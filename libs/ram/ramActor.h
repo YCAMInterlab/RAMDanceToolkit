@@ -1,0 +1,147 @@
+#pragma once
+
+#include "ofMain.h"
+
+#include "ofxOsc.h"
+
+#include "ramConstants.h"
+
+class ramNodeArray;
+
+#pragma mark - ramNode
+
+class ramNode : public ofNode
+{
+	friend class ramNodeArray;
+
+public:
+
+	ramNode();
+	ramNode(const ramNode& copy) { *this = copy; }
+	ramNode& operator=(const ramNode& copy);
+
+	void refreshParams();
+
+	const string& getName() { return name; }
+	int getID() { return node_id; }
+
+	void setParent(ramNode &parent) { this->parent = &parent; }
+	ramNode* getParent() { return parent; }
+
+	// utils
+	inline void transformBegin() const { transformGL(); }
+	inline void transformEnd() const { restoreTransformGL(); }
+
+private:
+
+	int node_id;
+	string name;
+
+	ramNode *parent;
+
+	// ignore global transform function
+	ofMatrix4x4 getGlobalTransformMatrix() const {}
+	ofVec3f getGlobalPosition() const {}
+	ofQuaternion getGlobalOrientation() const {}
+	ofVec3f getGlobalScale() const {}
+
+};
+
+#pragma mark - ramNodeArray
+
+class ramNodeArray
+{
+public:
+
+	ramNodeArray() {}
+	ramNodeArray(const ramNodeArray& copy) { *this = copy; }
+	ramNodeArray& operator=(const ramNodeArray& copy);
+	virtual ~ramNodeArray() {}
+
+	void setName(const string& name) { this->name = name; }
+	string& getName() { return name; }
+
+	int getNumNode() { return nodes.size(); }
+	ramNode& getNode(int node_id) { return nodes[node_id]; }
+
+	inline bool isOutdated() { return (last_timestamp - current_timestamp) > RAM_OUTDATED_DULATION; }
+
+	virtual void updateWithOscMessage(const ofxOscMessage &m);
+
+protected:
+
+	string name;
+	vector<ramNode> nodes;
+
+	float last_timestamp;
+	float current_timestamp;
+
+	float last_update_client_time;
+
+};
+
+#pragma mark - ramRigidBody
+
+class ramRigidBody : public ramNodeArray
+{
+public:
+
+	virtual void updateWithOscMessage(const ofxOscMessage &m);
+
+private:
+	
+	void reserveNodes(int num);
+};
+
+#pragma mark - ramActor
+
+class ramActor : public ramNodeArray
+{
+public:
+
+	enum Joint
+	{
+		JOINT_HIPS              = 0,
+		JOINT_ADBOMEN           = 1,
+		JOINT_CHEST             = 2,
+		JOINT_NECK              = 3,
+		JOINT_HEAD              = 4,
+
+		JOINT_LEFT_HIP          = 5,
+		JOINT_LEFT_KNEE         = 6,
+		JOINT_LEFT_ANKLE        = 7,
+		JOINT_LEFT_TOE          = 8,
+
+		JOINT_RIGHT_HIP         = 9,
+		JOINT_RIGHT_KNEE        = 10,
+		JOINT_RIGHT_ANKLE       = 11,
+		JOINT_RIGHT_TOE         = 12,
+
+		JOINT_LEFT_COLLAR       = 13,
+		JOINT_LEFT_SHOULDER     = 14,
+		JOINT_LEFT_ELBOW        = 15,
+		JOINT_LEFT_WRIST        = 16,
+		JOINT_LEFT_HAND         = 17,
+
+		JOINT_RIGHT_COLLAR      = 18,
+		JOINT_RIGHT_SHOULDER    = 19,
+		JOINT_RIGHT_ELBOW       = 20,
+		JOINT_RIGHT_WRIST       = 21,
+		JOINT_RIGHT_HAND        = 22,
+
+		NUM_JOINTS              = 23,
+	};
+
+	ramActor();
+	ramActor(const ramActor& copy) { *this = copy; }
+	ramActor& operator=(const ramActor& copy);
+	virtual ~ramActor();
+
+	virtual void updateWithOscMessage(const ofxOscMessage &m);
+
+private:
+
+	void dispose();
+
+	void setupTree();
+};

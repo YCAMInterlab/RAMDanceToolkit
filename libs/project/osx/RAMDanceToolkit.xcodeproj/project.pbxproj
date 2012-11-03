@@ -1,0 +1,257 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		60B90AA11644E06D00AF2156 /* ramActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60B90A981644E06D00AF2156 /* ramActor.cpp */; };
+		60B90AA21644E06D00AF2156 /* ramActor.h in Headers */ = {isa = PBXBuildFile; fileRef = 60B90A991644E06D00AF2156 /* ramActor.h */; };
+		60B90AA31644E06D00AF2156 /* ramActorManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60B90A9A1644E06D00AF2156 /* ramActorManager.cpp */; };
+		60B90AA41644E06D00AF2156 /* ramActorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 60B90A9B1644E06D00AF2156 /* ramActorManager.h */; };
+		60B90AA51644E06D00AF2156 /* ramBaseApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 60B90A9C1644E06D00AF2156 /* ramBaseApp.h */; };
+		60B90AA61644E06D00AF2156 /* ramConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 60B90A9D1644E06D00AF2156 /* ramConstants.h */; };
+		60B90AA71644E06D00AF2156 /* ramGraphics.h in Headers */ = {isa = PBXBuildFile; fileRef = 60B90A9E1644E06D00AF2156 /* ramGraphics.h */; };
+		60B90AA81644E06D00AF2156 /* ramMain.h in Headers */ = {isa = PBXBuildFile; fileRef = 60B90A9F1644E06D00AF2156 /* ramMain.h */; };
+		60B90AA91644E06D00AF2156 /* ramUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 60B90AA01644E06D00AF2156 /* ramUtils.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		60B90A8B1644E00900AF2156 /* libram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libram.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		60B90A981644E06D00AF2156 /* ramActor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramActor.cpp; sourceTree = "<group>"; };
+		60B90A991644E06D00AF2156 /* ramActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramActor.h; sourceTree = "<group>"; };
+		60B90A9A1644E06D00AF2156 /* ramActorManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramActorManager.cpp; sourceTree = "<group>"; };
+		60B90A9B1644E06D00AF2156 /* ramActorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramActorManager.h; sourceTree = "<group>"; };
+		60B90A9C1644E06D00AF2156 /* ramBaseApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramBaseApp.h; sourceTree = "<group>"; };
+		60B90A9D1644E06D00AF2156 /* ramConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramConstants.h; sourceTree = "<group>"; };
+		60B90A9E1644E06D00AF2156 /* ramGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramGraphics.h; sourceTree = "<group>"; };
+		60B90A9F1644E06D00AF2156 /* ramMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramMain.h; sourceTree = "<group>"; };
+		60B90AA01644E06D00AF2156 /* ramUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramUtils.h; sourceTree = "<group>"; };
+		60B90AAA1644E09400AF2156 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		60B90A881644E00900AF2156 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		60B90A801644E00900AF2156 = {
+			isa = PBXGroup;
+			children = (
+				60B90A961644E04B00AF2156 /* src */,
+				60B90A8C1644E00900AF2156 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		60B90A8C1644E00900AF2156 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				60B90A8B1644E00900AF2156 /* libram.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		60B90A961644E04B00AF2156 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				60B90A971644E06D00AF2156 /* ram */,
+				60B90AAA1644E09400AF2156 /* Config.xcconfig */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		60B90A971644E06D00AF2156 /* ram */ = {
+			isa = PBXGroup;
+			children = (
+				60B90A981644E06D00AF2156 /* ramActor.cpp */,
+				60B90A991644E06D00AF2156 /* ramActor.h */,
+				60B90A9A1644E06D00AF2156 /* ramActorManager.cpp */,
+				60B90A9B1644E06D00AF2156 /* ramActorManager.h */,
+				60B90A9C1644E06D00AF2156 /* ramBaseApp.h */,
+				60B90A9D1644E06D00AF2156 /* ramConstants.h */,
+				60B90A9E1644E06D00AF2156 /* ramGraphics.h */,
+				60B90A9F1644E06D00AF2156 /* ramMain.h */,
+				60B90AA01644E06D00AF2156 /* ramUtils.h */,
+			);
+			name = ram;
+			path = ../../ram;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		60B90A891644E00900AF2156 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60B90AA21644E06D00AF2156 /* ramActor.h in Headers */,
+				60B90AA41644E06D00AF2156 /* ramActorManager.h in Headers */,
+				60B90AA51644E06D00AF2156 /* ramBaseApp.h in Headers */,
+				60B90AA61644E06D00AF2156 /* ramConstants.h in Headers */,
+				60B90AA71644E06D00AF2156 /* ramGraphics.h in Headers */,
+				60B90AA81644E06D00AF2156 /* ramMain.h in Headers */,
+				60B90AA91644E06D00AF2156 /* ramUtils.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		60B90A8A1644E00900AF2156 /* RAMDanceToolkit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 60B90A8F1644E00900AF2156 /* Build configuration list for PBXNativeTarget "RAMDanceToolkit" */;
+			buildPhases = (
+				60B90A871644E00900AF2156 /* Sources */,
+				60B90A881644E00900AF2156 /* Frameworks */,
+				60B90A891644E00900AF2156 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RAMDanceToolkit;
+			productName = RAMDanceToolkit;
+			productReference = 60B90A8B1644E00900AF2156 /* libram.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		60B90A821644E00900AF2156 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = YCAMInterlab;
+			};
+			buildConfigurationList = 60B90A851644E00900AF2156 /* Build configuration list for PBXProject "RAMDanceToolkit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 60B90A801644E00900AF2156;
+			productRefGroup = 60B90A8C1644E00900AF2156 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				60B90A8A1644E00900AF2156 /* RAMDanceToolkit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		60B90A871644E00900AF2156 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60B90AA11644E06D00AF2156 /* ramActor.cpp in Sources */,
+				60B90AA31644E06D00AF2156 /* ramActorManager.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		60B90A8D1644E00900AF2156 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60B90AAA1644E09400AF2156 /* Config.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx10.7;
+			};
+			name = Debug;
+		};
+		60B90A8E1644E00900AF2156 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60B90AAA1644E09400AF2156 /* Config.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx10.7;
+			};
+			name = Release;
+		};
+		60B90A901644E00900AF2156 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = ram;
+			};
+			name = Debug;
+		};
+		60B90A911644E00900AF2156 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = ram;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		60B90A851644E00900AF2156 /* Build configuration list for PBXProject "RAMDanceToolkit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60B90A8D1644E00900AF2156 /* Debug */,
+				60B90A8E1644E00900AF2156 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		60B90A8F1644E00900AF2156 /* Build configuration list for PBXNativeTarget "RAMDanceToolkit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60B90A901644E00900AF2156 /* Debug */,
+				60B90A911644E00900AF2156 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 60B90A821644E00900AF2156 /* Project object */;
+}
