@@ -38,10 +38,10 @@ private:
 	ramNode *parent;
 
 	// ignore global transform function
-	ofMatrix4x4 getGlobalTransformMatrix() const {}
-	ofVec3f getGlobalPosition() const {}
-	ofQuaternion getGlobalOrientation() const {}
-	ofVec3f getGlobalScale() const {}
+	ofMatrix4x4 getGlobalTransformMatrix() const { return ofMatrix4x4(); }
+	ofVec3f getGlobalPosition() const { return ofVec3f(); }
+	ofQuaternion getGlobalOrientation() const { return ofQuaternion(); }
+	ofVec3f getGlobalScale() const { return ofVec3f(); }
 
 };
 

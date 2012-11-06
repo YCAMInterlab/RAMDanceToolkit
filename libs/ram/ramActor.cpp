@@ -2,9 +2,8 @@
 
 #pragma mark - ramNode
 
-ramNode::ramNode() : ofNode()
+ramNode::ramNode() : ofNode(), parent(NULL)
 {
-
 }
 
 ramNode& ramNode::operator=(const ramNode& copy)
@@ -26,6 +25,7 @@ ramNodeArray& ramNodeArray::operator=(const ramNodeArray& copy)
 	current_timestamp = copy.current_timestamp;
 
 	last_update_client_time = copy.last_update_client_time;
+	return *this;
 }
 
 void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
@@ -88,6 +88,7 @@ ramActor& ramActor::operator=(const ramActor& copy)
 {
 	ramNodeArray::operator=(copy);
 	setupTree();
+	return *this;
 }
 
 ramActor::~ramActor()

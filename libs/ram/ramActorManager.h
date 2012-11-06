@@ -43,7 +43,7 @@ private:
 
 	// noncopyable
 	ramActorManager(const ramActorManager&) {}
-	ramActorManager& operator=(const ramActorManager&) {}
+	ramActorManager& operator=(const ramActorManager&) { return *this; }
 
 	ramCompoundContainer<ramActor> actors;
 	ramCompoundContainer<ramRigidBody> rigids;
