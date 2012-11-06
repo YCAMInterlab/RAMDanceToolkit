@@ -14,11 +14,6 @@ ramNode& ramNode::operator=(const ramNode& copy)
 	return *this;
 }
 
-void ramNode::refreshParams()
-{
-	// TODO:
-	// accelerometer.update(); → ramNodeFinderみたいなのを作ってそこでやりましょう
-}
 
 #pragma mark - ramNodeArray
 
@@ -57,8 +52,6 @@ void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
 
 		node.setPosition(vec);
 		node.setOrientation(quat);
-
-		node.refreshParams();
 	}
 
 	// クライアントタイムと比較しないとちゃんと動かないかも?

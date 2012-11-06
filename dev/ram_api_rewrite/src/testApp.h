@@ -23,15 +23,19 @@ public:
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
+    
 
 	// ram methods
 	// ------------------------
 	void drawFloor();
-	void drawJoint(const ramNode &joint);
-	void drawBone(const ramNode &jointA, const ramNode &jointB);
-
+    void drawActor(ramActor &actor);
+    void drawRigid(ramRigidBody &rigid);
+    
+    
 	// ...
 	// ------------------------
 	ofxOscReceiver oscReceiver;
-
+    
+    
+    ramNodeFinder nodeFinder;
 };

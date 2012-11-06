@@ -20,8 +20,6 @@ public:
 	ramNode(const ramNode& copy) { *this = copy; }
 	ramNode& operator=(const ramNode& copy);
 
-	void refreshParams();
-
 	const string& getName() { return name; }
 	int getID() { return node_id; }
 
@@ -84,6 +82,7 @@ protected:
 
 class ramRigidBody : public ramNodeArray
 {
+    
 public:
 
 	virtual void updateWithOscMessage(const ofxOscMessage &m);

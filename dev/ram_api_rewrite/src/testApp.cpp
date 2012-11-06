@@ -1,6 +1,5 @@
 #include "testApp.h"
 
-ofEasyCam cam;
 
 //--------------------------------------------------------------
 void testApp::setup()
@@ -12,6 +11,8 @@ void testApp::setup()
 
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
+    
+    nodeFinder.start();
 }
 
 //--------------------------------------------------------------
@@ -30,95 +31,138 @@ void testApp::draw()
 {
 }
 
+
 // ram methods
 //--------------------------------------------------------------
 void testApp::drawFloor()
 {
+    
 }
 
-void testApp::drawJoint(const ramNode& joint)
+
+void testApp::drawActor(ramActor &actor)
 {
-	cam.begin();
+    
+    ofEnableSmoothing();
+    
+    for (int i=0; i<actor.getNumNode(); i++)
+    {
+        ramNode &node = actor.getNode(i);
+        {
+            glPushAttrib(GL_ALL_ATTRIB_BITS);
+            glPushMatrix();
+            ofPushStyle();
 
-	ofSetColor(255, 0, 0);
-	ofNoFill();
-	joint.transformBegin();
-	ofBox(10);
-	joint.transformEnd();
+            ofSetColor(255, 0, 0);
+            ofNoFill();
+            node.transformBegin();
+            ofBox(10);
+            node.transformEnd();
 
-	ofSetColor(0, 255, 0);
-	ofBox(joint, 20);
-
-	cam.end();
+            ofSetColor(0, 255, 0);
+            ofBox(node, 20);
+            
+            ofPopStyle();
+            glPopMatrix();
+            glPopAttrib();
+        }
+        
+        
+        // TODO:
+        // たまーにHipのgetParent() が0じゃない場合あり。drawBone(node, *parent_node); で落ちる
+        if (node.getID())
+        {
+            ramNode *parent_node = node.getParent();
+                
+            glPushAttrib(GL_ALL_ATTRIB_BITS);
+            glPushMatrix();
+            ofPushStyle();
+            
+            ofSetColor(255);
+            ofLine(node, *parent_node);
+            
+            ofPopStyle();
+            glPopMatrix();
+            glPopAttrib();
+        }
+    }
 }
 
-void testApp::drawBone(const ramNode& jointA, const ramNode& jointB)
+void testApp::drawRigid(ramRigidBody &rigid)
 {
-	cam.begin();
+    for (int i=0; i<rigid.getNumNode(); i++)
+    {
+        ramNode &node = rigid.getNode(i);
 
-	ofSetColor(255);
-	ofLine(jointA, jointB);
+        {
+            glPushAttrib(GL_ALL_ATTRIB_BITS);
+            glPushMatrix();
+            ofPushStyle();
 
-	cam.end();
+            ofSetColor(255, 0, 0);
+            ofNoFill();
+            node.transformBegin();
+            ofBox(10);
+            node.transformEnd();
+
+            ofSetColor(0, 255, 0);
+            ofBox(node, 20);
+
+            ofPopStyle();
+            glPopMatrix();
+            glPopAttrib();
+        }
+    }
 }
+
+
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	switch (key)
-	{
-	case 'r':
-		record();
-		break;
-
-	case 'p':
-		play();
-		break;
-	default:
-		break;
-	}
+    
 }
 
 //--------------------------------------------------------------
 void testApp::keyReleased(int key)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::windowResized(int w, int h)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::gotMessage(ofMessage msg)
 {
-
+    
 }
 
 //--------------------------------------------------------------
