@@ -70,7 +70,7 @@ void testApp::drawActor(ramActor &actor)
         
         // TODO:
         // たまーにHipのgetParent() が0じゃない場合あり。drawBone(node, *parent_node); で落ちる
-        if (node.getID())
+        if (node.hasParent())
         {
             ramNode *parent_node = node.getParent();
                 

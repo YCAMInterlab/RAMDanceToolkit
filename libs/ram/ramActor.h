@@ -23,8 +23,9 @@ public:
 	const string& getName() { return name; }
 	int getID() { return node_id; }
 
-	void setParent(ramNode &parent) { this->parent = &parent; }
-	ramNode* getParent() const { return parent; }
+	inline void setParent(ramNode &parent) { this->parent = &parent; }
+	inline ramNode* getParent() const { return parent; }
+	inline bool hasParent() const { return parent != NULL; }
 
 	// utils
 	inline void transformBegin() const { transformGL(); }
