@@ -24,7 +24,7 @@ public:
 	int getID() { return node_id; }
 
 	void setParent(ramNode &parent) { this->parent = &parent; }
-	ramNode* getParent() { return parent; }
+	ramNode* getParent() const { return parent; }
 
 	// utils
 	inline void transformBegin() const { transformGL(); }
@@ -51,7 +51,7 @@ class ramNodeArray
 {
 public:
 
-	ramNodeArray() {}
+	ramNodeArray();
 	ramNodeArray(const ramNodeArray& copy) { *this = copy; }
 	ramNodeArray& operator=(const ramNodeArray& copy);
 	virtual ~ramNodeArray() {}
@@ -132,8 +132,6 @@ public:
 	};
 
 	ramActor();
-	ramActor(const ramActor& copy) { *this = copy; }
-	ramActor& operator=(const ramActor& copy);
 	virtual ~ramActor();
 
 	virtual void updateWithOscMessage(const ofxOscMessage &m);

@@ -2,7 +2,7 @@
 
 #pragma mark - ramNode
 
-ramNode::ramNode() : ofNode(), parent(NULL)
+ramNode::ramNode() : ofNode(), parent(NULL), node_id(-1)
 {
 }
 
@@ -10,16 +10,37 @@ ramNode& ramNode::operator=(const ramNode& copy)
 {
 	node_id = copy.node_id;
 	name = copy.name;
+	parent = NULL;
 	return *this;
 }
 
 
 #pragma mark - ramNodeArray
 
+ramNodeArray::ramNodeArray() : last_timestamp(0), current_timestamp(0), last_update_client_time(0)
+{
+	
+}
+
 ramNodeArray& ramNodeArray::operator=(const ramNodeArray& copy)
 {
 	name = copy.name;
 	nodes = copy.nodes;
+	
+	// rebuild hierarchy
+	for (int i = 0; i < copy.nodes.size(); i++)
+	{
+		const ramNode &src = copy.nodes[i];
+		ramNode &dst = nodes[i];
+		
+		ramNode *p = src.getParent();
+		if (!p) continue;
+		
+		int idx = p->getID();
+		if (idx < 0) continue;
+		
+		dst.setParent(nodes[idx]);
+	}
 
 	last_timestamp = copy.last_timestamp;
 	current_timestamp = copy.current_timestamp;
@@ -54,7 +75,6 @@ void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
 		node.setOrientation(quat);
 	}
 
-	// クライアントタイムと比較しないとちゃんと動かないかも?
 	last_timestamp = current_timestamp;
 	current_timestamp = m.getArgAsFloat(2 + nNodes * 8);
 
@@ -82,13 +102,6 @@ ramActor::ramActor()
 {
 	nodes.resize(NUM_JOINTS);
 	setupTree();
-}
-
-ramActor& ramActor::operator=(const ramActor& copy)
-{
-	ramNodeArray::operator=(copy);
-	setupTree();
-	return *this;
 }
 
 ramActor::~ramActor()
