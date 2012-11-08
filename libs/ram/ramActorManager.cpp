@@ -1,23 +1,8 @@
 #include "ramActorManager.h"
 
-ramActorManager* ramActorManager::_instance = NULL;
-
-ramActorManager& ramActorManager::instance()
-{
-	if (_instance == NULL)
-		_instance = new ramActorManager;
-	return *_instance;
-}
 
 void ramActorManager::update()
 {
-	/*
-	   order:
-	   - check onstage-actors, onstage-rigids
-	   - renderer update
-	 */
-
-	// check onstage-actors
 	for (int i = 0; i < actors.size(); i++)
 	{
 		ramActor &actor = getActor(i);
@@ -34,19 +19,17 @@ void ramActorManager::update()
 		ramRigidBody &rigid = getRigidBody(i);
 		if (rigid.isOutdated())
 		{
-			//            !!!:
-			//            ofNotifyEvent(onStageOut, actor);
+//            !!!:
+//            ofNotifyEvent(onStageOut, actor);
 			rigids.remove(rigid.getName());
 		}
 	}
-
-
-	// !!!: collision update
-	// for (int i=0; i<rigids.size(); i++) getRigidBody(i).update();
 }
+
 
 void ramActorManager::draw()
 {
+    
 }
 
 
@@ -70,6 +53,7 @@ void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 			ramActor &o = actors[name];
 			o.updateWithOscMessage(m);
 		}
+        
 	}
 	else if (addr == RAM_OSC_ADDR_RIGID_BODY)
 	{

@@ -13,38 +13,42 @@ class ramActorManager
 public:
 
 	// singleton
-	static ramActorManager& instance();
+	static ramActorManager& instance()
+    {
+        if (_instance == NULL)
+            _instance = new ramActorManager;
+        return *_instance;
+    }
 
-	ramActorManager() {};
-	~ramActorManager() {};
+	// actor
+	inline size_t getNumActor() { return actors.size(); }
+	inline const vector<string>& getActorNames() { return actors.keys(); }
+	inline ramActor& getActor(int index) { return actors[index]; }
+	inline ramActor& getActor(const string& name) { return actors[name]; }
+
+	// rigidbody
+	inline size_t getNumRigidBody() { return rigids.size(); }
+	inline const vector<string>& getRigidBodyNames() { return rigids.keys(); }
+	inline ramRigidBody& getRigidBody(int index) { return rigids[index]; }
+	inline ramRigidBody& getRigidBody(const string& name) { return rigids[name]; }
 
 	void update();
 	void draw();
-
-	// actor
-	size_t getNumActor() { return actors.size(); }
-	const vector<string>& getActorNames() { return actors.keys(); }
-	ramActor& getActor(int index) { return actors[index]; }
-	ramActor& getActor(const string& name) { return actors[name]; }
-
-	// rigidbody
-	size_t getNumRigidBody() { return rigids.size(); }
-	const vector<string>& getRigidBodyNames() { return rigids.keys(); }
-	ramRigidBody& getRigidBody(int index) { return rigids[index]; }
-	ramRigidBody& getRigidBody(const string& name) { return rigids[name]; }
-
-	
-	// update actors, rigids with bvh data
 	void updateWithOscMessage(const ofxOscMessage &m);
 
 private:
 
+    
 	static ramActorManager *_instance;
 
 	// noncopyable
+	ramActorManager() {};
 	ramActorManager(const ramActorManager&) {}
 	ramActorManager& operator=(const ramActorManager&) { return *this; }
+	~ramActorManager() {};
 
 	ramCompoundContainer<ramActor> actors;
 	ramCompoundContainer<ramRigidBody> rigids;
 };
+
+ramActorManager* ramActorManager::_instance = NULL;

@@ -1,6 +1,9 @@
 #include "testApp.h"
 
 
+const string myActorName = "Ando_2012-08-29_13-48-10";
+
+
 //--------------------------------------------------------------
 void testApp::setup()
 {
@@ -11,8 +14,6 @@ void testApp::setup()
 
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
-    
-    nodeFinder.start();
 }
 
 //--------------------------------------------------------------
@@ -29,6 +30,26 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
+    cam.begin();
+    
+    ramNode &node = nodeFinder.findNode(myActorName, ramActor::JOINT_HIPS);
+    {
+        glPushAttrib(GL_ALL_ATTRIB_BITS);
+        glPushMatrix();
+        ofPushStyle();
+        ofNoFill();
+        
+        ofSetHexColor(0x00DDFF);
+        node.transformBegin();
+        ofBox(100);
+        node.transformEnd();
+        
+        ofPopStyle();
+        glPopMatrix();
+        glPopAttrib();
+    }
+    
+    cam.end();
 }
 
 
@@ -39,15 +60,14 @@ void testApp::drawFloor()
     
 }
 
-
+// ram methods
+//--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-    
-    ofEnableSmoothing();
-    
     for (int i=0; i<actor.getNumNode(); i++)
     {
         ramNode &node = actor.getNode(i);
+        
         {
             glPushAttrib(GL_ALL_ATTRIB_BITS);
             glPushMatrix();
@@ -66,10 +86,8 @@ void testApp::drawActor(ramActor &actor)
             glPopMatrix();
             glPopAttrib();
         }
+    
         
-        
-        // TODO:
-        // たまーにHipのgetParent() が0じゃない場合あり。drawBone(node, *parent_node); で落ちる
         if (node.hasParent())
         {
             ramNode *parent_node = node.getParent();
@@ -88,6 +106,8 @@ void testApp::drawActor(ramActor &actor)
     }
 }
 
+// ram methods
+//--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
     for (int i=0; i<rigid.getNumNode(); i++)

@@ -17,41 +17,27 @@ class ramNodeFinder
 {
   
 public:
+    
     ramNodeFinder(){}
     ~ramNodeFinder(){}
     
-    void start()
+    vector<ramNode> findNode(int jointId)
     {
-        lastFrameNodes.clear();
-        ofAddListener(ofEvents().update, this, &ramNodeFinder::update);
-    }
-    void stop()
-    {
-        ofRemoveListener(ofEvents().update, this, &ramNodeFinder::update);
-    }
-    
-    
-    void update( ofEventArgs &args )
-    {
-        lastFrameNodes.clear();
+        vector<ramNode> nodes;
         for (int i=0; i<getActorManager().getNumActor(); i++)
         {
-            ramActor &o = getActorManager().getActor(i);
-            lastFrameNodes.push_back(o);
+            ramNode &node = getActorManager().getActor(i).getNode(jointId);
+            nodes.push_back( node );
         }
-        for (int i=0; i<getActorManager().getNumRigidBody(); i++)
-        {
-            ramRigidBody &o = getActorManager().getRigidBody(i);
-            lastFrameNodes.push_back(o);
-        }
+        return nodes;
     }
     
-    vector<ramNode&> getXXXXXXXNodes();
-    vector<ramNode&> getInsideNodes(ofNode hitArea);
+    ramNode& findNode(const string actoreName, int jointId)
+    {
+        return getActorManager().getActor(actoreName).getNode(jointId);
+    }
     
 private:
-    vector<ramNodeArray> lastFrameNodes;
-    
     
     inline ramActorManager& getActorManager() { return ramActorManager::instance(); }
 };
