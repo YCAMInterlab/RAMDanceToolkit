@@ -8,9 +8,11 @@ ramNode::ramNode() : ofNode(), parent(NULL), node_id(-1)
 
 ramNode& ramNode::operator=(const ramNode& copy)
 {
+	ofNode::operator=(copy);
+	
 	node_id = copy.node_id;
 	name = copy.name;
-//    setPosition(copy.getPosition()); // !!!:
+
 	parent = NULL;
 	return *this;
 }
@@ -20,7 +22,6 @@ ramNode& ramNode::operator=(const ramNode& copy)
 
 ramNodeArray::ramNodeArray() : last_timestamp(0), current_timestamp(0), last_update_client_time(0)
 {
-	
 }
 
 ramNodeArray& ramNodeArray::operator=(const ramNodeArray& copy)
