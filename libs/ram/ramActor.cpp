@@ -10,7 +10,7 @@ ramNode& ramNode::operator=(const ramNode& copy)
 {
 	node_id = copy.node_id;
 	name = copy.name;
-    setPosition(copy.getPosition()); // !!!:
+//    setPosition(copy.getPosition()); // !!!:
 	parent = NULL;
 	return *this;
 }
