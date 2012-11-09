@@ -49,7 +49,7 @@ void ramBaseApp::draw(ofEventArgs &args)
 
 void ramBaseApp::exit(ofEventArgs &args)
 {
-    
+
 }
 
 
