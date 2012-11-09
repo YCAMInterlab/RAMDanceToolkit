@@ -31,13 +31,15 @@ void testApp::update()
 void testApp::draw()
 {
     ofEnableSmoothing();
+	
+	ramNodeFinder nf("Ando_2012-09-01_19-19-45", ramActor::JOINT_ADBOMEN);
+	cout << nf.getPtr().size() << endl;
     
     cam.begin();
 
-
     // nodeFinder example 1
     {
-        vector<ramNode> nodes = nodeFinder.findNode(ramActor::JOINT_ADBOMEN);
+        vector<ramNode> nodes = nodeFinder.findNodes(ramActor::JOINT_ADBOMEN);
         for (int i=0; i<nodes.size(); i++)
         {
             ramNode &node = nodes.at(i);
@@ -63,7 +65,7 @@ void testApp::draw()
     
     // nodeFinder example 2
     {
-        ramNode &node = nodeFinder.findNode(myActorName, ramActor::JOINT_HEAD);
+        ramNode node = nodeFinder.findNode(myActorName, ramActor::JOINT_HEAD);
         
         glPushAttrib(GL_ALL_ATTRIB_BITS);
         glPushMatrix();
