@@ -12,6 +12,13 @@ class ramActorManager
 {
 public:
 
+	
+	ofEvent<ramActor> actorEntered;
+	ofEvent<ramActor> actorExited;
+	ofEvent<ramRigidBody> rigidEntered;
+	ofEvent<ramRigidBody> rigidExited;
+	
+	
 	// singleton
 	static ramActorManager& instance()
     {

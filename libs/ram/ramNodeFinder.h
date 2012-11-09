@@ -27,15 +27,8 @@ public:
         for (int i=0; i<getActorManager().getNumActor(); i++)
         {
             ramNode &node = getActorManager().getActor(i).getNode(jointId);
-            
-            cout << node.getPosition() << endl;
-            
             nodes.push_back(node);
-            
-            cout << nodes.at(i).getPosition() << endl;
-            cout << "--" << endl;
         }
-        cout << "--------" << endl;
         return nodes;
     }
     

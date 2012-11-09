@@ -1,7 +1,7 @@
 #include "testApp.h"
 
 
-const string myActorName = "Ando_2012-08-29_13-48-10";
+const string myActorName = "Ando_2012-09-01_19-19-45";
 
 
 //--------------------------------------------------------------
@@ -34,53 +34,46 @@ void testApp::draw()
     
     cam.begin();
 
-
     // nodeFinder example 1
-    {
-        vector<ramNode> nodes = nodeFinder.findNode(ramActor::JOINT_ADBOMEN);
-        for (int i=0; i<nodes.size(); i++)
-        {
-            ramNode &node = nodes.at(i);
-            
-            glPushAttrib(GL_ALL_ATTRIB_BITS);
-            glPushMatrix();
-            ofPushStyle();
-            
-            ofNoFill();
-            ofSetLineWidth(3);
-            ofSetHexColor(0x00DDFF);
-            node.transformBegin();
-            ofBox(100);
-            node.transformEnd();
-            
-            ofPopStyle();
-            glPopMatrix();
-            glPopAttrib();
-        }
-    }
+	vector<ramNode> nodes = nodeFinder.findNode(ramActor::JOINT_ADBOMEN);
+	for (int i=0; i<nodes.size(); i++)
+	{
+		ramNode& node = nodes.at(i);
+		
+		glPushAttrib(GL_ALL_ATTRIB_BITS);
+		glPushMatrix();
+		ofPushStyle();
+		
+		ofNoFill();
+		ofSetLineWidth(3);
+		ofSetHexColor(0x00DDFF);
+		node.transformBegin();
+		ofBox(120);
+		node.transformEnd();
+		
+		ofPopStyle();
+		glPopMatrix();
+		glPopAttrib();
+	}
 
-    
     
     // nodeFinder example 2
-    {
-        ramNode &node = nodeFinder.findNode(myActorName, ramActor::JOINT_HEAD);
-        
-        glPushAttrib(GL_ALL_ATTRIB_BITS);
-        glPushMatrix();
-        ofPushStyle();
-
-        ofNoFill();
-        ofSetLineWidth(3);
-        ofSetHexColor(0xFFDDFF);
-        node.transformBegin();
-        ofBox(100);
-        node.transformEnd();
-
-        ofPopStyle();
-        glPopMatrix();
-        glPopAttrib();
-    }
-    
+	ramNode& node2 = nodeFinder.findNode(myActorName, ramActor::JOINT_HEAD);
+//
+//	glPushAttrib(GL_ALL_ATTRIB_BITS);
+//	glPushMatrix();
+//	ofPushStyle();
+//
+//	ofNoFill();
+//	ofSetLineWidth(3);
+//	ofSetHexColor(0xFF0000);
+//	node2.transformBegin();
+//	ofBox(100);
+//	node2.transformEnd();
+//
+//	ofPopStyle();
+//	glPopMatrix();
+//	glPopAttrib();
     
     cam.end();
     
@@ -170,6 +163,26 @@ void testApp::drawRigid(ramRigidBody &rigid)
     }
 }
 
+
+void testApp::actorEntered(ramActor& actor)
+{
+	cout << __FUNCTION__ << ": " << actor.getName() << endl;
+}
+
+void testApp::actorExited(ramActor& actor)
+{
+	cout << __FUNCTION__ << ": " << actor.getName() << endl;
+}
+
+void testApp::rigidEntered(ramRigidBody& rigid)
+{
+	cout << __FUNCTION__ << ": " << rigid.getName() << endl;
+}
+
+void testApp::rigidExited(ramRigidBody& rigid)
+{
+	cout << __FUNCTION__ << ": " << rigid.getName() << endl;
+}
 
 
 //--------------------------------------------------------------

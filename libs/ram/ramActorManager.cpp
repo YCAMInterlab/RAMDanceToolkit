@@ -8,9 +8,8 @@ void ramActorManager::update()
 		ramActor &actor = getActor(i);
 		if (actor.isOutdated())
 		{
-//            !!!: TODO
-//            ofNotifyEvent(onStageOut, actor);
 			actors.remove(actor.getName());
+			ofNotifyEvent(actorExited, actor);
 		}
 	}
 
@@ -19,9 +18,8 @@ void ramActorManager::update()
 		ramRigidBody &rigid = getRigidBody(i);
 		if (rigid.isOutdated())
 		{
-//            !!!:
-//            ofNotifyEvent(onStageOut, actor);
 			rigids.remove(rigid.getName());
+			ofNotifyEvent(rigidExited, rigid);
 		}
 	}
 }
@@ -47,6 +45,7 @@ void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 			o.updateWithOscMessage(m);
 			o.setName(name);
 			actors.add(name, o);
+			ofNotifyEvent(actorEntered, o);
 		}
 		else
 		{
@@ -64,6 +63,7 @@ void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 			ramRigidBody o;
 			o.updateWithOscMessage(m);
 			rigids.add(name, o);
+			ofNotifyEvent(rigidEntered, o);
 		}
 		else
 		{

@@ -33,17 +33,32 @@ public:
         ofAddListener(ofEvents().update, this, &ramBaseApp::update);
         ofAddListener(ofEvents().draw, this, &ramBaseApp::draw);
         ofAddListener(ofEvents().exit, this, &ramBaseApp::exit);
+		ofAddListener(getActorManager().actorEntered, this, &ramBaseApp::actorEntered );
+		ofAddListener(getActorManager().actorExited, this, &ramBaseApp::actorExited );
+		ofAddListener(getActorManager().rigidEntered, this, &ramBaseApp::rigidEntered );
+		ofAddListener(getActorManager().rigidExited, this, &ramBaseApp::rigidExited );
     }
 	void ramDisableAllEvents()
 	{
 		ofRemoveListener(ofEvents().update, this, &ramBaseApp::update);
 		ofRemoveListener(ofEvents().draw, this, &ramBaseApp::draw);
 		ofRemoveListener(ofEvents().exit, this, &ramBaseApp::exit);
+		ofRemoveListener(getActorManager().actorEntered, this, &ramBaseApp::actorEntered );
+		ofRemoveListener(getActorManager().actorExited, this, &ramBaseApp::actorExited );
+		ofRemoveListener(getActorManager().rigidEntered, this, &ramBaseApp::rigidEntered );
+		ofRemoveListener(getActorManager().rigidExited, this, &ramBaseApp::rigidExited );
 	}
     
+	virtual void actorEntered(ramActor& actor) {}
+	virtual void actorExited(ramActor& actor) {}
+	virtual void rigidEntered(ramRigidBody& rigid) {}
+	virtual void rigidExited(ramRigidBody& rigid) {}
+//	virtual void ramRigidEnter(const ramRigidBody& rigid){
+//		cout << rigid.getName() << endl;
+//	}
     
 	// physics
-	virtual void collision(const ramNode &jointA, const ramNode &jointB) {};
+	virtual void collision(const ramNode& jointA, const ramNode& jointB) {}
     
     
 	// Rec & Play....
@@ -52,6 +67,8 @@ public:
 	void ramPlay();
     
     
+	
+	
 private:
     
 	ofEasyCam cam;
