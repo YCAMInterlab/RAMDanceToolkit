@@ -3,6 +3,9 @@
 
 void ramActorManager::update()
 {
+	actors.updateIndexCache();
+	rigids.updateIndexCache();
+	
 	for (int i = 0; i < actors.size(); i++)
 	{
 		ramActor &actor = getActor(i);

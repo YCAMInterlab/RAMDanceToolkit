@@ -17,13 +17,13 @@ public:
 	void add(const string &key, T &o)
 	{
 		hash[key] = o;
-		updateArray();
+		updateIndexCache();
 	}
 
 	void remove(const string &key)
 	{
 		hash.erase(key);
-		updateArray();
+		updateIndexCache();
 	}
 
 	size_t size() { return array.size(); }
@@ -49,18 +49,11 @@ public:
 		return hash.find(key) != hash.end();
 	}
 
-private:
-
-	MapType hash;
-	ArrayType array;
-
-	vector<string> hash_keys;
-
-	void updateArray()
+	void updateIndexCache()
 	{
 		array.clear();
 		hash_keys.clear();
-
+		
 		typename MapType::iterator it = hash.begin();
 		while (it != hash.end())
 		{
@@ -69,4 +62,12 @@ private:
 			it++;
 		}
 	}
+
+private:
+
+	MapType hash;
+	ArrayType array;
+
+	vector<string> hash_keys;
+
 };
