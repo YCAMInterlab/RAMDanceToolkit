@@ -18,6 +18,7 @@ public:
 	virtual void drawRigid(ramRigidBody &rigid) {}
 
 	inline ramActorManager& getActorManager() { return ramActorManager::instance(); }
+	
 	void updateWithOscMessage(const ofxOscMessage &m) { getActorManager().updateWithOscMessage(m); }
 
 
@@ -51,11 +52,8 @@ public:
 	void ramRecStop();
 	void ramPlay();
     
-    
 private:
     
-	ofEasyCam cam;
-
 	// event callback
 	void update(ofEventArgs &args);
 	void draw(ofEventArgs &args);

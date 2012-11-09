@@ -31,10 +31,9 @@ void testApp::update()
 void testApp::draw()
 {
     ofEnableSmoothing();
+	
+	ramCameraBegin();
     
-    cam.begin();
-
-
     // nodeFinder example 1
     {
         vector<ramNode> nodes = nodeFinder.findNode(ramActor::JOINT_ADBOMEN);
@@ -58,8 +57,6 @@ void testApp::draw()
             glPopAttrib();
         }
     }
-
-    
     
     // nodeFinder example 2
     {
@@ -81,10 +78,9 @@ void testApp::draw()
         glPopAttrib();
     }
     
-    
-    cam.end();
-    
     ofDisableSmoothing();
+	
+	ramCameraEnd();
 }
 
 
