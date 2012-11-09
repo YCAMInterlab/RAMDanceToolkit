@@ -30,26 +30,35 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
+    ofEnableSmoothing();
+    
     cam.begin();
     
-    ramNode &node = nodeFinder.findNode(myActorName, ramActor::JOINT_HIPS);
+    vector<ramNode> nodes = nodeFinder.findNode(ramActor::JOINT_ADBOMEN);
+    
+    for (int i=0; i<nodes.size(); i++)
     {
+        ramNode &node = nodes.at(i);
+        
         glPushAttrib(GL_ALL_ATTRIB_BITS);
         glPushMatrix();
         ofPushStyle();
-        ofNoFill();
         
+        ofNoFill();
+        ofSetLineWidth(3);
         ofSetHexColor(0x00DDFF);
         node.transformBegin();
         ofBox(100);
         node.transformEnd();
-        
+
         ofPopStyle();
         glPopMatrix();
         glPopAttrib();
     }
     
     cam.end();
+    
+    ofDisableSmoothing();
 }
 
 

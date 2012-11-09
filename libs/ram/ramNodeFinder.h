@@ -27,7 +27,7 @@ public:
         for (int i=0; i<getActorManager().getNumActor(); i++)
         {
             ramNode &node = getActorManager().getActor(i).getNode(jointId);
-            nodes.push_back( node );
+            nodes.push_back(node);
         }
         return nodes;
     }

@@ -6,13 +6,6 @@ ramNode::ramNode() : ofNode(), parent(NULL), node_id(-1)
 {
 }
 
-ramNode& ramNode::operator=(const ramNode& copy)
-{
-	node_id = copy.node_id;
-	name = copy.name;
-	parent = NULL;
-	return *this;
-}
 
 
 #pragma mark - ramNodeArray
