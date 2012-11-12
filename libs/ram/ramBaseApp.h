@@ -67,12 +67,6 @@ public:
 	void ramRecStop();
 	void ramPlay();
     
-<<<<<<< HEAD
-    
-	
-	
-=======
->>>>>>> 30dd5af7d72eed1f1037b1b492a64b14afe8b07b
 private:
     
 	// event callback
