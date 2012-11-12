@@ -1,13 +1,6 @@
-//
-//  ramBaseApp.cpp
-//  RAMDanceToolkit
-//
-//  Created by motoishmz on 2012/11/06.
-//  Copyright (c) 2012年 YCAMInterlab. All rights reserved.
-//
-
 #include "ramBaseApp.h"
 
+#include "ramCameraManager.h"
 
 void ramBaseApp::update(ofEventArgs &args)
 {
@@ -17,7 +10,8 @@ void ramBaseApp::update(ofEventArgs &args)
 
 void ramBaseApp::draw(ofEventArgs &args)
 {
-    
+	ofCamera &cam = ramCameraManager::instance().getActiveCamera();
+	
     cam.begin();
     
     getActorManager().draw();
@@ -43,7 +37,7 @@ void ramBaseApp::draw(ofEventArgs &args)
     // floor
     drawFloor();
     
-    cam.end();
+	cam.end();
 }
 
 

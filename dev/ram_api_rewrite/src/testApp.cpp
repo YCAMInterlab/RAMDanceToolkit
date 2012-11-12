@@ -31,7 +31,10 @@ void testApp::update()
 void testApp::draw()
 {
     ofEnableSmoothing();
+	
+	ramCameraBegin();
     
+<<<<<<< HEAD
     cam.begin();
 
     // nodeFinder example 1
@@ -76,8 +79,55 @@ void testApp::draw()
 //	glPopAttrib();
     
     cam.end();
+=======
+    // nodeFinder example 1
+    {
+        vector<ramNode> nodes = nodeFinder.findNode(ramActor::JOINT_ADBOMEN);
+        for (int i=0; i<nodes.size(); i++)
+        {
+            ramNode &node = nodes.at(i);
+            
+            glPushAttrib(GL_ALL_ATTRIB_BITS);
+            glPushMatrix();
+            ofPushStyle();
+            
+            ofNoFill();
+            ofSetLineWidth(3);
+            ofSetHexColor(0x00DDFF);
+            node.transformBegin();
+            ofBox(100);
+            node.transformEnd();
+            
+            ofPopStyle();
+            glPopMatrix();
+            glPopAttrib();
+        }
+    }
+    
+    // nodeFinder example 2
+    {
+        ramNode &node = nodeFinder.findNode(myActorName, ramActor::JOINT_HEAD);
+        
+        glPushAttrib(GL_ALL_ATTRIB_BITS);
+        glPushMatrix();
+        ofPushStyle();
+
+        ofNoFill();
+        ofSetLineWidth(3);
+        ofSetHexColor(0xFFDDFF);
+        node.transformBegin();
+        ofBox(100);
+        node.transformEnd();
+
+        ofPopStyle();
+        glPopMatrix();
+        glPopAttrib();
+    }
+>>>>>>> 30dd5af7d72eed1f1037b1b492a64b14afe8b07b
     
     ofDisableSmoothing();
+	
+	ramCameraEnd();
 }
 
 

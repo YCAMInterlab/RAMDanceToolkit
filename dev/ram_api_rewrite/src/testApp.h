@@ -41,5 +41,4 @@ public:
 	// ------------------------
 	ofxOscReceiver oscReceiver;
     ramNodeFinder nodeFinder;
-    ofEasyCam cam;
 };

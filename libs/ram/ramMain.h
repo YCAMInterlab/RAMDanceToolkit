@@ -4,3 +4,4 @@
 #include "ramActorManager.h"
 #include "ramGraphics.h"
 #include "ramNodeFinder.h"
+#include "ramCameraManager.h"
