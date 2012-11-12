@@ -1,7 +1,7 @@
 #include "testApp.h"
 
 
-const string myActorName = "Ando_2012-09-01_19-19-45";
+const string myActorName = "Ando_2012-08-29_13-48-10";
 
 
 //--------------------------------------------------------------
@@ -32,11 +32,12 @@ void testApp::draw()
 {
     ofEnableSmoothing();
 	
+	ramNodeFinder nf(ramActor::JOINT_ADBOMEN);
+	
 	ramCameraBegin();
     
-    // nodeFinder example 1
     {
-        vector<ramNode> nodes = nodeFinder.findNode(ramActor::JOINT_ADBOMEN);
+        vector<ramNode> nodes = nf.get();
         for (int i=0; i<nodes.size(); i++)
         {
             ramNode &node = nodes.at(i);
@@ -56,26 +57,6 @@ void testApp::draw()
             glPopMatrix();
             glPopAttrib();
         }
-    }
-    
-    // nodeFinder example 2
-    {
-        ramNode &node = nodeFinder.findNode(myActorName, ramActor::JOINT_HEAD);
-        
-        glPushAttrib(GL_ALL_ATTRIB_BITS);
-        glPushMatrix();
-        ofPushStyle();
-
-        ofNoFill();
-        ofSetLineWidth(3);
-        ofSetHexColor(0xFFDDFF);
-        node.transformBegin();
-        ofBox(100);
-        node.transformEnd();
-
-        ofPopStyle();
-        glPopMatrix();
-        glPopAttrib();
     }
     
     ofDisableSmoothing();
@@ -167,25 +148,6 @@ void testApp::drawRigid(ramRigidBody &rigid)
 }
 
 
-void testApp::actorEntered(ramActor& actor)
-{
-	cout << __FUNCTION__ << ": " << actor.getName() << endl;
-}
-
-void testApp::actorExited(ramActor& actor)
-{
-	cout << __FUNCTION__ << ": " << actor.getName() << endl;
-}
-
-void testApp::rigidEntered(ramRigidBody& rigid)
-{
-	cout << __FUNCTION__ << ": " << rigid.getName() << endl;
-}
-
-void testApp::rigidExited(ramRigidBody& rigid)
-{
-	cout << __FUNCTION__ << ": " << rigid.getName() << endl;
-}
 
 
 //--------------------------------------------------------------

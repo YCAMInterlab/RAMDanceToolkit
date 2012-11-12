@@ -31,10 +31,6 @@ public:
 	void drawFloor();
     void drawActor(ramActor &actor);
     void drawRigid(ramRigidBody &rigid);
-	void actorEntered(ramActor& actor);
-	void actorExited(ramActor& actor);
-	void rigidEntered(ramRigidBody& rigid);
-	void rigidExited(ramRigidBody& rigid);
 
     
 	// ...

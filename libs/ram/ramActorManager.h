@@ -20,7 +20,7 @@ public:
 	
 	
 	// singleton
-	static ramActorManager& instance()
+	inline static ramActorManager& instance()
     {
         if (_instance == NULL)
             _instance = new ramActorManager;
