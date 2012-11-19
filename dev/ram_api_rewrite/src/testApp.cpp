@@ -3,6 +3,7 @@
 
 const string myActorName = "Ando_2012-08-29_13-48-10";
 
+ramSession *mySession = new ramSession(myActorName);
 
 //--------------------------------------------------------------
 void testApp::setup()
@@ -25,6 +26,9 @@ void testApp::update()
 		oscReceiver.getNextMessage(&m);
 		updateWithOscMessage(m);
 	}
+	
+	
+	mySession->update();
 }
 
 //--------------------------------------------------------------
@@ -59,6 +63,17 @@ void testApp::draw()
         }
     }
     
+	
+	if (mySession->isPlaying())
+	{
+		ramActor& actor = mySession->getNextFrame();
+		for	(int i=0; i<actor.getNumNode(); i++)
+		{
+			ramNode& node = actor.getNode(i);
+			ofBox(node, 10);
+		}
+	}
+	
     ofDisableSmoothing();
 	
 	ramCameraEnd();
@@ -153,7 +168,27 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-    
+    switch (key)
+	{
+		case 'r':
+			mySession->startRecording();
+			break;
+
+		case 's':
+			mySession->stopRecording();
+			break;
+			
+		case 'p':
+			mySession->play();
+			break;
+			
+		case 'q':
+			mySession->stop();
+			break;
+
+		default:
+			break;
+	}
 }
 
 //--------------------------------------------------------------

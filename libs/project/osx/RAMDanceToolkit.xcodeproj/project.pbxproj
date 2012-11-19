@@ -37,6 +37,7 @@
 		9A598CFE1648DE150066DF10 /* ramBaseApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramBaseApp.cpp; sourceTree = "<group>"; };
 		9A598CFF1648DE150066DF10 /* ramBaseApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramBaseApp.h; sourceTree = "<group>"; };
 		9A598D041648E5350066DF10 /* ramNodeFinder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ramNodeFinder.h; sourceTree = "<group>"; };
+		9ADF09A4165353C600961999 /* ramSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ramSession.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +92,7 @@
 				60B90A9F1644E06D00AF2156 /* ramMain.h */,
 				60B90AA01644E06D00AF2156 /* ramUtils.h */,
 				9A598D041648E5350066DF10 /* ramNodeFinder.h */,
+				9ADF09A4165353C600961999 /* ramSession.h */,
 			);
 			name = ram;
 			path = ../../ram;
