@@ -61,12 +61,6 @@ public:
 	// physics
 	virtual void collision(const ramNode& jointA, const ramNode& jointB) {}
     
-	// Rec & Play....
-	void ramRecStart(ramSession* session);
-	void ramRecStop(ramSession* session);
-	void ramPlaySession(ramSession* session);
-	void ramStopSession(ramSession* session);
-
     
 private:
 	

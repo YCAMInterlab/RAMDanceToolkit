@@ -46,24 +46,3 @@ void ramBaseApp::exit(ofEventArgs &args)
 {
 
 }
-
-
-// Rec & Play....
-void ramBaseApp::ramRecStart(ramSession* session)
-{
-	session->startRecording();
-//	recorder.recStart(session);
-}
-void ramBaseApp::ramRecStop(ramSession* session)
-{
-	session->stopRecording();
-//	recorder.recStop(session);
-}
-void ramBaseApp::ramPlaySession(ramSession* session)
-{
-//	recorder.playSession(session);
-}
-void ramBaseApp::ramStopSession(ramSession* session)
-{
-//	recorder.stopSession(session);
-}

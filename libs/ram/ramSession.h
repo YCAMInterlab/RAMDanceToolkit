@@ -1,8 +1,6 @@
 #pragma once
 
-
 #include "ramActor.h"
-
 
 #pragma mark - ramBuffer
 
@@ -10,14 +8,14 @@ class ramSession
 {
 public:
 
-//  !!!: TODO
-//	enum EntityType
-//	{
-//		RAM_ACTOR,
-//		RAM_RIGID_BODY
-//	};
+	enum EntityType
+	{
+		RAM_UNDEFINED_TYPE = -1,
+		RAM_ACTOR,
+		RAM_RIGID_BODY
+	};
 	
-	ramSession(const string name) : sessionName(name), loop(true), rate(1.0) { clear(); }
+	ramSession() : sessionName(""), sessionType(RAM_UNDEFINED_TYPE), loop(true), recording(false), playing(false), rate(1.0) {}
 	~ramSession() {}
 	
 	void clear()
@@ -27,10 +25,12 @@ public:
 		
 		playhead = 0;
 		duration = 0;
+		frame_time = 0;
+		play_start_time = 0;
 		rec_start_time = 0;
 		
-		recording = false;
-		playing = false;
+		frame_index = 0;
+		num_frames = 0;
 	}
 	
 //  !!!: TODO
@@ -42,11 +42,22 @@ public:
 		return floor(playhead / frame_time);
 	}
 	
+	void setup(const string mame, int type )
+	{
+		clear();
+		sessionName = mame;
+		sessionType = type;
+	}
+	
 	void update()
 	{
 		if (isRecording())
 		{
-			appendFrame( getActorManager().getActor(sessionName) );
+			if (sessionType == RAM_ACTOR)
+				appendFrame( getActorManager().getActor(sessionName) );
+			
+			else if (sessionType == RAM_RIGID_BODY)
+				appendFrame( getActorManager().getRigidBody(sessionName) );
 		}
 		
 		if (isPlaying())
@@ -54,7 +65,7 @@ public:
 			playhead = (ofGetElapsedTimef() - play_start_time) * rate;
 			frame_index = getFrame();
 			
-			if(frame_index >= actors.size())
+			if(frame_index >= num_frames)
 			{
 				frame_index = 0;
 				
@@ -68,8 +79,10 @@ public:
 
 	void startRecording()
 	{
+		if (sessionName == "") return;
+		
 		recording = true;
-	
+		
 		clear();
 		rec_start_time = ofGetElapsedTimef();
 	}
@@ -79,11 +92,14 @@ public:
 		recording = false;
 		
 		duration = ofGetElapsedTimef() - rec_start_time;
-		frame_time = duration / actors.size();
+		num_frames = sessionType==RAM_ACTOR ? actors.size() : sessionType==RAM_RIGID_BODY ? rigids.size() : RAM_UNDEFINED_TYPE;
+		frame_time = duration / num_frames;
 	}
 	
 	void play()
 	{
+		if (num_frames <= 0) return;
+		
 		playing = true;
 	
 		recording = false;
@@ -108,17 +124,22 @@ public:
 	inline float getDuration() {return duration;}
 	inline float getPlayhead() {return playhead;}
 	inline string getSessionName() {return sessionName;}
-
-	inline ramActor& getNextFrame() {return actors.at(frame_index);}
+	
+	inline ramActor& getNextFrameActor() {return actors.at(frame_index);}
+	inline ramRigidBody& getNextFrameRigid() {return rigids.at(frame_index);}
 	
 protected:
 	
-	string sessionName;
 	vector<ramActor> actors;
 	vector<ramRigidBody> rigids;
 	
+	string sessionName;
+	int sessionType;
 	bool loop;
 	float rate;
+	
+	bool recording;
+	bool playing;
 	
 	float playhead;
 	float duration;
@@ -126,9 +147,10 @@ protected:
 	float play_start_time;
 	float rec_start_time;
 	
-	bool recording;
-	bool playing;
-	
 	int frame_index;
+	int num_frames;
 	inline ramActorManager& getActorManager() { return ramActorManager::instance(); }
 };
+
+
+

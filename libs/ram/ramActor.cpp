@@ -91,6 +91,8 @@ void ramRigidBody::updateWithOscMessage(const ofxOscMessage &m)
 
 	if (nNodes != getNumNode())
 		reserveNodes(nNodes);
+	
+	ramNodeArray::updateWithOscMessage(m);
 }
 
 void ramRigidBody::reserveNodes(int num)

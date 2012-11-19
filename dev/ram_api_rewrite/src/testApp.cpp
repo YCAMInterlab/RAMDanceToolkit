@@ -2,8 +2,8 @@
 
 
 const string myActorName = "Ando_2012-08-29_13-48-10";
+const string myRigidName = "R_Wand500_2012-08-29_13-48-10";
 
-ramSession *mySession = new ramSession(myActorName);
 
 //--------------------------------------------------------------
 void testApp::setup()
@@ -15,6 +15,10 @@ void testApp::setup()
 
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
+	
+	mySession.setup(myActorName, ramSession::RAM_ACTOR);
+	myRigidSession.setup(myRigidName, ramSession::RAM_RIGID_BODY);
+	
 }
 
 //--------------------------------------------------------------
@@ -27,8 +31,8 @@ void testApp::update()
 		updateWithOscMessage(m);
 	}
 	
-	
-	mySession->update();
+	mySession.update();
+	myRigidSession.update();
 }
 
 //--------------------------------------------------------------
@@ -64,9 +68,9 @@ void testApp::draw()
     }
     
 	
-	if (mySession->isPlaying())
+	if (mySession.isPlaying())
 	{
-		ramActor& actor = mySession->getNextFrame();
+		ramActor& actor = mySession.getNextFrameActor();
 		for	(int i=0; i<actor.getNumNode(); i++)
 		{
 			ramNode& node = actor.getNode(i);
@@ -171,19 +175,19 @@ void testApp::keyPressed(int key)
     switch (key)
 	{
 		case 'r':
-			mySession->startRecording();
+			mySession.startRecording();
 			break;
 
 		case 's':
-			mySession->stopRecording();
+			mySession.stopRecording();
 			break;
 			
 		case 'p':
-			mySession->play();
+			mySession.play();
 			break;
 			
 		case 'q':
-			mySession->stop();
+			mySession.stop();
 			break;
 
 		default:

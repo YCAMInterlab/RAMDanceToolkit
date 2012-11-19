@@ -37,4 +37,7 @@ public:
 	// ------------------------
 	ofxOscReceiver oscReceiver;
     ramNodeFinder nodeFinder;
+	
+	ramSession mySession;
+	ramSession myRigidSession;
 };
