@@ -41,7 +41,16 @@ public:
 
 	T& operator[](const string& key)
 	{
-		return hash[key];
+		if (hasKey(key))
+		{
+			return hash[key];
+		}
+		else
+		{
+			ofLogWarning("RAMDanceToolkit") << "invalid key";
+			static T ret;
+			return ret;
+		}
 	}
 
 	bool hasKey(const string& key)
