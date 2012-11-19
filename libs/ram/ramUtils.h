@@ -49,6 +49,7 @@ public:
 		{
 			ofLogWarning("RAMDanceToolkit") << "invalid key";
 			static T ret;
+			ret = T();
 			return ret;
 		}
 	}
