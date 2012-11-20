@@ -111,8 +111,16 @@ public:
 		playing = false;
 	}
 
-	inline void appendFrame(ramActor& actor) {actors.push_back(actor);}
-	inline void appendFrame(ramRigidBody& rigid) {rigids.push_back(rigid);}
+	void appendFrame(ramActor& actor)
+	{
+		if (!actor.getName().empty())
+			actors.push_back(actor);
+	}
+	void appendFrame(ramRigidBody& rigid)
+	{
+		if (!rigid.getName().empty())
+			rigids.push_back(rigid);
+	}
 
 	inline void setLoop(bool l) {loop = l;};
 	inline void setRate(const float r) {rate = r;};
