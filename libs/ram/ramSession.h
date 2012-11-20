@@ -1,6 +1,8 @@
 #pragma once
 
+#include "ramActorManager.h"
 #include "ramActor.h"
+//#include "ofxXmlSettings.h"
 
 #pragma mark - ramBuffer
 
@@ -15,7 +17,7 @@ public:
 		RAM_RIGID_BODY
 	};
 	
-	ramSession() : sessionName(""), sessionType(RAM_UNDEFINED_TYPE), loop(true), recording(false), playing(false), rate(1.0) {}
+	ramSession() : sessionType(RAM_UNDEFINED_TYPE), loop(true), recording(false), playing(false), rate(1.0) {}
 	~ramSession() {}
 	
 	void clear()
@@ -32,10 +34,6 @@ public:
 		frame_index = 0;
 		num_frames = 0;
 	}
-	
-//  !!!: TODO
-//	void load(string filename);
-//	void save(const string filename);
 	
 	int getFrame()
 	{
@@ -79,11 +77,11 @@ public:
 
 	void startRecording()
 	{
-		if (sessionName == "") return;
-		
-		recording = true;
+		if (sessionName.empty()) return;
 		
 		clear();
+		playing = false;
+		recording = true;
 		rec_start_time = ofGetElapsedTimef();
 	}
 	
@@ -100,9 +98,8 @@ public:
 	{
 		if (num_frames <= 0) return;
 		
-		playing = true;
-	
 		recording = false;
+		playing = true;
 		play_start_time = ofGetElapsedTimef();
 	}
 	
@@ -116,15 +113,26 @@ public:
 		if (!actor.getName().empty())
 			actors.push_back(actor);
 	}
+	
 	void appendFrame(ramRigidBody& rigid)
 	{
 		if (!rigid.getName().empty())
 			rigids.push_back(rigid);
 	}
+	
+	void load(const string path)
+	{
+		
+	}
+	
+	void save(const string path)
+	{
+		
+	}
 
 	inline void setLoop(bool l) {loop = l;};
 	inline void setRate(const float r) {rate = r;};
-	inline void setPlayhead(const float t){ playhead = t; };
+	inline void setPlayhead(const float t){playhead = t;};
 	
 	inline bool isPlaying() {return playing;}
 	inline bool isRecording() {return recording;}
@@ -159,6 +167,4 @@ protected:
 	int num_frames;
 	inline ramActorManager& getActorManager() { return ramActorManager::instance(); }
 };
-
-
 

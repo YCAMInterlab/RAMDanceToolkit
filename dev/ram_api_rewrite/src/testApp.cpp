@@ -1,7 +1,7 @@
 #include "testApp.h"
 
 
-const string myActorName = "Ando_2012-08-29_13-48-10";
+const string myActorName = "Ando_2012-09-01_19-19-45";
 const string myRigidName = "R_Wand500_2012-08-29_13-48-10";
 
 
