@@ -3,6 +3,7 @@
 
 const string myActorName = "Ando_2012-08-29_13-48-10";
 
+#include "ofxBt.h"
 
 //--------------------------------------------------------------
 void testApp::setup()
