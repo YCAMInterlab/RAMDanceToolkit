@@ -9,6 +9,9 @@
 
 class ramPrimitive;
 
+void ramEnablePhysicsPrimitive(bool v);
+bool ramGetEnablePhysicsPrimitive();
+
 class ramPhysics
 {
 public:
@@ -27,6 +30,8 @@ public:
 	void registerPrimitive(ramPrimitive *o);
 	void unregisterPrimitive(ramPrimitive *o);
 	
+	void registerTempraryPrimitive(ramPrimitive *o);
+	
 private:
 	
 	static ramPhysics *_instance;
@@ -34,6 +39,7 @@ private:
 	bool inited;
 	ofxBt::World world;
 	vector<ramPrimitive*> primitives;
+	vector<ramPrimitive*> temporary_primitives;
 	
 	ramPhysics() : inited(false) {}
 	~ramPhysics() {}

@@ -17,23 +17,27 @@ public:
 protected:
 	
 	ofxBt::Rigid rigid;
+	ofxBt::World& getWorld();
 	
 	void _update();
 };
 
-class ramCube : public ramPrimitive
+class ramBoxPrimitive : public ramPrimitive
 {
 public:
+	ramBoxPrimitive(const ofVec3f& pos, float size = 100);
+	ramBoxPrimitive(const ofVec3f& pos, const ofVec3f& size);
 	
-	ramCube(float size = 100);
-	
-	void customDraw()
-	{
-		glScalef(size.x, size.y, size.z);
-		ofBox(1);
-	}
-	
-private:
-	
-	ofVec3f size;
+protected:
+	void customDraw();
 };
+
+class ramSpherePrimitive : public ramPrimitive
+{
+public:
+	ramSpherePrimitive(const ofVec3f& pos, float size = 100);
+	
+protected:
+	void customDraw();
+};
+

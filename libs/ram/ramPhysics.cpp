@@ -1,5 +1,17 @@
 #include "ramPhysics.h"
 
+static bool ram_enable_physics_primitive = true;
+
+void ramEnablePhysicsPrimitive(bool v)
+{
+	ram_enable_physics_primitive = v;
+}
+
+bool ramGetEnablePhysicsPrimitive()
+{
+	return ram_enable_physics_primitive;
+}
+
 ramPhysics* ramPhysics::_instance = NULL;
 
 ramPhysics& ramPhysics::instance()
@@ -41,6 +53,18 @@ void ramPhysics::onUpdate(ofEventArgs&)
 	}
 	
 	world.update();
+	
+	// remove all temporary primitives
+	
+	for (int i = 0; i < temporary_primitives.size(); i++)
+	{
+		ramPrimitive *p = temporary_primitives[i];
+		delete p;
+	}
+	
+	cout << temporary_primitives.size() << " -> ";
+	temporary_primitives.clear();
+	cout << temporary_primitives.size() << endl;
 }
 
 void ramPhysics::registerPrimitive(ramPrimitive *o)
@@ -55,4 +79,9 @@ void ramPhysics::unregisterPrimitive(ramPrimitive *o)
 	if (it == primitives.end()) return;
 	world.removeRegidBody(o->rigid.get());
 	primitives.erase(it);
+}
+
+void ramPhysics::registerTempraryPrimitive(ramPrimitive *o)
+{
+	temporary_primitives.push_back(o);
 }
