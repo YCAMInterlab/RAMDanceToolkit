@@ -5,6 +5,8 @@ const string myActorName = "Ando_2012-08-29_13-48-10";
 
 #include "ofxBt.h"
 
+ramCube *cube;
+
 //--------------------------------------------------------------
 void testApp::setup()
 {
@@ -15,6 +17,8 @@ void testApp::setup()
 
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
+	
+	cube = new ramCube(100);
 }
 
 //--------------------------------------------------------------
@@ -37,6 +41,11 @@ void testApp::draw()
 	
 	ramCameraBegin();
     
+	ofNoFill();
+	
+	// cube->draw();
+	ramPhysics::instance().debugDraw();
+	
     {
         vector<ramNode> nodes = nf.get();
         for (int i=0; i<nodes.size(); i++)

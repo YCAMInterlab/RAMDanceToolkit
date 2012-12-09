@@ -5,7 +5,10 @@ ramPhysics* ramPhysics::_instance = NULL;
 ramPhysics& ramPhysics::instance()
 {
 	if (!_instance)
+	{
 		_instance = new ramPhysics;
+		_instance->setup();
+	}
 	return *_instance;
 }
 
@@ -14,7 +17,8 @@ void ramPhysics::setup()
 	if (inited) return;
 	inited = true;
 	
-	world.setup();
+	world.setup(ofVec3f(0, -980, 0));
+	world.addWorldBox(ofVec3f(-1000, 0, -1000), ofVec3f(1000, 1000, 1000));
 	
 	ofAddListener(ofEvents().update, this, &ramPhysics::onUpdate);
 }
@@ -31,5 +35,24 @@ void ramPhysics::debugDraw()
 
 void ramPhysics::onUpdate(ofEventArgs&)
 {
+	for (int i = 0; i < primitives.size(); i++)
+	{
+		primitives[i]->_update();
+	}
+	
 	world.update();
+}
+
+void ramPhysics::registerPrimitive(ramPrimitive *o)
+{
+	if (find(primitives.begin(), primitives.end(), o) != primitives.end()) return;
+	primitives.push_back(o);
+}
+
+void ramPhysics::unregisterPrimitive(ramPrimitive *o)
+{
+	vector<ramPrimitive*>::iterator it = find(primitives.begin(), primitives.end(), o);
+	if (it == primitives.end()) return;
+	world.removeRegidBody(o->rigid.get());
+	primitives.erase(it);
 }

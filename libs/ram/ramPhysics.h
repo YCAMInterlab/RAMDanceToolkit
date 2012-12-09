@@ -5,6 +5,9 @@
 #include "ofxBt.h"
 
 #include "ramActor.h"
+#include "ramPrimitive.h"
+
+class ramPrimitive;
 
 class ramPhysics
 {
@@ -21,12 +24,16 @@ public:
 	
 	void onUpdate(ofEventArgs&);
 	
+	void registerPrimitive(ramPrimitive *o);
+	void unregisterPrimitive(ramPrimitive *o);
+	
 private:
 	
 	static ramPhysics *_instance;
 	
 	bool inited;
 	ofxBt::World world;
+	vector<ramPrimitive*> primitives;
 	
 	ramPhysics() : inited(false) {}
 	~ramPhysics() {}

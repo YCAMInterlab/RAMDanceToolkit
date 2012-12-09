@@ -5,3 +5,4 @@
 #include "ramGraphics.h"
 #include "ramNodeFinder.h"
 #include "ramCameraManager.h"
+#include "ramPrimitive.h"
