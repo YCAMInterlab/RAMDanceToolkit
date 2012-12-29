@@ -6,3 +6,4 @@
 #include "ramNodeFinder.h"
 #include "ramCameraManager.h"
 #include "ramSession.h"
+#include "ramPrimitive.h"

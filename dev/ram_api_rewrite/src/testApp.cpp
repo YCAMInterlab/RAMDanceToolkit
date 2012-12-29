@@ -4,6 +4,10 @@
 const string myActorName = "Ando_2012-09-01_19-19-45";
 const string myRigidName = "R_Wand500_2012-08-29_13-48-10";
 
+#include "ofxBt.h"
+
+ramBoxPrimitive *cube;
+ramSpherePrimitive *sphere;
 
 //--------------------------------------------------------------
 void testApp::setup()
@@ -19,6 +23,8 @@ void testApp::setup()
 	mySession.setup(myActorName, ramSession::RAM_ACTOR);
 	myRigidSession.setup(myRigidName, ramSession::RAM_RIGID_BODY);
 	
+	cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
+	sphere = new ramSpherePrimitive(ofVec3f(0, 0, 0), 50);
 }
 
 //--------------------------------------------------------------
@@ -44,28 +50,35 @@ void testApp::draw()
 	
 	ramCameraBegin();
     
-    {
-        vector<ramNode> nodes = nf.get();
-        for (int i=0; i<nodes.size(); i++)
-        {
-            ramNode &node = nodes.at(i);
-            
-            glPushAttrib(GL_ALL_ATTRIB_BITS);
-            glPushMatrix();
-            ofPushStyle();
-            
-            ofNoFill();
-            ofSetLineWidth(3);
-            ofSetHexColor(0x00DDFF);
-            node.transformBegin();
-            ofBox(100);
-            node.transformEnd();
-            
-            ofPopStyle();
-            glPopMatrix();
-            glPopAttrib();
-        }
-    }
+	ofNoFill();
+	
+	cube->draw();
+	sphere->draw();
+	
+	ramPhysics::instance().debugDraw();
+	
+//    {
+//        vector<ramNode> nodes = nf.get();
+//        for (int i=0; i<nodes.size(); i++)
+//        {
+//            ramNode &node = nodes.at(i);
+//            
+//            glPushAttrib(GL_ALL_ATTRIB_BITS);
+//            glPushMatrix();
+//            ofPushStyle();
+//            
+//            ofNoFill();
+//            ofSetLineWidth(3);
+//            ofSetHexColor(0x00DDFF);
+//            node.transformBegin();
+//            ofBox(100);
+//            node.transformEnd();
+//            
+//            ofPopStyle();
+//            glPopMatrix();
+//            glPopAttrib();
+//        }
+//    }
     
 	
 	if (mySession.isPlaying())
@@ -106,34 +119,34 @@ void testApp::drawActor(ramActor &actor)
 
             ofSetColor(255, 0, 0);
             ofNoFill();
-            node.transformBegin();
-            ofBox(10);
-            node.transformEnd();
+//            node.transformBegin();
+//            ofBox(10);
+//            node.transformEnd();
 
             ofSetColor(0, 255, 0);
-            ofBox(node, 20);
+            ramBox(node, 20);
             
             ofPopStyle();
             glPopMatrix();
             glPopAttrib();
         }
     
-        
-        if (node.hasParent())
-        {
-            ramNode *parent_node = node.getParent();
-                
-            glPushAttrib(GL_ALL_ATTRIB_BITS);
-            glPushMatrix();
-            ofPushStyle();
-            
-            ofSetColor(255);
-            ofLine(node, *parent_node);
-            
-            ofPopStyle();
-            glPopMatrix();
-            glPopAttrib();
-        }
+
+//        if (node.hasParent())
+//        {
+//            ramNode *parent_node = node.getParent();
+//                
+//            glPushAttrib(GL_ALL_ATTRIB_BITS);
+//            glPushMatrix();
+//            ofPushStyle();
+//            
+//            ofSetColor(255);
+//            ofLine(node, *parent_node);
+//            
+//            ofPopStyle();
+//            glPopMatrix();
+//            glPopAttrib();
+//        }
     }
 }
 
@@ -141,29 +154,29 @@ void testApp::drawActor(ramActor &actor)
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
-    for (int i=0; i<rigid.getNumNode(); i++)
-    {
-        ramNode &node = rigid.getNode(i);
-
-        {
-            glPushAttrib(GL_ALL_ATTRIB_BITS);
-            glPushMatrix();
-            ofPushStyle();
-
-            ofSetColor(255, 0, 0);
-            ofNoFill();
-            node.transformBegin();
-            ofBox(10);
-            node.transformEnd();
-
-            ofSetColor(0, 255, 0);
-            ofBox(node, 20);
-
-            ofPopStyle();
-            glPopMatrix();
-            glPopAttrib();
-        }
-    }
+//    for (int i=0; i<rigid.getNumNode(); i++)
+//    {
+//        ramNode &node = rigid.getNode(i);
+//
+//        {
+//            glPushAttrib(GL_ALL_ATTRIB_BITS);
+//            glPushMatrix();
+//            ofPushStyle();
+//
+//            ofSetColor(255, 0, 0);
+//            ofNoFill();
+//            node.transformBegin();
+//            ofBox(10);
+//            node.transformEnd();
+//
+//            ofSetColor(0, 255, 0);
+//            ofBox(node, 20);
+//
+//            ofPopStyle();
+//            glPopMatrix();
+//            glPopAttrib();
+//        }
+//    }
 }
 
 
@@ -172,6 +185,8 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
+	cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
+	
     switch (key)
 	{
 		case 'r':

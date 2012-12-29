@@ -30,6 +30,9 @@ public:
 	// utils
 	inline void transformBegin() const { transformGL(); }
 	inline void transformEnd() const { restoreTransformGL(); }
+	
+	const ofMatrix4x4& getTransformMatrix() const { return getLocalTransformMatrix(); }
+	const ofMatrix4x4& getMatrix() const { return getLocalTransformMatrix(); }
 
 private:
 
