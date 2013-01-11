@@ -17,7 +17,7 @@ string formatPosition(ofVec3f point) {
 void ofApp::setup() {
 	ofSetVerticalSync(true);
 	ofSetFrameRate(120);
-
+	
 	ofxXmlSettings settings;
 	settings.loadFile("settings.xml");
 	
@@ -32,16 +32,16 @@ void ofApp::update() {
 		osc.getNextMessage(&msg);
 		if(checkAddress(msg, "openni", 0)) {
 			int deviceID = ofToInt(getAddress(msg, 1));
-			OpenNI& openni = opennis[deviceID];
+			OscOpenNI& openni = opennis[deviceID];
 			if(checkAddress(msg, "user", 2)) {
 				int xnId = ofToInt(getAddress(msg, 3));
-				User& user = openni.users[xnId];
+				OscUser& user = openni.users[xnId];
 				if(checkAddress(msg, "joints", 4)) {
-					const int elementsPerJoint = 4;
-					int numJoints = msg.getNumArgs() / elementsPerJoint;
+					const int elementsPerOscJoint = 4;
+					int numOscJoints = msg.getNumArgs() / elementsPerOscJoint;
 					int j = 0;
-					for(int i = 0; i < numJoints; i++) {
-						Joint& joint = user.joints[i];
+					for(int i = 0; i < numOscJoints; i++) {
+						OscJoint& joint = user.joints[i];
 						joint.position.x = msg.getArgAsFloat(j++);
 						joint.position.y = msg.getArgAsFloat(j++);
 						joint.position.z = msg.getArgAsFloat(j++);
@@ -63,15 +63,18 @@ void ofApp::draw() {
 	cam.begin();
 	ofScale(.05, .05, .05);
 	ofDrawGrid(2000, 10, false, true, true, true);
-	for(map<int, OpenNI>::iterator openniItr = opennis.begin(); openniItr != opennis.end(); openniItr++) {
-		OpenNI& openni = openniItr->second;
-		for(map<int, User>::iterator userItr = openni.users.begin(); userItr != openni.users.end(); userItr++) {
-			User& user = userItr->second;
-			for(map<int, Joint>::iterator jointItr = user.joints.begin(); jointItr != user.joints.end(); jointItr++) {
-				Joint& joint = jointItr->second;
+	for(map<int, OscOpenNI>::iterator openniItr = opennis.begin(); openniItr != opennis.end(); openniItr++) {
+		OscOpenNI& openni = openniItr->second;
+		for(map<int, OscUser>::iterator userItr = openni.users.begin(); userItr != openni.users.end(); userItr++) {
+			OscUser& user = userItr->second;
+			ofSetColor(255);
+			user.drawSkeleton();
+			for(map<int, OscJoint>::iterator jointItr = user.joints.begin(); jointItr != user.joints.end(); jointItr++) {
+				OscJoint& joint = jointItr->second;
 				ofSetColor(ofColor::fromHsb(255 * joint.confidence, 255, 255));
 				ofBox(joint.position, 10);
-				ofDrawBitmapString(formatPosition(join.position), joint.position);
+				ofSetColor(255);
+				//ofDrawBitmapString(formatPosition(joint.position), joint.position);
 			}
 		}
 	}
