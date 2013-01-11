@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 #include "ofxOpenNI.h"
+#include "ofxOsc.h"
+#include "ofxXmlSettings.h"
 
 class ofApp : public ofBaseApp{
 public:
@@ -12,5 +14,6 @@ public:
 	
 	void userEvent(ofxOpenNIUserEvent & event);
 	
-	ofxOpenNI openNIDevice;	
+	ofxOpenNI openNI;
+	ofxOscSender osc;
 };

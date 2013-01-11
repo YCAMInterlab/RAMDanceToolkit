@@ -3,27 +3,68 @@
 void ofApp::setup() {
 	ofSetVerticalSync(true);
 	ofSetFrameRate(120);
+	
+	ofxXmlSettings settings;
+	settings.loadFile("settings.xml");
 
 	ofSetLogLevel(OF_LOG_VERBOSE);
-	openNIDevice.setDeviceID(0);
-	openNIDevice.setup();
-	openNIDevice.addDepthGenerator();
-	openNIDevice.setRegister(false);
-	openNIDevice.setMirror(false);
-	openNIDevice.addUserGenerator();
-	openNIDevice.setMaxNumUsers(2);
-	openNIDevice.start();
+	settings.pushTag("openNI");
+	openNI.setDeviceID(settings.getValue("deviceID", 0));
+	openNI.setup();
+	openNI.addDepthGenerator();
+	openNI.setRegister(false);
+	openNI.setMirror(false);
+	openNI.addUserGenerator();
+	openNI.setMaxNumUsers(settings.getValue("maxNumUsers", 2));
+	openNI.start();
+	settings.popTag();
+	
+	settings.pushTag("osc");
+	osc.setup(settings.getValue("hostname", "localhost"), settings.getValue("port", 10001));
+	settings.popTag();
 }
 
 void ofApp::update(){
-	openNIDevice.update();
+	openNI.update();
+	if(openNI.isNewFrame()) {
+		ofxOscBundle bundle;
+		string baseAddress = "/openni/" + ofToString(openNI.getDeviceID());
+		ofxOscMessage numTrackedUsersMsg;
+		numTrackedUsersMsg.setAddress(baseAddress + "/numTrackedUsers");
+		int numTrackedUsers = openNI.getNumTrackedUsers();
+		numTrackedUsersMsg.addIntArg(numTrackedUsers);
+		bundle.addMessage(numTrackedUsersMsg);
+		for(int i = 0; i < numTrackedUsers; i++) {
+			ofxOpenNIUser& user = openNI.getTrackedUser(i);
+			ofxOscMessage userMsg;
+			userMsg.setAddress(baseAddress + "/user/" + ofToString(user.getXnID()));
+			userMsg.addIntArg(user.isFound());
+			userMsg.addIntArg(user.isTracking());
+			userMsg.addIntArg(user.isSkeleton());
+			userMsg.addIntArg(user.isCalibrating());
+			bundle.addMessage(userMsg);
+			ofxOscMessage jointMsg;
+			jointMsg.setAddress(baseAddress + "/user/" + ofToString(user.getXnID()) + "/joints");
+			int numJoints = user.getNumJoints();
+			for(int j = 0; j < numJoints; j++) {
+				ofxOpenNIJoint& joint = user.getJoint((Joint) j);
+				ofPoint& worldPosition = joint.getWorldPosition();
+				jointMsg.addFloatArg(worldPosition.x);
+				jointMsg.addFloatArg(worldPosition.y);
+				jointMsg.addFloatArg(worldPosition.z);
+				jointMsg.addFloatArg(joint.getPositionConfidence());
+			}
+			bundle.addMessage(jointMsg);
+		}
+		osc.sendBundle(bundle);
+	}
 }
 
 void ofApp::draw() {
 	ofSetColor(255);
-	openNIDevice.drawDepth();
-	for(int i = 0; i < openNIDevice.getNumTrackedUsers(); i++) {
-		openNIDevice.getTrackedUser(i).drawSkeleton();
+	openNI.drawDepth();
+	for(int i = 0; i < openNI.getNumTrackedUsers(); i++) {
+		openNI.getTrackedUser(i).drawSkeleton();
 	}
 }
 
@@ -32,5 +73,5 @@ void ofApp::userEvent(ofxOpenNIUserEvent & event) {
 }
 
 void ofApp::exit() {
-	openNIDevice.stop();
+	openNI.stop();
 }
