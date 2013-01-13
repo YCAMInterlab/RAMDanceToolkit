@@ -65,7 +65,7 @@ public:
 
 	int getNumNode() { return nodes.size(); }
 	ramNode& getNode(int node_id) { return nodes[node_id]; }
-
+	
 	inline bool isOutdated() { return (ofGetElapsedTimef() -  last_update_client_time) > RAM_OUTDATED_DULATION; }
 	inline float getTimestamp() { return last_update_client_time; }
 	

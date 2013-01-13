@@ -7,3 +7,4 @@
 #include "ramCameraManager.h"
 #include "ramSession.h"
 #include "ramPrimitive.h"
+#include "ramAnalyzer.h"
