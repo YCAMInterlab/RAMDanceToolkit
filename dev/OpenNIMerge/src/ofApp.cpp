@@ -1,14 +1,9 @@
 #include "ofApp.h"
 
-string getAddress(ofxOscMessage& msg, int position) {
-	vector<string> address = ofSplitString(msg.getAddress(), "/", true);
-	return address[position];
-}
+using namespace cv;
+using namespace ofxCv;
 
-bool checkAddress(ofxOscMessage& msg, string name, int position) {
-	vector<string> address = ofSplitString(msg.getAddress(), "/", true);
-	return address.size() > position && address[position] == name;
-}
+bool OscOpenNI::calibrating = false;
 
 string formatPosition(ofVec3f point) {
 	return ofToString((int) point.x) + "/" + ofToString((int) point.y) + "/" + ofToString((int) point.z);
@@ -32,27 +27,18 @@ void ofApp::update() {
 		osc.getNextMessage(&msg);
 		if(checkAddress(msg, "openni", 0)) {
 			int deviceID = ofToInt(getAddress(msg, 1));
-			OscOpenNI& openni = opennis[deviceID];
-			if(checkAddress(msg, "user", 2)) {
-				int xnId = ofToInt(getAddress(msg, 3));
-				OscUser& user = openni.users[xnId];
-				if(checkAddress(msg, "joints", 4)) {
-					const int elementsPerOscJoint = 4;
-					int numOscJoints = msg.getNumArgs() / elementsPerOscJoint;
-					int j = 0;
-					for(int i = 0; i < numOscJoints; i++) {
-						OscJoint& joint = user.joints[i];
-						joint.position.x = msg.getArgAsFloat(j++);
-						joint.position.y = msg.getArgAsFloat(j++);
-						joint.position.z = msg.getArgAsFloat(j++);
-						joint.confidence = msg.getArgAsFloat(j++);
-					}
-				} else {
-					user.isFound = msg.getArgAsInt32(0);
-					user.isTracking = msg.getArgAsInt32(1);
-					user.isSkeleton = msg.getArgAsInt32(2);
-					user.isCalibrating = msg.getArgAsInt32(3);
-				}
+			opennis[deviceID].update(msg);
+		}
+	}
+	if(OscOpenNI::calibrating) {
+		map<int, OscOpenNI>::iterator itr = opennis.begin();
+		vector<ofVec3f>& reference = itr->second.recentData;
+		if(reference.size() > 4) {
+			for(itr++; itr != opennis.end(); itr++) {
+				OscOpenNI& cur = itr->second;
+				registration[itr->first] = estimateAffine3D(cur.recentData, reference);
+				cout << "registration for kinect " << itr->first << ": " << endl;
+				cout << registration[itr->first] << endl;
 			}
 		}
 	}
@@ -79,4 +65,10 @@ void ofApp::draw() {
 		}
 	}
 	cam.end();
+}
+
+void ofApp::keyPressed(int key) {
+	if(key == ' ') {
+		OscOpenNI::calibrating = !OscOpenNI::calibrating;
+	}
 }
