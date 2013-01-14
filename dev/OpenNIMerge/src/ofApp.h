@@ -4,6 +4,7 @@
 #include "ofxOsc.h"
 #include "ofxXmlSettings.h"
 #include "ofxCv.h"
+#include "DelayTimer.h"
 
 inline bool checkAddress(ofxOscMessage& msg, string name, int position) {
 	vector<string> address = ofSplitString(msg.getAddress(), "/", true);
@@ -16,33 +17,33 @@ inline string getAddress(ofxOscMessage& msg, int position) {
 }
 
 enum Joint {
-    // start at root joint
-    JOINT_TORSO = 0,
-    JOINT_NECK,
-    JOINT_HEAD,
-
-    // left arm + shoulder
-    JOINT_LEFT_SHOULDER,
-    JOINT_LEFT_ELBOW,
-    JOINT_LEFT_HAND,
-
-    // right arm + shoulder
-    JOINT_RIGHT_SHOULDER,
-    JOINT_RIGHT_ELBOW,
-    JOINT_RIGHT_HAND,
-
-    // left leg
-    JOINT_LEFT_HIP,
-    JOINT_LEFT_KNEE,
-    JOINT_LEFT_FOOT,
-
-    // right leg
-    JOINT_RIGHT_HIP,
-    JOINT_RIGHT_KNEE,
-    JOINT_RIGHT_FOOT,
-
-    JOINT_COUNT,
-    JOINT_UNKOWN
+	// start at root joint
+	JOINT_TORSO = 0,
+	JOINT_NECK,
+	JOINT_HEAD,
+	
+	// left arm + shoulder
+	JOINT_LEFT_SHOULDER,
+	JOINT_LEFT_ELBOW,
+	JOINT_LEFT_HAND,
+	
+	// right arm + shoulder
+	JOINT_RIGHT_SHOULDER,
+	JOINT_RIGHT_ELBOW,
+	JOINT_RIGHT_HAND,
+	
+	// left leg
+	JOINT_LEFT_HIP,
+	JOINT_LEFT_KNEE,
+	JOINT_LEFT_FOOT,
+	
+	// right leg
+	JOINT_RIGHT_HIP,
+	JOINT_RIGHT_KNEE,
+	JOINT_RIGHT_FOOT,
+	
+	JOINT_COUNT,
+	JOINT_UNKOWN
 };
 
 const static int skeletonLimbSize = 14;
@@ -114,15 +115,23 @@ public:
 
 class OscOpenNI {
 public:
-	static bool calibrating;
 	map<int, OscUser> users;
 	vector<ofVec3f> recentData;
+	ofMatrix4x4 registration;
+	bool hasRegistration;
+	DelayTimer calibrationTimer;
 	
-	void update(ofxOscMessage& msg) {
+	OscOpenNI()
+	:hasRegistration(false) {
+		calibrationTimer.setFramerate(2);
+	}
+	
+	void update(ofxOscMessage& msg, bool calibrating) {
 		if(checkAddress(msg, "user", 2)) {
 			int xnId = ofToInt(getAddress(msg, 3));
 			users[xnId].update(msg);
-			if(calibrating) {
+			if(calibrating && calibrationTimer.tick()) {
+				cout << "pushing data" << endl;
 				recentData.push_back(users[xnId].joints[JOINT_NECK].position);
 			}
 		}
@@ -140,6 +149,5 @@ public:
 	ofxOscReceiver osc;
 	map<int, OscOpenNI> opennis;
 	ofEasyCam cam;
-	
-	map<int, ofMatrix4x4> registration;
+	bool calibrating;
 };
