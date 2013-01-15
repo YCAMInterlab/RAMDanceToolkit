@@ -140,7 +140,7 @@ public:
 	virtual ~ramActor();
 
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
-
+	
 private:
 
 	void dispose();

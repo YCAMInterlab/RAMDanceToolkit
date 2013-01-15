@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+   <asset>
+      <contributor>
+         <authoring_tool>Google SketchUp 7.0.10247</authoring_tool>
+      </contributor>
+      <created>2009-11-26T06:01:10Z</created>
+      <modified>2009-11-26T06:01:10Z</modified>
+      <unit name="inches" meter="0.0254"/>
+      <up_axis>Z_UP</up_axis>
+   </asset>
+   <library_materials>
+      <material id="material_0_24ID" name="material_0_24">
+         <instance_effect url="#material_0_24-effect"/>
+      </material>
+   </library_materials>
+   <library_effects>
+      <effect id="material_0_24-effect" name="material_0_24-effect">
+         <profile_COMMON>
+            <technique sid="COMMON">
+               <lambert>
+                  <emission>
+                     <color>0.000000 0.000000 0.000000 1</color>
+                  </emission>
+                  <ambient>
+                     <color>0.000000 0.000000 0.000000 1</color>
+                  </ambient>
+                  <diffuse>
+                     <color>1.000000 0.000000 0.000000 1</color>
+                  </diffuse>
+                  <transparent>
+                     <color>1 1 1 1</color>
+                  </transparent>
+                  <transparency>
+                     <float>0.000000</float>
+                  </transparency>
+               </lambert>
+            </technique>
+         </profile_COMMON>
+      </effect>
+   </library_effects>
+   <library_geometries>
+      <geometry id="mesh1-geometry" name="mesh1-geometry">
+         <mesh>
+            <source id="mesh1-geometry-position">
+               <float_array id="mesh1-geometry-position-array" count="42">0.000000 0.062500 0.375000 0.000000 0.000000 0.375000 0.125000 0.062500 0.375000 0.187500 0.062500 0.595748 0.125000 0.000000 0.375000 0.187500 0.000000 0.595748 0.125000 0.000000 0.000000 0.250000 0.062500 0.375000 0.375000 0.062500 0.375000 0.250000 0.000000 0.375000 0.125000 0.062500 0.000000 0.375000 0.000000 0.375000 0.250000 0.000000 0.000000 0.250000 0.062500 0.000000 </float_array>
+               <technique_common>
+                  <accessor source="#mesh1-geometry-position-array" count="14" stride="3">
+                     <param name="X" type="float"/>
+                     <param name="Y" type="float"/>
+                     <param name="Z" type="float"/>
+                  </accessor>
+               </technique_common>
+            </source>
+            <source id="mesh1-geometry-normal">
+               <float_array id="mesh1-geometry-normal-array" count="36">-0.000000 -0.000000 1.000000 0.000000 0.000000 -1.000000 0.762170 -0.000000 -0.647377 -0.762170 0.000000 0.647377 -0.000000 1.000000 -0.000000 0.000000 -1.000000 0.000000 1.000000 -0.000000 -0.000000 -1.000000 0.000000 0.000000 -0.762170 -0.000000 -0.647377 0.762170 0.000000 0.647377 -1.000000 -0.000000 -0.000000 1.000000 0.000000 0.000000 </float_array>
+               <technique_common>
+                  <accessor source="#mesh1-geometry-normal-array" count="12" stride="3">
+                     <param name="X" type="float"/>
+                     <param name="Y" type="float"/>
+                     <param name="Z" type="float"/>
+                  </accessor>
+               </technique_common>
+            </source>
+            <vertices id="mesh1-geometry-vertex">
+               <input semantic="POSITION" source="#mesh1-geometry-position"/>
+            </vertices>
+            <triangles material="material_0_24" count="48">
+               <input semantic="VERTEX" source="#mesh1-geometry-vertex" offset="0"/>
+               <input semantic="NORMAL" source="#mesh1-geometry-normal" offset="1"/>
+               <p>0 0 1 0 2 0 2 1 1 1 0 1 0 2 3 2 1 2 1 3 3 3 0 3 4 0 2 0 1 0 1 1 2 1 4 1 0 4 3 4 2 4 2 5 3 5 0 5 5 2 1 2 3 2 3 3 1 3 5 3 4 6 6 6 2 6 2 7 6 7 4 7 1 4 5 4 4 4 4 5 5 5 1 5 2 4 3 4 7 4 7 5 3 5 2 5 3 8 8 8 5 8 5 9 8 9 3 9 4 4 9 4 6 4 6 5 9 5 4 5 10 6 2 6 6 6 6 7 2 7 10 7 4 4 5 4 9 4 9 5 5 5 4 5 8 4 7 4 3 4 3 5 7 5 8 5 2 4 7 4 10 4 10 5 7 5 2 5 11 8 5 8 8 8 8 9 5 9 11 9 12 4 6 4 9 4 9 5 6 5 12 5 10 0 6 0 13 0 13 1 6 1 10 1 11 4 9 4 5 4 5 5 9 5 11 5 7 0 9 0 8 0 8 1 9 1 7 1 13 4 10 4 7 4 7 5 10 5 13 5 11 0 8 0 9 0 9 1 8 1 11 1 12 0 13 0 6 0 6 1 13 1 12 1 12 10 9 10 13 10 13 11 9 11 12 11 7 10 13 10 9 10 9 11 13 11 7 11 </p>
+            </triangles>
+         </mesh>
+      </geometry>
+   </library_geometries>
+   <library_cameras>
+      <camera id="Camera-camera" name="Camera-camera">
+         <optics>
+            <technique_common>
+               <perspective>
+                  <xfov>46.666667</xfov>
+                  <yfov>35.000000</yfov>
+                  <znear>1.000000</znear>
+                  <zfar>1000.000000</zfar>
+               </perspective>
+            </technique_common>
+         </optics>
+      </camera>
+   </library_cameras>
+   <library_visual_scenes>
+      <visual_scene id="SketchUpScene" name="SketchUpScene">
+         <node id="Model" name="Model">
+            <node id="mesh1" name="mesh1">
+               <instance_geometry url="#mesh1-geometry">
+                  <bind_material>
+                     <technique_common>
+                        <instance_material symbol="material_0_24" target="#material_0_24ID"/>
+                     </technique_common>
+                  </bind_material>
+               </instance_geometry>
+            </node>
+         </node>
+         <node id="Camera" name="Camera">
+            <matrix>
+               -0.697385 0.372042 -0.612567 -1.120760
+               -0.716696 -0.362017 0.596062 1.271206
+               0.000000 0.854709 0.519107 1.403097
+               0.000000 0.000000 0.000000 1.000000
+            </matrix>
+            <instance_camera url="#Camera-camera"/>
+         </node>
+      </visual_scene>
+   </library_visual_scenes>
+   <scene>
+      <instance_visual_scene url="#SketchUpScene"/>
+   </scene>
+</COLLADA>
