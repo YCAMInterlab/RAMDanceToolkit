@@ -79,11 +79,15 @@ ofVbo vbo;
 float direction;
 float strength;
 
+//float weightBalance[] =
+//{
+//0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10
+//};
 float weightBalance[] =
 {
 	5,	//ramActor::JOINT_HIPS
-	10,	//ramActor::JOINT_ADBOMEN
-	10, //ramActor::JOINT_CHEST
+	5,	//ramActor::JOINT_ADBOMEN // 10
+	5, //ramActor::JOINT_CHEST  // 10
 	5,	//ramActor::JOINT_NECK
 	10, //ramActor::JOINT_HEAD
 	
@@ -107,7 +111,7 @@ float weightBalance[] =
 	4, //ramActor::JOINT_RIGHT_SHOULDER
 	3, //ramActor::JOINT_RIGHT_ELBOW
 	2, //ramActor::JOINT_RIGHT_WRIST
-	1, //ramActor::JOINT_RIGHT_HAND
+	100, //ramActor::JOINT_RIGHT_HAND
 };
 
 
@@ -116,15 +120,12 @@ float calcAngle2D(ofVec3f v1, ofVec3f v2)
 {
 	float angle = ofRadToDeg( atan((v2.z - v1.z)/(v2.x - v1.x)) );
 	
-	// 角が第1象限にあるとき
 	if (v2.z < v1.z && v2.x > v1.x)
 		return angle;
 	
-	// 角が第2 || 3象限にあるとき
 	else if((v2.z < v1.z && v2.x < v1.x) || (v2.z > v1.z && v2.x < v1.x))
 		return angle + 180.;
 	
-	// 4
 	else
 		return angle + 360.;
 }
@@ -132,27 +133,7 @@ float calcAngle2D(ofVec3f v1, ofVec3f v2)
 
 void getDirectionAndStrength(ramActor &actor, ofVec3f &axis, float &angle, float &strength)
 {
-	ofVec3f avarage;
-	const ofVec3f chest(axis.x, axis.z);
-	
-	const int size = actor.getNumNode();
-	
-	for (int i=0; i<size; i++)
-	{
-		ramNode &node = actor.getNode(i);
-		
-		ofVec3f pos = actor.getNode(i).getPosition() * weightBalance[i] / 100;
-		float dist = chest.distance(ofVec2f(pos.x, pos.y)) * 0.1;
-		pos *= dist;
-		
-		avarage.x += pos.x;
-		avarage.z += pos.z;
-	}
-	avarage.x /= size;
-	avarage.z /= size;
-	
-	strength = avarage.length();
-	angle = calcAngle2D(axis, avarage);
+
 }
 
 
@@ -170,18 +151,16 @@ void testApp::setup()
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
 	
-	
-    glShadeModel(GL_SMOOTH);
-    light.enable();
-    ofEnableSeparateSpecularLight();
-	
+//    glShadeModel(GL_SMOOTH);
+//    light.enable();
+//    ofEnableSeparateSpecularLight();
 	
 	int i, j = 0;
     for ( i = 0; i < kNumVerts; i++ )
     {
-        c[i].r = ofRandom(1.0);
-        c[i].g = ofRandom(1.0);
-        c[i].b = ofRandom(1.0);
+        c[i].r = 3*i;
+        c[i].g = 3*i;
+        c[i].b = 3*i;
 		
         v[i][0] = verts[j];
         j++;
@@ -217,25 +196,50 @@ void testApp::draw()
 	
 	ofPushStyle();
 	
+	ofVec3f avarage;
+	float scale;
+	int angle;
 	if (getActorManager().getNumActor() > 0)
 	{
 		ramActor &actor = getActorManager().getActor(myActorName);
-		ofVec3f chestPos = actor.getNode(ramActor::JOINT_CHEST).getPosition();
-		float scale, angle;
+		ofVec3f axis = actor.getNode(ramActor::JOINT_CHEST).getPosition();
 		
-		getDirectionAndStrength(actor, chestPos, angle, scale);
+		const int size = actor.getNumNode();
+		
+		axis.y = 0.;
+		
+		for (int i=0; i<size; i++)
+		{
+			ramNode &node = actor.getNode(i);
+			
+			ofVec3f pos = actor.getNode(i).getPosition();
+			pos.y = 0.;
+			
+			ofVec3f dist(pos - axis);
+			dist *= weightBalance[i];
+			
+			avarage.x += dist.x;
+			avarage.z += dist.z;
+		}
+		avarage.x /= size;
+		avarage.z /= size;
+		
+		scale = sqrt(avarage.x*avarage.x+avarage.z*avarage.z);
+		angle = calcAngle2D(axis, avarage);
 		
 		ramCameraBegin();
 		glPushMatrix();
+		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glEnable(GL_DEPTH_TEST);
 		
-		glTranslatef(chestPos.x, chestPos.y+70.f, chestPos.z);
+		glTranslatef(axis.x, 200, axis.z);
 		glScalef(scale, 10.0, scale);
-		glRotatef(angle-180, 0.f, 1.f, 0.f);
-
-		vbo.drawElements(GL_LINE_LOOP, kNumFaces);
+		glRotatef(angle, 0.f, 1.f, 0.f);
+		
+		vbo.drawElements(GL_TRIANGLES, kNumFaces);
 		
 		glDisable(GL_DEPTH_TEST);
+		glPopAttrib();
 		glPopMatrix();
 		ofPopStyle();
 		ramCameraEnd();
@@ -290,7 +294,7 @@ void testApp::drawActor(ramActor &actor)
 	glEnable(GL_DEPTH_TEST);
 	ofPushStyle();
 	ofNoFill();
-    ofSetColor(200);
+    ofSetColor(20);
 	
 	for (int i=0; i<actor.getNumNode(); i++)
     {

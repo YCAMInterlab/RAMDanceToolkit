@@ -3,7 +3,7 @@
 
 #include <numeric>
 
-static const string myActorName = "Ando_2012-09-01_18-02-37";
+static const string myActorName = "Ando_2012-09-01_18-49-10";
 
 ofMatrix4x4 shadowMat;
 
@@ -13,11 +13,11 @@ typedef struct
 	
 	vector<ramAccelerometer> accelerometers;
 	
-	void setup(ramActor &_actor)
+	void setup(ramActor &a)
 	{
-		actor = _actor;
+		actor = a;
 		accelerometers.clear();
-		accelerometers.resize(_actor.getNumNode());
+		accelerometers.resize(a.getNumNode());
 	}
 	
 } AcceRecord;
@@ -119,6 +119,48 @@ void testApp::update()
 void testApp::draw()
 {
     ofBackgroundGradient( ofColor( 240 ), ofColor( 60 ) );
+	ofNoFill();
+	
+	
+    ramCameraBegin();
+	glEnable(GL_DEPTH_TEST);
+	
+	// actor: recorded
+    if ( currRec < acceRecords.size() )
+    {
+        ramActor &recordedActor = acceRecords.at(currRec).actor;
+		vector<ramAccelerometer> &accerelometers = acceRecords.at(currRec).accelerometers;
+		
+        for ( int i=0; i<recordedActor.getNumNode(); i++ )
+        {
+			if ( i==0 )
+			{
+				for ( int j=0; j<acceRecords.size()-1; j++)
+				{
+					ramNode &n0 = acceRecords.at( j ).actor.getNode( i );
+					ramNode &n1 = acceRecords.at( j + 1 ).actor.getNode( i );
+					ofLine( n0.getPosition(), n1.getPosition() );
+				}
+			}
+			
+			float size = accerelometers.at(i).getAcceleration().length() / 20;
+			cout << recordedActor.getNode(i).getName() << " diff: " << size << endl;
+			
+            const int MAX_SIZE = 20.0;
+            if ( size > MAX_SIZE ) size = MAX_SIZE;
+			
+			ramNode &recordedNode = recordedActor.getNode(i);
+            ofBox(recordedNode, size);
+			
+            if ( recordedNode.getParent() )
+            {
+				ofLine(recordedNode, *recordedNode.getParent());
+            }
+        }
+    }
+	
+	glDisable(GL_DEPTH_TEST);
+    ramCameraEnd();
 }
 
 
@@ -188,35 +230,6 @@ void testApp::drawActor(ramActor &actor)
     ofVec3f namePos = actor.getNode(ramActor::JOINT_HEAD).getPosition();
     namePos.y += 20.0;
     ofDrawBitmapString(actor.getName(), namePos);
-
-    
-	// actor: recorded
-    if ( currRec < acceRecords.size() )
-    {
-        ramActor &recordedActor = acceRecords.at(currRec).actor;
-		vector<ramAccelerometer> &accerelometers = acceRecords.at(currRec).accelerometers;
-		
-        for ( int i=0; i<recordedActor.getNumNode(); i++ )
-        {
-			float size = accerelometers.at(i).getAcceleration().length();
-			cout << recordedActor.getNode(i).getName() << " diff: " << size << endl;
-			
-            const int MAX_SIZE = 20.0;
-            if ( size > MAX_SIZE ) size = MAX_SIZE;
-			
-			
-			
-			ramNode &recordedNode = recordedActor.getNode(i);
-            ofBox(recordedNode, size*5.0);
-
-            if ( recordedNode.getParent() )
-            {
-				ofLine(recordedNode, *recordedNode.getParent());
-            }
-        }
-		cout << "--" << endl;
-    }
-	
     ofPopStyle();
 }
 
