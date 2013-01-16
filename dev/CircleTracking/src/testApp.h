@@ -21,5 +21,6 @@ public:
 	ofxAutoControlPanel gui;
 	
 	ofImage valid, background;
+	vector<ofVec3f> trackedPositions;
 };
 

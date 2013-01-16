@@ -11,12 +11,13 @@ protected:
 	
 public:
 	int blurRadius;
-	int maxRadius;
+	float minRadius, maxRadius;
 	unsigned char threshold;
 	
 	CircleFinder()
 	:blurRadius(3)
 	,threshold(192)
+	,minRadius(2)
 	,maxRadius(6) {
 	}
 	
@@ -43,7 +44,7 @@ public:
 		unsigned char* pixels = img.getPixels();
 		unsigned char* blurredPixels = blurred.getPixels();
 		vector<ofVec2f> candidates;
-		int searchRadius = maxRadius * 2;
+		int searchRadius = ceilf(maxRadius * 2);
 		for(int y = searchRadius; y < img.getHeight() - searchRadius; y++) {
 			for(int x = searchRadius; x < img.getWidth() - searchRadius; x++) {
 				int i = y * img.getWidth() + x;
@@ -67,26 +68,27 @@ public:
 		}
 		
 		// collect multiple matches
+		vector<ofVec2f> proposals;
 		for(int i = 0; i < candidates.size(); i++) {
 			ofVec2f& cur = candidates[i];
 			bool exists = false;
-			for(int j = 0; j < centers.size(); j++) {
-				if(cur.distance(centers[j]) < searchRadius) {
+			for(int j = 0; j < proposals.size(); j++) {
+				if(cur.distance(proposals[j]) < searchRadius) {
 					exists = true;
 					break;
 				}
 			}
 			if(!exists) {
-				centers.push_back(cur);
+				proposals.push_back(cur);
 			}
 		}
 		
 		// this second half estimates the size of the circle
 		float areaThreshold = 64;
-		for(int i = 0; i < centers.size(); i++) {
+		for(int i = 0; i < proposals.size(); i++) {
 			float weightSum = 0;
 			ofVec2f positionSum;
-			ofVec2f& avg = centers[i]; 
+			ofVec2f& avg = proposals[i]; 
 			int xa = avg.x, ya = avg.y;
 			float area = 0;
 			for(int yd = -searchRadius; yd < searchRadius; yd++) {
@@ -103,8 +105,11 @@ public:
 					}
 				}
 			}
-			radii.push_back(sqrtf(area / (PI * 255)));
-			centers[i] = positionSum / weightSum;
+			float radius = sqrtf(area / (PI * 255));
+			if(radius < maxRadius && radius > minRadius) {
+				radii.push_back(radius);
+				centers.push_back(positionSum / weightSum);
+			}
 		}
 	};
 };
