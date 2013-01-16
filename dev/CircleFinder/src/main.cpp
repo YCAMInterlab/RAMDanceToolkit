@@ -4,6 +4,6 @@
 int main() {
 	ofAppGlutWindow window;
 	window.setGlutDisplayString("rgba double samples>=8 depth");
-	ofSetupOpenGL(&window, 1280, 480, OF_WINDOW);
+	ofSetupOpenGL(&window, 640, 480, OF_WINDOW);
 	ofRunApp(new testApp());
 }
