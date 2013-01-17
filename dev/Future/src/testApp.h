@@ -29,9 +29,6 @@ public:
 	void drawFloor();
     void drawActor(ramActor &actor);
     void drawRigid(ramRigidBody &rigid);
-
-    
-	// ...
-	// ------------------------
-	ofxOscReceiver oscReceiver;
+	
+	ramOscReceiver oscReceiver;
 };

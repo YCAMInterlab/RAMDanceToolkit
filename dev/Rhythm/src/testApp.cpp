@@ -4,22 +4,20 @@
 
 static const string myActorName = "Ando_2012-09-01_18-49-10";
 
-
-const int kMaxRecords = 90;
-vector<ofVec3f> playingPoints;
-vector<ofVec3f> recordingPoints;
-
-
-int curPlayingIndex;
-int targetJoint;
-ofPolyline line;
-
 ofxSimpleParticleEngine pe;
 Noise *noise;
 
-ramAccelerometer acc;
-ramFuture future;
+const int kMaxRecords = 90;
+vector<ramA> playingActor;
+vector<ofVec3f> recordingActor;
 
+int curPlayingIndex;
+int targetJoint;
+
+const int kNumDuplicates = 9;
+vector<ramActor> duplicatedActors;
+
+bool bActor, bParticle, bLine;
 
 
 #pragma mark - oF methods
@@ -45,13 +43,17 @@ void testApp::setup()
 	playingPoints.clear();
 	
 	//
-	line.clear();
+	for (int i=0; i<kNumDuplicates; i++) duplicatedActors.clear();
 	targetJoint = ramActor::JOINT_RIGHT_HAND;
 	
 	//
 	pe.setup(10000);
 	pe.addForceFactor(new Gravity);
 	pe.addForceFactor(new Floor);
+	
+	bActor = false;
+	bParticle = false;
+	bLine = false;
 }
 
 //--------------------------------------------------------------
@@ -64,22 +66,20 @@ void testApp::update()
 		updateWithOscMessage(m);
 	}
 	
-	
 	ramNode &node = getActor(myActorName).getNode(targetJoint);
 	recordingPoints.push_back(node.getPosition());
 	curPlayingIndex++;
 	
 	if (curPlayingIndex >= kMaxRecords-1)
 	{
-		cout << "cleared" << endl;
-		curPlayingIndex = 0;
-		
 		// data
 		playingPoints = recordingPoints;
-		recordingPoints.clear();
+		recordingPoints.clear(); cout << "cleared" << endl;
+		curPlayingIndex = 0;
 		
 		// line
-		line.clear();
+//		for (int i=0; i<kNumDuplicates; i++) [i][i].clear();
+		duplicatedActors.clear();
 	}
 	
 	
@@ -87,8 +87,18 @@ void testApp::update()
 	{
 		for (int i=0; i<curPlayingIndex; i++)
 		{
+			
 			ofVec3f &v = playingPoints.at(curPlayingIndex);
+			
+			// pe
 			pe.emit(v);
+
+			
+			// line
+			for (int i=0; i<kNumDuplicates; i++)
+			{
+				ac.addVertex(v);
+			}
 		}
 	}
 	
@@ -101,19 +111,23 @@ void testApp::draw()
     ofBackgroundGradient( ofColor( 240 ), ofColor( 60 ) );
 	ofSetColor(255);
 	
-	
 	ramCameraBegin();
 	{
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glEnable(GL_DEPTH_TEST);
 		
-		if ( !playingPoints.empty() )
+		
+		// line
+		if ( !playingPoints.empty() && bLine )
 		{
-			line.addVertex(playingPoints.at(curPlayingIndex));
-			line.draw();
+			line[0].draw();
 		}
 		
-		pe.draw();
+		
+		// particle
+		if (bParticle)
+			pe.draw();
+		
 		
 		glDisable(GL_DEPTH_TEST);
 		glPopAttrib();
@@ -127,6 +141,8 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
+	
+	if (!bActor) return;
 	
 	glEnable(GL_DEPTH_TEST);
 	ofPushStyle();
@@ -206,7 +222,15 @@ void testApp::drawFloor()
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	
+	switch (key)
+	{
+		case 'a': bActor ^= true; break;
+		case 's': bLine ^= true; break;
+		case 'd': bParticle ^= true; break;
+			
+		default:
+			break;
+	}
 }
 
 //--------------------------------------------------------------

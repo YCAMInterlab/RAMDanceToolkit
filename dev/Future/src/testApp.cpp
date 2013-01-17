@@ -17,7 +17,6 @@ bool bGhost, bActor, bParticle;
 //--------------------------------------------------------------
 void testApp::setup()
 {
-	
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
 	ofBackground(0);
@@ -38,17 +37,15 @@ void testApp::setup()
 	bGhost = false;
 	bActor = false;
 	bParticle = false;
+	
+	//
+	
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-	while (oscReceiver.hasWaitingMessages())
-	{
-		ofxOscMessage m;
-		oscReceiver.getNextMessage(&m);
-		updateWithOscMessage(m);
-	}
+	oscReceiver.update();
 	
 	ghost.update( getActor(myActorName) );
 	
@@ -62,6 +59,7 @@ void testApp::update()
 		pe.emit( node.getPosition() );
 	}
 	pe.update();
+	
 }
 
 //--------------------------------------------------------------

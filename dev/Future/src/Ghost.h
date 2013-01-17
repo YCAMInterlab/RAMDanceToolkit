@@ -6,8 +6,8 @@ class Ghost
 public:
 	Ghost() :
 	max_entities(10),
-	freshness(100), //動きの強調 
-	emphasis(100) // ghostの生きの良さ
+	freshness(50), //動きの強調
+	emphasis(10) // ghostの生きの良さ
 	{
 		recordedNodes.clear();
 	}
