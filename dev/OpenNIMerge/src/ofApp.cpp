@@ -22,11 +22,24 @@ string formatPosition(ofVec3f point) {
 	return ofToString((int) point.x) + "/" + ofToString((int) point.y) + "/" + ofToString((int) point.z);
 }
 
-ofMatrix4x4 estimateRigid3D(vector<ofVec3f>& from, vector<ofVec3f>& to) {
-	Scalar translation = mean(Mat(to.size(), 1, CV_32FC3, &to[0])) - mean(Mat(from.size(), 1, CV_32FC3, &from[0]));
-	ofMatrix4x4 mat;
-	mat.translate(translation[0], translation[1], translation[2]);
-	return mat;
+ofQuaternion findRotation(ofVec3f up1, ofVec3f right1, ofVec3f up2, ofVec3f right2) {
+	ofQuaternion rot1, rot2;
+	rot1.makeRotate(up1, up2);
+	ofVec3f remainder = rot1 * right1;
+	rot2.makeRotate(remainder, right2);
+	return rot1;// + rot2;
+}
+
+void ofApp::addPanel(int deviceID) {
+	string did = ofToString(deviceID);
+	gui.addPanel("Kinect" + did);
+	gui.addSlider("tx" + did, 0, -2000, 2000);
+	gui.addSlider("ty" + did, 0, -2000, 2000);
+	gui.addSlider("tz" + did, 0, -2000, 2000);
+	gui.addSlider("ux" + did, 0, -1, 1);
+	gui.addSlider("uy" + did, 0, -1, 1);
+	gui.addSlider("uz" + did, 1, -1, 1);
+	gui.addSlider("rot" + did, 0, -PI, PI);
 }
 
 void ofApp::setup() {
@@ -40,7 +53,10 @@ void ofApp::setup() {
 	osc.setup(settings.getValue("port", 10001));
 	settings.popTag();
 	
-	calibrating = false;
+	gui.setup();
+	gui.addPanel("Settings");
+	gui.addToggle("translationEstimate");
+	gui.addToggle("completeEstimate"); 
 }
 
 void ofApp::update() {
@@ -49,24 +65,41 @@ void ofApp::update() {
 		osc.getNextMessage(&msg);
 		if(checkAddress(msg, "openni", 0)) {
 			int deviceID = ofToInt(getAddress(msg, 1));
-			opennis[deviceID].update(msg, calibrating);
+			if(opennis.find(deviceID) == opennis.end()) {
+				addPanel(deviceID);
+			}
+			opennis[deviceID].update(msg);
 		}
-	}
-	if(calibrating) {
-		map<int, OscOpenNI>::iterator itr = opennis.begin();
-		vector<ofVec3f>& reference = itr->second.recentData;
-		if(reference.size() > 4) {
+	}	
+	
+	bool translationEstimate = gui.getValueB("translationEstimate");
+	bool completeEstimate = gui.getValueB("completeEstimate");
+	gui.setValueB("translationEstimate", false);
+	gui.setValueB("completeEstimate", false);
+	if(translationEstimate || completeEstimate) {
+		if(!opennis.empty()) {
+			map<int, OscOpenNI>::iterator itr = opennis.begin();
+			OscOpenNI& curOpenNI = itr->second;
+			OscUser* referenceUser = curOpenNI.recentUser;
 			for(itr++; itr != opennis.end(); itr++) {
-				OscOpenNI& cur = itr->second;
-				vector<ofVec3f> from = cur.recentData;
-				vector<ofVec3f> to = reference;
-				int matchSize = MIN(from.size(), to.size());
-				from.resize(matchSize);
-				to.resize(matchSize);
-				cur.registration = estimateAffine3D(from, to);
-				cur.hasRegistration = true;
-				cout << "registration for kinect " << itr->first << ": " << endl;
-				cout << cur.registration << endl;
+				OscUser* curUser = itr->second.recentUser;
+				if(curUser != NULL) {
+					curOpenNI.registration = ofMatrix4x4();
+					ofVec3f referenceJoint = referenceUser->joints[JOINT_NECK].position;
+					ofVec3f curJoint = curUser->joints[JOINT_NECK].position;
+					// this is broken right now
+					if(completeEstimate) {
+						ofVec3f up1 = curUser->joints[JOINT_HEAD].position;
+						ofVec3f right1 = curUser->joints[JOINT_RIGHT_SHOULDER].position;
+						ofVec3f up2 = referenceUser->joints[JOINT_HEAD].position;
+						ofVec3f right2 = referenceUser->joints[JOINT_RIGHT_SHOULDER].position;
+						ofQuaternion rotation = findRotation(up1 - curJoint, right1 - curJoint,
+																								 up2 - referenceJoint, right2 - referenceJoint);
+						curOpenNI.registration.glRotate(rotation);
+					}
+					curOpenNI.registration.glTranslate(curJoint - referenceJoint);
+					curOpenNI.hasRegistration = true;
+				}
 			}
 		}
 	}
@@ -75,33 +108,17 @@ void ofApp::update() {
 void ofApp::draw() {
 	ofBackground(0);
 	cam.begin();
-	ofScale(.1, .1, .1);
-	ofDrawGrid(2000, 10, false, true, true, true);
+	ofScale(.15, .15, .15);
+	ofDrawGrid(2000, 10, false, false, true, false);
 	for(map<int, OscOpenNI>::iterator openniItr = opennis.begin(); openniItr != opennis.end(); openniItr++) {
 		OscOpenNI& openni = openniItr->second;
-		ofMesh mesh;
-		mesh.setMode(OF_PRIMITIVE_LINE_STRIP);
-		mesh.addVertices(openni.recentData);
-		ofSetColor(ofColor::red);
-		mesh.draw();
-		if(openni.hasRegistration) {
-			cout << "drawing registration for kinect " << openniItr->first << endl;
-			for(int i = 0; i < mesh.getNumVertices(); i++) {
-				mesh.getVertices()[i] = openni.registration.preMult(mesh.getVertices()[i]);
-			}
-			ofSetColor(ofColor::green);
-			mesh.draw();
-		}
 		for(map<int, OscUser>::iterator userItr = openni.users.begin(); userItr != openni.users.end(); userItr++) {
 			OscUser& user = userItr->second;
 			ofSetColor(255);
 			user.drawSkeleton();
-			for(map<int, OscJoint>::iterator jointItr = user.joints.begin(); jointItr != user.joints.end(); jointItr++) {
-				OscJoint& joint = jointItr->second;
-				ofSetColor(ofColor::fromHsb(255 * joint.confidence, 255, 255));
-				ofBox(joint.position, 10);
-				ofSetColor(255);
-				//ofDrawBitmapString(formatPosition(joint.position), joint.position);
+			if(openni.hasRegistration) {
+				ofSetColor(ofColor::green);
+				user.drawSkeleton(openni.registration);
 			}
 		}
 	}
@@ -109,12 +126,9 @@ void ofApp::draw() {
 }
 
 void ofApp::keyPressed(int key) {
-	if(key == ' ') {
-		calibrating = !calibrating;
-	}
 	if(key == '\t') {
 		for(map<int, OscOpenNI>::iterator itr = opennis.begin(); itr != opennis.end(); itr++) {
-			savePoints(itr->second.recentData, ofToString(itr->first) + ".txt");
+			//savePoints(itr->second.recentData, ofToString(itr->first) + ".txt");
 		}
 	}
 }

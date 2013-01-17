@@ -5,7 +5,7 @@
 const std::string RAM_OSC_ADDR_SKELETON = "/ram/skeleton";
 const std::string RAM_OSC_ADDR_RIGID_BODY = "/ram/rigid_body";
 
-const float RAM_OUTDATED_DULATION = 0.5;
+const float RAM_OUTDATED_DURATION = 0.5;
 
 // ocs mesasge address
 const string addrTagName = "address";

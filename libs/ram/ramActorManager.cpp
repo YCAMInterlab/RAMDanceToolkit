@@ -28,11 +28,6 @@ void ramActorManager::update()
 }
 
 
-void ramActorManager::draw()
-{
-    
-}
-
 
 void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 {

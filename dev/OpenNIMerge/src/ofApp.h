@@ -4,7 +4,7 @@
 #include "ofxOsc.h"
 #include "ofxXmlSettings.h"
 #include "ofxCv.h"
-#include "DelayTimer.h"
+#include "ofxAutoControlPanel.h"
 
 inline bool checkAddress(ofxOscMessage& msg, string name, int position) {
 	vector<string> address = ofSplitString(msg.getAddress(), "/", true);
@@ -76,6 +76,7 @@ public:
 
 class OscUser {
 public:
+	int xnId;
 	bool isFound, isTracking, isSkeleton, isCalibrating;
 	map<int, OscJoint> joints;
 	
@@ -85,12 +86,17 @@ public:
 	,isSkeleton(false)
 	,isCalibrating(false) {
 	}
-	void drawSkeleton() {
+	void drawSkeleton(ofMatrix4x4 registration = ofMatrix4x4()) {
+		ofPushMatrix();
+		ofMultMatrix(registration);
 		for(int i = 0; i < skeletonLimbSize; i++) {
 			int root = skeletonLimbs[i * 2];
 			int parent = skeletonLimbs[i * 2 + 1];
-			ofLine(joints[root].position, joints[parent].position);
+			ofLine((joints[root].position), (joints[parent].position));
 		}
+		string msg = ofToString(xnId) + ": " + ofToString(isFound) + ofToString(isTracking) + ofToString(isSkeleton) + ofToString(isCalibrating);
+		ofDrawBitmapString(msg, (joints[JOINT_NECK].position));
+		ofPopMatrix();
 	}
 	void update(ofxOscMessage& msg) {
 		if(checkAddress(msg, "joints", 4)) {
@@ -116,24 +122,23 @@ public:
 class OscOpenNI {
 public:
 	map<int, OscUser> users;
-	vector<ofVec3f> recentData;
 	ofMatrix4x4 registration;
 	bool hasRegistration;
-	DelayTimer calibrationTimer;
+	OscUser* recentUser;
 	
 	OscOpenNI()
-	:hasRegistration(false) {
-		calibrationTimer.setFramerate(2);
+	:hasRegistration(false)
+	,recentUser(NULL) {
 	}
 	
-	void update(ofxOscMessage& msg, bool calibrating) {
+	void update(ofxOscMessage& msg) {
 		if(checkAddress(msg, "user", 2)) {
 			int xnId = ofToInt(getAddress(msg, 3));
 			users[xnId].update(msg);
-			if(calibrating && calibrationTimer.tick()) {
-				cout << "pushing data" << endl;
-				recentData.push_back(users[xnId].joints[JOINT_NECK].position);
-			}
+			users[xnId].xnId = xnId;
+			//if(users[xnId].isSkeleton) {
+				recentUser = &users[xnId];
+			//}
 		}
 	}
 };
@@ -144,10 +149,11 @@ public:
 	void update();
 	void draw();
 	
+	void addPanel(int deviceID);
 	void keyPressed(int key);
 	
 	ofxOscReceiver osc;
 	map<int, OscOpenNI> opennis;
 	ofEasyCam cam;
-	bool calibrating;
+	ofxAutoControlPanel gui;
 };
