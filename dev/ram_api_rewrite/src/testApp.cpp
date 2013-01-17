@@ -15,7 +15,7 @@ void testApp::setup()
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
 	ofBackground(0);
-	oscReceiver.setup(10000);
+	oscReceiver.setup(10001);
 
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
