@@ -3,44 +3,41 @@
 #include "ofMain.h"
 #include "ramActor.h"
 
+class ramNode;
 
 class ramAccelerometer
 {
+	friend class ramNode;
 	
 public:
-	void setup()
+	ramAccelerometer()
 	{
 		acceleration.set(0, 0, 0);
 		angular_velocity.set(0, 0, 0, 1);
 		last_pos.set(0, 0, 0);
 		last_rot.set(0, 0, 0, 1);
 	}
+	virtual ~ramAccelerometer() {}
 	
-	void update(ramNode &node)
+	void update(const ofVec3f &pos, const ofQuaternion &quat)
 	{
-		velocity = last_pos - node.getPosition();
-		last_pos = node.getPosition();
+		velocity = last_pos - pos;
+		last_pos = pos;
 
 		acceleration = last_velocity - velocity;
 		last_velocity = velocity;
 
-		angular_velocity = last_rot.inverse() * node.getOrientationQuat();
-		last_rot = node.getOrientationQuat();
+		angular_velocity = last_rot.inverse() * quat;
+		last_rot = quat;
 
 		angular_acceleration = last_angular_velocity.inverse() * angular_velocity;
 		last_angular_velocity = angular_velocity;
 	}
 	
-	inline ofVec3f getVelocity() { return velocity; }
-	inline ofVec3f getAcceleration() { return acceleration; }
-
-	inline ofQuaternion getAngularVelocity() { return angular_velocity; }
-	inline ofQuaternion getAngularAcceleration() { return angular_acceleration; }
-	
 private:
 	ofVec3f velocity, last_velocity, acceleration;
 	ofQuaternion angular_velocity, last_angular_velocity, angular_acceleration;
-	
+
 	ofVec3f last_pos;
 	ofQuaternion last_rot;
 };

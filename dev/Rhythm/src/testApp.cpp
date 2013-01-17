@@ -8,8 +8,8 @@ ofxSimpleParticleEngine pe;
 Noise *noise;
 
 const int kMaxRecords = 90;
-vector<ramA> playingActor;
-vector<ofVec3f> recordingActor;
+vector<ramActor> playingActors;
+vector<ramActor> recordingActors;
 
 int curPlayingIndex;
 int targetJoint;
@@ -24,11 +24,10 @@ bool bActor, bParticle, bLine;
 //--------------------------------------------------------------
 void testApp::setup()
 {
-	
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
 	ofBackground(0);
-	oscReceiver.setup(10000);
+	oscReceiver.setup(10001);
 	
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
@@ -39,8 +38,8 @@ void testApp::setup()
 	
 	//
 	curPlayingIndex = 0;
-	recordingPoints.clear();
-	playingPoints.clear();
+	recordingActors.clear();
+	playingActors.clear();
 	
 	//
 	for (int i=0; i<kNumDuplicates; i++) duplicatedActors.clear();
@@ -59,47 +58,32 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	while (oscReceiver.hasWaitingMessages())
-	{
-		ofxOscMessage m;
-		oscReceiver.getNextMessage(&m);
-		updateWithOscMessage(m);
-	}
+	oscReceiver.update();
 	
-	ramNode &node = getActor(myActorName).getNode(targetJoint);
-	recordingPoints.push_back(node.getPosition());
+	recordingActors.push_back( getActor(myActorName) );
 	curPlayingIndex++;
 	
 	if (curPlayingIndex >= kMaxRecords-1)
 	{
 		// data
-		playingPoints = recordingPoints;
-		recordingPoints.clear(); cout << "cleared" << endl;
+		playingActors = recordingActors;
+		recordingActors.clear(); cout << "cleared" << endl;
 		curPlayingIndex = 0;
 		
 		// line
-//		for (int i=0; i<kNumDuplicates; i++) [i][i].clear();
 		duplicatedActors.clear();
 	}
 	
 	
-	if ( !playingPoints.empty() )
+	if ( !playingActors.empty() )
 	{
-		for (int i=0; i<curPlayingIndex; i++)
-		{
-			
-			ofVec3f &v = playingPoints.at(curPlayingIndex);
-			
-			// pe
-			pe.emit(v);
-
-			
-			// line
-			for (int i=0; i<kNumDuplicates; i++)
-			{
-				ac.addVertex(v);
-			}
-		}
+//		for (int i=0; i<curPlayingIndex; i++)
+//		{
+		const ofVec3f &v = playingActors.at(curPlayingIndex).getNode(targetJoint).getPosition();
+		
+		
+		for(int i=0; i<100; i++) pe.emit(v);
+//		}
 	}
 	
 	pe.update();
@@ -116,17 +100,36 @@ void testApp::draw()
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glEnable(GL_DEPTH_TEST);
 		
+		// line
+//		if ( !playingPoints.empty() && bLine )
+//		{
+//			line[0].draw();
+//		}
 		
 		// line
-		if ( !playingPoints.empty() && bLine )
+		ofPolyline line;
+		if ( !playingActors.empty() )
 		{
-			line[0].draw();
+			for (int i=0; i<curPlayingIndex; i++)
+			{
+				ramNode &node = playingActors.at(i).getNode(targetJoint);
+				line.addVertex(node.getPosition());
+			}
+		}
+		
+		if (bLine)
+		{
+			ofSetColor(255, 255, 0);
+			line.draw();
 		}
 		
 		
 		// particle
 		if (bParticle)
+		{
+			ofSetColor(255);
 			pe.draw();
+		}
 		
 		
 		glDisable(GL_DEPTH_TEST);
@@ -134,8 +137,6 @@ void testApp::draw()
 	}
 	ramCameraEnd();
 }
-
-
 
 
 //--------------------------------------------------------------
@@ -161,7 +162,7 @@ void testApp::drawActor(ramActor &actor)
 		node.transformEnd();
 		glPopAttrib();
 		glPopMatrix();
-        
+		
         if (node.hasParent())
             ofLine(node, *node.getParent());
     }

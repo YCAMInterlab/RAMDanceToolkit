@@ -9,3 +9,4 @@
 #include "ramSession.h"
 #include "ramPrimitive.h"
 #include "ramAccelerometer.h"
+#include "ramGhost.h"
