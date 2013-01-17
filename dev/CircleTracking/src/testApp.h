@@ -12,6 +12,6 @@ public:
 	
 	ofEasyCam easyCam;
 	ofxAutoControlPanel gui;
-	CircleSensor sensor;
+	vector<ofPtr<CircleSensor> > sensors;
 };
 

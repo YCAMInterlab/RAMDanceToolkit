@@ -16,9 +16,18 @@ ofVec3f ConvertProjectiveToRealWorld(const ofVec3f& point) {
 								 point.z);
 }
 
-CircleSensor::CircleSensor() {
+CircleSensor::CircleSensor()
+:backgroundClear(false)
+,backgroundCalibrate(false)
+,backgroundThreshold(10)
+,sampleRadius(12) {
+}
+
+void CircleSensor::setup() {
 	kinect.init(true, true);
-	kinect.open(ofxKinect::nextAvailableSerial());
+	string serial = ofxKinect::nextAvailableSerial();
+	kinect.open(serial);
+	cout << "Connected to Kinect " << serial << endl;
 	
 	imitate(background, kinect, CV_8UC1);
 	imitate(valid, kinect, CV_8UC1);
@@ -107,7 +116,7 @@ void CircleSensor::update() {
 		}
 	}
 }
-void CircleSensor::draw() {
+void CircleSensor::drawCloud() {
 	ofPushStyle();
 	ofSetColor(255);
 	cloud.draw();
@@ -122,9 +131,9 @@ void CircleSensor::drawDebug() {
 	ofPushStyle();
 	ofPushMatrix();
 	ofSetColor(255);
-	kinect.drawDepth(0, 0);
-	kinect.draw(640, 0);
-	background.draw(640 * 2, 0);
+	kinect.draw(0, 0);
+	kinect.drawDepth(640, 0, 320, 240);
+	background.draw(640, 240, 320, 240);
 	
 	ofEnableBlendMode(OF_BLENDMODE_ADD);
 	ofSetColor(yellowPrint);
@@ -133,11 +142,11 @@ void CircleSensor::drawDebug() {
 	
 	ofNoFill();
 	ofSetColor(magentaPrint);
-	ofTranslate(640, 0);
 	for(int i = 0; i < circleFinder.size(); i++) {
 		float radius = circleFinder.getRadius(i);
 		if(radius > 2) {
 			ofCircle(circleFinder.getCenter(i), radius);
+			ofDrawBitmapString(ofToString(ConvertProjectiveToRealWorld(trackedPositions[i])), circleFinder.getCenter(i));
 		}
 	}
 	ofPopMatrix();

@@ -18,6 +18,7 @@ public:
 	float sampleRadius;
 	
 	CircleSensor();
+	void setup();
 	void update();
 	void draw();
 	void drawDebug();
