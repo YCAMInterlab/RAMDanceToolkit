@@ -43,7 +43,7 @@ ramNodeArray& ramNodeArray::operator=(const ramNodeArray& copy)
 		
 		dst.setParent(nodes[idx]);
 	}
-
+	
 	last_timestamp = copy.last_timestamp;
 	current_timestamp = copy.current_timestamp;
 

@@ -77,13 +77,8 @@ void testApp::update()
 	
 	if ( !playingActors.empty() )
 	{
-//		for (int i=0; i<curPlayingIndex; i++)
-//		{
 		const ofVec3f &v = playingActors.at(curPlayingIndex).getNode(targetJoint).getPosition();
-		
-		
 		for(int i=0; i<100; i++) pe.emit(v);
-//		}
 	}
 	
 	pe.update();
@@ -101,12 +96,6 @@ void testApp::draw()
 		glEnable(GL_DEPTH_TEST);
 		
 		// line
-//		if ( !playingPoints.empty() && bLine )
-//		{
-//			line[0].draw();
-//		}
-		
-		// line
 		ofPolyline line;
 		if ( !playingActors.empty() )
 		{
@@ -122,7 +111,6 @@ void testApp::draw()
 			ofSetColor(255, 255, 0);
 			line.draw();
 		}
-		
 		
 		// particle
 		if (bParticle)
@@ -182,39 +170,7 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::drawFloor()
 {
-	int division = 600/50.0f;
-	float size = 50.0f;
-	const ofColor& c1(200);
-	const ofColor& c2(230);
-	
-	ofPushStyle();
-	ofFill();
-	
-	ofPushMatrix();
-    ofRotate( 90.0f, 1.0f, 0.0f, 0.0f );
-	
-	if ( ofGetRectMode() != OF_RECTMODE_CENTER )
-	{
-		float w = division*size;
-		ofTranslate( -w/2.0f+size/2.0f, -w/2.0f+size/2.0f );
-	}
-	
-	glNormal3f( 0.0f, 1.0f, 0.0f );
-	
-	glEnable(GL_DEPTH_TEST);
-	for (int i=0; i<division; i++)
-	{
-		for (int j=0; j<division; j++)
-		{
-			if ( ( i%2==0 && j%2== 0 ) || ( i%2==1 && j%2== 1 ) ) ofSetColor( c1 );
-			else ofSetColor( c2 );
-			ofRect( i*size, j*size, size, size );
-		}
-	}
-	glDisable(GL_DEPTH_TEST);
-	
-	ofPopMatrix();
-	ofPopStyle();
+	ramBasicFloor(600., 50.);
 }
 
 
@@ -228,9 +184,6 @@ void testApp::keyPressed(int key)
 		case 'a': bActor ^= true; break;
 		case 's': bLine ^= true; break;
 		case 'd': bParticle ^= true; break;
-			
-		default:
-			break;
 	}
 }
 

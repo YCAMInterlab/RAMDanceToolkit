@@ -189,9 +189,6 @@ void testApp::keyPressed(int key)
 		case 'a': bActor ^= true; break;
 		case 's': bGhost ^= true; break;
 		case 'd': bParticle ^= true; break;
-			
-		default:
-			break;
 	}
 }
 
