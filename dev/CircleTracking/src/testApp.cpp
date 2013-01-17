@@ -17,6 +17,7 @@ void testApp::setup() {
 	gui.addToggle("backgroundCalibrate", false);
 	gui.addSlider("backgroundThreshold", 10, 0, 255, true);
 	gui.addSlider("sampleRadius", 12, 0, 32);
+	gui.addToggle("registrationClear", false);
 	gui.addToggle("registrationCalibrate", false);
 	gui.addSlider("registrationCalibrationRate", 2, 1, 10, true);
 	
@@ -47,21 +48,23 @@ void testApp::update() {
 	if(registrationCalibrate && registrationCalibrationTimer.tick()) {
 		bool singleMatch = true;
 		for(int i = 0; i < sensors.size(); i++) {
-			CircleSensor& sensor = *sensors[i];
-			if(sensor.trackedPositions.size() != 1) {
+			if(sensors[i]->trackedPositions.size() != 1) {
 				singleMatch = false;
 				break;
 			}
 		}
 		if(singleMatch) {
 			for(int i = 0; i < sensors.size(); i++) {
-				CircleSensor& sensor = *sensors[i];
-				sensor.sampleRegistration();
+				sensors[i]->sampleRegistration();
+			}
+			for(int i = 1; i < sensors.size(); i++) {
+				sensors[i]->updateRegistration(*sensors[0]);
 			}
 		}
 	}
 	
 	gui.setValueB("backgroundClear", false);
+	gui.setValueB("registrationClear", false);
 }
 
 void testApp::draw() {

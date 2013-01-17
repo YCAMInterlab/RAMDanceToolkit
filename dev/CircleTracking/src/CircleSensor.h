@@ -12,8 +12,10 @@ public:
 	ofImage valid, background;
 	vector<ofVec3f> trackedPositions;
 	vector<ofVec3f> registrationSamples;
+	ofMatrix4x4 registration;
 	
 	bool backgroundClear;
+	bool registrationClear;
 	bool backgroundCalibrate;
 	unsigned char backgroundThreshold;
 	float sampleRadius;
@@ -24,5 +26,6 @@ public:
 	void drawCloud();
 	void drawDebug();
 	void sampleRegistration();
+	void updateRegistration(CircleSensor& reference);
 	~CircleSensor();
 };
