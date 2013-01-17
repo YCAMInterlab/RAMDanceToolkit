@@ -45,9 +45,9 @@ void testApp::update()
 	oscReceiver.update();
 	ghost.update( getActor(myActorName) );
 	
-	for (int i=0; i<ghost.getFutureNodes().getNumNode(); i++)
+	for (int i=0; i<ghost.getActor().getNumNode(); i++)
 	{
-		ramNode &node = ghost.getFutureNodes().getNode(i);
+		ramNode &node = ghost.getActor().getNode(i);
 		for(int j=0; j<10; j++) pe.emit( node.getPosition() );
 	}
 	pe.update();
@@ -69,9 +69,9 @@ void testApp::draw()
 		
 		if (bGhost)
 		{
-			for (int i=0; i<ghost.getFutureNodes().getNumNode(); i++)
+			for (int i=0; i<ghost.getActor().getNumNode(); i++)
 			{
-				ramNode &node = ghost.getFutureNodes().getNode(i);
+				ramNode &node = ghost.getActor().getNode(i);
 				const int size = (i==ramActor::JOINT_HEAD) ? 6 : 3;
 				
 				node.transformBegin();
@@ -142,39 +142,7 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::drawFloor()
 {
-	int division = 600/50.0f;
-	float size = 50.0f;
-	const ofColor& c1(200);
-	const ofColor& c2(230);
-	
-	ofPushStyle();
-	ofFill();
-	
-	ofPushMatrix();
-    ofRotate( 90.0f, 1.0f, 0.0f, 0.0f );
-	
-	if ( ofGetRectMode() != OF_RECTMODE_CENTER )
-	{
-		float w = division*size;
-		ofTranslate( -w/2.0f+size/2.0f, -w/2.0f+size/2.0f );
-	}
-	
-	glNormal3f( 0.0f, 1.0f, 0.0f );
-	
-	glEnable(GL_DEPTH_TEST);
-	for (int i=0; i<division; i++)
-	{
-		for (int j=0; j<division; j++)
-		{
-			if ( ( i%2==0 && j%2== 0 ) || ( i%2==1 && j%2== 1 ) ) ofSetColor( c1 );
-			else ofSetColor( c2 );
-			ofRect( i*size, j*size, size, size );
-		}
-	}
-	glDisable(GL_DEPTH_TEST);
-	
-	ofPopMatrix();
-	ofPopStyle();
+	ramBasicFloor(600., 50.);
 }
 
 

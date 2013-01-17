@@ -1,3 +1,6 @@
 [submodule "addons/ofxBt"]
 	path = addons/ofxBt
 	url = git@github.com:satoruhiga/ofxBt.git
+[submodule "addons/ofxControlPanel"]
+	path = addons/ofxControlPanel
+	url = https://motoishmz@github.com/kylemcdonald/ofxControlPanel.git

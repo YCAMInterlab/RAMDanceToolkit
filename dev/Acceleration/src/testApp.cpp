@@ -7,22 +7,7 @@ static const string myActorName = "Ando_2012-09-01_18-49-10";
 
 ofMatrix4x4 shadowMat;
 
-typedef struct
-{
-	ramActor actor;
-	
-	vector<ramAccelerometer> accelerometers;
-	
-	void setup(ramActor &a)
-	{
-		actor = a;
-		accelerometers.clear();
-		accelerometers.resize(a.getNumNode());
-	}
-	
-} AcceRecord;
-
-deque<AcceRecord> acceRecords;
+deque<ramActor> actors;
 float currRec;
 
 static const int N_ACCE = 300;
@@ -65,7 +50,7 @@ void testApp::setup()
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
 	ofBackground(0);
-	oscReceiver.setup(10000);
+	oscReceiver.setup(10001);
 
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
@@ -75,43 +60,28 @@ void testApp::setup()
     gl::calcShadowMatrix( gl::kGroundPlaneYUp, lightPosition, shadowMat.getPtr() );
 	
 	currRec = 0;
-	acceRecords.clear();
+	actors.clear();
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-	while (oscReceiver.hasWaitingMessages())
-	{
-		ofxOscMessage m;
-		oscReceiver.getNextMessage(&m);
-		updateWithOscMessage(m);
-	}
+	oscReceiver.update();
 	
 	if (getActorManager().getNumActor() > 0)
 	{
 		ramActor &actor = getActorManager().getActor(myActorName);
-		
-		AcceRecord record;
-		record.setup(actor);
-		
-		for (int i=0; i<actor.getNumNode(); i++)
-		{
-			ramNode &node = record.actor.getNode(i);
-			ramAccelerometer &acce = record.accelerometers.at(i);
-			acce.update(node);
-		}
-		
-		acceRecords.push_back(record);
+		actors.push_back(actor);
+		cout << actors.back().getNode(0).getAcceleration();
 	}
 
-    while (acceRecords.size() > N_ACCE) acceRecords.pop_front();
+    while (actors.size() > N_ACCE) actors.pop_front();
 
-    if (acceRecords.size() > SPEED*5)
+    if (actors.size() > SPEED*5)
     {
         currRec += SPEED;
-        if (currRec >= acceRecords.size())
-            currRec -= acceRecords.size();
+        if (currRec >= actors.size())
+            currRec -= actors.size();
     }
 }
 
@@ -121,41 +91,35 @@ void testApp::draw()
     ofBackgroundGradient( ofColor( 240 ), ofColor( 60 ) );
 	ofNoFill();
 	
-	
     ramCameraBegin();
 	glEnable(GL_DEPTH_TEST);
 	
 	// actor: recorded
-    if ( currRec < acceRecords.size() )
+    if ( currRec < actors.size() )
     {
-        ramActor &recordedActor = acceRecords.at(currRec).actor;
-		vector<ramAccelerometer> &accerelometers = acceRecords.at(currRec).accelerometers;
+        ramActor &recordedActor = actors.at(currRec);
 		
         for ( int i=0; i<recordedActor.getNumNode(); i++ )
         {
 			if ( i==0 )
 			{
-				for ( int j=0; j<acceRecords.size()-1; j++)
+				for ( int j=0; j<actors.size()-1; j++)
 				{
-					ramNode &n0 = acceRecords.at( j ).actor.getNode( i );
-					ramNode &n1 = acceRecords.at( j + 1 ).actor.getNode( i );
+					ramNode &n0 = actors.at(j).getNode(i);
+					ramNode &n1 = actors.at(j + 1).getNode(i);
 					ofLine( n0.getPosition(), n1.getPosition() );
 				}
 			}
 			
-			float size = accerelometers.at(i).getAcceleration().length() / 20;
-			cout << recordedActor.getNode(i).getName() << " diff: " << size << endl;
-			
+			ramNode &node = recordedActor.getNode(i);
+			float size = node.getVelocity().length() * 2.;
             const int MAX_SIZE = 20.0;
             if ( size > MAX_SIZE ) size = MAX_SIZE;
 			
-			ramNode &recordedNode = recordedActor.getNode(i);
-            ofBox(recordedNode, size);
+            ofBox(node, size);
 			
-            if ( recordedNode.getParent() )
-            {
-				ofLine(recordedNode, *recordedNode.getParent());
-            }
+            if (node.getParent())
+				ofLine(node, *node.getParent());
         }
     }
 	

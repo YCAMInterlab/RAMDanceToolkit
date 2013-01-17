@@ -39,11 +39,11 @@ public:
 			d.normalize();
 			d *= freshness;
 			ofVec3f v = p0 + d;
-			ofVec3f f = futureActor.getNode(i).getPosition();
+			ofVec3f f = ghostActor.getNode(i).getPosition();
 			
 			f += (v - f) * emphasis * 0.001;
 			
-			futureActor.getNode(i).setPosition(f);
+			ghostActor.getNode(i).setPosition(f);
 		}
 	}
 	
@@ -67,16 +67,16 @@ public:
 			d.normalize();
 			d *= freshness;
 			ofVec3f v = p0 + d;
-			ofVec3f f = futureRigidBody.getNode(i).getPosition();
+			ofVec3f f = ghostRigidBody.getNode(i).getPosition();
 			
 			f += (v - f) * emphasis * 0.001;
 			
-			futureRigidBody.getNode(i).setPosition(f);
+			ghostRigidBody.getNode(i).setPosition(f);
 		}
 	}
 	
-	inline ramActor& getFutureActor() { return futureActor; }
-	inline ramRigidBody& getFutureRigidBody() { return futureRigidBody; }
+	inline ramActor& getActor() { return ghostActor; }
+	inline ramRigidBody& getRigidBody() { return ghostRigidBody; }
 	
 	inline void setFreshness(const float f) { freshness = f; }
 	inline void setEmphasis(const float e) { emphasis = e; }
@@ -89,8 +89,8 @@ public:
 protected:
 	deque<ramActor> recordedActors;
 	deque<ramRigidBody> recordedRigids;
-	ramActor futureActor;
-	ramRigidBody futureRigidBody;
+	ramActor ghostActor;
+	ramRigidBody ghostRigidBody;
 	
 	unsigned int max_entities;
 	float freshness, emphasis;
