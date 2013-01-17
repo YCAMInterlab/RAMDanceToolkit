@@ -1,14 +1,14 @@
 #include "testApp.h"
-#include "Ghost.h"
 #include "ofxSimpleParticleEngine.h"
 
 
 static const string myActorName = "Ando_2012-09-01_18-49-10";
 
+
 ofxSimpleParticleEngine pe;
 Noise *noise;
 
-Ghost ghost;
+ramGhost ghost;
 
 bool bGhost, bActor, bParticle;
 
@@ -20,7 +20,7 @@ void testApp::setup()
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
 	ofBackground(0);
-	oscReceiver.setup(10000);
+	oscReceiver.setup(10001);
 	
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
@@ -37,26 +37,18 @@ void testApp::setup()
 	bGhost = false;
 	bActor = false;
 	bParticle = false;
-	
-	//
-	
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
 	oscReceiver.update();
-	
 	ghost.update( getActor(myActorName) );
 	
 	for (int i=0; i<ghost.getFutureNodes().getNumNode(); i++)
 	{
 		ramNode &node = ghost.getFutureNodes().getNode(i);
-		
-		pe.emit( node.getPosition() );
-		pe.emit( node.getPosition() );
-		pe.emit( node.getPosition() );
-		pe.emit( node.getPosition() );
+		for(int j=0; j<10; j++) pe.emit( node.getPosition() );
 	}
 	pe.update();
 	
@@ -193,12 +185,10 @@ void testApp::keyPressed(int key)
 {
 	switch (key)
 	{
+		case 'f': ofToggleFullscreen(); break;
 		case 'a': bActor ^= true; break;
 		case 's': bGhost ^= true; break;
 		case 'd': bParticle ^= true; break;
-			
-		default:
-			break;
 	}
 }
 

@@ -8,8 +8,8 @@ ofxSimpleParticleEngine pe;
 Noise *noise;
 
 const int kMaxRecords = 90;
-vector<ramA> playingActor;
-vector<ofVec3f> recordingActor;
+vector<ramActor> playingActors;
+vector<ramActor> recordingActors;
 
 int curPlayingIndex;
 int targetJoint;
@@ -24,11 +24,10 @@ bool bActor, bParticle, bLine;
 //--------------------------------------------------------------
 void testApp::setup()
 {
-	
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
 	ofBackground(0);
-	oscReceiver.setup(10000);
+	oscReceiver.setup(10001);
 	
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
@@ -39,8 +38,8 @@ void testApp::setup()
 	
 	//
 	curPlayingIndex = 0;
-	recordingPoints.clear();
-	playingPoints.clear();
+	recordingActors.clear();
+	playingActors.clear();
 	
 	//
 	for (int i=0; i<kNumDuplicates; i++) duplicatedActors.clear();
@@ -59,47 +58,27 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	while (oscReceiver.hasWaitingMessages())
-	{
-		ofxOscMessage m;
-		oscReceiver.getNextMessage(&m);
-		updateWithOscMessage(m);
-	}
+	oscReceiver.update();
 	
-	ramNode &node = getActor(myActorName).getNode(targetJoint);
-	recordingPoints.push_back(node.getPosition());
+	recordingActors.push_back( getActor(myActorName) );
 	curPlayingIndex++;
 	
 	if (curPlayingIndex >= kMaxRecords-1)
 	{
 		// data
-		playingPoints = recordingPoints;
-		recordingPoints.clear(); cout << "cleared" << endl;
+		playingActors = recordingActors;
+		recordingActors.clear(); cout << "cleared" << endl;
 		curPlayingIndex = 0;
 		
 		// line
-//		for (int i=0; i<kNumDuplicates; i++) [i][i].clear();
 		duplicatedActors.clear();
 	}
 	
 	
-	if ( !playingPoints.empty() )
+	if ( !playingActors.empty() )
 	{
-		for (int i=0; i<curPlayingIndex; i++)
-		{
-			
-			ofVec3f &v = playingPoints.at(curPlayingIndex);
-			
-			// pe
-			pe.emit(v);
-
-			
-			// line
-			for (int i=0; i<kNumDuplicates; i++)
-			{
-				ac.addVertex(v);
-			}
-		}
+		const ofVec3f &v = playingActors.at(curPlayingIndex).getNode(targetJoint).getPosition();
+		for(int i=0; i<100; i++) pe.emit(v);
 	}
 	
 	pe.update();
@@ -116,17 +95,29 @@ void testApp::draw()
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glEnable(GL_DEPTH_TEST);
 		
-		
 		// line
-		if ( !playingPoints.empty() && bLine )
+		ofPolyline line;
+		if ( !playingActors.empty() )
 		{
-			line[0].draw();
+			for (int i=0; i<curPlayingIndex; i++)
+			{
+				ramNode &node = playingActors.at(i).getNode(targetJoint);
+				line.addVertex(node.getPosition());
+			}
 		}
 		
+		if (bLine)
+		{
+			ofSetColor(255, 255, 0);
+			line.draw();
+		}
 		
 		// particle
 		if (bParticle)
+		{
+			ofSetColor(255);
 			pe.draw();
+		}
 		
 		
 		glDisable(GL_DEPTH_TEST);
@@ -134,8 +125,6 @@ void testApp::draw()
 	}
 	ramCameraEnd();
 }
-
-
 
 
 //--------------------------------------------------------------
@@ -161,7 +150,7 @@ void testApp::drawActor(ramActor &actor)
 		node.transformEnd();
 		glPopAttrib();
 		glPopMatrix();
-        
+		
         if (node.hasParent())
             ofLine(node, *node.getParent());
     }
@@ -181,39 +170,7 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::drawFloor()
 {
-	int division = 600/50.0f;
-	float size = 50.0f;
-	const ofColor& c1(200);
-	const ofColor& c2(230);
-	
-	ofPushStyle();
-	ofFill();
-	
-	ofPushMatrix();
-    ofRotate( 90.0f, 1.0f, 0.0f, 0.0f );
-	
-	if ( ofGetRectMode() != OF_RECTMODE_CENTER )
-	{
-		float w = division*size;
-		ofTranslate( -w/2.0f+size/2.0f, -w/2.0f+size/2.0f );
-	}
-	
-	glNormal3f( 0.0f, 1.0f, 0.0f );
-	
-	glEnable(GL_DEPTH_TEST);
-	for (int i=0; i<division; i++)
-	{
-		for (int j=0; j<division; j++)
-		{
-			if ( ( i%2==0 && j%2== 0 ) || ( i%2==1 && j%2== 1 ) ) ofSetColor( c1 );
-			else ofSetColor( c2 );
-			ofRect( i*size, j*size, size, size );
-		}
-	}
-	glDisable(GL_DEPTH_TEST);
-	
-	ofPopMatrix();
-	ofPopStyle();
+	ramBasicFloor(600., 50.);
 }
 
 
@@ -227,9 +184,6 @@ void testApp::keyPressed(int key)
 		case 'a': bActor ^= true; break;
 		case 's': bLine ^= true; break;
 		case 'd': bParticle ^= true; break;
-			
-		default:
-			break;
 	}
 }
 

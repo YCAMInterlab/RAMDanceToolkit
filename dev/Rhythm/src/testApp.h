@@ -33,5 +33,5 @@ public:
     
 	// ...
 	// ------------------------
-	ofxOscReceiver oscReceiver;
+	ramOscReceiver oscReceiver;
 };

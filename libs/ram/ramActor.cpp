@@ -43,7 +43,7 @@ ramNodeArray& ramNodeArray::operator=(const ramNodeArray& copy)
 		
 		dst.setParent(nodes[idx]);
 	}
-
+	
 	last_timestamp = copy.last_timestamp;
 	current_timestamp = copy.current_timestamp;
 
@@ -75,6 +75,7 @@ void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
 
 		node.setPosition(vec);
 		node.setOrientation(quat);
+		node.accerelometer.update(vec, quat);
 	}
 
 	last_timestamp = current_timestamp;

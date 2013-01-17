@@ -1,17 +1,17 @@
 #pragma once
 #include "ramMain.h"
 
-class Ghost
+class ramGhost
 {
 public:
-	Ghost() :
+	ramGhost() :
 	max_entities(10),
-	freshness(50), //動きの強調
-	emphasis(10) // ghostの生きの良さ
+	freshness(150),
+	emphasis(27)
 	{
 		recordedNodes.clear();
 	}
-	virtual ~Ghost() {}
+	virtual ~ramGhost() {}
 	
 	void setup() {}
 	
@@ -20,11 +20,26 @@ public:
 		updateFutureNodes( (ramNodeArray&)present );
 	}
 	
-	inline ramNodeArray& getFutureNodes() { return futureNodes; }
+	void update(ramRigidBody &present)
+	{
+		updateFutureNodes( (ramNodeArray&)present );
+	}
 	
+	inline ramNodeArray& getFutureNodes() { return futureActor; }
+	
+	inline void setFreshness(const float f) { freshness = f; }
+	inline void setEmphasis(const float e) { emphasis = e; }
+	inline void setMaxEntities(const unsigned int m) { max_entities = m; }
+	
+	inline float getFreshness() { return freshness; }
+	inline float getEmphasis() { return emphasis; }
+	inline unsigned int getMaxEntities() { return max_entities; }
 	
 protected:
-	int max_entities;
+	deque<ramNodeArray> recordedNodes;
+	ramActor futureActor;
+	
+	unsigned int max_entities;
 	float freshness, emphasis;
 	
 	void updateFutureNodes(ramNodeArray &nodeArray)
@@ -48,14 +63,11 @@ protected:
 			d.normalize();
 			d *= freshness;
 			ofVec3f v = p0 + d;
-			ofVec3f f = futureNodes.getNode(i).getPosition();
+			ofVec3f f = futureActor.getNode(i).getPosition();
 			
 			f += (v - f) * emphasis * 0.001;
 			
-			futureNodes.getNode(i).setPosition(f);
+			futureActor.getNode(i).setPosition(f);
 		}
 	}
-	
-	deque<ramNodeArray> recordedNodes;
-	ramActor futureNodes;
 };

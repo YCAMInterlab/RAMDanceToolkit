@@ -5,6 +5,7 @@
 #include "ofxOsc.h"
 
 #include "ramConstants.h"
+#include "ramAccelerometer.h"
 
 class ramNodeArray;
 
@@ -33,6 +34,11 @@ public:
 	
 	const ofMatrix4x4& getTransformMatrix() const { return getLocalTransformMatrix(); }
 	const ofMatrix4x4& getMatrix() const { return getLocalTransformMatrix(); }
+	
+	inline ofVec3f getVelocity() { return accerelometer.velocity; }
+	inline ofVec3f getAcceleration() { return accerelometer.acceleration; }
+	inline ofQuaternion getAngularVelocity() { return accerelometer.angular_velocity; }
+	inline ofQuaternion getAngularAcceleration() { return accerelometer.angular_acceleration; }
 
 private:
 
@@ -40,6 +46,7 @@ private:
 	string name;
 
 	ramNode *parent;
+	ramAccelerometer accerelometer;
 
 	// ignore global transform function
 	ofMatrix4x4 getGlobalTransformMatrix() const { return ofMatrix4x4(); }
