@@ -15,17 +15,17 @@ void testApp::setup() {
 	gui.addToggle("showDebug", true);
 	gui.addToggle("backgroundClear", false);
 	gui.addToggle("backgroundCalibrate", false);
-	gui.addSlider("backgroundThreshold", 10, 0, 255, true);
-	gui.addSlider("sampleRadius", 12, 0, 32);
+	gui.addSlider("backgroundThreshold", 5, 0, 255, true);
+	gui.addSlider("sampleRadius", 10, 0, 24);
 	gui.addToggle("registrationClear", false);
 	gui.addToggle("registrationCalibrate", false);
-	gui.addSlider("registrationCalibrationRate", 2, 1, 10, true);
+	gui.addSlider("registrationCalibrationRate", 8, 1, 15, true);
 	
 	gui.addPanel("CircleFinder");
-	gui.addSlider("blurRadius", 5, 0, 11);
-	gui.addSlider("circleThreshold", 192, 0, 255);
+	gui.addSlider("blurRadius", 2, 0, 11);
+	gui.addSlider("circleThreshold", 160, 0, 255);
 	gui.addSlider("minRadius", 2, 0, 12);
-	gui.addSlider("maxRadius", 6, 0, 12);
+	gui.addSlider("maxRadius", 10, 0, 12);
 }
 
 void testApp::update() {
@@ -35,6 +35,7 @@ void testApp::update() {
 	for(int i = 0; i < sensors.size(); i++) {
 		CircleSensor& sensor = *sensors[i];
 		sensor.backgroundClear = gui.getValueB("backgroundClear");
+		sensor.registrationClear = gui.getValueB("registrationClear");
 		sensor.backgroundCalibrate = gui.getValueB("backgroundCalibrate");
 		sensor.backgroundThreshold = gui.getValueI("backgroundThreshold");
 		sensor.sampleRadius = gui.getValueF("sampleRadius");

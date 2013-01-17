@@ -14,11 +14,13 @@ public:
 	float minRadius, maxRadius;
 	unsigned char threshold;
 	
+	ofxCv::ContourFinder contourFinder;
+	
 	CircleFinder()
-	:blurRadius(3)
-	,threshold(192)
+	:blurRadius(2) // good value to remove kinect speckle
+	,threshold(150)
 	,minRadius(2)
-	,maxRadius(6) {
+	,maxRadius(8) {
 	}
 	
 	int size() const {
@@ -37,78 +39,21 @@ public:
 	void update(T& img) {
 		blur(img, blurred, blurRadius);
 		
+		contourFinder.setSimplify(false);
+		contourFinder.setMinAreaRadius(minRadius - 1);
+		contourFinder.setMaxAreaRadius(maxRadius + 1);
+		contourFinder.setThreshold(threshold);
+		contourFinder.findContours(blurred);
+		
 		centers.clear();
 		radii.clear();
 		
-		// could also just do contour detection here
-		unsigned char* pixels = img.getPixels();
-		unsigned char* blurredPixels = blurred.getPixels();
-		vector<ofVec2f> candidates;
-		int searchRadius = ceilf(maxRadius * 2);
-		for(int y = searchRadius; y < img.getHeight() - searchRadius; y++) {
-			for(int x = searchRadius; x < img.getWidth() - searchRadius; x++) {
-				int i = y * img.getWidth() + x;
-				if(blurredPixels[i] > threshold) {
-					ofVec2f avg;
-					float radius;
-					float weightSum = 0;
-					for(int yd = -searchRadius; yd < searchRadius; yd++) {
-						for(int xd = -searchRadius; xd < searchRadius; xd++) {
-							int j = (y + yd) * img.getWidth() + (x + xd);
-							unsigned char brightness = pixels[j];
-							ofVec2f position(x + xd, y + yd);
-							avg += brightness * position;
-							weightSum += pixels[j];
-						}
-					}
-					avg /= weightSum;
-					candidates.push_back(avg);
-				}
-			}
-		}
-		
-		// collect multiple matches
-		vector<ofVec2f> proposals;
-		for(int i = 0; i < candidates.size(); i++) {
-			ofVec2f& cur = candidates[i];
-			bool exists = false;
-			for(int j = 0; j < proposals.size(); j++) {
-				if(cur.distance(proposals[j]) < searchRadius) {
-					exists = true;
-					break;
-				}
-			}
-			if(!exists) {
-				proposals.push_back(cur);
-			}
-		}
-		
-		// this second half estimates the size of the circle
-		float areaThreshold = 64;
-		for(int i = 0; i < proposals.size(); i++) {
-			float weightSum = 0;
-			ofVec2f positionSum;
-			ofVec2f& avg = proposals[i]; 
-			int xa = avg.x, ya = avg.y;
-			float area = 0;
-			for(int yd = -searchRadius; yd < searchRadius; yd++) {
-				for(int xd = -searchRadius; xd < searchRadius; xd++) {
-					int j = (ya + yd) * img.getWidth() + (xa + xd);
-					float brightness = (float) pixels[j];
-					ofVec2f position(xa + xd, ya + yd);
-					float radius = avg.distance(position);
-					float weight = brightness;
-					positionSum += weight * position;
-					weightSum += weight;
-					if(brightness > areaThreshold) {
-						area += brightness;
-					}
-				}
-			}
-			float radius = sqrtf(area / (PI * 255));
-			if(radius < maxRadius && radius > minRadius) {
+		for(int i = 0; i < contourFinder.size(); i++) {
+			cv::RotatedRect ellipse = contourFinder.getFitEllipse(i);
+			float radius = (ellipse.size.width + ellipse.size.height) / 2.;
+			if(radius > minRadius && radius < maxRadius) {
+				centers.push_back(ofxCv::toOf(ellipse.center));
 				radii.push_back(radius);
-				centers.push_back(positionSum / weightSum);
 			}
 		}
 	};
