@@ -184,6 +184,44 @@
 		274FFD2E16A6B233009E77CC /* CircleFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleFinder.h; path = src/CircleFinder.h; sourceTree = SOURCE_ROOT; };
 		277D957416A7979000171ED0 /* CircleSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleSensor.h; sourceTree = "<group>"; };
 		277D959916A7A48100171ED0 /* CircleSensor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CircleSensor.cpp; path = src/CircleSensor.cpp; sourceTree = SOURCE_ROOT; };
+		277D95F616A7B6E900171ED0 /* COMMIT_EDITMSG */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = COMMIT_EDITMSG; path = ../../../addons/ofxTiming/.git/COMMIT_EDITMSG; sourceTree = SOURCE_ROOT; };
+		277D95F716A7B6E900171ED0 /* config */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = config; path = ../../../addons/ofxTiming/.git/config; sourceTree = SOURCE_ROOT; };
+		277D95F816A7B6E900171ED0 /* description */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = description; path = ../../../addons/ofxTiming/.git/description; sourceTree = SOURCE_ROOT; };
+		277D95F916A7B6E900171ED0 /* HEAD */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = HEAD; path = ../../../addons/ofxTiming/.git/HEAD; sourceTree = SOURCE_ROOT; };
+		277D95FB16A7B6E900171ED0 /* applypatch-msg.sample */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "applypatch-msg.sample"; path = "../../../addons/ofxTiming/.git/hooks/applypatch-msg.sample"; sourceTree = SOURCE_ROOT; };
+		277D95FC16A7B6E900171ED0 /* commit-msg.sample */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "commit-msg.sample"; path = "../../../addons/ofxTiming/.git/hooks/commit-msg.sample"; sourceTree = SOURCE_ROOT; };
+		277D95FD16A7B6E900171ED0 /* post-commit.sample */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "post-commit.sample"; path = "../../../addons/ofxTiming/.git/hooks/post-commit.sample"; sourceTree = SOURCE_ROOT; };
+		277D95FE16A7B6E900171ED0 /* post-receive.sample */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "post-receive.sample"; path = "../../../addons/ofxTiming/.git/hooks/post-receive.sample"; sourceTree = SOURCE_ROOT; };
+		277D95FF16A7B6E900171ED0 /* post-update.sample */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "post-update.sample"; path = "../../../addons/ofxTiming/.git/hooks/post-update.sample"; sourceTree = SOURCE_ROOT; };
+		277D960016A7B6E900171ED0 /* pre-applypatch.sample */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "pre-applypatch.sample"; path = "../../../addons/ofxTiming/.git/hooks/pre-applypatch.sample"; sourceTree = SOURCE_ROOT; };
+		277D960116A7B6E900171ED0 /* pre-commit.sample */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "pre-commit.sample"; path = "../../../addons/ofxTiming/.git/hooks/pre-commit.sample"; sourceTree = SOURCE_ROOT; };
+		277D960216A7B6E900171ED0 /* pre-rebase.sample */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "pre-rebase.sample"; path = "../../../addons/ofxTiming/.git/hooks/pre-rebase.sample"; sourceTree = SOURCE_ROOT; };
+		277D960316A7B6E900171ED0 /* prepare-commit-msg.sample */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "prepare-commit-msg.sample"; path = "../../../addons/ofxTiming/.git/hooks/prepare-commit-msg.sample"; sourceTree = SOURCE_ROOT; };
+		277D960416A7B6E900171ED0 /* update.sample */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = update.sample; path = ../../../addons/ofxTiming/.git/hooks/update.sample; sourceTree = SOURCE_ROOT; };
+		277D960516A7B6E900171ED0 /* index */ = {isa = PBXFileReference; lastKnownFileType = file; name = index; path = ../../../addons/ofxTiming/.git/index; sourceTree = SOURCE_ROOT; };
+		277D960716A7B6E900171ED0 /* exclude */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = exclude; path = ../../../addons/ofxTiming/.git/info/exclude; sourceTree = SOURCE_ROOT; };
+		277D960916A7B6E900171ED0 /* HEAD */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = HEAD; path = ../../../addons/ofxTiming/.git/logs/HEAD; sourceTree = SOURCE_ROOT; };
+		277D960C16A7B6E900171ED0 /* master */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = master; path = ../../../addons/ofxTiming/.git/logs/refs/heads/master; sourceTree = SOURCE_ROOT; };
+		277D960F16A7B6E900171ED0 /* master */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = master; path = ../../../addons/ofxTiming/.git/logs/refs/remotes/origin/master; sourceTree = SOURCE_ROOT; };
+		277D961216A7B6E900171ED0 /* fd3511d2ae268015876c9170b4be3f4d548912 */ = {isa = PBXFileReference; lastKnownFileType = file; name = fd3511d2ae268015876c9170b4be3f4d548912; path = ../../../addons/ofxTiming/.git/objects/07/fd3511d2ae268015876c9170b4be3f4d548912; sourceTree = SOURCE_ROOT; };
+		277D961416A7B6E900171ED0 /* 1bdb439f3e14be085c8e9bea59bdcaeb2d9da7 */ = {isa = PBXFileReference; lastKnownFileType = file; name = 1bdb439f3e14be085c8e9bea59bdcaeb2d9da7; path = ../../../addons/ofxTiming/.git/objects/0c/1bdb439f3e14be085c8e9bea59bdcaeb2d9da7; sourceTree = SOURCE_ROOT; };
+		277D961616A7B6E900171ED0 /* d6b61f25625d2d634d28405c955771d6ed781b */ = {isa = PBXFileReference; lastKnownFileType = file; name = d6b61f25625d2d634d28405c955771d6ed781b; path = ../../../addons/ofxTiming/.git/objects/13/d6b61f25625d2d634d28405c955771d6ed781b; sourceTree = SOURCE_ROOT; };
+		277D961816A7B6E900171ED0 /* 3ab8118e06a80c7ee64dde90f8a56b01903761 */ = {isa = PBXFileReference; lastKnownFileType = file; name = 3ab8118e06a80c7ee64dde90f8a56b01903761; path = ../../../addons/ofxTiming/.git/objects/22/3ab8118e06a80c7ee64dde90f8a56b01903761; sourceTree = SOURCE_ROOT; };
+		277D961A16A7B6E900171ED0 /* 8a71dce964fd7a8c6eed433925d76b260d12de */ = {isa = PBXFileReference; lastKnownFileType = file; name = 8a71dce964fd7a8c6eed433925d76b260d12de; path = ../../../addons/ofxTiming/.git/objects/35/8a71dce964fd7a8c6eed433925d76b260d12de; sourceTree = SOURCE_ROOT; };
+		277D961C16A7B6E900171ED0 /* 440e943dc454b7f5f20a97896775b37640f91d */ = {isa = PBXFileReference; lastKnownFileType = file; name = 440e943dc454b7f5f20a97896775b37640f91d; path = ../../../addons/ofxTiming/.git/objects/38/440e943dc454b7f5f20a97896775b37640f91d; sourceTree = SOURCE_ROOT; };
+		277D961E16A7B6E900171ED0 /* 1fb64a997466572df05efb14feb12f2d514b74 */ = {isa = PBXFileReference; lastKnownFileType = file; name = 1fb64a997466572df05efb14feb12f2d514b74; path = ../../../addons/ofxTiming/.git/objects/67/1fb64a997466572df05efb14feb12f2d514b74; sourceTree = SOURCE_ROOT; };
+		277D962016A7B6E900171ED0 /* 9c95632716018389e0739b2b2ebdbafbb9b7ad */ = {isa = PBXFileReference; lastKnownFileType = file; name = 9c95632716018389e0739b2b2ebdbafbb9b7ad; path = ../../../addons/ofxTiming/.git/objects/6b/9c95632716018389e0739b2b2ebdbafbb9b7ad; sourceTree = SOURCE_ROOT; };
+		277D962216A7B6E900171ED0 /* 7c75ddd64dcd36326aa0be62a3471fde57fee5 */ = {isa = PBXFileReference; lastKnownFileType = file; name = 7c75ddd64dcd36326aa0be62a3471fde57fee5; path = ../../../addons/ofxTiming/.git/objects/8b/7c75ddd64dcd36326aa0be62a3471fde57fee5; sourceTree = SOURCE_ROOT; };
+		277D962416A7B6E900171ED0 /* 72e0130ba2a0087d0b30f3474bf9f68eabedce */ = {isa = PBXFileReference; lastKnownFileType = file; name = 72e0130ba2a0087d0b30f3474bf9f68eabedce; path = ../../../addons/ofxTiming/.git/objects/df/72e0130ba2a0087d0b30f3474bf9f68eabedce; sourceTree = SOURCE_ROOT; };
+		277D962916A7B6E900171ED0 /* master */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = master; path = ../../../addons/ofxTiming/.git/refs/heads/master; sourceTree = SOURCE_ROOT; };
+		277D962C16A7B6E900171ED0 /* master */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = master; path = ../../../addons/ofxTiming/.git/refs/remotes/origin/master; sourceTree = SOURCE_ROOT; };
+		277D962E16A7B6E900171ED0 /* license.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = license.md; path = ../../../addons/ofxTiming/license.md; sourceTree = SOURCE_ROOT; };
+		277D962F16A7B6E900171ED0 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = readme.md; path = ../../../addons/ofxTiming/readme.md; sourceTree = SOURCE_ROOT; };
+		277D963116A7B6E900171ED0 /* DelayTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DelayTimer.h; path = ../../../addons/ofxTiming/src/DelayTimer.h; sourceTree = SOURCE_ROOT; };
+		277D963216A7B6E900171ED0 /* FadeTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FadeTimer.h; path = ../../../addons/ofxTiming/src/FadeTimer.h; sourceTree = SOURCE_ROOT; };
+		277D963316A7B6E900171ED0 /* Hysteresis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hysteresis.h; path = ../../../addons/ofxTiming/src/Hysteresis.h; sourceTree = SOURCE_ROOT; };
+		277D963416A7B6E900171ED0 /* ofxTiming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxTiming.h; path = ../../../addons/ofxTiming/src/ofxTiming.h; sourceTree = SOURCE_ROOT; };
+		277D963516A7B6E900171ED0 /* RateTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RateTimer.h; path = ../../../addons/ofxTiming/src/RateTimer.h; sourceTree = SOURCE_ROOT; };
 		27974FD5144D1A5A00BF8888 /* cameras.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cameras.c; path = ../../../addons/ofxKinect/libs/libfreenect/cameras.c; sourceTree = SOURCE_ROOT; };
 		27974FD6144D1A5A00BF8888 /* cameras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cameras.h; path = ../../../addons/ofxKinect/libs/libfreenect/cameras.h; sourceTree = SOURCE_ROOT; };
 		27974FD7144D1A5A00BF8888 /* core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = core.c; path = ../../../addons/ofxKinect/libs/libfreenect/core.c; sourceTree = SOURCE_ROOT; };
@@ -712,6 +750,304 @@
 			);
 			name = src;
 			path = ../../../addons/ofxCv/src;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D95F316A7B6E900171ED0 /* ofxTiming */ = {
+			isa = PBXGroup;
+			children = (
+				277D95F416A7B6E900171ED0 /* .git */,
+				277D962E16A7B6E900171ED0 /* license.md */,
+				277D962F16A7B6E900171ED0 /* readme.md */,
+				277D963016A7B6E900171ED0 /* src */,
+			);
+			name = ofxTiming;
+			path = ../../../addons/ofxTiming;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D95F416A7B6E900171ED0 /* .git */ = {
+			isa = PBXGroup;
+			children = (
+				277D95F516A7B6E900171ED0 /* branches */,
+				277D95F616A7B6E900171ED0 /* COMMIT_EDITMSG */,
+				277D95F716A7B6E900171ED0 /* config */,
+				277D95F816A7B6E900171ED0 /* description */,
+				277D95F916A7B6E900171ED0 /* HEAD */,
+				277D95FA16A7B6E900171ED0 /* hooks */,
+				277D960516A7B6E900171ED0 /* index */,
+				277D960616A7B6E900171ED0 /* info */,
+				277D960816A7B6E900171ED0 /* logs */,
+				277D961016A7B6E900171ED0 /* objects */,
+				277D962716A7B6E900171ED0 /* refs */,
+			);
+			name = .git;
+			path = ../../../addons/ofxTiming/.git;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D95F516A7B6E900171ED0 /* branches */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = branches;
+			path = ../../../addons/ofxTiming/.git/branches;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D95FA16A7B6E900171ED0 /* hooks */ = {
+			isa = PBXGroup;
+			children = (
+				277D95FB16A7B6E900171ED0 /* applypatch-msg.sample */,
+				277D95FC16A7B6E900171ED0 /* commit-msg.sample */,
+				277D95FD16A7B6E900171ED0 /* post-commit.sample */,
+				277D95FE16A7B6E900171ED0 /* post-receive.sample */,
+				277D95FF16A7B6E900171ED0 /* post-update.sample */,
+				277D960016A7B6E900171ED0 /* pre-applypatch.sample */,
+				277D960116A7B6E900171ED0 /* pre-commit.sample */,
+				277D960216A7B6E900171ED0 /* pre-rebase.sample */,
+				277D960316A7B6E900171ED0 /* prepare-commit-msg.sample */,
+				277D960416A7B6E900171ED0 /* update.sample */,
+			);
+			name = hooks;
+			path = ../../../addons/ofxTiming/.git/hooks;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D960616A7B6E900171ED0 /* info */ = {
+			isa = PBXGroup;
+			children = (
+				277D960716A7B6E900171ED0 /* exclude */,
+			);
+			name = info;
+			path = ../../../addons/ofxTiming/.git/info;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D960816A7B6E900171ED0 /* logs */ = {
+			isa = PBXGroup;
+			children = (
+				277D960916A7B6E900171ED0 /* HEAD */,
+				277D960A16A7B6E900171ED0 /* refs */,
+			);
+			name = logs;
+			path = ../../../addons/ofxTiming/.git/logs;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D960A16A7B6E900171ED0 /* refs */ = {
+			isa = PBXGroup;
+			children = (
+				277D960B16A7B6E900171ED0 /* heads */,
+				277D960D16A7B6E900171ED0 /* remotes */,
+			);
+			name = refs;
+			path = ../../../addons/ofxTiming/.git/logs/refs;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D960B16A7B6E900171ED0 /* heads */ = {
+			isa = PBXGroup;
+			children = (
+				277D960C16A7B6E900171ED0 /* master */,
+			);
+			name = heads;
+			path = ../../../addons/ofxTiming/.git/logs/refs/heads;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D960D16A7B6E900171ED0 /* remotes */ = {
+			isa = PBXGroup;
+			children = (
+				277D960E16A7B6E900171ED0 /* origin */,
+			);
+			name = remotes;
+			path = ../../../addons/ofxTiming/.git/logs/refs/remotes;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D960E16A7B6E900171ED0 /* origin */ = {
+			isa = PBXGroup;
+			children = (
+				277D960F16A7B6E900171ED0 /* master */,
+			);
+			name = origin;
+			path = ../../../addons/ofxTiming/.git/logs/refs/remotes/origin;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D961016A7B6E900171ED0 /* objects */ = {
+			isa = PBXGroup;
+			children = (
+				277D961116A7B6E900171ED0 /* 07 */,
+				277D961316A7B6E900171ED0 /* 0c */,
+				277D961516A7B6E900171ED0 /* 13 */,
+				277D961716A7B6E900171ED0 /* 22 */,
+				277D961916A7B6E900171ED0 /* 35 */,
+				277D961B16A7B6E900171ED0 /* 38 */,
+				277D961D16A7B6E900171ED0 /* 67 */,
+				277D961F16A7B6E900171ED0 /* 6b */,
+				277D962116A7B6E900171ED0 /* 8b */,
+				277D962316A7B6E900171ED0 /* df */,
+				277D962516A7B6E900171ED0 /* info */,
+				277D962616A7B6E900171ED0 /* pack */,
+			);
+			name = objects;
+			path = ../../../addons/ofxTiming/.git/objects;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D961116A7B6E900171ED0 /* 07 */ = {
+			isa = PBXGroup;
+			children = (
+				277D961216A7B6E900171ED0 /* fd3511d2ae268015876c9170b4be3f4d548912 */,
+			);
+			name = 07;
+			path = ../../../addons/ofxTiming/.git/objects/07;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D961316A7B6E900171ED0 /* 0c */ = {
+			isa = PBXGroup;
+			children = (
+				277D961416A7B6E900171ED0 /* 1bdb439f3e14be085c8e9bea59bdcaeb2d9da7 */,
+			);
+			name = 0c;
+			path = ../../../addons/ofxTiming/.git/objects/0c;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D961516A7B6E900171ED0 /* 13 */ = {
+			isa = PBXGroup;
+			children = (
+				277D961616A7B6E900171ED0 /* d6b61f25625d2d634d28405c955771d6ed781b */,
+			);
+			name = 13;
+			path = ../../../addons/ofxTiming/.git/objects/13;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D961716A7B6E900171ED0 /* 22 */ = {
+			isa = PBXGroup;
+			children = (
+				277D961816A7B6E900171ED0 /* 3ab8118e06a80c7ee64dde90f8a56b01903761 */,
+			);
+			name = 22;
+			path = ../../../addons/ofxTiming/.git/objects/22;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D961916A7B6E900171ED0 /* 35 */ = {
+			isa = PBXGroup;
+			children = (
+				277D961A16A7B6E900171ED0 /* 8a71dce964fd7a8c6eed433925d76b260d12de */,
+			);
+			name = 35;
+			path = ../../../addons/ofxTiming/.git/objects/35;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D961B16A7B6E900171ED0 /* 38 */ = {
+			isa = PBXGroup;
+			children = (
+				277D961C16A7B6E900171ED0 /* 440e943dc454b7f5f20a97896775b37640f91d */,
+			);
+			name = 38;
+			path = ../../../addons/ofxTiming/.git/objects/38;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D961D16A7B6E900171ED0 /* 67 */ = {
+			isa = PBXGroup;
+			children = (
+				277D961E16A7B6E900171ED0 /* 1fb64a997466572df05efb14feb12f2d514b74 */,
+			);
+			name = 67;
+			path = ../../../addons/ofxTiming/.git/objects/67;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D961F16A7B6E900171ED0 /* 6b */ = {
+			isa = PBXGroup;
+			children = (
+				277D962016A7B6E900171ED0 /* 9c95632716018389e0739b2b2ebdbafbb9b7ad */,
+			);
+			name = 6b;
+			path = ../../../addons/ofxTiming/.git/objects/6b;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D962116A7B6E900171ED0 /* 8b */ = {
+			isa = PBXGroup;
+			children = (
+				277D962216A7B6E900171ED0 /* 7c75ddd64dcd36326aa0be62a3471fde57fee5 */,
+			);
+			name = 8b;
+			path = ../../../addons/ofxTiming/.git/objects/8b;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D962316A7B6E900171ED0 /* df */ = {
+			isa = PBXGroup;
+			children = (
+				277D962416A7B6E900171ED0 /* 72e0130ba2a0087d0b30f3474bf9f68eabedce */,
+			);
+			name = df;
+			path = ../../../addons/ofxTiming/.git/objects/df;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D962516A7B6E900171ED0 /* info */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = info;
+			path = ../../../addons/ofxTiming/.git/objects/info;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D962616A7B6E900171ED0 /* pack */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = pack;
+			path = ../../../addons/ofxTiming/.git/objects/pack;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D962716A7B6E900171ED0 /* refs */ = {
+			isa = PBXGroup;
+			children = (
+				277D962816A7B6E900171ED0 /* heads */,
+				277D962A16A7B6E900171ED0 /* remotes */,
+				277D962D16A7B6E900171ED0 /* tags */,
+			);
+			name = refs;
+			path = ../../../addons/ofxTiming/.git/refs;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D962816A7B6E900171ED0 /* heads */ = {
+			isa = PBXGroup;
+			children = (
+				277D962916A7B6E900171ED0 /* master */,
+			);
+			name = heads;
+			path = ../../../addons/ofxTiming/.git/refs/heads;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D962A16A7B6E900171ED0 /* remotes */ = {
+			isa = PBXGroup;
+			children = (
+				277D962B16A7B6E900171ED0 /* origin */,
+			);
+			name = remotes;
+			path = ../../../addons/ofxTiming/.git/refs/remotes;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D962B16A7B6E900171ED0 /* origin */ = {
+			isa = PBXGroup;
+			children = (
+				277D962C16A7B6E900171ED0 /* master */,
+			);
+			name = origin;
+			path = ../../../addons/ofxTiming/.git/refs/remotes/origin;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D962D16A7B6E900171ED0 /* tags */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = tags;
+			path = ../../../addons/ofxTiming/.git/refs/tags;
+			sourceTree = SOURCE_ROOT;
+		};
+		277D963016A7B6E900171ED0 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				277D963116A7B6E900171ED0 /* DelayTimer.h */,
+				277D963216A7B6E900171ED0 /* FadeTimer.h */,
+				277D963316A7B6E900171ED0 /* Hysteresis.h */,
+				277D963416A7B6E900171ED0 /* ofxTiming.h */,
+				277D963516A7B6E900171ED0 /* RateTimer.h */,
+			);
+			name = src;
+			path = ../../../addons/ofxTiming/src;
 			sourceTree = SOURCE_ROOT;
 		};
 		27BB59421602F91E007EA30C /* ofxControlPanel */ = {
@@ -2145,6 +2481,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				277D95F316A7B6E900171ED0 /* ofxTiming */,
 				2726A0021650BB9700BBE891 /* ofxOsc */,
 				27373F56163A13D100BC6864 /* ofxCv */,
 				27BB5A731602F929007EA30C /* ofxXmlSettings */,

@@ -112,7 +112,7 @@ void CircleSensor::update() {
 					}
 				}
 			}
-			trackedPositions.push_back(sum / count);
+			trackedPositions.push_back(ConvertProjectiveToRealWorld(sum / count));
 		}
 	}
 }
@@ -123,8 +123,13 @@ void CircleSensor::drawCloud() {
 	ofFill();
 	ofSetColor(cyanPrint);
 	for(int i = 0; i < trackedPositions.size(); i++) {
-		ofBox(ConvertProjectiveToRealWorld(trackedPositions[i]), 8);
+		ofBox(trackedPositions[i], 8);
 	}
+	ofSetColor(magentaPrint);
+	ofMesh registrationLine;
+	registrationLine.setMode(OF_PRIMITIVE_LINE_STRIP);
+	registrationLine.addVertices(registrationSamples);
+	registrationLine.draw();
 	ofPopStyle();
 }
 void CircleSensor::drawDebug() {
@@ -141,16 +146,21 @@ void CircleSensor::drawDebug() {
 	ofDisableBlendMode();
 	
 	ofNoFill();
-	ofSetColor(magentaPrint);
 	for(int i = 0; i < circleFinder.size(); i++) {
 		float radius = circleFinder.getRadius(i);
 		if(radius > 2) {
+			ofSetColor(magentaPrint);
 			ofCircle(circleFinder.getCenter(i), radius);
-			ofDrawBitmapString(ofToString(ConvertProjectiveToRealWorld(trackedPositions[i])), circleFinder.getCenter(i));
+			ofSetColor(cyanPrint);
+			ofCircle(circleFinder.getCenter(i), sampleRadius);
+			ofDrawBitmapString(ofToString(trackedPositions[i]), circleFinder.getCenter(i));
 		}
 	}
 	ofPopMatrix();
 	ofPopStyle();
+}
+void CircleSensor::sampleRegistration() {
+	registrationSamples.push_back(trackedPositions[0]);
 }
 CircleSensor::~CircleSensor() {
 	kinect.close();

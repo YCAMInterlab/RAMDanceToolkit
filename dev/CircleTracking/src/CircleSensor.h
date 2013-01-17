@@ -11,6 +11,7 @@ public:
 	ofMesh cloud;
 	ofImage valid, background;
 	vector<ofVec3f> trackedPositions;
+	vector<ofVec3f> registrationSamples;
 	
 	bool backgroundClear;
 	bool backgroundCalibrate;
@@ -20,7 +21,8 @@ public:
 	CircleSensor();
 	void setup();
 	void update();
-	void draw();
+	void drawCloud();
 	void drawDebug();
+	void sampleRegistration();
 	~CircleSensor();
 };

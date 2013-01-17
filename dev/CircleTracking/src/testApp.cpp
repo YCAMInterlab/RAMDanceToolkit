@@ -12,10 +12,13 @@ void testApp::setup() {
 	
 	gui.setup();
 	gui.addPanel("Control");
+	gui.addToggle("showDebug", true);
 	gui.addToggle("backgroundClear", false);
 	gui.addToggle("backgroundCalibrate", false);
 	gui.addSlider("backgroundThreshold", 10, 0, 255, true);
 	gui.addSlider("sampleRadius", 12, 0, 32);
+	gui.addToggle("registrationCalibrate", false);
+	gui.addSlider("registrationCalibrationRate", 2, 1, 10, true);
 	
 	gui.addPanel("CircleFinder");
 	gui.addSlider("blurRadius", 5, 0, 11);
@@ -25,6 +28,9 @@ void testApp::setup() {
 }
 
 void testApp::update() {
+	registrationCalibrationTimer.setFramerate(gui.getValueI("registrationCalibrationRate"));
+	bool registrationCalibrate = gui.getValueB("registrationCalibrate");
+	
 	for(int i = 0; i < sensors.size(); i++) {
 		CircleSensor& sensor = *sensors[i];
 		sensor.backgroundClear = gui.getValueB("backgroundClear");
@@ -36,6 +42,23 @@ void testApp::update() {
 		sensor.circleFinder.minRadius = gui.getValueF("minRadius");
 		sensor.circleFinder.maxRadius = gui.getValueF("maxRadius");
 		sensor.update();
+	}
+	
+	if(registrationCalibrate && registrationCalibrationTimer.tick()) {
+		bool singleMatch = true;
+		for(int i = 0; i < sensors.size(); i++) {
+			CircleSensor& sensor = *sensors[i];
+			if(sensor.trackedPositions.size() != 1) {
+				singleMatch = false;
+				break;
+			}
+		}
+		if(singleMatch) {
+			for(int i = 0; i < sensors.size(); i++) {
+				CircleSensor& sensor = *sensors[i];
+				sensor.sampleRegistration();
+			}
+		}
 	}
 	
 	gui.setValueB("backgroundClear", false);
@@ -53,11 +76,14 @@ void testApp::draw() {
 	}
 	easyCam.end();
 	
-	ofPushMatrix();
-	for(int i = 0; i < sensors.size(); i++) {
-		CircleSensor& sensor = *sensors[i];
-		sensor.drawDebug();
-		ofTranslate(0, 480);
+	if(gui.getValueB("showDebug")) {
+		ofPushMatrix();
+		glDisable(GL_DEPTH_TEST);
+		for(int i = 0; i < sensors.size(); i++) {
+			CircleSensor& sensor = *sensors[i];
+			sensor.drawDebug();
+			ofTranslate(0, 480);
+		}
+		ofPopMatrix();
 	}
-	ofPopMatrix();
 }
