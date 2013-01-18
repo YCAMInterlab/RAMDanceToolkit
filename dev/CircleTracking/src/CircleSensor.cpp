@@ -18,6 +18,7 @@ ofVec3f ConvertProjectiveToRealWorld(const ofVec3f& point) {
 
 CircleSensor::CircleSensor()
 :backgroundClear(false)
+,registrationClear(false)
 ,backgroundCalibrate(false)
 ,backgroundThreshold(10)
 ,sampleRadius(12) {
@@ -37,20 +38,8 @@ void CircleSensor::update() {
 	if(kinect.isFrameNew()) {
 		circleFinder.update(kinect);
 		
-		cloud.clear();
 		int width = kinect.getWidth(), height = kinect.getHeight();
 		float* distancePixels = kinect.getDistancePixels(); // distance in millimeters
-		cloud.setMode(OF_PRIMITIVE_POINTS);
-		for(int y = 0; y < height; y++) {
-			for(int x = 0; x < width; x++) {
-				int i = y * width + x;
-				float z = distancePixels[i];
-				if(z != 0) { // ignore empty depth pixels
-					ofVec3f cur = ConvertProjectiveToRealWorld(ofVec3f(x, y, z));
-					cloud.addVertex(cur);
-				}
-			}
-		}
 		
 		unsigned char* backgroundPixels = background.getPixels();
 		int n = width * height;
@@ -59,6 +48,10 @@ void CircleSensor::update() {
 				backgroundPixels[i] = 0;
 			}
 			background.update();
+		}
+		
+		if(registrationClear) {
+			registrationSamples.clear();
 		}
 		
 		unsigned char* kinectPixels = kinect.getDepthPixels();
@@ -87,6 +80,19 @@ void CircleSensor::update() {
 			}
 		}
 		valid.update();
+		
+		cloud.clear();
+		cloud.setMode(OF_PRIMITIVE_POINTS);
+		for(int y = 0; y < height; y++) {
+			for(int x = 0; x < width; x++) {
+				int i = y * width + x;
+				if(validPixels[i]) {
+					float z = distancePixels[i];
+					ofVec3f cur = ConvertProjectiveToRealWorld(ofVec3f(x, y, z));
+					cloud.addVertex(cur);
+				}
+			}
+		}
 		
 		trackedPositions.clear();
 		for(int i = 0; i < circleFinder.size(); i++) {
@@ -117,7 +123,9 @@ void CircleSensor::update() {
 	}
 }
 void CircleSensor::drawCloud() {
+	ofPushMatrix();
 	ofPushStyle();
+	ofMultMatrix(registration);
 	ofSetColor(255);
 	cloud.draw();
 	ofFill();
@@ -131,6 +139,7 @@ void CircleSensor::drawCloud() {
 	registrationLine.addVertices(registrationSamples);
 	registrationLine.draw();
 	ofPopStyle();
+	ofPopMatrix();
 }
 void CircleSensor::drawDebug() {
 	ofPushStyle();
@@ -161,6 +170,9 @@ void CircleSensor::drawDebug() {
 }
 void CircleSensor::sampleRegistration() {
 	registrationSamples.push_back(trackedPositions[0]);
+}
+void CircleSensor::updateRegistration(CircleSensor& reference) {
+	registration = estimateAffine3D(registrationSamples, reference.registrationSamples);
 }
 CircleSensor::~CircleSensor() {
 	kinect.close();

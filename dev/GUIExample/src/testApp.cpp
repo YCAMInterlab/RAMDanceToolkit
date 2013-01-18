@@ -8,7 +8,7 @@ const string myActorName = "Ando_2012-09-01_18-49-10";
 ofxAutoControlPanel gui;
 ramGhost ghost;
 
-vector<string> slidersKey;
+vector<string> slidersKeys;
 const string sliderEmphasis = "emphasis";
 const string sliderFreshness = "freshness";
 
@@ -33,8 +33,8 @@ void testApp::setup()
 	gui.addPanel("ramGhost");
 	gui.addSlider(sliderEmphasis, 20, 0, 100);
 	gui.addSlider(sliderFreshness, 20, 0, 1000);
-	slidersKey.push_back(sliderEmphasis);
-	slidersKey.push_back(sliderFreshness);
+	slidersKeys.push_back(sliderEmphasis);
+	slidersKeys.push_back(sliderFreshness);
 }
 
 
@@ -43,7 +43,7 @@ void testApp::update()
 {
 	oscReceiver.update();
 	
-	if (gui.hasValueChanged(slidersKey))
+	if (gui.hasValueChanged(slidersKeys))
 	{
 		ghost.setEmphasis( gui.getValueF(sliderEmphasis) );
 		ghost.setFreshness( gui.getValueF(sliderFreshness) );
