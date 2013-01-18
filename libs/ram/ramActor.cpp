@@ -12,7 +12,8 @@ ramNode& ramNode::operator=(const ramNode& copy)
 	
 	node_id = copy.node_id;
 	name = copy.name;
-
+	accerelometer = copy.accerelometer;
+	
 	parent = NULL;
 	return *this;
 }
