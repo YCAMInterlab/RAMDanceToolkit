@@ -1,5 +1,6 @@
 #include "ramActorManager.h"
 
+ramActorManager* ramActorManager::_instance = NULL;
 
 void ramActorManager::update()
 {

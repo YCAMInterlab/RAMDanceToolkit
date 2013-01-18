@@ -56,4 +56,3 @@ private:
 	ramCompoundContainer<ramRigidBody> rigids;
 };
 
-ramActorManager* ramActorManager::_instance = NULL;
