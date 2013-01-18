@@ -27,5 +27,6 @@ public:
 	void drawDebug();
 	void sampleRegistration();
 	void updateRegistration(CircleSensor& reference);
+	bool oneTrackedPosition();
 	~CircleSensor();
 };

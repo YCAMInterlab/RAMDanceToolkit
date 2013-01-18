@@ -48,10 +48,12 @@ void CircleSensor::update() {
 				backgroundPixels[i] = 0;
 			}
 			background.update();
+			backgroundClear = false;
 		}
 		
 		if(registrationClear) {
 			registrationSamples.clear();
+			registrationClear = false;
 		}
 		
 		unsigned char* kinectPixels = kinect.getDepthPixels();
@@ -173,6 +175,9 @@ void CircleSensor::sampleRegistration() {
 }
 void CircleSensor::updateRegistration(CircleSensor& reference) {
 	registration = estimateAffine3D(registrationSamples, reference.registrationSamples);
+}
+bool CircleSensor::oneTrackedPosition() {
+	return trackedPositions.size() == 1;
 }
 CircleSensor::~CircleSensor() {
 	kinect.close();

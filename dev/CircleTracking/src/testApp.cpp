@@ -34,8 +34,12 @@ void testApp::update() {
 	
 	for(int i = 0; i < sensors.size(); i++) {
 		CircleSensor& sensor = *sensors[i];
-		sensor.backgroundClear = gui.getValueB("backgroundClear");
-		sensor.registrationClear = gui.getValueB("registrationClear");
+		if(gui.getValueB("backgroundClear")) {
+			sensor.backgroundClear = true;
+		}
+		if(gui.getValueB("registrationClear")) {
+			sensor.registrationClear = true;
+		}
 		sensor.backgroundCalibrate = gui.getValueB("backgroundCalibrate");
 		sensor.backgroundThreshold = gui.getValueI("backgroundThreshold");
 		sensor.sampleRadius = gui.getValueF("sampleRadius");
@@ -47,19 +51,13 @@ void testApp::update() {
 	}
 	
 	if(registrationCalibrate && registrationCalibrationTimer.tick()) {
-		bool singleMatch = true;
-		for(int i = 0; i < sensors.size(); i++) {
-			if(sensors[i]->trackedPositions.size() != 1) {
-				singleMatch = false;
-				break;
-			}
-		}
-		if(singleMatch) {
-			for(int i = 0; i < sensors.size(); i++) {
-				sensors[i]->sampleRegistration();
-			}
+		if(sensors[0]->oneTrackedPosition()) {
+			sensors[0]->sampleRegistration();
 			for(int i = 1; i < sensors.size(); i++) {
-				sensors[i]->updateRegistration(*sensors[0]);
+				if(sensors[i]->oneTrackedPosition()) {
+					sensors[i]->sampleRegistration();
+					sensors[i]->updateRegistration(*sensors[0]);
+				}
 			}
 		}
 	}
