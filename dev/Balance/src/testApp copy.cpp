@@ -4,7 +4,6 @@
 static const string myActorName = "Ando_2012-09-01_18-49-10";
 ofLight light;
 
-
 // arrow
 // ------------------------
 const ofIndexType faces[] =
@@ -13,32 +12,32 @@ const ofIndexType faces[] =
 	2,1,0,
 	3,5,6,
 	3,4,5,
-	
+
 	// top
 	7,8,9,
 	10,12,13,
 	10,11,12,
-	
+
 	// z minus side
 	0,7,9,
 	0,2,9,
-	
+
 	3,4,10,
 	4,10,11,
-	
+
 	2,3,9,
 	3,9,10,
-	
+
 	// z plus side
 	0,7,8,
 	0,1,8,
-	
+
 	1,6,8,
 	6,8,13,
-	
+
 	12,13,5,
 	5,6,13,
-	
+
 	// hip
 	4,5,11,
 	5,11,12,
@@ -53,7 +52,7 @@ const float verts[] =
 	0.0f, 0.0f, 1.0f,
 	0.0f, 0.0f, -1.0f,
 	2.0f, 0.0f, -1.0f,
-	
+
 	4.0f, 1.0f, 0.0f,
 	2.0f, 1.0f, -2.0f,
 	2.0f, 1.0f, 2.0f,
@@ -71,18 +70,24 @@ ofVec3f n[kNumVerts];
 ofFloatColor c[kNumVerts];
 ofVbo vbo;
 
+float calcAngle2D(ofVec3f v1, ofVec3f v2)
+{
+	float angle = ofRadToDeg( atan((v2.z - v1.z)/(v2.x - v1.x)) );
+	
+	if (v2.z < v1.z && v2.x > v1.x)
+		return angle;
+	
+	else if((v2.z < v1.z && v2.x < v1.x) || (v2.z > v1.z && v2.x < v1.x))
+		return angle + 180.;
+	
+	else
+		return angle + 360.;
+}
 
 
 // balance
 // cite: http://goo.gl/QcylU
 // ------------------------
-float direction;
-float strength;
-
-//float weightBalance[] =
-//{
-//0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10
-//};
 float weightBalance[] =
 {
 	5,	//ramActor::JOINT_HIPS
@@ -114,24 +119,6 @@ float weightBalance[] =
 	1, //ramActor::JOINT_RIGHT_HAND
 };
 
-
-
-float calcAngle2D(ofVec3f v1, ofVec3f v2)
-{
-	float angle = ofRadToDeg( atan((v2.z - v1.z)/(v2.x - v1.x)) );
-	
-	if (v2.z < v1.z && v2.x > v1.x)
-		return angle;
-	
-	else if((v2.z < v1.z && v2.x < v1.x) || (v2.z > v1.z && v2.x < v1.x))
-		return angle + 180.;
-	
-	else
-		return angle + 360.;
-}
-
-
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -140,14 +127,13 @@ void testApp::setup()
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
 	ofBackground(0);
-	oscReceiver.setup(10001);
+	oscReceiver.setup(10000);
 	
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
 	
-//    glShadeModel(GL_SMOOTH);
-//    light.enable();
-//    ofEnableSeparateSpecularLight();
+	ofEnableAlphaBlending();
+    glEnable(GL_DEPTH_TEST);
 	
 	int i, j = 0;
     for ( i = 0; i < kNumVerts; i++ )
@@ -155,7 +141,7 @@ void testApp::setup()
         c[i].r = 3*i;
         c[i].g = 3*i;
         c[i].b = 3*i;
-		
+
         v[i][0] = verts[j];
         j++;
         v[i][1] = verts[j];
@@ -163,19 +149,19 @@ void testApp::setup()
         v[i][2] = verts[j];
         j++;
     }
-	
+
     vbo.setVertexData( &v[0], kNumVerts, GL_STATIC_DRAW );
     vbo.setColorData( &c[0], kNumVerts, GL_STATIC_DRAW );
     vbo.setIndexData( &faces[0], kNumFaces, GL_STATIC_DRAW );
-	
-	ofEnableAlphaBlending();
-    glEnable(GL_DEPTH_TEST);
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
 	oscReceiver.update();
+//	ramActor &actor = getActorManager().getActor(myActorName);
+//	
+//	balancer.update(actor);
 }
 
 //--------------------------------------------------------------
@@ -190,18 +176,23 @@ void testApp::draw()
 	int angle;
 	if (getActorManager().getNumActor() > 0)
 	{
-		ramActor &actor = getActorManager().getActor(myActorName);
-		ofVec3f axis = actor.getNode(ramActor::JOINT_CHEST).getPosition();
+		ramCameraBegin();
+		glPushMatrix();
+		glPushAttrib(GL_ALL_ATTRIB_BITS);
+		glEnable(GL_DEPTH_TEST);
 		
-		const int size = actor.getNumNode();
+		ramActor &nodeArray = getActorManager().getActor(myActorName);
+		ofVec3f axis = nodeArray.getNode(ramActor::JOINT_CHEST).getPosition();
+		
+		const int size = nodeArray.getNumNode();
 		
 		axis.y = 0.;
 		
 		for (int i=0; i<size; i++)
 		{
-			ramNode &node = actor.getNode(i);
+			ramNode &node = nodeArray.getNode(i);
 			
-			ofVec3f pos = actor.getNode(i).getPosition();
+			ofVec3f pos = nodeArray.getNode(i).getPosition();
 			pos.y = 0.;
 			
 			ofVec3f dist(pos - axis);
@@ -215,11 +206,6 @@ void testApp::draw()
 		
 		scale = sqrt(avarage.x*avarage.x+avarage.z*avarage.z);
 		angle = calcAngle2D(axis, avarage);
-		
-		ramCameraBegin();
-		glPushMatrix();
-		glPushAttrib(GL_ALL_ATTRIB_BITS);
-		glEnable(GL_DEPTH_TEST);
 		
 		glTranslatef(axis.x, 200, axis.z);
 		glScalef(scale, 10.0, scale);

@@ -4,3 +4,6 @@
 [submodule "addons/ofxControlPanel"]
 	path = addons/ofxControlPanel
 	url = https://motoishmz@github.com/kylemcdonald/ofxControlPanel.git
+[submodule "addons/ofxValue"]
+	path = addons/ofxValue
+	url = https://motoishmz@github.com/satoruhiga/ofxValue.git

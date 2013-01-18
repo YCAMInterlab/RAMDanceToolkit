@@ -10,3 +10,5 @@
 #include "ramPrimitive.h"
 #include "ramAccelerometer.h"
 #include "ramGhost.h"
+#include "ramAnalyzer.h"
+#include "ramSession.h"
