@@ -26,9 +26,15 @@ CircleSensor::CircleSensor()
 
 void CircleSensor::setup() {
 	kinect.init(true, true);
-	string serial = ofxKinect::nextAvailableSerial();
+	serial = ofxKinect::nextAvailableSerial();
 	kinect.open(serial);
 	cout << "Connected to Kinect " << serial << endl;
+	
+	string registrationFile = serial + "-registration.txt";
+	if(ofFile::doesFileExist(registrationFile)) {
+		ofFile file(registrationFile, ofFile::ReadOnly);
+		file >> registration;
+	}
 	
 	imitate(background, kinect, CV_8UC1);
 	imitate(valid, kinect, CV_8UC1);
@@ -127,6 +133,13 @@ void CircleSensor::update() {
 void CircleSensor::drawCloud() {
 	ofPushMatrix();
 	ofPushStyle();
+	
+	ofSetColor(yellowPrint);
+	ofMesh registrationLine;
+	registrationLine.setMode(OF_PRIMITIVE_LINE_STRIP);
+	registrationLine.addVertices(registrationSamples);
+	registrationLine.draw();
+	
 	ofMultMatrix(registration);
 	ofSetColor(255);
 	cloud.draw();
@@ -135,11 +148,12 @@ void CircleSensor::drawCloud() {
 	for(int i = 0; i < trackedPositions.size(); i++) {
 		ofBox(trackedPositions[i], 8);
 	}
+	
 	ofSetColor(magentaPrint);
-	ofMesh registrationLine;
-	registrationLine.setMode(OF_PRIMITIVE_LINE_STRIP);
+	registrationLine.clear();
 	registrationLine.addVertices(registrationSamples);
 	registrationLine.draw();
+	
 	ofPopStyle();
 	ofPopMatrix();
 }
@@ -170,11 +184,12 @@ void CircleSensor::drawDebug() {
 	ofPopMatrix();
 	ofPopStyle();
 }
-void CircleSensor::sampleRegistration() {
+void CircleSensor::updateRegistration(ofVec3f& reference) {
 	registrationSamples.push_back(trackedPositions[0]);
-}
-void CircleSensor::updateRegistration(CircleSensor& reference) {
-	registration = estimateAffine3D(registrationSamples, reference.registrationSamples);
+	referenceSamples.push_back(reference);
+	registration = estimateAffine3D(registrationSamples, referenceSamples);
+	ofFile file(serial + "-registration.txt", ofFile::WriteOnly);
+	file << registration;
 }
 bool CircleSensor::oneTrackedPosition() {
 	return trackedPositions.size() == 1;

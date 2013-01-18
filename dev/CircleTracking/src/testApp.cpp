@@ -1,5 +1,20 @@
 #include "testApp.h"
 
+bool showDebug = false;
+bool backgroundClear = false;
+bool backgroundCalibrate = false;
+float backgroundThreshold = 5;
+
+float blurRadius = 2;
+float circleThreshold = 160;
+float minRadius = 2;
+float maxRadius = 10;
+float sampleRadius = 12;
+
+bool registrationClear = false;
+bool registrationCalibrate = false;
+float registrationCalibrationRate = 8;
+
 void testApp::setup() {
 	ofSetVerticalSync(true);
 	
@@ -10,65 +25,75 @@ void testApp::setup() {
 		sensors.back()->setup();
 	}
 	
-	gui.setup();
-	gui.addPanel("Control");
-	gui.addToggle("showDebug", true);
-	gui.addToggle("backgroundClear", false);
-	gui.addToggle("backgroundCalibrate", false);
-	gui.addSlider("backgroundThreshold", 5, 0, 255, true);
-	gui.addSlider("sampleRadius", 10, 0, 24);
-	gui.addToggle("registrationClear", false);
-	gui.addToggle("registrationCalibrate", false);
-	gui.addSlider("registrationCalibrationRate", 8, 1, 15, true);
+	float dim = 20;
+	float xInit = OFX_UI_GLOBAL_WIDGET_SPACING; 
+	float length = 320 - xInit;
+	gui = new ofxUICanvas(0, 0, length + xInit * 2, ofGetHeight());
+	gui->setFont("/System/Library/Fonts/HelveticaLight.ttf");
+	ofColor cb(64, 192),
+	co(192, 192),
+	coh(128, 192),
+	cf(240, 255),
+	cfh(128, 255),
+	cp(96, 192),
+	cpo(255, 192);
+	gui->setUIColors(cb, co, coh, cf, cfh, cp, cpo);
 	
-	gui.addPanel("CircleFinder");
-	gui.addSlider("blurRadius", 2, 0, 11);
-	gui.addSlider("circleThreshold", 160, 0, 255);
-	gui.addSlider("minRadius", 2, 0, 12);
-	gui.addSlider("maxRadius", 10, 0, 12);
+	gui->addLabel("Background", OFX_UI_FONT_LARGE);
+	gui->addLabelToggle("Debug", &showDebug, length, dim);
+	gui->addLabelButton("Clear", &backgroundClear, length, dim);
+	gui->addLabelToggle("Calibrate", &backgroundCalibrate, length, dim);
+	gui->addSlider("Threshold", 0, 255, &backgroundThreshold, length, dim);
+	
+	gui->addLabel("Tracking", OFX_UI_FONT_LARGE);
+	gui->addSlider("Blur radius", 0, 11, &blurRadius, length, dim);
+	gui->addSlider("Threshold", 0, 255, &circleThreshold, length, dim);
+	gui->addSlider("Min radius", 0, 12, &minRadius, length, dim);
+	gui->addSlider("Max radius", 0, 12, &maxRadius, length, dim);
+	gui->addSlider("Sample radius", 0, 24, &sampleRadius, length, dim);
+	
+	gui->addLabel("Registration", OFX_UI_FONT_LARGE);
+	gui->addLabelButton("Clear", &registrationClear, length, dim);
+	gui->addLabelToggle("Calibrate", &registrationCalibrate, length, dim);
+	gui->addSlider("Calibration rate", 1, 15, &registrationCalibrationRate, length, dim);
 }
 
 void testApp::update() {
-	registrationCalibrationTimer.setFramerate(gui.getValueI("registrationCalibrationRate"));
-	bool registrationCalibrate = gui.getValueB("registrationCalibrate");
+	registrationCalibrationTimer.setFramerate(registrationCalibrationRate);
 	
 	for(int i = 0; i < sensors.size(); i++) {
 		CircleSensor& sensor = *sensors[i];
-		if(gui.getValueB("backgroundClear")) {
+		if(backgroundClear) {
 			sensor.backgroundClear = true;
 		}
-		if(gui.getValueB("registrationClear")) {
+		if(registrationClear) {
 			sensor.registrationClear = true;
 		}
-		sensor.backgroundCalibrate = gui.getValueB("backgroundCalibrate");
-		sensor.backgroundThreshold = gui.getValueI("backgroundThreshold");
-		sensor.sampleRadius = gui.getValueF("sampleRadius");
-		sensor.circleFinder.blurRadius = gui.getValueF("blurRadius");
-		sensor.circleFinder.threshold = gui.getValueF("circleThreshold");
-		sensor.circleFinder.minRadius = gui.getValueF("minRadius");
-		sensor.circleFinder.maxRadius = gui.getValueF("maxRadius");
+		sensor.backgroundCalibrate = backgroundCalibrate;
+		sensor.backgroundThreshold = backgroundThreshold;
+		sensor.sampleRadius = sampleRadius;
+		sensor.circleFinder.blurRadius = blurRadius;
+		sensor.circleFinder.threshold = circleThreshold;
+		sensor.circleFinder.minRadius = minRadius;
+		sensor.circleFinder.maxRadius = maxRadius;
 		sensor.update();
 	}
 	
 	if(registrationCalibrate && registrationCalibrationTimer.tick()) {
-		if(sensors[0]->oneTrackedPosition()) {
-			sensors[0]->sampleRegistration();
-			for(int i = 1; i < sensors.size(); i++) {
-				if(sensors[i]->oneTrackedPosition()) {
-					sensors[i]->sampleRegistration();
-					sensors[i]->updateRegistration(*sensors[0]);
+		if(!sensors.empty()) {
+			if(sensors[0]->oneTrackedPosition()) {
+				for(int i = 1; i < sensors.size(); i++) {
+					if(sensors[i]->oneTrackedPosition()) {
+						sensors[i]->updateRegistration(sensors[0]->trackedPositions[0]);
+					}
 				}
 			}
 		}
 	}
-	
-	gui.setValueB("backgroundClear", false);
-	gui.setValueB("registrationClear", false);
 }
 
 void testApp::draw() {
-	ofBackground(0);
-	
+	ofBackgroundGradient(ofColor(64), ofColor(0));
 	easyCam.begin();
 	ofScale(1, -1, -1); // orient the point cloud properly
 	ofTranslate(0, 0, -1500); // rotate about z = 1500 mm
@@ -78,8 +103,9 @@ void testApp::draw() {
 	}
 	easyCam.end();
 	
-	if(gui.getValueB("showDebug")) {
+	if(showDebug) {
 		ofPushMatrix();
+		ofTranslate(320, 0);
 		glDisable(GL_DEPTH_TEST);
 		for(int i = 0; i < sensors.size(); i++) {
 			CircleSensor& sensor = *sensors[i];
@@ -89,3 +115,4 @@ void testApp::draw() {
 		ofPopMatrix();
 	}
 }
+
