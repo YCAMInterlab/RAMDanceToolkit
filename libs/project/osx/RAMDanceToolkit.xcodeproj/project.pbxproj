@@ -1216,6 +1216,7 @@
 					"\"$(SRCROOT)/../../../addons/ofxBt/libs/bullet/lib/osx\"",
 				);
 				PRODUCT_NAME = ram;
+				SDKROOT = "";
 			};
 			name = Debug;
 		};
@@ -1228,6 +1229,7 @@
 					"\"$(SRCROOT)/../../../addons/ofxBt/libs/bullet/lib/osx\"",
 				);
 				PRODUCT_NAME = ram;
+				SDKROOT = "";
 			};
 			name = Release;
 		};

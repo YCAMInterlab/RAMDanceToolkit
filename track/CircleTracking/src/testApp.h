@@ -2,8 +2,8 @@
 
 #include "ofMain.h"
 #include "CircleSensor.h"
-#include "ofxAutoControlPanel.h"
 #include "ofxTiming.h"
+#include "ofxUI.h"
 
 class testApp : public ofBaseApp {
 public:
@@ -12,8 +12,9 @@ public:
 	void draw();
 	
 	ofEasyCam easyCam;
-	ofxAutoControlPanel gui;
 	vector<ofPtr<CircleSensor> > sensors;
-	DelayTimer registrationCalibrationTimer;
+	DelayTimer registrationCalibrationTimer;;
+	
+	ofxUICanvas *gui;
 };
 
