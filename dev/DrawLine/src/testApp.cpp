@@ -76,7 +76,9 @@ public:
 			
 			ofPushStyle();
 			
-			ramNode& from = getNode(o.value["from"]);
+//			ramNode& from = getNode(o.value["from"]);
+			ramNode from = ramNode();
+			from.setPosition(0, 0, 0);
 			ramNode& to = getNode(o.value["to"]);
 			
 			ofPolyline poly;
@@ -278,7 +280,7 @@ private:
 };
 
 
-static const string myActorName = "Ando_2012-09-01_18-49-10";
+static const string myActorName = "default";
 DrawLine line;
 
 
@@ -289,7 +291,7 @@ void testApp::setup()
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
 	ofBackground(0);
-	oscReceiver.setup(10000);
+	oscReceiver.setup(10001);
 	
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();

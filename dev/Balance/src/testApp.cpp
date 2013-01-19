@@ -1,7 +1,7 @@
 #include "testApp.h"
 #include "arrow.h"
 
-static const string myActorName = "Ando_2012-09-01_18-49-10";
+static const string myActorName = "default";
 ofLight light;
 
 ramBalancer balancer;
@@ -16,7 +16,7 @@ void testApp::setup()
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
 	ofBackground(0);
-	oscReceiver.setup(10000);
+	oscReceiver.setup(10001);
 	
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
@@ -59,7 +59,7 @@ void testApp::draw()
 			ofSetColor(255, 0, 0);
 			ofLine(chest, balance * actorHeight);
 		}
-		
+//		
 //		if (bArrow)
 //		{
 //			float scale = balancer.getAvarage().length() * 2.5;
@@ -68,8 +68,6 @@ void testApp::draw()
 //			
 //			scale = (scale > max_scale) ? max_scale :
 //					(scale < min_scale) ? min_scale : scale;
-//			
-//			cout << scale << endl;
 //			
 //			glTranslatef(balance.x, 200, balance.z);
 //			glScalef(scale, 10.0, scale);

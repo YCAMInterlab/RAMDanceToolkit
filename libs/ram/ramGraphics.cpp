@@ -34,6 +34,23 @@ void ramBasicFloor(const float floorSize, const float tileSize, ofColor c1, ofCo
 	ofPopStyle();
 }
 
+
+void ramBasicActor(ramActor& actor)
+{
+	glEnable(GL_DEPTH_TEST);
+	for (int i=0; i<actor.getNumNode(); i++)
+	{
+		ramNode &node = actor.getNode(i);
+		node.transformBegin();
+		ofBox( i==(ramActor::JOINT_HEAD) ? 6 : 3 );
+		node.transformEnd();
+		
+		if (node.hasParent())
+			ofLine(node, *node.getParent());
+	}
+	glDisable(GL_DEPTH_TEST);
+}
+
 void ramBox(const ramNode& o, float size)
 {
 	ofBox(o, size);
