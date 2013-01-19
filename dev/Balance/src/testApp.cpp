@@ -1,12 +1,12 @@
 #include "testApp.h"
-#include "arrow.h"
+
 
 static const string myActorName = "Ando_2012-09-01_18-49-10";
 
 
 #include "Balance.h"
+ofxAutoControlPanel gui;
 Balance balance;
-
 
 
 #pragma mark - oF methods
@@ -16,13 +16,19 @@ void testApp::setup()
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
 	ofBackground(0);
-	oscReceiver.setup(10001);
 	
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
+	oscReceiver.setup(10001);
+	
+	// gui setup
+	ofxControlPanel::setTextColor(simpleColor(255,0,0,100));
+	ofxControlPanel::setBackgroundColor(simpleColor(0,0,0,20));
+	gui.setup(ofGetWidth(), ofGetHeight());
 	
 	//
 	balance.setup();
+	balance.refreshControlPanel(gui);
 }
 
 //--------------------------------------------------------------

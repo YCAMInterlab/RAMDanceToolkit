@@ -4,11 +4,16 @@
 class Balance : public ramSceneBase
 {
 	ramBalancer balancer;
+	string key_line_width;
 	
 public:
 	Balance()
 	{
-		sceneName = "Balance";
+		setSceneName("Balance");
+		
+		// --
+		
+		key_line_width = "Balance line Width";
 	}
 	
 	void setup()
@@ -20,7 +25,8 @@ public:
 	{
 		guiPtr = &gui;
 		guiPtr->addPanel(getSceneName());
-		guiPtr->addSlider("master size", 10, 10, 1000);
+		guiPtr->addToggle(key_enabled);
+		guiPtr->addSlider(key_line_width, 1, 1, 50);
 	}
 	
 	void update()
@@ -31,6 +37,11 @@ public:
 	
 	void draw()
 	{
+		bEnabled = guiPtr->getValueB(key_enabled);
+		if (!bEnabled) return;
+		
+		float lineWidth = guiPtr->getValueF(key_line_width);
+		
 		ofPushStyle();
 		
 		if (getActorManager().getNumActor() > 0)
@@ -46,6 +57,7 @@ public:
 			chest.y = 0.;
 			
 			ofSetColor(255, 0, 0);
+			ofSetLineWidth(lineWidth);
 			ofLine(chest, balance * actorHeight);
 			
 			glDisable(GL_DEPTH_TEST);
@@ -58,6 +70,9 @@ public:
 	
 	void drawActor(ramActor &actor)
 	{
+		bEnabled = guiPtr->getValueB(key_enabled);
+		if (!bEnabled) return;
+		
 		ofPushStyle();
 		ofNoFill();
 		ofSetColor(150);
@@ -85,11 +100,3 @@ public:
 		
 	}
 };
-
-
-
-
-
-
-
-

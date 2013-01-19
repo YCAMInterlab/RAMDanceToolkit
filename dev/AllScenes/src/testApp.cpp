@@ -1,11 +1,14 @@
 #include "testApp.h"
 #include "ofxAutoControlPanel.h"
 
+
+static const string myActorName = "Ando_2012-09-01_18-49-10";
+
+
 // scenes
 #include "BigBox.h"
 #include "Balance.h"
 
-static const string myActorName = "Ando_2012-09-01_18-49-10";
 
 ofxAutoControlPanel gui;
 vector<ramSceneBase*> scenes;
@@ -32,7 +35,7 @@ void testApp::setup()
 	// gui setup
 	ofxControlPanel::setTextColor(simpleColor(255,0,0,100));
 	ofxControlPanel::setBackgroundColor(simpleColor(0,0,0,20));
-	gui.setup(ofGetWidth(), ofGetHeight());
+	gui.setup(ofGetWidth()-100, ofGetHeight());
 	
 	// scenes
 	scenes.push_back(bigbox.getPtr());
@@ -92,6 +95,7 @@ void testApp::drawRigid(ramRigidBody &rigid)
 		scenes.at(i)->drawRigid(rigid);
 	}
 }
+
 
 
 
