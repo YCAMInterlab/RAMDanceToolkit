@@ -1,8 +1,15 @@
 #include "testApp.h"
 #include "ofxAutoControlPanel.h"
 
+
 static const string myActorName = "default";
 ofxAutoControlPanel gui;
+
+
+// scenes
+#include "BigBox.h"
+BigBox bigbox;
+
 
 
 #pragma mark - oF methods
@@ -11,18 +18,21 @@ void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
-	ofBackground(0);
-	oscReceiver.setup(10000);
+	ofBackground(230);
+	ofEnableSmoothing();
+	ofEnableAlphaBlending();
+	oscReceiver.setup(10001);
 	
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
 	
 	// gui setup
-	ofxControlPanel::setTextColor(0xffffff);
-	ofxControlPanel::setBackgroundColor(0x000000);
-	gui.setup();
-	gui.addPanel("Draw Line");
-	gui.addPanel("ok");
+	ofxControlPanel::setTextColor(simpleColor(255,0,0,100));
+	ofxControlPanel::setBackgroundColor(simpleColor(0,0,0,20));
+	gui.setup(300, 1000);
+	
+	bigbox.setup();
+	bigbox.refreshControlPanel(gui);		
 }
 
 //--------------------------------------------------------------
@@ -30,17 +40,14 @@ void testApp::update()
 {
 	oscReceiver.update();
 	
-//	if (gui.hasValueChanged( variadic(sliderEmphasis)(sliderFreshness) ))
-//	{
-//		ghost.setEmphasis( gui.getValueF(sliderEmphasis) );
-//		ghost.setFreshness( gui.getValueF(sliderFreshness) );
-//	}
+	bigbox.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
 	
+	bigbox.draw();
 }
 
 
@@ -56,7 +63,7 @@ void testApp::drawFloor()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramBasicActor(actor);
+	bigbox.drawActor(actor);
 }
 
 //--------------------------------------------------------------
