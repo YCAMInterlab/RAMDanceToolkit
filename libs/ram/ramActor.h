@@ -20,7 +20,6 @@ public:
 	ramNode();
 	ramNode(const ramNode& copy) { *this = copy; }
 	ramNode& operator=(const ramNode& copy);
-	
 	const string& getName() { return name; }
 	int getID() { return node_id; }
 
@@ -39,6 +38,8 @@ public:
 	inline ofVec3f getAcceleration() { return accerelometer.acceleration; }
 	inline ofQuaternion getAngularVelocity() { return accerelometer.angular_velocity; }
 	inline ofQuaternion getAngularAcceleration() { return accerelometer.angular_acceleration; }
+	
+	operator ofVec3f() const {return getPosition();}
 	
 private:
 
@@ -70,7 +71,7 @@ public:
 	void setName(const string& name) { this->name = name; }
 	string& getName() { return name; }
 
-	int getNumNode() const { return nodes.size(); }
+	int getNumNode() { return nodes.size(); }
 	ramNode& getNode(int node_id) { return nodes[node_id]; }
 	
 	inline bool isOutdated() { return (ofGetElapsedTimef() -  last_update_client_time) > RAM_OUTDATED_DURATION; }
