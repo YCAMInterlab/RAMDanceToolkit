@@ -1,14 +1,44 @@
-//
-//  ramSceneBase.h
-//  RAMDanceToolkit
-//
-//  Created by motoishmz on 2013/01/19.
-//  Copyright (c) 2013年 YCAMInterlab. All rights reserved.
-//
+#pragma once
 
-#ifndef RAMDanceToolkit_ramSceneBase_h
-#define RAMDanceToolkit_ramSceneBase_h
-
-
-
-#endif
+class ramSceneBase
+{
+public:
+	ramSceneBase() : bEnabled(false) {}
+	
+	inline void enable(){ bEnabled = true; }
+	inline void disable() { bEnabled = false; }
+	inline void toggle() { bEnabled ^= true; }
+	
+//	virtual void setup()
+//	{
+//		
+//	}
+//	
+//	virtual void update()
+//	{
+//		
+//	}
+//	
+//	virtual void draw()
+//	{
+//		
+//	}
+//	
+//	virtual void drawActor(const ramActor& actor)
+//	{
+//		
+//	}
+//	
+//	virtual void drawRigidBody(const ramRigidBody& rigid)
+//	{
+//		
+//	}
+//	
+//	virtual void drawFloor()
+//	{
+//		
+//	}
+	
+private:
+	bool bEnabled;
+};

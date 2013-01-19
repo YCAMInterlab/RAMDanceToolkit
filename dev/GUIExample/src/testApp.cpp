@@ -1,17 +1,22 @@
 #include "testApp.h"
+#include "ofxSimpleParticleEngine.h"
 
 
-const string myActorName = "Ando_2012-09-01_18-49-10";
+const string myActorName = "default";
 
 
 #include "ofxAutoControlPanel.h"
 ofxAutoControlPanel gui;
-ramGhost ghost;
-
-vector<string> slidersKeys;
 const string sliderEmphasis = "emphasis";
 const string sliderFreshness = "freshness";
 
+
+ofxSimpleParticleEngine pe;
+Noise *noise;
+
+
+ramGhost ghost;
+bool bGhost, bActor, bParticle;
 
 //--------------------------------------------------------------
 void testApp::setup()
@@ -33,8 +38,18 @@ void testApp::setup()
 	gui.addPanel("ramGhost");
 	gui.addSlider(sliderEmphasis, 20, 0, 100);
 	gui.addSlider(sliderFreshness, 20, 0, 1000);
-	slidersKeys.push_back(sliderEmphasis);
-	slidersKeys.push_back(sliderFreshness);
+	
+	bGhost = false;
+	bActor = false;
+	bParticle = false;
+	
+	//
+	pe.setup(100000);
+	pe.addForceFactor(new Gravity);
+	pe.addForceFactor(new Floor);
+	
+	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+	glEnable(GL_LINE_SMOOTH);
 }
 
 
@@ -43,31 +58,84 @@ void testApp::update()
 {
 	oscReceiver.update();
 	
-	if (gui.hasValueChanged(slidersKeys))
+	if (gui.hasValueChanged( variadic(sliderEmphasis)(sliderFreshness) ))
 	{
 		ghost.setEmphasis( gui.getValueF(sliderEmphasis) );
 		ghost.setFreshness( gui.getValueF(sliderFreshness) );
 	}
+	
+	for (int i=0; i<ghost.getActor().getNumNode(); i++)
+	{
+		ramNode &node = ghost.getActor().getNode(i);
+		for(int j=0; j<10; j++) pe.emit( node.getPosition() );
+	}
 	ghost.update(getActor(myActorName));
+	pe.update();
 }
 
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-    ofEnableSmoothing();
-	ofNoFill();
+	ofBackgroundGradient( ofColor( 240 ), ofColor( 60 ) );
+    ofSetColor(255, 0, 0);
+	
 	ramCameraBegin();
-    {
-		ramActor &actor = ghost.getActor();
-		for (int i=0; i<actor.getNumNode(); i++)
+	{
+		glPushAttrib(GL_ALL_ATTRIB_BITS);
+		glEnable(GL_DEPTH_TEST);
+		ofPushStyle();
+		ofNoFill();
+		
+		if (bGhost)
 		{
-			ramNode &node = actor.getNode(i);
-			ofBox(node, 10);
+			for (int i=0; i<ghost.getActor().getNumNode(); i++)
+			{
+				ramNode &node = ghost.getActor().getNode(i);
+				const int size = (i==ramActor::JOINT_HEAD) ? 6 : 3;
+				
+				node.transformBegin();
+				ofBox(size);
+				node.transformEnd();
+				
+				if (node.hasParent())
+					ofLine(node, *node.getParent());
+			}
 		}
+		
+		if (bParticle)
+		{
+			ofSetColor(255);
+			pe.draw();
+		}
+		
+		ofPopStyle();
+		glDisable(GL_DEPTH_TEST);
+		glPopAttrib();
 	}
 	ramCameraEnd();
-	ofDisableSmoothing();
+//	glPushAttrib(GL_ALL_ATTRIB_BITS);
+//	glEnable(GL_DEPTH_TEST);
+//	glPushMatrix();
+//    ofEnableSmoothing();
+//	ofNoFill();
+//	ramCameraBegin();
+//    {
+//		ramActor &actor = ghost.getActor();
+//		for (int i=0; i<actor.getNumNode(); i++)
+//		{
+//			ramNode &node = actor.getNode(i);
+//			ofBox(node, (i==ramActor::JOINT_HEAD) ? 6 : 3);
+//			
+//			if (node.hasParent())
+//				ofLine(node, *node.getParent());
+//		}
+//	}
+//	ramCameraEnd();
+//	ofDisableSmoothing();
+//	glPopMatrix();
+//	glDisable(GL_DEPTH_TEST);
+//	glPopAttrib();
 }
 
 
@@ -83,22 +151,32 @@ void testApp::drawFloor()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-    for (int i=0; i<actor.getNumNode(); i++)
+	if (!bActor) return;
+	
+	glEnable(GL_DEPTH_TEST);
+	ofPushStyle();
+	ofNoFill();
+	ofSetColor(0);
+	
+	for (int i=0; i<actor.getNumNode(); i++)
     {
-        ramNode &node = actor.getNode(i);
+		const ramNode &node = actor.getNode(i);
+		const int size = (i==ramActor::JOINT_HEAD) ? 6 : 3;
+		
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glPushMatrix();
-		ofPushStyle();
-		{
-			ofSetColor(255, 0, 0);
-			ofNoFill();
-			ofSetColor(0, 255, 0);
-			ramBox(node, 20);
-		}
-		ofPopStyle();
-		glPopMatrix();
+		node.transformBegin();
+		ofBox(size);
+		node.transformEnd();
 		glPopAttrib();
+		glPopMatrix();
+        
+        if (node.hasParent())
+            ofLine(node, *node.getParent());
     }
+	
+    ofPopStyle();
+	glDisable(GL_DEPTH_TEST);
 }
 
 
@@ -113,6 +191,12 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
+	switch (key)
+	{
+		case 'a': bActor ^= true; break;
+		case 's': bGhost ^= true; break;
+		case 'd': bParticle ^= true; break;
+	}
 }
 
 //--------------------------------------------------------------
