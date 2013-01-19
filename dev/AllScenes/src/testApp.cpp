@@ -1,14 +1,16 @@
 #include "testApp.h"
 #include "ofxAutoControlPanel.h"
 
-
-static const string myActorName = "default";
-ofxAutoControlPanel gui;
-
-
 // scenes
 #include "BigBox.h"
+#include "Balance.h"
+
+static const string myActorName = "Ando_2012-09-01_18-49-10";
+
+ofxAutoControlPanel gui;
+vector<ramSceneBase*> scenes;
 BigBox bigbox;
+Balance balance;
 
 
 
@@ -19,6 +21,7 @@ void testApp::setup()
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
 	ofBackground(230);
+	
 	ofEnableSmoothing();
 	ofEnableAlphaBlending();
 	oscReceiver.setup(10001);
@@ -29,10 +32,17 @@ void testApp::setup()
 	// gui setup
 	ofxControlPanel::setTextColor(simpleColor(255,0,0,100));
 	ofxControlPanel::setBackgroundColor(simpleColor(0,0,0,20));
-	gui.setup(300, 1000);
+	gui.setup(ofGetWidth(), ofGetHeight());
 	
-	bigbox.setup();
-	bigbox.refreshControlPanel(gui);		
+	// scenes
+	scenes.push_back(bigbox.getPtr());
+	scenes.push_back(balance.getPtr());
+	
+	for (int i=0; i<scenes.size(); i++)
+	{
+		scenes.at(i)->setup();
+		scenes.at(i)->refreshControlPanel(gui);
+	}
 }
 
 //--------------------------------------------------------------
@@ -40,14 +50,19 @@ void testApp::update()
 {
 	oscReceiver.update();
 	
-	bigbox.update();
+	for (int i=0; i<scenes.size(); i++)
+	{
+		scenes.at(i)->update();
+	}
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	
-	bigbox.draw();
+	for (int i=0; i<scenes.size(); i++)
+	{
+		scenes.at(i)->draw();
+	}
 }
 
 
@@ -63,13 +78,19 @@ void testApp::drawFloor()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	bigbox.drawActor(actor);
+	for (int i=0; i<scenes.size(); i++)
+	{
+		scenes.at(i)->drawActor(actor);
+	}
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
-	
+	for (int i=0; i<scenes.size(); i++)
+	{
+		scenes.at(i)->drawRigid(rigid);
+	}
 }
 
 

@@ -37,19 +37,26 @@ namespace gl
 class BigBox : public ramSceneBase
 {
 
+	string keyMasterSize, keyLineWidth;
+	
 public:
 	
 	BigBox()
 	{
 		sceneName = "Big Box";
+		
+		// ---
+		
+		keyMasterSize = "Master size";
+		keyLineWidth = "line Width";
 	}
 	
 	void refreshControlPanel(ofxAutoControlPanel& gui)
 	{
 		guiPtr = &gui;
 		guiPtr->addPanel(getSceneName());
-		guiPtr->addSlider("master size", 10, 10, 1000);
-		guiPtr->addSlider("lineWidth", 10, 1, 100);
+		guiPtr->addSlider(keyMasterSize, 10, 10, 1000);
+		guiPtr->addSlider(keyLineWidth, 10, 1, 100);
 		
 		for (int i=0; i<ramActor::NUM_JOINTS; i++)
 			guiPtr->addSlider(ramActor::getJointName(i), 0, 0, 1000);
@@ -63,10 +70,11 @@ public:
 	
 	void update()
 	{
-		if(guiPtr->hasValueChanged("master size"))
+		if(guiPtr->hasValueChanged(keyMasterSize))
 		{
 			for (int i=0; i<23; i++)
-				guiPtr->setValueF(ramActor::getJointName(i), guiPtr->getValueF("master size"));
+				guiPtr->setValueF(ramActor::getJointName(i), guiPtr->getValueF(keyMasterSize));
+			guiPtr->clearAllChanged();
 		}
 	}
 	
@@ -80,7 +88,7 @@ public:
 		ofColor currSklColor(110, 20, 20);
 		ofColor recSklColor(20, 20, 110);
 		ofColor shadowColor(0, 30);
-		float lineWidth = gui.getValueF("lineWidth");
+		float lineWidth = gui.getValueF(keyLineWidth);
 		
 		for (int i=0; i<actor.getNumNode(); i++)
 		{
