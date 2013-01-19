@@ -1,9 +1,10 @@
 #include "testApp.h"
+#include "ofxBt.h"
 
+static const string myActorName = "Ando_2012-09-01_18-49-10";
 
-
-#include "BigBox.h"
-BigBox bigbox;
+ramBoxPrimitive *cube;
+ramSpherePrimitive *sphere;
 
 
 #pragma mark - oF methods
@@ -14,26 +15,40 @@ void testApp::setup()
 	ofSetVerticalSync(true);
 	ofBackground(0);
 	oscReceiver.setup(10000);
-
+	
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
 	
-	bigbox.setup();
+	
+	cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
+	sphere = new ramSpherePrimitive(ofVec3f(0, 0, 0), 50);
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
 	oscReceiver.update();
-	bigbox.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	ofBackgroundGradient( ofColor( 240 ), ofColor( 60 ) );
-	bigbox.draw();
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	glEnable(GL_DEPTH_TEST);
+	glPushMatrix();
+	ramCameraBegin();
+	{
+		ofNoFill();
+		cube->draw();
+		sphere->draw();
+		ramPhysics::instance().debugDraw();
+	}
+	ramCameraEnd();
+	glPopMatrix();
+	glDisable(GL_DEPTH_TEST);
+	glPopAttrib();
 }
+
 
 
 
@@ -47,13 +62,27 @@ void testApp::drawFloor()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	bigbox.drawActor(actor);
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	glEnable(GL_DEPTH_TEST);
+	glPushMatrix();
+	ofPushStyle();
+	for (int i=0; i<actor.getNumNode(); i++)
+    {
+        ramNode &node = actor.getNode(i);
+		
+		ofNoFill();
+		ofSetColor(0, 255, 0);
+		ramBox(node, (i==ramActor::JOINT_HEAD) ? 6 : 3);
+    }
+	ofPopStyle();
+	glPopMatrix();
+	glDisable(GL_DEPTH_TEST);
+	glPopAttrib();
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
-	
 }
 
 
@@ -63,7 +92,7 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	
+	cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
 }
 
 //--------------------------------------------------------------

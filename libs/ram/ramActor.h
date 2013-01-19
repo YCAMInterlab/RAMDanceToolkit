@@ -39,7 +39,7 @@ public:
 	inline ofVec3f getAcceleration() { return accerelometer.acceleration; }
 	inline ofQuaternion getAngularVelocity() { return accerelometer.angular_velocity; }
 	inline ofQuaternion getAngularAcceleration() { return accerelometer.angular_acceleration; }
-
+	
 private:
 
 	int node_id;
@@ -70,7 +70,7 @@ public:
 	void setName(const string& name) { this->name = name; }
 	string& getName() { return name; }
 
-	int getNumNode() { return nodes.size(); }
+	int getNumNode() const { return nodes.size(); }
 	ramNode& getNode(int node_id) { return nodes[node_id]; }
 	
 	inline bool isOutdated() { return (ofGetElapsedTimef() -  last_update_client_time) > RAM_OUTDATED_DURATION; }
@@ -112,7 +112,7 @@ public:
 	enum Joint
 	{
 		JOINT_HIPS              = 0,
-		JOINT_ADBOMEN           = 1,
+		JOINT_ABDOMEN           = 1,
 		JOINT_CHEST             = 2,
 		JOINT_NECK              = 3,
 		JOINT_HEAD              = 4,

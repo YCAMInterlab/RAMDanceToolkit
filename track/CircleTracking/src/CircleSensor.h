@@ -5,13 +5,15 @@
 #include "CircleFinder.h"
 
 class CircleSensor {
+protected:
+	string serial;
 public:
 	CircleFinder circleFinder;
 	ofxKinect kinect;
 	ofMesh cloud;
 	ofImage valid, background;
 	vector<ofVec3f> trackedPositions;
-	vector<ofVec3f> registrationSamples;
+	vector<ofVec3f> registrationSamples, referenceSamples;
 	ofMatrix4x4 registration;
 	
 	bool backgroundClear;
@@ -25,7 +27,7 @@ public:
 	void update();
 	void drawCloud();
 	void drawDebug();
-	void sampleRegistration();
-	void updateRegistration(CircleSensor& reference);
+	void updateRegistration(ofVec3f& reference);
+	bool oneTrackedPosition();
 	~CircleSensor();
 };

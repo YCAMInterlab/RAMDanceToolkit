@@ -127,9 +127,9 @@ void ramActor::updateWithOscMessage(const ofxOscMessage &m)
 
 void ramActor::setupTree()
 {
-	getNode(JOINT_ADBOMEN).setParent(getNode(JOINT_HIPS));
+	getNode(JOINT_ABDOMEN).setParent(getNode(JOINT_HIPS));
 	{
-		getNode(JOINT_CHEST).setParent(getNode(JOINT_ADBOMEN));
+		getNode(JOINT_CHEST).setParent(getNode(JOINT_ABDOMEN));
 		{
 			getNode(JOINT_NECK).setParent(getNode(JOINT_CHEST));
 			{

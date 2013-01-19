@@ -19,7 +19,8 @@ inline void ofSphere(const ramNode& o, float radius)
 	ofSphere(o.getPosition(), radius);
 }
 
-
-void ramBasicFloor(const float floorSize, const float tileSize);
 void ramBox(const ramNode& o, float size);
 void ramSphere(const ramNode& o, float radius);
+
+void ramBasicFloor(const float floorSize, const float tileSize);
+void ramBasicActor(ramActor& actor);

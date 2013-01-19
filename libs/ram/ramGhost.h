@@ -1,6 +1,7 @@
 #pragma once
 #include "ramMain.h"
 
+
 class ramGhost
 {
 public:

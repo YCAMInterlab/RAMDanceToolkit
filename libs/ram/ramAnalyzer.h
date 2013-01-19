@@ -37,9 +37,11 @@ public:
 		avarage.z /= size;
 		
 		balance = avarage;
+		
 	}
 	
 	inline ofVec3f getAvarage() { return balance; }
+	inline ofVec3f getAngle() { return balance; }
 	
 private:
 	
@@ -67,7 +69,7 @@ private:
 		weightBalance.resize(ramActor::NUM_JOINTS);
 		
 		// cite: http://goo.gl/QcylU
-		weightBalance.at(ramActor::JOINT_ADBOMEN) = 0.05;
+		weightBalance.at(ramActor::JOINT_ABDOMEN) = 0.05;
 		weightBalance.at(ramActor::JOINT_CHEST) = 0.05;
 		weightBalance.at(ramActor::JOINT_NECK) = 0.05;
 		weightBalance.at(ramActor::JOINT_HEAD) = 0.10;

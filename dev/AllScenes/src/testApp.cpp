@@ -1,9 +1,8 @@
 #include "testApp.h"
+#include "ofxAutoControlPanel.h"
 
-
-
-#include "BigBox.h"
-BigBox bigbox;
+static const string myActorName = "default";
+ofxAutoControlPanel gui;
 
 
 #pragma mark - oF methods
@@ -14,26 +13,36 @@ void testApp::setup()
 	ofSetVerticalSync(true);
 	ofBackground(0);
 	oscReceiver.setup(10000);
-
+	
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
 	
-	bigbox.setup();
+	// gui setup
+	ofxControlPanel::setTextColor(0xffffff);
+	ofxControlPanel::setBackgroundColor(0x000000);
+	gui.setup();
+	gui.addPanel("Draw Line");
+	gui.addPanel("ok");
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
 	oscReceiver.update();
-	bigbox.update();
+	
+//	if (gui.hasValueChanged( variadic(sliderEmphasis)(sliderFreshness) ))
+//	{
+//		ghost.setEmphasis( gui.getValueF(sliderEmphasis) );
+//		ghost.setFreshness( gui.getValueF(sliderFreshness) );
+//	}
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	ofBackgroundGradient( ofColor( 240 ), ofColor( 60 ) );
-	bigbox.draw();
+	
 }
+
 
 
 
@@ -47,7 +56,7 @@ void testApp::drawFloor()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	bigbox.drawActor(actor);
+	ramBasicActor(actor);
 }
 
 //--------------------------------------------------------------
@@ -63,7 +72,7 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	
+
 }
 
 //--------------------------------------------------------------

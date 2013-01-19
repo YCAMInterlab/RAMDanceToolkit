@@ -434,6 +434,7 @@
 		9A598CFE1648DE150066DF10 /* ramBaseApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramBaseApp.cpp; sourceTree = "<group>"; };
 		9A598CFF1648DE150066DF10 /* ramBaseApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramBaseApp.h; sourceTree = "<group>"; };
 		9A598D041648E5350066DF10 /* ramNodeFinder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ramNodeFinder.h; sourceTree = "<group>"; };
+		9A7CD0DE16AA5C96008405D7 /* ramSceneBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ramSceneBase.h; sourceTree = "<group>"; };
 		9AE9587216A8417A00BC63F6 /* ramAnalyzer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ramAnalyzer.h; sourceTree = "<group>"; };
 		9AE9588F16A91B6600BC63F6 /* ramSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSession.h; sourceTree = "<group>"; };
 		9AF8FB3C16A7A89A000A1948 /* ramOscReciever.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ramOscReciever.h; sourceTree = "<group>"; };
@@ -876,6 +877,7 @@
 				9AF8FB3C16A7A89A000A1948 /* ramOscReciever.h */,
 				9AFD62A116A7C96D00942334 /* ramGhost.h */,
 				9AE9587216A8417A00BC63F6 /* ramAnalyzer.h */,
+				9A7CD0DE16AA5C96008405D7 /* ramSceneBase.h */,
 			);
 			name = ram;
 			path = ../../ram;
@@ -1216,6 +1218,7 @@
 					"\"$(SRCROOT)/../../../addons/ofxBt/libs/bullet/lib/osx\"",
 				);
 				PRODUCT_NAME = ram;
+				SDKROOT = "";
 			};
 			name = Debug;
 		};
@@ -1228,6 +1231,7 @@
 					"\"$(SRCROOT)/../../../addons/ofxBt/libs/bullet/lib/osx\"",
 				);
 				PRODUCT_NAME = ram;
+				SDKROOT = "";
 			};
 			name = Release;
 		};
