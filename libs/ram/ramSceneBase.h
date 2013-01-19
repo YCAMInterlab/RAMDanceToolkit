@@ -1,4 +1,5 @@
 #pragma once
+#include "ofxAutoControlPanel.h"
 
 class ramSceneBase
 {
@@ -9,36 +10,12 @@ public:
 	inline void disable() { bEnabled = false; }
 	inline void toggle() { bEnabled ^= true; }
 	
-//	virtual void setup()
-//	{
-//		
-//	}
-//	
-//	virtual void update()
-//	{
-//		
-//	}
-//	
-//	virtual void draw()
-//	{
-//		
-//	}
-//	
-//	virtual void drawActor(const ramActor& actor)
-//	{
-//		
-//	}
-//	
-//	virtual void drawRigidBody(const ramRigidBody& rigid)
-//	{
-//		
-//	}
-//	
-//	virtual void drawFloor()
-//	{
-//		
-//	}
+	string getSceneName() { return sceneName.empty() ? "no name" : sceneName; }
 	
-private:
+protected:
+	
+	ofxAutoControlPanel *guiPtr;
+	
+	string sceneName;
 	bool bEnabled;
 };

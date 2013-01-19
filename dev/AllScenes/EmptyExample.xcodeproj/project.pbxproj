@@ -138,6 +138,7 @@
 		81967292bfc87a0144bd32c66f3adb20 /* ofxOscSender.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxOscSender.cpp; path = ../../../addons/ofxOsc/src/ofxOscSender.cpp; sourceTree = SOURCE_ROOT; };
 		8b30e93fd3d3475eed522a0e0b085e30 /* ofxOscBundle.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxOscBundle.h; path = ../../../addons/ofxOsc/src/ofxOscBundle.h; sourceTree = SOURCE_ROOT; };
 		8c75afc8774a62495dd5346429f6f666 /* ofxOscReceiver.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxOscReceiver.h; path = ../../../addons/ofxOsc/src/ofxOscReceiver.h; sourceTree = SOURCE_ROOT; };
+		9A1DE6D416AA665400A10E3F /* BigBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigBox.h; sourceTree = "<group>"; };
 		9A6873BA16AA599100DD6D1B /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		9A6873BB16AA599100DD6D1B /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		9A6873BD16AA599100DD6D1B /* guiBaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = guiBaseObject.cpp; sourceTree = "<group>"; };
@@ -334,6 +335,23 @@
 			name = oscpack;
 			sourceTree = "<group>";
 		};
+		9A1DE6D316AA665400A10E3F /* BigBox */ = {
+			isa = PBXGroup;
+			children = (
+				9A1DE6D416AA665400A10E3F /* BigBox.h */,
+			);
+			name = BigBox;
+			path = ../../BigBox/src/BigBox;
+			sourceTree = "<group>";
+		};
+		9A1DE6D516AA666100A10E3F /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				9A1DE6D316AA665400A10E3F /* BigBox */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
 		9A6873B916AA599100DD6D1B /* ofxControlPanel */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,6 +533,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				9A1DE6D516AA666100A10E3F /* Scenes */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,

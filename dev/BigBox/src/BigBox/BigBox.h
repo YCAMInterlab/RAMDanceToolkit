@@ -1,7 +1,7 @@
 #pragma once
-
 #include <numeric>
 #include "ramSceneBase.h"
+
 
 namespace gl
 {
@@ -32,12 +32,28 @@ namespace gl
 	}
 }
 
+
+
 class BigBox : public ramSceneBase
 {
-	
 
 public:
-	BigBox() {}
+	
+	BigBox()
+	{
+		sceneName = "Big Box";
+	}
+	
+	void refreshControlPanel(ofxAutoControlPanel& gui)
+	{
+		guiPtr = &gui;
+		guiPtr->addPanel(getSceneName());
+		guiPtr->addSlider("master size", 10, 10, 1000);
+		guiPtr->addSlider("lineWidth", 10, 1, 100);
+		
+		for (int i=0; i<ramActor::NUM_JOINTS; i++)
+			guiPtr->addSlider(ramActor::getJointName(i), 0, 0, 1000);
+	}
 	
 	void setup()
 	{
@@ -47,7 +63,11 @@ public:
 	
 	void update()
 	{
-	
+		if(guiPtr->hasValueChanged("master size"))
+		{
+			for (int i=0; i<23; i++)
+				guiPtr->setValueF(ramActor::getJointName(i), guiPtr->getValueF("master size"));
+		}
 	}
 	
 	void draw()
@@ -57,16 +77,16 @@ public:
 	
 	void drawActor(ramActor& actor)
 	{
-		
 		ofColor currSklColor(110, 20, 20);
 		ofColor recSklColor(20, 20, 110);
 		ofColor shadowColor(0, 30);
-		float boxSize1 = 500.0;
-		float boxSize2 = 5.0;
+		float lineWidth = gui.getValueF("lineWidth");
 		
 		for (int i=0; i<actor.getNumNode(); i++)
 		{
 			const ramNode &node = actor.getNode(i);
+			float boxSize = (i==ramActor::JOINT_HEAD) ? 6 : 3;
+			float bigBoxSize = gui.getValueF(getJointName(i));
 			
 			glPushAttrib(GL_ALL_ATTRIB_BITS);
 			glPushMatrix();
@@ -76,14 +96,17 @@ public:
 			glEnable(GL_DEPTH_TEST);
 			
 			// big box
-			node.transformBegin();
 			ofSetColor(recSklColor);
-			ofBox(node, boxSize1);
+			
+			node.transformBegin();
+			ofSetLineWidth(lineWidth);
+			ofBox(bigBoxSize);
 			node.transformEnd();
 			
 			// actor
 			ofSetColor(currSklColor);
-			ofBox(node, boxSize2);
+			ofSetLineWidth(1);
+			ofBox(node, boxSize);
 			if (node.hasParent())
 				ofLine(node, *node.getParent());
 			
@@ -95,10 +118,12 @@ public:
 			ofSetColor(shadowColor);
 			
 			node.transformBegin();
-			ofBox(node, boxSize1);
+			ofSetLineWidth(lineWidth);
+			ofBox(bigBoxSize);
 			node.transformEnd();
 			
-			ofBox(node, boxSize2);
+			ofSetLineWidth(1);
+			ofBox(node, boxSize);
 			if (node.hasParent())
 				ofLine(node, *node.getParent());
 			
@@ -106,6 +131,7 @@ public:
 			glPopMatrix();
 			glPopAttrib();
 		}
+		
 	}
 	
 	void drawRigidBody(ramRigidBody& rigid)
@@ -122,5 +148,5 @@ public:
 private:
 	
 	ofMatrix4x4 shadowMat;
-
 };
+
