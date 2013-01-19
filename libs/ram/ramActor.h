@@ -20,7 +20,6 @@ public:
 	ramNode();
 	ramNode(const ramNode& copy) { *this = copy; }
 	ramNode& operator=(const ramNode& copy);
-	
 	const string& getName() { return name; }
 	int getID() { return node_id; }
 
@@ -39,7 +38,9 @@ public:
 	inline ofVec3f getAcceleration() { return accerelometer.acceleration; }
 	inline ofQuaternion getAngularVelocity() { return accerelometer.angular_velocity; }
 	inline ofQuaternion getAngularAcceleration() { return accerelometer.angular_acceleration; }
-
+	
+	operator ofVec3f() const {return getPosition();}
+	
 private:
 
 	int node_id;

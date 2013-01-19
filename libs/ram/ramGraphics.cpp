@@ -3,11 +3,9 @@
 #include "ramPhysics.h"
 #include "ramPrimitive.h"
 
-void ramBasicFloor(const float floorSize, const float tileSize)
+void ramBasicFloor(const float floorSize, const float tileSize, ofColor c1, ofColor c2)
 {
 	int division = floorSize/tileSize;
-	const ofColor& c1(200);
-	const ofColor& c2(230);
 	
 	ofPushStyle();
 	ofFill();
@@ -23,17 +21,14 @@ void ramBasicFloor(const float floorSize, const float tileSize)
 	
 	glNormal3f( 0.0f, 1.0f, 0.0f );
 	
-	glEnable(GL_DEPTH_TEST);
 	for (int i=0; i<division; i++)
 	{
 		for (int j=0; j<division; j++)
 		{
-			if ( ( i%2==0 && j%2== 0 ) || ( i%2==1 && j%2== 1 ) ) ofSetColor( c1 );
-			else ofSetColor( c2 );
+			ofSetColor( ( i%2==0 && j%2== 0 ) || ( i%2==1 && j%2== 1 ) ? c1 : c2 );
 			ofRect( i*tileSize, j*tileSize, tileSize, tileSize );
 		}
 	}
-	glDisable(GL_DEPTH_TEST);
 	
 	ofPopMatrix();
 	ofPopStyle();
