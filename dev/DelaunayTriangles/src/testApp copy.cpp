@@ -1,22 +1,15 @@
 #include "testApp.h"
-#include "ofxAutoControlPanel.h"
 
 
 static const string myActorName = "Ando_2012-09-01_18-49-10";
 
 
-// scenes
 #include "BigBox.h"
-#include "Balance.h"
-#include "Bullet.h"
 
-
+#include "ofxAutoControlPanel.h"
 ofxAutoControlPanel gui;
 vector<ramSceneBase*> scenes;
-BigBox bigbox;
-Balance balance;
-Bullet bullet;
-
+LengthenJoints joints;
 
 
 #pragma mark - oF methods
@@ -25,14 +18,12 @@ void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
-	ofBackground(230);
-	
-	ofEnableSmoothing();
-	ofEnableAlphaBlending();
+	ofBackground(0);
 	oscReceiver.setup(10000);
-	
+
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
+	
 	
 	// gui setup
 	ofxControlPanel::setTextColor(simpleColor(255,0,0,100));
@@ -40,38 +31,34 @@ void testApp::setup()
 	gui.setup(ofGetWidth()-100, ofGetHeight());
 	
 	// scenes
-	scenes.push_back(bigbox.getPtr());
-	scenes.push_back(balance.getPtr());
-	scenes.push_back(bullet.getPtr());
+	scenes.push_back(joints.getPtr());
 	
 	for (int i=0; i<scenes.size(); i++)
 	{
 		scenes.at(i)->setup();
 		scenes.at(i)->refreshControlPanel(gui);
 	}
+	
+	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+	glEnable(GL_LINE_SMOOTH);
+	
+	ramCameraManager::instance().getActiveCamera().setPosition(0, 300, 300);
+	ramCameraManager::instance().getActiveCamera().lookAt(ofVec3f(0,0,0));
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
 	oscReceiver.update();
-	
-	for (int i=0; i<scenes.size(); i++)
-	{
-		scenes.at(i)->update();
-	}
+	joints.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	
-	for (int i=0; i<scenes.size(); i++)
-	{
-		scenes.at(i)->draw();
-	}
+	ofBackgroundGradient( ofColor( 240 ), ofColor( 120 ) );
+	joints.draw();
 }
-
 
 
 
@@ -79,27 +66,20 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawFloor()
 {
-	ramBasicFloor(600., 50.);
+//	ramBasicFloor(600., 50., ofColor(255), ofColor(200));
 }
 
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	for (int i=0; i<scenes.size(); i++)
-	{
-		scenes.at(i)->drawActor(actor);
-	}
+	joints.drawActor(actor);
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
-	for (int i=0; i<scenes.size(); i++)
-	{
-		scenes.at(i)->drawRigid(rigid);
-	}
+	
 }
-
 
 
 
@@ -108,15 +88,7 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	switch (key)
-	{
-		case 'b':
-			bullet.cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
-			break;
-			
-		default:
-			break;
-	}
+	
 }
 
 //--------------------------------------------------------------

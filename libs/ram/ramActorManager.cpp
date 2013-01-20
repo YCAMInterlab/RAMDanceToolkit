@@ -27,11 +27,11 @@ void ramActorManager::update()
 void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 {
 	const std::string addr = m.getAddress();
-
+	
 	if (addr == RAM_OSC_ADDR_SKELETON)
 	{
 		const std::string name = m.getArgAsString(0);
-
+		
 		if (!actors.hasKey(name))
 		{
 			ramActor o;

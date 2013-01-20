@@ -86,7 +86,6 @@ public:
 	
 	void drawActor(ramActor& actor)
 	{
-		
 		bEnabled = guiPtr->getValueB(key_enabled);
 		if (!bEnabled) return;
 		

@@ -9,6 +9,7 @@ public:
 	virtual ~ramSceneBase(){}
 	
 	inline ramActorManager& getActorManager() { return ramActorManager::instance(); }
+	
 	virtual void refreshControlPanel(ofxAutoControlPanel& gui) {};
 	
 	virtual void setup() {}
@@ -36,6 +37,6 @@ protected:
 	void setSceneName(string name)
 	{
 		scene_name = name;
-		key_enabled = name + ": " + scene_name;
+		key_enabled = "Show: " + scene_name;
 	}
 };
