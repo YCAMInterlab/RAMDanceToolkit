@@ -4,7 +4,7 @@
 #include "ofxOsc.h"
 #include "ramActor.h"
 #include "ramActorManager.h"
-#include "ramSession.h"
+#include "ramCameraManager.h"
 
 class ramBaseApp : public ofBaseApp
 {
@@ -17,8 +17,10 @@ public:
 	virtual void drawFloor() {}
 	virtual void drawActor(ramActor &actor) {}
 	virtual void drawRigid(ramRigidBody &rigid) {}
-
+	
 	inline ramActorManager& getActorManager() { return ramActorManager::instance(); }
+	inline ramCameraManager& getCameraManager() { return ramCameraManager::instance(); }
+	inline ofCamera& getActiveCamera() { return ramCameraManager::instance().getActiveCamera(); }
 	
 	void updateWithOscMessage(const ofxOscMessage &m) { getActorManager().updateWithOscMessage(m); }
 

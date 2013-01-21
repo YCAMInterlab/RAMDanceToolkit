@@ -26,7 +26,7 @@ void ramBasicFloor(const int floorPattern,
 	if ( ofGetRectMode() != OF_RECTMODE_CENTER )
 	{
 		float w = division*tileSize;
-		ofTranslate( -w/2.0f+tileSize/2.0f, -w/2.0f+tileSize/2.0f );
+		ofTranslate( -w/2.0f, -w/2.0f );
 	}
 	
 	glNormal3f( 0.0f, 1.0f, 0.0f );
