@@ -37,19 +37,27 @@ namespace gl
 class BigBox : public ramSceneBase
 {
 
+	string key_master_size, key_line_width;
+	
 public:
 	
 	BigBox()
 	{
-		sceneName = "Big Box";
+		setSceneName("Big Box");
+		
+		// ---
+		
+		key_master_size = "Master size";
+		key_line_width = "line Width";
 	}
 	
 	void refreshControlPanel(ofxAutoControlPanel& gui)
 	{
 		guiPtr = &gui;
 		guiPtr->addPanel(getSceneName());
-		guiPtr->addSlider("master size", 10, 10, 1000);
-		guiPtr->addSlider("lineWidth", 10, 1, 100);
+		guiPtr->addToggle(key_enabled);
+		guiPtr->addSlider(key_master_size, 10, 10, 1000);
+		guiPtr->addSlider(key_line_width, 10, 1, 100);
 		
 		for (int i=0; i<ramActor::NUM_JOINTS; i++)
 			guiPtr->addSlider(ramActor::getJointName(i), 0, 0, 1000);
@@ -63,10 +71,11 @@ public:
 	
 	void update()
 	{
-		if(guiPtr->hasValueChanged("master size"))
+		if(guiPtr->hasValueChanged(key_master_size))
 		{
 			for (int i=0; i<23; i++)
-				guiPtr->setValueF(ramActor::getJointName(i), guiPtr->getValueF("master size"));
+				guiPtr->setValueF(ramActor::getJointName(i), guiPtr->getValueF(key_master_size));
+			guiPtr->clearAllChanged();
 		}
 	}
 	
@@ -77,16 +86,19 @@ public:
 	
 	void drawActor(ramActor& actor)
 	{
+		bEnabled = guiPtr->getValueB(key_enabled);
+		if (!bEnabled) return;
+		
 		ofColor currSklColor(110, 20, 20);
 		ofColor recSklColor(20, 20, 110);
 		ofColor shadowColor(0, 30);
-		float lineWidth = gui.getValueF("lineWidth");
+		float lineWidth = guiPtr->getValueF(key_line_width);
 		
 		for (int i=0; i<actor.getNumNode(); i++)
 		{
 			const ramNode &node = actor.getNode(i);
 			float boxSize = (i==ramActor::JOINT_HEAD) ? 6 : 3;
-			float bigBoxSize = gui.getValueF(getJointName(i));
+			float bigBoxSize = guiPtr->getValueF(getJointName(i));
 			
 			glPushAttrib(GL_ALL_ATTRIB_BITS);
 			glPushMatrix();
@@ -131,7 +143,6 @@ public:
 			glPopMatrix();
 			glPopAttrib();
 		}
-		
 	}
 	
 	void drawRigidBody(ramRigidBody& rigid)

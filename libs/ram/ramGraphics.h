@@ -22,5 +22,9 @@ inline void ofSphere(const ramNode& o, float radius)
 void ramBox(const ramNode& o, float size);
 void ramSphere(const ramNode& o, float radius);
 
-void ramBasicFloor(const float floorSize, const float tileSize, ofColor c1 = ofColor(200), ofColor c2 = ofColor(230));
+void ramBasicFloor(const float floorSize = 600.0,
+				   const float tileSize = 50.0,
+				   const ofColor& c1 = ofColor(60),
+				   const ofColor& c2 = ofColor(200));
+
 void ramBasicActor(ramActor& actor);

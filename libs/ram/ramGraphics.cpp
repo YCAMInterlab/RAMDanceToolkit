@@ -3,15 +3,21 @@
 #include "ramPhysics.h"
 #include "ramPrimitive.h"
 
-void ramBasicFloor(const float floorSize, const float tileSize, ofColor c1, ofColor c2)
+void ramBasicFloor(const float floorSize,
+				   const float tileSize,
+				   const ofColor& c1,
+				   const ofColor& c2)
 {
 	int division = floorSize/tileSize;
 	
 	ofPushStyle();
 	ofFill();
 	
+	
 	ofPushMatrix();
     ofRotate( 90.0f, 1.0f, 0.0f, 0.0f );
+	
+	glEnable(GL_DEPTH_TEST);
 	
 	if ( ofGetRectMode() != OF_RECTMODE_CENTER )
 	{
@@ -30,6 +36,7 @@ void ramBasicFloor(const float floorSize, const float tileSize, ofColor c1, ofCo
 		}
 	}
 	
+	glDisable(GL_DEPTH_TEST);
 	ofPopMatrix();
 	ofPopStyle();
 }

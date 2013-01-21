@@ -1,10 +1,12 @@
 #include "testApp.h"
-#include "ofxBt.h"
+#include "ofxAutoControlPanel.h"
+
 
 static const string myActorName = "Ando_2012-09-01_18-49-10";
+ofxAutoControlPanel gui;
 
-ramBoxPrimitive *cube;
-ramSpherePrimitive *sphere;
+#include "Bullet.h"
+Bullet bullet;
 
 
 #pragma mark - oF methods
@@ -14,39 +16,31 @@ void testApp::setup()
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
 	ofBackground(0);
-	oscReceiver.setup(10000);
+	oscReceiver.setup(10001);
 	
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
 	
-	
-	cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
-	sphere = new ramSpherePrimitive(ofVec3f(0, 0, 0), 50);
+	// gui setup
+	ofxControlPanel::setTextColor(simpleColor(255,0,0,100));
+	ofxControlPanel::setBackgroundColor(simpleColor(0,0,0,20));
+	gui.setup(ofGetWidth()-100, ofGetHeight());
+
+	bullet.setup();
+	bullet.refreshControlPanel(gui);
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
 	oscReceiver.update();
+	bullet.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	glEnable(GL_DEPTH_TEST);
-	glPushMatrix();
-	ramCameraBegin();
-	{
-		ofNoFill();
-		cube->draw();
-		sphere->draw();
-		ramPhysics::instance().debugDraw();
-	}
-	ramCameraEnd();
-	glPopMatrix();
-	glDisable(GL_DEPTH_TEST);
-	glPopAttrib();
+	bullet.draw();
 }
 
 
@@ -62,27 +56,13 @@ void testApp::drawFloor()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	glEnable(GL_DEPTH_TEST);
-	glPushMatrix();
-	ofPushStyle();
-	for (int i=0; i<actor.getNumNode(); i++)
-    {
-        ramNode &node = actor.getNode(i);
-		
-		ofNoFill();
-		ofSetColor(0, 255, 0);
-		ramBox(node, (i==ramActor::JOINT_HEAD) ? 6 : 3);
-    }
-	ofPopStyle();
-	glPopMatrix();
-	glDisable(GL_DEPTH_TEST);
-	glPopAttrib();
+	bullet.drawActor(actor);
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
+	
 }
 
 
@@ -92,7 +72,7 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
+//	cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
 }
 
 //--------------------------------------------------------------

@@ -12,3 +12,4 @@
 #include "ramGhost.h"
 #include "ramAnalyzer.h"
 #include "ramSession.h"
+#include "ramSceneBase.h"
