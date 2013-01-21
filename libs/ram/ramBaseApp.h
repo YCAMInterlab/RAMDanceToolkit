@@ -37,14 +37,12 @@ public:
     // events
 	void ramEnableAllEvents()
     {
-        ofAddListener(ofEvents().setup, this, &ramBaseApp::setup);
         ofAddListener(ofEvents().update, this, &ramBaseApp::update);
         ofAddListener(ofEvents().draw, this, &ramBaseApp::draw);
         ofAddListener(ofEvents().exit, this, &ramBaseApp::exit);
     }
 	void ramDisableAllEvents()
 	{
-		ofRemoveListener(ofEvents().setup, this, &ramBaseApp::setup);
 		ofRemoveListener(ofEvents().update, this, &ramBaseApp::update);
 		ofRemoveListener(ofEvents().draw, this, &ramBaseApp::draw);
 		ofRemoveListener(ofEvents().exit, this, &ramBaseApp::exit);

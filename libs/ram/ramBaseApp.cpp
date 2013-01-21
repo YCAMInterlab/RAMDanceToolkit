@@ -1,11 +1,5 @@
 #include "ramBaseApp.h"
-
 #include "ramCameraManager.h"
-
-void ramBaseApp::setup(ofEventArgs &args)
-{
-}
-
 
 void ramBaseApp::update(ofEventArgs &args)
 {
