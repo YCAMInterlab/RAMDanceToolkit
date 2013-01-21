@@ -9,6 +9,8 @@ public:
 	virtual ~ramSceneBase(){}
 	
 	inline ramActorManager& getActorManager() { return ramActorManager::instance(); }
+	inline ramActor& getActor(string name) { return ramActorManager::instance().getActor(name); }
+	inline ramRigidBody& getRigidBody(string name) { return ramActorManager::instance().getRigidBody(name); }
 	
 	virtual void refreshControlPanel(ofxAutoControlPanel& gui) {};
 	
@@ -24,7 +26,8 @@ public:
 	inline void toggle() { bEnabled ^= true; }
 	inline void setEnabled(bool b) { bEnabled = b; }
 	
-	string getSceneName() { return scene_name.empty() ? "no name" : scene_name; }
+	inline string getSceneKey() { return key_enabled; }
+	inline string getSceneName() { return scene_name.empty() ? "no name" : scene_name; }
 	
 	ramSceneBase* getPtr() { return this; }
 	

@@ -110,7 +110,6 @@ public:
 			glVertex3fv(p.pos.getPtr());
 		}
 		glEnd();
-		
 	}
 
 	void addForceFactor(ForceFactor *o)
@@ -135,7 +134,7 @@ class Gravity : public ofxSimpleParticleEngine::ForceFactor
 public:
 	void update(ofxSimpleParticleEngine::Particle& p)
 	{
-		p.force.y -= 0.03;
+		p.force.y -= 0.02;
 	}
 };
 

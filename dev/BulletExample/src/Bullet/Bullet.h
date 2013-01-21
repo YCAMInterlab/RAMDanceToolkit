@@ -26,7 +26,6 @@ public:
 	{
 		guiPtr = &gui;
 		guiPtr->addPanel(getSceneName());
-		guiPtr->addToggle(key_enabled);
 	}
 	
 	void update()

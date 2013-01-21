@@ -1,13 +1,15 @@
 #include "testApp.h"
 
 
+static const string myActorName = "Ando_2012-09-01_18-49-10";
+
+
+#include "BigBox.h"
+
 #include "ofxAutoControlPanel.h"
 ofxAutoControlPanel gui;
-
-
-#include "Future.h"
 vector<ramSceneBase*> scenes;
-Future future;
+LengthenJoints joints;
 
 
 #pragma mark - oF methods
@@ -17,60 +19,60 @@ void testApp::setup()
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
 	ofBackground(0);
-	
+	oscReceiver.setup(10000);
+
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
-	oscReceiver.setup(10000);
 	
-	//
-	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
-	glEnable(GL_LINE_SMOOTH);
-	// gui
-	ofxControlPanel::setTextColor(0xffffff);
-	ofxControlPanel::setBackgroundColor(0x000000);
-	gui.setup();
 	
-
-	/*!
-	 scenes setup
-	 */
-	scenes.push_back( future.getPtr() );
+	// gui setup
+	ofxControlPanel::setTextColor(simpleColor(255,0,0,100));
+	ofxControlPanel::setBackgroundColor(simpleColor(0,0,0,20));
+	gui.setup(ofGetWidth()-100, ofGetHeight());
 	
-	gui.addPanel("All Scenes");
-	gui.addToggle("Draw Actor", true);
-	for (int i=0; i<scenes.size(); i++)
-	{
-		string key = scenes.at(i)->getSceneKey();
-		gui.addToggle(key, false);
-	}
+	// scenes
+	scenes.push_back(joints.getPtr());
+	
 	for (int i=0; i<scenes.size(); i++)
 	{
 		scenes.at(i)->setup();
 		scenes.at(i)->refreshControlPanel(gui);
 	}
+	
+	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+	glEnable(GL_LINE_SMOOTH);
+	
+	ramCameraManager::instance().getActiveCamera().setPosition(0, 300, 300);
+	ramCameraManager::instance().getActiveCamera().lookAt(ofVec3f(0,0,0));
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
 	oscReceiver.update();
-	future.update();
-	
+	joints.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-    ofBackgroundGradient( ofColor( 240 ), ofColor( 60 ) );
-	ramCameraBegin();
-	future.draw();
-	ramCameraEnd();
+	ofBackgroundGradient( ofColor( 240 ), ofColor( 120 ) );
+	joints.draw();
+}
+
+
+
+#pragma mark - ram methods
+//--------------------------------------------------------------
+void testApp::drawFloor()
+{
+//	ramBasicFloor(600., 50., ofColor(255), ofColor(200));
 }
 
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramBasicActor(actor);
+	joints.drawActor(actor);
 }
 
 //--------------------------------------------------------------
@@ -80,26 +82,13 @@ void testApp::drawRigid(ramRigidBody &rigid)
 }
 
 
-#pragma mark - ram methods
-//--------------------------------------------------------------
-void testApp::drawFloor()
-{
-//	ramBasicFloor(600., 50.);
-}
-
 
 
 #pragma mark - oF Events
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	switch (key)
-	{
-//		case 'f': ofToggleFullscreen(); break;
-//		case 'a': bActor ^= true; break;
-//		case 's': bGhost ^= true; break;
-//		case 'd': bParticle ^= true; break;
-	}
+	
 }
 
 //--------------------------------------------------------------

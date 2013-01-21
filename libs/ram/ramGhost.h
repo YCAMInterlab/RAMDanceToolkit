@@ -7,8 +7,8 @@ class ramGhost
 public:
 	ramGhost() :
 	max_entities(10),
-	freshness(150),
-	emphasis(27)
+	distance(150),
+	speed(27)
 	{
 		clear();
 	}
@@ -38,11 +38,11 @@ public:
 			
 			ofVec3f d = (p0 - p1);
 			d.normalize();
-			d *= freshness;
+			d *= distance;
 			ofVec3f v = p0 + d;
 			ofVec3f f = ghostActor.getNode(i).getPosition();
 			
-			f += (v - f) * emphasis * 0.001;
+			f += (v - f) * speed * 0.001;
 			
 			ghostActor.getNode(i).setPosition(f);
 		}
@@ -66,11 +66,11 @@ public:
 			
 			ofVec3f d = (p0 - p1);
 			d.normalize();
-			d *= freshness;
+			d *= distance;
 			ofVec3f v = p0 + d;
 			ofVec3f f = ghostRigidBody.getNode(i).getPosition();
 			
-			f += (v - f) * emphasis * 0.001;
+			f += (v - f) * speed * 0.001;
 			
 			ghostRigidBody.getNode(i).setPosition(f);
 		}
@@ -79,12 +79,12 @@ public:
 	inline ramActor& getActor() { return ghostActor; }
 	inline ramRigidBody& getRigidBody() { return ghostRigidBody; }
 	
-	inline void setFreshness(const float f) { freshness = f; }
-	inline void setEmphasis(const float e) { emphasis = e; }
+	inline void setDistance(const float d) { distance = d; }
+	inline void setSpeed(const float s) { speed = s; }
 	inline void setMaxEntities(const unsigned int m) { max_entities = m; }
 	
-	inline float getFreshness() { return freshness; }
-	inline float getEmphasis() { return emphasis; }
+	inline float getdistance() { return distance; }
+	inline float getspeed() { return speed; }
 	inline unsigned int getMaxEntities() { return max_entities; }
 	
 protected:
@@ -94,5 +94,5 @@ protected:
 	ramRigidBody ghostRigidBody;
 	
 	unsigned int max_entities;
-	float freshness, emphasis;
+	float distance, speed;
 };
