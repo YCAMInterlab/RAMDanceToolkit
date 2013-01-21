@@ -63,6 +63,7 @@ namespace gl
 		
 		for(int y = 0; y < 4;++y) {
 			for(int x = 0; x < 4; ++x) {
+
 				shadowMatrix[y*4+x] = - groundplane[y]*lightpos[x];
 				
 				if (x == y) shadowMatrix[y*4+x] += dot;

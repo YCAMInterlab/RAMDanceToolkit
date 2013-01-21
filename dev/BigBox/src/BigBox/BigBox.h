@@ -113,6 +113,7 @@ public:
 		ramCameraEnd();
 	}
 	
+	
 	void drawActor(ramActor& actor)
 	{
 		
@@ -122,10 +123,9 @@ public:
 	{
 		
 	}
-	
 	void drawFloor()
 	{
 		
-	}	
+	}
 };
 
