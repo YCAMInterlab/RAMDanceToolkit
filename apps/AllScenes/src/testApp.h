@@ -1,8 +1,13 @@
 #pragma once
 
 #include "ofMain.h"
-
 #include "ramMain.h"
+
+
+static const string myActorName = "Ando_2012-09-01_18-49-10";
+//static const string myActorName = "default";
+
+
 
 class testApp : public ramBaseApp
 {
@@ -34,4 +39,5 @@ public:
 	// ...
 	// ------------------------
 	ramOscReceiver oscReceiver;
+	
 };

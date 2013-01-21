@@ -1,21 +1,10 @@
 #include "testApp.h"
+
+// gui
 #include "ofxAutoControlPanel.h"
-
-
-static const string myActorName = "Ando_2012-09-01_18-49-10";
-
-
-// scenes
-#include "BigBox.h"
-#include "Balance.h"
-#include "Bullet.h"
-
 
 ofxAutoControlPanel gui;
 vector<ramSceneBase*> scenes;
-BigBox bigbox;
-Balance balance;
-Bullet bullet;
 
 
 
@@ -27,23 +16,34 @@ void testApp::setup()
 	ofSetVerticalSync(true);
 	ofBackground(230);
 	
-	ofEnableSmoothing();
-	ofEnableAlphaBlending();
+	/*!
+		ramBaseApp setup
+	 */
+	ramEnableAllEvents();
 	oscReceiver.setup(10000);
 	
-	// enable ramBaseApp::setup, update, draw, exit
-	ramEnableAllEvents();
 	
-	// gui setup
-	ofxControlPanel::setTextColor(simpleColor(255,0,0,100));
-	ofxControlPanel::setBackgroundColor(simpleColor(0,0,0,20));
-	gui.setup(ofGetWidth()-100, ofGetHeight());
+	/*!
+		gui setup
+	 */
+	ofxControlPanel::setTextColor(simpleColor(255, 255, 255, 100));
+	ofxControlPanel::setBackgroundColor(simpleColor(0, 0, 0, 90));
+	gui.setup();
 	
-	// scenes
-	scenes.push_back(bigbox.getPtr());
-	scenes.push_back(balance.getPtr());
-	scenes.push_back(bullet.getPtr());
 	
+	gui.addPanel("Config");
+	vector<string> floors;
+	floors.push_back("CHECKER_PATTERN");
+	floors.push_back("GRID_LINES");
+	floors.push_back("NONE");
+	gui.addSlider("Background", 0, 0, 255);
+	gui.addMultiToggle("Floor pattern", 0, floors);
+	gui.addSlider("Floor size", 600.0, 100.0, 1000.0);
+	gui.addSlider("Grid size", 50.0, 10.0, 100.0);
+	
+	/*!
+	 scenes setup
+	 */
 	for (int i=0; i<scenes.size(); i++)
 	{
 		scenes.at(i)->setup();
@@ -57,19 +57,20 @@ void testApp::update()
 	oscReceiver.update();
 	
 	for (int i=0; i<scenes.size(); i++)
-	{
 		scenes.at(i)->update();
+	
+	if (gui.hasValueChanged( variadic("Background") ))
+	{
+		ofBackground(gui.getValueF("Background"));
+		gui.clearAllChanged();
 	}
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	
 	for (int i=0; i<scenes.size(); i++)
-	{
 		scenes.at(i)->draw();
-	}
 }
 
 
@@ -79,25 +80,23 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawFloor()
 {
-	ramBasicFloor(600., 50.);
+	ramBasicFloor(gui.getValueI("Floor pattern"),
+				  gui.getValueF("Floor size"),
+				  gui.getValueF("Grid size"));
 }
 
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
 	for (int i=0; i<scenes.size(); i++)
-	{
 		scenes.at(i)->drawActor(actor);
-	}
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
 	for (int i=0; i<scenes.size(); i++)
-	{
 		scenes.at(i)->drawRigid(rigid);
-	}
 }
 
 
@@ -108,15 +107,7 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	switch (key)
-	{
-		case 'b':
-			bullet.cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
-			break;
-			
-		default:
-			break;
-	}
+
 }
 
 //--------------------------------------------------------------
