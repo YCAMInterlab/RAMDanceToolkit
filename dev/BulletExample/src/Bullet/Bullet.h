@@ -26,7 +26,6 @@ public:
 	{
 		guiPtr = &gui;
 		guiPtr->addPanel(getSceneName());
-		guiPtr->addToggle(key_enabled);
 	}
 	
 	void update()
@@ -89,7 +88,7 @@ public:
 	}
 	
 	
-#pragma -
+#pragma - Scene original events & methods
 	
 	
 	void keyPressed(ofEventArgs &e)

@@ -28,6 +28,6 @@ void ramBasicFloor(const int floorPattern,
 				   const ofColor& c1 = ofColor(60),
 				   const ofColor& c2 = ofColor(230));
 
-void ramBasicActor(ramActor& actor);
+void ramBasicActor(ramActor& actor, float* matrixPtr = NULL);
 
 

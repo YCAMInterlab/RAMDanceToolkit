@@ -19,12 +19,20 @@ ofVec3f camPos[] =
 	ofVec3f(-450, 50, 450)	/* EDGE_FL */
 };
 
+
 /*!
  Scenes
  */
+#include "BigBox.h"
+#include "Future.h"
+#include "Bullet.h"
 vector<ramSceneBase*> scenes;
+BigBox bigbox;
+Bullet bullet;
+Future future;
 
 
+ofMatrix4x4 shadowMat;
 
 
 #pragma mark - oF methods
@@ -33,13 +41,17 @@ void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
-	ofBackground(ramColors[COLOR_GRAY]);
+	ofBackground(ramColors[COLOR_WHITE]);
+	
 	
 	/*!
 	 ramBaseApp setup
 	 */
 	ramEnableAllEvents();
 	oscReceiver.setup(10000);
+	
+	const float lightPosition[] = { -100.0f, 500.0f, 200.0f };
+	gl::calcShadowMatrix( gl::kGroundPlaneYUp, lightPosition, shadowMat.getPtr() );
 	
 	
 	/*!
@@ -80,20 +92,40 @@ void testApp::setup()
 	/*!
 	 scenes setup
 	 */
+	scenes.push_back( future.getPtr() );
+	scenes.push_back( bigbox.getPtr() );
+	scenes.push_back( bullet.getPtr() );
+		
+	gui.addPanel("All Scenes");
+	gui.addToggle("Draw Actor", true);
+	for (int i=0; i<scenes.size(); i++)
+	{
+		string key = scenes.at(i)->getSceneKey();
+		gui.addToggle(key, false);
+	}
 	for (int i=0; i<scenes.size(); i++)
 	{
 		scenes.at(i)->setup();
+		scenes.at(i)->setMatrix(shadowMat);
 		scenes.at(i)->refreshControlPanel(gui);
 	}
+	scenes.at(0)->enable();
+	getActiveCamera().setPosition(camPos[0]);
+	getActiveCamera().lookAt(ofVec3f(0,170,0));
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
+	
+	/* Entities update */
 	oscReceiver.update();
 	
+	
+	/* Scenes update */
 	for (int i=0; i<scenes.size(); i++)
 		scenes.at(i)->update();
+	
 	
 	/* GUI: camera */
 	if (gui.hasValueChanged("Camera Position"))
@@ -107,6 +139,7 @@ void testApp::update()
 		gui.clearAllChanged();
 	}
 	
+	
 	/* GUI: floor */
 	if (gui.hasValueChanged("Background"))
 	{
@@ -119,7 +152,7 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	
+	/* Scenes draw */
 	for (int i=0; i<scenes.size(); i++)
 		scenes.at(i)->draw();
 }
@@ -141,7 +174,11 @@ void testApp::drawFloor()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramBasicActor(actor);
+	if ( gui.getValueB("Draw Actor") )
+	{
+		ramBasicActor(actor, shadowMat.getPtr());
+	}
+	
 	
 	for (int i=0; i<scenes.size(); i++)
 		scenes.at(i)->drawActor(actor);
@@ -162,7 +199,12 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	
+//	switch (key)
+//	{
+//		case 'b':
+//			bullet.cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
+//			break;
+//	}
 }
 
 //--------------------------------------------------------------
