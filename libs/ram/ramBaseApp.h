@@ -53,13 +53,40 @@ public:
 	// physics
 	virtual void collision(const ramNode& jointA, const ramNode& jointB) {}
     
+	
 	enum FloorPattern
 	{
-		RAM_FLOOR_CHECKER_PATTERN = 0,
-		RAM_FLOOR_GRID_LINES = 1,
-		RAM_FLOOR_NONE = 2
+		FLOOR_PLANE				= 0,
+		FLOOR_CHECKER_PATTERN	= 1,
+		FLOOR_GRID_LINES		= 2,
+		FLOOR_NONE				= 3
 	};
 	
+	enum ColorId
+	{
+		COLOR_RED_NORMAL	= 0,
+		COLOR_RED_DEEP		= 1,
+		COLOR_RED_LIGHT		= 2,
+		
+		COLOR_GREEN_NORMAL	= 3,
+		COLOR_GREEN_DEEP	= 4,
+		COLOR_GREEN_LIGHT	= 5,
+		
+		COLOR_BLUE_NORMAL	= 6,
+		COLOR_BLUE_DEEP		= 7,
+		COLOR_BLUE_LIGHT	= 8,
+		
+		COLOR_YELLOW_NORMAL = 9,
+		COLOR_YELLOW_DEEP	= 10,
+		COLOR_YELLOW_LIGHT  = 11,
+		
+		COLOR_BLACK	= 12,
+		COLOR_GRAY	= 13,
+		COLOR_WHITE	= 14,
+		
+		NUM_COLORS = 15
+	};
+
 private:
 	
 	// event callback

@@ -2,6 +2,7 @@
 #include "ramGraphics.h"
 #include "ramPhysics.h"
 #include "ramPrimitive.h"
+#include "ramUtils.h"
 
 void ramBasicFloor(const int floorPattern,
 				   const float floorSize,
@@ -10,20 +11,19 @@ void ramBasicFloor(const int floorPattern,
 				   const ofColor& c2)
 {
 	
-	if (floorPattern == ramBaseApp::RAM_FLOOR_NONE) return;
+	if (floorPattern == ramBaseApp::FLOOR_NONE) return;
 	
 	int division = floorSize/tileSize;
 	
 	ofPushStyle();
-	ofFill();
-	
+	ofSetLineWidth(1.0);
 	
 	ofPushMatrix();
     ofRotate( 90.0f, 1.0f, 0.0f, 0.0f );
 	
 	glEnable(GL_DEPTH_TEST);
 	
-	if ( ofGetRectMode() != OF_RECTMODE_CENTER )
+	if (ofGetRectMode() != OF_RECTMODE_CENTER)
 	{
 		float w = division*tileSize;
 		ofTranslate( -w/2.0f, -w/2.0f );
@@ -31,23 +31,33 @@ void ramBasicFloor(const int floorPattern,
 	
 	glNormal3f( 0.0f, 1.0f, 0.0f );
 	
+	
+	if(floorPattern == ramBaseApp::FLOOR_PLANE)
+	{
+		ofFill();
+		ofSetColor(c1);
+		ofRect(0, 0, 0, division*tileSize, division*tileSize);
+	}
+	
 	for (int i=0; i<division; i++)
 	{
 		for (int j=0; j<division; j++)
 		{
 			switch (floorPattern)
 			{
-				case ramBaseApp::RAM_FLOOR_CHECKER_PATTERN :
+					
+				case ramBaseApp::FLOOR_CHECKER_PATTERN :
 					ofFill();
 					ofSetColor( ( i%2==0 && j%2== 0 ) || ( i%2==1 && j%2== 1 ) ? c1 : c2 );
+					ofRect( i*tileSize, j*tileSize, tileSize, tileSize );
 					break;
 					
-				case ramBaseApp::RAM_FLOOR_GRID_LINES :
+				case ramBaseApp::FLOOR_GRID_LINES :
 					ofNoFill();
 					ofSetColor(c1);
+					ofRect( i*tileSize, j*tileSize, tileSize, tileSize );
 					break;
 			}
-			ofRect( i*tileSize, j*tileSize, tileSize, tileSize );
 		}
 	}
 	
@@ -63,12 +73,19 @@ void ramBasicActor(ramActor& actor)
 	for (int i=0; i<actor.getNumNode(); i++)
 	{
 		ramNode &node = actor.getNode(i);
+		
+		float jointSize = (i==ramActor::JOINT_HEAD) ? 6.0 : 3.0;
+		
 		node.transformBegin();
-		ofBox( i==(ramActor::JOINT_HEAD) ? 6 : 3 );
+		ofSetColor(ramColors[ramBaseApp::COLOR_YELLOW_LIGHT]);
+		ofBox(jointSize);
 		node.transformEnd();
 		
 		if (node.hasParent())
+		{
+			ofSetColor(ramColors[ramBaseApp::COLOR_YELLOW_LIGHT]-40.0);
 			ofLine(node, *node.getParent());
+		}
 	}
 	glDisable(GL_DEPTH_TEST);
 }
