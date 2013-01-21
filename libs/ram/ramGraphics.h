@@ -26,7 +26,7 @@ void ramBasicFloor(const int floorPattern,
 				   const float floorSize = 600.0,
 				   const float tileSize = 50.0,
 				   const ofColor& c1 = ofColor(60),
-				   const ofColor& c2 = ofColor(200));
+				   const ofColor& c2 = ofColor(230));
 
 void ramBasicActor(ramActor& actor);
 

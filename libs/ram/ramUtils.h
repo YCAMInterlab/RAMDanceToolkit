@@ -81,3 +81,52 @@ private:
 	vector<string> hash_keys;
 
 };
+
+
+
+
+#pragma mark - ramColor
+
+/* Red */
+const ofColor ramColorRedNormal = ofColor::fromHex(0xff6666);
+const ofColor ramColorRedDeep = ofColor::fromHex(0x993333);
+const ofColor ramColorRedLight = ofColor::fromHex(0xff9898);
+
+/* Blue */
+const ofColor ramColorBlueNormal = ofColor::fromHex(0x66cc33);
+const ofColor ramColorBlueDeep = ofColor::fromHex(0x339900);
+const ofColor ramColorBlueLight = ofColor::fromHex(0x99cc99);
+
+/* Green */
+const ofColor ramColorGreenNormal = ofColor::fromHex(0x0099cc);
+const ofColor ramColorGreenDeep = ofColor::fromHex(0x003366);
+const ofColor ramColorGreenLight = ofColor::fromHex(0x99cccc);
+
+/* Yellow */
+const ofColor ramColorYellowNormal = ofColor::fromHex(0xffcc00);
+const ofColor ramColorYellowDeep = ofColor::fromHex(0xcc9900);
+const ofColor ramColorYellowLight = ofColor::fromHex(0xffff00);
+
+/* Black, Gray, White */
+const ofColor ramColorBlack = ofColor::fromHex(0x000000);
+const ofColor ramColorGray = ofColor::fromHex(0x666666);
+const ofColor ramColorWhite = ofColor::fromHex(0xffffff);
+
+const ofColor ramColors[] =
+{
+	ramColorRedNormal,
+	ramColorRedDeep,
+	ramColorRedLight,
+	ramColorBlueNormal,
+	ramColorBlueDeep,
+	ramColorBlueLight,
+	ramColorGreenNormal,
+	ramColorGreenDeep,
+	ramColorGreenLight,
+	ramColorYellowNormal,
+	ramColorYellowDeep,
+	ramColorYellowLight,
+	ramColorBlack,
+	ramColorGray,
+	ramColorWhite
+};
