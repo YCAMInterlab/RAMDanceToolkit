@@ -1,13 +1,17 @@
+#include "ramBaseApp.h"
 #include "ramGraphics.h"
-
 #include "ramPhysics.h"
 #include "ramPrimitive.h"
 
-void ramBasicFloor(const float floorSize,
+void ramBasicFloor(const int floorPattern,
+				   const float floorSize,
 				   const float tileSize,
 				   const ofColor& c1,
 				   const ofColor& c2)
 {
+	
+	if (floorPattern == ramBaseApp::RAM_FLOOR_NONE) return;
+	
 	int division = floorSize/tileSize;
 	
 	ofPushStyle();
@@ -31,7 +35,18 @@ void ramBasicFloor(const float floorSize,
 	{
 		for (int j=0; j<division; j++)
 		{
-			ofSetColor( ( i%2==0 && j%2== 0 ) || ( i%2==1 && j%2== 1 ) ? c1 : c2 );
+			switch (floorPattern)
+			{
+				case ramBaseApp::RAM_FLOOR_CHECKER_PATTERN :
+					ofFill();
+					ofSetColor( ( i%2==0 && j%2== 0 ) || ( i%2==1 && j%2== 1 ) ? c1 : c2 );
+					break;
+					
+				case ramBaseApp::RAM_FLOOR_GRID_LINES :
+					ofNoFill();
+					ofSetColor(c1);
+					break;
+			}
 			ofRect( i*tileSize, j*tileSize, tileSize, tileSize );
 		}
 	}

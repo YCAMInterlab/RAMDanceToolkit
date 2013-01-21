@@ -2,6 +2,11 @@
 
 #include "ramCameraManager.h"
 
+void ramBaseApp::setup(ofEventArgs &args)
+{
+}
+
+
 void ramBaseApp::update(ofEventArgs &args)
 {
     getActorManager().update();
@@ -37,5 +42,5 @@ void ramBaseApp::draw(ofEventArgs &args)
 
 void ramBaseApp::exit(ofEventArgs &args)
 {
-
+	ramDisableAllEvents();
 }
