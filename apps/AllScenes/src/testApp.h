@@ -39,7 +39,7 @@ public:
 	// ...
 	// ------------------------
 	ramOscReceiver oscReceiver;
-	
+	void updateSceneVariables();
 };
 
 

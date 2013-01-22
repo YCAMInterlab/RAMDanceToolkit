@@ -33,15 +33,15 @@ public:
 		key_toggle_pe = "Salt";
 	}
 	
-	void refreshControlPanel(ofxAutoControlPanel& gui)
+	void refreshControlPanel(ramControlPanel& gui)
 	{
 		guiPtr = &gui;
 		
 		gui.addPanel("Future");
-		gui.addToggle(key_toggle_draw);
+		gui.addToggle(key_toggle_draw, true);
 		gui.addToggle(key_toggle_pe);
-		gui.addSlider(key_slider_speed, 20, 0, 1000);
-		gui.addSlider(key_slider_distance, 20, 0, 1000);
+		gui.addSlider(key_slider_speed, 200, 0, 1000);
+		gui.addSlider(key_slider_distance, 60, 0, 1000);
 	}
 	
 	void setup()
@@ -71,11 +71,14 @@ public:
 			
 			ghost.setSpeed(speed);
 			ghost.setDistance(distance);
-			guiPtr->clearAllChanged();
+			// guiPtr->clearAllChanged();
 		}
 		
-		if(guiPtr->hasValueChanged( getSceneKey() ))
-			bEnabled = guiPtr->getValueF( getSceneKey() );
+		if(guiPtr->hasValueChanged( getSceneEnableKey() ))
+		{
+			bEnabled = guiPtr->getValueF( getSceneEnableKey() );
+			// guiPtr->clearAllChanged();
+		}
 	}
 	
 	void draw()
@@ -86,7 +89,7 @@ public:
 		ofPushStyle();
 		ofNoFill();
 		
-		ofColor shadowColor = ramColors[ramBaseApp::COLOR_GRAY];
+		ofColor shadowColor = getRamColor(ramColor::GRAY);
 		shadowColor.a = 50;
 		
 		ramCameraBegin();
@@ -99,20 +102,20 @@ public:
 				
 				glEnable(GL_DEPTH_TEST);
 				node.transformBegin();
-				ofSetColor(ramColors[ramBaseApp::COLOR_RED_DEEP]);
+				ofSetColor( getRamColor(ramColor::RED_DEEP) );
 				ofBox(boxSize);
 				node.transformEnd();
 				
 				if (node.hasParent())
 				{
-					ofSetColor(ramColors[ramBaseApp::COLOR_RED_LIGHT]-40.0);
+					ofSetColor( getRamColor(ramColor::RED_LIGHT) - 40.0);
 					ofLine(node, *node.getParent());
 				}
 				
 				/*!
 				 shadows
 				 */
-				ofColor shadowColor = ramColors[ramBaseApp::COLOR_GRAY];
+				ofColor shadowColor = getRamColor(ramColor::GRAY);
 				shadowColor.a = 90;
 				glPushMatrix();
 				glDisable(GL_DEPTH_TEST);

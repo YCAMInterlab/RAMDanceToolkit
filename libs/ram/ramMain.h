@@ -13,3 +13,4 @@
 #include "ramAnalyzer.h"
 #include "ramSession.h"
 #include "ramSceneBase.h"
+#include "ramControlPanel.h"
