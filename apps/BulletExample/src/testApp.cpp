@@ -1,7 +1,7 @@
 #include "testApp.h"
 
 
-const string DATAFOLDER_PATH = "../../../AllScenes/bin/data/";
+static const string DATAFOLDER_PATH = "../../../AllScenes/bin/data/";
 
 
 /*!
@@ -15,12 +15,8 @@ vector<ramCameraSettings> setting_cam;
 /*!
  Scenes
  */
-#include "BigBox.h"
 #include "Bullet.h"
-#include "Future.h"
-BigBox bigbox;
 Bullet bullet;
-Future future;
 
 
 #pragma mark - oF methods
@@ -43,19 +39,22 @@ void testApp::setup()
 	
 	
 	/*!
-	 gui setup
+	 GUI setup
 	 */
 	gui.setup();
 	gui.loadFont(DATAFOLDER_PATH + "Fonts/din-webfont.ttf", 11);
+	
+	/* camera */
+	setting_cam = ramCameraSettings::getSettings(camSettingXml);
+	gui.addMultiToggle("Camera Position", 0, ramCameraSettings::getCamNames(camSettingXml));
 	
 	
 	/*!
 	 scenes setup
 	 */
-	scenes.push_back( bigbox.getPtr() );
-	scenes.push_back( future.getPtr() );
 	scenes.push_back( bullet.getPtr() );
 	
+	/* adding GUI Panel for each scene */
 	gui.addPanel("All Scenes");
 	gui.addToggle("Draw Actor", true);
 	for (int i=0; i<scenes.size(); i++)
@@ -66,15 +65,14 @@ void testApp::setup()
 	for (int i=0; i<scenes.size(); i++)
 	{
 		scenes.at(i)->setup();
-		scenes.at(i)->setMatrix(shadowMat);
 		scenes.at(i)->refreshControlPanel(gui);
+		scenes.at(i)->setMatrix(shadowMat);
 	}
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-	
 	/* Entities update */
 	oscReceiver.update();
 	
@@ -98,6 +96,7 @@ void testApp::update()
 	/* GUI: floor */
 	if (gui.hasValueChanged("Background"))
 	{
+		cout << 1 << endl;
 		float bgcolor = gui.getValueF("Background");
 		ofBackground(bgcolor);
 	}
@@ -110,7 +109,6 @@ void testApp::draw()
 	for (int i=0; i<scenes.size(); i++)
 		scenes.at(i)->draw();
 }
-
 
 
 
@@ -137,10 +135,8 @@ void testApp::drawActor(ramActor &actor)
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
-	for (int i=0; i<scenes.size(); i++)
-		scenes.at(i)->drawRigid(rigid);
+	
 }
-
 
 
 
@@ -149,12 +145,7 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	switch (key)
-	{
-		case 'b':
-			bullet.cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
-			break;
-	}
+	
 }
 
 //--------------------------------------------------------------
@@ -204,3 +195,4 @@ void testApp::dragEvent(ofDragInfo dragInfo)
 {
 	
 }
+
