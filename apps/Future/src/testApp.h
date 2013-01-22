@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 #include "ramMain.h"
+#include "ofxXmlSettings.h"
+
 
 /*!
  for debuging....
@@ -44,4 +46,11 @@ public:
 	ramControlPanel gui;
 	
 	ofMatrix4x4 shadowMat;
+	
+	
+	// Setting files
+	// ------------------------
+	
+	ofxXmlSettings camSettingXml;
+	vector<ramCameraSettings> setting_cam;
 };

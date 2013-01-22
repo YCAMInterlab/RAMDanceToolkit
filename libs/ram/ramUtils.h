@@ -103,10 +103,10 @@ public:
 	{
 		string name[NUM_FLOOR_PATTERNS] =
 		{
+			"NONE",
 			"PLANE",
 			"CHECKER_PATTERN",
-			"GRID_LINES",
-			"NONE"
+			"GRID_LINES"
 		};
 		
 		vector<string> floorNames;

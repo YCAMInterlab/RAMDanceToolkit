@@ -4,13 +4,6 @@
 static const string DATAFOLDER_PATH = "../../../AllScenes/bin/data/";
 
 
-/*!
- Setting files
- */
-#include "ofxXmlSettings.h"
-ofxXmlSettings camSettingXml(DATAFOLDER_PATH + "settings.camera.xml");
-vector<ramCameraSettings> setting_cam;
-
 
 /*!
  Scenes

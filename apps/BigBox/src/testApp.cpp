@@ -5,14 +5,6 @@ static const string DATAFOLDER_PATH = "../../../AllScenes/bin/data/";
 
 
 /*!
- Setting files
- */
-#include "ofxXmlSettings.h"
-ofxXmlSettings camSettingXml(DATAFOLDER_PATH + "settings.camera.xml");
-vector<ramCameraSettings> setting_cam;
-
-
-/*!
  Scenes
  */
 #include "BigBox.h"
@@ -45,6 +37,7 @@ void testApp::setup()
 	gui.loadFont(DATAFOLDER_PATH + "Fonts/din-webfont.ttf", 11);
 	
 	/* camera */
+	camSettingXml.loadFile(DATAFOLDER_PATH + "settings.camera.xml");
 	setting_cam = ramCameraSettings::getSettings(camSettingXml);
 	gui.addMultiToggle("Camera Position", 0, ramCameraSettings::getCamNames(camSettingXml));
 	
