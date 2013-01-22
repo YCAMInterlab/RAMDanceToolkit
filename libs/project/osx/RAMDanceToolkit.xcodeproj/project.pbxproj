@@ -435,6 +435,14 @@
 		9A598CFF1648DE150066DF10 /* ramBaseApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramBaseApp.h; sourceTree = "<group>"; };
 		9A598D041648E5350066DF10 /* ramNodeFinder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ramNodeFinder.h; sourceTree = "<group>"; };
 		9A7CD0DE16AA5C96008405D7 /* ramSceneBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ramSceneBase.h; sourceTree = "<group>"; };
+		9AD3317916AE53BF0003FD7D /* tinyxml.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
+		9AD3317A16AE53BF0003FD7D /* tinyxml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
+		9AD3317B16AE53BF0003FD7D /* tinyxmlerror.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
+		9AD3317C16AE53BF0003FD7D /* tinyxmlparser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
+		9AD3317E16AE53BF0003FD7D /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
+		9AD3317F16AE53BF0003FD7D /* ofxXmlSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
+		9AD3318116AE55EF0003FD7D /* ramUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ramUtils.cpp; sourceTree = "<group>"; };
+		9AD3318816AE6EBF0003FD7D /* ramControlPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ramControlPanel.h; sourceTree = "<group>"; };
 		9AE9587216A8417A00BC63F6 /* ramAnalyzer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ramAnalyzer.h; sourceTree = "<group>"; };
 		9AE9588F16A91B6600BC63F6 /* ramSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSession.h; sourceTree = "<group>"; };
 		9AF8FB3C16A7A89A000A1948 /* ramOscReciever.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ramOscReciever.h; sourceTree = "<group>"; };
@@ -459,6 +467,7 @@
 		607D7ACC16661B860063800A /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				9AD3317716AE53BF0003FD7D /* ofxXmlSettings */,
 				607D7ACD16661B940063800A /* ofxBt */,
 			);
 			name = addons;
@@ -847,6 +856,7 @@
 			isa = PBXGroup;
 			children = (
 				60B90A971644E06D00AF2156 /* ram */,
+				9AD3318116AE55EF0003FD7D /* ramUtils.cpp */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -878,9 +888,40 @@
 				9AFD62A116A7C96D00942334 /* ramGhost.h */,
 				9AE9587216A8417A00BC63F6 /* ramAnalyzer.h */,
 				9A7CD0DE16AA5C96008405D7 /* ramSceneBase.h */,
+				9AD3318816AE6EBF0003FD7D /* ramControlPanel.h */,
 			);
 			name = ram;
 			path = ../../ram;
+			sourceTree = "<group>";
+		};
+		9AD3317716AE53BF0003FD7D /* ofxXmlSettings */ = {
+			isa = PBXGroup;
+			children = (
+				9AD3317816AE53BF0003FD7D /* libs */,
+				9AD3317D16AE53BF0003FD7D /* src */,
+			);
+			name = ofxXmlSettings;
+			path = ../../../../addons/ofxXmlSettings;
+			sourceTree = "<group>";
+		};
+		9AD3317816AE53BF0003FD7D /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				9AD3317916AE53BF0003FD7D /* tinyxml.cpp */,
+				9AD3317A16AE53BF0003FD7D /* tinyxml.h */,
+				9AD3317B16AE53BF0003FD7D /* tinyxmlerror.cpp */,
+				9AD3317C16AE53BF0003FD7D /* tinyxmlparser.cpp */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		9AD3317D16AE53BF0003FD7D /* src */ = {
+			isa = PBXGroup;
+			children = (
+				9AD3317E16AE53BF0003FD7D /* ofxXmlSettings.cpp */,
+				9AD3317F16AE53BF0003FD7D /* ofxXmlSettings.h */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

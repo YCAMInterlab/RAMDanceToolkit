@@ -11,7 +11,7 @@ void ramBasicFloor(const int floorPattern,
 				   const ofColor& c2)
 {
 	
-	if (floorPattern == ramBaseApp::FLOOR_NONE) return;
+	if (floorPattern == ramFloor::FLOOR_NONE) return;
 	
 	int division = floorSize/tileSize;
 	
@@ -32,7 +32,7 @@ void ramBasicFloor(const int floorPattern,
 	glNormal3f( 0.0f, 1.0f, 0.0f );
 	
 	
-	if(floorPattern == ramBaseApp::FLOOR_PLANE)
+	if(floorPattern == ramFloor::FLOOR_PLANE)
 	{
 		ofFill();
 		ofSetColor(c1);
@@ -46,13 +46,13 @@ void ramBasicFloor(const int floorPattern,
 			switch (floorPattern)
 			{
 					
-				case ramBaseApp::FLOOR_CHECKER_PATTERN :
+				case ramFloor::FLOOR_CHECKER_PATTERN :
 					ofFill();
 					ofSetColor( ( i%2==0 && j%2== 0 ) || ( i%2==1 && j%2== 1 ) ? c1 : c2 );
 					ofRect( i*tileSize, j*tileSize, tileSize, tileSize );
 					break;
 					
-				case ramBaseApp::FLOOR_GRID_LINES :
+				case ramFloor::FLOOR_GRID_LINES :
 					ofNoFill();
 					ofSetColor(c1);
 					ofRect( i*tileSize, j*tileSize, tileSize, tileSize );
@@ -78,20 +78,20 @@ void ramBasicActor(ramActor& actor, float* matrixPtr)
 		float jointSize = (i==ramActor::JOINT_HEAD) ? 6.0 : 3.0;
 		
 		node.transformBegin();
-		ofSetColor(ramColors[ramBaseApp::COLOR_YELLOW_LIGHT]);
+		ofSetColor( getRamColor(ramColor::YELLOW_LIGHT) );
 		ofBox(jointSize);
 		node.transformEnd();
 		
 		if (node.hasParent())
 		{
-			ofSetColor(ramColors[ramBaseApp::COLOR_YELLOW_LIGHT]-40.0);
+			ofSetColor(getRamColor(ramColor::YELLOW_LIGHT)-40.0);
 			ofLine(node, *node.getParent());
 		}
 		
 		
 		if (matrixPtr != NULL)
 		{
-			ofColor shadowColor = ramColors[ramBaseApp::COLOR_GRAY];
+			ofColor shadowColor = getRamColor(ramColor::GRAY);
 			shadowColor.a = 50;
 			glPushMatrix();
 			glDisable(GL_DEPTH_TEST);

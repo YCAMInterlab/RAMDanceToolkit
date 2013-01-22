@@ -1,6 +1,6 @@
 #pragma once
 #include "ofMain.h"
-#include "ofxAutoControlPanel.h"
+#include "ramControlPanel.h"
 
 class ramSceneBase
 {
@@ -12,7 +12,7 @@ public:
 	inline ramActor& getActor(string name) { return ramActorManager::instance().getActor(name); }
 	inline ramRigidBody& getRigidBody(string name) { return ramActorManager::instance().getRigidBody(name); }
 	
-	virtual void refreshControlPanel(ofxAutoControlPanel& gui) {};
+	virtual void refreshControlPanel(ramControlPanel& gui) {};
 	
 	virtual void setup() {}
 	virtual void update() {}
@@ -26,16 +26,20 @@ public:
 	inline void toggle() { bEnabled ^= true; }
 	inline void setEnabled(bool b) { bEnabled = b; }
 	
-	inline string getSceneKey() { return key_enabled; }
+	inline string getSceneEnableKey() { return key_enabled; }
 	inline string getSceneName() { return scene_name.empty() ? "no name" : scene_name; }
+	
+	inline ofMatrix4x4 getMatrix() { return shadow_mat; }
+	inline void setMatrix(ofMatrix4x4& m) { shadow_mat = m; }
 	
 	ramSceneBase* getPtr() { return this; }
 	
 protected:
 	
-	ofxAutoControlPanel *guiPtr;
-	string scene_name, key_enabled;
+	ramControlPanel *guiPtr;
 	bool bEnabled;
+	string scene_name, key_enabled;
+	ofMatrix4x4 shadow_mat;
 	
 	void setSceneName(string name)
 	{

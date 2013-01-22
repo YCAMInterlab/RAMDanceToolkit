@@ -22,7 +22,7 @@ public:
 		sphere = new ramSpherePrimitive(ofVec3f(0, 0, 0), 50);
 	}
 	
-	void refreshControlPanel(ofxAutoControlPanel& gui)
+	void refreshControlPanel(ramControlPanel& gui)
 	{
 		guiPtr = &gui;
 		guiPtr->addPanel(getSceneName());
@@ -88,7 +88,7 @@ public:
 	}
 	
 	
-#pragma -
+#pragma - Scene original events & methods
 	
 	
 	void keyPressed(ofEventArgs &e)
