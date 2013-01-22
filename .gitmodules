@@ -7,4 +7,3 @@
 [submodule "addons/ofxControlPanel"]
 	path = addons/ofxValue
 	url = git@github.com:kylemcdonald/ofxControlPanel.git
-	
