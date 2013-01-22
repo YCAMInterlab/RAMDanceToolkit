@@ -159,8 +159,6 @@ private:
 };
 
 
-string getJointName(unsigned int jointId) { return ramActor::getJointName(jointId); }
-
 
 
 
