@@ -191,6 +191,8 @@ public:
 			}
 			setting.popTag();
 		}
+		
+		if (numCams==0) positions.at(0) = ofVec3f(0,0,0);
 		return positions;
 	}
 	
