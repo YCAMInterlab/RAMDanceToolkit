@@ -1,10 +1,6 @@
 #include "testApp.h"
 
 
-const string DATAFOLDER_PATH = "../../../AllScenes/bin/data/";
-
-
-
 /*!
  Scenes
  */
@@ -39,7 +35,12 @@ void testApp::setup()
 	 gui setup
 	 */
 	gui.setup();
-	gui.loadFont(DATAFOLDER_PATH + "Fonts/din-webfont.ttf", 11);
+	gui.loadFont("Fonts/din-webfont.ttf", 11);
+	
+	/* camera */
+	camSettingXml.loadFile("settings.camera.xml");
+	setting_cam = ramCameraSettings::getSettings(camSettingXml);
+	gui.addMultiToggle("Camera Position", 0, ramCameraSettings::getCamNames(camSettingXml));
 	
 	
 	/*!
