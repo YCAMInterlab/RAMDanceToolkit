@@ -12,7 +12,24 @@ public:
 		ofxControlPanel::setTextColor(simpleColor(255, 255, 255, 100));
 		ofxControlPanel::setBackgroundColor(simpleColor(0, 0, 0, 90));
 		ofxAutoControlPanel::setup();
+		
+		/*!
+			Panel: Config
+		 */
+		addPanel("Config");
+		
+		
+		/* Background Color */
+		addSlider("Background", 0, 0, 255);
+		
+		
+		/* Default Floor */
+		addMultiToggle("Floor pattern", 0, ramFloor::getFloorNames());
+		addSlider("Floor size", 600.0, 100.0, 1000.0);
+		addSlider("Grid size", 50.0, 10.0, 100.0);
 	}
+	
+	
 	
 	/*!
 		ofxControlPanel

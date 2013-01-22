@@ -143,7 +143,6 @@
 		81967292bfc87a0144bd32c66f3adb20 /* ofxOscSender.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxOscSender.cpp; path = ../../../addons/ofxOsc/src/ofxOscSender.cpp; sourceTree = SOURCE_ROOT; };
 		8b30e93fd3d3475eed522a0e0b085e30 /* ofxOscBundle.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxOscBundle.h; path = ../../../addons/ofxOsc/src/ofxOscBundle.h; sourceTree = SOURCE_ROOT; };
 		8c75afc8774a62495dd5346429f6f666 /* ofxOscReceiver.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxOscReceiver.h; path = ../../../addons/ofxOsc/src/ofxOscReceiver.h; sourceTree = SOURCE_ROOT; };
-		9A3C92ED16AD4C3600056D6F /* BigBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigBox.h; sourceTree = "<group>"; };
 		9A3F637C16AE9D5900AFD537 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
 		9A3F637F16AE9D5900AFD537 /* btBulletCollisionCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletCollisionCommon.h; sourceTree = "<group>"; };
 		9A3F638016AE9D5900AFD537 /* btBulletDynamicsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletDynamicsCommon.h; sourceTree = "<group>"; };
@@ -337,6 +336,8 @@
 		9A3F644D16AE9D5900AFD537 /* ofxBt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBt.h; sourceTree = "<group>"; };
 		9A3F644E16AE9D5900AFD537 /* ofxBtHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtHelper.h; sourceTree = "<group>"; };
 		9A3FA1A416AD6D8A0037AC3C /* ofxSimpleParticleEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSimpleParticleEngine.h; sourceTree = "<group>"; };
+		9A44AF9116AEB8C500DC4CB6 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
+		9A44B13116AEC02400DC4CB6 /* Future.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Future.h; sourceTree = "<group>"; };
 		9A61367C16AEA5AA00F7C99A /* guiBaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = guiBaseObject.cpp; sourceTree = "<group>"; };
 		9A61367D16AEA5AA00F7C99A /* guiBaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = guiBaseObject.h; sourceTree = "<group>"; };
 		9A61367E16AEA5AA00F7C99A /* guiCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = guiCallback.cpp; sourceTree = "<group>"; };
@@ -402,8 +403,7 @@
 		9AD3316F16AE52CE0003FD7D /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		9AD3317116AE52CE0003FD7D /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		9AD3317216AE52CE0003FD7D /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
-		9AD3318316AE68070003FD7D /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
-		9AD3318516AE68110003FD7D /* Future.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Future.h; sourceTree = "<group>"; };
+		9AD4232116AEAD0700BAC519 /* BigBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigBox.h; sourceTree = "<group>"; };
 		9bf3aa0d4faa89d0f8a0e545403162be /* OscReceivedElements.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = OscReceivedElements.cpp; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscReceivedElements.cpp; sourceTree = SOURCE_ROOT; };
 		9f7986dc4eb05e75fce2c777500fdc01 /* ofxOscSender.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxOscSender.h; path = ../../../addons/ofxOsc/src/ofxOscSender.h; sourceTree = SOURCE_ROOT; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
@@ -540,20 +540,11 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				9AD3318416AE68110003FD7D /* Future */,
-				9AD3318216AE68070003FD7D /* Bullet */,
-				9A3C92EC16AD4C3600056D6F /* BigBox */,
+				9A44B13016AEC02400DC4CB6 /* Future */,
+				9A44AF9016AEB8C500DC4CB6 /* Bullet */,
+				9AD4232016AEAD0700BAC519 /* BigBox */,
 			);
 			name = Scenes;
-			sourceTree = "<group>";
-		};
-		9A3C92EC16AD4C3600056D6F /* BigBox */ = {
-			isa = PBXGroup;
-			children = (
-				9A3C92ED16AD4C3600056D6F /* BigBox.h */,
-			);
-			name = BigBox;
-			path = ../../../dev/BigBox/src/BigBox;
 			sourceTree = "<group>";
 		};
 		9A3F636616AE9D5900AFD537 /* ofxBt */ = {
@@ -933,6 +924,24 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		9A44AF9016AEB8C500DC4CB6 /* Bullet */ = {
+			isa = PBXGroup;
+			children = (
+				9A44AF9116AEB8C500DC4CB6 /* Bullet.h */,
+			);
+			name = Bullet;
+			path = ../../BulletExample/src/Bullet;
+			sourceTree = "<group>";
+		};
+		9A44B13016AEC02400DC4CB6 /* Future */ = {
+			isa = PBXGroup;
+			children = (
+				9A44B13116AEC02400DC4CB6 /* Future.h */,
+			);
+			name = Future;
+			path = ../../Future/src/Future;
+			sourceTree = "<group>";
+		};
 		9A61367816AEA5AA00F7C99A /* ofxControlPanel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1038,22 +1047,13 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		9AD3318216AE68070003FD7D /* Bullet */ = {
+		9AD4232016AEAD0700BAC519 /* BigBox */ = {
 			isa = PBXGroup;
 			children = (
-				9AD3318316AE68070003FD7D /* Bullet.h */,
+				9AD4232116AEAD0700BAC519 /* BigBox.h */,
 			);
-			name = Bullet;
-			path = ../../../dev/BulletExample/src/Bullet;
-			sourceTree = "<group>";
-		};
-		9AD3318416AE68110003FD7D /* Future */ = {
-			isa = PBXGroup;
-			children = (
-				9AD3318516AE68110003FD7D /* Future.h */,
-			);
-			name = Future;
-			path = ../../../dev/Future/src/Future;
+			name = BigBox;
+			path = ../../BigBox/src/BigBox;
 			sourceTree = "<group>";
 		};
 		BB4B014C10F69532006C3DED /* addons */ = {
@@ -1239,7 +1239,7 @@
 			attributes = {
 				LastUpgradeCheck = 0450;
 			};
-			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "EmptyExample" */;
+			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "AllScenes" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1610,7 +1610,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "EmptyExample" */ = {
+		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "AllScenes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B4E0A3A1720003C02F2 /* Debug */,
