@@ -12,8 +12,19 @@ const unsigned int Yres = 480;
 
 ofVec3f ConvertProjectiveToRealWorld(const ofVec3f& point) {
 	return ofVec3f((point.x / Xres - .5f) * point.z * XtoZ,
-								 (point.y / Yres - .5f) * point.z * YtoZ,
-								 point.z);
+                   (point.y / Yres - .5f) * point.z * YtoZ,
+                   point.z);
+}
+
+float distance(ofVec2f reference, vector<ofVec2f>& targets) {
+    float minDistance = 0;
+    for(int i = 0; i < targets.size(); i++) {
+        float distance = reference.distance(targets[i]);
+        if(i == 0 || distance < minDistance) {
+            minDistance = distance;
+        }
+    }
+    return minDistance;
 }
 
 CircleSensor::CircleSensor()
@@ -21,16 +32,16 @@ CircleSensor::CircleSensor()
 ,registrationClear(false)
 ,backgroundCalibrate(false)
 ,backgroundThreshold(10)
-,sampleRadius(12) {
+,sampleRadius(1.2)
+,deadZoneRadius(24)
+,minSamples(6) {
 }
 
 void CircleSensor::setup() {
 	kinect.init(true, true);
-	serial = ofxKinect::nextAvailableSerial();
-	kinect.open(serial);
-	cout << "Connected to Kinect " << serial << endl;
+	kinect.open();
 	
-	string registrationFile = serial + "-registration.txt";
+	string registrationFile = kinect.getSerial() + "-registration.txt";
 	if(ofFile::doesFileExist(registrationFile)) {
 		ofFile file(registrationFile, ofFile::ReadOnly);
 		file >> registration;
@@ -40,7 +51,7 @@ void CircleSensor::setup() {
 	imitate(valid, kinect, CV_8UC1);
 }
 void CircleSensor::update() {
-	kinect.update();
+    kinect.update();
 	if(kinect.isFrameNew()) {
 		circleFinder.update(kinect);
 		
@@ -94,7 +105,7 @@ void CircleSensor::update() {
 		for(int y = 0; y < height; y++) {
 			for(int x = 0; x < width; x++) {
 				int i = y * width + x;
-				if(validPixels[i]) {
+				if(validPixels[i] > 0) {
 					float z = distancePixels[i];
 					ofVec3f cur = ConvertProjectiveToRealWorld(ofVec3f(x, y, z));
 					cloud.addVertex(cur);
@@ -102,31 +113,39 @@ void CircleSensor::update() {
 			}
 		}
 		
+        centers.clear();
+        radii.clear();
 		trackedPositions.clear();
 		for(int i = 0; i < circleFinder.size(); i++) {
-			ofVec3f sum;
-			int count = 0;
 			const ofVec2f& center = circleFinder.getCenter(i);
-			for(int y = -sampleRadius; y < +sampleRadius; y++) {
-				for(int x = -sampleRadius; x < +sampleRadius; x++) {
-					if(ofDist(0, 0, x, y) <= sampleRadius) {
-						int curx = center.x + x;
-						int cury = center.y + y;
-						if(curx > 0 && curx < width &&
-							 cury > 0 && cury < height) {
-							int i = cury * width + curx;
-							float curz = distancePixels[i];
-							if(curz != 0) {
-								sum.x += curx;
-								sum.y += cury;
-								sum.z += curz;
-								count++;
-							}
-						}
-					}
-				}
-			}
-			trackedPositions.push_back(ConvertProjectiveToRealWorld(sum / count));
+            if(distance(center, deadZones) > deadZoneRadius) {
+                ofVec3f sum;
+                int count = 0;
+                float radius = sampleRadius * circleFinder.getRadius(i);
+                for(int y = -radius; y < +radius; y++) {
+                    for(int x = -radius; x < +radius; x++) {
+                        if(ofDist(0, 0, x, y) <= radius) {
+                            int curx = center.x + x;
+                            int cury = center.y + y;
+                            if(curx > 0 && curx < width &&
+                               cury > 0 && cury < height) {
+                                int i = cury * width + curx;
+                                if(validPixels[i] > 0) {
+                                    sum.x += curx;
+                                    sum.y += cury;
+                                    sum.z += distancePixels[i];
+                                    count++;
+                                }
+                            }
+                        }
+                    }
+                }
+                if(count > minSamples) {
+                    centers.push_back(center);
+                    radii.push_back(circleFinder.getRadius(i));
+                    trackedPositions.push_back(ConvertProjectiveToRealWorld(sum / count));
+                }
+            }
 		}
 	}
 }
@@ -134,28 +153,26 @@ void CircleSensor::drawCloud() {
 	ofPushMatrix();
 	ofPushStyle();
 	
-	ofSetColor(yellowPrint);
+	ofMultMatrix(registration);
+	cloud.draw();
+	ofFill();
+	ofSetColor(cyanPrint, 128);
+	for(int i = 0; i < trackedPositions.size(); i++) {
+		ofBox(trackedPositions[i], 8);
+	}
+    
+	ofSetColor(magentaPrint, 128);
 	ofMesh registrationLine;
 	registrationLine.setMode(OF_PRIMITIVE_LINE_STRIP);
 	registrationLine.addVertices(registrationSamples);
 	registrationLine.draw();
-	
-	ofMultMatrix(registration);
-	ofSetColor(255);
-	cloud.draw();
-	ofFill();
-	ofSetColor(cyanPrint);
-	for(int i = 0; i < trackedPositions.size(); i++) {
-		ofBox(trackedPositions[i], 8);
-	}
-	
-	ofSetColor(magentaPrint);
+	ofPopMatrix();
+    
+    ofSetColor(yellowPrint);
 	registrationLine.clear();
 	registrationLine.addVertices(registrationSamples);
 	registrationLine.draw();
-	
-	ofPopStyle();
-	ofPopMatrix();
+	ofPopStyle();	
 }
 void CircleSensor::drawDebug() {
 	ofPushStyle();
@@ -168,31 +185,40 @@ void CircleSensor::drawDebug() {
 	ofEnableBlendMode(OF_BLENDMODE_ADD);
 	ofSetColor(yellowPrint);
 	valid.draw(0, 0);
-	ofDisableBlendMode();
+	ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 	
+    ofFill();
+	for(int i = 0; i < deadZones.size(); i++) {
+        ofSetColor(magentaPrint);
+        ofCircle(deadZones[i], deadZoneRadius);
+    }
 	ofNoFill();
+	for(int i = 0; i < trackedPositions.size(); i++) {
+        ofSetColor(magentaPrint);
+        ofCircle(centers[i], radii[i]);
+        ofSetColor(cyanPrint);
+        ofCircle(centers[i], radii[i] * sampleRadius);
+        ofDrawBitmapString(ofToString(trackedPositions[i]), centers[i]);
+	}
 	for(int i = 0; i < circleFinder.size(); i++) {
-		float radius = circleFinder.getRadius(i);
-		if(radius > 2) {
-			ofSetColor(magentaPrint);
-			ofCircle(circleFinder.getCenter(i), radius);
-			ofSetColor(cyanPrint);
-			ofCircle(circleFinder.getCenter(i), sampleRadius);
-			ofDrawBitmapString(ofToString(trackedPositions[i]), circleFinder.getCenter(i));
-		}
+        ofSetColor(yellowPrint, 128);
+        ofCircle(circleFinder.getCenter(i), circleFinder.getRadius(i));
 	}
 	ofPopMatrix();
 	ofPopStyle();
 }
-void CircleSensor::updateRegistration(ofVec3f& reference) {
-	registrationSamples.push_back(trackedPositions[0]);
-	referenceSamples.push_back(reference);
-	registration = estimateAffine3D(registrationSamples, referenceSamples);
-	ofFile file(serial + "-registration.txt", ofFile::WriteOnly);
-	file << registration;
+void CircleSensor::updateRegistration(ofVec3f& reference, float accuracy) {
+    registrationSamples.push_back(trackedPositions[0]);
+    referenceSamples.push_back(reference);
+    registration = estimateAffine3D(registrationSamples, referenceSamples, accuracy);
+    ofFile file(kinect.getSerial() + "-registration.txt", ofFile::WriteOnly);
+    file << registration;
 }
 bool CircleSensor::oneTrackedPosition() {
-	return trackedPositions.size() == 1;
+	return trackedPositions.size() == 1 && (trackedPositions[0].distance(ofVec3f()) > 1);
+}
+void CircleSensor::setDeadZones() {
+    deadZones = circleFinder.getCenters();
 }
 CircleSensor::~CircleSensor() {
 	kinect.close();
