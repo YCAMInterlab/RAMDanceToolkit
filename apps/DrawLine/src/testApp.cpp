@@ -4,13 +4,7 @@
 /*!
  Scenes
  */
-#include "BigBox.h"
-#include "Bullet.h"
-#include "Future.h"
 #include "DrawLines.h"
-BigBox bigbox;
-Bullet bullet;
-Future future;
 DrawLines drawLines;
 
 
@@ -21,7 +15,6 @@ void testApp::setup()
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
 	ofBackground( ramColor::WHITE );
-	
 	
 	/*!
 	 ramBaseApp setup
@@ -37,7 +30,7 @@ void testApp::setup()
 	 gui setup
 	 */
 	gui.setup();
-	gui.loadFont("Fonts/din-webfont.ttf", 10);
+	gui.loadFont("Fonts/din-webfont.ttf", 11);
 	
 	/* camera */
 	camSettingXml.loadFile("settings.camera.xml");
@@ -48,9 +41,6 @@ void testApp::setup()
 	/*!
 	 scenes setup
 	 */
-	scenes.push_back( bigbox.getPtr() );
-	scenes.push_back( future.getPtr() );
-	scenes.push_back( bullet.getPtr() );
 	scenes.push_back( drawLines.getPtr() );
 	
 	gui.addPanel("All Scenes");
@@ -66,9 +56,7 @@ void testApp::setup()
 		scenes.at(i)->setMatrix(shadowMat);
 		scenes.at(i)->refreshControlPanel(gui);
 	}
-	
-	
-	scenes.back()->setEnabled(true);
+	scenes.at(0)->enable();
 }
 
 //--------------------------------------------------------------
@@ -149,12 +137,7 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	switch (key)
-	{
-		case 'b':
-			bullet.cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
-			break;
-	}
+
 }
 
 //--------------------------------------------------------------

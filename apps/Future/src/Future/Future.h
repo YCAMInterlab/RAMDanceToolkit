@@ -71,13 +71,11 @@ public:
 			
 			ghost.setSpeed(speed);
 			ghost.setDistance(distance);
-			// guiPtr->clearAllChanged();
 		}
 		
 		if(guiPtr->hasValueChanged( getSceneEnableKey() ))
 		{
-			bEnabled = guiPtr->getValueF( getSceneEnableKey() );
-			// guiPtr->clearAllChanged();
+			bEnabled = guiPtr->getValueB( getSceneEnableKey() );
 		}
 	}
 	
@@ -89,7 +87,7 @@ public:
 		ofPushStyle();
 		ofNoFill();
 		
-		ofColor shadowColor = getRamColor(ramColor::GRAY);
+		ofColor shadowColor = ramColor::GRAY;
 		shadowColor.a = 50;
 		
 		ramCameraBegin();
@@ -102,20 +100,22 @@ public:
 				
 				glEnable(GL_DEPTH_TEST);
 				node.transformBegin();
-				ofSetColor( getRamColor(ramColor::RED_DEEP) );
+				ofSetColor( ramColor::RED_DEEP );
 				ofBox(boxSize);
 				node.transformEnd();
 				
 				if (node.hasParent())
 				{
-					ofSetColor( getRamColor(ramColor::RED_LIGHT) - 40.0);
+					ofColor c = ramColor::RED_LIGHT;
+					c -= 40;
+					ofSetColor(c);
 					ofLine(node, *node.getParent());
 				}
 				
 				/*!
 				 shadows
 				 */
-				ofColor shadowColor = getRamColor(ramColor::GRAY);
+				ofColor shadowColor = ramColor::GRAY;
 				shadowColor.a = 90;
 				glPushMatrix();
 				glDisable(GL_DEPTH_TEST);

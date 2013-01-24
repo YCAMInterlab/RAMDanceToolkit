@@ -5,14 +5,21 @@
 class ramSceneBase
 {
 public:
-	ramSceneBase() : bEnabled(false), key_enabled("Show") {}
+	ramSceneBase() : bEnabled(false), key_enabled("Show"), scene_name("unknown scene") {}
 	virtual ~ramSceneBase(){}
 	
 	inline ramActorManager& getActorManager() { return ramActorManager::instance(); }
 	inline ramActor& getActor(string name) { return ramActorManager::instance().getActor(name); }
 	inline ramRigidBody& getRigidBody(string name) { return ramActorManager::instance().getRigidBody(name); }
 	
-	virtual void refreshControlPanel(ramControlPanel& gui) {};
+	virtual void refreshControlPanel(ramControlPanel& gui)
+	{
+		guiPtr = &gui;
+		
+		gui.addPanel(scene_name);
+		
+		cout << "ramSceneBase::refreshControlPanel() was not overrided at: " +scene_name << endl;
+	};
 	
 	virtual void setup() {}
 	virtual void update() {}

@@ -85,6 +85,7 @@ private:
 
 
 #pragma mark - ramCameraSettings
+
 class ramFloor
 {
 	
@@ -121,11 +122,40 @@ public:
 };
 
 
+#pragma mark - ramColor
+
+class ramColor
+{
+	
+public:
+	static const ofColor RED_NORMAL;
+	static const ofColor RED_DEEP;
+	static const ofColor RED_LIGHT;
+	static const ofColor GREEN_NORMAL;
+	static const ofColor GREEN_DEEP;
+	static const ofColor GREEN_LIGHT;
+	static const ofColor BLUE_NORMAL;
+	static const ofColor BLUE_DEEP;
+	static const ofColor BLUE_LIGHT;
+	static const ofColor YELLOW_NORMAL;
+	static const ofColor YELLOW_DEEP;
+	static const ofColor YELLOW_LIGHT;
+	static const ofColor BLACK;
+	static const ofColor GRAY;
+	static const ofColor WHITE;
+};
+
+
+
 #pragma mark - ramCameraSettings
 
 class ramCameraSettings
 {
 public:
+	
+	ofVec3f pos;
+	string name;
+	
 	ramCameraSettings(ofxXmlSettings& setting)
 	{
 		pos = ofVec3f(setting.getValue("x", 0),
@@ -195,70 +225,4 @@ public:
 		if (numCams==0) positions.at(0) = ofVec3f(0,0,0);
 		return positions;
 	}
-	
-	ofVec3f pos;
-	string name;
 };
-
-
-
-#pragma mark - ramColor
-class ramColor
-{
-	
-public:
-	
-	enum ColorId
-	{
-		RED_NORMAL		= 0,
-		RED_DEEP		= 1,
-		RED_LIGHT		= 2,
-		
-		GREEN_NORMAL	= 3,
-		GREEN_DEEP		= 4,
-		GREEN_LIGHT		= 5,
-		
-		BLUE_NORMAL		= 6,
-		BLUE_DEEP		= 7,
-		BLUE_LIGHT		= 8,
-		
-		YELLOW_NORMAL	= 9,
-		YELLOW_DEEP		= 10,
-		YELLOW_LIGHT	= 11,
-		
-		BLACK			= 12,
-		GRAY			= 13,
-		WHITE			= 14,
-		
-		NUM_COLORS		= 15
-	};
-};
-static ofColor getRamColor(const int colorId)
-{
-	ofColor color;
-	switch (colorId)
-	{
-		case ramColor::RED_NORMAL:	 color.setHex(0xff6666); break;
-		case ramColor::RED_DEEP:	 color.setHex(0x993333); break;
-		case ramColor::RED_LIGHT:	 color.setHex(0xff9898); break;
-			
-		case ramColor::GREEN_NORMAL: color.setHex(0x66cc33); break;
-		case ramColor::GREEN_DEEP:	 color.setHex(0x339900); break;
-		case ramColor::GREEN_LIGHT:  color.setHex(0x99cc99); break;
-			
-		case ramColor::BLUE_NORMAL:  color.setHex(0x0099cc); break;
-		case ramColor::BLUE_DEEP : 	 color.setHex(0x003366); break;
-		case ramColor::BLUE_LIGHT: 	 color.setHex(0x99cccc); break;
-			
-		case ramColor::YELLOW_NORMAL:color.setHex(0xffcc00); break;
-		case ramColor::YELLOW_DEEP:  color.setHex(0xcc9900); break;
-		case ramColor::YELLOW_LIGHT: color.setHex(0xffff00); break;
-			
-		case ramColor::BLACK:		 color.setHex(0x000000); break;
-		case ramColor::GRAY:		 color.setHex(0x666666); break;
-		case ramColor::WHITE:		 color.setHex(0xffffff); break;
-			
-		default: color.set(0xff0000); break;
-	}
-	return color;
-}

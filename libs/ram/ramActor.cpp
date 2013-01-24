@@ -191,7 +191,7 @@ void ramActor::setupTree()
 }
 
 
-string ramActor::ramActor::jointName[NUM_JOINTS] =
+string ramActor::jointName[NUM_JOINTS] =
 {
 	"JOINT_HIPS",
 	"JOINT_ABDOMEN",
@@ -217,3 +217,14 @@ string ramActor::ramActor::jointName[NUM_JOINTS] =
 	"JOINT_RIGHT_WRIST",
 	"JOINT_RIGHT_HAND"
 };
+
+vector<string> ramActor::getJointNames()
+{
+	vector<string> names;
+	names.clear();
+	names.resize(ramActor::NUM_JOINTS);
+	
+	for (int i=0; i<names.size(); i++) names.at(i) = getJointName(i);
+	return names;
+}
+

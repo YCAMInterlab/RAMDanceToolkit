@@ -78,20 +78,20 @@ void ramBasicActor(ramActor& actor, float* matrixPtr)
 		float jointSize = (i==ramActor::JOINT_HEAD) ? 6.0 : 3.0;
 		
 		node.transformBegin();
-		ofSetColor( getRamColor(ramColor::YELLOW_LIGHT) );
+		ofSetColor( ramColor::YELLOW_LIGHT );
 		ofBox(jointSize);
 		node.transformEnd();
 		
 		if (node.hasParent())
 		{
-			ofSetColor(getRamColor(ramColor::YELLOW_LIGHT)-40.0);
+			ofSetColor(ramColor::YELLOW_LIGHT-40.0);
 			ofLine(node, *node.getParent());
 		}
 		
 		
 		if (matrixPtr != NULL)
 		{
-			ofColor shadowColor = getRamColor(ramColor::GRAY);
+			ofColor shadowColor = ramColor::GRAY;
 			shadowColor.a = 50;
 			glPushMatrix();
 			glDisable(GL_DEPTH_TEST);
