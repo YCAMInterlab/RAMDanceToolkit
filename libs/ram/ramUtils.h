@@ -103,10 +103,10 @@ public:
 	{
 		string name[NUM_FLOOR_PATTERNS] =
 		{
+			"NONE",
 			"PLANE",
 			"CHECKER_PATTERN",
-			"GRID_LINES",
-			"NONE"
+			"GRID_LINES"
 		};
 		
 		vector<string> floorNames;
@@ -191,6 +191,8 @@ public:
 			}
 			setting.popTag();
 		}
+		
+		if (numCams==0) positions.at(0) = ofVec3f(0,0,0);
 		return positions;
 	}
 	

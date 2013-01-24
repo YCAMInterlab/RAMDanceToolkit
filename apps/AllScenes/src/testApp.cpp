@@ -2,31 +2,14 @@
 
 
 /*!
- GUI
- */
-ramControlPanel gui;
-
-
-/*!
- Setting files
- */
-#include "ofxXmlSettings.h"
-ofxXmlSettings camSettingXml("settings.camera.xml");
-vector<ramCameraSettings> setting_cam;
-
-
-/*!
  Scenes
  */
 #include "BigBox.h"
 #include "Bullet.h"
 #include "Future.h"
-vector<ramSceneBase*> scenes;
 BigBox bigbox;
 Bullet bullet;
 Future future;
-
-ofMatrix4x4 shadowMat;
 
 
 #pragma mark - oF methods
@@ -53,17 +36,11 @@ void testApp::setup()
 	 */
 	gui.setup();
 	gui.loadFont("Fonts/din-webfont.ttf", 11);
-	gui.addPanel("Config");
-	gui.addSlider("Background", 0, 0, 255);
 	
 	/* camera */
+	camSettingXml.loadFile("settings.camera.xml");
 	setting_cam = ramCameraSettings::getSettings(camSettingXml);
 	gui.addMultiToggle("Camera Position", 0, ramCameraSettings::getCamNames(camSettingXml));
-
-	/* floor */
-	gui.addMultiToggle("Floor pattern", 0, ramFloor::getFloorNames());
-	gui.addSlider("Floor size", 600.0, 100.0, 1000.0);
-	gui.addSlider("Grid size", 50.0, 10.0, 100.0);
 	
 	
 	/*!
@@ -146,12 +123,9 @@ void testApp::drawFloor()
 void testApp::drawActor(ramActor &actor)
 {
 	if ( gui.getValueB("Draw Actor") )
-	{
 		ramBasicActor(actor, shadowMat.getPtr());
-	}
 	
-	for (int i=0; i<scenes.size(); i++)
-		scenes.at(i)->drawActor(actor);
+	for (int i=0; i<scenes.size(); i++) scenes.at(i)->drawActor(actor);
 }
 
 //--------------------------------------------------------------
@@ -224,13 +198,3 @@ void testApp::dragEvent(ofDragInfo dragInfo)
 {
 	
 }
-
-
-#pragma -
-
-void testApp::updateSceneVariables()
-{
-	
-}
-
-

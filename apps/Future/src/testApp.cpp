@@ -1,10 +1,15 @@
 #include "testApp.h"
 
+
+static const string DATAFOLDER_PATH = "../../../AllScenes/bin/data/";
+
+
+
 /*!
  Scenes
  */
-//#include "BigBox.h"
-//BigBox bigbox;
+#include "Future.h"
+Future future;
 
 
 #pragma mark - oF methods
@@ -30,19 +35,17 @@ void testApp::setup()
 	 GUI setup
 	 */
 	gui.setup();
-	gui.loadFont("Fonts/din-webfont.ttf", 11);
+	gui.loadFont(DATAFOLDER_PATH + "Fonts/din-webfont.ttf", 11);
 	
 	/* camera */
-	camSettingXml.loadFile("settings.camera.xml");
 	setting_cam = ramCameraSettings::getSettings(camSettingXml);
 	gui.addMultiToggle("Camera Position", 0, ramCameraSettings::getCamNames(camSettingXml));
 	
 	
 	/*!
 	 scenes setup
-	 */	
-//	scenes.push_back( bigbox.getPtr() );
-	
+	 */
+	scenes.push_back( future.getPtr() );
 	
 	/* adding GUI Panel for each scene */
 	gui.addPanel("All Scenes");
@@ -86,6 +89,7 @@ void testApp::update()
 	/* GUI: floor */
 	if (gui.hasValueChanged("Background"))
 	{
+		cout << 1 << endl;
 		float bgcolor = gui.getValueF("Background");
 		ofBackground(bgcolor);
 	}
