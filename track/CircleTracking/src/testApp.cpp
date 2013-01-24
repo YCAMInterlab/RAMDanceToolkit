@@ -1,6 +1,6 @@
 #include "testApp.h"
 
-bool showDebug = false;
+bool showDebug = true;
 bool backgroundClear = true;
 bool backgroundCalibrate = false;
 bool setDeadZones = false;
@@ -17,6 +17,11 @@ bool registrationCalibrate = false;
 float registrationCalibrationRate = 10;
 float registrationCalibrationAccuracy = 1000;
 
+float maxVelocity = 2000;
+float filterRate = .1;
+
+bool trackedLastFrame = false;
+
 bool bySerial(const ofPtr<CircleSensor>& a, const ofPtr<CircleSensor>& b) {
     return a->kinect.getSerial() < b->kinect.getSerial();
 }
@@ -31,6 +36,9 @@ void testApp::setup() {
 		sensors.back()->setup();
 	}
     ofSort(sensors, bySerial);
+    
+    ofxXmlSettings xml;
+    xml.loadFile("settings.xml");
 	
 	float dim = 20;
 	float xInit = OFX_UI_GLOBAL_WIDGET_SPACING; 
@@ -50,6 +58,7 @@ void testApp::setup() {
     
 	gui->addLabel("Background", OFX_UI_FONT_LARGE);
 	gui->addLabelToggle("Debug", &showDebug, length, dim);
+	gui->addLabelButton("Set dead zones", &setDeadZones, length, dim);
 	gui->addLabelButton("Clear", &backgroundClear, length, dim);
 	gui->addLabelToggle("Calibrate", &backgroundCalibrate, length, dim);
 	gui->addSlider("Threshold", 0, 255, &backgroundThreshold, length, dim);
@@ -60,12 +69,15 @@ void testApp::setup() {
 	gui->addSlider("Min radius", 0, 12, &minRadius, length, dim);
 	gui->addSlider("Max radius", 0, 12, &maxRadius, length, dim);
 	gui->addSlider("Sample radius", 0, 24, &sampleRadius, length, dim);
-	gui->addLabelButton("Set dead zones", &setDeadZones, length, dim);
 	
 	gui->addLabel("Registration", OFX_UI_FONT_LARGE);
 	gui->addLabelButton("Clear", &registrationClear, length, dim);
 	gui->addLabelToggle("Calibrate", &registrationCalibrate, length, dim);
 	gui->addSlider("Calibration accuracy", 100, 10000, &registrationCalibrationAccuracy, length, dim);
+    
+    gui->addLabel("Filtering", OFX_UI_FONT_LARGE);
+	gui->addSlider("Max velocity", 0, 10000, &maxVelocity, length, dim);  
+	gui->addSlider("Filter rate", 0, 1, &filterRate, length, dim);
 }
 
 void testApp::update() {
@@ -91,7 +103,7 @@ void testApp::update() {
             sensor.setDeadZones();
         }
 	}
-	
+    
 	if(registrationCalibrate && !sensors.empty() && sensors[0]->oneTrackedPosition()) {
         for(int i = 1; i < sensors.size(); i++) {
             if(sensors[i]->oneTrackedPosition()) {
@@ -99,11 +111,30 @@ void testApp::update() {
             }
 		}
 	}
+    
+    combined.set(0);
+    int count = 0;
+    for(int i = 0; i < sensors.size(); i++) {
+        if(sensors[i]->oneTrackedPosition()) {
+            combined += sensors[i]->registration.preMult(sensors[i]->trackedPositions[0]);
+            count++;
+        }
+    }
+    if(count > 0) {
+        combined /= count;
+        if(filtered == ofVec3f()) {
+            filtered = combined;
+        } else  {
+            filtered.interpolate(combined, filterRate);
+        }
+        trackedLastFrame = true;
+    }
 }
 
 void testApp::draw() {
 	ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 	ofBackgroundGradient(ofColor(64), ofColor(0));
+    
 	easyCam.begin();
 	ofScale(1, -1, -1); // orient the point cloud properly
 	ofTranslate(0, 0, -1500); // rotate about z = 1500 mm
@@ -112,7 +143,11 @@ void testApp::draw() {
 		sensors[i]->drawCloud();
 	}
     ofFill();
-    ofSphere(filtered, 10);
+    ofSetColor(ofxCv::magentaPrint);
+    ofSphere(combined, 25);
+    ofSetColor(255);
+    ofNoFill();
+    ofSphere(filtered, 100);
 	easyCam.end();
 	
 	if(showDebug) {

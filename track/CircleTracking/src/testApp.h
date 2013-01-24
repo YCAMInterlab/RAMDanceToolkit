@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "CircleSensor.h"
 #include "ofxUI.h"
+#include "ofxOscSender.h"
 
 class testApp : public ofBaseApp {
 public:
@@ -12,8 +13,10 @@ public:
 	
 	ofEasyCam easyCam;
 	vector<ofPtr<CircleSensor> > sensors;
-	
-    ofVec3f filtered;
 	ofxUICanvas *gui;
+    
+    ofVec3f combined, filtered;
+    
+    ofxOscSender osc;
 };
 

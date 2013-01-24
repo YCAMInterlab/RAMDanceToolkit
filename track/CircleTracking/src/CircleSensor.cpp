@@ -158,7 +158,7 @@ void CircleSensor::drawCloud() {
 	ofFill();
 	ofSetColor(cyanPrint, 128);
 	for(int i = 0; i < trackedPositions.size(); i++) {
-		ofBox(trackedPositions[i], 8);
+		ofBox(trackedPositions[i], 100);
 	}
     
 	ofSetColor(magentaPrint, 128);
