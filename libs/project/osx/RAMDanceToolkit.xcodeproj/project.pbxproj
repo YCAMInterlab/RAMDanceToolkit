@@ -25,6 +25,7 @@
 		9A2047F816A402560061BB54 /* ramAccelerometer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A2047F716A402560061BB54 /* ramAccelerometer.h */; };
 		9A598D001648DE150066DF10 /* ramBaseApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A598CFE1648DE150066DF10 /* ramBaseApp.cpp */; };
 		9A598D011648DE150066DF10 /* ramBaseApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A598CFF1648DE150066DF10 /* ramBaseApp.h */; };
+		9AE0E13E16B0E7890016B3B0 /* ramUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AE0E13D16B0E7890016B3B0 /* ramUtils.cpp */; };
 		9AE9589016A91B6600BC63F6 /* ramSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AE9588F16A91B6600BC63F6 /* ramSession.h */; };
 /* End PBXBuildFile section */
 
@@ -57,7 +58,6 @@
 		9AD3317C16AE53BF0003FD7D /* tinyxmlparser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		9AD3317E16AE53BF0003FD7D /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		9AD3317F16AE53BF0003FD7D /* ofxXmlSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
-		9AD3318116AE55EF0003FD7D /* ramUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ramUtils.cpp; sourceTree = "<group>"; };
 		9AD3318816AE6EBF0003FD7D /* ramControlPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ramControlPanel.h; sourceTree = "<group>"; };
 		9AD4237D16AEB78500BAC519 /* btBulletCollisionCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = btBulletCollisionCommon.h; sourceTree = "<group>"; };
 		9AD4237E16AEB78500BAC519 /* btBulletDynamicsCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = btBulletDynamicsCommon.h; sourceTree = "<group>"; };
@@ -250,6 +250,7 @@
 		9AD4244A16AEB78500BAC519 /* ofxBt.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBt.cpp; sourceTree = "<group>"; };
 		9AD4244B16AEB78500BAC519 /* ofxBt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBt.h; sourceTree = "<group>"; };
 		9AD4244C16AEB78500BAC519 /* ofxBtHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBtHelper.h; sourceTree = "<group>"; };
+		9AE0E13D16B0E7890016B3B0 /* ramUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramUtils.cpp; sourceTree = "<group>"; };
 		9AE9587216A8417A00BC63F6 /* ramAnalyzer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ramAnalyzer.h; sourceTree = "<group>"; };
 		9AE9588F16A91B6600BC63F6 /* ramSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSession.h; sourceTree = "<group>"; };
 		9AF8FB3C16A7A89A000A1948 /* ramOscReciever.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ramOscReciever.h; sourceTree = "<group>"; };
@@ -298,7 +299,6 @@
 			isa = PBXGroup;
 			children = (
 				60B90A971644E06D00AF2156 /* ram */,
-				9AD3318116AE55EF0003FD7D /* ramUtils.cpp */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -323,6 +323,7 @@
 				60B90A9E1644E06D00AF2156 /* ramGraphics.h */,
 				60B90A9F1644E06D00AF2156 /* ramMain.h */,
 				60B90AA01644E06D00AF2156 /* ramUtils.h */,
+				9AE0E13D16B0E7890016B3B0 /* ramUtils.cpp */,
 				9A598D041648E5350066DF10 /* ramNodeFinder.h */,
 				607D7AC716661B330063800A /* ramPhysics.cpp */,
 				607D7AC816661B330063800A /* ramPhysics.h */,
@@ -805,6 +806,7 @@
 				607D7AC916661B330063800A /* ramPhysics.cpp in Sources */,
 				60BE2B711674E5EA0081F663 /* ramPrimitive.cpp in Sources */,
 				60BE2B75167500050081F663 /* ramGraphics.cpp in Sources */,
+				9AE0E13E16B0E7890016B3B0 /* ramUtils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

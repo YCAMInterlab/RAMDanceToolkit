@@ -54,6 +54,7 @@
 		9AD3317416AE52CE0003FD7D /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3316E16AE52CE0003FD7D /* tinyxmlerror.cpp */; };
 		9AD3317516AE52CE0003FD7D /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3316F16AE52CE0003FD7D /* tinyxmlparser.cpp */; };
 		9AD3317616AE52CE0003FD7D /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AD3317116AE52CE0003FD7D /* ofxXmlSettings.cpp */; };
+		9AE0E12016AFC6690016B3B0 /* ofxValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AE0E11716AFC6690016B3B0 /* ofxValue.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -404,6 +405,10 @@
 		9AD3317116AE52CE0003FD7D /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		9AD3317216AE52CE0003FD7D /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
 		9AD4232116AEAD0700BAC519 /* BigBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigBox.h; sourceTree = "<group>"; };
+		9AE0E10316AFC63C0016B3B0 /* DrawLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawLines.h; sourceTree = "<group>"; };
+		9AE0E11516AFC6690016B3B0 /* picojson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = picojson.h; sourceTree = "<group>"; };
+		9AE0E11716AFC6690016B3B0 /* ofxValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxValue.cpp; sourceTree = "<group>"; };
+		9AE0E11816AFC6690016B3B0 /* ofxValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxValue.h; sourceTree = "<group>"; };
 		9bf3aa0d4faa89d0f8a0e545403162be /* OscReceivedElements.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = OscReceivedElements.cpp; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscReceivedElements.cpp; sourceTree = SOURCE_ROOT; };
 		9f7986dc4eb05e75fce2c777500fdc01 /* ofxOscSender.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxOscSender.h; path = ../../../addons/ofxOsc/src/ofxOscSender.h; sourceTree = SOURCE_ROOT; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
@@ -540,6 +545,7 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				9AE0E10216AFC63C0016B3B0 /* DrawLines */,
 				9A44B13016AEC02400DC4CB6 /* Future */,
 				9A44AF9016AEB8C500DC4CB6 /* Bullet */,
 				9AD4232016AEAD0700BAC519 /* BigBox */,
@@ -1056,9 +1062,46 @@
 			path = ../../BigBox/src/BigBox;
 			sourceTree = "<group>";
 		};
+		9AE0E10216AFC63C0016B3B0 /* DrawLines */ = {
+			isa = PBXGroup;
+			children = (
+				9AE0E10316AFC63C0016B3B0 /* DrawLines.h */,
+			);
+			name = DrawLines;
+			path = ../../DrawLine/src/DrawLines;
+			sourceTree = "<group>";
+		};
+		9AE0E10516AFC6690016B3B0 /* ofxValue */ = {
+			isa = PBXGroup;
+			children = (
+				9AE0E11416AFC6690016B3B0 /* libs */,
+				9AE0E11616AFC6690016B3B0 /* src */,
+			);
+			name = ofxValue;
+			path = ../../addons/ofxValue;
+			sourceTree = "<group>";
+		};
+		9AE0E11416AFC6690016B3B0 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				9AE0E11516AFC6690016B3B0 /* picojson.h */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		9AE0E11616AFC6690016B3B0 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				9AE0E11716AFC6690016B3B0 /* ofxValue.cpp */,
+				9AE0E11816AFC6690016B3B0 /* ofxValue.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				9AE0E10516AFC6690016B3B0 /* ofxValue */,
 				9A61367816AEA5AA00F7C99A /* ofxControlPanel */,
 				9A3F636616AE9D5900AFD537 /* ofxBt */,
 				9AD3316A16AE52CE0003FD7D /* ofxXmlSettings */,
@@ -1354,6 +1397,7 @@
 				9A6136CF16AEA5AA00F7C99A /* simpleColor.cpp in Sources */,
 				9A6136D016AEA5AA00F7C99A /* simpleFileLister.cpp in Sources */,
 				9A6136D116AEA5AA00F7C99A /* simpleLogger.cpp in Sources */,
+				9AE0E12016AFC6690016B3B0 /* ofxValue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

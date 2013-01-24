@@ -75,7 +75,7 @@ public:
 		if (!bEnabled) return;
 		
 		ramActor &actor = getActor(myActorName);
-		ofColor shadowColor = getRamColor(ramColor::GRAY);
+		ofColor shadowColor = ramColor::GRAY;
 		shadowColor.a = 90;
 		
 		ramCameraBegin();
@@ -97,7 +97,7 @@ public:
 				/*!
 				 big box
 				 */
-				ofSetColor( getRamColor(ramColor::BLUE_DEEP) );
+				ofSetColor( ramColor::BLUE_DEEP );
 				ofSetLineWidth(bigBoxLineWidth);
 				node.transformBegin();
 				ofBox(bigBoxSize);

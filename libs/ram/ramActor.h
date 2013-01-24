@@ -148,18 +148,17 @@ public:
 
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
 	static string getJointName(int jointId) { return jointName[jointId]; }
+	static vector<string> getJointNames();
 	
 	
 private:
 	static string jointName[NUM_JOINTS];
-	
 	void dispose();
 
 	void setupTree();
 };
 
 
-string getJointName(unsigned int jointId) { return ramActor::getJointName(jointId); }
 
 
 
