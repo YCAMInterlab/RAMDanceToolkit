@@ -146,7 +146,7 @@ public:
 	
 	void draw()
 	{
-//		if (!bEnabled) return;
+		if (!bEnabled) return;
 		
 		ramCameraBegin();
 		

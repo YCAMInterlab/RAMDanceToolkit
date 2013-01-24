@@ -251,6 +251,65 @@
 		9AD4244B16AEB78500BAC519 /* ofxBt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBt.h; sourceTree = "<group>"; };
 		9AD4244C16AEB78500BAC519 /* ofxBtHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBtHelper.h; sourceTree = "<group>"; };
 		9AE0E13D16B0E7890016B3B0 /* ramUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramUtils.cpp; sourceTree = "<group>"; };
+		9AE0E20316B118620016B3B0 /* guiBaseObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiBaseObject.cpp; sourceTree = "<group>"; };
+		9AE0E20416B118620016B3B0 /* guiBaseObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiBaseObject.h; sourceTree = "<group>"; };
+		9AE0E20516B118620016B3B0 /* guiCallback.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiCallback.cpp; sourceTree = "<group>"; };
+		9AE0E20616B118620016B3B0 /* guiCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiCallback.h; sourceTree = "<group>"; };
+		9AE0E20716B118620016B3B0 /* guiCallbackValue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiCallbackValue.cpp; sourceTree = "<group>"; };
+		9AE0E20816B118620016B3B0 /* guiCallbackValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiCallbackValue.h; sourceTree = "<group>"; };
+		9AE0E20916B118620016B3B0 /* guiColor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiColor.cpp; sourceTree = "<group>"; };
+		9AE0E20A16B118620016B3B0 /* guiColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiColor.h; sourceTree = "<group>"; };
+		9AE0E20B16B118620016B3B0 /* guiCustomImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiCustomImpl.h; sourceTree = "<group>"; };
+		9AE0E20C16B118620016B3B0 /* guiIncludes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiIncludes.h; sourceTree = "<group>"; };
+		9AE0E20D16B118620016B3B0 /* guiTextBase.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiTextBase.cpp; sourceTree = "<group>"; };
+		9AE0E20E16B118620016B3B0 /* guiTextBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiTextBase.h; sourceTree = "<group>"; };
+		9AE0E20F16B118620016B3B0 /* guiType2DSlider.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiType2DSlider.cpp; sourceTree = "<group>"; };
+		9AE0E21016B118620016B3B0 /* guiType2DSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiType2DSlider.h; sourceTree = "<group>"; };
+		9AE0E21116B118620016B3B0 /* guiTypeButtonSlider.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiTypeButtonSlider.cpp; sourceTree = "<group>"; };
+		9AE0E21216B118620016B3B0 /* guiTypeButtonSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiTypeButtonSlider.h; sourceTree = "<group>"; };
+		9AE0E21316B118620016B3B0 /* guiTypeChartPlotter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiTypeChartPlotter.cpp; sourceTree = "<group>"; };
+		9AE0E21416B118620016B3B0 /* guiTypeChartPlotter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiTypeChartPlotter.h; sourceTree = "<group>"; };
+		9AE0E21516B118620016B3B0 /* guiTypeCustom.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiTypeCustom.cpp; sourceTree = "<group>"; };
+		9AE0E21616B118620016B3B0 /* guiTypeCustom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiTypeCustom.h; sourceTree = "<group>"; };
+		9AE0E21716B118620016B3B0 /* guiTypeDrawable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiTypeDrawable.cpp; sourceTree = "<group>"; };
+		9AE0E21816B118620016B3B0 /* guiTypeDrawable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiTypeDrawable.h; sourceTree = "<group>"; };
+		9AE0E21916B118620016B3B0 /* guiTypeFileLister.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiTypeFileLister.cpp; sourceTree = "<group>"; };
+		9AE0E21A16B118620016B3B0 /* guiTypeFileLister.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiTypeFileLister.h; sourceTree = "<group>"; };
+		9AE0E21B16B118620016B3B0 /* guiTypeLabel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiTypeLabel.cpp; sourceTree = "<group>"; };
+		9AE0E21C16B118620016B3B0 /* guiTypeLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiTypeLabel.h; sourceTree = "<group>"; };
+		9AE0E21D16B118620016B3B0 /* guiTypeLogger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiTypeLogger.cpp; sourceTree = "<group>"; };
+		9AE0E21E16B118620016B3B0 /* guiTypeLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiTypeLogger.h; sourceTree = "<group>"; };
+		9AE0E21F16B118620016B3B0 /* guiTypeMultiToggle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiTypeMultiToggle.cpp; sourceTree = "<group>"; };
+		9AE0E22016B118620016B3B0 /* guiTypeMultiToggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiTypeMultiToggle.h; sourceTree = "<group>"; };
+		9AE0E22116B118620016B3B0 /* guiTypePanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiTypePanel.cpp; sourceTree = "<group>"; };
+		9AE0E22216B118620016B3B0 /* guiTypePanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiTypePanel.h; sourceTree = "<group>"; };
+		9AE0E22316B118620016B3B0 /* guiTypeSlider.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiTypeSlider.cpp; sourceTree = "<group>"; };
+		9AE0E22416B118620016B3B0 /* guiTypeSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiTypeSlider.h; sourceTree = "<group>"; };
+		9AE0E22516B118620016B3B0 /* guiTypeText.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiTypeText.cpp; sourceTree = "<group>"; };
+		9AE0E22616B118620016B3B0 /* guiTypeText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiTypeText.h; sourceTree = "<group>"; };
+		9AE0E22716B118620016B3B0 /* guiTypeTextDropDown.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiTypeTextDropDown.cpp; sourceTree = "<group>"; };
+		9AE0E22816B118620016B3B0 /* guiTypeTextDropDown.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiTypeTextDropDown.h; sourceTree = "<group>"; };
+		9AE0E22916B118620016B3B0 /* guiTypeTextInput.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiTypeTextInput.cpp; sourceTree = "<group>"; };
+		9AE0E22A16B118620016B3B0 /* guiTypeTextInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiTypeTextInput.h; sourceTree = "<group>"; };
+		9AE0E22B16B118620016B3B0 /* guiTypeToggle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiTypeToggle.cpp; sourceTree = "<group>"; };
+		9AE0E22C16B118620016B3B0 /* guiTypeToggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiTypeToggle.h; sourceTree = "<group>"; };
+		9AE0E22D16B118620016B3B0 /* guiTypeVairableLister.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiTypeVairableLister.cpp; sourceTree = "<group>"; };
+		9AE0E22E16B118620016B3B0 /* guiTypeVairableLister.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiTypeVairableLister.h; sourceTree = "<group>"; };
+		9AE0E22F16B118620016B3B0 /* guiTypeVideo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiTypeVideo.cpp; sourceTree = "<group>"; };
+		9AE0E23016B118620016B3B0 /* guiTypeVideo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiTypeVideo.h; sourceTree = "<group>"; };
+		9AE0E23116B118620016B3B0 /* guiValue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = guiValue.cpp; sourceTree = "<group>"; };
+		9AE0E23216B118620016B3B0 /* guiValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiValue.h; sourceTree = "<group>"; };
+		9AE0E23316B118620016B3B0 /* guiVariablePointer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiVariablePointer.h; sourceTree = "<group>"; };
+		9AE0E23416B118620016B3B0 /* guiXmlValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = guiXmlValue.h; sourceTree = "<group>"; };
+		9AE0E23516B118620016B3B0 /* ofxAutoControlPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxAutoControlPanel.h; sourceTree = "<group>"; };
+		9AE0E23616B118620016B3B0 /* ofxControlPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxControlPanel.cpp; sourceTree = "<group>"; };
+		9AE0E23716B118620016B3B0 /* ofxControlPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxControlPanel.h; sourceTree = "<group>"; };
+		9AE0E23816B118620016B3B0 /* simpleColor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = simpleColor.cpp; sourceTree = "<group>"; };
+		9AE0E23916B118620016B3B0 /* simpleColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = simpleColor.h; sourceTree = "<group>"; };
+		9AE0E23A16B118620016B3B0 /* simpleFileLister.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = simpleFileLister.cpp; sourceTree = "<group>"; };
+		9AE0E23B16B118620016B3B0 /* simpleFileLister.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = simpleFileLister.h; sourceTree = "<group>"; };
+		9AE0E23C16B118620016B3B0 /* simpleLogger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = simpleLogger.cpp; sourceTree = "<group>"; };
+		9AE0E23D16B118620016B3B0 /* simpleLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = simpleLogger.h; sourceTree = "<group>"; };
 		9AE9587216A8417A00BC63F6 /* ramAnalyzer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ramAnalyzer.h; sourceTree = "<group>"; };
 		9AE9588F16A91B6600BC63F6 /* ramSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSession.h; sourceTree = "<group>"; };
 		9AF8FB3C16A7A89A000A1948 /* ramOscReciever.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ramOscReciever.h; sourceTree = "<group>"; };
@@ -271,6 +330,7 @@
 		607D7ACC16661B860063800A /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				9AE0E1FF16B118620016B3B0 /* ofxControlPanel */,
 				9AD4236416AEB78500BAC519 /* ofxBt */,
 				9AD3317716AE53BF0003FD7D /* ofxXmlSettings */,
 			);
@@ -722,6 +782,81 @@
 				9AD4244A16AEB78500BAC519 /* ofxBt.cpp */,
 				9AD4244B16AEB78500BAC519 /* ofxBt.h */,
 				9AD4244C16AEB78500BAC519 /* ofxBtHelper.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		9AE0E1FF16B118620016B3B0 /* ofxControlPanel */ = {
+			isa = PBXGroup;
+			children = (
+				9AE0E20216B118620016B3B0 /* src */,
+			);
+			name = ofxControlPanel;
+			path = ../../../addons/ofxControlPanel;
+			sourceTree = "<group>";
+		};
+		9AE0E20216B118620016B3B0 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				9AE0E20316B118620016B3B0 /* guiBaseObject.cpp */,
+				9AE0E20416B118620016B3B0 /* guiBaseObject.h */,
+				9AE0E20516B118620016B3B0 /* guiCallback.cpp */,
+				9AE0E20616B118620016B3B0 /* guiCallback.h */,
+				9AE0E20716B118620016B3B0 /* guiCallbackValue.cpp */,
+				9AE0E20816B118620016B3B0 /* guiCallbackValue.h */,
+				9AE0E20916B118620016B3B0 /* guiColor.cpp */,
+				9AE0E20A16B118620016B3B0 /* guiColor.h */,
+				9AE0E20B16B118620016B3B0 /* guiCustomImpl.h */,
+				9AE0E20C16B118620016B3B0 /* guiIncludes.h */,
+				9AE0E20D16B118620016B3B0 /* guiTextBase.cpp */,
+				9AE0E20E16B118620016B3B0 /* guiTextBase.h */,
+				9AE0E20F16B118620016B3B0 /* guiType2DSlider.cpp */,
+				9AE0E21016B118620016B3B0 /* guiType2DSlider.h */,
+				9AE0E21116B118620016B3B0 /* guiTypeButtonSlider.cpp */,
+				9AE0E21216B118620016B3B0 /* guiTypeButtonSlider.h */,
+				9AE0E21316B118620016B3B0 /* guiTypeChartPlotter.cpp */,
+				9AE0E21416B118620016B3B0 /* guiTypeChartPlotter.h */,
+				9AE0E21516B118620016B3B0 /* guiTypeCustom.cpp */,
+				9AE0E21616B118620016B3B0 /* guiTypeCustom.h */,
+				9AE0E21716B118620016B3B0 /* guiTypeDrawable.cpp */,
+				9AE0E21816B118620016B3B0 /* guiTypeDrawable.h */,
+				9AE0E21916B118620016B3B0 /* guiTypeFileLister.cpp */,
+				9AE0E21A16B118620016B3B0 /* guiTypeFileLister.h */,
+				9AE0E21B16B118620016B3B0 /* guiTypeLabel.cpp */,
+				9AE0E21C16B118620016B3B0 /* guiTypeLabel.h */,
+				9AE0E21D16B118620016B3B0 /* guiTypeLogger.cpp */,
+				9AE0E21E16B118620016B3B0 /* guiTypeLogger.h */,
+				9AE0E21F16B118620016B3B0 /* guiTypeMultiToggle.cpp */,
+				9AE0E22016B118620016B3B0 /* guiTypeMultiToggle.h */,
+				9AE0E22116B118620016B3B0 /* guiTypePanel.cpp */,
+				9AE0E22216B118620016B3B0 /* guiTypePanel.h */,
+				9AE0E22316B118620016B3B0 /* guiTypeSlider.cpp */,
+				9AE0E22416B118620016B3B0 /* guiTypeSlider.h */,
+				9AE0E22516B118620016B3B0 /* guiTypeText.cpp */,
+				9AE0E22616B118620016B3B0 /* guiTypeText.h */,
+				9AE0E22716B118620016B3B0 /* guiTypeTextDropDown.cpp */,
+				9AE0E22816B118620016B3B0 /* guiTypeTextDropDown.h */,
+				9AE0E22916B118620016B3B0 /* guiTypeTextInput.cpp */,
+				9AE0E22A16B118620016B3B0 /* guiTypeTextInput.h */,
+				9AE0E22B16B118620016B3B0 /* guiTypeToggle.cpp */,
+				9AE0E22C16B118620016B3B0 /* guiTypeToggle.h */,
+				9AE0E22D16B118620016B3B0 /* guiTypeVairableLister.cpp */,
+				9AE0E22E16B118620016B3B0 /* guiTypeVairableLister.h */,
+				9AE0E22F16B118620016B3B0 /* guiTypeVideo.cpp */,
+				9AE0E23016B118620016B3B0 /* guiTypeVideo.h */,
+				9AE0E23116B118620016B3B0 /* guiValue.cpp */,
+				9AE0E23216B118620016B3B0 /* guiValue.h */,
+				9AE0E23316B118620016B3B0 /* guiVariablePointer.h */,
+				9AE0E23416B118620016B3B0 /* guiXmlValue.h */,
+				9AE0E23516B118620016B3B0 /* ofxAutoControlPanel.h */,
+				9AE0E23616B118620016B3B0 /* ofxControlPanel.cpp */,
+				9AE0E23716B118620016B3B0 /* ofxControlPanel.h */,
+				9AE0E23816B118620016B3B0 /* simpleColor.cpp */,
+				9AE0E23916B118620016B3B0 /* simpleColor.h */,
+				9AE0E23A16B118620016B3B0 /* simpleFileLister.cpp */,
+				9AE0E23B16B118620016B3B0 /* simpleFileLister.h */,
+				9AE0E23C16B118620016B3B0 /* simpleLogger.cpp */,
+				9AE0E23D16B118620016B3B0 /* simpleLogger.h */,
 			);
 			path = src;
 			sourceTree = "<group>";

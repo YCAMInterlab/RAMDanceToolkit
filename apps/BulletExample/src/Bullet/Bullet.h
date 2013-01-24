@@ -35,7 +35,6 @@ public:
 	
 	void draw()
 	{
-		bEnabled = guiPtr->getValueB(key_enabled);
 		if (!bEnabled) return;
 		
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
