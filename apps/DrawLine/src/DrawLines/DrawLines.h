@@ -5,36 +5,23 @@
  -------------
  [
  {
- "style": {
- "type": "curve",
+ "style": {  "type": "curve",
  "curve_gain": 250,
  "line_width": 3,
  "color": [255, 100, 0],
  "effect": {
- "resampling": 10,
- "dotted": 2
+ "resampling": 2,
+ "dotted": 10,
+ "spiral":
+ {
+ "freq":20
+ }
  }
  },
- "from": {
- "type": "actor",
- "target": "Ando_2012-09-01_18-49-10",
- "node_id": 1
- },
- "from_cp": {
- "type": "actor",
- "target": "Ando_2012-09-01_18-49-10",
- "node_id": 0
- },
- "to": {
- "type": "actor",
- "target": "Ando_2012-09-01_18-49-10",
- "node_id": 21
- },
- "to_cp": {
- "type": "actor",
- "target": "Ando_2012-09-01_18-49-10",
- "node_id": 22
- }
+ "from"	  : { "type": "actor", "target": "Ando_2012-09-01_18-49-10", "node_id": 0 },
+ "from_cp": { "type": "actor", "target": "Ando_2012-09-01_18-49-10", "node_id": 13 },
+ "to"	  : { "type": "actor", "target": "Ando_2012-09-01_18-49-10", "node_id": 21 },
+ "to_cp"  : { "type": "actor", "target": "Ando_2012-09-01_18-49-10", "node_id": 22 }
  }
  ]
  -------------
