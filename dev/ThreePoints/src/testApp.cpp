@@ -1,6 +1,6 @@
 #include "testApp.h"
 
-static const string myActorName = "default";
+static const string myActorName = "Ando_2012-09-01_18-49-10";
 
 static const ofColor cyanPrint = ofColor::fromHex(0x00abec);
 static const ofColor magentaPrint = ofColor::fromHex(0xec008c);
@@ -88,7 +88,7 @@ void testApp::setupUI() {
 	float xInit = OFX_UI_GLOBAL_WIDGET_SPACING; 
 	float length = 320 - xInit;
 	gui = new ofxUICanvas(0, 0, length + xInit * 2, ofGetHeight());
-	gui->setFont("/System/Library/Fonts/HelveticaLight.ttf");
+//	gui->setFont("/Users/motoishmz/Library/Fonts/din-webfont.ttf");
 	ofColor cb(64, 192),
 	co(192, 192),
 	coh(128, 192),
@@ -127,7 +127,7 @@ void testApp::setup()
 	ofSetLineWidth(2);
 	ofSetVerticalSync(true);
 	ofBackground(0);
-	oscReceiver.setup(10001);
+	oscReceiver.setup(10000);
 	
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
@@ -158,6 +158,7 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
+	
 }
 
 
@@ -165,7 +166,8 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawFloor()
 {
-	ramBasicFloor(600., 50., ofColor(255, 64), ofColor(255, 96));
+//	ramBasicFloor(600., 50., ofColor(255, 64), ofColor(255, 96));
+	ramBasicFloor(ramFloor::FLOOR_NONE);
 }
 
 //--------------------------------------------------------------

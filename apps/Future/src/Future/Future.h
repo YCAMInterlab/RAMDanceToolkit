@@ -73,10 +73,6 @@ public:
 			ghost.setDistance(distance);
 		}
 		
-		if(guiPtr->hasValueChanged( getSceneEnableKey() ))
-		{
-			bEnabled = guiPtr->getValueB( getSceneEnableKey() );
-		}
 	}
 	
 	void draw()

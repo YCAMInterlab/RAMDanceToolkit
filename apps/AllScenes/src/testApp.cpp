@@ -60,15 +60,13 @@ void testApp::setup()
 		string key = scenes.at(i)->getSceneEnableKey();
 		gui.addToggle(key, false);
 	}
+	
 	for (int i=0; i<scenes.size(); i++)
 	{
 		scenes.at(i)->setup();
 		scenes.at(i)->setMatrix(shadowMat);
 		scenes.at(i)->refreshControlPanel(gui);
 	}
-	
-	
-	scenes.back()->setEnabled(true);
 }
 
 //--------------------------------------------------------------
@@ -101,6 +99,17 @@ void testApp::update()
 		float bgcolor = gui.getValueF("Background");
 		ofBackground(bgcolor);
 	}
+	
+
+	/* Scenes */
+	for (int i=0; i<scenes.size(); i++)
+	{
+		string enableKey =  scenes.at(i)->getSceneEnableKey();
+		if(gui.hasValueChanged( enableKey ))
+		{
+			scenes.at(i)->toggle();
+		}
+	}
 }
 
 //--------------------------------------------------------------
@@ -131,7 +140,8 @@ void testApp::drawActor(ramActor &actor)
 	if ( gui.getValueB("Draw Actor") )
 		ramBasicActor(actor, shadowMat.getPtr());
 	
-	for (int i=0; i<scenes.size(); i++) scenes.at(i)->drawActor(actor);
+	for (int i=0; i<scenes.size(); i++)
+		scenes.at(i)->drawActor(actor);
 }
 
 //--------------------------------------------------------------
