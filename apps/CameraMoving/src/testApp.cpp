@@ -1,11 +1,5 @@
 #include "testApp.h"
 
-/*!
- Scenes
- */
-//#include "BigBox.h"
-//BigBox bigbox;
-
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -36,12 +30,6 @@ void testApp::setup()
 	camSettingXml.loadFile("settings.camera.xml");
 	setting_cam = ramCameraSettings::getSettings(camSettingXml);
 	gui.addMultiToggle("Camera Position", 0, ramCameraSettings::getCamNames(camSettingXml));
-	
-	
-	/*!
-	 scenes setup
-	 */	
-//	scenes.push_back( bigbox.getPtr() );
 	
 	
 	/* adding GUI Panel for each scene */
@@ -89,6 +77,9 @@ void testApp::update()
 		float bgcolor = gui.getValueF("Background");
 		ofBackground(bgcolor);
 	}
+	
+//	ofEasyCam
+	
 }
 
 //--------------------------------------------------------------
@@ -97,6 +88,27 @@ void testApp::draw()
 	/* Scenes draw */
 	for (int i=0; i<scenes.size(); i++)
 		scenes.at(i)->draw();
+	
+	ramCameraBegin();
+	
+	float delta = ofGetElapsedTimef();
+	float radius = 600;
+	float speed = 0.5;
+	
+	ofVec3f camPos(0.1,
+				   sin(delta * speed) * radius,
+				   cos(delta * speed) * radius);
+//	cout << camPos << endl;
+//	getActiveCamera().setPosition(camPos);
+	//	getActiveCamera().lookAt(ofVec3f(0,0,0), ofVec3f(0.7, 1.0, 0.0));
+	cout << "Position:" << getActiveCamera().getPosition() << endl;
+	cout << "Fov:" << getActiveCamera().getFov() << endl;
+	cout << "NearClip:" << getActiveCamera().getNearClip() << endl;
+	cout << "FarClip:" << getActiveCamera().getFarClip() << endl;
+	
+		ofDrawAxis(100);
+	
+	ramCameraEnd();
 }
 
 
@@ -185,3 +197,22 @@ void testApp::dragEvent(ofDragInfo dragInfo)
 	
 }
 
+
+//
+//void lookAtTest()
+//{
+//	if(parent) upVector = upVector * ofMatrix4x4::getInverseOf(parent->getGlobalTransformMatrix());
+//	ofVec3f zaxis = (getGlobalPosition() - lookAtPosition).normalized();
+//	if (zaxis.length() > 0) {
+//		ofVec3f xaxis = upVector.getCrossed(zaxis).normalized();
+//		ofVec3f yaxis = zaxis.getCrossed(xaxis);
+//		
+//		ofMatrix4x4 m;
+//		m._mat[0].set(xaxis.x, xaxis.y, xaxis.z, 0);
+//		m._mat[1].set(yaxis.x, yaxis.y, yaxis.z, 0);
+//		m._mat[2].set(zaxis.x, zaxis.y, zaxis.z, 0);
+//		
+//		setGlobalOrientation(m.getRotate());
+//	}
+//
+//}

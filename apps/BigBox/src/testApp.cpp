@@ -17,7 +17,7 @@ void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
-	ofBackground( getRamColor(ramColor::WHITE)-20 );
+	ofBackground( ramColor::WHITE-20 );
 	
 	
 	/*!
@@ -111,8 +111,8 @@ void testApp::drawFloor()
 	ramBasicFloor(gui.getValueI("Floor pattern"),
 				  gui.getValueF("Floor size"),
 				  gui.getValueF("Grid size"),
-				  getRamColor(ramColor::BLUE_LIGHT),
-				  getRamColor(ramColor::BLUE_LIGHT)-20);
+				  ramColor::BLUE_LIGHT,
+				  ramColor::BLUE_LIGHT-20);
 }
 
 //--------------------------------------------------------------
