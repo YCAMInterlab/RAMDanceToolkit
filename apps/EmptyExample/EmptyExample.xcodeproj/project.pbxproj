@@ -197,6 +197,7 @@
 		9A44B0ED16AEBDA700DC4CB6 /* simpleFileLister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = simpleFileLister.h; sourceTree = "<group>"; };
 		9A44B0EE16AEBDA700DC4CB6 /* simpleLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = simpleLogger.cpp; sourceTree = "<group>"; };
 		9A44B0EF16AEBDA700DC4CB6 /* simpleLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = simpleLogger.h; sourceTree = "<group>"; };
+		9A985E5216B3F9D000F11B9E /* EmptyScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyScene.h; sourceTree = "<group>"; };
 		9AA73DE8165B7E7D006FBD32 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		9AA73DE9165B7E7D006FBD32 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		9AA73DEA165B7E7D006FBD32 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
@@ -407,6 +408,14 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		9A985E5116B3F9D000F11B9E /* EmptyScene */ = {
+			isa = PBXGroup;
+			children = (
+				9A985E5216B3F9D000F11B9E /* EmptyScene.h */,
+			);
+			path = EmptyScene;
+			sourceTree = "<group>";
+		};
 		9AA73DE6165B7E7D006FBD32 /* ofxXmlSettings */ = {
 			isa = PBXGroup;
 			children = (
@@ -511,6 +520,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				9A985E5116B3F9D000F11B9E /* EmptyScene */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,

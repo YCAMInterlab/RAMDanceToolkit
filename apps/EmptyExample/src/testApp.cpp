@@ -3,8 +3,8 @@
 /*!
  Scenes
  */
-#include "Triangles.h"
-Triangles triangleScene;
+#include "EmptyScene.h"
+EmptyScene empty;
 
 
 #pragma mark - oF methods
@@ -22,8 +22,6 @@ void testApp::setup()
 	ramEnableAllEvents();
 	oscReceiver.setup(10000);
 	
-	const float lightPosition[] = { -100.0f, 500.0f, 200.0f };
-	gl::calcShadowMatrix( gl::kGroundPlaneYUp, lightPosition, shadowMat.getPtr() );
 	
 	
 	/*!
@@ -40,8 +38,9 @@ void testApp::setup()
 	
 	/*!
 	 scenes setup
-	 */
-	scenes.push_back( triangleScene.getPtr() );
+	 */	
+	scenes.push_back( empty.getPtr() );
+	
 	
 	/* adding GUI Panel for each scene */
 	gui.addPanel("All Scenes");
@@ -55,10 +54,7 @@ void testApp::setup()
 	{
 		scenes.at(i)->setup();
 		scenes.at(i)->refreshControlPanel(gui);
-		scenes.at(i)->setMatrix(shadowMat);
 	}
-	
-	scenes.front()->enable();
 }
 
 //--------------------------------------------------------------
