@@ -1,6 +1,9 @@
 #include "testApp.h"
 
 
+#include "CameraMover.h"
+CameraMover mover;
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -30,6 +33,9 @@ void testApp::setup()
 	camSettingXml.loadFile("settings.camera.xml");
 	setting_cam = ramCameraSettings::getSettings(camSettingXml);
 	gui.addMultiToggle("Camera Position", 0, ramCameraSettings::getCamNames(camSettingXml));
+	
+	
+	scenes.push_back( mover.getPtr() );
 	
 	
 	/* adding GUI Panel for each scene */
@@ -77,9 +83,6 @@ void testApp::update()
 		float bgcolor = gui.getValueF("Background");
 		ofBackground(bgcolor);
 	}
-	
-//	ofEasyCam
-	
 }
 
 //--------------------------------------------------------------
@@ -95,18 +98,13 @@ void testApp::draw()
 	float radius = 600;
 	float speed = 0.5;
 	
-	ofVec3f camPos(0.1,
-				   sin(delta * speed) * radius,
-				   cos(delta * speed) * radius);
 //	cout << camPos << endl;
 //	getActiveCamera().setPosition(camPos);
-	//	getActiveCamera().lookAt(ofVec3f(0,0,0), ofVec3f(0.7, 1.0, 0.0));
-	cout << "Position:" << getActiveCamera().getPosition() << endl;
-	cout << "Fov:" << getActiveCamera().getFov() << endl;
-	cout << "NearClip:" << getActiveCamera().getNearClip() << endl;
-	cout << "FarClip:" << getActiveCamera().getFarClip() << endl;
-	
-		ofDrawAxis(100);
+//	getActiveCamera().lookAt(ofVec3f(0,0,0), ofVec3f(0.7, 1.0, 0.0));
+//	cout << "Position:" << getActiveCamera().getPosition() << endl;
+//	cout << "Fov:" << getActiveCamera().getFov() << endl;
+//	cout << "NearClip:" << getActiveCamera().getNearClip() << endl;
+//	cout << "FarClip:" << getActiveCamera().getFarClip() << endl;
 	
 	ramCameraEnd();
 }
