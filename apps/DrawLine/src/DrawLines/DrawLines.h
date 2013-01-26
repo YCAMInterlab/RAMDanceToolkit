@@ -41,7 +41,7 @@ public:
 		// ---
 		
 		target_type = "actor";
-		target_actor = "Ando_2012-09-01_18-49-10";
+		target_actor = "default_unknown_date";
 	}
 		
 	

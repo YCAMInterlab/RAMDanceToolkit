@@ -18,8 +18,6 @@ public:
 		guiPtr = &gui;
 		
 		gui.addPanel(scene_name);
-		
-		cout << "ramSceneBase::refreshControlPanel() was not overrided at: " +scene_name << endl;
 	};
 	
 	virtual void setup() {}

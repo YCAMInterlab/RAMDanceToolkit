@@ -170,6 +170,7 @@ public:
 	
 	string name;
 	ofVec3f pos;
+	ofVec3f lookAt;
 	
 	unsigned int moving_type;
 	ofVec3f moving_look_at;
@@ -193,10 +194,15 @@ public:
 	ramCameraSettings(){}
 	ramCameraSettings(ofxXmlSettings& setting)
 	{
-		pos = ofVec3f(setting.getValue("x", 0),
-					  setting.getValue("y", 0),
-					  setting.getValue("z", 0));
 		name = setting.getValue("name", "unknown");
+		
+		pos = ofVec3f(setting.getValue("pos:x", 0),
+					  setting.getValue("pos:y", 0),
+					  setting.getValue("pos:z", 0));
+		
+		lookAt = ofVec3f(setting.getValue("look_at:x", 0),
+						 setting.getValue("look_at:y", 100),
+						 setting.getValue("look_at:z", 0));
 	}
 	
 	

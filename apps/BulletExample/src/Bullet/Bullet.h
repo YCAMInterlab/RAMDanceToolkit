@@ -55,7 +55,6 @@ public:
 	
 	void drawActor(ramActor &actor)
 	{
-		bEnabled = guiPtr->getValueB(key_enabled);
 		if (!bEnabled) return;
 		
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
@@ -84,14 +83,5 @@ public:
 	void drawFloor()
 	{
 		
-	}
-	
-	
-#pragma - Scene original events & methods
-	
-	
-	void keyPressed(ofEventArgs &e)
-	{
-		cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
 	}
 };
