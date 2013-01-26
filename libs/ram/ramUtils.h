@@ -187,6 +187,7 @@ public:
 	ofVec3f moving_axis_up_vector;
 	float moving_radius;
 	float moving_speed;
+	float moving_deg;
 	
 	
 	ramCameraSettings(){}
