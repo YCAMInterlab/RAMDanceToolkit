@@ -128,6 +128,7 @@ class ramColor
 {
 	
 public:
+	
 	static const ofColor RED_NORMAL;
 	static const ofColor RED_DEEP;
 	static const ofColor RED_LIGHT;
@@ -145,6 +146,13 @@ public:
 	static const ofColor WHITE;
 };
 
+
+// !!!:TODO: remove getRamColor
+static const ofColor getRamColor(ofColor color)
+{
+	ofLogWarning("getRamColor is deprecated");
+	return color;
+}
 
 
 #pragma mark - ramCameraSettings
