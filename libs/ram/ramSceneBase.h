@@ -11,6 +11,7 @@ public:
 	inline ramActorManager& getActorManager() { return ramActorManager::instance(); }
 	inline ramActor& getActor(string name) { return ramActorManager::instance().getActor(name); }
 	inline ramRigidBody& getRigidBody(string name) { return ramActorManager::instance().getRigidBody(name); }
+	inline ofCamera& getActiveCamera() { return ramCameraManager::instance().getActiveCamera(); }
 	
 	virtual void refreshControlPanel(ramControlPanel& gui)
 	{
