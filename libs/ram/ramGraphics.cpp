@@ -67,7 +67,10 @@ void ramBasicFloor(const int floorPattern,
 }
 
 
-void ramBasicActor(ramActor& actor, float* matrixPtr)
+void ramBasicActor(ramActor& actor,
+				   ofColor jointColor,
+				   ofColor lineColor,
+				   float* matrixPtr)
 {
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glEnable(GL_DEPTH_TEST);
@@ -78,13 +81,13 @@ void ramBasicActor(ramActor& actor, float* matrixPtr)
 		float jointSize = (i==ramActor::JOINT_HEAD) ? 6.0 : 3.0;
 		
 		node.transformBegin();
-		ofSetColor( ramColor::YELLOW_LIGHT );
-		ofBox(jointSize);
+		ofSetColor( jointColor );
+		ofBox( jointSize );
 		node.transformEnd();
 		
 		if (node.hasParent())
 		{
-			ofSetColor(ramColor::YELLOW_LIGHT-40.0);
+			ofSetColor( lineColor );
 			ofLine(node, *node.getParent());
 		}
 		
@@ -108,6 +111,12 @@ void ramBasicActor(ramActor& actor, float* matrixPtr)
 	glPopMatrix();
 	glDisable(GL_DEPTH_TEST);
 	glPopAttrib();
+	
+}
+
+void ramBasicActor(ramActor& actor, float* matrixPtr)
+{
+	ramBasicActor(actor, ramColor::BLUE_LIGHT, ramColor::GRAY, matrixPtr);
 }
 
 void ramBox(const ramNode& o, float size)
