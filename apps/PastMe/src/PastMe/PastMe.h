@@ -83,22 +83,37 @@ public:
 	{
 		if (!bEnabled) return;
 		
-		
 		ofPushStyle();
+		ofColor currSklColor( 110, 20, 20 );
+		ofColor recSklColor( 20, 20, 110 );
+		ofColor locusColor( 20, 110, 20 );
+		
+		
 		for ( int i=0; i<pastMe.size(); i++ )
 		{
 			ramActor &skl = pastMe.at( i );
 			
 			if (showActor)
+			{
 				ramBasicActor(skl, ramColor::BLUE_DEEP, ramColor::BLUE_DEEP, getMatrix().getPtr());
+			}
 			
 			if (showBox)
-				ramActorCube(skl);
+			{
+				drawBox(skl);
+			}
+			
+			/*!
+				Actor name
+			 */
+//			ofSetColor( recSklColor );
+//			ofSetDrawBitmapMode( OF_BITMAPMODE_MODEL_BILLBOARD );
+//			ofVec3f namePos = skl.getNode( ramActor::JOINT_HEAD ).getPosition();
+//			namePos.y += 20.0;
+//			ofDrawBitmapString( actor.getName(), namePos );
 		}
-		
 		ofPopStyle();
-		
-		
+
 	}
 	
 	void drawRigid(ramRigidBody &rigid)
