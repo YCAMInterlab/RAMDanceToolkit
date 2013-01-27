@@ -4,6 +4,33 @@
 #include "ramPrimitive.h"
 #include "ramUtils.h"
 
+
+
+void ramBox(const ramNode& o, float size)
+{
+	ofBox(o, size);
+	
+	if (ramGetEnablePhysicsPrimitive())
+	{
+		ramBoxPrimitive *p = new ramBoxPrimitive(o.getPosition(), size);
+		//		p->setTransformMatrix(o.getMatrix());
+		ramPhysics::instance().registerTempraryPrimitive(p);
+	}
+}
+
+void ramSphere(const ramNode& o, float radius)
+{
+	ofSphere(o, radius);
+	
+	if (ramGetEnablePhysicsPrimitive())
+	{
+		ramSpherePrimitive *p = new ramSpherePrimitive(o.getPosition(), radius);
+		//		p->setTransformMatrix(o.getMatrix());
+		ramPhysics::instance().registerTempraryPrimitive(p);
+	}
+}
+
+
 void ramBasicFloor(const int floorPattern,
 				   const float floorSize,
 				   const float tileSize,
@@ -119,26 +146,39 @@ void ramBasicActor(ramActor& actor, float* matrixPtr)
 	ramBasicActor(actor, ramColor::BLUE_LIGHT, ramColor::GRAY, matrixPtr);
 }
 
-void ramBox(const ramNode& o, float size)
-{
-	ofBox(o, size);
-	
-	if (ramGetEnablePhysicsPrimitive())
-	{
-		ramBoxPrimitive *p = new ramBoxPrimitive(o.getPosition(), size);
-//		p->setTransformMatrix(o.getMatrix());
-		ramPhysics::instance().registerTempraryPrimitive(p);
-	}
-}
 
-void ramSphere(const ramNode& o, float radius)
+void ramActorCube(ramActor& actor)
 {
-	ofSphere(o, radius);
+	ofVec3f maxPos = actor.getNode( ramActor::JOINT_CHEST ).getPosition();
+	ofVec3f minPos = actor.getNode( ramActor::JOINT_CHEST ).getPosition();
 	
-	if (ramGetEnablePhysicsPrimitive())
+	for (int j=0; j<actor.getNumNode(); j++)
 	{
-		ramSpherePrimitive *p = new ramSpherePrimitive(o.getPosition(), radius);
-//		p->setTransformMatrix(o.getMatrix());
-		ramPhysics::instance().registerTempraryPrimitive(p);
+		ofVec3f pos = actor.getNode(j).getPosition();
+		
+		if( maxPos.x <= pos.x ) maxPos.x = pos.x;
+		if( maxPos.y <= pos.y ) maxPos.y = pos.y;
+		if( maxPos.z <= pos.z ) maxPos.z = pos.z;
+		
+		if( minPos.x > pos.x ) minPos.x = pos.x;
+		if( minPos.y > pos.y ) minPos.y = pos.y;
+		if( minPos.z > pos.z ) minPos.z = pos.z;
 	}
+	
+	ofVec3f scale, axis;
+	scale = (maxPos - minPos);
+	axis = (maxPos + minPos) / 2;
+	
+	ofSetLineWidth( 2 );
+	ofSetColor( ramColor::BLUE_DEEP );
+	
+	ofPushMatrix();
+	{
+		ofTranslate( axis.x, axis.y, axis.z );
+		ofScale( scale.x, scale.y, scale.z );
+		ofNoFill();
+		ofBox(1);
+	}
+	ofPopMatrix();
+
 }

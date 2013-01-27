@@ -144,6 +144,7 @@ public:
 	static const ofColor BLACK;
 	static const ofColor GRAY;
 	static const ofColor WHITE;
+	static const ofColor SHADOW;
 };
 
 
