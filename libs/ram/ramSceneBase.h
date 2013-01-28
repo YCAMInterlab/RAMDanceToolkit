@@ -30,6 +30,7 @@ public:
 	inline void disable() { bEnabled = false; }
 	inline void toggle() { bEnabled ^= true; }
 	inline void setEnabled(bool b) { bEnabled = b; }
+	inline bool isEnabled() { return bEnabled; }
 	
 	inline string getSceneEnableKey() { return key_enabled; }
 	inline string getSceneName() { return scene_name.empty() ? "no name" : scene_name; }
@@ -38,7 +39,6 @@ public:
 	
 protected:
 	
-	bool bEnabled;
 	string scene_name, key_enabled;
 	
 	void setSceneName(string name)
@@ -51,6 +51,7 @@ protected:
 	
 private:
 	
+	bool bEnabled;
 	ramControlPanel *guiPtr;
 	
 };

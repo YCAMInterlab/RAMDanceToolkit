@@ -45,7 +45,6 @@ void testApp::update()
 	for (int i=0; i<scenes.size(); i++)
 	{
 		ramSceneBase* scene = scenes.at(i);
-		scene->update();
 		
 		/* Enable / Disable scenes */
 		string key = scene->getSceneEnableKey();
@@ -55,6 +54,13 @@ void testApp::update()
 			scene->setEnabled( ramGlobal().getGUI().getValueB(key) );
 		}
 	}
+	
+	for (int i=0; i<scenes.size(); i++)
+	{
+		ramSceneBase* scene = scenes.at(i);
+		if (!scene->isEnabled()) continue;
+		scene->update();
+	}
 }
 
 //--------------------------------------------------------------
@@ -62,7 +68,11 @@ void testApp::draw()
 {
 	/* Scenes draw */
 	for (int i=0; i<scenes.size(); i++)
-		scenes.at(i)->draw();
+	{
+		ramSceneBase* scene = scenes.at(i);
+		if (!scene->isEnabled()) continue;
+		scene->draw();
+	}
 }
 
 
@@ -88,7 +98,12 @@ void testApp::drawActor(ramActor &actor)
 	ramBasicActor(actor, ramColor::GRAY, ramColor::GRAY);
 	ramGlobal().endShadowMatrix();
 	
-	for (int i=0; i<scenes.size(); i++) scenes.at(i)->drawActor(actor);
+	for (int i=0; i<scenes.size(); i++)
+	{
+		ramSceneBase* scene = scenes.at(i);
+		if (!scene->isEnabled()) continue;
+		scene->drawActor(actor);
+	}
 }
 
 //--------------------------------------------------------------

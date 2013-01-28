@@ -47,8 +47,6 @@ public:
 	
 	void update()
 	{
-		if (!bEnabled) return;
-		
 		// line width
 		bigBoxLineWidth = gui().getValueF(key_line_width);
 		
@@ -69,8 +67,6 @@ public:
 	
 	void draw()
 	{
-		if (!bEnabled) return;
-		
 		ramActor &actor = getActor(myActorName);
 		ofColor shadowColor = ramColor::GRAY;
 		shadowColor.a = 90;
