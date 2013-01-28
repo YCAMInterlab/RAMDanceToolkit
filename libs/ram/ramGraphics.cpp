@@ -8,12 +8,13 @@
 
 void ramBox(const ramNode& o, float size)
 {
-	ofBox(o, size);
+	o.transformBegin();
+	ofBox(size);
+	o.transformEnd();
 	
 	if (ramGetEnablePhysicsPrimitive())
 	{
-		ramBoxPrimitive *p = new ramBoxPrimitive(o.getPosition(), size);
-		//		p->setTransformMatrix(o.getMatrix());
+		ramBoxPrimitive *p = new ramBoxPrimitive(o.getTransformMatrix(), size);
 		ramPhysics::instance().registerTempraryPrimitive(p);
 	}
 }
@@ -25,7 +26,6 @@ void ramSphere(const ramNode& o, float radius)
 	if (ramGetEnablePhysicsPrimitive())
 	{
 		ramSpherePrimitive *p = new ramSpherePrimitive(o.getPosition(), radius);
-		//		p->setTransformMatrix(o.getMatrix());
 		ramPhysics::instance().registerTempraryPrimitive(p);
 	}
 }

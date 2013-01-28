@@ -34,4 +34,5 @@ public:
 	// ...
 	// ------------------------
 	ramOscReceiver oscReceiver;
+    ramNodeFinder nodeFinder;
 };

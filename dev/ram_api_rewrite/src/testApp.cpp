@@ -1,17 +1,12 @@
 #include "testApp.h"
 
 
-const string myActorName = "Ando_2012-09-01_18-49-10";
+const string myActorName = "Ando_2012-08-29_13-48-10";
 
+#include "ofxBt.h"
 
-#include "ofxAutoControlPanel.h"
-ofxAutoControlPanel gui;
-ramGhost ghost;
-
-vector<string> slidersKey;
-const string sliderEmphasis = "emphasis";
-const string sliderFreshness = "freshness";
-
+ramBoxPrimitive *cube;
+ramSpherePrimitive *sphere;
 
 //--------------------------------------------------------------
 void testApp::setup()
@@ -19,55 +14,40 @@ void testApp::setup()
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
 	ofBackground(0);
-	oscReceiver.setup(10001);
+	oscReceiver.setup(10000);
 
-	
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
 	
-	
-	// gui
-	ofxControlPanel::setTextColor(0xffffff);
-	ofxControlPanel::setBackgroundColor(0x000000);
-	gui.setup();
-	gui.addPanel("ramGhost");
-	gui.addSlider(sliderEmphasis, 20, 0, 100);
-	gui.addSlider(sliderFreshness, 20, 0, 1000);
-	slidersKey.push_back(sliderEmphasis);
-	slidersKey.push_back(sliderFreshness);
+	cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
+	sphere = new ramSpherePrimitive(ofVec3f(0, 0, 0), 50);
 }
-
 
 //--------------------------------------------------------------
 void testApp::update()
 {
 	oscReceiver.update();
-	
-	if (gui.hasValueChanged(slidersKey))
-	{
-		ghost.setEmphasis( gui.getValueF(sliderEmphasis) );
-		ghost.setFreshness( gui.getValueF(sliderFreshness) );
-	}
-	ghost.update(getActor(myActorName));
 }
-
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
     ofEnableSmoothing();
-	ofNoFill();
+	
+	ramNodeFinder nf(ramActor::JOINT_ABDOMEN);
+	
 	ramCameraBegin();
-    {
-		ramActor &actor = ghost.getActor();
-		for (int i=0; i<actor.getNumNode(); i++)
-		{
-			ramNode &node = actor.getNode(i);
-			ofBox(node, 10);
-		}
-	}
+    
+	ofNoFill();
+	
+	cube->draw();
+	sphere->draw();
+    
+//	ramPhysics::instance().debugDraw();
+	
+    ofDisableSmoothing();
+	
 	ramCameraEnd();
-	ofDisableSmoothing();
 }
 
 
@@ -75,9 +55,8 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawFloor()
 {
-    ramBasicFloor(600, 50);
+    
 }
-
 
 // ram methods
 //--------------------------------------------------------------
@@ -86,22 +65,24 @@ void testApp::drawActor(ramActor &actor)
     for (int i=0; i<actor.getNumNode(); i++)
     {
         ramNode &node = actor.getNode(i);
-		glPushAttrib(GL_ALL_ATTRIB_BITS);
-		glPushMatrix();
-		ofPushStyle();
-		{
-			ofSetColor(255, 0, 0);
-			ofNoFill();
-			ofSetColor(0, 255, 0);
-			ramBox(node, 20);
-		}
-		ofPopStyle();
-		glPopMatrix();
-		glPopAttrib();
+        
+        {
+            glPushAttrib(GL_ALL_ATTRIB_BITS);
+            glPushMatrix();
+            ofPushStyle();
+
+            ofSetColor(255, 0, 0);
+            ofNoFill();
+			
+            ofSetColor(0, 255, 0);
+            ramBox(node, 10);
+            
+            ofPopStyle();
+            glPopMatrix();
+            glPopAttrib();
+        }
     }
 }
-
-
 
 // ram methods
 //--------------------------------------------------------------
@@ -110,9 +91,12 @@ void testApp::drawRigid(ramRigidBody &rigid)
 }
 
 
+
+
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
+	cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
 }
 
 //--------------------------------------------------------------
