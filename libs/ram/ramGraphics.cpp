@@ -5,11 +5,13 @@
 
 void ramBox(const ramNode& o, float size)
 {
-	ofBox(o, size);
+	o.transformBegin();
+	ofBox(size);
+	o.transformEnd();
 	
 	if (ramGetEnablePhysicsPrimitive())
 	{
-		ramBoxPrimitive *p = new ramBoxPrimitive(o.getPosition(), size);
+		ramBoxPrimitive *p = new ramBoxPrimitive(o.getTransformMatrix(), size);
 //		p->setTransformMatrix(o.getMatrix());
 		ramPhysics::instance().registerTempraryPrimitive(p);
 	}

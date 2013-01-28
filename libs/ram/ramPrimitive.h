@@ -28,6 +28,9 @@ public:
 	ramBoxPrimitive(const ofVec3f& pos, float size = 100);
 	ramBoxPrimitive(const ofVec3f& pos, const ofVec3f& size);
 	
+	ramBoxPrimitive(const ofMatrix4x4& mat, float size = 100);
+	ramBoxPrimitive(const ofMatrix4x4& mat, const ofVec3f& size);
+
 protected:
 	void customDraw();
 };

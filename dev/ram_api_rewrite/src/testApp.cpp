@@ -48,7 +48,7 @@ void testApp::draw()
 	cube->draw();
 	sphere->draw();
 	
-	ramPhysics::instance().debugDraw();
+//	ramPhysics::instance().debugDraw();
 	
 //    {
 //        vector<ramNode> nodes = nf.get();
@@ -101,34 +101,14 @@ void testApp::drawActor(ramActor &actor)
 
             ofSetColor(255, 0, 0);
             ofNoFill();
-//            node.transformBegin();
-//            ofBox(10);
-//            node.transformEnd();
-
+			
             ofSetColor(0, 255, 0);
-            ramBox(node, 20);
+            ramBox(node, 10);
             
             ofPopStyle();
             glPopMatrix();
             glPopAttrib();
         }
-    
-
-//        if (node.hasParent())
-//        {
-//            ramNode *parent_node = node.getParent();
-//                
-//            glPushAttrib(GL_ALL_ATTRIB_BITS);
-//            glPushMatrix();
-//            ofPushStyle();
-//            
-//            ofSetColor(255);
-//            ofLine(node, *parent_node);
-//            
-//            ofPopStyle();
-//            glPopMatrix();
-//            glPopAttrib();
-//        }
     }
 }
 
@@ -136,29 +116,6 @@ void testApp::drawActor(ramActor &actor)
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
-//    for (int i=0; i<rigid.getNumNode(); i++)
-//    {
-//        ramNode &node = rigid.getNode(i);
-//
-//        {
-//            glPushAttrib(GL_ALL_ATTRIB_BITS);
-//            glPushMatrix();
-//            ofPushStyle();
-//
-//            ofSetColor(255, 0, 0);
-//            ofNoFill();
-//            node.transformBegin();
-//            ofBox(10);
-//            node.transformEnd();
-//
-//            ofSetColor(0, 255, 0);
-//            ofBox(node, 20);
-//
-//            ofPopStyle();
-//            glPopMatrix();
-//            glPopAttrib();
-//        }
-//    }
 }
 
 
