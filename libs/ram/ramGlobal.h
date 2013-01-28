@@ -21,3 +21,4 @@ private:
 };
 
 ramGlobalContext& ramGlobal();
+string ramToResourcePath(string path);
