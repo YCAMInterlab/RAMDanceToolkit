@@ -46,11 +46,4 @@ public:
 	ramControlPanel gui;
 	
 	ofMatrix4x4 shadowMat;
-	
-	
-	// Setting files
-	// ------------------------
-	
-	ofxXmlSettings camSettingXml;
-	vector<ramCameraSettings> setting_cam;
 };

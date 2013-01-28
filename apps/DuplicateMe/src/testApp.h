@@ -50,7 +50,7 @@ public:
 	
 	// Setting files
 	// ------------------------
-	
+		
 	ofxXmlSettings camSettingXml;
 	vector<ramCameraSettings> setting_cam;
 };

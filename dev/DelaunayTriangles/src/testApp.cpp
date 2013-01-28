@@ -3,8 +3,10 @@
 /*!
  Scenes
  */
-#include "EmptyScene.h"
-EmptyScene empty;
+#include "CameraMover.h"
+#include "Triangles.h"
+Triangles tri;
+CameraMover mover;
 
 
 #pragma mark - oF methods
@@ -36,7 +38,8 @@ void testApp::setup()
 	/*!
 	 scenes setup
 	 */
-	scenes.push_back( empty.getPtr() );
+	scenes.push_back( tri.getPtr() );
+	scenes.push_back( mover.getPtr() );
 	gui.addScenePanels(scenes);
 	
 	
@@ -48,6 +51,8 @@ void testApp::setup()
 	
 	for (int i=0; i<scenes.size(); i++)
 		scenes.at(i)->setMatrix(shadowMat);
+	
+	scenes.front()->enable();
 }
 
 //--------------------------------------------------------------
@@ -101,7 +106,7 @@ void testApp::drawActor(ramActor &actor)
 	{
 		ramBasicActor(actor, shadowMat.getPtr());
 	}
-		
+	
 	
 	for (int i=0; i<scenes.size(); i++) scenes.at(i)->drawActor(actor);
 }
