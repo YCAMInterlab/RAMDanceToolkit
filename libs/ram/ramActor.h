@@ -5,6 +5,7 @@
 #include "ofxOsc.h"
 
 #include "ramConstants.h"
+#include "ramAccelerometer.h"
 
 class ramNodeArray;
 
@@ -19,7 +20,6 @@ public:
 	ramNode();
 	ramNode(const ramNode& copy) { *this = copy; }
 	ramNode& operator=(const ramNode& copy);
-
 	const string& getName() { return name; }
 	int getID() { return node_id; }
 
@@ -33,13 +33,23 @@ public:
 	
 	const ofMatrix4x4& getTransformMatrix() const { return getLocalTransformMatrix(); }
 	const ofMatrix4x4& getMatrix() const { return getLocalTransformMatrix(); }
-
+	
+	inline ofVec3f getVelocity() { return accerelometer.velocity; }
+	inline ofVec3f getAcceleration() { return accerelometer.acceleration; }
+	inline ofQuaternion getAngularVelocity() { return accerelometer.angular_velocity; }
+	inline ofQuaternion getAngularAcceleration() { return accerelometer.angular_acceleration; }
+	
+	operator ofVec3f() const {return getPosition();}
+	
+	inline ramAccelerometer& getAccerelometer() { return accerelometer; }
+	
 private:
 
 	int node_id;
 	string name;
 
 	ramNode *parent;
+	ramAccelerometer accerelometer;
 
 	// ignore global transform function
 	ofMatrix4x4 getGlobalTransformMatrix() const { return ofMatrix4x4(); }
@@ -65,9 +75,10 @@ public:
 
 	int getNumNode() { return nodes.size(); }
 	ramNode& getNode(int node_id) { return nodes[node_id]; }
-
-	inline bool isOutdated() { return (ofGetElapsedTimef() -  last_update_client_time) > RAM_OUTDATED_DULATION; }
-
+	
+	inline bool isOutdated() { return (ofGetElapsedTimef() -  last_update_client_time) > RAM_OUTDATED_DURATION; }
+	inline float getTimestamp() { return last_update_client_time; }
+	
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
 
 protected:
@@ -79,7 +90,6 @@ protected:
 	float current_timestamp;
 
 	float last_update_client_time;
-
 };
 
 #pragma mark - ramRigidBody
@@ -105,7 +115,7 @@ public:
 	enum Joint
 	{
 		JOINT_HIPS              = 0,
-		JOINT_ADBOMEN           = 1,
+		JOINT_ABDOMEN           = 1,
 		JOINT_CHEST             = 2,
 		JOINT_NECK              = 3,
 		JOINT_HEAD              = 4,
@@ -139,10 +149,22 @@ public:
 	virtual ~ramActor();
 
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
-
+	static string getJointName(int jointId) { return jointName[jointId]; }
+	static vector<string> getJointNames();
+	
+	
 private:
-
+	static string jointName[NUM_JOINTS];
 	void dispose();
 
 	void setupTree();
 };
+
+
+
+
+
+
+
+
+

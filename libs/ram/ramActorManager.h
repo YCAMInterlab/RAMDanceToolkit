@@ -11,7 +11,6 @@
 class ramActorManager
 {
 public:
-
 	
 	ofEvent<ramActor> actorEntered;
 	ofEvent<ramActor> actorExited;
@@ -40,7 +39,6 @@ public:
 	inline ramRigidBody& getRigidBody(const string& name) { return rigids[name]; }
 
 	void update();
-	void draw();
 	void updateWithOscMessage(const ofxOscMessage &m);
 
 private:
@@ -58,4 +56,3 @@ private:
 	ramCompoundContainer<ramRigidBody> rigids;
 };
 
-ramActorManager* ramActorManager::_instance = NULL;

@@ -62,9 +62,7 @@ void ramPhysics::onUpdate(ofEventArgs&)
 		delete p;
 	}
 	
-	cout << temporary_primitives.size() << " -> ";
 	temporary_primitives.clear();
-	cout << temporary_primitives.size() << endl;
 }
 
 void ramPhysics::registerPrimitive(ramPrimitive *o)

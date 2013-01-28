@@ -26,12 +26,7 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	while (oscReceiver.hasWaitingMessages())
-	{
-		ofxOscMessage m;
-		oscReceiver.getNextMessage(&m);
-		updateWithOscMessage(m);
-	}
+	oscReceiver.update();
 }
 
 //--------------------------------------------------------------
@@ -39,7 +34,7 @@ void testApp::draw()
 {
     ofEnableSmoothing();
 	
-	ramNodeFinder nf(ramActor::JOINT_ADBOMEN);
+	ramNodeFinder nf(ramActor::JOINT_ABDOMEN);
 	
 	ramCameraBegin();
     

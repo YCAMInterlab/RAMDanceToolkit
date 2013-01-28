@@ -2,6 +2,8 @@
 
 #pragma mark - ramNode
 
+string getJointName(unsigned int jointId) { return ramActor::getJointName(jointId); }
+
 ramNode::ramNode() : ofNode(), parent(NULL), node_id(-1)
 {
 }
@@ -12,7 +14,8 @@ ramNode& ramNode::operator=(const ramNode& copy)
 	
 	node_id = copy.node_id;
 	name = copy.name;
-
+	accerelometer = copy.accerelometer;
+	
 	parent = NULL;
 	return *this;
 }
@@ -43,7 +46,7 @@ ramNodeArray& ramNodeArray::operator=(const ramNodeArray& copy)
 		
 		dst.setParent(nodes[idx]);
 	}
-
+	
 	last_timestamp = copy.last_timestamp;
 	current_timestamp = copy.current_timestamp;
 
@@ -75,6 +78,7 @@ void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
 
 		node.setPosition(vec);
 		node.setOrientation(quat);
+		node.accerelometer.update(vec, quat);
 	}
 
 	last_timestamp = current_timestamp;
@@ -91,6 +95,8 @@ void ramRigidBody::updateWithOscMessage(const ofxOscMessage &m)
 
 	if (nNodes != getNumNode())
 		reserveNodes(nNodes);
+	
+	ramNodeArray::updateWithOscMessage(m);
 }
 
 void ramRigidBody::reserveNodes(int num)
@@ -123,9 +129,9 @@ void ramActor::updateWithOscMessage(const ofxOscMessage &m)
 
 void ramActor::setupTree()
 {
-	getNode(JOINT_ADBOMEN).setParent(getNode(JOINT_HIPS));
+	getNode(JOINT_ABDOMEN).setParent(getNode(JOINT_HIPS));
 	{
-		getNode(JOINT_CHEST).setParent(getNode(JOINT_ADBOMEN));
+		getNode(JOINT_CHEST).setParent(getNode(JOINT_ABDOMEN));
 		{
 			getNode(JOINT_NECK).setParent(getNode(JOINT_CHEST));
 			{
@@ -185,3 +191,42 @@ void ramActor::setupTree()
 		}
 	}
 }
+
+
+string ramActor::jointName[NUM_JOINTS] =
+{
+	"JOINT_HIPS",
+	"JOINT_ABDOMEN",
+	"JOINT_CHEST",
+	"JOINT_NECK",
+	"JOINT_HEAD",
+	"JOINT_LEFT_HIP",
+	"JOINT_LEFT_KNEE",
+	"JOINT_LEFT_ANKLE",
+	"JOINT_LEFT_TOE",
+	"JOINT_RIGHT_HIP",
+	"JOINT_RIGHT_KNEE",
+	"JOINT_RIGHT_ANKLE",
+	"JOINT_RIGHT_TOE",
+	"JOINT_LEFT_COLLAR",
+	"JOINT_LEFT_SHOULDER",
+	"JOINT_LEFT_ELBOW",
+	"JOINT_LEFT_WRIST",
+	"JOINT_LEFT_HAND",
+	"JOINT_RIGHT_COLLAR",
+	"JOINT_RIGHT_SHOULDER",
+	"JOINT_RIGHT_ELBOW",
+	"JOINT_RIGHT_WRIST",
+	"JOINT_RIGHT_HAND"
+};
+
+vector<string> ramActor::getJointNames()
+{
+	vector<string> names;
+	names.clear();
+	names.resize(ramActor::NUM_JOINTS);
+	
+	for (int i=0; i<names.size(); i++) names.at(i) = getJointName(i);
+	return names;
+}
+

@@ -21,10 +21,6 @@ public:
 		return o;
 	}
 	
-	
-	
-	
-	
 protected:
 	
 	static ramCameraManager *_instance;

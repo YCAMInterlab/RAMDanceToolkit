@@ -1,0 +1,8 @@
+<openNI>
+	<deviceID>0</deviceID>
+	<maxNumUsers>2</maxNumUsers>
+</openNI>
+<osc>
+	<hostname>localhost</hostname>
+	<port>10001</port>
+</osc>

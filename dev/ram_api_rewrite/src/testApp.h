@@ -33,6 +33,6 @@ public:
     
 	// ...
 	// ------------------------
-	ofxOscReceiver oscReceiver;
+	ramOscReceiver oscReceiver;
     ramNodeFinder nodeFinder;
 };
