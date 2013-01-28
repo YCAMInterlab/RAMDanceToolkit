@@ -13,7 +13,7 @@ public:
 	inline ramRigidBody& getRigidBody(string name) { return ramActorManager::instance().getRigidBody(name); }
 	inline ofCamera& getActiveCamera() { return ramCameraManager::instance().getActiveCamera(); }
 	
-	virtual void refreshControlPanel(ramControlPanel& gui)
+	virtual void setupControlPanel(ramControlPanel& gui)
 	{
 		guiPtr = &gui;
 		gui.addPanel(scene_name);
@@ -38,7 +38,6 @@ public:
 	
 protected:
 	
-	ramControlPanel *guiPtr;
 	bool bEnabled;
 	string scene_name, key_enabled;
 	
@@ -47,4 +46,11 @@ protected:
 		scene_name = name;
 		key_enabled = "Show: " + scene_name;
 	}
+	
+	ramControlPanel& gui() { return *guiPtr; }
+	
+private:
+	
+	ramControlPanel *guiPtr;
+	
 };

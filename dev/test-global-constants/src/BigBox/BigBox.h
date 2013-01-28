@@ -29,15 +29,15 @@ public:
 		for (int i=0; i<jointSizes.size(); i++) jointSizes.at(i) = 300.0;
 	}
 	
-	void refreshControlPanel(ramControlPanel& gui)
+	void setupControlPanel(ramControlPanel& gui)
 	{
-		guiPtr = &gui;
-		guiPtr->addPanel(getSceneName());
-		guiPtr->addSlider(key_master_size, 400, 10, 1000);
-		guiPtr->addSlider(key_line_width, 3, 1, 100);
+		ramSceneBase::setupControlPanel(gui);
+		
+		gui.addSlider(key_master_size, 400, 10, 1000);
+		gui.addSlider(key_line_width, 3, 1, 100);
 		
 		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			guiPtr->addSlider(ramActor::getJointName(i), 500, 0, 1000);
+			gui.addSlider(ramActor::getJointName(i), 500, 0, 1000);
 	}
 	
 	void setup()
@@ -50,20 +50,18 @@ public:
 		if (!bEnabled) return;
 		
 		// line width
-		bigBoxLineWidth = guiPtr->getValueF(key_line_width);
+		bigBoxLineWidth = gui().getValueF(key_line_width);
 		
 		// box size
 		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			jointSizes.at(i) = guiPtr->getValueF(ramActor::getJointName(i));
+			jointSizes.at(i) = gui().getValueF(ramActor::getJointName(i));
 		
-		
-		
-		if (guiPtr->hasValueChanged(key_master_size))
+		if (gui().hasValueChanged(key_master_size))
 		{
 			for (int i=0; i<ramActor::NUM_JOINTS; i++)
 			{
-				float val = guiPtr->getValueF(key_master_size);
-				guiPtr->setValueF(ramActor::getJointName(i), val);
+				float val = gui().getValueF(key_master_size);
+				gui().setValueF(ramActor::getJointName(i), val);
 				jointSizes.at(i) = val;
 			}
 		}

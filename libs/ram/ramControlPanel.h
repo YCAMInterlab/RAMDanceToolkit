@@ -267,7 +267,7 @@ public:
 		for (int i=0; i<scenes.size(); i++)
 		{
 			scenes.at(i)->setup();
-			scenes.at(i)->refreshControlPanel( *this );
+			scenes.at(i)->setupControlPanel( *this );
 		}
 		
 		bCheckScenes = true;
