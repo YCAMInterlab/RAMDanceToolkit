@@ -34,6 +34,16 @@ ramBoxPrimitive::ramBoxPrimitive(const ofVec3f& pos, const ofVec3f& size)
 	rigid = getWorld().addBox(size, pos);
 }
 
+ramBoxPrimitive::ramBoxPrimitive(const ofMatrix4x4& mat, float size)
+{
+	rigid = getWorld().addBox(ofVec3f(size), mat.getTranslation(), mat.getRotate().getEuler());
+}
+
+ramBoxPrimitive::ramBoxPrimitive(const ofMatrix4x4& mat, const ofVec3f& size)
+{
+	rigid = getWorld().addBox(size, mat.getTranslation(), mat.getRotate().getEuler());
+}
+
 void ramBoxPrimitive::customDraw()
 {
 	ofVec3f size = rigid.getSize();
