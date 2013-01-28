@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ramGlobal.h"
 #include "ramBaseApp.h"
 #include "ramOscReciever.h"
 #include "ramActorManager.h"
