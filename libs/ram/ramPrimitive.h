@@ -16,7 +16,7 @@ public:
 	
 protected:
 	
-	ofxBt::Rigid rigid;
+	ofxBt::RigidBody rigid;
 	ofxBt::World& getWorld();
 	
 	void _update();

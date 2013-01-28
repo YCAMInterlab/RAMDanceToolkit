@@ -197,6 +197,20 @@
 		607D7C7316661B940063800A /* libBulletDynamics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 607D7BAA16661B940063800A /* libBulletDynamics.a */; };
 		607D7C7416661B940063800A /* libBulletSoftBody.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 607D7BAB16661B940063800A /* libBulletSoftBody.a */; };
 		607D7C7516661B940063800A /* libLinearMath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 607D7BAC16661B940063800A /* libLinearMath.a */; };
+		60AA58F716B69005003C5828 /* ofxBt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60AA58E916B69005003C5828 /* ofxBt.cpp */; };
+		60AA58F816B69005003C5828 /* ofxBt.h in Headers */ = {isa = PBXBuildFile; fileRef = 60AA58EA16B69005003C5828 /* ofxBt.h */; };
+		60AA58F916B69005003C5828 /* ofxBtCollisionObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60AA58EB16B69005003C5828 /* ofxBtCollisionObject.cpp */; };
+		60AA58FA16B69005003C5828 /* ofxBtCollisionObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 60AA58EC16B69005003C5828 /* ofxBtCollisionObject.h */; };
+		60AA58FB16B69005003C5828 /* ofxBtHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 60AA58ED16B69005003C5828 /* ofxBtHelper.h */; };
+		60AA58FC16B69005003C5828 /* ofxBtRender.h in Headers */ = {isa = PBXBuildFile; fileRef = 60AA58EE16B69005003C5828 /* ofxBtRender.h */; };
+		60AA58FD16B69005003C5828 /* ofxBtRigidBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60AA58EF16B69005003C5828 /* ofxBtRigidBody.cpp */; };
+		60AA58FE16B69005003C5828 /* ofxBtRigidBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 60AA58F016B69005003C5828 /* ofxBtRigidBody.h */; };
+		60AA58FF16B69005003C5828 /* ofxBtSoftBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60AA58F116B69005003C5828 /* ofxBtSoftBody.cpp */; };
+		60AA590016B69005003C5828 /* ofxBtSoftBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 60AA58F216B69005003C5828 /* ofxBtSoftBody.h */; };
+		60AA590116B69005003C5828 /* ofxBtSoftBodyWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60AA58F316B69005003C5828 /* ofxBtSoftBodyWorld.cpp */; };
+		60AA590216B69005003C5828 /* ofxBtSoftBodyWorld.h in Headers */ = {isa = PBXBuildFile; fileRef = 60AA58F416B69005003C5828 /* ofxBtSoftBodyWorld.h */; };
+		60AA590316B69005003C5828 /* ofxBtWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60AA58F516B69005003C5828 /* ofxBtWorld.cpp */; };
+		60AA590416B69005003C5828 /* ofxBtWorld.h in Headers */ = {isa = PBXBuildFile; fileRef = 60AA58F616B69005003C5828 /* ofxBtWorld.h */; };
 		60B90AA11644E06D00AF2156 /* ramActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60B90A981644E06D00AF2156 /* ramActor.cpp */; };
 		60B90AA21644E06D00AF2156 /* ramActor.h in Headers */ = {isa = PBXBuildFile; fileRef = 60B90A991644E06D00AF2156 /* ramActor.h */; };
 		60B90AA31644E06D00AF2156 /* ramActorManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60B90A9A1644E06D00AF2156 /* ramActorManager.cpp */; };
@@ -210,20 +224,6 @@
 		60BE2B75167500050081F663 /* ramGraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60BE2B74167500050081F663 /* ramGraphics.cpp */; };
 		60C8C560164D6DA400B4E176 /* ramCameraManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60C8C55E164D6DA400B4E176 /* ramCameraManager.cpp */; };
 		60C8C561164D6DA400B4E176 /* ramCameraManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 60C8C55F164D6DA400B4E176 /* ramCameraManager.h */; };
-		60CCD20916A5464B002F0FA9 /* ofxBt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60CCD1FB16A5464B002F0FA9 /* ofxBt.cpp */; };
-		60CCD20A16A5464B002F0FA9 /* ofxBt.h in Headers */ = {isa = PBXBuildFile; fileRef = 60CCD1FC16A5464B002F0FA9 /* ofxBt.h */; };
-		60CCD20B16A5464B002F0FA9 /* ofxBtCollisionObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60CCD1FD16A5464B002F0FA9 /* ofxBtCollisionObject.cpp */; };
-		60CCD20C16A5464B002F0FA9 /* ofxBtCollisionObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 60CCD1FE16A5464B002F0FA9 /* ofxBtCollisionObject.h */; };
-		60CCD20D16A5464B002F0FA9 /* ofxBtHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 60CCD1FF16A5464B002F0FA9 /* ofxBtHelper.h */; };
-		60CCD20E16A5464B002F0FA9 /* ofxBtRender.h in Headers */ = {isa = PBXBuildFile; fileRef = 60CCD20016A5464B002F0FA9 /* ofxBtRender.h */; };
-		60CCD20F16A5464B002F0FA9 /* ofxBtRigid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60CCD20116A5464B002F0FA9 /* ofxBtRigid.cpp */; };
-		60CCD21016A5464B002F0FA9 /* ofxBtRigid.h in Headers */ = {isa = PBXBuildFile; fileRef = 60CCD20216A5464B002F0FA9 /* ofxBtRigid.h */; };
-		60CCD21116A5464B002F0FA9 /* ofxBtSoft.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60CCD20316A5464B002F0FA9 /* ofxBtSoft.cpp */; };
-		60CCD21216A5464B002F0FA9 /* ofxBtSoft.h in Headers */ = {isa = PBXBuildFile; fileRef = 60CCD20416A5464B002F0FA9 /* ofxBtSoft.h */; };
-		60CCD21316A5464B002F0FA9 /* ofxBtSoftbodyWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60CCD20516A5464B002F0FA9 /* ofxBtSoftbodyWorld.cpp */; };
-		60CCD21416A5464B002F0FA9 /* ofxBtSoftbodyWorld.h in Headers */ = {isa = PBXBuildFile; fileRef = 60CCD20616A5464B002F0FA9 /* ofxBtSoftbodyWorld.h */; };
-		60CCD21516A5464B002F0FA9 /* ofxBtWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60CCD20716A5464B002F0FA9 /* ofxBtWorld.cpp */; };
-		60CCD21616A5464B002F0FA9 /* ofxBtWorld.h in Headers */ = {isa = PBXBuildFile; fileRef = 60CCD20816A5464B002F0FA9 /* ofxBtWorld.h */; };
 		9A598D001648DE150066DF10 /* ramBaseApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A598CFE1648DE150066DF10 /* ramBaseApp.cpp */; };
 		9A598D011648DE150066DF10 /* ramBaseApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A598CFF1648DE150066DF10 /* ramBaseApp.h */; };
 /* End PBXBuildFile section */
@@ -421,6 +421,20 @@
 		607D7BAB16661B940063800A /* libBulletSoftBody.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBulletSoftBody.a; sourceTree = "<group>"; };
 		607D7BAC16661B940063800A /* libLinearMath.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLinearMath.a; sourceTree = "<group>"; };
 		607D7BAD16661B940063800A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		60AA58E916B69005003C5828 /* ofxBt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBt.cpp; sourceTree = "<group>"; };
+		60AA58EA16B69005003C5828 /* ofxBt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBt.h; sourceTree = "<group>"; };
+		60AA58EB16B69005003C5828 /* ofxBtCollisionObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBtCollisionObject.cpp; sourceTree = "<group>"; };
+		60AA58EC16B69005003C5828 /* ofxBtCollisionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtCollisionObject.h; sourceTree = "<group>"; };
+		60AA58ED16B69005003C5828 /* ofxBtHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtHelper.h; sourceTree = "<group>"; };
+		60AA58EE16B69005003C5828 /* ofxBtRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtRender.h; sourceTree = "<group>"; };
+		60AA58EF16B69005003C5828 /* ofxBtRigidBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBtRigidBody.cpp; sourceTree = "<group>"; };
+		60AA58F016B69005003C5828 /* ofxBtRigidBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtRigidBody.h; sourceTree = "<group>"; };
+		60AA58F116B69005003C5828 /* ofxBtSoftBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBtSoftBody.cpp; sourceTree = "<group>"; };
+		60AA58F216B69005003C5828 /* ofxBtSoftBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtSoftBody.h; sourceTree = "<group>"; };
+		60AA58F316B69005003C5828 /* ofxBtSoftBodyWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBtSoftBodyWorld.cpp; sourceTree = "<group>"; };
+		60AA58F416B69005003C5828 /* ofxBtSoftBodyWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtSoftBodyWorld.h; sourceTree = "<group>"; };
+		60AA58F516B69005003C5828 /* ofxBtWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBtWorld.cpp; sourceTree = "<group>"; };
+		60AA58F616B69005003C5828 /* ofxBtWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtWorld.h; sourceTree = "<group>"; };
 		60B90A8B1644E00900AF2156 /* libram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libram.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		60B90A981644E06D00AF2156 /* ramActor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramActor.cpp; sourceTree = "<group>"; };
 		60B90A991644E06D00AF2156 /* ramActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramActor.h; sourceTree = "<group>"; };
@@ -436,20 +450,6 @@
 		60BE2B74167500050081F663 /* ramGraphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramGraphics.cpp; sourceTree = "<group>"; };
 		60C8C55E164D6DA400B4E176 /* ramCameraManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramCameraManager.cpp; sourceTree = "<group>"; };
 		60C8C55F164D6DA400B4E176 /* ramCameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramCameraManager.h; sourceTree = "<group>"; };
-		60CCD1FB16A5464B002F0FA9 /* ofxBt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBt.cpp; sourceTree = "<group>"; };
-		60CCD1FC16A5464B002F0FA9 /* ofxBt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBt.h; sourceTree = "<group>"; };
-		60CCD1FD16A5464B002F0FA9 /* ofxBtCollisionObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBtCollisionObject.cpp; sourceTree = "<group>"; };
-		60CCD1FE16A5464B002F0FA9 /* ofxBtCollisionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtCollisionObject.h; sourceTree = "<group>"; };
-		60CCD1FF16A5464B002F0FA9 /* ofxBtHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtHelper.h; sourceTree = "<group>"; };
-		60CCD20016A5464B002F0FA9 /* ofxBtRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtRender.h; sourceTree = "<group>"; };
-		60CCD20116A5464B002F0FA9 /* ofxBtRigid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBtRigid.cpp; sourceTree = "<group>"; };
-		60CCD20216A5464B002F0FA9 /* ofxBtRigid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtRigid.h; sourceTree = "<group>"; };
-		60CCD20316A5464B002F0FA9 /* ofxBtSoft.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBtSoft.cpp; sourceTree = "<group>"; };
-		60CCD20416A5464B002F0FA9 /* ofxBtSoft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtSoft.h; sourceTree = "<group>"; };
-		60CCD20516A5464B002F0FA9 /* ofxBtSoftbodyWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBtSoftbodyWorld.cpp; sourceTree = "<group>"; };
-		60CCD20616A5464B002F0FA9 /* ofxBtSoftbodyWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtSoftbodyWorld.h; sourceTree = "<group>"; };
-		60CCD20716A5464B002F0FA9 /* ofxBtWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBtWorld.cpp; sourceTree = "<group>"; };
-		60CCD20816A5464B002F0FA9 /* ofxBtWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtWorld.h; sourceTree = "<group>"; };
 		9A598CFE1648DE150066DF10 /* ramBaseApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramBaseApp.cpp; sourceTree = "<group>"; };
 		9A598CFF1648DE150066DF10 /* ramBaseApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramBaseApp.h; sourceTree = "<group>"; };
 		9A598D041648E5350066DF10 /* ramNodeFinder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ramNodeFinder.h; sourceTree = "<group>"; };
@@ -481,7 +481,7 @@
 		607D7ACD16661B940063800A /* ofxBt */ = {
 			isa = PBXGroup;
 			children = (
-				60CCD1FA16A5464B002F0FA9 /* src */,
+				60AA58E816B69005003C5828 /* src */,
 				607D7ADD16661B940063800A /* libs */,
 				607D7BAD16661B940063800A /* README.md */,
 			);
@@ -829,6 +829,27 @@
 			path = osx;
 			sourceTree = "<group>";
 		};
+		60AA58E816B69005003C5828 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				60AA58E916B69005003C5828 /* ofxBt.cpp */,
+				60AA58EA16B69005003C5828 /* ofxBt.h */,
+				60AA58EB16B69005003C5828 /* ofxBtCollisionObject.cpp */,
+				60AA58EC16B69005003C5828 /* ofxBtCollisionObject.h */,
+				60AA58ED16B69005003C5828 /* ofxBtHelper.h */,
+				60AA58EE16B69005003C5828 /* ofxBtRender.h */,
+				60AA58EF16B69005003C5828 /* ofxBtRigidBody.cpp */,
+				60AA58F016B69005003C5828 /* ofxBtRigidBody.h */,
+				60AA58F116B69005003C5828 /* ofxBtSoftBody.cpp */,
+				60AA58F216B69005003C5828 /* ofxBtSoftBody.h */,
+				60AA58F316B69005003C5828 /* ofxBtSoftBodyWorld.cpp */,
+				60AA58F416B69005003C5828 /* ofxBtSoftBodyWorld.h */,
+				60AA58F516B69005003C5828 /* ofxBtWorld.cpp */,
+				60AA58F616B69005003C5828 /* ofxBtWorld.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		60B90A801644E00900AF2156 = {
 			isa = PBXGroup;
 			children = (
@@ -879,27 +900,6 @@
 			);
 			name = ram;
 			path = ../../ram;
-			sourceTree = "<group>";
-		};
-		60CCD1FA16A5464B002F0FA9 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				60CCD1FB16A5464B002F0FA9 /* ofxBt.cpp */,
-				60CCD1FC16A5464B002F0FA9 /* ofxBt.h */,
-				60CCD1FD16A5464B002F0FA9 /* ofxBtCollisionObject.cpp */,
-				60CCD1FE16A5464B002F0FA9 /* ofxBtCollisionObject.h */,
-				60CCD1FF16A5464B002F0FA9 /* ofxBtHelper.h */,
-				60CCD20016A5464B002F0FA9 /* ofxBtRender.h */,
-				60CCD20116A5464B002F0FA9 /* ofxBtRigid.cpp */,
-				60CCD20216A5464B002F0FA9 /* ofxBtRigid.h */,
-				60CCD20316A5464B002F0FA9 /* ofxBtSoft.cpp */,
-				60CCD20416A5464B002F0FA9 /* ofxBtSoft.h */,
-				60CCD20516A5464B002F0FA9 /* ofxBtSoftbodyWorld.cpp */,
-				60CCD20616A5464B002F0FA9 /* ofxBtSoftbodyWorld.h */,
-				60CCD20716A5464B002F0FA9 /* ofxBtWorld.cpp */,
-				60CCD20816A5464B002F0FA9 /* ofxBtWorld.h */,
-			);
-			path = src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1103,14 +1103,14 @@
 				607D7C7016661B940063800A /* btTransformUtil.h in Headers */,
 				607D7C7116661B940063800A /* btVector3.h in Headers */,
 				60BE2B721674E5EA0081F663 /* ramPrimitive.h in Headers */,
-				60CCD20A16A5464B002F0FA9 /* ofxBt.h in Headers */,
-				60CCD20C16A5464B002F0FA9 /* ofxBtCollisionObject.h in Headers */,
-				60CCD20D16A5464B002F0FA9 /* ofxBtHelper.h in Headers */,
-				60CCD20E16A5464B002F0FA9 /* ofxBtRender.h in Headers */,
-				60CCD21016A5464B002F0FA9 /* ofxBtRigid.h in Headers */,
-				60CCD21216A5464B002F0FA9 /* ofxBtSoft.h in Headers */,
-				60CCD21416A5464B002F0FA9 /* ofxBtSoftbodyWorld.h in Headers */,
-				60CCD21616A5464B002F0FA9 /* ofxBtWorld.h in Headers */,
+				60AA58F816B69005003C5828 /* ofxBt.h in Headers */,
+				60AA58FA16B69005003C5828 /* ofxBtCollisionObject.h in Headers */,
+				60AA58FB16B69005003C5828 /* ofxBtHelper.h in Headers */,
+				60AA58FC16B69005003C5828 /* ofxBtRender.h in Headers */,
+				60AA58FE16B69005003C5828 /* ofxBtRigidBody.h in Headers */,
+				60AA590016B69005003C5828 /* ofxBtSoftBody.h in Headers */,
+				60AA590216B69005003C5828 /* ofxBtSoftBodyWorld.h in Headers */,
+				60AA590416B69005003C5828 /* ofxBtWorld.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1172,12 +1172,12 @@
 				607D7AC916661B330063800A /* ramPhysics.cpp in Sources */,
 				60BE2B711674E5EA0081F663 /* ramPrimitive.cpp in Sources */,
 				60BE2B75167500050081F663 /* ramGraphics.cpp in Sources */,
-				60CCD20916A5464B002F0FA9 /* ofxBt.cpp in Sources */,
-				60CCD20B16A5464B002F0FA9 /* ofxBtCollisionObject.cpp in Sources */,
-				60CCD20F16A5464B002F0FA9 /* ofxBtRigid.cpp in Sources */,
-				60CCD21116A5464B002F0FA9 /* ofxBtSoft.cpp in Sources */,
-				60CCD21316A5464B002F0FA9 /* ofxBtSoftbodyWorld.cpp in Sources */,
-				60CCD21516A5464B002F0FA9 /* ofxBtWorld.cpp in Sources */,
+				60AA58F716B69005003C5828 /* ofxBt.cpp in Sources */,
+				60AA58F916B69005003C5828 /* ofxBtCollisionObject.cpp in Sources */,
+				60AA58FD16B69005003C5828 /* ofxBtRigidBody.cpp in Sources */,
+				60AA58FF16B69005003C5828 /* ofxBtSoftBody.cpp in Sources */,
+				60AA590116B69005003C5828 /* ofxBtSoftBodyWorld.cpp in Sources */,
+				60AA590316B69005003C5828 /* ofxBtWorld.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
