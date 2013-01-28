@@ -102,28 +102,27 @@ public:
 				ofBox(bigBoxSize);
 				node.transformEnd();
 				
-				
 				/*!
 				 shadows
 				 */
+				ramGlobal().beginShadowMatrix();
 				glDisable(GL_DEPTH_TEST);
-				glPushMatrix();
-				{
-					glMultMatrixf(getMatrix().getPtr());
-					ofEnableAlphaBlending();
-					ofSetColor(shadowColor);
-					
-					node.transformBegin();
-					ofSetLineWidth(bigBoxLineWidth);
-					ofBox(bigBoxSize);
-					node.transformEnd();
-					
-					ofSetLineWidth(1);
-					ofBox(node, boxSize);
-					if (node.hasParent())
-						ofLine(node, *node.getParent());
-				}
-				glPopMatrix();
+
+				ofEnableAlphaBlending();
+				ofSetColor(shadowColor);
+				
+				node.transformBegin();
+				ofSetLineWidth(bigBoxLineWidth);
+				ofBox(bigBoxSize);
+				node.transformEnd();
+				
+				ofSetLineWidth(1);
+				ofBox(node, boxSize);
+				if (node.hasParent())
+					ofLine(node, *node.getParent());
+				
+				ramGlobal().endShadowMatrix();
+				
 				ofPopStyle();
 			}
 			glPopMatrix();

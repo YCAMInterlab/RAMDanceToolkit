@@ -14,9 +14,15 @@ public:
 	
 	void init();
 
+	void setLightPosition(ofVec3f pos);
+	
+	void beginShadowMatrix();
+	void endShadowMatrix();
+
 private:
 	
 	ramControlPanel *gui;
+	ofMatrix4x4 shadow_matrix;
 	
 };
 

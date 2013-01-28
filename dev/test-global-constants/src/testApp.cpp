@@ -19,6 +19,7 @@ void testApp::setup()
 	ofBackground( ramColor::WHITE );
 	
 	ramGlobal().init();
+	ramGlobal().setLightPosition(ofVec3f(-100.0f, 500.0f, 200.0f));
 	
 	/*!
 	 ramBaseApp setup
@@ -29,28 +30,20 @@ void testApp::setup()
 	/*!
 	 scenes setup
 	 */
-//	scenes.push_back( bigbox.getPtr() );
-//	gui.addScenePanels(scenes);
+	scenes.push_back( bigbox.getPtr() );
 	
+	ramGlobal().getGUI().addScenePanels(scenes);
 	
-	/*!
-	 (user code......)
-	 */
-	const float lightPosition[] = { -100.0f, 500.0f, 200.0f };
-	gl::calcShadowMatrix( gl::kGroundPlaneYUp, lightPosition, shadowMat.getPtr() );
-	
-	for (int i=0; i<scenes.size(); i++)
-		scenes.at(i)->setMatrix(shadowMat);
+//	for (int i=0; i<scenes.size(); i++)
+//		scenes.at(i)->setMatrix(shadowMat);
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-	
 	/* Entities update */
 	oscReceiver.update();
-	
-	
+
 	/* Scenes update */
 	for (int i=0; i<scenes.size(); i++)
 	{
@@ -60,11 +53,10 @@ void testApp::update()
 		/* Enable / Disable scenes */
 		string key = scene->getSceneEnableKey();
 		
-//		if ( gui.hasValueChanged(key) )
-//		{
-//			cout << 1 << endl;
-//			scene->setEnabled( gui.getValueB(key) );
-//		}
+		if ( ramGlobal().getGUI().hasValueChanged(key) )
+		{
+			scene->setEnabled( ramGlobal().getGUI().getValueB(key) );
+		}
 	}
 }
 
@@ -82,9 +74,9 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawFloor()
 {
-//	ramBasicFloor(gui.getValueI("Floor pattern"),
-//				  gui.getValueF("Floor size"),
-//				  gui.getValueF("Grid size"),
+//	ramBasicFloor(ramGlobal().getGUI().getValueI("Floor pattern"),
+//				  ramGlobal().getGUI().getValueF("Floor size"),
+//				  ramGlobal().getGUI().getValueF("Grid size"),
 //				  ramColor::BLUE_LIGHT,
 //				  ramColor::BLUE_LIGHT-20);
 }
@@ -92,9 +84,16 @@ void testApp::drawFloor()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-//	if ( gui.getValueB("Draw Actor") )
+//	if ( ramGlobal().getGUI().getValueB("Draw Actor") )
 //		ramBasicActor(actor, shadowMat.getPtr());
-//	
+
+	ramBasicActor(actor, NULL);
+	
+	glPushMatrix();
+	glMultMatrixf(shadowMat.getPtr());
+	ramBasicActor(actor, NULL);
+	glPopMatrix();
+	
 	for (int i=0; i<scenes.size(); i++) scenes.at(i)->drawActor(actor);
 }
 

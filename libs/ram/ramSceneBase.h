@@ -16,7 +16,6 @@ public:
 	virtual void refreshControlPanel(ramControlPanel& gui)
 	{
 		guiPtr = &gui;
-		
 		gui.addPanel(scene_name);
 	};
 	
@@ -35,9 +34,6 @@ public:
 	inline string getSceneEnableKey() { return key_enabled; }
 	inline string getSceneName() { return scene_name.empty() ? "no name" : scene_name; }
 	
-	inline ofMatrix4x4 getMatrix() { return shadow_mat; }
-	inline void setMatrix(ofMatrix4x4& m) { shadow_mat = m; }
-	
 	ramSceneBase* getPtr() { return this; }
 	
 protected:
@@ -45,7 +41,6 @@ protected:
 	ramControlPanel *guiPtr;
 	bool bEnabled;
 	string scene_name, key_enabled;
-	ofMatrix4x4 shadow_mat;
 	
 	void setSceneName(string name)
 	{
