@@ -120,9 +120,8 @@ void ramBasicFloor(const int floorPattern,
 
 
 void ramBasicActor(ramActor& actor,
-				   ofColor jointColor,
-				   ofColor lineColor,
-				   float* matrixPtr)
+				   const ofColor& jointColor,
+				   const ofColor& lineColor)
 {
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glEnable(GL_DEPTH_TEST);
@@ -142,35 +141,12 @@ void ramBasicActor(ramActor& actor,
 			ofSetColor( lineColor );
 			ofLine(node, *node.getParent());
 		}
-		
-		
-		if (matrixPtr != NULL)
-		{
-			ofColor shadowColor = ramColor::GRAY;
-			shadowColor.a = 50;
-			glPushMatrix();
-			glDisable(GL_DEPTH_TEST);
-			glMultMatrixf(matrixPtr);
-			ofEnableAlphaBlending();
-			ofSetColor(shadowColor);
-			
-			ofBox(node, jointSize);
-			if (node.hasParent())
-				ofLine(node, *node.getParent());
-			glPopMatrix();
-		}
 	}
 	glPopMatrix();
 	glDisable(GL_DEPTH_TEST);
 	glPopAttrib();
 	
 }
-
-void ramBasicActor(ramActor& actor, float* matrixPtr)
-{
-	ramBasicActor(actor, ramColor::BLUE_LIGHT, ramColor::GRAY, matrixPtr);
-}
-
 
 void ramActorCube(ramActor& actor)
 {

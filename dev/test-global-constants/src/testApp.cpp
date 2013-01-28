@@ -33,9 +33,6 @@ void testApp::setup()
 	scenes.push_back( bigbox.getPtr() );
 	
 	ramGlobal().getGUI().addScenePanels(scenes);
-	
-//	for (int i=0; i<scenes.size(); i++)
-//		scenes.at(i)->setMatrix(shadowMat);
 }
 
 //--------------------------------------------------------------
@@ -74,25 +71,22 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawFloor()
 {
-//	ramBasicFloor(ramGlobal().getGUI().getValueI("Floor pattern"),
-//				  ramGlobal().getGUI().getValueF("Floor size"),
-//				  ramGlobal().getGUI().getValueF("Grid size"),
-//				  ramColor::BLUE_LIGHT,
-//				  ramColor::BLUE_LIGHT-20);
+	ramBasicFloor(ramGlobal().getGUI().getValueI("Floor pattern"),
+				  ramGlobal().getGUI().getValueF("Floor size"),
+				  ramGlobal().getGUI().getValueF("Grid size"),
+				  ramColor::BLUE_LIGHT,
+				  ramColor::BLUE_LIGHT-20);
 }
 
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-//	if ( ramGlobal().getGUI().getValueB("Draw Actor") )
-//		ramBasicActor(actor, shadowMat.getPtr());
+	if ( ramGlobal().getGUI().getValueB("Draw Actor") )
+		ramBasicActor(actor);
 
-	ramBasicActor(actor, NULL);
-	
-	glPushMatrix();
-	glMultMatrixf(shadowMat.getPtr());
-	ramBasicActor(actor, NULL);
-	glPopMatrix();
+	ramGlobal().beginShadowMatrix();
+	ramBasicActor(actor, ramColor::GRAY, ramColor::GRAY);
+	ramGlobal().endShadowMatrix();
 	
 	for (int i=0; i<scenes.size(); i++) scenes.at(i)->drawActor(actor);
 }

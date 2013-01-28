@@ -63,11 +63,9 @@ void ramBasicFloor(const int floorPattern,
 				   const ofColor& c2 = ofColor(230));
 
 
-void ramBasicActor(ramActor& actor, float* matrixPtr = NULL);
 void ramBasicActor(ramActor& actor,
-				   ofColor jointColor = ramColor::BLUE_LIGHT,
-				   ofColor lineColor = ramColor::GRAY,
-				   float* matrixPtr = NULL);
+				   const ofColor& jointColor = ramColor::BLUE_LIGHT,
+				   const ofColor& lineColor = ramColor::GRAY);
 
 void ramActorCube(ramActor& actor);
 
