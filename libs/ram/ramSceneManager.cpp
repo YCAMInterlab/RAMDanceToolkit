@@ -42,6 +42,8 @@ void ramSceneManager::draw()
 		
 		scene->draw();
 		
+		ramCameraBegin();
+		
 		for (int n = 0; n < AM.getNumActor(); n++)
 		{
 			ramActor &o = AM.getActor(n);
@@ -53,5 +55,7 @@ void ramSceneManager::draw()
 			ramRigidBody &o = AM.getRigidBody(n);
 			scene->drawRigid(o);
 		}
+		
+		ramCameraEnd();
 	}
 }
