@@ -14,7 +14,9 @@ mCurrentTab(0),
 mVisible(true),
 mTabs(NULL),
 mTabsMatrix(NULL),
-mFontFile("")
+mFontFile(""),
+mDraggBarHeight(10.0f),
+mTabButtonSize(14.0f)
 {
     mCanvases.clear();
     super::enableAppEventCallbacks();
@@ -22,7 +24,7 @@ mFontFile("")
     super::enableKeyEventCallbacks();
     super::disableWindowEventCallbacks();
     
-    mTabSize.set(0.0f, 0.0f, 10.0f, 20.0f);
+    mTabSize.set(0.0f, mDraggBarHeight, 10.0f, mTabButtonSize);
     super::getRect()->set(mTabSize);
 }
 
@@ -50,14 +52,6 @@ void ofxUITabbedCanvas::update()
 void ofxUITabbedCanvas::draw()
 {
     if (mVisible && !mCanvases.empty()) {
-        ofPushStyle();
-        ofPushMatrix();
-        ofTranslate(mPosition);
-        ofTranslate(0.0f, mTabSize.height);
-        at(mCurrentTab)->draw();
-        ofPopMatrix();
-        ofPopStyle();
-        
         ofPushMatrix();
         ofPushStyle();
 		glDisable(GL_DEPTH_TEST);
@@ -86,6 +80,23 @@ void ofxUITabbedCanvas::draw()
         ofPopStyle();
         ofPopMatrix();
         
+        ofPushStyle();
+        ofPushMatrix();
+        ofNoFill();
+        if (mMouseState==MOUSE_IDLE) {
+            ofSetColor(getColorOutline());
+        }
+        else {
+            ofSetColor(getColorOutlineHighlight());
+        }
+        ofRect(mDraggableRect);
+        
+        ofTranslate(mPosition);
+        ofTranslate(0.0f, mTabSize.height+mDraggableRect.height);
+        at(mCurrentTab)->draw();
+        ofPopMatrix();
+        ofPopStyle();
+        
     }
 }
 
@@ -94,19 +105,6 @@ void ofxUITabbedCanvas::exit()
 {
     for (int i=0; i<mCanvases.size(); i++)
         at(i)->exit();
-}
-
-//--------------------------------------------------------------
-void ofxUITabbedCanvas::resize()
-{
-    if (mTabs)
-        mTabs->getRect()->setWidth(mTabSize.width);
-    
-    super::getRect()->set(mTabSize);
-    
-    for (int i=0; i<size(); i++) {
-        at(i)->getRect()->setWidth(mTabSize.width);
-    }
 }
 
 //--------------------------------------------------------------
@@ -126,29 +124,55 @@ void ofxUITabbedCanvas::keyReleased(int key)
 //--------------------------------------------------------------
 void ofxUITabbedCanvas::mouseMoved(int x, int y)
 {
+    if (mDraggableRect.inside(x, y)) {
+        mMouseState = MOUSE_OVER;
+    }
+    else {
+        mMouseState = MOUSE_IDLE;
+    }
+    
     if (mVisible && !mCanvases.empty())
-        at(mCurrentTab)->mouseMoved(x-mPosition.x, y-mTabSize.height-mPosition.y);
+        at(mCurrentTab)->mouseMoved(x-mPosition.x, y-mTabSize.height-mPosition.y-mDraggableRect.height);
 }
 
 //--------------------------------------------------------------
 void ofxUITabbedCanvas::mouseDragged(int x, int y, int button)
 {
+    if (mMouseState == MOUSE_DOWN) {
+        setPosition(ofVec2f(x-mDraggOrigin.x, y-mDraggOrigin.y));
+    }
+    
     if (mVisible && !mCanvases.empty())
-        at(mCurrentTab)->mouseDragged(x-mPosition.x, y-mTabSize.height-mPosition.y, button);
+        at(mCurrentTab)->mouseDragged(x-mPosition.x, y-mTabSize.height-mPosition.y-mDraggableRect.height, button);
 }
 
 //--------------------------------------------------------------
 void ofxUITabbedCanvas::mousePressed(int x, int y, int button)
 {
+    if (mMouseState == MOUSE_OVER && mDraggableRect.inside(x, y)) {
+        mMouseState = MOUSE_DOWN;
+        mDraggOrigin.set(x-mDraggableRect.x, y-mDraggableRect.y);
+    }
+    else {
+        mMouseState = MOUSE_IDLE;
+    }
+    
     if (mVisible && !mCanvases.empty())
-        at(mCurrentTab)->mousePressed(x-mPosition.x, y-mTabSize.height-mPosition.y, button);
+        at(mCurrentTab)->mousePressed(x-mPosition.x, y-mTabSize.height-mPosition.y-mDraggableRect.height, button);
 }
 
 //--------------------------------------------------------------
 void ofxUITabbedCanvas::mouseReleased(int x, int y, int button)
 {
+    if (mDraggableRect.inside(x, y)) {
+        mMouseState = MOUSE_OVER;
+    }
+    else {
+        mMouseState = MOUSE_IDLE;
+    }
+    
     if (mVisible && !mCanvases.empty())
-        at(mCurrentTab)->mouseReleased(x-mPosition.x, y-mTabSize.height-mPosition.y, button);
+        at(mCurrentTab)->mouseReleased(x-mPosition.x, y-mTabSize.height-mPosition.y-mDraggableRect.height, button);
 }
 
 //--------------------------------------------------------------
@@ -156,7 +180,10 @@ void ofxUITabbedCanvas::setPosition(const ofVec2f &pos)
 {
     if (mTabs) {
         mPosition = pos;
-        mTabs->getRect()->setPosition(pos);
+        if (mPosition.y<0.0f)
+            mPosition.y = 0.0f;
+        mTabs->getRect()->setPosition(mPosition);
+        mDraggableRect.setPosition(ofVec2f(mPosition.x, mPosition.y));
     }
 }
 
@@ -170,6 +197,22 @@ void ofxUITabbedCanvas::setPosition(float x, float y)
 ofVec2f ofxUITabbedCanvas::getPosition() const
 {
     return mPosition;
+}
+
+//--------------------------------------------------------------
+void ofxUITabbedCanvas::resize()
+{
+    if (mTabs)
+        mTabs->getRect()->setWidth(mTabSize.width);
+    
+    super::getRect()->set(mTabSize);
+    
+    for (int i=0; i<size(); i++) {
+        at(i)->getRect()->setWidth(mTabSize.width);
+    }
+    
+    mDraggableRect.setWidth(mTabSize.width);
+    mDraggableRect.setHeight(mDraggBarHeight);
 }
 
 //--------------------------------------------------------------

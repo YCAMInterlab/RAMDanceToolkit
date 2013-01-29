@@ -32,11 +32,11 @@ public:
     void mousePressed(int x, int y, int button);
     void mouseReleased(int x, int y, int button);
     
-    void resize();
-    
     void setPosition(const ofVec2f &pos);
     void setPosition(float x, float y);
     ofVec2f getPosition() const;
+    
+    void resize();
     
     void add(ofxUICanvas *canvas);
     void remove(ofxUICanvas *canvas);
@@ -69,6 +69,19 @@ private:
     string mFontFile;
     
     ofVec2f mPosition;
+    ofRectangle mDraggableRect;
+    
+    float mTabButtonSize;
+    float mDraggBarHeight;
+    
+    int mMouseState;
+    ofVec2f mDraggOrigin;
+    
+    enum MouseState {
+        MOUSE_OVER,
+        MOUSE_DOWN,
+        MOUSE_IDLE,
+    };
 };
 
 
