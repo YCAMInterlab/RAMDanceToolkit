@@ -13,11 +13,13 @@
 #include "ofxUI.h"
 
 //--------------------------------------------------------------
-class ofxUITabbedCanvas {
+class ofxUITabbedCanvas : public ofxUICanvas {
+    typedef ofxUICanvas super;
 public:
     ofxUITabbedCanvas();
     virtual ~ofxUITabbedCanvas();
     
+    void setup(const string &fontFile);
     void update();
     void draw();
     void exit();
@@ -32,14 +34,9 @@ public:
     
     void resize();
     
-    void enableAppEventCallbacks();
-    void disableAppEventCallbacks();
-    
-    void enableMouseEventCallbacks();
-    void disableMouseEventCallbacks();
-    
-    void enableKeyEventCallbacks();
-    void disableKeyEventCallbacks();
+    void setPosition(const ofVec2f &pos);
+    void setPosition(float x, float y);
+    ofVec2f getPosition() const;
     
     void add(ofxUICanvas *canvas);
     void remove(ofxUICanvas *canvas);
@@ -59,18 +56,6 @@ public:
     void saveSettings(const string &fileName);
     
 private:
-    inline void onUpdate(ofEventArgs &) { update(); }
-    inline void onDraw(ofEventArgs &) { draw(); }
-    inline void onExit(ofEventArgs &) { exit(); }
-    
-    inline void onKeyPressed(ofKeyEventArgs& e) { keyPressed(e.key); }
-    inline void onKeyReleased(ofKeyEventArgs& e) { keyReleased(e.key); }
-    
-    inline void onMouseReleased(ofMouseEventArgs& e) { mouseReleased(e.x, e.y, e.button); }
-    inline void onMousePressed(ofMouseEventArgs& e)  { mousePressed(e.x, e.y, e.button); }
-    inline void onMouseMoved(ofMouseEventArgs& e)  { mouseMoved(e.x, e.y); }
-    inline void onMouseDragged(ofMouseEventArgs& e)  { mouseDragged(e.x, e.y, e.button); }
-    
     void onTabChanged(ofxUIEventArgs &e);
     
     void rebuildTabs();
@@ -81,6 +66,9 @@ private:
     int mCurrentTab;
     bool mVisible;
     ofRectangle mTabSize;
+    string mFontFile;
+    
+    ofVec2f mPosition;
 };
 
 
