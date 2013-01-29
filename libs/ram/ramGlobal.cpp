@@ -58,6 +58,8 @@ void ramGlobalContext::init()
 	
 	gui->loadFont(ramToResourcePath("Fonts/din-webfont.ttf"), 10);
 	gui->loadCameraSettings("settings.camera.xml");
+	
+	setLightPosition(ofVec3f(-100.0f, 500.0f, 200.0f));
 }
 
 

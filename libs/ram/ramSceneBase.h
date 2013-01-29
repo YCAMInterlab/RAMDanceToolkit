@@ -1,8 +1,8 @@
 #pragma once
 #include "ofMain.h"
-#include "ramControlPanel.h"
 
 #include "ramActorManager.h"
+#include "ramCameraManager.h"
 
 class ramControlPanel;
 

@@ -7,6 +7,8 @@
 #include "ramCameraManager.h"
 #include "ramSceneBase.h"
 
+class ramSceneBase;
+
 class ramCameraSettings
 {
 public:
@@ -253,11 +255,11 @@ public:
 		bCheckCameras = true;
 	}
 	
-	template<typename T>
-	void addScenePanels(vector<T> scenes)
+	void addScenePanels(vector<ramSceneBase*>& scenes)
 	{
 		addPanel( "All Scenes" );
 		addToggle( "Draw Actor", true );
+		
 		for (int i=0; i<scenes.size(); i++)
 		{
 			string key = scenes.at(i)->getSceneEnableKey();

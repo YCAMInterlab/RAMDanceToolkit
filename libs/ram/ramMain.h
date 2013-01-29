@@ -2,6 +2,7 @@
 
 #include "ramGlobal.h"
 #include "ramBaseApp.h"
+#include "ramSceneManager.h"
 #include "ramOscReciever.h"
 #include "ramActorManager.h"
 #include "ramGraphics.h"
