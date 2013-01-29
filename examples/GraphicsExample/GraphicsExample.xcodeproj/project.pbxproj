@@ -589,9 +589,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E4B69B5A0A3A1756003C02F2 /* ramDanceToolKitRC */ = {
+		E4B69B5A0A3A1756003C02F2 /* GraphicsExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "ramDanceToolKitRC" */;
+			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "GraphicsExample" */;
 			buildPhases = (
 				E4B69B580A3A1756003C02F2 /* Sources */,
 				E4B69B590A3A1756003C02F2 /* Frameworks */,
@@ -604,7 +604,7 @@
 				6019005B1644E337001930AA /* PBXTargetDependency */,
 				E4EEB9AC138B136A00A80321 /* PBXTargetDependency */,
 			);
-			name = ramDanceToolKitRC;
+			name = GraphicsExample;
 			productName = myOFApp;
 			productReference = E4B69B5B0A3A1756003C02F2 /* ramDanceToolKitRCDebug.app */;
 			productType = "com.apple.product-type.application";
@@ -642,7 +642,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				E4B69B5A0A3A1756003C02F2 /* ramDanceToolKitRC */,
+				E4B69B5A0A3A1756003C02F2 /* GraphicsExample */,
 			);
 		};
 /* End PBXProject section */
@@ -996,7 +996,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "ramDanceToolKitRC" */ = {
+		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "GraphicsExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B600A3A1757003C02F2 /* Debug */,

@@ -82,7 +82,7 @@ void testApp::drawActor(ramActor &actor)
 		{
 			// draw cube at JOINT_HEAD
 			ofNoFill();
-			ofSetColor( ramColor::YELLOW_LIGHT );
+			ofSetColor( ramColor::YELLOW_DEEP );
 			ofSetLineWidth( 3 );
 			ofBox( 20 );
 			
@@ -98,7 +98,7 @@ void testApp::drawActor(ramActor &actor)
 		
 		// draw plane using several nodes
 		ofNoFill();
-		ofSetColor( ramColor::YELLOW_DEEP );
+		ofSetColor( ramColor::YELLOW_LIGHT );
 		ofSetLineWidth( 2 );
 		ofPushMatrix();
 		{

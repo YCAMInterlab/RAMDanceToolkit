@@ -1,10 +1,5 @@
 #include "testApp.h"
 
-/*!
- Scenes
- */
-#include "EmptyScene.h"
-EmptyScene empty;
 
 
 #pragma mark - oF methods
@@ -13,7 +8,7 @@ void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
-	ofBackground( ramColor::WHITE-20 );
+	ofBackground( ramColor::WHITE );
 	
 	
 	/*!
@@ -29,23 +24,6 @@ void testApp::setup()
 	gui.setup();
 	gui.loadFont("Fonts/din-webfont.ttf", 11);
 	gui.loadCameraSettings("settings.camera.xml");
-	
-	
-	/*!
-	 scenes setup
-	 */
-	scenes.push_back( empty.getPtr() );
-	gui.addScenePanels(scenes);
-	
-	
-	/*!
-	 (user code......)
-	 */
-	const float lightPosition[] = { -100.0f, 500.0f, 200.0f };
-	gl::calcShadowMatrix( gl::kGroundPlaneYUp, lightPosition, shadowMat.getPtr() );
-	
-	for (int i=0; i<scenes.size(); i++)
-		scenes.at(i)->setMatrix(shadowMat);
 }
 
 //--------------------------------------------------------------
@@ -53,30 +31,12 @@ void testApp::update()
 {
 	/* Entities update */
 	oscReceiver.update();
-	
-	
-	/* Scenes update */
-	for (int i=0; i<scenes.size(); i++)
-	{
-		ramSceneBase* scene = scenes.at(i);
-		scene->update();
-		
-		/* Enable / Disable scenes */
-		string key = scene->getSceneEnableKey();
-		
-		if ( gui.hasValueChanged(key) )
-		{
-			scene->setEnabled( gui.getValueB(key) );
-		}
-	}
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	/* Scenes draw */
-	for (int i=0; i<scenes.size(); i++)
-		scenes.at(i)->draw();
+	
 }
 
 
@@ -95,13 +55,7 @@ void testApp::drawFloor()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	if ( gui.getValueB("Draw Actor") )
-	{
-		ramBasicActor(actor, shadowMat.getPtr());
-	}
-		
-	
-	for (int i=0; i<scenes.size(); i++) scenes.at(i)->drawActor(actor);
+
 }
 
 //--------------------------------------------------------------
