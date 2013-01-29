@@ -29,8 +29,6 @@ void testApp::setup()
 	gui.setup();
 	gui.loadFont("Fonts/din-webfont.ttf", 11);
 	gui.loadCameraSettings("settings.camera.xml");
-	gui.addSlider("Actor Scale", 1.0, 0.1, 20);
-	gui.addSlider2D("Actor Position", "Actor Position", 0, 0, -300, 300, -300, 300, true);
 	
 	
 	/*!
