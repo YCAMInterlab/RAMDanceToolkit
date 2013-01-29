@@ -41,6 +41,8 @@ public:
 	
 	operator ofVec3f() const {return getPosition();}
 	
+	inline ramAccelerometer& getAccerelometer() { return accerelometer; }
+	
 private:
 
 	int node_id;

@@ -11,14 +11,13 @@ public:
 	inline ramActorManager& getActorManager() { return ramActorManager::instance(); }
 	inline ramActor& getActor(string name) { return ramActorManager::instance().getActor(name); }
 	inline ramRigidBody& getRigidBody(string name) { return ramActorManager::instance().getRigidBody(name); }
+	inline ofCamera& getActiveCamera() { return ramCameraManager::instance().getActiveCamera(); }
 	
 	virtual void refreshControlPanel(ramControlPanel& gui)
 	{
 		guiPtr = &gui;
 		
 		gui.addPanel(scene_name);
-		
-		cout << "ramSceneBase::refreshControlPanel() was not overrided at: " +scene_name << endl;
 	};
 	
 	virtual void setup() {}

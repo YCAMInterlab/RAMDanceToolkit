@@ -21,3 +21,5 @@ const ofColor ramColor::YELLOW_LIGHT	= ofColor::fromHex(0xffff00);
 const ofColor ramColor::BLACK			= ofColor::fromHex(0x000000);
 const ofColor ramColor::GRAY			= ofColor::fromHex(0x666666);
 const ofColor ramColor::WHITE			= ofColor::fromHex(0xffffff);
+
+const ofColor ramColor::SHADOW			= ofColor(0,0,0,60);

@@ -47,7 +47,6 @@ public:
 	
 	void update()
 	{
-		bEnabled = guiPtr->getValueB(key_enabled);
 		if (!bEnabled) return;
 		
 		// line width

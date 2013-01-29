@@ -29,20 +29,13 @@ void testApp::setup()
 	ramEnableAllEvents();
 	oscReceiver.setup(10000);
 	
-	const float lightPosition[] = { -100.0f, 500.0f, 200.0f };
-	gl::calcShadowMatrix( gl::kGroundPlaneYUp, lightPosition, shadowMat.getPtr() );
-	
 	
 	/*!
 	 gui setup
 	 */
 	gui.setup();
 	gui.loadFont("Fonts/din-webfont.ttf", 10);
-	
-	/* camera */
-	camSettingXml.loadFile("settings.camera.xml");
-	setting_cam = ramCameraSettings::getSettings(camSettingXml);
-	gui.addMultiToggle("Camera Position", 0, ramCameraSettings::getCamNames(camSettingXml));
+	gui.loadCameraSettings("settings.camera.xml");
 	
 	
 	/*!
@@ -53,22 +46,17 @@ void testApp::setup()
 	scenes.push_back( bullet.getPtr() );
 	scenes.push_back( drawLines.getPtr() );
 	
-	gui.addPanel("All Scenes");
-	gui.addToggle("Draw Actor", true);
+	gui.addScenePanels(scenes);
+	
+	
+	/*!
+	 (user code......)
+	 */
+	const float lightPosition[] = { -100.0f, 500.0f, 200.0f };
+	gl::calcShadowMatrix( gl::kGroundPlaneYUp, lightPosition, shadowMat.getPtr() );
+	
 	for (int i=0; i<scenes.size(); i++)
-	{
-		string key = scenes.at(i)->getSceneEnableKey();
-		gui.addToggle(key, false);
-	}
-	for (int i=0; i<scenes.size(); i++)
-	{
-		scenes.at(i)->setup();
 		scenes.at(i)->setMatrix(shadowMat);
-		scenes.at(i)->refreshControlPanel(gui);
-	}
-	
-	
-	scenes.back()->setEnabled(true);
 }
 
 //--------------------------------------------------------------
@@ -81,25 +69,18 @@ void testApp::update()
 	
 	/* Scenes update */
 	for (int i=0; i<scenes.size(); i++)
-		scenes.at(i)->update();
-	
-	
-	/* GUI: camera */
-	if (gui.hasValueChanged("Camera Position"))
 	{
-		/* camera */
-		int posIndex = gui.getValueI("Camera Position");
-		ofVec3f pos = setting_cam.at(posIndex).pos;
-		getActiveCamera().setPosition(pos);
-		getActiveCamera().lookAt(ofVec3f(0,170,0));
-	}
-	
-	
-	/* GUI: floor */
-	if (gui.hasValueChanged("Background"))
-	{
-		float bgcolor = gui.getValueF("Background");
-		ofBackground(bgcolor);
+		ramSceneBase* scene = scenes.at(i);
+		scene->update();
+		
+		/* Enable / Disable scenes */
+		string key = scene->getSceneEnableKey();
+		
+		if ( gui.hasValueChanged(key) )
+		{
+			cout << 1 << endl;
+			scene->setEnabled( gui.getValueB(key) );
+		}
 	}
 }
 
@@ -131,7 +112,8 @@ void testApp::drawActor(ramActor &actor)
 	if ( gui.getValueB("Draw Actor") )
 		ramBasicActor(actor, shadowMat.getPtr());
 	
-	for (int i=0; i<scenes.size(); i++) scenes.at(i)->drawActor(actor);
+	for (int i=0; i<scenes.size(); i++)
+		scenes.at(i)->drawActor(actor);
 }
 
 //--------------------------------------------------------------

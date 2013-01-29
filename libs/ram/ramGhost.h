@@ -22,6 +22,8 @@ public:
 	
 	void update(ramActor &present)
 	{
+		
+		
 		if (present.getNumNode() != 0)
 			recordedActors.push_back(present);
 		
@@ -33,18 +35,26 @@ public:
 		
 		for (int i = 0; i < presentArray.getNumNode(); i++)
 		{
-			ofVec3f p0 = presentArray.getNode(i).getPosition();
-			ofVec3f p1 = pastArray.getNode(i).getPosition();
 			
+			const ofVec3f& p0 = presentArray.getNode(i).getPosition();
+			const ofVec3f& p1 = pastArray.getNode(i).getPosition();
+			
+			// position
 			ofVec3f d = (p0 - p1);
 			d.normalize();
 			d *= distance;
 			ofVec3f v = p0 + d;
-			ofVec3f f = ghostActor.getNode(i).getPosition();
 			
-			f += (v - f) * speed * 0.001;
+			ofVec3f vec = ghostActor.getNode(i).getPosition();
+			vec += (v - vec) * speed * 0.001;
 			
-			ghostActor.getNode(i).setPosition(f);
+			// quaternion
+			const ofQuaternion& quat = presentArray.getNode(i).getOrientationQuat();
+			
+			ramNode& node = ghostActor.getNode(i);
+			node.setPosition(vec);
+			node.setOrientation(quat);
+			node.getAccerelometer().update(vec, quat);
 		}
 	}
 	
@@ -61,18 +71,25 @@ public:
 		
 		for (int i = 0; i < presentArray.getNumNode(); i++)
 		{
-			ofVec3f p0 = presentArray.getNode(i).getPosition();
-			ofVec3f p1 = pastArray.getNode(i).getPosition();
+			const ofVec3f& p0 = presentArray.getNode(i).getPosition();
+			const ofVec3f& p1 = pastArray.getNode(i).getPosition();
 			
+			// position
 			ofVec3f d = (p0 - p1);
 			d.normalize();
 			d *= distance;
 			ofVec3f v = p0 + d;
-			ofVec3f f = ghostRigidBody.getNode(i).getPosition();
 			
-			f += (v - f) * speed * 0.001;
+			ofVec3f vec = ghostRigidBody.getNode(i).getPosition();
+			vec += (v - vec) * speed * 0.001;
 			
-			ghostRigidBody.getNode(i).setPosition(f);
+			// quaternion
+			const ofQuaternion& quat = presentArray.getNode(i).getOrientationQuat();
+			
+			ramNode& node = ghostRigidBody.getNode(i);
+			node.setPosition(vec);
+			node.setOrientation(quat);
+			node.getAccerelometer().update(vec, quat);
 		}
 	}
 	
