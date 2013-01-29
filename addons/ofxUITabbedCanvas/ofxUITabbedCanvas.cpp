@@ -16,15 +16,20 @@ mTabs(NULL),
 mTabsMatrix(NULL),
 mFontFile(""),
 mDraggBarHeight(10.0f),
-mTabButtonSize(14.0f)
+mTabButtonSize(14.0f),
+mMouseState(MOUSE_IDLE),
+mTabSpacing(2.0f)
 {
+    /// tabs
     mCanvases.clear();
+    
+    /// enable all event callbacks
     super::enableAppEventCallbacks();
     super::enableMouseEventCallbacks();
     super::enableKeyEventCallbacks();
     super::disableWindowEventCallbacks();
     
-    mTabSize.set(0.0f, mDraggBarHeight, 10.0f, mTabButtonSize);
+    mTabSize.set(0.0f, mDraggBarHeight, 1.0f, mTabButtonSize); /// default size
     super::getRect()->set(mTabSize);
 }
 
@@ -32,26 +37,33 @@ mTabButtonSize(14.0f)
 ofxUITabbedCanvas::~ofxUITabbedCanvas()
 {
     super::disableAppEventCallbacks();
+    
+    /// delete all objects
     clear();
 }
 
 //--------------------------------------------------------------
 void ofxUITabbedCanvas::setup(const string &fontFile)
 {
+    /// set ofxUI font
     mFontFile = fontFile;
 }
 
 //--------------------------------------------------------------
 void ofxUITabbedCanvas::update()
-{
-    if (!mCanvases.empty())
-        at(mCurrentTab)->update();
+{    
+    if (mCanvases.empty()) return;
+    
+    at(mCurrentTab)->update();
 }
 
 //--------------------------------------------------------------
 void ofxUITabbedCanvas::draw()
 {
     if (mVisible && !mCanvases.empty()) {
+        
+        /// like ofxUI implementation
+        /// draw tab's frme
         ofPushMatrix();
         ofPushStyle();
 		glDisable(GL_DEPTH_TEST);
@@ -63,32 +75,22 @@ void ofxUITabbedCanvas::draw()
         ofTranslate(mPosition);
         
         drawPadded();
-        
         drawPaddedOutline();
-        
         drawBack();
-        
         drawFill();
-        
         drawFillHighlight();
-        
         drawOutline();
-        
         drawOutlineHighlight();
         
 		glDisable(GL_DEPTH_TEST);
         ofPopStyle();
         ofPopMatrix();
         
+        /// draw draggable toolbar
         ofPushStyle();
         ofPushMatrix();
         ofNoFill();
-        if (mMouseState==MOUSE_IDLE) {
-            ofSetColor(getColorOutline());
-        }
-        else {
-            ofSetColor(getColorOutlineHighlight());
-        }
+        (mMouseState==MOUSE_IDLE) ? ofSetColor(getColorOutline()) : ofSetColor(getColorOutlineHighlight());
         ofRect(mDraggableRect);
         
         ofTranslate(mPosition);
@@ -110,40 +112,38 @@ void ofxUITabbedCanvas::exit()
 //--------------------------------------------------------------
 void ofxUITabbedCanvas::keyPressed(int key)
 {
-    if (mVisible && !mCanvases.empty())
-        at(mCurrentTab)->keyPressed(key);
+    if (!mVisible || mCanvases.empty()) return;
+    
+    at(mCurrentTab)->keyPressed(key);
 }
 
 //--------------------------------------------------------------
 void ofxUITabbedCanvas::keyReleased(int key)
 {
-    if (mVisible && !mCanvases.empty())
-        at(mCurrentTab)->keyReleased(key);
+    if (!mVisible || mCanvases.empty()) return;
+    
+    at(mCurrentTab)->keyReleased(key);
 }
 
 //--------------------------------------------------------------
 void ofxUITabbedCanvas::mouseMoved(int x, int y)
 {
-    if (mDraggableRect.inside(x, y)) {
-        mMouseState = MOUSE_OVER;
-    }
-    else {
-        mMouseState = MOUSE_IDLE;
-    }
+    (mDraggableRect.inside(x, y)) ? mMouseState = MOUSE_OVER : mMouseState = MOUSE_IDLE;
     
-    if (mVisible && !mCanvases.empty())
-        at(mCurrentTab)->mouseMoved(x-mPosition.x, y-mTabSize.height-mPosition.y-mDraggableRect.height);
+    if (!mVisible || mCanvases.empty()) return;
+    
+    at(mCurrentTab)->mouseMoved(x-mPosition.x, y-mTabSize.height-mPosition.y-mDraggableRect.height);
 }
 
 //--------------------------------------------------------------
 void ofxUITabbedCanvas::mouseDragged(int x, int y, int button)
 {
-    if (mMouseState == MOUSE_DOWN) {
+    if (mMouseState == MOUSE_DOWN)
         setPosition(ofVec2f(x-mDraggOrigin.x, y-mDraggOrigin.y));
-    }
     
-    if (mVisible && !mCanvases.empty())
-        at(mCurrentTab)->mouseDragged(x-mPosition.x, y-mTabSize.height-mPosition.y-mDraggableRect.height, button);
+    if (!mVisible || mCanvases.empty()) return;
+    
+    at(mCurrentTab)->mouseDragged(x-mPosition.x, y-mTabSize.height-mPosition.y-mDraggableRect.height, button);
 }
 
 //--------------------------------------------------------------
@@ -157,22 +157,19 @@ void ofxUITabbedCanvas::mousePressed(int x, int y, int button)
         mMouseState = MOUSE_IDLE;
     }
     
-    if (mVisible && !mCanvases.empty())
-        at(mCurrentTab)->mousePressed(x-mPosition.x, y-mTabSize.height-mPosition.y-mDraggableRect.height, button);
+    if (!mVisible || mCanvases.empty()) return;
+    
+    at(mCurrentTab)->mousePressed(x-mPosition.x, y-mTabSize.height-mPosition.y-mDraggableRect.height, button);
 }
 
 //--------------------------------------------------------------
 void ofxUITabbedCanvas::mouseReleased(int x, int y, int button)
 {
-    if (mDraggableRect.inside(x, y)) {
-        mMouseState = MOUSE_OVER;
-    }
-    else {
-        mMouseState = MOUSE_IDLE;
-    }
+    (mDraggableRect.inside(x, y)) ? mMouseState = MOUSE_OVER : mMouseState = MOUSE_IDLE;
     
-    if (mVisible && !mCanvases.empty())
-        at(mCurrentTab)->mouseReleased(x-mPosition.x, y-mTabSize.height-mPosition.y-mDraggableRect.height, button);
+    if (!mVisible || mCanvases.empty()) return;
+    
+    at(mCurrentTab)->mouseReleased(x-mPosition.x, y-mTabSize.height-mPosition.y-mDraggableRect.height, button);
 }
 
 //--------------------------------------------------------------
@@ -216,31 +213,37 @@ void ofxUITabbedCanvas::resize()
 }
 
 //--------------------------------------------------------------
-void ofxUITabbedCanvas::add(ofxUICanvas *canvas)
+void ofxUITabbedCanvas::add(ofxUICanvas *aTabCanvas)
 {
-    canvas->disableAppEventCallbacks();
-    canvas->disableMouseEventCallbacks();
-    canvas->disableKeyEventCallbacks();
-    mCanvases.push_back(canvas);
+    /// desable child tab canvas events
+    /// it will be handled by ofxUITabbedCanvas
+    aTabCanvas->disableAppEventCallbacks();
+    aTabCanvas->disableMouseEventCallbacks();
+    aTabCanvas->disableKeyEventCallbacks();
+    aTabCanvas->disableWindowEventCallbacks();
+    
+    /// tabs
+    mCanvases.push_back(aTabCanvas);
+    
     select(mCurrentTab);
     
-    const float w = canvas->getRect()->getWidth();
-    if (w>mTabSize.width) {
+    /// make ofxUITabbedCanvas bigger if it is smaller than child canvas
+    const float w = aTabCanvas->getRect()->getWidth();
+    if (w>mTabSize.width)
         mTabSize.width = w;
-    }
-    
     resize();
     
+    /// delete all tabs and rebuild them
     rebuildTabs();
 }
 
 //--------------------------------------------------------------
-void ofxUITabbedCanvas::remove(ofxUICanvas *canvas)
+void ofxUITabbedCanvas::remove(ofxUICanvas *aTabCanvas)
 {
     for (int i=0; i<mCanvases.size(); i++) {
         if (mCanvases.at(i)) {
             delete mCanvases.at(i);
-            mCanvases.erase(std::remove(mCanvases.begin(), mCanvases.end(), canvas), mCanvases.end());
+            mCanvases.erase(std::remove(mCanvases.begin(), mCanvases.end(), aTabCanvas), mCanvases.end());
         }
     }
     
@@ -345,15 +348,19 @@ void ofxUITabbedCanvas::saveSettings(const string &fileName)
 //--------------------------------------------------------------
 void ofxUITabbedCanvas::onTabChanged(ofxUIEventArgs &e)
 {
+    /// (0, 1) -> (row, col)
     const string name = e.widget->getName();
+    /// OFX_UI_WIDGET_TOGGLE
 	const int kind = e.widget->getKind();
     
     if (kind == OFX_UI_WIDGET_TOGGLE) {
         ofxUIToggle *t = static_cast<ofxUIToggle *>(e.widget);
         if (t->getValue()) {
+            /// get current active tab index from ofxUIToggleMatrix column at 0
             vector<string> values = ofSplitString(name, ",");
             if (values.size()>1) {
                 //cout << ofToInt(values.at(1)) << endl;
+                /// remove '(' and ')'
                 const int tabIndex = ofToInt(values.at(1));
                 select(tabIndex);
             }
@@ -369,18 +376,16 @@ void ofxUITabbedCanvas::rebuildTabs()
         delete mTabs;
         mTabs = NULL;
     }
-    
-    const float mgn = 2.0f;
-    
+        
     mTabs = new ofxUICanvas(0.0f, 0.0f, mTabSize.width, mTabSize.height);
-    mTabs->setWidgetSpacing(mgn);
+    mTabs->setWidgetSpacing(mTabSpacing);
     mTabs->setFont(mFontFile, false);
     super::addWidget(mTabs);
     
     if (!mCanvases.empty()) {
         const int nTabs = mCanvases.size();
-        const float tabW = mTabSize.width/mCanvases.size()-mgn*2.0f;
-        const float tabH = mTabSize.height-mgn*2.0f;
+        const float tabW = mTabSize.width/mCanvases.size()-mTabSpacing*2.0f;
+        const float tabH = mTabSize.height-mTabSpacing*2.0f;
         
         ofxUIWidget *w = mTabs->addWidgetDown(new ofxUIToggleMatrix(tabW, tabH, 1, nTabs, ""));
         ofAddListener(mTabs->newGUIEvent, this, &ofxUITabbedCanvas::onTabChanged);
@@ -388,12 +393,17 @@ void ofxUITabbedCanvas::rebuildTabs()
         mTabsMatrix->setAllowMultiple(false);
         mTabsMatrix->setToggle(mCurrentTab, 0, true);
         vector<ofxUIToggle *> toggles = mTabsMatrix->getToggles();
+        
         for (int i=0; i<toggles.size(); i++) {
             toggles.at(i)->setDrawBack(true);
             toggles.at(i)->setDrawOutline(true);
-            ofColor color;
-            color.setHex(0x999999);
-            toggles.at(i)->setColorFill(color);
+            toggles.at(i)->setColorFill(super::getColorFill());
+            toggles.at(i)->setColorBack(super::getColorBack());
+            toggles.at(i)->setColorFillHighlight(super::getColorBack());
+            toggles.at(i)->setColorOutline(super::getColorOutline());
+            toggles.at(i)->setColorOutlineHighlight(super::getColorOutlineHighlight());
+            toggles.at(i)->setColorPadded(super::getColorPadded());
+            toggles.at(i)->setColorPaddedOutline(super::getColorOutline());
         }
     }
 }
