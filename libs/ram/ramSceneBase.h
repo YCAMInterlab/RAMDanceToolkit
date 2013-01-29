@@ -2,8 +2,14 @@
 #include "ofMain.h"
 #include "ramControlPanel.h"
 
+#include "ramActorManager.h"
+
+class ramControlPanel;
+
 class ramSceneBase
 {
+	friend class ramControlPanel;
+	
 public:
 	ramSceneBase() : bEnabled(false), key_enabled("Show"), scene_name("unknown scene") {}
 	virtual ~ramSceneBase(){}
@@ -13,11 +19,7 @@ public:
 	inline ramRigidBody& getRigidBody(string name) { return ramActorManager::instance().getRigidBody(name); }
 	inline ofCamera& getActiveCamera() { return ramCameraManager::instance().getActiveCamera(); }
 	
-	virtual void setupControlPanel(ramControlPanel& gui)
-	{
-		guiPtr = &gui;
-		gui.addPanel(scene_name);
-	};
+	virtual void setupControlPanel(ramControlPanel& gui) {}
 	
 	virtual void setup() {}
 	virtual void update() {}

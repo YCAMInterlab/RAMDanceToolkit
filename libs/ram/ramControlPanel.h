@@ -5,6 +5,7 @@
 
 #include "ramGraphics.h"
 #include "ramCameraManager.h"
+#include "ramSceneBase.h"
 
 class ramCameraSettings
 {
@@ -237,8 +238,6 @@ public:
 		ofRemoveListener( ofEvents().exit, this, &ramControlPanel::exit );
 	}
 	
-	
-	
 #pragma mark -
 	
 	
@@ -266,8 +265,10 @@ public:
 		}
 		for (int i=0; i<scenes.size(); i++)
 		{
-			scenes.at(i)->setup();
-			scenes.at(i)->setupControlPanel( *this );
+			ramSceneBase *scene = scenes.at(i);
+			scene->guiPtr = this;
+			scene->setup();
+			scene->setupControlPanel( *this );
 		}
 		
 		bCheckScenes = true;

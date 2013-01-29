@@ -48,15 +48,6 @@ void testApp::setup()
 	
 	gui.addScenePanels(scenes);
 	
-	
-	/*!
-	 (user code......)
-	 */
-	const float lightPosition[] = { -100.0f, 500.0f, 200.0f };
-	gl::calcShadowMatrix( gl::kGroundPlaneYUp, lightPosition, shadowMat.getPtr() );
-	
-	for (int i=0; i<scenes.size(); i++)
-		scenes.at(i)->setMatrix(shadowMat);
 }
 
 //--------------------------------------------------------------
@@ -110,7 +101,13 @@ void testApp::drawFloor()
 void testApp::drawActor(ramActor &actor)
 {
 	if ( gui.getValueB("Draw Actor") )
-		ramBasicActor(actor, shadowMat.getPtr());
+	{
+		ramBasicActor(actor);
+		
+		ramGlobal().beginShadowMatrix();
+		ramBasicActor(actor, ramColor::SHADOW, ramColor::SHADOW);
+		ramGlobal().endShadowMatrix();
+	}
 	
 	for (int i=0; i<scenes.size(); i++)
 		scenes.at(i)->drawActor(actor);
