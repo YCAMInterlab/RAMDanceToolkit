@@ -1,8 +1,6 @@
 #include "testApp.h"
 
 
-ramGhost ghost;
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -20,33 +18,22 @@ void testApp::setup()
 	
 	/// scenes setup
 	// ------------------
-	ghost.setDistance(150.0);
-	ghost.setSpeed(27.0);
-	ghost.setHistorySize(10);
+	vector<ramSceneBase*> scenes;
+	sceneManager.setup(scenes);	
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
+	/* Entities update */
 	oscReceiver.update();
-	
-	// update ghost with passing ramActor
-	ghost.update( getActor(myActorName) );
+	sceneManager.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	sceneManager.draw();
-
-	// get processed ramActor ref
-	ramActor& actor = ghost.getActor();
-
-	ramCameraBegin();
-	{
-		ramBasicActor(actor);
-	}
-	ramCameraEnd();
+	
 }
 
 
@@ -56,23 +43,69 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramControlPanel &gui = ramGetGUI();
-//	if ( gui.getValueB("Draw Actor") )
+	ramBasicActor(actor, NULL);
+	
+	for (int i=0; i<actor.getNumNode(); i++)
 	{
-		ramBasicActor(actor);
+		ramNode &node = actor.getNode(i);
+		ofVec3f v;
 		
-//		ramGlobal().beginShadowMatrix();
-		ramBasicActor(actor, ramColor::SHADOW, ramColor::SHADOW);
-//		ramGlobal().endShadowMatrix();
+		
+		v = node.getPosition();
+		
+		{
+//			if(i==0) cout << node.getPosition() << endl;
+			ofBox(v, 10);
+		}
+		{
+			
+			float *dst = ofMatrix4x4().getPtr();
+			GLfloat src1[16];
+			glGetFloatv(GL_MODELVIEW_MATRIX, src1);
+			float *src2 = node.ofNode::getGlobalTransformMatrix().getPtr();
+			
+			
+			for(int y=0;y<4;y++)
+			{
+				for(int x=0;x<4;x++)
+				{
+					
+					dst[y*4+x] = src2[y*4]   * src1[x]   +
+								 src2[y*4+1] * src1[x+4] +
+								 src2[y*4+2] * src1[x+8] +
+								 src2[y*4+3] * src1[x+12];
+				}
+			}
+			
+			if(i==0)
+			{
+				cout << node.getPosition() << endl;
+				cout << dst[1] << " " << dst[5] << " "<< dst[9] << " "<< dst[13] << " " << endl;
+				cout << dst[2] << " " << dst[6] << " "<< dst[10] << " "<< dst[14] << " " << endl;
+				cout << dst[3] << " " << dst[7] << " "<< dst[11] << " "<< dst[15] << " " << endl;
+				cout << dst[4] << " " << dst[8] << " "<< dst[12] << " "<< dst[16] << " " << endl << endl;
+			}
+			
+//			node.transformBegin();
+//			ofBox(10);
+//			node.transformEnd();
+//			ofPushMatrix();
+//			ofMultMatrix( dst );
+//			ofBox(v*gui.getValueF("test"), 10);
+//			ofPopMatrix();
+		}
+		ofPopMatrix();
+		
 	}
-
-	ramBasicActor(actor);
+	cout << endl << "---" << endl;
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
+	
 }
+
 
 
 

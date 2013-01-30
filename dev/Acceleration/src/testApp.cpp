@@ -1,9 +1,7 @@
 #include "testApp.h"
 
-
 #include <numeric>
 
-static const string myActorName = "Ando_2012-09-01_18-49-10";
 
 ofMatrix4x4 shadowMat;
 

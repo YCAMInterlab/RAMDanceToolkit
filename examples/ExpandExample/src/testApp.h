@@ -10,6 +10,7 @@
 static const string myActorName = "default_unknown_date";
 //static const string myActorName = "default";
 
+
 class testApp : public ramBaseApp
 {
 public:
@@ -34,6 +35,7 @@ public:
 	// ------------------------
     void drawActor(ramActor &actor);
     void drawRigid(ramRigidBody &rigid);
+	
     
 	// ...
 	// ------------------------

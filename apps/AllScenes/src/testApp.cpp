@@ -20,19 +20,17 @@ void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
-	ofBackground( ramColor::WHITE );
+	ofBackground(ramColor::WHITE);
 	
-	ramGlobalInit();
 	
-	/*!
-	 ramBaseApp setup
-	 */
-	ramEnableAllEvents();
+	/// ram setup
+	// ------------------
+	ramInit();
 	oscReceiver.setup(10000);
 	
-	/*!
-	 scenes setup
-	 */
+	
+	/// scenes setup
+	// ------------------
 	vector<ramSceneBase*> scenes;
 	scenes.push_back( bigbox.getPtr() );
 	scenes.push_back( future.getPtr() );
@@ -62,7 +60,7 @@ void testApp::draw()
 void testApp::drawActor(ramActor &actor)
 {
 	ramControlPanel &gui = ramGetGUI();
-	if ( gui.getValueB("Draw Actor") )
+//	if ( gui.getValueB("Draw Actor") )
 	{
 		ramBasicActor(actor);
 		

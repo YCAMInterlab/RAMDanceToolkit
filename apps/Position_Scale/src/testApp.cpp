@@ -13,7 +13,7 @@ void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
-	ofBackground( ramColor::WHITE-20 );
+	ofBackground(ramColor::WHITE);
 	
 	
 	/*!
@@ -103,7 +103,7 @@ void testApp::drawFloor()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	if ( gui.getValueB("Draw Actor") )
+//	if ( gui.getValueB("Draw Actor") )
 	{
 		float scale = gui.getValueF("Actor Scale");
 		float posX = gui.getValueF("Actor Position:x");

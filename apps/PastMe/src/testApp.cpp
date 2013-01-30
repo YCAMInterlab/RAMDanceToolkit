@@ -13,7 +13,7 @@ void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
-	ofBackground( ramColor::WHITE-20 );
+	ofBackground(ramColor::WHITE);
 	
 	
 	/*!
@@ -97,7 +97,7 @@ void testApp::drawFloor()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	if ( gui.getValueB("Draw Actor") )
+//	if ( gui.getValueB("Draw Actor") )
 		ramBasicActor(actor, shadowMat.getPtr());
 	
 	for (int i=0; i<scenes.size(); i++) scenes.at(i)->drawActor(actor);

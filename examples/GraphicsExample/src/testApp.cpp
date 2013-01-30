@@ -8,22 +8,19 @@ void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
-	ofBackground( ramColor::WHITE-20 );
+	ofBackground(ramColor::WHITE);
 	
 	
-	/*!
-	 ramBaseApp setup
-	 */
-	ramEnableAllEvents();
+	/// ram setup
+	// ------------------
+	ramInit();
 	oscReceiver.setup(10000);
 	
 	
-	/*!
-	 GUI setup
-	 */
-	gui.setup();
-	gui.loadFont("Fonts/din-webfont.ttf", 11);
-	gui.loadCameraSettings("settings.camera.xml");
+	/// scenes setup
+	// ------------------
+	vector<ramSceneBase*> scenes;
+	sceneManager.setup(scenes);	
 }
 
 //--------------------------------------------------------------
@@ -31,6 +28,8 @@ void testApp::update()
 {
 	/* Entities update */
 	oscReceiver.update();
+	
+	sceneManager.update();
 }
 
 //--------------------------------------------------------------
@@ -42,16 +41,6 @@ void testApp::draw()
 
 
 #pragma mark - ram methods
-//--------------------------------------------------------------
-void testApp::drawFloor()
-{
-	ramBasicFloor(gui.getValueI("Floor pattern"),
-				  gui.getValueF("Floor size"),
-				  gui.getValueF("Grid size"),
-				  ramColor::BLUE_LIGHT,
-				  ramColor::BLUE_LIGHT-20);
-}
-
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {

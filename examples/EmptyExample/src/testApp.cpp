@@ -2,26 +2,25 @@
 
 
 
-
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
-	ofBackground( ramColor::WHITE );
+	ofBackground(ramColor::WHITE);
 	
+	
+	/// ram setup
+	// ------------------
 	ramInit();
-	
-	ofSetLogLevel(OF_LOG_FATAL_ERROR);
-	
-	/*!
-	 ramBaseApp setup
-	 */
-	ramEnableAllEvents();
 	oscReceiver.setup(10000);
 	
+	
+	/// scenes setup
+	// ------------------
+	vector<ramSceneBase*> scenes;
+	sceneManager.setup(scenes);	
 }
 
 //--------------------------------------------------------------
@@ -29,6 +28,8 @@ void testApp::update()
 {
 	/* Entities update */
 	oscReceiver.update();
+	
+	sceneManager.update();
 }
 
 //--------------------------------------------------------------
@@ -44,7 +45,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramBasicActor(actor, NULL);
+	ramBasicActor(actor);
 }
 
 //--------------------------------------------------------------

@@ -11,7 +11,7 @@ class ramBaseApp : public ofBaseApp
     
 public:
 	
-	ramBaseApp() {};
+	ramBaseApp() { ramEnableAllEvents(); };
 	virtual ~ramBaseApp() {};
 
 	virtual void drawFloor();

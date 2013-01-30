@@ -4,13 +4,11 @@
 #include "ramMain.h"
 #include "ofxXmlSettings.h"
 
-#include "ramControlPanel.h"
 /*!
  for debuging....
  */
 static const string myActorName = "default_unknown_date";
 //static const string myActorName = "default";
-
 
 class testApp : public ramBaseApp
 {
@@ -36,10 +34,9 @@ public:
 	// ------------------------
     void drawActor(ramActor &actor);
     void drawRigid(ramRigidBody &rigid);
-	
     
 	// ...
 	// ------------------------
-	vector<ramSceneBase*> scenes;
 	ramOscReceiver oscReceiver;
+	ramSceneManager sceneManager;
 };

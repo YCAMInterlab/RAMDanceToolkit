@@ -1,20 +1,25 @@
 #pragma once
 
 #include "ofMain.h"
-
 #include "ramMain.h"
-#include "ofxUI.h"
+#include "ofxXmlSettings.h"
+
+/*!
+ for debuging....
+ */
+static const string myActorName = "default_unknown_date";
+//static const string myActorName = "default";
 
 class testApp : public ramBaseApp
 {
 public:
-
+	
 	// of methods
 	// ------------------------
 	void setup();
 	void update();
 	void draw();
-
+	
 	void keyPressed(int key);
 	void keyReleased(int key);
 	void mouseMoved(int x, int y);
@@ -27,27 +32,11 @@ public:
 	
 	// ram methods
 	// ------------------------
-	void drawFloor();
     void drawActor(ramActor &actor);
     void drawRigid(ramRigidBody &rigid);
-
     
 	// ...
 	// ------------------------
 	ramOscReceiver oscReceiver;
-	
-	bool showRects;
-	bool showSpheres;
-	bool showCircles;
-	bool invertSpheres;
-	float pointSize;
-	float crossLength;
-	float rectRadius;
-	float maxInvertRadius;
-	bool showCircleBisector;
-	float circleResolution;
-	bool showCenterCircles;
-	
-	ofxUICanvas* gui;
-	void setupUI();
+	ramSceneManager sceneManager;
 };

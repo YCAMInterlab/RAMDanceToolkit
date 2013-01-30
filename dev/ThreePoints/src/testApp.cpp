@@ -1,6 +1,5 @@
 #include "testApp.h"
 
-static const string myActorName = "Ando_2012-09-01_18-49-10";
 
 static const ofColor cyanPrint = ofColor::fromHex(0x00abec);
 static const ofColor magentaPrint = ofColor::fromHex(0xec008c);
