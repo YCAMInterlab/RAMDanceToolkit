@@ -39,17 +39,17 @@ inline static const ofColor getRamColor(ofColor color)
 
 inline void ofLine(const ramNode& o1, const ramNode& o2)
 {
-	ofLine(o1.getPosition(), o2.getPosition());
+	ofLine(o1.getGlobalPosition(), o2.getGlobalPosition());
 }
 
 inline void ofBox(const ramNode& o, float size)
 {
-	ofBox(o.getPosition(), size);
+	ofBox(o.getGlobalPosition(), size);
 }
 
 inline void ofSphere(const ramNode& o, float radius)
 {
-	ofSphere(o.getPosition(), radius);
+	ofSphere(o.getGlobalPosition(), radius);
 }
 
 void ramBox(const ramNode& o, float size);

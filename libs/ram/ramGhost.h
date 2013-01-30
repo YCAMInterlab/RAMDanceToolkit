@@ -36,8 +36,8 @@ public:
 		for (int i = 0; i < presentArray.getNumNode(); i++)
 		{
 			
-			const ofVec3f& p0 = presentArray.getNode(i).getPosition();
-			const ofVec3f& p1 = pastArray.getNode(i).getPosition();
+			const ofVec3f& p0 = presentArray.getNode(i).getGlobalPosition();
+			const ofVec3f& p1 = pastArray.getNode(i).getGlobalPosition();
 			
 			// position
 			ofVec3f d = (p0 - p1);
@@ -45,15 +45,15 @@ public:
 			d *= distance;
 			ofVec3f v = p0 + d;
 			
-			ofVec3f vec = ghostActor.getNode(i).getPosition();
+			ofVec3f vec = ghostActor.getNode(i).getGlobalPosition();
 			vec += (v - vec) * speed * 0.001;
 			
 			// quaternion
-			const ofQuaternion& quat = presentArray.getNode(i).getOrientationQuat();
+			const ofQuaternion& quat = presentArray.getNode(i).getGlobalOrientation();
 			
 			ramNode& node = ghostActor.getNode(i);
-			node.setPosition(vec);
-			node.setOrientation(quat);
+			node.setGlobalPosition(vec);
+			node.setGlobalOrientation(quat);
 			node.getAccerelometer().update(vec, quat);
 		}
 	}
@@ -71,8 +71,8 @@ public:
 		
 		for (int i = 0; i < presentArray.getNumNode(); i++)
 		{
-			const ofVec3f& p0 = presentArray.getNode(i).getPosition();
-			const ofVec3f& p1 = pastArray.getNode(i).getPosition();
+			const ofVec3f& p0 = presentArray.getNode(i).getGlobalPosition();
+			const ofVec3f& p1 = pastArray.getNode(i).getGlobalPosition();
 			
 			// position
 			ofVec3f d = (p0 - p1);
@@ -80,11 +80,11 @@ public:
 			d *= distance;
 			ofVec3f v = p0 + d;
 			
-			ofVec3f vec = ghostRigidBody.getNode(i).getPosition();
+			ofVec3f vec = ghostRigidBody.getNode(i).getGlobalPosition();
 			vec += (v - vec) * speed * 0.001;
 			
 			// quaternion
-			const ofQuaternion& quat = presentArray.getNode(i).getOrientationQuat();
+			const ofQuaternion& quat = presentArray.getNode(i).getGlobalOrientation();
 			
 			ramNode& node = ghostRigidBody.getNode(i);
 			node.setPosition(vec);

@@ -45,11 +45,13 @@ void ramBox(const ramNode& o, float size)
 
 void ramSphere(const ramNode& o, float radius)
 {
-	ofSphere(o, radius);
+	o.transformBegin();
+	ofSphere(radius);
+	o.transformEnd();
 	
 	if (ramGetEnablePhysicsPrimitive())
 	{
-		ramSpherePrimitive *p = new ramSpherePrimitive(o.getPosition(), radius);
+		ramSpherePrimitive *p = new ramSpherePrimitive(o.getGlobalPosition(), radius);
 		ramPhysics::instance().registerTempraryPrimitive(p);
 	}
 }
@@ -145,12 +147,12 @@ void ramBasicActor(ramActor& actor,
 
 void ramActorCube(ramActor& actor)
 {
-	ofVec3f maxPos = actor.getNode( ramActor::JOINT_CHEST ).getPosition();
-	ofVec3f minPos = actor.getNode( ramActor::JOINT_CHEST ).getPosition();
+	ofVec3f maxPos = actor.getNode( ramActor::JOINT_CHEST ).getGlobalPosition();
+	ofVec3f minPos = actor.getNode( ramActor::JOINT_CHEST ).getGlobalPosition();
 	
 	for (int j=0; j<actor.getNumNode(); j++)
 	{
-		ofVec3f pos = actor.getNode(j).getPosition();
+		ofVec3f pos = actor.getNode(j).getGlobalPosition();
 		
 		if( maxPos.x <= pos.x ) maxPos.x = pos.x;
 		if( maxPos.y <= pos.y ) maxPos.y = pos.y;
