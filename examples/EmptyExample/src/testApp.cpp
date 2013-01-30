@@ -1,10 +1,8 @@
 #include "testApp.h"
 
-/*!
- Scenes
- */
-#include "EmptyScene.h"
-EmptyScene empty;
+
+
+
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -12,9 +10,10 @@ void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
-	ofBackground( ramColor::WHITE-20 );
-
-	ramGlobal().init();
+	ofBackground( ramColor::WHITE );
+	
+	
+	ofSetLogLevel(OF_LOG_FATAL_ERROR);
 	
 	/*!
 	 ramBaseApp setup
@@ -22,25 +21,26 @@ void testApp::setup()
 	ramEnableAllEvents();
 	oscReceiver.setup(10000);
 	
+	
 	/*!
-	 scenes setup
+	 GUI setup
 	 */
-	vector<ramSceneBase*> scenes;
-	scenes.push_back( empty.getPtr() );
-	sceneManager.setup(scenes);
+	gui.setup();
+//	gui.loadFont("Fonts/din-webfont.ttf", 11);
+//	gui.loadCameraSettings("settings.camera.xml");
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
+	/* Entities update */
 	oscReceiver.update();
-	sceneManager.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	sceneManager.draw();
+	
 }
 
 
@@ -49,32 +49,25 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawFloor()
 {
-	ramControlPanel &gui = ramGlobal().getGUI();
-	ramBasicFloor(gui.getValueI("Floor pattern"),
-				  gui.getValueF("Floor size"),
-				  gui.getValueF("Grid size"),
-				  ramColor::BLUE_LIGHT,
-				  ramColor::BLUE_LIGHT-20);
+//	ramBasicFloor(gui.getValueI("Floor pattern"),
+//				  gui.getValueF("Floor size"),
+//				  gui.getValueF("Grid size"),
+//				  ramColor::BLUE_LIGHT,
+//				  ramColor::BLUE_LIGHT-20);
 }
 
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramControlPanel &gui = ramGlobal().getGUI();
-	if ( gui.getValueB("Draw Actor") )
-	{
-		ramBasicActor(actor);
-		
-		ramGlobal().beginShadowMatrix();
-		ramBasicActor(actor, ramColor::SHADOW, ramColor::SHADOW);
-		ramGlobal().endShadowMatrix();
-	}
+	ramBasicActor(actor, NULL);
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
+	
 }
+
 
 
 

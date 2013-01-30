@@ -1,4 +1,5 @@
 #pragma once
+
 #include "ofxAutoControlPanel.h"
 #include "ofxControlPanel.h"
 #include "ofxXmlSettings.h"

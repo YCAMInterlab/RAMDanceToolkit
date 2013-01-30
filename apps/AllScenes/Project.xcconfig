@@ -5,7 +5,7 @@ OF_PATH = ../../..
 //THIS HAS ALL THE HEADER AND LIBS FOR OF CORE
 #include "../../../libs/openFrameworksCompiled/project/osx/CoreOF.xcconfig"
 
-RAM_HEADER_SEARCH_PATHS = ../../libs/ram
+RAM_HEADER_SEARCH_PATHS = ../../libs/ram/**
 
 OTHER_LDFLAGS = $(OF_CORE_LIBS) 
-HEADER_SEARCH_PATHS = $(OF_CORE_HEADERS) $(RAM_HEADER_SEARCH_PATHS) $(OF_PATH)/addons/ofxOsc/** $(OF_PATH)/addons/ofxXmlSettings/** ../../addons/ofxBt/libs/bullet/include/bullet ../../addons/ofxBt/src
+HEADER_SEARCH_PATHS = $(OF_CORE_HEADERS) $(RAM_HEADER_SEARCH_PATHS) $(OF_PATH)/addons/ofxOsc/** $(OF_PATH)/addons/ofxXmlSettings/** ../../addons/ofxBt/libs/bullet/include/bullet ../../addons/ofxBt/src ../../addons/ofxUI/src/** ../../addons/ofxUITabbedCanvas/** ../../addons/ofxControlPanel/src/**

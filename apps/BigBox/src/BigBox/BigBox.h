@@ -31,12 +31,13 @@ public:
 	
 	void setupControlPanel(ramControlPanel& gui)
 	{
-		gui.addPanel(getSceneName());
-		gui.addSlider(key_master_size, 400, 10, 1000);
-		gui.addSlider(key_line_width, 3, 1, 100);
-		
-		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			gui.addSlider(ramActor::getJointName(i), 500, 0, 1000);
+		// !!!:
+//		gui.addPanel(getSceneName());
+//		gui.addSlider(key_master_size, 400, 10, 1000);
+//		gui.addSlider(key_line_width, 3, 1, 100);
+//		
+//		for (int i=0; i<ramActor::NUM_JOINTS; i++)
+//			gui.addSlider(ramActor::getJointName(i), 500, 0, 1000);
 	}
 	
 	void setup()
@@ -47,23 +48,23 @@ public:
 	void update()
 	{
 		// line width
-		bigBoxLineWidth = gui().getValueF(key_line_width);
-		
-		// box size
-		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			jointSizes.at(i) = gui().getValueF(ramActor::getJointName(i));
-		
-		
-		
-		if (gui().hasValueChanged(key_master_size))
-		{
-			for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			{
-				float val = gui().getValueF(key_master_size);
-				gui().setValueF(ramActor::getJointName(i), val);
-				jointSizes.at(i) = val;
-			}
-		}
+//		bigBoxLineWidth = gui().getValueF(key_line_width);
+//		
+//		// box size
+//		for (int i=0; i<ramActor::NUM_JOINTS; i++)
+//			jointSizes.at(i) = gui().getValueF(ramActor::getJointName(i));
+//		
+//		
+//		
+//		if (gui().hasValueChanged(key_master_size))
+//		{
+//			for (int i=0; i<ramActor::NUM_JOINTS; i++)
+//			{
+//				float val = gui().getValueF(key_master_size);
+//				gui().setValueF(ramActor::getJointName(i), val);
+//				jointSizes.at(i) = val;
+//			}
+//		}
 	}
 	
 	void draw()
@@ -102,7 +103,7 @@ public:
 				 shadows
 				 */
 				
-				ramGlobal().beginShadowMatrix();
+//				ramGlobal().beginShadowMatrix();
 				
 				ofEnableAlphaBlending();
 				ofSetColor(shadowColor);
@@ -117,7 +118,7 @@ public:
 				if (node.hasParent())
 					ofLine(node, *node.getParent());
 				
-				ramGlobal().endShadowMatrix();
+//				ramGlobal().endShadowMatrix();
 				
 				ofPopStyle();
 			}

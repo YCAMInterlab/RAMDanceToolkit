@@ -1,18 +1,6 @@
 #include "testApp.h"
 
 
-/*!
- Scenes
- */
-#include "BigBox.h"
-#include "Bullet.h"
-#include "Future.h"
-#include "DrawLines.h"
-BigBox bigbox;
-Bullet bullet;
-Future future;
-DrawLines drawLines;
-
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -20,9 +8,8 @@ void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
-	ofBackground( ramColor::WHITE );
+	ofBackground( ramColor::WHITE-20 );
 	
-	ramGlobalInit();
 	
 	/*!
 	 ramBaseApp setup
@@ -30,15 +17,13 @@ void testApp::setup()
 	ramEnableAllEvents();
 	oscReceiver.setup(10000);
 	
+	
 	/*!
-	 scenes setup
+	 GUI setup
 	 */
-	vector<ramSceneBase*> scenes;
-	scenes.push_back( bigbox.getPtr() );
-	scenes.push_back( future.getPtr() );
-	scenes.push_back( bullet.getPtr() );
-	scenes.push_back( drawLines.getPtr() );
-	sceneManager.setup(scenes);
+	gui.setup();
+	gui.loadFont("Fonts/din-webfont.ttf", 11);
+	gui.loadCameraSettings("settings.camera.xml");
 }
 
 //--------------------------------------------------------------
@@ -46,47 +31,99 @@ void testApp::update()
 {
 	/* Entities update */
 	oscReceiver.update();
-	
-	sceneManager.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	sceneManager.draw();
+	
 }
 
+
+
 #pragma mark - ram methods
+//--------------------------------------------------------------
+void testApp::drawFloor()
+{
+	ramBasicFloor(gui.getValueI("Floor pattern"),
+				  gui.getValueF("Floor size"),
+				  gui.getValueF("Grid size"),
+				  ramColor::BLUE_LIGHT,
+				  ramColor::BLUE_LIGHT-20);
+}
 
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramControlPanel &gui = ramGetGUI();
-	if ( gui.getValueB("Draw Actor") )
+	ramNode &n1 = actor.getNode(ramActor::JOINT_HEAD);
+	ramNode &n2 = actor.getNode(ramActor::JOINT_RIGHT_HAND);
+	ramNode &n3 = actor.getNode(ramActor::JOINT_LEFT_HAND);
+	ramNode &n4 = actor.getNode(ramActor::JOINT_RIGHT_TOE);
+	ramNode &n5 = actor.getNode(ramActor::JOINT_LEFT_TOE);
+	
+	ofPushStyle();
 	{
-		ramBasicActor(actor);
+		// draw line betweem two nodes
+		ofNoFill();
+		ofSetColor( ramColor::RED_LIGHT );
+		ofSetLineWidth( 3 );
+		ofLine( n2, n3 );
 		
-//		ramGlobal().beginShadowMatrix();
-		ramBasicActor(actor, ramColor::SHADOW, ramColor::SHADOW);
-//		ramGlobal().endShadowMatrix();
+		
+		// draw triangle using three nodes
+		ofFill();
+		ofSetColor( ramColor::BLUE_LIGHT );
+		ofSetLineWidth( 3 );
+		ofTriangle( n1, n4, n5 );
+		
+		
+		// ramNode::transformBegin() ~ transformEnd()
+		n1.transformBegin();
+		{
+			// draw cube at JOINT_HEAD
+			ofNoFill();
+			ofSetColor( ramColor::YELLOW_DEEP );
+			ofSetLineWidth( 3 );
+			ofBox( 20 );
+			
+			// draw cone at JOINT_HEAD
+			ofNoFill();
+			ofSetColor( ramColor::GRAY );
+			ofSetLineWidth( 2 );
+			ofCone(10, 100);
+		}
+		n1.transformEnd();
+		 
+		
+		
+		// draw plane using several nodes
+		ofNoFill();
+		ofSetColor( ramColor::YELLOW_LIGHT );
+		ofSetLineWidth( 2 );
+		ofPushMatrix();
+		{
+			ofScale( 3, 3, 3 );
+			ramPlate( n1, n2, n3, n4, n5 );
+		}
+		ofPopMatrix();
 	}
+	ofPopStyle();
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
+	
 }
+
+
+
 
 #pragma mark - oF Events
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	switch (key)
-	{
-		case 'b':
-			bullet.cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
-			break;
-	}
+	
 }
 
 //--------------------------------------------------------------
@@ -136,3 +173,4 @@ void testApp::dragEvent(ofDragInfo dragInfo)
 {
 	
 }
+

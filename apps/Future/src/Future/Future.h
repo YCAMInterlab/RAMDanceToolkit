@@ -35,10 +35,10 @@ public:
 	
 	void setupControlPanel(ramControlPanel& gui)
 	{
-		gui.addToggle(key_toggle_draw, true);
-		gui.addToggle(key_toggle_pe);
-		gui.addSlider(key_slider_speed, 200, 0, 1000);
-		gui.addSlider(key_slider_distance, 60, 0, 1000);
+//		gui.addToggle(key_toggle_draw, true);
+//		gui.addToggle(key_toggle_pe);
+//		gui.addSlider(key_slider_speed, 200, 0, 1000);
+//		gui.addSlider(key_slider_distance, 60, 0, 1000);
 	}
 	
 	void setup()
@@ -58,17 +58,17 @@ public:
 		
 		pe.update();
 		
-		if(gui().hasValueChanged( variadic(key_slider_distance)(key_slider_speed)(key_toggle_pe)(key_toggle_draw) ))
-		{
-			float speed = gui().getValueF(key_slider_speed);
-			float distance = gui().getValueF(key_slider_distance);
-			
-			bGhost = gui().getValueB(key_toggle_draw);
-			bParticle = gui().getValueB(key_toggle_pe);
-			
-			ghost.setSpeed(speed);
-			ghost.setDistance(distance);
-		}
+//		if(gui().hasValueChanged( variadic(key_slider_distance)(key_slider_speed)(key_toggle_pe)(key_toggle_draw) ))
+//		{
+//			float speed = gui().getValueF(key_slider_speed);
+//			float distance = gui().getValueF(key_slider_distance);
+//			
+//			bGhost = gui().getValueB(key_toggle_draw);
+//			bParticle = gui().getValueB(key_toggle_pe);
+//			
+//			ghost.setSpeed(speed);
+//			ghost.setDistance(distance);
+//		}
 		
 	}
 	
@@ -109,7 +109,8 @@ public:
 				ofColor shadowColor = ramColor::GRAY;
 				shadowColor.a = 90;
 				
-				ramGlobal().beginShadowMatrix();
+//				ramGlobal().beginShadowMatrix();
+				
 				ofEnableAlphaBlending();
 				ofSetColor(shadowColor);
 				
@@ -117,7 +118,7 @@ public:
 				if (node.hasParent())
 					ofLine(node, *node.getParent());
 				
-				ramGlobal().endShadowMatrix();
+//				ramGlobal().endShadowMatrix();
 			}
 		}
 		

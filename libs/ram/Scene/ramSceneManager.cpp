@@ -6,7 +6,6 @@
 void ramSceneManager::setup(vector<ramSceneBase*>& scenes)
 {
 	ramGetGUI().addScenePanels(scenes);
-	
 	this->scenes = scenes;
 }
 

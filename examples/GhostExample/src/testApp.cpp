@@ -1,18 +1,8 @@
 #include "testApp.h"
 
 
-/*!
- Scenes
- */
-#include "BigBox.h"
-#include "Bullet.h"
-#include "Future.h"
-#include "DrawLines.h"
-BigBox bigbox;
-Bullet bullet;
-Future future;
-DrawLines drawLines;
-
+static const string myActorName = "default_unknown_date";
+ramGhost ghost;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -20,8 +10,8 @@ void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
+
 	ofBackground( ramColor::WHITE );
-	
 	ramGlobalInit();
 	
 	/*!
@@ -31,30 +21,44 @@ void testApp::setup()
 	oscReceiver.setup(10000);
 	
 	/*!
-	 scenes setup
+	 Ghost setup
 	 */
 	vector<ramSceneBase*> scenes;
-	scenes.push_back( bigbox.getPtr() );
-	scenes.push_back( future.getPtr() );
-	scenes.push_back( bullet.getPtr() );
-	scenes.push_back( drawLines.getPtr() );
+	scenes.push_back( ghost.getPtr() );
 	sceneManager.setup(scenes);
+
+	ghost.setDistance(150.0);
+	ghost.setSpeed(27.0);
+	ghost.setHistorySize(10);
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/* Entities update */
 	oscReceiver.update();
 	
 	sceneManager.update();
+	
+	// update ghost with passing ramActor
+	ghost.update( getActor(myActorName) );
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
 	sceneManager.draw();
+
+	// get processed ramActor ref
+	ramActor& actor = ghost.getActor();
+
+	ramCameraBegin();
+	{
+		ramBasicActor( actor, NULL );
+	}
+	ramCameraEnd();
 }
+
+
 
 #pragma mark - ram methods
 
@@ -66,10 +70,12 @@ void testApp::drawActor(ramActor &actor)
 	{
 		ramBasicActor(actor);
 		
-//		ramGlobal().beginShadowMatrix();
+		ramGlobal().beginShadowMatrix();
 		ramBasicActor(actor, ramColor::SHADOW, ramColor::SHADOW);
-//		ramGlobal().endShadowMatrix();
+		ramGlobal().endShadowMatrix();
 	}
+
+	ramBasicActor(actor);
 }
 
 //--------------------------------------------------------------
@@ -77,16 +83,13 @@ void testApp::drawRigid(ramRigidBody &rigid)
 {
 }
 
+
+
 #pragma mark - oF Events
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	switch (key)
-	{
-		case 'b':
-			bullet.cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
-			break;
-	}
+	
 }
 
 //--------------------------------------------------------------
@@ -136,3 +139,4 @@ void testApp::dragEvent(ofDragInfo dragInfo)
 {
 	
 }
+

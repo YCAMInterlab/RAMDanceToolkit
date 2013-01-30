@@ -6,7 +6,7 @@ class ramGhost
 {
 public:
 	ramGhost() :
-	max_entities(10),
+	historySize(10),
 	distance(150),
 	speed(27)
 	{
@@ -27,7 +27,7 @@ public:
 		if (present.getNumNode() != 0)
 			recordedActors.push_back(present);
 		
-		if (recordedActors.size() > max_entities)
+		if (recordedActors.size() > historySize)
 			recordedActors.pop_front();
 		
 		ramNodeArray &presentArray = recordedActors.back();
@@ -63,7 +63,7 @@ public:
 		if (present.getNumNode() != 0)
 			recordedRigids.push_back(present);
 		
-		if (recordedRigids.size() > max_entities)
+		if (recordedRigids.size() > historySize)
 			recordedRigids.pop_front();
 		
 		ramNodeArray &presentArray = recordedRigids.back();
@@ -98,11 +98,11 @@ public:
 	
 	inline void setDistance(const float d) { distance = d; }
 	inline void setSpeed(const float s) { speed = s; }
-	inline void setMaxEntities(const unsigned int m) { max_entities = m; }
+	inline void setHistorySize(const unsigned int m) { historySize = m; }
 	
 	inline float getdistance() { return distance; }
 	inline float getspeed() { return speed; }
-	inline unsigned int getMaxEntities() { return max_entities; }
+	inline unsigned int getHistorySize() { return historySize; }
 	
 protected:
 	deque<ramActor> recordedActors;
@@ -110,6 +110,6 @@ protected:
 	ramActor ghostActor;
 	ramRigidBody ghostRigidBody;
 	
-	unsigned int max_entities;
+	unsigned int historySize;
 	float distance, speed;
 };
