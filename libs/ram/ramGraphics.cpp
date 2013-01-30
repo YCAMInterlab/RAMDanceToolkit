@@ -123,8 +123,6 @@ void ramBasicActor(ramActor& actor,
 				   const ofColor& jointColor,
 				   const ofColor& lineColor)
 {
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	glEnable(GL_DEPTH_TEST);
 	glPushMatrix();
 	for (int i=0; i<actor.getNumNode(); i++)
 	{
@@ -143,9 +141,6 @@ void ramBasicActor(ramActor& actor,
 		}
 	}
 	glPopMatrix();
-	glDisable(GL_DEPTH_TEST);
-	glPopAttrib();
-	
 }
 
 void ramActorCube(ramActor& actor)

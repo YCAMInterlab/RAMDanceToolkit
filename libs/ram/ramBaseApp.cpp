@@ -14,7 +14,6 @@ void ramBaseApp::draw(ofEventArgs &args)
     cam.begin();
     
 	// floor
-	// BUG: TODO: doesn't show shadow
 	drawFloor();
 	
     // actors

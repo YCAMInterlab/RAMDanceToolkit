@@ -104,7 +104,6 @@ public:
 				
 				ramGlobal().beginShadowMatrix();
 				
-				glDisable(GL_DEPTH_TEST);
 				ofEnableAlphaBlending();
 				ofSetColor(shadowColor);
 				

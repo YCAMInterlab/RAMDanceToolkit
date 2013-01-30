@@ -110,13 +110,13 @@ public:
 				shadowColor.a = 90;
 				
 				ramGlobal().beginShadowMatrix();
-				glDisable(GL_DEPTH_TEST);
 				ofEnableAlphaBlending();
 				ofSetColor(shadowColor);
 				
 				ofBox(node, boxSize);
 				if (node.hasParent())
 					ofLine(node, *node.getParent());
+				
 				ramGlobal().endShadowMatrix();
 			}
 		}

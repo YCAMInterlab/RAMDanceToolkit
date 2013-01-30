@@ -336,25 +336,25 @@ public:
 			lines.push_back(l);
 		}
 		
-//		ofxValue v;
-//		v.load(filename);
-//		
-//		if(!v.isArray()) return;
-//		for (int i = 0; i < v.size(); i++)
-//		{
-//			ofxValue p = v[i];
-//			if (!p.isMap()) continue;
-//			
-//			Line o;
-//			o.value = p;
-//			lines.push_back(o);
-//			
-//			cout << "DrawLines ";
-//			cout << p["from"]["target"].as<string>() << ":" << p["from"]["node_id"].as<int>();
-//			cout << " -> ";
-//			cout << p["to"]["target"].as<string>() << ":" << p["to"]["node_id"].as<int>();
-//			cout << endl;
-//		}
+		ofxValue v;
+		v.load(filename);
+		
+		if(!v.isArray()) return;
+		for (int i = 0; i < v.size(); i++)
+		{
+			ofxValue p = v[i];
+			if (!p.isMap()) continue;
+			
+			Line o;
+			o.value = p;
+			lines.push_back(o);
+			
+			cout << "DrawLines ";
+			cout << p["from"]["target"].as<string>() << ":" << p["from"]["node_id"].as<int>();
+			cout << " -> ";
+			cout << p["to"]["target"].as<string>() << ":" << p["to"]["node_id"].as<int>();
+			cout << endl;
+		}
 	}
 	
 private:

@@ -65,6 +65,9 @@ void ramGlobalContext::init()
 
 void ramGlobalContext::beginShadowMatrix()
 {
+	glPushAttrib(GL_ENABLE_BIT);
+	glDisable(GL_DEPTH_TEST);
+	
 	glPushMatrix();
 	glMultMatrixf(shadow_matrix.getPtr());
 }
@@ -72,6 +75,7 @@ void ramGlobalContext::beginShadowMatrix()
 void ramGlobalContext::endShadowMatrix()
 {
 	glPopMatrix();
+	glPopAttrib();
 }
 
 void ramGlobalContext::setLightPosition(ofVec3f pos)
