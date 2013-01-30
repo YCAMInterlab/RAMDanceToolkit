@@ -6,7 +6,6 @@
 #include "EmptyScene.h"
 EmptyScene empty;
 
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -14,7 +13,8 @@ void testApp::setup()
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
 	ofBackground( ramColor::WHITE-20 );
-	
+
+	ramGlobal().init();
 	
 	/*!
 	 ramBaseApp setup
@@ -22,63 +22,25 @@ void testApp::setup()
 	ramEnableAllEvents();
 	oscReceiver.setup(10000);
 	
-	
-	/*!
-	 GUI setup
-	 */
-	gui.setup();
-	gui.loadFont("Fonts/din-webfont.ttf", 11);
-	gui.loadCameraSettings("settings.camera.xml");
-	gui.addSlider("Actor Scale", 1.0, 0.1, 20);
-	gui.addSlider2D("Actor Position", "Actor Position", 0, 0, -300, 300, -300, 300, true);
-	
-	
 	/*!
 	 scenes setup
 	 */
+	vector<ramSceneBase*> scenes;
 	scenes.push_back( empty.getPtr() );
-	gui.addScenePanels(scenes);
-	
-	
-	/*!
-	 (user code......)
-	 */
-	const float lightPosition[] = { -100.0f, 500.0f, 200.0f };
-	gl::calcShadowMatrix( gl::kGroundPlaneYUp, lightPosition, shadowMat.getPtr() );
-	
-	for (int i=0; i<scenes.size(); i++)
-		scenes.at(i)->setMatrix(shadowMat);
+	sceneManager.setup(scenes);
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/* Entities update */
 	oscReceiver.update();
-	
-	
-	/* Scenes update */
-	for (int i=0; i<scenes.size(); i++)
-	{
-		ramSceneBase* scene = scenes.at(i);
-		scene->update();
-		
-		/* Enable / Disable scenes */
-		string key = scene->getSceneEnableKey();
-		
-		if ( gui.hasValueChanged(key) )
-		{
-			scene->setEnabled( gui.getValueB(key) );
-		}
-	}
+	sceneManager.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	/* Scenes draw */
-	for (int i=0; i<scenes.size(); i++)
-		scenes.at(i)->draw();
+	sceneManager.draw();
 }
 
 
@@ -87,6 +49,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawFloor()
 {
+	ramControlPanel &gui = ramGlobal().getGUI();
 	ramBasicFloor(gui.getValueI("Floor pattern"),
 				  gui.getValueF("Floor size"),
 				  gui.getValueF("Grid size"),
@@ -97,21 +60,21 @@ void testApp::drawFloor()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
+	ramControlPanel &gui = ramGlobal().getGUI();
 	if ( gui.getValueB("Draw Actor") )
 	{
-		ramBasicActor(actor, shadowMat.getPtr());
-	}
+		ramBasicActor(actor);
 		
-	
-	for (int i=0; i<scenes.size(); i++) scenes.at(i)->drawActor(actor);
+		ramGlobal().beginShadowMatrix();
+		ramBasicActor(actor, ramColor::SHADOW, ramColor::SHADOW);
+		ramGlobal().endShadowMatrix();
+	}
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
-	
 }
-
 
 
 

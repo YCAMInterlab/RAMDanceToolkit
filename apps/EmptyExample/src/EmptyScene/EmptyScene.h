@@ -18,7 +18,6 @@ public:
 		bColor = false;
 	}
 	
-	
 	void setup()
 	{
 		
@@ -28,23 +27,19 @@ public:
 	{
 		gui.addPanel( getSceneName() );
 		gui.addToggle( key_toggle );
-		
-		guiPtr = &gui;
 	}
 	
 	void update()
 	{
-		if( guiPtr->hasValueChanged( key_toggle ) )
+		if( gui().hasValueChanged( key_toggle ) )
 		{
-			bColor = guiPtr->getValueB( key_toggle );
+			bColor = gui().getValueB( key_toggle );
 		}
 	}
 	
 	void draw()
 	{
 		ofBackground( bColor ? ramColor::WHITE : ramColor::BLACK );
-		
-		if (!bEnabled) return;
 		
 		ramCameraBegin();
 		ofSetColor( ramColor::GRAY );

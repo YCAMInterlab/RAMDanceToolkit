@@ -37,20 +37,9 @@ public:
 	void drawFloor();
     void drawActor(ramActor &actor);
     void drawRigid(ramRigidBody &rigid);
-	
     
 	// ...
 	// ------------------------
-	vector<ramSceneBase*> scenes;
 	ramOscReceiver oscReceiver;
-	ramControlPanel gui;
-	
-	ofMatrix4x4 shadowMat;
-	
-	
-	// Setting files
-	// ------------------------
-		
-	ofxXmlSettings camSettingXml;
-	vector<ramCameraSettings> setting_cam;
+	ramSceneManager sceneManager;
 };
