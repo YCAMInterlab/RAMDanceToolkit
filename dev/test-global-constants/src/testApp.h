@@ -7,13 +7,13 @@
 class testApp : public ramBaseApp
 {
 public:
-
+	
 	// of methods
 	// ------------------------
 	void setup();
 	void update();
 	void draw();
-
+	
 	void keyPressed(int key);
 	void keyReleased(int key);
 	void mouseMoved(int x, int y);
@@ -29,10 +29,10 @@ public:
 	void drawFloor();
     void drawActor(ramActor &actor);
     void drawRigid(ramRigidBody &rigid);
-
+	
     
 	// ...
 	// ------------------------
 	ramOscReceiver oscReceiver;
-    ramNodeFinder nodeFinder;
+
 };

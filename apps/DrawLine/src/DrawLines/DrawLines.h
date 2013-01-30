@@ -64,90 +64,87 @@ public:
 		ofRemoveListener(ofEvents().keyPressed, this, &DrawLines::keyPressed);
 	}
 	
-	void refreshControlPanel(ramControlPanel& gui)
+	void setupControlPanel(ramControlPanel& gui)
 	{
-		guiPtr = &gui;
-		gui.addPanel( getSceneName() );
-		gui.addMultiToggle("Line: Type", 1, variadic("line")("curve"));
-		
-		// nodes
-		gui.addLabel(target_actor);
-		gui.addTextDropDown("Line: node from", 0, ramActor::getJointNames());
-		gui.addTextDropDown("Line: node from_cp", 1, ramActor::getJointNames());
-		gui.addTextDropDown("Line: node to", 21, ramActor::getJointNames());
-		gui.addTextDropDown("Line: node to_cp", 22, ramActor::getJointNames());
-		
-		// style
-		gui.addSlider("Line: Curve gain", 250, 1, 1000);
-		gui.addSlider("Line: Width", 3, 1, 20);
-		gui.addSlider("Line: Color R", 2, 1, 255);
-		gui.addSlider("Line: Color G", 2, 1, 255);
-		gui.addSlider("Line: Color B", 2, 1, 255);
-		
-		// effect
-		gui.addSlider("Line: Resampling", 1, 1, 100);
-		gui.addSlider("Line: Dot size", 2, 1, 30);
-		gui.addSlider("Line: Spiral freq", 1, 1, 1000);
-		gui.addSlider("Line: Spiral radius", 1, 1, 100);
+//		gui.addPanel( getSceneName() );
+//		gui.addMultiToggle("Line: Type", 1, variadic("line")("curve"));
+//		
+//		// nodes
+//		gui.addLabel(target_actor);
+//		gui.addTextDropDown("Line: node from", 0, ramActor::getJointNames());
+//		gui.addTextDropDown("Line: node from_cp", 1, ramActor::getJointNames());
+//		gui.addTextDropDown("Line: node to", 21, ramActor::getJointNames());
+//		gui.addTextDropDown("Line: node to_cp", 22, ramActor::getJointNames());
+//		
+//		// style
+//		gui.addSlider("Line: Curve gain", 250, 1, 1000);
+//		gui.addSlider("Line: Width", 3, 1, 20);
+//		gui.addSlider("Line: Color R", 2, 1, 255);
+//		gui.addSlider("Line: Color G", 2, 1, 255);
+//		gui.addSlider("Line: Color B", 2, 1, 255);
+//		
+//		// effect
+//		gui.addSlider("Line: Resampling", 1, 1, 100);
+//		gui.addSlider("Line: Dot size", 2, 1, 30);
+//		gui.addSlider("Line: Spiral freq", 1, 1, 1000);
+//		gui.addSlider("Line: Spiral radius", 1, 1, 100);
 	}
 	
 	void update()
 	{
-		if (guiPtr->hasValueChangedInPanel( getSceneName() ))
-		{
-			ofxValue o = ofxValue::Map();
-
-			// style
-			o["style"] = ofxValue::Map();
-			o["style"]["type"] = guiPtr->getValueI("Line: Type") == 0 ? "line" : "curve";
-			o["style"]["curve_gain"] = guiPtr->getValueI("Line: Curve gain");
-			o["style"]["line_width"] = guiPtr->getValueI("Line: Width");
-			
-			// color
-			o["style"]["color"] = ofxValue::Array();
-			o["style"]["color"].push( guiPtr->getValueF("Line: Color R") );
-			o["style"]["color"].push( guiPtr->getValueF("Line: Color G") );
-			o["style"]["color"].push( guiPtr->getValueF("Line: Color B") );
-			
-			// effect
-			o["style"]["effect"] = ofxValue::Map();
-			o["style"]["effect"]["relampling"] = guiPtr->getValueF("Line: Resampling");;
-			o["style"]["effect"]["dotted"] = guiPtr->getValueF("Line: Dot size");;
-			
-			o["style"]["effect"]["spiral"] = ofxValue::Map();
-			o["style"]["effect"]["spiral"]["freq"] = guiPtr->getValueF("Line: Spiral freq");
-			o["style"]["effect"]["spiral"]["radius"] = guiPtr->getValueF("Line: Spiral radius");;
-			
-			// nodes
-			o["from"] = ofxValue::Map();
-			o["from"]["type"] = target_type;
-			o["from"]["target"] = target_actor;
-			o["from"]["node_id"] = guiPtr->getValueI("Line: node from");
-
-			o["from_cp"] = ofxValue::Map();
-			o["from_cp"]["type"] = target_type;
-			o["from_cp"]["target"] = target_actor;
-			o["from_cp"]["node_id"] = guiPtr->getValueI("Line: node from_cp");
-
-			o["to"] = ofxValue::Map();
-			o["to"]["type"] = target_type;
-			o["to"]["target"] = target_actor;
-			o["to"]["node_id"] = guiPtr->getValueI("Line: node to");
-
-			o["to_cp"] = ofxValue::Map();
-			o["to_cp"]["type"] = target_type;
-			o["to_cp"]["target"] = target_actor;
-			o["to_cp"]["node_id"] = guiPtr->getValueI("Line: node to_cp");
-			
-			myLine = o;
-			reloadSettings();
-		}
+//		if (gui().hasValueChangedInPanel( getSceneName() ))
+//		{
+//			ofxValue o = ofxValue::Map();
+//
+//			// style
+//			o["style"] = ofxValue::Map();
+//			o["style"]["type"] = gui().getValueI("Line: Type") == 0 ? "line" : "curve";
+//			o["style"]["curve_gain"] = gui().getValueI("Line: Curve gain");
+//			o["style"]["line_width"] = gui().getValueI("Line: Width");
+//			
+//			// color
+//			o["style"]["color"] = ofxValue::Array();
+//			o["style"]["color"].push( gui().getValueF("Line: Color R") );
+//			o["style"]["color"].push( gui().getValueF("Line: Color G") );
+//			o["style"]["color"].push( gui().getValueF("Line: Color B") );
+//			
+//			// effect
+//			o["style"]["effect"] = ofxValue::Map();
+//			o["style"]["effect"]["relampling"] = gui().getValueF("Line: Resampling");;
+//			o["style"]["effect"]["dotted"] = gui().getValueF("Line: Dot size");;
+//			
+//			o["style"]["effect"]["spiral"] = ofxValue::Map();
+//			o["style"]["effect"]["spiral"]["freq"] = gui().getValueF("Line: Spiral freq");
+//			o["style"]["effect"]["spiral"]["radius"] = gui().getValueF("Line: Spiral radius");;
+//			
+//			// nodes
+//			o["from"] = ofxValue::Map();
+//			o["from"]["type"] = target_type;
+//			o["from"]["target"] = target_actor;
+//			o["from"]["node_id"] = gui().getValueI("Line: node from");
+//
+//			o["from_cp"] = ofxValue::Map();
+//			o["from_cp"]["type"] = target_type;
+//			o["from_cp"]["target"] = target_actor;
+//			o["from_cp"]["node_id"] = gui().getValueI("Line: node from_cp");
+//
+//			o["to"] = ofxValue::Map();
+//			o["to"]["type"] = target_type;
+//			o["to"]["target"] = target_actor;
+//			o["to"]["node_id"] = gui().getValueI("Line: node to");
+//
+//			o["to_cp"] = ofxValue::Map();
+//			o["to_cp"]["type"] = target_type;
+//			o["to_cp"]["target"] = target_actor;
+//			o["to_cp"]["node_id"] = gui().getValueI("Line: node to_cp");
+//			
+//			myLine = o;
+//			reloadSettings();
+//		}
 	}
 	
 	void draw()
 	{
-		if (!bEnabled) return;
-		
 		ramCameraBegin();
 		
 		ofSetColor(255);
@@ -301,8 +298,9 @@ public:
 				ofColor shadowColor = ramColor::GRAY;
 				shadowColor.a = 80;
 				ofSetColor(shadowColor);
-				glPushMatrix();
-				glMultMatrixf( getMatrix().getPtr() );
+				
+				ramGlobal().beginShadowMatrix();
+				
 				glBegin(GL_LINES);
 				for (int i = 0; i < poly.size() - 1; i += dotted)
 				{
@@ -312,7 +310,9 @@ public:
 					glVertex3fv(v1.getPtr());
 				}
 				glEnd();
-				glPopMatrix();
+				
+				ramGlobal().endShadowMatrix();
+				
 				ofPopStyle();
 				
 			}
@@ -329,19 +329,15 @@ public:
 		
 		lines.clear();
 		
-		if (guiPtr != NULL)
+		if (myLine.isMap())
 		{
-			if (myLine.isMap())
-			{
-				Line l;
-				l.value = myLine;
-				lines.push_back(l);
-			}
+			Line l;
+			l.value = myLine;
+			lines.push_back(l);
 		}
 		
 		ofxValue v;
 		v.load(filename);
-		
 		
 		if(!v.isArray()) return;
 		for (int i = 0; i < v.size(); i++)
