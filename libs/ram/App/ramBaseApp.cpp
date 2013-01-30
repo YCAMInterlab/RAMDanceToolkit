@@ -58,9 +58,9 @@ void ramBaseApp::draw(ofEventArgs &args)
 void ramBaseApp::drawFloor()
 {
 	ramControlPanel &gui = ramGetGUI();
-	ramBasicFloor(gui.getValueI("Floor pattern"),
-				  gui.getValueF("Floor size"),
-				  gui.getValueF("Grid size"),
-				  ramColor::BLUE_LIGHT,
-				  ramColor::BLUE_DEEP);
+//	ramBasicFloor(gui.getValueI("Floor pattern"),
+//				  gui.getValueF("Floor size"),
+//				  gui.getValueF("Grid size"),
+//				  ramColor::BLUE_LIGHT,
+//				  ramColor::BLUE_DEEP);
 }

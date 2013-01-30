@@ -1,6 +1,6 @@
 #include "ramControlPanel.h"
 
-ramControlPanel* ramControlPanel::_instance = NULL;
+ramControlPanel *ramControlPanel::_instance = NULL;
 
 ramControlPanel& ramControlPanel::instance()
 {

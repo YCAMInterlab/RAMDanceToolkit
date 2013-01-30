@@ -5,7 +5,7 @@
 
 void ramSceneManager::setup(vector<ramSceneBase*>& scenes)
 {
-	ramGetGUI().addScenePanels(scenes);
+//	ramGetGUI().addScenePanels(scenes);
 	this->scenes = scenes;
 }
 
@@ -18,10 +18,10 @@ void ramSceneManager::update()
 		ramSceneBase *scene = scenes[i];
 		string key = scene->getSceneEnableKey();
 		
-		if ( gui.hasValueChanged(key) )
-		{
-			scene->setEnabled( gui.getValueB(key) );
-		}
+//		if ( gui.hasValueChanged(key) )
+//		{
+//			scene->setEnabled( gui.getValueB(key) );
+//		}
 
 		if (!scene->isEnabled()) continue;
 		

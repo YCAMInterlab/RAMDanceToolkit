@@ -7,9 +7,9 @@ string ramToResourcePath(string path)
 	return ofFilePath::join(ofToDataPath("../../../../resources"), path);
 }
 
-void ramGlobalInit()
+void ramInit()
 {
 	ramGetGUI().setup();
-	ramGetGUI().loadFont(ramToResourcePath("Fonts/din-webfont.ttf"), 10);
-	ramGetGUI().loadCameraSettings("settings.camera.xml");
+//	ramGetGUI().loadFont(ramToResourcePath("Fonts/din-webfont.ttf"), 10);
+//	ramGetGUI().loadCameraSettings("settings.camera.xml");
 }

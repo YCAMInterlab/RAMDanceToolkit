@@ -34,7 +34,6 @@ public:
 	
 	// ram methods
 	// ------------------------
-	void drawFloor();
     void drawActor(ramActor &actor);
     void drawRigid(ramRigidBody &rigid);
 	
@@ -43,5 +42,4 @@ public:
 	// ------------------------
 	vector<ramSceneBase*> scenes;
 	ramOscReceiver oscReceiver;
-	ramControlPanel gui;
 };

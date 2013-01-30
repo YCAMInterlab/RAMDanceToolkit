@@ -4,5 +4,5 @@
 
 #include "ramControlPanel.h"
 
-void ramGlobalInit();
+void ramInit();
 string ramToResourcePath(string path);
