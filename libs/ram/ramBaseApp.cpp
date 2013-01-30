@@ -1,11 +1,16 @@
 #include "ramBaseApp.h"
 #include "ramCameraManager.h"
+#include "ramControlPanel.h"
+
+void ramBaseApp::exit(ofEventArgs &args)
+{
+	ramDisableAllEvents();
+}
 
 void ramBaseApp::update(ofEventArgs &args)
 {
     getActorManager().update();
 }
-
 
 void ramBaseApp::draw(ofEventArgs &args)
 {
@@ -13,28 +18,49 @@ void ramBaseApp::draw(ofEventArgs &args)
 	
     cam.begin();
     
-	// floor
 	drawFloor();
-	
-    // actors
-	for (int n = 0; n < getActorManager().getNumActor(); n++)
+
 	{
-		ramActor &o = getActorManager().getActor(n);
-		drawActor(o);
+		// shadow
+		
+		for (int n = 0; n < getActorManager().getNumActor(); n++)
+		{
+			ramActor &o = getActorManager().getActor(n);
+			drawActor(o);
+		}
+		
+		for (int n = 0; n < getActorManager().getNumRigidBody(); n++)
+		{
+			ramRigidBody &o = getActorManager().getRigidBody(n);
+			drawRigid(o);
+		}
 	}
-    
-    // rigids
-	for (int n = 0; n < getActorManager().getNumRigidBody(); n++)
+	
 	{
-		ramRigidBody &o = getActorManager().getRigidBody(n);
-		drawRigid(o);
+		// object
+		
+		for (int n = 0; n < getActorManager().getNumActor(); n++)
+		{
+			ramActor &o = getActorManager().getActor(n);
+			drawActor(o);
+		}
+		
+		for (int n = 0; n < getActorManager().getNumRigidBody(); n++)
+		{
+			ramRigidBody &o = getActorManager().getRigidBody(n);
+			drawRigid(o);
+		}
 	}
     
 	cam.end();
 }
 
-
-void ramBaseApp::exit(ofEventArgs &args)
+void ramBaseApp::drawFloor()
 {
-	ramDisableAllEvents();
+	ramControlPanel &gui = ramGetGUI();
+	ramBasicFloor(gui.getValueI("Floor pattern"),
+				  gui.getValueF("Floor size"),
+				  gui.getValueF("Grid size"),
+				  ramColor::BLUE_LIGHT,
+				  ramColor::BLUE_DEEP);
 }

@@ -8,7 +8,6 @@
 
 class ramColor
 {
-	
 public:
 	
 	static const ofColor RED_NORMAL;
@@ -55,14 +54,6 @@ inline void ofSphere(const ramNode& o, float radius)
 void ramBox(const ramNode& o, float size);
 void ramSphere(const ramNode& o, float radius);
 
-
-void ramBasicFloor(const int floorPattern,
-				   const float floorSize = 600.0,
-				   const float tileSize = 50.0,
-				   const ofColor& c1 = ofColor(60),
-				   const ofColor& c2 = ofColor(230));
-
-
 void ramBasicActor(ramActor& actor,
 				   const ofColor& jointColor = ramColor::BLUE_LIGHT,
 				   const ofColor& lineColor = ramColor::GRAY);
@@ -71,7 +62,6 @@ void ramActorCube(ramActor& actor);
 
 class ramFloor
 {
-	
 public:
 	
 	enum FloorName
@@ -103,3 +93,10 @@ public:
 		return floorNames;
 	}
 };
+
+void ramBasicFloor(const int floorPattern,
+				   const float floorSize = 600.0,
+				   const float tileSize = 50.0,
+				   const ofColor& c1 = ofColor(60),
+				   const ofColor& c2 = ofColor(230));
+

@@ -57,17 +57,6 @@ void testApp::draw()
 }
 
 #pragma mark - ram methods
-//--------------------------------------------------------------
-void testApp::drawFloor()
-{
-	ramControlPanel &gui = ramGetGUI();
-	
-	ramBasicFloor(gui.getValueI("Floor pattern"),
-				  gui.getValueF("Floor size"),
-				  gui.getValueF("Grid size"),
-				  ramColor::BLUE_LIGHT,
-				  ramColor::BLUE_DEEP);
-}
 
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)

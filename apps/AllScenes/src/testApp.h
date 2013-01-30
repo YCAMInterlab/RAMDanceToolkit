@@ -34,10 +34,8 @@ public:
 	
 	// ram methods
 	// ------------------------
-	void drawFloor();
     void drawActor(ramActor &actor);
     void drawRigid(ramRigidBody &rigid);
-	
     
 	// ...
 	// ------------------------

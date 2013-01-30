@@ -14,7 +14,7 @@ public:
 	ramBaseApp() {};
 	virtual ~ramBaseApp() {};
 
-	virtual void drawFloor() {}
+	virtual void drawFloor();
 	virtual void drawActor(ramActor &actor) {}
 	virtual void drawRigid(ramRigidBody &rigid) {}
 	
