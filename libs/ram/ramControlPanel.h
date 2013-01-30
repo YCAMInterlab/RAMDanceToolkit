@@ -165,19 +165,11 @@ private:
 	key_grid_size,
 	key_camera_position;
 	
+	static ramControlPanel *_instance;
+	
 public:
 	
-	ramControlPanel()
-	{
-		bCheckCameras = false;
-		bCheckScenes = false;
-		
-		key_background = "Background";
-		key_floor_pattern = "Floor pattern";
-		key_floor_size = "Floor size";
-		key_grid_size = "Grid size";
-		key_camera_position = "Camera Position";
-	}
+	static ramControlPanel& instance();
 	
 	void setup()
 	{
@@ -279,7 +271,6 @@ public:
 	
 #pragma mark -
 	
-	
 	/*!
 		ofxControlPanel
 	 */
@@ -315,4 +306,24 @@ public:
 	{
 		return ofxControlPanel::addTextDropDown( name, name, defaultBox, names );
 	}
+	
+protected:
+	
+	ramControlPanel()
+	{
+		bCheckCameras = false;
+		bCheckScenes = false;
+		
+		key_background = "Background";
+		key_floor_pattern = "Floor pattern";
+		key_floor_size = "Floor size";
+		key_grid_size = "Grid size";
+		key_camera_position = "Camera Position";
+	}
+
 };
+
+inline ramControlPanel& ramGetGUI()
+{
+	return ramControlPanel::instance();
+}

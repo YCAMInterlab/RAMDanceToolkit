@@ -10,8 +10,6 @@ class ramGlobalContext
 {
 public:
 	
-	ramControlPanel& getGUI();
-	
 	void init();
 
 	void setLightPosition(ofVec3f pos);
@@ -21,9 +19,7 @@ public:
 
 private:
 	
-	ramControlPanel *gui;
 	ofMatrix4x4 shadow_matrix;
-	
 };
 
 ramGlobalContext& ramGlobal();

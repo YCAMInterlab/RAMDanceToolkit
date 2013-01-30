@@ -276,6 +276,7 @@
 		6089077116B9146900C3C1ED /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6089076A16B9146900C3C1ED /* tinyxmlparser.cpp */; };
 		6089077216B9146900C3C1ED /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6089076C16B9146900C3C1ED /* ofxXmlSettings.cpp */; };
 		6089077316B9146900C3C1ED /* ofxXmlSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 6089076D16B9146900C3C1ED /* ofxXmlSettings.h */; };
+		6089077916B91CBE00C3C1ED /* ramControlPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6089077816B91CBE00C3C1ED /* ramControlPanel.cpp */; };
 		60B90AA11644E06D00AF2156 /* ramActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60B90A981644E06D00AF2156 /* ramActor.cpp */; };
 		60B90AA21644E06D00AF2156 /* ramActor.h in Headers */ = {isa = PBXBuildFile; fileRef = 60B90A991644E06D00AF2156 /* ramActor.h */; };
 		60B90AA31644E06D00AF2156 /* ramActorManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60B90A9A1644E06D00AF2156 /* ramActorManager.cpp */; };
@@ -603,6 +604,7 @@
 		6089076A16B9146900C3C1ED /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		6089076C16B9146900C3C1ED /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		6089076D16B9146900C3C1ED /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
+		6089077816B91CBE00C3C1ED /* ramControlPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramControlPanel.cpp; sourceTree = "<group>"; };
 		60B90A8B1644E00900AF2156 /* libram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libram.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		60B90A981644E06D00AF2156 /* ramActor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramActor.cpp; sourceTree = "<group>"; };
 		60B90A991644E06D00AF2156 /* ramActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramActor.h; sourceTree = "<group>"; };
@@ -1217,6 +1219,7 @@
 				9AFD62A116A7C96D00942334 /* ramGhost.h */,
 				9AE9587216A8417A00BC63F6 /* ramAnalyzer.h */,
 				9A7CD0DE16AA5C96008405D7 /* ramSceneBase.h */,
+				6089077816B91CBE00C3C1ED /* ramControlPanel.cpp */,
 				9AD3318816AE6EBF0003FD7D /* ramControlPanel.h */,
 			);
 			name = ram;
@@ -1717,6 +1720,7 @@
 				6089077016B9146900C3C1ED /* tinyxmlerror.cpp in Sources */,
 				6089077116B9146900C3C1ED /* tinyxmlparser.cpp in Sources */,
 				6089077216B9146900C3C1ED /* ofxXmlSettings.cpp in Sources */,
+				6089077916B91CBE00C3C1ED /* ramControlPanel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

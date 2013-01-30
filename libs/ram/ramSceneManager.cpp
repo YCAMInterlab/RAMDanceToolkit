@@ -5,15 +5,14 @@
 
 void ramSceneManager::setup(vector<ramSceneBase*>& scenes)
 {
-	ramControlPanel &gui = ramGlobal().getGUI();
-	gui.addScenePanels(scenes);
+	ramGetGUI().addScenePanels(scenes);
 	
 	this->scenes = scenes;
 }
 
 void ramSceneManager::update()
 {
-	ramControlPanel &gui = ramGlobal().getGUI();
+	ramControlPanel &gui = ramGetGUI();
 	
 	for (int i = 0; i < scenes.size(); i++)
 	{

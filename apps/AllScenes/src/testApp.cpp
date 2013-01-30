@@ -60,7 +60,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawFloor()
 {
-	ramControlPanel &gui = ramGlobal().getGUI();
+	ramControlPanel &gui = ramGetGUI();
 	
 	ramBasicFloor(gui.getValueI("Floor pattern"),
 				  gui.getValueF("Floor size"),
@@ -72,7 +72,7 @@ void testApp::drawFloor()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramControlPanel &gui = ramGlobal().getGUI();
+	ramControlPanel &gui = ramGetGUI();
 	if ( gui.getValueB("Draw Actor") )
 	{
 		ramBasicActor(actor);
