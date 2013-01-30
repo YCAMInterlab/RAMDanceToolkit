@@ -31,7 +31,8 @@ public:
 	
 	void setupControlPanel(ramControlPanel& gui)
 	{
-		gui.addPanel(getSceneName());
+		ramSceneBase::setupControlPanel(gui);
+		
 		gui.addSlider(key_master_size, 400, 10, 1000);
 		gui.addSlider(key_line_width, 3, 1, 100);
 		
@@ -52,8 +53,6 @@ public:
 		// box size
 		for (int i=0; i<ramActor::NUM_JOINTS; i++)
 			jointSizes.at(i) = gui().getValueF(ramActor::getJointName(i));
-		
-		
 		
 		if (gui().hasValueChanged(key_master_size))
 		{
@@ -97,13 +96,12 @@ public:
 				ofBox(bigBoxSize);
 				node.transformEnd();
 				
-				
 				/*!
 				 shadows
 				 */
-				
 				ramGlobal().beginShadowMatrix();
-				
+				glDisable(GL_DEPTH_TEST);
+
 				ofEnableAlphaBlending();
 				ofSetColor(shadowColor);
 				

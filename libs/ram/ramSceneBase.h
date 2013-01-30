@@ -1,9 +1,15 @@
 #pragma once
 #include "ofMain.h"
-#include "ramControlPanel.h"
+
+#include "ramActorManager.h"
+#include "ramCameraManager.h"
+
+class ramControlPanel;
 
 class ramSceneBase
 {
+	friend class ramControlPanel;
+	
 public:
 	ramSceneBase() : bEnabled(false), key_enabled("Show"), scene_name("unknown scene") {}
 	virtual ~ramSceneBase(){}
@@ -13,12 +19,7 @@ public:
 	inline ramRigidBody& getRigidBody(string name) { return ramActorManager::instance().getRigidBody(name); }
 	inline ofCamera& getActiveCamera() { return ramCameraManager::instance().getActiveCamera(); }
 	
-	virtual void refreshControlPanel(ramControlPanel& gui)
-	{
-		guiPtr = &gui;
-		
-		gui.addPanel(scene_name);
-	};
+	virtual void setupControlPanel(ramControlPanel& gui) {}
 	
 	virtual void setup() {}
 	virtual void update() {}
@@ -31,25 +32,28 @@ public:
 	inline void disable() { bEnabled = false; }
 	inline void toggle() { bEnabled ^= true; }
 	inline void setEnabled(bool b) { bEnabled = b; }
+	inline bool isEnabled() { return bEnabled; }
 	
 	inline string getSceneEnableKey() { return key_enabled; }
 	inline string getSceneName() { return scene_name.empty() ? "no name" : scene_name; }
-	
-	inline ofMatrix4x4 getMatrix() { return shadow_mat; }
-	inline void setMatrix(ofMatrix4x4& m) { shadow_mat = m; }
 	
 	ramSceneBase* getPtr() { return this; }
 	
 protected:
 	
-	ramControlPanel *guiPtr;
-	bool bEnabled;
 	string scene_name, key_enabled;
-	ofMatrix4x4 shadow_mat;
 	
 	void setSceneName(string name)
 	{
 		scene_name = name;
 		key_enabled = "Show: " + scene_name;
 	}
+	
+	ramControlPanel& gui() { return *guiPtr; }
+	
+private:
+	
+	bool bEnabled;
+	ramControlPanel *guiPtr;
+	
 };
