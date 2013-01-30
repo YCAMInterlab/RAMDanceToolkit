@@ -19,15 +19,27 @@ class Triangles : public ramSceneBase
 	
 	void refreshVertices()
 	{
-		vertices.clear();
-		vertices.resize(points);
+		ramActor& actor = getActor( myActorName );
+		vector<ramNode> nodes;
+		nodes.clear();
 		
-		for(int i = 0; i < points; ++i)
+		nodes.push_back( actor.getNode(ramActor::JOINT_HEAD) );
+		nodes.push_back( actor.getNode(ramActor::JOINT_RIGHT_HAND) );
+		nodes.push_back( actor.getNode(ramActor::JOINT_RIGHT_TOE) );
+		nodes.push_back( actor.getNode(ramActor::JOINT_LEFT_HAND) );
+		nodes.push_back( actor.getNode(ramActor::JOINT_LEFT_TOE) );
+		
+		vertices.clear();
+		vertices.resize(nodes.size());
+		
+		for(int i = 0; i < nodes.size(); ++i)
 		{
+			ramNode &node = nodes.at(i);
+			
 			Vector v;
-			v.x = ofRandom( -guiPtr->getValueF("x"), guiPtr->getValueF("x") );
-			v.y = ofRandom( 0, guiPtr->getValueF("y") );
-			v.z = ofRandom( -guiPtr->getValueF("z"), guiPtr->getValueF("z") );
+			v.x = node.getPosition().x;
+			v.y = node.getPosition().y;
+			v.z = node.getPosition().z;
 			
 			float speed = guiPtr->getValueF(kSpeed);
 			v.speed = ofRandom(-speed, speed);
@@ -57,11 +69,14 @@ public:
 		guiPtr = &gui;
 		guiPtr->addPanel(getSceneName());
 		guiPtr->addToggle(kReconstruct);
-		guiPtr->addSlider(kPoints, 4, 4, 20);
-		guiPtr->addSlider(kSpeed, 0.1, -10, 10);
-		guiPtr->addSlider("x", 300, 10, 1000);
-		guiPtr->addSlider("y", 300, 10, 1000);
-		guiPtr->addSlider("z", 300, 10, 1000);
+		
+		guiPtr->addSlider("obj scale", 1, 0.1, 10);
+		
+//		guiPtr->addSlider(kPoints, 4, 4, 20);
+//		guiPtr->addSlider(kSpeed, 0.1, -10, 10);
+//		guiPtr->addSlider("x", 300, 10, 1000);
+//		guiPtr->addSlider("y", 300, 10, 1000);
+//		guiPtr->addSlider("z", 300, 10, 1000);
 		
 		refreshVertices();
 	}
@@ -85,14 +100,14 @@ public:
 			points = guiPtr->getValueI(kPoints);
 		}
 		
-		for (int i=0; i<vertices.size(); i++)
-		{
-			float delta = ofGetElapsedTimef();
-			
-			Vector& v = vertices.at(i);
-			v.x = cos(delta * v.speed) * guiPtr->getValueF("x");
-			v.z = sin(delta * v.speed) * guiPtr->getValueF("z");
-		}
+//		for (int i=0; i<vertices.size(); i++)
+//		{
+//			float delta = ofGetElapsedTimef();
+//			
+//			Vector& v = vertices.at(i);
+//			v.x = cos(delta * v.speed) * guiPtr->getValueF("x");
+//			v.z = sin(delta * v.speed) * guiPtr->getValueF("z");
+//		}
 	}
 	
 	void draw()
@@ -103,9 +118,14 @@ public:
 		ofEnableAlphaBlending();
 		
 		ofColor shadowColor = ramColor::BLACK;
-		shadowColor.a = 50;
+		shadowColor.a = 30;
 		
 		ofPushStyle();
+		ofPushMatrix();
+		
+		
+		float scale = guiPtr->getValueF("obj scale");
+		ofScale(scale, scale, scale);
 		
 		int i=0;
 		for(std::set<Triangle>::iterator it = triangles.begin(); it != triangles.end(); ++it)
@@ -124,7 +144,7 @@ public:
 							 t.p[(i+1)%3]->y,
 							 t.p[(i+1)%3]->z);
 				
-				ofSetColor(t.p[i]->color);
+				ofSetColor( ramColor::BLACK );
 				ofSetLineWidth(3);
 				
 				if(v1.distance(v2) < 2000)
@@ -134,7 +154,7 @@ public:
 					{
 						ofLine(v1, v2);
 						ofSetColor(0);
-						ofBox(v1, 5);
+						ofBox(v1, 2);
 					}
 					glDisable(GL_DEPTH_TEST);
 					
@@ -152,6 +172,7 @@ public:
 			
 			i++;
 		}
+		ofPopMatrix();
 		ofPopStyle();
 		
 		ramCameraEnd();

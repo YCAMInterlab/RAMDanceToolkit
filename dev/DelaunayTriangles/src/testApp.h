@@ -8,7 +8,7 @@
 /*!
  for debuging....
  */
-static const string myActorName = "Ando_2012-09-01_18-49-10";
+static const string myActorName = "default_unknown_date";
 //static const string myActorName = "default";
 
 

@@ -3,8 +3,8 @@
 /*!
  Scenes
  */
-#include "Stamp.h"
-Stamp stamp;
+#include "nSecPastMe.h"
+nSecPastMe pastme;
 
 
 #pragma mark - oF methods
@@ -20,8 +20,7 @@ void testApp::setup()
 	 ramBaseApp setup
 	 */
 	ramEnableAllEvents();
-	oscReceiver.setup(10000);
-	
+	oscReceiver.setup(10001);
 	
 	
 	/*!
@@ -29,32 +28,35 @@ void testApp::setup()
 	 */
 	gui.setup();
 	gui.loadFont("Fonts/din-webfont.ttf", 11);
+	gui.loadCameraSettings("settings.camera.xml");
 	
-	/* camera */
-	camSettingXml.loadFile("settings.camera.xml");
-	setting_cam = ramCameraSettings::getSettings(camSettingXml);
-	gui.addMultiToggle("Camera Position", 0, ramCameraSettings::getCamNames(camSettingXml));
+	
+	/*!
+	 GUI: Actor scale / move
+	 */
+	gui.addSlider("Actor Scale", 1.0, 0.1, 3);
+	gui.addSlider("Actor Position:x", 0, -600, 600);
+	gui.addSlider("Actor Position:y", 0, -600, 600);
+	
 	
 	
 	/*!
 	 scenes setup
 	 */
-	//	scenes.push_back( bigbox.getPtr() );
+	scenes.push_back( pastme.getPtr() );
+	gui.addScenePanels(scenes);
 	
 	
-	/* adding GUI Panel for each scene */
-	gui.addPanel("All Scenes");
-	gui.addToggle("Draw Actor", true);
+	/*!
+	 (user code......)
+	 */
+	const float lightPosition[] = { -100.0f, 500.0f, 200.0f };
+	gl::calcShadowMatrix( gl::kGroundPlaneYUp, lightPosition, shadowMat.getPtr() );
+	
 	for (int i=0; i<scenes.size(); i++)
-	{
-		string key = scenes.at(i)->getSceneEnableKey();
-		gui.addToggle(key, false);
-	}
-	for (int i=0; i<scenes.size(); i++)
-	{
-		scenes.at(i)->setup();
-		scenes.at(i)->refreshControlPanel(gui);
-	}
+		scenes.at(i)->setMatrix(shadowMat);
+	
+	scenes.front()->enable();
 }
 
 //--------------------------------------------------------------
@@ -66,25 +68,17 @@ void testApp::update()
 	
 	/* Scenes update */
 	for (int i=0; i<scenes.size(); i++)
-		scenes.at(i)->update();
-	
-	
-	/* GUI: camera */
-	if (gui.hasValueChanged("Camera Position"))
 	{
-		/* camera */
-		int posIndex = gui.getValueI("Camera Position");
-		ofVec3f pos = setting_cam.at(posIndex).pos;
-		getActiveCamera().setPosition(pos);
-		getActiveCamera().lookAt(ofVec3f(0,170,0));
-	}
-	
-	
-	/* GUI: floor */
-	if (gui.hasValueChanged("Background"))
-	{
-		float bgcolor = gui.getValueF("Background");
-		ofBackground(bgcolor);
+		ramSceneBase* scene = scenes.at(i);
+		scene->update();
+		
+		/* Enable / Disable scenes */
+		string key = scene->getSceneEnableKey();
+		
+		if ( gui.hasValueChanged(key) )
+		{
+			scene->setEnabled( gui.getValueB(key) );
+		}
 	}
 }
 
@@ -113,7 +107,17 @@ void testApp::drawFloor()
 void testApp::drawActor(ramActor &actor)
 {
 	if ( gui.getValueB("Draw Actor") )
+	{
+		float scale = gui.getValueF("Actor Scale");
+		float posX = gui.getValueF("Actor Position:x");
+		float posY = gui.getValueF("Actor Position:y");
+		
+		ofPushMatrix();
+		ofTranslate(posX, 0, posY);
+		glScalef(scale, scale, scale);
 		ramBasicActor(actor, shadowMat.getPtr());
+		ofPopMatrix();
+	}
 	
 	for (int i=0; i<scenes.size(); i++) scenes.at(i)->drawActor(actor);
 }

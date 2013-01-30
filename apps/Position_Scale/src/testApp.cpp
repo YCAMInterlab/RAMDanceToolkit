@@ -29,8 +29,14 @@ void testApp::setup()
 	gui.setup();
 	gui.loadFont("Fonts/din-webfont.ttf", 11);
 	gui.loadCameraSettings("settings.camera.xml");
-	gui.addSlider("Actor Scale", 1.0, 0.1, 20);
-	gui.addSlider2D("Actor Position", "Actor Position", 0, 0, -300, 300, -300, 300, true);
+	
+	
+	/*!
+	 GUI: Actor scale / move
+	 */
+	gui.addSlider("Actor Scale", 1.0, 0.1, 3);
+	gui.addSlider("Actor Position:x", 0, -600, 600);
+	gui.addSlider("Actor Position:y", 0, -600, 600);
 	
 	
 	/*!
@@ -99,7 +105,15 @@ void testApp::drawActor(ramActor &actor)
 {
 	if ( gui.getValueB("Draw Actor") )
 	{
+		float scale = gui.getValueF("Actor Scale");
+		float posX = gui.getValueF("Actor Position:x");
+		float posY = gui.getValueF("Actor Position:y");
+		
+		ofPushMatrix();
+		glScalef(scale, scale, scale);
+		ofTranslate(posX, 0, posY);
 		ramBasicActor(actor, shadowMat.getPtr());
+		ofPopMatrix();
 	}
 		
 	
