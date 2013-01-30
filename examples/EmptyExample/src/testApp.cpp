@@ -2,6 +2,8 @@
 
 
 
+
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -10,6 +12,8 @@ void testApp::setup()
 	ofSetVerticalSync(true);
 	ofBackground( ramColor::WHITE );
 	
+	
+	ofSetLogLevel(OF_LOG_FATAL_ERROR);
 	
 	/*!
 	 ramBaseApp setup
@@ -22,8 +26,8 @@ void testApp::setup()
 	 GUI setup
 	 */
 	gui.setup();
-	gui.loadFont("Fonts/din-webfont.ttf", 11);
-	gui.loadCameraSettings("settings.camera.xml");
+//	gui.loadFont("Fonts/din-webfont.ttf", 11);
+//	gui.loadCameraSettings("settings.camera.xml");
 }
 
 //--------------------------------------------------------------
@@ -45,17 +49,17 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawFloor()
 {
-	ramBasicFloor(gui.getValueI("Floor pattern"),
-				  gui.getValueF("Floor size"),
-				  gui.getValueF("Grid size"),
-				  ramColor::BLUE_LIGHT,
-				  ramColor::BLUE_LIGHT-20);
+//	ramBasicFloor(gui.getValueI("Floor pattern"),
+//				  gui.getValueF("Floor size"),
+//				  gui.getValueF("Grid size"),
+//				  ramColor::BLUE_LIGHT,
+//				  ramColor::BLUE_LIGHT-20);
 }
 
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-
+	ramBasicActor(actor, NULL);
 }
 
 //--------------------------------------------------------------

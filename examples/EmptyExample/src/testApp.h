@@ -4,11 +4,11 @@
 #include "ramMain.h"
 #include "ofxXmlSettings.h"
 
-
+#include "ramControlPanel.h"
 /*!
  for debuging....
  */
-static const string myActorName = "default";
+static const string myActorName = "default_unknown_date";
 //static const string myActorName = "default";
 
 
@@ -44,13 +44,4 @@ public:
 	vector<ramSceneBase*> scenes;
 	ramOscReceiver oscReceiver;
 	ramControlPanel gui;
-	
-	ofMatrix4x4 shadowMat;
-	
-	
-	// Setting files
-	// ------------------------
-		
-	ofxXmlSettings camSettingXml;
-	vector<ramCameraSettings> setting_cam;
 };

@@ -13,12 +13,12 @@ public:
 	inline ramRigidBody& getRigidBody(string name) { return ramActorManager::instance().getRigidBody(name); }
 	inline ofCamera& getActiveCamera() { return ramCameraManager::instance().getActiveCamera(); }
 	
-	virtual void refreshControlPanel(ramControlPanel& gui)
-	{
-		guiPtr = &gui;
-		
-		gui.addPanel(scene_name);
-	};
+//	virtual void refreshControlPanel(ramControlPanel& gui)
+//	{
+//		guiPtr = &gui;
+//		
+//		gui.addPanel(scene_name);
+//	};
 	
 	virtual void setup() {}
 	virtual void update() {}
@@ -42,7 +42,7 @@ public:
 	
 protected:
 	
-	ramControlPanel *guiPtr;
+//	ramControlPanel *guiPtr;
 	bool bEnabled;
 	string scene_name, key_enabled;
 	ofMatrix4x4 shadow_mat;

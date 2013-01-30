@@ -1,172 +1,131 @@
 #pragma once
-#include "ofxAutoControlPanel.h"
-#include "ofxControlPanel.h"
-#include "ofxXmlSettings.h"
+#include "ofxUITabbedCanvas.h"
 
 
-class ramControlPanel : public ofxAutoControlPanel
+class ramControlPanel
 {
-
-private:
-	vector<ramCameraSettings> camSettings;
-	bool bCheckCameras, bCheckScenes;
 	
-	string key_background,
-	key_floor_pattern,
-	key_floor_size,
-	key_grid_size,
-	key_camera_position;
+private:
+	
+	float mR, mG, mB;
+	bool mUseBgSlider;
+
+	/// first panel
+    ofxUITabbedCanvas mTabbedCanvas;
+	ofxUICanvas *mPanelGeneral;
 	
 public:
 	
 	ramControlPanel()
 	{
-		bCheckCameras = false;
-		bCheckScenes = false;
-		
-		key_background = "Background";
-		key_floor_pattern = "Floor pattern";
-		key_floor_size = "Floor size";
-		key_grid_size = "Grid size";
-		key_camera_position = "Camera Position";
+		mR = 50;
+		mG = 50;
+		mB = 50;
+		mUseBgSlider = true;
 	}
+	
+	virtual ~ramControlPanel() {}
+	
+	
 	
 	void setup()
 	{
-		ofxControlPanel::setTextColor( simpleColor(255, 255, 255, 100) );
-		ofxControlPanel::setBackgroundColor( simpleColor(0, 0, 0, 90) );
-		ofxAutoControlPanel::setup( 400, ofGetHeight() );
 		
-		/*!
-			Panel: Config
-		 */
-		addPanel( "Config" );
+		/// Event hook
+		// -------------------------------------
+		ofAddListener(ofEvents().update, this, &ramControlPanel::update);
 		
 		
-		/* Background Color */
-		addSlider( key_background, 0, 0, 255 );
+		
+		/// First panel
+		// -------------------------------------
+		float dim = 16;
+		float xInit = OFX_UI_GLOBAL_WIDGET_SPACING;
+		float length = 320-xInit;
 		
 		
-		/* Default Floor Patterns */
-		addMultiToggle( key_floor_pattern, 0, ramFloor::getFloorNames() );
-		addSlider( key_floor_size, 600.0, 100.0, 1000.0 );
-		addSlider( key_grid_size, 50.0, 10.0, 100.0 );
+		/// background
+		mPanelGeneral = new ofxUICanvas(0,0,length+xInit*2.0,ofGetHeight());
+		mPanelGeneral->addWidgetDown(new ofxUILabel("RamDanceToolkit", OFX_UI_FONT_LARGE));
+		mPanelGeneral->addSpacer(length, 2);
 		
 		
-		/* Event Listeners */
-		ofAddListener( ofEvents().update, this, &ramControlPanel::update );
-		ofAddListener( ofEvents().draw, this, &ramControlPanel::draw );
-		ofAddListener( ofEvents().exit, this, &ramControlPanel::exit );
+		/// background color
+		mPanelGeneral->addWidgetDown(new ofxUIToggle(32, 32, true, "Use Background Slider"));
+		mPanelGeneral->addSlider("BG:R", 0, 255, &mR, 95, dim);
+		mPanelGeneral->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
+		mPanelGeneral->addSlider("BG:G", 0, 255, &mG, 95, dim);
+		mPanelGeneral->addSlider("BG:B", 0, 255, &mB, 95, dim);
+		mPanelGeneral->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
+		
+		
+		/// floor pattern
+		vector<string> floors;
+		floors.push_back("None");
+		floors.push_back("Grid");
+		floors.push_back("Plane");
+		floors.push_back("Checker");
+		mPanelGeneral->addSpacer(length, 2);
+		mPanelGeneral->addRadio("Floor Patterns", floors, OFX_UI_ORIENTATION_VERTICAL, dim, dim);
+		
+		
+		/// camera positions
+		vector<string> names;
+		names.push_back("Front");
+		names.push_back("Right");
+		names.push_back("Back");
+		names.push_back("Left");
+		mPanelGeneral->addSpacer(length, 2);
+		mPanelGeneral->addRadio("Camera Preset", names, OFX_UI_ORIENTATION_VERTICAL, dim, dim);
+		
+		
+		/// Camera Position
+		mPanelGeneral->addSpacer(length, 2);
+		mPanelGeneral->addWidgetDown(new ofxUILabel("Camera Position", OFX_UI_FONT_MEDIUM));
+		mPanelGeneral->addWidgetDown(new ofxUILabel("x:0.00 y:0.00 z:0.00", OFX_UI_FONT_MEDIUM));
+		
+		
+		/// full screan
+		mPanelGeneral->addSpacer(length, 2);
+		mPanelGeneral->addWidgetDown(new ofxUIToggle(32, 32, false, "FullScrean"));
+		
+		
+		/// Scenes
+		mPanelGeneral->addSpacer(length, 2);
+		mPanelGeneral->addWidgetDown(new ofxUIToggleMatrix(dim*3, dim*2, 5, 5, "Scenes"));
+		
+		
+		/// add panel to canvas
+		ofAddListener(mPanelGeneral->newGUIEvent, this, &ramControlPanel::guiEvent);
+		mTabbedCanvas.add(mPanelGeneral);
+		mTabbedCanvas.loadSettings("GUI/guiSettings.xml");
+	}
+
+	
+	
+	void update(ofEventArgs &e)
+	{
+		if (mUseBgSlider) ofBackground( ofColor(mR, mG, mB) );
 	}
 	
-	void update( ofEventArgs &e )
+	
+	
+	void guiEvent(ofxUIEventArgs &e)
 	{
+		string name = e.widget->getName();
+		int kind = e.widget->getKind();
 		
-		/* GUI: camera */
-		if ( bCheckCameras && hasValueChanged(key_camera_position) )
+		if (name == "Use Background Slider")
 		{
-			/* camera */
-			int posIndex = getValueI( key_camera_position );
-			ofVec3f pos = camSettings.at( posIndex ).pos;
-			ramCameraManager::instance().getActiveCamera().setPosition( pos );
-			ramCameraManager::instance().getActiveCamera().lookAt( ofVec3f(0,170,0) );
+			ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+			mUseBgSlider = toggle->getValue();
 		}
 		
-		/* GUI: background */
-		if ( hasValueChanged(key_background) )
+		if (name == "FullScrean")
 		{
-			float bgcolor = getValueF( key_background );
-			ofBackground(bgcolor);
+			ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+			ofSetFullscreen(toggle->getValue());
 		}
 	}
 	
-	void draw( ofEventArgs &e )
-	{
-		
-	}
-	
-	void exit( ofEventArgs &e )
-	{
-		ofRemoveListener( ofEvents().update, this, &ramControlPanel::update );
-		ofRemoveListener( ofEvents().draw, this, &ramControlPanel::draw );
-		ofRemoveListener( ofEvents().exit, this, &ramControlPanel::exit );
-	}
-	
-	
-	
-#pragma mark -
-	
-	
-	/*!
-		GUI Helpers
-	 */
-	void loadCameraSettings( string filename )
-	{
-		ofxXmlSettings xml_cam( filename );
-		camSettings = ramCameraSettings::getSettings( xml_cam );
-		addMultiToggle( key_camera_position, 0, ramCameraSettings::getCamNames(xml_cam) );
-		
-		bCheckCameras = true;
-	}
-	
-	template<typename T>
-	void addScenePanels(vector<T> scenes)
-	{
-		const int numScenes = scenes.size();
-		
-		addPanel( "All Scenes" );
-		addToggle( "Draw Actor", true );
-		for (int i=0; i<scenes.size(); i++)
-		{
-			string key = scenes.at(i)->getSceneEnableKey();
-			addToggle( key, false );
-		}
-		for (int i=0; i<scenes.size(); i++)
-		{
-			scenes.at(i)->setup();
-			scenes.at(i)->refreshControlPanel( *this );
-		}
-		
-		bCheckScenes = true;
-	}
-	
-	
-#pragma mark -
-	
-	
-	/*!
-		ofxControlPanel
-	 */
-	bool hasValueChanged( string xmlName )
-	{
-		bool bChanged = ofxControlPanel::hasValueChanged(xmlName);
-		if ( bChanged ) clearAllChanged();
-		return bChanged;
-	}
-	
-	bool hasValueChangedInPanel( string whichPanel )
-	{
-		bool bChanged = ofxControlPanel::hasValueChangedInPanel( whichPanel );
-		if ( bChanged ) clearAllChanged();
-		return bChanged;
-	}
-	
-	/*!
-		ofxAutoControlPanel
-	 */
-	// usage: panel.hasValueChanged(variadic(1)(2)(3)(4)(5));
-	bool hasValueChanged( const vector<string>& values )
-	{
-		bool bChanged = ofxAutoControlPanel::hasValueChanged( values );
-		if ( bChanged ) clearAllChanged();
-		return bChanged;
-	}
-	
-	
-	// --
-	// usage: panel.addTextDropDown("DropDownName", 0, variadic(1)(2)(3)(4)(5));
-	guiTypeTextDropDown * addTextDropDown( string name, int defaultBox, const vector<string>& names )
-	{
-		return ofxControlPanel::addTextDropDown( name, name, defaultBox, names );
-	}
 };
