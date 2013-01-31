@@ -1,3 +1,4 @@
+#include "ramGlobal.h"
 #include "ramBaseApp.h"
 #include "ramCameraManager.h"
 #include "ramControlPanel.h"
@@ -58,9 +59,10 @@ void ramBaseApp::draw(ofEventArgs &args)
 void ramBaseApp::drawFloor()
 {
 	ramControlPanel &gui = ramGetGUI();
-//	ramBasicFloor(gui.getValueI("Floor pattern"),
-//				  gui.getValueF("Floor size"),
-//				  gui.getValueF("Grid size"),
-//				  ramColor::BLUE_LIGHT,
-//				  ramColor::BLUE_DEEP);
+	
+	ramBasicFloor(gui.getFloorPattern(),
+				  gui.getFloorSize(),
+				  gui.getGridSize(),
+				  ramColor::BLUE_LIGHT,
+				  ramColor::BLUE_DEEP);
 }

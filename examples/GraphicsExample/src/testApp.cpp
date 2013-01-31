@@ -20,13 +20,14 @@ void testApp::setup()
 	/// scenes setup
 	// ------------------
 	vector<ramSceneBase*> scenes;
-	sceneManager.setup(scenes);	
+	sceneManager.setup(scenes);
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/* Entities update */
+	/// Entities update
+	// ------------------
 	oscReceiver.update();
 	
 	sceneManager.update();

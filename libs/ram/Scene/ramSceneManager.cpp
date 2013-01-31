@@ -5,7 +5,14 @@
 
 void ramSceneManager::setup(vector<ramSceneBase*>& scenes)
 {
-//	ramGetGUI().addScenePanels(scenes);
+	ramGetGUI().setupSceneToggles(scenes);
+	
+	for (int i=0; i<scenes.size(); i++)
+	{
+		ofxUICanvas *panel = scenes.at(i)->createScenePanel();
+		ramGetGUI().getTabbedCanvas().add(panel);
+	}
+	
 	this->scenes = scenes;
 }
 
@@ -13,18 +20,17 @@ void ramSceneManager::update()
 {
 	ramControlPanel &gui = ramGetGUI();
 	
-	for (int i = 0; i < scenes.size(); i++)
+	vector<ofxUIToggle *> toggles = gui.getSceneToggles()->getToggles();
+	const int numToggles = toggles.size();
+	
+	for (int i=0; i<numToggles; i++)
 	{
-		ramSceneBase *scene = scenes[i];
-		string key = scene->getSceneEnableKey();
+		if (i >= scenes.size()) break;
 		
-//		if ( gui.hasValueChanged(key) )
-//		{
-//			scene->setEnabled( gui.getValueB(key) );
-//		}
-
+		ramSceneBase *scene = scenes.at(i);
+		scene->setEnabled( toggles.at(i)->getValue() );
+		
 		if (!scene->isEnabled()) continue;
-		
 		scene->update();
 	}
 }

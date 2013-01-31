@@ -6,7 +6,7 @@ ramControlPanel& ramControlPanel::instance()
 {
 	if (_instance == NULL)
 	{
-		_instance = new ramControlPanel;
+		_instance = new ramControlPanel();
 	}
 	return *_instance;
 }

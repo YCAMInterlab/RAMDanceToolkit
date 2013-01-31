@@ -271,6 +271,7 @@
 		606D734316B9311C00C95401 /* simpleLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 606D730816B9311C00C95401 /* simpleLogger.cpp */; };
 		606D734416B9311C00C95401 /* simpleLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 606D730916B9311C00C95401 /* simpleLogger.h */; };
 		60F95BCD16B933CF0016E390 /* ramControlPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60F95BCC16B933CF0016E390 /* ramControlPanel.cpp */; };
+		9A48CE0C16BA4E5600D9C997 /* ramCameraSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A58D05216B982C70084E63F /* ramCameraSettings.cpp */; };
 		9AD6F5A316B926C000F7F51E /* ofxUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F4FF16B926BF00F7F51E /* ofxUI.h */; };
 		9AD6F5A416B926C000F7F51E /* ofxUI2DPad.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F50016B926BF00F7F51E /* ofxUI2DPad.h */; };
 		9AD6F5A516B926C000F7F51E /* ofxUIBaseDraws.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F50116B926BF00F7F51E /* ofxUIBaseDraws.h */; };
@@ -617,6 +618,7 @@
 		60B90A8B1644E00900AF2156 /* libram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libram.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		60B90AAA1644E09400AF2156 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		60F95BCC16B933CF0016E390 /* ramControlPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramControlPanel.cpp; sourceTree = "<group>"; };
+		9A58D05216B982C70084E63F /* ramCameraSettings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ramCameraSettings.cpp; sourceTree = "<group>"; };
 		9AD3317916AE53BF0003FD7D /* tinyxml.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		9AD3317A16AE53BF0003FD7D /* tinyxml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		9AD3317B16AE53BF0003FD7D /* tinyxmlerror.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
@@ -1377,6 +1379,7 @@
 				606D72C716B92FB500C95401 /* ramShadow.cpp */,
 				606D72C816B92FB500C95401 /* ramShadow.h */,
 				9AD6F64116B927E100F7F51E /* ramCameraSettings.h */,
+				9A58D05216B982C70084E63F /* ramCameraSettings.cpp */,
 				60F95BCC16B933CF0016E390 /* ramControlPanel.cpp */,
 				9AD6F64216B927E100F7F51E /* ramControlPanel.h */,
 				9AD6F64316B927E100F7F51E /* ramNodeFinder.h */,
@@ -1782,6 +1785,7 @@
 				606D734116B9311C00C95401 /* simpleFileLister.cpp in Sources */,
 				606D734316B9311C00C95401 /* simpleLogger.cpp in Sources */,
 				60F95BCD16B933CF0016E390 /* ramControlPanel.cpp in Sources */,
+				9A48CE0C16BA4E5600D9C997 /* ramCameraSettings.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
