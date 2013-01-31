@@ -37,6 +37,7 @@ void ramSceneManager::update()
 
 void ramSceneManager::draw()
 {
+	cout << 1;
 	ramActorManager &AM = ramActorManager::instance();
 	
 	for (int i = 0; i < scenes.size(); i++)
