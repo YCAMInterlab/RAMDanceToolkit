@@ -54,7 +54,8 @@ void testApp::setup()
 void testApp::update()
 {
 	
-	/* Entities update */
+	/// Entities update
+	// ------------------
 	oscReceiver.update();
 	
 	

@@ -49,7 +49,8 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/* Entities update */
+	/// Entities update
+	// ------------------
 	oscReceiver.update();
 	
 	numDuplicate = gui.getValueF("numDuplicate");

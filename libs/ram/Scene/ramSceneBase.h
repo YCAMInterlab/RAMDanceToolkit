@@ -3,6 +3,8 @@
 
 #include "ramActorManager.h"
 #include "ramCameraManager.h"
+#include "ofxUI.h"
+
 
 class ramControlPanel;
 
@@ -19,7 +21,7 @@ public:
 	inline ramRigidBody& getRigidBody(string name) { return ramActorManager::instance().getRigidBody(name); }
 	inline ofCamera& getActiveCamera() { return ramCameraManager::instance().getActiveCamera(); }
 	
-	virtual void setupControlPanel(ramControlPanel& gui) {}
+	virtual ofxUICanvas* createScenePanel() { return new ofxUICanvas(0, 0, 320+OFX_UI_GLOBAL_WIDGET_SPACING, ofGetHeight()); }
 	
 	virtual void setup() {}
 	virtual void update() {}

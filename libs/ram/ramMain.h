@@ -16,3 +16,4 @@
 #include "ramSession.h"
 #include "ramSceneBase.h"
 #include "ramControlPanel.h"
+#include "ramCameraSettings.h"

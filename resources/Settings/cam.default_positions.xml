@@ -1,0 +1,50 @@
+<cam>
+	<name>CAM_FRONT</name>
+	<pos><x>0</x><y>300</y><z>600</z></pos>
+	<look_at><x>0</x><y>100</y><z>0</z></look_at>
+</cam>
+<cam>
+	<name>CAM_RIGHT</name>
+	<pos><x>600</x><y>300</y><z>0</z></pos>
+	<look_at><x>0</x><y>100</y><z>0</z></look_at>
+</cam>
+<cam>
+	<name>CAM_BACK</name>
+	<pos><x>0</x><y>300</y><z>-600</z></pos>
+	<look_at><x>0</x><y>100</y><z>0</z></look_at>
+</cam>
+<cam>
+	<name>CAM_LEFT</name>
+	<pos><x>-600</x><y>300</y><z>0</z></pos>
+	<look_at><x>0</x><y>100</y><z>0</z></look_at>
+</cam>
+<cam>
+	<name>CAM_TOP</name>
+	<pos><x>0</x><y>600</y><z>1</z></pos>
+	<look_at><x>0</x><y>100</y><z>0</z></look_at>
+</cam>
+<cam>
+	<name>CAM_BOTTOM</name>
+	<pos><x>0</x><y>-600</y><z>1</z></pos>
+	<look_at><x>0</x><y>100</y><z>0</z></look_at>
+</cam>
+<cam>
+	<name>CAM_EDGE_FR</name>
+	<pos><x>450</x><y>50</y><z>450</z></pos>
+	<look_at><x>0</x><y>100</y><z>0</z></look_at>
+</cam>
+<cam>
+	<name>CAM_EDGE_BR</name>
+	<pos><x>450</x><y>50</y><z>-450</z></pos>
+	<look_at><x>0</x><y>100</y><z>0</z></look_at>
+</cam>
+<cam>
+	<name>CAM_EDGE_BL</name>
+	<pos><x>-450</x><y>50</y><z>-450</z></pos>
+	<look_at><x>0</x><y>100</y><z>0</z></look_at>
+</cam>
+<cam>
+	<name>CAM_EDGE_FL</name>
+	<pos><x>-450</x><y>50</y><z>450</z></pos>
+	<look_at><x>0</x><y>100</y><z>0</z></look_at>
+</cam>
