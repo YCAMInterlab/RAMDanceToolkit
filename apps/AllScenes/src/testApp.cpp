@@ -13,7 +13,6 @@ Bullet bullet;
 Future future;
 DrawLines drawLines;
 
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -37,6 +36,7 @@ void testApp::setup()
 	scenes.push_back( bullet.getPtr() );
 	scenes.push_back( drawLines.getPtr() );
 	sceneManager.setup(scenes);
+	
 }
 
 //--------------------------------------------------------------
@@ -64,10 +64,6 @@ void testApp::drawActor(ramActor &actor)
 //	if ( gui.getValueB("Draw Actor") )
 	{
 		ramBasicActor(actor);
-		
-//		ramGlobal().beginShadowMatrix();
-		ramBasicActor(actor, ramColor::SHADOW, ramColor::SHADOW);
-//		ramGlobal().endShadowMatrix();
 	}
 }
 
