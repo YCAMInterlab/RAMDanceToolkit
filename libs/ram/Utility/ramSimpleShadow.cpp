@@ -1,4 +1,4 @@
-#include "ramShadow.h"
+#include "ramSimpleShadow.h"
 
 #include <numeric>
 
@@ -30,17 +30,42 @@ namespace gl
 	}
 }
 
-void ramShadow::setup()
+void ramSimpleShadow::setup()
 {
-
+	// defulat light position
+	setLightPosition(ofVec3f(-100.0f, 500.0f, 200.0f));
+	
+	shadow_color.set(ramColor::SHADOW);
+	
+#define _S(src) #src
+	
+	const char *vs = _S(
+		uniform vec4 shadow_color;
+						
+		void main()
+		{
+			gl_FrontColor = shadow_color;
+			gl_Position = ftransform();
+		}
+	);
+	
+#undef _S
+	
+	shader.setupShaderFromSource(GL_VERTEX_SHADER, vs);
+	shader.linkProgram();
 }
 
-void ramShadow::setLightPosition(ofVec3f pos)
+void ramSimpleShadow::setLightPosition(ofVec3f pos)
 {
 	gl::calcShadowMatrix(gl::kGroundPlaneYUp, pos.getPtr(), shadow_matrix.getPtr());
 }
 
-void ramShadow::begin()
+void ramSimpleShadow::setShadowColor(ofFloatColor color)
+{
+	shadow_color = color;
+}
+
+void ramSimpleShadow::begin()
 {
 	glPushAttrib(GL_ENABLE_BIT);
 	glDisable(GL_DEPTH_TEST);
@@ -49,9 +74,10 @@ void ramShadow::begin()
 	glMultMatrixf(shadow_matrix.getPtr());
 
 	shader.begin();
+	shader.setUniform4f("shadow_color", shadow_color.r, shadow_color.g, shadow_color.b, shadow_color.a);
 }
 
-void ramShadow::end()
+void ramSimpleShadow::end()
 {
 	shader.end();
 	
