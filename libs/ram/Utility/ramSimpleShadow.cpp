@@ -1,5 +1,7 @@
 #include "ramSimpleShadow.h"
 
+#include "ramCameraManager.h"
+
 #include <numeric>
 
 namespace gl
@@ -41,11 +43,16 @@ void ramSimpleShadow::setup()
 	
 	const char *vs = _S(
 		uniform vec4 shadow_color;
-						
+		uniform mat4 shadow_matrix;
+		uniform mat4 modelview_matrix;
+		uniform mat4 modelview_matrix_inv;
+		
 		void main()
 		{
+			mat4 model_matrix = modelview_matrix_inv * gl_ModelViewMatrix;
+			
 			gl_FrontColor = shadow_color;
-			gl_Position = ftransform();
+			gl_Position = gl_ProjectionMatrix * modelview_matrix * shadow_matrix * model_matrix * gl_Vertex;
 		}
 	);
 	
@@ -67,20 +74,21 @@ void ramSimpleShadow::setShadowColor(ofFloatColor color)
 
 void ramSimpleShadow::begin()
 {
-	glPushAttrib(GL_ENABLE_BIT);
-	glDisable(GL_DEPTH_TEST);
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	
-	glPushMatrix();
-	glMultMatrixf(shadow_matrix.getPtr());
-
+	ofMatrix4x4 modelview_matrix = ramCameraManager::instance().getActiveCamera().getModelViewMatrix();
+	ofMatrix4x4 modelview_matrix_inv = modelview_matrix.getInverse();
+	
 	shader.begin();
 	shader.setUniform4f("shadow_color", shadow_color.r, shadow_color.g, shadow_color.b, shadow_color.a);
+	shader.setUniformMatrix4f("shadow_matrix", shadow_matrix);
+	shader.setUniformMatrix4f("modelview_matrix", modelview_matrix);
+	shader.setUniformMatrix4f("modelview_matrix_inv", modelview_matrix_inv);
 }
 
 void ramSimpleShadow::end()
 {
 	shader.end();
-	
-	glPopMatrix();
+
 	glPopAttrib();
 }

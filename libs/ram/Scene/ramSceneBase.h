@@ -28,7 +28,6 @@ public:
 	virtual void draw() {}
 	virtual void drawActor(ramActor &actor) {}
 	virtual void drawRigid(ramRigidBody &rigid) {}
-	virtual void drawFloor() {}
 	
 	inline void enable(){ bEnabled = true; }
 	inline void disable() { bEnabled = false; }

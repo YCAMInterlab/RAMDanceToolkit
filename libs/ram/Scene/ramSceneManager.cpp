@@ -37,30 +37,59 @@ void ramSceneManager::update()
 
 void ramSceneManager::draw()
 {
-	cout << 1;
 	ramActorManager &AM = ramActorManager::instance();
 	
 	for (int i = 0; i < scenes.size(); i++)
 	{
 		ramSceneBase *scene = scenes[i];
 		if (!scene->isEnabled()) continue;
-		
-		scene->draw();
-		
-		ramCameraBegin();
-		
-		for (int n = 0; n < AM.getNumActor(); n++)
+
 		{
-			ramActor &o = AM.getActor(n);
-			scene->drawActor(o);
+			// draw shadow
+			
+			ramSharedData::instance().shadow.begin();
+			
+			scene->draw();
+			
+			ramCameraBegin();
+			
+			for (int n = 0; n < AM.getNumActor(); n++)
+			{
+				ramActor &o = AM.getActor(n);
+				scene->drawActor(o);
+			}
+			
+			for (int n = 0; n < AM.getNumRigidBody(); n++)
+			{
+				ramRigidBody &o = AM.getRigidBody(n);
+				scene->drawRigid(o);
+			}
+			
+			ramCameraEnd();
+			
+			ramSharedData::instance().shadow.end();
 		}
-		
-		for (int n = 0; n < AM.getNumRigidBody(); n++)
+
 		{
-			ramRigidBody &o = AM.getRigidBody(n);
-			scene->drawRigid(o);
+			// draw object
+			
+			scene->draw();
+			
+			ramCameraBegin();
+			
+			for (int n = 0; n < AM.getNumActor(); n++)
+			{
+				ramActor &o = AM.getActor(n);
+				scene->drawActor(o);
+			}
+			
+			for (int n = 0; n < AM.getNumRigidBody(); n++)
+			{
+				ramRigidBody &o = AM.getRigidBody(n);
+				scene->drawRigid(o);
+			}
+			
+			ramCameraEnd();
 		}
-		
-		ramCameraEnd();
 	}
 }

@@ -75,8 +75,6 @@ void ramBasicFloor(const int floorPattern,
 	ofPushMatrix();
     ofRotate( 90.0f, 1.0f, 0.0f, 0.0f );
 	
-	glEnable(GL_DEPTH_TEST);
-	
 	if (ofGetRectMode() != OF_RECTMODE_CENTER)
 	{
 		float w = division*tileSize;
@@ -84,7 +82,6 @@ void ramBasicFloor(const int floorPattern,
 	}
 	
 	glNormal3f( 0.0f, 1.0f, 0.0f );
-	
 	
 	if(floorPattern == ramFloor::FLOOR_PLANE)
 	{
@@ -115,7 +112,6 @@ void ramBasicFloor(const int floorPattern,
 		}
 	}
 	
-	glDisable(GL_DEPTH_TEST);
 	ofPopMatrix();
 	ofPopStyle();
 }

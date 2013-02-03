@@ -78,10 +78,8 @@ public:
 		ofPushStyle();
 		ofNoFill();
 		
-		ofColor shadowColor = ramColor::GRAY;
-		shadowColor.a = 50;
-		
 		ramCameraBegin();
+		
 		if (bGhost)
 		{
 			for (int i=0; i<ghost.getActor().getNumNode(); i++)
@@ -89,7 +87,6 @@ public:
 				ramNode &node = ghost.getActor().getNode(i);
 				const int boxSize = (i==ramActor::JOINT_HEAD) ? 6 : 3;
 				
-				glEnable(GL_DEPTH_TEST);
 				node.transformBegin();
 				ofSetColor( ramColor::RED_DEEP );
 				ofBox(boxSize);
@@ -102,36 +99,18 @@ public:
 					ofSetColor(c);
 					ofLine(node, *node.getParent());
 				}
-				
-				/*!
-				 shadows
-				 */
-				ofColor shadowColor = ramColor::GRAY;
-				shadowColor.a = 90;
-				
-//				ramGlobal().beginShadowMatrix();
-				
-				ofEnableAlphaBlending();
-				ofSetColor(shadowColor);
-				
-				ofBox(node, boxSize);
-				if (node.hasParent())
-					ofLine(node, *node.getParent());
-				
-//				ramGlobal().endShadowMatrix();
 			}
 		}
 		
 		if (bParticle)
 		{
-			glEnable(GL_DEPTH_TEST);
 			ofSetColor(255);
 			pe.draw();
 		}
+		
 		ramCameraEnd();
 		
 		ofPopStyle();
-		glDisable(GL_DEPTH_TEST);
 		glPopAttrib();
 	}
 	
@@ -144,10 +123,6 @@ public:
 	{
 		
 	}
-	
-	void drawFloor()
-	{
-		
-	}
+
 };
 
