@@ -78,6 +78,8 @@ public:
 		ofPushStyle();
 		ofNoFill();
 		
+		glEnable(GL_DEPTH_TEST);
+		
 		ramCameraBegin();
 		
 		if (bGhost)

@@ -76,6 +76,8 @@ void ramSimpleShadow::begin()
 {
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	
+	glEnable(GL_DEPTH_TEST);
+	
 	ofMatrix4x4 modelview_matrix = ramCameraManager::instance().getActiveCamera().getModelViewMatrix();
 	ofMatrix4x4 modelview_matrix_inv = modelview_matrix.getInverse();
 	
@@ -89,6 +91,6 @@ void ramSimpleShadow::begin()
 void ramSimpleShadow::end()
 {
 	shader.end();
-
+	
 	glPopAttrib();
 }

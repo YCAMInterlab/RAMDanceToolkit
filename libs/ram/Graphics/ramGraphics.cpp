@@ -64,8 +64,14 @@ void ramBasicFloor(const int floorPattern,
 				   const ofColor& c1,
 				   const ofColor& c2)
 {
-	
 	if (floorPattern == ramFloor::FLOOR_NONE) return;
+
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	glEnable(GL_DEPTH_TEST);
+	
+	glEnable(GL_POLYGON_OFFSET_FILL);
+	glEnable(GL_POLYGON_OFFSET_LINE);
+	glPolygonOffset(4.0, 1.0);
 	
 	int division = floorSize/tileSize;
 	
@@ -114,6 +120,8 @@ void ramBasicFloor(const int floorPattern,
 	
 	ofPopMatrix();
 	ofPopStyle();
+
+	glPopAttrib();
 }
 
 
