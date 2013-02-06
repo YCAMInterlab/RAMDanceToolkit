@@ -46,12 +46,17 @@ void testApp::update()
 	// ------------------
 	oscReceiver.update();
 	
+	
+	/// Scenes update
+	// ------------------
 	sceneManager.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
+	/// Scenes draw
+	// ------------------
 	sceneManager.draw();
 }
 

@@ -9,6 +9,7 @@ BigBox bigbox;
 
 
 #pragma mark - oF methods
+//--------------------------------------------------------------
 void testApp::setup()
 {
 	ofSetFrameRate(60);
@@ -37,14 +38,16 @@ void testApp::update()
 	oscReceiver.update();
 	
 	
-	/* Scenes update */
+	/// Scenes update
+	// ------------------
 	sceneManager.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	/* Scenes draw */
+	/// Scenes draw
+	// ------------------
 	sceneManager.draw();
 }
 
