@@ -36,6 +36,7 @@ public:
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glEnable(GL_DEPTH_TEST);
 		glPushMatrix();
+		
 		ramCameraBegin();
 		{
 			ofNoFill();
@@ -44,6 +45,7 @@ public:
 			ramPhysics::instance().debugDraw();
 		}
 		ramCameraEnd();
+		
 		glPopMatrix();
 		glDisable(GL_DEPTH_TEST);
 		glPopAttrib();
@@ -70,11 +72,6 @@ public:
 	}
 	
 	void drawRigid(ramRigidBody &rigid)
-	{
-		
-	}
-	
-	void drawFloor()
 	{
 		
 	}

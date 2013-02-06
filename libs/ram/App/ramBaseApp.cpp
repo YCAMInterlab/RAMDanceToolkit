@@ -22,7 +22,9 @@ void ramBaseApp::draw(ofEventArgs &args)
 	drawFloor();
 
 	{
-		// shadow
+		// draw shadow
+		
+		ramSharedData::instance().shadow.begin();
 		
 		for (int n = 0; n < getActorManager().getNumActor(); n++)
 		{
@@ -35,10 +37,12 @@ void ramBaseApp::draw(ofEventArgs &args)
 			ramRigidBody &o = getActorManager().getRigidBody(n);
 			drawRigid(o);
 		}
+		
+		ramSharedData::instance().shadow.end();
 	}
 	
 	{
-		// object
+		// draw object
 		
 		for (int n = 0; n < getActorManager().getNumActor(); n++)
 		{
