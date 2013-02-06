@@ -98,29 +98,7 @@ public:
 				node.transformBegin();
 				ofBox(bigBoxSize);
 				node.transformEnd();
-				
-				
-				/*!
-				 shadows
-				 */
-				
-//				ramGlobal().beginShadowMatrix();
-				
-				ofEnableAlphaBlending();
-				ofSetColor(shadowColor);
-				
-				node.transformBegin();
-				ofSetLineWidth(bigBoxLineWidth);
-				ofBox(bigBoxSize);
-				node.transformEnd();
-				
-				ofSetLineWidth(1);
-				ofBox(node, boxSize);
-				if (node.hasParent())
-					ofLine(node, *node.getParent());
-				
-//				ramGlobal().endShadowMatrix();
-				
+								
 				ofPopStyle();
 			}
 			glPopMatrix();
@@ -137,10 +115,6 @@ public:
 	}
 	
 	void drawRigidBody(ramRigidBody& rigid)
-	{
-		
-	}
-	void drawFloor()
 	{
 		
 	}
