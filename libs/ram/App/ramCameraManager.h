@@ -36,6 +36,6 @@ protected:
 	
 };
 
-void ramCameraBegin();
-void ramCameraEnd();
+void ramBeginCamera();
+void ramEndCamera();
 

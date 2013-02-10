@@ -54,7 +54,7 @@ void ramSceneManager::draw()
 			
 			scene->draw();
 			
-			ramCameraBegin();
+			ramBeginCamera();
 			
 			for (int n = 0; n < AM.getNumActor(); n++)
 			{
@@ -68,7 +68,7 @@ void ramSceneManager::draw()
 				scene->drawRigid(o);
 			}
 			
-			ramCameraEnd();
+			ramEndCamera();
 			
 			ramSharedData::instance().shadow.end();
 		}
@@ -78,7 +78,7 @@ void ramSceneManager::draw()
 			
 			scene->draw();
 			
-			ramCameraBegin();
+			ramBeginCamera();
 			
 			for (int n = 0; n < AM.getNumActor(); n++)
 			{
@@ -92,7 +92,7 @@ void ramSceneManager::draw()
 				scene->drawRigid(o);
 			}
 			
-			ramCameraEnd();
+			ramEndCamera();
 		}
 	}
 }

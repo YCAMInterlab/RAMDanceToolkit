@@ -145,7 +145,7 @@ public:
 	
 	void draw()
 	{
-		ramCameraBegin();
+		ramBeginCamera();
 		
 		ofSetColor(255);
 		
@@ -321,7 +321,7 @@ public:
 			ofPopStyle();
 		}
 		
-		ramCameraEnd();
+		ramEndCamera();
 	}
 	
 	void reloadSettings()

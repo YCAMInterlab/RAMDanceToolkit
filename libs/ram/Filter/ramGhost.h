@@ -23,6 +23,9 @@ public:
 		if (present.getNumNode() != 0)
 			record.push_back(present);
 		
+		if (ghost.getNumNode() != present.getNumNode())
+			ghost = present;
+		
 		if (record.size() > historySize)
 			record.pop_front();
 		

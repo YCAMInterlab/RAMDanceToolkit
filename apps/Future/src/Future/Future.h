@@ -80,7 +80,7 @@ public:
 		
 		glEnable(GL_DEPTH_TEST);
 		
-		ramCameraBegin();
+		ramBeginCamera();
 		
 		if (bGhost)
 		{
@@ -110,7 +110,7 @@ public:
 			pe.draw();
 		}
 		
-		ramCameraEnd();
+		ramEndCamera();
 		
 		ofPopStyle();
 		glPopAttrib();

@@ -14,12 +14,12 @@ ramCameraManager::ramCameraManager()
 	active_camera = createCamera<ofEasyCam>();
 }
 
-void ramCameraBegin()
+void ramBeginCamera()
 {
 	ramCameraManager::instance().getActiveCamera().begin();
 }
 
-void ramCameraEnd()
+void ramEndCamera()
 {
 	ramCameraManager::instance().getActiveCamera().end();
 }

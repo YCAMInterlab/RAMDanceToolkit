@@ -37,14 +37,14 @@ public:
 		glEnable(GL_DEPTH_TEST);
 		glPushMatrix();
 		
-		ramCameraBegin();
+		ramBeginCamera();
 		{
 			ofNoFill();
 			cube->draw();
 			sphere->draw();
 			ramPhysics::instance().debugDraw();
 		}
-		ramCameraEnd();
+		ramEndCamera();
 		
 		glPopMatrix();
 		glDisable(GL_DEPTH_TEST);
