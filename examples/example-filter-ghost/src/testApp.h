@@ -8,7 +8,7 @@
  for debuging....
  */
 static const string myActorName = "default_unknown_date";
-//static const string myActorName = "default";
+// static const string myActorName = "default";
 
 class testApp : public ramBaseApp
 {
@@ -38,5 +38,4 @@ public:
 	// ...
 	// ------------------------
 	ramOscReceiver oscReceiver;
-	ramSceneManager sceneManager;
 };

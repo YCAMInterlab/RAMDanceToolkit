@@ -1,7 +1,6 @@
 #include "testApp.h"
 
 
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -17,6 +16,12 @@ void testApp::setup()
 	oscReceiver.setup(10000);
 	
 	
+	/// Scene Manager setup
+	// ------------------
+	vector<ramSceneBase*> scenes;
+	scenes.push_back( scene1.getPtr() );
+	scenes.push_back( scene2.getPtr() );
+	sceneManager.setup(scenes);
 }
 
 //--------------------------------------------------------------
@@ -25,12 +30,19 @@ void testApp::update()
 	/// Entities update
 	// ------------------
 	oscReceiver.update();
+	
+	
+	/// Scene Manager update
+	// ------------------
+	sceneManager.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	
+	/// Scene Manager draw
+	// ------------------
+	sceneManager.draw();
 }
 
 
