@@ -104,13 +104,15 @@ public:
 	virtual ~ramNodeArray() {}
 
 	void setName(const string& name) { this->name = name; }
-	string& getName() { return name; }
+	const string& getName() const { return name; }
 
-	int getNumNode() { return nodes.size(); }
-	ramNode& getNode(int node_id) { return nodes[node_id]; }
+	int getNumNode() const { return nodes.size(); }
 	
-	inline bool isOutdated() { return (ofGetElapsedTimef() -  last_update_client_time) > RAM_OUTDATED_DURATION; }
-	inline float getTimestamp() { return last_update_client_time; }
+	ramNode& getNode(int node_id) { return nodes[node_id]; }
+	const ramNode& getNode(int node_id) const { return nodes[node_id]; }
+	
+	inline bool isOutdated() const { return (ofGetElapsedTimef() -  last_update_client_time) > RAM_OUTDATED_DURATION; }
+	inline float getTimestamp() const { return last_update_client_time; }
 	
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
 

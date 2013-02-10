@@ -1,37 +1,33 @@
 #pragma once
+
 #include "ramMain.h"
 
+#include "ramFilter.h"
 
-class ramGhost
+class ramGhost : public ramFilter
 {
 public:
-	ramGhost() :
-	historySize(10),
-	distance(150),
-	speed(27)
+	
+	ramGhost() : historySize(10), distance(150), speed(27)
 	{
 		clear();
 	}
-	virtual ~ramGhost() {}
 	
 	void clear()
 	{
-		recordedActors.clear();
-		recordedRigids.clear();
+		record.clear();
 	}
 	
-	void update(ramActor &present)
+	const ramNodeArray& update(const ramNodeArray &present)
 	{
-		
-		
 		if (present.getNumNode() != 0)
-			recordedActors.push_back(present);
+			record.push_back(present);
 		
-		if (recordedActors.size() > historySize)
-			recordedActors.pop_front();
+		if (record.size() > historySize)
+			record.pop_front();
 		
-		ramNodeArray &presentArray = recordedActors.back();
-		ramNodeArray &pastArray = recordedActors.front();
+		ramNodeArray &presentArray = record.back();
+		ramNodeArray &pastArray = record.front();
 		
 		for (int i = 0; i < presentArray.getNumNode(); i++)
 		{
@@ -45,56 +41,22 @@ public:
 			d *= distance;
 			ofVec3f v = p0 + d;
 			
-			ofVec3f vec = ghostActor.getNode(i).getGlobalPosition();
+			ofVec3f vec = ghost.getNode(i).getGlobalPosition();
 			vec += (v - vec) * speed * 0.001;
 			
 			// quaternion
 			const ofQuaternion& quat = presentArray.getNode(i).getGlobalOrientation();
 			
-			ramNode& node = ghostActor.getNode(i);
+			ramNode& node = ghost.getNode(i);
 			node.setGlobalPosition(vec);
 			node.setGlobalOrientation(quat);
 			node.getAccerelometer().update(vec, quat);
 		}
+		
+		return ghost;
 	}
 	
-	void update(ramRigidBody &present)
-	{
-		if (present.getNumNode() != 0)
-			recordedRigids.push_back(present);
-		
-		if (recordedRigids.size() > historySize)
-			recordedRigids.pop_front();
-		
-		ramNodeArray &presentArray = recordedRigids.back();
-		ramNodeArray &pastArray = recordedRigids.front();
-		
-		for (int i = 0; i < presentArray.getNumNode(); i++)
-		{
-			const ofVec3f& p0 = presentArray.getNode(i).getGlobalPosition();
-			const ofVec3f& p1 = pastArray.getNode(i).getGlobalPosition();
-			
-			// position
-			ofVec3f d = (p0 - p1);
-			d.normalize();
-			d *= distance;
-			ofVec3f v = p0 + d;
-			
-			ofVec3f vec = ghostRigidBody.getNode(i).getGlobalPosition();
-			vec += (v - vec) * speed * 0.001;
-			
-			// quaternion
-			const ofQuaternion& quat = presentArray.getNode(i).getGlobalOrientation();
-			
-			ramNode& node = ghostRigidBody.getNode(i);
-			node.setPosition(vec);
-			node.setOrientation(quat);
-			node.getAccerelometer().update(vec, quat);
-		}
-	}
-	
-	inline ramActor& getActor() { return ghostActor; }
-	inline ramRigidBody& getRigidBody() { return ghostRigidBody; }
+	inline const ramNodeArray& getResult() { return ghost; }
 	
 	inline void setDistance(const float d) { distance = d; }
 	inline void setSpeed(const float s) { speed = s; }
@@ -105,10 +67,8 @@ public:
 	inline unsigned int getHistorySize() { return historySize; }
 	
 protected:
-	deque<ramActor> recordedActors;
-	deque<ramRigidBody> recordedRigids;
-	ramActor ghostActor;
-	ramRigidBody ghostRigidBody;
+	ramNodeArray ghost;
+	deque<ramNodeArray> record;
 	
 	unsigned int historySize;
 	float distance, speed;

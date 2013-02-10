@@ -49,9 +49,9 @@ public:
 	void update()
 	{
 		ghost.update( getActor(myActorName) );
-		for (int i=0; i<ghost.getActor().getNumNode(); i++)
+		for (int i=0; i<ghost.getResult().getNumNode(); i++)
 		{
-			ramNode &node = ghost.getActor().getNode(i);
+			const ramNode &node = ghost.getResult().getNode(i);
 			for(int j=0; j<10; j++)
 				pe.emit( node.getPosition() );
 		}
@@ -84,9 +84,9 @@ public:
 		
 		if (bGhost)
 		{
-			for (int i=0; i<ghost.getActor().getNumNode(); i++)
+			for (int i=0; i<ghost.getResult().getNumNode(); i++)
 			{
-				ramNode &node = ghost.getActor().getNode(i);
+				const ramNode &node = ghost.getResult().getNode(i);
 				const int boxSize = (i==ramActor::JOINT_HEAD) ? 6 : 3;
 				
 				node.transformBegin();
