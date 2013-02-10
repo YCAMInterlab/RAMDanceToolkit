@@ -25,13 +25,12 @@ void testApp::update()
 	/// Entities update
 	// ------------------
 	oscReceiver.update();
-	
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	ramBasicFloor(0, 1000, 30, ramColor::WHITE, ramColor::BLACK);
+	
 }
 
 
@@ -41,32 +40,6 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	
-	
-	for(int i=0; i<actor.getNumNode(); i++)
-	{
-		ramNode &node = actor.getNode(i);
-		
-		
-		if( i == ramActor::JOINT_RIGHT_ELBOW )
-		{
-			node.setPosition(0,0,0);
-		}
-		
-		ofBox(node, (i== ramActor::JOINT_HEAD) ? 10 : 5 );
-		
-		
-		if( node.hasParent() )
-		{
-			ofSetLineWidth(2);
-			ofLine( node, *node.getParent() );
-		}
-	}
-	
-	
-	
-	
-	
 	
 }
 
