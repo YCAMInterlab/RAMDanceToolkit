@@ -104,6 +104,12 @@ void ramRigidBody::reserveNodes(int num)
 	nodes.resize(num);
 }
 
+ramRigidBody& ramRigidBody::operator=(const ramNodeArray &copy)
+{
+	this->ramNodeArray::operator=(copy);
+	return *this;
+}
+
 #pragma mark - ramActor
 
 ramActor::ramActor()
@@ -112,9 +118,20 @@ ramActor::ramActor()
 	setupTree();
 }
 
+ramActor::ramActor(const ramNodeArray &copy)
+{
+	*this = copy;
+}
+
 ramActor::~ramActor()
 {
 	dispose();
+}
+
+ramActor& ramActor::operator=(const ramNodeArray &copy)
+{
+	this->ramNodeArray::operator=(copy);
+	return *this;
 }
 
 void ramActor::dispose()

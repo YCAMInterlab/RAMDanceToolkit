@@ -129,6 +129,8 @@ void ramBasicActor(ramActor& actor,
 				   const ofColor& jointColor,
 				   const ofColor& lineColor)
 {
+	assert(actor.getNumNode() == ramActor::NUM_JOINTS);
+	
 	glPushMatrix();
 	for (int i=0; i<actor.getNumNode(); i++)
 	{

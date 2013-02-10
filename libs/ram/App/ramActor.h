@@ -131,7 +131,12 @@ class ramRigidBody : public ramNodeArray
 {
     
 public:
+	
+	ramRigidBody() : ramNodeArray() {}
+	ramRigidBody(const ramNodeArray &copy) { *this = copy; }
 
+	ramRigidBody& operator=(const ramNodeArray &copy);
+	
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
 
 private:
@@ -179,7 +184,10 @@ public:
 	};
 
 	ramActor();
+	ramActor(const ramNodeArray &copy);
 	virtual ~ramActor();
+	
+	ramActor& operator=(const ramNodeArray &copy);
 
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
 	static string getJointName(int jointId) { return jointName[jointId]; }
