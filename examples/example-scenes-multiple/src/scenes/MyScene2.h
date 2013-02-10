@@ -9,6 +9,8 @@ private:
 	
 public:
 	
+	MyScene2(): fontColor(100) {}
+	
 	void setupControlPanel(ofxUICanvas* panel)
 	{
 		ramControlPanel &gui = ramGetGUI();
@@ -33,8 +35,7 @@ public:
 	
 	void draw()
 	{
-		ramBeginCamera();
-		ramEndCamera();
+		
 	}
 	
 	void drawActor( ramActor& actor )
@@ -42,6 +43,7 @@ public:
 		ghost.update(actor);
 		
 		ofVec3f pos = ghost.getResult().getNode(ramActor::JOINT_HEAD).getPosition();
+		pos.y += 30.0;
 		
 		ofSetColor( fontColor );
 		ofDrawBitmapString( "I am " + getName(), pos );

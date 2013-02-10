@@ -8,6 +8,8 @@ private:
 	
 public:
 	
+	MyScene1(): fontColor(100) {}
+	
 	void setupControlPanel(ofxUICanvas* panel)
 	{
 		ramControlPanel &gui = ramGetGUI();
@@ -36,6 +38,7 @@ public:
 	void drawActor( ramActor& actor )
 	{
 		ofVec3f pos = actor.getNode(ramActor::JOINT_HEAD).getPosition();
+		pos.y += 30.0;
 		
 		ofSetColor( fontColor );
 		ofDrawBitmapString( "I am " + getName(), pos );

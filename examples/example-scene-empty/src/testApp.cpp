@@ -19,7 +19,6 @@ void testApp::setup()
 	/// Scene setup
 	// ------------------
 	myScene.setup();
-	ramGetGUI().addPanel(&myScene);
 }
 
 //--------------------------------------------------------------
