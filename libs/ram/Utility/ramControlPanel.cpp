@@ -156,13 +156,12 @@ void ramControlPanel::guiEvent(ofxUIEventArgs &e)
 
 void ramControlPanel::reloadCameraSetting(const int index)
 {
-	ofxXmlSettings xml( ramToResourcePath(kCamSettingFile) );
+	ofxXmlSettings xml( kCamSettingFile );
 	xml.pushTag("cam", index);
 	ramCameraSettings setting( xml );
 	ramCameraManager::instance().getActiveCamera().setPosition( setting.pos );
 	ramCameraManager::instance().getActiveCamera().lookAt( setting.lookAt );
 }
-
 
 
 void ramControlPanel::addPanel(ramControllable* control)

@@ -1,6 +1,8 @@
 #include "testApp.h"
 
 
+ramGhost ghost;
+
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -17,6 +19,9 @@ void testApp::setup()
 	oscReceiver.setup(10000);
 	
 	
+	/// register ramGhost instance on GUI
+	// ------------------
+	ramGetGUI().addPanel(&ghost);
 }
 
 //--------------------------------------------------------------
@@ -25,12 +30,23 @@ void testApp::update()
 	/// Entities update
 	// ------------------
 	oscReceiver.update();
+	
+	
+	// update ghost with passing ramActor
+	ghost.update( getActor(myActorName) );
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
+	// get processed ramActor ref
+	ramActor& actor = (ramActor&)ghost.getResult();
 	
+	ramBeginCamera();
+	{
+		ramBasicActor(actor);
+	}
+	ramEndCamera();
 }
 
 
@@ -40,7 +56,13 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
+	ramBasicActor(actor);
 	
+	ramBeginShadow();
+	{
+		ramBasicActor(actor, ramColor::SHADOW, ramColor::SHADOW);
+	}
+	ramEndShadow();
 }
 
 //--------------------------------------------------------------
@@ -48,7 +70,6 @@ void testApp::drawRigid(ramRigidBody &rigid)
 {
 	
 }
-
 
 
 

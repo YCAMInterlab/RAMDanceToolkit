@@ -1,8 +1,6 @@
 #include "testApp.h"
 
 
-ramGhost ghost;
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -18,35 +16,31 @@ void testApp::setup()
 	oscReceiver.setup(10000);
 	
 	
-	/// scenes setup
+	/// Scene setup
 	// ------------------
-	ghost.setDistance(150.0);
-	ghost.setSpeed(27.0);
-	ghost.setHistorySize(10);
+	myScene.setup();
+	ramGetGUI().addPanel(&myScene);
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
+	/// Entities update
+	// ------------------
 	oscReceiver.update();
 	
-	// update ghost with passing ramActor
-	ghost.update( getActor(myActorName) );
+	
+	/// Scene update
+	// ------------------
+	myScene.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	sceneManager.draw();
-
-	// get processed ramActor ref
-	ramActor& actor = ghost.getActor();
-
-	ramCameraBegin();
-	{
-		ramBasicActor(actor);
-	}
-	ramCameraEnd();
+	/// Scene draw
+	// ------------------
+	myScene.draw();
 }
 
 
@@ -56,23 +50,19 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramControlPanel &gui = ramGetGUI();
-//	if ( gui.getValueB("Draw Actor") )
-	{
-		ramBasicActor(actor);
-		
-//		ramGlobal().beginShadowMatrix();
-		ramBasicActor(actor, ramColor::SHADOW, ramColor::SHADOW);
-//		ramGlobal().endShadowMatrix();
-	}
-
-	ramBasicActor(actor);
+	/// Scene drawActor
+	// ------------------
+	myScene.drawActor(actor);
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
+	/// Scene drawRigid
+	// ------------------
+	myScene.drawRigid(rigid);
 }
+
 
 
 

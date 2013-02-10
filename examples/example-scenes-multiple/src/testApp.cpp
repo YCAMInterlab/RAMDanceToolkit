@@ -1,7 +1,6 @@
 #include "testApp.h"
 
 
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -17,9 +16,11 @@ void testApp::setup()
 	oscReceiver.setup(10000);
 	
 	
-	/// scenes setup
+	/// Scene Manager setup
 	// ------------------
 	vector<ramSceneBase*> scenes;
+	scenes.push_back( scene1.getPtr() );
+	scenes.push_back( scene2.getPtr() );
 	sceneManager.setup(scenes);
 }
 
@@ -30,74 +31,28 @@ void testApp::update()
 	// ------------------
 	oscReceiver.update();
 	
+	
+	/// Scene Manager update
+	// ------------------
 	sceneManager.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	
+	/// Scene Manager draw
+	// ------------------
+	sceneManager.draw();
 }
 
 
 
 #pragma mark - ram methods
+
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramNode &n1 = actor.getNode(ramActor::JOINT_HEAD);
-	ramNode &n2 = actor.getNode(ramActor::JOINT_RIGHT_HAND);
-	ramNode &n3 = actor.getNode(ramActor::JOINT_LEFT_HAND);
-	ramNode &n4 = actor.getNode(ramActor::JOINT_RIGHT_TOE);
-	ramNode &n5 = actor.getNode(ramActor::JOINT_LEFT_TOE);
 	
-	ofPushStyle();
-	{
-		// draw line betweem two nodes
-		ofNoFill();
-		ofSetColor( ramColor::RED_LIGHT );
-		ofSetLineWidth( 3 );
-		ofLine( n2, n3 );
-		
-		
-		// draw triangle using three nodes
-		ofFill();
-		ofSetColor( ramColor::BLUE_LIGHT );
-		ofSetLineWidth( 3 );
-		ofTriangle( n1, n4, n5 );
-		
-		
-		// ramNode::transformBegin() ~ transformEnd()
-		n1.transformBegin();
-		{
-			// draw cube at JOINT_HEAD
-			ofNoFill();
-			ofSetColor( ramColor::YELLOW_DEEP );
-			ofSetLineWidth( 3 );
-			ofBox( 20 );
-			
-			// draw cone at JOINT_HEAD
-			ofNoFill();
-			ofSetColor( ramColor::GRAY );
-			ofSetLineWidth( 2 );
-			ofCone(10, 100);
-		}
-		n1.transformEnd();
-		 
-		
-		
-		// draw plane using several nodes
-		ofNoFill();
-		ofSetColor( ramColor::YELLOW_LIGHT );
-		ofSetLineWidth( 2 );
-		ofPushMatrix();
-		{
-			ofScale( 3, 3, 3 );
-			ramPlate( n1, n2, n3, n4, n5 );
-		}
-		ofPopMatrix();
-	}
-	ofPopStyle();
 }
 
 //--------------------------------------------------------------
