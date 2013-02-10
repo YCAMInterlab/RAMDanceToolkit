@@ -66,14 +66,14 @@ public:
 	
 	void draw()
 	{
-		ramCameraBegin();
+		ramBeginCamera();
 		
 		if (pastMe[curPlayingIndex].isPlaying())
 		{
 			ramActor& actor = pastMe[curPlayingIndex].getNextFrameActor();
 			ramBasicActor(actor, ramColor::BLACK);
 		}
-		ramCameraEnd();
+		ramEndCamera();
 	}
 	
 	void drawActor( ramActor& actor )

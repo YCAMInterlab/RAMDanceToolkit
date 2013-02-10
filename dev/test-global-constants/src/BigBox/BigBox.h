@@ -71,7 +71,7 @@ public:
 		ofColor shadowColor = ramColor::GRAY;
 		shadowColor.a = 90;
 		
-		ramCameraBegin();
+		ramBeginCamera();
 		
 		for (int i=0; i<actor.getNumNode(); i++)
 		{
@@ -123,7 +123,7 @@ public:
 			glPopAttrib();
 		}
 		
-		ramCameraEnd();
+		ramEndCamera();
 	}
 	
 	

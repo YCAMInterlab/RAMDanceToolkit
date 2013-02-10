@@ -15,6 +15,8 @@ public:
 	void begin();
 	void end();
 	
+	void setShadowAlpha(float alpha);
+	
 protected:
 	
 	ofMatrix4x4 shadow_matrix;
@@ -26,3 +28,4 @@ protected:
 
 void ramBeginShadow();
 void ramEndShadow();
+void ramSetShadowAlpha(float alpha);

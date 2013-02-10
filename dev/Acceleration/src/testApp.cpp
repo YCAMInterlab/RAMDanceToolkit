@@ -89,7 +89,7 @@ void testApp::draw()
     ofBackgroundGradient( ofColor( 240 ), ofColor( 60 ) );
 	ofNoFill();
 	
-    ramCameraBegin();
+    ramBeginCamera();
 	glEnable(GL_DEPTH_TEST);
 	
 	// actor: recorded
@@ -122,7 +122,7 @@ void testApp::draw()
     }
 	
 	glDisable(GL_DEPTH_TEST);
-    ramCameraEnd();
+    ramEndCamera();
 }
 
 

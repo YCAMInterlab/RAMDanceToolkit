@@ -9,7 +9,6 @@ vector<string> ramCameraSettings::getCamNames(ofxXmlSettings& setting)
 	names.clear();
 	names.resize(numCams);
 	
-	cout << numCams << endl;
 	for (int i=0; i<numCams; i++)
 	{
 		setting.pushTag("cam", i);

@@ -22,8 +22,6 @@ void testApp::setup()
 	oscReceiver.setup(10001);
 	
 	// gui setup
-	ofxControlPanel::setTextColor(simpleColor(255,0,0,100));
-	ofxControlPanel::setBackgroundColor(simpleColor(0,0,0,20));
 	gui.setup(ofGetWidth(), ofGetHeight());
 	
 	//

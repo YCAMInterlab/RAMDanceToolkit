@@ -86,7 +86,7 @@ void testApp::draw()
 	
 	ramNodeFinder nf(ramActor::JOINT_ABDOMEN);
 	
-	ramCameraBegin();
+	ramBeginCamera();
     
 	ofNoFill();
 	
@@ -97,7 +97,7 @@ void testApp::draw()
 	
     ofDisableSmoothing();
 	
-	ramCameraEnd();
+	ramEndCamera();
 }
 
 

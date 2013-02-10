@@ -67,7 +67,7 @@ void ramControlPanel::setup()
 	
 	
 	/// camera positions
-	ofxXmlSettings camSet( ramToResourcePath(kCamSettingFile) );
+	ofxXmlSettings camSet( kCamSettingFile );
 	vector<string> positions = ramCameraSettings::getCamNames(camSet);
 	mPanelGeneral->addSpacer(kLength, 2);
 	mPanelGeneral->addRadio("Camera Preset", positions, OFX_UI_ORIENTATION_VERTICAL, kDim, kDim);
@@ -77,7 +77,7 @@ void ramControlPanel::setup()
 	mPanelGeneral->addSpacer(kLength, 2);
 	mPanelGeneral->addWidgetDown(new ofxUILabel("Camera Position", OFX_UI_FONT_MEDIUM));
 	mPanelGeneral->addWidgetDown(mLabelCamPos);
-	
+
 	
 	/// add panel to canvas
 	ofAddListener(mPanelGeneral->newGUIEvent, this, &ramControlPanel::guiEvent);
@@ -161,4 +161,13 @@ void ramControlPanel::reloadCameraSetting(const int index)
 	ramCameraSettings setting( xml );
 	ramCameraManager::instance().getActiveCamera().setPosition( setting.pos );
 	ramCameraManager::instance().getActiveCamera().lookAt( setting.lookAt );
+}
+
+
+
+void ramControlPanel::addPanel(ramControllable* control)
+{
+	ofxUICanvas *panel = new ofxUICanvas(0, 0, ramGetGUI().kLength+ramGetGUI().kXInit*2.0, ofGetHeight());
+	control->setupControlPanel(panel);
+	getTabbedCanvas().add(panel);
 }

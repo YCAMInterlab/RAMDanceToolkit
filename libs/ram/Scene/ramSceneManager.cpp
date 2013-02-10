@@ -11,9 +11,7 @@ void ramSceneManager::setup(vector<ramSceneBase*>& scenes)
 	{
 		ramSceneBase *scene = scenes.at(i);
 		scene->setup();
-		
-		ofxUICanvas *panel = scene->createScenePanel();
-		ramGetGUI().getTabbedCanvas().add(panel);
+		ramGetGUI().addPanel(scene);
 	}
 	
 	this->scenes = scenes;

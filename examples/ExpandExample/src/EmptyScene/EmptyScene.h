@@ -46,10 +46,10 @@ public:
 		
 		if (!bEnabled) return;
 		
-		ramCameraBegin();
+		ramBeginCamera();
 		ofSetColor( ramColor::GRAY );
 		ofDrawBitmapString( "Empty!", ofVec3f(0,0,0) );
-		ramCameraEnd();
+		ramEndCamera();
 	}
 	
 	void drawActor( ramActor& actor )

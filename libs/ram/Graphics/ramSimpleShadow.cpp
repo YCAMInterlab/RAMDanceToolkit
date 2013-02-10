@@ -57,7 +57,7 @@ void ramSimpleShadow::setup()
 		}
 	);
 	
-#undef _S
+#undef _Sram
 	
 	shader.setupShaderFromSource(GL_VERTEX_SHADER, vs);
 	shader.linkProgram();
@@ -96,6 +96,12 @@ void ramSimpleShadow::end()
 	glPopAttrib();
 }
 
+void ramSimpleShadow::setShadowAlpha(float alpha)
+{
+	shadow_color = ofFloatColor(shadow_color, alpha);
+}
+
+
 void ramBeginShadow()
 {
 	ramSharedData::instance().shadow.begin();
@@ -104,4 +110,9 @@ void ramBeginShadow()
 void ramEndShadow()
 {
 	ramSharedData::instance().shadow.end();
+}
+
+void ramSetShadowAlpha(float alpha)
+{
+	ramSharedData::instance().shadow.setShadowAlpha(alpha);
 }

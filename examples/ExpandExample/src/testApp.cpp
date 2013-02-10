@@ -14,12 +14,6 @@ void testApp::setup()
 	// ------------------
 	ramInit();
 	oscReceiver.setup(10000);
-	
-	
-	/// scenes setup
-	// ------------------
-	vector<ramSceneBase*> scenes;
-	sceneManager.setup(scenes);
 }
 
 //--------------------------------------------------------------

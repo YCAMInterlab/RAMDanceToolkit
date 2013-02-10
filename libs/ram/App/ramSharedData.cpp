@@ -20,9 +20,8 @@ void ramInit()
 	ofSetLogLevel(OF_LOG_SILENT);
 	
 	ramSharedData::instance().setup();
-	
+
 	ramGetGUI().setup();
-//	ramGetGUI().loadFont(ramToResourcePath("Fonts/din-webfont.ttf"), 10);
 }
 
 ramSharedData* ramSharedData::_instance = NULL;

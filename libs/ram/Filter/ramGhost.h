@@ -3,6 +3,7 @@
 #include "ramMain.h"
 
 #include "ramFilter.h"
+#include "ramControlPanel.h"
 
 class ramGhost : public ramFilter
 {
@@ -16,6 +17,16 @@ public:
 	void clear()
 	{
 		record.clear();
+	}
+	
+	void setupControlPanel(ofxUICanvas* panel)
+	{
+		ramControlPanel &gui = ramGetGUI();
+		
+		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
+		panel->addSpacer(gui.kLength, 2);
+		panel->addSlider("Distance", 0.0, 255.0, &distance, gui.kLength, gui.kDim);
+		panel->addSlider("Speed", 0.0, 255.0, &speed, gui.kLength, gui.kDim);
 	}
 	
 	const ramNodeArray& update(const ramNodeArray &present)
@@ -68,11 +79,14 @@ public:
 	inline float getdistance() { return distance; }
 	inline float getspeed() { return speed; }
 	inline unsigned int getHistorySize() { return historySize; }
+
+	
+	inline const string getName() { return "ramGhost"; };
 	
 protected:
 	ramNodeArray ghost;
 	deque<ramNodeArray> record;
 	
-	unsigned int historySize;
+	int historySize;
 	float distance, speed;
 };
