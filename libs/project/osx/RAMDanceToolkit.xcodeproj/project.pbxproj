@@ -209,8 +209,10 @@
 		6007624E16B6955700C106E2 /* libBulletDynamics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6007619216B6955700C106E2 /* libBulletDynamics.a */; };
 		6007624F16B6955700C106E2 /* libBulletSoftBody.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6007619316B6955700C106E2 /* libBulletSoftBody.a */; };
 		6007625016B6955700C106E2 /* libLinearMath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6007619416B6955700C106E2 /* libLinearMath.a */; };
-		606D72C916B92FB500C95401 /* ramSimpleShadow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 606D72C716B92FB500C95401 /* ramSimpleShadow.cpp */; };
-		606D72CA16B92FB500C95401 /* ramSimpleShadow.h in Headers */ = {isa = PBXBuildFile; fileRef = 606D72C816B92FB500C95401 /* ramSimpleShadow.h */; };
+		6007E97116C77F2D0056BD73 /* ramFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6007E97016C77F2D0056BD73 /* ramFilter.h */; };
+		6007E97316C78B740056BD73 /* ramControllable.h in Headers */ = {isa = PBXBuildFile; fileRef = 6007E97216C78B740056BD73 /* ramControllable.h */; };
+		6007E97616C790BA0056BD73 /* ramSimpleShadow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6007E97416C790BA0056BD73 /* ramSimpleShadow.cpp */; };
+		6007E97716C790BA0056BD73 /* ramSimpleShadow.h in Headers */ = {isa = PBXBuildFile; fileRef = 6007E97516C790BA0056BD73 /* ramSimpleShadow.h */; };
 		606D730A16B9311C00C95401 /* guiBaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 606D72CF16B9311C00C95401 /* guiBaseObject.cpp */; };
 		606D730B16B9311C00C95401 /* guiBaseObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 606D72D016B9311C00C95401 /* guiBaseObject.h */; };
 		606D730C16B9311C00C95401 /* guiCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 606D72D116B9311C00C95401 /* guiCallback.cpp */; };
@@ -325,8 +327,8 @@
 		9AD6F64E16B927E100F7F51E /* ramCameraManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6F62A16B927E100F7F51E /* ramCameraManager.cpp */; };
 		9AD6F64F16B927E100F7F51E /* ramCameraManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F62B16B927E100F7F51E /* ramCameraManager.h */; };
 		9AD6F65016B927E100F7F51E /* ramConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F62C16B927E100F7F51E /* ramConstants.h */; };
-		9AD6F65116B927E100F7F51E /* ramGlobal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6F62D16B927E100F7F51E /* ramGlobal.cpp */; };
-		9AD6F65216B927E100F7F51E /* ramGlobal.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F62E16B927E100F7F51E /* ramGlobal.h */; };
+		9AD6F65116B927E100F7F51E /* ramSharedData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6F62D16B927E100F7F51E /* ramSharedData.cpp */; };
+		9AD6F65216B927E100F7F51E /* ramSharedData.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F62E16B927E100F7F51E /* ramSharedData.h */; };
 		9AD6F65316B927E100F7F51E /* ramOscReciever.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F62F16B927E100F7F51E /* ramOscReciever.h */; };
 		9AD6F65416B927E100F7F51E /* ramPhysics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6F63116B927E100F7F51E /* ramPhysics.cpp */; };
 		9AD6F65516B927E100F7F51E /* ramPhysics.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F63216B927E100F7F51E /* ramPhysics.h */; };
@@ -552,8 +554,10 @@
 		6007619216B6955700C106E2 /* libBulletDynamics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBulletDynamics.a; sourceTree = "<group>"; };
 		6007619316B6955700C106E2 /* libBulletSoftBody.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBulletSoftBody.a; sourceTree = "<group>"; };
 		6007619416B6955700C106E2 /* libLinearMath.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLinearMath.a; sourceTree = "<group>"; };
-		606D72C716B92FB500C95401 /* ramSimpleShadow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramSimpleShadow.cpp; sourceTree = "<group>"; };
-		606D72C816B92FB500C95401 /* ramSimpleShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSimpleShadow.h; sourceTree = "<group>"; };
+		6007E97016C77F2D0056BD73 /* ramFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramFilter.h; sourceTree = "<group>"; };
+		6007E97216C78B740056BD73 /* ramControllable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramControllable.h; sourceTree = "<group>"; };
+		6007E97416C790BA0056BD73 /* ramSimpleShadow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramSimpleShadow.cpp; sourceTree = "<group>"; };
+		6007E97516C790BA0056BD73 /* ramSimpleShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSimpleShadow.h; sourceTree = "<group>"; };
 		606D72CC16B9311C00C95401 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		606D72CD16B9311C00C95401 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		606D72CF16B9311C00C95401 /* guiBaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = guiBaseObject.cpp; sourceTree = "<group>"; };
@@ -678,8 +682,8 @@
 		9AD6F62A16B927E100F7F51E /* ramCameraManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramCameraManager.cpp; sourceTree = "<group>"; };
 		9AD6F62B16B927E100F7F51E /* ramCameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramCameraManager.h; sourceTree = "<group>"; };
 		9AD6F62C16B927E100F7F51E /* ramConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramConstants.h; sourceTree = "<group>"; };
-		9AD6F62D16B927E100F7F51E /* ramGlobal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramGlobal.cpp; sourceTree = "<group>"; };
-		9AD6F62E16B927E100F7F51E /* ramGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramGlobal.h; sourceTree = "<group>"; };
+		9AD6F62D16B927E100F7F51E /* ramSharedData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramSharedData.cpp; sourceTree = "<group>"; };
+		9AD6F62E16B927E100F7F51E /* ramSharedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSharedData.h; sourceTree = "<group>"; };
 		9AD6F62F16B927E100F7F51E /* ramOscReciever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramOscReciever.h; sourceTree = "<group>"; };
 		9AD6F63116B927E100F7F51E /* ramPhysics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramPhysics.cpp; sourceTree = "<group>"; };
 		9AD6F63216B927E100F7F51E /* ramPhysics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPhysics.h; sourceTree = "<group>"; };
@@ -1327,8 +1331,8 @@
 				9AD6F62A16B927E100F7F51E /* ramCameraManager.cpp */,
 				9AD6F62B16B927E100F7F51E /* ramCameraManager.h */,
 				9AD6F62C16B927E100F7F51E /* ramConstants.h */,
-				9AD6F62D16B927E100F7F51E /* ramGlobal.cpp */,
-				9AD6F62E16B927E100F7F51E /* ramGlobal.h */,
+				9AD6F62D16B927E100F7F51E /* ramSharedData.cpp */,
+				9AD6F62E16B927E100F7F51E /* ramSharedData.h */,
 				9AD6F62F16B927E100F7F51E /* ramOscReciever.h */,
 			);
 			path = App;
@@ -1348,6 +1352,7 @@
 		9AD6F63516B927E100F7F51E /* Filter */ = {
 			isa = PBXGroup;
 			children = (
+				6007E97016C77F2D0056BD73 /* ramFilter.h */,
 				9AD6F63616B927E100F7F51E /* ramAnalyzer.h */,
 				9AD6F63716B927E100F7F51E /* ramGhost.h */,
 			);
@@ -1357,6 +1362,8 @@
 		9AD6F63816B927E100F7F51E /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				6007E97416C790BA0056BD73 /* ramSimpleShadow.cpp */,
+				6007E97516C790BA0056BD73 /* ramSimpleShadow.h */,
 				9AD6F63916B927E100F7F51E /* ramGraphics.cpp */,
 				9AD6F63A16B927E100F7F51E /* ramGraphics.h */,
 			);
@@ -1376,12 +1383,11 @@
 		9AD6F64016B927E100F7F51E /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				606D72C716B92FB500C95401 /* ramSimpleShadow.cpp */,
-				606D72C816B92FB500C95401 /* ramSimpleShadow.h */,
 				9AD6F64116B927E100F7F51E /* ramCameraSettings.h */,
 				9A58D05216B982C70084E63F /* ramCameraSettings.cpp */,
 				60F95BCC16B933CF0016E390 /* ramControlPanel.cpp */,
 				9AD6F64216B927E100F7F51E /* ramControlPanel.h */,
+				6007E97216C78B740056BD73 /* ramControllable.h */,
 				9AD6F64316B927E100F7F51E /* ramNodeFinder.h */,
 				9AD6F64416B927E100F7F51E /* ramSession.h */,
 				9AD6F64516B927E100F7F51E /* ramUtils.cpp */,
@@ -1637,7 +1643,7 @@
 				9AD6F64D16B927E100F7F51E /* ramBaseApp.h in Headers */,
 				9AD6F64F16B927E100F7F51E /* ramCameraManager.h in Headers */,
 				9AD6F65016B927E100F7F51E /* ramConstants.h in Headers */,
-				9AD6F65216B927E100F7F51E /* ramGlobal.h in Headers */,
+				9AD6F65216B927E100F7F51E /* ramSharedData.h in Headers */,
 				9AD6F65316B927E100F7F51E /* ramOscReciever.h in Headers */,
 				9AD6F65516B927E100F7F51E /* ramPhysics.h in Headers */,
 				9AD6F65716B927E100F7F51E /* ramPrimitive.h in Headers */,
@@ -1652,7 +1658,6 @@
 				9AD6F66216B927E100F7F51E /* ramNodeFinder.h in Headers */,
 				9AD6F66316B927E100F7F51E /* ramSession.h in Headers */,
 				9AD6F66516B927E100F7F51E /* ramUtils.h in Headers */,
-				606D72CA16B92FB500C95401 /* ramSimpleShadow.h in Headers */,
 				606D730B16B9311C00C95401 /* guiBaseObject.h in Headers */,
 				606D730D16B9311C00C95401 /* guiCallback.h in Headers */,
 				606D730F16B9311C00C95401 /* guiCallbackValue.h in Headers */,
@@ -1685,6 +1690,9 @@
 				606D734016B9311C00C95401 /* simpleColor.h in Headers */,
 				606D734216B9311C00C95401 /* simpleFileLister.h in Headers */,
 				606D734416B9311C00C95401 /* simpleLogger.h in Headers */,
+				6007E97116C77F2D0056BD73 /* ramFilter.h in Headers */,
+				6007E97316C78B740056BD73 /* ramControllable.h in Headers */,
+				6007E97716C790BA0056BD73 /* ramSimpleShadow.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1750,13 +1758,12 @@
 				9AD6F64A16B927E100F7F51E /* ramActorManager.cpp in Sources */,
 				9AD6F64C16B927E100F7F51E /* ramBaseApp.cpp in Sources */,
 				9AD6F64E16B927E100F7F51E /* ramCameraManager.cpp in Sources */,
-				9AD6F65116B927E100F7F51E /* ramGlobal.cpp in Sources */,
+				9AD6F65116B927E100F7F51E /* ramSharedData.cpp in Sources */,
 				9AD6F65416B927E100F7F51E /* ramPhysics.cpp in Sources */,
 				9AD6F65616B927E100F7F51E /* ramPrimitive.cpp in Sources */,
 				9AD6F65A16B927E100F7F51E /* ramGraphics.cpp in Sources */,
 				9AD6F65E16B927E100F7F51E /* ramSceneManager.cpp in Sources */,
 				9AD6F66416B927E100F7F51E /* ramUtils.cpp in Sources */,
-				606D72C916B92FB500C95401 /* ramSimpleShadow.cpp in Sources */,
 				606D730A16B9311C00C95401 /* guiBaseObject.cpp in Sources */,
 				606D730C16B9311C00C95401 /* guiCallback.cpp in Sources */,
 				606D730E16B9311C00C95401 /* guiCallbackValue.cpp in Sources */,
@@ -1786,6 +1793,7 @@
 				606D734316B9311C00C95401 /* simpleLogger.cpp in Sources */,
 				60F95BCD16B933CF0016E390 /* ramControlPanel.cpp in Sources */,
 				9A48CE0C16BA4E5600D9C997 /* ramCameraSettings.cpp in Sources */,
+				6007E97616C790BA0056BD73 /* ramSimpleShadow.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

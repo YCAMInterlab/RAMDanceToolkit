@@ -1,6 +1,7 @@
 #include "ramSimpleShadow.h"
 
 #include "ramCameraManager.h"
+#include "ramSharedData.h"
 
 #include <numeric>
 
@@ -93,4 +94,14 @@ void ramSimpleShadow::end()
 	shader.end();
 	
 	glPopAttrib();
+}
+
+void ramBeginShadow()
+{
+	ramSharedData::instance().shadow.begin();
+}
+
+void ramEndShadow()
+{
+	ramSharedData::instance().shadow.end();
 }

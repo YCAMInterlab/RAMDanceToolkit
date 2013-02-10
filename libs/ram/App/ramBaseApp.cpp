@@ -1,4 +1,5 @@
-#include "ramGlobal.h"
+#include "ramSharedData.h"
+
 #include "ramBaseApp.h"
 #include "ramCameraManager.h"
 #include "ramControlPanel.h"

@@ -1,7 +1,8 @@
 #pragma once
 
 #include "ofxUITabbedCanvas.h"
-#include "ramGlobal.h"
+
+#include "ramSharedData.h"
 #include "ramGraphics.h"
 #include "ramCameraManager.h"
 #include "ramCameraSettings.h"

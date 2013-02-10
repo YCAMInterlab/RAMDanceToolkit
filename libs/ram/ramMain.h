@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ramGlobal.h"
+#include "ramSharedData.h"
 #include "ramBaseApp.h"
 #include "ramSceneManager.h"
 #include "ramOscReciever.h"

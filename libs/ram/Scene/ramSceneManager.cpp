@@ -1,6 +1,6 @@
 #include "ramSceneManager.h"
 
-#include "ramGlobal.h"
+#include "ramSharedData.h"
 #include "ramControlPanel.h"
 
 void ramSceneManager::setup(vector<ramSceneBase*>& scenes)

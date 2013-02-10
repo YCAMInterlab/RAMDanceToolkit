@@ -1,4 +1,4 @@
-#include "ramGlobal.h"
+#include "ramSharedData.h"
 #include "ramBaseApp.h"
 #include "ramControlPanel.h"
 
@@ -16,7 +16,7 @@ void ramInit()
 	inited = true;
 	
 	// !!!:
-	ofLogWarning("ramInit() in ramGlobal.cpp: ofSetLogLevel(OF_LOG_SILENT) will be deleted when Fonts probrem in ofxUI is fixed.");
+	ofLogWarning("ramInit() in ramSharedData.cpp: ofSetLogLevel(OF_LOG_SILENT) will be deleted when Fonts probrem in ofxUI is fixed.");
 	ofSetLogLevel(OF_LOG_SILENT);
 	
 	ramSharedData::instance().setup();

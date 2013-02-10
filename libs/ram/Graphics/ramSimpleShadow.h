@@ -23,3 +23,6 @@ protected:
 	ofFloatColor shadow_color;
 	
 };
+
+void ramBeginShadow();
+void ramEndShadow();
