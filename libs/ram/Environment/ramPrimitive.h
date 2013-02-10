@@ -54,3 +54,15 @@ protected:
 	void customDraw();
 };
 
+class ramPyramidPrimitive : public ramPrimitive
+{
+public:
+	ramPyramidPrimitive(const ofMatrix4x4& mat, float size = 100);
+	ramPyramidPrimitive(const ofVec3f& pos, float size = 100);
+	
+protected:
+	void customDraw();
+	
+	ofMesh mesh;
+};
+

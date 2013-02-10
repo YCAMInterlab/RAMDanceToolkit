@@ -134,3 +134,41 @@ void ramCylinderPrimitive::customDraw()
 
 	glPopAttrib();
 }
+
+ramPyramidPrimitive::ramPyramidPrimitive(const ofMatrix4x4& mat, float size)
+{
+	mesh.addVertex(ofVec3f(1, 1, 1) * size);
+	mesh.addVertex(ofVec3f(-1, 1, -1) * size);
+	mesh.addVertex(ofVec3f(-1, -1, 1) * size);
+	mesh.addVertex(ofVec3f(1, -1, -1) * size);
+	
+	mesh.addTriangle(0, 1, 2);
+	mesh.addTriangle(0, 2, 3);
+	mesh.addTriangle(0, 3, 1);
+	mesh.addTriangle(3, 2, 1);
+
+	rigid = getWorld().addMesh(mesh, mat.getTranslation(), mat.getRotate().getEuler());
+}
+
+ramPyramidPrimitive::ramPyramidPrimitive(const ofVec3f& pos, float size)
+{
+	mesh.addVertex(ofVec3f(1, 1, 1) * size);
+	mesh.addVertex(ofVec3f(-1, 1, -1) * size);
+	mesh.addVertex(ofVec3f(-1, -1, 1) * size);
+	mesh.addVertex(ofVec3f(1, -1, -1) * size);
+	
+	mesh.addTriangle(0, 1, 2);
+	mesh.addTriangle(0, 2, 3);
+	mesh.addTriangle(0, 3, 1);
+	mesh.addTriangle(3, 2, 1);
+	
+	rigid = getWorld().addMesh(mesh, pos);
+}
+	
+void ramPyramidPrimitive::customDraw()
+{
+	if (ofGetStyle().bFill)
+		mesh.draw();
+	else
+		mesh.drawWireframe();
+}
