@@ -2,7 +2,7 @@
 
 static bool ram_enable_physics_primitive = true;
 
-void ramEnablePhysicsPrimitive(bool v)
+void ramSetEnablePhysicsPrimitive(bool v)
 {
 	ram_enable_physics_primitive = v;
 }
@@ -75,11 +75,12 @@ void ramPhysics::unregisterPrimitive(ramPrimitive *o)
 {
 	vector<ramPrimitive*>::iterator it = find(primitives.begin(), primitives.end(), o);
 	if (it == primitives.end()) return;
-	world.removeRegidBody(o->rigid);
+	world.disposeRigidBody(o->rigid);
 	primitives.erase(it);
 }
 
 void ramPhysics::registerTempraryPrimitive(ramPrimitive *o)
 {
+	ofxBt::RigidBody(o->getRigidBody()).setKinematic(true);
 	temporary_primitives.push_back(o);
 }

@@ -12,7 +12,7 @@ public:
 	ramPrimitive();
 	~ramPrimitive();
 	
-	// enablePhysics
+	btRigidBody* getRigidBody() { return rigid; }
 	
 protected:
 	
