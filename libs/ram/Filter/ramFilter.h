@@ -2,7 +2,9 @@
 
 #include "ofMain.h"
 
-class ramFilter
+#include "ramControllable.h"
+
+class ramFilter : public ramControllable
 {
 public:
 	

@@ -3,12 +3,15 @@
 
 #include "ramActorManager.h"
 #include "ramCameraManager.h"
+
+#include "ramControllable.h"
+
 #include "ofxUI.h"
 
 
 class ramControlPanel;
 
-class ramSceneBase
+class ramSceneBase : public ramControllable
 {
 	friend class ramControlPanel;
 	
