@@ -1,9 +1,6 @@
 #include "testApp.h"
 
 
-/*!
- Scenes
- */
 #include "CameraMover.h"
 CameraMover mover;
 
@@ -22,12 +19,8 @@ void testApp::setup()
 	ramInit();
 	oscReceiver.setup(10000);
 	
-	
-	/// scenes setup
-	// ------------------
-	vector<ramSceneBase*> scenes;
-	scenes.push_back( mover.getPtr() );
-	sceneManager.setup(scenes);
+	mover.setup();
+	ramGetGUI().addPanel(&mover);
 }
 
 //--------------------------------------------------------------
@@ -37,18 +30,13 @@ void testApp::update()
 	// ------------------
 	oscReceiver.update();
 	
-	
-	/// Scenes update
-	// ------------------
-	sceneManager.update();
+	mover.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	/// Scenes draw
-	// ------------------
-	sceneManager.draw();
+	mover.draw();
 }
 
 
@@ -57,10 +45,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-//	if ( gui.getValueB("Draw Actor") )
-		ramBasicActor(actor, shadowMat.getPtr());
-	
-	for (int i=0; i<scenes.size(); i++) scenes.at(i)->drawActor(actor);
+	ramBasicActor(actor);
 }
 
 //--------------------------------------------------------------

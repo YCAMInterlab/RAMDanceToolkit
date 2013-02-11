@@ -1,5 +1,20 @@
 #include "ramCameraSettings.h"
 
+void ramCameraSettings::prepareForPlay()
+{
+	bMoving = true;
+	moving_from = pos;
+	moving_start_time = ofGetElapsedTimef();
+	moving_end_time = moving_start_time + moving_duration;
+	moving_deg = 0.0f;
+}
+void ramCameraSettings::reset()
+{
+	bMoving = false;
+	pos = moving_from;
+}
+
+
 
 vector<string> ramCameraSettings::getCamNames(ofxXmlSettings& setting)
 {
@@ -61,7 +76,7 @@ vector<ramCameraSettings> ramCameraSettings::getSettings(ofxXmlSettings& setting
 				
 				s.moving_type = setting.getValue("type", "") == "circle" ? MOVING_CIRCLE : MOVING_LINEAR;
 				
-				s.moving_look_at = ofVec3f(setting.getValue("look_at:x", 0.0),
+				s.look_at = ofVec3f(setting.getValue("look_at:x", 0.0),
 										   setting.getValue("look_at:y", 0.0),
 										   setting.getValue("look_at:z", 0.0));
 				
