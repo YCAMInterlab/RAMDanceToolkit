@@ -90,8 +90,8 @@ void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
 		node.node_id = i;
 		node.name = name;
 
-		node.setPosition(vec);
-		node.setOrientation(quat);
+		node.setGlobalPosition(vec);
+		node.setGlobalOrientation(quat);
 		node.accerelometer.update(vec, quat);
 	}
 
