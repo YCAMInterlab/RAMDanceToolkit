@@ -11,10 +11,9 @@ public:
 	ramBoxPrimitive *cube;
 	ramSpherePrimitive *sphere;
 	
-	Bullet()
-	{
-		setSceneName("Bullet");
-	}
+	string getSceneName() { return "Bullet"; }
+	
+	Bullet() {}
 	
 	void setup()
 	{

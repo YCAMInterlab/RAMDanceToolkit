@@ -19,6 +19,8 @@ public:
 	ramSceneBase() : bEnabled(false) {}
 	virtual ~ramSceneBase(){}
 	
+	virtual string getSceneName() { return "unnamed scene"; }
+
 	inline ramActorManager& getActorManager() { return ramActorManager::instance(); }
 	inline ramActor& getActor(string name) { return ramActorManager::instance().getActor(name); }
 	inline ramRigidBody& getRigidBody(string name) { return ramActorManager::instance().getRigidBody(name); }
@@ -35,8 +37,6 @@ public:
 	inline void toggle() { bEnabled ^= true; }
 	inline void setEnabled(bool b) { bEnabled = b; }
 	inline bool isEnabled() { return bEnabled; }
-	
-	inline string getSceneName() { return "unnamed scene"; }
 	
 	ramSceneBase* getPtr() { return this; }
 	

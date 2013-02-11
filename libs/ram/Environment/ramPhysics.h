@@ -9,7 +9,7 @@
 
 class ramPrimitive;
 
-void ramEnablePhysicsPrimitive(bool v);
+void ramSetEnablePhysicsPrimitive(bool v);
 bool ramGetEnablePhysicsPrimitive();
 
 class ramPhysics

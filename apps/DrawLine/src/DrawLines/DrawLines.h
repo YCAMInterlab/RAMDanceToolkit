@@ -34,10 +34,11 @@ class DrawLines : public ramSceneBase
 	string target_type, target_actor;
 	
 public:
+	
+	string getSceneName() { return "DrawLines"; }
+	
 	DrawLines()
 	{
-		setSceneName("DrawLines");
-		
 		// ---
 		
 		target_type = "actor";

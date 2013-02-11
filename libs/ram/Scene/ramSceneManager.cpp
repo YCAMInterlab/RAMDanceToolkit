@@ -2,6 +2,7 @@
 
 #include "ramSharedData.h"
 #include "ramControlPanel.h"
+#include "ramPhysics.h"
 
 void ramSceneManager::setup(vector<ramSceneBase*>& scenes)
 {
@@ -45,6 +46,9 @@ void ramSceneManager::draw()
 		ramSceneBase *scene = scenes[i];
 		if (!scene->isEnabled()) continue;
 
+		bool enable_physics = ramGetEnablePhysicsPrimitive();
+		ramSetEnablePhysicsPrimitive(false);
+		
 		{
 			// draw shadow
 			
@@ -71,6 +75,8 @@ void ramSceneManager::draw()
 			ramSharedData::instance().shadow.end();
 		}
 
+		ramSetEnablePhysicsPrimitive(enable_physics);
+		
 		{
 			// draw object
 			

@@ -14,9 +14,10 @@ public:
 	vector<float> jointSizes;
 	float bigBoxLineWidth;
 	
+	string getSceneName() { return "Big Box"; }
+	
 	BigBox()
 	{
-		setSceneName("Big Box");
 		key_master_size = "Master size";
 		key_line_width = "Line Width";
 		
