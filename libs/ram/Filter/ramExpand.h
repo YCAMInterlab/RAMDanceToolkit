@@ -18,13 +18,12 @@ public:
 
 		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
 		panel->addSpacer(gui.kLength, 2);
-		panel->addSlider("Expand", 0.01, 3.0, &expand, gui.kLength, gui.kDim);
+		panel->addSlider("Expand", 0.00, 3.0, &expand, gui.kLength, gui.kDim);
 	}
 	
 	const ramNodeArray& update(const ramNodeArray &nodeArray)
 	{
 		expandedArray = nodeArray;
-		
 		
 		for (int i=0; i<expandedArray.getNumNode(); i++)
 		{
@@ -32,9 +31,12 @@ public:
 			ramNode &expandedNode = expandedArray.getNode(i);
 			
 			ofMatrix4x4 m = node.getGlobalTransformMatrix();
-			m = m * m;
-			m.scale(expand, expand, expand);
-			expandedNode.setPosition( m.preMult(ofVec3f(0, 0, 0)) );
+			ofMatrix4x4 mm = m;
+			
+			mm.preMultRotate(m.getRotate());
+			mm.preMultTranslate(m.getTranslation() * expand);
+			
+			expandedNode.setPosition( mm.preMult(ofVec3f(0, 0, 0)) );
 		}
 		
 		return expandedArray;

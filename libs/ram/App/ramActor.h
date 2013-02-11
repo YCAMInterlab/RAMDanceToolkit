@@ -81,6 +81,9 @@ public:
 	
 	inline ramAccelerometer& getAccerelometer() { return accerelometer; }
 	
+	void drawId();
+	void drawName();
+	
 private:
 
 	int node_id;
@@ -114,7 +117,7 @@ public:
 	inline float getTimestamp() const { return last_update_client_time; }
 	
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
-
+	
 protected:
 
 	string name;

@@ -58,10 +58,7 @@ void testApp::drawActor(ramActor &actor)
 		node.transformBegin();
 		ofBox(10);
 		node.transformEnd();
-		
-		ofVec3f namePos = node.getPosition();
-		namePos.y += 20;
-		ofDrawBitmapString(ofToString(node.getName()), namePos);
+		node.drawName();
 	}
 	ofPopStyle();
 }
