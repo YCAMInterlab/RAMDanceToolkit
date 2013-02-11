@@ -61,8 +61,8 @@ public:
 	const string& getName() { return name; }
 	int getID() { return node_id; }
 
-	inline void setParent(ramNode &parent) { this->parent = &parent; ofNode::setParent(parent); }
-	inline ramNode* getParent() const { return parent; }
+	inline void setParent(ramNode &parent) { this->parent = &parent; }
+	inline ramNode* getParent() const { return (ramNode*)parent; }
 	inline bool hasParent() const { return parent != NULL; }
 
 	// utils
@@ -89,7 +89,6 @@ private:
 	int node_id;
 	string name;
 
-	ramNode *parent;
 	ramAccelerometer accerelometer;
 	
 };
