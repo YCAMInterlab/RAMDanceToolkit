@@ -1,6 +1,9 @@
 #include "testApp.h"
 
 
+#include "ramExpand.h"
+ramExpand expandFilter;
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -14,6 +17,11 @@ void testApp::setup()
 	// ------------------
 	ramInit();
 	oscReceiver.setup(10000);
+	
+	
+	/// register ramExpand instance on GUI
+	// ------------------
+	ramGetGUI().addPanel(&expandFilter);
 }
 
 //--------------------------------------------------------------
@@ -22,8 +30,6 @@ void testApp::update()
 	/// Entities update
 	// ------------------
 	oscReceiver.update();
-	
-	sceneManager.update();
 }
 
 //--------------------------------------------------------------
@@ -39,61 +45,25 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramBasicActor(actor, NULL);
+	ramBasicActor(actor);
 	
-	for (int i=0; i<actor.getNumNode(); i++)
+	ramActor &expandedActor = (ramActor&)expandFilter.update(actor);
+	
+	ofPushStyle();
+	ofNoFill();
+	for (int i=0; i<expandedActor.getNumNode(); i++)
 	{
-		ramNode &node = actor.getNode(i);
-		ofVec3f v;
+		ramNode &node = expandedActor.getNode(i);
 		
+		node.transformBegin();
+		ofBox(10);
+		node.transformEnd();
 		
-		v = node.getPosition();
-		
-		{
-//			if(i==0) cout << node.getPosition() << endl;
-			ofBox(v, 10);
-		}
-		{
-			
-			float *dst = ofMatrix4x4().getPtr();
-			GLfloat src1[16];
-			glGetFloatv(GL_MODELVIEW_MATRIX, src1);
-			float *src2 = node.ofNode::getGlobalTransformMatrix().getPtr();
-			
-			
-			for(int y=0;y<4;y++)
-			{
-				for(int x=0;x<4;x++)
-				{
-					
-					dst[y*4+x] = src2[y*4]   * src1[x]   +
-								 src2[y*4+1] * src1[x+4] +
-								 src2[y*4+2] * src1[x+8] +
-								 src2[y*4+3] * src1[x+12];
-				}
-			}
-			
-			if(i==0)
-			{
-				cout << node.getPosition() << endl;
-				cout << dst[1] << " " << dst[5] << " "<< dst[9] << " "<< dst[13] << " " << endl;
-				cout << dst[2] << " " << dst[6] << " "<< dst[10] << " "<< dst[14] << " " << endl;
-				cout << dst[3] << " " << dst[7] << " "<< dst[11] << " "<< dst[15] << " " << endl;
-				cout << dst[4] << " " << dst[8] << " "<< dst[12] << " "<< dst[16] << " " << endl << endl;
-			}
-			
-//			node.transformBegin();
-//			ofBox(10);
-//			node.transformEnd();
-//			ofPushMatrix();
-//			ofMultMatrix( dst );
-//			ofBox(v*gui.getValueF("test"), 10);
-//			ofPopMatrix();
-		}
-		ofPopMatrix();
-		
+		ofVec3f namePos = node.getPosition();
+		namePos.y += 20;
+		ofDrawBitmapString(ofToString(node.getName()), namePos);
 	}
-	cout << endl << "---" << endl;
+	ofPopStyle();
 }
 
 //--------------------------------------------------------------
