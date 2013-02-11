@@ -12,6 +12,7 @@ public:
 	ramNodeFinder(int joint_id) : actor_name(""), joint_id(joint_id) {}
 	ramNodeFinder(const string& actor_name) : actor_name(actor_name), joint_id(-1) {}
 	ramNodeFinder(const string& actor_name, int joint_id) : actor_name(actor_name), joint_id(joint_id) {}
+	ramNodeFinder(const ramNodeIdentifer &identifr) : actor_name(identifr.name), joint_id(identifr.index) {}
     
 	void setActorName(string actor_name_) { actor_name = actor_name_; }
 	void setJointID(int joint_id_) { joint_id = joint_id_; }
@@ -93,10 +94,31 @@ public:
         return nodes;
     }
     
-    static ramNode findNode(const string& actoreName, int jointId)
+	
+    static const ramNode& findNode(const string& actoreName, int jointId)
     {
-        return getActorManager().getActor(actoreName).getNode(jointId);
+        return getActorManager().getNodeArray(actoreName).getNode(jointId);
     }
+	
+	static const ramNode& findNode(const ramNodeIdentifer &identifr)
+	{
+		return findNode(identifr.name, identifr.index);
+	}
+	
+	// safety API
+	static bool findNode(const string& actoreName, int jointId, ramNode &node)
+    {
+		if (!getActorManager().hasNodeArray(actoreName)) return false;
+        node = getActorManager().getNodeArray(actoreName).getNode(jointId);
+		return true;
+    }
+	
+	static bool findNode(const ramNodeIdentifer &identifr, ramNode &node)
+	{
+		if (!getActorManager().hasNodeArray(identifr.name)) return false;
+		node = getActorManager().getNodeArray(identifr.name).getNode(identifr.index);
+		return true;
+	}
     
 private:
 	

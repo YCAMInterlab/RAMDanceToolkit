@@ -262,6 +262,8 @@
 		600EFFB316C92B4400A5B331 /* ofxIPMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = 600EFFAB16C92B4400A5B331 /* ofxIPMarker.h */; };
 		600EFFB416C92B4400A5B331 /* ofxIPStringBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 600EFFAC16C92B4400A5B331 /* ofxIPStringBox.h */; };
 		600EFFE216C933AC00A5B331 /* ramNodeIdentifer.h in Headers */ = {isa = PBXBuildFile; fileRef = 600EFFE116C933AC00A5B331 /* ramNodeIdentifer.h */; };
+		600EFFE716C93A4800A5B331 /* ramNodeLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 600EFFE516C93A4800A5B331 /* ramNodeLine.cpp */; };
+		600EFFE816C93A4800A5B331 /* ramNodeLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 600EFFE616C93A4800A5B331 /* ramNodeLine.h */; };
 		60F95BCD16B933CF0016E390 /* ramControlPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60F95BCC16B933CF0016E390 /* ramControlPanel.cpp */; };
 		9A48CE0C16BA4E5600D9C997 /* ramCameraSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A58D05216B982C70084E63F /* ramCameraSettings.cpp */; };
 		9AD6F5A316B926C000F7F51E /* ofxUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F4FF16B926BF00F7F51E /* ofxUI.h */; };
@@ -613,6 +615,8 @@
 		600EFFAB16C92B4400A5B331 /* ofxIPMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxIPMarker.h; sourceTree = "<group>"; };
 		600EFFAC16C92B4400A5B331 /* ofxIPStringBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxIPStringBox.h; sourceTree = "<group>"; };
 		600EFFE116C933AC00A5B331 /* ramNodeIdentifer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeIdentifer.h; sourceTree = "<group>"; };
+		600EFFE516C93A4800A5B331 /* ramNodeLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramNodeLine.cpp; sourceTree = "<group>"; };
+		600EFFE616C93A4800A5B331 /* ramNodeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeLine.h; sourceTree = "<group>"; };
 		60B90A8B1644E00900AF2156 /* libram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libram.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		60B90AAA1644E09400AF2156 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		60F95BCC16B933CF0016E390 /* ramControlPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramControlPanel.cpp; sourceTree = "<group>"; };
@@ -1442,6 +1446,8 @@
 		9AD6F63816B927E100F7F51E /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				600EFFE516C93A4800A5B331 /* ramNodeLine.cpp */,
+				600EFFE616C93A4800A5B331 /* ramNodeLine.h */,
 				6007E97416C790BA0056BD73 /* ramSimpleShadow.cpp */,
 				6007E97516C790BA0056BD73 /* ramSimpleShadow.h */,
 				9AD6F63916B927E100F7F51E /* ramGraphics.cpp */,
@@ -1770,6 +1776,7 @@
 				600EFFB316C92B4400A5B331 /* ofxIPMarker.h in Headers */,
 				600EFFB416C92B4400A5B331 /* ofxIPStringBox.h in Headers */,
 				600EFFE216C933AC00A5B331 /* ramNodeIdentifer.h in Headers */,
+				600EFFE816C93A4800A5B331 /* ramNodeLine.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1881,6 +1888,7 @@
 				600EFFAD16C92B4400A5B331 /* main.cpp in Sources */,
 				600EFFAE16C92B4400A5B331 /* testApp.cpp in Sources */,
 				600EFFB016C92B4400A5B331 /* ofxInteractivePrimitives.cpp in Sources */,
+				600EFFE716C93A4800A5B331 /* ramNodeLine.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
