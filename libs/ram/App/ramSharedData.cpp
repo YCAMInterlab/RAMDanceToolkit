@@ -21,6 +21,8 @@ void ramInit()
 	ofSetLogLevel(OF_LOG_SILENT);
 	
 	ramSharedData::instance().setup();
+	ramActorManager::instance().setup();
+	
 	ramPhysics::instance();
 
 	ramGetGUI().setup();

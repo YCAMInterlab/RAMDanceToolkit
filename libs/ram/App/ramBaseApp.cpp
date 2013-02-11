@@ -63,6 +63,8 @@ void ramBaseApp::draw(ofEventArgs &args)
 			drawRigid(o);
 		}
 	}
+	
+	getActorManager().draw();
     
 	cam.end();
 }

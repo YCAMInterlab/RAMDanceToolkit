@@ -261,6 +261,7 @@
 		600EFFB216C92B4400A5B331 /* ofxIPButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 600EFFAA16C92B4400A5B331 /* ofxIPButton.h */; };
 		600EFFB316C92B4400A5B331 /* ofxIPMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = 600EFFAB16C92B4400A5B331 /* ofxIPMarker.h */; };
 		600EFFB416C92B4400A5B331 /* ofxIPStringBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 600EFFAC16C92B4400A5B331 /* ofxIPStringBox.h */; };
+		600EFFE216C933AC00A5B331 /* ramNodeIdentifer.h in Headers */ = {isa = PBXBuildFile; fileRef = 600EFFE116C933AC00A5B331 /* ramNodeIdentifer.h */; };
 		60F95BCD16B933CF0016E390 /* ramControlPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60F95BCC16B933CF0016E390 /* ramControlPanel.cpp */; };
 		9A48CE0C16BA4E5600D9C997 /* ramCameraSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A58D05216B982C70084E63F /* ramCameraSettings.cpp */; };
 		9AD6F5A316B926C000F7F51E /* ofxUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F4FF16B926BF00F7F51E /* ofxUI.h */; };
@@ -611,6 +612,7 @@
 		600EFFAA16C92B4400A5B331 /* ofxIPButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxIPButton.h; sourceTree = "<group>"; };
 		600EFFAB16C92B4400A5B331 /* ofxIPMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxIPMarker.h; sourceTree = "<group>"; };
 		600EFFAC16C92B4400A5B331 /* ofxIPStringBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxIPStringBox.h; sourceTree = "<group>"; };
+		600EFFE116C933AC00A5B331 /* ramNodeIdentifer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeIdentifer.h; sourceTree = "<group>"; };
 		60B90A8B1644E00900AF2156 /* libram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libram.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		60B90AAA1644E09400AF2156 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		60F95BCC16B933CF0016E390 /* ramControlPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramControlPanel.cpp; sourceTree = "<group>"; };
@@ -1467,6 +1469,7 @@
 				9AD6F64216B927E100F7F51E /* ramControlPanel.h */,
 				6007E97216C78B740056BD73 /* ramControllable.h */,
 				9AD6F64316B927E100F7F51E /* ramNodeFinder.h */,
+				600EFFE116C933AC00A5B331 /* ramNodeIdentifer.h */,
 				9AD6F64416B927E100F7F51E /* ramSession.h */,
 				9AD6F64516B927E100F7F51E /* ramUtils.cpp */,
 				9AD6F64616B927E100F7F51E /* ramUtils.h */,
@@ -1766,6 +1769,7 @@
 				600EFFB216C92B4400A5B331 /* ofxIPButton.h in Headers */,
 				600EFFB316C92B4400A5B331 /* ofxIPMarker.h in Headers */,
 				600EFFB416C92B4400A5B331 /* ofxIPStringBox.h in Headers */,
+				600EFFE216C933AC00A5B331 /* ramNodeIdentifer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

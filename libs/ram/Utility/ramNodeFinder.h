@@ -2,10 +2,10 @@
 
 #include "ramActorManager.h"
 #include "ramActor.h"
+#include "ramNodeIdentifer.h"
 
 class ramNodeFinder
 {
-	
 public:
     
     ramNodeFinder() : actor_name(""), joint_id(-1) {}
@@ -65,7 +65,6 @@ public:
 		
 		return nodes;
 	}
-	
 	
     static vector<ramNode> findNodes(int jointId)
     {

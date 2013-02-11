@@ -7,7 +7,6 @@
 class ramNodeArray;
 class ramAccelerometer;
 
-
 #pragma mark - ramAccelerometer
 
 class ramAccelerometer

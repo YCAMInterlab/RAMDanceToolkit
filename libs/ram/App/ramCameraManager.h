@@ -19,9 +19,10 @@ public:
 	{
 		T *o = new T;
 		cameras.push_back(o);
-		active_camera = o;
 		return o;
 	}
+	
+	void setEnableInteractiveCamera(bool v);
 	
 protected:
 	
@@ -39,3 +40,4 @@ protected:
 void ramBeginCamera();
 void ramEndCamera();
 
+void ramEnableInteractiveCamera(bool v);

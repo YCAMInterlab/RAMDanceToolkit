@@ -3,10 +3,12 @@
 #include "ofMain.h"
 
 #include "ofxOsc.h"
+#include "ofxInteractivePrimitives.h"
 
 #include "ramConstants.h"
 #include "ramUtils.h"
 #include "ramActor.h"
+#include "ramNodeIdentifer.h"
 
 class ramActorManager
 {
@@ -17,6 +19,7 @@ public:
 	ofEvent<ramRigidBody> rigidEntered;
 	ofEvent<ramRigidBody> rigidExited;
 	
+	ofEvent<ramNodeIdentifer> selectStateChanged;
 	
 	// singleton
 	inline static ramActorManager& instance()
@@ -37,13 +40,26 @@ public:
 	inline const vector<string>& getRigidBodyNames() { return rigids.keys(); }
 	inline ramRigidBody& getRigidBody(int index) { return rigids[index]; }
 	inline ramRigidBody& getRigidBody(const string& name) { return rigids[name]; }
+	
+	// node
+	inline size_t getNumNodeArray() { return nodearray.size(); }
+	inline const vector<string>& getNodeArrayNames() { return nodearray.keys(); }
+	inline ramNodeArray& getNodeArray(int index) { return nodearray[index]; }
+	inline ramNodeArray& getNodeArray(const string& name) { return nodearray[name]; }
 
+	void setup();
 	void update();
+	void draw();
+	
 	void updateWithOscMessage(const ofxOscMessage &m);
+	
+	const ramNodeIdentifer& getSelectedNode();
+	
+	void onSelectStateChanged(ramNodeIdentifer &e);
+//	void setActorToBus(const string& bus_name, );
 
 private:
 
-    
 	static ramActorManager *_instance;
 
 	// noncopyable
@@ -52,7 +68,14 @@ private:
 	ramActorManager& operator=(const ramActorManager&) { return *this; }
 	~ramActorManager() {};
 
+	ramCompoundContainer<ramNodeArray> nodearray;
 	ramCompoundContainer<ramActor> actors;
 	ramCompoundContainer<ramRigidBody> rigids;
+	
+	ofxInteractivePrimitives::RootNode rootNode;
+	
+	class NodeSelector;
+	friend class NodeSelector;
+	NodeSelector *nodeSelector;
 };
 
