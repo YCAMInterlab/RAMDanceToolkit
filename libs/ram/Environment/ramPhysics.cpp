@@ -75,7 +75,7 @@ void ramPhysics::unregisterPrimitive(ramPrimitive *o)
 {
 	vector<ramPrimitive*>::iterator it = find(primitives.begin(), primitives.end(), o);
 	if (it == primitives.end()) return;
-	world.disposeRigidBody(o->rigid);
+	world.removeRigidBody(o->rigid);
 	primitives.erase(it);
 }
 

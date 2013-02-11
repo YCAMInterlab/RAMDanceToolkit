@@ -1,6 +1,7 @@
 #include "ramSharedData.h"
 #include "ramBaseApp.h"
 #include "ramControlPanel.h"
+#include "ramPhysics.h"
 
 #include <numeric>
 
@@ -20,6 +21,7 @@ void ramInit()
 	ofSetLogLevel(OF_LOG_SILENT);
 	
 	ramSharedData::instance().setup();
+	ramPhysics::instance();
 	
 	ramGetGUI().setup();
 //	ramGetGUI().loadFont(ramToResourcePath("Fonts/din-webfont.ttf"), 10);
