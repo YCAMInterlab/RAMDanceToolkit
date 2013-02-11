@@ -20,6 +20,20 @@ ramNode& ramNode::operator=(const ramNode& copy)
 	return *this;
 }
 
+void ramNode::drawId()
+{
+	ofVec3f pos = getPosition();
+	pos.y += 30;
+	ofDrawBitmapString(ofToString(getID()), pos);
+}
+
+void ramNode::drawName()
+{
+	ofVec3f pos = getPosition();
+	pos.y += 30;
+	ofDrawBitmapString(ofToString(getName()), pos);
+}
+
 
 #pragma mark - ramNodeArray
 
