@@ -12,7 +12,7 @@ public:
 	ramPrimitive();
 	~ramPrimitive();
 	
-	btRigidBody* getRigidBody() { return rigid; }
+	ofxBt::RigidBody getRigidBody() { return rigid; }
 	
 protected:
 	

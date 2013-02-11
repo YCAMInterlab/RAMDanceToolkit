@@ -213,6 +213,7 @@
 		6007E97316C78B740056BD73 /* ramControllable.h in Headers */ = {isa = PBXBuildFile; fileRef = 6007E97216C78B740056BD73 /* ramControllable.h */; };
 		6007E97616C790BA0056BD73 /* ramSimpleShadow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6007E97416C790BA0056BD73 /* ramSimpleShadow.cpp */; };
 		6007E97716C790BA0056BD73 /* ramSimpleShadow.h in Headers */ = {isa = PBXBuildFile; fileRef = 6007E97516C790BA0056BD73 /* ramSimpleShadow.h */; };
+		6060971316C7D4120006B675 /* ofxBtHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6060971216C7D4120006B675 /* ofxBtHelper.cpp */; };
 		606D730A16B9311C00C95401 /* guiBaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 606D72CF16B9311C00C95401 /* guiBaseObject.cpp */; };
 		606D730B16B9311C00C95401 /* guiBaseObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 606D72D016B9311C00C95401 /* guiBaseObject.h */; };
 		606D730C16B9311C00C95401 /* guiCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 606D72D116B9311C00C95401 /* guiCallback.cpp */; };
@@ -558,6 +559,7 @@
 		6007E97216C78B740056BD73 /* ramControllable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramControllable.h; sourceTree = "<group>"; };
 		6007E97416C790BA0056BD73 /* ramSimpleShadow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramSimpleShadow.cpp; sourceTree = "<group>"; };
 		6007E97516C790BA0056BD73 /* ramSimpleShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSimpleShadow.h; sourceTree = "<group>"; };
+		6060971216C7D4120006B675 /* ofxBtHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBtHelper.cpp; sourceTree = "<group>"; };
 		606D72CC16B9311C00C95401 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		606D72CD16B9311C00C95401 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		606D72CF16B9311C00C95401 /* guiBaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = guiBaseObject.cpp; sourceTree = "<group>"; };
@@ -727,6 +729,7 @@
 				600760AA16B6954300C106E2 /* ofxBt.h */,
 				600760AB16B6954300C106E2 /* ofxBtCollisionObject.cpp */,
 				600760AC16B6954300C106E2 /* ofxBtCollisionObject.h */,
+				6060971216C7D4120006B675 /* ofxBtHelper.cpp */,
 				600760AD16B6954300C106E2 /* ofxBtHelper.h */,
 				600760AE16B6954300C106E2 /* ofxBtRender.h */,
 				600760AF16B6954300C106E2 /* ofxBtRigidBody.cpp */,
@@ -1794,6 +1797,7 @@
 				60F95BCD16B933CF0016E390 /* ramControlPanel.cpp in Sources */,
 				9A48CE0C16BA4E5600D9C997 /* ramCameraSettings.cpp in Sources */,
 				6007E97616C790BA0056BD73 /* ramSimpleShadow.cpp in Sources */,
+				6060971316C7D4120006B675 /* ofxBtHelper.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
