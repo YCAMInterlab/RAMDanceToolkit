@@ -14,10 +14,10 @@ class Future : public ramSceneBase
 	
 public:
 	
+	string getSceneName() { return "Future"; }
+	
 	Future()
 	{
-		setSceneName("Future");
-		
 		// ---
 		
 		pe.setup(100000);

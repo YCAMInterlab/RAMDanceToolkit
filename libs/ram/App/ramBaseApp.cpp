@@ -3,6 +3,7 @@
 #include "ramBaseApp.h"
 #include "ramCameraManager.h"
 #include "ramControlPanel.h"
+#include "ramPhysics.h"
 
 void ramBaseApp::exit(ofEventArgs &args)
 {
@@ -22,6 +23,9 @@ void ramBaseApp::draw(ofEventArgs &args)
     
 	drawFloor();
 
+	bool enable_physics = ramGetEnablePhysicsPrimitive();
+	ramSetEnablePhysicsPrimitive(false);
+	
 	{
 		// draw shadow
 		
@@ -41,6 +45,8 @@ void ramBaseApp::draw(ofEventArgs &args)
 		
 		ramSharedData::instance().shadow.end();
 	}
+	
+	ramSetEnablePhysicsPrimitive(enable_physics);
 	
 	{
 		// draw object
