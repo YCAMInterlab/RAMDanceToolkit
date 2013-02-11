@@ -40,5 +40,4 @@ public:
 	// ...
 	// ------------------------
 	ramOscReceiver oscReceiver;
-	ramSceneManager sceneManager;
 };
