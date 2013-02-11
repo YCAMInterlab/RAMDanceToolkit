@@ -28,6 +28,13 @@ public:
 	}
 
 	size_t size() { return array.size(); }
+	
+	void clear()
+	{
+		array.clear();
+		hash.clear();
+		hash_keys.clear();
+	}
 
 	// array
 
