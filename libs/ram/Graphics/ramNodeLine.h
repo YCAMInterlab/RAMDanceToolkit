@@ -146,6 +146,21 @@ public:
 		return *this;
 	}
 	
+	ramNodeLine& extend(float length = 1000)
+	{
+		if (polyline.size() < 2) return *this;
+		
+		ofVec3f &p0 = polyline[0];
+		ofVec3f &p1 = polyline[1];
+		ofVec3f &pN = polyline[polyline.size() - 1];
+		ofVec3f &pNm1 = polyline[polyline.size() - 2];
+		
+		p0 += (p0 - p1).normalized() * length;
+		pN += (pN - pNm1).normalized() * length;
+		
+		return *this;
+	}
+	
 	void draw()
 	{
 		polyline.draw();
