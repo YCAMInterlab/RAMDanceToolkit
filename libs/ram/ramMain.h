@@ -24,6 +24,8 @@
 /// filters
 #include "ramAnalyzer.h"
 #include "ramGhost.h"
+#include "ramPendulum.h"
+#include "ramHangedMan.h"
 
 
 /// utility

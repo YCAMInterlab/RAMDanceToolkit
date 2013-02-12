@@ -1,7 +1,7 @@
 #include "testApp.h"
 
 
-ramPendulum pendulum;
+ramHangedMan hangedMan;
 
 
 #pragma mark - oF methods
@@ -18,9 +18,6 @@ void testApp::setup()
 	ramInit();
 	oscReceiver.setup(10000);
 	
-	
-	pendulum.setup();
-	ramGetGUI().addPanel(&pendulum);
 }
 
 //--------------------------------------------------------------
@@ -29,6 +26,7 @@ void testApp::update()
 	/// Entities update
 	// ------------------
 	oscReceiver.update();
+	
 }
 
 //--------------------------------------------------------------
@@ -38,12 +36,13 @@ void testApp::draw()
 }
 
 
+
 #pragma mark - ram methods
 
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramActor &a = (ramActor&)pendulum.update(actor);
+	ramActor &a = (ramActor&)hangedMan.update(actor);
 	ramBasicActor(a);
 }
 

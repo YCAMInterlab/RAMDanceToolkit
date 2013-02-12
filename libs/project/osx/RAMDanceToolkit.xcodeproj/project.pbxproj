@@ -255,6 +255,7 @@
 		60E55EF616C93E1B00A1BF13 /* ramNodeLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 60E55EF416C93E1B00A1BF13 /* ramNodeLine.h */; };
 		60F95BCD16B933CF0016E390 /* ramControlPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60F95BCC16B933CF0016E390 /* ramControlPanel.cpp */; };
 		9A48CE0C16BA4E5600D9C997 /* ramCameraSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A58D05216B982C70084E63F /* ramCameraSettings.cpp */; };
+		9A7556AC16CA0FBD00482F6E /* ramHangedMan.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A7556AB16CA0FBD00482F6E /* ramHangedMan.h */; };
 		9AD6F5A316B926C000F7F51E /* ofxUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F4FF16B926BF00F7F51E /* ofxUI.h */; };
 		9AD6F5A416B926C000F7F51E /* ofxUI2DPad.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F50016B926BF00F7F51E /* ofxUI2DPad.h */; };
 		9AD6F5A516B926C000F7F51E /* ofxUIBaseDraws.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F50116B926BF00F7F51E /* ofxUIBaseDraws.h */; };
@@ -591,6 +592,7 @@
 		60E55EF416C93E1B00A1BF13 /* ramNodeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeLine.h; sourceTree = "<group>"; };
 		60F95BCC16B933CF0016E390 /* ramControlPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramControlPanel.cpp; sourceTree = "<group>"; };
 		9A58D05216B982C70084E63F /* ramCameraSettings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ramCameraSettings.cpp; sourceTree = "<group>"; };
+		9A7556AB16CA0FBD00482F6E /* ramHangedMan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramHangedMan.h; sourceTree = "<group>"; };
 		9AD6F4FF16B926BF00F7F51E /* ofxUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI.h; sourceTree = "<group>"; };
 		9AD6F50016B926BF00F7F51E /* ofxUI2DPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI2DPad.h; sourceTree = "<group>"; };
 		9AD6F50116B926BF00F7F51E /* ofxUIBaseDraws.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIBaseDraws.h; sourceTree = "<group>"; };
@@ -1349,6 +1351,7 @@
 		9AD6F63516B927E100F7F51E /* Filter */ = {
 			isa = PBXGroup;
 			children = (
+				9A7556AB16CA0FBD00482F6E /* ramHangedMan.h */,
 				9AEDAAEC16C8FD0B00D03375 /* ramPendulum.h */,
 				9AEDAAD816C8D87E00D03375 /* ramExpand.h */,
 				6007E97016C77F2D0056BD73 /* ramFilter.h */,
@@ -1720,6 +1723,7 @@
 				9AF81AF916C93C0300C1A560 /* ofxIPStringBox.h in Headers */,
 				9AF81AFE16C93C3A00C1A560 /* ramNodeIdentifer.h in Headers */,
 				60E55EF616C93E1B00A1BF13 /* ramNodeLine.h in Headers */,
+				9A7556AC16CA0FBD00482F6E /* ramHangedMan.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
