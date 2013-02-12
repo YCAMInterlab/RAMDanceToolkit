@@ -55,10 +55,8 @@ public:
 		}
 		else
 		{
-			ofLogWarning("RAMDanceToolkit") << "invalid key";
-			static T ret;
-			ret = T();
-			return ret;
+			ofLogError("RAMDanceToolkit::ramCompoundContainer") << "invalid key: " << key;
+			assert(false);
 		}
 	}
 

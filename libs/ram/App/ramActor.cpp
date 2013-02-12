@@ -4,7 +4,7 @@
 
 string getJointName(unsigned int jointId) { return ramActor::getJointName(jointId); }
 
-ramNode::ramNode() : ofNode(), parent(NULL), node_id(-1)
+ramNode::ramNode() : ofNode(), node_id(-1)
 {
 }
 
