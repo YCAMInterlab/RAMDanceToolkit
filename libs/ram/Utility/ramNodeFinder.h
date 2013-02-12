@@ -23,9 +23,20 @@ public:
 	// safety API
 	bool get(ramNode &node)
     {
-		if (!found()) return false;
-        node = getActorManager().getNodeArray(name).getNode(index);
-		return true;
+		if (!getActorManager().hasNodeArray(name))
+		{
+			if (getActorManager().getNumNodeArray() > 0)
+			{
+				node = getActorManager().getNodeArray(0).getNode(index);
+				return true;
+			}
+			return false;
+		}
+		else
+		{
+			node = getActorManager().getNodeArray(name).getNode(index);
+			return true;
+		}
     }
 	
 	//
@@ -37,9 +48,9 @@ public:
 		bool has_target_actor = !name.empty();
 		bool has_target_node = index != -1;
 		
-		for (int i = 0; i < getActorManager().getNumActor(); i++)
+		for (int i = 0; i < getActorManager().getNumNodeArray(); i++)
         {
-			ramActor &actor = getActorManager().getActor(i);
+			ramNodeArray &actor = getActorManager().getNodeArray(i);
 			
 			if (has_target_actor && name != actor.getName()) continue;
 			
@@ -62,9 +73,9 @@ public:
 		bool has_target_actor = !name.empty();
 		bool has_target_node = index != -1;
 		
-		for (int i = 0; i < getActorManager().getNumActor(); i++)
+		for (int i = 0; i < getActorManager().getNumNodeArray(); i++)
         {
-			ramActor &actor = getActorManager().getActor(i);
+			ramNodeArray &actor = getActorManager().getNodeArray(i);
 			
 			if (has_target_actor && name != actor.getName()) continue;
 			
@@ -86,9 +97,9 @@ public:
     {
         vector<ramNode> nodes;
 		
-        for (int i=0; i<getActorManager().getNumActor(); i++)
+        for (int i=0; i<getActorManager().getNumNodeArray(); i++)
         {
-            ramNode &node = getActorManager().getActor(i).getNode(jointId);
+            ramNode &node = getActorManager().getNodeArray(i).getNode(jointId);
             nodes.push_back(node);
         }
 		
@@ -98,7 +109,7 @@ public:
 	static vector<ramNode> findNodes(const string& actoreName)
     {
         vector<ramNode> nodes;
-		ramActor &actor = getActorManager().getActor(actoreName);
+		ramNodeArray &actor = getActorManager().getNodeArray(actoreName);
 		
         for (int i=0; i<actor.getNumNode(); i++)
         {

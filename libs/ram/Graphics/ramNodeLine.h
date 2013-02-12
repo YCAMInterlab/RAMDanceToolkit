@@ -122,13 +122,27 @@ public:
 				axis.rotateRad(freq * TWO_PI, d);
 			}
 			
-			float s = sin(t * PI);
-			pp[i] = v0 + axis * radius * s;
+			pp[i] = v0 + axis * radius * sin(t * PI);
 			
 			phase += freq;
 		}
 		
 		polyline = pp;
+		return *this;
+	}
+	
+	ramNodeLine& noise(float scale = 5, float freq = 1, float fact = 0)
+	{
+		for (int i = 0; i < polyline.size(); i++)
+		{
+			float t = ofMap(i, 0, polyline.size() - 1, 0, 1);
+			float tt = t * freq;
+			ofVec3f v;
+			v.x = ofSignedNoise(100, tt, tt,  fact);
+			v.y = ofSignedNoise(tt, 100, tt,  fact);
+			v.z = ofSignedNoise(tt, tt, 100,  fact);
+			polyline[i] += v * scale * sin(t * PI);
+		}
 		return *this;
 	}
 	
