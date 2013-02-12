@@ -94,24 +94,36 @@ public:
 		return *this;
 	}
 	
-	ramNodeLine& spiral(float radius = 10, float freq = 10)
+	ramNodeLine& spiral(float radius = 10, float rotate = 10)
 	{
-		ofPolyline pp = polyline;
+		ofPolyline pp;
+		pp.resize(polyline.size());
 		
+		ofVec3f axis;
+		
+		float freq = (1. / polyline.size()) * rotate;
 		float phase = 0;
+		
 		for (int i = 0; i < polyline.size(); i++)
 		{
-			// FIXME: I'm not sure about this impl...
+			float t = ofMap(i, 0, polyline.size() - 1, 0, 1);
+			
 			ofVec3f &v0 = polyline[i];
 			ofVec3f &v1 = polyline[i + 1];
 			
 			ofVec3f d = (v1 - v0);
-			ofVec3f c = d.crossed(ofVec3f(0, 1, 0)).normalized();
+
+			if (i == 0)
+			{
+				axis = d.crossed(ofVec3f(0, 1, 0)).normalized();
+			}
+			else
+			{
+				axis.rotateRad(freq * TWO_PI, d);
+			}
 			
-			c *= radius;
-			c.rotate(phase, ofVec3f(d));
-			
-			pp[i] = v0 + c;
+			float s = sin(t * PI);
+			pp[i] = v0 + axis * radius * s;
 			
 			phase += freq;
 		}
