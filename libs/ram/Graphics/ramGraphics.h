@@ -88,7 +88,7 @@ void ramActorCube(ramActor& actor);
 void ramBox(const ramNode& o, float size);
 void ramSphere(const ramNode& o, float radius);
 
-void ramBasicActor(ramActor& actor,
+void ramBasicActor(const ramActor& actor,
 				   const ofColor& jointColor = ramColor::BLUE_LIGHT,
 				   const ofColor& lineColor = ramColor::GRAY);
 

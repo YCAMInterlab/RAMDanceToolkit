@@ -19,6 +19,7 @@
 
 /// graphics
 #include "ramGraphics.h"
+#include "ramNodeLine.h"
 
 
 /// filters

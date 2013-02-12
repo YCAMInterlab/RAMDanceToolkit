@@ -117,6 +117,17 @@ public:
 	
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
 	
+	// operators
+	
+	ramNodeArray operator+(const ramNodeArray &arr) const;
+	ramNodeArray& operator+=(const ramNodeArray &arr);
+	
+	ramNodeArray operator-(const ramNodeArray &arr) const;
+	ramNodeArray& operator-=(const ramNodeArray &arr);
+
+	ramNodeArray operator*(float s) const;
+	ramNodeArray& operator*=(float s);
+	
 protected:
 
 	string name;
@@ -126,6 +137,8 @@ protected:
 	float current_timestamp;
 
 	float last_update_client_time;
+	
+	void rebuildHierarchy(const ramNodeArray& ref);
 };
 
 #pragma mark - ramRigidBody

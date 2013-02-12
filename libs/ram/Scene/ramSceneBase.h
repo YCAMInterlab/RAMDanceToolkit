@@ -80,8 +80,19 @@ public:
 	virtual string getSceneName() { return "unnamed scene"; }
 
 	inline ramActorManager& getActorManager() { return ramActorManager::instance(); }
+	
+	inline bool hasActor(const string &key) { return ramActorManager::instance().hasActor(key); }
 	inline ramActor& getActor(string name) { return ramActorManager::instance().getActor(name); }
+	
+	inline size_t getNumActor() { return ramActorManager::instance().getNumActor(); }
+	inline ramActor& getActor(int index) { return ramActorManager::instance().getActor(index); }
+
+	inline bool hasRigidBody(const string &key) { return ramActorManager::instance().hasRigidBody(key); }
 	inline ramRigidBody& getRigidBody(string name) { return ramActorManager::instance().getRigidBody(name); }
+	
+	inline size_t getNumRigidBody() { return ramActorManager::instance().getNumRigidBody(); }
+	inline ramRigidBody& getRigidBody(int index) { return ramActorManager::instance().getRigidBody(index); }
+
 	inline ofCamera& getActiveCamera() { return ramCameraManager::instance().getActiveCamera(); }
 	
 	virtual void setup() {}

@@ -15,8 +15,8 @@ ramNode& ramNode::operator=(const ramNode& copy)
 	node_id = copy.node_id;
 	name = copy.name;
 	accerelometer = copy.accerelometer;
+	parent = copy.parent;
 	
-	parent = NULL;
 	return *this;
 }
 
@@ -41,15 +41,12 @@ ramNodeArray::ramNodeArray() : last_timestamp(0), current_timestamp(0), last_upd
 {
 }
 
-ramNodeArray& ramNodeArray::operator=(const ramNodeArray& copy)
+void ramNodeArray::rebuildHierarchy(const ramNodeArray& ref)
 {
-	name = copy.name;
-	nodes = copy.nodes;
-	
 	// rebuild hierarchy
-	for (int i = 0; i < copy.nodes.size(); i++)
+	for (int i = 0; i < ref.nodes.size(); i++)
 	{
-		const ramNode &src = copy.nodes[i];
+		const ramNode &src = ref.nodes[i];
 		ramNode &dst = nodes[i];
 		
 		ramNode *p = src.getParent();
@@ -60,12 +57,132 @@ ramNodeArray& ramNodeArray::operator=(const ramNodeArray& copy)
 		
 		dst.setParent(nodes[idx]);
 	}
+}
+
+ramNodeArray& ramNodeArray::operator=(const ramNodeArray& copy)
+{
+	name = copy.name;
+	nodes = copy.nodes;
+	
+	rebuildHierarchy(copy);
 	
 	last_timestamp = copy.last_timestamp;
 	current_timestamp = copy.current_timestamp;
-
 	last_update_client_time = copy.last_update_client_time;
+	
 	return *this;
+}
+
+ramNodeArray ramNodeArray::operator+(const ramNodeArray &arr) const
+{
+	assert(getNumNode() == arr.getNumNode());
+	
+	ramNodeArray result = *this;
+	
+	for (int i = 0; i < result.getNumNode(); i++)
+	{
+		const ramNode &src = arr.getNode(i);
+		ramNode &dst = result.getNode(i);
+		
+		dst.setPosition(dst.getPosition() + src.getPosition());
+		dst.setOrientation(src.getOrientationQuat() * dst.getOrientationQuat());
+	}
+	
+	return result;
+}
+
+ramNodeArray& ramNodeArray::operator+=(const ramNodeArray &arr)
+{
+	assert(getNumNode() == arr.getNumNode());
+
+	ramNodeArray &result = *this;
+	
+	for (int i = 0; i < result.getNumNode(); i++)
+	{
+		const ramNode &src = arr.getNode(i);
+		ramNode &dst = result.getNode(i);
+		
+		dst.setPosition(dst.getPosition() + src.getPosition());
+		dst.setOrientation(src.getOrientationQuat() * dst.getOrientationQuat());
+	}
+	
+	return result;
+}
+
+ramNodeArray ramNodeArray::operator-(const ramNodeArray &arr) const
+{
+	assert(getNumNode() == arr.getNumNode());
+	
+	ramNodeArray result = *this;
+	
+	for (int i = 0; i < result.getNumNode(); i++)
+	{
+		const ramNode &src = arr.getNode(i);
+		ramNode &dst = result.getNode(i);
+		
+		dst.setPosition(dst.getPosition() - src.getPosition());
+		dst.setOrientation(src.getOrientationQuat().inverse() * dst.getOrientationQuat());
+	}
+	
+	return result;
+}
+
+ramNodeArray& ramNodeArray::operator-=(const ramNodeArray &arr)
+{
+	assert(getNumNode() == arr.getNumNode());
+	
+	ramNodeArray &result = *this;
+	
+	for (int i = 0; i < result.getNumNode(); i++)
+	{
+		const ramNode &src = arr.getNode(i);
+		ramNode &dst = result.getNode(i);
+		
+		dst.setPosition(dst.getPosition() - src.getPosition());
+		dst.setOrientation(src.getOrientationQuat().inverse() * dst.getOrientationQuat());
+	}
+	
+	return result;
+}
+
+ramNodeArray ramNodeArray::operator*(float s) const
+{
+	ramNodeArray result = *this;
+	
+	static const ofQuaternion norm;
+	
+	for (int i = 0; i < result.getNumNode(); i++)
+	{
+		ramNode &dst = result.getNode(i);
+		
+		dst.setPosition(dst.getPosition() * s);
+		
+		ofQuaternion q;
+		q.slerp(s, norm, dst.getOrientationQuat());
+		dst.setOrientation(q);
+	}
+	
+	return result;
+}
+
+ramNodeArray& ramNodeArray::operator*=(float s)
+{
+	ramNodeArray &result = *this;
+	
+	static const ofQuaternion norm;
+	
+	for (int i = 0; i < result.getNumNode(); i++)
+	{
+		ramNode &dst = result.getNode(i);
+		
+		dst.setPosition(dst.getPosition() * s);
+		
+		ofQuaternion q;
+		q.slerp(s, norm, dst.getOrientationQuat());
+		dst.setOrientation(q);
+	}
+	
+	return result;
 }
 
 void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
