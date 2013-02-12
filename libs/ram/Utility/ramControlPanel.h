@@ -22,16 +22,7 @@ public:
 	const float kLength = 320-kXInit;
 	const string kCamSettingFile = ramToResourcePath("Settings/cam.default_positions.xml");
 	
-	inline ofColor getBackgroundColor() { return ofColor(mR, mG, mB); }
-	inline int getFloorPattern() { return mFloorPattern; }
-	inline float getFloorSize() { return mFloorSize; }
-	inline float getGridSize() { return mGridSize; }
-	
-	inline ofxUITabbedCanvas& getTabbedCanvas() { return mTabbedCanvas; }
-	inline ofxUIToggleMatrix* getSceneToggles() { return mSceneToggles; }
-	
 	static ramControlPanel& instance();
-	
 	virtual ~ramControlPanel() {}
 	
 	void setup();
@@ -41,6 +32,14 @@ public:
 	void reloadCameraSetting(const int index);
 	
 	void addPanel(ramControllable* control);
+	
+	inline ofColor getBackgroundColor() { return ofColor(mR, mG, mB); }
+	inline int getFloorPattern() { return mFloorPattern; }
+	inline float getFloorSize() { return mFloorSize; }
+	inline float getGridSize() { return mGridSize; }
+	
+	inline ofxUITabbedCanvas& getTabbedCanvas() { return mTabbedCanvas; }
+	inline ofxUIToggleMatrix* getSceneToggles() { return mSceneToggles; }
 	
 	void guiEvent(ofxUIEventArgs &e);
 	

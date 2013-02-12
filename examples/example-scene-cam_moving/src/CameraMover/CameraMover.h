@@ -187,7 +187,7 @@ public:
 	{
 		mSettingXml.loadFile(mXmlPath);
 		mSettings = ramCameraSettings::getSettings(mSettingXml);
-		refreshPanel(mPanel);
+//		refreshPanel(mPanel);
 		cout << "[" << getName() << "] settings reloaded." << endl;
 	}
 	
@@ -200,7 +200,10 @@ public:
 		
 		/// Label: Title
 		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addWidgetDown(new ofxUILabel("Press 'r' key to reload xml settings", OFX_UI_FONT_SMALL));
+		panel->addSpacer(gui.kLength, 2);
+		panel->addButton("Reload setting file", false, 50, 50);
+		panel->addSpacer(gui.kLength, 2);
+		panel->addWidgetDown(new ofxUILabel("or press 'r' key to reload xml settings", OFX_UI_FONT_SMALL));
 		panel->addSpacer(gui.kLength, 2);
 		
 		
@@ -218,20 +221,27 @@ public:
 	{
 		string name = e.widget->getName();
 		
-		for (int i=0; i<mSettings.size(); i++)
+		if (name == "Reload setting file")
 		{
-			ramCameraSettings &setting = mSettings.at(i);
-			
-			if(name == setting.name)
+			reloadSettings();
+		}
+		else
+		{
+			for (int i=0; i<mSettings.size(); i++)
 			{
-				setting.prepareForPlay();
-				mCurSetting = setting;
+				ramCameraSettings &setting = mSettings.at(i);
 				
-				cout << "[" << getName() << "] current setting:" << mCurSetting.name << endl;
-			}
-			else
-			{
-				setting.reset();
+				if(name == setting.name)
+				{
+					setting.prepareForPlay();
+					mCurSetting = setting;
+					
+					cout << "[" << getName() << "] current setting:" << mCurSetting.name << endl;
+				}
+				else
+				{
+					setting.reset();
+				}
 			}
 		}
 	}

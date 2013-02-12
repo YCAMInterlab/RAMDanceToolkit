@@ -22,6 +22,8 @@ ramControlPanel::ramControlPanel()
 	mFloorSize = 600.0;
 	mGridSize = 50.0;
 	mLabelCamPos = new ofxUILabel("x:0 y:0 z:0", OFX_UI_FONT_MEDIUM);
+	
+	scenes = NULL;
 }
 
 void ramControlPanel::setup()
@@ -154,6 +156,7 @@ void ramControlPanel::guiEvent(ofxUIEventArgs &e)
 	else if ( name == "CAM_EDGE_BL" )	reloadCameraSetting( 8 );
 	else if ( name == "CAM_EDGE_FL" )	reloadCameraSetting( 9 );
 	
+	/// scene togglematrix
 	if (scenes != NULL)
 	{
 		vector<ofxUIToggle *> toggles = mSceneToggles->getToggles();
@@ -162,7 +165,7 @@ void ramControlPanel::guiEvent(ofxUIEventArgs &e)
 		for (int i=0; i<numToggles; i++)
 		{
 			if (i >= scenes->size()) break;
-			cout << i;
+			
 			ramSceneBase *scene = scenes->at(i);
 			scene->setEnabled( toggles.at(i)->getValue() );
 		}

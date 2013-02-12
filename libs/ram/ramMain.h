@@ -25,6 +25,7 @@
 #include "ramAnalyzer.h"
 #include "ramGhost.h"
 #include "ramPendulum.h"
+#include "ramExpand.h"
 #include "ramHangedMan.h"
 
 
