@@ -21,6 +21,8 @@ struct ramNodeIdentifer
 	}
 	
 	void set(const string &name, int index) { this->name = name; this->index = index; }
-	
+	void set(const string &name) { this->name = name; this->index = -1; }
+	void set(int index) { this->name = ""; this->index = index; }
+
 	void clear() { name = ""; index = -1; }
 };
