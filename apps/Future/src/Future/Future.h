@@ -33,11 +33,8 @@ public:
 		key_toggle_pe = "Salt";
 	}
 	
-	void refreshControlPanel(ramControlPanel& gui)
+	void setupControlPanel(ramControlPanel& gui)
 	{
-		guiPtr = &gui;
-		
-		gui.addPanel("Future");
 		gui.addToggle(key_toggle_draw, true);
 		gui.addToggle(key_toggle_pe);
 		gui.addSlider(key_slider_speed, 200, 0, 1000);
@@ -61,13 +58,13 @@ public:
 		
 		pe.update();
 		
-		if(guiPtr->hasValueChanged( variadic(key_slider_distance)(key_slider_speed)(key_toggle_pe)(key_toggle_draw) ))
+		if(gui().hasValueChanged( variadic(key_slider_distance)(key_slider_speed)(key_toggle_pe)(key_toggle_draw) ))
 		{
-			float speed = guiPtr->getValueF(key_slider_speed);
-			float distance = guiPtr->getValueF(key_slider_distance);
+			float speed = gui().getValueF(key_slider_speed);
+			float distance = gui().getValueF(key_slider_distance);
 			
-			bGhost = guiPtr->getValueB(key_toggle_draw);
-			bParticle = guiPtr->getValueB(key_toggle_pe);
+			bGhost = gui().getValueB(key_toggle_draw);
+			bParticle = gui().getValueB(key_toggle_pe);
 			
 			ghost.setSpeed(speed);
 			ghost.setDistance(distance);
@@ -77,8 +74,6 @@ public:
 	
 	void draw()
 	{
-		if (!bEnabled) return;
-		
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		ofPushStyle();
 		ofNoFill();
@@ -113,16 +108,16 @@ public:
 				 */
 				ofColor shadowColor = ramColor::GRAY;
 				shadowColor.a = 90;
-				glPushMatrix();
-				glDisable(GL_DEPTH_TEST);
-				glMultMatrixf(getMatrix().getPtr());
+				
+				ramGlobal().beginShadowMatrix();
 				ofEnableAlphaBlending();
 				ofSetColor(shadowColor);
 				
 				ofBox(node, boxSize);
 				if (node.hasParent())
 					ofLine(node, *node.getParent());
-				glPopMatrix();
+				
+				ramGlobal().endShadowMatrix();
 			}
 		}
 		

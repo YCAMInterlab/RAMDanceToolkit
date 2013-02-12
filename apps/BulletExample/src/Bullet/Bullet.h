@@ -22,10 +22,8 @@ public:
 		sphere = new ramSpherePrimitive(ofVec3f(0, 0, 0), 50);
 	}
 	
-	void refreshControlPanel(ramControlPanel& gui)
+	void setupControlPanel(ramControlPanel& gui)
 	{
-		guiPtr = &gui;
-		guiPtr->addPanel(getSceneName());
 	}
 	
 	void update()
@@ -35,8 +33,6 @@ public:
 	
 	void draw()
 	{
-		if (!bEnabled) return;
-		
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glEnable(GL_DEPTH_TEST);
 		glPushMatrix();
@@ -55,8 +51,6 @@ public:
 	
 	void drawActor(ramActor &actor)
 	{
-		if (!bEnabled) return;
-		
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glEnable(GL_DEPTH_TEST);
 		glPushMatrix();

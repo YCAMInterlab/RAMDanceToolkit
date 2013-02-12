@@ -14,7 +14,7 @@ public:
 	void update(ramNodeArray& nodeArray)
 	{
 		ofVec3f avarage;
-		ofVec3f axis = nodeArray.getNode(ramActor::JOINT_CHEST).getPosition();
+		ofVec3f axis = nodeArray.getNode(ramActor::JOINT_CHEST).getGlobalPosition();
 		avarage += axis;
 		
 		const int size = nodeArray.getNumNode();
@@ -23,7 +23,7 @@ public:
 		{
 			ramNode &node = nodeArray.getNode(i);
 			
-			ofVec3f pos = nodeArray.getNode(i).getPosition();
+			ofVec3f pos = nodeArray.getNode(i).getGlobalPosition();
 			
 			ofVec3f dist(pos - axis);
 			dist *= weightBalance.at(i);

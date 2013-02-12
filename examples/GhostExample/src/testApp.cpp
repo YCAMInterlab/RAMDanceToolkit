@@ -4,15 +4,20 @@
 static const string myActorName = "default_unknown_date";
 ramGhost ghost;
 
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
+<<<<<<< HEAD:examples/GhostExample/src/testApp.cpp
 	ofBackground( ramColor::WHITE );
 	
+=======
+	ofBackground( ramColor::WHITE-20 );
+
+	ramGlobal().init();
+>>>>>>> 38c7636e30447f1bac43815459402028cd519d87:apps/EmptyExample/src/testApp.cpp
 	
 	/*!
 	 ramBaseApp setup
@@ -20,6 +25,7 @@ void testApp::setup()
 	ramEnableAllEvents();
 	oscReceiver.setup(10000);
 	
+<<<<<<< HEAD:examples/GhostExample/src/testApp.cpp
 	
 	/*!
 	 GUI setup
@@ -29,28 +35,40 @@ void testApp::setup()
 	gui.loadCameraSettings("settings.camera.xml");
 	
 	
+=======
+>>>>>>> 38c7636e30447f1bac43815459402028cd519d87:apps/EmptyExample/src/testApp.cpp
 	/*!
 	 Ghost setup
 	 */
+<<<<<<< HEAD:examples/GhostExample/src/testApp.cpp
 	ghost.setDistance(150.0);
 	ghost.setSpeed(27.0);
 	ghost.setHistorySize(10);
+=======
+	vector<ramSceneBase*> scenes;
+	scenes.push_back( empty.getPtr() );
+	sceneManager.setup(scenes);
+>>>>>>> 38c7636e30447f1bac43815459402028cd519d87:apps/EmptyExample/src/testApp.cpp
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/* Entities update */
 	oscReceiver.update();
+<<<<<<< HEAD:examples/GhostExample/src/testApp.cpp
 	
 	
 	// update ghost with passing ramActor
 	ghost.update( getActor(myActorName) );
+=======
+	sceneManager.update();
+>>>>>>> 38c7636e30447f1bac43815459402028cd519d87:apps/EmptyExample/src/testApp.cpp
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
+<<<<<<< HEAD:examples/GhostExample/src/testApp.cpp
 	// get processed ramActor ref
 	ramActor& actor = ghost.getActor();
 
@@ -59,6 +77,9 @@ void testApp::draw()
 		ramBasicActor( actor, NULL );
 	}
 	ramCameraEnd();
+=======
+	sceneManager.draw();
+>>>>>>> 38c7636e30447f1bac43815459402028cd519d87:apps/EmptyExample/src/testApp.cpp
 }
 
 
@@ -67,6 +88,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawFloor()
 {
+	ramControlPanel &gui = ramGlobal().getGUI();
 	ramBasicFloor(gui.getValueI("Floor pattern"),
 				  gui.getValueF("Floor size"),
 				  gui.getValueF("Grid size"),
@@ -77,15 +99,25 @@ void testApp::drawFloor()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
+<<<<<<< HEAD:examples/GhostExample/src/testApp.cpp
 	ramBasicActor( actor, NULL );
+=======
+	ramControlPanel &gui = ramGlobal().getGUI();
+	if ( gui.getValueB("Draw Actor") )
+	{
+		ramBasicActor(actor);
+		
+		ramGlobal().beginShadowMatrix();
+		ramBasicActor(actor, ramColor::SHADOW, ramColor::SHADOW);
+		ramGlobal().endShadowMatrix();
+	}
+>>>>>>> 38c7636e30447f1bac43815459402028cd519d87:apps/EmptyExample/src/testApp.cpp
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
-	
 }
-
 
 
 

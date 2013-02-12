@@ -13,8 +13,8 @@ void ramBaseApp::draw(ofEventArgs &args)
 	
     cam.begin();
     
-    // floor
-    drawFloor();
+	// floor
+	drawFloor();
 	
     // actors
 	for (int n = 0; n < getActorManager().getNumActor(); n++)

@@ -4,7 +4,31 @@
 #include "ramPrimitive.h"
 #include "ramUtils.h"
 
+#pragma mark - ramColor
 
+const ofColor ramColor::RED_NORMAL		= ofColor::fromHex(0xff6666);
+const ofColor ramColor::RED_DEEP		= ofColor::fromHex(0x993333);
+const ofColor ramColor::RED_LIGHT	 	= ofColor::fromHex(0xff9898);
+
+const ofColor ramColor::GREEN_NORMAL 	= ofColor::fromHex(0x66cc33);
+const ofColor ramColor::GREEN_DEEP		= ofColor::fromHex(0x339900);
+const ofColor ramColor::GREEN_LIGHT 	= ofColor::fromHex(0x99cc99);
+
+const ofColor ramColor::BLUE_NORMAL 	= ofColor::fromHex(0x0099cc);
+const ofColor ramColor::BLUE_DEEP   	= ofColor::fromHex(0x003366);
+const ofColor ramColor::BLUE_LIGHT  	= ofColor::fromHex(0x99cccc);
+
+const ofColor ramColor::YELLOW_NORMAL	= ofColor::fromHex(0xffcc00);
+const ofColor ramColor::YELLOW_DEEP 	= ofColor::fromHex(0xcc9900);
+const ofColor ramColor::YELLOW_LIGHT	= ofColor::fromHex(0xffff00);
+
+const ofColor ramColor::BLACK			= ofColor::fromHex(0x000000);
+const ofColor ramColor::GRAY			= ofColor::fromHex(0x666666);
+const ofColor ramColor::WHITE			= ofColor::fromHex(0xffffff);
+
+const ofColor ramColor::SHADOW			= ofColor(0,0,0,60);
+
+//
 
 void ramBox(const ramNode& o, float size)
 {
@@ -21,15 +45,18 @@ void ramBox(const ramNode& o, float size)
 
 void ramSphere(const ramNode& o, float radius)
 {
-	ofSphere(o, radius);
+	o.transformBegin();
+	ofSphere(radius);
+	o.transformEnd();
 	
 	if (ramGetEnablePhysicsPrimitive())
 	{
-		ramSpherePrimitive *p = new ramSpherePrimitive(o.getPosition(), radius);
+		ramSpherePrimitive *p = new ramSpherePrimitive(o.getGlobalPosition(), radius);
 		ramPhysics::instance().registerTempraryPrimitive(p);
 	}
 }
 
+//
 
 void ramBasicFloor(const int floorPattern,
 				   const float floorSize,
@@ -95,12 +122,9 @@ void ramBasicFloor(const int floorPattern,
 
 
 void ramBasicActor(ramActor& actor,
-				   ofColor jointColor,
-				   ofColor lineColor,
-				   float* matrixPtr)
+				   const ofColor& jointColor,
+				   const ofColor& lineColor)
 {
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	glEnable(GL_DEPTH_TEST);
 	glPushMatrix();
 	for (int i=0; i<actor.getNumNode(); i++)
 	{
@@ -117,44 +141,18 @@ void ramBasicActor(ramActor& actor,
 			ofSetColor( lineColor );
 			ofLine(node, *node.getParent());
 		}
-		
-		
-		if (matrixPtr != NULL)
-		{
-			ofColor shadowColor = ramColor::GRAY;
-			shadowColor.a = 50;
-			glPushMatrix();
-			glDisable(GL_DEPTH_TEST);
-			glMultMatrixf(matrixPtr);
-			ofEnableAlphaBlending();
-			ofSetColor(shadowColor);
-			
-			ofBox(node, jointSize);
-			if (node.hasParent())
-				ofLine(node, *node.getParent());
-			glPopMatrix();
-		}
 	}
 	glPopMatrix();
-	glDisable(GL_DEPTH_TEST);
-	glPopAttrib();
-	
 }
-
-void ramBasicActor(ramActor& actor, float* matrixPtr)
-{
-	ramBasicActor(actor, ramColor::BLUE_LIGHT, ramColor::GRAY, matrixPtr);
-}
-
 
 void ramActorCube(ramActor& actor)
 {
-	ofVec3f maxPos = actor.getNode( ramActor::JOINT_CHEST ).getPosition();
-	ofVec3f minPos = actor.getNode( ramActor::JOINT_CHEST ).getPosition();
+	ofVec3f maxPos = actor.getNode( ramActor::JOINT_CHEST ).getGlobalPosition();
+	ofVec3f minPos = actor.getNode( ramActor::JOINT_CHEST ).getGlobalPosition();
 	
 	for (int j=0; j<actor.getNumNode(); j++)
 	{
-		ofVec3f pos = actor.getNode(j).getPosition();
+		ofVec3f pos = actor.getNode(j).getGlobalPosition();
 		
 		if( maxPos.x <= pos.x ) maxPos.x = pos.x;
 		if( maxPos.y <= pos.y ) maxPos.y = pos.y;

@@ -1,16 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
+
 #include "ramMain.h"
-#include "ofxXmlSettings.h"
-
-
-/*!
- for debuging....
- */
-static const string myActorName = "default";
-//static const string myActorName = "default";
-
 
 class testApp : public ramBaseApp
 {
@@ -41,16 +33,6 @@ public:
     
 	// ...
 	// ------------------------
-	vector<ramSceneBase*> scenes;
 	ramOscReceiver oscReceiver;
-	ramControlPanel gui;
-	
-	ofMatrix4x4 shadowMat;
-	
-	
-	// Setting files
-	// ------------------------
-		
-	ofxXmlSettings camSettingXml;
-	vector<ramCameraSettings> setting_cam;
+
 };

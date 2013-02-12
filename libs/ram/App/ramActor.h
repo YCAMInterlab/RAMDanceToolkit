@@ -78,7 +78,7 @@ public:
 	inline ofQuaternion getAngularVelocity() { return accerelometer.angular_velocity; }
 	inline ofQuaternion getAngularAcceleration() { return accerelometer.angular_acceleration; }
 	
-	operator ofVec3f() const {return getPosition();}
+	operator ofVec3f() const { return getGlobalPosition(); }
 	
 	inline ramAccelerometer& getAccerelometer() { return accerelometer; }
 	
@@ -89,13 +89,7 @@ private:
 
 	ramNode *parent;
 	ramAccelerometer accerelometer;
-
-	// ignore global transform function
-	ofMatrix4x4 getGlobalTransformMatrix() const { return ofMatrix4x4(); }
-	ofVec3f getGlobalPosition() const { return ofVec3f(); }
-	ofQuaternion getGlobalOrientation() const { return ofQuaternion(); }
-	ofVec3f getGlobalScale() const { return ofVec3f(); }
-
+	
 };
 
 #pragma mark - ramNodeArray

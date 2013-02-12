@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 
+#include "ofxXmlSettings.h"
+
 class ramCameraManager
 {
 public:
@@ -36,3 +38,4 @@ protected:
 
 void ramCameraBegin();
 void ramCameraEnd();
+

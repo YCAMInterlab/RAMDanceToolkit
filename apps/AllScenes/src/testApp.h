@@ -8,7 +8,7 @@
 /*!
  for debuging....
  */
-static const string myActorName = "default_unknown_date";
+static const string myActorName = "Richi_2012-09-01_16-55-24";
 //static const string myActorName = "default";
 
 
@@ -41,9 +41,7 @@ public:
     
 	// ...
 	// ------------------------
-	vector<ramSceneBase*> scenes;
 	ramOscReceiver oscReceiver;
-	ramControlPanel gui;
 	
-	ofMatrix4x4 shadowMat;
+	ramSceneManager sceneManager;
 };
