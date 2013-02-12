@@ -98,13 +98,10 @@ void ramSceneManager::draw()
 
 void ramSceneManager::drawActor(ramActor &actor)
 {
-	ramBasicActor(actor);
-	
 	for (int i = 0; i < scenes.size(); i++)
 	{
 		ramSceneBase *scene = scenes[i];
 		if (!scene->isEnabled()) continue;
-		
 		scene->drawActor(actor);
 	}
 }

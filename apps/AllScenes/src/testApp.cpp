@@ -4,14 +4,18 @@
 /*!
  Scenes
  */
+#include "BasicActor.h"
 #include "BigBox.h"
 #include "Bullet.h"
 #include "Future.h"
 #include "DrawLines.h"
+#include "DuplicateMe.h"
+BasicActor basicActor;
 BigBox bigbox;
 Bullet bullet;
 Future future;
 DrawLines drawLines;
+DuplicateMe duplicateMe;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -31,10 +35,12 @@ void testApp::setup()
 	/// scenes setup
 	// ------------------
 	vector<ramSceneBase*> scenes;
+	scenes.push_back( basicActor.getPtr() );
 	scenes.push_back( bigbox.getPtr() );
 	scenes.push_back( future.getPtr() );
 	scenes.push_back( bullet.getPtr() );
 	scenes.push_back( drawLines.getPtr() );
+	scenes.push_back( duplicateMe.getPtr() );
 	sceneManager.setup(scenes);
 	
 }
@@ -65,16 +71,17 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramControlPanel &gui = ramGetGUI();
-//	if ( gui.getValueB("Draw Actor") )
-	{
-		ramBasicActor(actor);
-	}
+	/// Scenes drawActor
+	// ------------------
+	sceneManager.drawActor(actor);
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
+	/// Scenes drawActor
+	// ------------------
+	sceneManager.drawRigid(rigid);
 }
 
 #pragma mark - oF Events

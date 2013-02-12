@@ -312,6 +312,8 @@
 		9A3FA1A416AD6D8A0037AC3C /* ofxSimpleParticleEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSimpleParticleEngine.h; sourceTree = "<group>"; };
 		9A44AF9116AEB8C500DC4CB6 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
 		9A44B13116AEC02400DC4CB6 /* Future.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Future.h; sourceTree = "<group>"; };
+		9AAA0B1816CA9DB4002D15E6 /* DuplicateMe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuplicateMe.h; sourceTree = "<group>"; };
+		9AAA0B1A16CA9E47002D15E6 /* BasicActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicActor.h; sourceTree = "<group>"; };
 		9AD3316C16AE52CE0003FD7D /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		9AD3316D16AE52CE0003FD7D /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		9AD3316E16AE52CE0003FD7D /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
@@ -459,6 +461,8 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				9AAA0B1A16CA9E47002D15E6 /* BasicActor.h */,
+				9AAA0B1716CA9DB4002D15E6 /* DuplicateMe */,
 				9AE0E10216AFC63C0016B3B0 /* DrawLines */,
 				9A44B13016AEC02400DC4CB6 /* Future */,
 				9A44AF9016AEB8C500DC4CB6 /* Bullet */,
@@ -860,6 +864,15 @@
 			);
 			name = Future;
 			path = ../../Future/src/Future;
+			sourceTree = "<group>";
+		};
+		9AAA0B1716CA9DB4002D15E6 /* DuplicateMe */ = {
+			isa = PBXGroup;
+			children = (
+				9AAA0B1816CA9DB4002D15E6 /* DuplicateMe.h */,
+			);
+			name = DuplicateMe;
+			path = ../../DuplicateMe/src/DuplicateMe;
 			sourceTree = "<group>";
 		};
 		9AD3316A16AE52CE0003FD7D /* ofxXmlSettings */ = {

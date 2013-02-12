@@ -1,44 +1,37 @@
 #pragma once
-#include "ramSceneBase.h"
-
 
 class BigBox : public ramSceneBase
 {
-	string key_master_size, key_line_width;
+	vector<float> mSizeArray;
+	float mBoxLineWidth;
+	float mMasterBoxSize;
 	
 public:
-	
-	/*!
-		Scene params
-	 */
-	vector<float> jointSizes;
-	float bigBoxLineWidth;
-	
-	string getSceneName() { return "Big Box"; }
-	
-	BigBox()
+
+	BigBox() : mBoxLineWidth(2.0), mMasterBoxSize(300.0)
 	{
-		key_master_size = "Master size";
-		key_line_width = "Line Width";
-		
-		// ---
-		
-		bigBoxLineWidth = 2.0;
-		
-		jointSizes.clear();
-		jointSizes.resize(ramActor::NUM_JOINTS);
-		for (int i=0; i<jointSizes.size(); i++) jointSizes.at(i) = 300.0;
+		mSizeArray.clear();
+		mSizeArray.resize(ramActor::NUM_JOINTS);
+		for (int i=0; i<mSizeArray.size(); i++)
+			mSizeArray.at(i) = mMasterBoxSize;
 	}
-	
-	void setupControlPanel(ramControlPanel& gui)
+
+	void setupControlPanel(ofxUICanvas* panel)
 	{
-		// !!!:
-//		gui.addPanel(getSceneName());
-//		gui.addSlider(key_master_size, 400, 10, 1000);
-//		gui.addSlider(key_line_width, 3, 1, 100);
-//		
-//		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-//			gui.addSlider(ramActor::getJointName(i), 500, 0, 1000);
+		ramControlPanel &gui = ramGetGUI();
+		
+		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
+		panel->addSpacer(gui.kLength, 2);
+		panel->addSlider("Line width", 0.0, 10.0, &mBoxLineWidth, gui.kLength, gui.kDim);
+		panel->addSlider("Master box size", 0.0, 1000.0, &mMasterBoxSize, gui.kLength, gui.kDim);
+		panel->addSpacer(gui.kLength, 2);
+		
+		for (int i=0; i<ramActor::NUM_JOINTS; i++)
+		{
+			panel->addSlider(ramActor::getJointName(i), 0.0, 1000.0, &mSizeArray.at(i), gui.kLength, gui.kDim);
+		}
+		
+		ofAddListener(panel->newGUIEvent, this, &BigBox::onPanelChanged);
 	}
 	
 	void setup()
@@ -49,39 +42,20 @@ public:
 	void update()
 	{
 		
-		// line width
-//		bigBoxLineWidth = gui().getValueF(key_line_width);
-//		
-//		// box size
-//		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-//			jointSizes.at(i) = gui().getValueF(ramActor::getJointName(i));
-//		
-//		
-//		
-//		if (gui().hasValueChanged(key_master_size))
-//		{
-//			for (int i=0; i<ramActor::NUM_JOINTS; i++)
-//			{
-//				float val = gui().getValueF(key_master_size);
-//				gui().setValueF(ramActor::getJointName(i), val);
-//				jointSizes.at(i) = val;
-//			}
-//		}
 	}
 	
 	void draw()
 	{
-		ramActor &actor = getActor(myActorName);
-		ofColor shadowColor = ramColor::GRAY;
-		shadowColor.a = 90;
 		
-		ramBeginCamera();
-		
+	}
+	
+	void drawActor( ramActor& actor )
+	{
 		for (int i=0; i<actor.getNumNode(); i++)
 		{
 			const ramNode &node = actor.getNode(i);
 			float boxSize = (i==ramActor::JOINT_HEAD) ? 6 : 3;
-			float bigBoxSize = jointSizes.at(i);
+			float bigBoxSize = mSizeArray.at(i);
 			
 			glPushAttrib(GL_ALL_ATTRIB_BITS);
 			glPushMatrix();
@@ -95,29 +69,33 @@ public:
 				 big box
 				 */
 				ofSetColor( ramColor::BLUE_DEEP );
-				ofSetLineWidth(bigBoxLineWidth);
+				ofSetLineWidth(mBoxLineWidth);
 				node.beginTransform();
 				ofBox(bigBoxSize);
 				node.endTransform();
-								
+				
 				ofPopStyle();
 			}
 			glPopMatrix();
 			glPopAttrib();
 		}
-		
-		ramEndCamera();
 	}
 	
-	
-	void drawActor(ramActor& actor)
+	void drawRigid(ramRigidBody &rigid)
 	{
 		
 	}
 	
-	void drawRigidBody(ramRigidBody& rigid)
+	void onPanelChanged(ofxUIEventArgs& e)
 	{
+		string name = e.widget->getName();
 		
+		if (name == "Master box size")
+		{
+			for (int i=0; i<mSizeArray.size(); i++)
+				mSizeArray.at(i) = mMasterBoxSize;
+		}
 	}
+	
+	const string getName() { return "Big Box"; }
 };
-

@@ -1,11 +1,8 @@
 #include "testApp.h"
 
 
-/*!
- Scenes
- */
-#include "EmptyScene.h"
-EmptyScene empty;
+#include "BasicActor.h"
+BasicActor basicActor;
 
 
 #pragma mark - oF methods
@@ -26,7 +23,7 @@ void testApp::setup()
 	/// scenes setup
 	// ------------------
 	vector<ramSceneBase*> scenes;
-	scenes.push_back( empty.getPtr() );
+	scenes.push_back( basicActor.getPtr() );
 	sceneManager.setup(scenes);
 }
 
@@ -57,27 +54,17 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-//	if ( gui.getValueB("Draw Actor") )
-	{
-//		float scale = gui.getValueF("Actor Scale");
-//		float posX = gui.getValueF("Actor Position:x");
-//		float posY = gui.getValueF("Actor Position:y");
-//		
-//		ofPushMatrix();
-//		glScalef(scale, scale, scale);
-//		ofTranslate(posX, 0, posY);
-//		ramBasicActor(actor, shadowMat.getPtr());
-//		ofPopMatrix();
-	}
-		
-	
-	for (int i=0; i<scenes.size(); i++) scenes.at(i)->drawActor(actor);
+	/// Scenes drawActor
+	// ------------------
+	sceneManager.draw();
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
-	
+	/// Scenes drawRigid
+	// ------------------
+	sceneManager.draw();
 }
 
 

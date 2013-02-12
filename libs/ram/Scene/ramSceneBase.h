@@ -9,6 +9,64 @@
 #include "ofxUI.h"
 
 
+
+/** Empty scene sample code
+ 
+#pragma once
+ 
+class EmptyScene : public ramSceneBase
+{
+	
+public:
+	
+	void setupControlPanel(ofxUICanvas* panel)
+	{
+		ramControlPanel &gui = ramGetGUI();
+		 
+		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
+		panel->addSpacer(gui.kLength, 2);
+		panel->addSlider("Font Color", 0.0, 255.0, &fontColor, gui.kLength, gui.kDim);
+	
+		ofAddListener(panel->newGUIEvent, this, &BigBox::onPanelChanged);
+	}
+	
+	void setup()
+	{
+		
+	}
+	
+	
+	void update()
+	{
+		
+	}
+	
+	void draw()
+	{
+	
+	}
+	
+	void drawActor( ramActor& actor )
+	{
+		
+	}
+	
+	void drawRigid(ramRigidBody &rigid)
+	{
+		
+	}
+	 
+	void onPanelChanged(ofxUIEventArgs& e)
+	{
+		string name = e.widget->getName();
+	}
+	
+	const string getName() { return "My scene"; }
+};
+*/
+ 
+ 
+
 class ramControlPanel;
 
 class ramSceneBase : public ramControllable
@@ -50,3 +108,4 @@ private:
 	ramControlPanel *guiPtr;
 	
 };
+
