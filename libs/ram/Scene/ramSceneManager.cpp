@@ -102,7 +102,10 @@ void ramSceneManager::drawActor(ramActor &actor)
 	
 	for (int i = 0; i < scenes.size(); i++)
 	{
-		scenes.at(i)->drawActor(actor);
+		ramSceneBase *scene = scenes[i];
+		if (!scene->isEnabled()) continue;
+		
+		scene->drawActor(actor);
 	}
 }
 
@@ -110,8 +113,9 @@ void ramSceneManager::drawRigid(ramRigidBody &rigid)
 {
 	for (int i = 0; i < scenes.size(); i++)
 	{
-		ramBeginCamera();
-		scenes.at(i)->drawRigid(rigid);
-		ramEndCamera();
+		ramSceneBase *scene = scenes[i];
+		if (!scene->isEnabled()) continue;
+		
+		scene->drawRigid(rigid);
 	}
 }

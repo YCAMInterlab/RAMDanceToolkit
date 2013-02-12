@@ -1,7 +1,6 @@
 #include "testApp.h"
 
 
-#include "ramExpand.h"
 ramExpand expandFilter;
 
 #pragma mark - oF methods

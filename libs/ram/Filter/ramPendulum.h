@@ -20,8 +20,6 @@ public:
 		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
 		panel->addSpacer(gui.kLength, 2);
 		panel->addSlider("Frequency", 0.00, 100.0, &mFreq, gui.kLength, gui.kDim);
-		panel->addSlider("Noise", 0.00, 10.0, 10, gui.kLength, gui.kDim);
-		
 		
 		panel->addSpacer(gui.kLength, 2);
 		panel->addToggle("Pendulum axis: X", false, 10, 10);

@@ -37,7 +37,7 @@ public:
 			mm.preMultRotate(m.getRotate());
 			mm.preMultTranslate(m.getTranslation() * mExpand);
 			
-			expandedNode.setPosition( mm.preMult(ofVec3f(0, 0, 0)) );
+			expandedNode.setGlobalPosition( mm.preMult(ofVec3f(0, 0, 0)) );
 		}
 		
 		return expandedArray;
