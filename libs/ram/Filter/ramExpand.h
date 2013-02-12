@@ -6,11 +6,12 @@
 
 class ramExpand : public ramFilter
 {
-	float expand;
+	float kExpandMax;
+	float mExpand;
 	
 public:
 	
-	ramExpand() : expand(1.0) {}
+	ramExpand() : mExpand(1.0), kExpandMax(3.0) {}
 	
 	void setupControlPanel(ofxUICanvas* panel)
 	{
@@ -18,7 +19,7 @@ public:
 
 		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
 		panel->addSpacer(gui.kLength, 2);
-		panel->addSlider("Expand", 0.00, 3.0, &expand, gui.kLength, gui.kDim);
+		panel->addSlider("Expand", 0.0, kExpandMax, &mExpand, gui.kLength, gui.kDim);
 	}
 	
 	const ramNodeArray& update(const ramNodeArray &nodeArray)
@@ -34,7 +35,7 @@ public:
 			ofMatrix4x4 mm = m;
 			
 			mm.preMultRotate(m.getRotate());
-			mm.preMultTranslate(m.getTranslation() * expand);
+			mm.preMultTranslate(m.getTranslation() * mExpand);
 			
 			expandedNode.setPosition( mm.preMult(ofVec3f(0, 0, 0)) );
 		}

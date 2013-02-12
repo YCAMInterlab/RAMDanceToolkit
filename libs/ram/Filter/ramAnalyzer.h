@@ -23,8 +23,6 @@ public:
 		
 		for (int i=0; i<size; i++)
 		{
-			const ramNode &node = src.getNode(i);
-			
 			ofVec3f pos = src.getNode(i).getGlobalPosition();
 			
 			ofVec3f dist(pos - axis);

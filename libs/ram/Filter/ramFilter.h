@@ -12,7 +12,7 @@ public:
 	virtual ~ramFilter() {}
 	
 	virtual void setupControlPanel(ramControlPanel& gui) {}
-	
+	virtual void setup() {}
 	virtual const ramNodeArray& update(const ramNodeArray& src) { return src; }
 	virtual const ramNodeArray& getResult() { static ramNodeArray arr; return arr; }
 };
