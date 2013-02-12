@@ -96,9 +96,9 @@ public:
 				 */
 				ofSetColor( ramColor::BLUE_DEEP );
 				ofSetLineWidth(bigBoxLineWidth);
-				node.transformBegin();
+				node.beginTransform();
 				ofBox(bigBoxSize);
-				node.transformEnd();
+				node.endTransform();
 								
 				ofPopStyle();
 			}

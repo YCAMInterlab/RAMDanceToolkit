@@ -32,9 +32,9 @@ const ofColor ramColor::SHADOW			= ofColor(0,0,0,60);
 
 void ramBox(const ramNode& o, float size)
 {
-	o.transformBegin();
+	o.beginTransform();
 	ofBox(size);
-	o.transformEnd();
+	o.endTransform();
 	
 	if (ramGetEnablePhysicsPrimitive())
 	{
@@ -45,9 +45,9 @@ void ramBox(const ramNode& o, float size)
 
 void ramSphere(const ramNode& o, float radius)
 {
-	o.transformBegin();
+	o.beginTransform();
 	ofSphere(radius);
-	o.transformEnd();
+	o.endTransform();
 	
 	if (ramGetEnablePhysicsPrimitive())
 	{
@@ -137,10 +137,10 @@ void ramBasicActor(ramActor& actor,
 		ramNode &node = actor.getNode(i);
 		float jointSize = (i==ramActor::JOINT_HEAD) ? 6.0 : 3.0;
 		
-		node.transformBegin();
+		node.beginTransform();
 		ofSetColor( jointColor );
 		ofBox( jointSize );
-		node.transformEnd();
+		node.endTransform();
 		
 		if (node.hasParent())
 		{

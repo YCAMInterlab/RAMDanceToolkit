@@ -74,11 +74,11 @@ void testApp::drawActor(ramActor &actor)
 			img.setColor(img.getWidth() - 1, i, cur);
 			
 			ofPushMatrix();
-			node.transformBegin();
+			node.beginTransform();
 			ofFill();
 			ofBox((i==ramActor::JOINT_HEAD) ? 6 : 3);
 			ofSetColor(cur);
-			node.transformEnd();
+			node.endTransform();
 			ofPopMatrix();
 			
 			if (node.hasParent())

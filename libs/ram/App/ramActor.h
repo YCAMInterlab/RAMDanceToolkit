@@ -66,8 +66,8 @@ public:
 	inline bool hasParent() const { return parent != NULL; }
 
 	// utils
-	inline void transformBegin() const { transformGL(); }
-	inline void transformEnd() const { restoreTransformGL(); }
+	inline void beginTransform() const { transformGL(); }
+	inline void endTransform() const { restoreTransformGL(); }
 	
 	const ofMatrix4x4& getTransformMatrix() const { return getLocalTransformMatrix(); }
 	const ofMatrix4x4& getMatrix() const { return getLocalTransformMatrix(); }

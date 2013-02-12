@@ -89,10 +89,10 @@ public:
 				const ramNode &node = ghost.getResult().getNode(i);
 				const int boxSize = (i==ramActor::JOINT_HEAD) ? 6 : 3;
 				
-				node.transformBegin();
+				node.beginTransform();
 				ofSetColor( ramColor::RED_DEEP );
 				ofBox(boxSize);
-				node.transformEnd();
+				node.endTransform();
 				
 				if (node.hasParent())
 				{

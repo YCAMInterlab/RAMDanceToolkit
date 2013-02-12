@@ -55,9 +55,9 @@ void testApp::drawActor(ramActor &actor)
 	{
 		ramNode &node = expandedActor.getNode(i);
 		
-		node.transformBegin();
+		node.beginTransform();
 		ofBox(10);
-		node.transformEnd();
+		node.endTransform();
 		node.drawName();
 	}
 	ofPopStyle();

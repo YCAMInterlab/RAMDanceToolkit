@@ -181,7 +181,7 @@ void testApp::drawActor(ramActor &actor)
 		const ramNode &node = actor.getNode(i);
 		
 		ofPushMatrix();
-		node.transformBegin();
+		node.beginTransform();
 		ofSetColor(yellowPrint);
 		ofBox((i==ramActor::JOINT_HEAD) ? 6 : 3);
 		if(showRects) {
@@ -193,7 +193,7 @@ void testApp::drawActor(ramActor &actor)
 		}
 		
 		ofSetColor(255);
-		node.transformEnd();
+		node.endTransform();
 		ofPopMatrix();
 		
 		if (node.hasParent())

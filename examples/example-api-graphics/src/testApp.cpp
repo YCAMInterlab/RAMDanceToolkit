@@ -59,8 +59,8 @@ void testApp::drawActor(ramActor &actor)
 		ofTriangle( n1, n4, n5 );
 		
 		
-		// ramNode::transformBegin() ~ transformEnd()
-		n1.transformBegin();
+		// ramNode::beginTransform() ~ endTransform()
+		n1.beginTransform();
 		{
 			// draw cube at JOINT_HEAD
 			ofNoFill();
@@ -74,7 +74,7 @@ void testApp::drawActor(ramActor &actor)
 			ofSetLineWidth( 2 );
 			ofCone(10, 100);
 		}
-		n1.transformEnd();
+		n1.endTransform();
 		 
 		
 		// draw plane using several nodes

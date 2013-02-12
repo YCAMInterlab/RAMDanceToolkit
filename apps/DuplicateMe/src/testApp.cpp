@@ -109,15 +109,15 @@ void testApp::drawActor(ramActor &actor)
 		{
 			ofSetColor(c1);
 			ramNode &node = actor.getNode(ramActor::JOINT_LEFT_HAND);
-			node.transformBegin();
+			node.beginTransform();
 			ofBox(5);
-			node.transformEnd();
+			node.endTransform();
 			
 			ofSetColor(c2);
 			ramNode &node2 = actor.getNode(ramActor::JOINT_RIGHT_HAND);
-			node2.transformBegin();
+			node2.beginTransform();
 			ofBox(5);
-			node2.transformEnd();
+			node2.endTransform();
 		}
 		
 		
