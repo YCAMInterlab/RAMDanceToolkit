@@ -46,7 +46,7 @@ public:
 		
 		if (getActorManager().getNumActor() > 0)
 		{
-			ramCameraBegin();
+			ramBeginCamera();
 			glPushAttrib(GL_ALL_ATTRIB_BITS);
 			glEnable(GL_DEPTH_TEST);
 			
@@ -62,7 +62,7 @@ public:
 			
 			glDisable(GL_DEPTH_TEST);
 			glPopAttrib();
-			ramCameraEnd();
+			ramEndCamera();
 		}
 		
 		ofPopStyle();

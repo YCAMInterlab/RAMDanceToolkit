@@ -2,7 +2,9 @@
 
 #include "ramMain.h"
 
-class ramBalancer
+#include "ramFilter.h"
+
+class ramBalancer : public ramFilter
 {
 	
 public:
@@ -11,19 +13,17 @@ public:
 		resetWeightBalance();
 	}
 	
-	void update(ramNodeArray& nodeArray)
+	const ramNodeArray& update(const ramNodeArray& src)
 	{
 		ofVec3f avarage;
-		ofVec3f axis = nodeArray.getNode(ramActor::JOINT_CHEST).getGlobalPosition();
+		ofVec3f axis = src.getNode(ramActor::JOINT_CHEST).getGlobalPosition();
 		avarage += axis;
 		
-		const int size = nodeArray.getNumNode();
+		const int size = src.getNumNode();
 		
 		for (int i=0; i<size; i++)
 		{
-			ramNode &node = nodeArray.getNode(i);
-			
-			ofVec3f pos = nodeArray.getNode(i).getGlobalPosition();
+			ofVec3f pos = src.getNode(i).getGlobalPosition();
 			
 			ofVec3f dist(pos - axis);
 			dist *= weightBalance.at(i);
@@ -38,6 +38,7 @@ public:
 		
 		balance = avarage;
 		
+		return src;
 	}
 	
 	inline ofVec3f getAvarage() { return balance; }

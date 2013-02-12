@@ -114,7 +114,7 @@ public:
 	{
 		if (!bEnabled) return;
 		
-		ramCameraBegin();
+		ramBeginCamera();
 		ofEnableAlphaBlending();
 		
 		ofColor shadowColor = ramColor::BLACK;
@@ -175,7 +175,7 @@ public:
 		ofPopMatrix();
 		ofPopStyle();
 		
-		ramCameraEnd();
+		ramEndCamera();
 	}
 	
 	

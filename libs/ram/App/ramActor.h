@@ -7,7 +7,6 @@
 class ramNodeArray;
 class ramAccelerometer;
 
-
 #pragma mark - ramAccelerometer
 
 class ramAccelerometer
@@ -63,12 +62,12 @@ public:
 	int getID() { return node_id; }
 
 	inline void setParent(ramNode &parent) { this->parent = &parent; }
-	inline ramNode* getParent() const { return parent; }
+	inline ramNode* getParent() const { return (ramNode*)parent; }
 	inline bool hasParent() const { return parent != NULL; }
 
 	// utils
-	inline void transformBegin() const { transformGL(); }
-	inline void transformEnd() const { restoreTransformGL(); }
+	inline void beginTransform() const { transformGL(); }
+	inline void endTransform() const { restoreTransformGL(); }
 	
 	const ofMatrix4x4& getTransformMatrix() const { return getLocalTransformMatrix(); }
 	const ofMatrix4x4& getMatrix() const { return getLocalTransformMatrix(); }
@@ -82,12 +81,14 @@ public:
 	
 	inline ramAccelerometer& getAccerelometer() { return accerelometer; }
 	
+	void drawId();
+	void drawName();
+	
 private:
 
 	int node_id;
 	string name;
 
-	ramNode *parent;
 	ramAccelerometer accerelometer;
 	
 };
@@ -104,16 +105,18 @@ public:
 	virtual ~ramNodeArray() {}
 
 	void setName(const string& name) { this->name = name; }
-	string& getName() { return name; }
+	const string& getName() const { return name; }
 
-	int getNumNode() { return nodes.size(); }
-	ramNode& getNode(int node_id) { return nodes[node_id]; }
+	int getNumNode() const { return nodes.size(); }
 	
-	inline bool isOutdated() { return (ofGetElapsedTimef() -  last_update_client_time) > RAM_OUTDATED_DURATION; }
-	inline float getTimestamp() { return last_update_client_time; }
+	ramNode& getNode(int node_id) { return nodes[node_id]; }
+	const ramNode& getNode(int node_id) const { return nodes[node_id]; }
+	
+	inline bool isOutdated() const { return (ofGetElapsedTimef() -  last_update_client_time) > RAM_OUTDATED_DURATION; }
+	inline float getTimestamp() const { return last_update_client_time; }
 	
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
-
+	
 protected:
 
 	string name;
@@ -131,7 +134,12 @@ class ramRigidBody : public ramNodeArray
 {
     
 public:
+	
+	ramRigidBody() : ramNodeArray() {}
+	ramRigidBody(const ramNodeArray &copy) { *this = copy; }
 
+	ramRigidBody& operator=(const ramNodeArray &copy);
+	
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
 
 private:
@@ -179,7 +187,10 @@ public:
 	};
 
 	ramActor();
+	ramActor(const ramNodeArray &copy);
 	virtual ~ramActor();
+	
+	ramActor& operator=(const ramNodeArray &copy);
 
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
 	static string getJointName(int jointId) { return jointName[jointId]; }

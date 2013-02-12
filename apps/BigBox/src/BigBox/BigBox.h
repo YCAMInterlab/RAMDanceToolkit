@@ -14,9 +14,10 @@ public:
 	vector<float> jointSizes;
 	float bigBoxLineWidth;
 	
+	string getSceneName() { return "Big Box"; }
+	
 	BigBox()
 	{
-		setSceneName("Big Box");
 		key_master_size = "Master size";
 		key_line_width = "Line Width";
 		
@@ -31,12 +32,13 @@ public:
 	
 	void setupControlPanel(ramControlPanel& gui)
 	{
-		gui.addPanel(getSceneName());
-		gui.addSlider(key_master_size, 400, 10, 1000);
-		gui.addSlider(key_line_width, 3, 1, 100);
-		
-		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			gui.addSlider(ramActor::getJointName(i), 500, 0, 1000);
+		// !!!:
+//		gui.addPanel(getSceneName());
+//		gui.addSlider(key_master_size, 400, 10, 1000);
+//		gui.addSlider(key_line_width, 3, 1, 100);
+//		
+//		for (int i=0; i<ramActor::NUM_JOINTS; i++)
+//			gui.addSlider(ramActor::getJointName(i), 500, 0, 1000);
 	}
 	
 	void setup()
@@ -46,24 +48,25 @@ public:
 	
 	void update()
 	{
+		
 		// line width
-		bigBoxLineWidth = gui().getValueF(key_line_width);
-		
-		// box size
-		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			jointSizes.at(i) = gui().getValueF(ramActor::getJointName(i));
-		
-		
-		
-		if (gui().hasValueChanged(key_master_size))
-		{
-			for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			{
-				float val = gui().getValueF(key_master_size);
-				gui().setValueF(ramActor::getJointName(i), val);
-				jointSizes.at(i) = val;
-			}
-		}
+//		bigBoxLineWidth = gui().getValueF(key_line_width);
+//		
+//		// box size
+//		for (int i=0; i<ramActor::NUM_JOINTS; i++)
+//			jointSizes.at(i) = gui().getValueF(ramActor::getJointName(i));
+//		
+//		
+//		
+//		if (gui().hasValueChanged(key_master_size))
+//		{
+//			for (int i=0; i<ramActor::NUM_JOINTS; i++)
+//			{
+//				float val = gui().getValueF(key_master_size);
+//				gui().setValueF(ramActor::getJointName(i), val);
+//				jointSizes.at(i) = val;
+//			}
+//		}
 	}
 	
 	void draw()
@@ -72,7 +75,7 @@ public:
 		ofColor shadowColor = ramColor::GRAY;
 		shadowColor.a = 90;
 		
-		ramCameraBegin();
+		ramBeginCamera();
 		
 		for (int i=0; i<actor.getNumNode(); i++)
 		{
@@ -93,39 +96,17 @@ public:
 				 */
 				ofSetColor( ramColor::BLUE_DEEP );
 				ofSetLineWidth(bigBoxLineWidth);
-				node.transformBegin();
+				node.beginTransform();
 				ofBox(bigBoxSize);
-				node.transformEnd();
-				
-				
-				/*!
-				 shadows
-				 */
-				
-				ramGlobal().beginShadowMatrix();
-				
-				ofEnableAlphaBlending();
-				ofSetColor(shadowColor);
-				
-				node.transformBegin();
-				ofSetLineWidth(bigBoxLineWidth);
-				ofBox(bigBoxSize);
-				node.transformEnd();
-				
-				ofSetLineWidth(1);
-				ofBox(node, boxSize);
-				if (node.hasParent())
-					ofLine(node, *node.getParent());
-				
-				ramGlobal().endShadowMatrix();
-				
+				node.endTransform();
+								
 				ofPopStyle();
 			}
 			glPopMatrix();
 			glPopAttrib();
 		}
 		
-		ramCameraEnd();
+		ramEndCamera();
 	}
 	
 	
@@ -135,10 +116,6 @@ public:
 	}
 	
 	void drawRigidBody(ramRigidBody& rigid)
-	{
-		
-	}
-	void drawFloor()
 	{
 		
 	}

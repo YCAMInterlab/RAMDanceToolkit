@@ -11,10 +11,9 @@ public:
 	ramBoxPrimitive *cube;
 	ramSpherePrimitive *sphere;
 	
-	Bullet()
-	{
-		setSceneName("Bullet");
-	}
+	string getSceneName() { return "Bullet"; }
+	
+	Bullet() {}
 	
 	void setup()
 	{
@@ -36,14 +35,16 @@ public:
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glEnable(GL_DEPTH_TEST);
 		glPushMatrix();
-		ramCameraBegin();
+		
+		ramBeginCamera();
 		{
 			ofNoFill();
 			cube->draw();
 			sphere->draw();
 			ramPhysics::instance().debugDraw();
 		}
-		ramCameraEnd();
+		ramEndCamera();
+		
 		glPopMatrix();
 		glDisable(GL_DEPTH_TEST);
 		glPopAttrib();
@@ -70,11 +71,6 @@ public:
 	}
 	
 	void drawRigid(ramRigidBody &rigid)
-	{
-		
-	}
-	
-	void drawFloor()
 	{
 		
 	}

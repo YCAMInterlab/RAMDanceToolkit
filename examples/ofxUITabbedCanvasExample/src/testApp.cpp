@@ -3,11 +3,15 @@
 
 
 
+
 //--------------------------------------------------------------
 //--------------------------------------------------------------
 //--------------------------------------------------------------
 void testApp::setup()
 {
+
+	ofSetLogLevel(OF_LOG_FATAL_ERROR);
+	
 	ofSetVerticalSync(true);
 	ofEnableSmoothing();
     
@@ -30,7 +34,6 @@ void testApp::setup()
 	
     guiA = new ofxUICanvas(0,0,length+xInit*2.0,ofGetHeight());
 	guiA->addWidgetDown(new ofxUILabel("SIMPLE EXAMPLE", OFX_UI_FONT_LARGE));
-    
     guiA->addSpacer(length, 2);
     guiA->addWidgetDown(new ofxUILabel("BACKGROUND CONTROL", OFX_UI_FONT_MEDIUM));
     guiA->addSlider("BGR", 0, 255, backgroundColor.r, 95, dim);

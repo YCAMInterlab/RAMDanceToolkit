@@ -28,6 +28,13 @@ public:
 	}
 
 	size_t size() { return array.size(); }
+	
+	void clear()
+	{
+		array.clear();
+		hash.clear();
+		hash_keys.clear();
+	}
 
 	// array
 
@@ -48,10 +55,8 @@ public:
 		}
 		else
 		{
-			ofLogWarning("RAMDanceToolkit") << "invalid key";
-			static T ret;
-			ret = T();
-			return ret;
+			ofLogError("RAMDanceToolkit::ramCompoundContainer") << "invalid key: " << key;
+			assert(false);
 		}
 	}
 

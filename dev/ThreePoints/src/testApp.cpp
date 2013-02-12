@@ -1,6 +1,5 @@
 #include "testApp.h"
 
-static const string myActorName = "Ando_2012-09-01_18-49-10";
 
 static const ofColor cyanPrint = ofColor::fromHex(0x00abec);
 static const ofColor magentaPrint = ofColor::fromHex(0xec008c);
@@ -182,7 +181,7 @@ void testApp::drawActor(ramActor &actor)
 		const ramNode &node = actor.getNode(i);
 		
 		ofPushMatrix();
-		node.transformBegin();
+		node.beginTransform();
 		ofSetColor(yellowPrint);
 		ofBox((i==ramActor::JOINT_HEAD) ? 6 : 3);
 		if(showRects) {
@@ -194,7 +193,7 @@ void testApp::drawActor(ramActor &actor)
 		}
 		
 		ofSetColor(255);
-		node.transformEnd();
+		node.endTransform();
 		ofPopMatrix();
 		
 		if (node.hasParent())

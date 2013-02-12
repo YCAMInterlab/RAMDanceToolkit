@@ -32,9 +32,9 @@ const ofColor ramColor::SHADOW			= ofColor(0,0,0,60);
 
 void ramBox(const ramNode& o, float size)
 {
-	o.transformBegin();
+	o.beginTransform();
 	ofBox(size);
-	o.transformEnd();
+	o.endTransform();
 	
 	if (ramGetEnablePhysicsPrimitive())
 	{
@@ -45,9 +45,9 @@ void ramBox(const ramNode& o, float size)
 
 void ramSphere(const ramNode& o, float radius)
 {
-	o.transformBegin();
+	o.beginTransform();
 	ofSphere(radius);
-	o.transformEnd();
+	o.endTransform();
 	
 	if (ramGetEnablePhysicsPrimitive())
 	{
@@ -64,8 +64,14 @@ void ramBasicFloor(const int floorPattern,
 				   const ofColor& c1,
 				   const ofColor& c2)
 {
-	
 	if (floorPattern == ramFloor::FLOOR_NONE) return;
+
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	glEnable(GL_DEPTH_TEST);
+	
+	glEnable(GL_POLYGON_OFFSET_FILL);
+	glEnable(GL_POLYGON_OFFSET_LINE);
+	glPolygonOffset(4.0, 1.0);
 	
 	int division = floorSize/tileSize;
 	
@@ -75,8 +81,6 @@ void ramBasicFloor(const int floorPattern,
 	ofPushMatrix();
     ofRotate( 90.0f, 1.0f, 0.0f, 0.0f );
 	
-	glEnable(GL_DEPTH_TEST);
-	
 	if (ofGetRectMode() != OF_RECTMODE_CENTER)
 	{
 		float w = division*tileSize;
@@ -84,7 +88,6 @@ void ramBasicFloor(const int floorPattern,
 	}
 	
 	glNormal3f( 0.0f, 1.0f, 0.0f );
-	
 	
 	if(floorPattern == ramFloor::FLOOR_PLANE)
 	{
@@ -115,9 +118,10 @@ void ramBasicFloor(const int floorPattern,
 		}
 	}
 	
-	glDisable(GL_DEPTH_TEST);
 	ofPopMatrix();
 	ofPopStyle();
+
+	glPopAttrib();
 }
 
 
@@ -125,16 +129,18 @@ void ramBasicActor(ramActor& actor,
 				   const ofColor& jointColor,
 				   const ofColor& lineColor)
 {
+	assert(actor.getNumNode() == ramActor::NUM_JOINTS);
+	
 	glPushMatrix();
 	for (int i=0; i<actor.getNumNode(); i++)
 	{
 		ramNode &node = actor.getNode(i);
 		float jointSize = (i==ramActor::JOINT_HEAD) ? 6.0 : 3.0;
 		
-		node.transformBegin();
+		node.beginTransform();
 		ofSetColor( jointColor );
 		ofBox( jointSize );
-		node.transformEnd();
+		node.endTransform();
 		
 		if (node.hasParent())
 		{

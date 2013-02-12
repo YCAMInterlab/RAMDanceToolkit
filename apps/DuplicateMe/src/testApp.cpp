@@ -8,48 +8,49 @@ int numDuplicate = 50;
 //--------------------------------------------------------------
 void testApp::setup()
 {
+
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
-	ofBackground( ramColor::BLACK );
+	ofBackground(ramColor::WHITE);
 	
 	
-	/*!
-	 ramBaseApp setup
-	 */
-	ramEnableAllEvents();
+	/// ram setup
+	// ------------------
+	ramInit();
 	oscReceiver.setup(10000);
 	
 	
-	/*!
-	 GUI setup
-	 */
-	gui.setup();
-	gui.loadFont("Fonts/din-webfont.ttf", 11);
-	gui.loadCameraSettings("settings.camera.xml");
+	/// scenes setup
+	// ------------------
+	vector<ramSceneBase*> scenes;
+	scenes.push_back( drawLines.getPtr() );
+	sceneManager.setup(scenes);
 	
-	
-	/*!
-	 GUI: Actor scale / move
-	 */
-	gui.addSlider("Actor Scale", 1.0, 0.1, 3);
-	gui.addSlider("Actor Position:x", 0, -600, 600);
-	gui.addSlider("Actor Position:y", 0, -600, 600);
-	
-	gui.addToggle("Toggle actor");
-	gui.addSlider("numDuplicate", 50, 1, 100);
-	
-	
-	/*!
-	 (user code......)
-	 */
-	const float lightPosition[] = { -100.0f, 500.0f, 200.0f };
-	gl::calcShadowMatrix( gl::kGroundPlaneYUp, lightPosition, shadowMat.getPtr() );
+	// 
+	// 
+	// /*!
+	//  GUI: Actor scale / move
+	//  */
+	// gui.addSlider("Actor Scale", 1.0, 0.1, 3);
+	// gui.addSlider("Actor Position:x", 0, -600, 600);
+	// gui.addSlider("Actor Position:y", 0, -600, 600);
+	// 
+	// gui.addToggle("Toggle actor");
+	// gui.addSlider("numDuplicate", 50, 1, 100);
+	// 
+	// 
+	// /*!
+	//  (user code......)
+	//  */
+	// const float lightPosition[] = { -100.0f, 500.0f, 200.0f };
+	// gl::calcShadowMatrix( gl::kGroundPlaneYUp, lightPosition, shadowMat.getPtr() );
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/* Entities update */
+	/// Entities update
+	// ------------------
 	oscReceiver.update();
 	
 	numDuplicate = gui.getValueF("numDuplicate");
@@ -58,22 +59,14 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	
+	/// Scenes draw
+	// ------------------
+	sceneManager.draw();	
 }
 
 
 
 #pragma mark - ram methods
-//--------------------------------------------------------------
-void testApp::drawFloor()
-{
-	ramBasicFloor(gui.getValueI("Floor pattern"),
-				  gui.getValueF("Floor size"),
-				  gui.getValueF("Grid size"),
-				  ramColor::BLUE_LIGHT,
-				  ramColor::BLUE_LIGHT-20);
-}
-
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
@@ -116,15 +109,15 @@ void testApp::drawActor(ramActor &actor)
 		{
 			ofSetColor(c1);
 			ramNode &node = actor.getNode(ramActor::JOINT_LEFT_HAND);
-			node.transformBegin();
+			node.beginTransform();
 			ofBox(5);
-			node.transformEnd();
+			node.endTransform();
 			
 			ofSetColor(c2);
 			ramNode &node2 = actor.getNode(ramActor::JOINT_RIGHT_HAND);
-			node2.transformBegin();
+			node2.beginTransform();
 			ofBox(5);
-			node2.transformEnd();
+			node2.endTransform();
 		}
 		
 		

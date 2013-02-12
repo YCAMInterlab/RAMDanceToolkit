@@ -1,9 +1,7 @@
 #include "testApp.h"
 
-
 #include <numeric>
 
-static const string myActorName = "Ando_2012-09-01_18-49-10";
 
 ofMatrix4x4 shadowMat;
 
@@ -91,7 +89,7 @@ void testApp::draw()
     ofBackgroundGradient( ofColor( 240 ), ofColor( 60 ) );
 	ofNoFill();
 	
-    ramCameraBegin();
+    ramBeginCamera();
 	glEnable(GL_DEPTH_TEST);
 	
 	// actor: recorded
@@ -124,7 +122,7 @@ void testApp::draw()
     }
 	
 	glDisable(GL_DEPTH_TEST);
-    ramCameraEnd();
+    ramEndCamera();
 }
 
 

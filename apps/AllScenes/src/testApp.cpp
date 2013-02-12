@@ -13,73 +13,62 @@ Bullet bullet;
 Future future;
 DrawLines drawLines;
 
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
-	ofBackground( ramColor::WHITE );
+	ofBackground(ramColor::WHITE);
 	
-	ramGlobal().init();
 	
-	/*!
-	 ramBaseApp setup
-	 */
-	ramEnableAllEvents();
+	/// ram setup
+	// ------------------
+	ramInit();
 	oscReceiver.setup(10000);
 	
-	/*!
-	 scenes setup
-	 */
+	
+	/// scenes setup
+	// ------------------
 	vector<ramSceneBase*> scenes;
 	scenes.push_back( bigbox.getPtr() );
 	scenes.push_back( future.getPtr() );
 	scenes.push_back( bullet.getPtr() );
 	scenes.push_back( drawLines.getPtr() );
 	sceneManager.setup(scenes);
+	
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/* Entities update */
+	/// Entities update
+	// ------------------
 	oscReceiver.update();
 	
+	
+	/// Scenes update
+	// ------------------
 	sceneManager.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
+	/// Scenes draw
+	// ------------------
 	sceneManager.draw();
 }
 
 #pragma mark - ram methods
-//--------------------------------------------------------------
-void testApp::drawFloor()
-{
-	ramControlPanel &gui = ramGetGUI();
-	
-	ramBasicFloor(gui.getValueI("Floor pattern"),
-				  gui.getValueF("Floor size"),
-				  gui.getValueF("Grid size"),
-				  ramColor::BLUE_LIGHT,
-				  ramColor::BLUE_DEEP);
-}
 
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
 	ramControlPanel &gui = ramGetGUI();
-	if ( gui.getValueB("Draw Actor") )
+//	if ( gui.getValueB("Draw Actor") )
 	{
 		ramBasicActor(actor);
-		
-		ramGlobal().beginShadowMatrix();
-		ramBasicActor(actor, ramColor::SHADOW, ramColor::SHADOW);
-		ramGlobal().endShadowMatrix();
 	}
 }
 

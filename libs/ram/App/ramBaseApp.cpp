@@ -1,11 +1,19 @@
+#include "ramSharedData.h"
+
 #include "ramBaseApp.h"
 #include "ramCameraManager.h"
+#include "ramControlPanel.h"
+#include "ramPhysics.h"
+
+void ramBaseApp::exit(ofEventArgs &args)
+{
+	ramDisableAllEvents();
+}
 
 void ramBaseApp::update(ofEventArgs &args)
 {
     getActorManager().update();
 }
-
 
 void ramBaseApp::draw(ofEventArgs &args)
 {
@@ -13,28 +21,61 @@ void ramBaseApp::draw(ofEventArgs &args)
 	
     cam.begin();
     
-	// floor
 	drawFloor();
+
+	bool enable_physics = ramGetEnablePhysicsPrimitive();
+	ramSetEnablePhysicsPrimitive(false);
 	
-    // actors
-	for (int n = 0; n < getActorManager().getNumActor(); n++)
 	{
-		ramActor &o = getActorManager().getActor(n);
-		drawActor(o);
+		// draw shadow
+		
+		ramSharedData::instance().shadow.begin();
+		
+		for (int n = 0; n < getActorManager().getNumActor(); n++)
+		{
+			ramActor &o = getActorManager().getActor(n);
+			drawActor(o);
+		}
+		
+		for (int n = 0; n < getActorManager().getNumRigidBody(); n++)
+		{
+			ramRigidBody &o = getActorManager().getRigidBody(n);
+			drawRigid(o);
+		}
+		
+		ramSharedData::instance().shadow.end();
 	}
-    
-    // rigids
-	for (int n = 0; n < getActorManager().getNumRigidBody(); n++)
+	
+	ramSetEnablePhysicsPrimitive(enable_physics);
+	
 	{
-		ramRigidBody &o = getActorManager().getRigidBody(n);
-		drawRigid(o);
+		// draw object
+		
+		for (int n = 0; n < getActorManager().getNumActor(); n++)
+		{
+			ramActor &o = getActorManager().getActor(n);
+			drawActor(o);
+		}
+		
+		for (int n = 0; n < getActorManager().getNumRigidBody(); n++)
+		{
+			ramRigidBody &o = getActorManager().getRigidBody(n);
+			drawRigid(o);
+		}
 	}
+	
+	getActorManager().draw();
     
 	cam.end();
 }
 
-
-void ramBaseApp::exit(ofEventArgs &args)
+void ramBaseApp::drawFloor()
 {
-	ramDisableAllEvents();
+	ramControlPanel &gui = ramGetGUI();
+	
+	ramBasicFloor(gui.getFloorPattern(),
+				  gui.getFloorSize(),
+				  gui.getGridSize(),
+				  ramColor::BLUE_LIGHT,
+				  ramColor::BLUE_DEEP);
 }
