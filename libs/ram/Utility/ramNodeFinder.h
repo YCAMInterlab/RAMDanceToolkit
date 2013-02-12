@@ -4,35 +4,48 @@
 #include "ramActor.h"
 #include "ramNodeIdentifer.h"
 
-class ramNodeFinder
+class ramNodeFinder : public ramNodeIdentifer
 {
 public:
-    
-    ramNodeFinder() : actor_name(""), joint_id(-1) {}
-	ramNodeFinder(int joint_id) : actor_name(""), joint_id(joint_id) {}
-	ramNodeFinder(const string& actor_name) : actor_name(actor_name), joint_id(-1) {}
-	ramNodeFinder(const string& actor_name, int joint_id) : actor_name(actor_name), joint_id(joint_id) {}
-	ramNodeFinder(const ramNodeIdentifer &identifr) : actor_name(identifr.name), joint_id(identifr.index) {}
-    
-	void setActorName(string actor_name_) { actor_name = actor_name_; }
-	void setJointID(int joint_id_) { joint_id = joint_id_; }
+	
+    ramNodeFinder() : ramNodeIdentifer() {}
+	ramNodeFinder(const ramNodeIdentifer& copy) : ramNodeIdentifer(copy) {}
+	
+	void setActorName(string name_) { name = name_; }
+	void setJointID(int index_) { index = index_; }
+	
+	inline bool found()
+	{
+		if (!getActorManager().hasNodeArray(name)) return false;
+		return ofInRange(index, 0, getActorManager().getNodeArray(name).getNumNode());
+	}
+	
+	// safety API
+	bool get(ramNode &node)
+    {
+		if (!found()) return false;
+        node = getActorManager().getNodeArray(name).getNode(index);
+		return true;
+    }
+	
+	//
 	
 	vector<ramNode> get()
 	{
 		vector<ramNode> nodes;
 		
-		bool has_target_actor = !actor_name.empty();
-		bool has_target_node = joint_id != -1;
+		bool has_target_actor = !name.empty();
+		bool has_target_node = index != -1;
 		
 		for (int i = 0; i < getActorManager().getNumActor(); i++)
         {
 			ramActor &actor = getActorManager().getActor(i);
 			
-			if (has_target_actor && actor_name != actor.getName()) continue;
+			if (has_target_actor && name != actor.getName()) continue;
 			
 			for (int n = 0; n < actor.getNumNode(); n++)
 			{
-				if (has_target_node && joint_id != n) continue;
+				if (has_target_node && index != n) continue;
 				
 				ramNode &node = actor.getNode(n);
 				nodes.push_back(node);
@@ -46,18 +59,18 @@ public:
 	{
 		vector<ramNode*> nodes;
 		
-		bool has_target_actor = !actor_name.empty();
-		bool has_target_node = joint_id != -1;
+		bool has_target_actor = !name.empty();
+		bool has_target_node = index != -1;
 		
 		for (int i = 0; i < getActorManager().getNumActor(); i++)
         {
 			ramActor &actor = getActorManager().getActor(i);
 			
-			if (has_target_actor && actor_name != actor.getName()) continue;
+			if (has_target_actor && name != actor.getName()) continue;
 			
 			for (int n = 0; n < actor.getNumNode(); n++)
 			{
-				if (has_target_node && joint_id != n) continue;
+				if (has_target_node && index != n) continue;
 				
 				ramNode &node = actor.getNode(n);
 				nodes.push_back(&node);
@@ -66,6 +79,8 @@ public:
 		
 		return nodes;
 	}
+	
+	//
 	
     static vector<ramNode> findNodes(int jointId)
     {
@@ -122,8 +137,5 @@ public:
     
 private:
 	
-	string actor_name;
-	int joint_id;
-    
     inline static ramActorManager& getActorManager() { return ramActorManager::instance(); }
 };
