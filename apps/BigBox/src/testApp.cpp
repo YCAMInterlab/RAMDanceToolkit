@@ -25,7 +25,7 @@ void testApp::setup()
 	
 	/// scenes setup
 	// ------------------
-	vector<ramSceneBase*> scenes;
+	vector<ramBaseScene*> scenes;
 	scenes.push_back( bigbox.getPtr() );
 	sceneManager.setup(scenes);
 }

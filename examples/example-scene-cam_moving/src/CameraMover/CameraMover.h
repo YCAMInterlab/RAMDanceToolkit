@@ -1,5 +1,5 @@
 #pragma once
-#include "ramSceneBase.h"
+#include "ramBaseScene.h"
 #include "ofxXmlSettings.h"
 
 /*!
@@ -55,7 +55,7 @@
 */
 
 
-class CameraMover : public ramSceneBase
+class CameraMover : public ramBaseScene
 {
 	
 private:

@@ -66,7 +66,7 @@ void testApp::update()
 	/* Scenes update */
 	for (int i=0; i<scenes.size(); i++)
 	{
-		ramSceneBase* scene = scenes.at(i);
+		ramBaseScene* scene = scenes.at(i);
 		scene->update();
 		
 		/* Enable / Disable scenes */

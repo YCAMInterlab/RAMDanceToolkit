@@ -3,7 +3,7 @@
 #include "ofxBt.h"
 
 
-class Bullet : public ramSceneBase
+class Bullet : public ramBaseScene
 {
 	
 public:

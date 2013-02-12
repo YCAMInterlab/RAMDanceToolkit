@@ -1,5 +1,5 @@
 #pragma once
-#include "ramSceneBase.h"
+#include "ramBaseScene.h"
 #include "DelaunayTriangles.h"
 
 string
@@ -12,7 +12,7 @@ vector<Vector> vertices;
 set<Triangle> triangles;
 
 
-class Triangles : public ramSceneBase
+class Triangles : public ramBaseScene
 {
 	string key_master_size, key_line_width;
 

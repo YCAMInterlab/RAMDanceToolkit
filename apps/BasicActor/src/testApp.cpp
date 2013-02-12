@@ -22,7 +22,7 @@ void testApp::setup()
 	
 	/// scenes setup
 	// ------------------
-	vector<ramSceneBase*> scenes;
+	vector<ramBaseScene*> scenes;
 	scenes.push_back( basicActor.getPtr() );
 	sceneManager.setup(scenes);
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-class MyScene1 : public ramSceneBase
+class MyScene1 : public ramBaseScene
 {
 private:
 	

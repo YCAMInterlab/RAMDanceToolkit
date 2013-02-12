@@ -14,7 +14,7 @@
  
 #pragma once
  
-class EmptyScene : public ramSceneBase
+class EmptyScene : public ramBaseScene
 {
 	
 public:
@@ -69,13 +69,13 @@ public:
 
 class ramControlPanel;
 
-class ramSceneBase : public ramControllable
+class ramBaseScene : public ramControllable
 {
 	friend class ramControlPanel;
 	
 public:
-	ramSceneBase() : bEnabled(false) {}
-	virtual ~ramSceneBase(){}
+	ramBaseScene() : bEnabled(false) {}
+	virtual ~ramBaseScene(){}
 	
 	virtual string getSceneName() { return "unnamed scene"; }
 
@@ -107,7 +107,7 @@ public:
 	inline void setEnabled(bool b) { bEnabled = b; }
 	inline bool isEnabled() { return bEnabled; }
 	
-	ramSceneBase* getPtr() { return this; }
+	ramBaseScene* getPtr() { return this; }
 	
 protected:
 	

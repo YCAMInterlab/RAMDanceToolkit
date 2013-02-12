@@ -7,9 +7,9 @@
 #include "ramCameraManager.h"
 #include "ramCameraSettings.h"
 #include "ramControllable.h"
-#include "ramSceneBase.h"
+#include "ramBaseScene.h"
 
-class ramSceneBase;
+class ramBaseScene;
 class ramControllable;
 
 class ramControlPanel
@@ -28,7 +28,7 @@ public:
 	void setup();
 	void update(ofEventArgs &e);
 	
-	void setupSceneToggles(vector<ramSceneBase*>& scenes);
+	void setupSceneToggles(vector<ramBaseScene*>& scenes);
 	void reloadCameraSetting(const int index);
 	
 	void addPanel(ramControllable* control);
@@ -55,7 +55,7 @@ private:
 	ofxUICanvas *mPanelGeneral;
 	ofxUILabel *mLabelCamPos;
 	
-	vector<ramSceneBase*> *scenes;
+	vector<ramBaseScene*> *scenes;
 	
 	static ramControlPanel *_instance;
 	

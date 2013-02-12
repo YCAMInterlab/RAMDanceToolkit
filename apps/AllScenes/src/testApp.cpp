@@ -34,7 +34,7 @@ void testApp::setup()
 	
 	/// scenes setup
 	// ------------------
-	vector<ramSceneBase*> scenes;
+	vector<ramBaseScene*> scenes;
 	scenes.push_back( basicActor.getPtr() );
 	scenes.push_back( bigbox.getPtr() );
 	scenes.push_back( future.getPtr() );

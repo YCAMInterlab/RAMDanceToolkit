@@ -1,6 +1,6 @@
 #pragma once
 
-class BasicActor : public ramSceneBase
+class BasicActor : public ramBaseScene
 {
 	
 	struct ControlSegment

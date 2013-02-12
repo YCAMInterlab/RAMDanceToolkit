@@ -27,7 +27,7 @@
  -------------
  */
 
-class DrawLines : public ramSceneBase
+class DrawLines : public ramBaseScene
 {
 	
 	ofxValue myLine;

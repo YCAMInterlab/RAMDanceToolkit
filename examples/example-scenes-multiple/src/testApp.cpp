@@ -18,7 +18,7 @@ void testApp::setup()
 	
 	/// Scene Manager setup
 	// ------------------
-	vector<ramSceneBase*> scenes;
+	vector<ramBaseScene*> scenes;
 	scenes.push_back( scene1.getPtr() );
 	scenes.push_back( scene2.getPtr() );
 	sceneManager.setup(scenes);

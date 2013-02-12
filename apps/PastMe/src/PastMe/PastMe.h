@@ -3,7 +3,7 @@
 
 static float REC_SPAN = 3.0;
 
-class PastMe : public ramSceneBase
+class PastMe : public ramBaseScene
 {
 	
 	string key_toggle, key_box, key_actor;

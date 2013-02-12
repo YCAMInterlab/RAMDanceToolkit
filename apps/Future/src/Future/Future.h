@@ -1,7 +1,7 @@
 #pragma once
 #include "ofxSimpleParticleEngine.h"
 
-class Future : public ramSceneBase
+class Future : public ramBaseScene
 {
 	
 	ofxSimpleParticleEngine pe;

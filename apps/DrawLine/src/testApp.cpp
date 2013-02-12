@@ -25,7 +25,7 @@ void testApp::setup()
 	
 	/// scenes setup
 	// ------------------
-	vector<ramSceneBase*> scenes;
+	vector<ramBaseScene*> scenes;
 	scenes.push_back( drawLines.getPtr() );
 	sceneManager.setup(scenes);
 }

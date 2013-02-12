@@ -4,7 +4,7 @@
 #include "ramControlPanel.h"
 #include "ramPhysics.h"
 
-void ramSceneManager::setup(vector<ramSceneBase*>& scenes_)
+void ramSceneManager::setup(vector<ramBaseScene*>& scenes_)
 {
 	scenes = scenes_;
 	
@@ -12,7 +12,7 @@ void ramSceneManager::setup(vector<ramSceneBase*>& scenes_)
 	
 	for (int i = 0; i < scenes.size(); i++)
 	{
-		ramSceneBase *scene = scenes.at(i);
+		ramBaseScene *scene = scenes.at(i);
 		scene->setup();
 		ramGetGUI().addPanel(scene);
 	}
@@ -24,7 +24,7 @@ void ramSceneManager::update()
 	{
 		if (i >= scenes.size()) break;
 		
-		ramSceneBase *scene = scenes.at(i);
+		ramBaseScene *scene = scenes.at(i);
 		if (scene->isEnabled())
 			scene->update();
 		else
@@ -38,7 +38,7 @@ void ramSceneManager::draw()
 	
 	for (int i = 0; i < scenes.size(); i++)
 	{
-		ramSceneBase *scene = scenes[i];
+		ramBaseScene *scene = scenes[i];
 		if (!scene->isEnabled()) continue;
 
 		bool enable_physics = ramGetEnablePhysicsPrimitive();
@@ -100,7 +100,7 @@ void ramSceneManager::drawActor(ramActor &actor)
 {
 	for (int i = 0; i < scenes.size(); i++)
 	{
-		ramSceneBase *scene = scenes[i];
+		ramBaseScene *scene = scenes[i];
 		if (!scene->isEnabled()) continue;
 		scene->drawActor(actor);
 	}
@@ -110,7 +110,7 @@ void ramSceneManager::drawRigid(ramRigidBody &rigid)
 {
 	for (int i = 0; i < scenes.size(); i++)
 	{
-		ramSceneBase *scene = scenes[i];
+		ramBaseScene *scene = scenes[i];
 		if (!scene->isEnabled()) continue;
 		
 		scene->drawRigid(rigid);

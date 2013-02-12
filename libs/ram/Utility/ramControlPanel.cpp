@@ -100,7 +100,7 @@ void ramControlPanel::update(ofEventArgs &e)
 	mLabelCamPos->setLabel( pos.str() );
 }
 
-void ramControlPanel::setupSceneToggles(vector<ramSceneBase*>& scenes_)
+void ramControlPanel::setupSceneToggles(vector<ramBaseScene*>& scenes_)
 {
 	scenes = &scenes_;
 	
@@ -166,7 +166,7 @@ void ramControlPanel::guiEvent(ofxUIEventArgs &e)
 		{
 			if (i >= scenes->size()) break;
 			
-			ramSceneBase *scene = scenes->at(i);
+			ramBaseScene *scene = scenes->at(i);
 			scene->setEnabled( toggles.at(i)->getValue() );
 		}
 	}

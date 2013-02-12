@@ -3,7 +3,7 @@
 
 static float REC_SPAN = 15.0;
 
-class nSecPastMe : public ramSceneBase
+class nSecPastMe : public ramBaseScene
 {
 	
 	ramSession pastMe[2];

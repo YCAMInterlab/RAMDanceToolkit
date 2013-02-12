@@ -1,6 +1,6 @@
 #pragma once
 
-class DuplicateMe : public ramSceneBase
+class DuplicateMe : public ramBaseScene
 {
 	
 	float mNumDuplicate;

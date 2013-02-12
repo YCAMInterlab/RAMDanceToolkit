@@ -2,13 +2,13 @@
 
 #include "ofMain.h"
 
-#include "ramSceneBase.h"
+#include "ramBaseScene.h"
 
 class ramSceneManager
 {
 public:
 	
-	void setup(vector<ramSceneBase*>& scenes);
+	void setup(vector<ramBaseScene*>& scenes);
 	
 	void update();
 	void draw();
@@ -16,6 +16,6 @@ public:
 	void drawRigid(ramRigidBody &rigid);
 	
 protected:
-	vector<ramSceneBase*> scenes;
+	vector<ramBaseScene*> scenes;
 };
 

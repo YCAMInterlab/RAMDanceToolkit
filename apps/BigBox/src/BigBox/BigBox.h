@@ -1,6 +1,6 @@
 #pragma once
 
-class BigBox : public ramSceneBase
+class BigBox : public ramBaseScene
 {
 	vector<float> mSizeArray;
 	float mBoxLineWidth;
