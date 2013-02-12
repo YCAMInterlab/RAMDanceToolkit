@@ -95,7 +95,7 @@ void ramBasicActor(ramActor& actor,
 
 void ramPlate(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5)
 {
-	ofVec3f v[] = { n1.getPosition(), n2.getPosition(), n3.getPosition(), n4.getPosition(), n5.getPosition() };
+	ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition() };
 	glBegin(ofGetFill() ? GL_POLYGON : GL_LINES);
 	for (int i=0; i<5; i++)
 	{
@@ -108,7 +108,7 @@ void ramPlate(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ram
 
 void ramPlate(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6)
 {
-	ofVec3f v[] = { n1.getPosition(), n2.getPosition(), n3.getPosition(), n4.getPosition(), n5.getPosition(), n6.getPosition() };
+	ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition() };
 	glBegin(ofGetFill() ? GL_POLYGON : GL_LINES);
 	for (int i=0; i<6; i++)
 	{
@@ -120,7 +120,7 @@ void ramPlate(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ram
 
 void ramPlate(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7)
 {
-	ofVec3f v[] = { n1.getPosition(), n2.getPosition(), n3.getPosition(), n4.getPosition(), n5.getPosition(), n6.getPosition(), n7.getPosition() };
+	ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition(), n7.getGlobalPosition() };
 	glBegin(ofGetFill() ? GL_POLYGON : GL_LINES);
 	for (int i=0; i<7; i++)
 	{
@@ -132,7 +132,7 @@ void ramPlate(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ram
 
 void ramPlate(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7, const ramNode& n8)
 {
-	ofVec3f v[] = { n1.getPosition(), n2.getPosition(), n3.getPosition(), n4.getPosition(), n5.getPosition(), n6.getPosition(), n7.getPosition(), n8.getPosition() };
+	ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition(), n7.getGlobalPosition(), n8.getGlobalPosition() };
 	glBegin(ofGetFill() ? GL_POLYGON : GL_LINES);
 	for (int i=0; i<8; i++)
 	{
@@ -144,7 +144,7 @@ void ramPlate(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ram
 
 void ramPlate(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7, const ramNode& n8, const ramNode& n9)
 {
-	ofVec3f v[] = { n1.getPosition(), n2.getPosition(), n3.getPosition(), n4.getPosition(), n5.getPosition(), n6.getPosition(), n7.getPosition(), n8.getPosition(), n9.getPosition() };
+	ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition(), n7.getGlobalPosition(), n8.getGlobalPosition(), n9.getGlobalPosition() };
 	glBegin(ofGetFill() ? GL_POLYGON : GL_LINES);
 	for (int i=0; i<9; i++)
 	{
@@ -156,7 +156,7 @@ void ramPlate(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ram
 
 void ramPlate(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7, const ramNode& n8, const ramNode& n9, const ramNode& n10)
 {
-	ofVec3f v[] = { n1.getPosition(), n2.getPosition(), n3.getPosition(), n4.getPosition(), n5.getPosition(), n6.getPosition(), n7.getPosition(), n8.getPosition(), n9.getPosition(), n10.getPosition() };
+	ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition(), n7.getGlobalPosition(), n8.getGlobalPosition(), n9.getGlobalPosition(), n10.getGlobalPosition() };
 	glBegin(ofGetFill() ? GL_POLYGON : GL_LINES);
 	for (int i=0; i<10; i++)
 	{
@@ -168,7 +168,7 @@ void ramPlate(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ram
 
 void ramPlate(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7, const ramNode& n8, const ramNode& n9, const ramNode& n10, const ramNode& n11)
 {
-	ofVec3f v[] = { n1.getPosition(), n2.getPosition(), n3.getPosition(), n4.getPosition(), n5.getPosition(), n6.getPosition(), n7.getPosition(), n8.getPosition(), n9.getPosition(), n10.getPosition(), n11.getPosition() };
+	ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition(), n7.getGlobalPosition(), n8.getGlobalPosition(), n9.getGlobalPosition(), n10.getGlobalPosition(), n11.getGlobalPosition() };
 	glBegin(ofGetFill() ? GL_POLYGON : GL_LINES);
 	for (int i=0; i<11; i++)
 	{
@@ -180,7 +180,7 @@ void ramPlate(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ram
 
 void ramPlate(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7, const ramNode& n8, const ramNode& n9, const ramNode& n10, const ramNode& n11, const ramNode& n12)
 {
-	ofVec3f v[] = { n1.getPosition(), n2.getPosition(), n3.getPosition(), n4.getPosition(), n5.getPosition(), n6.getPosition(), n7.getPosition(), n8.getPosition(), n9.getPosition(), n10.getPosition(), n11.getPosition(), n12.getPosition() };
+	ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition(), n7.getGlobalPosition(), n8.getGlobalPosition(), n9.getGlobalPosition(), n10.getGlobalPosition(), n11.getGlobalPosition(), n12.getGlobalPosition() };
 	glBegin(ofGetFill() ? GL_POLYGON : GL_LINES);
 	for (int i=0; i<12; i++)
 	{

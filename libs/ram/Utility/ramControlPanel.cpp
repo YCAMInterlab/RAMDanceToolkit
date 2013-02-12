@@ -1,6 +1,5 @@
 #include "ramControlPanel.h"
 
-#include "ramSceneBase.h"
 
 ramControlPanel *ramControlPanel::_instance = NULL;
 
@@ -99,9 +98,11 @@ void ramControlPanel::update(ofEventArgs &e)
 	mLabelCamPos->setLabel( pos.str() );
 }
 
-void ramControlPanel::setupSceneToggles(vector<ramSceneBase*>& scenes)
+void ramControlPanel::setupSceneToggles(vector<ramSceneBase*>& scenes_)
 {
-	const int size = scenes.size();
+	scenes = &scenes_;
+	
+	const int size = scenes->size();
 	
 	if (size <= 0)
 	{
@@ -152,6 +153,20 @@ void ramControlPanel::guiEvent(ofxUIEventArgs &e)
 	else if ( name == "CAM_EDGE_BR" )	reloadCameraSetting( 7 );
 	else if ( name == "CAM_EDGE_BL" )	reloadCameraSetting( 8 );
 	else if ( name == "CAM_EDGE_FL" )	reloadCameraSetting( 9 );
+	
+	if (scenes != NULL)
+	{
+		vector<ofxUIToggle *> toggles = mSceneToggles->getToggles();
+		const int numToggles = toggles.size();
+		
+		for (int i=0; i<numToggles; i++)
+		{
+			if (i >= scenes->size()) break;
+			cout << i;
+			ramSceneBase *scene = scenes->at(i);
+			scene->setEnabled( toggles.at(i)->getValue() );
+		}
+	}
 }
 
 void ramControlPanel::reloadCameraSetting(const int index)

@@ -1,7 +1,8 @@
 #include "testApp.h"
 
 
-int numDuplicate = 50;
+#include "DuplicateMe.h"
+DuplicateMe duplicateMe;
 
 
 #pragma mark - oF methods
@@ -23,27 +24,8 @@ void testApp::setup()
 	/// scenes setup
 	// ------------------
 	vector<ramSceneBase*> scenes;
-	scenes.push_back( drawLines.getPtr() );
-	sceneManager.setup(scenes);
-	
-	// 
-	// 
-	// /*!
-	//  GUI: Actor scale / move
-	//  */
-	// gui.addSlider("Actor Scale", 1.0, 0.1, 3);
-	// gui.addSlider("Actor Position:x", 0, -600, 600);
-	// gui.addSlider("Actor Position:y", 0, -600, 600);
-	// 
-	// gui.addToggle("Toggle actor");
-	// gui.addSlider("numDuplicate", 50, 1, 100);
-	// 
-	// 
-	// /*!
-	//  (user code......)
-	//  */
-	// const float lightPosition[] = { -100.0f, 500.0f, 200.0f };
-	// gl::calcShadowMatrix( gl::kGroundPlaneYUp, lightPosition, shadowMat.getPtr() );
+	scenes.push_back( duplicateMe.getPtr() );
+	sceneManager.setup(scenes);	
 }
 
 //--------------------------------------------------------------
@@ -53,7 +35,9 @@ void testApp::update()
 	// ------------------
 	oscReceiver.update();
 	
-	numDuplicate = gui.getValueF("numDuplicate");
+	/// Scenes update
+	// ------------------
+	sceneManager.update();
 }
 
 //--------------------------------------------------------------
@@ -70,59 +54,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	float radius = 300;
-	float radian = 2 * M_PI / numDuplicate;
-	
-	for (int i=0; i<numDuplicate; i++)
-	{
-		float x = cos( radian * i ) * radius;
-		float z = sin( radian * i ) * radius;
-		
-		float scale = gui.getValueF("Actor Scale");
-		float posX = gui.getValueF("Actor Position:x");
-		float posZ = gui.getValueF("Actor Position:y");
-		
-		ofColor c1 = ramColor::RED_DEEP;
-		ofColor c2 = ramColor::BLUE_LIGHT;
-		
-		c1.g += i*5;
-		c2.b += i*5;
-		
-		ofPushMatrix();
-		ofTranslate(x, 0, z);
-		ofRotateY(360/numDuplicate * i);
-		if( i==0 )
-		{
-			ofTranslate(posX, 0, posZ);
-			ofScale(scale, scale, scale);
-		}
-		
-		
-		
-		bool showActor = gui.getValueB("Toggle actor");
-		
-		if(showActor)
-		{
-			ramBasicActor(actor, c1, c2, shadowMat.getPtr());
-		}
-		else
-		{
-			ofSetColor(c1);
-			ramNode &node = actor.getNode(ramActor::JOINT_LEFT_HAND);
-			node.beginTransform();
-			ofBox(5);
-			node.endTransform();
-			
-			ofSetColor(c2);
-			ramNode &node2 = actor.getNode(ramActor::JOINT_RIGHT_HAND);
-			node2.beginTransform();
-			ofBox(5);
-			node2.endTransform();
-		}
-		
-		
-		ofPopMatrix();
-	}
+	sceneManager.drawActor(actor);
 }
 
 //--------------------------------------------------------------

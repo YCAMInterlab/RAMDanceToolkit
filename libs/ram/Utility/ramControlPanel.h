@@ -7,6 +7,7 @@
 #include "ramCameraManager.h"
 #include "ramCameraSettings.h"
 #include "ramControllable.h"
+#include "ramSceneBase.h"
 
 class ramSceneBase;
 class ramControllable;
@@ -54,6 +55,8 @@ private:
 	ofxUIToggleMatrix *mSceneToggles;
 	ofxUICanvas *mPanelGeneral;
 	ofxUILabel *mLabelCamPos;
+	
+	vector<ramSceneBase*> *scenes;
 	
 	static ramControlPanel *_instance;
 	

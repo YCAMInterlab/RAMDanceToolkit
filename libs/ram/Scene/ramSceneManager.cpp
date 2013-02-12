@@ -4,8 +4,10 @@
 #include "ramControlPanel.h"
 #include "ramPhysics.h"
 
-void ramSceneManager::setup(vector<ramSceneBase*>& scenes)
+void ramSceneManager::setup(vector<ramSceneBase*>& scenes_)
 {
+	scenes = scenes_;
+	
 	ramGetGUI().setupSceneToggles(scenes);
 	
 	for (int i = 0; i < scenes.size(); i++)
@@ -14,26 +16,19 @@ void ramSceneManager::setup(vector<ramSceneBase*>& scenes)
 		scene->setup();
 		ramGetGUI().addPanel(scene);
 	}
-	
-	this->scenes = scenes;
 }
 
 void ramSceneManager::update()
 {
-	ramControlPanel &gui = ramGetGUI();
-	
-	vector<ofxUIToggle *> toggles = gui.getSceneToggles()->getToggles();
-	const int numToggles = toggles.size();
-	
-	for (int i=0; i<numToggles; i++)
+	for (int i=0; i<scenes.size(); i++)
 	{
 		if (i >= scenes.size()) break;
 		
 		ramSceneBase *scene = scenes.at(i);
-		scene->setEnabled( toggles.at(i)->getValue() );
-		
-		if (!scene->isEnabled()) continue;
-		scene->update();
+		if (scene->isEnabled())
+			scene->update();
+		else
+			continue;
 	}
 }
 
@@ -98,5 +93,25 @@ void ramSceneManager::draw()
 			
 			ramEndCamera();
 		}
+	}
+}
+
+void ramSceneManager::drawActor(ramActor &actor)
+{
+	ramBasicActor(actor);
+	
+	for (int i = 0; i < scenes.size(); i++)
+	{
+		scenes.at(i)->drawActor(actor);
+	}
+}
+
+void ramSceneManager::drawRigid(ramRigidBody &rigid)
+{
+	for (int i = 0; i < scenes.size(); i++)
+	{
+		ramBeginCamera();
+		scenes.at(i)->drawRigid(rigid);
+		ramEndCamera();
 	}
 }

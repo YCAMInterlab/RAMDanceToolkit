@@ -12,10 +12,10 @@ public:
 	
 	void update();
 	void draw();
+	void drawActor(ramActor &actor);
+	void drawRigid(ramRigidBody &rigid);
 	
 protected:
-	
 	vector<ramSceneBase*> scenes;
-	
 };
 

@@ -1,130 +1,86 @@
 #pragma once
-#include "ramSceneBase.h"
 #include "ofxSimpleParticleEngine.h"
-
 
 class Future : public ramSceneBase
 {
 	
 	ofxSimpleParticleEngine pe;
-	ramGhost ghost;
-	bool bGhost, bParticle;
-	
-	string key_slider_speed, key_slider_distance, key_toggle_pe, key_toggle_draw;
+	ramGhost mGhost;
+	bool mShowGhost, mShowParticle;
 	
 public:
 	
-	string getSceneName() { return "Future"; }
+	Future() : mShowGhost(true), mShowParticle(true) {}
 	
-	Future()
+	void setupControlPanel(ofxUICanvas* panel)
 	{
-		// ---
+		ramControlPanel &gui = ramGetGUI();
 		
-		pe.setup(100000);
-		pe.addForceFactor(new Gravity);
-		pe.addForceFactor(new Floor);
+		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
+		panel->addSpacer(gui.kLength, 2);
 		
-		bGhost = true;
-		bParticle = false;
-		
-		key_slider_speed = "Speed";
-		key_slider_distance = "Distance";
-		key_toggle_draw = "Ghost";
-		key_toggle_pe = "Salt";
-	}
-	
-	void setupControlPanel(ramControlPanel& gui)
-	{
-//		gui.addToggle(key_toggle_draw, true);
-//		gui.addToggle(key_toggle_pe);
-//		gui.addSlider(key_slider_speed, 200, 0, 1000);
-//		gui.addSlider(key_slider_distance, 60, 0, 1000);
+		mGhost.setupControlPanel(panel);
+		panel->addToggle("Show Ghost", &mShowGhost, 50, 50);
+		panel->addToggle("Show Salt", &mShowParticle, 50, 50);
 	}
 	
 	void setup()
 	{
-		
+		pe.setup(100000);
 	}
 	
 	void update()
 	{
-		ghost.update( getActor(myActorName) );
-		for (int i=0; i<ghost.getResult().getNumNode(); i++)
+		
+		for (int i=0; i<mGhost.getResult().getNumNode(); i++)
 		{
-			const ramNode &node = ghost.getResult().getNode(i);
+			const ramNode &node = mGhost.getResult().getNode(i);
 			for(int j=0; j<10; j++)
 				pe.emit( node.getPosition() );
 		}
-		
 		pe.update();
-		
-//		if(gui().hasValueChanged( variadic(key_slider_distance)(key_slider_speed)(key_toggle_pe)(key_toggle_draw) ))
-//		{
-//			float speed = gui().getValueF(key_slider_speed);
-//			float distance = gui().getValueF(key_slider_distance);
-//			
-//			bGhost = gui().getValueB(key_toggle_draw);
-//			bParticle = gui().getValueB(key_toggle_pe);
-//			
-//			ghost.setSpeed(speed);
-//			ghost.setDistance(distance);
-//		}
-		
 	}
 	
 	void draw()
 	{
+		
+	}
+	
+	void drawActor( ramActor& actor )
+	{
+		mGhost.update( actor );
+
+		
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
+		glEnable(GL_DEPTH_TEST);
 		ofPushStyle();
 		ofNoFill();
 		
-		glEnable(GL_DEPTH_TEST);
-		
-		ramBeginCamera();
-		
-		if (bGhost)
+		if (mShowGhost)
 		{
-			for (int i=0; i<ghost.getResult().getNumNode(); i++)
-			{
-				const ramNode &node = ghost.getResult().getNode(i);
-				const int boxSize = (i==ramActor::JOINT_HEAD) ? 6 : 3;
-				
-				node.beginTransform();
-				ofSetColor( ramColor::RED_DEEP );
-				ofBox(boxSize);
-				node.endTransform();
-				
-				if (node.hasParent())
-				{
-					ofColor c = ramColor::RED_LIGHT;
-					c -= 40;
-					ofSetColor(c);
-					ofLine(node, *node.getParent());
-				}
-			}
+			ramBasicActor( (ramActor&)mGhost.getResult() );
 		}
-		
-		if (bParticle)
+
+		if (mShowParticle)
 		{
 			ofSetColor(255);
 			pe.draw();
 		}
 		
-		ramEndCamera();
-		
 		ofPopStyle();
 		glPopAttrib();
 	}
 	
-	void drawActor(ramActor& actor)
+	void drawRigid(ramRigidBody &rigid)
 	{
 		
 	}
 	
-	void drawRigidBody(ramRigidBody& rigid)
+	void drawFloor()
 	{
 		
 	}
-
+	
+	const string getName() { return "Future events"; }
 };
 

@@ -36,8 +36,4 @@ public:
 	// ...
 	// ------------------------
 	ramOscReceiver oscReceiver;
-	
-	// ...
-	// ------------------------
-	EmptyScene myScene;
 };

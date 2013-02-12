@@ -1,6 +1,9 @@
 #include "testApp.h"
 
 
+EmptyScene myScene;
+
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()

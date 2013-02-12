@@ -59,15 +59,15 @@ void testApp::drawActor(ramActor &actor)
 {
 //	if ( gui.getValueB("Draw Actor") )
 	{
-		float scale = gui.getValueF("Actor Scale");
-		float posX = gui.getValueF("Actor Position:x");
-		float posY = gui.getValueF("Actor Position:y");
-		
-		ofPushMatrix();
-		glScalef(scale, scale, scale);
-		ofTranslate(posX, 0, posY);
-		ramBasicActor(actor, shadowMat.getPtr());
-		ofPopMatrix();
+//		float scale = gui.getValueF("Actor Scale");
+//		float posX = gui.getValueF("Actor Position:x");
+//		float posY = gui.getValueF("Actor Position:y");
+//		
+//		ofPushMatrix();
+//		glScalef(scale, scale, scale);
+//		ofTranslate(posX, 0, posY);
+//		ramBasicActor(actor, shadowMat.getPtr());
+//		ofPopMatrix();
 	}
 		
 	

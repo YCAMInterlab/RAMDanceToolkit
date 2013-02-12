@@ -5,11 +5,6 @@
 
 #include <numeric>
 
-string ramToResourcePath(string path)
-{
-	return ofFilePath::join(ofToDataPath("../../../../resources"), path);
-}
-
 void ramInit()
 {
 	static bool inited = false;

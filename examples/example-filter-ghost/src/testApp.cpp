@@ -39,14 +39,7 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	// get processed ramActor ref
-	ramActor& actor = (ramActor&)ghost.getResult();
 	
-	ramBeginCamera();
-	{
-		ramBasicActor(actor);
-	}
-	ramEndCamera();
 }
 
 
@@ -58,11 +51,8 @@ void testApp::drawActor(ramActor &actor)
 {
 	ramBasicActor(actor);
 	
-	ramBeginShadow();
-	{
-		ramBasicActor(actor, ramColor::SHADOW, ramColor::SHADOW);
-	}
-	ramEndShadow();
+	ramActor& g = (ramActor&)ghost.getResult();
+	ramBasicActor(g);
 }
 
 //--------------------------------------------------------------
