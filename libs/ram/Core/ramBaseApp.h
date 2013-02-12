@@ -3,10 +3,10 @@
 #include "ofMain.h"
 #include "ofxOsc.h"
 #include "ramActor.h"
-#include "ramActorManager.h"
-#include "ramCameraManager.h"
 
-class ramBaseApp : public ofBaseApp
+#include "ramGlobalShortcut.h"
+
+class ramBaseApp : public ofBaseApp, public ramGlobalShortcut
 {
     
 public:
@@ -18,22 +18,8 @@ public:
 	virtual void drawActor(ramActor &actor) {}
 	virtual void drawRigid(ramRigidBody &rigid) {}
 	
-	inline ramActorManager& getActorManager() { return ramActorManager::instance(); }
-	inline ramCameraManager& getCameraManager() { return ramCameraManager::instance(); }
-	inline ofCamera& getActiveCamera() { return ramCameraManager::instance().getActiveCamera(); }
-	
 	void updateWithOscMessage(const ofxOscMessage &m) { getActorManager().updateWithOscMessage(m); }
 
-	// shortcut to ramActorManager
-	size_t getNumActor() { return getActorManager().getNumActor(); }
-	ramActor& getActor(int index) { return getActorManager().getActor(index); }
-	ramActor& getActor(const string& name) { return getActorManager().getActor(name); }
-	
-	size_t getNumRigidBody() { return getActorManager().getNumRigidBody(); }
-	ramRigidBody& getRigidBody(int index) { return getActorManager().getRigidBody(index); }
-	ramRigidBody& getRigidBody(const string& name) { return getActorManager().getRigidBody(name); }
-    
-    
     // events
 	void ramEnableAllEvents()
     {
