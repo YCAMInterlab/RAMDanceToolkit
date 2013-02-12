@@ -71,7 +71,8 @@ public:
 	
 	void draw()
 	{
-		ramActor &actor = getActor(myActorName);
+		ramActor &actor = getActor(0);
+		
 		ofColor shadowColor = ramColor::GRAY;
 		shadowColor.a = 90;
 		
