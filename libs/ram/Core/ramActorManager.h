@@ -29,6 +29,10 @@ public:
         return *_instance;
     }
 
+	void setup();
+	void update();
+	void draw();
+
 	// actor
 	inline size_t getNumActor() { return actors.size(); }
 	inline const vector<string>& getActorNames() { return actors.keys(); }
@@ -50,18 +54,23 @@ public:
 	inline ramNodeArray& getNodeArray(const string& name) { return nodearray[name]; }
 	inline bool hasNodeArray(const string &key) { return nodearray.hasKey(key); }
 
-	void setup();
-	void update();
-	void draw();
-	
-	void updateWithOscMessage(const ofxOscMessage &m);
-	
+	// for mouse picked node
 	const ramNodeIdentifer& getSelectedNode();
 	
-	void onSelectStateChanged(ramNodeIdentifer &e);
-	
-	inline void toggleFreeze() { bFreeze ^= true; }
+	// Freeze all actor
 	inline bool isFreezed() { return bFreeze; }
+	inline void setFreezed(bool v) { bFreeze = v; }
+	inline void toggleFreeze() { bFreeze ^= true; }
+
+	// bus
+	bool hasBus(const string& bus_name) { return bus.find(bus_name) != bus.end(); }
+	void setBus(const string& bus_name, const ramNodeArray &arr) { bus[bus_name] = arr; }
+	const ramNodeArray& getBus(const string& bus_name) { return bus[bus_name]; }
+
+	
+	// for internal use
+	void updateWithOscMessage(const ofxOscMessage &m);
+	void onSelectStateChanged(ramNodeIdentifer &e);
 	
 private:
 
@@ -89,5 +98,7 @@ private:
 	class NodeSelector;
 	friend class NodeSelector;
 	NodeSelector *nodeSelector;
+	
+	map<string, ramNodeArray> bus;
 };
 
