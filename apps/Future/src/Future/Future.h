@@ -36,7 +36,7 @@ public:
 		{
 			const ramNode &node = mGhost.getResult().getNode(i);
 			for(int j=0; j<10; j++)
-				pe.emit( node.getPosition() );
+				pe.emit( node.getGlobalPosition() );
 		}
 		pe.update();
 	}
