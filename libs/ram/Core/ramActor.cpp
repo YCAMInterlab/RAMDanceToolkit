@@ -188,7 +188,9 @@ ramNodeArray& ramNodeArray::operator*=(float s)
 void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
 {
 	const int nNodes = m.getArgAsInt32(1);
-
+	
+	bool isActor = (nNodes == ramActor::NUM_JOINTS);
+	
 	for (int i = 0; i < nNodes; i++)
 	{
 		const string name = m.getArgAsString(i * 8 + 0 + 2);
@@ -205,7 +207,7 @@ void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
 
 		ramNode &node = getNode(i);
 		node.node_id = i;
-		node.name = name;
+		node.name = isActor ? getJointName(i) : "Node " + ofToString(i);
 
 		node.setGlobalPosition(vec);
 		node.setGlobalOrientation(quat);
@@ -343,29 +345,29 @@ void ramActor::setupTree()
 
 string ramActor::jointName[NUM_JOINTS] =
 {
-	"JOINT_HIPS",
-	"JOINT_ABDOMEN",
-	"JOINT_CHEST",
-	"JOINT_NECK",
-	"JOINT_HEAD",
-	"JOINT_LEFT_HIP",
-	"JOINT_LEFT_KNEE",
-	"JOINT_LEFT_ANKLE",
-	"JOINT_LEFT_TOE",
-	"JOINT_RIGHT_HIP",
-	"JOINT_RIGHT_KNEE",
-	"JOINT_RIGHT_ANKLE",
-	"JOINT_RIGHT_TOE",
-	"JOINT_LEFT_COLLAR",
-	"JOINT_LEFT_SHOULDER",
-	"JOINT_LEFT_ELBOW",
-	"JOINT_LEFT_WRIST",
-	"JOINT_LEFT_HAND",
-	"JOINT_RIGHT_COLLAR",
-	"JOINT_RIGHT_SHOULDER",
-	"JOINT_RIGHT_ELBOW",
-	"JOINT_RIGHT_WRIST",
-	"JOINT_RIGHT_HAND"
+	"HIPS",
+	"ABDOMEN",
+	"CHEST",
+	"NECK",
+	"HEAD",
+	"LEFT_HIP",
+	"LEFT_KNEE",
+	"LEFT_ANKLE",
+	"LEFT_TOE",
+	"RIGHT_HIP",
+	"RIGHT_KNEE",
+	"RIGHT_ANKLE",
+	"RIGHT_TOE",
+	"LEFT_COLLAR",
+	"LEFT_SHOULDER",
+	"LEFT_ELBOW",
+	"LEFT_WRIST",
+	"LEFT_HAND",
+	"RIGHT_COLLAR",
+	"RIGHT_SHOULDER",
+	"RIGHT_ELBOW",
+	"RIGHT_WRIST",
+	"RIGHT_HAND"
 };
 
 vector<string> ramActor::getJointNames()
