@@ -70,6 +70,11 @@ private:
 	ramActorManager& operator=(const ramActorManager&) { return *this; }
 	~ramActorManager() {};
 
+	/**
+	 !!!:FIXME
+	 - actor, rigid分けずにnodearray onlyにしてはどうか
+	 - nodearrayっていう名前で良いか。(Entity?)
+	 */
 	ramCompoundContainer<ramNodeArray> nodearray;
 	ramCompoundContainer<ramActor> actors;
 	ramCompoundContainer<ramRigidBody> rigids;

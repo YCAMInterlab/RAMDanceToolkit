@@ -78,12 +78,18 @@ public:
 	}
 	
 	
+	void setup(string path)
+	{
+		mXmlPath = path;
+		reloadSettings();
+		ofAddListener(ofEvents().keyPressed, this, &CameraMover::keyPressed);
+	}
+	
+	
 	void setup()
 	{
 		mXmlPath = ramToResourcePath("Settings/cam.moving.xml");
-		mSettingXml.loadFile( mXmlPath );
-		mSettings = ramCameraSettings::getSettings(mSettingXml);
-		
+		reloadSettings();
 		ofAddListener(ofEvents().keyPressed, this, &CameraMover::keyPressed);
 	}
 	

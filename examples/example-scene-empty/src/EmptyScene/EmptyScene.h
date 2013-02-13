@@ -7,7 +7,7 @@ public:
 	
 	void setupControlPanel(ofxUICanvas* panel)
 	{
-		
+		ofAddListener(panel->newGUIEvent, this, &EmptyScene::onValueChanged);
 	}
 
 	void setup()
@@ -24,9 +24,7 @@ public:
 	void draw()
 	{
 		ramBeginCamera();
-		{
-			ofDrawBitmapString( "Hello, "+getName()+ "!", ofVec3f(0,200,0) );
-		}
+		ofDrawBitmapString( "Hello, "+getName()+ "!", ofVec3f(0,200,0) );
 		ramEndCamera();
 	}
 	
@@ -43,6 +41,11 @@ public:
 	void drawFloor()
 	{
 	
+	}
+	
+	void onValueChanged(ofxUIEventArgs& e)
+	{
+		cout << "I am " << e.widget->getName() << endl;
 	}
 	
 	const string getName() { return "My scene"; }
