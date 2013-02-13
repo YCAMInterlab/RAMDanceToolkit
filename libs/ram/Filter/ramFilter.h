@@ -16,3 +16,24 @@ public:
 	virtual const ramNodeArray& update(const ramNodeArray& src) { return src; }
 	virtual const ramNodeArray& getResult() { static ramNodeArray arr; return arr; }
 };
+
+class ramBusSend : public ramFilter
+{
+public:
+	
+	ramBusSend() {}
+	ramBusSend(const string &bus_name) { setBusName(bus_name); }
+	
+	void setBusName(const string &bus_name) { this->bus_name = bus_name; }
+	const string& getBusName() const { return bus_name; }
+	
+	const ramNodeArray& update(const ramNodeArray& src)
+	{
+		ramActorManager::instance().setBus(bus_name, src);
+		return src;
+	}
+	
+private:
+	
+	string bus_name;
+};
