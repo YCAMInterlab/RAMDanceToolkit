@@ -29,9 +29,8 @@ public:
 	void update(ofEventArgs &e);
 	
 	void setupSceneToggles(vector<ramBaseScene*>& scenes);
-	void reloadCameraSetting(const int index);
-	
 	void addPanel(ramControllable* control);
+	void reloadCameraSetting(const int index);
 	
 	inline ofColor getBackgroundColor() { return ofColor(mR, mG, mB); }
 	inline int getFloorPattern() { return mFloorPattern; }
@@ -42,6 +41,7 @@ public:
 	inline ofxUIToggleMatrix* getSceneToggles() { return mSceneToggles; }
 	
 	void guiEvent(ofxUIEventArgs &e);
+	void keyPressed(ofKeyEventArgs &e);
 	
 private:
 	

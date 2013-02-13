@@ -151,6 +151,8 @@ ramActorManager* ramActorManager::_instance = NULL;
 
 void ramActorManager::setup()
 {
+	bFreeze = false;
+	
 	nodeSelector = new NodeSelector(rootNode);
 	ofAddListener(nodeSelector->selectStateChanged, this, &ramActorManager::onSelectStateChanged);
 }
@@ -163,14 +165,14 @@ void ramActorManager::update()
 	for (int i = 0; i < actors.size(); i++)
 	{
 		ramActor &actor = getActor(i);
-		if (actor.isOutdated())
+		if (actor.isOutdated() && !isFreezed())
 			actors.remove(actor.getName());
 	}
 
 	for (int i = 0; i < rigids.size(); i++)
 	{
 		ramRigidBody &rigid = getRigidBody(i);
-		if (rigid.isOutdated())
+		if (rigid.isOutdated() && !isFreezed())
 			rigids.remove(rigid.getName());
 	}
 	
@@ -197,6 +199,8 @@ void ramActorManager::draw()
 
 void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 {
+	if (isFreezed()) return;
+	
 	const std::string addr = m.getAddress();
 	
 	if (addr == RAM_OSC_ADDR_SKELETON)

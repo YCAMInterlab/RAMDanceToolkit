@@ -59,7 +59,10 @@ public:
 	const ramNodeIdentifer& getSelectedNode();
 	
 	void onSelectStateChanged(ramNodeIdentifer &e);
-
+	
+	inline void toggleFreeze() { bFreeze ^= true; }
+	inline bool isFreezed() { return bFreeze; }
+	
 private:
 
 	static ramActorManager *_instance;
@@ -80,6 +83,8 @@ private:
 	ramCompoundContainer<ramRigidBody> rigids;
 	
 	ofxInteractivePrimitives::RootNode rootNode;
+	
+	bool bFreeze;
 	
 	class NodeSelector;
 	friend class NodeSelector;

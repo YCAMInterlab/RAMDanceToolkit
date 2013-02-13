@@ -1,6 +1,5 @@
 #include "ramControlPanel.h"
 
-
 ramControlPanel *ramControlPanel::_instance = NULL;
 
 ramControlPanel& ramControlPanel::instance()
@@ -34,7 +33,6 @@ void ramControlPanel::setup()
 	ofAddListener(ofEvents().update, this, &ramControlPanel::update);
 	
 	
-	
 	/// First panel
 	// -------------------------------------
 	/// panel
@@ -45,6 +43,11 @@ void ramControlPanel::setup()
 	/// full screan
 	mPanelGeneral->addSpacer(kLength, 2);
 	mPanelGeneral->addWidgetDown(new ofxUIToggle(32, 32, false, "FullScrean"));
+	
+	
+	/// full screan
+	mPanelGeneral->addSpacer(kLength, 2);
+	mPanelGeneral->addWidgetDown(new ofxUIToggle(32, 32, false, "Pause (or press Space Key)"));
 	
 	
 	/// background color
@@ -81,9 +84,13 @@ void ramControlPanel::setup()
 
 	
 	/// add panel to canvas
-	ofAddListener(mPanelGeneral->newGUIEvent, this, &ramControlPanel::guiEvent);
 	mTabbedCanvas.add(mPanelGeneral);
 	mTabbedCanvas.loadSettings("GUI/guiSettings.xml");
+	
+	
+	/// Events
+	ofAddListener(ofEvents().keyPressed, this, &ramControlPanel::keyPressed);
+	ofAddListener(mPanelGeneral->newGUIEvent, this, &ramControlPanel::guiEvent);
 }
 
 void ramControlPanel::update(ofEventArgs &e)
@@ -99,6 +106,24 @@ void ramControlPanel::update(ofEventArgs &e)
 	
 	mLabelCamPos->setLabel( pos.str() );
 }
+
+
+void ramControlPanel::addPanel(ramControllable* control)
+{
+	ofxUICanvas *panel = new ofxUICanvas(0, 0, ramGetGUI().kLength+ramGetGUI().kXInit*2.0, ofGetHeight());
+	control->setupControlPanel(panel);
+	getTabbedCanvas().add(panel);
+}
+
+void ramControlPanel::reloadCameraSetting(const int index)
+{
+	ofxXmlSettings xml( kCamSettingFile );
+	xml.pushTag("cam", index);
+	ramCameraSettings setting( xml );
+	ramCameraManager::instance().getActiveCamera().setPosition( setting.pos );
+	ramCameraManager::instance().getActiveCamera().lookAt( setting.look_at );
+}
+
 
 void ramControlPanel::setupSceneToggles(vector<ramBaseScene*>& scenes_)
 {
@@ -170,21 +195,18 @@ void ramControlPanel::guiEvent(ofxUIEventArgs &e)
 			scene->setEnabled( toggles.at(i)->getValue() );
 		}
 	}
+	
+	
+	if (name == "Pause (or press Space Key)")
+	{
+		ramActorManager::instance().toggleFreeze();
+	}
 }
 
-void ramControlPanel::reloadCameraSetting(const int index)
+void ramControlPanel::keyPressed(ofKeyEventArgs &e)
 {
-	ofxXmlSettings xml( kCamSettingFile );
-	xml.pushTag("cam", index);
-	ramCameraSettings setting( xml );
-	ramCameraManager::instance().getActiveCamera().setPosition( setting.pos );
-	ramCameraManager::instance().getActiveCamera().lookAt( setting.look_at );
-}
-
-
-void ramControlPanel::addPanel(ramControllable* control)
-{
-	ofxUICanvas *panel = new ofxUICanvas(0, 0, ramGetGUI().kLength+ramGetGUI().kXInit*2.0, ofGetHeight());
-	control->setupControlPanel(panel);
-	getTabbedCanvas().add(panel);
+	if (e.key == ' ')
+	{
+		ramActorManager::instance().toggleFreeze();
+	}
 }
