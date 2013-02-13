@@ -8,40 +8,31 @@
 struct ramGlobalShortcut
 {
 	
-	inline ramActorManager& getActorManager() { return ramActorManager::instance(); }
+#pragma mark - ramActorManager
 	
-	inline bool hasActor(const string &key) { return ramActorManager::instance().hasActor(key); }
+	inline static ramActorManager& getActorManager() { return ramActorManager::instance(); }
 	
-	inline ramActor& getActor(string name) { return ramActorManager::instance().getActor(name); }
+	//	inline bool hasActor(const string &key) { return ramActorManager::instance().hasActor(key); }
+	//	inline bool hasRigidBody(const string &key) { return ramActorManager::instance().hasRigidBody(key); }
+	inline static bool hasNodeArray(const string &key) { return ramActorManager::instance().hasNodeArray(key); }
 	
-	
-	inline size_t getNumActor() { return ramActorManager::instance().getNumActor(); }
-	inline ramActor& getActor(int index) { return ramActorManager::instance().getActor(index); }
-	
-	
-	inline bool hasRigidBody(const string &key) { return ramActorManager::instance().hasRigidBody(key); }
-	
-	inline ramRigidBody& getRigidBody(string name) { return ramActorManager::instance().getRigidBody(name); }
+	//	inline ramActor& getActor(string name) { return ramActorManager::instance().getActor(name); }
+	//	inline ramRigidBody& getRigidBody(string name) { return ramActorManager::instance().getRigidBody(name); }
+	inline static ramNodeArray& getNodeArray(string name) { return ramActorManager::instance().getNodeArray(name); }
 	
 	
-	inline size_t getNumRigidBody() { return ramActorManager::instance().getNumRigidBody(); }
+	//	inline size_t getNumActor() { return ramActorManager::instance().getNumActor(); }
+	//	inline size_t getNumRigidBody() { return ramActorManager::instance().getNumRigidBody(); }
+	inline static size_t getNumNodeArray() { return ramActorManager::instance().getNumNodeArray(); }
 	
-	inline ramRigidBody& getRigidBody(int index) { return ramActorManager::instance().getRigidBody(index); }
+	//	inline ramActor& getActor(int index) { return ramActorManager::instance().getActor(index); }
+	//	inline ramRigidBody& getRigidBody(int index) { return ramActorManager::instance().getRigidBody(index); }
+	inline static ramNodeArray& getNodeArray(int index) { return ramActorManager::instance().getNodeArray(index); }
 
+#pragma mark - ramCameraManager
 	
-	inline bool hasNodeArray(const string &key) { return ramActorManager::instance().hasNodeArray(key); }
-	
-	inline ramNodeArray& getNodeArray(string name) { return ramActorManager::instance().getNodeArray(name); }
-	
-	
-	inline size_t getNumNodeArray() { return ramActorManager::instance().getNumNodeArray(); }
-	
-	inline ramNodeArray& getNodeArray(int index) { return ramActorManager::instance().getNodeArray(index); }
+	inline static ramCameraManager& getCameraManager() { return ramCameraManager::instance(); }
 
-	//
-	
-	inline ramCameraManager& getCameraManager() { return ramCameraManager::instance(); }
-
-	inline ofCamera& getActiveCamera() { return ramCameraManager::instance().getActiveCamera(); }
+	inline static ofCamera& getActiveCamera() { return ramCameraManager::instance().getActiveCamera(); }
 
 };

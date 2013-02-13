@@ -34,7 +34,7 @@ public:
 		mControlSegments.clear();
 	}
 	
-	void addEntityControl(ramActor &actor)
+	void addEntityControl(const ramActor &actor)
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
@@ -59,12 +59,16 @@ public:
 	void update()
 	{
 		int numSegments = mControlSegments.size();
-		int numActor = getActorManager().getNumActor();
+		int numActor = getNumNodeArray();
 		
 		if (numSegments < numActor)
 		{
 			for (int i=numSegments; i<numActor; i++)
-				addEntityControl( getActorManager().getActor(i) );
+			{
+				/// !!!:
+				const ramNodeArray copy = getNodeArray(i);
+				addEntityControl( copy );
+			}
 		}
 	}
 	

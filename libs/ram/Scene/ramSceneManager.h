@@ -3,8 +3,9 @@
 #include "ofMain.h"
 
 #include "ramBaseScene.h"
+#include "ramGlobalShortcut.h"
 
-class ramSceneManager
+class ramSceneManager : public ramGlobalShortcut
 {
 public:
 	

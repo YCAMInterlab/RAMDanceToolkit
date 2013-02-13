@@ -34,8 +34,6 @@ void ramSceneManager::update()
 
 void ramSceneManager::draw()
 {
-	ramActorManager &AM = ramActorManager::instance();
-	
 	for (int i = 0; i < scenes.size(); i++)
 	{
 		ramBaseScene *scene = scenes[i];
@@ -47,27 +45,29 @@ void ramSceneManager::draw()
 		{
 			// draw shadow
 			
-			ramSharedData::instance().shadow.begin();
+			ramBeginShadow();
 			
 			scene->draw();
 			
 			ramBeginCamera();
 			
-			for (int n = 0; n < AM.getNumActor(); n++)
+			for (int n = 0; n < getNumNodeArray(); n++)
 			{
-				ramActor &o = AM.getActor(n);
-				scene->drawActor(o);
-			}
-			
-			for (int n = 0; n < AM.getNumRigidBody(); n++)
-			{
-				ramRigidBody &o = AM.getRigidBody(n);
-				scene->drawRigid(o);
+				if (getNodeArray(n).isActor())
+				{
+					ramActor &o = (ramActor &)getNodeArray(n);
+					scene->drawActor(o);
+				}
+				else
+				{
+					ramRigidBody &o = (ramRigidBody &)getNodeArray(n);
+					scene->drawRigid(o);
+				}
 			}
 			
 			ramEndCamera();
 			
-			ramSharedData::instance().shadow.end();
+			ramEndShadow();
 		}
 
 		ramSetEnablePhysicsPrimitive(enable_physics);
@@ -79,16 +79,18 @@ void ramSceneManager::draw()
 			
 			ramBeginCamera();
 			
-			for (int n = 0; n < AM.getNumActor(); n++)
+			for (int n = 0; n < getNumNodeArray(); n++)
 			{
-				ramActor &o = AM.getActor(n);
-				scene->drawActor(o);
-			}
-			
-			for (int n = 0; n < AM.getNumRigidBody(); n++)
-			{
-				ramRigidBody &o = AM.getRigidBody(n);
-				scene->drawRigid(o);
+				if (getNodeArray(n).isActor())
+				{
+					ramActor &o = (ramActor &)getNodeArray(n);
+					scene->drawActor(o);
+				}
+				else
+				{
+					ramRigidBody &o = (ramRigidBody &)getNodeArray(n);
+					scene->drawRigid(o);
+				}
 			}
 			
 			ramEndCamera();

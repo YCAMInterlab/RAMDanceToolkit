@@ -376,11 +376,7 @@ private:
 		
 		if (!type.empty() && !target.empty())
 		{
-			if (type == "actor")
-				return ramActorManager::instance().getActor(target).getNode(node_id);
-			
-			else
-				return ramActorManager::instance().getRigidBody(target).getNode(node_id);
+				return getNodeArray(target).getNode(node_id);
 		}
 	}
 	

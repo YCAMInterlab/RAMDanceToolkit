@@ -31,36 +31,30 @@ void ramBaseApp::draw(ofEventArgs &args)
 		
 		ramSharedData::instance().shadow.begin();
 		
-		for (int n = 0; n < getActorManager().getNumActor(); n++)
+		for (int n=0; n<getActorManager().getNumNodeArray(); n++)
 		{
-			ramActor &o = getActorManager().getActor(n);
-			drawActor(o);
-		}
-		
-		for (int n = 0; n < getActorManager().getNumRigidBody(); n++)
-		{
-			ramRigidBody &o = getActorManager().getRigidBody(n);
-			drawRigid(o);
+			ramNodeArray &o = getNodeArray(n);
+			
+			if (o.getNumNode() == ramActor::NUM_JOINTS)
+				drawActor((ramActor&)o);
+			else
+				drawRigid((ramRigidBody&)o);
 		}
 		
 		ramSharedData::instance().shadow.end();
 	}
 	
 	ramSetEnablePhysicsPrimitive(enable_physics);
-	
 	{
-		// draw object
-		
-		for (int n = 0; n < getActorManager().getNumActor(); n++)
+		for (int n=0; n<getActorManager().getNumNodeArray(); n++)
 		{
-			ramActor &o = getActorManager().getActor(n);
-			drawActor(o);
-		}
-		
-		for (int n = 0; n < getActorManager().getNumRigidBody(); n++)
-		{
-			ramRigidBody &o = getActorManager().getRigidBody(n);
-			drawRigid(o);
+			ramNodeArray &o = getNodeArray(n);
+			if (o.getNumNode() == ramActor::NUM_JOINTS)
+				drawActor((ramActor&)o);
+			else
+			{
+				drawRigid((ramRigidBody&)o);
+			}
 		}
 	}
 	

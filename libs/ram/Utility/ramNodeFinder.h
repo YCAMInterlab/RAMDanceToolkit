@@ -3,8 +3,9 @@
 #include "ramActorManager.h"
 #include "ramActor.h"
 #include "ramNodeIdentifer.h"
+#include "ramGlobalShortcut.h"
 
-class ramNodeFinder : public ramNodeIdentifer
+class ramNodeFinder : public ramNodeIdentifer, public ramGlobalShortcut
 {
 public:
 	
@@ -16,25 +17,25 @@ public:
 	
 	inline bool found()
 	{
-		if (!getActorManager().hasNodeArray(name)) return false;
-		return ofInRange(index, 0, getActorManager().getNodeArray(name).getNumNode());
+		if (!hasNodeArray(name)) return false;
+		return ofInRange(index, 0, getNodeArray(name).getNumNode());
 	}
 	
 	// safety API
 	bool get(ramNode &node)
     {
-		if (!getActorManager().hasNodeArray(name))
+		if (!hasNodeArray(name))
 		{
-			if (getActorManager().getNumNodeArray() > 0)
+			if (getNumNodeArray() > 0)
 			{
-				node = getActorManager().getNodeArray(0).getNode(index);
+				node = getNodeArray(0).getNode(index);
 				return true;
 			}
 			return false;
 		}
 		else
 		{
-			node = getActorManager().getNodeArray(name).getNode(index);
+			node = getNodeArray(name).getNode(index);
 			return true;
 		}
     }
@@ -48,9 +49,9 @@ public:
 		bool has_target_actor = !name.empty();
 		bool has_target_node = index != -1;
 		
-		for (int i = 0; i < getActorManager().getNumNodeArray(); i++)
+		for (int i = 0; i < getNumNodeArray(); i++)
         {
-			ramNodeArray &actor = getActorManager().getNodeArray(i);
+			ramNodeArray &actor = getNodeArray(i);
 			
 			if (has_target_actor && name != actor.getName()) continue;
 			
@@ -73,9 +74,9 @@ public:
 		bool has_target_actor = !name.empty();
 		bool has_target_node = index != -1;
 		
-		for (int i = 0; i < getActorManager().getNumNodeArray(); i++)
+		for (int i = 0; i < getNumNodeArray(); i++)
         {
-			ramNodeArray &actor = getActorManager().getNodeArray(i);
+			ramNodeArray &actor = getNodeArray(i);
 			
 			if (has_target_actor && name != actor.getName()) continue;
 			
@@ -97,9 +98,9 @@ public:
     {
         vector<ramNode> nodes;
 		
-        for (int i=0; i<getActorManager().getNumNodeArray(); i++)
+        for (int i=0; i<getNumNodeArray(); i++)
         {
-            ramNode &node = getActorManager().getNodeArray(i).getNode(jointId);
+            ramNode &node = getNodeArray(i).getNode(jointId);
             nodes.push_back(node);
         }
 		
@@ -109,7 +110,7 @@ public:
 	static vector<ramNode> findNodes(const string& actoreName)
     {
         vector<ramNode> nodes;
-		ramNodeArray &actor = getActorManager().getNodeArray(actoreName);
+		ramNodeArray &actor = getNodeArray(actoreName);
 		
         for (int i=0; i<actor.getNumNode(); i++)
         {
@@ -123,7 +124,7 @@ public:
 	
     static const ramNode& findNode(const string& actoreName, int jointId)
     {
-        return getActorManager().getNodeArray(actoreName).getNode(jointId);
+        return getNodeArray(actoreName).getNode(jointId);
     }
 	
 	static const ramNode& findNode(const ramNodeIdentifer &identifr)
@@ -134,19 +135,16 @@ public:
 	// safety API
 	static bool findNode(const string& actoreName, int jointId, ramNode &node)
     {
-		if (!getActorManager().hasNodeArray(actoreName)) return false;
-        node = getActorManager().getNodeArray(actoreName).getNode(jointId);
+		if (!hasNodeArray(actoreName)) return false;
+        node = getNodeArray(actoreName).getNode(jointId);
 		return true;
     }
 	
 	static bool findNode(const ramNodeIdentifer &identifr, ramNode &node)
 	{
-		if (!getActorManager().hasNodeArray(identifr.name)) return false;
-		node = getActorManager().getNodeArray(identifr.name).getNode(identifr.index);
+		if (!hasNodeArray(identifr.name)) return false;
+		node = getNodeArray(identifr.name).getNode(identifr.index);
 		return true;
 	}
     
-private:
-	
-    inline static ramActorManager& getActorManager() { return ramActorManager::instance(); }
 };

@@ -159,34 +159,13 @@ void ramActorManager::setup()
 
 void ramActorManager::update()
 {
-	actors.updateIndexCache();
-	rigids.updateIndexCache();
+	nodearrays.updateIndexCache();
 	
-	for (int i = 0; i < actors.size(); i++)
+	for (int i = 0; i < nodearrays.size(); i++)
 	{
-		ramActor &actor = getActor(i);
-		if (actor.isOutdated() && !isFreezed())
-			actors.remove(actor.getName());
-	}
-
-	for (int i = 0; i < rigids.size(); i++)
-	{
-		ramRigidBody &rigid = getRigidBody(i);
-		if (rigid.isOutdated() && !isFreezed())
-			rigids.remove(rigid.getName());
-	}
-	
-	nodearray.clear();
-	for (int i = 0; i < actors.size(); i++)
-	{
-		ramActor &actor = getActor(i);
-		nodearray.add(actor.getName(), actor);
-	}
-	
-	for (int i = 0; i < rigids.size(); i++)
-	{
-		ramRigidBody &rigid = getRigidBody(i);
-		nodearray.add(rigid.getName(), rigid);
+		ramNodeArray &array = nodearrays[i];
+		if (array.isOutdated() && !isFreezed())
+			nodearrays.remove(array.getName());
 	}
 	
 	rootNode.update();
@@ -202,38 +181,36 @@ void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 	if (isFreezed()) return;
 	
 	const std::string addr = m.getAddress();
+	const std::string name = m.getArgAsString(0);
 	
 	if (addr == RAM_OSC_ADDR_SKELETON)
 	{
-		const std::string name = m.getArgAsString(0);
-		
-		if (!actors.hasKey(name))
+		if (!nodearrays.hasKey(name))
 		{
 			ramActor o;
+			o.setType(RAM_NODEARRAY_TYPE_ACTOR);
 			o.updateWithOscMessage(m);
 			o.setName(name);
-			actors.add(name, o);
+			nodearrays.add(name, o);
 		}
 		else
 		{
-			ramActor &o = actors[name];
+			ramActor &o = (ramActor &)nodearrays[name];
 			o.updateWithOscMessage(m);
 		}
-        
 	}
 	else if (addr == RAM_OSC_ADDR_RIGID_BODY)
 	{
-		const std::string name = m.getArgAsString(0);
-
-		if (!rigids.hasKey(name))
+		if (!nodearrays.hasKey(name))
 		{
 			ramRigidBody o;
+			o.setType(RAM_NODEARRAY_TYPE_RIGIDBODY);
 			o.updateWithOscMessage(m);
-			rigids.add(name, o);
+			nodearrays.add(name, o);
 		}
 		else
 		{
-			ramRigidBody &o = rigids[name];
+			ramRigidBody &o = (ramRigidBody &)nodearrays[name];
 			o.updateWithOscMessage(m);
 		}
 	}

@@ -95,9 +95,17 @@ private:
 
 #pragma mark - ramNodeArray
 
+enum ramNodeArrayType
+{
+	RAM_NODEARRAY_TYPE_ACTOR     = 0,
+	RAM_NODEARRAY_TYPE_RIGIDBODY = 1
+};
+
 class ramNodeArray
 {
 public:
+	
+
 
 	ramNodeArray();
 	ramNodeArray(const ramNodeArray& copy) { *this = copy; }
@@ -128,10 +136,16 @@ public:
 	ramNodeArray operator*(float s) const;
 	ramNodeArray& operator*=(float s);
 	
+	inline void setType(ramNodeArrayType t) { type = t; }
+	inline bool isActor() { return type == RAM_NODEARRAY_TYPE_ACTOR; }
+	inline bool isRigid() { return type == RAM_NODEARRAY_TYPE_RIGIDBODY; }
+	inline bool isTypeOf(ramNodeArrayType t) { return type == t; }
+	
 protected:
 
 	string name;
 	vector<ramNode> nodes;
+	ramNodeArrayType type;
 
 	float last_timestamp;
 	float current_timestamp;

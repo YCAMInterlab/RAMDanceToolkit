@@ -189,8 +189,6 @@ void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
 {
 	const int nNodes = m.getArgAsInt32(1);
 	
-	bool isActor = (nNodes == ramActor::NUM_JOINTS);
-	
 	for (int i = 0; i < nNodes; i++)
 	{
 		const string name = m.getArgAsString(i * 8 + 0 + 2);
@@ -207,8 +205,8 @@ void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
 
 		ramNode &node = getNode(i);
 		node.node_id = i;
-		node.name = isActor ? getJointName(i) : "Node " + ofToString(i);
-
+		node.name = isActor() ? getJointName(i) : "Node " + ofToString(i);
+		
 		node.setGlobalPosition(vec);
 		node.setGlobalOrientation(quat);
 		node.accerelometer.update(vec, quat);

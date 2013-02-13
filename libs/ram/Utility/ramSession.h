@@ -1,12 +1,13 @@
 #pragma once
 
+#include "ramGlobalShortcut.h"
 #include "ramActorManager.h"
 #include "ramActor.h"
 //#include "ofxXmlSettings.h"
 
 #pragma mark - ramBuffer
 
-class ramSession
+class ramSession : public ramGlobalShortcut
 {
 public:
 
@@ -22,8 +23,7 @@ public:
 	
 	void clear()
 	{
-		actors.clear();
-		rigids.clear();
+		node_array.clear();
 		
 		playhead = 0;
 		duration = 0;
@@ -51,11 +51,7 @@ public:
 	{
 		if (isRecording())
 		{
-			if (sessionType == RAM_ACTOR)
-				appendFrame( getActorManager().getActor(sessionName) );
-			
-			else if (sessionType == RAM_RIGID_BODY)
-				appendFrame( getActorManager().getRigidBody(sessionName) );
+			appendFrame( getNodeArray(sessionName) );
 		}
 		
 		if (isPlaying())
@@ -90,7 +86,7 @@ public:
 		recording = false;
 		
 		duration = ofGetElapsedTimef() - rec_start_time;
-		num_frames = sessionType==RAM_ACTOR ? actors.size() : sessionType==RAM_RIGID_BODY ? rigids.size() : RAM_UNDEFINED_TYPE;
+		num_frames = node_array.size();
 		frame_time = duration / num_frames;
 	}
 	
@@ -108,16 +104,10 @@ public:
 		playing = false;
 	}
 
-	void appendFrame(ramActor& actor)
+	void appendFrame(ramNodeArray& array)
 	{
-		if (!actor.getName().empty())
-			actors.push_back(actor);
-	}
-	
-	void appendFrame(ramRigidBody& rigid)
-	{
-		if (!rigid.getName().empty())
-			rigids.push_back(rigid);
+//		if (!actor.getName().empty())
+			node_array.push_back(array);
 	}
 	
 	void load(const string path)
@@ -141,13 +131,11 @@ public:
 	inline float getPlayhead() {return playhead;}
 	inline string getSessionName() {return sessionName;}
 	
-	inline ramActor& getNextFrameActor() {return actors.at(frame_index);}
-	inline ramRigidBody& getNextFrameRigid() {return rigids.at(frame_index);}
+	inline ramNodeArray& getNextFrame() {return node_array.at(frame_index);}
 	
 protected:
 	
-	vector<ramActor> actors;
-	vector<ramRigidBody> rigids;
+	vector<ramNodeArray> node_array;
 	
 	string sessionName;
 	int sessionType;
