@@ -25,4 +25,14 @@ struct ramNodeIdentifer
 	void set(int index) { this->name = ""; this->index = index; }
 
 	void clear() { name = ""; index = -1; }
+	bool isValid() const { return name != "" && index != -1; }
+	
+	friend ostream& operator<<(ostream &os, const ramNodeIdentifer& o)
+	{
+		if (o.isValid())
+			os << "['" << o.name << "' : " << o.index << "]";
+		else
+			os << "(null)";
+		return os;
+	}
 };
