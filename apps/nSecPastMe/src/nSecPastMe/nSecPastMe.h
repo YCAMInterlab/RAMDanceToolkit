@@ -1,7 +1,6 @@
 #pragma once
 
-
-static float REC_SPAN = 15.0;
+static float REC_SPAN = 2.0;
 
 class nSecPastMe : public ramBaseScene
 {
@@ -12,10 +11,7 @@ class nSecPastMe : public ramBaseScene
 	
 public:
 	
-	nSecPastMe()
-	{
-		setSceneName("nSec Past Me");
-	}
+	nSecPastMe() {}
 	
 	
 	void setup()
@@ -30,18 +26,22 @@ public:
 		pastMe[curRecIndex].startRecording();
 	}
 	
-	void refreshControlPanel(ramControlPanel& gui)
+	void setupControlPanel(ofxUICanvas* panel)
 	{
-		gui.addPanel( getSceneName() );
-		
-		guiPtr = &gui;
+		ramControlPanel &gui = ramGetGUI();
+//		
+//		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
+//		panel->addSpacer(gui.kLength, 2);
+//		panel->addSlider("Font Color", 0.0, 255.0, &fontColor, gui.kLength, gui.kDim);
+//		
+//		ofAddListener(panel->newGUIEvent, this, &BigBox::onPanelChanged);
 	}
 	
 	void update()
 	{
 		if ( getActorManager().getNumActor() > 0 )
 		{
-			if ( ofGetElapsedTimef() > lastRecordTime )
+			if ( ofGetElapsedTimef() >= lastRecordTime )
 			{
 				lastRecordTime += REC_SPAN;
 				
@@ -56,7 +56,6 @@ public:
 				// refresh indexes
 				curRecIndex ^= 1;
 				curPlayingIndex ^= 1;
-				
 			}
 		}
 		
@@ -86,9 +85,11 @@ public:
 		
 	}
 	
-	void drawFloor()
+	void onPanelChanged(ofxUIEventArgs& e)
 	{
-	
+		string name = e.widget->getName();
 	}
+	
+	const string getName() { return "My scene"; }
 };
 

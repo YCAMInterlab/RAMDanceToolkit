@@ -100,19 +100,3 @@ void ramSimpleShadow::setShadowAlpha(float alpha)
 {
 	shadow_color = ofFloatColor(shadow_color, alpha);
 }
-
-
-void ramBeginShadow()
-{
-	ramSharedData::instance().shadow.begin();
-}
-
-void ramEndShadow()
-{
-	ramSharedData::instance().shadow.end();
-}
-
-void ramSetShadowAlpha(float alpha)
-{
-	ramSharedData::instance().shadow.setShadowAlpha(alpha);
-}

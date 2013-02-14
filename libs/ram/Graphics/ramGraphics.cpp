@@ -124,7 +124,6 @@ void ramBasicFloor(const int floorPattern,
 	glPopAttrib();
 }
 
-
 void ramBasicActor(const ramActor& actor,
 				   const ofColor& jointColor,
 				   const ofColor& lineColor)
@@ -151,7 +150,7 @@ void ramBasicActor(const ramActor& actor,
 	glPopMatrix();
 }
 
-void ramActorCube(ramActor& actor)
+void ramActorCube(ramActor& actor, ofColor c)
 {
 	ofVec3f maxPos = actor.getNode( ramActor::JOINT_CHEST ).getGlobalPosition();
 	ofVec3f minPos = actor.getNode( ramActor::JOINT_CHEST ).getGlobalPosition();
@@ -173,16 +172,19 @@ void ramActorCube(ramActor& actor)
 	scale = (maxPos - minPos);
 	axis = (maxPos + minPos) / 2;
 	
-	ofSetLineWidth( 2 );
-	ofSetColor( ramColor::BLUE_DEEP );
-	
-	ofPushMatrix();
+	ofPushStyle();
 	{
-		ofTranslate( axis.x, axis.y, axis.z );
-		ofScale( scale.x, scale.y, scale.z );
-		ofNoFill();
-		ofBox(1);
+		ofSetLineWidth( 2 );
+		ofSetColor( c );
+		
+		ofPushMatrix();
+		{
+			ofTranslate( axis.x, axis.y, axis.z );
+			ofScale( scale.x, scale.y, scale.z );
+			ofNoFill();
+			ofBox(1);
+		}
+		ofPopMatrix();
 	}
-	ofPopMatrix();
-
+	ofPopStyle();
 }

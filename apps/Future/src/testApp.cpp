@@ -57,16 +57,6 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-//	ramBasicActor(actor);
-//	
-//	for (int i=0; i<actor.getNumNode(); i++)
-//	{
-//		ramNode& node = actor.getNode(i);
-//		node.beginTransform();
-//		ofBox(10);
-//		node.endTransform();
-//	}
-	
 	sceneManager.drawActor(actor);
 }
 

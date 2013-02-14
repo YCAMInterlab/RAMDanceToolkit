@@ -28,10 +28,12 @@
 #include "ramPendulum.h"
 #include "ramExpand.h"
 #include "ramHangedMan.h"
+#include "ramSession.h"
+#include "ramTimeShifter.h"
+#include "ramStamp.h"
 
 
 /// utility
 #include "ramControlPanel.h"
 #include "ramCameraSettings.h"
 #include "ramNodeFinder.h"
-#include "ramSession.h"

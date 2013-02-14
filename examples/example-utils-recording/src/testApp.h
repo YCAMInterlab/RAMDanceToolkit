@@ -4,12 +4,6 @@
 #include "ramMain.h"
 #include "ofxXmlSettings.h"
 
-/*!
- for debuging....
- */
-static const string myActorName = "Ando_2012-09-01_18-00-48";
-//static const string myActorName = "default";
-
 class testApp : public ramBaseApp
 {
 public:
@@ -38,5 +32,4 @@ public:
 	// ...
 	// ------------------------
 	ramOscReceiver oscReceiver;
-	ramSceneManager sceneManager;
 };

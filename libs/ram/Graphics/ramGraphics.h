@@ -38,11 +38,6 @@ inline static const ofColor getRamColor(ofColor color)
 #pragma mark - ramGraphics
 
 
-void ramBox(const ramNode& o, float size);
-void ramSphere(const ramNode& o, float radius);
-
-void ramActorCube(ramActor& actor);
-
 class ramFloor
 {
 	
@@ -84,7 +79,7 @@ void ramBasicFloor(const int floorPattern,
 				   const ofColor& c1,
 				   const ofColor& c2);
 
-void ramActorCube(ramActor& actor);
+void ramActorCube(ramActor& actor, ofColor c = ramColor::BLACK);
 void ramBox(const ramNode& o, float size);
 void ramSphere(const ramNode& o, float radius);
 

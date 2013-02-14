@@ -1,11 +1,7 @@
 #include "testApp.h"
 
 
-/*!
- Scenes
- */
-#include "nSecPastMe.h"
-nSecPastMe pastme;
+ramStamp stamp;
 
 
 #pragma mark - oF methods
@@ -23,19 +19,10 @@ void testApp::setup()
 	oscReceiver.setup(10000);
 	
 	
-	/// scenes setup
+	/// stamp setup
 	// ------------------
-	vector<ramBaseScene*> scenes;
-	scenes.push_back( pastme.getPtr() );
-	sceneManager.setup(scenes);
-
-	// /*!
-	//  GUI: Actor scale / move
-	//  */
-	// gui.addSlider("Actor Scale", 1.0, 0.1, 3);
-	// gui.addSlider("Actor Position:x", 0, -600, 600);
-	// gui.addSlider("Actor Position:y", 0, -600, 600);
-	// 
+	stamp.setup();
+	ramGetGUI().addPanel(&stamp);
 }
 
 //--------------------------------------------------------------
@@ -45,18 +32,28 @@ void testApp::update()
 	// ------------------
 	oscReceiver.update();
 	
-	
-	/// Scenes update
-	// ------------------
-	sceneManager.update();
+	stamp.update( getActor(0) );
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	/// Scenes draw
-	// ------------------
-	sceneManager.draw();
+	ramBeginCamera();
+	
+	for (int i=0; i<stamp.getNumStamps(); i++)
+	{
+		ramActor& actor = (ramActor&)stamp.getStamp(i);
+		
+		ramBasicActor(actor);
+		ramActorCube(actor);
+		
+		ramBeginShadow();
+		ramBasicActor(actor);
+		ramActorCube(actor);
+		ramEndShadow();
+	}
+	
+	ramEndCamera();
 }
 
 
@@ -65,23 +62,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	
 	ramBasicActor(actor);
-	
-//	if ( gui.getValueB("Draw Actor") )
-//	{
-//		float scale = gui.getValueF("Actor Scale");
-//		float posX = gui.getValueF("Actor Position:x");
-//		float posY = gui.getValueF("Actor Position:y");
-//		
-//		ofPushMatrix();
-//		ofTranslate(posX, 0, posY);
-//		glScalef(scale, scale, scale);
-//		ramBasicActor(actor, shadowMat.getPtr());
-//		ofPopMatrix();
-//	}
-//	
-//	for (int i=0; i<scenes.size(); i++) scenes.at(i)->drawActor(actor);
 }
 
 //--------------------------------------------------------------
@@ -97,7 +78,14 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	
+	if (key == 'c')
+	{
+		stamp.clear();
+	}
+	if (key == 'p')
+	{
+		stamp.createStamp( getActor(0) );
+	}
 }
 
 //--------------------------------------------------------------
@@ -147,4 +135,3 @@ void testApp::dragEvent(ofDragInfo dragInfo)
 {
 	
 }
-

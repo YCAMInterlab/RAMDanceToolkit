@@ -29,7 +29,7 @@ void ramBaseApp::draw(ofEventArgs &args)
 	{
 		// draw shadow
 		
-		ramSharedData::instance().shadow.begin();
+		ramBeginShadow();
 		
 		for (int n=0; n<getActorManager().getNumNodeArray(); n++)
 		{
@@ -41,7 +41,7 @@ void ramBaseApp::draw(ofEventArgs &args)
 				drawRigid((ramRigidBody&)o);
 		}
 		
-		ramSharedData::instance().shadow.end();
+		ramEndShadow();
 	}
 	
 	ramSetEnablePhysicsPrimitive(enable_physics);

@@ -5,7 +5,6 @@
 #include "ramConstants.h"
 
 class ramNodeArray;
-class ramAccelerometer;
 
 #pragma mark - ramAccelerometer
 
@@ -88,7 +87,7 @@ private:
 
 	int node_id;
 	string name;
-
+	
 	ramAccelerometer accerelometer;
 	
 };

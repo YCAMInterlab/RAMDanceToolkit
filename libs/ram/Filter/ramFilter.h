@@ -5,7 +5,49 @@
 #include "ramControllable.h"
 #include "ramControlPanel.h"
 
-class ramFilter : public ramControllable
+/** sample code...
+
+#pragma once
+
+class ramXXXFilter : public ramFilter
+{
+	
+public:
+	
+	ramXXXFilter() {}
+	
+	void setupControlPanel(ofxUICanvas* panel)
+	{
+		ramControlPanel &gui = ramGetGUI();
+		
+		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
+		panel->addSpacer(gui.kLength, 2);
+		
+		ofAddListener(panel->newGUIEvent, this, &ramXXXFilter::onPanelChanged);
+	}
+	
+	void setup()
+	{
+		
+	}
+	
+	const ramNodeArray& update(ramNodeArray& src)
+	{
+		return src;
+	}
+	
+	void onPanelChanged(ofxUIEventArgs& e)
+	{
+
+	}
+	
+	const string getName() { return "ramXXXFilter"; }
+};
+ */
+
+
+
+class ramFilter : public ramControllable, public ramGlobalShortcut
 {
 public:
 	

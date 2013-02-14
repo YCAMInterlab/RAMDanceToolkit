@@ -25,7 +25,3 @@ protected:
 	ofFloatColor shadow_color;
 	
 };
-
-void ramBeginShadow();
-void ramEndShadow();
-void ramSetShadowAlpha(float alpha);
