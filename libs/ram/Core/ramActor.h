@@ -57,6 +57,7 @@ public:
 	ramNode();
 	ramNode(const ramNode& copy) { *this = copy; }
 	ramNode& operator=(const ramNode& copy);
+	
 	const string& getName() { return name; }
 	int getID() { return node_id; }
 
@@ -89,6 +90,8 @@ private:
 	string name;
 	
 	ramAccelerometer accerelometer;
+	
+	ramNodeArray *container;
 	
 };
 

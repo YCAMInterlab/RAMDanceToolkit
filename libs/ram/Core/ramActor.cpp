@@ -4,7 +4,7 @@
 
 string getJointName(unsigned int jointId) { return ramActor::getJointName(jointId); }
 
-ramNode::ramNode() : ofNode(), node_id(-1)
+ramNode::ramNode() : ofNode(), node_id(-1), container(NULL)
 {
 }
 
@@ -16,6 +16,8 @@ ramNode& ramNode::operator=(const ramNode& copy)
 	name = copy.name;
 	accerelometer = copy.accerelometer;
 	parent = copy.parent;
+	
+	container = NULL;
 	
 	return *this;
 }
@@ -48,6 +50,8 @@ void ramNodeArray::rebuildHierarchy(const ramNodeArray& ref)
 	{
 		const ramNode &src = ref.nodes[i];
 		ramNode &dst = nodes[i];
+		
+		dst.container = this;
 		
 		ramNode *p = src.getParent();
 		if (!p) continue;
