@@ -70,11 +70,9 @@ void ramControlPanel::setup()
 	mPanelGeneral->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 	
 	
-	/// camera positions
-	ofxXmlSettings camSet( kCamSettingFile );
-	vector<string> positions = ramCameraSettings::getCamNames(camSet);
+	/// camera Names
 	mPanelGeneral->addSpacer(kLength, 2);
-	mPanelGeneral->addRadio("Camera Preset", positions, OFX_UI_ORIENTATION_VERTICAL, kDim, kDim);
+	mPanelGeneral->addRadio("Camera Preset", ramCameraManager::instance().getDefaultCameraNames(), OFX_UI_ORIENTATION_VERTICAL, kDim, kDim);
 	
 	
 	/// Camera Position
@@ -117,13 +115,8 @@ void ramControlPanel::addPanel(ramControllable* control)
 
 void ramControlPanel::reloadCameraSetting(const int index)
 {
-	ofxXmlSettings xml( kCamSettingFile );
-	xml.pushTag("cam", index);
-	ramCameraSettings setting( xml );
-	ramCameraManager::instance().getActiveCamera().setPosition( setting.pos );
-	ramCameraManager::instance().getActiveCamera().lookAt( setting.look_at );
+	ramCameraManager::instance().rollbackDefaultCameraSetting(index);
 }
-
 
 void ramControlPanel::setupSceneToggles(vector<ramBaseScene*>& scenes_)
 {

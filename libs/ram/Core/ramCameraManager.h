@@ -3,12 +3,15 @@
 #include "ofMain.h"
 
 #include "ofxXmlSettings.h"
+#include "ramCameraSettings.h"
 
 class ramCameraManager
 {
 public:
 	
 	static ramCameraManager& instance();
+	
+	void loadDefaults();
 	
 	inline size_t getNumCameras() { return cameras.size(); }
 	ofCamera& getActiveCamera() { return *active_camera; }
@@ -24,6 +27,11 @@ public:
 	
 	void setEnableInteractiveCamera(bool v);
 	
+	
+	// defaults
+	vector<string> getDefaultCameraNames();
+	void rollbackDefaultCameraSetting(int camera_id);
+	
 protected:
 	
 	static ramCameraManager *_instance;
@@ -34,6 +42,8 @@ protected:
 	ramCameraManager();
 	ramCameraManager(const ramCameraManager&) {}
 	ramCameraManager& operator=(const ramCameraManager&) { return *this; }
+	
+	vector<ramCameraSettings> settings;
 	
 };
 

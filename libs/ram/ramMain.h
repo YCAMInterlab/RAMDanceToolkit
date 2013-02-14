@@ -35,5 +35,4 @@
 
 /// utility
 #include "ramControlPanel.h"
-#include "ramCameraSettings.h"
 #include "ramNodeFinder.h"

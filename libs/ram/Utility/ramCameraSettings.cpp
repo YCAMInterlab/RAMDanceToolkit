@@ -14,51 +14,7 @@ void ramCameraSettings::reset()
 	pos = moving_from;
 }
 
-
-
-vector<string> ramCameraSettings::getCamNames(ofxXmlSettings& setting)
-{
-	const int numCams = setting.getNumTags("cam");
-	
-	vector<string> names;
-	names.clear();
-	names.resize(numCams);
-	
-	for (int i=0; i<numCams; i++)
-	{
-		setting.pushTag("cam", i);
-		{
-			names.at(i) = setting.getValue("name", "");
-		}
-		setting.popTag();
-	}
-	return names;
-}
-
-vector<ofVec3f> ramCameraSettings::getCamPositions(ofxXmlSettings& setting)
-{
-	const int numCams = setting.getNumTags("cam");
-	
-	vector<ofVec3f> positions;
-	positions.clear();
-	positions.resize(numCams);
-	
-	for (int i=0; i<numCams; i++)
-	{
-		setting.pushTag("cam", i);
-		{
-			positions.at(i) = ofVec3f(setting.getValue("x", 0),
-									  setting.getValue("y", 0),
-									  setting.getValue("z", 0));
-		}
-		setting.popTag();
-	}
-	
-	if (numCams==0) positions.at(0) = ofVec3f(0,0,0);
-	return positions;
-}
-
-vector<ramCameraSettings> ramCameraSettings::getSettings(ofxXmlSettings& setting)
+vector<ramCameraSettings> ramCameraSettings::loadSettings(ofxXmlSettings& setting)
 {
 	const int numCams = setting.getNumTags("cam");
 	

@@ -7,6 +7,8 @@ class ramCameraSettings
 	
 public:
 	
+	static vector<ramCameraSettings> loadSettings(ofxXmlSettings& setting);
+	
 	ramCameraSettings(){}
 	ramCameraSettings(ofxXmlSettings& setting)
 	{
@@ -51,10 +53,4 @@ public:
 	///
 	void prepareForPlay();
 	void reset();
-	
-	
-	static vector<string> getCamNames(ofxXmlSettings& setting);
-	static vector<ofVec3f> getCamPositions(ofxXmlSettings& setting);
-	static vector<ramCameraSettings> getSettings(ofxXmlSettings& setting);
-	static ramCameraSettings getSettingsAt(ofxXmlSettings& setting);
 };
