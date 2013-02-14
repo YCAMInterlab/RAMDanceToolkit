@@ -1,6 +1,6 @@
 #pragma once
 
-class ramStamp : public ramFilter
+class ramStamp : public ramBaseFilter
 {
 
 	deque<ramNodeArray> mStamps;

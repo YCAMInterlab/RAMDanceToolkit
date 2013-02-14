@@ -5,7 +5,7 @@
 //#include "ofxXmlSettings.h"
 
 
-class ramSession : public ramFilter
+class ramSession : public ramBaseFilter
 {
 	
 public:

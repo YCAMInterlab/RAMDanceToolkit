@@ -13,7 +13,7 @@ enum ramTimeShifterMaxValue
 	RAM_TIMESHIFT_MAX_FRAMES = 10800 // 180 sec * 60fps
 };
 
-class ramTimeShifter : public ramFilter
+class ramTimeShifter : public ramBaseFilter
 {
 	deque<ramNodeArray> buffer;
 	
