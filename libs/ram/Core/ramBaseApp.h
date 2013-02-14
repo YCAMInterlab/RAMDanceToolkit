@@ -11,12 +11,15 @@ class ramBaseApp : public ofBaseApp, public ramGlobalShortcut
     
 public:
 	
-	ramBaseApp() { ramEnableAllEvents(); };
+	ramBaseApp() : draw_floor_auto(true) { ramEnableAllEvents(); };
 	virtual ~ramBaseApp() {};
 
-	virtual void drawFloor();
 	virtual void drawActor(ramActor &actor) {}
 	virtual void drawRigid(ramRigidBody &rigid) {}
+	
+	void drawFloor();
+	
+	void setDrawFloorAuto(bool v = true) { v = draw_floor_auto; }
 	
 	void updateWithOscMessage(const ofxOscMessage &m) { getActorManager().updateWithOscMessage(m); }
 
@@ -38,6 +41,8 @@ public:
 	virtual void collision(const ramNode& jointA, const ramNode& jointB) {}
 	
 private:
+	
+	bool draw_floor_auto;
 	
 	// event callback
 	void setup(ofEventArgs &args);

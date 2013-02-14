@@ -97,11 +97,6 @@ public:
 		
 	}
 	
-	void drawFloor()
-	{
-		
-	}
-	
 	const string getName() { return "Duplicate me"; }
 };
 

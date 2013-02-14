@@ -76,11 +76,6 @@ public:
 		
 	}
 	
-	void drawFloor()
-	{
-		
-	}
-	
 	const string getName() { return "Future events"; }
 };
 

@@ -17,10 +17,8 @@ void ramBaseApp::update(ofEventArgs &args)
 
 void ramBaseApp::draw(ofEventArgs &args)
 {
-	ofCamera &cam = ramCameraManager::instance().getActiveCamera();
+	ramBeginCamera();
 	
-    cam.begin();
-    
 	drawFloor();
 
 	bool enable_physics = ramGetEnablePhysicsPrimitive();
@@ -60,13 +58,14 @@ void ramBaseApp::draw(ofEventArgs &args)
 	
 	getActorManager().draw();
     
-	cam.end();
+	ramEndCamera();
 }
 
 void ramBaseApp::drawFloor()
 {
-	ramControlPanel &gui = ramGetGUI();
+	if (!draw_floor_auto) return;
 	
+	ramControlPanel &gui = ramGetGUI();
 	ramBasicFloor(gui.getFloorPattern(),
 				  gui.getFloorSize(),
 				  gui.getGridSize(),
