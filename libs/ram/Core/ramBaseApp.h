@@ -19,7 +19,7 @@ public:
 	
 	void drawFloor();
 	
-	void setDrawFloorAuto(bool v = true) { v = draw_floor_auto; }
+	void setDrawFloorAuto(bool v = true) { draw_floor_auto = v; }
 	
 	void updateWithOscMessage(const ofxOscMessage &m) { getActorManager().updateWithOscMessage(m); }
 
