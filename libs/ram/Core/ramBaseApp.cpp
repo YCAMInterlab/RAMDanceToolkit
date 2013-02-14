@@ -21,44 +21,31 @@ void ramBaseApp::draw(ofEventArgs &args)
 	
     cam.begin();
     
+	getActorManager().draw();
+	
 	drawFloor();
 
 	bool enable_physics = ramGetEnablePhysicsPrimitive();
+	
 	ramSetEnablePhysicsPrimitive(false);
 	
 	{
-		// draw shadow
+		// shadow
 		
 		ramBeginShadow();
 		
-		for (int n=0; n<getActorManager().getNumNodeArray(); n++)
-		{
-			ramNodeArray &o = getNodeArray(n);
-			
-			if (o.getNumNode() == ramActor::NUM_JOINTS)
-				drawActor((ramActor&)o);
-			else
-				drawRigid((ramRigidBody&)o);
-		}
-		
+		drawNodeArrays();
+
 		ramEndShadow();
 	}
 	
-	ramSetEnablePhysicsPrimitive(enable_physics);
 	{
-		for (int n=0; n<getActorManager().getNumNodeArray(); n++)
-		{
-			ramNodeArray &o = getNodeArray(n);
-			if (o.getNumNode() == ramActor::NUM_JOINTS)
-				drawActor((ramActor&)o);
-			else
-			{
-				drawRigid((ramRigidBody&)o);
-			}
-		}
+		// entities
+		
+		ramSetEnablePhysicsPrimitive(enable_physics);
+		
+		drawNodeArrays();
 	}
-	
-	getActorManager().draw();
     
 	cam.end();
 }
@@ -72,4 +59,34 @@ void ramBaseApp::drawFloor()
 				  gui.getGridSize(),
 				  ramColor::BLUE_LIGHT,
 				  ramColor::BLUE_DEEP);
+}
+
+void ramBaseApp::drawNodeArrays()
+{
+	// draw nodearray
+	
+	for (int n=0; n<getNumNodeArray(); n++)
+	{
+		ramNodeArray &o = getNodeArray(n);
+		
+		if (o.isActor())
+			drawActor((ramActor&)o);
+		else
+			drawRigid((ramRigidBody&)o);
+	}
+	
+	// draw bus
+	
+	map<string, ramNodeArray>::iterator it = getActorManager().getAllBus().begin();
+	
+	while( it != getActorManager().getAllBus().end() )
+	{
+		ramNodeArray &o = (*it).second;
+		
+		if (o.isActor())
+			drawActor((ramActor&)o);
+		else
+			drawRigid((ramRigidBody&)o);
+		++it;
+	}
 }

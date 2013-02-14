@@ -65,7 +65,6 @@ public:
 		{
 			for (int i=numSegments; i<numActor; i++)
 			{
-				/// !!!:
 				const ramNodeArray copy = getNodeArray(i);
 				addEntityControl( copy );
 			}

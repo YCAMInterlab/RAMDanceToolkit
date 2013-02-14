@@ -63,6 +63,7 @@ ramNodeArray& ramNodeArray::operator=(const ramNodeArray& copy)
 {
 	name = copy.name;
 	nodes = copy.nodes;
+	type = copy.type;
 	
 	rebuildHierarchy(copy);
 	
