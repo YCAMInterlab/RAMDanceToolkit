@@ -41,7 +41,9 @@ public:
 	inline bool hasNodeArray(const string &key) { return nodearrays.hasKey(key); }
 
 	// for mouse picked node
-	const ramNodeIdentifer& getLastSelectedNode();
+	const ramNodeIdentifer& getLastSelectedNodeIdentifer();
+	const ramNode* getLastSelectedNode();
+	const ramNodeArray* getLastSelectedNodeArray();
 	
 	// Freeze all actor
 	inline bool isFreezed() { return bFreeze; }
