@@ -18,47 +18,60 @@ void ramBaseApp::update(ofEventArgs &args)
 void ramBaseApp::draw(ofEventArgs &args)
 {
 	ramBeginCamera();
-	
+
 	drawFloor();
+	getActorManager().draw();
 
 	bool enable_physics = ramGetEnablePhysicsPrimitive();
+	
 	ramSetEnablePhysicsPrimitive(false);
 	
 	{
-		// draw shadow
+		// shadow
 		
 		ramBeginShadow();
-		
-		for (int n=0; n<getActorManager().getNumNodeArray(); n++)
-		{
-			ramNodeArray &o = getNodeArray(n);
-			
-			if (o.getNumNode() == ramActor::NUM_JOINTS)
-				drawActor((ramActor&)o);
-			else
-				drawRigid((ramRigidBody&)o);
-		}
-		
+		drawNodeArrays();
 		ramEndShadow();
 	}
 	
 	ramSetEnablePhysicsPrimitive(enable_physics);
-	{
-		for (int n=0; n<getActorManager().getNumNodeArray(); n++)
-		{
-			ramNodeArray &o = getNodeArray(n);
-			if (o.getNumNode() == ramActor::NUM_JOINTS)
-				drawActor((ramActor&)o);
-			else
-			{
-				drawRigid((ramRigidBody&)o);
-			}
-		}
-	}
 	
-	getActorManager().draw();
+	{
+		// entities
+		drawNodeArrays();
+	}
     
 	ramEndCamera();
+}
+
+void ramBaseApp::drawNodeArrays()
+{
+	// draw nodearray
+	
+	for (int n=0; n<getNumNodeArray(); n++)
+	{
+		ramNodeArray &o = getNodeArray(n);
+		
+		if (o.isActor())
+			drawActor((ramActor&)o);
+		else
+			drawRigid((ramRigidBody&)o);
+	}
+	
+	// draw bus
+	
+	map<string, ramNodeArray>::iterator it = getActorManager().getAllBus().begin();
+	
+	while( it != getActorManager().getAllBus().end() )
+	{
+		ramNodeArray &o = (*it).second;
+		
+		if (o.isActor())
+			drawActor((ramActor&)o);
+		else
+			drawRigid((ramRigidBody&)o);
+		++it;
+	}
 }
 
 void ramBaseApp::drawFloor()

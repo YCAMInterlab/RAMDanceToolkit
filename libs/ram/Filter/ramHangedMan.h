@@ -2,9 +2,9 @@
 
 #include "ramMain.h"
 
-#include "ramFilter.h"
+#include "ramBaseFilter.h"
 
-class ramHangedMan : public ramFilter
+class ramHangedMan : public ramBaseFilter
 {
 	
 public:

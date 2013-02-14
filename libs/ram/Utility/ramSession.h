@@ -153,6 +153,5 @@ protected:
 	
 	int frame_index;
 	int num_frames;
-	inline ramActorManager& getActorManager() { return ramActorManager::instance(); }
 };
 

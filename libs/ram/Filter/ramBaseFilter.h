@@ -9,7 +9,7 @@
 
 #pragma once
 
-class ramXXXFilter : public ramFilter
+class ramXXXFilter : public ramBaseFilter
 {
 	
 public:
@@ -47,11 +47,11 @@ public:
 
 
 
-class ramFilter : public ramControllable, public ramGlobalShortcut
+class ramBaseFilter : public ramControllable, public ramGlobalShortcut
 {
 public:
 	
-	virtual ~ramFilter() {}
+	virtual ~ramBaseFilter() {}
 	
 	virtual void setupControlPanel(ramControlPanel& gui) {}
 	virtual void setup() {}
@@ -59,7 +59,7 @@ public:
 	virtual const ramNodeArray& getResult() { static ramNodeArray arr; return arr; }
 };
 
-class ramBusSend : public ramFilter
+class ramBusSend : public ramBaseFilter
 {
 public:
 	

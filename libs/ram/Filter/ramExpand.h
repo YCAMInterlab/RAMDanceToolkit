@@ -1,10 +1,10 @@
 #pragma once
 
 #include "ramMain.h"
-#include "ramFilter.h"
+#include "ramBaseFilter.h"
 #include "ramControlPanel.h"
 
-class ramExpand : public ramFilter
+class ramExpand : public ramBaseFilter
 {
 	float kExpandMax;
 	float mExpand;

@@ -1,10 +1,10 @@
 #pragma once
 
 #include "ramMain.h"
-#include "ramFilter.h"
+#include "ramBaseFilter.h"
 #include "ramControlPanel.h"
 
-class ramPendulum : public ramFilter
+class ramPendulum : public ramBaseFilter
 {
 	float mFreq;
 	ofVec3f mAxis;

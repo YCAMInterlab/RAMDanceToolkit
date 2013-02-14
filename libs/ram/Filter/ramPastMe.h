@@ -1,10 +1,10 @@
 #pragma once
 
-#include "ramFilter.h"
+#include "ramBaseFilter.h"
 #include "ramControlPanel.h"
 #include "ramSession.h"
 
-class ramPastMe : public ramFilter
+class ramPastMe : public ramBaseFilter
 {
 	float mRecSpan;
     float mLastRecordTime;

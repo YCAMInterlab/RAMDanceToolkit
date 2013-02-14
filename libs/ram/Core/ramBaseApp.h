@@ -49,6 +49,9 @@ private:
 	void update(ofEventArgs &args);
 	void draw(ofEventArgs &args);
 	void exit(ofEventArgs &args);
+	
+	//
+	void drawNodeArrays();
 };
 
 

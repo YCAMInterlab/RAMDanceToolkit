@@ -33,7 +33,7 @@ void testApp::update()
 	
 	
 	// update ghost with passing ramActor
-	ghost.update( getActor(myActorName) );
+	ghost.update( getNodeArray(0) );
 }
 
 //--------------------------------------------------------------

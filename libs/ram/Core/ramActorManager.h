@@ -52,7 +52,7 @@ public:
 	bool hasBus(const string& bus_name) { return bus.find(bus_name) != bus.end(); }
 	void setBus(const string& bus_name, const ramNodeArray &arr) { bus[bus_name] = arr; }
 	const ramNodeArray& getBus(const string& bus_name) { return bus[bus_name]; }
-
+	map<string, ramNodeArray>& getAllBus() {return bus;};
 	
 	// for internal use
 	void updateWithOscMessage(const ofxOscMessage &m);

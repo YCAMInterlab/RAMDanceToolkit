@@ -2,10 +2,10 @@
 
 #include "ramMain.h"
 
-#include "ramFilter.h"
+#include "ramBaseFilter.h"
 #include "ramControlPanel.h"
 
-class ramGhost : public ramFilter
+class ramGhost : public ramBaseFilter
 {
 public:
 	

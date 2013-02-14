@@ -160,7 +160,7 @@ void ramControlPanel::guiEvent(ofxUIEventArgs &e)
 		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
 		ofSetFullscreen(toggle->getValue());
 	}
-	
+
 	
 	/// floor patterns
 	if		( name == "NONE" )			 mFloorPattern = ramFloor::FLOOR_NONE;
@@ -180,6 +180,7 @@ void ramControlPanel::guiEvent(ofxUIEventArgs &e)
 	else if ( name == "CAM_EDGE_BR" )	reloadCameraSetting( 7 );
 	else if ( name == "CAM_EDGE_BL" )	reloadCameraSetting( 8 );
 	else if ( name == "CAM_EDGE_FL" )	reloadCameraSetting( 9 );
+	
 	
 	/// scene togglematrix
 	if (scenes != NULL)

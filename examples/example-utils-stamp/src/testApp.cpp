@@ -32,7 +32,7 @@ void testApp::update()
 	// ------------------
 	oscReceiver.update();
 	
-	stamp.update( getActor(0) );
+	stamp.update( getNodeArray(0) );
 }
 
 //--------------------------------------------------------------
@@ -84,7 +84,7 @@ void testApp::keyPressed(int key)
 	}
 	if (key == 'p')
 	{
-		stamp.createStamp( getActor(0) );
+		stamp.createStamp( getNodeArray(0) );
 	}
 }
 
