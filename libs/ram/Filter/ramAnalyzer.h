@@ -3,6 +3,7 @@
 #include "ramMain.h"
 
 #include "ramBaseFilter.h"
+#include "ramNodeFinder.h"
 
 class ramBalancer : public ramBaseFilter
 {
@@ -97,4 +98,154 @@ private:
 		weightBalance.at(ramActor::JOINT_RIGHT_WRIST) = 0.02;
 		weightBalance.at(ramActor::JOINT_RIGHT_HAND) = 0.01;
 	}
+};
+
+//
+
+class ramMovementAnalyser : public ramNodeFinder
+{
+public:
+	
+	ramMovementAnalyser() : threshold(2), state(false) {}
+	
+	void setThreshold(float v) { threshold = v; }
+	float getThreshold() { return threshold; }
+	
+	virtual float update()
+	{
+		if (!found()) return 0;
+		
+		float total_dist = 0;
+		vector<ramNode> found_nodes = get();
+		
+		if (found_nodes.size())
+		{
+			center_pos = found_nodes[0];
+			
+			for (int i = 0; i < found_nodes.size(); i++)
+			{
+				total_dist += found_nodes[i].getVelocity().length();
+			}
+			
+			current_value += (log(total_dist + 1) - current_value) * 0.5;
+		}
+		
+		bool b = current_value > threshold;
+		if (b != state)
+		{
+			state = b;
+			if (b) onMove();
+			else onStop();
+		}
+		
+		return total_dist;
+	}
+	
+	void draw()
+	{
+		glPushMatrix();
+		
+		ofTranslate(center_pos);
+		billboard();
+		
+		ofFill();
+		ofCircle(0, 0, current_value * 10);
+		
+		ofNoFill();
+		ofCircle(0, 0, threshold * 10);
+		
+		glPopMatrix();
+	}
+	
+protected:
+	
+	ofVec3f center_pos;
+	
+	inline void billboard()
+	{
+		ofMatrix4x4 m;
+		glGetFloatv(GL_MODELVIEW_MATRIX, m.getPtr());
+		
+		ofVec3f s = m.getScale();
+		
+		m(0, 0) = s.x;
+		m(0, 1) = 0;
+		m(0, 2) = 0;
+		
+		m(1, 0) = 0;
+		m(1, 1) = s.y;
+		m(1, 2) = 0;
+		
+		m(2, 0) = 0;
+		m(2, 1) = 0;
+		m(2, 2) = s.z;
+		
+		glLoadMatrixf(m.getPtr());
+	}
+	
+	virtual void onMove() {}
+	virtual void onStop() {}
+	
+	bool getState() { return state; }
+	
+private:
+	
+	float threshold;
+	float current_value;
+	
+	bool state;
+	
+};
+
+class ramTimerdMovementAnalyser : public ramMovementAnalyser
+{
+public:
+	
+	ramTimerdMovementAnalyser() : hold_time(1), current_time(0) {}
+	
+	void setTime(float t) { hold_time = t; }
+	float getTime() { return hold_time; }
+	
+	virtual float update()
+	{
+		float dist = ramMovementAnalyser::update();
+		
+		if (hold_state == getState())
+		{
+			current_time = 0;
+		}
+		else
+		{
+			current_time += ofGetLastFrameTime();
+			
+			if (current_time > hold_time
+				&& hold_state != getState())
+			{
+				hold_state = getState();
+				
+				if (getState())
+				{
+					onTimerdMove();
+				}
+				else
+				{
+					onTimerdStop();
+				}
+			}
+		}
+		
+		return dist;
+	}
+	
+protected:
+	
+	virtual void onTimerdMove() {}
+	virtual void onTimerdStop() {}
+	
+private:
+	
+	bool hold_state;
+	float hold_time;
+	float current_time;
+	
 };

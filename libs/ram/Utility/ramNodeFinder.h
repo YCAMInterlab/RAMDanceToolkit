@@ -17,8 +17,11 @@ public:
 	
 	inline bool found()
 	{
-		if (!hasNodeArray(name)) return false;
-		return ofInRange(index, 0, getNodeArray(name).getNumNode());
+		if (!hasNodeArray(name))
+			return false;
+		
+		return index == -1
+			|| (index >= 0 && index < getNodeArray(name).getNumNode());
 	}
 	
 	// safety API
