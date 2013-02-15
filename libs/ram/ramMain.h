@@ -31,6 +31,7 @@
 #include "ramSession.h"
 #include "ramTimeShifter.h"
 #include "ramStamp.h"
+#include "ramNodeTransform.h"
 
 
 /// utility
