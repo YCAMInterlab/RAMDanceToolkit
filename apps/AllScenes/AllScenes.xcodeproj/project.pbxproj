@@ -315,6 +315,7 @@
 		9A44B13116AEC02400DC4CB6 /* Future.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Future.h; sourceTree = "<group>"; };
 		9AAA0B1816CA9DB4002D15E6 /* DuplicateMe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuplicateMe.h; sourceTree = "<group>"; };
 		9AC08FCF16CDF4B800892109 /* Stamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stamp.h; sourceTree = "<group>"; };
+		9AC08FE516CE03C800892109 /* Expansion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expansion.h; sourceTree = "<group>"; };
 		9AD3316C16AE52CE0003FD7D /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		9AD3316D16AE52CE0003FD7D /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		9AD3316E16AE52CE0003FD7D /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
@@ -471,6 +472,7 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				9AC08FE416CE03C800892109 /* Expansion */,
 				9AC08FCE16CDF4B800892109 /* Stamp */,
 				6079C9F216CBECEC00ABCCD6 /* BasicActor */,
 				9AAA0B1716CA9DB4002D15E6 /* DuplicateMe */,
@@ -893,6 +895,15 @@
 			);
 			name = Stamp;
 			path = ../../Stamp/src/Stamp;
+			sourceTree = "<group>";
+		};
+		9AC08FE416CE03C800892109 /* Expansion */ = {
+			isa = PBXGroup;
+			children = (
+				9AC08FE516CE03C800892109 /* Expansion.h */,
+			);
+			name = Expansion;
+			path = ../../Expansion/src/Expansion;
 			sourceTree = "<group>";
 		};
 		9AD3316A16AE52CE0003FD7D /* ofxXmlSettings */ = {

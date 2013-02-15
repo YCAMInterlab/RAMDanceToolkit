@@ -1,29 +1,8 @@
 #include "testApp.h"
 
 
-/*!
- Scenes
- */
-#include "BasicActor.h"
-#include "BigBox.h"
-#include "Bullet.h"
-#include "Future.h"
-#include "DrawLines.h"
-#include "DuplicateMe.h"
-#include "Stamp.h"
-#include "UpsideDown.h"
 #include "Expansion.h"
-
-BasicActor basicActor;
-BigBox bigbox;
-Bullet bullet;
-Future future;
-DrawLines drawLines;
-DuplicateMe duplicateMe;
-Stamp stamp;
-UpsideDown upsideDown;
 Expansion expansion;
-
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -40,20 +19,10 @@ void testApp::setup()
 	oscReceiver.setup(10000);
 	
 	
-	/// scenes setup
+	/// stamp setup
 	// ------------------
-	vector<ramBaseScene*> scenes;
-	scenes.push_back( basicActor.getPtr() );
-	scenes.push_back( upsideDown.getPtr() );
-	scenes.push_back( expansion.getPtr() );
-	scenes.push_back( bigbox.getPtr() );
-	scenes.push_back( future.getPtr() );
-	scenes.push_back( bullet.getPtr() );
-	scenes.push_back( drawLines.getPtr() );
-	scenes.push_back( duplicateMe.getPtr() );
-	scenes.push_back( stamp.getPtr() );
-	sceneManager.setup(scenes);
-	
+	expansion.setup();
+	ramGetGUI().addPanel(&expansion);
 }
 
 //--------------------------------------------------------------
@@ -64,47 +33,39 @@ void testApp::update()
 	oscReceiver.update();
 	
 	
-	/// Scenes update
-	// ------------------
-	sceneManager.update();
+	expansion.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	/// Scenes draw
-	// ------------------
-	sceneManager.draw();
+	expansion.draw();
 }
+
+
 
 #pragma mark - ram methods
 
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	/// Scenes drawActor
-	// ------------------
-	sceneManager.drawActor(actor);
+	expansion.drawActor(actor);
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
-	/// Scenes drawActor
-	// ------------------
-	sceneManager.drawRigid(rigid);
+	
 }
+
+
+
 
 #pragma mark - oF Events
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	switch (key)
-	{
-		case 'b':
-			bullet.cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
-			break;
-	}
+	
 }
 
 //--------------------------------------------------------------
@@ -154,3 +115,4 @@ void testApp::dragEvent(ofDragInfo dragInfo)
 {
 	
 }
+

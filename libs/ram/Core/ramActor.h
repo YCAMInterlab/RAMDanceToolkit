@@ -81,8 +81,8 @@ public:
 	
 	inline ramAccelerometer& getAccerelometer() { return accerelometer; }
 	
-	void drawId();
-	void drawName();
+	void drawId(int floatPos=20);
+	void drawName(int floatPos=20);
 	
 private:
 

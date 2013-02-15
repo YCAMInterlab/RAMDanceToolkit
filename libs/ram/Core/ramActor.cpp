@@ -22,17 +22,17 @@ ramNode& ramNode::operator=(const ramNode& copy)
 	return *this;
 }
 
-void ramNode::drawId()
+void ramNode::drawId(int floatPos)
 {
 	ofVec3f pos = getGlobalPosition();
-	pos.y += 20;
+	pos.y += floatPos;
 	ofDrawBitmapString(ofToString(getID()), pos);
 }
 
-void ramNode::drawName()
+void ramNode::drawName(int floatPos)
 {
 	ofVec3f pos = getGlobalPosition();
-	pos.y += 20;
+	pos.y += floatPos;
 	ofDrawBitmapString(ofToString(getName()), pos);
 }
 
