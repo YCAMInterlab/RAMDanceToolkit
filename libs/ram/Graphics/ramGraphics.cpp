@@ -188,3 +188,13 @@ void ramDrawActorCube(ramActor& actor, ofColor c)
 	}
 	ofPopStyle();
 }
+
+void ramDrawNodeCorresponds(const ramNodeArray &a, const ramNodeArray &b)
+{
+	assert(a.getNumNode() == b.getNumNode());
+	
+	for (int i = 0; i < a.getNumNode(); i++)
+	{
+		ofLine(a.getNode(i).getGlobalPosition(), b.getNode(i).getGlobalPosition());
+	}
+}
