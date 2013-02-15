@@ -4,11 +4,11 @@
 
 #include "ramBaseFilter.h"
 
-class ramHangedMan : public ramBaseFilter
+class ramUpsideDown : public ramBaseFilter
 {
 	
 public:
-	ramHangedMan() {}
+	ramUpsideDown() {}
 	
 	const ramNodeArray& update(const ramNodeArray& src)
 	{
@@ -34,7 +34,7 @@ public:
 	}
 	
 	inline const ramNodeArray& getResult() { return hangedNodes; }
-	inline const string getName() { return "ramHangedMan"; };
+	inline const string getName() { return "ramUpsideDown"; };
 	
 protected:
 	
