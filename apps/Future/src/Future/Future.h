@@ -58,7 +58,7 @@ public:
 		
 		if (mShowGhost)
 		{
-			ramBasicActor( (ramActor&)mGhost.getResult() );
+			ramDrawBasicActor( (ramActor&)mGhost.getResult() );
 		}
 
 		if (mShowParticle)

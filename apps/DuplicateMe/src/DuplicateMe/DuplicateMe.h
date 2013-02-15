@@ -71,7 +71,7 @@ public:
 
 			if(mShowActor)
 			{
-				ramBasicActor(actor, c1, c2);
+				ramDrawBasicActor(actor, c1, c2);
 			}
 			else
 			{

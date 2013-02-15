@@ -79,7 +79,7 @@ void ramBaseApp::drawFloor()
 	if (!draw_floor_auto) return;
 	
 	ramControlPanel &gui = ramGetGUI();
-	ramBasicFloor(gui.getFloorPattern(),
+	ramDrawBasicFloor(gui.getFloorPattern(),
 				  gui.getFloorSize(),
 				  gui.getGridSize(),
 				  ramColor::BLUE_LIGHT,

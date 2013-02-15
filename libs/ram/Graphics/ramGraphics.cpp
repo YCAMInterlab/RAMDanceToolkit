@@ -58,7 +58,7 @@ void ramSphere(const ramNode& o, float radius)
 
 //
 
-void ramBasicFloor(const int floorPattern,
+void ramDrawBasicFloor(const int floorPattern,
 				   const float floorSize,
 				   const float tileSize,
 				   const ofColor& c1,
@@ -124,7 +124,7 @@ void ramBasicFloor(const int floorPattern,
 	glPopAttrib();
 }
 
-void ramBasicActor(const ramActor& actor,
+void ramDrawBasicActor(const ramActor& actor,
 				   const ofColor& jointColor,
 				   const ofColor& lineColor)
 {
@@ -150,7 +150,7 @@ void ramBasicActor(const ramActor& actor,
 	glPopMatrix();
 }
 
-void ramActorCube(ramActor& actor, ofColor c)
+void ramDrawActorCube(ramActor& actor, ofColor c)
 {
 	ofVec3f maxPos = actor.getNode( ramActor::JOINT_CHEST ).getGlobalPosition();
 	ofVec3f minPos = actor.getNode( ramActor::JOINT_CHEST ).getGlobalPosition();

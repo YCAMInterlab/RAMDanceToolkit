@@ -41,18 +41,18 @@ public:
 			// actor
 			if (mShowActor)
 			{
-				ramBasicActor(actor);
+				ramDrawBasicActor(actor);
 				ramBeginShadow();
-				ramBasicActor(actor);
+				ramDrawBasicActor(actor);
 				ramEndShadow();
 			}
 			
 			// shadow
 			if (mShowBox)
 			{
-				ramActorCube(actor);
+				ramDrawActorCube(actor);
 				ramBeginShadow();
-				ramActorCube(actor);
+				ramDrawActorCube(actor);
 				ramEndShadow();
 			}
 		}

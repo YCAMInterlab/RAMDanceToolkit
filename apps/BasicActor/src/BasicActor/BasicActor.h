@@ -84,7 +84,7 @@ public:
 		{
 			glTranslatef(segment.translate.x, segment.translate.y, segment.translate.z);
 			glScalef(segment.scale, segment.scale, segment.scale);
-			ramBasicActor(actor);
+			ramDrawBasicActor(actor);
 		}
 		glPopMatrix();
 	}

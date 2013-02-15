@@ -35,7 +35,7 @@ public:
 	void drawActor(ramActor& actor)
 	{
 		const ramActor &result = upsideDown.update(actor);
-		ramBasicActor(result);
+		ramDrawBasicActor(result);
 	}
 	
 	void drawRigid(ramRigidBody &rigid)
