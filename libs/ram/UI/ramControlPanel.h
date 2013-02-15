@@ -5,7 +5,6 @@
 #include "ramSharedData.h"
 #include "ramGraphics.h"
 #include "ramCameraManager.h"
-#include "ramCameraSettings.h"
 #include "ramControllable.h"
 #include "ramBaseScene.h"
 
@@ -20,7 +19,6 @@ public:
 	const float kDim = 16;
 	const float kXInit = OFX_UI_GLOBAL_WIDGET_SPACING;
 	const float kLength = 320-kXInit;
-	const string kCamSettingFile = ramToResourcePath("Settings/cam.default_positions.xml");
 	
 	static ramControlPanel& instance();
 	virtual ~ramControlPanel() {}

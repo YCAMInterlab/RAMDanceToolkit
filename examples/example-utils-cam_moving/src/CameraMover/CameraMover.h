@@ -192,7 +192,7 @@ public:
 	void reloadSettings()
 	{
 		mSettingXml.loadFile(mXmlPath);
-		mSettings = ramCameraSettings::getSettings(mSettingXml);
+		mSettings = ramCameraSettings::loadSettings(mSettingXml);
 //		refreshPanel(mPanel);
 		cout << "[" << getName() << "] settings reloaded." << endl;
 	}
@@ -219,7 +219,11 @@ public:
 		
 		
 		/// Radio: start moving
-		vector<string> camNames = ramCameraSettings::getCamNames(mSettingXml);
+		vector<string> camNames;
+		for (int i = 0; i < mSettings.size(); i++)
+		{
+			camNames.push_back(mSettings[i].name);
+		}
 		panel->addRadio("Camera Preset", camNames, OFX_UI_ORIENTATION_VERTICAL, gui.kDim, gui.kDim);
 	}
 	
