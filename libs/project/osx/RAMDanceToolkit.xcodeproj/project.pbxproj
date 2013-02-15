@@ -261,7 +261,7 @@
 		609A654216CAC57C00C0AB22 /* ramAnalyzer.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651316CAC57C00C0AB22 /* ramAnalyzer.h */; };
 		609A654316CAC57C00C0AB22 /* ramExpand.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651416CAC57C00C0AB22 /* ramExpand.h */; };
 		609A654516CAC57C00C0AB22 /* ramGhost.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651616CAC57C00C0AB22 /* ramGhost.h */; };
-		609A654616CAC57C00C0AB22 /* ramHangedMan.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651716CAC57C00C0AB22 /* ramHangedMan.h */; };
+		609A654616CAC57C00C0AB22 /* ramUpsideDown.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651716CAC57C00C0AB22 /* ramUpsideDown.h */; };
 		609A654716CAC57C00C0AB22 /* ramPendulum.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651816CAC57C00C0AB22 /* ramPendulum.h */; };
 		609A654816CAC57C00C0AB22 /* ramGraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A651A16CAC57C00C0AB22 /* ramGraphics.cpp */; };
 		609A654916CAC57C00C0AB22 /* ramGraphics.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651B16CAC57C00C0AB22 /* ramGraphics.h */; };
@@ -600,7 +600,7 @@
 		609A651316CAC57C00C0AB22 /* ramAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramAnalyzer.h; sourceTree = "<group>"; };
 		609A651416CAC57C00C0AB22 /* ramExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramExpand.h; sourceTree = "<group>"; };
 		609A651616CAC57C00C0AB22 /* ramGhost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramGhost.h; sourceTree = "<group>"; };
-		609A651716CAC57C00C0AB22 /* ramHangedMan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramHangedMan.h; sourceTree = "<group>"; };
+		609A651716CAC57C00C0AB22 /* ramUpsideDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramUpsideDown.h; sourceTree = "<group>"; };
 		609A651816CAC57C00C0AB22 /* ramPendulum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPendulum.h; sourceTree = "<group>"; };
 		609A651A16CAC57C00C0AB22 /* ramGraphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramGraphics.cpp; sourceTree = "<group>"; };
 		609A651B16CAC57C00C0AB22 /* ramGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramGraphics.h; sourceTree = "<group>"; };
@@ -1254,7 +1254,7 @@
 				609A651316CAC57C00C0AB22 /* ramAnalyzer.h */,
 				609A651416CAC57C00C0AB22 /* ramExpand.h */,
 				609A651616CAC57C00C0AB22 /* ramGhost.h */,
-				609A651716CAC57C00C0AB22 /* ramHangedMan.h */,
+				609A651716CAC57C00C0AB22 /* ramUpsideDown.h */,
 				609A651816CAC57C00C0AB22 /* ramPendulum.h */,
 				9AE4C36716CB76EE00BCE1D4 /* ramPastMe.h */,
 			);
@@ -1727,7 +1727,7 @@
 				609A654216CAC57C00C0AB22 /* ramAnalyzer.h in Headers */,
 				609A654316CAC57C00C0AB22 /* ramExpand.h in Headers */,
 				609A654516CAC57C00C0AB22 /* ramGhost.h in Headers */,
-				609A654616CAC57C00C0AB22 /* ramHangedMan.h in Headers */,
+				609A654616CAC57C00C0AB22 /* ramUpsideDown.h in Headers */,
 				609A654716CAC57C00C0AB22 /* ramPendulum.h in Headers */,
 				609A654916CAC57C00C0AB22 /* ramGraphics.h in Headers */,
 				609A654B16CAC57C00C0AB22 /* ramNodeLine.h in Headers */,

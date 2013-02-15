@@ -27,7 +27,7 @@
 #include "ramGhost.h"
 #include "ramPendulum.h"
 #include "ramExpand.h"
-#include "ramHangedMan.h"
+#include "ramUpsideDown.h"
 #include "ramSession.h"
 #include "ramTimeShifter.h"
 #include "ramStamp.h"

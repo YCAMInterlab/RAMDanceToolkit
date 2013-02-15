@@ -10,5 +10,5 @@ public:
 	
 	virtual void setupControlPanel(ofxUICanvas* panel) {}
 	
-	virtual const string getName() { return "unnamed"; };
+	virtual const string getName() = 0;
 };

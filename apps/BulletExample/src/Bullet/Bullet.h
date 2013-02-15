@@ -11,7 +11,7 @@ public:
 	ramBoxPrimitive *cube;
 	ramSpherePrimitive *sphere;
 	
-	string getSceneName() { return "Bullet"; }
+	const string getName() { return "Bullet"; }
 	
 	Bullet() {}
 	
@@ -21,8 +21,9 @@ public:
 		sphere = new ramSpherePrimitive(ofVec3f(0, 0, 0), 50);
 	}
 	
-	void setupControlPanel(ramControlPanel& gui)
+	void setupControlPanel(ofxUICanvas* panel)
 	{
+		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
 	}
 	
 	void update()

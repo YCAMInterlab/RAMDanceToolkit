@@ -10,12 +10,15 @@
 #include "Future.h"
 #include "DrawLines.h"
 #include "DuplicateMe.h"
+#include "UpsideDown.h"
+
 BasicActor basicActor;
 BigBox bigbox;
 Bullet bullet;
 Future future;
 DrawLines drawLines;
 DuplicateMe duplicateMe;
+UpsideDown upsideDown;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -36,6 +39,7 @@ void testApp::setup()
 	// ------------------
 	vector<ramBaseScene*> scenes;
 	scenes.push_back( basicActor.getPtr() );
+	scenes.push_back( upsideDown.getPtr() );
 	scenes.push_back( bigbox.getPtr() );
 	scenes.push_back( future.getPtr() );
 	scenes.push_back( bullet.getPtr() );

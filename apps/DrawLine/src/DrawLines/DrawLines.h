@@ -35,7 +35,7 @@ class DrawLines : public ramBaseScene
 	
 public:
 	
-	string getSceneName() { return "DrawLines"; }
+	const string getName() { return "DrawLines"; }
 	
 	DrawLines()
 	{
@@ -64,6 +64,12 @@ public:
 	{
 		ofRemoveListener(ofEvents().keyPressed, this, &DrawLines::keyPressed);
 	}
+	
+	void setupControlPanel(ofxUICanvas* panel)
+	{
+		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
+	}
+
 	
 	void setupControlPanel(ramControlPanel& gui)
 	{
