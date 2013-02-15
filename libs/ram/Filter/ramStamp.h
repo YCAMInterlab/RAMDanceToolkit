@@ -18,7 +18,8 @@ public:
 		
 		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
 		panel->addSpacer(gui.kLength, 2);
-		panel->addSlider("Recording Span", 1.0, 60.0, &mRecSpan, gui.kLength, gui.kDim);
+		panel->addButton("Clear", false, 30, 30);
+		panel->addSlider("Recording Span", 0.5, 60.0, &mRecSpan, gui.kLength, gui.kDim);
 		
 		ofAddListener(panel->newGUIEvent, this, &ramStamp::onPanelChanged);
 	}
@@ -42,9 +43,14 @@ public:
 	{
 		string name = e.widget->getName();
 		
-		if(name == "Clear")
+		if (name == "Clear")
 		{
 			clear();
+		}
+		
+		if (name == "Recording Span")
+		{
+			mLastRecordTime = ofGetElapsedTimef() + mRecSpan;
 		}
 	}
 	

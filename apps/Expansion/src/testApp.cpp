@@ -1,7 +1,8 @@
 #include "testApp.h"
 
 
-ramExpand expandFilter;
+#include "Expansion.h"
+Expansion expansion;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -18,9 +19,10 @@ void testApp::setup()
 	oscReceiver.setup(10000);
 	
 	
-	/// register ramExpand instance on GUI
+	/// stamp setup
 	// ------------------
-	ramGetGUI().addPanel(&expandFilter);
+	expansion.setup();
+	ramGetGUI().addPanel(&expansion);
 }
 
 //--------------------------------------------------------------
@@ -29,12 +31,15 @@ void testApp::update()
 	/// Entities update
 	// ------------------
 	oscReceiver.update();
+	
+	
+	expansion.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	
+	expansion.draw();
 }
 
 
@@ -44,22 +49,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramBasicActor(actor);
-	
-	ramActor &expandedActor = (ramActor&)expandFilter.update(actor);
-	
-	ofPushStyle();
-	ofNoFill();
-	for (int i=0; i<expandedActor.getNumNode(); i++)
-	{
-		ramNode &node = expandedActor.getNode(i);
-		
-		node.beginTransform();
-		ofBox(10);
-		node.endTransform();
-		node.drawName();
-	}
-	ofPopStyle();
+	expansion.drawActor(actor);
 }
 
 //--------------------------------------------------------------
