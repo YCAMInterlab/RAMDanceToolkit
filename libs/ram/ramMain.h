@@ -26,7 +26,7 @@
 #include "ramAnalyzer.h"
 #include "ramGhost.h"
 #include "ramPendulum.h"
-#include "ramExpand.h"
+#include "ramExpansion.h"
 #include "ramUpsideDown.h"
 #include "ramSession.h"
 #include "ramTimeShifter.h"
@@ -35,4 +35,5 @@
 
 /// utility
 #include "ramControlPanel.h"
+#include "ramCameraSettings.h"
 #include "ramNodeFinder.h"

@@ -4,14 +4,14 @@
 #include "ramBaseFilter.h"
 #include "ramControlPanel.h"
 
-class ramExpand : public ramBaseFilter
+class ramExpansion : public ramBaseFilter
 {
 	float kExpandMax;
 	float mExpand;
 	
 public:
 	
-	ramExpand() : mExpand(1.0), kExpandMax(3.0) {}
+	ramExpansion() : mExpand(1.0), kExpandMax(3.0) {}
 	
 	void setupControlPanel(ofxUICanvas* panel)
 	{
@@ -44,7 +44,7 @@ public:
 	}
 	
 	inline const ramNodeArray& getResult() { return expandedArray; }
-	inline const string getName() { return "ramExpand"; };
+	inline const string getName() { return "ramExpansion"; };
 	
 protected:
 	ramNodeArray expandedArray;

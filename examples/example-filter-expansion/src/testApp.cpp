@@ -1,7 +1,7 @@
 #include "testApp.h"
 
 
-ramExpand expandFilter;
+ramExpansion expantion;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -18,9 +18,9 @@ void testApp::setup()
 	oscReceiver.setup(10000);
 	
 	
-	/// register ramExpand instance on GUI
+	/// register ramExpansion instance on GUI
 	// ------------------
-	ramGetGUI().addPanel(&expandFilter);
+	ramGetGUI().addPanel(&expantion);
 }
 
 //--------------------------------------------------------------
@@ -46,7 +46,7 @@ void testApp::drawActor(ramActor &actor)
 {
 	ramBasicActor(actor);
 	
-	ramActor &expandedActor = (ramActor&)expandFilter.update(actor);
+	ramActor &expandedActor = (ramActor&)expantion.update(actor);
 	
 	ofPushStyle();
 	ofNoFill();

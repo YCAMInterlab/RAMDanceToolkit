@@ -1,7 +1,7 @@
 #include "testApp.h"
 
 
-ramHangedMan hangedMan;
+ramUpsideDown hangedMan;
 
 
 #pragma mark - oF methods
