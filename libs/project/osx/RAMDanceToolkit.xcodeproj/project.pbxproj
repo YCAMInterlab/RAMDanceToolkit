@@ -247,6 +247,7 @@
 		600EFB4616C8F59700A5B331 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 600EFB3F16C8F59700A5B331 /* tinyxmlparser.cpp */; };
 		600EFB4716C8F59700A5B331 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 600EFB4116C8F59700A5B331 /* ofxXmlSettings.cpp */; };
 		600EFB4816C8F59700A5B331 /* ofxXmlSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 600EFB4216C8F59700A5B331 /* ofxXmlSettings.h */; };
+		60426F9816CE1A5300C99541 /* ramExpansion.h in Headers */ = {isa = PBXBuildFile; fileRef = 60426F9716CE1A5300C99541 /* ramExpansion.h */; };
 		609A653716CAC57C00C0AB22 /* ramActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A650716CAC57C00C0AB22 /* ramActor.cpp */; };
 		609A653816CAC57C00C0AB22 /* ramActor.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A650816CAC57C00C0AB22 /* ramActor.h */; };
 		609A653916CAC57C00C0AB22 /* ramActorManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A650916CAC57C00C0AB22 /* ramActorManager.cpp */; };
@@ -259,7 +260,6 @@
 		609A654016CAC57C00C0AB22 /* ramSharedData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A651016CAC57C00C0AB22 /* ramSharedData.cpp */; };
 		609A654116CAC57C00C0AB22 /* ramSharedData.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651116CAC57C00C0AB22 /* ramSharedData.h */; };
 		609A654216CAC57C00C0AB22 /* ramAnalyzer.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651316CAC57C00C0AB22 /* ramAnalyzer.h */; };
-		609A654316CAC57C00C0AB22 /* ramExpand.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651416CAC57C00C0AB22 /* ramExpand.h */; };
 		609A654516CAC57C00C0AB22 /* ramGhost.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651616CAC57C00C0AB22 /* ramGhost.h */; };
 		609A654616CAC57C00C0AB22 /* ramUpsideDown.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651716CAC57C00C0AB22 /* ramUpsideDown.h */; };
 		609A654716CAC57C00C0AB22 /* ramPendulum.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651816CAC57C00C0AB22 /* ramPendulum.h */; };
@@ -586,6 +586,7 @@
 		600EFB3F16C8F59700A5B331 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		600EFB4116C8F59700A5B331 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		600EFB4216C8F59700A5B331 /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
+		60426F9716CE1A5300C99541 /* ramExpansion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramExpansion.h; sourceTree = "<group>"; };
 		609A650716CAC57C00C0AB22 /* ramActor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramActor.cpp; sourceTree = "<group>"; };
 		609A650816CAC57C00C0AB22 /* ramActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramActor.h; sourceTree = "<group>"; };
 		609A650916CAC57C00C0AB22 /* ramActorManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramActorManager.cpp; sourceTree = "<group>"; };
@@ -598,7 +599,6 @@
 		609A651016CAC57C00C0AB22 /* ramSharedData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramSharedData.cpp; sourceTree = "<group>"; };
 		609A651116CAC57C00C0AB22 /* ramSharedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSharedData.h; sourceTree = "<group>"; };
 		609A651316CAC57C00C0AB22 /* ramAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramAnalyzer.h; sourceTree = "<group>"; };
-		609A651416CAC57C00C0AB22 /* ramExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramExpand.h; sourceTree = "<group>"; };
 		609A651616CAC57C00C0AB22 /* ramGhost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramGhost.h; sourceTree = "<group>"; };
 		609A651716CAC57C00C0AB22 /* ramUpsideDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramUpsideDown.h; sourceTree = "<group>"; };
 		609A651816CAC57C00C0AB22 /* ramPendulum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPendulum.h; sourceTree = "<group>"; };
@@ -1247,12 +1247,12 @@
 		609A651216CAC57C00C0AB22 /* Filter */ = {
 			isa = PBXGroup;
 			children = (
+				60426F9716CE1A5300C99541 /* ramExpansion.h */,
 				60FFDB5416CD1F2F0093F734 /* ramBaseFilter.h */,
 				60CFE13916CCA76F000050C8 /* ramStamp.h */,
 				9A02CDAE16CBD96D0055E1AC /* ramSession.h */,
 				9A02CDAC16CBD9610055E1AC /* ramStamp.h */,
 				609A651316CAC57C00C0AB22 /* ramAnalyzer.h */,
-				609A651416CAC57C00C0AB22 /* ramExpand.h */,
 				609A651616CAC57C00C0AB22 /* ramGhost.h */,
 				609A651716CAC57C00C0AB22 /* ramUpsideDown.h */,
 				609A651816CAC57C00C0AB22 /* ramPendulum.h */,
@@ -1725,7 +1725,6 @@
 				609A653F16CAC57C00C0AB22 /* ramConstants.h in Headers */,
 				609A654116CAC57C00C0AB22 /* ramSharedData.h in Headers */,
 				609A654216CAC57C00C0AB22 /* ramAnalyzer.h in Headers */,
-				609A654316CAC57C00C0AB22 /* ramExpand.h in Headers */,
 				609A654516CAC57C00C0AB22 /* ramGhost.h in Headers */,
 				609A654616CAC57C00C0AB22 /* ramUpsideDown.h in Headers */,
 				609A654716CAC57C00C0AB22 /* ramPendulum.h in Headers */,
@@ -1750,6 +1749,7 @@
 				60CFE13816CCA766000050C8 /* ramTimeShifter.h in Headers */,
 				60CFE13A16CCA76F000050C8 /* ramStamp.h in Headers */,
 				60FFDB5516CD1F2F0093F734 /* ramBaseFilter.h in Headers */,
+				60426F9816CE1A5300C99541 /* ramExpansion.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

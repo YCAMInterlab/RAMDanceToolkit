@@ -8,7 +8,7 @@
 #include "BigBox.h"
 #include "Bullet.h"
 #include "Future.h"
-#include "DrawLines.h"
+#include "Line.h"
 #include "DuplicateMe.h"
 #include "Stamp.h"
 #include "UpsideDown.h"
@@ -18,7 +18,7 @@ BasicActor basicActor;
 BigBox bigbox;
 Bullet bullet;
 Future future;
-DrawLines drawLines;
+Line drawLines;
 DuplicateMe duplicateMe;
 Stamp stamp;
 UpsideDown upsideDown;

@@ -4,8 +4,8 @@
 /*!
  Scenes
  */
-#include "DrawLines.h"
-DrawLines drawLines;
+#include "Line.h"
+Line drawLines;
 
 
 #pragma mark - oF methods
@@ -58,17 +58,11 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-//	if ( gui.getValueB("Draw Actor") )
-		ramBasicActor(actor, shadowMat.getPtr());
-	
-	for (int i=0; i<scenes.size(); i++) scenes.at(i)->drawActor(actor);
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
-	for (int i=0; i<scenes.size(); i++)
-		scenes.at(i)->drawRigid(rigid);
 }
 
 

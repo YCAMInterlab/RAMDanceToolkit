@@ -2,14 +2,14 @@
 
 #include "ramNodeLine.h"
 
-class DrawLines : public ramBaseScene
+class Line : public ramBaseScene
 {
 	
 public:
 	
 	ramNodeLine nodeLine;
 	
-	const string getName() { return "DrawLines"; }
+	const string getName() { return "Line"; }
 	
 	bool set_from;
 	bool set_control0;
@@ -26,7 +26,7 @@ public:
 	
 	float extend;
 	
-	DrawLines()
+	Line()
 	{
 	}
 		
@@ -53,7 +53,7 @@ public:
 		
 		panel->addSlider("extend", 0, 1000, &extend, 300, 20);
 
-		ofAddListener(panel->newGUIEvent, this, &DrawLines::guiEvent);
+		ofAddListener(panel->newGUIEvent, this, &Line::guiEvent);
 	}
 
 	void setupControlPanel(ramControlPanel& gui)

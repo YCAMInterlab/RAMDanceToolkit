@@ -109,6 +109,7 @@
 		48974f980f51769171d0b2f5e519dd28 /* IpEndpointName.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = IpEndpointName.h; path = ../../../addons/ofxOsc/libs/oscpack/src/ip/IpEndpointName.h; sourceTree = SOURCE_ROOT; };
 		4e95fb446a9c9c6f0de12d752f6604b3 /* OscPrintReceivedElements.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = OscPrintReceivedElements.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscPrintReceivedElements.h; sourceTree = SOURCE_ROOT; };
 		5928aa323f5c2690b06c837d8d036f55 /* UdpSocketWin.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = UdpSocketWin.cpp; path = ../../../addons/ofxOsc/libs/oscpack/src/ip/win32/UdpSocketWin.cpp; sourceTree = SOURCE_ROOT; };
+		60426F9E16CE1ADE00C99541 /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
 		6079C9F316CBECEC00ABCCD6 /* BasicActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicActor.h; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
 		63a47ac60ffafc3bf093ec0f62a9a4d4 /* OscOutboundPacketStream.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = OscOutboundPacketStream.cpp; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscOutboundPacketStream.cpp; sourceTree = SOURCE_ROOT; };
@@ -323,7 +324,6 @@
 		9AD3317116AE52CE0003FD7D /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		9AD3317216AE52CE0003FD7D /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
 		9AD4232116AEAD0700BAC519 /* BigBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigBox.h; sourceTree = "<group>"; };
-		9AE0E10316AFC63C0016B3B0 /* DrawLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawLines.h; sourceTree = "<group>"; };
 		9AE0E11516AFC6690016B3B0 /* picojson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = picojson.h; sourceTree = "<group>"; };
 		9AE0E11716AFC6690016B3B0 /* ofxValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxValue.cpp; sourceTree = "<group>"; };
 		9AE0E11816AFC6690016B3B0 /* ofxValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxValue.h; sourceTree = "<group>"; };
@@ -435,6 +435,15 @@
 			name = ram;
 			sourceTree = "<group>";
 		};
+		60426F9D16CE1ADE00C99541 /* Line */ = {
+			isa = PBXGroup;
+			children = (
+				60426F9E16CE1ADE00C99541 /* Line.h */,
+			);
+			name = Line;
+			path = ../../Line/src/Line;
+			sourceTree = "<group>";
+		};
 		6079C9F216CBECEC00ABCCD6 /* BasicActor */ = {
 			isa = PBXGroup;
 			children = (
@@ -472,11 +481,11 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				60426F9D16CE1ADE00C99541 /* Line */,
 				9AC08FE416CE03C800892109 /* Expansion */,
 				9AC08FCE16CDF4B800892109 /* Stamp */,
 				6079C9F216CBECEC00ABCCD6 /* BasicActor */,
 				9AAA0B1716CA9DB4002D15E6 /* DuplicateMe */,
-				9AE0E10216AFC63C0016B3B0 /* DrawLines */,
 				9A44B13016AEC02400DC4CB6 /* Future */,
 				9A44AF9016AEB8C500DC4CB6 /* Bullet */,
 				9AD4232016AEAD0700BAC519 /* BigBox */,
@@ -943,15 +952,6 @@
 			);
 			name = BigBox;
 			path = ../../BigBox/src/BigBox;
-			sourceTree = "<group>";
-		};
-		9AE0E10216AFC63C0016B3B0 /* DrawLines */ = {
-			isa = PBXGroup;
-			children = (
-				9AE0E10316AFC63C0016B3B0 /* DrawLines.h */,
-			);
-			name = DrawLines;
-			path = ../../DrawLine/src/DrawLines;
 			sourceTree = "<group>";
 		};
 		9AE0E10516AFC6690016B3B0 /* ofxValue */ = {
