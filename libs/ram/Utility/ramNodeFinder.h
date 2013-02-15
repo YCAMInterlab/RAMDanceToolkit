@@ -24,6 +24,8 @@ public:
 	// safety API
 	bool get(ramNode &node)
     {
+		if (!isValid()) return false;
+		
 		if (!hasNodeArray(name))
 		{
 			if (getNumNodeArray() > 0)

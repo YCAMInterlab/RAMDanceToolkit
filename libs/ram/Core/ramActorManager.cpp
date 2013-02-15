@@ -1,8 +1,31 @@
 #include "ramActorManager.h"
 
 #include "ramCameraManager.h"
+#include "ramNodeFinder.h"
 
 using namespace ofxInteractivePrimitives;
+
+inline static void billboard()
+{
+	ofMatrix4x4 m;
+	glGetFloatv(GL_MODELVIEW_MATRIX, m.getPtr());
+	
+	ofVec3f s = m.getScale();
+	
+	m(0, 0) = s.x;
+	m(0, 1) = 0;
+	m(0, 2) = 0;
+	
+	m(1, 0) = 0;
+	m(1, 1) = s.y;
+	m(1, 2) = 0;
+	
+	m(2, 0) = 0;
+	m(2, 1) = 0;
+	m(2, 2) = s.z;
+	
+	glLoadMatrixf(m.getPtr());
+}
 
 #pragma mark - ramActorManager::NodeSelector
 
@@ -120,28 +143,9 @@ public:
 		ramEnableInteractiveCamera(true);
 	}
 	
-private:
-	
-	inline void billboard()
+	bool isObjectPickedUp()
 	{
-		ofMatrix4x4 m;
-		glGetFloatv(GL_MODELVIEW_MATRIX, m.getPtr());
-		
-		ofVec3f s = m.getScale();
-		
-		m(0, 0) = s.x;
-		m(0, 1) = 0;
-		m(0, 2) = 0;
-		
-		m(1, 0) = 0;
-		m(1, 1) = s.y;
-		m(1, 2) = 0;
-		
-		m(2, 0) = 0;
-		m(2, 1) = 0;
-		m(2, 2) = s.z;
-		
-		glLoadMatrixf(m.getPtr());
+		return !getCurrentNameStack().empty();
 	}
 };
 
@@ -174,6 +178,26 @@ void ramActorManager::update()
 void ramActorManager::draw()
 {
 	rootNode.draw();
+	
+	if (nodeSelector->identifer.isValid())
+	{
+		ramNode node;
+		if (ramNodeFinder::findNode(nodeSelector->identifer, node))
+		{
+			node.beginTransform();
+			
+			billboard();
+			
+			ofFill();
+			ofSetColor(255, 0, 0, 30);
+			ofCircle(0, 0, 10 + sin(ofGetElapsedTimef() * 10) * 5);
+			
+			ofNoFill();
+			ofCircle(0, 0, 10 + sin(ofGetElapsedTimef() * 10) * 5);
+
+			node.endTransform();
+		}
+	}
 }
 
 void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)

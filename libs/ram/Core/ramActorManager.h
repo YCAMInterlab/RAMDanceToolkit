@@ -58,6 +58,7 @@ public:
 	
 	// for internal use
 	void updateWithOscMessage(const ofxOscMessage &m);
+	
 	void onSelectStateChanged(ramNodeIdentifer &e);
 	
 private:

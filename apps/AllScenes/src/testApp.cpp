@@ -38,12 +38,12 @@ void testApp::setup()
 	/// scenes setup
 	// ------------------
 	vector<ramBaseScene*> scenes;
+	scenes.push_back( drawLines.getPtr() );
 	scenes.push_back( basicActor.getPtr() );
 	scenes.push_back( upsideDown.getPtr() );
 	scenes.push_back( bigbox.getPtr() );
 	scenes.push_back( future.getPtr() );
 	scenes.push_back( bullet.getPtr() );
-	scenes.push_back( drawLines.getPtr() );
 	scenes.push_back( duplicateMe.getPtr() );
 	sceneManager.setup(scenes);
 	
