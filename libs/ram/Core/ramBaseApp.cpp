@@ -17,6 +17,10 @@ void ramBaseApp::update(ofEventArgs &args)
 
 void ramBaseApp::draw(ofEventArgs &args)
 {
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	
+	glEnable(GL_DEPTH_TEST);
+	
 	ramBeginCamera();
 
 	drawFloor();
@@ -26,6 +30,10 @@ void ramBaseApp::draw(ofEventArgs &args)
 	
 	ramSetEnablePhysicsPrimitive(false);
 	
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	glPushMatrix();
+	ofPushStyle();
+
 	{
 		// shadow
 		
@@ -33,15 +41,29 @@ void ramBaseApp::draw(ofEventArgs &args)
 		drawNodeArrays();
 		ramEndShadow();
 	}
-	
+
+	ofPopStyle();
+	glPopMatrix();
+	glPopAttrib();
+
 	ramSetEnablePhysicsPrimitive(enable_physics);
 	
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	glPushMatrix();
+	ofPushStyle();
+
 	{
 		// entities
 		drawNodeArrays();
 	}
     
+	ofPopStyle();
+	glPopMatrix();
+	glPopAttrib();
+
 	ramEndCamera();
+	
+	glPopAttrib();
 }
 
 void ramBaseApp::drawNodeArrays()
