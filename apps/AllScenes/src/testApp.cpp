@@ -13,6 +13,7 @@
 #include "Stamp.h"
 #include "UpsideDown.h"
 #include "Expansion.h"
+#include "Graph3D.h"
 
 BasicActor basicActor;
 BigBox bigbox;
@@ -23,6 +24,7 @@ DuplicateMe duplicateMe;
 Stamp stamp;
 UpsideDown upsideDown;
 Expansion expansion;
+Graph3D graph3D;
 
 
 #pragma mark - oF methods
@@ -43,6 +45,7 @@ void testApp::setup()
 	/// scenes setup
 	// ------------------
 	vector<ramBaseScene*> scenes;
+	scenes.push_back( graph3D.getPtr() );
 	scenes.push_back( drawLines.getPtr() );
 	scenes.push_back( basicActor.getPtr() );
 	scenes.push_back( upsideDown.getPtr() );
@@ -52,8 +55,8 @@ void testApp::setup()
 	scenes.push_back( bullet.getPtr() );
 	scenes.push_back( duplicateMe.getPtr() );
 	scenes.push_back( stamp.getPtr() );
-	sceneManager.setup(scenes);
 	
+	sceneManager.setup(scenes);
 }
 
 //--------------------------------------------------------------

@@ -110,6 +110,7 @@
 		4e95fb446a9c9c6f0de12d752f6604b3 /* OscPrintReceivedElements.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = OscPrintReceivedElements.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscPrintReceivedElements.h; sourceTree = SOURCE_ROOT; };
 		5928aa323f5c2690b06c837d8d036f55 /* UdpSocketWin.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = UdpSocketWin.cpp; path = ../../../addons/ofxOsc/libs/oscpack/src/ip/win32/UdpSocketWin.cpp; sourceTree = SOURCE_ROOT; };
 		60426F9E16CE1ADE00C99541 /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
+		60426FA016CE22F300C99541 /* Graph3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Graph3D.h; sourceTree = "<group>"; };
 		6079C9F316CBECEC00ABCCD6 /* BasicActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicActor.h; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
 		63a47ac60ffafc3bf093ec0f62a9a4d4 /* OscOutboundPacketStream.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = OscOutboundPacketStream.cpp; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscOutboundPacketStream.cpp; sourceTree = SOURCE_ROOT; };
@@ -444,6 +445,14 @@
 			path = ../../Line/src/Line;
 			sourceTree = "<group>";
 		};
+		60426F9F16CE22EB00C99541 /* Graph3D */ = {
+			isa = PBXGroup;
+			children = (
+				60426FA016CE22F300C99541 /* Graph3D.h */,
+			);
+			name = Graph3D;
+			sourceTree = "<group>";
+		};
 		6079C9F216CBECEC00ABCCD6 /* BasicActor */ = {
 			isa = PBXGroup;
 			children = (
@@ -481,6 +490,7 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				60426F9F16CE22EB00C99541 /* Graph3D */,
 				60426F9D16CE1ADE00C99541 /* Line */,
 				9AC08FE416CE03C800892109 /* Expansion */,
 				9AC08FCE16CDF4B800892109 /* Stamp */,
