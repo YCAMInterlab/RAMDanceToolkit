@@ -13,9 +13,9 @@ ramControlPanel& ramControlPanel::instance()
 
 ramControlPanel::ramControlPanel()
 {
-	mR = 50;
-	mG = 50;
-	mB = 50;
+	mR = 0;
+	mG = 0;
+	mB = 0;
 	mUseBgSlider = true;
 	mFloorPattern = ramFloor::FLOOR_NONE;
 	mFloorSize = 600.0;
