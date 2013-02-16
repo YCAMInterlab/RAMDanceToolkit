@@ -11,7 +11,7 @@ ramControlPanel& ramControlPanel::instance()
 	return *_instance;
 }
 
-ramControlPanel::ramControlPanel()
+ramControlPanel::ramControlPanel() : kDim(16), kXInit(OFX_UI_GLOBAL_WIDGET_SPACING), kLength(320-kXInit)
 {
 	mR = 50;
 	mG = 50;

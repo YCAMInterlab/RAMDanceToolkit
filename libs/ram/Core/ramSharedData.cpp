@@ -5,7 +5,7 @@
 
 #include <numeric>
 
-void ramInit()
+void ramSetup()
 {
 	static bool inited = false;
 	if (inited) return;

@@ -2,7 +2,9 @@
 
 #include "ofMain.h"
 
+#pragma managed(push, off)
 #include "ofxBt.h"
+#pragma managed(pop)
 
 #include "ramActor.h"
 #include "ramPrimitive.h"
