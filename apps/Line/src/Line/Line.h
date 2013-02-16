@@ -26,6 +26,8 @@ public:
 	
 	float extend;
 	
+	float line_width;
+	
 	Line()
 	{
 	}
@@ -51,6 +53,8 @@ public:
 	void setupControlPanel(ofxUICanvas* panel)
 	{
 		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
+		
+		panel->addButton("Line Width", &line_width, 1, 10);
 		
 		panel->addButton("Set From", &set_from, 30, 30);
 		panel->addButton("Set Control 0", &set_control0, 30, 30);
@@ -88,14 +92,7 @@ public:
 		
 		ramNodeLine *NL = &nodeLine;
 		
-		if (curve > 0)
-		{
-			nodeLine.curve(curve);
-		}
-		else
-		{
-			nodeLine.line();
-		}
+		nodeLine.curve(curve);
 		
 		if (extend > 0)
 		{
@@ -114,12 +111,33 @@ public:
 			nodeLine.noise(noise_scale, noise_freq, ofGetElapsedTimef());
 		}
 		
+		ofSetColor(255, 0, 0);
+		
+		ofSetLineWidth(line_width);
 		nodeLine.draw();
 		
-//		if (nodeLine.from.found())
-//		{
-//			
-//		}
+		ofSetColor(255, 127);
+		
+		ramNode node;
+		if (nodeLine.from.get(node))
+		{
+			ofDrawBitmapString("FROM", node.getGlobalPosition() + ofVec3f(5, 5, 0));
+		}
+		
+		if (nodeLine.control0.get(node))
+		{
+			ofDrawBitmapString("CP0", node.getGlobalPosition() + ofVec3f(5, 5, 0));
+		}
+
+		if (nodeLine.control1.get(node))
+		{
+			ofDrawBitmapString("CP1", node.getGlobalPosition() + ofVec3f(5, 5, 0));
+		}
+
+		if (nodeLine.to.get(node))
+		{
+			ofDrawBitmapString("TO", node.getGlobalPosition() + ofVec3f(5, 5, 0));
+		}
 		
 		ramEndCamera();
 	}
