@@ -72,7 +72,7 @@ public:
 		if (p0.distance(p1) < 1000)
 		{
 			ofVec3f cp0 = control0_n.getGlobalTransformMatrix().preMult(ofVec3f(0, 0, 0));
-			ofVec3f cp1 = control1_n.getGlobalTransformMatrix().preMult(-ofVec3f(0, 0, 0));
+			ofVec3f cp1 = control1_n.getGlobalTransformMatrix().preMult(ofVec3f(0, 0, 0));
 			
 			ofVec3f pp0 = (p0 - cp0).normalized() * strength;
 			ofVec3f pp1 = (p1 - cp1).normalized() * strength;
