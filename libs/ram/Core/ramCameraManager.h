@@ -14,6 +14,8 @@ public:
 	void loadDefaults();
 	
 	inline size_t getNumCameras() { return cameras.size(); }
+	ofCamera* getCamera(size_t index) { return cameras[index]; }
+	
 	ofCamera& getActiveCamera() { return *active_camera; }
 	inline void setActiveCamera(int index) { active_camera = cameras.at(index); }
 	
