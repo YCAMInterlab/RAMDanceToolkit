@@ -30,7 +30,7 @@ void ramBaseApp::draw(ofEventArgs &args)
 
 	bool enable_physics = ramGetEnablePhysicsPrimitive();
 	
-	ramSetEnablePhysicsPrimitive(false);
+	ramEnablePhysicsPrimitive(false);
 	
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glPushMatrix();
@@ -48,7 +48,7 @@ void ramBaseApp::draw(ofEventArgs &args)
 	glPopMatrix();
 	glPopAttrib();
 
-	ramSetEnablePhysicsPrimitive(enable_physics);
+	ramEnablePhysicsPrimitive(enable_physics);
 	
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glPushMatrix();

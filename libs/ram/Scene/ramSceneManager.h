@@ -9,7 +9,7 @@ class ramSceneManager : public ramGlobalShortcut
 {
 public:
 	
-	void setup(vector<ramBaseScene*>& scenes);
+	void setup(const vector<ramBaseScene*>& scenes);
 	
 	void update();
 	void draw();
