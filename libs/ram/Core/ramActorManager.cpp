@@ -186,6 +186,7 @@ void ramActorManager::draw()
 		{
 			node.beginTransform();
 			
+			ofPushStyle();
 			billboard();
 			
 			ofFill();
@@ -194,6 +195,7 @@ void ramActorManager::draw()
 			
 			ofNoFill();
 			ofCircle(0, 0, 10 + sin(ofGetElapsedTimef() * 10) * 5);
+			ofPopStyle();
 
 			node.endTransform();
 		}
