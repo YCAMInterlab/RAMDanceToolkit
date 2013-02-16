@@ -9,156 +9,1053 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="ヘッダー ファイル\ram">
+      <UniqueIdentifier>{3e499425-354b-44d3-9355-016bd5d66051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\ram">
+      <UniqueIdentifier>{0f4d3559-0993-4565-928d-db856437f6ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\addons">
+      <UniqueIdentifier>{3a987ad9-0f8a-4514-8558-2e98f4a50830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\addons\ofxosc">
+      <UniqueIdentifier>{f9eb9494-ee6c-4d0f-b43b-6952c388979f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\addons">
+      <UniqueIdentifier>{9fe238c5-a673-42a1-badf-8bd12dd48fbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\addons\ofxosc">
+      <UniqueIdentifier>{91f126f2-0974-4be7-b307-9bdd5f40ce5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\addons\ofxXMLSettings">
+      <UniqueIdentifier>{e78538c3-b6cb-4331-b836-a595da30d526}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\addons\ofxXMLSettings">
+      <UniqueIdentifier>{9baf1b87-8556-4182-97e9-b513059c1b5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\addons\ofxBt">
+      <UniqueIdentifier>{bbf01c87-aca3-44cb-bc20-0737041ff3b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\addons\ofxInteractivePrimitives">
+      <UniqueIdentifier>{fc731ad6-b23c-43e0-b700-0fc6e93421bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\addons\ofxUI">
+      <UniqueIdentifier>{a67a9cd9-8ef8-4e86-9b6f-8089f79aaa49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\addons\ofxUITabbedCanvas">
+      <UniqueIdentifier>{a0d64b22-2539-4644-897a-88ce4329869f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\ram\Core\ramActor.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ram\Core\ramActorManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ram\Core\ramBaseApp.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ram\Core\ramCameraManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ram\Core\ramSharedData.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ram\Graphics\ramGraphics.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ram\Graphics\ramNodeLine.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ram\Graphics\ramPrimitive.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\ram</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ram\Graphics\ramSimpleShadow.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\ram</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ram\Physics\ramPhysics.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\..\ram\Core\ramActorManager.cpp">
+      <Filter>ソース ファイル\ram</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ram\Scene\ramSceneManager.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\..\ram\Core\ramBaseApp.cpp">
+      <Filter>ソース ファイル\ram</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ram\UI\ramControlPanel.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\..\ram\Core\ramCameraManager.cpp">
+      <Filter>ソース ファイル\ram</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ram\Utility\ramCameraSettings.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\ram</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ram\UI\ramControlPanel.cpp">
+      <Filter>ソース ファイル\ram</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ram\Graphics\ramGraphics.cpp">
+      <Filter>ソース ファイル\ram</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ram\Graphics\ramNodeLine.cpp">
+      <Filter>ソース ファイル\ram</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ram\Physics\ramPhysics.cpp">
+      <Filter>ソース ファイル\ram</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ram\Graphics\ramPrimitive.cpp">
+      <Filter>ソース ファイル\ram</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ram\Scene\ramSceneManager.cpp">
+      <Filter>ソース ファイル\ram</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ram\Core\ramSharedData.cpp">
+      <Filter>ソース ファイル\ram</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ram\Utility\ramUtils.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\ram</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.cpp">
+      <Filter>ソース ファイル\addons\ofxosc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32\UdpSocketWin.cpp">
+      <Filter>ソース ファイル\addons\ofxosc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix\NetworkingUtils.cpp">
+      <Filter>ソース ファイル\addons\ofxosc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32\NetworkingUtilsWin.cpp">
+      <Filter>ソース ファイル\addons\ofxosc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxOsc\src\ofxOscBundle.cpp">
+      <Filter>ソース ファイル\addons\ofxosc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxOsc\src\ofxOscMessage.cpp">
+      <Filter>ソース ファイル\addons\ofxosc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxOsc\src\ofxOscReceiver.cpp">
+      <Filter>ソース ファイル\addons\ofxosc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxOsc\src\ofxOscSender.cpp">
+      <Filter>ソース ファイル\addons\ofxosc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.cpp">
+      <Filter>ソース ファイル\addons\ofxosc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.cpp">
+      <Filter>ソース ファイル\addons\ofxosc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.cpp">
+      <Filter>ソース ファイル\addons\ofxosc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.cpp">
+      <Filter>ソース ファイル\addons\ofxosc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix\UdpSocket.cpp">
+      <Filter>ソース ファイル\addons\ofxosc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
+      <Filter>ソース ファイル\addons\ofxXMLSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp">
+      <Filter>ソース ファイル\addons\ofxXMLSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp">
+      <Filter>ソース ファイル\addons\ofxXMLSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp">
+      <Filter>ソース ファイル\addons\ofxXMLSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxBt\src\ofxBt.cpp">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtCollisionObject.cpp">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtHelper.cpp">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtJoint.cpp">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtRigidBody.cpp">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtSoftBody.cpp">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtSoftBodyWorld.cpp">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtWorld.cpp">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxInteractivePrimitives\src\ofxInteractivePrimitives.cpp">
+      <Filter>ソース ファイル\addons\ofxInteractivePrimitives</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxUITabbedCanvas\ofxUITabbedCanvas.cpp">
+      <Filter>ソース ファイル\addons\ofxUITabbedCanvas</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ram\Core\ramActor.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Core\ramActorManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Core\ramBaseApp.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Core\ramCameraManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Core\ramConstants.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Core\ramGlobalShortcut.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Core\ramSharedData.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Filter\ramAnalyzer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Filter\ramBaseFilter.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Filter\ramExpansion.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Filter\ramGhost.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Filter\ramNodeTransform.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Filter\ramPastMe.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Filter\ramPendulum.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Filter\ramSession.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Filter\ramStamp.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Filter\ramTimeShifter.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Filter\ramUpsideDown.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Graphics\ramGraphics.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Graphics\ramNodeLine.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Graphics\ramPrimitive.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Graphics\ramSimpleShadow.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Physics\ramPhysics.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\ramMain.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Scene\ramBaseScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Scene\ramSceneManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\UI\ramControllable.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\UI\ramControlPanel.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Utility\ramCameraSettings.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Utility\ramNodeFinder.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Utility\ramNodeIdentifer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Utility\ramOscReciever.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Utility\ramSession.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ram\Utility\ramTimeShifter.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\ram</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ram\Utility\ramUtils.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Core\ramActorManager.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Filter\ramAnalyzer.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Core\ramBaseApp.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Filter\ramBaseFilter.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Scene\ramBaseScene.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Core\ramCameraManager.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Utility\ramCameraSettings.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Core\ramConstants.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\UI\ramControllable.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\UI\ramControlPanel.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Filter\ramExpansion.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Filter\ramGhost.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Core\ramGlobalShortcut.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Graphics\ramGraphics.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\ramMain.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Utility\ramNodeFinder.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Utility\ramNodeIdentifer.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Graphics\ramNodeLine.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Filter\ramNodeTransform.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Utility\ramOscReciever.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Filter\ramPastMe.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Filter\ramPendulum.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Physics\ramPhysics.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Graphics\ramPrimitive.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Scene\ramSceneManager.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Filter\ramSession.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Utility\ramSession.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Core\ramSharedData.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Graphics\ramSimpleShadow.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Filter\ramStamp.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Filter\ramTimeShifter.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Utility\ramTimeShifter.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ram\Filter\ramUpsideDown.h">
+      <Filter>ヘッダー ファイル\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\UdpSocket.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\MessageMappingOscPacketListener.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\NetworkingUtils.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\src\ofxOsc.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\src\ofxOscArg.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\src\ofxOscBundle.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\src\ofxOscMessage.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\src\ofxOscReceiver.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\src\ofxOscSender.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscException.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscHostEndianness.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPacketListener.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\PacketListener.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\TimerListener.h">
+      <Filter>ヘッダー ファイル\addons\ofxosc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h">
+      <Filter>ヘッダー ファイル\addons\ofxXMLSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxml.h">
+      <Filter>ヘッダー ファイル\addons\ofxXMLSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\btBulletCollisionCommon.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\btBulletDynamicsCommon.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\Bullet-C-Api.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btAxisSweep3.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btBroadphaseInterface.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btBroadphaseProxy.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btCollisionAlgorithm.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btDbvt.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btDbvtBroadphase.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btDispatcher.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btMultiSapBroadphase.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btOverlappingPairCache.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btOverlappingPairCallback.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btQuantizedBvh.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btSimpleBroadphase.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btActivatingCollisionAlgorithm.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btBox2dBox2dCollisionAlgorithm.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btBoxBoxCollisionAlgorithm.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btBoxBoxDetector.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btCollisionConfiguration.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btCollisionCreateFunc.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btCollisionDispatcher.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btCollisionObject.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btCollisionObjectWrapper.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btCollisionWorld.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btCompoundCollisionAlgorithm.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btConvex2dConvex2dAlgorithm.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btConvexConcaveCollisionAlgorithm.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btConvexConvexAlgorithm.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btConvexPlaneCollisionAlgorithm.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btDefaultCollisionConfiguration.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btEmptyCollisionAlgorithm.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btGhostObject.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btInternalEdgeUtility.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btManifoldResult.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btSimulationIslandManager.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btSphereBoxCollisionAlgorithm.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btSphereSphereCollisionAlgorithm.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btSphereTriangleCollisionAlgorithm.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btUnionFind.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\SphereTriangleDetector.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btBox2dShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btBoxShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btBvhTriangleMeshShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btCapsuleShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btCollisionMargin.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btCollisionShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btCompoundShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btConcaveShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btConeShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btConvex2dShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btConvexHullShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btConvexInternalShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btConvexPointCloudShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btConvexShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btConvexTriangleMeshShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btCylinderShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btEmptyShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btHeightfieldTerrainShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btMaterial.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btMinkowskiSumShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btMultimaterialTriangleMeshShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btMultiSphereShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btOptimizedBvh.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btPolyhedralConvexShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btScaledBvhTriangleMeshShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btShapeHull.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btSphereShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btStaticPlaneShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btStridingMeshInterface.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btTetrahedronShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btTriangleBuffer.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btTriangleCallback.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btTriangleIndexVertexArray.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btTriangleIndexVertexMaterialArray.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btTriangleInfoMap.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btTriangleMesh.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btTriangleMeshShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btTriangleShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btUniformScalingShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btBoxCollision.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btClipPolygon.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btContactProcessing.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btGenericPoolAllocator.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btGeometryOperations.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btGImpactBvh.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btGImpactCollisionAlgorithm.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btGImpactMassUtil.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btGImpactQuantizedBvh.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btGImpactShape.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btQuantization.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btTriangleShapeEx.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_array.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_basic_geometry_operations.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_bitset.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_box_collision.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_box_set.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_clip_polygon.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_contact.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_geometry.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_geom_types.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_hash_table.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_linear_math.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_math.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_memory.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_radixsort.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_tri_collision.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btContinuousConvexCollision.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btConvexCast.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btConvexPenetrationDepthSolver.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btDiscreteCollisionDetectorInterface.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btGjkConvexCast.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btGjkEpa2.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btGjkEpaPenetrationDepthSolver.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btGjkPairDetector.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btManifoldPoint.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btMinkowskiPenetrationDepthSolver.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btPersistentManifold.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btPointCollector.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btRaycastCallback.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btSimplexSolverInterface.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btSubSimplexConvexCast.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btVoronoiSimplexSolver.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Character\btCharacterControllerInterface.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Character\btKinematicCharacterController.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btConeTwistConstraint.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btConstraintSolver.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btContactConstraint.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btContactSolverInfo.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btGearConstraint.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btGeneric6DofConstraint.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btGeneric6DofSpringConstraint.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btHinge2Constraint.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btHingeConstraint.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btJacobianEntry.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btPoint2PointConstraint.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btSequentialImpulseConstraintSolver.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btSliderConstraint.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btSolve2LinearConstraint.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btSolverBody.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btSolverConstraint.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btTypedConstraint.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btUniversalConstraint.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics\btActionInterface.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics\btDiscreteDynamicsWorld.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics\btDynamicsWorld.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics\btRigidBody.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics\btSimpleDynamicsWorld.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Vehicle\btRaycastVehicle.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Vehicle\btVehicleRaycaster.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Vehicle\btWheelInfo.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody\btSoftBody.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody\btSoftBodyConcaveCollisionAlgorithm.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody\btSoftBodyHelpers.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody\btSoftBodyInternals.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody\btSoftBodyRigidBodyCollisionConfiguration.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody\btSoftRigidCollisionAlgorithm.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody\btSoftRigidDynamicsWorld.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody\btSoftSoftCollisionAlgorithm.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody\btSparseSDF.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btAabbUtil2.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btAlignedAllocator.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btAlignedObjectArray.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btConvexHull.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btDefaultMotionState.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btGeometryUtil.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btHashMap.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btIDebugDraw.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btList.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btMatrix3x3.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btMinMax.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btMotionState.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btPolarDecomposition.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btPoolAllocator.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btQuadWord.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btQuaternion.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btQuickprof.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btRandom.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btScalar.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btSerializer.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btStackAlloc.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btTransform.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btTransformUtil.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btVector3.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\src\ofxBt.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\src\ofxBtCollisionObject.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\src\ofxBtHelper.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\src\ofxBtJoint.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\src\ofxBtRender.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\src\ofxBtRigidBody.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\src\ofxBtSoftBody.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\src\ofxBtSoftBodyWorld.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxBt\src\ofxBtWorld.h">
+      <Filter>ソース ファイル\addons\ofxBt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxInteractivePrimitives\src\ofxInteractivePrimitives.h">
+      <Filter>ソース ファイル\addons\ofxInteractivePrimitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPButton.h">
+      <Filter>ソース ファイル\addons\ofxInteractivePrimitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPMarker.h">
+      <Filter>ソース ファイル\addons\ofxInteractivePrimitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPStringBox.h">
+      <Filter>ソース ファイル\addons\ofxInteractivePrimitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUI.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUI2DPad.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIBaseDraws.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIBiLabelSlider.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIButton.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUICanvas.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUICircleSlider.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUICustomImageButton.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIDropDownList.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIEventArgs.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIFPS.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIFPSSlider.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIImage.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIImageButton.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIImageSampler.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIImageSlider.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIImageToggle.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUILabel.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUILabelButton.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUILabelToggle.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIMinimalSlider.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIMovingGraph.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIMultiImageButton.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIMultiImageSlider.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIMultiImageToggle.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUINumberDialer.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIRadio.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIRangeSlider.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIRectangle.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIRotarySlider.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIScrollableCanvas.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUISlider.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUISpacer.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUISpectrum.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUITextArea.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUITextInput.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIToggle.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIToggleMatrix.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWaveform.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWidget.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWidgetWithLabel.h">
+      <Filter>ソース ファイル\addons\ofxUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxUITabbedCanvas\ofxUITabbedCanvas.h">
+      <Filter>ソース ファイル\addons\ofxUITabbedCanvas</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
