@@ -23,7 +23,9 @@ void ramBaseApp::draw(ofEventArgs &args)
 	
 	ramBeginCamera();
 
-	drawFloor();
+	if (draw_floor_auto)
+		drawFloor();
+	
 	getActorManager().draw();
 
 	bool enable_physics = ramGetEnablePhysicsPrimitive();
@@ -98,8 +100,6 @@ void ramBaseApp::drawNodeArrays()
 
 void ramBaseApp::drawFloor()
 {
-	if (!draw_floor_auto) return;
-	
 	ramControlPanel &gui = ramGetGUI();
 	ramDrawBasicFloor(gui.getFloorPattern(),
 				  gui.getFloorSize(),
