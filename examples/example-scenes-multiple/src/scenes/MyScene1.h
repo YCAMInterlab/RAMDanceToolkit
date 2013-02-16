@@ -42,7 +42,7 @@ public:
 		
 		ofSetColor( fontColor );
 		ofDrawBitmapString( "I am " + getName(), pos );
-		ramBasicActor(actor);
+		ramDrawBasicActor(actor);
 	}
 	
 	void drawRigid(ramRigidBody &rigid)

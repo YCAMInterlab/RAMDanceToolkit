@@ -45,7 +45,7 @@ void testApp::draw()
 void testApp::drawActor(ramActor &actor)
 {
 	ramActor &a = (ramActor &)session.update(actor);
-	ramBasicActor(a);
+	ramDrawBasicActor(a);
 }
 
 //--------------------------------------------------------------

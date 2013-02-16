@@ -44,11 +44,11 @@ void testApp::draw()
 	{
 		ramActor& actor = (ramActor&)stamp.getStamp(i);
 		
-		ramBasicActor(actor);
+		ramDrawBasicActor(actor);
 		ramActorCube(actor);
 		
 		ramBeginShadow();
-		ramBasicActor(actor);
+		ramDrawBasicActor(actor);
 		ramActorCube(actor);
 		ramEndShadow();
 	}
@@ -62,7 +62,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramBasicActor(actor);
+	ramDrawBasicActor(actor);
 }
 
 //--------------------------------------------------------------

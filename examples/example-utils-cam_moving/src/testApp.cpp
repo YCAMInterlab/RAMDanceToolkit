@@ -45,7 +45,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramBasicActor(actor);
+	ramDrawBasicActor(actor);
 }
 
 //--------------------------------------------------------------
