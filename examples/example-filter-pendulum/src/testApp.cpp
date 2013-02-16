@@ -44,7 +44,7 @@ void testApp::draw()
 void testApp::drawActor(ramActor &actor)
 {
 	ramActor &a = (ramActor&)pendulum.update(actor);
-	ramBasicActor(a);
+	ramDrawBasicActor(a);
 }
 
 //--------------------------------------------------------------

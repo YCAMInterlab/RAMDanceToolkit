@@ -132,7 +132,8 @@ void ramControlPanel::setupSceneToggles(vector<ramBaseScene*>& scenes_)
 	}
 	
 	const int numCol = 5;
-	const int numRow = 2 / numCol + 1;
+	const int numRow = ceil(size / numCol);
+	
 	mSceneToggles = new ofxUIToggleMatrix(kDim*3, kDim*2, numRow, numCol, "Scenes");
 	mPanelGeneral->addSpacer(kLength, 2);
 	mPanelGeneral->addWidgetDown(mSceneToggles);

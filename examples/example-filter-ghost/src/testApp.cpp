@@ -49,10 +49,10 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramBasicActor(actor);
+	ramDrawBasicActor(actor);
 	
 	ramActor& g = (ramActor&)ghost.getResult();
-	ramBasicActor(g);
+	ramDrawBasicActor(g);
 }
 
 //--------------------------------------------------------------

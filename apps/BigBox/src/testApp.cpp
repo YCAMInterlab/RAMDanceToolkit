@@ -59,7 +59,7 @@ void testApp::draw()
 void testApp::drawActor(ramActor &actor)
 {
 //	if ( gui.getValueB("Draw Actor") )
-		ramBasicActor(actor);
+		ramDrawBasicActor(actor);
 	
 //	for (int i=0; i<scenes.size(); i++) scenes.at(i)->drawActor(actor);
 }

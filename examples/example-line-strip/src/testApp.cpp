@@ -43,7 +43,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramBasicActor(actor);
+	ramDrawBasicActor(actor);
 
 	// draw line strip with some effects
 	node_line.curve();

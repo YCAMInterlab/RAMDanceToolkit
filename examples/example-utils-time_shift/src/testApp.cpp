@@ -39,10 +39,10 @@ void testApp::draw()
 {
 	if (timeShifter.isPlayable())
 	{
-		ramActor& actor = (ramActor &)timeShifter.getNodeArray();
+		ramActor& actor = (ramActor &)timeShifter.getResult();
 		
 		ramBeginCamera();
-		ramBasicActor(actor);
+		ramDrawBasicActor(actor);
 		ramEndCamera();
 	}
 }
@@ -53,7 +53,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramBasicActor(actor);
+	ramDrawBasicActor(actor);
 }
 
 //--------------------------------------------------------------
