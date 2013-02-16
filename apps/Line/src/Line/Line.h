@@ -32,6 +32,20 @@ public:
 		
 	void setup()
 	{
+		ofAddListener(ofEvents().keyPressed, this, &Line::onKeyPressed);
+	}
+	
+	void onKeyPressed(ofKeyEventArgs &e)
+	{
+		if (e.key == 'r')
+		{
+			cout << "random" << endl;
+			
+			nodeLine.from.index = ofRandom(23);
+			nodeLine.control0.index = ofRandom(23);
+			nodeLine.control1.index = ofRandom(23);
+			nodeLine.to.index = ofRandom(23);
+		}
 	}
 	
 	void setupControlPanel(ofxUICanvas* panel)
@@ -43,7 +57,7 @@ public:
 		panel->addButton("Set Control 1", &set_control1, 30, 30);
 		panel->addButton("Set To", &set_to, 30, 30);
 		
-		panel->addSlider("curve", 0, 400, &curve, 300, 20);
+		panel->addSlider("curve", -400, 400, &curve, 300, 20);
 
 		panel->addSlider("spiral_radius", 0, 200, &spiral_radius, 300, 20);
 		panel->addSlider("spiral_num_rotate", 0, 100, &spiral_num_rotate, 300, 20);
@@ -66,8 +80,6 @@ public:
 		if (set_control0) nodeLine.control0 = ramActorManager::instance().getLastSelectedNodeIdentifer();
 		if (set_control1) nodeLine.control1 = ramActorManager::instance().getLastSelectedNodeIdentifer();
 		if (set_to) nodeLine.to = ramActorManager::instance().getLastSelectedNodeIdentifer();
-		
-		
 	}
 	
 	void draw()
@@ -103,6 +115,11 @@ public:
 		}
 		
 		nodeLine.draw();
+		
+//		if (nodeLine.from.found())
+//		{
+//			
+//		}
 		
 		ramEndCamera();
 	}
