@@ -4,6 +4,8 @@
 #include "ofxOsc.h"
 #include "ramConstants.h"
 
+#include <assert.h>
+
 class ramNodeArray;
 
 #pragma mark - ramAccelerometer

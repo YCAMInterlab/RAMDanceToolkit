@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A5E5640B-96DE-4DCD-A9DD-65C306AEEB5B}</ProjectGuid>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <Keyword>ManagedCProj</Keyword>
+    <RootNamespace>RAMDanceToolkit</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\..\libs\openFrameworks;..\..\..\..\libs\openFrameworks\graphics;..\..\..\..\libs\openFrameworks\app;..\..\..\..\libs\openFrameworks\sound;..\..\..\..\libs\openFrameworks\utils;..\..\..\..\libs\openFrameworks\communication;..\..\..\..\libs\openFrameworks\video;..\..\..\..\libs\openFrameworks\types;..\..\..\..\libs\openFrameworks\math;..\..\..\..\libs\openFrameworks\3d;..\..\..\..\libs\openFrameworks\gl;..\..\..\..\libs\openFrameworks\events;..\..\..\..\libs\glut\include;..\..\..\..\libs\rtAudio\include;..\..\..\..\libs\quicktime\include;..\..\..\..\libs\freetype\include;..\..\..\..\libs\freetype\include\freetype2;..\..\..\..\libs\freeImage\include;..\..\..\..\libs\fmodex\include;..\..\..\..\libs\videoInput\include;..\..\..\..\libs\glew\include\;..\..\..\..\libs\glu\include;..\..\..\..\libs\tess2\include;..\..\..\..\libs\cairo\include\cairo;..\..\..\..\libs\poco\include;..\..\..\addons\ofxBt;..\..\..\addons\ofxBt\libs;..\..\..\addons\ofxBt\libs\bullet;..\..\..\addons\ofxBt\libs\bullet\include;..\..\..\addons\ofxBt\libs\bullet\include\bullet;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Character;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Vehicle;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody;..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath;..\..\..\addons\ofxBt\libs\bullet\lib;..\..\..\addons\ofxBt\libs\bullet\lib\osx;..\..\..\addons\ofxBt\src;..\..\..\addons\ofxControlPanel;..\..\..\addons\ofxControlPanel\src;..\..\..\addons\ofxInteractivePrimitives;..\..\..\addons\ofxInteractivePrimitives\src;..\..\..\addons\ofxInteractivePrimitives\src\ui;..\..\..\addons\ofxSimpleParticleEngine;..\..\..\addons\ofxSimpleParticleEngine\src;..\..\..\addons\ofxUI;..\..\..\addons\ofxUI\src;..\..\..\addons\ofxUITabbedCanvas;..\..\..\addons\ofxValue;..\..\..\addons\ofxValue\libs;..\..\..\addons\ofxValue\src;..\..\ram;..\..\ram\Core;..\..\ram\Filter;..\..\ram\Graphics;..\..\ram\Physics;..\..\ram\Scene;..\..\ram\UI;..\..\ram\Utility;..\..\..\..\addons\ofxOsc;..\..\..\..\addons\ofxOsc\src;..\..\..\..\addons\ofxOsc\libs;..\..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\..\addons\ofxXMLSettings;..\..\..\..\addons\ofxXMLSettings\libs;..\..\..\..\addons\ofxXMLSettings\src;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\..\libs\openFrameworks;..\..\..\..\libs\openFrameworks\graphics;..\..\..\..\libs\openFrameworks\app;..\..\..\..\libs\openFrameworks\sound;..\..\..\..\libs\openFrameworks\utils;..\..\..\..\libs\openFrameworks\communication;..\..\..\..\libs\openFrameworks\video;..\..\..\..\libs\openFrameworks\types;..\..\..\..\libs\openFrameworks\math;..\..\..\..\libs\openFrameworks\3d;..\..\..\..\libs\openFrameworks\gl;..\..\..\..\libs\openFrameworks\events;..\..\..\..\libs\glut\include;..\..\..\..\libs\rtAudio\include;..\..\..\..\libs\quicktime\include;..\..\..\..\libs\freetype\include;..\..\..\..\libs\freetype\include\freetype2;..\..\..\..\libs\freeImage\include;..\..\..\..\libs\fmodex\include;..\..\..\..\libs\videoInput\include;..\..\..\..\libs\glew\include\;..\..\..\..\libs\glu\include;..\..\..\..\libs\tess2\include;..\..\..\..\libs\cairo\include\cairo;..\..\..\..\libs\poco\include;..\..\..\addons\ofxBt;..\..\..\addons\ofxBt\libs;..\..\..\addons\ofxBt\libs\bullet;..\..\..\addons\ofxBt\libs\bullet\include;..\..\..\addons\ofxBt\libs\bullet\include\bullet;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Character;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Vehicle;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody;..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath;..\..\..\addons\ofxBt\libs\bullet\lib;..\..\..\addons\ofxBt\libs\bullet\lib\osx;..\..\..\addons\ofxBt\src;..\..\..\addons\ofxControlPanel;..\..\..\addons\ofxControlPanel\src;..\..\..\addons\ofxInteractivePrimitives;..\..\..\addons\ofxInteractivePrimitives\src;..\..\..\addons\ofxInteractivePrimitives\src\ui;..\..\..\addons\ofxSimpleParticleEngine;..\..\..\addons\ofxSimpleParticleEngine\src;..\..\..\addons\ofxUI;..\..\..\addons\ofxUI\src;..\..\..\addons\ofxUITabbedCanvas;..\..\..\addons\ofxValue;..\..\..\addons\ofxValue\libs;..\..\..\addons\ofxValue\src;..\..\ram;..\..\ram\Core;..\..\ram\Filter;..\..\ram\Graphics;..\..\ram\Physics;..\..\ram\Scene;..\..\ram\UI;..\..\ram\Utility;..\..\..\..\addons\ofxOsc;..\..\..\..\addons\ofxOsc\src;..\..\..\..\addons\ofxOsc\libs;..\..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\..\addons\ofxXMLSettings;..\..\..\..\addons\ofxXMLSettings\libs;..\..\..\..\addons\ofxXMLSettings\src;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\ram\Core\ramActor.cpp" />
+    <ClCompile Include="..\..\ram\Core\ramActorManager.cpp" />
+    <ClCompile Include="..\..\ram\Core\ramBaseApp.cpp" />
+    <ClCompile Include="..\..\ram\Core\ramCameraManager.cpp" />
+    <ClCompile Include="..\..\ram\Core\ramSharedData.cpp" />
+    <ClCompile Include="..\..\ram\Graphics\ramGraphics.cpp" />
+    <ClCompile Include="..\..\ram\Graphics\ramNodeLine.cpp" />
+    <ClCompile Include="..\..\ram\Graphics\ramPrimitive.cpp" />
+    <ClCompile Include="..\..\ram\Graphics\ramSimpleShadow.cpp" />
+    <ClCompile Include="..\..\ram\Physics\ramPhysics.cpp" />
+    <ClCompile Include="..\..\ram\Scene\ramSceneManager.cpp" />
+    <ClCompile Include="..\..\ram\UI\ramControlPanel.cpp" />
+    <ClCompile Include="..\..\ram\Utility\ramCameraSettings.cpp" />
+    <ClCompile Include="..\..\ram\Utility\ramUtils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\ram\Core\ramActor.h" />
+    <ClInclude Include="..\..\ram\Core\ramActorManager.h" />
+    <ClInclude Include="..\..\ram\Core\ramBaseApp.h" />
+    <ClInclude Include="..\..\ram\Core\ramCameraManager.h" />
+    <ClInclude Include="..\..\ram\Core\ramConstants.h" />
+    <ClInclude Include="..\..\ram\Core\ramGlobalShortcut.h" />
+    <ClInclude Include="..\..\ram\Core\ramSharedData.h" />
+    <ClInclude Include="..\..\ram\Filter\ramAnalyzer.h" />
+    <ClInclude Include="..\..\ram\Filter\ramBaseFilter.h" />
+    <ClInclude Include="..\..\ram\Filter\ramExpansion.h" />
+    <ClInclude Include="..\..\ram\Filter\ramGhost.h" />
+    <ClInclude Include="..\..\ram\Filter\ramNodeTransform.h" />
+    <ClInclude Include="..\..\ram\Filter\ramPastMe.h" />
+    <ClInclude Include="..\..\ram\Filter\ramPendulum.h" />
+    <ClInclude Include="..\..\ram\Filter\ramSession.h" />
+    <ClInclude Include="..\..\ram\Filter\ramStamp.h" />
+    <ClInclude Include="..\..\ram\Filter\ramTimeShifter.h" />
+    <ClInclude Include="..\..\ram\Filter\ramUpsideDown.h" />
+    <ClInclude Include="..\..\ram\Graphics\ramGraphics.h" />
+    <ClInclude Include="..\..\ram\Graphics\ramNodeLine.h" />
+    <ClInclude Include="..\..\ram\Graphics\ramPrimitive.h" />
+    <ClInclude Include="..\..\ram\Graphics\ramSimpleShadow.h" />
+    <ClInclude Include="..\..\ram\Physics\ramPhysics.h" />
+    <ClInclude Include="..\..\ram\ramMain.h" />
+    <ClInclude Include="..\..\ram\Scene\ramBaseScene.h" />
+    <ClInclude Include="..\..\ram\Scene\ramSceneManager.h" />
+    <ClInclude Include="..\..\ram\UI\ramControllable.h" />
+    <ClInclude Include="..\..\ram\UI\ramControlPanel.h" />
+    <ClInclude Include="..\..\ram\Utility\ramCameraSettings.h" />
+    <ClInclude Include="..\..\ram\Utility\ramNodeFinder.h" />
+    <ClInclude Include="..\..\ram\Utility\ramNodeIdentifer.h" />
+    <ClInclude Include="..\..\ram\Utility\ramOscReciever.h" />
+    <ClInclude Include="..\..\ram\Utility\ramSession.h" />
+    <ClInclude Include="..\..\ram\Utility\ramTimeShifter.h" />
+    <ClInclude Include="..\..\ram\Utility\ramUtils.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
