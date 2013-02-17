@@ -36,6 +36,7 @@ void ramBaseApp::draw(ofEventArgs &args)
 	glPushMatrix();
 	ofPushStyle();
 
+	if (ramShadowEnabled())
 	{
 		// shadow
 		

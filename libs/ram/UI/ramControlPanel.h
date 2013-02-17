@@ -45,6 +45,7 @@ private:
 	
 	float mR, mG, mB;
 	bool mUseBgSlider;
+	bool enableShadow;
 	int mFloorPattern;
 	float mFloorSize, mGridSize;
 	

@@ -39,14 +39,4 @@ struct ramGlobalShortcut
 
 	inline static ofCamera& getActiveCamera() { return ramCameraManager::instance().getActiveCamera(); }
 	
-	
-#pragma mark -
-#pragma mark Shortcut to RamSharedData
-	
-	inline static void ramBeginShadow() { ramSharedData::instance().shadow.begin(); }
-	
-	inline static void ramEndShadow() { ramSharedData::instance().shadow.end(); }
-	
-	inline static void ramSetShadowAlpha(float alpha) { ramSharedData::instance().shadow.setShadowAlpha(alpha); }
-	
 };
