@@ -24,7 +24,22 @@ void ramPrimitive::_update()
 	}
 }
 
+void ramPrimitive::updatePhysicsTransform()
+{
+	rigid.setTransform(getGlobalTransformMatrix());
+}
+
 #pragma mark - ramBoxPrimitive
+
+ramBoxPrimitive::ramBoxPrimitive(float size)
+{
+	rigid = getWorld().addBox(ofVec3f(size), ofVec3f());
+}
+
+ramBoxPrimitive::ramBoxPrimitive(const ofVec3f& size)
+{
+	rigid = getWorld().addBox(size, ofVec3f());
+}
 
 ramBoxPrimitive::ramBoxPrimitive(const ofVec3f& pos, float size)
 {
@@ -55,6 +70,11 @@ void ramBoxPrimitive::customDraw()
 
 #pragma mark - ramSpherePrimitive
 
+ramSpherePrimitive::ramSpherePrimitive(float size)
+{
+	rigid = getWorld().addSphere(size, ofVec3f());
+}
+
 ramSpherePrimitive::ramSpherePrimitive(const ofVec3f& pos, float size)
 {
 	rigid = getWorld().addSphere(size, pos);
@@ -68,6 +88,11 @@ void ramSpherePrimitive::customDraw()
 }
 
 #pragma mark - ramCylinderPrimitive
+
+ramCylinderPrimitive::ramCylinderPrimitive(float radius, float height)
+{
+	rigid = getWorld().addCylinder(radius, height * 0.5, ofVec3f(), ofVec3f());
+}
 
 ramCylinderPrimitive::ramCylinderPrimitive(const ofMatrix4x4& mat, float radius, float height)
 {
@@ -133,6 +158,23 @@ void ramCylinderPrimitive::customDraw()
 	glEnd();
 
 	glPopAttrib();
+}
+
+// ramPyramidPrimitive
+
+ramPyramidPrimitive::ramPyramidPrimitive(float size)
+{
+	mesh.addVertex(ofVec3f(1, 1, 1) * size);
+	mesh.addVertex(ofVec3f(-1, 1, -1) * size);
+	mesh.addVertex(ofVec3f(-1, -1, 1) * size);
+	mesh.addVertex(ofVec3f(1, -1, -1) * size);
+	
+	mesh.addTriangle(0, 1, 2);
+	mesh.addTriangle(0, 2, 3);
+	mesh.addTriangle(0, 3, 1);
+	mesh.addTriangle(3, 2, 1);
+	
+	rigid = getWorld().addMesh(mesh, ofVec3f(), ofVec3f());
 }
 
 ramPyramidPrimitive::ramPyramidPrimitive(const ofMatrix4x4& mat, float size)

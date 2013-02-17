@@ -25,6 +25,8 @@ public:
 	
 	void draw()
 	{
+		if (getNumNodeArray() == 0) return;
+		
 		ramNodeArray &arr = getNodeArray(0);
 		
 		{

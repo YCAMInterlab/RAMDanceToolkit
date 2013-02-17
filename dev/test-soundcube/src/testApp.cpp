@@ -8,7 +8,7 @@ public:
 	{
 	public:
 		
-		Shape() : id(-1), obj(NULL) {}
+		Shape() : id(-1), obj(NULL), alpha(0) {}
 		
 		~Shape()
 		{
@@ -22,11 +22,45 @@ public:
 		{
 			this->id = id;
 			this->obj = obj;
+			
+			struct Callback
+			{
+				Shape *shape;
+				Callback(Shape *shape) : shape(shape) {}
+				
+				void operator()()
+				{
+					shape->onCollision();
+				}
+			};
+
+			obj->getRigidBody().setCollisionCallback(Callback(this));
 		}
 		
 		void draw()
 		{
+			ofPushStyle();
+			
+			if (ofGetElapsedTimef() - last_collision_time < 0.1)
+			{
+				alpha += (0 - alpha) * 0.1;
+			}
+			else
+			{
+				alpha += (1 - alpha) * 0.1;
+				
+			}
+			
+			ofSetColor(255, 255 * alpha, 255 * alpha);
+			
 			obj->draw();
+
+			ofPopStyle();
+		}
+		
+		void onCollision()
+		{
+			last_collision_time = ofGetElapsedTimef();
 		}
 		
 	private:
@@ -34,6 +68,9 @@ public:
 		int id;
 		ramPrimitive *obj;
 		
+		float alpha;
+		
+		float last_collision_time;
 	};
 	
 	const string getName() { return "SoundCube"; }
@@ -120,15 +157,15 @@ public:
 				
 				if (type == "cube")
 				{
-					s = new ramBoxPrimitive(pos, size);
+					s = new ramBoxPrimitive(size);
 				}
 				else if (type == "pyramid")
 				{
-					s = new ramPyramidPrimitive(pos, size.x);
+					s = new ramPyramidPrimitive(size.x);
 				}
 				else if (type == "sphere")
 				{
-					s = new ramSpherePrimitive(pos, size.x);
+					s = new ramSpherePrimitive(size.x);
 				}
 				else
 				{
@@ -136,8 +173,12 @@ public:
 					continue;
 				}
 				
+				s->setPosition(pos);
 				s->setOrientation(rot);
-//				s->getRigidBody().setStatic(true);
+				s->updatePhysicsTransform();
+				
+				s->getRigidBody().setStatic(true);
+//				s->getRigidBody().setDisableDeactivation(true);
 				
 				Shape *o = new Shape;
 				o->set(i, s);
@@ -210,6 +251,12 @@ void testApp::update()
 void testApp::draw()
 {
 	SM.draw();
+	
+	ramBeginCamera();
+	
+//	ramPhysics::instance().debugDraw();
+	
+	ramEndCamera();
 }
 
 

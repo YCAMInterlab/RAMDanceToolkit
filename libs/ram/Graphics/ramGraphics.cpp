@@ -36,7 +36,8 @@ void ramBox(const ramNode& o, float size)
 	ofBox(size);
 	o.endTransform();
 	
-	if (ramGetEnablePhysicsPrimitive())
+	if (ramGetEnablePhysicsPrimitive()
+		&& ramPhysics::instance().checkAndUpdateNodeCache(&o))
 	{
 		ramBoxPrimitive *p = new ramBoxPrimitive(o.getTransformMatrix(), size);
 		ramPhysics::instance().registerTempraryPrimitive(p);
