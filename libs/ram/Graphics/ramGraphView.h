@@ -8,6 +8,19 @@ public:
 	
 	ramGraphView() : num_buffer(400), rect(100, 100, 300, 100) {}
 	
+	void setupRecord(const string& key, float min = 0, float max = 1)
+	{
+		records[key] = Record();
+		records[key].buffer.resize(num_buffer);
+		records[key].min = min;
+		records[key].max = max;
+	}
+
+	bool hasRecord(const string& key)
+	{
+		return records.find(key) != records.end();
+	}
+	
 	void setNumBuffer(size_t num_buffer)
 	{
 		assert(num_buffer > 1);
@@ -23,22 +36,19 @@ public:
 		}
 	}
 	
-	void setRect(ofRectangle rect)
+	void setColor(const string& key, ofColor color)
 	{
-		this->rect = rect;
-	}
-	
-	void setupRecord(const string& key, float min = 0, float max = 1)
-	{
-		records[key] = Record();
-		records[key].buffer.resize(num_buffer);
-		records[key].min = min;
-		records[key].max = max;
+		if (!hasRecord(key)) return;
+		
+		Record &o = records[key];
+		o.has_color = true;
+		o.color = color;
 	}
 	
 	void setMinMax(const string& key, float min, float max)
 	{
-		if (records.find(key) == records.end()) return;
+		if (!hasRecord(key)) return;
+		
 		Record &o = records[key];
 		o.min = min;
 		o.max = max;
@@ -46,7 +56,7 @@ public:
 	
 	void update(const string& key, float v)
 	{
-		if (records.find(key) == records.end()) return;
+		if (!hasRecord(key)) return;
 		
 		Record &o = records[key];
 		o.buffer.push_front(v);
@@ -79,7 +89,18 @@ public:
 			
 			float c = fmod(color_offset, 1);
 			
-			ofSetColor(ofColor::fromHsb(c * 255, 255, 255, 127));
+			ofColor color;
+			
+			if (o.has_color)
+			{
+				color = o.color;
+			}
+			else
+			{
+				color = ofColor::fromHsb(c * 255, 255, 255, 127);
+			}
+			
+			ofSetColor(color, 127);
 			
 			{
 				int index = 0;
@@ -87,7 +108,7 @@ public:
 				float yy = ofMap(v[index], o.min, o.max, rect.height, 0);
 				
 				ofPushStyle();
-				ofSetColor(ofColor::fromHsb(c * 255, 255, 255, 64));
+				ofSetColor(color, 64);
 				ofLine(0, yy, rect.width, yy);
 				ofPopStyle();
 				
@@ -115,6 +136,11 @@ public:
 		ofPopStyle();
 	}
 	
+	void setRect(ofRectangle rect)
+	{
+		this->rect = rect;
+	}
+	
 private:
 	
 	int num_buffer;
@@ -128,7 +154,10 @@ private:
 		float min, max;
 		BufferType buffer;
 		
-		Record() : min(0), max(1) {}
+		bool has_color;
+		ofColor color;
+		
+		Record() : min(0), max(1), has_color(false) {}
 	};
 	
 	typedef map<string, Record> MapType;
