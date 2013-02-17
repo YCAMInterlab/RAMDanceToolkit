@@ -147,6 +147,17 @@ void ramDrawBasicActor(const ramActor& actor,
 	}
 	glPopMatrix();
 }
+void ramDrawBasicRigid(const ramRigidBody& rigid,
+					   const ofColor& jointColor)
+{
+	for(int i=0; i<rigid.getNumNode(); i++)
+	{
+		const ramNode &node = rigid.getNode(i);
+		node.beginTransform();
+		ofBox(node, 5);
+		node.endTransform();
+	}
+}
 
 void ramDrawActorCube(ramActor& actor, ofColor c)
 {
