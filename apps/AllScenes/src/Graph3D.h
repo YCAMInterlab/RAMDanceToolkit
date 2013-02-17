@@ -23,8 +23,10 @@ public:
 		
 	}
 	
-	void draw()
+	void drawHUD()
 	{
+		if (getNumNodeArray() == 0) return;
+		
 		ramNodeArray &arr = getNodeArray(0);
 		
 		{

@@ -72,6 +72,15 @@ public:
 	}
 };
 
+//
+
+void ramBox(const ramNode& o, float size);
+void ramSphere(const ramNode& o, float radius);
+
+//
+
+void ramDrawNodeCorresponds(const ramNodeArray &a, const ramNodeArray &b);
+
 void ramDrawBasicFloor(const int floorPattern,
 					   const float floorSize,
 					   const float tileSize,
@@ -87,10 +96,17 @@ void ramDrawBasicActor(const ramActor& actor,
 void ramDrawBasicRigid(const ramRigidBody& rigid,
 					   const ofColor& jointColor = ramColor::BLUE_LIGHT);
 
-void ramBox(const ramNode& o, float size);
-void ramSphere(const ramNode& o, float radius);
+// shadow
 
-void ramDrawNodeCorresponds(const ramNodeArray &a, const ramNodeArray &b);
+void ramEnableShadow(bool v = true);
+void ramDisableShadow();
+bool ramShadowEnabled();
+
+void ramBeginShadow();
+void ramEndShadow();
+void ramSetShadowAlpha(float alpha);
+
+//
 
 inline void ramPlate(const vector<ramNode> &nodes)
 {

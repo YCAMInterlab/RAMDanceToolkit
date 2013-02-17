@@ -21,6 +21,7 @@ ramControlPanel::ramControlPanel()
 	mFloorSize = 600.0;
 	mGridSize = 50.0;
 	mLabelCamPos = new ofxUILabel("x:0 y:0 z:0", OFX_UI_FONT_MEDIUM);
+	enableShadow = true;
 	
 	scenes = NULL;
 }
@@ -48,6 +49,11 @@ void ramControlPanel::setup()
 	/// full screan
 	mPanelGeneral->addSpacer(kLength, 2);
 	mPanelGeneral->addWidgetDown(new ofxUIToggle(32, 32, false, "Pause (or press Space Key)"));
+	
+	
+	/// full screan
+	mPanelGeneral->addSpacer(kLength, 2);
+	mPanelGeneral->addWidgetDown(new ofxUIToggle(16, 16, &enableShadow, "Use Shadow"));
 	
 	
 	/// background color
@@ -191,11 +197,12 @@ void ramControlPanel::guiEvent(ofxUIEventArgs &e)
 		}
 	}
 	
-	
 	if (name == "Pause (or press Space Key)")
 	{
 		ramActorManager::instance().toggleFreeze();
 	}
+	
+	ramEnableShadow(enableShadow);
 }
 
 void ramControlPanel::keyPressed(ofKeyEventArgs &e)

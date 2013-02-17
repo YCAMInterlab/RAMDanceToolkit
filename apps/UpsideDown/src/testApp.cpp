@@ -1,10 +1,8 @@
 #include "testApp.h"
 
-#include "SoundCube.h"
 
-ramSceneManager SM;
+EmptyScene myScene;
 
-SoundCube soundCube;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -20,9 +18,10 @@ void testApp::setup()
 	ramInit();
 	oscReceiver.setup(10000);
 	
-	vector<ramBaseScene*> scenes;
-	scenes.push_back(soundCube.getPtr());
-	SM.setup(scenes);
+	
+	/// Scene setup
+	// ------------------
+	myScene.setup();
 }
 
 //--------------------------------------------------------------
@@ -32,19 +31,18 @@ void testApp::update()
 	// ------------------
 	oscReceiver.update();
 	
-	SM.update();
+	
+	/// Scene update
+	// ------------------
+	myScene.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	SM.draw();
-	
-	ramBeginCamera();
-	
-//	ramPhysics::instance().debugDraw();
-	
-	ramEndCamera();
+	/// Scene draw
+	// ------------------
+	myScene.draw();
 }
 
 
@@ -54,14 +52,17 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	ramEnablePhysicsPrimitive();
-	ramDrawBasicActor(actor);
+	/// Scene drawActor
+	// ------------------
+	myScene.drawActor(actor);
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
-	
+	/// Scene drawRigid
+	// ------------------
+	myScene.drawRigid(rigid);
 }
 
 
