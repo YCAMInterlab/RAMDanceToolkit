@@ -20,6 +20,7 @@
 /// graphics
 #include "ramGraphics.h"
 #include "ramNodeLine.h"
+#include "ramGraphView.h"
 
 
 /// filters
