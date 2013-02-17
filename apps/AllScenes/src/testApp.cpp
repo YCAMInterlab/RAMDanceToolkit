@@ -9,22 +9,22 @@
 #include "Bullet.h"
 #include "Future.h"
 #include "Line.h"
-#include "DuplicateMe.h"
+#include "Donuts.h"
 #include "Stamp.h"
 #include "UpsideDown.h"
 #include "Expansion.h"
 #include "Graph3D.h"
 
 BasicActor basicActor;
-BigBox bigbox;
-Bullet bullet;
-Future future;
+Graph3D graph3D;
 Line drawLines;
-DuplicateMe duplicateMe;
-Stamp stamp;
 UpsideDown upsideDown;
 Expansion expansion;
-Graph3D graph3D;
+BigBox bigbox;
+Future future;
+Bullet bullet;
+Donuts donuts;
+Stamp stamp;
 
 
 #pragma mark - oF methods
@@ -45,15 +45,15 @@ void testApp::setup()
 	/// scenes setup
 	// ------------------
 	vector<ramBaseScene*> scenes;
+	scenes.push_back( basicActor.getPtr() );
 	scenes.push_back( graph3D.getPtr() );
 	scenes.push_back( drawLines.getPtr() );
-	scenes.push_back( basicActor.getPtr() );
 	scenes.push_back( upsideDown.getPtr() );
 	scenes.push_back( expansion.getPtr() );
 	scenes.push_back( bigbox.getPtr() );
 	scenes.push_back( future.getPtr() );
 	scenes.push_back( bullet.getPtr() );
-	scenes.push_back( duplicateMe.getPtr() );
+	scenes.push_back( donuts.getPtr() );
 	scenes.push_back( stamp.getPtr() );
 	
 	sceneManager.setup(scenes);

@@ -1,8 +1,8 @@
 #include "testApp.h"
 
 
-#include "DuplicateMe.h"
-DuplicateMe duplicateMe;
+#include "Donuts.h"
+Donuts donuts;
 
 
 #pragma mark - oF methods
@@ -24,7 +24,7 @@ void testApp::setup()
 	/// scenes setup
 	// ------------------
 	vector<ramBaseScene*> scenes;
-	scenes.push_back( duplicateMe.getPtr() );
+	scenes.push_back( donuts.getPtr() );
 	sceneManager.setup(scenes);	
 }
 

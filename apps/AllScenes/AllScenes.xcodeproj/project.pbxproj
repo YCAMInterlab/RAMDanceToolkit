@@ -315,7 +315,6 @@
 		9A3FA1A416AD6D8A0037AC3C /* ofxSimpleParticleEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSimpleParticleEngine.h; sourceTree = "<group>"; };
 		9A44AF9116AEB8C500DC4CB6 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
 		9A44B13116AEC02400DC4CB6 /* Future.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Future.h; sourceTree = "<group>"; };
-		9AAA0B1816CA9DB4002D15E6 /* DuplicateMe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuplicateMe.h; sourceTree = "<group>"; };
 		9AC08FCF16CDF4B800892109 /* Stamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stamp.h; sourceTree = "<group>"; };
 		9AC08FE516CE03C800892109 /* Expansion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expansion.h; sourceTree = "<group>"; };
 		9AD3316C16AE52CE0003FD7D /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
@@ -328,6 +327,7 @@
 		9AE0E11516AFC6690016B3B0 /* picojson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = picojson.h; sourceTree = "<group>"; };
 		9AE0E11716AFC6690016B3B0 /* ofxValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxValue.cpp; sourceTree = "<group>"; };
 		9AE0E11816AFC6690016B3B0 /* ofxValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxValue.h; sourceTree = "<group>"; };
+		9AEC705116D0A6B700C4B759 /* Donuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Donuts.h; sourceTree = "<group>"; };
 		9bf3aa0d4faa89d0f8a0e545403162be /* OscReceivedElements.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = OscReceivedElements.cpp; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscReceivedElements.cpp; sourceTree = SOURCE_ROOT; };
 		9f7986dc4eb05e75fce2c777500fdc01 /* ofxOscSender.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxOscSender.h; path = ../../../addons/ofxOsc/src/ofxOscSender.h; sourceTree = SOURCE_ROOT; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
@@ -490,12 +490,12 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				9AEC705016D0A6B700C4B759 /* Donuts */,
 				60426F9F16CE22EB00C99541 /* Graph3D */,
 				60426F9D16CE1ADE00C99541 /* Line */,
 				9AC08FE416CE03C800892109 /* Expansion */,
 				9AC08FCE16CDF4B800892109 /* Stamp */,
 				6079C9F216CBECEC00ABCCD6 /* BasicActor */,
-				9AAA0B1716CA9DB4002D15E6 /* DuplicateMe */,
 				9A44B13016AEC02400DC4CB6 /* Future */,
 				9A44AF9016AEB8C500DC4CB6 /* Bullet */,
 				9AD4232016AEAD0700BAC519 /* BigBox */,
@@ -898,15 +898,6 @@
 			path = ../../Future/src/Future;
 			sourceTree = "<group>";
 		};
-		9AAA0B1716CA9DB4002D15E6 /* DuplicateMe */ = {
-			isa = PBXGroup;
-			children = (
-				9AAA0B1816CA9DB4002D15E6 /* DuplicateMe.h */,
-			);
-			name = DuplicateMe;
-			path = ../../DuplicateMe/src/DuplicateMe;
-			sourceTree = "<group>";
-		};
 		9AC08FCE16CDF4B800892109 /* Stamp */ = {
 			isa = PBXGroup;
 			children = (
@@ -989,6 +980,15 @@
 				9AE0E11816AFC6690016B3B0 /* ofxValue.h */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		9AEC705016D0A6B700C4B759 /* Donuts */ = {
+			isa = PBXGroup;
+			children = (
+				9AEC705116D0A6B700C4B759 /* Donuts.h */,
+			);
+			name = Donuts;
+			path = ../../Donuts/src/Donuts;
 			sourceTree = "<group>";
 		};
 		BB4B014C10F69532006C3DED /* addons */ = {

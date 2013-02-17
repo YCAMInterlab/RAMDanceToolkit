@@ -13,9 +13,9 @@ ramControlPanel& ramControlPanel::instance()
 
 ramControlPanel::ramControlPanel()
 {
-	mR = 50;
-	mG = 50;
-	mB = 50;
+	mR = 0;
+	mG = 0;
+	mB = 0;
 	mUseBgSlider = true;
 	mFloorPattern = ramFloor::FLOOR_NONE;
 	mFloorSize = 600.0;
@@ -36,7 +36,7 @@ void ramControlPanel::setup()
 	/// First panel
 	// -------------------------------------
 	/// panel
-	mPanelGeneral = new ofxUICanvas(0, 0, kLength+kXInit*2.0, ofGetHeight());
+	mPanelGeneral = new ofxUICanvas(0, 0, kLength+kXInit*2.0, ofGetScreenHeight());
 	mPanelGeneral->addWidgetDown(new ofxUILabel("RamDanceToolkit", OFX_UI_FONT_LARGE));
 	
 	
@@ -108,7 +108,7 @@ void ramControlPanel::update(ofEventArgs &e)
 
 void ramControlPanel::addPanel(ramControllable* control)
 {
-	ofxUICanvas *panel = new ofxUICanvas(0, 0, ramGetGUI().kLength+ramGetGUI().kXInit*2.0, ofGetHeight());
+	ofxUICanvas *panel = new ofxUICanvas(0, 0, ramGetGUI().kLength+ramGetGUI().kXInit*2.0, ofGetScreenHeight());
 	control->setupControlPanel(panel);
 	getTabbedCanvas().add(panel);
 }

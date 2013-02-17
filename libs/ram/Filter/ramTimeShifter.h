@@ -37,7 +37,6 @@ public:
 		panel->addSpacer(gui.kLength, 2);
 		panel->addSlider("Shift time", 0, RAM_TIMESHIFT_MAX_TIME, &mShiftTime, gui.kLength, gui.kDim);
 		panel->addSlider("Shift frames", 0, RAM_TIMESHIFT_MAX_FRAMES, &mShiftFrames, gui.kLength, gui.kDim);
-		panel->addSlider("Shift frames", 0, RAM_TIMESHIFT_MAX_FRAMES, &mShiftFrames, gui.kLength, gui.kDim);
 		
 		ofAddListener(panel->newGUIEvent, this, &ramTimeShifter::onPanelChanged);
 	}
@@ -68,8 +67,7 @@ public:
 	
 #pragma mark -
 	
-	
-	inline ramNodeArray& getNodeArray() { return buffer.front(); }
+	inline const ramNodeArray& getResult() { return buffer.front(); }
 	inline void setShiftType(ramTimeShifterType type) { mType = type; }
 	inline void setShiftTime(const float time) { mShiftTime = time > RAM_TIMESHIFT_MAX_TIME ? RAM_TIMESHIFT_MAX_TIME : time; }
 	inline void setShiftFrames(const int frames) { mShiftFrames = frames > RAM_TIMESHIFT_MAX_FRAMES ? RAM_TIMESHIFT_MAX_FRAMES : frames; }
