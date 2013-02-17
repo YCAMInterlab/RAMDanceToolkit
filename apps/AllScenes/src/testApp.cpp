@@ -15,6 +15,7 @@
 #include "Expansion.h"
 #include "Graph3D.h"
 #include "Particles.h"
+#include "Abacus.h"
 
 BasicActor basicActor;
 Graph3D graph3D;
@@ -27,7 +28,7 @@ Bullet bullet;
 Donuts donuts;
 Stamp stamp;
 Particles particles;
-
+Abacus abacus;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -58,6 +59,7 @@ void testApp::setup()
 	scenes.push_back( donuts.getPtr() );
 	scenes.push_back( stamp.getPtr() );
 	scenes.push_back( particles.getPtr() );
+	scenes.push_back( abacus.getPtr() );
 	
 	sceneManager.setup(scenes);
 }

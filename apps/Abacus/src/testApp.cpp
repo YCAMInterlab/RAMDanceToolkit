@@ -1,8 +1,8 @@
 #include "testApp.h"
 
 
-#include "Particles.h"
-Particles particles;
+#include "Abacus.h"
+Abacus abacus;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -21,8 +21,8 @@ void testApp::setup()
 	
 	/// stamp setup
 	// ------------------
-	particles.setup();
-	ramGetGUI().addPanel(&particles);
+	abacus.setup();
+	ramGetGUI().addPanel(&abacus);
 }
 
 //--------------------------------------------------------------
@@ -33,13 +33,13 @@ void testApp::update()
 	oscReceiver.update();
 	
 	
-	particles.update();
+	abacus.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	particles.draw();
+	abacus.draw();
 }
 
 
@@ -49,11 +49,13 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
+	abacus.drawActor(actor);
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
+	abacus.drawRigid(rigid);
 }
 
 

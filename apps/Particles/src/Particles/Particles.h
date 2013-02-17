@@ -32,7 +32,7 @@ public:
 	
 	void setup()
 	{
-		pe.setup(10000);
+		pe.setup(30000);
 		
 		gravity = new Gravity;
 		floor = new Floor;
