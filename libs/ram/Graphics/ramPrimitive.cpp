@@ -72,12 +72,12 @@ void ramBoxPrimitive::customDraw()
 
 ramSpherePrimitive::ramSpherePrimitive(float size)
 {
-	rigid = getWorld().addSphere(size, ofVec3f());
+	rigid = getWorld().addSphere(size * 0.5, ofVec3f());
 }
 
 ramSpherePrimitive::ramSpherePrimitive(const ofVec3f& pos, float size)
 {
-	rigid = getWorld().addSphere(size, pos);
+	rigid = getWorld().addSphere(size * 0.5, pos);
 }
 
 void ramSpherePrimitive::customDraw()
@@ -164,6 +164,8 @@ void ramCylinderPrimitive::customDraw()
 
 ramPyramidPrimitive::ramPyramidPrimitive(float size)
 {
+	size *= 0.5;
+	
 	mesh.addVertex(ofVec3f(1, 1, 1) * size);
 	mesh.addVertex(ofVec3f(-1, 1, -1) * size);
 	mesh.addVertex(ofVec3f(-1, -1, 1) * size);
@@ -179,6 +181,8 @@ ramPyramidPrimitive::ramPyramidPrimitive(float size)
 
 ramPyramidPrimitive::ramPyramidPrimitive(const ofMatrix4x4& mat, float size)
 {
+	size *= 0.5;
+	
 	mesh.addVertex(ofVec3f(1, 1, 1) * size);
 	mesh.addVertex(ofVec3f(-1, 1, -1) * size);
 	mesh.addVertex(ofVec3f(-1, -1, 1) * size);
@@ -194,6 +198,8 @@ ramPyramidPrimitive::ramPyramidPrimitive(const ofMatrix4x4& mat, float size)
 
 ramPyramidPrimitive::ramPyramidPrimitive(const ofVec3f& pos, float size)
 {
+	size *= 0.5;
+	
 	mesh.addVertex(ofVec3f(1, 1, 1) * size);
 	mesh.addVertex(ofVec3f(-1, 1, -1) * size);
 	mesh.addVertex(ofVec3f(-1, -1, 1) * size);
