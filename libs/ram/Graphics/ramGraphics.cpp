@@ -136,10 +136,8 @@ void ramDrawBasicActor(const ramActor& actor,
 		const ramNode &node = actor.getNode(i);
 		float jointSize = (i==ramActor::JOINT_HEAD) ? 6.0 : 3.0;
 		
-		node.beginTransform();
 		ofSetColor( jointColor );
-		ofBox( jointSize );
-		node.endTransform();
+		ramBox( node, jointSize );
 		
 		if (node.hasParent())
 		{

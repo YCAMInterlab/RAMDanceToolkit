@@ -2,9 +2,14 @@
 
 static bool ram_enable_physics_primitive = true;
 
-void ramSetEnablePhysicsPrimitive(bool v)
+void ramEnablePhysicsPrimitive(bool v)
 {
 	ram_enable_physics_primitive = v;
+}
+
+void ramDisablePhysicsPrimitive()
+{
+	ram_enable_physics_primitive = false;
 }
 
 bool ramGetEnablePhysicsPrimitive()
