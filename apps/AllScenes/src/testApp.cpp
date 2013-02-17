@@ -9,7 +9,7 @@
 #include "Bullet.h"
 #include "Future.h"
 #include "Line.h"
-#include "DuplicateMe.h"
+#include "Donuts.h"
 #include "Stamp.h"
 #include "UpsideDown.h"
 #include "Expansion.h"
@@ -20,7 +20,7 @@ BigBox bigbox;
 Bullet bullet;
 Future future;
 Line drawLines;
-DuplicateMe duplicateMe;
+Donuts duplicateMe;
 Stamp stamp;
 UpsideDown upsideDown;
 Expansion expansion;
