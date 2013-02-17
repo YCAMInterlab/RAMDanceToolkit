@@ -1,33 +1,7 @@
 #include "testApp.h"
 
 
-/*!
- Scenes
- */
-#include "BasicActor.h"
-#include "BigBox.h"
-#include "Bullet.h"
-#include "Future.h"
-#include "Line.h"
-#include "Donuts.h"
-#include "Stamp.h"
-#include "UpsideDown.h"
-#include "Expansion.h"
-#include "Graph3D.h"
-#include "Particles.h"
 #include "Abacus.h"
-
-BasicActor basicActor;
-Graph3D graph3D;
-Line drawLines;
-UpsideDown upsideDown;
-Expansion expansion;
-BigBox bigbox;
-Future future;
-Bullet bullet;
-Donuts donuts;
-Stamp stamp;
-Particles particles;
 Abacus abacus;
 
 #pragma mark - oF methods
@@ -45,23 +19,10 @@ void testApp::setup()
 	oscReceiver.setup(10000);
 	
 	
-	/// scenes setup
+	/// stamp setup
 	// ------------------
-	vector<ramBaseScene*> scenes;
-	scenes.push_back( basicActor.getPtr() );
-	scenes.push_back( graph3D.getPtr() );
-	scenes.push_back( drawLines.getPtr() );
-	scenes.push_back( upsideDown.getPtr() );
-	scenes.push_back( expansion.getPtr() );
-	scenes.push_back( bigbox.getPtr() );
-	scenes.push_back( future.getPtr() );
-	scenes.push_back( bullet.getPtr() );
-	scenes.push_back( donuts.getPtr() );
-	scenes.push_back( stamp.getPtr() );
-	scenes.push_back( particles.getPtr() );
-	scenes.push_back( abacus.getPtr() );
-	
-	sceneManager.setup(scenes);
+	abacus.setup();
+	ramGetGUI().addPanel(&abacus);
 }
 
 //--------------------------------------------------------------
@@ -72,47 +33,39 @@ void testApp::update()
 	oscReceiver.update();
 	
 	
-	/// Scenes update
-	// ------------------
-	sceneManager.update();
+	abacus.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	/// Scenes draw
-	// ------------------
-	sceneManager.draw();
+	abacus.draw();
 }
+
+
 
 #pragma mark - ram methods
 
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	/// Scenes drawActor
-	// ------------------
-	sceneManager.drawActor(actor);
+	abacus.drawActor(actor);
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
-	/// Scenes drawActor
-	// ------------------
-	sceneManager.drawRigid(rigid);
+	abacus.drawRigid(rigid);
 }
+
+
+
 
 #pragma mark - oF Events
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	switch (key)
-	{
-		case 'b':
-			bullet.cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
-			break;
-	}
+	
 }
 
 //--------------------------------------------------------------
@@ -162,3 +115,4 @@ void testApp::dragEvent(ofDragInfo dragInfo)
 {
 	
 }
+
