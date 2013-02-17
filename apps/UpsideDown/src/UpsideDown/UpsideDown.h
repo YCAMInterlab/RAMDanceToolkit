@@ -8,6 +8,7 @@ public:
     ofVec3f mEuler;
     ofQuaternion mRotation;
     ramUpsideDown mUpsideDown;
+    float mOffset;
     
     ofVec3f mAutoRotateSpeed;
     struct { bool x, y, z; } mAutoRotate;
@@ -16,24 +17,35 @@ public:
 	{
 		ofAddListener(panel->newGUIEvent, this, &UpsideDown::onValueChanged);
         
-        panel->addSlider("ANGLE X", 0.0f, 360.0f, &mEuler.x, 300.0f, 16.0f);
-        panel->addSlider("ANGLE Y", 0.0f, 360.0f, &mEuler.y, 300.0f, 16.0f);
-        panel->addSlider("ANGLE Z", 0.0f, 360.0f, &mEuler.z, 300.0f, 16.0f);
+        const float dim = 16.0f;
         
-        panel->addSpacer(300.0f, 16.0f);
+        panel->addSlider("ANGLE X", 0.0f, 360.0f, &mEuler.x, 300.0f, dim);
+        panel->addSlider("ANGLE Y", 0.0f, 360.0f, &mEuler.y, 300.0f, dim);
+        panel->addSlider("ANGLE Z", 0.0f, 360.0f, &mEuler.z, 300.0f, dim);
         
-        panel->addToggle("AUTO ROTATE X", &mAutoRotate.x, 16.0f, 16.0f);
-        panel->addToggle("AUTO ROTATE Y", &mAutoRotate.y, 16.0f, 16.0f);
-        panel->addToggle("AUTO ROTATE Z", &mAutoRotate.z, 16.0f, 16.0f);
+        panel->addSpacer(300.0f, 1.0f);
         
-        panel->addSlider("AUTO ROTATE SPEED X", -5.0f, 5.0f, &mAutoRotateSpeed.x, 300.0f, 16.0f);
-        panel->addSlider("AUTO ROTATE SPEED Y", -5.0f, 5.0f, &mAutoRotateSpeed.y, 300.0f, 16.0f);
-        panel->addSlider("AUTO ROTATE SPEED Z", -5.0f, 5.0f, &mAutoRotateSpeed.z, 300.0f, 16.0f);
+        panel->addToggle("AUTO ROTATE X", &mAutoRotate.x, dim, dim);
+        panel->addToggle("AUTO ROTATE Y", &mAutoRotate.y, dim, dim);
+        panel->addToggle("AUTO ROTATE Z", &mAutoRotate.z, dim, dim);
+        
+        panel->addSlider("AUTO ROTATE SPEED X", -5.0f, 5.0f, &mAutoRotateSpeed.x, 300.0f, dim);
+        panel->addSlider("AUTO ROTATE SPEED Y", -5.0f, 5.0f, &mAutoRotateSpeed.y, 300.0f, dim);
+        panel->addSlider("AUTO ROTATE SPEED Z", -5.0f, 5.0f, &mAutoRotateSpeed.z, 300.0f, dim);
+        
+        panel->addSpacer(300.0f, 1.0f);
+        
+        panel->addSlider("OFFSET", -300.0f, 300.0f, &mOffset, 300.0f, dim);
+        
+        panel->addSpacer(300.0f, 1.0f);
+        
+        panel->addButton("RESET", false, dim, dim);
 	}
     
 	void setup()
 	{
         mAutoRotateSpeed.set(1.0f);
+        mOffset = -3.0f;
 	}
     
     void loopAngle(float &a)
@@ -64,6 +76,8 @@ public:
         mat.rotate(mEuler.x, 1.0f, 0.0f, 0.0f);
         
         mRotation = mat.getRotate();
+        
+        mUpsideDown.setOffset(mOffset);
 	}
 	
 	void draw()
@@ -100,7 +114,12 @@ public:
 	
 	void onValueChanged(ofxUIEventArgs& e)
 	{
-
+        if (e.widget->getName() == "RESET") {
+            mAutoRotate.x = mAutoRotate.y = mAutoRotate.z = 0.0f;
+            mEuler.set(0.0f);
+            mAutoRotateSpeed.set(1.0f);
+            mOffset = -3.0f;
+        }
 	}
 	
 	const string getName() { return "UpsideDown scene"; }
