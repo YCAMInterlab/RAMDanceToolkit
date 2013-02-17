@@ -25,14 +25,14 @@ public:
 		panel->addSlider("Amount", 1.0, 15.0, &particle_amount, gui.kLength, gui.kDim);
 		panel->addSlider("Life", 0.1, 10.0, &pe.particle_life, gui.kLength, gui.kDim);
 		panel->addSlider("Velocity", 0.1, 5, &pe.particle_velocity, gui.kLength, gui.kDim);
-		panel->addSlider("Gravity", -0.5, 0.5, &gravity->force, gui.kLength, gui.kDim);
+		panel->addSlider("Gravity", -0.1, 0.1, &gravity->force, gui.kLength, gui.kDim);
 		
 		ofAddListener(panel->newGUIEvent, this, &Particles::onValueChanged);
 	}
 	
 	void setup()
 	{
-		pe.setup(30000);
+		pe.setup(50000);
 		
 		gravity = new Gravity;
 		floor = new Floor;
@@ -45,7 +45,7 @@ public:
 	{
 		for (int n=0; n<getNumNodeArray(); n++)
 		{
-			ramNodeArray &nodeArray = getNodeArray(0);
+			ramNodeArray &nodeArray = getNodeArray(n);
 			for (int i=0; i<nodeArray.getNumNode(); i++)
 			{
 				const ramNode &node = nodeArray.getNode(i);
@@ -65,9 +65,8 @@ public:
 		glEnable(GL_DEPTH_TEST);
 		ofPushStyle();
 		ofNoFill();
-		
 
-		ofSetColor(255, 60);
+		ofSetColor(255, 30);
 		pe.draw();
 		
 		ofPopStyle();
