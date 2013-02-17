@@ -83,6 +83,7 @@ public:
 	virtual void draw() {}
 	virtual void drawActor(ramActor &actor) {}
 	virtual void drawRigid(ramRigidBody &rigid) {}
+	virtual void drawHUD() {}
 	
 	virtual void onEnabled() { cout << "[Scene enabled] " << getName() << endl; }
 	virtual void onDisabled() { cout << "[Scene disabled] " << getName() << endl; }

@@ -133,6 +133,14 @@ void ramSceneManager::draw()
 			
 			ramEndCamera();
 		}
+		
+		{
+			// draw HUD
+			ofPushView();
+			ofSetupScreen();
+			scene->drawHUD();
+			ofPopView();
+		}
 	}
 	
 	ofPopStyle();
