@@ -1,16 +1,13 @@
 #pragma once
-#include "ofxSimpleParticleEngine.h"
 
 class Future : public ramBaseScene
 {
 	
-	ofxSimpleParticleEngine pe;
 	ramGhost mGhost;
-	bool mShowGhost, mShowParticle;
 	
 public:
 	
-	Future() : mShowGhost(true), mShowParticle(true) {}
+	Future() {}
 	
 	void setupControlPanel(ofxUICanvas* panel)
 	{
@@ -20,25 +17,16 @@ public:
 		panel->addSpacer(gui.kLength, 2);
 		
 		mGhost.setupControlPanel(panel);
-		panel->addToggle("Show Ghost", &mShowGhost, 50, 50);
-		panel->addToggle("Show Salt", &mShowParticle, 50, 50);
 	}
 	
 	void setup()
 	{
-		pe.setup(100000);
+		
 	}
 	
 	void update()
 	{
 		
-		for (int i=0; i<mGhost.getResult().getNumNode(); i++)
-		{
-			const ramNode &node = mGhost.getResult().getNode(i);
-			for(int j=0; j<10; j++)
-				pe.emit( node.getGlobalPosition() );
-		}
-		pe.update();
 	}
 	
 	void draw()
@@ -50,23 +38,13 @@ public:
 	{
 		mGhost.update( actor );
 
-		
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glEnable(GL_DEPTH_TEST);
 		ofPushStyle();
 		ofNoFill();
 		
-		if (mShowGhost)
-		{
-			ramDrawBasicActor( (ramActor&)mGhost.getResult() );
-		}
+		ramDrawBasicActor( (ramActor&)mGhost.getResult() );
 
-		if (mShowParticle)
-		{
-			ofSetColor(255);
-			pe.draw();
-		}
-		
 		ofPopStyle();
 		glPopAttrib();
 	}
@@ -76,6 +54,6 @@ public:
 		
 	}
 	
-	const string getName() { return "Future events"; }
+	const string getName() { return "Future"; }
 };
 
