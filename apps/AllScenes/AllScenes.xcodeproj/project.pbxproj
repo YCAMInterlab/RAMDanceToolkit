@@ -89,6 +89,7 @@
 		9AD4232116AEAD0700BAC519 /* BigBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigBox.h; sourceTree = "<group>"; };
 		9AEC705116D0A6B700C4B759 /* Donuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Donuts.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		D292867B16D146A30016378A /* UpsideDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpsideDown.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -188,6 +189,7 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D292867A16D146A30016378A /* UpsideDown */,
 				9A6C418416D0FB1B0025D94D /* Abacus */,
 				9A9F66CD16D0DCFF004D9E1E /* Particles */,
 				9AEC705016D0A6B700C4B759 /* Donuts */,
@@ -311,6 +313,15 @@
 				BBAB23BE13894E4700AA2426 /* GLUT.framework */,
 			);
 			name = "3rd party frameworks";
+			sourceTree = "<group>";
+		};
+		D292867A16D146A30016378A /* UpsideDown */ = {
+			isa = PBXGroup;
+			children = (
+				D292867B16D146A30016378A /* UpsideDown.h */,
+			);
+			name = UpsideDown;
+			path = ../../UpsideDown/src/UpsideDown;
 			sourceTree = "<group>";
 		};
 		E4328144138ABC890047C5CB /* Products */ = {

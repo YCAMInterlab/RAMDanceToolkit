@@ -1,7 +1,7 @@
 #include "testApp.h"
 
 
-EmptyScene myScene;
+UpsideDown upsideDown;
 
 
 #pragma mark - oF methods
@@ -21,7 +21,10 @@ void testApp::setup()
 	
 	/// Scene setup
 	// ------------------
-	myScene.setup();
+    
+    vector<ramBaseScene*> scenes;
+	scenes.push_back(upsideDown.getPtr());
+	sceneManager.setup(scenes);
 }
 
 //--------------------------------------------------------------
@@ -34,7 +37,7 @@ void testApp::update()
 	
 	/// Scene update
 	// ------------------
-	myScene.update();
+	sceneManager.update();
 }
 
 //--------------------------------------------------------------
@@ -42,7 +45,7 @@ void testApp::draw()
 {
 	/// Scene draw
 	// ------------------
-	myScene.draw();
+	sceneManager.draw();
 }
 
 
@@ -54,7 +57,6 @@ void testApp::drawActor(ramActor &actor)
 {
 	/// Scene drawActor
 	// ------------------
-	myScene.drawActor(actor);
 }
 
 //--------------------------------------------------------------
@@ -62,7 +64,6 @@ void testApp::drawRigid(ramRigidBody &rigid)
 {
 	/// Scene drawRigid
 	// ------------------
-	myScene.drawRigid(rigid);
 }
 
 
