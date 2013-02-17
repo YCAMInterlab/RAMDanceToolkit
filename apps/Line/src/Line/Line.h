@@ -16,6 +16,8 @@ public:
 	bool set_control1;
 	bool set_to;
 	
+	float r, g, b;
+	
 	float curve;
 	
 	float spiral_radius;
@@ -34,32 +36,50 @@ public:
 		
 	void setup()
 	{
+		r = 255;
+		setRandom();
 		ofAddListener(ofEvents().keyPressed, this, &Line::onKeyPressed);
+	}
+	
+	void setRandom()
+	{
+		cout << "random" << endl;
+		
+		nodeLine.from.index = ofRandom(23);
+		nodeLine.control0.index = ofRandom(23);
+		nodeLine.control1.index = ofRandom(23);
+		nodeLine.to.index = ofRandom(23);
 	}
 	
 	void onKeyPressed(ofKeyEventArgs &e)
 	{
 		if (e.key == 'r')
 		{
-			cout << "random" << endl;
-			
-			nodeLine.from.index = ofRandom(23);
-			nodeLine.control0.index = ofRandom(23);
-			nodeLine.control1.index = ofRandom(23);
-			nodeLine.to.index = ofRandom(23);
+			setRandom();
 		}
 	}
 	
 	void setupControlPanel(ofxUICanvas* panel)
 	{
+		ramControlPanel &gui = ramGetGUI();
+		
+		panel->addSpacer(gui.kLength, 2);
 		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
 		
-		panel->addButton("Line Width", &line_width, 1, 10);
-		
-		panel->addButton("Set From", &set_from, 30, 30);
-		panel->addButton("Set Control 0", &set_control0, 30, 30);
-		panel->addButton("Set Control 1", &set_control1, 30, 30);
+		panel->addSlider("Line Width", 1.0, 5.0, &line_width, gui.kLength, gui.kDim);
+		panel->addButton("Set Random", false, 40, 40);
+		panel->addButton("Set From", &set_from, 20, 20);
+		panel->addButton("Set Control 0", &set_control0, 20, 20);
+		panel->addButton("Set Control 1", &set_control1, 20, 20);
 		panel->addButton("Set To", &set_to, 30, 30);
+		
+		panel->addSpacer(gui.kLength, 2);
+		
+		panel->addSlider("Color: R", 0, 255, &r, 95, gui.kDim);
+		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
+		panel->addSlider("Color:G", 0, 255, &g, 95, gui.kDim);
+		panel->addSlider("Color:B", 0, 255, &b, 95, gui.kDim);
+		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 		
 		panel->addSlider("curve", -400, 400, &curve, 300, 20);
 
@@ -111,7 +131,8 @@ public:
 			nodeLine.noise(noise_scale, noise_freq, ofGetElapsedTimef());
 		}
 		
-		ofSetColor(255, 0, 0);
+		ofPushStyle();
+		ofSetColor(r, g, b);
 		
 		ofSetLineWidth(line_width);
 		nodeLine.draw();
@@ -139,6 +160,7 @@ public:
 			ofDrawBitmapString("TO", node.getGlobalPosition() + ofVec3f(5, 5, 0));
 		}
 		
+		ofPopStyle();
 		ramEndCamera();
 	}
 	
@@ -146,6 +168,10 @@ public:
 	{
 		string name = e.widget->getName();
 		
+		if (name == "Set Random")
+		{
+			setRandom();
+		}
 	}
 		
 private:

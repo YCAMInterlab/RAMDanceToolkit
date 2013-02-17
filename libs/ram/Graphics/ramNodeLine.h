@@ -163,14 +163,7 @@ public:
 	
 	void draw()
 	{
-		ofPushStyle();
-		{
-			ofSetColor(255, 0, 0);
-			ofSetLineWidth(3);
-			polyline.draw();
-		}
-		ofPopStyle();
-		
+		polyline.draw();
 	}
 	
 	void drawDotted(int spaceing = 5)

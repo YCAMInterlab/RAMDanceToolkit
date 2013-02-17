@@ -25,11 +25,6 @@ public:
 		
 		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
 		
-		
-		panel->addSpacer(gui.kLength, 2);
-		panel->addButton("Reset all settings", false, 50, 50);
-		panel->addToggle("Show Actor", &mShowActor, 50, 50);
-		
 		panel->addSpacer(gui.kLength, 2);
 		panel->addWidgetDown(new ofxUILabel("Original me", OFX_UI_FONT_MEDIUM));
 		panel->addSlider("Scale", 0.1, 10.0, &mScale, gui.kLength, gui.kDim);
@@ -42,14 +37,17 @@ public:
 		panel->addSlider("Radius", 10.0, 1000.0, &mRadius, gui.kLength, gui.kDim);
 		
 		panel->addSpacer(gui.kLength, 2);
+		panel->addButton("Reset all settings", false, 50, 50);
+		panel->addToggle("Show Actor", &mShowActor, 50, 50);
+		
 		panel->addToggle("Toggle All", false, 20, 20);
+		panel->addSlider("Box Size", 1.0, 1000.0, &mBoxSize, gui.kLength, gui.kDim);
 		
 		for (int i=0; i<ramActor::NUM_JOINTS; i++)
 		{
 			mNodeVisibility[i] = (i == ramActor::JOINT_RIGHT_HAND || i == ramActor::JOINT_LEFT_HAND);
 			mToggles[i] = panel->addToggle(ramActor::getJointName(i), &mNodeVisibility[i], 10, 10);
 		}
-		panel->addSlider("Box Size", 1.0, 1000.0, &mBoxSize, gui.kLength, gui.kDim);
 		
 		clear();
 		
