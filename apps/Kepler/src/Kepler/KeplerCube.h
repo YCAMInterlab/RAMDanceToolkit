@@ -1,16 +1,16 @@
 //
-//  RiggedBox.h
-//  RiggedBox
+//  KeplerCube.h
+//  KeplerCube
 //
 //  Created by Onishi Yoshito on 1/23/13.
 //
 //
 
-#ifndef __RiggedBox__RiggedBox__
-#define __RiggedBox__RiggedBox__
+#ifndef __KeplerCube__KeplerCube__
+#define __KeplerCube__KeplerCube__
 
 #include "LinearMath/btScalar.h"
-#include "btAlignedObjectArray.h"
+#include "LinearMath/btAlignedObjectArray.h"
 
 class btDynamicsWorld;
 class btCollisionShape;
@@ -19,14 +19,31 @@ class btTypedConstraint;
 class btVector3;
 class btTransform;
 
-class RiggedBox
+class KeplerCube
 {
 public:
-	RiggedBox (btDynamicsWorld* ownerWorld, const btVector3& positionOffset);
-	virtual	~RiggedBox();
+    enum EdgeType {
+        EDGE_0  = 0,
+        EDGE_1,
+        EDGE_2,
+        EDGE_3,
+        
+        EDGE_4,
+        EDGE_5,
+        EDGE_6,
+        EDGE_7,
+        
+        EDGE_8,
+        EDGE_9,
+        EDGE_10,
+        EDGE_11,
+        
+        N_EDGES,
+    };
     
-    static const int N_EDGES = 12;
-    
+	KeplerCube (btDynamicsWorld* ownerWorld, const btVector3& positionOffset);
+	virtual	~KeplerCube();
+        
 	btDynamicsWorld* m_ownerWorld;
 	btAlignedObjectArray<btCollisionShape *>    m_shapes;
 	btAlignedObjectArray<btRigidBody *>         m_bodies;
@@ -48,4 +65,4 @@ private:
     
 };
 
-#endif /* defined(__        __RiggedBox__) */
+#endif /* defined(__        __KeplerCube__) */

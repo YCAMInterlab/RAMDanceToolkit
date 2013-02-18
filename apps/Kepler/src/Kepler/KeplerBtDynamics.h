@@ -15,7 +15,7 @@
 
 /*
  Bullet Continuous Collision Detection and Physics Library
- RiggedBox Demo
+ Kepler Demo
  Copyright (c) 2007 Starbreeze Studios
  
  This software is provided 'as-is', without any express or implied warranty.
@@ -59,13 +59,13 @@ class   btConstraintSolver;
 struct  btCollisionAlgorithmCreateFunc;
 class   btDefaultCollisionConfiguration;
 
-class   RiggedBoxShapeDrawer;
+class   KeplerBtShapeDrawer;
 
 
-class RiggedBoxScene
+class KeplerBtDynamics
 {
 public:    
-	void spawnRiggedBox(const btVector3& startOffset);
+	void spawnKepler(const btVector3& startOffset);
     
     virtual void setup();
     virtual void update();
@@ -73,14 +73,14 @@ public:
     virtual void keyPressed(int key);
     
 public:
-	RiggedBoxScene();
-	virtual ~RiggedBoxScene();
+	KeplerBtDynamics();
+	virtual ~KeplerBtDynamics();
     
 	inline btDynamicsWorld *getDynamicsWorld();
     
 	inline btScalar getDeltaTimeMicroseconds();
     
-    inline btAlignedObjectArray<class RiggedBox *> &getRiggedBoxes();
+    inline btAlignedObjectArray<class KeplerCube *> &getKepleres();
     
 protected:
     virtual void clientResetScene();
@@ -103,14 +103,14 @@ protected:
 	bool                m_stepping;
 	bool                m_singleStep;
    
-	RiggedBoxShapeDrawer  *m_shapeDrawer;
+	KeplerBtShapeDrawer  *m_shapeDrawer;
 	bool                m_enableshadows;
 	btVector3           m_sundirection;
 	btScalar            m_defaultContactProcessingThreshold;
     
     
-    //RiggedBox scene
-    btAlignedObjectArray<class RiggedBox *>       m_boxes;
+    //Kepler scene
+    btAlignedObjectArray<class KeplerCube *>       m_boxes;
     
 	//keep the collision shapes, for deletion/cleanup
 	btAlignedObjectArray<btCollisionShape *>    m_collisionShapes;
@@ -129,17 +129,17 @@ protected:
     } m_groundInfo;
 };
 
-inline btAlignedObjectArray<class RiggedBox *> &RiggedBoxScene::getRiggedBoxes()
+inline btAlignedObjectArray<class KeplerCube *> &KeplerBtDynamics::getKepleres()
 {
     return m_boxes;
 }
 
-inline btDynamicsWorld *RiggedBoxScene::getDynamicsWorld()
+inline btDynamicsWorld *KeplerBtDynamics::getDynamicsWorld()
 {
     return m_dynamicsWorld;
 }
 
-inline btScalar RiggedBoxScene::getDeltaTimeMicroseconds()
+inline btScalar KeplerBtDynamics::getDeltaTimeMicroseconds()
 {
     btScalar dt = (btScalar)m_clock.getTimeMicroseconds();
     m_clock.reset();

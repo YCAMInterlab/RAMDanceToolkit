@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+
 #include "ramMain.h"
 
 class testApp : public ramBaseApp
