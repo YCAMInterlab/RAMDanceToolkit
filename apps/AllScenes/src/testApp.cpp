@@ -85,6 +85,7 @@ void testApp::setup()
 		ofEasyCam *cam = ramCameraManager::instance().createCamera<ofEasyCam>();
         cam->setTranslationKey('z');
 		cam->disableMouseInput();
+        cam->setFov(40);
 	}
 	
 	for (int i = 0; i < 5; i++)
@@ -92,7 +93,7 @@ void testApp::setup()
 		ramCameraManager::instance().setActiveCamera(i + 1);
 		ramCameraManager::instance().rollbackDefaultCameraSetting(i);
 	}
-	
+    
     active_camera_id = 0;
 	ramCameraManager::instance().setActiveCamera(active_camera_id);
 
