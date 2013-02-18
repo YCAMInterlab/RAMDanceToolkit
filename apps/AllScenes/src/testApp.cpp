@@ -17,6 +17,7 @@
 #include "Graph2D.h"
 #include "Particles.h"
 #include "Abacus.h"
+#include "SoundCube.h"
 
 BasicActor basicActor;
 Graph3D graph3D;
@@ -26,11 +27,11 @@ UpsideDown upsideDown;
 Expansion expansion;
 BigBox bigbox;
 Future future;
-Bullet bullet;
 Donuts donuts;
 Stamp stamp;
 Particles particles;
 Abacus abacus;
+SoundCube soundcube;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -51,18 +52,18 @@ void testApp::setup()
 	// ------------------
 	vector<ramBaseScene*> scenes;
 	scenes.push_back( basicActor.getPtr() );
-	scenes.push_back( graph3D.getPtr() );
-	scenes.push_back( graph2D.getPtr() );
 	scenes.push_back( drawLines.getPtr() );
 	scenes.push_back( upsideDown.getPtr() );
 	scenes.push_back( expansion.getPtr() );
 	scenes.push_back( bigbox.getPtr() );
 	scenes.push_back( future.getPtr() );
-	scenes.push_back( bullet.getPtr() );
 	scenes.push_back( donuts.getPtr() );
 	scenes.push_back( stamp.getPtr() );
 	scenes.push_back( particles.getPtr() );
 	scenes.push_back( abacus.getPtr() );
+	scenes.push_back( soundcube.getPtr() );
+	scenes.push_back( graph3D.getPtr() );
+	scenes.push_back( graph2D.getPtr() );
 	
 	sceneManager.setup(scenes);
 }
@@ -110,12 +111,6 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	switch (key)
-	{
-		case 'b':
-			bullet.cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
-			break;
-	}
 }
 
 //--------------------------------------------------------------
