@@ -31,12 +31,18 @@ public:
 		ofFloatColor color;
 		
 		ramNodeLine nodeLine;
+		
+		bool active;
+		int id;
 
 		void setupControlPanel(ofxUICanvas* panel)
 		{
 			ramControlPanel &gui = ramGetGUI();
 			
 			line_width = 2;
+			
+			active = false;
+			panel->addToggle("Line " + ofToString(id), &active, 30, 30, 0, 0);
 			
 			panel->addButton("From", &set_from, 15, 15, 0, 0);
 			panel->addButton("Control0", &set_control0, 15, 15, 0, 80);
@@ -64,6 +70,8 @@ public:
 		
 		void update()
 		{
+			if (!active) return;
+			
 			if (set_from) nodeLine.from = ramActorManager::instance().getLastSelectedNodeIdentifer();
 			if (set_control0) nodeLine.control0 = ramActorManager::instance().getLastSelectedNodeIdentifer();
 			if (set_control1) nodeLine.control1 = ramActorManager::instance().getLastSelectedNodeIdentifer();
@@ -72,14 +80,15 @@ public:
 		
 		void draw()
 		{
+			if (!active) return;
+			
 			nodeLine.curve(curve);
+			nodeLine.resampling(0.3);
 			
 			if (extend > 0)
 			{
 				nodeLine.extend(extend);
 			}
-			
-			nodeLine.resampling(0.3);
 			
 			if (spiral_radius > 0)
 			{
@@ -149,6 +158,10 @@ public:
 	{
 		if (e.key == 'r')
 		{
+			for (int i = 0; i < NUM_LINE; i++)
+			{
+				lines[i].randomize();
+			}
 		}
 	}
 	
@@ -160,8 +173,11 @@ public:
 		
 		for (int i = 0; i < NUM_LINE; i++)
 		{
+			lines[i].id = i;
 			lines[i].setupControlPanel(panel);
 		}
+		
+		lines[0].active = true;
 	}
 
 	void update()
