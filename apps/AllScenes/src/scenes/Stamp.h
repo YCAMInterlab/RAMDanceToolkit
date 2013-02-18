@@ -18,6 +18,7 @@ public:
 		
 		panel->addToggle("Show Actor", &mShowActor, 30, 30);
 		panel->addToggle("Show Box", &mShowBox, 30, 30);
+		
 	}
 
 	void setup()

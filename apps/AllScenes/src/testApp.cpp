@@ -75,6 +75,7 @@ void testApp::setup()
 	scenes.push_back( graph2D.getPtr() );
     scenes.push_back( upsideDown.getPtr() );
     scenes.push_back( kepler.getPtr() );
+	
 	sceneManager.setup(scenes);
 	
     ofEasyCam *cam = (ofEasyCam*)ramCameraManager::instance().getCamera(0);
@@ -86,6 +87,7 @@ void testApp::setup()
 		ofEasyCam *cam = ramCameraManager::instance().createCamera<ofEasyCam>();
         cam->setTranslationKey('z');
 		cam->disableMouseInput();
+        cam->setFov(40);
 	}
 	
 	for (int i = 0; i < 5; i++)
@@ -93,7 +95,7 @@ void testApp::setup()
 		ramCameraManager::instance().setActiveCamera(i + 1);
 		ramCameraManager::instance().rollbackDefaultCameraSetting(i);
 	}
-	
+    
     active_camera_id = 0;
 	ramCameraManager::instance().setActiveCamera(active_camera_id);
 
