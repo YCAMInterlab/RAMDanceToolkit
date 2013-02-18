@@ -59,7 +59,7 @@ void ramSimpleShadow::setup()
 		}
 	);
 	
-#undef _Sram
+#undef _S
 	
 	shader.setupShaderFromSource(GL_VERTEX_SHADER, vs);
 	shader.linkProgram();

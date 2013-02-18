@@ -22,7 +22,7 @@
 BasicActor basicActor;
 Graph3D graph3D;
 Graph2D graph2D;
-Line drawLines;
+LineScene drawLines;
 Expansion expansion;
 BigBox bigbox;
 Future future;
@@ -44,7 +44,7 @@ void testApp::setup()
 	
 	/// ram setup
 	// ------------------
-	ramInit();
+	ramInitialize();
 	oscReceiver.setup(10000);
 	
 	/// scenes setup

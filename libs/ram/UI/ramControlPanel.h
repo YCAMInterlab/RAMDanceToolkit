@@ -16,9 +16,7 @@ class ramControlPanel
 	
 public:
 	
-	const float kDim = 16;
-	const float kXInit = OFX_UI_GLOBAL_WIDGET_SPACING;
-	const float kLength = 320-kXInit;
+	float kDim, kXInit, kLength;
 	
 	static ramControlPanel& instance();
 	virtual ~ramControlPanel() {}
