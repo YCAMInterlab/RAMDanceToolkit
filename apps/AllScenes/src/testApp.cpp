@@ -73,6 +73,7 @@ void testApp::setup()
 	scenes.push_back( abacus.getPtr() );
 	scenes.push_back( soundcube.getPtr() );
 	scenes.push_back( graph3D.getPtr() );
+	scenes.push_back( graph2D.getPtr() );
 	
 	sceneManager.setup(scenes);
 	
