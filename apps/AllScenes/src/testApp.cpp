@@ -34,6 +34,8 @@ SoundCube soundcube;
 UpsideDown upsideDown;
 Kepler kepler;
 
+extern bool drawModel;
+
 int active_camera_id = 0;
 
 int main_display_width = 1920;
@@ -128,6 +130,12 @@ void testApp::draw()
 		
 		ofCamera *screen_camera = ramCameraManager::instance().getCamera(i + 1);
 		
+		if (i == 4)
+		{
+			drawModel = false;
+			screen_camera->enableOrtho();
+		}
+		
 		ofViewport(ofRectangle(main_display_width + i * screen_width, screen_y_offset, screen_width, screen_height));
 		ramCameraManager::instance().setActiveCamera(i + 1);
 		
@@ -136,6 +144,8 @@ void testApp::draw()
 		screen_camera->end();
 		
 		sceneManager.draw();
+		
+		drawModel = true;
 		
 		ofPopView();
 	}
