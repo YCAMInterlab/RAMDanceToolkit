@@ -11,19 +11,19 @@
 #include "Line.h"
 #include "Donuts.h"
 #include "Stamp.h"
-#include "UpsideDown.h"
 #include "Expansion.h"
 #include "Graph3D.h"
 #include "Graph2D.h"
 #include "Particles.h"
 #include "Abacus.h"
 #include "SoundCube.h"
+#include "UpsideDown.h"
+#include "Kepler.h"
 
 BasicActor basicActor;
 Graph3D graph3D;
 Graph3D graph2D;
 Line drawLines;
-UpsideDown upsideDown;
 Expansion expansion;
 BigBox bigbox;
 Future future;
@@ -33,6 +33,9 @@ Stamp stamp;
 Particles particles;
 Abacus abacus;
 SoundCube soundcube;
+UpsideDown upsideDown;
+Kepler kepler;
+
 
 int active_camera_id = 0;
 
@@ -74,6 +77,8 @@ void testApp::setup()
 	scenes.push_back( soundcube.getPtr() );
 	scenes.push_back( graph3D.getPtr() );
 	scenes.push_back( graph2D.getPtr() );
+    scenes.push_back( upsideDown.getPtr() );
+    scenes.push_back( kepler.getPtr() );
 	
 	sceneManager.setup(scenes);
 	

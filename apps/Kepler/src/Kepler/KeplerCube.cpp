@@ -1,12 +1,12 @@
 //
-//  RiggedBox.cpp
-//  RiggedBox
+//  KeplerCube.cpp
+//  KeplerCube
 //
 //  Created by Onishi Yoshito on 1/23/13.
 //
 //
 
-#include "RiggedBox.h"
+#include "KeplerCube.h"
 
 #include "btBulletDynamicsCommon.h"
 
@@ -14,9 +14,9 @@
 
 #define R_LENGTH (140)
 
-const float RiggedBox::RAG_DALL_SCALE = 0.85f;
+const float KeplerCube::RAG_DALL_SCALE = 0.85f;
 
-btTransform RiggedBox::createBoxTransform(int i)
+btTransform KeplerCube::createBoxTransform(int i)
 {
     const float R = 0.7f;
     const float L = R_LENGTH/2.0f;
@@ -78,7 +78,7 @@ btTransform RiggedBox::createBoxTransform(int i)
     return transform;
 }
 
-void RiggedBox::createJoint(btRigidBody *bodyA,
+void KeplerCube::createJoint(btRigidBody *bodyA,
                             btRigidBody *bodyB,
                             const btVector3 &originA,
                             const btVector3 &originB,
@@ -103,7 +103,7 @@ void RiggedBox::createJoint(btRigidBody *bodyA,
 }
 
 
-RiggedBox::RiggedBox(btDynamicsWorld* ownerWorld, const btVector3& positionOffset)
+KeplerCube::KeplerCube(btDynamicsWorld* ownerWorld, const btVector3& positionOffset)
 : m_ownerWorld (ownerWorld)
 {
     //    const int R = 3.0f;
@@ -155,7 +155,7 @@ RiggedBox::RiggedBox(btDynamicsWorld* ownerWorld, const btVector3& positionOffse
     createJoint(m_bodies.at(11), m_bodies.at( 8), btVector3(-L, 0, 0), btVector3( 0, 0, L), 0, 0, 0, 0, 0, 0);
 }
 
-RiggedBox::~RiggedBox()
+KeplerCube::~KeplerCube()
 {
     // Remove all constraints
     for (int i = 0; i <m_joints.size(); ++i) {
@@ -174,7 +174,7 @@ RiggedBox::~RiggedBox()
     }
 }
 
-btRigidBody* RiggedBox::localCreateRigidBody(btScalar mass,
+btRigidBody* KeplerCube::localCreateRigidBody(btScalar mass,
                                              const btTransform& startTransform,
                                              btCollisionShape* shape)
 {
