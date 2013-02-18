@@ -42,20 +42,23 @@ public:
 			line_width = 2;
 			
 			active = false;
-			panel->addToggle("Line " + ofToString(id), &active, 30, 30, 0, 0);
+			panel->addToggle("Line " + ofToString(id), &active, 15, 15, 0, 0);
 			
-			panel->addButton("From", &set_from, 15, 15, 0, 0);
-			panel->addButton("Control0", &set_control0, 15, 15, 0, 80);
-			panel->addButton("Control1", &set_control1, 15, 15, 0, 160);
-			panel->addButton("To", &set_to, 15, 15, 0, 240);
+			panel->addButton("From", &set_from, 10, 10, 0, 0);
+			panel->addButton("Control0", &set_control0, 10, 10, 0, 80);
+			panel->addButton("Control1", &set_control1, 10, 10, 0, 160);
+			panel->addButton("To", &set_to, 10, 10, 0, 240);
 			
-			panel->addSlider("R", 0, 1, &color.r, 300, 10);
-			panel->addSlider("G", 0, 1, &color.g, 300, 10);
-			panel->addSlider("B", 0, 1, &color.b, 300, 10);
+			panel->addSlider("Line R", 0, 1, &color.r, 95, 10);
+			panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
+			panel->addSlider("Line G", 0, 1, &color.g, 95, 10);
+			panel->addSlider("Line B", 0, 1, &color.b, 95, 10);
+			panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 			
-			panel->addSlider("line_width", 1, 20, &line_width, 300, 10);
-			
-			panel->addSlider("curve", -400, 400, &curve, 300, 10);
+			panel->addSlider("line_width", 1, 20, &line_width, 150, 10);
+			panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
+			panel->addSlider("curve", -400, 400, &curve, 150, 10);
+			panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 			
 			panel->addSlider("spiral_radius", 0, 200, &spiral_radius, 300, 10);
 			panel->addSlider("spiral_num_rotate", 0, 100, &spiral_num_rotate, 300, 10);
@@ -140,7 +143,7 @@ public:
 	
 	enum
 	{
-		NUM_LINE = 2
+		NUM_LINE = 3
 	};
 	
 	LineContext lines[NUM_LINE];

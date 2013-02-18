@@ -24,10 +24,11 @@ public:
 		
 		panel->addSpacer(gui.kLength, 2);
 		panel->addWidgetDown(new ofxUIToggle(32, 32, true, "Box line color"));
-		panel->addSlider("R", 0, 255, &r, 95, gui.kDim);
+		
+		panel->addSlider("Stamp R", 0, 255, &r, 95, gui.kDim);
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
-		panel->addSlider("G", 0, 255, &g, 95, gui.kDim);
-		panel->addSlider("B", 0, 255, &b, 95, gui.kDim);
+		panel->addSlider("Stamp G", 0, 255, &g, 95, gui.kDim);
+		panel->addSlider("Stamp B", 0, 255, &b, 95, gui.kDim);
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 		panel->addSlider("Line width", 0, 255, &line_width, gui.kLength, gui.kDim);
 		

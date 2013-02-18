@@ -37,14 +37,14 @@ public:
 		panel->addSlider("Box Size", 1.0, 1000.0, &mBoxSize, gui.kLength, gui.kDim);
 		
 		panel->addSpacer(gui.kLength, 2);
-		panel->addButton("Reset all settings", false, 50, 50);
-		panel->addToggle("Show Actor", &mShowActor, 50, 50);
-		panel->addToggle("Toggle All", false, 50, 50);
+		panel->addButton("Reset all settings", false, 20, 20);
+		panel->addToggle("Show Actor", &mShowActor, 20, 20);
+		panel->addToggle("Toggle All", false, 20, 20);
 		
 		for (int i=0; i<ramActor::NUM_JOINTS; i++)
 		{
 			mNodeVisibility[i] = (i == ramActor::JOINT_RIGHT_HAND || i == ramActor::JOINT_LEFT_HAND);
-			mToggles[i] = panel->addToggle(ramActor::getJointName(i), &mNodeVisibility[i], 10, 10);
+			mToggles[i] = panel->addToggle(ramActor::getJointName(i), &mNodeVisibility[i], 8, 8);
 		}
 		
 		clear();
@@ -183,10 +183,10 @@ public:
 			mToggles[i]->setValue(mNodeVisibility[i]);
 		}
 		
-		mNumDuplicate = 5;
+		mNumDuplicate = 20;
 		mRadius = 110;
 		mScale = 1.0;
-		mBoxSize = 5.0;
+		mBoxSize = 3.0;
 		mTranslate = ofVec3f::zero();
 		mShowActor = false;
 	}
