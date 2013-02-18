@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		D2E1BF4216D1CB3C00C2FE8A /* btPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E1BF3816D1CB3C00C2FE8A /* btPicker.cpp */; };
+		D2E1BF4316D1CB3C00C2FE8A /* Kepler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E1BF3A16D1CB3C00C2FE8A /* Kepler.cpp */; };
+		D2E1BF4416D1CB3C00C2FE8A /* KeplerBtDynamics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E1BF3C16D1CB3C00C2FE8A /* KeplerBtDynamics.cpp */; };
+		D2E1BF4516D1CB3C00C2FE8A /* KeplerBtShapeDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E1BF3E16D1CB3C00C2FE8A /* KeplerBtShapeDrawer.cpp */; };
+		D2E1BF4616D1CB3C00C2FE8A /* KeplerCube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E1BF4016D1CB3C00C2FE8A /* KeplerCube.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -90,6 +95,16 @@
 		9AEC705116D0A6B700C4B759 /* Donuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Donuts.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		D292867B16D146A30016378A /* UpsideDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpsideDown.h; sourceTree = "<group>"; };
+		D2E1BF3816D1CB3C00C2FE8A /* btPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btPicker.cpp; sourceTree = "<group>"; };
+		D2E1BF3916D1CB3C00C2FE8A /* btPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btPicker.h; sourceTree = "<group>"; };
+		D2E1BF3A16D1CB3C00C2FE8A /* Kepler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Kepler.cpp; sourceTree = "<group>"; };
+		D2E1BF3B16D1CB3C00C2FE8A /* Kepler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kepler.h; sourceTree = "<group>"; };
+		D2E1BF3C16D1CB3C00C2FE8A /* KeplerBtDynamics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeplerBtDynamics.cpp; sourceTree = "<group>"; };
+		D2E1BF3D16D1CB3C00C2FE8A /* KeplerBtDynamics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeplerBtDynamics.h; sourceTree = "<group>"; };
+		D2E1BF3E16D1CB3C00C2FE8A /* KeplerBtShapeDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeplerBtShapeDrawer.cpp; sourceTree = "<group>"; };
+		D2E1BF3F16D1CB3C00C2FE8A /* KeplerBtShapeDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeplerBtShapeDrawer.h; sourceTree = "<group>"; };
+		D2E1BF4016D1CB3C00C2FE8A /* KeplerCube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeplerCube.cpp; sourceTree = "<group>"; };
+		D2E1BF4116D1CB3C00C2FE8A /* KeplerCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeplerCube.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -189,6 +204,7 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D2E1BF3716D1CB3C00C2FE8A /* Kepler */,
 				D292867A16D146A30016378A /* UpsideDown */,
 				9A6C418416D0FB1B0025D94D /* Abacus */,
 				9A9F66CD16D0DCFF004D9E1E /* Particles */,
@@ -322,6 +338,24 @@
 			);
 			name = UpsideDown;
 			path = ../../UpsideDown/src/UpsideDown;
+			sourceTree = "<group>";
+		};
+		D2E1BF3716D1CB3C00C2FE8A /* Kepler */ = {
+			isa = PBXGroup;
+			children = (
+				D2E1BF3816D1CB3C00C2FE8A /* btPicker.cpp */,
+				D2E1BF3916D1CB3C00C2FE8A /* btPicker.h */,
+				D2E1BF3A16D1CB3C00C2FE8A /* Kepler.cpp */,
+				D2E1BF3B16D1CB3C00C2FE8A /* Kepler.h */,
+				D2E1BF3C16D1CB3C00C2FE8A /* KeplerBtDynamics.cpp */,
+				D2E1BF3D16D1CB3C00C2FE8A /* KeplerBtDynamics.h */,
+				D2E1BF3E16D1CB3C00C2FE8A /* KeplerBtShapeDrawer.cpp */,
+				D2E1BF3F16D1CB3C00C2FE8A /* KeplerBtShapeDrawer.h */,
+				D2E1BF4016D1CB3C00C2FE8A /* KeplerCube.cpp */,
+				D2E1BF4116D1CB3C00C2FE8A /* KeplerCube.h */,
+			);
+			name = Kepler;
+			path = ../../Kepler/src/Kepler;
 			sourceTree = "<group>";
 		};
 		E4328144138ABC890047C5CB /* Products */ = {
@@ -476,6 +510,11 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
+				D2E1BF4216D1CB3C00C2FE8A /* btPicker.cpp in Sources */,
+				D2E1BF4316D1CB3C00C2FE8A /* Kepler.cpp in Sources */,
+				D2E1BF4416D1CB3C00C2FE8A /* KeplerBtDynamics.cpp in Sources */,
+				D2E1BF4516D1CB3C00C2FE8A /* KeplerBtShapeDrawer.cpp in Sources */,
+				D2E1BF4616D1CB3C00C2FE8A /* KeplerCube.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

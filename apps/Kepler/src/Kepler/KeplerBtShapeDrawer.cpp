@@ -24,7 +24,7 @@ subject to the following restrictions:
 #include <GLUT/GLUT.h>
 
 //#include "GlutStuff.h"
-#include "RiggedBoxShapeDrawer.h"
+#include "KeplerBtShapeDrawer.h"
 #include "BulletCollision/CollisionShapes/btPolyhedralConvexShape.h"
 #include "BulletCollision/CollisionShapes/btTriangleMeshShape.h"
 #include "BulletCollision/CollisionShapes/btBoxShape.h"
@@ -183,7 +183,7 @@ void OGL_displaylist_register_shape(btCollisionShape * shape)
 }
 #endif //USE_DISPLAY_LISTS
 
-void RiggedBoxShapeDrawer::drawCoordSystem()  {
+void KeplerBtShapeDrawer::drawCoordSystem()  {
 	glBegin(GL_LINES);
 	glColor3f(1, 0, 0);
 	glVertex3d(0, 0, 0);
@@ -276,7 +276,7 @@ public:
 };
 
 
-void RiggedBoxShapeDrawer::drawSphere(btScalar radius, int lats, int longs) 
+void KeplerBtShapeDrawer::drawSphere(btScalar radius, int lats, int longs) 
 {
 	int i, j;
 	for(i = 0; i <= lats; i++) {
@@ -302,7 +302,7 @@ void RiggedBoxShapeDrawer::drawSphere(btScalar radius, int lats, int longs)
 	}
 }
 
-void RiggedBoxShapeDrawer::drawCylinder(float radius,float halfHeight, int upAxis)
+void KeplerBtShapeDrawer::drawCylinder(float radius,float halfHeight, int upAxis)
 {
 
 
@@ -348,7 +348,7 @@ void RiggedBoxShapeDrawer::drawCylinder(float radius,float halfHeight, int upAxi
 	gluDeleteQuadric(quadObj);
 }
 
-RiggedBoxShapeDrawer::ShapeCache*		RiggedBoxShapeDrawer::cache(btConvexShape* shape)
+KeplerBtShapeDrawer::ShapeCache*		KeplerBtShapeDrawer::cache(btConvexShape* shape)
 {
 	ShapeCache*		sc=(ShapeCache*)shape->getUserPointer();
 	if(!sc)
@@ -404,17 +404,17 @@ void renderSquareA(float x, float y, float z)
 inline void glDrawVector(const btVector3& v) { glVertex3d(v[0], v[1], v[2]); }
 
 
-void RiggedBoxShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, const btVector3& color)
+void KeplerBtShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, const btVector3& color)
 {
     drawOpenGL(m, shape, color, 0, btVector3(), btVector3());
 }
 
-void RiggedBoxShapeDrawer::drawShadow(btScalar* m, const btVector3& extrusion, const btCollisionShape* shape)
+void KeplerBtShapeDrawer::drawShadow(btScalar* m, const btVector3& extrusion, const btCollisionShape* shape)
 {
     drawShadow(m, extrusion, shape, btVector3(), btVector3());
 }
 
-void RiggedBoxShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, const btVector3& color,int	debugMode,const btVector3& worldBoundsMin,const btVector3& worldBoundsMax)
+void KeplerBtShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, const btVector3& color,int	debugMode,const btVector3& worldBoundsMin,const btVector3& worldBoundsMax)
 {
 	
 	if (shape->getShapeType() == CUSTOM_CONVEX_SHAPE_TYPE)
@@ -905,7 +905,7 @@ void RiggedBoxShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape
 }
 
 //
-void		RiggedBoxShapeDrawer::drawShadow(btScalar* m,const btVector3& extrusion,const btCollisionShape* shape,const btVector3& worldBoundsMin,const btVector3& worldBoundsMax)
+void		KeplerBtShapeDrawer::drawShadow(btScalar* m,const btVector3& extrusion,const btCollisionShape* shape,const btVector3& worldBoundsMin,const btVector3& worldBoundsMax)
 {
 	glPushMatrix(); 
 	//btglMultMatrix(m);
@@ -981,14 +981,14 @@ void		RiggedBoxShapeDrawer::drawShadow(btScalar* m,const btVector3& extrusion,co
 }
 
 //
-RiggedBoxShapeDrawer::RiggedBoxShapeDrawer()
+KeplerBtShapeDrawer::KeplerBtShapeDrawer()
 {
 	m_texturehandle			=	0;
 	m_textureenabled		=	false;
 	m_textureinitialized	=	false;
 }
 
-RiggedBoxShapeDrawer::~RiggedBoxShapeDrawer()
+KeplerBtShapeDrawer::~KeplerBtShapeDrawer()
 {
 	int i;
 	for (i=0;i<m_shapecaches.size();i++)
