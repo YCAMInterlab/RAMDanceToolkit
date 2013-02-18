@@ -50,7 +50,7 @@ public:
 		ofPushStyle();
 		ofNoFill();
 		
-		ramDrawBasicActor( (ramActor&)mGhost.getResult() );
+		ramDrawBasicActor( (ramActor&)mGhost.get() );
 
 		ofPopStyle();
 		glPopAttrib();

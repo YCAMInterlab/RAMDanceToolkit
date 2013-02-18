@@ -63,6 +63,8 @@ public:
 	
 #pragma mark -
 	
+	const ramNodeArray& get(size_t index = 0) const { return mStamps[index]; }
+	size_t getSize() const { return mStamps.size(); }
 	
 	void clear()
 	{

@@ -70,8 +70,6 @@ public:
 		return ghost;
 	}
 	
-	inline const ramNodeArray& getResult() { return ghost; }
-	
 	inline void setDistance(const float d) { distance = d; }
 	inline void setSpeed(const float s) { speed = s; }
 	inline void setHistorySize(const unsigned int m) { historySize = m; }
@@ -80,6 +78,8 @@ public:
 	inline float getspeed() { return speed; }
 	inline unsigned int getHistorySize() { return historySize; }
 
+	const ramNodeArray& get(size_t index = 0) const { return ghost; }
+	size_t getSize() const { return 1; }
 	
 	inline const string getName() { return "ramGhost"; };
 	

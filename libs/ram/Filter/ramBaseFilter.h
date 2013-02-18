@@ -55,8 +55,12 @@ public:
 	
 	virtual void setupControlPanel(ofxUICanvas* panel) {}
 	virtual void setup() {}
+	
 	virtual const ramNodeArray& update(const ramNodeArray& src) { return src; }
-	virtual const ramNodeArray& getResult() { static ramNodeArray arr; return arr; }
+	
+	// FIXME: remove pre vertual 
+	virtual const ramNodeArray& get(size_t index = 0) const = 0; // { static ramNodeArray arr; return arr; }
+	virtual size_t getSize() const = 0; // { return 1; }
 };
 
 class ramBusSend : public ramBaseFilter
@@ -74,6 +78,9 @@ public:
 		ramActorManager::instance().setBus(bus_name, src);
 		return src;
 	}
+	
+	const ramNodeArray& get(size_t index = 0) const { static ramNodeArray arr; return arr; }
+	size_t getSize() const { return 1; }
 	
 private:
 	

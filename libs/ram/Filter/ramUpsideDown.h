@@ -35,7 +35,10 @@ public:
 	
     inline void setOffset(float y) { offset = y; }
     inline float getOffset() const { return offset; }
-	inline const ramNodeArray& getResult() { return hangedNodes; }
+	
+	const ramNodeArray& get(size_t index) const { return hangedNodes; }
+	size_t getSize() const { return 1; }
+	
 	inline const string getName() { return "ramUpsideDown"; };
 	
 protected:

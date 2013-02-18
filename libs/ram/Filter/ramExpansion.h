@@ -43,7 +43,9 @@ public:
 		return expandedArray;
 	}
 	
-	inline const ramNodeArray& getResult() { return expandedArray; }
+	const ramNodeArray& get(size_t index) const { return expandedArray; }
+	size_t getSize() const { return 1; }
+	
 	inline const string getName() { return "ramExpansion"; };
 	
 protected:
