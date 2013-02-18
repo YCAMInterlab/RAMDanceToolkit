@@ -70,6 +70,8 @@ public:
 		
 		void update()
 		{
+			if (!active) return;
+			
 			if (set_from) nodeLine.from = ramActorManager::instance().getLastSelectedNodeIdentifer();
 			if (set_control0) nodeLine.control0 = ramActorManager::instance().getLastSelectedNodeIdentifer();
 			if (set_control1) nodeLine.control1 = ramActorManager::instance().getLastSelectedNodeIdentifer();
@@ -78,6 +80,8 @@ public:
 		
 		void draw()
 		{
+			if (!active) return;
+			
 			nodeLine.curve(curve);
 			
 			if (extend > 0)
@@ -155,6 +159,10 @@ public:
 	{
 		if (e.key == 'r')
 		{
+			for (int i = 0; i < NUM_LINE; i++)
+			{
+				lines[i].randomize();
+			}
 		}
 	}
 	
