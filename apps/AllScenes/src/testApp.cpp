@@ -34,6 +34,8 @@ Particles particles;
 Abacus abacus;
 SoundCube soundcube;
 
+int active_camera_id = 0;
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -81,7 +83,8 @@ void testApp::setup()
 		ramCameraManager::instance().rollbackDefaultCameraSetting(i);
 	}
 	
-	ramCameraManager::instance().setActiveCamera(0);
+    active_camera_id = 0;
+	ramCameraManager::instance().setActiveCamera(active_camera_id);
 
 }
 
@@ -89,7 +92,7 @@ void testApp::setup()
 void testApp::update()
 {
 	ofViewport(0, 0, 1920, 1200);
-	ramCameraManager::instance().setActiveCamera(0);
+	ramCameraManager::instance().setActiveCamera(active_camera_id);
 	ramBeginCamera();
 	ramEndCamera();
 	
@@ -116,7 +119,7 @@ void testApp::draw()
 	
 	ofPushView();
 	ofViewport(0, 0, 1920, 1200);
-	ramCameraManager::instance().setActiveCamera(0);
+	ramCameraManager::instance().setActiveCamera(active_camera_id);
 	ramBeginCamera();
 	drawFloor();
 	ramEndCamera();
@@ -126,28 +129,30 @@ void testApp::draw()
 	
 	int screen_w = 1280, screen_h = 720;
 	
-//	int inv_screen_height = ofGetHeight() - screen_h;
-//	for (int i = 0; i < 5; i++)
-//	{
-//		ofPushView();
-//		
-//		ofCamera *screen_camera = ramCameraManager::instance().getCamera(i + 1);
-//		
-//		ofViewport(ofRectangle(main_display_width + i * screen_w, inv_screen_height, screen_w, screen_w));
-//		ramCameraManager::instance().setActiveCamera(i + 1);
-//		
-//		screen_camera->begin();
-//		drawFloor();
-//		screen_camera->end();
-//		
-//		sceneManager.draw();
-//		
-//		ofPopView();
-//	}
+	int inv_screen_height = ofGetHeight() - screen_h;
+	for (int i = 0; i < 5; i++)
+	{
+		ofPushView();
+		
+		ofCamera *screen_camera = ramCameraManager::instance().getCamera(i + 1);
+		
+		ofViewport(ofRectangle(main_display_width + i * screen_w, inv_screen_height, screen_w, screen_w));
+		ramCameraManager::instance().setActiveCamera(i + 1);
+		
+		screen_camera->begin();
+		drawFloor();
+		screen_camera->end();
+		
+		sceneManager.draw();
+		
+		ofPopView();
+	}
 	
-	ramCameraManager::instance().setActiveCamera(0);
+	ramCameraManager::instance().setActiveCamera(active_camera_id);
 	
 	setDrawFloorAuto(false);
+    
+    ofDrawBitmapString("active camera id: " + ofToString(active_camera_id), 400, 20);
 }
 
 #pragma mark - ram methods
@@ -166,6 +171,30 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
+    int new_active_camera_id = -1;
+    
+    if (key == '0')
+        new_active_camera_id = 0;
+    if (key == '1')
+        new_active_camera_id = 1;
+    if (key == '2')
+        new_active_camera_id = 2;
+    if (key == '3')
+        new_active_camera_id = 3;
+    if (key == '4')
+        new_active_camera_id = 4;
+    if (key == '5')
+        new_active_camera_id = 5;
+    
+    if (new_active_camera_id != -1)
+    {
+        ramCameraManager::instance().setEnableInteractiveCamera(false);
+        
+        active_camera_id = new_active_camera_id;
+        ramCameraManager::instance().setActiveCamera(active_camera_id);
+        
+        ramCameraManager::instance().setEnableInteractiveCamera(true);
+    }
 }
 
 //--------------------------------------------------------------
