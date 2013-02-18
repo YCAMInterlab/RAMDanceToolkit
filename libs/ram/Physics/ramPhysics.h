@@ -7,6 +7,8 @@
 #include "ramActor.h"
 #include "ramPrimitive.h"
 
+#include <set>
+
 class ramPrimitive;
 
 void ramEnablePhysicsPrimitive(bool v = true);
@@ -33,6 +35,8 @@ public:
 	
 	void registerTempraryPrimitive(ramPrimitive *o);
 	
+	bool checkAndUpdateNodeCache(const ramNode *node);
+	
 private:
 	
 	static ramPhysics *_instance;
@@ -41,6 +45,8 @@ private:
 	ofxBt::World world;
 	vector<ramPrimitive*> primitives;
 	vector<ramPrimitive*> temporary_primitives;
+	
+	set<const ramNode*> cache_index;
 	
 	ramPhysics() : inited(false) {}
 	~ramPhysics() {}

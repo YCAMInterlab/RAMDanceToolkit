@@ -36,9 +36,10 @@ void ramBox(const ramNode& o, float size)
 	ofBox(size);
 	o.endTransform();
 	
-	if (ramGetEnablePhysicsPrimitive())
+	if (ramGetEnablePhysicsPrimitive()
+		&& ramPhysics::instance().checkAndUpdateNodeCache(&o))
 	{
-		ramBoxPrimitive *p = new ramBoxPrimitive(o.getTransformMatrix(), size);
+		ramBoxPrimitive *p = new ramBoxPrimitive(o.getGlobalTransformMatrix(), size);
 		ramPhysics::instance().registerTempraryPrimitive(p);
 	}
 }
@@ -147,6 +148,17 @@ void ramDrawBasicActor(const ramActor& actor,
 	}
 	glPopMatrix();
 }
+void ramDrawBasicRigid(const ramRigidBody& rigid,
+					   const ofColor& jointColor)
+{
+	for(int i=0; i<rigid.getNumNode(); i++)
+	{
+		const ramNode &node = rigid.getNode(i);
+		node.beginTransform();
+		ofBox(node, 5);
+		node.endTransform();
+	}
+}
 
 void ramDrawActorCube(ramActor& actor, ofColor c)
 {
@@ -195,4 +207,37 @@ void ramDrawNodeCorresponds(const ramNodeArray &a, const ramNodeArray &b)
 	{
 		ofLine(a.getNode(i).getGlobalPosition(), b.getNode(i).getGlobalPosition());
 	}
+}
+
+
+// shadow
+
+void ramEnableShadow(bool v)
+{
+	ramSharedData::instance().shadow.setEnable(v);
+}
+
+void ramDisableShadow()
+{
+	ramSharedData::instance().shadow.setEnable(false);
+}
+
+bool ramShadowEnabled()
+{
+	return ramSharedData::instance().shadow.getEnable();
+}
+
+void ramBeginShadow()
+{
+	ramSharedData::instance().shadow.begin();
+}
+
+void ramEndShadow()
+{
+	ramSharedData::instance().shadow.end();
+}
+
+void ramSetShadowAlpha(float alpha)
+{
+	ramSharedData::instance().shadow.setShadowAlpha(alpha);
 }

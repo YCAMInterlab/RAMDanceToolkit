@@ -32,6 +32,10 @@ public:
 	float particle_velocity;
 	float particle_life;
 	
+	vector<ofVec3f> particle_buffer;
+	
+	ofShader shader;
+	
 	Particle& emit(const ofVec3f& pos, float vel = 1)
 	{
 		particle_index++;
@@ -40,7 +44,7 @@ public:
 		Particle &p = particles[particle_index];
 		p.pos = pos;
 		
-		p.life = particle_life;
+		p.life = particle_life * ofRandom(0.5, 1);
 		
 		p.vel.x = ofRandom(-1, 1);
 		p.vel.y = ofRandom(-1, 1);
@@ -59,6 +63,27 @@ public:
 		time = 1;
 		particle_velocity = 2;
 		particle_life = 2;
+		
+#define _S(src) #src
+		
+		const char *vs = _S(
+			uniform float pixel_per_unit;
+			uniform float point_size;
+			
+			void main()
+			{
+				gl_FrontColor = gl_Color;
+				gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+				
+				// calc point size
+				gl_PointSize = (pixel_per_unit * point_size) / gl_Position.w;
+			}
+		);
+		
+#undef _S
+		
+		shader.setupShaderFromSource(GL_VERTEX_SHADER, vs);
+		shader.linkProgram();
 	}
 	
 	void update()
@@ -104,30 +129,58 @@ public:
 			p.vel += p.force * t;
 			p.pos += p.vel * t;
 		}
+		
+		particle_buffer.clear();
+		for (int i = 0; i < particles.size(); i++)
+		{
+			Particle &p = particles[i];
+			if (p.dead()) continue;
+			
+			particle_buffer.push_back(p.pos);
+		}
 	}
 	
+	float getCurrentFov()
+	{
+		GLfloat m[16];
+		GLint viewport[4];
+		
+		glGetFloatv(GL_PROJECTION_MATRIX, m);
+		glGetIntegerv(GL_VIEWPORT, viewport);
+		
+		float aspect = (float)viewport[2] / viewport[3];
+		
+		// m[0] / aspect = cot(fovy / 2)
+		
+		float a = (m[0] * aspect);
+		float fov = (atan(a) - M_PI_2) * -2;
+		
+		return fov;
+	}
+
 	void draw()
 	{
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		ofPushStyle();
 		ofEnableBlendMode(OF_BLENDMODE_ADD);
 		
-		glEnable(GL_POINT_SMOOTH);
+		
 		glDisable(GL_DEPTH_TEST);
-		glPointSize(500);
+		glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
+		glEnable(GL_POINT_SMOOTH);
+
+		float fov = getCurrentFov();
+		float pixel_per_unit = fabs(ofGetViewportHeight() / (2.0f * std::tan(fov * 0.5f)));
+
+		shader.begin();
+		shader.setUniform1f("pixel_per_unit", pixel_per_unit);
+		shader.setUniform1f("point_size", 1);
 		
-		static GLfloat distance[] = { 0.0, 0.0, 1.0 };
-		glPointParameterfv(GL_POINT_DISTANCE_ATTENUATION, distance);
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glVertexPointer(3 , GL_FLOAT, sizeof(ofVec3f) , &particle_buffer[0]);
+		glDrawArrays(GL_POINTS , 0 , particle_buffer.size());
+		shader.end();
 		
-		glBegin(GL_POINTS);
-		for (int i = 0; i < particles.size(); i++)
-		{
-			Particle &p = particles[i];
-			if (p.dead()) continue;
-			
-			glVertex3fv(p.pos.getPtr());
-		}
-		glEnd();
 		ofPopStyle();
 		glPopAttrib();
 	}

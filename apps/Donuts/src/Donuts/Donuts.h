@@ -15,9 +15,11 @@ class Donuts : public ramBaseScene
 	ofVec3f mTranslate;
 	bool mShowActor;
 	
+	int mNumDuplicates;
+	float mRadian;
+	
 public:
 	
-	Donuts() {}
 	
 	void setupControlPanel(ofxUICanvas* panel)
 	{
@@ -35,13 +37,12 @@ public:
 		panel->addWidgetDown(new ofxUILabel("Duplicate me", OFX_UI_FONT_MEDIUM));
 		panel->addSlider("Duplicate", 1, 200, &mNumDuplicate, gui.kLength, gui.kDim);
 		panel->addSlider("Radius", 10.0, 1000.0, &mRadius, gui.kLength, gui.kDim);
+		panel->addSlider("Box Size", 1.0, 1000.0, &mBoxSize, gui.kLength, gui.kDim);
 		
 		panel->addSpacer(gui.kLength, 2);
 		panel->addButton("Reset all settings", false, 50, 50);
 		panel->addToggle("Show Actor", &mShowActor, 50, 50);
-		
-		panel->addToggle("Toggle All", false, 20, 20);
-		panel->addSlider("Box Size", 1.0, 1000.0, &mBoxSize, gui.kLength, gui.kDim);
+		panel->addToggle("Toggle All", false, 50, 50);
 		
 		for (int i=0; i<ramActor::NUM_JOINTS; i++)
 		{
@@ -56,26 +57,19 @@ public:
 	
 	void setup()
 	{
+		
 	}
 	
 	void update()
 	{
-		
+		mNumDuplicate = floor(mNumDuplicate);
+		mRadian = 2 * M_PI / mNumDuplicate;
 	}
 	
-	void draw()
+	void drawDonuts(ramNodeArray &nodeArray)
 	{
-		
-	}
-	
-	void drawActor( ramActor& actor )
-	{
-		float radian = 2 * M_PI / mNumDuplicate;
-		int numDuplicate = floor(mNumDuplicate);
-
 		ofPushStyle();
 		ofNoFill();
-
 		
 		if (mShowActor)
 		{
@@ -86,8 +80,8 @@ public:
 				c1.g += n*3;
 				c2.b += n*3;
 				
-				float x = cos( radian * n ) * mRadius;
-				float z = sin( radian * n ) * mRadius;
+				float x = cos( mRadian * n ) * mRadius;
+				float z = sin( mRadian * n ) * mRadius;
 				
 				ofPushMatrix();
 				ofTranslate(x, 0, z);
@@ -96,20 +90,28 @@ public:
 				ofRotateY(360/mNumDuplicate * n);
 				if( n==0 ) ofScale(mScale, mScale, mScale);
 				
-				ramDrawBasicActor(actor, c1, c2);
+				if (nodeArray.isActor())
+				{
+					ramDrawBasicActor((ramActor&)nodeArray, c1, c2);
+				}
+				else
+				{
+					ramDrawBasicRigid((ramRigidBody&)nodeArray, c1);
+				}
+				
 				ofPopMatrix();
 			}
 		}
 		
 		else
 		{
-			for (int index=0; index<actor.getNumNode(); index++)
+			for (int index=0; index<nodeArray.getNumNode(); index++)
 			{
 				if (mNodeVisibility[index] == false) continue;
 				
 				for (int n=0; n<mNumDuplicate; n++)
 				{
-					ramNode &node = actor.getNode(index);
+					ramNode &node = nodeArray.getNode(index);
 					
 					ofPushMatrix();
 					{
@@ -118,8 +120,8 @@ public:
 						c1.g += n*3;
 						c2.b += n*3;
 						
-						float x = cos( radian * n ) * mRadius;
-						float z = sin( radian * n ) * mRadius;
+						float x = cos( mRadian * n ) * mRadius;
+						float z = sin( mRadian * n ) * mRadius;
 						
 						ofMatrix4x4 m = node.getOrientationQuat();
 						glMultMatrixf(m.getPtr());
@@ -142,11 +144,22 @@ public:
 		
 		
 		ofPopStyle();
+
+	}
+	
+	void draw()
+	{
+
+	}
+	
+	void drawActor( ramActor& actor )
+	{
+		drawDonuts( actor );
 	}
 	
 	void drawRigid(ramRigidBody &rigid)
 	{
-		
+		drawDonuts( rigid );
 	}
 	
 	void onValueChanged(ofxUIEventArgs& e)
@@ -173,12 +186,12 @@ public:
 			mToggles[i]->setValue(mNodeVisibility[i]);
 		}
 		
-		mNumDuplicate = 15;
+		mNumDuplicate = 5;
 		mRadius = 110;
 		mScale = 1.0;
-		mBoxSize = 10.0;
+		mBoxSize = 5.0;
 		mTranslate = ofVec3f::zero();
-		mShowActor = true;
+		mShowActor = false;
 	}
 	
 	const string getName() { return "Donuts"; }

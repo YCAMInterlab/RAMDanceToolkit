@@ -15,6 +15,9 @@ public:
 	void begin();
 	void end();
 	
+	void setEnable(bool v) { enable = v; }
+	bool getEnable() { return enable; }
+
 	void setShadowAlpha(float alpha);
 	
 protected:
@@ -22,6 +25,7 @@ protected:
 	ofMatrix4x4 shadow_matrix;
 	ofShader shader;
 	
+	bool enable;
 	ofFloatColor shadow_color;
 	
 };

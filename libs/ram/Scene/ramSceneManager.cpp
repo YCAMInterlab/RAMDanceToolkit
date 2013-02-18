@@ -48,6 +48,7 @@ void ramSceneManager::draw()
 		bool enable_physics = ramGetEnablePhysicsPrimitive();
 		ramEnablePhysicsPrimitive(false);
 				
+		if (ramShadowEnabled())
 		{
 			// draw shadow
 			

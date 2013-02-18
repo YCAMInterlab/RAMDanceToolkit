@@ -13,6 +13,7 @@
 #include "Stamp.h"
 #include "Expansion.h"
 #include "Graph3D.h"
+#include "Graph2D.h"
 #include "Particles.h"
 #include "Abacus.h"
 #include "UpsideDown.h"
@@ -20,6 +21,7 @@
 
 BasicActor basicActor;
 Graph3D graph3D;
+Graph2D graph2D;
 Line drawLines;
 Expansion expansion;
 BigBox bigbox;
@@ -52,6 +54,7 @@ void testApp::setup()
 	vector<ramBaseScene*> scenes;
 	scenes.push_back( basicActor.getPtr() );
 	scenes.push_back( graph3D.getPtr() );
+	scenes.push_back( graph2D.getPtr() );
 	scenes.push_back( drawLines.getPtr() );
 	scenes.push_back( upsideDown.getPtr() );
 	scenes.push_back( expansion.getPtr() );
