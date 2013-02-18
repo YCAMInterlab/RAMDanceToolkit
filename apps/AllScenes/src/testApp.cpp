@@ -6,7 +6,6 @@
  */
 #include "BasicActor.h"
 #include "BigBox.h"
-#include "Bullet.h"
 #include "Future.h"
 #include "Line.h"
 #include "Donuts.h"
@@ -27,7 +26,6 @@ Line drawLines;
 Expansion expansion;
 BigBox bigbox;
 Future future;
-Bullet bullet;
 Donuts donuts;
 Stamp stamp;
 Particles particles;
@@ -35,7 +33,6 @@ Abacus abacus;
 SoundCube soundcube;
 UpsideDown upsideDown;
 Kepler kepler;
-
 
 int active_camera_id = 0;
 
@@ -53,12 +50,10 @@ void testApp::setup()
 	ofSetVerticalSync(true);
 	ofBackground(ramColor::WHITE);
 	
-	
 	/// ram setup
 	// ------------------
 	ramInit();
 	oscReceiver.setup(10000);
-	
 	
 	/// scenes setup
 	// ------------------
@@ -69,7 +64,6 @@ void testApp::setup()
 	scenes.push_back( expansion.getPtr() );
 	scenes.push_back( bigbox.getPtr() );
 	scenes.push_back( future.getPtr() );
-	scenes.push_back( bullet.getPtr() );
 	scenes.push_back( donuts.getPtr() );
 	scenes.push_back( stamp.getPtr() );
 	scenes.push_back( particles.getPtr() );

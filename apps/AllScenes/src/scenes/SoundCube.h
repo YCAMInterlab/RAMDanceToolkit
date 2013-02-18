@@ -9,10 +9,11 @@
  ====
  
  <scene>
- <shape type="cube" x="-100" y="50" z="0" rx="0" ry="90" rz="0" sx="200" sy="100" sz="100" color="FF0000" sound=""/>
- <shape type="sphere" x="200" y="50" z="0" rx="0" ry="0" rz="0" sx="100" sy="100" sz="100" color="FF00FF" sound=""/>
+ <shape type="cube" x="-100" y="50" z="0" rx="0" ry="90" rz="0" sx="200" sy="100" sz="100" color="FFFFFF" sound="Sounds/dlone_1m.aif" trigger="off" loop="on"/>
+ <shape type="cube" x="200" y="50" z="0" rx="0" ry="0" rz="0" sx="100" sy="100" sz="100" color="FFFFFF" sound="Sounds/dlone_2m.aif" trigger="on" loop="on"/>
+ <shape type="cube" x="200" y="50" z="200" rx="0" ry="0" rz="0" sx="100" sy="100" sz="100" color="FFFFFF" sound="Sounds/dlone_3m.aif" trigger="off" loop="on"/>
+ <shape type="cube" x="200" y="50" z="-200" rx="0" ry="0" rz="0" sx="100" sy="100" sz="100" color="FFFFFF" sound="Sounds/dlone_4m.aif" trigger="on" loop="on"/>
  </scene>
- 
  ====
  
  */
@@ -25,14 +26,21 @@ public:
 	public:
 		
 		ofColor color;
+		ofSoundPlayer *player;
+		bool trigger_mode;
 		
-		Shape() : id(-1), obj(NULL), alpha(0), is_inside(false) {}
+		Shape() : id(-1), obj(NULL), alpha(0), is_inside(false), player(NULL), trigger_mode(false) {}
 		
 		~Shape()
 		{
 			if (obj)
 			{
 				delete obj;
+			}
+			
+			if (player)
+			{
+				delete player;
 			}
 		}
 		
@@ -53,6 +61,16 @@ public:
 			};
 			
 			obj->getRigidBody().setCollisionCallback(Callback(this));
+		}
+		
+		void loadSound(const string &path, bool trigger = false, bool loop = true)
+		{
+			if (player) delete player;
+			
+			player = new ofSoundPlayer;
+			player->loadSound(path);
+			player->setLoop(loop ? OF_LOOP_NORMAL : OF_LOOP_NONE);
+			trigger_mode = trigger;
 		}
 		
 		void draw()
@@ -99,11 +117,29 @@ public:
 		
 		void triggerUp()
 		{
+			if (trigger_mode)
+			{
+				if (player) player->play();
+			}
+			else
+			{
+				if (player) player->stop();
+			}
 			cout << "trigger up: " << ofGetElapsedTimef() << endl;
 		}
 		
 		void triggerDown()
 		{
+			if (!trigger_mode)
+			{
+				if (player) player->play();
+			}
+			else
+			{
+				if (player) player->stop();
+			}
+
+			
 			cout << "trigger dow: " << ofGetElapsedTimef() << endl;
 		}
 		
@@ -170,8 +206,10 @@ public:
 		
 		string default_xml = _S(
 <scene>
-    <shape type="cube" x="-100" y="50" z="0" rx="0" ry="90" rz="0" sx="200" sy="100" sz="100" color="FF0000" sound=""/>
-    <shape type="sphere" x="200" y="50" z="0" rx="0" ry="0" rz="0" sx="100" sy="100" sz="100" color="FF00FF" sound=""/>
+<shape type="cube" x="-100" y="50" z="0" rx="0" ry="90" rz="0" sx="200" sy="100" sz="100" color="FFFFFF" sound="Sounds/dlone_1m.aif" trigger="off" loop="on"/>
+<shape type="cube" x="200" y="50" z="0" rx="0" ry="0" rz="0" sx="100" sy="100" sz="100" color="FFFFFF" sound="Sounds/dlone_2m.aif" trigger="on" loop="on"/>
+<shape type="cube" x="200" y="50" z="200" rx="0" ry="0" rz="0" sx="100" sy="100" sz="100" color="FFFFFF" sound="Sounds/dlone_3m.aif" trigger="off" loop="on"/>
+<shape type="cube" x="200" y="50" z="-200" rx="0" ry="0" rz="0" sx="100" sy="100" sz="100" color="FFFFFF" sound="Sounds/dlone_4m.aif" trigger="on" loop="on"/>
 </scene>
 		);
 
@@ -243,6 +281,16 @@ public:
 				Shape *o = new Shape;
 				o->color = color;
 				o->set(i, s);
+				
+				string sound = xml.getAttribute("shape", "sound", "", i);
+				bool toggle_mode = xml.getAttribute("shape", "trigger", "off", i) == "on";
+				bool loop = xml.getAttribute("shape", "loop", "off", i) == "on";
+				
+				if (sound != "")
+				{
+					o->loadSound(sound, toggle_mode, loop);
+				}
+				
 				shapes.push_back(o);
 			}
 			else
@@ -250,8 +298,6 @@ public:
 				ofLogError("Shape") << "invalid shape type";
 				continue;
 			}
-			
-			shapes;
 		}
 		
 		xml.popTag();
