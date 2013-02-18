@@ -168,8 +168,6 @@ public:
 	void setupControlPanel(ofxUICanvas* panel)
 	{
 		ramControlPanel &gui = ramGetGUI();
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
 		
 		for (int i = 0; i < NUM_LINE; i++)
 		{

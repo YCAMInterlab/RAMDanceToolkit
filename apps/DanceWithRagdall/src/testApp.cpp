@@ -21,7 +21,7 @@ void testApp::setup()
 	ofBackground(0);
 	oscReceiver.setup(10000);
 
-	ramInit();
+	ramInitialize();
 	
 	// gui setup
 	ofxControlPanel::setTextColor(simpleColor(255,255,255,255));

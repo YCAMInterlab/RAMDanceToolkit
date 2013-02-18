@@ -5,34 +5,43 @@
  Scenes
  */
 #include "BasicActor.h"
-#include "BigBox.h"
-#include "Bullet.h"
-#include "Future.h"
-#include "Line.h"
-#include "Donuts.h"
-#include "Stamp.h"
-#include "Expansion.h"
-#include "Graph3D.h"
-#include "Graph2D.h"
-#include "Particles.h"
-#include "Abacus.h"
-#include "UpsideDown.h"
-#include "Kepler.h"
-
 BasicActor basicActor;
-Graph3D graph3D;
-Graph2D graph2D;
+
+#include "Line.h"
 Line drawLines;
-Expansion expansion;
+
+#include "BigBox.h"
 BigBox bigbox;
+
+#include "Future.h"
 Future future;
-Bullet bullet;
+
+#include "Donuts.h"
 Donuts donuts;
+
+#include "Stamp.h"
 Stamp stamp;
+
+#include "Expansion.h"
+Expansion expansion;
+
+#include "Particles.h"
 Particles particles;
+
+#include "Abacus.h"
 Abacus abacus;
+
+#include "SoundCube.h"
+SoundCube soundcube;
+
+#include "UpsideDown.h"
 UpsideDown upsideDown;
+
+#include "Kepler.h"
 Kepler kepler;
+
+#include "Graph3D.h"
+Graph3D graph3D;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -42,38 +51,34 @@ void testApp::setup()
 	ofSetVerticalSync(true);
 	ofBackground(ramColor::WHITE);
 	
-	
 	/// ram setup
 	// ------------------
-	ramInit();
+	ramInitialize();
 	oscReceiver.setup(10000);
-	
 	
 	/// scenes setup
 	// ------------------
 	vector<ramBaseScene*> scenes;
 	scenes.push_back( basicActor.getPtr() );
-	scenes.push_back( graph3D.getPtr() );
-	scenes.push_back( graph2D.getPtr() );
 	scenes.push_back( drawLines.getPtr() );
-	scenes.push_back( upsideDown.getPtr() );
-	scenes.push_back( expansion.getPtr() );
 	scenes.push_back( bigbox.getPtr() );
 	scenes.push_back( future.getPtr() );
-	scenes.push_back( bullet.getPtr() );
 	scenes.push_back( donuts.getPtr() );
 	scenes.push_back( stamp.getPtr() );
+	scenes.push_back( expansion.getPtr() );
 	scenes.push_back( particles.getPtr() );
 	scenes.push_back( abacus.getPtr() );
+	scenes.push_back( soundcube.getPtr() );
     scenes.push_back( upsideDown.getPtr() );
     scenes.push_back( kepler.getPtr() );
+	scenes.push_back( graph3D.getPtr() );
 	
 	sceneManager.setup(scenes);
 }
 
 //--------------------------------------------------------------
 void testApp::update()
-{
+{	
 	/// Entities update
 	// ------------------
 	oscReceiver.update();
@@ -87,8 +92,6 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	/// Scenes draw
-	// ------------------
 	sceneManager.draw();
 }
 
@@ -97,29 +100,18 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	/// Scenes drawActor
-	// ------------------
-	sceneManager.drawActor(actor);
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
-	/// Scenes drawActor
-	// ------------------
-	sceneManager.drawRigid(rigid);
 }
 
 #pragma mark - oF Events
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	switch (key)
-	{
-		case 'b':
-			bullet.cube = new ramBoxPrimitive(ofVec3f(0, 300, 0), 100);
-			break;
-	}
+	
 }
 
 //--------------------------------------------------------------

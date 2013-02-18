@@ -81,9 +81,11 @@
 
 /* Begin PBXFileReference section */
 		60426F9E16CE1ADE00C99541 /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
-		60426FA016CE22F300C99541 /* Graph3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Graph3D.h; sourceTree = "<group>"; };
 		6079C9F316CBECEC00ABCCD6 /* BasicActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicActor.h; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
+		9A2B3ED516D243EB001CBFC9 /* Graph2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Graph2D.h; path = scenes/Graph2D.h; sourceTree = "<group>"; };
+		9A2B3ED616D243EB001CBFC9 /* Graph3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Graph3D.h; path = scenes/Graph3D.h; sourceTree = "<group>"; };
+		9A2B3ED716D24405001CBFC9 /* SoundCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundCube.h; path = scenes/SoundCube.h; sourceTree = "<group>"; };
 		9A44AF9116AEB8C500DC4CB6 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
 		9A44B13116AEC02400DC4CB6 /* Future.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Future.h; sourceTree = "<group>"; };
 		9A6C418516D0FB1B0025D94D /* Abacus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Abacus.h; sourceTree = "<group>"; };
@@ -176,12 +178,13 @@
 			path = ../../Line/src/Line;
 			sourceTree = "<group>";
 		};
-		60426F9F16CE22EB00C99541 /* Graph3D */ = {
+		60426F9F16CE22EB00C99541 /* Graph */ = {
 			isa = PBXGroup;
 			children = (
-				60426FA016CE22F300C99541 /* Graph3D.h */,
+				9A2B3ED516D243EB001CBFC9 /* Graph2D.h */,
+				9A2B3ED616D243EB001CBFC9 /* Graph3D.h */,
 			);
-			name = Graph3D;
+			name = Graph;
 			sourceTree = "<group>";
 		};
 		6079C9F216CBECEC00ABCCD6 /* BasicActor */ = {
@@ -204,12 +207,13 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				9A2B3ED716D24405001CBFC9 /* SoundCube.h */,
 				D2E1BF3716D1CB3C00C2FE8A /* Kepler */,
 				D292867A16D146A30016378A /* UpsideDown */,
 				9A6C418416D0FB1B0025D94D /* Abacus */,
 				9A9F66CD16D0DCFF004D9E1E /* Particles */,
 				9AEC705016D0A6B700C4B759 /* Donuts */,
-				60426F9F16CE22EB00C99541 /* Graph3D */,
+				60426F9F16CE22EB00C99541 /* Graph */,
 				60426F9D16CE1ADE00C99541 /* Line */,
 				9AC08FE416CE03C800892109 /* Expansion */,
 				9AC08FCE16CDF4B800892109 /* Stamp */,
