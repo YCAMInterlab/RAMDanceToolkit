@@ -36,13 +36,14 @@ public:
 		}
 	}
 	
-	void setColor(const string& key, ofColor color)
+	bool getColor(const string& key, ofColor &c)
 	{
-		if (!hasRecord(key)) return;
+		if (!hasRecord(key)) return false;
 		
 		Record &o = records[key];
-		o.has_color = true;
-		o.color = color;
+		c = o.color;
+		
+		return true;
 	}
 	
 	void setMinMax(const string& key, float min, float max)
@@ -89,18 +90,9 @@ public:
 			
 			float c = fmod(color_offset, 1);
 			
-			ofColor color;
+			o.color = ofColor::fromHsb(c * 255, 255, 255, 127);
 			
-			if (o.has_color)
-			{
-				color = o.color;
-			}
-			else
-			{
-				color = ofColor::fromHsb(c * 255, 255, 255, 127);
-			}
-			
-			ofSetColor(color, 127);
+			ofSetColor(o.color, 127);
 			
 			{
 				int index = 0;
@@ -108,7 +100,7 @@ public:
 				float yy = ofMap(v[index], o.min, o.max, rect.height, 0);
 				
 				ofPushStyle();
-				ofSetColor(color, 64);
+				ofSetColor(o.color, 64);
 				ofLine(0, yy, rect.width, yy);
 				ofPopStyle();
 				
@@ -154,10 +146,9 @@ private:
 		float min, max;
 		BufferType buffer;
 		
-		bool has_color;
 		ofColor color;
 		
-		Record() : min(0), max(1), has_color(false) {}
+		Record() : min(0), max(1) {}
 	};
 	
 	typedef map<string, Record> MapType;

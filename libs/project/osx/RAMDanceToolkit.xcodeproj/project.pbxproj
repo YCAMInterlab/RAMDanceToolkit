@@ -293,7 +293,6 @@
 		609A656016CAC57C00C0AB22 /* ramUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A653616CAC57C00C0AB22 /* ramUtils.h */; };
 		609A656216CAC9C300C0AB22 /* ramGlobalShortcut.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A656116CAC9C300C0AB22 /* ramGlobalShortcut.h */; };
 		60CFE13816CCA766000050C8 /* ramTimeShifter.h in Headers */ = {isa = PBXBuildFile; fileRef = 60CFE13716CCA766000050C8 /* ramTimeShifter.h */; };
-		60CFE13A16CCA76F000050C8 /* ramStamp.h in Headers */ = {isa = PBXBuildFile; fileRef = 60CFE13916CCA76F000050C8 /* ramStamp.h */; };
 		60DA905216CE7DAF00E392B5 /* ramNodeTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 60DA905116CE7DAF00E392B5 /* ramNodeTransform.h */; };
 		60EF104716D0C45700A37B2A /* ramGraphView.h in Headers */ = {isa = PBXBuildFile; fileRef = 60EF104616D0C45700A37B2A /* ramGraphView.h */; };
 		60FFDB5516CD1F2F0093F734 /* ramBaseFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FFDB5416CD1F2F0093F734 /* ramBaseFilter.h */; };
@@ -1573,7 +1572,6 @@
 				9A02CDAD16CBD9610055E1AC /* ramStamp.h in Headers */,
 				9A02CDB016CBD96D0055E1AC /* ramSession.h in Headers */,
 				60CFE13816CCA766000050C8 /* ramTimeShifter.h in Headers */,
-				60CFE13A16CCA76F000050C8 /* ramStamp.h in Headers */,
 				60FFDB5516CD1F2F0093F734 /* ramBaseFilter.h in Headers */,
 				60426F9816CE1A5300C99541 /* ramExpansion.h in Headers */,
 				60DA905216CE7DAF00E392B5 /* ramNodeTransform.h in Headers */,
@@ -1801,7 +1799,7 @@
 		60B90A821644E00900AF2156 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = YCAMInterlab;
 			};
 			buildConfigurationList = 60B90A851644E00900AF2156 /* Build configuration list for PBXProject "RAMDanceToolkit" */;
@@ -1899,7 +1897,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -1922,13 +1920,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
 		60B90A901644E00900AF2156 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1942,6 +1941,7 @@
 		60B90A911644E00900AF2156 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
