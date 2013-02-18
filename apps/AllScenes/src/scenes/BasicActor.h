@@ -19,9 +19,6 @@ class BasicActor : public ramBaseScene
 	map<const string, ControlSegment> mControlSegments;
 	ofxUICanvas *panel;
 	
-	float r,g,b;
-	ofColor jointColor;
-	
 public:
 	
 	BasicActor() {}
@@ -53,18 +50,10 @@ public:
 		panel->addWidgetDown(new ofxUILabel(segment.name, OFX_UI_FONT_LARGE));
 		panel->addSpacer(gui.kLength, 2);
 		panel->addButton("Reset: " + segment.name, false, 40, 40);
-		panel->addSlider(segment.name + " X", -600.0, 600.0, &segment.translate.x, 95, gui.kDim);
-		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
-		panel->addSlider(segment.name + " Y", -600.0, 600.0, &segment.translate.y, 95, gui.kDim);
-		panel->addSlider(segment.name + " Z", -600.0, 600.0, &segment.translate.z, 95, gui.kDim);
-		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
+		panel->addSlider(segment.name + " Translate: X", -600.0, 600.0, &segment.translate.x, gui.kLength, gui.kDim);
+		panel->addSlider(segment.name + " Translate: Y", -600.0, 600.0, &segment.translate.y, gui.kLength, gui.kDim);
+		panel->addSlider(segment.name + " Translate: Z", -600.0, 600.0, &segment.translate.z, gui.kLength, gui.kDim);
 		panel->addSlider(segment.name + " Scale", 0.01, 5.0, &segment.scale, gui.kLength, gui.kDim);
-		
-		panel->addSlider("Joint R", 0, 255, &r, 95, gui.kDim);
-		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
-		panel->addSlider("Joint G", 0, 255, &g, 95, gui.kDim);
-		panel->addSlider("Joint B", 0, 255, &b, 95, gui.kDim);
-		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 	}
 	
 	void update()
@@ -95,7 +84,7 @@ public:
 		{
 			glTranslatef(segment.translate.x, segment.translate.y, segment.translate.z);
 			glScalef(segment.scale, segment.scale, segment.scale);
-			ramDrawBasicActor(actor, jointColor);
+			ramDrawBasicActor(actor);
 		}
 		glPopMatrix();
 	}
@@ -120,12 +109,6 @@ public:
 			++it;
 		}
 		
-		if (name == "Joint R" || name == "Joint G" || name == "Joint B")
-		{
-			jointColor.r = r;
-			jointColor.g = g;
-			jointColor.b = b;
-		}
 	}
 	
 	const string getName() { return "Basic Actor"; }
