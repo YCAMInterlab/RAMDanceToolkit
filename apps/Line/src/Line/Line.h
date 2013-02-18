@@ -31,12 +31,18 @@ public:
 		ofFloatColor color;
 		
 		ramNodeLine nodeLine;
+		
+		bool active;
+		int id;
 
 		void setupControlPanel(ofxUICanvas* panel)
 		{
 			ramControlPanel &gui = ramGetGUI();
 			
 			line_width = 2;
+			
+			active = false;
+			panel->addToggle("Line " + ofToString(id), &active, 30, 30, 0, 0);
 			
 			panel->addButton("From", &set_from, 15, 15, 0, 0);
 			panel->addButton("Control0", &set_control0, 15, 15, 0, 80);
@@ -160,8 +166,11 @@ public:
 		
 		for (int i = 0; i < NUM_LINE; i++)
 		{
+			lines[i].id = i;
 			lines[i].setupControlPanel(panel);
 		}
+		
+		lines[0].active = true;
 	}
 
 	void update()
