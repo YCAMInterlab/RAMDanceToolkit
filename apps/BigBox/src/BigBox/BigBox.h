@@ -66,7 +66,22 @@ public:
 				/*!
 				 big box
 				 */
-				ofSetColor( ramColor::BLUE_DEEP );
+				
+				if (i%3 == 0)
+				{
+					ofSetColor( ramColor::BLUE_DEEP );
+				}
+				else if (i%3 == 1)
+				{
+					ofSetColor( ramColor::BLUE_NORMAL );
+				}
+				else
+				{
+					ofSetColor( ramColor::BLUE_LIGHT );
+				}
+				
+				
+				
 				ofSetLineWidth(mBoxLineWidth);
 				node.beginTransform();
 				ofBox(bigBoxSize);
