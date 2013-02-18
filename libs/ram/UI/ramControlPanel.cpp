@@ -1,17 +1,17 @@
 #include "ramControlPanel.h"
 
-ramControlPanel *ramControlPanel::_instance = NULL;
+ramOfxUIControlPanel *ramOfxUIControlPanel::_instance = NULL;
 
-ramControlPanel& ramControlPanel::instance()
+ramOfxUIControlPanel& ramOfxUIControlPanel::instance()
 {
 	if (_instance == NULL)
 	{
-		_instance = new ramControlPanel();
+		_instance = new ramOfxUIControlPanel();
 	}
 	return *_instance;
 }
 
-ramControlPanel::ramControlPanel()
+ramOfxUIControlPanel::ramOfxUIControlPanel()
 {
 	kDim = 16;
 	kXInit = OFX_UI_GLOBAL_WIDGET_SPACING;
@@ -29,12 +29,12 @@ ramControlPanel::ramControlPanel()
 	scenes = NULL;
 }
 
-void ramControlPanel::setup()
+void ramOfxUIControlPanel::setup()
 {
 	
 	/// Event hooks
 	// -------------------------------------
-	ofAddListener(ofEvents().update, this, &ramControlPanel::update);
+	ofAddListener(ofEvents().update, this, &ramOfxUIControlPanel::update);
 	
 	
 	/// First panel
@@ -96,11 +96,11 @@ void ramControlPanel::setup()
 	
 	
 	/// Events
-	ofAddListener(ofEvents().keyPressed, this, &ramControlPanel::keyPressed);
-	ofAddListener(mPanelGeneral->newGUIEvent, this, &ramControlPanel::guiEvent);
+	ofAddListener(ofEvents().keyPressed, this, &ramOfxUIControlPanel::keyPressed);
+	ofAddListener(mPanelGeneral->newGUIEvent, this, &ramOfxUIControlPanel::guiEvent);
 }
 
-void ramControlPanel::update(ofEventArgs &e)
+void ramOfxUIControlPanel::update(ofEventArgs &e)
 {
 	if (mUseBgSlider) ofBackground( ofColor(mR, mG, mB) );
 	
@@ -114,8 +114,9 @@ void ramControlPanel::update(ofEventArgs &e)
 	mLabelCamPos->setLabel( pos.str() );
 }
 
+//
 
-void ramControlPanel::addPanel(ramControllable* control)
+void ramOfxUIControlPanel::addPanel(ramControllable* control)
 {
 	ofxUICanvas *panel = new ofxUICanvas(0, 0, ramGetGUI().kLength+ramGetGUI().kXInit*2.0, ofGetScreenHeight());
 	
@@ -125,12 +126,105 @@ void ramControlPanel::addPanel(ramControllable* control)
 	getTabbedCanvas().add(panel);
 }
 
-void ramControlPanel::reloadCameraSetting(const int index)
+void ramOfxUIControlPanel::addPanel(const string& name)
+{
+	ofxUICanvas *panel = new ofxUICanvas(0, 0, ramGetGUI().kLength+ramGetGUI().kXInit*2.0, ofGetScreenHeight());
+	panel->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_LARGE));
+	panel->addSpacer(kLength, 2);
+	getTabbedCanvas().add(panel);
+	
+	current_panel = panel;
+}
+
+void ramOfxUIControlPanel::addSection(const string& name)
+{
+	current_panel->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_LARGE));
+	current_panel->addSpacer(kLength, 2);
+}
+
+void ramOfxUIControlPanel::addSeparator()
+{
+	current_panel->addSpacer(kLength, 2);
+}
+
+void ramOfxUIControlPanel::addLabel(const string& content)
+{
+	current_panel->addWidgetDown(new ofxUILabel(content, OFX_UI_FONT_MEDIUM));
+}
+
+void ramOfxUIControlPanel::addToggle(const string& name, bool *value)
+{
+	current_panel->addToggle(name, value, 30, 30);
+}
+
+void ramOfxUIControlPanel::addMultiToggle(const string& name, const vector<string>& content, int *value)
+{
+	assert(false);
+}
+
+void ramOfxUIControlPanel::addRadioGroup(const string& name, const vector<string>& content, int *value)
+{
+	ofxUIRadio *o = current_panel->addRadio(name, content, OFX_UI_ORIENTATION_VERTICAL, kDim, kDim);
+	
+	struct Listener
+	{
+		ofxUIRadio *o;
+		int *value;
+		
+		Listener(ofxUIRadio *o, int *value) : o(o), value(value) {}
+		
+		void handle(ofxUIEventArgs &e)
+		{
+			if (e.widget->getParent() != o) return;
+			vector<ofxUIToggle *> t = o->getToggles();
+			for (int i = 0; i < t.size(); i++)
+			{
+				if (t[i]->getValue())
+				{
+					*value = i;
+					break;
+				}
+			}
+		}
+	};
+
+	// FIXME: memory leak
+	Listener *e = new Listener(o, value);
+	ofAddListener(current_panel->newGUIEvent, e, &Listener::handle);
+}
+
+void ramOfxUIControlPanel::addDropdown(const string& name, const vector<string>& content, int *value)
+{
+	assert(false);
+}
+
+void ramOfxUIControlPanel::addSlider(const string& name, float min_value, float max_value, float *value)
+{
+	current_panel->addSlider(name, min_value, max_value, value, kLength, kDim);
+}
+
+void ramOfxUIControlPanel::addColorSelector(const string& name, ofFloatColor *value)
+{
+	current_panel->addSlider("R", 0, 1, &value->r, 95, kDim);
+	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
+	current_panel->addSlider("G", 0, 1, &value->g, 95, kDim);
+	current_panel->addSlider("B", 0, 1, &value->b, 95, kDim);
+	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
+}
+
+void ramOfxUIControlPanel::remove(const string& name)
+{
+	assert(false);
+}
+
+//
+
+void ramOfxUIControlPanel::reloadCameraSetting(const int index)
 {
 	ramCameraManager::instance().rollbackDefaultCameraSetting(index);
 }
 
-void ramControlPanel::setupSceneToggles(vector<ramBaseScene*>& scenes_)
+void ramOfxUIControlPanel::setupSceneToggles(vector<ramBaseScene*>& scenes_)
 {
 	scenes = &scenes_;
 	
@@ -151,7 +245,7 @@ void ramControlPanel::setupSceneToggles(vector<ramBaseScene*>& scenes_)
 	mPanelGeneral->addWidgetDown(mSceneToggles);
 }
 
-void ramControlPanel::guiEvent(ofxUIEventArgs &e)
+void ramOfxUIControlPanel::guiEvent(ofxUIEventArgs &e)
 {
 	string name = e.widget->getName();
 	
@@ -211,7 +305,7 @@ void ramControlPanel::guiEvent(ofxUIEventArgs &e)
 	ramEnableShadow(enableShadow);
 }
 
-void ramControlPanel::keyPressed(ofKeyEventArgs &e)
+void ramOfxUIControlPanel::keyPressed(ofKeyEventArgs &e)
 {
 	if (e.key == ' ')
 	{

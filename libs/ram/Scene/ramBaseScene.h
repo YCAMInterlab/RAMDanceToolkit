@@ -66,7 +66,6 @@ public:
 
 
 
-class ramControlPanel;
 
 class ramBaseScene : public ramControllable, public ramGlobalShortcut
 {

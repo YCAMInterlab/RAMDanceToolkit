@@ -294,6 +294,7 @@
 		609A655F16CAC57C00C0AB22 /* ramUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A653516CAC57C00C0AB22 /* ramUtils.cpp */; };
 		609A656016CAC57C00C0AB22 /* ramUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A653616CAC57C00C0AB22 /* ramUtils.h */; };
 		609A656216CAC9C300C0AB22 /* ramGlobalShortcut.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A656116CAC9C300C0AB22 /* ramGlobalShortcut.h */; };
+		60A9B79816D2CD3D0079E701 /* ramControlPanelBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 60A9B79716D2CD3D0079E701 /* ramControlPanelBase.h */; };
 		60CFE13816CCA766000050C8 /* ramTimeShifter.h in Headers */ = {isa = PBXBuildFile; fileRef = 60CFE13716CCA766000050C8 /* ramTimeShifter.h */; };
 		60DA905216CE7DAF00E392B5 /* ramNodeTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 60DA905116CE7DAF00E392B5 /* ramNodeTransform.h */; };
 		60EF104716D0C45700A37B2A /* ramGraphView.h in Headers */ = {isa = PBXBuildFile; fileRef = 60EF104616D0C45700A37B2A /* ramGraphView.h */; };
@@ -640,6 +641,7 @@
 		609A653516CAC57C00C0AB22 /* ramUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramUtils.cpp; sourceTree = "<group>"; };
 		609A653616CAC57C00C0AB22 /* ramUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramUtils.h; sourceTree = "<group>"; };
 		609A656116CAC9C300C0AB22 /* ramGlobalShortcut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramGlobalShortcut.h; sourceTree = "<group>"; };
+		60A9B79716D2CD3D0079E701 /* ramControlPanelBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramControlPanelBase.h; sourceTree = "<group>"; };
 		60B90A8B1644E00900AF2156 /* libram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libram.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		60B90AAA1644E09400AF2156 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		60CFE13716CCA766000050C8 /* ramTimeShifter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramTimeShifter.h; sourceTree = "<group>"; };
@@ -1330,6 +1332,7 @@
 		609A652A16CAC57C00C0AB22 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				60A9B79716D2CD3D0079E701 /* ramControlPanelBase.h */,
 				609A652B16CAC57C00C0AB22 /* ramControllable.h */,
 				609A652C16CAC57C00C0AB22 /* ramControlPanel.cpp */,
 				609A652D16CAC57C00C0AB22 /* ramControlPanel.h */,
@@ -1778,6 +1781,7 @@
 				60EF104716D0C45700A37B2A /* ramGraphView.h in Headers */,
 				607A91A616D2B4A40038D472 /* ramNodeArrayBuffer.h in Headers */,
 				607A91A816D2B52C0038D472 /* ramTimeFilter.h in Headers */,
+				60A9B79816D2CD3D0079E701 /* ramControlPanelBase.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
