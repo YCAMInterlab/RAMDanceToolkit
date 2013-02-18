@@ -1,6 +1,5 @@
 #include "testApp.h"
 
-static const string myActorName = "default";
 
 static const ofColor cyanPrint = ofColor::fromHex(0x00abec);
 static const ofColor magentaPrint = ofColor::fromHex(0xec008c);
@@ -411,6 +410,7 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
+	
 }
 
 
@@ -418,7 +418,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawFloor()
 {
-	ramBasicFloor(ramFloor::FLOOR_GRID_LINES, 600., 50., ofColor(255, 64), ofColor(255, 96));
+	ramDrawBasicFloor(ramFloor::FLOOR_PLANE, 600., 50., ofColor(255, 64), ofColor(255, 96));
 }
 
 //--------------------------------------------------------------
@@ -467,7 +467,7 @@ void testApp::drawActor(ramActor &actor)
 		const ramNode &node = actor.getNode(i);
 		
 		ofPushMatrix();
-		node.transformBegin();
+		node.beginTransform();
 		ofSetColor(yellowPrint);
 		ofBox((i==ramActor::JOINT_HEAD) ? 6 : 3);
 		if(showRects) {
@@ -479,7 +479,7 @@ void testApp::drawActor(ramActor &actor)
 		}
 		
 		ofSetColor(255);
-		node.transformEnd();
+		node.endTransform();
 		ofPopMatrix();
 		
 		if (node.hasParent())

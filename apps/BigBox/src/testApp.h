@@ -4,13 +4,11 @@
 #include "ramMain.h"
 #include "ofxXmlSettings.h"
 
-
 /*!
-	for debuging....
+ for debuging....
  */
-static const string myActorName = "Ando_2012-09-01_18-49-10";
+static const string myActorName = "default_unknown_date";
 //static const string myActorName = "default";
-
 
 class testApp : public ramBaseApp
 {
@@ -34,23 +32,11 @@ public:
 	
 	// ram methods
 	// ------------------------
-	void drawFloor();
     void drawActor(ramActor &actor);
     void drawRigid(ramRigidBody &rigid);
-	
     
 	// ...
 	// ------------------------
-	vector<ramSceneBase*> scenes;
 	ramOscReceiver oscReceiver;
-	ramControlPanel gui;
-	
-	ofMatrix4x4 shadowMat;
-	
-	
-	// Setting files
-	// ------------------------
-	
-	ofxXmlSettings camSettingXml;
-	vector<ramCameraSettings> setting_cam;
+	ramSceneManager sceneManager;
 };

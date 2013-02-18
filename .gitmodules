@@ -7,3 +7,9 @@
 [submodule "addons/ofxControlPanel"]
 	path = addons/ofxControlPanel
 	url = git@github.com:kylemcdonald/ofxControlPanel.git
+[submodule "addons/ofxUI"]
+	path = addons/ofxUI
+	url = https://YoshitoONISHI@github.com/rezaali/ofxUI.git
+[submodule "addons/ofxInteractivePrimitives"]
+	path = addons/ofxInteractivePrimitives
+	url = git@github.com:satoruhiga/ofxInteractivePrimitives.git

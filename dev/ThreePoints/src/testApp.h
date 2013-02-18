@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ofMain.h"
-
 #include "ramMain.h"
 #include "ofxUI.h"
 
@@ -30,7 +29,6 @@ public:
 	void drawFloor();
     void drawActor(ramActor &actor);
     void drawRigid(ramRigidBody &rigid);
-
     
 	// ...
 	// ------------------------
