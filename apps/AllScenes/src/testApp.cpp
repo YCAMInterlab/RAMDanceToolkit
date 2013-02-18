@@ -42,12 +42,10 @@ void testApp::setup()
 	ofSetVerticalSync(true);
 	ofBackground(ramColor::WHITE);
 	
-	
 	/// ram setup
 	// ------------------
 	ramInit();
 	oscReceiver.setup(10000);
-	
 	
 	/// scenes setup
 	// ------------------
@@ -67,7 +65,6 @@ void testApp::setup()
 	scenes.push_back( graph2D.getPtr() );
     scenes.push_back( upsideDown.getPtr() );
     scenes.push_back( kepler.getPtr() );
-	
 	sceneManager.setup(scenes);
 }
 
@@ -97,17 +94,11 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	/// Scenes drawActor
-	// ------------------
-	sceneManager.drawActor(actor);
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
-	/// Scenes drawActor
-	// ------------------
-	sceneManager.drawRigid(rigid);
 }
 
 #pragma mark - oF Events
