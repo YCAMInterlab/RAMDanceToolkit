@@ -12,11 +12,7 @@
 		510cafe035e576a4e1502d52c11243bb /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = e6def695b88ba5faaceaa93785a12fd9 /* UdpSocket.cpp */; };
 		5864ad82e20f15536d054ea319473de3 /* ofxOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = df49d76c45d5db505a234880104e4dc7 /* ofxOscMessage.cpp */; };
 		60426FB116CE528E00C99541 /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60426FB016CE513C00C99541 /* libram.a */; };
-		60426FFD16CE5A4300C99541 /* btPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60426FF116CE5A4300C99541 /* btPicker.cpp */; };
 		60426FFE16CE5A4300C99541 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60426FF316CE5A4300C99541 /* main.cpp */; };
-		60426FFF16CE5A4300C99541 /* RiggedBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60426FF516CE5A4300C99541 /* RiggedBox.cpp */; };
-		6042700016CE5A4300C99541 /* RiggedBoxScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60426FF716CE5A4300C99541 /* RiggedBoxScene.cpp */; };
-		6042700116CE5A4300C99541 /* RiggedBoxShapeDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60426FF916CE5A4300C99541 /* RiggedBoxShapeDrawer.cpp */; };
 		6042700216CE5A4300C99541 /* testApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60426FFB16CE5A4300C99541 /* testApp.cpp */; };
 		62545d179c94265ca1389d4ac8d694a5 /* OscOutboundPacketStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63a47ac60ffafc3bf093ec0f62a9a4d4 /* OscOutboundPacketStream.cpp */; };
 		640279ee111671bd026cb0137d5b121e /* ofxOscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = c2fac65c491d4231379f3298ec59c6e9 /* ofxOscReceiver.cpp */; };
@@ -56,6 +52,11 @@
 		9AA73DF1165B7E7D006FBD32 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA73DEB165B7E7D006FBD32 /* tinyxmlparser.cpp */; };
 		9AA73DF2165B7E7D006FBD32 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA73DED165B7E7D006FBD32 /* ofxXmlSettings.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		D292868E16D164B00016378A /* btPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D292868616D164B00016378A /* btPicker.cpp */; };
+		D292868F16D164B00016378A /* KeplerCube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D292868816D164B00016378A /* KeplerCube.cpp */; };
+		D292869016D164B00016378A /* KeplerBtShapeDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D292868A16D164B00016378A /* KeplerBtShapeDrawer.cpp */; };
+		D292869116D164B00016378A /* KeplerBtDynamics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D292868C16D164B00016378A /* KeplerBtDynamics.cpp */; };
+		D292869616D16A400016378A /* Kepler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D292869516D16A400016378A /* Kepler.cpp */; };
 		D2B3E1EE16AEDA8B0099DC4A /* libBulletCollision.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2B3E1DE16AEDA8B0099DC4A /* libBulletCollision.a */; };
 		D2B3E1EF16AEDA8B0099DC4A /* libBulletDynamics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2B3E1DF16AEDA8B0099DC4A /* libBulletDynamics.a */; };
 		D2B3E1F016AEDA8B0099DC4A /* libBulletSoftBody.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2B3E1E016AEDA8B0099DC4A /* libBulletSoftBody.a */; };
@@ -133,15 +134,7 @@
 		4e95fb446a9c9c6f0de12d752f6604b3 /* OscPrintReceivedElements.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = OscPrintReceivedElements.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscPrintReceivedElements.h; sourceTree = SOURCE_ROOT; };
 		5928aa323f5c2690b06c837d8d036f55 /* UdpSocketWin.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = UdpSocketWin.cpp; path = ../../../addons/ofxOsc/libs/oscpack/src/ip/win32/UdpSocketWin.cpp; sourceTree = SOURCE_ROOT; };
 		60426FAB16CE513C00C99541 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
-		60426FF116CE5A4300C99541 /* btPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btPicker.cpp; sourceTree = "<group>"; };
-		60426FF216CE5A4300C99541 /* btPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btPicker.h; sourceTree = "<group>"; };
 		60426FF316CE5A4300C99541 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		60426FF516CE5A4300C99541 /* RiggedBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RiggedBox.cpp; sourceTree = "<group>"; };
-		60426FF616CE5A4300C99541 /* RiggedBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiggedBox.h; sourceTree = "<group>"; };
-		60426FF716CE5A4300C99541 /* RiggedBoxScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RiggedBoxScene.cpp; sourceTree = "<group>"; };
-		60426FF816CE5A4300C99541 /* RiggedBoxScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiggedBoxScene.h; sourceTree = "<group>"; };
-		60426FF916CE5A4300C99541 /* RiggedBoxShapeDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RiggedBoxShapeDrawer.cpp; sourceTree = "<group>"; };
-		60426FFA16CE5A4300C99541 /* RiggedBoxShapeDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiggedBoxShapeDrawer.h; sourceTree = "<group>"; };
 		60426FFB16CE5A4300C99541 /* testApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testApp.cpp; sourceTree = "<group>"; };
 		60426FFC16CE5A4300C99541 /* testApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testApp.h; sourceTree = "<group>"; };
 		63a47ac60ffafc3bf093ec0f62a9a4d4 /* OscOutboundPacketStream.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = OscOutboundPacketStream.cpp; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscOutboundPacketStream.cpp; sourceTree = SOURCE_ROOT; };
@@ -219,6 +212,16 @@
 		9bf3aa0d4faa89d0f8a0e545403162be /* OscReceivedElements.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = OscReceivedElements.cpp; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscReceivedElements.cpp; sourceTree = SOURCE_ROOT; };
 		9f7986dc4eb05e75fce2c777500fdc01 /* ofxOscSender.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxOscSender.h; path = ../../../addons/ofxOsc/src/ofxOscSender.h; sourceTree = SOURCE_ROOT; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		D292868616D164B00016378A /* btPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btPicker.cpp; sourceTree = "<group>"; };
+		D292868716D164B00016378A /* btPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btPicker.h; sourceTree = "<group>"; };
+		D292868816D164B00016378A /* KeplerCube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeplerCube.cpp; sourceTree = "<group>"; };
+		D292868916D164B00016378A /* KeplerCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeplerCube.h; sourceTree = "<group>"; };
+		D292868A16D164B00016378A /* KeplerBtShapeDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeplerBtShapeDrawer.cpp; sourceTree = "<group>"; };
+		D292868B16D164B00016378A /* KeplerBtShapeDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeplerBtShapeDrawer.h; sourceTree = "<group>"; };
+		D292868C16D164B00016378A /* KeplerBtDynamics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeplerBtDynamics.cpp; sourceTree = "<group>"; };
+		D292868D16D164B00016378A /* KeplerBtDynamics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeplerBtDynamics.h; sourceTree = "<group>"; };
+		D292869416D169FE0016378A /* Kepler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Kepler.h; sourceTree = "<group>"; };
+		D292869516D16A400016378A /* Kepler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Kepler.cpp; sourceTree = "<group>"; };
 		D2B3E11316AEDA8B0099DC4A /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
 		D2B3E11616AEDA8B0099DC4A /* btBulletCollisionCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletCollisionCommon.h; sourceTree = "<group>"; };
 		D2B3E11716AEDA8B0099DC4A /* btBulletDynamicsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletDynamicsCommon.h; sourceTree = "<group>"; };
@@ -523,19 +526,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		60426FF416CE5A4300C99541 /* RiggedBox */ = {
-			isa = PBXGroup;
-			children = (
-				60426FF516CE5A4300C99541 /* RiggedBox.cpp */,
-				60426FF616CE5A4300C99541 /* RiggedBox.h */,
-				60426FF716CE5A4300C99541 /* RiggedBoxScene.cpp */,
-				60426FF816CE5A4300C99541 /* RiggedBoxScene.h */,
-				60426FF916CE5A4300C99541 /* RiggedBoxShapeDrawer.cpp */,
-				60426FFA16CE5A4300C99541 /* RiggedBoxShapeDrawer.h */,
-			);
-			path = RiggedBox;
-			sourceTree = "<group>";
-		};
 		641362ca659fafee4e81001be7d8d43c /* posix */ = {
 			isa = PBXGroup;
 			children = (
@@ -697,6 +687,23 @@
 				BBAB23BE13894E4700AA2426 /* GLUT.framework */,
 			);
 			name = "3rd party frameworks";
+			sourceTree = "<group>";
+		};
+		D292868516D164B00016378A /* Kepler */ = {
+			isa = PBXGroup;
+			children = (
+				D292868616D164B00016378A /* btPicker.cpp */,
+				D292868716D164B00016378A /* btPicker.h */,
+				D292868816D164B00016378A /* KeplerCube.cpp */,
+				D292868916D164B00016378A /* KeplerCube.h */,
+				D292868A16D164B00016378A /* KeplerBtShapeDrawer.cpp */,
+				D292868B16D164B00016378A /* KeplerBtShapeDrawer.h */,
+				D292868C16D164B00016378A /* KeplerBtDynamics.cpp */,
+				D292868D16D164B00016378A /* KeplerBtDynamics.h */,
+				D292869516D16A400016378A /* Kepler.cpp */,
+				D292869416D169FE0016378A /* Kepler.h */,
+			);
+			path = Kepler;
 			sourceTree = "<group>";
 		};
 		D2B3E10116AEDA8B0099DC4A /* ofxBt */ = {
@@ -1095,10 +1102,8 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				60426FF116CE5A4300C99541 /* btPicker.cpp */,
-				60426FF216CE5A4300C99541 /* btPicker.h */,
+				D292868516D164B00016378A /* Kepler */,
 				60426FF316CE5A4300C99541 /* main.cpp */,
-				60426FF416CE5A4300C99541 /* RiggedBox */,
 				60426FFB16CE5A4300C99541 /* testApp.cpp */,
 				60426FFC16CE5A4300C99541 /* testApp.h */,
 			);
@@ -1176,9 +1181,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E4B69B5A0A3A1756003C02F2 /* RiggedBox */ = {
+		E4B69B5A0A3A1756003C02F2 /* Kepler */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "RiggedBox" */;
+			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "Kepler" */;
 			buildPhases = (
 				E4B69B580A3A1756003C02F2 /* Sources */,
 				E4B69B590A3A1756003C02F2 /* Frameworks */,
@@ -1190,7 +1195,7 @@
 			dependencies = (
 				E4EEB9AC138B136A00A80321 /* PBXTargetDependency */,
 			);
-			name = RiggedBox;
+			name = Kepler;
 			productName = myOFApp;
 			productReference = E4B69B5B0A3A1756003C02F2 /* RiggedBoxDebug.app */;
 			productType = "com.apple.product-type.application";
@@ -1203,7 +1208,7 @@
 			attributes = {
 				LastUpgradeCheck = 0450;
 			};
-			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "RiggedBox" */;
+			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "Kepler" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1228,7 +1233,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				E4B69B5A0A3A1756003C02F2 /* RiggedBox */,
+				E4B69B5A0A3A1756003C02F2 /* Kepler */,
 			);
 		};
 /* End PBXProject section */
@@ -1316,12 +1321,13 @@
 				9AA2612816AAD5B700993CAA /* simpleFileLister.cpp in Sources */,
 				9AA2612916AAD5B700993CAA /* simpleLogger.cpp in Sources */,
 				D2B3E1F216AEDA8B0099DC4A /* ofxBt.cpp in Sources */,
-				60426FFD16CE5A4300C99541 /* btPicker.cpp in Sources */,
 				60426FFE16CE5A4300C99541 /* main.cpp in Sources */,
-				60426FFF16CE5A4300C99541 /* RiggedBox.cpp in Sources */,
-				6042700016CE5A4300C99541 /* RiggedBoxScene.cpp in Sources */,
-				6042700116CE5A4300C99541 /* RiggedBoxShapeDrawer.cpp in Sources */,
 				6042700216CE5A4300C99541 /* testApp.cpp in Sources */,
+				D292868E16D164B00016378A /* btPicker.cpp in Sources */,
+				D292868F16D164B00016378A /* KeplerCube.cpp in Sources */,
+				D292869016D164B00016378A /* KeplerBtShapeDrawer.cpp in Sources */,
+				D292869116D164B00016378A /* KeplerBtDynamics.cpp in Sources */,
+				D292869616D16A400016378A /* Kepler.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1587,7 +1593,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "RiggedBox" */ = {
+		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "Kepler" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B4E0A3A1720003C02F2 /* Debug */,
@@ -1596,7 +1602,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "RiggedBox" */ = {
+		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "Kepler" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B600A3A1757003C02F2 /* Debug */,

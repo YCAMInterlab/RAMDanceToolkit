@@ -15,7 +15,7 @@
 
 /*
  Bullet Continuous Collision Detection and Physics Library
- RiggedBox Demo
+ Kepler Demo
  Copyright (c) 2007 Starbreeze Studios
  
  This software is provided 'as-is', without any express or implied warranty.
@@ -31,7 +31,7 @@
  Written by: Marten Svanfeldt
  */
 
-#include "RiggedBoxScene.h"
+#include "KeplerBtDynamics.h"
 #include "LinearMath/btIDebugDraw.h"
 #include "BulletDynamics/Dynamics/btDynamicsWorld.h"
 
@@ -44,7 +44,7 @@
 #include "BulletCollision/CollisionShapes/btCompoundShape.h"
 #include "BulletCollision/CollisionShapes/btUniformScalingShape.h"
 #include "BulletDynamics/ConstraintSolver/btConstraintSolver.h"
-#include "RiggedBoxShapeDrawer.h"
+#include "KeplerBtShapeDrawer.h"
 #include "LinearMath/btQuickprof.h"
 #include "LinearMath/btDefaultMotionState.h"
 #include "LinearMath/btSerializer.h"
@@ -52,11 +52,11 @@
 #include "btBulletDynamicsCommon.h"
 #include "LinearMath/btIDebugDraw.h"
 
-#include "RiggedBox.h"
+#include "KeplerCube.h"
 
 #include <GLUT/GLUT.h>
 
-/// RiggedBox staffs
+/// Kepler staffs
 
 // Enrico: Shouldn't these three variables be real constants and not defines?
 
@@ -76,7 +76,7 @@ static const float GRAVITY_SCALE = 100.0f;
 
 
 
-void RiggedBoxScene::initPhysics()
+void KeplerBtDynamics::initPhysics()
 {
 	// Setup the basic world
 	m_collisionConfiguration = new btDefaultCollisionConfiguration();
@@ -100,13 +100,12 @@ void RiggedBoxScene::initPhysics()
 		//btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(1.5),btScalar(0.1),btScalar(1.5)));
         
 		btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(600.0f),
-                                                                 btScalar(10.0f),
+                                                                 btScalar(600.0f),
                                                                  btScalar(600.0f)));
         m_collisionShapes.push_back(groundShape);
 		btTransform groundTransform;
 		groundTransform.setIdentity();
-		//groundTransform.setOrigin(btVector3(0,-10,0));
-        groundTransform.setOrigin(btVector3(0,-5.0f,0));
+        groundTransform.setOrigin(btVector3(0.0f, -600.0f, 0.0f));
         
 		btCollisionObject* fixedGround = new btCollisionObject();
 		fixedGround->setCollisionShape(groundShape);
@@ -119,17 +118,17 @@ void RiggedBoxScene::initPhysics()
     
 	// Spawn one ragdoll
 	btVector3 startOffset(0,500,0);
-	spawnRiggedBox(startOffset);
+	spawnKepler(startOffset);
 	clientResetScene();
 }
 
-void RiggedBoxScene::spawnRiggedBox(const btVector3& startOffset)
+void KeplerBtDynamics::spawnKepler(const btVector3& startOffset)
 {
-	RiggedBox* ragDoll = new RiggedBox (m_dynamicsWorld, startOffset);
-	m_boxes.push_back(ragDoll);
+	KeplerCube* cube = new KeplerCube(m_dynamicsWorld, startOffset);
+	m_boxes.push_back(cube);
 }
 
-void RiggedBoxScene::update()
+void KeplerBtDynamics::update()
 {
 	//simple dynamics world doesn't handle fixed-time-stepping
 	float ms = getDeltaTimeMicroseconds();
@@ -142,7 +141,7 @@ void RiggedBoxScene::update()
 		m_dynamicsWorld->stepSimulation(ms / 1000000.f);
 }
 
-void RiggedBoxScene::draw()
+void KeplerBtDynamics::draw()
 {
     GLfloat light_ambient[] = { btScalar(0.2), btScalar(0.2), btScalar(0.2), btScalar(1.0) };
 	GLfloat light_diffuse[] = { btScalar(1.0), btScalar(1.0), btScalar(1.0), btScalar(1.0) };
@@ -214,21 +213,21 @@ void RiggedBoxScene::draw()
 	}
 }
 
-void RiggedBoxScene::keyPressed(int key)
+void KeplerBtDynamics::keyPressed(int key)
 {
 	switch (key) {
         case 'e': {
             btVector3 startOffset(ofRandom(-295,295),ofRandom(100, 500),ofRandom(-295,295));
-            spawnRiggedBox(startOffset);
+            spawnKepler(startOffset);
         }
     }
 }
 
-void RiggedBoxScene::exitPhysics()
+void KeplerBtDynamics::exitPhysics()
 {
 	for (int i=0;i<m_boxes.size();i++) {
-		RiggedBox* doll = m_boxes[i];
-		delete doll;
+		KeplerCube* cube = m_boxes[i];
+		delete cube;
 	}
     
 	//cleanup in the reverse order of creation/initialization
@@ -271,7 +270,7 @@ const int maxNumObjects = 16384;
 btTransform startTransforms[maxNumObjects];
 btCollisionShape* gShapePtr[maxNumObjects];//1 rigidbody has 1 shape (no re-use of shapes)
 
-RiggedBoxScene::RiggedBoxScene()
+KeplerBtDynamics::KeplerBtDynamics()
 //see btIDebugDraw.h for modes
 :
 m_dynamicsWorld(0),
@@ -283,11 +282,11 @@ m_enableshadows(true),
 m_sundirection(btVector3(1,-2,1)*1000),
 m_defaultContactProcessingThreshold(BT_LARGE_FLOAT)
 {
-	m_shapeDrawer = new RiggedBoxShapeDrawer();
+	m_shapeDrawer = new KeplerBtShapeDrawer();
 	m_shapeDrawer->enableTexture(true);
 }
 
-RiggedBoxScene::~RiggedBoxScene()
+KeplerBtDynamics::~KeplerBtDynamics()
 {
     exitPhysics();
     
@@ -295,7 +294,7 @@ RiggedBoxScene::~RiggedBoxScene()
 		delete m_shapeDrawer;
 }
 
-void RiggedBoxScene::setup(void)
+void KeplerBtDynamics::setup(void)
 {    
     initPhysics();
 }
@@ -303,7 +302,7 @@ void RiggedBoxScene::setup(void)
 
 //#define NUM_SPHERES_ON_DIAGONAL 9
 
-btRigidBody* RiggedBoxScene::localCreateRigidBody(float mass,
+btRigidBody* KeplerBtDynamics::localCreateRigidBody(float mass,
                                                    const btTransform& startTransform,
                                                    btCollisionShape* shape)
 {
@@ -331,7 +330,7 @@ btRigidBody* RiggedBoxScene::localCreateRigidBody(float mass,
 }
 
 //
-void RiggedBoxScene::renderscene(int pass)
+void KeplerBtDynamics::renderscene(int pass)
 {
 	btScalar	m[16];
 	btMatrix3x3	rot;rot.setIdentity();
@@ -396,7 +395,7 @@ void RiggedBoxScene::renderscene(int pass)
 #include "BulletCollision/BroadphaseCollision/btAxisSweep3.h"
 
 
-void RiggedBoxScene::clientResetScene()
+void KeplerBtDynamics::clientResetScene()
 {
 	int numObjects = 0;
     

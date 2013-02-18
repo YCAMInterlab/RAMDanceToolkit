@@ -11,18 +11,18 @@
 #include "Line.h"
 #include "Donuts.h"
 #include "Stamp.h"
-#include "UpsideDown.h"
 #include "Expansion.h"
 #include "Graph3D.h"
 #include "Graph2D.h"
 #include "Particles.h"
 #include "Abacus.h"
+#include "UpsideDown.h"
+#include "Kepler.h"
 
 BasicActor basicActor;
 Graph3D graph3D;
 Graph2D graph2D;
 Line drawLines;
-UpsideDown upsideDown;
 Expansion expansion;
 BigBox bigbox;
 Future future;
@@ -31,6 +31,8 @@ Donuts donuts;
 Stamp stamp;
 Particles particles;
 Abacus abacus;
+UpsideDown upsideDown;
+Kepler kepler;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -63,6 +65,8 @@ void testApp::setup()
 	scenes.push_back( stamp.getPtr() );
 	scenes.push_back( particles.getPtr() );
 	scenes.push_back( abacus.getPtr() );
+    scenes.push_back( upsideDown.getPtr() );
+    scenes.push_back( kepler.getPtr() );
 	
 	sceneManager.setup(scenes);
 }

@@ -1,8 +1,8 @@
 #include "testApp.h"
 
-#include "UpsideDown.h"
+#include "Kepler.h"
 
-UpsideDown upsideDown;
+Kepler kepler;
 
 
 #pragma mark - oF methods
@@ -24,7 +24,7 @@ void testApp::setup()
 	// ------------------
     
     vector<ramBaseScene*> scenes;
-	scenes.push_back(upsideDown.getPtr());
+	scenes.push_back(kepler.getPtr());
 	sceneManager.setup(scenes);
 }
 
