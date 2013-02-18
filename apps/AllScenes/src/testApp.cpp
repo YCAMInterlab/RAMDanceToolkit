@@ -109,11 +109,9 @@ void testApp::draw()
 	main_display_width = min(main_display_width, ofGetWidth());
 	main_display_height = min(main_display_height, ofGetHeight());
 	
-	ramCameraManager::instance().setActiveCamera(0);
-	
 	ofPushView();
 	ofViewport(0, 0, 1920, 1200);
-	
+	ramCameraManager::instance().setActiveCamera(0);
 	ramBeginCamera();
 	drawFloor();
 	ramEndCamera();
