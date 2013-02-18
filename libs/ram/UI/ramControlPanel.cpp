@@ -115,6 +115,9 @@ void ramControlPanel::update(ofEventArgs &e)
 void ramControlPanel::addPanel(ramControllable* control)
 {
 	ofxUICanvas *panel = new ofxUICanvas(0, 0, ramGetGUI().kLength+ramGetGUI().kXInit*2.0, ofGetScreenHeight());
+	
+	panel->addWidgetDown(new ofxUILabel(control->getName(), OFX_UI_FONT_LARGE));
+	panel->addSpacer(kLength, 2);
 	control->setupControlPanel(panel);
 	getTabbedCanvas().add(panel);
 }

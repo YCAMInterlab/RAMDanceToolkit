@@ -29,6 +29,7 @@ public:
 	void setupControlPanel(ofxUICanvas* panel_)
 	{
 		panel = panel_;
+		
 		ofAddListener(panel->newGUIEvent, this, &BasicActor::onPanelChanged);
 	}
 	
