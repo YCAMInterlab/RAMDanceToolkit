@@ -62,6 +62,7 @@ public:
 			
 			node.beginTransform();
 			ofBox(mBoxSize);
+			ofDrawAxis(mBoxSize*1.5);
 			node.endTransform();
 			
 			if (mShowName)
