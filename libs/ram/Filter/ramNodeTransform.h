@@ -30,7 +30,9 @@ public:
 		return result;
 	}
 	
-	inline const ramNodeArray& getResult() { return result; }
+	const ramNodeArray& get(size_t index = 0) const { return result; }
+	size_t getSize() const { return 1; }
+	
 	inline const string getName() { return "ramTranslate"; };
 	
 protected:
@@ -67,7 +69,9 @@ public:
 		return result;
 	}
 	
-	inline const ramNodeArray& getResult() { return result; }
+	const ramNodeArray& get(size_t index = 0) const { return result; }
+	size_t getSize() const { return 1; }
+	
 	inline const string getName() { return "ramRotate"; };
 	
 protected:
@@ -98,7 +102,9 @@ public:
 		return result;
 	}
 	
-	inline const ramNodeArray& getResult() { return result; }
+	const ramNodeArray& get(size_t index = 0) const { return result; }
+	size_t getSize() const { return 1; }
+	
 	inline const string getName() { return "ramTranslate"; };
 	
 protected:
@@ -128,7 +134,9 @@ public:
 		return result;
 	}
 	
-	inline const ramNodeArray& getResult() { return result; }
+	const ramNodeArray& get(size_t index = 0) const { return result; }
+	size_t getSize() const { return 1; }
+	
 	inline const string getName() { return "ramNodeLocalTransform"; };
 	
 protected:

@@ -4,8 +4,7 @@
 
 #include "ramSimpleShadow.h"
 
-void ramInit();
-string ramToResourcePath(string path);
+void ramInitialize();
 
 class ramSharedData
 {

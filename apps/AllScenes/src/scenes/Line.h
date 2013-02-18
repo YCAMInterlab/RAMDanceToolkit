@@ -2,7 +2,7 @@
 
 #include "ramNodeLine.h"
 
-class Line : public ramBaseScene
+class LineScene : public ramBaseScene
 {
 	
 public:
@@ -145,13 +145,13 @@ public:
 	
 	LineContext lines[NUM_LINE];
 	
-	Line()
+	LineScene()
 	{
 	}
 		
 	void setup()
 	{
-		ofAddListener(ofEvents().keyPressed, this, &Line::onKeyPressed);
+		ofAddListener(ofEvents().keyPressed, this, &LineScene::onKeyPressed);
 	}
 	
 	void onKeyPressed(ofKeyEventArgs &e)

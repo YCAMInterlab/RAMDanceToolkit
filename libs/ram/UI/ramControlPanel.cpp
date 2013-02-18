@@ -13,6 +13,9 @@ ramControlPanel& ramControlPanel::instance()
 
 ramControlPanel::ramControlPanel()
 {
+	kDim = 16;
+	kXInit = OFX_UI_GLOBAL_WIDGET_SPACING;
+	kLength = 320-kXInit;
 	mR = 0;
 	mG = 0;
 	mB = 0;

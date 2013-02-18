@@ -125,7 +125,8 @@ public:
 			{
 				if (player) player->stop();
 			}
-			cout << "trigger up: " << ofGetElapsedTimef() << endl;
+			
+			// cout << "trigger up: " << ofGetElapsedTimef() << endl;
 		}
 		
 		void triggerDown()
@@ -140,7 +141,7 @@ public:
 			}
 
 			
-			cout << "trigger dow: " << ofGetElapsedTimef() << endl;
+			// cout << "trigger dow: " << ofGetElapsedTimef() << endl;
 		}
 		
 	private:

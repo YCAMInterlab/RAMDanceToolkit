@@ -1,6 +1,7 @@
 #include "ramCameraManager.h"
 
 #include "ramSharedData.h"
+#include "ramUtils.h"
 
 ramCameraManager* ramCameraManager::_instance = NULL;
 

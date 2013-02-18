@@ -5,7 +5,7 @@
 
 #include <numeric>
 
-void ramInit()
+void ramInitialize()
 {
 	static bool inited = false;
 	if (inited) return;
@@ -19,7 +19,7 @@ void ramInit()
 	ramActorManager::instance().setup();
 	
 	ramPhysics::instance();
-
+	
 	ramGetGUI().setup();
 }
 

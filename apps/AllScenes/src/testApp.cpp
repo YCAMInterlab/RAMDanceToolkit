@@ -43,9 +43,6 @@ Kepler kepler;
 #include "Graph3D.h"
 Graph3D graph3D;
 
-
-
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -56,7 +53,7 @@ void testApp::setup()
 	
 	/// ram setup
 	// ------------------
-	ramInit();
+	ramInitialize();
 	oscReceiver.setup(10000);
 	
 	/// scenes setup

@@ -23,7 +23,6 @@ public:
 		
 		mGhost.setupControlPanel(panel);
 		ofAddListener(panel->newGUIEvent, this, &Future::onValueChanged);
-
 	}
 	
 	void setup()
@@ -50,7 +49,7 @@ public:
 		ofPushStyle();
 		ofNoFill();
 		
-		ramDrawBasicActor( (ramActor&)mGhost.getResult() );
+		ramDrawBasicActor( (ramActor&)mGhost.get() );
 
 		ofPopStyle();
 		glPopAttrib();

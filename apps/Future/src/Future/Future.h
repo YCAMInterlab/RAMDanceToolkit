@@ -2,13 +2,13 @@
 
 class Future : public ramBaseScene
 {
-	
+
 	ramGhost mGhost;
-	
+
 public:
-	
+
 	Future() {}
-	
+
 	void setupControlPanel(ofxUICanvas* panel)
 	{
 		ramControlPanel &gui = ramGetGUI();
@@ -21,22 +21,22 @@ public:
 		mGhost.setupControlPanel(panel);
 		ofAddListener(panel->newGUIEvent, this, &Future::onValueChanged);
 	}
-	
+
 	void setup()
 	{
-		
+
 	}
-	
+
 	void update()
 	{
-		
+
 	}
-	
+
 	void draw()
 	{
-		
+
 	}
-	
+
 	void drawActor( ramActor& actor )
 	{
 		mGhost.update( actor );
@@ -45,16 +45,16 @@ public:
 		glEnable(GL_DEPTH_TEST);
 		ofPushStyle();
 		ofNoFill();
-		
-		ramDrawBasicActor( (ramActor&)mGhost.getResult() );
+
+		ramDrawBasicActor( (ramActor&)mGhost.get() );
 
 		ofPopStyle();
 		glPopAttrib();
 	}
-	
+
 	void drawRigid(ramRigidBody &rigid)
 	{
-		
+
 	}
 	
 	void onValueChanged(ofxUIEventArgs& e)
