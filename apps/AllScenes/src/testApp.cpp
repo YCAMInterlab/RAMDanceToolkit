@@ -73,6 +73,7 @@ void testApp::setup()
 	scenes.push_back( graph2D.getPtr() );
     scenes.push_back( upsideDown.getPtr() );
     scenes.push_back( kepler.getPtr() );
+	
 	sceneManager.setup(scenes);
 	
     ofEasyCam *cam = (ofEasyCam*)ramCameraManager::instance().getCamera(0);
