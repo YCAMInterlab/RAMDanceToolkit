@@ -88,6 +88,11 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
+	ofViewport(0, 0, 1920, 1200);
+	ramCameraManager::instance().setActiveCamera(0);
+	ramBeginCamera();
+	ramEndCamera();
+	
 	/// Entities update
 	// ------------------
 	oscReceiver.update();
@@ -123,24 +128,24 @@ void testApp::draw()
 	
 	int screen_w = 1280, screen_h = 720;
 	
-	int inv_screen_height = ofGetHeight() - screen_h;
-	for (int i = 0; i < 5; i++)
-	{
-		ofPushView();
-		
-		ofCamera *screen_camera = ramCameraManager::instance().getCamera(i + 1);
-		
-		ofViewport(ofRectangle(main_display_width + i * screen_w, inv_screen_height, screen_w, screen_w));
-		ramCameraManager::instance().setActiveCamera(i + 1);
-		
-		screen_camera->begin();
-		drawFloor();
-		screen_camera->end();
-		
-		sceneManager.draw();
-		
-		ofPopView();
-	}
+//	int inv_screen_height = ofGetHeight() - screen_h;
+//	for (int i = 0; i < 5; i++)
+//	{
+//		ofPushView();
+//		
+//		ofCamera *screen_camera = ramCameraManager::instance().getCamera(i + 1);
+//		
+//		ofViewport(ofRectangle(main_display_width + i * screen_w, inv_screen_height, screen_w, screen_w));
+//		ramCameraManager::instance().setActiveCamera(i + 1);
+//		
+//		screen_camera->begin();
+//		drawFloor();
+//		screen_camera->end();
+//		
+//		sceneManager.draw();
+//		
+//		ofPopView();
+//	}
 	
 	ramCameraManager::instance().setActiveCamera(0);
 	
