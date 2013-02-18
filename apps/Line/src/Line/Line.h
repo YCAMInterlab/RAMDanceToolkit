@@ -83,13 +83,12 @@ public:
 			if (!active) return;
 			
 			nodeLine.curve(curve);
+			nodeLine.resampling(0.3);
 			
 			if (extend > 0)
 			{
 				nodeLine.extend(extend);
 			}
-			
-			nodeLine.resampling(0.3);
 			
 			if (spiral_radius > 0)
 			{
