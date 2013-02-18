@@ -54,6 +54,13 @@ public:
 		panel->addWidgetDown(new ofxUILabel(segment.name, OFX_UI_FONT_LARGE));
 		panel->addSpacer(gui.kLength, 2);
 		panel->addButton("Reset: " + segment.name, false, 40, 40);
+		
+		panel->addSlider("Joint R", 0, 255, &r, 95, gui.kDim);
+		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
+		panel->addSlider("Joint G", 0, 255, &g, 95, gui.kDim);
+		panel->addSlider("Joint B", 0, 255, &b, 95, gui.kDim);
+		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
+		
 		panel->addSlider(segment.name + " X", -600.0, 600.0, &segment.translate.x, 95, gui.kDim);
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
 		panel->addSlider(segment.name + " Y", -600.0, 600.0, &segment.translate.y, 95, gui.kDim);
@@ -61,12 +68,7 @@ public:
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 		panel->addSlider(segment.name + " Scale", 0.01, 5.0, &segment.scale, gui.kLength, gui.kDim);
 		
-		panel->addSlider("Joint R", 0, 255, &r, 95, gui.kDim);
-		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
-		panel->addSlider("Joint G", 0, 255, &g, 95, gui.kDim);
-		panel->addSlider("Joint B", 0, 255, &b, 95, gui.kDim);
-		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
-	}
+		}
 	
 	void update()
 	{

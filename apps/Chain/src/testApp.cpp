@@ -66,7 +66,7 @@ void testApp::setup()
 	ofBackground(0);
 	oscReceiver.setup(10000);
 	
-	ramInit();
+	ramInitialize();
 	
 	// enable ramBaseApp::setup, update, draw, exit
 	ramEnableAllEvents();
