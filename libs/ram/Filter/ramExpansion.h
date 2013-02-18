@@ -22,13 +22,22 @@ public:
 		panel->addSlider("Expand", 0.0, kExpandMax, &mExpand, gui.kLength, gui.kDim);
 	}
 	
-	const ramNodeArray& update(const ramNodeArray &nodeArray)
+	const ramNodeArray& get(size_t index) const { return expandedArray; }
+	size_t getSize() const { return 1; }
+	
+	inline const string getName() { return "ramExpansion"; };
+	
+protected:
+	
+	ramNodeArray expandedArray;
+	
+	const ramNodeArray& filter(const ramNodeArray& src)
 	{
-		expandedArray = nodeArray;
+		expandedArray = src;
 		
 		for (int i=0; i<expandedArray.getNumNode(); i++)
 		{
-			const ramNode &node = nodeArray.getNode(i);
+			const ramNode &node = src.getNode(i);
 			ramNode &expandedNode = expandedArray.getNode(i);
 			
 			ofMatrix4x4 m = node.getGlobalTransformMatrix();
@@ -42,13 +51,5 @@ public:
 		
 		return expandedArray;
 	}
-	
-	const ramNodeArray& get(size_t index) const { return expandedArray; }
-	size_t getSize() const { return 1; }
-	
-	inline const string getName() { return "ramExpansion"; };
-	
-protected:
-	ramNodeArray expandedArray;
 	
 };

@@ -23,7 +23,6 @@ public:
 		
 		mGhost.setupControlPanel(panel);
 		ofAddListener(panel->newGUIEvent, this, &Future::onValueChanged);
-
 	}
 	
 	void setup()

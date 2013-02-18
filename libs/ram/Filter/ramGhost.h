@@ -29,13 +29,33 @@ public:
 		panel->addSlider("Speed", 0.0, 255.0, &speed, gui.kLength, gui.kDim);
 	}
 	
-	const ramNodeArray& update(const ramNodeArray &present)
+	inline void setDistance(const float d) { distance = d; }
+	inline void setSpeed(const float s) { speed = s; }
+	inline void setHistorySize(const unsigned int m) { historySize = m; }
+	
+	inline float getdistance() { return distance; }
+	inline float getspeed() { return speed; }
+	inline unsigned int getHistorySize() { return historySize; }
+
+	const ramNodeArray& get(size_t index = 0) const { return ghost; }
+	size_t getSize() const { return 1; }
+	
+	inline const string getName() { return "ramGhost"; };
+	
+protected:
+	ramNodeArray ghost;
+	deque<ramNodeArray> record;
+	
+	int historySize;
+	float distance, speed;
+	
+	const ramNodeArray& filter(const ramNodeArray& src)
 	{
-		if (present.getNumNode() != 0)
-			record.push_back(present);
+		if (src.getNumNode() != 0)
+			record.push_back(src);
 		
-		if (ghost.getNumNode() != present.getNumNode())
-			ghost = present;
+		if (ghost.getNumNode() != src.getNumNode())
+			ghost = src;
 		
 		if (record.size() > historySize)
 			record.pop_front();
@@ -69,24 +89,5 @@ public:
 		
 		return ghost;
 	}
-	
-	inline void setDistance(const float d) { distance = d; }
-	inline void setSpeed(const float s) { speed = s; }
-	inline void setHistorySize(const unsigned int m) { historySize = m; }
-	
-	inline float getdistance() { return distance; }
-	inline float getspeed() { return speed; }
-	inline unsigned int getHistorySize() { return historySize; }
 
-	const ramNodeArray& get(size_t index = 0) const { return ghost; }
-	size_t getSize() const { return 1; }
-	
-	inline const string getName() { return "ramGhost"; };
-	
-protected:
-	ramNodeArray ghost;
-	deque<ramNodeArray> record;
-	
-	int historySize;
-	float distance, speed;
 };

@@ -30,18 +30,6 @@ public:
 		clear();
 	}
 	
-	const ramNodeArray& update(ramNodeArray& src)
-	{
-		if (ofGetElapsedTimef() > mLastRecordTime)
-		{
-			createStamp(src);
-			if (kMaxStamps < mStamps.size())
-				mStamps.pop_front();
-		}
-		
-		return src;
-	}
-	
 	void onPanelChanged(ofxUIEventArgs& e)
 	{
 		string name = e.widget->getName();
@@ -58,9 +46,6 @@ public:
 		}
 	}
 	
-	const string getName() { return "ramStamp"; }
-	
-	
 #pragma mark -
 	
 	const ramNodeArray& get(size_t index = 0) const { return mStamps[index]; }
@@ -72,7 +57,7 @@ public:
 		mStamps.clear();
 	}
 	
-	const ramNodeArray createStamp(ramNodeArray& src)
+	const ramNodeArray createStamp(const ramNodeArray& src)
 	{
 		mLastRecordTime += mRecSpan;
 		ramNodeArray copy = src;
@@ -86,5 +71,21 @@ public:
 	inline int getNumStamps() { return mStamps.size(); }
 	inline deque<ramNodeArray>& getStamps() { return mStamps; }
 	inline ramNodeArray& getStamp(const int index) { return mStamps.at(index); }
+	
+	const string getName() { return "ramStamp"; }
+	
+protected:
+	
+	const ramNodeArray& filter(const ramNodeArray& src)
+	{
+		if (ofGetElapsedTimef() > mLastRecordTime)
+		{
+			createStamp(src);
+			if (kMaxStamps < mStamps.size())
+				mStamps.pop_front();
+		}
+		
+		return src;
+	}
 	
 };
