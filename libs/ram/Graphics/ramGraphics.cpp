@@ -159,15 +159,28 @@ void ramDrawBasicRigid(const ramRigidBody& rigid,
 		node.endTransform();
 	}
 }
-
-void ramDrawActorCube(ramActor& actor, ofColor c)
+void ramDrawNodes(ramNodeArray& nodeArray,
+				  const ofColor& jointColor,
+				  const ofColor& lineColor)
 {
-	ofVec3f maxPos = actor.getNode( ramActor::JOINT_CHEST ).getGlobalPosition();
-	ofVec3f minPos = actor.getNode( ramActor::JOINT_CHEST ).getGlobalPosition();
+	if (nodeArray.isActor())
+		ramDrawBasicActor((ramActor &) nodeArray);
 	
-	for (int j=0; j<actor.getNumNode(); j++)
+	else
+		ramDrawBasicRigid((ramRigidBody &) nodeArray);
+}
+
+
+
+
+void ramDrawActorCube(ramNodeArray& nodeArray, ofColor c)
+{
+	ofVec3f maxPos = nodeArray.getNode( ramActor::JOINT_CHEST ).getGlobalPosition();
+	ofVec3f minPos = nodeArray.getNode( ramActor::JOINT_CHEST ).getGlobalPosition();
+	
+	for (int j=0; j<nodeArray.getNumNode(); j++)
 	{
-		ofVec3f pos = actor.getNode(j).getGlobalPosition();
+		ofVec3f pos = nodeArray.getNode(j).getGlobalPosition();
 		
 		if( maxPos.x <= pos.x ) maxPos.x = pos.x;
 		if( maxPos.y <= pos.y ) maxPos.y = pos.y;
@@ -183,19 +196,14 @@ void ramDrawActorCube(ramActor& actor, ofColor c)
 	axis = (maxPos + minPos) / 2;
 	
 	ofPushStyle();
+	ofPushMatrix();
 	{
-		ofSetLineWidth( 2 );
-		ofSetColor( c );
-		
-		ofPushMatrix();
-		{
-			ofTranslate( axis.x, axis.y, axis.z );
-			ofScale( scale.x, scale.y, scale.z );
-			ofNoFill();
-			ofBox(1);
-		}
-		ofPopMatrix();
+		ofTranslate( axis.x, axis.y, axis.z );
+		ofScale( scale.x, scale.y, scale.z );
+		ofNoFill();
+		ofBox(1);
 	}
+	ofPopMatrix();
 	ofPopStyle();
 }
 
