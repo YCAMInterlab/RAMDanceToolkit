@@ -36,6 +36,12 @@ SoundCube soundcube;
 
 int active_camera_id = 0;
 
+int main_display_width = 1920;
+int main_display_height = 1200;
+
+int screen_width = 1280;
+int screen_height = 720;
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -70,10 +76,14 @@ void testApp::setup()
 	
 	sceneManager.setup(scenes);
 	
+    ofEasyCam *cam = (ofEasyCam*)ramCameraManager::instance().getCamera(0);
+    cam->setTranslationKey('z');
+    
 	// for 5 screens
 	for (int i = 0; i < 5; i++)
 	{
 		ofEasyCam *cam = ramCameraManager::instance().createCamera<ofEasyCam>();
+        cam->setTranslationKey('z');
 		cam->disableMouseInput();
 	}
 	
@@ -91,7 +101,7 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	ofViewport(0, 0, 1920, 1200);
+	ofViewport(0, 0, main_display_width, main_display_height);
 	ramCameraManager::instance().setActiveCamera(active_camera_id);
 	ramBeginCamera();
 	ramEndCamera();
@@ -110,33 +120,16 @@ void testApp::update()
 void testApp::draw()
 {
 	setDrawFloorAuto(true);
-	
-	int main_display_width = 1920;
-	int main_display_height = 1200;
-	
-	main_display_width = min(main_display_width, ofGetWidth());
-	main_display_height = min(main_display_height, ofGetHeight());
-	
-	ofPushView();
-	ofViewport(0, 0, 1920, 1200);
-	ramCameraManager::instance().setActiveCamera(active_camera_id);
-	ramBeginCamera();
-	drawFloor();
-	ramEndCamera();
-	
-	sceneManager.draw();
-	ofPopView();
-	
-	int screen_w = 1280, screen_h = 720;
-	
-	int inv_screen_height = ofGetHeight() - screen_h;
+    
+    int screen_y_offset = main_display_height - screen_height;
+    
 	for (int i = 0; i < 5; i++)
 	{
 		ofPushView();
 		
 		ofCamera *screen_camera = ramCameraManager::instance().getCamera(i + 1);
 		
-		ofViewport(ofRectangle(main_display_width + i * screen_w, inv_screen_height, screen_w, screen_w));
+		ofViewport(ofRectangle(main_display_width + i * screen_width, screen_y_offset, screen_width, screen_height));
 		ramCameraManager::instance().setActiveCamera(i + 1);
 		
 		screen_camera->begin();
@@ -152,7 +145,21 @@ void testApp::draw()
 	
 	setDrawFloorAuto(false);
     
-    ofDrawBitmapString("active camera id: " + ofToString(active_camera_id), 400, 20);
+    string str;
+    str += "active camera id: " + ofToString(active_camera_id) + "\n";
+    str += "fps: " + ofToString(ofGetFrameRate(), 0);
+    ofDrawBitmapString(str, 400, 20);
+    
+    ofPushView();
+	ofViewport(0, 0, main_display_width, main_display_height);
+	ramCameraManager::instance().setActiveCamera(active_camera_id);
+	ramBeginCamera();
+	drawFloor();
+	ramEndCamera();
+	
+	sceneManager.draw();
+	ofPopView();
+
 }
 
 #pragma mark - ram methods
