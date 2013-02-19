@@ -15,15 +15,7 @@ public:
 	void setupControlPanel(ofxUICanvas* panel)
 	{
 		ramControlPanel &gui = ramGetGUI();
-		
 		gui.addSlider("amount", 0.0, 1.0, &amount);
-		
-		ofAddListener(panel->newGUIEvent, this, &ramLowPassFilter::onPanelChanged);
-	}
-	
-	void onPanelChanged(ofxUIEventArgs& e)
-	{
-		
 	}
 	
 	const string getName() { return "ramLowPassFilter"; }

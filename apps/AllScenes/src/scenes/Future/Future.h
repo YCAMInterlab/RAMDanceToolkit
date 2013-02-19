@@ -53,7 +53,7 @@ public:
 			ofPushStyle();
 			ofNoFill();
 			
-			ramDrawNodes( ghost );
+			ramDrawNodes( ghost, ramColor::RED_LIGHT );
 			
 			if (draw_line)
 				ramDrawNodeCorresponds(NA, ghost);
