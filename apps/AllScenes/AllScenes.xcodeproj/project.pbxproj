@@ -81,6 +81,9 @@
 
 /* Begin PBXFileReference section */
 		27B8489116D34A02000D321D /* ColorGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorGrid.h; sourceTree = "<group>"; };
+		27B8489316D35466000D321D /* ThreePoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreePoints.h; sourceTree = "<group>"; };
+		27B8489416D35513000D321D /* SphereMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphereMesh.h; sourceTree = "<group>"; };
+		27B8489516D3554B000D321D /* GeometryHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryHelpers.h; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
 		60E559B116D3366A00051FE9 /* HastyChase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HastyChase.h; sourceTree = "<group>"; };
 		9A2B3F4016D325C7001CBFC9 /* Abacus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Abacus.h; sourceTree = "<group>"; };
@@ -169,6 +172,17 @@
 			path = scenes/ColorGrid;
 			sourceTree = "<group>";
 		};
+		27B8489216D35466000D321D /* ThreePoints */ = {
+			isa = PBXGroup;
+			children = (
+				27B8489316D35466000D321D /* ThreePoints.h */,
+				27B8489416D35513000D321D /* SphereMesh.h */,
+				27B8489516D3554B000D321D /* GeometryHelpers.h */,
+			);
+			name = ThreePoints;
+			path = scenes/ThreePoints;
+			sourceTree = "<group>";
+		};
 		601900561644E22B001930AA /* ram */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +211,7 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				27B8489216D35466000D321D /* ThreePoints */,
 				27B8489016D34A02000D321D /* ColorGrid */,
 				60E559B016D3366A00051FE9 /* HastyChase */,
 				9A2B3F3F16D325C7001CBFC9 /* Abacus */,

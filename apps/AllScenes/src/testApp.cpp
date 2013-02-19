@@ -46,6 +46,8 @@ HastyChase hastyChase;
 #include "ColorGrid.h"
 ColorGrid colorGrid;
 
+#include "ThreePoints.h"
+ThreePoints threePoints;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -77,6 +79,7 @@ void testApp::setup()
     scenes.push_back( kepler.getPtr() );
 	scenes.push_back( hastyChase.getPtr() );
 	scenes.push_back( colorGrid.getPtr() );
+	scenes.push_back( threePoints.getPtr() );
 	sceneManager.setup(scenes);
 }
 
