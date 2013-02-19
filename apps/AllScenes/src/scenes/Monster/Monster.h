@@ -6,14 +6,16 @@ class Monster : public ramBaseScene
 {
 public:
 	
-	bool reset, randomizeTopology, swapLeftRight, swapArmsLegs;
+	bool reset, randomizeTopology, randomizeGeometry, swapLeftRight, swapArmsLegs;
 	ramMonster monster;
 		
 	void setupControlPanel(ofxUICanvas* panel)
 	{
-		randomize = false;
+		randomizeTopology = false;
+		randomizeGeometry = false;
 		panel->addButton("Reset", &reset, 40, 40);
 		panel->addButton("Randomize Topology", &randomizeTopology, 40, 40);
+		panel->addButton("Randomize Geometry", &randomizeGeometry, 40, 40);
 		panel->addButton("Swap Left/Right", &swapLeftRight, 40, 40);
 		panel->addButton("Swap Arms/Legs", &swapArmsLegs, 40, 40);
 	}
