@@ -1,35 +1,50 @@
 #include "testApp.h"
 
-bool showDebug = false;
-bool backgroundClear = false;
+bool showDebug = true;
+bool backgroundClear = true;
 bool backgroundCalibrate = false;
+bool setDeadZones = false;
 float backgroundThreshold = 5;
 
-float blurRadius = 2;
-float circleThreshold = 160;
-float minRadius = 2;
-float maxRadius = 10;
-float sampleRadius = 12;
+float blurRadius = 7;
+float circleThreshold = 80;
+float minRadius = 1;
+float maxRadius = 12;
+float sampleRadius = 1.2;
 
 bool registrationClear = false;
 bool registrationCalibrate = false;
-float registrationCalibrationRate = 8;
+float registrationCalibrationRate = 10;
+float registrationCalibrationAccuracy = 1000;
+
+float maxVelocity = 2000;
+float filterRate = .1;
+
+bool trackedLastFrame = false;
+
+bool bySerial(const ofPtr<CircleSensor>& a, const ofPtr<CircleSensor>& b) {
+    return a->kinect.getSerial() < b->kinect.getSerial();
+}
 
 void testApp::setup() {
 	ofSetVerticalSync(true);
+    ofEnableSmoothing();
 	
-	int n = ofxKinect::numAvailableDevices();
-	cout << "total devices: " << n << endl;
+	int n = ofxKinect::numAvailableDevices();    
 	while(sensors.size() < n) {
 		sensors.push_back(ofPtr<CircleSensor>(new CircleSensor()));
 		sensors.back()->setup();
 	}
+    ofSort(sensors, bySerial);
+    
+    ofxXmlSettings xml;
+    xml.loadFile("settings.xml");
 	
 	float dim = 20;
 	float xInit = OFX_UI_GLOBAL_WIDGET_SPACING; 
 	float length = 320 - xInit;
-	gui = new ofxUICanvas(0, 0, length + xInit * 2, ofGetHeight());
-	gui->setFont("/System/Library/Fonts/HelveticaLight.ttf");
+	gui = new ofxUICanvas(0, 0, length + xInit * 2, 2560);
+	gui->setFont("/System/Library/Fonts/Geneva.dfont");
 	ofColor cb(64, 192),
 	co(192, 192),
 	coh(128, 192),
@@ -39,8 +54,11 @@ void testApp::setup() {
 	cpo(255, 192);
 	gui->setUIColors(cb, co, coh, cf, cfh, cp, cpo);
 	
+    gui->addLabel("Kinects: " +  ofToString(ofxKinect::numConnectedDevices()) + " / " + ofToString(ofxKinect::numTotalDevices()), OFX_UI_FONT_SMALL);
+    
 	gui->addLabel("Background", OFX_UI_FONT_LARGE);
 	gui->addLabelToggle("Debug", &showDebug, length, dim);
+	gui->addLabelButton("Set dead zones", &setDeadZones, length, dim);
 	gui->addLabelButton("Clear", &backgroundClear, length, dim);
 	gui->addLabelToggle("Calibrate", &backgroundCalibrate, length, dim);
 	gui->addSlider("Threshold", 0, 255, &backgroundThreshold, length, dim);
@@ -55,14 +73,18 @@ void testApp::setup() {
 	gui->addLabel("Registration", OFX_UI_FONT_LARGE);
 	gui->addLabelButton("Clear", &registrationClear, length, dim);
 	gui->addLabelToggle("Calibrate", &registrationCalibrate, length, dim);
-	gui->addSlider("Calibration rate", 1, 15, &registrationCalibrationRate, length, dim);
+	gui->addSlider("Calibration accuracy", 100, 10000, &registrationCalibrationAccuracy, length, dim);
+    
+    gui->addLabel("Filtering", OFX_UI_FONT_LARGE);
+	gui->addSlider("Max velocity", 0, 10000, &maxVelocity, length, dim);  
+	gui->addSlider("Filter rate", 0, 1, &filterRate, length, dim);
 }
 
 void testApp::update() {
-	registrationCalibrationTimer.setFramerate(registrationCalibrationRate);
-	
+    string kinectDropdownStatus = "";
 	for(int i = 0; i < sensors.size(); i++) {
 		CircleSensor& sensor = *sensors[i];
+        kinectDropdownStatus += "[" + (sensor.kinect.isConnected() ? ofToString(sensor.kinect.getSerial()) : "not connected") + "]";
 		if(backgroundClear) {
 			sensor.backgroundClear = true;
 		}
@@ -77,39 +99,65 @@ void testApp::update() {
 		sensor.circleFinder.minRadius = minRadius;
 		sensor.circleFinder.maxRadius = maxRadius;
 		sensor.update();
+        if(setDeadZones) {
+            sensor.setDeadZones();
+        }
 	}
-	
-	if(registrationCalibrate && registrationCalibrationTimer.tick()) {
-		if(!sensors.empty()) {
-			if(sensors[0]->oneTrackedPosition()) {
-				for(int i = 1; i < sensors.size(); i++) {
-					if(sensors[i]->oneTrackedPosition()) {
-						sensors[i]->updateRegistration(sensors[0]->trackedPositions[0]);
-					}
-				}
-			}
+    
+	if(registrationCalibrate && !sensors.empty() && sensors[0]->oneTrackedPosition()) {
+        for(int i = 1; i < sensors.size(); i++) {
+            if(sensors[i]->oneTrackedPosition()) {
+                sensors[i]->updateRegistration(sensors[0]->trackedPositions[0], 1. - (1./registrationCalibrationAccuracy));
+            }
 		}
 	}
+    
+    combined.set(0);
+    int count = 0;
+    for(int i = 0; i < sensors.size(); i++) {
+        if(sensors[i]->oneTrackedPosition()) {
+            combined += sensors[i]->registration.preMult(sensors[i]->trackedPositions[0]);
+            count++;
+        }
+    }
+    if(count > 0) {
+        combined /= count;
+        if(filtered == ofVec3f()) {
+            filtered = combined;
+        } else  {
+            filtered.interpolate(combined, filterRate);
+        }
+        trackedLastFrame = true;
+    }
 }
 
 void testApp::draw() {
+	ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 	ofBackgroundGradient(ofColor(64), ofColor(0));
+    
 	easyCam.begin();
 	ofScale(1, -1, -1); // orient the point cloud properly
 	ofTranslate(0, 0, -1500); // rotate about z = 1500 mm
 	for(int i = 0; i < sensors.size(); i++) {
-		CircleSensor& sensor = *sensors[i];
-		sensor.drawCloud();
+        ofSetColor(ofColor::fromHsb(((int) ofMap(i, 0, sensors.size(), 0, 255) + 40) % 256, 255, 255));
+		sensors[i]->drawCloud();
 	}
+    ofFill();
+    ofSetColor(ofxCv::magentaPrint);
+    ofSphere(combined, 25);
+    ofSetColor(255);
+    ofNoFill();
+    ofSphere(filtered, 100);
 	easyCam.end();
 	
 	if(showDebug) {
 		ofPushMatrix();
 		ofTranslate(320, 0);
+        float scale = ((float) ofGetHeight() / sensors.size()) / 480;
+        ofScale(scale, scale);
 		glDisable(GL_DEPTH_TEST);
 		for(int i = 0; i < sensors.size(); i++) {
-			CircleSensor& sensor = *sensors[i];
-			sensor.drawDebug();
+			sensors[i]->drawDebug();
 			ofTranslate(0, 480);
 		}
 		ofPopMatrix();

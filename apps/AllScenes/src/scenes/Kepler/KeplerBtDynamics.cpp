@@ -266,9 +266,9 @@ void KeplerBtDynamics::exitPhysics()
 }
 
 /// Basic staffs
-const int maxNumObjects = 16384;
-btTransform startTransforms[maxNumObjects];
-btCollisionShape* gShapePtr[maxNumObjects];//1 rigidbody has 1 shape (no re-use of shapes)
+static const int maxNumObjects = 16384;
+static btTransform startTransforms[maxNumObjects];
+static btCollisionShape* gShapePtr[maxNumObjects];//1 rigidbody has 1 shape (no re-use of shapes)
 
 KeplerBtDynamics::KeplerBtDynamics()
 //see btIDebugDraw.h for modes

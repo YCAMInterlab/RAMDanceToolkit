@@ -182,7 +182,7 @@ void ramActorManager::draw()
     ramCameraManager::instance().getActiveCamera().begin(ofRectangle(0, 0, 1920, 1200));
 	rootNode.draw();
 	
-	if (nodeSelector->identifer.isValid())
+	if (nodeSelector != NULL && nodeSelector->identifer.isValid())
 	{
 		ramNode node;
 		if (ramNodeFinder::findNode(nodeSelector->identifer, node))
