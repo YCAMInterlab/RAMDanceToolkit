@@ -1,42 +1,14 @@
-#pragma once
+//
+//  testApp.h
+//  Chain
+//
+//  Created by Onishi Yoshito on 2/19/13.
+//
+//
 
-#include "ofMain.h"
+#ifndef __Chain__testApp__
+#define __Chain__testApp__
 
-#include "ramMain.h"
+#include <iostream>
 
-#include "btPicker.h"
-
-class testApp : public ramBaseApp
-{
-public:
-    
-	// of methods
-	// ------------------------
-	void setup();
-	void update();
-	void draw();
-    
-	void keyPressed(int key);
-	
-	// ram methods
-	// ------------------------
-	void drawFloor();
-    void drawActor(ramActor &actor);
-    
-    
-	// ...
-	// ------------------------
-	ramOscReceiver oscReceiver;
-    ofMatrix4x4 m_shadowMat;
-    
-#if CHAIN_MODE
-    btPicker m_picker0;
-    btPicker m_picker1;
-    
-    string nameA, nameB;
-#endif
-    
-#if RAIL_MODE
-    vector<btPicker> m_pickers;
-#endif
-};
+#endif /* defined(__Chain__testApp__) */
