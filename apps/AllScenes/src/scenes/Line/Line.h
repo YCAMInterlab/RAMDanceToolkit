@@ -134,10 +134,20 @@ public:
 		
 		void randomize()
 		{
+			ramActorManager &AM = ramActorManager::instance();
+			const vector<string>& names = AM.getNodeArrayNames();
+			
 			nodeLine.from.index = ofRandom(23);
+			nodeLine.from.name = names[rand() % names.size()];
+			
 			nodeLine.control0.index = ofRandom(23);
-			nodeLine.control1.index = ofRandom(23);
+			nodeLine.control0.name = names[rand() % names.size()];
+			
 			nodeLine.to.index = ofRandom(23);
+			nodeLine.to.name = names[rand() % names.size()];
+			
+			nodeLine.control1.index = ofRandom(23);
+			nodeLine.control1.name = names[rand() % names.size()];
 		}
 	};
 	
@@ -147,11 +157,30 @@ public:
 	};
 	
 	LineContext lines[NUM_LINE];
+	float random_change_time;
+	float last_changed_time;
 	
 	Line()
 	{
 	}
+	
+	void setupControlPanel(ofxUICanvas* panel)
+	{
+		ramControlPanel &gui = ramGetGUI();
 		
+		random_change_time = 60;
+		gui.addSlider("random_change_time", 0.1, 60, &random_change_time);
+		last_changed_time = ofGetElapsedTimef();
+		
+		for (int i = 0; i < NUM_LINE; i++)
+		{
+			lines[i].id = i;
+			lines[i].setupControlPanel(panel);
+		}
+		
+		lines[0].active = true;
+	}
+	
 	void setup()
 	{
 		ofAddListener(ofEvents().keyPressed, this, &Line::onKeyPressed);
@@ -168,21 +197,19 @@ public:
 		}
 	}
 	
-	void setupControlPanel(ofxUICanvas* panel)
-	{
-		ramControlPanel &gui = ramGetGUI();
-		
-		for (int i = 0; i < NUM_LINE; i++)
-		{
-			lines[i].id = i;
-			lines[i].setupControlPanel(panel);
-		}
-		
-		lines[0].active = true;
-	}
-
 	void update()
 	{
+		if (random_change_time < 60
+			&& ofGetElapsedTimef() - last_changed_time > random_change_time)
+		{
+			last_changed_time = ofGetElapsedTimef();
+			
+			for (int i = 0; i < NUM_LINE; i++)
+			{
+				lines[i].randomize();
+			}
+		}
+		
 		for (int i = 0; i < NUM_LINE; i++)
 		{
 			lines[i].update();
