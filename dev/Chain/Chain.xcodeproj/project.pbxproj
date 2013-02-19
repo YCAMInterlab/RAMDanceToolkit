@@ -50,17 +50,17 @@
 		9AA73DF1165B7E7D006FBD32 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA73DEB165B7E7D006FBD32 /* tinyxmlparser.cpp */; };
 		9AA73DF2165B7E7D006FBD32 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA73DED165B7E7D006FBD32 /* ofxXmlSettings.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
-		D255D33116B1A48E003DAE12 /* BaseConstrains.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D255D32B16B1A48E003DAE12 /* BaseConstrains.cpp */; };
-		D255D33216B1A48E003DAE12 /* ChainBtDynamics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D255D32D16B1A48E003DAE12 /* ChainBtDynamics.cpp */; };
-		D255D33316B1A48E003DAE12 /* ChainBtShapeDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D255D32F16B1A48E003DAE12 /* ChainBtShapeDrawer.cpp */; };
 		D2B3E1EE16AEDA8B0099DC4A /* libBulletCollision.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2B3E1DE16AEDA8B0099DC4A /* libBulletCollision.a */; };
 		D2B3E1EF16AEDA8B0099DC4A /* libBulletDynamics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2B3E1DF16AEDA8B0099DC4A /* libBulletDynamics.a */; };
 		D2B3E1F016AEDA8B0099DC4A /* libBulletSoftBody.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2B3E1E016AEDA8B0099DC4A /* libBulletSoftBody.a */; };
 		D2B3E1F116AEDA8B0099DC4A /* libLinearMath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2B3E1E116AEDA8B0099DC4A /* libLinearMath.a */; };
 		D2B3E1F216AEDA8B0099DC4A /* ofxBt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B3E1E416AEDA8B0099DC4A /* ofxBt.cpp */; };
-		D2C13D9816B165C700BFE847 /* btPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C13D9616B165C700BFE847 /* btPicker.cpp */; };
-		D2D9860016D331CC002EFB1A /* ChainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2D985FE16D331CC002EFB1A /* ChainScene.cpp */; };
-		D2DD30A516B2E5E000D86CF2 /* ChainObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DD30A316B2E5DF00D86CF2 /* ChainObject.cpp */; };
+		D2B8DCB816D36DCE00210022 /* BaseConstrains.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCAE16D36DCE00210022 /* BaseConstrains.cpp */; };
+		D2B8DCB916D36DCE00210022 /* ChainBtDynamics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCB016D36DCE00210022 /* ChainBtDynamics.cpp */; };
+		D2B8DCBA16D36DCE00210022 /* ChainBtShapeDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCB216D36DCE00210022 /* ChainBtShapeDrawer.cpp */; };
+		D2B8DCBB16D36DCE00210022 /* ChainObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCB416D36DCE00210022 /* ChainObject.cpp */; };
+		D2B8DCBC16D36DCE00210022 /* ChainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCB616D36DCE00210022 /* ChainScene.cpp */; };
+		D2B8DCC016D3830C00210022 /* btPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCBE16D3830C00210022 /* btPicker.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -210,12 +210,6 @@
 		9bf3aa0d4faa89d0f8a0e545403162be /* OscReceivedElements.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = OscReceivedElements.cpp; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscReceivedElements.cpp; sourceTree = SOURCE_ROOT; };
 		9f7986dc4eb05e75fce2c777500fdc01 /* ofxOscSender.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxOscSender.h; path = ../../../addons/ofxOsc/src/ofxOscSender.h; sourceTree = SOURCE_ROOT; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
-		D255D32B16B1A48E003DAE12 /* BaseConstrains.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseConstrains.cpp; sourceTree = "<group>"; };
-		D255D32C16B1A48E003DAE12 /* BaseConstrains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseConstrains.h; sourceTree = "<group>"; };
-		D255D32D16B1A48E003DAE12 /* ChainBtDynamics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainBtDynamics.cpp; sourceTree = "<group>"; };
-		D255D32E16B1A48E003DAE12 /* ChainBtDynamics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainBtDynamics.h; sourceTree = "<group>"; };
-		D255D32F16B1A48E003DAE12 /* ChainBtShapeDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainBtShapeDrawer.cpp; sourceTree = "<group>"; };
-		D255D33016B1A48E003DAE12 /* ChainBtShapeDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainBtShapeDrawer.h; sourceTree = "<group>"; };
 		D2B3E11316AEDA8B0099DC4A /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
 		D2B3E11616AEDA8B0099DC4A /* btBulletCollisionCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletCollisionCommon.h; sourceTree = "<group>"; };
 		D2B3E11716AEDA8B0099DC4A /* btBulletDynamicsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletDynamicsCommon.h; sourceTree = "<group>"; };
@@ -410,12 +404,18 @@
 		D2B3E1E416AEDA8B0099DC4A /* ofxBt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBt.cpp; sourceTree = "<group>"; };
 		D2B3E1E516AEDA8B0099DC4A /* ofxBt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBt.h; sourceTree = "<group>"; };
 		D2B3E1E616AEDA8B0099DC4A /* ofxBtHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtHelper.h; sourceTree = "<group>"; };
-		D2C13D9616B165C700BFE847 /* btPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btPicker.cpp; sourceTree = "<group>"; };
-		D2C13D9716B165C700BFE847 /* btPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btPicker.h; sourceTree = "<group>"; };
-		D2D985FE16D331CC002EFB1A /* ChainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainScene.cpp; sourceTree = "<group>"; };
-		D2D985FF16D331CC002EFB1A /* ChainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainScene.h; sourceTree = "<group>"; };
-		D2DD30A316B2E5DF00D86CF2 /* ChainObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainObject.cpp; sourceTree = "<group>"; };
-		D2DD30A416B2E5E000D86CF2 /* ChainObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainObject.h; sourceTree = "<group>"; };
+		D2B8DCAE16D36DCE00210022 /* BaseConstrains.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseConstrains.cpp; sourceTree = "<group>"; };
+		D2B8DCAF16D36DCE00210022 /* BaseConstrains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseConstrains.h; sourceTree = "<group>"; };
+		D2B8DCB016D36DCE00210022 /* ChainBtDynamics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainBtDynamics.cpp; sourceTree = "<group>"; };
+		D2B8DCB116D36DCE00210022 /* ChainBtDynamics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainBtDynamics.h; sourceTree = "<group>"; };
+		D2B8DCB216D36DCE00210022 /* ChainBtShapeDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainBtShapeDrawer.cpp; sourceTree = "<group>"; };
+		D2B8DCB316D36DCE00210022 /* ChainBtShapeDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainBtShapeDrawer.h; sourceTree = "<group>"; };
+		D2B8DCB416D36DCE00210022 /* ChainObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainObject.cpp; sourceTree = "<group>"; };
+		D2B8DCB516D36DCE00210022 /* ChainObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainObject.h; sourceTree = "<group>"; };
+		D2B8DCB616D36DCE00210022 /* ChainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainScene.cpp; sourceTree = "<group>"; };
+		D2B8DCB716D36DCE00210022 /* ChainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainScene.h; sourceTree = "<group>"; };
+		D2B8DCBE16D3830C00210022 /* btPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btPicker.cpp; sourceTree = "<group>"; };
+		D2B8DCBF16D3830C00210022 /* btPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btPicker.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -426,7 +426,7 @@
 		E45BE9770E8CC7DD009D7055 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		E45BE9790E8CC7DD009D7055 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
-		E4B69B5B0A3A1756003C02F2 /* ConstrainTestDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConstrainTestDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4B69B5B0A3A1756003C02F2 /* ConstrainTestDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = ConstrainTestDebug.app; path = ChainDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = testApp.cpp; path = src/testApp.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1F0A3A1BDC003C02F2 /* testApp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = testApp.h; path = src/testApp.h; sourceTree = SOURCE_ROOT; };
@@ -690,24 +690,6 @@
 				BBAB23BE13894E4700AA2426 /* GLUT.framework */,
 			);
 			name = "3rd party frameworks";
-			sourceTree = "<group>";
-		};
-		D255D32A16B1A48E003DAE12 /* Constrains */ = {
-			isa = PBXGroup;
-			children = (
-				D255D32B16B1A48E003DAE12 /* BaseConstrains.cpp */,
-				D255D32C16B1A48E003DAE12 /* BaseConstrains.h */,
-				D2DD30A316B2E5DF00D86CF2 /* ChainObject.cpp */,
-				D2DD30A416B2E5E000D86CF2 /* ChainObject.h */,
-				D255D32D16B1A48E003DAE12 /* ChainBtDynamics.cpp */,
-				D255D32E16B1A48E003DAE12 /* ChainBtDynamics.h */,
-				D255D32F16B1A48E003DAE12 /* ChainBtShapeDrawer.cpp */,
-				D255D33016B1A48E003DAE12 /* ChainBtShapeDrawer.h */,
-				D2D985FE16D331CC002EFB1A /* ChainScene.cpp */,
-				D2D985FF16D331CC002EFB1A /* ChainScene.h */,
-			);
-			name = Constrains;
-			path = RiggedBox;
 			sourceTree = "<group>";
 		};
 		D2B3E10116AEDA8B0099DC4A /* ofxBt */ = {
@@ -1072,6 +1054,33 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		D2B8DCAD16D36DCE00210022 /* Chain */ = {
+			isa = PBXGroup;
+			children = (
+				D2B8DCAE16D36DCE00210022 /* BaseConstrains.cpp */,
+				D2B8DCAF16D36DCE00210022 /* BaseConstrains.h */,
+				D2B8DCB016D36DCE00210022 /* ChainBtDynamics.cpp */,
+				D2B8DCB116D36DCE00210022 /* ChainBtDynamics.h */,
+				D2B8DCB216D36DCE00210022 /* ChainBtShapeDrawer.cpp */,
+				D2B8DCB316D36DCE00210022 /* ChainBtShapeDrawer.h */,
+				D2B8DCB416D36DCE00210022 /* ChainObject.cpp */,
+				D2B8DCB516D36DCE00210022 /* ChainObject.h */,
+				D2B8DCB616D36DCE00210022 /* ChainScene.cpp */,
+				D2B8DCB716D36DCE00210022 /* ChainScene.h */,
+			);
+			path = Chain;
+			sourceTree = "<group>";
+		};
+		D2B8DCBD16D3830C00210022 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				D2B8DCBE16D3830C00210022 /* btPicker.cpp */,
+				D2B8DCBF16D3830C00210022 /* btPicker.h */,
+			);
+			name = Helper;
+			path = ../../Helper;
+			sourceTree = "<group>";
+		};
 		E4328144138ABC890047C5CB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1106,12 +1115,11 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				D255D32A16B1A48E003DAE12 /* Constrains */,
+				D2B8DCAD16D36DCE00210022 /* Chain */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
-				D2C13D9616B165C700BFE847 /* btPicker.cpp */,
-				D2C13D9716B165C700BFE847 /* btPicker.h */,
+				D2B8DCBD16D3830C00210022 /* Helper */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -1329,12 +1337,12 @@
 				9AA2612816AAD5B700993CAA /* simpleFileLister.cpp in Sources */,
 				9AA2612916AAD5B700993CAA /* simpleLogger.cpp in Sources */,
 				D2B3E1F216AEDA8B0099DC4A /* ofxBt.cpp in Sources */,
-				D2C13D9816B165C700BFE847 /* btPicker.cpp in Sources */,
-				D255D33116B1A48E003DAE12 /* BaseConstrains.cpp in Sources */,
-				D255D33216B1A48E003DAE12 /* ChainBtDynamics.cpp in Sources */,
-				D255D33316B1A48E003DAE12 /* ChainBtShapeDrawer.cpp in Sources */,
-				D2DD30A516B2E5E000D86CF2 /* ChainObject.cpp in Sources */,
-				D2D9860016D331CC002EFB1A /* ChainScene.cpp in Sources */,
+				D2B8DCB816D36DCE00210022 /* BaseConstrains.cpp in Sources */,
+				D2B8DCB916D36DCE00210022 /* ChainBtDynamics.cpp in Sources */,
+				D2B8DCBA16D36DCE00210022 /* ChainBtShapeDrawer.cpp in Sources */,
+				D2B8DCBB16D36DCE00210022 /* ChainObject.cpp in Sources */,
+				D2B8DCBC16D36DCE00210022 /* ChainScene.cpp in Sources */,
+				D2B8DCC016D3830C00210022 /* btPicker.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

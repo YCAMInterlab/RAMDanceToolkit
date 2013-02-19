@@ -59,13 +59,18 @@ class   btConstraintSolver;
 struct  btCollisionAlgorithmCreateFunc;
 class   btDefaultCollisionConfiguration;
 class   BaseConstrains;
-class   TestShapeDrawer;
+class   ChainBtShapeDrawer;
 
 
-class ConstrainsTestScene
+class ChainBtDynamics
 {
-public:    
-	void spawnConstrains(const btVector3& startOffset);
+public:
+	BaseConstrains *spawnChain(const btVector3& startOffset,
+                               int nEdges,
+                               float edgeLength,
+                               float edgeThickness);
+    
+    void removeAllChains();
     
     virtual void setup();
     virtual void update();
@@ -73,8 +78,8 @@ public:
     virtual void keyPressed(int key);
     
 public:
-	ConstrainsTestScene();
-	virtual ~ConstrainsTestScene();
+	ChainBtDynamics();
+	virtual ~ChainBtDynamics();
     
 	inline btDynamicsWorld *getDynamicsWorld();
     
@@ -82,11 +87,13 @@ public:
     
     inline btAlignedObjectArray<class BaseConstrains *> &getConstrains();
     
+    void setGravity(float x, float y, float z);
+    
 protected:
     virtual void clientResetScene();
     
 	btRigidBody* localCreateRigidBody(float mass, const btTransform& startTransform,btCollisionShape* shape);
-
+    
     void initPhysics();
 	void exitPhysics();
     
@@ -96,14 +103,14 @@ protected:
     
 	///this is the most important class
 	btDynamicsWorld     *m_dynamicsWorld;
-
+    
 	float               m_scaleBottom;
 	float               m_scaleFactor;
 	
 	bool                m_stepping;
 	bool                m_singleStep;
-   
-	TestShapeDrawer     *m_shapeDrawer;
+    
+	ChainBtShapeDrawer     *m_shapeDrawer;
 	bool                m_enableshadows;
 	btVector3           m_sundirection;
 	btScalar            m_defaultContactProcessingThreshold;
@@ -129,17 +136,17 @@ protected:
     } m_groundInfo;
 };
 
-inline btAlignedObjectArray<BaseConstrains *> &ConstrainsTestScene::getConstrains()
+inline btAlignedObjectArray<BaseConstrains *> &ChainBtDynamics::getConstrains()
 {
     return m_constrains;
 }
 
-inline btDynamicsWorld *ConstrainsTestScene::getDynamicsWorld()
+inline btDynamicsWorld *ChainBtDynamics::getDynamicsWorld()
 {
     return m_dynamicsWorld;
 }
 
-inline btScalar ConstrainsTestScene::getDeltaTimeMicroseconds()
+inline btScalar ChainBtDynamics::getDeltaTimeMicroseconds()
 {
     btScalar dt = (btScalar)m_clock.getTimeMicroseconds();
     m_clock.reset();

@@ -24,7 +24,7 @@ subject to the following restrictions:
 #include <GLUT/GLUT.h>
 
 //#include "GlutStuff.h"
-#include "TestShapeDrawer.h"
+#include "ChainBtShapeDrawer.h"
 #include "BulletCollision/CollisionShapes/btPolyhedralConvexShape.h"
 #include "BulletCollision/CollisionShapes/btTriangleMeshShape.h"
 #include "BulletCollision/CollisionShapes/btBoxShape.h"
@@ -183,7 +183,7 @@ void OGL_displaylist_register_shape(btCollisionShape * shape)
 }
 #endif //USE_DISPLAY_LISTS
 
-void TestShapeDrawer::drawCoordSystem()  {
+void ChainBtShapeDrawer::drawCoordSystem()  {
 	glBegin(GL_LINES);
 	glColor3f(1, 0, 0);
 	glVertex3d(0, 0, 0);
@@ -276,7 +276,7 @@ public:
 };
 
 
-void TestShapeDrawer::drawSphere(btScalar radius, int lats, int longs) 
+void ChainBtShapeDrawer::drawSphere(btScalar radius, int lats, int longs) 
 {
 	int i, j;
 	for(i = 0; i <= lats; i++) {
@@ -302,7 +302,7 @@ void TestShapeDrawer::drawSphere(btScalar radius, int lats, int longs)
 	}
 }
 
-void TestShapeDrawer::drawCylinder(float radius,float halfHeight, int upAxis)
+void ChainBtShapeDrawer::drawCylinder(float radius,float halfHeight, int upAxis)
 {
 
 
@@ -348,7 +348,7 @@ void TestShapeDrawer::drawCylinder(float radius,float halfHeight, int upAxis)
 	gluDeleteQuadric(quadObj);
 }
 
-TestShapeDrawer::ShapeCache*		TestShapeDrawer::cache(btConvexShape* shape)
+ChainBtShapeDrawer::ShapeCache*		ChainBtShapeDrawer::cache(btConvexShape* shape)
 {
 	ShapeCache*		sc=(ShapeCache*)shape->getUserPointer();
 	if(!sc)
@@ -404,17 +404,17 @@ void renderSquareA(float x, float y, float z)
 inline void glDrawVector(const btVector3& v) { glVertex3d(v[0], v[1], v[2]); }
 
 
-void TestShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, const btVector3& color)
+void ChainBtShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, const btVector3& color)
 {
     drawOpenGL(m, shape, color, 0, btVector3(), btVector3());
 }
 
-void TestShapeDrawer::drawShadow(btScalar* m, const btVector3& extrusion, const btCollisionShape* shape)
+void ChainBtShapeDrawer::drawShadow(btScalar* m, const btVector3& extrusion, const btCollisionShape* shape)
 {
     drawShadow(m, extrusion, shape, btVector3(), btVector3());
 }
 
-void TestShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, const btVector3& color,int	debugMode,const btVector3& worldBoundsMin,const btVector3& worldBoundsMax)
+void ChainBtShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, const btVector3& color,int	debugMode,const btVector3& worldBoundsMin,const btVector3& worldBoundsMax)
 {
 	
 	if (shape->getShapeType() == CUSTOM_CONVEX_SHAPE_TYPE)
@@ -575,7 +575,7 @@ void TestShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, con
 		}
 
 
-		glColor3f(color.x(),color.y(), color.z());		
+		glColor3f(color.x(),color.y(), color.z());
 
 		bool useWireframeFallback = true;
 
@@ -905,7 +905,7 @@ void TestShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, con
 }
 
 //
-void		TestShapeDrawer::drawShadow(btScalar* m,const btVector3& extrusion,const btCollisionShape* shape,const btVector3& worldBoundsMin,const btVector3& worldBoundsMax)
+void		ChainBtShapeDrawer::drawShadow(btScalar* m,const btVector3& extrusion,const btCollisionShape* shape,const btVector3& worldBoundsMin,const btVector3& worldBoundsMax)
 {
 	glPushMatrix(); 
 	//btglMultMatrix(m);
@@ -981,14 +981,14 @@ void		TestShapeDrawer::drawShadow(btScalar* m,const btVector3& extrusion,const b
 }
 
 //
-TestShapeDrawer::TestShapeDrawer()
+ChainBtShapeDrawer::ChainBtShapeDrawer()
 {
 	m_texturehandle			=	0;
 	m_textureenabled		=	false;
 	m_textureinitialized	=	false;
 }
 
-TestShapeDrawer::~TestShapeDrawer()
+ChainBtShapeDrawer::~ChainBtShapeDrawer()
 {
 	int i;
 	for (i=0;i<m_shapecaches.size();i++)

@@ -22,7 +22,7 @@ class btShapeHull;
 #include "BulletCollision/CollisionShapes/btShapeHull.h"
 
 /// OpenGL shape drawing
-class TestShapeDrawer
+class ChainBtShapeDrawer
 {
 protected:
 	struct ShapeCache
@@ -42,9 +42,9 @@ protected:
 	ShapeCache*							cache(btConvexShape*);
 
 public:
-		TestShapeDrawer();
+		ChainBtShapeDrawer();
 
-		virtual ~TestShapeDrawer();
+		virtual ~ChainBtShapeDrawer();
 
 		///drawOpenGL might allocate temporary memoty, stores pointer in shape userpointer
 		virtual void		drawOpenGL(btScalar* m, const btCollisionShape* shape, const btVector3& color,int	debugMode,const btVector3& worldBoundsMin,const btVector3& worldBoundsMax);

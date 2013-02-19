@@ -8,13 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
-		9A2B3F6416D325C7001CBFC9 /* btPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F4F16D325C7001CBFC9 /* btPicker.cpp */; };
 		9A2B3F6516D325C7001CBFC9 /* Kepler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5116D325C7001CBFC9 /* Kepler.cpp */; };
 		9A2B3F6616D325C7001CBFC9 /* KeplerBtDynamics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5316D325C7001CBFC9 /* KeplerBtDynamics.cpp */; };
 		9A2B3F6716D325C7001CBFC9 /* KeplerBtShapeDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5516D325C7001CBFC9 /* KeplerBtShapeDrawer.cpp */; };
 		9A2B3F6816D325C7001CBFC9 /* KeplerCube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5716D325C7001CBFC9 /* KeplerCube.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
-		E4328149138ABC9F0047C5CB /* openFrameworks.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworks.a */; };
+		D2B8DCC616D3834A00210022 /* btPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCC416D3834A00210022 /* btPicker.cpp */; };
+		D2B8DCD216D3835700210022 /* BaseConstrains.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCC816D3835700210022 /* BaseConstrains.cpp */; };
+		D2B8DCD316D3835700210022 /* ChainBtDynamics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCCA16D3835700210022 /* ChainBtDynamics.cpp */; };
+		D2B8DCD416D3835700210022 /* ChainBtShapeDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCCC16D3835700210022 /* ChainBtShapeDrawer.cpp */; };
+		D2B8DCD516D3835700210022 /* ChainObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCCE16D3835700210022 /* ChainObject.cpp */; };
+		D2B8DCD616D3835700210022 /* Chain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCD016D3835700210022 /* Chain.cpp */; };
+		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
 		E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9730E8CC7DD009D7055 /* AudioToolbox.framework */; };
@@ -93,8 +98,6 @@
 		9A2B3F4616D325C7001CBFC9 /* Donuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Donuts.h; sourceTree = "<group>"; };
 		9A2B3F4816D325C7001CBFC9 /* Expansion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expansion.h; sourceTree = "<group>"; };
 		9A2B3F4A16D325C7001CBFC9 /* Future.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Future.h; sourceTree = "<group>"; };
-		9A2B3F4F16D325C7001CBFC9 /* btPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btPicker.cpp; sourceTree = "<group>"; };
-		9A2B3F5016D325C7001CBFC9 /* btPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btPicker.h; sourceTree = "<group>"; };
 		9A2B3F5116D325C7001CBFC9 /* Kepler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Kepler.cpp; sourceTree = "<group>"; };
 		9A2B3F5216D325C7001CBFC9 /* Kepler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kepler.h; sourceTree = "<group>"; };
 		9A2B3F5316D325C7001CBFC9 /* KeplerBtDynamics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeplerBtDynamics.cpp; sourceTree = "<group>"; };
@@ -111,6 +114,18 @@
 		9A2B3F6316D325C7001CBFC9 /* UpsideDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpsideDown.h; sourceTree = "<group>"; };
 		9A2B3FB716D3517A001CBFC9 /* upside-donuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "upside-donuts.h"; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		D2B8DCC416D3834A00210022 /* btPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btPicker.cpp; sourceTree = "<group>"; };
+		D2B8DCC516D3834A00210022 /* btPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btPicker.h; sourceTree = "<group>"; };
+		D2B8DCC816D3835700210022 /* BaseConstrains.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseConstrains.cpp; sourceTree = "<group>"; };
+		D2B8DCC916D3835700210022 /* BaseConstrains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseConstrains.h; sourceTree = "<group>"; };
+		D2B8DCCA16D3835700210022 /* ChainBtDynamics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainBtDynamics.cpp; sourceTree = "<group>"; };
+		D2B8DCCB16D3835700210022 /* ChainBtDynamics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainBtDynamics.h; sourceTree = "<group>"; };
+		D2B8DCCC16D3835700210022 /* ChainBtShapeDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainBtShapeDrawer.cpp; sourceTree = "<group>"; };
+		D2B8DCCD16D3835700210022 /* ChainBtShapeDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainBtShapeDrawer.h; sourceTree = "<group>"; };
+		D2B8DCCE16D3835700210022 /* ChainObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainObject.cpp; sourceTree = "<group>"; };
+		D2B8DCCF16D3835700210022 /* ChainObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainObject.h; sourceTree = "<group>"; };
+		D2B8DCD016D3835700210022 /* Chain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Chain.cpp; sourceTree = "<group>"; };
+		D2B8DCD116D3835700210022 /* Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chain.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -145,7 +160,7 @@
 				E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */,
 				E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */,
 				E4EB6799138ADC1D00A09F29 /* GLUT.framework in Frameworks */,
-				E4328149138ABC9F0047C5CB /* openFrameworks.a in Frameworks */,
+				E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */,
 				E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */,
 				E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */,
 				E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */,
@@ -222,6 +237,8 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D2B8DCC716D3835700210022 /* Chain */,
+				D2B8DCC316D3834A00210022 /* Helper */,
 				9A2B3FB316D35150001CBFC9 /* YokoSelection */,
 				60E559B016D3366A00051FE9 /* HastyChase */,
 				9A2B3F3F16D325C7001CBFC9 /* Abacus */,
@@ -301,8 +318,6 @@
 		9A2B3F4E16D325C7001CBFC9 /* Kepler */ = {
 			isa = PBXGroup;
 			children = (
-				9A2B3F4F16D325C7001CBFC9 /* btPicker.cpp */,
-				9A2B3F5016D325C7001CBFC9 /* btPicker.h */,
 				9A2B3F5116D325C7001CBFC9 /* Kepler.cpp */,
 				9A2B3F5216D325C7001CBFC9 /* Kepler.h */,
 				9A2B3F5316D325C7001CBFC9 /* KeplerBtDynamics.cpp */,
@@ -416,10 +431,38 @@
 			name = "3rd party frameworks";
 			sourceTree = "<group>";
 		};
+		D2B8DCC316D3834A00210022 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				D2B8DCC416D3834A00210022 /* btPicker.cpp */,
+				D2B8DCC516D3834A00210022 /* btPicker.h */,
+			);
+			name = Helper;
+			path = ../../../dev/Helper;
+			sourceTree = "<group>";
+		};
+		D2B8DCC716D3835700210022 /* Chain */ = {
+			isa = PBXGroup;
+			children = (
+				D2B8DCC816D3835700210022 /* BaseConstrains.cpp */,
+				D2B8DCC916D3835700210022 /* BaseConstrains.h */,
+				D2B8DCCA16D3835700210022 /* ChainBtDynamics.cpp */,
+				D2B8DCCB16D3835700210022 /* ChainBtDynamics.h */,
+				D2B8DCCC16D3835700210022 /* ChainBtShapeDrawer.cpp */,
+				D2B8DCCD16D3835700210022 /* ChainBtShapeDrawer.h */,
+				D2B8DCCE16D3835700210022 /* ChainObject.cpp */,
+				D2B8DCCF16D3835700210022 /* ChainObject.h */,
+				D2B8DCD016D3835700210022 /* Chain.cpp */,
+				D2B8DCD116D3835700210022 /* Chain.h */,
+			);
+			name = Chain;
+			path = scenes/Chain;
+			sourceTree = "<group>";
+		};
 		E4328144138ABC890047C5CB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E4328148138ABC890047C5CB /* openFrameworks.a */,
+				E4328148138ABC890047C5CB /* openFrameworksDebug.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -536,10 +579,10 @@
 			remoteRef = 60B90AB21644E21400AF2156 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E4328148138ABC890047C5CB /* openFrameworks.a */ = {
+		E4328148138ABC890047C5CB /* openFrameworksDebug.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = openFrameworks.a;
+			path = openFrameworksDebug.a;
 			remoteRef = E4328147138ABC890047C5CB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -568,11 +611,16 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
-				9A2B3F6416D325C7001CBFC9 /* btPicker.cpp in Sources */,
 				9A2B3F6516D325C7001CBFC9 /* Kepler.cpp in Sources */,
 				9A2B3F6616D325C7001CBFC9 /* KeplerBtDynamics.cpp in Sources */,
 				9A2B3F6716D325C7001CBFC9 /* KeplerBtShapeDrawer.cpp in Sources */,
 				9A2B3F6816D325C7001CBFC9 /* KeplerCube.cpp in Sources */,
+				D2B8DCC616D3834A00210022 /* btPicker.cpp in Sources */,
+				D2B8DCD216D3835700210022 /* BaseConstrains.cpp in Sources */,
+				D2B8DCD316D3835700210022 /* ChainBtDynamics.cpp in Sources */,
+				D2B8DCD416D3835700210022 /* ChainBtShapeDrawer.cpp in Sources */,
+				D2B8DCD516D3835700210022 /* ChainObject.cpp in Sources */,
+				D2B8DCD616D3835700210022 /* Chain.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

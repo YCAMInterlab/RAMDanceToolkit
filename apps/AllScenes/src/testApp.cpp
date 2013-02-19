@@ -55,6 +55,9 @@ ThreePoints threePoints;
 #include "FourPoints.h"
 FourPoints fourPoints;
 
+#include "Chain.h"
+Chain chain;
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -88,6 +91,7 @@ void testApp::setup()
 	scenes.push_back( colorGrid.getPtr() );
 	scenes.push_back( threePoints.getPtr() );
 	scenes.push_back( fourPoints.getPtr() );
+    scenes.push_back( chain.getPtr() );
 	sceneManager.setup(scenes);
 }
 
