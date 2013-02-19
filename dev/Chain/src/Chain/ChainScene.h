@@ -1,13 +1,13 @@
 //
-//  Chain.h
+//  ChainScene.h
 //  Chain
 //
 //  Created by Onishi Yoshito on 2/19/13.
 //
 //
 
-#ifndef __Chain__Chain__
-#define __Chain__Chain__
+#ifndef __Chain__ChainScene__
+#define __Chain__ChainScene__
 
 #include "ramBaseScene.h"
 
@@ -84,7 +84,7 @@ private:
 };
 // ------------------------
 
-class Chain : public ramBaseScene
+class ChainScene : public ramBaseScene
 {
 public:
     // ------------------------
@@ -114,4 +114,4 @@ private:
 };
 
 
-#endif /* defined(__Chain__Chain__) */
+#endif /* defined(__Chain__ChainScene__) */

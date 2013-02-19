@@ -8,12 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
-		9A2B3F6416D325C7001CBFC9 /* btPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F4F16D325C7001CBFC9 /* btPicker.cpp */; };
 		9A2B3F6516D325C7001CBFC9 /* Kepler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5116D325C7001CBFC9 /* Kepler.cpp */; };
 		9A2B3F6616D325C7001CBFC9 /* KeplerBtDynamics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5316D325C7001CBFC9 /* KeplerBtDynamics.cpp */; };
 		9A2B3F6716D325C7001CBFC9 /* KeplerBtShapeDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5516D325C7001CBFC9 /* KeplerBtShapeDrawer.cpp */; };
 		9A2B3F6816D325C7001CBFC9 /* KeplerCube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5716D325C7001CBFC9 /* KeplerCube.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		D2B8DCC616D3834A00210022 /* btPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCC416D3834A00210022 /* btPicker.cpp */; };
+		D2B8DCD216D3835700210022 /* BaseConstrains.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCC816D3835700210022 /* BaseConstrains.cpp */; };
+		D2B8DCD316D3835700210022 /* ChainBtDynamics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCCA16D3835700210022 /* ChainBtDynamics.cpp */; };
+		D2B8DCD416D3835700210022 /* ChainBtShapeDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCCC16D3835700210022 /* ChainBtShapeDrawer.cpp */; };
+		D2B8DCD516D3835700210022 /* ChainObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCCE16D3835700210022 /* ChainObject.cpp */; };
+		D2B8DCD616D3835700210022 /* Chain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCD016D3835700210022 /* Chain.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -80,6 +85,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		27B8489116D34A02000D321D /* ColorGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorGrid.h; sourceTree = "<group>"; };
+		27B8489316D35466000D321D /* ThreePoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreePoints.h; sourceTree = "<group>"; };
+		27B8489416D35513000D321D /* SphereMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphereMesh.h; sourceTree = "<group>"; };
+		27B8489516D3554B000D321D /* GeometryHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryHelpers.h; sourceTree = "<group>"; };
+		27B8489716D35D17000D321D /* FourPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourPoints.h; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
 		60E559B116D3366A00051FE9 /* HastyChase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HastyChase.h; sourceTree = "<group>"; };
 		9A2B3F4016D325C7001CBFC9 /* Abacus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Abacus.h; sourceTree = "<group>"; };
@@ -88,8 +98,6 @@
 		9A2B3F4616D325C7001CBFC9 /* Donuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Donuts.h; sourceTree = "<group>"; };
 		9A2B3F4816D325C7001CBFC9 /* Expansion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expansion.h; sourceTree = "<group>"; };
 		9A2B3F4A16D325C7001CBFC9 /* Future.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Future.h; sourceTree = "<group>"; };
-		9A2B3F4F16D325C7001CBFC9 /* btPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btPicker.cpp; sourceTree = "<group>"; };
-		9A2B3F5016D325C7001CBFC9 /* btPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btPicker.h; sourceTree = "<group>"; };
 		9A2B3F5116D325C7001CBFC9 /* Kepler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Kepler.cpp; sourceTree = "<group>"; };
 		9A2B3F5216D325C7001CBFC9 /* Kepler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kepler.h; sourceTree = "<group>"; };
 		9A2B3F5316D325C7001CBFC9 /* KeplerBtDynamics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeplerBtDynamics.cpp; sourceTree = "<group>"; };
@@ -106,6 +114,18 @@
 		9A2B3F6316D325C7001CBFC9 /* UpsideDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpsideDown.h; sourceTree = "<group>"; };
 		9A2B3FB716D3517A001CBFC9 /* upside-donuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "upside-donuts.h"; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		D2B8DCC416D3834A00210022 /* btPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btPicker.cpp; sourceTree = "<group>"; };
+		D2B8DCC516D3834A00210022 /* btPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btPicker.h; sourceTree = "<group>"; };
+		D2B8DCC816D3835700210022 /* BaseConstrains.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseConstrains.cpp; sourceTree = "<group>"; };
+		D2B8DCC916D3835700210022 /* BaseConstrains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseConstrains.h; sourceTree = "<group>"; };
+		D2B8DCCA16D3835700210022 /* ChainBtDynamics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainBtDynamics.cpp; sourceTree = "<group>"; };
+		D2B8DCCB16D3835700210022 /* ChainBtDynamics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainBtDynamics.h; sourceTree = "<group>"; };
+		D2B8DCCC16D3835700210022 /* ChainBtShapeDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainBtShapeDrawer.cpp; sourceTree = "<group>"; };
+		D2B8DCCD16D3835700210022 /* ChainBtShapeDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainBtShapeDrawer.h; sourceTree = "<group>"; };
+		D2B8DCCE16D3835700210022 /* ChainObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainObject.cpp; sourceTree = "<group>"; };
+		D2B8DCCF16D3835700210022 /* ChainObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainObject.h; sourceTree = "<group>"; };
+		D2B8DCD016D3835700210022 /* Chain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Chain.cpp; sourceTree = "<group>"; };
+		D2B8DCD116D3835700210022 /* Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chain.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -160,6 +180,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27B8489016D34A02000D321D /* ColorGrid */ = {
+			isa = PBXGroup;
+			children = (
+				27B8489116D34A02000D321D /* ColorGrid.h */,
+			);
+			name = ColorGrid;
+			path = scenes/ColorGrid;
+			sourceTree = "<group>";
+		};
+		27B8489216D35466000D321D /* ThreePoints */ = {
+			isa = PBXGroup;
+			children = (
+				27B8489316D35466000D321D /* ThreePoints.h */,
+				27B8489416D35513000D321D /* SphereMesh.h */,
+				27B8489516D3554B000D321D /* GeometryHelpers.h */,
+			);
+			name = ThreePoints;
+			path = scenes/ThreePoints;
+			sourceTree = "<group>";
+		};
+		27B8489616D35D17000D321D /* FourPoints */ = {
+			isa = PBXGroup;
+			children = (
+				27B8489716D35D17000D321D /* FourPoints.h */,
+			);
+			name = FourPoints;
+			path = scenes/FourPoints;
+			sourceTree = "<group>";
+		};
 		601900561644E22B001930AA /* ram */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,19 +237,25 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D2B8DCC716D3835700210022 /* Chain */,
+				D2B8DCC316D3834A00210022 /* Helper */,
 				9A2B3FB316D35150001CBFC9 /* YokoSelection */,
 				60E559B016D3366A00051FE9 /* HastyChase */,
 				9A2B3F3F16D325C7001CBFC9 /* Abacus */,
 				9A2B3F4116D325C7001CBFC9 /* BasicActor */,
 				9A2B3F4316D325C7001CBFC9 /* BigBox */,
+				27B8489016D34A02000D321D /* ColorGrid */,
 				9A2B3F4516D325C7001CBFC9 /* Donuts */,
 				9A2B3F4716D325C7001CBFC9 /* Expansion */,
+				27B8489616D35D17000D321D /* FourPoints */,
 				9A2B3F4916D325C7001CBFC9 /* Future */,
+				60E559B016D3366A00051FE9 /* HastyChase */,
 				9A2B3F4E16D325C7001CBFC9 /* Kepler */,
 				9A2B3F5916D325C7001CBFC9 /* LineDrawing */,
 				9A2B3F5B16D325C7001CBFC9 /* Particles */,
 				9A2B3F5E16D325C7001CBFC9 /* SoundCube */,
 				9A2B3F6016D325C7001CBFC9 /* Stamp */,
+				27B8489216D35466000D321D /* ThreePoints */,
 				9A2B3F6216D325C7001CBFC9 /* UpsideDown */,
 			);
 			name = Scenes;
@@ -263,8 +318,6 @@
 		9A2B3F4E16D325C7001CBFC9 /* Kepler */ = {
 			isa = PBXGroup;
 			children = (
-				9A2B3F4F16D325C7001CBFC9 /* btPicker.cpp */,
-				9A2B3F5016D325C7001CBFC9 /* btPicker.h */,
 				9A2B3F5116D325C7001CBFC9 /* Kepler.cpp */,
 				9A2B3F5216D325C7001CBFC9 /* Kepler.h */,
 				9A2B3F5316D325C7001CBFC9 /* KeplerBtDynamics.cpp */,
@@ -376,6 +429,34 @@
 				BBAB23BE13894E4700AA2426 /* GLUT.framework */,
 			);
 			name = "3rd party frameworks";
+			sourceTree = "<group>";
+		};
+		D2B8DCC316D3834A00210022 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				D2B8DCC416D3834A00210022 /* btPicker.cpp */,
+				D2B8DCC516D3834A00210022 /* btPicker.h */,
+			);
+			name = Helper;
+			path = ../../../dev/Helper;
+			sourceTree = "<group>";
+		};
+		D2B8DCC716D3835700210022 /* Chain */ = {
+			isa = PBXGroup;
+			children = (
+				D2B8DCC816D3835700210022 /* BaseConstrains.cpp */,
+				D2B8DCC916D3835700210022 /* BaseConstrains.h */,
+				D2B8DCCA16D3835700210022 /* ChainBtDynamics.cpp */,
+				D2B8DCCB16D3835700210022 /* ChainBtDynamics.h */,
+				D2B8DCCC16D3835700210022 /* ChainBtShapeDrawer.cpp */,
+				D2B8DCCD16D3835700210022 /* ChainBtShapeDrawer.h */,
+				D2B8DCCE16D3835700210022 /* ChainObject.cpp */,
+				D2B8DCCF16D3835700210022 /* ChainObject.h */,
+				D2B8DCD016D3835700210022 /* Chain.cpp */,
+				D2B8DCD116D3835700210022 /* Chain.h */,
+			);
+			name = Chain;
+			path = scenes/Chain;
 			sourceTree = "<group>";
 		};
 		E4328144138ABC890047C5CB /* Products */ = {
@@ -530,11 +611,16 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
-				9A2B3F6416D325C7001CBFC9 /* btPicker.cpp in Sources */,
 				9A2B3F6516D325C7001CBFC9 /* Kepler.cpp in Sources */,
 				9A2B3F6616D325C7001CBFC9 /* KeplerBtDynamics.cpp in Sources */,
 				9A2B3F6716D325C7001CBFC9 /* KeplerBtShapeDrawer.cpp in Sources */,
 				9A2B3F6816D325C7001CBFC9 /* KeplerCube.cpp in Sources */,
+				D2B8DCC616D3834A00210022 /* btPicker.cpp in Sources */,
+				D2B8DCD216D3835700210022 /* BaseConstrains.cpp in Sources */,
+				D2B8DCD316D3835700210022 /* ChainBtDynamics.cpp in Sources */,
+				D2B8DCD416D3835700210022 /* ChainBtShapeDrawer.cpp in Sources */,
+				D2B8DCD516D3835700210022 /* ChainObject.cpp in Sources */,
+				D2B8DCD616D3835700210022 /* Chain.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,12 +1,12 @@
 //
-//  Chain.cpp
+//  ChainScene.cpp
 //  Chain
 //
 //  Created by Onishi Yoshito on 2/19/13.
 //
 //
 
-#include "Chain.h"
+#include "ChainScene.h"
 
 #pragma mark -
 //--------------------------------------------------------------
@@ -59,9 +59,9 @@ static void popAll()
 
 #pragma mark -
 //--------------------------------------------------------------
-void Chain::setupControlPanel(ofxUICanvas* panel)
+void ChainScene::setupControlPanel(ofxUICanvas* panel)
 {
-    ofAddListener(panel->newGUIEvent, this, &Chain::onValueChanged);
+    ofAddListener(panel->newGUIEvent, this, &ChainScene::onValueChanged);
     
     const float w = 300.0f;
     const float dim = 16.0f;
@@ -75,7 +75,7 @@ void Chain::setupControlPanel(ofxUICanvas* panel)
     panel->addLabel("NUM EDGES", OFX_UI_FONT_SMALL);
     panel->addNumberDialer("NUM EDGES", 2, 100, &mNumEdges, 0);
     panel->addLabel("ATTACHING EDGES", OFX_UI_FONT_SMALL);
-    panel->addNumberDialer("ATTACHING EDGE", 0, 100, &mAttachingEdge, 0);
+    panel->addNumberDialer("ATTACHING EDGE", 2, 100, &mAttachingEdge, 0);
     panel->addSlider("EDGE LENGTH", 1.0, 100, &mEdgeLength, w, dim);
     panel->addSlider("THICKNESS", 1.0, 100, &mThickness, w, dim);
     panel->addButton("ADD", false, dim, dim);
@@ -87,7 +87,7 @@ void Chain::setupControlPanel(ofxUICanvas* panel)
 
 #pragma mark -
 //--------------------------------------------------------------
-void Chain::setup()
+void ChainScene::setup()
 {
     mChainBtDynamics.setup();
     
@@ -103,7 +103,7 @@ void Chain::setup()
 }
 
 //--------------------------------------------------------------
-void Chain::update()
+void ChainScene::update()
 {
     pushAll();
     mChainBtDynamics.update();
@@ -111,7 +111,7 @@ void Chain::update()
 }
 
 //--------------------------------------------------------------
-void Chain::draw()
+void ChainScene::draw()
 {
     pushAll();
     ramBeginCamera();
@@ -124,7 +124,7 @@ void Chain::draw()
 
 #pragma mark -
 //--------------------------------------------------------------
-void Chain::drawActor(ramActor &actor)
+void ChainScene::drawActor(ramActor &actor)
 {
     ramDrawBasicActor(actor, ramColor::RED_DEEP, ramColor::RED_NORMAL);
     
@@ -136,7 +136,7 @@ void Chain::drawActor(ramActor &actor)
 
 #pragma mark -
 //--------------------------------------------------------------
-void Chain::onValueChanged(ofxUIEventArgs& e)
+void ChainScene::onValueChanged(ofxUIEventArgs& e)
 {
     const string name = e.widget->getName();
     
@@ -144,11 +144,8 @@ void Chain::onValueChanged(ofxUIEventArgs& e)
         mChainBtDynamics.setGravity(mGravity.x, mGravity.y, mGravity.z);
     }
     else if (name=="ADD") {
-        ofxUIButton *b = static_cast<ofxUIButton *>(e.widget);
-        if (b->getValue()) return;
-        
         if (!ramActorManager::instance().getLastSelectedNode()) {
-            ofLogError("Chain") << "We must select a node at first!";
+            ofLogError("ChainScene") << "We must select a node at first!";
             return;
         }
         const string actorName = ramActorManager::instance().getLastSelectedNodeIdentifer().name;
@@ -166,9 +163,6 @@ void Chain::onValueChanged(ofxUIEventArgs& e)
         mChains.push_back(chain);
     }
     else if (name=="REMOVE ALL") {
-        ofxUIButton *b = static_cast<ofxUIButton *>(e.widget);
-        if (b->getValue()) return;
-        
         for (int i=0; i<mChains.size(); i++) {
             delete mChains.at(i);
             mChains.at(i) = NULL;

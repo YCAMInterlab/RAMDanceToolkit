@@ -164,31 +164,32 @@ void ramOfxUIControlPanel::addMultiToggle(const string& name, const vector<strin
 	assert(false);
 }
 
+struct Listener
+{
+	ofxUIRadio *o;
+	int *value;
+	
+	Listener(ofxUIRadio *o, int *value) : o(o), value(value) {}
+	
+	void handle(ofxUIEventArgs &e)
+	{
+		if (e.widget->getParent() != o) return;
+		vector<ofxUIToggle *> t = o->getToggles();
+		for (int i = 0; i < t.size(); i++)
+		{
+			if (t[i]->getValue())
+			{
+				*value = i;
+				break;
+			}
+		}
+	}
+};
+
 void ramOfxUIControlPanel::addRadioGroup(const string& name, const vector<string>& content, int *value)
 {
 	ofxUIRadio *o = current_panel->addRadio(name, content, OFX_UI_ORIENTATION_VERTICAL, kDim, kDim);
 	
-	struct Listener
-	{
-		ofxUIRadio *o;
-		int *value;
-		
-		Listener(ofxUIRadio *o, int *value) : o(o), value(value) {}
-		
-		void handle(ofxUIEventArgs &e)
-		{
-			if (e.widget->getParent() != o) return;
-			vector<ofxUIToggle *> t = o->getToggles();
-			for (int i = 0; i < t.size(); i++)
-			{
-				if (t[i]->getValue())
-				{
-					*value = i;
-					break;
-				}
-			}
-		}
-	};
 
 	// FIXME: memory leak
 	Listener *e = new Listener(o, value);

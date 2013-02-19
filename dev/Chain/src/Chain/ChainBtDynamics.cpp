@@ -15,7 +15,7 @@
 
 /*
  Bullet Continuous Collision Detection and Physics Library
- Kepler Demo
+ RiggedBox Demo
  Copyright (c) 2007 Starbreeze Studios
  
  This software is provided 'as-is', without any express or implied warranty.
@@ -31,7 +31,7 @@
  Written by: Marten Svanfeldt
  */
 
-#include "KeplerBtDynamics.h"
+#include "ChainBtDynamics.h"
 #include "LinearMath/btIDebugDraw.h"
 #include "BulletDynamics/Dynamics/btDynamicsWorld.h"
 
@@ -44,7 +44,7 @@
 #include "BulletCollision/CollisionShapes/btCompoundShape.h"
 #include "BulletCollision/CollisionShapes/btUniformScalingShape.h"
 #include "BulletDynamics/ConstraintSolver/btConstraintSolver.h"
-#include "KeplerBtShapeDrawer.h"
+#include "ChainBtShapeDrawer.h"
 #include "LinearMath/btQuickprof.h"
 #include "LinearMath/btDefaultMotionState.h"
 #include "LinearMath/btSerializer.h"
@@ -52,11 +52,14 @@
 #include "btBulletDynamicsCommon.h"
 #include "LinearMath/btIDebugDraw.h"
 
-#include "KeplerCube.h"
+#include "ChainObject.h"
+
+#include <gl/glew.h>
+#include "ramMain.h"
 
 #include <GLUT/GLUT.h>
 
-/// Kepler staffs
+/// RiggedBox staffs
 
 // Enrico: Shouldn't these three variables be real constants and not defines?
 
@@ -74,9 +77,56 @@
 
 static const float GRAVITY_SCALE = 100.0f;
 
+//--------------------------------------------------------------
+static void ramPushAll()
+{
+    ofPushView();
+    
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
+    
+    GLint matrixMode;
+    glGetIntegerv(GL_MATRIX_MODE, &matrixMode);
+    
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glMatrixMode(GL_TEXTURE);
+    glPushMatrix();
+    glMatrixMode(GL_COLOR);
+    glPushMatrix();
+    
+    glMatrixMode(matrixMode);
+    
+    ofPushStyle();
+}
+
+//--------------------------------------------------------------
+static void ramPopAll()
+{
+    ofPopStyle();
+    
+    GLint matrixMode;
+    glGetIntegerv(GL_MATRIX_MODE, &matrixMode);
+    
+    glMatrixMode(GL_COLOR);
+    glPopMatrix();
+    glMatrixMode(GL_TEXTURE);
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    
+    glMatrixMode(matrixMode);
+    
+    glPopAttrib();
+    
+    ofPopView();
+}
 
 
-void KeplerBtDynamics::initPhysics()
+void ChainBtDynamics::initPhysics()
 {
 	// Setup the basic world
 	m_collisionConfiguration = new btDefaultCollisionConfiguration();
@@ -90,45 +140,71 @@ void KeplerBtDynamics::initPhysics()
 	m_solver = new btSequentialImpulseConstraintSolver;
     
 	m_dynamicsWorld = new btDiscreteDynamicsWorld(m_dispatcher,m_broadphase,m_solver,m_collisionConfiguration);
-    m_dynamicsWorld->setGravity(btVector3(0.0f, -9.8f*GRAVITY_SCALE, 0.0f));
+    //m_dynamicsWorld->setGravity(btVector3(0.0f, -9.8f*GRAVITY_SCALE, 0.0f));
+    //m_dynamicsWorld->setGravity(btVector3(0.0f, 0.1f*GRAVITY_SCALE, 0.0f));
+    //m_dynamicsWorld->setGravity(btVector3(0.0f, -3.0f*GRAVITY_SCALE, 0.0f));
+    m_dynamicsWorld->setGravity(btVector3(0.0f, 0.00f*GRAVITY_SCALE, 0.0f));
 	//m_dynamicsWorld->getDispatchInfo().m_useConvexConservativeDistanceUtil = true;
 	//m_dynamicsWorld->getDispatchInfo().m_convexConservativeDistanceThreshold = 0.01f;
     
-
-	// Setup a big ground box
-	{
-		//btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(1.5),btScalar(0.1),btScalar(1.5)));
-        
-		btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(600.0f),
-                                                                 btScalar(600.0f),
-                                                                 btScalar(600.0f)));
-        m_collisionShapes.push_back(groundShape);
-		btTransform groundTransform;
-		groundTransform.setIdentity();
-        groundTransform.setOrigin(btVector3(0.0f, -600.0f, 0.0f));
-        
-		btCollisionObject* fixedGround = new btCollisionObject();
-		fixedGround->setCollisionShape(groundShape);
-		fixedGround->setWorldTransform(groundTransform);
-        m_groundInfo.isGround = true;
-        fixedGround->setUserPointer(&m_groundInfo);
-        
-		m_dynamicsWorld->addCollisionObject(fixedGround);   
-	}
     
-	// Spawn one ragdoll
-	btVector3 startOffset(0,500,0);
-	spawnKepler(startOffset);
+	// Setup a big ground box
+    //{
+    //    //btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(1.5),btScalar(0.1),btScalar(1.5)));
+    //
+    //    btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(3000.0f),
+    //                                                             btScalar(600.0f),
+    //                                                             btScalar(3000.0f)));
+    //    m_collisionShapes.push_back(groundShape);
+    //    btTransform groundTransform;
+    //    groundTransform.setIdentity();
+    //    //groundTransform.setOrigin(btVector3(0,-10,0));
+    //    groundTransform.setOrigin(btVector3(0,-600.0f,0));
+    //
+    //    btCollisionObject* fixedGround = new btCollisionObject();
+    //    fixedGround->setCollisionShape(groundShape);
+    //    fixedGround->setWorldTransform(groundTransform);
+    //    m_groundInfo.isGround = true;
+    //    fixedGround->setUserPointer(&m_groundInfo);
+    //
+    //    m_dynamicsWorld->addCollisionObject(fixedGround);
+    //}
+    btVector3 startOffset(0,100,0);
+    
 	clientResetScene();
 }
 
-void KeplerBtDynamics::spawnKepler(const btVector3& startOffset)
+void ChainBtDynamics::setGravity(float x, float y, float z)
 {
-	KeplerCube* cube = new KeplerCube(m_dynamicsWorld, startOffset);
-	m_boxes.push_back(cube);
+    m_dynamicsWorld->setGravity(btVector3(x*GRAVITY_SCALE, y*GRAVITY_SCALE, z*GRAVITY_SCALE));
+    
 }
 
-void KeplerBtDynamics::update()
+BaseConstrains *ChainBtDynamics::spawnChain(const btVector3& startOffset,
+                                            int nEdges,
+                                            float edgeLength,
+                                            float edgeThickness)
+{
+    BaseConstrains *c = new ChainObject(m_dynamicsWorld,
+                                        startOffset,
+                                        nEdges,
+                                        edgeLength,
+                                        edgeThickness);
+    m_constrains.push_back(c);
+    return c;
+}
+
+void ChainBtDynamics::removeAllChains()
+{
+    for (int i=0;i<m_constrains.size();i++) {
+		BaseConstrains* con = m_constrains[i];
+		delete con;
+        con = NULL;
+	}
+    m_constrains.clear();
+}
+
+void ChainBtDynamics::update()
 {
 	//simple dynamics world doesn't handle fixed-time-stepping
 	float ms = getDeltaTimeMicroseconds();
@@ -141,7 +217,7 @@ void KeplerBtDynamics::update()
 		m_dynamicsWorld->stepSimulation(ms / 1000000.f);
 }
 
-void KeplerBtDynamics::draw()
+void ChainBtDynamics::draw()
 {
     GLfloat light_ambient[] = { btScalar(0.2), btScalar(0.2), btScalar(0.2), btScalar(1.0) };
 	GLfloat light_diffuse[] = { btScalar(1.0), btScalar(1.0), btScalar(1.0), btScalar(1.0) };
@@ -211,23 +287,33 @@ void KeplerBtDynamics::draw()
         
 		glDisable(GL_LIGHTING);
 	}
+    
+    ramPushAll();
+    ofSetColor(ramColor::BLUE_LIGHT);
+    glDisable(GL_LIGHTING);
+    for (int i=0; i<m_constrains.size(); i++) {
+        m_constrains.at(i)->draw();
+    }
+    ramPopAll();
+    
 }
 
-void KeplerBtDynamics::keyPressed(int key)
+void ChainBtDynamics::keyPressed(int key)
 {
 	switch (key) {
         case 'e': {
-            btVector3 startOffset(ofRandom(-295,295),ofRandom(100, 500),ofRandom(-295,295));
-            spawnKepler(startOffset);
+            //            btVector3 startOffset(ofRandom(-295,295),ofRandom(100, 500),ofRandom(-295,295));
+            //            spawnConstrains(startOffset);
         }
     }
 }
 
-void KeplerBtDynamics::exitPhysics()
+void ChainBtDynamics::exitPhysics()
 {
-	for (int i=0;i<m_boxes.size();i++) {
-		KeplerCube* cube = m_boxes[i];
-		delete cube;
+	for (int i=0;i<m_constrains.size();i++) {
+		BaseConstrains* consts = m_constrains[i];
+		delete consts;
+        consts = NULL;
 	}
     
 	//cleanup in the reverse order of creation/initialization
@@ -239,30 +325,33 @@ void KeplerBtDynamics::exitPhysics()
 		btRigidBody* body = btRigidBody::upcast(obj);
 		if (body && body->getMotionState()) {
 			delete body->getMotionState();
+            body->setMotionState(NULL);
 		}
 		m_dynamicsWorld->removeCollisionObject( obj );
 		delete obj;
+        obj = NULL;
 	}
     
 	//delete collision shapes
 	for (int j=0;j<m_collisionShapes.size();j++) {
 		btCollisionShape* shape = m_collisionShapes[j];
 		delete shape;
+        shape = NULL;
 	}
     
 	//delete dynamics world
-	delete m_dynamicsWorld;
+	delete m_dynamicsWorld; m_dynamicsWorld = NULL;
     
 	//delete solver
-	delete m_solver;
+	delete m_solver; m_solver = NULL;
     
 	//delete broadphase
-	delete m_broadphase;
+	delete m_broadphase; m_broadphase = NULL;
     
 	//delete dispatcher
-	delete m_dispatcher;
+	delete m_dispatcher; m_dispatcher = NULL;
     
-	delete m_collisionConfiguration;
+	delete m_collisionConfiguration; m_collisionConfiguration = NULL;
 }
 
 /// Basic staffs
@@ -270,7 +359,7 @@ static const int maxNumObjects = 16384;
 static btTransform startTransforms[maxNumObjects];
 static btCollisionShape* gShapePtr[maxNumObjects];//1 rigidbody has 1 shape (no re-use of shapes)
 
-KeplerBtDynamics::KeplerBtDynamics()
+ChainBtDynamics::ChainBtDynamics()
 //see btIDebugDraw.h for modes
 :
 m_dynamicsWorld(0),
@@ -282,11 +371,11 @@ m_enableshadows(true),
 m_sundirection(btVector3(1,-2,1)*1000),
 m_defaultContactProcessingThreshold(BT_LARGE_FLOAT)
 {
-	m_shapeDrawer = new KeplerBtShapeDrawer();
+	m_shapeDrawer = new ChainBtShapeDrawer();
 	m_shapeDrawer->enableTexture(true);
 }
 
-KeplerBtDynamics::~KeplerBtDynamics()
+ChainBtDynamics::~ChainBtDynamics()
 {
     exitPhysics();
     
@@ -294,15 +383,15 @@ KeplerBtDynamics::~KeplerBtDynamics()
 		delete m_shapeDrawer;
 }
 
-void KeplerBtDynamics::setup(void)
-{    
+void ChainBtDynamics::setup(void)
+{
     initPhysics();
 }
 
 
 //#define NUM_SPHERES_ON_DIAGONAL 9
 
-btRigidBody* KeplerBtDynamics::localCreateRigidBody(float mass,
+btRigidBody* ChainBtDynamics::localCreateRigidBody(float mass,
                                                    const btTransform& startTransform,
                                                    btCollisionShape* shape)
 {
@@ -322,7 +411,7 @@ btRigidBody* KeplerBtDynamics::localCreateRigidBody(float mass,
     
 	btRigidBody* body = new btRigidBody(cInfo);
 	body->setContactProcessingThreshold(m_defaultContactProcessingThreshold);
-
+    
     
 	m_dynamicsWorld->addRigidBody(body);
     
@@ -330,7 +419,7 @@ btRigidBody* KeplerBtDynamics::localCreateRigidBody(float mass,
 }
 
 //
-void KeplerBtDynamics::renderscene(int pass)
+void ChainBtDynamics::renderscene(int pass)
 {
 	btScalar	m[16];
 	btMatrix3x3	rot;rot.setIdentity();
@@ -348,28 +437,40 @@ void KeplerBtDynamics::renderscene(int pass)
 			colObj->getWorldTransform().getOpenGLMatrix(m);
 			rot=colObj->getWorldTransform().getBasis();
 		}
-		btVector3 wireColor(1.f,1.0f,0.5f); //wants deactivation
-		if(i&1) wireColor=btVector3(0.f,0.0f,1.f);
+		btVector3 wireColor(ramColor::RED_NORMAL.r/255.0f,
+                            ramColor::RED_NORMAL.g/255.0f,
+                            ramColor::RED_NORMAL.b/255.0f); //wants deactivation
+		if(i&1) wireColor=btVector3(ramColor::BLUE_NORMAL.r/255.0f,
+                                    ramColor::BLUE_NORMAL.g/255.0f,
+                                    ramColor::BLUE_NORMAL.b/255.0f);
 		///color differently for active, sleeping, wantsdeactivation states
         //active
 		if (colObj->getActivationState() == 1) {
 			if (i & 1)
-				wireColor += btVector3 (1.f,0.f,0.f);
+				wireColor += btVector3 (ramColor::YELLOW_NORMAL.r/255.0f,
+                                        ramColor::YELLOW_NORMAL.g/255.0f,
+                                        ramColor::YELLOW_NORMAL.b/255.0f);
 			else
-				wireColor += btVector3 (.5f,0.f,0.f);
+				wireColor += btVector3 (ramColor::GREEN_NORMAL.r/255.0f,
+                                        ramColor::GREEN_NORMAL.g/255.0f,
+                                        ramColor::GREEN_NORMAL.b/255.0f);
 		}
         //ISLAND_SLEEPING
 		if(colObj->getActivationState()==2) {
 			if(i&1)
-				wireColor += btVector3 (0.f,1.f, 0.f);
+				wireColor += btVector3 (ramColor::RED_DEEP.r/255.0f,
+                                        ramColor::RED_DEEP.g/255.0f,
+                                        ramColor::RED_DEEP.b/255.0f);
 			else
-				wireColor += btVector3 (0.f,0.5f,0.f);
+				wireColor += btVector3 (ramColor::BLUE_DEEP.r/255.0f,
+                                        ramColor::BLUE_DEEP.g/255.0f,
+                                        ramColor::BLUE_DEEP.b/255.0f);
 		}
         
         if (colObj->getCollisionShape()->getShapeType() == BOX_SHAPE_PROXYTYPE) {
             MyInfo *info = (MyInfo *)colObj->getUserPointer();
             if (info && info->isGround)
-                wireColor = btVector3 (0.3f,0.3f,0.3f);
+                wireColor = btVector3 (0.0f,0.0f,0.0f);
         }
         
 		btVector3 aabbMin,aabbMax;
@@ -395,7 +496,7 @@ void KeplerBtDynamics::renderscene(int pass)
 #include "BulletCollision/BroadphaseCollision/btAxisSweep3.h"
 
 
-void KeplerBtDynamics::clientResetScene()
+void ChainBtDynamics::clientResetScene()
 {
 	int numObjects = 0;
     
@@ -403,7 +504,7 @@ void KeplerBtDynamics::clientResetScene()
 		int numConstraints = m_dynamicsWorld->getNumConstraints();
 		for (int i=0;i<numConstraints;i++)
 			m_dynamicsWorld->getConstraint(0)->setEnabled(true);
-
+        
 		numObjects = m_dynamicsWorld->getNumCollisionObjects();
         
 		///create a copy of the array, not a reference!
@@ -432,7 +533,7 @@ void KeplerBtDynamics::clientResetScene()
 					btRigidBody::upcast(colObj)->setLinearVelocity(btVector3(0,0,0));
 					btRigidBody::upcast(colObj)->setAngularVelocity(btVector3(0,0,0));
 				}
-			}    
+			}
 		}
         
 		///reset some internal cached data in the broadphase
