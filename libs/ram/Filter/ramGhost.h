@@ -25,6 +25,10 @@ public:
 		
 		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
 		panel->addSpacer(gui.kLength, 2);
+		panel->addButton("Ghost", false, 10, 10);
+		panel->addButton("Slow", false, 10, 10);
+		panel->addButton("Normal", false, 10, 10);
+		panel->addButton("Fast", false, 10, 10);
 		panel->addSlider("Distance", 0.0, 255.0, &distance, gui.kLength, gui.kDim);
 		panel->addSlider("Speed", 0.0, 255.0, &speed, gui.kLength, gui.kDim);
 	}
@@ -41,6 +45,32 @@ public:
 	size_t getSize() const { return 1; }
 	
 	inline const string getName() { return "ramGhost"; };
+	
+	void onValueChanged(ofxUIEventArgs& e)
+	{
+		string name = e.widget->getName();
+		
+		if (name == "Ghost")
+		{
+			setSpeed(1.5);
+			setDistance(240);
+		}
+		if (name == "Slow")
+		{
+			setSpeed(8.3);
+			setDistance(74.4);
+		}
+		if (name == "Normal")
+		{
+			setSpeed(9.4);
+			setDistance(150);
+		}
+		if (name == "Fast")
+		{
+			setSpeed(38.9);
+			setDistance(211.1);
+		}
+	}
 	
 protected:
 	ramNodeArray ghost;

@@ -109,7 +109,53 @@ public:
 	
 	void drawRigid(ramRigidBody &rigid)
 	{
-		
+		for (int i=0; i<rigid.getNumNode(); i++)
+		{
+			const ramNode &node = rigid.getNode(i);
+			float boxSize = (i==0) ? 6 : 3;
+			float bigBoxSize = mSizeArray.at(i);
+			
+			glPushAttrib(GL_ALL_ATTRIB_BITS);
+			glPushMatrix();
+			{
+				ofPushStyle();
+				ofNoFill();
+				
+				glEnable(GL_DEPTH_TEST);
+				
+				/*!
+				 big box
+				 */
+				if (mUseSingleColor)
+				{
+					ofSetColor(r, g, b);
+				}
+				else
+				{
+					if (i%3 == 0)
+					{
+						ofSetColor( ramColor::BLUE_DEEP );
+					}
+					else if (i%3 == 1)
+					{
+						ofSetColor( ramColor::BLUE_NORMAL );
+					}
+					else
+					{
+						ofSetColor( ramColor::BLUE_LIGHT );
+					}
+				}
+				
+				ofSetLineWidth(mBoxLineWidth);
+				node.beginTransform();
+				ofBox(bigBoxSize);
+				node.endTransform();
+				
+				ofPopStyle();
+			}
+			glPopMatrix();
+			glPopAttrib();
+		}
 	}
 	
 	void onPanelChanged(ofxUIEventArgs& e)
