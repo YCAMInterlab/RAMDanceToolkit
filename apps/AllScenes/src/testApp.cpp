@@ -58,6 +58,9 @@ FourPoints fourPoints;
 #include "Chain.h"
 Chain chain;
 
+#include "Monster.h"
+Monster monster;
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -91,7 +94,8 @@ void testApp::setup()
 	scenes.push_back( colorGrid.getPtr() );
 	scenes.push_back( threePoints.getPtr() );
 	scenes.push_back( fourPoints.getPtr() );
-    scenes.push_back( chain.getPtr() );
+	scenes.push_back( chain.getPtr() );
+	scenes.push_back( monster.getPtr() );
 	sceneManager.setup(scenes);
 }
 

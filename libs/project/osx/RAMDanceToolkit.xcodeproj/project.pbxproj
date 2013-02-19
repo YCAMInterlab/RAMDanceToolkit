@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27FD3B6D16D38F1100C9EAC6 /* ramMonster.h in Headers */ = {isa = PBXBuildFile; fileRef = 27FD3B6C16D38F1100C9EAC6 /* ramMonster.h */; };
 		600EFB1A16C8F56800A5B331 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 600EFAF616C8F56800A5B331 /* IpEndpointName.cpp */; };
 		600EFB1B16C8F56800A5B331 /* IpEndpointName.h in Headers */ = {isa = PBXBuildFile; fileRef = 600EFAF716C8F56800A5B331 /* IpEndpointName.h */; };
 		600EFB1C16C8F56800A5B331 /* NetworkingUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 600EFAF816C8F56800A5B331 /* NetworkingUtils.h */; };
@@ -352,6 +353,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		27FD3B6C16D38F1100C9EAC6 /* ramMonster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramMonster.h; sourceTree = "<group>"; };
 		600EFAF116C8F56800A5B331 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
 		600EFAF616C8F56800A5B331 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		600EFAF716C8F56800A5B331 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
@@ -1278,19 +1280,20 @@
 		609A651216CAC57C00C0AB22 /* Filter */ = {
 			isa = PBXGroup;
 			children = (
-				607A91A716D2B52C0038D472 /* ramTimeFilter.h */,
-				60EF104616D0C45700A37B2A /* ramGraphView.h */,
-				60DA905116CE7DAF00E392B5 /* ramNodeTransform.h */,
-				60426F9716CE1A5300C99541 /* ramExpansion.h */,
-				60FFDB5416CD1F2F0093F734 /* ramBaseFilter.h */,
-				60CFE13916CCA76F000050C8 /* ramStamp.h */,
-				9A02CDAE16CBD96D0055E1AC /* ramSession.h */,
-				9A02CDAC16CBD9610055E1AC /* ramStamp.h */,
 				609A651316CAC57C00C0AB22 /* ramAnalyzer.h */,
+				60FFDB5416CD1F2F0093F734 /* ramBaseFilter.h */,
+				60426F9716CE1A5300C99541 /* ramExpansion.h */,
 				609A651616CAC57C00C0AB22 /* ramGhost.h */,
-				609A651716CAC57C00C0AB22 /* ramUpsideDown.h */,
-				609A651816CAC57C00C0AB22 /* ramPendulum.h */,
+				60EF104616D0C45700A37B2A /* ramGraphView.h */,
+				27FD3B6C16D38F1100C9EAC6 /* ramMonster.h */,
+				60DA905116CE7DAF00E392B5 /* ramNodeTransform.h */,
 				9AE4C36716CB76EE00BCE1D4 /* ramPastMe.h */,
+				609A651816CAC57C00C0AB22 /* ramPendulum.h */,
+				9A02CDAE16CBD96D0055E1AC /* ramSession.h */,
+				60CFE13916CCA76F000050C8 /* ramStamp.h */,
+				607A91A716D2B52C0038D472 /* ramTimeFilter.h */,
+				9A02CDAC16CBD9610055E1AC /* ramStamp.h */,
+				609A651716CAC57C00C0AB22 /* ramUpsideDown.h */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -1782,6 +1785,7 @@
 				607A91A616D2B4A40038D472 /* ramNodeArrayBuffer.h in Headers */,
 				607A91A816D2B52C0038D472 /* ramTimeFilter.h in Headers */,
 				60A9B79816D2CD3D0079E701 /* ramControlPanelBase.h in Headers */,
+				27FD3B6D16D38F1100C9EAC6 /* ramMonster.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
