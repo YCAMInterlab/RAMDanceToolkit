@@ -2,7 +2,7 @@
 
 #include "ramNodeLine.h"
 
-class Line : public ramBaseScene
+class LineDrawing : public ramBaseScene
 {
 	
 public:
@@ -160,7 +160,7 @@ public:
 	float random_change_time;
 	float last_changed_time;
 	
-	Line()
+	LineDrawing()
 	{
 	}
 	
@@ -183,7 +183,7 @@ public:
 	
 	void setup()
 	{
-		ofAddListener(ofEvents().keyPressed, this, &Line::onKeyPressed);
+		ofAddListener(ofEvents().keyPressed, this, &LineDrawing::onKeyPressed);
 	}
 	
 	void onKeyPressed(ofKeyEventArgs &e)

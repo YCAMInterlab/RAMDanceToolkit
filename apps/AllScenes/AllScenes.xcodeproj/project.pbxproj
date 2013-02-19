@@ -98,7 +98,7 @@
 		9A2B3F5616D325C7001CBFC9 /* KeplerBtShapeDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeplerBtShapeDrawer.h; sourceTree = "<group>"; };
 		9A2B3F5716D325C7001CBFC9 /* KeplerCube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeplerCube.cpp; sourceTree = "<group>"; };
 		9A2B3F5816D325C7001CBFC9 /* KeplerCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeplerCube.h; sourceTree = "<group>"; };
-		9A2B3F5A16D325C7001CBFC9 /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
+		9A2B3F5A16D325C7001CBFC9 /* LineDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineDrawing.h; sourceTree = "<group>"; };
 		9A2B3F5C16D325C7001CBFC9 /* ParticleEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleEngine.h; sourceTree = "<group>"; };
 		9A2B3F5D16D325C7001CBFC9 /* Particles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particles.h; sourceTree = "<group>"; };
 		9A2B3F5F16D325C7001CBFC9 /* SoundCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundCube.h; sourceTree = "<group>"; };
@@ -197,7 +197,7 @@
 				9A2B3F4716D325C7001CBFC9 /* Expansion */,
 				9A2B3F4916D325C7001CBFC9 /* Future */,
 				9A2B3F4E16D325C7001CBFC9 /* Kepler */,
-				9A2B3F5916D325C7001CBFC9 /* Line */,
+				9A2B3F5916D325C7001CBFC9 /* LineDrawing */,
 				9A2B3F5B16D325C7001CBFC9 /* Particles */,
 				9A2B3F5E16D325C7001CBFC9 /* SoundCube */,
 				9A2B3F6016D325C7001CBFC9 /* Stamp */,
@@ -278,12 +278,12 @@
 			path = scenes/Kepler;
 			sourceTree = "<group>";
 		};
-		9A2B3F5916D325C7001CBFC9 /* Line */ = {
+		9A2B3F5916D325C7001CBFC9 /* LineDrawing */ = {
 			isa = PBXGroup;
 			children = (
-				9A2B3F5A16D325C7001CBFC9 /* Line.h */,
+				9A2B3F5A16D325C7001CBFC9 /* LineDrawing.h */,
 			);
-			name = Line;
+			name = LineDrawing;
 			path = scenes/Line;
 			sourceTree = "<group>";
 		};

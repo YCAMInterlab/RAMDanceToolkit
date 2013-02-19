@@ -7,8 +7,8 @@
 #include "BasicActor.h"
 BasicActor basicActor;
 
-#include "Line.h"
-Line drawLines;
+#include "LineDrawing.h"
+LineDrawing drawLines;
 
 #include "BigBox.h"
 BigBox bigbox;
