@@ -4,6 +4,7 @@ class Expansion : public ramBaseScene
 {
 	
 	ramExpansion mExpantion;
+	ramLowPassFilter lowpass;
 	
 	ofxUIToggle *mToggleDraw[ramActor::NUM_JOINTS];
 	bool mNodeVisibility[ramActor::NUM_JOINTS];
@@ -64,7 +65,9 @@ public:
 			panel->addWidgetRight(toggleVisible);
 			mToggleDraw[i] = toggleVisible;
 		}
-			
+		
+		lowpass.setupControlPanel(panel);
+		
 		ofAddListener(panel->newGUIEvent, this, &Expansion::onValueChanged);
 	}
 	
@@ -86,7 +89,8 @@ public:
 	
 	void drawActor( ramActor& actor )
 	{
-		ramActor &expandedActor = (ramActor&)mExpantion.update(actor);
+		ramActor &expandedActor = (ramActor&) lowpass.filter( mExpantion.filter(actor) ) ;
+		
 		
 		ofPushStyle();
 		ofNoFill();
@@ -100,27 +104,40 @@ public:
 			
 			int boxSize = mBoxSize * (mBiggerSize[i] ? mBoxSizeRatio : 1);
 			
-			ofSetLineWidth(1);
-			ofSetColor(r, g, b);
-			if (mShowBox) ofBox(boxSize);
-			if (mShowAxis) ofDrawAxis(boxSize);
+			if (mShowBox)
+			{
+				ofSetColor(r, g, b);
+				ofBox(boxSize);
+			}
 			
-			ofSetColor(100);
-			if (mShowLine) ofLine(actor.getNode(i), expandedActor.getNode(i));
+			if (mShowAxis)
+			{
+				ofDrawAxis(boxSize);
+			}
 			
-			ofSetLineWidth(2);
-			if (mShowExtendedLine) ofLine(actor.getNode(i), expandedActor.getNode(i));
+			if (mShowExtendedLine)
+			{
+				ofSetLineWidth(2);
+				ofLine(actor.getNode(i), expandedActor.getNode(i));
+			}
+			
 			node.endTransform();
 			
-			ofSetColor(255);
-			if (mShowName) node.drawName(mBoxSize+20);
+			if (mShowLine)
+			{
+				ofSetColor(100);
+				ofSetLineWidth(1);
+				ofLine(actor.getNode(i), expandedActor.getNode(i));
+			}
+			
+			
+			if (mShowName)
+			{
+				ofSetColor(255);
+				node.drawName(mBoxSize+20);
+			}
 		}
 		ofPopStyle();
-	}
-	
-	void drawRigid(ramRigidBody &rigid)
-	{
-		
 	}
 	
 	void onValueChanged(ofxUIEventArgs& e)
@@ -133,10 +150,9 @@ public:
 			bool newValue = t->getValue();
 			
 			setAllVisiblity(newValue);
+			
 			for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			{
 				mToggleDraw[i]->setValue(newValue);
-			}
 		}
 		
 		if (name == "Toggle box size")
@@ -145,10 +161,9 @@ public:
 			bool newValue = t->getValue();
 			
 			toggleAllSize(newValue);
+			
 			for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			{
 				mToggleSize[i]->setValue(newValue);
-			}
 		}
 	}
 	
@@ -161,15 +176,12 @@ public:
 	
 	void setAllVisiblity(bool b)
 	{
-		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			mNodeVisibility[i] = b;
+		for (int i=0; i<ramActor::NUM_JOINTS; i++) mNodeVisibility[i] = b;
 	}
 	
 	void toggleAllSize(bool b)
 	{
-		cout << "toggleAllSize" << endl;
-		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			mBiggerSize[i] = b;
+		for (int i=0; i<ramActor::NUM_JOINTS; i++) mBiggerSize[i] = b;
 	}
 };
 
