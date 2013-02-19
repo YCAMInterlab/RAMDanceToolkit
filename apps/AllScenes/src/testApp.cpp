@@ -43,6 +43,9 @@ Kepler kepler;
 #include "HastyChase.h"
 HastyChase hastyChase;
 
+#include "upside-donuts.h"
+UpsideDownDonuts upsideDownDonuts;
+
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -73,6 +76,7 @@ void testApp::setup()
     scenes.push_back( upsideDown.getPtr() );
     scenes.push_back( kepler.getPtr() );
 	scenes.push_back( hastyChase.getPtr() );
+	scenes.push_back( upsideDownDonuts.getPtr() );
 	sceneManager.setup(scenes);
 }
 

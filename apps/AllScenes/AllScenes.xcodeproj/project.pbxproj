@@ -104,6 +104,7 @@
 		9A2B3F5F16D325C7001CBFC9 /* SoundCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundCube.h; sourceTree = "<group>"; };
 		9A2B3F6116D325C7001CBFC9 /* Stamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stamp.h; sourceTree = "<group>"; };
 		9A2B3F6316D325C7001CBFC9 /* UpsideDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpsideDown.h; sourceTree = "<group>"; };
+		9A2B3FB716D3517A001CBFC9 /* upside-donuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "upside-donuts.h"; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -187,6 +188,7 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				9A2B3FB316D35150001CBFC9 /* YokoSelection */,
 				60E559B016D3366A00051FE9 /* HastyChase */,
 				9A2B3F3F16D325C7001CBFC9 /* Abacus */,
 				9A2B3F4116D325C7001CBFC9 /* BasicActor */,
@@ -320,6 +322,23 @@
 			);
 			name = UpsideDown;
 			path = scenes/UpsideDown;
+			sourceTree = "<group>";
+		};
+		9A2B3FB316D35150001CBFC9 /* YokoSelection */ = {
+			isa = PBXGroup;
+			children = (
+				9A2B3FB616D3517A001CBFC9 /* upside-donuts */,
+			);
+			name = YokoSelection;
+			path = scenes/YokoSelection;
+			sourceTree = "<group>";
+		};
+		9A2B3FB616D3517A001CBFC9 /* upside-donuts */ = {
+			isa = PBXGroup;
+			children = (
+				9A2B3FB716D3517A001CBFC9 /* upside-donuts.h */,
+			);
+			path = "upside-donuts";
 			sourceTree = "<group>";
 		};
 		BB4B014C10F69532006C3DED /* addons */ = {
