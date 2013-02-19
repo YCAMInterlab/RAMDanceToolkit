@@ -159,7 +159,7 @@ void ramDrawBasicRigid(const ramRigidBody& rigid,
 		node.endTransform();
 	}
 }
-void ramDrawNodes(ramNodeArray& nodeArray,
+void ramDrawNodes(const ramNodeArray& nodeArray,
 				  const ofColor& jointColor,
 				  const ofColor& lineColor)
 {
