@@ -84,6 +84,7 @@
 		27B8489316D35466000D321D /* ThreePoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreePoints.h; sourceTree = "<group>"; };
 		27B8489416D35513000D321D /* SphereMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphereMesh.h; sourceTree = "<group>"; };
 		27B8489516D3554B000D321D /* GeometryHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryHelpers.h; sourceTree = "<group>"; };
+		27B8489716D35D17000D321D /* FourPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourPoints.h; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
 		60E559B116D3366A00051FE9 /* HastyChase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HastyChase.h; sourceTree = "<group>"; };
 		9A2B3F4016D325C7001CBFC9 /* Abacus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Abacus.h; sourceTree = "<group>"; };
@@ -183,6 +184,15 @@
 			path = scenes/ThreePoints;
 			sourceTree = "<group>";
 		};
+		27B8489616D35D17000D321D /* FourPoints */ = {
+			isa = PBXGroup;
+			children = (
+				27B8489716D35D17000D321D /* FourPoints.h */,
+			);
+			name = FourPoints;
+			path = scenes/FourPoints;
+			sourceTree = "<group>";
+		};
 		601900561644E22B001930AA /* ram */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,20 +221,21 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				27B8489216D35466000D321D /* ThreePoints */,
-				27B8489016D34A02000D321D /* ColorGrid */,
-				60E559B016D3366A00051FE9 /* HastyChase */,
 				9A2B3F3F16D325C7001CBFC9 /* Abacus */,
 				9A2B3F4116D325C7001CBFC9 /* BasicActor */,
 				9A2B3F4316D325C7001CBFC9 /* BigBox */,
+				27B8489016D34A02000D321D /* ColorGrid */,
 				9A2B3F4516D325C7001CBFC9 /* Donuts */,
 				9A2B3F4716D325C7001CBFC9 /* Expansion */,
+				27B8489616D35D17000D321D /* FourPoints */,
 				9A2B3F4916D325C7001CBFC9 /* Future */,
+				60E559B016D3366A00051FE9 /* HastyChase */,
 				9A2B3F4E16D325C7001CBFC9 /* Kepler */,
 				9A2B3F5916D325C7001CBFC9 /* Line */,
 				9A2B3F5B16D325C7001CBFC9 /* Particles */,
 				9A2B3F5E16D325C7001CBFC9 /* SoundCube */,
 				9A2B3F6016D325C7001CBFC9 /* Stamp */,
+				27B8489216D35466000D321D /* ThreePoints */,
 				9A2B3F6216D325C7001CBFC9 /* UpsideDown */,
 			);
 			name = Scenes;
