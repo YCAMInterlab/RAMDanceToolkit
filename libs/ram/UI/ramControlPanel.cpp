@@ -140,7 +140,7 @@ void ramOfxUIControlPanel::addPanel(const string& name)
 
 void ramOfxUIControlPanel::addSection(const string& name)
 {
-	current_panel->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_LARGE));
+	current_panel->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_MEDIUM));
 	current_panel->addSpacer(kLength, 2);
 }
 
@@ -205,10 +205,42 @@ void ramOfxUIControlPanel::addSlider(const string& name, float min_value, float 
 	current_panel->addSlider(name, min_value, max_value, value, kLength, kDim);
 }
 
+struct ColorSelectorListener
+{
+	ofxUIToggle* toggle;
+	ofFloatColor *value;
+	ofFloatColor color;
+	
+	ColorSelectorListener(ofxUIToggle* toggle, ofFloatColor *value)
+	: toggle(toggle), value(value) {}
+	
+	void handle(ofxUIEventArgs &e)
+	{
+		if (toggle->getValue())
+		{
+			color = *value;
+			value->a = 1;
+		}
+		else
+		{
+			*value = color;
+			value->a = 0;
+		}
+	}
+};
+
 void ramOfxUIControlPanel::addColorSelector(const string& name, ofFloatColor *value)
 {
-	current_panel->addSlider("R", 0, 1, &value->r, 95, kDim);
+	current_panel->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_SMALL));
+	
+	ofxUIToggle* toggle = current_panel->addToggle("", true, 26, 26);
 	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
+	
+	// FIXME: memory leak
+	ColorSelectorListener *e = new ColorSelectorListener(toggle, value);
+	ofAddListener(current_panel->newGUIEvent, e, &ColorSelectorListener::handle);
+	
+	current_panel->addSlider("R", 0, 1, &value->r, 95, kDim);
 	current_panel->addSlider("G", 0, 1, &value->g, 95, kDim);
 	current_panel->addSlider("B", 0, 1, &value->b, 95, kDim);
 	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
