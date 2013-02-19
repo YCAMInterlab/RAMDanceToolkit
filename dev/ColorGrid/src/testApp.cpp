@@ -38,13 +38,6 @@ void testApp::draw()
 	img.draw(0, 0, ofGetWidth(), ofGetHeight());
 }
 
-
-#pragma mark - ram methods
-//--------------------------------------------------------------
-void testApp::drawFloor()
-{
-}
-
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {

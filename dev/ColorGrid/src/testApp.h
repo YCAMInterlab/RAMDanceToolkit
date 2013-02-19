@@ -39,4 +39,7 @@ public:
 	// ------------------------
 	ramOscReceiver oscReceiver;
 	ramSceneManager sceneManager;
+	
+	ofImage img;
+	bool mode;
 };
