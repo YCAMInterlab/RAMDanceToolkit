@@ -50,30 +50,15 @@ public:
 	void addSeparator();
 	
 	void addLabel(const string& content);
-	
+
 	template <typename Functor>
 	void addButton(const string& name, const Functor &functor)
 	{
 		ofxUIButton *button = current_panel->addButton(name, false, 30, 30);
 		
-		struct Listener
-		{
-			ofxUIButton *button;
-			struct ICallable *callable;
-			
-			Listener(ofxUIButton *button, ICallable *callable) : button(button), callable(callable) {}
-			~Listener() { delete button; delete callable; }
-			
-			void handle(ofxUIEventArgs &e)
-			{
-				if (!button->getValue()) return;
-				callable->call();
-			}
-		};
-		
 		// FIXME: memory leak
-		Listener *e = new Listener(button, new Callback<Functor>(functor));
-		ofAddListener(current_panel->newGUIEvent, e, &Listener::handle);
+		ButtonEventListener *e = new ButtonEventListener(button, new Callback<Functor>(functor));
+		ofAddListener(current_panel->newGUIEvent, e, &ButtonEventListener::handle);
 	}
 
 	void addToggle(const string& name, bool *value);
@@ -91,6 +76,8 @@ public:
 	
 private:
 	
+	static ramOfxUIControlPanel *_instance;
+	
 	float mR, mG, mB;
 	bool mUseBgSlider;
 	bool enableShadow;
@@ -106,7 +93,20 @@ private:
 	
 	vector<ramBaseScene*> *scenes;
 	
-	static ramOfxUIControlPanel *_instance;
+	struct ButtonEventListener
+	{
+		ofxUIButton *button;
+		struct ICallable *callable;
+		
+		ButtonEventListener(ofxUIButton *button, ICallable *callable) : button(button), callable(callable) {}
+		~ButtonEventListener() { delete button; delete callable; }
+		
+		void handle(ofxUIEventArgs &e)
+		{
+			if (!button->getValue()) return;
+			callable->call();
+		}
+	};
 	
 	ramOfxUIControlPanel();
 };
