@@ -10,7 +10,7 @@
 #define __BaseConstrains__BaseConstrains__
 
 #include "LinearMath/btScalar.h"
-#include "btAlignedObjectArray.h"
+#include "LinearMath/btAlignedObjectArray.h"
 
 class btDynamicsWorld;
 class btCollisionShape;
