@@ -40,6 +40,9 @@ UpsideDown upsideDown;
 #include "Kepler.h"
 Kepler kepler;
 
+#include "upside-donuts.h"
+UpsideDownDonuts upsideDownDonuts;
+
 #include "HastyChase.h"
 HastyChase hastyChase;
 
@@ -82,6 +85,7 @@ void testApp::setup()
     scenes.push_back( upsideDown.getPtr() );
     scenes.push_back( kepler.getPtr() );
 	scenes.push_back( hastyChase.getPtr() );
+	scenes.push_back( upsideDownDonuts.getPtr() );
 	sceneManager.setup(scenes);
 	
     ofEasyCam *cam = (ofEasyCam*)ramCameraManager::instance().getCamera(0);
