@@ -7,8 +7,13 @@ class Stamp : public ramBaseScene
 	bool mShowActor;
 	bool mShowBox;
 	
-	float r, g, b;
 	float line_width;
+	
+	ofFloatColor color;
+	
+	ramTimerdMovementAnalyser timer;
+	float timer_duration;
+	
 public:
 	
 	Stamp() : mShowActor(true), mShowBox(true) {}
@@ -19,18 +24,11 @@ public:
 		
 		mStamp.setupControlPanel(panel);
 		
-		panel->addToggle("Show Actor", &mShowActor, 30, 30);
-		panel->addToggle("Show Box", &mShowBox, 30, 30);
+		gui.addToggle("Show Actor", &mShowActor);
+		gui.addColorSelector("Box line color", &color);
+		gui.addSlider("Line width", 0, 6, &line_width);
 		
-		panel->addSpacer(gui.kLength, 2);
-		panel->addWidgetDown(new ofxUIToggle(32, 32, true, "Box line color"));
-		
-		panel->addSlider("Stamp R", 0, 255, &r, 95, gui.kDim);
-		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
-		panel->addSlider("Stamp G", 0, 255, &g, 95, gui.kDim);
-		panel->addSlider("Stamp B", 0, 255, &b, 95, gui.kDim);
-		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
-		panel->addSlider("Line width", 0, 255, &line_width, gui.kLength, gui.kDim);
+		gui.addSlider("timer_duration", 0, 4, &timer_duration);
 		
 		ofAddListener(panel->newGUIEvent, this, &Stamp::onValueChanged);
 	}
@@ -48,6 +46,11 @@ public:
 		{
 			mStamp.update( getNodeArray(ofRandom(0, numNudeArrays)) );
 		}
+		
+		if (timer_duration > 0)
+		{
+			timer.setTime(timer_duration);
+		}
 	}
 	
 	void draw()
@@ -63,10 +66,10 @@ public:
 				ramDrawNodes(nodeArray);
 			}
 			
-			if (mShowBox)
+			if (color.a > 0)
 			{
 				ofPushStyle();
-				ofSetColor(r, g, b);
+				ofSetColor(color);
 				ofSetLineWidth(line_width);
 				ramDrawActorCube(nodeArray);
 				ofPopStyle();

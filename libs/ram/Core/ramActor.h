@@ -106,8 +106,6 @@ enum ramNodeArrayType
 class ramNodeArray
 {
 public:
-	
-
 
 	ramNodeArray();
 	ramNodeArray(const ramNodeArray& copy) { *this = copy; }
