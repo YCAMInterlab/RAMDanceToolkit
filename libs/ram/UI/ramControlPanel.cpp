@@ -119,9 +119,11 @@ void ramOfxUIControlPanel::update(ofEventArgs &e)
 void ramOfxUIControlPanel::addPanel(ramControllable* control)
 {
 	ofxUICanvas *panel = new ofxUICanvas(0, 0, ramGetGUI().kLength+ramGetGUI().kXInit*2.0, ofGetScreenHeight());
+	current_panel = panel;
 	
 	panel->addWidgetDown(new ofxUILabel(control->getName(), OFX_UI_FONT_LARGE));
 	panel->addSpacer(kLength, 2);
+	
 	control->setupControlPanel(panel);
 	getTabbedCanvas().add(panel);
 }
@@ -129,11 +131,11 @@ void ramOfxUIControlPanel::addPanel(ramControllable* control)
 void ramOfxUIControlPanel::addPanel(const string& name)
 {
 	ofxUICanvas *panel = new ofxUICanvas(0, 0, ramGetGUI().kLength+ramGetGUI().kXInit*2.0, ofGetScreenHeight());
+	current_panel = panel;
+	
 	panel->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_LARGE));
 	panel->addSpacer(kLength, 2);
 	getTabbedCanvas().add(panel);
-	
-	current_panel = panel;
 }
 
 void ramOfxUIControlPanel::addSection(const string& name)

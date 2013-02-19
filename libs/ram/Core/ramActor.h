@@ -72,10 +72,10 @@ public:
 	const ofMatrix4x4& getTransformMatrix() const { return getLocalTransformMatrix(); }
 	const ofMatrix4x4& getMatrix() const { return getLocalTransformMatrix(); }
 	
-	inline ofVec3f getVelocity() { return accerelometer.velocity; }
-	inline ofVec3f getAcceleration() { return accerelometer.acceleration; }
-	inline ofQuaternion getAngularVelocity() { return accerelometer.angular_velocity; }
-	inline ofQuaternion getAngularAcceleration() { return accerelometer.angular_acceleration; }
+	inline ofVec3f getVelocity() const { return accerelometer.velocity; }
+	inline ofVec3f getAcceleration() const { return accerelometer.acceleration; }
+	inline ofQuaternion getAngularVelocity() const { return accerelometer.angular_velocity; }
+	inline ofQuaternion getAngularAcceleration() const { return accerelometer.angular_acceleration; }
 	
 	operator ofVec3f() const { return getGlobalPosition(); }
 	
