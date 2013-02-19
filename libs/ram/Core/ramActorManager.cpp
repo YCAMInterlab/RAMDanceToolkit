@@ -190,7 +190,7 @@ void ramActorManager::draw()
 			billboard();
 			
 			ofFill();
-			ofSetColor(255, 0, 0, 30);
+			ofSetColor(255, 0, 0, 80);
 			ofCircle(0, 0, 10 + sin(ofGetElapsedTimef() * 10) * 5);
 			
 			ofNoFill();

@@ -12,7 +12,7 @@ void ramInitialize()
 	inited = true;
 	
 	// !!!:
-	ofLogWarning("ramInit() in ramSharedData.cpp: ofSetLogLevel(OF_LOG_SILENT) will be deleted when Fonts probrem in ofxUI is fixed.");
+	ofLogWarning("ramInitialize() in ramSharedData.cpp: ofSetLogLevel(OF_LOG_SILENT) will be deleted when Fonts probrem in ofxUI is fixed.");
 	ofSetLogLevel(OF_LOG_SILENT);
 	
 	ramSharedData::instance().setup();

@@ -164,9 +164,6 @@ public:
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
-		
 		panel->addSlider("line width", 1, 10, &line_width, gui.kLength, gui.kDim);
 	}
 	

@@ -19,9 +19,6 @@ public:
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
-		
 		panel->addSlider("Amount", 1.0, 15.0, &particle_amount, gui.kLength, gui.kDim);
 		panel->addSlider("Life", 0.1, 10.0, &pe.particle_life, gui.kLength, gui.kDim);
 		panel->addSlider("Velocity", 0.1, 5, &pe.particle_velocity, gui.kLength, gui.kDim);

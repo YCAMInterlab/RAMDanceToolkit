@@ -25,9 +25,6 @@ public:
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		
-		panel->addSpacer(gui.kLength, 2);
 		panel->addWidgetDown(new ofxUILabel("Original me", OFX_UI_FONT_MEDIUM));
 		panel->addSlider("Scale", 0.1, 10.0, &mScale, gui.kLength, gui.kDim);
 		panel->addSlider("Position: X", -300.0, 300.0, &mTranslate.x, gui.kLength, gui.kDim);

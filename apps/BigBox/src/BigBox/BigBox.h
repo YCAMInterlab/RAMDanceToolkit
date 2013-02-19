@@ -20,8 +20,6 @@ public:
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
 		panel->addSlider("Line width", 0.0, 10.0, &mBoxLineWidth, gui.kLength, gui.kDim);
 		panel->addSlider("Master box size", 0.0, 1000.0, &mMasterBoxSize, gui.kLength, gui.kDim);
 		panel->addSpacer(gui.kLength, 2);
@@ -68,7 +66,22 @@ public:
 				/*!
 				 big box
 				 */
-				ofSetColor( ramColor::BLUE_DEEP );
+				
+				if (i%3 == 0)
+				{
+					ofSetColor( ramColor::BLUE_DEEP );
+				}
+				else if (i%3 == 1)
+				{
+					ofSetColor( ramColor::BLUE_NORMAL );
+				}
+				else
+				{
+					ofSetColor( ramColor::BLUE_LIGHT );
+				}
+				
+				
+				
 				ofSetLineWidth(mBoxLineWidth);
 				node.beginTransform();
 				ofBox(bigBoxSize);

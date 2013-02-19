@@ -18,8 +18,6 @@ public:
 	{
 		ramControlPanel &gui = ramGetGUI();;
 		
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
 		panel->addSlider("Box size", 3.0, 100.0, &mBoxSize, gui.kLength, gui.kDim);
 		panel->addToggle("Show Name", &mShowName, 30, 30);
 		mExpantion.setupControlPanel(panel);

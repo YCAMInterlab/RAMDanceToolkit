@@ -12,9 +12,6 @@ public:
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		
-		panel->addSpacer(gui.kLength, 2);
 		panel->addWidgetDown(new ofxUILabel("No parameters", OFX_UI_FONT_MEDIUM));
 	}
 	
