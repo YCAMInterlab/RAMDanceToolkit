@@ -31,7 +31,7 @@
  Written by: Marten Svanfeldt
  */
 
-#include "ConstrainsTestScene.h"
+#include "ChainBtDynamics.h"
 #include "LinearMath/btIDebugDraw.h"
 #include "BulletDynamics/Dynamics/btDynamicsWorld.h"
 
@@ -44,7 +44,7 @@
 #include "BulletCollision/CollisionShapes/btCompoundShape.h"
 #include "BulletCollision/CollisionShapes/btUniformScalingShape.h"
 #include "BulletDynamics/ConstraintSolver/btConstraintSolver.h"
-#include "TestShapeDrawer.h"
+#include "ChainBtShapeDrawer.h"
 #include "LinearMath/btQuickprof.h"
 #include "LinearMath/btDefaultMotionState.h"
 #include "LinearMath/btSerializer.h"
@@ -52,9 +52,7 @@
 #include "btBulletDynamicsCommon.h"
 #include "LinearMath/btIDebugDraw.h"
 
-#include "RiggedBox.h"
-#include "Chain.h"
-#include "Rail.h"
+#include "ChainObject.h"
 
 #include <gl/glew.h>
 #include "ramMain.h"
@@ -128,7 +126,7 @@ inline void ramPopAll()
 }
 
 
-void ConstrainsTestScene::initPhysics()
+void ChainBtDynamics::initPhysics()
 {
 	// Setup the basic world
 	m_collisionConfiguration = new btDefaultCollisionConfiguration();
@@ -151,55 +149,62 @@ void ConstrainsTestScene::initPhysics()
     
 
 	// Setup a big ground box
-#if CHAIN_MODE
-	{
-		//btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(1.5),btScalar(0.1),btScalar(1.5)));
-        
-		btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(3000.0f),
-                                                                 btScalar(600.0f),
-                                                                 btScalar(3000.0f)));
-        m_collisionShapes.push_back(groundShape);
-		btTransform groundTransform;
-		groundTransform.setIdentity();
-		//groundTransform.setOrigin(btVector3(0,-10,0));
-        groundTransform.setOrigin(btVector3(0,-600.0f,0));
-        
-		btCollisionObject* fixedGround = new btCollisionObject();
-		fixedGround->setCollisionShape(groundShape);
-		fixedGround->setWorldTransform(groundTransform);
-        m_groundInfo.isGround = true;
-        fixedGround->setUserPointer(&m_groundInfo);
-        
-		m_dynamicsWorld->addCollisionObject(fixedGround);
-	}
-#endif
-    
-	// Spawn one ragdoll
-#if CHAIN_MODE
+    //{
+    //    //btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(1.5),btScalar(0.1),btScalar(1.5)));
+    //    
+    //    btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(3000.0f),
+    //                                                             btScalar(600.0f),
+    //                                                             btScalar(3000.0f)));
+    //    m_collisionShapes.push_back(groundShape);
+    //    btTransform groundTransform;
+    //    groundTransform.setIdentity();
+    //    //groundTransform.setOrigin(btVector3(0,-10,0));
+    //    groundTransform.setOrigin(btVector3(0,-600.0f,0));
+    //    
+    //    btCollisionObject* fixedGround = new btCollisionObject();
+    //    fixedGround->setCollisionShape(groundShape);
+    //    fixedGround->setWorldTransform(groundTransform);
+    //    m_groundInfo.isGround = true;
+    //    fixedGround->setUserPointer(&m_groundInfo);
+    //    
+    //    m_dynamicsWorld->addCollisionObject(fixedGround);
+    //}
     btVector3 startOffset(0,100,0);
-#else
-	btVector3 startOffset(0,-200,0);
-#endif
-    
-	spawnConstrains(startOffset);
+
 	clientResetScene();
 }
 
-void ConstrainsTestScene::spawnConstrains(const btVector3& startOffset)
+void ChainBtDynamics::setGravity(float x, float y, float z)
 {
-#if CHAIN_MODE
-    BaseConstrains *c0 = new Chain(m_dynamicsWorld, startOffset);
-    m_constrains.push_back(c0);
-#endif
+    m_dynamicsWorld->setGravity(btVector3(x*GRAVITY_SCALE, y*GRAVITY_SCALE, z*GRAVITY_SCALE));
     
-#if RAIL_MODE
-    BaseConstrains *c1 = new Rail(m_dynamicsWorld, startOffset);
-    m_constrains.push_back(c1);
-#endif
-    //BaseConstrains *c = new RiggedBox(m_dynamicsWorld, startOffset);
 }
 
-void ConstrainsTestScene::update()
+BaseConstrains *ChainBtDynamics::spawnChain(const btVector3& startOffset,
+                                     int nEdges,
+                                     float edgeLength,
+                                     float edgeThickness)
+{
+    BaseConstrains *c = new ChainObject(m_dynamicsWorld,
+                                        startOffset,
+                                        nEdges,
+                                        edgeLength,
+                                        edgeThickness);
+    m_constrains.push_back(c);
+    return c;
+}
+
+void ChainBtDynamics::removeAllChains()
+{
+    for (int i=0;i<m_constrains.size();i++) {
+		BaseConstrains* con = m_constrains[i];
+		delete con;
+        con = NULL;
+	}
+    m_constrains.clear();
+}
+
+void ChainBtDynamics::update()
 {
 	//simple dynamics world doesn't handle fixed-time-stepping
 	float ms = getDeltaTimeMicroseconds();
@@ -212,7 +217,7 @@ void ConstrainsTestScene::update()
 		m_dynamicsWorld->stepSimulation(ms / 1000000.f);
 }
 
-void ConstrainsTestScene::draw()
+void ChainBtDynamics::draw()
 {
     GLfloat light_ambient[] = { btScalar(0.2), btScalar(0.2), btScalar(0.2), btScalar(1.0) };
 	GLfloat light_diffuse[] = { btScalar(1.0), btScalar(1.0), btScalar(1.0), btScalar(1.0) };
@@ -293,7 +298,7 @@ void ConstrainsTestScene::draw()
     
 }
 
-void ConstrainsTestScene::keyPressed(int key)
+void ChainBtDynamics::keyPressed(int key)
 {
 	switch (key) {
         case 'e': {
@@ -303,7 +308,7 @@ void ConstrainsTestScene::keyPressed(int key)
     }
 }
 
-void ConstrainsTestScene::exitPhysics()
+void ChainBtDynamics::exitPhysics()
 {
 	for (int i=0;i<m_constrains.size();i++) {
 		BaseConstrains* consts = m_constrains[i];
@@ -354,7 +359,7 @@ const int maxNumObjects = 16384;
 btTransform startTransforms[maxNumObjects];
 btCollisionShape* gShapePtr[maxNumObjects];//1 rigidbody has 1 shape (no re-use of shapes)
 
-ConstrainsTestScene::ConstrainsTestScene()
+ChainBtDynamics::ChainBtDynamics()
 //see btIDebugDraw.h for modes
 :
 m_dynamicsWorld(0),
@@ -366,11 +371,11 @@ m_enableshadows(true),
 m_sundirection(btVector3(1,-2,1)*1000),
 m_defaultContactProcessingThreshold(BT_LARGE_FLOAT)
 {
-	m_shapeDrawer = new TestShapeDrawer();
+	m_shapeDrawer = new ChainBtShapeDrawer();
 	m_shapeDrawer->enableTexture(true);
 }
 
-ConstrainsTestScene::~ConstrainsTestScene()
+ChainBtDynamics::~ChainBtDynamics()
 {
     exitPhysics();
     
@@ -378,7 +383,7 @@ ConstrainsTestScene::~ConstrainsTestScene()
 		delete m_shapeDrawer;
 }
 
-void ConstrainsTestScene::setup(void)
+void ChainBtDynamics::setup(void)
 {    
     initPhysics();
 }
@@ -386,7 +391,7 @@ void ConstrainsTestScene::setup(void)
 
 //#define NUM_SPHERES_ON_DIAGONAL 9
 
-btRigidBody* ConstrainsTestScene::localCreateRigidBody(float mass,
+btRigidBody* ChainBtDynamics::localCreateRigidBody(float mass,
                                                    const btTransform& startTransform,
                                                    btCollisionShape* shape)
 {
@@ -414,7 +419,7 @@ btRigidBody* ConstrainsTestScene::localCreateRigidBody(float mass,
 }
 
 //
-void ConstrainsTestScene::renderscene(int pass)
+void ChainBtDynamics::renderscene(int pass)
 {
 	btScalar	m[16];
 	btMatrix3x3	rot;rot.setIdentity();
@@ -432,28 +437,40 @@ void ConstrainsTestScene::renderscene(int pass)
 			colObj->getWorldTransform().getOpenGLMatrix(m);
 			rot=colObj->getWorldTransform().getBasis();
 		}
-		btVector3 wireColor(1.f,1.0f,0.5f); //wants deactivation
-		if(i&1) wireColor=btVector3(0.f,0.0f,1.f);
+		btVector3 wireColor(ramColor::RED_NORMAL.r/255.0f,
+                            ramColor::RED_NORMAL.g/255.0f,
+                            ramColor::RED_NORMAL.b/255.0f); //wants deactivation
+		if(i&1) wireColor=btVector3(ramColor::BLUE_NORMAL.r/255.0f,
+                                    ramColor::BLUE_NORMAL.g/255.0f,
+                                    ramColor::BLUE_NORMAL.b/255.0f);
 		///color differently for active, sleeping, wantsdeactivation states
         //active
 		if (colObj->getActivationState() == 1) {
 			if (i & 1)
-				wireColor += btVector3 (1.f,0.f,0.f);
+				wireColor += btVector3 (ramColor::YELLOW_NORMAL.r/255.0f,
+                                        ramColor::YELLOW_NORMAL.g/255.0f,
+                                        ramColor::YELLOW_NORMAL.b/255.0f);
 			else
-				wireColor += btVector3 (.5f,0.f,0.f);
+				wireColor += btVector3 (ramColor::GREEN_NORMAL.r/255.0f,
+                                        ramColor::GREEN_NORMAL.g/255.0f,
+                                        ramColor::GREEN_NORMAL.b/255.0f);
 		}
         //ISLAND_SLEEPING
 		if(colObj->getActivationState()==2) {
 			if(i&1)
-				wireColor += btVector3 (0.f,1.f, 0.f);
+				wireColor += btVector3 (ramColor::RED_DEEP.r/255.0f,
+                                        ramColor::RED_DEEP.g/255.0f,
+                                        ramColor::RED_DEEP.b/255.0f);
 			else
-				wireColor += btVector3 (0.f,0.5f,0.f);
+				wireColor += btVector3 (ramColor::BLUE_DEEP.r/255.0f,
+                                        ramColor::BLUE_DEEP.g/255.0f,
+                                        ramColor::BLUE_DEEP.b/255.0f);
 		}
         
         if (colObj->getCollisionShape()->getShapeType() == BOX_SHAPE_PROXYTYPE) {
             MyInfo *info = (MyInfo *)colObj->getUserPointer();
             if (info && info->isGround)
-                wireColor = btVector3 (0.3f,0.3f,0.3f);
+                wireColor = btVector3 (0.0f,0.0f,0.0f);
         }
         
 		btVector3 aabbMin,aabbMax;
@@ -479,7 +496,7 @@ void ConstrainsTestScene::renderscene(int pass)
 #include "BulletCollision/BroadphaseCollision/btAxisSweep3.h"
 
 
-void ConstrainsTestScene::clientResetScene()
+void ChainBtDynamics::clientResetScene()
 {
 	int numObjects = 0;
     

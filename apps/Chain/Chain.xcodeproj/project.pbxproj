@@ -51,17 +51,16 @@
 		9AA73DF2165B7E7D006FBD32 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA73DED165B7E7D006FBD32 /* ofxXmlSettings.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		D255D33116B1A48E003DAE12 /* BaseConstrains.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D255D32B16B1A48E003DAE12 /* BaseConstrains.cpp */; };
-		D255D33216B1A48E003DAE12 /* ConstrainsTestScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D255D32D16B1A48E003DAE12 /* ConstrainsTestScene.cpp */; };
-		D255D33316B1A48E003DAE12 /* TestShapeDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D255D32F16B1A48E003DAE12 /* TestShapeDrawer.cpp */; };
-		D25D5B2B16B41C6A004235FB /* Rail.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25D5B2916B41C6A004235FB /* Rail.cpp */; };
+		D255D33216B1A48E003DAE12 /* ChainBtDynamics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D255D32D16B1A48E003DAE12 /* ChainBtDynamics.cpp */; };
+		D255D33316B1A48E003DAE12 /* ChainBtShapeDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D255D32F16B1A48E003DAE12 /* ChainBtShapeDrawer.cpp */; };
 		D2B3E1EE16AEDA8B0099DC4A /* libBulletCollision.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2B3E1DE16AEDA8B0099DC4A /* libBulletCollision.a */; };
 		D2B3E1EF16AEDA8B0099DC4A /* libBulletDynamics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2B3E1DF16AEDA8B0099DC4A /* libBulletDynamics.a */; };
 		D2B3E1F016AEDA8B0099DC4A /* libBulletSoftBody.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2B3E1E016AEDA8B0099DC4A /* libBulletSoftBody.a */; };
 		D2B3E1F116AEDA8B0099DC4A /* libLinearMath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2B3E1E116AEDA8B0099DC4A /* libLinearMath.a */; };
 		D2B3E1F216AEDA8B0099DC4A /* ofxBt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B3E1E416AEDA8B0099DC4A /* ofxBt.cpp */; };
 		D2C13D9816B165C700BFE847 /* btPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C13D9616B165C700BFE847 /* btPicker.cpp */; };
-		D2DD309D16B2DEF200D86CF2 /* RiggedBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DD309B16B2DEF200D86CF2 /* RiggedBox.cpp */; };
-		D2DD30A516B2E5E000D86CF2 /* Chain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DD30A316B2E5DF00D86CF2 /* Chain.cpp */; };
+		D2D9860016D331CC002EFB1A /* ChainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2D985FE16D331CC002EFB1A /* ChainScene.cpp */; };
+		D2DD30A516B2E5E000D86CF2 /* ChainObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DD30A316B2E5DF00D86CF2 /* ChainObject.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -213,12 +212,10 @@
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		D255D32B16B1A48E003DAE12 /* BaseConstrains.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseConstrains.cpp; sourceTree = "<group>"; };
 		D255D32C16B1A48E003DAE12 /* BaseConstrains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseConstrains.h; sourceTree = "<group>"; };
-		D255D32D16B1A48E003DAE12 /* ConstrainsTestScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConstrainsTestScene.cpp; sourceTree = "<group>"; };
-		D255D32E16B1A48E003DAE12 /* ConstrainsTestScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstrainsTestScene.h; sourceTree = "<group>"; };
-		D255D32F16B1A48E003DAE12 /* TestShapeDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestShapeDrawer.cpp; sourceTree = "<group>"; };
-		D255D33016B1A48E003DAE12 /* TestShapeDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestShapeDrawer.h; sourceTree = "<group>"; };
-		D25D5B2916B41C6A004235FB /* Rail.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rail.cpp; sourceTree = "<group>"; };
-		D25D5B2A16B41C6A004235FB /* Rail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rail.h; sourceTree = "<group>"; };
+		D255D32D16B1A48E003DAE12 /* ChainBtDynamics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainBtDynamics.cpp; sourceTree = "<group>"; };
+		D255D32E16B1A48E003DAE12 /* ChainBtDynamics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainBtDynamics.h; sourceTree = "<group>"; };
+		D255D32F16B1A48E003DAE12 /* ChainBtShapeDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainBtShapeDrawer.cpp; sourceTree = "<group>"; };
+		D255D33016B1A48E003DAE12 /* ChainBtShapeDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainBtShapeDrawer.h; sourceTree = "<group>"; };
 		D2B3E11316AEDA8B0099DC4A /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
 		D2B3E11616AEDA8B0099DC4A /* btBulletCollisionCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletCollisionCommon.h; sourceTree = "<group>"; };
 		D2B3E11716AEDA8B0099DC4A /* btBulletDynamicsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletDynamicsCommon.h; sourceTree = "<group>"; };
@@ -415,10 +412,10 @@
 		D2B3E1E616AEDA8B0099DC4A /* ofxBtHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtHelper.h; sourceTree = "<group>"; };
 		D2C13D9616B165C700BFE847 /* btPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btPicker.cpp; sourceTree = "<group>"; };
 		D2C13D9716B165C700BFE847 /* btPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btPicker.h; sourceTree = "<group>"; };
-		D2DD309B16B2DEF200D86CF2 /* RiggedBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RiggedBox.cpp; sourceTree = "<group>"; };
-		D2DD309C16B2DEF200D86CF2 /* RiggedBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiggedBox.h; sourceTree = "<group>"; };
-		D2DD30A316B2E5DF00D86CF2 /* Chain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Chain.cpp; sourceTree = "<group>"; };
-		D2DD30A416B2E5E000D86CF2 /* Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chain.h; sourceTree = "<group>"; };
+		D2D985FE16D331CC002EFB1A /* ChainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainScene.cpp; sourceTree = "<group>"; };
+		D2D985FF16D331CC002EFB1A /* ChainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainScene.h; sourceTree = "<group>"; };
+		D2DD30A316B2E5DF00D86CF2 /* ChainObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainObject.cpp; sourceTree = "<group>"; };
+		D2DD30A416B2E5E000D86CF2 /* ChainObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainObject.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -700,16 +697,14 @@
 			children = (
 				D255D32B16B1A48E003DAE12 /* BaseConstrains.cpp */,
 				D255D32C16B1A48E003DAE12 /* BaseConstrains.h */,
-				D2DD309B16B2DEF200D86CF2 /* RiggedBox.cpp */,
-				D2DD309C16B2DEF200D86CF2 /* RiggedBox.h */,
-				D2DD30A316B2E5DF00D86CF2 /* Chain.cpp */,
-				D2DD30A416B2E5E000D86CF2 /* Chain.h */,
-				D25D5B2916B41C6A004235FB /* Rail.cpp */,
-				D25D5B2A16B41C6A004235FB /* Rail.h */,
-				D255D32D16B1A48E003DAE12 /* ConstrainsTestScene.cpp */,
-				D255D32E16B1A48E003DAE12 /* ConstrainsTestScene.h */,
-				D255D32F16B1A48E003DAE12 /* TestShapeDrawer.cpp */,
-				D255D33016B1A48E003DAE12 /* TestShapeDrawer.h */,
+				D2DD30A316B2E5DF00D86CF2 /* ChainObject.cpp */,
+				D2DD30A416B2E5E000D86CF2 /* ChainObject.h */,
+				D255D32D16B1A48E003DAE12 /* ChainBtDynamics.cpp */,
+				D255D32E16B1A48E003DAE12 /* ChainBtDynamics.h */,
+				D255D32F16B1A48E003DAE12 /* ChainBtShapeDrawer.cpp */,
+				D255D33016B1A48E003DAE12 /* ChainBtShapeDrawer.h */,
+				D2D985FE16D331CC002EFB1A /* ChainScene.cpp */,
+				D2D985FF16D331CC002EFB1A /* ChainScene.h */,
 			);
 			name = Constrains;
 			path = RiggedBox;
@@ -1192,9 +1187,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E4B69B5A0A3A1756003C02F2 /* ConstrainTest */ = {
+		E4B69B5A0A3A1756003C02F2 /* Chain */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "ConstrainTest" */;
+			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "Chain" */;
 			buildPhases = (
 				E4B69B580A3A1756003C02F2 /* Sources */,
 				E4B69B590A3A1756003C02F2 /* Frameworks */,
@@ -1206,7 +1201,7 @@
 			dependencies = (
 				E4EEB9AC138B136A00A80321 /* PBXTargetDependency */,
 			);
-			name = ConstrainTest;
+			name = Chain;
 			productName = myOFApp;
 			productReference = E4B69B5B0A3A1756003C02F2 /* ConstrainTestDebug.app */;
 			productType = "com.apple.product-type.application";
@@ -1219,7 +1214,7 @@
 			attributes = {
 				LastUpgradeCheck = 0450;
 			};
-			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "ConstrainTest" */;
+			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "Chain" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1244,7 +1239,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				E4B69B5A0A3A1756003C02F2 /* ConstrainTest */,
+				E4B69B5A0A3A1756003C02F2 /* Chain */,
 			);
 		};
 /* End PBXProject section */
@@ -1336,11 +1331,10 @@
 				D2B3E1F216AEDA8B0099DC4A /* ofxBt.cpp in Sources */,
 				D2C13D9816B165C700BFE847 /* btPicker.cpp in Sources */,
 				D255D33116B1A48E003DAE12 /* BaseConstrains.cpp in Sources */,
-				D255D33216B1A48E003DAE12 /* ConstrainsTestScene.cpp in Sources */,
-				D255D33316B1A48E003DAE12 /* TestShapeDrawer.cpp in Sources */,
-				D2DD309D16B2DEF200D86CF2 /* RiggedBox.cpp in Sources */,
-				D2DD30A516B2E5E000D86CF2 /* Chain.cpp in Sources */,
-				D25D5B2B16B41C6A004235FB /* Rail.cpp in Sources */,
+				D255D33216B1A48E003DAE12 /* ChainBtDynamics.cpp in Sources */,
+				D255D33316B1A48E003DAE12 /* ChainBtShapeDrawer.cpp in Sources */,
+				D2DD30A516B2E5E000D86CF2 /* ChainObject.cpp in Sources */,
+				D2D9860016D331CC002EFB1A /* ChainScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1373,11 +1367,11 @@
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_LABEL = YES;
-				GCC_WARN_UNUSED_PARAMETER = YES;
-				GCC_WARN_UNUSED_VALUE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				OTHER_CPLUSPLUSFLAGS = (
 					"-D__MACOSX_CORE__",
 					"-lpthread",
@@ -1406,11 +1400,11 @@
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_LABEL = YES;
-				GCC_WARN_UNUSED_PARAMETER = YES;
-				GCC_WARN_UNUSED_VALUE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				OTHER_CPLUSPLUSFLAGS = (
 					"-D__MACOSX_CORE__",
 					"-lpthread",
@@ -1606,7 +1600,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "ConstrainTest" */ = {
+		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "Chain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B4E0A3A1720003C02F2 /* Debug */,
@@ -1615,7 +1609,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "ConstrainTest" */ = {
+		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "Chain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B600A3A1757003C02F2 /* Debug */,

@@ -1,14 +1,38 @@
-//
-//  testApp.h
-//  Chain
-//
-//  Created by Onishi Yoshito on 2/19/13.
-//
-//
+#pragma once
 
-#ifndef __Chain__testApp__
-#define __Chain__testApp__
+#include "ofMain.h"
 
-#include <iostream>
+#include "ramMain.h"
 
-#endif /* defined(__Chain__testApp__) */
+#include "btPicker.h"
+
+class testApp : public ramBaseApp
+{
+public:
+	
+	// of methods
+	// ------------------------
+	void setup();
+	void update();
+	void draw();
+	
+	void keyPressed(int key);
+	void keyReleased(int key);
+	void mouseMoved(int x, int y);
+	void mouseDragged(int x, int y, int button);
+	void mousePressed(int x, int y, int button);
+	void mouseReleased(int x, int y, int button);
+	void windowResized(int w, int h);
+	void dragEvent(ofDragInfo dragInfo);
+	void gotMessage(ofMessage msg);
+	
+	// ram methods
+	// ------------------------
+    void drawActor(ramActor &actor);
+    void drawRigid(ramRigidBody &rigid);
+    
+	// ...
+	// ------------------------
+	ramOscReceiver oscReceiver;
+    ramSceneManager sceneManager;
+};
