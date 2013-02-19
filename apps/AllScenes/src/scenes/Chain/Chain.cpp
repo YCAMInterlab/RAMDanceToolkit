@@ -75,7 +75,7 @@ void Chain::setupControlPanel(ofxUICanvas* panel)
     panel->addLabel("NUM EDGES", OFX_UI_FONT_SMALL);
     panel->addNumberDialer("NUM EDGES", 2, 100, &mNumEdges, 0);
     panel->addLabel("ATTACHING EDGES", OFX_UI_FONT_SMALL);
-    panel->addNumberDialer("ATTACHING EDGE", 2, 100, &mAttachingEdge, 0);
+    panel->addNumberDialer("ATTACHING EDGE", 0, 100, &mAttachingEdge, 0);
     panel->addSlider("EDGE LENGTH", 1.0, 100, &mEdgeLength, w, dim);
     panel->addSlider("THICKNESS", 1.0, 100, &mThickness, w, dim);
     panel->addButton("ADD", false, dim, dim);
@@ -144,6 +144,9 @@ void Chain::onValueChanged(ofxUIEventArgs& e)
         mChainBtDynamics.setGravity(mGravity.x, mGravity.y, mGravity.z);
     }
     else if (name=="ADD") {
+        ofxUIButton *b = static_cast<ofxUIButton *>(e.widget);
+        if (b->getValue()) return;
+        
         if (!ramActorManager::instance().getLastSelectedNode()) {
             ofLogError("Chain") << "We must select a node at first!";
             return;
@@ -163,6 +166,9 @@ void Chain::onValueChanged(ofxUIEventArgs& e)
         mChains.push_back(chain);
     }
     else if (name=="REMOVE ALL") {
+        ofxUIButton *b = static_cast<ofxUIButton *>(e.widget);
+        if (b->getValue()) return;
+        
         for (int i=0; i<mChains.size(); i++) {
             delete mChains.at(i);
             mChains.at(i) = NULL;
