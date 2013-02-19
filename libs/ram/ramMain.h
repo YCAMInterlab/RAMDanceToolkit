@@ -33,6 +33,7 @@
 #include "ramStamp.h"
 #include "ramNodeTransform.h"
 #include "ramTimeFilter.h"
+#include "ramLowPassFilter.h"
 
 
 /// utility
