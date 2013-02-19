@@ -40,8 +40,9 @@ UpsideDown upsideDown;
 #include "Kepler.h"
 Kepler kepler;
 
-#include "Graph3D.h"
-Graph3D graph3D;
+#include "HastyChase.h"
+HastyChase hastyChase;
+
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -71,8 +72,7 @@ void testApp::setup()
 	scenes.push_back( soundcube.getPtr() );
     scenes.push_back( upsideDown.getPtr() );
     scenes.push_back( kepler.getPtr() );
-	scenes.push_back( graph3D.getPtr() );
-	
+	scenes.push_back( hastyChase.getPtr() );
 	sceneManager.setup(scenes);
 }
 

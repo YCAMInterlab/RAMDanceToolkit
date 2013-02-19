@@ -155,7 +155,7 @@ void ramDrawBasicRigid(const ramRigidBody& rigid,
 	{
 		const ramNode &node = rigid.getNode(i);
 		node.beginTransform();
-		ofBox(node, 5);
+		ofBox(5);
 		node.endTransform();
 	}
 }
