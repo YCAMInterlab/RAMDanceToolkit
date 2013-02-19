@@ -17,33 +17,21 @@ public:
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
-		panel->addButton("Clear", false, 30, 30);
-		panel->addSlider("Recording Span", 2.0, 60.0, &mRecSpan, gui.kLength, gui.kDim);
+		gui.addSection(getName());
 		
-		ofAddListener(panel->newGUIEvent, this, &ramStamp::onPanelChanged);
+		struct ClearListener
+		{
+			ramStamp *self;
+			ClearListener(ramStamp *self) : self(self) {}
+			void operator()() { self->clear(); }
+		};
+		gui.addButton("Clear", ClearListener(this));
+		gui.addSlider("Recording Span", 2.0, 60.0, &mRecSpan);
 	}
 	
 	void setup()
 	{
 		clear();
-	}
-	
-	void onPanelChanged(ofxUIEventArgs& e)
-	{
-		string name = e.widget->getName();
-		
-		if (name == "Clear")
-		{
-			clear();
-		}
-		
-		if (name == "Recording Span")
-		{
-			mLastRecordTime = ofGetElapsedTimef() + mRecSpan;
-			clear();
-		}
 	}
 	
 #pragma mark -
@@ -53,13 +41,13 @@ public:
 	
 	void clear()
 	{
-		mLastRecordTime = ofGetElapsedTimef() + mRecSpan;
+		mLastRecordTime = ofGetElapsedTimef();
 		mStamps.clear();
 	}
 	
 	const ramNodeArray createStamp(const ramNodeArray& src)
 	{
-		mLastRecordTime += mRecSpan;
+		mLastRecordTime = ofGetElapsedTimef();
 		ramNodeArray copy = src;
 		mStamps.push_back(copy);
 		
@@ -78,7 +66,7 @@ protected:
 	
 	const ramNodeArray& filter(const ramNodeArray& src)
 	{
-		if (ofGetElapsedTimef() > mLastRecordTime)
+		if (ofGetElapsedTimef() - mLastRecordTime > mRecSpan)
 		{
 			createStamp(src);
 			if (kMaxStamps < mStamps.size())

@@ -78,6 +78,35 @@ ramNodeArray& ramNodeArray::operator=(const ramNodeArray& copy)
 	return *this;
 }
 
+bool ramNodeArray::operator==(const ramNodeArray &arr) const
+{
+	assert(getNumNode() == arr.getNumNode());
+	
+	for (int i = 0; i < getNumNode(); i++)
+	{
+		const ofMatrix4x4 &m = getNode(i).getTransformMatrix();
+		const ofMatrix4x4 &mm = arr.getNode(i).getTransformMatrix();
+		
+		if (!std::equal(m.getPtr(), m.getPtr() + 16, mm.getPtr()))
+		{
+			cout << "not eq" << endl;
+			cout << m << endl;
+			cout << "== " << endl;
+			cout << mm << endl;
+			cout << endl;
+			
+			return false;
+		}
+	}
+	
+	return true;
+}
+
+bool ramNodeArray::operator!=(const ramNodeArray &arr) const
+{
+	return !(*this == arr);
+}
+
 ramNodeArray ramNodeArray::operator+(const ramNodeArray &arr) const
 {
 	assert(getNumNode() == arr.getNumNode());
