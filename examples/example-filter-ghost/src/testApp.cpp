@@ -51,7 +51,7 @@ void testApp::drawActor(ramActor &actor)
 {
 	ramDrawBasicActor(actor);
 	
-	ramActor& g = (ramActor&)ghost.getResult();
+	ramActor& g = (ramActor&)ghost.get();
 	ramDrawBasicActor(g);
 }
 

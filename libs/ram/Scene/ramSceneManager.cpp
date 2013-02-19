@@ -4,6 +4,8 @@
 #include "ramControlPanel.h"
 #include "ramPhysics.h"
 
+extern bool drawModel;
+
 void ramSceneManager::setup(const vector<ramBaseScene*>& scenes_)
 {
 	scenes = scenes_;
@@ -95,6 +97,7 @@ void ramSceneManager::draw()
 		
 		ramEnablePhysicsPrimitive(enable_physics);
 
+		if (drawModel)
 		{
 			// draw object
 			

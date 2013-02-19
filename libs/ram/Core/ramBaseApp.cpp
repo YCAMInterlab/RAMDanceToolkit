@@ -5,6 +5,8 @@
 #include "ramControlPanel.h"
 #include "ramPhysics.h"
 
+bool drawModel = true;
+
 void ramBaseApp::exit(ofEventArgs &args)
 {
 	ramDisableAllEvents();
@@ -55,6 +57,7 @@ void ramBaseApp::draw(ofEventArgs &args)
 	glPushMatrix();
 	ofPushStyle();
 
+	if (drawModel)
 	{
 		// entities
 		drawNodeArrays();

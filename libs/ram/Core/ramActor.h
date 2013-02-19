@@ -106,8 +106,6 @@ enum ramNodeArrayType
 class ramNodeArray
 {
 public:
-	
-
 
 	ramNodeArray();
 	ramNodeArray(const ramNodeArray& copy) { *this = copy; }
@@ -129,6 +127,9 @@ public:
 	
 	// operators
 	
+	bool operator==(const ramNodeArray &arr) const;
+	bool operator!=(const ramNodeArray &arr) const;
+
 	ramNodeArray operator+(const ramNodeArray &arr) const;
 	ramNodeArray& operator+=(const ramNodeArray &arr);
 	

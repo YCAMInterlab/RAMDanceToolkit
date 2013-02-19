@@ -175,8 +175,11 @@ void ramActorManager::update()
 	rootNode.update();
 }
 
+#include "ramCameraManager.h"
 void ramActorManager::draw()
 {
+    ofPushView();
+    ramCameraManager::instance().getActiveCamera().begin(ofRectangle(0, 0, 1920, 1200));
 	rootNode.draw();
 	
 	if (nodeSelector != NULL && nodeSelector->identifer.isValid())
@@ -200,6 +203,9 @@ void ramActorManager::draw()
 			node.endTransform();
 		}
 	}
+    
+    ramCameraManager::instance().getActiveCamera().end();
+    ofPopView();
 }
 
 void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
