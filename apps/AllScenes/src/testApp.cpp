@@ -8,7 +8,7 @@
 BasicActor basicActor;
 
 #include "Line.h"
-Line drawLines;
+class Line drawLines;
 
 #include "BigBox.h"
 BigBox bigbox;
@@ -43,6 +43,9 @@ Kepler kepler;
 #include "HastyChase.h"
 HastyChase hastyChase;
 
+#include "ColorGrid.h"
+ColorGrid colorGrid;
+
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -73,6 +76,7 @@ void testApp::setup()
     scenes.push_back( upsideDown.getPtr() );
     scenes.push_back( kepler.getPtr() );
 	scenes.push_back( hastyChase.getPtr() );
+	scenes.push_back( colorGrid.getPtr() );
 	sceneManager.setup(scenes);
 }
 
