@@ -36,6 +36,106 @@ void ramNode::drawName(int floatPos)
 	ofDrawBitmapString(ofToString(getName()), pos);
 }
 
+bool ramNode::operator==(const ramNode &node) const
+{
+	const float *m = getTransformMatrix().getPtr();
+	const float *mm = node.getTransformMatrix().getPtr();
+
+	float r = 0;
+	r += fabs(m[0] - mm[0]);
+	r += fabs(m[1] - mm[1]);
+	r += fabs(m[2] - mm[2]);
+	
+	r += fabs(m[4] - mm[4]);
+	r += fabs(m[5] - mm[5]);
+	r += fabs(m[6] - mm[6]);
+	
+	r += fabs(m[8] - mm[8]);
+	r += fabs(m[9] - mm[9]);
+	r += fabs(m[10] - mm[10]);
+	
+	if (r > 0.01)
+	{
+		cout << "r: " << r << endl;
+		return false;
+	}
+	
+	float d = ofVec3f(m[12], m[13], m[14]).distance(ofVec3f(mm[12], mm[13], mm[14]));
+	if (d > 0.2)
+	{
+		cout << "d: " << d << endl;
+		return false;
+	}
+
+	return true;
+}
+
+bool ramNode::operator!=(const ramNode &node) const
+{
+	return !(*this == node);
+}
+
+ramNode ramNode::operator+(const ramNode &node) const
+{
+	ramNode result = *this;
+	
+	result.setPosition(result.getPosition() + node.getPosition());
+	result.setOrientation(result.getOrientationQuat() * node.getOrientationQuat());
+	
+	return result;
+}
+
+ramNode& ramNode::operator+=(const ramNode &node)
+{
+	ramNode &result = *this;
+
+	result.setPosition(result.getPosition() + node.getPosition());
+	result.setOrientation(result.getOrientationQuat() * node.getOrientationQuat());
+	
+	return result;
+}
+
+ramNode ramNode::operator-(const ramNode &node) const
+{
+	ramNode result = *this;
+
+	result.setPosition(result.getPosition() - node.getPosition());
+	result.setOrientation(result.getOrientationQuat() * node.getOrientationQuat().inverse());
+	
+	return result;
+}
+
+ramNode& ramNode::operator-=(const ramNode &node)
+{
+	ramNode &result = *this;
+
+	result.setPosition(result.getPosition() - node.getPosition());
+	result.setOrientation(result.getOrientationQuat() * node.getOrientationQuat().inverse());
+	
+	return result;
+}
+
+ramNode& ramNode::lerp(const ramNode &node, float t)
+{
+	const ofMatrix4x4& a = this->getTransformMatrix();
+	const ofMatrix4x4& b = node.getTransformMatrix();
+	
+	ofQuaternion trot;
+	trot.slerp(t, a.getRotate(), b.getRotate());
+	ofMatrix4x4 tmat(trot);
+	ofVec3f apos = a.getTranslation(), bpos = b.getTranslation();
+	tmat.translate(apos.interpolate(bpos, t));
+	
+	setTransformMatrix(tmat);
+	return *this;
+}
+
+ramNode ramNode::getLerpd(const ramNode &node, float t) const
+{
+	ramNode result = *this;
+	result.lerp(node, t);
+	return result;
+}
 
 #pragma mark - ramNodeArray
 
@@ -84,19 +184,7 @@ bool ramNodeArray::operator==(const ramNodeArray &arr) const
 	
 	for (int i = 0; i < getNumNode(); i++)
 	{
-		const ofMatrix4x4 &m = getNode(i).getTransformMatrix();
-		const ofMatrix4x4 &mm = arr.getNode(i).getTransformMatrix();
-		
-		if (!std::equal(m.getPtr(), m.getPtr() + 16, mm.getPtr()))
-		{
-			cout << "not eq" << endl;
-			cout << m << endl;
-			cout << "== " << endl;
-			cout << mm << endl;
-			cout << endl;
-			
-			return false;
-		}
+		if (getNode(i) != arr.getNode(i)) return false;
 	}
 	
 	return true;
@@ -115,11 +203,7 @@ ramNodeArray ramNodeArray::operator+(const ramNodeArray &arr) const
 	
 	for (int i = 0; i < result.getNumNode(); i++)
 	{
-		const ramNode &src = arr.getNode(i);
-		ramNode &dst = result.getNode(i);
-		
-		dst.setPosition(dst.getPosition() + src.getPosition());
-		dst.setOrientation(src.getOrientationQuat() * dst.getOrientationQuat());
+		result.getNode(i) += arr.getNode(i);
 	}
 	
 	return result;
@@ -133,11 +217,7 @@ ramNodeArray& ramNodeArray::operator+=(const ramNodeArray &arr)
 	
 	for (int i = 0; i < result.getNumNode(); i++)
 	{
-		const ramNode &src = arr.getNode(i);
-		ramNode &dst = result.getNode(i);
-		
-		dst.setPosition(dst.getPosition() + src.getPosition());
-		dst.setOrientation(src.getOrientationQuat() * dst.getOrientationQuat());
+		result.getNode(i) += arr.getNode(i);
 	}
 	
 	return result;
@@ -151,11 +231,7 @@ ramNodeArray ramNodeArray::operator-(const ramNodeArray &arr) const
 	
 	for (int i = 0; i < result.getNumNode(); i++)
 	{
-		const ramNode &src = arr.getNode(i);
-		ramNode &dst = result.getNode(i);
-		
-		dst.setPosition(dst.getPosition() - src.getPosition());
-		dst.setOrientation(src.getOrientationQuat().inverse() * dst.getOrientationQuat());
+		result.getNode(i) -= arr.getNode(i);
 	}
 	
 	return result;
@@ -169,51 +245,31 @@ ramNodeArray& ramNodeArray::operator-=(const ramNodeArray &arr)
 	
 	for (int i = 0; i < result.getNumNode(); i++)
 	{
-		const ramNode &src = arr.getNode(i);
-		ramNode &dst = result.getNode(i);
-		
-		dst.setPosition(dst.getPosition() - src.getPosition());
-		dst.setOrientation(src.getOrientationQuat().inverse() * dst.getOrientationQuat());
+		result.getNode(i) -= arr.getNode(i);
 	}
 	
 	return result;
 }
 
-ramNodeArray ramNodeArray::operator*(float s) const
-{
-	ramNodeArray result = *this;
-	
-	static const ofQuaternion norm;
-	
-	for (int i = 0; i < result.getNumNode(); i++)
-	{
-		ramNode &dst = result.getNode(i);
-		
-		dst.setPosition(dst.getPosition() * s);
-		
-		ofQuaternion q;
-		q.slerp(s, norm, dst.getOrientationQuat());
-		dst.setOrientation(q);
-	}
-	
-	return result;
-}
-
-ramNodeArray& ramNodeArray::operator*=(float s)
+ramNodeArray& ramNodeArray::lerp(const ramNodeArray &arr, float t)
 {
 	ramNodeArray &result = *this;
 	
-	static const ofQuaternion norm;
+	for (int i = 0; i < result.getNumNode(); i++)
+	{
+		result.getNode(i).lerp(arr.getNode(i), t);
+	}
+
+	return result;
+}
+
+ramNodeArray ramNodeArray::getLerpd(const ramNodeArray &arr, float t) const
+{
+	ramNodeArray result = *this;
 	
 	for (int i = 0; i < result.getNumNode(); i++)
 	{
-		ramNode &dst = result.getNode(i);
-		
-		dst.setPosition(dst.getPosition() * s);
-		
-		ofQuaternion q;
-		q.slerp(s, norm, dst.getOrientationQuat());
-		dst.setOrientation(q);
+		result.getNode(i).lerp(arr.getNode(i), t);
 	}
 	
 	return result;
