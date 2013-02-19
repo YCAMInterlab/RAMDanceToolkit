@@ -7,8 +7,8 @@
 #include "BasicActor.h"
 BasicActor basicActor;
 
-#include "Line.h"
-Line drawLines;
+#include "LineDrawing.h"
+LineDrawing drawLines;
 
 #include "BigBox.h"
 BigBox bigbox;
@@ -40,8 +40,20 @@ UpsideDown upsideDown;
 #include "Kepler.h"
 Kepler kepler;
 
-#include "Graph3D.h"
-Graph3D graph3D;
+#include "HastyChase.h"
+HastyChase hastyChase;
+
+#include "upside-donuts.h"
+UpsideDownDonuts upsideDownDonuts;
+
+#include "ColorGrid.h"
+ColorGrid colorGrid;
+
+#include "ThreePoints.h"
+ThreePoints threePoints;
+
+#include "FourPoints.h"
+FourPoints fourPoints;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -71,8 +83,11 @@ void testApp::setup()
 	scenes.push_back( soundcube.getPtr() );
     scenes.push_back( upsideDown.getPtr() );
     scenes.push_back( kepler.getPtr() );
-	scenes.push_back( graph3D.getPtr() );
-	
+	scenes.push_back( hastyChase.getPtr() );
+	scenes.push_back( upsideDownDonuts.getPtr() );
+	scenes.push_back( colorGrid.getPtr() );
+	scenes.push_back( threePoints.getPtr() );
+	scenes.push_back( fourPoints.getPtr() );
 	sceneManager.setup(scenes);
 }
 

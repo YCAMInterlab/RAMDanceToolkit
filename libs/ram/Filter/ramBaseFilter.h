@@ -93,6 +93,8 @@ class ramBusSend : public ramBaseFilter
 {
 public:
 	
+	const string getName() { return "BusSend"; }
+	
 	ramBusSend() {}
 	ramBusSend(const string &bus_name) { setBusName(bus_name); }
 	
