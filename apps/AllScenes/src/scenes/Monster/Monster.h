@@ -7,20 +7,25 @@ class Monster : public ramBaseScene
 public:
 	
 	vector<int> treeBase, treeSwap;
-	vector<float> lengths;
+	vector<float> lengthScale;
 	ramNodeArray monsterArray;
-	
-	bool needToReset, randomizeTopology, randomizeGeometry, swapLeftRight, swapArmsLegs;
+	float minScale, maxScale;
+	bool needToReset, randomLine, randomizeTopology, randomizeGeometry;
 		
 	void setupControlPanel(ofxUICanvas* panel)
 	{
+		needToReset = false;
 		randomizeTopology = false;
 		randomizeGeometry = false;
-		panel->addButton("Reset", &needToReset, 40, 40);
-		panel->addButton("Randomize Topology", &randomizeTopology, 40, 40);
-		panel->addButton("Randomize Geometry", &randomizeGeometry, 40, 40);
-		panel->addButton("Swap Left/Right", &swapLeftRight, 40, 40);
-		panel->addButton("Swap Arms/Legs", &swapArmsLegs, 40, 40);
+		randomLine = false;
+		minScale = .5;
+		maxScale = 2;
+		panel->addButton("Reset", &needToReset, 20, 20);
+		panel->addButton("Random Line", &randomLine, 20, 20);
+		panel->addButton("Randomize Topology", &randomizeTopology, 20, 20);
+		panel->addButton("Randomize Geometry", &randomizeGeometry, 20, 20);
+		panel->addSlider("Min scale", 0, 4, &minScale, 300, 20);
+		panel->addSlider("Max scale", 0, 4, &maxScale, 300, 20);
 	}
 	
 	void setup()
@@ -51,6 +56,7 @@ public:
 			ramActor::JOINT_RIGHT_WRIST
 		};
 		treeBase.resize(ramActor::NUM_JOINTS);
+		lengthScale.resize(ramActor::NUM_JOINTS, 1);
 		for(int i = 0; i < treeBase.size(); i++) {
 			treeBase[i] = treeArray[i];
 		}
@@ -60,6 +66,8 @@ public:
 	void reset() 
 	{
 		treeSwap = treeBase;
+		lengthScale.clear();
+		lengthScale.resize(ramActor::NUM_JOINTS, 1);
 	}
 	
 	bool isAncestor(int ancestor, int child) {
@@ -121,22 +129,26 @@ public:
 		}
 		if(randomizeGeometry) 
 		{
+			int n = lengthScale.size();
+			for(int i = 0; i < n; i++)
+			{
+				lengthScale[i] = ofRandom(minScale, maxScale);
+			}
 		}
-		if(swapLeftRight)
+		if(randomLine)
 		{
 			reset();
-			attach(ramActor::JOINT_LEFT_KNEE, ramActor::JOINT_RIGHT_HIP);
-			attach(ramActor::JOINT_RIGHT_KNEE, ramActor::JOINT_LEFT_HIP);
-			attach(ramActor::JOINT_LEFT_ELBOW, ramActor::JOINT_RIGHT_SHOULDER);
-			attach(ramActor::JOINT_RIGHT_ELBOW, ramActor::JOINT_LEFT_SHOULDER);
-		}
-		if(swapArmsLegs)
-		{
-			reset();
-			attach(ramActor::JOINT_LEFT_KNEE, ramActor::JOINT_LEFT_SHOULDER);
-			attach(ramActor::JOINT_RIGHT_KNEE, ramActor::JOINT_RIGHT_SHOULDER);
-			attach(ramActor::JOINT_LEFT_ELBOW, ramActor::JOINT_LEFT_HIP);
-			attach(ramActor::JOINT_RIGHT_ELBOW, ramActor::JOINT_RIGHT_HIP);
+			vector<int> all;
+			for(int i = 1; i < ramActor::NUM_JOINTS; i++) 
+			{
+				all.push_back(i);
+			}
+			ofRandomize(all);
+			attach(all[0], ramActor::JOINT_HIPS);
+			for(int i = 1; i < all.size(); i++)
+			{
+				attach(all[i], all[i - 1]);
+			}
 		}
 	}
 	
@@ -154,6 +166,7 @@ public:
 			if(treeSwap[i] != -1)
 			{
 				monsterArray.getNode(i).setParent(monsterArray.getNode(treeSwap[i]));
+				monsterArray.getNode(i).setScale(lengthScale[i]);
 			}
 		}
 		
