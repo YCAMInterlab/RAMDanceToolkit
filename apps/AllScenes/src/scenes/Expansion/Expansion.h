@@ -2,9 +2,10 @@
 
 class Expansion : public ramBaseScene
 {
+	enum { NUM_FILTER_BUFFER = 3 };
 	
-	ramExpansion mExpantion;
-	ramLowPassFilter lowpass;
+	ramExpansion mExpantion[NUM_FILTER_BUFFER];
+	ramLowPassFilter lowpass[NUM_FILTER_BUFFER];
 	
 	ofxUIToggle *mToggleDraw[ramActor::NUM_JOINTS];
 	bool mNodeVisibility[ramActor::NUM_JOINTS];
@@ -45,7 +46,7 @@ public:
 		
 		panel->addSlider("Box size", 3.0, 100.0, &mBoxSize, gui.kLength, gui.kDim);
 		panel->addSlider("Box size ratio", 2.0, 100.0, &mBoxSizeRatio, gui.kLength, gui.kDim);
-		mExpantion.setupControlPanel(panel);
+//		mExpantion.setupControlPanel(panel);
 		
 		panel->addToggle("Toggle box size", true, 20, 20);
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
@@ -66,14 +67,17 @@ public:
 			mToggleDraw[i] = toggleVisible;
 		}
 		
-		lowpass.setupControlPanel(panel);
+		for(int i=0; i<NUM_FILTER_BUFFER; i++)
+		{
+			mExpantion[i].setupControlPanel(panel);
+		}
+		
 		
 		ofAddListener(panel->newGUIEvent, this, &Expansion::onValueChanged);
 	}
 	
 	void setup()
 	{
-		mExpantion.setup();
 		setAllVisiblity(true);
 	}
 	
@@ -84,60 +88,67 @@ public:
 	
 	void draw()
 	{
-		
+		ramBeginCamera();
+		for (int i=0; i<getNumNodeArray(); i++)
+		{
+			ramActor &src = (ramActor&) getNodeArray(i);
+			ramActor &expandedActor = (ramActor&) lowpass[i].filter( mExpantion[i].filter(src) );
+			
+			
+			ofPushStyle();
+			ofNoFill();
+			for (int i=0; i<expandedActor.getNumNode(); i++)
+			{
+				if (mNodeVisibility[i] == false) continue;
+				
+				ramNode &node = expandedActor.getNode(i);
+				
+				node.beginTransform();
+				
+				int boxSize = mBoxSize * (mBiggerSize[i] ? mBoxSizeRatio : 1);
+				
+				if (mShowBox)
+				{
+					ofSetColor(r, g, b);
+					ofBox(boxSize);
+				}
+				
+				if (mShowAxis)
+				{
+					ofDrawAxis(boxSize);
+				}
+				
+				if (mShowExtendedLine)
+				{
+					ofSetLineWidth(2);
+					ofLine(src.getNode(i), expandedActor.getNode(i));
+				}
+				
+				node.endTransform();
+				
+				if (mShowLine)
+				{
+					ofSetColor(100);
+					ofSetLineWidth(1);
+					ofLine(src.getNode(i), expandedActor.getNode(i));
+				}
+				
+				
+				if (mShowName)
+				{
+					ofSetColor(255);
+					node.drawName(mBoxSize+20);
+				}
+			}
+			ofPopStyle();
+		}
+		ramEndCamera();
 	}
 	
 	void drawActor( ramActor& actor )
 	{
-		ramActor &expandedActor = (ramActor&) lowpass.filter( mExpantion.filter(actor) ) ;
 		
-		
-		ofPushStyle();
-		ofNoFill();
-		for (int i=0; i<expandedActor.getNumNode(); i++)
-		{
-			if (mNodeVisibility[i] == false) continue;
-			
-			ramNode &node = expandedActor.getNode(i);
-			
-			node.beginTransform();
-			
-			int boxSize = mBoxSize * (mBiggerSize[i] ? mBoxSizeRatio : 1);
-			
-			if (mShowBox)
-			{
-				ofSetColor(r, g, b);
-				ofBox(boxSize);
-			}
-			
-			if (mShowAxis)
-			{
-				ofDrawAxis(boxSize);
-			}
-			
-			if (mShowExtendedLine)
-			{
-				ofSetLineWidth(2);
-				ofLine(actor.getNode(i), expandedActor.getNode(i));
-			}
-			
-			node.endTransform();
-			
-			if (mShowLine)
-			{
-				ofSetColor(100);
-				ofSetLineWidth(1);
-				ofLine(actor.getNode(i), expandedActor.getNode(i));
-			}
-			
-			
-			if (mShowName)
-			{
-				ofSetColor(255);
-				node.drawName(mBoxSize+20);
-			}
-		}
-		ofPopStyle();
+
 	}
 	
 	void onValueChanged(ofxUIEventArgs& e)

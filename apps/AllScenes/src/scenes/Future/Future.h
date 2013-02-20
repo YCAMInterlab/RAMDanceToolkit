@@ -2,8 +2,10 @@
 
 class Future : public ramBaseScene
 {
-	ramGhost mGhosts[3];
-	ramLowPassFilter lowpass;
+	
+	enum { NUM_FILTER_BUFFER = 3 };
+	ramGhost mGhosts[NUM_FILTER_BUFFER];
+	ramLowPassFilter mLowpass[NUM_FILTER_BUFFER];
 	
 public:
 	
@@ -20,9 +22,9 @@ public:
 		for(int i=0; i<3; i++)
 		{
 			mGhosts[i].setupControlPanel(panel);
+			mLowpass[i].setupControlPanel(panel);
 		}
 		
-		lowpass.setupControlPanel(panel);
 		ofAddListener(panel->newGUIEvent, this, &Future::onValueChanged);
 	}
 
@@ -46,14 +48,18 @@ public:
 		for (int i=0; i<getNumNodeArray(); i++)
 		{
 			ramNodeArray &NA = getNodeArray(i);
-			const ramNodeArray &ghost = lowpass.filter( mGhosts[i].get() );
+			const ramNodeArray &ghost = mLowpass[i].filter( mGhosts[i].get() );
 			
 			glPushAttrib(GL_ALL_ATTRIB_BITS);
 			glEnable(GL_DEPTH_TEST);
 			ofPushStyle();
 			ofNoFill();
 			
-			ramDrawNodes( ghost, ramColor::RED_LIGHT );
+			const ofColor gcolor =
+				i==0 ? ramColor::RED_LIGHT :
+				i==1 ? ramColor::YELLOW_DEEP : ramColor::BLUE_LIGHT;
+			
+			ramDrawNodes( ghost, gcolor );
 			
 			if (draw_line)
 				ramDrawNodeCorresponds(NA, ghost);

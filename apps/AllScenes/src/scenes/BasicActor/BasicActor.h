@@ -14,9 +14,9 @@ class BasicActor : public ramBaseScene
 		{
 			translate = ofVec3f::zero();
 			scale = 1.0;
-			r = ofRandom(50, 255);
-			g = ofRandom(50, 255);
-			b = ofRandom(50, 255);
+			r = ofRandom(0, 255);
+			g = ofRandom(0, 255);
+			b = ofRandom(0, 255);
 		}
 	};
 	
