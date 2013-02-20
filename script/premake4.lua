@@ -326,6 +326,10 @@ solution (project_name)
 				"_DEBUG",
 			}
 
+			linkoptions {
+				"/DEBUG"
+			}
+
 			links {
 				-- RAM
 				'BulletCollision_vs2010_d',

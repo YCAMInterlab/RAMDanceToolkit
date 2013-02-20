@@ -71,7 +71,7 @@
       <OutputFile>$(OutDir)AllScenesDebug.exe</OutputFile>
       <AdditionalLibraryDirectories>..\..\libs\lib;..\..\addons\ofxBt\libs\bullet\lib\vs2010;..\..\..\libs\assimp\lib\vs2010;..\..\..\libs\cairo\lib\vs2010;..\..\..\libs\fmodex\lib\vs2010;..\..\..\libs\FreeImage\lib\vs2010;..\..\..\libs\freetype\lib\vs2010;..\..\..\libs\glew\lib\vs2010;..\..\..\libs\glu\lib\vs2010;..\..\..\libs\glut\lib\vs2010;..\..\..\libs\openFrameworks\lib\vs2010;..\..\..\libs\openFrameworksCompiled\lib\vs2010;..\..\..\libs\poco\lib\vs2010;..\..\..\libs\quicktime\lib\vs2010;..\..\..\libs\rtAudio\lib\vs2010;..\..\..\libs\tess2\lib\vs2010;..\..\..\libs\videoInput\lib\vs2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalOptions>/NODEFAULTLIB:"PocoFoundationd.lib" /NODEFAULTLIB:"atlthunk.lib" %(AdditionalOptions)</AdditionalOptions>

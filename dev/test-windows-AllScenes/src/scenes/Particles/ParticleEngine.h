@@ -39,7 +39,7 @@ public:
 	Particle& emit(const ofVec3f& pos, float vel = 1)
 	{
 		particle_index++;
-		if (particle_index > particles.size()) particle_index = 0;
+		if (particle_index >= particles.size()) particle_index = 0;
 		
 		Particle &p = particles[particle_index];
 		p.pos = pos;
@@ -82,8 +82,15 @@ public:
 		
 #undef _S
 		
+		ofSetLogLevel(OF_LOG_VERBOSE);
+
+
 		shader.setupShaderFromSource(GL_VERTEX_SHADER, vs);
 		shader.linkProgram();
+
+		ofSetLogLevel(OF_LOG_SILENT);
+
+
 	}
 	
 	void update()
@@ -164,14 +171,16 @@ public:
 		ofPushStyle();
 		ofEnableBlendMode(OF_BLENDMODE_ADD);
 		
-		
 		glDisable(GL_DEPTH_TEST);
 		glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
+
+#ifndef TARGET_WIN32
 		glEnable(GL_POINT_SMOOTH);
+#endif
 
 		float fov = getCurrentFov();
 		float pixel_per_unit = fabs(ofGetViewportHeight() / (2.0f * std::tan(fov * 0.5f)));
-
+		
 		shader.begin();
 		shader.setUniform1f("pixel_per_unit", pixel_per_unit);
 		shader.setUniform1f("point_size", 1);
@@ -179,6 +188,7 @@ public:
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(3 , GL_FLOAT, sizeof(ofVec3f) , &particle_buffer[0]);
 		glDrawArrays(GL_POINTS , 0 , particle_buffer.size());
+
 		shader.end();
 		
 		ofPopStyle();
