@@ -184,6 +184,8 @@ void ramActorManager::update()
 
 void ramActorManager::draw()
 {
+	rootNode.draw();
+
 	if (nodeSelector != NULL && nodeSelector->identifer.isValid())
 	{
 		ramNode node;
