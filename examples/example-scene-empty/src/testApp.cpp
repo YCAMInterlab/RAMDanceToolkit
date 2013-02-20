@@ -15,8 +15,7 @@ void testApp::setup()
 	
 	/// ram setup
 	// ------------------
-	ramInitialize();
-	oscReceiver.setup(10000);
+	ramInitialize(10000);
 	
 	
 	/// Scene setup
@@ -27,12 +26,7 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/// Entities update
-	// ------------------
-	oscReceiver.update();
-	
-	
-	/// Scene update
+	/// Scenes update
 	// ------------------
 	myScene.update();
 }
@@ -40,7 +34,7 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	/// Scene draw
+	/// Scenes draw
 	// ------------------
 	myScene.draw();
 }
@@ -48,11 +42,10 @@ void testApp::draw()
 
 
 #pragma mark - ram methods
-
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	/// Scene drawActor
+	/// Scenes drawActor
 	// ------------------
 	myScene.drawActor(actor);
 }
@@ -60,7 +53,7 @@ void testApp::drawActor(ramActor &actor)
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
-	/// Scene drawRigid
+	/// Scenes drawRigid
 	// ------------------
 	myScene.drawRigid(rigid);
 }

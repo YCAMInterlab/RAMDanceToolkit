@@ -14,8 +14,7 @@ void testApp::setup()
 	
 	/// ram setup
 	// ------------------
-	ramInitialize();
-	oscReceiver.setup(10000);
+	ramInitialize(10000);
 	
 	
 	/// register ramExpansion instance on GUI
@@ -26,9 +25,7 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/// Entities update
-	// ------------------
-	oscReceiver.update();
+	
 }
 
 //--------------------------------------------------------------
@@ -40,7 +37,6 @@ void testApp::draw()
 
 
 #pragma mark - ram methods
-
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {

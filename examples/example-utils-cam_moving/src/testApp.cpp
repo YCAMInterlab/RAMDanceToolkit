@@ -16,8 +16,7 @@ void testApp::setup()
 	
 	/// ram setup
 	// ------------------
-	ramInitialize();
-	oscReceiver.setup(10000);
+	ramInitialize(10000);
 	
 	mover.setup();
 	ramGetGUI().addPanel(&mover);
@@ -26,10 +25,6 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/// Entities update
-	// ------------------
-	oscReceiver.update();
-	
 	mover.update();
 }
 

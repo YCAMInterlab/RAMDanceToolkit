@@ -1,6 +1,10 @@
 #include "testApp.h"
 
-
+#include "MyScene1.h"
+#include "MyScene2.h"
+MyScene1 scene1;
+MyScene2 scene2;
+	
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -12,8 +16,7 @@ void testApp::setup()
 	
 	/// ram setup
 	// ------------------
-	ramInitialize();
-	oscReceiver.setup(10000);
+	ramInitialize(10000);
 	
 	/// Scene Manager setup
 	// ------------------
@@ -40,11 +43,6 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/// Entities update
-	// ------------------
-	oscReceiver.update();
-	
-	
 	/// Scene Manager update
 	// ------------------
 	sceneManager.update();
@@ -106,7 +104,6 @@ void testApp::draw()
 
 
 #pragma mark - ram methods
-
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {

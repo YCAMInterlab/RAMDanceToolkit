@@ -6,6 +6,7 @@ class Stamp : public ramBaseScene
 	ramStamp mStamp;
 	bool mShowActor;
 	bool mShowBox;
+	bool mPause;
 	
 	float line_width;
 	
@@ -16,7 +17,7 @@ class Stamp : public ramBaseScene
 	
 public:
 	
-	Stamp() : mShowActor(true), mShowBox(true) {}
+	Stamp() : mShowActor(true), mShowBox(true), mPause(false) {}
 	
 	void setupControlPanel(ofxUICanvas* panel)
 	{
@@ -25,6 +26,7 @@ public:
 		mStamp.setupControlPanel(panel);
 		
 		gui.addToggle("Show Actor", &mShowActor);
+		gui.addToggle("Show Actor", &mPause);
 		gui.addColorSelector("Box line color", &color);
 		gui.addSlider("Line width", 0, 6, &line_width);
 		
@@ -42,7 +44,7 @@ public:
 	{
 		const int numNudeArrays = getNumNodeArray();
 		
-		if(numNudeArrays > 0)
+		if(numNudeArrays > 0 && (!mPause))
 		{
 			mStamp.update( getNodeArray(ofRandom(0, numNudeArrays)) );
 		}

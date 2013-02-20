@@ -43,12 +43,8 @@ public:
 
 	// ram methods
 	// ------------------------
-    void drawActor(ramActor &actor);
-    void drawRigid(ramRigidBody &rigid);
-
-	// ...
-	// ------------------------
-	ramOscReceiver oscReceiver;
+	void drawActor(ramActor &actor);
+	void drawRigid(ramRigidBody &rigid);
 };
 ]]
 
@@ -66,16 +62,13 @@ void testApp::setup()
 
 	/// ram setup
 	// ------------------
-	ramInitialize();
-	oscReceiver.setup(10000);
+	ramInitialize(10000);
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/// Entities update
-	// ------------------
-	oscReceiver.update();
+	
 }
 
 //--------------------------------------------------------------
@@ -84,7 +77,6 @@ void testApp::draw()
 }
 
 #pragma mark - ram methods
-
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {

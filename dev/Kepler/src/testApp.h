@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ofMain.h"
-
 #include "ramMain.h"
 
 class testApp : public ramBaseApp
@@ -26,11 +25,10 @@ public:
 	
 	// ram methods
 	// ------------------------
-    void drawActor(ramActor &actor);
-    void drawRigid(ramRigidBody &rigid);
+	void drawActor(ramActor &actor);
+	void drawRigid(ramRigidBody &rigid);
     
 	// ...
 	// ------------------------
-	ramOscReceiver oscReceiver;
-    ramSceneManager sceneManager;
+	ramSceneManager sceneManager;
 };

@@ -16,14 +16,12 @@ void testApp::setup()
 	
 	/// ram setup
 	// ------------------
-	ramInitialize();
-	oscReceiver.setup(10000);
+	ramInitialize(10000);
 	
 	
 	/// Scene setup
-	// ------------------
-    
-    vector<ramBaseScene*> scenes;
+	// ------------------  
+	vector<ramBaseScene*> scenes;
 	scenes.push_back(kepler.getPtr());
 	sceneManager.setup(scenes);
 }
@@ -31,12 +29,7 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/// Entities update
-	// ------------------
-	oscReceiver.update();
-	
-	
-	/// Scene update
+	/// Scenes update
 	// ------------------
 	sceneManager.update();
 }
@@ -44,7 +37,7 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	/// Scene draw
+	/// Scenes draw
 	// ------------------
 	sceneManager.draw();
 }
@@ -52,18 +45,17 @@ void testApp::draw()
 
 
 #pragma mark - ram methods
-
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
-	/// Scene drawActor
+	/// Scenes drawActor
 	// ------------------
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
-	/// Scene drawRigid
+	/// Scenes drawRigid
 	// ------------------
 }
 

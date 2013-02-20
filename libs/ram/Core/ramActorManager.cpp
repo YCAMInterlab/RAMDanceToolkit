@@ -163,6 +163,13 @@ void ramActorManager::setup()
 
 void ramActorManager::update()
 {
+	while (oscReceiver.hasWaitingMessages())
+	{
+		ofxOscMessage m;
+		oscReceiver.getNextMessage(&m);
+		ramActorManager::instance().updateWithOscMessage(m);
+	}
+	
 	nodearrays.updateIndexCache();
 	
 	for (int i = 0; i < nodearrays.size(); i++)

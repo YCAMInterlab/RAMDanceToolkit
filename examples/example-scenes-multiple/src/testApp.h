@@ -2,10 +2,6 @@
 
 #include "ofMain.h"
 #include "ramMain.h"
-#include "ofxXmlSettings.h"
-
-#include "MyScene1.h"
-#include "MyScene2.h"
 
 class testApp : public ramBaseApp
 {
@@ -29,17 +25,10 @@ public:
 	
 	// ram methods
 	// ------------------------
-    void drawActor(ramActor &actor);
-    void drawRigid(ramRigidBody &rigid);
-    
-	// ...
-	// ------------------------
-	ramOscReceiver oscReceiver;
-	
+	void drawActor(ramActor &actor);
+	void drawRigid(ramRigidBody &rigid);
 	
 	// ...
 	// ------------------------
 	ramSceneManager sceneManager;
-	MyScene1 scene1;
-	MyScene2 scene2;
 };
