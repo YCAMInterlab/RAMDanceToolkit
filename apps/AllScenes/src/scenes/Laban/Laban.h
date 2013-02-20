@@ -38,7 +38,7 @@ class Laban : public ramBaseScene
 public:
 	
 	float threshold, lineWidth, lineLength, scale, ticks;
-	bool showLines, showPlanes;
+	bool showLines, showPlanes, onlyLimbs;
 	
 	vector<ofColor> labanColors;
 	vector<ofVec3f> labanDirections;
@@ -47,14 +47,16 @@ public:
 	
 	void setupControlPanel(ofxUICanvas* panel)
 	{
-		threshold = .1;
-		lineWidth = 2;
+		threshold = .2;
+		lineWidth = 3;
 		scale = 20;
 		ticks = 3;
-		lineLength = 100;
+		lineLength = 300;
 		showLines = true;
 		showPlanes = false;
+		onlyLimbs = true;
 		panel->addSlider("Fade out", 0, 2, &maxLabanMomentLife, 300, 20);
+		panel->addToggle("Only Limbs", &onlyLimbs, 20, 20);
 		panel->addSlider("Threshold", 0, .5, &threshold, 300, 20);
 		panel->addToggle("Show lines", &showLines, 20, 20);
 		panel->addSlider("Line width", 0, 10, &lineWidth, 300, 20);
@@ -77,9 +79,9 @@ public:
 						ofVec3f cur(x, y, z);
 						cur.normalize();
 						labanDirections.push_back(cur);
-						float red = ofMap(x, -1, 1, 0, 255);
-						float green = ofMap(y, -1, 1, 0, 255);
-						float blue = ofMap(z, -1, 1, 0, 255);
+						float red = ofMap(x, -1, 1, 64, 255);
+						float green = ofMap(y, -1, 1, 64, 255);
+						float blue = ofMap(z, -1, 1, 64, 255);
 						labanColors.push_back(ofColor(red, green, blue));
 					}
 				}
@@ -102,10 +104,10 @@ public:
 		{
 			LabanMoment& cur = *itr;
 			ofPushStyle();
-			float alpha = 255 * cur.getLife();
-			ofSetColor(128, alpha);
+			float alpha = cur.getLife();
+			ofSetColor(255, 64 * alpha);
 			ofLine(cur.start, cur.start + cur.direction * lineLength);
-			ofSetColor(labanColors[cur.choice], alpha);
+			ofSetColor(labanColors[cur.choice], 255 * alpha);
 			ofLine(cur.start, cur.start + labanDirections[cur.choice] * lineLength);
 			ofPopStyle();	
 		}
@@ -116,6 +118,16 @@ public:
 	{	
 		for (int i=0; i<actor.getNumNode(); i++)
 		{
+			if(onlyLimbs)
+			{
+				if(i != ramActor::JOINT_LEFT_ANKLE &&
+				   i != ramActor::JOINT_RIGHT_ANKLE &&
+				   i != ramActor::JOINT_LEFT_WRIST &&
+				   i != ramActor::JOINT_RIGHT_WRIST)
+				{
+					continue;
+				}
+			}
 			ramNode &node = actor.getNode(i);
 			ofSetColor(255);
 			ofSetLineWidth(lineWidth);
@@ -123,7 +135,7 @@ public:
 			{
 				ofVec3f start = node.getGlobalPosition();
 				ofVec3f end = node.getParent()->getGlobalPosition();
-				ofVec3f direction = (end - start);
+				ofVec3f direction = (start - end);
 				direction.normalize();
 				if(showLines)
 				{
