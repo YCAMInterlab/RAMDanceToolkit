@@ -90,6 +90,7 @@
 		27B8489416D35513000D321D /* SphereMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphereMesh.h; sourceTree = "<group>"; };
 		27B8489516D3554B000D321D /* GeometryHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryHelpers.h; sourceTree = "<group>"; };
 		27B8489716D35D17000D321D /* FourPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourPoints.h; sourceTree = "<group>"; };
+		27E36A0116D4937000729344 /* Laban.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Laban.h; sourceTree = "<group>"; };
 		27FD3B6B16D387E800C9EAC6 /* Monster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Monster.h; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
 		60E559B116D3366A00051FE9 /* HastyChase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HastyChase.h; sourceTree = "<group>"; };
@@ -210,6 +211,15 @@
 			path = scenes/FourPoints;
 			sourceTree = "<group>";
 		};
+		27E36A0016D4937000729344 /* Laban */ = {
+			isa = PBXGroup;
+			children = (
+				27E36A0116D4937000729344 /* Laban.h */,
+			);
+			name = Laban;
+			path = scenes/Laban;
+			sourceTree = "<group>";
+		};
 		27FD3B6A16D387E800C9EAC6 /* Monster */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +269,7 @@
 				60E559B016D3366A00051FE9 /* HastyChase */,
 				D2B8DCC316D3834A00210022 /* Helper */,
 				9A2B3F4E16D325C7001CBFC9 /* Kepler */,
+				27E36A0016D4937000729344 /* Laban */,
 				9A2B3F5916D325C7001CBFC9 /* LineDrawing */,
 				27FD3B6A16D387E800C9EAC6 /* Monster */,
 				9A2B3F5B16D325C7001CBFC9 /* Particles */,

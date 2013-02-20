@@ -71,6 +71,9 @@ Chain chain;
 #include "Monster.h"
 Monster monster;
 
+#include "Laban.h"
+Laban laban;
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -105,6 +108,7 @@ void testApp::setup()
 	scenes.push_back( fourPoints.getPtr() );
 	scenes.push_back( chain.getPtr() );
 	scenes.push_back( monster.getPtr() );
+	scenes.push_back( laban.getPtr() );
 	sceneManager.setup(scenes);
 	
     ofEasyCam *cam = (ofEasyCam*)ramCameraManager::instance().getCamera(0);
