@@ -66,7 +66,6 @@ void testApp::setup()
 	/// ram setup
 	// ------------------
 	ramInitialize();
-	oscReceiver.setup(10000);
 	
 	/// scenes setup
 	// ------------------
@@ -94,11 +93,6 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {	
-	/// Entities update
-	// ------------------
-	oscReceiver.update();
-	
-	
 	/// Scenes update
 	// ------------------
 	sceneManager.update();
