@@ -83,47 +83,27 @@ public:
 	virtual void drawActor(ramActor &actor) {}
 	virtual void drawRigid(ramRigidBody &rigid) {}
 	virtual void drawHUD() {}
+
+	inline void enable(){ bEnabled = true; }
+	inline void disable() { bEnabled = false; }
+	inline void toggle() { setEnabled(!isEnabled()); }
+	inline bool isEnabled() { return bEnabled; }
+	
+	inline void setEnabled(bool b)
+	{
+		if (bEnabled == b) return;
+		bEnabled = b;
+		
+		if (b)
+			onEnabled();
+		else
+			onDisabled();
+	}
 	
 	virtual void onEnabled() { cout << "[Scene enabled] " << getName() << endl; }
 	virtual void onDisabled() { cout << "[Scene disabled] " << getName() << endl; }
 
-	inline void enable(){ bEnabled = true; }
-	inline void disable() { bEnabled = false; }
-	inline void toggle() { bEnabled ^= true; }
-	inline void setEnabled(bool b) { bEnabled = b; }
-	inline bool isEnabled() { return bEnabled; }
-	
-	/// !!!:
-	// gwenに刺しかわったらscene.onEnabled / disabled 追加
-//	void enable()
-//	{
-//		bEnabled = true;
-//		onEnabled();
-//	}
-//	void disable()
-//	{
-//		bEnabled = false;
-//		onDisabled();
-//	}
-//	void toggle()
-//	{
-//		bEnabled ^= true;
-//		if (bEnabled)
-//			onEnabled();
-//		else
-//			onDisabled();
-//	}
-//	void setEnabled(bool b)
-//	{
-//		bEnabled = b;
-//		if (bEnabled)
-//			onEnabled();
-//		else
-//			onDisabled();
-//	}
-
 	ramBaseScene* getPtr() { return this; }
-	
 	
 protected:
 
