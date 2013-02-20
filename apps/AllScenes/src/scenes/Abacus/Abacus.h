@@ -15,17 +15,11 @@ public:
 	
 	void setupControlPanel(ofxUICanvas* panel)
 	{
-		ofAddListener(panel->newGUIEvent, this, &Abacus::onValueChanged);
 	}
 	
 	void setup()
 	{
 		light.setPosition(300, 0, 300);
-	}
-	
-	void update()
-	{
-		
 	}
 	
 	void draw()
@@ -43,21 +37,6 @@ public:
 		}
 		
 		ramEndCamera();
-	}
-	
-	void drawActor(ramActor& actor)
-	{
-		
-	}
-	
-	void drawRigid(ramRigidBody &rigid)
-	{
-		
-	}
-	
-	void onValueChanged(ofxUIEventArgs& e)
-	{
-		
 	}
 	
 	const string getName() { return "Abacus"; }

@@ -100,7 +100,6 @@ void testApp::setup()
     scenes.push_back( upsideDown.getPtr() );
     scenes.push_back( kepler.getPtr() );
 	scenes.push_back( hastyChase.getPtr() );
-	scenes.push_back( upsideDownDonuts.getPtr() );
 	scenes.push_back( colorGrid.getPtr() );
 	scenes.push_back( threePoints.getPtr() );
 	scenes.push_back( fourPoints.getPtr() );
