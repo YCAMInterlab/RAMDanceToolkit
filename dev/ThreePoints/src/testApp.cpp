@@ -372,7 +372,6 @@ void testApp::setup()
 	ofSetLineWidth(2);
 	ofSetVerticalSync(true);
 	ofBackground(0);
-	oscReceiver.setup(10000);
     
     icosphere = ofGetIcoSphereMesh(1, 3);
 	
@@ -401,7 +400,7 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	oscReceiver.update();
+	
 	
 	glPointSize(pointSize);
 	ofSetCircleResolution(circleResolution);

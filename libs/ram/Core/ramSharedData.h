@@ -1,11 +1,9 @@
 #pragma once
 
 #include "ofMain.h"
-
 #include "ramSimpleShadow.h"
 
-string ramToResourcePath(string path);
-void ramInitialize();
+void ramInitialize(int oscPort = 10000);
 
 class ramSharedData
 {

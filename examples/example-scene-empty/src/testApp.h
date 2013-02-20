@@ -2,7 +2,6 @@
 
 #include "ofMain.h"
 #include "ramMain.h"
-#include "ofxXmlSettings.h"
 
 
 #include "EmptyScene.h"
@@ -30,10 +29,6 @@ public:
 	
 	// ram methods
 	// ------------------------
-    void drawActor(ramActor &actor);
-    void drawRigid(ramRigidBody &rigid);
-    
-	// ...
-	// ------------------------
-	ramOscReceiver oscReceiver;
+	void drawActor(ramActor &actor);
+	void drawRigid(ramRigidBody &rigid);
 };

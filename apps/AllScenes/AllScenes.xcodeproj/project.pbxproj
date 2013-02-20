@@ -19,7 +19,7 @@
 		D2B8DCD416D3835700210022 /* ChainBtShapeDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCCC16D3835700210022 /* ChainBtShapeDrawer.cpp */; };
 		D2B8DCD516D3835700210022 /* ChainObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCCE16D3835700210022 /* ChainObject.cpp */; };
 		D2B8DCD616D3835700210022 /* Chain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCD016D3835700210022 /* Chain.cpp */; };
-		E4328149138ABC9F0047C5CB /* openFrameworks.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworks.a */; };
+		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
 		E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9730E8CC7DD009D7055 /* AudioToolbox.framework */; };
@@ -113,7 +113,6 @@
 		9A2B3F5F16D325C7001CBFC9 /* SoundCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundCube.h; sourceTree = "<group>"; };
 		9A2B3F6116D325C7001CBFC9 /* Stamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stamp.h; sourceTree = "<group>"; };
 		9A2B3F6316D325C7001CBFC9 /* UpsideDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpsideDown.h; sourceTree = "<group>"; };
-		9A2B3FB716D3517A001CBFC9 /* upside-donuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "upside-donuts.h"; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		D2B8DCC416D3834A00210022 /* btPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btPicker.cpp; sourceTree = "<group>"; };
 		D2B8DCC516D3834A00210022 /* btPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btPicker.h; sourceTree = "<group>"; };
@@ -161,7 +160,7 @@
 				E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */,
 				E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */,
 				E4EB6799138ADC1D00A09F29 /* GLUT.framework in Frameworks */,
-				E4328149138ABC9F0047C5CB /* openFrameworks.a in Frameworks */,
+				E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */,
 				E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */,
 				E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */,
 				E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */,
@@ -266,7 +265,6 @@
 				9A2B3F6016D325C7001CBFC9 /* Stamp */,
 				27B8489216D35466000D321D /* ThreePoints */,
 				9A2B3F6216D325C7001CBFC9 /* UpsideDown */,
-				9A2B3FB316D35150001CBFC9 /* YokoSelection */,
 				60E559B016D3366A00051FE9 /* HastyChase */,
 			);
 			name = Scenes;
@@ -388,23 +386,6 @@
 			path = scenes/UpsideDown;
 			sourceTree = "<group>";
 		};
-		9A2B3FB316D35150001CBFC9 /* YokoSelection */ = {
-			isa = PBXGroup;
-			children = (
-				9A2B3FB616D3517A001CBFC9 /* upside-donuts */,
-			);
-			name = YokoSelection;
-			path = scenes/YokoSelection;
-			sourceTree = "<group>";
-		};
-		9A2B3FB616D3517A001CBFC9 /* upside-donuts */ = {
-			isa = PBXGroup;
-			children = (
-				9A2B3FB716D3517A001CBFC9 /* upside-donuts.h */,
-			);
-			path = "upside-donuts";
-			sourceTree = "<group>";
-		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
@@ -473,7 +454,7 @@
 		E4328144138ABC890047C5CB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E4328148138ABC890047C5CB /* openFrameworks.a */,
+				E4328148138ABC890047C5CB /* openFrameworksDebug.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -590,10 +571,10 @@
 			remoteRef = 60B90AB21644E21400AF2156 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E4328148138ABC890047C5CB /* openFrameworks.a */ = {
+		E4328148138ABC890047C5CB /* openFrameworksDebug.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = openFrameworks.a;
+			path = openFrameworksDebug.a;
 			remoteRef = E4328147138ABC890047C5CB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};

@@ -39,9 +39,10 @@ void ramOfxUIControlPanel::setup()
 	/// First panel
 	// -------------------------------------
 	/// panel
+	
+	
 	addPanel("RamDanceToolkit");
 	
-	addSection("RamDanceToolkit");
 	addToggle("FullScrean", &fullScreen);
 	addToggle("Pause (or press Space Key)", &pause);
 	addToggle("Use Shadow", &enableShadow);

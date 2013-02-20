@@ -25,11 +25,10 @@ public:
 	
 	// ram methods
 	// ------------------------
-    void drawActor(ramActor &actor);
-    void drawRigid(ramRigidBody &rigid);
+	void drawActor(ramActor &actor);
+	void drawRigid(ramRigidBody &rigid);
     
 	// ...
 	// ------------------------
-	ramOscReceiver oscReceiver;
-    ramSceneManager sceneManager;
+	ramSceneManager sceneManager;
 };

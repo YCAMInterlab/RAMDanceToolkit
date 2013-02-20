@@ -21,12 +21,9 @@ public:
 	// ram methods
 	// ------------------------
 	void drawFloor();
-    void drawActor(ramActor &actor);
+	void drawActor(ramActor &actor);
 
     
-	// ...
-	// ------------------------
-	ramOscReceiver oscReceiver;
     
     vector<btPicker *> m_picker;
     
