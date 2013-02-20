@@ -30,7 +30,7 @@ public:
 	void addPanel(ramControllable* control);
 	void reloadCameraSetting(const int index);
 	
-	inline ofColor getBackgroundColor() { return ofColor(mR, mG, mB); }
+	inline ofColor getBackgroundColor() { return backgroundColor; }
 	inline int getFloorPattern() { return mFloorPattern; }
 	inline float getFloorSize() { return mFloorSize; }
 	inline float getGridSize() { return mGridSize; }
@@ -78,16 +78,18 @@ private:
 	
 	static ramOfxUIControlPanel *_instance;
 	
-	float mR, mG, mB;
-	bool mUseBgSlider;
-	bool enableShadow;
 	int mFloorPattern;
 	float mFloorSize, mGridSize;
 	
+	bool fullScreen;
+	bool pause;
+	bool enableShadow;
+	int camera_preset, camera_preset_t;
+	
+	ofFloatColor backgroundColor;
+	
     ofxUITabbedCanvas mTabbedCanvas;
 	ofxUIToggleMatrix *mSceneToggles;
-	ofxUICanvas *mPanelGeneral;
-	ofxUILabel *mLabelCamPos;
 	
 	ofxUICanvas *current_panel;
 	

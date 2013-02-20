@@ -87,14 +87,24 @@ public:
 				ofRotateY(360/mNumDuplicate * n);
 				if( n==0 ) ofScale(mScale, mScale, mScale);
 				
-				if (nodeArray.isActor())
+
+				ofPushStyle();
+				for(int i=0; i<nodeArray.getNumNode(); i++)
 				{
-					ramDrawBasicActor((ramActor&)nodeArray, c1, c2);
+					ramNode& node = nodeArray.getNode(i);
+					
+					node.beginTransform();
+					ofSetColor(c1);
+					ofBox( i==ramActor::JOINT_HEAD ? 8 : 5);
+					node.endTransform();
+					
+					if (node.hasParent())
+					{
+						ofSetColor(c2);
+						ofLine(node, *node.getParent());
+					}
 				}
-				else
-				{
-					ramDrawBasicRigid((ramRigidBody&)nodeArray, c1);
-				}
+				ofPopStyle();
 				
 				ofPopMatrix();
 			}

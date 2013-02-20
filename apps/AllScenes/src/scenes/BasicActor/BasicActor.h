@@ -79,7 +79,7 @@ public:
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 		panel->addSlider(segment.name + " Scale", 0.01, 5.0, &segment.scale, gui.kLength, gui.kDim);
 		
-		}
+	}
 	
 	void update()
 	{
