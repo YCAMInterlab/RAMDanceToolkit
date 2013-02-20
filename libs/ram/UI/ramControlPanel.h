@@ -9,6 +9,7 @@
 #include "ramCameraManager.h"
 #include "ramControllable.h"
 #include "ramBaseScene.h"
+#include "ramSceneTabs.h"
 
 class ramBaseScene;
 class ramControllable;
@@ -37,7 +38,7 @@ public:
 	inline float getFloorSize() { return mFloorSize; }
 	inline float getGridSize() { return mGridSize; }
 	
-	inline ofxUITabbedCanvas& getTabbedCanvas() { return mTabbedCanvas; }
+	inline ramSceneTabs& getSceneTabs() { return mSceneTabs; }
 	inline ofxUIToggleMatrix* getSceneToggles() { return mSceneToggles; }
 	
 	void guiEvent(ofxUIEventArgs &e);
@@ -90,7 +91,7 @@ private:
 	
 	ofFloatColor backgroundColor;
 	
-    ofxUITabbedCanvas mTabbedCanvas;
+    ramSceneTabs mSceneTabs;
 	ofxUIToggleMatrix *mSceneToggles;
 	
 	ofxUICanvas *current_panel;
@@ -118,4 +119,15 @@ private:
 struct ramControlPanel : public ramOfxUIControlPanel {};
 
 inline ramControlPanel& ramGetGUI() { return (ramControlPanel&)ramOfxUIControlPanel::instance(); }
+
+inline void ramSaveSettings(const string filename)
+{
+	ramControlPanel &gui = ramGetGUI();
+	gui.getSceneTabs().saveSettings(filename);
+}
+inline void ramLoadSettings(const string filename)
+{
+	ramControlPanel &gui = ramGetGUI();
+	gui.getSceneTabs().loadSettings(filename);
+}
 
