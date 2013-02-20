@@ -221,8 +221,8 @@ void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 		{
 			ramActor o;
 			o.setType(RAM_NODEARRAY_TYPE_ACTOR);
-			o.updateWithOscMessage(m);
 			o.setName(name);
+			o.updateWithOscMessage(m);
 			nodearrays.add(name, o);
 		}
 		else
@@ -237,6 +237,7 @@ void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 		{
 			ramRigidBody o;
 			o.setType(RAM_NODEARRAY_TYPE_RIGIDBODY);
+			o.setName(name);
 			o.updateWithOscMessage(m);
 			nodearrays.add(name, o);
 		}
