@@ -1947,9 +1947,15 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_HEADER_SEARCH_PATHS)",
+					"$(OF_BASE_PATH)/addons/ofxOsc/**",
+					../../../addons/ofxBt/libs/bullet/include/bullet,
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../addons/ofxBt/libs/bullet/lib/osx\"",
+					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/osx\"",
 				);
 				PRODUCT_NAME = ram;
 				SDKROOT = "";
@@ -1961,9 +1967,15 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_HEADER_SEARCH_PATHS)",
+					"$(OF_BASE_PATH)/addons/ofxOsc/**",
+					../../../addons/ofxBt/libs/bullet/include/bullet,
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../addons/ofxBt/libs/bullet/lib/osx\"",
+					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/osx\"",
 				);
 				PRODUCT_NAME = ram;
 				SDKROOT = "";

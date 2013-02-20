@@ -28,7 +28,7 @@ public:
 	}
 };
 
-bool isDead(const LabanMoment& moment)
+bool LabanMomentIsDead(const LabanMoment& moment)
 {
 	return moment.isDead();
 }
@@ -91,7 +91,7 @@ public:
 	
 	void update()
 	{
-		moments.erase(remove_if(moments.begin(), moments.end(), isDead), moments.end());
+		moments.erase(remove_if(moments.begin(), moments.end(), LabanMomentIsDead), moments.end());
 	}
 	
 	void draw()
@@ -109,7 +109,7 @@ public:
 			ofLine(cur.start, cur.start + cur.direction * lineLength);
 			ofSetColor(labanColors[cur.choice], 255 * alpha);
 			ofLine(cur.start, cur.start + labanDirections[cur.choice] * lineLength);
-			ofPopStyle();	
+			ofPopStyle();
 		}
 		ramEndCamera();
 	}
@@ -181,7 +181,6 @@ public:
 				}
 			}
 		}
-		ofPopStyle();
 	}
 	
 	void drawRigid(ramRigidBody &rigid)

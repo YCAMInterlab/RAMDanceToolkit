@@ -85,6 +85,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		276D282016D4C640005153ED /* Notation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notation.h; sourceTree = "<group>"; };
 		27B8489116D34A02000D321D /* ColorGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorGrid.h; sourceTree = "<group>"; };
 		27B8489316D35466000D321D /* ThreePoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreePoints.h; sourceTree = "<group>"; };
 		27B8489416D35513000D321D /* SphereMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphereMesh.h; sourceTree = "<group>"; };
@@ -182,6 +183,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		276D281F16D4C640005153ED /* Notation */ = {
+			isa = PBXGroup;
+			children = (
+				276D282016D4C640005153ED /* Notation.h */,
+			);
+			name = Notation;
+			path = scenes/Notation;
+			sourceTree = "<group>";
+		};
 		27B8489016D34A02000D321D /* ColorGrid */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +282,7 @@
 				27E36A0016D4937000729344 /* Laban */,
 				9A2B3F5916D325C7001CBFC9 /* LineDrawing */,
 				27FD3B6A16D387E800C9EAC6 /* Monster */,
+				276D281F16D4C640005153ED /* Notation */,
 				9A2B3F5B16D325C7001CBFC9 /* Particles */,
 				9A2B3F5E16D325C7001CBFC9 /* SoundCube */,
 				9A2B3F6016D325C7001CBFC9 /* Stamp */,
