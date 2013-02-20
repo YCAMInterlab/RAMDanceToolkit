@@ -2,6 +2,8 @@
 
 ramOfxUIControlPanel *ramOfxUIControlPanel::_instance = NULL;
 
+ofColor uiThemecb(64, 192), uiThemeco(192, 192), uiThemecoh(128, 192), uiThemecf(240, 255), uiThemecfh(128, 255), uiThemecp(96, 192), uiThemecpo(255, 192);
+
 ramOfxUIControlPanel& ramOfxUIControlPanel::instance()
 {
 	if (_instance == NULL)
@@ -41,6 +43,9 @@ void ramOfxUIControlPanel::setup()
 	// -------------------------------------
 	/// panel
 	mPanelGeneral = new ofxUICanvas(0, 0, kLength+kXInit*2.0, ofGetScreenHeight());
+	
+	mPanelGeneral->setUIColors(uiThemecb, uiThemeco, uiThemecoh, uiThemecf, uiThemecfh, uiThemecp, uiThemecpo);
+	
 	mPanelGeneral->addWidgetDown(new ofxUILabel("RamDanceToolkit", OFX_UI_FONT_LARGE));
 	
 	
@@ -120,6 +125,8 @@ void ramOfxUIControlPanel::addPanel(ramControllable* control)
 {
 	ofxUICanvas *panel = new ofxUICanvas(0, 0, ramGetGUI().kLength+ramGetGUI().kXInit*2.0, ofGetScreenHeight());
 	current_panel = panel;
+	
+	panel->setUIColors(uiThemecb, uiThemeco, uiThemecoh, uiThemecf, uiThemecfh, uiThemecp, uiThemecpo);
 	
 	panel->addWidgetDown(new ofxUILabel(control->getName(), OFX_UI_FONT_LARGE));
 	panel->addSpacer(kLength, 2);
