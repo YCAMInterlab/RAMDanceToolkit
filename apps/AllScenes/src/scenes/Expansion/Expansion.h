@@ -2,8 +2,10 @@
 
 class Expansion : public ramBaseScene
 {
+	enum { NUM_FILTER_BUFFER = 3 };
 	
-	ramExpansion mExpantion;
+	ramExpansion mExpantion[NUM_FILTER_BUFFER];
+	ramLowPassFilter lowpass[NUM_FILTER_BUFFER];
 	
 	ofxUIToggle *mToggleDraw[ramActor::NUM_JOINTS];
 	bool mNodeVisibility[ramActor::NUM_JOINTS];
@@ -44,7 +46,7 @@ public:
 		
 		panel->addSlider("Box size", 3.0, 100.0, &mBoxSize, gui.kLength, gui.kDim);
 		panel->addSlider("Box size ratio", 2.0, 100.0, &mBoxSizeRatio, gui.kLength, gui.kDim);
-		mExpantion.setupControlPanel(panel);
+//		mExpantion.setupControlPanel(panel);
 		
 		panel->addToggle("Toggle box size", true, 20, 20);
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
@@ -64,13 +66,18 @@ public:
 			panel->addWidgetRight(toggleVisible);
 			mToggleDraw[i] = toggleVisible;
 		}
-			
+		
+		for(int i=0; i<NUM_FILTER_BUFFER; i++)
+		{
+			mExpantion[i].setupControlPanel(panel);
+		}
+		
+		
 		ofAddListener(panel->newGUIEvent, this, &Expansion::onValueChanged);
 	}
 	
 	void setup()
 	{
-		mExpantion.setup();
 		setAllVisiblity(true);
 	}
 	
@@ -81,46 +88,67 @@ public:
 	
 	void draw()
 	{
-		
+		ramBeginCamera();
+		for (int i=0; i<getNumNodeArray(); i++)
+		{
+			ramActor &src = (ramActor&) getNodeArray(i);
+			ramActor &expandedActor = (ramActor&) lowpass[i].filter( mExpantion[i].filter(src) );
+			
+			
+			ofPushStyle();
+			ofNoFill();
+			for (int i=0; i<expandedActor.getNumNode(); i++)
+			{
+				if (mNodeVisibility[i] == false) continue;
+				
+				ramNode &node = expandedActor.getNode(i);
+				
+				node.beginTransform();
+				
+				int boxSize = mBoxSize * (mBiggerSize[i] ? mBoxSizeRatio : 1);
+				
+				if (mShowBox)
+				{
+					ofSetColor(r, g, b);
+					ofBox(boxSize);
+				}
+				
+				if (mShowAxis)
+				{
+					ofDrawAxis(boxSize);
+				}
+				
+				if (mShowExtendedLine)
+				{
+					ofSetLineWidth(2);
+					ofLine(src.getNode(i), expandedActor.getNode(i));
+				}
+				
+				node.endTransform();
+				
+				if (mShowLine)
+				{
+					ofSetColor(100);
+					ofSetLineWidth(1);
+					ofLine(src.getNode(i), expandedActor.getNode(i));
+				}
+				
+				
+				if (mShowName)
+				{
+					ofSetColor(255);
+					node.drawName(mBoxSize+20);
+				}
+			}
+			ofPopStyle();
+		}
+		ramEndCamera();
 	}
 	
 	void drawActor( ramActor& actor )
 	{
-		ramActor &expandedActor = (ramActor&)mExpantion.update(actor);
 		
-		ofPushStyle();
-		ofNoFill();
-		for (int i=0; i<expandedActor.getNumNode(); i++)
-		{
-			if (mNodeVisibility[i] == false) continue;
-			
-			ramNode &node = expandedActor.getNode(i);
-			
-			node.beginTransform();
-			
-			int boxSize = mBoxSize * (mBiggerSize[i] ? mBoxSizeRatio : 1);
-			
-			ofSetLineWidth(1);
-			ofSetColor(r, g, b);
-			if (mShowBox) ofBox(boxSize);
-			if (mShowAxis) ofDrawAxis(boxSize);
-			
-			ofSetColor(100);
-			if (mShowLine) ofLine(actor.getNode(i), expandedActor.getNode(i));
-			
-			ofSetLineWidth(2);
-			if (mShowExtendedLine) ofLine(actor.getNode(i), expandedActor.getNode(i));
-			node.endTransform();
-			
-			ofSetColor(255);
-			if (mShowName) node.drawName(mBoxSize+20);
-		}
-		ofPopStyle();
-	}
-	
-	void drawRigid(ramRigidBody &rigid)
-	{
-		
+
 	}
 	
 	void onValueChanged(ofxUIEventArgs& e)
@@ -133,10 +161,9 @@ public:
 			bool newValue = t->getValue();
 			
 			setAllVisiblity(newValue);
+			
 			for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			{
 				mToggleDraw[i]->setValue(newValue);
-			}
 		}
 		
 		if (name == "Toggle box size")
@@ -145,10 +172,9 @@ public:
 			bool newValue = t->getValue();
 			
 			toggleAllSize(newValue);
+			
 			for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			{
 				mToggleSize[i]->setValue(newValue);
-			}
 		}
 	}
 	
@@ -161,15 +187,12 @@ public:
 	
 	void setAllVisiblity(bool b)
 	{
-		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			mNodeVisibility[i] = b;
+		for (int i=0; i<ramActor::NUM_JOINTS; i++) mNodeVisibility[i] = b;
 	}
 	
 	void toggleAllSize(bool b)
 	{
-		cout << "toggleAllSize" << endl;
-		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			mBiggerSize[i] = b;
+		for (int i=0; i<ramActor::NUM_JOINTS; i++) mBiggerSize[i] = b;
 	}
 };
 

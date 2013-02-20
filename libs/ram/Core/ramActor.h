@@ -151,9 +151,9 @@ public:
 	ramNodeArray getLerpd(const ramNodeArray &arr, float t) const;
 	
 	inline void setType(ramNodeArrayType t) { type = t; }
-	inline bool isActor() { return type == RAM_NODEARRAY_TYPE_ACTOR; }
-	inline bool isRigid() { return type == RAM_NODEARRAY_TYPE_RIGIDBODY; }
-	inline bool isTypeOf(ramNodeArrayType t) { return type == t; }
+	inline bool isActor() const { return type == RAM_NODEARRAY_TYPE_ACTOR; }
+	inline bool isRigid() const { return type == RAM_NODEARRAY_TYPE_RIGIDBODY; }
+	inline bool isTypeOf(ramNodeArrayType t) const { return type == t; }
 	
 protected:
 

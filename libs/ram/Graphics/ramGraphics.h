@@ -96,7 +96,7 @@ void ramDrawBasicActor(const ramActor& actor,
 void ramDrawBasicRigid(const ramRigidBody& rigid,
 					   const ofColor& jointColor = ramColor::BLUE_LIGHT);
 
-void ramDrawNodes(ramNodeArray& nodeArray,
+void ramDrawNodes(const ramNodeArray& nodeArray,
 				  const ofColor& jointColor = ramColor::BLUE_LIGHT,
 				  const ofColor& lineColor = ramColor::GRAY);
 

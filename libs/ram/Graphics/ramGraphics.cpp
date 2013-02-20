@@ -135,8 +135,9 @@ void ramDrawBasicActor(const ramActor& actor,
 	for (int i=0; i<actor.getNumNode(); i++)
 	{
 		const ramNode &node = actor.getNode(i);
-		float jointSize = (i==ramActor::JOINT_HEAD) ? 6.0 : 3.0;
+		float jointSize = (i==ramActor::JOINT_HEAD) ? 8.0 : 5.0;
 		
+		ofPushStyle();
 		ofSetColor( jointColor );
 		ramBox( node, jointSize );
 		
@@ -145,6 +146,7 @@ void ramDrawBasicActor(const ramActor& actor,
 			ofSetColor( lineColor );
 			ofLine(node, *node.getParent());
 		}
+		ofPopStyle();
 	}
 	glPopMatrix();
 }
@@ -154,20 +156,21 @@ void ramDrawBasicRigid(const ramRigidBody& rigid,
 	for(int i=0; i<rigid.getNumNode(); i++)
 	{
 		const ramNode &node = rigid.getNode(i);
-		node.beginTransform();
-		ofBox(5);
-		node.endTransform();
+		ofPushStyle();
+		ofSetColor(jointColor);
+		ramBox(node, 5);
+		ofPopStyle();
 	}
 }
-void ramDrawNodes(ramNodeArray& nodeArray,
+void ramDrawNodes(const ramNodeArray& nodeArray,
 				  const ofColor& jointColor,
 				  const ofColor& lineColor)
 {
 	if (nodeArray.isActor())
-		ramDrawBasicActor((ramActor &) nodeArray);
+		ramDrawBasicActor((ramActor &) nodeArray, jointColor, lineColor);
 	
 	else
-		ramDrawBasicRigid((ramRigidBody &) nodeArray);
+		ramDrawBasicRigid((ramRigidBody &) nodeArray, jointColor);
 }
 
 

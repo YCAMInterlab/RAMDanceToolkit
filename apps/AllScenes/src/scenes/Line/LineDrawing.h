@@ -25,7 +25,8 @@ public:
 		float noise_scale;
 		float noise_freq;
 		
-		float extend;
+		float extend_from;
+		float extend_to;
 		
 		float line_width;
 		ofFloatColor color;
@@ -55,18 +56,25 @@ public:
 			panel->addSlider("Line B", 0, 1, &color.b, 95, 10);
 			panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 			
-			panel->addSlider("line_width", 1, 20, &line_width, 150, 10);
+			panel->addSlider("line_width", 1, 10, &line_width, 150, 10);
 			panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
 			panel->addSlider("curve", -400, 400, &curve, 150, 10);
 			panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 			
-			panel->addSlider("spiral_radius", 0, 200, &spiral_radius, 300, 10);
-			panel->addSlider("spiral_num_rotate", 0, 100, &spiral_num_rotate, 300, 10);
+			panel->addSlider("spiral_radius", 0, 200, &spiral_radius, 150, 10);
+			panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
+			panel->addSlider("spiral_num_rotate", 0, 100, &spiral_num_rotate, 150, 10);
+			panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 			
-			panel->addSlider("noise_scale", 0, 200, &noise_scale, 300, 10);
-			panel->addSlider("noise_freq", 0, 10, &noise_freq, 300, 10);
+			panel->addSlider("noise_scale", 0, 200, &noise_scale, 150, 10);
+			panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
+			panel->addSlider("noise_freq", 0, 10, &noise_freq, 150, 10);
+			panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 			
-			panel->addSlider("extend", 0, 1000, &extend, 300, 10);
+			panel->addSlider("extend from", 0, 1000, &extend_from, 150, 10);
+			panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
+			panel->addSlider("extend to", 0, 1000, &extend_to, 150, 10);
+			panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 			
 			panel->addSpacer(gui.kLength, 2);
 		}
@@ -88,9 +96,14 @@ public:
 			nodeLine.curve(curve);
 			nodeLine.resampling(0.3);
 			
-			if (extend > 0)
+			if (extend_from > 0)
 			{
-				nodeLine.extend(extend);
+				nodeLine.extendFrom(extend_from);
+			}
+			
+			if (extend_to > 0)
+			{
+				nodeLine.extendTo(extend_to);
 			}
 			
 			if (spiral_radius > 0)

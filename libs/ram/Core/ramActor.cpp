@@ -296,7 +296,6 @@ void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
 		ramNode &node = getNode(i);
 		node.node_id = i;
 		node.name = isActor() ? getJointName(i) : "Node " + ofToString(i);
-		
 		node.setGlobalPosition(vec);
 		node.setGlobalOrientation(quat);
 		node.accerelometer.update(vec, quat);

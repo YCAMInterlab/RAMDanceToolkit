@@ -4,6 +4,8 @@
 #include "ramBaseFilter.h"
 #include "ramControlPanel.h"
 
+#include "ramLowPassFilter.h"
+
 class ramExpansion : public ramBaseFilter
 {
 	float kExpandMax;
@@ -27,10 +29,6 @@ public:
 	
 	inline const string getName() { return "ramExpansion"; };
 	
-protected:
-	
-	ramNodeArray expandedArray;
-	
 	const ramNodeArray& filter(const ramNodeArray& src)
 	{
 		expandedArray = src;
@@ -51,5 +49,9 @@ protected:
 		
 		return expandedArray;
 	}
+	
+protected:
+	
+	ramNodeArray expandedArray;
 	
 };
