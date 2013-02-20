@@ -155,19 +155,19 @@ void ramDrawBasicRigid(const ramRigidBody& rigid,
 	{
 		const ramNode &node = rigid.getNode(i);
 		node.beginTransform();
-		ofBox(5);
+		ofBox(3);
 		node.endTransform();
 	}
 }
-void ramDrawNodes(ramNodeArray& nodeArray,
+void ramDrawNodes(const ramNodeArray& nodeArray,
 				  const ofColor& jointColor,
 				  const ofColor& lineColor)
 {
 	if (nodeArray.isActor())
-		ramDrawBasicActor((ramActor &) nodeArray);
+		ramDrawBasicActor((ramActor &) nodeArray, jointColor, lineColor);
 	
 	else
-		ramDrawBasicRigid((ramRigidBody &) nodeArray);
+		ramDrawBasicRigid((ramRigidBody &) nodeArray, jointColor);
 }
 
 

@@ -84,6 +84,18 @@ public:
 	void drawId(int floatPos=20);
 	void drawName(int floatPos=20);
 	
+	bool operator==(const ramNode &node) const;
+	bool operator!=(const ramNode &node) const;
+	
+	ramNode operator+(const ramNode &node) const;
+	ramNode& operator+=(const ramNode &node);
+	
+	ramNode operator-(const ramNode &node) const;
+	ramNode& operator-=(const ramNode &node);
+	
+	ramNode& lerp(const ramNode &node, float t);
+	ramNode getLerpd(const ramNode &node, float t) const;
+	
 private:
 
 	int node_id;
@@ -92,7 +104,6 @@ private:
 	ramAccelerometer accerelometer;
 	
 	ramNodeArray *container;
-	
 };
 
 #pragma mark - ramNodeArray
@@ -136,13 +147,13 @@ public:
 	ramNodeArray operator-(const ramNodeArray &arr) const;
 	ramNodeArray& operator-=(const ramNodeArray &arr);
 
-	ramNodeArray operator*(float s) const;
-	ramNodeArray& operator*=(float s);
+	ramNodeArray& lerp(const ramNodeArray &arr, float t);
+	ramNodeArray getLerpd(const ramNodeArray &arr, float t) const;
 	
 	inline void setType(ramNodeArrayType t) { type = t; }
-	inline bool isActor() { return type == RAM_NODEARRAY_TYPE_ACTOR; }
-	inline bool isRigid() { return type == RAM_NODEARRAY_TYPE_RIGIDBODY; }
-	inline bool isTypeOf(ramNodeArrayType t) { return type == t; }
+	inline bool isActor() const { return type == RAM_NODEARRAY_TYPE_ACTOR; }
+	inline bool isRigid() const { return type == RAM_NODEARRAY_TYPE_RIGIDBODY; }
+	inline bool isTypeOf(ramNodeArrayType t) const { return type == t; }
 	
 protected:
 

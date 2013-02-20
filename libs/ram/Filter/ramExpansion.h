@@ -27,10 +27,6 @@ public:
 	
 	inline const string getName() { return "ramExpansion"; };
 	
-protected:
-	
-	ramNodeArray expandedArray;
-	
 	const ramNodeArray& filter(const ramNodeArray& src)
 	{
 		expandedArray = src;
@@ -51,5 +47,9 @@ protected:
 		
 		return expandedArray;
 	}
+	
+protected:
+	
+	ramNodeArray expandedArray;
 	
 };

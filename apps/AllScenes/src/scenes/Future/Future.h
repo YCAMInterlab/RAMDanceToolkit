@@ -2,9 +2,9 @@
 
 class Future : public ramBaseScene
 {
+	ramGhost mGhosts[3];
+	ramLowPassFilter lowpass;
 	
-	ramGhost mGhosts[5];
-
 public:
 	
 	bool draw_line;
@@ -17,10 +17,12 @@ public:
 		
 		gui.addToggle("draw_line", &draw_line);
 		
-		for(int i=0; i<5; i++)
+		for(int i=0; i<3; i++)
 		{
 			mGhosts[i].setupControlPanel(panel);
 		}
+		
+		lowpass.setupControlPanel(panel);
 		ofAddListener(panel->newGUIEvent, this, &Future::onValueChanged);
 	}
 
@@ -33,7 +35,7 @@ public:
 	{
 		for (int i=0; i<getNumNodeArray(); i++)
 		{
-			ramNodeArray &src = getNodeArray(i);
+			const ramNodeArray &src = getNodeArray(i);
 			mGhosts[i].update(src);
 		}
 	}
@@ -44,16 +46,17 @@ public:
 		for (int i=0; i<getNumNodeArray(); i++)
 		{
 			ramNodeArray &NA = getNodeArray(i);
+			const ramNodeArray &ghost = lowpass.filter( mGhosts[i].get() );
 			
 			glPushAttrib(GL_ALL_ATTRIB_BITS);
 			glEnable(GL_DEPTH_TEST);
 			ofPushStyle();
 			ofNoFill();
 			
-			ramDrawNodes( (ramActor&)mGhosts[i].get() );
+			ramDrawNodes( ghost, ramColor::RED_LIGHT );
 			
 			if (draw_line)
-				ramDrawNodeCorresponds(NA, mGhosts[i].get());
+				ramDrawNodeCorresponds(NA, ghost);
 			
 			ofPopStyle();
 			glPopAttrib();

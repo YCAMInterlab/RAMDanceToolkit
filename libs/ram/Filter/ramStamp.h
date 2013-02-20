@@ -55,8 +55,6 @@ public:
 	}
 	
 	inline void setRecSpan(const float span) { mRecSpan = span; }
-	
-	inline int getNumStamps() { return mStamps.size(); }
 	inline deque<ramNodeArray>& getStamps() { return mStamps; }
 	inline ramNodeArray& getStamp(const int index) { return mStamps.at(index); }
 	

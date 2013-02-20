@@ -57,7 +57,7 @@ public:
 	{
 		ramBeginCamera();
 		
-		for (int i=0; i<mStamp.getNumStamps(); i++)
+		for (int i=0; i<mStamp.getSize(); i++)
 		{
 			ramNodeArray& nodeArray = mStamp.getStamp(i);
 			
@@ -71,7 +71,7 @@ public:
 				ofPushStyle();
 				ofSetColor(color);
 				ofSetLineWidth(line_width);
-				ramDrawActorCube(nodeArray);
+				ramDrawActorCube(nodeArray, ramColor::RED_LIGHT);
 				ofPopStyle();
 			}
 		}

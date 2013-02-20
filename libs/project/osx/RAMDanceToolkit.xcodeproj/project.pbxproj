@@ -302,6 +302,7 @@
 		60FFDB5516CD1F2F0093F734 /* ramBaseFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FFDB5416CD1F2F0093F734 /* ramBaseFilter.h */; };
 		9A02CDAD16CBD9610055E1AC /* ramStamp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A02CDAC16CBD9610055E1AC /* ramStamp.h */; };
 		9A02CDB016CBD96D0055E1AC /* ramSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A02CDAE16CBD96D0055E1AC /* ramSession.h */; };
+		9A2B3FC616D366F4001CBFC9 /* ramLowPassFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A2B3FC516D366F4001CBFC9 /* ramLowPassFilter.h */; };
 		9AD6F5A316B926C000F7F51E /* ofxUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F4FF16B926BF00F7F51E /* ofxUI.h */; };
 		9AD6F5A416B926C000F7F51E /* ofxUI2DPad.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F50016B926BF00F7F51E /* ofxUI2DPad.h */; };
 		9AD6F5A516B926C000F7F51E /* ofxUIBaseDraws.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F50116B926BF00F7F51E /* ofxUIBaseDraws.h */; };
@@ -653,6 +654,7 @@
 		60FFDB5416CD1F2F0093F734 /* ramBaseFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramBaseFilter.h; sourceTree = "<group>"; };
 		9A02CDAC16CBD9610055E1AC /* ramStamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramStamp.h; sourceTree = "<group>"; };
 		9A02CDAE16CBD96D0055E1AC /* ramSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSession.h; sourceTree = "<group>"; };
+		9A2B3FC516D366F4001CBFC9 /* ramLowPassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramLowPassFilter.h; sourceTree = "<group>"; };
 		9AD6F4FF16B926BF00F7F51E /* ofxUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI.h; sourceTree = "<group>"; };
 		9AD6F50016B926BF00F7F51E /* ofxUI2DPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI2DPad.h; sourceTree = "<group>"; };
 		9AD6F50116B926BF00F7F51E /* ofxUIBaseDraws.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIBaseDraws.h; sourceTree = "<group>"; };
@@ -1290,6 +1292,9 @@
 				9AE4C36716CB76EE00BCE1D4 /* ramPastMe.h */,
 				609A651816CAC57C00C0AB22 /* ramPendulum.h */,
 				9A02CDAE16CBD96D0055E1AC /* ramSession.h */,
+				9A2B3FC516D366F4001CBFC9 /* ramLowPassFilter.h */,
+				60426F9716CE1A5300C99541 /* ramExpansion.h */,
+				60FFDB5416CD1F2F0093F734 /* ramBaseFilter.h */,
 				60CFE13916CCA76F000050C8 /* ramStamp.h */,
 				607A91A716D2B52C0038D472 /* ramTimeFilter.h */,
 				9A02CDAC16CBD9610055E1AC /* ramStamp.h */,
@@ -1786,6 +1791,7 @@
 				607A91A816D2B52C0038D472 /* ramTimeFilter.h in Headers */,
 				60A9B79816D2CD3D0079E701 /* ramControlPanelBase.h in Headers */,
 				27FD3B6D16D38F1100C9EAC6 /* ramMonster.h in Headers */,
+				9A2B3FC616D366F4001CBFC9 /* ramLowPassFilter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

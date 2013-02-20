@@ -34,6 +34,7 @@
 #include "ramNodeTransform.h"
 #include "ramTimeFilter.h"
 #include "ramMonster.h"
+#include "ramLowPassFilter.h"
 
 
 /// utility
