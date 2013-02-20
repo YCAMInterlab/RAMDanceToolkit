@@ -18,7 +18,9 @@ class ramOfxUIControlPanel : public ramControlPanelBase
 	
 public:
 	
-	float kDim, kXInit, kLength;
+	const float kDim;
+	const float kXInit;
+	const float kLength;
 	
 	static ramOfxUIControlPanel& instance();
 	virtual ~ramOfxUIControlPanel() {}

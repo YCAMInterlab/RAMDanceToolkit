@@ -12,7 +12,7 @@ public:
     ramNodeFinder() : ramNodeIdentifer() {}
 	ramNodeFinder(const ramNodeIdentifer& copy) : ramNodeIdentifer(copy) {}
 	
-	void setActorName(string name_) { name = name_; }
+	void setTargetName(string name_) { name = name_; }
 	void setJointID(int index_) { index = index_; }
 	
 	inline bool found()

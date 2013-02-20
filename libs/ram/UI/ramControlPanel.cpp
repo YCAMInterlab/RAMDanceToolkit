@@ -13,12 +13,8 @@ ramOfxUIControlPanel& ramOfxUIControlPanel::instance()
 	return *_instance;
 }
 
-ramOfxUIControlPanel::ramOfxUIControlPanel()
+ramOfxUIControlPanel::ramOfxUIControlPanel() : kDim(16), kXInit(OFX_UI_GLOBAL_WIDGET_SPACING), kLength(320-kXInit)
 {
-	kDim = 16;
-	kXInit = OFX_UI_GLOBAL_WIDGET_SPACING;
-	kLength = 320-kXInit;
-	
 	mFloorPattern = ramFloor::FLOOR_NONE;
 	mFloorSize = 600.0;
 	mGridSize = 50.0;
@@ -36,11 +32,9 @@ ramOfxUIControlPanel::ramOfxUIControlPanel()
 
 void ramOfxUIControlPanel::setup()
 {
-	
 	/// Event hooks
 	// -------------------------------------
 	ofAddListener(ofEvents().update, this, &ramOfxUIControlPanel::update);
-	
 	
 	/// First panel
 	// -------------------------------------
@@ -48,7 +42,7 @@ void ramOfxUIControlPanel::setup()
 	
 	
 	addPanel("RamDanceToolkit");
-
+	
 	addToggle("FullScrean", &fullScreen);
 	addToggle("Pause (or press Space Key)", &pause);
 	addToggle("Use Shadow", &enableShadow);
@@ -58,7 +52,7 @@ void ramOfxUIControlPanel::setup()
 	addColorSelector("Background", &backgroundColor);
 	
 	addSeparator();
-
+	
 	/// floor pattern
 	vector<string> floors = ramFloor::getFloorNames();
 	addRadioGroup("Floor Patterns", floors, &mFloorPattern);
@@ -69,7 +63,7 @@ void ramOfxUIControlPanel::setup()
 	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 	
 	addSeparator();
-	
+
 	/// camera Names
 	addRadioGroup("Camera Preset", ramCameraManager::instance().getDefaultCameraNames(), &camera_preset_t);
 	

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ofMain.h"
-
 #include "ramSimpleShadow.h"
 
 void ramInitialize(int oscPort = 10000);

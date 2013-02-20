@@ -144,56 +144,88 @@ end
 solution (project_name)
 	language "C++"
 
+	location ( project_name )
+
+	configuration "Debug"
+		targetname( project_name .. "Debug" )
+
+	configuration "Release"
+		targetname( project_name )
+
 	configurations { "Debug", "Release" }
 	platforms { "x32" }
 
 	project (project_name)
-		kind "WindowedApp"
 
-		targetname( project_name )
-		location ( project_name )
+		targetdir( project_name .. '/bin' )
 
 		includedirs {
-	   		-- RAM
-	   		"../libs/ram/",
-	   		"../libs/ram/**",
+			-- RAM
+			"../libs/ram/",
+			"../libs/ram/**",
 
-	   		-- RAM addons
-	   		'../addons/ofxBt/src/',
-	   		'../addons/ofxBt/src/**',
-	   		'../addons/ofxBt/libs/',
-	   		'../addons/ofxBt/libs/**',
-	   		'../addons/ofxInteractivePrimitives/src/',
-	   		'../addons/ofxInteractivePrimitives/src/**',
-	   		'../addons/ofxUI/src/',
-	   		'../addons/ofxUITabbedCanvas/',
+			-- RAM addons
+			'../addons/ofxBt/src/',
+			'../addons/ofxBt/src/**',
+			'../addons/ofxBt/libs/',
+			'../addons/ofxBt/libs/**',
+			'../addons/ofxInteractivePrimitives/src/',
+			'../addons/ofxInteractivePrimitives/src/**',
+			'../addons/ofxUI/src/',
+			'../addons/ofxUITabbedCanvas/',
 
-	   		-- oF
-	   		'../../libs/**/include',
-	   		'../../libs/cairo/include/**',
-	   		'../../libs/openFrameworks',
-	   		'../../libs/openFrameworks/**',
+			-- oF
+			'../../libs/**/include',
+			'../../libs/cairo/include/**',
+			'../../libs/openFrameworks',
+			'../../libs/openFrameworks/**',
 
-	   		-- oF addons
-	   		'../../addons/ofxOsc/**',
-	   		'../../addons/ofxXMLSettings/**',
-	   	}
-
-	   	-- excludes { "**/Win32Specific/**" }
-	   	-- libdirs { os.findlib("X11") }
-	   	-- links { "Cocoa.framework" }
-	   	-- libdirs { "libs", "../mylibs" }
-
-	   	libdirs {
-		   	-- RAM
-	   		'../libs/project/',
+			-- oF addons
+			'../../addons/ofxOsc/**',
+			'../../addons/ofxXMLSettings/**',
 		}
 
-		configuration 'macosx'
-			links {
-				-- RAM
-				'ram',
+		-- empty sorcecode
+		create_file(project_name .. '/src/main.cpp', main_cpp)
+		create_file(project_name .. '/src/testApp.h', test_app_h)
+		create_file(project_name .. '/src/testApp.cpp', test_app_cpp)
 
+		files {
+			'../../libs/openFrameworks/*.h',
+	   		'../../libs/openFrameworks/**/*.h',
+
+			'../libs/ram/*.h',
+			'../libs/ram/**/*.h',
+			'../libs/ram/**/*.cpp',
+
+			'../addons/ofxBt/src/*.h',
+			'../addons/ofxBt/src/*.cpp',
+
+			'../addons/ofxInteractivePrimitives/src/**.h',
+			'../addons/ofxInteractivePrimitives/src/**.cpp',
+
+			'../addons/ofxUI/src/**.h',
+
+			'../addons/ofxUITabbedCanvas/*.h',
+			'../addons/ofxUITabbedCanvas/*.cpp',
+
+			'../../addons/ofxOsc/**/*.h',
+			'../../addons/ofxOsc/**/*.cpp',
+
+			'../../addons/ofxXmlSettings/**/*.h',
+			'../../addons/ofxXmlSettings/**/*.cpp',
+
+			project_name .. '/src/main.cpp',
+			project_name .. '/src/testApp.h',
+			project_name .. '/src/testApp.cpp'
+		}
+
+		-- platform specific
+
+		configuration 'macosx'
+			kind "WindowedApp"
+
+			links {
 				-- oF
 				'Accelerate.framework',
 				'AGL.framework',
@@ -211,7 +243,6 @@ solution (project_name)
 
 			linkoptions {
 				-- RAM
-				'../../libs/project/libram.a',
 				'../../addons/ofxBt/libs/bullet/lib/osx/libBulletCollision.a',
 				'../../addons/ofxBt/libs/bullet/lib/osx/libBulletDynamics.a',
 				'../../addons/ofxBt/libs/bullet/lib/osx/libBulletSoftBody.a',
@@ -242,15 +273,118 @@ solution (project_name)
 				'../../../libs/tess2/lib/osx/tess2.a',
 			}
 
+			postbuildcommands { 'cp -f ../../../libs/fmodex/lib/osx/libfmodex.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmodex.dylib"; install_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME"; mkdir -p "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/"; cp -Rf ../../../libs/glut/lib/osx/GLUT.framework "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks"; mkdir -p "$TARGET_BUILD_DIR/data/";' }
+
+		configuration 'vs*'
+			kind "ConsoleApp"
+
+			libdirs {
+				-- RAM
+				'../addons/ofxBt/libs/bullet/lib/vs2010/',
+
+				-- oF
+				'../../libs/assimp/lib/vs2010',
+				'../../libs/cairo/lib/vs2010',
+				'../../libs/fmodex/lib/vs2010',
+				'../../libs/FreeImage/lib/vs2010',
+				'../../libs/freetype/lib/vs2010',
+				'../../libs/glew/lib/vs2010',
+				'../../libs/glu/lib/vs2010',
+				'../../libs/glut/lib/vs2010',
+				'../../libs/openFrameworks/lib/vs2010',
+				'../../libs/openFrameworksCompiled/lib/vs2010',
+				'../../libs/poco/lib/vs2010',
+				'../../libs/quicktime/lib/vs2010',
+				'../../libs/rtAudio/lib/vs2010',
+				'../../libs/tess2/lib/vs2010',
+				'../../libs/videoInput/lib/vs2010',
+			}
+
+			linkoptions {
+				'/NODEFAULTLIB:"PocoFoundationd.lib"',
+				'/NODEFAULTLIB:"atlthunk.lib"',
+			}
+
+			defines {
+				"WIN32",
+				"_CONSOLE",
+				"POCO_STATIC",
+				"CAIRO_WIN32_STATIC_BUILD",
+				"DISABLE_SOME_FLOATING_POINT",
+			}
+
+		configuration {'vs*' , "Debug"}
+			defines {
+				"_DEBUG",
+			}
+
+			links {
+				-- RAM
+				'BulletCollision_vs2010_d',
+				'BulletDynamics_vs2010_d',
+				'BulletSoftBody_vs2010_d',
+				'LinearMath_vs2010_d',
+
+				-- oF
+				'cairo-static',
+				'pixman-1',
+				'fmodexL_vc',
+				'fmodex_vc',
+				'FreeImage',
+				'libfreetype',
+				'glew32s',
+				'glu32',
+				'glut32',
+				'openframeworksLibDebug',
+				'PocoFoundationmdd',
+				'PocoNetmdd',
+				'PocoUtilmdd',
+				'PocoXMLmdd',
+				'qtmlClient',
+				'QTSClient',
+				'Rave',
+				'dsound',
+				'rtAudioD',
+				'tess2',
+				'videoInput',
+				'msimg32',
+			}
+
+		configuration {'vs*' , "Release"}
+			defines {
+				"NODEBUG",
+			}
+
+			links {
+				-- RAM
+				'LinearMath_vs2010',
+				'BulletCollision_vs2010',
+				'BulletDynamics_vs2010',
+				'BulletSoftBody_vs2010',
+
+				-- oF
+				'cairo-static',
+				'pixman-1',
+				'fmodexL_vc',
+				'fmodex_vc',
+				'FreeImage',
+				'libfreetype',
+				'glew32s',
+				'glu32',
+				'glut32',
+				'openframeworksLib',
+				'PocoFoundationmd',
+				'PocoNetmd',
+				'PocoUtilmd',
+				'PocoXMLmd',
+				'qtmlClient',
+				'QTSClient',
+				'Rave',
+				'dsound',
+				'rtAudio',
+				'tess2',
+				'videoInput',
+				'msimg32',
+			}
+
 		configuration {}
-
-	   	create_file(project_name .. '/src/main.cpp', main_cpp)
-	   	create_file(project_name .. '/src/testApp.h', test_app_h)
-	   	create_file(project_name .. '/src/testApp.cpp', test_app_cpp)
-
-	   	files {
-	   		project_name .. '/src/main.cpp',
-	   		project_name .. '/src/testApp.h',
-	   		project_name .. '/src/testApp.cpp'
-	   	}
-
