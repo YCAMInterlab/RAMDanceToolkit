@@ -2,7 +2,7 @@
 
 #include "ramMain.h"
 
-float maxLabanMomentLife = 5;
+float maxLabanMomentLife = 1;
 
 class LabanMoment
 {
@@ -24,7 +24,7 @@ public:
 	}
 	bool isDead() const
 	{
-		return (ofGetElapsedTimef() - birth) > maxLabanMomentLife;
+		return getLife() < 0;
 	}
 };
 
@@ -54,6 +54,7 @@ public:
 		lineLength = 100;
 		showLines = true;
 		showPlanes = false;
+		panel->addSlider("Fade out", 0, 2, &maxLabanMomentLife, 300, 20);
 		panel->addSlider("Threshold", 0, .5, &threshold, 300, 20);
 		panel->addToggle("Show lines", &showLines, 20, 20);
 		panel->addSlider("Line width", 0, 10, &lineWidth, 300, 20);
