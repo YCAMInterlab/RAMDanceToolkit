@@ -19,9 +19,8 @@ public:
 	{
 		ramControlPanel &gui = ramGetGUI();
 
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
-		panel->addSlider("Expand", 0.0, kExpandMax, &mExpand, gui.kLength, gui.kDim);
+		gui.addSection(getName());
+		gui.addSlider("Expand", 0.0, kExpandMax, &mExpand);
 	}
 	
 	const ramNodeArray& get(size_t index) const { return expandedArray; }

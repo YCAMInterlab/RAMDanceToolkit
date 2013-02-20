@@ -152,7 +152,10 @@ struct RadioGroupListener
 	ofxUIRadio *o;
 	int *value;
 	
-	RadioGroupListener(ofxUIRadio *o, int *value) : o(o), value(value) {}
+	RadioGroupListener(ofxUIRadio *o, int *value) : o(o), value(value)
+	{
+		o->getToggles().at(*value)->setValue(true);
+	}
 	
 	void handle(ofxUIEventArgs &e)
 	{

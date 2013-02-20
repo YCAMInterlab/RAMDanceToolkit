@@ -25,6 +25,7 @@ public:
 			ClearListener(ramStamp *self) : self(self) {}
 			void operator()() { self->clear(); }
 		};
+		
 		gui.addButton("Clear", ClearListener(this));
 		gui.addSlider("Recording Span", 2.0, 60.0, &mRecSpan);
 	}
