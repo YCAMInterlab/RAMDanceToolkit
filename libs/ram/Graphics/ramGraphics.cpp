@@ -135,7 +135,7 @@ void ramDrawBasicActor(const ramActor& actor,
 	for (int i=0; i<actor.getNumNode(); i++)
 	{
 		const ramNode &node = actor.getNode(i);
-		float jointSize = (i==ramActor::JOINT_HEAD) ? 6.0 : 3.0;
+		float jointSize = (i==ramActor::JOINT_HEAD) ? 8.0 : 5.0;
 		
 		ofPushStyle();
 		ofSetColor( jointColor );

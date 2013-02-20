@@ -23,6 +23,8 @@ class BasicActor : public ramBaseScene
 	map<const string, ControlSegment> mControlSegments;
 	ofxUICanvas *panel;
 	
+	ofLight light;
+	bool enableLight;
 	
 public:
 	
@@ -32,11 +34,15 @@ public:
 	{
 		panel = panel_;
 		
+		ramControlPanel &gui = ramGetGUI();
+		gui.addToggle("Enable light", &enableLight);
+		
 		ofAddListener(panel->newGUIEvent, this, &BasicActor::onPanelChanged);
 	}
 	
 	void setup()
 	{
+		light.setPosition(300, 300, 300);
 		mControlSegments.clear();
 	}
 	
@@ -55,7 +61,8 @@ public:
 		panel->addSpacer(gui.kLength, 2);
 		panel->addWidgetDown(new ofxUILabel(segment.name, OFX_UI_FONT_LARGE));
 		panel->addSpacer(gui.kLength, 2);
-		panel->addButton("Reset: " + segment.name, false, 40, 40);
+		panel->addButton("Reset: " + segment.name, false, 20, 20);
+		
 		
 		panel->addSlider(nodeArray.getName() + " Joint R", 0, 255, &segment.r, 95, gui.kDim);
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
@@ -89,6 +96,8 @@ public:
 	
 	void draw()
 	{
+		if (enableLight) light.enable();
+		
 		ramBeginCamera();
 		for (int i=0; i<getNumNodeArray(); i++)
 		{
@@ -105,6 +114,8 @@ public:
 			glPopMatrix();
 		}
 		ramEndCamera();
+		
+		if (enableLight) light.disable();
 	}
 	
 	void onPanelChanged(ofxUIEventArgs& e)
