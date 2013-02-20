@@ -8,23 +8,31 @@ public:
 	
 	ofImage img;
 	bool useRgb;
+	float bufferSize;
 	
 	void setupControlPanel(ofxUICanvas* panel)
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
+		useRgb = true;
+		bufferSize = 1024;
+		
 		gui.addToggle("Use RGB/HSB", &useRgb);
+		gui.addSlider("Buffer size", 128, 2048, &bufferSize);
 	}
 	
 	void setup()
 	{		
-		img.allocate(500, ramActor::NUM_JOINTS, OF_IMAGE_COLOR);
-		useRgb = true;
 	}
 	
 	void update()
 	{
-		img.update();		
+		bufferSize = (int) bufferSize;
+		if(bufferSize != img.getWidth())
+		{
+			img.allocate((int) bufferSize, ramActor::NUM_JOINTS, OF_IMAGE_COLOR);
+		}
+		img.update();
 	}
 	
 	//--------------------------------------------------------------
@@ -32,7 +40,7 @@ public:
 	{	
 		ofSetColor(255);
 		ofSetMinMagFilters(GL_NEAREST, GL_NEAREST);
-		img.draw(0, 0, ofGetWidth(), ofGetHeight());
+		img.draw(0, 0, ofGetViewportWidth(), ofGetViewportHeight());
 	}
 	
 	//--------------------------------------------------------------
