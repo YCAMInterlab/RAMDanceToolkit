@@ -1,60 +1,5 @@
 #include "testApp.h"
 
-
-/*!
- Scenes
- */
-#include "BasicActor.h"
-BasicActor basicActor;
-
-#include "LineDrawing.h"
-LineDrawing drawLines;
-
-#include "BigBox.h"
-BigBox bigbox;
-
-#include "Future.h"
-Future future;
-
-#include "Donuts.h"
-Donuts donuts;
-
-#include "Stamp.h"
-Stamp stamp;
-
-#include "Expansion.h"
-Expansion expansion;
-
-#include "Particles.h"
-Particles particles;
-
-#include "Abacus.h"
-Abacus abacus;
-
-#include "SoundCube.h"
-SoundCube soundcube;
-
-#include "UpsideDown.h"
-UpsideDown upsideDown;
-
-#include "Kepler.h"
-Kepler kepler;
-
-#include "HastyChase.h"
-HastyChase hastyChase;
-
-#include "ColorGrid.h"
-ColorGrid colorGrid;
-
-#include "ThreePoints.h"
-ThreePoints threePoints;
-
-#include "FourPoints.h"
-FourPoints fourPoints;
-
-#include "Chain.h"
-Chain chain;
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -63,51 +8,26 @@ void testApp::setup()
 	ofSetVerticalSync(true);
 	ofBackground(ramColor::WHITE);
 	
+	
 	/// ram setup
 	// ------------------
 	ramInitialize();
-	oscReceiver.setup(10000);
 	
-	/// scenes setup
-	// ------------------
-	vector<ramBaseScene*> scenes;
-	scenes.push_back( basicActor.getPtr() );
-	scenes.push_back( drawLines.getPtr() );
-	scenes.push_back( bigbox.getPtr() );
-	scenes.push_back( future.getPtr() );
-	scenes.push_back( donuts.getPtr() );
-	scenes.push_back( stamp.getPtr() );
-	scenes.push_back( expansion.getPtr() );
-	scenes.push_back( particles.getPtr() );
-	scenes.push_back( abacus.getPtr() );
-	scenes.push_back( soundcube.getPtr() );
-    scenes.push_back( upsideDown.getPtr() );
-    scenes.push_back( kepler.getPtr() );
-	scenes.push_back( hastyChase.getPtr() );
-	scenes.push_back( colorGrid.getPtr() );
-	scenes.push_back( threePoints.getPtr() );
-	scenes.push_back( fourPoints.getPtr() );
-    scenes.push_back( chain.getPtr() );
-	sceneManager.setup(scenes);
+	oscReceiver.setup(10000);
+
 }
 
 //--------------------------------------------------------------
 void testApp::update()
-{	
+{
 	/// Entities update
 	// ------------------
 	oscReceiver.update();
-	
-	
-	/// Scenes update
-	// ------------------
-	sceneManager.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	sceneManager.draw();
 }
 
 #pragma mark - ram methods
@@ -115,12 +35,101 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
+//	ramDrawBasicActor(actor);
+
+	ofPushStyle();
+	
+	ofNoFill();
+	ofSetRectMode(OF_RECTMODE_CENTER);
+	
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	glEnable(GL_CULL_FACE);
+	
+	ofColor front_color(ramColor::BLUE_LIGHT, 200);
+	ofColor back_color(ramColor::WHITE, 200);
+	
+	for (int i = 0; i < actor.getNumNode(); i++)
+	{
+		ofSetColor(front_color);
+		
+		ramNode &node = actor.getNode(i);
+		ramNode *parent = node.getParent();
+		if (parent == NULL) continue;
+		
+		ramBox(node, 2);
+		
+		parent->beginTransform();
+		
+		ofVec3f axis(0, 0, 1);
+		ofVec3f c = node.getPosition().normalized().crossed(axis);
+		
+		ofRotate(90, c.x, c.y, c.z);
+		
+		ofVec3f p0 = node.getGlobalPosition();
+		ofVec3f p1 = parent->getGlobalPosition();
+		
+		float dist = p0.distance(p1);
+		float offset = 0.2;
+		int num = 4;
+		
+		ofLine(ofVec3f(0), ofVec3f(0, 0, -dist));
+		
+		if (i < 4)
+			glScalef(1., 1.8, 1);
+		else if (i == 4)
+			glScalef(1, 1, 3);
+		else
+			glScalef(1., 0.8, 1);
+		
+		glBegin(GL_TRIANGLE_STRIP);
+		for (int n = 0; n < 6; n++)
+		{
+			float d = ofMap(n, 0, 5, 0, 1);
+			float dd = ofMap(d, 0, 1, offset, 1 - offset);
+			
+			float xx = sin(d * PI) * 2 + 4;
+			float zz = dd * -dist;
+			float w = 5;
+			
+			glVertex3f(xx, w, zz);
+			glVertex3f(xx, -w, zz);
+		}
+		glEnd();
+		
+		ofSetColor(back_color);
+		
+		glBegin(GL_TRIANGLE_STRIP);
+		for (int n = 0; n < 6; n++)
+		{
+			float d = ofMap(n, 0, 5, 0, 1);
+			float dd = ofMap(d, 0, 1, offset, 1 - offset);
+			
+			float xx = -sin(d * PI) * 1 - 6;
+			float zz = dd * -dist;
+			float w = 3;
+			
+			glVertex3f(xx, -w, zz);
+			glVertex3f(xx, w, zz);
+		}
+		glEnd();
+
+
+		parent->endTransform();
+	}
+	
+	glPopAttrib();
+	
+	ofPopStyle();
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
+	
 }
+
+
+
 
 #pragma mark - oF Events
 //--------------------------------------------------------------
@@ -176,3 +185,4 @@ void testApp::dragEvent(ofDragInfo dragInfo)
 {
 	
 }
+
