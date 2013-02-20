@@ -11,11 +11,7 @@ public:
 	
 	/// override constructor
 	// --------------------
-	ramScenePanel(ofRectangle r) : ofxUICanvas(){}
-    ramScenePanel(float x, float y, float w, float h) : ofxUICanvas(){}
-    ramScenePanel(float x, float y, float w, float h, ofxUICanvas *sharedResources) : ofxUICanvas(){}
-    ramScenePanel() : ofxUICanvas(){}
-    ramScenePanel(ofxUICanvas *sharedResources) : ofxUICanvas(){}
+	ramScenePanel(float x, float y, float w, float h) : ofxUICanvas(x, y, w, h) {}
 	
 	/// getter, setter
 	// --------------------
