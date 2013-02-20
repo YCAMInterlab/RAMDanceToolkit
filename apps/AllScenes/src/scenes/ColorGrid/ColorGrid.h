@@ -36,7 +36,7 @@ public:
 	}
 	
 	//--------------------------------------------------------------
-	void draw()
+	void drawHUD()
 	{	
 		ofSetColor(255);
 		ofSetMinMagFilters(GL_NEAREST, GL_NEAREST);
