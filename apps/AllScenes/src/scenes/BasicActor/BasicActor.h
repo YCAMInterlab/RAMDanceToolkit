@@ -42,7 +42,9 @@ public:
 	
 	void setup()
 	{
-		light.setPosition(300, 300, 300);
+		enableLight = true;
+		light.setPosition(300, 600, 300);
+		
 		mControlSegments.clear();
 	}
 	
