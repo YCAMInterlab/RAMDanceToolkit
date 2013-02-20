@@ -5,6 +5,8 @@
 #include "ramControlPanel.h"
 #include "ramPhysics.h"
 
+bool drawModel = true;
+
 void ramBaseApp::exit(ofEventArgs &args)
 {
 	ramDisableAllEvents();
@@ -30,12 +32,13 @@ void ramBaseApp::draw(ofEventArgs &args)
 
 	bool enable_physics = ramGetEnablePhysicsPrimitive();
 	
-	ramSetEnablePhysicsPrimitive(false);
+	ramEnablePhysicsPrimitive(false);
 	
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glPushMatrix();
 	ofPushStyle();
 
+	if (ramShadowEnabled())
 	{
 		// shadow
 		
@@ -48,12 +51,13 @@ void ramBaseApp::draw(ofEventArgs &args)
 	glPopMatrix();
 	glPopAttrib();
 
-	ramSetEnablePhysicsPrimitive(enable_physics);
+	ramEnablePhysicsPrimitive(enable_physics);
 	
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glPushMatrix();
 	ofPushStyle();
 
+	if (drawModel)
 	{
 		// entities
 		drawNodeArrays();

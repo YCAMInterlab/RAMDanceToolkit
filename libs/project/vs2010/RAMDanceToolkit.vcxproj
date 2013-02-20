@@ -1,423 +1,192 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-  </ItemGroup>
-  <PropertyGroup Label="Globals">
-    <ProjectGuid>{A5E5640B-96DE-4DCD-A9DD-65C306AEEB5B}</ProjectGuid>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <Keyword>ManagedCProj</Keyword>
-    <RootNamespace>RAMDanceToolkit</RootNamespace>
-  </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <CLRSupport>true</CLRSupport>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <CLRSupport>true</CLRSupport>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\..\libs\openFrameworks;..\..\..\..\libs\openFrameworks\graphics;..\..\..\..\libs\openFrameworks\app;..\..\..\..\libs\openFrameworks\sound;..\..\..\..\libs\openFrameworks\utils;..\..\..\..\libs\openFrameworks\communication;..\..\..\..\libs\openFrameworks\video;..\..\..\..\libs\openFrameworks\types;..\..\..\..\libs\openFrameworks\math;..\..\..\..\libs\openFrameworks\3d;..\..\..\..\libs\openFrameworks\gl;..\..\..\..\libs\openFrameworks\events;..\..\..\..\libs\glut\include;..\..\..\..\libs\rtAudio\include;..\..\..\..\libs\quicktime\include;..\..\..\..\libs\freetype\include;..\..\..\..\libs\freetype\include\freetype2;..\..\..\..\libs\freeImage\include;..\..\..\..\libs\fmodex\include;..\..\..\..\libs\videoInput\include;..\..\..\..\libs\glew\include\;..\..\..\..\libs\glu\include;..\..\..\..\libs\tess2\include;..\..\..\..\libs\cairo\include\cairo;..\..\..\..\libs\poco\include;..\..\..\addons\ofxBt;..\..\..\addons\ofxBt\libs;..\..\..\addons\ofxBt\libs\bullet;..\..\..\addons\ofxBt\libs\bullet\include;..\..\..\addons\ofxBt\libs\bullet\include\bullet;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Character;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Vehicle;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody;..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath;..\..\..\addons\ofxBt\libs\bullet\lib;..\..\..\addons\ofxBt\libs\bullet\lib\osx;..\..\..\addons\ofxBt\src;..\..\..\addons\ofxControlPanel;..\..\..\addons\ofxControlPanel\src;..\..\..\addons\ofxInteractivePrimitives;..\..\..\addons\ofxInteractivePrimitives\src;..\..\..\addons\ofxInteractivePrimitives\src\ui;..\..\..\addons\ofxSimpleParticleEngine;..\..\..\addons\ofxSimpleParticleEngine\src;..\..\..\addons\ofxUI;..\..\..\addons\ofxUI\src;..\..\..\addons\ofxUITabbedCanvas;..\..\..\addons\ofxValue;..\..\..\addons\ofxValue\libs;..\..\..\addons\ofxValue\src;..\..\ram;..\..\ram\Core;..\..\ram\Filter;..\..\ram\Graphics;..\..\ram\Physics;..\..\ram\Scene;..\..\ram\UI;..\..\ram\Utility;..\..\..\..\addons\ofxOsc;..\..\..\..\addons\ofxOsc\src;..\..\..\..\addons\ofxOsc\libs;..\..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\..\addons\ofxXMLSettings;..\..\..\..\addons\ofxXMLSettings\libs;..\..\..\..\addons\ofxXMLSettings\src;</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\..\libs\openFrameworks;..\..\..\..\libs\openFrameworks\graphics;..\..\..\..\libs\openFrameworks\app;..\..\..\..\libs\openFrameworks\sound;..\..\..\..\libs\openFrameworks\utils;..\..\..\..\libs\openFrameworks\communication;..\..\..\..\libs\openFrameworks\video;..\..\..\..\libs\openFrameworks\types;..\..\..\..\libs\openFrameworks\math;..\..\..\..\libs\openFrameworks\3d;..\..\..\..\libs\openFrameworks\gl;..\..\..\..\libs\openFrameworks\events;..\..\..\..\libs\glut\include;..\..\..\..\libs\rtAudio\include;..\..\..\..\libs\quicktime\include;..\..\..\..\libs\freetype\include;..\..\..\..\libs\freetype\include\freetype2;..\..\..\..\libs\freeImage\include;..\..\..\..\libs\fmodex\include;..\..\..\..\libs\videoInput\include;..\..\..\..\libs\glew\include\;..\..\..\..\libs\glu\include;..\..\..\..\libs\tess2\include;..\..\..\..\libs\cairo\include\cairo;..\..\..\..\libs\poco\include;..\..\..\addons\ofxBt;..\..\..\addons\ofxBt\libs;..\..\..\addons\ofxBt\libs\bullet;..\..\..\addons\ofxBt\libs\bullet\include;..\..\..\addons\ofxBt\libs\bullet\include\bullet;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Character;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Vehicle;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody;..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath;..\..\..\addons\ofxBt\libs\bullet\lib;..\..\..\addons\ofxBt\libs\bullet\lib\osx;..\..\..\addons\ofxBt\src;..\..\..\addons\ofxControlPanel;..\..\..\addons\ofxControlPanel\src;..\..\..\addons\ofxInteractivePrimitives;..\..\..\addons\ofxInteractivePrimitives\src;..\..\..\addons\ofxInteractivePrimitives\src\ui;..\..\..\addons\ofxSimpleParticleEngine;..\..\..\addons\ofxSimpleParticleEngine\src;..\..\..\addons\ofxUI;..\..\..\addons\ofxUI\src;..\..\..\addons\ofxUITabbedCanvas;..\..\..\addons\ofxValue;..\..\..\addons\ofxValue\libs;..\..\..\addons\ofxValue\src;..\..\ram;..\..\ram\Core;..\..\ram\Filter;..\..\ram\Graphics;..\..\ram\Physics;..\..\ram\Scene;..\..\ram\UI;..\..\ram\Utility;..\..\..\..\addons\ofxOsc;..\..\..\..\addons\ofxOsc\src;..\..\..\..\addons\ofxOsc\libs;..\..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\..\addons\ofxXMLSettings;..\..\..\..\addons\ofxXMLSettings\libs;..\..\..\..\addons\ofxXMLSettings\src;</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix\NetworkingUtils.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix\UdpSocket.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32\NetworkingUtilsWin.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32\UdpSocketWin.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxOsc\src\ofxOscBundle.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxOsc\src\ofxOscMessage.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxOsc\src\ofxOscReceiver.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxOsc\src\ofxOscSender.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxBt\src\ofxBt.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtCollisionObject.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtHelper.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtJoint.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtRigidBody.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtSoftBody.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtSoftBodyWorld.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtWorld.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxInteractivePrimitives\src\ofxInteractivePrimitives.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxUITabbedCanvas\ofxUITabbedCanvas.cpp" />
-    <ClCompile Include="..\..\ram\Core\ramActor.cpp" />
-    <ClCompile Include="..\..\ram\Core\ramActorManager.cpp" />
-    <ClCompile Include="..\..\ram\Core\ramBaseApp.cpp" />
-    <ClCompile Include="..\..\ram\Core\ramCameraManager.cpp" />
-    <ClCompile Include="..\..\ram\Core\ramSharedData.cpp" />
-    <ClCompile Include="..\..\ram\Graphics\ramGraphics.cpp" />
-    <ClCompile Include="..\..\ram\Graphics\ramNodeLine.cpp" />
-    <ClCompile Include="..\..\ram\Graphics\ramPrimitive.cpp" />
-    <ClCompile Include="..\..\ram\Graphics\ramSimpleShadow.cpp" />
-    <ClCompile Include="..\..\ram\Physics\ramPhysics.cpp" />
-    <ClCompile Include="..\..\ram\Scene\ramSceneManager.cpp" />
-    <ClCompile Include="..\..\ram\UI\ramControlPanel.cpp" />
-    <ClCompile Include="..\..\ram\Utility\ramCameraSettings.cpp" />
-    <ClCompile Include="..\..\ram\Utility\ramUtils.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\NetworkingUtils.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\PacketListener.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\TimerListener.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\UdpSocket.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\MessageMappingOscPacketListener.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscException.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscHostEndianness.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPacketListener.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\src\ofxOsc.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\src\ofxOscArg.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\src\ofxOscBundle.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\src\ofxOscMessage.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\src\ofxOscReceiver.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxOsc\src\ofxOscSender.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxml.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\btBulletCollisionCommon.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\btBulletDynamicsCommon.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\Bullet-C-Api.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btAxisSweep3.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btBroadphaseInterface.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btBroadphaseProxy.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btCollisionAlgorithm.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btDbvt.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btDbvtBroadphase.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btDispatcher.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btMultiSapBroadphase.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btOverlappingPairCache.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btOverlappingPairCallback.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btQuantizedBvh.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision\btSimpleBroadphase.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btActivatingCollisionAlgorithm.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btBox2dBox2dCollisionAlgorithm.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btBoxBoxCollisionAlgorithm.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btBoxBoxDetector.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btCollisionConfiguration.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btCollisionCreateFunc.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btCollisionDispatcher.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btCollisionObject.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btCollisionObjectWrapper.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btCollisionWorld.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btCompoundCollisionAlgorithm.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btConvex2dConvex2dAlgorithm.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btConvexConcaveCollisionAlgorithm.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btConvexConvexAlgorithm.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btConvexPlaneCollisionAlgorithm.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btDefaultCollisionConfiguration.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btEmptyCollisionAlgorithm.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btGhostObject.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btInternalEdgeUtility.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btManifoldResult.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btSimulationIslandManager.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btSphereBoxCollisionAlgorithm.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btSphereSphereCollisionAlgorithm.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btSphereTriangleCollisionAlgorithm.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\btUnionFind.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch\SphereTriangleDetector.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btBox2dShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btBoxShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btBvhTriangleMeshShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btCapsuleShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btCollisionMargin.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btCollisionShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btCompoundShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btConcaveShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btConeShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btConvex2dShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btConvexHullShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btConvexInternalShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btConvexPointCloudShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btConvexShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btConvexTriangleMeshShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btCylinderShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btEmptyShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btHeightfieldTerrainShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btMaterial.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btMinkowskiSumShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btMultimaterialTriangleMeshShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btMultiSphereShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btOptimizedBvh.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btPolyhedralConvexShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btScaledBvhTriangleMeshShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btShapeHull.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btSphereShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btStaticPlaneShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btStridingMeshInterface.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btTetrahedronShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btTriangleBuffer.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btTriangleCallback.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btTriangleIndexVertexArray.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btTriangleIndexVertexMaterialArray.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btTriangleInfoMap.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btTriangleMesh.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btTriangleMeshShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btTriangleShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes\btUniformScalingShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btBoxCollision.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btClipPolygon.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btContactProcessing.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btGenericPoolAllocator.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btGeometryOperations.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btGImpactBvh.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btGImpactCollisionAlgorithm.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btGImpactMassUtil.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btGImpactQuantizedBvh.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btGImpactShape.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btQuantization.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\btTriangleShapeEx.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_array.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_basic_geometry_operations.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_bitset.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_box_collision.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_box_set.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_clip_polygon.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_contact.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_geometry.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_geom_types.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_hash_table.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_linear_math.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_math.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_memory.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_radixsort.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact\gim_tri_collision.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btContinuousConvexCollision.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btConvexCast.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btConvexPenetrationDepthSolver.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btDiscreteCollisionDetectorInterface.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btGjkConvexCast.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btGjkEpa2.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btGjkEpaPenetrationDepthSolver.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btGjkPairDetector.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btManifoldPoint.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btMinkowskiPenetrationDepthSolver.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btPersistentManifold.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btPointCollector.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btRaycastCallback.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btSimplexSolverInterface.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btSubSimplexConvexCast.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision\btVoronoiSimplexSolver.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Character\btCharacterControllerInterface.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Character\btKinematicCharacterController.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btConeTwistConstraint.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btConstraintSolver.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btContactConstraint.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btContactSolverInfo.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btGearConstraint.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btGeneric6DofConstraint.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btGeneric6DofSpringConstraint.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btHinge2Constraint.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btHingeConstraint.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btJacobianEntry.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btPoint2PointConstraint.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btSequentialImpulseConstraintSolver.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btSliderConstraint.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btSolve2LinearConstraint.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btSolverBody.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btSolverConstraint.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btTypedConstraint.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver\btUniversalConstraint.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics\btActionInterface.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics\btDiscreteDynamicsWorld.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics\btDynamicsWorld.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics\btRigidBody.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics\btSimpleDynamicsWorld.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Vehicle\btRaycastVehicle.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Vehicle\btVehicleRaycaster.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Vehicle\btWheelInfo.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody\btSoftBody.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody\btSoftBodyConcaveCollisionAlgorithm.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody\btSoftBodyHelpers.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody\btSoftBodyInternals.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody\btSoftBodyRigidBodyCollisionConfiguration.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody\btSoftRigidCollisionAlgorithm.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody\btSoftRigidDynamicsWorld.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody\btSoftSoftCollisionAlgorithm.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody\btSparseSDF.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btAabbUtil2.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btAlignedAllocator.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btAlignedObjectArray.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btConvexHull.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btDefaultMotionState.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btGeometryUtil.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btHashMap.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btIDebugDraw.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btList.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btMatrix3x3.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btMinMax.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btMotionState.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btPolarDecomposition.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btPoolAllocator.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btQuadWord.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btQuaternion.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btQuickprof.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btRandom.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btScalar.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btSerializer.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btStackAlloc.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btTransform.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btTransformUtil.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath\btVector3.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\src\ofxBt.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\src\ofxBtCollisionObject.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\src\ofxBtHelper.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\src\ofxBtJoint.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\src\ofxBtRender.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\src\ofxBtRigidBody.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\src\ofxBtSoftBody.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\src\ofxBtSoftBodyWorld.h" />
-    <ClInclude Include="..\..\..\addons\ofxBt\src\ofxBtWorld.h" />
-    <ClInclude Include="..\..\..\addons\ofxInteractivePrimitives\src\ofxInteractivePrimitives.h" />
-    <ClInclude Include="..\..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPButton.h" />
-    <ClInclude Include="..\..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPMarker.h" />
-    <ClInclude Include="..\..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPStringBox.h" />
-    <ClInclude Include="..\..\..\addons\ofxUITabbedCanvas\ofxUITabbedCanvas.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUI.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUI2DPad.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIBaseDraws.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIBiLabelSlider.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIButton.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUICanvas.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUICircleSlider.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUICustomImageButton.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIDropDownList.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIEventArgs.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIFPS.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIFPSSlider.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIImage.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIImageButton.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIImageSampler.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIImageSlider.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIImageToggle.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUILabel.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUILabelButton.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUILabelToggle.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIMinimalSlider.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIMovingGraph.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIMultiImageButton.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIMultiImageSlider.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIMultiImageToggle.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUINumberDialer.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIRadio.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIRangeSlider.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIRectangle.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIRotarySlider.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIScrollableCanvas.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUISlider.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUISpacer.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUISpectrum.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUITextArea.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUITextInput.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIToggle.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIToggleMatrix.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWaveform.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWidget.h" />
-    <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWidgetWithLabel.h" />
-    <ClInclude Include="..\..\ram\Core\ramActor.h" />
-    <ClInclude Include="..\..\ram\Core\ramActorManager.h" />
-    <ClInclude Include="..\..\ram\Core\ramBaseApp.h" />
-    <ClInclude Include="..\..\ram\Core\ramCameraManager.h" />
-    <ClInclude Include="..\..\ram\Core\ramConstants.h" />
-    <ClInclude Include="..\..\ram\Core\ramGlobalShortcut.h" />
-    <ClInclude Include="..\..\ram\Core\ramSharedData.h" />
-    <ClInclude Include="..\..\ram\Filter\ramAnalyzer.h" />
-    <ClInclude Include="..\..\ram\Filter\ramBaseFilter.h" />
-    <ClInclude Include="..\..\ram\Filter\ramExpansion.h" />
-    <ClInclude Include="..\..\ram\Filter\ramGhost.h" />
-    <ClInclude Include="..\..\ram\Filter\ramNodeTransform.h" />
-    <ClInclude Include="..\..\ram\Filter\ramPastMe.h" />
-    <ClInclude Include="..\..\ram\Filter\ramPendulum.h" />
-    <ClInclude Include="..\..\ram\Filter\ramSession.h" />
-    <ClInclude Include="..\..\ram\Filter\ramStamp.h" />
-    <ClInclude Include="..\..\ram\Filter\ramTimeShifter.h" />
-    <ClInclude Include="..\..\ram\Filter\ramUpsideDown.h" />
-    <ClInclude Include="..\..\ram\Graphics\ramGraphics.h" />
-    <ClInclude Include="..\..\ram\Graphics\ramNodeLine.h" />
-    <ClInclude Include="..\..\ram\Graphics\ramPrimitive.h" />
-    <ClInclude Include="..\..\ram\Graphics\ramSimpleShadow.h" />
-    <ClInclude Include="..\..\ram\Physics\ramPhysics.h" />
-    <ClInclude Include="..\..\ram\ramMain.h" />
-    <ClInclude Include="..\..\ram\Scene\ramBaseScene.h" />
-    <ClInclude Include="..\..\ram\Scene\ramSceneManager.h" />
-    <ClInclude Include="..\..\ram\UI\ramControllable.h" />
-    <ClInclude Include="..\..\ram\UI\ramControlPanel.h" />
-    <ClInclude Include="..\..\ram\Utility\ramCameraSettings.h" />
-    <ClInclude Include="..\..\ram\Utility\ramNodeFinder.h" />
-    <ClInclude Include="..\..\ram\Utility\ramNodeIdentifer.h" />
-    <ClInclude Include="..\..\ram\Utility\ramOscReciever.h" />
-    <ClInclude Include="..\..\ram\Utility\ramSession.h" />
-    <ClInclude Include="..\..\ram\Utility\ramTimeShifter.h" />
-    <ClInclude Include="..\..\ram\Utility\ramUtils.h" />
-  </ItemGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+	<ItemGroup Label="ProjectConfigurations">
+		<ProjectConfiguration Include="Debug|Win32">
+			<Configuration>Debug</Configuration>
+			<Platform>Win32</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Release|Win32">
+			<Configuration>Release</Configuration>
+			<Platform>Win32</Platform>
+		</ProjectConfiguration>
+	</ItemGroup>
+	<PropertyGroup Label="Globals">
+		<ProjectGuid>{BF23D69E-FE41-604C-8F54-23E42B0C48BA}</ProjectGuid>
+		<RootNamespace>RAMDanceToolkit</RootNamespace>
+		<Keyword>Win32Proj</Keyword>
+	</PropertyGroup>
+	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+		<ConfigurationType>StaticLibrary</ConfigurationType>
+		<CharacterSet>MultiByte</CharacterSet>
+		<UseDebugLibraries>true</UseDebugLibraries>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+		<ConfigurationType>StaticLibrary</ConfigurationType>
+		<CharacterSet>MultiByte</CharacterSet>
+		<UseDebugLibraries>true</UseDebugLibraries>
+	</PropertyGroup>
+	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+	<ImportGroup Label="ExtensionSettings">
+	</ImportGroup>
+	<ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+		<Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+	</ImportGroup>
+	<ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+		<Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+	</ImportGroup>
+	<PropertyGroup Label="UserMacros" />
+	<PropertyGroup>
+		<_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+		<OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\</OutDir>
+		<IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">obj\x32\Debug\</IntDir>
+		<TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ram</TargetName>
+		<OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\</OutDir>
+		<IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">obj\x32\Release\</IntDir>
+		<TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">ram</TargetName>
+	</PropertyGroup>
+	<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+		<ClCompile>
+			<Optimization>Disabled</Optimization>
+			<AdditionalIncludeDirectories>..\..\ram;..\..\ram\Core;..\..\ram\Filter;..\..\ram\Graphics;..\..\ram\Physics;..\..\ram\Scene;..\..\ram\UI;..\..\ram\Utility;..\..\..\addons\ofxBt\src;..\..\..\addons\ofxBt\libs;..\..\..\addons\ofxBt\libs\bullet;..\..\..\addons\ofxBt\libs\bullet\include;..\..\..\addons\ofxBt\libs\bullet\lib;..\..\..\addons\ofxBt\libs\bullet\include\bullet;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody;..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Character;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Vehicle;..\..\..\addons\ofxBt\libs\bullet\lib\osx;..\..\..\addons\ofxBt\libs\bullet\lib\vs2010;..\..\..\addons\ofxInteractivePrimitives\src;..\..\..\addons\ofxInteractivePrimitives\src\ui;..\..\..\addons\ofxUI\example-ofxUIAllWidgets;..\..\..\addons\ofxUI\example-ofxUIButtons;..\..\..\addons\ofxUI\example-ofxUICompactSyntax;..\..\..\addons\ofxUI\example-ofxUICustomFont;..\..\..\addons\ofxUI\example-ofxUICustomization;..\..\..\addons\ofxUI\example-ofxUICustomPlacement;..\..\..\addons\ofxUI\example-ofxUICustomWidgets;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings;..\..\..\addons\ofxUI\example-ofxUIScrollable;..\..\..\addons\ofxUI\example-ofxUISimpleExample;..\..\..\addons\ofxUI\example-ofxUISliders;..\..\..\addons\ofxUI\example-ofxUITutorial;..\..\..\addons\ofxUI\example-ofxUIVariableBinding;..\..\..\addons\ofxUI\src;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\bin;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\ofxUIAllWidgets.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\src;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\bin\data;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\bin\data\GUI\images;..\..\..\addons\ofxUI\example-ofxUIButtons\bin;..\..\..\addons\ofxUI\example-ofxUIButtons\ofxUIButtons.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIButtons\src;..\..\..\addons\ofxUI\example-ofxUIButtons\bin\data;..\..\..\addons\ofxUI\example-ofxUIButtons\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\bin;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\ofxUICompactSyntax.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\src;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\bin\data;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICustomFont\bin;..\..\..\addons\ofxUI\example-ofxUICustomFont\ofxUICustomFont.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICustomFont\src;..\..\..\addons\ofxUI\example-ofxUICustomFont\bin\data;..\..\..\addons\ofxUI\example-ofxUICustomFont\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICustomization\bin;..\..\..\addons\ofxUI\example-ofxUICustomization\ofxUICustomization.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICustomization\src;..\..\..\addons\ofxUI\example-ofxUICustomization\bin\data;..\..\..\addons\ofxUI\example-ofxUICustomization\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\bin;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\ofxUICustomPlacement.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\src;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\bin\data;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\bin;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\ofxUICustomWidgets.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\src;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\bin\data;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\bin;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\ofxUIDynamicDropDown.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\src;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\bin\data;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\bin;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\ofxUIMoreWidgets.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\src;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\bin\data;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\bin;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\ofxUISaveLoadSettings.xcodeproj;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\src;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\bin\data;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\bin\data\GUI\images;..\..\..\addons\ofxUI\example-ofxUIScrollable\bin;..\..\..\addons\ofxUI\example-ofxUIScrollable\ofxUIScrollable.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIScrollable\src;..\..\..\addons\ofxUI\example-ofxUIScrollable\bin\data;..\..\..\addons\ofxUI\example-ofxUIScrollable\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUISimpleExample\bin;..\..\..\addons\ofxUI\example-ofxUISimpleExample\ofxUISimpleExample.xcodeproj;..\..\..\addons\ofxUI\example-ofxUISimpleExample\src;..\..\..\addons\ofxUI\example-ofxUISimpleExample\bin\data;..\..\..\addons\ofxUI\example-ofxUISimpleExample\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUISliders\bin;..\..\..\addons\ofxUI\example-ofxUISliders\ofxUISliders.xcodeproj;..\..\..\addons\ofxUI\example-ofxUISliders\src;..\..\..\addons\ofxUI\example-ofxUISliders\bin\data;..\..\..\addons\ofxUI\example-ofxUISliders\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUITutorial\bin;..\..\..\addons\ofxUI\example-ofxUITutorial\ofxUITutorial.xcodeproj;..\..\..\addons\ofxUI\example-ofxUITutorial\src;..\..\..\addons\ofxUI\example-ofxUITutorial\bin\data;..\..\..\addons\ofxUI\example-ofxUITutorial\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\bin;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\ofxUIVariableBinding.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\src;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\bin\data;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\bin\data\GUI;..\..\..\addons\ofxUITabbedCanvas;..\..\..\..\libs\assimp\include;..\..\..\..\libs\cairo\include;..\..\..\..\libs\fmodex\include;..\..\..\..\libs\FreeImage\include;..\..\..\..\libs\freetype\include;..\..\..\..\libs\glew\include;..\..\..\..\libs\glu\include;..\..\..\..\libs\glut\include;..\..\..\..\libs\poco\include;..\..\..\..\libs\quicktime\include;..\..\..\..\libs\rtAudio\include;..\..\..\..\libs\tess2\include;..\..\..\..\libs\videoInput\include;..\..\..\..\libs\cairo\include\cairo;..\..\..\..\libs\cairo\include\libpng15;..\..\..\..\libs\cairo\include\pixman-1;..\..\..\..\libs\openFrameworks;..\..\..\..\libs\openFrameworks\3d;..\..\..\..\libs\openFrameworks\app;..\..\..\..\libs\openFrameworks\communication;..\..\..\..\libs\openFrameworks\events;..\..\..\..\libs\openFrameworks\gl;..\..\..\..\libs\openFrameworks\graphics;..\..\..\..\libs\openFrameworks\math;..\..\..\..\libs\openFrameworks\sound;..\..\..\..\libs\openFrameworks\types;..\..\..\..\libs\openFrameworks\utils;..\..\..\..\libs\openFrameworks\video;..\..\..\..\addons\ofxOsc\libs;..\..\..\..\addons\ofxOsc\src;..\..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\..\addons\ofxXMLSettings\libs;..\..\..\..\addons\ofxXMLSettings\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<PreprocessorDefinitions></PreprocessorDefinitions>
+			<MinimalRebuild>false</MinimalRebuild>
+			<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+			<FunctionLevelLinking>true</FunctionLevelLinking>
+			<PrecompiledHeader></PrecompiledHeader>
+			<WarningLevel>Level3</WarningLevel>
+			<DebugInformationFormat></DebugInformationFormat>
+		</ClCompile>
+		<ResourceCompile>
+			<PreprocessorDefinitions></PreprocessorDefinitions>
+			<AdditionalIncludeDirectories>..\..\ram;..\..\ram\Core;..\..\ram\Filter;..\..\ram\Graphics;..\..\ram\Physics;..\..\ram\Scene;..\..\ram\UI;..\..\ram\Utility;..\..\..\addons\ofxBt\src;..\..\..\addons\ofxBt\libs;..\..\..\addons\ofxBt\libs\bullet;..\..\..\addons\ofxBt\libs\bullet\include;..\..\..\addons\ofxBt\libs\bullet\lib;..\..\..\addons\ofxBt\libs\bullet\include\bullet;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody;..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Character;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Vehicle;..\..\..\addons\ofxBt\libs\bullet\lib\osx;..\..\..\addons\ofxBt\libs\bullet\lib\vs2010;..\..\..\addons\ofxInteractivePrimitives\src;..\..\..\addons\ofxInteractivePrimitives\src\ui;..\..\..\addons\ofxUI\example-ofxUIAllWidgets;..\..\..\addons\ofxUI\example-ofxUIButtons;..\..\..\addons\ofxUI\example-ofxUICompactSyntax;..\..\..\addons\ofxUI\example-ofxUICustomFont;..\..\..\addons\ofxUI\example-ofxUICustomization;..\..\..\addons\ofxUI\example-ofxUICustomPlacement;..\..\..\addons\ofxUI\example-ofxUICustomWidgets;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings;..\..\..\addons\ofxUI\example-ofxUIScrollable;..\..\..\addons\ofxUI\example-ofxUISimpleExample;..\..\..\addons\ofxUI\example-ofxUISliders;..\..\..\addons\ofxUI\example-ofxUITutorial;..\..\..\addons\ofxUI\example-ofxUIVariableBinding;..\..\..\addons\ofxUI\src;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\bin;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\ofxUIAllWidgets.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\src;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\bin\data;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\bin\data\GUI\images;..\..\..\addons\ofxUI\example-ofxUIButtons\bin;..\..\..\addons\ofxUI\example-ofxUIButtons\ofxUIButtons.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIButtons\src;..\..\..\addons\ofxUI\example-ofxUIButtons\bin\data;..\..\..\addons\ofxUI\example-ofxUIButtons\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\bin;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\ofxUICompactSyntax.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\src;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\bin\data;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICustomFont\bin;..\..\..\addons\ofxUI\example-ofxUICustomFont\ofxUICustomFont.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICustomFont\src;..\..\..\addons\ofxUI\example-ofxUICustomFont\bin\data;..\..\..\addons\ofxUI\example-ofxUICustomFont\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICustomization\bin;..\..\..\addons\ofxUI\example-ofxUICustomization\ofxUICustomization.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICustomization\src;..\..\..\addons\ofxUI\example-ofxUICustomization\bin\data;..\..\..\addons\ofxUI\example-ofxUICustomization\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\bin;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\ofxUICustomPlacement.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\src;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\bin\data;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\bin;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\ofxUICustomWidgets.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\src;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\bin\data;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\bin;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\ofxUIDynamicDropDown.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\src;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\bin\data;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\bin;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\ofxUIMoreWidgets.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\src;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\bin\data;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\bin;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\ofxUISaveLoadSettings.xcodeproj;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\src;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\bin\data;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\bin\data\GUI\images;..\..\..\addons\ofxUI\example-ofxUIScrollable\bin;..\..\..\addons\ofxUI\example-ofxUIScrollable\ofxUIScrollable.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIScrollable\src;..\..\..\addons\ofxUI\example-ofxUIScrollable\bin\data;..\..\..\addons\ofxUI\example-ofxUIScrollable\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUISimpleExample\bin;..\..\..\addons\ofxUI\example-ofxUISimpleExample\ofxUISimpleExample.xcodeproj;..\..\..\addons\ofxUI\example-ofxUISimpleExample\src;..\..\..\addons\ofxUI\example-ofxUISimpleExample\bin\data;..\..\..\addons\ofxUI\example-ofxUISimpleExample\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUISliders\bin;..\..\..\addons\ofxUI\example-ofxUISliders\ofxUISliders.xcodeproj;..\..\..\addons\ofxUI\example-ofxUISliders\src;..\..\..\addons\ofxUI\example-ofxUISliders\bin\data;..\..\..\addons\ofxUI\example-ofxUISliders\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUITutorial\bin;..\..\..\addons\ofxUI\example-ofxUITutorial\ofxUITutorial.xcodeproj;..\..\..\addons\ofxUI\example-ofxUITutorial\src;..\..\..\addons\ofxUI\example-ofxUITutorial\bin\data;..\..\..\addons\ofxUI\example-ofxUITutorial\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\bin;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\ofxUIVariableBinding.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\src;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\bin\data;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\bin\data\GUI;..\..\..\addons\ofxUITabbedCanvas;..\..\..\..\libs\assimp\include;..\..\..\..\libs\cairo\include;..\..\..\..\libs\fmodex\include;..\..\..\..\libs\FreeImage\include;..\..\..\..\libs\freetype\include;..\..\..\..\libs\glew\include;..\..\..\..\libs\glu\include;..\..\..\..\libs\glut\include;..\..\..\..\libs\poco\include;..\..\..\..\libs\quicktime\include;..\..\..\..\libs\rtAudio\include;..\..\..\..\libs\tess2\include;..\..\..\..\libs\videoInput\include;..\..\..\..\libs\cairo\include\cairo;..\..\..\..\libs\cairo\include\libpng15;..\..\..\..\libs\cairo\include\pixman-1;..\..\..\..\libs\openFrameworks;..\..\..\..\libs\openFrameworks\3d;..\..\..\..\libs\openFrameworks\app;..\..\..\..\libs\openFrameworks\communication;..\..\..\..\libs\openFrameworks\events;..\..\..\..\libs\openFrameworks\gl;..\..\..\..\libs\openFrameworks\graphics;..\..\..\..\libs\openFrameworks\math;..\..\..\..\libs\openFrameworks\sound;..\..\..\..\libs\openFrameworks\types;..\..\..\..\libs\openFrameworks\utils;..\..\..\..\libs\openFrameworks\video;..\..\..\..\addons\ofxOsc\libs;..\..\..\..\addons\ofxOsc\src;..\..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\..\addons\ofxXMLSettings\libs;..\..\..\..\addons\ofxXMLSettings\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+		</ResourceCompile>
+	<Lib>
+		<OutputFile>$(OutDir)ram.lib</OutputFile>
+	</Lib>
+		<Link>
+			<SubSystem>Windows</SubSystem>
+			<GenerateDebugInformation>false</GenerateDebugInformation>
+		</Link>
+	</ItemDefinitionGroup>
+	<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+		<ClCompile>
+			<Optimization>Disabled</Optimization>
+			<AdditionalIncludeDirectories>..\..\ram;..\..\ram\Core;..\..\ram\Filter;..\..\ram\Graphics;..\..\ram\Physics;..\..\ram\Scene;..\..\ram\UI;..\..\ram\Utility;..\..\..\addons\ofxBt\src;..\..\..\addons\ofxBt\libs;..\..\..\addons\ofxBt\libs\bullet;..\..\..\addons\ofxBt\libs\bullet\include;..\..\..\addons\ofxBt\libs\bullet\lib;..\..\..\addons\ofxBt\libs\bullet\include\bullet;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody;..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Character;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Vehicle;..\..\..\addons\ofxBt\libs\bullet\lib\osx;..\..\..\addons\ofxBt\libs\bullet\lib\vs2010;..\..\..\addons\ofxInteractivePrimitives\src;..\..\..\addons\ofxInteractivePrimitives\src\ui;..\..\..\addons\ofxUI\example-ofxUIAllWidgets;..\..\..\addons\ofxUI\example-ofxUIButtons;..\..\..\addons\ofxUI\example-ofxUICompactSyntax;..\..\..\addons\ofxUI\example-ofxUICustomFont;..\..\..\addons\ofxUI\example-ofxUICustomization;..\..\..\addons\ofxUI\example-ofxUICustomPlacement;..\..\..\addons\ofxUI\example-ofxUICustomWidgets;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings;..\..\..\addons\ofxUI\example-ofxUIScrollable;..\..\..\addons\ofxUI\example-ofxUISimpleExample;..\..\..\addons\ofxUI\example-ofxUISliders;..\..\..\addons\ofxUI\example-ofxUITutorial;..\..\..\addons\ofxUI\example-ofxUIVariableBinding;..\..\..\addons\ofxUI\src;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\bin;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\ofxUIAllWidgets.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\src;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\bin\data;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\bin\data\GUI\images;..\..\..\addons\ofxUI\example-ofxUIButtons\bin;..\..\..\addons\ofxUI\example-ofxUIButtons\ofxUIButtons.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIButtons\src;..\..\..\addons\ofxUI\example-ofxUIButtons\bin\data;..\..\..\addons\ofxUI\example-ofxUIButtons\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\bin;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\ofxUICompactSyntax.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\src;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\bin\data;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICustomFont\bin;..\..\..\addons\ofxUI\example-ofxUICustomFont\ofxUICustomFont.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICustomFont\src;..\..\..\addons\ofxUI\example-ofxUICustomFont\bin\data;..\..\..\addons\ofxUI\example-ofxUICustomFont\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICustomization\bin;..\..\..\addons\ofxUI\example-ofxUICustomization\ofxUICustomization.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICustomization\src;..\..\..\addons\ofxUI\example-ofxUICustomization\bin\data;..\..\..\addons\ofxUI\example-ofxUICustomization\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\bin;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\ofxUICustomPlacement.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\src;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\bin\data;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\bin;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\ofxUICustomWidgets.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\src;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\bin\data;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\bin;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\ofxUIDynamicDropDown.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\src;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\bin\data;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\bin;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\ofxUIMoreWidgets.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\src;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\bin\data;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\bin;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\ofxUISaveLoadSettings.xcodeproj;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\src;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\bin\data;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\bin\data\GUI\images;..\..\..\addons\ofxUI\example-ofxUIScrollable\bin;..\..\..\addons\ofxUI\example-ofxUIScrollable\ofxUIScrollable.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIScrollable\src;..\..\..\addons\ofxUI\example-ofxUIScrollable\bin\data;..\..\..\addons\ofxUI\example-ofxUIScrollable\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUISimpleExample\bin;..\..\..\addons\ofxUI\example-ofxUISimpleExample\ofxUISimpleExample.xcodeproj;..\..\..\addons\ofxUI\example-ofxUISimpleExample\src;..\..\..\addons\ofxUI\example-ofxUISimpleExample\bin\data;..\..\..\addons\ofxUI\example-ofxUISimpleExample\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUISliders\bin;..\..\..\addons\ofxUI\example-ofxUISliders\ofxUISliders.xcodeproj;..\..\..\addons\ofxUI\example-ofxUISliders\src;..\..\..\addons\ofxUI\example-ofxUISliders\bin\data;..\..\..\addons\ofxUI\example-ofxUISliders\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUITutorial\bin;..\..\..\addons\ofxUI\example-ofxUITutorial\ofxUITutorial.xcodeproj;..\..\..\addons\ofxUI\example-ofxUITutorial\src;..\..\..\addons\ofxUI\example-ofxUITutorial\bin\data;..\..\..\addons\ofxUI\example-ofxUITutorial\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\bin;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\ofxUIVariableBinding.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\src;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\bin\data;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\bin\data\GUI;..\..\..\addons\ofxUITabbedCanvas;..\..\..\..\libs\assimp\include;..\..\..\..\libs\cairo\include;..\..\..\..\libs\fmodex\include;..\..\..\..\libs\FreeImage\include;..\..\..\..\libs\freetype\include;..\..\..\..\libs\glew\include;..\..\..\..\libs\glu\include;..\..\..\..\libs\glut\include;..\..\..\..\libs\poco\include;..\..\..\..\libs\quicktime\include;..\..\..\..\libs\rtAudio\include;..\..\..\..\libs\tess2\include;..\..\..\..\libs\videoInput\include;..\..\..\..\libs\cairo\include\cairo;..\..\..\..\libs\cairo\include\libpng15;..\..\..\..\libs\cairo\include\pixman-1;..\..\..\..\libs\openFrameworks;..\..\..\..\libs\openFrameworks\3d;..\..\..\..\libs\openFrameworks\app;..\..\..\..\libs\openFrameworks\communication;..\..\..\..\libs\openFrameworks\events;..\..\..\..\libs\openFrameworks\gl;..\..\..\..\libs\openFrameworks\graphics;..\..\..\..\libs\openFrameworks\math;..\..\..\..\libs\openFrameworks\sound;..\..\..\..\libs\openFrameworks\types;..\..\..\..\libs\openFrameworks\utils;..\..\..\..\libs\openFrameworks\video;..\..\..\..\addons\ofxOsc\libs;..\..\..\..\addons\ofxOsc\src;..\..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\..\addons\ofxXMLSettings\libs;..\..\..\..\addons\ofxXMLSettings\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<PreprocessorDefinitions></PreprocessorDefinitions>
+			<MinimalRebuild>false</MinimalRebuild>
+			<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+			<FunctionLevelLinking>true</FunctionLevelLinking>
+			<PrecompiledHeader></PrecompiledHeader>
+			<WarningLevel>Level3</WarningLevel>
+			<DebugInformationFormat></DebugInformationFormat>
+		</ClCompile>
+		<ResourceCompile>
+			<PreprocessorDefinitions></PreprocessorDefinitions>
+			<AdditionalIncludeDirectories>..\..\ram;..\..\ram\Core;..\..\ram\Filter;..\..\ram\Graphics;..\..\ram\Physics;..\..\ram\Scene;..\..\ram\UI;..\..\ram\Utility;..\..\..\addons\ofxBt\src;..\..\..\addons\ofxBt\libs;..\..\..\addons\ofxBt\libs\bullet;..\..\..\addons\ofxBt\libs\bullet\include;..\..\..\addons\ofxBt\libs\bullet\lib;..\..\..\addons\ofxBt\libs\bullet\include\bullet;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody;..\..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Character;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics;..\..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Vehicle;..\..\..\addons\ofxBt\libs\bullet\lib\osx;..\..\..\addons\ofxBt\libs\bullet\lib\vs2010;..\..\..\addons\ofxInteractivePrimitives\src;..\..\..\addons\ofxInteractivePrimitives\src\ui;..\..\..\addons\ofxUI\example-ofxUIAllWidgets;..\..\..\addons\ofxUI\example-ofxUIButtons;..\..\..\addons\ofxUI\example-ofxUICompactSyntax;..\..\..\addons\ofxUI\example-ofxUICustomFont;..\..\..\addons\ofxUI\example-ofxUICustomization;..\..\..\addons\ofxUI\example-ofxUICustomPlacement;..\..\..\addons\ofxUI\example-ofxUICustomWidgets;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings;..\..\..\addons\ofxUI\example-ofxUIScrollable;..\..\..\addons\ofxUI\example-ofxUISimpleExample;..\..\..\addons\ofxUI\example-ofxUISliders;..\..\..\addons\ofxUI\example-ofxUITutorial;..\..\..\addons\ofxUI\example-ofxUIVariableBinding;..\..\..\addons\ofxUI\src;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\bin;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\ofxUIAllWidgets.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\src;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\bin\data;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUIAllWidgets\bin\data\GUI\images;..\..\..\addons\ofxUI\example-ofxUIButtons\bin;..\..\..\addons\ofxUI\example-ofxUIButtons\ofxUIButtons.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIButtons\src;..\..\..\addons\ofxUI\example-ofxUIButtons\bin\data;..\..\..\addons\ofxUI\example-ofxUIButtons\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\bin;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\ofxUICompactSyntax.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\src;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\bin\data;..\..\..\addons\ofxUI\example-ofxUICompactSyntax\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICustomFont\bin;..\..\..\addons\ofxUI\example-ofxUICustomFont\ofxUICustomFont.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICustomFont\src;..\..\..\addons\ofxUI\example-ofxUICustomFont\bin\data;..\..\..\addons\ofxUI\example-ofxUICustomFont\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICustomization\bin;..\..\..\addons\ofxUI\example-ofxUICustomization\ofxUICustomization.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICustomization\src;..\..\..\addons\ofxUI\example-ofxUICustomization\bin\data;..\..\..\addons\ofxUI\example-ofxUICustomization\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\bin;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\ofxUICustomPlacement.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\src;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\bin\data;..\..\..\addons\ofxUI\example-ofxUICustomPlacement\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\bin;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\ofxUICustomWidgets.xcodeproj;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\src;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\bin\data;..\..\..\addons\ofxUI\example-ofxUICustomWidgets\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\bin;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\ofxUIDynamicDropDown.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\src;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\bin\data;..\..\..\addons\ofxUI\example-ofxUIDynamicDropDown\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\bin;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\ofxUIMoreWidgets.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\src;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\bin\data;..\..\..\addons\ofxUI\example-ofxUIMoreWidgets\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\bin;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\ofxUISaveLoadSettings.xcodeproj;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\src;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\bin\data;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUISaveLoadSettings\bin\data\GUI\images;..\..\..\addons\ofxUI\example-ofxUIScrollable\bin;..\..\..\addons\ofxUI\example-ofxUIScrollable\ofxUIScrollable.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIScrollable\src;..\..\..\addons\ofxUI\example-ofxUIScrollable\bin\data;..\..\..\addons\ofxUI\example-ofxUIScrollable\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUISimpleExample\bin;..\..\..\addons\ofxUI\example-ofxUISimpleExample\ofxUISimpleExample.xcodeproj;..\..\..\addons\ofxUI\example-ofxUISimpleExample\src;..\..\..\addons\ofxUI\example-ofxUISimpleExample\bin\data;..\..\..\addons\ofxUI\example-ofxUISimpleExample\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUISliders\bin;..\..\..\addons\ofxUI\example-ofxUISliders\ofxUISliders.xcodeproj;..\..\..\addons\ofxUI\example-ofxUISliders\src;..\..\..\addons\ofxUI\example-ofxUISliders\bin\data;..\..\..\addons\ofxUI\example-ofxUISliders\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUITutorial\bin;..\..\..\addons\ofxUI\example-ofxUITutorial\ofxUITutorial.xcodeproj;..\..\..\addons\ofxUI\example-ofxUITutorial\src;..\..\..\addons\ofxUI\example-ofxUITutorial\bin\data;..\..\..\addons\ofxUI\example-ofxUITutorial\bin\data\GUI;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\bin;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\ofxUIVariableBinding.xcodeproj;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\src;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\bin\data;..\..\..\addons\ofxUI\example-ofxUIVariableBinding\bin\data\GUI;..\..\..\addons\ofxUITabbedCanvas;..\..\..\..\libs\assimp\include;..\..\..\..\libs\cairo\include;..\..\..\..\libs\fmodex\include;..\..\..\..\libs\FreeImage\include;..\..\..\..\libs\freetype\include;..\..\..\..\libs\glew\include;..\..\..\..\libs\glu\include;..\..\..\..\libs\glut\include;..\..\..\..\libs\poco\include;..\..\..\..\libs\quicktime\include;..\..\..\..\libs\rtAudio\include;..\..\..\..\libs\tess2\include;..\..\..\..\libs\videoInput\include;..\..\..\..\libs\cairo\include\cairo;..\..\..\..\libs\cairo\include\libpng15;..\..\..\..\libs\cairo\include\pixman-1;..\..\..\..\libs\openFrameworks;..\..\..\..\libs\openFrameworks\3d;..\..\..\..\libs\openFrameworks\app;..\..\..\..\libs\openFrameworks\communication;..\..\..\..\libs\openFrameworks\events;..\..\..\..\libs\openFrameworks\gl;..\..\..\..\libs\openFrameworks\graphics;..\..\..\..\libs\openFrameworks\math;..\..\..\..\libs\openFrameworks\sound;..\..\..\..\libs\openFrameworks\types;..\..\..\..\libs\openFrameworks\utils;..\..\..\..\libs\openFrameworks\video;..\..\..\..\addons\ofxOsc\libs;..\..\..\..\addons\ofxOsc\src;..\..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\..\addons\ofxXMLSettings\libs;..\..\..\..\addons\ofxXMLSettings\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+		</ResourceCompile>
+	<Lib>
+		<OutputFile>$(OutDir)ram.lib</OutputFile>
+	</Lib>
+		<Link>
+			<SubSystem>Windows</SubSystem>
+			<GenerateDebugInformation>false</GenerateDebugInformation>
+		</Link>
+	</ItemDefinitionGroup>
+	<ItemGroup>
+		<ClInclude Include="..\..\ram\ramMain.h" />
+		<ClInclude Include="..\..\ram\Core\ramActor.h" />
+		<ClInclude Include="..\..\ram\Core\ramActorManager.h" />
+		<ClInclude Include="..\..\ram\Core\ramBaseApp.h" />
+		<ClInclude Include="..\..\ram\Core\ramCameraManager.h" />
+		<ClInclude Include="..\..\ram\Core\ramConstants.h" />
+		<ClInclude Include="..\..\ram\Core\ramGlobalShortcut.h" />
+		<ClInclude Include="..\..\ram\Core\ramSharedData.h" />
+		<ClInclude Include="..\..\ram\Filter\ramAnalyzer.h" />
+		<ClInclude Include="..\..\ram\Filter\ramBaseFilter.h" />
+		<ClInclude Include="..\..\ram\Filter\ramExpansion.h" />
+		<ClInclude Include="..\..\ram\Filter\ramGhost.h" />
+		<ClInclude Include="..\..\ram\Filter\ramLowPassFilter.h" />
+		<ClInclude Include="..\..\ram\Filter\ramNodeTransform.h" />
+		<ClInclude Include="..\..\ram\Filter\ramPastMe.h" />
+		<ClInclude Include="..\..\ram\Filter\ramPendulum.h" />
+		<ClInclude Include="..\..\ram\Filter\ramSession.h" />
+		<ClInclude Include="..\..\ram\Filter\ramStamp.h" />
+		<ClInclude Include="..\..\ram\Filter\ramTimeFilter.h" />
+		<ClInclude Include="..\..\ram\Filter\ramUpsideDown.h" />
+		<ClInclude Include="..\..\ram\Graphics\ramGraphics.h" />
+		<ClInclude Include="..\..\ram\Graphics\ramGraphView.h" />
+		<ClInclude Include="..\..\ram\Graphics\ramNodeLine.h" />
+		<ClInclude Include="..\..\ram\Graphics\ramPrimitive.h" />
+		<ClInclude Include="..\..\ram\Graphics\ramSimpleShadow.h" />
+		<ClInclude Include="..\..\ram\Physics\ramPhysics.h" />
+		<ClInclude Include="..\..\ram\Scene\ramBaseScene.h" />
+		<ClInclude Include="..\..\ram\Scene\ramSceneManager.h" />
+		<ClInclude Include="..\..\ram\UI\ramControllable.h" />
+		<ClInclude Include="..\..\ram\UI\ramControlPanel.h" />
+		<ClInclude Include="..\..\ram\UI\ramControlPanelBase.h" />
+		<ClInclude Include="..\..\ram\Utility\ramCameraSettings.h" />
+		<ClInclude Include="..\..\ram\Utility\ramNodeArrayBuffer.h" />
+		<ClInclude Include="..\..\ram\Utility\ramNodeFinder.h" />
+		<ClInclude Include="..\..\ram\Utility\ramNodeIdentifer.h" />
+		<ClInclude Include="..\..\ram\Utility\ramOscReciever.h" />
+		<ClInclude Include="..\..\ram\Utility\ramSession.h" />
+		<ClInclude Include="..\..\ram\Utility\ramTimeShifter.h" />
+		<ClInclude Include="..\..\ram\Utility\ramUtils.h" />
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="..\..\ram\Core\ramActor.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\ram\Core\ramActorManager.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\ram\Core\ramBaseApp.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\ram\Core\ramCameraManager.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\ram\Core\ramSharedData.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\ram\Graphics\ramGraphics.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\ram\Graphics\ramNodeLine.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\ram\Graphics\ramPrimitive.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\ram\Graphics\ramSimpleShadow.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\ram\Physics\ramPhysics.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\ram\Scene\ramSceneManager.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\ram\UI\ramControlPanel.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\ram\Utility\ramCameraSettings.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\ram\Utility\ramUtils.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxBt\src\ofxBt.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtCollisionObject.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtHelper.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtJoint.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtRigidBody.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtSoftBody.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtSoftBodyWorld.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxBt\src\ofxBtWorld.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxInteractivePrimitives\src\ofxInteractivePrimitives.cpp">
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPPatcher.cpp">
+		</ClCompile>
+	</ItemGroup>
+	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+	<ImportGroup Label="ExtensionTargets">
+	</ImportGroup>
 </Project>

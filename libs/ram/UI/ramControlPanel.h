@@ -2,6 +2,8 @@
 
 #include "ofxUITabbedCanvas.h"
 
+#include "ramControlPanelBase.h"
+
 #include "ramSharedData.h"
 #include "ramGraphics.h"
 #include "ramCameraManager.h"
@@ -11,7 +13,7 @@
 class ramBaseScene;
 class ramControllable;
 
-class ramControlPanel
+class ramOfxUIControlPanel : public ramControlPanelBase
 {
 	
 public:
@@ -20,8 +22,8 @@ public:
 	const float kXInit;
 	const float kLength;
 	
-	static ramControlPanel& instance();
-	virtual ~ramControlPanel() {}
+	static ramOfxUIControlPanel& instance();
+	virtual ~ramOfxUIControlPanel() {}
 	
 	void setup();
 	void update(ofEventArgs &e);
@@ -30,7 +32,7 @@ public:
 	void addPanel(ramControllable* control);
 	void reloadCameraSetting(const int index);
 	
-	inline ofColor getBackgroundColor() { return ofColor(mR, mG, mB); }
+	inline ofColor getBackgroundColor() { return backgroundColor; }
 	inline int getFloorPattern() { return mFloorPattern; }
 	inline float getFloorSize() { return mFloorSize; }
 	inline float getGridSize() { return mGridSize; }
@@ -41,24 +43,79 @@ public:
 	void guiEvent(ofxUIEventArgs &e);
 	void keyPressed(ofKeyEventArgs &e);
 	
+	
+	// simple GUI
+	
+	void addPanel(const string& name);
+	void addSection(const string& name);
+	
+	void addSeparator();
+	
+	void addLabel(const string& content);
+
+	template <typename Functor>
+	void addButton(const string& name, const Functor &functor)
+	{
+		ofxUIButton *button = current_panel->addButton(name, false, 30, 30);
+		
+		// FIXME: memory leak
+		ButtonEventListener *e = new ButtonEventListener(button, new Callback<Functor>(functor));
+		ofAddListener(current_panel->newGUIEvent, e, &ButtonEventListener::handle);
+	}
+
+	void addToggle(const string& name, bool *value);
+	void addMultiToggle(const string& name, const vector<string>& content, int *value);
+	void addRadioGroup(const string& name, const vector<string>& content, int *value);
+	void addDropdown(const string& name, const vector<string>& content, int *value);
+	
+	void addSlider(const string& name, float min_value, float max_value, float *value);
+	
+	void addColorSelector(const string& name, ofFloatColor *value);
+
+	void remove(const string& name);
+	
+	//
+	
 private:
 	
-	float mR, mG, mB;
-	bool mUseBgSlider;
+	static ramOfxUIControlPanel *_instance;
+	
 	int mFloorPattern;
 	float mFloorSize, mGridSize;
 	
+	bool fullScreen;
+	bool pause;
+	bool enableShadow;
+	int camera_preset, camera_preset_t;
+	
+	ofFloatColor backgroundColor;
+	
     ofxUITabbedCanvas mTabbedCanvas;
 	ofxUIToggleMatrix *mSceneToggles;
-	ofxUICanvas *mPanelGeneral;
-	ofxUILabel *mLabelCamPos;
+	
+	ofxUICanvas *current_panel;
 	
 	vector<ramBaseScene*> *scenes;
 	
-	static ramControlPanel *_instance;
+	struct ButtonEventListener
+	{
+		ofxUIButton *button;
+		struct ICallable *callable;
+		
+		ButtonEventListener(ofxUIButton *button, ICallable *callable) : button(button), callable(callable) {}
+		~ButtonEventListener() { delete button; delete callable; }
+		
+		void handle(ofxUIEventArgs &e)
+		{
+			if (!button->getValue()) return;
+			callable->call();
+		}
+	};
 	
-	ramControlPanel();
+	ramOfxUIControlPanel();
 };
 
+struct ramControlPanel : public ramOfxUIControlPanel {};
 
-inline ramControlPanel& ramGetGUI() { return ramControlPanel::instance(); }
+inline ramControlPanel& ramGetGUI() { return (ramControlPanel&)ramOfxUIControlPanel::instance(); }
+

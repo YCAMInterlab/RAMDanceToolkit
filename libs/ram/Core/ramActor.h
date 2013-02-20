@@ -74,10 +74,10 @@ public:
 	const ofMatrix4x4& getTransformMatrix() const { return getLocalTransformMatrix(); }
 	const ofMatrix4x4& getMatrix() const { return getLocalTransformMatrix(); }
 	
-	inline ofVec3f getVelocity() { return accerelometer.velocity; }
-	inline ofVec3f getAcceleration() { return accerelometer.acceleration; }
-	inline ofQuaternion getAngularVelocity() { return accerelometer.angular_velocity; }
-	inline ofQuaternion getAngularAcceleration() { return accerelometer.angular_acceleration; }
+	inline ofVec3f getVelocity() const { return accerelometer.velocity; }
+	inline ofVec3f getAcceleration() const { return accerelometer.acceleration; }
+	inline ofQuaternion getAngularVelocity() const { return accerelometer.angular_velocity; }
+	inline ofQuaternion getAngularAcceleration() const { return accerelometer.angular_acceleration; }
 	
 	operator ofVec3f() const { return getGlobalPosition(); }
 	
@@ -85,6 +85,18 @@ public:
 	
 	void drawId(int floatPos=20);
 	void drawName(int floatPos=20);
+	
+	bool operator==(const ramNode &node) const;
+	bool operator!=(const ramNode &node) const;
+	
+	ramNode operator+(const ramNode &node) const;
+	ramNode& operator+=(const ramNode &node);
+	
+	ramNode operator-(const ramNode &node) const;
+	ramNode& operator-=(const ramNode &node);
+	
+	ramNode& lerp(const ramNode &node, float t);
+	ramNode getLerpd(const ramNode &node, float t) const;
 	
 private:
 
@@ -94,7 +106,6 @@ private:
 	ramAccelerometer accerelometer;
 	
 	ramNodeArray *container;
-	
 };
 
 #pragma mark - ramNodeArray
@@ -108,8 +119,6 @@ enum ramNodeArrayType
 class ramNodeArray
 {
 public:
-	
-
 
 	ramNodeArray();
 	ramNodeArray(const ramNodeArray& copy) { *this = copy; }
@@ -131,19 +140,22 @@ public:
 	
 	// operators
 	
+	bool operator==(const ramNodeArray &arr) const;
+	bool operator!=(const ramNodeArray &arr) const;
+
 	ramNodeArray operator+(const ramNodeArray &arr) const;
 	ramNodeArray& operator+=(const ramNodeArray &arr);
 	
 	ramNodeArray operator-(const ramNodeArray &arr) const;
 	ramNodeArray& operator-=(const ramNodeArray &arr);
 
-	ramNodeArray operator*(float s) const;
-	ramNodeArray& operator*=(float s);
+	ramNodeArray& lerp(const ramNodeArray &arr, float t);
+	ramNodeArray getLerpd(const ramNodeArray &arr, float t) const;
 	
 	inline void setType(ramNodeArrayType t) { type = t; }
-	inline bool isActor() { return type == RAM_NODEARRAY_TYPE_ACTOR; }
-	inline bool isRigid() { return type == RAM_NODEARRAY_TYPE_RIGIDBODY; }
-	inline bool isTypeOf(ramNodeArrayType t) { return type == t; }
+	inline bool isActor() const { return type == RAM_NODEARRAY_TYPE_ACTOR; }
+	inline bool isRigid() const { return type == RAM_NODEARRAY_TYPE_RIGIDBODY; }
+	inline bool isTypeOf(ramNodeArrayType t) const { return type == t; }
 	
 protected:
 

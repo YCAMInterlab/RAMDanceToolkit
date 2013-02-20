@@ -35,6 +35,8 @@ namespace gl
 
 void ramSimpleShadow::setup()
 {
+	enable = true;
+
 	// defulat light position
 	setLightPosition(ofVec3f(-100.0f, 500.0f, 200.0f));
 	
@@ -57,7 +59,7 @@ void ramSimpleShadow::setup()
 		}
 	);
 	
-#undef _Sram
+#undef _S
 	
 	shader.setupShaderFromSource(GL_VERTEX_SHADER, vs);
 	shader.linkProgram();
@@ -75,6 +77,8 @@ void ramSimpleShadow::setShadowColor(ofFloatColor color)
 
 void ramSimpleShadow::begin()
 {
+	assert(enable);
+	
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	
 	glEnable(GL_DEPTH_TEST);

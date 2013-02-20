@@ -4,6 +4,8 @@
 #include "ramBaseFilter.h"
 #include "ramControlPanel.h"
 
+#include "ramLowPassFilter.h"
+
 class ramExpansion : public ramBaseFilter
 {
 	float kExpandMax;
@@ -17,18 +19,22 @@ public:
 	{
 		ramControlPanel &gui = ramGetGUI();
 
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
-		panel->addSlider("Expand", 0.0, kExpandMax, &mExpand, gui.kLength, gui.kDim);
+		gui.addSection(getName());
+		gui.addSlider("Expand", 0.0, kExpandMax, &mExpand);
 	}
 	
-	const ramNodeArray& update(const ramNodeArray &nodeArray)
+	const ramNodeArray& get(size_t index) const { return expandedArray; }
+	size_t getSize() const { return 1; }
+	
+	inline const string getName() { return "ramExpansion"; };
+	
+	const ramNodeArray& filter(const ramNodeArray& src)
 	{
-		expandedArray = nodeArray;
+		expandedArray = src;
 		
 		for (int i=0; i<expandedArray.getNumNode(); i++)
 		{
-			const ramNode &node = nodeArray.getNode(i);
+			const ramNode &node = src.getNode(i);
 			ramNode &expandedNode = expandedArray.getNode(i);
 			
 			ofMatrix4x4 m = node.getGlobalTransformMatrix();
@@ -43,10 +49,8 @@ public:
 		return expandedArray;
 	}
 	
-	inline const ramNodeArray& getResult() { return expandedArray; }
-	inline const string getName() { return "ramExpansion"; };
-	
 protected:
+	
 	ramNodeArray expandedArray;
 	
 };

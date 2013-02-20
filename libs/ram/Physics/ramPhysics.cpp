@@ -2,9 +2,14 @@
 
 static bool ram_enable_physics_primitive = true;
 
-void ramSetEnablePhysicsPrimitive(bool v)
+void ramEnablePhysicsPrimitive(bool v)
 {
 	ram_enable_physics_primitive = v;
+}
+
+void ramDisablePhysicsPrimitive()
+{
+	ram_enable_physics_primitive = false;
 }
 
 bool ramGetEnablePhysicsPrimitive()
@@ -63,6 +68,7 @@ void ramPhysics::onUpdate(ofEventArgs&)
 	}
 	
 	temporary_primitives.clear();
+	cache_index.clear();
 }
 
 void ramPhysics::registerPrimitive(ramPrimitive *o)
@@ -83,4 +89,14 @@ void ramPhysics::registerTempraryPrimitive(ramPrimitive *o)
 {
 	ofxBt::RigidBody(o->getRigidBody()).setKinematic(true);
 	temporary_primitives.push_back(o);
+}
+
+bool ramPhysics::checkAndUpdateNodeCache(const ramNode *node)
+{
+	if (cache_index.find(node) == cache_index.end())
+	{
+		cache_index.insert(node);
+		return true;
+	}
+	return false;
 }

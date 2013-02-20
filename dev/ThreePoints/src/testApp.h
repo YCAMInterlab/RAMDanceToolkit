@@ -2,24 +2,18 @@
 
 #include "ofMain.h"
 #include "ramMain.h"
-#include "ofxXmlSettings.h"
-
-/*!
- for debuging....
- */
-static const string myActorName = "default_unknown_date";
-//static const string myActorName = "default";
+#include "ofxUI.h"
 
 class testApp : public ramBaseApp
 {
 public:
-	
+
 	// of methods
 	// ------------------------
 	void setup();
 	void update();
 	void draw();
-	
+
 	void keyPressed(int key);
 	void keyReleased(int key);
 	void mouseMoved(int x, int y);
@@ -32,11 +26,29 @@ public:
 	
 	// ram methods
 	// ------------------------
+	void drawFloor();
     void drawActor(ramActor &actor);
     void drawRigid(ramRigidBody &rigid);
     
 	// ...
 	// ------------------------
 	ramOscReceiver oscReceiver;
-	ramSceneManager sceneManager;
+	
+	bool showRects;
+	bool showSpheres;
+	bool showThreePoints, showFourPointSphere, showFourPointTwist;
+	bool invertSpheres;
+	bool showCircleBisector;
+	bool showCenterCircles;
+    float twistExtension;
+	float pointSize;
+	float crossLength;
+	float rectRadius;
+	float maxInvertRadius;
+	float circleResolution;
+    float twistResolution;
+	
+	ofxUICanvas* gui;
+    ofxUIToggleMatrix *m3p, *m4p1, *m4p2, *m4p3, *m4p4;
+	void setupUI();
 };

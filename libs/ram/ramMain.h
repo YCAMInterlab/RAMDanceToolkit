@@ -20,6 +20,7 @@
 /// graphics
 #include "ramGraphics.h"
 #include "ramNodeLine.h"
+#include "ramGraphView.h"
 
 
 /// filters
@@ -29,9 +30,10 @@
 #include "ramExpansion.h"
 #include "ramUpsideDown.h"
 #include "ramSession.h"
-#include "ramTimeShifter.h"
 #include "ramStamp.h"
 #include "ramNodeTransform.h"
+#include "ramTimeFilter.h"
+#include "ramLowPassFilter.h"
 
 
 /// utility

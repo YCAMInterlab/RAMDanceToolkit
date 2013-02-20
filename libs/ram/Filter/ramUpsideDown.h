@@ -6,11 +6,24 @@
 
 class ramUpsideDown : public ramBaseFilter
 {
-	
 public:
-	ramUpsideDown() {}
 	
-	const ramNodeArray& update(const ramNodeArray& src)
+	ramUpsideDown() : offset(-3.0f) {}
+	
+    inline void setOffset(float y) { offset = y; }
+    inline float getOffset() const { return offset; }
+	
+	const ramNodeArray& get(size_t index) const { return hangedNodes; }
+	size_t getSize() const { return 1; }
+	
+	inline const string getName() { return "ramUpsideDown"; };
+	
+protected:
+	
+	ramNodeArray hangedNodes;
+    float offset;
+	
+	const ramNodeArray& filter(const ramNodeArray& src)
 	{
 		hangedNodes = src;
 		
@@ -25,19 +38,12 @@ public:
 		ramNode &rootNode = hangedNodes.getNode(ramActor::JOINT_HIPS);
 		ofMatrix4x4 m = rootNode.getTransformMatrix();
 		
-		m.translate(0.0f, -h-3.0f, 0.0f);
+		m.translate(0.0f, -h-offset, 0.0f);
 		m.rotate(180, 0.0, 0.0, 1.0);
 		
 		rootNode.setTransformMatrix(m);
 		
 		return hangedNodes;
 	}
-	
-	inline const ramNodeArray& getResult() { return hangedNodes; }
-	inline const string getName() { return "ramUpsideDown"; };
-	
-protected:
-	
-	ramNodeArray hangedNodes;
-	
+
 };

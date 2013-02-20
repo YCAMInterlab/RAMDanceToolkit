@@ -15,7 +15,7 @@ void testApp::setup()
 	
 	/// ram setup
 	// ------------------
-	ramInit();
+	ramInitialize();
 	oscReceiver.setup(10000);
 	
 	
@@ -51,7 +51,7 @@ void testApp::drawActor(ramActor &actor)
 {
 	ramDrawBasicActor(actor);
 	
-	ramActor& g = (ramActor&)ghost.getResult();
+	ramActor& g = (ramActor&)ghost.get();
 	ramDrawBasicActor(g);
 }
 

@@ -14,7 +14,7 @@ void testApp::setup()
 	
 	/// ram setup
 	// ------------------
-	ramInit();
+	ramInitialize();
 	oscReceiver.setup(10000);
 	
 	

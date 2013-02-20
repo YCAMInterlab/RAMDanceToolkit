@@ -4,7 +4,9 @@
 #include "ramControlPanel.h"
 #include "ramPhysics.h"
 
-void ramSceneManager::setup(vector<ramBaseScene*>& scenes_)
+extern bool drawModel;
+
+void ramSceneManager::setup(const vector<ramBaseScene*>& scenes_)
 {
 	scenes = scenes_;
 	
@@ -34,25 +36,44 @@ void ramSceneManager::update()
 
 void ramSceneManager::draw()
 {
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	glPushMatrix();
+	ofPushStyle();
+	
+	glEnable(GL_DEPTH_TEST);
+	
 	for (int i = 0; i < scenes.size(); i++)
 	{
 		ramBaseScene *scene = scenes[i];
 		if (!scene->isEnabled()) continue;
 
 		bool enable_physics = ramGetEnablePhysicsPrimitive();
-		ramSetEnablePhysicsPrimitive(false);
-		
+		ramEnablePhysicsPrimitive(false);
+				
+		if (ramShadowEnabled())
 		{
 			// draw shadow
 			
 			ramBeginShadow();
 			
+			glPushAttrib(GL_ALL_ATTRIB_BITS);
+			glPushMatrix();
+			ofPushStyle();
+
 			scene->draw();
+			
+			ofPopStyle();
+			glPopMatrix();
+			glPopAttrib();
 			
 			ramBeginCamera();
 			
 			for (int n = 0; n < getNumNodeArray(); n++)
 			{
+				glPushAttrib(GL_ALL_ATTRIB_BITS);
+				glPushMatrix();
+				ofPushStyle();
+
 				if (getNodeArray(n).isActor())
 				{
 					ramActor &o = (ramActor &)getNodeArray(n);
@@ -63,24 +84,41 @@ void ramSceneManager::draw()
 					ramRigidBody &o = (ramRigidBody &)getNodeArray(n);
 					scene->drawRigid(o);
 				}
+				
+				ofPopStyle();
+				glPopMatrix();
+				glPopAttrib();
 			}
 			
 			ramEndCamera();
 			
 			ramEndShadow();
 		}
-
-		ramSetEnablePhysicsPrimitive(enable_physics);
 		
+		ramEnablePhysicsPrimitive(enable_physics);
+
+		if (drawModel)
 		{
 			// draw object
 			
+			glPushAttrib(GL_ALL_ATTRIB_BITS);
+			glPushMatrix();
+			ofPushStyle();
+
 			scene->draw();
 			
+			ofPopStyle();
+			glPopMatrix();
+			glPopAttrib();
+
 			ramBeginCamera();
 			
 			for (int n = 0; n < getNumNodeArray(); n++)
 			{
+				glPushAttrib(GL_ALL_ATTRIB_BITS);
+				glPushMatrix();
+				ofPushStyle();
+
 				if (getNodeArray(n).isActor())
 				{
 					ramActor &o = (ramActor &)getNodeArray(n);
@@ -91,11 +129,27 @@ void ramSceneManager::draw()
 					ramRigidBody &o = (ramRigidBody &)getNodeArray(n);
 					scene->drawRigid(o);
 				}
+				
+				ofPopStyle();
+				glPopMatrix();
+				glPopAttrib();
 			}
 			
 			ramEndCamera();
 		}
+		
+		{
+			// draw HUD
+			ofPushView();
+			ofSetupScreen();
+			scene->drawHUD();
+			ofPopView();
+		}
 	}
+	
+	ofPopStyle();
+	glPopMatrix();
+	glPopAttrib();
 }
 
 void ramSceneManager::drawActor(ramActor &actor)

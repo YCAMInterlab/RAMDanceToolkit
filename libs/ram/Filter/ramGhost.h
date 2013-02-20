@@ -25,17 +25,67 @@ public:
 		
 		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
 		panel->addSpacer(gui.kLength, 2);
+		panel->addButton("Ghost", false, 10, 10);
+		panel->addButton("Slow", false, 10, 10);
+		panel->addButton("Normal", false, 10, 10);
+		panel->addButton("Fast", false, 10, 10);
 		panel->addSlider("Distance", 0.0, 255.0, &distance, gui.kLength, gui.kDim);
 		panel->addSlider("Speed", 0.0, 255.0, &speed, gui.kLength, gui.kDim);
 	}
 	
-	const ramNodeArray& update(const ramNodeArray &present)
+	inline void setDistance(const float d) { distance = d; }
+	inline void setSpeed(const float s) { speed = s; }
+	inline void setHistorySize(const unsigned int m) { historySize = m; }
+	
+	inline float getdistance() { return distance; }
+	inline float getspeed() { return speed; }
+	inline unsigned int getHistorySize() { return historySize; }
+
+	const ramNodeArray& get(size_t index = 0) const { return ghost; }
+	size_t getSize() const { return 1; }
+	
+	inline const string getName() { return "ramGhost"; };
+	
+	void onValueChanged(ofxUIEventArgs& e)
 	{
-		if (present.getNumNode() != 0)
-			record.push_back(present);
+		string name = e.widget->getName();
 		
-		if (ghost.getNumNode() != present.getNumNode())
-			ghost = present;
+		if (name == "Ghost")
+		{
+			setSpeed(1.5);
+			setDistance(240);
+		}
+		if (name == "Slow")
+		{
+			setSpeed(8.3);
+			setDistance(74.4);
+		}
+		if (name == "Normal")
+		{
+			setSpeed(9.4);
+			setDistance(150);
+		}
+		if (name == "Fast")
+		{
+			setSpeed(38.9);
+			setDistance(211.1);
+		}
+	}
+	
+protected:
+	ramNodeArray ghost;
+	deque<ramNodeArray> record;
+	
+	int historySize;
+	float distance, speed;
+	
+	const ramNodeArray& filter(const ramNodeArray& src)
+	{
+		if (src.getNumNode() != 0)
+			record.push_back(src);
+		
+		if (ghost.getNumNode() != src.getNumNode())
+			ghost = src;
 		
 		if (record.size() > historySize)
 			record.pop_front();
@@ -69,24 +119,5 @@ public:
 		
 		return ghost;
 	}
-	
-	inline const ramNodeArray& getResult() { return ghost; }
-	
-	inline void setDistance(const float d) { distance = d; }
-	inline void setSpeed(const float s) { speed = s; }
-	inline void setHistorySize(const unsigned int m) { historySize = m; }
-	
-	inline float getdistance() { return distance; }
-	inline float getspeed() { return speed; }
-	inline unsigned int getHistorySize() { return historySize; }
 
-	
-	inline const string getName() { return "ramGhost"; };
-	
-protected:
-	ramNodeArray ghost;
-	deque<ramNodeArray> record;
-	
-	int historySize;
-	float distance, speed;
 };

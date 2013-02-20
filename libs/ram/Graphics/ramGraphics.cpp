@@ -36,9 +36,10 @@ void ramBox(const ramNode& o, float size)
 	ofBox(size);
 	o.endTransform();
 	
-	if (ramGetEnablePhysicsPrimitive())
+	if (ramGetEnablePhysicsPrimitive()
+		&& ramPhysics::instance().checkAndUpdateNodeCache(&o))
 	{
-		ramBoxPrimitive *p = new ramBoxPrimitive(o.getTransformMatrix(), size);
+		ramBoxPrimitive *p = new ramBoxPrimitive(o.getGlobalTransformMatrix(), size);
 		ramPhysics::instance().registerTempraryPrimitive(p);
 	}
 }
@@ -134,30 +135,55 @@ void ramDrawBasicActor(const ramActor& actor,
 	for (int i=0; i<actor.getNumNode(); i++)
 	{
 		const ramNode &node = actor.getNode(i);
-		float jointSize = (i==ramActor::JOINT_HEAD) ? 6.0 : 3.0;
+		float jointSize = (i==ramActor::JOINT_HEAD) ? 8.0 : 5.0;
 		
-		node.beginTransform();
+		ofPushStyle();
 		ofSetColor( jointColor );
-		ofBox( jointSize );
-		node.endTransform();
+		ramBox( node, jointSize );
 		
 		if (node.hasParent())
 		{
 			ofSetColor( lineColor );
 			ofLine(node, *node.getParent());
 		}
+		ofPopStyle();
 	}
 	glPopMatrix();
 }
-
-void ramDrawActorCube(ramActor& actor, ofColor c)
+void ramDrawBasicRigid(const ramRigidBody& rigid,
+					   const ofColor& jointColor)
 {
-	ofVec3f maxPos = actor.getNode( ramActor::JOINT_CHEST ).getGlobalPosition();
-	ofVec3f minPos = actor.getNode( ramActor::JOINT_CHEST ).getGlobalPosition();
-	
-	for (int j=0; j<actor.getNumNode(); j++)
+	for(int i=0; i<rigid.getNumNode(); i++)
 	{
-		ofVec3f pos = actor.getNode(j).getGlobalPosition();
+		const ramNode &node = rigid.getNode(i);
+		ofPushStyle();
+		ofSetColor(jointColor);
+		ramBox(node, 5);
+		ofPopStyle();
+	}
+}
+void ramDrawNodes(const ramNodeArray& nodeArray,
+				  const ofColor& jointColor,
+				  const ofColor& lineColor)
+{
+	if (nodeArray.isActor())
+		ramDrawBasicActor((ramActor &) nodeArray, jointColor, lineColor);
+	
+	else
+		ramDrawBasicRigid((ramRigidBody &) nodeArray, jointColor);
+}
+
+
+
+
+void ramDrawActorCube(ramNodeArray& nodeArray, ofColor c)
+{
+	ofVec3f maxPos = nodeArray.getNode( ramActor::JOINT_CHEST ).getGlobalPosition();
+	ofVec3f minPos = nodeArray.getNode( ramActor::JOINT_CHEST ).getGlobalPosition();
+	
+	for (int j=0; j<nodeArray.getNumNode(); j++)
+	{
+		ofVec3f pos = nodeArray.getNode(j).getGlobalPosition();
 		
 		if( maxPos.x <= pos.x ) maxPos.x = pos.x;
 		if( maxPos.y <= pos.y ) maxPos.y = pos.y;
@@ -173,19 +199,14 @@ void ramDrawActorCube(ramActor& actor, ofColor c)
 	axis = (maxPos + minPos) / 2;
 	
 	ofPushStyle();
+	ofPushMatrix();
 	{
-		ofSetLineWidth( 2 );
-		ofSetColor( c );
-		
-		ofPushMatrix();
-		{
-			ofTranslate( axis.x, axis.y, axis.z );
-			ofScale( scale.x, scale.y, scale.z );
-			ofNoFill();
-			ofBox(1);
-		}
-		ofPopMatrix();
+		ofTranslate( axis.x, axis.y, axis.z );
+		ofScale( scale.x, scale.y, scale.z );
+		ofNoFill();
+		ofBox(1);
 	}
+	ofPopMatrix();
 	ofPopStyle();
 }
 
@@ -197,4 +218,37 @@ void ramDrawNodeCorresponds(const ramNodeArray &a, const ramNodeArray &b)
 	{
 		ofLine(a.getNode(i).getGlobalPosition(), b.getNode(i).getGlobalPosition());
 	}
+}
+
+
+// shadow
+
+void ramEnableShadow(bool v)
+{
+	ramSharedData::instance().shadow.setEnable(v);
+}
+
+void ramDisableShadow()
+{
+	ramSharedData::instance().shadow.setEnable(false);
+}
+
+bool ramShadowEnabled()
+{
+	return ramSharedData::instance().shadow.getEnable();
+}
+
+void ramBeginShadow()
+{
+	ramSharedData::instance().shadow.begin();
+}
+
+void ramEndShadow()
+{
+	ramSharedData::instance().shadow.end();
+}
+
+void ramSetShadowAlpha(float alpha)
+{
+	ramSharedData::instance().shadow.setShadowAlpha(alpha);
 }

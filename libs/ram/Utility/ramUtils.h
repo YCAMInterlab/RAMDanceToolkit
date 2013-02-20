@@ -95,7 +95,7 @@ private:
 
 };
 
-string ramToResourcePath(string path)
+inline string ramToResourcePath(string path)
 {
 	return ofFilePath::join(ofToDataPath("../../../../resources"), path);
 }
