@@ -1,16 +1,22 @@
 solution "RAMDanceToolkit"
 	language "C++"
 
+	configuration "Debug"
+		targetname( "ramDebug" )
+
+	configuration "Release"
+		targetname( "ram" )
+
 	configurations { "Debug", "Release" }
 	platforms { "x32" }
 
+	local dirname = _ACTION
+	location ( dirname )
+
 	project "RAMDanceToolkit"
 		kind "StaticLib"
-
-		targetname( "ram" )
-
-		local dirname = _ACTION
-	   	location ( dirname )
+		
+		targetdir( '../lib' )
 
 	   	includedirs {
 	   		-- RAM
@@ -38,15 +44,36 @@ solution "RAMDanceToolkit"
 	   		'../../../addons/ofxXMLSettings/**',
 	   	}
 
-	   	-- excludes { "**/Win32Specific/**" }
-	   	-- libdirs { os.findlib("X11") }
-	   	-- links { "Cocoa.framework" }
-	   	-- libdirs { "libs", "../mylibs" }
-
 	   	files {
-	   		"../ram/**.h",
-	   		"../ram/**.cpp",
-	   		'../../addons/ofxBt/src/**.cpp',
+	   		'../../libs/openFrameworks/*.h',
+	   		'../../libs/openFrameworks/**/*.h',
+	   		'../ram/**.h',
+	   		'../ram/**.cpp',
+	   		'../../addons/ofxBt/src/*.cpp',
 	   		'../../addons/ofxInteractivePrimitives/src/**.cpp',
-	   		'../../addons/ofxInteractivePrimitives/ofxUITabbedCanvas/**.cpp',
+	   		'../../addons/ofxUITabbedCanvas/*.cpp',
+	   		'../../../addons/ofxOsc/**/*.cpp',
+	   		'../../../addons/ofxXmlSettings/**/*.cpp',
 	   	}
+
+	   	configuration { 'vs*' }
+	   		defines {
+				"WIN32",
+				"POCO_STATIC",
+				"CAIRO_WIN32_STATIC_BUILD",
+				"DISABLE_SOME_FLOATING_POINT",
+			}
+
+	   	configuration { 'vs*', "Debug" }
+			defines {
+				"_DEBUG",
+			}
+
+			linkoptions {
+				"/MTd"
+			}
+
+	   	configuration { 'vs*', "Release" }
+	   		defines {
+				"NODEBUG",
+			}
