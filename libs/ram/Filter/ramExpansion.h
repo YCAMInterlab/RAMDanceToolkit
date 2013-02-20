@@ -4,6 +4,8 @@
 #include "ramBaseFilter.h"
 #include "ramControlPanel.h"
 
+#include "ramLowPassFilter.h"
+
 class ramExpansion : public ramBaseFilter
 {
 	float kExpandMax;
