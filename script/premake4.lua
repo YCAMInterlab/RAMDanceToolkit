@@ -164,7 +164,6 @@ solution (project_name)
 	platforms { "x32" }
 
 	project (project_name)
-		kind "WindowedApp"
 
 		targetdir( project_name .. '/bin' )
 
@@ -194,17 +193,47 @@ solution (project_name)
 			'../../addons/ofxXMLSettings/**',
 		}
 
-		libdirs {
-			-- RAM
-			'../libs/lib',
+		-- empty sorcecode
+		create_file(project_name .. '/src/main.cpp', main_cpp)
+		create_file(project_name .. '/src/testApp.h', test_app_h)
+		create_file(project_name .. '/src/testApp.cpp', test_app_cpp)
 
+		files {
+			'../../libs/openFrameworks/*.h',
+	   		'../../libs/openFrameworks/**/*.h',
+
+			'../libs/ram/*.h',
+			'../libs/ram/**/*.h',
+			'../libs/ram/**/*.cpp',
+
+			'../addons/ofxBt/src/*.h',
+			'../addons/ofxBt/src/*.cpp',
+
+			'../addons/ofxInteractivePrimitives/src/**.h',
+			'../addons/ofxInteractivePrimitives/src/**.cpp',
+
+			'../addons/ofxUI/src/**.h',
+
+			'../addons/ofxUITabbedCanvas/*.h',
+			'../addons/ofxUITabbedCanvas/*.cpp',
+
+			'../../addons/ofxOsc/**/*.h',
+			'../../addons/ofxOsc/**/*.cpp',
+
+			'../../addons/ofxXmlSettings/**/*.h',
+			'../../addons/ofxXmlSettings/**/*.cpp',
+
+			project_name .. '/src/main.cpp',
+			project_name .. '/src/testApp.h',
+			project_name .. '/src/testApp.cpp'
 		}
 
-		configuration 'macosx'
-			links {
-				-- RAM
-				'ram',
+		-- platform specific
 
+		configuration 'macosx'
+			kind "WindowedApp"
+
+			links {
 				-- oF
 				'Accelerate.framework',
 				'AGL.framework',
@@ -222,7 +251,6 @@ solution (project_name)
 
 			linkoptions {
 				-- RAM
-				'../../libs/project/libram.a',
 				'../../addons/ofxBt/libs/bullet/lib/osx/libBulletCollision.a',
 				'../../addons/ofxBt/libs/bullet/lib/osx/libBulletDynamics.a',
 				'../../addons/ofxBt/libs/bullet/lib/osx/libBulletSoftBody.a',
@@ -252,6 +280,8 @@ solution (project_name)
 				'../../../libs/rtAudio/lib/osx/rtAudio.a',
 				'../../../libs/tess2/lib/osx/tess2.a',
 			}
+
+			postbuildcommands { 'cp -f ../../../libs/fmodex/lib/osx/libfmodex.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmodex.dylib"; install_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME"; mkdir -p "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/"; cp -Rf ../../../libs/glut/lib/osx/GLUT.framework "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks"; mkdir -p "$TARGET_BUILD_DIR/data/";' }
 
 		configuration 'vs*'
 			kind "ConsoleApp"
@@ -298,7 +328,6 @@ solution (project_name)
 
 			links {
 				-- RAM
-				-- 'ramDebug',
 				'BulletCollision_vs2010_d',
 				'BulletDynamics_vs2010_d',
 				'BulletSoftBody_vs2010_d',
@@ -336,7 +365,6 @@ solution (project_name)
 
 			links {
 				-- RAM
-				-- 'ram',
 				'LinearMath_vs2010',
 				'BulletCollision_vs2010',
 				'BulletDynamics_vs2010',
@@ -368,36 +396,3 @@ solution (project_name)
 			}
 
 		configuration {}
-
-		create_file(project_name .. '/src/main.cpp', main_cpp)
-		create_file(project_name .. '/src/testApp.h', test_app_h)
-		create_file(project_name .. '/src/testApp.cpp', test_app_cpp)
-
-		files {
-			'../../libs/openFrameworks/*.h',
-	   		'../../libs/openFrameworks/**/*.h',
-	   		
-			'../libs/ram/*.h',
-			'../libs/ram/**/*.h',
-			'../libs/ram/**/*.cpp',
-
-			'../addons/ofxBt/src/*.h',
-			'../addons/ofxBt/src/*.cpp',
-
-			'../addons/ofxInteractivePrimitives/src/*.h',
-			'../addons/ofxInteractivePrimitives/src/*.cpp',
-
-			'../addons/ofxUITabbedCanvas/*.h',
-			'../addons/ofxUITabbedCanvas/*.cpp',
-
-			'../../addons/ofxOsc/**/*.h',
-			'../../addons/ofxOsc/**/*.cpp',
-
-			'../../addons/ofxXmlSettings/**/*.h',
-			'../../addons/ofxXmlSettings/**/*.cpp',
-
-			project_name .. '/src/main.cpp',
-			project_name .. '/src/testApp.h',
-			project_name .. '/src/testApp.cpp'
-		}
-
