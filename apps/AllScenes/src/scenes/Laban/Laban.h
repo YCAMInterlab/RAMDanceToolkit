@@ -2,6 +2,37 @@
 
 #include "ramMain.h"
 
+float maxLabanMomentLife = 5;
+
+class LabanMoment
+{
+public:
+	ofVec3f start, direction;
+	int choice;
+	float birth;
+	
+	LabanMoment(ofVec3f start, ofVec3f direction, int choice)
+	:start(start)
+	,direction(direction)
+	,choice(choice)
+	{
+		birth = ofGetElapsedTimef();
+	}
+	float getLife() const
+	{
+		return 1. - ((ofGetElapsedTimef() - birth) / maxLabanMomentLife);
+	}
+	bool isDead() const
+	{
+		return (ofGetElapsedTimef() - birth) > maxLabanMomentLife;
+	}
+};
+
+bool isDead(const LabanMoment& moment)
+{
+	return moment.isDead();
+}
+
 class Laban : public ramBaseScene
 {
 public:
@@ -11,6 +42,8 @@ public:
 	
 	vector<ofColor> labanColors;
 	vector<ofVec3f> labanDirections;
+	
+	list<LabanMoment> moments;
 	
 	void setupControlPanel(ofxUICanvas* panel)
 	{
@@ -55,10 +88,27 @@ public:
 	
 	void update()
 	{
+		moments.erase(remove_if(moments.begin(), moments.end(), isDead), moments.end());
 	}
 	
 	void draw()
 	{	
+		ramBeginCamera();
+		ofEnableAlphaBlending();
+		glDisable(GL_DEPTH_TEST);
+		list<LabanMoment>::iterator itr;
+		for(itr = moments.begin(); itr != moments.end(); itr++)
+		{
+			LabanMoment& cur = *itr;
+			ofPushStyle();
+			float alpha = 255 * cur.getLife();
+			ofSetColor(128, alpha);
+			ofLine(cur.start, cur.start + cur.direction * lineLength);
+			ofSetColor(labanColors[cur.choice], alpha);
+			ofLine(cur.start, cur.start + labanDirections[cur.choice] * lineLength);
+			ofPopStyle();	
+		}
+		ramEndCamera();
 	}
 	
 	void drawActor(ramActor &actor)
@@ -89,12 +139,7 @@ public:
 					}
 					if(nearestDistance < threshold)
 					{
-						ofPushStyle();
-						ofSetColor(128);
-						ofLine(start, start + direction * lineLength);
-						ofSetColor(labanColors[nearestChoice]);
-						ofLine(start, start + labanDirections[nearestChoice] * lineLength);
-						ofPopStyle();
+						moments.push_back(LabanMoment(start, direction, nearestChoice));
 					}
 				}
 				if(showPlanes)
