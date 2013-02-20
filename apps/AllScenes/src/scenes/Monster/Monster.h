@@ -9,7 +9,7 @@ public:
 	vector<int> treeBase, treeSwap;
 	vector<float> lengthScale;
 	ramNodeArray monsterArray;
-	float minScale, maxScale;
+	float minScale, maxScale, randomizationAmount;
 	bool needToReset, randomLine, randomizeTopology, randomizeGeometry;
 		
 	void setupControlPanel(ofxUICanvas* panel)
@@ -20,12 +20,14 @@ public:
 		randomLine = false;
 		minScale = .5;
 		maxScale = 2;
+		randomizationAmount = .5;
 		panel->addButton("Reset", &needToReset, 20, 20);
 		panel->addButton("Random Line", &randomLine, 20, 20);
 		panel->addButton("Randomize Topology", &randomizeTopology, 20, 20);
 		panel->addButton("Randomize Geometry", &randomizeGeometry, 20, 20);
 		panel->addSlider("Min scale", 0, 4, &minScale, 300, 20);
 		panel->addSlider("Max scale", 0, 4, &maxScale, 300, 20);
+		panel->addSlider("Randomization amount", 0, 1, &randomizationAmount, 300, 20);
 	}
 	
 	void setup()
@@ -121,7 +123,7 @@ public:
 			int n = treeSwap.size();
 			for(int i = 0; i < n; i++)
 			{
-				if(treeSwap[i] != -1) 
+				if(treeSwap[i] != -1 && ofRandom(1) < randomizationAmount) 
 				{
 					treeSwap[i] = getRandomNonChild(i);
 				}
@@ -132,7 +134,12 @@ public:
 			int n = lengthScale.size();
 			for(int i = 0; i < n; i++)
 			{
-				lengthScale[i] = ofRandom(minScale, maxScale);
+				if(ofRandom(1) < randomizationAmount)
+				{
+					lengthScale[i] = ofRandom(minScale, maxScale);
+				} else {
+					lengthScale[i] = 1;
+				}
 			}
 		}
 		if(randomLine)
