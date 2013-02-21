@@ -169,6 +169,8 @@ void ramDrawNodes(const ramNodeArray& nodeArray,
 				  const ofColor& jointColor,
 				  const ofColor& lineColor)
 {
+    if (nodeArray.getNumNode() == 0) return;
+    
 	if (nodeArray.isActor())
 		ramDrawBasicActor((ramActor&)nodeArray, jointColor, lineColor);
 	else
