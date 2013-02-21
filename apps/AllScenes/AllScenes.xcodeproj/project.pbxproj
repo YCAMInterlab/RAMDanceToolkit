@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		275C7EB416D644FD00024334 /* Fading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 275C7EAD16D644FD00024334 /* Fading.cpp */; };
+		275C7EB516D644FD00024334 /* GeometryHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 275C7EAF16D644FD00024334 /* GeometryHelpers.cpp */; };
 		27FF225F16D5C98A00972DEE /* Calibration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27FF225416D5C98A00972DEE /* Calibration.cpp */; };
 		27FF226016D5C98A00972DEE /* ContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27FF225516D5C98A00972DEE /* ContourFinder.cpp */; };
 		27FF226116D5C98A00972DEE /* Distance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27FF225616D5C98A00972DEE /* Distance.cpp */; };
@@ -125,7 +127,6 @@
 		27FF23B116D5C9B000972DEE /* libopencv_ts231.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FF234316D5C9AF00972DEE /* libopencv_ts231.a */; };
 		27FF23B216D5C9B000972DEE /* libopencv_video231.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FF234416D5C9AF00972DEE /* libopencv_video231.a */; };
 		27FF23B316D5C9B000972DEE /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FF234616D5C9AF00972DEE /* libzlib.a */; };
-		27FF23B816D5DC7100972DEE /* Fading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27FF23B616D5DC7100972DEE /* Fading.cpp */; };
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
 		9A2B3F6516D325C7001CBFC9 /* Kepler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5116D325C7001CBFC9 /* Kepler.cpp */; };
 		9A2B3F6616D325C7001CBFC9 /* KeplerBtDynamics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5316D325C7001CBFC9 /* KeplerBtDynamics.cpp */; };
@@ -204,7 +205,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		276D282016D4C640005153ED /* Notation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notation.h; sourceTree = "<group>"; };
+		275C7EAD16D644FD00024334 /* Fading.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fading.cpp; sourceTree = "<group>"; };
+		275C7EAE16D644FD00024334 /* Fading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fading.h; sourceTree = "<group>"; };
+		275C7EAF16D644FD00024334 /* GeometryHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryHelpers.cpp; sourceTree = "<group>"; };
+		275C7EB016D644FD00024334 /* GeometryHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryHelpers.h; sourceTree = "<group>"; };
+		275C7EB116D644FD00024334 /* Notation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notation.h; sourceTree = "<group>"; };
+		275C7EB316D644FD00024334 /* Recognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recognizer.h; sourceTree = "<group>"; };
 		27B8489116D34A02000D321D /* ColorGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorGrid.h; sourceTree = "<group>"; };
 		27B8489316D35466000D321D /* ThreePoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreePoints.h; sourceTree = "<group>"; };
 		27B8489416D35513000D321D /* SphereMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphereMesh.h; sourceTree = "<group>"; };
@@ -212,7 +218,6 @@
 		27B8489716D35D17000D321D /* FourPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourPoints.h; sourceTree = "<group>"; };
 		27E36A0116D4937000729344 /* Laban.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Laban.h; sourceTree = "<group>"; };
 		27FD3B6B16D387E800C9EAC6 /* Monster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Monster.h; sourceTree = "<group>"; };
-		27FF223F16D51DD800972DEE /* ofxOneDollar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOneDollar.h; sourceTree = "<group>"; };
 		27FF224A16D5C98A00972DEE /* Calibration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Calibration.h; sourceTree = "<group>"; };
 		27FF224B16D5C98A00972DEE /* ContourFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContourFinder.h; sourceTree = "<group>"; };
 		27FF224C16D5C98A00972DEE /* Distance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Distance.h; sourceTree = "<group>"; };
@@ -428,8 +433,6 @@
 		27FF234416D5C9AF00972DEE /* libopencv_video231.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopencv_video231.a; sourceTree = "<group>"; };
 		27FF234516D5C9AF00972DEE /* libsorder.make */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libsorder.make; sourceTree = "<group>"; };
 		27FF234616D5C9AF00972DEE /* libzlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzlib.a; sourceTree = "<group>"; };
-		27FF23B616D5DC7100972DEE /* Fading.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fading.cpp; sourceTree = "<group>"; };
-		27FF23B716D5DC7100972DEE /* Fading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fading.h; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
 		60E559B116D3366A00051FE9 /* HastyChase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HastyChase.h; sourceTree = "<group>"; };
 		9A2B3F4016D325C7001CBFC9 /* Abacus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Abacus.h; sourceTree = "<group>"; };
@@ -632,10 +635,12 @@
 		276D281F16D4C640005153ED /* Notation */ = {
 			isa = PBXGroup;
 			children = (
-				27FF23B616D5DC7100972DEE /* Fading.cpp */,
-				27FF23B716D5DC7100972DEE /* Fading.h */,
-				27FF223F16D51DD800972DEE /* ofxOneDollar.h */,
-				276D282016D4C640005153ED /* Notation.h */,
+				275C7EAD16D644FD00024334 /* Fading.cpp */,
+				275C7EAE16D644FD00024334 /* Fading.h */,
+				275C7EAF16D644FD00024334 /* GeometryHelpers.cpp */,
+				275C7EB016D644FD00024334 /* GeometryHelpers.h */,
+				275C7EB116D644FD00024334 /* Notation.h */,
+				275C7EB316D644FD00024334 /* Recognizer.h */,
 			);
 			name = Notation;
 			path = scenes/Notation;
@@ -1602,7 +1607,8 @@
 				27FF226516D5C98A00972DEE /* Tracker.cpp in Sources */,
 				27FF226616D5C98A00972DEE /* Utilities.cpp in Sources */,
 				27FF226716D5C98A00972DEE /* Wrappers.cpp in Sources */,
-				27FF23B816D5DC7100972DEE /* Fading.cpp in Sources */,
+				275C7EB416D644FD00024334 /* Fading.cpp in Sources */,
+				275C7EB516D644FD00024334 /* GeometryHelpers.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
