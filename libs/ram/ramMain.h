@@ -37,6 +37,10 @@
 #include "ramLowPassFilter.h"
 
 
+/// events
+#include "ramTimeEvent.h"
+
+
 /// utility
 #include "ramControlPanel.h"
 #include "ramCameraSettings.h"

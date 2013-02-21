@@ -226,6 +226,7 @@
 		600EFB4616C8F59700A5B331 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 600EFB3F16C8F59700A5B331 /* tinyxmlparser.cpp */; };
 		600EFB4716C8F59700A5B331 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 600EFB4116C8F59700A5B331 /* ofxXmlSettings.cpp */; };
 		600EFB4816C8F59700A5B331 /* ofxXmlSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 600EFB4216C8F59700A5B331 /* ofxXmlSettings.h */; };
+		6016C92416D6214D006A578D /* ramTimeEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6016C92316D6214D006A578D /* ramTimeEvent.h */; };
 		60314DF916CFC6B400138384 /* btBulletCollisionCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 60314D1416CFC6B400138384 /* btBulletCollisionCommon.h */; };
 		60314DFA16CFC6B400138384 /* btBulletDynamicsCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 60314D1516CFC6B400138384 /* btBulletDynamicsCommon.h */; };
 		60314DFB16CFC6B400138384 /* Bullet-C-Api.h in Headers */ = {isa = PBXBuildFile; fileRef = 60314D1616CFC6B400138384 /* Bullet-C-Api.h */; };
@@ -755,6 +756,7 @@
 		600EFB3F16C8F59700A5B331 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		600EFB4116C8F59700A5B331 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		600EFB4216C8F59700A5B331 /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
+		6016C92316D6214D006A578D /* ramTimeEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramTimeEvent.h; sourceTree = "<group>"; };
 		60314D1116CFC6B400138384 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
 		60314D1416CFC6B400138384 /* btBulletCollisionCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletCollisionCommon.h; sourceTree = "<group>"; };
 		60314D1516CFC6B400138384 /* btBulletDynamicsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletDynamicsCommon.h; sourceTree = "<group>"; };
@@ -1059,7 +1061,6 @@
 		9AD6F52716B926BF00F7F51E /* ofxUIWidgetWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWidgetWithLabel.h; sourceTree = "<group>"; };
 		9AD6F52916B926BF00F7F51E /* ofxUITabbedCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUITabbedCanvas.cpp; sourceTree = "<group>"; };
 		9AD6F52A16B926BF00F7F51E /* ofxUITabbedCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUITabbedCanvas.h; sourceTree = "<group>"; };
-		9AE4C36716CB76EE00BCE1D4 /* ramPastMe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ramPastMe.h; sourceTree = "<group>"; };
 		9AF81AEC16C93C0300C1A560 /* ofxInteractivePrimitives.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxInteractivePrimitives.cpp; sourceTree = "<group>"; };
 		9AF81AED16C93C0300C1A560 /* ofxInteractivePrimitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxInteractivePrimitives.h; sourceTree = "<group>"; };
 		9AF81AEF16C93C0300C1A560 /* ofxIPButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxIPButton.h; sourceTree = "<group>"; };
@@ -1548,6 +1549,14 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		6016C92216D6214D006A578D /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				6016C92316D6214D006A578D /* ramTimeEvent.h */,
+			);
+			path = Event;
+			sourceTree = "<group>";
+		};
 		60314CEF16CFC6B300138384 /* ofxBt */ = {
 			isa = PBXGroup;
 			children = (
@@ -1940,6 +1949,7 @@
 		609A650516CAC57C00C0AB22 /* ram */ = {
 			isa = PBXGroup;
 			children = (
+				6016C92216D6214D006A578D /* Event */,
 				609A650616CAC57C00C0AB22 /* Core */,
 				609A651216CAC57C00C0AB22 /* Filter */,
 				609A651916CAC57C00C0AB22 /* Graphics */,
@@ -1981,7 +1991,6 @@
 				609A651616CAC57C00C0AB22 /* ramGhost.h */,
 				60EF104616D0C45700A37B2A /* ramGraphView.h */,
 				60DA905116CE7DAF00E392B5 /* ramNodeTransform.h */,
-				9AE4C36716CB76EE00BCE1D4 /* ramPastMe.h */,
 				609A651816CAC57C00C0AB22 /* ramPendulum.h */,
 				9A02CDAE16CBD96D0055E1AC /* ramSession.h */,
 				9A2B3FC516D366F4001CBFC9 /* ramLowPassFilter.h */,
@@ -2596,6 +2605,7 @@
 				6007AB4416D5D0810010E44B /* WindowProvider.h in Headers */,
 				6007ABA416D5D0810010E44B /* ofxGwen.h in Headers */,
 				6007ABA516D5D0810010E44B /* ofxGwenRenderer.h in Headers */,
+				6016C92416D6214D006A578D /* ramTimeEvent.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
