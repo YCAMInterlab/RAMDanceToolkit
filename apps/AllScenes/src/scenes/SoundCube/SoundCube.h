@@ -40,6 +40,7 @@ public:
 			
 			if (player)
 			{
+				player->stop();
 				delete player;
 			}
 		}
@@ -71,9 +72,13 @@ public:
 			player->loadSound(path);
 			player->setLoop(loop ? OF_LOOP_NORMAL : OF_LOOP_NONE);
 			trigger_mode = trigger;
+			
+			volume = volume_t = 0;
+			
+			player->play();
 		}
 		
-		void draw()
+		void draw(float fade = 0.1)
 		{
 			ofPushStyle();
 			
@@ -96,8 +101,10 @@ public:
 			else
 			{
 				alpha += (1 - alpha) * 0.1;
-				
 			}
+			
+			volume += (volume_t - volume) * fade;
+			player->setVolume(volume);
 			
 			ofSetColor(color, 127 + 127 * (1 - alpha));
 			
@@ -119,11 +126,13 @@ public:
 		{
 			if (trigger_mode)
 			{
-				if (player) player->play();
+//				if (player) player->play();
+				volume_t = 1;
 			}
 			else
 			{
-				if (player) player->stop();
+//				if (player) player->stop();
+				volume_t = 0;
 			}
 			
 			// cout << "trigger up: " << ofGetElapsedTimef() << endl;
@@ -133,11 +142,13 @@ public:
 		{
 			if (!trigger_mode)
 			{
-				if (player) player->play();
+//				if (player) player->play();
+				volume_t = 1;
 			}
 			else
 			{
-				if (player) player->stop();
+//				if (player) player->stop();
+				volume_t = 0;
 			}
 
 			
@@ -153,6 +164,8 @@ public:
 		
 		bool is_inside;
 		float last_collision_time;
+		
+		float volume, volume_t;
 	};
 	
 	const string getName() { return "SoundCube"; }
@@ -160,29 +173,39 @@ public:
 	bool fill;
 	float line_width;
 	
+	float fade;
+	
 	void setupControlPanel()
 	{
+		fade = 0.5;
+		
 		ramControlPanel &gui = ramGetGUI();
 		
-#ifdef RAM_GUI_SYSTEM_OFXUI
-		
-		ofxUICanvas* panel = gui.getCurrentUIContext();
-		
-		panel->addSlider("line width", 1, 10, &line_width, gui.kLength, gui.kDim);
-		
-#endif
+		gui.addSlider("line width", 1, 10, &line_width);
+		gui.addSlider("fade", 0, 1, &fade);
 	}
 	
 	void setup()
 	{
-		loadXML();
-		
 		ofAddListener(ofEvents().keyPressed, this, &SoundCube::onKeyPressed);
 	}
 	
 	void update()
 	{
 		
+	}
+	
+	void onEnabled()
+	{
+		loadXML();
+	}
+	
+	void onDisabled()
+	{
+		for (int i = 0; i < shapes.size(); i++)
+		{
+			shapes[i]->player->stop();
+		}
 	}
 	
 	void draw()
@@ -196,7 +219,7 @@ public:
 		ofDrawAxis(100);
 		for (int i = 0; i < shapes.size(); i++)
 		{
-			shapes[i]->draw();
+			shapes[i]->draw(fade);
 		}
 		
 		ramEndCamera();
@@ -306,6 +329,8 @@ public:
 		
 		xml.popTag();
 	}
+	
+	
 	
 	void clear()
 	{
