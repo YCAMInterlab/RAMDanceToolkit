@@ -146,11 +146,6 @@ void testApp::update()
 	ramBeginCamera();
 	ramEndCamera();
 	
-	/// Entities update
-	// ------------------
-	oscReceiver.update();
-	
-	
 	/// Scenes update
 	// ------------------
 	sceneManager.update();
