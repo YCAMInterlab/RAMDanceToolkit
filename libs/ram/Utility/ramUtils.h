@@ -97,9 +97,5 @@ private:
 
 inline string ramToResourcePath(string path)
 {
-#ifdef TARGET_WIN32
-	return ofFilePath::join(ofToDataPath("../../../resources"), path);
-#else
 	return ofFilePath::join(ofToDataPath("../../../../resources"), path);
-#endif
 }

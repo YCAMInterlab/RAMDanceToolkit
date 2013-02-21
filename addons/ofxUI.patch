@@ -1,22 +1,18 @@
 diff --git src/ofxUI.h src/ofxUI.h
-index 499d414..397909a 100755
+index e220503..97681e9 100755
 --- src/ofxUI.h
 +++ src/ofxUI.h
-@@ -214,7 +214,11 @@ enum ofxUIThemeType
+@@ -205,7 +205,7 @@ enum ofxUIThemeType
      OFX_UI_THEME_MINBLACK
  };
  
 -#define OFX_UI_FONT_NAME "GUI/NewMedia Fett.ttf"
-+#ifdef TARGET_WIN32
-+#define OFX_UI_FONT_NAME "../../../resources/Fonts/din-webfont.ttf"
-+#else
 +#define OFX_UI_FONT_NAME "../../../../resources/Fonts/din-webfont.ttf"
-+#endif
  
  #define OFX_UI_FONT_RESOLUTION 150
  #define OFX_UI_FONT_LARGE_SIZE 10
 diff --git src/ofxUILabel.h src/ofxUILabel.h
-index 425313b..1eb9d46 100755
+index eb2e3ad..a452208 100755
 --- src/ofxUILabel.h
 +++ src/ofxUILabel.h
 @@ -122,7 +122,7 @@ public:

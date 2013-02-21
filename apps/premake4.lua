@@ -172,7 +172,7 @@ solution (project_name)
 
 		targetdir( project_name .. '/bin' )
 
-		debugdir project_name .. '/bin'
+		debugdir ( project_name .. '/bin' )
 
 		-- empty sorcecode if directory not exsits
 		if not os.isdir(project_name) then
@@ -321,6 +321,10 @@ solution (project_name)
 				'../../libs/rtAudio/lib/vs2010',
 				'../../libs/tess2/lib/vs2010',
 				'../../libs/videoInput/lib/vs2010',
+			}
+
+			buildoptions {
+				'/MP'
 			}
 
 			linkoptions {
