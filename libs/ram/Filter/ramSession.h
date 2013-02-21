@@ -13,17 +13,25 @@ public:
 	ramSession() : mLoop(true), mRecording(false), mPlaying(false) {}
 	~ramSession() {}
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
+#ifdef RAM_GUI_SYSTEM_OFXUI
+		
+		gui.addSection(getName());
+		
+//		gui.addToggle("Rec", )
+		
+		ofxUICanvas* panel = gui.getCurrentUIContext();
+		
 		panel->addToggle("Rec", false, 40, 40);
 		panel->addToggle("Play", false, 40, 40);
 		panel->addToggle("Loop", true, 40, 40);
 		
 		ofAddListener(panel->newGUIEvent, this, &ramSession::onPanelChanged);
+		
+#endif
 	}
 	
 	void clear()

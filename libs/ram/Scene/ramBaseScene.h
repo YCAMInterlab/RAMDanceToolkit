@@ -4,10 +4,7 @@
 #include "ramGlobalShortcut.h"
 
 #include "ramControllable.h"
-
-#include "ofxUI.h"
-
-
+#include "ramControlPanel.h"
 
 /** Empty scene sample code
 
@@ -17,54 +14,46 @@ class EmptyScene : public ramBaseScene
 {
 
 public:
+	
+	const string getName() { return "My scene"; }
+	
+	float box_size;
 
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
-
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
-		panel->addSlider("Font Color", 0.0, 255.0, &fontColor, gui.kLength, gui.kDim);
-
-		ofAddListener(panel->newGUIEvent, this, &BigBox::onPanelChanged);
+ 
+		gui.addPanel(getName());
+	
+		box_size = 50;
+		gui.addSlider("box_size", &box_size);
 	}
 
 	void setup()
 	{
-
 	}
 
 
 	void update()
 	{
-
 	}
 
 	void draw()
 	{
-
 	}
 
 	void drawActor( ramActor& actor )
 	{
-
+		ramDrawBasicActor(actor);
+		ramBox(actor.getNode(0), box_size);
 	}
 
 	void drawRigid(ramRigidBody &rigid)
 	{
-
 	}
 
-	void onPanelChanged(ofxUIEventArgs& e)
-	{
-		string name = e.widget->getName();
-	}
-
-	const string getName() { return "My scene"; }
 };
 */
-
-
 
 
 class ramBaseScene : public ramControllable, public ramGlobalShortcut
@@ -72,10 +61,9 @@ class ramBaseScene : public ramControllable, public ramGlobalShortcut
 	friend class ramControlPanel;
 
 public:
+	
 	ramBaseScene() : bEnabled(false) {}
 	virtual ~ramBaseScene(){}
-
-	virtual string getSceneName() { return "unnamed scene"; }
 
 	virtual void setup() {}
 	virtual void update() {}
@@ -104,15 +92,10 @@ public:
 	virtual void onDisabled() { cout << "[Scene disabled] " << getName() << endl; }
 
 	ramBaseScene* getPtr() { return this; }
-	
-protected:
-
-	ramControlPanel& gui() { return *guiPtr; }
 
 private:
 
 	bool bEnabled;
-	ramControlPanel *guiPtr;
 
 };
 

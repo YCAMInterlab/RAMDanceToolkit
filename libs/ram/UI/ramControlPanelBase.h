@@ -30,7 +30,7 @@ public:
 	virtual void addDropdown(const string& name, const vector<string>& content, int *value) {}
 	
 	virtual void addSlider(const string& name, float min_value, float max_value, float *value) {}
-	virtual void addColorSelector(const string& name, ofColor *value) {}
+	virtual void addColorSelector(const string& name, ofFloatColor *value) {}
 	
 	virtual void remove(const string& name) {}
 	

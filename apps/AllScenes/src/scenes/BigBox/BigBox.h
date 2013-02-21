@@ -18,9 +18,13 @@ public:
 			mSizeArray.at(i) = mMasterBoxSize;
 	}
 
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
+		
+#ifdef RAM_GUI_SYSTEM_OFXUI
+		
+		ofxUICanvas* panel = gui.getCurrentUIContext();
 		
 		panel->addToggle("Use single color", &mUseSingleColor, 30, 30);
 		panel->addSlider("BigBox R", 0, 255, &r, 95, gui.kDim);
@@ -39,6 +43,8 @@ public:
 		}
 		
 		ofAddListener(panel->newGUIEvent, this, &BigBox::onPanelChanged);
+		
+#endif
 	}
 	
 	void setup()

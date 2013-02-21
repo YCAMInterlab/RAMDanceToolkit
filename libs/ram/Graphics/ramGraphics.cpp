@@ -40,6 +40,7 @@ void ramBox(const ramNode& o, float size)
 		&& ramPhysics::instance().checkAndUpdateNodeCache(&o))
 	{
 		ramBoxPrimitive *p = new ramBoxPrimitive(o.getGlobalTransformMatrix(), size);
+		p->getRigidBody().setKinematic(true);
 		ramPhysics::instance().registerTempraryPrimitive(p);
 	}
 }
@@ -53,6 +54,7 @@ void ramSphere(const ramNode& o, float radius)
 	if (ramGetEnablePhysicsPrimitive())
 	{
 		ramSpherePrimitive *p = new ramSpherePrimitive(o.getGlobalPosition(), radius);
+		p->getRigidBody().setKinematic(true);
 		ramPhysics::instance().registerTempraryPrimitive(p);
 	}
 }
@@ -138,6 +140,7 @@ void ramDrawBasicActor(const ramActor& actor,
 		float jointSize = (i==ramActor::JOINT_HEAD) ? 8.0 : 5.0;
 		
 		ofPushStyle();
+		ofSetLineWidth(2);
 		ofSetColor( jointColor );
 		ramBox( node, jointSize );
 		
@@ -167,10 +170,9 @@ void ramDrawNodes(const ramNodeArray& nodeArray,
 				  const ofColor& lineColor)
 {
 	if (nodeArray.isActor())
-		ramDrawBasicActor((ramActor &) nodeArray, jointColor, lineColor);
-	
+		ramDrawBasicActor((ramActor&)nodeArray, jointColor, lineColor);
 	else
-		ramDrawBasicRigid((ramRigidBody &) nodeArray, jointColor);
+		ramDrawBasicRigid((ramRigidBody&)nodeArray, jointColor);
 }
 
 

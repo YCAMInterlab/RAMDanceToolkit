@@ -10,7 +10,7 @@ public:
 	bool useRgb;
 	float bufferSize;
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 		

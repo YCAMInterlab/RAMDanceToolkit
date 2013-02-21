@@ -20,7 +20,7 @@ class Kepler : public ramBaseScene
 {
 public:
     // ------------------------
-    void setupControlPanel(ofxUICanvas* panel);
+    void setupControlPanel();
 	void setup();
 	void update();
 	void draw();

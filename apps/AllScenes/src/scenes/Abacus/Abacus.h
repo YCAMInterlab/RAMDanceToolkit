@@ -1,32 +1,27 @@
 #pragma once
 
+#include "ramMain.h"
+
 class Abacus : public ramBaseScene
 {
 	
-	const int box_size = 20;
-	const float margin = 5.0;
-	const float width = 500.0;
-	
-	ofLight light;
+	const int box_size;
+	const float margin;
+	const float width;
 	
 public:
 	
-	Abacus() {}
-	
-	void setupControlPanel(ofxUICanvas* panel)
-	{
-	}
+	Abacus() : box_size(20), margin(5.0), width(500.0) {}
 	
 	void setup()
 	{
-		light.setPosition(300, 0, 300);
+		
 	}
 	
 	void draw()
 	{
 		ramBeginCamera();
 		
-		light.enable();
 		glEnable(GL_DEPTH_TEST);
 		
 		int numNodeArrays = getNumNodeArray();
