@@ -9,8 +9,6 @@
 #include "ramSharedData.h"
 #include "ramGraphics.h"
 #include "ramCameraManager.h"
-#include "ramControllable.h"
-#include "ramBaseScene.h"
 #include "ramSceneTabs.h"
 
 class ramBaseScene;

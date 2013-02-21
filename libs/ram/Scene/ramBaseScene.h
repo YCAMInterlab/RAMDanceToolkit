@@ -4,10 +4,7 @@
 #include "ramGlobalShortcut.h"
 
 #include "ramControllable.h"
-
-#include "ofxUI.h"
-
-
+#include "ramControlPanel.h"
 
 /** Empty scene sample code
 
@@ -65,17 +62,14 @@ public:
 */
 
 
-
-
 class ramBaseScene : public ramControllable, public ramGlobalShortcut
 {
 	friend class ramControlPanel;
 
 public:
+	
 	ramBaseScene() : bEnabled(false) {}
 	virtual ~ramBaseScene(){}
-
-	virtual string getSceneName() { return "unnamed scene"; }
 
 	virtual void setup() {}
 	virtual void update() {}
@@ -104,15 +98,10 @@ public:
 	virtual void onDisabled() { cout << "[Scene disabled] " << getName() << endl; }
 
 	ramBaseScene* getPtr() { return this; }
-	
-protected:
-
-	ramControlPanel& gui() { return *guiPtr; }
 
 private:
 
 	bool bEnabled;
-	ramControlPanel *guiPtr;
 
 };
 

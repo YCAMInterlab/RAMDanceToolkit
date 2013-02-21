@@ -1,5 +1,8 @@
 #include "ramControlPanel.h"
 
+#include "ramBaseScene.h"
+#include "ramControllable.h"
+
 #ifdef RAM_GUI_SYSTEM_OFXUI
 
 ramOfxUIControlPanel *ramOfxUIControlPanel::_instance = NULL;
