@@ -1,4 +1,17 @@
-local project_name = _ARGS[1]
+-- :usage
+-- $ premake4 --project-name=MyProject xcode3
+-- $ premake4 --project-name=MyProject vs2010
+
+newoption {
+   trigger = "project-name",
+   value = "empry-example",
+   description = "name of new project",
+}
+
+local project_name = _OPTIONS['project-name']
+if not project_name then
+	project_name = 'empry-example'
+end
 
 local main_cpp = [[
 #include "testApp.h"
@@ -68,7 +81,7 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	
+
 }
 
 //--------------------------------------------------------------
