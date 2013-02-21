@@ -28,10 +28,11 @@ public:
 		ofColor color;
 		ofSoundPlayer *player;
 		bool trigger_mode;
+		bool visible;
 		
 		ramCollisionEvent event;
 		
-		Shape() : id(-1), obj(NULL), alpha(0), player(NULL), trigger_mode(false) {}
+		Shape() : id(-1), obj(NULL), alpha(0), player(NULL), trigger_mode(false), visible(true) {}
 		
 		~Shape()
 		{
@@ -101,13 +102,16 @@ public:
 			volume += (volume_t - volume) * fade;
 			player->setVolume(volume);
 			
-			ofSetColor(color, 127 + 127 * (1 - alpha));
-			
-			obj->transformGL();
-			ofDrawBitmapString(ofToString(id), 0, 0);
-			obj->restoreTransformGL();
-			
-			obj->draw();
+			if(visible)
+			{
+				ofSetColor(color, 127 + 127 * (1 - alpha));
+				
+				obj->transformGL();
+				ofDrawBitmapString(ofToString(id), 0, 0);
+				obj->restoreTransformGL();
+				
+				obj->draw();
+			}
 			
 			ofPopStyle();
 		}
@@ -127,6 +131,7 @@ public:
 	float line_width;
 	
 	float fade;
+	bool show_box;
 	
 	void setupControlPanel()
 	{
@@ -134,18 +139,21 @@ public:
 		
 		ramControlPanel &gui = ramGetGUI();
 		
-		gui.addSlider("line width", 1, 10, &line_width);
+		gui.addSlider("line width", 0, 10, &line_width);
 		gui.addSlider("fade", 0, 1, &fade);
+		gui.addToggle("show box", &show_box);
 	}
 	
 	void setup()
 	{
+		show_box = true;
 		ofAddListener(ofEvents().keyPressed, this, &SoundCube::onKeyPressed);
 	}
 	
 	void update()
 	{
-		
+		for(int i=0; i<shapes.size(); i++)
+			shapes.at(i)->visible = show_box;
 	}
 	
 	void onEnabled()
@@ -166,15 +174,16 @@ public:
 		ramBeginCamera();
 		
 		ofNoFill();
-		
+		ofPushStyle();
 		ofSetLineWidth(line_width);
 		
-		ofDrawAxis(100);
+		if (show_box) ofDrawAxis(100);
 		for (int i = 0; i < shapes.size(); i++)
 		{
 			shapes[i]->draw(fade);
 		}
 		
+		ofPopStyle();
 		ramEndCamera();
 	}
 	
@@ -297,6 +306,7 @@ public:
 		if (e.key == 'r')
 			loadXML();
 	}
+	
 	
 protected:
 	

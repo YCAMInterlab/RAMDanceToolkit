@@ -140,6 +140,7 @@ void ramDrawBasicActor(const ramActor& actor,
 		float jointSize = (i==ramActor::JOINT_HEAD) ? 8.0 : 5.0;
 		
 		ofPushStyle();
+		ofSetLineWidth(2);
 		ofSetColor( jointColor );
 		ramBox( node, jointSize );
 		
