@@ -2,46 +2,25 @@
 
 #include "ofMain.h"
 
-class ramBaseTimerEvent
+#include "ramBaseEvent.h"
+
+class ramBaseTimerEvent : public ramBaseEvent
 {
 public:
 	
-	ofEvent<ofEventArgs> fire;
-	
-	ramBaseTimerEvent() : enabled(true), last_updated_frame(0), fired(false) {}
+	ramBaseTimerEvent() : current_time(0), timer_duration(1) {}
 
-	inline void setEnabled(bool v) { enabled = v; }
-	inline bool isEnabled() const { return enabled; }
-	
 	inline void reset() { current_time = 0; }
 	
-	inline bool isFired() { return fired; }
-	
-	bool update()
-	{
-		if (!enabled) return false;
-		if (ofGetFrameNum() == last_updated_frame) return false;
-		last_updated_frame = ofGetFrameNum();
-		
-		fired = tick();
-		return fired;
-	}
-
 	inline float getDuration() const { return timer_duration; }
 	inline float getCurrentTime() const { return current_time ;}
-	inline float getPosition() const { return current_time / timer_duration; }
+	inline float getProgress() const { return current_time / timer_duration; }
 	
 protected:
-
-	bool enabled;
-	int last_updated_frame;
-	
-	bool fired;
 	
 	float current_time;
 	float timer_duration;
 	
-	virtual bool tick() = 0;
 };
 
 class ramScheduledTimerEvent : public ramBaseTimerEvent

@@ -29,7 +29,9 @@ public:
 		ofSoundPlayer *player;
 		bool trigger_mode;
 		
-		Shape() : id(-1), obj(NULL), alpha(0), is_inside(false), player(NULL), trigger_mode(false) {}
+		ramCollisionEvent event;
+		
+		Shape() : id(-1), obj(NULL), alpha(0), player(NULL), trigger_mode(false) {}
 		
 		~Shape()
 		{
@@ -50,18 +52,7 @@ public:
 			this->id = id;
 			this->obj = obj;
 			
-			struct Callback
-			{
-				Shape *shape;
-				Callback(Shape *shape) : shape(shape) {}
-				
-				void operator()()
-				{
-					shape->onCollision();
-				}
-			};
-			
-			obj->getRigidBody().setCollisionCallback(Callback(this));
+			event.setPrimitive(obj);
 		}
 		
 		void loadSound(const string &path, bool trigger = false, bool loop = true)
@@ -76,25 +67,34 @@ public:
 			volume = volume_t = 0;
 			
 			player->play();
+			
+			event.setTiming(RAM_TRIGGER_BOTH);
 		}
 		
 		void draw(float fade = 0.1)
 		{
-			ofPushStyle();
+			event.update();
 			
-			bool b = ofGetElapsedTimef() - last_collision_time < 0.1;
-			
-			if (is_inside != b)
+			if (event.isFired())
 			{
-				is_inside = b;
-				
-				if (b)
-					triggerUp();
+				if (event.getState())
+				{
+					if (trigger_mode) volume_t = 1;
+					else volume_t = 0;
+				}
 				else
-					triggerDown();
+				{
+					if (!trigger_mode) volume_t = 1;
+					else volume_t = 0;
+				}
+				
+//				onCollision();
 			}
 			
-			if (b)
+			ofPushStyle();
+			
+			
+			if (event.getState())
 			{
 				alpha += (0 - alpha) * 0.1;
 			}
@@ -122,39 +122,6 @@ public:
 			last_collision_time = ofGetElapsedTimef();
 		}
 		
-		void triggerUp()
-		{
-			if (trigger_mode)
-			{
-//				if (player) player->play();
-				volume_t = 1;
-			}
-			else
-			{
-//				if (player) player->stop();
-				volume_t = 0;
-			}
-			
-			// cout << "trigger up: " << ofGetElapsedTimef() << endl;
-		}
-		
-		void triggerDown()
-		{
-			if (!trigger_mode)
-			{
-//				if (player) player->play();
-				volume_t = 1;
-			}
-			else
-			{
-//				if (player) player->stop();
-				volume_t = 0;
-			}
-
-			
-			// cout << "trigger dow: " << ofGetElapsedTimef() << endl;
-		}
-		
 	private:
 		
 		int id;
@@ -162,7 +129,6 @@ public:
 		
 		float alpha;
 		
-		bool is_inside;
 		float last_collision_time;
 		
 		float volume, volume_t;
