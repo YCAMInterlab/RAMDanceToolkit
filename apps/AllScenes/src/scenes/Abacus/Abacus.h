@@ -13,10 +13,6 @@ public:
 	
 	Abacus() {}
 	
-	void setupControlPanel(ofxUICanvas* panel)
-	{
-	}
-	
 	void setup()
 	{
 		light.setPosition(300, 0, 300);

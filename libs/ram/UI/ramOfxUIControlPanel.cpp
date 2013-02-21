@@ -105,7 +105,7 @@ void ramOfxUIControlPanel::addPanel(ramControllable* control)
 	panel->addWidgetDown(new ofxUILabel(control->getName(), OFX_UI_FONT_LARGE));
 	panel->addSpacer(kLength, 2);
 	
-	control->setupControlPanel(panel);
+	control->setupControlPanel();
 	getSceneTabs().add(panel);
 }
 

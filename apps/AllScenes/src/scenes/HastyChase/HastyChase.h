@@ -11,7 +11,7 @@ public:
 	float rate;
 	bool draw_line;
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 		

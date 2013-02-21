@@ -18,7 +18,7 @@ class EmptyScene : public ramBaseScene
 
 public:
 
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 

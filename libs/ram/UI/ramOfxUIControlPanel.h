@@ -28,6 +28,16 @@ public:
 	static ramOfxUIControlPanel& instance();
 	virtual ~ramOfxUIControlPanel() {}
 	
+	void save(const string& path)
+	{
+		getSceneTabs().saveSettings(path);
+	}
+	
+	void load(const string& path)
+	{
+		getSceneTabs().loadSettings(path);
+	}
+	
 	void setup();
 	void update(ofEventArgs &e);
 	
@@ -79,6 +89,8 @@ public:
 	
 	//
 	
+	ofxUICanvas* getCurrentUIContext() { return current_panel; }
+	
 private:
 	
 	static ramOfxUIControlPanel *_instance;
@@ -124,13 +136,12 @@ inline ramControlPanel& ramGetGUI() { return (ramControlPanel&)ramOfxUIControlPa
 
 inline void ramSaveSettings(const string filename)
 {
-	ramControlPanel &gui = ramGetGUI();
-	gui.getSceneTabs().saveSettings(filename);
+	ramGetGUI().save(filename);
 }
+
 inline void ramLoadSettings(const string filename)
 {
-	ramControlPanel &gui = ramGetGUI();
-	gui.getSceneTabs().loadSettings(filename);
+	ramGetGUI().load(filename);
 }
 
 #endif

@@ -2,7 +2,66 @@
 
 #ifdef RAM_GUI_SYSTEM_GWEN
 
+#include "Gwen/Controls/RadioButtonController.h"
+
 ramGwenControlPanel *ramGwenControlPanel::_instance = NULL;
+
+#define NA() { cout << "not impld" << __PRETTY_FUNCTION__ << endl; assert(false); }
+
+using namespace Gwen;
+using namespace Gwen::Controls;
+
+#pragma mark - ramGwenControlPanel
+
+
+//
+
+class ramGwenControlPanel::Separator : public Gwen::Controls::Base
+{
+public:
+	
+	GWEN_CONTROL( Separator, Gwen::Controls::Base );
+	
+	void Render( Skin::Base* skin )
+	{
+		Gwen::Point p = LocalPosToCanvas();
+		
+		glPushMatrix();
+		glTranslatef(p.x, p.y, 0);
+		ofSetColor(0, 60);
+		ofLine(0, 0, Width(), 0);
+		glPopMatrix();
+	}
+	
+};
+
+ramGwenControlPanel::Separator::Separator( Gwen::Controls::Base* pParent, const Gwen::String& pName ) : BaseClass( pParent, pName ) {}
+
+
+struct Group
+{
+	Gwen::Controls::Base *backup;
+	Gwen::Controls::Base **ptr;
+	
+	Group(const string& name, Gwen::Controls::Base*& base, int height = 30)
+	{
+		backup = base;
+		ptr = &base;
+		
+		(*ptr) = new Gwen::Controls::Base(backup);
+		(*ptr)->SetName(name);
+		(*ptr)->SetSize(100, height);
+		(*ptr)->Dock(Pos::Top);
+	}
+	
+	~Group()
+	{
+		*ptr = backup;
+	}
+};
+
+//
+
 
 ofColor uiThemecb(64, 192), uiThemeco(192, 192), uiThemecoh(128, 192), uiThemecf(240, 255), uiThemecfh(128, 255), uiThemecp(96, 192), uiThemecpo(255, 192);
 
@@ -15,227 +74,461 @@ ramGwenControlPanel& ramGwenControlPanel::instance()
 	return *_instance;
 }
 
-ramGwenControlPanel::ramGwenControlPanel() : kDim(16), kXInit(OFX_UI_GLOBAL_WIDGET_SPACING), kLength(320-kXInit)
+ramGwenControlPanel::ramGwenControlPanel()
 {
 	mFloorPattern = ramFloor::FLOOR_NONE;
 	mFloorSize = 600.0;
 	mGridSize = 50.0;
 	enableShadow = true;
-	
-	fullScreen = false;
-	pause = false;
+	mPause = false;
 	
 	camera_preset = camera_preset_t = 0;
-	
-	backgroundColor.set(0, 0, 0, 1);
 	
 	scenes = NULL;
 }
 
+Gwen::Controls::Base* ramGwenControlPanel::getCurrentSection()
+{
+	return section_stack.top();
+}
+
+void ramGwenControlPanel::pushSection(const string& name, int height)
+{
+	Gwen::Controls::Base *base = new Gwen::Controls::Base(getCurrentSection());
+	base->Dock(Pos::Top);
+	base->SetName(name);
+	base->SetSize(100, height);
+	section_stack.push(base);
+}
+
+void ramGwenControlPanel::popSection()
+{
+	section_stack.pop();
+}
+
 void ramGwenControlPanel::setup()
 {
-	/// Event hooks
-	// -------------------------------------
-	ofAddListener(ofEvents().update, this, &ramGwenControlPanel::update);
+	gwen.setup();
 	
-	/// First panel
-	// -------------------------------------
-	/// panel
-	
-	
-	addPanel("RamDanceToolkit");
-	
-	addToggle("FullScrean", &fullScreen);
-	addToggle("Pause (or press Space Key)", &pause);
-	addToggle("Use Shadow", &enableShadow);
-
-	addSeparator();
-	
-	addColorSelector("Background", &backgroundColor);
-	
-	addSeparator();
-	
-	/// floor pattern
-	vector<string> floors = ramFloor::getFloorNames();
-	addRadioGroup("Floor Patterns", floors, &mFloorPattern);
-	
-	current_panel->addSlider("Floor Size", 100, 1000, &mFloorSize, kLength/2-kXInit, kDim);
-	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
-	current_panel->addSlider("Grid Size", 20, 200, &mGridSize, kLength/2-kXInit, kDim);
-	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
-	
-	addSeparator();
-
-	/// camera Names
-	addRadioGroup("Camera Preset", ramCameraManager::instance().getDefaultCameraNames(), &camera_preset_t);
-	
-	/// add panel to canvas
-	mTabbedCanvas.loadSettings("GUI/guiSettings.xml");
-	
-	/// Events
 	ofAddListener(ofEvents().keyPressed, this, &ramGwenControlPanel::keyPressed);
-	ofAddListener(current_panel->newGUIEvent, this, &ramGwenControlPanel::guiEvent);
+	
+	Gwen::Controls::Canvas *canvas = gwen.getCanvas();
+	dock = new Gwen::Controls::DockBase(canvas);
+	
+	dock->Dock(Pos::Fill);
+	dock->SetSize(canvas->GetSize().x, canvas->GetSize().y);
+	
+	dock->GetLeft()->GetTabControl()->SetTabStripPosition(Pos::Right);
+	dock->GetLeft()->SetWidth(DEFAULT_WIDGET_WIDTH);
+	
+	
+	// interactive camera enable/disable event hook
+	{
+		struct Handler : public Gwen::Event::Handler
+		{
+			void handle()
+			{
+				ramCameraManager::instance().setEnableInteractiveCamera(true);
+			}
+		};
+		static Handler evt;
+		dock->onHoverEnter.Add(&evt, &Handler::handle);
+	}
+	
+	{
+		struct Handler : public Gwen::Event::Handler
+		{
+			void handle()
+			{
+				ramCameraManager::instance().setEnableInteractiveCamera(false);
+			}
+		};
+		static Handler evt;
+		dock->onHoverLeave.Add(&evt, &Handler::handle);
+	}
+	
+	//
+	
+	addPanel("RAMDanceToolkit");
+	
+	struct FullScreen
+	{
+		FullScreen() {}
+		
+		void operator()()
+		{
+			ofToggleFullscreen();
+		}
+	};
+	
+	addButton("Fullscreen", FullScreen());
+	addSeparator();
+	addToggle("Pause", &mPause);
+	
+	addColorSelector("Background", &mBGColor);
+	
+	addRadioGroup("Floor Patterns", ramFloor::getFloorNames(), &mFloorPattern);
+	addSlider("Floor Size", 100, 1000, &mFloorSize);
+	addSlider("Grid Size", 20, 200, &mGridSize);
+	
+	addDropdown("Camera Preset", ramCameraManager::instance().getDefaultCameraNames(), &mCameraPreset);
+	
+	ofAddListener(ofEvents().update, this, &ramGwenControlPanel::update);
 }
 
 void ramGwenControlPanel::update(ofEventArgs &e)
 {
-	if (fullScreen != (ofGetWindowMode() == OF_FULLSCREEN))
+	ofBackground(mBGColor);
+	
+	ramActorManager::instance().setFreezed(mPause);
+	
 	{
-		ofSetFullscreen(fullScreen);
+		static int t = mCameraPreset;
+		if (t != mCameraPreset)
+		{
+			reloadCameraSetting(mCameraPreset);
+		}
+		t = mCameraPreset;
 	}
-	
-	ramActorManager::instance().setFreezed(pause);
-	
-	if (camera_preset_t != camera_preset)
-	{
-		camera_preset = camera_preset_t;
-		reloadCameraSetting(camera_preset);
-	}
-	
-	ramEnableShadow(enableShadow);
-	
-	ofBackground(backgroundColor);
 }
 
 //
 
 void ramGwenControlPanel::addPanel(ramControllable* control)
 {
-	ofxUICanvas *panel = new ofxUICanvas(0, 0, ramGetGUI().kLength+ramGetGUI().kXInit*2.0, ofGetScreenHeight());
-	current_panel = panel;
-	
-	panel->setUIColors(uiThemecb, uiThemeco, uiThemecoh, uiThemecf, uiThemecfh, uiThemecp, uiThemecpo);
-	
-	panel->addWidgetDown(new ofxUILabel(control->getName(), OFX_UI_FONT_LARGE));
-	panel->addSpacer(kLength, 2);
-	
-	control->setupControlPanel(panel);
-	getTabbedCanvas().add(panel);
+	ofLog() << "log";
+//	section_stack = stack<Gwen::Controls::Base*>();
+//	
+//	Gwen::Controls::Base *base = new Gwen::Controls::Base(dock);
+//	section_stack.push(base);
+//	
+//	dock->GetLeft()->GetTabControl()->AddPage(name, getCurrentSection());
+//	getCurrentSection()->RestrictToParent(true);
+//	getCurrentSection()->SetName(name);
+//	getCurrentSection()->SetPadding(Padding(4, 4, 4, 4));
+//	
+//	getCurrentSection()->Dock(Pos::Fill);
 }
 
 void ramGwenControlPanel::addPanel(const string& name)
 {
-	ofxUICanvas *panel = new ofxUICanvas(0, 0, ramGetGUI().kLength+ramGetGUI().kXInit*2.0, ofGetScreenHeight());
-	current_panel = panel;
+	section_stack = stack<Gwen::Controls::Base*>();
 	
-	addSection(name);
-	getTabbedCanvas().add(panel);
+	Gwen::Controls::Base *base = new Gwen::Controls::Base(dock);
+	section_stack.push(base);
+	
+	dock->GetLeft()->GetTabControl()->AddPage(name, getCurrentSection());
+	getCurrentSection()->RestrictToParent(true);
+	getCurrentSection()->SetName(name);
+	getCurrentSection()->SetPadding(Padding(4, 4, 4, 4));
+	
+	getCurrentSection()->Dock(Pos::Fill);
 }
 
 void ramGwenControlPanel::addSection(const string& name)
 {
-	current_panel->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_MEDIUM));
-	current_panel->addSpacer(kLength, 2);
+	Gwen::Controls::Label *obj = new Gwen::Controls::Label(getCurrentSection());
+	obj->Dock(Pos::Top);
+	obj->SetText(name);
+	obj->SetMargin(Margin(5, 5, 5, 5));
+	obj->SizeToContents();
+	
+	obj->SetFont(L"/Library/Fonts/Arial.ttf", 16, true);
+	
+	addSeparator();
 }
 
 void ramGwenControlPanel::addSeparator()
 {
-	current_panel->addSpacer(kLength, 2);
+	Separator *obj = new Separator(getCurrentSection());
+	obj->Dock(Pos::Top);
+	obj->SetMargin(Margin(3, 6, 3, 6));
+	obj->SetSize(100, 1);
 }
 
 void ramGwenControlPanel::addLabel(const string& content)
 {
-	current_panel->addWidgetDown(new ofxUILabel(content, OFX_UI_FONT_MEDIUM));
+	Gwen::Controls::Label *obj = new Gwen::Controls::Label(getCurrentSection());
+	obj->Dock(Pos::Top);
+	obj->SetText(content);
+	obj->SizeToContents();
+	obj->SetMargin(Margin(6, 0, 0, 0));
 }
 
 void ramGwenControlPanel::addToggle(const string& name, bool *value)
 {
-	current_panel->addToggle(name, value, 30, 30);
+	pushSection(name, 35);
+	
+	Gwen::Controls::CheckBoxWithLabel* obj = new Gwen::Controls::CheckBoxWithLabel(getCurrentSection());
+	
+	obj->Label()->SetText(name);
+	obj->Dock(Pos::Top);
+	obj->SetMargin(Margin(5, 5, 5, 5));
+	
+	if (value)
+	{
+		obj->Checkbox()->SetChecked(*value);
+		
+		typedef Gwen::Controls::CheckBox Control;
+		struct Handler : public Gwen::Event::Handler
+		{
+			void handle(Gwen::Controls::Base *obj)
+			{
+				if (obj->UserData.Exists("ptr"))
+				{
+					bool *value = obj->UserData.Get<bool*>("ptr");
+					Control *c = gwen_cast<Control>(obj);
+					*value = c->IsChecked();
+				}
+			}
+		};
+		
+		static Handler evt;
+		obj->Checkbox()->UserData.Set<bool*>("ptr", value);
+		obj->Checkbox()->onCheckChanged.Add(&evt, &Handler::handle);
+	}
+	
+	popSection();
 }
 
 void ramGwenControlPanel::addMultiToggle(const string& name, const vector<string>& content, int *value)
 {
-	assert(false);
+	pushSection(name, 100);
+	
+	addLabel(name);
+	
+	Gwen::Controls::Layout::Tile* obj = new Gwen::Controls::Layout::Tile(getCurrentSection());
+	obj->SetTileSize(40, 40);
+	
+	NA();
+	
+	popSection();
 }
-
-struct RadioGroupListener
-{
-	ofxUIRadio *o;
-	int *value;
-	
-	RadioGroupListener(ofxUIRadio *o, int *value) : o(o), value(value)
-	{
-		o->getToggles().at(*value)->setValue(true);
-	}
-	
-	void handle(ofxUIEventArgs &e)
-	{
-		if (e.widget->getParent() != o) return;
-		vector<ofxUIToggle *> t = o->getToggles();
-		for (int i = 0; i < t.size(); i++)
-		{
-			if (t[i]->getValue())
-			{
-				*value = i;
-				break;
-			}
-		}
-	}
-};
 
 void ramGwenControlPanel::addRadioGroup(const string& name, const vector<string>& content, int *value)
 {
-	ofxUIRadio *o = current_panel->addRadio(name, content, OFX_UI_ORIENTATION_VERTICAL, kDim, kDim);
+	pushSection(name, 24 * content.size() + 10);
 	
-	// FIXME: memory leak
-	RadioGroupListener *e = new RadioGroupListener(o, value);
-	ofAddListener(current_panel->newGUIEvent, e, &RadioGroupListener::handle);
+	addLabel(name);
+	
+	Gwen::Controls::RadioButtonController* obj = new Gwen::Controls::RadioButtonController(getCurrentSection());
+	
+	obj->Dock(Pos::Top);
+	obj->SetMargin(Margin(5, 2, 5, 5));
+	
+	Gwen::Point size;
+	
+	for (int i = 0; i < content.size(); i++)
+	{
+		const string &s = content[i];
+		LabeledRadioButton *btn = obj->AddOption(Utility::StringToUnicode(s));
+		size.x = max(size.x, btn->Right());
+		size.y += btn->Bottom();
+		
+		btn->UserData.Set<int>("id", i);
+		
+		if (value && *value == i)
+		{
+			btn->Select();
+		}
+	}
+	
+	size.y += ELEMENT_MARGIN;
+	
+	obj->SetSize(100, size.y);
+	
+	if (value)
+	{
+		
+		typedef Gwen::Controls::RadioButtonController Control;
+		struct Handler : public Gwen::Event::Handler
+		{
+			void handle(Gwen::Controls::Base *obj)
+			{
+				int *value = obj->UserData.Get<int*>("ptr");
+				
+				Control *c = gwen_cast<Control>(obj);
+				LabeledRadioButton *btn = c->GetSelected();
+				
+				if (value)
+				{
+					*value = btn->UserData.Get<int>("id");
+				}
+			}
+		};
+		
+		static Handler evt;
+		obj->UserData.Set<int*>("ptr", value);
+		obj->onSelectionChange.Add(&evt, &Handler::handle);
+	}
+	
+	popSection();
 }
 
 void ramGwenControlPanel::addDropdown(const string& name, const vector<string>& content, int *value)
 {
-	assert(false);
+	pushSection(name, 48);
+	
+	addLabel(name);
+	
+	Gwen::Controls::ComboBox* obj = new Gwen::Controls::ComboBox(getCurrentSection());
+	obj->SetSize(100, 24);
+	obj->Dock(Pos::Top);
+	obj->SetMargin(Margin(4, 4, 4, 6));
+	
+	for (int i = 0; i < content.size(); i++)
+	{
+		const string &s = content[i];
+		Gwen::Controls::MenuItem* item = obj->AddItem(Utility::StringToUnicode(s));
+		
+		if (value)
+		{
+			struct Handler : public Gwen::Event::Handler
+			{
+				void handle(Gwen::Controls::Base *obj)
+				{
+					int *value = obj->UserData.Get<int*>("ptr");
+					*value = obj->UserData.Get<int>("id");
+				}
+			};
+			
+			static Handler evt;
+			item->UserData.Set<int*>("ptr", value);
+			item->UserData.Set<int>("id", i);
+			item->onMenuItemSelected.Add(&evt, &Handler::handle);
+		}
+	}
+	
+	if (value)
+	{
+		Controls::Base *d = obj->GetChild(*value);
+		if (d) obj->OnItemSelected(d);
+	}
+	
+	popSection();
 }
 
 void ramGwenControlPanel::addSlider(const string& name, float min_value, float max_value, float *value)
 {
-	current_panel->addSlider(name, min_value, max_value, value, kLength, kDim);
-}
-
-struct ColorSelectorListener
-{
-	ofxUIToggle* toggle;
-	ofFloatColor *value;
-	ofFloatColor color;
+	pushSection(name, 35);
 	
-	ColorSelectorListener(ofxUIToggle* toggle, ofFloatColor *value)
-	: toggle(toggle), value(value), color(*value) {}
+	Gwen::Controls::Label *label = new Gwen::Controls::Label(getCurrentSection());
+	label->Dock(Pos::Top);
+	label->SetText(name);
+	label->SizeToContents();
+	label->SetMargin(Margin(4, 0, 0, 0));
 	
-	void handle(ofxUIEventArgs &e)
+	Gwen::Controls::HorizontalSlider* obj = new Gwen::Controls::HorizontalSlider(getCurrentSection());
+	obj->SetRange(min_value, max_value);
+	obj->SetSize(100, 15);
+	obj->Dock(Pos::Top);
+	
+	if (value)
 	{
-		if (toggle->getValue())
+		obj->SetFloatValue(*value);
+		
+		typedef Gwen::Controls::Slider Control;
+		struct Handler : public Gwen::Event::Handler
 		{
-			color = *value;
-			value->a = 1;
-		}
-		else
-		{
-			*value = color;
-			value->a = 0;
-		}
+			void handle(Gwen::Controls::Base *obj)
+			{
+				float *value = obj->UserData.Get<float*>("ptr");
+				Control *c = gwen_cast<Control>(obj);
+				*value = c->GetFloatValue();
+				
+				string name = obj->UserData.Get<string>("name");
+				Gwen::Controls::Label *label = obj->UserData.Get<Gwen::Controls::Label*>("label");
+				label->SetText(name + ": " + ofToString(*value));
+			}
+		};
+		
+		static Handler evt;
+		obj->UserData.Set<float*>("ptr", value);
+		obj->UserData.Set<string>("name", name);
+		obj->UserData.Set<Gwen::Controls::Label*>("label", label);
+		obj->onValueChanged.Add(&evt, &Handler::handle);
+		
+		string s = name + ": " + ofToString(*value);
+		label->SetText(s);
 	}
-};
+	
+	popSection();
+}
 
 void ramGwenControlPanel::addColorSelector(const string& name, ofFloatColor *value)
 {
-	current_panel->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_MEDIUM));
+	float height = 60;
 	
-	ofxUIToggle* toggle = current_panel->addToggle("", true, 26, 26);
-	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
+	pushSection(name, height + 15);
 	
-	// FIXME: memory leak
-	ColorSelectorListener *e = new ColorSelectorListener(toggle, value);
-	ofAddListener(current_panel->newGUIEvent, e, &ColorSelectorListener::handle);
+	getCurrentSection()->SetMargin(Margin(0, 0, 0, 6));
 	
-	current_panel->addSlider("R", 0, 1, &value->r, 90, kDim);
-	current_panel->addSlider("G", 0, 1, &value->g, 90, kDim);
-	current_panel->addSlider("B", 0, 1, &value->b, 90, kDim);
-	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
+	addLabel(name);
+	
+	pushSection("", height);
+	
+	getCurrentSection()->SetPadding(Padding(4, 4, 4, 0));
+	
+	struct Handler : public Gwen::Event::Handler
+	{
+		void handle(Gwen::Controls::Base *obj)
+		{
+			Gwen::Controls::ColorLerpBox *box = obj->UserData.Get<Gwen::Controls::ColorLerpBox*>("box");
+			ofColor *value = obj->UserData.Get<ofColor*>("value");
+			
+			if (obj->UserData.Exists("slider_updated"))
+			{
+				Gwen::Controls::ColorSlider *slider = (Gwen::Controls::ColorSlider*)obj;
+				box->SetColor(slider->GetSelectedColor());
+			}
+			
+			Gwen::Color c = box->GetSelectedColor();
+			if (value)
+			{
+				value->r = c.r * 255;
+				value->g = c.g * 255;
+				value->b = c.b * 255;
+			}
+		}
+	};
+	
+	Gwen::Controls::ColorLerpBox *box = new Gwen::Controls::ColorLerpBox(getCurrentSection());
+	Gwen::Controls::ColorSlider *slider = new Gwen::Controls::ColorSlider(getCurrentSection());
+	
+	if (value)
+	{
+		Gwen::Color c;
+		c.r = value->r;
+		c.g = value->g;
+		c.b = value->b;
+		slider->SetColor(c);
+		box->SetColor(c);
+	}
+	
+	box->Dock(Pos::Left);
+	box->SetSize(190, height);
+	box->UserData.Set<Gwen::Controls::ColorSlider*>("slider", slider);
+	box->UserData.Set<Gwen::Controls::ColorLerpBox*>("box", box);
+	box->UserData.Set<ofFloatColor*>("value", value);
+	
+	slider->Dock(Pos::Left);
+	slider->UserData.Set<Gwen::Controls::ColorLerpBox*>("slider_updated", NULL);
+	slider->UserData.Set<Gwen::Controls::ColorSlider*>("slider", slider);
+	slider->UserData.Set<Gwen::Controls::ColorLerpBox*>("box", box);
+	slider->UserData.Set<ofFloatColor*>("value", value);
+	
+	static Handler evt;
+	box->onSelectionChanged.Add(&evt, &Handler::handle);
+	slider->onSelectionChanged.Add(&evt, &Handler::handle);
+	
+	popSection();
+	
+	popSection();
 }
 
 void ramGwenControlPanel::remove(const string& name)
 {
-	assert(false);
+	NA();
 }
 
 //
@@ -245,58 +538,50 @@ void ramGwenControlPanel::reloadCameraSetting(const int index)
 	ramCameraManager::instance().rollbackDefaultCameraSetting(index);
 }
 
-void ramGwenControlPanel::setupSceneToggles(vector<ramBaseScene*>& scenes_)
+void ramGwenControlPanel::setupSceneToggles(vector<ramBaseScene*>& scenes)
 {
-	scenes = &scenes_;
+	Gwen::Controls::Base *ram_panel = dock->FindChildByName("RAMDanceToolkit", true);
 	
-	const int size = scenes->size();
-	
-	if (size <= 0)
+	for (int i = 0; i < scenes.size(); i++)
 	{
-		current_panel->addSpacer(kLength, 2);
-		current_panel->addLabel("No scenes are assigned.");
-		return;
+		ramBaseScene *scene = scenes[i];
+		Gwen::Controls::Button *obj = new Gwen::Controls::Button(ram_panel);
+		
+		obj->Dock(Pos::Top);
+		obj->SetText(scene->getName());
+		obj->SetIsToggle(true);
+		obj->SetMargin(Margin(5, 5, 5, 5));
+		obj->SetSize(100, 30);
+		
+		typedef Gwen::Controls::Button Control;
+		struct Handler : public Gwen::Event::Handler
+		{
+			void handle(Gwen::Controls::Base *obj)
+			{
+				ramBaseScene *scene = obj->UserData.Get<ramBaseScene*>("ptr");
+				Control *c = gwen_cast<Control>(obj);
+				scene->setEnabled(c->GetToggleState());
+			}
+		};
+		
+		static Handler evt;
+		obj->UserData.Set<ramBaseScene*>("ptr", scene);
+		obj->onToggle.Add(&evt, &Handler::handle);
 	}
-	
-	const int numCol = 5;
-	const int numRow = ceil((float)size / numCol);
-	
-	mSceneToggles = new ofxUIToggleMatrix(kDim*3, kDim*2, numRow, numCol, "Scenes");
-	current_panel->addSpacer(kLength, 2);
-	current_panel->addWidgetDown(mSceneToggles);
 }
 
-void ramGwenControlPanel::guiEvent(ofxUIEventArgs &e)
-{
-	string name = e.widget->getName();
-	
-	/// scene togglematrix
-	if (scenes != NULL)
-	{
-		vector<ofxUIToggle *> toggles = mSceneToggles->getToggles();
-		const int numToggles = toggles.size();
-		
-		for (int i=0; i<numToggles; i++)
-		{
-			if (i >= scenes->size()) break;
-			
-			ramBaseScene *scene = scenes->at(i);
-			scene->setEnabled( toggles.at(i)->getValue() );
-		}
-	}
-}
 
 void ramGwenControlPanel::keyPressed(ofKeyEventArgs &e)
 {
-	if (e.key == ' ')
-	{
-		pause = !pause;
-	}
-	
-	if (e.key == '\t')
-	{
-		mTabbedCanvas.toggleVisible();
-	}
+//	if (e.key == ' ')
+//	{
+//		pause = !pause;
+//	}
+//	
+//	if (e.key == '\t')
+//	{
+//		mTabbedCanvas.toggleVisible();
+//	}
 }
 
 #endif

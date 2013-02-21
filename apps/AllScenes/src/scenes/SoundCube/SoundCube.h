@@ -160,11 +160,17 @@ public:
 	bool fill;
 	float line_width;
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
+#ifdef RAM_GUI_SYSTEM_OFXUI
+		
+		ofxUICanvas* panel = gui.getCurrentUIContext();
+		
 		panel->addSlider("line width", 1, 10, &line_width, gui.kLength, gui.kDim);
+		
+#endif
 	}
 	
 	void setup()

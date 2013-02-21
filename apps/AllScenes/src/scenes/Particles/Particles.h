@@ -18,9 +18,13 @@ public:
 	
 	Particles() : particle_amount(4.0) {}
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
+		
+#ifdef RAM_GUI_SYSTEM_OFXUI
+		
+		ofxUICanvas* panel = gui.getCurrentUIContext();
 		
 		panel->addSlider("Amount", 1.0, 15.0, &particle_amount, gui.kLength, gui.kDim);
 		panel->addSlider("Life", 0.1, 10.0, &pe.particle_life, gui.kLength, gui.kDim);
@@ -28,6 +32,8 @@ public:
 		panel->addSlider("Gravity", -0.1, 0.1, &gravity->force, gui.kLength, gui.kDim);
 		
 		ofAddListener(panel->newGUIEvent, this, &Particles::onValueChanged);
+		
+#endif
 	}
 	
 	void setup()

@@ -12,7 +12,7 @@ public:
 	const ramNodeArray& get(size_t index = 0) const { return copy; }
 	size_t getSize() const { return 1; }
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 		gui.addSlider("LowPass amount", 0.0, 1.0, &amount);

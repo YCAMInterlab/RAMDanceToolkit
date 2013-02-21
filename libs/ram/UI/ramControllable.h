@@ -8,7 +8,7 @@ class ramControllable
 {
 public:
 	
-	virtual void setupControlPanel(ofxUICanvas* panel) {}
+	virtual void setupControlPanel() {}
 	
 	virtual const string getName() = 0;
 };

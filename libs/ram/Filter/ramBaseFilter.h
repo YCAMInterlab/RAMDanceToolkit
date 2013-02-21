@@ -18,7 +18,7 @@ public:
 	
 	ramXXXFilter() {}
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
@@ -54,7 +54,7 @@ public:
 	
 	virtual ~ramBaseFilter() {}
 	
-	virtual void setupControlPanel(ofxUICanvas* panel) {}
+	virtual void setupControlPanel() {}
 	virtual void setup() {}
 	
 	const ramNodeArray& update(const ramNodeArray& src)

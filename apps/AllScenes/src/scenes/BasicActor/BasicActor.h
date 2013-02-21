@@ -21,7 +21,6 @@ class BasicActor : public ramBaseScene
 	};
 	
 	map<const string, ControlSegment> mControlSegments;
-	ofxUICanvas *panel;
 	
 	ofLight light;
 	bool enableLight;
@@ -30,14 +29,19 @@ public:
 	
 	BasicActor() {}
 	
-	void setupControlPanel(ofxUICanvas* panel_)
+	void setupControlPanel()
 	{
-		panel = panel_;
-		
 		ramControlPanel &gui = ramGetGUI();
+		
+#ifdef RAM_GUI_SYSTEM_OFXUI
+		
+		ofxUICanvas* panel = gui.getCurrentUIContext();
+		
 		gui.addToggle("Enable light", &enableLight);
 		
 		ofAddListener(panel->newGUIEvent, this, &BasicActor::onPanelChanged);
+		
+#endif
 	}
 	
 	void setup()
@@ -52,6 +56,10 @@ public:
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
+#ifdef RAM_GUI_SYSTEM_OFXUI
+		
+		ofxUICanvas* panel = gui.getCurrentUIContext();
+
 		const string &name = nodeArray.getName();
 		
 		mControlSegments.insert( make_pair(name, ControlSegment()) );
@@ -79,6 +87,7 @@ public:
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 		panel->addSlider(segment.name + " Scale", 0.01, 5.0, &segment.scale, gui.kLength, gui.kDim);
 		
+#endif
 	}
 	
 	void update()

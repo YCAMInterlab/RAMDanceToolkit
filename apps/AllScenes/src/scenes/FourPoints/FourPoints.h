@@ -27,9 +27,13 @@ public:
 		m4p4->getToggles()[i3]->setValue(true);
 	}
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
+		
+#ifdef RAM_GUI_SYSTEM_OFXUI
+		
+		ofxUICanvas* panel = gui.getCurrentUIContext();
 		
 		showFourPointSphere = false;
 		showFourPointTwist = true;
@@ -63,6 +67,8 @@ public:
 		m4p2->setAllowMultiple(false);
 		m4p3->setAllowMultiple(false);
 		m4p4->setAllowMultiple(false);
+	
+#endif
 		
 	}
 	

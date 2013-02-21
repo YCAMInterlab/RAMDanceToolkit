@@ -36,9 +36,13 @@ public:
 		bool active;
 		int id;
 
-		void setupControlPanel(ofxUICanvas* panel)
+		void setupControlPanel()
 		{
 			ramControlPanel &gui = ramGetGUI();
+			
+#ifdef RAM_GUI_SYSTEM_OFXUI
+			
+			ofxUICanvas* panel = gui.getCurrentUIContext();
 			
 			line_width = 2;
 			
@@ -77,6 +81,8 @@ public:
 			panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 			
 			panel->addSpacer(gui.kLength, 2);
+			
+#endif
 		}
 		
 		void update()
@@ -177,7 +183,7 @@ public:
 	{
 	}
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
@@ -188,7 +194,7 @@ public:
 		for (int i = 0; i < NUM_LINE; i++)
 		{
 			lines[i].id = i;
-			lines[i].setupControlPanel(panel);
+			lines[i].setupControlPanel();
 		}
 		
 		lines[0].active = true;

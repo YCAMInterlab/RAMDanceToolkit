@@ -15,7 +15,7 @@ public:
 	
 	ramExpansion() : mExpand(1.0), kExpandMax(3.0) {}
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 

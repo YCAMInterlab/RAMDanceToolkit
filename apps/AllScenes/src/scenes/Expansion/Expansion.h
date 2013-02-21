@@ -26,9 +26,13 @@ public:
 	
 	Expansion() : mShowName(true), mShowBox(true), mShowAxis(true), mShowLine(true), mShowExtendedLine(true), mBoxSize(10.0), mBoxSizeRatio(5.0), r(250), g(250), b(250) {}
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
-		ramControlPanel &gui = ramGetGUI();;
+		ramControlPanel &gui = ramGetGUI();
+		
+#ifdef RAM_GUI_SYSTEM_OFXUI
+		
+		ofxUICanvas* panel = gui.getCurrentUIContext();
 		
 		panel->getRect()->width =500.0f;
 		
@@ -69,11 +73,12 @@ public:
 		
 		for(int i=0; i<NUM_FILTER_BUFFER; i++)
 		{
-			mExpantion[i].setupControlPanel(panel);
+			mExpantion[i].setupControlPanel();
 		}
 		
-		
 		ofAddListener(panel->newGUIEvent, this, &Expansion::onValueChanged);
+		
+#endif
 	}
 	
 	void setup()
