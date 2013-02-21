@@ -341,7 +341,8 @@ public:
 	
 	void onKeyPressed(ofKeyEventArgs &e)
 	{
-		loadXML();
+		if (e.key == 'r')
+			loadXML();
 	}
 	
 protected:

@@ -16,7 +16,7 @@ public:
 	
 	Future() {}
 
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
