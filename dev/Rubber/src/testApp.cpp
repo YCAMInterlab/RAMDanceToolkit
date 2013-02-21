@@ -64,9 +64,8 @@ void testApp::setup()
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
 	ofBackground(0);
-	oscReceiver.setup(10000);
 	
-	ramInitialize();
+	ramInitialize(10000);
 	
 	// gui setup
 	ofxControlPanel::setTextColor(simpleColor(255,255,255,255));
@@ -92,7 +91,7 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	oscReceiver.update();
+	
     scene.update();
 }
 

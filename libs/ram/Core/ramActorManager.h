@@ -28,7 +28,7 @@ public:
             _instance = new ramActorManager;
         return *_instance;
     }
-
+	
 	void setup();
 	void update();
 	void draw();
@@ -58,13 +58,16 @@ public:
 	
 	// for internal use
 	void updateWithOscMessage(const ofxOscMessage &m);
+	void setupOscReceiver(int port) { oscReceiver.setup(port); }
 	
 	void onSelectStateChanged(ramNodeIdentifer &e);
 	
 private:
 
 	static ramActorManager *_instance;
-
+	
+	ofxOscReceiver oscReceiver;
+	
 	// noncopyable
 	ramActorManager() {};
 	ramActorManager(const ramActorManager&) {}

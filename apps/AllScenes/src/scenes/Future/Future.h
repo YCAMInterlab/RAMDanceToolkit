@@ -1,11 +1,14 @@
 #pragma once
 
+#include "ParticleEngine.h"
+
 class Future : public ramBaseScene
 {
 	
 	enum { NUM_FILTER_BUFFER = 3 };
 	ramGhost mGhosts[NUM_FILTER_BUFFER];
 	ramLowPassFilter mLowpass[NUM_FILTER_BUFFER];
+	
 	
 public:
 	
@@ -30,7 +33,7 @@ public:
 
 	void setup()
 	{
-
+		
 	}
 
 	void update()
@@ -62,7 +65,11 @@ public:
 			ramDrawNodes( ghost, gcolor );
 			
 			if (draw_line)
+			{
+				ofSetColor(gcolor);
 				ramDrawNodeCorresponds(NA, ghost);
+			}
+				
 			
 			ofPopStyle();
 			glPopAttrib();

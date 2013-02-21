@@ -17,8 +17,7 @@ void testApp::setup()
 	
 	/// ram setup
 	// ------------------
-	ramInitialize();
-	oscReceiver.setup(10000);
+	ramInitialize(10000);
 	
 	vector<ramBaseScene*> scenes;
 	scenes.push_back(soundCube.getPtr());
@@ -28,9 +27,6 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/// Entities update
-	// ------------------
-	oscReceiver.update();
 	
 	SM.update();
 }
@@ -50,7 +46,6 @@ void testApp::draw()
 
 
 #pragma mark - ram methods
-
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {

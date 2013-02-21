@@ -13,8 +13,7 @@ void testApp::setup()
 	
 	/// ram setup
 	// ------------------
-	ramInitialize();
-	oscReceiver.setup(10000);
+	ramInitialize(10000);
 	
 	timeShifter.setup();
 	timeShifter.setShiftTime(2.0);
@@ -27,9 +26,6 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/// Entities update
-	// ------------------
-	oscReceiver.update();
 	
 	timeShifter.update( getNodeArray(0) );
 }

@@ -15,7 +15,7 @@ DerivedData
 project.xcworkspace
 
 # win
-obj
+*.obj
 *.dll
 *.lib
 *.exp
@@ -24,6 +24,7 @@ obj
 *.*sdf
 *.suo
 *.ilk
+obj
 
 *.zip
 

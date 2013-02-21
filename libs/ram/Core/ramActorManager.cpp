@@ -163,6 +163,13 @@ void ramActorManager::setup()
 
 void ramActorManager::update()
 {
+	while (oscReceiver.hasWaitingMessages())
+	{
+		ofxOscMessage m;
+		oscReceiver.getNextMessage(&m);
+		ramActorManager::instance().updateWithOscMessage(m);
+	}
+	
 	nodearrays.updateIndexCache();
 	
 	for (int i = 0; i < nodearrays.size(); i++)
@@ -175,13 +182,10 @@ void ramActorManager::update()
 	rootNode.update();
 }
 
-#include "ramCameraManager.h"
 void ramActorManager::draw()
 {
-    ofPushView();
-    ramCameraManager::instance().getActiveCamera().begin(ofRectangle(0, 0, 1920, 1200));
 	rootNode.draw();
-	
+
 	if (nodeSelector != NULL && nodeSelector->identifer.isValid())
 	{
 		ramNode node;
@@ -203,9 +207,6 @@ void ramActorManager::draw()
 			node.endTransform();
 		}
 	}
-    
-    ramCameraManager::instance().getActiveCamera().end();
-    ofPopView();
 }
 
 void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)

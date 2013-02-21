@@ -89,8 +89,8 @@ void testApp::setup()
 	
 	/// ram setup
 	// ------------------
-	ramInitialize();
-	oscReceiver.setup(10000);
+	ramInitialize(10000);
+	
 	
 	/// scenes setup
 	// ------------------
@@ -105,8 +105,8 @@ void testApp::setup()
 	scenes.push_back( particles.getPtr() );
 	scenes.push_back( abacus.getPtr() );
 	scenes.push_back( soundcube.getPtr() );
-    scenes.push_back( upsideDown.getPtr() );
-    scenes.push_back( kepler.getPtr() );
+	scenes.push_back( upsideDown.getPtr() );
+	scenes.push_back( kepler.getPtr() );
 	scenes.push_back( hastyChase.getPtr() );
 	scenes.push_back( colorGrid.getPtr() );
 	scenes.push_back( threePoints.getPtr() );
@@ -136,7 +136,6 @@ void testApp::setup()
     
     active_camera_id = 0;
 	ramCameraManager::instance().setActiveCamera(active_camera_id);
-	
 }
 
 //--------------------------------------------------------------
@@ -176,6 +175,7 @@ void testApp::draw()
 			screen_camera->enableOrtho();
 		}
 		
+		
 		ofViewport(ofRectangle(main_display_width + i * screen_width, screen_y_offset, screen_width, screen_height));
 		ramCameraManager::instance().setActiveCamera(i + 1);
 		
@@ -208,19 +208,19 @@ void testApp::draw()
 	
 	sceneManager.draw();
 	ofPopView();
-	
 }
 
 #pragma mark - ram methods
-
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
+	
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
+	
 }
 
 #pragma mark - oF Events
@@ -251,6 +251,16 @@ void testApp::keyPressed(int key)
         
         ramCameraManager::instance().setEnableInteractiveCamera(true);
     }
+	
+	if(key=='.')
+	{
+		ramLoadSettings("Settings/scene.xml");
+	}
+	
+	if(key=='/')
+	{
+		ramSaveSettings("Settings/scene.xml");
+	}
 }
 
 //--------------------------------------------------------------
