@@ -2,10 +2,11 @@
 
 #include "ramMain.h"
 #include "ofxOneDollar.h"
+#include "ofxCv.h"
 
-float maxNotationLife = 1;
+#include "Fading.h"
 
-class HistoryPoint
+class HistoryPoint : public Fading
 {
 public:
 	ofVec3f point;
@@ -13,17 +14,7 @@ public:
 	
 	HistoryPoint(ofVec3f point)
 	:point(point)
-	{
-		birth = ofGetElapsedTimef();
-	}
-	float getLife() const
-	{
-		return 1. - ((ofGetElapsedTimef() - birth) / maxNotationLife);
-	}
-	bool isDead() const
-	{
-		return getLife() < 0;
-	}
+	{}
 };
 
 // needs improvement. right now it just looks for the biggest cross product
@@ -57,10 +48,55 @@ void approximatePlane(const vector<ofVec3f>& points, int iterations, ofVec3f& ce
 	normal.normalize();
 }
 
-bool HistoryPointIsDead(const HistoryPoint& historyPoint)
+float angleCompleteness(const ofPolyline& polyline, const ofVec2f& center, int bins = 12) 
 {
-	return historyPoint.isDead();
+	vector<bool> allBins(bins, false);
+	int filledBins = 0;
+	for(int i = 0; i < polyline.size(); i++)
+	{
+		float angle = center.angle(polyline[i]);
+		int bin = ofClamp(ofMap(angle, -180, 180, 0, bins), 0, bins - 1);
+		if(!allBins[bin])
+		{
+			filledBins++;
+		}
+		allBins[bin] = true;
+	}
+	return (float) filledBins / (float) bins;
 }
+
+class SpatialEllipse : public Fading
+{
+public:
+	ofVec3f position, normal;
+	cv::RotatedRect ellipse;
+	
+	SpatialEllipse(ofVec3f position, ofVec3f normal, cv::RotatedRect ellipse)
+	:position(position)
+	,normal(normal)
+	,ellipse(ellipse)
+	{
+	}
+	
+	void draw3d(float lifespan)
+	{
+		ofPushMatrix();
+		ofTranslate(position);
+		rotateToNormal(normal);
+		draw2d(lifespan);
+		ofPopMatrix();
+	}
+	
+	void draw2d(float lifespan)
+	{
+		ofPushMatrix();
+		ofTranslate(ellipse.center.x, ellipse.center.y);
+		ofRotate(ellipse.angle);
+		ofSetColor(255, 255 * getLife(lifespan));
+		ofEllipse(0, 0, ellipse.size.width, ellipse.size.height);
+		ofPopMatrix();
+	}
+};
 
 class Notation : public ramBaseScene
 {
@@ -76,9 +112,16 @@ public:
 	map<int, ofVec2f> undoTranslation;
 	map<int, ofVec2f> undoScaling;
 	map<int, float> undoRotation;
+	map<int, ofPolyline> normalized;
+	map<int, cv::RotatedRect> ellipses;
+	map<int, float> completeness;
 	
+	list<SpatialEllipse> allEllipses;
+	
+	
+	float maxNotationLife, maxEllipseLife;
 	float threshold;
-	bool onlyLimbs;
+	bool onlyLimbs, drawDebug;
 	
 	ofxOneDollar dollar;
 	ofxGesture *circleGesture, *squareGesture, *uGesture, *lineGesture;
@@ -88,11 +131,16 @@ public:
 	void setupControlPanel(ofxUICanvas* panel)
 	{
 		onlyLimbs = true;
+		maxNotationLife = 1;
+		maxEllipseLife = 5;
 		centerLerpRate = .1;
 		normalLerpRate = .1;
 		threshold = .9;
+		drawDebug = false;
 		panel->addToggle("Only limbs", &onlyLimbs, 20, 20);
-		panel->addSlider("Fade out", 0, 5, &maxNotationLife, 20, 20);
+		panel->addToggle("Draw debug", &drawDebug, 20, 20);
+		panel->addSlider("History fade out", 0, 5, &maxNotationLife, 300, 20);
+		panel->addSlider("Ellipse fade out", 0, 10, &maxEllipseLife, 300, 20);
 		panel->addSlider("Threshold", 0, 1, &threshold, 300, 20);
 		panel->addSlider("Center lerp rate", 0, 1, &centerLerpRate, 300, 20);
 		panel->addSlider("Normal lerp rate", 0, 1, &normalLerpRate, 300, 20);
@@ -154,19 +202,21 @@ public:
 	
 	void update()
 	{
+		Fading::bury(allEllipses, maxEllipseLife);
+		
 		// remove any dead points
 		map<int, list<HistoryPoint> >::iterator itr;
 		for(itr = history.begin(); itr != history.end(); itr++)
 		{
 			list<HistoryPoint>& cur = itr->second;
-			cur.erase(remove_if(cur.begin(), cur.end(), HistoryPointIsDead), cur.end());
+			Fading::bury(cur, maxNotationLife);
 			vector<ofVec3f> all;
 			list<HistoryPoint>::iterator curItr;
 			for(curItr = cur.begin(); curItr != cur.end(); curItr++)
 			{
 				all.push_back(curItr->point);
 			}
-			if(all.size() > 3) {
+			if(all.size() > 5) {
 				ofVec3f center, normal;
 				approximatePlane(all, 1000, center, normal);
 				centers[itr->first].interpolate(center, centerLerpRate);
@@ -194,48 +244,75 @@ public:
 				polyline.addVertices(all);
 				boundingBoxes[itr->first] = polyline.getBoundingBox();
 				
-				ofxGesture* gesture = new ofxGesture();
-				for(int i = 0; i < all.size(); i++) 
+				/*
+				 ofxGesture* gesture = new ofxGesture();
+				 for(int i = 0; i < all.size(); i++) 
+				 {
+				 gesture->addPoint(all[i].x, all[i].y);
+				 }
+				 double score = 0;
+				 ofxGesture* match = dollar.match(gesture, &score);
+				 scores[itr->first] = score;
+				 matches[itr->first] = match;
+				 undoTranslation[itr->first] = gesture->undoTranslation;
+				 undoScaling[itr->first] = gesture->undoScaling;
+				 undoRotation[itr->first] = gesture->undoRotation;
+				 normalized[itr->first] = gesture->getNormalized();
+				 delete gesture;
+				 */
+				
+				cv::RotatedRect ellipse = ofxCv::fitEllipse(polyline);
+				ellipses[itr->first] = ellipse;
+				completeness[itr->first] = angleCompleteness(polyline, ofVec2f(ellipse.center.x, ellipse.center.y));
+				if(completeness[itr->first] > threshold)
 				{
-					gesture->addPoint(all[i].x, all[i].y);
+					allEllipses.push_back(SpatialEllipse(center, normal, ellipse));
 				}
-				double score = 0;
-				ofxGesture* match = dollar.match(gesture, &score);
-				scores[itr->first] = score;
-				matches[itr->first] = match;
-				undoTranslation[itr->first] = gesture->undoTranslation;
-				undoScaling[itr->first] = gesture->undoScaling;
-				undoRotation[itr->first] = gesture->undoRotation;
-				delete gesture;
 			}
 		}
 	}
 	
 	void drawHUD()
 	{
-		ofPushMatrix();
-		ofTranslate(200, 200);
-		map<int, vector<ofVec3f> >::iterator itr;
-		for(itr = projected.begin(); itr != projected.end(); itr++)
+		if(drawDebug)
 		{
-			ofMesh mesh;
-			mesh.setMode(OF_PRIMITIVE_LINE_STRIP);
-			mesh.addVertices(itr->second);
-			mesh.draw();
-			int i = itr->first;
-			if(matches[i] != NULL && scores[i] > threshold)
+			ofPushMatrix();
+			ofTranslate(200, 200);
+			map<int, vector<ofVec3f> >::iterator itr;
+			for(itr = projected.begin(); itr != projected.end(); itr++)
 			{
-				ofDrawBitmapString(matches[i]->name + " " + ofToString(scores[i]), 10, 20);
+				ofMesh mesh;
+				mesh.setMode(OF_PRIMITIVE_LINE_STRIP);
+				mesh.addVertices(itr->second);
+				mesh.draw();
+				int i = itr->first;
 				ofPushMatrix();
-				ofTranslate(undoTranslation[i]);
-				ofScale(1/undoScaling[i].x, 1/undoScaling[i].y);
-				ofRotate(-ofRadToDeg(undoRotation[i]));
-				matches[i]->draw();
+				if(matches[i] != NULL) // && scores[i] > threshold)
+				{
+					ofDrawBitmapString(matches[i]->name + " " + ofToString(scores[i]), 10, 20);
+					/*
+					 ofTranslate(undoTranslation[i]);
+					 ofScale(1/undoScaling[i].x, 1/undoScaling[i].y);
+					 ofRotate(-ofRadToDeg(undoRotation[i]));
+					 */
+					normalized[i].draw();
+					matches[i]->draw();
+				}
+				
+				if(completeness[itr->first] > threshold)
+				{
+					ofTranslate(ellipses[i].center.x, ellipses[i].center.y);
+					ofRotate(ellipses[i].angle);
+					ofNoFill();
+					ofEllipse(0, 0, ellipses[i].size.width, ellipses[i].size.height);
+					//ofRect(-10, -10, 20, 20);
+				}
 				ofPopMatrix();
+				
+				ofTranslate(0, 200);
 			}
-			ofTranslate(0, 200);
+			ofPopMatrix();
 		}
-		ofPopMatrix();
 	}
 	
 	void draw()
@@ -244,34 +321,45 @@ public:
 		ofEnableAlphaBlending();
 		glDisable(GL_DEPTH_TEST);
 		
-		map<int, list<HistoryPoint> >::iterator itr;
-		for(itr = history.begin(); itr != history.end(); itr++)
+		ofNoFill();
+		list<SpatialEllipse>::iterator ellipseItr;
+		for(ellipseItr = allEllipses.begin(); ellipseItr != allEllipses.end(); ellipseItr++)
 		{
-			list<HistoryPoint>& cur = itr->second;
-			ofMesh mesh;
-			mesh.setMode(OF_PRIMITIVE_LINE_STRIP);
-			list<HistoryPoint>::iterator curItr;
-			for(curItr = cur.begin(); curItr != cur.end(); curItr++)
-			{
-				mesh.addVertex(curItr->point);
-			}
-			mesh.draw();
+			ellipseItr->draw3d(maxEllipseLife);
 		}
 		
-		map<int, ofVec3f>::iterator centersItr;
-		for(centersItr = centers.begin(); centersItr != centers.end(); centersItr++)
+		ofSetColor(255);
+		if(drawDebug)
 		{
-			int i = centersItr->first;
-			ofVec3f& center = centersItr->second;
-			ofVec3f& normal = normals[i];
-			//ofLine(center, center + normal * 100);
+			map<int, list<HistoryPoint> >::iterator itr;
+			for(itr = history.begin(); itr != history.end(); itr++)
+			{
+				list<HistoryPoint>& cur = itr->second;
+				ofMesh mesh;
+				mesh.setMode(OF_PRIMITIVE_LINE_STRIP);
+				list<HistoryPoint>::iterator curItr;
+				for(curItr = cur.begin(); curItr != cur.end(); curItr++)
+				{
+					mesh.addVertex(curItr->point);
+				}
+				mesh.draw();
+			}
 			
-			ofPushMatrix();
-			ofTranslate(center);
-			rotateToNormal(normal);
-			ofNoFill();
-			ofRect(boundingBoxes[i]);
-			ofPopMatrix();
+			map<int, ofVec3f>::iterator centersItr;
+			for(centersItr = centers.begin(); centersItr != centers.end(); centersItr++)
+			{
+				int i = centersItr->first;
+				ofVec3f& center = centersItr->second;
+				ofVec3f& normal = normals[i];
+				//ofLine(center, center + normal * 100);
+				
+				ofPushMatrix();
+				ofTranslate(center);
+				rotateToNormal(normal);
+				ofNoFill();
+				ofRect(boundingBoxes[i]);
+				ofPopMatrix();
+			}
 		}
 		
 		ramEndCamera();

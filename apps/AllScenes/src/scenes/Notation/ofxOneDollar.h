@@ -50,9 +50,8 @@ struct ofxGesture {
 		}
 		glEnd();
 		
-		glPointSize(4);
 		std::vector<Vec2d>::iterator it_res = resampled_points.begin();
-		glBegin(GL_POINTS);
+		glBegin(GL_LINE_STRIP);
 		while(it_res != resampled_points.end()) {
 			glVertex2f((*it_res).x, (*it_res).y);
 			++it_res;
@@ -241,6 +240,14 @@ struct ofxGesture {
 		rotateToZero();
 		scaleTo();
 		translate();
+	}
+	
+	ofPolyline getNormalized() {
+		ofPolyline polyline;
+		for(int i = 0; i < resampled_points.size(); i++) {
+			polyline.addVertex(resampled_points[i].x, resampled_points[i].y);
+		}
+		return polyline;
 	}
 	
 	void reset() {

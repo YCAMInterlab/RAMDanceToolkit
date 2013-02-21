@@ -1,7 +1,7 @@
 #pragma once
 
 //--------------------------------------------------------------
-void rotateToNormal(ofVec3f normal) {
+inline void rotateToNormal(ofVec3f normal) {
 	normal.normalize();
 	
 	float rotationAmount;
