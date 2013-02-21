@@ -17,14 +17,13 @@ class Expansion : public ramBaseScene
 	bool mShowBox;
 	bool mShowName;
 	bool mShowLine;
-	bool mShowExtendedLine;
 	float mBoxSize;
 	float mBoxSizeRatio;
 	float r, g, b;
 	
 public:
 	
-	Expansion() : mShowName(true), mShowBox(true), mShowAxis(true), mShowLine(true), mShowExtendedLine(true), mBoxSize(10.0), mBoxSizeRatio(5.0), r(250), g(250), b(250) {}
+	Expansion() : mShowName(true), mShowBox(true), mShowAxis(true), mShowLine(true), mBoxSize(10.0), mBoxSizeRatio(5.0), r(250), g(250), b(250) {}
 	
 	void setupControlPanel()
 	{
@@ -40,7 +39,6 @@ public:
 		panel->addToggle("Show Box", &mShowBox, 20, 20);
 		panel->addToggle("Show Axis", &mShowAxis, 20, 20);
 		panel->addToggle("Show Line1", &mShowLine, 20, 20);
-		panel->addToggle("Show Line2", &mShowExtendedLine, 20, 20);
 		
 		panel->addSlider("ExpBox R", 0, 255, &r, 95, gui.kDim);
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
@@ -50,7 +48,6 @@ public:
 		
 		panel->addSlider("Box size", 3.0, 100.0, &mBoxSize, gui.kLength, gui.kDim);
 		panel->addSlider("Box size ratio", 2.0, 100.0, &mBoxSizeRatio, gui.kLength, gui.kDim);
-//		mExpantion.setupControlPanel(panel);
 		
 		panel->addToggle("Toggle box size", true, 20, 20);
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
@@ -121,12 +118,6 @@ public:
 				if (mShowAxis)
 				{
 					ofDrawAxis(boxSize);
-				}
-				
-				if (mShowExtendedLine)
-				{
-					ofSetLineWidth(2);
-					ofLine(src.getNode(i), expandedActor.getNode(i));
 				}
 				
 				node.endTransform();

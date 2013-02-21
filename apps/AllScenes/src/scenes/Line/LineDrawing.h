@@ -329,7 +329,7 @@ public:
 			const float color		= XML.getValue("param:color", 1.0);
 			
 			
-			LineContext line;
+			LineContext &line = lines[i];
 			line.active = true;
 			line.nodeLine.from = ramNodeIdentifer(from_name, from_id);
 			line.nodeLine.control0 = ramNodeIdentifer(cp0_name, cp0_id);
@@ -345,14 +345,8 @@ public:
 			line.line_width = line_width;
 			line.color = color;
 			
-			
-			lines[i] = line;
 			XML.popTag();
 		}
 	}
-	
-private:
-	
-
 };
 
