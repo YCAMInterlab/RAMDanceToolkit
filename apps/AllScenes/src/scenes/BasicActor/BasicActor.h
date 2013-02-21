@@ -9,6 +9,15 @@ class BasicActor : public ramBaseScene
 		ofVec3f translate;
 		float scale;
 		float r,g,b;
+        
+        ControlSegment()
+        {
+			translate = ofVec3f::zero();
+			scale = 1.0;
+			r = ofRandom(0, 255);
+			g = ofRandom(0, 255);
+			b = ofRandom(0, 255);
+        }
 		
 		void reset()
 		{
@@ -115,9 +124,10 @@ public:
 		ramBeginCamera();
 		for (int i=0; i<getNumNodeArray(); i++)
 		{
+            
 			ramNodeArray &array = getNodeArray(i);
-			
-			ControlSegment &segment = mControlSegments[array.getName()];
+            
+            ControlSegment &segment = mControlSegments[array.getName()];
 			
 			glPushMatrix();
 			{

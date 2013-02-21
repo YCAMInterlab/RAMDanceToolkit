@@ -265,6 +265,7 @@ void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 			o.updateWithOscMessage(m);
 		}
 	}
+    else assert(false);
 }
 
 const ramNodeIdentifer& ramActorManager::getLastSelectedNodeIdentifer()
