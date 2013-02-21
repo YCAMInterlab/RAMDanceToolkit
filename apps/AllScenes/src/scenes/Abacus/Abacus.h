@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ramMain.h"
+
 class Abacus : public ramBaseScene
 {
 	
@@ -7,22 +9,19 @@ class Abacus : public ramBaseScene
 	const float margin = 5.0;
 	const float width = 500.0;
 	
-	ofLight light;
-	
 public:
 	
 	Abacus() {}
 	
 	void setup()
 	{
-		light.setPosition(300, 0, 300);
+		
 	}
 	
 	void draw()
 	{
 		ramBeginCamera();
 		
-		light.enable();
 		glEnable(GL_DEPTH_TEST);
 		
 		int numNodeArrays = getNumNodeArray();

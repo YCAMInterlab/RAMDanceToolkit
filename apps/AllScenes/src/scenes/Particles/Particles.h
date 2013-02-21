@@ -76,11 +76,6 @@ public:
 		
 		ramEndCamera();
 	}
-	
-	void onValueChanged(ofxUIEventArgs& e)
-	{
 		
-	}
-	
 	const string getName() { return "Particles"; }
 };
