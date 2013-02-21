@@ -51,6 +51,9 @@ public:
 	
 	const ramNodeArray& update(const ramNodeArray& src)
 	{
+        if (cache.getNumNode() != src.getNumNode())
+            cache = src;
+        
 		const int f = ofGetFrameNum();
 		if (last_update_frame != f)
 		{
