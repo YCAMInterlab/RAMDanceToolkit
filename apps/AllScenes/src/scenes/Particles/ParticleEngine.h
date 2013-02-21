@@ -39,7 +39,7 @@ public:
 	Particle& emit(const ofVec3f& pos, float vel = 1)
 	{
 		particle_index++;
-		if (particle_index > particles.size()) particle_index = 0;
+		if (particle_index >= particles.size()) particle_index = 0;
 		
 		Particle &p = particles[particle_index];
 		p.pos = pos;

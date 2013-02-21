@@ -1,4 +1,17 @@
-local project_name = _ARGS[1]
+-- :usage
+-- $ premake4 --project-name=MyProject xcode3
+-- $ premake4 --project-name=MyProject vs2010
+
+newoption {
+   trigger = "project-name",
+   value = "empry-example",
+   description = "name of new project",
+}
+
+local project_name = _OPTIONS['project-name']
+if not project_name then
+	project_name = 'empry-example'
+end
 
 local main_cpp = [[
 #include "testApp.h"
@@ -68,7 +81,7 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	
+
 }
 
 //--------------------------------------------------------------
@@ -185,10 +198,12 @@ solution (project_name)
 			'../../addons/ofxXMLSettings/**',
 		}
 
-		-- empty sorcecode
-		create_file(project_name .. '/src/main.cpp', main_cpp)
-		create_file(project_name .. '/src/testApp.h', test_app_h)
-		create_file(project_name .. '/src/testApp.cpp', test_app_cpp)
+		-- empty sorcecode if directory not exsits
+		if not os.isdir(project_name) then
+			create_file(project_name .. '/src/main.cpp', main_cpp)
+			create_file(project_name .. '/src/testApp.h', test_app_h)
+			create_file(project_name .. '/src/testApp.cpp', test_app_cpp)
+		end
 
 		files {
 			'../../libs/openFrameworks/*.h',

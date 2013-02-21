@@ -74,9 +74,7 @@ public:
 		
 		void draw(float fade = 0.1)
 		{
-			event.update();
-			
-			if (event.isFired())
+			if (event.update())
 			{
 				if (event.getState())
 				{
