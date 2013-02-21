@@ -198,10 +198,12 @@ solution (project_name)
 			'../../addons/ofxXMLSettings/**',
 		}
 
-		-- empty sorcecode
-		create_file(project_name .. '/src/main.cpp', main_cpp)
-		create_file(project_name .. '/src/testApp.h', test_app_h)
-		create_file(project_name .. '/src/testApp.cpp', test_app_cpp)
+		-- empty sorcecode if directory not exsits
+		if not os.isdir(project_name) then
+			create_file(project_name .. '/src/main.cpp', main_cpp)
+			create_file(project_name .. '/src/testApp.h', test_app_h)
+			create_file(project_name .. '/src/testApp.cpp', test_app_cpp)
+		end
 
 		files {
 			'../../libs/openFrameworks/*.h',
