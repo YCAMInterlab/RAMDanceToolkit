@@ -172,6 +172,8 @@ solution (project_name)
 
 		targetdir( project_name .. '/bin' )
 
+		debugdir project_name .. '/bin'
+
 		-- empty sorcecode if directory not exsits
 		if not os.isdir(project_name) then
 			create_file(project_name .. '/src/main.cpp', main_cpp)

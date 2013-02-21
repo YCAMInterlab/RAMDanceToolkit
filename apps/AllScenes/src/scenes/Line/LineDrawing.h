@@ -258,8 +258,32 @@ public:
 	{
 		string fileName = "Lines.xml";
 		
+
 		if (!ofFile::doesFileExist(fileName))
 		{
+			#define _S(src) #src
+			string default_xml = _S(<line>
+							<from><name>Yoko</name><id>1</id></from>
+							<control1><name>Yoko</name><id>2</id></control1>
+							<control2><name>Yoko</name><id>13</id></control2>
+							<to><name>Yoko</name><id>20</id></to>
+							</line>
+							<line>
+							<from><name>Yoko</name><id>11</id></from>
+							<control1><name>Yoko</name><id>2</id></control1>
+							<control2><name>Yoko</name><id>22</id></control2>
+							<to><name>Yoko</name><id>3</id></to>
+							</line>
+							<line>
+							<from><name>Yoko</name><id>5</id></from>
+							<control1><name>Yoko</name><id>18</id></control1>
+							<control2><name>Yoko</name><id>15</id></control2>
+							<to><name>Yoko</name><id>1</id></to>
+							</line>
+			);
+	
+			#undef _S
+
 			ofBuffer buf(default_xml);
 			ofBufferToFile(fileName, buf);
 		}
@@ -329,27 +353,6 @@ public:
 	
 private:
 	
-#define _S(src) #src
-	string default_xml = _S(<line>
-							<from><name>Yoko</name><id>1</id></from>
-							<control1><name>Yoko</name><id>2</id></control1>
-							<control2><name>Yoko</name><id>13</id></control2>
-							<to><name>Yoko</name><id>20</id></to>
-							</line>
-							<line>
-							<from><name>Yoko</name><id>11</id></from>
-							<control1><name>Yoko</name><id>2</id></control1>
-							<control2><name>Yoko</name><id>22</id></control2>
-							<to><name>Yoko</name><id>3</id></to>
-							</line>
-							<line>
-							<from><name>Yoko</name><id>5</id></from>
-							<control1><name>Yoko</name><id>18</id></control1>
-							<control2><name>Yoko</name><id>15</id></control2>
-							<to><name>Yoko</name><id>1</id></to>
-							</line>
-							);
-	
-#undef _S
+
 };
 
