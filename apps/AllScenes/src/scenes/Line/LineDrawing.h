@@ -260,6 +260,28 @@ public:
 		
 		if (!ofFile::doesFileExist(fileName))
 		{
+#define _S(src) #src
+			string default_xml = _S(<line>\n
+									<from><name>Yoko</name><id>1</id></from>\n
+									<control1><name>Yoko</name><id>2</id></control1>\n
+									<control2><name>Yoko</name><id>13</id></control2>\n
+									<to><name>Yoko</name><id>20</id></to>\n
+									</line>\n
+									<line>\n
+									<from><name>Yoko</name><id>11</id></from>\n
+									<control1><name>Yoko</name><id>2</id></control1>\n
+									<control2><name>Yoko</name><id>22</id></control2>\n
+									<to><name>Yoko</name><id>3</id></to>\n
+									</line>\n
+									<line>\n
+									<from><name>Yoko</name><id>5</id></from>\n
+									<control1><name>Yoko</name><id>18</id></control1>\n
+									<control2><name>Yoko</name><id>15</id></control2>\n
+									<to><name>Yoko</name><id>1</id></to>\n
+									</line>\n
+									);
+			
+#undef _S
 			ofBuffer buf(default_xml);
 			ofBufferToFile(fileName, buf);
 		}
@@ -305,7 +327,7 @@ public:
 			const float color		= XML.getValue("param:color", 1.0);
 			
 			
-			LineContext line;
+			LineContext &line = lines[i];
 			line.active = true;
 			line.nodeLine.from = ramNodeIdentifer(from_name, from_id);
 			line.nodeLine.control0 = ramNodeIdentifer(cp0_name, cp0_id);
@@ -321,35 +343,10 @@ public:
 			line.line_width = line_width;
 			line.color = color;
 			
-			
-			lines[i] = line;
 			XML.popTag();
 		}
 	}
 	
 private:
-	
-#define _S(src) #src
-	string default_xml = _S(<line>
-							<from><name>Yoko</name><id>1</id></from>
-							<control1><name>Yoko</name><id>2</id></control1>
-							<control2><name>Yoko</name><id>13</id></control2>
-							<to><name>Yoko</name><id>20</id></to>
-							</line>
-							<line>
-							<from><name>Yoko</name><id>11</id></from>
-							<control1><name>Yoko</name><id>2</id></control1>
-							<control2><name>Yoko</name><id>22</id></control2>
-							<to><name>Yoko</name><id>3</id></to>
-							</line>
-							<line>
-							<from><name>Yoko</name><id>5</id></from>
-							<control1><name>Yoko</name><id>18</id></control1>
-							<control2><name>Yoko</name><id>15</id></control2>
-							<to><name>Yoko</name><id>1</id></to>
-							</line>
-							);
-	
-#undef _S
 };
 
