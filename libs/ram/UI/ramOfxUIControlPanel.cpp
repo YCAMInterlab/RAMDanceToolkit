@@ -1,5 +1,7 @@
 #include "ramControlPanel.h"
 
+#ifdef RAM_GUI_SYSTEM_OFXUI
+
 ramOfxUIControlPanel *ramOfxUIControlPanel::_instance = NULL;
 
 ofColor uiThemecb(64, 192), uiThemeco(192, 192), uiThemecoh(128, 192), uiThemecf(240, 255), uiThemecfh(128, 255), uiThemecp(96, 192), uiThemecpo(255, 192);
@@ -296,3 +298,5 @@ void ramOfxUIControlPanel::keyPressed(ofKeyEventArgs &e)
 		mTabbedCanvas.toggleVisible();
 	}
 }
+
+#endif
