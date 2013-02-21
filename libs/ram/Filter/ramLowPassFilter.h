@@ -2,8 +2,6 @@
 
 class ramLowPassFilter : public ramBaseFilter
 {
-	
-	
 public:
 	
 	ramLowPassFilter() : amount(0.01) {}
