@@ -11,18 +11,15 @@ void testApp::setup()
 	
 	/// ram setup
 	// ------------------
-	ramInitialize();
+	ramInitialize(10000);
 	
-	oscReceiver.setup(10000);
 
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/// Entities update
-	// ------------------
-	oscReceiver.update();
+	
 }
 
 //--------------------------------------------------------------
@@ -31,7 +28,6 @@ void testApp::draw()
 }
 
 #pragma mark - ram methods
-
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {

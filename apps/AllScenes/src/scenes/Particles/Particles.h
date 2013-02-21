@@ -11,6 +11,9 @@ class Particles : public ramBaseScene
 	
 	float particle_amount;
 	
+	enum { NUM_FILTER_BUFFER = 3 };
+	ramGhost mGhosts[NUM_FILTER_BUFFER];
+	
 public:
 	
 	Particles() : particle_amount(4.0) {}
@@ -43,6 +46,10 @@ public:
 		for (int n=0; n<getNumNodeArray(); n++)
 		{
 			ramNodeArray &nodeArray = getNodeArray(n);
+			
+			nodeArray = mGhosts[n].update(nodeArray);
+			
+			
 			for (int i=0; i<nodeArray.getNumNode(); i++)
 			{
 				const ramNode &node = nodeArray.getNode(i);

@@ -19,12 +19,9 @@ public:
 	// ram methods
 	// ------------------------
 	void drawFloor();
-    void drawActor(ramActor &actor);
+	void drawActor(ramActor &actor);
 
     
-	// ...
-	// ------------------------
-	ramOscReceiver oscReceiver;
     
     //enum { L, R, H, COUNT };
     enum { L, R, H, COUNT };

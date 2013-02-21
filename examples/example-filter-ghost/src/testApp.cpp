@@ -15,8 +15,7 @@ void testApp::setup()
 	
 	/// ram setup
 	// ------------------
-	ramInitialize();
-	oscReceiver.setup(10000);
+	ramInitialize(10000);
 	
 	
 	/// register ramGhost instance on GUI
@@ -27,11 +26,6 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/// Entities update
-	// ------------------
-	oscReceiver.update();
-	
-	
 	// update ghost with passing ramActor
 	ghost.update( getNodeArray(0) );
 }
@@ -45,7 +39,6 @@ void testApp::draw()
 
 
 #pragma mark - ram methods
-
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {

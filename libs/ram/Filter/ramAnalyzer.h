@@ -141,16 +141,20 @@ public:
 		return total_dist;
 	}
 	
-	void draw()
+	virtual void draw()
 	{
 		glPushMatrix();
 		
 		ofTranslate(center_pos);
 		billboard();
 		
-		ofFill();
+		ofColor c = ofGetStyle().color;
+		
+		ofSetColor(c, c.a * 0.3);
+		ofNoFill();
 		ofCircle(0, 0, current_value * 10);
 		
+		ofSetColor(c, c.a * 0.5);
 		ofNoFill();
 		ofCircle(0, 0, threshold * 10);
 		
@@ -235,6 +239,25 @@ public:
 		}
 		
 		return dist;
+	}
+	
+	void draw()
+	{
+		ramMovementAnalyser::draw();
+		
+		glPushMatrix();
+		
+		ofTranslate(center_pos);
+		billboard();
+		
+		ofColor c = ofGetStyle().color;
+		
+		ofSetColor(c, c.a * 0.5);
+		ofFill();
+		ofCircle(0, 0, 10 * getThreshold() * (current_time / hold_time));
+		
+		glPopMatrix();
+
 	}
 	
 protected:

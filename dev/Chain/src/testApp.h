@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ofMain.h"
-
 #include "ramMain.h"
 
 #include "btPicker.h"
@@ -28,11 +27,8 @@ public:
 	
 	// ram methods
 	// ------------------------
-    void drawActor(ramActor &actor);
-    void drawRigid(ramRigidBody &rigid);
+	void drawActor(ramActor &actor);
+	void drawRigid(ramRigidBody &rigid);
     
-	// ...
-	// ------------------------
-	ramOscReceiver oscReceiver;
-    ramSceneManager sceneManager;
+	ramSceneManager sceneManager;
 };

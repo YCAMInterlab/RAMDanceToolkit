@@ -1,11 +1,12 @@
 #pragma once
 
+#include "ofMain.h"
+
 /// app
 #include "ramSharedData.h"
 #include "ramBaseApp.h"
 #include "ramActorManager.h"
 #include "ramCameraManager.h"
-#include "ramOscReciever.h"
 
 
 /// environment
@@ -40,3 +41,7 @@
 #include "ramControlPanel.h"
 #include "ramCameraSettings.h"
 #include "ramNodeFinder.h"
+
+
+#define _USE_MATH_DEFINES
+#include <math.h>
