@@ -54,7 +54,11 @@
 
 #include "KeplerCube.h"
 
+#ifdef TARGET_WIN32
+#include <glut.h>
+#elif TARGET_MAC
 #include <GLUT/GLUT.h>
+#endif
 
 /// Kepler staffs
 

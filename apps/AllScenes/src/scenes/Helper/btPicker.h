@@ -9,6 +9,8 @@
 #ifndef __DanceWithRagdall2__btPicker__
 #define __DanceWithRagdall2__btPicker__
 
+#include <assert.h>
+
 #include "LinearMath/btVector3.h"
 
 class btPicker {

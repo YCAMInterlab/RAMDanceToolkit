@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ofMain.h"
+
 class ParticleEngine
 {
 	
@@ -164,10 +166,12 @@ public:
 		ofPushStyle();
 		ofEnableBlendMode(OF_BLENDMODE_ADD);
 		
-		
 		glDisable(GL_DEPTH_TEST);
 		glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
+
+#ifndef TARGET_WIN32
 		glEnable(GL_POINT_SMOOTH);
+#endif
 
 		float fov = getCurrentFov();
 		float pixel_per_unit = fabs(ofGetViewportHeight() / (2.0f * std::tan(fov * 0.5f)));
