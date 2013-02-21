@@ -172,7 +172,17 @@ solution (project_name)
 
 		targetdir( project_name .. '/bin' )
 
+		-- empty sorcecode if directory not exsits
+		if not os.isdir(project_name) then
+			create_file(project_name .. '/src/main.cpp', main_cpp)
+			create_file(project_name .. '/src/testApp.h', test_app_h)
+			create_file(project_name .. '/src/testApp.cpp', test_app_cpp)
+		end
+
 		includedirs {
+			-- src
+			project_name .. '/src/**',
+
 			-- RAM
 			"../libs/ram/",
 			"../libs/ram/**",
@@ -198,14 +208,10 @@ solution (project_name)
 			'../../addons/ofxXMLSettings/**',
 		}
 
-		-- empty sorcecode if directory not exsits
-		if not os.isdir(project_name) then
-			create_file(project_name .. '/src/main.cpp', main_cpp)
-			create_file(project_name .. '/src/testApp.h', test_app_h)
-			create_file(project_name .. '/src/testApp.cpp', test_app_cpp)
-		end
-
 		files {
+			project_name .. '/src/**.h',
+			project_name .. '/src/**.cpp',
+
 			'../../libs/openFrameworks/*.h',
 	   		'../../libs/openFrameworks/**/*.h',
 
@@ -327,6 +333,10 @@ solution (project_name)
 				"CAIRO_WIN32_STATIC_BUILD",
 				"DISABLE_SOME_FLOATING_POINT",
 			}
+
+			postbuildcommands { 'mkdir $(ProjectDir)bin\\data' }
+			postbuildcommands { 'xcopy /e /i /y "$(ProjectDir)..\\..\\..\\export\\vs2010\\*.dll" "$(ProjectDir)bin"' }
+
 
 		configuration {'vs*' , "Debug"}
 			defines {
