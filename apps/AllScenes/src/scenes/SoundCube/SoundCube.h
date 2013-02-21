@@ -68,7 +68,7 @@ public:
 			
 			player->play();
 			
-			event.setTiming(RAM_TRIGGER_BOTH);
+			event.setTrigger(RAM_TRIGGER_BOTH);
 		}
 		
 		void draw(float fade = 0.1)
@@ -87,12 +87,9 @@ public:
 					if (!trigger_mode) volume_t = 1;
 					else volume_t = 0;
 				}
-				
-//				onCollision();
 			}
 			
 			ofPushStyle();
-			
 			
 			if (event.getState())
 			{
@@ -117,20 +114,12 @@ public:
 			ofPopStyle();
 		}
 		
-		void onCollision()
-		{
-			last_collision_time = ofGetElapsedTimef();
-		}
-		
 	private:
 		
 		int id;
 		ramPrimitive *obj;
 		
 		float alpha;
-		
-		float last_collision_time;
-		
 		float volume, volume_t;
 	};
 	

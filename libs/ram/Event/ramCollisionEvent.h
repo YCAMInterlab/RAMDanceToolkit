@@ -26,8 +26,8 @@ public:
 		primitive->getRigidBody().setCollisionCallback(CollisionCallback(this));
 	}
 	
-	void setTiming(ramTriggerTiming t) { timing = t; }
-	ramTriggerTiming getTiming() const { return timing; }
+	void setTrigger(ramTriggerTiming t) { timing = t; }
+	ramTriggerTiming getTrigger() const { return timing; }
 	
 	bool getState() { return collision_state; }
 	
