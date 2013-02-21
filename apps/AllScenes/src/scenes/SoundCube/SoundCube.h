@@ -303,6 +303,8 @@ public:
 	
 	void onKeyPressed(ofKeyEventArgs &e)
 	{
+		if (isEnabled()) return;
+		
 		if (e.key == 'r')
 			loadXML();
 	}
