@@ -14,50 +14,44 @@ class EmptyScene : public ramBaseScene
 {
 
 public:
+	
+	const string getName() { return "My scene"; }
+	
+	float box_size;
 
 	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
-
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
-		panel->addSlider("Font Color", 0.0, 255.0, &fontColor, gui.kLength, gui.kDim);
-
-		ofAddListener(panel->newGUIEvent, this, &BigBox::onPanelChanged);
+ 
+		gui.addPanel(getName());
+	
+		box_size = 50;
+		gui.addSlider("box_size", &box_size);
 	}
 
 	void setup()
 	{
-
 	}
 
 
 	void update()
 	{
-
 	}
 
 	void draw()
 	{
-
 	}
 
 	void drawActor( ramActor& actor )
 	{
-
+		ramDrawBasicActor(actor);
+		ramBox(actor.getNode(0), box_size);
 	}
 
 	void drawRigid(ramRigidBody &rigid)
 	{
-
 	}
 
-	void onPanelChanged(ofxUIEventArgs& e)
-	{
-		string name = e.widget->getName();
-	}
-
-	const string getName() { return "My scene"; }
 };
 */
 

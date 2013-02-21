@@ -16,16 +16,15 @@ class ramXXXFilter : public ramBaseFilter
 	
 public:
 	
+	const string getName() { return "ramXXXFilter"; }
+ 
 	ramXXXFilter() {}
 	
 	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
-		
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
-		
-		ofAddListener(panel->newGUIEvent, this, &ramXXXFilter::onPanelChanged);
+ 
+		gui.addSection(getName());
 	}
 	
 	void setup()
@@ -38,12 +37,6 @@ public:
 		return src;
 	}
 	
-	void onPanelChanged(ofxUIEventArgs& e)
-	{
-
-	}
-	
-	const string getName() { return "ramXXXFilter"; }
 };
  */
 

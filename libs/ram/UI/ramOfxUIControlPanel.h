@@ -26,34 +26,7 @@ public:
 	static ramOfxUIControlPanel& instance();
 	virtual ~ramOfxUIControlPanel() {}
 	
-	void save(const string& path)
-	{
-		getSceneTabs().saveSettings(path);
-	}
-	
-	void load(const string& path)
-	{
-		getSceneTabs().loadSettings(path);
-	}
-	
 	void setup();
-	void update(ofEventArgs &e);
-	
-	void setupSceneToggles(vector<ramBaseScene*>& scenes);
-	void addPanel(ramControllable* control);
-	void reloadCameraSetting(const int index);
-	
-	inline ofColor getBackgroundColor() { return backgroundColor; }
-	inline int getFloorPattern() { return mFloorPattern; }
-	inline float getFloorSize() { return mFloorSize; }
-	inline float getGridSize() { return mGridSize; }
-	
-	inline ramSceneTabs& getSceneTabs() { return mSceneTabs; }
-	inline ofxUIToggleMatrix* getSceneToggles() { return mSceneToggles; }
-	
-	void guiEvent(ofxUIEventArgs &e);
-	void keyPressed(ofKeyEventArgs &e);
-	
 	
 	// simple GUI
 	
@@ -75,6 +48,7 @@ public:
 	}
 	
 	void addToggle(const string& name, bool *value);
+	
 	void addMultiToggle(const string& name, const vector<string>& content, int *value);
 	void addRadioGroup(const string& name, const vector<string>& content, int *value);
 	void addDropdown(const string& name, const vector<string>& content, int *value);
@@ -84,6 +58,38 @@ public:
 	void addColorSelector(const string& name, ofFloatColor *value);
 	
 	void remove(const string& name);
+	
+	//
+	
+	void save(const string& path)
+	{
+		getSceneTabs().saveSettings(path);
+	}
+	
+	void load(const string& path)
+	{
+		getSceneTabs().loadSettings(path);
+	}
+	
+	// for internal use
+	
+	void addPanel(ramControllable* control);
+	void setupSceneToggles(vector<ramBaseScene*>& scenes);
+	void reloadCameraSetting(const int index);
+	
+	inline ofColor getBackgroundColor() { return backgroundColor; }
+	inline int getFloorPattern() { return mFloorPattern; }
+	inline float getFloorSize() { return mFloorSize; }
+	inline float getGridSize() { return mGridSize; }
+	
+	inline ramSceneTabs& getSceneTabs() { return mSceneTabs; }
+	inline ofxUIToggleMatrix* getSceneToggles() { return mSceneToggles; }
+	
+	//
+	
+	void update(ofEventArgs &e);
+	void guiEvent(ofxUIEventArgs &e);
+	void keyPressed(ofKeyEventArgs &e);
 	
 	//
 	
