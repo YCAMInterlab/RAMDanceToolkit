@@ -1,5 +1,10 @@
 #include "ramControlPanel.h"
 
+#include "ramBaseScene.h"
+#include "ramControllable.h"
+
+#ifdef RAM_GUI_SYSTEM_OFXUI
+
 ramOfxUIControlPanel *ramOfxUIControlPanel::_instance = NULL;
 
 ofColor uiThemecb(64, 192), uiThemeco(192, 192), uiThemecoh(128, 192), uiThemecf(240, 255), uiThemecfh(128, 255), uiThemecp(96, 192), uiThemecpo(255, 192);
@@ -38,9 +43,6 @@ void ramOfxUIControlPanel::setup()
 	
 	/// First panel
 	// -------------------------------------
-	/// panel
-	
-	
 	addPanel("RamDanceToolkit");
 	
 	addToggle("FullScrean", &fullScreen);
@@ -48,12 +50,11 @@ void ramOfxUIControlPanel::setup()
 	addToggle("Use Shadow", &enableShadow);
 
 	addSeparator();
-	
 	addColorSelector("Background", &backgroundColor);
 	
-	addSeparator();
 	
 	/// floor pattern
+	addSeparator();
 	vector<string> floors = ramFloor::getFloorNames();
 	addRadioGroup("Floor Patterns", floors, &mFloorPattern);
 	
@@ -66,9 +67,6 @@ void ramOfxUIControlPanel::setup()
 
 	/// camera Names
 	addRadioGroup("Camera Preset", ramCameraManager::instance().getDefaultCameraNames(), &camera_preset_t);
-	
-	/// add panel to canvas
-	mTabbedCanvas.loadSettings("GUI/guiSettings.xml");
 	
 	/// Events
 	ofAddListener(ofEvents().keyPressed, this, &ramOfxUIControlPanel::keyPressed);
@@ -99,25 +97,31 @@ void ramOfxUIControlPanel::update(ofEventArgs &e)
 
 void ramOfxUIControlPanel::addPanel(ramControllable* control)
 {
-	ofxUICanvas *panel = new ofxUICanvas(0, 0, ramGetGUI().kLength+ramGetGUI().kXInit*2.0, ofGetScreenHeight());
+	ramScenePanel *panel = new ramScenePanel(0, 0, ramGetGUI().kLength+ramGetGUI().kXInit*2.0, ofGetScreenHeight());
 	current_panel = panel;
+	
+	/// used for save/load setting file suffix
+	panel->setSceneName(control->getName());
 	
 	panel->setUIColors(uiThemecb, uiThemeco, uiThemecoh, uiThemecf, uiThemecfh, uiThemecp, uiThemecpo);
 	
 	panel->addWidgetDown(new ofxUILabel(control->getName(), OFX_UI_FONT_LARGE));
 	panel->addSpacer(kLength, 2);
 	
-	control->setupControlPanel(panel);
-	getTabbedCanvas().add(panel);
+	control->setupControlPanel();
+	getSceneTabs().add(panel);
 }
 
 void ramOfxUIControlPanel::addPanel(const string& name)
 {
-	ofxUICanvas *panel = new ofxUICanvas(0, 0, ramGetGUI().kLength+ramGetGUI().kXInit*2.0, ofGetScreenHeight());
+	ramScenePanel *panel = new ramScenePanel(0, 0, ramGetGUI().kLength+ramGetGUI().kXInit*2.0, ofGetScreenHeight());
 	current_panel = panel;
 	
+	/// used for save/load setting file suffix
+	panel->setSceneName(name);
+	
 	addSection(name);
-	getTabbedCanvas().add(panel);
+	getSceneTabs().add(panel);
 }
 
 void ramOfxUIControlPanel::addSection(const string& name)
@@ -266,7 +270,6 @@ void ramOfxUIControlPanel::setupSceneToggles(vector<ramBaseScene*>& scenes_)
 
 void ramOfxUIControlPanel::guiEvent(ofxUIEventArgs &e)
 {
-	string name = e.widget->getName();
 	
 	/// scene togglematrix
 	if (scenes != NULL)
@@ -293,6 +296,8 @@ void ramOfxUIControlPanel::keyPressed(ofKeyEventArgs &e)
 	
 	if (e.key == '\t')
 	{
-		mTabbedCanvas.toggleVisible();
+		mSceneTabs.toggleVisible();
 	}
 }
+
+#endif

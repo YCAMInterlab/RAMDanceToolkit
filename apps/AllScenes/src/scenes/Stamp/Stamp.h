@@ -48,11 +48,11 @@ public:
 	
 	Stamp() : mShowActor(true), mShowBox(true) {}
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
-		mStamp.setupControlPanel(panel);
+		mStamp.setupControlPanel();
 		
 		gui.addToggle("Show Actor", &mShowActor);
 		gui.addColorSelector("Box line color", &color);

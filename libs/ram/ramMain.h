@@ -7,11 +7,11 @@
 #include "ramBaseApp.h"
 #include "ramActorManager.h"
 #include "ramCameraManager.h"
-#include "ramOscReciever.h"
 
 
-/// environment
+/// physics
 #include "ramPrimitive.h"
+#include "ramSoftBodyPrimitive.h"
 
 
 /// scenes
@@ -37,6 +37,10 @@
 #include "ramTimeFilter.h"
 #include "ramLowPassFilter.h"
 
+
+/// events
+#include "ramTimeEvent.h"
+#include "ramCollisionEvent.h"
 
 /// utility
 #include "ramControlPanel.h"

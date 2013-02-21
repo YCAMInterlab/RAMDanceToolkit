@@ -29,7 +29,9 @@ public:
 		ofSoundPlayer *player;
 		bool trigger_mode;
 		
-		Shape() : id(-1), obj(NULL), alpha(0), is_inside(false), player(NULL), trigger_mode(false) {}
+		ramCollisionEvent event;
+		
+		Shape() : id(-1), obj(NULL), alpha(0), player(NULL), trigger_mode(false) {}
 		
 		~Shape()
 		{
@@ -40,6 +42,7 @@ public:
 			
 			if (player)
 			{
+				player->stop();
 				delete player;
 			}
 		}
@@ -49,18 +52,7 @@ public:
 			this->id = id;
 			this->obj = obj;
 			
-			struct Callback
-			{
-				Shape *shape;
-				Callback(Shape *shape) : shape(shape) {}
-				
-				void operator()()
-				{
-					shape->onCollision();
-				}
-			};
-			
-			obj->getRigidBody().setCollisionCallback(Callback(this));
+			event.setPrimitive(obj);
 		}
 		
 		void loadSound(const string &path, bool trigger = false, bool loop = true)
@@ -71,33 +63,43 @@ public:
 			player->loadSound(path);
 			player->setLoop(loop ? OF_LOOP_NORMAL : OF_LOOP_NONE);
 			trigger_mode = trigger;
+			
+			volume = volume_t = 0;
+			
+			player->play();
+			
+			event.setTrigger(RAM_TRIGGER_BOTH);
 		}
 		
-		void draw()
+		void draw(float fade = 0.1)
 		{
-			ofPushStyle();
-			
-			bool b = ofGetElapsedTimef() - last_collision_time < 0.1;
-			
-			if (is_inside != b)
+			if (event.update())
 			{
-				is_inside = b;
-				
-				if (b)
-					triggerUp();
+				if (event.getState())
+				{
+					if (trigger_mode) volume_t = 1;
+					else volume_t = 0;
+				}
 				else
-					triggerDown();
+				{
+					if (!trigger_mode) volume_t = 1;
+					else volume_t = 0;
+				}
 			}
 			
-			if (b)
+			ofPushStyle();
+			
+			if (event.getState())
 			{
 				alpha += (0 - alpha) * 0.1;
 			}
 			else
 			{
 				alpha += (1 - alpha) * 0.1;
-				
 			}
+			
+			volume += (volume_t - volume) * fade;
+			player->setVolume(volume);
 			
 			ofSetColor(color, 127 + 127 * (1 - alpha));
 			
@@ -110,49 +112,13 @@ public:
 			ofPopStyle();
 		}
 		
-		void onCollision()
-		{
-			last_collision_time = ofGetElapsedTimef();
-		}
-		
-		void triggerUp()
-		{
-			if (trigger_mode)
-			{
-				if (player) player->play();
-			}
-			else
-			{
-				if (player) player->stop();
-			}
-			
-			// cout << "trigger up: " << ofGetElapsedTimef() << endl;
-		}
-		
-		void triggerDown()
-		{
-			if (!trigger_mode)
-			{
-				if (player) player->play();
-			}
-			else
-			{
-				if (player) player->stop();
-			}
-
-			
-			// cout << "trigger dow: " << ofGetElapsedTimef() << endl;
-		}
-		
 	private:
 		
 		int id;
 		ramPrimitive *obj;
 		
 		float alpha;
-		
-		bool is_inside;
-		float last_collision_time;
+		float volume, volume_t;
 	};
 	
 	const string getName() { return "SoundCube"; }
@@ -160,23 +126,39 @@ public:
 	bool fill;
 	float line_width;
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	float fade;
+	
+	void setupControlPanel()
 	{
+		fade = 0.5;
+		
 		ramControlPanel &gui = ramGetGUI();
 		
-		panel->addSlider("line width", 1, 10, &line_width, gui.kLength, gui.kDim);
+		gui.addSlider("line width", 1, 10, &line_width);
+		gui.addSlider("fade", 0, 1, &fade);
 	}
 	
 	void setup()
 	{
-		loadXML();
-		
 		ofAddListener(ofEvents().keyPressed, this, &SoundCube::onKeyPressed);
 	}
 	
 	void update()
 	{
 		
+	}
+	
+	void onEnabled()
+	{
+		loadXML();
+	}
+	
+	void onDisabled()
+	{
+		for (int i = 0; i < shapes.size(); i++)
+		{
+			shapes[i]->player->stop();
+		}
 	}
 	
 	void draw()
@@ -190,7 +172,7 @@ public:
 		ofDrawAxis(100);
 		for (int i = 0; i < shapes.size(); i++)
 		{
-			shapes[i]->draw();
+			shapes[i]->draw(fade);
 		}
 		
 		ramEndCamera();
@@ -301,6 +283,8 @@ public:
 		xml.popTag();
 	}
 	
+	
+	
 	void clear()
 	{
 		for (int i = 0; i < shapes.size(); i++)
@@ -310,7 +294,8 @@ public:
 	
 	void onKeyPressed(ofKeyEventArgs &e)
 	{
-		loadXML();
+		if (e.key == 'r')
+			loadXML();
 	}
 	
 protected:

@@ -33,30 +33,49 @@ public:
 	void update();
 	void draw();
 
+	
 	// node
+	
 	inline size_t getNumNodeArray() { return nodearrays.size(); }
+	
+	inline vector<ramNodeArray> getAllNodeArrays()
+	{
+		vector<ramNodeArray> r;
+		for (int i = 0; i < getNumNodeArray(); i++)
+			r.push_back(getNodeArray(i));
+		return r;
+	}
+	
 	inline const vector<string>& getNodeArrayNames() { return nodearrays.keys(); }
 	inline ramNodeArray& getNodeArray(int index) { return nodearrays[index]; }
 	inline ramNodeArray& getNodeArray(const string& name) { return nodearrays[name]; }
 	inline bool hasNodeArray(const string &key) { return nodearrays.hasKey(key); }
 
+	
 	// for mouse picked node
+	
 	const ramNodeIdentifer& getLastSelectedNodeIdentifer();
 	const ramNode* getLastSelectedNode();
 	const ramNodeArray* getLastSelectedNodeArray();
 	
+	
 	// Freeze all actor
+	
 	inline bool isFreezed() { return bFreeze; }
 	inline void setFreezed(bool v) { bFreeze = v; }
 	inline void toggleFreeze() { bFreeze ^= true; }
 
+	
 	// bus
+	
 	bool hasBus(const string& bus_name) { return bus.find(bus_name) != bus.end(); }
 	void setBus(const string& bus_name, const ramNodeArray &arr) { bus[bus_name] = arr; }
 	const ramNodeArray& getBus(const string& bus_name) { return bus[bus_name]; }
 	map<string, ramNodeArray>& getAllBus() {return bus;};
 	
+	
 	// for internal use
+	
 	void updateWithOscMessage(const ofxOscMessage &m);
 	void setupOscReceiver(int port) { oscReceiver.setup(port); }
 	
