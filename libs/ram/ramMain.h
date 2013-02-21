@@ -9,8 +9,9 @@
 #include "ramCameraManager.h"
 
 
-/// environment
+/// physics
 #include "ramPrimitive.h"
+#include "ramSoftBodyPrimitive.h"
 
 
 /// scenes

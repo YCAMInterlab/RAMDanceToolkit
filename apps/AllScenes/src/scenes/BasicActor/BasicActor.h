@@ -26,6 +26,8 @@ class BasicActor : public ramBaseScene
 	bool enableLight;
 	bool use_new_actor;
 	
+	ofxUICanvas* my_panel;
+	
 public:
 	
 	BasicActor() {}
@@ -38,6 +40,12 @@ public:
 		
 		use_new_actor = true;
 		gui.addToggle("use_new_actor", &use_new_actor);
+		
+#ifdef RAM_GUI_SYSTEM_OFXUI
+		
+		my_panel = gui.getCurrentUIContext();
+		
+#endif
 	}
 	
 	void setup()
@@ -54,7 +62,7 @@ public:
 		
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		
-		ofxUICanvas* panel = gui.getCurrentUIContext();
+		ofxUICanvas* panel = my_panel;
 
 		const string &name = nodeArray.getName();
 		

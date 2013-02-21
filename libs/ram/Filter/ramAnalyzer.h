@@ -257,7 +257,6 @@ public:
 		ofCircle(0, 0, 10 * getThreshold() * (current_time / hold_time));
 		
 		glPopMatrix();
-
 	}
 	
 protected:

@@ -40,6 +40,7 @@ void ramBox(const ramNode& o, float size)
 		&& ramPhysics::instance().checkAndUpdateNodeCache(&o))
 	{
 		ramBoxPrimitive *p = new ramBoxPrimitive(o.getGlobalTransformMatrix(), size);
+		p->getRigidBody().setKinematic(true);
 		ramPhysics::instance().registerTempraryPrimitive(p);
 	}
 }
@@ -53,6 +54,7 @@ void ramSphere(const ramNode& o, float radius)
 	if (ramGetEnablePhysicsPrimitive())
 	{
 		ramSpherePrimitive *p = new ramSpherePrimitive(o.getGlobalPosition(), radius);
+		p->getRigidBody().setKinematic(true);
 		ramPhysics::instance().registerTempraryPrimitive(p);
 	}
 }

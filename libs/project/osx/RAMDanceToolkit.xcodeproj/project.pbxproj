@@ -229,6 +229,8 @@
 		6016C92416D6214D006A578D /* ramTimeEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6016C92316D6214D006A578D /* ramTimeEvent.h */; };
 		6016C92616D62DB4006A578D /* ramBaseEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6016C92516D62DB4006A578D /* ramBaseEvent.h */; };
 		6016C92816D62F03006A578D /* ramCollisionEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6016C92716D62F03006A578D /* ramCollisionEvent.h */; };
+		6016C92B16D642FC006A578D /* ramSoftBodyPrimitive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6016C92916D642FB006A578D /* ramSoftBodyPrimitive.cpp */; };
+		6016C92C16D642FC006A578D /* ramSoftBodyPrimitive.h in Headers */ = {isa = PBXBuildFile; fileRef = 6016C92A16D642FC006A578D /* ramSoftBodyPrimitive.h */; };
 		60314DF916CFC6B400138384 /* btBulletCollisionCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 60314D1416CFC6B400138384 /* btBulletCollisionCommon.h */; };
 		60314DFA16CFC6B400138384 /* btBulletDynamicsCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 60314D1516CFC6B400138384 /* btBulletDynamicsCommon.h */; };
 		60314DFB16CFC6B400138384 /* Bullet-C-Api.h in Headers */ = {isa = PBXBuildFile; fileRef = 60314D1616CFC6B400138384 /* Bullet-C-Api.h */; };
@@ -761,6 +763,8 @@
 		6016C92316D6214D006A578D /* ramTimeEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramTimeEvent.h; sourceTree = "<group>"; };
 		6016C92516D62DB4006A578D /* ramBaseEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramBaseEvent.h; sourceTree = "<group>"; };
 		6016C92716D62F03006A578D /* ramCollisionEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramCollisionEvent.h; sourceTree = "<group>"; };
+		6016C92916D642FB006A578D /* ramSoftBodyPrimitive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramSoftBodyPrimitive.cpp; sourceTree = "<group>"; };
+		6016C92A16D642FC006A578D /* ramSoftBodyPrimitive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSoftBodyPrimitive.h; sourceTree = "<group>"; };
 		60314D1116CFC6B400138384 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
 		60314D1416CFC6B400138384 /* btBulletCollisionCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletCollisionCommon.h; sourceTree = "<group>"; };
 		60314D1516CFC6B400138384 /* btBulletDynamicsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletDynamicsCommon.h; sourceTree = "<group>"; };
@@ -2013,6 +2017,8 @@
 		609A651916CAC57C00C0AB22 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				6016C92916D642FB006A578D /* ramSoftBodyPrimitive.cpp */,
+				6016C92A16D642FC006A578D /* ramSoftBodyPrimitive.h */,
 				609A651A16CAC57C00C0AB22 /* ramGraphics.cpp */,
 				609A651B16CAC57C00C0AB22 /* ramGraphics.h */,
 				609A651C16CAC57C00C0AB22 /* ramNodeLine.cpp */,
@@ -2614,6 +2620,7 @@
 				6016C92416D6214D006A578D /* ramTimeEvent.h in Headers */,
 				6016C92616D62DB4006A578D /* ramBaseEvent.h in Headers */,
 				6016C92816D62F03006A578D /* ramCollisionEvent.h in Headers */,
+				6016C92C16D642FC006A578D /* ramSoftBodyPrimitive.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2780,6 +2787,7 @@
 				6007AB8816D5D0810010E44B /* ToolTip.cpp in Sources */,
 				6007AB8916D5D0810010E44B /* Utility.cpp in Sources */,
 				6007ABA316D5D0810010E44B /* ofxGwen.cpp in Sources */,
+				6016C92B16D642FC006A578D /* ramSoftBodyPrimitive.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
