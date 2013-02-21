@@ -7,7 +7,6 @@
 #include "ramBaseApp.h"
 #include "ramActorManager.h"
 #include "ramCameraManager.h"
-#include "ramOscReciever.h"
 
 
 /// environment

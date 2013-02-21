@@ -94,6 +94,7 @@ void testApp::setup()
 	scenes.push_back( chain.getPtr() );
 	scenes.push_back( monster.getPtr() );
 	sceneManager.setup(scenes);
+	
 }
 
 //--------------------------------------------------------------
@@ -129,7 +130,14 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	
+	if(key=='.')
+	{
+		ramLoadSettings("Settings/scene.xml");
+	}
+	if(key=='/')
+	{
+		ramSaveSettings("Settings/scene.xml");
+	}
 }
 
 //--------------------------------------------------------------
