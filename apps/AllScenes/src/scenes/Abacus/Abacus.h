@@ -5,13 +5,13 @@
 class Abacus : public ramBaseScene
 {
 	
-	const int box_size = 20;
-	const float margin = 5.0;
-	const float width = 500.0;
+	const int box_size;
+	const float margin;
+	const float width;
 	
 public:
 	
-	Abacus() {}
+	Abacus() : box_size(20), margin(5.0), width(500.0) {}
 	
 	void setup()
 	{
