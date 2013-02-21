@@ -13,3 +13,6 @@
 [submodule "addons/ofxInteractivePrimitives"]
 	path = addons/ofxInteractivePrimitives
 	url = git@github.com:satoruhiga/ofxInteractivePrimitives.git
+[submodule "addons/ofxGwen"]
+	path = addons/ofxGwen
+	url = git@github.com:satoruhiga/ofxGwen.git
