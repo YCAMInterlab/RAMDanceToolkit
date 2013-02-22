@@ -1,5 +1,13 @@
 #include "testApp.h"
 
+// ram retina用 build
+// 4画面出力
+#define RAM_RETINA
+
+// ram retina用 build
+// 2面出力
+#define RAM_SUB
+
 
 /*!
  Scenes
@@ -56,7 +64,7 @@ ThreePoints threePoints;
 FourPoints fourPoints;
 
 #include "Chain.h"
-Chain chain;
+Chain chain;    
 
 #include "Monster.h"
 Monster monster;
@@ -71,14 +79,19 @@ Laban laban;
 extern bool drawModel;
 
 int active_camera_id = 0;
-
-int main_display_width = 1920;
-int main_display_height = 1200;
-
 int screen_width = 1280;
 int screen_height = 720;
 
+#ifdef RAM_RETINA
+int main_display_width = 1920;
+int main_display_height = 1200;
 int num_screens = 6;
+#else
+int main_display_width = 1440;
+int main_display_height = 900;
+int num_screens = 3;
+#endif
+
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -233,10 +246,14 @@ void testApp::keyPressed(int key)
         new_active_camera_id = 2;
     if (key == '3')
         new_active_camera_id = 3;
-    if (key == '4')
-        new_active_camera_id = 4;
-    if (key == '5')
-        new_active_camera_id = 5;
+    
+    if(num_screens >3)
+    {
+        if (key == '4')
+            new_active_camera_id = 4;
+        if (key == '5')
+            new_active_camera_id = 5;
+    }
     
     if (new_active_camera_id != -1)
     {
