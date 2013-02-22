@@ -9,8 +9,8 @@ void testApp::setup()
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
 	ofBackground(ramColor::WHITE);
-	
-	
+
+
 	/// ram setup
 	// ------------------
 	ramInitialize(10000);
@@ -19,27 +19,27 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	
+
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	
+
 }
 
 
 
 #pragma mark - ram methods
 //--------------------------------------------------------------
-void testApp::drawActor(ramActor &actor)
+void testApp::drawActor(const ramActor &actor)
 {
-	ramNode &n1 = actor.getNode(ramActor::JOINT_HEAD);
-	ramNode &n2 = actor.getNode(ramActor::JOINT_RIGHT_HAND);
-	ramNode &n3 = actor.getNode(ramActor::JOINT_LEFT_HAND);
-	ramNode &n4 = actor.getNode(ramActor::JOINT_RIGHT_TOE);
-	ramNode &n5 = actor.getNode(ramActor::JOINT_LEFT_TOE);
-	
+	ramNode n1 = actor.getNode(ramActor::JOINT_HEAD);
+	ramNode n2 = actor.getNode(ramActor::JOINT_RIGHT_HAND);
+	ramNode n3 = actor.getNode(ramActor::JOINT_LEFT_HAND);
+	ramNode n4 = actor.getNode(ramActor::JOINT_RIGHT_TOE);
+	ramNode n5 = actor.getNode(ramActor::JOINT_LEFT_TOE);
+
 	ofPushStyle();
 	{
 		// draw line betweem two nodes
@@ -47,15 +47,15 @@ void testApp::drawActor(ramActor &actor)
 		ofSetColor( ramColor::RED_LIGHT );
 		ofSetLineWidth( 3 );
 		ofLine( n2, n3 );
-		
-		
+
+
 		// draw triangle using three nodes
 		ofFill();
 		ofSetColor( ramColor::BLUE_LIGHT );
 		ofSetLineWidth( 3 );
 		ofTriangle( n1, n4, n5 );
-		
-		
+
+
 		// ramNode::beginTransform() ~ endTransform()
 		n1.beginTransform();
 		{
@@ -64,7 +64,7 @@ void testApp::drawActor(ramActor &actor)
 			ofSetColor( ramColor::YELLOW_DEEP );
 			ofSetLineWidth( 3 );
 			ofBox( 20 );
-			
+
 			// draw cone at JOINT_HEAD
 			ofNoFill();
 			ofSetColor( ramColor::GRAY );
@@ -72,8 +72,8 @@ void testApp::drawActor(ramActor &actor)
 			ofCone(10, 100);
 		}
 		n1.endTransform();
-		 
-		
+
+
 		// draw plane using several nodes
 		ofNoFill();
 		ofSetColor( ramColor::YELLOW_LIGHT );
@@ -89,9 +89,9 @@ void testApp::drawActor(ramActor &actor)
 }
 
 //--------------------------------------------------------------
-void testApp::drawRigid(ramRigidBody &rigid)
+void testApp::drawRigid(const ramRigidBody &rigid)
 {
-	
+
 }
 
 
@@ -101,54 +101,54 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	
+
 }
 
 //--------------------------------------------------------------
 void testApp::keyReleased(int key)
 {
-    
+
 }
 
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y)
 {
-    
+
 }
 
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button)
 {
-    
+
 }
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button)
 {
-    
+
 }
 
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button)
 {
-    
+
 }
 
 //--------------------------------------------------------------
 void testApp::windowResized(int w, int h)
 {
-    
+
 }
 
 //--------------------------------------------------------------
 void testApp::gotMessage(ofMessage msg)
 {
-    
+
 }
 
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo)
 {
-	
+
 }
 

@@ -141,7 +141,7 @@ public:
 		ramEndCamera();
 	}
 	
-	void drawActor( ramActor& actor )
+	void drawActor( const ramActor& actor )
 	{
 		
 

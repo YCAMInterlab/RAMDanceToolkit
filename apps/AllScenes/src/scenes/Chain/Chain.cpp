@@ -132,7 +132,7 @@ void Chain::draw()
 
 #pragma mark -
 //--------------------------------------------------------------
-void Chain::drawActor(ramActor &actor)
+void Chain::drawActor(const ramActor &actor)
 {
 	ofSetColor(ramColor::RED_DEEP);
     ramDrawBasicActor(actor);

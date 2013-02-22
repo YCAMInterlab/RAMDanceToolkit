@@ -42,13 +42,13 @@ public:
 	{
 	}
 
-	void drawActor( ramActor& actor )
+	void drawActor(const ramActor& actor)
 	{
 		ramDrawBasicActor(actor);
 		ramBox(actor.getNode(0), box_size);
 	}
 
-	void drawRigid(ramRigidBody &rigid)
+	void drawRigid(const ramRigidBody &rigid)
 	{
 	}
 
@@ -68,13 +68,16 @@ public:
 	virtual void setup() {}
 	virtual void update() {}
 	virtual void draw() {}
-	virtual void drawActor(ramActor &actor) {}
-	virtual void drawRigid(ramRigidBody &rigid) {}
+	
+	virtual void drawActor(const ramActor &actor) {}
+	virtual void drawRigid(const ramRigidBody &rigid) {}
+	
 	virtual void drawHUD() {}
 
 	inline void enable(){ bEnabled = true; }
 	inline void disable() { bEnabled = false; }
 	inline void toggle() { setEnabled(!isEnabled()); }
+	
 	inline bool isEnabled() { return bEnabled; }
 	
 	inline void setEnabled(bool b)
@@ -92,11 +95,11 @@ public:
 	virtual void onDisabled() { cout << "[Scene disabled] " << getName() << endl; }
 
 	// nodeArray events
-	virtual void onActorSetup(ramActor &actor) {}
-	virtual void onActorExit(ramActor &actor) {}
+	virtual void onActorSetup(const ramActor &actor) {}
+	virtual void onActorExit(const ramActor &actor) {}
 	
-	virtual void onRigidSetup(ramRigidBody &rigid) {}
-	virtual void onRigidExit(ramRigidBody &rigid) {}
+	virtual void onRigidSetup(const ramRigidBody &rigid) {}
+	virtual void onRigidExit(const ramRigidBody &rigid) {}
 
 	ramBaseScene* getPtr() { return this; }
 

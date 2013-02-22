@@ -36,14 +36,17 @@ void testApp::draw()
 
 #pragma mark - ram methods
 //--------------------------------------------------------------
-void testApp::drawActor(ramActor &actor)
+void testApp::drawActor(const ramActor &actor)
 {
+	ofSetColor(ramColor::GRAY);
 	ramDrawBasicActor(actor);
 
 	// draw line strip with some effects
 	node_line.curve();
 	node_line.resampling();
 	node_line.extend();
+	
+	ofSetColor(255);
 	node_line.draw();
 
 	// or oneliner
@@ -51,7 +54,7 @@ void testApp::drawActor(ramActor &actor)
 }
 
 //--------------------------------------------------------------
-void testApp::drawRigid(ramRigidBody &rigid)
+void testApp::drawRigid(const ramRigidBody &rigid)
 {
 
 }
@@ -63,7 +66,7 @@ void testApp::drawRigid(ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	
+
 }
 
 //--------------------------------------------------------------

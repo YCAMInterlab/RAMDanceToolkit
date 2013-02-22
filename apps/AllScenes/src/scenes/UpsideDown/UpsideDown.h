@@ -96,7 +96,7 @@ public:
 		ramEndCamera();
 	}
 	
-	void drawActor(ramActor& actor)
+	void drawActor(const ramActor& actor)
 	{
 
         ramActor tmpActor = actor;
@@ -111,7 +111,7 @@ public:
         ramDrawBasicActor(filterd);
 	}
 	
-	void drawRigid(ramRigidBody &rigid)
+	void drawRigid(const ramRigidBody &rigid)
 	{
 		
 	}

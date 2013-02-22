@@ -62,7 +62,7 @@ public:
 		
 	}
 	
-	void drawActor( ramActor& actor )
+	void drawActor( const ramActor& actor )
 	{
 		for (int i=0; i<actor.getNumNode(); i++)
 		{
@@ -113,7 +113,7 @@ public:
 		}
 	}
 	
-	void drawRigid(ramRigidBody &rigid)
+	void drawRigid(const ramRigidBody &rigid)
 	{
 		for (int i=0; i<rigid.getNumNode(); i++)
 		{

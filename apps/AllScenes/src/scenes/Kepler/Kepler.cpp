@@ -160,7 +160,7 @@ void Kepler::draw()
 
 #pragma mark -
 //--------------------------------------------------------------
-void Kepler::drawActor(ramActor &actor)
+void Kepler::drawActor(const ramActor &actor)
 {
     pushAll();
     
@@ -169,7 +169,7 @@ void Kepler::drawActor(ramActor &actor)
     
     for (int i=0; i<actor.getNumNode(); i++)
 	{
-		ramNode &node = actor.getNode(i);
+		const ramNode &node = actor.getNode(i);
 		float jointSize = (i==ramActor::JOINT_HEAD) ? 6.0 : 3.0;
 		
 		node.beginTransform();

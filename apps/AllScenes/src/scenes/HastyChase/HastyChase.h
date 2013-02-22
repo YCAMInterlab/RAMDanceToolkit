@@ -52,7 +52,7 @@ public:
 
 	}
 	
-	void drawActor(ramActor& actor)
+	void drawActor(const ramActor& actor)
 	{
 		ramTimeShifter &TS = time_shifters[actor.getName()];
 		TS.setNumBufferFrame(buffer_time);
@@ -90,7 +90,7 @@ public:
 		ofPopStyle();
 	}
 	
-	void drawRigid(ramRigidBody &rigid)
+	void drawRigid(const ramRigidBody &rigid)
 	{
 	}
 	

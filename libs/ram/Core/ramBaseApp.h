@@ -14,8 +14,8 @@ public:
 	ramBaseApp() : draw_floor_auto(true) { ramEnableAllEvents(); };
 	virtual ~ramBaseApp() {};
 	
-	virtual void drawActor(ramActor &actor) {}
-	virtual void drawRigid(ramRigidBody &rigid) {}
+	virtual void drawActor(const ramActor &actor) {}
+	virtual void drawRigid(const ramRigidBody &rigid) {}
 	
 	void drawFloor();
 	void setDrawFloorAuto(bool v = true) { draw_floor_auto = v; }
@@ -45,11 +45,11 @@ public:
 	}
     
 	// nodeArray events
-	virtual void onActorSetup(ramActor &actor) {}
-	virtual void onActorExit(ramActor &actor) {}
+	virtual void onActorSetup(const ramActor &actor) {}
+	virtual void onActorExit(const ramActor &actor) {}
 	
-	virtual void onRigidSetup(ramRigidBody &rigid) {}
-	virtual void onRigidExit(ramRigidBody &rigid) {}
+	virtual void onRigidSetup(const ramRigidBody &rigid) {}
+	virtual void onRigidExit(const ramRigidBody &rigid) {}
 	
 	// physics event
 	virtual void collision(const ramNode& jointA, const ramNode& jointB) {}

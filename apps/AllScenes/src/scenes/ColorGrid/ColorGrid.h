@@ -44,7 +44,7 @@ public:
 	}
 	
 	//--------------------------------------------------------------
-	void drawActor(ramActor &actor)
+	void drawActor(const ramActor &actor)
 	{
 		for(int y = 0; y < img.getHeight(); y++) {
 			for(int x = 0; x < img.getWidth() - 1; x++) {
@@ -55,7 +55,7 @@ public:
 		for (int i=0; i<actor.getNumNode(); i++)
 		{
 			if(i < ramActor::NUM_JOINTS) {
-				ramNode &node = actor.getNode(i);
+				const ramNode &node = actor.getNode(i);
 				ofColor cur;
 				if(useRgb) {
 					ofVec3f base = ofVec3f(1, 0, 0) * node.getOrientationQuat();
@@ -89,7 +89,7 @@ public:
 	}
 	
 	//--------------------------------------------------------------
-	void drawRigid(ramRigidBody &rigid)
+	void drawRigid(const ramRigidBody &rigid)
 	{
 	}
 	
