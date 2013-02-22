@@ -159,34 +159,47 @@ void ofApp::update(){
 		int numTrackedUsers = openNI.getNumTrackedUsers();
 		for(int i = 0; i < numTrackedUsers; i++) {
 			ofxOpenNIUser& user = openNI.getTrackedUser(i);
-			// should use user.isFound(), user.isTracking(), etc. to decide whether to send
-			
-			ofxOscMessage msg;
-			msg.setAddress("/ram/skeleton");
-			int userId = user.getXnID();
-			string actorName = "OpenNI " + ofToString(userId) + " @" + ofToString(deviceId);
-			int numJoints = user.getNumJoints();
-			msg.addStringArg(actorName);
-			msg.addIntArg(ram::NUM_JOINTS);
-			for(int j = 0; j < ram::NUM_JOINTS; j++) {
-				int openniIndex = jointMapping[j];
-				ofxOpenNIJoint& joint = user.getJoint((Joint) openniIndex);
-				ofVec3f position = joint.getWorldPosition();
-				position -= openniCenter;
-				position *= ramScale;		
-				msg.addStringArg(ramJointName[j]);
-				msg.addFloatArg(position.x);
-				msg.addFloatArg(position.y);
-				msg.addFloatArg(position.z);
-				cout << position << endl;
-				// send zero orientation
-				msg.addFloatArg(0);
-				msg.addFloatArg(1);
-				msg.addFloatArg(0);
-				msg.addFloatArg(0);				
+			if(user.isTracking() && user.isSkeleton()) {
+				ofxOscMessage msg;
+				msg.setAddress("/ram/skeleton");
+				int userId = user.getXnID();
+				string actorName = "OpenNI " + ofToString(userId) + " @" + ofToString(deviceId);
+				int numJoints = user.getNumJoints();
+				msg.addStringArg(actorName);
+				msg.addIntArg(ram::NUM_JOINTS);
+				
+				// should use accelerometer to right things
+				// or a custom slider to position people
+				float floorOffset = 0;
+				for(int j = 0; j < openni::NUM_JOINTS; j++) {
+					ofxOpenNIJoint& joint = user.getJoint((Joint) j);
+					ofVec3f position = joint.getWorldPosition();
+					if(j == 0 || position.y < floorOffset) {
+						floorOffset = position.y;
+					}
+				}
+				
+				for(int j = 0; j < ram::NUM_JOINTS; j++) {
+					int openniIndex = jointMapping[j];
+					ofxOpenNIJoint& joint = user.getJoint((Joint) openniIndex);
+					ofVec3f position = joint.getWorldPosition();
+					position -= openniCenter;
+					position.y -= floorOffset;
+					position.x *= -1; // openni is mirrored left/right
+					position *= ramScale;		
+					msg.addStringArg(ramJointName[j]);
+					msg.addFloatArg(position.x);
+					msg.addFloatArg(position.y);
+					msg.addFloatArg(position.z);
+					// send zero orientation
+					msg.addFloatArg(0);
+					msg.addFloatArg(1);
+					msg.addFloatArg(0);
+					msg.addFloatArg(0);				
+				}
+				msg.addFloatArg(ofGetElapsedTimef());
+				bundle.addMessage(msg);
 			}
-			msg.addFloatArg(ofGetElapsedTimef());
-			bundle.addMessage(msg);
 		}
 		osc.sendBundle(bundle);
 	}
