@@ -19,7 +19,7 @@ public:
 	bool update()
 	{
 		if (!enabled) return false;
-		if (ofGetFrameNum() == last_updated_frame) return false;
+		if (ofGetFrameNum() == last_updated_frame) return fired;
 		
 		last_updated_frame = ofGetFrameNum();
 		

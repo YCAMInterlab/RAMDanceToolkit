@@ -46,6 +46,8 @@ class Stamp : public ramBaseScene
 	
 public:
 	
+	const string getName() { return "Stamp"; }
+	
 	Stamp() : mShowActor(true), mShowBox(true) {}
 	
 	void setupControlPanel()
@@ -147,21 +149,5 @@ public:
 		ramEndCamera();
 	}
 	
-	void drawActor( ramActor& actor )
-	{
-		
-	}
-	
-	void drawRigid(ramRigidBody &rigid)
-	{
-		
-	}
-	
-	void drawFloor()
-	{
-	
-	}
-	
-	const string getName() { return "Stamp"; }
 };
 

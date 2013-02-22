@@ -8,15 +8,12 @@ class ramUpsideDown : public ramBaseFilter
 {
 public:
 	
+	const string getName() { return "ramUpsideDown"; };
+	
 	ramUpsideDown() : offset(-3.0f) {}
 	
     inline void setOffset(float y) { offset = y; }
     inline float getOffset() const { return offset; }
-	
-	const ramNodeArray& get(size_t index) const { return hangedNodes; }
-	size_t getSize() const { return 1; }
-	
-	inline const string getName() { return "ramUpsideDown"; };
 	
 protected:
 	

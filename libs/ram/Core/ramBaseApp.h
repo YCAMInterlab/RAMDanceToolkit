@@ -4,7 +4,7 @@
 #include "ofxOsc.h"
 #include "ramActor.h"
 
-#include "ramGlobalShortcut.h"
+#include "ramGlobal.h"
 
 class ramBaseApp : public ofBaseApp, public ramGlobalShortcut
 {

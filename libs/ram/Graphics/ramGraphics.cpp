@@ -131,6 +131,7 @@ void ramDrawBasicActor(const ramActor& actor,
 				   const ofColor& jointColor,
 				   const ofColor& lineColor)
 {
+	if (actor.getNumNode() == 0) return;
 	assert(actor.getNumNode() == ramActor::NUM_JOINTS);
 	
 	glPushMatrix();
@@ -157,6 +158,8 @@ void ramDrawBasicActor(const ramActor& actor,
 void ramDrawBasicRigid(const ramRigidBody& rigid,
 					   const ofColor& jointColor)
 {
+	if (rigid.getNumNode() == 0) return;
+	
 	for(int i=0; i<rigid.getNumNode(); i++)
 	{
 		const ramNode &node = rigid.getNode(i);
@@ -184,6 +187,8 @@ void ramDrawNodes(const ramNodeArray& nodeArray,
 
 void ramDrawActorCube(ramNodeArray& nodeArray, ofColor c)
 {
+	if (nodeArray.getNumNode() == 0) return;
+	
 	ofVec3f maxPos = nodeArray.getNode( ramActor::JOINT_CHEST ).getGlobalPosition();
 	ofVec3f minPos = nodeArray.getNode( ramActor::JOINT_CHEST ).getGlobalPosition();
 	
@@ -218,6 +223,8 @@ void ramDrawActorCube(ramNodeArray& nodeArray, ofColor c)
 
 void ramDrawNodeCorresponds(const ramNodeArray &a, const ramNodeArray &b)
 {
+	if (a.getNumNode() == 0) return;
+	if (b.getNumNode() == 0) return;
 	assert(a.getNumNode() == b.getNumNode());
 	
 	for (int i = 0; i < a.getNumNode(); i++)
@@ -226,35 +233,129 @@ void ramDrawNodeCorresponds(const ramNodeArray &a, const ramNodeArray &b)
 	}
 }
 
+//
 
-// shadow
-
-void ramEnableShadow(bool v)
+void ramBillboard()
 {
-	ramSharedData::instance().shadow.setEnable(v);
+	ofMatrix4x4 m;
+	glGetFloatv(GL_MODELVIEW_MATRIX, m.getPtr());
+	
+	const ofVec3f& s = m.getScale();
+	
+	m(0, 0) = s.x;
+	m(0, 1) = 0;
+	m(0, 2) = 0;
+	
+	m(1, 0) = 0;
+	m(1, 1) = s.y;
+	m(1, 2) = 0;
+	
+	m(2, 0) = 0;
+	m(2, 1) = 0;
+	m(2, 2) = s.z;
+	
+	glLoadMatrixf(m.getPtr());
 }
 
-void ramDisableShadow()
+//
+
+void ramStripe(const vector<ramNode> &nodes)
 {
-	ramSharedData::instance().shadow.setEnable(false);
+	glBegin(ofGetFill() ? GL_POLYGON : GL_LINE_LOOP);
+	for (int i = 0; i < nodes.size(); i++)
+	{
+		ofVec3f v = nodes[i].getGlobalPosition();
+		glVertex3fv(v.getPtr());
+	}
+	glEnd();
 }
 
-bool ramShadowEnabled()
+void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5)
 {
-	return ramSharedData::instance().shadow.getEnable();
+	const ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition() };
+	glBegin(ofGetFill() ? GL_POLYGON : GL_LINE_LOOP);
+	for (int i = 0; i < 5; i++)
+	{
+		glVertex3fv(v[i].getPtr());
+	}
+	glEnd();
 }
 
-void ramBeginShadow()
+
+void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6)
 {
-	ramSharedData::instance().shadow.begin();
+	const ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition() };
+	glBegin(ofGetFill() ? GL_POLYGON : GL_LINE_LOOP);
+	for (int i = 0; i < 6; i++)
+	{
+		glVertex3fv(v[i].getPtr());
+	}
+	glEnd();
 }
 
-void ramEndShadow()
+void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7)
 {
-	ramSharedData::instance().shadow.end();
+	const ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition(), n7.getGlobalPosition() };
+	glBegin(ofGetFill() ? GL_POLYGON : GL_LINE_LOOP);
+	for (int i = 0; i < 7; i++)
+	{
+		glVertex3fv(v[i].getPtr());
+	}
+	glEnd();
 }
 
-void ramSetShadowAlpha(float alpha)
+void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7, const ramNode& n8)
 {
-	ramSharedData::instance().shadow.setShadowAlpha(alpha);
+	const ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition(), n7.getGlobalPosition(), n8.getGlobalPosition() };
+	glBegin(ofGetFill() ? GL_POLYGON : GL_LINE_LOOP);
+	for (int i = 0; i < 8; i++)
+	{
+		glVertex3fv(v[i].getPtr());
+	}
+	glEnd();
 }
+
+void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7, const ramNode& n8, const ramNode& n9)
+{
+	const ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition(), n7.getGlobalPosition(), n8.getGlobalPosition(), n9.getGlobalPosition() };
+	glBegin(ofGetFill() ? GL_POLYGON : GL_LINE_LOOP);
+	for (int i = 0; i < 9; i++)
+	{
+		glVertex3fv(v[i].getPtr());
+	}
+	glEnd();
+}
+
+void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7, const ramNode& n8, const ramNode& n9, const ramNode& n10)
+{
+	const ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition(), n7.getGlobalPosition(), n8.getGlobalPosition(), n9.getGlobalPosition(), n10.getGlobalPosition() };
+	glBegin(ofGetFill() ? GL_POLYGON : GL_LINE_LOOP);
+	for (int i = 0; i < 10; i++)
+	{
+		glVertex3fv(v[i].getPtr());
+	}
+	glEnd();
+}
+
+void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7, const ramNode& n8, const ramNode& n9, const ramNode& n10, const ramNode& n11)
+{
+	const ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition(), n7.getGlobalPosition(), n8.getGlobalPosition(), n9.getGlobalPosition(), n10.getGlobalPosition(), n11.getGlobalPosition() };
+	glBegin(ofGetFill() ? GL_POLYGON : GL_LINE_LOOP);
+	for (int i = 0; i < 11; i++)
+	{
+		glVertex3fv(v[i].getPtr());
+	}
+	glEnd();
+}
+
+void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7, const ramNode& n8, const ramNode& n9, const ramNode& n10, const ramNode& n11, const ramNode& n12)
+{
+	const ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition(), n7.getGlobalPosition(), n8.getGlobalPosition(), n9.getGlobalPosition(), n10.getGlobalPosition(), n11.getGlobalPosition(), n12.getGlobalPosition() };
+	glBegin(ofGetFill() ? GL_POLYGON : GL_LINE_LOOP);
+	for (int i = 0; i < 12; i++)
+	{
+		glVertex3fv(v[i].getPtr());
+	}
+	glEnd();
+}
+

@@ -4,17 +4,16 @@
 
 #include "ramActorManager.h"
 #include "ramCameraManager.h"
-#include "ramSharedData.h"
 
 struct ramGlobalShortcut
 {
 	
-#pragma mark -
 #pragma mark Shortcut to RamActorManager
-	
 	
 	inline static ramActorManager& getActorManager() { return ramActorManager::instance(); }
 	
+	inline const vector<string>& getNodeArrayNames() { return ramActorManager::instance().getNodeArrayNames(); }
+
 	inline static bool hasNodeArray(const string &key) { return ramActorManager::instance().hasNodeArray(key); }
 	
 	inline static ramNodeArray& getNodeArray(string name) { return ramActorManager::instance().getNodeArray(name); }
@@ -25,7 +24,6 @@ struct ramGlobalShortcut
 
 	inline static vector<ramNodeArray> getAllNodeArrays() { return ramActorManager::instance().getAllNodeArrays(); }
 	
-#pragma mark -
 #pragma mark Shortcut to RamCameraManager
 	
 	inline static ramCameraManager& getCameraManager() { return ramCameraManager::instance(); }
@@ -33,3 +31,37 @@ struct ramGlobalShortcut
 	inline static ofCamera& getActiveCamera() { return ramCameraManager::instance().getActiveCamera(); }
 	
 };
+
+
+// core
+
+void ramInitialize(int oscPort = 10000);
+string ramToResourcePath(string path);
+
+// camera
+
+void ramBeginCamera();
+void ramEndCamera();
+
+void ramEnableInteractiveCamera(bool v);
+
+// shadow
+
+void ramEnableShadow(bool v = true);
+void ramDisableShadow();
+bool ramShadowEnabled();
+
+void ramBeginShadow();
+void ramEndShadow();
+void ramSetShadowAlpha(float alpha);
+
+// physics
+
+void ramEnablePhysicsPrimitive(bool v = true);
+void ramDisablePhysicsPrimitive();
+bool ramGetEnablePhysicsPrimitive();
+
+//
+
+void ramNotImplementedError();
+

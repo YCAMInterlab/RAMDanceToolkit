@@ -1,6 +1,5 @@
 #include "ramSceneManager.h"
 
-#include "ramSharedData.h"
 #include "ramControlPanel.h"
 #include "ramPhysics.h"
 

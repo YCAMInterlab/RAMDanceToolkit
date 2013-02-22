@@ -1,7 +1,7 @@
 #pragma once
 #include "ofMain.h"
 
-#include "ramGlobalShortcut.h"
+#include "ramGlobal.h"
 
 #include "ramControllable.h"
 #include "ramControlPanel.h"
@@ -15,7 +15,7 @@ class EmptyScene : public ramBaseScene
 
 public:
 	
-	const string getName() { return "My scene"; }
+	const string getName() { return "EmptyScene"; }
 	
 	float box_size;
 

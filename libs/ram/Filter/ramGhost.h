@@ -9,6 +9,8 @@ class ramGhost : public ramBaseFilter
 {
 public:
 	
+	const string getName() { return "ramGhost"; };
+	
 	ramGhost() : historySize(10), distance(150), speed(27)
 	{
 		clear();
@@ -52,14 +54,9 @@ public:
 	inline void setSpeed(const float s) { speed = s; }
 	inline void setHistorySize(const unsigned int m) { historySize = m; }
 	
-	inline float getdistance() { return distance; }
-	inline float getspeed() { return speed; }
+	inline float getDistance() { return distance; }
+	inline float getSpeed() { return speed; }
 	inline unsigned int getHistorySize() { return historySize; }
-
-	const ramNodeArray& get(size_t index = 0) const { return ghost; }
-	size_t getSize() const { return 1; }
-	
-	inline const string getName() { return "ramGhost"; };
 	
 protected:
 	ramNodeArray ghost;

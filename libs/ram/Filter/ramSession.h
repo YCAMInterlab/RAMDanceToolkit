@@ -2,13 +2,14 @@
 
 #include "ramActorManager.h"
 #include "ramActor.h"
-//#include "ofxXmlSettings.h"
-
+#include "ramGlobal.h"
 
 class ramSession : public ramBaseFilter
 {
 	
 public:
+	
+	const string getName() { return "ramSession"; }
 	
 	ramSession() : mLoop(true), mRecording(false), mPlaying(false) {}
 	~ramSession() {}
@@ -60,42 +61,6 @@ public:
 		clear();
 	}
 	
-	const ramNodeArray& update(const ramNodeArray &src)
-	{
-		if (isRecording())
-		{
-			appendFrame(src);
-		}
-		
-		if (isPlaying())
-		{
-			mPlayhead = (ofGetElapsedTimef() - mPlayStartTime) * mRate;
-			mFrameIndex = getFrameIndex();
-			
-			if(mFrameIndex >= mNumFrames)
-			{
-				mFrameIndex = 0;
-				
-				if (isLoop())
-				{
-					mPlayStartTime = ofGetElapsedTimef();
-				}
-				else
-				{
-					mPlaying = false;
-				}
-			}
-			
-			return mNodeArray.at(mFrameIndex);
-		}
-		else
-		{
-			return src;
-		}
-		
-		return src;
-	}
-	
 	void onPanelChanged(ofxUIEventArgs& e)
 	{
 		string name = e.widget->getName();
@@ -129,13 +94,7 @@ public:
 		}
 	}
 	
-	const string getName() { return "ramSession"; }
-	
-	
-	
 #pragma mark - recorder handling
-	
-	
 	
 	void startRecording()
 	{
@@ -190,15 +149,8 @@ public:
 		mNodeArray.push_back(copy);
 	}
 	
-	void load(const string path)
-	{
-		
-	}
-	
-	void save(const string path)
-	{
-		
-	}
+	void load(const string path) { ramNotImplementedError(); }
+	void save(const string path) { ramNotImplementedError(); }
 
 	inline void setLoop(bool l) {mLoop = l;};
 	inline void setRate(const float r) {mRate = r;};
@@ -236,5 +188,41 @@ protected:
 	
 	int mFrameIndex;
 	int mNumFrames;
+	
+	const ramNodeArray& filter(const ramNodeArray &src)
+	{
+		if (isRecording())
+		{
+			appendFrame(src);
+		}
+		
+		if (isPlaying())
+		{
+			mPlayhead = (ofGetElapsedTimef() - mPlayStartTime) * mRate;
+			mFrameIndex = getFrameIndex();
+			
+			if(mFrameIndex >= mNumFrames)
+			{
+				mFrameIndex = 0;
+				
+				if (isLoop())
+				{
+					mPlayStartTime = ofGetElapsedTimef();
+				}
+				else
+				{
+					mPlaying = false;
+				}
+			}
+			
+			return mNodeArray.at(mFrameIndex);
+		}
+		else
+		{
+			return src;
+		}
+		
+		return src;
+	}
 };
 

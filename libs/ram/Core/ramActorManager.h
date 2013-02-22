@@ -62,9 +62,9 @@ public:
 	
 	// Freeze all actor
 	
-	inline bool isFreezed() { return bFreeze; }
-	inline void setFreezed(bool v) { bFreeze = v; }
-	inline void toggleFreeze() { bFreeze ^= true; }
+	inline bool isFreezed() { return freeze; }
+	inline void setFreezed(bool v) { freeze = v; }
+	inline void toggleFreeze() { freeze ^= true; }
 
 	
 	// bus
@@ -79,8 +79,6 @@ public:
 	
 	void updateWithOscMessage(const ofxOscMessage &m);
 	void setupOscReceiver(int port) { oscReceiver.setup(port); }
-	
-	void onSelectStateChanged(ramNodeIdentifer &e);
 	
 private:
 
@@ -98,12 +96,15 @@ private:
 	
 	ofxInteractivePrimitives::RootNode rootNode;
 	
-	bool bFreeze;
+	bool freeze;
 	
 	class NodeSelector;
 	friend class NodeSelector;
+	
 	NodeSelector *nodeSelector;
 	
 	map<string, ramNodeArray> bus;
+	
+	void onSelectStateChanged(ramNodeIdentifer &e);
 };
 

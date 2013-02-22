@@ -21,8 +21,8 @@ public:
 		ramNode from_n;
 		ramNode to_n;
 		
-		if (!from.get(from_n)) return -1;
-		if (!to.get(to_n)) return -1;
+		if (!from.findOne(from_n)) return -1;
+		if (!to.findOne(to_n)) return -1;
 		
 		ofVec3f p0 = from_n.getGlobalTransformMatrix().preMult(ofVec3f(0, 0, 0));
 		ofVec3f p1 = to_n.getGlobalTransformMatrix().preMult(ofVec3f(0, 0, 0));
@@ -37,8 +37,8 @@ public:
 		ramNode from_n;
 		ramNode to_n;
 		
-		if (!from.get(from_n)) return *this;
-		if (!to.get(to_n)) return *this;
+		if (!from.findOne(from_n)) return *this;
+		if (!to.findOne(to_n)) return *this;
 		
 		ofVec3f p0 = from_n.getGlobalTransformMatrix().preMult(ofVec3f(0, 0, 0));
 		ofVec3f p1 = to_n.getGlobalTransformMatrix().preMult(ofVec3f(0, 0, 0));
@@ -61,10 +61,10 @@ public:
 		ramNode control1_n;
 		ramNode to_n;
 		
-		if (!from.get(from_n)) return *this;
-		if (!to.get(to_n)) return *this;
-		if (!control0.get(control0_n)) return *this;
-		if (!control1.get(control1_n)) return *this;
+		if (!from.findOne(from_n)) return *this;
+		if (!to.findOne(to_n)) return *this;
+		if (!control0.findOne(control0_n)) return *this;
+		if (!control1.findOne(control1_n)) return *this;
 		
 		ofVec3f p0 = from_n.getGlobalTransformMatrix().preMult(ofVec3f(0, 0, 0));
 		ofVec3f p1 = to_n.getGlobalTransformMatrix().preMult(ofVec3f(0, 0, 0));
