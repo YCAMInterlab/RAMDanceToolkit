@@ -107,7 +107,8 @@ public:
         
         ramActor filterd = mUpsideDown.update(tmpActor);
         
-        ramDrawBasicActor(filterd, ramColor::RED_DEEP, ramColor::RED_LIGHT);
+		ofSetColor(ramColor::RED_DEEP);
+        ramDrawBasicActor(filterd);
 	}
 	
 	void drawRigid(ramRigidBody &rigid)

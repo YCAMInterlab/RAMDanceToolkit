@@ -134,7 +134,8 @@ void Chain::draw()
 //--------------------------------------------------------------
 void Chain::drawActor(ramActor &actor)
 {
-    ramDrawBasicActor(actor, ramColor::RED_DEEP, ramColor::RED_NORMAL);
+	ofSetColor(ramColor::RED_DEEP);
+    ramDrawBasicActor(actor);
     
     for (int i=0; i<mChains.size(); i++) {
         if (mChains.at(i))

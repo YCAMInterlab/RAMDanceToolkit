@@ -60,7 +60,8 @@ public:
 				i==0 ? ramColor::RED_LIGHT :
 				i==1 ? ramColor::YELLOW_DEEP : ramColor::BLUE_LIGHT;
 			
-			ramDrawNodes( ghost, gcolor );
+			ofSetColor(gcolor);
+			ramDrawNodes(ghost);
 			
 			if (draw_line)
 			{

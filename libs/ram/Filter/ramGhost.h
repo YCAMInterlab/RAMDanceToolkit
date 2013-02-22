@@ -59,6 +59,7 @@ public:
 	inline unsigned int getHistorySize() { return historySize; }
 	
 protected:
+	
 	ramNodeArray ghost;
 	deque<ramNodeArray> record;
 	

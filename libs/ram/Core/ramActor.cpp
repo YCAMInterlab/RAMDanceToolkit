@@ -117,16 +117,16 @@ ramNode& ramNode::operator-=(const ramNode &node)
 
 ramNode& ramNode::lerp(const ramNode &node, float t)
 {
-	const ofMatrix4x4& a = this->getTransformMatrix();
-	const ofMatrix4x4& b = node.getTransformMatrix();
+	const ofMatrix4x4& a = this->getGlobalTransformMatrix();
+	const ofMatrix4x4& b = node.getGlobalTransformMatrix();
 	
 	ofQuaternion trot;
 	trot.slerp(t, a.getRotate(), b.getRotate());
-	ofMatrix4x4 tmat(trot);
-	ofVec3f apos = a.getTranslation(), bpos = b.getTranslation();
-	tmat.translate(apos.interpolate(bpos, t));
+	setGlobalOrientation(trot);
 	
-	setTransformMatrix(tmat);
+	ofVec3f apos = a.getTranslation(), bpos = b.getTranslation();
+	setGlobalPosition(apos.interpolate(bpos, t));
+	
 	return *this;
 }
 
@@ -134,6 +134,68 @@ ramNode ramNode::getLerpd(const ramNode &node, float t) const
 {
 	ramNode result = *this;
 	result.lerp(node, t);
+	return result;
+}
+
+ramNode& ramNode::normalize(const ramNode &node, float length)
+{
+	ramNode &result = *this;
+	
+	const ofVec3f &p0 = result.getGlobalPosition();
+	const ofVec3f &p1 = node.getGlobalPosition();
+	
+	ofVec3f d = (p1 - p0);
+	d.normalize();
+	d *= length;
+
+	result.setGlobalPosition(p0 + d);
+	
+	return result;
+}
+
+ramNode ramNode::getNormalized(const ramNode &node, float length) const
+{
+	ramNode result = *this;
+	
+	const ofVec3f &p0 = result.getGlobalPosition();
+	const ofVec3f &p1 = node.getGlobalPosition();
+	
+	ofVec3f d = (p1 - p0);
+	d.normalize();
+	d *= length;
+	
+	result.setGlobalPosition(p0 + d);
+	
+	return result;
+}
+
+ramNode& ramNode::limit(const ramNode &node, float length)
+{
+	ramNode &result = *this;
+	
+	const ofVec3f &p0 = result.getGlobalPosition();
+	const ofVec3f &p1 = node.getGlobalPosition();
+	
+	ofVec3f d = (p1 - p0);
+	d.limit(length);
+	
+	result.setGlobalPosition(p0 + d);
+	
+	return result;
+}
+
+ramNode ramNode::getLimited(const ramNode &node, float length) const
+{
+	ramNode result = *this;
+	
+	const ofVec3f &p0 = result.getGlobalPosition();
+	const ofVec3f &p1 = node.getGlobalPosition();
+	
+	ofVec3f d = (p1 - p0);
+	d.limit(length);
+	
+	result.setGlobalPosition(p0 + d);
+	
 	return result;
 }
 
@@ -160,6 +222,29 @@ void ramNodeArray::rebuildHierarchy(const ramNodeArray& ref)
 		if (idx < 0) continue;
 		
 		dst.setParent(nodes[idx]);
+	}
+}
+
+void ramNodeArray::clearHierarchy()
+{
+	for (int i = 0; i < nodes.size(); i++)
+	{
+		ramNode &node = nodes[i];
+		ofMatrix4x4 m = node.getGlobalTransformMatrix();
+		node.clearParent();
+		node.setTransformMatrix(m);
+	}
+}
+
+void ramNodeArray::rebuildLocalPosition()
+{
+	for (int i = 0; i < nodes.size(); i++)
+	{
+		ramNode &node = nodes[i];
+
+		ofMatrix4x4 m = node.getTransformMatrix();
+		node.setGlobalOrientation(m.getRotate());
+		node.setGlobalPosition(m.getTranslation());
 	}
 }
 
@@ -254,26 +339,94 @@ ramNodeArray& ramNodeArray::operator-=(const ramNodeArray &arr)
 ramNodeArray& ramNodeArray::lerp(const ramNodeArray &arr, float t)
 {
 	ramNodeArray &result = *this;
+	result.clearHierarchy();
 	
 	for (int i = 0; i < result.getNumNode(); i++)
 	{
 		result.getNode(i).lerp(arr.getNode(i), t);
 	}
 
+	result.rebuildHierarchy(arr);
+	result.rebuildLocalPosition();
 	return result;
 }
 
 ramNodeArray ramNodeArray::getLerpd(const ramNodeArray &arr, float t) const
 {
 	ramNodeArray result = *this;
+	result.clearHierarchy();
 	
 	for (int i = 0; i < result.getNumNode(); i++)
 	{
 		result.getNode(i).lerp(arr.getNode(i), t);
 	}
 	
+	result.rebuildHierarchy(arr);
+	result.rebuildLocalPosition();
 	return result;
 }
+
+ramNodeArray& ramNodeArray::normalize(const ramNodeArray &arr, float length)
+{
+	ramNodeArray &result = *this;
+	result.clearHierarchy();
+	
+	for (int i = 0; i < result.getNumNode(); i++)
+	{
+		result.getNode(i).normalize(arr.getNode(i), length);
+	}
+	
+	result.rebuildHierarchy(arr);
+	result.rebuildLocalPosition();
+	return result;
+}
+
+ramNodeArray ramNodeArray::getNormalized(const ramNodeArray &arr, float length) const
+{
+	ramNodeArray result = *this;
+	result.clearHierarchy();
+	
+	for (int i = 0; i < result.getNumNode(); i++)
+	{
+		result.getNode(i).normalize(arr.getNode(i), length);
+	}
+	
+	result.rebuildHierarchy(arr);
+	result.rebuildLocalPosition();
+	return result;
+}
+
+ramNodeArray& ramNodeArray::limit(const ramNodeArray &arr, float length)
+{
+	ramNodeArray &result = *this;
+	result.clearHierarchy();
+	
+	for (int i = 0; i < result.getNumNode(); i++)
+	{
+		result.getNode(i).limit(arr.getNode(i), length);
+	}
+	
+	result.rebuildHierarchy(arr);
+	result.rebuildLocalPosition();
+	return result;
+}
+
+ramNodeArray ramNodeArray::getLimited(const ramNodeArray &arr, float length) const
+{
+	ramNodeArray result = *this;
+	result.clearHierarchy();
+	
+	for (int i = 0; i < result.getNumNode(); i++)
+	{
+		result.getNode(i).limit(arr.getNode(i), length);
+	}
+	
+	result.rebuildHierarchy(arr);
+	result.rebuildLocalPosition();
+	return result;
+}
+
+//
 
 void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
 {

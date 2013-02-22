@@ -90,18 +90,11 @@ void ramDrawBasicFloor(const int floorPattern,
 					   const ofColor& c1,
 					   const ofColor& c2);
 
-void ramDrawActorCube(ramNodeArray& nodeArray, ofColor c = ramColor::BLACK);
+void ramDrawActorCube(ramNodeArray& nodeArray);
 
-void ramDrawBasicActor(const ramActor& actor,
-					   const ofColor& jointColor = ramColor::BLUE_LIGHT,
-					   const ofColor& lineColor = ramColor::GRAY);
-
-void ramDrawBasicRigid(const ramRigidBody& rigid,
-					   const ofColor& jointColor = ramColor::BLUE_LIGHT);
-
-void ramDrawNodes(const ramNodeArray& nodeArray,
-				  const ofColor& jointColor = ramColor::BLUE_LIGHT,
-				  const ofColor& lineColor = ramColor::GRAY);
+void ramDrawBasicActor(const ramActor& actor);
+void ramDrawBasicRigid(const ramRigidBody& rigid);
+void ramDrawNodes(const ramNodeArray& nodeArray);
 
 //
 

@@ -30,7 +30,7 @@ ramOfxUIControlPanel::ramOfxUIControlPanel() : kDim(16), kXInit(OFX_UI_GLOBAL_WI
 	
 	camera_preset = camera_preset_t = 0;
 	
-	backgroundColor.set(0, 0, 0, 1);
+	backgroundColor.set(0.15, 0.15, 0.15, 1);
 	
 	scenes = NULL;
 }

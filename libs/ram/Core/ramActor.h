@@ -97,6 +97,12 @@ public:
 	
 	ramNode& lerp(const ramNode &node, float t);
 	ramNode getLerpd(const ramNode &node, float t) const;
+
+	ramNode& normalize(const ramNode &node, float length);
+	ramNode getNormalized(const ramNode &node, float length) const;
+	
+	ramNode& limit(const ramNode &node, float t);
+	ramNode getLimited(const ramNode &node, float length) const;
 	
 private:
 
@@ -152,6 +158,14 @@ public:
 	ramNodeArray& lerp(const ramNodeArray &arr, float t);
 	ramNodeArray getLerpd(const ramNodeArray &arr, float t) const;
 	
+	ramNodeArray& normalize(const ramNodeArray &arr, float length);
+	ramNodeArray getNormalized(const ramNodeArray &arr, float length) const;
+	
+	ramNodeArray& limit(const ramNodeArray &arr, float length);
+	ramNodeArray getLimited(const ramNodeArray &arr, float length) const;
+
+	//
+	
 	inline void setType(ramNodeArrayType t) { type = t; }
 	inline bool isActor() const { return type == RAM_NODEARRAY_TYPE_ACTOR; }
 	inline bool isRigid() const { return type == RAM_NODEARRAY_TYPE_RIGIDBODY; }
@@ -169,6 +183,8 @@ protected:
 	float last_update_client_time;
 	
 	void rebuildHierarchy(const ramNodeArray& ref);
+	void clearHierarchy();
+	void rebuildLocalPosition();
 };
 
 #pragma mark - ramRigidBody

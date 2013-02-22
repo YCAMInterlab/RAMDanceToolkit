@@ -22,7 +22,7 @@ public:
 	
 	void setCapacity(size_t capacity)
 	{
-		assert(capacity > 0);
+		assert(capacity >= 0);
 		this->capacity = capacity;
 		while (buffer.size() > capacity)
 			buffer.pop_back();

@@ -127,12 +127,14 @@ void ramDrawBasicFloor(const int floorPattern,
 	glPopAttrib();
 }
 
-void ramDrawBasicActor(const ramActor& actor,
-				   const ofColor& jointColor,
-				   const ofColor& lineColor)
+void ramDrawBasicActor(const ramActor& actor)
 {
 	if (actor.getNumNode() == 0) return;
 	assert(actor.getNumNode() == ramActor::NUM_JOINTS);
+	
+	ofPushStyle();
+	const ofColor& color0 = ofGetStyle().color;
+	const ofColor& color1 = ofColor::fromHsb(((int)color0.getHue() + 30) % 255, color0.getSaturation() * 0.5, color0.getBrightness(), color0.a);
 	
 	glPushMatrix();
 	for (int i=0; i<actor.getNumNode(); i++)
@@ -142,50 +144,42 @@ void ramDrawBasicActor(const ramActor& actor,
 		
 		ofPushStyle();
 		ofSetLineWidth(2);
-		ofSetColor( jointColor );
-		ramBox( node, jointSize );
 		
-		if (node.hasParent())
-		{
-			ofSetColor( lineColor );
-			ofLine(node, *node.getParent());
-		}
+		ofSetColor(color0);
+		ramBox(node, jointSize);
+		
+		ofSetColor(color1);
+		ramLine(node);
+		
 		ofPopStyle();
 	}
 	glPopMatrix();
+	
+	ofPopStyle();
 }
 
-void ramDrawBasicRigid(const ramRigidBody& rigid,
-					   const ofColor& jointColor)
+void ramDrawBasicRigid(const ramRigidBody& rigid)
 {
 	if (rigid.getNumNode() == 0) return;
 	
 	for(int i=0; i<rigid.getNumNode(); i++)
 	{
 		const ramNode &node = rigid.getNode(i);
-		ofPushStyle();
-		ofSetColor(jointColor);
 		ramBox(node, 5);
-		ofPopStyle();
 	}
 }
 
-void ramDrawNodes(const ramNodeArray& nodeArray,
-				  const ofColor& jointColor,
-				  const ofColor& lineColor)
+void ramDrawNodes(const ramNodeArray& nodeArray)
 {
     if (nodeArray.getNumNode() == 0) return;
     
 	if (nodeArray.isActor())
-		ramDrawBasicActor((ramActor&)nodeArray, jointColor, lineColor);
+		ramDrawBasicActor((ramActor&)nodeArray);
 	else
-		ramDrawBasicRigid((ramRigidBody&)nodeArray, jointColor);
+		ramDrawBasicRigid((ramRigidBody&)nodeArray);
 }
 
-
-
-
-void ramDrawActorCube(ramNodeArray& nodeArray, ofColor c)
+void ramDrawActorCube(ramNodeArray& nodeArray)
 {
 	if (nodeArray.getNumNode() == 0) return;
 	

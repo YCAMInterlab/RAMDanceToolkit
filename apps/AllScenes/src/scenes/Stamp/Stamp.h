@@ -141,7 +141,8 @@ public:
 				ofPushStyle();
 				ofSetColor(color);
 				ofSetLineWidth(line_width);
-				ramDrawActorCube(nodeArray, ramColor::RED_LIGHT);
+				ofSetColor(ramColor::RED_LIGHT);
+				ramDrawActorCube(nodeArray);
 				ofPopStyle();
 			}
 		}

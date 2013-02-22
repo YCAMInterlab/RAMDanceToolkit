@@ -124,10 +124,12 @@ public:
 				glTranslatef(segment.translate.x, segment.translate.y, segment.translate.z);
 				glScalef(segment.scale, segment.scale, segment.scale);
 				
+				ofSetColor(segment.r, segment.g, segment.b);
+				
 				if (use_new_actor)
-					drawNodes(array, ofColor(segment.r, segment.g, segment.b));
+					drawNodes(array);
 				else
-					ramDrawNodes(array, ofColor(segment.r, segment.g, segment.b));
+					ramDrawNodes(array);
 			}
 			glPopMatrix();
 		}
@@ -136,7 +138,7 @@ public:
 		if (enableLight) light.disable();
 	}
 	
-	void drawNodes(const ramNodeArray &actor, ofColor color)
+	void drawNodes(const ramNodeArray &actor)
 	{
 		ofPushStyle();
 		
@@ -146,8 +148,8 @@ public:
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glEnable(GL_CULL_FACE);
 		
-		ofColor front_color(color, 200);
-		ofColor back_color(color, 150);
+		ofColor front_color(ofGetStyle().color, 200);
+		ofColor back_color(ofGetStyle().color, 150);
 		
 		for (int i = 0; i < actor.getNumNode(); i++)
 		{

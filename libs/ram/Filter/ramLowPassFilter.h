@@ -4,7 +4,7 @@ class ramLowPassFilter : public ramBaseFilter
 {
 public:
 	
-	ramLowPassFilter() : amount(0.01) {}
+	ramLowPassFilter() : amount(0.1) {}
 	
 	
 	const ramNodeArray& get(size_t index = 0) const { return copy; }
