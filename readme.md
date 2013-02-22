@@ -8,6 +8,26 @@ The toolkit itself is built using a project file in `libs/`. This toolkit is use
 
 `track/` contains an absolute positioning app and OpenNI tracking code.
 
+## OSC
+
+The OSC specification for RAM is as follows:
+
+* Applications generally receive on port `10000`.
+* Skeleton data is sent as a series of nodes in a single OSC message.
+
+The structure of each OSC message is:
+
+1. `s`: the actor name.
+2. `i`: the number of nodes in the message.
+3. Array of nodes.
+4. `f`: the message timestamp.
+
+The arguments for each node are:
+
+1. `s`: name of the node.
+2. `fff`: (x, y, z) position of the node.
+3. `ffff`: angle-axis orientation of the node, stored as (angle, x, y, z).
+
 ## Tracking
 
 Apps related to tracking can be found in the `track/` folder.
