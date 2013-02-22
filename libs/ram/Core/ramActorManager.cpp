@@ -293,3 +293,8 @@ void ramActorManager::onSelectStateChanged(ramNodeIdentifer &e)
 {
 	ofNotifyEvent(selectStateChanged, e);
 }
+
+void ramActorManager::clearSelected()
+{
+	nodeSelector->identifer.clear();
+}

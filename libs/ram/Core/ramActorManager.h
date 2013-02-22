@@ -57,6 +57,7 @@ public:
 	const ramNodeIdentifer& getLastSelectedNodeIdentifer();
 	const ramNode* getLastSelectedNode();
 	const ramNodeArray* getLastSelectedNodeArray();
+	void clearSelected();
 	
 	
 	// Freeze all actor

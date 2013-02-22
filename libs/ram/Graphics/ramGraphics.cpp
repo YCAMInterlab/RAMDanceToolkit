@@ -153,6 +153,7 @@ void ramDrawBasicActor(const ramActor& actor,
 	}
 	glPopMatrix();
 }
+
 void ramDrawBasicRigid(const ramRigidBody& rigid,
 					   const ofColor& jointColor)
 {
@@ -165,6 +166,7 @@ void ramDrawBasicRigid(const ramRigidBody& rigid,
 		ofPopStyle();
 	}
 }
+
 void ramDrawNodes(const ramNodeArray& nodeArray,
 				  const ofColor& jointColor,
 				  const ofColor& lineColor)

@@ -83,8 +83,8 @@ public:
 	
 	inline ramAccelerometer& getAccerelometer() { return accerelometer; }
 	
-	void drawId(int floatPos=20);
-	void drawName(int floatPos=20);
+	void drawNodeId(int floatPos=20);
+	void drawNodeName(int floatPos=20);
 	
 	bool operator==(const ramNode &node) const;
 	bool operator!=(const ramNode &node) const;
