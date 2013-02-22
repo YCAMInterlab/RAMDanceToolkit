@@ -74,6 +74,14 @@ public:
 
 //
 
+inline void ramLine(const ramNode& node)
+{
+	if (!node.hasParent()) return;
+	
+	ofLine(node.getGlobalPosition(),
+		   node.getParent()->getGlobalPosition());
+}
+
 void ramBox(const ramNode& o, float size);
 void ramSphere(const ramNode& o, float radius);
 
