@@ -13,6 +13,8 @@ class ramExpansion : public ramBaseFilter
 	
 public:
 	
+	const string getName() { return "ramExpansion"; };
+	
 	ramExpansion() : mExpand(1.0), kExpandMax(3.0) {}
 	
 	void setupControlPanel()
@@ -22,11 +24,6 @@ public:
 		gui.addSection(getName());
 		gui.addSlider("Expand", 0.0, kExpandMax, &mExpand);
 	}
-	
-	const ramNodeArray& get(size_t index) const { return expandedArray; }
-	size_t getSize() const { return 1; }
-	
-	inline const string getName() { return "ramExpansion"; };
 	
 	const ramNodeArray& filter(const ramNodeArray& src)
 	{

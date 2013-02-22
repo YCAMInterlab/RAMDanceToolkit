@@ -14,10 +14,10 @@ class ramActorManager
 {
 public:
 	
-	ofEvent<ramActor> actorEntered;
-	ofEvent<ramActor> actorExited;
-	ofEvent<ramRigidBody> rigidEntered;
-	ofEvent<ramRigidBody> rigidExited;
+	ofEvent<ramActor> actorSetup;
+	ofEvent<ramActor> actorExit;
+	ofEvent<ramRigidBody> rigidSetup;
+	ofEvent<ramRigidBody> rigidExit;
 	
 	ofEvent<ramNodeIdentifer> selectStateChanged;
 	
@@ -57,13 +57,14 @@ public:
 	const ramNodeIdentifer& getLastSelectedNodeIdentifer();
 	const ramNode* getLastSelectedNode();
 	const ramNodeArray* getLastSelectedNodeArray();
+	void clearSelected();
 	
 	
 	// Freeze all actor
 	
-	inline bool isFreezed() { return bFreeze; }
-	inline void setFreezed(bool v) { bFreeze = v; }
-	inline void toggleFreeze() { bFreeze ^= true; }
+	inline bool isFreezed() { return freeze; }
+	inline void setFreezed(bool v) { freeze = v; }
+	inline void toggleFreeze() { freeze ^= true; }
 
 	
 	// bus
@@ -78,8 +79,6 @@ public:
 	
 	void updateWithOscMessage(const ofxOscMessage &m);
 	void setupOscReceiver(int port) { oscReceiver.setup(port); }
-	
-	void onSelectStateChanged(ramNodeIdentifer &e);
 	
 private:
 
@@ -97,12 +96,15 @@ private:
 	
 	ofxInteractivePrimitives::RootNode rootNode;
 	
-	bool bFreeze;
+	bool freeze;
 	
 	class NodeSelector;
 	friend class NodeSelector;
+	
 	NodeSelector *nodeSelector;
 	
 	map<string, ramNodeArray> bus;
+	
+	void onSelectStateChanged(ramNodeIdentifer &e);
 };
 

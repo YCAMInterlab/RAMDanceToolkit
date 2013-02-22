@@ -15,10 +15,6 @@ class ramBasePrimitive;
 class ramPrimitive;
 class ramSoftBodyPrimitive;
 
-void ramEnablePhysicsPrimitive(bool v = true);
-void ramDisablePhysicsPrimitive();
-bool ramGetEnablePhysicsPrimitive();
-
 class ramPhysics
 {
 public:

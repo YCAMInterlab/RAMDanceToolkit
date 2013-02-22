@@ -74,5 +74,4 @@ protected:
 		
 		return src;
 	}
-	
 };

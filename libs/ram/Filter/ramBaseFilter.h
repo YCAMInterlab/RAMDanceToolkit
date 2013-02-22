@@ -59,11 +59,6 @@ public:
 		{
 			last_update_frame = f;
 			cache = filter(src);
-//			cout << "updated: " << getName() << " " << ofGetElapsedTimef() << endl;
-		}
-		else
-		{
-//			cout << "use cache: " << getName() << " " << ofGetElapsedTimef() << endl;
 		}
 		
 		return cache;
@@ -89,7 +84,7 @@ class ramBusSend : public ramBaseFilter
 {
 public:
 	
-	const string getName() { return "BusSend"; }
+	const string getName() { return "ramBusSend"; }
 	
 	ramBusSend() {}
 	ramBusSend(const string &bus_name) { setBusName(bus_name); }

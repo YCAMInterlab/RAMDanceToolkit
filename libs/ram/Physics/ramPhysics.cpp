@@ -3,23 +3,6 @@
 #include "ramPrimitive.h"
 #include "ramSoftBodyPrimitive.h"
 
-static bool ram_enable_physics_primitive = true;
-
-void ramEnablePhysicsPrimitive(bool v)
-{
-	ram_enable_physics_primitive = v;
-}
-
-void ramDisablePhysicsPrimitive()
-{
-	ram_enable_physics_primitive = false;
-}
-
-bool ramGetEnablePhysicsPrimitive()
-{
-	return ram_enable_physics_primitive;
-}
-
 ramPhysics* ramPhysics::_instance = NULL;
 
 ramPhysics& ramPhysics::instance()

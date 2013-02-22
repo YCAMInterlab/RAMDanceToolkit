@@ -1,7 +1,6 @@
 #include "ramCameraManager.h"
 
-#include "ramSharedData.h"
-#include "ramUtils.h"
+#include "ramGlobal.h"
 
 ramCameraManager* ramCameraManager::_instance = NULL;
 
@@ -53,21 +52,3 @@ void ramCameraManager::rollbackDefaultCameraSetting(int camera_id)
 	active_camera->setPosition(setting.pos);
 	active_camera->lookAt(setting.look_at);
 }
-
-//
-
-void ramBeginCamera()
-{
-	ramCameraManager::instance().getActiveCamera().begin();
-}
-
-void ramEndCamera()
-{
-	ramCameraManager::instance().getActiveCamera().end();
-}
-
-void ramEnableInteractiveCamera(bool v)
-{
-	ramCameraManager::instance().setEnableInteractiveCamera(v);
-}
-

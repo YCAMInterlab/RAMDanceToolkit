@@ -2,30 +2,9 @@
 
 #include "ramCameraManager.h"
 #include "ramNodeFinder.h"
+#include "ramGraphics.h"
 
 using namespace ofxInteractivePrimitives;
-
-inline static void billboard()
-{
-	ofMatrix4x4 m;
-	glGetFloatv(GL_MODELVIEW_MATRIX, m.getPtr());
-	
-	ofVec3f s = m.getScale();
-	
-	m(0, 0) = s.x;
-	m(0, 1) = 0;
-	m(0, 2) = 0;
-	
-	m(1, 0) = 0;
-	m(1, 1) = s.y;
-	m(1, 2) = 0;
-	
-	m(2, 0) = 0;
-	m(2, 1) = 0;
-	m(2, 2) = s.z;
-	
-	glLoadMatrixf(m.getPtr());
-}
 
 #pragma mark - ramActorManager::NodeSelector
 
@@ -60,7 +39,7 @@ public:
 				
 				glPushMatrix();
 				ofTranslate(node.getGlobalPosition());
-				billboard();
+				ramBillboard();
 				
 				if (NS.size() == 3
 					&& NS[1] == n
@@ -96,7 +75,7 @@ public:
 				
 				glPushMatrix();
 				ofTranslate(node.getGlobalPosition());
-				billboard();
+				ramBillboard();
 				
 				ofCircle(0, 0, 15);
 				
@@ -155,9 +134,10 @@ ramActorManager* ramActorManager::_instance = NULL;
 
 void ramActorManager::setup()
 {
-	bFreeze = false;
+	freeze = false;
 	
 	nodeSelector = new NodeSelector(rootNode);
+	
 	ofAddListener(nodeSelector->selectStateChanged, this, &ramActorManager::onSelectStateChanged);
 }
 
@@ -174,9 +154,23 @@ void ramActorManager::update()
 	
 	for (int i = 0; i < nodearrays.size(); i++)
 	{
-		ramNodeArray &array = nodearrays[i];
+		const ramNodeArray &array = nodearrays[i];
+		
 		if (array.isOutdated() && !isFreezed())
+		{
+			if (array.isActor())
+			{
+				ramActor o = array;
+				ofNotifyEvent(actorExit, o);
+			}
+			else
+			{
+				ramRigidBody o = array;
+				ofNotifyEvent(rigidExit, o);
+			}
+			
 			nodearrays.erase(array.getName());
+		}
 	}
 	
 	rootNode.update();
@@ -189,12 +183,14 @@ void ramActorManager::draw()
 	if (nodeSelector != NULL && nodeSelector->identifer.isValid())
 	{
 		ramNode node;
-		if (ramNodeFinder::findNode(nodeSelector->identifer, node))
+		ramNodeFinder finder(nodeSelector->identifer);
+		
+		if (finder.findOne(node))
 		{
 			node.beginTransform();
 			
 			ofPushStyle();
-			billboard();
+			ramBillboard();
 			
 			ofFill();
 			ofSetColor(255, 0, 0, 80);
@@ -225,6 +221,8 @@ void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 			o.setName(name);
 			o.updateWithOscMessage(m);
 			nodearrays.set(name, o);
+			
+			ofNotifyEvent(actorSetup, o);
 		}
 		else
 		{
@@ -241,6 +239,8 @@ void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 			o.setName(name);
 			o.updateWithOscMessage(m);
 			nodearrays.set(name, o);
+			
+			ofNotifyEvent(rigidSetup, o);
 		}
 		else
 		{
@@ -274,4 +274,9 @@ const ramNodeArray* ramActorManager::getLastSelectedNodeArray()
 void ramActorManager::onSelectStateChanged(ramNodeIdentifer &e)
 {
 	ofNotifyEvent(selectStateChanged, e);
+}
+
+void ramActorManager::clearSelected()
+{
+	nodeSelector->identifer.clear();
 }
