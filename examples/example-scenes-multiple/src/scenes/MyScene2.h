@@ -11,15 +11,14 @@ public:
 	
 	MyScene2(): fontColor(100) {}
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
-		panel->addSlider("Font Color", 0.0, 255.0, &fontColor, gui.kLength, gui.kDim);
+		gui.addPanel(getName());
+		gui.addSlider("Font Color", 0.0, 255.0, &fontColor);
 		
-		ghost.setupControlPanel(panel);
+		ghost.setupControlPanel();
 	}
 
 	void setup()
@@ -42,12 +41,13 @@ public:
 	{
 		ghost.update(actor);
 		
-		ofVec3f pos = ghost.getResult().getNode(ramActor::JOINT_HEAD).getPosition();
+		ofVec3f pos = ghost.get().getNode(ramActor::JOINT_HEAD);
 		pos.y += 30.0;
 		
 		ofSetColor( fontColor );
 		ofDrawBitmapString( "I am " + getName(), pos );
-		ramDrawBasicActor((ramActor&)ghost.getResult());
+		
+		ramDrawBasicActor((ramActor&)ghost.get());
 	}
 	
 	void drawRigid(ramRigidBody &rigid)

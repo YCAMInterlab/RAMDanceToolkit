@@ -1,8 +1,6 @@
 #include "testApp.h"
 
-
 ramStamp stamp;
-
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -27,8 +25,8 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	
-	stamp.update( getNodeArray(0) );
+	if (getNumNodeArray() > 0)
+		stamp.update(getNodeArray(0));
 }
 
 //--------------------------------------------------------------
@@ -36,22 +34,21 @@ void testApp::draw()
 {
 	ramBeginCamera();
 	
-	for (int i=0; i<stamp.getNumStamps(); i++)
+	for (int i=0; i<stamp.getSize(); i++)
 	{
-		ramActor& actor = (ramActor&)stamp.getStamp(i);
+		ramActor& actor = (ramActor&)stamp.get(i);
 		
 		ramDrawBasicActor(actor);
-		ramActorCube(actor);
+		ramDrawActorCube(actor);
 		
 		ramBeginShadow();
 		ramDrawBasicActor(actor);
-		ramActorCube(actor);
+		ramDrawActorCube(actor);
 		ramEndShadow();
 	}
 	
 	ramEndCamera();
 }
-
 
 
 #pragma mark - ram methods
@@ -64,11 +61,7 @@ void testApp::drawActor(ramActor &actor)
 //--------------------------------------------------------------
 void testApp::drawRigid(ramRigidBody &rigid)
 {
-	
 }
-
-
-
 
 #pragma mark - oF Events
 //--------------------------------------------------------------

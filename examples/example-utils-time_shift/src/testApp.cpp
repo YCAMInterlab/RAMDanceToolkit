@@ -16,9 +16,7 @@ void testApp::setup()
 	ramInitialize(10000);
 	
 	timeShifter.setup();
-	timeShifter.setShiftTime(2.0);
-	timeShifter.setShiftFrames(20);
-	timeShifter.setShiftType(RAM_TIMESHIFT_BY_FRAMES);
+	timeShifter.setNumBufferFrame(20);
 	
 	ramGetGUI().addPanel(&timeShifter);
 }
@@ -26,21 +24,11 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	
-	timeShifter.update( getNodeArray(0) );
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	if (timeShifter.isPlayable())
-	{
-		ramActor& actor = (ramActor &)timeShifter.getResult();
-		
-		ramBeginCamera();
-		ramDrawBasicActor(actor);
-		ramEndCamera();
-	}
 }
 
 
@@ -49,6 +37,9 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(ramActor &actor)
 {
+	ramActor shifted_actor = timeShifter.update(actor);
+	
+	ramDrawBasicActor(shifted_actor);
 	ramDrawBasicActor(actor);
 }
 

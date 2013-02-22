@@ -53,7 +53,7 @@ void testApp::drawActor(ramActor &actor)
 		node.beginTransform();
 		ofBox(10);
 		node.endTransform();
-		node.drawName();
+		node.drawNodeName();
 	}
 	ofPopStyle();
 }

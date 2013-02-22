@@ -7,7 +7,7 @@ def check(path):
 	print path
 	os.chdir(path)
 	cmd = 'xcodebuild'
-	subprocess.call(cmd, shell=True)
+	subprocess.check_call(cmd, shell=True)
 
 def check_dir(path):
 	os.chdir(basedir)

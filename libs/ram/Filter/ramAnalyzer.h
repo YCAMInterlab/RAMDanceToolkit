@@ -103,7 +103,7 @@ private:
 //
 
 // TODO: move to events
-class ramMovementAnalyser : public ramNodeFinder
+class ramMovementAnalyser : public ramNodeFinder, public ramControllable
 {
 public:
 	
@@ -162,21 +162,25 @@ public:
 		glPopMatrix();
 	}
 	
+	void setupControlPanel()
+	{
+		gui().addSection(getName());
+		gui().addSlider("Threshold", 0.1, 10, &threshold);
+	}
+
 protected:
 	
 	ofVec3f center_pos;
-	
-	virtual void onMove() {}
-	virtual void onStop() {}
-	
-	bool getState() { return state; }
-	
-private:
 	
 	float threshold;
 	float current_value;
 	
 	bool state;
+
+	virtual void onMove() {}
+	virtual void onStop() {}
+	
+	bool getState() { return state; }
 	
 };
 
@@ -195,6 +199,8 @@ public:
 	virtual float update()
 	{
 		float dist = ramMovementAnalyser::update();
+		
+		timer.setDuration(hold_time);
 		
 		if (hold_state == getState())
 		{
@@ -238,6 +244,13 @@ public:
 		glPopMatrix();
 	}
 	
+	void setupControlPanel()
+	{
+		gui().addSection(getName());
+		gui().addSlider("Threshold", 0.1, 10, &threshold);
+		gui().addSlider("Hold time", 0.1, 10, &hold_time);
+	}
+
 protected:
 	
 	virtual void onTimerdMove() {}
@@ -246,6 +259,7 @@ protected:
 private:
 	
 	bool hold_state;
+	float hold_time;
 	
 	ramScheduledTimerEvent timer;
 	
