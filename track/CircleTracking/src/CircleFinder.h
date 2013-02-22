@@ -30,6 +30,10 @@ public:
 	const ofVec2f& getCenter(int i) const {
 		return centers[i];
 	}
+    
+    const vector<ofVec2f> getCenters() const {
+        return centers;
+    }
 	
 	float getRadius(int i) const {
 		return radii[i];
@@ -37,7 +41,7 @@ public:
 	
 	template <class T>
 	void update(T& img) {
-		blur(img, blurred, blurRadius);
+        ofxCv::blur(img, blurred, blurRadius);
 		
 		contourFinder.setSimplify(false);
 		contourFinder.setMinAreaRadius(minRadius - 1);

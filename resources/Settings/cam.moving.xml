@@ -1,0 +1,43 @@
+<cam>
+	<name>Moving Linear 1</name>
+	<pos><x>0</x><y>300</y><z>0</z></pos>
+	<movement>
+		<type>linear</type>
+		<duration>10</duration>
+		<look_at>
+			<x>0</x>
+			<y>150</y>
+			<z>0</z>
+		</look_at>
+		<move_to>
+			<x>-450</x>
+			<y>50</y>
+			<z>-450</z>
+		</move_to>
+	</movement>
+</cam>
+
+<cam>
+	<name>Moving Circle 1</name>
+	<pos><x>0</x><y>300</y><z>600</z></pos>
+	<movement>
+		<type>circle</type>
+		<radius>300.0</radius>
+		<speed>1.0</speed>
+		<look_at>
+			<x>0</x>
+			<y>0</y>
+			<z>0</z>
+		</look_at>
+		<axis_pos>
+			<x>1.0</x>
+			<y>200.0</y>
+			<z>0.0</z>
+		</axis_pos>
+		<axis_up_vector>
+			<x>0.0</x>
+			<y>0.0</y>
+			<z>1.0</z>
+		</axis_up_vector>
+	</movement>
+</cam>
