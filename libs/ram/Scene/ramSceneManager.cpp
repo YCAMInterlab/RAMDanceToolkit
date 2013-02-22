@@ -152,23 +152,58 @@ void ramSceneManager::draw()
 	glPopAttrib();
 }
 
-void ramSceneManager::drawActor(ramActor &actor)
+void ramSceneManager::enableAllEvents()
+{
+	ofAddListener(ramActorManager::instance().actorSetup, this, &ramSceneManager::actorSetup);
+	ofAddListener(ramActorManager::instance().actorExit, this, &ramSceneManager::actorExit);
+	ofAddListener(ramActorManager::instance().rigidSetup, this, &ramSceneManager::rigidSetup);
+	ofAddListener(ramActorManager::instance().rigidExit, this, &ramSceneManager::rigidExit);
+}
+
+void ramSceneManager::disableAllEvents()
+{
+	ofRemoveListener(ramActorManager::instance().actorSetup, this, &ramSceneManager::actorSetup);
+	ofRemoveListener(ramActorManager::instance().actorExit, this, &ramSceneManager::actorExit);
+	ofRemoveListener(ramActorManager::instance().rigidSetup, this, &ramSceneManager::rigidSetup);
+	ofRemoveListener(ramActorManager::instance().rigidExit, this, &ramSceneManager::rigidExit);
+}
+
+void ramSceneManager::actorSetup(ramActor &actor)
 {
 	for (int i = 0; i < scenes.size(); i++)
 	{
 		ramBaseScene *scene = scenes[i];
 		if (!scene->isEnabled()) continue;
-		scene->drawActor(actor);
+		scene->onActorSetup(actor);
 	}
 }
 
-void ramSceneManager::drawRigid(ramRigidBody &rigid)
+void ramSceneManager::actorExit(ramActor &actor)
 {
 	for (int i = 0; i < scenes.size(); i++)
 	{
 		ramBaseScene *scene = scenes[i];
 		if (!scene->isEnabled()) continue;
-		
-		scene->drawRigid(rigid);
+		scene->onActorExit(actor);
+	}
+}
+
+void ramSceneManager::rigidSetup(ramRigidBody &rigid)
+{
+	for (int i = 0; i < scenes.size(); i++)
+	{
+		ramBaseScene *scene = scenes[i];
+		if (!scene->isEnabled()) continue;
+		scene->onRigidSetup(rigid);
+	}
+}
+
+void ramSceneManager::rigidExit(ramRigidBody &rigid)
+{
+	for (int i = 0; i < scenes.size(); i++)
+	{
+		ramBaseScene *scene = scenes[i];
+		if (!scene->isEnabled()) continue;
+		scene->onRigidSetup(rigid);
 	}
 }

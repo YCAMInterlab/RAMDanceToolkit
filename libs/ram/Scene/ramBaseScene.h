@@ -91,6 +91,13 @@ public:
 	virtual void onEnabled() { cout << "[Scene enabled] " << getName() << endl; }
 	virtual void onDisabled() { cout << "[Scene disabled] " << getName() << endl; }
 
+	// nodeArray events
+	virtual void onActorSetup(ramActor &actor) {}
+	virtual void onActorExit(ramActor &actor) {}
+	
+	virtual void onRigidSetup(ramRigidBody &rigid) {}
+	virtual void onRigidExit(ramRigidBody &rigid) {}
+
 	ramBaseScene* getPtr() { return this; }
 
 private:

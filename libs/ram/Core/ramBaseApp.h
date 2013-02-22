@@ -27,10 +27,10 @@ public:
         ofAddListener(ofEvents().draw, this, &ramBaseApp::draw);
         ofAddListener(ofEvents().exit, this, &ramBaseApp::exit);
 		
-		ofAddListener(ramActorManager::instance().actorSetup, this, &ramBaseApp::onActorSetup);
-		ofAddListener(ramActorManager::instance().actorExit, this, &ramBaseApp::onActorExit);
-		ofAddListener(ramActorManager::instance().rigidSetup, this, &ramBaseApp::onRigidSetup);
-		ofAddListener(ramActorManager::instance().rigidExit, this, &ramBaseApp::onRigidExit);
+		ofAddListener(ramActorManager::instance().actorSetup, this, &ramBaseApp::actorSetup);
+		ofAddListener(ramActorManager::instance().actorExit, this, &ramBaseApp::actorExit);
+		ofAddListener(ramActorManager::instance().rigidSetup, this, &ramBaseApp::rigidSetup);
+		ofAddListener(ramActorManager::instance().rigidExit, this, &ramBaseApp::rigidExit);
     }
 	void ramDisableAllEvents()
 	{
@@ -38,19 +38,18 @@ public:
 		ofRemoveListener(ofEvents().draw, this, &ramBaseApp::draw);
 		ofRemoveListener(ofEvents().exit, this, &ramBaseApp::exit);
 		
-		ofRemoveListener(ramActorManager::instance().actorSetup, this, &ramBaseApp::onActorSetup);
-		ofRemoveListener(ramActorManager::instance().actorExit, this, &ramBaseApp::onActorExit);
-		ofRemoveListener(ramActorManager::instance().rigidSetup, this, &ramBaseApp::onRigidSetup);
-		ofRemoveListener(ramActorManager::instance().rigidExit, this, &ramBaseApp::onRigidExit);
+		ofRemoveListener(ramActorManager::instance().actorSetup, this, &ramBaseApp::actorSetup);
+		ofRemoveListener(ramActorManager::instance().actorExit, this, &ramBaseApp::actorExit);
+		ofRemoveListener(ramActorManager::instance().rigidSetup, this, &ramBaseApp::rigidSetup);
+		ofRemoveListener(ramActorManager::instance().rigidExit, this, &ramBaseApp::rigidExit);
 	}
     
 	// nodeArray events
-	virtual void actorSetup(ramActor &actor) {}
-	virtual void actorExit(ramActor &actor) {}
+	virtual void onActorSetup(ramActor &actor) {}
+	virtual void onActorExit(ramActor &actor) {}
 	
-	virtual void rigidSetup(ramRigidBody &rigid) {}
-	virtual void rigidExit(ramRigidBody &rigid) {}
-
+	virtual void onRigidSetup(ramRigidBody &rigid) {}
+	virtual void onRigidExit(ramRigidBody &rigid) {}
 	
 	// physics event
 	virtual void collision(const ramNode& jointA, const ramNode& jointB) {}
@@ -67,11 +66,11 @@ private:
 	void draw(ofEventArgs &args);
 	void exit(ofEventArgs &args);
 	
-	void onActorSetup(ramActor &actor) { actorSetup(actor); }
-	void onActorExit(ramActor &actor) { actorExit(actor); }
+	void actorSetup(ramActor &actor) { onActorSetup(actor); }
+	void actorExit(ramActor &actor) { onActorExit(actor); }
 	
-	void onRigidSetup(ramRigidBody &rigid) { rigidSetup(rigid); }
-	void onRigidExit(ramRigidBody &rigid) { rigidExit(rigid); }
+	void rigidSetup(ramRigidBody &rigid) { onRigidSetup(rigid); }
+	void rigidExit(ramRigidBody &rigid) { onRigidExit(rigid); }
 
 	//
 	void drawNodeArrays();
