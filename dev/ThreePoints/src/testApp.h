@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ofMain.h"
-
 #include "ramMain.h"
 #include "ofxUI.h"
 
@@ -28,26 +27,25 @@ public:
 	// ram methods
 	// ------------------------
 	void drawFloor();
-    void drawActor(ramActor &actor);
-    void drawRigid(ramRigidBody &rigid);
-
+	void drawActor(ramActor &actor);
+	void drawRigid(ramRigidBody &rigid);
     
-	// ...
-	// ------------------------
-	ramOscReceiver oscReceiver;
 	
 	bool showRects;
 	bool showSpheres;
-	bool showCircles;
+	bool showThreePoints, showFourPointSphere, showFourPointTwist;
 	bool invertSpheres;
+	bool showCircleBisector;
+	bool showCenterCircles;
+    float twistExtension;
 	float pointSize;
 	float crossLength;
 	float rectRadius;
 	float maxInvertRadius;
-	bool showCircleBisector;
 	float circleResolution;
-	bool showCenterCircles;
+    float twistResolution;
 	
 	ofxUICanvas* gui;
+    ofxUIToggleMatrix *m3p, *m4p1, *m4p2, *m4p3, *m4p4;
 	void setupUI();
 };
