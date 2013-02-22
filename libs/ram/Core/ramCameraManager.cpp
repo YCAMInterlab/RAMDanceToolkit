@@ -14,14 +14,14 @@ ramCameraManager& ramCameraManager::instance()
 ramCameraManager::ramCameraManager()
 {
 	active_camera = createCamera<ofEasyCam>();
-	
+
 	loadDefaults();
 }
 
 void ramCameraManager::loadDefaults()
 {
 	const string &kCamSettingFile = ramToResourcePath("Settings/cam.default_positions.xml");
-	ofxXmlSettings xml( kCamSettingFile );
+	ofxXmlSettings xml(kCamSettingFile);
 	settings = ramCameraSettings::loadSettings(xml);
 }
 
@@ -40,7 +40,7 @@ void ramCameraManager::setEnableInteractiveCamera(bool v)
 	if (typeid(*active_camera) == typeid(ofEasyCam))
 	{
 		ofEasyCam *cam = (ofEasyCam*)active_camera;
-		
+
 		if (v) cam->enableMouseInput();
 		else cam->disableMouseInput();
 	}

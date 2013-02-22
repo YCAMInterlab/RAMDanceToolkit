@@ -35,7 +35,7 @@ public:
 	}
 
 	size_t size() { return array.size(); }
-	
+
 	void clear()
 	{
 		array.clear();
@@ -76,7 +76,7 @@ public:
 	{
 		array.clear();
 		hash_keys.clear();
-		
+
 		typename MapType::iterator it = hash.begin();
 		while (it != hash.end())
 		{

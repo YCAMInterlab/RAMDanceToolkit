@@ -12,26 +12,26 @@ void ramBaseApp::exit(ofEventArgs &args)
 
 void ramBaseApp::update(ofEventArgs &args)
 {
-    getActorManager().update();
+	getActorManager().update();
 }
 
 void ramBaseApp::draw(ofEventArgs &args)
 {
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	
+
 	glEnable(GL_DEPTH_TEST);
-	
+
 	ramBeginCamera();
 
 	if (draw_floor_auto)
 		drawFloor();
-	
+
 	getActorManager().draw();
 
 	bool enable_physics = ramGetEnablePhysicsPrimitive();
-	
+
 	ramEnablePhysicsPrimitive(false);
-	
+
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glPushMatrix();
 	ofPushStyle();
@@ -39,7 +39,7 @@ void ramBaseApp::draw(ofEventArgs &args)
 	if (ramShadowEnabled())
 	{
 		// shadow
-		
+
 		ramBeginShadow();
 		drawNodeArrays();
 		ramEndShadow();
@@ -50,7 +50,7 @@ void ramBaseApp::draw(ofEventArgs &args)
 	glPopAttrib();
 
 	ramEnablePhysicsPrimitive(enable_physics);
-	
+
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glPushMatrix();
 	ofPushStyle();
@@ -60,43 +60,43 @@ void ramBaseApp::draw(ofEventArgs &args)
 		// entities
 		drawNodeArrays();
 	}
-    
+
 	ofPopStyle();
 	glPopMatrix();
 	glPopAttrib();
 
 	ramEndCamera();
-	
+
 	glPopAttrib();
 }
 
 void ramBaseApp::drawNodeArrays()
 {
 	// draw nodearray
-	
-	for (int n=0; n<getNumNodeArray(); n++)
+
+	for (int n = 0; n < getNumNodeArray(); n++)
 	{
 		const ramNodeArray &o = getNodeArray(n);
-		
+
 		if (o.isActor())
-			drawActor((ramActor&)o);
+			drawActor((ramActor &)o);
 		else
-			drawRigid((ramRigidBody&)o);
+			drawRigid((ramRigidBody &)o);
 	}
-	
+
 	// draw bus
-	
+
 	map<string, ramNodeArray>::iterator it = getActorManager().getAllBus().begin();
-	
-	while( it != getActorManager().getAllBus().end() )
+
+	while (it != getActorManager().getAllBus().end())
 	{
 		const ramNodeArray &o = (*it).second;
-		
+
 		if (o.isActor())
-			drawActor((ramActor&)o);
+			drawActor((ramActor &)o);
 		else
-			drawRigid((ramRigidBody&)o);
-		
+			drawRigid((ramRigidBody &)o);
+
 		++it;
 	}
 }
@@ -105,8 +105,8 @@ void ramBaseApp::drawFloor()
 {
 	ramControlPanel &gui = ramGetGUI();
 	ramDrawBasicFloor(gui.getFloorPattern(),
-				  gui.getFloorSize(),
-				  gui.getGridSize(),
-				  ramColor::BLUE_LIGHT,
-				  ramColor::BLUE_DEEP);
+					  gui.getFloorSize(),
+					  gui.getGridSize(),
+					  ramColor::BLUE_LIGHT,
+					  ramColor::BLUE_DEEP);
 }

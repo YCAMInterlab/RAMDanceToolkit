@@ -6,16 +6,16 @@
 class ramDelay : public ramBaseFilter
 {
 public:
-	
+
 	const string getName() { return "ramDelay"; }
-	
+
 	ramDelay(size_t delay_frame = 60) : delay_frame(delay_frame) {}
-	
+
 	void setFrame(size_t num) { delay_frame = num; };
 	size_t getFrame() const { return delay_frame; }
-	
+
 	size_t getSize() const { return buffer.getSize(); }
-	
+
 	void setupControlPanel()
 	{
 		gui().addSection(getName());
@@ -23,11 +23,11 @@ public:
 	}
 
 protected:
-	
+
 	ramNodeArrayBuffer buffer;
-	
+
 	float delay_frame;
-	
+
 	const ramNodeArray& filter(const ramNodeArray& src)
 	{
 		buffer.setCapacity(delay_frame);
@@ -36,26 +36,25 @@ protected:
 	}
 };
 
-
 class ramTimeShifter : public ramBaseFilter
 {
 public:
-	
+
 	const string getName() { return "ramTimeShifter"; }
-	
+
 	ramTimeShifter(size_t buffer_frame = 300) : rate(1), play_head(0), buffer_frame(buffer_frame)
 	{
 		setNumBufferFrame(buffer_frame);
 	}
-	
+
 	void setNumBufferFrame(size_t buffer_frame) { this->buffer_frame = buffer_frame; }
 	size_t getNumBufferFrame() const { return buffer_frame; }
-	
+
 	void setRate(float rate) { this->rate = rate; }
 	float getRate() const { return rate; }
-	
+
 	void clear() { buffer.clear(); }
-	
+
 	void setupControlPanel()
 	{
 		gui().addSection(getName());
@@ -66,21 +65,21 @@ public:
 protected:
 
 	ramNodeArrayBuffer buffer;
-	
+
 	float rate;
 	float play_head;
 	float buffer_frame;
-	
+
 	const ramNodeArray& filter(const ramNodeArray& src)
 	{
 		buffer.setCapacity(buffer_frame);
-		
+
 		buffer.add(src);
-		
+
 		play_head += (60. / buffer.getSize()) / 60. * (-rate + 1);
 		while (play_head > 1) play_head -= 1;
 		while (play_head <= 0) play_head += 1;
-		
+
 		return buffer.get(((int)buffer.getSize() - 1) * play_head);
 	}
 

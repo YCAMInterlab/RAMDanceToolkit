@@ -30,18 +30,18 @@ struct ramColor
 
 class ramFloor
 {
-	
+
 public:
-	
+
 	enum FloorName
 	{
-		FLOOR_NONE				= 0,
-		FLOOR_PLANE				= 1,
-		FLOOR_CHECKER_PATTERN	= 2,
-		FLOOR_GRID_LINES		= 3,
-		NUM_FLOOR_PATTERNS		= 4
+		FLOOR_NONE              = 0,
+		FLOOR_PLANE             = 1,
+		FLOOR_CHECKER_PATTERN   = 2,
+		FLOOR_GRID_LINES        = 3,
+		NUM_FLOOR_PATTERNS      = 4
 	};
-	
+
 	static vector<string> getFloorNames()
 	{
 		string name[NUM_FLOOR_PATTERNS] =
@@ -51,14 +51,14 @@ public:
 			"CHECKER_PATTERN",
 			"GRID_LINES"
 		};
-		
+
 		vector<string> floorNames;
 		floorNames.clear();
 		floorNames.resize(NUM_FLOOR_PATTERNS);
-		
-		for (int i=0; i<floorNames.size(); i++)
+
+		for (int i = 0; i < floorNames.size(); i++)
 			floorNames.at(i) = name[i];
-		
+
 		return floorNames;
 	}
 };
@@ -72,7 +72,7 @@ void ramBillboard();
 inline void ramLine(const ramNode& node)
 {
 	if (!node.hasParent()) return;
-	
+
 	ofLine(node.getGlobalPosition(),
 		   node.getParent()->getGlobalPosition());
 }
@@ -107,4 +107,3 @@ void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ra
 void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7, const ramNode& n8, const ramNode& n9, const ramNode& n10);
 void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7, const ramNode& n8, const ramNode& n9, const ramNode& n10, const ramNode& n11);
 void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7, const ramNode& n8, const ramNode& n9, const ramNode& n10, const ramNode& n11, const ramNode& n12);
-
