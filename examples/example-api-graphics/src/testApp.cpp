@@ -81,7 +81,7 @@ void testApp::drawActor(ramActor &actor)
 		ofPushMatrix();
 		{
 			ofScale( 3, 3, 3 );
-			ramPlate( n1, n2, n3, n4, n5 );
+			ramStripe( n1, n2, n3, n4, n5 );
 		}
 		ofPopMatrix();
 	}

@@ -21,6 +21,7 @@ void testApp::setup()
 	/// Scene setup
 	// ------------------
 	myScene.setup();
+	myScene.setupControlPanel();
 }
 
 //--------------------------------------------------------------

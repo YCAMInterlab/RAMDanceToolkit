@@ -3,7 +3,6 @@
 #include "ofMain.h"
 
 /// app
-#include "ramSharedData.h"
 #include "ramBaseApp.h"
 #include "ramActorManager.h"
 #include "ramCameraManager.h"

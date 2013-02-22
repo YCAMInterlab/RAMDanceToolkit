@@ -4,6 +4,7 @@
 
 #include "ramBaseFilter.h"
 #include "ramNodeFinder.h"
+#include "ramTimeEvent.h"
 
 class ramBalancer : public ramBaseFilter
 {
@@ -14,36 +15,7 @@ public:
 		resetWeightBalance();
 	}
 	
-	const ramNodeArray& update(const ramNodeArray& src)
-	{
-		ofVec3f avarage;
-		ofVec3f axis = src.getNode(ramActor::JOINT_CHEST).getGlobalPosition();
-		avarage += axis;
-		
-		const int size = src.getNumNode();
-		
-		for (int i=0; i<size; i++)
-		{
-			ofVec3f pos = src.getNode(i).getGlobalPosition();
-			
-			ofVec3f dist(pos - axis);
-			dist *= weightBalance.at(i);
-			
-			avarage.x += dist.x;
-			avarage.y += dist.y;
-			avarage.z += dist.z;
-		}
-		avarage.x /= size;
-		avarage.y /= size;
-		avarage.z /= size;
-		
-		balance = avarage;
-		
-		return src;
-	}
-	
 	inline ofVec3f getAvarage() { return balance; }
-	inline ofVec3f getAngle() { return balance; }
 	
 private:
 	
@@ -98,11 +70,40 @@ private:
 		weightBalance.at(ramActor::JOINT_RIGHT_WRIST) = 0.02;
 		weightBalance.at(ramActor::JOINT_RIGHT_HAND) = 0.01;
 	}
+	
+	const ramNodeArray& filter(const ramNodeArray& src)
+	{
+		ofVec3f avarage;
+		ofVec3f axis = src.getNode(ramActor::JOINT_CHEST).getGlobalPosition();
+		avarage += axis;
+		
+		const int size = src.getNumNode();
+		
+		for (int i=0; i<size; i++)
+		{
+			ofVec3f pos = src.getNode(i).getGlobalPosition();
+			
+			ofVec3f dist(pos - axis);
+			dist *= weightBalance.at(i);
+			
+			avarage.x += dist.x;
+			avarage.y += dist.y;
+			avarage.z += dist.z;
+		}
+		avarage.x /= size;
+		avarage.y /= size;
+		avarage.z /= size;
+		
+		balance = avarage;
+		
+		return src;
+	}
 };
 
 //
 
-class ramMovementAnalyser : public ramNodeFinder
+// TODO: move to events
+class ramMovementAnalyser : public ramNodeFinder, public ramControllable
 {
 public:
 	
@@ -116,7 +117,7 @@ public:
 		if (!found()) return 0;
 		
 		float total_dist = 0;
-		vector<ramNode> found_nodes = get();
+		vector<ramNode> found_nodes = findAll();
 		
 		if (found_nodes.size())
 		{
@@ -146,7 +147,7 @@ public:
 		glPushMatrix();
 		
 		ofTranslate(center_pos);
-		billboard();
+		ramBillboard();
 		
 		ofColor c = ofGetStyle().color;
 		
@@ -161,43 +162,25 @@ public:
 		glPopMatrix();
 	}
 	
+	void setupControlPanel()
+	{
+		gui().addSection(getName());
+		gui().addSlider("Threshold", 0.1, 10, &threshold);
+	}
+
 protected:
 	
 	ofVec3f center_pos;
-	
-	inline void billboard()
-	{
-		ofMatrix4x4 m;
-		glGetFloatv(GL_MODELVIEW_MATRIX, m.getPtr());
-		
-		ofVec3f s = m.getScale();
-		
-		m(0, 0) = s.x;
-		m(0, 1) = 0;
-		m(0, 2) = 0;
-		
-		m(1, 0) = 0;
-		m(1, 1) = s.y;
-		m(1, 2) = 0;
-		
-		m(2, 0) = 0;
-		m(2, 1) = 0;
-		m(2, 2) = s.z;
-		
-		glLoadMatrixf(m.getPtr());
-	}
-	
-	virtual void onMove() {}
-	virtual void onStop() {}
-	
-	bool getState() { return state; }
-	
-private:
 	
 	float threshold;
 	float current_value;
 	
 	bool state;
+
+	virtual void onMove() {}
+	virtual void onStop() {}
+	
+	bool getState() { return state; }
 	
 };
 
@@ -205,25 +188,27 @@ class ramTimerdMovementAnalyser : public ramMovementAnalyser
 {
 public:
 	
-	ramTimerdMovementAnalyser() : hold_time(1), current_time(0) {}
+	ramTimerdMovementAnalyser() : hold_state(false)
+	{
+		timer.setDuration(1);
+	}
 	
-	void setTime(float t) { hold_time = t; }
-	float getTime() { return hold_time; }
+	void setTime(float t) { timer.setDuration(t); }
+	float getTime() { return timer.getDuration(); }
 	
 	virtual float update()
 	{
 		float dist = ramMovementAnalyser::update();
 		
+		timer.setDuration(hold_time);
+		
 		if (hold_state == getState())
 		{
-			current_time = 0;
+			timer.reset();
 		}
 		else
 		{
-			current_time += ofGetLastFrameTime();
-			
-			if (current_time > hold_time
-				&& hold_state != getState())
+			if (timer.update())
 			{
 				hold_state = getState();
 				
@@ -248,17 +233,24 @@ public:
 		glPushMatrix();
 		
 		ofTranslate(center_pos);
-		billboard();
+		ramBillboard();
 		
 		ofColor c = ofGetStyle().color;
 		
 		ofSetColor(c, c.a * 0.5);
 		ofFill();
-		ofCircle(0, 0, 10 * getThreshold() * (current_time / hold_time));
+		ofCircle(0, 0, 10 * getThreshold() * timer.getProgress());
 		
 		glPopMatrix();
 	}
 	
+	void setupControlPanel()
+	{
+		gui().addSection(getName());
+		gui().addSlider("Threshold", 0.1, 10, &threshold);
+		gui().addSlider("Hold time", 0.1, 10, &hold_time);
+	}
+
 protected:
 	
 	virtual void onTimerdMove() {}
@@ -268,6 +260,7 @@ private:
 	
 	bool hold_state;
 	float hold_time;
-	float current_time;
+	
+	ramScheduledTimerEvent timer;
 	
 };

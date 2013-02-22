@@ -27,7 +27,7 @@ class ramScheduledTimerEvent : public ramBaseTimerEvent
 {
 public:
 	
-	void setTimer(float t) { timer_duration = t; }
+	void setDuration(float t) { timer_duration = t; }
 	
 protected:
 	
@@ -60,7 +60,7 @@ public:
 	
 	ramRandomTimerEvent() : min(1), max(5) {}
 	
-	void setTimer(float min, float max)
+	void setDuration(float min, float max)
 	{
 		this->min = min;
 		this->max = max;

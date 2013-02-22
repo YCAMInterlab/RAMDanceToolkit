@@ -130,22 +130,22 @@ public:
 			ofSetColor(255, 127);
 			
 			ramNode node;
-			if (nodeLine.from.get(node))
+			if (nodeLine.from.findOne(node))
 			{
 				ofDrawBitmapString("FROM", node.getGlobalPosition() + ofVec3f(5, 5, 0));
 			}
 			
-			if (nodeLine.control0.get(node))
+			if (nodeLine.control0.findOne(node))
 			{
 				ofDrawBitmapString("CP0", node.getGlobalPosition() + ofVec3f(5, 5, 0));
 			}
 			
-			if (nodeLine.control1.get(node))
+			if (nodeLine.control1.findOne(node))
 			{
 				ofDrawBitmapString("CP1", node.getGlobalPosition() + ofVec3f(5, 5, 0));
 			}
 			
-			if (nodeLine.to.get(node))
+			if (nodeLine.to.findOne(node))
 			{
 				ofDrawBitmapString("TO", node.getGlobalPosition() + ofVec3f(5, 5, 0));
 			}

@@ -24,7 +24,6 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	
 }
 
 //--------------------------------------------------------------
@@ -43,6 +42,7 @@ void testApp::drawActor(ramActor &actor)
 
 	// draw line strip with some effects
 	node_line.curve();
+	node_line.resampling();
 	node_line.extend();
 	node_line.draw();
 

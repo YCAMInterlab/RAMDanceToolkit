@@ -2,208 +2,208 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<ItemGroup>
 		<Filter Include="src">
-			<UniqueIdentifier>{0BBCA076-1839-9A4A-B706-94EF6C9CED9C}</UniqueIdentifier>
+			<UniqueIdentifier>{325B543F-9688-4653-E371-5C1805490108}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes">
-			<UniqueIdentifier>{401DF425-BCE1-F842-9D30-9E2E0AFD8E41}</UniqueIdentifier>
+			<UniqueIdentifier>{F8A74643-C19F-7E6D-E1C6-9A46BA25C7D5}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\Abacus">
-			<UniqueIdentifier>{F548569B-D00F-0A48-B618-6AA381F73D8A}</UniqueIdentifier>
+			<UniqueIdentifier>{AB19B37E-4D04-0102-A3FE-E98E49C9E48E}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\BasicActor">
-			<UniqueIdentifier>{298EDD2A-D3B4-EE40-87F7-1A0CED5BD450}</UniqueIdentifier>
+			<UniqueIdentifier>{B6A1F75C-3626-65CE-AC92-9EAAC8B2400D}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\BigBox">
-			<UniqueIdentifier>{2ECE5A32-2DFF-0340-BE86-50EF31A8A741}</UniqueIdentifier>
+			<UniqueIdentifier>{A68433AF-DEE0-7AC6-0B5E-205D79DCE588}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\Chain">
-			<UniqueIdentifier>{F8C88214-0724-EB43-9D5A-6A298BC5B164}</UniqueIdentifier>
+			<UniqueIdentifier>{DE975F05-6CE3-8FC5-141C-519BBFAD5EBE}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\ColorGrid">
-			<UniqueIdentifier>{6137D4CB-CADF-9844-B28C-17703ECE0C8A}</UniqueIdentifier>
+			<UniqueIdentifier>{BDE1ED8B-4914-1A95-A32F-B906A2A5723D}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\Donuts">
-			<UniqueIdentifier>{7D41E0E2-30CE-8749-B0E6-FFE5570E9455}</UniqueIdentifier>
+			<UniqueIdentifier>{230C6EC3-78A8-7E5F-2C49-C6103D8E7B74}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\Expansion">
-			<UniqueIdentifier>{ECFBED92-FAFA-8F48-9F98-90BDE72A66A1}</UniqueIdentifier>
+			<UniqueIdentifier>{2A2B63D2-BCDB-7869-FEC3-21AB0BAF65B4}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\FourPoints">
-			<UniqueIdentifier>{55165753-DF06-BE42-B223-7BB4E775582C}</UniqueIdentifier>
+			<UniqueIdentifier>{1BF94317-6459-B826-E72F-41856C02AE31}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\Future">
-			<UniqueIdentifier>{9496866D-4E88-884A-ACB4-E42412BB5A53}</UniqueIdentifier>
+			<UniqueIdentifier>{AF45C5D4-DC09-E26E-C480-F2331E2759AF}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\Graph">
-			<UniqueIdentifier>{A4DE2F1D-FCE6-E14D-9E4D-12E6B26C8170}</UniqueIdentifier>
+			<UniqueIdentifier>{547538E8-149A-BDF0-9818-ABB1D00936DB}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\HastyChase">
-			<UniqueIdentifier>{376E0A68-5CFE-2D41-9F04-7659E2981B7E}</UniqueIdentifier>
+			<UniqueIdentifier>{F44BF946-8509-6D40-ADA7-7BD5B672038B}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\Helper">
-			<UniqueIdentifier>{A312306A-3B56-0843-9EA9-C0A1BBE8B9BB}</UniqueIdentifier>
+			<UniqueIdentifier>{97B9FF79-65BB-5418-388E-B75F546B00AC}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\Kepler">
-			<UniqueIdentifier>{3DE43C6B-1EAD-724C-9939-E505CAC5A9BD}</UniqueIdentifier>
+			<UniqueIdentifier>{D66AC96E-29A8-C843-5762-10ED408CFF10}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\Line">
-			<UniqueIdentifier>{B67135E2-49B4-3F4C-9F88-837DD694B13E}</UniqueIdentifier>
+			<UniqueIdentifier>{E3C69A3C-7C7C-8CC1-526E-2260F2191C04}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\Monster">
-			<UniqueIdentifier>{9941B3B9-8A69-0A43-B814-A6230A66181D}</UniqueIdentifier>
+			<UniqueIdentifier>{0C7A26E6-1E72-B5A2-CD3F-9FFF6D931426}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\Particles">
-			<UniqueIdentifier>{0263451B-7E8D-D344-8608-786D73C15F20}</UniqueIdentifier>
+			<UniqueIdentifier>{CEEA97FB-6EAA-04BE-CC3A-B5CE7A7541F2}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\Ragdall">
-			<UniqueIdentifier>{C63FCB16-719B-0A49-B100-CB603E069255}</UniqueIdentifier>
+			<UniqueIdentifier>{C2AFDC30-1396-11F9-BE84-DEFE1F4BC12B}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\SoundCube">
-			<UniqueIdentifier>{3AADF498-B798-314B-BCFC-75E1FE29BB04}</UniqueIdentifier>
+			<UniqueIdentifier>{D3EC2A70-39D4-39A8-DC09-CE95CDA725CB}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\Stamp">
-			<UniqueIdentifier>{6263C244-3F10-DF49-A0D7-46FC23B32A56}</UniqueIdentifier>
+			<UniqueIdentifier>{9F5DD397-D2E4-875E-F251-1E382FA55EED}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\ThreePoints">
-			<UniqueIdentifier>{F72B3D34-C713-9F41-968B-88FB2E10F104}</UniqueIdentifier>
+			<UniqueIdentifier>{3B90C513-B08A-8758-7F43-3D0EBF72BA25}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\UpsideDown">
-			<UniqueIdentifier>{10100E18-3B5B-F941-A2BE-F102C18B135B}</UniqueIdentifier>
+			<UniqueIdentifier>{64F7DDF9-F801-40F3-3B78-71E32471C0B3}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\YokoSelection">
-			<UniqueIdentifier>{C878D9C9-45CE-3446-8193-157109770E59}</UniqueIdentifier>
+			<UniqueIdentifier>{88DEA1B4-9BA8-E19B-B57D-EC70267B84D3}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="src\scenes\YokoSelection\upside-donuts">
-			<UniqueIdentifier>{E832AFA4-77DD-EE43-B1F3-312111577876}</UniqueIdentifier>
+			<UniqueIdentifier>{98DED057-6D76-7E5F-A78C-7C296A14B9B3}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs">
-			<UniqueIdentifier>{4CC01EDB-77D7-034A-997D-4F5807D653D4}</UniqueIdentifier>
+			<UniqueIdentifier>{67A2953F-FF6C-62F1-71E5-269652666FC6}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\openFrameworks">
-			<UniqueIdentifier>{36872C40-FD32-6A4E-8504-482CFD7D7004}</UniqueIdentifier>
+			<UniqueIdentifier>{8758E961-4A21-926D-FE7F-41BF979B5A4E}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\openFrameworks\3d">
-			<UniqueIdentifier>{83ABEF89-0F1A-6149-821E-B385DF8C6F3C}</UniqueIdentifier>
+			<UniqueIdentifier>{7860DAFE-0C0E-4A59-C595-461C262C3930}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\openFrameworks\app">
-			<UniqueIdentifier>{F792DD01-530B-FB4C-9B56-A53FBA4B67FB}</UniqueIdentifier>
+			<UniqueIdentifier>{D3E9883C-4F06-DF53-E785-8E4F4C34AFEC}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\openFrameworks\communication">
-			<UniqueIdentifier>{811E1128-0678-7247-ACF0-5FD475B0330E}</UniqueIdentifier>
+			<UniqueIdentifier>{5BAD3671-B380-997F-E0E0-EC71AE9DA012}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\openFrameworks\events">
-			<UniqueIdentifier>{CBE5DE03-8D5B-304F-945A-B98A48ECE707}</UniqueIdentifier>
+			<UniqueIdentifier>{CD4C3D6C-ABF5-B5C0-DEBE-3C5F14DA2369}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\openFrameworks\gl">
-			<UniqueIdentifier>{B1589E58-A31C-6548-8A80-9D45D7C725C3}</UniqueIdentifier>
+			<UniqueIdentifier>{8CABA114-F314-8942-80B5-809E6D97BF06}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\openFrameworks\graphics">
-			<UniqueIdentifier>{D983880E-0E4D-C841-B311-251F47956DED}</UniqueIdentifier>
+			<UniqueIdentifier>{C921C910-E2A8-E95C-DE76-16245EDD36B6}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\openFrameworks\math">
-			<UniqueIdentifier>{0BE9004C-8359-444C-BB15-D07DC730E876}</UniqueIdentifier>
+			<UniqueIdentifier>{8E6D282F-1024-5764-BE06-A19F35C2F1D0}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\openFrameworks\sound">
-			<UniqueIdentifier>{DC08280F-834D-D245-913D-D33F245D7E7E}</UniqueIdentifier>
+			<UniqueIdentifier>{023B6B94-EEC1-CCE6-AF4F-6B3DB5613F48}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\openFrameworks\types">
-			<UniqueIdentifier>{DD3097F7-43DC-044D-ADF2-B36D316AF0F7}</UniqueIdentifier>
+			<UniqueIdentifier>{817AE3ED-779C-5C37-FD65-5D20026CA461}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\openFrameworks\utils">
-			<UniqueIdentifier>{563A67DE-D033-C94D-9260-DFFC8B6EF16A}</UniqueIdentifier>
+			<UniqueIdentifier>{AFE79AE0-4A0C-7CE8-BED1-5F7B7351B1E6}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\openFrameworks\video">
-			<UniqueIdentifier>{BC93849D-E981-5349-A2F0-8DDDC83126E9}</UniqueIdentifier>
+			<UniqueIdentifier>{E1D8FDFE-A1EB-2D76-6561-911DC971876C}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\ram">
-			<UniqueIdentifier>{E4F2C83F-29CF-8345-8F8C-058102E32D7F}</UniqueIdentifier>
+			<UniqueIdentifier>{6EC03531-2DD3-61F2-3DBE-EE17906272FA}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\ram\Core">
-			<UniqueIdentifier>{8EF9C062-8127-404E-A71A-0B9A1754D5A2}</UniqueIdentifier>
+			<UniqueIdentifier>{4CC9F04D-ECEA-04B6-03DE-FB90404E4E14}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\ram\Event">
-			<UniqueIdentifier>{FA9761E9-EB2D-B843-9E66-0BB6A5437E9F}</UniqueIdentifier>
+			<UniqueIdentifier>{81B3DEB4-5BD8-873C-CC93-DE785482D888}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\ram\Filter">
-			<UniqueIdentifier>{24154868-3F80-DA49-95A2-E398151D30ED}</UniqueIdentifier>
+			<UniqueIdentifier>{44E78E7C-E3EE-A017-A87C-A754D11AA9B3}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\ram\Graphics">
-			<UniqueIdentifier>{8B9C0EE4-970F-8E45-9661-60E6BC2D1B7E}</UniqueIdentifier>
+			<UniqueIdentifier>{5162AFDE-ADA7-DCE6-880B-54969CFDE18E}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\ram\Physics">
-			<UniqueIdentifier>{D6970109-70D7-6046-B246-7A4AF73E5B46}</UniqueIdentifier>
+			<UniqueIdentifier>{D2A5C20D-B678-6FDF-D446-15D5607D74E6}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\ram\Scene">
-			<UniqueIdentifier>{74ED0E78-7129-A24D-A9F7-17B1B13DEE2C}</UniqueIdentifier>
+			<UniqueIdentifier>{E5258BAF-AEE3-FD9D-6F6A-6ACA8CF0C00D}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\ram\UI">
-			<UniqueIdentifier>{805B9F8E-5494-B64A-9435-3B64D1DCAE8B}</UniqueIdentifier>
+			<UniqueIdentifier>{F22A5C2E-BBAD-9835-D176-7BDE3B03A969}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="libs\ram\Utility">
-			<UniqueIdentifier>{99A56790-2215-FC41-A425-E12BFE7E8DF7}</UniqueIdentifier>
+			<UniqueIdentifier>{6C1315FA-AD0D-63BD-164D-6F3262F4E0DD}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons">
-			<UniqueIdentifier>{32B7B10E-C862-0E40-9135-A0BC9CF1CF1D}</UniqueIdentifier>
+			<UniqueIdentifier>{F611BDD3-224D-224D-1078-0B006332C1FD}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxBt">
-			<UniqueIdentifier>{D7F3B865-C402-7B45-8862-4F4DECA21E2B}</UniqueIdentifier>
+			<UniqueIdentifier>{11434815-178F-11E8-265A-C8DE083CA434}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxBt\src">
-			<UniqueIdentifier>{FE6E9940-6494-5A40-90B8-6FDE544FF0C1}</UniqueIdentifier>
+			<UniqueIdentifier>{B5E639F8-7A30-5044-9155-0B3BB14C34E2}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxInteractivePrimitives">
-			<UniqueIdentifier>{606F3780-6802-B048-8F87-19A3B805CEA4}</UniqueIdentifier>
+			<UniqueIdentifier>{B772C3FE-92A2-02AD-DD5C-DD10A9A981F2}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxInteractivePrimitives\src">
-			<UniqueIdentifier>{6998D4FA-A403-A040-AF9D-1CC93BC201BE}</UniqueIdentifier>
+			<UniqueIdentifier>{899C2EA6-87FC-038B-9842-42F2C667ACAF}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxInteractivePrimitives\src\ui">
-			<UniqueIdentifier>{FB868411-DEC0-2B44-9F35-4773B3051AF1}</UniqueIdentifier>
+			<UniqueIdentifier>{BE0DFF4C-0637-0E33-D32B-7C557FEBF3F0}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxUI">
-			<UniqueIdentifier>{B5C65F35-A8F9-3341-B457-3018FE67FB98}</UniqueIdentifier>
+			<UniqueIdentifier>{16A0332F-5008-E7A3-94E5-43AA65193C4F}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxUI\src">
-			<UniqueIdentifier>{FCFAA410-766D-DB41-9F0E-B24DE0FE639D}</UniqueIdentifier>
+			<UniqueIdentifier>{3CD23E1A-39A1-CEB0-88A3-C4A0257B3AC9}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxUITabbedCanvas">
-			<UniqueIdentifier>{67DF0E89-B881-BB42-B3C4-048E284E776A}</UniqueIdentifier>
+			<UniqueIdentifier>{5E678B19-3418-5EA9-6341-0BC7F2323013}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxOsc">
-			<UniqueIdentifier>{F4CF6D99-4B10-E545-9F26-92490483F734}</UniqueIdentifier>
+			<UniqueIdentifier>{A025F8BC-B5FB-5505-B4F3-41786AA8B4C5}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxOsc\libs">
-			<UniqueIdentifier>{9402B426-4F07-9E4C-B05B-C0D9E36E6940}</UniqueIdentifier>
+			<UniqueIdentifier>{66990C61-6D5F-E41F-D642-5BF8EE95C130}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxOsc\libs\oscpack">
-			<UniqueIdentifier>{D3457967-3EC3-5B49-A6A4-BABCF4E1B9AE}</UniqueIdentifier>
+			<UniqueIdentifier>{D71A7A57-6089-8228-A599-940BC6209CFC}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxOsc\libs\oscpack\src">
-			<UniqueIdentifier>{09E2694B-32A3-4645-BE4C-1BE2DE58D06F}</UniqueIdentifier>
+			<UniqueIdentifier>{EAD0BAA4-6745-2A65-5311-46500D8019EC}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxOsc\libs\oscpack\src\ip">
-			<UniqueIdentifier>{8E9E2FD6-2AF3-9C4F-87AC-89BEBC74FB9A}</UniqueIdentifier>
+			<UniqueIdentifier>{FBF43491-8F42-B7F1-067B-6B13BEED50DF}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxOsc\libs\oscpack\src\osc">
-			<UniqueIdentifier>{BB40D614-7F21-AD4C-919B-7BA26550D164}</UniqueIdentifier>
+			<UniqueIdentifier>{5AC7EC53-DB1F-C468-C3CB-9FE9A4BA4B7E}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxOsc\src">
-			<UniqueIdentifier>{7E4E8819-BF63-EA40-9A9C-B8FEB8C48D64}</UniqueIdentifier>
+			<UniqueIdentifier>{A0787748-751D-1938-34A2-DE6C8CDEE36C}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxXmlSettings">
-			<UniqueIdentifier>{73C1FBAF-18B7-3249-96A2-844F451DAE20}</UniqueIdentifier>
+			<UniqueIdentifier>{F6AA9795-8736-B696-5E61-D74F2512C56B}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxXmlSettings\libs">
-			<UniqueIdentifier>{3A37127F-BD33-B841-B868-C40239714365}</UniqueIdentifier>
+			<UniqueIdentifier>{EF42325A-BD94-4E7D-FCB6-D9DA40AF6029}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxXmlSettings\src">
-			<UniqueIdentifier>{98D212C0-551D-6548-A680-8DEE3A036E00}</UniqueIdentifier>
+			<UniqueIdentifier>{2F802C4E-A883-85F2-C0F9-B45BD7C31FF0}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxOsc\libs\oscpack\src\ip\posix">
-			<UniqueIdentifier>{5613874E-BD8A-984D-B1D1-05B98B19B23F}</UniqueIdentifier>
+			<UniqueIdentifier>{1AFEFF63-0CE2-8C9F-B180-A8AD7CA51649}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxOsc\libs\oscpack\src\ip\win32">
-			<UniqueIdentifier>{15C7AD7E-2B7D-2A49-9137-5B334C45D31F}</UniqueIdentifier>
+			<UniqueIdentifier>{606CCA81-2BA6-BBC0-CB9F-13D5B4DE4D1D}</UniqueIdentifier>
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -555,10 +555,7 @@
 		<ClInclude Include="..\..\libs\ram\Core\ramConstants.h">
 			<Filter>libs\ram\Core</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Core\ramGlobalShortcut.h">
-			<Filter>libs\ram\Core</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Core\ramSharedData.h">
+		<ClInclude Include="..\..\libs\ram\Core\ramGlobal.h">
 			<Filter>libs\ram\Core</Filter>
 		</ClInclude>
 		<ClInclude Include="..\..\libs\ram\Event\ramBaseEvent.h">
@@ -637,9 +634,6 @@
 			<Filter>libs\ram\UI</Filter>
 		</ClInclude>
 		<ClInclude Include="..\..\libs\ram\UI\ramControlPanelBase.h">
-			<Filter>libs\ram\UI</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\UI\ramGwenControlPanel.h">
 			<Filter>libs\ram\UI</Filter>
 		</ClInclude>
 		<ClInclude Include="..\..\libs\ram\UI\ramOfxUIControlPanel.h">
@@ -962,7 +956,7 @@
 		<ClCompile Include="..\..\libs\ram\Core\ramCameraManager.cpp">
 			<Filter>libs\ram\Core</Filter>
 		</ClCompile>
-		<ClCompile Include="..\..\libs\ram\Core\ramSharedData.cpp">
+		<ClCompile Include="..\..\libs\ram\Core\ramGlobal.cpp">
 			<Filter>libs\ram\Core</Filter>
 		</ClCompile>
 		<ClCompile Include="..\..\libs\ram\Graphics\ramGraphics.cpp">
@@ -985,9 +979,6 @@
 		</ClCompile>
 		<ClCompile Include="..\..\libs\ram\Scene\ramSceneManager.cpp">
 			<Filter>libs\ram\Scene</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\libs\ram\UI\ramGwenControlPanel.cpp">
-			<Filter>libs\ram\UI</Filter>
 		</ClCompile>
 		<ClCompile Include="..\..\libs\ram\UI\ramOfxUIControlPanel.cpp">
 			<Filter>libs\ram\UI</Filter>

@@ -1,7 +1,7 @@
 #pragma once
 #include "ofMain.h"
 
-#include "ramGlobalShortcut.h"
+#include "ramGlobal.h"
 
 #include "ramControllable.h"
 #include "ramControlPanel.h"
@@ -15,7 +15,7 @@ class EmptyScene : public ramBaseScene
 
 public:
 	
-	const string getName() { return "My scene"; }
+	const string getName() { return "EmptyScene"; }
 	
 	float box_size;
 
@@ -90,6 +90,13 @@ public:
 	
 	virtual void onEnabled() { cout << "[Scene enabled] " << getName() << endl; }
 	virtual void onDisabled() { cout << "[Scene disabled] " << getName() << endl; }
+
+	// nodeArray events
+	virtual void onActorSetup(ramActor &actor) {}
+	virtual void onActorExit(ramActor &actor) {}
+	
+	virtual void onRigidSetup(ramRigidBody &rigid) {}
+	virtual void onRigidExit(ramRigidBody &rigid) {}
 
 	ramBaseScene* getPtr() { return this; }
 

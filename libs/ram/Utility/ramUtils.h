@@ -94,8 +94,3 @@ private:
 	vector<string> hash_keys;
 
 };
-
-inline string ramToResourcePath(string path)
-{
-	return ofFilePath::join(ofToDataPath("../../../../resources"), path);
-}

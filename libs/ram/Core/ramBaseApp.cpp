@@ -1,5 +1,3 @@
-#include "ramSharedData.h"
-
 #include "ramBaseApp.h"
 #include "ramCameraManager.h"
 #include "ramControlPanel.h"
@@ -78,7 +76,7 @@ void ramBaseApp::drawNodeArrays()
 	
 	for (int n=0; n<getNumNodeArray(); n++)
 	{
-		ramNodeArray &o = getNodeArray(n);
+		const ramNodeArray &o = getNodeArray(n);
 		
 		if (o.isActor())
 			drawActor((ramActor&)o);
@@ -92,12 +90,13 @@ void ramBaseApp::drawNodeArrays()
 	
 	while( it != getActorManager().getAllBus().end() )
 	{
-		ramNodeArray &o = (*it).second;
+		const ramNodeArray &o = (*it).second;
 		
 		if (o.isActor())
 			drawActor((ramActor&)o);
 		else
 			drawRigid((ramRigidBody&)o);
+		
 		++it;
 	}
 }

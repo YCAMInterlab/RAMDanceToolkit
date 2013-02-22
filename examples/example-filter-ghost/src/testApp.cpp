@@ -27,7 +27,9 @@ void testApp::setup()
 void testApp::update()
 {
 	// update ghost with passing ramActor
-	ghost.update( getNodeArray(0) );
+	
+	if (getNumNodeArray() > 0)
+		ghost.update( getNodeArray(0) );
 }
 
 //--------------------------------------------------------------

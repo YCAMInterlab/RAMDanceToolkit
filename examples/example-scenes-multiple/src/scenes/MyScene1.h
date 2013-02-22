@@ -10,13 +10,11 @@ public:
 	
 	MyScene1(): fontColor(100) {}
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
-		panel->addSlider("Font Color", 0.0, 255.0, &fontColor, gui.kLength, gui.kDim);
+		gui.addSlider("Font Color", 0.0, 255.0, &fontColor);
 	}
 
 	void setup()

@@ -16,4 +16,6 @@ public:
 	
 	ofxOpenNI openNI;
 	ofxOscSender osc;
+	
+	ofVec3f openniCenter;
 };

@@ -1,18 +1,9 @@
 [submodule "addons/ofxBt"]
 	path = addons/ofxBt
 	url = git@github.com:satoruhiga/ofxBt.git
-[submodule "addons/ofxValue"]
-	path = addons/ofxValue
-	url = git@github.com:satoruhiga/ofxValue.git
-[submodule "addons/ofxControlPanel"]
-	path = addons/ofxControlPanel
-	url = git@github.com:kylemcdonald/ofxControlPanel.git
 [submodule "addons/ofxUI"]
 	path = addons/ofxUI
 	url = https://YoshitoONISHI@github.com/rezaali/ofxUI.git
 [submodule "addons/ofxInteractivePrimitives"]
 	path = addons/ofxInteractivePrimitives
 	url = git@github.com:satoruhiga/ofxInteractivePrimitives.git
-[submodule "addons/ofxGwen"]
-	path = addons/ofxGwen
-	url = git@github.com:satoruhiga/ofxGwen.git

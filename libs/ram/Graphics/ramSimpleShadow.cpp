@@ -1,37 +1,8 @@
 #include "ramSimpleShadow.h"
 
 #include "ramCameraManager.h"
-#include "ramSharedData.h"
 
 #include <numeric>
-
-namespace gl
-{
-	//ax + by + cz + d = 0;
-	static const float kGroundPlaneXUp[] = { 1.0, 0.0, 0.0, 1.0 };
-	static const float kGroundPlaneYUp[] = { 0.0, 1.0, 0.0, 1.0 };
-	static const float kGroundPlaneZUp[] = { 0.0, 0.0, 1.0, 1.0 };
-	
-	inline void calcShadowMatrix(const float groundplane[4],
-								 const float lightpos[3],
-								 float shadowMatrix[16]);
-	
-	
-	void calcShadowMatrix(const float groundplane[],
-						  const float lightpos[],
-						  float shadowMatrix[])
-	{
-		float dot = inner_product(groundplane, groundplane+4, lightpos, 0.f);
-		
-		for(int y = 0; y < 4;++y) {
-			for(int x = 0; x < 4; ++x) {
-				
-				shadowMatrix[y*4+x] = - groundplane[y]*lightpos[x];
-				if (x == y) shadowMatrix[y*4+x] += dot;
-			}
-		}
-	}
-}
 
 void ramSimpleShadow::setup()
 {
@@ -39,7 +10,6 @@ void ramSimpleShadow::setup()
 
 	// defulat light position
 	setLightPosition(ofVec3f(-100.0f, 500.0f, 200.0f));
-	
 	shadow_color.set(ramColor::SHADOW);
 	
 #define _S(src) #src
@@ -67,7 +37,19 @@ void ramSimpleShadow::setup()
 
 void ramSimpleShadow::setLightPosition(ofVec3f pos)
 {
-	gl::calcShadowMatrix(gl::kGroundPlaneYUp, pos.getPtr(), shadow_matrix.getPtr());
+	static const float groundplane[] = { 0.0, 1.0, 0.0, 1.0 };
+	const float* lightpos = pos.getPtr();
+	float* shadowMatrix = shadow_matrix.getPtr();
+	
+	float dot = inner_product(groundplane, groundplane+4, lightpos, 0.f);
+	
+	for(int y = 0; y < 4;++y) {
+		for(int x = 0; x < 4; ++x) {
+			
+			shadowMatrix[y*4+x] = - groundplane[y]*lightpos[x];
+			if (x == y) shadowMatrix[y*4+x] += dot;
+		}
+	}
 }
 
 void ramSimpleShadow::setShadowColor(ofFloatColor color)

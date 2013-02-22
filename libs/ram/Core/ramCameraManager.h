@@ -11,8 +11,6 @@ public:
 	
 	static ramCameraManager& instance();
 	
-	void loadDefaults();
-	
 	inline size_t getNumCameras() { return cameras.size(); }
 	ofCamera* getCamera(size_t index) { return cameras[index]; }
 	
@@ -31,6 +29,8 @@ public:
 	
 	
 	// defaults
+	void loadDefaults();
+	
 	vector<string> getDefaultCameraNames();
 	void rollbackDefaultCameraSetting(int camera_id);
 	
@@ -48,8 +48,3 @@ protected:
 	vector<ramCameraSettings> settings;
 	
 };
-
-void ramBeginCamera();
-void ramEndCamera();
-
-void ramEnableInteractiveCamera(bool v);

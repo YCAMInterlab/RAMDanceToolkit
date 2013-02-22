@@ -6,7 +6,6 @@
 
 #include "ofxUITabbedCanvas.h"
 
-#include "ramSharedData.h"
 #include "ramGraphics.h"
 #include "ramCameraManager.h"
 #include "ramSceneTabs.h"
