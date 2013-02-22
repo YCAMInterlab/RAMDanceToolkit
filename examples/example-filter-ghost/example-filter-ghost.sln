@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "example-filter-ghost", "example-filter-ghost.vcxproj", "{046BAAC6-724C-94EB-9907-733FB729CAEA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{046BAAC6-724C-94EB-9907-733FB729CAEA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{046BAAC6-724C-94EB-9907-733FB729CAEA}.Debug|Win32.Build.0 = Debug|Win32
+		{046BAAC6-724C-94EB-9907-733FB729CAEA}.Release|Win32.ActiveCfg = Release|Win32
+		{046BAAC6-724C-94EB-9907-733FB729CAEA}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
