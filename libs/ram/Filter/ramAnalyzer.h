@@ -107,6 +107,8 @@ class ramMovementAnalyser : public ramNodeFinder, public ramControllable
 {
 public:
 	
+	const string getName() { return "ramMovementAnalyser"; }
+
 	ramMovementAnalyser() : threshold(2), state(false) {}
 	
 	void setThreshold(float v) { threshold = v; }
@@ -187,6 +189,8 @@ protected:
 class ramTimerdMovementAnalyser : public ramMovementAnalyser
 {
 public:
+
+	const string getName() { return "ramTimerdMovementAnalyser"; }
 	
 	ramTimerdMovementAnalyser() : hold_state(false)
 	{

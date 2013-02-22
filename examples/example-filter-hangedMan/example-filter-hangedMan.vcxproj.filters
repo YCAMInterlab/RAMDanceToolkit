@@ -1,861 +1,861 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<ItemGroup>
-		<Filter Include="src">
-			<UniqueIdentifier>{3936603B-DF43-0E85-2B43-3F30ADB50B9B}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs">
-			<UniqueIdentifier>{3A9CDD01-BA47-C1DD-D210-B45B14BFB807}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\openFrameworks">
-			<UniqueIdentifier>{DFF8E015-4F64-6FF9-C312-F0C3E54A2E71}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\openFrameworks\3d">
-			<UniqueIdentifier>{6D7CEF1D-EDC7-0814-F9E6-144B31F9A5C3}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\openFrameworks\app">
-			<UniqueIdentifier>{C7EE0541-5BC7-4E8F-1C81-63467779ACD0}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\openFrameworks\communication">
-			<UniqueIdentifier>{AE663195-0324-041E-2011-18109B921C9F}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\openFrameworks\events">
-			<UniqueIdentifier>{861B58E5-1B8C-64BD-88EB-2F21BE87710D}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\openFrameworks\gl">
-			<UniqueIdentifier>{B907AA20-F740-BA19-3D18-E73B4F5DE418}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\openFrameworks\graphics">
-			<UniqueIdentifier>{3B095FE3-E987-B135-B1EF-B670B4824292}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\openFrameworks\math">
-			<UniqueIdentifier>{AD8FAFF3-D478-3F7B-BC17-7AC9CF7C15D7}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\openFrameworks\sound">
-			<UniqueIdentifier>{EA94786A-B391-F089-E7FF-C9B16E97C516}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\openFrameworks\types">
-			<UniqueIdentifier>{3E241A43-88FE-8B70-34C8-D959B3F22B2F}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\openFrameworks\utils">
-			<UniqueIdentifier>{EA12CAD3-A7CB-9AC3-DEB4-9F726D4F5BAC}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\openFrameworks\video">
-			<UniqueIdentifier>{8D348319-603B-CD51-0E56-5075B1EF52DC}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\ram">
-			<UniqueIdentifier>{08B36F4F-CABD-5064-5039-3A129BBC2B6D}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\ram\Core">
-			<UniqueIdentifier>{4C8F0418-928C-CEF5-8FF5-BC2930D7CF33}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\ram\Event">
-			<UniqueIdentifier>{35975DE6-6B89-B575-D580-CFAEE093361C}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\ram\Filter">
-			<UniqueIdentifier>{3B4DF70B-88B5-571D-B0AA-A310A3E2F6C0}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\ram\Graphics">
-			<UniqueIdentifier>{C0DC9BFE-99DB-EDB8-A825-AC272814005E}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\ram\Physics">
-			<UniqueIdentifier>{4E3B9FEB-04E7-00EE-C196-7CC8039E1AEE}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\ram\Scene">
-			<UniqueIdentifier>{D9D47131-6407-127D-5436-F4CFF933B82C}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\ram\UI">
-			<UniqueIdentifier>{85F3F743-65B0-CBD7-1FC5-E79D3098630F}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="libs\ram\Utility">
-			<UniqueIdentifier>{3A06ACD2-82F6-BE64-7A46-5BB1CB39E95B}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons">
-			<UniqueIdentifier>{EEAA71D0-F768-AA3F-7526-1BD48BEF9F3F}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxBt">
-			<UniqueIdentifier>{4DB70FCB-6DEE-5E3B-A921-419590209ABF}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxBt\src">
-			<UniqueIdentifier>{2F17B6E8-883D-3CB8-FE50-C818BF7D94F6}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxInteractivePrimitives">
-			<UniqueIdentifier>{6B5BE48B-46FA-F118-B0C0-1748FFD861C6}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxInteractivePrimitives\src">
-			<UniqueIdentifier>{3E099574-AC76-E37B-B98C-5B3ECDE3FFD4}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxInteractivePrimitives\src\ui">
-			<UniqueIdentifier>{86887AC2-D54C-0AD9-D6F3-BC1CA1AE84A6}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxUI">
-			<UniqueIdentifier>{07632728-A1CA-B5A0-8B62-E9F695A9EE7F}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxUI\src">
-			<UniqueIdentifier>{88E706A9-018E-AF0B-7867-5A468C09E052}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxUITabbedCanvas">
-			<UniqueIdentifier>{C2C0E857-355A-1A99-5031-87930FCB5B38}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxOsc">
-			<UniqueIdentifier>{A22C3A5F-31BF-AED4-9F62-5E5FCD99B132}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxOsc\libs">
-			<UniqueIdentifier>{E8F81A4E-A2C5-948C-367A-608F99E6FAEC}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxOsc\libs\oscpack">
-			<UniqueIdentifier>{E4DA8355-A30B-B11D-EE9D-D1ADF47FD2DF}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxOsc\libs\oscpack\src">
-			<UniqueIdentifier>{660D3518-0A86-0C35-A16E-D1840F47E804}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxOsc\libs\oscpack\src\ip">
-			<UniqueIdentifier>{CBEF41EE-3BA1-5B04-5E16-3B3568CA8DA2}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxOsc\libs\oscpack\src\osc">
-			<UniqueIdentifier>{806E90A4-13EA-C9EF-42CF-8B0EEE8EA337}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxOsc\src">
-			<UniqueIdentifier>{8D415F33-E496-E62F-E885-F7DB1642A4D2}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxXmlSettings">
-			<UniqueIdentifier>{340494DB-976E-DDB0-4731-C91FED0E59B6}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxXmlSettings\libs">
-			<UniqueIdentifier>{5FCB1011-F4B7-32F8-0BCC-38FA8CDCDCEF}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxXmlSettings\src">
-			<UniqueIdentifier>{4FD726E0-23B7-BB3B-BE6D-3E04238DEE3C}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxOsc\libs\oscpack\src\ip\posix">
-			<UniqueIdentifier>{1FE0A6EF-DDB3-0B4E-9F12-9E7140379036}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxOsc\libs\oscpack\src\ip\win32">
-			<UniqueIdentifier>{6FA42394-E870-CB1B-8EC5-E7E387909EE4}</UniqueIdentifier>
-		</Filter>
-	</ItemGroup>
-	<ItemGroup>
-		<ClInclude Include="src\testApp.h">
-			<Filter>src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\ofMain.h">
-			<Filter>libs\openFrameworks</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\3d\of3dUtils.h">
-			<Filter>libs\openFrameworks\3d</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\3d\ofCamera.h">
-			<Filter>libs\openFrameworks\3d</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\3d\ofEasyCam.h">
-			<Filter>libs\openFrameworks\3d</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\3d\ofMesh.h">
-			<Filter>libs\openFrameworks\3d</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\3d\ofNode.h">
-			<Filter>libs\openFrameworks\3d</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\app\ofAppBaseWindow.h">
-			<Filter>libs\openFrameworks\app</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\app\ofAppGlutWindow.h">
-			<Filter>libs\openFrameworks\app</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\app\ofAppRunner.h">
-			<Filter>libs\openFrameworks\app</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\app\ofBaseApp.h">
-			<Filter>libs\openFrameworks\app</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\communication\ofArduino.h">
-			<Filter>libs\openFrameworks\communication</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\communication\ofSerial.h">
-			<Filter>libs\openFrameworks\communication</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\events\ofEvents.h">
-			<Filter>libs\openFrameworks\events</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\events\ofEventUtils.h">
-			<Filter>libs\openFrameworks\events</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\gl\ofFbo.h">
-			<Filter>libs\openFrameworks\gl</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\gl\ofGLRenderer.h">
-			<Filter>libs\openFrameworks\gl</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\gl\ofGLUtils.h">
-			<Filter>libs\openFrameworks\gl</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\gl\ofLight.h">
-			<Filter>libs\openFrameworks\gl</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\gl\ofMaterial.h">
-			<Filter>libs\openFrameworks\gl</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\gl\ofShader.h">
-			<Filter>libs\openFrameworks\gl</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\gl\ofTexture.h">
-			<Filter>libs\openFrameworks\gl</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\gl\ofVbo.h">
-			<Filter>libs\openFrameworks\gl</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\gl\ofVboMesh.h">
-			<Filter>libs\openFrameworks\gl</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofBitmapFont.h">
-			<Filter>libs\openFrameworks\graphics</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofCairoRenderer.h">
-			<Filter>libs\openFrameworks\graphics</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofGraphics.h">
-			<Filter>libs\openFrameworks\graphics</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofImage.h">
-			<Filter>libs\openFrameworks\graphics</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofPath.h">
-			<Filter>libs\openFrameworks\graphics</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofPixels.h">
-			<Filter>libs\openFrameworks\graphics</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofPolyline.h">
-			<Filter>libs\openFrameworks\graphics</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofRendererCollection.h">
-			<Filter>libs\openFrameworks\graphics</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofTessellator.h">
-			<Filter>libs\openFrameworks\graphics</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofTrueTypeFont.h">
-			<Filter>libs\openFrameworks\graphics</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\math\ofMath.h">
-			<Filter>libs\openFrameworks\math</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\math\ofMatrix3x3.h">
-			<Filter>libs\openFrameworks\math</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\math\ofMatrix4x4.h">
-			<Filter>libs\openFrameworks\math</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\math\ofQuaternion.h">
-			<Filter>libs\openFrameworks\math</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\math\ofVec2f.h">
-			<Filter>libs\openFrameworks\math</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\math\ofVec3f.h">
-			<Filter>libs\openFrameworks\math</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\math\ofVec4f.h">
-			<Filter>libs\openFrameworks\math</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\math\ofVectorMath.h">
-			<Filter>libs\openFrameworks\math</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\sound\ofBaseSoundPlayer.h">
-			<Filter>libs\openFrameworks\sound</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\sound\ofBaseSoundStream.h">
-			<Filter>libs\openFrameworks\sound</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\sound\ofFmodSoundPlayer.h">
-			<Filter>libs\openFrameworks\sound</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\sound\ofOpenALSoundPlayer.h">
-			<Filter>libs\openFrameworks\sound</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\sound\ofPASoundStream.h">
-			<Filter>libs\openFrameworks\sound</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\sound\ofRtAudioSoundStream.h">
-			<Filter>libs\openFrameworks\sound</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\sound\ofSoundPlayer.h">
-			<Filter>libs\openFrameworks\sound</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\sound\ofSoundStream.h">
-			<Filter>libs\openFrameworks\sound</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\types\ofBaseTypes.h">
-			<Filter>libs\openFrameworks\types</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\types\ofColor.h">
-			<Filter>libs\openFrameworks\types</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\types\ofPoint.h">
-			<Filter>libs\openFrameworks\types</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\types\ofRectangle.h">
-			<Filter>libs\openFrameworks\types</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\types\ofTypes.h">
-			<Filter>libs\openFrameworks\types</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\utils\ofConstants.h">
-			<Filter>libs\openFrameworks\utils</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\utils\ofFileUtils.h">
-			<Filter>libs\openFrameworks\utils</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\utils\ofLog.h">
-			<Filter>libs\openFrameworks\utils</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\utils\ofNoise.h">
-			<Filter>libs\openFrameworks\utils</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\utils\ofSystemUtils.h">
-			<Filter>libs\openFrameworks\utils</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\utils\ofThread.h">
-			<Filter>libs\openFrameworks\utils</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\utils\ofURLFileLoader.h">
-			<Filter>libs\openFrameworks\utils</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\utils\ofUtils.h">
-			<Filter>libs\openFrameworks\utils</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\video\ofDirectShowGrabber.h">
-			<Filter>libs\openFrameworks\video</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\video\ofGstUtils.h">
-			<Filter>libs\openFrameworks\video</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\video\ofGstVideoGrabber.h">
-			<Filter>libs\openFrameworks\video</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\video\ofGstVideoPlayer.h">
-			<Filter>libs\openFrameworks\video</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\video\ofQTKitGrabber.h">
-			<Filter>libs\openFrameworks\video</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\video\ofQTKitMovieRenderer.h">
-			<Filter>libs\openFrameworks\video</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\video\ofQTKitPlayer.h">
-			<Filter>libs\openFrameworks\video</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\video\ofQtUtils.h">
-			<Filter>libs\openFrameworks\video</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\video\ofQuickTimeGrabber.h">
-			<Filter>libs\openFrameworks\video</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\video\ofQuickTimePlayer.h">
-			<Filter>libs\openFrameworks\video</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\video\ofVideoGrabber.h">
-			<Filter>libs\openFrameworks\video</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\libs\openFrameworks\video\ofVideoPlayer.h">
-			<Filter>libs\openFrameworks\video</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\ramMain.h">
-			<Filter>libs\ram</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Core\ramActor.h">
-			<Filter>libs\ram\Core</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Core\ramActorManager.h">
-			<Filter>libs\ram\Core</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Core\ramBaseApp.h">
-			<Filter>libs\ram\Core</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Core\ramCameraManager.h">
-			<Filter>libs\ram\Core</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Core\ramConstants.h">
-			<Filter>libs\ram\Core</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Core\ramGlobal.h">
-			<Filter>libs\ram\Core</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Event\ramBaseEvent.h">
-			<Filter>libs\ram\Event</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Event\ramCollisionEvent.h">
-			<Filter>libs\ram\Event</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Event\ramTimeEvent.h">
-			<Filter>libs\ram\Event</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Filter\ramAnalyzer.h">
-			<Filter>libs\ram\Filter</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Filter\ramBaseFilter.h">
-			<Filter>libs\ram\Filter</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Filter\ramExpansion.h">
-			<Filter>libs\ram\Filter</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Filter\ramGhost.h">
-			<Filter>libs\ram\Filter</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Filter\ramLowPassFilter.h">
-			<Filter>libs\ram\Filter</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Filter\ramNodeTransform.h">
-			<Filter>libs\ram\Filter</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Filter\ramPendulum.h">
-			<Filter>libs\ram\Filter</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Filter\ramSession.h">
-			<Filter>libs\ram\Filter</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Filter\ramStamp.h">
-			<Filter>libs\ram\Filter</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Filter\ramTimeFilter.h">
-			<Filter>libs\ram\Filter</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Filter\ramUpsideDown.h">
-			<Filter>libs\ram\Filter</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Graphics\ramGraphics.h">
-			<Filter>libs\ram\Graphics</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Graphics\ramGraphView.h">
-			<Filter>libs\ram\Graphics</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Graphics\ramNodeLine.h">
-			<Filter>libs\ram\Graphics</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Graphics\ramPrimitive.h">
-			<Filter>libs\ram\Graphics</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Graphics\ramSimpleShadow.h">
-			<Filter>libs\ram\Graphics</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Graphics\ramSoftBodyPrimitive.h">
-			<Filter>libs\ram\Graphics</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Physics\ramPhysics.h">
-			<Filter>libs\ram\Physics</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Scene\ramBaseScene.h">
-			<Filter>libs\ram\Scene</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Scene\ramSceneManager.h">
-			<Filter>libs\ram\Scene</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\UI\ramControllable.h">
-			<Filter>libs\ram\UI</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\UI\ramControlPanel.h">
-			<Filter>libs\ram\UI</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\UI\ramControlPanelBase.h">
-			<Filter>libs\ram\UI</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\UI\ramOfxUIControlPanel.h">
-			<Filter>libs\ram\UI</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\UI\ramSceneTabs.h">
-			<Filter>libs\ram\UI</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Utility\ramCameraSettings.h">
-			<Filter>libs\ram\Utility</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Utility\ramNodeArrayBuffer.h">
-			<Filter>libs\ram\Utility</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Utility\ramNodeFinder.h">
-			<Filter>libs\ram\Utility</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Utility\ramNodeIdentifer.h">
-			<Filter>libs\ram\Utility</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Utility\ramSession.h">
-			<Filter>libs\ram\Utility</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Utility\ramTimeShifter.h">
-			<Filter>libs\ram\Utility</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\libs\ram\Utility\ramUtils.h">
-			<Filter>libs\ram\Utility</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxBt\src\ofxBt.h">
-			<Filter>addons\ofxBt\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxBt\src\ofxBtCollisionObject.h">
-			<Filter>addons\ofxBt\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxBt\src\ofxBtHelper.h">
-			<Filter>addons\ofxBt\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxBt\src\ofxBtJoint.h">
-			<Filter>addons\ofxBt\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxBt\src\ofxBtRender.h">
-			<Filter>addons\ofxBt\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxBt\src\ofxBtRigidBody.h">
-			<Filter>addons\ofxBt\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxBt\src\ofxBtSoftBody.h">
-			<Filter>addons\ofxBt\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxBt\src\ofxBtSoftBodyWorld.h">
-			<Filter>addons\ofxBt\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxBt\src\ofxBtWorld.h">
-			<Filter>addons\ofxBt\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxInteractivePrimitives\src\ofxInteractivePrimitives.h">
-			<Filter>addons\ofxInteractivePrimitives\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPBaseElement.h">
-			<Filter>addons\ofxInteractivePrimitives\src\ui</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPButton.h">
-			<Filter>addons\ofxInteractivePrimitives\src\ui</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPMarker.h">
-			<Filter>addons\ofxInteractivePrimitives\src\ui</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPPatcher.h">
-			<Filter>addons\ofxInteractivePrimitives\src\ui</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPStringBox.h">
-			<Filter>addons\ofxInteractivePrimitives\src\ui</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUI.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUI2DPad.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIBaseDraws.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIBiLabelSlider.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIButton.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUICanvas.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUICircleSlider.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUICustomImageButton.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIDropDownList.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIEventArgs.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIFPS.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIFPSSlider.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIImage.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIImageButton.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIImageSampler.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIImageSlider.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIImageToggle.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUILabel.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUILabelButton.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUILabelToggle.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIMinimalSlider.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIMovingGraph.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIMultiImageButton.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIMultiImageSlider.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIMultiImageToggle.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUINumberDialer.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIRadio.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIRangeSlider.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIRectangle.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIRotarySlider.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIScrollableCanvas.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUISlider.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUISpacer.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUISpectrum.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUITextArea.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUITextInput.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIToggle.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIToggleMatrix.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIWaveform.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIWidget.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUI\src\ofxUIWidgetWithLabel.h">
-			<Filter>addons\ofxUI\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\addons\ofxUITabbedCanvas\ofxUITabbedCanvas.h">
-			<Filter>addons\ofxUITabbedCanvas</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.h">
-			<Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\NetworkingUtils.h">
-			<Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\PacketListener.h">
-			<Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\TimerListener.h">
-			<Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\UdpSocket.h">
-			<Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\MessageMappingOscPacketListener.h">
-			<Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscException.h">
-			<Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscHostEndianness.h">
-			<Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.h">
-			<Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPacketListener.h">
-			<Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.h">
-			<Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.h">
-			<Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.h">
-			<Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOsc.h">
-			<Filter>addons\ofxOsc\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscArg.h">
-			<Filter>addons\ofxOsc\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscBundle.h">
-			<Filter>addons\ofxOsc\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscMessage.h">
-			<Filter>addons\ofxOsc\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscReceiver.h">
-			<Filter>addons\ofxOsc\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscSender.h">
-			<Filter>addons\ofxOsc\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h">
-			<Filter>addons\ofxXmlSettings\libs</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h">
-			<Filter>addons\ofxXmlSettings\src</Filter>
-		</ClInclude>
-	</ItemGroup>
-	<ItemGroup>
-		<ClCompile Include="src\main.cpp">
-			<Filter>src</Filter>
-		</ClCompile>
-		<ClCompile Include="src\testApp.cpp">
-			<Filter>src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\libs\ram\Core\ramActor.cpp">
-			<Filter>libs\ram\Core</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\libs\ram\Core\ramActorManager.cpp">
-			<Filter>libs\ram\Core</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\libs\ram\Core\ramBaseApp.cpp">
-			<Filter>libs\ram\Core</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\libs\ram\Core\ramCameraManager.cpp">
-			<Filter>libs\ram\Core</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\libs\ram\Core\ramGlobal.cpp">
-			<Filter>libs\ram\Core</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\libs\ram\Graphics\ramGraphics.cpp">
-			<Filter>libs\ram\Graphics</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\libs\ram\Graphics\ramNodeLine.cpp">
-			<Filter>libs\ram\Graphics</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\libs\ram\Graphics\ramPrimitive.cpp">
-			<Filter>libs\ram\Graphics</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\libs\ram\Graphics\ramSimpleShadow.cpp">
-			<Filter>libs\ram\Graphics</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\libs\ram\Graphics\ramSoftBodyPrimitive.cpp">
-			<Filter>libs\ram\Graphics</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\libs\ram\Physics\ramPhysics.cpp">
-			<Filter>libs\ram\Physics</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\libs\ram\Scene\ramSceneManager.cpp">
-			<Filter>libs\ram\Scene</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\libs\ram\UI\ramOfxUIControlPanel.cpp">
-			<Filter>libs\ram\UI</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\libs\ram\Utility\ramCameraSettings.cpp">
-			<Filter>libs\ram\Utility</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\libs\ram\Utility\ramUtils.cpp">
-			<Filter>libs\ram\Utility</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\addons\ofxBt\src\ofxBt.cpp">
-			<Filter>addons\ofxBt\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\addons\ofxBt\src\ofxBtCollisionObject.cpp">
-			<Filter>addons\ofxBt\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\addons\ofxBt\src\ofxBtHelper.cpp">
-			<Filter>addons\ofxBt\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\addons\ofxBt\src\ofxBtJoint.cpp">
-			<Filter>addons\ofxBt\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\addons\ofxBt\src\ofxBtRigidBody.cpp">
-			<Filter>addons\ofxBt\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\addons\ofxBt\src\ofxBtSoftBody.cpp">
-			<Filter>addons\ofxBt\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\addons\ofxBt\src\ofxBtSoftBodyWorld.cpp">
-			<Filter>addons\ofxBt\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\addons\ofxBt\src\ofxBtWorld.cpp">
-			<Filter>addons\ofxBt\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\addons\ofxInteractivePrimitives\src\ofxInteractivePrimitives.cpp">
-			<Filter>addons\ofxInteractivePrimitives\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPPatcher.cpp">
-			<Filter>addons\ofxInteractivePrimitives\src\ui</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\addons\ofxUITabbedCanvas\ofxUITabbedCanvas.cpp">
-			<Filter>addons\ofxUITabbedCanvas</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.cpp">
-			<Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix\NetworkingUtils.cpp">
-			<Filter>addons\ofxOsc\libs\oscpack\src\ip\posix</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix\UdpSocket.cpp">
-			<Filter>addons\ofxOsc\libs\oscpack\src\ip\posix</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32\NetworkingUtilsWin.cpp">
-			<Filter>addons\ofxOsc\libs\oscpack\src\ip\win32</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32\UdpSocketWin.cpp">
-			<Filter>addons\ofxOsc\libs\oscpack\src\ip\win32</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.cpp">
-			<Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.cpp">
-			<Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.cpp">
-			<Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.cpp">
-			<Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscBundle.cpp">
-			<Filter>addons\ofxOsc\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscMessage.cpp">
-			<Filter>addons\ofxOsc\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscReceiver.cpp">
-			<Filter>addons\ofxOsc\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscSender.cpp">
-			<Filter>addons\ofxOsc\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp">
-			<Filter>addons\ofxXmlSettings\libs</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp">
-			<Filter>addons\ofxXmlSettings\libs</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
-			<Filter>addons\ofxXmlSettings\libs</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp">
-			<Filter>addons\ofxXmlSettings\src</Filter>
-		</ClCompile>
-	</ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{BE5264EE-C29D-5142-A56A-44984CFFE10A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs">
+      <UniqueIdentifier>{997DB79E-7735-8B4C-9CBF-CEC7C924D502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\openFrameworks">
+      <UniqueIdentifier>{56152DA0-DBE3-2F4E-8032-1D549AAF1B3D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\openFrameworks\3d">
+      <UniqueIdentifier>{92BD9D97-73B2-B541-9B50-EC36C75FB033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\openFrameworks\app">
+      <UniqueIdentifier>{BE5545BC-039D-5C42-AADB-6D39F8C32FE6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\openFrameworks\communication">
+      <UniqueIdentifier>{1F192395-4457-FB4E-81B3-23E36668418C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\openFrameworks\events">
+      <UniqueIdentifier>{15A5DDED-63F1-D742-841C-B49D58252380}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\openFrameworks\gl">
+      <UniqueIdentifier>{011C09D2-9CCA-EF41-93D1-29852C14A87C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\openFrameworks\graphics">
+      <UniqueIdentifier>{897FADF1-450D-B441-AF97-7E8BC8133F59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\openFrameworks\math">
+      <UniqueIdentifier>{52440E40-E7A5-C94C-BD46-3E8AD54497A6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\openFrameworks\sound">
+      <UniqueIdentifier>{B4B09E7D-2D2C-614B-9E1D-A19D1A4DDB8E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\openFrameworks\types">
+      <UniqueIdentifier>{381BD05E-B60E-9D47-934C-F2D90B8E5014}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\openFrameworks\utils">
+      <UniqueIdentifier>{2970AAC0-242A-9D4F-BA1B-52F7DA493F67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\openFrameworks\video">
+      <UniqueIdentifier>{63DEE2F0-EE43-C747-A8B8-3CAB3DDF2A6F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\ram">
+      <UniqueIdentifier>{06A3AFA1-4B5D-1F4F-B64D-6BCFE9AE599D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\ram\Core">
+      <UniqueIdentifier>{398EF10F-ACAE-9448-8747-20F47BF85CC5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\ram\Event">
+      <UniqueIdentifier>{67EAC91C-78AB-6944-AED5-224D1B364DD7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\ram\Filter">
+      <UniqueIdentifier>{AF2F3B84-54BF-2E4D-AD43-1D4ACE8174C0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\ram\Graphics">
+      <UniqueIdentifier>{B63882A5-D689-6646-9638-67801330D911}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\ram\Physics">
+      <UniqueIdentifier>{4A449BC4-687C-694C-80A3-BCF8A1AD9E35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\ram\Scene">
+      <UniqueIdentifier>{4548D417-E5DA-CA48-A4A9-95D2E2FAC25A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\ram\UI">
+      <UniqueIdentifier>{3D39FA11-C5BB-1048-962D-2E17DE43F7F7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\ram\Utility">
+      <UniqueIdentifier>{82E91713-52AC-7348-B1C6-69D8FB77FBAA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons">
+      <UniqueIdentifier>{F94B6456-4EF8-B448-9881-497E4F964A81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxBt">
+      <UniqueIdentifier>{767008D6-5C19-D547-85E7-3E44860233C1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxBt\src">
+      <UniqueIdentifier>{231AE89F-59FC-5544-95A5-A1AF59B34F00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxInteractivePrimitives">
+      <UniqueIdentifier>{EE187F10-8166-3043-83E5-4E22F35770AC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxInteractivePrimitives\src">
+      <UniqueIdentifier>{2A4040E3-7865-7C49-A16E-09A08A952DF4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxInteractivePrimitives\src\ui">
+      <UniqueIdentifier>{DF6E7524-34D3-5041-82A2-F3164B6D7617}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxUI">
+      <UniqueIdentifier>{A8F8ABCF-0D71-5B4A-A22A-CA096E5C6579}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxUI\src">
+      <UniqueIdentifier>{885F5D4B-8E5F-E141-9CA3-7950D7F64AFF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxUITabbedCanvas">
+      <UniqueIdentifier>{CF245F24-FF0F-FD4C-9C2E-185BB4409114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOsc">
+      <UniqueIdentifier>{CCFA62F0-1C61-D747-9BE2-AABBA96650CC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOsc\libs">
+      <UniqueIdentifier>{6224E6D7-DBAB-DF4A-B3E5-A230532F32D4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOsc\libs\oscpack">
+      <UniqueIdentifier>{E4E6E68D-F3B6-9846-BA3A-FB2E32AECB06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOsc\libs\oscpack\src">
+      <UniqueIdentifier>{5E161029-B71D-244D-A8DE-DD841236F579}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOsc\libs\oscpack\src\ip">
+      <UniqueIdentifier>{B30642F2-AFD2-D048-A5F4-66BFF15F2D6C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOsc\libs\oscpack\src\osc">
+      <UniqueIdentifier>{F7B94EF8-DF95-744E-9DF2-32FB53CEA5FC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOsc\src">
+      <UniqueIdentifier>{013BD8F8-FC22-1C43-9DF7-7CB18813B4B8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOsc\libs\oscpack\src\ip\posix">
+      <UniqueIdentifier>{1381113C-8A5C-3248-B1DA-49A8455A0489}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOsc\libs\oscpack\src\ip\win32">
+      <UniqueIdentifier>{97921112-A0A5-3E49-8938-AB1C00999C25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxXmlSettings">
+      <UniqueIdentifier>{B3C17AE7-51A9-ED4B-9732-1898121D3860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxXmlSettings\libs">
+      <UniqueIdentifier>{0CB5943C-DB92-7B4C-AD99-D57F0F69EB4D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxXmlSettings\src">
+      <UniqueIdentifier>{FED6D042-EECB-0744-99AE-B095170F96D3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\testApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\ofMain.h">
+      <Filter>libs\openFrameworks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\3d\of3dUtils.h">
+      <Filter>libs\openFrameworks\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\3d\ofCamera.h">
+      <Filter>libs\openFrameworks\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\3d\ofEasyCam.h">
+      <Filter>libs\openFrameworks\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\3d\ofMesh.h">
+      <Filter>libs\openFrameworks\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\3d\ofNode.h">
+      <Filter>libs\openFrameworks\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\app\ofAppBaseWindow.h">
+      <Filter>libs\openFrameworks\app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\app\ofAppGlutWindow.h">
+      <Filter>libs\openFrameworks\app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\app\ofAppRunner.h">
+      <Filter>libs\openFrameworks\app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\app\ofBaseApp.h">
+      <Filter>libs\openFrameworks\app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\communication\ofArduino.h">
+      <Filter>libs\openFrameworks\communication</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\communication\ofSerial.h">
+      <Filter>libs\openFrameworks\communication</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\events\ofEvents.h">
+      <Filter>libs\openFrameworks\events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\events\ofEventUtils.h">
+      <Filter>libs\openFrameworks\events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofFbo.h">
+      <Filter>libs\openFrameworks\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofGLRenderer.h">
+      <Filter>libs\openFrameworks\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofGLUtils.h">
+      <Filter>libs\openFrameworks\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofLight.h">
+      <Filter>libs\openFrameworks\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofMaterial.h">
+      <Filter>libs\openFrameworks\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofShader.h">
+      <Filter>libs\openFrameworks\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofTexture.h">
+      <Filter>libs\openFrameworks\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofVbo.h">
+      <Filter>libs\openFrameworks\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofVboMesh.h">
+      <Filter>libs\openFrameworks\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofBitmapFont.h">
+      <Filter>libs\openFrameworks\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofCairoRenderer.h">
+      <Filter>libs\openFrameworks\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofGraphics.h">
+      <Filter>libs\openFrameworks\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofImage.h">
+      <Filter>libs\openFrameworks\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofPath.h">
+      <Filter>libs\openFrameworks\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofPixels.h">
+      <Filter>libs\openFrameworks\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofPolyline.h">
+      <Filter>libs\openFrameworks\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofRendererCollection.h">
+      <Filter>libs\openFrameworks\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofTessellator.h">
+      <Filter>libs\openFrameworks\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofTrueTypeFont.h">
+      <Filter>libs\openFrameworks\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\math\ofMath.h">
+      <Filter>libs\openFrameworks\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\math\ofMatrix3x3.h">
+      <Filter>libs\openFrameworks\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\math\ofMatrix4x4.h">
+      <Filter>libs\openFrameworks\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\math\ofQuaternion.h">
+      <Filter>libs\openFrameworks\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\math\ofVec2f.h">
+      <Filter>libs\openFrameworks\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\math\ofVec3f.h">
+      <Filter>libs\openFrameworks\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\math\ofVec4f.h">
+      <Filter>libs\openFrameworks\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\math\ofVectorMath.h">
+      <Filter>libs\openFrameworks\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofBaseSoundPlayer.h">
+      <Filter>libs\openFrameworks\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofBaseSoundStream.h">
+      <Filter>libs\openFrameworks\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofFmodSoundPlayer.h">
+      <Filter>libs\openFrameworks\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofOpenALSoundPlayer.h">
+      <Filter>libs\openFrameworks\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofPASoundStream.h">
+      <Filter>libs\openFrameworks\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofRtAudioSoundStream.h">
+      <Filter>libs\openFrameworks\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofSoundPlayer.h">
+      <Filter>libs\openFrameworks\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofSoundStream.h">
+      <Filter>libs\openFrameworks\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\types\ofBaseTypes.h">
+      <Filter>libs\openFrameworks\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\types\ofColor.h">
+      <Filter>libs\openFrameworks\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\types\ofPoint.h">
+      <Filter>libs\openFrameworks\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\types\ofRectangle.h">
+      <Filter>libs\openFrameworks\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\types\ofTypes.h">
+      <Filter>libs\openFrameworks\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofConstants.h">
+      <Filter>libs\openFrameworks\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofFileUtils.h">
+      <Filter>libs\openFrameworks\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofLog.h">
+      <Filter>libs\openFrameworks\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofNoise.h">
+      <Filter>libs\openFrameworks\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofSystemUtils.h">
+      <Filter>libs\openFrameworks\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofThread.h">
+      <Filter>libs\openFrameworks\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofURLFileLoader.h">
+      <Filter>libs\openFrameworks\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofUtils.h">
+      <Filter>libs\openFrameworks\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofDirectShowGrabber.h">
+      <Filter>libs\openFrameworks\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofGstUtils.h">
+      <Filter>libs\openFrameworks\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofGstVideoGrabber.h">
+      <Filter>libs\openFrameworks\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofGstVideoPlayer.h">
+      <Filter>libs\openFrameworks\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofQTKitGrabber.h">
+      <Filter>libs\openFrameworks\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofQTKitMovieRenderer.h">
+      <Filter>libs\openFrameworks\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofQTKitPlayer.h">
+      <Filter>libs\openFrameworks\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofQtUtils.h">
+      <Filter>libs\openFrameworks\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofQuickTimeGrabber.h">
+      <Filter>libs\openFrameworks\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofQuickTimePlayer.h">
+      <Filter>libs\openFrameworks\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofVideoGrabber.h">
+      <Filter>libs\openFrameworks\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofVideoPlayer.h">
+      <Filter>libs\openFrameworks\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\ramMain.h">
+      <Filter>libs\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\ramActor.h">
+      <Filter>libs\ram\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\ramActorManager.h">
+      <Filter>libs\ram\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\ramBaseApp.h">
+      <Filter>libs\ram\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\ramCameraManager.h">
+      <Filter>libs\ram\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\ramConstants.h">
+      <Filter>libs\ram\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\ramGlobal.h">
+      <Filter>libs\ram\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Event\ramBaseEvent.h">
+      <Filter>libs\ram\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Event\ramCollisionEvent.h">
+      <Filter>libs\ram\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Event\ramTimeEvent.h">
+      <Filter>libs\ram\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Filter\ramAnalyzer.h">
+      <Filter>libs\ram\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Filter\ramBaseFilter.h">
+      <Filter>libs\ram\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Filter\ramExpansion.h">
+      <Filter>libs\ram\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Filter\ramGhost.h">
+      <Filter>libs\ram\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Filter\ramLowPassFilter.h">
+      <Filter>libs\ram\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Filter\ramNodeTransform.h">
+      <Filter>libs\ram\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Filter\ramPendulum.h">
+      <Filter>libs\ram\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Filter\ramSession.h">
+      <Filter>libs\ram\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Filter\ramStamp.h">
+      <Filter>libs\ram\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Filter\ramTimeFilter.h">
+      <Filter>libs\ram\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Filter\ramUpsideDown.h">
+      <Filter>libs\ram\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Graphics\ramGraphics.h">
+      <Filter>libs\ram\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Graphics\ramGraphView.h">
+      <Filter>libs\ram\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Graphics\ramNodeLine.h">
+      <Filter>libs\ram\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Graphics\ramPrimitive.h">
+      <Filter>libs\ram\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Graphics\ramSimpleShadow.h">
+      <Filter>libs\ram\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Graphics\ramSoftBodyPrimitive.h">
+      <Filter>libs\ram\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Physics\ramPhysics.h">
+      <Filter>libs\ram\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Scene\ramBaseScene.h">
+      <Filter>libs\ram\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Scene\ramSceneManager.h">
+      <Filter>libs\ram\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\UI\ramControllable.h">
+      <Filter>libs\ram\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\UI\ramControlPanel.h">
+      <Filter>libs\ram\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\UI\ramControlPanelBase.h">
+      <Filter>libs\ram\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\UI\ramOfxUIControlPanel.h">
+      <Filter>libs\ram\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\UI\ramSceneTabs.h">
+      <Filter>libs\ram\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Utility\ramCameraSettings.h">
+      <Filter>libs\ram\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Utility\ramNodeArrayBuffer.h">
+      <Filter>libs\ram\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Utility\ramNodeFinder.h">
+      <Filter>libs\ram\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Utility\ramNodeIdentifer.h">
+      <Filter>libs\ram\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Utility\ramSession.h">
+      <Filter>libs\ram\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Utility\ramTimeShifter.h">
+      <Filter>libs\ram\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Utility\ramUtils.h">
+      <Filter>libs\ram\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxBt\src\ofxBt.h">
+      <Filter>addons\ofxBt\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxBt\src\ofxBtCollisionObject.h">
+      <Filter>addons\ofxBt\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxBt\src\ofxBtHelper.h">
+      <Filter>addons\ofxBt\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxBt\src\ofxBtJoint.h">
+      <Filter>addons\ofxBt\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxBt\src\ofxBtRender.h">
+      <Filter>addons\ofxBt\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxBt\src\ofxBtRigidBody.h">
+      <Filter>addons\ofxBt\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxBt\src\ofxBtSoftBody.h">
+      <Filter>addons\ofxBt\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxBt\src\ofxBtSoftBodyWorld.h">
+      <Filter>addons\ofxBt\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxBt\src\ofxBtWorld.h">
+      <Filter>addons\ofxBt\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxInteractivePrimitives\src\ofxInteractivePrimitives.h">
+      <Filter>addons\ofxInteractivePrimitives\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPBaseElement.h">
+      <Filter>addons\ofxInteractivePrimitives\src\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPButton.h">
+      <Filter>addons\ofxInteractivePrimitives\src\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPMarker.h">
+      <Filter>addons\ofxInteractivePrimitives\src\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPPatcher.h">
+      <Filter>addons\ofxInteractivePrimitives\src\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPStringBox.h">
+      <Filter>addons\ofxInteractivePrimitives\src\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUI.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUI2DPad.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIBaseDraws.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIBiLabelSlider.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIButton.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUICanvas.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUICircleSlider.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUICustomImageButton.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIDropDownList.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIEventArgs.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIFPS.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIFPSSlider.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIImage.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIImageButton.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIImageSampler.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIImageSlider.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIImageToggle.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUILabel.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUILabelButton.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUILabelToggle.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIMinimalSlider.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIMovingGraph.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIMultiImageButton.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIMultiImageSlider.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIMultiImageToggle.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUINumberDialer.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIRadio.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIRangeSlider.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIRectangle.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIRotarySlider.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIScrollableCanvas.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUISlider.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUISpacer.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUISpectrum.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUITextArea.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUITextInput.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIToggle.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIToggleMatrix.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIWaveform.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIWidget.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIWidgetWithLabel.h">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxUITabbedCanvas\ofxUITabbedCanvas.h">
+      <Filter>addons\ofxUITabbedCanvas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\NetworkingUtils.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\PacketListener.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\TimerListener.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\UdpSocket.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\MessageMappingOscPacketListener.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscException.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscHostEndianness.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPacketListener.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOsc.h">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscArg.h">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscBundle.h">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscMessage.h">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscReceiver.h">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscSender.h">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h">
+      <Filter>addons\ofxXmlSettings\libs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h">
+      <Filter>addons\ofxXmlSettings\src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\ramActor.cpp">
+      <Filter>libs\ram\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\ramActorManager.cpp">
+      <Filter>libs\ram\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\ramBaseApp.cpp">
+      <Filter>libs\ram\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\ramCameraManager.cpp">
+      <Filter>libs\ram\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\ramGlobal.cpp">
+      <Filter>libs\ram\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Graphics\ramGraphics.cpp">
+      <Filter>libs\ram\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Graphics\ramNodeLine.cpp">
+      <Filter>libs\ram\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Graphics\ramPrimitive.cpp">
+      <Filter>libs\ram\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Graphics\ramSimpleShadow.cpp">
+      <Filter>libs\ram\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Graphics\ramSoftBodyPrimitive.cpp">
+      <Filter>libs\ram\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Physics\ramPhysics.cpp">
+      <Filter>libs\ram\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Scene\ramSceneManager.cpp">
+      <Filter>libs\ram\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\UI\ramOfxUIControlPanel.cpp">
+      <Filter>libs\ram\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Utility\ramCameraSettings.cpp">
+      <Filter>libs\ram\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Utility\ramUtils.cpp">
+      <Filter>libs\ram\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxBt\src\ofxBt.cpp">
+      <Filter>addons\ofxBt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxBt\src\ofxBtCollisionObject.cpp">
+      <Filter>addons\ofxBt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxBt\src\ofxBtHelper.cpp">
+      <Filter>addons\ofxBt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxBt\src\ofxBtJoint.cpp">
+      <Filter>addons\ofxBt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxBt\src\ofxBtRigidBody.cpp">
+      <Filter>addons\ofxBt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxBt\src\ofxBtSoftBody.cpp">
+      <Filter>addons\ofxBt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxBt\src\ofxBtSoftBodyWorld.cpp">
+      <Filter>addons\ofxBt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxBt\src\ofxBtWorld.cpp">
+      <Filter>addons\ofxBt\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxInteractivePrimitives\src\ofxInteractivePrimitives.cpp">
+      <Filter>addons\ofxInteractivePrimitives\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxInteractivePrimitives\src\ui\ofxIPPatcher.cpp">
+      <Filter>addons\ofxInteractivePrimitives\src\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUITabbedCanvas\ofxUITabbedCanvas.cpp">
+      <Filter>addons\ofxUITabbedCanvas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.cpp">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix\NetworkingUtils.cpp">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip\posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix\UdpSocket.cpp">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip\posix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32\NetworkingUtilsWin.cpp">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32\UdpSocketWin.cpp">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.cpp">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.cpp">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.cpp">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.cpp">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscBundle.cpp">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscMessage.cpp">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscReceiver.cpp">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscSender.cpp">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp">
+      <Filter>addons\ofxXmlSettings\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp">
+      <Filter>addons\ofxXmlSettings\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
+      <Filter>addons\ofxXmlSettings\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp">
+      <Filter>addons\ofxXmlSettings\src</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>

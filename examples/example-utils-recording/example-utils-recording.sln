@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "example-utils-recording", "example-utils-recording.vcxproj", "{D38A7054-ABE5-8F53-13AE-9C32CD1AD67B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "example-utils-recording", "example-utils-recording.vcxproj", "{6AA76B5E-0036-924B-AD51-6EDBCBF92012}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D38A7054-ABE5-8F53-13AE-9C32CD1AD67B}.Debug|Win32.ActiveCfg = Debug|Win32
-		{D38A7054-ABE5-8F53-13AE-9C32CD1AD67B}.Debug|Win32.Build.0 = Debug|Win32
-		{D38A7054-ABE5-8F53-13AE-9C32CD1AD67B}.Release|Win32.ActiveCfg = Release|Win32
-		{D38A7054-ABE5-8F53-13AE-9C32CD1AD67B}.Release|Win32.Build.0 = Release|Win32
+		{6AA76B5E-0036-924B-AD51-6EDBCBF92012}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6AA76B5E-0036-924B-AD51-6EDBCBF92012}.Debug|Win32.Build.0 = Debug|Win32
+		{6AA76B5E-0036-924B-AD51-6EDBCBF92012}.Release|Win32.ActiveCfg = Release|Win32
+		{6AA76B5E-0036-924B-AD51-6EDBCBF92012}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

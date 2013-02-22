@@ -40,11 +40,6 @@ void testApp::draw()
 		
 		ramDrawBasicActor(actor);
 		ramDrawActorCube(actor);
-		
-		ramBeginShadow();
-		ramDrawBasicActor(actor);
-		ramDrawActorCube(actor);
-		ramEndShadow();
 	}
 	
 	ramEndCamera();
