@@ -174,9 +174,23 @@ void ramActorManager::update()
 	
 	for (int i = 0; i < nodearrays.size(); i++)
 	{
-		ramNodeArray &array = nodearrays[i];
+		const ramNodeArray &array = nodearrays[i];
+		
 		if (array.isOutdated() && !isFreezed())
+		{
+			if (array.isActor())
+			{
+				ramActor o = array;
+				ofNotifyEvent(actorExit, o);
+			}
+			else
+			{
+				ramRigidBody o = array;
+				ofNotifyEvent(rigidExit, o);
+			}
+			
 			nodearrays.erase(array.getName());
+		}
 	}
 	
 	rootNode.update();
@@ -225,6 +239,8 @@ void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 			o.setName(name);
 			o.updateWithOscMessage(m);
 			nodearrays.set(name, o);
+			
+			ofNotifyEvent(actorSetup, o);
 		}
 		else
 		{
@@ -241,6 +257,8 @@ void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 			o.setName(name);
 			o.updateWithOscMessage(m);
 			nodearrays.set(name, o);
+			
+			ofNotifyEvent(rigidSetup, o);
 		}
 		else
 		{

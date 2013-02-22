@@ -14,10 +14,10 @@ class ramActorManager
 {
 public:
 	
-	ofEvent<ramActor> actorEntered;
-	ofEvent<ramActor> actorExited;
-	ofEvent<ramRigidBody> rigidEntered;
-	ofEvent<ramRigidBody> rigidExited;
+	ofEvent<ramActor> actorSetup;
+	ofEvent<ramActor> actorExit;
+	ofEvent<ramRigidBody> rigidSetup;
+	ofEvent<ramRigidBody> rigidExit;
 	
 	ofEvent<ramNodeIdentifer> selectStateChanged;
 	
