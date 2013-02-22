@@ -5,9 +5,10 @@ class EmptyScene : public ramBaseScene
 	
 public:
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	const string getName() { return "My scene"; }
+	
+	void setupControlPanel()
 	{
-		ofAddListener(panel->newGUIEvent, this, &EmptyScene::onValueChanged);
 	}
 
 	void setup()
@@ -43,11 +44,5 @@ public:
 	
 	}
 	
-	void onValueChanged(ofxUIEventArgs& e)
-	{
-		cout << "I am " << e.widget->getName() << endl;
-	}
-	
-	const string getName() { return "My scene"; }
 };
 

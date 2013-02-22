@@ -20,10 +20,6 @@ public:
 		
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		
-		gui.addSection(getName());
-		
-//		gui.addToggle("Rec", )
-		
 		ofxUICanvas* panel = gui.getCurrentUIContext();
 		
 		panel->addToggle("Rec", false, 40, 40);

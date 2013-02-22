@@ -15,7 +15,6 @@ public:
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
-		gui.addPanel(getName());
 		gui.addSlider("Font Color", 0.0, 255.0, &fontColor);
 		
 		ghost.setupControlPanel();
