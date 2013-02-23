@@ -56,8 +56,8 @@ public:
 
 	// ram methods
 	// ------------------------
-	void drawActor(ramActor &actor);
-	void drawRigid(ramRigidBody &rigid);
+	void drawActor(const ramActor &actor);
+	void drawRigid(const ramRigidBody &rigid);
 };
 ]]
 
@@ -91,12 +91,12 @@ void testApp::draw()
 
 #pragma mark - ram methods
 //--------------------------------------------------------------
-void testApp::drawActor(ramActor &actor)
+void testApp::drawActor(const ramActor &actor)
 {
 }
 
 //--------------------------------------------------------------
-void testApp::drawRigid(ramRigidBody &rigid)
+void testApp::drawRigid(const ramRigidBody &rigid)
 {
 }
 

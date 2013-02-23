@@ -48,6 +48,11 @@ public:
 	virtual void setupControlPanel() {}
 	virtual void setup() {}
 
+	inline const ramNodeArray& operator()(const ramNodeArray& src)
+	{
+		return update(src);
+	}
+	
 	const ramNodeArray& update(const ramNodeArray& src)
 	{
 		if (cache.getNumNode() != src.getNumNode())

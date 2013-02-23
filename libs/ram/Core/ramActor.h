@@ -94,14 +94,14 @@ public:
 	ramNode operator-(const ramNode &node) const;
 	ramNode& operator-=(const ramNode &node);
 
-	ramNode& lerp(const ramNode &node, float t);
-	ramNode getLerpd(const ramNode &node, float t) const;
+	ramNode& lerp(const ramNode &base, float t);
+	ramNode getLerpd(const ramNode &base, float t) const;
 
-	ramNode& normalize(const ramNode &node, float length);
-	ramNode getNormalized(const ramNode &node, float length) const;
+	ramNode& normalize(const ramNode &base, float length);
+	ramNode getNormalized(const ramNode &base, float length) const;
 
-	ramNode& limit(const ramNode &node, float t);
-	ramNode getLimited(const ramNode &node, float length) const;
+	ramNode& limit(const ramNode &base, float t);
+	ramNode getLimited(const ramNode &base, float length) const;
 
 private:
 
@@ -154,14 +154,14 @@ public:
 	ramNodeArray operator-(const ramNodeArray &arr) const;
 	ramNodeArray& operator-=(const ramNodeArray &arr);
 
-	ramNodeArray& lerp(const ramNodeArray &arr, float t);
-	ramNodeArray getLerpd(const ramNodeArray &arr, float t) const;
+	ramNodeArray& lerp(const ramNodeArray &base, float t);
+	ramNodeArray getLerpd(const ramNodeArray &base, float t) const;
 
-	ramNodeArray& normalize(const ramNodeArray &arr, float length);
-	ramNodeArray getNormalized(const ramNodeArray &arr, float length) const;
+	ramNodeArray& normalize(const ramNodeArray &base, float length);
+	ramNodeArray getNormalized(const ramNodeArray &base, float length) const;
 
-	ramNodeArray& limit(const ramNodeArray &arr, float length);
-	ramNodeArray getLimited(const ramNodeArray &arr, float length) const;
+	ramNodeArray& limit(const ramNodeArray &base, float length);
+	ramNodeArray getLimited(const ramNodeArray &base, float length) const;
 
 	//
 

@@ -115,10 +115,10 @@ ramNode& ramNode::operator-=(const ramNode &node)
 	return result;
 }
 
-ramNode& ramNode::lerp(const ramNode &node, float t)
+ramNode& ramNode::lerp(const ramNode &base, float t)
 {
 	const ofMatrix4x4& a = this->getGlobalTransformMatrix();
-	const ofMatrix4x4& b = node.getGlobalTransformMatrix();
+	const ofMatrix4x4& b = base.getGlobalTransformMatrix();
 
 	ofQuaternion trot;
 	trot.slerp(t, a.getRotate(), b.getRotate());
@@ -130,71 +130,71 @@ ramNode& ramNode::lerp(const ramNode &node, float t)
 	return *this;
 }
 
-ramNode ramNode::getLerpd(const ramNode &node, float t) const
+ramNode ramNode::getLerpd(const ramNode &base, float t) const
 {
 	ramNode result = *this;
-	result.lerp(node, t);
+	result.lerp(base, t);
 	return result;
 }
 
-ramNode& ramNode::normalize(const ramNode &node, float length)
+ramNode& ramNode::normalize(const ramNode &base, float length)
 {
 	ramNode &result = *this;
 
 	const ofVec3f &p0 = result.getGlobalPosition();
-	const ofVec3f &p1 = node.getGlobalPosition();
+	const ofVec3f &p1 = base.getGlobalPosition();
 
-	ofVec3f d = (p1 - p0);
+	ofVec3f d = (p0 - p1);
 	d.normalize();
 	d *= length;
 
-	result.setGlobalPosition(p0 + d);
+	result.setGlobalPosition(p1 + d);
 
 	return result;
 }
 
-ramNode ramNode::getNormalized(const ramNode &node, float length) const
+ramNode ramNode::getNormalized(const ramNode &base, float length) const
 {
 	ramNode result = *this;
 
 	const ofVec3f &p0 = result.getGlobalPosition();
-	const ofVec3f &p1 = node.getGlobalPosition();
+	const ofVec3f &p1 = base.getGlobalPosition();
 
-	ofVec3f d = (p1 - p0);
+	ofVec3f d = (p0 - p1);
 	d.normalize();
 	d *= length;
 
-	result.setGlobalPosition(p0 + d);
+	result.setGlobalPosition(p1 + d);
 
 	return result;
 }
 
-ramNode& ramNode::limit(const ramNode &node, float length)
+ramNode& ramNode::limit(const ramNode &base, float length)
 {
 	ramNode &result = *this;
 
 	const ofVec3f &p0 = result.getGlobalPosition();
-	const ofVec3f &p1 = node.getGlobalPosition();
+	const ofVec3f &p1 = base.getGlobalPosition();
 
-	ofVec3f d = (p1 - p0);
+	ofVec3f d = (p0 - p1);
 	d.limit(length);
 
-	result.setGlobalPosition(p0 + d);
+	result.setGlobalPosition(p1 + d);
 
 	return result;
 }
 
-ramNode ramNode::getLimited(const ramNode &node, float length) const
+ramNode ramNode::getLimited(const ramNode &base, float length) const
 {
 	ramNode result = *this;
 
 	const ofVec3f &p0 = result.getGlobalPosition();
-	const ofVec3f &p1 = node.getGlobalPosition();
+	const ofVec3f &p1 = base.getGlobalPosition();
 
-	ofVec3f d = (p1 - p0);
+	ofVec3f d = (p0 - p1);
 	d.limit(length);
 
-	result.setGlobalPosition(p0 + d);
+	result.setGlobalPosition(p1 + d);
 
 	return result;
 }
@@ -336,92 +336,92 @@ ramNodeArray& ramNodeArray::operator-=(const ramNodeArray &arr)
 	return result;
 }
 
-ramNodeArray& ramNodeArray::lerp(const ramNodeArray &arr, float t)
+ramNodeArray& ramNodeArray::lerp(const ramNodeArray &base, float t)
 {
 	ramNodeArray &result = *this;
 	result.clearHierarchy();
 
 	for (int i = 0; i < result.getNumNode(); i++)
 	{
-		result.getNode(i).lerp(arr.getNode(i), t);
+		result.getNode(i).lerp(base.getNode(i), t);
 	}
 
-	result.rebuildHierarchy(arr);
+	result.rebuildHierarchy(base);
 	result.rebuildLocalPosition();
 	return result;
 }
 
-ramNodeArray ramNodeArray::getLerpd(const ramNodeArray &arr, float t) const
+ramNodeArray ramNodeArray::getLerpd(const ramNodeArray &base, float t) const
 {
 	ramNodeArray result = *this;
 	result.clearHierarchy();
 
 	for (int i = 0; i < result.getNumNode(); i++)
 	{
-		result.getNode(i).lerp(arr.getNode(i), t);
+		result.getNode(i).lerp(base.getNode(i), t);
 	}
 
-	result.rebuildHierarchy(arr);
+	result.rebuildHierarchy(base);
 	result.rebuildLocalPosition();
 	return result;
 }
 
-ramNodeArray& ramNodeArray::normalize(const ramNodeArray &arr, float length)
+ramNodeArray& ramNodeArray::normalize(const ramNodeArray &base, float length)
 {
 	ramNodeArray &result = *this;
 	result.clearHierarchy();
 
 	for (int i = 0; i < result.getNumNode(); i++)
 	{
-		result.getNode(i).normalize(arr.getNode(i), length);
+		result.getNode(i).normalize(base.getNode(i), length);
 	}
 
-	result.rebuildHierarchy(arr);
+	result.rebuildHierarchy(base);
 	result.rebuildLocalPosition();
 	return result;
 }
 
-ramNodeArray ramNodeArray::getNormalized(const ramNodeArray &arr, float length) const
+ramNodeArray ramNodeArray::getNormalized(const ramNodeArray &base, float length) const
 {
 	ramNodeArray result = *this;
 	result.clearHierarchy();
 
 	for (int i = 0; i < result.getNumNode(); i++)
 	{
-		result.getNode(i).normalize(arr.getNode(i), length);
+		result.getNode(i).normalize(base.getNode(i), length);
 	}
 
-	result.rebuildHierarchy(arr);
+	result.rebuildHierarchy(base);
 	result.rebuildLocalPosition();
 	return result;
 }
 
-ramNodeArray& ramNodeArray::limit(const ramNodeArray &arr, float length)
+ramNodeArray& ramNodeArray::limit(const ramNodeArray &base, float length)
 {
 	ramNodeArray &result = *this;
 	result.clearHierarchy();
 
 	for (int i = 0; i < result.getNumNode(); i++)
 	{
-		result.getNode(i).limit(arr.getNode(i), length);
+		result.getNode(i).limit(base.getNode(i), length);
 	}
 
-	result.rebuildHierarchy(arr);
+	result.rebuildHierarchy(base);
 	result.rebuildLocalPosition();
 	return result;
 }
 
-ramNodeArray ramNodeArray::getLimited(const ramNodeArray &arr, float length) const
+ramNodeArray ramNodeArray::getLimited(const ramNodeArray &base, float length) const
 {
 	ramNodeArray result = *this;
 	result.clearHierarchy();
 
 	for (int i = 0; i < result.getNumNode(); i++)
 	{
-		result.getNode(i).limit(arr.getNode(i), length);
+		result.getNode(i).limit(base.getNode(i), length);
 	}
 
-	result.rebuildHierarchy(arr);
+	result.rebuildHierarchy(base);
 	result.rebuildLocalPosition();
 	return result;
 }

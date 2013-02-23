@@ -11,7 +11,7 @@ public:
 
 	ramDelay(size_t delay_frame = 60) : delay_frame(delay_frame) {}
 
-	void setFrame(size_t num) { delay_frame = num; };
+	void setFrame(size_t num) { delay_frame = num; if (delay_frame < 1) delay_frame = 1; };
 	size_t getFrame() const { return delay_frame; }
 
 	size_t getSize() const { return buffer.getSize(); }
