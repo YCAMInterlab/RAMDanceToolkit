@@ -19,18 +19,33 @@ public:
 		record.clear();
 	}
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
-		panel->addButton("Ghost", false, 10, 10);
-		panel->addButton("Slow", false, 10, 10);
-		panel->addButton("Normal", false, 10, 10);
-		panel->addButton("Fast", false, 10, 10);
-		panel->addSlider("Distance", 0.0, 255.0, &distance, gui.kLength, gui.kDim);
-		panel->addSlider("Speed", 0.0, 255.0, &speed, gui.kLength, gui.kDim);
+		gui.addSection(getName());
+		
+		struct Preset
+		{
+			ramGhost *self;
+			float distance;
+			float speed;
+			
+			Preset(ramGhost *self, float distance, float speed) : self(self), distance(distance), speed(speed) {}
+			void operator()()
+			{
+				self->setSpeed(speed);
+				self->setDistance(distance);
+			}
+		};
+		
+		gui.addButton("Ghost", Preset(this, 1.5, 240));
+		gui.addButton("Slow", Preset(this, 8.3, 74.4));
+		gui.addButton("Normal", Preset(this, 9.4, 150));
+		gui.addButton("Fast", Preset(this, 38.9, 211.1));
+		
+		gui.addSlider("Distance", 0.0, 255.0, &distance);
+		gui.addSlider("Speed", 0.0, 255.0, &speed);
 	}
 	
 	inline void setDistance(const float d) { distance = d; }
@@ -45,32 +60,6 @@ public:
 	size_t getSize() const { return 1; }
 	
 	inline const string getName() { return "ramGhost"; };
-	
-	void onValueChanged(ofxUIEventArgs& e)
-	{
-		string name = e.widget->getName();
-		
-		if (name == "Ghost")
-		{
-			setSpeed(1.5);
-			setDistance(240);
-		}
-		if (name == "Slow")
-		{
-			setSpeed(8.3);
-			setDistance(74.4);
-		}
-		if (name == "Normal")
-		{
-			setSpeed(9.4);
-			setDistance(150);
-		}
-		if (name == "Fast")
-		{
-			setSpeed(38.9);
-			setDistance(211.1);
-		}
-	}
 	
 protected:
 	ramNodeArray ghost;

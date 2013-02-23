@@ -19,10 +19,14 @@ public:
 	bool showRects, showCircle, showSpheres, invertSpheres, showCircleBisector, showCenterCircles;
 	float pointSize, crossLength, rectRadius, maxInvertRadius, circleResolution;
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
+#ifdef RAM_GUI_SYSTEM_OFXUI
+		
+		ofxUICanvas* panel = gui.getCurrentUIContext();
+
 		showRects = false;
 		showSpheres = false;
 		invertSpheres = false;
@@ -51,6 +55,8 @@ public:
 			mNodeVisibility[i] = (i == ramActor::JOINT_LEFT_TOE || i == ramActor::JOINT_RIGHT_TOE);
 			mToggles[i] = panel->addToggle(ramActor::getJointName(i), &mNodeVisibility[i], 8, 8);
 		}
+		
+#endif
 	}
 	
 	void setup()

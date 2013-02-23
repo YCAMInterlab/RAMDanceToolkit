@@ -13,19 +13,17 @@
 
 class ramXXXFilter : public ramBaseFilter
 {
-	
 public:
 	
+	const string getName() { return "ramXXXFilter"; }
+ 
 	ramXXXFilter() {}
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
-		
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
-		
-		ofAddListener(panel->newGUIEvent, this, &ramXXXFilter::onPanelChanged);
+ 
+		gui.addSection(getName());
 	}
 	
 	void setup()
@@ -37,14 +35,8 @@ public:
 	{
 		return src;
 	}
-	
-	void onPanelChanged(ofxUIEventArgs& e)
-	{
-
-	}
-	
-	const string getName() { return "ramXXXFilter"; }
 };
+ 
  */
 
 
@@ -54,11 +46,14 @@ public:
 	
 	virtual ~ramBaseFilter() {}
 	
-	virtual void setupControlPanel(ofxUICanvas* panel) {}
+	virtual void setupControlPanel() {}
 	virtual void setup() {}
 	
 	const ramNodeArray& update(const ramNodeArray& src)
 	{
+        if (cache.getNumNode() != src.getNumNode())
+            cache = src;
+        
 		const int f = ofGetFrameNum();
 		if (last_update_frame != f)
 		{
@@ -88,6 +83,7 @@ private:
 	int last_update_frame;
 };
 
+//
 
 class ramBusSend : public ramBaseFilter
 {
@@ -115,4 +111,53 @@ protected:
 private:
 	
 	string bus_name;
+};
+
+//
+
+template <typename FilterClass>
+class ramFilterEach
+{
+public:
+	
+	void clear()
+	{
+		cache.clear();
+		filters.clear();
+	}
+	
+	const vector<ramNodeArray>& update(const vector<ramNodeArray> &src)
+	{
+		if (ofGetFrameNum() == last_updated_time) return cache;
+		last_updated_time = ofGetFrameNum();
+		
+		cache.clear();
+		
+		for (int i = 0; i < src.size(); i++)
+		{
+			const ramNodeArray &NA = src[i];
+			const string &name = NA.getName();
+			
+			if (!filters.hasKey(name))
+				filters.set(name, FilterClass());
+			
+			FilterClass &filter = filters[name];
+			cache.push_back(filter.update(NA));
+		}
+		
+		return cache;
+	}
+	
+	inline const vector<ramNodeArray>& get(size_t index = 0) { return cache[index]; }
+	
+	FilterClass& getFilter(int index) { return filters[index]; }
+	FilterClass& getFilter(const string& name) { return filters[name]; }
+	
+protected:
+	
+	ramCompoundContainer<FilterClass> filters;
+	vector<ramNodeArray> cache;
+	
+	unsigned int last_updated_time;
+	
 };

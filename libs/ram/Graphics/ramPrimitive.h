@@ -3,7 +3,23 @@
 #include "ofMain.h"
 #include "ramPhysics.h"
 
-class ramPrimitive : public ofNode
+class ramPhysics;
+
+class ramBasePrimitive
+{
+	friend class ramPhysics;
+	
+public:
+	
+	virtual ~ramBasePrimitive() {}
+	
+private:
+	
+	virtual void internal_update() {}
+
+};
+
+class ramPrimitive : public ofNode, public ramBasePrimitive
 {
 	friend class ramPhysics;
 	
@@ -12,16 +28,19 @@ public:
 	ramPrimitive();
 	~ramPrimitive();
 	
-	ofxBt::RigidBody getRigidBody() { return rigid; }
+	ofxBt::RigidBody getRigidBody() { return body; }
 	
 	void updatePhysicsTransform();
 	
 protected:
 	
-	ofxBt::RigidBody rigid;
+	ofxBt::RigidBody body;
 	ofxBt::World& getWorld();
 	
-	void _update();
+private:
+	
+	void internal_update();
+
 };
 
 class ramBoxPrimitive : public ramPrimitive

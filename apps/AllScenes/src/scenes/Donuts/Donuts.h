@@ -21,9 +21,13 @@ class Donuts : public ramBaseScene
 public:
 	
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
+		
+#ifdef RAM_GUI_SYSTEM_OFXUI
+		
+		ofxUICanvas* panel = gui.getCurrentUIContext();
 		
 		panel->addWidgetDown(new ofxUILabel("Original me", OFX_UI_FONT_MEDIUM));
 		panel->addSlider("Scale", 0.1, 10.0, &mScale, gui.kLength, gui.kDim);
@@ -50,6 +54,8 @@ public:
 		clear();
 		
 		ofAddListener(panel->newGUIEvent, this, &Donuts::onValueChanged);
+		
+#endif
 	}
 	
 	void setup()

@@ -13,7 +13,7 @@ public:
 	
 	ramStamp() : mLastRecordTime(0.0), mRecSpan(5.0), kMaxStamps(30) {}
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 		

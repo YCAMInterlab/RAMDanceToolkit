@@ -59,8 +59,14 @@ static void popAll()
 
 #pragma mark -
 //--------------------------------------------------------------
-void Kepler::setupControlPanel(ofxUICanvas* panel)
+void Kepler::setupControlPanel()
 {
+	ramControlPanel &gui = ramGetGUI();
+	
+#ifdef RAM_GUI_SYSTEM_OFXUI
+	
+	ofxUICanvas* panel = gui.getCurrentUIContext();
+	
     ofAddListener(panel->newGUIEvent, this, &Kepler::onValueChanged);
 
     ofxUIRadio *radio = NULL;
@@ -114,6 +120,8 @@ void Kepler::setupControlPanel(ofxUICanvas* panel)
     radio = new ofxUIRadio("EDGE B", names, OFX_UI_ORIENTATION_VERTICAL, dim, dim);
     radio->getToggles().at(KeplerCube::EDGE_11)->setValue(true);
     panel->addWidgetRight(radio);
+	
+#endif
 }
 
 #pragma mark -

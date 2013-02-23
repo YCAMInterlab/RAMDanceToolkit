@@ -11,7 +11,9 @@
 
 #include <set>
 
+class ramBasePrimitive;
 class ramPrimitive;
+class ramSoftBodyPrimitive;
 
 void ramEnablePhysicsPrimitive(bool v = true);
 void ramDisablePhysicsPrimitive();
@@ -29,13 +31,16 @@ public:
 	void debugDraw();
 	
 	ofxBt::World& getWorld() { return world; }
+	ofxBt::SoftBodyWorld& getSoftBodyWorld() { return world; }
 	
 	void onUpdate(ofEventArgs&);
 	
-	void registerPrimitive(ramPrimitive *o);
-	void unregisterPrimitive(ramPrimitive *o);
-	
+	void registerRigidBodyPrimitive(ramPrimitive *o);
+	void unregisterRigidBodyPrimitive(ramPrimitive *o);
 	void registerTempraryPrimitive(ramPrimitive *o);
+	
+	void registerSoftBodyPrimitive(ramSoftBodyPrimitive *o);
+	void unregisterSoftBodyPrimitive(ramSoftBodyPrimitive *o);
 	
 	bool checkAndUpdateNodeCache(const ramNode *node);
 	
@@ -44,9 +49,10 @@ private:
 	static ramPhysics *_instance;
 	
 	bool inited;
-	ofxBt::World world;
-	vector<ramPrimitive*> primitives;
-	vector<ramPrimitive*> temporary_primitives;
+	ofxBt::SoftBodyWorld world;
+	
+	vector<ramBasePrimitive*> primitives;
+	vector<ramBasePrimitive*> temporary_primitives;
 	
 	set<const ramNode*> cache_index;
 	

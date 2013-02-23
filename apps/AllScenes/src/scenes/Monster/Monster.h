@@ -12,8 +12,14 @@ public:
 	float minScale, maxScale, randomizationAmount;
 	bool needToReset, randomLine, randomizeTopology, randomizeGeometry;
 		
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
+#ifdef RAM_GUI_SYSTEM_OFXUI
+		
+		ramControlPanel &gui = ramGetGUI();
+		
+		ofxUICanvas* panel = gui.getCurrentUIContext();
+		
 		needToReset = false;
 		randomizeTopology = false;
 		randomizeGeometry = false;
@@ -28,6 +34,8 @@ public:
 		panel->addSlider("Min scale", 0, 4, &minScale, 300, 20);
 		panel->addSlider("Max scale", 0, 4, &maxScale, 300, 20);
 		panel->addSlider("Randomization amount", 0, 1, &randomizationAmount, 300, 20);
+		
+#endif
 	}
 	
 	void setup()

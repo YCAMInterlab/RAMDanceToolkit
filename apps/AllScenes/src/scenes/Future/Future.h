@@ -16,7 +16,7 @@ public:
 	
 	Future() {}
 
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
@@ -24,11 +24,9 @@ public:
 		
 		for(int i=0; i<3; i++)
 		{
-			mGhosts[i].setupControlPanel(panel);
-			mLowpass[i].setupControlPanel(panel);
+			mGhosts[i].setupControlPanel();
+			mLowpass[i].setupControlPanel();
 		}
-		
-		ofAddListener(panel->newGUIEvent, this, &Future::onValueChanged);
 	}
 
 	void setup()
@@ -77,7 +75,6 @@ public:
 		ramEndCamera();
 	}
 	
-	void onValueChanged(ofxUIEventArgs& e){}
 	const string getName() { return "Future"; }
 };
 

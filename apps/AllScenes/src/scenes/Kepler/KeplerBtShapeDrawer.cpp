@@ -21,8 +21,6 @@ subject to the following restrictions:
 #include <gl/glew.h>
 #include "ofMain.h"
 
-#include <GLUT/GLUT.h>
-
 //#include "GlutStuff.h"
 #include "KeplerBtShapeDrawer.h"
 #include "BulletCollision/CollisionShapes/btPolyhedralConvexShape.h"

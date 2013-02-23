@@ -22,13 +22,13 @@ class ramCompoundContainer
 
 public:
 
-	void add(const string &key, T &o)
+	void set(const string &key, const T &o)
 	{
 		hash[key] = o;
 		updateIndexCache();
 	}
 
-	void remove(const string &key)
+	void erase(const string &key)
 	{
 		hash.erase(key);
 		updateIndexCache();
