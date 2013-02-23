@@ -13,7 +13,7 @@ The toolkit itself is built using a project file in `libs/`. This toolkit is use
 The OSC specification for RAM is as follows:
 
 * Applications generally receive on port `10000`.
-* Skeleton data is sent as a series of nodes in a single OSC message.
+* Skeleton data is sent as a series of nodes in a single OSC message at the address `/ram/skeleton`.
 
 The structure of each OSC message is:
 
