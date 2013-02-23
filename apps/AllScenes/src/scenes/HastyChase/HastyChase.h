@@ -52,13 +52,12 @@ public:
 
 	}
 	
-	void drawActor(ramActor& actor)
+	void drawActor(const ramActor& actor)
 	{
 		ramTimeShifter &TS = time_shifters[actor.getName()];
 		TS.setNumBufferFrame(buffer_time);
 		TS.setRate(rate);
 
-		
 		ofPushStyle();
 		if (fill_chaser)
 		{
@@ -67,8 +66,11 @@ public:
 		else{
 			ofNoFill();
 		}
+		
 		const ramActor &chaser = TS.update(actor);
-		ramDrawBasicActor(chaser, joint_color);
+		
+		ofSetColor(joint_color);
+		ramDrawBasicActor(chaser);
 		
 		if (draw_line)
 			ramDrawNodeCorresponds(actor, chaser);
@@ -88,7 +90,7 @@ public:
 		ofPopStyle();
 	}
 	
-	void drawRigid(ramRigidBody &rigid)
+	void drawRigid(const ramRigidBody &rigid)
 	{
 	}
 	

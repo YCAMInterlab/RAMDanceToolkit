@@ -9,6 +9,4 @@
 #ifndef RAMDanceToolkit_ramTimeShift_h
 #define RAMDanceToolkit_ramTimeShift_h
 
-
-
 #endif

@@ -96,7 +96,7 @@ public:
 		ramEndCamera();
 	}
 	
-	void drawActor(ramActor& actor)
+	void drawActor(const ramActor& actor)
 	{
 
         ramActor tmpActor = actor;
@@ -107,10 +107,11 @@ public:
         
         ramActor filterd = mUpsideDown.update(tmpActor);
         
-        ramDrawBasicActor(filterd, ramColor::RED_DEEP, ramColor::RED_LIGHT);
+		ofSetColor(ramColor::RED_DEEP);
+        ramDrawBasicActor(filterd);
 	}
 	
-	void drawRigid(ramRigidBody &rigid)
+	void drawRigid(const ramRigidBody &rigid)
 	{
 		
 	}

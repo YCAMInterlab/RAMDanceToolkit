@@ -74,7 +74,7 @@ public:
 	}
 	
 	//--------------------------------------------------------------
-	void drawActor(ramActor &actor)
+	void drawActor(const ramActor &actor)
 	{		
 		// maybe this is slow...? need a better way to do point size/depth testing.
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
@@ -163,7 +163,7 @@ public:
 	}
 	
 	//--------------------------------------------------------------
-	void drawRigid(ramRigidBody &rigid)
+	void drawRigid(const ramRigidBody &rigid)
 	{
 	}
 	

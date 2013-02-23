@@ -13,7 +13,7 @@ class ramNodeArray;
 class ramAccelerometer
 {
 	friend class ramNode;
-	
+
 public:
 	ramAccelerometer()
 	{
@@ -23,30 +23,29 @@ public:
 		last_rot.set(0, 0, 0, 1);
 	}
 	virtual ~ramAccelerometer() {}
-	
+
 	void update(const ofVec3f &pos, const ofQuaternion &quat)
 	{
 		velocity = last_pos - pos;
 		last_pos = pos;
-		
+
 		acceleration = last_velocity - velocity;
 		last_velocity = velocity;
-		
+
 		angular_velocity = last_rot.inverse() * quat;
 		last_rot = quat;
-		
+
 		angular_acceleration = last_angular_velocity.inverse() * angular_velocity;
 		last_angular_velocity = angular_velocity;
 	}
-	
+
 private:
 	ofVec3f velocity, last_velocity, acceleration;
 	ofQuaternion angular_velocity, last_angular_velocity, angular_acceleration;
-	
+
 	ofVec3f last_pos;
 	ofQuaternion last_rot;
 };
-
 
 #pragma mark - ramNode
 
@@ -59,7 +58,7 @@ public:
 	ramNode();
 	ramNode(const ramNode& copy) { *this = copy; }
 	ramNode& operator=(const ramNode& copy);
-	
+
 	const string& getName() { return name; }
 	int getID() { return node_id; }
 
@@ -70,41 +69,47 @@ public:
 	// utils
 	inline void beginTransform() const { transformGL(); }
 	inline void endTransform() const { restoreTransformGL(); }
-	
+
 	const ofMatrix4x4& getTransformMatrix() const { return getLocalTransformMatrix(); }
 	const ofMatrix4x4& getMatrix() const { return getLocalTransformMatrix(); }
-	
+
 	inline ofVec3f getVelocity() const { return accerelometer.velocity; }
 	inline ofVec3f getAcceleration() const { return accerelometer.acceleration; }
 	inline ofQuaternion getAngularVelocity() const { return accerelometer.angular_velocity; }
 	inline ofQuaternion getAngularAcceleration() const { return accerelometer.angular_acceleration; }
-	
+
 	operator ofVec3f() const { return getGlobalPosition(); }
-	
+
 	inline ramAccelerometer& getAccerelometer() { return accerelometer; }
-	
-	void drawId(int floatPos=20);
-	void drawName(int floatPos=20);
-	
+
+	void drawNodeId(int floatPos = 20);
+	void drawNodeName(int floatPos = 20);
+
 	bool operator==(const ramNode &node) const;
 	bool operator!=(const ramNode &node) const;
-	
+
 	ramNode operator+(const ramNode &node) const;
 	ramNode& operator+=(const ramNode &node);
-	
+
 	ramNode operator-(const ramNode &node) const;
 	ramNode& operator-=(const ramNode &node);
-	
-	ramNode& lerp(const ramNode &node, float t);
-	ramNode getLerpd(const ramNode &node, float t) const;
-	
+
+	ramNode& lerp(const ramNode &base, float t);
+	ramNode getLerpd(const ramNode &base, float t) const;
+
+	ramNode& normalize(const ramNode &base, float length);
+	ramNode getNormalized(const ramNode &base, float length) const;
+
+	ramNode& limit(const ramNode &base, float t);
+	ramNode getLimited(const ramNode &base, float length) const;
+
 private:
 
 	int node_id;
 	string name;
-	
+
 	ramAccelerometer accerelometer;
-	
+
 	ramNodeArray *container;
 };
 
@@ -129,34 +134,42 @@ public:
 	const string& getName() const { return name; }
 
 	int getNumNode() const { return nodes.size(); }
-	
+
 	ramNode& getNode(int node_id) { return nodes[node_id]; }
 	const ramNode& getNode(int node_id) const { return nodes[node_id]; }
-	
+
 	inline bool isOutdated() const { return (ofGetElapsedTimef() -  last_update_client_time) > RAM_OUTDATED_DURATION; }
 	inline float getTimestamp() const { return last_update_client_time; }
-	
+
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
-	
+
 	// operators
-	
+
 	bool operator==(const ramNodeArray &arr) const;
 	bool operator!=(const ramNodeArray &arr) const;
 
 	ramNodeArray operator+(const ramNodeArray &arr) const;
 	ramNodeArray& operator+=(const ramNodeArray &arr);
-	
+
 	ramNodeArray operator-(const ramNodeArray &arr) const;
 	ramNodeArray& operator-=(const ramNodeArray &arr);
 
-	ramNodeArray& lerp(const ramNodeArray &arr, float t);
-	ramNodeArray getLerpd(const ramNodeArray &arr, float t) const;
-	
+	ramNodeArray& lerp(const ramNodeArray &base, float t);
+	ramNodeArray getLerpd(const ramNodeArray &base, float t) const;
+
+	ramNodeArray& normalize(const ramNodeArray &base, float length);
+	ramNodeArray getNormalized(const ramNodeArray &base, float length) const;
+
+	ramNodeArray& limit(const ramNodeArray &base, float length);
+	ramNodeArray getLimited(const ramNodeArray &base, float length) const;
+
+	//
+
 	inline void setType(ramNodeArrayType t) { type = t; }
 	inline bool isActor() const { return type == RAM_NODEARRAY_TYPE_ACTOR; }
 	inline bool isRigid() const { return type == RAM_NODEARRAY_TYPE_RIGIDBODY; }
 	inline bool isTypeOf(ramNodeArrayType t) const { return type == t; }
-	
+
 protected:
 
 	string name;
@@ -167,26 +180,28 @@ protected:
 	float current_timestamp;
 
 	float last_update_client_time;
-	
+
 	void rebuildHierarchy(const ramNodeArray& ref);
+	void clearHierarchy();
+	void rebuildLocalPosition();
 };
 
 #pragma mark - ramRigidBody
 
 class ramRigidBody : public ramNodeArray
 {
-    
+
 public:
-	
+
 	ramRigidBody() : ramNodeArray() {}
 	ramRigidBody(const ramNodeArray &copy) { *this = copy; }
 
 	ramRigidBody& operator=(const ramNodeArray &copy);
-	
+
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
 
 private:
-	
+
 	void reserveNodes(int num);
 };
 
@@ -232,18 +247,16 @@ public:
 	ramActor();
 	ramActor(const ramNodeArray &copy);
 	virtual ~ramActor();
-	
+
 	ramActor& operator=(const ramNodeArray &copy);
 
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
 	static string getJointName(int jointId) { return jointName[jointId]; }
 	static vector<string> getJointNames();
-	
-	
+
 private:
 	static string jointName[NUM_JOINTS];
 	void dispose();
 
 	void setupTree();
 };
-

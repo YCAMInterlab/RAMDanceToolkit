@@ -69,7 +69,7 @@ public:
 		mRadian = 2 * M_PI / mNumDuplicate;
 	}
 	
-	void drawDonuts(ramNodeArray &nodeArray)
+	void drawDonuts(const ramNodeArray &nodeArray)
 	{
 		ofPushStyle();
 		ofNoFill();
@@ -97,7 +97,7 @@ public:
 				ofPushStyle();
 				for(int i=0; i<nodeArray.getNumNode(); i++)
 				{
-					ramNode& node = nodeArray.getNode(i);
+					const ramNode& node = nodeArray.getNode(i);
 					
 					node.beginTransform();
 					ofSetColor(c1);
@@ -124,7 +124,7 @@ public:
 				
 				for (int n=0; n<mNumDuplicate; n++)
 				{
-					ramNode &node = nodeArray.getNode(index);
+					const ramNode &node = nodeArray.getNode(index);
 					
 					ofPushMatrix();
 					{
@@ -165,12 +165,12 @@ public:
 
 	}
 	
-	void drawActor( ramActor& actor )
+	void drawActor(const ramActor& actor)
 	{
 		drawDonuts( actor );
 	}
 	
-	void drawRigid(ramRigidBody &rigid)
+	void drawRigid(const ramRigidBody &rigid)
 	{
 		drawDonuts( rigid );
 	}

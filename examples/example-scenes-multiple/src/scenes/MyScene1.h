@@ -3,58 +3,54 @@
 class MyScene1 : public ramBaseScene
 {
 private:
-	
+
 	float fontColor;
-	
+
 public:
+
+	const string getName() { return "MyScene1"; }
 	
 	MyScene1(): fontColor(100) {}
-	
-	void setupControlPanel(ofxUICanvas* panel)
+
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
-		
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
-		panel->addSlider("Font Color", 0.0, 255.0, &fontColor, gui.kLength, gui.kDim);
+
+		gui.addSlider("Font Color", 0.0, 255.0, &fontColor);
 	}
 
 	void setup()
 	{
-		
+
 	}
-	
-	
+
+
 	void update()
 	{
-		
+
 	}
-	
+
 	void draw()
 	{
-		
+
 	}
-	
-	void drawActor( ramActor& actor )
+
+	void drawActor(const ramActor& actor )
 	{
 		ofVec3f pos = actor.getNode(ramActor::JOINT_HEAD).getPosition();
 		pos.y += 30.0;
-		
-		ofSetColor( fontColor );
+
+		ofSetColor(fontColor, 0, 0);
 		ofDrawBitmapString( "I am " + getName(), pos );
+		
 		ramDrawBasicActor(actor);
 	}
-	
-	void drawRigid(ramRigidBody &rigid)
+
+	void drawRigid(const ramRigidBody &rigid)
 	{
-		
+
 	}
+
 	
-	void drawFloor()
-	{
-	
-	}
-	
-	const string getName() { return "MyScene1"; }
 };
 

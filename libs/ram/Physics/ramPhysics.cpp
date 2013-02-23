@@ -3,23 +3,6 @@
 #include "ramPrimitive.h"
 #include "ramSoftBodyPrimitive.h"
 
-static bool ram_enable_physics_primitive = true;
-
-void ramEnablePhysicsPrimitive(bool v)
-{
-	ram_enable_physics_primitive = v;
-}
-
-void ramDisablePhysicsPrimitive()
-{
-	ram_enable_physics_primitive = false;
-}
-
-bool ramGetEnablePhysicsPrimitive()
-{
-	return ram_enable_physics_primitive;
-}
-
 ramPhysics* ramPhysics::_instance = NULL;
 
 ramPhysics& ramPhysics::instance()
@@ -35,11 +18,12 @@ ramPhysics& ramPhysics::instance()
 void ramPhysics::setup()
 {
 	if (inited) return;
+
 	inited = true;
-	
+
 	world.setup(ofVec3f(0, -980, 0));
 	world.addWorldBox(ofVec3f(-1000, 0, -1000), ofVec3f(1000, 1000, 1000));
-	
+
 	ofAddListener(ofEvents().update, this, &ramPhysics::onUpdate);
 }
 
@@ -59,17 +43,17 @@ void ramPhysics::onUpdate(ofEventArgs&)
 	{
 		primitives[i]->internal_update();
 	}
-	
+
 	world.update();
-	
+
 	// remove all temporary primitives
-	
+
 	for (int i = 0; i < temporary_primitives.size(); i++)
 	{
 		ramBasePrimitive *p = temporary_primitives[i];
 		delete p;
 	}
-	
+
 	temporary_primitives.clear();
 	cache_index.clear();
 }
@@ -77,6 +61,7 @@ void ramPhysics::onUpdate(ofEventArgs&)
 void ramPhysics::registerRigidBodyPrimitive(ramPrimitive *o)
 {
 	if (find(primitives.begin(), primitives.end(), o) != primitives.end()) return;
+
 	primitives.push_back(o);
 }
 
@@ -84,9 +69,9 @@ void ramPhysics::unregisterRigidBodyPrimitive(ramPrimitive *o)
 {
 	vector<ramBasePrimitive*>::iterator it = find(primitives.begin(), primitives.end(), o);
 	if (it == primitives.end()) return;
-	
+
 	world.removeRigidBody(o->body);
-	
+
 	primitives.erase(it);
 }
 
@@ -98,6 +83,7 @@ void ramPhysics::registerTempraryPrimitive(ramPrimitive *o)
 void ramPhysics::registerSoftBodyPrimitive(ramSoftBodyPrimitive *o)
 {
 	if (find(primitives.begin(), primitives.end(), o) != primitives.end()) return;
+
 	primitives.push_back(o);
 }
 
@@ -105,9 +91,9 @@ void ramPhysics::unregisterSoftBodyPrimitive(ramSoftBodyPrimitive *o)
 {
 	vector<ramBasePrimitive*>::iterator it = find(primitives.begin(), primitives.end(), o);
 	if (it == primitives.end()) return;
-	
+
 	world.removeSoftBody(o->body);
-	
+
 	primitives.erase(it);
 }
 

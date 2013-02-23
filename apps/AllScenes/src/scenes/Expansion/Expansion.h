@@ -133,7 +133,7 @@ public:
 				if (mShowName)
 				{
 					ofSetColor(255);
-					node.drawName(mBoxSize+20);
+					node.drawNodeName(mBoxSize+20);
 				}
 			}
 			ofPopStyle();
@@ -141,7 +141,7 @@ public:
 		ramEndCamera();
 	}
 	
-	void drawActor( ramActor& actor )
+	void drawActor( const ramActor& actor )
 	{
 		
 

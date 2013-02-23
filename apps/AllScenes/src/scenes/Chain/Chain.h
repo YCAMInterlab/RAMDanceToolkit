@@ -94,7 +94,7 @@ public:
 	void draw();
     
 	// ------------------------
-	void drawActor(ramActor &actor);
+	void drawActor(const ramActor &actor);
     
     const string getName() { return "Chain scene"; }
     

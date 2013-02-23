@@ -171,7 +171,7 @@ public:
 	{	
 	}
 	
-	void drawActor(ramActor &actor)
+	void drawActor(const ramActor &actor)
 	{	
 		
 		monsterArray = actor;
@@ -200,7 +200,7 @@ public:
 		ofPopStyle();
 	}
 	
-	void drawRigid(ramRigidBody &rigid)
+	void drawRigid(const ramRigidBody &rigid)
 	{
 	}
 	
