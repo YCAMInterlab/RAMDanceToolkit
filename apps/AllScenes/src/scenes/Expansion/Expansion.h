@@ -2,8 +2,10 @@
 
 class Expansion : public ramBaseScene
 {
+	enum { NUM_FILTER_BUFFER = 3 };
 	
-	ramExpansion mExpantion;
+	ramExpansion mExpantion[NUM_FILTER_BUFFER];
+	ramLowPassFilter lowpass[NUM_FILTER_BUFFER];
 	
 	ofxUIToggle *mToggleDraw[ramActor::NUM_JOINTS];
 	bool mNodeVisibility[ramActor::NUM_JOINTS];
@@ -15,18 +17,21 @@ class Expansion : public ramBaseScene
 	bool mShowBox;
 	bool mShowName;
 	bool mShowLine;
-	bool mShowExtendedLine;
 	float mBoxSize;
 	float mBoxSizeRatio;
 	float r, g, b;
 	
 public:
 	
-	Expansion() : mShowName(true), mShowBox(true), mShowAxis(true), mShowLine(true), mShowExtendedLine(true), mBoxSize(10.0), mBoxSizeRatio(5.0), r(250), g(250), b(250) {}
+	Expansion() : mShowName(true), mShowBox(true), mShowAxis(true), mShowLine(true), mBoxSize(10.0), mBoxSizeRatio(5.0), r(250), g(250), b(250) {}
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
-		ramControlPanel &gui = ramGetGUI();;
+		ramControlPanel &gui = ramGetGUI();
+		
+#ifdef RAM_GUI_SYSTEM_OFXUI
+		
+		ofxUICanvas* panel = gui.getCurrentUIContext();
 		
 		panel->getRect()->width =500.0f;
 		
@@ -34,7 +39,6 @@ public:
 		panel->addToggle("Show Box", &mShowBox, 20, 20);
 		panel->addToggle("Show Axis", &mShowAxis, 20, 20);
 		panel->addToggle("Show Line1", &mShowLine, 20, 20);
-		panel->addToggle("Show Line2", &mShowExtendedLine, 20, 20);
 		
 		panel->addSlider("ExpBox R", 0, 255, &r, 95, gui.kDim);
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
@@ -44,7 +48,6 @@ public:
 		
 		panel->addSlider("Box size", 3.0, 100.0, &mBoxSize, gui.kLength, gui.kDim);
 		panel->addSlider("Box size ratio", 2.0, 100.0, &mBoxSizeRatio, gui.kLength, gui.kDim);
-		mExpantion.setupControlPanel(panel);
 		
 		panel->addToggle("Toggle box size", true, 20, 20);
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
@@ -64,13 +67,19 @@ public:
 			panel->addWidgetRight(toggleVisible);
 			mToggleDraw[i] = toggleVisible;
 		}
-			
+		
+		for(int i=0; i<NUM_FILTER_BUFFER; i++)
+		{
+			mExpantion[i].setupControlPanel();
+		}
+		
 		ofAddListener(panel->newGUIEvent, this, &Expansion::onValueChanged);
+		
+#endif
 	}
 	
 	void setup()
 	{
-		mExpantion.setup();
 		setAllVisiblity(true);
 	}
 	
@@ -81,46 +90,61 @@ public:
 	
 	void draw()
 	{
-		
-	}
-	
-	void drawActor( ramActor& actor )
-	{
-		ramActor &expandedActor = (ramActor&)mExpantion.update(actor);
-		
-		ofPushStyle();
-		ofNoFill();
-		for (int i=0; i<expandedActor.getNumNode(); i++)
+		ramBeginCamera();
+		for (int i=0; i<getNumNodeArray(); i++)
 		{
-			if (mNodeVisibility[i] == false) continue;
+			ramActor &src = (ramActor&) getNodeArray(i);
+			ramActor &expandedActor = (ramActor&) lowpass[i].filter( mExpantion[i].filter(src) );
 			
-			ramNode &node = expandedActor.getNode(i);
 			
-			node.beginTransform();
-			
-			int boxSize = mBoxSize * (mBiggerSize[i] ? mBoxSizeRatio : 1);
-			
-			ofSetLineWidth(1);
-			ofSetColor(r, g, b);
-			if (mShowBox) ofBox(boxSize);
-			if (mShowAxis) ofDrawAxis(boxSize);
-			
-			ofSetColor(100);
-			if (mShowLine) ofLine(actor.getNode(i), expandedActor.getNode(i));
-			
-			ofSetLineWidth(2);
-			if (mShowExtendedLine) ofLine(actor.getNode(i), expandedActor.getNode(i));
-			node.endTransform();
-			
-			ofSetColor(255);
-			if (mShowName) node.drawName(mBoxSize+20);
+			ofPushStyle();
+			ofNoFill();
+			for (int i=0; i<expandedActor.getNumNode(); i++)
+			{
+				if (mNodeVisibility[i] == false) continue;
+				
+				ramNode &node = expandedActor.getNode(i);
+				
+				node.beginTransform();
+				
+				int boxSize = mBoxSize * (mBiggerSize[i] ? mBoxSizeRatio : 1);
+				
+				if (mShowBox)
+				{
+					ofSetColor(r, g, b);
+					ofBox(boxSize);
+				}
+				
+				if (mShowAxis)
+				{
+					ofDrawAxis(boxSize);
+				}
+				
+				node.endTransform();
+				
+				if (mShowLine)
+				{
+					ofSetColor(100);
+					ofSetLineWidth(1);
+					ofLine(src.getNode(i), expandedActor.getNode(i));
+				}
+				
+				
+				if (mShowName)
+				{
+					ofSetColor(255);
+					node.drawNodeName(mBoxSize+20);
+				}
+			}
+			ofPopStyle();
 		}
-		ofPopStyle();
+		ramEndCamera();
 	}
 	
-	void drawRigid(ramRigidBody &rigid)
+	void drawActor( const ramActor& actor )
 	{
 		
+
 	}
 	
 	void onValueChanged(ofxUIEventArgs& e)
@@ -133,10 +157,9 @@ public:
 			bool newValue = t->getValue();
 			
 			setAllVisiblity(newValue);
+			
 			for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			{
 				mToggleDraw[i]->setValue(newValue);
-			}
 		}
 		
 		if (name == "Toggle box size")
@@ -145,10 +168,9 @@ public:
 			bool newValue = t->getValue();
 			
 			toggleAllSize(newValue);
+			
 			for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			{
 				mToggleSize[i]->setValue(newValue);
-			}
 		}
 	}
 	
@@ -161,15 +183,12 @@ public:
 	
 	void setAllVisiblity(bool b)
 	{
-		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			mNodeVisibility[i] = b;
+		for (int i=0; i<ramActor::NUM_JOINTS; i++) mNodeVisibility[i] = b;
 	}
 	
 	void toggleAllSize(bool b)
 	{
-		cout << "toggleAllSize" << endl;
-		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			mBiggerSize[i] = b;
+		for (int i=0; i<ramActor::NUM_JOINTS; i++) mBiggerSize[i] = b;
 	}
 };
 

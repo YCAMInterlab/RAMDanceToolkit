@@ -21,8 +21,6 @@ subject to the following restrictions:
 #include <gl/glew.h>
 #include "ofMain.h"
 
-#include <GLUT/GLUT.h>
-
 //#include "GlutStuff.h"
 #include "KeplerBtShapeDrawer.h"
 #include "BulletCollision/CollisionShapes/btPolyhedralConvexShape.h"
@@ -389,16 +387,6 @@ KeplerBtShapeDrawer::ShapeCache*		KeplerBtShapeDrawer::cache(btConvexShape* shap
 		}
 	}
 	return(sc);
-}
-
-void renderSquareA(float x, float y, float z)
-{
-	glBegin(GL_LINE_LOOP);
-	glVertex3f(x, y, z);
-	glVertex3f(x + 10.f, y, z);
-	glVertex3f(x + 10.f, y + 10.f, z);
-	glVertex3f(x, y + 10.f, z);
-	glEnd();
 }
 
 inline void glDrawVector(const btVector3& v) { glVertex3d(v[0], v[1], v[2]); }

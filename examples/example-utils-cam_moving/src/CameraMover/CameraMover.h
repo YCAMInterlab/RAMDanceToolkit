@@ -69,12 +69,12 @@ private:
 	
 public:
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
-		mPanel = panel;
-		refreshPanel(panel);
+		mPanel = gui().getCurrentUIContext();
+		refreshPanel(mPanel);
 		
-		ofAddListener(panel->newGUIEvent, this, &CameraMover::onTriggered);
+		ofAddListener(mPanel->newGUIEvent, this, &CameraMover::onTriggered);
 	}
 	
 	

@@ -2,12 +2,11 @@
 
 ramPrimitive::ramPrimitive()
 {
-	ramPhysics::instance().registerPrimitive(this);
+	ramPhysics::instance().registerRigidBodyPrimitive(this);
 }
-
 ramPrimitive::~ramPrimitive()
 {
-	ramPhysics::instance().unregisterPrimitive(this);
+	ramPhysics::instance().unregisterRigidBodyPrimitive(this);
 }
 
 ofxBt::World& ramPrimitive::getWorld()
@@ -15,55 +14,55 @@ ofxBt::World& ramPrimitive::getWorld()
 	return ramPhysics::instance().getWorld();
 }
 
-void ramPrimitive::_update()
+void ramPrimitive::internal_update()
 {
-	if (rigid)
+	if (body)
 	{
-		ofMatrix4x4 mat = rigid.getTransform();
+		ofMatrix4x4 mat = body.getTransform();
 		setTransformMatrix(mat);
 	}
 }
 
 void ramPrimitive::updatePhysicsTransform()
 {
-	rigid.setTransform(getGlobalTransformMatrix());
+	body.setTransform(getGlobalTransformMatrix());
 }
 
 #pragma mark - ramBoxPrimitive
 
 ramBoxPrimitive::ramBoxPrimitive(float size)
 {
-	rigid = getWorld().addBox(ofVec3f(size), ofVec3f());
+	body = getWorld().addBox(ofVec3f(size), ofVec3f());
 }
 
 ramBoxPrimitive::ramBoxPrimitive(const ofVec3f& size)
 {
-	rigid = getWorld().addBox(size, ofVec3f());
+	body = getWorld().addBox(size, ofVec3f());
 }
 
 ramBoxPrimitive::ramBoxPrimitive(const ofVec3f& pos, float size)
 {
-	rigid = getWorld().addBox(ofVec3f(size), pos);
+	body = getWorld().addBox(ofVec3f(size), pos);
 }
 
 ramBoxPrimitive::ramBoxPrimitive(const ofVec3f& pos, const ofVec3f& size)
 {
-	rigid = getWorld().addBox(size, pos);
+	body = getWorld().addBox(size, pos);
 }
 
 ramBoxPrimitive::ramBoxPrimitive(const ofMatrix4x4& mat, float size)
 {
-	rigid = getWorld().addBox(ofVec3f(size), mat.getTranslation(), mat.getRotate().getEuler());
+	body = getWorld().addBox(ofVec3f(size), mat.getTranslation(), mat.getRotate().getEuler());
 }
 
 ramBoxPrimitive::ramBoxPrimitive(const ofMatrix4x4& mat, const ofVec3f& size)
 {
-	rigid = getWorld().addBox(size, mat.getTranslation(), mat.getRotate().getEuler());
+	body = getWorld().addBox(size, mat.getTranslation(), mat.getRotate().getEuler());
 }
 
 void ramBoxPrimitive::customDraw()
 {
-	ofVec3f size = rigid.getSize();
+	ofVec3f size = body.getSize();
 	glScalef(size.x, size.y, size.z);
 	ofBox(2);
 }
@@ -72,17 +71,17 @@ void ramBoxPrimitive::customDraw()
 
 ramSpherePrimitive::ramSpherePrimitive(float size)
 {
-	rigid = getWorld().addSphere(size * 0.5, ofVec3f());
+	body = getWorld().addSphere(size * 0.5, ofVec3f());
 }
 
 ramSpherePrimitive::ramSpherePrimitive(const ofVec3f& pos, float size)
 {
-	rigid = getWorld().addSphere(size * 0.5, pos);
+	body = getWorld().addSphere(size * 0.5, pos);
 }
 
 void ramSpherePrimitive::customDraw()
 {
-	ofVec3f size = rigid.getSize();
+	ofVec3f size = body.getSize();
 	glScalef(size.x, size.x, size.x);
 	ofSphere(1);
 }
@@ -91,25 +90,25 @@ void ramSpherePrimitive::customDraw()
 
 ramCylinderPrimitive::ramCylinderPrimitive(float radius, float height)
 {
-	rigid = getWorld().addCylinder(radius, height * 0.5, ofVec3f(), ofVec3f());
+	body = getWorld().addCylinder(radius, height * 0.5, ofVec3f(), ofVec3f());
 }
 
 ramCylinderPrimitive::ramCylinderPrimitive(const ofMatrix4x4& mat, float radius, float height)
 {
-	rigid = getWorld().addCylinder(radius, height * 0.5, mat.getTranslation(), mat.getRotate().getEuler());
+	body = getWorld().addCylinder(radius, height * 0.5, mat.getTranslation(), mat.getRotate().getEuler());
 }
 
 ramCylinderPrimitive::ramCylinderPrimitive(const ofVec3f& pos, float radius, float height)
 {
-	rigid = getWorld().addCylinder(radius, height * 0.5, pos);
+	body = getWorld().addCylinder(radius, height * 0.5, pos);
 }
 
 void ramCylinderPrimitive::customDraw()
 {
-	ofVec3f size = rigid.getSize();
-	
+	ofVec3f size = body.getSize();
+
 	const int num_vtx = 32;
-	
+
 	vector<ofVec2f> p(num_vtx);
 	for (int i = 0; i < num_vtx; i++)
 	{
@@ -119,9 +118,9 @@ void ramCylinderPrimitive::customDraw()
 		v.y = cos(d) * size.x;
 		p[i] = v;
 	}
-	
+
 	glPushAttrib(GL_ENABLE_BIT);
-	
+
 	if (ofGetStyle().bFill)
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -130,16 +129,16 @@ void ramCylinderPrimitive::customDraw()
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
-	
+
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(0, -size.y, 0);
-	
+
 	for (int i = 0; i < num_vtx; i++)
 	{
 		glVertex3f(p[i].x, -size.y, p[i].y);
 	}
 	glEnd();
-	
+
 	glBegin(GL_QUAD_STRIP);
 	for (int i = 0; i < num_vtx; i++)
 	{
@@ -150,7 +149,7 @@ void ramCylinderPrimitive::customDraw()
 
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(0, size.y, 0);
-	
+
 	for (int i = 0; i < num_vtx; i++)
 	{
 		glVertex3f(p[i].x, size.y, p[i].y);
@@ -165,54 +164,54 @@ void ramCylinderPrimitive::customDraw()
 ramPyramidPrimitive::ramPyramidPrimitive(float size)
 {
 	size *= 0.5;
-	
+
 	mesh.addVertex(ofVec3f(1, 1, 1) * size);
 	mesh.addVertex(ofVec3f(-1, 1, -1) * size);
 	mesh.addVertex(ofVec3f(-1, -1, 1) * size);
 	mesh.addVertex(ofVec3f(1, -1, -1) * size);
-	
+
 	mesh.addTriangle(0, 1, 2);
 	mesh.addTriangle(0, 2, 3);
 	mesh.addTriangle(0, 3, 1);
 	mesh.addTriangle(3, 2, 1);
-	
-	rigid = getWorld().addMesh(mesh, ofVec3f(), ofVec3f());
+
+	body = getWorld().addMesh(mesh, ofVec3f(), ofVec3f());
 }
 
 ramPyramidPrimitive::ramPyramidPrimitive(const ofMatrix4x4& mat, float size)
 {
 	size *= 0.5;
-	
+
 	mesh.addVertex(ofVec3f(1, 1, 1) * size);
 	mesh.addVertex(ofVec3f(-1, 1, -1) * size);
 	mesh.addVertex(ofVec3f(-1, -1, 1) * size);
 	mesh.addVertex(ofVec3f(1, -1, -1) * size);
-	
+
 	mesh.addTriangle(0, 1, 2);
 	mesh.addTriangle(0, 2, 3);
 	mesh.addTriangle(0, 3, 1);
 	mesh.addTriangle(3, 2, 1);
 
-	rigid = getWorld().addMesh(mesh, mat.getTranslation(), mat.getRotate().getEuler());
+	body = getWorld().addMesh(mesh, mat.getTranslation(), mat.getRotate().getEuler());
 }
 
 ramPyramidPrimitive::ramPyramidPrimitive(const ofVec3f& pos, float size)
 {
 	size *= 0.5;
-	
+
 	mesh.addVertex(ofVec3f(1, 1, 1) * size);
 	mesh.addVertex(ofVec3f(-1, 1, -1) * size);
 	mesh.addVertex(ofVec3f(-1, -1, 1) * size);
 	mesh.addVertex(ofVec3f(1, -1, -1) * size);
-	
+
 	mesh.addTriangle(0, 1, 2);
 	mesh.addTriangle(0, 2, 3);
 	mesh.addTriangle(0, 3, 1);
 	mesh.addTriangle(3, 2, 1);
-	
-	rigid = getWorld().addMesh(mesh, pos);
+
+	body = getWorld().addMesh(mesh, pos);
 }
-	
+
 void ramPyramidPrimitive::customDraw()
 {
 	if (ofGetStyle().bFill)

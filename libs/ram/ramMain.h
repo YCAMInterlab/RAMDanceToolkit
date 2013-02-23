@@ -1,27 +1,24 @@
 #pragma once
 
+#include "ofMain.h"
+
 /// app
-#include "ramSharedData.h"
 #include "ramBaseApp.h"
 #include "ramActorManager.h"
 #include "ramCameraManager.h"
-#include "ramOscReciever.h"
 
-
-/// environment
+/// physics
 #include "ramPrimitive.h"
-
+#include "ramSoftBodyPrimitive.h"
 
 /// scenes
 #include "ramSceneManager.h"
 #include "ramBaseScene.h"
 
-
 /// graphics
 #include "ramGraphics.h"
 #include "ramNodeLine.h"
 #include "ramGraphView.h"
-
 
 /// filters
 #include "ramAnalyzer.h"
@@ -35,8 +32,14 @@
 #include "ramTimeFilter.h"
 #include "ramLowPassFilter.h"
 
+/// events
+#include "ramTimeEvent.h"
+#include "ramCollisionEvent.h"
 
 /// utility
 #include "ramControlPanel.h"
 #include "ramCameraSettings.h"
 #include "ramNodeFinder.h"
+
+#define _USE_MATH_DEFINES
+#include <math.h>

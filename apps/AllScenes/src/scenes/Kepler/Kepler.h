@@ -20,13 +20,13 @@ class Kepler : public ramBaseScene
 {
 public:
     // ------------------------
-    void setupControlPanel(ofxUICanvas* panel);
+    void setupControlPanel();
 	void setup();
 	void update();
 	void draw();
     
 	// ------------------------
-    void drawActor(ramActor &actor);
+	void drawActor(const ramActor &actor);
     
     const string getName() { return "Kepler scene"; }
     

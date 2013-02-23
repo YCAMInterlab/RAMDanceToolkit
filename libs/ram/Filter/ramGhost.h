@@ -8,115 +8,102 @@
 class ramGhost : public ramBaseFilter
 {
 public:
-	
+
+	const string getName() { return "ramGhost"; };
+
 	ramGhost() : historySize(10), distance(150), speed(27)
 	{
 		clear();
 	}
-	
+
 	void clear()
 	{
 		record.clear();
 	}
-	
-	void setupControlPanel(ofxUICanvas* panel)
+
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
-		
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
-		panel->addButton("Ghost", false, 10, 10);
-		panel->addButton("Slow", false, 10, 10);
-		panel->addButton("Normal", false, 10, 10);
-		panel->addButton("Fast", false, 10, 10);
-		panel->addSlider("Distance", 0.0, 255.0, &distance, gui.kLength, gui.kDim);
-		panel->addSlider("Speed", 0.0, 255.0, &speed, gui.kLength, gui.kDim);
+
+		gui.addSection(getName());
+
+		struct Preset
+		{
+			ramGhost *self;
+			float distance;
+			float speed;
+
+			Preset(ramGhost *self, float distance, float speed) : self(self), distance(distance), speed(speed) {}
+			void operator()()
+			{
+				self->setSpeed(speed);
+				self->setDistance(distance);
+			}
+		};
+
+		gui.addButton("Ghost", Preset(this, 1.5, 240));
+		gui.addButton("Slow", Preset(this, 8.3, 74.4));
+		gui.addButton("Normal", Preset(this, 9.4, 150));
+		gui.addButton("Fast", Preset(this, 38.9, 211.1));
+
+		gui.addSlider("Distance", 0.0, 255.0, &distance);
+		gui.addSlider("Speed", 0.0, 255.0, &speed);
 	}
-	
+
 	inline void setDistance(const float d) { distance = d; }
 	inline void setSpeed(const float s) { speed = s; }
 	inline void setHistorySize(const unsigned int m) { historySize = m; }
-	
-	inline float getdistance() { return distance; }
-	inline float getspeed() { return speed; }
+
+	inline float getDistance() { return distance; }
+	inline float getSpeed() { return speed; }
 	inline unsigned int getHistorySize() { return historySize; }
 
-	const ramNodeArray& get(size_t index = 0) const { return ghost; }
-	size_t getSize() const { return 1; }
-	
-	inline const string getName() { return "ramGhost"; };
-	
-	void onValueChanged(ofxUIEventArgs& e)
-	{
-		string name = e.widget->getName();
-		
-		if (name == "Ghost")
-		{
-			setSpeed(1.5);
-			setDistance(240);
-		}
-		if (name == "Slow")
-		{
-			setSpeed(8.3);
-			setDistance(74.4);
-		}
-		if (name == "Normal")
-		{
-			setSpeed(9.4);
-			setDistance(150);
-		}
-		if (name == "Fast")
-		{
-			setSpeed(38.9);
-			setDistance(211.1);
-		}
-	}
-	
 protected:
+
 	ramNodeArray ghost;
 	deque<ramNodeArray> record;
-	
+
 	int historySize;
 	float distance, speed;
-	
+
 	const ramNodeArray& filter(const ramNodeArray& src)
 	{
 		if (src.getNumNode() != 0)
 			record.push_back(src);
-		
+
 		if (ghost.getNumNode() != src.getNumNode())
 			ghost = src;
-		
+
 		if (record.size() > historySize)
 			record.pop_front();
-		
+
 		ramNodeArray &presentArray = record.back();
 		ramNodeArray &pastArray = record.front();
-		
+
 		for (int i = 0; i < presentArray.getNumNode(); i++)
 		{
-			
+
 			const ofVec3f& p0 = presentArray.getNode(i).getGlobalPosition();
 			const ofVec3f& p1 = pastArray.getNode(i).getGlobalPosition();
-			
+
 			// position
 			ofVec3f d = (p0 - p1);
 			d.normalize();
 			d *= distance;
 			ofVec3f v = p0 + d;
-			
+
 			ofVec3f vec = ghost.getNode(i).getGlobalPosition();
 			vec += (v - vec) * speed * 0.001;
-			
+
 			// quaternion
 			const ofQuaternion& quat = presentArray.getNode(i).getGlobalOrientation();
-			
+
 			ramNode& node = ghost.getNode(i);
 			node.setGlobalPosition(vec);
 			node.setGlobalOrientation(quat);
 			node.getAccerelometer().update(vec, quat);
 		}
-		
+
 		return ghost;
 	}
 

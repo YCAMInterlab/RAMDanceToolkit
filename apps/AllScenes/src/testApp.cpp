@@ -43,9 +43,6 @@ Kepler kepler;
 #include "HastyChase.h"
 HastyChase hastyChase;
 
-#include "upside-donuts.h"
-UpsideDownDonuts upsideDownDonuts;
-
 #include "ColorGrid.h"
 ColorGrid colorGrid;
 
@@ -58,6 +55,10 @@ FourPoints fourPoints;
 #include "Chain.h"
 Chain chain;
 
+#include "Monster.h"
+Monster monster;
+
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -68,8 +69,8 @@ void testApp::setup()
 	
 	/// ram setup
 	// ------------------
-	ramInitialize();
-	oscReceiver.setup(10000);
+	ramInitialize(10000);
+	
 	
 	/// scenes setup
 	// ------------------
@@ -84,25 +85,21 @@ void testApp::setup()
 	scenes.push_back( particles.getPtr() );
 	scenes.push_back( abacus.getPtr() );
 	scenes.push_back( soundcube.getPtr() );
-    scenes.push_back( upsideDown.getPtr() );
-    scenes.push_back( kepler.getPtr() );
+	scenes.push_back( upsideDown.getPtr() );
+	scenes.push_back( kepler.getPtr() );
 	scenes.push_back( hastyChase.getPtr() );
-	scenes.push_back( upsideDownDonuts.getPtr() );
 	scenes.push_back( colorGrid.getPtr() );
 	scenes.push_back( threePoints.getPtr() );
 	scenes.push_back( fourPoints.getPtr() );
-    scenes.push_back( chain.getPtr() );
+	scenes.push_back( chain.getPtr() );
+	scenes.push_back( monster.getPtr() );
 	sceneManager.setup(scenes);
+	
 }
 
 //--------------------------------------------------------------
 void testApp::update()
-{	
-	/// Entities update
-	// ------------------
-	oscReceiver.update();
-	
-	
+{
 	/// Scenes update
 	// ------------------
 	sceneManager.update();
@@ -111,26 +108,36 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
+	/// Scenes draw
+	// ------------------
 	sceneManager.draw();
 }
 
 #pragma mark - ram methods
-
 //--------------------------------------------------------------
-void testApp::drawActor(ramActor &actor)
+void testApp::drawActor(const ramActor &actor)
 {
+	
 }
 
 //--------------------------------------------------------------
-void testApp::drawRigid(ramRigidBody &rigid)
+void testApp::drawRigid(const ramRigidBody &rigid)
 {
+	
 }
 
 #pragma mark - oF Events
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	
+	if(key=='.')
+	{
+		ramLoadSettings("Settings/scene.xml");
+	}
+	if(key=='/')
+	{
+		ramSaveSettings("Settings/scene.xml");
+	}
 }
 
 //--------------------------------------------------------------

@@ -59,8 +59,14 @@ static void popAll()
 
 #pragma mark -
 //--------------------------------------------------------------
-void Kepler::setupControlPanel(ofxUICanvas* panel)
+void Kepler::setupControlPanel()
 {
+	ramControlPanel &gui = ramGetGUI();
+	
+#ifdef RAM_GUI_SYSTEM_OFXUI
+	
+	ofxUICanvas* panel = gui.getCurrentUIContext();
+	
     ofAddListener(panel->newGUIEvent, this, &Kepler::onValueChanged);
 
     ofxUIRadio *radio = NULL;
@@ -114,6 +120,8 @@ void Kepler::setupControlPanel(ofxUICanvas* panel)
     radio = new ofxUIRadio("EDGE B", names, OFX_UI_ORIENTATION_VERTICAL, dim, dim);
     radio->getToggles().at(KeplerCube::EDGE_11)->setValue(true);
     panel->addWidgetRight(radio);
+	
+#endif
 }
 
 #pragma mark -
@@ -152,7 +160,7 @@ void Kepler::draw()
 
 #pragma mark -
 //--------------------------------------------------------------
-void Kepler::drawActor(ramActor &actor)
+void Kepler::drawActor(const ramActor &actor)
 {
     pushAll();
     
@@ -161,7 +169,7 @@ void Kepler::drawActor(ramActor &actor)
     
     for (int i=0; i<actor.getNumNode(); i++)
 	{
-		ramNode &node = actor.getNode(i);
+		const ramNode &node = actor.getNode(i);
 		float jointSize = (i==ramActor::JOINT_HEAD) ? 6.0 : 3.0;
 		
 		node.beginTransform();

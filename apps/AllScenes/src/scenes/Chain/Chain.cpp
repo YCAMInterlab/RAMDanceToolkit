@@ -59,8 +59,14 @@ static void popAll()
 
 #pragma mark -
 //--------------------------------------------------------------
-void Chain::setupControlPanel(ofxUICanvas* panel)
+void Chain::setupControlPanel()
 {
+	ramControlPanel &gui = ramGetGUI();
+	
+#ifdef RAM_GUI_SYSTEM_OFXUI
+	
+	ofxUICanvas* panel = gui.getCurrentUIContext();
+	
     ofAddListener(panel->newGUIEvent, this, &Chain::onValueChanged);
     
     const float w = 300.0f;
@@ -83,6 +89,8 @@ void Chain::setupControlPanel(ofxUICanvas* panel)
     panel->addSpacer(w, 1.0f);
     
     panel->addButton("REMOVE ALL", false, dim, dim);
+	
+#endif
 }
 
 #pragma mark -
@@ -124,9 +132,10 @@ void Chain::draw()
 
 #pragma mark -
 //--------------------------------------------------------------
-void Chain::drawActor(ramActor &actor)
+void Chain::drawActor(const ramActor &actor)
 {
-    ramDrawBasicActor(actor, ramColor::RED_DEEP, ramColor::RED_NORMAL);
+	ofSetColor(ramColor::RED_DEEP);
+    ramDrawBasicActor(actor);
     
     for (int i=0; i<mChains.size(); i++) {
         if (mChains.at(i))

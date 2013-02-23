@@ -11,20 +11,21 @@ class Particles : public ramBaseScene
 	
 	float particle_amount;
 	
+	enum { NUM_FILTER_BUFFER = 3 };
+	ramGhost mGhosts[NUM_FILTER_BUFFER];
+	
+	ramFilterEach<ramGhost> filters;
+	
 public:
 	
 	Particles() : particle_amount(4.0) {}
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
-		ramControlPanel &gui = ramGetGUI();
-		
-		panel->addSlider("Amount", 1.0, 15.0, &particle_amount, gui.kLength, gui.kDim);
-		panel->addSlider("Life", 0.1, 10.0, &pe.particle_life, gui.kLength, gui.kDim);
-		panel->addSlider("Velocity", 0.1, 5, &pe.particle_velocity, gui.kLength, gui.kDim);
-		panel->addSlider("Gravity", -0.1, 0.1, &gravity->force, gui.kLength, gui.kDim);
-		
-		ofAddListener(panel->newGUIEvent, this, &Particles::onValueChanged);
+		gui().addSlider("Amount", 1.0, 15.0, &particle_amount);
+		gui().addSlider("Life", 0.1, 10.0, &pe.particle_life);
+		gui().addSlider("Velocity", 0.1, 5, &pe.particle_velocity);
+		gui().addSlider("Gravity", -0.1, 0.1, &gravity->force);
 	}
 	
 	void setup()
@@ -40,12 +41,16 @@ public:
 	
 	void update()
 	{
-		for (int n=0; n<getNumNodeArray(); n++)
+		const vector<ramNodeArray>& NAs = filters.update(getAllNodeArrays());
+		
+		for (int n = 0; n < NAs.size(); n++)
 		{
-			ramNodeArray &nodeArray = getNodeArray(n);
-			for (int i=0; i<nodeArray.getNumNode(); i++)
+			const ramNodeArray &NA = NAs[n];
+			
+			for (int i = 0; i < NA.getNumNode(); i++)
 			{
-				const ramNode &node = nodeArray.getNode(i);
+				const ramNode &node = NA.getNode(i);
+				
 				for(int j=0; j<particle_amount; j++)
 					pe.emit( node.getGlobalPosition() );
 			}
@@ -68,13 +73,9 @@ public:
 		
 		ofPopStyle();
 		glPopAttrib();
+		
 		ramEndCamera();
 	}
-	
-	void onValueChanged(ofxUIEventArgs& e)
-	{
 		
-	}
-	
 	const string getName() { return "Particles"; }
 };

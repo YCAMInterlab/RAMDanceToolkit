@@ -8,23 +8,31 @@ public:
 	
 	ofImage img;
 	bool useRgb;
+	float bufferSize;
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
+		useRgb = true;
+		bufferSize = 1024;
+		
 		gui.addToggle("Use RGB/HSB", &useRgb);
+		gui.addSlider("Buffer size", 128, 2048, &bufferSize);
 	}
 	
 	void setup()
 	{		
-		img.allocate(500, ramActor::NUM_JOINTS, OF_IMAGE_COLOR);
-		useRgb = true;
 	}
 	
 	void update()
 	{
-		img.update();		
+		bufferSize = (int) bufferSize;
+		if(bufferSize != img.getWidth())
+		{
+			img.allocate((int) bufferSize, ramActor::NUM_JOINTS, OF_IMAGE_COLOR);
+		}
+		img.update();
 	}
 	
 	//--------------------------------------------------------------
@@ -32,11 +40,11 @@ public:
 	{	
 		ofSetColor(255);
 		ofSetMinMagFilters(GL_NEAREST, GL_NEAREST);
-		img.draw(0, 0, ofGetWidth(), ofGetHeight());
+		img.draw(0, 0, ofGetViewportWidth(), ofGetViewportHeight());
 	}
 	
 	//--------------------------------------------------------------
-	void drawActor(ramActor &actor)
+	void drawActor(const ramActor &actor)
 	{
 		for(int y = 0; y < img.getHeight(); y++) {
 			for(int x = 0; x < img.getWidth() - 1; x++) {
@@ -47,7 +55,7 @@ public:
 		for (int i=0; i<actor.getNumNode(); i++)
 		{
 			if(i < ramActor::NUM_JOINTS) {
-				ramNode &node = actor.getNode(i);
+				const ramNode &node = actor.getNode(i);
 				ofColor cur;
 				if(useRgb) {
 					ofVec3f base = ofVec3f(1, 0, 0) * node.getOrientationQuat();
@@ -81,7 +89,7 @@ public:
 	}
 	
 	//--------------------------------------------------------------
-	void drawRigid(ramRigidBody &rigid)
+	void drawRigid(const ramRigidBody &rigid)
 	{
 	}
 	

@@ -1,0 +1,35 @@
+diff --git src/ofxUI.h src/ofxUI.h
+index e220503..97681e9 100755
+--- src/ofxUI.h
++++ src/ofxUI.h
+@@ -205,7 +205,7 @@ enum ofxUIThemeType
+     OFX_UI_THEME_MINBLACK
+ };
+ 
+-#define OFX_UI_FONT_NAME "GUI/NewMedia Fett.ttf"
++#define OFX_UI_FONT_NAME "../../../../resources/Fonts/din-webfont.ttf"
+ 
+ #define OFX_UI_FONT_RESOLUTION 150
+ #define OFX_UI_FONT_LARGE_SIZE 10
+diff --git src/ofxUILabel.h src/ofxUILabel.h
+index eb2e3ad..a452208 100755
+--- src/ofxUILabel.h
++++ src/ofxUILabel.h
+@@ -122,7 +122,7 @@ public:
+     
+     void drawFill()
+     {
+-        if(draw_fill)
++        if(draw_fill && !label.empty())
+         {
+             ofFill(); 
+             ofSetColor(color_fill); 
+@@ -132,7 +132,7 @@ public:
+ 	
+     void drawFillHighlight()
+     {
+-		if(draw_fill_highlight)
++		if(draw_fill_highlight && !label.empty())
+         {
+             ofFill(); 
+             ofSetColor(color_fill_highlight); 

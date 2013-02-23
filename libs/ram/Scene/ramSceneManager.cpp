@@ -1,15 +1,16 @@
 #include "ramSceneManager.h"
 
-#include "ramSharedData.h"
 #include "ramControlPanel.h"
 #include "ramPhysics.h"
+
+extern bool drawModel;
 
 void ramSceneManager::setup(const vector<ramBaseScene*>& scenes_)
 {
 	scenes = scenes_;
-	
+
 	ramGetGUI().setupSceneToggles(scenes);
-	
+
 	for (int i = 0; i < scenes.size(); i++)
 	{
 		ramBaseScene *scene = scenes.at(i);
@@ -20,10 +21,10 @@ void ramSceneManager::setup(const vector<ramBaseScene*>& scenes_)
 
 void ramSceneManager::update()
 {
-	for (int i=0; i<scenes.size(); i++)
+	for (int i = 0; i < scenes.size(); i++)
 	{
 		if (i >= scenes.size()) break;
-		
+
 		ramBaseScene *scene = scenes.at(i);
 		if (scene->isEnabled())
 			scene->update();
@@ -37,9 +38,9 @@ void ramSceneManager::draw()
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glPushMatrix();
 	ofPushStyle();
-	
+
 	glEnable(GL_DEPTH_TEST);
-	
+
 	for (int i = 0; i < scenes.size(); i++)
 	{
 		ramBaseScene *scene = scenes[i];
@@ -47,25 +48,25 @@ void ramSceneManager::draw()
 
 		bool enable_physics = ramGetEnablePhysicsPrimitive();
 		ramEnablePhysicsPrimitive(false);
-				
+
 		if (ramShadowEnabled())
 		{
 			// draw shadow
-			
+
 			ramBeginShadow();
-			
+
 			glPushAttrib(GL_ALL_ATTRIB_BITS);
 			glPushMatrix();
 			ofPushStyle();
 
 			scene->draw();
-			
+
 			ofPopStyle();
 			glPopMatrix();
 			glPopAttrib();
-			
+
 			ramBeginCamera();
-			
+
 			for (int n = 0; n < getNumNodeArray(); n++)
 			{
 				glPushAttrib(GL_ALL_ATTRIB_BITS);
@@ -82,34 +83,35 @@ void ramSceneManager::draw()
 					ramRigidBody &o = (ramRigidBody &)getNodeArray(n);
 					scene->drawRigid(o);
 				}
-				
+
 				ofPopStyle();
 				glPopMatrix();
 				glPopAttrib();
 			}
-			
+
 			ramEndCamera();
-			
+
 			ramEndShadow();
 		}
-		
+
 		ramEnablePhysicsPrimitive(enable_physics);
 
+		if (drawModel)
 		{
 			// draw object
-			
+
 			glPushAttrib(GL_ALL_ATTRIB_BITS);
 			glPushMatrix();
 			ofPushStyle();
 
 			scene->draw();
-			
+
 			ofPopStyle();
 			glPopMatrix();
 			glPopAttrib();
 
 			ramBeginCamera();
-			
+
 			for (int n = 0; n < getNumNodeArray(); n++)
 			{
 				glPushAttrib(GL_ALL_ATTRIB_BITS);
@@ -126,15 +128,15 @@ void ramSceneManager::draw()
 					ramRigidBody &o = (ramRigidBody &)getNodeArray(n);
 					scene->drawRigid(o);
 				}
-				
+
 				ofPopStyle();
 				glPopMatrix();
 				glPopAttrib();
 			}
-			
+
 			ramEndCamera();
 		}
-		
+
 		{
 			// draw HUD
 			ofPushView();
@@ -143,29 +145,64 @@ void ramSceneManager::draw()
 			ofPopView();
 		}
 	}
-	
+
 	ofPopStyle();
 	glPopMatrix();
 	glPopAttrib();
 }
 
-void ramSceneManager::drawActor(ramActor &actor)
+void ramSceneManager::enableAllEvents()
+{
+	ofAddListener(ramActorManager::instance().actorSetup, this, &ramSceneManager::actorSetup);
+	ofAddListener(ramActorManager::instance().actorExit, this, &ramSceneManager::actorExit);
+	ofAddListener(ramActorManager::instance().rigidSetup, this, &ramSceneManager::rigidSetup);
+	ofAddListener(ramActorManager::instance().rigidExit, this, &ramSceneManager::rigidExit);
+}
+
+void ramSceneManager::disableAllEvents()
+{
+	ofRemoveListener(ramActorManager::instance().actorSetup, this, &ramSceneManager::actorSetup);
+	ofRemoveListener(ramActorManager::instance().actorExit, this, &ramSceneManager::actorExit);
+	ofRemoveListener(ramActorManager::instance().rigidSetup, this, &ramSceneManager::rigidSetup);
+	ofRemoveListener(ramActorManager::instance().rigidExit, this, &ramSceneManager::rigidExit);
+}
+
+void ramSceneManager::actorSetup(ramActor &actor)
 {
 	for (int i = 0; i < scenes.size(); i++)
 	{
 		ramBaseScene *scene = scenes[i];
 		if (!scene->isEnabled()) continue;
-		scene->drawActor(actor);
+		scene->onActorSetup(actor);
 	}
 }
 
-void ramSceneManager::drawRigid(ramRigidBody &rigid)
+void ramSceneManager::actorExit(ramActor &actor)
 {
 	for (int i = 0; i < scenes.size(); i++)
 	{
 		ramBaseScene *scene = scenes[i];
 		if (!scene->isEnabled()) continue;
-		
-		scene->drawRigid(rigid);
+		scene->onActorExit(actor);
+	}
+}
+
+void ramSceneManager::rigidSetup(ramRigidBody &rigid)
+{
+	for (int i = 0; i < scenes.size(); i++)
+	{
+		ramBaseScene *scene = scenes[i];
+		if (!scene->isEnabled()) continue;
+		scene->onRigidSetup(rigid);
+	}
+}
+
+void ramSceneManager::rigidExit(ramRigidBody &rigid)
+{
+	for (int i = 0; i < scenes.size(); i++)
+	{
+		ramBaseScene *scene = scenes[i];
+		if (!scene->isEnabled()) continue;
+		scene->onRigidSetup(rigid);
 	}
 }

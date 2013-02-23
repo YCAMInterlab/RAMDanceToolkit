@@ -18,7 +18,13 @@ subject to the following restrictions:
 #endif
 //#include "GLDebugFont.h"
 
+#include "ofMain.h"
+
+#ifdef TARGET_WIN32
+#include <glut.h>
+#elif TARGET_MAC
 #include <GLUT/GLUT.h>
+#endif
 
 //#include "GlutStuff.h"
 #include "RagdollShapeDrawer.h"
@@ -388,7 +394,7 @@ RagdollShapeDrawer::ShapeCache*		RagdollShapeDrawer::cache(btConvexShape* shape)
 	return(sc);
 }
 
-void renderSquareA(float x, float y, float z)
+static void renderSquareA(float x, float y, float z)
 {
 	glBegin(GL_LINE_LOOP);
 	glVertex3f(x, y, z);

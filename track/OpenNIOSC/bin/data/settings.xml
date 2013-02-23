@@ -4,5 +4,5 @@
 </openNI>
 <osc>
 	<hostname>localhost</hostname>
-	<port>10001</port>
+	<port>10000</port>
 </osc>

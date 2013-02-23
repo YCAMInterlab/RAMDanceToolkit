@@ -21,9 +21,13 @@ class Donuts : public ramBaseScene
 public:
 	
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
+		
+#ifdef RAM_GUI_SYSTEM_OFXUI
+		
+		ofxUICanvas* panel = gui.getCurrentUIContext();
 		
 		panel->addWidgetDown(new ofxUILabel("Original me", OFX_UI_FONT_MEDIUM));
 		panel->addSlider("Scale", 0.1, 10.0, &mScale, gui.kLength, gui.kDim);
@@ -50,6 +54,8 @@ public:
 		clear();
 		
 		ofAddListener(panel->newGUIEvent, this, &Donuts::onValueChanged);
+		
+#endif
 	}
 	
 	void setup()
@@ -63,7 +69,7 @@ public:
 		mRadian = 2 * M_PI / mNumDuplicate;
 	}
 	
-	void drawDonuts(ramNodeArray &nodeArray)
+	void drawDonuts(const ramNodeArray &nodeArray)
 	{
 		ofPushStyle();
 		ofNoFill();
@@ -87,14 +93,24 @@ public:
 				ofRotateY(360/mNumDuplicate * n);
 				if( n==0 ) ofScale(mScale, mScale, mScale);
 				
-				if (nodeArray.isActor())
+
+				ofPushStyle();
+				for(int i=0; i<nodeArray.getNumNode(); i++)
 				{
-					ramDrawBasicActor((ramActor&)nodeArray, c1, c2);
+					const ramNode& node = nodeArray.getNode(i);
+					
+					node.beginTransform();
+					ofSetColor(c1);
+					ofBox( i==ramActor::JOINT_HEAD ? 8 : 5);
+					node.endTransform();
+					
+					if (node.hasParent())
+					{
+						ofSetColor(c2);
+						ofLine(node, *node.getParent());
+					}
 				}
-				else
-				{
-					ramDrawBasicRigid((ramRigidBody&)nodeArray, c1);
-				}
+				ofPopStyle();
 				
 				ofPopMatrix();
 			}
@@ -108,7 +124,7 @@ public:
 				
 				for (int n=0; n<mNumDuplicate; n++)
 				{
-					ramNode &node = nodeArray.getNode(index);
+					const ramNode &node = nodeArray.getNode(index);
 					
 					ofPushMatrix();
 					{
@@ -149,12 +165,12 @@ public:
 
 	}
 	
-	void drawActor( ramActor& actor )
+	void drawActor(const ramActor& actor)
 	{
 		drawDonuts( actor );
 	}
 	
-	void drawRigid(ramRigidBody &rigid)
+	void drawRigid(const ramRigidBody &rigid)
 	{
 		drawDonuts( rigid );
 	}

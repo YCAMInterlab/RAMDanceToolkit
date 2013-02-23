@@ -2,13 +2,6 @@
 
 #include "ofMain.h"
 #include "ramMain.h"
-#include "ofxXmlSettings.h"
-
-/*!
- for debuging....
- */
-static const string myActorName = "default_unknown_date";
-//static const string myActorName = "default";
 
 class testApp : public ramBaseApp
 {
@@ -32,11 +25,10 @@ public:
 	
 	// ram methods
 	// ------------------------
-    void drawActor(ramActor &actor);
-    void drawRigid(ramRigidBody &rigid);
+	void drawActor(const ramActor &actor);
+	void drawRigid(const ramRigidBody &rigid);
     
 	// ...
 	// ------------------------
-	ramOscReceiver oscReceiver;
 	ramSceneManager sceneManager;
 };

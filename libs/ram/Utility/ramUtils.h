@@ -1,34 +1,41 @@
 #pragma once
 
 #include "ofMain.h"
-#include <tr1/unordered_map>
-#include "ofxXmlSettings.h"
 
+#ifndef TARGET_WIN32
+#include <tr1/unordered_map>
+#endif
+
+#include "ofxXmlSettings.h"
 
 #pragma mark - ramCompoundContainer
 
 template <typename T>
 class ramCompoundContainer
 {
+#ifndef TARGET_WIN32
 	typedef std::tr1::unordered_map<string, T> MapType;
+#else
+	typedef std::map<string, T> MapType;
+#endif
 	typedef vector<T*> ArrayType;
 
 public:
 
-	void add(const string &key, T &o)
+	void set(const string &key, const T &o)
 	{
 		hash[key] = o;
 		updateIndexCache();
 	}
 
-	void remove(const string &key)
+	void erase(const string &key)
 	{
 		hash.erase(key);
 		updateIndexCache();
 	}
 
 	size_t size() { return array.size(); }
-	
+
 	void clear()
 	{
 		array.clear();
@@ -69,7 +76,7 @@ public:
 	{
 		array.clear();
 		hash_keys.clear();
-		
+
 		typename MapType::iterator it = hash.begin();
 		while (it != hash.end())
 		{
@@ -87,8 +94,3 @@ private:
 	vector<string> hash_keys;
 
 };
-
-inline string ramToResourcePath(string path)
-{
-	return ofFilePath::join(ofToDataPath("../../../../resources"), path);
-}

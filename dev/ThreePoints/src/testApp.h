@@ -27,12 +27,9 @@ public:
 	// ram methods
 	// ------------------------
 	void drawFloor();
-    void drawActor(ramActor &actor);
-    void drawRigid(ramRigidBody &rigid);
+	void drawActor(ramActor &actor);
+	void drawRigid(ramRigidBody &rigid);
     
-	// ...
-	// ------------------------
-	ramOscReceiver oscReceiver;
 	
 	bool showRects;
 	bool showSpheres;

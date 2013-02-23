@@ -7,91 +7,69 @@
 class ramPendulum : public ramBaseFilter
 {
 	float mFreq;
-	ofVec3f mAxis;
-	
+
+	bool axis_x, axis_y, axis_z;
+
 public:
-	
-	ramPendulum() : mFreq(30.0), mAxis(ofVec3f(0.0, 1.0, 0.0)) {}
-	
-	void setupControlPanel(ofxUICanvas* panel)
+
+	ramPendulum() : mFreq(30.0), axis_x(0), axis_y(1), axis_z(0) {}
+
+	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 
-		panel->addWidgetDown(new ofxUILabel(getName(), OFX_UI_FONT_LARGE));
-		panel->addSpacer(gui.kLength, 2);
-		panel->addSlider("Frequency", 0.00, 100.0, &mFreq, gui.kLength, gui.kDim);
-		
-		panel->addSpacer(gui.kLength, 2);
-		panel->addToggle("Pendulum axis: X", false, 10, 10);
-		panel->addToggle("Pendulum axis: Y", true,  10, 10);
-		panel->addToggle("Pendulum axis: Z", false, 10, 10);
-		
-		ofAddListener(panel->newGUIEvent, this, &ramPendulum::onValueChanged);
+		gui.addSection(getName());
+
+		gui.addSlider("Frequency", 0.00, 100.0, &mFreq);
+
+		gui.addSeparator();
+
+		gui.addToggle("Pendulum axis: X", &axis_x);
+		gui.addToggle("Pendulum axis: Y", &axis_y);
+		gui.addToggle("Pendulum axis: Z", &axis_z);
 	}
-	
+
 	void setup()
 	{
 		randoms.clear();
-		
-		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			randoms.push_back( ofRandom(1.0, 5.0) );
-		
+
+		for (int i = 0; i < ramActor::NUM_JOINTS; i++)
+			randoms.push_back(ofRandom(1.0, 5.0));
+
 		periods.clear();
-		periods.assign( ramActor::NUM_JOINTS, float() );
+		periods.assign(ramActor::NUM_JOINTS, float());
 	}
-	
-	const ramNodeArray& update(const ramNodeArray &nodeArray)
+
+	const ramNodeArray& filter(const ramNodeArray &nodeArray)
 	{
 		const float t = ofGetElapsedTimef();
-		
-		for (int i=0; i<periods.size(); i++)
-			periods.at(i) = sin( t*randoms.at(i) ) * mFreq;
-		
+
+		ofVec3f axis(axis_x, axis_y, axis_z);
+
+		for (int i = 0; i < periods.size(); i++)
+			periods.at(i) = sin(t * randoms.at(i)) * mFreq;
+
 		processedArray = nodeArray;
-		
-		for (int i=0; i<processedArray.getNumNode(); i++)
+
+		for (int i = 0; i < processedArray.getNumNode(); i++)
 		{
 			ramNode &node = processedArray.getNode(i);
 			ofMatrix4x4 m = node.getLocalTransformMatrix();
-			const ofQuaternion qt = ofQuaternion(periods.at(i), mAxis);
-			
+			const ofQuaternion qt = ofQuaternion(periods.at(i), axis);
+
 			node.setTransformMatrix(m * qt);
 		}
-		
+
 		return processedArray;
 	}
-	
-	void onValueChanged(ofxUIEventArgs &e)
-	{
-		string name = e.widget->getName();
-		
-		if (name == "Pendulum axis: X")
-		{
-			ofxUIToggle *t = (ofxUIToggle *)e.widget;
-			float v = t->getValue();
-			mAxis.x = v;
-		}
-		if (name == "Pendulum axis: Y")
-		{
-			ofxUIToggle *t = (ofxUIToggle *)e.widget;
-			float v = t->getValue();
-			mAxis.y = v;
-		}
-		if (name == "Pendulum axis: Z")
-		{
-			ofxUIToggle *t = (ofxUIToggle *)e.widget;
-			float v = t->getValue();
-			mAxis.z = v;
-		}
-	}
-	
+
 	inline const ramNodeArray& getResult() { return processedArray; }
 	inline const string getName() { return "ramPendulum"; };
-	
+
 protected:
-	
+
 	ramNodeArray processedArray;
 	vector<float> periods;
 	vector<float> randoms;
-	
+
 };

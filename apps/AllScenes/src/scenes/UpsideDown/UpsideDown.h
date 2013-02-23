@@ -13,8 +13,14 @@ public:
     ofVec3f mAutoRotateSpeed;
     struct { bool x, y, z; } mAutoRotate;
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
+#ifdef RAM_GUI_SYSTEM_OFXUI
+		
+		ramControlPanel &gui = ramGetGUI();
+		
+		ofxUICanvas* panel = gui.getCurrentUIContext();
+		
 		ofAddListener(panel->newGUIEvent, this, &UpsideDown::onValueChanged);
         
         const float dim = 16.0f;
@@ -40,6 +46,8 @@ public:
         panel->addSpacer(300.0f, 1.0f);
         
         panel->addButton("RESET", false, dim, dim);
+		
+#endif
 	}
     
 	void setup()
@@ -88,7 +96,7 @@ public:
 		ramEndCamera();
 	}
 	
-	void drawActor(ramActor& actor)
+	void drawActor(const ramActor& actor)
 	{
 
         ramActor tmpActor = actor;
@@ -99,10 +107,11 @@ public:
         
         ramActor filterd = mUpsideDown.update(tmpActor);
         
-        ramDrawBasicActor(filterd, ramColor::RED_DEEP, ramColor::RED_LIGHT);
+		ofSetColor(ramColor::RED_DEEP);
+        ramDrawBasicActor(filterd);
 	}
 	
-	void drawRigid(ramRigidBody &rigid)
+	void drawRigid(const ramRigidBody &rigid)
 	{
 		
 	}
