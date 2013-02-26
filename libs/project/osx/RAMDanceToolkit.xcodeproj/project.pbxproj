@@ -261,6 +261,8 @@
 		60426F9816CE1A5300C99541 /* ramExpansion.h in Headers */ = {isa = PBXBuildFile; fileRef = 60426F9716CE1A5300C99541 /* ramExpansion.h */; };
 		607A91A616D2B4A40038D472 /* ramNodeArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 607A91A516D2B4A40038D472 /* ramNodeArrayBuffer.h */; };
 		607A91A816D2B52C0038D472 /* ramTimeFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 607A91A716D2B52C0038D472 /* ramTimeFilter.h */; };
+		60813DF616DCAFCD005A1F85 /* ofxNodeArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60813DF416DCAFCD005A1F85 /* ofxNodeArray.cpp */; };
+		60813DF716DCAFCD005A1F85 /* ofxNodeArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 60813DF516DCAFCD005A1F85 /* ofxNodeArray.h */; };
 		609A653716CAC57C00C0AB22 /* ramActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A650716CAC57C00C0AB22 /* ramActor.cpp */; };
 		609A653816CAC57C00C0AB22 /* ramActor.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A650816CAC57C00C0AB22 /* ramActor.h */; };
 		609A653916CAC57C00C0AB22 /* ramActorManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A650916CAC57C00C0AB22 /* ramActorManager.cpp */; };
@@ -614,6 +616,8 @@
 		60426F9716CE1A5300C99541 /* ramExpansion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramExpansion.h; sourceTree = "<group>"; };
 		607A91A516D2B4A40038D472 /* ramNodeArrayBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeArrayBuffer.h; sourceTree = "<group>"; };
 		607A91A716D2B52C0038D472 /* ramTimeFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramTimeFilter.h; sourceTree = "<group>"; };
+		60813DF416DCAFCD005A1F85 /* ofxNodeArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxNodeArray.cpp; sourceTree = "<group>"; };
+		60813DF516DCAFCD005A1F85 /* ofxNodeArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxNodeArray.h; sourceTree = "<group>"; };
 		609A650716CAC57C00C0AB22 /* ramActor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramActor.cpp; sourceTree = "<group>"; };
 		609A650816CAC57C00C0AB22 /* ramActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramActor.h; sourceTree = "<group>"; };
 		609A650916CAC57C00C0AB22 /* ramActorManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramActorManager.cpp; sourceTree = "<group>"; };
@@ -1251,6 +1255,7 @@
 		607D7ACC16661B860063800A /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				60813DF216DCAFCD005A1F85 /* ofxNodeArray */,
 				60314CEF16CFC6B300138384 /* ofxBt */,
 				9AF81ADD16C93C0300C1A560 /* ofxInteractivePrimitives */,
 				600EFB3A16C8F59700A5B331 /* ofxXmlSettings */,
@@ -1259,6 +1264,24 @@
 				9AD6F52816B926BF00F7F51E /* ofxUITabbedCanvas */,
 			);
 			name = addons;
+			sourceTree = "<group>";
+		};
+		60813DF216DCAFCD005A1F85 /* ofxNodeArray */ = {
+			isa = PBXGroup;
+			children = (
+				60813DF316DCAFCD005A1F85 /* src */,
+			);
+			name = ofxNodeArray;
+			path = ../../../addons/ofxNodeArray;
+			sourceTree = "<group>";
+		};
+		60813DF316DCAFCD005A1F85 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				60813DF416DCAFCD005A1F85 /* ofxNodeArray.cpp */,
+				60813DF516DCAFCD005A1F85 /* ofxNodeArray.h */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		609A650516CAC57C00C0AB22 /* ram */ = {
@@ -1821,6 +1844,7 @@
 				6016C92816D62F03006A578D /* ramCollisionEvent.h in Headers */,
 				6016C92C16D642FC006A578D /* ramSoftBodyPrimitive.h in Headers */,
 				9ADAF14216DC8D96008C618C /* ramRecognizer.h in Headers */,
+				60813DF716DCAFCD005A1F85 /* ofxNodeArray.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1917,6 +1941,7 @@
 				60314EC516CFC6B400138384 /* ofxBtWorld.cpp in Sources */,
 				6016C92B16D642FC006A578D /* ramSoftBodyPrimitive.cpp in Sources */,
 				6032635D16D7A17F0039D55D /* ramGlobal.cpp in Sources */,
+				60813DF616DCAFCD005A1F85 /* ofxNodeArray.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
