@@ -21,7 +21,7 @@ public:
 	Node(const Node& copy) { *this = copy; }
 	Node(const BaseType& copy) { *this = copy; }
 	
-	BaseType& operator=(const BaseType& copy);
+	Node& operator=(const Node& copy);
 	
 	inline int getID() { return node_id; }
 	
@@ -54,7 +54,7 @@ public:
 	inline void beginTransform() const { transformGL(); }
 	inline void endTransform() const { restoreTransformGL(); }
 
-private:
+protected:
 	
 	int node_id;
 };
@@ -73,13 +73,12 @@ public:
 	NodeArray(const NodeArray& copy) { *this = copy; }
 	NodeArray(const BaseType& copy) { *this = copy; }
 	
-	inline BaseType& operator=(const BaseType& copy);
+	inline NodeArray& operator=(const NodeArray& copy);
 	
 	inline void setName(const string& name) { this->name = name; }
 	inline const string& getName() const { return name; }
 	
 	inline int getNumNode() const { return nodes.size(); }
-	inline void resize(size_t size);
 	
 	inline NodeType& getNode(int node_id) { return nodes[node_id]; }
 	inline const NodeType& getNode(int node_id) const { return nodes[node_id]; }
@@ -108,7 +107,7 @@ protected:
 	string name;
 	vector<NodeType> nodes;
 	
-	inline void rebuildHierarchy(const BaseType& ref);
+	inline void rebuildHierarchy(const NodeArray& ref);
 	inline void clearHierarchy();
 	inline void rebuildLocalPosition();
 };
@@ -118,7 +117,7 @@ protected:
 // ofxNodeArray::Node impl
 
 template <typename BaseType>
-inline BaseType& ofxNodeArray::Node<BaseType>::operator=(const BaseType& copy)
+inline ofxNodeArray::Node<BaseType>& ofxNodeArray::Node<BaseType>::operator=(const ofxNodeArray::Node<BaseType>& copy)
 {
 	ofNode::operator=(copy);
 	
@@ -310,15 +309,13 @@ inline BaseType ofxNodeArray::Node<BaseType>::getLimited(const BaseType &base, f
 // ofxNodeArray::NodeArray impl
 
 template <typename BaseType, typename NodeType>
-inline void ofxNodeArray::NodeArray<BaseType, NodeType>::rebuildHierarchy(const BaseType& ref)
+inline void ofxNodeArray::NodeArray<BaseType, NodeType>::rebuildHierarchy(const ofxNodeArray::NodeArray<BaseType, NodeType>& ref)
 {
 	// rebuild hierarchy
 	for (int i = 0; i < ref.nodes.size(); i++)
 	{
 		const NodeType &src = ref.nodes[i];
 		NodeType &dst = nodes[i];
-		
-		dst.container = this;
 		
 		NodeType *p = src.getParent();
 		if (!p) continue;
@@ -355,20 +352,11 @@ inline void ofxNodeArray::NodeArray<BaseType, NodeType>::rebuildLocalPosition()
 }
 
 template <typename BaseType, typename NodeType>
-inline void ofxNodeArray::NodeArray<BaseType, NodeType>::resize(size_t size)
-{
-	nodes.resize(size);
-	for (int i = 0; i < size; i++)
-		nodes[i] = NodeType(i);
-}
-
-template <typename BaseType, typename NodeType>
-inline BaseType& ofxNodeArray::NodeArray<BaseType, NodeType>::operator=(const BaseType& copy)
+inline ofxNodeArray::NodeArray<BaseType, NodeType>& ofxNodeArray::NodeArray<BaseType, NodeType>::operator=(const ofxNodeArray::NodeArray<BaseType, NodeType>& copy)
 {
 	this->name = copy.name;
-	this->nodes = copy.nodes;
-	this->type = copy.type;
 	
+	this->nodes = copy.nodes;
 	rebuildHierarchy(copy);
 	
 	return *this;
