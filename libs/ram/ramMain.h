@@ -21,7 +21,6 @@
 #include "ramGraphView.h"
 
 /// filters
-#include "ramAnalyzer.h"
 #include "ramGhost.h"
 #include "ramPendulum.h"
 #include "ramExpansion.h"
@@ -31,6 +30,9 @@
 #include "ramNodeTransform.h"
 #include "ramTimeFilter.h"
 #include "ramLowPassFilter.h"
+
+/// recognizers
+#include "ramRecognizer.h"
 
 /// events
 #include "ramTimeEvent.h"
