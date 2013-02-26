@@ -10,7 +10,6 @@ class HistoryPoint : public Fading
 {
 public:
 	ofVec3f point;
-	float birth;
 	
 	HistoryPoint(ofVec3f point)
 	:point(point)
