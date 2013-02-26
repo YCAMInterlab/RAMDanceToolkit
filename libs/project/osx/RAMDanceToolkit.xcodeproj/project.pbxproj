@@ -270,7 +270,6 @@
 		609A653D16CAC57C00C0AB22 /* ramCameraManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A650D16CAC57C00C0AB22 /* ramCameraManager.cpp */; };
 		609A653E16CAC57C00C0AB22 /* ramCameraManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A650E16CAC57C00C0AB22 /* ramCameraManager.h */; };
 		609A653F16CAC57C00C0AB22 /* ramConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A650F16CAC57C00C0AB22 /* ramConstants.h */; };
-		609A654216CAC57C00C0AB22 /* ramAnalyzer.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651316CAC57C00C0AB22 /* ramAnalyzer.h */; };
 		609A654516CAC57C00C0AB22 /* ramGhost.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651616CAC57C00C0AB22 /* ramGhost.h */; };
 		609A654616CAC57C00C0AB22 /* ramUpsideDown.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651716CAC57C00C0AB22 /* ramUpsideDown.h */; };
 		609A654716CAC57C00C0AB22 /* ramPendulum.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651816CAC57C00C0AB22 /* ramPendulum.h */; };
@@ -350,6 +349,7 @@
 		9AD6F5CB16B926C000F7F51E /* ofxUIWidgetWithLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F52716B926BF00F7F51E /* ofxUIWidgetWithLabel.h */; };
 		9AD6F5CC16B926C000F7F51E /* ofxUITabbedCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6F52916B926BF00F7F51E /* ofxUITabbedCanvas.cpp */; };
 		9AD6F5CD16B926C000F7F51E /* ofxUITabbedCanvas.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F52A16B926BF00F7F51E /* ofxUITabbedCanvas.h */; };
+		9ADAF14216DC8D96008C618C /* ramRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9ADAF14116DC8D96008C618C /* ramRecognizer.h */; };
 		9AF81AF516C93C0300C1A560 /* ofxInteractivePrimitives.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AF81AEC16C93C0300C1A560 /* ofxInteractivePrimitives.cpp */; };
 		9AF81AF616C93C0300C1A560 /* ofxInteractivePrimitives.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AF81AED16C93C0300C1A560 /* ofxInteractivePrimitives.h */; };
 		9AF81AF716C93C0300C1A560 /* ofxIPButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AF81AEF16C93C0300C1A560 /* ofxIPButton.h */; };
@@ -623,7 +623,6 @@
 		609A650D16CAC57C00C0AB22 /* ramCameraManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramCameraManager.cpp; sourceTree = "<group>"; };
 		609A650E16CAC57C00C0AB22 /* ramCameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramCameraManager.h; sourceTree = "<group>"; };
 		609A650F16CAC57C00C0AB22 /* ramConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramConstants.h; sourceTree = "<group>"; };
-		609A651316CAC57C00C0AB22 /* ramAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramAnalyzer.h; sourceTree = "<group>"; };
 		609A651616CAC57C00C0AB22 /* ramGhost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramGhost.h; sourceTree = "<group>"; };
 		609A651716CAC57C00C0AB22 /* ramUpsideDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramUpsideDown.h; sourceTree = "<group>"; };
 		609A651816CAC57C00C0AB22 /* ramPendulum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPendulum.h; sourceTree = "<group>"; };
@@ -706,6 +705,7 @@
 		9AD6F52716B926BF00F7F51E /* ofxUIWidgetWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWidgetWithLabel.h; sourceTree = "<group>"; };
 		9AD6F52916B926BF00F7F51E /* ofxUITabbedCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUITabbedCanvas.cpp; sourceTree = "<group>"; };
 		9AD6F52A16B926BF00F7F51E /* ofxUITabbedCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUITabbedCanvas.h; sourceTree = "<group>"; };
+		9ADAF14116DC8D96008C618C /* ramRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramRecognizer.h; sourceTree = "<group>"; };
 		9AF81AEC16C93C0300C1A560 /* ofxInteractivePrimitives.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxInteractivePrimitives.cpp; sourceTree = "<group>"; };
 		9AF81AED16C93C0300C1A560 /* ofxInteractivePrimitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxInteractivePrimitives.h; sourceTree = "<group>"; };
 		9AF81AEF16C93C0300C1A560 /* ofxIPButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxIPButton.h; sourceTree = "<group>"; };
@@ -1264,6 +1264,7 @@
 		609A650516CAC57C00C0AB22 /* ram */ = {
 			isa = PBXGroup;
 			children = (
+				9ADAF13F16DC8D55008C618C /* Recognizer */,
 				6016C92216D6214D006A578D /* Event */,
 				609A650616CAC57C00C0AB22 /* Core */,
 				609A651216CAC57C00C0AB22 /* Filter */,
@@ -1299,7 +1300,6 @@
 		609A651216CAC57C00C0AB22 /* Filter */ = {
 			isa = PBXGroup;
 			children = (
-				609A651316CAC57C00C0AB22 /* ramAnalyzer.h */,
 				60FFDB5416CD1F2F0093F734 /* ramBaseFilter.h */,
 				60426F9716CE1A5300C99541 /* ramExpansion.h */,
 				609A651616CAC57C00C0AB22 /* ramGhost.h */,
@@ -1475,6 +1475,14 @@
 			path = ../../../addons/ofxUITabbedCanvas;
 			sourceTree = "<group>";
 		};
+		9ADAF13F16DC8D55008C618C /* Recognizer */ = {
+			isa = PBXGroup;
+			children = (
+				9ADAF14116DC8D96008C618C /* ramRecognizer.h */,
+			);
+			path = Recognizer;
+			sourceTree = "<group>";
+		};
 		9AF81ADD16C93C0300C1A560 /* ofxInteractivePrimitives */ = {
 			isa = PBXGroup;
 			children = (
@@ -1583,7 +1591,6 @@
 				609A653C16CAC57C00C0AB22 /* ramBaseApp.h in Headers */,
 				609A653E16CAC57C00C0AB22 /* ramCameraManager.h in Headers */,
 				609A653F16CAC57C00C0AB22 /* ramConstants.h in Headers */,
-				609A654216CAC57C00C0AB22 /* ramAnalyzer.h in Headers */,
 				609A654516CAC57C00C0AB22 /* ramGhost.h in Headers */,
 				609A654616CAC57C00C0AB22 /* ramUpsideDown.h in Headers */,
 				609A654716CAC57C00C0AB22 /* ramPendulum.h in Headers */,
@@ -1813,6 +1820,7 @@
 				6016C92616D62DB4006A578D /* ramBaseEvent.h in Headers */,
 				6016C92816D62F03006A578D /* ramCollisionEvent.h in Headers */,
 				6016C92C16D642FC006A578D /* ramSoftBodyPrimitive.h in Headers */,
+				9ADAF14216DC8D96008C618C /* ramRecognizer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
