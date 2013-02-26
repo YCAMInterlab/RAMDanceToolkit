@@ -4,13 +4,13 @@
 
 namespace ofxNodeArray
 {
-	template <typename BaseType> class Node;
-	template <typename BaseType, typename NodeType> class NodeArray;
+	template <typename SuperClass> class Node;
+	template <typename SuperClass, typename NodeType> class NodeArray;
 }
 
 #pragma mark - Node
 
-template <typename BaseType>
+template <typename SuperClass>
 class ofxNodeArray::Node : public ofNode
 {
 public:
@@ -19,37 +19,37 @@ public:
 	Node(int node_id) : node_id(node_id), ofNode() {}
 	
 	Node(const Node& copy) { *this = copy; }
-	Node(const BaseType& copy) { *this = copy; }
+	Node(const SuperClass& copy) { *this = copy; }
 	
 	Node& operator=(const Node& copy);
 	
 	inline int getID() const { return node_id; }
 	inline void setID(int id) { node_id = id; }
 	
-	inline void setParent(BaseType &parent) { this->parent = &parent; }
-	inline BaseType* getParent() const { return (BaseType*)parent; }
+	inline void setParent(SuperClass &parent) { this->parent = &parent; }
+	inline SuperClass* getParent() const { return (SuperClass*)parent; }
 	inline bool hasParent() const { return parent != NULL; }
 	
 	// operators
 	inline operator ofVec3f() const { return getGlobalPosition(); }
 	
-	inline bool operator==(const BaseType &node) const;
-	inline bool operator!=(const BaseType &node) const;
+	inline bool operator==(const SuperClass &node) const;
+	inline bool operator!=(const SuperClass &node) const;
 	
-	inline BaseType operator+(const BaseType &node) const;
-	inline BaseType& operator+=(const BaseType &node);
+	inline SuperClass operator+(const SuperClass &node) const;
+	inline SuperClass& operator+=(const SuperClass &node);
 	
-	inline BaseType operator-(const BaseType &node) const;
-	inline BaseType& operator-=(const BaseType &node);
+	inline SuperClass operator-(const SuperClass &node) const;
+	inline SuperClass& operator-=(const SuperClass &node);
 	
-	inline BaseType& lerp(const BaseType &base, float t);
-	inline BaseType getLerpd(const BaseType &base, float t) const;
+	inline SuperClass& lerp(const SuperClass &base, float t);
+	inline SuperClass getLerpd(const SuperClass &base, float t) const;
 	
-	inline BaseType& normalize(const BaseType &base, float length);
-	inline BaseType getNormalized(const BaseType &base, float length) const;
+	inline SuperClass& normalize(const SuperClass &base, float length);
+	inline SuperClass getNormalized(const SuperClass &base, float length) const;
 	
-	inline BaseType& limit(const BaseType &base, float t);
-	inline BaseType getLimited(const BaseType &base, float length) const;
+	inline SuperClass& limit(const SuperClass &base, float t);
+	inline SuperClass getLimited(const SuperClass &base, float length) const;
 
 protected:
 	
@@ -58,7 +58,7 @@ protected:
 
 #pragma mark - NodeArray
 
-template <typename BaseType, typename NodeType>
+template <typename SuperClass, typename NodeType>
 class ofxNodeArray::NodeArray
 {
 public:
@@ -68,7 +68,7 @@ public:
 	virtual ~NodeArray() {}
 	
 	NodeArray(const NodeArray& copy) { *this = copy; }
-	NodeArray(const BaseType& copy) { *this = copy; }
+	NodeArray(const SuperClass& copy) { *this = copy; }
 	
 	inline NodeArray& operator=(const NodeArray& copy);
 	
@@ -81,23 +81,23 @@ public:
 	inline const NodeType& getNode(int node_id) const { return nodes[node_id]; }
 	
 	// operators
-	inline bool operator==(const BaseType &arr) const;
-	inline bool operator!=(const BaseType &arr) const;
+	inline bool operator==(const SuperClass &arr) const;
+	inline bool operator!=(const SuperClass &arr) const;
 	
-	inline BaseType operator+(const BaseType &arr) const;
-	inline BaseType& operator+=(const BaseType &arr);
+	inline SuperClass operator+(const SuperClass &arr) const;
+	inline SuperClass& operator+=(const SuperClass &arr);
 	
-	inline BaseType operator-(const BaseType &arr) const;
-	inline BaseType& operator-=(const BaseType &arr);
+	inline SuperClass operator-(const SuperClass &arr) const;
+	inline SuperClass& operator-=(const SuperClass &arr);
 	
-	inline BaseType& lerp(const BaseType &base, float t);
-	inline BaseType getLerpd(const BaseType &base, float t) const;
+	inline SuperClass& lerp(const SuperClass &base, float t);
+	inline SuperClass getLerpd(const SuperClass &base, float t) const;
 	
-	inline BaseType& normalize(const BaseType &base, float length);
-	inline BaseType getNormalized(const BaseType &base, float length) const;
+	inline SuperClass& normalize(const SuperClass &base, float length);
+	inline SuperClass getNormalized(const SuperClass &base, float length) const;
 	
-	inline BaseType& limit(const BaseType &base, float length);
-	inline BaseType getLimited(const BaseType &base, float length) const;
+	inline SuperClass& limit(const SuperClass &base, float length);
+	inline SuperClass getLimited(const SuperClass &base, float length) const;
 	
 protected:
 	
@@ -113,8 +113,8 @@ protected:
 
 // ofxNodeArray::Node impl
 
-template <typename BaseType>
-inline ofxNodeArray::Node<BaseType>& ofxNodeArray::Node<BaseType>::operator=(const ofxNodeArray::Node<BaseType>& copy)
+template <typename SuperClass>
+inline ofxNodeArray::Node<SuperClass>& ofxNodeArray::Node<SuperClass>::operator=(const ofxNodeArray::Node<SuperClass>& copy)
 {
 	ofNode::operator=(copy);
 	
@@ -124,8 +124,8 @@ inline ofxNodeArray::Node<BaseType>& ofxNodeArray::Node<BaseType>::operator=(con
 	return *this;
 }
 
-template <typename BaseType>
-inline bool ofxNodeArray::Node<BaseType>::operator==(const BaseType &node) const
+template <typename SuperClass>
+inline bool ofxNodeArray::Node<SuperClass>::operator==(const SuperClass &node) const
 {
 	const float *m = getLocalTransformMatrix().getPtr();
 	const float *mm = node.getLocalTransformMatrix().getPtr();
@@ -157,17 +157,17 @@ inline bool ofxNodeArray::Node<BaseType>::operator==(const BaseType &node) const
 	return true;
 }
 
-template <typename BaseType>
-inline bool ofxNodeArray::Node<BaseType>::operator!=(const BaseType &node) const
+template <typename SuperClass>
+inline bool ofxNodeArray::Node<SuperClass>::operator!=(const SuperClass &node) const
 {
 	return !(*this == node);
 }
 
-template <typename BaseType>
-inline BaseType ofxNodeArray::Node<BaseType>::operator+(const BaseType &node) const
+template <typename SuperClass>
+inline SuperClass ofxNodeArray::Node<SuperClass>::operator+(const SuperClass &node) const
 {
-	const BaseType &self = static_cast<const BaseType&>(*this);
-	BaseType result = self;
+	const SuperClass &self = static_cast<const SuperClass&>(*this);
+	SuperClass result = self;
 	
 	result.setPosition(result.getPosition() + node.getPosition());
 	result.setOrientation(result.getOrientationQuat() * node.getOrientationQuat());
@@ -175,10 +175,10 @@ inline BaseType ofxNodeArray::Node<BaseType>::operator+(const BaseType &node) co
 	return result;
 }
 
-template <typename BaseType>
-inline BaseType& ofxNodeArray::Node<BaseType>::operator+=(const BaseType &node)
+template <typename SuperClass>
+inline SuperClass& ofxNodeArray::Node<SuperClass>::operator+=(const SuperClass &node)
 {
-	BaseType &result = static_cast<BaseType&>(*this);
+	SuperClass &result = static_cast<SuperClass&>(*this);
 	
 	result.setPosition(result.getPosition() + node.getPosition());
 	result.setOrientation(result.getOrientationQuat() * node.getOrientationQuat());
@@ -186,11 +186,11 @@ inline BaseType& ofxNodeArray::Node<BaseType>::operator+=(const BaseType &node)
 	return result;
 }
 
-template <typename BaseType>
-inline BaseType ofxNodeArray::Node<BaseType>::operator-(const BaseType &node) const
+template <typename SuperClass>
+inline SuperClass ofxNodeArray::Node<SuperClass>::operator-(const SuperClass &node) const
 {
-	const BaseType &self = static_cast<const BaseType&>(*this);
-	BaseType result = self;
+	const SuperClass &self = static_cast<const SuperClass&>(*this);
+	SuperClass result = self;
 	
 	result.setPosition(result.getPosition() - node.getPosition());
 	result.setOrientation(result.getOrientationQuat() * node.getOrientationQuat().inverse());
@@ -198,10 +198,10 @@ inline BaseType ofxNodeArray::Node<BaseType>::operator-(const BaseType &node) co
 	return result;
 }
 
-template <typename BaseType>
-inline BaseType& ofxNodeArray::Node<BaseType>::operator-=(const BaseType &node)
+template <typename SuperClass>
+inline SuperClass& ofxNodeArray::Node<SuperClass>::operator-=(const SuperClass &node)
 {
-	BaseType &result = static_cast<BaseType&>(*this);
+	SuperClass &result = static_cast<SuperClass&>(*this);
 	
 	result.setPosition(result.getPosition() - node.getPosition());
 	result.setOrientation(result.getOrientationQuat() * node.getOrientationQuat().inverse());
@@ -209,8 +209,8 @@ inline BaseType& ofxNodeArray::Node<BaseType>::operator-=(const BaseType &node)
 	return result;
 }
 
-template <typename BaseType>
-inline BaseType& ofxNodeArray::Node<BaseType>::lerp(const BaseType &base, float t)
+template <typename SuperClass>
+inline SuperClass& ofxNodeArray::Node<SuperClass>::lerp(const SuperClass &base, float t)
 {
 	const ofMatrix4x4& a = this->getGlobalTransformMatrix();
 	const ofMatrix4x4& b = base.getGlobalTransformMatrix();
@@ -225,20 +225,20 @@ inline BaseType& ofxNodeArray::Node<BaseType>::lerp(const BaseType &base, float 
 	return *this;
 }
 
-template <typename BaseType>
-inline BaseType ofxNodeArray::Node<BaseType>::getLerpd(const BaseType &base, float t) const
+template <typename SuperClass>
+inline SuperClass ofxNodeArray::Node<SuperClass>::getLerpd(const SuperClass &base, float t) const
 {
-	const BaseType &self = static_cast<const BaseType&>(*this);
-	BaseType result = self;
+	const SuperClass &self = static_cast<const SuperClass&>(*this);
+	SuperClass result = self;
 
 	result.lerp(base, t);
 	return result;
 }
 
-template <typename BaseType>
-inline BaseType& ofxNodeArray::Node<BaseType>::normalize(const BaseType &base, float length)
+template <typename SuperClass>
+inline SuperClass& ofxNodeArray::Node<SuperClass>::normalize(const SuperClass &base, float length)
 {
-	BaseType &result = static_cast<BaseType&>(*this);
+	SuperClass &result = static_cast<SuperClass&>(*this);
 	
 	const ofVec3f &p0 = result.getGlobalPosition();
 	const ofVec3f &p1 = base.getGlobalPosition();
@@ -252,11 +252,11 @@ inline BaseType& ofxNodeArray::Node<BaseType>::normalize(const BaseType &base, f
 	return result;
 }
 
-template <typename BaseType>
-inline BaseType ofxNodeArray::Node<BaseType>::getNormalized(const BaseType &base, float length) const
+template <typename SuperClass>
+inline SuperClass ofxNodeArray::Node<SuperClass>::getNormalized(const SuperClass &base, float length) const
 {
-	const BaseType &self = static_cast<const BaseType&>(*this);
-	BaseType result = self;
+	const SuperClass &self = static_cast<const SuperClass&>(*this);
+	SuperClass result = self;
 	
 	const ofVec3f &p0 = result.getGlobalPosition();
 	const ofVec3f &p1 = base.getGlobalPosition();
@@ -270,10 +270,10 @@ inline BaseType ofxNodeArray::Node<BaseType>::getNormalized(const BaseType &base
 	return result;
 }
 
-template <typename BaseType>
-inline BaseType& ofxNodeArray::Node<BaseType>::limit(const BaseType &base, float length)
+template <typename SuperClass>
+inline SuperClass& ofxNodeArray::Node<SuperClass>::limit(const SuperClass &base, float length)
 {
-	BaseType &result = static_cast<BaseType&>(*this);
+	SuperClass &result = static_cast<SuperClass&>(*this);
 	
 	const ofVec3f &p0 = result.getGlobalPosition();
 	const ofVec3f &p1 = base.getGlobalPosition();
@@ -286,11 +286,11 @@ inline BaseType& ofxNodeArray::Node<BaseType>::limit(const BaseType &base, float
 	return result;
 }
 
-template <typename BaseType>
-inline BaseType ofxNodeArray::Node<BaseType>::getLimited(const BaseType &base, float length) const
+template <typename SuperClass>
+inline SuperClass ofxNodeArray::Node<SuperClass>::getLimited(const SuperClass &base, float length) const
 {
-	const BaseType &self = static_cast<const BaseType&>(*this);
-	BaseType result = self;
+	const SuperClass &self = static_cast<const SuperClass&>(*this);
+	SuperClass result = self;
 	
 	const ofVec3f &p0 = result.getGlobalPosition();
 	const ofVec3f &p1 = base.getGlobalPosition();
@@ -305,8 +305,8 @@ inline BaseType ofxNodeArray::Node<BaseType>::getLimited(const BaseType &base, f
 
 // ofxNodeArray::NodeArray impl
 
-template <typename BaseType, typename NodeType>
-inline void ofxNodeArray::NodeArray<BaseType, NodeType>::rebuildHierarchy(const ofxNodeArray::NodeArray<BaseType, NodeType>& ref)
+template <typename SuperClass, typename NodeType>
+inline void ofxNodeArray::NodeArray<SuperClass, NodeType>::rebuildHierarchy(const ofxNodeArray::NodeArray<SuperClass, NodeType>& ref)
 {
 	// rebuild hierarchy
 	for (int i = 0; i < ref.nodes.size(); i++)
@@ -324,8 +324,8 @@ inline void ofxNodeArray::NodeArray<BaseType, NodeType>::rebuildHierarchy(const 
 	}
 }
 
-template <typename BaseType, typename NodeType>
-inline void ofxNodeArray::NodeArray<BaseType, NodeType>::clearHierarchy()
+template <typename SuperClass, typename NodeType>
+inline void ofxNodeArray::NodeArray<SuperClass, NodeType>::clearHierarchy()
 {
 	for (int i = 0; i < nodes.size(); i++)
 	{
@@ -336,8 +336,8 @@ inline void ofxNodeArray::NodeArray<BaseType, NodeType>::clearHierarchy()
 	}
 }
 
-template <typename BaseType, typename NodeType>
-inline void ofxNodeArray::NodeArray<BaseType, NodeType>::rebuildLocalPosition()
+template <typename SuperClass, typename NodeType>
+inline void ofxNodeArray::NodeArray<SuperClass, NodeType>::rebuildLocalPosition()
 {
 	for (int i = 0; i < nodes.size(); i++)
 	{
@@ -348,8 +348,8 @@ inline void ofxNodeArray::NodeArray<BaseType, NodeType>::rebuildLocalPosition()
 	}
 }
 
-template <typename BaseType, typename NodeType>
-inline ofxNodeArray::NodeArray<BaseType, NodeType>& ofxNodeArray::NodeArray<BaseType, NodeType>::operator=(const ofxNodeArray::NodeArray<BaseType, NodeType>& copy)
+template <typename SuperClass, typename NodeType>
+inline ofxNodeArray::NodeArray<SuperClass, NodeType>& ofxNodeArray::NodeArray<SuperClass, NodeType>::operator=(const ofxNodeArray::NodeArray<SuperClass, NodeType>& copy)
 {
 	this->name = copy.name;
 	
@@ -359,8 +359,8 @@ inline ofxNodeArray::NodeArray<BaseType, NodeType>& ofxNodeArray::NodeArray<Base
 	return *this;
 }
 
-template <typename BaseType, typename NodeType>
-inline bool ofxNodeArray::NodeArray<BaseType, NodeType>::operator==(const BaseType &arr) const
+template <typename SuperClass, typename NodeType>
+inline bool ofxNodeArray::NodeArray<SuperClass, NodeType>::operator==(const SuperClass &arr) const
 {
 	assert(getNumNode() == arr.getNumNode());
 	
@@ -370,19 +370,19 @@ inline bool ofxNodeArray::NodeArray<BaseType, NodeType>::operator==(const BaseTy
 	return true;
 }
 
-template <typename BaseType, typename NodeType>
-inline bool ofxNodeArray::NodeArray<BaseType, NodeType>::operator!=(const BaseType &arr) const
+template <typename SuperClass, typename NodeType>
+inline bool ofxNodeArray::NodeArray<SuperClass, NodeType>::operator!=(const SuperClass &arr) const
 {
 	return !(*this == arr);
 }
 
-template <typename BaseType, typename NodeType>
-inline BaseType ofxNodeArray::NodeArray<BaseType, NodeType>::operator+(const BaseType &arr) const
+template <typename SuperClass, typename NodeType>
+inline SuperClass ofxNodeArray::NodeArray<SuperClass, NodeType>::operator+(const SuperClass &arr) const
 {
 	assert(getNumNode() == arr.getNumNode());
 	
-	const BaseType &self = static_cast<const BaseType&>(*this);
-	BaseType result = self;
+	const SuperClass &self = static_cast<const SuperClass&>(*this);
+	SuperClass result = self;
 	
 	for (int i = 0; i < result.getNumNode(); i++)
 		result.getNode(i) += arr.getNode(i);
@@ -390,12 +390,12 @@ inline BaseType ofxNodeArray::NodeArray<BaseType, NodeType>::operator+(const Bas
 	return result;
 }
 
-template <typename BaseType, typename NodeType>
-inline BaseType& ofxNodeArray::NodeArray<BaseType, NodeType>::operator+=(const BaseType &arr)
+template <typename SuperClass, typename NodeType>
+inline SuperClass& ofxNodeArray::NodeArray<SuperClass, NodeType>::operator+=(const SuperClass &arr)
 {
 	assert(getNumNode() == arr.getNumNode());
 	
-	BaseType &result = static_cast<BaseType&>(*this);
+	SuperClass &result = static_cast<SuperClass&>(*this);
 	
 	for (int i = 0; i < result.getNumNode(); i++)
 		result.getNode(i) += arr.getNode(i);
@@ -403,13 +403,13 @@ inline BaseType& ofxNodeArray::NodeArray<BaseType, NodeType>::operator+=(const B
 	return result;
 }
 
-template <typename BaseType, typename NodeType>
-inline BaseType ofxNodeArray::NodeArray<BaseType, NodeType>::operator-(const BaseType &arr) const
+template <typename SuperClass, typename NodeType>
+inline SuperClass ofxNodeArray::NodeArray<SuperClass, NodeType>::operator-(const SuperClass &arr) const
 {
 	assert(getNumNode() == arr.getNumNode());
 	
-	const BaseType &self = static_cast<const BaseType&>(*this);
-	BaseType result = self;
+	const SuperClass &self = static_cast<const SuperClass&>(*this);
+	SuperClass result = self;
 	
 	for (int i = 0; i < result.getNumNode(); i++)
 		result.getNode(i) -= arr.getNode(i);
@@ -417,12 +417,12 @@ inline BaseType ofxNodeArray::NodeArray<BaseType, NodeType>::operator-(const Bas
 	return result;
 }
 
-template <typename BaseType, typename NodeType>
-inline BaseType& ofxNodeArray::NodeArray<BaseType, NodeType>::operator-=(const BaseType &arr)
+template <typename SuperClass, typename NodeType>
+inline SuperClass& ofxNodeArray::NodeArray<SuperClass, NodeType>::operator-=(const SuperClass &arr)
 {
 	assert(getNumNode() == arr.getNumNode());
 	
-	BaseType &result = static_cast<BaseType&>(*this);
+	SuperClass &result = static_cast<SuperClass&>(*this);
 	
 	for (int i = 0; i < result.getNumNode(); i++)
 		result.getNode(i) -= arr.getNode(i);
@@ -430,12 +430,12 @@ inline BaseType& ofxNodeArray::NodeArray<BaseType, NodeType>::operator-=(const B
 	return result;
 }
 
-template <typename BaseType, typename NodeType>
-inline BaseType& ofxNodeArray::NodeArray<BaseType, NodeType>::lerp(const BaseType &base, float t)
+template <typename SuperClass, typename NodeType>
+inline SuperClass& ofxNodeArray::NodeArray<SuperClass, NodeType>::lerp(const SuperClass &base, float t)
 {
 	assert(getNumNode() == base.getNumNode());
 	
-	BaseType &result = static_cast<BaseType&>(*this);
+	SuperClass &result = static_cast<SuperClass&>(*this);
 	result.clearHierarchy();
 	
 	for (int i = 0; i < result.getNumNode(); i++)
@@ -446,13 +446,13 @@ inline BaseType& ofxNodeArray::NodeArray<BaseType, NodeType>::lerp(const BaseTyp
 	return result;
 }
 
-template <typename BaseType, typename NodeType>
-inline BaseType ofxNodeArray::NodeArray<BaseType, NodeType>::getLerpd(const BaseType &base, float t) const
+template <typename SuperClass, typename NodeType>
+inline SuperClass ofxNodeArray::NodeArray<SuperClass, NodeType>::getLerpd(const SuperClass &base, float t) const
 {
 	assert(getNumNode() == base.getNumNode());
 	
-	const BaseType &self = static_cast<const BaseType&>(*this);
-	BaseType result = self;
+	const SuperClass &self = static_cast<const SuperClass&>(*this);
+	SuperClass result = self;
 	
 	result.clearHierarchy();
 	
@@ -466,12 +466,12 @@ inline BaseType ofxNodeArray::NodeArray<BaseType, NodeType>::getLerpd(const Base
 	return result;
 }
 
-template <typename BaseType, typename NodeType>
-inline BaseType& ofxNodeArray::NodeArray<BaseType, NodeType>::normalize(const BaseType &base, float length)
+template <typename SuperClass, typename NodeType>
+inline SuperClass& ofxNodeArray::NodeArray<SuperClass, NodeType>::normalize(const SuperClass &base, float length)
 {
 	assert(getNumNode() == base.getNumNode());
 	
-	BaseType &result = static_cast<BaseType&>(*this);
+	SuperClass &result = static_cast<SuperClass&>(*this);
 	result.clearHierarchy();
 	
 	for (int i = 0; i < result.getNumNode(); i++)
@@ -484,13 +484,13 @@ inline BaseType& ofxNodeArray::NodeArray<BaseType, NodeType>::normalize(const Ba
 	return result;
 }
 
-template <typename BaseType, typename NodeType>
-inline BaseType ofxNodeArray::NodeArray<BaseType, NodeType>::getNormalized(const BaseType &base, float length) const
+template <typename SuperClass, typename NodeType>
+inline SuperClass ofxNodeArray::NodeArray<SuperClass, NodeType>::getNormalized(const SuperClass &base, float length) const
 {
 	assert(getNumNode() == base.getNumNode());
 	
-	const BaseType &self = static_cast<const BaseType&>(*this);
-	BaseType result = self;
+	const SuperClass &self = static_cast<const SuperClass&>(*this);
+	SuperClass result = self;
 
 	result.clearHierarchy();
 	
@@ -504,12 +504,12 @@ inline BaseType ofxNodeArray::NodeArray<BaseType, NodeType>::getNormalized(const
 	return result;
 }
 
-template <typename BaseType, typename NodeType>
-inline BaseType& ofxNodeArray::NodeArray<BaseType, NodeType>::limit(const BaseType &base, float length)
+template <typename SuperClass, typename NodeType>
+inline SuperClass& ofxNodeArray::NodeArray<SuperClass, NodeType>::limit(const SuperClass &base, float length)
 {
 	assert(getNumNode() == base.getNumNode());
 	
-	BaseType &result = static_cast<BaseType&>(*this);
+	SuperClass &result = static_cast<SuperClass&>(*this);
 	result.clearHierarchy();
 	
 	for (int i = 0; i < result.getNumNode(); i++)
@@ -522,13 +522,13 @@ inline BaseType& ofxNodeArray::NodeArray<BaseType, NodeType>::limit(const BaseTy
 	return result;
 }
 
-template <typename BaseType, typename NodeType>
-inline BaseType ofxNodeArray::NodeArray<BaseType, NodeType>::getLimited(const BaseType &base, float length) const
+template <typename SuperClass, typename NodeType>
+inline SuperClass ofxNodeArray::NodeArray<SuperClass, NodeType>::getLimited(const SuperClass &base, float length) const
 {
 	assert(getNumNode() == base.getNumNode());
 	
-	const BaseType &self = static_cast<const BaseType&>(*this);
-	BaseType result = self;
+	const SuperClass &self = static_cast<const SuperClass&>(*this);
+	SuperClass result = self;
 
 	result.clearHierarchy();
 	
