@@ -78,6 +78,10 @@ public:
 	void drawNodeId(int floatPos = 20);
 	void drawNodeName(int floatPos = 20);
 
+	// utils
+	inline void beginTransform() const { transformGL(); }
+	inline void endTransform() const { restoreTransformGL(); }
+
 private:
 	
 	string name;
@@ -105,14 +109,12 @@ public:
 	inline bool isOutdated() const { return (ofGetElapsedTimef() -  last_update_client_time) > RAM_OUTDATED_DURATION; }
 	inline float getTimestamp() const { return last_update_client_time; }
 
-	virtual void updateWithOscMessage(const ofxOscMessage &m);
-
-	//
-
 	inline void setType(ramNodeArrayType t) { type = t; }
 	inline bool isActor() const { return type == RAM_NODEARRAY_TYPE_ACTOR; }
 	inline bool isRigid() const { return type == RAM_NODEARRAY_TYPE_RIGIDBODY; }
 	inline bool isTypeOf(ramNodeArrayType t) const { return type == t; }
+	
+	virtual void updateWithOscMessage(const ofxOscMessage &m);
 
 protected:
 
@@ -130,10 +132,7 @@ class ramRigidBody : public ramNodeArray
 
 public:
 
-	ramRigidBody() : ramNodeArray()
-	{
-		type = RAM_NODEARRAY_TYPE_RIGIDBODY;
-	}
+	ramRigidBody();
 	ramRigidBody(const ramNodeArray &copy) { *this = copy; }
 
 	ramRigidBody& operator=(const ramNodeArray &copy);
@@ -191,6 +190,7 @@ public:
 	ramActor& operator=(const ramNodeArray &copy);
 
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
+	
 	static string getJointName(int jointId) { return jointName[jointId]; }
 	static vector<string> getJointNames();
 

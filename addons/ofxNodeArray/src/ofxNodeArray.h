@@ -23,7 +23,8 @@ public:
 	
 	Node& operator=(const Node& copy);
 	
-	inline int getID() { return node_id; }
+	inline int getID() const { return node_id; }
+	inline void setID(int id) { node_id = id; }
 	
 	inline void setParent(BaseType &parent) { this->parent = &parent; }
 	inline BaseType* getParent() const { return (BaseType*)parent; }
@@ -49,10 +50,6 @@ public:
 	
 	inline BaseType& limit(const BaseType &base, float t);
 	inline BaseType getLimited(const BaseType &base, float length) const;
-
-	// utils
-	inline void beginTransform() const { transformGL(); }
-	inline void endTransform() const { restoreTransformGL(); }
 
 protected:
 	

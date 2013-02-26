@@ -82,6 +82,11 @@ void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
 
 #pragma mark - ramRigidBody
 
+ramRigidBody::ramRigidBody()
+{
+	type = RAM_NODEARRAY_TYPE_ACTOR;
+}
+
 void ramRigidBody::updateWithOscMessage(const ofxOscMessage &m)
 {
 	const int nNodes = m.getArgAsInt32(1);
@@ -108,6 +113,7 @@ ramRigidBody& ramRigidBody::operator=(const ramNodeArray &copy)
 ramActor::ramActor()
 {
 	type = RAM_NODEARRAY_TYPE_ACTOR;
+	
 	nodes.resize(NUM_JOINTS);
 	setupTree();
 }
