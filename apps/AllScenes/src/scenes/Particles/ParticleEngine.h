@@ -24,7 +24,7 @@ public:
 	
 	class ForceFactor
 	{
-		friend ParticleEngine;
+		friend class ParticleEngine;
 		
 	public:
 		virtual void update(Particle& p) = 0;
