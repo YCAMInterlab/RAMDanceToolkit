@@ -65,6 +65,7 @@
 		271B406216DE40AF009CCD04 /* ramTimeShifter.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B402816DE40AF009CCD04 /* ramTimeShifter.h */; };
 		271B406316DE40AF009CCD04 /* ramUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 271B402916DE40AF009CCD04 /* ramUtils.cpp */; };
 		271B406416DE40AF009CCD04 /* ramUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B402A16DE40AF009CCD04 /* ramUtils.h */; };
+		271B406616DE5423009CCD04 /* ramUnit.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B406516DE5423009CCD04 /* ramUnit.h */; };
 		272C287316DE37DE005EBE2C /* Calibration.h in Headers */ = {isa = PBXBuildFile; fileRef = 272C286A16DE37DE005EBE2C /* Calibration.h */; };
 		272C287416DE37DE005EBE2C /* ContourFinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 272C286B16DE37DE005EBE2C /* ContourFinder.h */; };
 		272C287516DE37DE005EBE2C /* Distance.h in Headers */ = {isa = PBXBuildFile; fileRef = 272C286C16DE37DE005EBE2C /* Distance.h */; };
@@ -440,6 +441,7 @@
 		271B402816DE40AF009CCD04 /* ramTimeShifter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramTimeShifter.h; sourceTree = "<group>"; };
 		271B402916DE40AF009CCD04 /* ramUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramUtils.cpp; sourceTree = "<group>"; };
 		271B402A16DE40AF009CCD04 /* ramUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramUtils.h; sourceTree = "<group>"; };
+		271B406516DE5423009CCD04 /* ramUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramUnit.h; sourceTree = "<group>"; };
 		272C286A16DE37DE005EBE2C /* Calibration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Calibration.h; sourceTree = "<group>"; };
 		272C286B16DE37DE005EBE2C /* ContourFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContourFinder.h; sourceTree = "<group>"; };
 		272C286C16DE37DE005EBE2C /* Distance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Distance.h; sourceTree = "<group>"; };
@@ -808,6 +810,7 @@
 				271B3FF116DE40AF009CCD04 /* ramConstants.h */,
 				271B3FF216DE40AF009CCD04 /* ramGlobal.cpp */,
 				271B3FF316DE40AF009CCD04 /* ramGlobal.h */,
+				271B406516DE5423009CCD04 /* ramUnit.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -2003,6 +2006,7 @@
 				271B406116DE40AF009CCD04 /* ramSession.h in Headers */,
 				271B406216DE40AF009CCD04 /* ramTimeShifter.h in Headers */,
 				271B406416DE40AF009CCD04 /* ramUtils.h in Headers */,
+				271B406616DE5423009CCD04 /* ramUnit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

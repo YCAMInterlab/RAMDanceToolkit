@@ -2,11 +2,11 @@
 
 #include "ramMain.h"
 
-#include "ramBaseFilter.h"
+#include "ramBaseRecognizer.h"
 #include "ramNodeFinder.h"
 #include "ramTimeEvent.h"
 
-class ramBalancer : public ramBaseFilter
+class ramBalancer : public ramBaseRecognizer
 {
 
 public:
@@ -15,7 +15,7 @@ public:
 		resetWeightBalance();
 	}
 
-	inline ofVec3f getAvarage() { return balance; }
+	inline ofVec3f getAverage() { return balance; }
 
 private:
 
@@ -103,7 +103,7 @@ private:
 //
 
 // TODO: move to events
-class ramMovementAnalyser : public ramNodeFinder, public ramControllable
+class ramMovementAnalyser : public ramNodeFinder, public ramBaseRecognizer
 {
 public:
 
