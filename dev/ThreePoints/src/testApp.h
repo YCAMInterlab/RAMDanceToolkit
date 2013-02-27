@@ -27,8 +27,8 @@ public:
 	// ram methods
 	// ------------------------
 	void drawFloor();
-	void drawActor(ramActor &actor);
-	void drawRigid(ramRigidBody &rigid);
+	void drawActor(const ramActor &actor);
+	void drawRigid(const ramRigidBody &rigid);
     
 	
 	bool showRects;

@@ -25,6 +25,6 @@ public:
 	
 	// ram methods
 	// ------------------------
-	void drawActor(ramActor &actor);
-	void drawRigid(ramRigidBody &rigid);
+	void drawActor(const ramActor &actor);
+	void drawRigid(const ramRigidBody &rigid);
 };

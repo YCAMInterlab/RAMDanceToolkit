@@ -133,7 +133,7 @@ void testApp::drawFloor()
 }
 
 //--------------------------------------------------------------
-void testApp::drawActor(ramActor &actor)
+void testApp::drawActor(const ramActor &actor)
 {
 	ramPushAll();
     glEnable(GL_DEPTH_TEST);
