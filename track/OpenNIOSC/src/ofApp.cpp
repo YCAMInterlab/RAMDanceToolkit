@@ -85,14 +85,6 @@ ofQuaternion makeRotate(const ofVec3f& axis1, const ofVec3f& axis2) {
 	return mat.getRotate();
 }
 
-ofQuaternion inheritRotation(const ofQuaternion& parentOrientation, const ofVec3f& from, const ofVec3f& to) {
-	ofVec3f bindFrom = parentOrientation * from;
-	ofQuaternion orientation;
-	orientation.makeRotate(bindFrom, to);
-	orientation += parentOrientation;
-	return orientation;
-}
-
 void ofApp::setup() {
 	ofSetVerticalSync(true);
 	ofSetFrameRate(120);
