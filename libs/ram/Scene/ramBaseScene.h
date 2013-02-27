@@ -3,7 +3,7 @@
 
 #include "ramGlobal.h"
 
-#include "ramControllable.h"
+#include "ramUnit.h"
 #include "ramControlPanel.h"
 
 /** Empty scene sample code
@@ -55,19 +55,17 @@ class EmptyScene : public ramBaseScene
 };
  */
 
-class ramBaseScene : public ramControllable, public ramGlobalShortcut
+class ramBaseScene : public ramUnit
 {
-	friend class ramControlPanel;
-
 public:
 
 	ramBaseScene() : bEnabled(false) {}
 	virtual ~ramBaseScene() {}
-
+	
 	virtual void setup() {}
 	virtual void update() {}
 	virtual void draw() {}
-
+	
 	virtual void drawActor(const ramActor &actor) {}
 	virtual void drawRigid(const ramRigidBody &rigid) {}
 
