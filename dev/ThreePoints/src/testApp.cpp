@@ -421,7 +421,7 @@ void testApp::drawFloor()
 }
 
 //--------------------------------------------------------------
-void testApp::drawActor(ramActor &actor)
+void testApp::drawActor(const ramActor &actor)
 {
 	ofPushStyle();
 	ofNoFill();
@@ -536,7 +536,7 @@ void testApp::drawActor(ramActor &actor)
 }
 
 //--------------------------------------------------------------
-void testApp::drawRigid(ramRigidBody &rigid)
+void testApp::drawRigid(const ramRigidBody &rigid)
 {
 }
 

@@ -79,7 +79,7 @@ void testApp::drawFloor()
 }
 
 //--------------------------------------------------------------
-void testApp::drawActor(ramActor &actor)
+void testApp::drawActor(const ramActor &actor)
 {
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
     glEnable(GL_DEPTH_TEST);

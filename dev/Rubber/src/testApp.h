@@ -21,7 +21,7 @@ public:
 	// ram methods
 	// ------------------------
 	void drawFloor();
-	void drawActor(ramActor &actor);
+	void drawActor(const ramActor &actor);
 
     
     

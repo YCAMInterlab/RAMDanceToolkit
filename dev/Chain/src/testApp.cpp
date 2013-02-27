@@ -45,7 +45,7 @@ void testApp::draw()
 
 #pragma mark - ram methods
 //--------------------------------------------------------------
-void testApp::drawActor(ramActor &actor)
+void testApp::drawActor(const ramActor &actor)
 {
 	/// Scenes drawActor
 	// ------------------
@@ -53,7 +53,7 @@ void testApp::drawActor(ramActor &actor)
 }
 
 //--------------------------------------------------------------
-void testApp::drawRigid(ramRigidBody &rigid)
+void testApp::drawRigid(const ramRigidBody &rigid)
 {
 	/// Scenes drawRigid
 	// ------------------
