@@ -101,7 +101,7 @@ protected:
 			ramNode& node = ghost.getNode(i);
 			node.setGlobalPosition(vec);
 			node.setGlobalOrientation(quat);
-			node.getAccerelometer().update(vec, quat);
+			node.getAccelerometer().update(vec, quat);
 		}
 
 		return ghost;

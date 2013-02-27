@@ -9,7 +9,7 @@ ramNode& ramNode::operator=(const ramNode& copy)
 	ofxNodeArray::Node<ramNode>::operator=(copy);
 
 	name = copy.name;
-	accerelometer = copy.accerelometer;
+	accelerometer = copy.accelerometer;
 
 	return *this;
 }
@@ -72,7 +72,7 @@ void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
 		node.name = isActor() ? getJointName(i) : "Node " + ofToString(i);
 		node.setGlobalPosition(vec);
 		node.setGlobalOrientation(quat);
-		node.accerelometer.update(vec, quat);
+		node.accelerometer.update(vec, quat);
 	}
 
 	last_timestamp = current_timestamp;

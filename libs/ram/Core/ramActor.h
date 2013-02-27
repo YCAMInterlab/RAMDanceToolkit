@@ -68,12 +68,12 @@ public:
 	const ofMatrix4x4& getTransformMatrix() const { return getLocalTransformMatrix(); }
 	const ofMatrix4x4& getMatrix() const { return getLocalTransformMatrix(); }
 
-	inline ofVec3f getVelocity() const { return accerelometer.velocity; }
-	inline ofVec3f getAcceleration() const { return accerelometer.acceleration; }
-	inline ofQuaternion getAngularVelocity() const { return accerelometer.angular_velocity; }
-	inline ofQuaternion getAngularAcceleration() const { return accerelometer.angular_acceleration; }
+	inline ofVec3f getVelocity() const { return accelerometer.velocity; }
+	inline ofVec3f getAcceleration() const { return accelerometer.acceleration; }
+	inline ofQuaternion getAngularVelocity() const { return accelerometer.angular_velocity; }
+	inline ofQuaternion getAngularAcceleration() const { return accelerometer.angular_acceleration; }
 
-	inline ramAccelerometer& getAccerelometer() { return accerelometer; }
+	inline ramAccelerometer& getAccelerometer() { return accelerometer; }
 
 	void drawNodeId(int floatPos = 20);
 	void drawNodeName(int floatPos = 20);
@@ -85,7 +85,7 @@ public:
 private:
 	
 	string name;
-	ramAccelerometer accerelometer;
+	ramAccelerometer accelerometer;
 	
 };
 
