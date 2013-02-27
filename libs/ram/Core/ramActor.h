@@ -58,7 +58,7 @@ class ramNode : public ofxNodeArray::Node<ramNode>
 public:
 
 	ramNode() {}
-	ramNode(int index) : Node(index) {}
+	ramNode(int index) : ofxNodeArray::Node<ramNode>(index) {}
 	
 	ramNode(const ramNode& copy) { *this = copy; }
 	ramNode& operator=(const ramNode& copy);
