@@ -66,6 +66,33 @@ string ramJointName[] =
 	"RIGHT_HAND"
 };
 
+// if axis1 and axis2 are not orthogonal, only axis1 will be preserved
+ofQuaternion makeRotate(const ofVec3f& axis1, const ofVec3f& axis2) {
+	ofVec3f avg = (axis1 + axis2) / 2;
+	ofVec3f z = axis1.getCrossed(axis2);
+	ofVec3f x = axis1;
+	ofVec3f y = z.getCrossed(x);
+	ofMatrix4x4 mat;
+	vector<ofVec3f> axes;
+	axes.push_back(x.normalize());
+	axes.push_back(y.normalize());
+	axes.push_back(z.normalize());
+	for(int i = 0; i < 3; i++) {
+		for(int j = 0; j < 3; j++) {
+			mat(i, j) = axes[i][j];
+		}
+	}
+	return mat.getRotate();
+}
+
+ofQuaternion inheritRotation(const ofQuaternion& parentOrientation, const ofVec3f& from, const ofVec3f& to) {
+	ofVec3f bindFrom = parentOrientation * from;
+	ofQuaternion orientation;
+	orientation.makeRotate(bindFrom, to);
+	orientation += parentOrientation;
+	return orientation;
+}
+
 void ofApp::setup() {
 	ofSetVerticalSync(true);
 	ofSetFrameRate(120);
@@ -117,6 +144,7 @@ void ofApp::update(){
 				for(int openniIndex = 0; openniIndex < JOINT_COUNT; openniIndex++) {
 					ofxOpenNIJoint& joint = user.getJoint((Joint) openniIndex);
 					positions[openniIndex] = joint.getWorldPosition();
+					positions[openniIndex].x *= -1; // openni is mirrored left/right
 					if(openniIndex == 0 || positions[openniIndex].y < floorOffset) {
 						floorOffset = positions[openniIndex].y;
 					}
@@ -124,40 +152,42 @@ void ofApp::update(){
 				
 				vector<ofQuaternion> orientations(JOINT_COUNT);
 				
+				ofVec3f torsoToNeck = positions[JOINT_NECK] - positions[JOINT_TORSO];
 				ofVec3f torsoToLeftHip = positions[JOINT_LEFT_HIP] - positions[JOINT_TORSO];
 				ofVec3f torsoToRightHip = positions[JOINT_RIGHT_HIP] - positions[JOINT_TORSO];
-				orientations[JOINT_TORSO].makeRotate(forwardDirection, torsoToLeftHip.getCrossed(torsoToRightHip));
 				ofVec3f neckToTorso = positions[JOINT_TORSO] - positions[JOINT_NECK];
 				ofVec3f neckToRightShoulder = positions[JOINT_RIGHT_SHOULDER] - positions[JOINT_NECK];
-				orientations[JOINT_NECK].makeRotate(forwardDirection, neckToTorso.getCrossed(neckToRightShoulder));
-				//JOINT_HEAD,
+				ofVec3f headToNeck = positions[JOINT_NECK] - positions[JOINT_HEAD];
+				ofVec3f leftShoulderToLeftElbow = positions[JOINT_LEFT_ELBOW] - positions[JOINT_LEFT_SHOULDER];
+				ofVec3f leftElbowToLeftHand = positions[JOINT_LEFT_HAND] - positions[JOINT_LEFT_ELBOW];
+				ofVec3f rightShoulderToRightElbow = positions[JOINT_RIGHT_ELBOW] - positions[JOINT_RIGHT_SHOULDER];
+				ofVec3f rightElbowToRightHand = positions[JOINT_RIGHT_HAND] - positions[JOINT_RIGHT_ELBOW];
+				ofVec3f leftHipToLeftKnee = positions[JOINT_LEFT_KNEE] - positions[JOINT_LEFT_HIP];
+				ofVec3f leftKneeToLeftFoot = positions[JOINT_LEFT_FOOT] - positions[JOINT_LEFT_KNEE];
+				ofVec3f rightHipToRightKnee = positions[JOINT_RIGHT_KNEE] - positions[JOINT_RIGHT_HIP];
+				ofVec3f rightKneeToRightFoot = positions[JOINT_RIGHT_FOOT] - positions[JOINT_RIGHT_KNEE];
 				
-				// left arm + shoulder
-				//JOINT_LEFT_SHOULDER,
-				//JOINT_LEFT_ELBOW,
+				orientations[JOINT_TORSO] = makeRotate(torsoToNeck, torsoToRightHip);
+				orientations[JOINT_NECK] = makeRotate(neckToTorso, neckToRightShoulder);
+				orientations[JOINT_HEAD] = makeRotate(headToNeck, neckToRightShoulder);
+				orientations[JOINT_LEFT_SHOULDER] = makeRotate(leftShoulderToLeftElbow, neckToRightShoulder);
+				orientations[JOINT_LEFT_ELBOW] = makeRotate(leftElbowToLeftHand, leftShoulderToLeftElbow);
 				orientations[JOINT_LEFT_HAND] = orientations[JOINT_LEFT_ELBOW];
-				
-				// right arm + shoulder
-				//JOINT_RIGHT_SHOULDER,
-				//JOINT_RIGHT_ELBOW,
+				orientations[JOINT_RIGHT_SHOULDER] = makeRotate(rightShoulderToRightElbow, neckToRightShoulder);
+				orientations[JOINT_RIGHT_ELBOW] = makeRotate(rightElbowToRightHand, rightShoulderToRightElbow);
 				orientations[JOINT_RIGHT_HAND] = orientations[JOINT_RIGHT_ELBOW];
-				
-				// left leg
-				//JOINT_LEFT_HIP,
-				//JOINT_LEFT_KNEE,
+				orientations[JOINT_LEFT_HIP] = makeRotate(leftHipToLeftKnee, torsoToLeftHip);
+				orientations[JOINT_LEFT_KNEE] = makeRotate(leftKneeToLeftFoot, leftHipToLeftKnee);
 				orientations[JOINT_LEFT_FOOT] = orientations[JOINT_LEFT_KNEE];
-				
-				// right leg
-				//JOINT_RIGHT_HIP,
-				//JOINT_RIGHT_KNEE,
-				orientations[JOINT_RIGHT_FOOT] = orientations[JOINT_RIGHT_KNEE];				
+				orientations[JOINT_RIGHT_HIP] = makeRotate(rightHipToRightKnee, torsoToRightHip);
+				orientations[JOINT_RIGHT_KNEE] = makeRotate(rightKneeToRightFoot, rightHipToRightKnee);
+				orientations[JOINT_RIGHT_FOOT] = orientations[JOINT_RIGHT_KNEE];		
 				
 				for(int ramIndex = 0; ramIndex < RAM_JOINT_COUNT; ramIndex++) {
 					int openniIndex = jointMapping[ramIndex];
 					ofVec3f position = positions[openniIndex]; // process a copy
 					position -= openniCenter;
 					position.y -= floorOffset;
-					position.x *= -1; // openni is mirrored left/right
 					position *= ramScale;
 					msg.addStringArg(ramJointName[ramIndex]);
 					msg.addFloatArg(position.x);
