@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
+		60D49F3616DE7A10003BA064 /* Fading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 275C7EAD16D644FD00024334 /* Fading.cpp */; };
+		60D49F3716DE7A15003BA064 /* GeometryHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 275C7EAF16D644FD00024334 /* GeometryHelpers.cpp */; };
 		9A2B3F6516D325C7001CBFC9 /* Kepler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5116D325C7001CBFC9 /* Kepler.cpp */; };
 		9A2B3F6616D325C7001CBFC9 /* KeplerBtDynamics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5316D325C7001CBFC9 /* KeplerBtDynamics.cpp */; };
 		9A2B3F6716D325C7001CBFC9 /* KeplerBtShapeDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5516D325C7001CBFC9 /* KeplerBtShapeDrawer.cpp */; };
@@ -284,7 +286,6 @@
 				E4C2424810CC5A17004149E2 /* Cocoa.framework in Frameworks */,
 				E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */,
 				E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */,
-				27FF238816D5C9B000972DEE /* opencv.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1080,17 +1081,8 @@
 				D2B8DCD416D3835700210022 /* ChainBtShapeDrawer.cpp in Sources */,
 				D2B8DCD516D3835700210022 /* ChainObject.cpp in Sources */,
 				D2B8DCD616D3835700210022 /* Chain.cpp in Sources */,
-				27FF225F16D5C98A00972DEE /* Calibration.cpp in Sources */,
-				27FF226016D5C98A00972DEE /* ContourFinder.cpp in Sources */,
-				27FF226116D5C98A00972DEE /* Distance.cpp in Sources */,
-				27FF226216D5C98A00972DEE /* Flow.cpp in Sources */,
-				27FF226316D5C98A00972DEE /* Helpers.cpp in Sources */,
-				27FF226416D5C98A00972DEE /* RunningBackground.cpp in Sources */,
-				27FF226516D5C98A00972DEE /* Tracker.cpp in Sources */,
-				27FF226616D5C98A00972DEE /* Utilities.cpp in Sources */,
-				27FF226716D5C98A00972DEE /* Wrappers.cpp in Sources */,
-				275C7EB416D644FD00024334 /* Fading.cpp in Sources */,
-				275C7EB516D644FD00024334 /* GeometryHelpers.cpp in Sources */,
+				60D49F3616DE7A10003BA064 /* Fading.cpp in Sources */,
+				60D49F3716DE7A15003BA064 /* GeometryHelpers.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1135,7 +1127,6 @@
 					"-lpthread",
 					"-mtune=native",
 				);
-				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -1165,7 +1156,6 @@
 					"-lpthread",
 					"-mtune=native",
 				);
-				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -1184,12 +1174,6 @@
 				GCC_MODEL_TUNING = NONE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
-				HEADER_SEARCH_PATHS = (
-					"$(OF_CORE_HEADERS)",
-					"$(RAM_HEADER_SEARCH_PATHS)",
-					"../../../addons/ofxCv/libs/**",
-					"../../../addons/ofxOpenCv/libs/**",
-				);
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
@@ -1286,12 +1270,6 @@
 				GCC_MODEL_TUNING = NONE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
-				HEADER_SEARCH_PATHS = (
-					"$(OF_CORE_HEADERS)",
-					"$(RAM_HEADER_SEARCH_PATHS)",
-					"../../../addons/ofxCv/libs/**",
-					"../../../addons/ofxOpenCv/libs/**",
-				);
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
