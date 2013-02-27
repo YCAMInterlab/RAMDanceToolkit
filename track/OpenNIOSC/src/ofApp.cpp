@@ -1,49 +1,13 @@
 #include "ofApp.h"
 
-ofVec3f upDirection(0, -1, 0), downDirection = -upDirection, leftDirection(-1, 0, 0), rightDirection = -leftDirection;
-ofVec3f defaultDirection[] = {
-	ofVec3f(0), //JOINT_TORSO = 0,
-	upDirection, //JOINT_NECK,
-	upDirection, //JOINT_HEAD,
-	
-	rightDirection, //JOINT_LEFT_SHOULDER,
-	downDirection, //JOINT_LEFT_ELBOW,
-	downDirection, //JOINT_LEFT_HAND,
-	
-	leftDirection, //JOINT_RIGHT_SHOULDER,
-	downDirection, //JOINT_RIGHT_ELBOW,
-	downDirection, //JOINT_RIGHT_HAND,
-	
-	rightDirection, //JOINT_LEFT_HIP,
-	downDirection, //JOINT_LEFT_KNEE,
-	downDirection, //JOINT_LEFT_FOOT,
-	
-	leftDirection, //JOINT_RIGHT_HIP,
-	downDirection, //JOINT_RIGHT_KNEE,
-	downDirection, //JOINT_RIGHT_FOOT,
-};
+ofVec3f upDirection(0, -1, 0), downDirection = -upDirection;
+ofVec3f leftDirection(-1, 0, 0), rightDirection = -leftDirection;
+ofVec3f forwardDirection(0, 0, -1), backDirection = -forwardDirection;
 
-int jointParents[] = {
-	-1,
-	JOINT_TORSO,
-	JOINT_NECK,
-	
-	JOINT_NECK,
-	JOINT_LEFT_SHOULDER,
-	JOINT_LEFT_ELBOW,
-	
-	JOINT_NECK,
-	JOINT_RIGHT_SHOULDER,
-	JOINT_RIGHT_ELBOW,
-	
-	JOINT_TORSO,
-	JOINT_LEFT_HIP,
-	JOINT_LEFT_KNEE,
-	
-	JOINT_TORSO,
-	JOINT_RIGHT_HIP,
-	JOINT_RIGHT_KNEE
-};
+// openni is in millimeters, ram is in centimeters
+const float ramScale = .1;
+
+const static int RAM_JOINT_COUNT = 23;
 
 int jointMapping[] = {
 	JOINT_TORSO, //JOINT_HIPS
@@ -75,8 +39,6 @@ int jointMapping[] = {
 	JOINT_RIGHT_HAND, //JOINT_RIGHT_HAND,
 };
 
-const static int RAM_JOINT_COUNT = 23;
-
 string ramJointName[] =
 {
 	"HIPS",
@@ -103,25 +65,6 @@ string ramJointName[] =
 	"RIGHT_WRIST",
 	"RIGHT_HAND"
 };
-
-vector<ofQuaternion> getOrientation(const vector<ofVec3f>& positions) {
-	vector<ofQuaternion> orientations;
-	for(int i = 0; i < positions.size(); i++) {
-		if(jointParents[i] == -1) {
-			orientations.push_back(ofQuaternion()); // zero rotation for no parents
-		} else {
-			int parent = jointParents[i];
-			ofVec3f direction = positions[i] - positions[parent];
-			ofQuaternion orientation;
-			orientation.makeRotate(defaultDirection[i], direction);
-			orientations.push_back(orientation);
-		}
-	}
-	return orientations;
-}
-
-// openni is in millimeters, ram is in centimeters
-const float ramScale = .1;
 
 void ofApp::setup() {
 	ofSetVerticalSync(true);
@@ -178,7 +121,36 @@ void ofApp::update(){
 						floorOffset = positions[openniIndex].y;
 					}
 				}
-				vector<ofQuaternion> orientations = getOrientation(positions);
+				
+				vector<ofQuaternion> orientations(JOINT_COUNT);
+				
+				ofVec3f torsoToLeftHip = positions[JOINT_LEFT_HIP] - positions[JOINT_TORSO];
+				ofVec3f torsoToRightHip = positions[JOINT_RIGHT_HIP] - positions[JOINT_TORSO];
+				orientations[JOINT_TORSO].makeRotate(forwardDirection, torsoToLeftHip.getCrossed(torsoToRightHip));
+				ofVec3f neckToTorso = positions[JOINT_TORSO] - positions[JOINT_NECK];
+				ofVec3f neckToRightShoulder = positions[JOINT_RIGHT_SHOULDER] - positions[JOINT_NECK];
+				orientations[JOINT_NECK].makeRotate(forwardDirection, neckToTorso.getCrossed(neckToRightShoulder));
+				//JOINT_HEAD,
+				
+				// left arm + shoulder
+				//JOINT_LEFT_SHOULDER,
+				//JOINT_LEFT_ELBOW,
+				orientations[JOINT_LEFT_HAND] = orientations[JOINT_LEFT_ELBOW];
+				
+				// right arm + shoulder
+				//JOINT_RIGHT_SHOULDER,
+				//JOINT_RIGHT_ELBOW,
+				orientations[JOINT_RIGHT_HAND] = orientations[JOINT_RIGHT_ELBOW];
+				
+				// left leg
+				//JOINT_LEFT_HIP,
+				//JOINT_LEFT_KNEE,
+				orientations[JOINT_LEFT_FOOT] = orientations[JOINT_LEFT_KNEE];
+				
+				// right leg
+				//JOINT_RIGHT_HIP,
+				//JOINT_RIGHT_KNEE,
+				orientations[JOINT_RIGHT_FOOT] = orientations[JOINT_RIGHT_KNEE];				
 				
 				for(int ramIndex = 0; ramIndex < RAM_JOINT_COUNT; ramIndex++) {
 					int openniIndex = jointMapping[ramIndex];
