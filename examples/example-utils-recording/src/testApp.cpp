@@ -1,6 +1,8 @@
 #include "testApp.h"
 
+//ramFilterEach<ramSession> sessions;
 
+ramTSVCoder coder;
 ramSession session;
 
 
@@ -12,25 +14,42 @@ void testApp::setup()
 	ofSetVerticalSync(true);
 	ofBackground(ramColor::WHITE);
 
-
 	/// ram setup
 	// ------------------
 	ramInitialize(10000);
 
-	session.setup();
-	ramGetGUI().addPanel( &session );
+	
+	/// session
+	// ------------------
+//	ramGetGUI().addPanel( &session );
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-
+//	sessions.update(getAllNodeArrays());
+	if (getNumNodeArray() > 0)
+	{
+		session.update(getNodeArray(0));
+	}
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-
+	/// draw recorded session if it's playing
+//	for(int i=0; i<sessions.getNumFilters(); i++)
+//	{
+//		ramSession &session = sessions.getFilter(i);
+//		
+		if (session.isPlaying())
+		{
+			ramBeginCamera();
+			ramActor &actor = (ramActor &)session.get();
+			ramDrawBasicActor(actor);
+			ramEndCamera();
+		}
+//	}
 }
 
 
@@ -39,10 +58,9 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(const ramActor &actor)
 {
-	ramActor &a = (ramActor &)session.update(actor);
-	
-	ofSetColor(ramColor::GREEN_NORMAL);
-	ramDrawBasicActor(a);
+	/// draw realtime data
+	ofSetColor(ramColor::RED_DEEP);
+	ramDrawBasicActor(actor);
 }
 
 //--------------------------------------------------------------
@@ -61,19 +79,45 @@ void testApp::keyPressed(int key)
 	switch (key)
 	{
 		case '[':
+//			for(int i=0; i<sessions.getNumFilters(); i++)
+//				sessions.getFilter(i).startRecording();
+			
 			session.startRecording();
 			break;
 
 		case ']':
+//			for(int i=0; i<sessions.getNumFilters(); i++)
+//				sessions.getFilter(i).stopRecording();
+			
 			session.stopRecording();
 			break;
 
 		case '-':
+//			for(int i=0; i<sessions.getNumFilters(); i++)
+//				sessions.getFilter(i).play();
+			
 			session.play();
 			break;
-
+			
 		case '=':
+//			for(int i=0; i<sessions.getNumFilters(); i++)
+//				sessions.getFilter(i).stop();
+			
 			session.stop();
+			break;
+			
+		case 's':
+//			for(int i=0; i<sessions.getNumFilters(); i++)
+//				coder.save(sessions.getFilter(i), ofToString(i)+".tsv");
+			
+			coder.save(session);
+			break;
+			
+		case 'l':
+			session = coder.load("tst.tsv");
+			
+//			cout << "Duration: " << session.getDuration() << "sec"<< endl;
+//			cout << "Frames: " << session.getNumFrames() << endl;
 			break;
 
 		default:

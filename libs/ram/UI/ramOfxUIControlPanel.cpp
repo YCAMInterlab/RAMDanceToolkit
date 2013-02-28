@@ -45,7 +45,7 @@ void ramOfxUIControlPanel::setup()
 	// -------------------------------------
 	addPanel("RamDanceToolkit");
 
-	addToggle("FullScrean", &fullScreen);
+	addToggle("FullScreen", &fullScreen);
 	addToggle("Pause (or press Space Key)", &pause);
 	addToggle("Use Shadow", &enableShadow);
 
@@ -57,6 +57,7 @@ void ramOfxUIControlPanel::setup()
 	vector<string> floors = ramFloor::getFloorNames();
 	addRadioGroup("Floor Patterns", floors, &mFloorPattern);
 
+	current_panel->setUIColors(uiThemecb, uiThemeco, uiThemecoh, uiThemecf, uiThemecfh, uiThemecp, uiThemecpo);
 	current_panel->addSlider("Floor Size", 100, 1000, &mFloorSize, kLength / 2 - kXInit, kDim);
 	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
 	current_panel->addSlider("Grid Size", 20, 200, &mGridSize, kLength / 2 - kXInit, kDim);
@@ -78,8 +79,6 @@ void ramOfxUIControlPanel::update(ofEventArgs &e)
 	{
 		ofSetFullscreen(fullScreen);
 	}
-
-	ramActorManager::instance().setFreezed(pause);
 
 	if (camera_preset_t != camera_preset)
 	{
@@ -291,6 +290,7 @@ void ramOfxUIControlPanel::keyPressed(ofKeyEventArgs &e)
 	if (e.key == ' ')
 	{
 		pause = !pause;
+		ramActorManager::instance().setFreezed(pause);
 	}
 
 	if (e.key == '\t')

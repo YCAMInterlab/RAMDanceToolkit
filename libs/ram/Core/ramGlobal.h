@@ -8,11 +8,11 @@
 struct ramGlobalShortcut
 {
 
-#pragma mark Shortcut to RamActorManager
+#pragma mark - Shortcut to RamActorManager
 
 	inline static ramActorManager& getActorManager() { return ramActorManager::instance(); }
 
-	inline const vector<string>& getNodeArrayNames() { return ramActorManager::instance().getNodeArrayNames(); }
+	inline static const vector<string>& getNodeArrayNames() { return ramActorManager::instance().getNodeArrayNames(); }
 
 	inline static bool hasNodeArray(const string &key) { return ramActorManager::instance().hasNodeArray(key); }
 
@@ -24,7 +24,7 @@ struct ramGlobalShortcut
 
 	inline static vector<ramNodeArray> getAllNodeArrays() { return ramActorManager::instance().getAllNodeArrays(); }
 
-#pragma mark Shortcut to RamCameraManager
+#pragma mark - Shortcut to RamCameraManager
 
 	inline static ramCameraManager& getCameraManager() { return ramCameraManager::instance(); }
 
@@ -32,20 +32,16 @@ struct ramGlobalShortcut
 
 };
 
-// core
-
+#pragma mark - core
 void ramInitialize(int oscPort = 10000);
 string ramToResourcePath(string path);
 
-// camera
-
+#pragma mark - camera
 void ramBeginCamera();
 void ramEndCamera();
-
 void ramEnableInteractiveCamera(bool v);
 
-// shadow
-
+#pragma mark - shoadws
 void ramEnableShadow(bool v = true);
 void ramDisableShadow();
 bool ramShadowEnabled();
@@ -54,12 +50,10 @@ void ramBeginShadow();
 void ramEndShadow();
 void ramSetShadowAlpha(float alpha);
 
-// physics
-
+#pragma mark - physics
 void ramEnablePhysicsPrimitive(bool v = true);
 void ramDisablePhysicsPrimitive();
 bool ramGetEnablePhysicsPrimitive();
 
-//
-
+#pragma mark - error
 void ramNotImplementedError();

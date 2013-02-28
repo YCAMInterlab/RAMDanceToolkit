@@ -176,19 +176,8 @@ void ramActorManager::update()
 	rootNode.update();
 }
 
-#define SHOOTING
-
-#ifdef SHOOTING
-#include "ramCameraManager.h"
-#endif
-
 void ramActorManager::draw()
 {
-#ifdef SHOOTING
-    ofPushView();
-    ramCameraManager::instance().getActiveCamera().begin(ofRectangle(0, 0, 1920, 1200));
-#endif
-
 	rootNode.draw();
 
 	if (nodeSelector != NULL && nodeSelector->identifer.isValid())
@@ -214,12 +203,6 @@ void ramActorManager::draw()
 			node.endTransform();
 		}
 	}
-    
-#ifdef SHOOTING
-    ramCameraManager::instance().getActiveCamera().end();
-    ofPopView();
-#endif
-
 }
 
 void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
@@ -229,7 +212,7 @@ void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 	const std::string addr = m.getAddress();
 	const std::string name = m.getArgAsString(0);
 
-	if (addr == RAM_OSC_ADDR_SKELETON)
+	if (addr == RAM_OSC_ADDR_ACTOR)
 	{
 		if (!nodearrays.hasKey(name))
 		{

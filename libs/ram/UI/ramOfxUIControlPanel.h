@@ -31,9 +31,7 @@ public:
 
 	void addPanel(const string& name);
 	void addSection(const string& name);
-
 	void addSeparator();
-
 	void addLabel(const string& content);
 
 	template <typename Functor>
@@ -47,28 +45,18 @@ public:
 	}
 
 	void addToggle(const string& name, bool *value);
-
 	void addMultiToggle(const string& name, const vector<string>& content, int *value);
 	void addRadioGroup(const string& name, const vector<string>& content, int *value);
 	void addDropdown(const string& name, const vector<string>& content, int *value);
-
 	void addSlider(const string& name, float min_value, float max_value, float *value);
-
 	void addColorSelector(const string& name, ofFloatColor *value);
 
 	void remove(const string& name);
 
-	//
+	// load & save
 
-	void save(const string& path)
-	{
-		getSceneTabs().saveSettings(path);
-	}
-
-	void load(const string& path)
-	{
-		getSceneTabs().loadSettings(path);
-	}
+	void save(const string& path) { getSceneTabs().saveSettings(path); }
+	void load(const string& path) { getSceneTabs().loadSettings(path); }
 
 	// for internal use
 

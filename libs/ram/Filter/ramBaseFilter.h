@@ -141,9 +141,10 @@ public:
 
 		return cache;
 	}
-
+	
 	inline const vector<ramNodeArray>& get(size_t index = 0) { return cache[index]; }
-
+	inline const size_t getNumFilters() { return filters.size(); }
+	
 	FilterClass& getFilter(int index) { return filters[index]; }
 	FilterClass& getFilter(const string& name) { return filters[name]; }
 
