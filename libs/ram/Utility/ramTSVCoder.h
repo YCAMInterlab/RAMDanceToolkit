@@ -6,51 +6,78 @@
 class ramTSVCoder : public ramBaseCoder
 {
 	
-public:
-//	void test()
-//	{
-//		ofBuffer buf;
-//		
-//		{
-//			/// アクターの動き１フレーム分、全関節の位置と回転を文字列としてbufferに追加
-//			/// 各floatの間は後でパース出来る様に任意の文字(この場合は"/")で区切る
-//			string str = ofToString(0.01f) + "/" + ofToString(0.02f) + "/" + ofToString(0.03f) + "\n";
-//			buf.append(str.c_str(), str.length());
-//		}
-//		
-//		{
-//			/// buffer が空じゃなければ
-//			if (buf.size()) {
-//				/// 最後の行まで来たら頭に戻る(ループ)
-//				if (buf.isLastLine())
-//					buf.resetLineReader();
-//				
-//				/// 次の行(アクターの動き１フレーム分、全関節の位置と回転を文字列として読む)
-//				string str = buf.getNextLine();
-//				/// 書き込みの時に指定した文字で分割
-//				vector<string> values = ofSplitString(str, "/");
-//				vector<float> data;
-//				data.clear();
-//				/// floatに変換
-//				for (int i=0; i<values.size(); i++)
-//					data.push_back(ofToFloat(values.at(i)));
-//				
-//				/// ダンプ
-//				for (int i=0; i<data.size(); i++)
-//					cout << data.at(i) << ", ";
-//				cout << endl;
-//			}
-//		}
-//	}
-	
 protected:
 	
-//	bool decode(const string filePath)
-//	{
-//		ofBu
-//	}
+	ramSession decode(ofBuffer buffer)
+	{
+		if (buffer.size())
+		{
+			mSession.clear();
+			
+			do
+			{
+				string frame = buffer.getNextLine();
+				vector<string> values = ofSplitString(frame, "\t");
+				
+				const string addr = values.at(0);
+				const string name = values.at(1);
+				
+				ramNodeArray NA;
+				
+				if (addr == RAM_OSC_ADDR_ACTOR)
+				{
+					ramActor o;
+					o.setType(RAM_NODEARRAY_TYPE_ACTOR);
+					o.setName(name);
+					NA = o;
+				}
+				else
+				{
+					ramRigidBody o;
+					o.setType(RAM_NODEARRAY_TYPE_RIGIDBODY);
+					o.setName(name);
+					NA = o;
+				}
+				
+				const int numNodes = ofToInt(values.at(2));
+
+				for (int i=0; i<numNodes; i++)
+				{
+					const string nodeName = values.at(i*8 + 0 + 3);
+					const float vx = ofToFloat( values.at(i*8 + 1 + 3) );
+					const float vy = ofToFloat( values.at(i*8 + 2 + 3) );
+					const float vz = ofToFloat( values.at(i*8 + 3 + 3) );
+					const float qa = ofToFloat( values.at(i*8 + 4 + 3) );
+					const float ax = ofToFloat( values.at(i*8 + 5 + 3) );
+					const float ay = ofToFloat( values.at(i*8 + 6 + 3) );
+					const float az = ofToFloat( values.at(i*8 + 7 + 3) );
+					const ofVec3f axis(ax, ay, az);
+					const ofVec3f vec(vx, vy, vz);
+					const ofQuaternion quat(qa, axis);
+					
+					ramNode &node = NA.getNode(i);
+					node.setID(i);
+					node.setName(nodeName);
+					node.setGlobalPosition(vec);
+					node.setGlobalOrientation(quat);
+					node.getAccelerometer().update(vec, quat);
+				}
+				
+				NA.setTimestamp(ofToFloat( values.at(numNodes*8 + 0 + 3) ));
+				
+				mSession.appendFrame(NA);
+				
+			} while (!buffer.isLastLine());
+		}
+		
+		cout << "Actor: " << mSession.getNodeArrayName() << endl;
+		cout << "Duration: " << mSession.getDuration() << "sec"<< endl;
+		cout << "Frames: " << mSession.getNumFrames() << endl;
+		
+		return mSession;
+	}
 	
-	bool encode(const ramSession &src)
+	const bool encode(const ramSession &src)
 	{
 		if (src.getSize() <= 0) return false;
 		
@@ -60,22 +87,20 @@ protected:
 		
 		for(int i=0; i<src.getNumFrames(); i++)
 		{
-			const ramNodeArray &nodeArray = src.get(i);
-			
+			const ramNodeArray &nodeArray = src.getFrame(i);
 			stringstream frame;
 			frame << address << "\t" << entityName << "\t" << numJoints << "\t";
 			
 			for(int j=0; j<nodeArray.getNumNode(); j++)
 			{
-				const ramNode &node = nodeArray.getNode(j);
-				
-//				const string& name = node.getName();
+				const ramNode& node = nodeArray.getNode(j);
+				const string& name = node.getName();
 				const ofVec3f &pos = node.getPosition();
 				float qangle, qx, qy, qz;
 				node.getOrientationQuat().getRotate(qangle, qx, qy, qz);
 				
 				frame
-//				<< name << "\t"
+				<< name << "\t"
 				<< ofToString(pos.x) << "\t"
 				<< ofToString(pos.y) << "\t"
 				<< ofToString(pos.z) << "\t"
@@ -84,6 +109,7 @@ protected:
 				<< ofToString(qy) << "\t"
 				<< ofToString(qz) << "\t";
 			}
+			
 			const float timestamp = nodeArray.getTimestamp();
 			frame << ofToString(timestamp) << "\n";
 			

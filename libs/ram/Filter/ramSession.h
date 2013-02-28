@@ -14,9 +14,9 @@ public:
 	
 	const string getName() { return "ramSession"; }
 	
-	ramSession() {}
-	ramSession(const ramSession &copy) { *this = copy; }
-	ramSession(const ramNodeArrayBuffer &buf) { mBuffer = buf; }
+	ramSession() { clear(); }
+	ramSession(const ramSession &copy) { clear(); *this = copy; }
+	ramSession(const ramNodeArrayBuffer &buf) { clear(); mBuffer = buf; }
 	~ramSession() {}
 
 	void setupControlPanel()
@@ -43,28 +43,14 @@ public:
 		mNodeArrayName.clear();
 		
 		mPlayhead = 0;
-		mDuration = 0;
-		mFrameTime = 0;
 		mPlayStartTime = 0;
 		mRecStartTime = 0;
-
-		mFrameTime = 0;
-		mNumFrames = 0;
-		mRate = 1.0;
+		mRecEndTime = 0;
 		
+		mRate = 1.0;
 		mLoop = true;
 		mRecording = false;
 		mPlaying = false;
-	}
-
-	int getFrameIndex()
-	{
-		return floor(mPlayhead / mFrameTime);
-	}
-
-	void setup()
-	{
-		clear();
 	}
 
 	void onPanelChanged(ofxUIEventArgs& e)
@@ -104,17 +90,16 @@ public:
 	{
 		if (isRecording())
 		{
-			mBuffer.add(src);
+			appendFrame(src);
 		}
 		
 		if (isPlaying())
 		{
 			mPlayhead = (ofGetElapsedTimef() - mPlayStartTime) * mRate;
-			mFrameIndex = getFrameIndex();
 			
-			if (mFrameIndex >= mNumFrames)
+			if (getFrameIndex() <= 0)
 			{
-				mFrameIndex = 0;
+//				mFrameIndex = getNumFrames();
 				
 				if (isLoop())
 				{
@@ -126,7 +111,7 @@ public:
 				}
 			}
 			
-			return mBuffer.get(mFrameIndex);
+			return mBuffer.get(getFrameIndex());
 		}
 		else
 		{
@@ -155,20 +140,19 @@ public:
 		if (!isRecording() || mBuffer.getSize() <= 0) return;
 		
 		mRecording = false;
-		mNodeArrayName = mBuffer.get(0).getName();
-		mDuration = ofGetElapsedTimef() - mRecStartTime;
-		mNumFrames = mBuffer.getSize();
-		mFrameTime = mDuration / mNumFrames;
+		mRecEndTime = ofGetElapsedTimef();
 		
-		cout
-		<< "Recording finish. ["
-		<< mNodeArrayName
-		<< "] Total:" << mBuffer.getSize() << " frames." << endl;
+		mNodeArrayName = mBuffer.get(0).getName();
+		
+		
+		cout << mNodeArrayName << " Recording finished." << endl;
+		cout << "Duration: " << getDuration() << "sec"<< endl;
+		cout << "Frames: " << getNumFrames() << endl;
 	}
 
 	void play()
 	{
-		if (mNumFrames <= 0) return;
+		if (getNumFrames() <= 0) return;
 
 		cout << "start playing " << mNodeArrayName << "." << endl;
 
@@ -198,21 +182,57 @@ public:
 		mBuffer = buffer;
 	}
 	
-	inline void setLoop(bool l) { mLoop = l; };
+	const ramNodeArray& getFrame(int index) const
+	{
+		if (index > getNumFrames()) index = getNumFrames();
+		return mBuffer.get(index);
+	}
+	void appendFrame(const ramNodeArray copy)
+	{
+		mBuffer.add(copy);
+	}
+	
+	inline void setLoop(const bool l) { mLoop = l; };
 	inline void setRate(const float r) { mRate = r; };
 	inline void setPlayhead(const float t) { mPlayhead = t; };
 
-	inline bool isPlaying() { return mPlaying; }
-	inline bool isRecording() { return mRecording; }
-	inline bool isLoop() { return mLoop; }
-
-	inline ramNodeArray& getNextFrame() { return mBuffer.get(mFrameIndex); }
-
-	inline float getDuration() const {return mDuration;}
-	inline float getPlayhead() const {return mPlayhead;}
-	inline string getNodeArrayName() const {return mNodeArrayName;}
-	inline int getNumFrames() const { return mNumFrames; }
+	inline const bool isPlaying() const { return mPlaying; }
+	inline const bool isRecording() const { return mRecording; }
+	inline const bool isLoop() const { return mLoop; }
 	
+	inline const float getPlayhead() const {return mPlayhead;}
+	
+	const int getFrameIndex() const
+	{
+		return getNumFrames() - floor(mPlayhead / getFrameTime());
+	}
+	
+	const int getNumFrames() const
+	{
+		return mBuffer.getSize();
+	}
+	
+	const float getFrameTime() const
+	{
+		return getDuration() / getNumFrames();
+	}
+	
+	const float getDuration() const
+	{
+		assert(getNumFrames() > 1);
+		
+		const ramNodeArray &frontFrame = mBuffer.get( 0 );
+		const ramNodeArray &backFrame = mBuffer.get( getNumFrames() );
+		
+		return backFrame.getTimestamp() - frontFrame.getTimestamp();
+	}
+	
+	const string getNodeArrayName() const
+	{
+		assert(getNumFrames() > 0);
+		
+		return getNumFrames() > 0 ? mBuffer.get(0).getName() : "no name";
+	}
 	
 protected:
 
@@ -222,16 +242,12 @@ protected:
 	
 	bool mLoop;
 	float mRate;
-
+	
 	bool mRecording;
 	bool mPlaying;
-
+	
 	float mPlayhead;
-	float mDuration;
-	float mFrameTime;
 	float mPlayStartTime;
 	float mRecStartTime;
-
-	int mFrameIndex;
-	int mNumFrames;
+	float mRecEndTime;
 };

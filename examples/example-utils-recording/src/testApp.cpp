@@ -1,7 +1,10 @@
 #include "testApp.h"
 
-ramFilterEach<ramSession> sessions;
+//ramFilterEach<ramSession> sessions;
+
 ramTSVCoder coder;
+ramSession session;
+
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -24,24 +27,29 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	sessions.update(getAllNodeArrays());
+//	sessions.update(getAllNodeArrays());
+	if (getNumNodeArray() > 0)
+	{
+		session.update(getNodeArray(0));
+	}
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
 	/// draw recorded session if it's playing
-	for(int i=0; i<sessions.getNumFilters(); i++)
-	{
-		ramSession &session = sessions.getFilter(i);
+//	for(int i=0; i<sessions.getNumFilters(); i++)
+//	{
+//		ramSession &session = sessions.getFilter(i);
+//		
 		if (session.isPlaying())
 		{
 			ramBeginCamera();
-			ramActor &actor = (ramActor &)sessions.getFilter(i).get();
+			ramActor &actor = (ramActor &)session.get();
 			ramDrawBasicActor(actor);
 			ramEndCamera();
 		}
-	}
+//	}
 }
 
 
@@ -71,29 +79,45 @@ void testApp::keyPressed(int key)
 	switch (key)
 	{
 		case '[':
-			for(int i=0; i<sessions.getNumFilters(); i++)
-				sessions.getFilter(i).startRecording();
+//			for(int i=0; i<sessions.getNumFilters(); i++)
+//				sessions.getFilter(i).startRecording();
 			
+			session.startRecording();
 			break;
 
 		case ']':
-			for(int i=0; i<sessions.getNumFilters(); i++)
-				sessions.getFilter(i).stopRecording();
+//			for(int i=0; i<sessions.getNumFilters(); i++)
+//				sessions.getFilter(i).stopRecording();
+			
+			session.stopRecording();
 			break;
 
 		case '-':
-			for(int i=0; i<sessions.getNumFilters(); i++)
-				sessions.getFilter(i).play();
+//			for(int i=0; i<sessions.getNumFilters(); i++)
+//				sessions.getFilter(i).play();
+			
+			session.play();
 			break;
 			
 		case '=':
-			for(int i=0; i<sessions.getNumFilters(); i++)
-				sessions.getFilter(i).stop();
+//			for(int i=0; i<sessions.getNumFilters(); i++)
+//				sessions.getFilter(i).stop();
+			
+			session.stop();
 			break;
 			
 		case 's':
-			for(int i=0; i<sessions.getNumFilters(); i++)
-				coder.save(sessions.getFilter(i), ofToString(i)+".test");
+//			for(int i=0; i<sessions.getNumFilters(); i++)
+//				coder.save(sessions.getFilter(i), ofToString(i)+".tsv");
+			
+			coder.save(session);
+			break;
+			
+		case 'l':
+			session = coder.load("tst.tsv");
+			
+//			cout << "Duration: " << session.getDuration() << "sec"<< endl;
+//			cout << "Frames: " << session.getNumFrames() << endl;
 			break;
 
 		default:

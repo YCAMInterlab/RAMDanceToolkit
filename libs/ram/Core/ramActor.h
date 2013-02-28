@@ -62,7 +62,8 @@ public:
 	
 	ramNode(const ramNode& copy) { *this = copy; }
 	ramNode& operator=(const ramNode& copy);
-
+	
+	inline void setName(const string n) { name = n; }
 	const string& getName() const { return name; }
 	
 	const ofMatrix4x4& getTransformMatrix() const { return getLocalTransformMatrix(); }
@@ -107,7 +108,9 @@ public:
 	virtual ~ramNodeArray() {}
 
 	inline bool isOutdated() const { return (ofGetElapsedTimef() -  last_update_client_time) > RAM_OUTDATED_DURATION; }
+	
 	inline float getTimestamp() const { return last_update_client_time; }
+	inline void setTimestamp(const float t) { last_update_client_time = t; }
 
 	inline void setType(ramNodeArrayType t) { type = t; }
 	inline bool isActor() const { return type == RAM_NODEARRAY_TYPE_ACTOR; }

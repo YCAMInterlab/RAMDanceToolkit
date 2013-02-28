@@ -7,9 +7,9 @@
  s: string
  i: int
  f: float
-  sisfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsffffffff
+  ssisfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsffffffff
  
- "{s} osc route", {i} numJoints,
+ "{s} osc route", "{s} Actor name", {i} numJoints,
  "{s} joint name", {f}x, {f}y, {f}z, {f}quat angle, {f}quat x, {f}quat y, {f}quat z,
  "{s} joint name", {f}x, {f}y, {f}z, {f}quat angle, {f}quat x, {f}quat y, {f}quat z,
  "{s} joint name", {f}x, {f}y, {f}z, {f}quat angle, {f}quat x, {f}quat y, {f}quat z,
@@ -30,21 +30,41 @@ public:
 	virtual ~ramBaseCoder() {}
 	
 	
-	/// save csv file to filePath
+	/// load tsv, and convert to ramSession
 	// -----------------------------
-	bool save(const ramSession &src)
+	ramSession load(const string filePath)
+	{
+		if ( !ofFile::doesFileExist(filePath) )
+		{
+			cout << filePath << " load failed. No such file or directory." << endl;
+			return ramSession();
+		}
+		
+		ofFile file;
+		file.open(filePath);
+		
+		mBuffer.clear();
+		mBuffer = file.readToBuffer();
+		
+		return decode(mBuffer);
+	}
+	
+	
+	/// save ramSession to filePath
+	// -----------------------------
+	const bool save(const ramSession &src)
 	{
 		clear();
 		return encode(src);
 	}
-	bool save(const ramSession &src, const string filePath)
+	const bool save(const ramSession &src, const string filePath)
 	{
 		clear();
 		setFileName(filePath);
 		return encode(src);
 	}
 	
-	bool save(const ramNodeArrayBuffer &src)
+	const bool save(const ramNodeArrayBuffer &src)
 	{
 		ramSession session(src);
 		
@@ -52,7 +72,7 @@ public:
 		return encode(session);
 	}
 	
-	bool save(const ramNodeArrayBuffer &src, const string filePath)
+	const bool save(const ramNodeArrayBuffer &src, const string filePath)
 	{
 		ramSession session(src);
 		
@@ -72,11 +92,6 @@ public:
 	}
 	
 	
-	/// result
-	// -----------------------------
-	ramSession get() { return mSession; };
-	
-	
 	/// setters
 	// -----------------------------
 	inline void setFileName(const string fileName) { mFileName = fileName; }
@@ -84,7 +99,8 @@ public:
 	
 protected:
 	
-	virtual bool encode(const ramSession &src) = 0;
+	virtual ramSession decode(const ofBuffer buffer) = 0;
+	virtual const bool encode(const ramSession &src) = 0;
 	
 	ofBuffer mBuffer;
 	
