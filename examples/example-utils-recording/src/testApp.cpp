@@ -1,8 +1,7 @@
 #include "testApp.h"
 
-
-ramSession session;
-
+ramFilterEach<ramSession> sessions;
+ramTSVCoder coder;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -12,25 +11,37 @@ void testApp::setup()
 	ofSetVerticalSync(true);
 	ofBackground(ramColor::WHITE);
 
-
 	/// ram setup
 	// ------------------
 	ramInitialize(10000);
 
-	session.setup();
-	ramGetGUI().addPanel( &session );
+	
+	/// session
+	// ------------------
+//	ramGetGUI().addPanel( &session );
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-
+	sessions.update(getAllNodeArrays());
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-
+	/// draw recorded session if it's playing
+	for(int i=0; i<sessions.getNumFilters(); i++)
+	{
+		ramSession &session = sessions.getFilter(i);
+		if (session.isPlaying())
+		{
+			ramBeginCamera();
+			ramActor &actor = (ramActor &)sessions.getFilter(i).get();
+			ramDrawBasicActor(actor);
+			ramEndCamera();
+		}
+	}
 }
 
 
@@ -39,10 +50,9 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(const ramActor &actor)
 {
-	ramActor &a = (ramActor &)session.update(actor);
-	
-	ofSetColor(ramColor::GREEN_NORMAL);
-	ramDrawBasicActor(a);
+	/// draw realtime data
+	ofSetColor(ramColor::RED_DEEP);
+	ramDrawBasicActor(actor);
 }
 
 //--------------------------------------------------------------
@@ -61,19 +71,29 @@ void testApp::keyPressed(int key)
 	switch (key)
 	{
 		case '[':
-			session.startRecording();
+			for(int i=0; i<sessions.getNumFilters(); i++)
+				sessions.getFilter(i).startRecording();
+			
 			break;
 
 		case ']':
-			session.stopRecording();
+			for(int i=0; i<sessions.getNumFilters(); i++)
+				sessions.getFilter(i).stopRecording();
 			break;
 
 		case '-':
-			session.play();
+			for(int i=0; i<sessions.getNumFilters(); i++)
+				sessions.getFilter(i).play();
 			break;
-
+			
 		case '=':
-			session.stop();
+			for(int i=0; i<sessions.getNumFilters(); i++)
+				sessions.getFilter(i).stop();
+			break;
+			
+		case 's':
+			for(int i=0; i<sessions.getNumFilters(); i++)
+				coder.save(sessions.getFilter(i), ofToString(i)+".test");
 			break;
 
 		default:
