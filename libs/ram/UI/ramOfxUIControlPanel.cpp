@@ -45,7 +45,7 @@ void ramOfxUIControlPanel::setup()
 	// -------------------------------------
 	addPanel("RamDanceToolkit");
 
-	addToggle("FullScrean", &fullScreen);
+	addToggle("FullScreen", &fullScreen);
 	addToggle("Pause (or press Space Key)", &pause);
 	addToggle("Use Shadow", &enableShadow);
 
@@ -78,8 +78,6 @@ void ramOfxUIControlPanel::update(ofEventArgs &e)
 	{
 		ofSetFullscreen(fullScreen);
 	}
-
-	ramActorManager::instance().setFreezed(pause);
 
 	if (camera_preset_t != camera_preset)
 	{
@@ -291,6 +289,7 @@ void ramOfxUIControlPanel::keyPressed(ofKeyEventArgs &e)
 	if (e.key == ' ')
 	{
 		pause = !pause;
+		ramActorManager::instance().setFreezed(pause);
 	}
 
 	if (e.key == '\t')
