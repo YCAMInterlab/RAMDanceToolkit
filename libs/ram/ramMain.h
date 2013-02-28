@@ -42,6 +42,7 @@
 #include "ramControlPanel.h"
 #include "ramCameraSettings.h"
 #include "ramNodeFinder.h"
+#include "ramTSVCoder.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>

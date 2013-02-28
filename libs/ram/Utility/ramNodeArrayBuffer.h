@@ -6,7 +6,7 @@ class ramNodeArrayBuffer
 {
 public:
 
-	ramNodeArrayBuffer() {}
+	ramNodeArrayBuffer() : capacity(100000) {}
 
 	void add(const ramNodeArray& arr)
 	{
