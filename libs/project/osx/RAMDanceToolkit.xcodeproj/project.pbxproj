@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		27423B0016DF06EE00FD1944 /* ramGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 27423AFF16DF06EE00FD1944 /* ramGeometry.h */; };
 		27423B0216DF074000FD1944 /* ramGeometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27423B0116DF074000FD1944 /* ramGeometry.cpp */; };
-		27423B0416DF217A00FD1944 /* ramArcLineRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 27423B0316DF217A00FD1944 /* ramArcLineRecognizer.h */; };
-		27423B0616DF2B2200FD1944 /* ramArcLineRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27423B0516DF2B2200FD1944 /* ramArcLineRecognizer.cpp */; };
+		27423B0416DF217A00FD1944 /* ramPlanarGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 27423B0316DF217A00FD1944 /* ramPlanarGestureRecognizer.h */; };
+		27423B0616DF2B2200FD1944 /* ramPlanarGestureRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27423B0516DF2B2200FD1944 /* ramPlanarGestureRecognizer.cpp */; };
 		274B3C2016DEFADA004F30A6 /* ramActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3BDD16DEFADA004F30A6 /* ramActor.cpp */; };
 		274B3C2116DEFADA004F30A6 /* ramActor.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BDE16DEFADA004F30A6 /* ramActor.h */; };
 		274B3C2216DEFADA004F30A6 /* ramActorManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3BDF16DEFADA004F30A6 /* ramActorManager.cpp */; };
@@ -471,8 +471,8 @@
 /* Begin PBXFileReference section */
 		27423AFF16DF06EE00FD1944 /* ramGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramGeometry.h; sourceTree = "<group>"; };
 		27423B0116DF074000FD1944 /* ramGeometry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramGeometry.cpp; sourceTree = "<group>"; };
-		27423B0316DF217A00FD1944 /* ramArcLineRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramArcLineRecognizer.h; sourceTree = "<group>"; };
-		27423B0516DF2B2200FD1944 /* ramArcLineRecognizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramArcLineRecognizer.cpp; sourceTree = "<group>"; };
+		27423B0316DF217A00FD1944 /* ramPlanarGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPlanarGestureRecognizer.h; sourceTree = "<group>"; };
+		27423B0516DF2B2200FD1944 /* ramPlanarGestureRecognizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramPlanarGestureRecognizer.cpp; sourceTree = "<group>"; };
 		274B3BDD16DEFADA004F30A6 /* ramActor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramActor.cpp; sourceTree = "<group>"; };
 		274B3BDE16DEFADA004F30A6 /* ramActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramActor.h; sourceTree = "<group>"; };
 		274B3BDF16DEFADA004F30A6 /* ramActorManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramActorManager.cpp; sourceTree = "<group>"; };
@@ -1047,8 +1047,8 @@
 		274B3C0816DEFADA004F30A6 /* Recognizer */ = {
 			isa = PBXGroup;
 			children = (
-				27423B0316DF217A00FD1944 /* ramArcLineRecognizer.h */,
-				27423B0516DF2B2200FD1944 /* ramArcLineRecognizer.cpp */,
+				27423B0316DF217A00FD1944 /* ramPlanarGestureRecognizer.h */,
+				27423B0516DF2B2200FD1944 /* ramPlanarGestureRecognizer.cpp */,
 				274B3C0916DEFADA004F30A6 /* ramBaseRecognizer.h */,
 				274B3C0A16DEFADA004F30A6 /* ramRecognizer.h */,
 				27423AFF16DF06EE00FD1944 /* ramGeometry.h */,
@@ -2497,7 +2497,7 @@
 				274B3C5816DEFADA004F30A6 /* ramTimeShifter.h in Headers */,
 				274B3C5A16DEFADA004F30A6 /* ramUtils.h in Headers */,
 				27423B0016DF06EE00FD1944 /* ramGeometry.h in Headers */,
-				27423B0416DF217A00FD1944 /* ramArcLineRecognizer.h in Headers */,
+				27423B0416DF217A00FD1944 /* ramPlanarGestureRecognizer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2605,7 +2605,7 @@
 				274B3C5216DEFADA004F30A6 /* ramCameraSettings.cpp in Sources */,
 				274B3C5916DEFADA004F30A6 /* ramUtils.cpp in Sources */,
 				27423B0216DF074000FD1944 /* ramGeometry.cpp in Sources */,
-				27423B0616DF2B2200FD1944 /* ramArcLineRecognizer.cpp in Sources */,
+				27423B0616DF2B2200FD1944 /* ramPlanarGestureRecognizer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

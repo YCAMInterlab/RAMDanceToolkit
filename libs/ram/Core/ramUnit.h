@@ -10,6 +10,5 @@ class ramUnit : public ramControllable, public ramGlobalShortcut
 public:
 	
 	virtual ~ramUnit() {}
-	virtual void setupControlPanel() {}
 
 };

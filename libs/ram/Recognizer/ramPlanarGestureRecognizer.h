@@ -1,16 +1,14 @@
 #pragma once
 
-#include "ramRecognizer.h"
-
-#include "ramMain.h"
-#include "ofxCv.h"
+#include "ramBaseRecognizer.h"
 #include "ramGeometry.h"
+#include "ofxCv.h"
 
-class Recognizer {	
+class ramPlanarGestureRecognizer : public ramBaseRecognizer {	
 public:
 	enum GestureType {GESTURE_LINE, GESTURE_ARC}; 
 	
-	Recognizer()
+	ramPlanarGestureRecognizer()
 	:lineRatio(6)
 	,gestureType(GESTURE_LINE)
 	,fitError(0)
@@ -67,6 +65,8 @@ public:
 			}
 		}
 	}
+	
+	const string getName() { return "Planar Gesture Recognizer"; }
 	
 protected:
 	cv::RotatedRect ellipse, rect;

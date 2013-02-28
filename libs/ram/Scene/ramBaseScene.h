@@ -41,7 +41,7 @@ class EmptyScene : public ramBaseScene
     void draw()
     {
     }
-
+ 
     void drawActor(const ramActor& actor)
     {
         ramDrawBasicActor(actor);
@@ -61,6 +61,8 @@ public:
 
 	ramBaseScene() : bEnabled(false) {}
 	virtual ~ramBaseScene() {}
+	
+	virtual void setupControlPanel() {}
 	
 	virtual void setup() {}
 	virtual void update() {}

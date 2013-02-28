@@ -2,7 +2,7 @@
 
 #include "ramMain.h"
 #include "ofxCv.h"
-#include "ramArcLineRecognizer.h"
+#include "ramPlanarGestureRecognizer.h"
 
 class HistoryPoint : public ramFading
 {
@@ -13,37 +13,6 @@ public:
 	:point(point)
 	{}
 };
-
-// needs improvement. right now it just looks for the biggest cross product
-void approximatePlane(const vector<ofVec3f>& points, int iterations, ofVec3f& center, ofVec3f& normal)
-{
-	int n = points.size();
-	for(int i = 0; i < n; i++)
-	{
-		center += points[i];
-	}
-	center /= n;
-	float maxLength = 0;
-	for(int i = 0; i < n; i++)
-	{
-		ofVec3f side1 = points[i] - center;
-		for(int j = i + 1; j < n; j++)
-		{
-			ofVec3f side2 = points[j] - center;
-			ofVec3f curNormal = side1.getCrossed(side2);
-			if(curNormal.z < 0) {
-				curNormal *= -1;
-			}
-			float length = curNormal.length();
-			if(length > maxLength)
-			{
-				normal = curNormal;
-				maxLength = length;
-			}
-		}
-	}
-	normal.normalize();
-}
 
 class SpatialMark : public ramFading
 {
@@ -91,9 +60,9 @@ public:
 	
 	float centerLerpRate, normalLerpRate;
 	
-	Recognizer recognizer;
+	ramPlanarGestureRecognizer recognizer;
 	
-	void setupControlPanel(ofxUICanvas* panel)
+	void setupControlPanel()
 	{
 		onlyLimbs = true;
 		maxNotationLife = 1;
@@ -102,6 +71,7 @@ public:
 		normalLerpRate = .1;
 		threshold = .3;
 		drawDebug = false;
+		ofxUICanvas* panel = gui().getCurrentUIContext();
 		panel->addToggle("Only limbs", &onlyLimbs, 20, 20);
 		panel->addToggle("Draw debug", &drawDebug, 20, 20);
 		panel->addSlider("History fade out", 0, 5, &maxNotationLife, 300, 20);
