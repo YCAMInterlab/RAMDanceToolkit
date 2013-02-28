@@ -34,6 +34,10 @@ public:
 	// -----------------------------
 	ramSession load(const string filePath)
 	{
+		cout
+		<< "start loading file..."
+		<< "File name: " << filePath << endl;
+		
 		if ( !ofFile::doesFileExist(filePath) )
 		{
 			cout << filePath << " load failed. No such file or directory." << endl;
@@ -43,10 +47,7 @@ public:
 		ofFile file;
 		file.open(filePath);
 		
-		mBuffer.clear();
-		mBuffer = file.readToBuffer();
-		
-		return decode(mBuffer);
+		return decode(file.readToBuffer());
 	}
 	
 	
@@ -54,12 +55,11 @@ public:
 	// -----------------------------
 	const bool save(const ramSession &src)
 	{
-		clear();
 		return encode(src);
 	}
+	
 	const bool save(const ramSession &src, const string filePath)
 	{
-		clear();
 		setFileName(filePath);
 		return encode(src);
 	}
@@ -67,16 +67,12 @@ public:
 	const bool save(const ramNodeArrayBuffer &src)
 	{
 		ramSession session(src);
-		
-		clear();
 		return encode(session);
 	}
 	
 	const bool save(const ramNodeArrayBuffer &src, const string filePath)
 	{
 		ramSession session(src);
-		
-		clear();
 		setFileName(filePath);
 		return encode(session);
 	}
@@ -86,7 +82,6 @@ public:
 	// -----------------------------
 	void clear()
 	{
-		mBuffer.clear();
 		mFileName.clear();
 		mSession.clear();
 	}
@@ -101,8 +96,6 @@ protected:
 	
 	virtual ramSession decode(const ofBuffer buffer) = 0;
 	virtual const bool encode(const ramSession &src) = 0;
-	
-	ofBuffer mBuffer;
 	
 	string mFileName;
 	ramSession mSession;

@@ -12,7 +12,7 @@ protected:
 	{
 		if (buffer.size())
 		{
-			mSession.clear();
+			clear();
 			
 			do
 			{
@@ -70,16 +70,23 @@ protected:
 			} while (!buffer.isLastLine());
 		}
 		
+		cout << "File loaded! " << endl;
 		cout << "Actor: " << mSession.getNodeArrayName() << endl;
 		cout << "Duration: " << mSession.getDuration() << "sec"<< endl;
-		cout << "Frames: " << mSession.getNumFrames() << endl;
+		cout << "Frames: " << mSession.getNumFrames() << endl << endl;
 		
 		return mSession;
 	}
 	
 	const bool encode(const ramSession &src)
 	{
-		if (src.getSize() <= 0) return false;
+		if (src.getNumFrames() <= 0)
+		{
+			cout << "session seems not to have any data to save." << endl;
+			return false;
+		}
+		
+		ofBuffer buf;
 		
 		const string address = src.get().isActor() ? RAM_OSC_ADDR_ACTOR : RAM_OSC_ADDR_RIGID_BODY;
 		const string entityName = src.get().getName();
@@ -113,26 +120,26 @@ protected:
 			const float timestamp = nodeArray.getTimestamp();
 			frame << ofToString(timestamp) << "\n";
 			
-			mBuffer.append(frame.str().c_str(), frame.str().length());
+			buf.append(frame.str().c_str(), frame.str().length());
 		}
 		
 		const string fileName = mFileName.empty() ? ofGetTimestampString("%Y.%m.%d %H.%M.%S ") + entityName + ".tsv" : mFileName;
 
-		const bool succeeded = ofBufferToFile(fileName, mBuffer, true);
+		const bool succeeded = ofBufferToFile(fileName, buf, true);
 		
 		if (succeeded)
 		{
-			cout << "save succeeded! " << fileName << " was created." << endl;
+			cout << "Save succeeded! " << endl;
+			cout << "File name:" << fileName << endl;
 			cout << "Duration: " << src.getDuration() << "sec"<< endl;
 			cout << "Frames: " << src.getNumFrames() << endl;
-			cout << "Size: " << mBuffer.size() * 0.001 << "KB" << endl;
+			cout << "Size: " << buf.size() * 0.001 << "KB" << endl << endl;
 		}
 		else
 		{
 			cout << "save failed.";
 		}
 		
-		mBuffer.clear();
 		return succeeded;
 	}
 };

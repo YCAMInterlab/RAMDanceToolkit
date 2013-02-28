@@ -40,8 +40,6 @@ public:
 	{
 		mBuffer.clear();
 		
-		mNodeArrayName.clear();
-		
 		mPlayhead = 0;
 		mPlayStartTime = 0;
 		mRecStartTime = 0;
@@ -52,7 +50,7 @@ public:
 		mRecording = false;
 		mPlaying = false;
 	}
-
+	
 	void onPanelChanged(ofxUIEventArgs& e)
 	{
 		string name = e.widget->getName();
@@ -99,8 +97,6 @@ public:
 			
 			if (getFrameIndex() <= 0)
 			{
-//				mFrameIndex = getNumFrames();
-				
 				if (isLoop())
 				{
 					mPlayStartTime = ofGetElapsedTimef();
@@ -127,7 +123,7 @@ public:
 	{
 		if (isRecording()) return;
 
-		cout << "recording start " << mNodeArrayName << "." << endl;
+		cout << "recording start." << endl;
 
 		clear();
 		mPlaying = false;
@@ -142,11 +138,9 @@ public:
 		mRecording = false;
 		mRecEndTime = ofGetElapsedTimef();
 		
-		mNodeArrayName = mBuffer.get(0).getName();
-		
-		
-		cout << mNodeArrayName << " Recording finished." << endl;
-		cout << "Duration: " << getDuration() << "sec"<< endl;
+		cout << "Recording finished." << endl;
+		cout << "Actor: " << getNodeArrayName() << endl;
+		cout << "Duration: " << getDuration() << " sec"<< endl;
 		cout << "Frames: " << getNumFrames() << endl;
 	}
 
@@ -154,7 +148,7 @@ public:
 	{
 		if (getNumFrames() <= 0) return;
 
-		cout << "start playing " << mNodeArrayName << "." << endl;
+		cout << "start playing " << getNodeArrayName() << "." << endl;
 
 		mRecording = false;
 		mPlaying = true;
@@ -165,7 +159,7 @@ public:
 	{
 		if (!isPlaying()) return;
 		
-		cout << "stop playing " << mNodeArrayName << "." << endl;
+		cout << "stop playing " << getNodeArrayName() << "." << endl;
 
 		mPlaying = false;
 	}
@@ -185,20 +179,12 @@ public:
 	const ramNodeArray& getFrame(int index) const
 	{
 		if (index > getNumFrames()) index = getNumFrames();
-		return mBuffer.get(index);
+		return mBuffer.get(getNumFrames() - index);
 	}
 	void appendFrame(const ramNodeArray copy)
 	{
 		mBuffer.add(copy);
 	}
-	
-	inline void setLoop(const bool l) { mLoop = l; };
-	inline void setRate(const float r) { mRate = r; };
-	inline void setPlayhead(const float t) { mPlayhead = t; };
-
-	inline const bool isPlaying() const { return mPlaying; }
-	inline const bool isRecording() const { return mRecording; }
-	inline const bool isLoop() const { return mLoop; }
 	
 	inline const float getPlayhead() const {return mPlayhead;}
 	
@@ -224,7 +210,7 @@ public:
 		const ramNodeArray &frontFrame = mBuffer.get( 0 );
 		const ramNodeArray &backFrame = mBuffer.get( getNumFrames() );
 		
-		return backFrame.getTimestamp() - frontFrame.getTimestamp();
+		return frontFrame.getTimestamp() - backFrame.getTimestamp();
 	}
 	
 	const string getNodeArrayName() const
@@ -234,11 +220,17 @@ public:
 		return getNumFrames() > 0 ? mBuffer.get(0).getName() : "no name";
 	}
 	
+	inline void setLoop(const bool l) { mLoop = l; };
+	inline void setRate(const float r) { mRate = r; };
+	inline void setPlayhead(const float t) { mPlayhead = t; };
+	
+	inline const bool isPlaying() const { return mPlaying; }
+	inline const bool isRecording() const { return mRecording; }
+	inline const bool isLoop() const { return mLoop; }
+	
 protected:
 
 	ramNodeArrayBuffer mBuffer;
-	
-	string mNodeArrayName;
 	
 	bool mLoop;
 	float mRate;
