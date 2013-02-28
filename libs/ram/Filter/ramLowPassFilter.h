@@ -19,7 +19,7 @@ public:
 
 #pragma mark -
 
-	void setAmout(float a) { amount = a; }
+	void setAmount(float a) { amount = a; }
 
 	const ramNodeArray& filter(const ramNodeArray& src)
 	{
