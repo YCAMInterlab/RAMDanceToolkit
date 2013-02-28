@@ -8,6 +8,34 @@
 
 #include "ofxXmlSettings.h"
 
+#pragma mark - ramFading
+
+class ramFading;
+
+class ramDeadFunctor {
+protected:
+	float lifespan;
+public:
+	ramDeadFunctor(float lifespan) : lifespan(lifespan) {}
+	bool operator()(const ramFading& fading);
+};
+
+class ramFading {
+protected:
+	float birth;
+public:
+	ramFading();
+	float getLife(float lifespan) const;
+	bool isDead(float lifespan) const;
+	
+	template <class T>
+	static void bury(list<T>& all, float lifespan) {
+		ramDeadFunctor deadFunctor(lifespan);
+		all.erase(remove_if(all.begin(), all.end(), deadFunctor), all.end());
+	}
+};
+
+
 #pragma mark - ramCompoundContainer
 
 template <typename T>
