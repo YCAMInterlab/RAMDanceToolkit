@@ -1,5 +1,13 @@
 #include "testApp.h"
 
+// ram retina用 build
+// 4画面出力
+#define RAM_RETINA
+
+// ram retina用 build
+// 2面出力
+#define RAM_SUB
+
 
 /*!
  Scenes
@@ -40,6 +48,9 @@ UpsideDown upsideDown;
 #include "Kepler.h"
 Kepler kepler;
 
+#include "upside-donuts.h"
+UpsideDownDonuts upsideDownDonuts;
+
 #include "HastyChase.h"
 HastyChase hastyChase;
 
@@ -53,10 +64,36 @@ ThreePoints threePoints;
 FourPoints fourPoints;
 
 #include "Chain.h"
-Chain chain;
+Chain chain;    
 
 #include "Monster.h"
 Monster monster;
+
+#include "Laban.h"
+Laban laban;
+
+#include "Notation.h"
+Notation notation;
+
+
+/*!
+ screen settings
+ */
+extern bool drawModel;
+
+int active_camera_id = 0;
+int screen_width = 1280;
+int screen_height = 720;
+
+#ifdef RAM_RETINA
+int main_display_width = 1920;
+int main_display_height = 1200;
+int num_screens = 6;
+#else
+int main_display_width = 1440;
+int main_display_height = 900;
+int num_screens = 3;
+#endif
 
 
 #pragma mark - oF methods
@@ -93,13 +130,40 @@ void testApp::setup()
 	scenes.push_back( fourPoints.getPtr() );
 	scenes.push_back( chain.getPtr() );
 	scenes.push_back( monster.getPtr() );
+	scenes.push_back( laban.getPtr() );
+	scenes.push_back( notation.getPtr() );
 	sceneManager.setup(scenes);
 	
+    ofEasyCam *cam = (ofEasyCam*)ramCameraManager::instance().getCamera(0);
+    cam->setTranslationKey('z');
+    
+	// for 5 screens
+	for (int i = 0; i < num_screens; i++)
+	{
+		ofEasyCam *cam = ramCameraManager::instance().createCamera<ofEasyCam>();
+        cam->setTranslationKey('z');
+		cam->disableMouseInput();
+        cam->setFov(40);
+	}
+	
+	for (int i = 0; i < num_screens; i++)
+	{
+		ramCameraManager::instance().setActiveCamera(i + 1);
+		ramCameraManager::instance().rollbackDefaultCameraSetting(i);
+	}
+    
+    active_camera_id = 0;
+	ramCameraManager::instance().setActiveCamera(active_camera_id);
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
+	ofViewport(0, 0, main_display_width, main_display_height);
+	ramCameraManager::instance().setActiveCamera(active_camera_id);
+	ramBeginCamera();
+	ramEndCamera();
+	
 	/// Scenes update
 	// ------------------
 	sceneManager.update();
@@ -108,9 +172,55 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	/// Scenes draw
-	// ------------------
+	setDrawFloorAuto(true);
+    
+    int screen_y_offset = main_display_height - screen_height;
+    
+	for (int i = 0; i < num_screens; i++)
+	{
+		ofPushView();
+		
+		ofCamera *screen_camera = ramCameraManager::instance().getCamera(i + 1);
+		
+		if (i == num_screens-1)
+		{
+			drawModel = false;
+			screen_camera->enableOrtho();
+		}
+		
+		
+		ofViewport(ofRectangle(main_display_width + i * screen_width, screen_y_offset, screen_width, screen_height));
+		ramCameraManager::instance().setActiveCamera(i + 1);
+		
+		screen_camera->begin();
+		drawFloor();
+		screen_camera->end();
+		
+		sceneManager.draw();
+		
+		drawModel = true;
+		
+		ofPopView();
+	}
+	
+	ramCameraManager::instance().setActiveCamera(active_camera_id);
+	
+	setDrawFloorAuto(false);
+    
+    string str;
+    str += "active camera id: " + ofToString(active_camera_id) + "\n";
+    str += "fps: " + ofToString(ofGetFrameRate(), 0);
+    ofDrawBitmapString(str, 400, 20);
+    
+    ofPushView();
+	ofViewport(0, 0, main_display_width, main_display_height);
+	ramCameraManager::instance().setActiveCamera(active_camera_id);
+	ramBeginCamera();
+	drawFloor();
+	ramEndCamera();
+	
 	sceneManager.draw();
+	ofPopView();
 }
 
 #pragma mark - ram methods
@@ -130,11 +240,41 @@ void testApp::drawRigid(const ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	if(key=='.')
+    int new_active_camera_id = -1;
+    
+    if (key == '0')
+        new_active_camera_id = 0;
+    if (key == '1')
+        new_active_camera_id = 1;
+    if (key == '2')
+        new_active_camera_id = 2;
+    if (key == '3')
+        new_active_camera_id = 3;
+    
+    if(num_screens >3)
+    {
+        if (key == '4')
+            new_active_camera_id = 4;
+        if (key == '5')
+            new_active_camera_id = 5;
+    }
+    
+    if (new_active_camera_id != -1)
+    {
+        ramCameraManager::instance().setEnableInteractiveCamera(false);
+        
+        active_camera_id = new_active_camera_id;
+        ramCameraManager::instance().setActiveCamera(active_camera_id);
+        
+        ramCameraManager::instance().setEnableInteractiveCamera(true);
+    }
+	
+	if(key=='/')
 	{
 		ramLoadSettings("Settings/scene.xml");
 	}
-	if(key=='/')
+	
+	if(key=='_')
 	{
 		ramSaveSettings("Settings/scene.xml");
 	}

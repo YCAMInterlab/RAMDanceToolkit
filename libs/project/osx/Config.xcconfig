@@ -2,4 +2,4 @@ OF_BASE_PATH = ../../../..
 
 OF_HEADER_SEARCH_PATHS = $(OF_BASE_PATH)/libs/openFrameworks/** $(OF_BASE_PATH)/libs/glew/include $(OF_BASE_PATH)/libs/tess2/include $(OF_BASE_PATH)/libs/poco/include $(OF_BASE_PATH)/libs/cairo/include/** $(OF_BASE_PATH)/libs/fmodex/include/**
 
-HEADER_SEARCH_PATHS = $(OF_HEADER_SEARCH_PATHS) $(OF_BASE_PATH)/addons/ofxOsc/** ../../../addons/ofxBt/libs/bullet/include/bullet 
+HEADER_SEARCH_PATHS = $(OF_HEADER_SEARCH_PATHS) $(OF_BASE_PATH)/addons/ofxOsc/** ../../../addons/ofxBt/libs/bullet/include/bullet ../../../addons/ofxCv/src ../../../addons/ofxCv/libs/ofxCv/include/ $(OF_BASE_PATH)/addons/ofxOpenCV/libs/opencv/include

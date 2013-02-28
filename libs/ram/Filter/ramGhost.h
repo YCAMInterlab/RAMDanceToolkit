@@ -21,25 +21,25 @@ public:
 		record.clear();
 	}
 
+	struct Preset
+	{
+		ramGhost *self;
+		float distance;
+		float speed;
+		
+		Preset(ramGhost *self, float distance, float speed) : self(self), distance(distance), speed(speed) {}
+		void operator()()
+		{
+			self->setSpeed(speed);
+			self->setDistance(distance);
+		}
+	};
+
 	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 
 		gui.addSection(getName());
-
-		struct Preset
-		{
-			ramGhost *self;
-			float distance;
-			float speed;
-
-			Preset(ramGhost *self, float distance, float speed) : self(self), distance(distance), speed(speed) {}
-			void operator()()
-			{
-				self->setSpeed(speed);
-				self->setDistance(distance);
-			}
-		};
 
 		gui.addButton("Ghost", Preset(this, 1.5, 240));
 		gui.addButton("Slow", Preset(this, 8.3, 74.4));
@@ -101,7 +101,7 @@ protected:
 			ramNode& node = ghost.getNode(i);
 			node.setGlobalPosition(vec);
 			node.setGlobalOrientation(quat);
-			node.getAccerelometer().update(vec, quat);
+			node.getAccelerometer().update(vec, quat);
 		}
 
 		return ghost;

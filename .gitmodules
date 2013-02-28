@@ -7,3 +7,6 @@
 [submodule "addons/ofxInteractivePrimitives"]
 	path = addons/ofxInteractivePrimitives
 	url = git@github.com:satoruhiga/ofxInteractivePrimitives.git
+[submodule "addons/ofxCv"]
+	path = addons/ofxCv
+	url = git@github.com:kylemcdonald/ofxCv.git

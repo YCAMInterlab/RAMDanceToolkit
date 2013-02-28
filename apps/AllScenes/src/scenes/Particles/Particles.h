@@ -42,7 +42,7 @@ public:
 	void update()
 	{
 		const vector<ramNodeArray>& NAs = filters.update(getAllNodeArrays());
-		
+        
 		for (int n = 0; n < NAs.size(); n++)
 		{
 			const ramNodeArray &NA = NAs[n];

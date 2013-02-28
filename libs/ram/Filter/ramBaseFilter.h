@@ -2,8 +2,7 @@
 
 #include "ofMain.h"
 
-#include "ramControllable.h"
-#include "ramControlPanel.h"
+#include "ramUnit.h"
 
 #include "ramActor.h"
 
@@ -39,14 +38,9 @@
 
  */
 
-class ramBaseFilter : public ramControllable, public ramGlobalShortcut
+class ramBaseFilter : public ramUnit
 {
 public:
-
-	virtual ~ramBaseFilter() {}
-
-	virtual void setupControlPanel() {}
-	virtual void setup() {}
 
 	inline const ramNodeArray& operator()(const ramNodeArray& src)
 	{
