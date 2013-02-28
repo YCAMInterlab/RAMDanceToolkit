@@ -7,7 +7,65 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6007A7AD16D5BCB40010E44B /* ramControlPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 6007A7AC16D5BCB40010E44B /* ramControlPanel.h */; };
+		274B3C2016DEFADA004F30A6 /* ramActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3BDD16DEFADA004F30A6 /* ramActor.cpp */; };
+		274B3C2116DEFADA004F30A6 /* ramActor.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BDE16DEFADA004F30A6 /* ramActor.h */; };
+		274B3C2216DEFADA004F30A6 /* ramActorManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3BDF16DEFADA004F30A6 /* ramActorManager.cpp */; };
+		274B3C2316DEFADA004F30A6 /* ramActorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BE016DEFADA004F30A6 /* ramActorManager.h */; };
+		274B3C2416DEFADA004F30A6 /* ramBaseApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3BE116DEFADA004F30A6 /* ramBaseApp.cpp */; };
+		274B3C2516DEFADA004F30A6 /* ramBaseApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BE216DEFADA004F30A6 /* ramBaseApp.h */; };
+		274B3C2616DEFADA004F30A6 /* ramCameraManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3BE316DEFADA004F30A6 /* ramCameraManager.cpp */; };
+		274B3C2716DEFADA004F30A6 /* ramCameraManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BE416DEFADA004F30A6 /* ramCameraManager.h */; };
+		274B3C2816DEFADA004F30A6 /* ramConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BE516DEFADA004F30A6 /* ramConstants.h */; };
+		274B3C2916DEFADA004F30A6 /* ramGlobal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3BE616DEFADA004F30A6 /* ramGlobal.cpp */; };
+		274B3C2A16DEFADA004F30A6 /* ramGlobal.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BE716DEFADA004F30A6 /* ramGlobal.h */; };
+		274B3C2B16DEFADA004F30A6 /* ramUnit.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BE816DEFADA004F30A6 /* ramUnit.h */; };
+		274B3C2C16DEFADA004F30A6 /* ramBaseEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BEA16DEFADA004F30A6 /* ramBaseEvent.h */; };
+		274B3C2D16DEFADA004F30A6 /* ramCollisionEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BEB16DEFADA004F30A6 /* ramCollisionEvent.h */; };
+		274B3C2E16DEFADA004F30A6 /* ramTimeEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BEC16DEFADA004F30A6 /* ramTimeEvent.h */; };
+		274B3C2F16DEFADA004F30A6 /* ramBaseFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BEE16DEFADA004F30A6 /* ramBaseFilter.h */; };
+		274B3C3016DEFADA004F30A6 /* ramExpansion.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BEF16DEFADA004F30A6 /* ramExpansion.h */; };
+		274B3C3116DEFADA004F30A6 /* ramGhost.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BF016DEFADA004F30A6 /* ramGhost.h */; };
+		274B3C3216DEFADA004F30A6 /* ramLowPassFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BF116DEFADA004F30A6 /* ramLowPassFilter.h */; };
+		274B3C3316DEFADA004F30A6 /* ramNodeTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BF216DEFADA004F30A6 /* ramNodeTransform.h */; };
+		274B3C3416DEFADA004F30A6 /* ramPendulum.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BF316DEFADA004F30A6 /* ramPendulum.h */; };
+		274B3C3516DEFADA004F30A6 /* ramSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BF416DEFADA004F30A6 /* ramSession.h */; };
+		274B3C3616DEFADA004F30A6 /* ramStamp.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BF516DEFADA004F30A6 /* ramStamp.h */; };
+		274B3C3716DEFADA004F30A6 /* ramTimeFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BF616DEFADA004F30A6 /* ramTimeFilter.h */; };
+		274B3C3816DEFADA004F30A6 /* ramUpsideDown.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BF716DEFADA004F30A6 /* ramUpsideDown.h */; };
+		274B3C3916DEFADA004F30A6 /* ramGraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3BF916DEFADA004F30A6 /* ramGraphics.cpp */; };
+		274B3C3A16DEFADA004F30A6 /* ramGraphics.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BFA16DEFADA004F30A6 /* ramGraphics.h */; };
+		274B3C3B16DEFADA004F30A6 /* ramGraphView.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BFB16DEFADA004F30A6 /* ramGraphView.h */; };
+		274B3C3C16DEFADA004F30A6 /* ramNodeLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3BFC16DEFADA004F30A6 /* ramNodeLine.cpp */; };
+		274B3C3D16DEFADA004F30A6 /* ramNodeLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BFD16DEFADA004F30A6 /* ramNodeLine.h */; };
+		274B3C3E16DEFADA004F30A6 /* ramPrimitive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3BFE16DEFADA004F30A6 /* ramPrimitive.cpp */; };
+		274B3C3F16DEFADA004F30A6 /* ramPrimitive.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3BFF16DEFADA004F30A6 /* ramPrimitive.h */; };
+		274B3C4016DEFADA004F30A6 /* ramSimpleShadow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3C0016DEFADA004F30A6 /* ramSimpleShadow.cpp */; };
+		274B3C4116DEFADA004F30A6 /* ramSimpleShadow.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C0116DEFADA004F30A6 /* ramSimpleShadow.h */; };
+		274B3C4216DEFADA004F30A6 /* ramSoftBodyPrimitive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3C0216DEFADA004F30A6 /* ramSoftBodyPrimitive.cpp */; };
+		274B3C4316DEFADA004F30A6 /* ramSoftBodyPrimitive.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C0316DEFADA004F30A6 /* ramSoftBodyPrimitive.h */; };
+		274B3C4416DEFADA004F30A6 /* ramPhysics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3C0516DEFADA004F30A6 /* ramPhysics.cpp */; };
+		274B3C4516DEFADA004F30A6 /* ramPhysics.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C0616DEFADA004F30A6 /* ramPhysics.h */; };
+		274B3C4616DEFADA004F30A6 /* ramMain.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C0716DEFADA004F30A6 /* ramMain.h */; };
+		274B3C4716DEFADA004F30A6 /* ramBaseRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C0916DEFADA004F30A6 /* ramBaseRecognizer.h */; };
+		274B3C4816DEFADA004F30A6 /* ramRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C0A16DEFADA004F30A6 /* ramRecognizer.h */; };
+		274B3C4916DEFADA004F30A6 /* ramBaseScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C0C16DEFADA004F30A6 /* ramBaseScene.h */; };
+		274B3C4A16DEFADA004F30A6 /* ramSceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3C0D16DEFADA004F30A6 /* ramSceneManager.cpp */; };
+		274B3C4B16DEFADA004F30A6 /* ramSceneManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C0E16DEFADA004F30A6 /* ramSceneManager.h */; };
+		274B3C4C16DEFADA004F30A6 /* ramControllable.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1016DEFADA004F30A6 /* ramControllable.h */; };
+		274B3C4D16DEFADA004F30A6 /* ramControlPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1116DEFADA004F30A6 /* ramControlPanel.h */; };
+		274B3C4E16DEFADA004F30A6 /* ramControlPanelBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1216DEFADA004F30A6 /* ramControlPanelBase.h */; };
+		274B3C4F16DEFADA004F30A6 /* ramOfxUIControlPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3C1316DEFADA004F30A6 /* ramOfxUIControlPanel.cpp */; };
+		274B3C5016DEFADA004F30A6 /* ramOfxUIControlPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1416DEFADA004F30A6 /* ramOfxUIControlPanel.h */; };
+		274B3C5116DEFADA004F30A6 /* ramSceneTabs.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1516DEFADA004F30A6 /* ramSceneTabs.h */; };
+		274B3C5216DEFADA004F30A6 /* ramCameraSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3C1716DEFADA004F30A6 /* ramCameraSettings.cpp */; };
+		274B3C5316DEFADA004F30A6 /* ramCameraSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1816DEFADA004F30A6 /* ramCameraSettings.h */; };
+		274B3C5416DEFADA004F30A6 /* ramNodeArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1916DEFADA004F30A6 /* ramNodeArrayBuffer.h */; };
+		274B3C5516DEFADA004F30A6 /* ramNodeFinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1A16DEFADA004F30A6 /* ramNodeFinder.h */; };
+		274B3C5616DEFADA004F30A6 /* ramNodeIdentifer.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1B16DEFADA004F30A6 /* ramNodeIdentifer.h */; };
+		274B3C5716DEFADA004F30A6 /* ramSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1C16DEFADA004F30A6 /* ramSession.h */; };
+		274B3C5816DEFADA004F30A6 /* ramTimeShifter.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1D16DEFADA004F30A6 /* ramTimeShifter.h */; };
+		274B3C5916DEFADA004F30A6 /* ramUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3C1E16DEFADA004F30A6 /* ramUtils.cpp */; };
+		274B3C5A16DEFADA004F30A6 /* ramUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1F16DEFADA004F30A6 /* ramUtils.h */; };
 		600EFB1A16C8F56800A5B331 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 600EFAF616C8F56800A5B331 /* IpEndpointName.cpp */; };
 		600EFB1B16C8F56800A5B331 /* IpEndpointName.h in Headers */ = {isa = PBXBuildFile; fileRef = 600EFAF716C8F56800A5B331 /* IpEndpointName.h */; };
 		600EFB1C16C8F56800A5B331 /* NetworkingUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 600EFAF816C8F56800A5B331 /* NetworkingUtils.h */; };
@@ -46,11 +104,6 @@
 		600EFB4616C8F59700A5B331 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 600EFB3F16C8F59700A5B331 /* tinyxmlparser.cpp */; };
 		600EFB4716C8F59700A5B331 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 600EFB4116C8F59700A5B331 /* ofxXmlSettings.cpp */; };
 		600EFB4816C8F59700A5B331 /* ofxXmlSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 600EFB4216C8F59700A5B331 /* ofxXmlSettings.h */; };
-		6016C92416D6214D006A578D /* ramTimeEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6016C92316D6214D006A578D /* ramTimeEvent.h */; };
-		6016C92616D62DB4006A578D /* ramBaseEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6016C92516D62DB4006A578D /* ramBaseEvent.h */; };
-		6016C92816D62F03006A578D /* ramCollisionEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6016C92716D62F03006A578D /* ramCollisionEvent.h */; };
-		6016C92B16D642FC006A578D /* ramSoftBodyPrimitive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6016C92916D642FB006A578D /* ramSoftBodyPrimitive.cpp */; };
-		6016C92C16D642FC006A578D /* ramSoftBodyPrimitive.h in Headers */ = {isa = PBXBuildFile; fileRef = 6016C92A16D642FC006A578D /* ramSoftBodyPrimitive.h */; };
 		60314DF916CFC6B400138384 /* btBulletCollisionCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 60314D1416CFC6B400138384 /* btBulletCollisionCommon.h */; };
 		60314DFA16CFC6B400138384 /* btBulletDynamicsCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 60314D1516CFC6B400138384 /* btBulletDynamicsCommon.h */; };
 		60314DFB16CFC6B400138384 /* Bullet-C-Api.h in Headers */ = {isa = PBXBuildFile; fileRef = 60314D1616CFC6B400138384 /* Bullet-C-Api.h */; };
@@ -257,51 +310,8 @@
 		60314EC416CFC6B400138384 /* ofxBtSoftBodyWorld.h in Headers */ = {isa = PBXBuildFile; fileRef = 60314DF016CFC6B400138384 /* ofxBtSoftBodyWorld.h */; };
 		60314EC516CFC6B400138384 /* ofxBtWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60314DF116CFC6B400138384 /* ofxBtWorld.cpp */; };
 		60314EC616CFC6B400138384 /* ofxBtWorld.h in Headers */ = {isa = PBXBuildFile; fileRef = 60314DF216CFC6B400138384 /* ofxBtWorld.h */; };
-		6032635D16D7A17F0039D55D /* ramGlobal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6032635C16D7A17F0039D55D /* ramGlobal.cpp */; };
-		60426F9816CE1A5300C99541 /* ramExpansion.h in Headers */ = {isa = PBXBuildFile; fileRef = 60426F9716CE1A5300C99541 /* ramExpansion.h */; };
-		607A91A616D2B4A40038D472 /* ramNodeArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 607A91A516D2B4A40038D472 /* ramNodeArrayBuffer.h */; };
-		607A91A816D2B52C0038D472 /* ramTimeFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 607A91A716D2B52C0038D472 /* ramTimeFilter.h */; };
 		60813DF616DCAFCD005A1F85 /* ofxNodeArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60813DF416DCAFCD005A1F85 /* ofxNodeArray.cpp */; };
 		60813DF716DCAFCD005A1F85 /* ofxNodeArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 60813DF516DCAFCD005A1F85 /* ofxNodeArray.h */; };
-		609A653716CAC57C00C0AB22 /* ramActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A650716CAC57C00C0AB22 /* ramActor.cpp */; };
-		609A653816CAC57C00C0AB22 /* ramActor.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A650816CAC57C00C0AB22 /* ramActor.h */; };
-		609A653916CAC57C00C0AB22 /* ramActorManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A650916CAC57C00C0AB22 /* ramActorManager.cpp */; };
-		609A653A16CAC57C00C0AB22 /* ramActorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A650A16CAC57C00C0AB22 /* ramActorManager.h */; };
-		609A653B16CAC57C00C0AB22 /* ramBaseApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A650B16CAC57C00C0AB22 /* ramBaseApp.cpp */; };
-		609A653C16CAC57C00C0AB22 /* ramBaseApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A650C16CAC57C00C0AB22 /* ramBaseApp.h */; };
-		609A653D16CAC57C00C0AB22 /* ramCameraManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A650D16CAC57C00C0AB22 /* ramCameraManager.cpp */; };
-		609A653E16CAC57C00C0AB22 /* ramCameraManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A650E16CAC57C00C0AB22 /* ramCameraManager.h */; };
-		609A653F16CAC57C00C0AB22 /* ramConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A650F16CAC57C00C0AB22 /* ramConstants.h */; };
-		609A654516CAC57C00C0AB22 /* ramGhost.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651616CAC57C00C0AB22 /* ramGhost.h */; };
-		609A654616CAC57C00C0AB22 /* ramUpsideDown.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651716CAC57C00C0AB22 /* ramUpsideDown.h */; };
-		609A654716CAC57C00C0AB22 /* ramPendulum.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651816CAC57C00C0AB22 /* ramPendulum.h */; };
-		609A654816CAC57C00C0AB22 /* ramGraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A651A16CAC57C00C0AB22 /* ramGraphics.cpp */; };
-		609A654916CAC57C00C0AB22 /* ramGraphics.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651B16CAC57C00C0AB22 /* ramGraphics.h */; };
-		609A654A16CAC57C00C0AB22 /* ramNodeLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A651C16CAC57C00C0AB22 /* ramNodeLine.cpp */; };
-		609A654B16CAC57C00C0AB22 /* ramNodeLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651D16CAC57C00C0AB22 /* ramNodeLine.h */; };
-		609A654C16CAC57C00C0AB22 /* ramPrimitive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A651E16CAC57C00C0AB22 /* ramPrimitive.cpp */; };
-		609A654D16CAC57C00C0AB22 /* ramPrimitive.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A651F16CAC57C00C0AB22 /* ramPrimitive.h */; };
-		609A654E16CAC57C00C0AB22 /* ramSimpleShadow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A652016CAC57C00C0AB22 /* ramSimpleShadow.cpp */; };
-		609A654F16CAC57C00C0AB22 /* ramSimpleShadow.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A652116CAC57C00C0AB22 /* ramSimpleShadow.h */; };
-		609A655016CAC57C00C0AB22 /* ramPhysics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A652316CAC57C00C0AB22 /* ramPhysics.cpp */; };
-		609A655116CAC57C00C0AB22 /* ramPhysics.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A652416CAC57C00C0AB22 /* ramPhysics.h */; };
-		609A655216CAC57C00C0AB22 /* ramMain.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A652516CAC57C00C0AB22 /* ramMain.h */; };
-		609A655316CAC57C00C0AB22 /* ramBaseScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A652716CAC57C00C0AB22 /* ramBaseScene.h */; };
-		609A655416CAC57C00C0AB22 /* ramSceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A652816CAC57C00C0AB22 /* ramSceneManager.cpp */; };
-		609A655516CAC57C00C0AB22 /* ramSceneManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A652916CAC57C00C0AB22 /* ramSceneManager.h */; };
-		609A655616CAC57C00C0AB22 /* ramControllable.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A652B16CAC57C00C0AB22 /* ramControllable.h */; };
-		609A655716CAC57C00C0AB22 /* ramOfxUIControlPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A652C16CAC57C00C0AB22 /* ramOfxUIControlPanel.cpp */; };
-		609A655816CAC57C00C0AB22 /* ramOfxUIControlPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A652D16CAC57C00C0AB22 /* ramOfxUIControlPanel.h */; };
-		609A655916CAC57C00C0AB22 /* ramCameraSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A652F16CAC57C00C0AB22 /* ramCameraSettings.cpp */; };
-		609A655A16CAC57C00C0AB22 /* ramCameraSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A653016CAC57C00C0AB22 /* ramCameraSettings.h */; };
-		609A655B16CAC57C00C0AB22 /* ramNodeFinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A653116CAC57C00C0AB22 /* ramNodeFinder.h */; };
-		609A655C16CAC57C00C0AB22 /* ramNodeIdentifer.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A653216CAC57C00C0AB22 /* ramNodeIdentifer.h */; };
-		609A655D16CAC57C00C0AB22 /* ramOscReciever.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A653316CAC57C00C0AB22 /* ramOscReciever.h */; };
-		609A655F16CAC57C00C0AB22 /* ramUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 609A653516CAC57C00C0AB22 /* ramUtils.cpp */; };
-		609A656016CAC57C00C0AB22 /* ramUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A653616CAC57C00C0AB22 /* ramUtils.h */; };
-		609A656216CAC9C300C0AB22 /* ramGlobal.h in Headers */ = {isa = PBXBuildFile; fileRef = 609A656116CAC9C300C0AB22 /* ramGlobal.h */; };
-		60A9B79816D2CD3D0079E701 /* ramControlPanelBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 60A9B79716D2CD3D0079E701 /* ramControlPanelBase.h */; };
-		60CFE13816CCA766000050C8 /* ramTimeShifter.h in Headers */ = {isa = PBXBuildFile; fileRef = 60CFE13716CCA766000050C8 /* ramTimeShifter.h */; };
 		60D49DF516DE5975003BA064 /* Calibration.h in Headers */ = {isa = PBXBuildFile; fileRef = 60D49D7C16DE5974003BA064 /* Calibration.h */; };
 		60D49DF616DE5975003BA064 /* ContourFinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 60D49D7D16DE5974003BA064 /* ContourFinder.h */; };
 		60D49DF716DE5975003BA064 /* Distance.h in Headers */ = {isa = PBXBuildFile; fileRef = 60D49D7E16DE5974003BA064 /* Distance.h */; };
@@ -404,12 +414,6 @@
 		60D49F2116DE79B2003BA064 /* tracking.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 60D49EB916DE79B2003BA064 /* tracking.hpp */; };
 		60D49F2216DE79B2003BA064 /* video.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 60D49EBA16DE79B2003BA064 /* video.hpp */; };
 		60D49F2316DE79B2003BA064 /* opencv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D49EBD16DE79B2003BA064 /* opencv.a */; };
-		60DA905216CE7DAF00E392B5 /* ramNodeTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 60DA905116CE7DAF00E392B5 /* ramNodeTransform.h */; };
-		60EF104716D0C45700A37B2A /* ramGraphView.h in Headers */ = {isa = PBXBuildFile; fileRef = 60EF104616D0C45700A37B2A /* ramGraphView.h */; };
-		60FFDB5516CD1F2F0093F734 /* ramBaseFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FFDB5416CD1F2F0093F734 /* ramBaseFilter.h */; };
-		9A02CDAD16CBD9610055E1AC /* ramStamp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A02CDAC16CBD9610055E1AC /* ramStamp.h */; };
-		9A02CDB016CBD96D0055E1AC /* ramSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A02CDAE16CBD96D0055E1AC /* ramSession.h */; };
-		9A2B3FC616D366F4001CBFC9 /* ramLowPassFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A2B3FC516D366F4001CBFC9 /* ramLowPassFilter.h */; };
 		9AD6F5A316B926C000F7F51E /* ofxUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F4FF16B926BF00F7F51E /* ofxUI.h */; };
 		9AD6F5A416B926C000F7F51E /* ofxUI2DPad.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F50016B926BF00F7F51E /* ofxUI2DPad.h */; };
 		9AD6F5A516B926C000F7F51E /* ofxUIBaseDraws.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F50116B926BF00F7F51E /* ofxUIBaseDraws.h */; };
@@ -453,7 +457,6 @@
 		9AD6F5CB16B926C000F7F51E /* ofxUIWidgetWithLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F52716B926BF00F7F51E /* ofxUIWidgetWithLabel.h */; };
 		9AD6F5CC16B926C000F7F51E /* ofxUITabbedCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6F52916B926BF00F7F51E /* ofxUITabbedCanvas.cpp */; };
 		9AD6F5CD16B926C000F7F51E /* ofxUITabbedCanvas.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F52A16B926BF00F7F51E /* ofxUITabbedCanvas.h */; };
-		9ADAF14216DC8D96008C618C /* ramRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9ADAF14116DC8D96008C618C /* ramRecognizer.h */; };
 		9AF81AF516C93C0300C1A560 /* ofxInteractivePrimitives.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AF81AEC16C93C0300C1A560 /* ofxInteractivePrimitives.cpp */; };
 		9AF81AF616C93C0300C1A560 /* ofxInteractivePrimitives.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AF81AED16C93C0300C1A560 /* ofxInteractivePrimitives.h */; };
 		9AF81AF716C93C0300C1A560 /* ofxIPButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AF81AEF16C93C0300C1A560 /* ofxIPButton.h */; };
@@ -462,7 +465,65 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6007A7AC16D5BCB40010E44B /* ramControlPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramControlPanel.h; sourceTree = "<group>"; };
+		274B3BDD16DEFADA004F30A6 /* ramActor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramActor.cpp; sourceTree = "<group>"; };
+		274B3BDE16DEFADA004F30A6 /* ramActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramActor.h; sourceTree = "<group>"; };
+		274B3BDF16DEFADA004F30A6 /* ramActorManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramActorManager.cpp; sourceTree = "<group>"; };
+		274B3BE016DEFADA004F30A6 /* ramActorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramActorManager.h; sourceTree = "<group>"; };
+		274B3BE116DEFADA004F30A6 /* ramBaseApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramBaseApp.cpp; sourceTree = "<group>"; };
+		274B3BE216DEFADA004F30A6 /* ramBaseApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramBaseApp.h; sourceTree = "<group>"; };
+		274B3BE316DEFADA004F30A6 /* ramCameraManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramCameraManager.cpp; sourceTree = "<group>"; };
+		274B3BE416DEFADA004F30A6 /* ramCameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramCameraManager.h; sourceTree = "<group>"; };
+		274B3BE516DEFADA004F30A6 /* ramConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramConstants.h; sourceTree = "<group>"; };
+		274B3BE616DEFADA004F30A6 /* ramGlobal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramGlobal.cpp; sourceTree = "<group>"; };
+		274B3BE716DEFADA004F30A6 /* ramGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramGlobal.h; sourceTree = "<group>"; };
+		274B3BE816DEFADA004F30A6 /* ramUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramUnit.h; sourceTree = "<group>"; };
+		274B3BEA16DEFADA004F30A6 /* ramBaseEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramBaseEvent.h; sourceTree = "<group>"; };
+		274B3BEB16DEFADA004F30A6 /* ramCollisionEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramCollisionEvent.h; sourceTree = "<group>"; };
+		274B3BEC16DEFADA004F30A6 /* ramTimeEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramTimeEvent.h; sourceTree = "<group>"; };
+		274B3BEE16DEFADA004F30A6 /* ramBaseFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramBaseFilter.h; sourceTree = "<group>"; };
+		274B3BEF16DEFADA004F30A6 /* ramExpansion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramExpansion.h; sourceTree = "<group>"; };
+		274B3BF016DEFADA004F30A6 /* ramGhost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramGhost.h; sourceTree = "<group>"; };
+		274B3BF116DEFADA004F30A6 /* ramLowPassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramLowPassFilter.h; sourceTree = "<group>"; };
+		274B3BF216DEFADA004F30A6 /* ramNodeTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeTransform.h; sourceTree = "<group>"; };
+		274B3BF316DEFADA004F30A6 /* ramPendulum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPendulum.h; sourceTree = "<group>"; };
+		274B3BF416DEFADA004F30A6 /* ramSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSession.h; sourceTree = "<group>"; };
+		274B3BF516DEFADA004F30A6 /* ramStamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramStamp.h; sourceTree = "<group>"; };
+		274B3BF616DEFADA004F30A6 /* ramTimeFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramTimeFilter.h; sourceTree = "<group>"; };
+		274B3BF716DEFADA004F30A6 /* ramUpsideDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramUpsideDown.h; sourceTree = "<group>"; };
+		274B3BF916DEFADA004F30A6 /* ramGraphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramGraphics.cpp; sourceTree = "<group>"; };
+		274B3BFA16DEFADA004F30A6 /* ramGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramGraphics.h; sourceTree = "<group>"; };
+		274B3BFB16DEFADA004F30A6 /* ramGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramGraphView.h; sourceTree = "<group>"; };
+		274B3BFC16DEFADA004F30A6 /* ramNodeLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramNodeLine.cpp; sourceTree = "<group>"; };
+		274B3BFD16DEFADA004F30A6 /* ramNodeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeLine.h; sourceTree = "<group>"; };
+		274B3BFE16DEFADA004F30A6 /* ramPrimitive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramPrimitive.cpp; sourceTree = "<group>"; };
+		274B3BFF16DEFADA004F30A6 /* ramPrimitive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPrimitive.h; sourceTree = "<group>"; };
+		274B3C0016DEFADA004F30A6 /* ramSimpleShadow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramSimpleShadow.cpp; sourceTree = "<group>"; };
+		274B3C0116DEFADA004F30A6 /* ramSimpleShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSimpleShadow.h; sourceTree = "<group>"; };
+		274B3C0216DEFADA004F30A6 /* ramSoftBodyPrimitive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramSoftBodyPrimitive.cpp; sourceTree = "<group>"; };
+		274B3C0316DEFADA004F30A6 /* ramSoftBodyPrimitive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSoftBodyPrimitive.h; sourceTree = "<group>"; };
+		274B3C0516DEFADA004F30A6 /* ramPhysics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramPhysics.cpp; sourceTree = "<group>"; };
+		274B3C0616DEFADA004F30A6 /* ramPhysics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPhysics.h; sourceTree = "<group>"; };
+		274B3C0716DEFADA004F30A6 /* ramMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramMain.h; sourceTree = "<group>"; };
+		274B3C0916DEFADA004F30A6 /* ramBaseRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramBaseRecognizer.h; sourceTree = "<group>"; };
+		274B3C0A16DEFADA004F30A6 /* ramRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramRecognizer.h; sourceTree = "<group>"; };
+		274B3C0C16DEFADA004F30A6 /* ramBaseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramBaseScene.h; sourceTree = "<group>"; };
+		274B3C0D16DEFADA004F30A6 /* ramSceneManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramSceneManager.cpp; sourceTree = "<group>"; };
+		274B3C0E16DEFADA004F30A6 /* ramSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSceneManager.h; sourceTree = "<group>"; };
+		274B3C1016DEFADA004F30A6 /* ramControllable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramControllable.h; sourceTree = "<group>"; };
+		274B3C1116DEFADA004F30A6 /* ramControlPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramControlPanel.h; sourceTree = "<group>"; };
+		274B3C1216DEFADA004F30A6 /* ramControlPanelBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramControlPanelBase.h; sourceTree = "<group>"; };
+		274B3C1316DEFADA004F30A6 /* ramOfxUIControlPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramOfxUIControlPanel.cpp; sourceTree = "<group>"; };
+		274B3C1416DEFADA004F30A6 /* ramOfxUIControlPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramOfxUIControlPanel.h; sourceTree = "<group>"; };
+		274B3C1516DEFADA004F30A6 /* ramSceneTabs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSceneTabs.h; sourceTree = "<group>"; };
+		274B3C1716DEFADA004F30A6 /* ramCameraSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramCameraSettings.cpp; sourceTree = "<group>"; };
+		274B3C1816DEFADA004F30A6 /* ramCameraSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramCameraSettings.h; sourceTree = "<group>"; };
+		274B3C1916DEFADA004F30A6 /* ramNodeArrayBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeArrayBuffer.h; sourceTree = "<group>"; };
+		274B3C1A16DEFADA004F30A6 /* ramNodeFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeFinder.h; sourceTree = "<group>"; };
+		274B3C1B16DEFADA004F30A6 /* ramNodeIdentifer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeIdentifer.h; sourceTree = "<group>"; };
+		274B3C1C16DEFADA004F30A6 /* ramSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSession.h; sourceTree = "<group>"; };
+		274B3C1D16DEFADA004F30A6 /* ramTimeShifter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramTimeShifter.h; sourceTree = "<group>"; };
+		274B3C1E16DEFADA004F30A6 /* ramUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramUtils.cpp; sourceTree = "<group>"; };
+		274B3C1F16DEFADA004F30A6 /* ramUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramUtils.h; sourceTree = "<group>"; };
 		600EFAF116C8F56800A5B331 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
 		600EFAF616C8F56800A5B331 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		600EFAF716C8F56800A5B331 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
@@ -502,11 +563,6 @@
 		600EFB3F16C8F59700A5B331 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		600EFB4116C8F59700A5B331 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		600EFB4216C8F59700A5B331 /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
-		6016C92316D6214D006A578D /* ramTimeEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramTimeEvent.h; sourceTree = "<group>"; };
-		6016C92516D62DB4006A578D /* ramBaseEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramBaseEvent.h; sourceTree = "<group>"; };
-		6016C92716D62F03006A578D /* ramCollisionEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramCollisionEvent.h; sourceTree = "<group>"; };
-		6016C92916D642FB006A578D /* ramSoftBodyPrimitive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramSoftBodyPrimitive.cpp; sourceTree = "<group>"; };
-		6016C92A16D642FC006A578D /* ramSoftBodyPrimitive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSoftBodyPrimitive.h; sourceTree = "<group>"; };
 		60314D1116CFC6B400138384 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
 		60314D1416CFC6B400138384 /* btBulletCollisionCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletCollisionCommon.h; sourceTree = "<group>"; };
 		60314D1516CFC6B400138384 /* btBulletDynamicsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletDynamicsCommon.h; sourceTree = "<group>"; };
@@ -714,54 +770,10 @@
 		60314DF016CFC6B400138384 /* ofxBtSoftBodyWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtSoftBodyWorld.h; sourceTree = "<group>"; };
 		60314DF116CFC6B400138384 /* ofxBtWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBtWorld.cpp; sourceTree = "<group>"; };
 		60314DF216CFC6B400138384 /* ofxBtWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtWorld.h; sourceTree = "<group>"; };
-		6032635C16D7A17F0039D55D /* ramGlobal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramGlobal.cpp; sourceTree = "<group>"; };
-		60426F9716CE1A5300C99541 /* ramExpansion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramExpansion.h; sourceTree = "<group>"; };
-		607A91A516D2B4A40038D472 /* ramNodeArrayBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeArrayBuffer.h; sourceTree = "<group>"; };
-		607A91A716D2B52C0038D472 /* ramTimeFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramTimeFilter.h; sourceTree = "<group>"; };
 		60813DF416DCAFCD005A1F85 /* ofxNodeArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxNodeArray.cpp; sourceTree = "<group>"; };
 		60813DF516DCAFCD005A1F85 /* ofxNodeArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxNodeArray.h; sourceTree = "<group>"; };
-		609A650716CAC57C00C0AB22 /* ramActor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramActor.cpp; sourceTree = "<group>"; };
-		609A650816CAC57C00C0AB22 /* ramActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramActor.h; sourceTree = "<group>"; };
-		609A650916CAC57C00C0AB22 /* ramActorManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramActorManager.cpp; sourceTree = "<group>"; };
-		609A650A16CAC57C00C0AB22 /* ramActorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramActorManager.h; sourceTree = "<group>"; };
-		609A650B16CAC57C00C0AB22 /* ramBaseApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramBaseApp.cpp; sourceTree = "<group>"; };
-		609A650C16CAC57C00C0AB22 /* ramBaseApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ramBaseApp.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		609A650D16CAC57C00C0AB22 /* ramCameraManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramCameraManager.cpp; sourceTree = "<group>"; };
-		609A650E16CAC57C00C0AB22 /* ramCameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramCameraManager.h; sourceTree = "<group>"; };
-		609A650F16CAC57C00C0AB22 /* ramConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramConstants.h; sourceTree = "<group>"; };
-		609A651616CAC57C00C0AB22 /* ramGhost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramGhost.h; sourceTree = "<group>"; };
-		609A651716CAC57C00C0AB22 /* ramUpsideDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramUpsideDown.h; sourceTree = "<group>"; };
-		609A651816CAC57C00C0AB22 /* ramPendulum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPendulum.h; sourceTree = "<group>"; };
-		609A651A16CAC57C00C0AB22 /* ramGraphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramGraphics.cpp; sourceTree = "<group>"; };
-		609A651B16CAC57C00C0AB22 /* ramGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramGraphics.h; sourceTree = "<group>"; };
-		609A651C16CAC57C00C0AB22 /* ramNodeLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramNodeLine.cpp; sourceTree = "<group>"; };
-		609A651D16CAC57C00C0AB22 /* ramNodeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeLine.h; sourceTree = "<group>"; };
-		609A651E16CAC57C00C0AB22 /* ramPrimitive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramPrimitive.cpp; sourceTree = "<group>"; };
-		609A651F16CAC57C00C0AB22 /* ramPrimitive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPrimitive.h; sourceTree = "<group>"; };
-		609A652016CAC57C00C0AB22 /* ramSimpleShadow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramSimpleShadow.cpp; sourceTree = "<group>"; };
-		609A652116CAC57C00C0AB22 /* ramSimpleShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSimpleShadow.h; sourceTree = "<group>"; };
-		609A652316CAC57C00C0AB22 /* ramPhysics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramPhysics.cpp; sourceTree = "<group>"; };
-		609A652416CAC57C00C0AB22 /* ramPhysics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPhysics.h; sourceTree = "<group>"; };
-		609A652516CAC57C00C0AB22 /* ramMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramMain.h; sourceTree = "<group>"; };
-		609A652716CAC57C00C0AB22 /* ramBaseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ramBaseScene.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		609A652816CAC57C00C0AB22 /* ramSceneManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramSceneManager.cpp; sourceTree = "<group>"; };
-		609A652916CAC57C00C0AB22 /* ramSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ramSceneManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		609A652B16CAC57C00C0AB22 /* ramControllable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramControllable.h; sourceTree = "<group>"; };
-		609A652C16CAC57C00C0AB22 /* ramOfxUIControlPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramOfxUIControlPanel.cpp; sourceTree = "<group>"; };
-		609A652D16CAC57C00C0AB22 /* ramOfxUIControlPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramOfxUIControlPanel.h; sourceTree = "<group>"; };
-		609A652F16CAC57C00C0AB22 /* ramCameraSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramCameraSettings.cpp; sourceTree = "<group>"; };
-		609A653016CAC57C00C0AB22 /* ramCameraSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramCameraSettings.h; sourceTree = "<group>"; };
-		609A653116CAC57C00C0AB22 /* ramNodeFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeFinder.h; sourceTree = "<group>"; };
-		609A653216CAC57C00C0AB22 /* ramNodeIdentifer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeIdentifer.h; sourceTree = "<group>"; };
-		609A653316CAC57C00C0AB22 /* ramOscReciever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramOscReciever.h; sourceTree = "<group>"; };
-		609A653516CAC57C00C0AB22 /* ramUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramUtils.cpp; sourceTree = "<group>"; };
-		609A653616CAC57C00C0AB22 /* ramUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramUtils.h; sourceTree = "<group>"; };
-		609A656116CAC9C300C0AB22 /* ramGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramGlobal.h; sourceTree = "<group>"; };
-		60A9B79716D2CD3D0079E701 /* ramControlPanelBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramControlPanelBase.h; sourceTree = "<group>"; };
 		60B90A8B1644E00900AF2156 /* libram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libram.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		60B90AAA1644E09400AF2156 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		60CFE13716CCA766000050C8 /* ramTimeShifter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramTimeShifter.h; sourceTree = "<group>"; };
-		60CFE13916CCA76F000050C8 /* ramStamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramStamp.h; sourceTree = "<group>"; };
 		60D49D7816DE5974003BA064 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		60D49D7C16DE5974003BA064 /* Calibration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Calibration.h; sourceTree = "<group>"; };
 		60D49D7D16DE5974003BA064 /* ContourFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContourFinder.h; sourceTree = "<group>"; };
@@ -867,12 +879,6 @@
 		60D49EB916DE79B2003BA064 /* tracking.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tracking.hpp; sourceTree = "<group>"; };
 		60D49EBA16DE79B2003BA064 /* video.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = video.hpp; sourceTree = "<group>"; };
 		60D49EBD16DE79B2003BA064 /* opencv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = opencv.a; sourceTree = "<group>"; };
-		60DA905116CE7DAF00E392B5 /* ramNodeTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeTransform.h; sourceTree = "<group>"; };
-		60EF104616D0C45700A37B2A /* ramGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ramGraphView.h; path = ../Graphics/ramGraphView.h; sourceTree = "<group>"; };
-		60FFDB5416CD1F2F0093F734 /* ramBaseFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramBaseFilter.h; sourceTree = "<group>"; };
-		9A02CDAC16CBD9610055E1AC /* ramStamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramStamp.h; sourceTree = "<group>"; };
-		9A02CDAE16CBD96D0055E1AC /* ramSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSession.h; sourceTree = "<group>"; };
-		9A2B3FC516D366F4001CBFC9 /* ramLowPassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramLowPassFilter.h; sourceTree = "<group>"; };
 		9AD6F4FF16B926BF00F7F51E /* ofxUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI.h; sourceTree = "<group>"; };
 		9AD6F50016B926BF00F7F51E /* ofxUI2DPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI2DPad.h; sourceTree = "<group>"; };
 		9AD6F50116B926BF00F7F51E /* ofxUIBaseDraws.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIBaseDraws.h; sourceTree = "<group>"; };
@@ -916,7 +922,6 @@
 		9AD6F52716B926BF00F7F51E /* ofxUIWidgetWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWidgetWithLabel.h; sourceTree = "<group>"; };
 		9AD6F52916B926BF00F7F51E /* ofxUITabbedCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUITabbedCanvas.cpp; sourceTree = "<group>"; };
 		9AD6F52A16B926BF00F7F51E /* ofxUITabbedCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUITabbedCanvas.h; sourceTree = "<group>"; };
-		9ADAF14116DC8D96008C618C /* ramRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramRecognizer.h; sourceTree = "<group>"; };
 		9AF81AEC16C93C0300C1A560 /* ofxInteractivePrimitives.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxInteractivePrimitives.cpp; sourceTree = "<group>"; };
 		9AF81AED16C93C0300C1A560 /* ofxInteractivePrimitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxInteractivePrimitives.h; sourceTree = "<group>"; };
 		9AF81AEF16C93C0300C1A560 /* ofxIPButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxIPButton.h; sourceTree = "<group>"; };
@@ -940,6 +945,145 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		274B3BDB16DEFADA004F30A6 /* ram */ = {
+			isa = PBXGroup;
+			children = (
+				274B3BDC16DEFADA004F30A6 /* Core */,
+				274B3BE916DEFADA004F30A6 /* Event */,
+				274B3BED16DEFADA004F30A6 /* Filter */,
+				274B3BF816DEFADA004F30A6 /* Graphics */,
+				274B3C0416DEFADA004F30A6 /* Physics */,
+				274B3C0716DEFADA004F30A6 /* ramMain.h */,
+				274B3C0816DEFADA004F30A6 /* Recognizer */,
+				274B3C0B16DEFADA004F30A6 /* Scene */,
+				274B3C0F16DEFADA004F30A6 /* UI */,
+				274B3C1616DEFADA004F30A6 /* Utility */,
+			);
+			name = ram;
+			path = ../../ram;
+			sourceTree = "<group>";
+		};
+		274B3BDC16DEFADA004F30A6 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				274B3BDD16DEFADA004F30A6 /* ramActor.cpp */,
+				274B3BDE16DEFADA004F30A6 /* ramActor.h */,
+				274B3BDF16DEFADA004F30A6 /* ramActorManager.cpp */,
+				274B3BE016DEFADA004F30A6 /* ramActorManager.h */,
+				274B3BE116DEFADA004F30A6 /* ramBaseApp.cpp */,
+				274B3BE216DEFADA004F30A6 /* ramBaseApp.h */,
+				274B3BE316DEFADA004F30A6 /* ramCameraManager.cpp */,
+				274B3BE416DEFADA004F30A6 /* ramCameraManager.h */,
+				274B3BE516DEFADA004F30A6 /* ramConstants.h */,
+				274B3BE616DEFADA004F30A6 /* ramGlobal.cpp */,
+				274B3BE716DEFADA004F30A6 /* ramGlobal.h */,
+				274B3BE816DEFADA004F30A6 /* ramUnit.h */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		274B3BE916DEFADA004F30A6 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				274B3BEA16DEFADA004F30A6 /* ramBaseEvent.h */,
+				274B3BEB16DEFADA004F30A6 /* ramCollisionEvent.h */,
+				274B3BEC16DEFADA004F30A6 /* ramTimeEvent.h */,
+			);
+			path = Event;
+			sourceTree = "<group>";
+		};
+		274B3BED16DEFADA004F30A6 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				274B3BEE16DEFADA004F30A6 /* ramBaseFilter.h */,
+				274B3BEF16DEFADA004F30A6 /* ramExpansion.h */,
+				274B3BF016DEFADA004F30A6 /* ramGhost.h */,
+				274B3BF116DEFADA004F30A6 /* ramLowPassFilter.h */,
+				274B3BF216DEFADA004F30A6 /* ramNodeTransform.h */,
+				274B3BF316DEFADA004F30A6 /* ramPendulum.h */,
+				274B3BF416DEFADA004F30A6 /* ramSession.h */,
+				274B3BF516DEFADA004F30A6 /* ramStamp.h */,
+				274B3BF616DEFADA004F30A6 /* ramTimeFilter.h */,
+				274B3BF716DEFADA004F30A6 /* ramUpsideDown.h */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		274B3BF816DEFADA004F30A6 /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				274B3BF916DEFADA004F30A6 /* ramGraphics.cpp */,
+				274B3BFA16DEFADA004F30A6 /* ramGraphics.h */,
+				274B3BFB16DEFADA004F30A6 /* ramGraphView.h */,
+				274B3BFC16DEFADA004F30A6 /* ramNodeLine.cpp */,
+				274B3BFD16DEFADA004F30A6 /* ramNodeLine.h */,
+				274B3BFE16DEFADA004F30A6 /* ramPrimitive.cpp */,
+				274B3BFF16DEFADA004F30A6 /* ramPrimitive.h */,
+				274B3C0016DEFADA004F30A6 /* ramSimpleShadow.cpp */,
+				274B3C0116DEFADA004F30A6 /* ramSimpleShadow.h */,
+				274B3C0216DEFADA004F30A6 /* ramSoftBodyPrimitive.cpp */,
+				274B3C0316DEFADA004F30A6 /* ramSoftBodyPrimitive.h */,
+			);
+			path = Graphics;
+			sourceTree = "<group>";
+		};
+		274B3C0416DEFADA004F30A6 /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+				274B3C0516DEFADA004F30A6 /* ramPhysics.cpp */,
+				274B3C0616DEFADA004F30A6 /* ramPhysics.h */,
+			);
+			path = Physics;
+			sourceTree = "<group>";
+		};
+		274B3C0816DEFADA004F30A6 /* Recognizer */ = {
+			isa = PBXGroup;
+			children = (
+				274B3C0916DEFADA004F30A6 /* ramBaseRecognizer.h */,
+				274B3C0A16DEFADA004F30A6 /* ramRecognizer.h */,
+			);
+			path = Recognizer;
+			sourceTree = "<group>";
+		};
+		274B3C0B16DEFADA004F30A6 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				274B3C0C16DEFADA004F30A6 /* ramBaseScene.h */,
+				274B3C0D16DEFADA004F30A6 /* ramSceneManager.cpp */,
+				274B3C0E16DEFADA004F30A6 /* ramSceneManager.h */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		274B3C0F16DEFADA004F30A6 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				274B3C1016DEFADA004F30A6 /* ramControllable.h */,
+				274B3C1116DEFADA004F30A6 /* ramControlPanel.h */,
+				274B3C1216DEFADA004F30A6 /* ramControlPanelBase.h */,
+				274B3C1316DEFADA004F30A6 /* ramOfxUIControlPanel.cpp */,
+				274B3C1416DEFADA004F30A6 /* ramOfxUIControlPanel.h */,
+				274B3C1516DEFADA004F30A6 /* ramSceneTabs.h */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		274B3C1616DEFADA004F30A6 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				274B3C1716DEFADA004F30A6 /* ramCameraSettings.cpp */,
+				274B3C1816DEFADA004F30A6 /* ramCameraSettings.h */,
+				274B3C1916DEFADA004F30A6 /* ramNodeArrayBuffer.h */,
+				274B3C1A16DEFADA004F30A6 /* ramNodeFinder.h */,
+				274B3C1B16DEFADA004F30A6 /* ramNodeIdentifer.h */,
+				274B3C1C16DEFADA004F30A6 /* ramSession.h */,
+				274B3C1D16DEFADA004F30A6 /* ramTimeShifter.h */,
+				274B3C1E16DEFADA004F30A6 /* ramUtils.cpp */,
+				274B3C1F16DEFADA004F30A6 /* ramUtils.h */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		600EFAF016C8F56800A5B331 /* ofxOsc */ = {
 			isa = PBXGroup;
 			children = (
@@ -1073,16 +1217,6 @@
 				600EFB4216C8F59700A5B331 /* ofxXmlSettings.h */,
 			);
 			path = src;
-			sourceTree = "<group>";
-		};
-		6016C92216D6214D006A578D /* Event */ = {
-			isa = PBXGroup;
-			children = (
-				6016C92716D62F03006A578D /* ramCollisionEvent.h */,
-				6016C92516D62DB4006A578D /* ramBaseEvent.h */,
-				6016C92316D6214D006A578D /* ramTimeEvent.h */,
-			);
-			path = Event;
 			sourceTree = "<group>";
 		};
 		60314CEF16CFC6B300138384 /* ofxBt */ = {
@@ -1494,127 +1628,6 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		609A650516CAC57C00C0AB22 /* ram */ = {
-			isa = PBXGroup;
-			children = (
-				9ADAF13F16DC8D55008C618C /* Recognizer */,
-				6016C92216D6214D006A578D /* Event */,
-				609A650616CAC57C00C0AB22 /* Core */,
-				609A651216CAC57C00C0AB22 /* Filter */,
-				609A651916CAC57C00C0AB22 /* Graphics */,
-				609A652216CAC57C00C0AB22 /* Physics */,
-				609A652516CAC57C00C0AB22 /* ramMain.h */,
-				609A652616CAC57C00C0AB22 /* Scene */,
-				609A652A16CAC57C00C0AB22 /* UI */,
-				609A652E16CAC57C00C0AB22 /* Utility */,
-			);
-			name = ram;
-			path = ../../ram;
-			sourceTree = "<group>";
-		};
-		609A650616CAC57C00C0AB22 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				6032635C16D7A17F0039D55D /* ramGlobal.cpp */,
-				609A656116CAC9C300C0AB22 /* ramGlobal.h */,
-				609A650716CAC57C00C0AB22 /* ramActor.cpp */,
-				609A650816CAC57C00C0AB22 /* ramActor.h */,
-				609A650916CAC57C00C0AB22 /* ramActorManager.cpp */,
-				609A650A16CAC57C00C0AB22 /* ramActorManager.h */,
-				609A650B16CAC57C00C0AB22 /* ramBaseApp.cpp */,
-				609A650C16CAC57C00C0AB22 /* ramBaseApp.h */,
-				609A650D16CAC57C00C0AB22 /* ramCameraManager.cpp */,
-				609A650E16CAC57C00C0AB22 /* ramCameraManager.h */,
-				609A650F16CAC57C00C0AB22 /* ramConstants.h */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		609A651216CAC57C00C0AB22 /* Filter */ = {
-			isa = PBXGroup;
-			children = (
-				60FFDB5416CD1F2F0093F734 /* ramBaseFilter.h */,
-				60426F9716CE1A5300C99541 /* ramExpansion.h */,
-				609A651616CAC57C00C0AB22 /* ramGhost.h */,
-				60EF104616D0C45700A37B2A /* ramGraphView.h */,
-				60DA905116CE7DAF00E392B5 /* ramNodeTransform.h */,
-				609A651816CAC57C00C0AB22 /* ramPendulum.h */,
-				9A02CDAE16CBD96D0055E1AC /* ramSession.h */,
-				9A2B3FC516D366F4001CBFC9 /* ramLowPassFilter.h */,
-				60426F9716CE1A5300C99541 /* ramExpansion.h */,
-				60FFDB5416CD1F2F0093F734 /* ramBaseFilter.h */,
-				60CFE13916CCA76F000050C8 /* ramStamp.h */,
-				607A91A716D2B52C0038D472 /* ramTimeFilter.h */,
-				9A02CDAC16CBD9610055E1AC /* ramStamp.h */,
-				609A651716CAC57C00C0AB22 /* ramUpsideDown.h */,
-			);
-			path = Filter;
-			sourceTree = "<group>";
-		};
-		609A651916CAC57C00C0AB22 /* Graphics */ = {
-			isa = PBXGroup;
-			children = (
-				6016C92916D642FB006A578D /* ramSoftBodyPrimitive.cpp */,
-				6016C92A16D642FC006A578D /* ramSoftBodyPrimitive.h */,
-				609A651A16CAC57C00C0AB22 /* ramGraphics.cpp */,
-				609A651B16CAC57C00C0AB22 /* ramGraphics.h */,
-				609A651C16CAC57C00C0AB22 /* ramNodeLine.cpp */,
-				609A651D16CAC57C00C0AB22 /* ramNodeLine.h */,
-				609A651E16CAC57C00C0AB22 /* ramPrimitive.cpp */,
-				609A651F16CAC57C00C0AB22 /* ramPrimitive.h */,
-				609A652016CAC57C00C0AB22 /* ramSimpleShadow.cpp */,
-				609A652116CAC57C00C0AB22 /* ramSimpleShadow.h */,
-			);
-			path = Graphics;
-			sourceTree = "<group>";
-		};
-		609A652216CAC57C00C0AB22 /* Physics */ = {
-			isa = PBXGroup;
-			children = (
-				609A652316CAC57C00C0AB22 /* ramPhysics.cpp */,
-				609A652416CAC57C00C0AB22 /* ramPhysics.h */,
-			);
-			path = Physics;
-			sourceTree = "<group>";
-		};
-		609A652616CAC57C00C0AB22 /* Scene */ = {
-			isa = PBXGroup;
-			children = (
-				609A652716CAC57C00C0AB22 /* ramBaseScene.h */,
-				609A652816CAC57C00C0AB22 /* ramSceneManager.cpp */,
-				609A652916CAC57C00C0AB22 /* ramSceneManager.h */,
-			);
-			path = Scene;
-			sourceTree = "<group>";
-		};
-		609A652A16CAC57C00C0AB22 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				6007A7AC16D5BCB40010E44B /* ramControlPanel.h */,
-				60A9B79716D2CD3D0079E701 /* ramControlPanelBase.h */,
-				609A652B16CAC57C00C0AB22 /* ramControllable.h */,
-				609A652C16CAC57C00C0AB22 /* ramOfxUIControlPanel.cpp */,
-				609A652D16CAC57C00C0AB22 /* ramOfxUIControlPanel.h */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		609A652E16CAC57C00C0AB22 /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-				607A91A516D2B4A40038D472 /* ramNodeArrayBuffer.h */,
-				60CFE13716CCA766000050C8 /* ramTimeShifter.h */,
-				609A652F16CAC57C00C0AB22 /* ramCameraSettings.cpp */,
-				609A653016CAC57C00C0AB22 /* ramCameraSettings.h */,
-				609A653116CAC57C00C0AB22 /* ramNodeFinder.h */,
-				609A653216CAC57C00C0AB22 /* ramNodeIdentifer.h */,
-				609A653316CAC57C00C0AB22 /* ramOscReciever.h */,
-				609A653516CAC57C00C0AB22 /* ramUtils.cpp */,
-				609A653616CAC57C00C0AB22 /* ramUtils.h */,
-			);
-			path = Utility;
-			sourceTree = "<group>";
-		};
 		60B90A801644E00900AF2156 = {
 			isa = PBXGroup;
 			children = (
@@ -1637,7 +1650,7 @@
 		60B90A961644E04B00AF2156 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				609A650516CAC57C00C0AB22 /* ram */,
+				274B3BDB16DEFADA004F30A6 /* ram */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -2037,14 +2050,6 @@
 			path = ../../../addons/ofxUITabbedCanvas;
 			sourceTree = "<group>";
 		};
-		9ADAF13F16DC8D55008C618C /* Recognizer */ = {
-			isa = PBXGroup;
-			children = (
-				9ADAF14116DC8D96008C618C /* ramRecognizer.h */,
-			);
-			path = Recognizer;
-			sourceTree = "<group>";
-		};
 		9AF81ADD16C93C0300C1A560 /* ofxInteractivePrimitives */ = {
 			isa = PBXGroup;
 			children = (
@@ -2148,36 +2153,6 @@
 				9AF81AF716C93C0300C1A560 /* ofxIPButton.h in Headers */,
 				9AF81AF816C93C0300C1A560 /* ofxIPMarker.h in Headers */,
 				9AF81AF916C93C0300C1A560 /* ofxIPStringBox.h in Headers */,
-				609A653816CAC57C00C0AB22 /* ramActor.h in Headers */,
-				609A653A16CAC57C00C0AB22 /* ramActorManager.h in Headers */,
-				609A653C16CAC57C00C0AB22 /* ramBaseApp.h in Headers */,
-				609A653E16CAC57C00C0AB22 /* ramCameraManager.h in Headers */,
-				609A653F16CAC57C00C0AB22 /* ramConstants.h in Headers */,
-				609A654516CAC57C00C0AB22 /* ramGhost.h in Headers */,
-				609A654616CAC57C00C0AB22 /* ramUpsideDown.h in Headers */,
-				609A654716CAC57C00C0AB22 /* ramPendulum.h in Headers */,
-				609A654916CAC57C00C0AB22 /* ramGraphics.h in Headers */,
-				609A654B16CAC57C00C0AB22 /* ramNodeLine.h in Headers */,
-				609A654D16CAC57C00C0AB22 /* ramPrimitive.h in Headers */,
-				609A654F16CAC57C00C0AB22 /* ramSimpleShadow.h in Headers */,
-				609A655116CAC57C00C0AB22 /* ramPhysics.h in Headers */,
-				609A655216CAC57C00C0AB22 /* ramMain.h in Headers */,
-				609A655316CAC57C00C0AB22 /* ramBaseScene.h in Headers */,
-				609A655516CAC57C00C0AB22 /* ramSceneManager.h in Headers */,
-				609A655616CAC57C00C0AB22 /* ramControllable.h in Headers */,
-				609A655816CAC57C00C0AB22 /* ramOfxUIControlPanel.h in Headers */,
-				609A655A16CAC57C00C0AB22 /* ramCameraSettings.h in Headers */,
-				609A655B16CAC57C00C0AB22 /* ramNodeFinder.h in Headers */,
-				609A655C16CAC57C00C0AB22 /* ramNodeIdentifer.h in Headers */,
-				609A655D16CAC57C00C0AB22 /* ramOscReciever.h in Headers */,
-				609A656016CAC57C00C0AB22 /* ramUtils.h in Headers */,
-				609A656216CAC9C300C0AB22 /* ramGlobal.h in Headers */,
-				9A02CDAD16CBD9610055E1AC /* ramStamp.h in Headers */,
-				9A02CDB016CBD96D0055E1AC /* ramSession.h in Headers */,
-				60CFE13816CCA766000050C8 /* ramTimeShifter.h in Headers */,
-				60FFDB5516CD1F2F0093F734 /* ramBaseFilter.h in Headers */,
-				60426F9816CE1A5300C99541 /* ramExpansion.h in Headers */,
-				60DA905216CE7DAF00E392B5 /* ramNodeTransform.h in Headers */,
 				60314DF916CFC6B400138384 /* btBulletCollisionCommon.h in Headers */,
 				60314DFA16CFC6B400138384 /* btBulletDynamicsCommon.h in Headers */,
 				60314DFB16CFC6B400138384 /* Bullet-C-Api.h in Headers */,
@@ -2372,17 +2347,6 @@
 				60314EC216CFC6B400138384 /* ofxBtSoftBody.h in Headers */,
 				60314EC416CFC6B400138384 /* ofxBtSoftBodyWorld.h in Headers */,
 				60314EC616CFC6B400138384 /* ofxBtWorld.h in Headers */,
-				60EF104716D0C45700A37B2A /* ramGraphView.h in Headers */,
-				607A91A616D2B4A40038D472 /* ramNodeArrayBuffer.h in Headers */,
-				607A91A816D2B52C0038D472 /* ramTimeFilter.h in Headers */,
-				60A9B79816D2CD3D0079E701 /* ramControlPanelBase.h in Headers */,
-				9A2B3FC616D366F4001CBFC9 /* ramLowPassFilter.h in Headers */,
-				6007A7AD16D5BCB40010E44B /* ramControlPanel.h in Headers */,
-				6016C92416D6214D006A578D /* ramTimeEvent.h in Headers */,
-				6016C92616D62DB4006A578D /* ramBaseEvent.h in Headers */,
-				6016C92816D62F03006A578D /* ramCollisionEvent.h in Headers */,
-				6016C92C16D642FC006A578D /* ramSoftBodyPrimitive.h in Headers */,
-				9ADAF14216DC8D96008C618C /* ramRecognizer.h in Headers */,
 				60813DF716DCAFCD005A1F85 /* ofxNodeArray.h in Headers */,
 				60D49DF516DE5975003BA064 /* Calibration.h in Headers */,
 				60D49DF616DE5975003BA064 /* ContourFinder.h in Headers */,
@@ -2476,6 +2440,50 @@
 				60D49F2016DE79B2003BA064 /* background_segm.hpp in Headers */,
 				60D49F2116DE79B2003BA064 /* tracking.hpp in Headers */,
 				60D49F2216DE79B2003BA064 /* video.hpp in Headers */,
+				274B3C2116DEFADA004F30A6 /* ramActor.h in Headers */,
+				274B3C2316DEFADA004F30A6 /* ramActorManager.h in Headers */,
+				274B3C2516DEFADA004F30A6 /* ramBaseApp.h in Headers */,
+				274B3C2716DEFADA004F30A6 /* ramCameraManager.h in Headers */,
+				274B3C2816DEFADA004F30A6 /* ramConstants.h in Headers */,
+				274B3C2A16DEFADA004F30A6 /* ramGlobal.h in Headers */,
+				274B3C2B16DEFADA004F30A6 /* ramUnit.h in Headers */,
+				274B3C2C16DEFADA004F30A6 /* ramBaseEvent.h in Headers */,
+				274B3C2D16DEFADA004F30A6 /* ramCollisionEvent.h in Headers */,
+				274B3C2E16DEFADA004F30A6 /* ramTimeEvent.h in Headers */,
+				274B3C2F16DEFADA004F30A6 /* ramBaseFilter.h in Headers */,
+				274B3C3016DEFADA004F30A6 /* ramExpansion.h in Headers */,
+				274B3C3116DEFADA004F30A6 /* ramGhost.h in Headers */,
+				274B3C3216DEFADA004F30A6 /* ramLowPassFilter.h in Headers */,
+				274B3C3316DEFADA004F30A6 /* ramNodeTransform.h in Headers */,
+				274B3C3416DEFADA004F30A6 /* ramPendulum.h in Headers */,
+				274B3C3516DEFADA004F30A6 /* ramSession.h in Headers */,
+				274B3C3616DEFADA004F30A6 /* ramStamp.h in Headers */,
+				274B3C3716DEFADA004F30A6 /* ramTimeFilter.h in Headers */,
+				274B3C3816DEFADA004F30A6 /* ramUpsideDown.h in Headers */,
+				274B3C3A16DEFADA004F30A6 /* ramGraphics.h in Headers */,
+				274B3C3B16DEFADA004F30A6 /* ramGraphView.h in Headers */,
+				274B3C3D16DEFADA004F30A6 /* ramNodeLine.h in Headers */,
+				274B3C3F16DEFADA004F30A6 /* ramPrimitive.h in Headers */,
+				274B3C4116DEFADA004F30A6 /* ramSimpleShadow.h in Headers */,
+				274B3C4316DEFADA004F30A6 /* ramSoftBodyPrimitive.h in Headers */,
+				274B3C4516DEFADA004F30A6 /* ramPhysics.h in Headers */,
+				274B3C4616DEFADA004F30A6 /* ramMain.h in Headers */,
+				274B3C4716DEFADA004F30A6 /* ramBaseRecognizer.h in Headers */,
+				274B3C4816DEFADA004F30A6 /* ramRecognizer.h in Headers */,
+				274B3C4916DEFADA004F30A6 /* ramBaseScene.h in Headers */,
+				274B3C4B16DEFADA004F30A6 /* ramSceneManager.h in Headers */,
+				274B3C4C16DEFADA004F30A6 /* ramControllable.h in Headers */,
+				274B3C4D16DEFADA004F30A6 /* ramControlPanel.h in Headers */,
+				274B3C4E16DEFADA004F30A6 /* ramControlPanelBase.h in Headers */,
+				274B3C5016DEFADA004F30A6 /* ramOfxUIControlPanel.h in Headers */,
+				274B3C5116DEFADA004F30A6 /* ramSceneTabs.h in Headers */,
+				274B3C5316DEFADA004F30A6 /* ramCameraSettings.h in Headers */,
+				274B3C5416DEFADA004F30A6 /* ramNodeArrayBuffer.h in Headers */,
+				274B3C5516DEFADA004F30A6 /* ramNodeFinder.h in Headers */,
+				274B3C5616DEFADA004F30A6 /* ramNodeIdentifer.h in Headers */,
+				274B3C5716DEFADA004F30A6 /* ramSession.h in Headers */,
+				274B3C5816DEFADA004F30A6 /* ramTimeShifter.h in Headers */,
+				274B3C5A16DEFADA004F30A6 /* ramUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2549,19 +2557,6 @@
 				600EFB4616C8F59700A5B331 /* tinyxmlparser.cpp in Sources */,
 				600EFB4716C8F59700A5B331 /* ofxXmlSettings.cpp in Sources */,
 				9AF81AF516C93C0300C1A560 /* ofxInteractivePrimitives.cpp in Sources */,
-				609A653716CAC57C00C0AB22 /* ramActor.cpp in Sources */,
-				609A653916CAC57C00C0AB22 /* ramActorManager.cpp in Sources */,
-				609A653B16CAC57C00C0AB22 /* ramBaseApp.cpp in Sources */,
-				609A653D16CAC57C00C0AB22 /* ramCameraManager.cpp in Sources */,
-				609A654816CAC57C00C0AB22 /* ramGraphics.cpp in Sources */,
-				609A654A16CAC57C00C0AB22 /* ramNodeLine.cpp in Sources */,
-				609A654C16CAC57C00C0AB22 /* ramPrimitive.cpp in Sources */,
-				609A654E16CAC57C00C0AB22 /* ramSimpleShadow.cpp in Sources */,
-				609A655016CAC57C00C0AB22 /* ramPhysics.cpp in Sources */,
-				609A655416CAC57C00C0AB22 /* ramSceneManager.cpp in Sources */,
-				609A655716CAC57C00C0AB22 /* ramOfxUIControlPanel.cpp in Sources */,
-				609A655916CAC57C00C0AB22 /* ramCameraSettings.cpp in Sources */,
-				609A655F16CAC57C00C0AB22 /* ramUtils.cpp in Sources */,
 				60314EB616CFC6B400138384 /* ofxBt.cpp in Sources */,
 				60314EB816CFC6B400138384 /* ofxBtCollisionObject.cpp in Sources */,
 				60314EBA16CFC6B400138384 /* ofxBtHelper.cpp in Sources */,
@@ -2570,8 +2565,6 @@
 				60314EC116CFC6B400138384 /* ofxBtSoftBody.cpp in Sources */,
 				60314EC316CFC6B400138384 /* ofxBtSoftBodyWorld.cpp in Sources */,
 				60314EC516CFC6B400138384 /* ofxBtWorld.cpp in Sources */,
-				6016C92B16D642FC006A578D /* ramSoftBodyPrimitive.cpp in Sources */,
-				6032635D16D7A17F0039D55D /* ramGlobal.cpp in Sources */,
 				60813DF616DCAFCD005A1F85 /* ofxNodeArray.cpp in Sources */,
 				60D49DFE16DE5975003BA064 /* Calibration.cpp in Sources */,
 				60D49DFF16DE5975003BA064 /* ContourFinder.cpp in Sources */,
@@ -2582,6 +2575,21 @@
 				60D49E0416DE5975003BA064 /* Tracker.cpp in Sources */,
 				60D49E0516DE5975003BA064 /* Utilities.cpp in Sources */,
 				60D49E0616DE5975003BA064 /* Wrappers.cpp in Sources */,
+				274B3C2016DEFADA004F30A6 /* ramActor.cpp in Sources */,
+				274B3C2216DEFADA004F30A6 /* ramActorManager.cpp in Sources */,
+				274B3C2416DEFADA004F30A6 /* ramBaseApp.cpp in Sources */,
+				274B3C2616DEFADA004F30A6 /* ramCameraManager.cpp in Sources */,
+				274B3C2916DEFADA004F30A6 /* ramGlobal.cpp in Sources */,
+				274B3C3916DEFADA004F30A6 /* ramGraphics.cpp in Sources */,
+				274B3C3C16DEFADA004F30A6 /* ramNodeLine.cpp in Sources */,
+				274B3C3E16DEFADA004F30A6 /* ramPrimitive.cpp in Sources */,
+				274B3C4016DEFADA004F30A6 /* ramSimpleShadow.cpp in Sources */,
+				274B3C4216DEFADA004F30A6 /* ramSoftBodyPrimitive.cpp in Sources */,
+				274B3C4416DEFADA004F30A6 /* ramPhysics.cpp in Sources */,
+				274B3C4A16DEFADA004F30A6 /* ramSceneManager.cpp in Sources */,
+				274B3C4F16DEFADA004F30A6 /* ramOfxUIControlPanel.cpp in Sources */,
+				274B3C5216DEFADA004F30A6 /* ramCameraSettings.cpp in Sources */,
+				274B3C5916DEFADA004F30A6 /* ramUtils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
