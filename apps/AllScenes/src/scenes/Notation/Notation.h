@@ -207,7 +207,7 @@ public:
 		ramEndCamera();
 	}
 	
-	void drawActor(ramActor &actor)
+	void drawActor(const ramActor &actor)
 	{	
 		for (int i=0; i<actor.getNumNode(); i++)
 		{

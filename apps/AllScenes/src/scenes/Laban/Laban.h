@@ -115,8 +115,8 @@ public:
 		ramEndCamera();
 	}
 	
-	void drawActor(ramActor &actor)
-	{	
+	void drawActor(const ramActor &actor)
+	{			
 		for (int i=0; i<actor.getNumNode(); i++)
 		{
 			if(onlyLimbs)
@@ -129,7 +129,7 @@ public:
 					continue;
 				}
 			}
-			ramNode &node = actor.getNode(i);
+			const ramNode &node = actor.getNode(i);
 			ofSetColor(255);
 			ofSetLineWidth(lineWidth);
 			if(node.hasParent())

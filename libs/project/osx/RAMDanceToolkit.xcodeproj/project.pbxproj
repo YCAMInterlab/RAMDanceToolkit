@@ -1047,12 +1047,12 @@
 		274B3C0816DEFADA004F30A6 /* Recognizer */ = {
 			isa = PBXGroup;
 			children = (
-				27423B0316DF217A00FD1944 /* ramPlanarGestureRecognizer.h */,
-				27423B0516DF2B2200FD1944 /* ramPlanarGestureRecognizer.cpp */,
 				274B3C0916DEFADA004F30A6 /* ramBaseRecognizer.h */,
-				274B3C0A16DEFADA004F30A6 /* ramRecognizer.h */,
-				27423AFF16DF06EE00FD1944 /* ramGeometry.h */,
 				27423B0116DF074000FD1944 /* ramGeometry.cpp */,
+				27423AFF16DF06EE00FD1944 /* ramGeometry.h */,
+				27423B0516DF2B2200FD1944 /* ramPlanarGestureRecognizer.cpp */,
+				27423B0316DF217A00FD1944 /* ramPlanarGestureRecognizer.h */,
+				274B3C0A16DEFADA004F30A6 /* ramRecognizer.h */,
 			);
 			path = Recognizer;
 			sourceTree = "<group>";
