@@ -3,6 +3,51 @@
 using namespace ofxCv;
 using namespace cv;
 
+void rotateToNormal(ofVec3f normal) {
+	normal.normalize();
+	
+	float rotationAmount;
+	ofVec3f rotationAngle;
+	ofQuaternion rotation;
+	
+	ofVec3f axis(0, 0, 1);
+	rotation.makeRotate(axis, normal);
+	rotation.getRotate(rotationAmount, rotationAngle);
+	ofRotate(rotationAmount, rotationAngle.x, rotationAngle.y, rotationAngle.z);
+}
+
+
+// needs improvement. right now it just looks for the biggest cross product
+void approximatePlane(const vector<ofVec3f>& points, int iterations, ofVec3f& center, ofVec3f& normal)
+{
+	int n = points.size();
+	for(int i = 0; i < n; i++)
+	{
+		center += points[i];
+	}
+	center /= n;
+	float maxLength = 0;
+	for(int i = 0; i < n; i++)
+	{
+		ofVec3f side1 = points[i] - center;
+		for(int j = i + 1; j < n; j++)
+		{
+			ofVec3f side2 = points[j] - center;
+			ofVec3f curNormal = side1.getCrossed(side2);
+			if(curNormal.z < 0) {
+				curNormal *= -1;
+			}
+			float length = curNormal.length();
+			if(length > maxLength)
+			{
+				normal = curNormal;
+				maxLength = length;
+			}
+		}
+	}
+	normal.normalize();
+}
+
 template <typename Real>
 Real DistancePointEllipseSpecial (const Real e[2], const Real y[2], Real x[2])
 {

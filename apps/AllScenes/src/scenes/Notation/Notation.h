@@ -2,11 +2,9 @@
 
 #include "ramMain.h"
 #include "ofxCv.h"
+#include "ramArcLineRecognizer.h"
 
-#include "Recognizer.h"
-#include "Fading.h"
-
-class HistoryPoint : public Fading
+class HistoryPoint : public ramFading
 {
 public:
 	ofVec3f point;
@@ -47,7 +45,7 @@ void approximatePlane(const vector<ofVec3f>& points, int iterations, ofVec3f& ce
 	normal.normalize();
 }
 
-class SpatialMark : public Fading
+class SpatialMark : public ramFading
 {
 public:
 	ofVec3f position, normal;
@@ -120,14 +118,14 @@ public:
 	
 	void update()
 	{
-		Fading::bury(allMarks, maxMarkLife);
+		ramFading::bury(allMarks, maxMarkLife);
 		
 		// remove any dead points
 		map<int, list<HistoryPoint> >::iterator itr;
 		for(itr = history.begin(); itr != history.end(); itr++)
 		{
 			list<HistoryPoint>& cur = itr->second;
-			Fading::bury(cur, maxNotationLife);
+			ramFading::bury(cur, maxNotationLife);
 			vector<ofVec3f> all;
 			list<HistoryPoint>::iterator curItr;
 			for(curItr = cur.begin(); curItr != cur.end(); curItr++)

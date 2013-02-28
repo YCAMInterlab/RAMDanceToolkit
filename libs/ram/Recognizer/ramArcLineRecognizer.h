@@ -1,8 +1,10 @@
 #pragma once
 
-#include "ofMain.h"
+#include "ramRecognizer.h"
+
+#include "ramMain.h"
 #include "ofxCv.h"
-#include "GeometryHelpers.h"
+#include "ramGeometry.h"
 
 class Recognizer {	
 public:
