@@ -7,6 +7,8 @@ extern bool drawModel;
 
 void ramSceneManager::setup(const vector<ramBaseScene*>& scenes_)
 {
+	enableAllEvents();
+	
 	scenes = scenes_;
 
 	ramGetGUI().setupSceneToggles(scenes);
