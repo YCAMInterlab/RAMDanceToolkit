@@ -124,7 +124,7 @@ void testApp::keyPressed(int key)
 			break;
 			
 		case 'l':
-			session = coder.load("load-test.tsv");
+			session = coder.load(ramToResourcePath("MotionData/Cyril.tsv"));
 			break;
 
 		default:

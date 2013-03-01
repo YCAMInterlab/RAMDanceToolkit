@@ -416,6 +416,7 @@
 		60D49F2116DE79B2003BA064 /* tracking.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 60D49EB916DE79B2003BA064 /* tracking.hpp */; };
 		60D49F2216DE79B2003BA064 /* video.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 60D49EBA16DE79B2003BA064 /* video.hpp */; };
 		60D49F2316DE79B2003BA064 /* opencv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D49EBD16DE79B2003BA064 /* opencv.a */; };
+		9A10418C16E084B200A7E707 /* ramSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A10418B16E084B200A7E707 /* ramSession.cpp */; };
 		9AA72AF116DF0D5E006C4E06 /* ramTSVCoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AA72AF016DF0D5E006C4E06 /* ramTSVCoder.h */; };
 		9AA72AF516DF0DBA006C4E06 /* ramSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AA72AF416DF0DBA006C4E06 /* ramSession.h */; };
 		9AD6F5A316B926C000F7F51E /* ofxUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F4FF16B926BF00F7F51E /* ofxUI.h */; };
@@ -885,6 +886,7 @@
 		60D49EB916DE79B2003BA064 /* tracking.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tracking.hpp; sourceTree = "<group>"; };
 		60D49EBA16DE79B2003BA064 /* video.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = video.hpp; sourceTree = "<group>"; };
 		60D49EBD16DE79B2003BA064 /* opencv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = opencv.a; sourceTree = "<group>"; };
+		9A10418B16E084B200A7E707 /* ramSession.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramSession.cpp; sourceTree = "<group>"; };
 		9AA72AF016DF0D5E006C4E06 /* ramTSVCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramTSVCoder.h; sourceTree = "<group>"; };
 		9AA72AF416DF0DBA006C4E06 /* ramSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSession.h; sourceTree = "<group>"; };
 		9AD6F4FF16B926BF00F7F51E /* ofxUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI.h; sourceTree = "<group>"; };
@@ -1004,6 +1006,7 @@
 			isa = PBXGroup;
 			children = (
 				9AA72AF416DF0DBA006C4E06 /* ramSession.h */,
+				9A10418B16E084B200A7E707 /* ramSession.cpp */,
 				274B3BEE16DEFADA004F30A6 /* ramBaseFilter.h */,
 				274B3BEF16DEFADA004F30A6 /* ramExpansion.h */,
 				274B3BF016DEFADA004F30A6 /* ramGhost.h */,
@@ -2606,6 +2609,7 @@
 				274B3C5916DEFADA004F30A6 /* ramUtils.cpp in Sources */,
 				27423B0216DF074000FD1944 /* ramGeometry.cpp in Sources */,
 				27423B0616DF2B2200FD1944 /* ramPlanarGestureRecognizer.cpp in Sources */,
+				9A10418C16E084B200A7E707 /* ramSession.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
