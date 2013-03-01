@@ -1251,6 +1251,7 @@
 					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/vs2010\"",
 					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/win_cb\"",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1347,6 +1348,7 @@
 					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/vs2010\"",
 					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/win_cb\"",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
