@@ -285,5 +285,5 @@ public:
 		}
 	}
 	
-	const string getName() { return "UpsideDownDonuts"; }
+	const string getName() { return "Upside Down Donuts"; }
 };

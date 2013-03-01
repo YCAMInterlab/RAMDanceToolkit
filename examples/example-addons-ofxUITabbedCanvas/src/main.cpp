@@ -45,7 +45,8 @@ public:
 		};
 		
 		for(int i = 0; i < n; i++) {
-			ofxUITab* tab = new ofxUITab(titles[i], i > 3);
+			ofxUITab* tab = new ofxUITab("", i > 3);
+			tab->setTabName(titles[i]);
 			tabs.push_back(tab);
 			switch(i % 3) {
 				case 0:

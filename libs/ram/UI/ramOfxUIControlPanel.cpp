@@ -95,7 +95,7 @@ void ramOfxUIControlPanel::update(ofEventArgs &e)
 
 void ramOfxUIControlPanel::addPanel(ramControllable* control)
 {
-	ramScenePanel *panel = new ramScenePanel(0, 0, ramGetGUI().kLength + ramGetGUI().kXInit * 2.0, ofGetScreenHeight());
+	ramScenePanel *panel = new ramScenePanel();
 	current_panel = panel;
 
 	/// used for save/load setting file suffix
@@ -112,7 +112,7 @@ void ramOfxUIControlPanel::addPanel(ramControllable* control)
 
 void ramOfxUIControlPanel::addPanel(const string& name)
 {
-	ramScenePanel *panel = new ramScenePanel(0, 0, ramGetGUI().kLength + ramGetGUI().kXInit * 2.0, ofGetScreenHeight());
+	ramScenePanel *panel = new ramScenePanel();
 	current_panel = panel;
 
 	/// used for save/load setting file suffix
@@ -291,11 +291,6 @@ void ramOfxUIControlPanel::keyPressed(ofKeyEventArgs &e)
 	{
 		pause = !pause;
 		ramActorManager::instance().setFreezed(pause);
-	}
-
-	if (e.key == '\t')
-	{
-		mSceneTabs.toggleVisible();
 	}
 }
 

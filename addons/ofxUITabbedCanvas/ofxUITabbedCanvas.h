@@ -10,22 +10,21 @@ public:
 
 class ofxUITab : public ofxUIXmlCanvas {
 protected:
-	string tabName;
+	ofxUILabel* title;
 	bool visible;
 	bool enabled, enableable;
 public:
-	ofxUITab(string tabName, bool enableable = true)
-	:tabName(tabName)
-	,visible(false)
+	ofxUITab(string tabName = "", bool enableable = true)
+	:visible(false)
 	,enabled(false)
 	,enableable(enableable)
 	{
-		addLabel(tabName, OFX_UI_FONT_LARGE);
+		title = addLabel(tabName, OFX_UI_FONT_LARGE);
 		addSpacer();
 	}
 	
-	void setTabName(const string& tabName) {this->tabName = tabName;}
-	string getTabName() const {return tabName;}
+	void setTabName(const string& tabName) {title->setLabel(tabName);}
+	string getTabName() const {return title->getLabel();}
 	bool& getVisible() {return visible;}
 	bool& getEnabled() {return enabled;}
 	bool getEnableable() {return enableable;}
