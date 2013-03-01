@@ -8,11 +8,7 @@ public:
 	
 	ofxUITabbedCanvas* tabbedCanvas;
 	vector<ofxUITab*> tabs;
-	
-	float radius, red, green, blue, alpha;
-	ofPoint position;
-	bool drawFill;
-	
+		
 	void setup() {
 		ofSetVerticalSync(true);
 		ofSetFrameRate(120);
@@ -55,17 +51,17 @@ public:
 				case 0:
 					tab->addFPSSlider("FPS");
 					tab->addSpacer();
-					tab->addSlider("RADIUS", 0.0, 255.0, &radius);
-					tab->addSlider("RED", 0.0, 255.0, &red);
-					tab->addSlider("GREEN", 0.0, 255.0, &green);
-					tab->addSlider("BLUE", 0.0, 255.0, &blue);
-					tab->addSlider("ALPHA", 0.0, 255.0, &alpha);
+					tab->addSlider("RADIUS", 0.0, 255.0, 0.);
+					tab->addSlider("RED", 0.0, 255.0, 0.);
+					tab->addSlider("GREEN", 0.0, 255.0, 0.);
+					tab->addSlider("BLUE", 0.0, 255.0, 0.);
+					tab->addSlider("ALPHA", 0.0, 255.0, 0.);
 					break;
 				case 1:
 					tab->addFPSSlider("FPS");
 					tab->addSpacer();
-					tab->add2DPad("CENTER", ofPoint(0,ofGetWidth()), ofPoint(0, ofGetHeight()), &position);
-					tab->addLabelToggle("DRAWFILL", &drawFill);
+					tab->add2DPad("CENTER", ofPoint(0,ofGetWidth()), ofPoint(0, ofGetHeight()), ofPoint(0., 0.));
+					tab->addLabelToggle("DRAWFILL", false);
 					break;
 				case 2:
 					tab->addFPSSlider("FPS");
@@ -90,6 +86,6 @@ public:
 
 int main() {
 	ofAppGlutWindow window;
-	ofSetupOpenGL(&window, 1280, 720, OF_WINDOW);
+	ofSetupOpenGL(&window, 1280, 720, OF_FULLSCREEN);
 	ofRunApp(new ofApp());
 }

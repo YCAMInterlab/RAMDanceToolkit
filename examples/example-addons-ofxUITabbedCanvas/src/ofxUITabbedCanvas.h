@@ -2,7 +2,13 @@
 
 #include "ofxUI.h"
 
-class ofxUITab : public ofxUICanvas {
+class ofxUIXmlCanvas : public ofxUICanvas {
+public:
+	void saveSettingsToXml(ofxXmlSettings& xml);
+	void loadSettingsFromXml(ofxXmlSettings& xml);
+};
+
+class ofxUITab : public ofxUIXmlCanvas {
 protected:
 	string tabName;
 	bool visible;
@@ -17,6 +23,7 @@ public:
 		addLabel(tabName, OFX_UI_FONT_LARGE);
 		addSpacer();
 	}
+	
 	void setTabName(const string& tabName) {this->tabName = tabName;}
 	string getTabName() const {return tabName;}
 	bool& getVisible() {return visible;}
@@ -24,20 +31,28 @@ public:
 	bool getEnableable() {return enableable;}
 };
 
-class ofxUITabbedCanvas : public ofxUICanvas {
+class ofxUITabbedCanvas : public ofxUIXmlCanvas {
 protected:
 	int currentTab;
 	float tabWidth, enableWidth;
 	bool visible;
+	bool saveStatus, loadStatus;
 	vector<ofxUITab*> tabs;
 	vector<ofxUILabelToggle*> tabToggles;
 	vector<ofxUIToggle*> enableToggles;
+	ofxUIImageButton *saveButton, *loadButton;
 public:
-	ofxUITabbedCanvas()
+	ofxUITabbedCanvas(float tabWidth = 100, float enableWidth = 10)
 	:currentTab(0)
-	,tabWidth(100)
-	,enableWidth(10)
+	,saveStatus(false)
+	,loadStatus(false)
+	,tabWidth(tabWidth)
+	,enableWidth(enableWidth)
 	,visible(true) {
+        loadButton = new ofxUIImageButton(0, 0, 32, 32, &loadStatus, "open.png", "Load");
+        saveButton = new ofxUIImageButton(0, 0, 32, 32, &saveStatus, "save.png", "Save");
+        addWidgetRight(loadButton);
+        addWidgetRight(saveButton);
 	}
 	void add(ofxUITab* tab) {
 		tab->disableAppEventCallbacks();
@@ -48,25 +63,35 @@ public:
 			tab->getVisible() = true;
 		}
 		tabs.push_back(tab);
-		ofxUILabelToggle* tabToggle = new ofxUILabelToggle(tab->getTabName(), tab->getVisible(), tabWidth, 0, 0, 0, OFX_UI_FONT_SMALL, true);
+		ofxUILabelToggle* tabToggle = new ofxUILabelToggle(tab->getTabName(), &tab->getVisible(), tabWidth, 0, 0, 0, OFX_UI_FONT_SMALL, true);
         addWidgetDown(tabToggle);
 		tabToggles.push_back(tabToggle);
 		if(tab->getEnableable()) {
-			ofxUIToggle* enableToggle = new ofxUIToggle("", tab->getEnabled(), enableWidth, tabToggle->getRect()->height);
+			ofxUIToggle* enableToggle = new ofxUIToggle("", &tab->getEnabled(), enableWidth, tabToggle->getRect()->height);
 			addWidgetRight(enableToggle);
 			enableToggles.push_back(enableToggle);
 		}
 		autoSizeToFitWidgets();
 	}
-	void select(string name) {
+	ofxUICanvas* at(int i) {
+		return tabs[i];
+	}
+	int getTabIndex(string name) {
 		for(int i = 0; i < tabToggles.size(); i++) {
 			ofxUILabelToggle *tabToggle = tabToggles[i];		
 			if(tabToggle->getName() == name) {
-				tabToggle->setValue(true);
-				currentTab = i;
-			} else {
-				tabToggle->setValue(false); 
-			}			
+				return i;
+			}
+		}
+		return -1;
+	}
+	void select(string name) {
+		int tabIndex = getTabIndex(name);
+		if(tabIndex != -1) {
+			currentTab = tabIndex;
+			for(int i = 0; i < tabToggles.size(); i++) {	
+				tabToggles[i]->setValue(i == tabIndex);
+			}
 		}
 	}
 	void triggerEvent(ofxUIWidget *child) {
@@ -77,24 +102,37 @@ public:
 		return tabs[currentTab];
 	}
 	void update() {
+		if (saveStatus) {
+			ofFileDialogResult result = ofSystemSaveDialog("settings.xml", "Save settings.");
+			saveSettings(result.getPath());
+			saveButton->setValue(false);
+		}
+		if (loadStatus) {
+			ofFileDialogResult result = ofSystemLoadDialog("Load settings.", false);
+			loadSettings(result.getPath());
+			loadButton->setValue(false);
+		}
 		if (!visible || tabs.empty()) return;
 		getCurrent()->update();
 	}
 	void draw() {
-		glDisable(GL_DEPTH_TEST);
-        glDisable(GL_LIGHTING);
-		
-        ofPushStyle();
-        ofPushMatrix();
-        ofNoFill();
-        ofTranslate(getRect()->width, 0);
-        tabs[currentTab]->draw();
-        ofPopMatrix();
-        ofPopStyle();
-		
-		ofxUICanvas::draw();
+		if(visible) {
+			glDisable(GL_DEPTH_TEST);
+			glDisable(GL_LIGHTING);
+			
+			ofPushStyle();
+			ofPushMatrix();
+			ofNoFill();
+			ofTranslate(getRect()->width, 0);
+			tabs[currentTab]->draw();
+			ofPopMatrix();
+			ofPopStyle();
+			
+			ofxUICanvas::draw();
+		}
 	}
 	void keyPressed(int key) {
+		if(key == '\t') visible = !visible;
 		if (!visible) return;
 		ofxUICanvas::keyPressed(key);
 		if (tabs.empty()) return;
@@ -130,6 +168,6 @@ public:
 		if (tabs.empty()) return;
 		getCurrent()->mouseReleased(x - getRect()->width, y, tabToggle);
 	}	
-	void loadSettings(const string &fileName);
-	void saveSettings(const string &fileName);
+	void loadSettings(const string &filename);
+	void saveSettings(const string &filename);
 };
