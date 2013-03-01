@@ -1,6 +1,9 @@
-#include "testApp.h"
+#pragma once
 
 #include "ofxCv.h"
+
+void rotateToNormal(ofVec3f normal);
+void approximatePlane(const vector<ofVec3f>& points, int iterations, ofVec3f& center, ofVec3f& normal);
 
 ofVec2f closestPointOnRay(const ofVec2f& p1, const ofVec2f& p2, const ofVec2f& p3);
 ofVec2f closestPointOnLine(const ofVec2f& p1, const ofVec2f& p2, const ofVec2f& p3);

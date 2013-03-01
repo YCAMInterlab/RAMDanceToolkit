@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
-		60D49F3616DE7A10003BA064 /* Fading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 275C7EAD16D644FD00024334 /* Fading.cpp */; };
-		60D49F3716DE7A15003BA064 /* GeometryHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 275C7EAF16D644FD00024334 /* GeometryHelpers.cpp */; };
 		9A2B3F6516D325C7001CBFC9 /* Kepler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5116D325C7001CBFC9 /* Kepler.cpp */; };
 		9A2B3F6616D325C7001CBFC9 /* KeplerBtDynamics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5316D325C7001CBFC9 /* KeplerBtDynamics.cpp */; };
 		9A2B3F6716D325C7001CBFC9 /* KeplerBtShapeDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5516D325C7001CBFC9 /* KeplerBtShapeDrawer.cpp */; };
@@ -21,7 +19,7 @@
 		D2B8DCD416D3835700210022 /* ChainBtShapeDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCCC16D3835700210022 /* ChainBtShapeDrawer.cpp */; };
 		D2B8DCD516D3835700210022 /* ChainObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCCE16D3835700210022 /* ChainObject.cpp */; };
 		D2B8DCD616D3835700210022 /* Chain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCD016D3835700210022 /* Chain.cpp */; };
-		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
+		E4328149138ABC9F0047C5CB /* openFrameworks.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworks.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
 		E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9730E8CC7DD009D7055 /* AudioToolbox.framework */; };
@@ -87,12 +85,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		275C7EAD16D644FD00024334 /* Fading.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fading.cpp; sourceTree = "<group>"; };
-		275C7EAE16D644FD00024334 /* Fading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fading.h; sourceTree = "<group>"; };
-		275C7EAF16D644FD00024334 /* GeometryHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryHelpers.cpp; sourceTree = "<group>"; };
-		275C7EB016D644FD00024334 /* GeometryHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryHelpers.h; sourceTree = "<group>"; };
 		275C7EB116D644FD00024334 /* Notation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notation.h; sourceTree = "<group>"; };
-		275C7EB316D644FD00024334 /* Recognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recognizer.h; sourceTree = "<group>"; };
 		27B8489116D34A02000D321D /* ColorGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorGrid.h; sourceTree = "<group>"; };
 		27B8489316D35466000D321D /* ThreePoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreePoints.h; sourceTree = "<group>"; };
 		27B8489416D35513000D321D /* SphereMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphereMesh.h; sourceTree = "<group>"; };
@@ -272,7 +265,7 @@
 				E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */,
 				E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */,
 				E4EB6799138ADC1D00A09F29 /* GLUT.framework in Frameworks */,
-				E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */,
+				E4328149138ABC9F0047C5CB /* openFrameworks.a in Frameworks */,
 				E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */,
 				E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */,
 				E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */,
@@ -295,12 +288,7 @@
 		276D281F16D4C640005153ED /* Notation */ = {
 			isa = PBXGroup;
 			children = (
-				275C7EAD16D644FD00024334 /* Fading.cpp */,
-				275C7EAE16D644FD00024334 /* Fading.h */,
-				275C7EAF16D644FD00024334 /* GeometryHelpers.cpp */,
-				275C7EB016D644FD00024334 /* GeometryHelpers.h */,
 				275C7EB116D644FD00024334 /* Notation.h */,
-				275C7EB316D644FD00024334 /* Recognizer.h */,
 			);
 			name = Notation;
 			path = scenes/Notation;
@@ -922,7 +910,7 @@
 		E4328144138ABC890047C5CB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E4328148138ABC890047C5CB /* openFrameworksDebug.a */,
+				E4328148138ABC890047C5CB /* openFrameworks.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1039,10 +1027,10 @@
 			remoteRef = 60B90AB21644E21400AF2156 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E4328148138ABC890047C5CB /* openFrameworksDebug.a */ = {
+		E4328148138ABC890047C5CB /* openFrameworks.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = openFrameworksDebug.a;
+			path = openFrameworks.a;
 			remoteRef = E4328147138ABC890047C5CB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1081,8 +1069,6 @@
 				D2B8DCD416D3835700210022 /* ChainBtShapeDrawer.cpp in Sources */,
 				D2B8DCD516D3835700210022 /* ChainObject.cpp in Sources */,
 				D2B8DCD616D3835700210022 /* Chain.cpp in Sources */,
-				60D49F3616DE7A10003BA064 /* Fading.cpp in Sources */,
-				60D49F3716DE7A15003BA064 /* GeometryHelpers.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1174,6 +1160,7 @@
 				GCC_MODEL_TUNING = NONE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
@@ -1251,7 +1238,6 @@
 					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/vs2010\"",
 					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/win_cb\"",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1271,6 +1257,7 @@
 				GCC_MODEL_TUNING = NONE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
@@ -1348,7 +1335,6 @@
 					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/vs2010\"",
 					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/win_cb\"",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
