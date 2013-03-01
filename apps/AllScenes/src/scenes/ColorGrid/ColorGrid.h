@@ -12,13 +12,11 @@ public:
 	
 	void setupControlPanel()
 	{
-		ramControlPanel &gui = ramGetGUI();
-		
 		useRgb = true;
 		bufferSize = 1024;
 		
-		gui.addToggle("Use RGB/HSB", &useRgb);
-		gui.addSlider("Buffer size", 128, 2048, &bufferSize);
+		gui().addToggle("Use RGB/HSB", &useRgb);
+		gui().addSlider("Buffer size", 128, 2048, &bufferSize);
 	}
 	
 	void setup()
