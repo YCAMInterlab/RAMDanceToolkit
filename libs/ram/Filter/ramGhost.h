@@ -41,13 +41,37 @@ public:
 
 		gui.addSection(getName());
 
-		gui.addButton("Ghost", Preset(this, 1.5, 240));
-		gui.addButton("Slow", Preset(this, 8.3, 74.4));
-		gui.addButton("Normal", Preset(this, 9.4, 150));
-		gui.addButton("Fast", Preset(this, 38.9, 211.1));
+		ofAddListener(gui.addButton("Ghost"), this, &ramGhost::onPresetGhost);
+		ofAddListener(gui.addButton("Slow"), this, &ramGhost::onPresetSlow);
+		ofAddListener(gui.addButton("Normal"), this, &ramGhost::onPresetNormal);
+		ofAddListener(gui.addButton("Fast"), this, &ramGhost::onPresetFast);
 
 		gui.addSlider("Distance", 0.0, 255.0, &distance);
 		gui.addSlider("Speed", 0.0, 255.0, &speed);
+	}
+	
+	void onPresetGhost(ofEventArgs &e)
+	{
+		setSpeed(1.5);
+		setDistance(240);
+	}
+
+	void onPresetSlow(ofEventArgs &e)
+	{
+		setSpeed(8.3);
+		setDistance(74.4);
+	}
+	
+	void onPresetNormal(ofEventArgs &e)
+	{
+		setSpeed(9.4);
+		setDistance(150);
+	}
+	
+	void onPresetFast(ofEventArgs &e)
+	{
+		setSpeed(38.9);
+		setDistance(211);
 	}
 
 	inline void setDistance(const float d) { distance = d; }

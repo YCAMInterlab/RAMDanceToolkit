@@ -13,21 +13,19 @@ public:
 
 	ramStamp() : mLastRecordTime(0.0), mRecSpan(5.0), kMaxStamps(30) {}
 
-	struct ClearListener
-	{
-		ramStamp *self;
-		ClearListener(ramStamp *self) : self(self) {}
-		void operator()() { self->clear(); }
-	};
-
 	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 
 		gui.addSection(getName());
 
-		gui.addButton("Clear", ClearListener(this));
+		ofAddListener(gui.addButton("Clear"), this, &ramStamp::onClear);
 		gui.addSlider("Recording Span", 2.0, 60.0, &mRecSpan);
+	}
+	
+	void onClear(ofEventArgs &e)
+	{
+		clear();
 	}
 
 	void setup()
