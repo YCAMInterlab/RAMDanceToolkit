@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2797318416E0E53200707EB2 /* ofxUITabbedCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2797318216E0E53200707EB2 /* ofxUITabbedCanvas.cpp */; };
+		27814CAA16E113BB00FC4C7B /* ofxUITabbedCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27814CA816E113BB00FC4C7B /* ofxUITabbedCanvas.cpp */; };
 		27F6A02B16E0861D003A9B5D /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27F6A02416E0861D003A9B5D /* tinyxml.cpp */; };
 		27F6A02C16E0861D003A9B5D /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27F6A02616E0861D003A9B5D /* tinyxmlerror.cpp */; };
 		27F6A02D16E0861D003A9B5D /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27F6A02716E0861D003A9B5D /* tinyxmlparser.cpp */; };
@@ -64,8 +64,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2797318216E0E53200707EB2 /* ofxUITabbedCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUITabbedCanvas.cpp; sourceTree = "<group>"; };
-		2797318316E0E53200707EB2 /* ofxUITabbedCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUITabbedCanvas.h; sourceTree = "<group>"; };
+		27814CA816E113BB00FC4C7B /* ofxUITabbedCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUITabbedCanvas.cpp; sourceTree = "<group>"; };
+		27814CA916E113BB00FC4C7B /* ofxUITabbedCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUITabbedCanvas.h; sourceTree = "<group>"; };
 		27F69FF616E08431003A9B5D /* ofxUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI.h; sourceTree = "<group>"; };
 		27F69FF816E08431003A9B5D /* ofxUI2DGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI2DGraph.h; sourceTree = "<group>"; };
 		27F69FF916E08431003A9B5D /* ofxUI2DPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI2DPad.h; sourceTree = "<group>"; };
@@ -167,6 +167,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27814CA716E113BB00FC4C7B /* ofxUITabbedCanvas */ = {
+			isa = PBXGroup;
+			children = (
+				27814CA816E113BB00FC4C7B /* ofxUITabbedCanvas.cpp */,
+				27814CA916E113BB00FC4C7B /* ofxUITabbedCanvas.h */,
+			);
+			name = ofxUITabbedCanvas;
+			path = ../../addons/ofxUITabbedCanvas;
+			sourceTree = "<group>";
+		};
 		27F69FF416E08424003A9B5D /* ofxUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +269,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				27814CA716E113BB00FC4C7B /* ofxUITabbedCanvas */,
 				27F6A02216E0861D003A9B5D /* ofxXmlSettings */,
 				27F69FF416E08424003A9B5D /* ofxUI */,
 			);
@@ -328,8 +339,6 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				2797318216E0E53200707EB2 /* ofxUITabbedCanvas.cpp */,
-				2797318316E0E53200707EB2 /* ofxUITabbedCanvas.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 			);
 			path = src;
@@ -433,7 +442,7 @@
 				27F6A02C16E0861D003A9B5D /* tinyxmlerror.cpp in Sources */,
 				27F6A02D16E0861D003A9B5D /* tinyxmlparser.cpp in Sources */,
 				27F6A02E16E0861D003A9B5D /* ofxXmlSettings.cpp in Sources */,
-				2797318416E0E53200707EB2 /* ofxUITabbedCanvas.cpp in Sources */,
+				27814CAA16E113BB00FC4C7B /* ofxUITabbedCanvas.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

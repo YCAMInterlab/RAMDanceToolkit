@@ -1,125 +1,173 @@
-//
-//  ofxUITabbedCanvas.h
-//  ofxUISimpleExample
-//
-//  Created by Onishi Yoshito on 1/29/13.
-//
-//
+#pragma once
 
-#ifndef __ofxUISimpleExample__ofxUITabbedCanvas__
-#define __ofxUISimpleExample__ofxUITabbedCanvas__
-
-#include "ofMain.h"
 #include "ofxUI.h"
 
-//--------------------------------------------------------------
-class ofxUITabbedCanvas : public ofxUICanvas {
-    
-    typedef ofxUICanvas super; /// for readableness
-    
+class ofxUIXmlCanvas : public ofxUICanvas {
 public:
-    //--------------------
-    ofxUITabbedCanvas();
-    virtual ~ofxUITabbedCanvas();
-    
-    /// callbacks
-    //--------------------
-    /// app events
-    void setup(const string &fontFile);
-    void update();
-    void draw();
-    void exit();
-    /// key events
-    void keyPressed(int key);
-	void keyReleased(int key);
-    /// mouse events
-    void mouseMoved(int x, int y);
-    void mouseDragged(int x, int y, int button);
-    void mousePressed(int x, int y, int button);
-    void mouseReleased(int x, int y, int button);
-    
-    /// setters
-    //--------------------
-    void setPosition(const ofVec2f &pos);
-    void setPosition(float x, float y);
-    
-    /// getters
-    //--------------------
-    ofVec2f getPosition() const;
-    
-    //--------------------
-    void resize();
-    
-    /// tab management
-    //--------------------
-    void add(ofxUICanvas *aTabCanvas);
-    void remove(ofxUICanvas *aTabCanvas);
-    void remove(int index);
-    void clear();
-    
-    ofxUICanvas *at(int index);
-    ofxUICanvas *operator [] (int index);
-    /// num of tabs
-    int size() const;
-    
-    //--------------------
-    void select(int index);
-    
-    /// utils
-    //--------------------
-    /// show/hide ofxUITabbedCanvas
-    void toggleVisible();
-    void setVisible(bool bShow);
-
-    /// setting
-    //--------------------
-    /// load xml files for each tabs
-    void loadSettings(const string &fileName);
-    /// generate and save xml files for each tabs
-    void saveSettings(const string &fileName);
-    
-private:
-    /// internal utils
-    //--------------------
-    void onTabChanged(ofxUIEventArgs &e);
-    
-    void rebuildTabs();
-    
-    /// for dragging
-    //--------------------
-    enum MouseState {
-        MOUSE_IDLE,
-        MOUSE_OVER,
-        MOUSE_DOWN,
-    };
-    
-    //--------------------
-    ofxUICanvas             *mTabs;
-    ofxUIToggleMatrix       *mTabsMatrix;
-    vector<ofxUICanvas *>   mCanvases;
-    int         mCurrentTab;
-    
-    //--------------------
-    bool        mVisible;
-    
-    string      mFontFile;
-    
-    //--------------------
-    float       mTabButtonSize;
-    float       mDraggBarHeight;
-    
-    /// position, size
-    //--------------------
-    ofVec2f     mPosition;
-    ofRectangle mDraggableRect;
-    ofRectangle mTabSize;
-    
-    //--------------------
-    int     mMouseState;
-    ofVec2f mDraggOrigin;
-    float   mTabSpacing;
-
+	void saveSettingsToXml(ofxXmlSettings& xml);
+	void loadSettingsFromXml(ofxXmlSettings& xml);
 };
 
+class ofxUITab : public ofxUIXmlCanvas {
+protected:
+	string tabName;
+	bool visible;
+	bool enabled, enableable;
+public:
+	ofxUITab(string tabName, bool enableable = true)
+	:tabName(tabName)
+	,visible(false)
+	,enabled(false)
+	,enableable(enableable)
+	{
+		addLabel(tabName, OFX_UI_FONT_LARGE);
+		addSpacer();
+	}
+	
+	void setTabName(const string& tabName) {this->tabName = tabName;}
+	string getTabName() const {return tabName;}
+	bool& getVisible() {return visible;}
+	bool& getEnabled() {return enabled;}
+	bool getEnableable() {return enableable;}
+};
 
-#endif /* defined(__ofxUISimpleExample__ofxUITabbedCanvas__) */
+class ofxUITabbedCanvas : public ofxUIXmlCanvas {
+protected:
+	int currentTab;
+	float tabWidth, enableWidth;
+	bool visible;
+	bool saveStatus, loadStatus;
+	vector<ofxUITab*> tabs;
+	vector<ofxUILabelToggle*> tabToggles;
+	vector<ofxUIToggle*> enableToggles;
+	ofxUIImageButton *saveButton, *loadButton;
+public:
+	ofxUITabbedCanvas(float tabWidth = 100, float enableWidth = 10)
+	:currentTab(0)
+	,saveStatus(false)
+	,loadStatus(false)
+	,tabWidth(tabWidth)
+	,enableWidth(enableWidth)
+	,visible(true) {
+        loadButton = new ofxUIImageButton(0, 0, 32, 32, &loadStatus, "../../../../resources/Images/open.png", "Load");
+        saveButton = new ofxUIImageButton(0, 0, 32, 32, &saveStatus, "../../../../resources/Images/save.png", "Save");
+        addWidgetRight(loadButton);
+        addWidgetRight(saveButton);
+	}
+	void add(ofxUITab* tab) {
+		tab->disableAppEventCallbacks();
+		tab->disableMouseEventCallbacks();
+		tab->disableKeyEventCallbacks();
+		tab->disableWindowEventCallbacks();
+		if(tabs.empty()) {
+			tab->getVisible() = true;
+		}
+		tabs.push_back(tab);
+		ofxUILabelToggle* tabToggle = new ofxUILabelToggle(tab->getTabName(), &tab->getVisible(), tabWidth, 0, 0, 0, OFX_UI_FONT_SMALL, true);
+        addWidgetDown(tabToggle);
+		tabToggles.push_back(tabToggle);
+		if(tab->getEnableable()) {
+			ofxUIToggle* enableToggle = new ofxUIToggle("", &tab->getEnabled(), enableWidth, tabToggle->getRect()->height);
+			addWidgetRight(enableToggle);
+			enableToggles.push_back(enableToggle);
+		}
+		autoSizeToFitWidgets();
+	}
+	ofxUICanvas* at(int i) {
+		return tabs[i];
+	}
+	int getTabIndex(string name) {
+		for(int i = 0; i < tabToggles.size(); i++) {
+			ofxUILabelToggle *tabToggle = tabToggles[i];		
+			if(tabToggle->getName() == name) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	void select(string name) {
+		int tabIndex = getTabIndex(name);
+		if(tabIndex != -1) {
+			currentTab = tabIndex;
+			for(int i = 0; i < tabToggles.size(); i++) {	
+				tabToggles[i]->setValue(i == tabIndex);
+			}
+		}
+	}
+	void triggerEvent(ofxUIWidget *child) {
+		select(child->getName());
+		ofxUICanvas::triggerEvent(child);
+	} 
+	ofxUITab* getCurrent() {
+		return tabs[currentTab];
+	}
+	void update() {
+		if (saveStatus) {
+			ofFileDialogResult result = ofSystemSaveDialog("settings.xml", "Save settings.");
+			saveSettings(result.getPath());
+			saveButton->setValue(false);
+		}
+		if (loadStatus) {
+			ofFileDialogResult result = ofSystemLoadDialog("Load settings.", false);
+			loadSettings(result.getPath());
+			loadButton->setValue(false);
+		}
+		if (!visible || tabs.empty()) return;
+		getCurrent()->update();
+	}
+	void draw() {
+		if(visible) {
+			glDisable(GL_DEPTH_TEST);
+			glDisable(GL_LIGHTING);
+			
+			ofPushStyle();
+			ofPushMatrix();
+			ofNoFill();
+			ofTranslate(getRect()->width, 0);
+			tabs[currentTab]->draw();
+			ofPopMatrix();
+			ofPopStyle();
+			
+			ofxUICanvas::draw();
+		}
+	}
+	void keyPressed(int key) {
+		if(key == '\t') visible = !visible;
+		if (!visible) return;
+		ofxUICanvas::keyPressed(key);
+		if (tabs.empty()) return;
+		getCurrent()->keyPressed(key);
+	}
+	void keyReleased(int key) {
+		if (!visible) return;
+		ofxUICanvas::keyReleased(key);
+		if (tabs.empty()) return;
+		getCurrent()->keyReleased(key);
+	}
+	void mouseMoved(int x, int y) {
+		if (!visible) return;
+		ofxUICanvas::mouseMoved(x, y);
+		if (tabs.empty()) return;
+		getCurrent()->mouseMoved(x - getRect()->width, y);
+	}
+	void mouseDragged(int x, int y, int tabToggle) {
+		if (!visible) return;
+		ofxUICanvas::mouseDragged(x, y, tabToggle);
+		if (tabs.empty()) return;
+		getCurrent()->mouseDragged(x - getRect()->width, y, tabToggle);
+	}
+	void mousePressed(int x, int y, int tabToggle) {
+		if (!visible) return;
+		ofxUICanvas::mousePressed(x, y, tabToggle);
+		if (tabs.empty()) return;
+		getCurrent()->mousePressed(x - getRect()->width, y, tabToggle);
+	}	
+	void mouseReleased(int x, int y, int tabToggle) {
+		if (!visible) return;
+		ofxUICanvas::mouseReleased(x, y, tabToggle);
+		if (tabs.empty()) return;
+		getCurrent()->mouseReleased(x - getRect()->width, y, tabToggle);
+	}	
+	void loadSettings(const string &filename);
+	void saveSettings(const string &filename);
+};
