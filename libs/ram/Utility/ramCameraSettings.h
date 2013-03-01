@@ -21,6 +21,8 @@ public:
 		look_at = ofVec3f(setting.getValue("look_at:x", 0),
 						  setting.getValue("look_at:y", 100),
 						  setting.getValue("look_at:z", 0));
+		
+		fov = setting.getValue("fov", 60.0);
 	}
 
 	enum MovingType
@@ -32,6 +34,7 @@ public:
 	string name;
 	ofVec3f pos;
 	ofVec3f look_at;
+	float fov;
 
 	unsigned int moving_type;
 	bool bMoving;
