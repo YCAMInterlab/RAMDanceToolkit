@@ -2,14 +2,17 @@
 
 #include "ofxUI.h"
 
-class ofxUIXmlCanvas : public ofxUICanvas {
+class ofxUICanvasPlus : public ofxUICanvas {
 public:
-	ofxUIXmlCanvas();
+	ofxUICanvasPlus();
 	void saveSettingsToXml(ofxXmlSettings& xml);
 	void loadSettingsFromXml(ofxXmlSettings& xml);
+protected:
+	static int getChoice(ofxUIRadio* radio);
+	static int getChoice(ofxUIEventArgs& e, ofxUIRadio* radio);
 };
 
-class ofxUITab : public ofxUIXmlCanvas {
+class ofxUITab : public ofxUICanvasPlus {
 protected:
 	ofxUILabel* title;
 	bool visible;
@@ -31,7 +34,7 @@ public:
 	bool getEnableable() {return enableable;}
 };
 
-class ofxUITabbedCanvas : public ofxUIXmlCanvas {
+class ofxUITabbedCanvas : public ofxUICanvasPlus {
 protected:
 	int currentTab;
 	float tabWidth, enableWidth;
@@ -55,7 +58,7 @@ public:
         addWidgetRight(saveButton);
 	}
 	void add(ofxUITab* tab) {
-		tab->disableAppEventCallbacks();
+		tab->disableAppDrawCallback();
 		tab->disableMouseEventCallbacks();
 		tab->disableKeyEventCallbacks();
 		tab->disableWindowEventCallbacks();

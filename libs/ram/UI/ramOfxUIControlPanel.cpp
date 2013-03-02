@@ -22,12 +22,6 @@ ramOfxUIControlPanel::ramOfxUIControlPanel()
 ,kLength(320 - kXInit)
 ,camera_preset_t(0)
 ,camera_preset(0)
-,fullScreen(true)
-,pause(false)
-,enableShadow(true)
-,mFloorPattern(ramFloor::FLOOR_GRID_LINES)
-,mFloorSize(600.0)
-,mGridSize(50.0)
 ,backgroundColor(ofColor(0))
 {
 }
@@ -43,35 +37,6 @@ void ramOfxUIControlPanel::setup()
 	addPanel(playbackTab);
 	addPanel(actorsTab);
 	
-	/// First panel
-	// -------------------------------------
-	addPanel("RamDanceToolkit");
-	
-	addToggle("FullScreen", &fullScreen);
-	addToggle("Pause (or press Space Key)", &pause);
-	addToggle("Use Shadow", &enableShadow);
-	
-	addSeparator();
-	addColorSelector("Background", &backgroundColor);
-	
-	/// floor pattern
-	addSeparator();
-	vector<string> floors = ramFloor::getFloorNames();
-	addRadioGroup("Floor Patterns", floors, &mFloorPattern);
-	
-	
-	current_panel->addSlider("Floor Size", 100, 1000, &mFloorSize, kLength / 2 - kXInit, kDim);
-	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
-	current_panel->addSlider("Grid Size", 20, 200, &mGridSize, kLength / 2 - kXInit, kDim);
-	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
-	
-	addSeparator();
-	
-	/// camera Names
-	addRadioGroup("Camera Preset", ramCameraManager::instance().getDefaultCameraNames(), &camera_preset_t);
-	
-	/// Events
-	ofAddListener(ofEvents().keyPressed, this, &ramOfxUIControlPanel::keyPressed);
 	ofAddListener(mSceneTabs.newGUIEvent, this, &ramOfxUIControlPanel::guiEvent);
 	
 	mSceneTabs.addSpacer();
@@ -79,28 +44,11 @@ void ramOfxUIControlPanel::setup()
 
 void ramOfxUIControlPanel::update(ofEventArgs &e)
 {
-	if (fullScreen != (ofGetWindowMode() == OF_FULLSCREEN))
-	{
-		ofSetFullscreen(fullScreen);
-	}
-	
 	if(!ofGetMousePressed())
 	{
 		bool hover = mSceneTabs.isHit(ofGetMouseX(), ofGetMouseY());
 		ramCameraManager::instance().setEnableInteractiveCamera(!hover);
 	}
-	
-	// reset the camera within the first few frames. if you do it once on initialization,
-	// there's some kind of bug that keeps the camera from being in the right position
-	if (camera_preset_t != camera_preset || ofGetFrameNum() < 10)
-	{
-		camera_preset = camera_preset_t;
-		reloadCameraSetting(camera_preset);
-	}
-	
-	ramEnableShadow(enableShadow);
-	
-	ofBackground(backgroundColor);
 }
 
 //
@@ -123,16 +71,6 @@ void ramOfxUIControlPanel::addPanel(ofxUITab& tab)
 {
 	scenes.push_back(NULL);
 	getSceneTabs().add(&tab);
-}
-
-void ramOfxUIControlPanel::addPanel(const string& name)
-{
-	ofxUITab *panel = new ofxUITab(name, false);
-	current_panel = panel;
-	
-	getSceneTabs().add(panel);
-	scenes.push_back(NULL);
-	panel->autoSizeToFitWidgets();
 }
 
 void ramOfxUIControlPanel::addSection(const string& name)
@@ -259,13 +197,6 @@ void ramOfxUIControlPanel::remove(const string& name)
 	assert(false);
 }
 
-//
-
-void ramOfxUIControlPanel::reloadCameraSetting(const int index)
-{
-	ramCameraManager::instance().rollbackDefaultCameraSetting(index);
-}
-
 void ramOfxUIControlPanel::guiEvent(ofxUIEventArgs &e)
 {
 	for(int i = 0; i < scenes.size(); i++) 
@@ -275,15 +206,6 @@ void ramOfxUIControlPanel::guiEvent(ofxUIEventArgs &e)
 			// this is a weak connection, it would be better for ramScene to extend ofxUITab
 			scenes[i]->setEnabled(mSceneTabs.at(i)->getEnabled());
 		}
-	}
-}
-
-void ramOfxUIControlPanel::keyPressed(ofKeyEventArgs &e)
-{
-	if (e.key == ' ')
-	{
-		pause = !pause;
-		ramActorManager::instance().setFreezed(pause);
 	}
 }
 

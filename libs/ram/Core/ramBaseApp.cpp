@@ -104,9 +104,9 @@ void ramBaseApp::drawNodeArrays()
 void ramBaseApp::drawFloor()
 {
 	ramControlPanel &gui = ramGetGUI();
-	ramDrawBasicFloor(gui.getFloorPattern(),
-					  gui.getFloorSize(),
-					  gui.getGridSize(),
-					  ramColor::GRAY,
-					  ramColor::DARK_GRAY);
+	ramDrawBasicFloor(gui.getPreferencesTab().getFloorPattern(),
+					  gui.getPreferencesTab().getFloorSize(),
+					  gui.getPreferencesTab().getFloorGridSize(),
+					  ramColor::GRAY_ALPHA,
+					  ramColor::DARK_GRAY_ALPHA);
 }

@@ -28,6 +28,10 @@ const ofColor ramColor::GRAY            = ofColor::fromHex(0x888888);
 const ofColor ramColor::LIGHT_GRAY      = ofColor::fromHex(0xbbbbbb);
 const ofColor ramColor::WHITE           = ofColor::fromHex(0xffffff);
 
+const ofColor ramColor::DARK_GRAY_ALPHA = ofColor(255, 64);
+const ofColor ramColor::GRAY_ALPHA      = ofColor(255, 128);
+const ofColor ramColor::LIGHT_GRAY_ALPHA= ofColor(255, 192);
+
 const ofColor ramColor::SHADOW          = ofColor(0, 0, 0, 60);
 
 //

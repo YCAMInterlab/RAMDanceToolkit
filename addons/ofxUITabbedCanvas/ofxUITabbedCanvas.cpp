@@ -2,8 +2,28 @@
 
 ofColor uiThemecb(64, 192), uiThemeco(192, 192), uiThemecoh(160, 192), uiThemecf(240, 255), uiThemecfh(160, 255), uiThemecp(128, 192), uiThemecpo(255, 192);
 
-ofxUIXmlCanvas::ofxUIXmlCanvas() {
+ofxUICanvasPlus::ofxUICanvasPlus() {
 	setUIColors(uiThemecb, uiThemeco, uiThemecoh, uiThemecf, uiThemecfh, uiThemecp, uiThemecpo);
+}
+
+int ofxUICanvasPlus::getChoice(ofxUIRadio* radio) {
+	vector<ofxUIToggle*> toggles = radio->getToggles();
+	for(int i = 0; i < toggles.size(); i++) {
+		if(toggles[i]->getValue()) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+int ofxUICanvasPlus::getChoice(ofxUIEventArgs& e, ofxUIRadio* radio) {
+	vector<ofxUIToggle*> toggles = radio->getToggles();
+	for(int i = 0; i < toggles.size(); i++) {
+		if(e.widget == toggles[i]) {
+			return i;
+		}
+	}
+	return -1;
 }
 
 string getXmlSafeName(string name) {
@@ -44,7 +64,7 @@ void ofxUITabbedCanvas::saveSettings(const string &filename) {
 	xml.saveFile(filename);
 }
 
-void ofxUIXmlCanvas::saveSettingsToXml(ofxXmlSettings& xml) {
+void ofxUICanvasPlus::saveSettingsToXml(ofxXmlSettings& xml) {
 	for(int i = 0; i < widgetsWithState.size(); i++) {
 		int index = xml.addTag("Widget");
 		if(xml.pushTag("Widget", index)) {
@@ -56,8 +76,7 @@ void ofxUIXmlCanvas::saveSettingsToXml(ofxXmlSettings& xml) {
 	}
 }
 
-void ofxUIXmlCanvas::loadSettingsFromXml(ofxXmlSettings& xml)
-{
+void ofxUICanvasPlus::loadSettingsFromXml(ofxXmlSettings& xml) {
 	int widgetTags = xml.getNumTags("Widget"); 
 	for(int i = 0; i < widgetTags; i++) {
 		xml.pushTag("Widget", i);

@@ -66,6 +66,11 @@
 		274B3C5816DEFADA004F30A6 /* ramTimeShifter.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1D16DEFADA004F30A6 /* ramTimeShifter.h */; };
 		274B3C5916DEFADA004F30A6 /* ramUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3C1E16DEFADA004F30A6 /* ramUtils.cpp */; };
 		274B3C5A16DEFADA004F30A6 /* ramUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1F16DEFADA004F30A6 /* ramUtils.h */; };
+		279CDD2516E20D62002DFFBE /* ramPreferencesTab.h in Headers */ = {isa = PBXBuildFile; fileRef = 279CDD2416E20D62002DFFBE /* ramPreferencesTab.h */; };
+		279CDD2716E20D6E002DFFBE /* ramPresetTab.h in Headers */ = {isa = PBXBuildFile; fileRef = 279CDD2616E20D6E002DFFBE /* ramPresetTab.h */; };
+		279CDD2916E20D77002DFFBE /* ramPlaybackTab.h in Headers */ = {isa = PBXBuildFile; fileRef = 279CDD2816E20D77002DFFBE /* ramPlaybackTab.h */; };
+		279CDD2B16E20D7E002DFFBE /* ramActorsTab.h in Headers */ = {isa = PBXBuildFile; fileRef = 279CDD2A16E20D7E002DFFBE /* ramActorsTab.h */; };
+		279CDD2D16E20FD1002DFFBE /* ramPresetTab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 279CDD2C16E20FD1002DFFBE /* ramPresetTab.cpp */; };
 		600EFB1A16C8F56800A5B331 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 600EFAF616C8F56800A5B331 /* IpEndpointName.cpp */; };
 		600EFB1B16C8F56800A5B331 /* IpEndpointName.h in Headers */ = {isa = PBXBuildFile; fileRef = 600EFAF716C8F56800A5B331 /* IpEndpointName.h */; };
 		600EFB1C16C8F56800A5B331 /* NetworkingUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 600EFAF816C8F56800A5B331 /* NetworkingUtils.h */; };
@@ -527,6 +532,11 @@
 		274B3C1D16DEFADA004F30A6 /* ramTimeShifter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramTimeShifter.h; sourceTree = "<group>"; };
 		274B3C1E16DEFADA004F30A6 /* ramUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramUtils.cpp; sourceTree = "<group>"; };
 		274B3C1F16DEFADA004F30A6 /* ramUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramUtils.h; sourceTree = "<group>"; };
+		279CDD2416E20D62002DFFBE /* ramPreferencesTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPreferencesTab.h; sourceTree = "<group>"; };
+		279CDD2616E20D6E002DFFBE /* ramPresetTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPresetTab.h; sourceTree = "<group>"; };
+		279CDD2816E20D77002DFFBE /* ramPlaybackTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPlaybackTab.h; sourceTree = "<group>"; };
+		279CDD2A16E20D7E002DFFBE /* ramActorsTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramActorsTab.h; sourceTree = "<group>"; };
+		279CDD2C16E20FD1002DFFBE /* ramPresetTab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramPresetTab.cpp; sourceTree = "<group>"; };
 		600EFAF116C8F56800A5B331 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
 		600EFAF616C8F56800A5B331 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		600EFAF716C8F56800A5B331 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
@@ -1073,6 +1083,11 @@
 				274B3C1116DEFADA004F30A6 /* ramControlPanel.h */,
 				274B3C1316DEFADA004F30A6 /* ramOfxUIControlPanel.cpp */,
 				274B3C1416DEFADA004F30A6 /* ramOfxUIControlPanel.h */,
+				279CDD2416E20D62002DFFBE /* ramPreferencesTab.h */,
+				279CDD2616E20D6E002DFFBE /* ramPresetTab.h */,
+				279CDD2816E20D77002DFFBE /* ramPlaybackTab.h */,
+				279CDD2A16E20D7E002DFFBE /* ramActorsTab.h */,
+				279CDD2C16E20FD1002DFFBE /* ramPresetTab.cpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2493,6 +2508,10 @@
 				27423B0416DF217A00FD1944 /* ramPlanarGestureRecognizer.h in Headers */,
 				9AA72AF116DF0D5E006C4E06 /* ramTSVCoder.h in Headers */,
 				9AA72AF516DF0DBA006C4E06 /* ramSession.h in Headers */,
+				279CDD2516E20D62002DFFBE /* ramPreferencesTab.h in Headers */,
+				279CDD2716E20D6E002DFFBE /* ramPresetTab.h in Headers */,
+				279CDD2916E20D77002DFFBE /* ramPlaybackTab.h in Headers */,
+				279CDD2B16E20D7E002DFFBE /* ramActorsTab.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2602,6 +2621,7 @@
 				27423B0216DF074000FD1944 /* ramGeometry.cpp in Sources */,
 				27423B0616DF2B2200FD1944 /* ramPlanarGestureRecognizer.cpp in Sources */,
 				9A10418C16E084B200A7E707 /* ramSession.cpp in Sources */,
+				279CDD2D16E20FD1002DFFBE /* ramPresetTab.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

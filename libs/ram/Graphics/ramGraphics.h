@@ -25,6 +25,9 @@ struct ramColor
 	static const ofColor GRAY;
 	static const ofColor LIGHT_GRAY;
 	static const ofColor WHITE;
+	static const ofColor DARK_GRAY_ALPHA;
+	static const ofColor GRAY_ALPHA;
+	static const ofColor LIGHT_GRAY_ALPHA;
 	static const ofColor SHADOW;
 };
 
