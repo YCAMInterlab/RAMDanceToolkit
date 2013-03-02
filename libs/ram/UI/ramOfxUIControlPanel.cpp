@@ -16,19 +16,20 @@ ramOfxUIControlPanel& ramOfxUIControlPanel::instance()
 	return *_instance;
 }
 
-ramOfxUIControlPanel::ramOfxUIControlPanel() : kDim(16), kXInit(OFX_UI_GLOBAL_WIDGET_SPACING), kLength(320 - kXInit)
+ramOfxUIControlPanel::ramOfxUIControlPanel()
+:kDim(16)
+,kXInit(OFX_UI_GLOBAL_WIDGET_SPACING)
+,kLength(320 - kXInit)
+,camera_preset_t(0)
+,camera_preset(0)
+,fullScreen(true)
+,pause(false)
+,enableShadow(true)
+,mFloorPattern(ramFloor::FLOOR_GRID_LINES)
+,mFloorSize(600.0)
+,mGridSize(50.0)
+,backgroundColor(ofColor(0))
 {
-	mFloorPattern = ramFloor::FLOOR_NONE;
-	mFloorSize = 600.0;
-	mGridSize = 50.0;
-	enableShadow = true;
-
-	fullScreen = true;
-	pause = false;
-
-	camera_preset = camera_preset_t = 0;
-
-	backgroundColor.set(0);
 }
 
 void ramOfxUIControlPanel::setup()
@@ -52,6 +53,7 @@ void ramOfxUIControlPanel::setup()
 	addSeparator();
 	vector<string> floors = ramFloor::getFloorNames();
 	addRadioGroup("Floor Patterns", floors, &mFloorPattern);
+	
 
 	current_panel->addSlider("Floor Size", 100, 1000, &mFloorSize, kLength / 2 - kXInit, kDim);
 	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
@@ -66,6 +68,8 @@ void ramOfxUIControlPanel::setup()
 	/// Events
 	ofAddListener(ofEvents().keyPressed, this, &ramOfxUIControlPanel::keyPressed);
 	ofAddListener(mSceneTabs.newGUIEvent, this, &ramOfxUIControlPanel::guiEvent);
+	
+	mSceneTabs.addSpacer();
 }
 
 void ramOfxUIControlPanel::update(ofEventArgs &e)
@@ -75,7 +79,9 @@ void ramOfxUIControlPanel::update(ofEventArgs &e)
 		ofSetFullscreen(fullScreen);
 	}
 
-	if (camera_preset_t != camera_preset)
+	// reset the camera within the first few frames. if you do it once on initialization,
+	// there's some kind of bug that keeps the camera from being in the right position
+	if (camera_preset_t != camera_preset || ofGetFrameNum() < 10)
 	{
 		camera_preset = camera_preset_t;
 		reloadCameraSetting(camera_preset);
@@ -168,7 +174,7 @@ struct RadioGroupListener
 	}
 };
 
-void ramOfxUIControlPanel::addRadioGroup(const string& name, const vector<string>& content, int *value)
+ofxUIRadio* ramOfxUIControlPanel::addRadioGroup(const string& name, const vector<string>& content, int *value)
 {
 	ofxUIRadio *o = current_panel->addRadio(name, content, OFX_UI_ORIENTATION_VERTICAL, kDim, kDim);
 
@@ -176,6 +182,7 @@ void ramOfxUIControlPanel::addRadioGroup(const string& name, const vector<string
 	RadioGroupListener *e = new RadioGroupListener(o, value);
 	ofAddListener(current_panel->newGUIEvent, e, &RadioGroupListener::handle);
 	current_panel->autoSizeToFitWidgets();
+	return o;
 }
 
 void ramOfxUIControlPanel::addDropdown(const string& name, const vector<string>& content, int *value)

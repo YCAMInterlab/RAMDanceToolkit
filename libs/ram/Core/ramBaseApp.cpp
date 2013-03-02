@@ -107,6 +107,6 @@ void ramBaseApp::drawFloor()
 	ramDrawBasicFloor(gui.getFloorPattern(),
 					  gui.getFloorSize(),
 					  gui.getGridSize(),
-					  ramColor::BLUE_LIGHT,
-					  ramColor::BLUE_DEEP);
+					  ramColor::GRAY,
+					  ramColor::DARK_GRAY);
 }

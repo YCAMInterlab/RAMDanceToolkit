@@ -43,7 +43,7 @@ public:
 
 	void addToggle(const string& name, bool *value);
 	void addMultiToggle(const string& name, const vector<string>& content, int *value);
-	void addRadioGroup(const string& name, const vector<string>& content, int *value);
+	ofxUIRadio* addRadioGroup(const string& name, const vector<string>& content, int *value);
 	void addDropdown(const string& name, const vector<string>& content, int *value);
 	void addSlider(const string& name, float min_value, float max_value, float *value);
 	void addColorSelector(const string& name, ofFloatColor *value);
