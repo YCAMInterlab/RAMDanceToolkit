@@ -9,8 +9,6 @@ void ramSceneManager::setup(const vector<ramBaseScene*>& scenes_)
 {
 	scenes = scenes_;
 
-	ramGetGUI().setupSceneToggles(scenes);
-
 	for (int i = 0; i < scenes.size(); i++)
 	{
 		ramBaseScene *scene = scenes.at(i);

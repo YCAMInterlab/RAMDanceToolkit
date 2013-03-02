@@ -71,9 +71,8 @@ Notation notation;
 //--------------------------------------------------------------
 void testApp::setup()
 {
-	ofSetFrameRate(60);
+	ofSetFrameRate(120);
 	ofSetVerticalSync(true);
-	ofBackground(ramColor::WHITE);
 	
 	/// ram setup
 	// ------------------

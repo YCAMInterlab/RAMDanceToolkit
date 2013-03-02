@@ -4,6 +4,7 @@
 
 class ofxUIXmlCanvas : public ofxUICanvas {
 public:
+	ofxUIXmlCanvas();
 	void saveSettingsToXml(ofxXmlSettings& xml);
 	void loadSettingsFromXml(ofxXmlSettings& xml);
 };
@@ -72,7 +73,7 @@ public:
 		}
 		autoSizeToFitWidgets();
 	}
-	ofxUICanvas* at(int i) {
+	ofxUITab* at(int i) {
 		return tabs[i];
 	}
 	int getTabIndex(string name) {
@@ -100,6 +101,7 @@ public:
 	ofxUITab* getCurrent() {
 		return tabs[currentTab];
 	}
+	// this should be done differently instead of overriding update()
 	void update() {
 		if (saveStatus) {
 			ofFileDialogResult result = ofSystemSaveDialog("settings.xml", "Save settings.");

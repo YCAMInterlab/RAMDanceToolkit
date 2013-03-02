@@ -1,5 +1,11 @@
 #include "ofxUITabbedCanvas.h"
 
+ofColor uiThemecb(64, 192), uiThemeco(192, 192), uiThemecoh(128, 192), uiThemecf(240, 255), uiThemecfh(128, 255), uiThemecp(96, 192), uiThemecpo(255, 192);
+
+ofxUIXmlCanvas::ofxUIXmlCanvas() {
+	setUIColors(uiThemecb, uiThemeco, uiThemecoh, uiThemecf, uiThemecfh, uiThemecp, uiThemecpo);
+}
+
 string getXmlSafeName(string name) {
 	string safe;
 	for(int i = 0; i < name.size(); i++) {

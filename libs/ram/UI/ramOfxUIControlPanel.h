@@ -8,7 +8,6 @@
 
 #include "ramGraphics.h"
 #include "ramCameraManager.h"
-#include "ramSceneTabs.h"
 
 class ramBaseScene;
 class ramControllable;
@@ -61,7 +60,6 @@ public:
 	// for internal use
 
 	void addPanel(ramControllable* control);
-	void setupSceneToggles(vector<ramBaseScene*>& scenes);
 	void reloadCameraSetting(const int index);
 
 	inline ofColor getBackgroundColor() { return backgroundColor; }
@@ -69,8 +67,7 @@ public:
 	inline float getFloorSize() { return mFloorSize; }
 	inline float getGridSize() { return mGridSize; }
 
-	inline ramSceneTabs& getSceneTabs() { return mSceneTabs; }
-	inline ofxUIToggleMatrix* getSceneToggles() { return mSceneToggles; }
+	inline ofxUITabbedCanvas& getSceneTabs() { return mSceneTabs; }
 
 	//
 
@@ -96,8 +93,7 @@ private:
 
 	ofFloatColor backgroundColor;
 
-	ramSceneTabs mSceneTabs;
-	ofxUIToggleMatrix *mSceneToggles;
+	ofxUITabbedCanvas mSceneTabs;
 
 	ofxUICanvas *current_panel;
 

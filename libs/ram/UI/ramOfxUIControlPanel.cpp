@@ -7,8 +7,6 @@
 
 ramOfxUIControlPanel *ramOfxUIControlPanel::_instance = NULL;
 
-ofColor uiThemecb(64, 192), uiThemeco(192, 192), uiThemecoh(128, 192), uiThemecf(240, 255), uiThemecfh(128, 255), uiThemecp(96, 192), uiThemecpo(255, 192);
-
 ramOfxUIControlPanel& ramOfxUIControlPanel::instance()
 {
 	if (_instance == NULL)
@@ -25,12 +23,12 @@ ramOfxUIControlPanel::ramOfxUIControlPanel() : kDim(16), kXInit(OFX_UI_GLOBAL_WI
 	mGridSize = 50.0;
 	enableShadow = true;
 
-	fullScreen = false;
+	fullScreen = true;
 	pause = false;
 
 	camera_preset = camera_preset_t = 0;
 
-	backgroundColor.set(0.15, 0.15, 0.15, 1);
+	backgroundColor.set(0);
 
 	scenes = NULL;
 }
@@ -57,7 +55,6 @@ void ramOfxUIControlPanel::setup()
 	vector<string> floors = ramFloor::getFloorNames();
 	addRadioGroup("Floor Patterns", floors, &mFloorPattern);
 
-	current_panel->setUIColors(uiThemecb, uiThemeco, uiThemecoh, uiThemecf, uiThemecfh, uiThemecp, uiThemecpo);
 	current_panel->addSlider("Floor Size", 100, 1000, &mFloorSize, kLength / 2 - kXInit, kDim);
 	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
 	current_panel->addSlider("Grid Size", 20, 200, &mGridSize, kLength / 2 - kXInit, kDim);
@@ -95,52 +92,51 @@ void ramOfxUIControlPanel::update(ofEventArgs &e)
 
 void ramOfxUIControlPanel::addPanel(ramControllable* control)
 {
-	ramScenePanel *panel = new ramScenePanel();
+	ofxUITab *panel = new ofxUITab();
 	current_panel = panel;
 
 	/// used for save/load setting file suffix
-	panel->setSceneName(control->getName());
-
-	panel->setUIColors(uiThemecb, uiThemeco, uiThemecoh, uiThemecf, uiThemecfh, uiThemecp, uiThemecpo);
-
-	panel->addWidgetDown(new ofxUILabel(control->getName(), OFX_UI_FONT_LARGE));
-	panel->addSpacer(kLength, 2);
+	panel->setTabName(control->getName());
 
 	control->setupControlPanel();
 	getSceneTabs().add(panel);
+	
+	panel->autoSizeToFitWidgets();
 }
 
 void ramOfxUIControlPanel::addPanel(const string& name)
 {
-	ramScenePanel *panel = new ramScenePanel();
+	ofxUITab *panel = new ofxUITab(name, false);
 	current_panel = panel;
 
-	/// used for save/load setting file suffix
-	panel->setSceneName(name);
-
-	addSection(name);
 	getSceneTabs().add(panel);
+	
+	panel->autoSizeToFitWidgets();
 }
 
 void ramOfxUIControlPanel::addSection(const string& name)
 {
 	current_panel->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_MEDIUM));
 	current_panel->addSpacer(kLength, 2);
+	current_panel->autoSizeToFitWidgets();
 }
 
 void ramOfxUIControlPanel::addSeparator()
 {
 	current_panel->addSpacer(kLength, 2);
+	current_panel->autoSizeToFitWidgets();
 }
 
 void ramOfxUIControlPanel::addLabel(const string& content)
 {
 	current_panel->addWidgetDown(new ofxUILabel(content, OFX_UI_FONT_MEDIUM));
+	current_panel->autoSizeToFitWidgets();
 }
 
 void ramOfxUIControlPanel::addToggle(const string& name, bool *value)
 {
 	current_panel->addToggle(name, value, 30, 30);
+	current_panel->autoSizeToFitWidgets();
 }
 
 void ramOfxUIControlPanel::addMultiToggle(const string& name, const vector<string>& content, int *value)
@@ -181,6 +177,7 @@ void ramOfxUIControlPanel::addRadioGroup(const string& name, const vector<string
 	// FIXME: memory leak
 	RadioGroupListener *e = new RadioGroupListener(o, value);
 	ofAddListener(current_panel->newGUIEvent, e, &RadioGroupListener::handle);
+	current_panel->autoSizeToFitWidgets();
 }
 
 void ramOfxUIControlPanel::addDropdown(const string& name, const vector<string>& content, int *value)
@@ -191,6 +188,7 @@ void ramOfxUIControlPanel::addDropdown(const string& name, const vector<string>&
 void ramOfxUIControlPanel::addSlider(const string& name, float min_value, float max_value, float *value)
 {
 	current_panel->addSlider(name, min_value, max_value, value, kLength, kDim);
+	current_panel->autoSizeToFitWidgets();
 }
 
 struct ColorSelectorListener
@@ -231,6 +229,7 @@ void ramOfxUIControlPanel::addColorSelector(const string& name, ofFloatColor *va
 	current_panel->addSlider("G", 0, 1, &value->g, 90, kDim);
 	current_panel->addSlider("B", 0, 1, &value->b, 90, kDim);
 	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
+	current_panel->autoSizeToFitWidgets();
 }
 
 void ramOfxUIControlPanel::remove(const string& name)
@@ -245,42 +244,16 @@ void ramOfxUIControlPanel::reloadCameraSetting(const int index)
 	ramCameraManager::instance().rollbackDefaultCameraSetting(index);
 }
 
-void ramOfxUIControlPanel::setupSceneToggles(vector<ramBaseScene*>& scenes_)
-{
-	scenes = &scenes_;
-
-	const int size = scenes->size();
-
-	if (size <= 0)
-	{
-		current_panel->addSpacer(kLength, 2);
-		current_panel->addLabel("No scenes are assigned.");
-		return;
-	}
-
-	const int numCol = 5;
-	const int numRow = ceil((float)size / numCol);
-
-	mSceneToggles = new ofxUIToggleMatrix(kDim * 3, kDim * 2, numRow, numCol, "Scenes");
-	current_panel->addSpacer(kLength, 2);
-	current_panel->addWidgetDown(mSceneToggles);
-}
-
 void ramOfxUIControlPanel::guiEvent(ofxUIEventArgs &e)
 {
 
 	/// scene togglematrix
 	if (scenes != NULL)
 	{
-		vector<ofxUIToggle *> toggles = mSceneToggles->getToggles();
-		const int numToggles = toggles.size();
-
-		for (int i = 0; i < numToggles; i++)
+		for(int i = 0; i < scenes->size(); i++) 
 		{
-			if (i >= scenes->size()) break;
-
-			ramBaseScene *scene = scenes->at(i);
-			scene->setEnabled(toggles.at(i)->getValue());
+			// this is a weak connection, it would be better for ramScene to extend ofxUITab
+			scenes->at(i)->setEnabled(mSceneTabs.at(i)->getEnabled());
 		}
 	}
 }
