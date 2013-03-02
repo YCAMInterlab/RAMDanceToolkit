@@ -73,6 +73,9 @@ public:
 		}
 		autoSizeToFitWidgets();
 	}
+	bool isHit(float x, float y) {
+		return ofxUICanvas::isHit(x, y) || getCurrent()->isHit(x - getRect()->width, y);
+	}
 	ofxUITab* at(int i) {
 		return tabs[i];
 	}

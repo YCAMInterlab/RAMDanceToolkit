@@ -78,6 +78,12 @@ void ramOfxUIControlPanel::update(ofEventArgs &e)
 	{
 		ofSetFullscreen(fullScreen);
 	}
+	
+	if(!ofGetMousePressed())
+	{
+		bool hover = mSceneTabs.isHit(ofGetMouseX(), ofGetMouseY());
+		ramCameraManager::instance().setEnableInteractiveCamera(!hover);
+	}
 
 	// reset the camera within the first few frames. if you do it once on initialization,
 	// there's some kind of bug that keeps the camera from being in the right position

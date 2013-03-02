@@ -27,8 +27,9 @@ vector<ramCameraSettings> ramCameraSettings::loadSettings(ofxXmlSettings& settin
 		{
 			ramCameraSettings s = ramCameraSettings(setting);
 
-			if (setting.pushTag("movement"))
+			if (setting.tagExists("movement"))
 			{
+				setting.pushTag("movement");
 				s.moving_type = setting.getValue("type", "") == "circle" ? MOVING_CIRCLE : MOVING_LINEAR;
 				
 				s.look_at = ofVec3f(setting.getValue("look_at:x", 0.0),

@@ -8,12 +8,12 @@ public:
 	
 	ofxUITabbedCanvas* tabbedCanvas;
 	vector<ofxUITab*> tabs;
-		
+	
 	void setup() {
 		ofSetVerticalSync(true);
 		ofSetFrameRate(120);
 		ofSetWindowTitle("RAM Dance Toolkit");
-
+		
 		tabbedCanvas = new ofxUITabbedCanvas();
 		
 		int n = 24;
