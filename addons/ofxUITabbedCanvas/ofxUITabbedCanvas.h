@@ -105,13 +105,17 @@ public:
 	void update() {
 		if (saveStatus) {
 			ofFileDialogResult result = ofSystemSaveDialog("settings.xml", "Save settings.");
-			saveSettings(result.getPath());
-			saveButton->setValue(false);
+			if(result.bSuccess) {
+				saveSettings(result.getPath());
+				saveButton->setValue(false);
+			}
 		}
 		if (loadStatus) {
 			ofFileDialogResult result = ofSystemLoadDialog("Load settings.", false);
-			loadSettings(result.getPath());
-			loadButton->setValue(false);
+			if(result.bSuccess) {
+				loadSettings(result.getPath());
+				loadButton->setValue(false);
+			}
 		}
 		if (!visible || tabs.empty()) return;
 		getCurrent()->update();

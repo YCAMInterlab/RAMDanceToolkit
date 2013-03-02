@@ -59,7 +59,7 @@ public:
 
 	// for internal use
 
-	void addPanel(ramControllable* control);
+	void addPanel(ramBaseScene* control);
 	void reloadCameraSetting(const int index);
 
 	inline ofColor getBackgroundColor() { return backgroundColor; }
@@ -97,7 +97,7 @@ private:
 
 	ofxUICanvas *current_panel;
 
-	vector<ramBaseScene*> *scenes;
+	vector<ramBaseScene*> scenes;
 
 	struct ButtonEventListener
 	{

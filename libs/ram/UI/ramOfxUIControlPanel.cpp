@@ -29,8 +29,6 @@ ramOfxUIControlPanel::ramOfxUIControlPanel() : kDim(16), kXInit(OFX_UI_GLOBAL_WI
 	camera_preset = camera_preset_t = 0;
 
 	backgroundColor.set(0);
-
-	scenes = NULL;
 }
 
 void ramOfxUIControlPanel::setup()
@@ -67,7 +65,7 @@ void ramOfxUIControlPanel::setup()
 
 	/// Events
 	ofAddListener(ofEvents().keyPressed, this, &ramOfxUIControlPanel::keyPressed);
-	ofAddListener(current_panel->newGUIEvent, this, &ramOfxUIControlPanel::guiEvent);
+	ofAddListener(mSceneTabs.newGUIEvent, this, &ramOfxUIControlPanel::guiEvent);
 }
 
 void ramOfxUIControlPanel::update(ofEventArgs &e)
@@ -90,7 +88,7 @@ void ramOfxUIControlPanel::update(ofEventArgs &e)
 
 //
 
-void ramOfxUIControlPanel::addPanel(ramControllable* control)
+void ramOfxUIControlPanel::addPanel(ramBaseScene* control)
 {
 	ofxUITab *panel = new ofxUITab();
 	current_panel = panel;
@@ -100,7 +98,7 @@ void ramOfxUIControlPanel::addPanel(ramControllable* control)
 
 	control->setupControlPanel();
 	getSceneTabs().add(panel);
-	
+	scenes.push_back(control);
 	panel->autoSizeToFitWidgets();
 }
 
@@ -110,7 +108,7 @@ void ramOfxUIControlPanel::addPanel(const string& name)
 	current_panel = panel;
 
 	getSceneTabs().add(panel);
-	
+	scenes.push_back(NULL);
 	panel->autoSizeToFitWidgets();
 }
 
@@ -246,14 +244,12 @@ void ramOfxUIControlPanel::reloadCameraSetting(const int index)
 
 void ramOfxUIControlPanel::guiEvent(ofxUIEventArgs &e)
 {
-
-	/// scene togglematrix
-	if (scenes != NULL)
+	for(int i = 0; i < scenes.size(); i++) 
 	{
-		for(int i = 0; i < scenes->size(); i++) 
+		if(scenes[i] != NULL)
 		{
-			// this is a weak connection, it would be better for ramScene to extend ofxUITab
-			scenes->at(i)->setEnabled(mSceneTabs.at(i)->getEnabled());
+		// this is a weak connection, it would be better for ramScene to extend ofxUITab
+			scenes[i]->setEnabled(mSceneTabs.at(i)->getEnabled());
 		}
 	}
 }
