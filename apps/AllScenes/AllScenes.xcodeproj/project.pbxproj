@@ -115,7 +115,6 @@
 		9A2B3F5F16D325C7001CBFC9 /* SoundCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundCube.h; sourceTree = "<group>"; };
 		9A2B3F6116D325C7001CBFC9 /* Stamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stamp.h; sourceTree = "<group>"; };
 		9A2B3F6316D325C7001CBFC9 /* UpsideDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpsideDown.h; sourceTree = "<group>"; };
-		9A2B3FB716D3517A001CBFC9 /* upside-donuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "upside-donuts.h"; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		D2B8DCC416D3834A00210022 /* btPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btPicker.cpp; sourceTree = "<group>"; };
 		D2B8DCC516D3834A00210022 /* btPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btPicker.h; sourceTree = "<group>"; };
@@ -288,7 +287,6 @@
 				9A2B3F6016D325C7001CBFC9 /* Stamp */,
 				27B8489216D35466000D321D /* ThreePoints */,
 				9A2B3F6216D325C7001CBFC9 /* UpsideDown */,
-				9A2B3FB316D35150001CBFC9 /* YokoSelection */,
 				60E559B016D3366A00051FE9 /* HastyChase */,
 			);
 			name = Scenes;
@@ -410,23 +408,6 @@
 			path = scenes/UpsideDown;
 			sourceTree = "<group>";
 		};
-		9A2B3FB316D35150001CBFC9 /* YokoSelection */ = {
-			isa = PBXGroup;
-			children = (
-				9A2B3FB616D3517A001CBFC9 /* upside-donuts */,
-			);
-			name = YokoSelection;
-			path = scenes/YokoSelection;
-			sourceTree = "<group>";
-		};
-		9A2B3FB616D3517A001CBFC9 /* upside-donuts */ = {
-			isa = PBXGroup;
-			children = (
-				9A2B3FB716D3517A001CBFC9 /* upside-donuts.h */,
-			);
-			path = "upside-donuts";
-			sourceTree = "<group>";
-		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
@@ -495,7 +476,7 @@
 		E4328144138ABC890047C5CB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E4328148138ABC890047C5CB /* openFrameworks.a */,
+				E4328148138ABC890047C5CB /* openFrameworksDebug.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -612,7 +593,7 @@
 			remoteRef = 60B90AB21644E21400AF2156 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E4328148138ABC890047C5CB /* openFrameworks.a */ = {
+		E4328148138ABC890047C5CB /* openFrameworksDebug.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = openFrameworks.a;

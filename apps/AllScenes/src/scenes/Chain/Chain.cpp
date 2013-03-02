@@ -61,17 +61,14 @@ static void popAll()
 //--------------------------------------------------------------
 void Chain::setupControlPanel()
 {
-	ramControlPanel &gui = ramGetGUI();
 	
 #ifdef RAM_GUI_SYSTEM_OFXUI
 	
-	ofxUICanvas* panel = gui.getCurrentUIContext();
-	
-    ofAddListener(panel->newGUIEvent, this, &Chain::onValueChanged);
-    
     const float w = 300.0f;
     const float dim = 16.0f;
     
+	ofxUICanvas* panel = gui().getCurrentUIContext();
+	
     panel->addSlider("GRAVITY X", -3.0f, 3.0f, &mGravity.x, w, dim);
     panel->addSlider("GRAVITY Y", -3.0f, 3.0f, &mGravity.y, w, dim);
     panel->addSlider("GRAVITY Z", -3.0f, 3.0f, &mGravity.z, w, dim);
@@ -90,6 +87,7 @@ void Chain::setupControlPanel()
     
     panel->addButton("REMOVE ALL", false, dim, dim);
 	
+    ofAddListener(panel->newGUIEvent, this, &Chain::onValueChanged);
 #endif
 }
 

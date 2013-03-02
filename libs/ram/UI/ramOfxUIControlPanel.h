@@ -32,15 +32,15 @@ public:
 	void addSection(const string& name);
 	void addSeparator();
 	void addLabel(const string& content);
-
-	template <typename Functor>
-	void addButton(const string& name, const Functor &functor)
+	
+	ofEvent<ofEventArgs>& addButton(const string& name)
 	{
 		ofxUIButton *button = current_panel->addButton(name, false, 30, 30);
-
+		
 		// FIXME: memory leak
-		ButtonEventListener *e = new ButtonEventListener(button, new Callback<Functor>(functor));
+		ButtonEventListener *e = new ButtonEventListener(button);
 		ofAddListener(current_panel->newGUIEvent, e, &ButtonEventListener::handle);
+		return e->evt;
 	}
 
 	void addToggle(const string& name, bool *value);
@@ -102,16 +102,18 @@ private:
 	struct ButtonEventListener
 	{
 		ofxUIButton *button;
-		struct ICallable *callable;
+		ofEvent<ofEventArgs> evt;
 
-		ButtonEventListener(ofxUIButton *button, ICallable *callable) : button(button), callable(callable) {}
-		~ButtonEventListener() { delete button; delete callable; }
+		ButtonEventListener(ofxUIButton *button) : button(button){}
+		~ButtonEventListener() { delete button; }
 
 		void handle(ofxUIEventArgs &e)
 		{
-			if (!button->getValue()) return;
+			if (e.widget != button
+				&& !button->getValue()) return;
 
-			callable->call();
+			static ofEventArgs args;
+			ofNotifyEvent(evt, args);
 		}
 	};
 

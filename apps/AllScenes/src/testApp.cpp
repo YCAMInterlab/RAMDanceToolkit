@@ -39,9 +39,6 @@ UpsideDown upsideDown;
 #include "Kepler.h"
 Kepler kepler;
 
-#include "upside-donuts.h"
-UpsideDownDonuts upsideDownDonuts;
-
 #include "HastyChase.h"
 HastyChase hastyChase;
 

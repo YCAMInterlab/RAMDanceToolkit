@@ -14,6 +14,8 @@ class Donuts : public ramBaseScene
 	float mBoxSize;
 	ofVec3f mTranslate;
 	bool mShowActor;
+	bool mResetAll;
+	bool mToggleAll;
 	
 	int mNumDuplicates;
 	float mRadian;
@@ -23,27 +25,25 @@ public:
 	
 	void setupControlPanel()
 	{
-		ramControlPanel &gui = ramGetGUI();
 		
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		
-		ofxUICanvas* panel = gui.getCurrentUIContext();
+		ofxUICanvas* panel = gui().getCurrentUIContext();
 		
-		panel->addWidgetDown(new ofxUILabel("Original me", OFX_UI_FONT_MEDIUM));
-		panel->addSlider("Scale", 0.1, 10.0, &mScale, gui.kLength, gui.kDim);
-		panel->addSlider("Position: X", -300.0, 300.0, &mTranslate.x, gui.kLength, gui.kDim);
-		panel->addSlider("Position: Z", -300.0, 300.0, &mTranslate.z, gui.kLength, gui.kDim);
+		gui().addSection("Original me");
+		gui().addSlider("Scale", 0.1, 10.0, &mScale);
+		gui().addSlider("Position: X", -300.0, 300.0, &mTranslate.x);
+		gui().addSlider("Position: Z", -300.0, 300.0, &mTranslate.z);
 		
-		panel->addSpacer(gui.kLength, 2);
-		panel->addWidgetDown(new ofxUILabel("Duplicate me", OFX_UI_FONT_MEDIUM));
-		panel->addSlider("Duplicate", 1, 200, &mNumDuplicate, gui.kLength, gui.kDim);
-		panel->addSlider("Radius", 10.0, 1000.0, &mRadius, gui.kLength, gui.kDim);
-		panel->addSlider("Box Size", 1.0, 1000.0, &mBoxSize, gui.kLength, gui.kDim);
+		gui().addSection("Duplicated me");
+		gui().addSlider("Duplicate", 1, 200, &mNumDuplicate);
+		gui().addSlider("Radius", 10.0, 1000.0, &mRadius);
+		gui().addSlider("Box Size", 1.0, 1000.0, &mBoxSize);
 		
-		panel->addSpacer(gui.kLength, 2);
-		panel->addButton("Reset all settings", false, 20, 20);
-		panel->addToggle("Show Actor", &mShowActor, 20, 20);
-		panel->addToggle("Toggle All", false, 20, 20);
+		gui().addSection("Reset, Toggle visibility");
+		panel->addButton("Reset all settings", false, 30, 30);
+		gui().addToggle("Show Actor", &mShowActor);
+		gui().addToggle("Toggle All", &mToggleAll);
 		
 		for (int i=0; i<ramActor::NUM_JOINTS; i++)
 		{
@@ -52,11 +52,11 @@ public:
 		}
 		
 		clear();
-		
 		ofAddListener(panel->newGUIEvent, this, &Donuts::onValueChanged);
 		
 #endif
 	}
+
 	
 	void setup()
 	{

@@ -12,213 +12,53 @@ class ramSession : public ramBaseFilter
 
 public:
 	
-	const string getName() { return "ramSession"; }
 	
-	ramSession() { clear(); }
-	ramSession(const ramSession &copy) { clear(); *this = copy; }
-	ramSession(const ramNodeArrayBuffer &buf) { clear(); mBuffer = buf; }
-	~ramSession() {}
-
-	void setupControlPanel()
-	{
-		ramControlPanel &gui = ramGetGUI();
-
-#ifdef RAM_GUI_SYSTEM_OFXUI
-
-		ofxUICanvas* panel = gui.getCurrentUIContext();
-
-		panel->addToggle("Rec", false, 40, 40);
-		panel->addToggle("Play", false, 40, 40);
-		panel->addToggle("Loop", true, 40, 40);
-
-		ofAddListener(panel->newGUIEvent, this, &ramSession::onPanelChanged);
-
-#endif
-	}
-
-	void clear()
-	{
-		mBuffer.clear();
-		
-		mPlayhead = 0;
-		mPlayStartTime = 0;
-		mRecStartTime = 0;
-		mRecEndTime = 0;
-		
-		mRate = 1.0;
-		mLoop = true;
-		mRecording = false;
-		mPlaying = false;
-	}
+#pragma mark -
+#pragma mark constructor
+	ramSession();
+	ramSession(const ramSession &copy);
+	ramSession(const ramNodeArrayBuffer &buf);
 	
-	void onPanelChanged(ofxUIEventArgs& e)
-	{
-		string name = e.widget->getName();
-
-		if (name == "Rec")
-		{
-			ofxUIToggle *toggle = (ofxUIToggle*)e.widget;
-
-			if (toggle->getValue())
-				startRecording();
-
-			else
-				stopRecording();
-		}
-
-		if (name == "Play")
-		{
-			ofxUIToggle *toggle = (ofxUIToggle*)e.widget;
-
-			if (toggle->getValue())
-				play();
-
-			else
-				stop();
-		}
-
-		if (name == "Loop")
-		{
-			ofxUIToggle *toggle = (ofxUIToggle*)e.widget;
-			setLoop(toggle->getValue());
-		}
-	}
 	
-	const ramNodeArray& filter(const ramNodeArray &src)
-	{
-		if (isRecording())
-		{
-			appendFrame(src);
-		}
-		
-		if (isPlaying())
-		{
-			mPlayhead = (ofGetElapsedTimef() - mPlayStartTime) * mRate;
-			
-			if (getFrameIndex() <= 0)
-			{
-				if (isLoop())
-				{
-					mPlayStartTime = ofGetElapsedTimef();
-				}
-				else
-				{
-					stop();
-				}
-			}
-			
-			return mBuffer.get(getFrameIndex());
-		}
-		else
-		{
-			return src;
-		}
-		
-		return src;
-	}
-
-#pragma mark - recorder handling
-
-	void startRecording()
-	{
-		if (isRecording()) return;
-
-		cout << "recording start." << endl;
-
-		clear();
-		mPlaying = false;
-		mRecording = true;
-		mRecStartTime = ofGetElapsedTimef();
-	}
-
-	void stopRecording()
-	{
-		if (!isRecording() || mBuffer.getSize() <= 0) return;
-		
-		mRecording = false;
-		mRecEndTime = ofGetElapsedTimef();
-		
-		cout << "Recording finished." << endl;
-		cout << "Actor: " << getNodeArrayName() << endl;
-		cout << "Duration: " << getDuration() << " sec"<< endl;
-		cout << "Frames: " << getNumFrames() << endl;
-	}
-
-	void play()
-	{
-		if (getNumFrames() <= 0) return;
-
-		cout << "start playing " << getNodeArrayName() << "." << endl;
-
-		mRecording = false;
-		mPlaying = true;
-		mPlayStartTime = ofGetElapsedTimef();
-	}
-
-	void stop()
-	{
-		if (!isPlaying()) return;
-		
-		cout << "stop playing " << getNodeArrayName() << "." << endl;
-
-		mPlaying = false;
-	}
+#pragma mark -
+#pragma mark gui settings
+	void setupControlPanel();
+	void onPanelChanged(ofxUIEventArgs& e);
 	
-	void setNodeArrayBuffer(ramNodeArrayBuffer &buffer)
-	{
-		if (buffer.getSize() <= 0)
-		{
-			ofLogError("RAMDanceToolkit::ramSession") << "invalid buffer was passed to setNodeArrayBuffer";
-			return;
-		}
-		
-		clear();
-		mBuffer = buffer;
-	}
 	
-	const ramNodeArray& getFrame(int index) const
-	{
-		if (index > getNumFrames()) index = getNumFrames();
-		return mBuffer.get(getNumFrames() - index);
-	}
-	void appendFrame(const ramNodeArray copy)
-	{
-		mBuffer.add(copy);
-	}
+#pragma mark -
+#pragma mark override ramBaseFilter
+	const string getName();
+	const ramNodeArray& filter(const ramNodeArray &src);
+
 	
-	inline const float getPlayhead() const {return mPlayhead;}
+#pragma mark -
+#pragma mark session handling
+	void startRecording();
+	void stopRecording();
+	void play();
+	void stop();
+
+	// --
 	
-	const int getFrameIndex() const
-	{
-		return getNumFrames() - floor(mPlayhead / getFrameTime());
-	}
+	void updatePlayhead();
 	
-	const int getNumFrames() const
-	{
-		return mBuffer.getSize();
-	}
+	// --
 	
-	const float getFrameTime() const
-	{
-		return getDuration() / getNumFrames();
-	}
+	void clear();
+	void appendFrame(const ramNodeArray copy);
+	const ramNodeArray& getFrame(int index) const;
+	const ramNodeArray& getCurrentFrame() const;
 	
-	const float getDuration() const
-	{
-		assert(getNumFrames() > 1);
-		
-		const ramNodeArray &frontFrame = mBuffer.get( 0 );
-		const ramNodeArray &backFrame = mBuffer.get( getNumFrames() );
-		
-		return frontFrame.getTimestamp() - backFrame.getTimestamp();
-	}
 	
-	const string getNodeArrayName() const
-	{
-		assert(getNumFrames() > 0);
-		
-		return getNumFrames() > 0 ? mBuffer.get(0).getName() : "no name";
-	}
+#pragma mark -
+#pragma mark getters, setters
+	const int getFrameIndex() const;
+	const int getNumFrames() const;
+	const float getFrameTime() const;
+	const float getDuration() const;
+	const float getPlayhead() const;
+	const string getNodeArrayName() const;
 	
 	inline void setLoop(const bool l) { mLoop = l; };
 	inline void setRate(const float r) { mRate = r; };
@@ -228,8 +68,11 @@ public:
 	inline const bool isRecording() const { return mRecording; }
 	inline const bool isLoop() const { return mLoop; }
 	
+	void setNodeArrayBuffer(ramNodeArrayBuffer &buffer);
+	
+	
 protected:
-
+	
 	ramNodeArrayBuffer mBuffer;
 	
 	bool mLoop;

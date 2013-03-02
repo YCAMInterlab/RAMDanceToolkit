@@ -51,4 +51,5 @@ void ramCameraManager::rollbackDefaultCameraSetting(int camera_id)
 	const ramCameraSettings &setting = settings.at(camera_id);
 	active_camera->setPosition(setting.pos);
 	active_camera->lookAt(setting.look_at);
+	active_camera->setFov(setting.fov);
 }
