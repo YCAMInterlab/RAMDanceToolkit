@@ -205,6 +205,6 @@ void ramSceneManager::rigidExit(ramRigidBody &rigid)
 	{
 		ramBaseScene *scene = scenes[i];
 		if (!scene->isEnabled()) continue;
-		scene->onRigidSetup(rigid);
+		scene->onRigidExit(rigid);
 	}
 }
