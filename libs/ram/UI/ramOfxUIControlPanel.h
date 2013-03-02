@@ -10,6 +10,47 @@
 class ramBaseScene;
 class ramControllable;
 
+class ramPresetTab : public ofxUITab
+{
+protected:
+	ofxUIToggleMatrix* matrix;
+public:
+	ramPresetTab()
+	:ofxUITab("Presets", false)
+	{
+		// should probably be a list of named presets instead of a grid
+		matrix = addToggleMatrix("Presets", 4, 4);
+		matrix->setAllowMultiple(false);
+	}
+};
+
+class ramPreferencesTab : public ofxUITab
+{
+public:
+	ramPreferencesTab()
+	:ofxUITab("Preferences", false)
+	{
+	}
+};
+
+class ramPlaybackTab : public ofxUITab
+{
+public:
+	ramPlaybackTab()
+	:ofxUITab("Playback", false)
+	{
+	}
+};
+
+class ramActorsTab : public ofxUITab
+{
+public:
+	ramActorsTab()
+	:ofxUITab("Actors", false)
+	{
+	}
+};
+
 class ramOfxUIControlPanel
 {
 
@@ -25,7 +66,7 @@ public:
 	void setup();
 
 	// simple GUI
-
+	void addPanel(ofxUITab& tab);
 	void addPanel(const string& name);
 	void addSection(const string& name);
 	void addSeparator();
@@ -88,6 +129,11 @@ private:
 	bool pause;
 	bool enableShadow;
 	int camera_preset, camera_preset_t;
+	
+	ramPresetTab presetTab;
+	ramPreferencesTab preferencesTab;
+	ramPlaybackTab playbackTab;
+	ramActorsTab actorsTab;
 
 	ofFloatColor backgroundColor;
 

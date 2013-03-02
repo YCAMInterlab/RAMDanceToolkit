@@ -37,34 +37,39 @@ void ramOfxUIControlPanel::setup()
 	/// Event hooks
 	// -------------------------------------
 	ofAddListener(ofEvents().update, this, &ramOfxUIControlPanel::update);
-
+	
+	addPanel(presetTab);
+	addPanel(preferencesTab);
+	addPanel(playbackTab);
+	addPanel(actorsTab);
+	
 	/// First panel
 	// -------------------------------------
 	addPanel("RamDanceToolkit");
-
+	
 	addToggle("FullScreen", &fullScreen);
 	addToggle("Pause (or press Space Key)", &pause);
 	addToggle("Use Shadow", &enableShadow);
-
+	
 	addSeparator();
 	addColorSelector("Background", &backgroundColor);
-
+	
 	/// floor pattern
 	addSeparator();
 	vector<string> floors = ramFloor::getFloorNames();
 	addRadioGroup("Floor Patterns", floors, &mFloorPattern);
 	
-
+	
 	current_panel->addSlider("Floor Size", 100, 1000, &mFloorSize, kLength / 2 - kXInit, kDim);
 	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
 	current_panel->addSlider("Grid Size", 20, 200, &mGridSize, kLength / 2 - kXInit, kDim);
 	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
-
+	
 	addSeparator();
-
+	
 	/// camera Names
 	addRadioGroup("Camera Preset", ramCameraManager::instance().getDefaultCameraNames(), &camera_preset_t);
-
+	
 	/// Events
 	ofAddListener(ofEvents().keyPressed, this, &ramOfxUIControlPanel::keyPressed);
 	ofAddListener(mSceneTabs.newGUIEvent, this, &ramOfxUIControlPanel::guiEvent);
@@ -84,7 +89,7 @@ void ramOfxUIControlPanel::update(ofEventArgs &e)
 		bool hover = mSceneTabs.isHit(ofGetMouseX(), ofGetMouseY());
 		ramCameraManager::instance().setEnableInteractiveCamera(!hover);
 	}
-
+	
 	// reset the camera within the first few frames. if you do it once on initialization,
 	// there's some kind of bug that keeps the camera from being in the right position
 	if (camera_preset_t != camera_preset || ofGetFrameNum() < 10)
@@ -92,9 +97,9 @@ void ramOfxUIControlPanel::update(ofEventArgs &e)
 		camera_preset = camera_preset_t;
 		reloadCameraSetting(camera_preset);
 	}
-
+	
 	ramEnableShadow(enableShadow);
-
+	
 	ofBackground(backgroundColor);
 }
 
@@ -104,21 +109,27 @@ void ramOfxUIControlPanel::addPanel(ramBaseScene* control)
 {
 	ofxUITab *panel = new ofxUITab();
 	current_panel = panel;
-
+	
 	/// used for save/load setting file suffix
 	panel->setTabName(control->getName());
-
+	
 	control->setupControlPanel();
 	getSceneTabs().add(panel);
 	scenes.push_back(control);
 	panel->autoSizeToFitWidgets();
 }
 
+void ramOfxUIControlPanel::addPanel(ofxUITab& tab)
+{
+	scenes.push_back(NULL);
+	getSceneTabs().add(&tab);
+}
+
 void ramOfxUIControlPanel::addPanel(const string& name)
 {
 	ofxUITab *panel = new ofxUITab(name, false);
 	current_panel = panel;
-
+	
 	getSceneTabs().add(panel);
 	scenes.push_back(NULL);
 	panel->autoSizeToFitWidgets();
@@ -158,16 +169,16 @@ struct RadioGroupListener
 {
 	ofxUIRadio *o;
 	int *value;
-
+	
 	RadioGroupListener(ofxUIRadio *o, int *value) : o(o), value(value)
 	{
 		o->getToggles().at(*value)->setValue(true);
 	}
-
+	
 	void handle(ofxUIEventArgs &e)
 	{
 		if (e.widget->getParent() != o) return;
-
+		
 		vector<ofxUIToggle *> t = o->getToggles();
 		for (int i = 0; i < t.size(); i++)
 		{
@@ -183,7 +194,7 @@ struct RadioGroupListener
 ofxUIRadio* ramOfxUIControlPanel::addRadioGroup(const string& name, const vector<string>& content, int *value)
 {
 	ofxUIRadio *o = current_panel->addRadio(name, content, OFX_UI_ORIENTATION_VERTICAL, kDim, kDim);
-
+	
 	// FIXME: memory leak
 	RadioGroupListener *e = new RadioGroupListener(o, value);
 	ofAddListener(current_panel->newGUIEvent, e, &RadioGroupListener::handle);
@@ -207,9 +218,9 @@ struct ColorSelectorListener
 	ofxUIToggle* toggle;
 	ofFloatColor *value;
 	ofFloatColor color;
-
+	
 	ColorSelectorListener(ofxUIToggle* toggle, ofFloatColor *value) : toggle(toggle), value(value), color(*value) {}
-
+	
 	void handle(ofxUIEventArgs &e)
 	{
 		if (toggle->getValue())
@@ -228,14 +239,14 @@ struct ColorSelectorListener
 void ramOfxUIControlPanel::addColorSelector(const string& name, ofFloatColor *value)
 {
 	current_panel->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_MEDIUM));
-
+	
 	ofxUIToggle* toggle = current_panel->addToggle("", true, 26, 26);
 	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
-
+	
 	// FIXME: memory leak
 	ColorSelectorListener *e = new ColorSelectorListener(toggle, value);
 	ofAddListener(current_panel->newGUIEvent, e, &ColorSelectorListener::handle);
-
+	
 	current_panel->addSlider("R", 0, 1, &value->r, 90, kDim);
 	current_panel->addSlider("G", 0, 1, &value->g, 90, kDim);
 	current_panel->addSlider("B", 0, 1, &value->b, 90, kDim);
@@ -261,7 +272,7 @@ void ramOfxUIControlPanel::guiEvent(ofxUIEventArgs &e)
 	{
 		if(scenes[i] != NULL)
 		{
-		// this is a weak connection, it would be better for ramScene to extend ofxUITab
+			// this is a weak connection, it would be better for ramScene to extend ofxUITab
 			scenes[i]->setEnabled(mSceneTabs.at(i)->getEnabled());
 		}
 	}

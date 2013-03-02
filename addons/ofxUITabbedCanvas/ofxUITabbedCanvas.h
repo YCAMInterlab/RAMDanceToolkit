@@ -70,6 +70,8 @@ public:
 			ofxUIToggle* enableToggle = new ofxUIToggle("", &tab->getEnabled(), enableWidth, tabToggle->getRect()->height);
 			addWidgetRight(enableToggle);
 			enableToggles.push_back(enableToggle);
+		} else {
+			enableToggles.push_back(NULL);
 		}
 		autoSizeToFitWidgets();
 	}
@@ -92,6 +94,7 @@ public:
 		int tabIndex = getTabIndex(name);
 		if(tabIndex != -1) {
 			currentTab = tabIndex;
+			enableToggles[tabIndex]->setValue(true);
 			for(int i = 0; i < tabToggles.size(); i++) {	
 				tabToggles[i]->setValue(i == tabIndex);
 			}
@@ -100,7 +103,7 @@ public:
 	void triggerEvent(ofxUIWidget *child) {
 		select(child->getName());
 		ofxUICanvas::triggerEvent(child);
-	} 
+	}
 	ofxUITab* getCurrent() {
 		return tabs[currentTab];
 	}
