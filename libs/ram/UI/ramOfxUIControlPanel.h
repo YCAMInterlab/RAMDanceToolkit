@@ -1,7 +1,5 @@
 #pragma once
 
-#include "ramControlPanelBase.h"
-
 #ifdef RAM_GUI_SYSTEM_OFXUI
 
 #include "ofxUITabbedCanvas.h"
@@ -12,7 +10,7 @@
 class ramBaseScene;
 class ramControllable;
 
-class ramOfxUIControlPanel : public ramControlPanelBase
+class ramOfxUIControlPanel
 {
 
 public:

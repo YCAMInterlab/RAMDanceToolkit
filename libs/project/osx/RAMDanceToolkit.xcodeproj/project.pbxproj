@@ -56,7 +56,6 @@
 		274B3C4B16DEFADA004F30A6 /* ramSceneManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C0E16DEFADA004F30A6 /* ramSceneManager.h */; };
 		274B3C4C16DEFADA004F30A6 /* ramControllable.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1016DEFADA004F30A6 /* ramControllable.h */; };
 		274B3C4D16DEFADA004F30A6 /* ramControlPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1116DEFADA004F30A6 /* ramControlPanel.h */; };
-		274B3C4E16DEFADA004F30A6 /* ramControlPanelBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1216DEFADA004F30A6 /* ramControlPanelBase.h */; };
 		274B3C4F16DEFADA004F30A6 /* ramOfxUIControlPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3C1316DEFADA004F30A6 /* ramOfxUIControlPanel.cpp */; };
 		274B3C5016DEFADA004F30A6 /* ramOfxUIControlPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1416DEFADA004F30A6 /* ramOfxUIControlPanel.h */; };
 		274B3C5216DEFADA004F30A6 /* ramCameraSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3C1716DEFADA004F30A6 /* ramCameraSettings.cpp */; };
@@ -518,7 +517,6 @@
 		274B3C0E16DEFADA004F30A6 /* ramSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSceneManager.h; sourceTree = "<group>"; };
 		274B3C1016DEFADA004F30A6 /* ramControllable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramControllable.h; sourceTree = "<group>"; };
 		274B3C1116DEFADA004F30A6 /* ramControlPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramControlPanel.h; sourceTree = "<group>"; };
-		274B3C1216DEFADA004F30A6 /* ramControlPanelBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramControlPanelBase.h; sourceTree = "<group>"; };
 		274B3C1316DEFADA004F30A6 /* ramOfxUIControlPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramOfxUIControlPanel.cpp; sourceTree = "<group>"; };
 		274B3C1416DEFADA004F30A6 /* ramOfxUIControlPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramOfxUIControlPanel.h; sourceTree = "<group>"; };
 		274B3C1716DEFADA004F30A6 /* ramCameraSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramCameraSettings.cpp; sourceTree = "<group>"; };
@@ -1073,7 +1071,6 @@
 			children = (
 				274B3C1016DEFADA004F30A6 /* ramControllable.h */,
 				274B3C1116DEFADA004F30A6 /* ramControlPanel.h */,
-				274B3C1216DEFADA004F30A6 /* ramControlPanelBase.h */,
 				274B3C1316DEFADA004F30A6 /* ramOfxUIControlPanel.cpp */,
 				274B3C1416DEFADA004F30A6 /* ramOfxUIControlPanel.h */,
 			);
@@ -2485,7 +2482,6 @@
 				274B3C4B16DEFADA004F30A6 /* ramSceneManager.h in Headers */,
 				274B3C4C16DEFADA004F30A6 /* ramControllable.h in Headers */,
 				274B3C4D16DEFADA004F30A6 /* ramControlPanel.h in Headers */,
-				274B3C4E16DEFADA004F30A6 /* ramControlPanelBase.h in Headers */,
 				274B3C5016DEFADA004F30A6 /* ramOfxUIControlPanel.h in Headers */,
 				274B3C5316DEFADA004F30A6 /* ramCameraSettings.h in Headers */,
 				274B3C5416DEFADA004F30A6 /* ramNodeArrayBuffer.h in Headers */,
