@@ -13,23 +13,67 @@ class ramControllable;
 class ramPresetTab : public ofxUITab
 {
 protected:
+	ofxUIRadio* cameraPresetRadio;
+	int cameraPreset;
 	ofxUIToggleMatrix* matrix;
 public:
 	ramPresetTab()
 	:ofxUITab("Presets", false)
+	,cameraPreset(1)
 	{
 		// should probably be a list of named presets instead of a grid
 		matrix = addToggleMatrix("Presets", 4, 4);
 		matrix->setAllowMultiple(false);
+		addSpacer();
+		
+		vector<string> cameraPresetNames;
+		cameraPresetNames.push_back("Low");
+		cameraPresetNames.push_back("High");
+		cameraPresetNames.push_back("Overhead");
+		cameraPresetRadio = addRadio("Camera position", cameraPresetNames);
+		cameraPresetRadio->getToggles()[cameraPreset]->setValue(true);
+		
+		autoSizeToFitWidgets();
 	}
 };
 
 class ramPreferencesTab : public ofxUITab
 {
+protected:
+	ofxUIRadio* floorStyleRadio;
+	bool fullscreen, useShadows;
+	float floorSize, floorGridSize;
+	int floorStyle;
+	float bgHue, bgSaturation, bgBrightness;
 public:
 	ramPreferencesTab()
 	:ofxUITab("Preferences", false)
+	,fullscreen(true)
+	,useShadows(true)
+	,floorStyle(ramFloor::FLOOR_GRID_LINES)
+	,floorSize(600.0)
+	,floorGridSize(50.0)
+	,bgHue(0)
+	,bgSaturation(0)
+	,bgBrightness(0)
 	{
+		addLabelToggle("Fullscreen", &fullscreen);
+		addLabelToggle("Use shadows", &useShadows);
+		addSpacer();
+		
+		vector<string> floorNames = ramFloor::getFloorNames();
+		floorStyleRadio = addRadio("Floor style", floorNames);
+		floorStyleRadio->getToggles()[floorStyle]->setValue(true);
+		addSlider("Floor size", 100, 1000, &floorGridSize);
+		addSlider("Floor grid Size", 20, 200, &floorGridSize);
+		addSpacer();
+		
+		addLabel("Background color", OFX_UI_FONT_MEDIUM);
+		addSlider("Hue", 0, 1, &bgHue);
+		addSlider("Saturation", 0, 1, &bgSaturation);
+		addSlider("Brightness", 0, 1, &bgBrightness);
+		
+		autoSizeToFitWidgets();
 	}
 };
 
@@ -44,10 +88,13 @@ public:
 
 class ramActorsTab : public ofxUITab
 {
+protected:
+	bool paused;
 public:
 	ramActorsTab()
 	:ofxUITab("Actors", false)
 	{
+		addLabelToggle("Paused", &paused);
 	}
 };
 

@@ -94,7 +94,9 @@ public:
 		int tabIndex = getTabIndex(name);
 		if(tabIndex != -1) {
 			currentTab = tabIndex;
-			enableToggles[tabIndex]->setValue(true);
+			if(enableToggles[tabIndex] != NULL) {
+				enableToggles[tabIndex]->setValue(true);
+			}
 			for(int i = 0; i < tabToggles.size(); i++) {	
 				tabToggles[i]->setValue(i == tabIndex);
 			}
