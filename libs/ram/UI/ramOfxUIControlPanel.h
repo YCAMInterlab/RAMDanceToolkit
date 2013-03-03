@@ -25,7 +25,7 @@ public:
 	const float kLength;
 
 	static ramOfxUIControlPanel& instance();
-	virtual ~ramOfxUIControlPanel() {}
+	virtual ~ramOfxUIControlPanel();
 
 	void setup();
 
@@ -61,10 +61,13 @@ public:
 
 	// for internal use
 
-	void addPanel(ramBaseScene* control);
+	void addPanel(ramBaseScene* control,  bool enableable = true);
 
 	ramPreferencesTab& getPreferencesTab() {
 		return preferencesTab;
+	}
+	ramBaseScene* getActorsScene() {
+		return actorsScene;
 	}
 	
 	inline ofxUITabbedCanvas& getSceneTabs() { return mSceneTabs; }
@@ -90,8 +93,11 @@ private:
 	ramPresetTab presetTab;
 	ramPreferencesTab preferencesTab;
 	ramPlaybackTab playbackTab;
-	ramActorsTab actorsTab;
 
+	// bomisutaro!
+	// can't be statically allocated due to inheritance conflicts from header-only implementation
+	ramBaseScene* actorsScene;
+	
 	ofFloatColor backgroundColor;
 
 	ofxUITabbedCanvas mSceneTabs;

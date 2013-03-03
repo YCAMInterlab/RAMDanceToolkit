@@ -1,14 +1,17 @@
 #pragma once
 
+#include "ramSession.h"
+#include "ramTSVCoder.h"
+
 /*
  almost all things of this class depends on ofxUI
 */
-class ActorsPanel : public ramBaseScene
+class ramActorsScene : public ramBaseScene
 {
 	
 public:
 	
-	ActorsPanel() : mNeedUpdatePanel(false) {}
+	ramActorsScene() : mNeedUpdatePanel(false) {}
 	
 	void setupControlPanel()
 	{
@@ -176,7 +179,7 @@ public:
 			rebuildControlPanel();
 	}
 	
-	const string getName() { return "ActorsPanel"; }
+	const string getName() { return "Actors"; }
 	
 	
 private:

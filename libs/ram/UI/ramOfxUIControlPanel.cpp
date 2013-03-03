@@ -3,6 +3,8 @@
 #include "ramBaseScene.h"
 #include "ramControllable.h"
 
+#include "ramActorsScene.h"
+
 #ifdef RAM_GUI_SYSTEM_OFXUI
 
 ramOfxUIControlPanel *ramOfxUIControlPanel::_instance = NULL;
@@ -26,6 +28,11 @@ ramOfxUIControlPanel::ramOfxUIControlPanel()
 {
 }
 
+ramOfxUIControlPanel::~ramOfxUIControlPanel()
+{
+	delete (ramActorsScene*) actorsScene;
+}
+
 void ramOfxUIControlPanel::setup()
 {
 	/// Event hooks
@@ -35,7 +42,10 @@ void ramOfxUIControlPanel::setup()
 	addPanel(presetTab);
 	addPanel(preferencesTab);
 	addPanel(playbackTab);
-	addPanel(actorsTab);
+	
+	actorsScene = new ramActorsScene();
+	addPanel(actorsScene, false);
+	actorsScene->setEnabled(true);
 	
 	ofAddListener(mSceneTabs.newGUIEvent, this, &ramOfxUIControlPanel::guiEvent);
 	
@@ -44,6 +54,7 @@ void ramOfxUIControlPanel::setup()
 
 void ramOfxUIControlPanel::update(ofEventArgs &e)
 {
+	actorsScene->update();
 	if(!ofGetMousePressed())
 	{
 		bool hover = mSceneTabs.isHit(ofGetMouseX(), ofGetMouseY());
@@ -53,17 +64,13 @@ void ramOfxUIControlPanel::update(ofEventArgs &e)
 
 //
 
-void ramOfxUIControlPanel::addPanel(ramBaseScene* control)
+void ramOfxUIControlPanel::addPanel(ramBaseScene* control, bool enableable)
 {
-	ofxUITab *panel = new ofxUITab();
-	current_panel = panel;
-	
-	/// used for save/load setting file suffix
-	panel->setTabName(control->getName());
-	
+	ofxUITab *panel = new ofxUITab(control->getName(), enableable);
+	current_panel = panel;	
 	control->setupControlPanel();
 	getSceneTabs().add(panel);
-	scenes.push_back(control);
+	scenes.push_back(enableable ? control : NULL);
 	panel->autoSizeToFitWidgets();
 }
 
@@ -203,7 +210,7 @@ void ramOfxUIControlPanel::guiEvent(ofxUIEventArgs &e)
 	{
 		if(scenes[i] != NULL)
 		{
-			// this is a weak connection, it would be better for ramScene to extend ofxUITab
+			// bomisutaro: this is a weak connection, it would be better for ramScene to extend ofxUITab
 			scenes[i]->setEnabled(mSceneTabs.at(i)->getEnabled());
 		}
 	}

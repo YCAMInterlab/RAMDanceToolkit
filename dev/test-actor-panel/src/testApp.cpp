@@ -1,9 +1,5 @@
 #include "testApp.h"
 
-
-#include "ActorsPanel.h"
-ActorsPanel AR;
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -17,10 +13,7 @@ void testApp::setup()
 	ramInitialize(10000);
 	
 	vector<ramBaseScene*>scenes;
-	scenes.push_back(AR.getPtr());
 	SM.setup(scenes);
-	
-	AR.enable();
 }
 
 //--------------------------------------------------------------
