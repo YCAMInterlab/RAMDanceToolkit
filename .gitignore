@@ -31,4 +31,4 @@ obj
 devApps
 data
 
-dev/**
+resources/Settings/Actors/**

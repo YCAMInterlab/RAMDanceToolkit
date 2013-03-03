@@ -25,7 +25,8 @@ public:
 	void onRigidSetup(const ramRigidBody &rigid);
 	void onActorExit(const ramActor &actor);
 	void onRigidExit(const ramRigidBody &rigid);
-	void onEnabled();
+	
+	void keyPressed(ofKeyEventArgs &e);
 	
 	void drawNodes(const ramNodeArray &NA); // experimental
 	
@@ -34,6 +35,7 @@ private:
 	void addControlSegment(const ramNodeArray &NA);
 	void removeControlSegment(const ramNodeArray &NA);
 	void rebuildControlPanel();
+	void createPanelHeader();
 
 	
 	/// ActorsPanel
@@ -61,12 +63,9 @@ private:
 	
 	/// draw method flags
 	ofLight light;
-	bool bUseNewActor;
-	bool bUseLight;
-	
-	
-	/// to store actor color
-	ofxXmlSettings XML;
-	
+	bool bShowAllActor;
+	bool bRecAllActor;
+	bool bUseSimpleActor;
+	bool bUseShading;
 };
 
