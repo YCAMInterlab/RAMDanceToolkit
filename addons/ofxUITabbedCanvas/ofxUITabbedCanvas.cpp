@@ -43,23 +43,29 @@ string getXmlSafeName(string name) {
 void ofxUITabbedCanvas::loadSettings(const string &filename) {
 	ofxXmlSettings xml;
 	xml.loadFile(filename);
+	loadSettingsFromXml(xml);
 	for (int i=0; i<tabs.size(); i++) {
 		string curTabName = getXmlSafeName(tabs[i]->getTabName());
-		xml.pushTag(curTabName);
-		tabs[i]->loadSettingsFromXml(xml);
-		xml.popTag();
+		if(curTabName != "Actors") {
+			xml.pushTag(curTabName);
+			tabs[i]->loadSettingsFromXml(xml);
+			xml.popTag();
+		}
 	}
 	xml.saveFile(filename);
 }
 
 void ofxUITabbedCanvas::saveSettings(const string &filename) {
 	ofxXmlSettings xml;
+	saveSettingsToXml(xml);
 	for (int i=0; i<tabs.size(); i++) {
 		string curTabName = getXmlSafeName(tabs[i]->getTabName());
-		xml.addTag(curTabName);
-		xml.pushTag(curTabName);
-		tabs[i]->saveSettingsToXml(xml);
-		xml.popTag();
+		if(curTabName != "Actors") {
+			xml.addTag(curTabName);
+			xml.pushTag(curTabName);
+			tabs[i]->saveSettingsToXml(xml);
+			xml.popTag();
+		}
 	}
 	xml.saveFile(filename);
 }

@@ -17,6 +17,11 @@ void ramSceneManager::setup(const vector<ramBaseScene*>& scenes_)
 		scene->setup();
 		ramGetGUI().addPanel(scene);
 	}
+	
+	// bomisutaro: this is a bit dangerous because the scene manager is not a singleton
+	ramBaseScene *actorsScene = ramGetGUI().getActorsScene();
+	scenes.push_back(actorsScene);
+	actorsScene->setup();
 }
 
 void ramSceneManager::update()

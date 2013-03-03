@@ -5,11 +5,15 @@
 
 #include "ControlSegment.h"
 
-class ActorsPanel : public ramBaseScene
+
+/*
+ almost all things of this class depends on ofxUI
+*/
+class ramActorsScene : public ramBaseScene
 {
 public:
 	
-	ActorsPanel();
+	ramActorsScene() {}
 	
 	void setupControlPanel();
 	void setup();

@@ -66,6 +66,8 @@
 		274B3C5816DEFADA004F30A6 /* ramTimeShifter.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1D16DEFADA004F30A6 /* ramTimeShifter.h */; };
 		274B3C5916DEFADA004F30A6 /* ramUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 274B3C1E16DEFADA004F30A6 /* ramUtils.cpp */; };
 		274B3C5A16DEFADA004F30A6 /* ramUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 274B3C1F16DEFADA004F30A6 /* ramUtils.h */; };
+		277B9C2416E3826C005AE2C0 /* ramActorsScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 277B9C2316E3826C005AE2C0 /* ramActorsScene.h */; };
+		27855D5916E34109008BB54F /* ofxUIToggleMini.h in Headers */ = {isa = PBXBuildFile; fileRef = 27855D5816E34109008BB54F /* ofxUIToggleMini.h */; };
 		279CDD2516E20D62002DFFBE /* ramPreferencesTab.h in Headers */ = {isa = PBXBuildFile; fileRef = 279CDD2416E20D62002DFFBE /* ramPreferencesTab.h */; };
 		279CDD2716E20D6E002DFFBE /* ramPresetTab.h in Headers */ = {isa = PBXBuildFile; fileRef = 279CDD2616E20D6E002DFFBE /* ramPresetTab.h */; };
 		279CDD2916E20D77002DFFBE /* ramPlaybackTab.h in Headers */ = {isa = PBXBuildFile; fileRef = 279CDD2816E20D77002DFFBE /* ramPlaybackTab.h */; };
@@ -532,6 +534,8 @@
 		274B3C1D16DEFADA004F30A6 /* ramTimeShifter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramTimeShifter.h; sourceTree = "<group>"; };
 		274B3C1E16DEFADA004F30A6 /* ramUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramUtils.cpp; sourceTree = "<group>"; };
 		274B3C1F16DEFADA004F30A6 /* ramUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramUtils.h; sourceTree = "<group>"; };
+		277B9C2316E3826C005AE2C0 /* ramActorsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramActorsScene.h; sourceTree = "<group>"; };
+		27855D5816E34109008BB54F /* ofxUIToggleMini.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIToggleMini.h; sourceTree = "<group>"; };
 		279CDD2416E20D62002DFFBE /* ramPreferencesTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPreferencesTab.h; sourceTree = "<group>"; };
 		279CDD2616E20D6E002DFFBE /* ramPresetTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPresetTab.h; sourceTree = "<group>"; };
 		279CDD2816E20D77002DFFBE /* ramPlaybackTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPlaybackTab.h; sourceTree = "<group>"; };
@@ -1069,6 +1073,7 @@
 		274B3C0B16DEFADA004F30A6 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				277B9C2316E3826C005AE2C0 /* ramActorsScene.h */,
 				274B3C0C16DEFADA004F30A6 /* ramBaseScene.h */,
 				274B3C0D16DEFADA004F30A6 /* ramSceneManager.cpp */,
 				274B3C0E16DEFADA004F30A6 /* ramSceneManager.h */,
@@ -2069,6 +2074,7 @@
 			children = (
 				9AD6F52916B926BF00F7F51E /* ofxUITabbedCanvas.cpp */,
 				9AD6F52A16B926BF00F7F51E /* ofxUITabbedCanvas.h */,
+				27855D5816E34109008BB54F /* ofxUIToggleMini.h */,
 			);
 			name = ofxUITabbedCanvas;
 			path = ../../../addons/ofxUITabbedCanvas;
@@ -2512,6 +2518,8 @@
 				279CDD2916E20D77002DFFBE /* ramPlaybackTab.h in Headers */,
 				279CDD2B16E20D7E002DFFBE /* ramActorsTab.h in Headers */,
 				9A503DA316E324AE004F57EE /* ofxNodeArray.h in Headers */,
+				27855D5916E34109008BB54F /* ofxUIToggleMini.h in Headers */,
+				277B9C2416E3826C005AE2C0 /* ramActorsScene.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
