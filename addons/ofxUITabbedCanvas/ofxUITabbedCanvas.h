@@ -71,7 +71,22 @@ public:
         addWidgetDown(tabToggle);
 		tabToggles.push_back(tabToggle);
 		if(tab->getEnableable()) {
+			//ofxUIImageToggle* enableToggle = new ofxUIImageToggle(0, 0, tabToggle->getRect()->height, tabToggle->getRect()->height, &tab->getEnabled(), "../../../../resources/Images/show.png", "Enable " + tab->getTabName());
 			ofxUIToggle* enableToggle = new ofxUIToggle("Enable " + tab->getTabName(), &tab->getEnabled(), enableWidth, tabToggle->getRect()->height);
+			
+			ofxUIRectangle* rect = enableToggle->getRect();
+			rect->setWidth(enableWidth);
+			rect->setHeight(enableWidth);
+			ofxUIRectangle* paddedRect = enableToggle->getPaddingRect();
+			paddedRect->setWidth(enableWidth);
+			paddedRect->setHeight(enableWidth);
+			paddedRect->setParent(rect);
+			ofxUILabel* label = enableToggle->getLabelWidget();
+			label->setParent(label);
+			label->setRectParent(rect);
+			label->setEmbedded(true);
+			label->setVisible(false);
+			
 			addWidgetRight(enableToggle);
 			enableToggles.push_back(enableToggle);
 		} else {
