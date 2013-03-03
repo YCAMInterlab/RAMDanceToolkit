@@ -41,7 +41,6 @@ protected:
 	float tabWidth;
 	bool visible;
 	bool saveStatus, loadStatus;
-	int enableableCount;
 	vector<ofxUITab*> tabs;
 	vector<ofxUILabelToggle*> tabToggles;
 	vector<ofxUIToggle*> enableToggles;
@@ -52,7 +51,6 @@ public:
 	,saveStatus(false)
 	,loadStatus(false)
 	,tabWidth(tabWidth)
-	,enableableCount(0)
 	,visible(true) {
         loadButton = new ofxUIImageButton(0, 0, 32, 32, &loadStatus, "../../../../resources/Images/open.png", "Load");
         saveButton = new ofxUIImageButton(0, 0, 32, 32, &saveStatus, "../../../../resources/Images/save.png", "Save");
@@ -77,11 +75,6 @@ public:
 			
 			addWidgetRight(enableToggle);
 			enableToggles.push_back(enableToggle);
-			// always enable the first thing that can be enabled
-			if(enableableCount == 0) {
-				enableToggle->setValue(true);
-			}
-			enableableCount++;
 		} else {
 			enableToggles.push_back(NULL);
 		}
