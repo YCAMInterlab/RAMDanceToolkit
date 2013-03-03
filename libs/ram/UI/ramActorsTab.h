@@ -7,7 +7,8 @@ protected:
 	bool paused;
 public:
 	ramActorsTab()
-	:ofxUITab("Actors", false) {
+	:ofxUITab("Actors", false)
+	,paused(false) {
 		addLabelToggle("Paused", &paused);
 	}
 	void update() {
