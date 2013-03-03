@@ -1,18 +1,53 @@
 diff --git src/ofxUI.h src/ofxUI.h
-index e220503..97681e9 100755
+index 433952b..5917c24 100755
 --- src/ofxUI.h
 +++ src/ofxUI.h
-@@ -205,7 +205,7 @@ enum ofxUIThemeType
+@@ -215,7 +215,7 @@ enum ofxUIThemeType
      OFX_UI_THEME_MINBLACK
  };
  
 -#define OFX_UI_FONT_NAME "GUI/NewMedia Fett.ttf"
-+#define OFX_UI_FONT_NAME "../../../../resources/Fonts/din-webfont.ttf"
++#define OFX_UI_FONT_NAME "../../../../resources/Fonts/FreeUniversal-Regular.ttf"
  
  #define OFX_UI_FONT_RESOLUTION 150
  #define OFX_UI_FONT_LARGE_SIZE 10
+diff --git src/ofxUICanvas.h src/ofxUICanvas.h
+index d11e56d..3405008 100755
+--- src/ofxUICanvas.h
++++ src/ofxUICanvas.h
+@@ -1129,7 +1129,7 @@ public:
+         centerWidgetsOnCanvas(true, true);
+     }
+ 
+-    virtual virtual void addModalWidget(ofxUIWidget *widget)
++    virtual void addModalWidget(ofxUIWidget *widget)
+     {
+         widgetsAreModal[widget->getName()] = widget;
+     }
+diff --git src/ofxUIImageButton.h src/ofxUIImageButton.h
+index c604306..abc01d2 100755
+--- src/ofxUIImageButton.h
++++ src/ofxUIImageButton.h
+@@ -104,7 +104,7 @@ public:
+         if(draw_back && !draw_fill)
+         {
+             ofFill();
+-            ofSetColor(color_back);
++            ofSetColor(color_fill);
+             img->draw(rect->getX(), rect->getY(), rect->getWidth(), rect->getHeight()); 
+         }
+     }
+@@ -114,7 +114,7 @@ public:
+         if(draw_fill)
+         {
+             ofFill(); 
+-            ofSetColor(color_fill); 
++            ofSetColor(color_back); 
+             img->draw(rect->getX(), rect->getY(), rect->getWidth(), rect->getHeight()); 
+         }
+     }
 diff --git src/ofxUILabel.h src/ofxUILabel.h
-index eb2e3ad..a452208 100755
+index 9ec140d..6ade0b0 100755
 --- src/ofxUILabel.h
 +++ src/ofxUILabel.h
 @@ -122,7 +122,7 @@ public:
