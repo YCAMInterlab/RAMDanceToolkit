@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofxUI.h"
+#include "ofxUIToggleMini.h"
 
 class ofxUICanvasPlus : public ofxUICanvas {
 public:
@@ -72,22 +73,7 @@ public:
         addWidgetDown(tabToggle);
 		tabToggles.push_back(tabToggle);
 		if(tab->getEnableable()) {
-			//ofxUIToggle* enableToggle = new ofxUIToggle("", &tab->getEnabled(), enableWidth, tabToggle->getRect()->height);
-			//ofxUIImageToggle* enableToggle = new ofxUIImageToggle(0, 0, tabToggle->getRect()->height, tabToggle->getRect()->height, &tab->getEnabled(), "../../../../resources/Images/show.png", "Enable " + tab->getTabName());
-			ofxUIToggle* enableToggle = new ofxUIToggle("Enable " + tab->getTabName(), &tab->getEnabled(), tabToggle->getRect()->height, tabToggle->getRect()->height);
-			
-			ofxUIRectangle* rect = enableToggle->getRect();
-			rect->setWidth(tabToggle->getRect()->height);
-			rect->setHeight(tabToggle->getRect()->height);
-			ofxUIRectangle* paddedRect = enableToggle->getPaddingRect();
-			paddedRect->setWidth(tabToggle->getRect()->height);
-			paddedRect->setHeight(tabToggle->getRect()->height);
-			paddedRect->setParent(rect);
-			ofxUILabel* label = enableToggle->getLabelWidget();
-			label->setParent(label);
-			label->setRectParent(rect);
-			label->setEmbedded(true);
-			label->setVisible(false);
+			ofxUIToggle* enableToggle = new ofxUIToggleMini("Enable " + tab->getTabName(), &tab->getEnabled(), tabToggle->getRect()->height, tabToggle->getRect()->height);
 			
 			addWidgetRight(enableToggle);
 			enableToggles.push_back(enableToggle);
