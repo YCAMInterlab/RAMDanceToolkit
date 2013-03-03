@@ -28,16 +28,15 @@ ControlSegment::~ControlSegment()
 ofxUICanvasPlus* ControlSegment::createPanel(const ramNodeArray &NA)
 {
 	name = NA.getName();
+	const float width = ramGetGUI().kLength;
+	const float height = ramGetGUI().kDim+3;
+	
 	
 	ofxUICanvasPlus *child = new ofxUICanvasPlus();
 	child->disableAppDrawCallback();
 	child->disableAppEventCallbacks();
 	child->disableKeyEventCallbacks();
 	child->disableMouseEventCallbacks();
-	
-	
-	const float width = ramGetGUI().kLength;
-	const float height = ramGetGUI().kDim+3;
 	
 	
 	/// section title

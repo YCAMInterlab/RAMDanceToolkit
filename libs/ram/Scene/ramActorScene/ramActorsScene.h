@@ -13,6 +13,7 @@ class ramActorsScene : public ramBaseScene
 public:
 	
 	ramActorsScene();
+	~ramActorsScene();
 	
 	const string getName();
 	void setupControlPanel();
@@ -26,16 +27,23 @@ public:
 	void onActorExit(const ramActor &actor);
 	void onRigidExit(const ramRigidBody &rigid);
 	
-	void keyPressed(ofKeyEventArgs &e);
+	void onKeyPressed(ofKeyEventArgs &e);
+	void onValueChanged(ofxUIEventArgs &e);
 	
 	void drawNodes(const ramNodeArray &NA); // experimental
 	
 private:
 	
+	/// internal use
 	void addControlSegment(const ramNodeArray &NA);
 	void removeControlSegment(const ramNodeArray &NA);
 	void rebuildControlPanel();
 	void createPanelHeader();
+
+	
+	/// instances which are controlled programatically
+	ofxUILabelToggle *btnPause;
+	ofxUILabelToggle *btnRecAll;
 
 	
 	/// ActorsPanel
