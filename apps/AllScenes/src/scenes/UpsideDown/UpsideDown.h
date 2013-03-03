@@ -131,6 +131,6 @@ public:
         }
 	}
 	
-	const string getName() { return "UpsideDown scene"; }
+	const string getName() { return "Upside Down"; }
 };
 

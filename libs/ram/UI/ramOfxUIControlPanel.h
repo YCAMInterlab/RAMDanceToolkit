@@ -1,19 +1,21 @@
 #pragma once
 
-#include "ramControlPanelBase.h"
-
 #ifdef RAM_GUI_SYSTEM_OFXUI
 
 #include "ofxUITabbedCanvas.h"
 
+#include "ramGlobal.h"
 #include "ramGraphics.h"
 #include "ramCameraManager.h"
-#include "ramSceneTabs.h"
+#include "ramPreferencesTab.h"
+#include "ramPresetTab.h"
+#include "ramPlaybackTab.h"
+#include "ramActorsTab.h"
 
 class ramBaseScene;
 class ramControllable;
 
-class ramOfxUIControlPanel : public ramControlPanelBase
+class ramOfxUIControlPanel
 {
 
 public:
@@ -28,8 +30,7 @@ public:
 	void setup();
 
 	// simple GUI
-
-	void addPanel(const string& name);
+	void addPanel(ofxUITab& tab);
 	void addSection(const string& name);
 	void addSeparator();
 	void addLabel(const string& content);
@@ -46,7 +47,7 @@ public:
 
 	void addToggle(const string& name, bool *value);
 	void addMultiToggle(const string& name, const vector<string>& content, int *value);
-	void addRadioGroup(const string& name, const vector<string>& content, int *value);
+	ofxUIRadio* addRadioGroup(const string& name, const vector<string>& content, int *value);
 	void addDropdown(const string& name, const vector<string>& content, int *value);
 	void addSlider(const string& name, float min_value, float max_value, float *value);
 	void addColorSelector(const string& name, ofFloatColor *value);
@@ -60,23 +61,18 @@ public:
 
 	// for internal use
 
-	void addPanel(ramControllable* control);
-	void setupSceneToggles(vector<ramBaseScene*>& scenes);
-	void reloadCameraSetting(const int index);
+	void addPanel(ramBaseScene* control);
 
-	inline ofColor getBackgroundColor() { return backgroundColor; }
-	inline int getFloorPattern() { return mFloorPattern; }
-	inline float getFloorSize() { return mFloorSize; }
-	inline float getGridSize() { return mGridSize; }
-
-	inline ramSceneTabs& getSceneTabs() { return mSceneTabs; }
-	inline ofxUIToggleMatrix* getSceneToggles() { return mSceneToggles; }
+	ramPreferencesTab& getPreferencesTab() {
+		return preferencesTab;
+	}
+	
+	inline ofxUITabbedCanvas& getSceneTabs() { return mSceneTabs; }
 
 	//
 
 	void update(ofEventArgs &e);
 	void guiEvent(ofxUIEventArgs &e);
-	void keyPressed(ofKeyEventArgs &e);
 
 	//
 
@@ -89,19 +85,20 @@ private:
 	int mFloorPattern;
 	float mFloorSize, mGridSize;
 
-	bool fullScreen;
-	bool pause;
-	bool enableShadow;
 	int camera_preset, camera_preset_t;
+	
+	ramPresetTab presetTab;
+	ramPreferencesTab preferencesTab;
+	ramPlaybackTab playbackTab;
+	ramActorsTab actorsTab;
 
 	ofFloatColor backgroundColor;
 
-	ramSceneTabs mSceneTabs;
-	ofxUIToggleMatrix *mSceneToggles;
+	ofxUITabbedCanvas mSceneTabs;
 
 	ofxUICanvas *current_panel;
 
-	vector<ramBaseScene*> *scenes;
+	vector<ramBaseScene*> scenes;
 
 	struct ButtonEventListener
 	{

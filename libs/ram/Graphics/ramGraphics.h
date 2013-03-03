@@ -21,8 +21,13 @@ struct ramColor
 	static const ofColor YELLOW_DEEP;
 	static const ofColor YELLOW_LIGHT;
 	static const ofColor BLACK;
+	static const ofColor DARK_GRAY;
 	static const ofColor GRAY;
+	static const ofColor LIGHT_GRAY;
 	static const ofColor WHITE;
+	static const ofColor DARK_GRAY_ALPHA;
+	static const ofColor GRAY_ALPHA;
+	static const ofColor LIGHT_GRAY_ALPHA;
 	static const ofColor SHADOW;
 };
 
@@ -36,28 +41,19 @@ public:
 	enum FloorName
 	{
 		FLOOR_NONE              = 0,
-		FLOOR_PLANE             = 1,
-		FLOOR_CHECKER_PATTERN   = 2,
-		FLOOR_GRID_LINES        = 3,
+		FLOOR_GRID_LINES        = 1,
+		FLOOR_PLANE             = 2,
+		FLOOR_CHECKER_PATTERN   = 3,
 		NUM_FLOOR_PATTERNS      = 4
 	};
 
 	static vector<string> getFloorNames()
 	{
-		string name[NUM_FLOOR_PATTERNS] =
-		{
-			"NONE",
-			"PLANE",
-			"CHECKER_PATTERN",
-			"GRID_LINES"
-		};
-
 		vector<string> floorNames;
-		floorNames.clear();
-		floorNames.resize(NUM_FLOOR_PATTERNS);
-
-		for (int i = 0; i < floorNames.size(); i++)
-			floorNames.at(i) = name[i];
+		floorNames.push_back("NONE");
+		floorNames.push_back("GRID_LINES");
+		floorNames.push_back("PLANE");
+		floorNames.push_back("CHECKER_PATTERN");
 
 		return floorNames;
 	}
