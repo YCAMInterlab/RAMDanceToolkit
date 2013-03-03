@@ -43,6 +43,7 @@ string getXmlSafeName(string name) {
 void ofxUITabbedCanvas::loadSettings(const string &filename) {
 	ofxXmlSettings xml;
 	xml.loadFile(filename);
+	loadSettingsFromXml(xml);
 	for (int i=0; i<tabs.size(); i++) {
 		string curTabName = getXmlSafeName(tabs[i]->getTabName());
 		xml.pushTag(curTabName);
@@ -54,6 +55,7 @@ void ofxUITabbedCanvas::loadSettings(const string &filename) {
 
 void ofxUITabbedCanvas::saveSettings(const string &filename) {
 	ofxXmlSettings xml;
+	saveSettingsToXml(xml);
 	for (int i=0; i<tabs.size(); i++) {
 		string curTabName = getXmlSafeName(tabs[i]->getTabName());
 		xml.addTag(curTabName);

@@ -56,6 +56,7 @@ public:
         saveButton = new ofxUIImageButton(0, 0, 32, 32, &saveStatus, "../../../../resources/Images/save.png", "Save");
         addWidgetRight(loadButton);
         addWidgetRight(saveButton);
+		ofAddListener(newGUIEvent, this, &ofxUITabbedCanvas::guiEvent);
 	}
 	void add(ofxUITab* tab) {
 		tab->disableAppDrawCallback();
@@ -70,7 +71,7 @@ public:
         addWidgetDown(tabToggle);
 		tabToggles.push_back(tabToggle);
 		if(tab->getEnableable()) {
-			ofxUIToggle* enableToggle = new ofxUIToggle("", &tab->getEnabled(), enableWidth, tabToggle->getRect()->height);
+			ofxUIToggle* enableToggle = new ofxUIToggle("Enable " + tab->getTabName(), &tab->getEnabled(), enableWidth, tabToggle->getRect()->height);
 			addWidgetRight(enableToggle);
 			enableToggles.push_back(enableToggle);
 		} else {
@@ -95,7 +96,7 @@ public:
 	}
 	void select(string name) {
 		int tabIndex = getTabIndex(name);
-		if(tabIndex != -1) {
+		if(tabIndex != -1 && tabToggles[tabIndex]->getValue()) {
 			currentTab = tabIndex;
 			if(enableToggles[tabIndex] != NULL) {
 				enableToggles[tabIndex]->setValue(true);
@@ -112,24 +113,19 @@ public:
 	ofxUITab* getCurrent() {
 		return tabs[currentTab];
 	}
-	// this should be done differently instead of overriding update()
-	void update() {
-		if (saveStatus) {
+	void guiEvent(ofxUIEventArgs &e) {
+		if (e.widget == saveButton && saveStatus) {
 			ofFileDialogResult result = ofSystemSaveDialog("settings.xml", "Save settings.");
 			if(result.bSuccess) {
 				saveSettings(result.getPath());
-				saveButton->setValue(false);
 			}
 		}
-		if (loadStatus) {
+		if (e.widget == loadButton && loadStatus) {
 			ofFileDialogResult result = ofSystemLoadDialog("Load settings.", false);
 			if(result.bSuccess) {
 				loadSettings(result.getPath());
-				loadButton->setValue(false);
 			}
 		}
-		if (!visible || tabs.empty()) return;
-		getCurrent()->update();
 	}
 	void draw() {
 		if(visible) {
@@ -140,7 +136,7 @@ public:
 			ofPushMatrix();
 			ofNoFill();
 			ofTranslate(getRect()->width, 0);
-			tabs[currentTab]->draw();
+			getCurrent()->draw();
 			ofPopMatrix();
 			ofPopStyle();
 			
