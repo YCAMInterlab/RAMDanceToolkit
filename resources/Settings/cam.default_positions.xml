@@ -1,4 +1,10 @@
 <cam>
+	<name>CAM_LOW</name>
+	<pos><x>0</x><y>0</y><z>600</z></pos>
+	<look_at><x>0</x><y>100</y><z>0</z></look_at>
+	<fov>60</fov>
+</cam>
+<cam>
 	<name>CAM_FRONT</name>
 	<pos><x>0</x><y>300</y><z>600</z></pos>
 	<look_at><x>0</x><y>100</y><z>0</z></look_at>
