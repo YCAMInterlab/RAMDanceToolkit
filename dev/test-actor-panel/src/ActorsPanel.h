@@ -1,6 +1,5 @@
 #pragma once
 
-
 /*
  almost all things of this class depends on ofxUI
 */
@@ -18,25 +17,46 @@ public:
 	
 	void setup()
 	{
-		
+		fontSize = 30;
+		font.loadFont(ramToResourcePath("Fonts/NewMedia Fett.ttf"), fontSize, true, true);
+		font.setLineHeight(fontSize*1.4f);
+		font.setLetterSpacing(1.0);
 	}
 	
 	void update()
 	{
 		if (mNeedUpdatePanel)
+		{
 			rebuildControlPanel();
+		}
+		
+		SegmentsIter it = mSegmentsMap.begin();
+		
+		while (it != mSegmentsMap.end())
+		{
+			ControlSegment *seg = it->second;
+			
+			if (seg->bNeedsResetPos)
+			{
+				seg->position = ofPoint::zero();
+				seg->bNeedsResetPos = false;
+			}
+			
+			it++;
+		}
 	}
 	
 	void draw()
 	{
-		
-		ramBeginCamera();
+		bool bRecording = false;
 		
 		for(int i=0; i<getNumNodeArray(); i++)
 		{
 			ramNodeArray &NA = getNodeArray(i);
 			
-			SegmentsIter it = mSegmentsMap.find(NA.getName());
+			const string name = NA.getName();
+			
+			SegmentsIter it = mSegmentsMap.find(name);
 			
 			assert(it != mSegmentsMap.end());
 			
@@ -45,6 +65,8 @@ public:
 			
 			/// draw if "Show actor" toggle is anabled
 			// note that ofxUIImageToggle shows hilighted image when it's false,
+			ramBeginCamera();
+			
 			if (!seg->bHideActor)
 			{
 				ofPushMatrix();
@@ -57,13 +79,25 @@ public:
 				ofPopStyle();
 				ofPopMatrix();
 			}
+			ramEndCamera();
 			
 			
-			/// capture the actor if "Start recording" toggle is anabled
-
+			// recording indicator
+			if (seg->bRecording)
+			{
+				bRecording = true;
+			}
 		}
 		
-		ramEndCamera();
+		if (bRecording)
+		{
+			ofPushStyle();
+			{
+				ofSetColor(255, 0, 0);
+				font.drawString("RECORDING", ofGetWidth()-230, fontSize*1.3);
+			}
+			ofPopStyle();
+		}
 	}
 	
 	void onValueChanged(ofxUIEventArgs& e)
@@ -109,6 +143,7 @@ public:
 			addControlSegment(NA);
 		}
 		
+		
 		mLocalPanel->autoSizeToFitWidgets();
 		mNeedUpdatePanel = false;
 	}
@@ -152,6 +187,7 @@ private:
 		
 	public:
 		
+		ramSession session;
 		ofFloatColor jointColor;
 		ofPoint position;
 		bool bHideActor;
@@ -185,18 +221,15 @@ private:
 			// Icons
 			panel->addWidgetDown(new ofxUIImageToggle(32, 32, &bHideActor, ramToResourcePath("Images/show.png"),"show"));
 			panel->addWidgetRight(new ofxUIImageButton(32, 32, &bNeedsResetPos, ramToResourcePath("Images/reset.png"),"reset"));
+			panel->addWidgetRight(new ofxUIImageToggle(32, 32, &bRecording, ramToResourcePath("Images/record.png"),"record"));
 
 			
 			/// actor color
 			panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
-			panel->addSlider("R", 0, 1, &jointColor.r, 75, height);
-			panel->addSlider("G", 0, 1, &jointColor.g, 75, height);
-			panel->addSlider("B", 0, 1, &jointColor.b, 75, height);
+			panel->addSlider("R", 0, 1, &jointColor.r, 60, height);
+			panel->addSlider("G", 0, 1, &jointColor.g, 60, height);
+			panel->addSlider("B", 0, 1, &jointColor.b, 60, height);
 			panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
-			
-			
-			// recording
-			panel->addLabelToggle("Start Recording", &bRecording, width);
 			
 			
 			/// actor position
@@ -232,13 +265,11 @@ private:
 	map<string, ControlSegment*> mSegmentsMap;
 	typedef map<string, ControlSegment*>::iterator SegmentsIter;
 	
+	ramTSVCoder coder;
+	
+	ofTrueTypeFont font;
+	float fontSize;
 };
-
-
-
-
-
-
 
 
 
