@@ -10,7 +10,6 @@
 #include "ramPreferencesTab.h"
 #include "ramPresetTab.h"
 #include "ramPlaybackTab.h"
-#include "ramActorsTab.h"
 
 class ramBaseScene;
 class ramControllable;
