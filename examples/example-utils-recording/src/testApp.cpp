@@ -19,11 +19,6 @@ void testApp::setup()
 	/// ram setup
 	// ------------------
 	ramInitialize(10000);
-
-	
-	/// session
-	// ------------------
-	ramGetGUI().addPanel( &session );
 }
 
 //--------------------------------------------------------------

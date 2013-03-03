@@ -76,7 +76,7 @@ public:
 
 	//
 
-	ofxUICanvas* getCurrentUIContext() { return current_panel; }
+	ofxUICanvasPlus* getCurrentUIContext() { return current_panel; }
 
 private:
 
@@ -96,7 +96,7 @@ private:
 
 	ofxUITabbedCanvas mSceneTabs;
 
-	ofxUICanvas *current_panel;
+	ofxUICanvasPlus *current_panel;
 
 	vector<ramBaseScene*> scenes;
 

@@ -315,8 +315,6 @@
 		60314EC416CFC6B400138384 /* ofxBtSoftBodyWorld.h in Headers */ = {isa = PBXBuildFile; fileRef = 60314DF016CFC6B400138384 /* ofxBtSoftBodyWorld.h */; };
 		60314EC516CFC6B400138384 /* ofxBtWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60314DF116CFC6B400138384 /* ofxBtWorld.cpp */; };
 		60314EC616CFC6B400138384 /* ofxBtWorld.h in Headers */ = {isa = PBXBuildFile; fileRef = 60314DF216CFC6B400138384 /* ofxBtWorld.h */; };
-		60813DF616DCAFCD005A1F85 /* ofxNodeArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60813DF416DCAFCD005A1F85 /* ofxNodeArray.cpp */; };
-		60813DF716DCAFCD005A1F85 /* ofxNodeArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 60813DF516DCAFCD005A1F85 /* ofxNodeArray.h */; };
 		60D49DF516DE5975003BA064 /* Calibration.h in Headers */ = {isa = PBXBuildFile; fileRef = 60D49D7C16DE5974003BA064 /* Calibration.h */; };
 		60D49DF616DE5975003BA064 /* ContourFinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 60D49D7D16DE5974003BA064 /* ContourFinder.h */; };
 		60D49DF716DE5975003BA064 /* Distance.h in Headers */ = {isa = PBXBuildFile; fileRef = 60D49D7E16DE5974003BA064 /* Distance.h */; };
@@ -420,6 +418,8 @@
 		60D49F2216DE79B2003BA064 /* video.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 60D49EBA16DE79B2003BA064 /* video.hpp */; };
 		60D49F2316DE79B2003BA064 /* opencv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D49EBD16DE79B2003BA064 /* opencv.a */; };
 		9A10418C16E084B200A7E707 /* ramSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A10418B16E084B200A7E707 /* ramSession.cpp */; };
+		9A503DA316E324AE004F57EE /* ofxNodeArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A503DA116E324AE004F57EE /* ofxNodeArray.h */; };
+		9A503DA416E324AE004F57EE /* ofxNodeArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A503DA216E324AE004F57EE /* ofxNodeArray.cpp */; };
 		9AA72AF116DF0D5E006C4E06 /* ramTSVCoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AA72AF016DF0D5E006C4E06 /* ramTSVCoder.h */; };
 		9AA72AF516DF0DBA006C4E06 /* ramSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AA72AF416DF0DBA006C4E06 /* ramSession.h */; };
 		9AD6F5A316B926C000F7F51E /* ofxUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F4FF16B926BF00F7F51E /* ofxUI.h */; };
@@ -783,8 +783,6 @@
 		60314DF016CFC6B400138384 /* ofxBtSoftBodyWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtSoftBodyWorld.h; sourceTree = "<group>"; };
 		60314DF116CFC6B400138384 /* ofxBtWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBtWorld.cpp; sourceTree = "<group>"; };
 		60314DF216CFC6B400138384 /* ofxBtWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBtWorld.h; sourceTree = "<group>"; };
-		60813DF416DCAFCD005A1F85 /* ofxNodeArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxNodeArray.cpp; sourceTree = "<group>"; };
-		60813DF516DCAFCD005A1F85 /* ofxNodeArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxNodeArray.h; sourceTree = "<group>"; };
 		60B90A8B1644E00900AF2156 /* libram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libram.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		60B90AAA1644E09400AF2156 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		60D49D7816DE5974003BA064 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -893,6 +891,8 @@
 		60D49EBA16DE79B2003BA064 /* video.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = video.hpp; sourceTree = "<group>"; };
 		60D49EBD16DE79B2003BA064 /* opencv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = opencv.a; sourceTree = "<group>"; };
 		9A10418B16E084B200A7E707 /* ramSession.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramSession.cpp; sourceTree = "<group>"; };
+		9A503DA116E324AE004F57EE /* ofxNodeArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxNodeArray.h; sourceTree = "<group>"; };
+		9A503DA216E324AE004F57EE /* ofxNodeArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxNodeArray.cpp; sourceTree = "<group>"; };
 		9AA72AF016DF0D5E006C4E06 /* ramTSVCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramTSVCoder.h; sourceTree = "<group>"; };
 		9AA72AF416DF0DBA006C4E06 /* ramSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramSession.h; sourceTree = "<group>"; };
 		9AD6F4FF16B926BF00F7F51E /* ofxUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI.h; sourceTree = "<group>"; };
@@ -1646,8 +1646,8 @@
 		60813DF316DCAFCD005A1F85 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				60813DF416DCAFCD005A1F85 /* ofxNodeArray.cpp */,
-				60813DF516DCAFCD005A1F85 /* ofxNodeArray.h */,
+				9A503DA116E324AE004F57EE /* ofxNodeArray.h */,
+				9A503DA216E324AE004F57EE /* ofxNodeArray.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -2371,7 +2371,6 @@
 				60314EC216CFC6B400138384 /* ofxBtSoftBody.h in Headers */,
 				60314EC416CFC6B400138384 /* ofxBtSoftBodyWorld.h in Headers */,
 				60314EC616CFC6B400138384 /* ofxBtWorld.h in Headers */,
-				60813DF716DCAFCD005A1F85 /* ofxNodeArray.h in Headers */,
 				60D49DF516DE5975003BA064 /* Calibration.h in Headers */,
 				60D49DF616DE5975003BA064 /* ContourFinder.h in Headers */,
 				60D49DF716DE5975003BA064 /* Distance.h in Headers */,
@@ -2512,6 +2511,7 @@
 				279CDD2716E20D6E002DFFBE /* ramPresetTab.h in Headers */,
 				279CDD2916E20D77002DFFBE /* ramPlaybackTab.h in Headers */,
 				279CDD2B16E20D7E002DFFBE /* ramActorsTab.h in Headers */,
+				9A503DA316E324AE004F57EE /* ofxNodeArray.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2593,7 +2593,6 @@
 				60314EC116CFC6B400138384 /* ofxBtSoftBody.cpp in Sources */,
 				60314EC316CFC6B400138384 /* ofxBtSoftBodyWorld.cpp in Sources */,
 				60314EC516CFC6B400138384 /* ofxBtWorld.cpp in Sources */,
-				60813DF616DCAFCD005A1F85 /* ofxNodeArray.cpp in Sources */,
 				60D49DFE16DE5975003BA064 /* Calibration.cpp in Sources */,
 				60D49DFF16DE5975003BA064 /* ContourFinder.cpp in Sources */,
 				60D49E0016DE5975003BA064 /* Distance.cpp in Sources */,
@@ -2622,6 +2621,7 @@
 				27423B0616DF2B2200FD1944 /* ramPlanarGestureRecognizer.cpp in Sources */,
 				9A10418C16E084B200A7E707 /* ramSession.cpp in Sources */,
 				279CDD2D16E20FD1002DFFBE /* ramPresetTab.cpp in Sources */,
+				9A503DA416E324AE004F57EE /* ofxNodeArray.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
