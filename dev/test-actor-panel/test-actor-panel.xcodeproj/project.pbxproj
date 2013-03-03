@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
+		9A503DC316E37E0A004F57EE /* ActorsPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A503DC216E37E0A004F57EE /* ActorsPanel.cpp */; };
+		9A503DC516E381F5004F57EE /* ControlSegment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A503DC416E381F5004F57EE /* ControlSegment.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -77,6 +79,9 @@
 /* Begin PBXFileReference section */
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
 		9A10418F16E09B7A00A7E707 /* ActorsPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActorsPanel.h; sourceTree = "<group>"; };
+		9A503DBA16E34FEE004F57EE /* ControlSegment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlSegment.h; sourceTree = "<group>"; };
+		9A503DC216E37E0A004F57EE /* ActorsPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActorsPanel.cpp; sourceTree = "<group>"; };
+		9A503DC416E381F5004F57EE /* ControlSegment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlSegment.cpp; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -223,6 +228,9 @@
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
 				9A10418F16E09B7A00A7E707 /* ActorsPanel.h */,
+				9A503DBA16E34FEE004F57EE /* ControlSegment.h */,
+				9A503DC216E37E0A004F57EE /* ActorsPanel.cpp */,
+				9A503DC416E381F5004F57EE /* ControlSegment.cpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -337,6 +345,8 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
+				9A503DC316E37E0A004F57EE /* ActorsPanel.cpp in Sources */,
+				9A503DC516E381F5004F57EE /* ControlSegment.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
