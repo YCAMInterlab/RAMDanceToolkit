@@ -37,7 +37,7 @@ public:
 class ofxUITabbedCanvas : public ofxUICanvasPlus {
 protected:
 	int currentTab;
-	float tabWidth, enableWidth;
+	float tabWidth;
 	bool visible;
 	bool saveStatus, loadStatus;
 	int enableableCount;
@@ -46,12 +46,11 @@ protected:
 	vector<ofxUIToggle*> enableToggles;
 	ofxUIImageButton *saveButton, *loadButton;
 public:
-	ofxUITabbedCanvas(float tabWidth = 100, float enableWidth = 10)
+	ofxUITabbedCanvas(float tabWidth = 100)
 	:currentTab(0)
 	,saveStatus(false)
 	,loadStatus(false)
 	,tabWidth(tabWidth)
-	,enableWidth(enableWidth)
 	,enableableCount(0)
 	,visible(true) {
         loadButton = new ofxUIImageButton(0, 0, 32, 32, &loadStatus, "../../../../resources/Images/open.png", "Load");
@@ -73,21 +72,16 @@ public:
         addWidgetDown(tabToggle);
 		tabToggles.push_back(tabToggle);
 		if(tab->getEnableable()) {
-			// always enable the first thing that can be enabled
-			if(enableableCount == 0) {
-				tab->getEnabled() = true;
-			}
-			enableableCount++;
 			//ofxUIToggle* enableToggle = new ofxUIToggle("", &tab->getEnabled(), enableWidth, tabToggle->getRect()->height);
 			//ofxUIImageToggle* enableToggle = new ofxUIImageToggle(0, 0, tabToggle->getRect()->height, tabToggle->getRect()->height, &tab->getEnabled(), "../../../../resources/Images/show.png", "Enable " + tab->getTabName());
-			ofxUIToggle* enableToggle = new ofxUIToggle("Enable " + tab->getTabName(), &tab->getEnabled(), enableWidth, tabToggle->getRect()->height);
+			ofxUIToggle* enableToggle = new ofxUIToggle("Enable " + tab->getTabName(), &tab->getEnabled(), tabToggle->getRect()->height, tabToggle->getRect()->height);
 			
 			ofxUIRectangle* rect = enableToggle->getRect();
-			rect->setWidth(enableWidth);
-			rect->setHeight(enableWidth);
+			rect->setWidth(tabToggle->getRect()->height);
+			rect->setHeight(tabToggle->getRect()->height);
 			ofxUIRectangle* paddedRect = enableToggle->getPaddingRect();
-			paddedRect->setWidth(enableWidth);
-			paddedRect->setHeight(enableWidth);
+			paddedRect->setWidth(tabToggle->getRect()->height);
+			paddedRect->setHeight(tabToggle->getRect()->height);
 			paddedRect->setParent(rect);
 			ofxUILabel* label = enableToggle->getLabelWidget();
 			label->setParent(label);
@@ -97,6 +91,11 @@ public:
 			
 			addWidgetRight(enableToggle);
 			enableToggles.push_back(enableToggle);
+			// always enable the first thing that can be enabled
+			if(enableableCount == 0) {
+				enableToggle->setValue(true);
+			}
+			enableableCount++;
 		} else {
 			enableToggles.push_back(NULL);
 		}
