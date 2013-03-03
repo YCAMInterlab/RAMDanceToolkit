@@ -2,7 +2,6 @@
 
 #include "ramBaseScene.h"
 #include "ramTSVCoder.h"
-
 #include "ControlSegment.h"
 
 
@@ -13,8 +12,9 @@ class ramActorsScene : public ramBaseScene
 {
 public:
 	
-	ramActorsScene() {}
+	ramActorsScene();
 	
+	const string getName();
 	void setupControlPanel();
 	void setup();
 	void update();
@@ -26,8 +26,8 @@ public:
 	void onActorExit(const ramActor &actor);
 	void onRigidExit(const ramRigidBody &rigid);
 	void onEnabled();
-	const string getName();
 	
+	void drawNodes(const ramNodeArray &NA); // experimental
 	
 private:
 	
@@ -59,10 +59,14 @@ private:
 	bool bRecording;
 	
 	
+	/// draw method flags
+	ofLight light;
+	bool bUseNewActor;
+	bool bUseLight;
+	
+	
 	/// to store actor color
 	ofxXmlSettings XML;
 	
 };
-
-
 
