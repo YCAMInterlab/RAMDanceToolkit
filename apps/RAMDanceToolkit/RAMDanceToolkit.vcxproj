@@ -12,7 +12,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F7D36F43-E22F-7C4A-866C-5615A22BE701}</ProjectGuid>
-    <RootNamespace>AllScenes</RootNamespace>
+    <RootNamespace>RAMDanceToolkit</RootNamespace>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -40,11 +40,11 @@
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">bin\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">obj\x32\Debug\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllScenesDebug</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RAMDanceToolkitDebug</TargetName>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">bin\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">obj\x32\Release\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllScenes</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RAMDanceToolkit</TargetName>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -67,7 +67,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>BulletCollision_vs2010_d.lib;BulletDynamics_vs2010_d.lib;BulletSoftBody_vs2010_d.lib;LinearMath_vs2010_d.lib;cairo-static.lib;pixman-1.lib;fmodexL_vc.lib;fmodex_vc.lib;FreeImage.lib;libfreetype.lib;glew32s.lib;glu32.lib;glut32.lib;openframeworksLibDebug.lib;PocoFoundationmdd.lib;PocoNetmdd.lib;PocoUtilmdd.lib;PocoXMLmdd.lib;qtmlClient.lib;QTSClient.lib;Rave.lib;dsound.lib;rtAudioD.lib;tess2.lib;videoInput.lib;msimg32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)AllScenesDebug.exe</OutputFile>
+      <OutputFile>$(OutDir)RAMDanceToolkitDebug.exe</OutputFile>
       <AdditionalLibraryDirectories>..\..\addons\ofxBt\libs\bullet\lib\vs2010;..\..\..\libs\assimp\lib\vs2010;..\..\..\libs\cairo\lib\vs2010;..\..\..\libs\fmodex\lib\vs2010;..\..\..\libs\FreeImage\lib\vs2010;..\..\..\libs\freetype\lib\vs2010;..\..\..\libs\glew\lib\vs2010;..\..\..\libs\glu\lib\vs2010;..\..\..\libs\glut\lib\vs2010;..\..\..\libs\openFrameworks\lib\vs2010;..\..\..\libs\openFrameworksCompiled\lib\vs2010;..\..\..\libs\poco\lib\vs2010;..\..\..\libs\quicktime\lib\vs2010;..\..\..\libs\rtAudio\lib\vs2010;..\..\..\libs\tess2\lib\vs2010;..\..\..\libs\videoInput\lib\vs2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -99,7 +99,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>LinearMath_vs2010.lib;BulletCollision_vs2010.lib;BulletDynamics_vs2010.lib;BulletSoftBody_vs2010.lib;cairo-static.lib;pixman-1.lib;fmodexL_vc.lib;fmodex_vc.lib;FreeImage.lib;libfreetype.lib;glew32s.lib;glu32.lib;glut32.lib;openframeworksLib.lib;PocoFoundationmd.lib;PocoNetmd.lib;PocoUtilmd.lib;PocoXMLmd.lib;qtmlClient.lib;QTSClient.lib;Rave.lib;dsound.lib;rtAudio.lib;tess2.lib;videoInput.lib;msimg32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)AllScenes.exe</OutputFile>
+      <OutputFile>$(OutDir)RAMDanceToolkit.exe</OutputFile>
       <AdditionalLibraryDirectories>..\..\addons\ofxBt\libs\bullet\lib\vs2010;..\..\..\libs\assimp\lib\vs2010;..\..\..\libs\cairo\lib\vs2010;..\..\..\libs\fmodex\lib\vs2010;..\..\..\libs\FreeImage\lib\vs2010;..\..\..\libs\freetype\lib\vs2010;..\..\..\libs\glew\lib\vs2010;..\..\..\libs\glu\lib\vs2010;..\..\..\libs\glut\lib\vs2010;..\..\..\libs\openFrameworks\lib\vs2010;..\..\..\libs\openFrameworksCompiled\lib\vs2010;..\..\..\libs\poco\lib\vs2010;..\..\..\libs\quicktime\lib\vs2010;..\..\..\libs\rtAudio\lib\vs2010;..\..\..\libs\tess2\lib\vs2010;..\..\..\libs\videoInput\lib\vs2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
