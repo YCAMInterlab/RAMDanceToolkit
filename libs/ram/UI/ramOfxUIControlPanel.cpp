@@ -7,6 +7,42 @@
 
 #ifdef RAM_GUI_SYSTEM_OFXUI
 
+struct ButtonEventListener
+{
+	ofxUIButton *button;
+	ofEvent<ofEventArgs> evt;
+	
+	ButtonEventListener(ofxUIButton *button) : button(button){}
+	~ButtonEventListener() { delete button; }
+	
+	void handle(ofxUIEventArgs &e)
+	{
+		if (e.widget != button
+			&& !button->getValue()) return;
+		
+		static ofEventArgs args;
+		ofNotifyEvent(evt, args);
+	}
+};
+
+ramPreferencesTab& ramOfxUIControlPanel::getPreferencesTab() { return preferencesTab; }
+ramBaseScene* ramOfxUIControlPanel::getActorsScene() { return actorsScene; }
+ofxUITabbedCanvas& ramOfxUIControlPanel::getSceneTabs() { return mSceneTabs; }
+void ramOfxUIControlPanel::save(const string& path) { getSceneTabs().saveSettings(path); }
+void ramOfxUIControlPanel::load(const string& path) { getSceneTabs().loadSettings(path); }
+ofxUICanvasPlus* ramOfxUIControlPanel::getCurrentUIContext() { return current_panel; }
+
+ofEvent<ofEventArgs>& ramOfxUIControlPanel::addButton(const string& name)
+{
+	ofxUIButton *button = current_panel->addButton(name, false, 30, 30);
+	
+	// FIXME: memory leak
+	ButtonEventListener *e = new ButtonEventListener(button);
+	ofAddListener(current_panel->newGUIEvent, e, &ButtonEventListener::handle);
+	return e->evt;
+}
+
+
 ramOfxUIControlPanel *ramOfxUIControlPanel::_instance = NULL;
 
 ramOfxUIControlPanel& ramOfxUIControlPanel::instance()
