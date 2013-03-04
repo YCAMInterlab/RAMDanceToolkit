@@ -31,7 +31,7 @@ public:
 	void loadDefaults();
 
 	vector<string> getDefaultCameraNames();
-	void rollbackDefaultCameraSetting(int camera_id);
+	void rollbackDefaultCameraSetting(int camera_id = -1);
 
 protected:
 
@@ -43,7 +43,10 @@ protected:
 	ramCameraManager();
 	ramCameraManager(const ramCameraManager&) {}
 	ramCameraManager& operator=(const ramCameraManager&) { return *this; }
+	
+	void update(ofEventArgs& args);
 
 	vector<ramCameraSettings> settings;
-
+	
+	int last_camera_id;
 };
