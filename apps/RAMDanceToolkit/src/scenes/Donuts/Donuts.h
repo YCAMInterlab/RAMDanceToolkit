@@ -28,22 +28,22 @@ public:
 		
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		
-		ofxUICanvas* panel = gui().getCurrentUIContext();
+		ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
 		
-		gui().addSection("Original me");
-		gui().addSlider("Scale", 0.1, 10.0, &mScale);
-		gui().addSlider("Position: X", -300.0, 300.0, &mTranslate.x);
-		gui().addSlider("Position: Z", -300.0, 300.0, &mTranslate.z);
+		ramGetGUI().addSection("Original me");
+		ramGetGUI().addSlider("Scale", 0.1, 10.0, &mScale);
+		ramGetGUI().addSlider("Position: X", -300.0, 300.0, &mTranslate.x);
+		ramGetGUI().addSlider("Position: Z", -300.0, 300.0, &mTranslate.z);
 		
-		gui().addSection("Duplicated me");
-		gui().addSlider("Duplicate", 1, 200, &mNumDuplicate);
-		gui().addSlider("Radius", 10.0, 1000.0, &mRadius);
-		gui().addSlider("Box Size", 1.0, 1000.0, &mBoxSize);
+		ramGetGUI().addSection("Duplicated me");
+		ramGetGUI().addSlider("Duplicate", 1, 200, &mNumDuplicate);
+		ramGetGUI().addSlider("Radius", 10.0, 1000.0, &mRadius);
+		ramGetGUI().addSlider("Box Size", 1.0, 1000.0, &mBoxSize);
 		
-		gui().addSection("Reset, Toggle visibility");
+		ramGetGUI().addSection("Reset, Toggle visibility");
 		panel->addButton("Reset all settings", false, 30, 30);
-		gui().addToggle("Show Actor", &mShowActor);
-		gui().addToggle("Toggle All", &mToggleAll);
+		ramGetGUI().addToggle("Show Actor", &mShowActor);
+		ramGetGUI().addToggle("Toggle All", &mToggleAll);
 		
 		for (int i=0; i<ramActor::NUM_JOINTS; i++)
 		{

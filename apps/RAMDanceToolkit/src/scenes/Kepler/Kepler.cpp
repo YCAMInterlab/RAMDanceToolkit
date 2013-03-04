@@ -64,7 +64,7 @@ void Kepler::setupControlPanel()
 	
 #ifdef RAM_GUI_SYSTEM_OFXUI
 	
-	ofxUICanvas* panel = gui().getCurrentUIContext();
+	ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
 	
     ofAddListener(panel->newGUIEvent, this, &Kepler::onValueChanged);
 

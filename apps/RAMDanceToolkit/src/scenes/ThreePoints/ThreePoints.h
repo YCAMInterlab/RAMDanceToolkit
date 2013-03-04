@@ -24,7 +24,7 @@ public:
 		
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		
-		ofxUICanvas* panel = gui().getCurrentUIContext();
+		ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
 
 		showRects = false;
 		showSpheres = false;
@@ -37,17 +37,17 @@ public:
 		maxInvertRadius = 2000;
 		circleResolution = 30;
 		
-		gui().addToggle("Show spheres", &showSpheres);
-		gui().addToggle("Show rects", &showRects);
-		gui().addToggle("Show circle", &showCircle);
-		gui().addToggle("Inverted spheres", &invertSpheres);
-		gui().addToggle("Show circle bisector", &showCircleBisector);
-		gui().addToggle("Show center circles", &showCenterCircles);
-		gui().addSlider("Point size", 1, 10, &pointSize);
-		gui().addSlider("Cross length", 1, 1000, &crossLength);
-		gui().addSlider("Rect radius", 1, 1000, &rectRadius);
-		gui().addSlider("Max invert radius", 1, 10000, &maxInvertRadius);
-		gui().addSlider("Circle resolution", 3, 30, &circleResolution);
+		ramGetGUI().addToggle("Show spheres", &showSpheres);
+		ramGetGUI().addToggle("Show rects", &showRects);
+		ramGetGUI().addToggle("Show circle", &showCircle);
+		ramGetGUI().addToggle("Inverted spheres", &invertSpheres);
+		ramGetGUI().addToggle("Show circle bisector", &showCircleBisector);
+		ramGetGUI().addToggle("Show center circles", &showCenterCircles);
+		ramGetGUI().addSlider("Point size", 1, 10, &pointSize);
+		ramGetGUI().addSlider("Cross length", 1, 1000, &crossLength);
+		ramGetGUI().addSlider("Rect radius", 1, 1000, &rectRadius);
+		ramGetGUI().addSlider("Max invert radius", 1, 10000, &maxInvertRadius);
+		ramGetGUI().addSlider("Circle resolution", 3, 30, &circleResolution);
 		
 		for (int i=0; i<ramActor::NUM_JOINTS; i++)
 		{

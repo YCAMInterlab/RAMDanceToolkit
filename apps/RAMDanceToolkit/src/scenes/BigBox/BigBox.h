@@ -22,15 +22,15 @@ public:
 	{
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		
-		gui().addToggle("Use single color", &mUseSingleColor);
-		gui().addColorSelector("line color", &mLineColor);
-		gui().addSlider("Line width", 0.0, 10.0, &mBoxLineWidth);
-		gui().addSlider("Master box size", 0.0, 1000.0, &mMasterBoxSize);
+		ramGetGUI().addToggle("Use single color", &mUseSingleColor);
+		ramGetGUI().addColorSelector("line color", &mLineColor);
+		ramGetGUI().addSlider("Line width", 0.0, 10.0, &mBoxLineWidth);
+		ramGetGUI().addSlider("Master box size", 0.0, 1000.0, &mMasterBoxSize);
 
 		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			gui().addSlider(ramActor::getJointName(i), 0.0, 1000.0, &mSizeArray.at(i));
+			ramGetGUI().addSlider(ramActor::getJointName(i), 0.0, 1000.0, &mSizeArray.at(i));
 
-		ofAddListener(gui().getCurrentUIContext()->newGUIEvent, this, &BigBox::onPanelChanged);
+		ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &BigBox::onPanelChanged);
 		
 #endif
 	}

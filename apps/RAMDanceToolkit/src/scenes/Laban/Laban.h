@@ -55,7 +55,7 @@ public:
 		showLines = true;
 		showPlanes = false;
 		onlyLimbs = true;
-		ofxUICanvas* panel = gui().getCurrentUIContext();
+		ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
 		panel->addSlider("Fade out", 0, 2, &maxLabanMomentLife, 300, 20);
 		panel->addToggle("Only Limbs", &onlyLimbs, 20, 20);
 		panel->addSlider("Threshold", 0, .5, &threshold, 300, 20);

@@ -32,7 +32,7 @@ public:
 		
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		
-		ofxUICanvas* panel = gui().getCurrentUIContext();
+		ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
 		
 		showFourPointSphere = false;
 		showFourPointTwist = true;

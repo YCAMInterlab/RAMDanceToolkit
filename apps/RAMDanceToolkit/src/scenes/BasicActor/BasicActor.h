@@ -43,7 +43,7 @@ public:
 	
 	void setupControlPanel()
 	{
-		ramControlPanel &gui = gui();
+		ramControlPanel &gui = ramGetGUI();
 		
 		gui.addToggle("Enable light", &enableLight);
 		
@@ -67,7 +67,7 @@ public:
 	
 	void addEntityControl(const ramNodeArray &nodeArray)
 	{
-		ramControlPanel &gui = gui();
+		ramControlPanel &gui = ramGetGUI();
 		
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		

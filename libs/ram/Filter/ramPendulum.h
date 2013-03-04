@@ -16,15 +16,15 @@ public:
 
 	void setupControlPanel()
 	{
-		gui().addSection(getName());
+		ramGetGUI().addSection(getName());
 
-		gui().addSlider("Frequency", 0.00, 100.0, &mFreq);
+		ramGetGUI().addSlider("Frequency", 0.00, 100.0, &mFreq);
 
-		gui().addSeparator();
+		ramGetGUI().addSeparator();
 
-		gui().addToggle("Pendulum axis: X", &axis_x);
-		gui().addToggle("Pendulum axis: Y", &axis_y);
-		gui().addToggle("Pendulum axis: Z", &axis_z);
+		ramGetGUI().addToggle("Pendulum axis: X", &axis_x);
+		ramGetGUI().addToggle("Pendulum axis: Y", &axis_y);
+		ramGetGUI().addToggle("Pendulum axis: Z", &axis_z);
 	}
 
 	void setup()

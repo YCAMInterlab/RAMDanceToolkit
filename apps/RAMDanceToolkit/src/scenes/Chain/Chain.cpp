@@ -67,7 +67,7 @@ void Chain::setupControlPanel()
     const float w = 300.0f;
     const float dim = 16.0f;
     
-	ofxUICanvas* panel = gui().getCurrentUIContext();
+	ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
 	
     panel->addSlider("GRAVITY X", -3.0f, 3.0f, &mGravity.x, w, dim);
     panel->addSlider("GRAVITY Y", -3.0f, 3.0f, &mGravity.y, w, dim);

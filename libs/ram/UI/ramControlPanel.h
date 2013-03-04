@@ -97,16 +97,16 @@ private:
 	ramControlPanel();
 };
 
-inline ramControlPanel& gui() { return (ramControlPanel &) ramControlPanel::instance(); }
+inline ramControlPanel& ramGetGUI() { return (ramControlPanel &) ramControlPanel::instance(); }
 
 inline void ramSaveSettings(const string filename)
 {
-	gui().save(filename);
+	ramGetGUI().save(filename);
 }
 
 inline void ramLoadSettings(const string filename)
 {
-	gui().load(filename);
+	ramGetGUI().load(filename);
 }
 
 #endif

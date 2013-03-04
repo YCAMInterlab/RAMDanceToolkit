@@ -166,8 +166,8 @@ public:
 
 	void setupControlPanel()
 	{
-		gui().addSection(getName());
-		gui().addSlider("Threshold", 0.1, 10, &threshold);
+		ramGetGUI().addSection(getName());
+		ramGetGUI().addSlider("Threshold", 0.1, 10, &threshold);
 	}
 
 protected:
@@ -250,9 +250,9 @@ public:
 
 	void setupControlPanel()
 	{
-		gui().addSection(getName());
-		gui().addSlider("Threshold", 0.1, 10, &threshold);
-		gui().addSlider("Hold time", 0.1, 10, &hold_time);
+		ramGetGUI().addSection(getName());
+		ramGetGUI().addSlider("Threshold", 0.1, 10, &threshold);
+		ramGetGUI().addSlider("Hold time", 0.1, 10, &hold_time);
 	}
 
 protected:

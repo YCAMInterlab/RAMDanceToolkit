@@ -25,7 +25,7 @@ void ramSession::setupControlPanel()
 
 #ifdef RAM_GUI_SYSTEM_OFXUI
 
-	ofxUICanvas* panel = gui().getCurrentUIContext();
+	ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
 
 	panel->addToggle("Rec", false, 40, 40);
 	panel->addToggle("Play", false, 40, 40);

@@ -18,8 +18,8 @@ public:
 
 	void setupControlPanel()
 	{
-		gui().addSection(getName());
-		gui().addSlider("Delay", 1, 1000, &delay_frame);
+		ramGetGUI().addSection(getName());
+		ramGetGUI().addSlider("Delay", 1, 1000, &delay_frame);
 	}
 
 protected:
@@ -57,9 +57,9 @@ public:
 
 	void setupControlPanel()
 	{
-		gui().addSection(getName());
-		gui().addSlider("Rate", -3, 3, &rate);
-		gui().addSlider("Buffer Frame", 1, 1000, &buffer_frame);
+		ramGetGUI().addSection(getName());
+		ramGetGUI().addSlider("Rate", -3, 3, &rate);
+		ramGetGUI().addSlider("Buffer Frame", 1, 1000, &buffer_frame);
 	}
 
 protected:
