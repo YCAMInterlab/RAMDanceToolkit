@@ -17,9 +17,8 @@ public:
 	{
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		
-		ramControlPanel &gui = ramGetGUI();
 		
-		ofxUICanvas* panel = gui.getCurrentUIContext();
+		ofxUICanvas* panel = gui().getCurrentUIContext();
 		
 		ofAddListener(panel->newGUIEvent, this, &UpsideDown::onValueChanged);
         

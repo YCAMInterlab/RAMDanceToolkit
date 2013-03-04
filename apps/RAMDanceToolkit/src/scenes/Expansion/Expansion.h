@@ -27,7 +27,7 @@ public:
 	
 	void setupControlPanel()
 	{
-//		ramControlPanel &gui = ramGetGUI();
+//		ramControlPanel &gui = gui();
 		
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		

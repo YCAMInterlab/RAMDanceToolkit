@@ -11,8 +11,7 @@ public:
 
 	void setupControlPanel()
 	{
-		ramControlPanel &gui = ramGetGUI();
-		gui.addSlider("LowPass amount", 0.0, 1.0, &amount);
+		gui().addSlider("LowPass amount", 0.0, 1.0, &amount);
 	}
 
 	const string getName() { return "ramLowPassFilter"; }

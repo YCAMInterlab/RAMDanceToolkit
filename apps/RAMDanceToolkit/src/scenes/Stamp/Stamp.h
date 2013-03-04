@@ -51,26 +51,24 @@ public:
 	Stamp() : mShowActor(true), mShowBox(true) {}
 	
 	void setupControlPanel()
-	{
-		ramControlPanel &gui = ramGetGUI();
-		
+	{		
 		mStamp.setupControlPanel();
 		
-		gui.addToggle("Show Actor", &mShowActor);
-		gui.addColorSelector("Box line color", &color);
-		gui.addSlider("Line width", 0, 6, &line_width);
+		gui().addToggle("Show Actor", &mShowActor);
+		gui().addColorSelector("Box line color", &color);
+		gui().addSlider("Line width", 0, 6, &line_width);
 		
 		use_idle_timer = false;
 		timer_duration = 0.5;
 		threshold = 3;
 		debug_draw = false;
 		
-		gui.addToggle("use_idle_timer", &use_idle_timer);
+		gui().addToggle("use_idle_timer", &use_idle_timer);
 		
-		gui.addSlider("timer_duration", 0, 4, &timer_duration);
-		gui.addSlider("threshold", 0, 10, &threshold);
+		gui().addSlider("timer_duration", 0, 4, &timer_duration);
+		gui().addSlider("threshold", 0, 10, &threshold);
 		
-		gui.addToggle("debug_draw", &debug_draw);
+		gui().addToggle("debug_draw", &debug_draw);
 	}
 	
 	void setup()

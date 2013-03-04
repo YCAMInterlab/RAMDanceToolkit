@@ -422,11 +422,11 @@ void ramActorsScene::rebuildControlPanel()
 
 void ramActorsScene::createPanelHeader()
 {
-	const int width = ramGetGUI().kLength/2 - 5;
-	const int height = ramGetGUI().kDim * 1.3;
+	const int width = gui().kLength/2 - 5;
+	const int height = gui().kDim * 1.3;
 	
 	mLocalPanel->addLabel(getName(), OFX_UI_FONT_LARGE);
-	mLocalPanel->addSpacer(ramGetGUI().kLength, 2);
+	mLocalPanel->addSpacer(gui().kLength, 2);
 	
 	
 	/// 2x2 matrix
@@ -439,8 +439,8 @@ void ramActorsScene::createPanelHeader()
 	/// buttons which are controlled programatically
 	//  all of the child widgets of mLocalPanel are deleted when rebuildControlPanel is executed
 	//  so it needs to make new pointer
-	btnPause = new ofxUILabelToggle("Pause (Space key)", false, ramGetGUI().kLength, height);
-	btnRecAll = new ofxUILabelToggle("Recording All Actors", false, ramGetGUI().kLength, height);
+	btnPause = new ofxUILabelToggle("Pause (Space key)", false, gui().kLength, height);
+	btnRecAll = new ofxUILabelToggle("Recording All Actors", false, gui().kLength, height);
 	mLocalPanel->addWidgetDown( btnPause );
 	mLocalPanel->addWidgetDown( btnRecAll );
 }

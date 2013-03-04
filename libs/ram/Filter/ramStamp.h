@@ -15,12 +15,10 @@ public:
 
 	void setupControlPanel()
 	{
-		ramControlPanel &gui = ramGetGUI();
+		gui().addSection(getName());
 
-		gui.addSection(getName());
-
-		ofAddListener(gui.addButton("Clear"), this, &ramStamp::onClear);
-		gui.addSlider("Recording Span", 2.0, 60.0, &mRecSpan);
+		ofAddListener(gui().addButton("Clear"), this, &ramStamp::onClear);
+		gui().addSlider("Recording Span", 2.0, 60.0, &mRecSpan);
 	}
 	
 	void onClear(ofEventArgs &e)

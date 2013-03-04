@@ -37,17 +37,15 @@ public:
 
 	void setupControlPanel()
 	{
-		ramControlPanel &gui = ramGetGUI();
+		gui().addSection(getName());
 
-		gui.addSection(getName());
+		ofAddListener(gui().addButton("Ghost"), this, &ramGhost::onPresetGhost);
+		ofAddListener(gui().addButton("Slow"), this, &ramGhost::onPresetSlow);
+		ofAddListener(gui().addButton("Normal"), this, &ramGhost::onPresetNormal);
+		ofAddListener(gui().addButton("Fast"), this, &ramGhost::onPresetFast);
 
-		ofAddListener(gui.addButton("Ghost"), this, &ramGhost::onPresetGhost);
-		ofAddListener(gui.addButton("Slow"), this, &ramGhost::onPresetSlow);
-		ofAddListener(gui.addButton("Normal"), this, &ramGhost::onPresetNormal);
-		ofAddListener(gui.addButton("Fast"), this, &ramGhost::onPresetFast);
-
-		gui.addSlider("Distance", 0.0, 255.0, &distance);
-		gui.addSlider("Speed", 0.0, 255.0, &speed);
+		gui().addSlider("Distance", 0.0, 255.0, &distance);
+		gui().addSlider("Speed", 0.0, 255.0, &speed);
 	}
 	
 	void onPresetGhost(ofEventArgs &e)

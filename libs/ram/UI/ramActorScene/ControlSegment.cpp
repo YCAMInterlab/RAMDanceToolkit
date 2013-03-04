@@ -30,8 +30,8 @@ ControlSegment::~ControlSegment()
 ofxUICanvasPlus* ControlSegment::createPanel(const ramNodeArray &NA)
 {
 	name = NA.getName();
-	const float width = ramGetGUI().kLength;
-	const float height = ramGetGUI().kDim+3;
+	const float width = gui().kLength;
+	const float height = gui().kDim+3;
 	
 	
 	ofxUICanvasPlus *child = new ofxUICanvasPlus();

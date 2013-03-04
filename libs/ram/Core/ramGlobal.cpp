@@ -24,7 +24,7 @@ void ramInitialize(int oscPort)
 	ramActorManager::instance().setupOscReceiver(oscPort);
 
 	ramPhysics::instance();
-	ramGetGUI().setup();
+	gui().setup();
 }
 
 string ramToResourcePath(string path)

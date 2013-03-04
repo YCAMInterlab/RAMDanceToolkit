@@ -19,10 +19,8 @@ public:
 
 	void setupControlPanel()
 	{
-		ramControlPanel &gui = ramGetGUI();
-
-		gui.addSection(getName());
-		gui.addSlider("Expand", 0.0, kExpandMax, &mExpand);
+		gui().addSection(getName());
+		gui().addSlider("Expand", 0.0, kExpandMax, &mExpand);
 	}
 
 	const ramNodeArray& filter(const ramNodeArray& src)

@@ -29,11 +29,10 @@ public:
 	
 	void setupControlPanel()
 	{
-		ramControlPanel &gui = ramGetGUI();
 		
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		
-		ofxUICanvas* panel = gui.getCurrentUIContext();
+		ofxUICanvas* panel = gui().getCurrentUIContext();
 		
 		showFourPointSphere = false;
 		showFourPointTwist = true;

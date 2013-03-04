@@ -32,19 +32,18 @@ public:
 
 	void setupControlPanel()
 	{
-		ramControlPanel &gui = ramGetGUI();
 		
-		gui.addToggle("Draw line from actor to ghost", &draw_line);
+		gui().addToggle("Draw line from actor to ghost", &draw_line);
 		
-		ofAddListener(gui.addButton("Ghost"), this, &Future::onPresetGhost);
-		ofAddListener(gui.addButton("Slow"), this, &Future::onPresetSlow);
-		ofAddListener(gui.addButton("Normal"), this, &Future::onPresetNormal);
-		ofAddListener(gui.addButton("Fast"), this, &Future::onPresetFast);
+		ofAddListener(gui().addButton("Ghost"), this, &Future::onPresetGhost);
+		ofAddListener(gui().addButton("Slow"), this, &Future::onPresetSlow);
+		ofAddListener(gui().addButton("Normal"), this, &Future::onPresetNormal);
+		ofAddListener(gui().addButton("Fast"), this, &Future::onPresetFast);
 		
-		gui.addSlider("Distance", 0.0, 255.0, &distance);
-		gui.addSlider("Speed", 0.0, 255.0, &speed);
+		gui().addSlider("Distance", 0.0, 255.0, &distance);
+		gui().addSlider("Speed", 0.0, 255.0, &speed);
 		
-		ofAddListener(gui.getCurrentUIContext()->newGUIEvent, this, &Future::onValueChanged);
+		ofAddListener(gui().getCurrentUIContext()->newGUIEvent, this, &Future::onValueChanged);
 	}
 
 	void draw()

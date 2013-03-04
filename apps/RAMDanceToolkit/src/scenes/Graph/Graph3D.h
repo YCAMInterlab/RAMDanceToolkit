@@ -10,7 +10,7 @@ public:
 	
 	void setupControlPanel(ofxUICanvas* panel)
 	{
-		ramControlPanel &gui = ramGetGUI();
+		ramControlPanel &gui = gui();
 		
 		panel->addWidgetDown(new ofxUILabel("No parameters", OFX_UI_FONT_MEDIUM));
 	}

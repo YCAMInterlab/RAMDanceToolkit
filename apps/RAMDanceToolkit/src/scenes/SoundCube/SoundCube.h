@@ -137,11 +137,9 @@ public:
 	{
 		fade = 0.5;
 		
-		ramControlPanel &gui = ramGetGUI();
-		
-		gui.addSlider("line width", 0, 10, &line_width);
-		gui.addSlider("fade", 0, 1, &fade);
-		gui.addToggle("show box", &show_box);
+		gui().addSlider("line width", 0, 10, &line_width);
+		gui().addSlider("fade", 0, 1, &fade);
+		gui().addToggle("show box", &show_box);
 	}
 	
 	void setup()

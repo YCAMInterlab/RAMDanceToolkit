@@ -38,11 +38,10 @@ public:
 
 		void setupControlPanel()
 		{
-			ramControlPanel &gui = ramGetGUI();
 			
 #ifdef RAM_GUI_SYSTEM_OFXUI
 			
-			ofxUICanvas* panel = gui.getCurrentUIContext();
+			ofxUICanvas* panel = gui().getCurrentUIContext();
 			
 			line_width = 2;
 			
@@ -80,7 +79,7 @@ public:
 			panel->addSlider("extend to", 0, 1000, &extend_to, 150, 10);
 			panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 			
-			panel->addSpacer(gui.kLength, 2);
+			panel->addSpacer(gui().kLength, 2);
 			
 #endif
 		}
@@ -185,10 +184,9 @@ public:
 	
 	void setupControlPanel()
 	{
-		ramControlPanel &gui = ramGetGUI();
 		
 		random_change_time = 60;
-		gui.addSlider("random_change_time", 0.1, 60, &random_change_time);
+		gui().addSlider("random_change_time", 0.1, 60, &random_change_time);
 		last_changed_time = ofGetElapsedTimef();
 		
 		for (int i = 0; i < NUM_LINE; i++)

@@ -61,11 +61,10 @@ static void popAll()
 //--------------------------------------------------------------
 void Kepler::setupControlPanel()
 {
-	ramControlPanel &gui = ramGetGUI();
 	
 #ifdef RAM_GUI_SYSTEM_OFXUI
 	
-	ofxUICanvas* panel = gui.getCurrentUIContext();
+	ofxUICanvas* panel = gui().getCurrentUIContext();
 	
     ofAddListener(panel->newGUIEvent, this, &Kepler::onValueChanged);
 

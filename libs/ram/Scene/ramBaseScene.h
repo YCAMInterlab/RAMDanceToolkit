@@ -21,7 +21,7 @@ class EmptyScene : public ramBaseScene
 
     void setupControlPanel()
     {
-        ramControlPanel &gui = ramGetGUI();
+        ramControlPanel &gui = gui();
 
         gui.addPanel(getName());
 

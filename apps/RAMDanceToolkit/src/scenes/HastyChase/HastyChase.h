@@ -16,18 +16,17 @@ public:
 	
 	void setupControlPanel()
 	{
-		ramControlPanel &gui = ramGetGUI();
 		
 		buffer_time = 3600;
 		rate = 1.5;
 		
-		gui.addSlider("buffer_time", 1, 10000, &buffer_time);
-		gui.addSlider("rate", -2, 3, &rate);
+		gui().addSlider("buffer_time", 1, 10000, &buffer_time);
+		gui().addSlider("rate", -2, 3, &rate);
 		
-		gui.addToggle("draw_line", &draw_line);
-		gui.addToggle("show box", &show_box);
-		gui.addToggle("fill chaser", &fill_chaser);
-		gui.addColorSelector("chaser color", &joint_color);
+		gui().addToggle("draw_line", &draw_line);
+		gui().addToggle("show box", &show_box);
+		gui().addToggle("fill chaser", &fill_chaser);
+		gui().addColorSelector("chaser color", &joint_color);
 	}
 	
 	void setup()

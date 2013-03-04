@@ -1,6 +1,6 @@
 #include "ramSession.h"
 
-
+#include "ramControlPanel.h"
 
 #pragma mark -
 #pragma mark constructor
@@ -9,18 +9,15 @@ ramSession::ramSession() { clear(); }
 ramSession::ramSession(const ramSession &copy) { clear(); *this = copy; }
 ramSession::ramSession(const ramNodeArrayBuffer &buf) { clear(); mBuffer = buf; }
 
-
-
 #pragma mark -
 #pragma mark gui settings
 
 void ramSession::setupControlPanel()
 {
-	ramControlPanel &gui = ramGetGUI();
 
 #ifdef RAM_GUI_SYSTEM_OFXUI
 
-	ofxUICanvas* panel = gui.getCurrentUIContext();
+	ofxUICanvas* panel = gui().getCurrentUIContext();
 
 	panel->addToggle("Rec", false, 40, 40);
 	panel->addToggle("Play", false, 40, 40);

@@ -20,7 +20,6 @@
  {f} timestamp
  */
 
-
 class ramBaseCoder
 {
 	
