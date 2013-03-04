@@ -25,14 +25,14 @@ struct ButtonEventListener
 	}
 };
 
-ramPreferencesTab& ramOfxUIControlPanel::getPreferencesTab() { return preferencesTab; }
-ramBaseScene* ramOfxUIControlPanel::getActorsScene() { return actorsScene; }
-ofxUITabbedCanvas& ramOfxUIControlPanel::getSceneTabs() { return mSceneTabs; }
-void ramOfxUIControlPanel::save(const string& path) { getSceneTabs().saveSettings(path); }
-void ramOfxUIControlPanel::load(const string& path) { getSceneTabs().loadSettings(path); }
-ofxUICanvasPlus* ramOfxUIControlPanel::getCurrentUIContext() { return current_panel; }
+ramPreferencesTab& ramControlPanel::getPreferencesTab() { return preferencesTab; }
+ramBaseScene* ramControlPanel::getActorsScene() { return actorsScene; }
+ofxUITabbedCanvas& ramControlPanel::getSceneTabs() { return mSceneTabs; }
+void ramControlPanel::save(const string& path) { getSceneTabs().saveSettings(path); }
+void ramControlPanel::load(const string& path) { getSceneTabs().loadSettings(path); }
+ofxUICanvasPlus* ramControlPanel::getCurrentUIContext() { return current_panel; }
 
-ofEvent<ofEventArgs>& ramOfxUIControlPanel::addButton(const string& name)
+ofEvent<ofEventArgs>& ramControlPanel::addButton(const string& name)
 {
 	ofxUIButton *button = current_panel->addButton(name, false, 30, 30);
 	
@@ -43,18 +43,18 @@ ofEvent<ofEventArgs>& ramOfxUIControlPanel::addButton(const string& name)
 }
 
 
-ramOfxUIControlPanel *ramOfxUIControlPanel::_instance = NULL;
+ramControlPanel *ramControlPanel::_instance = NULL;
 
-ramOfxUIControlPanel& ramOfxUIControlPanel::instance()
+ramControlPanel& ramControlPanel::instance()
 {
 	if (_instance == NULL)
 	{
-		_instance = new ramOfxUIControlPanel();
+		_instance = new ramControlPanel();
 	}
 	return *_instance;
 }
 
-ramOfxUIControlPanel::ramOfxUIControlPanel()
+ramControlPanel::ramControlPanel()
 :kDim(16)
 ,kXInit(OFX_UI_GLOBAL_WIDGET_SPACING)
 ,kLength(320 - kXInit)
@@ -64,16 +64,16 @@ ramOfxUIControlPanel::ramOfxUIControlPanel()
 {
 }
 
-ramOfxUIControlPanel::~ramOfxUIControlPanel()
+ramControlPanel::~ramControlPanel()
 {
 	delete (ramActorsScene*) actorsScene;
 }
 
-void ramOfxUIControlPanel::setup()
+void ramControlPanel::setup()
 {
 	/// Event hooks
 	// -------------------------------------
-	ofAddListener(ofEvents().update, this, &ramOfxUIControlPanel::update);
+	ofAddListener(ofEvents().update, this, &ramControlPanel::update);
 	
 	addPanel(presetTab);
 	addPanel(preferencesTab);
@@ -83,12 +83,12 @@ void ramOfxUIControlPanel::setup()
 	addPanel(actorsScene, false);
 	actorsScene->setEnabled(true);
 	
-	ofAddListener(mSceneTabs.newGUIEvent, this, &ramOfxUIControlPanel::guiEvent);
+	ofAddListener(mSceneTabs.newGUIEvent, this, &ramControlPanel::guiEvent);
 	
 	mSceneTabs.addSpacer();
 }
 
-void ramOfxUIControlPanel::update(ofEventArgs &e)
+void ramControlPanel::update(ofEventArgs &e)
 {
 	actorsScene->update();
 	if(!ofGetMousePressed())
@@ -100,7 +100,7 @@ void ramOfxUIControlPanel::update(ofEventArgs &e)
 
 //
 
-void ramOfxUIControlPanel::addPanel(ramBaseScene* control, bool enableable)
+void ramControlPanel::addPanel(ramBaseScene* control, bool enableable)
 {
 	ofxUITab *panel = new ofxUITab(control->getName(), enableable);
 	current_panel = panel;	
@@ -110,38 +110,38 @@ void ramOfxUIControlPanel::addPanel(ramBaseScene* control, bool enableable)
 	panel->autoSizeToFitWidgets();
 }
 
-void ramOfxUIControlPanel::addPanel(ofxUITab& tab)
+void ramControlPanel::addPanel(ofxUITab& tab)
 {
 	scenes.push_back(NULL);
 	getSceneTabs().add(&tab);
 }
 
-void ramOfxUIControlPanel::addSection(const string& name)
+void ramControlPanel::addSection(const string& name)
 {
 	current_panel->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_MEDIUM));
 	current_panel->addSpacer(kLength, 2);
 	current_panel->autoSizeToFitWidgets();
 }
 
-void ramOfxUIControlPanel::addSeparator()
+void ramControlPanel::addSeparator()
 {
 	current_panel->addSpacer(kLength, 2);
 	current_panel->autoSizeToFitWidgets();
 }
 
-void ramOfxUIControlPanel::addLabel(const string& content)
+void ramControlPanel::addLabel(const string& content)
 {
 	current_panel->addWidgetDown(new ofxUILabel(content, OFX_UI_FONT_MEDIUM));
 	current_panel->autoSizeToFitWidgets();
 }
 
-void ramOfxUIControlPanel::addToggle(const string& name, bool *value)
+void ramControlPanel::addToggle(const string& name, bool *value)
 {
 	current_panel->addToggle(name, value, 30, 30);
 	current_panel->autoSizeToFitWidgets();
 }
 
-void ramOfxUIControlPanel::addMultiToggle(const string& name, const vector<string>& content, int *value)
+void ramControlPanel::addMultiToggle(const string& name, const vector<string>& content, int *value)
 {
 	assert(false);
 }
@@ -172,7 +172,7 @@ struct RadioGroupListener
 	}
 };
 
-ofxUIRadio* ramOfxUIControlPanel::addRadioGroup(const string& name, const vector<string>& content, int *value)
+ofxUIRadio* ramControlPanel::addRadioGroup(const string& name, const vector<string>& content, int *value)
 {
 	ofxUIRadio *o = current_panel->addRadio(name, content, OFX_UI_ORIENTATION_VERTICAL, kDim, kDim);
 	
@@ -183,12 +183,12 @@ ofxUIRadio* ramOfxUIControlPanel::addRadioGroup(const string& name, const vector
 	return o;
 }
 
-void ramOfxUIControlPanel::addDropdown(const string& name, const vector<string>& content, int *value)
+void ramControlPanel::addDropdown(const string& name, const vector<string>& content, int *value)
 {
 	assert(false);
 }
 
-void ramOfxUIControlPanel::addSlider(const string& name, float min_value, float max_value, float *value)
+void ramControlPanel::addSlider(const string& name, float min_value, float max_value, float *value)
 {
 	current_panel->addSlider(name, min_value, max_value, value, kLength, kDim);
 	current_panel->autoSizeToFitWidgets();
@@ -217,7 +217,7 @@ struct ColorSelectorListener
 	}
 };
 
-void ramOfxUIControlPanel::addColorSelector(const string& name, ofFloatColor *value)
+void ramControlPanel::addColorSelector(const string& name, ofFloatColor *value)
 {
 	current_panel->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_MEDIUM));
 	
@@ -235,12 +235,12 @@ void ramOfxUIControlPanel::addColorSelector(const string& name, ofFloatColor *va
 	current_panel->autoSizeToFitWidgets();
 }
 
-void ramOfxUIControlPanel::remove(const string& name)
+void ramControlPanel::remove(const string& name)
 {
 	assert(false);
 }
 
-void ramOfxUIControlPanel::guiEvent(ofxUIEventArgs &e)
+void ramControlPanel::guiEvent(ofxUIEventArgs &e)
 {
 	for(int i = 0; i < scenes.size(); i++) 
 	{
