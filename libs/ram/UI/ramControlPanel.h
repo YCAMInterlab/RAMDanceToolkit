@@ -72,11 +72,9 @@ public:
 private:
 
 	static ramControlPanel *_instance;
-
-	int mFloorPattern;
-	float mFloorSize, mGridSize;
-
-	int camera_preset, camera_preset_t;
+	
+	ofxUICanvasPlus *current_panel;
+	ofxUITabbedCanvas mSceneTabs;
 	
 	ramPresetTab presetTab;
 	ramPreferencesTab preferencesTab;
@@ -85,12 +83,6 @@ private:
 	// bomisutaro!
 	// can't be statically allocated due to inheritance conflicts from header-only implementation
 	ramBaseScene* actorsScene;
-	
-	ofFloatColor backgroundColor;
-
-	ofxUITabbedCanvas mSceneTabs;
-
-	ofxUICanvasPlus *current_panel;
 
 	vector<ramBaseScene*> scenes;
 

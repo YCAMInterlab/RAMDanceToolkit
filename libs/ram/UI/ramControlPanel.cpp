@@ -58,9 +58,6 @@ ramControlPanel::ramControlPanel()
 :kDim(16)
 ,kXInit(OFX_UI_GLOBAL_WIDGET_SPACING)
 ,kLength(320 - kXInit)
-,camera_preset_t(0)
-,camera_preset(0)
-,backgroundColor(ofColor(0))
 {
 }
 
