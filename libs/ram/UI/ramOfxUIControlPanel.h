@@ -7,6 +7,7 @@
 #include "ramGlobal.h"
 #include "ramGraphics.h"
 #include "ramCameraManager.h"
+
 #include "ramPreferencesTab.h"
 #include "ramPresetTab.h"
 #include "ramPlaybackTab.h"
@@ -33,17 +34,7 @@ public:
 	void addSection(const string& name);
 	void addSeparator();
 	void addLabel(const string& content);
-	
-	ofEvent<ofEventArgs>& addButton(const string& name)
-	{
-		ofxUIButton *button = current_panel->addButton(name, false, 30, 30);
-		
-		// FIXME: memory leak
-		ButtonEventListener *e = new ButtonEventListener(button);
-		ofAddListener(current_panel->newGUIEvent, e, &ButtonEventListener::handle);
-		return e->evt;
-	}
-
+	ofEvent<ofEventArgs>& addButton(const string& name);
 	void addToggle(const string& name, bool *value);
 	void addMultiToggle(const string& name, const vector<string>& content, int *value);
 	ofxUIRadio* addRadioGroup(const string& name, const vector<string>& content, int *value);
@@ -55,21 +46,17 @@ public:
 
 	// load & save
 
-	void save(const string& path) { getSceneTabs().saveSettings(path); }
-	void load(const string& path) { getSceneTabs().loadSettings(path); }
-
+	void save(const string& path);
+	void load(const string& path);
+	
 	// for internal use
 
 	void addPanel(ramBaseScene* control,  bool enableable = true);
 
-	ramPreferencesTab& getPreferencesTab() {
-		return preferencesTab;
-	}
-	ramBaseScene* getActorsScene() {
-		return actorsScene;
-	}
+	ramPreferencesTab& getPreferencesTab();
+	ramBaseScene* getActorsScene();
 	
-	inline ofxUITabbedCanvas& getSceneTabs() { return mSceneTabs; }
+	ofxUITabbedCanvas& getSceneTabs();
 
 	//
 
@@ -78,8 +65,8 @@ public:
 
 	//
 
-	ofxUICanvasPlus* getCurrentUIContext() { return current_panel; }
-
+	ofxUICanvasPlus* getCurrentUIContext();
+	
 private:
 
 	static ramOfxUIControlPanel *_instance;
@@ -104,24 +91,6 @@ private:
 	ofxUICanvasPlus *current_panel;
 
 	vector<ramBaseScene*> scenes;
-
-	struct ButtonEventListener
-	{
-		ofxUIButton *button;
-		ofEvent<ofEventArgs> evt;
-
-		ButtonEventListener(ofxUIButton *button) : button(button){}
-		~ButtonEventListener() { delete button; }
-
-		void handle(ofxUIEventArgs &e)
-		{
-			if (e.widget != button
-				&& !button->getValue()) return;
-
-			static ofEventArgs args;
-			ofNotifyEvent(evt, args);
-		}
-	};
 
 	ramOfxUIControlPanel();
 };

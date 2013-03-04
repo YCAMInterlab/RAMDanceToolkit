@@ -21,11 +21,11 @@ public:
 	virtual void drawActor(const ramActor &actor);
 	virtual void drawRigid(const ramRigidBody &rigid);
 
-	inline void enable();
-	inline void disable();
-	inline void toggle();
-	inline bool isEnabled();
-	inline void setEnabled(bool enabled);
+	void enable();
+	void disable();
+	void toggle();
+	bool isEnabled();
+	void setEnabled(bool enabled);
 	
 	virtual void onEnabled();
 	virtual void onDisabled();

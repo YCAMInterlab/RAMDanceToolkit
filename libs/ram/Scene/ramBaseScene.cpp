@@ -36,13 +36,13 @@ bool ramBaseScene::isEnabled()
 	return bEnabled;
 }
 
-void ramBaseScene::setEnabled(bool b)
+void ramBaseScene::setEnabled(bool enabled)
 {
-	if (bEnabled == b) return;
+	if (bEnabled == enabled) return;
 
-	bEnabled = b;
+	bEnabled = enabled;
 
-	if (b)
+	if (enabled)
 		onEnabled();
 	else
 		onDisabled();
