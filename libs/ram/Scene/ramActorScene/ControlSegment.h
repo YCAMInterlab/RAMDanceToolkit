@@ -10,15 +10,24 @@ class ControlSegment
 public:
 	
 	ControlSegment();
-	ofxUICanvasPlus* setup(ofxUICanvasPlus* panel, const ramNodeArray &NA);
+	~ControlSegment();
+	ofxUICanvasPlus* createPanel(const ramNodeArray &NA);
 	void onValueChanged(ofxUIEventArgs& e);
 	
-	void load();
-	void save();
+	void loadCache();
+	void saveCache();
 	
 private:
 	
+	ofxUIImageToggle *btnHideActor;
+	ofxUIImageButton *btnResetActor;
+	ofxUIImageToggle *btnRecordActor;
+	
+	ofxXmlSettings XML;
+	string name;
+	
 	void reset();
+	const string getXMLFilePath() const;
 	
 	ramSession session;
 	ofFloatColor jointColor;

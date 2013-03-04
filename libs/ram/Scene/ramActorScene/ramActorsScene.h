@@ -13,6 +13,7 @@ class ramActorsScene : public ramBaseScene
 public:
 	
 	ramActorsScene();
+	~ramActorsScene();
 	
 	const string getName();
 	void setupControlPanel();
@@ -25,15 +26,24 @@ public:
 	void onRigidSetup(const ramRigidBody &rigid);
 	void onActorExit(const ramActor &actor);
 	void onRigidExit(const ramRigidBody &rigid);
-	void onEnabled();
+	
+	void onKeyPressed(ofKeyEventArgs &e);
+	void onValueChanged(ofxUIEventArgs &e);
 	
 	void drawNodes(const ramNodeArray &NA); // experimental
 	
 private:
 	
+	/// internal use
 	void addControlSegment(const ramNodeArray &NA);
 	void removeControlSegment(const ramNodeArray &NA);
 	void rebuildControlPanel();
+	void createPanelHeader();
+
+	
+	/// instances which are controlled programatically
+	ofxUILabelToggle *btnPause;
+	ofxUILabelToggle *btnRecAll;
 
 	
 	/// ActorsPanel
@@ -61,12 +71,9 @@ private:
 	
 	/// draw method flags
 	ofLight light;
-	bool bUseNewActor;
-	bool bUseLight;
-	
-	
-	/// to store actor color
-	ofxXmlSettings XML;
-	
+	bool bShowAllActor;
+	bool bRecAllActor;
+	bool bUseSimpleActor;
+	bool bUseShading;
 };
 

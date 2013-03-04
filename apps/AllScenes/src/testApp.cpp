@@ -3,9 +3,6 @@
 /*!
  Scenes
  */
-#include "BasicActor.h"
-BasicActor basicActor;
-
 #include "LineDrawing.h"
 LineDrawing drawLines;
 
@@ -79,7 +76,6 @@ void testApp::setup()
 	/// scenes setup
 	// ------------------
 	vector<ramBaseScene*> scenes;
-	scenes.push_back( basicActor.getPtr() );
 	scenes.push_back( drawLines.getPtr() );
 	scenes.push_back( bigbox.getPtr() );
 	scenes.push_back( future.getPtr() );
