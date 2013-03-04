@@ -29,6 +29,11 @@ public:
 		if(bufferSize != img.getWidth())
 		{
 			img.allocate((int) bufferSize, ramActor::NUM_JOINTS, OF_IMAGE_COLOR);
+			for(int y = 0; y < ramActor::NUM_JOINTS; y++) {
+				for(int x = 0; x < bufferSize; x++) {
+					img.setColor(x, y, ofColor(0));
+				}
+			}
 		}
 		img.update();
 	}

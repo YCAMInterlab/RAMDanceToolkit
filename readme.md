@@ -2,11 +2,11 @@
 
 This repository is the primary source for the "[Reactor for Awareness in Motion](http://www.ycam.jp/en/performingarts/2013/02/ram-workshop.html)" Joint Research Project with Yoko Ando at [Yamaguchi Center for Arts and Media](http://www.ycam.jp). The other source is the [Motioner](https://github.com/YCAMInterlab/Motioner) application for accessing data from the custom inertial motion sensor system.
 
-The toolkit itself is built using a project file in `libs/`. This toolkit is used by applications in `apps/` such as `AllScenes` which demonstrates a number of scenes built with the RAM Toolkit. `addons/` contains submodules that refer to addons which are not shipped with openFrameworks.
+The toolkit itself is built using a project file in `libs/`. This toolkit is used by applications in `apps/` such as `RAMDanceToolkit` which demonstrates a number of scenes built with the toolkit. `addons/` contains submodules that refer to addons which are not shipped with openFrameworks.
 
-`dev/` contains work in progress, while `experiment/` is unused but interesting code.
+The only app that depends on an addon which is not in a submodule is `apps/OpenNIOSC`.  If you're interested in building this application, make sure you have a copy of [this version's develop branch](https://github.com/kylemcdonald/ofxOpenNI/tree/develop) in your addons folder.
 
-`track/` contains an absolute positioning app and OpenNI tracking code.
+`dev/` contains work in progress or unused but interesting code.
 
 ## OSC
 
@@ -30,7 +30,7 @@ The arguments for each node are:
 
 ## Tracking
 
-Apps related to tracking can be found in the `track/` folder.
+Some apps related to tracking can be found in the `dev/` folder.
 
 ### CircleTracking
 
