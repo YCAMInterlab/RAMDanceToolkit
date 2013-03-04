@@ -24,9 +24,6 @@ public:
 	,enabled(false)
 	,enableable(enableable)
 	,tabName(tabName) {
-		addHeader();
-	}
-	void addHeader() {
 		addLabel(tabName, OFX_UI_FONT_LARGE);
 		addSpacer();
 	}
