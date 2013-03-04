@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ramBaseScene.h"
-#include "ramTSVCoder.h"
 #include "ControlSegment.h"
 
 
@@ -53,10 +52,6 @@ private:
 	/// ControlSegment map
 	map<string, ControlSegment*> mSegmentsMap;
 	typedef map<string, ControlSegment*>::iterator SegmentsIter;
-	
-	
-	/// to encode/decode to tsv file
-	ramTSVCoder coder;
 	
 	
 	/// fonts

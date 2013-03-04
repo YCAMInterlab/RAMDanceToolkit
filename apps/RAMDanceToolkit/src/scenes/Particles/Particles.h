@@ -11,9 +11,6 @@ class Particles : public ramBaseScene
 	
 	float particle_amount;
 	
-	enum { NUM_FILTER_BUFFER = 3 };
-	ramGhost mGhosts[NUM_FILTER_BUFFER];
-	
 	ramFilterEach<ramGhost> filters;
 	
 public:

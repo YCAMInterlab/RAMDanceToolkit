@@ -1,5 +1,6 @@
 #include "ControlSegment.h"
-	
+
+
 
 #pragma mark -
 #pragma mark constructor, destructor
@@ -22,8 +23,9 @@ ControlSegment::~ControlSegment()
 
 
 
+
 #pragma mark -
-#pragma mark constructor
+#pragma mark public methods
 
 ofxUICanvasPlus* ControlSegment::createPanel(const ramNodeArray &NA)
 {
@@ -72,22 +74,6 @@ ofxUICanvasPlus* ControlSegment::createPanel(const ramNodeArray &NA)
 	return child;
 }
 
-void ControlSegment::reset()
-{
-	bHideActor = false;
-	bNeedsResetPos = false;
-	bRecording = false;
-	
-	jointColor = ofFloatColor(1.0, 0.15, 0.4);
-	position = ofPoint(0, 0);
-}
-
-void ControlSegment::onValueChanged(ofxUIEventArgs& e)
-{
-	saveCache();
-}
-
-
 void ControlSegment::loadCache()
 {
 	if ( !ofFile::doesFileExist(getXMLFilePath()) ) return;
@@ -107,7 +93,7 @@ void ControlSegment::loadCache()
 	position.x = XML.getValue("x", 0.0);
 	position.y = XML.getValue("y", 0.0);
 	XML.popTag();
-
+	
 	/// boolean state
 	XML.pushTag("state");
 	bHideActor = XML.getValue("hideActor", 0);
@@ -134,7 +120,7 @@ void ControlSegment::saveCache()
 	XML.addValue("x", position.x);
 	XML.addValue("y", position.y);
 	XML.popTag();
-
+	
 	/// boolean states
 	XML.addTag("state");
 	XML.pushTag("state");
@@ -142,6 +128,73 @@ void ControlSegment::saveCache()
 	XML.popTag();
 	
 	XML.saveFile(getXMLFilePath());
+}
+
+void ControlSegment::toggleRecording(const bool bStart)
+{
+	if (bStart)
+	{
+		/// rec start
+		session.startRecording();
+	}
+	else
+	{
+		/// rec stop
+		session.stopRecording();
+		
+		
+		/// save data as tsv file
+		ofFileDialogResult result = ofSystemSaveDialog(ofGetTimestampString("%Y.%m.%d_%H.%M.%S-") + name + ".tsv" , "Save motion data.");
+		
+		if(result.bSuccess)
+		{
+			coder.save(session, result.getPath());
+		}
+	}
+	
+	/// update button state programmatically
+	bRecording = bStart;
+	btnRecordActor->setValue(bStart);
+	btnRecordActor->stateChange();
+}
+
+
+
+
+#pragma mark -
+#pragma mark Events
+
+void ControlSegment::onValueChanged(ofxUIEventArgs& e)
+{
+	const string widgetName = e.widget->getName();
+	
+	if (widgetName == "record")
+	{
+		ofxUILabelToggle *toggle = (ofxUILabelToggle *)e.widget;
+		const bool value = toggle->getValue();
+		
+		toggleRecording(value);
+	}
+	else
+	{
+		saveCache();
+	}
+}
+
+
+
+
+#pragma mark -
+#pragma mark private methods
+
+void ControlSegment::reset()
+{
+	bHideActor = false;
+	bNeedsResetPos = false;
+	bRecording = false;
+	
+	jointColor = ofFloatColor(1.0, 0.15, 0.4);
+	position = ofPoint(0, 0);
 }
 
 const string ControlSegment::getXMLFilePath() const

@@ -213,6 +213,7 @@ void ramActorsScene::onValueChanged(ofxUIEventArgs &e)
 			seg->bHideActor = toggle->getValue();
 			seg->btnHideActor->setValue(value);
 			seg->btnHideActor->stateChange();
+			seg->saveCache();
 			
 			it++;
 		}
@@ -226,6 +227,7 @@ void ramActorsScene::onValueChanged(ofxUIEventArgs &e)
 		{
 			ControlSegment *seg = it->second;
 			seg->position = ofPoint::zero();
+			seg->saveCache();
 			
 			it++;
 		}
@@ -249,11 +251,9 @@ void ramActorsScene::onValueChanged(ofxUIEventArgs &e)
 			ofxUILabelToggle *toggle = (ofxUILabelToggle *)e.widget;
 			
 			const bool value = toggle->getValue();
+			seg->toggleRecording(value);
 			
-			seg->bRecording = value;
-			seg->btnRecordActor->setValue(value);
-			seg->btnRecordActor->stateChange();
-			
+			// no need to saveCache on click this recording button
 			it++;
 		}
 	}
@@ -379,7 +379,7 @@ void ramActorsScene::addControlSegment(const ramNodeArray &NA)
 	childPanel->getRect()->y = panelIndex * panelHeight + panelHeaderHeight;
 	
 	
-	///
+	/// append widget, resize parent panel, load default settings
 	mLocalPanel->addWidget(childPanel);
 	mLocalPanel->autoSizeToFitWidgets();
 	seg->loadCache();
@@ -422,11 +422,11 @@ void ramActorsScene::rebuildControlPanel()
 
 void ramActorsScene::createPanelHeader()
 {
-	mLocalPanel->addLabel(getName(), OFX_UI_FONT_LARGE);
-	mLocalPanel->addSpacer(ramGetGUI().kLength, 2);
-	
 	const int width = ramGetGUI().kLength/2 - 5;
 	const int height = ramGetGUI().kDim * 1.3;
+	
+	mLocalPanel->addLabel(getName(), OFX_UI_FONT_LARGE);
+	mLocalPanel->addSpacer(ramGetGUI().kLength, 2);
 	
 	
 	/// 2x2 matrix

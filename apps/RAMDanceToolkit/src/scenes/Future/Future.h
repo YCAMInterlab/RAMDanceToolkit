@@ -5,51 +5,60 @@
 class Future : public ramBaseScene
 {
 	
-	enum { NUM_FILTER_BUFFER = 3 };
-	ramGhost mGhosts[NUM_FILTER_BUFFER];
-	ramLowPassFilter mLowpass[NUM_FILTER_BUFFER];
+	ramFilterEach<ramGhost> ghostFilters;
+	ramFilterEach<ramLowPassFilter> lowPassFilters;
 	
+	float speed, distance;
 	
 public:
 	
 	bool draw_line;
 	
-	Future() {}
+	Future() : distance(150), speed(27) {}
+	
+	struct Preset
+	{
+		ramGhost *self;
+		float distance;
+		float speed;
+		
+		Preset(ramGhost *self, float distance, float speed) : self(self), distance(distance), speed(speed) {}
+		void operator()()
+		{
+			self->setSpeed(speed);
+			self->setDistance(distance);
+		}
+	};
 
 	void setupControlPanel()
 	{
 		ramControlPanel &gui = ramGetGUI();
 		
-		gui.addToggle("draw_line", &draw_line);
+		gui.addToggle("Draw line from actor to ghost", &draw_line);
 		
-		for(int i=0; i<3; i++)
-		{
-			mGhosts[i].setupControlPanel();
-			mLowpass[i].setupControlPanel();
-		}
-	}
-
-	void setup()
-	{
+		ofAddListener(gui.addButton("Ghost"), this, &Future::onPresetGhost);
+		ofAddListener(gui.addButton("Slow"), this, &Future::onPresetSlow);
+		ofAddListener(gui.addButton("Normal"), this, &Future::onPresetNormal);
+		ofAddListener(gui.addButton("Fast"), this, &Future::onPresetFast);
 		
-	}
-
-	void update()
-	{
-		for (int i=0; i<getNumNodeArray(); i++)
-		{
-			const ramNodeArray &src = getNodeArray(i);
-			mGhosts[i].update(src);
-		}
+		gui.addSlider("Distance", 0.0, 255.0, &distance);
+		gui.addSlider("Speed", 0.0, 255.0, &speed);
+		
+		ofAddListener(gui.getCurrentUIContext()->newGUIEvent, this, &Future::onValueChanged);
 	}
 
 	void draw()
 	{
+		const vector<ramNodeArray>& NAs = ghostFilters.update(getAllNodeArrays());
+		const vector<ramNodeArray>& lowPassedNAs = ghostFilters.update(NAs);
+		
 		ramBeginCamera();
-		for (int i=0; i<getNumNodeArray(); i++)
+		
+		for(int i=0; i<lowPassedNAs.size(); i++)
 		{
-			ramNodeArray &NA = getNodeArray(i);
-			const ramNodeArray &ghost = mLowpass[i].filter( mGhosts[i].get() );
+			
+			const ramNodeArray &NA = getNodeArray(i);
+			const ramNodeArray &processedNA = lowPassedNAs[i];
 			
 			glPushAttrib(GL_ALL_ATTRIB_BITS);
 			glEnable(GL_DEPTH_TEST);
@@ -57,25 +66,65 @@ public:
 			ofNoFill();
 			
 			const ofColor gcolor =
-				i==0 ? ramColor::RED_LIGHT :
-				i==1 ? ramColor::YELLOW_DEEP : ramColor::BLUE_LIGHT;
+			i==0 ? ramColor::RED_LIGHT :
+			i==1 ? ramColor::YELLOW_DEEP : ramColor::BLUE_LIGHT;
 			
 			ofSetColor(gcolor);
-			ramDrawNodes(ghost);
+			ramDrawNodes(processedNA);
 			
 			if (draw_line)
 			{
 				ofSetColor(gcolor);
-				ramDrawNodeCorresponds(NA, ghost);
+				ramDrawNodeCorresponds(NA, processedNA);
 			}
-				
 			
 			ofPopStyle();
 			glPopAttrib();
 		}
+		
 		ramEndCamera();
+	}
+	
+	void onPresetGhost(ofEventArgs &e)
+	{
+		speed = 1.5;
+		distance = 240;
+	}
+	
+	void onPresetSlow(ofEventArgs &e)
+	{
+		speed = 8.3;
+		distance = 74.4;
+	}
+	
+	void onPresetNormal(ofEventArgs &e)
+	{
+		speed = 9.4;
+		distance = 150;
+	}
+	
+	void onPresetFast(ofEventArgs &e)
+	{
+		speed = 38.9;
+		distance = 211;
+	}
+	
+	void updateFilters()
+	{
+		for(int i=0; i<ghostFilters.getNumFilters(); i++)
+		{
+			ramGhost &filter = ghostFilters.getFilter(i);
+			filter.setDistance(distance);
+			filter.setSpeed(speed);
+		}
+	}
+	
+	void onValueChanged(ofxUIEventArgs &e)
+	{
+		updateFilters();
 	}
 	
 	const string getName() { return "Future"; }
 };
+
 
