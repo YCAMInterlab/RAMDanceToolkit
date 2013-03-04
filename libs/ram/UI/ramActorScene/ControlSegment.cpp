@@ -1,6 +1,6 @@
 #include "ControlSegment.h"
 
-
+#include "ramControlPanel.h"
 
 #pragma mark -
 #pragma mark constructor, destructor

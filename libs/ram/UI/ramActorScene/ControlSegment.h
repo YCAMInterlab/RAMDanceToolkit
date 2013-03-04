@@ -1,8 +1,8 @@
 #pragma once
 
+#include "ofxUITabbedCanvas.h"
 #include "ramSession.h"
 #include "ramTSVCoder.h"
-#include "ofxXmlSettings.h"
 
 class ControlSegment
 {

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ofxUI.h"
 #include "ramActorManager.h"
 #include "ramActor.h"
 #include "ramGlobal.h"

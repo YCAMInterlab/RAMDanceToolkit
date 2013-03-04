@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ramControlPanel.h"
+#include "ofMain.h"
 
 class ramControllable
 {

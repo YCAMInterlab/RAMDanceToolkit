@@ -1,42 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-
 #include "ramUnit.h"
-
 #include "ramActor.h"
-
-/** sample code...
-
-   #pragma once
-
-   class ramXXXFilter : public ramBaseFilter
-   {
-   public:
-
-    const string getName() { return "ramXXXFilter"; }
-
-    ramXXXFilter() {}
-
-    void setupControlPanel()
-    {
-        ramControlPanel &gui = gui();
-
-        gui.addSection(getName());
-    }
-
-    void setup()
-    {
-
-    }
-
-    const ramNodeArray& update(ramNodeArray& src)
-    {
-        return src;
-    }
-   };
-
- */
 
 class ramBaseFilter : public ramUnit
 {

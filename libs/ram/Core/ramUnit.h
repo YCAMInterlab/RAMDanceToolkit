@@ -5,9 +5,6 @@
 
 class ramUnit : public ramControllable, public ramGlobalShortcut
 {
-	
-public:
-	
+public:	
 	virtual ~ramUnit() {}
-
 };
