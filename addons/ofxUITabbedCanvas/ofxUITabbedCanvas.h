@@ -15,7 +15,7 @@ protected:
 
 class ofxUITab : public ofxUICanvasPlus {
 protected:
-	ofxUILabel* title;
+	string tabName;
 	bool visible;
 	bool enabled, enableable;
 public:
@@ -23,13 +23,14 @@ public:
 	:visible(false)
 	,enabled(false)
 	,enableable(enableable)
-	{
-		title = addLabel(tabName, OFX_UI_FONT_LARGE);
+	,tabName(tabName) {
+		addHeader();
+	}
+	void addHeader() {
+		addLabel(tabName, OFX_UI_FONT_LARGE);
 		addSpacer();
 	}
-	
-	void setTabName(const string& tabName) {title->setLabel(tabName);}
-	string getTabName() const {return title->getLabel();}
+	string getTabName() const {return tabName;}
 	bool& getVisible() {return visible;}
 	bool& getEnabled() {return enabled;}
 	bool getEnableable() {return enableable;}
