@@ -679,6 +679,7 @@
 					"-lpthread",
 					"-mtune=native",
 				);
+				VALID_ARCHS = i386;
 			};
 			name = Debug;
 		};
@@ -708,6 +709,7 @@
 					"-lpthread",
 					"-mtune=native",
 				);
+				VALID_ARCHS = i386;
 			};
 			name = Release;
 		};

@@ -2721,6 +2721,7 @@
 					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/win_cb\"",
 				);
 				PRODUCT_NAME = ram;
+				VALID_ARCHS = i386;
 			};
 			name = Debug;
 		};
@@ -2742,6 +2743,7 @@
 					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/win_cb\"",
 				);
 				PRODUCT_NAME = ram;
+				VALID_ARCHS = i386;
 			};
 			name = Release;
 		};
