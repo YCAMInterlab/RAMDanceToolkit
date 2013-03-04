@@ -5,7 +5,6 @@
 
 class ramUnit : public ramControllable, public ramGlobalShortcut
 {
-	friend class ramControlPanel;
 	
 public:
 	

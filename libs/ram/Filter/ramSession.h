@@ -60,13 +60,13 @@ public:
 	const float getPlayhead() const;
 	const string getNodeArrayName() const;
 	
-	inline void setLoop(const bool l) { mLoop = l; };
-	inline void setRate(const float r) { mRate = r; };
-	inline void setPlayhead(const float t) { mPlayhead = t; };
+	void setLoop(const bool l);
+	void setRate(const float r);
+	void setPlayhead(const float t);
 	
-	inline const bool isPlaying() const { return mPlaying; }
-	inline const bool isRecording() const { return mRecording; }
-	inline const bool isLoop() const { return mLoop; }
+	const bool isPlaying() const;
+	const bool isRecording() const;
+	const bool isLoop() const;
 	
 	void setNodeArrayBuffer(ramNodeArrayBuffer &buffer);
 	

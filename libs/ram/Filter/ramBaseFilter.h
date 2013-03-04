@@ -41,38 +41,16 @@
 class ramBaseFilter : public ramUnit
 {
 public:
-
-	inline const ramNodeArray& operator()(const ramNodeArray& src)
-	{
-		return update(src);
-	}
-	
-	const ramNodeArray& update(const ramNodeArray& src)
-	{
-		if (cache.getNumNode() != src.getNumNode())
-			cache = src;
-
-		const int f = ofGetFrameNum();
-		if (last_update_frame != f)
-		{
-			last_update_frame = f;
-			cache = filter(src);
-		}
-
-		return cache;
-	}
-
-	virtual const ramNodeArray& get(size_t index = 0) const { return cache; }
-	virtual size_t getSize() const { return 1; }
+	const ramNodeArray& operator()(const ramNodeArray& src);
+	const ramNodeArray& update(const ramNodeArray& src);
+	virtual const ramNodeArray& get(size_t index = 0) const;
+	virtual size_t getSize() const;
 
 protected:
-
 	ramNodeArray cache;
-
 	virtual const ramNodeArray& filter(const ramNodeArray& src) = 0;
 
 private:
-
 	int last_update_frame;
 };
 
@@ -82,24 +60,19 @@ class ramBusSend : public ramBaseFilter
 {
 public:
 
-	const string getName() { return "ramBusSend"; }
+	const string getName();
+	ramBusSend();
+	ramBusSend(const string &bus_name);
 
-	ramBusSend() {}
-	ramBusSend(const string &bus_name) { setBusName(bus_name); }
+	void setBusName(const string &bus_name);
+	const string& getBusName() const;
 
-	void setBusName(const string &bus_name) { this->bus_name = bus_name; }
-	const string& getBusName() const { return bus_name; }
-
-	const ramNodeArray& get(size_t index = 0) const { static ramNodeArray arr; return arr; }
-	size_t getSize() const { return 1; }
+	const ramNodeArray& get(size_t index = 0) const;
+	size_t getSize() const;
 
 protected:
 
-	const ramNodeArray& filter(const ramNodeArray& src)
-	{
-		ramActorManager::instance().setBus(bus_name, src);
-		return src;
-	}
+	const ramNodeArray& filter(const ramNodeArray& src);
 
 private:
 
@@ -142,8 +115,8 @@ public:
 		return cache;
 	}
 	
-	inline const vector<ramNodeArray>& get(size_t index = 0) { return cache[index]; }
-	inline const size_t getNumFilters() { return filters.size(); }
+	const vector<ramNodeArray>& get(size_t index = 0) { return cache[index]; }
+	const size_t getNumFilters() { return filters.size(); }
 	
 	FilterClass& getFilter(int index) { return filters[index]; }
 	FilterClass& getFilter(const string& name) { return filters[name]; }

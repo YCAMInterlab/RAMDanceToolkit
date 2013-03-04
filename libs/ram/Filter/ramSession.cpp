@@ -2,6 +2,14 @@
 
 #include "ramControlPanel.h"
 
+void ramSession::setLoop(const bool l) { mLoop = l; };
+void ramSession::setRate(const float r) { mRate = r; };
+void ramSession::setPlayhead(const float t) { mPlayhead = t; };
+
+const bool ramSession::isPlaying() const { return mPlaying; }
+const bool ramSession::isRecording() const { return mRecording; }
+const bool ramSession::isLoop() const { return mLoop; }
+
 #pragma mark -
 #pragma mark constructor
 
