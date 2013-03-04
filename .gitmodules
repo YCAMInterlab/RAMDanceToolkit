@@ -10,3 +10,6 @@
 [submodule "addons/ofxCv"]
 	path = addons/ofxCv
 	url = git@github.com:kylemcdonald/ofxCv.git
+[submodule "addons/ofxOpenNI"]
+	path = addons/ofxOpenNI
+	url = git@github.com:kylemcdonald/ofxOpenNI.git
