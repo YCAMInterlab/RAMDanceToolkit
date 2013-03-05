@@ -45,7 +45,7 @@ public:
 		
 		ofFile file;
 		file.open(filePath);
-		
+
 		return decode(file.readToBuffer());
 	}
 	
