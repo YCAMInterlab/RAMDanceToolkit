@@ -4,32 +4,31 @@
 
 #include "ramActorManager.h"
 #include "ramCameraManager.h"
+//#include "ramSceneManager.h"
 
-struct ramGlobalShortcut
+class ramGlobalShortcut
 {
+public:
+	
+#pragma mark - Shortcut to ramActorManager
 
-#pragma mark - Shortcut to RamActorManager
+	ramActorManager& getActorManager();
+	const vector<string>& getNodeArrayNames();
+	bool hasNodeArray(const string &key);
+	ramNodeArray& getNodeArray(string name);
+	size_t getNumNodeArray();
+	ramNodeArray& getNodeArray(int index);
+	vector<ramNodeArray> getAllNodeArrays();
+	
+#pragma mark - Shortcut to ramCameraManager
 
-	inline static ramActorManager& getActorManager() { return ramActorManager::instance(); }
+	ramCameraManager& getCameraManager();
+	ofCamera& getActiveCamera();
+	
+#pragma mark - Shortcut to ramSceneManager
 
-	inline static const vector<string>& getNodeArrayNames() { return ramActorManager::instance().getNodeArrayNames(); }
-
-	inline static bool hasNodeArray(const string &key) { return ramActorManager::instance().hasNodeArray(key); }
-
-	inline static ramNodeArray& getNodeArray(string name) { return ramActorManager::instance().getNodeArray(name); }
-
-	inline static size_t getNumNodeArray() { return ramActorManager::instance().getNumNodeArray(); }
-
-	inline static ramNodeArray& getNodeArray(int index) { return ramActorManager::instance().getNodeArray(index); }
-
-	inline static vector<ramNodeArray> getAllNodeArrays() { return ramActorManager::instance().getAllNodeArrays(); }
-
-#pragma mark - Shortcut to RamCameraManager
-
-	inline static ramCameraManager& getCameraManager() { return ramCameraManager::instance(); }
-
-	inline static ofCamera& getActiveCamera() { return ramCameraManager::instance().getActiveCamera(); }
-
+	//ramSceneManager& getSceneManager();
+	
 };
 
 #pragma mark - core

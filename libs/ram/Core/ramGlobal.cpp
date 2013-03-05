@@ -3,8 +3,30 @@
 #include "ramSimpleShadow.h"
 #include "ramPhysics.h"
 #include "ramControlPanel.h"
+#include "ramSceneManager.h"
 
 static ramSimpleShadow ram_simple_shadow;
+
+ramActorManager& ramGlobalShortcut::getActorManager() { return ramActorManager::instance(); }
+
+const vector<string>& ramGlobalShortcut::getNodeArrayNames() { return ramActorManager::instance().getNodeArrayNames(); }
+
+bool ramGlobalShortcut::hasNodeArray(const string &key) { return ramActorManager::instance().hasNodeArray(key); }
+
+ramNodeArray& ramGlobalShortcut::getNodeArray(string name) { return ramActorManager::instance().getNodeArray(name); }
+
+size_t ramGlobalShortcut::getNumNodeArray() { return ramActorManager::instance().getNumNodeArray(); }
+
+ramNodeArray& ramGlobalShortcut::getNodeArray(int index) { return ramActorManager::instance().getNodeArray(index); }
+
+vector<ramNodeArray> ramGlobalShortcut::getAllNodeArrays() { return ramActorManager::instance().getAllNodeArrays(); }
+
+ramCameraManager& ramGlobalShortcut::getCameraManager() { return ramCameraManager::instance(); }
+
+ofCamera& ramGlobalShortcut::getActiveCamera() { return ramCameraManager::instance().getActiveCamera(); }
+
+//ramSceneManager& ramGlobalShortcut::getSceneManager() { return ramSceneManager::instance(); }
+
 
 void ramInitialize(int oscPort)
 {
@@ -19,12 +41,14 @@ void ramInitialize(int oscPort)
 	// to apply `$ patch -p0 < ../ofxUI.patch` at ofxUI directory
 
 	ram_simple_shadow.setup();
-
+	
 	ramActorManager::instance().setup();
 	ramActorManager::instance().setupOscReceiver(oscPort);
 
+	ramSceneManager::instance().setup();
+	
 	ramPhysics::instance();
-	gui().setup();
+	ramGetGUI().setup();
 }
 
 string ramToResourcePath(string path)

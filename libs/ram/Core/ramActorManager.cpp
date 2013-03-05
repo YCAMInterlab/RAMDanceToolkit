@@ -139,6 +139,7 @@ void ramActorManager::setup()
 	nodeSelector = new NodeSelector(rootNode);
 
 	ofAddListener(nodeSelector->selectStateChanged, this, &ramActorManager::onSelectStateChanged);
+	ofAddListener(ofEvents().mouseReleased, this, &ramActorManager::onMouseReleased);
 }
 
 void ramActorManager::update()
@@ -275,6 +276,12 @@ const ramNodeArray* ramActorManager::getLastSelectedNodeArray()
 void ramActorManager::onSelectStateChanged(ramNodeIdentifer &e)
 {
 	ofNotifyEvent(selectStateChanged, e);
+}
+
+void ramActorManager::onMouseReleased(ofMouseEventArgs &e)
+{
+	if (!rootNode.hasFocusdObject())
+		nodeSelector->identifer.clear();
 }
 
 void ramActorManager::clearSelected()

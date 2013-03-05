@@ -71,7 +71,7 @@ public:
 		normalLerpRate = .1;
 		threshold = .3;
 		drawDebug = false;
-		ofxUICanvas* panel = gui().getCurrentUIContext();
+		ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
 		panel->addToggle("Only limbs", &onlyLimbs, 20, 20);
 		panel->addToggle("Draw debug", &drawDebug, 20, 20);
 		panel->addSlider("History fade out", 0, 5, &maxNotationLife, 300, 20);

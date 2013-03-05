@@ -26,7 +26,6 @@ struct ButtonEventListener
 };
 
 ramPreferencesTab& ramControlPanel::getPreferencesTab() { return preferencesTab; }
-ramBaseScene* ramControlPanel::getActorsScene() { return actorsScene; }
 ofxUITabbedCanvas& ramControlPanel::getSceneTabs() { return mSceneTabs; }
 void ramControlPanel::save(const string& path) { getSceneTabs().saveSettings(path); }
 void ramControlPanel::load(const string& path) { getSceneTabs().loadSettings(path); }
@@ -58,15 +57,11 @@ ramControlPanel::ramControlPanel()
 :kDim(16)
 ,kXInit(OFX_UI_GLOBAL_WIDGET_SPACING)
 ,kLength(320 - kXInit)
-,camera_preset_t(0)
-,camera_preset(0)
-,backgroundColor(ofColor(0))
 {
 }
 
 ramControlPanel::~ramControlPanel()
 {
-	delete (ramActorsScene*) actorsScene;
 }
 
 void ramControlPanel::setup()
@@ -79,10 +74,6 @@ void ramControlPanel::setup()
 	addPanel(preferencesTab);
 	addPanel(playbackTab);
 	
-	actorsScene = new ramActorsScene();
-	addPanel(actorsScene, false);
-	actorsScene->setEnabled(true);
-	
 	ofAddListener(mSceneTabs.newGUIEvent, this, &ramControlPanel::guiEvent);
 	
 	mSceneTabs.addSpacer();
@@ -90,7 +81,6 @@ void ramControlPanel::setup()
 
 void ramControlPanel::update(ofEventArgs &e)
 {
-	actorsScene->update();
 	if(!ofGetMousePressed())
 	{
 		bool hover = mSceneTabs.isHit(ofGetMouseX(), ofGetMouseY());

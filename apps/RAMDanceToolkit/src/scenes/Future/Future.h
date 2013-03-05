@@ -33,17 +33,17 @@ public:
 	void setupControlPanel()
 	{
 		
-		gui().addToggle("Draw line from actor to ghost", &draw_line);
+		ramGetGUI().addToggle("Draw line from actor to ghost", &draw_line);
 		
-		ofAddListener(gui().addButton("Ghost"), this, &Future::onPresetGhost);
-		ofAddListener(gui().addButton("Slow"), this, &Future::onPresetSlow);
-		ofAddListener(gui().addButton("Normal"), this, &Future::onPresetNormal);
-		ofAddListener(gui().addButton("Fast"), this, &Future::onPresetFast);
+		ofAddListener(ramGetGUI().addButton("Ghost"), this, &Future::onPresetGhost);
+		ofAddListener(ramGetGUI().addButton("Slow"), this, &Future::onPresetSlow);
+		ofAddListener(ramGetGUI().addButton("Normal"), this, &Future::onPresetNormal);
+		ofAddListener(ramGetGUI().addButton("Fast"), this, &Future::onPresetFast);
 		
-		gui().addSlider("Distance", 0.0, 255.0, &distance);
-		gui().addSlider("Speed", 0.0, 255.0, &speed);
+		ramGetGUI().addSlider("Distance", 0.0, 255.0, &distance);
+		ramGetGUI().addSlider("Speed", 0.0, 255.0, &speed);
 		
-		ofAddListener(gui().getCurrentUIContext()->newGUIEvent, this, &Future::onValueChanged);
+		ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &Future::onValueChanged);
 	}
 
 	void draw()

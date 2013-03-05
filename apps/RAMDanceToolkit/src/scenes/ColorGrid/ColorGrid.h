@@ -15,8 +15,8 @@ public:
 		useRgb = true;
 		bufferSize = 1024;
 		
-		gui().addToggle("Use RGB/HSB", &useRgb);
-		gui().addSlider("Buffer size", 128, 2048, &bufferSize);
+		ramGetGUI().addToggle("Use RGB/HSB", &useRgb);
+		ramGetGUI().addSlider("Buffer size", 128, 2048, &bufferSize);
 	}
 	
 	void setup()

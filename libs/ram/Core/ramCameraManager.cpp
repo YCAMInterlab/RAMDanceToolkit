@@ -13,9 +13,13 @@ ramCameraManager& ramCameraManager::instance()
 
 ramCameraManager::ramCameraManager()
 {
+	last_camera_id = 0;
+	
 	active_camera = createCamera<ofEasyCam>();
 
 	loadDefaults();
+	
+	ofAddListener(ofEvents().update, this, &ramCameraManager::update);
 }
 
 void ramCameraManager::loadDefaults()
@@ -48,8 +52,23 @@ void ramCameraManager::setEnableInteractiveCamera(bool v)
 
 void ramCameraManager::rollbackDefaultCameraSetting(int camera_id)
 {
+	if(camera_id == -1) camera_id = last_camera_id;
 	const ramCameraSettings &setting = settings.at(camera_id);
 	active_camera->setPosition(setting.pos);
 	active_camera->lookAt(setting.look_at);
 	active_camera->setFov(setting.fov);
+	last_camera_id = camera_id;
+}
+
+void ramCameraManager::update(ofEventArgs& args)
+{
+	if (typeid(*active_camera) == typeid(ofEasyCam))
+	{
+		ofEasyCam *cam = (ofEasyCam*)active_camera;
+		ofVec3f position = cam->getPosition();
+		ofVec3f basePosition = ofVec3f(0, 0, cam->getDistance());
+		if(position == basePosition) {
+			rollbackDefaultCameraSetting();
+		}
+	}
 }

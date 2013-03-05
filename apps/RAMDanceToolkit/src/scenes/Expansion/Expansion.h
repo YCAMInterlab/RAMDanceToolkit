@@ -27,22 +27,22 @@ public:
 	
 	void setupControlPanel()
 	{
-//		ramControlPanel &gui = gui();
+//		ramControlPanel &gui = ramGetGUI();
 		
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		
-		ofxUICanvas* panel = gui().getCurrentUIContext();
+		ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
 		
 		panel->getRect()->width =500.0f;
 		
-		gui().addToggle("Show Joint name", &mShowName);
-		gui().addToggle("Show Box", &mShowBox);
-		gui().addToggle("Show Axis", &mShowAxis);
-		gui().addToggle("Show Line", &mShowLine);
-		gui().addColorSelector("ExtBox", &mBoxColor);
+		ramGetGUI().addToggle("Show Joint name", &mShowName);
+		ramGetGUI().addToggle("Show Box", &mShowBox);
+		ramGetGUI().addToggle("Show Axis", &mShowAxis);
+		ramGetGUI().addToggle("Show Line", &mShowLine);
+		ramGetGUI().addColorSelector("ExtBox", &mBoxColor);
 		
-		gui().addSlider("Box size", 3.0, 100.0, &mBoxSize);
-		gui().addSlider("Box size ratio", 2.0, 100.0, &mBoxSizeRatio);
+		ramGetGUI().addSlider("Box size", 3.0, 100.0, &mBoxSize);
+		ramGetGUI().addSlider("Box size ratio", 2.0, 100.0, &mBoxSizeRatio);
 		
 		panel->addToggle("Toggle box size", true, 20, 20);
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);

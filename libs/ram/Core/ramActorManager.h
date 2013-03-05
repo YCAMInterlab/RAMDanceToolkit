@@ -101,4 +101,5 @@ private:
 	map<string, ramNodeArray> bus;
 
 	void onSelectStateChanged(ramNodeIdentifer &e);
+	void onMouseReleased(ofMouseEventArgs &e);
 };

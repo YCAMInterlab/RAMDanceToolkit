@@ -23,7 +23,7 @@ public:
 		minScale = .5;
 		maxScale = 2;
 		randomizationAmount = .5;
-		ofxUICanvas* panel = gui().getCurrentUIContext();
+		ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
 		panel->addButton("Reset", &needToReset, 20, 20);
 		panel->addButton("Random Line", &randomLine, 20, 20);
 		panel->addButton("Randomize Topology", &randomizeTopology, 20, 20);

@@ -27,9 +27,9 @@ class Stamp : public ramBaseScene
 		
 		void onTimerdStop()
 		{
-			if (hasNodeArray(name))
+			if (ramNodeFinder::hasNodeArray(name))
 			{
-				stamp->mStamp.createStamp(getNodeArray(name));
+				stamp->mStamp.createStamp(ramNodeFinder::getNodeArray(name));
 			}
 		}
 	};
@@ -54,21 +54,21 @@ public:
 	{		
 		mStamp.setupControlPanel();
 		
-		gui().addToggle("Show Actor", &mShowActor);
-		gui().addColorSelector("Box line color", &color);
-		gui().addSlider("Line width", 0, 6, &line_width);
+		ramGetGUI().addToggle("Show Actor", &mShowActor);
+		ramGetGUI().addColorSelector("Box line color", &color);
+		ramGetGUI().addSlider("Line width", 0, 6, &line_width);
 		
 		use_idle_timer = false;
 		timer_duration = 0.5;
 		threshold = 3;
 		debug_draw = false;
 		
-		gui().addToggle("use_idle_timer", &use_idle_timer);
+		ramGetGUI().addToggle("use_idle_timer", &use_idle_timer);
 		
-		gui().addSlider("timer_duration", 0, 4, &timer_duration);
-		gui().addSlider("threshold", 0, 10, &threshold);
+		ramGetGUI().addSlider("timer_duration", 0, 4, &timer_duration);
+		ramGetGUI().addSlider("threshold", 0, 10, &threshold);
 		
-		gui().addToggle("debug_draw", &debug_draw);
+		ramGetGUI().addToggle("debug_draw", &debug_draw);
 	}
 	
 	void setup()

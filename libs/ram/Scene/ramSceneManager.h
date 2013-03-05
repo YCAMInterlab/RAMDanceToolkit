@@ -8,11 +8,11 @@
 class ramSceneManager : public ramGlobalShortcut
 {
 public:
+	
+	static ramSceneManager& instance();
 
-	void setup(const vector<ramBaseScene*>& scenes);
-
-	void update();
-	void draw();
+	void setup();
+	void addScene(ramBaseScene* scene);
 
 protected:
 
@@ -26,4 +26,16 @@ protected:
 	void rigidExit(ramRigidBody &rigid);
 
 	vector<ramBaseScene*> scenes;
+	
+	void update(ofEventArgs& args);
+	void draw(ofEventArgs& args);
+	
+private:
+	
+	static ramSceneManager *_instance;
+	ramSceneManager();
+	ramSceneManager(const ramSceneManager&);
+	ramSceneManager& operator=(const ramSceneManager&);
+	
+	ramBaseScene* actorsScene;
 };
