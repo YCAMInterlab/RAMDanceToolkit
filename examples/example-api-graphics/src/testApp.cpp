@@ -14,6 +14,7 @@ void testApp::setup()
 	/// ram setup
 	// ------------------
 	ramInitialize(10000);
+	ramEnableShowActors(false);
 }
 
 //--------------------------------------------------------------
