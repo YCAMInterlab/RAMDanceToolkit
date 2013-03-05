@@ -8,13 +8,15 @@ ramActorsScene::ramActorsScene() :
 bShowAllActor(true),
 bRecAllActor(false),
 bUseShading(true),
-bUseSimpleActor(false	)
+bUseSimpleActor(false)
 {
 
 }
 
 ramActorsScene::~ramActorsScene()
 {
+	// note: not sure these should be deleted here
+	// or, we should add more widgets which need to be deleted
 	delete btnPause;
 	delete btnRecAll;
 }
@@ -430,7 +432,8 @@ void ramActorsScene::createPanelHeader()
 	
 	
 	/// 2x2 matrix
-	mLocalPanel->addWidgetDown( new ofxUILabelToggle("Show All Actors", &bShowAllActor, width, height) );
+	btnShowAll = new ofxUILabelToggle("Show All Actors", &bShowAllActor, width, height);
+	mLocalPanel->addWidgetDown( btnShowAll );
 	mLocalPanel->addWidgetRight( new ofxUILabelButton("Reset Positions", &bRecAllActor, width, height) );
 	mLocalPanel->addWidgetDown( new ofxUILabelToggle("Use Shading", &bUseShading, width, height) );
 	mLocalPanel->addWidgetRight( new ofxUILabelToggle("Use Simple Actor", &bUseSimpleActor, width, height) );
@@ -445,3 +448,13 @@ void ramActorsScene::createPanelHeader()
 	mLocalPanel->addWidgetDown( btnRecAll );
 }
 
+void ramActorsScene::setShowAll(bool showAll)
+{
+	btnShowAll->setValue(showAll);
+	btnShowAll->triggerSelf();
+}
+
+bool ramActorsScene::getShowAll() const
+{
+	return bShowAllActor;
+}

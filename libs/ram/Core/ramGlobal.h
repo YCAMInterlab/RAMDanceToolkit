@@ -35,6 +35,10 @@ public:
 void ramInitialize(int oscPort = 10000);
 string ramToResourcePath(string path);
 
+#pragma mark - actors
+void ramEnableShowActors(bool v);
+bool ramShowActorsEnabled();
+
 #pragma mark - camera
 void ramBeginCamera();
 void ramEndCamera();

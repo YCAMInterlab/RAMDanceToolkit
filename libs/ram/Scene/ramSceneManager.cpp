@@ -2,7 +2,6 @@
 
 #include "ramControlPanel.h"
 #include "ramPhysics.h"
-#include "ramActorsScene.h"
 
 extern bool drawModel;
 
@@ -41,6 +40,21 @@ void ramSceneManager::addScene(ramBaseScene* scene)
 	scenes.push_back(scene);
 	scene->setup();
 	ramGetGUI().addPanel(scene);
+}
+
+ramActorsScene* ramSceneManager::getActorsScene()
+{
+	return actorsScene;
+}
+
+void ramSceneManager::setShowAllActors(bool showAllActors)
+{
+	return actorsScene->setShowAll(showAllActors);
+}
+
+bool ramSceneManager::getShowAllActors() const
+{
+	return actorsScene->getShowAll();
 }
 
 void ramSceneManager::update(ofEventArgs& args)
