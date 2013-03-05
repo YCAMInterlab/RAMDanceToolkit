@@ -25,15 +25,15 @@ void ramSceneManager::setup()
 {
 	enableAllEvents();
 	
+	ofAddListener(ofEvents().update, this, &ramSceneManager::update);
+	ofAddListener(ofEvents().draw, this, &ramSceneManager::draw);
+	
 	// memory leak on exit
 	actorsScene = new ramActorsScene();
 	scenes.push_back(actorsScene);
 	actorsScene->setup();
 	actorsScene->setEnabled(true);
 	ramGetGUI().addPanel(actorsScene, false);
-	
-	ofAddListener(ofEvents().update, this, &ramSceneManager::update);
-	ofAddListener(ofEvents().draw, this, &ramSceneManager::draw);
 }
 
 void ramSceneManager::addScene(ramBaseScene* scene)
