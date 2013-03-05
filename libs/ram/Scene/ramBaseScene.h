@@ -21,15 +21,6 @@ public:
 	virtual void drawActor(const ramActor &actor);
 	virtual void drawRigid(const ramRigidBody &rigid);
 
-	void enable();
-	void disable();
-	void toggle();
-	bool isEnabled();
-	void setEnabled(bool enabled);
-	
-	virtual void onEnabled();
-	virtual void onDisabled();
-
 	// nodeArray events
 	virtual void onActorSetup(const ramActor &actor);
 	virtual void onActorExit(const ramActor &actor);
@@ -37,9 +28,5 @@ public:
 	virtual void onRigidExit(const ramRigidBody &rigid);
 
 	ramBaseScene* getPtr();
-	
-private:
-
-	bool bEnabled;
 
 };

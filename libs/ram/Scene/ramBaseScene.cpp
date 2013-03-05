@@ -2,7 +2,7 @@
 
 
 
-ramBaseScene::ramBaseScene() : bEnabled(false) {}
+ramBaseScene::ramBaseScene() {}
 ramBaseScene::~ramBaseScene() {}
 
 
@@ -13,53 +13,6 @@ void ramBaseScene::draw() {}
 void ramBaseScene::drawActor(const ramActor &actor) {}
 void ramBaseScene::drawRigid(const ramRigidBody &rigid) {}
 void ramBaseScene::drawHUD() {}
-
-
-
-void ramBaseScene::enable()
-{
-	bEnabled = true;
-}
-
-void ramBaseScene::disable()
-{
-	bEnabled = false;
-}
-
-void ramBaseScene::toggle()
-{
-	setEnabled(!isEnabled());
-}
-
-bool ramBaseScene::isEnabled()
-{
-	return bEnabled;
-}
-
-void ramBaseScene::setEnabled(bool enabled)
-{
-	if (bEnabled == enabled) return;
-
-	bEnabled = enabled;
-
-	if (enabled)
-		onEnabled();
-	else
-		onDisabled();
-}
-
-
-
-void ramBaseScene::onEnabled()
-{
-	cout << "[Scene enabled] " << getName() << endl;
-}
-
-void ramBaseScene::onDisabled()
-{
-	cout << "[Scene disabled] " << getName() << endl;
-}
-
 
 
 // nodeArray events

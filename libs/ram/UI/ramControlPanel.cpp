@@ -1,6 +1,6 @@
 #include "ramControlPanel.h"
 
-#include "ramBaseScene.h"
+#include "ramUnit.h"
 #include "ramControllable.h"
 
 #include "ramActorsScene.h"
@@ -90,7 +90,7 @@ void ramControlPanel::update(ofEventArgs &e)
 
 //
 
-void ramControlPanel::addPanel(ramBaseScene* control, bool enableable)
+void ramControlPanel::addPanel(ramUnit* control, bool enableable)
 {
 	ofxUITab *panel = new ofxUITab(control->getName(), enableable);
 	current_panel = panel;	

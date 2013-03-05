@@ -14,7 +14,7 @@
 #include "ramPresetTab.h"
 #include "ramPlaybackTab.h"
 
-class ramBaseScene;
+class ramUnit;
 class ramControllable;
 
 class ramControlPanel
@@ -53,7 +53,7 @@ public:
 	
 	// for internal use
 
-	void addPanel(ramBaseScene* control,  bool enableable = true);
+	void addPanel(ramUnit* control,  bool enableable = true);
 
 	ramPreferencesTab& getPreferencesTab();
 	
@@ -79,11 +79,7 @@ private:
 	ramPreferencesTab preferencesTab;
 	ramPlaybackTab playbackTab;
 
-	// bomisutaro!
-	// can't be statically allocated due to inheritance conflicts from header-only implementation
-	ramBaseScene* actorsScene;
-
-	vector<ramBaseScene*> scenes;
+	vector<ramUnit*> scenes;
 
 	ramControlPanel();
 };
