@@ -7,8 +7,8 @@
 ramActorsScene::ramActorsScene() :
 bShowAllActor(true),
 bRecAllActor(false),
-bUseShading(false),
-bUseSimpleActor(true)
+bUseShading(true),
+bUseSimpleActor(false	)
 {
 
 }
