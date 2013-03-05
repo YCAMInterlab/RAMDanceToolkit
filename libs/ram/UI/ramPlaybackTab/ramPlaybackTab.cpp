@@ -70,11 +70,12 @@ void ramPlaybackTab::onFileDrop(ofDragInfo &e)
 		
 		try
 		{
-			ramSession session = coder.load(filePath);
-			addControlSegment(session);
-			session.play();
-			
-			mSessionsMap.insert( make_pair(session.getNodeArrayName(), session) );
+			coder.load(filePath);
+//			ramSession session(  );
+//			addControlSegment(session);
+//			session.play();
+//
+//			mSessionsMap.insert( make_pair(session.getNodeArrayName(), session) );
 		}
 		catch (std::exception &e)
 		{
@@ -156,8 +157,8 @@ void ramPlaybackTab::rebuildControlPanel()
 void ramPlaybackTab::createPanelHeader()
 {
 	
-	const int width = gui().kLength/2 - 5;
-	const int height = gui().kDim * 1.3;
+//	const int width = ramGetGUI().kLength/2 - 5;
+//	const int height = ramGetGUI().kDim * 1.3;
 	
 //	addLabel(getName(), OFX_UI_FONT_LARGE);
 //	addSpacer(gui().kLength, 2);

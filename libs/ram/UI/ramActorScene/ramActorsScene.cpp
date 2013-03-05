@@ -433,7 +433,7 @@ void ramActorsScene::createPanelHeader()
 	mLocalPanel->addWidgetDown( new ofxUILabelToggle("Show All Actors", &bShowAllActor, width, height) );
 	mLocalPanel->addWidgetRight( new ofxUILabelButton("Reset Positions", &bRecAllActor, width, height) );
 	mLocalPanel->addWidgetDown( new ofxUILabelToggle("Use Shading", &bUseShading, width, height) );
-	mLocalPanel->addWidgetRight( new ofxUILabelToggle("Use Simple Actor", &bUseSimpleActor, width, height) );
+	mLocalPanel->addWidgetRight( new ofxUILabelToggle("Use SimpleActor", &bUseSimpleActor, width, height) );
 	
 	
 	/// buttons which are controlled programatically

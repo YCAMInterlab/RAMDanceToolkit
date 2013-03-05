@@ -2,20 +2,13 @@
 
 #include "ramControlPanel.h"
 
-void ramSession::setLoop(const bool l) { mLoop = l; };
-void ramSession::setRate(const float r) { mRate = r; };
-void ramSession::setPlayhead(const float t) { mPlayhead = t; };
-
-const bool ramSession::isPlaying() const { return mPlaying; }
-const bool ramSession::isRecording() const { return mRecording; }
-const bool ramSession::isLoop() const { return mLoop; }
-
 #pragma mark -
 #pragma mark constructor
 
 ramSession::ramSession() { clear(); }
 ramSession::ramSession(const ramSession &copy) { clear(); *this = copy; }
 ramSession::ramSession(const ramNodeArrayBuffer &buf) { clear(); mBuffer = buf; }
+
 
 #pragma mark -
 #pragma mark gui settings
@@ -199,6 +192,7 @@ const ramNodeArray& ramSession::getFrame(int index) const
 
 const ramNodeArray& ramSession::getCurrentFrame() const
 {
+//	cout << "getFrameIndex():" << getFrameIndex() << "/" << getNumFrames() << endl;
 	return mBuffer.get(getFrameIndex());
 }
 
@@ -207,6 +201,14 @@ const ramNodeArray& ramSession::getCurrentFrame() const
 #pragma mark -
 #pragma mark getters, setters
 
+void ramSession::setLoop(const bool l) { mLoop = l; };
+void ramSession::setRate(const float r) { mRate = r; };
+void ramSession::setPlayhead(const float t) { mPlayhead = t; };
+
+const bool ramSession::isPlaying() const { return mPlaying; }
+const bool ramSession::isRecording() const { return mRecording; }
+const bool ramSession::isLoop() const { return mLoop; }
+
 const float ramSession::getPlayhead() const
 {
 	return mPlayhead;
@@ -214,6 +216,17 @@ const float ramSession::getPlayhead() const
 
 const int ramSession::getFrameIndex() const
 {
+	const ramNodeArray &frontFrame = mBuffer.get( 0 );
+	const ramNodeArray &backFrame = mBuffer.get( getNumFrames() );
+	
+	cout
+	<< "frameIndex:" << getNumFrames() - floor(mPlayhead / getFrameTime()) 
+	<< " getNumFrames():" << mBuffer.getSize()
+	<< " mPlayhead:" << mPlayhead
+	<< " frontFrame.getTimestamp():" << frontFrame.getTimestamp()
+	<< " backFrame.getTimestamp():" << backFrame.getTimestamp()
+	<< endl;
+	
 	return getNumFrames() - floor(mPlayhead / getFrameTime());
 }
 
@@ -255,3 +268,4 @@ void ramSession::setNodeArrayBuffer(ramNodeArrayBuffer &buffer)
 	clear();
 	mBuffer = buffer;
 }
+

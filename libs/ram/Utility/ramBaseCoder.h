@@ -31,7 +31,7 @@ public:
 	
 	/// load tsv, and convert to ramSession
 	// -----------------------------
-	ramSession load(const string filePath)
+	void load(const string filePath)
 	{
 		cout
 		<< "start loading file..."
@@ -40,13 +40,14 @@ public:
 		if ( !ofFile::doesFileExist(filePath) )
 		{
 			cout << filePath << " load failed. No such file or directory." << endl;
-			return ramSession();
+//			return mSession;
 		}
 		
 		ofFile file;
 		file.open(filePath);
-
-		return decode(file.readToBuffer());
+		
+//		return decode(file.readToBuffer());
+		decode(file.readToBuffer());
 	}
 	
 	
@@ -90,10 +91,11 @@ public:
 	// -----------------------------
 	inline void setFileName(const string fileName) { mFileName = fileName; }
 	
+	ramSession& getSession() { return mSession; }
 	
 protected:
 	
-	virtual ramSession decode(const ofBuffer buffer) = 0;
+	virtual void decode(const ofBuffer buffer) = 0;
 	virtual const bool encode(const ramSession &src) = 0;
 	
 	string mFileName;

@@ -31,8 +31,8 @@ PlaybackSegment::~PlaybackSegment()
 ofxUICanvasPlus* PlaybackSegment::createPanel(const ramSession &session)
 {
 	name = session.getNodeArrayName();
-	const float width = gui().kLength;
-	const float height = gui().kDim+3;
+	const float width = ramGetGUI().kLength;
+	const float height = ramGetGUI().kDim+3;
 	
 	
 	ofxUICanvasPlus *child = new ofxUICanvasPlus();

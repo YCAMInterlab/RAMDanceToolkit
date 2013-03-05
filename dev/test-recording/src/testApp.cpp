@@ -4,9 +4,6 @@
 ramTSVCoder coder;
 ramSession session;
 
-// managing sessions dynamically
-ramFilterEach<ramSession> sessions;
-
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -24,11 +21,6 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/// update sessions with all node arrays
-	// ------------------
-	sessions.update(getAllNodeArrays());
-	
-	
 	/// update only playhead, it is used for session which is aimed at load tsv and play
 	// ------------------
 	session.updatePlayhead();
@@ -37,23 +29,6 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	
-	/// draw recorded session if it's playing
-	// ------------------
-	for(int i=0; i<sessions.getNumFilters(); i++)
-	{
-		ramSession &sess = sessions.getFilter(i);
-		
-		if (sess.isPlaying())
-		{
-			ramBeginCamera();
-			ramActor &actor = (ramActor &)sess.get();
-			ramDrawBasicActor(actor);
-			ramEndCamera();
-		}
-	}
-	
-	
 	/// draw loaded session
 	// ------------------
 	if (session.isPlaying())
@@ -71,9 +46,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(const ramActor &actor)
 {
-//	/// draw realtime data
-//	ofSetColor(ramColor::RED_DEEP);
-//	ramDrawBasicActor(actor);
+	
 }
 
 //--------------------------------------------------------------
@@ -91,32 +64,6 @@ void testApp::keyPressed(int key)
 {
 	switch (key)
 	{
-		case '[':
-			for(int i=0; i<sessions.getNumFilters(); i++)
-				sessions.getFilter(i).startRecording();
-			break;
-
-		case ']':
-			for(int i=0; i<sessions.getNumFilters(); i++)
-				sessions.getFilter(i).stopRecording();
-			break;
-
-		case '-':
-			session.play();
-			for(int i=0; i<sessions.getNumFilters(); i++)
-				sessions.getFilter(i).play();
-			break;
-			
-		case '=':
-			for(int i=0; i<sessions.getNumFilters(); i++)
-				sessions.getFilter(i).stop();
-			break;
-			
-		case 's':
-			for(int i=0; i<sessions.getNumFilters(); i++)
-				coder.save(sessions.getFilter(i), "session-"+ofToString(i+1)+".tsv");
-			break;
-			
 		case '.':
 			session.play();
 			break;
@@ -126,19 +73,16 @@ void testApp::keyPressed(int key)
 			break;
 			
 		case 'l':
-			
 			try
 			{
-				coder.load("/Users/motoishmz/Desktop/test.tsv");
+				coder.load("test.tsv");
 				session = coder.getSession();
-				cout << "load end" << endl;
+				cout << "loaded from " << __FUNCTION__ << endl;
 			}
 			catch (std::exception &e)
 			{
 				cout << e.what() << endl;
 			}
-			
-			
 			
 			break;
 

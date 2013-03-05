@@ -1,7 +1,7 @@
 #include "ramTSVCoder.h"
 
 
-ramSession ramTSVCoder::decode(ofBuffer buffer)
+void ramTSVCoder::decode(ofBuffer buffer)
 {
 	
 	if (buffer.size())
@@ -39,10 +39,10 @@ ramSession ramTSVCoder::decode(ofBuffer buffer)
 			}
 			
 			const int numNodes = ofToInt(values.at(2));
-
+			cout << "numNodes:" << numNodes << endl;
+			
 			for (int i=0; i<numNodes; i++)
 			{
-				cout << "i*8+3+7:" << (i*8+3+7) << " values.size():" << values.size() << endl;
 				
 				if (values.size() < i*8+3+7)
 					throw std::exception();
@@ -56,9 +56,11 @@ ramSession ramTSVCoder::decode(ofBuffer buffer)
 				const float ax = ofToFloat( values.at(i*8 + 5 + 3) );
 				const float ay = ofToFloat( values.at(i*8 + 6 + 3) );
 				const float az = ofToFloat( values.at(i*8 + 7 + 3) );
-				const ofVec3f axis(ax, ay, az);
 				const ofVec3f vec(vx, vy, vz);
+				const ofVec3f axis(ax, ay, az);
 				const ofQuaternion quat(qa, axis);
+				
+				cout << "nodeName:" << nodeName << " nodeName:" << nodeName << " vec:" << vec << endl;
 				
 				ramNode &node = NA.getNode(i);
 				node.setID(i);
@@ -67,6 +69,8 @@ ramSession ramTSVCoder::decode(ofBuffer buffer)
 				node.setGlobalOrientation(quat);
 				node.getAccelerometer().update(vec, quat);
 			}
+			
+			cout << "--" << endl;
 			
 			NA.setTimestamp(ofToFloat( values.at(numNodes*8 + 0 + 3) ));
 			
@@ -81,7 +85,7 @@ ramSession ramTSVCoder::decode(ofBuffer buffer)
 	}
 
 
-	return mSession;
+//	return mSession;
 }
 
 const bool ramTSVCoder::encode(const ramSession &src)

@@ -6,7 +6,7 @@
 class ramTSVCoder : public ramBaseCoder
 {
 protected:
-	ramSession decode(ofBuffer buffer);
+	void decode(ofBuffer buffer);
 	const bool encode(const ramSession &src);
 };
 
