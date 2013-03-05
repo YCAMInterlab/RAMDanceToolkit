@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ramGlobal.h"
 #include "ramControllable.h"
+#include "ramGlobal.h"
 
 class ramUnit : public ramControllable, public ramGlobalShortcut
 {

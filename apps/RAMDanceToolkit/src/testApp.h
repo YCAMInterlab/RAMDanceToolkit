@@ -27,8 +27,6 @@ public:
 	// ------------------------
 	void drawActor(const ramActor &actor);
 	void drawRigid(const ramRigidBody &rigid);
-    
-	// ...
-	// ------------------------
-	ramSceneManager sceneManager;
+	
+	ramSceneManager* sceneManager;
 };

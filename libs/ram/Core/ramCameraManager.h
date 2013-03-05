@@ -36,13 +36,12 @@ public:
 protected:
 
 	static ramCameraManager *_instance;
-
-	ofCamera *active_camera;
-	vector<ofCamera*> cameras;
-
 	ramCameraManager();
 	ramCameraManager(const ramCameraManager&) {}
 	ramCameraManager& operator=(const ramCameraManager&) { return *this; }
+	
+	ofCamera *active_camera;
+	vector<ofCamera*> cameras;
 	
 	void update(ofEventArgs& args);
 

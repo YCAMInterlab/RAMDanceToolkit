@@ -5,11 +5,31 @@
 
 extern bool drawModel;
 
+ramSceneManager* ramSceneManager::_instance = NULL;
+
+ramSceneManager& ramSceneManager::instance()
+{
+	if (_instance == NULL)
+		_instance = new ramSceneManager;
+	return *_instance;
+}
+
+ramSceneManager::ramSceneManager() {}
+
+ramSceneManager::ramSceneManager(const ramSceneManager&) {}
+
+ramSceneManager& ramSceneManager::operator=(const ramSceneManager&) { return *this; }
+
 void ramSceneManager::setup(const vector<ramBaseScene*>& scenes_)
 {
 	enableAllEvents();
 	
 	scenes = scenes_;
+	
+	// bomisutaro: this is a bit dangerous because the scene manager is not a singleton
+	ramBaseScene *actorsScene = ramGetGUI().getActorsScene();
+	scenes.push_back(actorsScene);
+	actorsScene->setup();
 
 	for (int i = 0; i < scenes.size(); i++)
 	{
@@ -17,11 +37,6 @@ void ramSceneManager::setup(const vector<ramBaseScene*>& scenes_)
 		scene->setup();
 		ramGetGUI().addPanel(scene);
 	}
-	
-	// bomisutaro: this is a bit dangerous because the scene manager is not a singleton
-	ramBaseScene *actorsScene = ramGetGUI().getActorsScene();
-	scenes.push_back(actorsScene);
-	actorsScene->setup();
 }
 
 void ramSceneManager::update()

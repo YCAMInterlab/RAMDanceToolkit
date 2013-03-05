@@ -27,9 +27,9 @@ class Stamp : public ramBaseScene
 		
 		void onTimerdStop()
 		{
-			if (hasNodeArray(name))
+			if (ramNodeFinder::hasNodeArray(name))
 			{
-				stamp->mStamp.createStamp(getNodeArray(name));
+				stamp->mStamp.createStamp(ramNodeFinder::getNodeArray(name));
 			}
 		}
 	};

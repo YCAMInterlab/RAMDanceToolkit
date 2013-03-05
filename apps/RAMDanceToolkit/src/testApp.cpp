@@ -95,7 +95,8 @@ void testApp::setup()
 	scenes.push_back( monster.getPtr() );
 	scenes.push_back( laban.getPtr() );
 	scenes.push_back( notation.getPtr() );
-	sceneManager.setup(scenes);
+	sceneManager = &ramSceneManager::instance();
+	sceneManager->setup(scenes);
 }
 
 //--------------------------------------------------------------
@@ -103,13 +104,13 @@ void testApp::update()
 {
 	/// Scenes update
 	// ------------------
-	sceneManager.update();
+	sceneManager->update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	sceneManager.draw();
+	sceneManager->draw();
 }
 
 #pragma mark - ram methods
