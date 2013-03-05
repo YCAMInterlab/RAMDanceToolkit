@@ -1,6 +1,6 @@
 #include "ControlSegment.h"
 
-#include "ramControlPanel.h"
+#include "ramSceneManager.h"
 
 #pragma mark -
 #pragma mark constructor, destructor
@@ -50,7 +50,7 @@ ofxUICanvasPlus* ControlSegment::createPanel(const ramNodeArray &NA)
 	child->addWidgetDown(btnHideActor);
 	child->addWidgetRight(btnResetActor);
 	child->addWidgetRight(btnRecordActor);
-	
+	btnHideActor->setValue(!ramShowActorsEnabled());
 	
 	/// actor color
 	child->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);

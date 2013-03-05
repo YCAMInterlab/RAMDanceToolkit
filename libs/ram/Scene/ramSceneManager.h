@@ -4,6 +4,7 @@
 
 #include "ramBaseScene.h"
 #include "ramGlobal.h"
+#include "ramActorsScene.h"
 
 class ramSceneManager : public ramGlobalShortcut
 {
@@ -13,6 +14,10 @@ public:
 
 	void setup();
 	void addScene(ramBaseScene* scene);
+	
+	ramActorsScene* getActorsScene();
+	void setShowAllActors(bool showAllActors);
+	bool getShowAllActors() const;
 
 protected:
 
@@ -37,5 +42,5 @@ private:
 	ramSceneManager(const ramSceneManager&);
 	ramSceneManager& operator=(const ramSceneManager&);
 	
-	ramBaseScene* actorsScene;
+	ramActorsScene* actorsScene;
 };

@@ -31,6 +31,9 @@ public:
 	
 	void drawNodes(const ramNodeArray &NA); // experimental
 	
+	void setShowAll(bool showAll);
+	bool getShowAll() const;
+	
 private:
 	
 	/// internal use
@@ -41,6 +44,7 @@ private:
 
 	
 	/// instances which are controlled programatically
+	ofxUILabelToggle *btnShowAll;
 	ofxUILabelToggle *btnPause;
 	ofxUILabelToggle *btnRecAll;
 

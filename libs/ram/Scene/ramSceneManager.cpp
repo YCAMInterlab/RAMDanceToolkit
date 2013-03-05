@@ -2,7 +2,6 @@
 
 #include "ramControlPanel.h"
 #include "ramPhysics.h"
-#include "ramActorsScene.h"
 
 extern bool drawModel;
 
@@ -25,15 +24,15 @@ void ramSceneManager::setup()
 {
 	enableAllEvents();
 	
+	ofAddListener(ofEvents().update, this, &ramSceneManager::update);
+	ofAddListener(ofEvents().draw, this, &ramSceneManager::draw);
+	
 	// memory leak on exit
 	actorsScene = new ramActorsScene();
 	scenes.push_back(actorsScene);
 	actorsScene->setup();
 	actorsScene->setEnabled(true);
 	ramGetGUI().addPanel(actorsScene, false);
-	
-	ofAddListener(ofEvents().update, this, &ramSceneManager::update);
-	ofAddListener(ofEvents().draw, this, &ramSceneManager::draw);
 }
 
 void ramSceneManager::addScene(ramBaseScene* scene)
@@ -41,6 +40,21 @@ void ramSceneManager::addScene(ramBaseScene* scene)
 	scenes.push_back(scene);
 	scene->setup();
 	ramGetGUI().addPanel(scene);
+}
+
+ramActorsScene* ramSceneManager::getActorsScene()
+{
+	return actorsScene;
+}
+
+void ramSceneManager::setShowAllActors(bool showAllActors)
+{
+	return actorsScene->setShowAll(showAllActors);
+}
+
+bool ramSceneManager::getShowAllActors() const
+{
+	return actorsScene->getShowAll();
 }
 
 void ramSceneManager::update(ofEventArgs& args)

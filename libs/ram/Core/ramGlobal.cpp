@@ -58,6 +58,18 @@ string ramToResourcePath(string path)
 
 //
 
+void ramEnableShowActors(bool v)
+{
+	ramSceneManager::instance().setShowAllActors(v);
+}
+
+bool ramShowActorsEnabled()
+{
+	return ramSceneManager::instance().getShowAllActors();	
+}
+
+//
+
 void ramBeginCamera()
 {
 	ramCameraManager::instance().getActiveCamera().begin();

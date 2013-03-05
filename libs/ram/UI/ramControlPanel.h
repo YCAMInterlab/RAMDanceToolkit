@@ -56,7 +56,6 @@ public:
 	void addPanel(ramBaseScene* control,  bool enableable = true);
 
 	ramPreferencesTab& getPreferencesTab();
-	ramBaseScene* getActorsScene();
 	
 	ofxUITabbedCanvas& getSceneTabs();
 
