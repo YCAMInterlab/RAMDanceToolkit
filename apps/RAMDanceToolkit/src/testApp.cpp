@@ -75,42 +75,38 @@ void testApp::setup()
 	
 	/// scenes setup
 	// ------------------
-	vector<ramBaseScene*> scenes;
-	scenes.push_back( drawLines.getPtr() );
-	scenes.push_back( bigbox.getPtr() );
-	scenes.push_back( future.getPtr() );
-	scenes.push_back( donuts.getPtr() );
-	scenes.push_back( stamp.getPtr() );
-	scenes.push_back( expansion.getPtr() );
-	scenes.push_back( particles.getPtr() );
-	scenes.push_back( abacus.getPtr() );
-	scenes.push_back( soundcube.getPtr() );
-	scenes.push_back( upsideDown.getPtr() );
-	scenes.push_back( kepler.getPtr() );
-	scenes.push_back( hastyChase.getPtr() );
-	scenes.push_back( colorGrid.getPtr() );
-	scenes.push_back( threePoints.getPtr() );
-	scenes.push_back( fourPoints.getPtr() );
-	scenes.push_back( chain.getPtr() );
-	scenes.push_back( monster.getPtr() );
-	scenes.push_back( laban.getPtr() );
-	scenes.push_back( notation.getPtr() );
-	sceneManager = &ramSceneManager::instance();
-	sceneManager->setup(scenes);
+	ramSceneManager& sceneManager = ramSceneManager::instance();
+	sceneManager.addScene( drawLines.getPtr() );
+	sceneManager.addScene( bigbox.getPtr() );
+	sceneManager.addScene( future.getPtr() );
+	sceneManager.addScene( donuts.getPtr() );
+	sceneManager.addScene( stamp.getPtr() );
+	sceneManager.addScene( expansion.getPtr() );
+	sceneManager.addScene( particles.getPtr() );
+	sceneManager.addScene( abacus.getPtr() );
+	sceneManager.addScene( soundcube.getPtr() );
+	sceneManager.addScene( upsideDown.getPtr() );
+	sceneManager.addScene( kepler.getPtr() );
+	sceneManager.addScene( hastyChase.getPtr() );
+	sceneManager.addScene( colorGrid.getPtr() );
+	sceneManager.addScene( threePoints.getPtr() );
+	sceneManager.addScene( fourPoints.getPtr() );
+	sceneManager.addScene( chain.getPtr() );
+	sceneManager.addScene( monster.getPtr() );
+	sceneManager.addScene( laban.getPtr() );
+	sceneManager.addScene( notation.getPtr() );
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/// Scenes update
-	// ------------------
-	sceneManager->update();
+
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	sceneManager->draw();
+	
 }
 
 #pragma mark - ram methods

@@ -3,6 +3,7 @@
 #include "ramSimpleShadow.h"
 #include "ramPhysics.h"
 #include "ramControlPanel.h"
+#include "ramSceneManager.h"
 
 static ramSimpleShadow ram_simple_shadow;
 
@@ -40,10 +41,12 @@ void ramInitialize(int oscPort)
 	// to apply `$ patch -p0 < ../ofxUI.patch` at ofxUI directory
 
 	ram_simple_shadow.setup();
-
+	
 	ramActorManager::instance().setup();
 	ramActorManager::instance().setupOscReceiver(oscPort);
 
+	ramSceneManager::instance().setup();
+	
 	ramPhysics::instance();
 	ramGetGUI().setup();
 }

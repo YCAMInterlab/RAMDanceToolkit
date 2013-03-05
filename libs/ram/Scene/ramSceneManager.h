@@ -11,10 +11,8 @@ public:
 	
 	static ramSceneManager& instance();
 
-	void setup(const vector<ramBaseScene*>& scenes);
-
-	void update();
-	void draw();
+	void setup();
+	void addScene(ramBaseScene* scene);
 
 protected:
 
@@ -29,6 +27,9 @@ protected:
 
 	vector<ramBaseScene*> scenes;
 	
+	void update(ofEventArgs& args);
+	void draw(ofEventArgs& args);
+	
 private:
 	
 	static ramSceneManager *_instance;
@@ -36,4 +37,5 @@ private:
 	ramSceneManager(const ramSceneManager&);
 	ramSceneManager& operator=(const ramSceneManager&);
 	
+	ramBaseScene* actorsScene;
 };

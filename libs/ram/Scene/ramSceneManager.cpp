@@ -2,6 +2,7 @@
 
 #include "ramControlPanel.h"
 #include "ramPhysics.h"
+#include "ramActorsScene.h"
 
 extern bool drawModel;
 
@@ -20,26 +21,29 @@ ramSceneManager::ramSceneManager(const ramSceneManager&) {}
 
 ramSceneManager& ramSceneManager::operator=(const ramSceneManager&) { return *this; }
 
-void ramSceneManager::setup(const vector<ramBaseScene*>& scenes_)
+void ramSceneManager::setup()
 {
 	enableAllEvents();
 	
-	scenes = scenes_;
-	
-	// bomisutaro: this is a bit dangerous because the scene manager is not a singleton
-	ramBaseScene *actorsScene = ramGetGUI().getActorsScene();
+	// memory leak on exit
+	actorsScene = new ramActorsScene();
 	scenes.push_back(actorsScene);
 	actorsScene->setup();
-
-	for (int i = 0; i < scenes.size(); i++)
-	{
-		ramBaseScene *scene = scenes.at(i);
-		scene->setup();
-		ramGetGUI().addPanel(scene);
-	}
+	actorsScene->setEnabled(true);
+	ramGetGUI().addPanel(actorsScene, false);
+	
+	ofAddListener(ofEvents().update, this, &ramSceneManager::update);
+	ofAddListener(ofEvents().draw, this, &ramSceneManager::draw);
 }
 
-void ramSceneManager::update()
+void ramSceneManager::addScene(ramBaseScene* scene)
+{
+	scenes.push_back(scene);
+	scene->setup();
+	ramGetGUI().addPanel(scene);
+}
+
+void ramSceneManager::update(ofEventArgs& args)
 {
 	for (int i = 0; i < scenes.size(); i++)
 	{
@@ -53,7 +57,7 @@ void ramSceneManager::update()
 	}
 }
 
-void ramSceneManager::draw()
+void ramSceneManager::draw(ofEventArgs& args)
 {
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glPushMatrix();
