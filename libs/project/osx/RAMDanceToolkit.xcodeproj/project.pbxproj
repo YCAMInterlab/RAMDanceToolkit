@@ -65,7 +65,6 @@
 		2776071816E4EB2700D6B31D /* ramControllable.h in Headers */ = {isa = PBXBuildFile; fileRef = 277606CF16E4EB2700D6B31D /* ramControllable.h */; };
 		2776071916E4EB2700D6B31D /* ramControlPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 277606D016E4EB2700D6B31D /* ramControlPanel.cpp */; };
 		2776071A16E4EB2700D6B31D /* ramControlPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 277606D116E4EB2700D6B31D /* ramControlPanel.h */; };
-		2776071B16E4EB2700D6B31D /* ramPlaybackTab.h in Headers */ = {isa = PBXBuildFile; fileRef = 277606D216E4EB2700D6B31D /* ramPlaybackTab.h */; };
 		2776071C16E4EB2700D6B31D /* ramPreferencesTab.h in Headers */ = {isa = PBXBuildFile; fileRef = 277606D316E4EB2700D6B31D /* ramPreferencesTab.h */; };
 		2776071D16E4EB2700D6B31D /* ramPresetTab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 277606D416E4EB2700D6B31D /* ramPresetTab.cpp */; };
 		2776071E16E4EB2700D6B31D /* ramPresetTab.h in Headers */ = {isa = PBXBuildFile; fileRef = 277606D516E4EB2700D6B31D /* ramPresetTab.h */; };
@@ -426,6 +425,11 @@
 		60D49F2116DE79B2003BA064 /* tracking.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 60D49EB916DE79B2003BA064 /* tracking.hpp */; };
 		60D49F2216DE79B2003BA064 /* video.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 60D49EBA16DE79B2003BA064 /* video.hpp */; };
 		60D49F2316DE79B2003BA064 /* opencv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D49EBD16DE79B2003BA064 /* opencv.a */; };
+		9A21607916E4FFEF00EC81F4 /* ramTSVCoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A21607816E4FFEF00EC81F4 /* ramTSVCoder.cpp */; };
+		9A21608216E5114B00EC81F4 /* ramPlaybackTab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A21608016E5114B00EC81F4 /* ramPlaybackTab.cpp */; };
+		9A21608316E5114B00EC81F4 /* ramPlaybackTab.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A21608116E5114B00EC81F4 /* ramPlaybackTab.h */; };
+		9A21608616E5117C00EC81F4 /* PlaybackSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A21608416E5117C00EC81F4 /* PlaybackSegment.h */; };
+		9A21608716E5117C00EC81F4 /* PlaybackSegment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A21608516E5117C00EC81F4 /* PlaybackSegment.cpp */; };
 		9A503DA316E324AE004F57EE /* ofxNodeArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A503DA116E324AE004F57EE /* ofxNodeArray.h */; };
 		9A503DA416E324AE004F57EE /* ofxNodeArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A503DA216E324AE004F57EE /* ofxNodeArray.cpp */; };
 		9AD6F5A316B926C000F7F51E /* ofxUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F4FF16B926BF00F7F51E /* ofxUI.h */; };
@@ -537,7 +541,6 @@
 		277606CF16E4EB2700D6B31D /* ramControllable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramControllable.h; sourceTree = "<group>"; };
 		277606D016E4EB2700D6B31D /* ramControlPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramControlPanel.cpp; sourceTree = "<group>"; };
 		277606D116E4EB2700D6B31D /* ramControlPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramControlPanel.h; sourceTree = "<group>"; };
-		277606D216E4EB2700D6B31D /* ramPlaybackTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPlaybackTab.h; sourceTree = "<group>"; };
 		277606D316E4EB2700D6B31D /* ramPreferencesTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPreferencesTab.h; sourceTree = "<group>"; };
 		277606D416E4EB2700D6B31D /* ramPresetTab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramPresetTab.cpp; sourceTree = "<group>"; };
 		277606D516E4EB2700D6B31D /* ramPresetTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPresetTab.h; sourceTree = "<group>"; };
@@ -905,6 +908,11 @@
 		60D49EB916DE79B2003BA064 /* tracking.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tracking.hpp; sourceTree = "<group>"; };
 		60D49EBA16DE79B2003BA064 /* video.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = video.hpp; sourceTree = "<group>"; };
 		60D49EBD16DE79B2003BA064 /* opencv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = opencv.a; sourceTree = "<group>"; };
+		9A21607816E4FFEF00EC81F4 /* ramTSVCoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramTSVCoder.cpp; sourceTree = "<group>"; };
+		9A21608016E5114B00EC81F4 /* ramPlaybackTab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramPlaybackTab.cpp; sourceTree = "<group>"; };
+		9A21608116E5114B00EC81F4 /* ramPlaybackTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPlaybackTab.h; sourceTree = "<group>"; };
+		9A21608416E5117C00EC81F4 /* PlaybackSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackSegment.h; sourceTree = "<group>"; };
+		9A21608516E5117C00EC81F4 /* PlaybackSegment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlaybackSegment.cpp; sourceTree = "<group>"; };
 		9A503DA116E324AE004F57EE /* ofxNodeArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxNodeArray.h; sourceTree = "<group>"; };
 		9A503DA216E324AE004F57EE /* ofxNodeArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxNodeArray.cpp; sourceTree = "<group>"; };
 		9AD6F4FF16B926BF00F7F51E /* ofxUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI.h; sourceTree = "<group>"; };
@@ -1082,11 +1090,11 @@
 		277606C916E4EB2700D6B31D /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				9A21607F16E5114A00EC81F4 /* ramPlaybackTab */,
 				277606CA16E4EB2700D6B31D /* ramActorScene */,
 				277606CF16E4EB2700D6B31D /* ramControllable.h */,
 				277606D016E4EB2700D6B31D /* ramControlPanel.cpp */,
 				277606D116E4EB2700D6B31D /* ramControlPanel.h */,
-				277606D216E4EB2700D6B31D /* ramPlaybackTab.h */,
 				277606D316E4EB2700D6B31D /* ramPreferencesTab.h */,
 				277606D416E4EB2700D6B31D /* ramPresetTab.cpp */,
 				277606D516E4EB2700D6B31D /* ramPresetTab.h */,
@@ -1117,6 +1125,7 @@
 				277606DC16E4EB2700D6B31D /* ramNodeIdentifer.h */,
 				277606DD16E4EB2700D6B31D /* ramTimeShifter.h */,
 				277606DE16E4EB2700D6B31D /* ramTSVCoder.h */,
+				9A21607816E4FFEF00EC81F4 /* ramTSVCoder.cpp */,
 				277606DF16E4EB2700D6B31D /* ramUtils.cpp */,
 				277606E016E4EB2700D6B31D /* ramUtils.h */,
 			);
@@ -2032,6 +2041,17 @@
 			path = osx;
 			sourceTree = "<group>";
 		};
+		9A21607F16E5114A00EC81F4 /* ramPlaybackTab */ = {
+			isa = PBXGroup;
+			children = (
+				9A21608416E5117C00EC81F4 /* PlaybackSegment.h */,
+				9A21608516E5117C00EC81F4 /* PlaybackSegment.cpp */,
+				9A21608016E5114B00EC81F4 /* ramPlaybackTab.cpp */,
+				9A21608116E5114B00EC81F4 /* ramPlaybackTab.h */,
+			);
+			path = ramPlaybackTab;
+			sourceTree = "<group>";
+		};
 		9AD6F38716B926BF00F7F51E /* ofxUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -2529,7 +2549,6 @@
 				2776071716E4EB2700D6B31D /* ramActorsScene.h in Headers */,
 				2776071816E4EB2700D6B31D /* ramControllable.h in Headers */,
 				2776071A16E4EB2700D6B31D /* ramControlPanel.h in Headers */,
-				2776071B16E4EB2700D6B31D /* ramPlaybackTab.h in Headers */,
 				2776071C16E4EB2700D6B31D /* ramPreferencesTab.h in Headers */,
 				2776071E16E4EB2700D6B31D /* ramPresetTab.h in Headers */,
 				2776071F16E4EB2700D6B31D /* ramBaseCoder.h in Headers */,
@@ -2540,6 +2559,8 @@
 				2776072516E4EB2700D6B31D /* ramTimeShifter.h in Headers */,
 				2776072616E4EB2700D6B31D /* ramTSVCoder.h in Headers */,
 				2776072816E4EB2700D6B31D /* ramUtils.h in Headers */,
+				9A21608316E5114B00EC81F4 /* ramPlaybackTab.h in Headers */,
+				9A21608616E5117C00EC81F4 /* PlaybackSegment.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2654,6 +2675,9 @@
 				2776071D16E4EB2700D6B31D /* ramPresetTab.cpp in Sources */,
 				2776072016E4EB2700D6B31D /* ramCameraSettings.cpp in Sources */,
 				2776072716E4EB2700D6B31D /* ramUtils.cpp in Sources */,
+				9A21607916E4FFEF00EC81F4 /* ramTSVCoder.cpp in Sources */,
+				9A21608216E5114B00EC81F4 /* ramPlaybackTab.cpp in Sources */,
+				9A21608716E5117C00EC81F4 /* PlaybackSegment.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
