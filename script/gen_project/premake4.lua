@@ -148,6 +148,11 @@ void testApp::dragEvent(ofDragInfo dragInfo)
 }
 ]]
 
+local gitkeep = [[
+#.gitkeep
+]]
+
+
 function create_file( path, content )
 	local fp = io.open(path, 'w')
 	fp:write(content)
@@ -179,6 +184,7 @@ solution (project_name)
 			create_file(project_name .. '/src/main.cpp', main_cpp)
 			create_file(project_name .. '/src/testApp.h', test_app_h)
 			create_file(project_name .. '/src/testApp.cpp', test_app_cpp)
+			create_file(project_name .. '/bin/data/.gitkeep', gitkeep)
 		end
 
 		includedirs {
@@ -194,9 +200,16 @@ solution (project_name)
 			'../addons/ofxBt/src/**',
 			'../addons/ofxBt/libs/',
 			'../addons/ofxBt/libs/**',
+			'../addons/ofxCv/src/',
+			'../addons/ofxCv/src/**',
+			'../addons/ofxCv/libs/',
+			'../addons/ofxCv/libs/**',
+			'../addons/ofxNodeArray/src/',
+			'../addons/ofxNodeArray/src/**',
 			'../addons/ofxInteractivePrimitives/src/',
 			'../addons/ofxInteractivePrimitives/src/**',
 			'../addons/ofxUI/src/',
+			'../addons/ofxUI/src/**',
 			'../addons/ofxUITabbedCanvas/',
 
 			-- oF
@@ -208,6 +221,7 @@ solution (project_name)
 			-- oF addons
 			'../../addons/ofxOsc/**',
 			'../../addons/ofxXMLSettings/**',
+			'../../addons/ofxOpenCv/**',
 		}
 
 		files {
@@ -215,7 +229,7 @@ solution (project_name)
 			project_name .. '/src/**.cpp',
 
 			'../../libs/openFrameworks/*.h',
-	   		'../../libs/openFrameworks/**/*.h',
+			'../../libs/openFrameworks/**/*.h',
 
 			'../libs/ram/*.h',
 			'../libs/ram/**/*.h',
@@ -223,6 +237,17 @@ solution (project_name)
 
 			'../addons/ofxBt/src/*.h',
 			'../addons/ofxBt/src/*.cpp',
+
+			'../addons/ofxCv/src/*.h',
+			'../addons/ofxCv/src/*.cpp',
+			'../addons/ofxCv/libs/*.h',
+			'../addons/ofxCv/libs/*.cpp',
+			
+			'../addons/ofxOpenCv/libs/*.h',
+			'../addons/ofxOpenCv/libs/*.cpp',
+			
+			'../addons/ofxNodeArray/src/*.h',
+			'../addons/ofxNodeArray/src/*.cpp',
 
 			'../addons/ofxInteractivePrimitives/src/**.h',
 			'../addons/ofxInteractivePrimitives/src/**.cpp',
@@ -241,6 +266,7 @@ solution (project_name)
 			project_name .. '/src/main.cpp',
 			project_name .. '/src/testApp.h',
 			project_name .. '/src/testApp.cpp'
+			project_name .. '/bin/data/.gitkeep'
 		}
 
 		-- platform specific
