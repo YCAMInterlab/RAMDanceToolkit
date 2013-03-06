@@ -57,7 +57,7 @@ class ramNode : public ofxNodeArray::Node<ramNode>
 
 public:
 
-	ramNode() {}
+	ramNode() : initialized(false) {}
 	ramNode(int index) : ofxNodeArray::Node<ramNode>(index) {}
 	
 	ramNode(const ramNode& copy) { *this = copy; }
@@ -83,6 +83,9 @@ public:
 	inline void beginTransform() const { transformGL(); }
 	inline void endTransform() const { restoreTransformGL(); }
 
+	
+	bool initialized;
+	
 private:
 	
 	string name;
