@@ -29,7 +29,7 @@ public:
 	
 #pragma mark -
 #pragma mark override ramBaseFilter
-	const string getName();
+	string getName() const;
 	const ramNodeArray& filter(const ramNodeArray &src);
 
 	

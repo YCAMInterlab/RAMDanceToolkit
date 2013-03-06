@@ -8,7 +8,7 @@ class ramUpsideDown : public ramBaseFilter
 {
 public:
 
-	const string getName() { return "ramUpsideDown"; };
+	string getName() const { return "ramUpsideDown"; };
 
 	ramUpsideDown() : offset(-3.0f) {}
 

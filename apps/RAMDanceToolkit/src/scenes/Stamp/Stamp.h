@@ -46,7 +46,7 @@ class Stamp : public ramBaseScene
 	
 public:
 	
-	const string getName() { return "Stamp"; }
+	string getName() const { return "Stamp"; }
 	
 	Stamp() : mShowActor(true), mShowBox(true) {}
 	

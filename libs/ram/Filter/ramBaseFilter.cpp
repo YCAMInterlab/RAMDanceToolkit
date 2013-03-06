@@ -24,7 +24,7 @@ const ramNodeArray& ramBaseFilter::get(size_t index) const { return cache; }
 size_t ramBaseFilter::getSize() const { return 1; }
 
 //
-const string ramBusSend::getName() { return "ramBusSend"; }
+string ramBusSend::getName() const { return "ramBusSend"; }
 
 ramBusSend::ramBusSend() {}
 ramBusSend::ramBusSend(const string &bus_name) { setBusName(bus_name); }

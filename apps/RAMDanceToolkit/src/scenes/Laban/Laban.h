@@ -188,6 +188,6 @@ public:
 	{
 	}
 	
-	const string getName() { return "Laban"; }
+	string getName() const { return "Laban"; }
 	
 };

@@ -62,7 +62,7 @@ public:
 	}
 
 	inline const ramNodeArray& getResult() { return processedArray; }
-	inline const string getName() { return "ramPendulum"; };
+	inline string getName() const { return "ramPendulum"; };
 
 protected:
 

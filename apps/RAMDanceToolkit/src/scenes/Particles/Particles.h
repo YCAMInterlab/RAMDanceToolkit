@@ -74,5 +74,5 @@ public:
 		ramEndCamera();
 	}
 		
-	const string getName() { return "Particles"; }
+	string getName() const { return "Particles"; }
 };

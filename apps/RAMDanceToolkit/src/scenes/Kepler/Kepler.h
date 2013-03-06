@@ -28,7 +28,7 @@ public:
 	// ------------------------
 	void drawActor(const ramActor &actor);
     
-    const string getName() { return "Kepler"; }
+    string getName() const { return "Kepler"; }
     
 private:
     void onValueChanged(ofxUIEventArgs& e);

@@ -34,7 +34,7 @@ public:
 		ramEndCamera();
 	}
 	
-	const string getName() { return "Abacus"; }
+	string getName() const { return "Abacus"; }
 	
 	
 	

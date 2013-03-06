@@ -166,6 +166,6 @@ public:
 	{
 	}
 	
-	const string getName() { return "Three Points"; }
+	string getName() const { return "Three Points"; }
 	
 };

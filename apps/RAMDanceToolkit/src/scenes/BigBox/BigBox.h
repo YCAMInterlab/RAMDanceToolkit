@@ -112,5 +112,5 @@ public:
 		}
 	}
 	
-	const string getName() { return "Big Box"; }
+	string getName() const { return "Big Box"; }
 };

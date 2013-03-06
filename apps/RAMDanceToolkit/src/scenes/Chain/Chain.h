@@ -96,7 +96,7 @@ public:
 	// ------------------------
 	void drawActor(const ramActor &actor);
     
-    const string getName() { return "Chain"; }
+    string getName() const { return "Chain"; }
     
 private:
     void onValueChanged(ofxUIEventArgs& e);

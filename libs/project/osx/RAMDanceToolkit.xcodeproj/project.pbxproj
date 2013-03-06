@@ -1646,15 +1646,15 @@
 		607D7ACC16661B860063800A /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				60D49E5516DE79B2003BA064 /* ofxOpenCv */,
-				60D49B7816DE5971003BA064 /* ofxCv */,
-				60813DF216DCAFCD005A1F85 /* ofxNodeArray */,
 				60314CEF16CFC6B300138384 /* ofxBt */,
+				60D49B7816DE5971003BA064 /* ofxCv */,
 				9AF81ADD16C93C0300C1A560 /* ofxInteractivePrimitives */,
-				600EFB3A16C8F59700A5B331 /* ofxXmlSettings */,
+				60813DF216DCAFCD005A1F85 /* ofxNodeArray */,
+				60D49E5516DE79B2003BA064 /* ofxOpenCv */,
 				600EFAF016C8F56800A5B331 /* ofxOsc */,
 				9AD6F38716B926BF00F7F51E /* ofxUI */,
 				9AD6F52816B926BF00F7F51E /* ofxUITabbedCanvas */,
+				600EFB3A16C8F59700A5B331 /* ofxXmlSettings */,
 			);
 			name = addons;
 			sourceTree = "<group>";

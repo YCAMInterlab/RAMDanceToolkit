@@ -18,7 +18,7 @@ public:
 	ofPolyline& getPolyline();
 	void update(ofPolyline& polyline);
 	
-	const string getName() { return "Planar Gesture Recognizer"; }
+	string getName() const { return "Planar Gesture Recognizer"; }
 	
 protected:
 	cv::RotatedRect ellipse, rect;

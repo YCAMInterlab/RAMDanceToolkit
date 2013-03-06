@@ -6,6 +6,6 @@ class ramControllable
 {
 public:
 	virtual ~ramControllable() {}
-	virtual const string getName() = 0;
+	virtual string getName() const = 0;
 	virtual void setupControlPanel() {}
 };

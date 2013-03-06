@@ -96,6 +96,6 @@ public:
 	{
 	}
 	
-	const string getName() { return "Color Grid"; }
+	string getName() const { return "Color Grid"; }
 	
 };

@@ -14,7 +14,7 @@ public:
 	ramActorsScene();
 	~ramActorsScene();
 	
-	const string getName();
+	string getName() const;
 	void setupControlPanel();
 	void setup();
 	void update();

@@ -13,7 +13,7 @@ class ramExpansion : public ramBaseFilter
 
 public:
 
-	const string getName() { return "ramExpansion"; };
+	string getName() const { return "ramExpansion"; };
 
 	ramExpansion() : mExpand(1.0), kExpandMax(3.0) {}
 

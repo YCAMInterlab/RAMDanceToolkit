@@ -230,6 +230,6 @@ public:
 	{
 	}
 	
-	const string getName() { return "Notation"; }
+	string getName() const { return "Notation"; }
 	
 };

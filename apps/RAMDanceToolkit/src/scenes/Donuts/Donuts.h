@@ -207,7 +207,7 @@ public:
 		mShowActor = false;
 	}
 	
-	const string getName() { return "Donuts"; }
+	string getName() const { return "Donuts"; }
 	
 	
 	void setAllVisiblity(bool b)

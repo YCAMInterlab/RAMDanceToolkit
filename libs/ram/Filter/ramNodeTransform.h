@@ -8,7 +8,7 @@ class ramTranslate : public ramBaseFilter
 {
 public:
 
-	const string getName() { return "ramTranslate"; };
+	string getName() const { return "ramTranslate"; };
 
 	void setTranslate(const ofVec3f& v) { translate = v; }
 	void setTranslate(float x, float y, float z) { setTranslate(ofVec3f(x, y, z)); }
@@ -41,7 +41,7 @@ class ramRotate : public ramBaseFilter
 {
 public:
 
-	const string getName() { return "ramRotate"; };
+	string getName() const { return "ramRotate"; };
 
 	void setRotate(const ofVec3f& v) { rotate = ofQuaternion(v.y, ofVec3f(0, 1, 0), v.x, ofVec3f(1, 0, 0), v.z, ofVec3f(0, 0, 1)); }
 	void setRotate(float rx, float ry, float rz) { setRotate(ofVec3f(rx, ry, rz)); }
@@ -76,7 +76,7 @@ class ramNodeTransform : public ramBaseFilter, public ofMatrix4x4
 {
 public:
 
-	const string getName() { return "ramTranslate"; };
+	string getName() const { return "ramTranslate"; };
 
 protected:
 
@@ -103,7 +103,7 @@ class ramNodeLocalTransform : public ramBaseFilter, public ofMatrix4x4
 {
 public:
 
-	const string getName() { return "ramNodeLocalTransform"; };
+	string getName() const { return "ramNodeLocalTransform"; };
 
 protected:
 

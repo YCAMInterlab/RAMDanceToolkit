@@ -26,7 +26,7 @@ class ramBusSend : public ramBaseFilter
 {
 public:
 
-	const string getName();
+	string getName() const;
 	ramBusSend();
 	ramBusSend(const string &bus_name);
 

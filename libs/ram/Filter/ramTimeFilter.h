@@ -7,7 +7,7 @@ class ramDelay : public ramBaseFilter
 {
 public:
 
-	const string getName() { return "ramDelay"; }
+	string getName() const { return "ramDelay"; }
 
 	ramDelay(size_t delay_frame = 60) : delay_frame(delay_frame) {}
 
@@ -40,7 +40,7 @@ class ramTimeShifter : public ramBaseFilter
 {
 public:
 
-	const string getName() { return "ramTimeShifter"; }
+	string getName() const { return "ramTimeShifter"; }
 
 	ramTimeShifter(size_t buffer_frame = 300) : rate(1), play_head(0), buffer_frame(buffer_frame)
 	{

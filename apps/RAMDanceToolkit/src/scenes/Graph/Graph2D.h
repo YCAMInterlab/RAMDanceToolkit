@@ -180,6 +180,6 @@ public:
 		
 	}
 	
-	const string getName() { return "Graph 2D"; }
+	string getName() const { return "Graph 2D"; }
 };
 

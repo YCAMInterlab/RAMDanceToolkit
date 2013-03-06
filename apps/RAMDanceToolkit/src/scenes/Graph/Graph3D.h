@@ -85,6 +85,6 @@ public:
 		
 	}
 	
-	const string getName() { return "Graph 3D"; }
+	string getName() const { return "Graph 3D"; }
 };
 

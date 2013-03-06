@@ -254,5 +254,5 @@ public:
 		}
 	}
 	
-	const string getName() { return "Basic Actor"; }
+	string getName() const { return "Basic Actor"; }
 };

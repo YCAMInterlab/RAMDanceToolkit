@@ -130,6 +130,6 @@ public:
         }
 	}
 	
-	const string getName() { return "Upside Down"; }
+	string getName() const { return "Upside Down"; }
 };
 

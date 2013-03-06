@@ -107,7 +107,7 @@ class ramMovementAnalyser : public ramNodeFinder, public ramBaseRecognizer
 {
 public:
 
-	const string getName() { return "ramMovementAnalyser"; }
+	string getName() const { return "ramMovementAnalyser"; }
 
 	ramMovementAnalyser() : threshold(2), state(false) {}
 
@@ -190,7 +190,7 @@ class ramTimerdMovementAnalyser : public ramMovementAnalyser
 {
 public:
 
-	const string getName() { return "ramTimerdMovementAnalyser"; }
+	string getName() const { return "ramTimerdMovementAnalyser"; }
 
 	ramTimerdMovementAnalyser() : hold_state(false)
 	{

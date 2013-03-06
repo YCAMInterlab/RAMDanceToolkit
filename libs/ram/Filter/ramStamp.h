@@ -55,7 +55,7 @@ public:
 	inline deque<ramNodeArray>& getStamps() { return mStamps; }
 	inline ramNodeArray& getStamp(const int index) { return mStamps.at(index); }
 
-	const string getName() { return "ramStamp"; }
+	string getName() const { return "ramStamp"; }
 
 protected:
 

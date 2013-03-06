@@ -14,7 +14,7 @@ public:
 		ramGetGUI().addSlider("LowPass amount", 0.0, 1.0, &amount);
 	}
 
-	const string getName() { return "ramLowPassFilter"; }
+	string getName() const { return "ramLowPassFilter"; }
 
 #pragma mark -
 

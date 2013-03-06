@@ -25,7 +25,7 @@ ramActorsScene::~ramActorsScene()
 #pragma mark -
 #pragma mark called from ramSceneManager
 
-const string ramActorsScene::getName()
+string ramActorsScene::getName() const
 {
 	return "Actors";
 }

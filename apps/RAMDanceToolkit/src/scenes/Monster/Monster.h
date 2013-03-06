@@ -201,6 +201,6 @@ public:
 	{
 	}
 	
-	const string getName() { return "Monster"; }
+	string getName() const { return "Monster"; }
 	
 };

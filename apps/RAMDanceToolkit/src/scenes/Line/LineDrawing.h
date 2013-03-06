@@ -8,7 +8,7 @@ class LineDrawing : public ramBaseScene
 	
 public:
 	
-	const string getName() { return "Line"; }
+	string getName() const { return "Line"; }
 	
 	struct LineContext
 	{

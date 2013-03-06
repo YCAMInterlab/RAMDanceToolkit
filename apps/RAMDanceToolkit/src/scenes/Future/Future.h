@@ -123,7 +123,7 @@ public:
 		updateFilters();
 	}
 	
-	const string getName() { return "Future"; }
+	string getName() const { return "Future"; }
 };
 
 

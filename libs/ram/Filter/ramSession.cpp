@@ -83,7 +83,7 @@ const ramNodeArray& ramSession::filter(const ramNodeArray &src)
 	return src;
 }
 
-const string ramSession::getName()
+string ramSession::getName() const
 {
 	return "ramSession";
 }

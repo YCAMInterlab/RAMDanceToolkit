@@ -125,7 +125,7 @@ public:
 		float volume, volume_t;
 	};
 	
-	const string getName() { return "SoundCube"; }
+	string getName() const { return "SoundCube"; }
 	
 	bool fill;
 	float line_width;

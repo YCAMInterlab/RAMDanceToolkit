@@ -9,7 +9,7 @@ class ramGhost : public ramBaseFilter
 {
 public:
 
-	const string getName() { return "ramGhost"; };
+	string getName() const { return "ramGhost"; };
 
 	ramGhost() : historySize(10), distance(150), speed(27)
 	{

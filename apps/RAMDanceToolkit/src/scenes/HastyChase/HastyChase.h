@@ -93,6 +93,6 @@ public:
 	{
 	}
 	
-	const string getName() { return "Hasty Chase"; }
+	string getName() const { return "Hasty Chase"; }
 };
 

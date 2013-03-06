@@ -158,7 +158,7 @@ public:
 		}
 	}
 	
-	const string getName() { return "Expansion"; }
+	string getName() const { return "Expansion"; }
 	
 	
 #pragma mark - 
