@@ -6,7 +6,6 @@ void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
-	ofBackground(ramColor::WHITE);
 
 	/// ram setup
 	// ------------------

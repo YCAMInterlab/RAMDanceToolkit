@@ -210,15 +210,8 @@ struct ColorSelectorListener
 void ramControlPanel::addColorSelector(const string& name, ofFloatColor *value)
 {
 	current_panel->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_MEDIUM));
-	
-	ofxUIToggle* toggle = current_panel->addToggle("", true, 26, 26);
-	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
-	
-	// FIXME: memory leak
-	ColorSelectorListener *e = new ColorSelectorListener(toggle, value);
-	ofAddListener(current_panel->newGUIEvent, e, &ColorSelectorListener::handle);
-	
 	current_panel->addSlider("R", 0, 1, &value->r, 90, kDim);
+	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
 	current_panel->addSlider("G", 0, 1, &value->g, 90, kDim);
 	current_panel->addSlider("B", 0, 1, &value->b, 90, kDim);
 	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
