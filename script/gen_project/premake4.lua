@@ -10,7 +10,7 @@ newoption {
 
 local project_name = _OPTIONS['project-name']
 if not project_name then
-	project_name = 'empry-example'
+	project_name = 'empty-example'
 end
 
 local main_cpp = [[
@@ -221,7 +221,7 @@ solution (project_name)
 			-- oF addons
 			'../../addons/ofxOsc/**',
 			'../../addons/ofxXMLSettings/**',
-			'../../addons/ofxOpenCv/**',
+			'../../addons/ofxOpenCv/**'
 		}
 
 		files {
