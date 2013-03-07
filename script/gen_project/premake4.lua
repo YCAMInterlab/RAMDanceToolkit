@@ -4,7 +4,7 @@
 
 newoption {
    trigger = "project-name",
-   value = "empry-example",
+   value = "empty-example",
    description = "name of new project",
 }
 
@@ -149,9 +149,8 @@ void testApp::dragEvent(ofDragInfo dragInfo)
 ]]
 
 local gitkeep = [[
-#.gitkeep
-]]
 
+]]
 
 function create_file( path, content )
 	local fp = io.open(path, 'w')
@@ -200,16 +199,24 @@ solution (project_name)
 			'../addons/ofxBt/src/**',
 			'../addons/ofxBt/libs/',
 			'../addons/ofxBt/libs/**',
+
 			'../addons/ofxCv/src/',
 			'../addons/ofxCv/src/**',
 			'../addons/ofxCv/libs/',
 			'../addons/ofxCv/libs/**',
+
+			'../addons/ofxOpenCv/src/',
+			'../addons/ofxOpenCv/src/**',
+			'../addons/ofxOpenCv/libs/',
+			'../addons/ofxOpenCv/libs/**',
+
 			'../addons/ofxNodeArray/src/',
 			'../addons/ofxNodeArray/src/**',
+
 			'../addons/ofxInteractivePrimitives/src/',
 			'../addons/ofxInteractivePrimitives/src/**',
+			
 			'../addons/ofxUI/src/',
-			'../addons/ofxUI/src/**',
 			'../addons/ofxUITabbedCanvas/',
 
 			-- oF
@@ -221,7 +228,7 @@ solution (project_name)
 			-- oF addons
 			'../../addons/ofxOsc/**',
 			'../../addons/ofxXMLSettings/**',
-			'../../addons/ofxOpenCv/**'
+			'../../addons/ofxOpenCv/**',
 		}
 
 		files {
@@ -240,17 +247,14 @@ solution (project_name)
 
 			'../addons/ofxCv/src/*.h',
 			'../addons/ofxCv/src/*.cpp',
-			'../addons/ofxCv/libs/*.h',
-			'../addons/ofxCv/libs/*.cpp',
-			
-			'../addons/ofxOpenCv/libs/*.h',
-			'../addons/ofxOpenCv/libs/*.cpp',
-			
+			'../addons/ofxCv/libs/**/*.h',
+			'../addons/ofxCv/libs/**/*.cpp',
+
 			'../addons/ofxNodeArray/src/*.h',
 			'../addons/ofxNodeArray/src/*.cpp',
 
-			'../addons/ofxInteractivePrimitives/src/**.h',
-			'../addons/ofxInteractivePrimitives/src/**.cpp',
+			'../addons/ofxInteractivePrimitives/src/*.h',
+			'../addons/ofxInteractivePrimitives/src/*.cpp',
 
 			'../addons/ofxUI/src/**.h',
 
@@ -263,10 +267,14 @@ solution (project_name)
 			'../../addons/ofxXmlSettings/**/*.h',
 			'../../addons/ofxXmlSettings/**/*.cpp',
 
+			'../../addons/ofxOpenCv/src/*.h',
+			'../../addons/ofxOpenCv/src/*.cpp',
+			'../../addons/ofxOpenCv/libs/**/*.h',
+			'../../addons/ofxOpenCv/libs/**/*.cpp',
+
 			project_name .. '/src/main.cpp',
 			project_name .. '/src/testApp.h',
 			project_name .. '/src/testApp.cpp'
-			project_name .. '/bin/data/.gitkeep'
 		}
 
 		-- platform specific
@@ -330,6 +338,7 @@ solution (project_name)
 			libdirs {
 				-- RAM
 				'../addons/ofxBt/libs/bullet/lib/vs2010/',
+				'../addons/ofxOpenCv/libs/opencv/lib/vs2010/',
 
 				-- oF
 				'../../libs/assimp/lib/vs2010',
@@ -409,6 +418,22 @@ solution (project_name)
 				'tess2',
 				'videoInput',
 				'msimg32',
+
+				-- oF addons
+				'opencv_calib3d231d',
+				'opencv_contrib231d',
+				'opencv_core231d',
+				'opencv_features2d231d',
+				'opencv_flann231d',
+				'opencv_gpu231d',
+				'opencv_haartraining_engined',
+				'opencv_highgui231d',
+				'opencv_imgproc231d',
+				'opencv_legacy231d',
+				'opencv_ml231d',
+				'opencv_objdetect231d',
+				'opencv_video231d',
+				'zlibd',
 			}
 
 		configuration {'vs*' , "Release"}
@@ -446,6 +471,22 @@ solution (project_name)
 				'tess2',
 				'videoInput',
 				'msimg32',
+				
+				-- oF addons
+				'opencv_calib3d231',
+				'opencv_contrib231',
+				'opencv_core231',
+				'opencv_features2d231',
+				'opencv_flann231',
+				'opencv_gpu231',
+				'opencv_haartraining_engine',
+				'opencv_highgui231',
+				'opencv_imgproc231',
+				'opencv_legacy231',
+				'opencv_ml231',
+				'opencv_objdetect231',
+				'opencv_video231',
+				'zlib',
 			}
 
 		configuration {}
