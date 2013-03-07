@@ -30,5 +30,8 @@ obj
 
 devApps
 data
+!data/.gitkeep
 
+
+# cache for actor color setting
 resources/Settings/Actors/**
