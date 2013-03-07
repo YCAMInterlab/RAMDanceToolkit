@@ -338,7 +338,7 @@ solution (project_name)
 			libdirs {
 				-- RAM
 				'../addons/ofxBt/libs/bullet/lib/vs2010/',
-				'../addons/ofxOpenCv/libs/opencv/lib/vs2010/',
+				'../../addons/ofxOpenCv/libs/opencv/lib/vs2010/',
 
 				-- oF
 				'../../libs/assimp/lib/vs2010',
