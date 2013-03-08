@@ -19,11 +19,24 @@ else
 	# clone from repo
 	cd ./addons
 
-	echo "[start clone five addons from github repos]"
+	echo "[couldn't found ./.gitmodule. start clone five addons from github repos instead of git submodule update]"
+
+	# ofxBt
 	git clone git@github.com:satoruhiga/ofxBt.git
+	cd ofxBt
+	git checkout develop
+	cd ../
+
+	# ofxUI
 	git clone git@github.com:rezaali/ofxUI.git
+
+	# ofxInteractivePrimitives
 	git clone git@github.com:satoruhiga/ofxInteractivePrimitives.git
+
+	# ofxCv
 	git clone git@github.com:kylemcdonald/ofxCv.git
+
+	# ofxNodeArray
 	git clone git@github.com:YCAMInterlab/ofxNodeArray.git
 
 	echo "end clone addons"
