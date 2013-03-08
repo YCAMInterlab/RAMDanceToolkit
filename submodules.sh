@@ -3,7 +3,7 @@
 # usage: $ ./submodules.sh
 
 
-if [ -r .gitmodules ]; then
+if [ -r .git ]; then
 
 	# submodule init & update
 	echo "[start submodule init]"
