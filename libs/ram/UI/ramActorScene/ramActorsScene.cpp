@@ -42,7 +42,7 @@ void ramActorsScene::setup()
 {
 	/// font setting to draw "RECORDING" on screen right top
 	fontSize = 30;
-	font.loadFont(ramToResourcePath("Fonts/NewMedia Fett.ttf"), fontSize, true, true);
+	font.loadFont(ramToResourcePath("Fonts/FreeUniversal-Regular.ttf"), fontSize, true, true);
 	font.setLineHeight(fontSize*1.4f);
 	font.setLetterSpacing(1.0);
 	
