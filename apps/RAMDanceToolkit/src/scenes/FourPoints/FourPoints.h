@@ -3,7 +3,7 @@
 #include "ramMain.h"
 
 #include "SphereMesh.h"
-#include "GeometryHelpers.h"
+#include "ramGeometry.h"
 
 class FourPoints : public ramBaseScene
 {

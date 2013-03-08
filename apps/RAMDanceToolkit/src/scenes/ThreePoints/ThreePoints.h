@@ -3,7 +3,7 @@
 #include "ramMain.h"
 
 #include "SphereMesh.h"
-#include "GeometryHelpers.h"
+#include "ramGeometry.h"
 
 static const ofColor cyanPrint = ofColor::fromHex(0x00abec);
 static const ofColor magentaPrint = ofColor::fromHex(0xec008c);
