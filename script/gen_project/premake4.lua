@@ -58,6 +58,10 @@ public:
 	// ------------------------
 	void drawActor(const ramActor &actor);
 	void drawRigid(const ramRigidBody &rigid);
+	void onActorSetup(const ramActor &actor);
+	void onActorExit(const ramActor &actor);
+	void onRigidSetup(const ramRigidBody &rigid);
+	void onRigidExit(const ramRigidBody &rigid);
 };
 ]]
 
@@ -101,7 +105,29 @@ void testApp::drawRigid(const ramRigidBody &rigid)
 }
 
 
-#pragma mark - oF Events
+#pragma mark - ram Events
+//--------------------------------------------------------------
+void testApp::onActorSetup(const ramActor &actor)
+{
+}
+
+//--------------------------------------------------------------
+void testApp::onActorExit(const ramActor &actor)
+{
+}
+
+//--------------------------------------------------------------
+void testApp::onRigidSetup(const ramRigidBody &rigid)
+{
+}
+
+//--------------------------------------------------------------
+void testApp::onRigidExit(const ramRigidBody &rigid)
+{
+}
+
+
+#pragma mark - of Events
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
