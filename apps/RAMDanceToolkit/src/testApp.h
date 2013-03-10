@@ -27,4 +27,8 @@ public:
 	// ------------------------
 	void drawActor(const ramActor &actor);
 	void drawRigid(const ramRigidBody &rigid);
+	void onActorSetup(const ramActor &actor);
+	void onActorExit(const ramActor &actor);
+	void onRigidSetup(const ramRigidBody &rigid);
+	void onRigidExit(const ramRigidBody &rigid);
 };

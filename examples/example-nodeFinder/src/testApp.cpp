@@ -79,9 +79,33 @@ void testApp::drawRigid(const ramRigidBody &rigid)
 }
 
 
+#pragma mark - ram Events
+//--------------------------------------------------------------
+void testApp::onActorSetup(const ramActor &actor)
+{
+	
+}
+
+//--------------------------------------------------------------
+void testApp::onActorExit(const ramActor &actor)
+{
+	
+}
+
+//--------------------------------------------------------------
+void testApp::onRigidSetup(const ramRigidBody &rigid)
+{
+	
+}
+
+//--------------------------------------------------------------
+void testApp::onRigidExit(const ramRigidBody &rigid)
+{
+	
+}
 
 
-#pragma mark - oF Events
+#pragma mark - of Events
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
