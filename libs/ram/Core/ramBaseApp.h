@@ -14,12 +14,6 @@ public:
 	ramBaseApp() : draw_floor_auto(true) { ramEnableAllEvents(); };
 	virtual ~ramBaseApp() {};
 
-	virtual void drawActor(const ramActor &actor) {}
-	virtual void drawRigid(const ramRigidBody &rigid) {}
-
-	void drawFloor();
-	void setDrawFloorAuto(bool v = true) { draw_floor_auto = v; }
-
 	// events
 	void ramEnableAllEvents()
 	{
@@ -43,6 +37,9 @@ public:
 		ofRemoveListener(ramActorManager::instance().rigidSetup, this, &ramBaseApp::rigidSetup);
 		ofRemoveListener(ramActorManager::instance().rigidExit, this, &ramBaseApp::rigidExit);
 	}
+	
+	virtual void drawActor(const ramActor &actor) {}
+	virtual void drawRigid(const ramRigidBody &rigid) {}
 
 	// nodeArray events
 	virtual void onActorSetup(const ramActor &actor) {}
@@ -53,7 +50,9 @@ public:
 
 	// physics event
 	virtual void collision(const ramNode& jointA, const ramNode& jointB) {}
-
+	
+	void drawFloor();
+	void setDrawFloorAuto(bool v = true) { draw_floor_auto = v; }
 	void updateWithOscMessage(const ofxOscMessage &m) { getActorManager().updateWithOscMessage(m); }
 
 private:

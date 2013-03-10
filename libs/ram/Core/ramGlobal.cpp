@@ -35,18 +35,10 @@ void ramInitialize(int oscPort)
 
 	inited = true;
 
-	// !!!:
-	ofLogWarning("ramInitialize(10000) in ramSharedData.cpp: ofSetLogLevel(OF_LOG_SILENT) will be deleted when Fonts probrem in ofxUI is fixed.");
-	ofLogWarning("see addons/ofxUI.patch");
-	// to apply `$ patch -p0 < ../ofxUI.patch` at ofxUI directory
-
 	ram_simple_shadow.setup();
-	
 	ramActorManager::instance().setup();
 	ramActorManager::instance().setupOscReceiver(oscPort);
-
 	ramSceneManager::instance().setup();
-	
 	ramPhysics::instance();
 	ramGetGUI().setup();
 }
