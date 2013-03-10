@@ -15,23 +15,55 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-}
+	
+}	
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
+	
 }
+
 
 #pragma mark - ram methods
 //--------------------------------------------------------------
 void testApp::drawActor(const ramActor &actor)
 {
+	
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(const ramRigidBody &rigid)
 {
+	
 }
+
+
+#pragma mark - ram Events
+//--------------------------------------------------------------
+void testApp::onActorSetup(const ramActor &actor)
+{
+	
+}
+
+//--------------------------------------------------------------
+void testApp::onActorExit(const ramActor &actor)
+{
+	
+}
+
+//--------------------------------------------------------------
+void testApp::onRigidSetup(const ramRigidBody &rigid)
+{
+	
+}
+
+//--------------------------------------------------------------
+void testApp::onRigidExit(const ramRigidBody &rigid)
+{
+	
+}
+
 
 #pragma mark - oF Events
 //--------------------------------------------------------------
