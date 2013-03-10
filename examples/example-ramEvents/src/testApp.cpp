@@ -1,5 +1,6 @@
 #include "testApp.h"
 
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -10,18 +11,64 @@ void testApp::setup()
 	/// ram setup
 	// ------------------
 	ramInitialize(10000);
+	
+	
+	/// collision event
+	
+	float size = 100.0;
+
+	// create shape which has collision detection
+	primitive = new ramBoxPrimitive(size);
+	// primitive = new ramSpherePrimitive(size);
+	// primitive = new ramPyramidPrimitive(size);
+	
+	// set some variables
+	primitive->setPosition(ofVec3f(0.0, size, 0.0));
+	primitive->setOrientation(ofVec3f(0.0, 1.0, 0.0));
+	primitive->updatePhysicsTransform();
+	primitive->getRigidBody().setStatic(true);
+	
+	// register primitive to event as observed object
+	collision.setPrimitive(primitive);
+	
+	// set trigger timing
+	collision.setTrigger(RAM_TRIGGER_BOTH);
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
 	
-}	
+	if (timer.update())
+	{
+		// change box size if timer is fired
+		size = ofRandom(1, 50);
+	}
+	
+	if (randomTimer.update())
+	{
+		// change box size if randome timer is fired
+		jointColor = ofColor(ofRandom(20, 240), ofRandom(20, 240), ofRandom(20, 240));
+	}
+	
+	if (collision.update())
+	{
+		// change box color if actor drawn with ramBox touches primitive
+		if (collision.getState())
+			primitiveColor = ofColor(255);
+		else
+			primitiveColor = ofColor(100);
+	}
+}
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	
+	ramBeginCamera();
+	ofNoFill();
+	ofSetColor(primitiveColor);
+	primitive->draw();
+	ramEndCamera();
 }
 
 
@@ -29,7 +76,17 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(const ramActor &actor)
 {
-	
+	ofSetColor(jointColor);
+	for(int i=0; i<actor.getNumNode(); i++)
+	{
+		const ramNode& node = actor.getNode(i);
+		
+		ofNoFill();
+		
+		// note that ofBox doesn't have collision detection.
+		// use ramBox, ramSphere, ramPrimitive insted of general oF methods
+		ramBox(node, size);
+	}
 }
 
 //--------------------------------------------------------------

@@ -31,4 +31,18 @@ public:
 	void onActorExit(const ramActor &actor);
 	void onRigidSetup(const ramRigidBody &rigid);
 	void onRigidExit(const ramRigidBody &rigid);
+	
+	// used for size change
+	ramScheduledTimerEvent timer;
+	
+	// used for color change
+	ramRandomTimerEvent randomTimer;
+	
+	// used for background color change
+	ramCollisionEvent collision;
+	ramPrimitive *primitive;
+	
+	float size;
+	ofColor jointColor;
+	ofColor primitiveColor;
 };
