@@ -74,7 +74,6 @@
 		2776072216E4EB2700D6B31D /* ramNodeArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 277606DA16E4EB2700D6B31D /* ramNodeArrayBuffer.h */; };
 		2776072316E4EB2700D6B31D /* ramNodeFinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 277606DB16E4EB2700D6B31D /* ramNodeFinder.h */; };
 		2776072416E4EB2700D6B31D /* ramNodeIdentifer.h in Headers */ = {isa = PBXBuildFile; fileRef = 277606DC16E4EB2700D6B31D /* ramNodeIdentifer.h */; };
-		2776072516E4EB2700D6B31D /* ramTimeShifter.h in Headers */ = {isa = PBXBuildFile; fileRef = 277606DD16E4EB2700D6B31D /* ramTimeShifter.h */; };
 		2776072616E4EB2700D6B31D /* ramTSVCoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 277606DE16E4EB2700D6B31D /* ramTSVCoder.h */; };
 		2776072716E4EB2700D6B31D /* ramUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 277606DF16E4EB2700D6B31D /* ramUtils.cpp */; };
 		2776072816E4EB2700D6B31D /* ramUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 277606E016E4EB2700D6B31D /* ramUtils.h */; };
@@ -556,7 +555,6 @@
 		277606DA16E4EB2700D6B31D /* ramNodeArrayBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeArrayBuffer.h; sourceTree = "<group>"; };
 		277606DB16E4EB2700D6B31D /* ramNodeFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeFinder.h; sourceTree = "<group>"; };
 		277606DC16E4EB2700D6B31D /* ramNodeIdentifer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeIdentifer.h; sourceTree = "<group>"; };
-		277606DD16E4EB2700D6B31D /* ramTimeShifter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramTimeShifter.h; sourceTree = "<group>"; };
 		277606DE16E4EB2700D6B31D /* ramTSVCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramTSVCoder.h; sourceTree = "<group>"; };
 		277606DF16E4EB2700D6B31D /* ramUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramUtils.cpp; sourceTree = "<group>"; };
 		277606E016E4EB2700D6B31D /* ramUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramUtils.h; sourceTree = "<group>"; };
@@ -1135,7 +1133,6 @@
 				277606DA16E4EB2700D6B31D /* ramNodeArrayBuffer.h */,
 				277606DB16E4EB2700D6B31D /* ramNodeFinder.h */,
 				277606DC16E4EB2700D6B31D /* ramNodeIdentifer.h */,
-				277606DD16E4EB2700D6B31D /* ramTimeShifter.h */,
 				277606DE16E4EB2700D6B31D /* ramTSVCoder.h */,
 				9A21607816E4FFEF00EC81F4 /* ramTSVCoder.cpp */,
 				277606DF16E4EB2700D6B31D /* ramUtils.cpp */,
@@ -2324,7 +2321,6 @@
 				2776072216E4EB2700D6B31D /* ramNodeArrayBuffer.h in Headers */,
 				2776072316E4EB2700D6B31D /* ramNodeFinder.h in Headers */,
 				2776072416E4EB2700D6B31D /* ramNodeIdentifer.h in Headers */,
-				2776072516E4EB2700D6B31D /* ramTimeShifter.h in Headers */,
 				2776072616E4EB2700D6B31D /* ramTSVCoder.h in Headers */,
 				2776072816E4EB2700D6B31D /* ramUtils.h in Headers */,
 				9A21608316E5114B00EC81F4 /* ramPlaybackTab.h in Headers */,
