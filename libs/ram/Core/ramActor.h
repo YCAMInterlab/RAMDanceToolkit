@@ -76,8 +76,8 @@ public:
 
 	inline ramAccelerometer& getAccelerometer() { return accelerometer; }
 
-	void drawNodeId(int floatPos = 20);
-	void drawNodeName(int floatPos = 20);
+	void drawNodeId(int floatPos = 20) const;
+	void drawNodeName(int floatPos = 20) const;
 
 	// utils
 	inline void beginTransform() const { transformGL(); }

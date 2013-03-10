@@ -14,14 +14,14 @@ ramNode& ramNode::operator=(const ramNode& copy)
 	return *this;
 }
 
-void ramNode::drawNodeId(int floatPos)
+void ramNode::drawNodeId(int floatPos) const
 {
 	ofVec3f pos = getGlobalPosition();
 	pos.y += floatPos;
 	ofDrawBitmapString(ofToString(getID()), pos);
 }
 
-void ramNode::drawNodeName(int floatPos)
+void ramNode::drawNodeName(int floatPos) const
 {
 	ofVec3f pos = getGlobalPosition();
 	pos.y += floatPos;

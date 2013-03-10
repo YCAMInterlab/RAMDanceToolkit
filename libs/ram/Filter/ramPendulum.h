@@ -12,7 +12,16 @@ class ramPendulum : public ramBaseFilter
 
 public:
 
-	ramPendulum() : mFreq(30.0), axis_x(0), axis_y(1), axis_z(0) {}
+	ramPendulum() : mFreq(30.0), axis_x(0), axis_y(1), axis_z(0)
+	{
+		randoms.clear();
+		
+		for (int i = 0; i < ramActor::NUM_JOINTS; i++)
+			randoms.push_back(ofRandom(1.0, 5.0));
+		
+		periods.clear();
+		periods.assign(ramActor::NUM_JOINTS, float());
+	}
 
 	void setupControlPanel()
 	{
@@ -25,17 +34,6 @@ public:
 		ramGetGUI().addToggle("Pendulum axis: X", &axis_x);
 		ramGetGUI().addToggle("Pendulum axis: Y", &axis_y);
 		ramGetGUI().addToggle("Pendulum axis: Z", &axis_z);
-	}
-
-	void setup()
-	{
-		randoms.clear();
-
-		for (int i = 0; i < ramActor::NUM_JOINTS; i++)
-			randoms.push_back(ofRandom(1.0, 5.0));
-
-		periods.clear();
-		periods.assign(ramActor::NUM_JOINTS, float());
 	}
 
 	const ramNodeArray& filter(const ramNodeArray &nodeArray)
@@ -61,7 +59,6 @@ public:
 		return processedArray;
 	}
 
-	inline const ramNodeArray& getResult() { return processedArray; }
 	inline string getName() const { return "ramPendulum"; };
 
 protected:

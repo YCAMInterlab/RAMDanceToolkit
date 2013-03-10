@@ -7,6 +7,8 @@ const ramNodeArray& ramBaseFilter::operator()(const ramNodeArray& src)
 
 const ramNodeArray& ramBaseFilter::update(const ramNodeArray& src)
 {
+	if (!isEnabled()) return src;
+	
 	if (cache.getNumNode() != src.getNumNode())
 		cache = src;
 	
