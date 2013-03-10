@@ -147,7 +147,8 @@ public:
 	virtual void draw()
 	{
 		glPushMatrix();
-
+		ofPushStyle();
+		
 		ofTranslate(center_pos);
 		ramBillboard();
 
@@ -160,7 +161,8 @@ public:
 		ofSetColor(c, c.a * 0.5);
 		ofNoFill();
 		ofCircle(0, 0, threshold * 10);
-
+		
+		ofPopStyle();
 		glPopMatrix();
 	}
 
@@ -235,6 +237,7 @@ public:
 		ramMovementAnalyser::draw();
 
 		glPushMatrix();
+		ofPushStyle();
 
 		ofTranslate(center_pos);
 		ramBillboard();
@@ -244,7 +247,8 @@ public:
 		ofSetColor(c, c.a * 0.5);
 		ofFill();
 		ofCircle(0, 0, 10 * getThreshold() * timer.getProgress());
-
+		
+		ofPopStyle();
 		glPopMatrix();
 	}
 
