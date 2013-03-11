@@ -47,7 +47,7 @@ void testApp::draw()
 		if (sess.isPlaying())
 		{
 			ramBeginCamera();
-			ramActor &actor = (ramActor &)sess.get();
+			const ramActor &actor = sess.get();
 			ramDrawBasicActor(actor);
 			ramEndCamera();
 		}
@@ -59,7 +59,7 @@ void testApp::draw()
 	if (session.isPlaying())
 	{
 		ramBeginCamera();
-		ramActor &actor = (ramActor &)session.getCurrentFrame();
+		const ramActor &actor = session.getCurrentFrame();
 		ramDrawBasicActor(actor);
 		ramEndCamera();
 	}

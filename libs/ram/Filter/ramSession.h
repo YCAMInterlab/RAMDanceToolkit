@@ -54,9 +54,9 @@ public:
 	
 #pragma mark -
 #pragma mark getters, setters
-	const int getFrameIndex() const;
+	const int getCurrentFrameIndex() const;
 	const int getNumFrames() const;
-	const float getFrameTime() const;
+	const float getAverageFrameTime() const;
 	const float getDuration() const;
 	const float getPlayhead() const;
 	const string getNodeArrayName() const;
@@ -83,7 +83,6 @@ protected:
 	bool mPlaying;
 	
 	float mPlayhead;
-	float mPlayStartTime;
 	float mRecStartTime;
 	float mRecEndTime;
 };

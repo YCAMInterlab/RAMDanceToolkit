@@ -8,11 +8,23 @@ public:
 
 	ramNodeArrayBuffer() : capacity(100000) {}
 
-	void add(const ramNodeArray& arr)
+	inline void add(const ramNodeArray& arr)
+	{
+		prepend(arr);
+	}
+	
+	void prepend(const ramNodeArray& arr)
 	{
 		buffer.push_front(arr);
 		if (buffer.size() > capacity)
 			buffer.pop_back();
+	}
+
+	void append(const ramNodeArray& arr)
+	{
+		buffer.push_back(arr);
+		if (buffer.size() > capacity)
+			buffer.pop_front();
 	}
 
 	void clear()
@@ -35,14 +47,12 @@ public:
 	ramNodeArray& get(size_t index)
 	{
 		if (index >= buffer.size()) return buffer.back();
-
 		return buffer[index];
 	}
 
 	const ramNodeArray& get(size_t index) const
 	{
 		if (index >= buffer.size()) return buffer.back();
-
 		return buffer[index];
 	}
 

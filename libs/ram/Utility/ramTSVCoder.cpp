@@ -13,11 +13,9 @@ void ramTSVCoder::decode(ofBuffer buffer)
 			string frame = buffer.getNextLine();
 			vector<string> values = ofSplitString(frame, "\t");
 			
-			
 			if (values.size() < 2)
 				throw std::exception();
 				
-			
 			const string addr = values.at(0);
 			const string name = values.at(1);
 			
@@ -43,11 +41,9 @@ void ramTSVCoder::decode(ofBuffer buffer)
 			
 			for (int i=0; i<numNodes; i++)
 			{
-				
 				if (values.size() < i*8+3+7)
 					throw std::exception();
 					
-				
 				const string nodeName = values.at(i*8 + 0 + 3);
 				const float vx = ofToFloat( values.at(i*8 + 1 + 3) );
 				const float vy = ofToFloat( values.at(i*8 + 2 + 3) );
@@ -65,8 +61,8 @@ void ramTSVCoder::decode(ofBuffer buffer)
 				ramNode &node = NA.getNode(i);
 				node.setID(i);
 				node.setName(nodeName);
-				node.setGlobalPosition(vec);
-				node.setGlobalOrientation(quat);
+				node.setPosition(vec);
+				node.setOrientation(quat);
 				node.getAccelerometer().update(vec, quat);
 			}
 			
