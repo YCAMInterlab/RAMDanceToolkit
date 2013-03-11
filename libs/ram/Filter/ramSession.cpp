@@ -77,7 +77,7 @@ const ramNodeArray& ramSession::filter(const ramNodeArray &src)
 	if (isPlaying())
 	{
 		updatePlayhead();
-		return mBuffer.get(getFrameIndex());
+		return getCurrentFrame();
 	}
 	
 	return src;
@@ -124,7 +124,6 @@ void ramSession::play()
 
 	mRecording = false;
 	mPlaying = true;
-	mPlayStartTime = ofGetElapsedTimef();
 	
 	cout << "start playing " << getNodeArrayName() << "." << endl;
 }
@@ -146,15 +145,25 @@ void ramSession::updatePlayhead()
 {
 	if (!isPlaying()) return;
 	
-	mPlayhead = (ofGetElapsedTimef() - mPlayStartTime) * mRate;
+	mPlayhead += ofGetLastFrameTime() * mRate;
 	
-	if (getFrameIndex() <= 0)
+	bool wrapped = false;
+	
+	while (mPlayhead > 1)
 	{
-		if (isLoop())
-		{
-			mPlayStartTime = ofGetElapsedTimef();
-		}
-		else
+		mPlayhead -= 1;
+		wrapped = true;
+	}
+	
+	while (mPlayhead < 0)
+	{
+		mPlayhead += 1;
+		wrapped = true;
+	}
+	
+	if (wrapped)
+	{
+		if (!isLoop())
 		{
 			stop();
 		}
@@ -169,7 +178,6 @@ void ramSession::clear()
 	mBuffer.clear();
 	
 	mPlayhead = 0;
-	mPlayStartTime = 0;
 	mRecStartTime = 0;
 	mRecEndTime = 0;
 	
@@ -181,19 +189,17 @@ void ramSession::clear()
 
 void ramSession::appendFrame(const ramNodeArray copy)
 {
-	mBuffer.add(copy);
+	mBuffer.append(copy);
 }
 
 const ramNodeArray& ramSession::getFrame(int index) const
 {
-	if (index > getNumFrames()) index = getNumFrames();
-	return mBuffer.get(getNumFrames() - index);
+	return mBuffer.get(index);
 }
 
 const ramNodeArray& ramSession::getCurrentFrame() const
 {
-//	cout << "getFrameIndex():" << getFrameIndex() << "/" << getNumFrames() << endl;
-	return mBuffer.get(getFrameIndex());
+	return getFrame(getCurrentFrameIndex());
 }
 
 
@@ -214,20 +220,9 @@ const float ramSession::getPlayhead() const
 	return mPlayhead;
 }
 
-const int ramSession::getFrameIndex() const
+const int ramSession::getCurrentFrameIndex() const
 {
-	const ramNodeArray &frontFrame = mBuffer.get( 0 );
-	const ramNodeArray &backFrame = mBuffer.get( getNumFrames() );
-	
-	cout
-	<< "frameIndex:" << getNumFrames() - floor(mPlayhead / getFrameTime()) 
-	<< " getNumFrames():" << mBuffer.getSize()
-	<< " mPlayhead:" << mPlayhead
-	<< " frontFrame.getTimestamp():" << frontFrame.getTimestamp()
-	<< " backFrame.getTimestamp():" << backFrame.getTimestamp()
-	<< endl;
-	
-	return getNumFrames() - floor(mPlayhead / getFrameTime());
+	return mPlayhead * (getNumFrames() - 1);
 }
 
 const int ramSession::getNumFrames() const
@@ -235,7 +230,7 @@ const int ramSession::getNumFrames() const
 	return mBuffer.getSize();
 }
 
-const float ramSession::getFrameTime() const
+const float ramSession::getAverageFrameTime() const
 {
 	return getDuration() / getNumFrames();
 }
@@ -253,7 +248,6 @@ const float ramSession::getDuration() const
 const string ramSession::getNodeArrayName() const
 {
 	assert(getNumFrames() > 0);
-	
 	return getNumFrames() > 0 ? mBuffer.get(0).getName() : "no name";
 }
 

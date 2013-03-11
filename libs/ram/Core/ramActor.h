@@ -54,6 +54,8 @@ private:
 class ramNode : public ofxNodeArray::Node<ramNode>
 {
 	friend class ramNodeArray;
+	friend class ramActor;
+	friend class ramRigidBody;
 
 public:
 
