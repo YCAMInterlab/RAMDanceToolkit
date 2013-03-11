@@ -115,6 +115,11 @@ ramActor::ramActor()
 	type = RAM_NODEARRAY_TYPE_ACTOR;
 	
 	nodes.resize(NUM_JOINTS);
+	for (int i = 0; i < nodes.size(); i++)
+	{
+		nodes[i].node_id = i;
+	}
+	
 	setupTree();
 }
 
