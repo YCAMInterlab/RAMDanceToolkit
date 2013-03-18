@@ -35,7 +35,7 @@ public:
 		
 		bool active;
 		int id;
-
+        
 		void setupControlPanel()
 		{
 			
@@ -46,7 +46,7 @@ public:
 			line_width = 2;
 			
 			active = false;
-			panel->addToggle("Line " + ofToString(id), &active, 15, 15, 0, 0);
+			panel->addToggle("Line " + ofToString(id), &active, 30, 30, 0, 0);
 			
 			panel->addButton("From", &set_from, 10, 10, 0, 0);
 			panel->addButton("Control0", &set_control0, 10, 10, 0, 80);
@@ -184,7 +184,6 @@ public:
 	
 	void setupControlPanel()
 	{
-		
 		random_change_time = 60;
 		ramGetGUI().addSlider("random_change_time", 0.1, 60, &random_change_time);
 		last_changed_time = ofGetElapsedTimef();
@@ -194,12 +193,12 @@ public:
 			lines[i].id = i;
 			lines[i].setupControlPanel();
 		}
-		
-		lines[0].active = true;
+        
 	}
 	
 	void setup()
 	{
+//        loadXML();
 		ofAddListener(ofEvents().keyPressed, this, &LineDrawing::onKeyPressed);
 	}
 	
@@ -211,11 +210,6 @@ public:
 			{
 				lines[i].randomize();
 			}
-		}
-		
-		if (e.key == 'l')
-		{
-			loadXML();
 		}
 	}
 	
@@ -286,12 +280,11 @@ public:
 			);
 	
 			#undef _S
-
+            
 			ofBuffer buf(default_xml);
 			ofBufferToFile(fileName, buf);
 		}
 		
-		ofxXmlSettings XML;
 		XML.loadFile(fileName);
 		
 		int n = XML.getNumTags("line");
@@ -320,8 +313,8 @@ public:
 			/// spiral
 			const float radius		= XML.getValue("param:radius", 10);
 			const float num_rotate	= XML.getValue("param:num_rotate", 10);
-			const float noise		= XML.getValue("param:scale", 1);
-			const float freq		= XML.getValue("param:freq", 10);
+			const float noise		= XML.getValue("param:scale", 0);
+			const float freq		= XML.getValue("param:freq", 0);
 			
 			/// extend length
 			const float ex_from		= XML.getValue("param:extend_from", 10);
@@ -329,7 +322,9 @@ public:
 			
 			/// line styling
 			const float line_width = XML.getValue("param:line_width", 2);
-			const float color		= XML.getValue("param:color", 1.0);
+			const float colorR		= XML.getValue("param:color:r", 0.5);
+			const float colorG		= XML.getValue("param:color:g", 0.5);
+			const float colorB		= XML.getValue("param:color:b", 0.5);
 			
 			
 			LineContext &line = lines[i];
@@ -346,10 +341,15 @@ public:
 			line.extend_from = ex_from;
 			line.extend_to = ex_to;
 			line.line_width = line_width;
-			line.color = color;
+			line.color.r = colorR;
+			line.color.g = colorG;
+			line.color.b = colorB;
 			
 			XML.popTag();
 		}
 	}
+    
+private:
+    ofxXmlSettings XML;
 };
 
