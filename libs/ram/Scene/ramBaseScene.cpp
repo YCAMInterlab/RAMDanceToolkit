@@ -13,6 +13,7 @@ void ramBaseScene::draw() {}
 void ramBaseScene::drawActor(const ramActor &actor) {}
 void ramBaseScene::drawRigid(const ramRigidBody &rigid) {}
 void ramBaseScene::drawHUD() {}
+void ramBaseScene::exit() {}
 
 
 // nodeArray events

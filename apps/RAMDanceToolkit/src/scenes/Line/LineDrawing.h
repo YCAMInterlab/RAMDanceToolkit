@@ -251,6 +251,11 @@ public:
 		
 		ramEndCamera();
 	}
+    
+    void exit()
+    {
+        
+    }
 
 	void loadXML()
 	{

@@ -34,6 +34,7 @@ protected:
 	
 	void update(ofEventArgs& args);
 	void draw(ofEventArgs& args);
+	void exit(ofEventArgs& args);
 	
 private:
 	

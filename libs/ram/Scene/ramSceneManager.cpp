@@ -26,6 +26,7 @@ void ramSceneManager::setup()
 	
 	ofAddListener(ofEvents().update, this, &ramSceneManager::update);
 	ofAddListener(ofEvents().draw, this, &ramSceneManager::draw);
+	ofAddListener(ofEvents().exit, this, &ramSceneManager::exit);
 	
 	// memory leak on exit
 	actorsScene = new ramActorsScene();
@@ -187,6 +188,17 @@ void ramSceneManager::draw(ofEventArgs& args)
 	ofPopStyle();
 	glPopMatrix();
 	glPopAttrib();
+}
+
+void ramSceneManager::exit(ofEventArgs& args)
+{
+	for (int i = 0; i < scenes.size(); i++)
+	{
+		if (i >= scenes.size()) break;
+        
+		ramBaseScene *scene = scenes.at(i);
+        scene->exit();
+	}
 }
 
 void ramSceneManager::enableAllEvents()

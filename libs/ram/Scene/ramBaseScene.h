@@ -17,6 +17,7 @@ public:
 	virtual void update();
 	virtual void draw();
 	virtual void drawHUD();
+	virtual void exit();
 	
 	virtual void drawActor(const ramActor &actor);
 	virtual void drawRigid(const ramRigidBody &rigid);
