@@ -99,6 +99,7 @@ public:
     string getName() const { return "Chain"; }
     
 private:
+	void onKeyPressed(ofKeyEventArgs &e);
     void onValueChanged(ofxUIEventArgs& e);
     
     ChainBtDynamics mChainBtDynamics;
