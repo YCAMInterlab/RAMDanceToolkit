@@ -12,7 +12,7 @@ protected:
 public:
 	ramPreferencesTab()
 	:ofxUITab("Preferences", false)
-	,fullscreen(true)
+	,fullscreen(false)
 	,useShadows(true)
 	,floorStyle(ramFloor::FLOOR_GRID_LINES)
 	,floorSize(600.0)
