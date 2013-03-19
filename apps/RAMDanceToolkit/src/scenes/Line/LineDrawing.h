@@ -184,6 +184,10 @@ public:
 	
 	void setupControlPanel()
 	{
+		ramGetGUI().getCurrentUIContext()->addLabelButton("Load Line Settings", false, ramGetGUI().kLength);
+		ramGetGUI().getCurrentUIContext()->addLabelButton("Save Line Settings", false, ramGetGUI().kLength);
+        ramGetGUI().getCurrentUIContext()->addSpacer(ramGetGUI().kLength, 2);
+        
 		random_change_time = 60;
         ramGetGUI().addButton("Randomize");
 		ramGetGUI().addSlider("Auto Random change time", 0.0, 60, &random_change_time);
@@ -203,16 +207,7 @@ public:
 	void setup()
 	{
         loadXML();
-        ofAddListener(ofEvents().keyPressed, this, &LineDrawing::keyPressed);
 	}
-    
-    void keyPressed(ofKeyEventArgs &e)
-    {
-        if (e.key == 'l')
-        {
-            loadXML();
-        }
-    }
     
     void onValueChanged(ofxUIEventArgs &e)
     {
@@ -222,7 +217,31 @@ public:
         {
             ofxUIButton *button = (ofxUIButton *)e.widget;
             if (button->getValue())
+            {
                 for (int i = 0; i < NUM_LINE; i++) lines[i].randomize();
+            }
+        }
+        
+        if (name == "Load Line Settings")
+        {
+            ofxUIButton *button = (ofxUIButton *)e.widget;
+            if (button->getValue())
+            {
+                ofFileDialogResult result = ofSystemLoadDialog("Load Line Settings.", false, "Lines.xml");
+                if (result.bSuccess)
+                    loadXML(result.getPath());
+            }
+        }
+        
+        if (name == "Save Line Settings")
+        {
+            ofxUIButton *button = (ofxUIButton *)e.widget;
+            if (button->getValue())
+            {
+                ofFileDialogResult result = ofSystemSaveDialog("Lines.xml", "Save Line Settings.");
+                if (result.bSuccess)
+                    saveXML(result.getPath());
+            }
         }
         
         saveXML();
@@ -268,9 +287,8 @@ public:
         
     }
     
-	void saveXML()
+	void saveXML(string fileName = "Lines.xml")
     {
-		string fileName = "Lines.xml";
         
         XML.clear();
         
@@ -311,17 +329,15 @@ public:
                 XML.setValue("param:color:g", line.color.g);
                 XML.setValue("param:color:b", line.color.b);
                 
+                XML.setValue("param:active", line.active);
             }
             XML.popTag();
             XML.saveFile(fileName);
         }
     }
     
-	void loadXML()
+	void loadXML(string fileName = "Lines.xml")
 	{
-		string fileName = "Lines.xml";
-		
-
 		if (!ofFile::doesFileExist(fileName))
 		{
 			#define _S(src) #src
@@ -391,10 +407,12 @@ public:
 			const float colorR		= XML.getValue("param:color:r", 0.5);
 			const float colorG		= XML.getValue("param:color:g", 0.5);
 			const float colorB		= XML.getValue("param:color:b", 0.5);
+            
+			const bool active		= XML.getValue("param:active", 1);
 			
 			
 			LineContext &line = lines[i];
-			line.active = true;
+			line.active = active;
 			line.nodeLine.from = ramNodeIdentifer(from_name, from_id);
 			line.nodeLine.control0 = ramNodeIdentifer(cp0_name, cp0_id);
 			line.nodeLine.control1 = ramNodeIdentifer(cp1_name, cp1_id);
