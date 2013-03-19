@@ -43,12 +43,12 @@ public:
 	
 	
 	
-	void onEnabled()
+	virtual void onEnabled()
 	{
 		cout << "[Unit enabled] " << getName() << endl;
 	}
 	
-	void onDisabled()
+	virtual void onDisabled()
 	{
 		cout << "[Unit disabled] " << getName() << endl;
 	}
