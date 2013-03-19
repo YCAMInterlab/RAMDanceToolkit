@@ -185,7 +185,10 @@ public:
 	void setupControlPanel()
 	{
 		random_change_time = 60;
-		ramGetGUI().addSlider("random_change_time", 0.1, 60, &random_change_time);
+        ramGetGUI().addButton("Randomize");
+		ramGetGUI().addSlider("Auto Random change time", 0.0, 60, &random_change_time);
+        ramGetGUI().getCurrentUIContext()->addSpacer();
+        
 		last_changed_time = ofGetElapsedTimef();
 		
 		for (int i = 0; i < NUM_LINE; i++)
@@ -194,29 +197,32 @@ public:
 			lines[i].setupControlPanel();
 		}
         
+        ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &LineDrawing::onValueChanged);
 	}
 	
 	void setup()
 	{
-//        loadXML();
-		ofAddListener(ofEvents().keyPressed, this, &LineDrawing::onKeyPressed);
+        loadXML();
 	}
-	
-	void onKeyPressed(ofKeyEventArgs &e)
-	{
-		if (e.key == 'r')
-		{
-			for (int i = 0; i < NUM_LINE; i++)
-			{
-				lines[i].randomize();
-			}
-		}
-	}
+    
+    void onValueChanged(ofxUIEventArgs &e)
+    {
+        const string name = e.widget->getName();
+        
+        if (name == "Randomize")
+        {
+            ofxUIButton *button = (ofxUIButton *)e.widget;
+            if (button->getValue())
+                for (int i = 0; i < NUM_LINE; i++) lines[i].randomize();
+        }
+    }
 	
 	void update()
 	{
+        
 		if (random_change_time < 60
-			&& ofGetElapsedTimef() - last_changed_time > random_change_time)
+			&& ofGetElapsedTimef() - last_changed_time > random_change_time
+            && random_change_time != 0.0)
 		{
 			last_changed_time = ofGetElapsedTimef();
 			
