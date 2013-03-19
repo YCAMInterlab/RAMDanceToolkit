@@ -32,6 +32,7 @@ public:
 		ofFloatColor color;
 		
 		ramNodeLine nodeLine;
+        ofxUIToggle *toggle;
 		
 		bool active;
 		int id;
@@ -46,7 +47,8 @@ public:
 			line_width = 2;
 			
 			active = false;
-			panel->addToggle("Line " + ofToString(id), &active, 30, 30, 0, 0);
+            toggle = new ofxUIToggle("Line " + ofToString(id), &active, 30, 30, 0, 0);
+			panel->addWidgetDown(toggle);
 			
 			panel->addButton("From", &set_from, 10, 10, 0, 0);
 			panel->addButton("Control0", &set_control0, 10, 10, 0, 80);
@@ -230,6 +232,19 @@ public:
                 ofFileDialogResult result = ofSystemLoadDialog("Load Line Settings.", false, "Lines.xml");
                 if (result.bSuccess)
                     loadXML(result.getPath());
+                
+                for (int i=0; i<NUM_LINE; i++)
+                {
+                    bool active;
+                    
+                    LineContext &line = lines[i];
+                    XML.pushTag("line", i);
+                    active = XML.getValue("active", true);
+                    XML.popTag();
+                    
+                    line.toggle->setValue(active);
+                    line.toggle->stateChange();
+                }
             }
         }
         
