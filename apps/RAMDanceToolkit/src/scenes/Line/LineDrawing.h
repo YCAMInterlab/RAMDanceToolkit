@@ -203,7 +203,16 @@ public:
 	void setup()
 	{
         loadXML();
+        ofAddListener(ofEvents().keyPressed, this, &LineDrawing::keyPressed);
 	}
+    
+    void keyPressed(ofKeyEventArgs &e)
+    {
+        if (e.key == 'l')
+        {
+            loadXML();
+        }
+    }
     
     void onValueChanged(ofxUIEventArgs &e)
     {
@@ -215,6 +224,8 @@ public:
             if (button->getValue())
                 for (int i = 0; i < NUM_LINE; i++) lines[i].randomize();
         }
+        
+        saveXML();
     }
 	
 	void update()
@@ -256,7 +267,56 @@ public:
     {
         
     }
-
+    
+	void saveXML()
+    {
+		string fileName = "Lines.xml";
+        
+        XML.clear();
+        
+        for (int i=0; i<NUM_LINE; i++)
+        {
+            LineContext &line = lines[i];
+            
+            XML.addTag("line");
+            XML.pushTag("line", i);
+            {
+                
+                // targets
+                XML.setValue("from:name", line.nodeLine.from.name);
+                XML.setValue("from:id", line.nodeLine.from.index);
+                
+                XML.setValue("control0:name", line.nodeLine.control0.name);
+                XML.setValue("control0:id", line.nodeLine.control0.index);
+                
+                XML.setValue("control1:name", line.nodeLine.control1.name);
+                XML.setValue("control1:id", line.nodeLine.control1.index);
+                
+                XML.setValue("to:name", line.nodeLine.to.name);
+                XML.setValue("to:id", line.nodeLine.to.index);
+                
+                // styling
+                XML.setValue("param:curve", line.curve);
+                
+                XML.setValue("param:radius", line.spiral_radius);
+                XML.setValue("param:num_rotate", line.spiral_num_rotate);
+                XML.setValue("param:scale", line.noise_scale);
+                XML.setValue("param:freq", line.noise_freq);
+                
+                XML.setValue("param:extend_from", line.extend_from);
+                XML.setValue("param:extend_to", line.extend_to);
+                
+                XML.setValue("param:line_width", line.line_width);
+                XML.setValue("param:color:r", line.color.r);
+                XML.setValue("param:color:g", line.color.g);
+                XML.setValue("param:color:b", line.color.b);
+                
+            }
+            XML.popTag();
+            XML.saveFile(fileName);
+        }
+    }
+    
 	void loadXML()
 	{
 		string fileName = "Lines.xml";
