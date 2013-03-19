@@ -40,13 +40,11 @@ public:
 		if ( !ofFile::doesFileExist(filePath) )
 		{
 			cout << filePath << " load failed. No such file or directory." << endl;
-//			return mSession;
 		}
 		
 		ofFile file;
 		file.open(filePath);
 		
-//		return decode(file.readToBuffer());
 		decode(file.readToBuffer());
 	}
 	
@@ -91,7 +89,7 @@ public:
 	// -----------------------------
 	inline void setFileName(const string fileName) { mFileName = fileName; }
 	
-	ramSession& getSession() { return mSession; }
+	ramSession& get() { return mSession; }
 	
 protected:
 	

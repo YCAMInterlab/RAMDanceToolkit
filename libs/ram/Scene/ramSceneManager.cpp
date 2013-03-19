@@ -127,7 +127,28 @@ void ramSceneManager::draw(ofEventArgs& args)
 				glPopMatrix();
 				glPopAttrib();
 			}
+			
+			map<string, ramNodeArray>::iterator it = getActorManager().getAllBus().begin();
 
+			while (it != getActorManager().getAllBus().end())
+			{
+				const ramNodeArray &o = (*it).second;
+				
+				ofPopStyle();
+				glPopMatrix();
+				glPopAttrib();
+				if (o.isActor())
+					scene->drawActor((ramActor &)o);
+				else
+					scene->drawRigid((ramRigidBody &)o);
+				
+				ofPopStyle();
+				glPopMatrix();
+				glPopAttrib();
+				
+				++it;
+			}
+			
 			ramEndCamera();
 
 			ramEndShadow();
@@ -171,6 +192,29 @@ void ramSceneManager::draw(ofEventArgs& args)
 				ofPopStyle();
 				glPopMatrix();
 				glPopAttrib();
+			}
+			
+			
+			map<string, ramNodeArray>::iterator it = getActorManager().getAllBus().begin();
+			
+			while (it != getActorManager().getAllBus().end())
+			{
+				const ramNodeArray &o = (*it).second;
+				
+				glPushAttrib(GL_ALL_ATTRIB_BITS);
+				glPushMatrix();
+				ofPushStyle();
+				
+				if (o.isActor())
+					scene->drawActor((ramActor &)o);
+				else
+					scene->drawRigid((ramRigidBody &)o);
+				
+				
+				ofPopStyle();
+				glPopMatrix();
+				glPopAttrib();
+				++it;
 			}
 
 			ramEndCamera();

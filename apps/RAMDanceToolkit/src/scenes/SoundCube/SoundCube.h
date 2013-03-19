@@ -202,14 +202,16 @@ public:
 
 #undef _S
 		
-		if (!ofFile::doesFileExist("SoundCube.xml"))
+		const string filePath = "SoundCube.xml";
+		
+		if (!ofFile::doesFileExist(filePath))
 		{
 			ofBuffer buf(default_xml);
-			ofBufferToFile("SoundCube.xml", buf);
+			ofBufferToFile(filePath, buf);
 		}
 		
 		ofxXmlSettings xml;
-		xml.loadFile("SoundCube.xml");
+		xml.loadFile(filePath);
 		
 		xml.pushTag("scene");
 		
@@ -277,6 +279,8 @@ public:
 				{
 					o->loadSound(sound, toggle_mode, loop);
 				}
+				
+				cout << type << " loaded." << endl;
 				
 				shapes.push_back(o);
 			}

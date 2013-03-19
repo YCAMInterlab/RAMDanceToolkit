@@ -37,7 +37,6 @@ void ramTSVCoder::decode(ofBuffer buffer)
 			}
 			
 			const int numNodes = ofToInt(values.at(2));
-			cout << "numNodes:" << numNodes << endl;
 			
 			for (int i=0; i<numNodes; i++)
 			{
@@ -56,8 +55,6 @@ void ramTSVCoder::decode(ofBuffer buffer)
 				const ofVec3f axis(ax, ay, az);
 				const ofQuaternion quat(qa, axis);
 				
-				cout << "nodeName:" << nodeName << " nodeName:" << nodeName << " vec:" << vec << endl;
-				
 				ramNode &node = NA.getNode(i);
 				node.setID(i);
 				node.setName(nodeName);
@@ -65,8 +62,6 @@ void ramTSVCoder::decode(ofBuffer buffer)
 				node.setOrientation(quat);
 				node.getAccelerometer().update(vec, quat);
 			}
-			
-			cout << "--" << endl;
 			
 			NA.setTimestamp(ofToFloat( values.at(numNodes*8 + 0 + 3) ));
 			
@@ -94,9 +89,13 @@ const bool ramTSVCoder::encode(const ramSession &src)
 	
 	ofBuffer buf;
 	
-	const string address = src.get().isActor() ? RAM_OSC_ADDR_ACTOR : RAM_OSC_ADDR_RIGID_BODY;
-	const string entityName = src.get().getName();
-	const string numJoints = ofToString( src.get().getNumNode() );
+	const ramNodeArray& sample = src.getFrame(0);
+	
+	
+	const string timestampStr = ofGetTimestampString("%Y.%m.%d_%H.%M.%S");
+	const string address = sample.isActor() ? RAM_OSC_ADDR_ACTOR : RAM_OSC_ADDR_RIGID_BODY;
+	const string entityName = sample.getName() + " " + timestampStr;
+	const string numJoints = ofToString( sample.getNumNode() );
 	
 	for(int i=0; i<src.getNumFrames(); i++)
 	{
@@ -129,7 +128,7 @@ const bool ramTSVCoder::encode(const ramSession &src)
 		buf.append(frame.str().c_str(), frame.str().length());
 	}
 	
-	const string fileName = mFileName.empty() ? ofGetTimestampString("%Y.%m.%d %H.%M.%S ") + entityName + ".tsv" : mFileName;
+	const string fileName = mFileName.empty() ? timestampStr + "_" + entityName + ".tsv" : mFileName;
 
 	const bool succeeded = ofBufferToFile(fileName, buf, true);
 	

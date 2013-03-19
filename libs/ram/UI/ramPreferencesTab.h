@@ -4,7 +4,7 @@
 
 class ramPreferencesTab : public ofxUITab {
 protected:
-	ofxUIRadio* floorStyleRadio;
+	ofxUIRadio* floorStyleRadio; 
 	bool fullscreen, useShadows;
 	float floorSize, floorGridSize;
 	int floorStyle;

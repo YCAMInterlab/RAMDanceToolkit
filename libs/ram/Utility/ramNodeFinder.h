@@ -29,7 +29,7 @@ public:
 	bool findOne(ramNode &node)
 	{
 		if (!isValid()) return false;
-
+		
 		if (!hasNodeArray(name))
 		{
 			if (getNumNodeArray() > 0)
@@ -69,6 +69,26 @@ public:
 				nodes.push_back(node);
 			}
 		}
+		
+		map<string, ramNodeArray>::iterator it = getActorManager().getAllBus().begin();
+		
+		while (it != getActorManager().getAllBus().end())
+		{
+			ramNodeArray &o = (*it).second;
+			
+			if (has_target_actor && name != o.getName()) continue;
+			
+			for (int n = 0; n < o.getNumNode(); n++)
+			{
+				if (has_target_node && index != n) continue;
+				
+				ramNode &node = o.getNode(n);
+				nodes.push_back(node);
+			}
+			
+			++it;
+		}
+
 
 		return nodes;
 	}
