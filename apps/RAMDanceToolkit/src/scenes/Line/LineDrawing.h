@@ -380,11 +380,11 @@ public:
 			const string from_name	= XML.getValue("from:name", "Yoko");
 			const int	 from_id	= XML.getValue("from:id", ramActor::JOINT_RIGHT_HAND);
 			
-			const string cp0_name	= XML.getValue("control1:name", "Yoko");
-			const int	 cp0_id		= XML.getValue("control1:id", ramActor::JOINT_RIGHT_TOE);
+			const string cp0_name	= XML.getValue("control0:name", "Yoko");
+			const int	 cp0_id		= XML.getValue("control0:id", ramActor::JOINT_RIGHT_TOE);
 			
-			const string cp1_name	= XML.getValue("control2:name", "Yoko");
-			const int	 cp1_id		= XML.getValue("control2:id", ramActor::JOINT_LEFT_TOE);
+			const string cp1_name	= XML.getValue("control1:name", "Yoko");
+			const int	 cp1_id		= XML.getValue("control1:id", ramActor::JOINT_LEFT_TOE);
 			
 			const string to_name	= XML.getValue("to:name", "Yoko");
 			const int	 to_id		= XML.getValue("to:id", ramActor::JOINT_LEFT_HAND);
