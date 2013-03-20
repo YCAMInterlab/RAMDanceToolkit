@@ -7,7 +7,8 @@ public:
     
     ofVec3f mEuler;
     ofQuaternion mRotation;
-    ramUpsideDown mUpsideDown;
+    ramFilterEach<ramUpsideDown> mUpsideDown;
+    
     float mOffset;
     
     ofVec3f mAutoRotateSpeed;
@@ -83,42 +84,41 @@ public:
         mat.rotate(mEuler.x, 1.0f, 0.0f, 0.0f);
         
         mRotation = mat.getRotate();
-        
-        mUpsideDown.setOffset(mOffset);
+        for (int i=0; i<mUpsideDown.getNumFilters(); i++)
+        {
+            mUpsideDown.getFilter(i).setOffset(mOffset);
+        }
 	}
 	
 	void draw()
 	{
-		ramBeginCamera();
-
+        vector<ramNodeArray> NAs;
+        for (int i=0; i<getNumNodeArray(); i++)
+        {
+            ramNodeArray tmpActor = getNodeArray(i);
+            ofQuaternion base = tmpActor.getNode(ramActor::JOINT_HIPS).getOrientationQuat();
+            ofQuaternion rotated = base * mRotation;
+            tmpActor.getNode(ramActor::JOINT_HIPS).setOrientation(rotated);
+            
+            NAs.push_back(tmpActor);
+        }
         
-		ramEndCamera();
+        vector<ramNodeArray> filterdNAs = mUpsideDown.update(NAs);
+        
+        ramBeginCamera();
+        
+        ofPushStyle();
+        for (int i=0; i<NAs.size(); i++)
+        {
+            ramNodeArray &NA = filterdNAs[i];
+            ofSetColor(ramColor::RED_DEEP);
+            ramDrawBasicActor(NA);
+        }
+        ofPopStyle();
+        
+        ramEndCamera();
 	}
 	
-	void drawActor(const ramActor& actor)
-	{
-
-        ramActor tmpActor = actor;
-        
-        ofQuaternion base = tmpActor.getNode(ramActor::JOINT_HIPS).getOrientationQuat();
-        ofQuaternion rotated = base * mRotation;
-        tmpActor.getNode(ramActor::JOINT_HIPS).setOrientation(rotated);
-        
-        ramActor filterd = mUpsideDown.update(tmpActor);
-        
-		ofSetColor(ramColor::RED_DEEP);
-        ramDrawBasicActor(filterd);
-	}
-	
-	void drawRigid(const ramRigidBody &rigid)
-	{
-		
-	}
-	
-	void drawFloor()
-	{
-        
-	}
 	
 	void onValueChanged(ofxUIEventArgs& e)
 	{
