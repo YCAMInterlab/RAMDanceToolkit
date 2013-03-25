@@ -49,7 +49,11 @@ public:
 	inline ramNodeArray& getNodeArray(int index) { return nodearrays[index]; }
 	inline ramNodeArray& getNodeArray(const string& name) { return nodearrays[name]; }
 	inline bool hasNodeArray(const string &key) { return nodearrays.hasKey(key); }
-
+	
+	// test
+	void setNodeArray(const ramNodeArray& NA) { nodearrays.set(NA.getName(), NA); }
+	
+	
 	// for mouse picked node
 
 	const ramNodeIdentifer& getLastSelectedNodeIdentifer();
@@ -69,7 +73,10 @@ public:
 	void setBus(const string& bus_name, const ramNodeArray &arr) { bus[bus_name] = arr; }
 	const ramNodeArray& getBus(const string& bus_name) { return bus[bus_name]; }
 	map<string, ramNodeArray>& getAllBus() { return bus; };
-
+	inline size_t getNumBus() { return bus.size(); };
+	inline size_t eraseFromBus(const string& bus_name) { return bus.erase(bus_name); };
+	
+	
 	// for internal use
 
 	void updateWithOscMessage(const ofxOscMessage &m);

@@ -8,6 +8,7 @@ bool drawModel = true;
 void ramBaseApp::exit(ofEventArgs &args)
 {
 	ramDisableAllEvents();
+	ofSetFullscreen(false);
 }
 
 void ramBaseApp::update(ofEventArgs &args)
@@ -32,10 +33,6 @@ void ramBaseApp::draw(ofEventArgs &args)
 
 	ramEnablePhysicsPrimitive(false);
 
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	glPushMatrix();
-	ofPushStyle();
-
 	if (ramShadowEnabled())
 	{
 		// shadow
@@ -45,25 +42,13 @@ void ramBaseApp::draw(ofEventArgs &args)
 		ramEndShadow();
 	}
 
-	ofPopStyle();
-	glPopMatrix();
-	glPopAttrib();
-
 	ramEnablePhysicsPrimitive(enable_physics);
-
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	glPushMatrix();
-	ofPushStyle();
 
 	if (drawModel)
 	{
 		// entities
 		drawNodeArrays();
 	}
-
-	ofPopStyle();
-	glPopMatrix();
-	glPopAttrib();
 
 	ramEndCamera();
 
@@ -77,11 +62,18 @@ void ramBaseApp::drawNodeArrays()
 	for (int n = 0; n < getNumNodeArray(); n++)
 	{
 		const ramNodeArray &o = getNodeArray(n);
-
+		
+		glPushAttrib(GL_ALL_ATTRIB_BITS);
+		glPushMatrix();
+		ofPushStyle();
 		if (o.isActor())
 			drawActor((ramActor &)o);
 		else
 			drawRigid((ramRigidBody &)o);
+		
+		ofPopStyle();
+		glPopMatrix();
+		glPopAttrib();
 	}
 
 	// draw bus
@@ -91,12 +83,17 @@ void ramBaseApp::drawNodeArrays()
 	while (it != getActorManager().getAllBus().end())
 	{
 		const ramNodeArray &o = (*it).second;
-
+		
+		glPushAttrib(GL_ALL_ATTRIB_BITS);
+		glPushMatrix();
+		ofPushStyle();
 		if (o.isActor())
 			drawActor((ramActor &)o);
 		else
 			drawRigid((ramRigidBody &)o);
-
+		ofPopStyle();
+		glPopMatrix();
+		glPopAttrib();
 		++it;
 	}
 }

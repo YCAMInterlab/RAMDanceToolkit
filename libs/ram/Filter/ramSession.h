@@ -47,7 +47,7 @@ public:
 	// --
 	
 	void clear();
-	void appendFrame(const ramNodeArray copy);
+	void appendFrame(const ramNodeArray& copy);
 	const ramNodeArray& getFrame(int index) const;
 	const ramNodeArray& getCurrentFrame() const;
 	
@@ -64,7 +64,9 @@ public:
 	void setLoop(const bool l);
 	void setRate(const float r);
 	void setPlayhead(const float t);
+	void pause(const bool paused);
 	
+	const bool isPaused() const;
 	const bool isPlaying() const;
 	const bool isRecording() const;
 	const bool isLoop() const;
@@ -79,6 +81,7 @@ protected:
 	bool mLoop;
 	float mRate;
 	
+	bool mPaused;
 	bool mRecording;
 	bool mPlaying;
 	

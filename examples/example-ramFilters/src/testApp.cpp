@@ -7,7 +7,8 @@ ramPendulum pendulum;
 ramUpsideDown upsideDown;
 ramTimeShifter timeShifter;
 
-bool drawName;
+bool bDrawActor;
+bool bDrawName;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -27,7 +28,8 @@ void testApp::setup()
 	ramGetGUI().addPanel( &upsideDown );
 	ramGetGUI().addPanel( &timeShifter );
 	
-	drawName = false;
+	bDrawName = false;
+	bDrawActor = true;
 }
 
 //--------------------------------------------------------------
@@ -68,7 +70,7 @@ void testApp::draw()
 			ofDrawAxis(5);
 			node.endTransform();
 			
-			if (drawName)
+			if (bDrawName)
 				node.drawNodeName();
 		}
 		
@@ -80,7 +82,9 @@ void testApp::draw()
 	
 	ramEndCamera();
 	
-	ofDrawBitmapString("press [n] to draw node name", ofGetWidth()/2, 20);
+	ofSetColor(ramColor::RED_DEEP);
+	ofDrawBitmapString("press [h] to hide original actor", ofGetWidth()/2, 20);
+	ofDrawBitmapString("press [n] to draw node name", ofGetWidth()/2, 40);
 }
 
 
@@ -88,10 +92,13 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(const ramActor &actor)
 {
-	// draw basic actor with yellow
-	ofSetColor(ramColor::YELLOW_DEEP);
-	ofFill();
-	ramDrawBasicActor(actor);
+	if (bDrawActor)
+	{
+		// draw basic actor with yellow
+		ofSetColor(ramColor::YELLOW_DEEP);
+		ofFill();
+		ramDrawBasicActor(actor);
+	}
 }
 
 //--------------------------------------------------------------
@@ -131,10 +138,17 @@ void testApp::onRigidExit(const ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
+	if (key == 'h')
+	{
+		bDrawActor ^= true;
+	}
+	
 	if (key == 'n')
 	{
-		
+		bDrawName ^= true;
 	}
+	
+	
 }
 
 //--------------------------------------------------------------

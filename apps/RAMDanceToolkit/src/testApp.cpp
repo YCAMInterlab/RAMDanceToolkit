@@ -151,6 +151,9 @@ void testApp::onRigidExit(const ramRigidBody &rigid)
 
 }
 
+
+
+#pragma mark - of Event
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {

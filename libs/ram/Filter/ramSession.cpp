@@ -149,15 +149,15 @@ void ramSession::updatePlayhead()
 	
 	bool wrapped = false;
 	
-	while (mPlayhead > 1)
+	while (mPlayhead > getDuration())
 	{
-		mPlayhead -= 1;
+		mPlayhead = 0;
 		wrapped = true;
 	}
 	
 	while (mPlayhead < 0)
 	{
-		mPlayhead += 1;
+		mPlayhead = getDuration();
 		wrapped = true;
 	}
 	
@@ -183,11 +183,13 @@ void ramSession::clear()
 	
 	mRate = 1.0;
 	mLoop = true;
+	
+	mPaused = false;
 	mRecording = false;
 	mPlaying = false;
 }
 
-void ramSession::appendFrame(const ramNodeArray copy)
+void ramSession::appendFrame(const ramNodeArray& copy)
 {
 	mBuffer.append(copy);
 }
@@ -211,6 +213,8 @@ void ramSession::setLoop(const bool l) { mLoop = l; };
 void ramSession::setRate(const float r) { mRate = r; };
 void ramSession::setPlayhead(const float t) { mPlayhead = t; };
 
+
+const bool ramSession::isPaused() const { return mPaused; }
 const bool ramSession::isPlaying() const { return mPlaying; }
 const bool ramSession::isRecording() const { return mRecording; }
 const bool ramSession::isLoop() const { return mLoop; }
@@ -222,7 +226,8 @@ const float ramSession::getPlayhead() const
 
 const int ramSession::getCurrentFrameIndex() const
 {
-	return mPlayhead * (getNumFrames() - 1);
+	return floor(mPlayhead / getAverageFrameTime());
+//	return mPlayhead * (getNumFrames() - 1);
 }
 
 const int ramSession::getNumFrames() const
@@ -242,7 +247,7 @@ const float ramSession::getDuration() const
 	const ramNodeArray &frontFrame = mBuffer.get( 0 );
 	const ramNodeArray &backFrame = mBuffer.get( getNumFrames() );
 	
-	return frontFrame.getTimestamp() - backFrame.getTimestamp();
+	return backFrame.getTimestamp() - frontFrame.getTimestamp();
 }
 
 const string ramSession::getNodeArrayName() const
