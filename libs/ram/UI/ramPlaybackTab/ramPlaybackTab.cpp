@@ -63,18 +63,18 @@ void ramPlaybackTab::drawSessions(ofEventArgs &e)
 		
 		getActorManager().setNodeArray(NA);
 		
-//		if (session.isPlaying())
-//		{
-//			getActorManager().setBus(NA.getName(), NA);
-//		}
-//		
-//		if (seg->bHideActor)
-//		{
-//			if (getActorManager().hasBus(NA.getName()))
-//			{
-//				getActorManager().eraseFromBus(NA.getName());
-//			}
-//		}
+		if (session.isPlaying())
+		{
+			getActorManager().setBus(NA.getName(), NA);
+		}
+		
+		if (seg->bHideActor)
+		{
+			if (getActorManager().hasBus(NA.getName()))
+			{
+				getActorManager().eraseFromBus(NA.getName());
+			}
+		}
 		
 		it++;
 	}

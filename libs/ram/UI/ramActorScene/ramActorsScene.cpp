@@ -95,7 +95,7 @@ void ramActorsScene::draw()
 		
 		SegmentsIter it = mSegmentsMap.find(name);
 		
-		assert(it != mSegmentsMap.end());
+//		assert(it != mSegmentsMap.end());
 		
 		ControlSegment *seg = it->second;
 		
