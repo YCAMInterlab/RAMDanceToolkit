@@ -8,18 +8,16 @@ protected:
 	bool fullscreen, useShadows;
 	float floorSize, floorGridSize;
 	int floorStyle;
-	float bgHue, bgSaturation, bgBrightness;
+	ofFloatColor bg;
 public:
 	ramPreferencesTab()
 	:ofxUITab("Preferences", false)
-	,fullscreen(true)
+	,fullscreen(false)
 	,useShadows(true)
 	,floorStyle(ramFloor::FLOOR_GRID_LINES)
 	,floorSize(600.0)
 	,floorGridSize(50.0)
-	,bgHue(0)
-	,bgSaturation(0)
-	,bgBrightness(0)
+	,bg(0)
 	{
 		addLabelToggle("Fullscreen", &fullscreen);
 		addLabelToggle("Use shadows", &useShadows);
@@ -33,9 +31,9 @@ public:
 		addSpacer();
 		
 		addLabel("Background color", OFX_UI_FONT_MEDIUM);
-		addSlider("Hue", 0, 1, &bgHue);
-		addSlider("Saturation", 0, 1, &bgSaturation);
-		addSlider("Brightness", 0, 1, &bgBrightness);
+		addSlider("Red", 0, 1, &bg.r);
+		addSlider("Green", 0, 1, &bg.g);
+		addSlider("Blue", 0, 1, &bg.b);
 		
 		autoSizeToFitWidgets();
 	}
@@ -50,6 +48,6 @@ public:
 			ofSetFullscreen(fullscreen);
 		}
 		ramEnableShadow(useShadows);
-		ofBackground(ofFloatColor::fromHsb(bgHue, bgSaturation, bgBrightness));
+		ofBackground(bg);
 	}
 };

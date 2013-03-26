@@ -93,50 +93,50 @@ void ramActorsScene::draw()
 		
 		const string name = NA.getName();
 		
-//		SegmentsIter it = mSegmentsMap.find(name);
-//		
-//		assert(it != mSegmentsMap.end());
-//		
-//		ControlSegment *seg = it->second;
-//		
-//		/// draw if "Show actor" toggle is anabled
-//		// note that ofxUIImageToggle shows hilighted image when it's false,
-//		ramBeginCamera();
-//		
-//		if (!seg->bHideActor)
-//		{
-//			ofPushMatrix();
-//			ofPushStyle();
-//			{
-//				
-//				if (bUseShading) light.enable();
-//				
-//				ofSetColor(seg->jointColor);
-//				ofTranslate(seg->position.x, 0, seg->position.y);
-//				
-//				if (NA.isRigid())
-//				{
-//					ramDrawBasicRigid((ramRigidBody&)NA);
-//				}
-//				else
-//				{
-//					if (bUseSimpleActor) ramDrawBasicActor((ramActor&)NA);
-//					else drawNodes(NA);
-//				}
-//				
-//				if (bUseShading) light.disable();
-//			}
-//			ofPopStyle();
-//			ofPopMatrix();
-//		}
-//		
-//		ramEndCamera();
-//		
-//		/// show/hide recording indicator
-//		if (seg->bRecording)
-//		{
-//			bRecording = true;
-//		}
+		SegmentsIter it = mSegmentsMap.find(name);
+		
+		assert(it != mSegmentsMap.end());
+		
+		ControlSegment *seg = it->second;
+		
+		/// draw if "Show actor" toggle is anabled
+		// note that ofxUIImageToggle shows hilighted image when it's false,
+		ramBeginCamera();
+		
+		if (!seg->bHideActor)
+		{
+			ofPushMatrix();
+			ofPushStyle();
+			{
+				
+				if (bUseShading) light.enable();
+				
+				ofSetColor(seg->jointColor);
+				ofTranslate(seg->position.x, 0, seg->position.y);
+				
+				if (NA.isRigid())
+				{
+					ramDrawBasicRigid((ramRigidBody&)NA);
+				}
+				else
+				{
+					if (bUseSimpleActor) ramDrawBasicActor((ramActor&)NA);
+					else drawNodes(NA);
+				}
+				
+				if (bUseShading) light.disable();
+			}
+			ofPopStyle();
+			ofPopMatrix();
+		}
+		
+		ramEndCamera();
+		
+		/// show/hide recording indicator
+		if (seg->bRecording)
+		{
+			bRecording = true;
+		}
 	}
 }
 
