@@ -69,17 +69,17 @@ void ramTSVCoder::decode(ofBuffer buffer)
 			
 		} while (!buffer.isLastLine());
 		
-		cout << "File loaded! " << endl;
-		cout << "Actor: " << mSession.getNodeArrayName() << endl;
-		cout << "Duration: " << mSession.getDuration() << "sec"<< endl;
-		cout << "Frames: " << mSession.getNumFrames() << endl << endl;
+		cout << "[" << __FUNCTION__ << "] " << "File loaded! " << endl;
+		cout << "[" << __FUNCTION__ << "] " << "Actor: " << mSession.getNodeArrayName() << endl;
+		cout << "[" << __FUNCTION__ << "] " << "Duration: " << mSession.getDuration() << "sec"<< endl;
+		cout << "[" << __FUNCTION__ << "] " << "Frames: " << mSession.getNumFrames() << endl << endl;
 	}
 
 
 //	return mSession;
 }
 
-const bool ramTSVCoder::encode(const ramSession &src)
+bool ramTSVCoder::encode(ramSession &src)
 {
 	if (src.getNumFrames() <= 0)
 	{
@@ -89,7 +89,7 @@ const bool ramTSVCoder::encode(const ramSession &src)
 	
 	ofBuffer buf;
 	
-	const ramNodeArray& sample = src.getFrame(0);
+	ramNodeArray& sample = src.getFrame(0);
 	
 	
 	const string timestampStr = ofGetTimestampString("%Y.%m.%d_%H.%M.%S");
@@ -99,7 +99,7 @@ const bool ramTSVCoder::encode(const ramSession &src)
 	
 	for(int i=0; i<src.getNumFrames(); i++)
 	{
-		const ramNodeArray &nodeArray = src.getFrame(i);
+		ramNodeArray &nodeArray = src.getFrame(i);
 		stringstream frame;
 		frame << address << "\t" << entityName << "\t" << numJoints << "\t";
 		
@@ -134,15 +134,15 @@ const bool ramTSVCoder::encode(const ramSession &src)
 	
 	if (succeeded)
 	{
-		cout << "Save succeeded! " << endl;
-		cout << "File name:" << fileName << endl;
-		cout << "Duration: " << src.getDuration() << "sec"<< endl;
-		cout << "Frames: " << src.getNumFrames() << endl;
-		cout << "Size: " << buf.size() * 0.001 << "KB" << endl << endl;
+		cout << "[" << __FUNCTION__ << "] " << "Save succeeded! " << endl;
+		cout << "[" << __FUNCTION__ << "] " << "File name:" << fileName << endl;
+		cout << "[" << __FUNCTION__ << "] " << "Duration: " << src.getDuration() << "sec"<< endl;
+		cout << "[" << __FUNCTION__ << "] " << "Frames: " << src.getNumFrames() << endl;
+		cout << "[" << __FUNCTION__ << "] " << "Size: " << buf.size() * 0.001 << "KB" << endl << endl;
 	}
 	else
 	{
-		cout << "save failed.";
+		cout << "[" << __FUNCTION__ << "] " << "save failed.";
 	}
 	
 	return succeeded;

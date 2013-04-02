@@ -9,10 +9,8 @@
 #include "ramGlobal.h"
 #include "ramGraphics.h"
 #include "ramCameraManager.h"
-
 #include "ramPreferencesTab.h"
 #include "ramPresetTab.h"
-#include "ramPlaybackTab.h"
 
 class ramUnit;
 class ramControllable;
@@ -77,7 +75,6 @@ private:
 	
 	ramPresetTab presetTab;
 	ramPreferencesTab preferencesTab;
-	ramPlaybackTab playbackTab;
 
 	vector<ramUnit*> scenes;
 

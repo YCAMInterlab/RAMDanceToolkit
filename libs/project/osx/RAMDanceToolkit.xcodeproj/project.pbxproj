@@ -202,8 +202,6 @@
 		9A21607916E4FFEF00EC81F4 /* ramTSVCoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A21607816E4FFEF00EC81F4 /* ramTSVCoder.cpp */; };
 		9A21608216E5114B00EC81F4 /* ramPlaybackTab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A21608016E5114B00EC81F4 /* ramPlaybackTab.cpp */; };
 		9A21608316E5114B00EC81F4 /* ramPlaybackTab.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A21608116E5114B00EC81F4 /* ramPlaybackTab.h */; };
-		9A21608616E5117C00EC81F4 /* PlaybackSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A21608416E5117C00EC81F4 /* PlaybackSegment.h */; };
-		9A21608716E5117C00EC81F4 /* PlaybackSegment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A21608516E5117C00EC81F4 /* PlaybackSegment.cpp */; };
 		9A38F4CC16E9E81900FF8B66 /* btBulletCollisionCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A38F3DE16E9E81800FF8B66 /* btBulletCollisionCommon.h */; };
 		9A38F4CD16E9E81900FF8B66 /* btBulletDynamicsCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A38F3DF16E9E81800FF8B66 /* btBulletDynamicsCommon.h */; };
 		9A38F4CE16E9E81900FF8B66 /* Bullet-C-Api.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A38F3E016E9E81800FF8B66 /* Bullet-C-Api.h */; };
@@ -483,6 +481,9 @@
 		9A70C1FD16E9CE6F00A5B755 /* ofxUIWaveform.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A70C04316E9CE6F00A5B755 /* ofxUIWaveform.h */; };
 		9A70C1FE16E9CE6F00A5B755 /* ofxUIWidget.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A70C04416E9CE6F00A5B755 /* ofxUIWidget.h */; };
 		9A70C1FF16E9CE6F00A5B755 /* ofxUIWidgetWithLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A70C04516E9CE6F00A5B755 /* ofxUIWidgetWithLabel.h */; };
+		9A712F611701918B00C449C3 /* PlaybackSegment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A712F5F1701918A00C449C3 /* PlaybackSegment.cpp */; };
+		9A712F621701918B00C449C3 /* PlaybackSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A712F601701918B00C449C3 /* PlaybackSegment.h */; };
+		9A712F64170191AC00C449C3 /* BaseSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A712F63170191AC00C449C3 /* BaseSegment.h */; };
 		9AD6F5CC16B926C000F7F51E /* ofxUITabbedCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6F52916B926BF00F7F51E /* ofxUITabbedCanvas.cpp */; };
 		9AD6F5CD16B926C000F7F51E /* ofxUITabbedCanvas.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F52A16B926BF00F7F51E /* ofxUITabbedCanvas.h */; };
 /* End PBXBuildFile section */
@@ -688,8 +689,6 @@
 		9A21607816E4FFEF00EC81F4 /* ramTSVCoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramTSVCoder.cpp; sourceTree = "<group>"; };
 		9A21608016E5114B00EC81F4 /* ramPlaybackTab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramPlaybackTab.cpp; sourceTree = "<group>"; };
 		9A21608116E5114B00EC81F4 /* ramPlaybackTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPlaybackTab.h; sourceTree = "<group>"; };
-		9A21608416E5117C00EC81F4 /* PlaybackSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackSegment.h; sourceTree = "<group>"; };
-		9A21608516E5117C00EC81F4 /* PlaybackSegment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlaybackSegment.cpp; sourceTree = "<group>"; };
 		9A38F3DE16E9E81800FF8B66 /* btBulletCollisionCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletCollisionCommon.h; sourceTree = "<group>"; };
 		9A38F3DF16E9E81800FF8B66 /* btBulletDynamicsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletDynamicsCommon.h; sourceTree = "<group>"; };
 		9A38F3E016E9E81800FF8B66 /* Bullet-C-Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bullet-C-Api.h"; sourceTree = "<group>"; };
@@ -971,6 +970,9 @@
 		9A70C04316E9CE6F00A5B755 /* ofxUIWaveform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWaveform.h; sourceTree = "<group>"; };
 		9A70C04416E9CE6F00A5B755 /* ofxUIWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWidget.h; sourceTree = "<group>"; };
 		9A70C04516E9CE6F00A5B755 /* ofxUIWidgetWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWidgetWithLabel.h; sourceTree = "<group>"; };
+		9A712F5F1701918A00C449C3 /* PlaybackSegment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlaybackSegment.cpp; sourceTree = "<group>"; };
+		9A712F601701918B00C449C3 /* PlaybackSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackSegment.h; sourceTree = "<group>"; };
+		9A712F63170191AC00C449C3 /* BaseSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSegment.h; sourceTree = "<group>"; };
 		9AD6F52916B926BF00F7F51E /* ofxUITabbedCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUITabbedCanvas.cpp; sourceTree = "<group>"; };
 		9AD6F52A16B926BF00F7F51E /* ofxUITabbedCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUITabbedCanvas.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1116,6 +1118,9 @@
 		277606CA16E4EB2700D6B31D /* ramActorScene */ = {
 			isa = PBXGroup;
 			children = (
+				9A712F63170191AC00C449C3 /* BaseSegment.h */,
+				9A712F5F1701918A00C449C3 /* PlaybackSegment.cpp */,
+				9A712F601701918B00C449C3 /* PlaybackSegment.h */,
 				277606CB16E4EB2700D6B31D /* ControlSegment.cpp */,
 				277606CC16E4EB2700D6B31D /* ControlSegment.h */,
 				277606CD16E4EB2700D6B31D /* ramActorsScene.cpp */,
@@ -1584,8 +1589,6 @@
 		9A21607F16E5114A00EC81F4 /* ramPlaybackTab */ = {
 			isa = PBXGroup;
 			children = (
-				9A21608416E5117C00EC81F4 /* PlaybackSegment.h */,
-				9A21608516E5117C00EC81F4 /* PlaybackSegment.cpp */,
 				9A21608016E5114B00EC81F4 /* ramPlaybackTab.cpp */,
 				9A21608116E5114B00EC81F4 /* ramPlaybackTab.h */,
 			);
@@ -2324,7 +2327,6 @@
 				2776072616E4EB2700D6B31D /* ramTSVCoder.h in Headers */,
 				2776072816E4EB2700D6B31D /* ramUtils.h in Headers */,
 				9A21608316E5114B00EC81F4 /* ramPlaybackTab.h in Headers */,
-				9A21608616E5117C00EC81F4 /* PlaybackSegment.h in Headers */,
 				9A70C17816E9CE6F00A5B755 /* Calibration.h in Headers */,
 				9A70C17916E9CE6F00A5B755 /* ContourFinder.h in Headers */,
 				9A70C17A16E9CE6F00A5B755 /* Distance.h in Headers */,
@@ -2580,6 +2582,8 @@
 				9A38F59D16E9E81900FF8B66 /* ofxBtSoftBody.h in Headers */,
 				9A38F59F16E9E81900FF8B66 /* ofxBtSoftBodyWorld.h in Headers */,
 				9A38F5A116E9E81900FF8B66 /* ofxBtWorld.h in Headers */,
+				9A712F621701918B00C449C3 /* PlaybackSegment.h in Headers */,
+				9A712F64170191AC00C449C3 /* BaseSegment.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2677,7 +2681,6 @@
 				2776072716E4EB2700D6B31D /* ramUtils.cpp in Sources */,
 				9A21607916E4FFEF00EC81F4 /* ramTSVCoder.cpp in Sources */,
 				9A21608216E5114B00EC81F4 /* ramPlaybackTab.cpp in Sources */,
-				9A21608716E5117C00EC81F4 /* PlaybackSegment.cpp in Sources */,
 				9A70C18116E9CE6F00A5B755 /* Calibration.cpp in Sources */,
 				9A70C18216E9CE6F00A5B755 /* ContourFinder.cpp in Sources */,
 				9A70C18316E9CE6F00A5B755 /* Distance.cpp in Sources */,
@@ -2698,6 +2701,7 @@
 				9A38F59C16E9E81900FF8B66 /* ofxBtSoftBody.cpp in Sources */,
 				9A38F59E16E9E81900FF8B66 /* ofxBtSoftBodyWorld.cpp in Sources */,
 				9A38F5A016E9E81900FF8B66 /* ofxBtWorld.cpp in Sources */,
+				9A712F611701918B00C449C3 /* PlaybackSegment.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

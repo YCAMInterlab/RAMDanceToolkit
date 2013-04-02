@@ -34,12 +34,12 @@ public:
 	void load(const string filePath)
 	{
 		cout
-		<< "start loading file..."
+		<< "[" << __FUNCTION__ << "] " << "start loading file..."
 		<< "File name: " << filePath << endl;
 		
 		if ( !ofFile::doesFileExist(filePath) )
 		{
-			cout << filePath << " load failed. No such file or directory." << endl;
+			cout << "[" << __FUNCTION__ << "] " << filePath << " load failed. No such file or directory." << endl;
 		}
 		
 		ofFile file;
@@ -51,24 +51,24 @@ public:
 	
 	/// save ramSession to filePath
 	// -----------------------------
-	const bool save(const ramSession &src)
+	const bool save(ramSession &src)
 	{
 		return encode(src);
 	}
 	
-	const bool save(const ramSession &src, const string filePath)
+	const bool save(ramSession &src, const string filePath)
 	{
 		setFileName(filePath);
 		return encode(src);
 	}
 	
-	const bool save(const ramNodeArrayBuffer &src)
+	const bool save(ramNodeArrayBuffer &src)
 	{
 		ramSession session(src);
 		return encode(session);
 	}
 	
-	const bool save(const ramNodeArrayBuffer &src, const string filePath)
+	const bool save(ramNodeArrayBuffer &src, const string filePath)
 	{
 		ramSession session(src);
 		setFileName(filePath);
@@ -93,8 +93,8 @@ public:
 	
 protected:
 	
-	virtual void decode(const ofBuffer buffer) = 0;
-	virtual const bool encode(const ramSession &src) = 0;
+	virtual void decode(ofBuffer buffer) = 0;
+	virtual bool encode(ramSession &src) = 0;
 	
 	string mFileName;
 	ramSession mSession;

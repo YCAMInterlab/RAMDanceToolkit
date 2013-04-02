@@ -149,13 +149,13 @@ void ramSession::updatePlayhead()
 	
 	bool wrapped = false;
 	
-	while (mPlayhead > getDuration())
+	if (mPlayhead > getDuration())
 	{
 		mPlayhead = 0;
 		wrapped = true;
 	}
 	
-	while (mPlayhead < 0)
+	if (mPlayhead < 0)
 	{
 		mPlayhead = getDuration();
 		wrapped = true;
@@ -184,7 +184,6 @@ void ramSession::clear()
 	mRate = 1.0;
 	mLoop = true;
 	
-	mPaused = false;
 	mRecording = false;
 	mPlaying = false;
 }
@@ -194,12 +193,12 @@ void ramSession::appendFrame(const ramNodeArray& copy)
 	mBuffer.append(copy);
 }
 
-const ramNodeArray& ramSession::getFrame(int index) const
+ramNodeArray& ramSession::getFrame(int index)
 {
 	return mBuffer.get(index);
 }
 
-const ramNodeArray& ramSession::getCurrentFrame() const
+ramNodeArray& ramSession::getCurrentFrame()
 {
 	return getFrame(getCurrentFrameIndex());
 }
@@ -209,48 +208,48 @@ const ramNodeArray& ramSession::getCurrentFrame() const
 #pragma mark -
 #pragma mark getters, setters
 
+void ramSession::setFreeze(const bool playing) { mPlaying = !playing; };
 void ramSession::setLoop(const bool l) { mLoop = l; };
 void ramSession::setRate(const float r) { mRate = r; };
 void ramSession::setPlayhead(const float t) { mPlayhead = t; };
 
 
-const bool ramSession::isPaused() const { return mPaused; }
-const bool ramSession::isPlaying() const { return mPlaying; }
-const bool ramSession::isRecording() const { return mRecording; }
-const bool ramSession::isLoop() const { return mLoop; }
+bool ramSession::isPlaying() { return mPlaying; }
+bool ramSession::isRecording() { return mRecording; }
+bool ramSession::isLoop() { return mLoop; }
 
-const float ramSession::getPlayhead() const
+float ramSession::getPlayhead()
 {
 	return mPlayhead;
 }
 
-const int ramSession::getCurrentFrameIndex() const
+int ramSession::getCurrentFrameIndex()
 {
 	return floor(mPlayhead / getAverageFrameTime());
 //	return mPlayhead * (getNumFrames() - 1);
 }
 
-const int ramSession::getNumFrames() const
+int ramSession::getNumFrames()
 {
 	return mBuffer.getSize();
 }
 
-const float ramSession::getAverageFrameTime() const
+float ramSession::getAverageFrameTime()
 {
 	return getDuration() / getNumFrames();
 }
 
-const float ramSession::getDuration() const
+float ramSession::getDuration()
 {
 	assert(getNumFrames() > 0);
 	
-	const ramNodeArray &frontFrame = mBuffer.get( 0 );
-	const ramNodeArray &backFrame = mBuffer.get( getNumFrames() );
+	ramNodeArray &frontFrame = mBuffer.get( 0 );
+	ramNodeArray &backFrame = mBuffer.get( getNumFrames() );
 	
 	return backFrame.getTimestamp() - frontFrame.getTimestamp();
 }
 
-const string ramSession::getNodeArrayName() const
+string ramSession::getNodeArrayName()
 {
 	assert(getNumFrames() > 0);
 	return getNumFrames() > 0 ? mBuffer.get(0).getName() : "no name";

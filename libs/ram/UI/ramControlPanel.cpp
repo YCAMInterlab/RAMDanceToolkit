@@ -70,7 +70,6 @@ void ramControlPanel::setup()
 	// -------------------------------------
 	ofAddListener(ofEvents().update, this, &ramControlPanel::update);
 	
-	addPanel(playbackTab);
 	addPanel(presetTab);
 	addPanel(preferencesTab);
 	

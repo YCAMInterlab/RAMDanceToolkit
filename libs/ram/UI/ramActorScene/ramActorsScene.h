@@ -2,6 +2,7 @@
 
 #include "ramBaseScene.h"
 #include "ControlSegment.h"
+#include "PlaybackSegment.h"
 
 
 /*
@@ -33,16 +34,26 @@ public:
 	
 	void setShowAll(bool showAll);
 	bool getShowAll() const;
-	
+    
+	void setNeedsUpdatePanel(const bool needsUpdate);
+    bool needsUpdatePanel();
 private:
+    
+    
+    /// playback
+	void onFileDrop(ofDragInfo &e);
+    void loadFile(const string filePath);
+	ramTSVCoder coder;
+    
 	
 	/// internal use
-	void addControlSegment(const ramNodeArray &NA);
-	void removeControlSegment(const ramNodeArray &NA);
+//    void addSegment(ramActorUISegmentType type, const string name);
+    void addSegment(BaseSegment *newSegment);
+	void removeControlSegment(const string name);
 	void rebuildControlPanel();
 	void createPanelHeader();
-
-	
+    
+    
 	/// instances which are controlled programatically
 	ofxUILabelToggle *btnShowAll;
 	ofxUILabelToggle *btnPause;
@@ -54,8 +65,8 @@ private:
 	
 	
 	/// ControlSegment map
-	map<string, ControlSegment*> mSegmentsMap;
-	typedef map<string, ControlSegment*>::iterator SegmentsIter;
+	map<string, BaseSegment*> mSegmentsMap;
+	typedef map<string, BaseSegment*>::iterator SegmentsIter;
 	
 	
 	/// fonts
@@ -64,7 +75,7 @@ private:
 	
 	
 	/// update flags
-	bool mNeedUpdatePanel;
+	bool bNeedUpdatePanel;
 	bool bRecording;
 	
 	
@@ -75,4 +86,3 @@ private:
 	bool bUseSimpleActor;
 	bool bUseShading;
 };
-

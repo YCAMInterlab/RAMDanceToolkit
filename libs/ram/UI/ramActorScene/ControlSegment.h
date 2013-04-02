@@ -1,45 +1,36 @@
 #pragma once
 
 #include "ofxUITabbedCanvas.h"
+#include "BaseSegment.h"
 #include "ramSession.h"
-#include "ramTSVCoder.h"
 
-class ControlSegment
+class ControlSegment : public BaseSegment
 {
 	friend class ramActorsScene;
 
 public:
 	
-	ControlSegment();
+	ControlSegment(string segmentName);
 	~ControlSegment();
-	ofxUICanvasPlus* createPanel(const ramNodeArray &NA);
+    
+    ramActorUISegmentType getType();
+    ofxUICanvasPlus* createPanel(const string targetName);
+    
 	void onValueChanged(ofxUIEventArgs& e);
-	
 	void toggleRecording(const bool bStart);
 	
-	void loadCache();
-	void saveCache();
-	
 private:
-	
-	void reset();
-	const string getXMLFilePath() const;
-	
-	ofxUIImageToggle *btnHideActor;
-	ofxUIImageButton *btnResetActor;
+    
+    /// additional variables from BaseSegment...
+    
+    // ui parts
 	ofxUIImageToggle *btnRecordActor;
 	
-	ramSession session;
-	ofFloatColor jointColor;
-	ofPoint position;
+    
+    // initialize
+	void init();
+    
 	
-	ofxXmlSettings XML;
-	string name;
-	
-	/// to encode/decode to tsv file
-	ramTSVCoder coder;
-	
-	bool bHideActor;
-	bool bNeedsResetPos;
+    // flags
 	bool bRecording;
 };

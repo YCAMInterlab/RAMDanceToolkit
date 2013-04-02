@@ -48,28 +48,27 @@ public:
 	
 	void clear();
 	void appendFrame(const ramNodeArray& copy);
-	const ramNodeArray& getFrame(int index) const;
-	const ramNodeArray& getCurrentFrame() const;
+	ramNodeArray& getFrame(int index);
+	ramNodeArray& getCurrentFrame();
 	
 	
 #pragma mark -
 #pragma mark getters, setters
-	const int getCurrentFrameIndex() const;
-	const int getNumFrames() const;
-	const float getAverageFrameTime() const;
-	const float getDuration() const;
-	const float getPlayhead() const;
-	const string getNodeArrayName() const;
+	int getCurrentFrameIndex();
+	int getNumFrames();
+	float getAverageFrameTime();
+	float getDuration();
+	float getPlayhead();
+	string getNodeArrayName();
 	
 	void setLoop(const bool l);
 	void setRate(const float r);
 	void setPlayhead(const float t);
-	void pause(const bool paused);
+	void setFreeze(const bool playing);
 	
-	const bool isPaused() const;
-	const bool isPlaying() const;
-	const bool isRecording() const;
-	const bool isLoop() const;
+	bool isPlaying();
+	bool isRecording();
+	bool isLoop();
 	
 	void setNodeArrayBuffer(ramNodeArrayBuffer &buffer);
 	
@@ -81,7 +80,6 @@ protected:
 	bool mLoop;
 	float mRate;
 	
-	bool mPaused;
 	bool mRecording;
 	bool mPlaying;
 	

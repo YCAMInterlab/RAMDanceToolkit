@@ -5,9 +5,11 @@
 #pragma mark -
 #pragma mark constructor, destructor
 
-ControlSegment::ControlSegment()
+ControlSegment::ControlSegment(string segmentName)
 {
-	reset();
+    name = segmentName;
+    
+	init();
 	
 	btnHideActor = new ofxUIImageToggle(32, 32, &bHideActor, ramToResourcePath("Images/show.png"),"show");
 	btnResetActor = new ofxUIImageButton(32, 32, &bNeedsResetPos, ramToResourcePath("Images/reset.png"),"reset");
@@ -27,9 +29,13 @@ ControlSegment::~ControlSegment()
 #pragma mark -
 #pragma mark public methods
 
-ofxUICanvasPlus* ControlSegment::createPanel(const ramNodeArray &NA)
+ramActorUISegmentType ControlSegment::getType()
 {
-	name = NA.getName();
+    return RAM_UI_SEGMENT_TYPE_CONTROL;
+}
+
+ofxUICanvasPlus* ControlSegment::createPanel(const string targetName)
+{
 	const float width = ramGetGUI().kLength;
 	const float height = ramGetGUI().kDim+3;
 	
@@ -42,7 +48,7 @@ ofxUICanvasPlus* ControlSegment::createPanel(const ramNodeArray &NA)
 	
 	
 	/// section title
-	child->addWidgetDown(new ofxUILabel(NA.getName(), OFX_UI_FONT_MEDIUM));
+	child->addWidgetDown(new ofxUILabel(targetName, OFX_UI_FONT_MEDIUM));
 	child->addSpacer(width, 2);
 	
 	
@@ -74,61 +80,7 @@ ofxUICanvasPlus* ControlSegment::createPanel(const ramNodeArray &NA)
 	return child;
 }
 
-void ControlSegment::loadCache()
-{
-	if ( !ofFile::doesFileExist(getXMLFilePath()) ) return;
-	
-	XML.clear();
-	XML.loadFile(getXMLFilePath());
-	
-	/// color
-	XML.pushTag("color");
-	jointColor.r = XML.getValue("r", 0.8);
-	jointColor.g = XML.getValue("g", 0.8);
-	jointColor.b = XML.getValue("b", 0.8);
-	XML.popTag();
-	
-	/// position
-	XML.pushTag("position");
-	position.x = XML.getValue("x", 0.0);
-	position.y = XML.getValue("y", 0.0);
-	XML.popTag();
-	
-	/// boolean state
-	XML.pushTag("state");
-	bHideActor = XML.getValue("hideActor", 0);
-	btnHideActor->setValue(bHideActor);
-	btnHideActor->stateChange();
-	XML.popTag();
-}
 
-void ControlSegment::saveCache()
-{
-	XML.clear();
-	
-	/// color
-	XML.addTag("color");
-	XML.pushTag("color");
-	XML.addValue("r", jointColor.r);
-	XML.addValue("g", jointColor.g);
-	XML.addValue("b", jointColor.b);
-	XML.popTag();
-	
-	/// position
-	XML.addTag("position");
-	XML.pushTag("position");
-	XML.addValue("x", position.x);
-	XML.addValue("y", position.y);
-	XML.popTag();
-	
-	/// boolean states
-	XML.addTag("state");
-	XML.pushTag("state");
-	XML.addValue("hideActor", bHideActor);
-	XML.popTag();
-	
-	XML.saveFile(getXMLFilePath());
-}
 
 void ControlSegment::toggleRecording(const bool bStart)
 {
@@ -187,18 +139,10 @@ void ControlSegment::onValueChanged(ofxUIEventArgs& e)
 #pragma mark -
 #pragma mark private methods
 
-void ControlSegment::reset()
+void ControlSegment::init()
 {
-	bHideActor = false;
-	bNeedsResetPos = false;
+    BaseSegment::init();
 	bRecording = false;
-	
-	jointColor = ofFloatColor(1.0, 0.15, 0.4);
-	position = ofPoint(0, 0);
 }
 
-const string ControlSegment::getXMLFilePath() const
-{
-	return ramToResourcePath("Settings/Actors/color."+name+".xml");
-}
 

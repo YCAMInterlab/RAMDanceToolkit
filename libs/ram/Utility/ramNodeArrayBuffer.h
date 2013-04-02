@@ -50,12 +50,6 @@ public:
 		return buffer[index];
 	}
 
-	const ramNodeArray& get(size_t index) const
-	{
-		if (index >= buffer.size()) return buffer.back();
-		return buffer[index];
-	}
-
 	size_t getSize() const { return buffer.size(); }
 
 private:
