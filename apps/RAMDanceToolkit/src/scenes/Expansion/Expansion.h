@@ -1,33 +1,10 @@
 #pragma once
 
+
 class Expansion : public ramBaseScene
 {
 	
 public:
-    
-    class JointUI
-    {
-        
-    public:
-        
-        JointUI(int index) : bBigger(false), bVidibility(true)
-        {
-            idx = index;
-            
-			string nameBigger = (index<10 ? " " : "") + ofToString(index);
-            toggleSize = new ofxUIToggle("Size:" + nameBigger, &bBigger, 8, 8);
-            
-			string nameDraw = ramActor::getJointName(index);
-            toggleDraw = new ofxUIToggle("Show:" + nameDraw, &bVidibility, 8, 8);
-        }
-        
-        ofxUIToggle *toggleDraw;
-        ofxUIToggle *toggleSize;
-        bool bBigger;
-        bool bVidibility;
-        int idx;
-    };
-    
     
 	Expansion() :
     mShowName(true),
@@ -56,7 +33,7 @@ public:
 		
 		ramGetGUI().addSlider("Expasion Ratio", 1.0, 10.0, &mExpasionRatio);
 		ramGetGUI().addSlider("Box size", 3.0, 100.0, &mBoxSize);
-		ramGetGUI().addSlider("Big Box ratio", 2.0, 100.0, &mBoxSizeRatio);
+		ramGetGUI().addSlider("Big Box ratio", 2.0, 10.0, &mBoxSizeRatio);
 		
 		panel->addToggle("Toggle box size", true, 20, 20);
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
@@ -65,20 +42,19 @@ public:
 		
 		for(int i=0; i<ramActor::NUM_JOINTS; i++)
 		{
-            JointUI *jointui = new JointUI(i);
-            panel->addWidgetDown(jointui->toggleSize);
-            panel->addWidgetRight(jointui->toggleDraw);
-            jointUIs.push_back(jointui);
+            string name = (i<10 ? " " : "") + ofToString(i);
+			ofxUIToggle *toggleSize = new ofxUIToggle("Size" + name, &mBiggerSize[i], 8, 8);
+			panel->addWidgetDown(toggleSize);
+			mToggleSize[i] = toggleSize;
+			
+			ofxUIToggle *toggleVisible = new ofxUIToggle(ramActor::getJointName(i), &mNodeVisibility[i], 8, 8);
+			panel->addWidgetRight(toggleVisible);
+			mToggleDraw[i] = toggleVisible;
 		}
 		
 		ofAddListener(panel->newGUIEvent, this, &Expansion::onValueChanged);
 		
 #endif
-	}
-	
-	void setup()
-	{
-        jointUIs.clear();
 	}
 	
 	void draw()
@@ -94,17 +70,15 @@ public:
 			
 			ofPushStyle();
 			ofNoFill();
-			for (int j=0; j<processedNA.getNumNode(); j++)
+			for (int nodeId=0; nodeId<processedNA.getNumNode(); nodeId++)
 			{
-                JointUI *jointui = jointUIs[j];
+				if (mNodeVisibility[nodeId] == false) continue;
                 
-				if (jointui->bVidibility == false) continue;
-                
-				ramNode &node = processedNA.getNode(j);
+				ramNode &node = processedNA.getNode(nodeId);
 				
 				node.beginTransform();
 				
-				int boxSize = mBoxSize * (jointui->bBigger ? mBoxSizeRatio : 1);
+				int boxSize = mBoxSize * (mBiggerSize[nodeId] ? mBoxSizeRatio : 1);
 				
 				if (mShowBox)
 				{
@@ -123,7 +97,7 @@ public:
 				{
 					ofSetColor(100);
 					ofSetLineWidth(1);
-					ofLine(src.getNode(j), processedNA.getNode(j));
+					ofLine(src.getNode(nodeId), processedNA.getNode(nodeId));
 				}
 				
 				
@@ -183,17 +157,13 @@ public:
 	void setAllVisiblity(bool b)
 	{
 		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-        {
-            jointUIs.at(i)->bVidibility = b;
-        }
+            mToggleDraw[i]->setValue(b);
 	}
 	
 	void toggleAllSize(bool b)
 	{
 		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-        {
-            jointUIs.at(i)->bBigger = b;
-        }
+            mToggleSize[i]->setValue(b);
 	}
     
     
@@ -201,8 +171,12 @@ private:
     
     ramFilterEach<ramExpansion> mExpansion;
     ramFilterEach<ramLowPassFilter> mLowpass;
+    
+	ofxUIToggle *mToggleDraw[ramActor::NUM_JOINTS];
+	bool mNodeVisibility[ramActor::NUM_JOINTS];
 	
-    vector<JointUI*> jointUIs;
+	ofxUIToggle *mToggleSize[ramActor::NUM_JOINTS];
+	bool mBiggerSize[ramActor::NUM_JOINTS];
 	
 	bool mShowAxis;
 	bool mShowBox;

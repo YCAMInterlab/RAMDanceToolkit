@@ -25,8 +25,6 @@ public:
 
 	const ramNodeArray& filter(const ramNodeArray& src)
 	{
-        cout << mExpand << endl;
-        
 		expandedArray = src;
 
 		for (int i = 0; i < expandedArray.getNumNode(); i++)
