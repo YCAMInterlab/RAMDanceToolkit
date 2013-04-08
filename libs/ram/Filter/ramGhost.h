@@ -4,6 +4,7 @@
 
 #include "ramBaseFilter.h"
 #include "ramControlPanel.h"
+#include "ramLowPassFilter.h"
 
 class ramGhost : public ramBaseFilter
 {
@@ -81,7 +82,7 @@ public:
 	inline unsigned int getHistorySize() { return historySize; }
 
 protected:
-
+    
 	ramNodeArray ghost;
 	deque<ramNodeArray> record;
 
@@ -107,7 +108,7 @@ protected:
 
 			const ofVec3f& p0 = presentArray.getNode(i).getGlobalPosition();
 			const ofVec3f& p1 = pastArray.getNode(i).getGlobalPosition();
-
+            
 			// position
 			ofVec3f d = (p0 - p1);
 			d.normalize();

@@ -39,7 +39,8 @@ ramNodeArray& ramNodeArray::operator=(const ramNodeArray& copy)
 	ofxNodeArray::NodeArray<ramNodeArray, ramNode>::operator=(copy);
 	
 	type = copy.type;
-
+    
+    is_playback = copy.is_playback;
 	last_timestamp = copy.last_timestamp;
 	current_timestamp = copy.current_timestamp;
 	last_update_client_time = copy.last_update_client_time;

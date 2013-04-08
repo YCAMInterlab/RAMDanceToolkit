@@ -11,14 +11,16 @@ class Particles : public ramBaseScene
 	
 	float particle_amount;
 	
-	ramFilterEach<ramGhost> filters;
+	ramFilterEach<ramGhost> ghostFilters;
+    bool useGhost;
 	
 public:
 	
-	Particles() : particle_amount(4.0) {}
+	Particles() : particle_amount(4.0), useGhost(false) {}
 	
 	void setupControlPanel()
 	{
+        ramGetGUI().addToggle("Change emit position", &useGhost);
 		ramGetGUI().addSlider("Amount", 1.0, 15.0, &particle_amount);
 		ramGetGUI().addSlider("Life", 0.1, 10.0, &pe.particle_life);
 		ramGetGUI().addSlider("Velocity", 0.1, 5, &pe.particle_velocity);
@@ -38,7 +40,8 @@ public:
 	
 	void update()
 	{
-		const vector<ramNodeArray>& NAs = filters.update(getAllNodeArrays());
+        
+		const vector<ramNodeArray>& NAs = useGhost ? ghostFilters.update(getAllNodeArrays()) : getAllNodeArrays();
         
 		for (int n = 0; n < NAs.size(); n++)
 		{

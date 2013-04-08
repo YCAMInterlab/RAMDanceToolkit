@@ -35,13 +35,16 @@ public:
 		ramGetGUI().addSlider("Box size", 3.0, 100.0, &mBoxSize);
 		ramGetGUI().addSlider("Big Box ratio", 2.0, 10.0, &mBoxSizeRatio);
 		
-		panel->addToggle("Toggle box size", true, 20, 20);
+		panel->addToggle("Toggle box size", false, 20, 20);
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
 		panel->addToggle("Show All", true, 20, 20);
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 		
 		for(int i=0; i<ramActor::NUM_JOINTS; i++)
 		{
+            mBiggerSize[i] = false;
+            mNodeVisibility[i] = true;
+            
             string name = (i<10 ? " " : "") + ofToString(i);
 			ofxUIToggle *toggleSize = new ofxUIToggle("Size" + name, &mBiggerSize[i], 8, 8);
 			panel->addWidgetDown(toggleSize);
@@ -136,7 +139,7 @@ public:
 			ofxUIToggle *t = (ofxUIToggle *)e.widget;
 			bool newValue = t->getValue();
 			
-			toggleAllSize(newValue);
+			seteAllSizeBigger(newValue);
 		}
 	}
     
@@ -160,7 +163,7 @@ public:
             mToggleDraw[i]->setValue(b);
 	}
 	
-	void toggleAllSize(bool b)
+	void seteAllSizeBigger(bool b)
 	{
 		for (int i=0; i<ramActor::NUM_JOINTS; i++)
             mToggleSize[i]->setValue(b);

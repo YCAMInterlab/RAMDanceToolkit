@@ -15,8 +15,6 @@ public:
 
 	void setupControlPanel()
 	{
-		ramGetGUI().addSection(getName());
-
 		ofAddListener(ramGetGUI().addButton("Clear"), this, &ramStamp::onClear);
 		ramGetGUI().addSlider("Recording Span", 2.0, 60.0, &mRecSpan);
 	}
