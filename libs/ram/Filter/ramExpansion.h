@@ -15,7 +15,7 @@ public:
 
 	string getName() const { return "ramExpansion"; };
 
-	ramExpansion() : mExpand(1.0), kExpandMax(3.0) {}
+	ramExpansion() : mExpand(1.0), kExpandMax(10.0) {}
 
 	void setupControlPanel()
 	{
@@ -25,6 +25,8 @@ public:
 
 	const ramNodeArray& filter(const ramNodeArray& src)
 	{
+        cout << mExpand << endl;
+        
 		expandedArray = src;
 
 		for (int i = 0; i < expandedArray.getNumNode(); i++)
@@ -43,6 +45,8 @@ public:
 
 		return expandedArray;
 	}
+    
+    inline void setExpand(float ratio) { mExpand = ratio; }
 
 protected:
 
