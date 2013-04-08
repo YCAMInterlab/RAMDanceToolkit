@@ -4,7 +4,6 @@
 #include "ControlSegment.h"
 #include "PlaybackSegment.h"
 
-
 /*
  almost all things of this class depends on ofxUI
 */
@@ -29,25 +28,27 @@ public:
 	
 	void onKeyPressed(ofKeyEventArgs &e);
 	void onValueChanged(ofxUIEventArgs &e);
+	void onFileDrop(ofDragInfo &e);
 	
-	void drawNodes(const ramNodeArray &NA); // experimental
-	
-	void setShowAll(bool showAll);
-	bool getShowAll() const;
+	void showAll(bool showAll);
+	void resetPosAll(bool showAll);
+    void pauseAll(bool bPause);
+    void recAll(bool bStartRec);
+	bool getShowAll();
+    void loadFile(const string filePath);
     
 	void setNeedsUpdatePanel(const bool needsUpdate);
     bool needsUpdatePanel();
+    
+	void drawNodes(const ramNodeArray &NA); // experimental
+    
 private:
     
-    
     /// playback
-	void onFileDrop(ofDragInfo &e);
-    void loadFile(const string filePath);
 	ramTSVCoder coder;
     
 	
 	/// internal use
-//    void addSegment(ramActorUISegmentType type, const string name);
     void addSegment(BaseSegment *newSegment);
 	void removeControlSegment(const string name);
 	void rebuildControlPanel();

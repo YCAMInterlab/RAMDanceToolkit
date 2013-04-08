@@ -8,7 +8,7 @@ ramActorsScene::ramActorsScene() :
 bShowAllActor(true),
 bRecAllActor(false),
 bUseShading(true),
-bUseSimpleActor(false)
+bUseSimpleActor(true)
 {
 	ofAddListener(ofEvents().fileDragEvent, this, &ramActorsScene::onFileDrop);
 }
@@ -84,92 +84,75 @@ void ramActorsScene::update()
             seg->session.updatePlayhead();
             
             ramNodeArray NA = seg->session.getCurrentFrame();
+            NA.setPlayback(true);
             NA.setTimestamp(ofGetElapsedTimef());
             getActorManager().instance().setNodeArray(NA);
         }
 		
 		it++;
 	}
-    
-    cout << "--- total size:" << mSegmentsMap.size() << endl;
 }
 
 void ramActorsScene::draw()
 {
     ///
 	bRecording = false;
-	
     
     ///
     ramBeginCamera();
 
-    SegmentsIter it = mSegmentsMap.begin();
-    
-    while (it != mSegmentsMap.end())
-    {
-        const string name = it->first;
-
-        assert( getActorManager().hasNodeArray(name) );
-        
-        ramNodeArray &NA = getNodeArray(name);
-        ramDrawBasicActor(NA);
-        
-        it++;
-        
-    }
+	for(int i=0; i<getNumNodeArray(); i++)
+	{
+		ramNodeArray &NA = getNodeArray(i);
+		
+		const string name = NA.getName();
+		
+		SegmentsIter it = mSegmentsMap.find(name);
+		
+		assert(it != mSegmentsMap.end());
+		
+		BaseSegment *seg = it->second;
+		
+		/// draw if "Show actor" toggle is anabled
+		// note that ofxUIImageToggle shows hilighted image when it's false,
+        if (!seg->bHideActor)
+		{
+			ofPushMatrix();
+			ofPushStyle();
+			{
+				
+				if (bUseShading) light.enable();
+				
+				ofSetColor(seg->jointColor);
+				ofTranslate(seg->position.x, 0, seg->position.y);
+				
+				if (NA.isRigid())
+				{
+					ramDrawBasicRigid((ramRigidBody&)NA);
+				}
+				else
+				{
+					if (bUseSimpleActor)
+                        ramDrawBasicActor((ramActor&)NA);
+					else
+                        drawNodes(NA);
+				}
+				
+				if (bUseShading) light.disable();
+			}
+			ofPopStyle();
+			ofPopMatrix();
+		}
+		
+		if (seg->getType() == RAM_UI_SEGMENT_TYPE_CONTROL)
+        {
+            if (static_cast<ControlSegment*>(seg)->isRecording())
+            {
+                bRecording = true;
+            }
+        }
+	}
     ramEndCamera();
-    
-    
-    
-//
-//	for(int i=0; i<getNumNodeArray(); i++)
-//	{
-//		ramNodeArray &NA = getNodeArray(i);
-//		
-//		const string name = NA.getName();
-//		
-//		SegmentsIter it = mSegmentsMap.find(name);
-//		
-////		assert(it != mSegmentsMap.end());
-//		
-//		BaseSegment *seg = it->second;
-//		
-//		/// draw if "Show actor" toggle is anabled
-//		// note that ofxUIImageToggle shows hilighted image when it's false,
-//
-//		if (!seg->bHideActor)
-//		{
-//			ofPushMatrix();
-//			ofPushStyle();
-//			{
-//				
-//				if (bUseShading) light.enable();
-//				
-//				ofSetColor(seg->jointColor);
-//				ofTranslate(seg->position.x, 0, seg->position.y);
-//				
-//				if (NA.isRigid())
-//				{
-//					ramDrawBasicRigid((ramRigidBody&)NA);
-//				}
-//				else
-//				{
-//					if (bUseSimpleActor) ramDrawBasicActor((ramActor&)NA);
-//					else drawNodes(NA);
-//				}
-//				
-//				if (bUseShading) light.disable();
-//			}
-//			ofPopStyle();
-//			ofPopMatrix();
-//		}
-		
-		
-//		if (seg->bRecording)
-//		{
-//			bRecording = true;
-//		}
-//	}
 }
 
 void ramActorsScene::drawHUD()
@@ -192,26 +175,21 @@ void ramActorsScene::drawHUD()
 	
 void ramActorsScene::onActorSetup(const ramActor &actor)
 {
-    cout << __FUNCTION__ << endl;
     addSegment(new ControlSegment(actor.getName()));
 }
 
 void ramActorsScene::onRigidSetup(const ramRigidBody &rigid)
 {
-    cout << __FUNCTION__ << endl;
     addSegment(new ControlSegment(rigid.getName()));
 }
 
 void ramActorsScene::onActorExit(const ramActor &actor)
 {
-    cout << __FUNCTION__ << endl;
-    cout << actor.getName() << endl;
 	removeControlSegment(actor.getName());
 }
 
 void ramActorsScene::onRigidExit(const ramRigidBody &rigid)
 {
-    cout << __FUNCTION__ << endl;
 	removeControlSegment(rigid.getName());
 }
 
@@ -223,31 +201,10 @@ void ramActorsScene::onKeyPressed(ofKeyEventArgs &e)
 {
 	if (e.key == ' ')
 	{
-        bool newState = !getActorManager().isFreezed();
-        cout << "new state is " << (newState ? "stop" : "play") << endl;
-        
-        /// realtime osc data
-		getActorManager().setFreezed(newState);
-		
-        
-        /// playback data
-        SegmentsIter it = mSegmentsMap.begin();
-        
-        while (it != mSegmentsMap.end())
-        {
-            BaseSegment *seg = it->second;
-            if (seg->getType() == RAM_UI_SEGMENT_TYPE_PLAYBACK)
-            {
-                seg->session.setFreeze(newState);
-            }
-            it++;
-        }
-        
-        
-        /// UI Button state
-		btnPause->setValue(newState);
-		btnPause->stateChange();
-	}
+        const bool newState = !getActorManager().isFreezed();
+        btnPause->setValue(newState);
+        btnPause->triggerSelf();
+    }
 }
 
 void ramActorsScene::onValueChanged(ofxUIEventArgs &e)
@@ -256,63 +213,264 @@ void ramActorsScene::onValueChanged(ofxUIEventArgs &e)
 	
 	if (name == "Show All Actors")
 	{
-		SegmentsIter it = mSegmentsMap.begin();
-		
-		while (it != mSegmentsMap.end())
-		{
-			ControlSegment *seg = (ControlSegment *)it->second;
-			ofxUILabelToggle *toggle = (ofxUILabelToggle *)e.widget;
-			
-			// note that ofxUIImageToggle shows hilighted image when it's false,
-			const bool value = !toggle->getValue();
-			
-			seg->bHideActor = toggle->getValue();
-			seg->btnHideActor->setValue(value);
-			seg->btnHideActor->stateChange();
-			seg->saveCache();
-			
-			it++;
-		}
+        ofxUILabelToggle *t = (ofxUILabelToggle *)e.widget;
+		showAll(t->getValue());
 	}
 	
 	if (name == "Reset Positions")
 	{
-		SegmentsIter it = mSegmentsMap.begin();
-		
-		while (it != mSegmentsMap.end())
-		{
-			ControlSegment *seg = (ControlSegment *)it->second;
-			seg->position = ofPoint::zero();
-			seg->saveCache();
-			
-			it++;
-		}
+        ofxUILabelToggle *t = (ofxUILabelToggle *)e.widget;
+        resetPosAll(t->getValue());
 	}
 	
 	if (name == "Pause (Space key)")
 	{
-		getActorManager().toggleFreeze();
-		
-		btnPause->setValue( getActorManager().isFreezed() );
-		btnPause->stateChange();
+        ofxUILabelToggle *t = (ofxUILabelToggle *)e.widget;
+		pauseAll(t->getValue());
 	}
 	
 	if (name == "Recording All Actors")
 	{
-		SegmentsIter it = mSegmentsMap.begin();
+        ofxUILabelToggle *t = (ofxUILabelToggle *)e.widget;
+		recAll(t->getValue());
+	}
+}
+
+void ramActorsScene::onFileDrop(ofDragInfo &e)
+{
+    for(int i=0; i<e.files.size(); i++)
+	{
+		const string filePath = e.files.at(i);
 		
-		while (it != mSegmentsMap.end())
+		try
 		{
-			ControlSegment *seg = (ControlSegment *)it->second;
-			ofxUILabelToggle *toggle = (ofxUILabelToggle *)e.widget;
+			coder.load(filePath);
+			ramSession session = coder.get();
 			
-			const bool value = toggle->getValue();
-			seg->toggleRecording(value);
+			SegmentsIter it = mSegmentsMap.find(session.getNodeArrayName());
+            
+			if( it != mSegmentsMap.end() ) return;
 			
-			// no need to saveCache on click this recording button
-			it++;
+            const string name = session.getNodeArrayName();
+            
+            PlaybackSegment *seg = new PlaybackSegment(name);
+            seg->session = session;
+            seg->session.play();
+			addSegment(seg);
+		}
+		catch (std::exception &e)
+		{
+			cout << e.what() << endl;
 		}
 	}
+}
+
+
+#pragma mark -
+#pragma mark control methods
+
+void ramActorsScene::showAll(bool bShow)
+{
+    SegmentsIter it = mSegmentsMap.begin();
+    
+    while (it != mSegmentsMap.end())
+    {
+        BaseSegment *seg = it->second;
+        
+        // note that ofxUIImageToggle shows hilighted image when it's false,
+        const bool bHide = !bShow;
+        
+        seg->bHideActor = bHide;
+        seg->btnHideActor->setValue(bHide);
+        seg->btnHideActor->stateChange();
+        seg->saveCache();
+        
+        it++;
+    }
+}
+
+void ramActorsScene::resetPosAll(bool bReset)
+{
+    SegmentsIter it = mSegmentsMap.begin();
+    
+    while (it != mSegmentsMap.end())
+    {
+        BaseSegment *seg = it->second;
+        seg->position = ofPoint::zero();
+        seg->saveCache();
+        
+        it++;
+    }
+}
+
+void ramActorsScene::pauseAll(bool bPause)
+{
+    /// realtime osc data
+    getActorManager().setFreezed(bPause);
+    
+    
+    /// playback data
+    SegmentsIter it = mSegmentsMap.begin();
+    
+    while (it != mSegmentsMap.end())
+    {
+        BaseSegment *seg = it->second;
+        if (seg->getType() == RAM_UI_SEGMENT_TYPE_PLAYBACK)
+        {
+            seg->session.setFreeze(bPause);
+        }
+        it++;
+    }
+}
+
+void ramActorsScene::recAll(bool bStartRec)
+{
+    SegmentsIter it = mSegmentsMap.begin();
+    
+    while (it != mSegmentsMap.end())
+    {
+        
+        if (it->second->getType() == RAM_UI_SEGMENT_TYPE_CONTROL)
+        {
+            ControlSegment *seg = (ControlSegment *)it->second;
+            seg->toggleRecording(bStartRec);
+        }
+        
+        // no need to saveCache on click this recording button
+        it++;
+    }
+}
+
+bool ramActorsScene::getShowAll()
+{
+	return bShowAllActor;
+}
+
+void ramActorsScene::loadFile(const string filePath)
+{
+    
+}
+
+
+#pragma mark -
+#pragma mark private methods
+
+void ramActorsScene::addSegment(BaseSegment *newSegment)
+{
+    const string name = newSegment->getName();
+    
+    if (mSegmentsMap.find(name) == mSegmentsMap.end())
+    {
+        mSegmentsMap.insert( make_pair(name, newSegment) );
+    }
+
+    
+	/// create and add child panel
+	const int panelIndex = mSegmentsMap.size()-1;
+	const int panelHeight = 192;
+	const int panelHeaderHeight = 164;
+	
+	ofxUICanvasPlus* childPanel = newSegment->createPanel(name);
+	childPanel->getRect()->x = ramGetGUI().kXInit;
+	childPanel->getRect()->y = panelHeaderHeight + panelIndex * panelHeight;
+	childPanel->getRect()->width = ramGetGUI().kLength;
+	
+    
+	/// append widget, resize parent panel, load default settings
+	mLocalPanel->addWidget(childPanel);
+	mLocalPanel->autoSizeToFitWidgets();
+	newSegment->loadCache();
+}
+
+void ramActorsScene::removeControlSegment(const string name)
+{
+	SegmentsIter it = mSegmentsMap.find(name);
+	
+	assert( it != mSegmentsMap.end() );
+    
+    mSegmentsMap.erase( it );
+
+    setNeedsUpdatePanel(true);
+}
+
+void ramActorsScene::rebuildControlPanel()
+{
+	/// remove all widgets
+	mLocalPanel->removeWidgets();
+	mLocalPanel->resetPlacer();
+	
+	
+	/// adding panel header
+	createPanelHeader();
+	
+	
+	/// insert panels
+    map<string, BaseSegment*> tmpMap = mSegmentsMap;
+    mSegmentsMap.clear();
+    SegmentsIter it = tmpMap.begin();
+    
+    while (it != tmpMap.end())
+    {
+        BaseSegment *seg = it->second;
+        
+        if (seg->getType() == RAM_UI_SEGMENT_TYPE_CONTROL)
+        {
+            ControlSegment *s = new ControlSegment(seg->getName());
+            addSegment(s);
+        }
+        else if (seg->getType() == RAM_UI_SEGMENT_TYPE_PLAYBACK)
+        {
+            PlaybackSegment *s = new PlaybackSegment(seg->getName());
+            s->session = seg->session;
+            s->session.play();
+            addSegment(s);
+        }
+        
+        it++;
+    }
+    
+	mLocalPanel->autoSizeToFitWidgets();
+	
+	setNeedsUpdatePanel(false);
+}
+
+
+void ramActorsScene::createPanelHeader()
+{
+	const int width = ramGetGUI().kLength/2 - 3;
+	const int height = ramGetGUI().kDim * 1.3;
+	
+	mLocalPanel->addLabel(getName(), OFX_UI_FONT_LARGE);
+	mLocalPanel->addSpacer(ramGetGUI().kLength, 2);
+	
+    
+	mLocalPanel->addWidgetDown( new ofxUILabelButton("Load Recorded File", false, ramGetGUI().kLength, height) );
+	
+	/// 2x2 matrix
+	btnShowAll = new ofxUILabelToggle("Show All Actors", &bShowAllActor, width, height);
+	mLocalPanel->addWidgetDown( btnShowAll );
+	mLocalPanel->addWidgetRight( new ofxUILabelButton("Reset Positions", &bRecAllActor, width, height) );
+	mLocalPanel->addWidgetDown( new ofxUILabelToggle("Use Shading", &bUseShading, width, height) );
+	mLocalPanel->addWidgetRight( new ofxUILabelToggle("Use SimpleActor", &bUseSimpleActor, width, height) );
+	
+	
+	/// buttons which are controlled programatically
+	//  all of the child widgets of mLocalPanel are deleted when rebuildControlPanel is executed
+	//  so it needs to make new pointer
+	btnPause = new ofxUILabelToggle("Pause (Space key)", false, ramGetGUI().kLength, height);
+	btnRecAll = new ofxUILabelToggle("Recording All Actors", false, ramGetGUI().kLength, height);
+	mLocalPanel->addWidgetDown(btnPause);
+	mLocalPanel->addWidgetDown(btnRecAll);
+}
+
+void ramActorsScene::setNeedsUpdatePanel(const bool needsUpdate)
+{
+    bNeedUpdatePanel = needsUpdate;
+}
+
+bool ramActorsScene::needsUpdatePanel()
+{
+    return bNeedUpdatePanel;
 }
 
 
@@ -407,161 +565,4 @@ void ramActorsScene::drawNodes(const ramNodeArray &NA)
 	glPopAttrib();
 	
 	ofPopStyle();
-}
-
-
-#pragma mark -
-#pragma mark private methods
-
-void ramActorsScene::onFileDrop(ofDragInfo &e)
-{
-    for(int i=0; i<e.files.size(); i++)
-	{
-		const string filePath = e.files.at(i);
-		
-		try
-		{
-			coder.load(filePath);
-			ramSession session = coder.get();
-			
-			SegmentsIter it = mSegmentsMap.find(session.getNodeArrayName());
-            
-			if( it != mSegmentsMap.end() ) return;
-			
-            const string name = session.getNodeArrayName();
-            
-            PlaybackSegment *seg = new PlaybackSegment(name);
-            seg->session = session;
-            seg->session.play();
-			addSegment(seg);
-		}
-		catch (std::exception &e)
-		{
-			cout << e.what() << endl;
-		}
-	}
-}
-
-void ramActorsScene::loadFile(const string filePath)
-{
-    
-}
-
-void ramActorsScene::addSegment(BaseSegment *newSegment)
-{
-    const string name = newSegment->getName();
-    
-    if (mSegmentsMap.find(name) == mSegmentsMap.end())
-        mSegmentsMap.insert( make_pair(name, newSegment) );
-    
-    
-	/// create and add child panel
-	const int panelIndex = mSegmentsMap.size()-1;
-	const int panelHeight = 210;
-	const int panelHeaderHeight = 155;
-	
-	ofxUICanvasPlus* childPanel = newSegment->createPanel(name);
-	childPanel->getRect()->y = panelIndex * panelHeight + panelHeaderHeight;
-	
-    
-	/// append widget, resize parent panel, load default settings
-	mLocalPanel->addWidget(childPanel);
-	mLocalPanel->autoSizeToFitWidgets();
-	newSegment->loadCache();
-}
-
-
-void ramActorsScene::removeControlSegment(const string name)
-{
-	SegmentsIter it = mSegmentsMap.find(name);
-	
-	assert( it != mSegmentsMap.end() );
-    
-    mSegmentsMap.erase( it );
-
-    setNeedsUpdatePanel(true);
-}
-
-void ramActorsScene::rebuildControlPanel()
-{
-	/// remove all widgets
-	mLocalPanel->removeWidgets();
-	mLocalPanel->resetPlacer();
-	
-	
-	/// adding panel header
-	createPanelHeader();
-	
-	
-	/// insert panels
-    
-    SegmentsIter it = mSegmentsMap.begin();
-    
-    while (it != mSegmentsMap.end())
-    {
-        BaseSegment *seg = it->second;
-        addSegment(seg);
-//        if (seg->getType() == RAM_UI_SEGMENT_TYPE_CONTROL)
-//        {
-//        }
-//        else if (seg->getType() == RAM_UI_SEGMENT_TYPE_PLAYBACK)
-//        {
-//        }
-        
-        it++;
-    }
-    
-	mLocalPanel->autoSizeToFitWidgets();
-	
-	setNeedsUpdatePanel(false);
-}
-
-
-void ramActorsScene::createPanelHeader()
-{
-	const int width = ramGetGUI().kLength/2 - 5;
-	const int height = ramGetGUI().kDim * 1.3;
-	
-	mLocalPanel->addLabel(getName(), OFX_UI_FONT_LARGE);
-	mLocalPanel->addSpacer(ramGetGUI().kLength, 2);
-	
-    
-	mLocalPanel->addWidgetDown( new ofxUILabelButton("Load Recorded File", false, ramGetGUI().kLength, height) );
-	
-	/// 2x2 matrix
-	btnShowAll = new ofxUILabelToggle("Show All Actors", &bShowAllActor, width, height);
-	mLocalPanel->addWidgetDown( btnShowAll );
-	mLocalPanel->addWidgetRight( new ofxUILabelButton("Reset Positions", &bRecAllActor, width, height) );
-	mLocalPanel->addWidgetDown( new ofxUILabelToggle("Use Shading", &bUseShading, width, height) );
-	mLocalPanel->addWidgetRight( new ofxUILabelToggle("Use SimpleActor", &bUseSimpleActor, width, height) );
-	
-	
-	/// buttons which are controlled programatically
-	//  all of the child widgets of mLocalPanel are deleted when rebuildControlPanel is executed
-	//  so it needs to make new pointer
-	btnPause = new ofxUILabelToggle("Pause (Space key)", false, ramGetGUI().kLength, height);
-	btnRecAll = new ofxUILabelToggle("Recording All Actors", false, ramGetGUI().kLength, height);
-	mLocalPanel->addWidgetDown(btnPause);
-	mLocalPanel->addWidgetDown(btnRecAll);
-}
-
-void ramActorsScene::setShowAll(bool showAll)
-{
-	btnShowAll->setValue(showAll);
-	btnShowAll->triggerSelf();
-}
-
-bool ramActorsScene::getShowAll() const
-{
-	return bShowAllActor;
-}
-
-void ramActorsScene::setNeedsUpdatePanel(const bool needsUpdate)
-{
-    bNeedUpdatePanel = needsUpdate;
-}
-
-bool ramActorsScene::needsUpdatePanel()
-{
-    return bNeedUpdatePanel;
 }

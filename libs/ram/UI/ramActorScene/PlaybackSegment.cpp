@@ -1,4 +1,5 @@
 #include "PlaybackSegment.h"
+#include "ramActorManager.h"
 
 #pragma mark -
 #pragma mark constructor, destructor
@@ -44,6 +45,7 @@ ofxUICanvasPlus* PlaybackSegment::createPanel(const string targetName)
     
 	const float width = ramGetGUI().kLength;
 	const float height = ramGetGUI().kDim+3;
+    const float padding = ramGetGUI().kXInit*2;
 	
 	
 	ofxUICanvasPlus *child = new ofxUICanvasPlus();
@@ -55,10 +57,10 @@ ofxUICanvasPlus* PlaybackSegment::createPanel(const string targetName)
 	
 	/// section title
 	child->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_MEDIUM));
-	child->addSpacer(width, 2);
+	child->addSpacer(width-padding, 2);
 	
 	
-	/// Icons
+	/// Icons   
 	child->addWidgetDown(btnHideActor);
 	child->addWidgetRight(btnPlayActor);
 	child->addWidgetRight(btnCueActor);
@@ -67,11 +69,20 @@ ofxUICanvasPlus* PlaybackSegment::createPanel(const string targetName)
 	
 	/// actor color
 	child->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
-	child->addSlider("R", 0, 1, &jointColor.r, 43, height);
-	child->addSlider("G", 0, 1, &jointColor.g, 43, height);
-	child->addSlider("B", 0, 1, &jointColor.b, 43, height);
+	child->addSlider("R", 0, 1, &jointColor.r, 44, height);
+	child->addSlider("G", 0, 1, &jointColor.g, 44, height);
+	child->addSlider("B", 0, 1, &jointColor.b, 45, height);
 	child->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 	
+    
+	/// actor position
+	child->add2DPad("Position",
+					ofPoint(-500, 500),
+					ofPoint(-500, 500),
+					&position,
+					width-padding, 100);
+    
+    
     //	child->addWidgetDown(sliderProgress);
     //	child->addSlider("Progress", 0, src.getDuration(), &progress, width, height);
 	

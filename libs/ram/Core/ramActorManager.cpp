@@ -157,7 +157,7 @@ void ramActorManager::update()
 	{
 		const ramNodeArray &array = nodearrays[i];
 
-		if (array.isOutdated() && !isFreezed())
+		if (array.isOutdated() && !isFreezed() && !array.isPlayback())
 		{
 			if (array.isActor())
 			{

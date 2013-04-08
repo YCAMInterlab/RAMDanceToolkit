@@ -30,7 +30,7 @@ void ramNode::drawNodeName(int floatPos) const
 
 #pragma mark - ramNodeArray
 
-ramNodeArray::ramNodeArray() : last_timestamp(0), current_timestamp(0), last_update_client_time(0)
+ramNodeArray::ramNodeArray() : last_timestamp(0), current_timestamp(0), last_update_client_time(0), is_playback(false)
 {
 }
 

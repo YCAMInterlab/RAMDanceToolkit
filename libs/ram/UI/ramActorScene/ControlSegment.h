@@ -18,8 +18,10 @@ public:
     
 	void onValueChanged(ofxUIEventArgs& e);
 	void toggleRecording(const bool bStart);
-	
-private:
+
+	bool isRecording();
+    
+protected:
     
     /// additional variables from BaseSegment...
     

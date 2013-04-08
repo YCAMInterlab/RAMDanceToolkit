@@ -14,7 +14,6 @@ public:
     ofxUICanvasPlus* createPanel(const string targetName);
 	
 	void update();
-	
 //	void setVisible(const bool value);
 //	void setPlay(const bool value);
 //	void cue();

@@ -6,6 +6,7 @@
 #include "ramGlobal.h"
 #include "ramActorsScene.h"
 
+
 class ramSceneManager : public ramGlobalShortcut
 {
 public:

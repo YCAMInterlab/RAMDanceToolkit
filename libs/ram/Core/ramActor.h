@@ -121,12 +121,16 @@ public:
 	inline bool isActor() const { return type == RAM_NODEARRAY_TYPE_ACTOR; }
 	inline bool isRigid() const { return type == RAM_NODEARRAY_TYPE_RIGIDBODY; }
 	inline bool isTypeOf(ramNodeArrayType t) const { return type == t; }
-	
+    
+	inline void setPlayback(bool b) { is_playback = b; }
+	inline bool isPlayback() const { return is_playback; }
+    
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
-
+    
 protected:
 
 	ramNodeArrayType type;
+    bool is_playback;
 
 	float last_timestamp;
 	float current_timestamp;

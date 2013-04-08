@@ -484,6 +484,7 @@
 		9A712F611701918B00C449C3 /* PlaybackSegment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A712F5F1701918A00C449C3 /* PlaybackSegment.cpp */; };
 		9A712F621701918B00C449C3 /* PlaybackSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A712F601701918B00C449C3 /* PlaybackSegment.h */; };
 		9A712F64170191AC00C449C3 /* BaseSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A712F63170191AC00C449C3 /* BaseSegment.h */; };
+		9A712F661701971700C449C3 /* BaseSegment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A712F651701971700C449C3 /* BaseSegment.cpp */; };
 		9AD6F5CC16B926C000F7F51E /* ofxUITabbedCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6F52916B926BF00F7F51E /* ofxUITabbedCanvas.cpp */; };
 		9AD6F5CD16B926C000F7F51E /* ofxUITabbedCanvas.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AD6F52A16B926BF00F7F51E /* ofxUITabbedCanvas.h */; };
 /* End PBXBuildFile section */
@@ -973,6 +974,7 @@
 		9A712F5F1701918A00C449C3 /* PlaybackSegment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlaybackSegment.cpp; sourceTree = "<group>"; };
 		9A712F601701918B00C449C3 /* PlaybackSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackSegment.h; sourceTree = "<group>"; };
 		9A712F63170191AC00C449C3 /* BaseSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSegment.h; sourceTree = "<group>"; };
+		9A712F651701971700C449C3 /* BaseSegment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseSegment.cpp; sourceTree = "<group>"; };
 		9AD6F52916B926BF00F7F51E /* ofxUITabbedCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUITabbedCanvas.cpp; sourceTree = "<group>"; };
 		9AD6F52A16B926BF00F7F51E /* ofxUITabbedCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUITabbedCanvas.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1118,6 +1120,7 @@
 		277606CA16E4EB2700D6B31D /* ramActorScene */ = {
 			isa = PBXGroup;
 			children = (
+				9A712F651701971700C449C3 /* BaseSegment.cpp */,
 				9A712F63170191AC00C449C3 /* BaseSegment.h */,
 				9A712F5F1701918A00C449C3 /* PlaybackSegment.cpp */,
 				9A712F601701918B00C449C3 /* PlaybackSegment.h */,
@@ -2702,6 +2705,7 @@
 				9A38F59E16E9E81900FF8B66 /* ofxBtSoftBodyWorld.cpp in Sources */,
 				9A38F5A016E9E81900FF8B66 /* ofxBtWorld.cpp in Sources */,
 				9A712F611701918B00C449C3 /* PlaybackSegment.cpp in Sources */,
+				9A712F661701971700C449C3 /* BaseSegment.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

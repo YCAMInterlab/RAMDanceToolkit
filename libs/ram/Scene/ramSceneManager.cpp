@@ -50,7 +50,7 @@ ramActorsScene* ramSceneManager::getActorsScene()
 
 void ramSceneManager::setShowAllActors(bool showAllActors)
 {
-	return actorsScene->setShowAll(showAllActors);
+	return actorsScene->showAll(showAllActors);
 }
 
 bool ramSceneManager::getShowAllActors() const

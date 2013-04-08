@@ -1,7 +1,5 @@
 #include "ControlSegment.h"
 
-#include "ramSceneManager.h"
-
 #pragma mark -
 #pragma mark constructor, destructor
 
@@ -38,6 +36,7 @@ ofxUICanvasPlus* ControlSegment::createPanel(const string targetName)
 {
 	const float width = ramGetGUI().kLength;
 	const float height = ramGetGUI().kDim+3;
+    const float padding = ramGetGUI().kXInit*2;
 	
 	
 	ofxUICanvasPlus *child = new ofxUICanvasPlus();
@@ -49,7 +48,7 @@ ofxUICanvasPlus* ControlSegment::createPanel(const string targetName)
 	
 	/// section title
 	child->addWidgetDown(new ofxUILabel(targetName, OFX_UI_FONT_MEDIUM));
-	child->addSpacer(width, 2);
+	child->addSpacer(width-padding, 2);
 	
 	
 	/// Icons
@@ -58,11 +57,12 @@ ofxUICanvasPlus* ControlSegment::createPanel(const string targetName)
 	child->addWidgetRight(btnRecordActor);
 	btnHideActor->setValue(!ramShowActorsEnabled());
 	
+    
 	/// actor color
 	child->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
-	child->addSlider("R", 0, 1, &jointColor.r, 63, height);
-	child->addSlider("G", 0, 1, &jointColor.g, 63, height);
-	child->addSlider("B", 0, 1, &jointColor.b, 63, height);
+	child->addSlider("R", 0, 1, &jointColor.r, 61, height);
+	child->addSlider("G", 0, 1, &jointColor.g, 61, height);
+	child->addSlider("B", 0, 1, &jointColor.b, 60, height);
 	child->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 	
 	
@@ -71,7 +71,7 @@ ofxUICanvasPlus* ControlSegment::createPanel(const string targetName)
 					ofPoint(-500, 500),
 					ofPoint(-500, 500),
 					&position,
-					width, 100);
+					width-padding, 100);
 	
 	ofAddListener(child->newGUIEvent, this, &ControlSegment::onValueChanged);
 	
@@ -112,7 +112,6 @@ void ControlSegment::toggleRecording(const bool bStart)
 
 
 
-
 #pragma mark -
 #pragma mark Events
 
@@ -133,6 +132,16 @@ void ControlSegment::onValueChanged(ofxUIEventArgs& e)
 	}
 }
 
+
+
+
+
+#pragma mark -
+#pragma mark getter, setter
+bool ControlSegment::isRecording()
+{
+    return bRecording;
+}
 
 
 
