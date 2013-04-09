@@ -81,12 +81,15 @@ void ramActorsScene::update()
         /// recording data playback
         else if (seg->getType() == RAM_UI_SEGMENT_TYPE_PLAYBACK)
         {
-            seg->session.updatePlayhead();
-            
-            ramNodeArray NA = seg->session.getCurrentFrame();
-            NA.setPlayback(true);
-            NA.setTimestamp(ofGetElapsedTimef());
-            getActorManager().instance().setNodeArray(NA);
+            if (static_cast<PlaybackSegment*>(seg)->isPlaying())
+            {
+                seg->session.updatePlayhead();
+                
+                ramNodeArray NA = seg->session.getCurrentFrame();
+                NA.setPlayback(true);
+                NA.setTimestamp(ofGetElapsedTimef());
+                getActorManager().instance().setNodeArray(NA);
+            }
         }
 		
 		it++;
@@ -115,7 +118,7 @@ void ramActorsScene::draw()
 		
 		/// draw if "Show actor" toggle is anabled
 		// note that ofxUIImageToggle shows hilighted image when it's false,
-        if (!seg->bHideActor)
+        if (seg->isVisible())
 		{
 			ofPushMatrix();
 			ofPushStyle();
@@ -254,6 +257,7 @@ void ramActorsScene::onFileDrop(ofDragInfo &e)
             const string name = session.getNodeArrayName();
             
             PlaybackSegment *seg = new PlaybackSegment(name);
+            seg->parent = this;
             seg->session = session;
             seg->session.play();
 			addSegment(seg);
@@ -317,7 +321,7 @@ void ramActorsScene::pauseAll(bool bPause)
         BaseSegment *seg = it->second;
         if (seg->getType() == RAM_UI_SEGMENT_TYPE_PLAYBACK)
         {
-            seg->session.setFreeze(bPause);
+            static_cast<PlaybackSegment*>(seg)->pause(bPause);
         }
         it++;
     }

@@ -42,6 +42,9 @@ public:
     
 	void drawNodes(const ramNodeArray &NA); // experimental
     
+    void addSegment(BaseSegment *newSegment);
+	void removeControlSegment(const string name);
+    
 private:
     
     /// playback
@@ -49,8 +52,6 @@ private:
     
 	
 	/// internal use
-    void addSegment(BaseSegment *newSegment);
-	void removeControlSegment(const string name);
 	void rebuildControlPanel();
 	void createPanelHeader();
     

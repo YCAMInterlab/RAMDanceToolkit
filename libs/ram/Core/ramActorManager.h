@@ -49,6 +49,7 @@ public:
 	inline ramNodeArray& getNodeArray(int index) { return nodearrays[index]; }
 	inline ramNodeArray& getNodeArray(const string& name) { return nodearrays[name]; }
 	inline bool hasNodeArray(const string &key) { return nodearrays.hasKey(key); }
+    inline void removeNodeArray(const string& name) { nodearrays.erase(name); }
 	
 	// test
 	void setNodeArray(const ramNodeArray& NA) { nodearrays.set(NA.getName(), NA); }

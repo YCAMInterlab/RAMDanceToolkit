@@ -29,6 +29,9 @@ public:
 
     string getName() const;
     
+    inline void setVisibility(bool b) { bHideActor = b; }
+    inline bool isVisible() const { return !bHideActor; }
+    
 protected:
     
     ///

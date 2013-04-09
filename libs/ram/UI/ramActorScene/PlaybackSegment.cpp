@@ -11,8 +11,8 @@ PlaybackSegment::PlaybackSegment(string segmentName)
 	init();
 	
 	btnHideActor = new ofxUIImageToggle(32, 32, &bHideActor, ramToResourcePath("Images/show.png"),"show");
-	btnPlayActor = new ofxUIImageToggle(32, 32, &bPlaying, ramToResourcePath("Images/play.png"),"play");
-	btnCueActor = new ofxUIImageButton(32, 32, &bNeedsResetPos, ramToResourcePath("Images/reset.png"),"cue");
+	btnPlayActor = new ofxUIImageToggle(32, 32, &bPaused, ramToResourcePath("Images/play.png"),"pause");
+	btnCueActor = new ofxUIImageButton(32, 32, &bNeedsResetPos, ramToResourcePath("Images/reset.png"),"resetPos");
 	btnDeleteActor = new ofxUIImageButton(32, 32, false, ramToResourcePath("Images/delete.png"),"delete");
 }
 
@@ -81,10 +81,6 @@ ofxUICanvasPlus* PlaybackSegment::createPanel(const string targetName)
 					ofPoint(-500, 500),
 					&position,
 					width-padding, 100);
-    
-    
-    //	child->addWidgetDown(sliderProgress);
-    //	child->addSlider("Progress", 0, src.getDuration(), &progress, width, height);
 	
 	child->autoSizeToFitWidgets();
 	
@@ -93,23 +89,27 @@ ofxUICanvasPlus* PlaybackSegment::createPanel(const string targetName)
 	return child;
 }
 
-//void PlaybackSegment::setVisible(const bool value)
-//{
-//	bHideActor = value;
-//}
-//
-//void PlaybackSegment::setPlay(const bool value)
-//{
-//	if (!value)
-//		session.play();
-//	else
-//		session.stop();
-//}
-//
-//void PlaybackSegment::cue()
-//{
-//	session.setPlayhead(0);
-//}
+
+void PlaybackSegment::pause(bool bPause)
+{
+    bPaused = bPause;
+    
+	if (!bPaused)
+		session.play();
+	else
+		session.stop();
+    
+    btnPlayActor->setValue(bPaused);
+}
+
+void PlaybackSegment::deleteSelf()
+{
+    ramActorManager::instance().removeNodeArray(name);
+    parent->removeControlSegment(name);
+}
+
+
+
 
 
 #pragma mark -
@@ -119,29 +119,16 @@ void PlaybackSegment::onValueChanged(ofxUIEventArgs& e)
 {
 	const string widgetName = e.widget->getName();
 	
-	
-	if (widgetName == "show")
+	if (widgetName == "pause")
 	{
-//		ofxUILabelToggle *toggle = (ofxUILabelToggle *) e.widget;
-//		const bool value = toggle->getValue();
-//		setVisible(value);
-	}
-    
-	if (widgetName == "play")
-	{
-//		ofxUILabelToggle *toggle = (ofxUILabelToggle *) e.widget;
-//		const bool value = toggle->getValue();
-//		setPlay(value);
-	}
-    
-	if (widgetName == "cue")
-	{
-//		cue();
+		ofxUILabelToggle *toggle = (ofxUILabelToggle *) e.widget;
+		const bool value = toggle->getValue();
+		pause(value);
 	}
     
 	if (widgetName == "delete")
 	{
-//		parent->removeControlSegment(session.getNodeArrayName());
+        deleteSelf();
 	}
 	
 	saveCache();
