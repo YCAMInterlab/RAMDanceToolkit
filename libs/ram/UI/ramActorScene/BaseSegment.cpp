@@ -83,6 +83,6 @@ void BaseSegment::init()
 
 string BaseSegment::getCacheFilePath() const
 {
-	return ramToResourcePath("Settings/Actors/color."+name+".xml");
+	return ramToResourcePath("Settings/cache/color."+name+".xml");
 }
 

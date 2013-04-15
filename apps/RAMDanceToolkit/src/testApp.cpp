@@ -3,6 +3,9 @@
 /*!
  Scenes
  */
+#include "MovingCam.h"
+MovingCam movingCam;
+
 #include "LineDrawing.h"
 LineDrawing drawLines;
 
@@ -76,6 +79,7 @@ void testApp::setup()
 	/// scenes setup
 	// ------------------
 	ramSceneManager& sceneManager = ramSceneManager::instance();
+	sceneManager.addScene( movingCam.getPtr() );
 	sceneManager.addScene( drawLines.getPtr() );
 	sceneManager.addScene( bigbox.getPtr() );
 	sceneManager.addScene( future.getPtr() );
@@ -157,16 +161,7 @@ void testApp::onRigidExit(const ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	
-	if(key=='/')
-	{
-		ramLoadSettings("Settings/scene.xml");
-	}
-	
-	if(key=='_')
-	{
-		ramSaveSettings("Settings/scene.xml");
-	}
+    
 }
 
 //--------------------------------------------------------------
