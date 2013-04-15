@@ -214,6 +214,18 @@ void ramActorsScene::onValueChanged(ofxUIEventArgs &e)
 {
 	const string name = e.widget->getName();
 	
+    if (name == "Load Recorded File")
+    {
+        ofxUIButton *button = (ofxUIButton *)e.widget;
+        
+        if (button->getValue())
+        {
+            ofFileDialogResult result = ofSystemLoadDialog("Load recorded *.tsv file.", false, "");
+            if (result.bSuccess)
+                loadFile(result.getPath());
+        }
+    }
+    
 	if (name == "Show All Actors")
 	{
         ofxUILabelToggle *t = (ofxUILabelToggle *)e.widget;
@@ -244,30 +256,35 @@ void ramActorsScene::onFileDrop(ofDragInfo &e)
     for(int i=0; i<e.files.size(); i++)
 	{
 		const string filePath = e.files.at(i);
-		
-		try
-		{
-			coder.load(filePath);
-			ramSession session = coder.get();
-			
-			SegmentsIter it = mSegmentsMap.find(session.getNodeArrayName());
-            
-			if( it != mSegmentsMap.end() ) return;
-			
-            const string name = session.getNodeArrayName();
-            
-            PlaybackSegment *seg = new PlaybackSegment(name);
-            seg->parent = this;
-            seg->session = session;
-            seg->session.play();
-			addSegment(seg);
-		}
-		catch (std::exception &e)
-		{
-			cout << e.what() << endl;
-		}
+		loadFile(filePath);
 	}
 }
+
+void ramActorsScene::loadFile(const string filePath)
+{
+    try
+    {
+        coder.load(filePath);
+        ramSession session = coder.get();
+        
+        SegmentsIter it = mSegmentsMap.find(session.getNodeArrayName());
+        
+        if( it != mSegmentsMap.end() ) return;
+        
+        const string name = session.getNodeArrayName();
+        
+        PlaybackSegment *seg = new PlaybackSegment(name);
+        seg->parent = this;
+        seg->session = session;
+        seg->session.play();
+        addSegment(seg);
+    }
+    catch (std::exception &e)
+    {
+        cout << e.what() << endl;
+    }
+}
+
 
 
 #pragma mark -
@@ -349,12 +366,6 @@ bool ramActorsScene::getShowAll()
 {
 	return bShowAllActor;
 }
-
-void ramActorsScene::loadFile(const string filePath)
-{
-    
-}
-
 
 #pragma mark -
 #pragma mark private methods

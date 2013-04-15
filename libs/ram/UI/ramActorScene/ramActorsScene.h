@@ -29,13 +29,13 @@ public:
 	void onKeyPressed(ofKeyEventArgs &e);
 	void onValueChanged(ofxUIEventArgs &e);
 	void onFileDrop(ofDragInfo &e);
+    void loadFile(const string filePath);
 	
 	void showAll(bool showAll);
 	void resetPosAll(bool showAll);
     void pauseAll(bool bPause);
     void recAll(bool bStartRec);
 	bool getShowAll();
-    void loadFile(const string filePath);
     
 	void setNeedsUpdatePanel(const bool needsUpdate);
     bool needsUpdatePanel();

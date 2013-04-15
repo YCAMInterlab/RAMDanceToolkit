@@ -23,6 +23,7 @@ ramPresetTab::ramPresetTab()
 	addSpacer();
 	
     // nodecam
+    addLabel("NodeCam", OFX_UI_FONT_LARGE);
     addLabel("1. Click a node on actor", OFX_UI_FONT_SMALL);
     addLabel("which you want to set as", OFX_UI_FONT_SMALL);
     addLabel("camera pos or lookAt.", OFX_UI_FONT_SMALL);
