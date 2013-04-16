@@ -200,8 +200,6 @@
 		60D49F2216DE79B2003BA064 /* video.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 60D49EBA16DE79B2003BA064 /* video.hpp */; };
 		60D49F2316DE79B2003BA064 /* opencv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D49EBD16DE79B2003BA064 /* opencv.a */; };
 		9A21607916E4FFEF00EC81F4 /* ramTSVCoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A21607816E4FFEF00EC81F4 /* ramTSVCoder.cpp */; };
-		9A21608216E5114B00EC81F4 /* ramPlaybackTab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A21608016E5114B00EC81F4 /* ramPlaybackTab.cpp */; };
-		9A21608316E5114B00EC81F4 /* ramPlaybackTab.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A21608116E5114B00EC81F4 /* ramPlaybackTab.h */; };
 		9A38F4CC16E9E81900FF8B66 /* btBulletCollisionCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A38F3DE16E9E81800FF8B66 /* btBulletCollisionCommon.h */; };
 		9A38F4CD16E9E81900FF8B66 /* btBulletDynamicsCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A38F3DF16E9E81800FF8B66 /* btBulletDynamicsCommon.h */; };
 		9A38F4CE16E9E81900FF8B66 /* Bullet-C-Api.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A38F3E016E9E81800FF8B66 /* Bullet-C-Api.h */; };
@@ -688,8 +686,6 @@
 		60D49EBA16DE79B2003BA064 /* video.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = video.hpp; sourceTree = "<group>"; };
 		60D49EBD16DE79B2003BA064 /* opencv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = opencv.a; sourceTree = "<group>"; };
 		9A21607816E4FFEF00EC81F4 /* ramTSVCoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramTSVCoder.cpp; sourceTree = "<group>"; };
-		9A21608016E5114B00EC81F4 /* ramPlaybackTab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramPlaybackTab.cpp; sourceTree = "<group>"; };
-		9A21608116E5114B00EC81F4 /* ramPlaybackTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramPlaybackTab.h; sourceTree = "<group>"; };
 		9A38F3DE16E9E81800FF8B66 /* btBulletCollisionCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletCollisionCommon.h; sourceTree = "<group>"; };
 		9A38F3DF16E9E81800FF8B66 /* btBulletDynamicsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletDynamicsCommon.h; sourceTree = "<group>"; };
 		9A38F3E016E9E81800FF8B66 /* Bullet-C-Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bullet-C-Api.h"; sourceTree = "<group>"; };
@@ -1104,7 +1100,6 @@
 		277606C916E4EB2700D6B31D /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				9A21607F16E5114A00EC81F4 /* ramPlaybackTab */,
 				277606CA16E4EB2700D6B31D /* ramActorScene */,
 				277606CF16E4EB2700D6B31D /* ramControllable.h */,
 				277606D016E4EB2700D6B31D /* ramControlPanel.cpp */,
@@ -1587,15 +1582,6 @@
 				60D49EBD16DE79B2003BA064 /* opencv.a */,
 			);
 			path = osx;
-			sourceTree = "<group>";
-		};
-		9A21607F16E5114A00EC81F4 /* ramPlaybackTab */ = {
-			isa = PBXGroup;
-			children = (
-				9A21608016E5114B00EC81F4 /* ramPlaybackTab.cpp */,
-				9A21608116E5114B00EC81F4 /* ramPlaybackTab.h */,
-			);
-			path = ramPlaybackTab;
 			sourceTree = "<group>";
 		};
 		9A38F3B916E9E81800FF8B66 /* ofxBt */ = {
@@ -2329,7 +2315,6 @@
 				2776072416E4EB2700D6B31D /* ramNodeIdentifer.h in Headers */,
 				2776072616E4EB2700D6B31D /* ramTSVCoder.h in Headers */,
 				2776072816E4EB2700D6B31D /* ramUtils.h in Headers */,
-				9A21608316E5114B00EC81F4 /* ramPlaybackTab.h in Headers */,
 				9A70C17816E9CE6F00A5B755 /* Calibration.h in Headers */,
 				9A70C17916E9CE6F00A5B755 /* ContourFinder.h in Headers */,
 				9A70C17A16E9CE6F00A5B755 /* Distance.h in Headers */,
@@ -2683,7 +2668,6 @@
 				2776072016E4EB2700D6B31D /* ramCameraSettings.cpp in Sources */,
 				2776072716E4EB2700D6B31D /* ramUtils.cpp in Sources */,
 				9A21607916E4FFEF00EC81F4 /* ramTSVCoder.cpp in Sources */,
-				9A21608216E5114B00EC81F4 /* ramPlaybackTab.cpp in Sources */,
 				9A70C18116E9CE6F00A5B755 /* Calibration.cpp in Sources */,
 				9A70C18216E9CE6F00A5B755 /* ContourFinder.cpp in Sources */,
 				9A70C18316E9CE6F00A5B755 /* Distance.cpp in Sources */,
