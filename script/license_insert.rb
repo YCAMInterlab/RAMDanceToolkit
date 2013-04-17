@@ -1,5 +1,6 @@
-// 
-// main.cpp - RAMDanceToolkit
+require 'find'
+
+license_txt = <<EOF
 // 
 // Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
 // 
@@ -14,18 +15,23 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+EOF
 
-#include "testApp.h"
-#include "ofAppGlutWindow.h"
+Find.find(File.expand_path('.')) do |path|
+  
+  next if File.directory?(path)
+  next unless (File::extname(path) == '.h' || File::extname(path) == '.cpp')
+  
+  basename = File::basename(path)
+  
+  open(path, "r+") do |file|
+    
+    lines = file.readlines
+    lines.unshift("// \n// #{basename} - RAMDanceToolkit\n#{license_txt}\n")
+    file.rewind
 
-//--------------------------------------------------------------
-int main()
-{
-	ofAppGlutWindow window; // create a window
-	window.setGlutDisplayString("rgba depth double samples>=2 stencil");
-	
-	
-	// set width, height, mode (OF_WINDOW or OF_FULLSCREEN)
-	ofSetupOpenGL(&window, 1024, 768, OF_WINDOW);
-	ofRunApp(new testApp); // start the app
-}
+    lines.each do |line|
+      file.write line
+    end
+  end
+end
