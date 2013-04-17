@@ -22,14 +22,15 @@ class MovingCam : public ramBaseScene
         float angle;
     };
     
-    CameraSetting base, opposite, current, moveFrom, moveTo;
+    CameraSetting base, opposite, camera, move_from, move_to;
     MovingState state;
-    inline float getElapsedTime() { return ofGetElapsedTimef() - movingStartTime; }
-    float movingStartTime;
-    float movingDuration;
-    
-    float movingRadius;
-    float movingAngle;
+    float moving_start_time;
+    float moving_duration;
+    float moving_radius;
+	ofVec3f moving_axis;
+    bool is_camera_enabled;
+    inline float getElapsedTime() const { return ofGetElapsedTimef() - moving_start_time; }
+	inline bool isCameraMoving() const { return state == STATE_MOVING_UP || state == STATE_MOVING_DOWN; }
     
 public:
 	
@@ -43,18 +44,21 @@ public:
         panel->addButton("Start move up", false);
         panel->addButton("Start move down", false);
         panel->addButton("Reset & Reload XML", false);
+        panel->addSpacer();
+        panel->addToggle("Enable Camera", &is_camera_enabled);
         
         ofAddListener(panel->newGUIEvent, this, &MovingCam::onValuChanged);
 	}
 	
 	void setup()
 	{
+        is_camera_enabled = false;
         resetCamera();
 	}
 	
 	void update()
 	{
-        if (state != STATE_STOP)
+        if (isCameraMoving())
         {
             assert(state == STATE_MOVING_UP || state == STATE_MOVING_DOWN);
             
@@ -62,74 +66,68 @@ public:
                 (state == STATE_MOVING_UP) ? 1 :
                 (state == STATE_MOVING_DOWN) ? -1 : STATE_UNKNOWN;
             
-            const float progress = getElapsedTime() / movingDuration;
+            const float progress = getElapsedTime() / moving_duration;
+            const float angle = (abs(move_from.angle)*2 * progress) * direction;
             
-            const float deg = (abs(moveFrom.angle)*2 * progress) * direction;
-            
-            ofVec3f axis, normal;
-            normal = moveFrom.pos;
-            normal.y = 0;
-            axis = normal.getPerpendicular(ofVec3f(0, 1, 0));
-            
-            current.pos = moveFrom.pos.getRotated(deg, axis);
-            
-            getCameraManager().getActiveCamera().setPosition(current.pos);
-            getCameraManager().getActiveCamera().lookAt(current.lookAt);
-            
+            camera.pos = move_from.pos.getRotated(angle, moving_axis);
+			
             if (progress >= 1.0)
             {
-                current.pos = moveTo.pos;
+                camera.pos = move_to.pos;
                 resetCamera();
             }
+        }
+        
+        if (is_camera_enabled)
+        {
+            getCameraManager().getActiveCamera().setPosition(camera.pos);
+            getCameraManager().getActiveCamera().lookAt(camera.lookAt);
+            getCameraManager().getActiveCamera().setFov(camera.fov);
         }
 	}
 	
 	void draw()
 	{
+        if (is_camera_enabled)
+            return;
+        
         ramBeginCamera();
         
         ofPushStyle();
         
+        // from, to
         ofSetColor(255,0,0);
-        ofLine(ofVec3f::zero(), current.pos);
-        
-        // from
-        ofVec3f strPos1 = base.pos;
-        strPos1.y += 20;
-        ofDrawBitmapString("Pos1", strPos1);
         ofBox(base.pos, 10);
-        
-        // to
-        ofVec3f strPos2 = opposite.pos;
-        strPos2.y += 20;
-        ofDrawBitmapString("Pos2", strPos2);
         ofBox(opposite.pos, 10);
+		
+        ofVec3f strPos1 = move_from.pos;
+        strPos1.y += 20;
+        ofDrawBitmapString("From", strPos1);
         
-        // current
-        ofSetColor(0, 0, 255);
-        ofVec3f curStrPos = current.pos;
-        curStrPos.y += 20;;
-        ofDrawBitmapString("Cur", curStrPos);
-        ofBox(current.pos, 10);
+        ofVec3f strPos2 = move_to.pos;
+        strPos2.y += 20;
+        ofDrawBitmapString("To", strPos2);
         
+		// camera
+		ofSetColor(0, 0, 255);
+		ofVec3f curStrPos = camera.pos;
+		curStrPos.y += 20;;
+		ofDrawBitmapString("Camera", curStrPos);
+		ofBox(camera.pos, 10);
+		
+		// lookAt
+		ofSetColor(0, 255, 0);
+		ofVec3f lookAtStrPos = camera.lookAt;
+		lookAtStrPos.y += 20;;
+		ofDrawBitmapString("Look At", lookAtStrPos);
+		ofBox(camera.lookAt, 10);
+		
+		ofLine(camera.lookAt, camera.pos);
+		
         ofPopStyle();
         
         ramEndCamera();
 	}
-    
-    void onValuChanged(ofxUIEventArgs &e)
-    {
-        const string name = e.widget->getName();
-        
-        if (name == "Reset & Reload XML")
-            resetCamera();
-        
-        else if (name == "Start move up")
-            moveUp();
-        
-        else if (name == "Start move down")
-            moveDown();
-    }
     
     void reloadXML()
     {
@@ -158,8 +156,6 @@ public:
 		ofxXmlSettings XML;
 		XML.loadFile(filePath);
         
-        movingDuration = XML.getValue("cam:duration", 100);
-        
         base.pos.x = XML.getValue("cam:pos:x", 100);
         base.pos.y = XML.getValue("cam:pos:y", 100);
         base.pos.z = XML.getValue("cam:pos:z", 100);
@@ -168,33 +164,32 @@ public:
         base.lookAt.z = XML.getValue("cam:look_at:z", 0);
         base.fov = XML.getValue("cam:fov", 60);
         
-        movingRadius = base.pos.distance(ofVec3f::zero());
+        moving_duration = XML.getValue("cam:duration", 100);
+        moving_radius = base.pos.distance(ofVec3f::zero());
+		moving_axis = base.pos.getPerpendicular(ofVec3f(0, 1, 0));
         const float triHeight = base.pos.y;
-        const float triBase = sqrt(pow(movingRadius, 2) - pow(triHeight, 2));
+        const float triBase = sqrt(pow(moving_radius, 2) - pow(triHeight, 2));
         base.angle = ofRadToDeg( atan(triHeight/triBase) );
-        
-        opposite = base;
+
+		
+		// creating mirror node at Y-Axis opposite side
+		opposite = base;
         opposite.pos.y *= -1;
         opposite.angle *= -1;
-//        
-//        cout << "loaded" << endl;
-//        cout << movingDuration << endl;
-//        cout << base.pos << endl;
-//        cout << base.lookAt << endl;
-//        cout << base.fov << endl;
-//        cout << opposite.pos << endl;
-//        cout << opposite.lookAt << endl;
-//        cout << opposite.fov << endl;
-//        
-//        cout << "movingRadius:" << movingRadius << endl;
-//        cout << "tribase, triheight:" << triBase << ", " << triHeight << endl;
-//        cout << "movingAngle:"  << movingAngle << endl;
+		
+		
+		// setting default position, fov, lookAt
+		camera.pos = base.pos;
+		camera.lookAt = base.lookAt;
+		camera.fov = base.fov;
+		move_from.pos = base.pos;
+		move_to.pos = opposite.pos;
     }
     
     void resetCamera()
     {
         reloadXML();
-        movingStartTime = ofGetElapsedTimef();
+        moving_start_time = ofGetElapsedTimef();
         state = STATE_STOP;
     }
     
@@ -202,16 +197,41 @@ public:
     {
         resetCamera();
         state = STATE_MOVING_UP;
-        moveFrom = (base.pos.y > 0) ? opposite : base;
-        moveTo = (base.pos.y > 0) ? base : opposite;
+        move_from = (base.pos.y > 0) ? opposite : base;
+        move_to = (base.pos.y > 0) ? base : opposite;
+		camera = move_from;
     }
     
     void moveDown()
     {
         resetCamera();
         state = STATE_MOVING_DOWN;
-        moveFrom = (base.pos.y > 0) ? base : opposite;
-        moveTo = (base.pos.y > 0) ? opposite : base;
+        move_from = (base.pos.y > 0) ? base : opposite;
+        move_to = (base.pos.y > 0) ? opposite : base;
+		camera = move_from;
+    }
+    
+    void onValuChanged(ofxUIEventArgs &e)
+    {
+        const string name = e.widget->getName();
+        
+        if (name == "Reset & Reload XML")
+        {
+            if (static_cast<ofxUIButton*>(e.widget)->getValue())
+                resetCamera();
+        }
+        
+        else if (name == "Start move up")
+        {
+            if (static_cast<ofxUIButton*>(e.widget)->getValue())
+                moveUp();
+        }
+        
+        else if (name == "Start move down")
+        {
+            if (static_cast<ofxUIButton*>(e.widget)->getValue())
+                moveDown();
+        }
     }
     
     void onKeyPressed(ofKeyEventArgs &e)
@@ -233,6 +253,7 @@ public:
 	void onDisabled()
 	{
 		cout << "[Unit disabled] " << getName() << endl;
+		getCameraManager().rollbackDefaultCameraSetting();
         ofRemoveListener(ofEvents().keyPressed, this, &MovingCam::onKeyPressed);
         
 	}
