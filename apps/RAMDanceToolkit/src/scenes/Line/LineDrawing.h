@@ -63,7 +63,7 @@ public:
 			
 			line_width = 2;
 			
-			active = false;
+			active = true;
             toggle = new ofxUIToggle("Line " + ofToString(id), &active, 30, 30, 0, 0);
 			panel->addWidgetDown(toggle);
 			
@@ -465,6 +465,11 @@ public:
 		}
 	}
     
+	void loadPresetXML(string filePath)
+	{
+		loadXML(filePath);
+	}
+	
 private:
     ofxXmlSettings XML;
 };

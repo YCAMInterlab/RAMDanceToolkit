@@ -58,7 +58,15 @@ public:
 			onDisabled();
 	}
 	
+	virtual void loadPreset(size_t preset_id = 0)
+	{
+		cout << "[loadPreset] " << getName() << endl;
+	}
 	
+	virtual void loadPresetXML(string filePath)
+	{
+		cout << "[loadPresetXML] " << getName() << endl;
+	}
 	
 	virtual void onEnabled()
 	{

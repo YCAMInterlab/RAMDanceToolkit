@@ -83,8 +83,6 @@ ramControlPanel::~ramControlPanel()
 
 void ramControlPanel::setup()
 {
-	/// Event hooks
-	// -------------------------------------
 	ofAddListener(ofEvents().update, this, &ramControlPanel::update);
 	
 	addPanel(presetTab);

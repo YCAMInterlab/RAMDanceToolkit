@@ -53,21 +53,6 @@ public:
 		joint_color = ramColor::BLUE_NORMAL;
 	}
 	
-	void update()
-	{
-		
-	}
-	
-	void draw()
-	{
-		
-	}
-	
-	void drawHUD()
-	{
-
-	}
-	
 	void drawActor(const ramActor& actor)
 	{
 		ramTimeShifter &TS = time_shifters[actor.getName()];
@@ -104,10 +89,6 @@ public:
 			}
 		}
 		ofPopStyle();
-	}
-	
-	void drawRigid(const ramRigidBody &rigid)
-	{
 	}
 	
 	string getName() const { return "Hasty Chase"; }

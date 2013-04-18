@@ -33,10 +33,14 @@ public:
 	void setup();
 	void addScene(ramBaseScene* scene);
 	
+	size_t getNumScenes() const;
+	size_t findtSceneIndex(string name) const;
+	ramBaseScene* getScene(size_t index) const;
+	
 	ramActorsScene* getActorsScene();
 	void setShowAllActors(bool showAllActors);
 	bool getShowAllActors() const;
-
+	
 protected:
 
 	void enableAllEvents();

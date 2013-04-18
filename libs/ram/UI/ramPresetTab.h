@@ -45,6 +45,11 @@ protected:
     ramNode node_pos;
     ramNode node_look_at;
     
+	// preset scenes
+	void callPreset(size_t preset_id);
+	void setEnableScene(size_t idx, bool enable);
+	void disableAllScene();
+	
 public:
     
 	ramPresetTab();

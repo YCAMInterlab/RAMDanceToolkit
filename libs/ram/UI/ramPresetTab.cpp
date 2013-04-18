@@ -18,6 +18,7 @@
 #include "ramPresetTab.h"
 
 #include "ramCameraManager.h"
+#include "ramSceneManager.h"
 
 ramPresetTab::ramPresetTab()
 :ofxUITab("Presets", false)
@@ -27,8 +28,14 @@ ramPresetTab::ramPresetTab()
 ,cam_look_at(false)
 {
 	// should probably be a list of named presets instead of a grid
-	matrix = addToggleMatrix("Presets", 4, 4);
-	matrix->setAllowMultiple(false);
+    addLabelButton("Line", false);
+    addLabelButton("Hasty Chase", false);
+    addLabelButton("HC + Stamp", false);
+    addLabelButton("HC + Stamp + Natto", false);
+    addLabelButton("HC + Future", false);
+	addLabelButton("Line + Future", false);
+	addLabelButton("Particles + Future", false);
+	addLabelButton("Particles", false);
 	addSpacer();
 	
 	vector<string> cameraPresetNames;
@@ -77,6 +84,7 @@ void ramPresetTab::update(ofEventArgs& e)
         nf_pos = ramActorManager::instance().getLastSelectedNodeIdentifer();
         nf_pos.findOne(node_pos);
     }
+	
     if (cam_look_at)
     {
         nf_look_at = ramActorManager::instance().getLastSelectedNodeIdentifer();
@@ -129,11 +137,128 @@ void ramPresetTab::draw(ofEventArgs& e)
 
 void ramPresetTab::guiEvent(ofxUIEventArgs &e)
 {
+	// camera
 	int choice = getChoice(e, preset_cam_radio);
 	if(choice != -1)
-    {
+	{
 		int indices[] = {0, 1, 5};
 		int choice = getChoice(preset_cam_radio);
 		ramCameraManager::instance().rollbackDefaultCameraSetting(indices[choice]);
 	}
+	
+	// preset scenes
+	const string name = e.widget->getName();
+	
+	if      (name == "Line") callPreset(0);
+	else if (name == "Hasty Chase") callPreset(1);
+	else if (name == "HC + Stamp") callPreset(2);
+	else if (name == "HC + Stamp + Natto") callPreset(3);
+	else if (name == "HC + Future") callPreset(4);
+	else if (name == "Line + Future") callPreset(5);
+	else if (name == "Particles + Future") callPreset(6);
+	else if (name == "Particles") callPreset(7);}
+
+
+void ramPresetTab::callPreset(size_t preset_id)
+{
+	disableAllScene();
+	
+	static const size_t id_line = ramSceneManager::instance().findtSceneIndex("Line");
+	static const size_t id_hasty = ramSceneManager::instance().findtSceneIndex("Hasty Chase");
+	static const size_t id_stamp = ramSceneManager::instance().findtSceneIndex("Stamp");
+	static const size_t id_future = ramSceneManager::instance().findtSceneIndex("Future");
+	static const size_t id_particles = ramSceneManager::instance().findtSceneIndex("Particles");
+	
+	switch (preset_id)
+	{
+		case 0: // Line
+			setEnableScene(id_line, true);
+			ramSceneManager::instance().getScene(id_line)->loadPresetXML( ramToResourcePath("preset.lines.xml") );
+			break;
+			
+		case 1: // Hasty Chase
+			setEnableScene(id_hasty, true);
+			ramSceneManager::instance().getScene(id_hasty)->loadPreset(0);
+			break;
+			
+		case 2: // HC + Stamp
+			setEnableScene(id_hasty, true);
+			setEnableScene(id_stamp, true);
+			ramSceneManager::instance().getScene(id_hasty)->loadPreset(0);
+			ramSceneManager::instance().getScene(id_stamp)->loadPreset();
+			break;
+			
+		case 3: // HC + Stamp + Natto
+			setEnableScene(id_hasty, true);
+			setEnableScene(id_stamp, true);
+			ramSceneManager::instance().getScene(id_hasty)->loadPreset(1);
+			ramSceneManager::instance().getScene(id_stamp)->loadPreset();
+			break;
+			
+		case 4: // HC + Future
+			setEnableScene(id_hasty, true);
+			setEnableScene(id_future, true);
+			ramSceneManager::instance().getScene(id_hasty)->loadPreset(1);
+			ramSceneManager::instance().getScene(id_future)->loadPreset();
+			break;
+			
+		case 5: // Line + Future
+			setEnableScene(id_line, true);
+			setEnableScene(id_future, true);
+			ramSceneManager::instance().getScene(id_line)->loadPreset(0);
+			ramSceneManager::instance().getScene(id_future)->loadPreset();
+			break;
+			
+		case 6: // Particles + Future
+			setEnableScene(id_particles, true);
+			setEnableScene(id_future, true);
+			ramSceneManager::instance().getScene(id_particles)->loadPreset();
+			ramSceneManager::instance().getScene(id_future)->loadPreset();
+			break;
+			
+		case 7: // Particles
+			setEnableScene(id_particles, true);
+			ramSceneManager::instance().getScene(id_particles)->loadPreset();
+			break;
+	}
 }
+
+void ramPresetTab::setEnableScene(size_t idx, bool enable)
+{
+	// FIXME:
+	// idx:0 is "Actors" scene. it should be not scene but tab.
+	if (idx == 0)
+		return;
+	
+	if (idx > ramSceneManager::instance().getNumScenes())
+		return;
+	
+	ramSceneManager::instance().getScene(idx)->setEnabled(enable);
+	
+	// 0:Actors, 1:Preset, 2:Preferences tab don't have enableToggle.
+	int ui_offset = 3;
+	
+	if ((idx + ui_offset) > ramSceneManager::instance().getNumScenes()+1)
+		return;
+	
+	ramGetGUI().getSceneTabs().getEnableToggle(idx+ui_offset-1)->setValue(enable);
+}
+
+void ramPresetTab::disableAllScene()
+{
+	for (int i=0; i<ramSceneManager::instance().getNumScenes(); i++)
+	{
+		setEnableScene(i, false);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+

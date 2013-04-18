@@ -60,6 +60,25 @@ void ramSceneManager::addScene(ramBaseScene* scene)
 	ramGetGUI().addPanel(scene);
 }
 
+size_t ramSceneManager::getNumScenes() const
+{
+	return scenes.size();
+}
+size_t ramSceneManager::findtSceneIndex(string name) const
+{
+	for (int i=0; i<scenes.size(); i++)
+	{
+		string sceneName = scenes.at(i)->getName();
+		if (sceneName == name)
+			return i;
+	}
+	return -1;
+}
+ramBaseScene* ramSceneManager::getScene(size_t index) const
+{
+	return scenes.at(index);
+}
+
 ramActorsScene* ramSceneManager::getActorsScene()
 {
 	return actorsScene;

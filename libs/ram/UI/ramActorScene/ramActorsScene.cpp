@@ -71,7 +71,6 @@ void ramActorsScene::setup()
 
 void ramActorsScene::update()
 {
-    
     /// refresh control panel if it's needed
 	if (needsUpdatePanel())
 		rebuildControlPanel();
