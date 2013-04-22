@@ -173,7 +173,7 @@ void ramPresetTab::callPreset(size_t preset_id)
 	{
 		case 0: // Line
 			setEnableScene(id_line, true);
-			ramSceneManager::instance().getScene(id_line)->loadPresetXML( ramToResourcePath("preset.lines.xml") );
+			ramSceneManager::instance().getScene(id_line)->loadPresetXML( ramToResourcePath("Settings/presets/preset.lines.xml") );
 			break;
 			
 		case 1: // Hasty Chase
