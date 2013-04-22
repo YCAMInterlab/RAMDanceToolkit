@@ -205,7 +205,7 @@ void ramPresetTab::callPreset(size_t preset_id)
 		case 5: // Line + Future
 			setEnableScene(id_line, true);
 			setEnableScene(id_future, true);
-			ramSceneManager::instance().getScene(id_line)->loadPresetXML( ramToResourcePath("preset.lines.xml") );
+			ramSceneManager::instance().getScene(id_line)->loadPresetXML( ramToResourcePath("Settings/presets/preset.lines.xml") );
 			ramSceneManager::instance().getScene(id_future)->loadPreset();
 			break;
 			
