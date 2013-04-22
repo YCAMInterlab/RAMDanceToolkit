@@ -31,23 +31,30 @@ public:
 	bool fill_chaser;
 	ofFloatColor joint_color;
 	
+	ofxUIToggle
+		*drawLineToggle,
+		*showBoxToggle,
+		*fillChaserToggle;
+	
 	void setupControlPanel()
 	{
-		
-		buffer_time = 3600;
-		rate = 1.5;
+		drawLineToggle = new ofxUIToggle("draw line", &draw_line, 20, 20);
+		showBoxToggle = new ofxUIToggle("show box", &show_box, 20, 20);
+		fillChaserToggle = new ofxUIToggle("fill chaser", &fill_chaser, 20, 20);
 		
 		ramGetGUI().addSlider("buffer_time", 1, 10000, &buffer_time);
 		ramGetGUI().addSlider("rate", -2, 3, &rate);
 		
-		ramGetGUI().addToggle("draw_line", &draw_line);
-		ramGetGUI().addToggle("show box", &show_box);
-		ramGetGUI().addToggle("fill chaser", &fill_chaser);
+		ramGetGUI().getCurrentUIContext()->addWidgetDown(drawLineToggle);
+		ramGetGUI().getCurrentUIContext()->addWidgetDown(showBoxToggle);
+		ramGetGUI().getCurrentUIContext()->addWidgetDown(fillChaserToggle);
 		ramGetGUI().addColorSelector("chaser color", &joint_color);
 	}
 	
 	void setup()
 	{
+		buffer_time = 3600;
+		rate = 1.5;
 		show_box = false;
 		fill_chaser = false;
 		joint_color = ramColor::BLUE_NORMAL;
@@ -91,6 +98,27 @@ public:
 		ofPopStyle();
 	}
 	
+	void loadPreset(size_t preset_id=0)
+	{
+		buffer_time = 3600;
+		rate = 1.5;
+		draw_line = false;
+		show_box = false;
+		fill_chaser = false;
+		
+		if (preset_id == 1)
+		{
+			draw_line = true;
+		}
+
+		drawLineToggle->setValue(draw_line);
+		drawLineToggle->stateChange();
+		showBoxToggle->setValue(show_box);
+		showBoxToggle->stateChange();
+		fillChaserToggle->setValue(fill_chaser);
+		fillChaserToggle->stateChange();
+	}
+
 	string getName() const { return "Hasty Chase"; }
 };
 

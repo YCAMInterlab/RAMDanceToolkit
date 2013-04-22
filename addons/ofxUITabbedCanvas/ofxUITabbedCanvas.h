@@ -112,6 +112,10 @@ public:
 	ofxUITab* getCurrent() {
 		return tabs[currentTab];
 	}
+	ofxUIToggle* getEnableToggle(size_t idx)
+	{
+		return enableToggles.at(idx);
+	}
 	void guiEvent(ofxUIEventArgs &e) {
 		if (e.widget == saveButton && saveStatus) {
 			ofFileDialogResult result = ofSystemSaveDialog("settings.xml", "Save settings.");

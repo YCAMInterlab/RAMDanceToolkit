@@ -140,6 +140,16 @@ public:
 		updateFilters();
 	}
 	
+	void loadPreset(size_t preset_id=0)
+	{
+		for (int i=0; i<ghostFilters.getNumFilters(); i++)
+		{
+			ghostFilters.getFilter(i).setDistance(150);
+			ghostFilters.getFilter(i).setSpeed(27);
+		}
+	}
+	
+	
 	string getName() const { return "Future"; }
 };
 

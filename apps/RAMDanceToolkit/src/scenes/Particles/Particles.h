@@ -93,6 +93,14 @@ public:
 		
 		ramEndCamera();
 	}
+	
+	void loadPreset(size_t preset_id=0)
+	{
+		particle_amount = 5.0;
+		pe.particle_life = 2.6;
+		pe.particle_velocity = 0.7;
+		gravity->force = -0.01;
+	}
 		
 	string getName() const { return "Particles"; }
 };

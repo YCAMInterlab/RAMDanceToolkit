@@ -29,7 +29,7 @@ class Stamp : public ramBaseScene
 	ofFloatColor color;
 	ofFloatColor timer_display_color;
 	
-	float timer_duration;
+	ofxUIToggle *idleTimerToggle, *showActorToggle;
 	
 	bool use_idle_timer;
 	
@@ -40,23 +40,23 @@ public:
 	Stamp() : mShowActor(true), mShowBox(true) {}
 	
 	void setupControlPanel()
-	{
-		ramGetGUI().addToggle("Idle Timer", &use_idle_timer);
-		mStamp.setupControlPanel();
+	{	
+		idleTimerToggle = new ofxUIToggle("Idle Timer", &use_idle_timer, 30, 30);
+		showActorToggle = new ofxUIToggle("Show Actor", &mShowActor, 30, 30);
 		
+		ramGetGUI().getCurrentUIContext()->addWidgetDown(idleTimerToggle);
+		
+		mStamp.setupControlPanel();
         ramGetGUI().addSeparator();
-        
-		ramGetGUI().addToggle("Show Actor", &mShowActor);
+		ramGetGUI().getCurrentUIContext()->addWidgetDown(showActorToggle);
 		ramGetGUI().addColorSelector("Box line color", &color);
 		ramGetGUI().addSlider("Line width", 0, 6, &line_width);
-		
-		use_idle_timer = false;
-		timer_duration = 0.5;
     }
 	
 	void setup()
 	{
 		mStamp.clear();
+		use_idle_timer = false;
 	}
 	
 	void update()
@@ -95,5 +95,18 @@ public:
 		ramEndCamera();
 	}
 	
+	void loadPreset(size_t preset_id=0)
+	{
+		mStamp.clear();
+		mStamp.setRecSpan(5.0);
+		
+		line_width = 1.0;
+		use_idle_timer = false;
+		mShowActor = true;
+		idleTimerToggle->setValue(use_idle_timer);
+		idleTimerToggle->stateChange();
+		showActorToggle->setValue(mShowActor);
+		showActorToggle->stateChange();
+	}
 };
 

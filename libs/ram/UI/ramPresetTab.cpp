@@ -198,14 +198,14 @@ void ramPresetTab::callPreset(size_t preset_id)
 		case 4: // HC + Future
 			setEnableScene(id_hasty, true);
 			setEnableScene(id_future, true);
-			ramSceneManager::instance().getScene(id_hasty)->loadPreset(1);
+			ramSceneManager::instance().getScene(id_hasty)->loadPreset(0);
 			ramSceneManager::instance().getScene(id_future)->loadPreset();
 			break;
 			
 		case 5: // Line + Future
 			setEnableScene(id_line, true);
 			setEnableScene(id_future, true);
-			ramSceneManager::instance().getScene(id_line)->loadPreset(0);
+			ramSceneManager::instance().getScene(id_line)->loadPresetXML( ramToResourcePath("preset.lines.xml") );
 			ramSceneManager::instance().getScene(id_future)->loadPreset();
 			break;
 			
@@ -251,14 +251,3 @@ void ramPresetTab::disableAllScene()
 		setEnableScene(i, false);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
