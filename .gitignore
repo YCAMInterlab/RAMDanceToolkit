@@ -28,11 +28,13 @@ obj
 
 *.zip
 
+dev
 devApps
 bin/data
 !bin/data/.gitkeep
 
 
 # actor color setting　cache
+resources/Sounds/
 resources/Settings/cache/
 !resources/Settings/cache/.gitkeep
