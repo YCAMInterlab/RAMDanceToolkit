@@ -33,8 +33,10 @@ devApps
 bin/data
 !bin/data/.gitkeep
 
-
-# actor color setting　cache
 resources/Sounds/
+resources/MotionData/
 resources/Settings/cache/
+!resources/Sounds/.gitkeep
+!resources/MotionData/.gitkeep
 !resources/Settings/cache/.gitkeep
+resources/Settings/presets/preset.init.xml
