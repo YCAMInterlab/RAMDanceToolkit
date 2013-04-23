@@ -86,10 +86,10 @@ void ramTSVCoder::decode(ofBuffer buffer)
 			
 		} while (!buffer.isLastLine());
 		
-		cout << "[" << __FUNCTION__ << "] " << "File loaded! " << endl;
-		cout << "[" << __FUNCTION__ << "] " << "Actor: " << mSession.getNodeArrayName() << endl;
-		cout << "[" << __FUNCTION__ << "] " << "Duration: " << mSession.getDuration() << "sec"<< endl;
-		cout << "[" << __FUNCTION__ << "] " << "Frames: " << mSession.getNumFrames() << endl << endl;
+//		cout << "[" << __FUNCTION__ << "] " << "File loaded! " << endl;
+//		cout << "[" << __FUNCTION__ << "] " << "Actor: " << mSession.getNodeArrayName() << endl;
+//		cout << "[" << __FUNCTION__ << "] " << "Duration: " << mSession.getDuration() << "sec"<< endl;
+//		cout << "[" << __FUNCTION__ << "] " << "Frames: " << mSession.getNumFrames() << endl << endl;
 	}
 
 

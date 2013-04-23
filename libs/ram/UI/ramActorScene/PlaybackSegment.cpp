@@ -16,7 +16,6 @@
 // limitations under the License.
 
 #include "PlaybackSegment.h"
-#include "ramActorManager.h"
 
 #pragma mark -
 #pragma mark constructor, destructor
@@ -119,10 +118,65 @@ void PlaybackSegment::pause(bool bPause)
     btnPlayActor->setValue(bPaused);
 }
 
+void PlaybackSegment::loadCache()
+{
+	if ( !ofFile::doesFileExist(getCacheFilePath()) ) return;
+	
+	XML.clear();
+	XML.loadFile(getCacheFilePath());
+	
+	/// color
+	XML.pushTag("color");
+	jointColor.r = XML.getValue("r", 0.8);
+	jointColor.g = XML.getValue("g", 0.8);
+	jointColor.b = XML.getValue("b", 0.8);
+	XML.popTag();
+	
+	/// position
+	XML.pushTag("position");
+	position.x = XML.getValue("x", 0.0);
+	position.y = XML.getValue("y", 0.0);
+	XML.popTag();
+	
+	/// boolean state
+	XML.pushTag("state");
+	bHideActor = XML.getValue("hideActor", 0);
+	btnHideActor->setValue(bHideActor);
+	btnHideActor->stateChange();
+	XML.popTag();
+}
+
+void PlaybackSegment::saveCache()
+{
+	XML.clear();
+	
+	/// color
+	XML.addTag("color");
+	XML.pushTag("color");
+	XML.addValue("r", jointColor.r);
+	XML.addValue("g", jointColor.g);
+	XML.addValue("b", jointColor.b);
+	XML.popTag();
+	
+	/// position
+	XML.addTag("position");
+	XML.pushTag("position");
+	XML.addValue("x", position.x);
+	XML.addValue("y", position.y);
+	XML.popTag();
+	
+	/// boolean states
+	XML.addTag("state");
+	XML.pushTag("state");
+	XML.addValue("hideActor", bHideActor);
+	XML.popTag();
+	
+	XML.saveFile(getCacheFilePath());
+}
+
 void PlaybackSegment::deleteSelf()
 {
-    ramActorManager::instance().removeNodeArray(name);
-    parent->removeControlSegment(name);
+    ofSendMessage("/PlaybackSegment/remove "+getName());
 }
 
 
@@ -145,7 +199,10 @@ void PlaybackSegment::onValueChanged(ofxUIEventArgs& e)
     
 	if (widgetName == "delete")
 	{
-        deleteSelf();
+		ofxUILabelToggle *toggle = (ofxUILabelToggle *) e.widget;
+		const bool pressed = toggle->getValue();
+		if (pressed)
+			deleteSelf();
 	}
 	
 	saveCache();
@@ -159,6 +216,7 @@ void PlaybackSegment::onValueChanged(ofxUIEventArgs& e)
 
 void PlaybackSegment::init()
 {
+	bPaused = false;
     BaseSegment::init();
 }
 

@@ -142,7 +142,7 @@ void ramSession::play()
 	mRecording = false;
 	mPlaying = true;
 	
-	cout << "start playing " << getNodeArrayName() << "." << endl;
+//	cout << "start playing " << getNodeArrayName() << "." << endl;
 }
 
 void ramSession::stop()
@@ -151,7 +151,7 @@ void ramSession::stop()
 
 	mPlaying = false;
 	
-	cout << "stop playing " << getNodeArrayName() << "." << endl;
+//	cout << "stop playing " << getNodeArrayName() << "." << endl;
 }
 
 

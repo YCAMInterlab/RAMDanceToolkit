@@ -38,6 +38,9 @@ public:
 
 	bool isRecording();
     
+	void loadCache();
+	void saveCache();
+
 protected:
     
     /// additional variables from BaseSegment...

@@ -54,6 +54,10 @@ void ramActorsScene::setupControlPanel()
 
 void ramActorsScene::setup()
 {
+	/// to get message from PlaybackSegment
+	ofRegisterGetMessages(this);
+	
+	
 	/// font setting to draw "RECORDING" on screen right top
 	fontSize = 30;
 	font.loadFont(ramToResourcePath("Fonts/FreeUniversal-Regular.ttf"), fontSize, true, true);
@@ -128,7 +132,8 @@ void ramActorsScene::draw()
 		
 		SegmentsIter it = mSegmentsMap.find(name);
 		
-		assert(it != mSegmentsMap.end());
+		if (it == mSegmentsMap.end())
+			continue;
 		
 		BaseSegment *seg = it->second;
 		
@@ -216,6 +221,20 @@ void ramActorsScene::onRigidExit(const ramRigidBody &rigid)
 
 #pragma mark -
 #pragma mark Events
+void ramActorsScene::gotMessage(ofMessage &msg)
+{
+	vector<string> keys = ofSplitString(msg.message, "/");
+	
+	const string route = ofSplitString(msg.message, " ")[0];
+	string value = msg.message;
+	ofStringReplace(value, route+" ", "");
+	
+	if (route == "/PlaybackSegment/remove")
+	{
+		removeControlSegment(value);
+	}
+}
+
 void ramActorsScene::onKeyPressed(ofKeyEventArgs &e)
 {
 	if (e.key == ' ')
@@ -290,7 +309,6 @@ void ramActorsScene::loadFile(const string filePath)
         const string name = session.getNodeArrayName();
         
         PlaybackSegment *seg = new PlaybackSegment(name);
-        seg->parent = this;
         seg->session = session;
         seg->session.play();
         addSegment(seg);
@@ -390,12 +408,11 @@ void ramActorsScene::addSegment(BaseSegment *newSegment)
 {
     const string name = newSegment->getName();
     
-    if (mSegmentsMap.find(name) == mSegmentsMap.end())
-    {
-        mSegmentsMap.insert( make_pair(name, newSegment) );
-    }
+    if (mSegmentsMap.find(name) != mSegmentsMap.end())
+		return;
+	
+    mSegmentsMap.insert( make_pair(name, newSegment) );
 
-    
 	/// create and add child panel
 	const int panelIndex = mSegmentsMap.size()-1;
 	const int panelHeight = 192;
@@ -415,12 +432,15 @@ void ramActorsScene::addSegment(BaseSegment *newSegment)
 
 void ramActorsScene::removeControlSegment(const string name)
 {
+    ramActorManager::instance().removeNodeArray(name);
+	
 	SegmentsIter it = mSegmentsMap.find(name);
 	
-	assert( it != mSegmentsMap.end() );
-    
-    mSegmentsMap.erase( it );
-
+	if (it == mSegmentsMap.end())
+		return;
+	
+	mSegmentsMap.erase(it);
+	
     setNeedsUpdatePanel(true);
 }
 

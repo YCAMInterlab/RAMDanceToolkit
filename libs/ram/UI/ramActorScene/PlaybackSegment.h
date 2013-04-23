@@ -18,9 +18,7 @@
 #pragma once
 
 #include "BaseSegment.h"
-#include "ramActorsScene.h"
 
-class ramActorsScene;
 class PlaybackSegment : public BaseSegment
 {
 	
@@ -33,16 +31,14 @@ public:
     ofxUICanvasPlus* createPanel(const string targetName);
 	
 	void update();
-    
-//	void setVisible(const bool value);
-//	void cue();
 	
     void pause(bool bPause);
     void deleteSelf();
     
-    inline bool isPlaying() const { return !bPaused; }
-	
-    ramActorsScene *parent;
+	void loadCache();
+	void saveCache();
+
+	inline bool isPlaying() const { return !bPaused; }
     
 private:
 	

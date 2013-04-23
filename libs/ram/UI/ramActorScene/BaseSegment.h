@@ -36,8 +36,8 @@ class BaseSegment
 public:
     
     /// load / save actor's color, position, visibility....
-    void loadCache();
-    void saveCache();
+    virtual void loadCache() = 0;
+    virtual void saveCache() = 0;
     
     
     /// control panel definition

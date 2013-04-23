@@ -20,6 +20,7 @@
 #include "ramBaseScene.h"
 #include "ControlSegment.h"
 #include "PlaybackSegment.h"
+#include "ramActorManager.h"
 
 /*
  almost all things of this class depends on ofxUI
@@ -43,6 +44,7 @@ public:
 	void onActorExit(const ramActor &actor);
 	void onRigidExit(const ramRigidBody &rigid);
 	
+	void gotMessage(ofMessage &msg);
 	void onKeyPressed(ofKeyEventArgs &e);
 	void onValueChanged(ofxUIEventArgs &e);
 	void onFileDrop(ofDragInfo &e);
@@ -61,7 +63,7 @@ public:
     
     void addSegment(BaseSegment *newSegment);
 	void removeControlSegment(const string name);
-    
+	
 private:
     
     /// playback

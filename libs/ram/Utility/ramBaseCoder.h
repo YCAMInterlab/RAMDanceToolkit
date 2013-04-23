@@ -19,23 +19,6 @@
 
 #include "ramNodeArrayBuffer.h"
 #include "ramSession.h"
-/*
- # format of each frame sent from motioner
- s: string
- i: int
- f: float
-  ssisfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsfffffffsffffffff
- 
- "{s} osc route", "{s} Actor name", {i} numJoints,
- "{s} joint name", {f}x, {f}y, {f}z, {f}quat angle, {f}quat x, {f}quat y, {f}quat z,
- "{s} joint name", {f}x, {f}y, {f}z, {f}quat angle, {f}quat x, {f}quat y, {f}quat z,
- "{s} joint name", {f}x, {f}y, {f}z, {f}quat angle, {f}quat x, {f}quat y, {f}quat z,
- "{s} joint name", {f}x, {f}y, {f}z, {f}quat angle, {f}quat x, {f}quat y, {f}quat z,
- ...
- ...
- ...
- {f} timestamp
- */
 
 class ramBaseCoder
 {
@@ -50,9 +33,9 @@ public:
 	// -----------------------------
 	void load(const string filePath)
 	{
-		cout
-		<< "[" << __FUNCTION__ << "] " << "start loading file..."
-		<< "File name: " << filePath << endl;
+//		cout
+//		<< "[" << __FUNCTION__ << "] " << "start loading file..."
+//		<< "File name: " << filePath << endl;
 		
 		if ( !ofFile::doesFileExist(filePath) )
 		{
