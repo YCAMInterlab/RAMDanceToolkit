@@ -33,6 +33,6 @@ bin/data
 !bin/data/.gitkeep
 
 
-# cache for actor color setting
-resources/Settings/Actors/
-!resources/Settings/Actors/.gitkeep
+# actor color setting　cache
+resources/Settings/cache/
+!resources/Settings/cache/.gitkeep
