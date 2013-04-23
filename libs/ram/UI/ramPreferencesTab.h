@@ -29,7 +29,7 @@ protected:
 public:
 	ramPreferencesTab()
 	:ofxUITab("Preferences", false)
-	,fullscreen(false)
+	,fullscreen(true)
 	,useShadows(true)
 	,floorStyle(ramFloor::FLOOR_GRID_LINES)
 	,floorSize(600.0)

@@ -41,7 +41,7 @@ ramCameraManager::ramCameraManager()
 
 void ramCameraManager::loadDefaults()
 {
-	const string &kCamSettingFile = ramToResourcePath("Settings/cam.default_positions.xml");
+	const string &kCamSettingFile = ramToResourcePath("Settings/camera/cam.default_positions.xml");
 	ofxXmlSettings xml(kCamSettingFile);
 	settings = ramCameraSettings::loadSettings(xml);
 }

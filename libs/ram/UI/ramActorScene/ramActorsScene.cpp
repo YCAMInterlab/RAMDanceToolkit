@@ -50,6 +50,15 @@ void ramActorsScene::setupControlPanel()
 	rebuildControlPanel();
 	
 	ofAddListener(mLocalPanel->newGUIEvent, this, &ramActorsScene::onValueChanged);
+	
+	/// load Ando_1.tsv if this is the first launch of this application
+	string initial_file_path = "Settings/presets/preset.init.xml";
+	if (!ofFile::doesFileExist( ramToResourcePath(initial_file_path) ))
+	{
+		ofBuffer buf("hello ram!");
+		ofBufferToFile(ramToResourcePath(initial_file_path), buf);
+		loadFile(ramToResourcePath("MotionData/Ando_1.tsv"));
+	}
 }
 
 void ramActorsScene::setup()
@@ -297,6 +306,9 @@ void ramActorsScene::onFileDrop(ofDragInfo &e)
 
 void ramActorsScene::loadFile(const string filePath)
 {
+	if (mSegmentsMap.size() >= MAX_ACTORS)
+		return;
+	
     try
     {
         coder.load(filePath);
