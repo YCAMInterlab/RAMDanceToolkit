@@ -13,8 +13,8 @@
 		9A2B3F6616D325C7001CBFC9 /* KeplerBtDynamics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5316D325C7001CBFC9 /* KeplerBtDynamics.cpp */; };
 		9A2B3F6716D325C7001CBFC9 /* KeplerBtShapeDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5516D325C7001CBFC9 /* KeplerBtShapeDrawer.cpp */; };
 		9A2B3F6816D325C7001CBFC9 /* KeplerCube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5716D325C7001CBFC9 /* KeplerCube.cpp */; };
+		9AD1DE2017269E2100C97F20 /* btPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1DE1E17269E2100C97F20 /* btPicker.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
-		D2B8DCC616D3834A00210022 /* btPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCC416D3834A00210022 /* btPicker.cpp */; };
 		D2B8DCD216D3835700210022 /* BaseConstrains.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCC816D3835700210022 /* BaseConstrains.cpp */; };
 		D2B8DCD316D3835700210022 /* ChainBtDynamics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCCA16D3835700210022 /* ChainBtDynamics.cpp */; };
 		D2B8DCD416D3835700210022 /* ChainBtShapeDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCCC16D3835700210022 /* ChainBtShapeDrawer.cpp */; };
@@ -127,9 +127,9 @@
 		9A2B3F6116D325C7001CBFC9 /* Stamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stamp.h; sourceTree = "<group>"; };
 		9A2B3F6316D325C7001CBFC9 /* UpsideDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpsideDown.h; sourceTree = "<group>"; };
 		9A77845A171847F0004ED621 /* MovingCam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingCam.h; sourceTree = "<group>"; };
+		9AD1DE1E17269E2100C97F20 /* btPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btPicker.cpp; sourceTree = "<group>"; };
+		9AD1DE1F17269E2100C97F20 /* btPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btPicker.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
-		D2B8DCC416D3834A00210022 /* btPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btPicker.cpp; sourceTree = "<group>"; };
-		D2B8DCC516D3834A00210022 /* btPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btPicker.h; sourceTree = "<group>"; };
 		D2B8DCC816D3835700210022 /* BaseConstrains.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseConstrains.cpp; sourceTree = "<group>"; };
 		D2B8DCC916D3835700210022 /* BaseConstrains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseConstrains.h; sourceTree = "<group>"; };
 		D2B8DCCA16D3835700210022 /* ChainBtDynamics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainBtDynamics.cpp; sourceTree = "<group>"; };
@@ -277,6 +277,7 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				9AD1DE1D17269E2100C97F20 /* Helper */,
 				9A778459171847F0004ED621 /* MovingCam */,
 				9A2B3F3F16D325C7001CBFC9 /* Abacus */,
 				9A2B3F4116D325C7001CBFC9 /* BasicActor */,
@@ -288,7 +289,6 @@
 				27B8489616D35D17000D321D /* FourPoints */,
 				9A2B3F4916D325C7001CBFC9 /* Future */,
 				60E559B016D3366A00051FE9 /* HastyChase */,
-				D2B8DCC316D3834A00210022 /* Helper */,
 				9A2B3F4E16D325C7001CBFC9 /* Kepler */,
 				27E36A0016D4937000729344 /* Laban */,
 				9A2B3F5916D325C7001CBFC9 /* LineDrawing */,
@@ -429,6 +429,16 @@
 			path = scenes/MovingCam;
 			sourceTree = "<group>";
 		};
+		9AD1DE1D17269E2100C97F20 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				9AD1DE1E17269E2100C97F20 /* btPicker.cpp */,
+				9AD1DE1F17269E2100C97F20 /* btPicker.h */,
+			);
+			name = Helper;
+			path = scenes/Helper;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
@@ -464,16 +474,6 @@
 				BBAB23BE13894E4700AA2426 /* GLUT.framework */,
 			);
 			name = "3rd party frameworks";
-			sourceTree = "<group>";
-		};
-		D2B8DCC316D3834A00210022 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				D2B8DCC416D3834A00210022 /* btPicker.cpp */,
-				D2B8DCC516D3834A00210022 /* btPicker.h */,
-			);
-			name = Helper;
-			path = ../../../dev/Helper;
 			sourceTree = "<group>";
 		};
 		D2B8DCC716D3835700210022 /* Chain */ = {
@@ -652,12 +652,12 @@
 				9A2B3F6616D325C7001CBFC9 /* KeplerBtDynamics.cpp in Sources */,
 				9A2B3F6716D325C7001CBFC9 /* KeplerBtShapeDrawer.cpp in Sources */,
 				9A2B3F6816D325C7001CBFC9 /* KeplerCube.cpp in Sources */,
-				D2B8DCC616D3834A00210022 /* btPicker.cpp in Sources */,
 				D2B8DCD216D3835700210022 /* BaseConstrains.cpp in Sources */,
 				D2B8DCD316D3835700210022 /* ChainBtDynamics.cpp in Sources */,
 				D2B8DCD416D3835700210022 /* ChainBtShapeDrawer.cpp in Sources */,
 				D2B8DCD516D3835700210022 /* ChainObject.cpp in Sources */,
 				D2B8DCD616D3835700210022 /* Chain.cpp in Sources */,
+				9AD1DE2017269E2100C97F20 /* btPicker.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
