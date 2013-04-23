@@ -1,3 +1,20 @@
+// 
+// UpsideDown.h - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #pragma once
 
 class UpsideDown : public ramBaseScene
@@ -7,7 +24,8 @@ public:
     
     ofVec3f mEuler;
     ofQuaternion mRotation;
-    ramUpsideDown mUpsideDown;
+    ramFilterEach<ramUpsideDown> mUpsideDown;
+    
     float mOffset;
     
     ofVec3f mAutoRotateSpeed;
@@ -83,42 +101,41 @@ public:
         mat.rotate(mEuler.x, 1.0f, 0.0f, 0.0f);
         
         mRotation = mat.getRotate();
-        
-        mUpsideDown.setOffset(mOffset);
+        for (int i=0; i<mUpsideDown.getNumFilters(); i++)
+        {
+            mUpsideDown.getFilter(i).setOffset(mOffset);
+        }
 	}
 	
 	void draw()
 	{
-		ramBeginCamera();
-
+        vector<ramNodeArray> NAs;
+        for (int i=0; i<getNumNodeArray(); i++)
+        {
+            ramNodeArray tmpActor = getNodeArray(i);
+            ofQuaternion base = tmpActor.getNode(ramActor::JOINT_HIPS).getOrientationQuat();
+            ofQuaternion rotated = base * mRotation;
+            tmpActor.getNode(ramActor::JOINT_HIPS).setOrientation(rotated);
+            
+            NAs.push_back(tmpActor);
+        }
         
-		ramEndCamera();
+        vector<ramNodeArray> filterdNAs = mUpsideDown.update(NAs);
+        
+        ramBeginCamera();
+        
+        ofPushStyle();
+        for (int i=0; i<NAs.size(); i++)
+        {
+            ramNodeArray &NA = filterdNAs[i];
+            ofSetColor(ramColor::RED_DEEP);
+            ramDrawBasicActor(NA);
+        }
+        ofPopStyle();
+        
+        ramEndCamera();
 	}
 	
-	void drawActor(const ramActor& actor)
-	{
-
-        ramActor tmpActor = actor;
-        
-        ofQuaternion base = tmpActor.getNode(ramActor::JOINT_HIPS).getOrientationQuat();
-        ofQuaternion rotated = base * mRotation;
-        tmpActor.getNode(ramActor::JOINT_HIPS).setOrientation(rotated);
-        
-        ramActor filterd = mUpsideDown.update(tmpActor);
-        
-		ofSetColor(ramColor::RED_DEEP);
-        ramDrawBasicActor(filterd);
-	}
-	
-	void drawRigid(const ramRigidBody &rigid)
-	{
-		
-	}
-	
-	void drawFloor()
-	{
-        
-	}
 	
 	void onValueChanged(ofxUIEventArgs& e)
 	{
@@ -130,6 +147,6 @@ public:
         }
 	}
 	
-	const string getName() { return "Upside Down"; }
+	string getName() const { return "Upside Down"; }
 };
 

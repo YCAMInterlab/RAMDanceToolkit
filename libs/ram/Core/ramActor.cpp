@@ -1,3 +1,20 @@
+// 
+// ramActor.cpp - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #include "ramActor.h"
 
 #pragma mark - ramNode
@@ -14,14 +31,14 @@ ramNode& ramNode::operator=(const ramNode& copy)
 	return *this;
 }
 
-void ramNode::drawNodeId(int floatPos)
+void ramNode::drawNodeId(int floatPos) const
 {
 	ofVec3f pos = getGlobalPosition();
 	pos.y += floatPos;
 	ofDrawBitmapString(ofToString(getID()), pos);
 }
 
-void ramNode::drawNodeName(int floatPos)
+void ramNode::drawNodeName(int floatPos) const
 {
 	ofVec3f pos = getGlobalPosition();
 	pos.y += floatPos;
@@ -30,7 +47,7 @@ void ramNode::drawNodeName(int floatPos)
 
 #pragma mark - ramNodeArray
 
-ramNodeArray::ramNodeArray() : last_timestamp(0), current_timestamp(0), last_update_client_time(0)
+ramNodeArray::ramNodeArray() : last_timestamp(0), current_timestamp(0), last_update_client_time(0), is_playback(false)
 {
 }
 
@@ -39,7 +56,8 @@ ramNodeArray& ramNodeArray::operator=(const ramNodeArray& copy)
 	ofxNodeArray::NodeArray<ramNodeArray, ramNode>::operator=(copy);
 	
 	type = copy.type;
-
+    
+    is_playback = copy.is_playback;
 	last_timestamp = copy.last_timestamp;
 	current_timestamp = copy.current_timestamp;
 	last_update_client_time = copy.last_update_client_time;
@@ -115,6 +133,11 @@ ramActor::ramActor()
 	type = RAM_NODEARRAY_TYPE_ACTOR;
 	
 	nodes.resize(NUM_JOINTS);
+	for (int i = 0; i < nodes.size(); i++)
+	{
+		nodes[i].node_id = i;
+	}
+	
 	setupTree();
 }
 

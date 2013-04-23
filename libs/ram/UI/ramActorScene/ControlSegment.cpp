@@ -1,13 +1,30 @@
-#include "ControlSegment.h"
+// 
+// ControlSegment.cpp - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-#include "ramControlPanel.h"
+#include "ControlSegment.h"
 
 #pragma mark -
 #pragma mark constructor, destructor
 
-ControlSegment::ControlSegment()
+ControlSegment::ControlSegment(string segmentName)
 {
-	reset();
+    name = segmentName;
+    
+	init();
 	
 	btnHideActor = new ofxUIImageToggle(32, 32, &bHideActor, ramToResourcePath("Images/show.png"),"show");
 	btnResetActor = new ofxUIImageButton(32, 32, &bNeedsResetPos, ramToResourcePath("Images/reset.png"),"reset");
@@ -27,11 +44,16 @@ ControlSegment::~ControlSegment()
 #pragma mark -
 #pragma mark public methods
 
-ofxUICanvasPlus* ControlSegment::createPanel(const ramNodeArray &NA)
+ramActorUISegmentType ControlSegment::getType()
 {
-	name = NA.getName();
+    return RAM_UI_SEGMENT_TYPE_CONTROL;
+}
+
+ofxUICanvasPlus* ControlSegment::createPanel(const string targetName)
+{
 	const float width = ramGetGUI().kLength;
 	const float height = ramGetGUI().kDim+3;
+    const float padding = ramGetGUI().kXInit*2;
 	
 	
 	ofxUICanvasPlus *child = new ofxUICanvasPlus();
@@ -42,21 +64,22 @@ ofxUICanvasPlus* ControlSegment::createPanel(const ramNodeArray &NA)
 	
 	
 	/// section title
-	child->addWidgetDown(new ofxUILabel(NA.getName(), OFX_UI_FONT_MEDIUM));
-	child->addSpacer(width, 2);
+	child->addWidgetDown(new ofxUILabel(targetName, OFX_UI_FONT_MEDIUM));
+	child->addSpacer(width-padding, 2);
 	
 	
 	/// Icons
 	child->addWidgetDown(btnHideActor);
 	child->addWidgetRight(btnResetActor);
 	child->addWidgetRight(btnRecordActor);
+	btnHideActor->setValue(!ramShowActorsEnabled());
 	
-	
+    
 	/// actor color
 	child->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
-	child->addSlider("R", 0, 1, &jointColor.r, 63, height);
-	child->addSlider("G", 0, 1, &jointColor.g, 63, height);
-	child->addSlider("B", 0, 1, &jointColor.b, 63, height);
+	child->addSlider("R", 0, 1, &jointColor.r, 61, height);
+	child->addSlider("G", 0, 1, &jointColor.g, 61, height);
+	child->addSlider("B", 0, 1, &jointColor.b, 60, height);
 	child->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 	
 	
@@ -65,7 +88,7 @@ ofxUICanvasPlus* ControlSegment::createPanel(const ramNodeArray &NA)
 					ofPoint(-500, 500),
 					ofPoint(-500, 500),
 					&position,
-					width, 100);
+					width-padding, 100);
 	
 	ofAddListener(child->newGUIEvent, this, &ControlSegment::onValueChanged);
 	
@@ -74,12 +97,47 @@ ofxUICanvasPlus* ControlSegment::createPanel(const ramNodeArray &NA)
 	return child;
 }
 
+
+
+void ControlSegment::toggleRecording(const bool bStart)
+{
+	if (bStart)
+	{
+		/// rec start
+		session.startRecording();
+	}
+	else
+	{
+		/// rec stop
+		session.stopRecording();
+		
+		
+		/// save data as tsv file
+		ofFileDialogResult result = ofSystemSaveDialog(ofGetTimestampString("%Y.%m.%d_%H.%M.%S-") + name + ".tsv" , "Save motion data.");
+		
+		if(result.bSuccess)
+		{
+			coder.save(session, result.getPath());
+		}
+	}
+	
+	/// update button state programmatically
+	bRecording = bStart;
+	btnRecordActor->setValue(bStart);
+	btnRecordActor->stateChange();
+}
+
+bool ControlSegment::isRecording()
+{
+    return bRecording;
+}
+
 void ControlSegment::loadCache()
 {
-	if ( !ofFile::doesFileExist(getXMLFilePath()) ) return;
+	if ( !ofFile::doesFileExist(getCacheFilePath()) ) return;
 	
 	XML.clear();
-	XML.loadFile(getXMLFilePath());
+	XML.loadFile(getCacheFilePath());
 	
 	/// color
 	XML.pushTag("color");
@@ -127,38 +185,8 @@ void ControlSegment::saveCache()
 	XML.addValue("hideActor", bHideActor);
 	XML.popTag();
 	
-	XML.saveFile(getXMLFilePath());
+	XML.saveFile(getCacheFilePath());
 }
-
-void ControlSegment::toggleRecording(const bool bStart)
-{
-	if (bStart)
-	{
-		/// rec start
-		session.startRecording();
-	}
-	else
-	{
-		/// rec stop
-		session.stopRecording();
-		
-		
-		/// save data as tsv file
-		ofFileDialogResult result = ofSystemSaveDialog(ofGetTimestampString("%Y.%m.%d_%H.%M.%S-") + name + ".tsv" , "Save motion data.");
-		
-		if(result.bSuccess)
-		{
-			coder.save(session, result.getPath());
-		}
-	}
-	
-	/// update button state programmatically
-	bRecording = bStart;
-	btnRecordActor->setValue(bStart);
-	btnRecordActor->stateChange();
-}
-
-
 
 
 #pragma mark -
@@ -187,18 +215,9 @@ void ControlSegment::onValueChanged(ofxUIEventArgs& e)
 #pragma mark -
 #pragma mark private methods
 
-void ControlSegment::reset()
+void ControlSegment::init()
 {
-	bHideActor = false;
-	bNeedsResetPos = false;
+    BaseSegment::init();
 	bRecording = false;
-	
-	jointColor = ofFloatColor(1.0, 0.15, 0.4);
-	position = ofPoint(0, 0);
-}
-
-const string ControlSegment::getXMLFilePath() const
-{
-	return ramToResourcePath("Settings/Actors/color."+name+".xml");
 }
 

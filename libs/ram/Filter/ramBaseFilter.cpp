@@ -1,3 +1,20 @@
+// 
+// ramBaseFilter.cpp - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #include "ramBaseFilter.h"
 
 const ramNodeArray& ramBaseFilter::operator()(const ramNodeArray& src)
@@ -7,6 +24,7 @@ const ramNodeArray& ramBaseFilter::operator()(const ramNodeArray& src)
 
 const ramNodeArray& ramBaseFilter::update(const ramNodeArray& src)
 {
+	
 	if (cache.getNumNode() != src.getNumNode())
 		cache = src;
 	
@@ -24,7 +42,7 @@ const ramNodeArray& ramBaseFilter::get(size_t index) const { return cache; }
 size_t ramBaseFilter::getSize() const { return 1; }
 
 //
-const string ramBusSend::getName() { return "ramBusSend"; }
+string ramBusSend::getName() const { return "ramBusSend"; }
 
 ramBusSend::ramBusSend() {}
 ramBusSend::ramBusSend(const string &bus_name) { setBusName(bus_name); }

@@ -1,3 +1,20 @@
+// 
+// LineDrawing.h - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #pragma once
 
 #include "ofxXmlSettings.h"
@@ -8,7 +25,7 @@ class LineDrawing : public ramBaseScene
 	
 public:
 	
-	const string getName() { return "Line"; }
+	string getName() const { return "Line"; }
 	
 	struct LineContext
 	{
@@ -32,10 +49,11 @@ public:
 		ofFloatColor color;
 		
 		ramNodeLine nodeLine;
+        ofxUIToggle *toggle;
 		
 		bool active;
 		int id;
-
+        
 		void setupControlPanel()
 		{
 			
@@ -45,8 +63,9 @@ public:
 			
 			line_width = 2;
 			
-			active = false;
-			panel->addToggle("Line " + ofToString(id), &active, 15, 15, 0, 0);
+			active = true;
+            toggle = new ofxUIToggle("Line " + ofToString(id), &active, 30, 30, 0, 0);
+			panel->addWidgetDown(toggle);
 			
 			panel->addButton("From", &set_from, 10, 10, 0, 0);
 			panel->addButton("Control0", &set_control0, 10, 10, 0, 80);
@@ -184,9 +203,15 @@ public:
 	
 	void setupControlPanel()
 	{
-		
+		ramGetGUI().getCurrentUIContext()->addLabelButton("Load Line Settings", false, ramGetGUI().kLength);
+		ramGetGUI().getCurrentUIContext()->addLabelButton("Save Line Settings", false, ramGetGUI().kLength);
+        ramGetGUI().getCurrentUIContext()->addSpacer(ramGetGUI().kLength, 2);
+        
 		random_change_time = 60;
-		ramGetGUI().addSlider("random_change_time", 0.1, 60, &random_change_time);
+        ramGetGUI().addButton("Randomize");
+		ramGetGUI().addSlider("Auto Random change time", 0.0, 60, &random_change_time);
+        ramGetGUI().getCurrentUIContext()->addSpacer();
+        
 		last_changed_time = ofGetElapsedTimef();
 		
 		for (int i = 0; i < NUM_LINE; i++)
@@ -194,35 +219,72 @@ public:
 			lines[i].id = i;
 			lines[i].setupControlPanel();
 		}
-		
-		lines[0].active = true;
+        
+        ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &LineDrawing::onValueChanged);
 	}
 	
 	void setup()
 	{
-		ofAddListener(ofEvents().keyPressed, this, &LineDrawing::onKeyPressed);
+        loadXML();
 	}
-	
-	void onKeyPressed(ofKeyEventArgs &e)
-	{
-		if (e.key == 'r')
-		{
-			for (int i = 0; i < NUM_LINE; i++)
-			{
-				lines[i].randomize();
-			}
-		}
-		
-		if (e.key == 'l')
-		{
-			loadXML();
-		}
-	}
+    
+    void onValueChanged(ofxUIEventArgs &e)
+    {
+        const string name = e.widget->getName();
+        
+        if (name == "Randomize")
+        {
+            ofxUIButton *button = (ofxUIButton *)e.widget;
+            if (button->getValue())
+            {
+                for (int i = 0; i < NUM_LINE; i++) lines[i].randomize();
+            }
+        }
+        
+        if (name == "Load Line Settings")
+        {
+            ofxUIButton *button = (ofxUIButton *)e.widget;
+            if (button->getValue())
+            {
+                ofFileDialogResult result = ofSystemLoadDialog("Load Line Settings.", false, "Lines.xml");
+                if (result.bSuccess)
+                    loadXML(result.getPath());
+                
+                for (int i=0; i<NUM_LINE; i++)
+                {
+                    bool active;
+                    
+                    LineContext &line = lines[i];
+                    XML.pushTag("line", i);
+                    active = XML.getValue("active", true);
+                    XML.popTag();
+                    
+                    line.toggle->setValue(active);
+                    line.toggle->stateChange();
+                }
+            }
+        }
+        
+        if (name == "Save Line Settings")
+        {
+            ofxUIButton *button = (ofxUIButton *)e.widget;
+            if (button->getValue())
+            {
+                ofFileDialogResult result = ofSystemSaveDialog("Lines.xml", "Save Line Settings.");
+                if (result.bSuccess)
+                    saveXML(result.getPath());
+            }
+        }
+        
+        saveXML();
+    }
 	
 	void update()
 	{
+        
 		if (random_change_time < 60
-			&& ofGetElapsedTimef() - last_changed_time > random_change_time)
+			&& ofGetElapsedTimef() - last_changed_time > random_change_time
+            && random_change_time != 0.0)
 		{
 			last_changed_time = ofGetElapsedTimef();
 			
@@ -251,12 +313,63 @@ public:
 		
 		ramEndCamera();
 	}
-
-	void loadXML()
+    
+    void exit()
+    {
+        
+    }
+    
+	void saveXML(string fileName = "Lines.xml")
+    {
+        
+        XML.clear();
+        
+        for (int i=0; i<NUM_LINE; i++)
+        {
+            LineContext &line = lines[i];
+            
+            XML.addTag("line");
+            XML.pushTag("line", i);
+            {
+                
+                // targets
+                XML.setValue("from:name", line.nodeLine.from.name);
+                XML.setValue("from:id", line.nodeLine.from.index);
+                
+                XML.setValue("control0:name", line.nodeLine.control0.name);
+                XML.setValue("control0:id", line.nodeLine.control0.index);
+                
+                XML.setValue("control1:name", line.nodeLine.control1.name);
+                XML.setValue("control1:id", line.nodeLine.control1.index);
+                
+                XML.setValue("to:name", line.nodeLine.to.name);
+                XML.setValue("to:id", line.nodeLine.to.index);
+                
+                // styling
+                XML.setValue("param:curve", line.curve);
+                
+                XML.setValue("param:radius", line.spiral_radius);
+                XML.setValue("param:num_rotate", line.spiral_num_rotate);
+                XML.setValue("param:scale", line.noise_scale);
+                XML.setValue("param:freq", line.noise_freq);
+                
+                XML.setValue("param:extend_from", line.extend_from);
+                XML.setValue("param:extend_to", line.extend_to);
+                
+                XML.setValue("param:line_width", line.line_width);
+                XML.setValue("param:color:r", line.color.r);
+                XML.setValue("param:color:g", line.color.g);
+                XML.setValue("param:color:b", line.color.b);
+                
+                XML.setValue("param:active", line.active);
+            }
+            XML.popTag();
+            XML.saveFile(fileName);
+        }
+    }
+    
+	void loadXML(string fileName = "Lines.xml")
 	{
-		string fileName = "Lines.xml";
-		
-
 		if (!ofFile::doesFileExist(fileName))
 		{
 			#define _S(src) #src
@@ -281,12 +394,11 @@ public:
 			);
 	
 			#undef _S
-
+            
 			ofBuffer buf(default_xml);
 			ofBufferToFile(fileName, buf);
 		}
 		
-		ofxXmlSettings XML;
 		XML.loadFile(fileName);
 		
 		int n = XML.getNumTags("line");
@@ -300,11 +412,11 @@ public:
 			const string from_name	= XML.getValue("from:name", "Yoko");
 			const int	 from_id	= XML.getValue("from:id", ramActor::JOINT_RIGHT_HAND);
 			
-			const string cp0_name	= XML.getValue("control1:name", "Yoko");
-			const int	 cp0_id		= XML.getValue("control1:id", ramActor::JOINT_RIGHT_TOE);
+			const string cp0_name	= XML.getValue("control0:name", "Yoko");
+			const int	 cp0_id		= XML.getValue("control0:id", ramActor::JOINT_RIGHT_TOE);
 			
-			const string cp1_name	= XML.getValue("control2:name", "Yoko");
-			const int	 cp1_id		= XML.getValue("control2:id", ramActor::JOINT_LEFT_TOE);
+			const string cp1_name	= XML.getValue("control1:name", "Yoko");
+			const int	 cp1_id		= XML.getValue("control1:id", ramActor::JOINT_LEFT_TOE);
 			
 			const string to_name	= XML.getValue("to:name", "Yoko");
 			const int	 to_id		= XML.getValue("to:id", ramActor::JOINT_LEFT_HAND);
@@ -315,8 +427,8 @@ public:
 			/// spiral
 			const float radius		= XML.getValue("param:radius", 10);
 			const float num_rotate	= XML.getValue("param:num_rotate", 10);
-			const float noise		= XML.getValue("param:scale", 1);
-			const float freq		= XML.getValue("param:freq", 10);
+			const float noise		= XML.getValue("param:scale", 0);
+			const float freq		= XML.getValue("param:freq", 0);
 			
 			/// extend length
 			const float ex_from		= XML.getValue("param:extend_from", 10);
@@ -324,11 +436,15 @@ public:
 			
 			/// line styling
 			const float line_width = XML.getValue("param:line_width", 2);
-			const float color		= XML.getValue("param:color", 1.0);
+			const float colorR		= XML.getValue("param:color:r", 0.5);
+			const float colorG		= XML.getValue("param:color:g", 0.5);
+			const float colorB		= XML.getValue("param:color:b", 0.5);
+            
+			const bool active		= XML.getValue("param:active", 1);
 			
 			
 			LineContext &line = lines[i];
-			line.active = true;
+			line.active = active;
 			line.nodeLine.from = ramNodeIdentifer(from_name, from_id);
 			line.nodeLine.control0 = ramNodeIdentifer(cp0_name, cp0_id);
 			line.nodeLine.control1 = ramNodeIdentifer(cp1_name, cp1_id);
@@ -341,10 +457,20 @@ public:
 			line.extend_from = ex_from;
 			line.extend_to = ex_to;
 			line.line_width = line_width;
-			line.color = color;
+			line.color.r = colorR;
+			line.color.g = colorG;
+			line.color.b = colorB;
 			
 			XML.popTag();
 		}
 	}
+    
+	void loadPresetXML(string filePath)
+	{
+		loadXML(filePath);
+	}
+	
+private:
+    ofxXmlSettings XML;
 };
 

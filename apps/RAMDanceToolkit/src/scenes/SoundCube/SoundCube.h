@@ -1,22 +1,24 @@
+// 
+// SoundCube.h - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #pragma once
 
 #include "ramMain.h"
 
-/*
- 
- XML format
- 
- ====
- 
- <scene>
- <shape type="cube" x="-100" y="50" z="0" rx="0" ry="90" rz="0" sx="200" sy="100" sz="100" color="FFFFFF" sound="Sounds/dlone_1m.aif" trigger="off" loop="on"/>
- <shape type="cube" x="200" y="50" z="0" rx="0" ry="0" rz="0" sx="100" sy="100" sz="100" color="FFFFFF" sound="Sounds/dlone_2m.aif" trigger="on" loop="on"/>
- <shape type="cube" x="200" y="50" z="200" rx="0" ry="0" rz="0" sx="100" sy="100" sz="100" color="FFFFFF" sound="Sounds/dlone_3m.aif" trigger="off" loop="on"/>
- <shape type="cube" x="200" y="50" z="-200" rx="0" ry="0" rz="0" sx="100" sy="100" sz="100" color="FFFFFF" sound="Sounds/dlone_4m.aif" trigger="on" loop="on"/>
- </scene>
- ====
- 
- */
 class SoundCube : public ramBaseScene
 {
 public:
@@ -125,7 +127,7 @@ public:
 		float volume, volume_t;
 	};
 	
-	const string getName() { return "SoundCube"; }
+	string getName() const { return "SoundCube"; }
 	
 	bool fill;
 	float line_width;
@@ -156,11 +158,14 @@ public:
 	
 	void onEnabled()
 	{
+		cout << "[Unit enabled] " << getName() << endl;
 		loadXML();
 	}
 	
 	void onDisabled()
 	{
+		cout << "[Unit disabled] " << getName() << endl;
+        
 		for (int i = 0; i < shapes.size(); i++)
 		{
 			shapes[i]->player->stop();
@@ -193,23 +198,25 @@ public:
 		
 		string default_xml = _S(
 <scene>
-<shape type="cube" x="-100" y="50" z="0" rx="0" ry="90" rz="0" sx="200" sy="100" sz="100" color="FFFFFF" sound="Sounds/dlone_1m.aif" trigger="off" loop="on"/>
-<shape type="cube" x="200" y="50" z="0" rx="0" ry="0" rz="0" sx="100" sy="100" sz="100" color="FFFFFF" sound="Sounds/dlone_2m.aif" trigger="on" loop="on"/>
-<shape type="cube" x="200" y="50" z="200" rx="0" ry="0" rz="0" sx="100" sy="100" sz="100" color="FFFFFF" sound="Sounds/dlone_3m.aif" trigger="off" loop="on"/>
-<shape type="cube" x="200" y="50" z="-200" rx="0" ry="0" rz="0" sx="100" sy="100" sz="100" color="FFFFFF" sound="Sounds/dlone_4m.aif" trigger="on" loop="on"/>
+<shape type="cube" x="-100" y="50" z="0" rx="0" ry="90" rz="0" sx="200" sy="100" sz="100" color="FFFFFF" sound="../../../../resources/Sounds/1.aif" trigger="off" loop="on"/>
+<shape type="cube" x="200" y="50" z="0" rx="0" ry="0" rz="0" sx="100" sy="100" sz="100" color="FFFFFF" sound="../../../../resources/Sounds/2.aif" trigger="on" loop="on"/>
+<shape type="cube" x="200" y="50" z="200" rx="0" ry="0" rz="0" sx="100" sy="100" sz="100" color="FFFFFF" sound="../../../../resources/Sounds/3.aif" trigger="off" loop="on"/>
+<shape type="cube" x="200" y="50" z="-200" rx="0" ry="0" rz="0" sx="100" sy="100" sz="100" color="FFFFFF" sound="../../../../resources/Sounds/4.aif" trigger="on" loop="on"/>
 </scene>
 		);
 
 #undef _S
 		
-		if (!ofFile::doesFileExist("SoundCube.xml"))
+		const string filePath = "SoundCube.xml";
+		
+		if (!ofFile::doesFileExist(filePath))
 		{
 			ofBuffer buf(default_xml);
-			ofBufferToFile("SoundCube.xml", buf);
+			ofBufferToFile(filePath, buf);
 		}
 		
 		ofxXmlSettings xml;
-		xml.loadFile("SoundCube.xml");
+		xml.loadFile(filePath);
 		
 		xml.pushTag("scene");
 		
@@ -277,6 +284,8 @@ public:
 				{
 					o->loadSound(sound, toggle_mode, loop);
 				}
+				
+				cout << type << " loaded." << endl;
 				
 				shapes.push_back(o);
 			}

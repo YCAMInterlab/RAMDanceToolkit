@@ -1,3 +1,20 @@
+// 
+// Future.h - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #pragma once
 
 #include "ParticleEngine.h"
@@ -35,10 +52,10 @@ public:
 		
 		ramGetGUI().addToggle("Draw line from actor to ghost", &draw_line);
 		
-		ofAddListener(ramGetGUI().addButton("Ghost"), this, &Future::onPresetGhost);
-		ofAddListener(ramGetGUI().addButton("Slow"), this, &Future::onPresetSlow);
-		ofAddListener(ramGetGUI().addButton("Normal"), this, &Future::onPresetNormal);
-		ofAddListener(ramGetGUI().addButton("Fast"), this, &Future::onPresetFast);
+		ofAddListener(ramGetGUI().addButton("Speed: Ghost"), this, &Future::onPresetGhost);
+		ofAddListener(ramGetGUI().addButton("Speed: Slow"), this, &Future::onPresetSlow);
+		ofAddListener(ramGetGUI().addButton("Speed: Normal"), this, &Future::onPresetNormal);
+		ofAddListener(ramGetGUI().addButton("Speed: Fast"), this, &Future::onPresetFast);
 		
 		ramGetGUI().addSlider("Distance", 0.0, 255.0, &distance);
 		ramGetGUI().addSlider("Speed", 0.0, 255.0, &speed);
@@ -49,7 +66,7 @@ public:
 	void draw()
 	{
 		const vector<ramNodeArray>& NAs = ghostFilters.update(getAllNodeArrays());
-		const vector<ramNodeArray>& lowPassedNAs = ghostFilters.update(NAs);
+		const vector<ramNodeArray>& lowPassedNAs = lowPassFilters.update(NAs);
 		
 		ramBeginCamera();
 		
@@ -123,7 +140,17 @@ public:
 		updateFilters();
 	}
 	
-	const string getName() { return "Future"; }
+	void loadPreset(size_t preset_id=0)
+	{
+		for (int i=0; i<ghostFilters.getNumFilters(); i++)
+		{
+			ghostFilters.getFilter(i).setDistance(150);
+			ghostFilters.getFilter(i).setSpeed(27);
+		}
+	}
+	
+	
+	string getName() const { return "Future"; }
 };
 
 

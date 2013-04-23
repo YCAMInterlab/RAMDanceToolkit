@@ -1,3 +1,20 @@
+// 
+// ramActor.h - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #pragma once
 
 #include "ofMain.h"
@@ -54,10 +71,12 @@ private:
 class ramNode : public ofxNodeArray::Node<ramNode>
 {
 	friend class ramNodeArray;
+	friend class ramActor;
+	friend class ramRigidBody;
 
 public:
 
-	ramNode() {}
+	ramNode() : initialized(false) {}
 	ramNode(int index) : ofxNodeArray::Node<ramNode>(index) {}
 	
 	ramNode(const ramNode& copy) { *this = copy; }
@@ -76,13 +95,16 @@ public:
 
 	inline ramAccelerometer& getAccelerometer() { return accelerometer; }
 
-	void drawNodeId(int floatPos = 20);
-	void drawNodeName(int floatPos = 20);
+	void drawNodeId(int floatPos = 20) const;
+	void drawNodeName(int floatPos = 20) const;
 
 	// utils
 	inline void beginTransform() const { transformGL(); }
 	inline void endTransform() const { restoreTransformGL(); }
 
+	
+	bool initialized;
+	
 private:
 	
 	string name;
@@ -116,12 +138,16 @@ public:
 	inline bool isActor() const { return type == RAM_NODEARRAY_TYPE_ACTOR; }
 	inline bool isRigid() const { return type == RAM_NODEARRAY_TYPE_RIGIDBODY; }
 	inline bool isTypeOf(ramNodeArrayType t) const { return type == t; }
-	
+    
+	inline void setPlayback(bool b) { is_playback = b; }
+	inline bool isPlayback() const { return is_playback; }
+    
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
-
+    
 protected:
 
 	ramNodeArrayType type;
+    bool is_playback;
 
 	float last_timestamp;
 	float current_timestamp;

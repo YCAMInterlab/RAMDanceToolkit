@@ -1,6 +1,23 @@
+// 
+// ramControlPanel.cpp - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #include "ramControlPanel.h"
 
-#include "ramBaseScene.h"
+#include "ramUnit.h"
 #include "ramControllable.h"
 
 #include "ramActorsScene.h"
@@ -66,13 +83,10 @@ ramControlPanel::~ramControlPanel()
 
 void ramControlPanel::setup()
 {
-	/// Event hooks
-	// -------------------------------------
 	ofAddListener(ofEvents().update, this, &ramControlPanel::update);
 	
 	addPanel(presetTab);
 	addPanel(preferencesTab);
-	addPanel(playbackTab);
 	
 	ofAddListener(mSceneTabs.newGUIEvent, this, &ramControlPanel::guiEvent);
 	
@@ -90,7 +104,7 @@ void ramControlPanel::update(ofEventArgs &e)
 
 //
 
-void ramControlPanel::addPanel(ramBaseScene* control, bool enableable)
+void ramControlPanel::addPanel(ramUnit* control, bool enableable)
 {
 	ofxUITab *panel = new ofxUITab(control->getName(), enableable);
 	current_panel = panel;	
@@ -210,15 +224,8 @@ struct ColorSelectorListener
 void ramControlPanel::addColorSelector(const string& name, ofFloatColor *value)
 {
 	current_panel->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_MEDIUM));
-	
-	ofxUIToggle* toggle = current_panel->addToggle("", true, 26, 26);
-	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
-	
-	// FIXME: memory leak
-	ColorSelectorListener *e = new ColorSelectorListener(toggle, value);
-	ofAddListener(current_panel->newGUIEvent, e, &ColorSelectorListener::handle);
-	
 	current_panel->addSlider("R", 0, 1, &value->r, 90, kDim);
+	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
 	current_panel->addSlider("G", 0, 1, &value->g, 90, kDim);
 	current_panel->addSlider("B", 0, 1, &value->b, 90, kDim);
 	current_panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);

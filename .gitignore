@@ -28,7 +28,15 @@ obj
 
 *.zip
 
+dev
 devApps
-data
+bin/data
+!bin/data/.gitkeep
 
-resources/Settings/Actors/**
+resources/Sounds/
+resources/MotionData/
+resources/Settings/cache/
+!resources/Sounds/.gitkeep
+!resources/MotionData/.gitkeep
+!resources/Settings/cache/.gitkeep
+resources/Settings/presets/preset.init.xml

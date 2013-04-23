@@ -1,14 +1,23 @@
+// 
+// ramSession.cpp - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #include "ramSession.h"
 
 #include "ramControlPanel.h"
-
-void ramSession::setLoop(const bool l) { mLoop = l; };
-void ramSession::setRate(const float r) { mRate = r; };
-void ramSession::setPlayhead(const float t) { mPlayhead = t; };
-
-const bool ramSession::isPlaying() const { return mPlaying; }
-const bool ramSession::isRecording() const { return mRecording; }
-const bool ramSession::isLoop() const { return mLoop; }
 
 #pragma mark -
 #pragma mark constructor
@@ -16,6 +25,7 @@ const bool ramSession::isLoop() const { return mLoop; }
 ramSession::ramSession() { clear(); }
 ramSession::ramSession(const ramSession &copy) { clear(); *this = copy; }
 ramSession::ramSession(const ramNodeArrayBuffer &buf) { clear(); mBuffer = buf; }
+
 
 #pragma mark -
 #pragma mark gui settings
@@ -84,13 +94,13 @@ const ramNodeArray& ramSession::filter(const ramNodeArray &src)
 	if (isPlaying())
 	{
 		updatePlayhead();
-		return mBuffer.get(getFrameIndex());
+		return getCurrentFrame();
 	}
 	
 	return src;
 }
 
-const string ramSession::getName()
+string ramSession::getName() const
 {
 	return "ramSession";
 }
@@ -131,9 +141,8 @@ void ramSession::play()
 
 	mRecording = false;
 	mPlaying = true;
-	mPlayStartTime = ofGetElapsedTimef();
 	
-	cout << "start playing " << getNodeArrayName() << "." << endl;
+//	cout << "start playing " << getNodeArrayName() << "." << endl;
 }
 
 void ramSession::stop()
@@ -142,7 +151,7 @@ void ramSession::stop()
 
 	mPlaying = false;
 	
-	cout << "stop playing " << getNodeArrayName() << "." << endl;
+//	cout << "stop playing " << getNodeArrayName() << "." << endl;
 }
 
 
@@ -153,15 +162,25 @@ void ramSession::updatePlayhead()
 {
 	if (!isPlaying()) return;
 	
-	mPlayhead = (ofGetElapsedTimef() - mPlayStartTime) * mRate;
+	mPlayhead += ofGetLastFrameTime() * mRate;
 	
-	if (getFrameIndex() <= 0)
+	bool wrapped = false;
+	
+	if (mPlayhead > getDuration())
 	{
-		if (isLoop())
-		{
-			mPlayStartTime = ofGetElapsedTimef();
-		}
-		else
+		mPlayhead = 0;
+		wrapped = true;
+	}
+	
+	if (mPlayhead < 0)
+	{
+		mPlayhead = getDuration();
+		wrapped = true;
+	}
+	
+	if (wrapped)
+	{
+		if (!isLoop())
 		{
 			stop();
 		}
@@ -176,30 +195,29 @@ void ramSession::clear()
 	mBuffer.clear();
 	
 	mPlayhead = 0;
-	mPlayStartTime = 0;
 	mRecStartTime = 0;
 	mRecEndTime = 0;
 	
 	mRate = 1.0;
 	mLoop = true;
+	
 	mRecording = false;
 	mPlaying = false;
 }
 
-void ramSession::appendFrame(const ramNodeArray copy)
+void ramSession::appendFrame(const ramNodeArray& copy)
 {
-	mBuffer.add(copy);
+	mBuffer.append(copy);
 }
 
-const ramNodeArray& ramSession::getFrame(int index) const
+ramNodeArray& ramSession::getFrame(int index)
 {
-	if (index > getNumFrames()) index = getNumFrames();
-	return mBuffer.get(getNumFrames() - index);
+	return mBuffer.get(index);
 }
 
-const ramNodeArray& ramSession::getCurrentFrame() const
+ramNodeArray& ramSession::getCurrentFrame()
 {
-	return mBuffer.get(getFrameIndex());
+	return getFrame(getCurrentFrameIndex());
 }
 
 
@@ -207,40 +225,50 @@ const ramNodeArray& ramSession::getCurrentFrame() const
 #pragma mark -
 #pragma mark getters, setters
 
-const float ramSession::getPlayhead() const
+void ramSession::setFreeze(const bool playing) { mPlaying = !playing; };
+void ramSession::setLoop(const bool l) { mLoop = l; };
+void ramSession::setRate(const float r) { mRate = r; };
+void ramSession::setPlayhead(const float t) { mPlayhead = t; };
+
+
+bool ramSession::isPlaying() { return mPlaying; }
+bool ramSession::isRecording() { return mRecording; }
+bool ramSession::isLoop() { return mLoop; }
+
+float ramSession::getPlayhead()
 {
 	return mPlayhead;
 }
 
-const int ramSession::getFrameIndex() const
+int ramSession::getCurrentFrameIndex()
 {
-	return getNumFrames() - floor(mPlayhead / getFrameTime());
+	return floor(mPlayhead / getAverageFrameTime());
+//	return mPlayhead * (getNumFrames() - 1);
 }
 
-const int ramSession::getNumFrames() const
+int ramSession::getNumFrames()
 {
 	return mBuffer.getSize();
 }
 
-const float ramSession::getFrameTime() const
+float ramSession::getAverageFrameTime()
 {
 	return getDuration() / getNumFrames();
 }
 
-const float ramSession::getDuration() const
+float ramSession::getDuration()
 {
 	assert(getNumFrames() > 0);
 	
-	const ramNodeArray &frontFrame = mBuffer.get( 0 );
-	const ramNodeArray &backFrame = mBuffer.get( getNumFrames() );
+	ramNodeArray &frontFrame = mBuffer.get( 0 );
+	ramNodeArray &backFrame = mBuffer.get( getNumFrames() );
 	
-	return frontFrame.getTimestamp() - backFrame.getTimestamp();
+	return backFrame.getTimestamp() - frontFrame.getTimestamp();
 }
 
-const string ramSession::getNodeArrayName() const
+string ramSession::getNodeArrayName()
 {
 	assert(getNumFrames() > 0);
-	
 	return getNumFrames() > 0 ? mBuffer.get(0).getName() : "no name";
 }
 
@@ -255,3 +283,4 @@ void ramSession::setNodeArrayBuffer(ramNodeArrayBuffer &buffer)
 	clear();
 	mBuffer = buffer;
 }
+

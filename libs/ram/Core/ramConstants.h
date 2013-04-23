@@ -1,3 +1,20 @@
+// 
+// ramConstants.h - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #pragma once
 
 #include "ofMain.h"
@@ -6,25 +23,3 @@ const std::string RAM_OSC_ADDR_ACTOR = "/ram/skeleton";
 const std::string RAM_OSC_ADDR_RIGID_BODY = "/ram/rigid_body";
 
 const float RAM_OUTDATED_DURATION = 1.0;
-
-// ocs mesasge address
-const string addrTagName = "address";
-
-// session meta
-const string sessionTagName = "session";
-const string recDateTagName = "recDate";
-
-// values
-const string frameTagName  = "frame";
-const string timestampTagName  = "timestamp";
-const string entityTagName = "entity";
-const string nodesTagName = "nodes";
-const string nodeTagName = "node";
-const string arg1TagName = "name";
-const string arg2TagName = "x";
-const string arg3TagName = "y";
-const string arg4TagName = "z";
-const string arg5TagName = "qa";
-const string arg6TagName = "qx";
-const string arg7TagName = "qy";
-const string arg8TagName = "qz";

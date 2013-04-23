@@ -1,3 +1,20 @@
+// 
+// ramTimeFilter.h - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #pragma once
 
 #include "ramNodeArrayBuffer.h"
@@ -7,7 +24,7 @@ class ramDelay : public ramBaseFilter
 {
 public:
 
-	const string getName() { return "ramDelay"; }
+	string getName() const { return "ramDelay"; }
 
 	ramDelay(size_t delay_frame = 60) : delay_frame(delay_frame) {}
 
@@ -40,7 +57,7 @@ class ramTimeShifter : public ramBaseFilter
 {
 public:
 
-	const string getName() { return "ramTimeShifter"; }
+	string getName() const { return "ramTimeShifter"; }
 
 	ramTimeShifter(size_t buffer_frame = 300) : rate(1), play_head(0), buffer_frame(buffer_frame)
 	{

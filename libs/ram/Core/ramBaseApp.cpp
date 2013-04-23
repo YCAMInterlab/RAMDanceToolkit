@@ -1,3 +1,20 @@
+// 
+// ramBaseApp.cpp - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #include "ramBaseApp.h"
 #include "ramCameraManager.h"
 #include "ramControlPanel.h"
@@ -8,6 +25,7 @@ bool drawModel = true;
 void ramBaseApp::exit(ofEventArgs &args)
 {
 	ramDisableAllEvents();
+	ofSetFullscreen(false);
 }
 
 void ramBaseApp::update(ofEventArgs &args)
@@ -32,10 +50,6 @@ void ramBaseApp::draw(ofEventArgs &args)
 
 	ramEnablePhysicsPrimitive(false);
 
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	glPushMatrix();
-	ofPushStyle();
-
 	if (ramShadowEnabled())
 	{
 		// shadow
@@ -45,25 +59,13 @@ void ramBaseApp::draw(ofEventArgs &args)
 		ramEndShadow();
 	}
 
-	ofPopStyle();
-	glPopMatrix();
-	glPopAttrib();
-
 	ramEnablePhysicsPrimitive(enable_physics);
-
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	glPushMatrix();
-	ofPushStyle();
 
 	if (drawModel)
 	{
 		// entities
 		drawNodeArrays();
 	}
-
-	ofPopStyle();
-	glPopMatrix();
-	glPopAttrib();
 
 	ramEndCamera();
 
@@ -77,11 +79,18 @@ void ramBaseApp::drawNodeArrays()
 	for (int n = 0; n < getNumNodeArray(); n++)
 	{
 		const ramNodeArray &o = getNodeArray(n);
-
+		
+		glPushAttrib(GL_ALL_ATTRIB_BITS);
+		glPushMatrix();
+		ofPushStyle();
 		if (o.isActor())
 			drawActor((ramActor &)o);
 		else
 			drawRigid((ramRigidBody &)o);
+		
+		ofPopStyle();
+		glPopMatrix();
+		glPopAttrib();
 	}
 
 	// draw bus
@@ -91,12 +100,17 @@ void ramBaseApp::drawNodeArrays()
 	while (it != getActorManager().getAllBus().end())
 	{
 		const ramNodeArray &o = (*it).second;
-
+		
+		glPushAttrib(GL_ALL_ATTRIB_BITS);
+		glPushMatrix();
+		ofPushStyle();
 		if (o.isActor())
 			drawActor((ramActor &)o);
 		else
 			drawRigid((ramRigidBody &)o);
-
+		ofPopStyle();
+		glPopMatrix();
+		glPopAttrib();
 		++it;
 	}
 }

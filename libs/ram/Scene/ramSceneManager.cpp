@@ -1,8 +1,24 @@
+// 
+// ramSceneManager.cpp - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #include "ramSceneManager.h"
 
 #include "ramControlPanel.h"
 #include "ramPhysics.h"
-#include "ramActorsScene.h"
 
 extern bool drawModel;
 
@@ -27,6 +43,7 @@ void ramSceneManager::setup()
 	
 	ofAddListener(ofEvents().update, this, &ramSceneManager::update);
 	ofAddListener(ofEvents().draw, this, &ramSceneManager::draw);
+	ofAddListener(ofEvents().exit, this, &ramSceneManager::exit);
 	
 	// memory leak on exit
 	actorsScene = new ramActorsScene();
@@ -41,6 +58,40 @@ void ramSceneManager::addScene(ramBaseScene* scene)
 	scenes.push_back(scene);
 	scene->setup();
 	ramGetGUI().addPanel(scene);
+}
+
+size_t ramSceneManager::getNumScenes() const
+{
+	return scenes.size();
+}
+size_t ramSceneManager::findtSceneIndex(string name) const
+{
+	for (int i=0; i<scenes.size(); i++)
+	{
+		string sceneName = scenes.at(i)->getName();
+		if (sceneName == name)
+			return i;
+	}
+	return -1;
+}
+ramBaseScene* ramSceneManager::getScene(size_t index) const
+{
+	return scenes.at(index);
+}
+
+ramActorsScene* ramSceneManager::getActorsScene()
+{
+	return actorsScene;
+}
+
+void ramSceneManager::setShowAllActors(bool showAllActors)
+{
+	return actorsScene->showAll(showAllActors);
+}
+
+bool ramSceneManager::getShowAllActors() const
+{
+	return actorsScene->getShowAll();
 }
 
 void ramSceneManager::update(ofEventArgs& args)
@@ -112,7 +163,28 @@ void ramSceneManager::draw(ofEventArgs& args)
 				glPopMatrix();
 				glPopAttrib();
 			}
+			
+			map<string, ramNodeArray>::iterator it = getActorManager().getAllBus().begin();
 
+			while (it != getActorManager().getAllBus().end())
+			{
+				const ramNodeArray &o = (*it).second;
+				
+				ofPopStyle();
+				glPopMatrix();
+				glPopAttrib();
+				if (o.isActor())
+					scene->drawActor((ramActor &)o);
+				else
+					scene->drawRigid((ramRigidBody &)o);
+				
+				ofPopStyle();
+				glPopMatrix();
+				glPopAttrib();
+				
+				++it;
+			}
+			
 			ramEndCamera();
 
 			ramEndShadow();
@@ -157,6 +229,29 @@ void ramSceneManager::draw(ofEventArgs& args)
 				glPopMatrix();
 				glPopAttrib();
 			}
+			
+			
+			map<string, ramNodeArray>::iterator it = getActorManager().getAllBus().begin();
+			
+			while (it != getActorManager().getAllBus().end())
+			{
+				const ramNodeArray &o = (*it).second;
+				
+				glPushAttrib(GL_ALL_ATTRIB_BITS);
+				glPushMatrix();
+				ofPushStyle();
+				
+				if (o.isActor())
+					scene->drawActor((ramActor &)o);
+				else
+					scene->drawRigid((ramRigidBody &)o);
+				
+				
+				ofPopStyle();
+				glPopMatrix();
+				glPopAttrib();
+				++it;
+			}
 
 			ramEndCamera();
 		}
@@ -173,6 +268,17 @@ void ramSceneManager::draw(ofEventArgs& args)
 	ofPopStyle();
 	glPopMatrix();
 	glPopAttrib();
+}
+
+void ramSceneManager::exit(ofEventArgs& args)
+{
+	for (int i = 0; i < scenes.size(); i++)
+	{
+		if (i >= scenes.size()) break;
+        
+		ramBaseScene *scene = scenes.at(i);
+        scene->exit();
+	}
 }
 
 void ramSceneManager::enableAllEvents()

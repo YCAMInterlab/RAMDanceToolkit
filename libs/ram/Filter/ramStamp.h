@@ -1,3 +1,20 @@
+// 
+// ramStamp.h - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #pragma once
 
 class ramStamp : public ramBaseFilter
@@ -15,8 +32,6 @@ public:
 
 	void setupControlPanel()
 	{
-		ramGetGUI().addSection(getName());
-
 		ofAddListener(ramGetGUI().addButton("Clear"), this, &ramStamp::onClear);
 		ramGetGUI().addSlider("Recording Span", 2.0, 60.0, &mRecSpan);
 	}
@@ -55,7 +70,7 @@ public:
 	inline deque<ramNodeArray>& getStamps() { return mStamps; }
 	inline ramNodeArray& getStamp(const int index) { return mStamps.at(index); }
 
-	const string getName() { return "ramStamp"; }
+	string getName() const { return "ramStamp"; }
 
 protected:
 

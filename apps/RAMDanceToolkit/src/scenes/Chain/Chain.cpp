@@ -1,3 +1,20 @@
+// 
+// Chain.cpp - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 //
 //  Chain.cpp
 //  Chain
@@ -81,10 +98,11 @@ void Chain::setupControlPanel()
     panel->addNumberDialer("ATTACHING EDGE", 0, 100, &mAttachingEdge, 0);
     panel->addSlider("EDGE LENGTH", 1.0, 100, &mEdgeLength, w, dim);
     panel->addSlider("THICKNESS", 1.0, 100, &mThickness, w, dim);
-    panel->addButton("ADD", false, dim, dim);
     
     panel->addSpacer(w, 1.0f);
-    
+    panel->addLabel("Click target node, and", OFX_UI_FONT_MEDIUM);
+    panel->addLabel("Press [o] to add chain", OFX_UI_FONT_MEDIUM);
+    panel->addSpacer(w, 1.0f);
     panel->addButton("REMOVE ALL", false, dim, dim);
 	
     ofAddListener(panel->newGUIEvent, this, &Chain::onValueChanged);
@@ -106,6 +124,8 @@ void Chain::setup()
     mAttachingEdge = 0;
     mEdgeLength = 50;
     mThickness = 5;
+	
+	ofAddListener(ofEvents().keyPressed, this, &Chain::onKeyPressed);
 }
 
 //--------------------------------------------------------------
@@ -185,4 +205,26 @@ void Chain::onValueChanged(ofxUIEventArgs& e)
     }
 }
 
+void Chain::onKeyPressed(ofKeyEventArgs &e)
+{
+	if (e.key != 'o') return;
+	
+	if (!ramActorManager::instance().getLastSelectedNode()) {
+		ofLogError("Chain") << "We must select a node at first!";
+		return;
+	}
+	const string actorName = ramActorManager::instance().getLastSelectedNodeIdentifer().name;
+	int nodeId =ramActorManager::instance().getLastSelectedNodeIdentifer().index;
+	AttachableChain *chain;
+	chain = new AttachableChain();
+	chain->setup(&mChainBtDynamics);
+	const ofVec3f pos = ramActorManager::instance().getLastSelectedNode()->getGlobalPosition();
+	/// not good
+	//chain->spawnChain(btVector3(pos.x, pos.y, pos.z), mNumEdges, mEdgeLength, mThickness);
+	/// good
+	chain->spawnChain(btVector3(0.0f, 100.0f, 0.0f), mNumEdges, mEdgeLength, mThickness);
+	chain->attach(actorName, nodeId, mAttachingEdge);
+	
+	mChains.push_back(chain);
+}
 

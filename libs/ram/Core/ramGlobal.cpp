@@ -1,3 +1,20 @@
+// 
+// ramGlobal.cpp - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #include "ramGlobal.h"
 
 #include "ramSimpleShadow.h"
@@ -35,18 +52,10 @@ void ramInitialize(int oscPort)
 
 	inited = true;
 
-	// !!!:
-	ofLogWarning("ramInitialize(10000) in ramSharedData.cpp: ofSetLogLevel(OF_LOG_SILENT) will be deleted when Fonts probrem in ofxUI is fixed.");
-	ofLogWarning("see addons/ofxUI.patch");
-	// to apply `$ patch -p0 < ../ofxUI.patch` at ofxUI directory
-
 	ram_simple_shadow.setup();
-	
 	ramActorManager::instance().setup();
 	ramActorManager::instance().setupOscReceiver(oscPort);
-
 	ramSceneManager::instance().setup();
-	
 	ramPhysics::instance();
 	ramGetGUI().setup();
 }
@@ -54,6 +63,18 @@ void ramInitialize(int oscPort)
 string ramToResourcePath(string path)
 {
 	return ofFilePath::join(ofToDataPath("../../../../resources"), path);
+}
+
+//
+
+void ramEnableShowActors(bool v)
+{
+	ramSceneManager::instance().setShowAllActors(v);
+}
+
+bool ramShowActorsEnabled()
+{
+	return ramSceneManager::instance().getShowAllActors();	
 }
 
 //

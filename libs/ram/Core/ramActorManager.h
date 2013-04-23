@@ -1,3 +1,20 @@
+// 
+// ramActorManager.h - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #pragma once
 
 #include "ofMain.h"
@@ -49,7 +66,12 @@ public:
 	inline ramNodeArray& getNodeArray(int index) { return nodearrays[index]; }
 	inline ramNodeArray& getNodeArray(const string& name) { return nodearrays[name]; }
 	inline bool hasNodeArray(const string &key) { return nodearrays.hasKey(key); }
-
+    inline void removeNodeArray(const string& name) { nodearrays.erase(name); }
+	
+	// test
+	void setNodeArray(const ramNodeArray& NA) { nodearrays.set(NA.getName(), NA); }
+	
+	
 	// for mouse picked node
 
 	const ramNodeIdentifer& getLastSelectedNodeIdentifer();
@@ -69,7 +91,10 @@ public:
 	void setBus(const string& bus_name, const ramNodeArray &arr) { bus[bus_name] = arr; }
 	const ramNodeArray& getBus(const string& bus_name) { return bus[bus_name]; }
 	map<string, ramNodeArray>& getAllBus() { return bus; };
-
+	inline size_t getNumBus() { return bus.size(); };
+	inline size_t eraseFromBus(const string& bus_name) { return bus.erase(bus_name); };
+	
+	
 	// for internal use
 
 	void updateWithOscMessage(const ofxOscMessage &m);

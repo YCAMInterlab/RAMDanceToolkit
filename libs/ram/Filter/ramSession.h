@@ -1,3 +1,20 @@
+// 
+// ramSession.h - RAMDanceToolkit
+// 
+// Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #pragma once
 
 #include "ofxUI.h"
@@ -29,7 +46,7 @@ public:
 	
 #pragma mark -
 #pragma mark override ramBaseFilter
-	const string getName();
+	string getName() const;
 	const ramNodeArray& filter(const ramNodeArray &src);
 
 	
@@ -47,27 +64,28 @@ public:
 	// --
 	
 	void clear();
-	void appendFrame(const ramNodeArray copy);
-	const ramNodeArray& getFrame(int index) const;
-	const ramNodeArray& getCurrentFrame() const;
+	void appendFrame(const ramNodeArray& copy);
+	ramNodeArray& getFrame(int index);
+	ramNodeArray& getCurrentFrame();
 	
 	
 #pragma mark -
 #pragma mark getters, setters
-	const int getFrameIndex() const;
-	const int getNumFrames() const;
-	const float getFrameTime() const;
-	const float getDuration() const;
-	const float getPlayhead() const;
-	const string getNodeArrayName() const;
+	int getCurrentFrameIndex();
+	int getNumFrames();
+	float getAverageFrameTime();
+	float getDuration();
+	float getPlayhead();
+	string getNodeArrayName();
 	
 	void setLoop(const bool l);
 	void setRate(const float r);
 	void setPlayhead(const float t);
+	void setFreeze(const bool playing);
 	
-	const bool isPlaying() const;
-	const bool isRecording() const;
-	const bool isLoop() const;
+	bool isPlaying();
+	bool isRecording();
+	bool isLoop();
 	
 	void setNodeArrayBuffer(ramNodeArrayBuffer &buffer);
 	
@@ -83,7 +101,6 @@ protected:
 	bool mPlaying;
 	
 	float mPlayhead;
-	float mPlayStartTime;
 	float mRecStartTime;
 	float mRecEndTime;
 };
