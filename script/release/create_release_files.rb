@@ -11,12 +11,12 @@ sources = [
   "../examples",
   "../libs",
   "../resources",
-  "../readme.md",
-  "../submodules.sh"
+  "../readme.md"
   ]
 
 ignore_files = [
-  ".DS_Store"
+  ".DS_Store",
+  "preset.init.xml"
   ]
 
 
