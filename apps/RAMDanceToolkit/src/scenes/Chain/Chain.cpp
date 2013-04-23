@@ -100,7 +100,8 @@ void Chain::setupControlPanel()
     panel->addSlider("THICKNESS", 1.0, 100, &mThickness, w, dim);
     
     panel->addSpacer(w, 1.0f);
-    panel->addLabel("Press [o] to add chain", OFX_UI_FONT_LARGE);
+    panel->addLabel("Click target node, and", OFX_UI_FONT_MEDIUM);
+    panel->addLabel("Press [o] to add chain", OFX_UI_FONT_MEDIUM);
     panel->addSpacer(w, 1.0f);
     panel->addButton("REMOVE ALL", false, dim, dim);
 	
