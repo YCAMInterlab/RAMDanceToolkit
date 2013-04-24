@@ -1,36 +1,43 @@
-# RamDanceToolkit
+# RAMDanceToolkit
 
-This repository is the primary source for the "[Reactor for Awareness in Motion](http://www.ycam.jp/en/performingarts/2013/02/ram-workshop.html)" Joint Research Project with Yoko Ando at [Yamaguchi Center for Arts and Media](http://www.ycam.jp). The other source is the [Motioner](https://github.com/YCAMInterlab/Motioner) application for accessing data from the custom inertial motion sensor system.
+![](https://raw.github.com/wiki/YCAMInterlab/RAMDanceToolkit/Images/Home/ram.png)
 
-The toolkit itself is built using a project file in `libs/`. This toolkit is used by applications in `apps/` such as `RAMDanceToolkit` which demonstrates a number of scenes built with the toolkit. `addons/` contains submodules that refer to addons which are not shipped with openFrameworks.
 
-The only app that depends on an addon which is not in a submodule is `apps/OpenNIOSC`.  If you're interested in building this application, make sure you have a copy of [this version's develop branch](https://github.com/kylemcdonald/ofxOpenNI/tree/develop) in your addons folder.
+ RAM Dance Toolkit is a C++ creative coding toolkit to create environments for dance. This toolkit contains a GUI and functions to access, recognize, and process motion data to support creation of various kinds of feedback to dancers using code in an easy way. Toolkit uses openFrameworks, a software development toolkit for artists, which means users can use functions from both RAM Dance Toolkit and openFrameworks. RAM Dance Toolkit will also be published as application for Windows and Mac. As an application, users also can choreograph or rehearse with previously programmed environmental conditions, which we call “scenes”.
 
-`dev/` contains work in progress or unused but interesting code.
+For more details, please see [RAMDanceToolkit wiki](https://github.com/YCAMInterlab/RAMDanceToolkit/wiki)
 
-## OSC
+詳しい情報は[RAMDanceToolkit wiki](https://github.com/YCAMInterlab/RAMDanceToolkit/wiki)を参照してください。
 
-The OSC specification for RAM is as follows:
 
-* Applications generally receive on port `10000`.
-* Skeleton data is sent as a series of nodes in a single OSC message at the address `/ram/skeleton`.
 
-The structure of each OSC message is:
 
-1. `s`: the actor name.
-2. `i`: the number of nodes in the message.
-3. Array of nodes.
-4. `f`: the message timestamp.
 
-The arguments for each node are:
+## Licenses
+RAMDanceToolkit by YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald is licensed under the [Apache License, Version2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
 
-1. `s`: name of the node.
-2. `fff`: (x, y, z) position of the node.
-3. `ffff`: angle-axis orientation of the node, stored as (angle, x, y, z).
+    Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+    
+
+
+<!-- 
 
 ## Tracking
 
 Some apps related to tracking can be found in the `dev/` folder.
+
 
 ### CircleTracking
 
@@ -43,3 +50,5 @@ The calibration data is automatically stored in the `data/` folder using a filen
 If more than one point is visible, the system will not be able to reconstruct the positions. Further work must be done to adapt this system to multiple point tracking, as well as sending data over OSC. However, the primary difficulty is currently that the 3d data from the tracking system needs to be tracked more accurately. Right now the 3d positions are extracted by looking at the area around the tracked point, and averaging those locations. Another technique, such as fitting a plane and ignoring outliers in the averaging, may lead to more robust data.
 
 The primary innovation of the CircleTracking app is the use of OpenCV's `estimateAffine3D()` function, which solves for the position and orientation of the sensors based on an original data set.
+
+-->
