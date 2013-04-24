@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{87813313-7C51-6E44-8673-5970F9574AC6}</ProjectGuid>
+    <RootNamespace>example-empty</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">obj\x32\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">example-emptyDebug</TargetName>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">obj\x32\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">example-empty</TargetName>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\libs\ram;..\..\libs\ram\Core;..\..\libs\ram\Event;..\..\libs\ram\Filter;..\..\libs\ram\Graphics;..\..\libs\ram\Physics;..\..\libs\ram\Recognizer;..\..\libs\ram\Scene;..\..\libs\ram\UI;..\..\libs\ram\Utility;..\..\libs\ram\UI\ramActorScene;..\..\addons\ofxBt\src;..\..\addons\ofxBt\libs;..\..\addons\ofxBt\libs\bullet;..\..\addons\ofxBt\libs\bullet\include;..\..\addons\ofxBt\libs\bullet\lib;..\..\addons\ofxBt\libs\bullet\include\bullet;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody;..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Character;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Vehicle;..\..\addons\ofxBt\libs\bullet\lib\osx;..\..\addons\ofxBt\libs\bullet\lib\vs2010;..\..\addons\ofxCv\src;..\..\addons\ofxCv\libs;..\..\addons\ofxCv\libs\ofxCv;..\..\addons\ofxCv\libs\ofxCv\include;..\..\addons\ofxCv\libs\ofxCv\src;..\..\addons\ofxCv\libs\ofxCv\include\ofxCv;..\..\addons\ofxOpenCv\src;..\..\addons\ofxOpenCv\libs;..\..\addons\ofxNodeArray\src;..\..\addons\ofxInteractivePrimitives\src;..\..\addons\ofxInteractivePrimitives\src\ui;..\..\addons\ofxUI\src;..\..\addons\ofxUITabbedCanvas;..\..\..\libs\assimp\include;..\..\..\libs\cairo\include;..\..\..\libs\fmodex\include;..\..\..\libs\FreeImage\include;..\..\..\libs\freetype\include;..\..\..\libs\glew\include;..\..\..\libs\glu\include;..\..\..\libs\glut\include;..\..\..\libs\poco\include;..\..\..\libs\quicktime\include;..\..\..\libs\rtAudio\include;..\..\..\libs\tess2\include;..\..\..\libs\videoInput\include;..\..\..\libs\cairo\include\cairo;..\..\..\libs\cairo\include\libpng15;..\..\..\libs\cairo\include\pixman-1;..\..\..\libs\openFrameworks;..\..\..\libs\openFrameworks\3d;..\..\..\libs\openFrameworks\app;..\..\..\libs\openFrameworks\communication;..\..\..\libs\openFrameworks\events;..\..\..\libs\openFrameworks\gl;..\..\..\libs\openFrameworks\graphics;..\..\..\libs\openFrameworks\math;..\..\..\libs\openFrameworks\sound;..\..\..\libs\openFrameworks\types;..\..\..\libs\openFrameworks\utils;..\..\..\libs\openFrameworks\video;..\..\..\addons\ofxOsc\libs;..\..\..\addons\ofxOsc\src;..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\addons\ofxXMLSettings\libs;..\..\..\addons\ofxXMLSettings\src;..\..\..\addons\ofxOpenCv\libs;..\..\..\addons\ofxOpenCv\src;..\..\..\addons\ofxOpenCv\libs\opencv;..\..\..\addons\ofxOpenCv\libs\opencv\include;..\..\..\addons\ofxOpenCv\libs\opencv\lib;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\calib3d;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\contrib;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\core;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\features2d;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\gpu;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\highgui;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\legacy;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\ml;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\objdetect;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\ts;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\video;..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_CONSOLE;POCO_STATIC;CAIRO_WIN32_STATIC_BUILD;DISABLE_SOME_FLOATING_POINT;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader></PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_CONSOLE;POCO_STATIC;CAIRO_WIN32_STATIC_BUILD;DISABLE_SOME_FLOATING_POINT;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\libs\ram;..\..\libs\ram\Core;..\..\libs\ram\Event;..\..\libs\ram\Filter;..\..\libs\ram\Graphics;..\..\libs\ram\Physics;..\..\libs\ram\Recognizer;..\..\libs\ram\Scene;..\..\libs\ram\UI;..\..\libs\ram\Utility;..\..\libs\ram\UI\ramActorScene;..\..\addons\ofxBt\src;..\..\addons\ofxBt\libs;..\..\addons\ofxBt\libs\bullet;..\..\addons\ofxBt\libs\bullet\include;..\..\addons\ofxBt\libs\bullet\lib;..\..\addons\ofxBt\libs\bullet\include\bullet;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody;..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Character;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Vehicle;..\..\addons\ofxBt\libs\bullet\lib\osx;..\..\addons\ofxBt\libs\bullet\lib\vs2010;..\..\addons\ofxCv\src;..\..\addons\ofxCv\libs;..\..\addons\ofxCv\libs\ofxCv;..\..\addons\ofxCv\libs\ofxCv\include;..\..\addons\ofxCv\libs\ofxCv\src;..\..\addons\ofxCv\libs\ofxCv\include\ofxCv;..\..\addons\ofxOpenCv\src;..\..\addons\ofxOpenCv\libs;..\..\addons\ofxNodeArray\src;..\..\addons\ofxInteractivePrimitives\src;..\..\addons\ofxInteractivePrimitives\src\ui;..\..\addons\ofxUI\src;..\..\addons\ofxUITabbedCanvas;..\..\..\libs\assimp\include;..\..\..\libs\cairo\include;..\..\..\libs\fmodex\include;..\..\..\libs\FreeImage\include;..\..\..\libs\freetype\include;..\..\..\libs\glew\include;..\..\..\libs\glu\include;..\..\..\libs\glut\include;..\..\..\libs\poco\include;..\..\..\libs\quicktime\include;..\..\..\libs\rtAudio\include;..\..\..\libs\tess2\include;..\..\..\libs\videoInput\include;..\..\..\libs\cairo\include\cairo;..\..\..\libs\cairo\include\libpng15;..\..\..\libs\cairo\include\pixman-1;..\..\..\libs\openFrameworks;..\..\..\libs\openFrameworks\3d;..\..\..\libs\openFrameworks\app;..\..\..\libs\openFrameworks\communication;..\..\..\libs\openFrameworks\events;..\..\..\libs\openFrameworks\gl;..\..\..\libs\openFrameworks\graphics;..\..\..\libs\openFrameworks\math;..\..\..\libs\openFrameworks\sound;..\..\..\libs\openFrameworks\types;..\..\..\libs\openFrameworks\utils;..\..\..\libs\openFrameworks\video;..\..\..\addons\ofxOsc\libs;..\..\..\addons\ofxOsc\src;..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\addons\ofxXMLSettings\libs;..\..\..\addons\ofxXMLSettings\src;..\..\..\addons\ofxOpenCv\libs;..\..\..\addons\ofxOpenCv\src;..\..\..\addons\ofxOpenCv\libs\opencv;..\..\..\addons\ofxOpenCv\libs\opencv\include;..\..\..\addons\ofxOpenCv\libs\opencv\lib;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\calib3d;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\contrib;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\core;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\features2d;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\gpu;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\highgui;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\legacy;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\ml;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\objdetect;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\ts;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\video;..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>BulletCollision_vs2010_d.lib;BulletDynamics_vs2010_d.lib;BulletSoftBody_vs2010_d.lib;LinearMath_vs2010_d.lib;cairo-static.lib;pixman-1.lib;fmodexL_vc.lib;fmodex_vc.lib;FreeImage.lib;libfreetype.lib;glew32s.lib;glu32.lib;glut32.lib;openframeworksLibDebug.lib;PocoFoundationmdd.lib;PocoNetmdd.lib;PocoUtilmdd.lib;PocoXMLmdd.lib;qtmlClient.lib;QTSClient.lib;Rave.lib;dsound.lib;rtAudioD.lib;tess2.lib;videoInput.lib;msimg32.lib;opencv_calib3d231d.lib;opencv_contrib231d.lib;opencv_core231d.lib;opencv_features2d231d.lib;opencv_flann231d.lib;opencv_gpu231d.lib;opencv_haartraining_engined.lib;opencv_highgui231d.lib;opencv_imgproc231d.lib;opencv_legacy231d.lib;opencv_ml231d.lib;opencv_objdetect231d.lib;opencv_video231d.lib;zlibd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)example-emptyDebug.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\addons\ofxBt\libs\bullet\lib\vs2010;..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010;..\..\..\libs\assimp\lib\vs2010;..\..\..\libs\cairo\lib\vs2010;..\..\..\libs\fmodex\lib\vs2010;..\..\..\libs\FreeImage\lib\vs2010;..\..\..\libs\freetype\lib\vs2010;..\..\..\libs\glew\lib\vs2010;..\..\..\libs\glu\lib\vs2010;..\..\..\libs\glut\lib\vs2010;..\..\..\libs\openFrameworks\lib\vs2010;..\..\..\libs\openFrameworksCompiled\lib\vs2010;..\..\..\libs\poco\lib\vs2010;..\..\..\libs\quicktime\lib\vs2010;..\..\..\libs\rtAudio\lib\vs2010;..\..\..\libs\tess2\lib\vs2010;..\..\..\libs\videoInput\lib\vs2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalOptions>/NODEFAULTLIB:&quot;PocoFoundationd.lib&quot; /NODEFAULTLIB:&quot;atlthunk.lib&quot; /DEBUG %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <PostBuildEvent>
+      <Command>mkdir $(ProjectDir)bin\data&#x0D;&#x0A;xcopy /e /i /y &quot;$(ProjectDir)..\..\..\export\vs2010\*.dll&quot; &quot;$(ProjectDir)bin&quot;</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\libs\ram;..\..\libs\ram\Core;..\..\libs\ram\Event;..\..\libs\ram\Filter;..\..\libs\ram\Graphics;..\..\libs\ram\Physics;..\..\libs\ram\Recognizer;..\..\libs\ram\Scene;..\..\libs\ram\UI;..\..\libs\ram\Utility;..\..\libs\ram\UI\ramActorScene;..\..\addons\ofxBt\src;..\..\addons\ofxBt\libs;..\..\addons\ofxBt\libs\bullet;..\..\addons\ofxBt\libs\bullet\include;..\..\addons\ofxBt\libs\bullet\lib;..\..\addons\ofxBt\libs\bullet\include\bullet;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody;..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Character;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Vehicle;..\..\addons\ofxBt\libs\bullet\lib\osx;..\..\addons\ofxBt\libs\bullet\lib\vs2010;..\..\addons\ofxCv\src;..\..\addons\ofxCv\libs;..\..\addons\ofxCv\libs\ofxCv;..\..\addons\ofxCv\libs\ofxCv\include;..\..\addons\ofxCv\libs\ofxCv\src;..\..\addons\ofxCv\libs\ofxCv\include\ofxCv;..\..\addons\ofxOpenCv\src;..\..\addons\ofxOpenCv\libs;..\..\addons\ofxNodeArray\src;..\..\addons\ofxInteractivePrimitives\src;..\..\addons\ofxInteractivePrimitives\src\ui;..\..\addons\ofxUI\src;..\..\addons\ofxUITabbedCanvas;..\..\..\libs\assimp\include;..\..\..\libs\cairo\include;..\..\..\libs\fmodex\include;..\..\..\libs\FreeImage\include;..\..\..\libs\freetype\include;..\..\..\libs\glew\include;..\..\..\libs\glu\include;..\..\..\libs\glut\include;..\..\..\libs\poco\include;..\..\..\libs\quicktime\include;..\..\..\libs\rtAudio\include;..\..\..\libs\tess2\include;..\..\..\libs\videoInput\include;..\..\..\libs\cairo\include\cairo;..\..\..\libs\cairo\include\libpng15;..\..\..\libs\cairo\include\pixman-1;..\..\..\libs\openFrameworks;..\..\..\libs\openFrameworks\3d;..\..\..\libs\openFrameworks\app;..\..\..\libs\openFrameworks\communication;..\..\..\libs\openFrameworks\events;..\..\..\libs\openFrameworks\gl;..\..\..\libs\openFrameworks\graphics;..\..\..\libs\openFrameworks\math;..\..\..\libs\openFrameworks\sound;..\..\..\libs\openFrameworks\types;..\..\..\libs\openFrameworks\utils;..\..\..\libs\openFrameworks\video;..\..\..\addons\ofxOsc\libs;..\..\..\addons\ofxOsc\src;..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\addons\ofxXMLSettings\libs;..\..\..\addons\ofxXMLSettings\src;..\..\..\addons\ofxOpenCv\libs;..\..\..\addons\ofxOpenCv\src;..\..\..\addons\ofxOpenCv\libs\opencv;..\..\..\addons\ofxOpenCv\libs\opencv\include;..\..\..\addons\ofxOpenCv\libs\opencv\lib;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\calib3d;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\contrib;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\core;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\features2d;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\gpu;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\highgui;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\legacy;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\ml;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\objdetect;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\ts;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\video;..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_CONSOLE;POCO_STATIC;CAIRO_WIN32_STATIC_BUILD;DISABLE_SOME_FLOATING_POINT;NODEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader></PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_CONSOLE;POCO_STATIC;CAIRO_WIN32_STATIC_BUILD;DISABLE_SOME_FLOATING_POINT;NODEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\libs\ram;..\..\libs\ram\Core;..\..\libs\ram\Event;..\..\libs\ram\Filter;..\..\libs\ram\Graphics;..\..\libs\ram\Physics;..\..\libs\ram\Recognizer;..\..\libs\ram\Scene;..\..\libs\ram\UI;..\..\libs\ram\Utility;..\..\libs\ram\UI\ramActorScene;..\..\addons\ofxBt\src;..\..\addons\ofxBt\libs;..\..\addons\ofxBt\libs\bullet;..\..\addons\ofxBt\libs\bullet\include;..\..\addons\ofxBt\libs\bullet\lib;..\..\addons\ofxBt\libs\bullet\include\bullet;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletSoftBody;..\..\addons\ofxBt\libs\bullet\include\bullet\LinearMath;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\BroadphaseCollision;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionDispatch;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\CollisionShapes;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\Gimpact;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletCollision\NarrowPhaseCollision;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Character;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\ConstraintSolver;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Dynamics;..\..\addons\ofxBt\libs\bullet\include\bullet\BulletDynamics\Vehicle;..\..\addons\ofxBt\libs\bullet\lib\osx;..\..\addons\ofxBt\libs\bullet\lib\vs2010;..\..\addons\ofxCv\src;..\..\addons\ofxCv\libs;..\..\addons\ofxCv\libs\ofxCv;..\..\addons\ofxCv\libs\ofxCv\include;..\..\addons\ofxCv\libs\ofxCv\src;..\..\addons\ofxCv\libs\ofxCv\include\ofxCv;..\..\addons\ofxOpenCv\src;..\..\addons\ofxOpenCv\libs;..\..\addons\ofxNodeArray\src;..\..\addons\ofxInteractivePrimitives\src;..\..\addons\ofxInteractivePrimitives\src\ui;..\..\addons\ofxUI\src;..\..\addons\ofxUITabbedCanvas;..\..\..\libs\assimp\include;..\..\..\libs\cairo\include;..\..\..\libs\fmodex\include;..\..\..\libs\FreeImage\include;..\..\..\libs\freetype\include;..\..\..\libs\glew\include;..\..\..\libs\glu\include;..\..\..\libs\glut\include;..\..\..\libs\poco\include;..\..\..\libs\quicktime\include;..\..\..\libs\rtAudio\include;..\..\..\libs\tess2\include;..\..\..\libs\videoInput\include;..\..\..\libs\cairo\include\cairo;..\..\..\libs\cairo\include\libpng15;..\..\..\libs\cairo\include\pixman-1;..\..\..\libs\openFrameworks;..\..\..\libs\openFrameworks\3d;..\..\..\libs\openFrameworks\app;..\..\..\libs\openFrameworks\communication;..\..\..\libs\openFrameworks\events;..\..\..\libs\openFrameworks\gl;..\..\..\libs\openFrameworks\graphics;..\..\..\libs\openFrameworks\math;..\..\..\libs\openFrameworks\sound;..\..\..\libs\openFrameworks\types;..\..\..\libs\openFrameworks\utils;..\..\..\libs\openFrameworks\video;..\..\..\addons\ofxOsc\libs;..\..\..\addons\ofxOsc\src;..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\addons\ofxXMLSettings\libs;..\..\..\addons\ofxXMLSettings\src;..\..\..\addons\ofxOpenCv\libs;..\..\..\addons\ofxOpenCv\src;..\..\..\addons\ofxOpenCv\libs\opencv;..\..\..\addons\ofxOpenCv\libs\opencv\include;..\..\..\addons\ofxOpenCv\libs\opencv\lib;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\calib3d;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\contrib;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\core;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\features2d;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\gpu;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\highgui;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\legacy;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\ml;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\objdetect;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\ts;..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\video;..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>LinearMath_vs2010.lib;BulletCollision_vs2010.lib;BulletDynamics_vs2010.lib;BulletSoftBody_vs2010.lib;cairo-static.lib;pixman-1.lib;fmodexL_vc.lib;fmodex_vc.lib;FreeImage.lib;libfreetype.lib;glew32s.lib;glu32.lib;glut32.lib;openframeworksLib.lib;PocoFoundationmd.lib;PocoNetmd.lib;PocoUtilmd.lib;PocoXMLmd.lib;qtmlClient.lib;QTSClient.lib;Rave.lib;dsound.lib;rtAudio.lib;tess2.lib;videoInput.lib;msimg32.lib;opencv_calib3d231.lib;opencv_contrib231.lib;opencv_core231.lib;opencv_features2d231.lib;opencv_flann231.lib;opencv_gpu231.lib;opencv_haartraining_engine.lib;opencv_highgui231.lib;opencv_imgproc231.lib;opencv_legacy231.lib;opencv_ml231.lib;opencv_objdetect231.lib;opencv_video231.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)example-empty.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\addons\ofxBt\libs\bullet\lib\vs2010;..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010;..\..\..\libs\assimp\lib\vs2010;..\..\..\libs\cairo\lib\vs2010;..\..\..\libs\fmodex\lib\vs2010;..\..\..\libs\FreeImage\lib\vs2010;..\..\..\libs\freetype\lib\vs2010;..\..\..\libs\glew\lib\vs2010;..\..\..\libs\glu\lib\vs2010;..\..\..\libs\glut\lib\vs2010;..\..\..\libs\openFrameworks\lib\vs2010;..\..\..\libs\openFrameworksCompiled\lib\vs2010;..\..\..\libs\poco\lib\vs2010;..\..\..\libs\quicktime\lib\vs2010;..\..\..\libs\rtAudio\lib\vs2010;..\..\..\libs\tess2\lib\vs2010;..\..\..\libs\videoInput\lib\vs2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalOptions>/NODEFAULTLIB:&quot;PocoFoundationd.lib&quot; /NODEFAULTLIB:&quot;atlthunk.lib&quot; %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <PostBuildEvent>
+      <Command>mkdir $(ProjectDir)bin\data&#x0D;&#x0A;xcopy /e /i /y &quot;$(ProjectDir)..\..\..\export\vs2010\*.dll&quot; &quot;$(ProjectDir)bin&quot;</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="src\testApp.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\ofMain.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\3d\of3dUtils.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\3d\ofCamera.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\3d\ofEasyCam.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\3d\ofMesh.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\3d\ofNode.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\app\ofAppBaseWindow.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\app\ofAppGlutWindow.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\app\ofAppRunner.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\app\ofBaseApp.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\communication\ofArduino.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\communication\ofSerial.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\events\ofEvents.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\events\ofEventUtils.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofFbo.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofGLRenderer.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofGLUtils.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofLight.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofMaterial.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofShader.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofTexture.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofVbo.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofVboMesh.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofBitmapFont.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofCairoRenderer.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofGraphics.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofImage.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofPath.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofPixels.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofPolyline.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofRendererCollection.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofTessellator.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofTrueTypeFont.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\math\ofMath.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\math\ofMatrix3x3.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\math\ofMatrix4x4.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\math\ofQuaternion.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\math\ofVec2f.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\math\ofVec3f.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\math\ofVec4f.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\math\ofVectorMath.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofBaseSoundPlayer.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofBaseSoundStream.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofFmodSoundPlayer.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofOpenALSoundPlayer.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofPASoundStream.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofRtAudioSoundStream.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofSoundPlayer.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofSoundStream.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\types\ofBaseTypes.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\types\ofColor.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\types\ofPoint.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\types\ofRectangle.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\types\ofTypes.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofConstants.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofFileUtils.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofLog.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofNoise.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofSystemUtils.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofThread.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofURLFileLoader.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofUtils.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofDirectShowGrabber.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofGstUtils.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofGstVideoGrabber.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofGstVideoPlayer.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofQTKitGrabber.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofQTKitMovieRenderer.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofQTKitPlayer.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofQtUtils.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofQuickTimeGrabber.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofQuickTimePlayer.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofVideoGrabber.h" />
+    <ClInclude Include="..\..\..\libs\openFrameworks\video\ofVideoPlayer.h" />
+    <ClInclude Include="..\..\libs\ram\ramMain.h" />
+    <ClInclude Include="..\..\libs\ram\Core\ramActor.h" />
+    <ClInclude Include="..\..\libs\ram\Core\ramActorManager.h" />
+    <ClInclude Include="..\..\libs\ram\Core\ramBaseApp.h" />
+    <ClInclude Include="..\..\libs\ram\Core\ramCameraManager.h" />
+    <ClInclude Include="..\..\libs\ram\Core\ramConstants.h" />
+    <ClInclude Include="..\..\libs\ram\Core\ramGlobal.h" />
+    <ClInclude Include="..\..\libs\ram\Core\ramUnit.h" />
+    <ClInclude Include="..\..\libs\ram\Event\ramBaseEvent.h" />
+    <ClInclude Include="..\..\libs\ram\Event\ramCollisionEvent.h" />
+    <ClInclude Include="..\..\libs\ram\Event\ramTimeEvent.h" />
+    <ClInclude Include="..\..\libs\ram\Filter\ramBaseFilter.h" />
+    <ClInclude Include="..\..\libs\ram\Filter\ramExpansion.h" />
+    <ClInclude Include="..\..\libs\ram\Filter\ramGhost.h" />
+    <ClInclude Include="..\..\libs\ram\Filter\ramLowPassFilter.h" />
+    <ClInclude Include="..\..\libs\ram\Filter\ramNodeTransform.h" />
+    <ClInclude Include="..\..\libs\ram\Filter\ramPendulum.h" />
+    <ClInclude Include="..\..\libs\ram\Filter\ramSession.h" />
+    <ClInclude Include="..\..\libs\ram\Filter\ramStamp.h" />
+    <ClInclude Include="..\..\libs\ram\Filter\ramTimeFilter.h" />
+    <ClInclude Include="..\..\libs\ram\Filter\ramUpsideDown.h" />
+    <ClInclude Include="..\..\libs\ram\Graphics\ramGraphics.h" />
+    <ClInclude Include="..\..\libs\ram\Graphics\ramGraphView.h" />
+    <ClInclude Include="..\..\libs\ram\Graphics\ramNodeLine.h" />
+    <ClInclude Include="..\..\libs\ram\Graphics\ramPrimitive.h" />
+    <ClInclude Include="..\..\libs\ram\Graphics\ramSimpleShadow.h" />
+    <ClInclude Include="..\..\libs\ram\Graphics\ramSoftBodyPrimitive.h" />
+    <ClInclude Include="..\..\libs\ram\Physics\ramPhysics.h" />
+    <ClInclude Include="..\..\libs\ram\Recognizer\ramBaseRecognizer.h" />
+    <ClInclude Include="..\..\libs\ram\Recognizer\ramGeometry.h" />
+    <ClInclude Include="..\..\libs\ram\Recognizer\ramPlanarGestureRecognizer.h" />
+    <ClInclude Include="..\..\libs\ram\Recognizer\ramRecognizer.h" />
+    <ClInclude Include="..\..\libs\ram\Scene\ramBaseScene.h" />
+    <ClInclude Include="..\..\libs\ram\Scene\ramSceneManager.h" />
+    <ClInclude Include="..\..\libs\ram\UI\ramControllable.h" />
+    <ClInclude Include="..\..\libs\ram\UI\ramControlPanel.h" />
+    <ClInclude Include="..\..\libs\ram\UI\ramPreferencesTab.h" />
+    <ClInclude Include="..\..\libs\ram\UI\ramPresetTab.h" />
+    <ClInclude Include="..\..\libs\ram\UI\ramActorScene\BaseSegment.h" />
+    <ClInclude Include="..\..\libs\ram\UI\ramActorScene\ControlSegment.h" />
+    <ClInclude Include="..\..\libs\ram\UI\ramActorScene\PlaybackSegment.h" />
+    <ClInclude Include="..\..\libs\ram\UI\ramActorScene\ramActorsScene.h" />
+    <ClInclude Include="..\..\libs\ram\Utility\ramBaseCoder.h" />
+    <ClInclude Include="..\..\libs\ram\Utility\ramCameraSettings.h" />
+    <ClInclude Include="..\..\libs\ram\Utility\ramNodeArrayBuffer.h" />
+    <ClInclude Include="..\..\libs\ram\Utility\ramNodeFinder.h" />
+    <ClInclude Include="..\..\libs\ram\Utility\ramNodeIdentifer.h" />
+    <ClInclude Include="..\..\libs\ram\Utility\ramTSVCoder.h" />
+    <ClInclude Include="..\..\libs\ram\Utility\ramUtils.h" />
+    <ClInclude Include="..\..\addons\ofxBt\src\ofxBt.h" />
+    <ClInclude Include="..\..\addons\ofxBt\src\ofxBtCollisionObject.h" />
+    <ClInclude Include="..\..\addons\ofxBt\src\ofxBtHelper.h" />
+    <ClInclude Include="..\..\addons\ofxBt\src\ofxBtJoint.h" />
+    <ClInclude Include="..\..\addons\ofxBt\src\ofxBtRender.h" />
+    <ClInclude Include="..\..\addons\ofxBt\src\ofxBtRigidBody.h" />
+    <ClInclude Include="..\..\addons\ofxBt\src\ofxBtSoftBody.h" />
+    <ClInclude Include="..\..\addons\ofxBt\src\ofxBtSoftBodyWorld.h" />
+    <ClInclude Include="..\..\addons\ofxBt\src\ofxBtWorld.h" />
+    <ClInclude Include="..\..\addons\ofxCv\src\ofxCv.h" />
+    <ClInclude Include="..\..\addons\ofxCv\libs\ofxCv\include\ofxCv\Calibration.h" />
+    <ClInclude Include="..\..\addons\ofxCv\libs\ofxCv\include\ofxCv\ContourFinder.h" />
+    <ClInclude Include="..\..\addons\ofxCv\libs\ofxCv\include\ofxCv\Distance.h" />
+    <ClInclude Include="..\..\addons\ofxCv\libs\ofxCv\include\ofxCv\Flow.h" />
+    <ClInclude Include="..\..\addons\ofxCv\libs\ofxCv\include\ofxCv\Helpers.h" />
+    <ClInclude Include="..\..\addons\ofxCv\libs\ofxCv\include\ofxCv\RunningBackground.h" />
+    <ClInclude Include="..\..\addons\ofxCv\libs\ofxCv\include\ofxCv\Tracker.h" />
+    <ClInclude Include="..\..\addons\ofxCv\libs\ofxCv\include\ofxCv\Utilities.h" />
+    <ClInclude Include="..\..\addons\ofxCv\libs\ofxCv\include\ofxCv\Wrappers.h" />
+    <ClInclude Include="..\..\addons\ofxNodeArray\src\ofxNodeArray.h" />
+    <ClInclude Include="..\..\addons\ofxInteractivePrimitives\src\ofxInteractivePrimitives.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUI.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUI2DGraph.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUI2DPad.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIBaseDraws.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIBiLabelSlider.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIButton.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUICanvas.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUICircleSlider.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUICustomImageButton.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIDropDownList.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIEventArgs.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIFPS.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIFPSSlider.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIImage.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIImageButton.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIImageSampler.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIImageSlider.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIImageToggle.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUILabel.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUILabelButton.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUILabelToggle.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIMinimalSlider.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIMovingGraph.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIMultiImageButton.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIMultiImageSlider.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIMultiImageToggle.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUINumberDialer.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIRadio.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIRangeSlider.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIRectangle.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIRotarySlider.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIScrollableCanvas.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUISlider.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUISpacer.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUISpectrum.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUITextArea.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUITextInput.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIToggle.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIToggleMatrix.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIValuePlotter.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIWaveform.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIWidget.h" />
+    <ClInclude Include="..\..\addons\ofxUI\src\ofxUIWidgetWithLabel.h" />
+    <ClInclude Include="..\..\addons\ofxUITabbedCanvas\ofxUITabbedCanvas.h" />
+    <ClInclude Include="..\..\addons\ofxUITabbedCanvas\ofxUIToggleMini.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\NetworkingUtils.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\PacketListener.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\TimerListener.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\UdpSocket.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\MessageMappingOscPacketListener.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscException.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscHostEndianness.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPacketListener.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOsc.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscArg.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscBundle.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscMessage.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscReceiver.h" />
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscSender.h" />
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h" />
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvBlob.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvColorImage.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvConstants.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvContourFinder.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvFloatImage.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvGrayscaleImage.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvHaarFinder.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvImage.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvMain.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvShortImage.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxOpenCv.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv\cv.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv\cvaux.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv\cvwimage.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv\cxcore.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv\cxmisc.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv\highgui.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv\ml.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\core\core_c.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\core\types_c.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\allocator.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\all_indices.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\any.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\autotuned_index.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\composite_index.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\config.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\defines.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\dist.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\dummy.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\dynamic_bitset.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\general.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\ground_truth.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\hdf5.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\heap.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\hierarchical_clustering_index.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\index_testing.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\kdtree_index.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\kdtree_single_index.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\kmeans_index.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\linear_index.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\logger.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\lsh_index.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\lsh_table.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\matrix.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\nn_index.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\object_factory.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\params.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\random.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\result_set.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\sampling.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\saving.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\simplex_downhill.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\flann\timer.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\highgui\highgui_c.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\imgproc_c.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\types_c.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\ts\ts_gtest.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+    </ClCompile>
+    <ClCompile Include="src\testApp.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\ramActor.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\ramActorManager.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\ramBaseApp.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\ramCameraManager.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\ramGlobal.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Filter\ramBaseFilter.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Filter\ramSession.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Graphics\ramGraphics.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Graphics\ramNodeLine.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Graphics\ramPrimitive.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Graphics\ramSimpleShadow.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Graphics\ramSoftBodyPrimitive.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Physics\ramPhysics.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Recognizer\ramGeometry.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Recognizer\ramPlanarGestureRecognizer.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Scene\ramBaseScene.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Scene\ramSceneManager.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\UI\ramControlPanel.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\UI\ramPresetTab.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\UI\ramActorScene\BaseSegment.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\UI\ramActorScene\ControlSegment.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\UI\ramActorScene\PlaybackSegment.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\UI\ramActorScene\ramActorsScene.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Utility\ramCameraSettings.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Utility\ramTSVCoder.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Utility\ramUtils.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxBt\src\ofxBt.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxBt\src\ofxBtCollisionObject.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxBt\src\ofxBtHelper.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxBt\src\ofxBtJoint.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxBt\src\ofxBtRigidBody.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxBt\src\ofxBtSoftBody.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxBt\src\ofxBtSoftBodyWorld.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxBt\src\ofxBtWorld.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxCv\libs\ofxCv\src\Calibration.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxCv\libs\ofxCv\src\ContourFinder.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxCv\libs\ofxCv\src\Distance.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxCv\libs\ofxCv\src\Flow.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxCv\libs\ofxCv\src\Helpers.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxCv\libs\ofxCv\src\RunningBackground.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxCv\libs\ofxCv\src\Tracker.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxCv\libs\ofxCv\src\Utilities.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxCv\libs\ofxCv\src\Wrappers.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxNodeArray\src\ofxNodeArray.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxInteractivePrimitives\src\ofxInteractivePrimitives.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUITabbedCanvas\ofxUITabbedCanvas.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix\NetworkingUtils.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix\UdpSocket.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32\NetworkingUtilsWin.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32\UdpSocketWin.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscBundle.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscMessage.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscReceiver.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscSender.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvColorImage.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvContourFinder.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvFloatImage.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvGrayscaleImage.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvHaarFinder.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvImage.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvShortImage.cpp">
+    </ClCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

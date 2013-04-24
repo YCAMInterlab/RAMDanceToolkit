@@ -66,7 +66,7 @@ public:
 	
 private:
     
-	const int MAX_ACTORS = 4;
+	static const int MAX_ACTORS = 4;
 	
     /// playback
 	ramTSVCoder coder;
