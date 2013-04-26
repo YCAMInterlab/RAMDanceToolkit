@@ -103,7 +103,10 @@ void testApp::setup()
 	sceneManager.addScene( donuts.getPtr() );
 	sceneManager.addScene( stamp.getPtr() );
 	sceneManager.addScene( expansion.getPtr() );
+// ignore win32
+#ifndef TARGET_WIN32
 	sceneManager.addScene( particles.getPtr() );
+#endif
 	sceneManager.addScene( abacus.getPtr() );
 	sceneManager.addScene( soundcube.getPtr() );
 	sceneManager.addScene( upsideDown.getPtr() );

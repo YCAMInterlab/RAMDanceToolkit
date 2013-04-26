@@ -1,17 +1,19 @@
 require 'fileutils'
 require 'find'
 
+ram_root_dir = "../../"
+FileUtils.cd(ram_root_dir, {:verbose => false})
 
 release_files_path =
   "RAM-release-v1_0_0"
 
 sources = [
-  "../addons",
-  "../apps",
-  "../examples",
-  "../libs",
-  "../resources",
-  "../readme.md"
+  "addons",
+  "apps",
+  "examples",
+  "libs",
+  "resources",
+  "readme.md"
   ]
 
 ignore_files = [
@@ -37,7 +39,7 @@ sources.each { |path|
 
 
 # remove files that should be ignored e.g. .DS_Store
-Find.find('.') {|f|
+Find.find('./'+release_files_path) {|f|
   ignore_files.each{ |ignore|
     if File::basename(f) == ignore
       FileUtils.rm(f, {:force=>true})

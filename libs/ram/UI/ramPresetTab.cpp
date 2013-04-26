@@ -34,8 +34,13 @@ ramPresetTab::ramPresetTab()
     addLabelButton("HC + Stamp + Natto", false);
     addLabelButton("HC + Future", false);
 	addLabelButton("Line + Future", false);
+// ignore win32
+#ifndef TARGET_WIN32
 	addLabelButton("Particles + Future", false);
 	addLabelButton("Particles", false);
+#else
+	addLabelButton("Future", false); // only for windows
+#endif
 	addSpacer();
 	
 	vector<string> cameraPresetNames;

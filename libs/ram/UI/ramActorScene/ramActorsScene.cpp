@@ -51,6 +51,8 @@ void ramActorsScene::setupControlPanel()
 	
 	ofAddListener(mLocalPanel->newGUIEvent, this, &ramActorsScene::onValueChanged);
 	
+// ignore win32
+#ifndef TARGET_WIN32
 	/// load Ando_1.tsv if this is the first launch of this application
 	string initial_file_path = "Settings/presets/preset.init.xml";
 	if (!ofFile::doesFileExist( ramToResourcePath(initial_file_path) ))
@@ -59,6 +61,7 @@ void ramActorsScene::setupControlPanel()
 		ofBufferToFile(ramToResourcePath(initial_file_path), buf);
 		loadFile(ramToResourcePath("MotionData/Ando_1.tsv"));
 	}
+#endif
 }
 
 void ramActorsScene::setup()
@@ -297,11 +300,14 @@ void ramActorsScene::onValueChanged(ofxUIEventArgs &e)
 
 void ramActorsScene::onFileDrop(ofDragInfo &e)
 {
+// ignore win32
+#ifndef TARGET_WIN32
     for(int i=0; i<e.files.size(); i++)
 	{
 		const string filePath = e.files.at(i);
 		loadFile(filePath);
 	}
+#endif
 }
 
 void ramActorsScene::loadFile(const string filePath)
@@ -506,8 +512,10 @@ void ramActorsScene::createPanelHeader()
 	mLocalPanel->addLabel(getName(), OFX_UI_FONT_LARGE);
 	mLocalPanel->addSpacer(ramGetGUI().kLength, 2);
 	
-    
+// ignore win32
+#ifndef TARGET_WIN32
 	mLocalPanel->addWidgetDown( new ofxUILabelButton("Load Recorded File", false, ramGetGUI().kLength, height) );
+#endif
 	
 	/// 2x2 matrix
 	btnShowAll = new ofxUILabelToggle("Show All Actors", &bShowAllActor, width, height);
