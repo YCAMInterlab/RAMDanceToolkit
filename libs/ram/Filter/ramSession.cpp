@@ -258,8 +258,6 @@ float ramSession::getAverageFrameTime()
 
 float ramSession::getDuration()
 {
-	assert(getNumFrames() > 0);
-	
 	ramNodeArray &frontFrame = mBuffer.get( 0 );
 	ramNodeArray &backFrame = mBuffer.get( getNumFrames() );
 	
@@ -268,7 +266,6 @@ float ramSession::getDuration()
 
 string ramSession::getNodeArrayName()
 {
-	assert(getNumFrames() > 0);
 	return getNumFrames() > 0 ? mBuffer.get(0).getName() : "no name";
 }
 

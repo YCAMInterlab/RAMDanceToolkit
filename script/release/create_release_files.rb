@@ -5,7 +5,7 @@ ram_root_dir = "../../"
 FileUtils.cd(ram_root_dir, {:verbose => false})
 
 release_files_path =
-  "RAM-release-v1_0_0"
+  "RAM-release-v1_0_1"
 
 sources = [
   "addons",
@@ -40,6 +40,14 @@ sources.each { |path|
 
 # remove files that should be ignored e.g. .DS_Store
 Find.find('./'+release_files_path) {|f|
+  
+  if File::basename(f) =~ /^.+?\.app$/
+    p File::basename(f) + " found"
+    p ".app deleted"
+    FileUtils.rm_r(f, {:force=>true})
+    next
+  end
+
   ignore_files.each{ |ignore|
     if File::basename(f) == ignore
       FileUtils.rm(f, {:force=>true})

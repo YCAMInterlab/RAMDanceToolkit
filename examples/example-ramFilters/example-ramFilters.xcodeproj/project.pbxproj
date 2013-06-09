@@ -374,12 +374,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CPLUSPLUSFLAGS = (
 					"-D__MACOSX_CORE__",
 					"-lpthread",
 					"-mtune=native",
 				);
-				SDKROOT = macosx;
+				SDKROOT = macosx10.7;
 			};
 			name = Debug;
 		};
@@ -404,12 +405,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CPLUSPLUSFLAGS = (
 					"-D__MACOSX_CORE__",
 					"-lpthread",
 					"-mtune=native",
 				);
-				SDKROOT = macosx;
+				SDKROOT = macosx10.7;
 			};
 			name = Release;
 		};
@@ -498,7 +500,9 @@
 					"\"$(SRCROOT)/../../addons/ofxBt/libs/bullet/lib/osx\"",
 					"\"$(SRCROOT)/../../../addons/ofxAssimpModelLoader/libs/assimp/lib/osx\"",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "example-ramFiltersDebug";
+				SDKROOT = macosx10.7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -587,7 +591,9 @@
 					"\"$(SRCROOT)/../../addons/ofxBt/libs/bullet/lib/osx\"",
 					"\"$(SRCROOT)/../../../addons/ofxAssimpModelLoader/libs/assimp/lib/osx\"",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "example-ramFilters";
+				SDKROOT = macosx10.7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -90,7 +90,7 @@ void testApp::setup()
 	
 	/// ram setup
 	// ------------------
-	ramInitialize(10000);
+	ramInitialize(10000, true);
 	
 	
 	/// scenes setup

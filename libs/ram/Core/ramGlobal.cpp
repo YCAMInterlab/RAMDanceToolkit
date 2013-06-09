@@ -45,7 +45,7 @@ ofCamera& ramGlobalShortcut::getActiveCamera() { return ramCameraManager::instan
 //ramSceneManager& ramGlobalShortcut::getSceneManager() { return ramSceneManager::instance(); }
 
 
-void ramInitialize(int oscPort)
+void ramInitialize(int oscPort, bool usePresetScenes)
 {
 	static bool inited = false;
 	if (inited) return;
@@ -57,7 +57,7 @@ void ramInitialize(int oscPort)
 	ramActorManager::instance().setupOscReceiver(oscPort);
 	ramSceneManager::instance().setup();
 	ramPhysics::instance();
-	ramGetGUI().setup();
+	ramGetGUI().setup(usePresetScenes);
 }
 
 string ramToResourcePath(string path)

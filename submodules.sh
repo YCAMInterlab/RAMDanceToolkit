@@ -25,19 +25,32 @@ else
 	git clone git@github.com:satoruhiga/ofxBt.git
 	cd ofxBt
 	git checkout develop
+	git checkout 724c568
 	cd ../
 
 	# ofxUI
 	git clone git@github.com:rezaali/ofxUI.git
+	cd ofxUI
+	git checkout 748d421
+	cd ../
 
 	# ofxInteractivePrimitives
 	git clone git@github.com:satoruhiga/ofxInteractivePrimitives.git
+	cd ofxInteractivePrimitives
+	git checkout 987205e
+	cd ../
 
 	# ofxCv
 	git clone git@github.com:kylemcdonald/ofxCv.git
+	cd ofxCv
+	git checkout 115deaf
+	cd ../
 
 	# ofxNodeArray
 	git clone git@github.com:YCAMInterlab/ofxNodeArray.git
+	cd ofxNodeArray
+	git checkout b21dcd5
+	cd ../
 
 	echo "end clone addons"
 	cd ../

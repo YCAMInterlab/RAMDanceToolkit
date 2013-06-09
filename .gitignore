@@ -35,6 +35,7 @@ bin/data
 
 resources/Sounds/
 resources/MotionData/
+resources/MotionData-OSCServer/
 resources/Settings/cache/
 !resources/Sounds/.gitkeep
 !resources/MotionData/.gitkeep

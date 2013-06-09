@@ -53,6 +53,7 @@ protected:
 public:
     
 	ramPresetTab();
+	void setup(bool usePresetScenes);
 	void update(ofEventArgs& e);
 	void draw(ofEventArgs& e);
 	void guiEvent(ofxUIEventArgs &e);

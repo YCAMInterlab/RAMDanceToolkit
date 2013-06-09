@@ -49,7 +49,7 @@ public:
 };
 
 #pragma mark - core
-void ramInitialize(int oscPort = 10000);
+void ramInitialize(int oscPort = 10000, bool usePresetScenes = false);
 string ramToResourcePath(string path);
 
 #pragma mark - actors

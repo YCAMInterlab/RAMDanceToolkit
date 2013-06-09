@@ -44,7 +44,7 @@ public:
 	static ramControlPanel& instance();
 	virtual ~ramControlPanel();
 
-	void setup();
+	void setup(bool usePresetScenes);
 
 	// simple GUI
 	void addPanel(ofxUITab& tab);
@@ -83,8 +83,9 @@ public:
 
 	ofxUICanvasPlus* getCurrentUIContext();
 	
+	void setUsePresetScenes(bool bUse);
+	
 private:
-
 	static ramControlPanel *_instance;
 	
 	ofxUICanvasPlus *current_panel;

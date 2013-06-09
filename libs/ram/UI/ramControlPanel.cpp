@@ -70,6 +70,11 @@ ramControlPanel& ramControlPanel::instance()
 	return *_instance;
 }
 
+void ramControlPanel::setUsePresetScenes(bool bUse)
+{
+	
+}
+
 ramControlPanel::ramControlPanel()
 :kDim(16)
 ,kXInit(OFX_UI_GLOBAL_WIDGET_SPACING)
@@ -81,11 +86,15 @@ ramControlPanel::~ramControlPanel()
 {
 }
 
-void ramControlPanel::setup()
+void ramControlPanel::setup(bool usePresetScenes)
 {
 	ofAddListener(ofEvents().update, this, &ramControlPanel::update);
 	
+	// preset tab
+	presetTab.setup(usePresetScenes);
 	addPanel(presetTab);
+	
+	// preference tab
 	addPanel(preferencesTab);
 	
 	ofAddListener(mSceneTabs.newGUIEvent, this, &ramControlPanel::guiEvent);
