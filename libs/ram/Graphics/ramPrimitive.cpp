@@ -81,7 +81,7 @@ void ramBoxPrimitive::customDraw()
 {
 	ofVec3f size = body.getSize();
 	glScalef(size.x, size.y, size.z);
-	ofBox(2);
+	ofDrawBox(2);
 }
 
 #pragma mark - ramSpherePrimitive
@@ -100,7 +100,7 @@ void ramSpherePrimitive::customDraw()
 {
 	ofVec3f size = body.getSize();
 	glScalef(size.x, size.x, size.x);
-	ofSphere(1);
+	ofDrawSphere(1);
 }
 
 #pragma mark - ramCylinderPrimitive

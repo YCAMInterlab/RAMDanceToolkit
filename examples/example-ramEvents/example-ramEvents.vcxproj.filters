@@ -2,202 +2,199 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
-      <UniqueIdentifier>{B6AED4C6-149F-A241-98EE-44A39BA4FD79}</UniqueIdentifier>
+      <UniqueIdentifier>{6128924B-BCF9-EF4C-9D67-BE94A425D161}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs">
-      <UniqueIdentifier>{77026C20-2B80-124F-9602-58BE787D8956}</UniqueIdentifier>
+      <UniqueIdentifier>{9CE8984E-A00A-3442-B8C2-D5D7FA4B0295}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\openFrameworks">
-      <UniqueIdentifier>{BA22978D-BDE6-3E4B-919E-25965D8301B3}</UniqueIdentifier>
+      <UniqueIdentifier>{D0FD9A81-ED36-3746-A013-DA4DDDCC15F0}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\openFrameworks\3d">
-      <UniqueIdentifier>{59C270F6-6768-8647-A11F-102FCAD4A140}</UniqueIdentifier>
+      <UniqueIdentifier>{3DBCDE19-8DAD-F143-A7BC-E7AEBD9B41D1}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\openFrameworks\app">
-      <UniqueIdentifier>{890F662F-7DB4-6C4F-AE17-FBE14B87B3F4}</UniqueIdentifier>
+      <UniqueIdentifier>{66C008C6-BEBA-1446-815D-FC76EA6B0744}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\openFrameworks\communication">
-      <UniqueIdentifier>{B458DC1A-A8D6-FD4D-B56D-0E34F4C85541}</UniqueIdentifier>
+      <UniqueIdentifier>{0BE95273-7C63-0A43-8700-9A98F036121D}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\openFrameworks\events">
-      <UniqueIdentifier>{3F83E96B-4D78-9C4B-BDE8-FB93111769EB}</UniqueIdentifier>
+      <UniqueIdentifier>{2E419B19-989C-C54D-B663-CBDC689215B8}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\openFrameworks\gl">
-      <UniqueIdentifier>{3BC99A52-2437-2641-9E9B-753E7FCDF0EA}</UniqueIdentifier>
+      <UniqueIdentifier>{135CF45B-450D-644B-9FB6-F00E7DA83A2D}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\openFrameworks\graphics">
-      <UniqueIdentifier>{1C360EE5-8B10-5E4D-8BEF-DFFFCDF3B511}</UniqueIdentifier>
+      <UniqueIdentifier>{387C2D46-19CA-6447-B44A-CE8E2504F403}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\openFrameworks\math">
-      <UniqueIdentifier>{7A96B048-3A87-6A47-AE35-8E052494B08F}</UniqueIdentifier>
+      <UniqueIdentifier>{4BE70BF5-64DE-CE45-9503-D2174A0C7A5A}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\openFrameworks\sound">
-      <UniqueIdentifier>{A7B21402-C2D9-C34D-A329-333FD959B1AC}</UniqueIdentifier>
+      <UniqueIdentifier>{8EBF9E93-0A29-0846-94F8-7CA03D79AA70}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\openFrameworks\types">
-      <UniqueIdentifier>{779024C8-1723-8342-A490-10372CDD5EFB}</UniqueIdentifier>
+      <UniqueIdentifier>{5584A9A0-CF39-A046-A6A8-D93C2544BC29}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\openFrameworks\utils">
-      <UniqueIdentifier>{3347AC97-6FCC-8046-B27E-E5F19678CE3B}</UniqueIdentifier>
+      <UniqueIdentifier>{F91DA297-90DC-A440-BF84-ED2E22C14399}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\openFrameworks\video">
-      <UniqueIdentifier>{D91147C5-8243-7C49-81DE-C775D28D9A4D}</UniqueIdentifier>
+      <UniqueIdentifier>{66F537ED-1601-E245-A79F-6AA42B98296F}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\ram">
-      <UniqueIdentifier>{48DC7E7B-2F4B-8D42-93E4-32B3DFF99C4C}</UniqueIdentifier>
+      <UniqueIdentifier>{0867D538-85E1-BA47-8BA9-A1024DBCDB54}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\ram\Core">
-      <UniqueIdentifier>{FC619F73-458E-374F-A597-53FA7324B07D}</UniqueIdentifier>
+      <UniqueIdentifier>{0B2290B6-6CEC-C24B-9AC2-19BCC5B3DBE7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\ram\Core\UI">
+      <UniqueIdentifier>{3E22AD48-4B9B-CA41-AA46-963D0282D6AD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\ram\Core\UI\ramActorScene">
+      <UniqueIdentifier>{065FEFC0-BDD6-1846-9197-232A9580BB1B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\ram\Core\Utility">
+      <UniqueIdentifier>{78F956B9-E551-CD4E-B69E-F028EB367BE8}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\ram\Event">
-      <UniqueIdentifier>{65213815-8B4A-6446-9D60-549D215B1476}</UniqueIdentifier>
+      <UniqueIdentifier>{1F701523-A438-0442-83C5-F1A9F1110496}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\ram\Filter">
-      <UniqueIdentifier>{0A50699C-B596-8443-85FB-304245ABD1BD}</UniqueIdentifier>
+      <UniqueIdentifier>{5EA22D8A-CBB1-2A48-A9AD-38567DD26FB2}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\ram\Graphics">
-      <UniqueIdentifier>{BB5B3DDC-0648-C24A-95EF-75EC54148641}</UniqueIdentifier>
+      <UniqueIdentifier>{C8AA5F77-AF9F-6241-9B4E-694554C6D543}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\ram\Physics">
-      <UniqueIdentifier>{6186E165-3F4B-BB4D-BA2F-5EE5F5DD4A60}</UniqueIdentifier>
+      <UniqueIdentifier>{1893FA31-7007-5C41-B9A6-30A2D5BE8E4C}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs\ram\Recognizer">
-      <UniqueIdentifier>{00086491-7829-144C-9114-92DBAE2846FE}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="libs\ram\Scene">
-      <UniqueIdentifier>{8878A2CF-2BAE-1A4A-B376-65E1D31413A0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="libs\ram\UI">
-      <UniqueIdentifier>{DADBEFEE-1288-BC4E-AE36-A15F62EC8045}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="libs\ram\UI\ramActorScene">
-      <UniqueIdentifier>{7963993A-8818-9345-9591-9841003A5B34}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="libs\ram\Utility">
-      <UniqueIdentifier>{CE1067EA-3BC9-7043-AB3B-277150F2CCE5}</UniqueIdentifier>
+      <UniqueIdentifier>{F31F85DF-ED44-854C-82A9-75A1DF7D7C16}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons">
-      <UniqueIdentifier>{7832CD73-06A8-334C-A85D-E5287CB13142}</UniqueIdentifier>
+      <UniqueIdentifier>{550DA6B3-9C7C-974F-8C21-B6E6AC0EAEFD}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxBt">
-      <UniqueIdentifier>{90EFAEA0-5EF7-2B48-8C1F-193493383E7D}</UniqueIdentifier>
+      <UniqueIdentifier>{4DCFACAB-C5A2-FA48-A332-F3ED795AF085}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxBt\src">
-      <UniqueIdentifier>{2A8DBD46-D004-BB42-8220-C3A05B0552B2}</UniqueIdentifier>
+      <UniqueIdentifier>{96975CEE-D7EE-8A43-93BF-F99C26EA2770}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxCv">
-      <UniqueIdentifier>{8F76CC40-9CF6-1C48-8974-19099FE38C6C}</UniqueIdentifier>
+      <UniqueIdentifier>{C54CE8F6-7A7D-A640-9C53-204C3B20631B}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxCv\src">
-      <UniqueIdentifier>{3F97C6FB-2E23-6B48-BC36-A27689B4BC52}</UniqueIdentifier>
+      <UniqueIdentifier>{E7103E32-2E51-6341-92E9-787F74686564}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxCv\libs">
-      <UniqueIdentifier>{7F657269-E07C-3F40-B967-B9412B0A9537}</UniqueIdentifier>
+      <UniqueIdentifier>{0FC6ABE2-75B9-5D47-9391-BB8D9500B371}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxCv\libs\ofxCv">
-      <UniqueIdentifier>{8509D339-4375-FE4D-9B75-549AE119D6D4}</UniqueIdentifier>
+      <UniqueIdentifier>{875DE075-5C2D-1246-B44E-1424FC75A1B7}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxCv\libs\ofxCv\include">
-      <UniqueIdentifier>{934E6F81-52DC-8B48-8486-E5E130F53DD4}</UniqueIdentifier>
+      <UniqueIdentifier>{68FCB581-004E-E84A-A7BB-7558468055AB}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxCv\libs\ofxCv\include\ofxCv">
-      <UniqueIdentifier>{C263D25D-E871-0A4B-A631-C3A0525AF0CF}</UniqueIdentifier>
+      <UniqueIdentifier>{58AA6D9A-EC50-DD41-8C17-B4B46967D9D6}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxCv\libs\ofxCv\src">
-      <UniqueIdentifier>{FA71871C-B336-E247-AD2C-D8A7789C0A3B}</UniqueIdentifier>
+      <UniqueIdentifier>{D8E45CC1-D9DB-564A-9464-CD536CFA7D44}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxNodeArray">
-      <UniqueIdentifier>{967464A6-C7F1-9E43-981D-E8004A2D66AE}</UniqueIdentifier>
+      <UniqueIdentifier>{3F15E5C3-49F3-A840-B0A1-2FF363BFF405}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxNodeArray\src">
-      <UniqueIdentifier>{1EEC97F5-5BAA-E643-AF75-FC57759C4C67}</UniqueIdentifier>
+      <UniqueIdentifier>{BF27F353-CE99-B84E-9056-364D84E7E764}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxInteractivePrimitives">
-      <UniqueIdentifier>{684B994F-EF36-BE46-91AB-DBD4A663EF76}</UniqueIdentifier>
+      <UniqueIdentifier>{64B52A9E-9558-1A47-86CB-F4CAB9473977}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxInteractivePrimitives\src">
-      <UniqueIdentifier>{07ABA576-9FB1-6F4E-90E4-8B7589FF769B}</UniqueIdentifier>
+      <UniqueIdentifier>{E90737F2-7040-0B42-8862-C487723ACAE7}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxUI">
-      <UniqueIdentifier>{5D94B66A-6A93-CB4D-8A1B-7EC1BE77A478}</UniqueIdentifier>
+      <UniqueIdentifier>{DA909A0C-BBEF-404B-97CC-1C914A694C71}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxUI\src">
-      <UniqueIdentifier>{2464080F-5F74-A444-861D-A214E9F99A38}</UniqueIdentifier>
+      <UniqueIdentifier>{2FEA15BB-5DE3-FF4E-A3CC-CBE0CA860ACA}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxUITabbedCanvas">
-      <UniqueIdentifier>{9D61C7A4-B9A1-E44E-A038-1473532F84EB}</UniqueIdentifier>
+      <UniqueIdentifier>{C9B1FED2-03E8-7B40-A9C3-46ADAE3A2AF9}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOsc">
-      <UniqueIdentifier>{607AEE08-F2B7-F14C-AAA8-BA01C99A1874}</UniqueIdentifier>
+      <UniqueIdentifier>{DC147535-C3E6-E547-8F7E-C26DD95082DB}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOsc\libs">
-      <UniqueIdentifier>{89766426-D97C-D642-9F0E-91AB5D190A42}</UniqueIdentifier>
+      <UniqueIdentifier>{FCAA7585-35B9-0D42-95F6-6AC5E8464A81}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOsc\libs\oscpack">
-      <UniqueIdentifier>{96BE2A38-50FA-AB4B-B335-333BB89398AA}</UniqueIdentifier>
+      <UniqueIdentifier>{9F9B3112-1076-BE42-AECE-F47C5CBBC80C}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOsc\libs\oscpack\src">
-      <UniqueIdentifier>{637D95EA-67CA-444A-81D6-BD61099668FC}</UniqueIdentifier>
+      <UniqueIdentifier>{854FA50D-93C3-6D4F-BF79-ADAED5801AC2}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOsc\libs\oscpack\src\ip">
-      <UniqueIdentifier>{C9683A6E-1315-AB42-A240-F5F47770E540}</UniqueIdentifier>
+      <UniqueIdentifier>{95453B45-8C32-9A43-92E3-BBBD23AD80D1}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOsc\libs\oscpack\src\osc">
-      <UniqueIdentifier>{454C030F-F163-764E-B579-B38924BBBF3E}</UniqueIdentifier>
+      <UniqueIdentifier>{94C50B46-782E-B44B-84E3-E917100F2F3B}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOsc\src">
-      <UniqueIdentifier>{A0040AB5-F134-AC49-A03E-4C6E6ACABBB5}</UniqueIdentifier>
+      <UniqueIdentifier>{2E51DB02-011C-5C40-B472-800727CB1648}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOsc\libs\oscpack\src\ip\posix">
-      <UniqueIdentifier>{A7BDD4A7-43C9-3B49-99FA-93AB71C96234}</UniqueIdentifier>
+      <UniqueIdentifier>{993B02FE-5DA4-0E4C-A847-0E28A06B27CD}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOsc\libs\oscpack\src\ip\win32">
-      <UniqueIdentifier>{3CA5B5B5-6684-0342-813D-287CAAED51B2}</UniqueIdentifier>
+      <UniqueIdentifier>{235F13B8-F4AD-C24C-A79E-4B799DC423B9}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxXmlSettings">
-      <UniqueIdentifier>{D00FA638-1066-3548-B2D6-B9006551DF07}</UniqueIdentifier>
+      <UniqueIdentifier>{B157B955-6F57-F348-841F-05ADE546A637}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxXmlSettings\libs">
-      <UniqueIdentifier>{3901DE10-4292-EC44-95EF-808503FB1F18}</UniqueIdentifier>
+      <UniqueIdentifier>{428AB444-27E8-214F-9131-10F325C82D47}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxXmlSettings\src">
-      <UniqueIdentifier>{09D52E77-9E71-F943-8D43-D2EEB11824CD}</UniqueIdentifier>
+      <UniqueIdentifier>{DEE29497-EB29-6C4F-AD6A-69DC291FA731}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOpenCv">
-      <UniqueIdentifier>{D816FF08-E06A-5448-B82B-2E7A8BB5CCB3}</UniqueIdentifier>
+      <UniqueIdentifier>{2A2ECD75-9CA5-9448-A033-AC26BCE31A1B}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOpenCv\src">
-      <UniqueIdentifier>{11F82C46-903F-EC48-97C4-C23EF9724F9F}</UniqueIdentifier>
+      <UniqueIdentifier>{CFE0C127-0C84-1547-8B1E-92C7E40756E6}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOpenCv\libs">
-      <UniqueIdentifier>{B4526C5A-286C-AB41-81DE-94794D7B5D16}</UniqueIdentifier>
+      <UniqueIdentifier>{15C20512-8815-2347-84E3-85E23E99004E}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOpenCv\libs\opencv">
-      <UniqueIdentifier>{7625E53B-5A35-8D4F-B53E-944F7CA98AE4}</UniqueIdentifier>
+      <UniqueIdentifier>{6336D5D9-934F-FD44-A356-A1E11FCD3BA6}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOpenCv\libs\opencv\include">
-      <UniqueIdentifier>{E871DB0A-1BC6-3940-A0BC-AB0B92800AE1}</UniqueIdentifier>
+      <UniqueIdentifier>{F6144E03-8C08-2540-A2B5-69A4ED59B48F}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOpenCv\libs\opencv\include\opencv">
-      <UniqueIdentifier>{3EF2994E-B407-DC4B-A257-3B5409D7143F}</UniqueIdentifier>
+      <UniqueIdentifier>{C8E073A7-81D9-9E4D-86AC-F725A98BF956}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOpenCv\libs\opencv\include\opencv2">
-      <UniqueIdentifier>{C6F33C66-C84C-DD48-B843-5896C08C70A3}</UniqueIdentifier>
+      <UniqueIdentifier>{790FE96A-325A-AA49-A94D-53A86DAA29A9}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOpenCv\libs\opencv\include\opencv2\core">
-      <UniqueIdentifier>{9CF6A29B-D11E-AB49-9A45-C364F2F00A39}</UniqueIdentifier>
+      <UniqueIdentifier>{FAA1A45D-EDF8-484C-990E-86DC56BCFE5B}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOpenCv\libs\opencv\include\opencv2\flann">
-      <UniqueIdentifier>{952B3765-37E9-0C49-86AF-B399D8554228}</UniqueIdentifier>
+      <UniqueIdentifier>{3CFB784B-41C9-114C-B4D6-D3206EDE7FD8}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOpenCv\libs\opencv\include\opencv2\highgui">
-      <UniqueIdentifier>{249A8E47-AE77-7947-8B69-498B71491B69}</UniqueIdentifier>
+      <UniqueIdentifier>{0310652F-2862-DE4E-A455-DD8ACB7309CD}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc">
-      <UniqueIdentifier>{C360E4CA-9E59-944E-9F27-966CF07539D9}</UniqueIdentifier>
+      <UniqueIdentifier>{F0012194-7D00-524A-86AD-14F938B7652D}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOpenCv\libs\opencv\include\opencv2\ts">
-      <UniqueIdentifier>{416CA8C4-C304-044B-BED8-24D6BEBD01AC}</UniqueIdentifier>
+      <UniqueIdentifier>{A99AA927-51ED-A040-BC68-16909F759DBD}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +203,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\libs\openFrameworks\ofMain.h">
       <Filter>libs\openFrameworks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\3d\of3dPrimitives.h">
+      <Filter>libs\openFrameworks\3d</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libs\openFrameworks\3d\of3dUtils.h">
       <Filter>libs\openFrameworks\3d</Filter>
@@ -225,7 +225,16 @@
     <ClInclude Include="..\..\..\libs\openFrameworks\app\ofAppBaseWindow.h">
       <Filter>libs\openFrameworks\app</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\app\ofAppEGLWindow.h">
+      <Filter>libs\openFrameworks\app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\app\ofAppGLFWWindow.h">
+      <Filter>libs\openFrameworks\app</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\libs\openFrameworks\app\ofAppGlutWindow.h">
+      <Filter>libs\openFrameworks\app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\app\ofAppNoWindow.h">
       <Filter>libs\openFrameworks\app</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libs\openFrameworks\app\ofAppRunner.h">
@@ -234,11 +243,17 @@
     <ClInclude Include="..\..\..\libs\openFrameworks\app\ofBaseApp.h">
       <Filter>libs\openFrameworks\app</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\app\ofIcon.h">
+      <Filter>libs\openFrameworks\app</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\libs\openFrameworks\communication\ofArduino.h">
       <Filter>libs\openFrameworks\communication</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libs\openFrameworks\communication\ofSerial.h">
       <Filter>libs\openFrameworks\communication</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\events\ofDelegate.h">
+      <Filter>libs\openFrameworks\events</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libs\openFrameworks\events\ofEvents.h">
       <Filter>libs\openFrameworks\events</Filter>
@@ -247,6 +262,9 @@
       <Filter>libs\openFrameworks\events</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofFbo.h">
+      <Filter>libs\openFrameworks\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofGLProgrammableRenderer.h">
       <Filter>libs\openFrameworks\gl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofGLRenderer.h">
@@ -272,6 +290,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\libs\openFrameworks\gl\ofVboMesh.h">
       <Filter>libs\openFrameworks\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\graphics\of3dGraphics.h">
+      <Filter>libs\openFrameworks\graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libs\openFrameworks\graphics\ofBitmapFont.h">
       <Filter>libs\openFrameworks\graphics</Filter>
@@ -339,9 +360,6 @@
     <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofOpenALSoundPlayer.h">
       <Filter>libs\openFrameworks\sound</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofPASoundStream.h">
-      <Filter>libs\openFrameworks\sound</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\libs\openFrameworks\sound\ofRtAudioSoundStream.h">
       <Filter>libs\openFrameworks\sound</Filter>
     </ClInclude>
@@ -355,6 +373,12 @@
       <Filter>libs\openFrameworks\types</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libs\openFrameworks\types\ofColor.h">
+      <Filter>libs\openFrameworks\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\types\ofParameter.h">
+      <Filter>libs\openFrameworks\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\types\ofParameterGroup.h">
       <Filter>libs\openFrameworks\types</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libs\openFrameworks\types\ofPoint.h">
@@ -375,6 +399,9 @@
     <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofLog.h">
       <Filter>libs\openFrameworks\utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofMatrixStack.h">
+      <Filter>libs\openFrameworks\utils</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofNoise.h">
       <Filter>libs\openFrameworks\utils</Filter>
     </ClInclude>
@@ -388,6 +415,9 @@
       <Filter>libs\openFrameworks\utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofUtils.h">
+      <Filter>libs\openFrameworks\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\openFrameworks\utils\ofXml.h">
       <Filter>libs\openFrameworks\utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libs\openFrameworks\video\ofDirectShowGrabber.h">
@@ -426,7 +456,22 @@
     <ClInclude Include="..\..\..\libs\openFrameworks\video\ofVideoPlayer.h">
       <Filter>libs\openFrameworks\video</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\libs\ram\ramEventMain.h">
+      <Filter>libs\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\ramFilterMain.h">
+      <Filter>libs\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\ramGraphicsMain.h">
+      <Filter>libs\ram</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\libs\ram\ramMain.h">
+      <Filter>libs\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\ramPhysicsMain.h">
+      <Filter>libs\ram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\ramRecognizerMain.h">
       <Filter>libs\ram</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\ram\Core\ramActor.h">
@@ -438,7 +483,13 @@
     <ClInclude Include="..\..\libs\ram\Core\ramBaseApp.h">
       <Filter>libs\ram\Core</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\ramBaseScene.h">
+      <Filter>libs\ram\Core</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\libs\ram\Core\ramCameraManager.h">
+      <Filter>libs\ram\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\ramCommunicationManager.h">
       <Filter>libs\ram\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\ram\Core\ramConstants.h">
@@ -447,8 +498,59 @@
     <ClInclude Include="..\..\libs\ram\Core\ramGlobal.h">
       <Filter>libs\ram\Core</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\ramOscManager.h">
+      <Filter>libs\ram\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\ramSceneManager.h">
+      <Filter>libs\ram\Core</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\libs\ram\Core\ramUnit.h">
       <Filter>libs\ram\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\UI\ramControllable.h">
+      <Filter>libs\ram\Core\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\UI\ramControlPanel.h">
+      <Filter>libs\ram\Core\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\UI\ramPreferencesTab.h">
+      <Filter>libs\ram\Core\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\UI\ramPresetTab.h">
+      <Filter>libs\ram\Core\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\UI\ramActorScene\BaseSegment.h">
+      <Filter>libs\ram\Core\UI\ramActorScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\UI\ramActorScene\ControlSegment.h">
+      <Filter>libs\ram\Core\UI\ramActorScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\UI\ramActorScene\PlaybackSegment.h">
+      <Filter>libs\ram\Core\UI\ramActorScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\UI\ramActorScene\ramActorsScene.h">
+      <Filter>libs\ram\Core\UI\ramActorScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\Utility\ramBaseCoder.h">
+      <Filter>libs\ram\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\Utility\ramCameraSettings.h">
+      <Filter>libs\ram\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\Utility\ramNodeArrayBuffer.h">
+      <Filter>libs\ram\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\Utility\ramNodeFinder.h">
+      <Filter>libs\ram\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\Utility\ramNodeIdentifer.h">
+      <Filter>libs\ram\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\Utility\ramTSVCoder.h">
+      <Filter>libs\ram\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\Utility\ramUtils.h">
+      <Filter>libs\ram\Core\Utility</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\ram\Event\ramBaseEvent.h">
       <Filter>libs\ram\Event</Filter>
@@ -521,57 +623,6 @@
     </ClInclude>
     <ClInclude Include="..\..\libs\ram\Recognizer\ramRecognizer.h">
       <Filter>libs\ram\Recognizer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\ram\Scene\ramBaseScene.h">
-      <Filter>libs\ram\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\ram\Scene\ramSceneManager.h">
-      <Filter>libs\ram\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\ram\UI\ramControllable.h">
-      <Filter>libs\ram\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\ram\UI\ramControlPanel.h">
-      <Filter>libs\ram\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\ram\UI\ramPreferencesTab.h">
-      <Filter>libs\ram\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\ram\UI\ramPresetTab.h">
-      <Filter>libs\ram\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\ram\UI\ramActorScene\BaseSegment.h">
-      <Filter>libs\ram\UI\ramActorScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\ram\UI\ramActorScene\ControlSegment.h">
-      <Filter>libs\ram\UI\ramActorScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\ram\UI\ramActorScene\PlaybackSegment.h">
-      <Filter>libs\ram\UI\ramActorScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\ram\UI\ramActorScene\ramActorsScene.h">
-      <Filter>libs\ram\UI\ramActorScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\ram\Utility\ramBaseCoder.h">
-      <Filter>libs\ram\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\ram\Utility\ramCameraSettings.h">
-      <Filter>libs\ram\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\ram\Utility\ramNodeArrayBuffer.h">
-      <Filter>libs\ram\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\ram\Utility\ramNodeFinder.h">
-      <Filter>libs\ram\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\ram\Utility\ramNodeIdentifer.h">
-      <Filter>libs\ram\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\ram\Utility\ramTSVCoder.h">
-      <Filter>libs\ram\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\ram\Utility\ramUtils.h">
-      <Filter>libs\ram\Utility</Filter>
     </ClInclude>
     <ClInclude Include="..\..\addons\ofxBt\src\ofxBt.h">
       <Filter>addons\ofxBt\src</Filter>
@@ -822,6 +873,9 @@
     <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscMessage.h">
       <Filter>addons\ofxOsc\src</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscParameterSync.h">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscReceiver.h">
       <Filter>addons\ofxOsc\src</Filter>
     </ClInclude>
@@ -856,9 +910,6 @@
       <Filter>addons\ofxOpenCv\src</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvImage.h">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvMain.h">
       <Filter>addons\ofxOpenCv\src</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvShortImage.h">
@@ -1022,11 +1073,50 @@
     <ClCompile Include="..\..\libs\ram\Core\ramBaseApp.cpp">
       <Filter>libs\ram\Core</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\ramBaseScene.cpp">
+      <Filter>libs\ram\Core</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\libs\ram\Core\ramCameraManager.cpp">
+      <Filter>libs\ram\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\ramCommunicationManager.cpp">
       <Filter>libs\ram\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\ram\Core\ramGlobal.cpp">
       <Filter>libs\ram\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\ramOscManager.cpp">
+      <Filter>libs\ram\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\ramSceneManager.cpp">
+      <Filter>libs\ram\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\UI\ramControlPanel.cpp">
+      <Filter>libs\ram\Core\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\UI\ramPresetTab.cpp">
+      <Filter>libs\ram\Core\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\UI\ramActorScene\BaseSegment.cpp">
+      <Filter>libs\ram\Core\UI\ramActorScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\UI\ramActorScene\ControlSegment.cpp">
+      <Filter>libs\ram\Core\UI\ramActorScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\UI\ramActorScene\PlaybackSegment.cpp">
+      <Filter>libs\ram\Core\UI\ramActorScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\UI\ramActorScene\ramActorsScene.cpp">
+      <Filter>libs\ram\Core\UI\ramActorScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\Utility\ramCameraSettings.cpp">
+      <Filter>libs\ram\Core\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\Utility\ramTSVCoder.cpp">
+      <Filter>libs\ram\Core\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\Utility\ramUtils.cpp">
+      <Filter>libs\ram\Core\Utility</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\ram\Filter\ramBaseFilter.cpp">
       <Filter>libs\ram\Filter</Filter>
@@ -1057,39 +1147,6 @@
     </ClCompile>
     <ClCompile Include="..\..\libs\ram\Recognizer\ramPlanarGestureRecognizer.cpp">
       <Filter>libs\ram\Recognizer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\ram\Scene\ramBaseScene.cpp">
-      <Filter>libs\ram\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\ram\Scene\ramSceneManager.cpp">
-      <Filter>libs\ram\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\ram\UI\ramControlPanel.cpp">
-      <Filter>libs\ram\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\ram\UI\ramPresetTab.cpp">
-      <Filter>libs\ram\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\ram\UI\ramActorScene\BaseSegment.cpp">
-      <Filter>libs\ram\UI\ramActorScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\ram\UI\ramActorScene\ControlSegment.cpp">
-      <Filter>libs\ram\UI\ramActorScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\ram\UI\ramActorScene\PlaybackSegment.cpp">
-      <Filter>libs\ram\UI\ramActorScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\ram\UI\ramActorScene\ramActorsScene.cpp">
-      <Filter>libs\ram\UI\ramActorScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\ram\Utility\ramCameraSettings.cpp">
-      <Filter>libs\ram\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\ram\Utility\ramTSVCoder.cpp">
-      <Filter>libs\ram\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\ram\Utility\ramUtils.cpp">
-      <Filter>libs\ram\Utility</Filter>
     </ClCompile>
     <ClCompile Include="..\..\addons\ofxBt\src\ofxBt.cpp">
       <Filter>addons\ofxBt\src</Filter>
@@ -1182,6 +1239,9 @@
       <Filter>addons\ofxOsc\src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscMessage.cpp">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscParameterSync.cpp">
       <Filter>addons\ofxOsc\src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscReceiver.cpp">

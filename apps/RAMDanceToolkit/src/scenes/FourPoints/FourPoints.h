@@ -90,7 +90,7 @@ public:
 	
 	void setup()
 	{		
-		ofSetIcoSphereResolution(3);
+		_ofSetIcoSphereResolution(3);
 	}
 	
 	void update()

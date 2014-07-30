@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "example-ramFilters", "example-ramFilters.vcxproj", "{3D9616FA-E947-164D-9C51-FD4D78D1403E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "example-ramFilters", "example-ramFilters.vcxproj", "{F7E9DFE8-DF99-3B47-B319-D39A10001E44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3D9616FA-E947-164D-9C51-FD4D78D1403E}.Debug|Win32.ActiveCfg = Debug|Win32
-		{3D9616FA-E947-164D-9C51-FD4D78D1403E}.Debug|Win32.Build.0 = Debug|Win32
-		{3D9616FA-E947-164D-9C51-FD4D78D1403E}.Release|Win32.ActiveCfg = Release|Win32
-		{3D9616FA-E947-164D-9C51-FD4D78D1403E}.Release|Win32.Build.0 = Release|Win32
+		{F7E9DFE8-DF99-3B47-B319-D39A10001E44}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F7E9DFE8-DF99-3B47-B319-D39A10001E44}.Debug|Win32.Build.0 = Debug|Win32
+		{F7E9DFE8-DF99-3B47-B319-D39A10001E44}.Release|Win32.ActiveCfg = Release|Win32
+		{F7E9DFE8-DF99-3B47-B319-D39A10001E44}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

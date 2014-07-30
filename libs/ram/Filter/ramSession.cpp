@@ -137,7 +137,16 @@ void ramSession::stopRecording()
 
 void ramSession::play()
 {
-	if (getNumFrames() <= 0) return;
+	if (mCurrentFrame.getNumNode() == 0)
+	{
+		ofLogError("ramSession") << "You should call ramSession::prepareForPlay() before calling ramSession::play()";
+		return;
+	}
+	if (getNumFrames() <= 0)
+	{
+		ofLogError("ramSession") << "session data is empty...";
+		 return;
+	}
 
 	mRecording = false;
 	mPlaying = true;
@@ -157,6 +166,12 @@ void ramSession::stop()
 
 // --
 
+void ramSession::prepareForPlay()
+{
+	assert( getNumFrames() > 0 );
+	
+	mCurrentFrame = mBuffer.get(0);
+}
 
 void ramSession::updatePlayhead()
 {
@@ -212,7 +227,20 @@ void ramSession::appendFrame(const ramNodeArray& copy)
 
 ramNodeArray& ramSession::getFrame(int index)
 {
-	return mBuffer.get(index);
+	mCurrentFrame = mBuffer.get(index);
+	
+	for (int i=0; i<mCurrentFrame.getNumNode(); i++)
+	{
+		const ofVec3f pos = mCurrentFrame.getNode(i).getGlobalPosition();
+		const ofQuaternion quat = mCurrentFrame.getNode(i).getGlobalOrientation();
+		
+		ramNode &node = mCurrentFrame.getNode(i);
+		node.setGlobalPosition(pos);
+		node.setGlobalOrientation(quat);
+		node.getAccelerometer().update(pos, quat);
+	}
+	
+	return mCurrentFrame;
 }
 
 ramNodeArray& ramSession::getCurrentFrame()

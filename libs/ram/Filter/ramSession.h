@@ -59,6 +59,7 @@ public:
 
 	// --
 	
+	void prepareForPlay();
 	void updatePlayhead();
 	
 	// --
@@ -103,4 +104,6 @@ protected:
 	float mPlayhead;
 	float mRecStartTime;
 	float mRecEndTime;
+	
+	ramNodeArray mCurrentFrame;
 };

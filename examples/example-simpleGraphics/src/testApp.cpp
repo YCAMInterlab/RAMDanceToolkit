@@ -80,13 +80,13 @@ void testApp::drawActor(const ramActor &actor)
 			ofNoFill();
 			ofSetColor( ramColor::YELLOW_DEEP );
 			ofSetLineWidth( 3 );
-			ofBox( 20 );
+			ofDrawBox( 20 );
 
 			// draw cone at JOINT_HEAD
 			ofNoFill();
 			ofSetColor( ramColor::GRAY );
 			ofSetLineWidth( 2 );
-			ofCone(10, 100);
+			ofDrawCone(10, 40);
 		}
 		n1.endTransform();
 

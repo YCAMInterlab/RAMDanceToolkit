@@ -148,26 +148,20 @@ public:
     
     void reloadXML()
     {
-        
-#define _S(src) #src
-		
-		string default_xml = _S(
-                                <cam>
-                                    <duration>104</duration>
-                                    <fov>27</fov>
-                                    <pos><x>-620</x><y>300</y><z>620</z></pos>
-                                    <look_at><x>0</x><y>50</y><z>0</z></look_at>
-                                </cam>
-                                );
-        
-#undef _S
-		
-		const string filePath = "MovingCam.xml";
+		const string filePath = ofToDataPath("MovingCam.xml", true);
 		
 		if (!ofFile::doesFileExist(filePath))
 		{
-			ofBuffer buf(default_xml);
-			ofBufferToFile(filePath, buf);
+			ofxXmlSettings XML;
+			XML.setValue("cam:pos:x", -620);
+			XML.setValue("cam:pos:y", 300);
+			XML.setValue("cam:pos:z", 620);
+			XML.setValue("cam:look_at:x", 0);
+			XML.setValue("cam:look_at:y", 50);
+			XML.setValue("cam:look_at:z", 0);
+			XML.setValue("cam:fov", 27);
+			XML.setValue("cam:duration", 104);
+			XML.saveFile(filePath);
 		}
 		
 		ofxXmlSettings XML;

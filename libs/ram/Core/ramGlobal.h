@@ -21,6 +21,8 @@
 
 #include "ramActorManager.h"
 #include "ramCameraManager.h"
+#include "ramCommunicationManager.h"
+#include "ramOscManager.h"
 //#include "ramSceneManager.h"
 
 class ramGlobalShortcut
@@ -30,6 +32,9 @@ public:
 #pragma mark - Shortcut to ramActorManager
 
 	ramActorManager& getActorManager();
+	ramCommunicationManager& getCommunicationManager();
+	ramOscManager& getOscManager();
+
 	const vector<string>& getNodeArrayNames();
 	bool hasNodeArray(const string &key);
 	ramNodeArray& getNodeArray(string name);
@@ -55,13 +60,14 @@ string ramToResourcePath(string path);
 #pragma mark - actors
 void ramEnableShowActors(bool v);
 bool ramShowActorsEnabled();
+const ramNode& ramGetNode(unsigned int actorId, unsigned int jointId);
 
 #pragma mark - camera
 void ramBeginCamera();
 void ramEndCamera();
 void ramEnableInteractiveCamera(bool v);
 
-#pragma mark - shoadws
+#pragma mark - shadows
 void ramEnableShadow(bool v = true);
 void ramDisableShadow();
 bool ramShadowEnabled();

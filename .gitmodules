@@ -1,6 +1,3 @@
-[submodule "addons/ofxBt"]
-	path = addons/ofxBt
-	url = git@github.com:satoruhiga/ofxBt.git
 [submodule "addons/ofxUI"]
 	path = addons/ofxUI
 	url = git@github.com:rezaali/ofxUI.git
@@ -13,3 +10,6 @@
 [submodule "addons/ofxNodeArray"]
 	path = addons/ofxNodeArray
 	url = git@github.com:YCAMInterlab/ofxNodeArray.git
+[submodule "addons/ofxBt"]
+	path = addons/ofxBt
+	url = git@github.com:motoishmz/ofxBt.git

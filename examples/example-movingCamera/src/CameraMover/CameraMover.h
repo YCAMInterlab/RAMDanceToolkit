@@ -104,7 +104,7 @@ public:
 	
 	void setup()
 	{
-		mXmlPath = ramToResourcePath("Settings/cam.moving.xml");
+		mXmlPath = ramToResourcePath("Settings/camera/cam.moving.xml");
 		reloadSettings();
 	}
 	
@@ -206,7 +206,6 @@ public:
 	{
 		mSettingXml.loadFile(mXmlPath);
 		mSettings = ramCameraSettings::loadSettings(mSettingXml);
-		cout << "[" << getName() << "] settings reloaded." << endl;
 	}
 	
 	void refreshPanel(ofxUICanvas *panel)

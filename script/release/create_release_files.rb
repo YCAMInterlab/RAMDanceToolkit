@@ -5,7 +5,7 @@ ram_root_dir = "../../"
 FileUtils.cd(ram_root_dir, {:verbose => false})
 
 release_files_path =
-  "RAM-release-v1_0_1"
+  "RAM-release-v1_1_0"
 
 sources = [
   "addons",
@@ -23,7 +23,8 @@ ignore_files = [
 
 
 # copy sources files to release_file_path
-Dir::mkdir(release_files_path, 0700) 
+FileUtils.rm_r(release_files_path, {:force=>true}) if File.exists?(release_files_path)
+Dir::mkdir(release_files_path, 0700)
 
 sources.each { |path|
   
@@ -42,8 +43,19 @@ sources.each { |path|
 Find.find('./'+release_files_path) {|f|
   
   if File::basename(f) =~ /^.+?\.app$/
-    p File::basename(f) + " found"
-    p ".app deleted"
+    p "[removed: app] " + f
+    FileUtils.rm_r(f, {:force=>true})
+    next
+  end
+
+  if File::basename(f) =~ /^\./
+    p "[removed: invisible] " + f
+    FileUtils.rm_r(f, {:force=>true})
+    next
+  end
+
+  if f =~ /.*?addons\/ofx[A-Z].*?\/example.*?/
+    p "[removed: example] " + f
     FileUtils.rm_r(f, {:force=>true})
     next
   end

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "example-ramEvents", "example-ramEvents.vcxproj", "{DA9E4AEC-DD8A-CA42-8BE7-019C011CCB9D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "example-ramEvents", "example-ramEvents.vcxproj", "{415F36B6-293B-B340-8907-64A6BF575C9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DA9E4AEC-DD8A-CA42-8BE7-019C011CCB9D}.Debug|Win32.ActiveCfg = Debug|Win32
-		{DA9E4AEC-DD8A-CA42-8BE7-019C011CCB9D}.Debug|Win32.Build.0 = Debug|Win32
-		{DA9E4AEC-DD8A-CA42-8BE7-019C011CCB9D}.Release|Win32.ActiveCfg = Release|Win32
-		{DA9E4AEC-DD8A-CA42-8BE7-019C011CCB9D}.Release|Win32.Build.0 = Release|Win32
+		{415F36B6-293B-B340-8907-64A6BF575C9C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{415F36B6-293B-B340-8907-64A6BF575C9C}.Debug|Win32.Build.0 = Debug|Win32
+		{415F36B6-293B-B340-8907-64A6BF575C9C}.Release|Win32.ActiveCfg = Release|Win32
+		{415F36B6-293B-B340-8907-64A6BF575C9C}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -98,6 +98,22 @@ void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
 	last_update_client_time = ofGetElapsedTimef();
 }
 
+ofPoint ramNodeArray::getCentroid() const{
+    
+    ofPoint centroid(0,0,0);
+    
+    for (int i = 0; i < getNumNode(); i++)
+    {
+        const ramNode &node = getNode(i);
+        centroid += node.getGlobalPosition();
+    }
+    
+    centroid /= getNumNode();
+    
+    return centroid;
+    
+}
+
 #pragma mark - ramRigidBody
 
 ramRigidBody::ramRigidBody()

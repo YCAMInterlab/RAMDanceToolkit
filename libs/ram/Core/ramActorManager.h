@@ -25,6 +25,7 @@
 #include "ramConstants.h"
 #include "ramUtils.h"
 #include "ramActor.h"
+#include "ramOscManager.h"
 #include "ramNodeIdentifer.h"
 
 class ramActorManager
@@ -98,13 +99,20 @@ public:
 	// for internal use
 
 	void updateWithOscMessage(const ofxOscMessage &m);
-	void setupOscReceiver(int port) { oscReceiver.setup(port); }
+	void setupOscReceiver(ramOscManager* oscMan) {
+
+		oscReceiver.addAddress(RAM_OSC_ADDR_ACTOR);
+		oscReceiver.addAddress(RAM_OSC_ADDR_RIGID_BODY);
+
+		oscMan->addReceiverTag(&oscReceiver);
+
+	}
 
 private:
 
 	static ramActorManager *_instance;
 
-	ofxOscReceiver oscReceiver;
+	ramOscReceiveTag oscReceiver;
 
 	// noncopyable
 	ramActorManager() {};

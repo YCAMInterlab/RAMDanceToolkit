@@ -217,7 +217,7 @@ ofMesh ofGetIcoSphereMesh(float radius, int iterations) {
 }
 
 ofMesh icosphere;
-void ofSetIcoSphereResolution(int iterations) {
+void _ofSetIcoSphereResolution(int iterations) {
 	icosphere = ofGetIcoSphereMesh(1, iterations);
 }
 

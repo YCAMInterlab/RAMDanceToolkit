@@ -1,15 +1,15 @@
 require 'fileutils'
 require 'find'
 
-# !!!: task of this script
-# 1. to replace all of resource dir path in source code
-# 2. to copy ./resources to apps/RAMDanceToolkit/bin
-# 3. to remove trash files
+# !!!: tasks of this script
+# 1. replacing all of resource dir path in source code
+# 2. copying ./resources to apps/RAMDanceToolkit/bin
+# 3. removing trash files
 # 
 # build new release binary after running this script,
 # and check it works fine.
 # 
-# note that the source codes which is replaced by this script should not commit to develop/master branch!
+# note that the source codes which is replaced by this script should not be commited to our repos!
 
 ram_root_dir = "../../"
 FileUtils.cd(ram_root_dir, {:verbose => false})
@@ -58,14 +58,20 @@ Find.find('.') {|path|
 
 # copy resources dir into ramdancetoolkit
 FileUtils.cp_r("resources", release_bin_path+"resources", {:remove_destination=>true})
+p "copied shared resources to RAMDanceToolkit/bin"
 
 
 # kill .DS_Store etc...
 Find.find('.') {|f|
-  ignore_files.each{ |ignore|
-    if File::basename(f) == ignore
-      FileUtils.rm(f, {:force=>true})
-      next
-    end
-  }
+	ignore_files.each{ |ignore|
+		if File::basename(f) == ignore
+			FileUtils.rm(f, {:force=>true})
+			p "removed: " + f
+			next
+		end
+	}
+	if File::basename(f) =~ /^\./
+		FileUtils.rm(f, {:force=>true})
+		p "removed: " + f
+	end
 }

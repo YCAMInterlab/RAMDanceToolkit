@@ -22,10 +22,8 @@ else
 	echo "[couldn't found ./.gitmodule. start clone five addons from github repos instead of git submodule update]"
 
 	# ofxBt
-	git clone git@github.com:satoruhiga/ofxBt.git
+	git clone git@github.com:motoishmz/ofxBt.git
 	cd ofxBt
-	git checkout develop
-	git checkout 724c568
 	cd ../
 
 	# ofxUI

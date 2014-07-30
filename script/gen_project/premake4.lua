@@ -363,25 +363,25 @@ solution (project_name)
 
 			libdirs {
 				-- RAM
-				'../addons/ofxBt/libs/bullet/lib/vs2010/',
-				'../../addons/ofxOpenCv/libs/opencv/lib/vs2010/',
+				'../addons/ofxBt/libs/bullet/lib/vs/',
+				'../../addons/ofxOpenCv/libs/opencv/lib/vs/',
 
 				-- oF
-				'../../libs/assimp/lib/vs2010',
-				'../../libs/cairo/lib/vs2010',
-				'../../libs/fmodex/lib/vs2010',
-				'../../libs/FreeImage/lib/vs2010',
-				'../../libs/freetype/lib/vs2010',
-				'../../libs/glew/lib/vs2010',
-				'../../libs/glu/lib/vs2010',
-				'../../libs/glut/lib/vs2010',
-				'../../libs/openFrameworks/lib/vs2010',
-				'../../libs/openFrameworksCompiled/lib/vs2010',
-				'../../libs/poco/lib/vs2010',
-				'../../libs/quicktime/lib/vs2010',
-				'../../libs/rtAudio/lib/vs2010',
-				'../../libs/tess2/lib/vs2010',
-				'../../libs/videoInput/lib/vs2010',
+				'../../libs/cairo/lib/vs',
+				'../../libs/fmodex/lib/vs',
+				'../../libs/FreeImage/lib/vs',
+				'../../libs/freetype/lib/vs',
+				'../../libs/glew/lib/vs',
+				'../../libs/glfw/lib/vs',
+				'../../libs/glu/lib/vs',
+				'../../libs/glut/lib/vs',
+				'../../libs/openFrameworksCompiled/lib/vs',
+				'../../libs/openssl/lib/vs',
+				'../../libs/poco/lib/vs',
+				'../../libs/quicktime/lib/vs',
+				'../../libs/rtAudio/lib/vs',
+				'../../libs/tess2/lib/vs',
+				'../../libs/videoInput/lib/vs',
 			}
 
 			buildoptions {
@@ -402,7 +402,7 @@ solution (project_name)
 			}
 
 			postbuildcommands { 'mkdir $(ProjectDir)bin\\data' }
-			postbuildcommands { 'xcopy /e /i /y "$(ProjectDir)..\\..\\..\\export\\vs2010\\*.dll" "$(ProjectDir)bin"' }
+			postbuildcommands { 'xcopy /e /i /y "$(ProjectDir)..\\..\\..\\export\\vs\\*.dll" "$(ProjectDir)bin"' }
 
 
 		configuration {'vs*' , "Debug"}
@@ -416,10 +416,10 @@ solution (project_name)
 
 			links {
 				-- RAM
-				'BulletCollision_vs2010_d',
-				'BulletDynamics_vs2010_d',
-				'BulletSoftBody_vs2010_d',
-				'LinearMath_vs2010_d',
+				'BulletCollision_Debug',
+				'BulletDynamics_Debug',
+				'BulletSoftBody_Debug',
+				'LinearMath_Debug',
 
 				-- oF
 				'cairo-static',
@@ -429,11 +429,16 @@ solution (project_name)
 				'FreeImage',
 				'libfreetype',
 				'glew32s',
+				'glfw3',
 				'glu32',
 				'glut32',
-				'openframeworksLibDebug',
+				'openframeworksLib_debug',
+				'libeay32MD',
+				'ssleay32MD',
+				'PocoCryptomdd',
 				'PocoFoundationmdd',
 				'PocoNetmdd',
+				'PocoNetSSLmdd',
 				'PocoUtilmdd',
 				'PocoXMLmdd',
 				'qtmlClient',
@@ -444,6 +449,7 @@ solution (project_name)
 				'tess2',
 				'videoInput',
 				'msimg32',
+				'crypt32',
 
 				-- oF addons
 				'opencv_calib3d231d',
@@ -469,10 +475,10 @@ solution (project_name)
 
 			links {
 				-- RAM
-				'LinearMath_vs2010',
-				'BulletCollision_vs2010',
-				'BulletDynamics_vs2010',
-				'BulletSoftBody_vs2010',
+				'LinearMath',
+				'BulletCollision',
+				'BulletDynamics',
+				'BulletSoftBody',
 
 				-- oF
 				'cairo-static',
@@ -482,11 +488,16 @@ solution (project_name)
 				'FreeImage',
 				'libfreetype',
 				'glew32s',
+				'glfw3',
 				'glu32',
 				'glut32',
 				'openframeworksLib',
+				'libeay32MD',
+				'ssleay32MD',
+				'PocoCryptomd',
 				'PocoFoundationmd',
 				'PocoNetmd',
+				'PocoNetSSLmd',
 				'PocoUtilmd',
 				'PocoXMLmd',
 				'qtmlClient',
@@ -497,6 +508,7 @@ solution (project_name)
 				'tess2',
 				'videoInput',
 				'msimg32',
+				'crypt32',
 				
 				-- oF addons
 				'opencv_calib3d231',

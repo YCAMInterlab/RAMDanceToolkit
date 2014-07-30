@@ -144,6 +144,8 @@ public:
     
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
     
+    ofPoint getCentroid() const;
+    
 protected:
 
 	ramNodeArrayType type;

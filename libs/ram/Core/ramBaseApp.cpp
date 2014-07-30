@@ -31,6 +31,12 @@ void ramBaseApp::exit(ofEventArgs &args)
 void ramBaseApp::update(ofEventArgs &args)
 {
 	getActorManager().update();
+	
+	getCommunicationManager().update();
+
+	getOscManager().update();
+	
+	update(); // calling testApp(or ofApp)::update()
 }
 
 void ramBaseApp::draw(ofEventArgs &args)
@@ -70,6 +76,10 @@ void ramBaseApp::draw(ofEventArgs &args)
 	ramEndCamera();
 
 	glPopAttrib();
+	
+	getCommunicationManager().draw();
+	
+	draw(); // calling testApp(or ofApp)::draw()
 }
 
 void ramBaseApp::drawNodeArrays()

@@ -17,6 +17,7 @@
 
 #include "testApp.h"
 
+
 /*!
  Scenes
  */
@@ -92,7 +93,6 @@ void testApp::setup()
 	// ------------------
 	ramInitialize(10000, true);
 	
-	
 	/// scenes setup
 	// ------------------
 	ramSceneManager& sceneManager = ramSceneManager::instance();
@@ -119,6 +119,7 @@ void testApp::setup()
 	sceneManager.addScene( monster.getPtr() );
 	sceneManager.addScene( laban.getPtr() );
 	sceneManager.addScene( notation.getPtr() );
+	
 }
 
 //--------------------------------------------------------------
