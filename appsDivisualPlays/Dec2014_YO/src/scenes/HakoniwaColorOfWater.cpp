@@ -8,13 +8,6 @@
 
 #include "HakoniwaColorOfWater.h"
 
-static const int kNode0a = ramActor::JOINT_LEFT_ELBOW;
-static const int kNode0b = ramActor::JOINT_RIGHT_WRIST;
-static const int kNode1a = ramActor::JOINT_LEFT_ELBOW;
-static const int kNode1b = ramActor::JOINT_LEFT_KNEE;
-static const int kNode2a = ramActor::JOINT_RIGHT_KNEE;
-static const int kNode2b = ramActor::JOINT_HEAD;
-
 void HakoniwaColorOfWater::Valve::update(const ramNode& n0, const ramNode& n1)
 {
     nodeA = n0;
@@ -61,9 +54,16 @@ HakoniwaColorOfWater::HakoniwaColorOfWater()
 {
     mOscSender.setup("192.168.20.52", 8528);
     
-    mValves[0].threshould = 58;
-    mValves[1].threshould = 95;
-    mValves[2].threshould = 103;
+    mValves[0].threshould = 110;
+    mValves[1].threshould = 110;
+    mValves[2].threshould = 110;
+    
+    node0a = ramActor::JOINT_LEFT_ELBOW;
+    node0b = ramActor::JOINT_RIGHT_WRIST;
+    node1a = ramActor::JOINT_LEFT_ELBOW;
+    node1b = ramActor::JOINT_LEFT_KNEE;
+    node2a = ramActor::JOINT_RIGHT_KNEE;
+    node2b = ramActor::JOINT_LEFT_SHOULDER;
 }
 
 HakoniwaColorOfWater::~HakoniwaColorOfWater()
@@ -71,15 +71,11 @@ HakoniwaColorOfWater::~HakoniwaColorOfWater()
     
 }
 
-void HakoniwaColorOfWater::setupControlPanel()
-{
-}
-
 void HakoniwaColorOfWater::update()
 {
-    mValves[0].update(mActor.getNode(kNode0a), mActor.getNode(kNode0b));
-    mValves[1].update(mActor.getNode(kNode1a), mActor.getNode(kNode1b));
-    mValves[2].update(mActor.getNode(kNode2a), mActor.getNode(kNode2b));
+    mValves[0].update(mActor.getNode(node0a), mActor.getNode(node0b));
+    mValves[1].update(mActor.getNode(node1a), mActor.getNode(node1b));
+    mValves[2].update(mActor.getNode(node2a), mActor.getNode(node2b));
     
     for (int i=0; i<kNumValves; i++) {
         if (mValves[i].stateChanged()) {
@@ -95,13 +91,87 @@ void HakoniwaColorOfWater::update()
 void HakoniwaColorOfWater::draw()
 {
     for (int i=0; i<kNumValves; i++) {
-        mValves[i].draw(i, ofGetWidth()/4*(i+1), ofGetHeight()*0.5f);
+        mValves[i].draw(i, ofGetWidth()/4*(i+1), ofGetHeight()-150.f);
     }
 }
 
+void HakoniwaColorOfWater::setupControlPanel()
+{
+    ramGetGUI().addSlider("Threshould L", 40, 140, &mValves[0].threshould);
+    ramGetGUI().addSlider("Threshould C", 40, 140, &mValves[1].threshould);
+    ramGetGUI().addSlider("Threshould R", 40, 140, &mValves[2].threshould);
+    
+    ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+    
+    ofxUIRadio *radio = NULL;
+    
+    const float dim = 16.0f;
+    
+    panel->getRect()->width =500.0f;
+    
+    radio = new ofxUIRadio("L JOINT A", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
+    radio->getToggles().at(node0a)->setValue(true);
+    panel->addWidgetDown(radio);
+    
+    radio = new ofxUIRadio("L JOINT B", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
+    radio->getToggles().at(node0b)->setValue(true);
+    panel->addWidgetRight(radio);
+    
+    radio = new ofxUIRadio("C JOINT A", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
+    radio->getToggles().at(node1a)->setValue(true);
+    panel->addWidgetRight(radio);
+    
+    radio = new ofxUIRadio("C JOINT B", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
+    radio->getToggles().at(node1b)->setValue(true);
+    panel->addWidgetRight(radio);
+    
+    radio = new ofxUIRadio("R JOINT A", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
+    radio->getToggles().at(node2a)->setValue(true);
+    panel->addWidgetRight(radio);
+    
+    radio = new ofxUIRadio("R JOINT B", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
+    radio->getToggles().at(node2b)->setValue(true);
+    panel->addWidgetRight(radio);
+    
+    ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &HakoniwaColorOfWater::onPanelChanged);
+}
+
+static int _getJointIdFromName(const string& name)
+{
+    const vector<string>& names = ramActor::getJointNames();
+    int id = 0;
+    for (int i=0; i<names.size(); i++) {
+        if (names.at(i) == name) {
+            id = i;
+            break;
+        }
+    }
+    return id;
+}
 
 void HakoniwaColorOfWater::onPanelChanged(ofxUIEventArgs& e)
 {
+    const string radioName = e.widget->getParent()->getName();
+    const string toggleName = e.widget->getName();
+    if (radioName == "L JOINT A") {
+        node0a = _getJointIdFromName(toggleName);
+    }
+    else if (radioName == "L JOINT B") {
+        node0b = _getJointIdFromName(toggleName);
+    }
+    else if (radioName == "C JOINT A") {
+        node1a = _getJointIdFromName(toggleName);
+    }
+    else if (radioName == "C JOINT B") {
+        node1b = _getJointIdFromName(toggleName);
+    }
+    else if (radioName == "R JOINT A") {
+        node2a = _getJointIdFromName(toggleName);
+    }
+    else if (radioName == "R JOINT B") {
+        node2b = _getJointIdFromName(toggleName);
+    }
+    
 }
 
 void HakoniwaColorOfWater::drawActor(const ramActor &actor)

@@ -33,6 +33,13 @@ private:
     ramActor mActor;
     static const int kNumValves = 3;
     
+    int node0a;
+    int node0b;
+    int node1a;
+    int node1b;
+    int node2a;
+    int node2b;
+    
     class Valve {
     public:
         void update(const ramNode& n0, const ramNode& n1);
