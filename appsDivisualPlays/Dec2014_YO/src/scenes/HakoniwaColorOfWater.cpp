@@ -21,6 +21,7 @@ void HakoniwaColorOfWater::Valve::update(const ramNode& n0, const ramNode& n1)
     nodeB = n1;
     
     distance = n0.getGlobalPosition().distance(n1.getGlobalPosition());
+    pState = state;
     (distance >= threshould) ? (state = true) : (state = false);
 }
 
@@ -81,11 +82,13 @@ void HakoniwaColorOfWater::update()
     mValves[2].update(mActor.getNode(kNode2a), mActor.getNode(kNode2b));
     
     for (int i=0; i<kNumValves; i++) {
-        ofxOscMessage m;
-        m.setAddress("/dp/hakoniwa/colorOfWater");
-        m.addIntArg(i);
-        m.addIntArg(mValves[i].state);
-        mOscSender.sendMessage(m);
+        if (mValves[i].stateChanged()) {
+            ofxOscMessage m;
+            m.setAddress("/dp/hakoniwa/colorOfWater");
+            m.addIntArg(i);
+            m.addIntArg(mValves[i].state);
+            mOscSender.sendMessage(m);
+        }
     }
 }
 

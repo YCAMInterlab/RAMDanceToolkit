@@ -38,9 +38,12 @@ private:
         void update(const ramNode& n0, const ramNode& n1);
         void draw(int color, float x, float y);
         
+        bool stateChanged() const { return state != pState; }
+        
         bool state;
         float threshould;
         float distance;
+        bool pState;
         
         ramNode nodeA;
         ramNode nodeB;
