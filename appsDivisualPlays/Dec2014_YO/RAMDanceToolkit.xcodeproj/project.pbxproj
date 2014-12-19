@@ -11,6 +11,7 @@
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		D2DD09181A4408DA00331675 /* HakoniwaColorOfWater.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DD09161A4408DA00331675 /* HakoniwaColorOfWater.cpp */; };
+		D2DD091F1A44287C00331675 /* HakoniwaOscTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DD091D1A44287C00331675 /* HakoniwaOscTest.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -92,6 +93,8 @@
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		D2DD09161A4408DA00331675 /* HakoniwaColorOfWater.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakoniwaColorOfWater.cpp; path = scenes/HakoniwaColorOfWater.cpp; sourceTree = "<group>"; };
 		D2DD09171A4408DA00331675 /* HakoniwaColorOfWater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaColorOfWater.h; path = scenes/HakoniwaColorOfWater.h; sourceTree = "<group>"; };
+		D2DD091D1A44287C00331675 /* HakoniwaOscTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakoniwaOscTest.cpp; path = scenes/HakoniwaOscTest.cpp; sourceTree = "<group>"; };
+		D2DD091E1A44287C00331675 /* HakoniwaOscTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaOscTest.h; path = scenes/HakoniwaOscTest.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -165,6 +168,8 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D2DD091D1A44287C00331675 /* HakoniwaOscTest.cpp */,
+				D2DD091E1A44287C00331675 /* HakoniwaOscTest.h */,
 				D2DD09161A4408DA00331675 /* HakoniwaColorOfWater.cpp */,
 				D2DD09171A4408DA00331675 /* HakoniwaColorOfWater.h */,
 			);
@@ -363,6 +368,7 @@
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
 				D2DD09181A4408DA00331675 /* HakoniwaColorOfWater.cpp in Sources */,
+				D2DD091F1A44287C00331675 /* HakoniwaOscTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

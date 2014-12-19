@@ -58,7 +58,7 @@ void HakoniwaColorOfWater::Valve::draw(int color, float x, float y)
 
 HakoniwaColorOfWater::HakoniwaColorOfWater()
 {
-    mOscSender.setup("192.168.1.101", 8528);
+    mOscSender.setup("192.168.20.52", 8528);
     
     mValves[0].threshould = 58;
     mValves[1].threshould = 95;

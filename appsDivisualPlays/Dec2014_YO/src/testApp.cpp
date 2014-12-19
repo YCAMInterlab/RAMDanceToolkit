@@ -21,8 +21,10 @@
 /*!
  Scenes
  */
+#include "HakoniwaOscTest.h"
 #include "HakoniwaColorOfWater.h"
 
+HakoniwaOscTest hakoniwaOscTest;
 HakoniwaColorOfWater hakoniwaColorOfWater;
 
 
@@ -40,6 +42,7 @@ void testApp::setup()
 	/// scenes setup
 	// ------------------
 	ramSceneManager& sceneManager = ramSceneManager::instance();
+    sceneManager.addScene( hakoniwaOscTest.getPtr() );
 	sceneManager.addScene( hakoniwaColorOfWater.getPtr() );
 	
 }
