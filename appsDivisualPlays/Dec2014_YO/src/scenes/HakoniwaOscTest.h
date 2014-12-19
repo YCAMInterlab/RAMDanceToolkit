@@ -19,10 +19,13 @@ public:
     void update();
 	void draw();
     
+    void setupControlPanel();
+    void onPanelChanged(ofxUIEventArgs& e);
+    
 	inline
     string getName() const { return "HakoniwaOscTest"; }
     
 private:
     ofxOscSender mOscSender;
-    
+    bool mLed;
 };

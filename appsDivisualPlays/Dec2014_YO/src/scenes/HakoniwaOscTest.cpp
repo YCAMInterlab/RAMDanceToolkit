@@ -24,14 +24,24 @@ void HakoniwaOscTest::update()
 
 void HakoniwaOscTest::draw()
 {
-    bool blink = (bool)(int)fmod(ofGetElapsedTimef(), 2.f);
-    
-    ofxOscMessage m;
-    m.setAddress("/dp/hakoniwa/oscTest");
-    m.addIntArg(blink);
-    m.addIntArg(blink);
-    mOscSender.sendMessage(m);
-    
-    blink ? ofFill() : ofNoFill();
+    mLed ? ofFill() : ofNoFill();
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
+}
+
+void HakoniwaOscTest::setupControlPanel()
+{
+    ramGetGUI().addToggle("LED", &mLed);
+    ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &HakoniwaOscTest::onPanelChanged);
+}
+
+
+void HakoniwaOscTest::onPanelChanged(ofxUIEventArgs& e)
+{
+    const string name = e.widget->getName();
+    if (name == "LED") {
+        ofxOscMessage m;
+        m.setAddress("/dp/hakoniwa/oscTest");
+        m.addIntArg(mLed);
+        mOscSender.sendMessage(m);
+    }
 }
