@@ -32,7 +32,7 @@ public:
 	:ofxUITab("Preferences", false)
 	,fullscreen(false)
 	,useShadows(true)
-	,floorStyle(ramFloor::FLOOR_GRID_LINES)
+	,floorStyle(ramFloor::FLOOR_CHECKER_PATTERN)
 	,floorSize(600.0)
 	,floorGridSize(50.0)
 	,bg(0)

@@ -38,7 +38,7 @@ void testApp::setup()
 	/// ram setup
 	// ------------------
 	ramInitialize(10000, true);
-	
+    
 	/// scenes setup
 	// ------------------
 	ramSceneManager& sceneManager = ramSceneManager::instance();
@@ -50,7 +50,7 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-
+    ramSetViewPort(ofRectangle(0.f, 0.f, ofGetWidth() * 0.5f, ofGetHeight() * 0.5f));
 }
 
 //--------------------------------------------------------------

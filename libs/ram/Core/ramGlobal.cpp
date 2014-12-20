@@ -121,6 +121,20 @@ const ramNode& ramGetNode(unsigned int actorId, unsigned int jointId){
 }
 
 #pragma mark - camera
+
+static ofRectangle _viewport;
+
+void ramSetViewPort(ofRectangle viewport)
+{
+    _viewport = viewport;
+}
+
+ofRectangle ramGetViewPort()
+{
+    if (_viewport.isEmpty()) _viewport = ofGetCurrentViewport();
+    return _viewport;
+}
+
 void ramBeginCamera(ofRectangle viewport)
 {
 	ramCameraManager::instance().getActiveCamera().begin(viewport);

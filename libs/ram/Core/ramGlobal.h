@@ -63,7 +63,9 @@ bool ramShowActorsEnabled();
 const ramNode& ramGetNode(unsigned int actorId, unsigned int jointId);
 
 #pragma mark - camera
-void ramBeginCamera(ofRectangle viewport = ofGetCurrentViewport());
+void ramSetViewPort(ofRectangle viewport);
+ofRectangle ramGetViewPort();
+void ramBeginCamera(ofRectangle viewport = ramGetViewPort());
 void ramEndCamera();
 void ramEnableInteractiveCamera(bool v);
 
