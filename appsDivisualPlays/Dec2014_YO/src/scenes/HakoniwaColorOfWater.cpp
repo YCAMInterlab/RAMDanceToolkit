@@ -90,6 +90,7 @@ void HakoniwaColorOfWater::update()
 
 void HakoniwaColorOfWater::draw()
 {
+    ofDisableDepthTest();
     for (int i=0; i<kNumValves; i++) {
         mValves[i].draw(i, ofGetWidth()/4*(i+1), ofGetHeight()-150.f);
     }

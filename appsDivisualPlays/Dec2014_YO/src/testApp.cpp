@@ -50,7 +50,7 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
-    ramSetViewPort(ofRectangle(0.f, 0.f, ofGetWidth() * 0.5f, ofGetHeight() * 0.5f));
+    ramSetViewPort(ofRectangle(0.f, 0.f, ofGetWidth(), ofGetHeight() * 0.5f));
 }
 
 //--------------------------------------------------------------

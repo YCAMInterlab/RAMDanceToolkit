@@ -24,8 +24,9 @@ void HakoniwaOscTest::update()
 
 void HakoniwaOscTest::draw()
 {
+    ofDisableDepthTest();
     mLed ? ofFill() : ofNoFill();
-    ofRect(0, 0, ofGetWidth(), ofGetHeight());
+    ofRect(10, 10, ofGetWidth()-20, ofGetHeight()-20);
 }
 
 void HakoniwaOscTest::setupControlPanel()

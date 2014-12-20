@@ -28,6 +28,6 @@ int main()
 #endif
 
 	// these values are only for initialization, actual settings are in ramControlPanel
-	ofSetupOpenGL(&window, 1024, 1024, OF_WINDOW);
+	ofSetupOpenGL(&window, 1366, 768, OF_WINDOW);
 	ofRunApp(new testApp); // start the app
 }
