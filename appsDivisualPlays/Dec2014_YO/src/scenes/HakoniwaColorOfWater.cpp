@@ -14,8 +14,20 @@ void HakoniwaColorOfWater::Valve::update(const ramNode& n0, const ramNode& n1)
     nodeB = n1;
     
     distance = n0.getGlobalPosition().distance(n1.getGlobalPosition());
+    
+    (distance >= threshould) ? (on = true) : (on = false);
+    
     pState = state;
-    (distance >= threshould) ? (state = true) : (state = false);
+    if (on) {
+        if (ofGetElapsedTimef() - prevTime >= blink) {
+            state ^= true;
+            prevTime = ofGetElapsedTimef();
+        }
+    }
+    else {
+        state = false;
+        prevTime = ofGetElapsedTimef() - blink;
+    }
 }
 
 void HakoniwaColorOfWater::Valve::draw(int color, float x, float y)
@@ -60,16 +72,19 @@ HakoniwaColorOfWater::HakoniwaColorOfWater()
 {
     mOscSender.setup("192.168.20.52", 8528);
     
-    mValves[0].threshould = 110;
-    mValves[1].threshould = 110;
-    mValves[2].threshould = 110;
+    mNode0a = ramActor::JOINT_LEFT_ELBOW;
+    mNode0b = ramActor::JOINT_RIGHT_WRIST;
+    mNode1a = ramActor::JOINT_LEFT_ELBOW;
+    mNode1b = ramActor::JOINT_LEFT_KNEE;
+    mNode2a = ramActor::JOINT_RIGHT_KNEE;
+    mNode2b = ramActor::JOINT_LEFT_SHOULDER;
     
-    node0a = ramActor::JOINT_LEFT_ELBOW;
-    node0b = ramActor::JOINT_RIGHT_WRIST;
-    node1a = ramActor::JOINT_LEFT_ELBOW;
-    node1b = ramActor::JOINT_LEFT_KNEE;
-    node2a = ramActor::JOINT_RIGHT_KNEE;
-    node2b = ramActor::JOINT_LEFT_SHOULDER;
+    mBlink = 0.5f;
+    
+    for (int i=0; i<kNumValves; i++) {
+        mValves[i].threshould = 110.f;
+        mValves[i].blink = mBlink;
+    }
 }
 
 HakoniwaColorOfWater::~HakoniwaColorOfWater()
@@ -79,15 +94,14 @@ HakoniwaColorOfWater::~HakoniwaColorOfWater()
 
 void HakoniwaColorOfWater::update()
 {
-    mValves[0].update(mActor.getNode(node0a), mActor.getNode(node0b));
-    mValves[1].update(mActor.getNode(node1a), mActor.getNode(node1b));
-    mValves[2].update(mActor.getNode(node2a), mActor.getNode(node2b));
+    mValves[0].update(mActor.getNode(mNode0a), mActor.getNode(mNode0b));
+    mValves[1].update(mActor.getNode(mNode1a), mActor.getNode(mNode1b));
+    mValves[2].update(mActor.getNode(mNode2a), mActor.getNode(mNode2b));
     
     for (int i=0; i<kNumValves; i++) {
         if (mValves[i].stateChanged()) {
             ofxOscMessage m;
-            m.setAddress("/dp/hakoniwa/colorOfWater");
-            m.addIntArg(i);
+            m.setAddress("/dp/hakoniwa/colorOfWater/"+ofToString(6+i));
             m.addIntArg(mValves[i].state);
             mOscSender.sendMessage(m);
         }
@@ -101,42 +115,55 @@ void HakoniwaColorOfWater::draw()
     }
 }
 
+void HakoniwaColorOfWater::exit()
+{
+    for (int i=0; i<kNumValves; i++) {
+        ofxOscMessage m;
+        m.setAddress("/dp/hakoniwa/colorOfWater/"+ofToString(6+i));
+        m.addIntArg(0);
+        mOscSender.sendMessage(m);
+    }
+}
+
 void HakoniwaColorOfWater::setupControlPanel()
 {
-    ramGetGUI().addSlider("Threshould L", 40, 140, &mValves[0].threshould);
-    ramGetGUI().addSlider("Threshould C", 40, 140, &mValves[1].threshould);
-    ramGetGUI().addSlider("Threshould R", 40, 140, &mValves[2].threshould);
-    
     ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
-    
     ofxUIRadio *radio = NULL;
+    ofxUISlider *slider = NULL;
+    const float dim = 12.0f;
     
-    const float dim = 16.0f;
+    const float thickness = 16.f;
+    const float length = 300.f;
     
-    panel->getRect()->width =500.0f;
+    panel->addWidgetDown(new ofxUISlider("Blink", 0.1f, 5.f, &mBlink, length, thickness));
+    panel->addWidgetDown(new ofxUISpacer(0.f, 0.f, 840.f, 1.f));
+    panel->addWidgetDown(new ofxUISlider("L Threshould", 40, 140, &mValves[0].threshould, length, thickness));
+    panel->addWidgetDown(new ofxUISlider("C Threshould", 40, 140, &mValves[1].threshould, length, thickness));
+    panel->addWidgetDown(new ofxUISlider("R Threshould", 40, 140, &mValves[2].threshould, length, thickness));
+    panel->addWidgetDown(new ofxUISpacer(0.f, 0.f, 840.f, 1.f));
     
-    radio = new ofxUIRadio("L JOINT A", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
-    radio->getToggles().at(node0a)->setValue(true);
+    radio = new ofxUIRadio("L Joint A", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
+    radio->getToggles().at(mNode0a)->setValue(true);
     panel->addWidgetDown(radio);
     
-    radio = new ofxUIRadio("L JOINT B", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
-    radio->getToggles().at(node0b)->setValue(true);
+    radio = new ofxUIRadio("L Joint B", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
+    radio->getToggles().at(mNode0b)->setValue(true);
     panel->addWidgetRight(radio);
     
-    radio = new ofxUIRadio("C JOINT A", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
-    radio->getToggles().at(node1a)->setValue(true);
+    radio = new ofxUIRadio("C Joint A", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
+    radio->getToggles().at(mNode1a)->setValue(true);
     panel->addWidgetRight(radio);
     
-    radio = new ofxUIRadio("C JOINT B", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
-    radio->getToggles().at(node1b)->setValue(true);
+    radio = new ofxUIRadio("C Joint B", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
+    radio->getToggles().at(mNode1b)->setValue(true);
     panel->addWidgetRight(radio);
     
-    radio = new ofxUIRadio("R JOINT A", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
-    radio->getToggles().at(node2a)->setValue(true);
+    radio = new ofxUIRadio("R Joint A", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
+    radio->getToggles().at(mNode2a)->setValue(true);
     panel->addWidgetRight(radio);
     
-    radio = new ofxUIRadio("R JOINT B", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
-    radio->getToggles().at(node2b)->setValue(true);
+    radio = new ofxUIRadio("R Joint B", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
+    radio->getToggles().at(mNode2b)->setValue(true);
     panel->addWidgetRight(radio);
     
     ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &HakoniwaColorOfWater::onPanelChanged);
@@ -157,27 +184,32 @@ static int _getJointIdFromName(const string& name)
 
 void HakoniwaColorOfWater::onPanelChanged(ofxUIEventArgs& e)
 {
+    const string name = e.widget->getName();
     const string radioName = e.widget->getParent()->getName();
-    const string toggleName = e.widget->getName();
+    
     if (radioName == "L JOINT A") {
-        node0a = _getJointIdFromName(toggleName);
+        mNode0a = _getJointIdFromName(name);
     }
     else if (radioName == "L JOINT B") {
-        node0b = _getJointIdFromName(toggleName);
+        mNode0b = _getJointIdFromName(name);
     }
     else if (radioName == "C JOINT A") {
-        node1a = _getJointIdFromName(toggleName);
+        mNode1a = _getJointIdFromName(name);
     }
     else if (radioName == "C JOINT B") {
-        node1b = _getJointIdFromName(toggleName);
+        mNode1b = _getJointIdFromName(name);
     }
     else if (radioName == "R JOINT A") {
-        node2a = _getJointIdFromName(toggleName);
+        mNode2a = _getJointIdFromName(name);
     }
     else if (radioName == "R JOINT B") {
-        node2b = _getJointIdFromName(toggleName);
+        mNode2b = _getJointIdFromName(name);
     }
-    
+    else if (name == "Blink") {
+        for (int i=0; i<kNumValves; i++) {
+            mValves[i].blink = mBlink;
+        }
+    }
 }
 
 void HakoniwaColorOfWater::drawActor(const ramActor &actor)

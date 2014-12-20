@@ -20,6 +20,7 @@ public:
 	
     void update();
 	void draw();
+    void exit();
 	
 	void onPanelChanged(ofxUIEventArgs& e);
     
@@ -33,12 +34,13 @@ private:
     ramActor mActor;
     static const int kNumValves = 3;
     
-    int node0a;
-    int node0b;
-    int node1a;
-    int node1b;
-    int node2a;
-    int node2b;
+    int mNode0a;
+    int mNode0b;
+    int mNode1a;
+    int mNode1b;
+    int mNode2a;
+    int mNode2b;
+    float mBlink;
     
     class Valve {
     public:
@@ -47,10 +49,13 @@ private:
         
         bool stateChanged() const { return state != pState; }
         
+        bool on;
         bool state;
-        float threshould;
-        float distance;
         bool pState;
+        float prevTime;
+        float distance;
+        float threshould;
+        float blink;
         
         ramNode nodeA;
         ramNode nodeB;
