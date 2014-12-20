@@ -13,3 +13,6 @@
 [submodule "addons/ofxBt"]
 	path = addons/ofxBt
 	url = git@github.com:motoishmz/ofxBt.git
+[submodule "addons/ofxDmx"]
+	path = addons/ofxDmx
+	url = https://github.com/kylemcdonald/ofxDmx.git
