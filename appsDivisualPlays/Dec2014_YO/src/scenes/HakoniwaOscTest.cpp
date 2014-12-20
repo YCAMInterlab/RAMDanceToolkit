@@ -10,7 +10,7 @@
 
 HakoniwaOscTest::HakoniwaOscTest()
 {
-    mOscSender.setup("192.168.20.51", 8528);
+    mOscSender.setup("192.168.20.51", 8528); //test
 }
 
 HakoniwaOscTest::~HakoniwaOscTest()
