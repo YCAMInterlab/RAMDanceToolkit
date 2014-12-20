@@ -131,13 +131,14 @@ void ramSetViewPort(ofRectangle viewport)
 
 ofRectangle ramGetViewPort()
 {
-    if (_viewport.isEmpty()) _viewport = ofGetCurrentViewport();
     return _viewport;
 }
 
 void ramBeginCamera(ofRectangle viewport)
 {
-	ramCameraManager::instance().getActiveCamera().begin(viewport);
+    ofRectangle v = viewport;
+    if (v.isEmpty()) v = ofGetCurrentViewport();
+	ramCameraManager::instance().getActiveCamera().begin(v);
 }
 
 void ramEndCamera()

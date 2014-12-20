@@ -20,10 +20,7 @@ void HakoniwaColorOfWater::Valve::update(const ramNode& n0, const ramNode& n1)
 
 void HakoniwaColorOfWater::Valve::draw(int color, float x, float y)
 {
-    ofSetCircleResolution(64);
-    ofSetLineWidth(2.f);
-    
-    ofDisableAlphaBlending();
+    ofPushStyle();
     
     switch (color) {
         case 0:
@@ -37,10 +34,17 @@ void HakoniwaColorOfWater::Valve::draw(int color, float x, float y)
             break;
     }
     
+    ofSetLineWidth(2.f);
+    
+    ofEnableDepthTest();
+    ofDisableAlphaBlending();
+    
     ramBeginCamera();
     ofLine(nodeA, nodeB);
     ramEndCamera();
     
+    ofSetCircleResolution(64);
+    ofDisableDepthTest();
     ofEnableAlphaBlending();
     
     state ? ofFill() : ofNoFill();
@@ -48,6 +52,8 @@ void HakoniwaColorOfWater::Valve::draw(int color, float x, float y)
     
     ofSetColor(ofColor::white);
     ofDrawBitmapString(ofToString(distance), x, y);
+    
+    ofPopStyle();
 }
 
 HakoniwaColorOfWater::HakoniwaColorOfWater()
@@ -90,7 +96,6 @@ void HakoniwaColorOfWater::update()
 
 void HakoniwaColorOfWater::draw()
 {
-    ofDisableDepthTest();
     for (int i=0; i<kNumValves; i++) {
         mValves[i].draw(i, ofGetWidth()/4*(i+1), ofGetHeight()-150.f);
     }
