@@ -30,6 +30,7 @@ void ParallelLinkManager::setup(string serial){
 
 	enableSync = false;
 	id_offset = 0;
+	id_swap = true;
 }
 
 void ParallelLinkManager::update(){
@@ -46,12 +47,15 @@ void ParallelLinkManager::update(){
 		for (int i = 0;i < 3;i++){
 			ps[i] = delta.actuator[(i+id_offset)%3].getGlobalOrientation().getEuler().x/2;
 		}
+
+		if (id_swap) swap(ps[1], ps[2]);
+
 		stepManager.setStepperAll(true);
 		stepManager.multi_go_to(ps);
 		stepManager.setStepperAll(false);
 	}
 
-	delta.setup(radius, armLength1*2, armLength2*2, height,plot_radius);
+	delta.setup(radius, armLength1*2, armLength2*2, height, plot_radius);
 	
 }
 
@@ -86,10 +90,15 @@ void ParallelLinkManager::calibrate(){
 	stepManager.setStepperAll(false);
 
 	ofSleepMillis(300);
+	int ps[3];
 	for (int i = 0;i < 3;i++){
+		ps[i] = delta.actuator[(i+id_offset)%3].getGlobalOrientation().getEuler().x/2;
+	}
+	if (id_swap) swap(ps[1], ps[2]);
 
+	for (int i = 0;i < 3;i++){
 		stepManager.setStepperSingle(i, true);
-		stepManager.absPos(delta.actuator[(i+id_offset)%3].getGlobalOrientation().getEuler().x/2);
+		stepManager.absPos(ps[i]);
 		stepManager.setStepperSingle(i, false);
 	}
 
@@ -97,7 +106,7 @@ void ParallelLinkManager::calibrate(){
 	for (int i = 0;i < 3;i++){
 
 		stepManager.setStepperSingle(i, true);
-		stepManager.go_to(delta.actuator[(i+id_offset)%3].getGlobalOrientation().getEuler().x/2);
+		stepManager.go_to(ps[i]);
 		stepManager.setStepperSingle(i, false);
 
 	}

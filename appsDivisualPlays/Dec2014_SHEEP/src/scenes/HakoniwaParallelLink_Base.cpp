@@ -15,19 +15,33 @@ HakoniwaParallelLink_Base::HakoniwaParallelLink_Base(){
 
 	mLinkManager.height = 250.0;
 
-	mLinkManager.area_clamp.set(80.0, 80.0, 80.0);
+	mLinkManager.area_clamp.set(80.0, 43.67, 80.0);
 	mLinkManager.area_offset.set(0.0, 150.0, 0.0);
+	mLinkManager.delta.rotation = 30;
+	mLinkManager.id_offset = 0;
+	mLinkManager.id_swap = false;
+
+	mOscSender = &mLinkManager.stepManager.sender;
 }
 
 void HakoniwaParallelLink_Base::update(){
 
-	ofVec3f v = mActor.getNode(ramActor::JOINT_LEFT_ELBOW);
+	ofVec3f v = mActor.getNode(ramActor::JOINT_RIGHT_HAND);
+
+
+	if (ofGetFrameNum() % 3 == 0){
+		ofxOscMessage m;
+		m.setAddress("/dp/hakoniwa/digitalWrite/");
+		m.addIntArg(3);
+		m.addIntArg(mDigitalOut && ofGetFrameNum() % 6 == 0);
+		mOscSender->sendMessage(m);
+	}
 
 	mLinkManager.update();
 
 	if (CalibratePose)		mLinkManager.setPlot_inClamp(ofVec3f(0.0,100.0,0.0));
 	else if (ManualPose)	mLinkManager.setPlot_inClamp(mManualPosition);
-	else					mLinkManager.setPlot_inClamp(v);
+	else					mLinkManager.setPlot_inClamp(v - machinePosition);
 
 }
 
@@ -36,7 +50,10 @@ void HakoniwaParallelLink_Base::draw(){
 
 	ramBeginCamera();
 	glEnable(GL_DEPTH_TEST);
+	ofPushMatrix();
+	ofTranslate(machinePosition);
 	mLinkManager.draw();
+	ofPopMatrix();
 	glDisable(GL_DEPTH_TEST);
 	ramEndCamera();
 
@@ -54,6 +71,9 @@ void HakoniwaParallelLink_Base::setupControlPanel(){
 
 	ramGetGUI().addLabel("Calibration");
 	ramGetGUI().getCurrentUIContext()->addSpacer();
+	ramGetGUI().addSlider("Machine_X", -200.0, 200.0, &machinePosition.x);
+	ramGetGUI().addSlider("Machine_Y", -200.0, 200.0, &machinePosition.y);
+	ramGetGUI().addSlider("Machine_Z", -200.0, 200.0, &machinePosition.z);
 	ramGetGUI().addSlider("Clamp_X", 0.0, 200.0, &mLinkManager.area_clamp.x);
 	ramGetGUI().addSlider("Clamp_Y", 0.0, 200.0, &mLinkManager.area_clamp.y);
 	ramGetGUI().addSlider("Clamp_Z", 0.0, 200.0, &mLinkManager.area_clamp.z);
@@ -73,6 +93,7 @@ void HakoniwaParallelLink_Base::setupControlPanel(){
 	ramGetGUI().addButton("Calibration");
 	ramGetGUI().addToggle("Enable", &mLinkManager.enableSync);
 
+	ramGetGUI().addToggle("digitalIO", &mDigitalOut);
 	ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent,
 				  this, &HakoniwaParallelLink_Base::onPanelChanged);
 
@@ -89,7 +110,5 @@ void HakoniwaParallelLink_Base::onPanelChanged(ofxUIEventArgs& e){
 	if (w->getName() == "Calibration"){
 		mLinkManager.calibrate();
 	}
-
-	cout << "Ev" << endl;
 
 }

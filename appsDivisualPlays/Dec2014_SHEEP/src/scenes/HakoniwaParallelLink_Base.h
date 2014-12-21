@@ -31,7 +31,7 @@ public:
 	string getName() const { return "HakoniwaParallelLink_Base"; }
 
 private:
-	ofxOscSender mOscSender;
+	ofxOscSender* mOscSender;
 	ramActor mActor;
 	static const int kNumValves = 3;
 
@@ -41,7 +41,10 @@ private:
 
 	bool CalibratePose;
 	bool ManualPose;
+	bool mDigitalOut;
 	ofVec3f mManualPosition;
+	ofVec3f machinePosition;
+
 };
 
 
