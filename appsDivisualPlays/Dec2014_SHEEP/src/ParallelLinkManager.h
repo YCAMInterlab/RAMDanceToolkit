@@ -36,12 +36,13 @@ public:
 	float armLength2;
 	float height;
 	float plot_radius;
-	
+
 	ofVec3f area_clamp;
 	ofVec3f area_offset;
 
 	bool	enableSync;
 	int		id_offset;
+	bool	id_swap;
 };
 
 #endif /* defined(__motorTester__ParallelLinkManager__) */
