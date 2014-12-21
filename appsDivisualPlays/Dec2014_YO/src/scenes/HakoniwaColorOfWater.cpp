@@ -93,7 +93,7 @@ HakoniwaColorOfWater::HakoniwaColorOfWater()
         mOscSender.setup("192.168.20.60", 8528);
     }
     catch (exception& e) {
-        ofLogWarning("HakoniwaColorOfWater"t) << e.what();
+        ofLogWarning("HakoniwaColorOfWater") << e.what();
     }
     
     mNode0a = ramActor::JOINT_LEFT_ELBOW;
