@@ -7,13 +7,13 @@
 #include <OSCBoards.h>
 
 EthernetUDP _udp;
-byte _mac[] = { 0x90, 0xA2, 0xDA, 0x0F, 0xB5, 0x8A };
+byte _mac[] = { 0x85, 0x28, 0xFF, 0x00, 0x00, 0x00 };
 
-IPAddress _ip(192, 168, 20, 51);
+IPAddress _ip(192, 168, 20, 99);
 
 const unsigned int _inPort = 8528;
 
-const int _pin = 8;
+const int _pin = 9;
 
 void setup() 
 {

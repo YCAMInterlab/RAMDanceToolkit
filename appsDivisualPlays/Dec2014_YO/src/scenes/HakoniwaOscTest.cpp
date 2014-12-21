@@ -11,7 +11,7 @@
 HakoniwaOscTest::HakoniwaOscTest()
 {
     try {
-        mOscSender.setup("192.168.20.50", 8528);
+        mOscSender.setup("192.168.20.99", 8528);
     }
     catch (exception& e) {
         ofLogWarning("HakoniwaOscTest") << e.what();

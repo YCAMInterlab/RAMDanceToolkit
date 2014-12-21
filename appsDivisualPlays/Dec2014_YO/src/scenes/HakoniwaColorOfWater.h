@@ -49,8 +49,8 @@ private:
         void update(const ramNode& n0, const ramNode& n1);
         void draw(int color, float x, float y);
         
-        bool stateChanged() const { return state != pState; }
-        
+        ofxOscSender* sender;
+        int pin;
         bool on;
         float time;
         bool state;
@@ -59,6 +59,8 @@ private:
         float distance;
         float threshould;
         float blinkOpen, blinkClose;
+        float openingDuration;
+        int nOpen;
         
         ramNode nodeA;
         ramNode nodeB;
