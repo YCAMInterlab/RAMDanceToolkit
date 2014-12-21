@@ -17,17 +17,6 @@
 
 #include "testApp.h"
 
-
-/*!
- Scenes
- */
-#include "HakoniwaOscTest.h"
-#include "HakoniwaColorOfWater.h"
-
-HakoniwaOscTest hakoniwaOscTest;
-HakoniwaColorOfWater hakoniwaColorOfWater;
-
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()

@@ -40,22 +40,25 @@ private:
     int mNode1b;
     int mNode2a;
     int mNode2b;
-    float mBlink;
+    float mBlinkOpen;
+    float mBlinkClose;
     
     class Valve {
     public:
+        Valve();
         void update(const ramNode& n0, const ramNode& n1);
         void draw(int color, float x, float y);
         
         bool stateChanged() const { return state != pState; }
         
         bool on;
+        float time;
         bool state;
         bool pState;
         float prevTime;
         float distance;
         float threshould;
-        float blink;
+        float blinkOpen, blinkClose;
         
         ramNode nodeA;
         ramNode nodeB;

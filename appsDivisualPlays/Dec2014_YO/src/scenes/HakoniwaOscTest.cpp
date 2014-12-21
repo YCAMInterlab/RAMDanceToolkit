@@ -10,7 +10,12 @@
 
 HakoniwaOscTest::HakoniwaOscTest()
 {
-    mOscSender.setup("192.168.20.51", 8528);
+    try {
+        mOscSender.setup("192.168.20.50", 8528);
+    }
+    catch (exception& e) {
+        ofLogWarning("HakoniwaOscTest") << e.what();
+    }
     m6 = m7 = m8 = m9 = false;
     mLed = false;
 }
