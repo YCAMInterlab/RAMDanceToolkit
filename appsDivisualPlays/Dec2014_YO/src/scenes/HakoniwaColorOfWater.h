@@ -33,6 +33,7 @@ private:
     ofxOscSender mOscSender;
     ramActor mActor;
     static const int kNumValves = 3;
+    bool mEnableOsc;
     
     int mNode0a;
     int mNode0b;
@@ -61,6 +62,7 @@ private:
         float blinkOpen, blinkClose;
         float openingDuration;
         int nOpen;
+        bool enableOsc;
         
         ramNode nodeA;
         ramNode nodeB;

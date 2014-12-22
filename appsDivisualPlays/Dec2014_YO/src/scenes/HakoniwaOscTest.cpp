@@ -27,13 +27,30 @@ HakoniwaOscTest::~HakoniwaOscTest()
 
 void HakoniwaOscTest::update()
 {
+    if (ofGetFrameNum() % 300 >= 0 && ofGetFrameNum() % 300 < 60) {
+        
+    }
+    else if (ofGetFrameNum()%3==0) {
+        mLed ^= true;
+    }
+    
+    ofxOscMessage m;
+    m.setAddress("/dp/hakoniwa/oscTest");
+    m.addIntArg(mLed);
+    for (int i=0; i<5; i++) {
+        m.addIntArg(i);
+    }
+    mOscSender.sendMessage(m);
 }
 
 void HakoniwaOscTest::draw()
 {
+    ofPushStyle();
+    ofSetColor(ofColor::gray);
     ofDisableDepthTest();
     mLed ? ofFill() : ofNoFill();
-    ofRect(10, 10, ofGetWidth()-20, ofGetHeight()-20);
+    ofRect(10, 10 + (ofGetHeight()-20.0f) * 0.5f, ofGetWidth()-20, ofGetHeight()-20);
+    ofPopStyle();
 }
 
 void HakoniwaOscTest::setupControlPanel()

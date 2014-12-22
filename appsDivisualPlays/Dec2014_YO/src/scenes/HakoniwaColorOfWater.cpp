@@ -20,7 +20,8 @@ blinkOpen(0.5f),
 blinkClose(1.0f),
 openingDuration(0.f),
 sender(NULL),
-nOpen(0)
+nOpen(0),
+enableOsc(false)
 {
     
 }
@@ -47,11 +48,12 @@ void HakoniwaColorOfWater::Valve::update(const ramNode& n0, const ramNode& n1)
         
         if (on) {
             nOpen++;
-            
-            ofxOscMessage m;
-            m.setAddress("/dp/hakoniwa/colorOfWater/"+ofToString(pin));
-            m.addIntArg(1);
-            sender->sendMessage(m);
+            if (enableOsc) {
+                ofxOscMessage m;
+                m.setAddress("/dp/hakoniwa/colorOfWater/"+ofToString(pin));
+                m.addIntArg(1);
+                sender->sendMessage(m);
+            }
         }
     }
     if (state && time - prevTime >= blinkOpen) {
@@ -145,12 +147,14 @@ HakoniwaColorOfWater::HakoniwaColorOfWater()
         mValves[i].sender = &mOscSender;
         mValves[i].blinkOpen = mBlinkOpen;
         mValves[i].blinkClose = mBlinkClose;
-        mValves[i].threshould = 140.f;
+        mValves[i].threshould = 150.f;
     }
     
-    mValves[0].threshould = 120.f;
+    mValves[0].threshould = 150.f;
     mValves[1].threshould = 100.f;
-    mValves[2].threshould = 120.f;
+    mValves[2].threshould = 150.f;
+    
+    mEnableOsc = false;
 }
 
 HakoniwaColorOfWater::~HakoniwaColorOfWater()
@@ -201,15 +205,19 @@ void HakoniwaColorOfWater::setupControlPanel()
     ofxUISlider *slider = NULL;
     const float dim = 12.0f;
     
-    const float thickness = 16.f;
-    const float length = 300.f;
+    const float thickness = 12.f;
+    const float length = 500.f;
     
+    panel->addWidgetDown(new ofxUIToggle("Enable OSC", &mEnableOsc, 24.f, 24.f));
     panel->addWidgetDown(new ofxUISlider("Blink Open", 0.1f, 5.f, &mBlinkOpen, length, thickness));
     panel->addWidgetDown(new ofxUISlider("Blink Close", 0.1f, 5.f, &mBlinkClose, length, thickness));
     panel->addWidgetDown(new ofxUISpacer(0.f, 0.f, 840.f, 1.f));
-    panel->addWidgetDown(new ofxUISlider("L Threshould", 40, 140, &mValves[0].threshould, length, thickness));
-    panel->addWidgetDown(new ofxUISlider("C Threshould", 40, 140, &mValves[1].threshould, length, thickness));
-    panel->addWidgetDown(new ofxUISlider("R Threshould", 40, 140, &mValves[2].threshould, length, thickness));
+    panel->addWidgetDown(new ofxUISlider("L Distance", 30, 300, &mValves[0].distance, length, thickness))->setColorFill(ofColor::blue);
+    panel->addWidgetDown(new ofxUISlider("L Threshould", 30, 300, &mValves[0].threshould, length, thickness))->setColorFill(ofColor::blue);
+    panel->addWidgetDown(new ofxUISlider("C Distance", 30, 300, &mValves[1].distance, length, thickness))->setColorFill(ofColor::red);
+    panel->addWidgetDown(new ofxUISlider("C Threshould", 30, 300, &mValves[1].threshould, length, thickness))->setColorFill(ofColor::red);
+    panel->addWidgetDown(new ofxUISlider("R Distance", 30, 300, &mValves[2].distance, length, thickness))->setColorFill(ofColor::green);
+    panel->addWidgetDown(new ofxUISlider("R Threshould", 30, 300, &mValves[2].threshould, length, thickness))->setColorFill(ofColor::green);
     panel->addWidgetDown(new ofxUISpacer(0.f, 0.f, 840.f, 1.f));
     
     radio = new ofxUIRadio("L Joint A", ramActor::getJointNames(), OFX_UI_ORIENTATION_VERTICAL, dim, dim);
@@ -283,6 +291,11 @@ void HakoniwaColorOfWater::onPanelChanged(ofxUIEventArgs& e)
     else if (name == "Blink Close") {
         for (int i=0; i<kNumValves; i++) {
             mValves[i].blinkClose = mBlinkClose;
+        }
+    }
+    else if (name == "Enable OSC") {
+        for (int i=0; i<kNumValves; i++) {
+            mValves[i].enableOsc = mEnableOsc;
         }
     }
 }
