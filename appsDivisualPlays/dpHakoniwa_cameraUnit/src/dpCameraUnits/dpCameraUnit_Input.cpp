@@ -116,18 +116,19 @@ void dpCameraUnit_input::update(){
 	}
 }
 
-void dpCameraUnit_input::draw(int x,int y){
+void dpCameraUnit_input::drawUI(int x, int y){
 	mGui.setPosition(x, y);
+}
 
+void dpCameraUnit_input::drawThumbnail(int x, int y, float scale){
 	mDrawnPoint.set(x, y);
 	ofSetColor(255);
 
 	ofPushMatrix();
 	ofTranslate(x, y);
-	mGui.draw();
+	glScaled(scale, scale, scale);
 
 	ofPushMatrix();
-	ofTranslate(240, 0);
 	glScaled(thumb_ratio, thumb_ratio, 1.0);
 	if (mSourceType > 0){
 		if (mCameraList[mSourceType] == "ps3Eye"){
@@ -154,6 +155,11 @@ void dpCameraUnit_input::draw(int x,int y){
 
 	ofPopMatrix();
 	ofSetColor(255);
+}
+
+void dpCameraUnit_input::draw(int x,int y){
+	drawUI(x, y);
+	drawThumbnail(x+240, y);
 }
 
 

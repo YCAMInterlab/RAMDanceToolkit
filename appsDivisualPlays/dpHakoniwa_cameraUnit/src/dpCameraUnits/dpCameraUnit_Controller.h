@@ -22,13 +22,11 @@ public:
 
 	void update();
 	void draw();
+	void simulator_initialize();
 
 	dpCameraUnit_input		inputUnit;
-//	dpCameraUnit_ShaderFX	shaderUnit;
-	dpCameraUnit_cvFX		cvFXUnit;
-	dpCameraUnit_cvFX		cvFXUnit_second;
-	dpCameraUnit_cvAnalysis cvAnalysis;
-	dpCameraUnit_cvAnalysis cvAnalysis_second;
+	dpCameraUnit_cvFX		cvFXUnit[4];
+	dpCameraUnit_cvAnalysis cvAnalysis[4];
 };
 
 #endif /* defined(__dpHakoniwa_cameraUnit__dpCameraUnit_Controller__) */
