@@ -27,5 +27,8 @@ public:
     
 private:
     ofxOscSender mOscSender;
+    // HakoniwaOscTest
     bool mLed;
+    // HakoniwaColorOfWater
+    bool m6, m7, m8, m9;
 };

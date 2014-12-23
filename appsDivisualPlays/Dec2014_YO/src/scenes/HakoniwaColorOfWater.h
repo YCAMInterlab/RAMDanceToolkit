@@ -20,6 +20,7 @@ public:
 	
     void update();
 	void draw();
+    void exit();
 	
 	void onPanelChanged(ofxUIEventArgs& e);
     
@@ -32,25 +33,36 @@ private:
     ofxOscSender mOscSender;
     ramActor mActor;
     static const int kNumValves = 3;
+    bool mEnableOsc;
     
-    int node0a;
-    int node0b;
-    int node1a;
-    int node1b;
-    int node2a;
-    int node2b;
+    int mNode0a;
+    int mNode0b;
+    int mNode1a;
+    int mNode1b;
+    int mNode2a;
+    int mNode2b;
+    float mBlinkOpen;
+    float mBlinkClose;
     
     class Valve {
     public:
+        Valve();
         void update(const ramNode& n0, const ramNode& n1);
         void draw(int color, float x, float y);
         
-        bool stateChanged() const { return state != pState; }
-        
+        ofxOscSender* sender;
+        int pin;
+        bool on;
+        float time;
         bool state;
-        float threshould;
-        float distance;
         bool pState;
+        float prevTime;
+        float distance;
+        float threshould;
+        float blinkOpen, blinkClose;
+        float openingDuration;
+        int nOpen;
+        bool enableOsc;
         
         ramNode nodeA;
         ramNode nodeB;

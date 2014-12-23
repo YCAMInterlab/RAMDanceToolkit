@@ -20,6 +20,11 @@
 #include "ofMain.h"
 
 #include "ramMain.h"
+/*!
+ Scenes
+ */
+#include "HakoniwaOscTest.h"
+#include "HakoniwaColorOfWater.h"
 
 class testApp : public ramBaseApp
 {
@@ -49,4 +54,7 @@ public:
 	void onActorExit(const ramActor &actor);
 	void onRigidSetup(const ramRigidBody &rigid);
 	void onRigidExit(const ramRigidBody &rigid);
+    
+    HakoniwaOscTest hakoniwaOscTest;
+    HakoniwaColorOfWater hakoniwaColorOfWater;
 };

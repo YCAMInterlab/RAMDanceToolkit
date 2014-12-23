@@ -7,15 +7,17 @@
 #include <OSCBoards.h>
 
 EthernetUDP _udp;
-byte _mac[] = { 0x90, 0xA2, 0xDA, 0x0F, 0xB5, 0x8A };
+byte _mac[] = { 0x85, 0x28, 0xFF, 0x00, 0x00, 0x00 };
 
-IPAddress _ip(192, 168, 20, 51);
+IPAddress _ip(192, 168, 20, 99);
 
 const unsigned int _inPort = 8528;
 
+const int _pin = 9;
+
 void setup() 
 {
-  pinMode(9, OUTPUT);
+  pinMode(_pin, OUTPUT);
   
   Ethernet.begin(_mac, _ip);
   _udp.begin(_inPort);
@@ -23,7 +25,7 @@ void setup()
 
 void loop()
 { 
-    OSCBundle bundle;
+   OSCBundle bundle;
    int size = _udp.parsePacket();
  
    if (size > 0) {
@@ -34,7 +36,7 @@ void loop()
      OSCMessage message = bundle.getOSCMessage("/dp/hakoniwa/oscTest");
      
      if(!message.hasError()) {
-          digitalWrite(9, message.getInt(0) ? HIGH:LOW);
+          digitalWrite(_pin, message.getInt(0) ? HIGH : LOW);
      }
    }
 }
