@@ -19,7 +19,10 @@ public:
 	~dpCameraUnit_cvFX();
 
 	void update(ofImage &pix,bool NewFrame);
+
 	void draw(int x,int y);
+	void drawUI(int x,int y);
+	void drawThumbnail(int x,int y,float scale = 1.0);
 
 	ofxUICanvas mGui;
 	ofImage mSource;

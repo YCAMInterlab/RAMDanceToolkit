@@ -21,7 +21,9 @@ public:
 	~dpCameraUnit_input();
 
 	void update();
-	void draw(int x,int y);
+	void draw			(int x,int y);
+	void drawUI			(int x,int y);
+	void drawThumbnail	(int x,int y, float scale = 1.0);
 
 	void mouseMoved(ofMouseEventArgs &arg);
 	void mousePressed(ofMouseEventArgs &arg);
@@ -35,7 +37,7 @@ public:
 	const float			input_width		= 640.0;
 	const float			input_height	= 480.0;
 	const float			thumb_ratio		= 0.5;
-	const float			cvSrc_ratio		= 0.5;
+	const float			cvSrc_ratio		= 0.25;
 
 	int					mSourceType;
 	float				mGain;

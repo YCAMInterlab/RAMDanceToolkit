@@ -19,8 +19,10 @@ public:
 	dpCameraUnit_cvAnalysis();
 	~dpCameraUnit_cvAnalysis();
 
-	void update(ofImage &pixColor, ofImage &pixGray);
+	void update(ofImage &pixColor, ofImage &pixGray, bool isFrameNew);
 	void draw(int x,int y);
+	void drawUI(int x,int y);
+	void drawThumbnail(int x,int y, float scale = 1.0);
 	
 	void guiEvent(ofxUIEventArgs& ev);
 

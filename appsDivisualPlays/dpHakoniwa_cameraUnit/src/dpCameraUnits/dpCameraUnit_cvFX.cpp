@@ -64,13 +64,26 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 
 void dpCameraUnit_cvFX::draw(int x,int y){
 
+	drawUI(x, y);
+	drawThumbnail(x+240, y);
+
+}
+
+void dpCameraUnit_cvFX::drawUI(int x,int y){
+
 	mGui.setPosition(x, y);
+
+}
+
+void dpCameraUnit_cvFX::drawThumbnail(int x, int y, float scale){
 
 	ofPushMatrix();
 	ofTranslate(x, y);
+	glScaled(scale, scale, scale);
 
-	mSource.draw(240,0);
-	mGraySource.draw(240, mSource.getHeight());
+	ofSetColor(255);
+	mSource.draw(0,0);
+	mGraySource.draw(0, mSource.getHeight());
 
 	ofPopMatrix();
 

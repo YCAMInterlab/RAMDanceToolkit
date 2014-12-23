@@ -55,7 +55,7 @@ dpCameraUnit_cvAnalysis::~dpCameraUnit_cvAnalysis(){
 
 }
 
-void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray){
+void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool isFrameNew){
 
 	imgRefColor = &pixColor;
 	imgRefGray = &pixGray;
@@ -103,9 +103,9 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray){
 		}
 	}
 	if (mEnableOptFlow){
-		if (ofxCv::mean(ofxCv::toCv(pixGray))[0] > 1.0f)
-			mOptFlow.calcOpticalFlow(pixGray);
-		if ((ofGetFrameNum() % 300 == 0) ||
+		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 1.0f) &&
+			(isFrameNew)) mOptFlow.calcOpticalFlow(pixGray);
+		if ((ofGetFrameNum() % 150 == 0) ||
 			(ofGetKeyPressed(' '))) mOptFlow.resetFlow();
 		
 		vector <ofVec2f> mot = mOptFlow.getMotion();
@@ -137,13 +137,16 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray){
 
 }
 
-void dpCameraUnit_cvAnalysis::draw(int x,int y){
+void dpCameraUnit_cvAnalysis::drawUI(int x, int y){
 	mGui.setPosition(x, y);
+}
+
+void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 	ofPushMatrix();
 	ofTranslate(x, y);
+	glScaled(scale, scale, scale);
 	ofDrawBitmapString(hakoniwa_name, 0,400);
 
-	ofTranslate(240,0);
 	if (mViewSource && imgRefGray != NULL) imgRefGray->draw(0,0);
 	ofSetColor(255, 255, 0);
 	mContFinder.draw();
@@ -160,7 +163,7 @@ void dpCameraUnit_cvAnalysis::draw(int x,int y){
 		}
 		ofPopMatrix();
 	}
-	
+
 	ofSetColor(255, 0, 0);
 	ofRect(0, imgRefGray->getHeight()     , means[0], 10);
 	ofSetColor(0, 255, 0);
@@ -173,6 +176,11 @@ void dpCameraUnit_cvAnalysis::draw(int x,int y){
 	ofPopMatrix();
 
 	ofSetColor(255);
+}
+
+void dpCameraUnit_cvAnalysis::draw(int x,int y){
+	drawUI(x, y);
+	drawThumbnail(x+240, y);
 }
 
 void dpCameraUnit_cvAnalysis::guiEvent(ofxUIEventArgs &ev){
