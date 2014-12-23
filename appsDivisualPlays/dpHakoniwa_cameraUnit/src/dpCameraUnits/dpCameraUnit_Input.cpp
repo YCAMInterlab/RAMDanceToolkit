@@ -10,16 +10,21 @@
 
 dpCameraUnit_input::dpCameraUnit_input(){
 
+	mVideoPlayer.loadMovie("hakoniwa_split_2.mov");
+	mVideoPlayer.setVolume(0.0);
+	
 	mCameraList.push_back("None");
 	for (int i = 0;i < mVideoGrabber.listDevices().size();i++){
 		mCameraList.push_back(mVideoGrabber.listDevices()[i].deviceName);
 	}
 	mCameraList.push_back("ps3Eye");
+	mCameraList.push_back("Video");
 
 	mGui.setup();
 	mGui.addLabel("InputUnit",OFX_UI_FONT_LARGE);
 	mGui.addDropDownList("InputSource", mCameraList);
 	mGui.addToggle("Perspective", &mEnablePerspective);
+	mGui.addToggle("FourSplit", &mFourSplit);
 	mGui.autoSizeToFitWidgets();
 
 	ofAddListener(mGui.newGUIEvent, this, &dpCameraUnit_input::guiEvent);
@@ -41,6 +46,11 @@ dpCameraUnit_input::dpCameraUnit_input(){
 								input_height * cvSrc_ratio,
 								OF_IMAGE_COLOR);
 
+	for (int i = 0;i < 4;i++){
+		mFinalSource_FourSplit[i].allocate(input_width/2.0,
+										   input_height/2.0, OF_IMAGE_COLOR);
+	}
+	
 	mIsFrameNew = false;
 }
 
@@ -50,26 +60,51 @@ dpCameraUnit_input::~dpCameraUnit_input(){
 
 void dpCameraUnit_input::update(){
 
-	mVideoGrabber.update();
-
 	if (mSourceType > 0){
 		if (mCameraList[mSourceType] == "ps3Eye"){
 
 		}else if (mSourceType > 0){
-			if (mVideoGrabber.isFrameNew()){
+			
+			bool isFrameNew;
+			bool isVideo = mCameraList[mSourceType] == "Video";
+			
+			if (isVideo){
+				mVideoPlayer.update();
+				isFrameNew = mVideoPlayer.isFrameNew();
+			}else{
+				mVideoGrabber.update();
+				isFrameNew = mVideoGrabber.isFrameNew();
+			}
+			
+			if (isFrameNew){
 				mIsFrameNew = true;
 
 				if (mEnablePerspective){
 					vector<ofxCv::Point2f> warpPt;
 					for (int i = 0;i < 4;i++) warpPt.push_back(ofxCv::toCv(mWarpPoint[i]));
-					ofxCv::unwarpPerspective(mVideoGrabber.getPixelsRef(),
+					ofxCv::unwarpPerspective(isVideo ? mVideoPlayer.getPixelsRef() : mVideoGrabber.getPixelsRef(),
 											 mFinalSource_Large,
 											 warpPt);
 				}else{
-					ofxCv::copy(mVideoGrabber.getPixelsRef(), mFinalSource_Large);
+					ofxCv::copy(isVideo ? mVideoPlayer.getPixelsRef() : mVideoGrabber.getPixelsRef(), mFinalSource_Large);
 				}
 
 				mFinalSource_Large.update();
+				
+				if (mFourSplit){
+					mFinalSource_FourSplit[0].cropFrom(mFinalSource_Large, 0, 0,
+													   input_width/2.0, input_height/2.0);
+					
+					mFinalSource_FourSplit[1].cropFrom(mFinalSource_Large, input_width/2.0, 0,
+													   input_width/2.0, input_height/2.0);
+					
+					mFinalSource_FourSplit[2].cropFrom(mFinalSource_Large, 0, input_height/2.0,
+													   input_width/2.0, input_height/2.0);
+					
+					mFinalSource_FourSplit[3].cropFrom(mFinalSource_Large, input_width/2.0, input_height/2.0,
+													   input_width/2.0, input_height/2.0);
+					
+				}
 
 				ofxCv::resize(mFinalSource_Large, mFinalSource_Small);
 				mFinalSource_Small.update();
@@ -98,7 +133,11 @@ void dpCameraUnit_input::draw(int x,int y){
 		if (mCameraList[mSourceType] == "ps3Eye"){
 
 		}else if (mSourceType > 0){
-			mVideoGrabber.draw(0, 0, input_width, input_height);
+			if (mCameraList[mSourceType] == "Video"){
+				mVideoPlayer.draw(0, 0, input_width, input_height);
+			}else{
+				mVideoGrabber.draw(0, 0, input_width, input_height);
+			}
 			mFinalSource_Large.draw(0, input_height, input_width, input_height);
 
 			ofSetColor(255, 255, 0);
@@ -114,6 +153,7 @@ void dpCameraUnit_input::draw(int x,int y){
 	ofPopMatrix();
 
 	ofPopMatrix();
+	ofSetColor(255);
 }
 
 
@@ -166,11 +206,19 @@ void dpCameraUnit_input::guiEvent(ofxUIEventArgs &e){
 			string srcName = ww->getSelectedNames()[0];
 			ww->setLabelText(srcName);
 
+			mVideoPlayer.stop();
+			
 			if (srcName == "ps3Eye"){
 				cout << "ps3eye initialize" << endl;
+			}else if (srcName == "Video"){
+				
+				mVideoPlayer.play();
+				
 			}else if (ww->getSelectedIndeces()[0] > 0){
+				
 				mVideoGrabber.setDeviceID(ww->getSelectedIndeces()[0]-1);
 				mVideoGrabber.initGrabber(input_width, input_height);
+				
 			}
 
 		}

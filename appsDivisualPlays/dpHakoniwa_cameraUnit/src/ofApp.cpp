@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
+	ofBackground(30, 30, 30);
 	ser.listDevices();
 	ser.setup("cu.usbserial-A5002vny",9600);
 }
@@ -10,13 +10,13 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
 
-	if (!ofGetKeyPressed('a')){
-		unsigned char buf[8] = {ofRandom(49,58), ',',
-								ofRandom(49,58), ';',
-								ofRandom(49,58), ',',
-								ofRandom(49,58), '\r'};
-		ser.writeBytes(buf, 8);
-	}
+//	if (!ofGetKeyPressed('a')){
+//		unsigned char buf[8] = {ofRandom(49,58), ',',
+//								ofRandom(49,58), ';',
+//								ofRandom(49,58), ',',
+//								ofRandom(49,58), '\r'};
+//		ser.writeBytes(buf, 8);
+//	}
 
 	ofSetWindowTitle(ofToString(ofGetFrameRate()));
 	

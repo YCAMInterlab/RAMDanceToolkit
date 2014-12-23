@@ -50,6 +50,12 @@ else
 	git checkout b21dcd5
 	cd ../
 
+	# ofxQuadWarp
+	git clone git@github.com:julapy/ofxQuadWarp.git
+	cd ofxQuadWarp
+	git checkout a45ff5e
+	cd ../
+
 	echo "end clone addons"
 	cd ../
 fi

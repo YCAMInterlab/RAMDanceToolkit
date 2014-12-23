@@ -44,13 +44,17 @@ public:
 	vector<string>		mCameraList;
 	bool				mEnablePerspective;
 	bool				mIsFrameNew;
+	bool				mFourSplit;
 
 	int					mGuiParam_catchWarpPoint;
 
 	ofVideoGrabber		mVideoGrabber;
+	ofVideoPlayer		mVideoPlayer;
 
 	ofImage				mFinalSource_Large;
 	ofImage				mFinalSource_Small;
+	
+	ofImage				mFinalSource_FourSplit[4];
 };
 
 #endif /* defined(__dpHakoniwa_cameraUnit__dpCameraUnit_Input__) */
