@@ -21,6 +21,9 @@ public:
 	void setupOsc(string host,int port){
 		stepManager.setupOsc(host, port);
 	};
+	void setupUDP(string host,int port){
+		stepManager.setupUDP(host, port);
+	}
 
 	void update();
 	void draw();
@@ -43,6 +46,8 @@ public:
 	bool	enableSync;
 	int		id_offset;
 	bool	id_swap;
+
+	float		signal_step;
 };
 
 #endif /* defined(__motorTester__ParallelLinkManager__) */

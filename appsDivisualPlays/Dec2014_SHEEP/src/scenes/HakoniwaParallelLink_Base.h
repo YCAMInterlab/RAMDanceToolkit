@@ -30,6 +30,9 @@ public:
 	inline
 	string getName() const { return "HakoniwaParallelLink_Base"; }
 
+	virtual void onEnabled();
+	virtual void onDisabled();
+
 private:
 	ofxOscSender* mOscSender;
 	ramActor mActor;
@@ -42,9 +45,19 @@ private:
 	bool CalibratePose;
 	bool ManualPose;
 	bool mDigitalOut;
+	bool mTrackMachine;
+	float mPwm_Param;
+	
 	ofVec3f mManualPosition;
 	ofVec3f machinePosition;
 
+	ofxUICanvas* xyzGui;
+	ofxUICanvas* systemGui;
+	ofxUICanvas* settingGui;
+
+	float mSetting_Accel;
+	float mSetting_Deccel;
+	float mSetting_MaxSpeed;
 };
 
 

@@ -31,6 +31,9 @@ void ParallelLinkManager::setup(string serial){
 	enableSync = false;
 	id_offset = 0;
 	id_swap = true;
+
+	signal_step = 2;
+
 }
 
 void ParallelLinkManager::update(){
@@ -42,7 +45,7 @@ void ParallelLinkManager::update(){
 		stepManager.setStepperAll(false);
 	}
 
-	if (enableSync && (ofGetFrameNum() % 3 == 0)){
+	if (enableSync && (ofGetFrameNum() % (int)signal_step == 0)){
 		int ps[3];
 		for (int i = 0;i < 3;i++){
 			ps[i] = delta.actuator[(i+id_offset)%3].getGlobalOrientation().getEuler().x/2;

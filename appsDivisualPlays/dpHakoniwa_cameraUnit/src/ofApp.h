@@ -22,4 +22,6 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 	dpCameraUnit_Controller dpCameraUnit;
+
+	ofSerial ser;
 };
