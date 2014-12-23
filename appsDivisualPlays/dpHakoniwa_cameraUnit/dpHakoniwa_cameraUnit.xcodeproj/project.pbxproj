@@ -75,6 +75,7 @@
 		C6318F1A1A4329A2007DC4C8 /* ofxKsmrFragFXUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6318F161A4329A2007DC4C8 /* ofxKsmrFragFXUnit.cpp */; };
 		C6318F1B1A4329A2007DC4C8 /* ofxKsmrFragmentFx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6318F181A4329A2007DC4C8 /* ofxKsmrFragmentFx.cpp */; };
 		C6318F201A43E52E007DC4C8 /* dpCameraUnit_cvAnalysis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6318F1E1A43E52E007DC4C8 /* dpCameraUnit_cvAnalysis.cpp */; };
+		C6D4099D1A46DB83002D4C34 /* sw_1010F_SerialController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D4099B1A46DB83002D4C34 /* sw_1010F_SerialController.cpp */; };
 		C961BE22AB9A8CCF037FC18F /* ofxUITextArea.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBE31D52BCB0CE44B9D154F0 /* ofxUITextArea.cpp */; };
 		CE5D89B9893EAA12F511DCAC /* ofxUIWidgetWithLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5AD807D1AF254F978AB20B1C /* ofxUIWidgetWithLabel.cpp */; };
 		D3301F6A0B43BB293ED97C1D /* ofxCvShortImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A4DD23693DFAB8EC05FAA5D /* ofxCvShortImage.cpp */; };
@@ -365,6 +366,8 @@
 		C6318F1F1A43E52E007DC4C8 /* dpCameraUnit_cvAnalysis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpCameraUnit_cvAnalysis.h; path = dpCameraUnits/dpCameraUnit_cvAnalysis.h; sourceTree = "<group>"; };
 		C66C6414C8B86FDB99ED3B70 /* core.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = core.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/core.hpp; sourceTree = SOURCE_ROOT; };
 		C6937888E126BADC8777423B /* OscTypes.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = OscTypes.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscTypes.h; sourceTree = SOURCE_ROOT; };
+		C6D4099B1A46DB83002D4C34 /* sw_1010F_SerialController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sw_1010F_SerialController.cpp; path = utils/sw_1010F_SerialController.cpp; sourceTree = "<group>"; };
+		C6D4099C1A46DB83002D4C34 /* sw_1010F_SerialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sw_1010F_SerialController.h; path = utils/sw_1010F_SerialController.h; sourceTree = "<group>"; };
 		C76DE5C29BDBD2CAA1DD0021 /* ofxCvContourFinder.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxCvContourFinder.cpp; path = ../../../addons/ofxOpenCv/src/ofxCvContourFinder.cpp; sourceTree = SOURCE_ROOT; };
 		C7B4B8AD9464A693A3683D0F /* ofxUISpacer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUISpacer.h; path = ../../../addons/ofxUI/src/ofxUISpacer.h; sourceTree = SOURCE_ROOT; };
 		CBDE84185E2969BA4AB209FC /* general.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = general.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/general.h; sourceTree = SOURCE_ROOT; };
@@ -409,7 +412,7 @@
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
 		E4B69B5B0A3A1756003C02F2 /* dpHakoniwa_cameraUnitDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dpHakoniwa_cameraUnitDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
-		E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofApp.cpp; path = src/ofApp.cpp; sourceTree = SOURCE_ROOT; };
+		E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofApp.cpp; path = src/ofApp.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ofApp.h; path = src/ofApp.h; sourceTree = SOURCE_ROOT; };
 		E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = "openFrameworks-Info.plist"; sourceTree = "<group>"; };
 		E4C2424410CC5A17004149E2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -947,6 +950,15 @@
 			path = ../../../../ksmr/KsmrLib/ofxKsmrFragmentFx;
 			sourceTree = "<group>";
 		};
+		C6D4099E1A46DB88002D4C34 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				C6D4099C1A46DB83002D4C34 /* sw_1010F_SerialController.h */,
+				C6D4099B1A46DB83002D4C34 /* sw_1010F_SerialController.cpp */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
 		C756CAAFD542831674E15FE6 /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -1151,6 +1163,7 @@
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				C6318F051A432581007DC4C8 /* dpCameraUnit_Controller.h */,
+				C6D4099E1A46DB88002D4C34 /* utils */,
 				C6318F041A432581007DC4C8 /* dpCameraUnit_Controller.cpp */,
 				C6041E1E1A42EC210038CF31 /* dpCameraUnit_Input.h */,
 				C6041E1D1A42EC210038CF31 /* dpCameraUnit_Input.cpp */,
@@ -1394,6 +1407,7 @@
 				AE281BEBF3A00F1FC37F3DA0 /* ofxUIWaveform.cpp in Sources */,
 				82845E1F8C90E1F5A99D9868 /* ofxUIWidget.cpp in Sources */,
 				CE5D89B9893EAA12F511DCAC /* ofxUIWidgetWithLabel.cpp in Sources */,
+				C6D4099D1A46DB83002D4C34 /* sw_1010F_SerialController.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
