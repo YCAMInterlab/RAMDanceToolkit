@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxOsc.h"
+#include "ofxUI.h"
 
 class ofApp : public ofBaseApp {
 public:
@@ -19,21 +20,31 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
 
+    void guiEvent(ofxUIEventArgs &e);
+    
 private:
     void draw2LinesGraph();
     void drawClocks();
     void drawGrid();
     void drawCircle();
+    void drawScroll();
     
     enum Mode {
         MODE_TWO_LINES,
         MODE_CLOCKS,
         MODE_GRID,
         MODE_CIRCLE,
+        //MODE_SCROLL,
         NUM_MODE,
     };
     
+    ofxUICanvas *mGui;
+    ofEasyCam mCam;
+    
+    float mSensorScale;
     int mMode;
+    int mW;
+    int mH;
     
     ofxOscReceiver mOscReceiver;
     deque<ofVec2f> mBuffer;
@@ -44,11 +55,19 @@ private:
     
     vector<ofVec3f> mGridVertices;
     ofVbo mGridVbo;
-    int mW;
-    int mH;
+    deque<ofVec2f> mGridBuffer;
+    int mGridStep;
+    int mGridW;
+    int mGridH;
     
     deque<ofVec2f> mCircleBuffer;
     vector<ofVec3f> mCircleVertices;
     vector<ofFloatColor> mCircleColors;
     ofVbo mCircleVbo;
+    
+    deque<vector<ofVec2f> > mScrollBuffer;
+    float mScrollW;
+    float mScrollH;
+    int mScrollBufferSize;
+    
 };
