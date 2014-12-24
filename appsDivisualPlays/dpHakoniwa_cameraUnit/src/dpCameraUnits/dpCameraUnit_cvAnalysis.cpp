@@ -15,9 +15,12 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.addSpacer();
 	
 	mGui.addLabel("Switch");
+	mGui.addSpacer();
+	mGui.addLabel("OSCOption");
+	mGui.addSpacer();
 	mGui.addToggle("SendOSC",		&mEnableSendOSC);
 	mGui.addTextInput("OSCAddress", "localhost")->setAutoClear(false);
-	mGui.addTextInput("OSCPort", "10012")->setAutoClear(false);
+	mGui.addTextInput("OSCPort", "10000")->setAutoClear(false);
 	mGui.addToggle("ContourFinder", &mEnableContourFinder);
 	mGui.addToggle("OptFlow",		&mEnableOptFlow);
 	mGui.addToggle("Mean",			&mEnableMean);
@@ -28,10 +31,15 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 
 	mGui.addLabel("ContourFinder");
 	mGui.addSpacer();
+	mGui.addToggle("Blob"	, false);
+	mGui.addToggle("Pts"	, false);
 	mGui.addToggle("Simplify"		, &mParamCF_Simplify);
 	mGui.addToggle("UseTargetColor"	, &mParamCF_UseTargetColor);
 	mGui.addRangeSlider("Area", 0.0, 10000.0, &mParamCF_MinArea, &mParamCF_MaxArea);
 	mGui.addSlider("Threshold", 0.0, 255.0, &mParamCF_Threshold);
+	mGui.addLabel("OptFlow");
+	mGui.addSpacer();
+	mGui.addSlider("filter_Speed", 0.0, 100.0, &mOptFlow_filterSpd);
 
 	ofAddListener(mGui.newGUIEvent, this, &dpCameraUnit_cvAnalysis::guiEvent);
 	
@@ -40,14 +48,24 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 
 	mGui.autoSizeToFitWidgets();
 
-	sender.setup("localhost", 10012);
-	
+	//OSC Initialize
+	ofxUITextInput* addUI = (ofxUITextInput*)mGui.getWidget("OSCAddress");
+	ofxUITextInput* portUI = (ofxUITextInput*)mGui.getWidget("OSCPort");
+
+	int pt = ofToInt(portUI->getTextString());
+	string address = addUI->getTextString();
+
+	sender.setup(address, pt);
+
+
 	mEnableSendOSC			= false;
 	mEnableContourFinder	= false;
 	mEnableOptFlow			= false;
 	mEnableFAST				= false;
 	mEnableMean				= false;
 	mEnableHistgram			= false;
+	
+	mOptFlow_filterSpd = 100.0;
 	
 }
 
@@ -71,6 +89,13 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		mContFinder.findContours(pixGray);
 
 		for (int i = 0;i < mContFinder.getContours().size();i++){
+			ofVec2f center = ofxCv::toOf(mContFinder.getCenter(i));
+			ofxOscMessage m;
+			m.setAddress("/dp/cameraUnit/blob");
+			m.addIntArg(i);
+			m.addFloatArg(center.x);
+			m.addFloatArg(center.y);
+			sender.sendMessage(m);
 			for (int j = 0;j < mContFinder.getContour(i).size();j++){
 
 				if ((j % 5 == 0) && (mEnableSendOSC)){
@@ -112,7 +137,9 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		
 		for (int i = 0;i < 10;i++) mOptFlow_sumVecs[i].set(0.0,0.0);
 		for (int i = 0;i < mot.size();i++){
-			mOptFlow_sumVecs[i % 10] += mot[i];
+			if (mot[i].lengthSquared() < pow(mOptFlow_filterSpd,2.0f)){
+				mOptFlow_sumVecs[i % 10] += mot[i];
+			}
 		}
 		for (int i = 0;i < 10;i++){
 			mOptFlow_smoothVecs[i] += (mOptFlow_sumVecs[i] - mOptFlow_smoothVecs[i]) / 5.0;
@@ -121,15 +148,18 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		if (mEnableSendOSC){
 			for (int i = 0;i < 10;i++){
 				ofxOscMessage m;
-				m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector/"+ofToString(i));
-				m.addFloatArg(MIN(mOptFlow_smoothVecs[i].x,50.0));
-				m.addFloatArg(MIN(mOptFlow_smoothVecs[i].y,50.0));
+				m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector");
+				m.addIntArg(i);
+				m.addFloatArg(mOptFlow_smoothVecs[i].x);
+				m.addFloatArg(mOptFlow_smoothVecs[i].y);
 				sender.sendMessage(m);
 			}
+
 			for (int i = 0;i < 10;i++){
 				ofxOscMessage m;
-				m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector/length/"+ofToString(i));
-				m.addFloatArg(MIN(mOptFlow_smoothVecs[i].length(),50.0));
+				m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector/length");
+				m.addIntArg(i);
+				m.addFloatArg(mOptFlow_smoothVecs[i].length());
 				sender.sendMessage(m);
 			}
 		}
@@ -157,9 +187,8 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 		ofPushMatrix();
 		ofTranslate(160, 120);
 		for (int i = 0;i < 10;i++){
-			ofLine(0, 0, mOptFlow_smoothVecs[i].x, mOptFlow_smoothVecs[i].y);
+			ofLine(0, 0, mOptFlow_smoothVecs[i].x*4.0, mOptFlow_smoothVecs[i].y*4.0);
 			ofCircle(mOptFlow_smoothVecs[i], 3);
-			ofLine(i*20, 0,i*20,mOptFlow_smoothVecs[i].length());
 		}
 		ofPopMatrix();
 	}
@@ -195,8 +224,6 @@ void dpCameraUnit_cvAnalysis::guiEvent(ofxUIEventArgs &ev){
 			string address = addUI->getTextString();
 			
 			sender.setup(address, pt);
-			
-			cout << "Sender setuped :" << address << " : " << pt << endl;
 		}
 	}
 	if (w->getName() == "OSCPort"){
@@ -208,8 +235,7 @@ void dpCameraUnit_cvAnalysis::guiEvent(ofxUIEventArgs &ev){
 			string address = addUI->getTextString();
 			
 			sender.setup(address, pt);
-			
-			cout << "Sender setuped :" << address << " : " << pt << endl;
+
 		}
 	}
 	
