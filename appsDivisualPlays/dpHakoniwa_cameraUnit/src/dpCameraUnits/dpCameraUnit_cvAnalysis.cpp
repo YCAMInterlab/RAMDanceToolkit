@@ -141,7 +141,8 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		if (mEnableSendOSC){
 			for (int i = 0;i < 10;i++){
 				ofxOscMessage m;
-				m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector/"+ofToString(i));
+				m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector");
+				m.addIntArg(i);
 				m.addFloatArg(MIN(mOptFlow_smoothVecs[i].x,50.0));
 				m.addFloatArg(MIN(mOptFlow_smoothVecs[i].y,50.0));
 				sender.sendMessage(m);
@@ -149,7 +150,8 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 
 			for (int i = 0;i < 10;i++){
 				ofxOscMessage m;
-				m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector/length/"+ofToString(i));
+				m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector/length");
+				m.addIntArg(i);
 				m.addFloatArg(MIN(mOptFlow_smoothVecs[i].length(),50.0));
 				sender.sendMessage(m);
 			}
