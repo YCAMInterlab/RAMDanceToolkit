@@ -15,9 +15,12 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.addSpacer();
 	
 	mGui.addLabel("Switch");
+	mGui.addSpacer();
+	mGui.addLabel("OSCOption");
+	mGui.addSpacer();
 	mGui.addToggle("SendOSC",		&mEnableSendOSC);
 	mGui.addTextInput("OSCAddress", "localhost")->setAutoClear(false);
-	mGui.addTextInput("OSCPort", "10012")->setAutoClear(false);
+	mGui.addTextInput("OSCPort", "10000")->setAutoClear(false);
 	mGui.addToggle("ContourFinder", &mEnableContourFinder);
 	mGui.addToggle("OptFlow",		&mEnableOptFlow);
 	mGui.addToggle("Mean",			&mEnableMean);
@@ -28,6 +31,8 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 
 	mGui.addLabel("ContourFinder");
 	mGui.addSpacer();
+	mGui.addToggle("Blob"	, false);
+	mGui.addToggle("Pts"	, false);
 	mGui.addToggle("Simplify"		, &mParamCF_Simplify);
 	mGui.addToggle("UseTargetColor"	, &mParamCF_UseTargetColor);
 	mGui.addRangeSlider("Area", 0.0, 10000.0, &mParamCF_MinArea, &mParamCF_MaxArea);
@@ -40,8 +45,16 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 
 	mGui.autoSizeToFitWidgets();
 
-	sender.setup("localhost", 10012);
-	
+	//OSC Initialize
+	ofxUITextInput* addUI = (ofxUITextInput*)mGui.getWidget("OSCAddress");
+	ofxUITextInput* portUI = (ofxUITextInput*)mGui.getWidget("OSCPort");
+
+	int pt = ofToInt(portUI->getTextString());
+	string address = addUI->getTextString();
+
+	sender.setup(address, pt);
+
+
 	mEnableSendOSC			= false;
 	mEnableContourFinder	= false;
 	mEnableOptFlow			= false;
@@ -71,6 +84,13 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		mContFinder.findContours(pixGray);
 
 		for (int i = 0;i < mContFinder.getContours().size();i++){
+			ofVec2f center = ofxCv::toOf(mContFinder.getCenter(i));
+			ofxOscMessage m;
+			m.setAddress("/dp/cameraUnit/blob");
+			m.addIntArg(i);
+			m.addFloatArg(center.x);
+			m.addFloatArg(center.y);
+			sender.sendMessage(m);
 			for (int j = 0;j < mContFinder.getContour(i).size();j++){
 
 				if ((j % 5 == 0) && (mEnableSendOSC)){
@@ -126,6 +146,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 				m.addFloatArg(MIN(mOptFlow_smoothVecs[i].y,50.0));
 				sender.sendMessage(m);
 			}
+
 			for (int i = 0;i < 10;i++){
 				ofxOscMessage m;
 				m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector/length/"+ofToString(i));
@@ -159,7 +180,6 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 		for (int i = 0;i < 10;i++){
 			ofLine(0, 0, mOptFlow_smoothVecs[i].x, mOptFlow_smoothVecs[i].y);
 			ofCircle(mOptFlow_smoothVecs[i], 3);
-			ofLine(i*20, 0,i*20,mOptFlow_smoothVecs[i].length());
 		}
 		ofPopMatrix();
 	}
@@ -195,8 +215,6 @@ void dpCameraUnit_cvAnalysis::guiEvent(ofxUIEventArgs &ev){
 			string address = addUI->getTextString();
 			
 			sender.setup(address, pt);
-			
-			cout << "Sender setuped :" << address << " : " << pt << endl;
 		}
 	}
 	if (w->getName() == "OSCPort"){
@@ -208,8 +226,7 @@ void dpCameraUnit_cvAnalysis::guiEvent(ofxUIEventArgs &ev){
 			string address = addUI->getTextString();
 			
 			sender.setup(address, pt);
-			
-			cout << "Sender setuped :" << address << " : " << pt << endl;
+
 		}
 	}
 	
