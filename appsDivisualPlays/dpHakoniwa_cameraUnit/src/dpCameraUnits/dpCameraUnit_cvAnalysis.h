@@ -56,6 +56,7 @@ public:
 	//Analysis Variables
 	ofVec2f mOptFlow_sumVecs[10];
 	ofVec2f mOptFlow_smoothVecs[10];
+	float mOptFlow_filterSpd;
 };
 
 #endif /* defined(__dpHakoniwa_cameraUnit__dpCameraUnit_cvAnalysis__) */

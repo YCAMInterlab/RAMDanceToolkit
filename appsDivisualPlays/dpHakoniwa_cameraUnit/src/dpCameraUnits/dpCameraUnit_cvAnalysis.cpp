@@ -37,6 +37,9 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.addToggle("UseTargetColor"	, &mParamCF_UseTargetColor);
 	mGui.addRangeSlider("Area", 0.0, 10000.0, &mParamCF_MinArea, &mParamCF_MaxArea);
 	mGui.addSlider("Threshold", 0.0, 255.0, &mParamCF_Threshold);
+	mGui.addLabel("OptFlow");
+	mGui.addSpacer();
+	mGui.addSlider("filter_Speed", 0.0, 100.0, &mOptFlow_filterSpd);
 
 	ofAddListener(mGui.newGUIEvent, this, &dpCameraUnit_cvAnalysis::guiEvent);
 	
@@ -61,6 +64,8 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mEnableFAST				= false;
 	mEnableMean				= false;
 	mEnableHistgram			= false;
+	
+	mOptFlow_filterSpd = 100.0;
 	
 }
 
@@ -132,7 +137,9 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		
 		for (int i = 0;i < 10;i++) mOptFlow_sumVecs[i].set(0.0,0.0);
 		for (int i = 0;i < mot.size();i++){
-			mOptFlow_sumVecs[i % 10] += mot[i];
+			if (mot[i].lengthSquared() < pow(mOptFlow_filterSpd,2.0f)){
+				mOptFlow_sumVecs[i % 10] += mot[i];
+			}
 		}
 		for (int i = 0;i < 10;i++){
 			mOptFlow_smoothVecs[i] += (mOptFlow_sumVecs[i] - mOptFlow_smoothVecs[i]) / 5.0;
@@ -143,8 +150,8 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 				ofxOscMessage m;
 				m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector");
 				m.addIntArg(i);
-				m.addFloatArg(MIN(mOptFlow_smoothVecs[i].x,50.0));
-				m.addFloatArg(MIN(mOptFlow_smoothVecs[i].y,50.0));
+				m.addFloatArg(mOptFlow_smoothVecs[i].x);
+				m.addFloatArg(mOptFlow_smoothVecs[i].y);
 				sender.sendMessage(m);
 			}
 
@@ -152,7 +159,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 				ofxOscMessage m;
 				m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector/length");
 				m.addIntArg(i);
-				m.addFloatArg(MIN(mOptFlow_smoothVecs[i].length(),50.0));
+				m.addFloatArg(mOptFlow_smoothVecs[i].length());
 				sender.sendMessage(m);
 			}
 		}
@@ -180,7 +187,7 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 		ofPushMatrix();
 		ofTranslate(160, 120);
 		for (int i = 0;i < 10;i++){
-			ofLine(0, 0, mOptFlow_smoothVecs[i].x, mOptFlow_smoothVecs[i].y);
+			ofLine(0, 0, mOptFlow_smoothVecs[i].x*4.0, mOptFlow_smoothVecs[i].y*4.0);
 			ofCircle(mOptFlow_smoothVecs[i], 3);
 		}
 		ofPopMatrix();
