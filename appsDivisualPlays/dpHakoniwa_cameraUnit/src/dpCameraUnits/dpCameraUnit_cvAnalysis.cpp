@@ -40,6 +40,7 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.addLabel("OptFlow");
 	mGui.addSpacer();
 	mGui.addSlider("filter_Speed", 0.0, 100.0, &mOptFlow_filterSpd);
+	mGui.addSlider("smooth", 1.0, 10.0, &mOptFlowSmooth);
 
 	ofAddListener(mGui.newGUIEvent, this, &dpCameraUnit_cvAnalysis::guiEvent);
 	
@@ -136,13 +137,20 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		vector <ofVec2f> mot = mOptFlow.getMotion();
 		
 		for (int i = 0;i < 10;i++) mOptFlow_sumVecs[i].set(0.0,0.0);
+		
+		mOptFlow_angleVec = ofVec2f(0.0,0.0);
+		
 		for (int i = 0;i < mot.size();i++){
 			if (mot[i].lengthSquared() < pow(mOptFlow_filterSpd,2.0f)){
 				mOptFlow_sumVecs[i % 10] += mot[i];
+				mOptFlow_angleVec += mot[i];
 			}
 		}
+		mOptFlow_angleVec /= 100.0;
+
+		
 		for (int i = 0;i < 10;i++){
-			mOptFlow_smoothVecs[i] += (mOptFlow_sumVecs[i] - mOptFlow_smoothVecs[i]) / 5.0;
+			mOptFlow_smoothVecs[i] += (mOptFlow_sumVecs[i] - mOptFlow_smoothVecs[i]) / mOptFlowSmooth;
 		}
 		
 		if (mEnableSendOSC){
@@ -162,6 +170,13 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 				m.addFloatArg(mOptFlow_smoothVecs[i].length());
 				sender.sendMessage(m);
 			}
+			
+			ofxOscMessage m;
+			m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector/total");
+			m.addFloatArg(mOptFlow_angleVec.x);
+			m.addFloatArg(mOptFlow_angleVec.y);
+			
+			sender.sendMessage(m);
 		}
 	}
 
@@ -190,6 +205,8 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 			ofLine(0, 0, mOptFlow_smoothVecs[i].x*4.0, mOptFlow_smoothVecs[i].y*4.0);
 			ofCircle(mOptFlow_smoothVecs[i], 3);
 		}
+		ofSetColor(0, 255, 0);
+		ofLine(0, 0, mOptFlow_angleVec.x*30.0, mOptFlow_angleVec.y*30.0);
 		ofPopMatrix();
 	}
 
