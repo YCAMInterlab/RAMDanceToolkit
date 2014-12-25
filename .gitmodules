@@ -16,3 +16,9 @@
 [submodule "addons/ofxDmx"]
 	path = addons/ofxDmx
 	url = https://github.com/kylemcdonald/ofxDmx.git
+[submodule "addons/ofxException"]
+	path = addons/ofxException
+	url = https://github.com/YoshitoONISHI/ofxException
+[submodule "addons/ofxEvent"]
+	path = addons/ofxEvent
+	url = https://github.com/YoshitoONISHI/ofxEvent
