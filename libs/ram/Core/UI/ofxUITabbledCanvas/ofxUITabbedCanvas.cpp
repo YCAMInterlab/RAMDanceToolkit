@@ -83,7 +83,8 @@ void ofxUICanvasPlus::saveSettingsToXml(ofxXmlSettings& xml) {
 		if(xml.pushTag("Widget", index)) {
 			xml.setValue("Kind", widgetsWithState[i]->getKind(), 0);
 			xml.setValue("Name", widgetsWithState[i]->getName(), 0);
-			writeSpecificWidgetData(widgetsWithState[i], &xml); 
+			//writeSpecificWidgetData(widgetsWithState[i], &xml);
+            widgetsWithState[i]->saveState(&xml);
 		}
 		xml.popTag();                            
 	}
@@ -96,7 +97,8 @@ void ofxUICanvasPlus::loadSettingsFromXml(ofxXmlSettings& xml) {
 		string name = xml.getValue("Name", "NULL", 0);
 		ofxUIWidget *widget = getWidget(name); 
 		if(widget != NULL) {
-			loadSpecificWidgetData(widget, &xml); 
+			//loadSpecificWidgetData(widget, &xml);
+            widget->loadState(&xml);
 			triggerEvent(widget); 
 		}
 		xml.popTag(); 

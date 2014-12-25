@@ -59,12 +59,3 @@ else
 	echo "end clone addons"
 	cd ../
 fi
-
-
-# apply ofxUI patch
-
-echo "[start running patch for modify ofxUI]"
-cd addons/ofxUI
-patch -p0 < ../ofxUI.patch
-cd ../../
-echo "end apply patch."
