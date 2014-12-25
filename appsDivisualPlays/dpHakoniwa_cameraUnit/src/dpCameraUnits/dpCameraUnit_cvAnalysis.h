@@ -54,9 +54,11 @@ public:
 	string hakoniwa_name;
 	
 	//Analysis Variables
+	ofVec2f mOptFlow_angleVec;
 	ofVec2f mOptFlow_sumVecs[10];
 	ofVec2f mOptFlow_smoothVecs[10];
 	float mOptFlow_filterSpd;
+	float mOptFlowSmooth;
 };
 
 #endif /* defined(__dpHakoniwa_cameraUnit__dpCameraUnit_cvAnalysis__) */

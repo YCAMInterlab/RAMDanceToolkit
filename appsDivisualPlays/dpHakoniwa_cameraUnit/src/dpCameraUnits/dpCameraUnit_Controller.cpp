@@ -19,7 +19,7 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 
 	cvAnalysis[0].hakoniwa_name = "sand";
 	cvAnalysis[1].hakoniwa_name = "pendulum";
-	cvAnalysis[2].hakoniwa_name = "hakoniwa_C";
+	cvAnalysis[2].hakoniwa_name = "struggle";
 	cvAnalysis[3].hakoniwa_name = "hakoniwa_D";
 
 //	simulator_initialize();
