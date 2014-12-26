@@ -34,12 +34,22 @@ SceneManager::~SceneManager()
 
 void SceneManager::add(SceneBase::Ptr scene)
 {
+    const string className = scene->getName();
+    
     if (mScenes.empty() == false) {
-        const string className = scene->getName();
         if (findScene(className) != mScenes.end())
             ofxThrowExceptionf(ofxException,
                                "class %s is already exists",
                                className.c_str());
+        
+        for (auto& s : mScenes) {
+            if (s == scene) {
+                ofxThrowExceptionf(ofxException,
+                                   "same instance %s %x is already exists",
+                                   className.c_str(),
+                                   s.get());
+            }
+        }
     }
     scene->initialize();
     

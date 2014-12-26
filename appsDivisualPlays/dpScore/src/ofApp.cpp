@@ -11,7 +11,10 @@ void ofApp::setup()
 {
     ofSetFrameRate(kFrameRate);
     ofBackground(ofColor::black);
+    
+#ifdef DEBUG
     ofSetLogLevel(OF_LOG_VERBOSE);
+#endif
     
     OFX_BEGIN_EXCEPTION_HANDLING
     
@@ -25,12 +28,19 @@ void ofApp::setup()
     mSceneManager.add(vec2Grid);
     mSceneManager.add(vec2Plotter);
     
-    mSceneManager.change(3);
-    mSceneManager.change<SceneVec2SimpleGraph>();
-    mSceneManager.change("SceneVec2Clocks");
+    // make another instance for existing class
+    //auto vec2Simple2 = SceneBase::Ptr(new SceneVec2SimpleGraph());
+    //vec2Simple2->setName("SceneVec2SimpleGraph 2"); // set unique name
+    //mSceneManager.add(vec2Simple2);
     
-    mSceneManager.getTabBar()->loadSettings(kSettingsDir,
-                                            kSettingsPrefix);
+    // we can't change the name after added it into scene manager
+    //vec2Simple->setName("SceneVec2SimpleGraph renamed");
+    
+    //mSceneManager.change(3);
+    //mSceneManager.change("dp::score::SceneVec2Clocks");
+    mSceneManager.change<SceneVec2SimpleGraph>();
+    
+    mSceneManager.getTabBar()->loadSettings(kSettingsDir, kSettingsPrefix);
     mSceneManager.getTabBar()->setVisible(false);
     
     mOscReceiver.setup(kOscClientPort);
@@ -92,8 +102,7 @@ void ofApp::keyPressed(int key)
             mSceneManager.getTabBar()->toggleVisible();
             break;
         case 's':
-            mSceneManager.getTabBar()->saveSettings(kSettingsDir,
-                                                    kSettingsPrefix);
+            mSceneManager.getTabBar()->saveSettings(kSettingsDir, kSettingsPrefix);
             break;
         case OF_KEY_LEFT:
             mSceneManager.prev();
