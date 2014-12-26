@@ -10,7 +10,7 @@
 
 dpCameraUnit_input::dpCameraUnit_input(){
 
-	mVideoPlayer.loadMovie("hakoniwa_split_2.mov");
+	mVideoPlayer.loadMovie("prizm20141225_2.mov");//("hakoniwa_split_2.mov");
 	mVideoPlayer.setVolume(0.0);
 	
 	mCameraList.push_back("None");
