@@ -16,6 +16,7 @@ HakoniwaParallelLink_Base::HakoniwaParallelLink_Base(){
 //    mLinkManager.setup("cu.usbmodem1142");
 //    mLinkManager.setupOsc("192.168.20.38", 12345);
 //    mLinkManager.setupOsc("192.168.20.38", 8528);
+//
     
 	mLinkManager.height = 250.0;
 
