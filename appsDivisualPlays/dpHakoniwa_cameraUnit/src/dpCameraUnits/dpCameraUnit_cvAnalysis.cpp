@@ -89,28 +89,41 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 
 		mContFinder.findContours(pixGray);
 
+		pts.clear();
 		for (int i = 0;i < mContFinder.getContours().size();i++){
-			ofVec2f center = ofxCv::toOf(mContFinder.getCenter(i));
+			
+			ofRectangle rt = ofxCv::toOf(mContFinder.getBoundingRect(i));
 			ofxOscMessage m;
-			m.setAddress("/dp/cameraUnit/blob");
+			m.setAddress("dp/cameraUnit/"+hakoniwa_name+"/contour/boundingRect");
 			m.addIntArg(i);
-			m.addFloatArg(center.x);
-			m.addFloatArg(center.y);
+			m.addFloatArg(rt.x);
+			m.addFloatArg(rt.y);
+			m.addFloatArg(rt.width);
+			m.addFloatArg(rt.height);
 			sender.sendMessage(m);
+			
+			ofxOscMessage mm;
+			mm.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/blob");
+			mm.addIntArg(i);
+			
+			int cnt = 0;
+			for (int j = 0;j < mContFinder.getContour(i).size();j++){
+				cnt++;
+			}
+			
+			mm.addIntArg(cnt);
+			
 			for (int j = 0;j < mContFinder.getContour(i).size();j++){
 
-				if ((j % 5 == 0) && (mEnableSendOSC)){
+				if (mEnableSendOSC){
 					ofVec2f pt = ofxCv::toOf(mContFinder.getContour(i)[j]);
-					ofxOscMessage m;
-					m.setAddress("/dp/cameraUnit/contour");
-					m.addIntArg(i);
-					m.addIntArg(j);
-					m.addFloatArg(pt.x);
-					m.addFloatArg(pt.y);
-					sender.sendMessage(m);
+					mm.addFloatArg(pt.x);
+					mm.addFloatArg(pt.y);
+					pts.push_back(ofVec2f(pt));
 				}
-
 			}
+
+			sender.sendMessage(mm);
 		}
 
 	}
@@ -187,6 +200,13 @@ void dpCameraUnit_cvAnalysis::drawUI(int x, int y){
 }
 
 void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
+	
+//	for (int i = 0;i < pts.size();i++){
+//		cout << "Circle" << i << endl;
+//		ofCircle(pts[i], 5);
+//	}
+	
+	
 	ofPushMatrix();
 	ofTranslate(x, y);
 	glScaled(scale, scale, scale);

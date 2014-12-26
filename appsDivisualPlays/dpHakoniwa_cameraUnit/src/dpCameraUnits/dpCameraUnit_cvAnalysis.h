@@ -59,6 +59,8 @@ public:
 	ofVec2f mOptFlow_smoothVecs[10];
 	float mOptFlow_filterSpd;
 	float mOptFlowSmooth;
+	
+	vector <ofVec2f> pts;
 };
 
 #endif /* defined(__dpHakoniwa_cameraUnit__dpCameraUnit_cvAnalysis__) */
