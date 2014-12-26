@@ -16,7 +16,8 @@ mSceneId(0)
     
     mTabBar = new ofxUITabBar();
     mTabBar->setPosition(20.f, 40.f);
-    mTabBar->setColorBack(ofColor(ofColor::black, 200));
+    mTabBar->addToggle("Update All", &mUpdateAll);
+    mTabBar->addSpacer();
 }
 
 dpScoreSceneManager::~dpScoreSceneManager()
@@ -32,7 +33,7 @@ dpScoreSceneManager::~dpScoreSceneManager()
 void dpScoreSceneManager::addScene(dpScoreBase::Ptr scene)
 {
     if (mScenes.empty() == false) {
-        const string className = dpGetClassName(*scene);
+        const string className = scene->getName();
         if (findScene(className) != mScenes.end())
             ofxThrowExceptionf(ofxException,
                                "class %s is already exists",
@@ -107,13 +108,63 @@ void dpScoreSceneManager::setUpdateAll(bool update)
     mUpdateAll = update;
 }
 
+void dpScoreSceneManager::keyPressed(int key)
+{
+    if (mCurrentScene) mCurrentScene->keyPressed(key);
+}
+
+void dpScoreSceneManager::keyReleased(int key)
+{
+    if (mCurrentScene) mCurrentScene->keyReleased(key);
+}
+
+void dpScoreSceneManager::mouseMoved(int x, int y)
+{
+    if (mCurrentScene) mCurrentScene->mouseMoved(x, y);
+}
+
+void dpScoreSceneManager::mouseDragged(int x, int y, int button)
+{
+    if (mCurrentScene) mCurrentScene->mouseDragged(x, y, button);
+}
+
+void dpScoreSceneManager::mousePressed(int x, int y, int button)
+{
+    if (mCurrentScene) mCurrentScene->mousePressed(x, y, button);
+}
+
+void dpScoreSceneManager::mouseReleased(int x, int y, int button)
+{
+    if (mCurrentScene) mCurrentScene->mouseReleased(x, y, button);
+}
+
+void dpScoreSceneManager::windowResized(int w, int h)
+{
+    if (mCurrentScene) mCurrentScene->windowResized(w, h);
+}
+
+void dpScoreSceneManager::dragEvent(ofDragInfo dragInfo)
+{
+    if (mCurrentScene) mCurrentScene->dragEvent(dragInfo);
+}
+
+void dpScoreSceneManager::gotMessage(ofMessage msg)
+{
+    if (mCurrentScene) mCurrentScene->gotMessage(msg);
+}
+
+void dpScoreSceneManager::guiEvent(ofxUIEventArgs &e)
+{
+    
+}
+
 dpScoreSceneManager::SceneVec::iterator
 dpScoreSceneManager::findScene(const string& name)
 {
-    auto comarator = [&](const dpScoreBase::Ptr& rhs)
-    {
-        return name == dpGetClassName(*rhs);
-    };
-    
-    return find_if(mScenes.begin(), mScenes.end(), comarator);
+    return find_if(mScenes.begin(),
+                   mScenes.end(),
+                   [&](const dpScoreBase::Ptr& rhs)
+                   {
+                       return name == rhs->getName();
+                   });
 }

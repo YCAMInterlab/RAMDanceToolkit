@@ -45,8 +45,11 @@ public:
     int getId() const { return mId; }
     void setId(int id) { mId = id; }
     
+    const string& getName();
+    
 protected:
     ofxUICanvas* mUICanvas;
+    string mName;
     int mId;
     
 };

@@ -18,10 +18,9 @@ void dpScoreVec2SimpleGraph::initialize()
     mBuffer.clear();
     mBuffer.assign(kW/mStep, ofVec2f::zero());
  
-    const string name = dpGetClassName(*this);
     mUICanvas = new ofxUICanvas();
-    mUICanvas->setName(name);
-    mUICanvas->addLabel(name);
+    mUICanvas->setName(getName());
+    mUICanvas->addLabel(getName());
     mUICanvas->addSpacer();
     mUICanvas->addIntSlider("Step", 1, 10, &mStep);
     mUICanvas->addSlider("Sensor Scale", 0.f, 2.f, &mSensorScale);

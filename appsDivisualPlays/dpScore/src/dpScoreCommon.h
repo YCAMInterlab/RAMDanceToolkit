@@ -16,6 +16,14 @@
 extern const int kW;
 extern const int kH;
 
+extern const int dpScoreFrameRate;
+extern const int dpScoreOscClientPort;
+
+extern const string dpOscAddrCameraUnitPendulumVector;
+
+extern const string dpScoreSettingsDir;
+extern const string dpScoreSettingsPrefix;
+
 extern const string dpScoreMessageVec2;
 extern const string dpScoreMessageVec2Arr;
 

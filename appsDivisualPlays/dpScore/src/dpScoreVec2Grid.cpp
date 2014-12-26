@@ -25,10 +25,9 @@ void dpScoreVec2Grid::initialize()
                            mGridVertices.size(),
                            GL_DYNAMIC_DRAW);
     
-    const string name = dpGetClassName(*this);
     mUICanvas = new ofxUICanvas();
-    mUICanvas->setName(name);
-    mUICanvas->addLabel(name);
+    mUICanvas->setName(getName());
+    mUICanvas->addLabel(getName());
     mUICanvas->addSpacer();
     mUICanvas->addSlider("Sensor Scale", 0.f, 2.f, &mSensorScale);
 }

@@ -9,7 +9,14 @@
 #include "dpScoreBase.h"
 
 dpScoreBase::dpScoreBase() :
-mUICanvas(NULL)
+mUICanvas(NULL),
+mName("")
 {
-    
+}
+
+const string& dpScoreBase::getName()
+{
+    if (mName == "")
+        mName = dpGetClassName(*this);
+    return mName;
 }

@@ -12,6 +12,14 @@
 const int kW = 1280;
 const int kH = 768;
 
+const int dpScoreFrameRate = 30;
+const int dpScoreOscClientPort = 10000;
+
+const string dpOscAddrCameraUnitPendulumVector = "/dp/cameraUnit/pendulum/vector";
+
+const string dpScoreSettingsDir = "settings/";
+const string dpScoreSettingsPrefix = "scoreUI-";
+
 const string dpScoreMessageVec2 = "/dp/score/vec2";
 const string dpScoreMessageVec2Arr = "/dp/score/vec2Arr";
 
