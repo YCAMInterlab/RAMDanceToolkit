@@ -56,6 +56,12 @@ else
 	git checkout a45ff5e
 	cd ../
 
+	# ofxDelaunay
+	git clone git@github.com:obviousjim/ofxDelaunay.git
+	cd ofxDelaunay
+	git checkout 957f902
+	cd ../
+
 	echo "end clone addons"
 	cd ../
 fi

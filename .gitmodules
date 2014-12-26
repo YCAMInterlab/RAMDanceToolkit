@@ -22,3 +22,9 @@
 [submodule "addons/ofxEvent"]
 	path = addons/ofxEvent
 	url = https://github.com/YoshitoONISHI/ofxEvent
+[submodule "addons/ofxQuadWarp"]
+	path = addons/ofxQuadWarp
+	url = https://github.com/julapy/ofxQuadWarp
+[submodule "addons/ofxDelaunay"]
+	path = addons/ofxDelaunay
+	url = https://github.com/obviousjim/ofxDelaunay
