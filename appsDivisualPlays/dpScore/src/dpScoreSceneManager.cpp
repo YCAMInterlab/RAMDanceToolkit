@@ -30,7 +30,7 @@ dpScoreSceneManager::~dpScoreSceneManager()
     for (auto& scene : mScenes) scene->shutDown();
 }
 
-void dpScoreSceneManager::addScene(dpScoreBase::Ptr scene)
+void dpScoreSceneManager::add(dpScoreBase::Ptr scene)
 {
     if (mScenes.empty() == false) {
         const string className = scene->getName();

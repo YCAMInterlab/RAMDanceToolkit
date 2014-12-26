@@ -18,7 +18,7 @@ public:
     dpScoreSceneManager();
     ~dpScoreSceneManager();
     
-    void addScene(dpScoreBase::Ptr scene);
+    void add(dpScoreBase::Ptr scene);
     void next();
     void prev();
     void change(int i);

@@ -18,10 +18,10 @@ void ofApp::setup()
     auto vec2Grid = dpScoreBase::Ptr(new dpScoreVec2Grid());
     auto vec2Plotter = dpScoreBase::Ptr(new dpScoreVec2Plotter());
     
-    mSceneManager.addScene(vec2Simple);
-    mSceneManager.addScene(vec2Clocks);
-    mSceneManager.addScene(vec2Grid);
-    mSceneManager.addScene(vec2Plotter);
+    mSceneManager.add(vec2Simple);
+    mSceneManager.add(vec2Clocks);
+    mSceneManager.add(vec2Grid);
+    mSceneManager.add(vec2Plotter);
     
     mSceneManager.change<dpScoreVec2SimpleGraph>();
     

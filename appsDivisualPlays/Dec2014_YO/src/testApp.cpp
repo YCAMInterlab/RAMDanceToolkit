@@ -33,6 +33,7 @@ void testApp::setup()
 	ramSceneManager& sceneManager = ramSceneManager::instance();
     sceneManager.addScene( hakoniwaOscTest.getPtr() );
 	sceneManager.addScene( hakoniwaColorOfWater.getPtr() );
+    sceneManager.addScene( hakovisLaser.getPtr() );
 	
 }
 

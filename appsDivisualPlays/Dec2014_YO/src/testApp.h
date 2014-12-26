@@ -25,6 +25,7 @@
  */
 #include "HakoniwaOscTest.h"
 #include "HakoniwaColorOfWater.h"
+#include "HakovisLaser.h"
 
 class testApp : public ramBaseApp
 {
@@ -57,4 +58,5 @@ public:
     
     HakoniwaOscTest hakoniwaOscTest;
     HakoniwaColorOfWater hakoniwaColorOfWater;
+    HakovisLaser hakovisLaser;
 };
