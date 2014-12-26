@@ -46,7 +46,8 @@ void HakoniwaGearMove::drawActor(const ramActor &actor)
         ofNode nodePosition = actor.getNode(nodeNumber);
         ofNode nodePositionBefore = actor.getNode(nodeNumberBefore);
         ofVec3f euler = converter.convertAxis(nodePosition, nodePositionBefore);
-        KsmrStep.go_to(euler[axisNum]);
+        
+        KsmrStep.go_to( ofMap(euler[axisNum], 0, 360, 0, 200));
         cout << euler[axisNum] << endl;
     }
     

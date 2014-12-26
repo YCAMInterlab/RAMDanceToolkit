@@ -1,20 +1,22 @@
 //
-//  dpScoreVec2SimpleGraph.h
+//  dpScoreSceneVec2SimpleGraph.h
 //  dpScore
 //
 //  Created by YoshitoONISHI on 12/25/14.
 //
 //
 
-#ifndef __dpScore__dpScoreVec2SimpleGraph__
-#define __dpScore__dpScoreVec2SimpleGraph__
+#ifndef __dpScore__SceneVec2SimpleGraph__
+#define __dpScore__SceneVec2SimpleGraph__
 
-#include "dpScoreBase.h"
+#include "dpScoreSceneBase.h"
 
-class dpScoreVec2SimpleGraph final : public dpScoreBase {
+DP_SCORE_NAMESPACE_BEGIN
+
+class SceneVec2SimpleGraph final : public SceneBase {
 public:
-    dpScoreVec2SimpleGraph() {}
-    virtual ~dpScoreVec2SimpleGraph() {}
+    SceneVec2SimpleGraph() {}
+    virtual ~SceneVec2SimpleGraph() {}
     
     void initialize() override;
     void shutDown() override;
@@ -33,4 +35,6 @@ private:
     
 };
 
-#endif /* defined(__dpScore__dpScoreVec2SimpleGraph__) */
+DP_SCORE_NAMESPACE_END
+
+#endif /* defined(__dpScore__SceneVec2SimpleGraph__) */

@@ -1,15 +1,16 @@
 //
-//  dpScoreVec2SimpleGraph.cpp
+//  dpScoreSceneVec2SimpleGraph.cpp
 //  dpScore
 //
 //  Created by YoshitoONISHI on 12/25/14.
 //
 //
 
-#include "dpScoreVec2SimpleGraph.h"
+#include "dpScoreSceneVec2SimpleGraph.h"
 
+DP_SCORE_NAMESPACE_BEGIN
 
-void dpScoreVec2SimpleGraph::initialize()
+void SceneVec2SimpleGraph::initialize()
 {
     dpDebugFunc();
     
@@ -26,7 +27,7 @@ void dpScoreVec2SimpleGraph::initialize()
     mUICanvas->addSlider("Sensor Scale", 0.f, 2.f, &mSensorScale);
 }
 
-void dpScoreVec2SimpleGraph::shutDown()
+void SceneVec2SimpleGraph::shutDown()
 {
     dpDebugFunc();
     
@@ -36,19 +37,19 @@ void dpScoreVec2SimpleGraph::shutDown()
     }
 }
 
-void dpScoreVec2SimpleGraph::enter()
+void SceneVec2SimpleGraph::enter()
 {
     dpDebugFunc();
 }
 
-void dpScoreVec2SimpleGraph::exit()
+void SceneVec2SimpleGraph::exit()
 {
     dpDebugFunc();
 }
 
-void dpScoreVec2SimpleGraph::update(ofxEventMessage& m)
+void SceneVec2SimpleGraph::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == dpScoreMessageVec2) {
+    if (m.getAddress() == kAddrVec2) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);
         mBuffer.push_back(mVec);
@@ -58,7 +59,7 @@ void dpScoreVec2SimpleGraph::update(ofxEventMessage& m)
     }
 }
 
-void dpScoreVec2SimpleGraph::draw()
+void SceneVec2SimpleGraph::draw()
 {
     ofPushStyle();
     ofEnableAlphaBlending();
@@ -69,23 +70,23 @@ void dpScoreVec2SimpleGraph::draw()
     ofDrawBitmapString("Dividual Plays System Score - A", 12.f, 16.f);
     
     ofPushMatrix();
-    ofTranslate(0.f, dpAlign(20.f));
+    ofTranslate(0.f, alignf(20.f));
     ofLine(10.f, 0.f, kW-10.f, 0.f);
     const float step = kW / 210;
     for (int i=0; i<=210; i++) {
         int height = 5;
         if (i%10==0) height = 8;
-        ofLine(dpAlign(10.f+i*step), 0.f, dpAlign(10.f+i*step), height);
+        ofLine(alignf(10.f+i*step), 0.f, alignf(10.f+i*step), height);
     }
     ofPopMatrix();
     
     ofPushMatrix();
-    ofTranslate(0.f, dpAlign(kH-10.f));
+    ofTranslate(0.f, alignf(kH-10.f));
     ofLine(10.f, 0.f, kW-10.f, 0.f);
     for (int i=0; i<=210; i++) {
         int height = 5;
         if (i%10==0) height = 8;
-        ofLine(dpAlign(10.f+i*step), 0.f, dpAlign(10.f+i*step), -height);
+        ofLine(alignf(10.f+i*step), 0.f, alignf(10.f+i*step), -height);
     }
     ofPopMatrix();
     
@@ -93,11 +94,11 @@ void dpScoreVec2SimpleGraph::draw()
     for (int i=0; i<=100; i++) {
         int width = 5.f;
         if (i%10 == 0) width = 8;
-        ofLine(0.f, dpAlign(40.f+i*stepY), width, dpAlign(40.f+i*stepY));
+        ofLine(0.f, alignf(40.f+i*stepY), width, alignf(40.f+i*stepY));
     }
     
     ofSetColor(ofColor::white, 150);
-    ofTranslate(20.f, dpAlign(kH*0.5f+5.f));
+    ofTranslate(20.f, alignf(kH*0.5f+5.f));
     ofLine(0.f, 0.f, kW, 0.f);
     
     const float mult = kH / 40.f * mSensorScale;
@@ -109,21 +110,23 @@ void dpScoreVec2SimpleGraph::draw()
             ofVec2f v1 = mBuffer.at(i+1);
             v0 *= mult;
             v1 *= mult;
-            ofLine(dpAlign(i*mStep), dpAlign(v0.x),
-                   dpAlign((i+1)*mStep), dpAlign(v1.x));
-            ofLine(dpAlign(i*mStep), dpAlign(v0.y),
-                   dpAlign((i+1)*mStep), dpAlign(v1.y));
+            ofLine(alignf(i*mStep), alignf(v0.x),
+                   alignf((i+1)*mStep), alignf(v1.x));
+            ofLine(alignf(i*mStep), alignf(v0.y),
+                   alignf((i+1)*mStep), alignf(v1.y));
         }
     }
     ofPopMatrix();
     
     ofPushMatrix();
-    ofTranslate(0.f, dpAlign(kH*0.5f+5.f));
+    ofTranslate(0.f, alignf(kH*0.5f+5.f));
     ofSetColor(255, 0, 0, 255);
     ofSetLineWidth(2.f);
     const ofVec2f v = mVec * mult;
-    ofLine(ofGetWidth()-14.f, dpAlign(v.x), ofGetWidth(), dpAlign(v.x));
-    ofLine(ofGetWidth()-14.f, dpAlign(v.y), ofGetWidth(), dpAlign(v.y));
+    ofLine(ofGetWidth()-14.f, alignf(v.x), ofGetWidth(), alignf(v.x));
+    ofLine(ofGetWidth()-14.f, alignf(v.y), ofGetWidth(), alignf(v.y));
     ofPopMatrix();
     ofPopStyle();
 }
+
+DP_SCORE_NAMESPACE_END

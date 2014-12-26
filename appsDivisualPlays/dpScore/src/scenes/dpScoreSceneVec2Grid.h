@@ -1,20 +1,22 @@
 //
-//  dpScoreVec2Grid.h
+//  dpScoreSceneVec2Grid.h
 //  dpScore
 //
 //  Created by YoshitoONISHI on 12/25/14.
 //
 //
 
-#ifndef __dpScore__dpScoreVec2Grid__
-#define __dpScore__dpScoreVec2Grid__
+#ifndef __dpScore__SceneVec2Grid__
+#define __dpScore__SceneVec2Grid__
 
-#include "dpScoreBase.h"
+#include "dpScoreSceneBase.h"
 
-class dpScoreVec2Grid final : public dpScoreBase {
+DP_SCORE_NAMESPACE_BEGIN
+
+class SceneVec2Grid final : public SceneBase {
 public:
-    dpScoreVec2Grid() {}
-    virtual ~dpScoreVec2Grid() {}
+    SceneVec2Grid() {}
+    virtual ~SceneVec2Grid() {}
     
     void initialize() override;
     void shutDown() override;
@@ -40,4 +42,6 @@ private:
     int mGridH;
 };
 
-#endif /* defined(__dpScore__dpScoreVec2Grid__) */
+DP_SCORE_NAMESPACE_END
+
+#endif /* defined(__dpScore__SceneVec2Grid__) */

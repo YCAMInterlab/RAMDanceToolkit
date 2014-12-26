@@ -1,20 +1,22 @@
 //
-//  dpScoreVec2Plotter.h
+//  dpScoreSceneVec2Plotter.h
 //  dpScore
 //
 //  Created by YoshitoONISHI on 12/25/14.
 //
 //
 
-#ifndef __dpScore__dpScoreVec2Plotter__
-#define __dpScore__dpScoreVec2Plotter__
+#ifndef __dpScore__SceneVec2Plotter__
+#define __dpScore__SceneVec2Plotter__
 
-#include "dpScoreBase.h"
+#include "dpScoreSceneBase.h"
 
-class dpScoreVec2Plotter final : public dpScoreBase {
+DP_SCORE_NAMESPACE_BEGIN
+
+class SceneVec2Plotter final : public SceneBase {
 public:
-    dpScoreVec2Plotter() {}
-    virtual ~dpScoreVec2Plotter() {}
+    SceneVec2Plotter() {}
+    virtual ~SceneVec2Plotter() {}
     
     void initialize() override;
     void shutDown() override;
@@ -36,4 +38,6 @@ private:
 };
 
 
-#endif /* defined(__dpScore__dpScoreVec2Plotter__) */
+DP_SCORE_NAMESPACE_END
+
+#endif /* defined(__dpScore__SceneVec2Plotter__) */

@@ -1,35 +1,39 @@
 #include "ofApp.h"
-#include "dpScoreVec2SimpleGraph.h"
-#include "dpScoreVec2Clocks.h"
-#include "dpScoreVec2Grid.h"
-#include "dpScoreVec2Plotter.h"
+#include "dpScoreSceneVec2SimpleGraph.h"
+#include "dpScoreSceneVec2Clocks.h"
+#include "dpScoreSceneVec2Grid.h"
+#include "dpScoreSceneVec2Plotter.h"
+
+using namespace dp::score;
 
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-    ofSetFrameRate(dpScoreFrameRate);
+    ofSetFrameRate(kFrameRate);
     ofBackground(ofColor::black);
     ofSetLogLevel(OF_LOG_VERBOSE);
     
     OFX_BEGIN_EXCEPTION_HANDLING
     
-    auto vec2Simple = dpScoreBase::Ptr(new dpScoreVec2SimpleGraph());
-    auto vec2Clocks = dpScoreBase::Ptr(new dpScoreVec2Clocks());
-    auto vec2Grid = dpScoreBase::Ptr(new dpScoreVec2Grid());
-    auto vec2Plotter = dpScoreBase::Ptr(new dpScoreVec2Plotter());
+    auto vec2Simple = SceneBase::Ptr(new SceneVec2SimpleGraph());
+    auto vec2Clocks = SceneBase::Ptr(new SceneVec2Clocks());
+    auto vec2Grid = SceneBase::Ptr(new SceneVec2Grid());
+    auto vec2Plotter = SceneBase::Ptr(new SceneVec2Plotter());
     
     mSceneManager.add(vec2Simple);
     mSceneManager.add(vec2Clocks);
     mSceneManager.add(vec2Grid);
     mSceneManager.add(vec2Plotter);
     
-    mSceneManager.change<dpScoreVec2SimpleGraph>();
+    mSceneManager.change(3);
+    mSceneManager.change<SceneVec2SimpleGraph>();
+    mSceneManager.change("SceneVec2Clocks");
     
-    mSceneManager.getTabBar()->loadSettings(dpScoreSettingsDir,
-                                            dpScoreSettingsPrefix);
+    mSceneManager.getTabBar()->loadSettings(kSettingsDir,
+                                            kSettingsPrefix);
     mSceneManager.getTabBar()->setVisible(false);
     
-    mOscReceiver.setup(dpScoreOscClientPort);
+    mOscReceiver.setup(kOscClientPort);
     
     OFX_END_EXCEPTION_HANDLING
 }
@@ -47,7 +51,7 @@ void ofApp::update()
         ofxOscMessage m;
         mOscReceiver.getNextMessage(&m);
         
-        if (m.getAddress() == dpOscAddrCameraUnitPendulumVector) {
+        if (m.getAddress() == kOscAddrPendulumVec2) {
             v.x += m.getArgAsFloat(1);
             v.y += m.getArgAsFloat(2);
             n++;
@@ -57,7 +61,7 @@ void ofApp::update()
         v /= (float)n;
         
         ofxEventMessage m;
-        m.setAddress(dpScoreMessageVec2);
+        m.setAddress(kAddrVec2);
         m.addFloatArg(v.x);
         m.addFloatArg(v.y);
         mSceneManager.update(m);
@@ -88,8 +92,8 @@ void ofApp::keyPressed(int key)
             mSceneManager.getTabBar()->toggleVisible();
             break;
         case 's':
-            mSceneManager.getTabBar()->saveSettings(dpScoreSettingsDir,
-                                                    dpScoreSettingsPrefix);
+            mSceneManager.getTabBar()->saveSettings(kSettingsDir,
+                                                    kSettingsPrefix);
             break;
         case OF_KEY_LEFT:
             mSceneManager.prev();

@@ -1,16 +1,18 @@
 //
-//  dpScoreVec2Plotter.cpp
+//  dpScoreSceneVec2Plotter.cpp
 //  dpScore
 //
 //  Created by YoshitoONISHI on 12/25/14.
 //
 //
 
-#include "dpScoreVec2Plotter.h"
+#include "dpScoreSceneVec2Plotter.h"
+
+DP_SCORE_NAMESPACE_BEGIN
 
 static const int _circleNum = 2000;
 
-void dpScoreVec2Plotter::initialize()
+void SceneVec2Plotter::initialize()
 {
     dpDebugFunc();
     
@@ -32,7 +34,7 @@ void dpScoreVec2Plotter::initialize()
     mUICanvas->addSlider("Sensor Scale", 0.f, 2.f, &mSensorScale);
 }
 
-void dpScoreVec2Plotter::shutDown()
+void SceneVec2Plotter::shutDown()
 {
     dpDebugFunc();
     
@@ -42,19 +44,19 @@ void dpScoreVec2Plotter::shutDown()
     }
 }
 
-void dpScoreVec2Plotter::enter()
+void SceneVec2Plotter::enter()
 {
     dpDebugFunc();
 }
 
-void dpScoreVec2Plotter::exit()
+void SceneVec2Plotter::exit()
 {
     dpDebugFunc();
 }
 
-void dpScoreVec2Plotter::update(ofxEventMessage& m)
+void SceneVec2Plotter::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == dpScoreMessageVec2) {
+    if (m.getAddress() == kAddrVec2) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);
         mCircleBuffer.push_back(mVec);
@@ -64,7 +66,7 @@ void dpScoreVec2Plotter::update(ofxEventMessage& m)
     }
 }
 
-void dpScoreVec2Plotter::draw()
+void SceneVec2Plotter::draw()
 {
     ofPushStyle();
     ofEnableAlphaBlending();
@@ -102,8 +104,8 @@ void dpScoreVec2Plotter::draw()
     for (int i=2; i<=210; i++) {
         int height = 5;
         if (i%10==0) height = 8;
-        ofLine(dpAlign(5.f+i*step), 25.f, dpAlign(5.f+i*step), 25.f+height);
-        ofLine(dpAlign(5.f+i*step), kH - 5.f, dpAlign(5.f+i*step), kH - 5.f - height);
+        ofLine(alignf(5.f+i*step), 25.f, alignf(5.f+i*step), 25.f+height);
+        ofLine(alignf(5.f+i*step), kH - 5.f, alignf(5.f+i*step), kH - 5.f - height);
     }
     
     
@@ -111,8 +113,8 @@ void dpScoreVec2Plotter::draw()
     for (int i=2; i<=98; i++) {
         int width = 5.f;
         if (i%10 == 0) width = 8;
-        ofLine(5.f, dpAlign(25.f+i*stepY), 5.f+width, dpAlign(25.f+i*stepY));
-        ofLine(kW - 5.f, dpAlign(25.f+i*stepY), kW - 5.f - width, dpAlign(25.f+i*stepY));
+        ofLine(5.f, alignf(25.f+i*stepY), 5.f+width, alignf(25.f+i*stepY));
+        ofLine(kW - 5.f, alignf(25.f+i*stepY), kW - 5.f - width, alignf(25.f+i*stepY));
     }
     
     
@@ -144,3 +146,5 @@ void dpScoreVec2Plotter::draw()
     ofPopStyle();
 
 }
+
+DP_SCORE_NAMESPACE_END

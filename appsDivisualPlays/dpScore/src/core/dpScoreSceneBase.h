@@ -1,23 +1,25 @@
 //
-//  dpScoreBase.h
+//  dpScoreSceneBase.h
 //  dpScore
 //
 //  Created by YoshitoONISHI on 12/25/14.
 //
 //
 
-#ifndef __dpScore__dpScoreBase__
-#define __dpScore__dpScoreBase__
+#ifndef __dpScore__SceneBase__
+#define __dpScore__SceneBase__
 
 #include "dpScoreCommon.h"
 #include "ofxUI.h"
 
-class dpScoreBase {
+DP_SCORE_NAMESPACE_BEGIN
+
+class SceneBase {
 public:
-    typedef ofPtr<dpScoreBase> Ptr;
+    typedef ofPtr<SceneBase> Ptr;
     
-    dpScoreBase();
-    virtual ~dpScoreBase() {}
+    SceneBase();
+    virtual ~SceneBase() {}
     
     virtual void update(ofxEventMessage& m) {}
     virtual void draw() {}
@@ -45,6 +47,7 @@ public:
     int getId() const { return mId; }
     void setId(int id) { mId = id; }
     
+    void setName(const string& name);
     const string& getName();
     
 protected:
@@ -54,4 +57,6 @@ protected:
     
 };
 
-#endif /* defined(__dpScore__dpScoreBase__) */
+DP_SCORE_NAMESPACE_END
+
+#endif /* defined(__dpScore__SceneBase__) */

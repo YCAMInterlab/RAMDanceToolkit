@@ -1,20 +1,22 @@
 //
-//  dpScoreVec2Clocks.h
+//  dpScoreSceneVec2Clocks.h
 //  dpScore
 //
 //  Created by YoshitoONISHI on 12/25/14.
 //
 //
 
-#ifndef __dpScore__dpScoreVec2Clocks__
-#define __dpScore__dpScoreVec2Clocks__
+#ifndef __dpScore__SceneVec2Clocks__
+#define __dpScore__SceneVec2Clocks__
 
-#include "dpScoreBase.h"
+#include "dpScoreSceneBase.h"
 
-class dpScoreVec2Clocks final : public dpScoreBase {
+DP_SCORE_NAMESPACE_BEGIN
+
+class SceneVec2Clocks final : public SceneBase {
 public:
-    dpScoreVec2Clocks() {}
-    virtual ~dpScoreVec2Clocks() {}
+    SceneVec2Clocks() {}
+    virtual ~SceneVec2Clocks() {}
     
     void initialize() override;
     void shutDown() override;
@@ -32,4 +34,6 @@ private:
     
 };
 
-#endif /* defined(__dpScore__dpScoreVec2Clocks__) */
+DP_SCORE_NAMESPACE_END
+
+#endif /* defined(__dpScore__SceneVec2Clocks__) */

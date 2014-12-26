@@ -8,7 +8,9 @@
 
 #include "dpScoreSceneManager.h"
 
-dpScoreSceneManager::dpScoreSceneManager() :
+DP_SCORE_NAMESPACE_BEGIN
+
+SceneManager::SceneManager() :
 mUpdateAll(true),
 mSceneId(0)
 {
@@ -20,7 +22,7 @@ mSceneId(0)
     mTabBar->addSpacer();
 }
 
-dpScoreSceneManager::~dpScoreSceneManager()
+SceneManager::~SceneManager()
 {
     if (mTabBar) {
         delete mTabBar;
@@ -30,7 +32,7 @@ dpScoreSceneManager::~dpScoreSceneManager()
     for (auto& scene : mScenes) scene->shutDown();
 }
 
-void dpScoreSceneManager::add(dpScoreBase::Ptr scene)
+void SceneManager::add(SceneBase::Ptr scene)
 {
     if (mScenes.empty() == false) {
         const string className = scene->getName();
@@ -49,7 +51,7 @@ void dpScoreSceneManager::add(dpScoreBase::Ptr scene)
     mScenes.push_back(scene);
 }
 
-void dpScoreSceneManager::next()
+void SceneManager::next()
 {
     if (mScenes.empty())
         ofxThrowException(ofxException, "mScenes is empty");
@@ -57,7 +59,7 @@ void dpScoreSceneManager::next()
     change();
 }
 
-void dpScoreSceneManager::prev()
+void SceneManager::prev()
 {
     if (mScenes.empty())
         ofxThrowException(ofxException, "mScenes is empty");
@@ -66,24 +68,35 @@ void dpScoreSceneManager::prev()
     change();
 }
 
-void dpScoreSceneManager::change(int i)
+void SceneManager::change(int index)
 {
-    if (i<0 || i>=mScenes.size())
-        ofxThrowExceptionf(ofxException, "%d is out of range", i);
-    mSceneId = i;
+    if (index<0 || index>=mScenes.size())
+        ofxThrowExceptionf(ofxException, "%d is out of range", index);
+    mSceneId = index;
     change();
 }
 
-void dpScoreSceneManager::change()
+void SceneManager::change(const string& name)
+{
+    auto it = findScene(name);
+    if (it == mScenes.end())
+        ofxThrowExceptionf(ofxException,
+                           "no scene named %s found",
+                           name.c_str());
+    mSceneId = (*it)->getId();
+    change();
+}
+
+void SceneManager::change()
 {
     if (mCurrentScene) mCurrentScene->exit();
     mCurrentScene = mScenes.at(mSceneId);
     mCurrentScene->enter();
     
-    ofLogNotice() << "changed scene: " << mSceneId << ", " << dpGetClassName(*mCurrentScene);
+    ofLogNotice() << "changed scene: " << mSceneId << ", " << mCurrentScene->getName();
 }
 
-void dpScoreSceneManager::update(ofxEventMessage& m)
+void SceneManager::update(ofxEventMessage& m)
 {
     if (mUpdateAll) {
         for (auto& scene : mScenes) scene->update(m);
@@ -93,78 +106,80 @@ void dpScoreSceneManager::update(ofxEventMessage& m)
     }
 }
 
-void dpScoreSceneManager::draw()
+void SceneManager::draw()
 {
     if (mCurrentScene) mCurrentScene->draw();
 }
 
-ofPtr<dpScoreBase> dpScoreSceneManager::getCurrent()
+ofPtr<SceneBase> SceneManager::getCurrent()
 {
     return mCurrentScene;
 }
 
-void dpScoreSceneManager::setUpdateAll(bool update)
+void SceneManager::setUpdateAll(bool update)
 {
     mUpdateAll = update;
 }
 
-void dpScoreSceneManager::keyPressed(int key)
+void SceneManager::keyPressed(int key)
 {
     if (mCurrentScene) mCurrentScene->keyPressed(key);
 }
 
-void dpScoreSceneManager::keyReleased(int key)
+void SceneManager::keyReleased(int key)
 {
     if (mCurrentScene) mCurrentScene->keyReleased(key);
 }
 
-void dpScoreSceneManager::mouseMoved(int x, int y)
+void SceneManager::mouseMoved(int x, int y)
 {
     if (mCurrentScene) mCurrentScene->mouseMoved(x, y);
 }
 
-void dpScoreSceneManager::mouseDragged(int x, int y, int button)
+void SceneManager::mouseDragged(int x, int y, int button)
 {
     if (mCurrentScene) mCurrentScene->mouseDragged(x, y, button);
 }
 
-void dpScoreSceneManager::mousePressed(int x, int y, int button)
+void SceneManager::mousePressed(int x, int y, int button)
 {
     if (mCurrentScene) mCurrentScene->mousePressed(x, y, button);
 }
 
-void dpScoreSceneManager::mouseReleased(int x, int y, int button)
+void SceneManager::mouseReleased(int x, int y, int button)
 {
     if (mCurrentScene) mCurrentScene->mouseReleased(x, y, button);
 }
 
-void dpScoreSceneManager::windowResized(int w, int h)
+void SceneManager::windowResized(int w, int h)
 {
     if (mCurrentScene) mCurrentScene->windowResized(w, h);
 }
 
-void dpScoreSceneManager::dragEvent(ofDragInfo dragInfo)
+void SceneManager::dragEvent(ofDragInfo dragInfo)
 {
     if (mCurrentScene) mCurrentScene->dragEvent(dragInfo);
 }
 
-void dpScoreSceneManager::gotMessage(ofMessage msg)
+void SceneManager::gotMessage(ofMessage msg)
 {
     if (mCurrentScene) mCurrentScene->gotMessage(msg);
 }
 
-void dpScoreSceneManager::guiEvent(ofxUIEventArgs &e)
+void SceneManager::guiEvent(ofxUIEventArgs &e)
 {
     
 }
 
-dpScoreSceneManager::SceneVec::iterator
-dpScoreSceneManager::findScene(const string& name)
+SceneManager::SceneVec::iterator
+SceneManager::findScene(const string& name)
 {
     return find_if(mScenes.begin(),
                    mScenes.end(),
-                   [&](const dpScoreBase::Ptr& rhs)
+                   [&](const SceneBase::Ptr& rhs)
                    {
                        return name == rhs->getName();
                    });
 }
+
+DP_SCORE_NAMESPACE_END

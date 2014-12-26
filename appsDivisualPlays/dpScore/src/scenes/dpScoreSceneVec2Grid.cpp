@@ -1,14 +1,16 @@
 //
-//  dpScoreVec2Grid.cpp
+//  dpScoreSceneVec2Grid.cpp
 //  dpScore
 //
 //  Created by YoshitoONISHI on 12/25/14.
 //
 //
 
-#include "dpScoreVec2Grid.h"
+#include "dpScoreSceneVec2Grid.h"
 
-void dpScoreVec2Grid::initialize()
+DP_SCORE_NAMESPACE_BEGIN
+
+void SceneVec2Grid::initialize()
 {
     dpDebugFunc();
     
@@ -32,7 +34,7 @@ void dpScoreVec2Grid::initialize()
     mUICanvas->addSlider("Sensor Scale", 0.f, 2.f, &mSensorScale);
 }
 
-void dpScoreVec2Grid::shutDown()
+void SceneVec2Grid::shutDown()
 {
     dpDebugFunc();
     
@@ -42,23 +44,23 @@ void dpScoreVec2Grid::shutDown()
     }
 }
 
-void dpScoreVec2Grid::enter()
+void SceneVec2Grid::enter()
 {
     dpDebugFunc();
     
     mCam.enableMouseInput();
 }
 
-void dpScoreVec2Grid::exit()
+void SceneVec2Grid::exit()
 {
     dpDebugFunc();
     
     mCam.disableMouseInput();
 }
 
-void dpScoreVec2Grid::update(ofxEventMessage& m)
+void SceneVec2Grid::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == dpScoreMessageVec2) {
+    if (m.getAddress() == kAddrVec2) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);
         mGridBuffer.push_back(mVec);
@@ -68,7 +70,7 @@ void dpScoreVec2Grid::update(ofxEventMessage& m)
     }
 }
 
-void dpScoreVec2Grid::draw()
+void SceneVec2Grid::draw()
 {
     ofPushStyle();
     ofEnableAlphaBlending();
@@ -105,8 +107,8 @@ void dpScoreVec2Grid::draw()
             const int idx = j * mGridW/mGridStep + i;
             ofVec2f v = mGridBuffer.at(i);
             float f = ofMap(v.y, -25.f, 25.f, -1.f, 1.f);
-            mGridVertices.at(idx).x = dpAlign(i*mGridStep);
-            mGridVertices.at(idx).y = dpAlign(j*mGridStep) * f * mSensorScale;
+            mGridVertices.at(idx).x = alignf(i*mGridStep);
+            mGridVertices.at(idx).y = alignf(j*mGridStep) * f * mSensorScale;
             mGridVertices.at(idx).z = v.x * 15.f * mSensorScale;
         }
     }
@@ -118,3 +120,5 @@ void dpScoreVec2Grid::draw()
     
     ofPopStyle();
 }
+
+DP_SCORE_NAMESPACE_END

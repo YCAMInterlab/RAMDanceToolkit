@@ -6,22 +6,25 @@
 //
 //
 
-#ifndef __dpScore__dpScoreSceneManager__
-#define __dpScore__dpScoreSceneManager__
+#ifndef __dpScore__SceneManager__
+#define __dpScore__SceneManager__
 
-#include "dpScoreBase.h"
+#include "dpScoreSceneBase.h"
 
-class dpScoreSceneManager final {
+DP_SCORE_NAMESPACE_BEGIN
+
+class SceneManager final {
 public:
-    typedef vector<dpScoreBase::Ptr> SceneVec;
+    typedef vector<SceneBase::Ptr> SceneVec;
     
-    dpScoreSceneManager();
-    ~dpScoreSceneManager();
+    SceneManager();
+    ~SceneManager();
     
-    void add(dpScoreBase::Ptr scene);
+    void add(SceneBase::Ptr scene);
     void next();
     void prev();
-    void change(int i);
+    void change(int index);
+    void change(const string& name);
     template <class SceneClass> void change();
     
     void update(ofxEventMessage& m);
@@ -39,7 +42,7 @@ public:
     
     void guiEvent(ofxUIEventArgs &e);
     
-    dpScoreBase::Ptr getCurrent();
+    SceneBase::Ptr getCurrent();
     
     void setUpdateAll(bool update);
     
@@ -53,7 +56,7 @@ private:
     ofxUITabBar* mTabBar;
 
     SceneVec mScenes;
-    dpScoreBase::Ptr mCurrentScene;
+    SceneBase::Ptr mCurrentScene;
     
     int mSceneId;
     
@@ -62,9 +65,9 @@ private:
 };
 
 template <class SceneClass>
-void dpScoreSceneManager::change()
+void SceneManager::change()
 {
-    const string className = dpGetClassName<SceneClass>();
+    const string className = getClassName<SceneClass>();
     auto it = findScene(className);
     if (it == mScenes.end())
         ofxThrowExceptionf(ofxException,
@@ -74,4 +77,6 @@ void dpScoreSceneManager::change()
     change();
 }
 
-#endif /* defined(__dpScore__dpScoreSceneManager__) */
+DP_SCORE_NAMESPACE_END
+
+#endif /* defined(__dpScore__SceneManager__) */

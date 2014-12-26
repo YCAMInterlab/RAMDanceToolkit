@@ -24,7 +24,7 @@ public:
     void guiEvent(ofxUIEventArgs &e);
     
 private:
-    dpScoreSceneManager mSceneManager;
+    dp::score::SceneManager mSceneManager;
     ofxOscReceiver mOscReceiver;
 };
 

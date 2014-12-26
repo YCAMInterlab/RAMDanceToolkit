@@ -1,17 +1,19 @@
 //
-//  dpScoreVec2Clocks.cpp
+//  dpScoreSceneVec2Clocks.cpp
 //  dpScore
 //
 //  Created by YoshitoONISHI on 12/25/14.
 //
 //
 
-#include "dpScoreVec2Clocks.h"
+#include "dpScoreSceneVec2Clocks.h"
+
+DP_SCORE_NAMESPACE_BEGIN
 
 static const int _clockNumX = 16;
 static const int _clockNumY = 9;
 
-void dpScoreVec2Clocks::initialize()
+void SceneVec2Clocks::initialize()
 {
     dpDebugFunc();
     
@@ -25,7 +27,7 @@ void dpScoreVec2Clocks::initialize()
     mUICanvas->addSlider("Sensor Scale", 0.f, 2.f, &mSensorScale);
 }
 
-void dpScoreVec2Clocks::shutDown()
+void SceneVec2Clocks::shutDown()
 {
     dpDebugFunc();
     
@@ -35,19 +37,19 @@ void dpScoreVec2Clocks::shutDown()
     }
 }
 
-void dpScoreVec2Clocks::enter()
+void SceneVec2Clocks::enter()
 {
     dpDebugFunc();
 }
 
-void dpScoreVec2Clocks::exit()
+void SceneVec2Clocks::exit()
 {
     dpDebugFunc();
 }
 
-void dpScoreVec2Clocks::update(ofxEventMessage& m)
+void SceneVec2Clocks::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == dpScoreMessageVec2) {
+    if (m.getAddress() == kAddrVec2) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);
         mClockBuffer.push_back(mVec);
@@ -57,7 +59,7 @@ void dpScoreVec2Clocks::update(ofxEventMessage& m)
     }
 }
 
-void dpScoreVec2Clocks::draw()
+void SceneVec2Clocks::draw()
 {
     ofPushStyle();
     
@@ -73,11 +75,11 @@ void dpScoreVec2Clocks::draw()
     ofSetColor(255, 50);
     
     for (int i=0; i<=kW/step; i++) {
-        ofLine(dpAlign(i*step), 20.f, dpAlign(i*step), dpAlign(kH-30.f));
+        ofLine(alignf(i*step), 20.f, alignf(i*step), alignf(kH-30.f));
     }
     
     for (int j=2; j<kH/step-2; j++) {
-        ofLine(0.f, dpAlign(j*step), dpAlign(kW), dpAlign(j*step));
+        ofLine(0.f, alignf(j*step), alignf(kW), alignf(j*step));
     }
     
     const float circleStep = 80.f;
@@ -111,8 +113,8 @@ void dpScoreVec2Clocks::draw()
             ofSetColor(255, 100);
             ofSetLineWidth(1.f);
             const float size = 5.f;
-            ofLine(dpAlign(-size), 0.5f, dpAlign(size), 0.5f);
-            ofLine(0.5f, dpAlign(-size), 0.5f, dpAlign(size));
+            ofLine(alignf(-size), 0.5f, alignf(size), 0.5f);
+            ofLine(0.5f, alignf(-size), 0.5f, alignf(size));
             
             ofPopMatrix();
         }
@@ -121,3 +123,5 @@ void dpScoreVec2Clocks::draw()
     ofPopStyle();
 
 }
+
+DP_SCORE_NAMESPACE_END
