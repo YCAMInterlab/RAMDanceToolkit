@@ -71,5 +71,5 @@ void ofApp::gotMessage(ofMessage msg){
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
+	dpCameraUnit.inputUnit.mVideoPlayer.loadMovie(dragInfo.files[0]);
 }

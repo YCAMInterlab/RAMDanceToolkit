@@ -14,15 +14,19 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 		cvAnalysis[i].mGui.setPosition(-1000, 0);
 		cvFXUnit[i].mGui.setPosition(-1000, 0);
 	}
-//	cvAnalysis_second.mGui.setPosition(0, 480);
-//	cvFXUnit_second.mGui.setPosition(1200, 0);
 
 	cvAnalysis[0].hakoniwa_name = "prism";
 	cvAnalysis[1].hakoniwa_name = "pendulum";
 	cvAnalysis[2].hakoniwa_name = "struggle";
 	cvAnalysis[3].hakoniwa_name = "hakoniwa_D";
 
-//	simulator_initialize();
+	gui.setup();
+	gui.addLabel("main Console");
+	gui.addSpacer();
+	gui.addButton("Load Setting", false);
+	gui.addButton("Save Setting", false);
+	gui.autoSizeToFitWidgets();
+	
 }
 
 dpCameraUnit_Controller::~dpCameraUnit_Controller(){
@@ -49,8 +53,8 @@ void dpCameraUnit_Controller::update(){
 
 void dpCameraUnit_Controller::draw(){
 
-	inputUnit.drawUI(0, 0);
-	inputUnit.drawThumbnail(0, 110, 0.5);
+	inputUnit.drawUI(0, 300);
+	inputUnit.drawThumbnail(0, 410, 0.5);
 
 	if (inputUnit.mFourSplit){
 		for (int i = 0;i < 4;i++){

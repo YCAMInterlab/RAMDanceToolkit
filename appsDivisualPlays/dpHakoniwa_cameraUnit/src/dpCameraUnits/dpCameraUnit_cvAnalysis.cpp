@@ -13,7 +13,7 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.setup();
 	mGui.addLabel("Analysis",OFX_UI_FONT_LARGE);
 	mGui.addSpacer();
-	
+	mGui.addTextInput("hakoniwaName", "")->setAutoClear(false);
 	mGui.addLabel("Switch");
 	mGui.addSpacer();
 	mGui.addLabel("OSCOption");

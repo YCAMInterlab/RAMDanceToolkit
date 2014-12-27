@@ -22,7 +22,7 @@ dpCameraUnit_input::dpCameraUnit_input(){
 
 	mGui.setup();
 	mGui.addLabel("InputUnit",OFX_UI_FONT_LARGE);
-	mGui.addDropDownList("InputSource", mCameraList);
+	mGui.addDropDownList("InputSource", mCameraList)->setAutoClose(true);
 	mGui.addToggle("Perspective", &mEnablePerspective);
 	mGui.addToggle("FourSplit", &mFourSplit);
 	mGui.autoSizeToFitWidgets();

@@ -24,6 +24,8 @@ public:
 	void draw();
 	void simulator_initialize();
 
+	ofxUICanvas gui;
+	
 	dpCameraUnit_input		inputUnit;
 	dpCameraUnit_cvFX		cvFXUnit[4];
 	dpCameraUnit_cvAnalysis cvAnalysis[4];
