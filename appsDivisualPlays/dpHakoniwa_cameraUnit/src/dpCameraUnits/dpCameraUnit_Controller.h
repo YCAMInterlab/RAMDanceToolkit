@@ -24,6 +24,8 @@ public:
 	void draw();
 	void simulator_initialize();
 
+	void guiEvent(ofxUIEventArgs& e);
+	
 	ofxUICanvas gui;
 	
 	dpCameraUnit_input		inputUnit;

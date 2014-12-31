@@ -23,10 +23,16 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 	gui.setup();
 	gui.addLabel("main Console");
 	gui.addSpacer();
-	gui.addButton("Load Setting", false);
-	gui.addButton("Save Setting", false);
+	gui.setTriggerWidgetsUponLoad(false);
+	gui.addLabel("Load Preset");
+	gui.addToggleMatrix("LoadPreset", 5, 8);
+	gui.addLabel("Save Preset");
+	gui.addToggleMatrix("SavePreset", 5, 8);
+	gui.addLabel("PresetName");
+	gui.addTextInput("namePreset", "PresetName");
 	gui.autoSizeToFitWidgets();
 	
+	ofAddListener(gui.newGUIEvent, this, &dpCameraUnit_Controller::guiEvent);
 }
 
 dpCameraUnit_Controller::~dpCameraUnit_Controller(){
@@ -89,4 +95,64 @@ void dpCameraUnit_Controller::simulator_initialize(){
 //
 //	cvAnalysis			.mEnableSendOSC = true;
 //	cvAnalysis_second	.mEnableSendOSC = true;
+}
+
+void dpCameraUnit_Controller::guiEvent(ofxUIEventArgs &e){
+	
+	ofxUIWidget* w = e.widget;
+	
+	if (w->getName() == "Load Setting"){
+
+	}
+	
+	if (w->getName() == "Save Setting"){
+		inputUnit.mGui.saveSettings("inputUnit.xml");
+		
+		for (int i = 0;i < 4;i++){
+			cvFXUnit[i]		.mGui.saveSettings("cvFxUnit_"+ofToString(i)+".xml");
+			cvAnalysis[i]	.mGui.saveSettings("Analysis_"+ofToString(i)+".xml");
+		}
+	}
+	
+	cout << w->getName() << endl;
+	
+	if (w->getName().substr(0,10) == "LoadPreset"){
+		ofxUIToggle* tm = (ofxUIToggle*)(e.widget);
+
+		int i = ofToInt(w->getName().substr(11,1));
+		int j = ofToInt(w->getName().substr(14,1));
+
+		gui.loadSettings("Preset"+ofToString(i)+ofToString(j)+"/Controller.xml");
+		inputUnit.mGui.loadSettings("Preset"+ofToString(i)+ofToString(j)+"/inputUnit.xml");
+		inputUnit.sourceReflesh();
+
+		for (int o = 0;o < 4;o++){
+			cvFXUnit[o].mGui.loadSettings("Preset"+ofToString(i)+ofToString(j)+"/cvFxUnit_"+ofToString(o)+".xml");
+			cvAnalysis[o].mGui.loadSettings("Preset"+ofToString(i)+ofToString(j)+"/Analysis_"+ofToString(o)+".xml");
+		}
+		
+	}
+	
+	if (w->getName().substr(0,10) == "SavePreset"){
+		ofxUIToggle* tm = (ofxUIToggle*)(e.widget);
+
+		int i = ofToInt(w->getName().substr(11,1));
+		int j = ofToInt(w->getName().substr(14,1));
+
+		ofDirectory::createDirectory("Preset"+ofToString(i)+ofToString(j));
+		
+		gui.saveSettings("Preset"+ofToString(i)+ofToString(j)+"/Controller.xml");
+		inputUnit.mGui.saveSettings("Preset"+ofToString(i)+ofToString(j)+"/inputUnit.xml");
+		
+		for (int o = 0;o < 4;o++){
+			cvFXUnit[o].mGui.saveSettings("Preset"+ofToString(i)+ofToString(j)+"/cvFxUnit_"+ofToString(o)+".xml");
+			cvAnalysis[o].mGui.saveSettings("Preset"+ofToString(i)+ofToString(j)+"/Analysis_"+ofToString(o)+".xml");
+		}
+		
+	}
+	
+	if (w->getName() == "namePreset"){
+		ofxUITextInput* ti = (ofxUITextInput*)(e.widget);
+		ti->setTextString(ti->getTextString());
+	}
 }
