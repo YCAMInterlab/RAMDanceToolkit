@@ -19,8 +19,8 @@ uiThemecpo(255, 192);
 HakoniwaParallelLink_Base::HakoniwaParallelLink_Base(){
 
 	mLinkManager.setup("cu.usbmodem1141");
-	mLinkManager.setupOsc("192.168.20.56", 8528);
-//	mLinkManager.setupUDP("192.168.20.56", 8528);
+	//mLinkManager.setupOsc("192.168.20.69", 8528);
+
 
 	mLinkManager.height = 250.0;
 
@@ -86,12 +86,15 @@ void HakoniwaParallelLink_Base::draw(){
 
 void HakoniwaParallelLink_Base::setupControlPanel(){
 
-	ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+	ofxUICanvasPlus* panel = ramGetGUI().getCurrentUIContext();
 
 	//==============================   System GUI   ===========================//
 	systemGui = new ofxUICanvas();
-	systemGui->setAutoDraw(false);
+	systemGui->disableAppDrawCallback();
 	systemGui->disableMouseEventCallbacks();
+	systemGui->setUIColors(uiThemecb, uiThemeco, uiThemecoh,
+						uiThemecf, uiThemecfh, uiThemecp, uiThemecpo);
+
 	systemGui->addLabel("System");
 	systemGui->addSpacer();
 	systemGui->addSlider("arm1", 0.0, 200.0, &mLinkManager.armLength1);
@@ -112,7 +115,7 @@ void HakoniwaParallelLink_Base::setupControlPanel(){
 
 	systemGui->addToggle("digitalIO", &mDigitalOut);
 	systemGui->addSlider("pwmParam", 0.0, 255.0, &mPwm_Param);
-	systemGui->setPosition(0, 30);
+	systemGui->setPosition(5, 30);
 	systemGui->autoSizeToFitWidgets();
 
 
@@ -120,7 +123,8 @@ void HakoniwaParallelLink_Base::setupControlPanel(){
 	xyzGui = new ofxUICanvas();
 	xyzGui->setUIColors(uiThemecb, uiThemeco, uiThemecoh,
 						uiThemecf, uiThemecfh, uiThemecp, uiThemecpo);
-	xyzGui->setAutoDraw(false);
+
+	xyzGui->disableAppDrawCallback();
 	xyzGui->disableMouseEventCallbacks();
 	xyzGui->addLabel("Machine");
 	xyzGui->addSlider("X", -200.0, 200.0, &machinePosition.x,15,100);
@@ -156,30 +160,26 @@ void HakoniwaParallelLink_Base::setupControlPanel(){
 	settingGui = new ofxUICanvas();
 	settingGui->setUIColors(uiThemecb, uiThemeco, uiThemecoh,
 							uiThemecf, uiThemecfh, uiThemecp, uiThemecpo);
-	settingGui->setAutoDraw(false);
+	settingGui->disableAppDrawCallback();
 	settingGui->disableMouseEventCallbacks();
 	settingGui->addLabel("Settings");
 	settingGui->addSlider("Accel", 0.0, 500.0, &mSetting_Accel);
 	settingGui->addSlider("Deccel", 0.0, 500.0, &mSetting_Deccel);
 	settingGui->addSlider("MaxSPD", 0.0, 500.0, &mSetting_MaxSpeed);
 	settingGui->addButton("SendSettings", false);
-	settingGui->setPosition(0, 450);
+	settingGui->setPosition(5, 450);
 	settingGui->autoSizeToFitWidgets();
 
 	panel->addWidget(systemGui);
-	panel->addWidget(xyzGui);
 	panel->addWidget(settingGui);
+	panel->addWidget(xyzGui);
+
+	panel->autoSizeToFitWidgets();
 
 	CalibratePose	= false;
 	ManualPose		= false;
 
 	ofAddListener(panel->newGUIEvent,
-				  this, &HakoniwaParallelLink_Base::onPanelChanged);
-	ofAddListener(systemGui->newGUIEvent,
-				  this, &HakoniwaParallelLink_Base::onPanelChanged);
-	ofAddListener(xyzGui->newGUIEvent,
-				  this, &HakoniwaParallelLink_Base::onPanelChanged);
-	ofAddListener(settingGui->newGUIEvent,
 				  this, &HakoniwaParallelLink_Base::onPanelChanged);
 
 }
@@ -203,14 +203,12 @@ void HakoniwaParallelLink_Base::onPanelChanged(ofxUIEventArgs& e){
 		mLinkManager.stepManager.setParam_maxSpeed(mSetting_MaxSpeed);
 		mLinkManager.stepManager.setStepperAll(false);
 	}
-
 }
 
 void HakoniwaParallelLink_Base::onEnabled(){
-//	xyzGui->setAutoDraw(true);
+
 }
 
 void HakoniwaParallelLink_Base::onDisabled(){
-	xyzGui->setAutoDraw(false);
 
 }

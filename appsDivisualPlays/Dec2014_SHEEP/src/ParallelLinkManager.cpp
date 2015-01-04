@@ -48,7 +48,7 @@ void ParallelLinkManager::update(){
 	if (enableSync && (ofGetFrameNum() % (int)signal_step == 0)){
 		int ps[3];
 		for (int i = 0;i < 3;i++){
-			ps[i] = delta.actuator[(i+id_offset)%3].getGlobalOrientation().getEuler().x/2;
+			ps[i] = -delta.actuator[(i+id_offset)%3].getGlobalOrientation().getEuler().x/2;
 		}
 
 		if (id_swap) swap(ps[1], ps[2]);
