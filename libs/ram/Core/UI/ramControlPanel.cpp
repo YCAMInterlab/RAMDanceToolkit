@@ -203,6 +203,12 @@ void ramControlPanel::addSlider(const string& name, float min_value, float max_v
 	current_panel->autoSizeToFitWidgets();
 }
 
+void ramControlPanel::addIntSlider(const string& name, int min_value, int max_value, int *value)
+{
+	current_panel->addIntSlider(name, min_value, max_value, value, kLength, kDim);
+	current_panel->autoSizeToFitWidgets();
+}
+
 struct ColorSelectorListener
 {
 	ofxUIToggle* toggle;
