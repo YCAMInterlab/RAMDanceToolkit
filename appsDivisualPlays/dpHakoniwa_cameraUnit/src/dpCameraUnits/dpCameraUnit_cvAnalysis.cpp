@@ -13,9 +13,8 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.setup();
 	mGui.addLabel("Analysis",OFX_UI_FONT_LARGE);
 	mGui.addSpacer();
-	
-	mGui.addLabel("Switch");
-	mGui.addSpacer();
+	mGui.addLabel("Hakoniwa Name");
+	mGui.addTextInput("hakoniwaName", "")->setAutoClear(false);
 	mGui.addLabel("OSCOption");
 	mGui.addSpacer();
 	mGui.addToggle("SendOSC",		&mEnableSendOSC);
@@ -274,6 +273,12 @@ void dpCameraUnit_cvAnalysis::guiEvent(ofxUIEventArgs &ev){
 			sender.setup(address, pt);
 
 		}
+	}
+
+	if (w->getName() == "hakoniwaName"){
+		ofxUITextInput* ti = (ofxUITextInput*)w;
+		ti->setTextString(ti->getTextString());
+		hakoniwa_name = ti->getTextString();
 	}
 	
 }

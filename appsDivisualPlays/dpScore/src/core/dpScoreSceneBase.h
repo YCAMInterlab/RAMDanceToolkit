@@ -42,12 +42,17 @@ public:
     
     void guiEvent(ofxUIEventArgs &e) {}
     
+    // default value is NULL
     ofxUICanvas* getUICanvas() { return mUICanvas; }
     
-    int getId() const { return mId; }
-    void setId(int id) { mId = id; }
+    // we can change the id only once
+     void setId(int id);
+    int getId() const;
     
+    // we can change the name only once and can't change it after called getName()
     void setName(const string& name);
+    
+    // return class name if we've not called setName()
     const string& getName();
     
 protected:

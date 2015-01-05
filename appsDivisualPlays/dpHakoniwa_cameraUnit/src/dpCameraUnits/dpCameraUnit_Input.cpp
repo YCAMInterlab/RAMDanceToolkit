@@ -10,7 +10,7 @@
 
 dpCameraUnit_input::dpCameraUnit_input(){
 
-	mVideoPlayer.loadMovie("prizm20141225_2.mov");//("hakoniwa_split_2.mov");
+	mVideoPlayer.loadMovie("hakoniwa_split_2.mov");//("hakoniwa_split_2.mov");
 	mVideoPlayer.setVolume(0.0);
 	
 	mCameraList.push_back("None");
@@ -22,7 +22,7 @@ dpCameraUnit_input::dpCameraUnit_input(){
 
 	mGui.setup();
 	mGui.addLabel("InputUnit",OFX_UI_FONT_LARGE);
-	mGui.addDropDownList("InputSource", mCameraList);
+	mGui.addDropDownList("InputSource", mCameraList)->setAutoClose(true);
 	mGui.addToggle("Perspective", &mEnablePerspective);
 	mGui.addToggle("FourSplit", &mFourSplit);
 	mGui.autoSizeToFitWidgets();
@@ -202,34 +202,38 @@ void dpCameraUnit_input::guiEvent(ofxUIEventArgs &e){
 	ofxUIWidget* w = e.widget;
 
 	if (w->getName() == "InputSource"){
-		ofxUIDropDownList* ww = (ofxUIDropDownList*)w;
-
-		if ((ww->getSelectedNames().size() > 0) &&
-			(ww->getSelectedIndeces()[0] != mSourceType)){
-
-			mSourceType = ww->getSelectedIndeces()[0];
-
-			string srcName = ww->getSelectedNames()[0];
-			ww->setLabelText(srcName);
-
-			mVideoPlayer.stop();
-			
-			if (srcName == "ps3Eye"){
-				cout << "ps3eye initialize" << endl;
-			}else if (srcName == "Video"){
-				
-				mVideoPlayer.play();
-				
-			}else if (ww->getSelectedIndeces()[0] > 0){
-				
-				mVideoGrabber.setDeviceID(ww->getSelectedIndeces()[0]-1);
-				mVideoGrabber.initGrabber(input_width, input_height);
-				
-			}
-
-		}
-
+		sourceReflesh();
 	}
 
+
+}
+
+void dpCameraUnit_input::sourceReflesh(){
+	ofxUIDropDownList* ww = (ofxUIDropDownList*)mGui.getWidget("InputSource");
+	
+	if ((ww->getSelectedNames().size() > 0) &&
+		(ww->getSelectedIndeces()[0] != mSourceType)){
+		
+		mSourceType = ww->getSelectedIndeces()[0];
+		
+		string srcName = ww->getSelectedNames()[0];
+		ww->setLabelText(srcName);
+		
+		mVideoPlayer.stop();
+		
+		if (srcName == "ps3Eye"){
+			cout << "ps3eye initialize" << endl;
+		}else if (srcName == "Video"){
+			
+			mVideoPlayer.play();
+			
+		}else if (ww->getSelectedIndeces()[0] > 0){
+			
+			mVideoGrabber.setDeviceID(ww->getSelectedIndeces()[0]-1);
+			mVideoGrabber.initGrabber(input_width, input_height);
+			
+		}
+		
+	}
 
 }
