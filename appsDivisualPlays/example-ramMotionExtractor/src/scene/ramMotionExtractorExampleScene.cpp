@@ -15,12 +15,36 @@ ramMotionExtractorExampleScene::ramMotionExtractorExampleScene(){
 	mDrawPreview	= true;
 	mDrawDump		= true;
 
+	sender.setup("localhost", 8528);
+
+}
+
+void ramMotionExtractorExampleScene::setupControlPanel(){
+
+	ofxUICanvasPlus* gui = ramGetGUI().getCurrentUIContext();
+
+	gui->addToggle("Preview"	, &mDrawPreview);
+	gui->addToggle("Dump"		, &mDrawDump);
+
+	gui->addSpacer();
+	gui->addToggle("Lines"		, &mDrawLines);
+	gui->addToggle("Triangle"	, &mDrawTriangle);
+
+	/*=== register ===*/
+	motionExtractor.setupControlPanel(this);
+	
 }
 
 void ramMotionExtractorExampleScene::update(){
 
 	/*=== update ===*/
 	motionExtractor.update();
+
+	/*=== OSC Send Example ===*/
+	ofxOscMessage m;
+	m.setAddress("/dp/hakoniwa/testHakoniwa");
+	m.addFloatArg(motionExtractor.getVelocitySpeedAt(0)); //send node's speed
+	sender.sendMessage(m);
 
 }
 
@@ -29,16 +53,47 @@ void ramMotionExtractorExampleScene::draw(){
 	ramBeginCamera();
 
 	/*=== Preview selected nodes ===*/
+
 	if (mDrawPreview)	motionExtractor.draw();
 
+
 	/*=== Example drawing with motionExtractor ===*/
+
 	if (mDrawLines)		example_drawLines();
 	if (mDrawTriangle)	example_drawTriangles();
+
 
 	ramEndCamera();
 
 	if (mDrawDump)		example_drawDump();
 
+}
+
+void ramMotionExtractorExampleScene::example_drawLines(){
+
+	ofSetColor(255);
+	for (int i = 0;i < motionExtractor.getNumPort() - 1;i+=2){
+
+		ofVec3f vec_a = motionExtractor.getPositionAt(i);
+		ofVec3f vec_b = motionExtractor.getPositionAt(i+1);
+
+		ofLine(vec_a, vec_b);
+	}
+
+}
+
+void ramMotionExtractorExampleScene::example_drawTriangles(){
+
+	ofVec3f vec_a = motionExtractor.getPositionAt(0);
+	ofVec3f vec_b = motionExtractor.getPositionAt(1);
+	ofVec3f vec_c = motionExtractor.getPositionAt(2);
+
+	ofSetLineWidth(3.0);
+	ofNoFill();
+	ofTriangle(vec_a, vec_b, vec_c);
+	ofFill();
+	ofSetLineWidth(1.0);
+	
 }
 
 void ramMotionExtractorExampleScene::example_drawDump(){
@@ -63,7 +118,7 @@ void ramMotionExtractorExampleScene::example_drawDump(){
 		info += "Joint :" + motionExtractor.getJointNameAt(i) + "\n";
 		info += "Speed :" + ofToString(motionExtractor.getVelocitySpeedAt(i)) + "\n";
 
-		ofSetColor(50);
+		ofSetColor(100);
 		ofRect(10, 45, motionExtractor.getVelocitySpeedAt(i)*10.0, 15);
 
 		ofSetColor(255);
@@ -75,48 +130,4 @@ void ramMotionExtractorExampleScene::example_drawDump(){
 
 	ofPopMatrix();
 
-}
-
-void ramMotionExtractorExampleScene::example_drawLines(){
-
-	for (int i = 0;i < motionExtractor.getNumPort() - 1;i+=2){
-
-		ofVec3f vec_a = motionExtractor.getPositionAt(i);
-		ofVec3f vec_b = motionExtractor.getPositionAt(i);
-
-		ofLine(vec_a, vec_b);
-	}
-
-}
-
-void ramMotionExtractorExampleScene::example_drawTriangles(){
-
-	ofVec3f vec_a = motionExtractor.getPositionAt(0);
-	ofVec3f vec_b = motionExtractor.getPositionAt(1);
-	ofVec3f vec_c = motionExtractor.getPositionAt(2);
-
-	ofSetLineWidth(3.0);
-	ofNoFill();
-	ofTriangle(vec_a, vec_b, vec_c);
-	ofFill();
-	ofSetLineWidth(1.0);
-
-}
-
-void ramMotionExtractorExampleScene::setupControlPanel(){
-
-	ofxUICanvasPlus* gui = ramGetGUI().getCurrentUIContext();
-
-	gui->addToggle("Preview"	, &mDrawPreview);
-	gui->addToggle("Dump"		, &mDrawDump);
-
-	gui->addSpacer();
-	gui->addToggle("Lines"		, &mDrawLines);
-	gui->addToggle("Triangle"	, &mDrawTriangle);
-
-
-	/*=== register scene's pointer ===*/
-
-	motionExtractor.setupControlPanel(this);
-	
 }

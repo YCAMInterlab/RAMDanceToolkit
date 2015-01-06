@@ -16,14 +16,13 @@ class ramMotionPort;
 class ramMotionExtractor{
 public:
 
+	/*=== Must call for use ===*/
 	void setupControlPanel(ramBaseScene* scene_, ofVec2f canvasPos = ofVec2f(240,30));
-
 	void update();
 	void draw();
-	void guiEvent(ofxUIEventArgs &e);
-	void setDefaultNode(ramNode &node);
 
-	int getNumPort(){return mMotionPort.size();};
+	/*=== Getter ===*/
+	int				getNumPort();
 
 	ramNode			getNodeAt(int port);
 	string			getActorNameAt(int port);
@@ -34,14 +33,23 @@ public:
 	ofQuaternion	getRotationAt(int port);
 
 	ofVec3f			getVelocityAt(int port);
+	float			getVelocitySpeedAt(int port);
 	ofQuaternion	getRotateVelocityAt(int port);
 	float			getDistanceAt(int port_A, int port_B);
 
-	float			getVelocitySpeedAt(int port);
+	/*=== Utilities ===*/
+	void clearPorts();
+	void save(string file);
+	void load(string file);
+
+protected:
+	void guiEvent(ofxUIEventArgs &e);
 
 	ofxUICanvas*			mGui;
 	ramBaseScene*			mScenePtr;
+	float					mMotionSmooth;
 	vector<ramMotionPort*>	mMotionPort;
+
 };
 
 
@@ -55,26 +63,21 @@ public:
 
 	}
 
-	void init(ramNodeFinder nodeF){
-		mFinder = nodeF;
-		mVelocitySmoothed.set(0,0,0);
-		mVelocity.set(0,0,0);
-		isBlank = false;
-		vecInitialize = false;
-	}
-	void update();
+	void			init(ramNodeFinder nodeF);
+	void			update(float smooth);
+
 	bool			vecInitialize;
 	bool			isBlank;
+
 	ramNodeFinder	mFinder;
 	ofNode			mCurrentNode;
 	ofNode			mBefNode;
-
-	float			speedSmoothed;
 
 	ofVec3f			mVelocity;
 	ofVec3f			mVelocitySmoothed;
 	ofQuaternion	mRotateVec;
 	ofQuaternion	mRotateVecSmoothed;
+
 };
 
 #endif /* defined(__RAMDanceToolkit__ramMotionExtractor__) */

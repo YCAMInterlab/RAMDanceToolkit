@@ -20,6 +20,7 @@ uiThemecpo(255, 192);
 /* Call setupControlPanel of each scenes. */
 void ramMotionExtractor::setupControlPanel(ramBaseScene *scene_, ofVec2f canvasPos){
 
+	mMotionSmooth = 10.0;
 	mScenePtr = scene_;
 
 	mGui = new ofxUICanvas();
@@ -28,13 +29,13 @@ void ramMotionExtractor::setupControlPanel(ramBaseScene *scene_, ofVec2f canvasP
 	mGui->setUIColors(uiThemecb, uiThemeco, uiThemecoh,
 					 uiThemecf, uiThemecfh, uiThemecp, uiThemecpo);
 	mGui->addLabel("motionExtractor");
-	mGui->addButton("addNewPort", false);
 	mGui->addButton("Save", false);
 	mGui->addButton("Load", false);
 	mGui->addSpacer();
-	mGui->addButton("PushNode", false);
-	mGui->addButton("PopNode", false);
+	mGui->addButton("PushPort", false);
+	mGui->addButton("PopPort", false);
 	mGui->addButton("Clear", false);
+	mGui->addSlider("Smooth", 1.0, 50.0, &mMotionSmooth);
 
 	mGui->setup();
 	mGui->setPosition(canvasPos.x,
@@ -48,7 +49,7 @@ void ramMotionExtractor::setupControlPanel(ramBaseScene *scene_, ofVec2f canvasP
 
 void ramMotionExtractor::update(){
 	for (int i = 0;i < mMotionPort.size();i++){
-		mMotionPort[i]->update();
+		mMotionPort[i]->update(mMotionSmooth);
 	}
 }
 
@@ -89,7 +90,7 @@ void ramMotionExtractor::draw(){
 void ramMotionExtractor::guiEvent(ofxUIEventArgs &e){
 	ofxUIWidget* w = e.widget;
 
-	if (w->getName() == "PushNode"){
+	if (w->getName() == "PushPort"){
 		if (w->getState() == OFX_UI_STATE_DOWN){
 			ramMotionPort* mp = new ramMotionPort(ramActorManager::instance().getLastSelectedNodeIdentifer());
 
@@ -118,7 +119,7 @@ void ramMotionExtractor::guiEvent(ofxUIEventArgs &e){
 		}
 	}
 
-	if (w->getName() == "PopNode"){
+	if (w->getName() == "PopPort"){
 		if (w->getState() == OFX_UI_STATE_DOWN){
 			ramNodeFinder nf = ramActorManager::instance().getLastSelectedNodeIdentifer();
 
@@ -126,6 +127,8 @@ void ramMotionExtractor::guiEvent(ofxUIEventArgs &e){
 				if ((nf.name == mMotionPort[i]->mFinder.name) &&
 					(nf.index == mMotionPort[i]->mFinder.index)){
 					mMotionPort[i]->isBlank = true;
+					mMotionPort[i]->mFinder.setTargetName("");
+					mMotionPort[i]->mFinder.setJointID(-1);
 					break;
 				}
 			}
@@ -133,19 +136,72 @@ void ramMotionExtractor::guiEvent(ofxUIEventArgs &e){
 		}
 	}
 
-	if (w->getName() == "Clear"){
-		if (w->getState() == OFX_UI_STATE_DOWN){
-			while (mMotionPort.size() > 0){
-				ramMotionPort* pt = mMotionPort[0];
-				mMotionPort.erase(mMotionPort.begin());
-				delete pt;
-			}
-		}
+	if ((w->getName() == "Clear") && (w->getState() == OFX_UI_STATE_DOWN)){
+		clearPorts();
+	}
+
+	if ((w->getName() == "Save") && (w->getState() == OFX_UI_STATE_DOWN)){
+		save("motionExt_"+mScenePtr->getName()+".xml");
+	}
+
+	if ((w->getName() == "Load") && (w->getState() == OFX_UI_STATE_DOWN)){
+		load("motionExt_"+mScenePtr->getName()+".xml");
+	}
+
+}
+
+#pragma mark - utility
+
+void ramMotionExtractor::clearPorts(){
+	while (mMotionPort.size() > 0){
+		ramMotionPort* pt = mMotionPort[0];
+		mMotionPort.erase(mMotionPort.begin());
+		delete pt;
+	}
+}
+
+void ramMotionExtractor::save(string file){
+
+	ofxXmlSettings xml;
+
+	xml.setValue("Smooth", mMotionSmooth);
+	for (int i = 0;i < mMotionPort.size();i++){
+		int id = xml.addTag("MPort");
+		xml.setValue("MPort:Name", mMotionPort[i]->mFinder.name, id);
+		xml.setValue("MPort:Joint", mMotionPort[i]->mFinder.index, id);
+	}
+
+	xml.save(file);
+
+}
+
+void ramMotionExtractor::load(string file){
+
+	ofxXmlSettings xml;
+	xml.load(file);
+
+	clearPorts();
+	mMotionSmooth = xml.getValue("Smooth", 10.0);
+	for (int i = 0;i < xml.getNumTags("MPort");i++){
+		ramNodeIdentifer nodeIdent;
+
+		xml.pushTag("MPort",i);
+		nodeIdent.set(xml.getValue("Name", ""),
+					  xml.getValue("Joint", -1));
+		xml.popTag();
+
+		ramMotionPort* mp = new ramMotionPort(nodeIdent);
+		mMotionPort.push_back(mp);
 	}
 
 }
 
 #pragma mark - Getter
+
+int ramMotionExtractor::getNumPort(){
+	return mMotionPort.size();
+}
+
 ramNode ramMotionExtractor::getNodeAt(int port){
 
 	ramNode nd;
@@ -241,7 +297,7 @@ ofQuaternion ramMotionExtractor::getRotateVelocityAt(int port){
 	ofQuaternion q = ofQuaternion(0,0,0,0);
 
 	if ((0 <= port) && (port < mMotionPort.size())){
-		q = mMotionPort[port]->mRotateVec;
+		q = mMotionPort[port]->mRotateVecSmoothed;
 	}
 
 	return q;
@@ -262,10 +318,22 @@ float ramMotionExtractor::getDistanceAt(int port_A, int port_B){
 		return 0.0f;
 
 	}
+
 }
 
 #pragma mark - motionPort
-void ramMotionPort::update(){
+
+void ramMotionPort::init(ramNodeFinder nodeF){
+
+	mFinder = nodeF;
+	mVelocitySmoothed.set(0,0,0);
+	mVelocity.set(0,0,0);
+	isBlank = false;
+	vecInitialize = false;
+
+}
+
+void ramMotionPort::update(float smooth){
 
 	mBefNode = mCurrentNode;
 	ramNode cn;
@@ -277,8 +345,9 @@ void ramMotionPort::update(){
 	}
 
 	mVelocity	= mCurrentNode.getGlobalPosition() - mBefNode.getGlobalPosition();
-	mVelocitySmoothed += (mVelocity - mVelocitySmoothed) / 30.0;
+	mVelocitySmoothed += (mVelocity - mVelocitySmoothed) / smooth;
 
-	mRotateVec	= mCurrentNode.getGlobalOrientation() - mBefNode.getGlobalOrientation();
-	mRotateVecSmoothed += (mRotateVec - mRotateVecSmoothed) / 30.0;
+	mRotateVec	= mBefNode.getGlobalOrientation().inverse() * mCurrentNode.getGlobalOrientation();
+	mRotateVecSmoothed.slerp(1.0 / smooth, mRotateVecSmoothed, mRotateVec);
+
 }

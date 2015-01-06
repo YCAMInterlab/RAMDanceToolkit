@@ -14,6 +14,7 @@
 
 class ramMotionExtractorExampleScene : public ramBaseScene{
 public:
+	
 	ramMotionExtractorExampleScene();
 	virtual ~ramMotionExtractorExampleScene(){};
 
@@ -28,6 +29,9 @@ public:
 
 private:
 
+	ramMotionExtractor	motionExtractor;
+	ofxOscSender sender;
+
 	bool mDrawLines;
 	bool mDrawTriangle;
 	bool mDrawPreview;
@@ -36,8 +40,6 @@ private:
 	void example_drawLines();
 	void example_drawTriangles();
 	void example_drawDump();
-
-	ramMotionExtractor motionExtractor;
 
 };
 
