@@ -22,8 +22,10 @@
  Scenes
  */
 #include "HakoniwaParallelLink_Base.h"
+#include "ramMotionExtractorExampleScene.h"
 
 HakoniwaParallelLink_Base hakoniwaParallelLink;
+ramMotionExtractorExampleScene motionExt;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -40,6 +42,7 @@ void testApp::setup()
 	// ------------------
 	ramSceneManager& sceneManager = ramSceneManager::instance();
 	sceneManager.addScene( hakoniwaParallelLink.getPtr());
+	sceneManager.addScene( motionExt.getPtr());
 }
 
 //--------------------------------------------------------------

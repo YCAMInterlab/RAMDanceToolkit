@@ -12,6 +12,7 @@
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		C630DF1F1A4D80E800567351 /* distanceMetaball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C630DF1D1A4D80E800567351 /* distanceMetaball.cpp */; };
 		C630DF221A4D85A200567351 /* ramMotionExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C630DF201A4D85A200567351 /* ramMotionExtractor.cpp */; };
+		C6A68CA31A5A518D00122475 /* ramMotionExtractorExampleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A68CA11A5A518D00122475 /* ramMotionExtractorExampleScene.cpp */; };
 		C6D4097D1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D4097B1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp */; };
 		C6D409871A4575A5002D4C34 /* ofxKsmrParallelLinkDelta.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D4097F1A4575A5002D4C34 /* ofxKsmrParallelLinkDelta.cpp */; };
 		C6D409881A4575A5002D4C34 /* ofxKsmrStepManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D409831A4575A5002D4C34 /* ofxKsmrStepManager.cpp */; };
@@ -104,6 +105,8 @@
 		C630DF1E1A4D80E800567351 /* distanceMetaball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = distanceMetaball.h; path = scenes/distanceMetaball/distanceMetaball.h; sourceTree = "<group>"; };
 		C630DF201A4D85A200567351 /* ramMotionExtractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ramMotionExtractor.cpp; path = ramMotionExtractor/ramMotionExtractor.cpp; sourceTree = "<group>"; };
 		C630DF211A4D85A200567351 /* ramMotionExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ramMotionExtractor.h; path = ramMotionExtractor/ramMotionExtractor.h; sourceTree = "<group>"; };
+		C6A68CA11A5A518D00122475 /* ramMotionExtractorExampleScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ramMotionExtractorExampleScene.cpp; path = ramMotionExtractor/ramMotionExtractorExampleScene.cpp; sourceTree = "<group>"; };
+		C6A68CA21A5A518D00122475 /* ramMotionExtractorExampleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ramMotionExtractorExampleScene.h; path = ramMotionExtractor/ramMotionExtractorExampleScene.h; sourceTree = "<group>"; };
 		C6D4097B1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakoniwaParallelLink_Base.cpp; path = scenes/HakoniwaParallelLink_Base.cpp; sourceTree = "<group>"; };
 		C6D4097C1A457117002D4C34 /* HakoniwaParallelLink_Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaParallelLink_Base.h; path = scenes/HakoniwaParallelLink_Base.h; sourceTree = "<group>"; };
 		C6D4097F1A4575A5002D4C34 /* ofxKsmrParallelLinkDelta.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxKsmrParallelLinkDelta.cpp; sourceTree = "<group>"; };
@@ -280,6 +283,8 @@
 			children = (
 				C6D4097C1A457117002D4C34 /* HakoniwaParallelLink_Base.h */,
 				C6D4097B1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp */,
+				C6A68CA21A5A518D00122475 /* ramMotionExtractorExampleScene.h */,
+				C6A68CA11A5A518D00122475 /* ramMotionExtractorExampleScene.cpp */,
 				C6D4098C1A4575F1002D4C34 /* ParallelLinkManager.h */,
 				C6D4098B1A4575F1002D4C34 /* ParallelLinkManager.cpp */,
 				C6D4097E1A4575A5002D4C34 /* ofxKsmrParallelLinkDelta */,
@@ -480,6 +485,7 @@
 				C6D4097D1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				C6D409B41A47D4E1002D4C34 /* ofxTCPServer.cpp in Sources */,
+				C6A68CA31A5A518D00122475 /* ramMotionExtractorExampleScene.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
 				C630DF1F1A4D80E800567351 /* distanceMetaball.cpp in Sources */,
 				C6D409B21A47D4E1002D4C34 /* ofxTCPClient.cpp in Sources */,
