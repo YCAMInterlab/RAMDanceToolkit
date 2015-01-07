@@ -31,14 +31,17 @@ HakoniwaVibrator vibrator;
 #include "VectorFieldScene.h"
 VectorFieldScene VF;
 
-#include "HakoniwaSkipper.h"
-HakoniwaSkipper skipper;
+#include "HakoVisStruggle.h"
+HakoVisStruggle skipper;
 
 #include "MotionerThruVelocity.h"
 MotionerThruVelocity velSend;
 
 #include "DanceMapScene.h"
 DanceMapScene danceMap;
+
+#include "HakoVisSandStorm.h"
+HakoVisSandStorm hakoVisSandStorm;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -60,6 +63,7 @@ void testApp::setup()
     sceneManager.addScene( skipper.getPtr());
     sceneManager.addScene( velSend.getPtr());
     sceneManager.addScene( danceMap.getPtr());
+    sceneManager.addScene( hakoVisSandStorm.getPtr());
 }
 
 //--------------------------------------------------------------

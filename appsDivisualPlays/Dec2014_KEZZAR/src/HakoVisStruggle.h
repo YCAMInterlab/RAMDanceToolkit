@@ -1,37 +1,41 @@
 //
-//  HakoniwaSkipper.h
+//  HakoVisStruggle.h
 //  RAMDanceToolkit
 //
 //  Created by kezzardrix2 on 2014/12/21.
 //
 //
 
-#ifndef RAMDanceToolkit_HakoniwaSkipper_h
-#define RAMDanceToolkit_HakoniwaSkipper_h
+#ifndef RAMDanceToolkit_HakoVisStruggle_h
+#define RAMDanceToolkit_HakoVisStruggle_h
 
-#include "SkipperWakeUpBeam.h"
-#include "ofxDelaunay.h"
+#include "KezDelaunayMesh.h"
+#include "KezSlidePoint.h"
 
 #define STRINGIFY(A) #A
 
-class HakoniwaSkipper : public ramBaseScene{
+class HakoVisStruggle : public ramBaseScene{
 public:
-    string getName() const { return "HakoniwaSkipper"; }
+    string getName() const { return "HakoVisStruggle"; }
     
 	void setupControlPanel(){
-        ramGetGUI().addToggle("dir", &mDir);
+        ramGetGUI().addToggle("dir", &mMotorDir);
         ramGetGUI().addToggle("vibeAuto", &isVibeAuto);
         ramGetGUI().addToggle("vibeWhenMoveFast", &isVibeWhenActorMoveFast);
         ramGetGUI().addSlider("strength", 0.0, 255.0, &mStrength);
-        ramGetGUI().addSlider("thresh", 0.0, 30.0, &mThresh);
+        ramGetGUI().addSlider("thresh", 0.0, 30.0, &mVibeThresh);
         ramGetGUI().addButton("vibe");
         ramGetGUI().addSlider("timeSpan", 0.01, 3.0, &mVibeTimeSpan);
         ramGetGUI().addSlider("tempo",2,8.0,&mVibeTempo);
         ramGetGUI().addSlider("dur",0.1,2.0,&mVibeDur);
         ramGetGUI().addToggle("isDrawActor", &isDrawActor);
         ramGetGUI().addToggle("isDrawFloor", &isDrawFloor);
-        ramGetGUI().addSlider("mulForBuffer",1.0,500.0,&mMultForDrawBuffer);
+        ramGetGUI().addSlider("scaleForDrawBuffer",0.1,50.0,&mScaleDrawDelaunay);
         ramGetGUI().addSlider("lineWidth",1.0,20.0,&mLineWidth);
+        
+        ramGetGUI().addSlider("alphaReducSpeed", 0.01, 5.0, &mAlphaReducSpeed);
+        ramGetGUI().addToggle("isShowFaces", &isShowFaces);
+        ramGetGUI().addToggle("isRotAfterFinish", &isRotAfterFinish);
         
         ofxUIRadio *radio = NULL;
         
@@ -51,15 +55,11 @@ public:
         //radio->getToggles().at(ramActor::JOINT_LEFT_HAND)->setValue(true);
         panel->addWidgetDown(radio);
         
-        ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &HakoniwaSkipper::onPanelChanged);
+        ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &HakoVisStruggle::onPanelChanged);
     }
     void setup(){
         mSender.setup("192.168.20.53",8528);
-        ofAddListener(ReachAtSkipperEvent::events, this, &HakoniwaSkipper::reachEvent);
-        
-        for(int i = 0; i < BEAM_NUM; i++){
-            mBeams.push_back(SkipperWakeUpBeam());
-        }
+       // ofAddListener(ReachAtStruggleEvent::events, this, &HakoVisStruggle::reachEvent);
         
         mVibe.speed = 0.666;
         
@@ -91,7 +91,6 @@ public:
         
         mDisplace.setupShaderFromSource(GL_VERTEX_SHADER, mVert);
         mDisplace.setupShaderFromSource(GL_FRAGMENT_SHADER, mFrag);
-        
         mDisplace.linkProgram();
         
         ramOscManager::instance().addReceiverTag(&mReceiver);
@@ -99,22 +98,16 @@ public:
         
         mVecFromCam.speed = 0.2;
         
-        for(int i = 0; i < BUFFER_MAX; i++){
-            mBufferFromCam.push_back(ofPoint(0,0,0));
-        }
+        mDelaunayMesh.setup();
     }
-    
-    void reachEvent(ReachAtSkipperEvent &e){
-        vibe();
-    }
-    
+  
     void vibe(){
         //mVibe.speed = mVibeDur;
         mVibe.imSet((int)mStrength);
         
         
-        //mDir = !mDir;
-        //mDir %= 2;//(int)ofRandom(0,2);
+        //mMotorDir = !mMotorDir;
+        //mMotorDir %= 2;//(int)ofRandom(0,2);
     }
     
     void stopVibe(){
@@ -153,7 +146,7 @@ public:
                 
                 
                 if(j == mJointNum){
-                    if(node.getVelocity().length() > mThresh){
+                    if(node.getVelocity().length() > mVibeThresh){
                     
                         if(isVibeWhenActorMoveFast){
                             
@@ -174,44 +167,33 @@ public:
         if(vibeVal > 255.0)vibeVal = 255.0;
         
         mSmoothedVibeVal.set(vibeVal);
+       
+        sendOsc(vibeVal);
         
-        //if(vibeVal < 0.0)vibeVal = 0.0;
-                
-       // if(vibeVal > 1.0){
+        mVibe.update();
+        mVibeFromActor.update();
+        mVecFromCam.update();
+        mSmoothedVibeVal.update();
+        
+        mDelaunayMesh.addPoint(mVecFromCam * mScaleDrawDelaunay);
+        mDelaunayMesh.update();
+        
+    }
+    
+    void sendOsc(float vibeVal){
         ofxOscMessage m;
-        m.setAddress("/dp/hakoniwa/skipper");
-        if(mDir == false){
+        m.setAddress("/dp/hakoniwa/struggle");
+        if(mMotorDir == false){
             m.addIntArg(0);
             m.addIntArg(1);
         }else{
             m.addIntArg(1);
             m.addIntArg(0);
         }
-            
+        
         m.addIntArg((int)vibeVal);
         
         mSender.sendMessage(m);
-        
-        //}
-        
-        for(auto &v:mBeams){
-            v.update();
-        }
-        
-        
-        mVibe.update();
-        
-        mVibeFromActor.update();
-        
-        mVecFromCam.update();
-        
-        mBufferFromCam[mBufferCounter].set(mVecFromCam);
-        mBufferCounter++;
-        mBufferCounter %= BUFFER_MAX;
-        
-        mSmoothedVibeVal.update();
-        
-      //  mVecFromCam.set(ofGetMouseX(),ofGetMouseY());
     }
     
     void vibeAuto(){
@@ -237,26 +219,6 @@ public:
     void draw(){
         
         float vibeVal = mSmoothedVibeVal.val;
-        //ofRect(SINGLE_SCREEN_WIDTH * 0.5 + rnd.x,SINGLE_SCREEN_HEIGHT * 0.5 + rnd.y,100,100);
-        
-        /*ramBeginCamera();
-       
-        for(auto &v:mBeams){
-            v.draw();
-        }
-
-        ramEndCamera();*/
-        /*
-        for(auto &v:mBeams){
-            v.draw();
-        }
-        
-        ofPoint tmp(ofRandom(-1.0,1.0),
-                    0.0,
-                    ofRandom(-1.0,1.0));
-        tmp *= mVibe.val * 0.2;
-        ofDrawBox(getSecondScreenCenter() + tmp,40.0);
-        ofLine(getSecondScreenCenter() + tmp,getSecondScreenCenter() + ofPoint(0,-1000,0));*/
         
         ramBeginCamera();
         
@@ -275,41 +237,11 @@ public:
         
         ramEndCamera();
         
-        float mult = mMultForDrawBuffer;
-        
-        ofPolyline poly;
-        
-        for(auto &v:mBufferFromCam){
-            poly.curveTo(v * mult);
-        }
-        
-        poly.setClosed(true);
-        
         ofPushMatrix();
-    
-        ofTranslate(SINGLE_SCREEN_WIDTH + SINGLE_SCREEN_WIDTH * 0.5,SINGLE_SCREEN_HEIGHT * 0.5);
-        ofSetColor(255,255,255);
-       // poly.draw();
-        
-        ofLine(0,0,mVecFromCam.x * mult,mVecFromCam.y * mult);
-        ofPushStyle();
-        ofSetColor(255,0,0);
-        ofCircle(mVecFromCam * mult,10);
-        ofPopStyle();
+        ofTranslate(SINGLE_SCREEN_WIDTH * 0.5,SINGLE_SCREEN_HEIGHT * 0.5);
         drawDelaunay();
-        
         ofPopMatrix();
-        
-        /*for(int i = 1; i < mBufferFromCam.size(); i++){
-        
-            ofPushMatrix();
-            ofTranslate(SINGLE_SCREEN_WIDTH + SINGLE_SCREEN_WIDTH * 0.5, SINGLE_SCREEN_HEIGHT * 0.5);
-            ofSetColor(255,255,255);
-            ofLine(mBufferFromCam[i] * mult,mBufferFromCam[i-1] * mult);
-            ofCircle(mBufferFromCam[i] * mult,2);
-            ofPopMatrix();
-        }*/
-      
+
     }
     
     
@@ -351,6 +283,18 @@ public:
             vibe();
         }
         
+        if(name == "isRotAfterFinish"){
+            mDelaunayMesh.rotAfterFinish(isRotAfterFinish);
+        }
+        
+        if(name == "isShowFaces"){
+            mDelaunayMesh.showFaces(isShowFaces);
+        }
+
+        if(name == "alphaReducSpeed"){
+            mDelaunayMesh.setAlphaReducSpeed(mAlphaReducSpeed);
+        }
+        
         ofxUIToggle *t = static_cast<ofxUIToggle *>(e.widget);
         
         string togName = e.widget->getName();
@@ -363,109 +307,52 @@ public:
 	}
     
     void drawDelaunay(){
-        mDelaunay.reset();
-        
-        vector<ofPoint>tmp,tmp2;
-        
-        for(auto &v:mBufferFromCam){
-            tmp.push_back(v * mMultForDrawBuffer);
-        }
-                
-        for(int i = 0; i < tmp.size() - 1; i++){
-            ofPoint a = tmp[i];
-            bool isNear = false;
-            for(int j = i + 1; j < tmp.size(); j++){
-                ofPoint b = tmp[j];
-                
-                if(a.distanceSquared(b) < 1.0){
-                    isNear = true;
-                }
-            }
-            
-             if(isNear == false)tmp2.push_back(a);
-        }
-        
-        if(tmp2.size() >= 3){
-      
-            for(auto &v:tmp2){
-                mDelaunay.addPoint(v);
-            }
-            
-            mDelaunay.triangulate();
-
-           /* ofDisableDepthTest();
-            ofPushStyle();
-            ofNoFill();
-            ofMesh &mesh = mDelaunay.triangleMesh;
-            ofEnableBlendMode(OF_BLENDMODE_ADD);
-            for(int i = 0; i < mesh.getIndices().size(); i+=3){
-                
-                int idx1 = mesh.getIndices()[i];
-                int idx2 = mesh.getIndices()[i+1];
-                int idx3 = mesh.getIndices()[i+2];
-                
-                ofSetColor(255,255,255, ((int)mesh.getVertices()[idx1].x % 10 + 1) * 25);
-                ofSetLineWidth((int)mesh.getVertices()[idx1].x % 10 + 1);
-                ofTriangle(mesh.getVertices()[idx1].x, mesh.getVertices()[idx1].y,
-                       mesh.getVertices()[idx2].x, mesh.getVertices()[idx2].y,
-                           mesh.getVertices()[idx3].x, mesh.getVertices()[idx3].y);
-            }*/
-            
-            
-            ofPushStyle();
-            ofNoFill();
-            mDelaunay.draw();
-            ofPopStyle();
-        }
+        mDelaunayMesh.draw();
     }
     
 private:
     float mStrength = 200.0;
-    bool mDir = 0;
+    bool mMotorDir = 0;
     ofxOscSender mSender;
-    float mThresh = 100.0;
+    float mVibeThresh = 100.0;
     static const int BEAM_NUM = 30;
     
-    vector<SkipperWakeUpBeam>mBeams;
-    int mBeamCounter = 0;
-    Slide mVibe;
-    Slide mVibeFromActor;
+    KezSlide mVibe;
+    KezSlide mVibeFromActor;
     
     float mVibeTimeSpan = 0.2;
     float mElapsedTime = 0.0;
-    int mVibeCounter = 0;
     float mVibeTempo = 4;
-    
-    vector<string>mVibeTempoStr;
-    
     float mVibeDur = 0.1;
     float mElapsedTimeFromVibe;
-    bool isVibeAuto = false;
-    bool isVibeWhenActorMoveFast = false;
-    
-    ofPlanePrimitive mPlane;
-    
-    string mFrag;
-    string mVert;
-    ofShader mDisplace;
-    
+
+    int mVibeCounter = 0;
     int mJointNum = ramActor::JOINT_ABDOMEN;
     
     bool isDrawActor = true;
     bool isDrawFloor = false;
+    bool isVibeAuto = false;
+    bool isVibeWhenActorMoveFast = false;
     
     ramOscReceiveTag mReceiver;
     
-    SlidePoint mVecFromCam;
-    vector<ofVec2f>mBufferFromCam;
-    static const int BUFFER_MAX = 60;
-    int mBufferCounter = 0;
+    KezSlidePoint mVecFromCam;
+
+    KezSlide mSmoothedVibeVal;
     
-    Slide mSmoothedVibeVal;
-    ofxDelaunay mDelaunay;
-    
-    float mMultForDrawBuffer = 30.0;
+    float mScaleDrawDelaunay = 1.0;
     float mLineWidth = 4.0;
+    
+    ofPlanePrimitive mPlane;
+    string mFrag;
+    string mVert;
+    ofShader mDisplace;
+    
+    KezDelaunayMeshController mDelaunayMesh;
+    
+    bool isShowFaces = false;
+    bool isRotAfterFinish = false;
+    float mAlphaReducSpeed = 0.5;
 };
 
 #endif
