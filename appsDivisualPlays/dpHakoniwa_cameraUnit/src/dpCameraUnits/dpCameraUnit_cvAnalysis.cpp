@@ -22,6 +22,7 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.addTextInput("OSCPort", "10000")->setAutoClear(false);
 	mGui.addToggle("ContourFinder", &mEnableContourFinder);
 	mGui.addToggle("OptFlow",		&mEnableOptFlow);
+	mGui.addToggle("Flow_FarneBack", &mEnableOptFlowFarne);
 	mGui.addToggle("Mean",			&mEnableMean);
 //	mGui.addToggle("FAST",			&mEnableFAST);
 //	mGui.addToggle("Histgram",		&mEnableHistgram);
@@ -140,6 +141,15 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			sender.sendMessage(m);
 		}
 	}
+
+	if (mEnableOptFlowFarne){
+
+		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 1.0f) &&
+			(isFrameNew)) mOptFlowFarne.calcOpticalFlow(pixGray);
+
+
+	}
+
 	if (mEnableOptFlow){
 		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 1.0f) &&
 			(isFrameNew)) mOptFlow.calcOpticalFlow(pixGray);
@@ -213,8 +223,9 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 
 	if (mViewSource && imgRefGray != NULL) imgRefGray->draw(0,0);
 	ofSetColor(255, 255, 0);
-	mContFinder.draw();
-	mOptFlow.draw();
+	if (mEnableContourFinder)	mContFinder.draw();
+	if (mEnableOptFlow)			mOptFlow.draw();
+	if (mEnableOptFlowFarne)	mOptFlowFarne.draw();
 
 	if (mEnableOptFlow){
 		ofSetColor(255, 0, 0);
@@ -260,6 +271,7 @@ void dpCameraUnit_cvAnalysis::guiEvent(ofxUIEventArgs &ev){
 			string address = addUI->getTextString();
 			
 			sender.setup(address, pt);
+
 		}
 	}
 	if (w->getName() == "OSCPort"){
