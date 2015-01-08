@@ -50,15 +50,18 @@ else
 	git checkout b21dcd5
 	cd ../
 
+	# ofxQuadWarp
+	git clone git@github.com:julapy/ofxQuadWarp.git
+	cd ofxQuadWarp
+	git checkout a45ff5e
+	cd ../
+
+	# ofxDelaunay
+	git clone git@github.com:obviousjim/ofxDelaunay.git
+	cd ofxDelaunay
+	git checkout 957f902
+	cd ../
+
 	echo "end clone addons"
 	cd ../
 fi
-
-
-# apply ofxUI patch
-
-echo "[start running patch for modify ofxUI]"
-cd addons/ofxUI
-patch -p0 < ../ofxUI.patch
-cd ../../
-echo "end apply patch."

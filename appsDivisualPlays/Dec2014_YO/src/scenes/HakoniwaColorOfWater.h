@@ -33,6 +33,7 @@ private:
     ofxOscSender mOscSender;
     ramActor mActor;
     static const int kNumValves = 3;
+    bool mEnableOsc;
     
     int mNode0a;
     int mNode0b;
@@ -40,22 +41,28 @@ private:
     int mNode1b;
     int mNode2a;
     int mNode2b;
-    float mBlink;
+    float mBlinkOpen;
+    float mBlinkClose;
     
     class Valve {
     public:
+        Valve();
         void update(const ramNode& n0, const ramNode& n1);
         void draw(int color, float x, float y);
         
-        bool stateChanged() const { return state != pState; }
-        
+        ofxOscSender* sender;
+        int pin;
         bool on;
+        float time;
         bool state;
         bool pState;
         float prevTime;
         float distance;
         float threshould;
-        float blink;
+        float blinkOpen, blinkClose;
+        float openingDuration;
+        int nOpen;
+        bool enableOsc;
         
         ramNode nodeA;
         ramNode nodeB;

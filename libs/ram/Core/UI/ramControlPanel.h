@@ -57,6 +57,7 @@ public:
 	ofxUIRadio* addRadioGroup(const string& name, const vector<string>& content, int *value);
 	void addDropdown(const string& name, const vector<string>& content, int *value);
 	void addSlider(const string& name, float min_value, float max_value, float *value);
+    void addIntSlider(const string& name, int min_value, int max_value, int *value);
 	void addColorSelector(const string& name, ofFloatColor *value);
 
 	void remove(const string& name);

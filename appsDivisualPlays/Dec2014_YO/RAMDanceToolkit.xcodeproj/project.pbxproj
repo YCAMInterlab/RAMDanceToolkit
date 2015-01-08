@@ -10,6 +10,7 @@
 		270D2D9C16E4760700D5F750 /* icon.icns in CopyFiles */ = {isa = PBXBuildFile; fileRef = 270D2D9916E475D800D5F750 /* icon.icns */; };
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		D29033FA1A4D09B500577E04 /* HakovisLaser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29033F81A4D09B500577E04 /* HakovisLaser.cpp */; };
 		D2DD09181A4408DA00331675 /* HakoniwaColorOfWater.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DD09161A4408DA00331675 /* HakoniwaColorOfWater.cpp */; };
 		D2DD091F1A44287C00331675 /* HakoniwaOscTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2DD091D1A44287C00331675 /* HakoniwaOscTest.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
@@ -91,6 +92,9 @@
 		270D2D9916E475D800D5F750 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../../resources/Icons/icon.icns; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		D29033F81A4D09B500577E04 /* HakovisLaser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakovisLaser.cpp; path = scenes/HakovisLaser.cpp; sourceTree = "<group>"; };
+		D29033F91A4D09B500577E04 /* HakovisLaser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakovisLaser.h; path = scenes/HakovisLaser.h; sourceTree = "<group>"; };
+		D29033FB1A4D320F00577E04 /* Easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Easing.h; path = scenes/Easing.h; sourceTree = "<group>"; };
 		D2DD09161A4408DA00331675 /* HakoniwaColorOfWater.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakoniwaColorOfWater.cpp; path = scenes/HakoniwaColorOfWater.cpp; sourceTree = "<group>"; };
 		D2DD09171A4408DA00331675 /* HakoniwaColorOfWater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaColorOfWater.h; path = scenes/HakoniwaColorOfWater.h; sourceTree = "<group>"; };
 		D2DD091D1A44287C00331675 /* HakoniwaOscTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakoniwaOscTest.cpp; path = scenes/HakoniwaOscTest.cpp; sourceTree = "<group>"; };
@@ -172,6 +176,9 @@
 				D2DD091E1A44287C00331675 /* HakoniwaOscTest.h */,
 				D2DD09161A4408DA00331675 /* HakoniwaColorOfWater.cpp */,
 				D2DD09171A4408DA00331675 /* HakoniwaColorOfWater.h */,
+				D29033F81A4D09B500577E04 /* HakovisLaser.cpp */,
+				D29033F91A4D09B500577E04 /* HakovisLaser.h */,
+				D29033FB1A4D320F00577E04 /* Easing.h */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -365,6 +372,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D29033FA1A4D09B500577E04 /* HakovisLaser.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
 				D2DD09181A4408DA00331675 /* HakoniwaColorOfWater.cpp in Sources */,

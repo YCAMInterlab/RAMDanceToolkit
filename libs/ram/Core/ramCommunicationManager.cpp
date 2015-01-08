@@ -25,10 +25,10 @@ void ramCommunicationManager::setup(ramOscManager* oscMan){
 	mainPanel.addLabel("Communicator");
 	mainPanel.addToggle("Enable", true);
 	mainPanel.autoSizeToFitWidgets();
-	mainPanel.setAutoDraw(false);
+	//mainPanel.setAutoDraw(false);
 
 	UIcanvas.setName("Communicator");
-	UIcanvas.setAutoDraw(false);
+	//UIcanvas.setAutoDraw(false);
 	//UIcanvas.setUIColors(uiThemecb, uiThemeco, uiThemecoh, uiThemecf, uiThemecfh, uiThemecp, uiThemecpo);
 
 	refleshInstruments();

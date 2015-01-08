@@ -7,9 +7,9 @@
 #include <OSCBoards.h>
 
 EthernetUDP _udp;
-byte _mac[] = { 0x90, 0xA2, 0xDA, 0x0F, 0xB5, 0x8A };
+byte _mac[] = { 0x85, 0x28, 0x0A, 0x00, 0x00, 0x00 };
 
-IPAddress _ip(192, 168, 20, 52);
+IPAddress _ip(192, 168, 20, 60);
 
 const unsigned int _inPort = 8528;
 
