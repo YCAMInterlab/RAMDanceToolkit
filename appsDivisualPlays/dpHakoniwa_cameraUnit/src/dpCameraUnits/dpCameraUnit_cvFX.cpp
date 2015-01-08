@@ -17,6 +17,15 @@ dpCameraUnit_cvFX::dpCameraUnit_cvFX(){
 	mGui.addSpacer();
 	mGui.addToggle("Blur", &mEnableBlur);
 	mGui.addSlider("BlurSize", 0.0, 40.0, &mParam_Blur);
+
+	mGui.addSpacer();
+	mGui.addToggle("AdaptiveThreshold", &mEnableAdaptiveThreshold);
+	mGui.addIntSlider("blockSize", 3, 255, &mParam_adpThreshold_blockSize);
+	mGui.addIntSlider("offset", 3, 255, &mParam_adpThreshold_offset);
+	mGui.addToggle("invert", &mParam_adpThreshold_invert);
+	mGui.addToggle("gauss", &mParam_adpThreshold_gauss);
+
+	mGui.addSpacer();
 	mGui.addToggle("Threshold", &mEnableThreshold);
 	mGui.addSlider("ThrVal", 0.0, 255.0, &mParam_Threshold);
 	mGui.addToggle("Canny", &mEnableCanny);
@@ -48,6 +57,12 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 
 		if (mEnableBlur)		ofxCv::blur(mGraySource, mGraySource, mParam_Blur);
 		if (mEnableThreshold)	ofxCv::threshold(mGraySource, mGraySource, mParam_Threshold);
+		if (mEnableAdaptiveThreshold) useAdaptiveThreshold(mGraySource,
+														   mGraySource,
+														   mParam_adpThreshold_blockSize,
+														   mParam_adpThreshold_offset,
+														   mParam_adpThreshold_invert,
+														   mParam_adpThreshold_gauss);
 		if (mEnableInvert)		ofxCv::invert(mGraySource);
 		if (mEnableCanny)		ofxCv::Canny(mGraySource, mGraySource, mParam_Canny_Thr2, mParam_Canny_Thr1);
 
@@ -86,5 +101,36 @@ void dpCameraUnit_cvFX::drawThumbnail(int x, int y, float scale){
 	mGraySource.draw(0, mSource.getHeight());
 
 	ofPopMatrix();
+
+}
+
+void dpCameraUnit_cvFX::useAdaptiveThreshold(ofImage &src, ofImage &dst, int blockSize, int offset, bool invert, bool gauss){
+
+	if(src.type != OF_IMAGE_GRAYSCALE){
+
+		ofLogNotice("adaptiveThreshold(): src type must be OF_IMAGE_GRAYSCALE !!!");
+		return;
+
+	}
+
+	if( blockSize < 2 ) {
+		ofLogNotice("adaptiveThreshold(): block size") << blockSize << " < minimum, setting to 3";
+		blockSize = 3;
+	}
+
+	if( blockSize % 2 == 0 ) {
+		ofLogNotice() << "adaptiveThreshold(): block size " << blockSize << " not odd, adding 1";
+		blockSize++;
+	}
+
+	int threshold_type = CV_THRESH_BINARY;
+	if(invert) threshold_type = CV_THRESH_BINARY_INV;
+
+	int adaptive_method = CV_ADAPTIVE_THRESH_MEAN_C;
+	if(gauss) adaptive_method = CV_ADAPTIVE_THRESH_GAUSSIAN_C;
+
+	ofxCv::adaptiveThreshold(ofxCv::toCv(src), tmp, 255,
+							 adaptive_method, threshold_type, blockSize, offset);
+	ofxCv::toOf(tmp,dst);
 
 }

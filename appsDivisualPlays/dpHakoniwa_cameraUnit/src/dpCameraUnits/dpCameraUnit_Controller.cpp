@@ -17,7 +17,7 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 
 	cvAnalysis[0].hakoniwa_name = "prism";
 	cvAnalysis[1].hakoniwa_name = "pendulum";
-	cvAnalysis[2].hakoniwa_name = "struggle";
+	cvAnalysis[2].hakoniwa_name = "";
 	cvAnalysis[3].hakoniwa_name = "hakoniwa_D";
 
 	gui.setup();

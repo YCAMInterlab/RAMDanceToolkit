@@ -91,15 +91,21 @@
 /* Begin PBXFileReference section */
 		270D2D9916E475D800D5F750 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../../resources/Icons/icon.icns; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
+		922356671A5D2C14009DD3EB /* KezBlinker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezBlinker.h; sourceTree = "<group>"; };
+		922356681A5D2D63009DD3EB /* KezDelaunayMesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezDelaunayMesh.h; sourceTree = "<group>"; };
 		9248D4DF1A4D674600047AF5 /* KezConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezConstants.h; sourceTree = "<group>"; };
-		927274161A46AC0B008B2DC5 /* HakoniwaSkipper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HakoniwaSkipper.h; sourceTree = "<group>"; };
+		925872B21A4D8FF800483FE3 /* IceLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IceLine.h; sourceTree = "<group>"; };
+		925872B31A4D8FF800483FE3 /* MapTri.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapTri.h; sourceTree = "<group>"; };
+		925872B41A4D900000483FE3 /* IceLineScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IceLineScene.h; sourceTree = "<group>"; };
+		927274161A46AC0B008B2DC5 /* HakoVisStruggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HakoVisStruggle.h; sourceTree = "<group>"; };
 		927274171A46AFF4008B2DC5 /* SkipperWakeUpBeam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SkipperWakeUpBeam.cpp; sourceTree = "<group>"; };
 		927274181A46AFF4008B2DC5 /* SkipperWakeUpBeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkipperWakeUpBeam.h; sourceTree = "<group>"; };
 		92811CC61A47F57C007954AB /* MotionerThruVelocity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MotionerThruVelocity.h; sourceTree = "<group>"; };
 		92811CCB1A490069007954AB /* DanceMapScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DanceMapScene.h; sourceTree = "<group>"; };
+		92BD3AB01A5A7A30005498D6 /* HakoVisSandStorm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HakoVisSandStorm.h; sourceTree = "<group>"; };
 		92F108E61A45395F00E398B2 /* HakoniwaVibrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaVibrator.h; path = scenes/HakoniwaVibrator.h; sourceTree = "<group>"; };
 		92F108E81A45395F00E398B2 /* GeometryHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryHelpers.h; sourceTree = "<group>"; };
-		92F108E91A45395F00E398B2 /* SlidePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidePoint.h; sourceTree = "<group>"; };
+		92F108E91A45395F00E398B2 /* KezSlidePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KezSlidePoint.h; sourceTree = "<group>"; };
 		92F108EB1A45395F00E398B2 /* VectorField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VectorField.cpp; sourceTree = "<group>"; };
 		92F108EC1A45395F00E398B2 /* VectorField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VectorField.h; sourceTree = "<group>"; };
 		92F108ED1A45395F00E398B2 /* VFParticle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VFParticle.cpp; sourceTree = "<group>"; };
@@ -176,12 +182,24 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		925872B11A4D8FF800483FE3 /* iceLine */ = {
+			isa = PBXGroup;
+			children = (
+				925872B21A4D8FF800483FE3 /* IceLine.h */,
+				925872B31A4D8FF800483FE3 /* MapTri.h */,
+			);
+			name = iceLine;
+			path = scenes/iceLine;
+			sourceTree = "<group>";
+		};
 		92F108E71A45395F00E398B2 /* kez_util */ = {
 			isa = PBXGroup;
 			children = (
+				922356681A5D2D63009DD3EB /* KezDelaunayMesh.h */,
+				922356671A5D2C14009DD3EB /* KezBlinker.h */,
 				9248D4DF1A4D674600047AF5 /* KezConstants.h */,
 				92F108E81A45395F00E398B2 /* GeometryHelpers.h */,
-				92F108E91A45395F00E398B2 /* SlidePoint.h */,
+				92F108E91A45395F00E398B2 /* KezSlidePoint.h */,
 				92F108EA1A45395F00E398B2 /* vectorField */,
 			);
 			name = kez_util;
@@ -202,9 +220,12 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				925872B11A4D8FF800483FE3 /* iceLine */,
 				92F108E61A45395F00E398B2 /* HakoniwaVibrator.h */,
+				925872B41A4D900000483FE3 /* IceLineScene.h */,
 				92811CC61A47F57C007954AB /* MotionerThruVelocity.h */,
-				927274161A46AC0B008B2DC5 /* HakoniwaSkipper.h */,
+				927274161A46AC0B008B2DC5 /* HakoVisStruggle.h */,
+				92BD3AB01A5A7A30005498D6 /* HakoVisSandStorm.h */,
 				92811CCB1A490069007954AB /* DanceMapScene.h */,
 				927274171A46AFF4008B2DC5 /* SkipperWakeUpBeam.cpp */,
 				927274181A46AFF4008B2DC5 /* SkipperWakeUpBeam.h */,

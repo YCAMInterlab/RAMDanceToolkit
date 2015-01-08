@@ -10,7 +10,7 @@
 #define RAMDanceToolkit_KezConstants_h
 
 static const int SINGLE_SCREEN_WIDTH = 1920;
-static const int SINGLE_SCREEN_HEIGHT = 1080;
+static const int SINGLE_SCREEN_HEIGHT = 1200;
 static const int APP_WIDTH = SINGLE_SCREEN_WIDTH * 2;
 static const int APP_HEIGHT = SINGLE_SCREEN_HEIGHT;
 
