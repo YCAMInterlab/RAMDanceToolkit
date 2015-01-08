@@ -26,8 +26,13 @@ public:
 	
 	void guiEvent(ofxUIEventArgs& ev);
 
+	void sendMessageMulti(ofxOscMessage &m);
+
 	ofxOscSender sender;
 	ofxUICanvas mGui;
+	ofxUITextInput* addUI;
+	ofxUITextInput* portUI;
+	ofxUIToggleMatrix* oscMatrixUI;
 
 	ofxCv::ContourFinder	mContFinder;
 	ofxCv::FlowPyrLK		mOptFlow;
@@ -63,6 +68,8 @@ public:
 	float mOptFlowSmooth;
 	
 	vector <ofVec2f> pts;
+
+	vector <string> *oscListPtr;
 };
 
 #endif /* defined(__dpHakoniwa_cameraUnit__dpCameraUnit_cvAnalysis__) */

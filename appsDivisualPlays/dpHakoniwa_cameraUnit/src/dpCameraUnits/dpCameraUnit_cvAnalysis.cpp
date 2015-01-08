@@ -19,6 +19,8 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.addSpacer();
 	mGui.addToggle("SendOSC",		&mEnableSendOSC);
 	mGui.addTextInput("OSCAddress", "localhost")->setAutoClear(false);
+	mGui.addLabel("OSCSplit", "OSCSplit");
+	oscMatrixUI = mGui.addToggleMatrix("OSCSpliter", 1, 7);
 	mGui.addTextInput("OSCPort", "10000")->setAutoClear(false);
 	mGui.addToggle("ContourFinder", &mEnableContourFinder);
 	mGui.addToggle("OptFlow",		&mEnableOptFlow);
@@ -50,8 +52,8 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.autoSizeToFitWidgets();
 
 	//OSC Initialize
-	ofxUITextInput* addUI = (ofxUITextInput*)mGui.getWidget("OSCAddress");
-	ofxUITextInput* portUI = (ofxUITextInput*)mGui.getWidget("OSCPort");
+	addUI = (ofxUITextInput*)mGui.getWidget("OSCAddress");
+	portUI = (ofxUITextInput*)mGui.getWidget("OSCPort");
 
 	int pt = ofToInt(portUI->getTextString());
 	string address = addUI->getTextString();
@@ -100,8 +102,8 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			m.addFloatArg(rt.y);
 			m.addFloatArg(rt.width);
 			m.addFloatArg(rt.height);
-			sender.sendMessage(m);
-			
+			sendMessageMulti(m);
+
 			ofxOscMessage mm;
 			mm.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/blob");
 			mm.addIntArg(i);
@@ -123,7 +125,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 				}
 			}
 
-			sender.sendMessage(mm);
+			sendMessageMulti(mm);
 		}
 
 	}
@@ -138,7 +140,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			m.addIntArg(means[1]);
 			m.addIntArg(means[2]);
 			m.addIntArg(means_gray[0]);
-			sender.sendMessage(m);
+			sendMessageMulti(m);
 		}
 	}
 
@@ -182,7 +184,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 				m.addIntArg(i);
 				m.addFloatArg(mOptFlow_smoothVecs[i].x);
 				m.addFloatArg(mOptFlow_smoothVecs[i].y);
-				sender.sendMessage(m);
+				sendMessageMulti(m);
 			}
 
 			for (int i = 0;i < 10;i++){
@@ -190,7 +192,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 				m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector/length");
 				m.addIntArg(i);
 				m.addFloatArg(mOptFlow_smoothVecs[i].length());
-				sender.sendMessage(m);
+				sendMessageMulti(m);
 			}
 			
 			ofxOscMessage m;
@@ -198,7 +200,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			m.addFloatArg(mOptFlow_angleVec.x);
 			m.addFloatArg(mOptFlow_angleVec.y);
 			
-			sender.sendMessage(m);
+			sendMessageMulti(m);
 		}
 	}
 
@@ -261,31 +263,6 @@ void dpCameraUnit_cvAnalysis::draw(int x,int y){
 
 void dpCameraUnit_cvAnalysis::guiEvent(ofxUIEventArgs &ev){
 	ofxUIWidget* w = ev.widget;
-	
-	if (w->getName() == "OSCAddress"){
-		ofxUITextInput* addUI = (ofxUITextInput*)mGui.getWidget("OSCAddress");
-		ofxUITextInput* portUI = (ofxUITextInput*)mGui.getWidget("OSCPort");
-		if (addUI->getInputTriggerType() == OFX_UI_TEXTINPUT_ON_ENTER){
-			
-			int pt = ofToInt(portUI->getTextString());
-			string address = addUI->getTextString();
-			
-			sender.setup(address, pt);
-
-		}
-	}
-	if (w->getName() == "OSCPort"){
-		ofxUITextInput* addUI = (ofxUITextInput*)mGui.getWidget("OSCAddress");
-		ofxUITextInput* portUI = (ofxUITextInput*)mGui.getWidget("OSCPort");
-		if (portUI->getInputTriggerType() == OFX_UI_TEXTINPUT_ON_ENTER){
-			
-			int pt = ofToInt(portUI->getTextString());
-			string address = addUI->getTextString();
-			
-			sender.setup(address, pt);
-
-		}
-	}
 
 	if (w->getName() == "hakoniwaName"){
 		ofxUITextInput* ti = (ofxUITextInput*)w;
@@ -293,4 +270,22 @@ void dpCameraUnit_cvAnalysis::guiEvent(ofxUIEventArgs &ev){
 		hakoniwa_name = ti->getTextString();
 	}
 	
+}
+
+void dpCameraUnit_cvAnalysis::sendMessageMulti(ofxOscMessage &m){
+	if (!mEnableSendOSC) return;
+
+	string defAdd = addUI->getTextString();
+	int defPort = ofToInt(portUI->getTextString());
+
+	sender.setup(defAdd, defPort);
+	sender.sendMessage(m);
+
+	for (int i = 0;i < oscListPtr->size();i++){
+		if (oscMatrixUI->getState(0, i)){
+			sender.setup((*oscListPtr)[i], defPort);
+			sender.sendMessage(m);
+		}
+
+	}
 }

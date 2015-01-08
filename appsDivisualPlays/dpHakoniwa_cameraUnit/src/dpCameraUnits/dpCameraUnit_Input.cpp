@@ -10,7 +10,7 @@
 
 dpCameraUnit_input::dpCameraUnit_input(){
 
-	mVideoPlayer.loadMovie("hakoniwa_split_2.mov");//("hakoniwa_split_2.mov");
+	mVideoPlayer.loadMovie("hakoniwa_split_2_1.mov");//("hakoniwa_split_2.mov");
 	mVideoPlayer.setVolume(0.0);
 	
 	mCameraList.push_back("None");
@@ -103,7 +103,6 @@ void dpCameraUnit_input::update(){
 					
 					mFinalSource_FourSplit[3].cropFrom(mFinalSource_Large, input_width/2.0, input_height/2.0,
 													   input_width/2.0, input_height/2.0);
-					
 				}
 
 				ofxCv::resize(mFinalSource_Large, mFinalSource_Small);
