@@ -44,7 +44,7 @@ protected:
 	vector<ofxUIToggle*> enableToggles;
 	ofxUIImageButton *saveButton, *loadButton;
 public:
-	ofxUITabbedCanvas(float tabWidth = 100)
+	ofxUITabbedCanvas(float tabWidth = 200)
 	:currentTab(0)
 	,saveStatus(false)
 	,loadStatus(false)
