@@ -5,6 +5,7 @@
 #include "ofxUI.h"
 #include "dpScoreCommon.h"
 #include "dpScoreSceneManager.h"
+#include "dpScoreEvent.h"
 #include "ofxMotioner.h"
 
 class ofApp final : public ofBaseApp {
@@ -23,6 +24,7 @@ public:
     void dragEvent(ofDragInfo dragInfo) override;
     void gotMessage(ofMessage msg) override;
     void guiEvent(ofxUIEventArgs &e);
+    void onObjectReceived(dp::score::ObjectEventArgs& e);
     
 private:
     dp::score::SceneManager mSceneManager;
