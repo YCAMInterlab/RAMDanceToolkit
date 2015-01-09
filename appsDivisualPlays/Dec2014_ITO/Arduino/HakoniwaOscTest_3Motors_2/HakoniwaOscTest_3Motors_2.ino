@@ -47,13 +47,14 @@ void loop()
     cPos[i] = sv[i].read();
     
     if (i == 0) {
-      Serial.print(i);
-      Serial.print(cPos[i]);
-      Serial.print(" ");
-      Serial.println(gPos[i]);
+      Serial.println(myservo_movetime[i]);
     }
     
-    if (cPos[i] != gPos[i] && millis() >= myservo_movetime[i]) {
+    //myservo_movetime[i]がオーバーフローしてます。マイナスの値になってしまうので、millis()を下回り停止していた模様。
+    //おそらく起動から30秒過ぎたあとにmoveServoを呼び出すとビット溢れで止まります。
+//  if (cPos[i] != gPos[i] && millis() >= myservo_movetime[i]) {
+    //これで動作に問題なければ上の条件はいらないんじゃないかと思います。
+    if (cPos[i] != gPos[i]) {
       moveServo(i);
     }
   }
@@ -64,13 +65,6 @@ void loop()
    if (size > 0) {
      while (size--) {
        message.fill(_udp.read());
-     }
-     
-     if (message.hasError()){
-       Serial.println("error");
-     }
-     if (!message.match("/dp/hakoniwa/oscTest")){
-       Serial.println("not match");
      }
      
      if(!message.hasError() && message.match("/dp/hakoniwa/oscTest")) {
