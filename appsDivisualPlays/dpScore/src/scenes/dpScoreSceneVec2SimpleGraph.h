@@ -15,8 +15,8 @@ DP_SCORE_NAMESPACE_BEGIN
 
 class SceneVec2SimpleGraph final : public SceneBase {
 public:
-    SceneVec2SimpleGraph() {}
-    virtual ~SceneVec2SimpleGraph() {}
+    explicit SceneVec2SimpleGraph() = default;
+    virtual ~SceneVec2SimpleGraph() = default;
     
     void initialize() override;
     void shutDown() override;
@@ -29,9 +29,9 @@ public:
     
 private:
     deque<ofVec2f> mBuffer;
-    float mSensorScale;
-    ofVec2f mVec;
-    int mStep;
+    float mSensorScale{0.3f};
+    ofVec2f mVec{0.f};
+    int mStep{4};
     
 };
 

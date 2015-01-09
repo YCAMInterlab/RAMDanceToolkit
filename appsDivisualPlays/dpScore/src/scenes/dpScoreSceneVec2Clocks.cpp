@@ -10,14 +10,10 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-static const int _clockNumX = 16;
-static const int _clockNumY = 9;
-
 void SceneVec2Clocks::initialize()
 {
     dpDebugFunc();
     
-    mSensorScale = 0.3f;
     mClockBuffer.clear();
     
     mUICanvas = new ofxUICanvas();
@@ -33,7 +29,7 @@ void SceneVec2Clocks::shutDown()
     
     if (mUICanvas) {
         delete mUICanvas;
-        mUICanvas = NULL;
+        mUICanvas = nullptr;
     }
 }
 

@@ -13,11 +13,23 @@
 #include "ofxEvent.h"
 #include "ofxException.h"
 
+// WIP
+//#define USE_CUSTOM_MEMORY_ALLOCATOR
+
+#ifdef USE_CUSTOM_MEMORY_ALLOCATOR
+void* operator new(size_t size) throw(std::bad_alloc);
+void* operator new[](size_t size) throw(std::bad_alloc);
+void operator delete(void* pv) throw();
+void operator delete[](void* pv) throw();
+#endif
+
 #define DP_SCORE_NAMESPACE_BEGIN namespace dp { namespace score {
  
 #define DP_SCORE_NAMESPACE_END } }
 
 DP_SCORE_NAMESPACE_BEGIN
+
+using easeFunc = float(*)(float);
 
 extern const int kW;
 extern const int kH;

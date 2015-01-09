@@ -14,11 +14,6 @@ void SceneVec2Grid::initialize()
 {
     dpDebugFunc();
     
-    mSensorScale = 0.3f;
-    
-    mGridStep = 10;
-    mGridW = kW - 100.f;
-    mGridH = kH;
     mGridBuffer.clear();
     mGridBuffer.assign(mGridW/mGridStep, ofVec2f::zero());
     mGridVertices.clear();
@@ -40,7 +35,7 @@ void SceneVec2Grid::shutDown()
     
     if (mUICanvas) {
         delete mUICanvas;
-        mUICanvas = NULL;
+        mUICanvas = nullptr;
     }
 }
 

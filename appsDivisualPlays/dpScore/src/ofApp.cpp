@@ -6,7 +6,7 @@
 
 using namespace dp::score;
 
-//--------------------------------------------------------------
+#pragma mark ___________________________________________________________________
 void ofApp::setup()
 {
     ofSetFrameRate(kFrameRate);
@@ -42,13 +42,13 @@ void ofApp::setup()
     
     mSceneManager.getTabBar()->loadSettings(kSettingsDir, kSettingsPrefix);
     mSceneManager.getTabBar()->setVisible(false);
-    
+        
     mOscReceiver.setup(kOscClientPort);
     
     OFX_END_EXCEPTION_HANDLING
 }
 
-//--------------------------------------------------------------
+#pragma mark ___________________________________________________________________
 void ofApp::update()
 {
     ofSetWindowTitle(ofToString(ofGetFrameRate(), 2));
@@ -79,7 +79,7 @@ void ofApp::update()
     
     OFX_END_EXCEPTION_HANDLING
 }
-//--------------------------------------------------------------
+#pragma mark ___________________________________________________________________
 void ofApp::draw()
 {
     OFX_BEGIN_EXCEPTION_HANDLING
@@ -89,7 +89,17 @@ void ofApp::draw()
     OFX_END_EXCEPTION_HANDLING
 }
 
-//--------------------------------------------------------------
+#pragma mark ___________________________________________________________________
+void ofApp::exit()
+{
+    OFX_BEGIN_EXCEPTION_HANDLING
+    
+    mSceneManager.clear();
+    
+    OFX_END_EXCEPTION_HANDLING
+}
+
+#pragma mark ___________________________________________________________________
 void ofApp::keyPressed(int key)
 {
     OFX_BEGIN_EXCEPTION_HANDLING
@@ -118,7 +128,7 @@ void ofApp::keyPressed(int key)
     OFX_END_EXCEPTION_HANDLING
 }
 
-//--------------------------------------------------------------
+#pragma mark ___________________________________________________________________
 void ofApp::keyReleased(int key)
 {
     OFX_BEGIN_EXCEPTION_HANDLING
@@ -128,7 +138,7 @@ void ofApp::keyReleased(int key)
     OFX_END_EXCEPTION_HANDLING
 }
 
-//--------------------------------------------------------------
+#pragma mark ___________________________________________________________________
 void ofApp::mouseMoved(int x, int y)
 {
     OFX_BEGIN_EXCEPTION_HANDLING
@@ -138,7 +148,7 @@ void ofApp::mouseMoved(int x, int y)
     OFX_END_EXCEPTION_HANDLING
 }
 
-//--------------------------------------------------------------
+#pragma mark ___________________________________________________________________
 void ofApp::mouseDragged(int x, int y, int button)
 {
     OFX_BEGIN_EXCEPTION_HANDLING
@@ -148,7 +158,7 @@ void ofApp::mouseDragged(int x, int y, int button)
     OFX_END_EXCEPTION_HANDLING
 }
 
-//--------------------------------------------------------------
+#pragma mark ___________________________________________________________________
 void ofApp::mousePressed(int x, int y, int button)
 {
     OFX_BEGIN_EXCEPTION_HANDLING
@@ -158,7 +168,7 @@ void ofApp::mousePressed(int x, int y, int button)
     OFX_END_EXCEPTION_HANDLING
 }
 
-//--------------------------------------------------------------
+#pragma mark ___________________________________________________________________
 void ofApp::mouseReleased(int x, int y, int button)
 {
     OFX_BEGIN_EXCEPTION_HANDLING
@@ -168,7 +178,7 @@ void ofApp::mouseReleased(int x, int y, int button)
     OFX_END_EXCEPTION_HANDLING
 }
 
-//--------------------------------------------------------------
+#pragma mark ___________________________________________________________________
 void ofApp::windowResized(int w, int h)
 {
     OFX_BEGIN_EXCEPTION_HANDLING
@@ -178,7 +188,7 @@ void ofApp::windowResized(int w, int h)
     OFX_END_EXCEPTION_HANDLING
 }
 
-//--------------------------------------------------------------
+#pragma mark ___________________________________________________________________
 void ofApp::gotMessage(ofMessage msg)
 {
     OFX_BEGIN_EXCEPTION_HANDLING
@@ -188,7 +198,7 @@ void ofApp::gotMessage(ofMessage msg)
     OFX_END_EXCEPTION_HANDLING
 }
 
-//--------------------------------------------------------------
+#pragma mark ___________________________________________________________________
 void ofApp::dragEvent(ofDragInfo dragInfo)
 {
     OFX_BEGIN_EXCEPTION_HANDLING

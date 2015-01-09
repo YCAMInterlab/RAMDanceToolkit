@@ -10,13 +10,9 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-static const int _circleNum = 2000;
-
 void SceneVec2Plotter::initialize()
 {
     dpDebugFunc();
-    
-    mSensorScale = 0.3f;
     
     mCircleBuffer.clear();
     
@@ -40,7 +36,7 @@ void SceneVec2Plotter::shutDown()
     
     if (mUICanvas) {
         delete mUICanvas;
-        mUICanvas = NULL;
+        mUICanvas = nullptr;
     }
 }
 

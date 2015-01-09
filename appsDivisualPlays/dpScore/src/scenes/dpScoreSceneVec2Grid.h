@@ -15,8 +15,8 @@ DP_SCORE_NAMESPACE_BEGIN
 
 class SceneVec2Grid final : public SceneBase {
 public:
-    SceneVec2Grid() {}
-    virtual ~SceneVec2Grid() {}
+    explicit SceneVec2Grid() = default;
+    virtual ~SceneVec2Grid() = default;
     
     void initialize() override;
     void shutDown() override;
@@ -34,12 +34,12 @@ private:
     
     ofEasyCam mCam;
     
-    float mSensorScale;
-    ofVec2f mVec;
+    float mSensorScale{0.3f};
+    ofVec2f mVec{0.f};
     
-    int mGridStep;
-    int mGridW;
-    int mGridH;
+    int mGridStep{10};
+    int mGridW{kW - 100};
+    int mGridH{kH};
 };
 
 DP_SCORE_NAMESPACE_END
