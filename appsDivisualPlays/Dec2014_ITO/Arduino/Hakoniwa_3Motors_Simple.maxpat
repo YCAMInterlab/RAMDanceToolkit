@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 505.0, 425.0, 448.0, 379.0 ],
+		"rect" : [ 634.0, 506.0, 448.0, 379.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -89,7 +89,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 28.0, 287.0, 182.0, 35.0 ],
 					"style" : "",
-					"text" : "/dp/hakoniwa/oscTest 158 114 85"
+					"text" : "/dp/hakoniwa/oscTest 158 158 158"
 				}
 
 			}
@@ -128,9 +128,9 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 220.0, 242.0, 173.0, 22.0 ],
+					"patching_rect" : [ 220.0, 242.0, 158.0, 22.0 ],
 					"style" : "",
-					"text" : "prepend /dp/hakoniwa/oscTest"
+					"text" : "prepend /dp/hakoniwa/sand"
 				}
 
 			}
@@ -140,9 +140,9 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 220.0, 287.0, 173.0, 22.0 ],
+					"patching_rect" : [ 220.0, 287.0, 167.0, 22.0 ],
 					"style" : "",
-					"text" : "udpsend 192.168.20.54 12345"
+					"text" : "udpsend 192.168.20.54 8528"
 				}
 
 			}
