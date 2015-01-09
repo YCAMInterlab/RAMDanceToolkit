@@ -19,7 +19,7 @@ int tDelay[4]; // delay between moves, gives appearance of smooth motion
 EthernetUDP _udp;
 byte _mac[] = { 0x90, 0xA2, 0xDA, 0x85, 0x28, 0x04 };
 IPAddress _ip(192, 168, 20, 54);
-const unsigned int _inPort = 12345;
+const unsigned int _inPort = 8528;
 
 void setup() 
 {
@@ -46,8 +46,14 @@ void loop()
   for (int i = 0; i < 3; i++) {
     cPos[i] = sv[i].read();
     
+    
     if (i == 0) {
-      Serial.println(myservo_movetime[i]);
+//      Serial.println(myservo_movetime[i]);
+//      Serial.print(i);
+//      Serial.print(" ");
+//      Serial.print(cPos[i]);
+//      Serial.print(" ");
+//      Serial.println(gPos[i]);
     }
     
     //myservo_movetime[i]がオーバーフローしてます。マイナスの値になってしまうので、millis()を下回り停止していた模様。
@@ -66,7 +72,7 @@ void loop()
        message.fill(_udp.read());
      }
      
-     if(!message.hasError() && message.match("/dp/hakoniwa/oscTest")) {
+     if(!message.hasError() && message.match("/dp/hakoniwa/sand")) {
  //          digitalWrite(9, message.getInt(0) ? HIGH:LOW);
         for (int i = 0; i < 3; i++) {
           gPos[i] = message.getInt(i);
