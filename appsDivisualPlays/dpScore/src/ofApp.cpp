@@ -3,6 +3,7 @@
 #include "dpScoreSceneVec2Clocks.h"
 #include "dpScoreSceneVec2Grid.h"
 #include "dpScoreSceneVec2Plotter.h"
+#include "dpScoreSceneBodyVisualization.h"
 
 using namespace dp::score;
 
@@ -22,11 +23,13 @@ void ofApp::setup()
     auto vec2Clocks = SceneBase::Ptr(new SceneVec2Clocks());
     auto vec2Grid = SceneBase::Ptr(new SceneVec2Grid());
     auto vec2Plotter = SceneBase::Ptr(new SceneVec2Plotter());
+    auto bodyVis = SceneBase::Ptr(new SceneBodyVisualization());
     
     mSceneManager.add(vec2Simple);
     mSceneManager.add(vec2Clocks);
     mSceneManager.add(vec2Grid);
     mSceneManager.add(vec2Plotter);
+    mSceneManager.add(bodyVis);
     
     // make another instance for existing class
     //auto vec2Simple2 = SceneBase::Ptr(new SceneVec2SimpleGraph());
@@ -60,11 +63,15 @@ void ofApp::update()
     while (mOscReceiver.hasWaitingMessages()) {
         ofxOscMessage m;
         mOscReceiver.getNextMessage(&m);
+        const string addr = m.getAddress();
         
-        if (m.getAddress() == kOscAddrPendulumVec2) {
+        if (addr == kOscAddrPendulumVec2) {
             v.x += m.getArgAsFloat(1);
             v.y += m.getArgAsFloat(2);
             n++;
+        }
+        else if (addr == ofxMotioner::OSC_ADDR) {
+            ofxMotioner::updateWithOscMessage(m);
         }
     }
     if (n>0) {
@@ -77,6 +84,8 @@ void ofApp::update()
         mSceneManager.update(m);
     }
     
+    ofxMotioner::update();
+    
     OFX_END_EXCEPTION_HANDLING
 }
 #pragma mark ___________________________________________________________________
@@ -85,7 +94,7 @@ void ofApp::draw()
     OFX_BEGIN_EXCEPTION_HANDLING
     
     mSceneManager.draw();
-    
+        
     OFX_END_EXCEPTION_HANDLING
 }
 

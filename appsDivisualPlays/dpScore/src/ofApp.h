@@ -3,7 +3,9 @@
 #include "ofMain.h"
 #include "ofxOsc.h"
 #include "ofxUI.h"
+#include "dpScoreCommon.h"
 #include "dpScoreSceneManager.h"
+#include "ofxMotioner.h"
 
 class ofApp final : public ofBaseApp {
 public:
