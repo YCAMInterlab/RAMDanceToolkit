@@ -186,6 +186,10 @@
 		9258726B1A4D6CC800483FE3 /* ofxDelaunay.h in Headers */ = {isa = PBXBuildFile; fileRef = 9258724D1A4D6CC800483FE3 /* ofxDelaunay.h */; };
 		9258726F1A4D6CC800483FE3 /* ofxQuadWarp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 925872621A4D6CC800483FE3 /* ofxQuadWarp.cpp */; };
 		925872701A4D6CC800483FE3 /* ofxQuadWarp.h in Headers */ = {isa = PBXBuildFile; fileRef = 925872631A4D6CC800483FE3 /* ofxQuadWarp.h */; };
+		9264E9281A5F76F80084BA46 /* ramMotionExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9264E9261A5F76F80084BA46 /* ramMotionExtractor.cpp */; };
+		9264E9291A5F76F80084BA46 /* ramMotionExtractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 9264E9271A5F76F80084BA46 /* ramMotionExtractor.h */; };
+		9264E9361A5FD0750084BA46 /* ramFloorQuadWarper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9264E9341A5FD0750084BA46 /* ramFloorQuadWarper.cpp */; };
+		9264E9371A5FD0750084BA46 /* ramFloorQuadWarper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9264E9351A5FD0750084BA46 /* ramFloorQuadWarper.h */; };
 		9A38F4CC16E9E81900FF8B66 /* btBulletCollisionCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A38F3DE16E9E81800FF8B66 /* btBulletCollisionCommon.h */; };
 		9A38F4CD16E9E81900FF8B66 /* btBulletDynamicsCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A38F3DF16E9E81800FF8B66 /* btBulletDynamicsCommon.h */; };
 		9A38F4CE16E9E81900FF8B66 /* Bullet-C-Api.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A38F3E016E9E81800FF8B66 /* Bullet-C-Api.h */; };
@@ -772,6 +776,10 @@
 		925872621A4D6CC800483FE3 /* ofxQuadWarp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxQuadWarp.cpp; sourceTree = "<group>"; };
 		925872631A4D6CC800483FE3 /* ofxQuadWarp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxQuadWarp.h; sourceTree = "<group>"; };
 		925872641A4D6CC800483FE3 /* TODO.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.md; sourceTree = "<group>"; };
+		9264E9261A5F76F80084BA46 /* ramMotionExtractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramMotionExtractor.cpp; sourceTree = "<group>"; };
+		9264E9271A5F76F80084BA46 /* ramMotionExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramMotionExtractor.h; sourceTree = "<group>"; };
+		9264E9341A5FD0750084BA46 /* ramFloorQuadWarper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramFloorQuadWarper.cpp; sourceTree = "<group>"; };
+		9264E9351A5FD0750084BA46 /* ramFloorQuadWarper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramFloorQuadWarper.h; sourceTree = "<group>"; };
 		9A38F3DE16E9E81800FF8B66 /* btBulletCollisionCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletCollisionCommon.h; sourceTree = "<group>"; };
 		9A38F3DF16E9E81800FF8B66 /* btBulletDynamicsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletDynamicsCommon.h; sourceTree = "<group>"; };
 		9A38F3E016E9E81800FF8B66 /* Bullet-C-Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bullet-C-Api.h"; sourceTree = "<group>"; };
@@ -1429,6 +1437,8 @@
 		607D7ACC16661B860063800A /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				9264E9331A5FD0750084BA46 /* ramFloorQuadWarper */,
+				9264E9251A5F76F80084BA46 /* ramMotionExtractor */,
 				925872391A4D6CC800483FE3 /* ofxDelaunay */,
 				9258724E1A4D6CC800483FE3 /* ofxQuadWarp */,
 				9248D51E1A4D6A1200047AF5 /* ofxOpenCv */,
@@ -1811,6 +1821,26 @@
 				925872631A4D6CC800483FE3 /* ofxQuadWarp.h */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		9264E9251A5F76F80084BA46 /* ramMotionExtractor */ = {
+			isa = PBXGroup;
+			children = (
+				9264E9261A5F76F80084BA46 /* ramMotionExtractor.cpp */,
+				9264E9271A5F76F80084BA46 /* ramMotionExtractor.h */,
+			);
+			name = ramMotionExtractor;
+			path = ../../../addons/ramMotionExtractor;
+			sourceTree = "<group>";
+		};
+		9264E9331A5FD0750084BA46 /* ramFloorQuadWarper */ = {
+			isa = PBXGroup;
+			children = (
+				9264E9341A5FD0750084BA46 /* ramFloorQuadWarper.cpp */,
+				9264E9351A5FD0750084BA46 /* ramFloorQuadWarper.h */,
+			);
+			name = ramFloorQuadWarper;
+			path = ../../../addons/ramFloorQuadWarper;
 			sourceTree = "<group>";
 		};
 		9A38F3B916E9E81800FF8B66 /* ofxBt */ = {
@@ -2600,6 +2630,7 @@
 				277606F916E4EB2700D6B31D /* ramStamp.h in Headers */,
 				277606FA16E4EB2700D6B31D /* ramTimeFilter.h in Headers */,
 				277606FB16E4EB2700D6B31D /* ramUpsideDown.h in Headers */,
+				9264E9291A5F76F80084BA46 /* ramMotionExtractor.h in Headers */,
 				277606FD16E4EB2700D6B31D /* ramGraphics.h in Headers */,
 				277606FE16E4EB2700D6B31D /* ramGraphView.h in Headers */,
 				9248D5AE1A4D6A1200047AF5 /* version.hpp in Headers */,
@@ -2705,6 +2736,7 @@
 				9A38F4F016E9E81900FF8B66 /* btSphereBoxCollisionAlgorithm.h in Headers */,
 				9AEA65CE191CB63D001FAA18 /* ramNodeIdentifer.h in Headers */,
 				9A38F4F116E9E81900FF8B66 /* btSphereSphereCollisionAlgorithm.h in Headers */,
+				9264E9371A5FD0750084BA46 /* ramFloorQuadWarper.h in Headers */,
 				9A38F4F216E9E81900FF8B66 /* btSphereTriangleCollisionAlgorithm.h in Headers */,
 				9A38F4F316E9E81900FF8B66 /* btUnionFind.h in Headers */,
 				9A38F4F416E9E81900FF8B66 /* SphereTriangleDetector.h in Headers */,
@@ -3071,6 +3103,7 @@
 				9AEA65C7191CB63D001FAA18 /* ramPresetTab.cpp in Sources */,
 				277606F716E4EB2700D6B31D /* ramSession.cpp in Sources */,
 				D21D081D1A4BD9A900CC3598 /* ofxUIImage.cpp in Sources */,
+				9264E9281A5F76F80084BA46 /* ramMotionExtractor.cpp in Sources */,
 				9AEA65B8191CB63D001FAA18 /* ramCameraManager.cpp in Sources */,
 				277606FC16E4EB2700D6B31D /* ramGraphics.cpp in Sources */,
 				277606FF16E4EB2700D6B31D /* ramNodeLine.cpp in Sources */,
@@ -3143,6 +3176,7 @@
 				C6FC6B4419515D11002E18D5 /* ofxBaseGui.cpp in Sources */,
 				D21D08131A4BD9A900CC3598 /* ofxUIDragableLabelButton.cpp in Sources */,
 				D21D08461A4BD9A900CC3598 /* ofxUISpacer.cpp in Sources */,
+				9264E9361A5FD0750084BA46 /* ramFloorQuadWarper.cpp in Sources */,
 				9AEA65BA191CB63D001FAA18 /* ramSceneManager.cpp in Sources */,
 				D21D083A1A4BD9A900CC3598 /* ofxUIRangeSlider.cpp in Sources */,
 			);
