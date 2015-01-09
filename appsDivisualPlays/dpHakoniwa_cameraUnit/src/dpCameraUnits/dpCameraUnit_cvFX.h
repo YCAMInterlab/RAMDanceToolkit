@@ -49,6 +49,7 @@ public:
 protected:
 
 	ofxCv::Mat tmp;
+
 	void useAdaptiveThreshold(ofImage &src,ofImage &dst,int blockSize,int offset,bool invert,bool gauss);
 };
 

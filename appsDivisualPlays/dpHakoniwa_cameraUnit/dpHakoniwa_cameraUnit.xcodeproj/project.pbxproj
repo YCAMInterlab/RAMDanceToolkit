@@ -72,9 +72,9 @@
 		C6318F061A432581007DC4C8 /* dpCameraUnit_Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6318F041A432581007DC4C8 /* dpCameraUnit_Controller.cpp */; };
 		C6318F091A432862007DC4C8 /* dpCameraUnit_ShaderFX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6318F071A432862007DC4C8 /* dpCameraUnit_ShaderFX.cpp */; };
 		C6318F0C1A432879007DC4C8 /* dpCameraUnit_cvFX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6318F0A1A432879007DC4C8 /* dpCameraUnit_cvFX.cpp */; };
-		C6318F1A1A4329A2007DC4C8 /* ofxKsmrFragFXUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6318F161A4329A2007DC4C8 /* ofxKsmrFragFXUnit.cpp */; };
-		C6318F1B1A4329A2007DC4C8 /* ofxKsmrFragmentFx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6318F181A4329A2007DC4C8 /* ofxKsmrFragmentFx.cpp */; };
 		C6318F201A43E52E007DC4C8 /* dpCameraUnit_cvAnalysis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6318F1E1A43E52E007DC4C8 /* dpCameraUnit_cvAnalysis.cpp */; };
+		C685883F1A5E31DC00F8F488 /* ofxKsmrFragFXUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C685883B1A5E31DC00F8F488 /* ofxKsmrFragFXUnit.cpp */; };
+		C68588401A5E31DC00F8F488 /* ofxKsmrFragmentFx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C685883D1A5E31DC00F8F488 /* ofxKsmrFragmentFx.cpp */; };
 		C6D4099D1A46DB83002D4C34 /* sw_1010F_SerialController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D4099B1A46DB83002D4C34 /* sw_1010F_SerialController.cpp */; };
 		C961BE22AB9A8CCF037FC18F /* ofxUITextArea.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBE31D52BCB0CE44B9D154F0 /* ofxUITextArea.cpp */; };
 		CE5D89B9893EAA12F511DCAC /* ofxUIWidgetWithLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5AD807D1AF254F978AB20B1C /* ofxUIWidgetWithLabel.cpp */; };
@@ -350,21 +350,21 @@
 		C6318F081A432862007DC4C8 /* dpCameraUnit_ShaderFX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpCameraUnit_ShaderFX.h; path = dpCameraUnits/dpCameraUnit_ShaderFX.h; sourceTree = "<group>"; };
 		C6318F0A1A432879007DC4C8 /* dpCameraUnit_cvFX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpCameraUnit_cvFX.cpp; path = dpCameraUnits/dpCameraUnit_cvFX.cpp; sourceTree = "<group>"; };
 		C6318F0B1A432879007DC4C8 /* dpCameraUnit_cvFX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpCameraUnit_cvFX.h; path = dpCameraUnits/dpCameraUnit_cvFX.h; sourceTree = "<group>"; };
-		C6318F0E1A4329A2007DC4C8 /* FragFXUnits_EdgeOnTop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FragFXUnits_EdgeOnTop.h; sourceTree = "<group>"; };
-		C6318F0F1A4329A2007DC4C8 /* FragFXUnits_Fringe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FragFXUnits_Fringe.h; sourceTree = "<group>"; };
-		C6318F101A4329A2007DC4C8 /* FragFXUnits_Invert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FragFXUnits_Invert.h; sourceTree = "<group>"; };
-		C6318F111A4329A2007DC4C8 /* FragFXUnits_noise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FragFXUnits_noise.h; sourceTree = "<group>"; };
-		C6318F121A4329A2007DC4C8 /* FragFXUnits_SlantShift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FragFXUnits_SlantShift.h; sourceTree = "<group>"; };
-		C6318F131A4329A2007DC4C8 /* FragFXUnits_TexChip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FragFXUnits_TexChip.h; sourceTree = "<group>"; };
-		C6318F141A4329A2007DC4C8 /* FragFXUnits_verticalNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FragFXUnits_verticalNoise.h; sourceTree = "<group>"; };
-		C6318F151A4329A2007DC4C8 /* FragFXUnits_verticalSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FragFXUnits_verticalSlide.h; sourceTree = "<group>"; };
-		C6318F161A4329A2007DC4C8 /* ofxKsmrFragFXUnit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxKsmrFragFXUnit.cpp; sourceTree = "<group>"; };
-		C6318F171A4329A2007DC4C8 /* ofxKsmrFragFXUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxKsmrFragFXUnit.h; sourceTree = "<group>"; };
-		C6318F181A4329A2007DC4C8 /* ofxKsmrFragmentFx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxKsmrFragmentFx.cpp; sourceTree = "<group>"; };
-		C6318F191A4329A2007DC4C8 /* ofxKsmrFragmentFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxKsmrFragmentFx.h; sourceTree = "<group>"; };
 		C6318F1E1A43E52E007DC4C8 /* dpCameraUnit_cvAnalysis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpCameraUnit_cvAnalysis.cpp; path = dpCameraUnits/dpCameraUnit_cvAnalysis.cpp; sourceTree = "<group>"; };
 		C6318F1F1A43E52E007DC4C8 /* dpCameraUnit_cvAnalysis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpCameraUnit_cvAnalysis.h; path = dpCameraUnits/dpCameraUnit_cvAnalysis.h; sourceTree = "<group>"; };
 		C66C6414C8B86FDB99ED3B70 /* core.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = core.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/core.hpp; sourceTree = SOURCE_ROOT; };
+		C68588331A5E31DC00F8F488 /* FragFXUnits_EdgeOnTop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FragFXUnits_EdgeOnTop.h; sourceTree = "<group>"; };
+		C68588341A5E31DC00F8F488 /* FragFXUnits_Fringe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FragFXUnits_Fringe.h; sourceTree = "<group>"; };
+		C68588351A5E31DC00F8F488 /* FragFXUnits_Invert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FragFXUnits_Invert.h; sourceTree = "<group>"; };
+		C68588361A5E31DC00F8F488 /* FragFXUnits_noise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FragFXUnits_noise.h; sourceTree = "<group>"; };
+		C68588371A5E31DC00F8F488 /* FragFXUnits_SlantShift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FragFXUnits_SlantShift.h; sourceTree = "<group>"; };
+		C68588381A5E31DC00F8F488 /* FragFXUnits_TexChip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FragFXUnits_TexChip.h; sourceTree = "<group>"; };
+		C68588391A5E31DC00F8F488 /* FragFXUnits_verticalNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FragFXUnits_verticalNoise.h; sourceTree = "<group>"; };
+		C685883A1A5E31DC00F8F488 /* FragFXUnits_verticalSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FragFXUnits_verticalSlide.h; sourceTree = "<group>"; };
+		C685883B1A5E31DC00F8F488 /* ofxKsmrFragFXUnit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxKsmrFragFXUnit.cpp; sourceTree = "<group>"; };
+		C685883C1A5E31DC00F8F488 /* ofxKsmrFragFXUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxKsmrFragFXUnit.h; sourceTree = "<group>"; };
+		C685883D1A5E31DC00F8F488 /* ofxKsmrFragmentFx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxKsmrFragmentFx.cpp; sourceTree = "<group>"; };
+		C685883E1A5E31DC00F8F488 /* ofxKsmrFragmentFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxKsmrFragmentFx.h; sourceTree = "<group>"; };
 		C6937888E126BADC8777423B /* OscTypes.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = OscTypes.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscTypes.h; sourceTree = SOURCE_ROOT; };
 		C6D4099B1A46DB83002D4C34 /* sw_1010F_SerialController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sw_1010F_SerialController.cpp; path = utils/sw_1010F_SerialController.cpp; sourceTree = "<group>"; };
 		C6D4099C1A46DB83002D4C34 /* sw_1010F_SerialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sw_1010F_SerialController.h; path = utils/sw_1010F_SerialController.h; sourceTree = "<group>"; };
@@ -862,7 +862,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				C6318F0D1A4329A2007DC4C8 /* ofxKsmrFragmentFx */,
+				C68588321A5E31DC00F8F488 /* ofxKsmrFragmentFx */,
 				A0B90D3B0ADB9C1716816714 /* ofxOpenCv */,
 				E6053AB7FEC63D5F83825B88 /* ofxOsc */,
 				1F4FB5C423662B96ADFDCC0B /* ofxXmlSettings */,
@@ -930,24 +930,24 @@
 			name = video;
 			sourceTree = "<group>";
 		};
-		C6318F0D1A4329A2007DC4C8 /* ofxKsmrFragmentFx */ = {
+		C68588321A5E31DC00F8F488 /* ofxKsmrFragmentFx */ = {
 			isa = PBXGroup;
 			children = (
-				C6318F0E1A4329A2007DC4C8 /* FragFXUnits_EdgeOnTop.h */,
-				C6318F0F1A4329A2007DC4C8 /* FragFXUnits_Fringe.h */,
-				C6318F101A4329A2007DC4C8 /* FragFXUnits_Invert.h */,
-				C6318F111A4329A2007DC4C8 /* FragFXUnits_noise.h */,
-				C6318F121A4329A2007DC4C8 /* FragFXUnits_SlantShift.h */,
-				C6318F131A4329A2007DC4C8 /* FragFXUnits_TexChip.h */,
-				C6318F141A4329A2007DC4C8 /* FragFXUnits_verticalNoise.h */,
-				C6318F151A4329A2007DC4C8 /* FragFXUnits_verticalSlide.h */,
-				C6318F161A4329A2007DC4C8 /* ofxKsmrFragFXUnit.cpp */,
-				C6318F171A4329A2007DC4C8 /* ofxKsmrFragFXUnit.h */,
-				C6318F181A4329A2007DC4C8 /* ofxKsmrFragmentFx.cpp */,
-				C6318F191A4329A2007DC4C8 /* ofxKsmrFragmentFx.h */,
+				C68588331A5E31DC00F8F488 /* FragFXUnits_EdgeOnTop.h */,
+				C68588341A5E31DC00F8F488 /* FragFXUnits_Fringe.h */,
+				C68588351A5E31DC00F8F488 /* FragFXUnits_Invert.h */,
+				C68588361A5E31DC00F8F488 /* FragFXUnits_noise.h */,
+				C68588371A5E31DC00F8F488 /* FragFXUnits_SlantShift.h */,
+				C68588381A5E31DC00F8F488 /* FragFXUnits_TexChip.h */,
+				C68588391A5E31DC00F8F488 /* FragFXUnits_verticalNoise.h */,
+				C685883A1A5E31DC00F8F488 /* FragFXUnits_verticalSlide.h */,
+				C685883B1A5E31DC00F8F488 /* ofxKsmrFragFXUnit.cpp */,
+				C685883C1A5E31DC00F8F488 /* ofxKsmrFragFXUnit.h */,
+				C685883D1A5E31DC00F8F488 /* ofxKsmrFragmentFx.cpp */,
+				C685883E1A5E31DC00F8F488 /* ofxKsmrFragmentFx.h */,
 			);
 			name = ofxKsmrFragmentFx;
-			path = ../../../../ksmr/KsmrLib/ofxKsmrFragmentFx;
+			path = src/utils/ofxKsmrFragmentFx;
 			sourceTree = "<group>";
 		};
 		C6D4099E1A46DB88002D4C34 /* utils */ = {
@@ -1322,6 +1322,7 @@
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				250A95BA26587BE85DB0A353 /* ofxCvColorImage.cpp in Sources */,
 				1D5F3298C2FA073628012944 /* ofxCvContourFinder.cpp in Sources */,
+				C68588401A5E31DC00F8F488 /* ofxKsmrFragmentFx.cpp in Sources */,
 				169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */,
 				FB09C6B2A1DA0EA217240CB8 /* ofxCvGrayscaleImage.cpp in Sources */,
 				E212C821D1064B92DD953A42 /* ofxCvHaarFinder.cpp in Sources */,
@@ -1372,7 +1373,6 @@
 				7252706DA14C1BE63950ADDA /* ofxUIFPS.cpp in Sources */,
 				C6318F061A432581007DC4C8 /* dpCameraUnit_Controller.cpp in Sources */,
 				22030CBDCC25D815E7ED6757 /* ofxUIFPSSlider.cpp in Sources */,
-				C6318F1A1A4329A2007DC4C8 /* ofxKsmrFragFXUnit.cpp in Sources */,
 				3D4EA8E172D3E4A30FEFA969 /* ofxUIImage.cpp in Sources */,
 				7F2CD93F681F3C1547B3BF2C /* ofxUIImageButton.cpp in Sources */,
 				FBD0CD0AFE3849C14E829CAF /* ofxUIImageSampler.cpp in Sources */,
@@ -1386,6 +1386,7 @@
 				222C3AB10FA3158602718602 /* ofxUIMultiImageButton.cpp in Sources */,
 				F9C20834354ACC8337320B8C /* ofxUIMultiImageToggle.cpp in Sources */,
 				E3D59A6B55F05669B3FBF8BD /* ofxUINumberDialer.cpp in Sources */,
+				C685883F1A5E31DC00F8F488 /* ofxKsmrFragFXUnit.cpp in Sources */,
 				D60E54E7FD6E19BC8636E0D2 /* ofxUIRadio.cpp in Sources */,
 				1587708E3CAC72997E43504E /* ofxUIRangeSlider.cpp in Sources */,
 				59C5F2F5D7254C33C00F97CB /* ofxUIRectangle.cpp in Sources */,
@@ -1403,7 +1404,6 @@
 				04C82720B149CE576B8CBB06 /* ofxUIToggle.cpp in Sources */,
 				E3A1109F67D711D6C256031E /* ofxUIToggleMatrix.cpp in Sources */,
 				60012C723B05938A3D388335 /* ofxUIValuePlotter.cpp in Sources */,
-				C6318F1B1A4329A2007DC4C8 /* ofxKsmrFragmentFx.cpp in Sources */,
 				AE281BEBF3A00F1FC37F3DA0 /* ofxUIWaveform.cpp in Sources */,
 				82845E1F8C90E1F5A99D9868 /* ofxUIWidget.cpp in Sources */,
 				CE5D89B9893EAA12F511DCAC /* ofxUIWidgetWithLabel.cpp in Sources */,

@@ -20,9 +20,11 @@ public:
 	void setupControlPanel(ramBaseScene* scene_, ofVec2f canvasPos = ofVec2f(240,30));
 	void update();
 	void draw();
+	void mouseReleased(ofMouseEventArgs &arg);
 
 	/*=== Getter ===*/
 	int				getNumPort();
+	bool			getIsExist(int port);
 
 	ramNode			getNodeAt(int port);
 	string			getActorNameAt(int port);
@@ -44,10 +46,15 @@ public:
 
 protected:
 	void guiEvent(ofxUIEventArgs &e);
+	int getIndexFromName(string name);
 
+	ofxUICanvasPlus*		parentGui;
 	ofxUICanvas*			mGui;
+	ofxUISortableList*		actorList;
 	ramBaseScene*			mScenePtr;
+	ofVec2f					mCurrentCanvasPos;
 	float					mMotionSmooth;
+	int						lastNumNodeArray;
 	vector<ramMotionPort*>	mMotionPort;
 
 };
@@ -65,10 +72,13 @@ public:
 
 	void			init(ramNodeFinder nodeF);
 	void			update(float smooth);
+	void			refleshActorFromIndex();
+	void			refleshActorFromName();
 
 	bool			vecInitialize;
 	bool			isBlank;
 
+	int				mActorIndex;
 	ramNodeFinder	mFinder;
 	ofNode			mCurrentNode;
 	ofNode			mBefNode;

@@ -12,6 +12,7 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 
 	for (int i = 0;i < 4;i++){
 		cvAnalysis[i].mGui.setPosition(-1000, 0);
+		cvAnalysis[i].oscListPtr = &oscSendList;
 		cvFXUnit[i].mGui.setPosition(-1000, 0);
 	}
 
@@ -30,6 +31,25 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 	gui.addToggleMatrix("SavePreset", 5, 8);
 	gui.addLabel("PresetName");
 	gui.addTextInput("namePreset", "PresetName");
+	gui.addSpacer();
+	gui.addLabel("OSC SplitList",OFX_UI_FONT_LARGE);
+	gui.addLabel("RDTK_1");
+	gui.addTextInput("OSC_A", "192.168.20.2");
+	gui.addLabel("RDTK_2");
+	gui.addTextInput("OSC_B", "192.168.20.3");
+	gui.addLabel("floor_score");
+	gui.addTextInput("OSC_C", "192.168.20.6");
+	gui.addLabel("Audio1_evala");
+	gui.addTextInput("OSC_D", "192.168.20.9");
+	gui.addLabel("Audio2_evala");
+	gui.addTextInput("OSC_E", "192.168.20.10");
+	gui.addLabel("Dev_Kez");
+	gui.addTextInput("OSC_F", "192.168.20.23");
+	gui.addLabel("Dev_Onishi");
+	gui.addTextInput("OSC_G", "192.168.20.30");
+
+	refleshAddressList();
+
 	gui.autoSizeToFitWidgets();
 	
 	ofAddListener(gui.newGUIEvent, this, &dpCameraUnit_Controller::guiEvent);
@@ -59,8 +79,8 @@ void dpCameraUnit_Controller::update(){
 
 void dpCameraUnit_Controller::draw(){
 
-	inputUnit.drawUI(0, 300);
-	inputUnit.drawThumbnail(0, 410, 0.5);
+	inputUnit.drawUI(0, 730);
+	inputUnit.drawThumbnail(0, 840, 0.5);
 
 	if (inputUnit.mFourSplit){
 		for (int i = 0;i < 4;i++){
@@ -68,14 +88,14 @@ void dpCameraUnit_Controller::draw(){
 			cvFXUnit[i].drawUI			(240 + i*370, 0);
 			cvFXUnit[i].drawThumbnail	(450 + i*370, 0, 0.5);
 
-			cvAnalysis[i].drawUI		(240 + i * 370, 500);
-			cvAnalysis[i].drawThumbnail	(450 + i * 370, 500, 0.5);
+			cvAnalysis[i].drawUI		(240 + i * 370, 420);
+			cvAnalysis[i].drawThumbnail	(450 + i * 370, 420, 0.5);
 
 		}
 	}else{
 
 		cvFXUnit[0].draw(240,0);
-		cvAnalysis[0].draw(240,500);
+		cvAnalysis[0].draw(240,420);
 
 	}
 }
@@ -100,6 +120,10 @@ void dpCameraUnit_Controller::simulator_initialize(){
 void dpCameraUnit_Controller::guiEvent(ofxUIEventArgs &e){
 	
 	ofxUIWidget* w = e.widget;
+
+	if (w->getName().substr(0,4) == "OSC_"){
+		refleshAddressList();
+	}
 	
 	if (w->getName() == "Load Setting"){
 
@@ -113,9 +137,7 @@ void dpCameraUnit_Controller::guiEvent(ofxUIEventArgs &e){
 			cvAnalysis[i]	.mGui.saveSettings("Analysis_"+ofToString(i)+".xml");
 		}
 	}
-	
-	cout << w->getName() << endl;
-	
+
 	if (w->getName().substr(0,10) == "LoadPreset"){
 		ofxUIToggle* tm = (ofxUIToggle*)(e.widget);
 
@@ -154,5 +176,17 @@ void dpCameraUnit_Controller::guiEvent(ofxUIEventArgs &e){
 	if (w->getName() == "namePreset"){
 		ofxUITextInput* ti = (ofxUITextInput*)(e.widget);
 		ti->setTextString(ti->getTextString());
+	}
+}
+
+void dpCameraUnit_Controller::refleshAddressList(){
+	oscSendList.clear();
+
+	for (int i = 0;i < 7;i++){
+		string wname = "OSC_"+ofToString(char(0x41+i));
+		string add = ((ofxUITextInput*)
+					  (gui.getWidget(wname)))->getTextString();
+
+		oscSendList.push_back(add);
 	}
 }
