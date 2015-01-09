@@ -23,6 +23,12 @@ public:
 	void update();
 	void draw();
 	void simulator_initialize();
+	void refleshAddressList();
+
+	void guiEvent(ofxUIEventArgs& e);
+	
+	ofxUICanvas gui;
+	vector<string> oscSendList;
 
 	dpCameraUnit_input		inputUnit;
 	dpCameraUnit_cvFX		cvFXUnit[4];

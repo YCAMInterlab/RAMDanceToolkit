@@ -24,14 +24,10 @@ public:
 	void drawUI(int x,int y);
 	void drawThumbnail(int x,int y,float scale = 1.0);
 
-	ofxUICanvas mGui;
-	ofImage mSource;
-	ofImage mGraySource;
-	ofImage mGraySource_forDiff;
-
 	bool mEnableBlur;
 	bool mEnableCanny;
 	bool mEnableThreshold;
+	bool mEnableAdaptiveThreshold;
 	bool mEnableInvert;
 	bool mEnableFrameDiff;
 
@@ -39,6 +35,22 @@ public:
 	float mParam_Canny_Thr1;
 	float mParam_Canny_Thr2;
 	float mParam_Threshold;
+
+	int   mParam_adpThreshold_blockSize;
+	int   mParam_adpThreshold_offset;
+	bool  mParam_adpThreshold_invert;
+	bool  mParam_adpThreshold_gauss;
+
+	ofxUICanvas mGui;
+	ofImage mSource;
+	ofImage mGraySource;
+	ofImage mGraySource_forDiff;
+
+protected:
+
+	ofxCv::Mat tmp;
+
+	void useAdaptiveThreshold(ofImage &src,ofImage &dst,int blockSize,int offset,bool invert,bool gauss);
 };
 
 #endif /* defined(__dpHakoniwa_cameraUnit__dpCameraUnit_cvFX__) */

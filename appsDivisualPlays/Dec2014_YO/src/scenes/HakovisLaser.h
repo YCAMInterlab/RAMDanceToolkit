@@ -34,15 +34,22 @@ private:
     
     struct Blob {
         Blob(int index, int nVerts);
-        void draw();
+        void update();
+        void draw(float a);
         
         int idx;
-        ofPolyline polyLine;
+        vector<ofVec2f> verts;
+        ofVec3f center;
+        
+        ofVec2f min;
+        ofVec2f max;
     };
     
-    vector<ofPtr<Blob> > mBlobs;
+    deque<vector<ofPtr<Blob> > > mBlobs;
     
     float mBlobScale;
+    
+    float mX, mY;
     
 };
 

@@ -7,6 +7,9 @@
 //
 
 #include "HakovisLaser.h"
+#include "Easing.h"
+
+static float _height = 20.f;
 
 HakovisLaser::Blob::Blob(int index, int nVerts) :
 idx(index)
@@ -14,9 +17,58 @@ idx(index)
     
 }
 
-void HakovisLaser::Blob::draw()
+void HakovisLaser::Blob::update()
 {
-    polyLine.draw();
+    for (int i=0; i<verts.size(); i++) {
+        center += verts.at(i);
+    }
+    center /= verts.size();
+    
+    for (int i=0; i<verts.size(); i++) {
+        verts.at(i) -= center;
+        const ofVec2f& v = verts.at(i);
+        if (i==0){
+            min = max = v;
+        }
+        else {
+            if (v.x < min.x) min.x = v.x;
+            if (v.y < min.y) min.y = v.y;
+            if (v.x > max.x) max.x = v.x;
+            if (v.y > max.y) max.y = v.y;
+        }
+    }
+}
+
+void HakovisLaser::Blob::draw(float a)
+{
+    int n = 10;
+    float base = 2.f;
+    
+    a = ::easeInSine(a);
+    
+    float square = (max.x - min.x) * (max.y - min.y);
+    square = ofMap(square, 0, 50000, 0.2f, 1.f);
+    
+    ofPushMatrix();
+    ofTranslate(center.x, 0.f, center.y);
+    
+    glLineWidth(2.f);
+    for (int i=0; i<n; i++) {
+        ofPushMatrix();
+        float _f = (i+1)/(float)n;
+        ofColor c;
+        c.setHsb(_f*255.f, (a*0.7f)*255.f, 255.f);
+        ofSetColor(c, 2555);
+        ofTranslate(0.f, (n*_height - (i+1)*_height) * square, 0.f);
+        ofScale(i/(float)(n+1)*base, 1.f, i/(float)(n+1)*base);
+        glBegin(GL_LINE_STRIP);
+        for (int i=0; i<verts.size(); i++) {
+            glVertex3f(verts.at(i).x, 0.f, verts.at(i).y);
+        }
+        glEnd();
+        ofPopMatrix();
+    }
+    ofPopMatrix();
 }
 
 HakovisLaser::HakovisLaser() :
@@ -25,6 +77,9 @@ mOscReceiverTag(NULL)
     mOscReceiverTag = new ramOscReceiveTag;
     ramOscManager::instance().addReceiverTag(mOscReceiverTag);
     mOscReceiverTag->addAddress("/dp/cameraUnit/prism/contour/blob");
+    mBlobScale = 4.f;
+    mX = mY = 0.f;
+    mBlobs.clear();
 }
 
 HakovisLaser::~HakovisLaser()
@@ -39,6 +94,8 @@ void HakovisLaser::setupControlPanel()
 {
     ramGetGUI().addLabel("HakovisLaser");
     ramGetGUI().addSlider("Blob Scale", 0.f, 10.f, &mBlobScale);
+    ramGetGUI().addSlider("X", 0.f, 500.f, &mX);
+    ramGetGUI().addSlider("Y", 0.f, 500.f, &mY);
     
     ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent,
                   this,
@@ -47,7 +104,8 @@ void HakovisLaser::setupControlPanel()
 
 void HakovisLaser::update()
 {
-    mBlobs.clear();
+    vector<ofPtr<Blob> > blobs;
+    blobs.clear();
     while (mOscReceiverTag->hasWaitingMessages()) {
         ofxOscMessage m;
         mOscReceiverTag->getNextMessage(&m);
@@ -61,38 +119,48 @@ void HakovisLaser::update()
             const int blobIdx = m.getArgAsInt32(0);
             const int nVerts = m.getArgAsInt32(1);
             
-            cout << blobIdx << ", " << nVerts << endl;
+            //cout << blobIdx << ", " << nVerts << ", " << m.getNumArgs() << endl;
             
             ofPtr<Blob> blob = ofPtr<Blob>(new Blob(blobIdx, nVerts));
-
-            for (int i=0; i<nVerts; i+=2) {
+            
+            for (int i=0; i<nVerts*2; i+=2) {
                 ofVec2f v;
                 v.x = m.getArgAsFloat(i+0+2);
                 v.y = m.getArgAsFloat(i+1+2);
-                blob->polyLine.addVertex(v * mBlobScale);
+                blob->verts.push_back(v * mBlobScale);
             }
             
-            mBlobs.push_back(blob);
+            blob->update();
+            blobs.push_back(blob);
         }
+    }
+    
+    if (blobs.empty() == false)
+        mBlobs.push_back(blobs);
+    
+    while (mBlobs.size() > 60) {
+        mBlobs.pop_front();
     }
 }
 
 void HakovisLaser::draw()
 {
     ofPushStyle();
-    ofEnableAlphaBlending();
-    ofDisableDepthTest();
+    ofEnableDepthTest();
     ofSetColor(ofColor::white);
-    
-    ofPushMatrix();
-    ofTranslate(ofGetWidth() * 0.5f, ofGetHeight() * 0.5f);
-    for (int i=0; i<mBlobs.size(); i++) {
-        mBlobs.at(i)->draw();
-    }
-    ofPopMatrix();
     
     ramBeginCamera();
     
+    ofPushMatrix();
+    //ofTranslate(ofGetWidth() * 0.5f, ofGetHeight() * 0.5f);
+    ofTranslate(mX-250.f, 0.f, mY-250.f);
+    for (int i=0; i<mBlobs.size(); i++) {
+        for (int j=0; j<mBlobs.at(i).size(); j++) {
+            float a = (i+1)/(float)mBlobs.size();
+            mBlobs.at(i).at(j)->draw(a);
+        }
+    }
+    ofPopMatrix();
     
     ramEndCamera();
     

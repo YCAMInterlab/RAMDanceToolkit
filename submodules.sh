@@ -29,7 +29,7 @@ else
 	# ofxUI
 	git clone git@github.com:rezaali/ofxUI.git
 	cd ofxUI
-	git checkout 748d421
+	git checkout 1832f2a
 	cd ../
 
 	# ofxInteractivePrimitives
@@ -54,6 +54,12 @@ else
 	git clone git@github.com:julapy/ofxQuadWarp.git
 	cd ofxQuadWarp
 	git checkout a45ff5e
+	cd ../
+
+	# ofxDelaunay
+	git clone git@github.com:obviousjim/ofxDelaunay.git
+	cd ofxDelaunay
+	git checkout 957f902
 	cd ../
 
 	echo "end clone addons"

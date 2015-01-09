@@ -13,16 +13,18 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.setup();
 	mGui.addLabel("Analysis",OFX_UI_FONT_LARGE);
 	mGui.addSpacer();
-	
-	mGui.addLabel("Switch");
-	mGui.addSpacer();
+	mGui.addLabel("Hakoniwa Name");
+	mGui.addTextInput("hakoniwaName", "")->setAutoClear(false);
 	mGui.addLabel("OSCOption");
 	mGui.addSpacer();
 	mGui.addToggle("SendOSC",		&mEnableSendOSC);
 	mGui.addTextInput("OSCAddress", "localhost")->setAutoClear(false);
+	mGui.addLabel("OSCSplit", "OSCSplit");
+	oscMatrixUI = mGui.addToggleMatrix("OSCSpliter", 1, 7);
 	mGui.addTextInput("OSCPort", "10000")->setAutoClear(false);
 	mGui.addToggle("ContourFinder", &mEnableContourFinder);
 	mGui.addToggle("OptFlow",		&mEnableOptFlow);
+	mGui.addToggle("Flow_FarneBack", &mEnableOptFlowFarne);
 	mGui.addToggle("Mean",			&mEnableMean);
 //	mGui.addToggle("FAST",			&mEnableFAST);
 //	mGui.addToggle("Histgram",		&mEnableHistgram);
@@ -50,8 +52,8 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.autoSizeToFitWidgets();
 
 	//OSC Initialize
-	ofxUITextInput* addUI = (ofxUITextInput*)mGui.getWidget("OSCAddress");
-	ofxUITextInput* portUI = (ofxUITextInput*)mGui.getWidget("OSCPort");
+	addUI = (ofxUITextInput*)mGui.getWidget("OSCAddress");
+	portUI = (ofxUITextInput*)mGui.getWidget("OSCPort");
 
 	int pt = ofToInt(portUI->getTextString());
 	string address = addUI->getTextString();
@@ -89,28 +91,41 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 
 		mContFinder.findContours(pixGray);
 
+		pts.clear();
 		for (int i = 0;i < mContFinder.getContours().size();i++){
-			ofVec2f center = ofxCv::toOf(mContFinder.getCenter(i));
+			
+			ofRectangle rt = ofxCv::toOf(mContFinder.getBoundingRect(i));
 			ofxOscMessage m;
-			m.setAddress("/dp/cameraUnit/blob");
+			m.setAddress("dp/cameraUnit/"+hakoniwa_name+"/contour/boundingRect");
 			m.addIntArg(i);
-			m.addFloatArg(center.x);
-			m.addFloatArg(center.y);
-			sender.sendMessage(m);
+			m.addFloatArg(rt.x);
+			m.addFloatArg(rt.y);
+			m.addFloatArg(rt.width);
+			m.addFloatArg(rt.height);
+			sendMessageMulti(m);
+
+			ofxOscMessage mm;
+			mm.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/blob");
+			mm.addIntArg(i);
+			
+			int cnt = 0;
+			for (int j = 0;j < mContFinder.getContour(i).size();j++){
+				cnt++;
+			}
+			
+			mm.addIntArg(cnt);
+			
 			for (int j = 0;j < mContFinder.getContour(i).size();j++){
 
-				if ((j % 5 == 0) && (mEnableSendOSC)){
+				if (mEnableSendOSC){
 					ofVec2f pt = ofxCv::toOf(mContFinder.getContour(i)[j]);
-					ofxOscMessage m;
-					m.setAddress("/dp/cameraUnit/contour");
-					m.addIntArg(i);
-					m.addIntArg(j);
-					m.addFloatArg(pt.x);
-					m.addFloatArg(pt.y);
-					sender.sendMessage(m);
+					mm.addFloatArg(pt.x);
+					mm.addFloatArg(pt.y);
+					pts.push_back(ofVec2f(pt));
 				}
-
 			}
+
+			sendMessageMulti(mm);
 		}
 
 	}
@@ -125,9 +140,18 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			m.addIntArg(means[1]);
 			m.addIntArg(means[2]);
 			m.addIntArg(means_gray[0]);
-			sender.sendMessage(m);
+			sendMessageMulti(m);
 		}
 	}
+
+	if (mEnableOptFlowFarne){
+
+		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 1.0f) &&
+			(isFrameNew)) mOptFlowFarne.calcOpticalFlow(pixGray);
+
+
+	}
+
 	if (mEnableOptFlow){
 		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 1.0f) &&
 			(isFrameNew)) mOptFlow.calcOpticalFlow(pixGray);
@@ -160,7 +184,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 				m.addIntArg(i);
 				m.addFloatArg(mOptFlow_smoothVecs[i].x);
 				m.addFloatArg(mOptFlow_smoothVecs[i].y);
-				sender.sendMessage(m);
+				sendMessageMulti(m);
 			}
 
 			for (int i = 0;i < 10;i++){
@@ -168,7 +192,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 				m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector/length");
 				m.addIntArg(i);
 				m.addFloatArg(mOptFlow_smoothVecs[i].length());
-				sender.sendMessage(m);
+				sendMessageMulti(m);
 			}
 			
 			ofxOscMessage m;
@@ -176,7 +200,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			m.addFloatArg(mOptFlow_angleVec.x);
 			m.addFloatArg(mOptFlow_angleVec.y);
 			
-			sender.sendMessage(m);
+			sendMessageMulti(m);
 		}
 	}
 
@@ -187,6 +211,13 @@ void dpCameraUnit_cvAnalysis::drawUI(int x, int y){
 }
 
 void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
+	
+//	for (int i = 0;i < pts.size();i++){
+//		cout << "Circle" << i << endl;
+//		ofCircle(pts[i], 5);
+//	}
+	
+	
 	ofPushMatrix();
 	ofTranslate(x, y);
 	glScaled(scale, scale, scale);
@@ -194,8 +225,9 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 
 	if (mViewSource && imgRefGray != NULL) imgRefGray->draw(0,0);
 	ofSetColor(255, 255, 0);
-	mContFinder.draw();
-	mOptFlow.draw();
+	if (mEnableContourFinder)	mContFinder.draw();
+	if (mEnableOptFlow)			mOptFlow.draw();
+	if (mEnableOptFlowFarne)	mOptFlowFarne.draw();
 
 	if (mEnableOptFlow){
 		ofSetColor(255, 0, 0);
@@ -231,29 +263,29 @@ void dpCameraUnit_cvAnalysis::draw(int x,int y){
 
 void dpCameraUnit_cvAnalysis::guiEvent(ofxUIEventArgs &ev){
 	ofxUIWidget* w = ev.widget;
-	
-	if (w->getName() == "OSCAddress"){
-		ofxUITextInput* addUI = (ofxUITextInput*)mGui.getWidget("OSCAddress");
-		ofxUITextInput* portUI = (ofxUITextInput*)mGui.getWidget("OSCPort");
-		if (addUI->getInputTriggerType() == OFX_UI_TEXTINPUT_ON_ENTER){
-			
-			int pt = ofToInt(portUI->getTextString());
-			string address = addUI->getTextString();
-			
-			sender.setup(address, pt);
-		}
-	}
-	if (w->getName() == "OSCPort"){
-		ofxUITextInput* addUI = (ofxUITextInput*)mGui.getWidget("OSCAddress");
-		ofxUITextInput* portUI = (ofxUITextInput*)mGui.getWidget("OSCPort");
-		if (portUI->getInputTriggerType() == OFX_UI_TEXTINPUT_ON_ENTER){
-			
-			int pt = ofToInt(portUI->getTextString());
-			string address = addUI->getTextString();
-			
-			sender.setup(address, pt);
 
-		}
+	if (w->getName() == "hakoniwaName"){
+		ofxUITextInput* ti = (ofxUITextInput*)w;
+		ti->setTextString(ti->getTextString());
+		hakoniwa_name = ti->getTextString();
 	}
 	
+}
+
+void dpCameraUnit_cvAnalysis::sendMessageMulti(ofxOscMessage &m){
+	if (!mEnableSendOSC) return;
+
+	string defAdd = addUI->getTextString();
+	int defPort = ofToInt(portUI->getTextString());
+
+	sender.setup(defAdd, defPort);
+	sender.sendMessage(m);
+
+	for (int i = 0;i < oscListPtr->size();i++){
+		if (oscMatrixUI->getState(0, i)){
+			sender.setup((*oscListPtr)[i], defPort);
+			sender.sendMessage(m);
+		}
+
+	}
 }

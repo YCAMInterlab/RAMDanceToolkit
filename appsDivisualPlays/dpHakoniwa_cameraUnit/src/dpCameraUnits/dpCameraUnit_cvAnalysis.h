@@ -26,17 +26,24 @@ public:
 	
 	void guiEvent(ofxUIEventArgs& ev);
 
+	void sendMessageMulti(ofxOscMessage &m);
+
 	ofxOscSender sender;
 	ofxUICanvas mGui;
+	ofxUITextInput* addUI;
+	ofxUITextInput* portUI;
+	ofxUIToggleMatrix* oscMatrixUI;
 
 	ofxCv::ContourFinder	mContFinder;
 	ofxCv::FlowPyrLK		mOptFlow;
+	ofxCv::FlowFarneback	mOptFlowFarne;
 	ofxCv::Scalar means;
 	ofxCv::Scalar means_gray;
 
 	bool mEnableSendOSC;
 	bool mEnableContourFinder;
 	bool mEnableOptFlow;
+	bool mEnableOptFlowFarne;
 	bool mEnableFAST;
 	bool mEnableMean;
 	bool mEnableHistgram;
@@ -59,6 +66,10 @@ public:
 	ofVec2f mOptFlow_smoothVecs[10];
 	float mOptFlow_filterSpd;
 	float mOptFlowSmooth;
+	
+	vector <ofVec2f> pts;
+
+	vector <string> *oscListPtr;
 };
 
 #endif /* defined(__dpHakoniwa_cameraUnit__dpCameraUnit_cvAnalysis__) */

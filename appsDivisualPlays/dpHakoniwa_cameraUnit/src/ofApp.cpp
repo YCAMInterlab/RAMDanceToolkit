@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	ofBackground(30, 30, 30);
+	ofBackground(70, 80, 70);
 	ser.listDevices();
 	ser.setup("cu.usbserial-A5002vny",9600);
 	ofSetFrameRate(30);
@@ -71,5 +71,5 @@ void ofApp::gotMessage(ofMessage msg){
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
+	dpCameraUnit.inputUnit.mVideoPlayer.loadMovie(dragInfo.files[0]);
 }

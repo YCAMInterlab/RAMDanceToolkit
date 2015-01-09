@@ -10,6 +10,9 @@
 		270D2D9C16E4760700D5F750 /* icon.icns in CopyFiles */ = {isa = PBXBuildFile; fileRef = 270D2D9916E475D800D5F750 /* icon.icns */; };
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		C630DF1F1A4D80E800567351 /* distanceMetaball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C630DF1D1A4D80E800567351 /* distanceMetaball.cpp */; };
+		C6A68D121A5C32B700122475 /* ramMotionExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A68D101A5C32B700122475 /* ramMotionExtractor.cpp */; };
+		C6A68D181A5C32E000122475 /* ramMotionExtractorExampleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A68D161A5C32E000122475 /* ramMotionExtractorExampleScene.cpp */; };
 		C6D4097D1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D4097B1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp */; };
 		C6D409871A4575A5002D4C34 /* ofxKsmrParallelLinkDelta.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D4097F1A4575A5002D4C34 /* ofxKsmrParallelLinkDelta.cpp */; };
 		C6D409881A4575A5002D4C34 /* ofxKsmrStepManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D409831A4575A5002D4C34 /* ofxKsmrStepManager.cpp */; };
@@ -98,6 +101,12 @@
 		270D2D9916E475D800D5F750 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../../resources/Icons/icon.icns; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		C630DF1D1A4D80E800567351 /* distanceMetaball.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = distanceMetaball.cpp; path = scenes/distanceMetaball/distanceMetaball.cpp; sourceTree = "<group>"; };
+		C630DF1E1A4D80E800567351 /* distanceMetaball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = distanceMetaball.h; path = scenes/distanceMetaball/distanceMetaball.h; sourceTree = "<group>"; };
+		C6A68D101A5C32B700122475 /* ramMotionExtractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ramMotionExtractor.cpp; path = ../../../addons/ramMotionExtractor/ramMotionExtractor.cpp; sourceTree = "<group>"; };
+		C6A68D111A5C32B700122475 /* ramMotionExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ramMotionExtractor.h; path = ../../../addons/ramMotionExtractor/ramMotionExtractor.h; sourceTree = "<group>"; };
+		C6A68D161A5C32E000122475 /* ramMotionExtractorExampleScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ramMotionExtractorExampleScene.cpp; path = "../../example-ramMotionExtractor/src/scene/ramMotionExtractorExampleScene.cpp"; sourceTree = "<group>"; };
+		C6A68D171A5C32E000122475 /* ramMotionExtractorExampleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ramMotionExtractorExampleScene.h; path = "../../example-ramMotionExtractor/src/scene/ramMotionExtractorExampleScene.h"; sourceTree = "<group>"; };
 		C6D4097B1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakoniwaParallelLink_Base.cpp; path = scenes/HakoniwaParallelLink_Base.cpp; sourceTree = "<group>"; };
 		C6D4097C1A457117002D4C34 /* HakoniwaParallelLink_Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaParallelLink_Base.h; path = scenes/HakoniwaParallelLink_Base.h; sourceTree = "<group>"; };
 		C6D4097F1A4575A5002D4C34 /* ofxKsmrParallelLinkDelta.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxKsmrParallelLinkDelta.cpp; sourceTree = "<group>"; };
@@ -193,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				C6D4098A1A4575AE002D4C34 /* Hakoniwa_ParallelLink */,
+				C630DF1C1A4D80C900567351 /* distanceMetaball */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -235,6 +245,17 @@
 			name = "3rd party frameworks";
 			sourceTree = "<group>";
 		};
+		C630DF1C1A4D80C900567351 /* distanceMetaball */ = {
+			isa = PBXGroup;
+			children = (
+				C630DF1E1A4D80E800567351 /* distanceMetaball.h */,
+				C630DF1D1A4D80E800567351 /* distanceMetaball.cpp */,
+				C6A68D101A5C32B700122475 /* ramMotionExtractor.cpp */,
+				C6A68D111A5C32B700122475 /* ramMotionExtractor.h */,
+			);
+			name = distanceMetaball;
+			sourceTree = "<group>";
+		};
 		C6D4097E1A4575A5002D4C34 /* ofxKsmrParallelLinkDelta */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,6 +283,8 @@
 			children = (
 				C6D4097C1A457117002D4C34 /* HakoniwaParallelLink_Base.h */,
 				C6D4097B1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp */,
+				C6A68D161A5C32E000122475 /* ramMotionExtractorExampleScene.cpp */,
+				C6A68D171A5C32E000122475 /* ramMotionExtractorExampleScene.h */,
 				C6D4098C1A4575F1002D4C34 /* ParallelLinkManager.h */,
 				C6D4098B1A4575F1002D4C34 /* ParallelLinkManager.cpp */,
 				C6D4097E1A4575A5002D4C34 /* ofxKsmrParallelLinkDelta */,
@@ -460,9 +483,12 @@
 				C6D4098D1A4575F1002D4C34 /* ParallelLinkManager.cpp in Sources */,
 				C6D409B31A47D4E1002D4C34 /* ofxTCPManager.cpp in Sources */,
 				C6D4097D1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp in Sources */,
+				C6A68D121A5C32B700122475 /* ramMotionExtractor.cpp in Sources */,
+				C6A68D181A5C32E000122475 /* ramMotionExtractorExampleScene.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				C6D409B41A47D4E1002D4C34 /* ofxTCPServer.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
+				C630DF1F1A4D80E800567351 /* distanceMetaball.cpp in Sources */,
 				C6D409B21A47D4E1002D4C34 /* ofxTCPClient.cpp in Sources */,
 				C6D409891A4575A5002D4C34 /* virtualSteppingMotor.cpp in Sources */,
 				C6D409B51A47D4E1002D4C34 /* ofxUDPManager.cpp in Sources */,
@@ -646,7 +672,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
-				SDKROOT = macosx;
+				SDKROOT = macosx10.9;
 				VALID_ARCHS = i386;
 				WRAPPER_EXTENSION = app;
 			};
@@ -747,7 +773,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
+				SDKROOT = macosx10.9;
 				VALID_ARCHS = i386;
 				WRAPPER_EXTENSION = app;
 			};

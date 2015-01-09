@@ -31,11 +31,13 @@ public:
 	void mouseReleased(ofMouseEventArgs &arg);
 	void guiEvent(ofxUIEventArgs &e);
 
+	void sourceReflesh();
+	
 	ofxUICanvas			mGui;
 
 	
-	const float			input_width		= 640.0;
-	const float			input_height	= 480.0;
+	const float			input_width		= 320.0;
+	const float			input_height	= 240.0;
 	const float			thumb_ratio		= 0.5;
 	const float			cvSrc_ratio		= 0.25;
 
