@@ -29,7 +29,7 @@ else
 	# ofxUI
 	git clone git@github.com:rezaali/ofxUI.git
 	cd ofxUI
-	git checkout 748d421
+	git checkout 1832f2a
 	cd ../
 
 	# ofxInteractivePrimitives
