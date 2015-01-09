@@ -378,11 +378,13 @@ void ramMotionPort::update(float smooth){
 
 	mBefNode = mCurrentNode;
 	ramNode cn;
-	mFinder.findOne(cn);
-	mCurrentNode.setTransformMatrix(cn.getGlobalTransformMatrix());
-	if (!vecInitialize){
-		mBefNode = mCurrentNode;
-		vecInitialize = true;
+	if (!isBlank){
+		mFinder.findOne(cn);
+		mCurrentNode.setTransformMatrix(cn.getGlobalTransformMatrix());
+		if (!vecInitialize){
+			mBefNode = mCurrentNode;
+			vecInitialize = true;
+		}
 	}
 
 	mVelocity	= mCurrentNode.getGlobalPosition() - mBefNode.getGlobalPosition();
