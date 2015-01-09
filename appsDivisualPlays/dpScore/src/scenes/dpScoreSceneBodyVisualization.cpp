@@ -133,6 +133,8 @@ void SceneBodyVisualization::exit()
 
 void SceneBodyVisualization::update(ofxEventMessage& m)
 {
+    ofSetWindowTitle(getName() + ": " + ofToString(ofGetFrameRate(), 2));
+    
     if (mMagnify) {
         mScale += ofGetLastFrameTime() * 2.f;
         if (mScale >= 600.f) mScale = 100.f;
@@ -153,7 +155,7 @@ void SceneBodyVisualization::draw()
     ofDisableDepthTest();
     
     ofSetColor(ofColor::white, 255);
-    ofDrawBitmapString("Dividual Plays System Score - E", 12.f, 16.f);
+    ofDrawBitmapString(getName(), 12.f, 16.f);
     
     mCam.begin();
     ofPushMatrix();

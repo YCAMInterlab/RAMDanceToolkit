@@ -84,8 +84,6 @@ void ofApp::setup()
 #pragma mark ___________________________________________________________________
 void ofApp::update()
 {
-    ofSetWindowTitle(ofToString(ofGetFrameRate(), 2));
-    
     OFX_BEGIN_EXCEPTION_HANDLING
     
     int n = 0;
