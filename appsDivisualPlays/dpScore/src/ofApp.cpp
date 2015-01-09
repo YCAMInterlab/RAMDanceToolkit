@@ -57,7 +57,7 @@ void ofApp::setup()
     
     //mSceneManager.change(3);
     //mSceneManager.change("dp::score::SceneVec2Clocks");
-    mSceneManager.change<SceneVec2SimpleGraph>();
+    mSceneManager.change<SceneBodyVisualization>();
     
     mSceneManager.getTabBar()->loadSettings(kSettingsDir, kSettingsPrefix);
     mSceneManager.getTabBar()->setVisible(false);
