@@ -9,7 +9,7 @@
 
 Servo sv[4];
 int myservo_speed[4]; // how fast the servo moves, 1 = very fast, 10 = very slow
-int myservo_movetime[4]; // next time in millis servo next moves
+unsigned long myservo_movetime[4]; // next time in millis servo next moves
 int myservo_gPos[4]; // target position to move towards
 int myservo_cPos[4]; // current postion of servo
 int cPos[4];       // current position
@@ -51,10 +51,9 @@ void loop()
     }
     
     //myservo_movetime[i]がオーバーフローしてます。マイナスの値になってしまうので、millis()を下回り停止していた模様。
-    //おそらく起動から30秒過ぎたあとにmoveServoを呼び出すとビット溢れで止まります。
-//  if (cPos[i] != gPos[i] && millis() >= myservo_movetime[i]) {
-    //これで動作に問題なければ上の条件はいらないんじゃないかと思います。
-    if (cPos[i] != gPos[i]) {
+    //おそらく起動から32768ミリ秒過ぎたあとにmoveServoを呼び出すとビット溢れで止まります。
+    //unsigned long型にしましたので、これで50日間は大丈夫、らしい。
+    if (cPos[i] != gPos[i] && millis() >= myservo_movetime[i]) {
       moveServo(i);
     }
   }
