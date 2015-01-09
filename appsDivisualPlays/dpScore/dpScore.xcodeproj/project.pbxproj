@@ -56,6 +56,13 @@
 		D21D0C0B1A4C0E2E00CC3598 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D21D0C041A4C0E2E00CC3598 /* README.md */; };
 		D21D0C0C1A4C0E2E00CC3598 /* ofxException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0C071A4C0E2E00CC3598 /* ofxException.cpp */; };
 		D21D0C0D1A4C0E2E00CC3598 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D21D0C091A4C0E2E00CC3598 /* README.md */; };
+		D228B33D1A5FB738005F0404 /* dpScoreSceneBodyVisualization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B33B1A5FB738005F0404 /* dpScoreSceneBodyVisualization.cpp */; };
+		D228B3791A5FC2D8005F0404 /* ofxMotioner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B36D1A5FC2D8005F0404 /* ofxMotioner.cpp */; };
+		D228B37A1A5FC2D8005F0404 /* ofxMotionerConstants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B36F1A5FC2D8005F0404 /* ofxMotionerConstants.cpp */; };
+		D228B37B1A5FC2D8005F0404 /* ofxMotionerNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3711A5FC2D8005F0404 /* ofxMotionerNode.cpp */; };
+		D228B37C1A5FC2D8005F0404 /* ofxMotionerSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3731A5FC2D8005F0404 /* ofxMotionerSkeleton.cpp */; };
+		D228B37D1A5FC2D8005F0404 /* ofxMotionerUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3751A5FC2D8005F0404 /* ofxMotionerUtils.cpp */; };
+		D228B37E1A5FC2D8005F0404 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D228B3771A5FC2D8005F0404 /* README.md */; };
 		D24C21BC1A49653D009D0796 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21961A49653D009D0796 /* IpEndpointName.cpp */; };
 		D24C21BD1A49653D009D0796 /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C219B1A49653D009D0796 /* NetworkingUtils.cpp */; };
 		D24C21BE1A49653D009D0796 /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C219C1A49653D009D0796 /* UdpSocket.cpp */; };
@@ -237,6 +244,20 @@
 		D21D0C081A4C0E2E00CC3598 /* ofxException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxException.h; sourceTree = "<group>"; };
 		D21D0C091A4C0E2E00CC3598 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D21D0C0F1A4C2DAB00CC3598 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		D228B33B1A5FB738005F0404 /* dpScoreSceneBodyVisualization.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyVisualization.cpp; sourceTree = "<group>"; };
+		D228B33C1A5FB738005F0404 /* dpScoreSceneBodyVisualization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyVisualization.h; sourceTree = "<group>"; };
+		D228B3631A5FC2D8005F0404 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		D228B36D1A5FC2D8005F0404 /* ofxMotioner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMotioner.cpp; sourceTree = "<group>"; };
+		D228B36E1A5FC2D8005F0404 /* ofxMotioner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMotioner.h; sourceTree = "<group>"; };
+		D228B36F1A5FC2D8005F0404 /* ofxMotionerConstants.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMotionerConstants.cpp; sourceTree = "<group>"; };
+		D228B3701A5FC2D8005F0404 /* ofxMotionerConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMotionerConstants.h; sourceTree = "<group>"; };
+		D228B3711A5FC2D8005F0404 /* ofxMotionerNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMotionerNode.cpp; sourceTree = "<group>"; };
+		D228B3721A5FC2D8005F0404 /* ofxMotionerNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMotionerNode.h; sourceTree = "<group>"; };
+		D228B3731A5FC2D8005F0404 /* ofxMotionerSkeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMotionerSkeleton.cpp; sourceTree = "<group>"; };
+		D228B3741A5FC2D8005F0404 /* ofxMotionerSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMotionerSkeleton.h; sourceTree = "<group>"; };
+		D228B3751A5FC2D8005F0404 /* ofxMotionerUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMotionerUtils.cpp; sourceTree = "<group>"; };
+		D228B3761A5FC2D8005F0404 /* ofxMotionerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMotionerUtils.h; sourceTree = "<group>"; };
+		D228B3771A5FC2D8005F0404 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D24C21961A49653D009D0796 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		D24C21971A49653D009D0796 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
 		D24C21981A49653D009D0796 /* NetworkingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingUtils.h; sourceTree = "<group>"; };
@@ -346,6 +367,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				D228B3621A5FC2D8005F0404 /* ofxMotioner */,
 				D21D0C001A4C0E2E00CC3598 /* ofxEvent */,
 				D21D0C051A4C0E2E00CC3598 /* ofxException */,
 				D21D08811A4C045D00CC3598 /* ofxUI */,
@@ -519,6 +541,26 @@
 			path = ../../addons/ofxException;
 			sourceTree = "<group>";
 		};
+		D228B3621A5FC2D8005F0404 /* ofxMotioner */ = {
+			isa = PBXGroup;
+			children = (
+				D228B3631A5FC2D8005F0404 /* .gitignore */,
+				D228B36D1A5FC2D8005F0404 /* ofxMotioner.cpp */,
+				D228B36E1A5FC2D8005F0404 /* ofxMotioner.h */,
+				D228B36F1A5FC2D8005F0404 /* ofxMotionerConstants.cpp */,
+				D228B3701A5FC2D8005F0404 /* ofxMotionerConstants.h */,
+				D228B3711A5FC2D8005F0404 /* ofxMotionerNode.cpp */,
+				D228B3721A5FC2D8005F0404 /* ofxMotionerNode.h */,
+				D228B3731A5FC2D8005F0404 /* ofxMotionerSkeleton.cpp */,
+				D228B3741A5FC2D8005F0404 /* ofxMotionerSkeleton.h */,
+				D228B3751A5FC2D8005F0404 /* ofxMotionerUtils.cpp */,
+				D228B3761A5FC2D8005F0404 /* ofxMotionerUtils.h */,
+				D228B3771A5FC2D8005F0404 /* README.md */,
+			);
+			name = ofxMotioner;
+			path = ../../addons/ofxMotioner;
+			sourceTree = "<group>";
+		};
 		D24C21911A49653D009D0796 /* ofxOsc */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,6 +692,8 @@
 				D290340E1A4D4ADE00577E04 /* dpScoreSceneVec2Plotter.h */,
 				D290340F1A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.cpp */,
 				D29034101A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.h */,
+				D228B33B1A5FB738005F0404 /* dpScoreSceneBodyVisualization.cpp */,
+				D228B33C1A5FB738005F0404 /* dpScoreSceneBodyVisualization.h */,
 			);
 			path = scenes;
 			sourceTree = "<group>";
@@ -827,8 +871,10 @@
 				D24C21C61A49653D009D0796 /* ofxOscMessage.cpp in Sources */,
 				D24C21C81A49653D009D0796 /* ofxOscReceiver.cpp in Sources */,
 				D21D0B9F1A4C046000CC3598 /* ofxUIMultiImageButton.cpp in Sources */,
+				D228B37B1A5FC2D8005F0404 /* ofxMotionerNode.cpp in Sources */,
 				D24C21C41A49653D009D0796 /* OscTypes.cpp in Sources */,
 				D21D0C0D1A4C0E2E00CC3598 /* README.md in Sources */,
+				D228B33D1A5FB738005F0404 /* dpScoreSceneBodyVisualization.cpp in Sources */,
 				D21D0B9E1A4C046000CC3598 /* ofxUIMovingGraph.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				D21D0B941A4C046000CC3598 /* ofxUIFPSSlider.cpp in Sources */,
@@ -869,9 +915,12 @@
 				D21D0BAD1A4C046000CC3598 /* ofxUITextArea.cpp in Sources */,
 				D29034131A4D4ADE00577E04 /* dpScoreSceneManager.cpp in Sources */,
 				D21D0BA91A4C046000CC3598 /* ofxUISpacer.cpp in Sources */,
+				D228B37A1A5FC2D8005F0404 /* ofxMotionerConstants.cpp in Sources */,
 				D21D0B961A4C046000CC3598 /* ofxUIImageButton.cpp in Sources */,
 				D24C21C71A49653D009D0796 /* ofxOscParameterSync.cpp in Sources */,
 				D21D0C0A1A4C0E2E00CC3598 /* ofxEvent.cpp in Sources */,
+				D228B37E1A5FC2D8005F0404 /* README.md in Sources */,
+				D228B37C1A5FC2D8005F0404 /* ofxMotionerSkeleton.cpp in Sources */,
 				D29034161A4D4ADE00577E04 /* dpScoreSceneVec2Plotter.cpp in Sources */,
 				D21D0B931A4C046000CC3598 /* ofxUIFPS.cpp in Sources */,
 				D21D0B8A1A4C046000CC3598 /* ofxUI2DPad.cpp in Sources */,
@@ -880,6 +929,7 @@
 				D21D0C0B1A4C0E2E00CC3598 /* README.md in Sources */,
 				D21D0BA31A4C046000CC3598 /* ofxUIRangeSlider.cpp in Sources */,
 				D29034171A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.cpp in Sources */,
+				D228B37D1A5FC2D8005F0404 /* ofxMotionerUtils.cpp in Sources */,
 				D21D0BA11A4C046000CC3598 /* ofxUINumberDialer.cpp in Sources */,
 				D24C21C21A49653D009D0796 /* OscPrintReceivedElements.cpp in Sources */,
 				D21D0B9A1A4C046000CC3598 /* ofxUILabel.cpp in Sources */,
@@ -897,6 +947,7 @@
 				D21D0B8E1A4C046000CC3598 /* ofxUICanvas.cpp in Sources */,
 				D21D0C0C1A4C0E2E00CC3598 /* ofxException.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
+				D228B3791A5FC2D8005F0404 /* ofxMotioner.cpp in Sources */,
 				D21D0B8C1A4C046000CC3598 /* ofxUIBiLabelSlider.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -999,6 +1050,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ./PrefixHeader.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_CORE_HEADERS)",
+					src,
+				);
 				ICON = "$(ICON_NAME_DEBUG)";
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
@@ -1090,6 +1145,10 @@
 				GCC_MODEL_TUNING = NONE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ./PrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_CORE_HEADERS)",
+					src,
+				);
 				ICON = "$(ICON_NAME_RELEASE)";
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";

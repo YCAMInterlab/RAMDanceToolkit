@@ -14,8 +14,6 @@ void SceneVec2SimpleGraph::initialize()
 {
     dpDebugFunc();
     
-    mSensorScale = 0.3f;
-    mStep = 4;
     mBuffer.clear();
     mBuffer.assign(kW/mStep, ofVec2f::zero());
  
@@ -33,7 +31,7 @@ void SceneVec2SimpleGraph::shutDown()
     
     if (mUICanvas) {
         delete mUICanvas;
-        mUICanvas = NULL;
+        mUICanvas = nullptr;
     }
 }
 
