@@ -63,6 +63,7 @@
 		D228B37C1A5FC2D8005F0404 /* ofxMotionerSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3731A5FC2D8005F0404 /* ofxMotionerSkeleton.cpp */; };
 		D228B37D1A5FC2D8005F0404 /* ofxMotionerUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3751A5FC2D8005F0404 /* ofxMotionerUtils.cpp */; };
 		D228B37E1A5FC2D8005F0404 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D228B3771A5FC2D8005F0404 /* README.md */; };
+		D228B3841A5FC95C005F0404 /* dpScoreEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3821A5FC95C005F0404 /* dpScoreEvent.cpp */; };
 		D24C21BC1A49653D009D0796 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21961A49653D009D0796 /* IpEndpointName.cpp */; };
 		D24C21BD1A49653D009D0796 /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C219B1A49653D009D0796 /* NetworkingUtils.cpp */; };
 		D24C21BE1A49653D009D0796 /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C219C1A49653D009D0796 /* UdpSocket.cpp */; };
@@ -258,6 +259,8 @@
 		D228B3751A5FC2D8005F0404 /* ofxMotionerUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMotionerUtils.cpp; sourceTree = "<group>"; };
 		D228B3761A5FC2D8005F0404 /* ofxMotionerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMotionerUtils.h; sourceTree = "<group>"; };
 		D228B3771A5FC2D8005F0404 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D228B3821A5FC95C005F0404 /* dpScoreEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreEvent.cpp; sourceTree = "<group>"; };
+		D228B3831A5FC95C005F0404 /* dpScoreEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreEvent.h; sourceTree = "<group>"; };
 		D24C21961A49653D009D0796 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		D24C21971A49653D009D0796 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
 		D24C21981A49653D009D0796 /* NetworkingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingUtils.h; sourceTree = "<group>"; };
@@ -677,6 +680,8 @@
 				D29034031A4D4ADE00577E04 /* dpScoreSceneBase.h */,
 				D29034061A4D4ADE00577E04 /* dpScoreSceneManager.cpp */,
 				D29034071A4D4ADE00577E04 /* dpScoreSceneManager.h */,
+				D228B3821A5FC95C005F0404 /* dpScoreEvent.cpp */,
+				D228B3831A5FC95C005F0404 /* dpScoreEvent.h */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -936,6 +941,7 @@
 				D21D0BAB1A4C046000CC3598 /* ofxUISuperCanvas.cpp in Sources */,
 				D21D0BA01A4C046000CC3598 /* ofxUIMultiImageToggle.cpp in Sources */,
 				D2E2B7401A4A4FB500570C58 /* tinyxmlerror.cpp in Sources */,
+				D228B3841A5FC95C005F0404 /* dpScoreEvent.cpp in Sources */,
 				D24C21C11A49653D009D0796 /* OscOutboundPacketStream.cpp in Sources */,
 				D2E2B73F1A4A4FB500570C58 /* tinyxml.cpp in Sources */,
 				D24C21C51A49653D009D0796 /* ofxOscBundle.cpp in Sources */,
