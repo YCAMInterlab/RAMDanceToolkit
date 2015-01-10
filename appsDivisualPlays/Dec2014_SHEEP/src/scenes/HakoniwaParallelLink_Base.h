@@ -10,6 +10,7 @@
 #define __RAMDanceToolkit__HakoniwaParallelLink_Base__
 
 #include "ramMain.h"
+#include "ramMotionExtractor.h"
 #include "ParallelLinkManager.h"
 
 class HakoniwaParallelLink_Base : public ramBaseScene {
@@ -46,6 +47,7 @@ private:
 	bool ManualPose;
 	bool mDigitalOut;
 	bool mTrackMachine;
+	bool mDrawExtractor;
 	float mPwm_Param;
 	
 	ofVec3f mManualPosition;
@@ -54,6 +56,9 @@ private:
 	ofxUICanvas* xyzGui;
 	ofxUICanvas* systemGui;
 	ofxUICanvas* settingGui;
+	ofxUICanvas* utilityGui;
+
+	ramMotionExtractor motionEx;
 
 	float mSetting_Accel;
 	float mSetting_Deccel;

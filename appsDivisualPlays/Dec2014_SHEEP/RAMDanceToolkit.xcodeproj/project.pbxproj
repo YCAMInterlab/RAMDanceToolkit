@@ -11,6 +11,7 @@
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		C630DF1F1A4D80E800567351 /* distanceMetaball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C630DF1D1A4D80E800567351 /* distanceMetaball.cpp */; };
+		C685884C1A5EA7E000F8F488 /* dpMarionette.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C685884A1A5EA7E000F8F488 /* dpMarionette.cpp */; };
 		C6A68D121A5C32B700122475 /* ramMotionExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A68D101A5C32B700122475 /* ramMotionExtractor.cpp */; };
 		C6A68D181A5C32E000122475 /* ramMotionExtractorExampleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A68D161A5C32E000122475 /* ramMotionExtractorExampleScene.cpp */; };
 		C6D4097D1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D4097B1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp */; };
@@ -103,6 +104,8 @@
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		C630DF1D1A4D80E800567351 /* distanceMetaball.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = distanceMetaball.cpp; path = scenes/distanceMetaball/distanceMetaball.cpp; sourceTree = "<group>"; };
 		C630DF1E1A4D80E800567351 /* distanceMetaball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = distanceMetaball.h; path = scenes/distanceMetaball/distanceMetaball.h; sourceTree = "<group>"; };
+		C685884A1A5EA7E000F8F488 /* dpMarionette.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpMarionette.cpp; path = dpUtils/dpMarionette.cpp; sourceTree = "<group>"; };
+		C685884B1A5EA7E000F8F488 /* dpMarionette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpMarionette.h; path = dpUtils/dpMarionette.h; sourceTree = "<group>"; };
 		C6A68D101A5C32B700122475 /* ramMotionExtractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ramMotionExtractor.cpp; path = ../../../addons/ramMotionExtractor/ramMotionExtractor.cpp; sourceTree = "<group>"; };
 		C6A68D111A5C32B700122475 /* ramMotionExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ramMotionExtractor.h; path = ../../../addons/ramMotionExtractor/ramMotionExtractor.h; sourceTree = "<group>"; };
 		C6A68D161A5C32E000122475 /* ramMotionExtractorExampleScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ramMotionExtractorExampleScene.cpp; path = "../../example-ramMotionExtractor/src/scene/ramMotionExtractorExampleScene.cpp"; sourceTree = "<group>"; };
@@ -250,10 +253,19 @@
 			children = (
 				C630DF1E1A4D80E800567351 /* distanceMetaball.h */,
 				C630DF1D1A4D80E800567351 /* distanceMetaball.cpp */,
-				C6A68D101A5C32B700122475 /* ramMotionExtractor.cpp */,
 				C6A68D111A5C32B700122475 /* ramMotionExtractor.h */,
+				C6A68D101A5C32B700122475 /* ramMotionExtractor.cpp */,
 			);
 			name = distanceMetaball;
+			sourceTree = "<group>";
+		};
+		C68588491A5EA7A700F8F488 /* dpUtils */ = {
+			isa = PBXGroup;
+			children = (
+				C685884B1A5EA7E000F8F488 /* dpMarionette.h */,
+				C685884A1A5EA7E000F8F488 /* dpMarionette.cpp */,
+			);
+			name = dpUtils;
 			sourceTree = "<group>";
 		};
 		C6D4097E1A4575A5002D4C34 /* ofxKsmrParallelLinkDelta */ = {
@@ -283,8 +295,8 @@
 			children = (
 				C6D4097C1A457117002D4C34 /* HakoniwaParallelLink_Base.h */,
 				C6D4097B1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp */,
-				C6A68D161A5C32E000122475 /* ramMotionExtractorExampleScene.cpp */,
 				C6A68D171A5C32E000122475 /* ramMotionExtractorExampleScene.h */,
+				C6A68D161A5C32E000122475 /* ramMotionExtractorExampleScene.cpp */,
 				C6D4098C1A4575F1002D4C34 /* ParallelLinkManager.h */,
 				C6D4098B1A4575F1002D4C34 /* ParallelLinkManager.cpp */,
 				C6D4097E1A4575A5002D4C34 /* ofxKsmrParallelLinkDelta */,
@@ -363,6 +375,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				C68588491A5EA7A700F8F488 /* dpUtils */,
 				9A1DE6D516AA666100A10E3F /* Scenes */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
@@ -481,6 +494,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6D4098D1A4575F1002D4C34 /* ParallelLinkManager.cpp in Sources */,
+				C685884C1A5EA7E000F8F488 /* dpMarionette.cpp in Sources */,
 				C6D409B31A47D4E1002D4C34 /* ofxTCPManager.cpp in Sources */,
 				C6D4097D1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp in Sources */,
 				C6A68D121A5C32B700122475 /* ramMotionExtractor.cpp in Sources */,

@@ -25,13 +25,11 @@ class ofxKsmrStepManager{
 public:
 	ofxKsmrStepManager(){
 		useOsc = false;
-		useUDP = false;
 	}
 
 	void setup(string portName,int baud);
 	void setup(int portNum, int baud);
 	void setupOsc(string address, int port);
-	void setupUDP(string address, int port);
 
 	void addStepper(string name,int numStep,int SPIch);
 
@@ -39,7 +37,6 @@ public:
 	void setupEasyFromPreset(ofxKsmrStepPreset preset);
 
 	void resetAllDevices();
-	void setMicroSteps		(int involution0to7);
 
 	void selectStepperOne	(int ch,bool enable);
 	void setStepperAll		(bool enable);
@@ -64,6 +61,7 @@ public:
 	void hardStop();
 	void gohome();
 
+	void setMicroSteps		(int involution0to7);
 	void setParam_maxSpeed(int bit_10);
 	void setParam_minSpeed(int bit_13);
 	void setParam_Accel(int bit_12);
@@ -79,10 +77,8 @@ public:
 	ofSerial serial;
 
 	bool			useOsc;
-	bool			useUDP;
 
 	ofxOscSender	sender;
-	ofxUDPManager	udpSender;
 
 	void sendBytesOnline(unsigned char* buffer, int length);
 };
