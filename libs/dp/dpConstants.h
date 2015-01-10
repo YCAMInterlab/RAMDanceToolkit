@@ -14,19 +14,19 @@ static const int SINGLE_SCREEN_HEIGHT = 1080;
 static const int APP_WIDTH = SINGLE_SCREEN_WIDTH * 2;
 static const int APP_HEIGHT = SINGLE_SCREEN_HEIGHT;
 
-static ofRectangle getFirstScreenViewPort(){
+static ofRectangle dpGetFirstScreenViewPort(){
     return ofRectangle(0,0,SINGLE_SCREEN_WIDTH,SINGLE_SCREEN_HEIGHT);
 }
 
-static ofRectangle getSecondScreenViewPort(){
+static ofRectangle dpGetSecondScreenViewPort(){
     return ofRectangle(SINGLE_SCREEN_WIDTH,0,SINGLE_SCREEN_WIDTH,SINGLE_SCREEN_HEIGHT);
 }
 
-static ofPoint getFisrtScreenCenter(){
+static ofPoint dpGetFisrtScreenCenter(){
     return ofPoint(SINGLE_SCREEN_WIDTH * 0.5,SINGLE_SCREEN_HEIGHT * 0.5,0.0);
 }
 
-static ofPoint getSecondScreenCenter(){
+static ofPoint dpGetSecondScreenCenter(){
     return ofPoint(SINGLE_SCREEN_WIDTH * 1.5,SINGLE_SCREEN_HEIGHT * 0.5,0.0);
 }
 
