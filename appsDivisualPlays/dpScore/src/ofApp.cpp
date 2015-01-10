@@ -51,12 +51,12 @@ void ofApp::setup()
     auto vec2Grid = SceneBase::Ptr(new SceneVec2Grid());
     auto vec2Plotter = SceneBase::Ptr(new SceneVec2Plotter());
     
+    mSceneManager.add(dataScroll);
+    
     mSceneManager.add(bodyScan);
     mSceneManager.add(bodyPattern);
     mSceneManager.add(bodyFlow);
     mSceneManager.add(bodyGlobe);
-    
-    mSceneManager.add(dataScroll);
     
     mSceneManager.add(vec2Simple);
     mSceneManager.add(vec2Clocks);
@@ -73,7 +73,7 @@ void ofApp::setup()
     
     //mSceneManager.change(3);
     //mSceneManager.change("dp::score::SceneVec2Clocks");
-    mSceneManager.change<SceneBodyScan>();
+    mSceneManager.change<SceneDataScroll>();
     
     mSceneManager.getTabBar()->loadSettings(kSettingsDir, kSettingsPrefix);
     mSceneManager.getTabBar()->setVisible(false);

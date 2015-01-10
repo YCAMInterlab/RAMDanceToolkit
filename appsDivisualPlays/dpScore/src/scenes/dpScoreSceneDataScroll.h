@@ -17,16 +17,6 @@ DP_SCORE_NAMESPACE_BEGIN
 
 class SceneDataScroll final : public SceneBase {
 public:
-    struct Points {
-        Points();
-        void update();
-        void draw();
-        vector<ofVec3f> p0;
-        vector<ofVec3f> p1;
-        vector<ofVec3f> p2;
-        ofVbo v0, v1, v2;
-    };
-    
     explicit SceneDataScroll() = default;
     virtual ~SceneDataScroll() = default;
     
@@ -46,10 +36,7 @@ public:
 private:
     string mSkeletonName;
     deque<ofxMot::SkeletonPtr> mSkeletons;
-    vector<ofPtr<Points> > mPoints;
-    const int kNumSkeletons = 200;
-    
-    ofEasyCam mCam;
+    const int kNumSkeletons = (kH-20.f) / 10.f;
 };
 
 DP_SCORE_NAMESPACE_END
