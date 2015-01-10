@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 634.0, 506.0, 448.0, 379.0 ],
+		"rect" : [ 585.0, 465.0, 448.0, 379.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -75,21 +75,20 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 220.0, 210.0, 75.0, 22.0 ],
 					"style" : "",
-					"text" : "speedlim 40"
+					"text" : "speedlim 10"
 				}
 
 			}
 , 			{
 				"box" : 				{
 					"id" : "obj-9",
-					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 28.0, 287.0, 182.0, 35.0 ],
+					"patching_rect" : [ 28.0, 287.0, 182.0, 22.0 ],
 					"style" : "",
-					"text" : "/dp/hakoniwa/oscTest 158 158 158"
+					"text" : "/dp/hakoniwa/sand 24 117 24"
 				}
 
 			}
