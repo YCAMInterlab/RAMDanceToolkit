@@ -1,20 +1,20 @@
 //
-//  dpScoreSceneBodyVisualization.h
+//  dpScoreSceneBodyGlobe.h
 //  dpScore
 //
 //  Created by YoshitoONISHI on 1/9/15.
 //
 //
 
-#ifndef __dpScore__dpScoreSceneBodyVisualization__
-#define __dpScore__dpScoreSceneBodyVisualization__
+#ifndef __dpScore__dpScoreSceneBodyGlobe__
+#define __dpScore__dpScoreSceneBodyGlobe__
 
 #include "dpScoreSceneBase.h"
 #include "ofxMotioner.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-class SceneBodyVisualization final : public SceneBase {
+class SceneBodyGlobe final : public SceneBase {
 public:
     struct Node : public ofxMot::Node {
         typedef ofPtr<Node> Ptr;
@@ -35,8 +35,8 @@ public:
     
     typedef vector<Node::Ptr> NodeVec;
     
-    explicit SceneBodyVisualization() = default;
-    virtual ~SceneBodyVisualization() = default;
+    explicit SceneBodyGlobe() = default;
+    virtual ~SceneBodyGlobe() = default;
     
     void initialize() override;
     void shutDown() override;
@@ -50,7 +50,7 @@ public:
     void onUpdateSkeleton(ofxMotioner::EventArgs &e);
     
 private:
-    string mSleletonName;
+    string mSkeletonName;
     ofEasyCam mCam;
     NodeVec mNodes;
     bool mMagnify = false;
@@ -62,4 +62,4 @@ private:
 
 DP_SCORE_NAMESPACE_END
 
-#endif /* defined(__dpScore__dpScoreSceneBodyVisualization__) */
+#endif /* defined(__dpScore__dpScoreSceneBodyGlobe__) */

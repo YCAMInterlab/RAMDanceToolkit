@@ -56,7 +56,7 @@
 		D21D0C0B1A4C0E2E00CC3598 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D21D0C041A4C0E2E00CC3598 /* README.md */; };
 		D21D0C0C1A4C0E2E00CC3598 /* ofxException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0C071A4C0E2E00CC3598 /* ofxException.cpp */; };
 		D21D0C0D1A4C0E2E00CC3598 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D21D0C091A4C0E2E00CC3598 /* README.md */; };
-		D228B33D1A5FB738005F0404 /* dpScoreSceneBodyVisualization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B33B1A5FB738005F0404 /* dpScoreSceneBodyVisualization.cpp */; };
+		D228B33D1A5FB738005F0404 /* dpScoreSceneBodyGlobe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B33B1A5FB738005F0404 /* dpScoreSceneBodyGlobe.cpp */; };
 		D228B3791A5FC2D8005F0404 /* ofxMotioner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B36D1A5FC2D8005F0404 /* ofxMotioner.cpp */; };
 		D228B37A1A5FC2D8005F0404 /* ofxMotionerConstants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B36F1A5FC2D8005F0404 /* ofxMotionerConstants.cpp */; };
 		D228B37B1A5FC2D8005F0404 /* ofxMotionerNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3711A5FC2D8005F0404 /* ofxMotionerNode.cpp */; };
@@ -85,6 +85,10 @@
 		D29034151A4D4ADE00577E04 /* dpScoreSceneVec2Grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D290340B1A4D4ADE00577E04 /* dpScoreSceneVec2Grid.cpp */; };
 		D29034161A4D4ADE00577E04 /* dpScoreSceneVec2Plotter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D290340D1A4D4ADE00577E04 /* dpScoreSceneVec2Plotter.cpp */; };
 		D29034171A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D290340F1A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.cpp */; };
+		D2B4FD181A60BEB600C97A66 /* dpScoreSceneBodyScan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD161A60BEB600C97A66 /* dpScoreSceneBodyScan.cpp */; };
+		D2B4FD1B1A60DDBB00C97A66 /* dpScoreSceneBodyPatterns.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD191A60DDBB00C97A66 /* dpScoreSceneBodyPatterns.cpp */; };
+		D2B4FD1E1A60DE1200C97A66 /* dpScoreSceneBodyFlow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD1C1A60DE1200C97A66 /* dpScoreSceneBodyFlow.cpp */; };
+		D2B4FD241A60FF3A00C97A66 /* dpScoreSceneDataScroll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD221A60FF3A00C97A66 /* dpScoreSceneDataScroll.cpp */; };
 		D2E2B73F1A4A4FB500570C58 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B7381A4A4FB500570C58 /* tinyxml.cpp */; };
 		D2E2B7401A4A4FB500570C58 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B73A1A4A4FB500570C58 /* tinyxmlerror.cpp */; };
 		D2E2B7411A4A4FB500570C58 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B73B1A4A4FB500570C58 /* tinyxmlparser.cpp */; };
@@ -245,8 +249,8 @@
 		D21D0C081A4C0E2E00CC3598 /* ofxException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxException.h; sourceTree = "<group>"; };
 		D21D0C091A4C0E2E00CC3598 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D21D0C0F1A4C2DAB00CC3598 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		D228B33B1A5FB738005F0404 /* dpScoreSceneBodyVisualization.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyVisualization.cpp; sourceTree = "<group>"; };
-		D228B33C1A5FB738005F0404 /* dpScoreSceneBodyVisualization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyVisualization.h; sourceTree = "<group>"; };
+		D228B33B1A5FB738005F0404 /* dpScoreSceneBodyGlobe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyGlobe.cpp; sourceTree = "<group>"; };
+		D228B33C1A5FB738005F0404 /* dpScoreSceneBodyGlobe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyGlobe.h; sourceTree = "<group>"; };
 		D228B3631A5FC2D8005F0404 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		D228B36D1A5FC2D8005F0404 /* ofxMotioner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMotioner.cpp; sourceTree = "<group>"; };
 		D228B36E1A5FC2D8005F0404 /* ofxMotioner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMotioner.h; sourceTree = "<group>"; };
@@ -310,6 +314,14 @@
 		D290340E1A4D4ADE00577E04 /* dpScoreSceneVec2Plotter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneVec2Plotter.h; sourceTree = "<group>"; };
 		D290340F1A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneVec2SimpleGraph.cpp; sourceTree = "<group>"; };
 		D29034101A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneVec2SimpleGraph.h; sourceTree = "<group>"; };
+		D2B4FD161A60BEB600C97A66 /* dpScoreSceneBodyScan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyScan.cpp; sourceTree = "<group>"; };
+		D2B4FD171A60BEB600C97A66 /* dpScoreSceneBodyScan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyScan.h; sourceTree = "<group>"; };
+		D2B4FD191A60DDBB00C97A66 /* dpScoreSceneBodyPatterns.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyPatterns.cpp; sourceTree = "<group>"; };
+		D2B4FD1A1A60DDBB00C97A66 /* dpScoreSceneBodyPatterns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyPatterns.h; sourceTree = "<group>"; };
+		D2B4FD1C1A60DE1200C97A66 /* dpScoreSceneBodyFlow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyFlow.cpp; sourceTree = "<group>"; };
+		D2B4FD1D1A60DE1200C97A66 /* dpScoreSceneBodyFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyFlow.h; sourceTree = "<group>"; };
+		D2B4FD221A60FF3A00C97A66 /* dpScoreSceneDataScroll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneDataScroll.cpp; sourceTree = "<group>"; };
+		D2B4FD231A60FF3A00C97A66 /* dpScoreSceneDataScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataScroll.h; sourceTree = "<group>"; };
 		D2E2B7381A4A4FB500570C58 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		D2E2B7391A4A4FB500570C58 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		D2E2B73A1A4A4FB500570C58 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
@@ -697,8 +709,16 @@
 				D290340E1A4D4ADE00577E04 /* dpScoreSceneVec2Plotter.h */,
 				D290340F1A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.cpp */,
 				D29034101A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.h */,
-				D228B33B1A5FB738005F0404 /* dpScoreSceneBodyVisualization.cpp */,
-				D228B33C1A5FB738005F0404 /* dpScoreSceneBodyVisualization.h */,
+				D228B33B1A5FB738005F0404 /* dpScoreSceneBodyGlobe.cpp */,
+				D228B33C1A5FB738005F0404 /* dpScoreSceneBodyGlobe.h */,
+				D2B4FD161A60BEB600C97A66 /* dpScoreSceneBodyScan.cpp */,
+				D2B4FD171A60BEB600C97A66 /* dpScoreSceneBodyScan.h */,
+				D2B4FD191A60DDBB00C97A66 /* dpScoreSceneBodyPatterns.cpp */,
+				D2B4FD1A1A60DDBB00C97A66 /* dpScoreSceneBodyPatterns.h */,
+				D2B4FD1C1A60DE1200C97A66 /* dpScoreSceneBodyFlow.cpp */,
+				D2B4FD1D1A60DE1200C97A66 /* dpScoreSceneBodyFlow.h */,
+				D2B4FD221A60FF3A00C97A66 /* dpScoreSceneDataScroll.cpp */,
+				D2B4FD231A60FF3A00C97A66 /* dpScoreSceneDataScroll.h */,
 			);
 			path = scenes;
 			sourceTree = "<group>";
@@ -879,10 +899,11 @@
 				D228B37B1A5FC2D8005F0404 /* ofxMotionerNode.cpp in Sources */,
 				D24C21C41A49653D009D0796 /* OscTypes.cpp in Sources */,
 				D21D0C0D1A4C0E2E00CC3598 /* README.md in Sources */,
-				D228B33D1A5FB738005F0404 /* dpScoreSceneBodyVisualization.cpp in Sources */,
+				D228B33D1A5FB738005F0404 /* dpScoreSceneBodyGlobe.cpp in Sources */,
 				D21D0B9E1A4C046000CC3598 /* ofxUIMovingGraph.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				D21D0B941A4C046000CC3598 /* ofxUIFPSSlider.cpp in Sources */,
+				D2B4FD1E1A60DE1200C97A66 /* dpScoreSceneBodyFlow.cpp in Sources */,
 				D21D0B951A4C046000CC3598 /* ofxUIImage.cpp in Sources */,
 				D21D0BB41A4C046000CC3598 /* ofxUIWidgetWithLabel.cpp in Sources */,
 				D21D0BB01A4C046000CC3598 /* ofxUIToggleMatrix.cpp in Sources */,
@@ -893,7 +914,10 @@
 				D29034111A4D4ADE00577E04 /* dpScoreSceneBase.cpp in Sources */,
 				D21D0BA51A4C046000CC3598 /* ofxUIRotarySlider.cpp in Sources */,
 				D21D0B8D1A4C046000CC3598 /* ofxUIButton.cpp in Sources */,
+				D2B4FD241A60FF3A00C97A66 /* dpScoreSceneDataScroll.cpp in Sources */,
 				D24C21C01A49653D009D0796 /* UdpSocketWin.cpp in Sources */,
+				D2B4FD1B1A60DDBB00C97A66 /* dpScoreSceneBodyPatterns.cpp in Sources */,
+				D2B4FD181A60BEB600C97A66 /* dpScoreSceneBodyScan.cpp in Sources */,
 				D21D0BAE1A4C046000CC3598 /* ofxUITextInput.cpp in Sources */,
 				D21D0BB31A4C046000CC3598 /* ofxUIWidget.cpp in Sources */,
 				D24C21BD1A49653D009D0796 /* NetworkingUtils.cpp in Sources */,

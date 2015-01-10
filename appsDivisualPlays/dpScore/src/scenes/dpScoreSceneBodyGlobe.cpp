@@ -1,47 +1,16 @@
 //
-//  dpScoreSceneBodyVisualization.cpp
+//  dpScoreSceneBodyGlobe.cpp
 //  dpScore
 //
 //  Created by YoshitoONISHI on 1/9/15.
 //
 //
 
-#include "dpScoreSceneBodyVisualization.h"
-
-OFX_MOTIONER_NAMESPACE_BEGIN
-string getJointNameLower(int index)
-{
-    if (index==JOINT_HIPS)				return "hips";
-    if (index==JOINT_ABDOMEN)			return "abdomen";
-    if (index==JOINT_CHEST)				return "chest";
-    if (index==JOINT_NECK)				return "neck";
-    if (index==JOINT_HEAD)				return "head";
-    if (index==JOINT_LEFT_HIP)			return "left hip";
-    if (index==JOINT_LEFT_KNEE)			return "left knee";
-    if (index==JOINT_LEFT_ANKLE)		return "left ankle";
-    if (index==JOINT_LEFT_TOE)			return "left toe";
-    if (index==JOINT_RIGHT_HIP)			return "right hip";
-    if (index==JOINT_RIGHT_KNEE)		return "right knee";
-    if (index==JOINT_RIGHT_ANKLE)		return "right ankle";
-    if (index==JOINT_RIGHT_TOE)			return "right toe";
-    if (index==JOINT_LEFT_COLLAR)		return "left collar";
-    if (index==JOINT_LEFT_SHOULDER)		return "left shoulder";
-    if (index==JOINT_LEFT_ELBOW)		return "left elbow";
-    if (index==JOINT_LEFT_WRIST)		return "left wrist";
-    if (index==JOINT_LEFT_HAND) 		return "left hand";
-    if (index==JOINT_RIGHT_COLLAR) 		return "right collar";
-    if (index==JOINT_RIGHT_SHOULDER) 	return "right shoulder";
-    if (index==JOINT_RIGHT_ELBOW) 		return "right elbow";
-    if (index==JOINT_RIGHT_WRIST) 		return "right wrist";
-    if (index==JOINT_RIGHT_HAND)		return "right hand";
-    
-    return "unknown joint index";
-}
-OFX_MOTIONER_NAMESPACE_END
+#include "dpScoreSceneBodyGlobe.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-SceneBodyVisualization::Node::Node()
+SceneBodyGlobe::Node::Node()
 {
     points.clear();
     vertices.clear();
@@ -49,7 +18,7 @@ SceneBodyVisualization::Node::Node()
     vbo.setVertexData(&vertices.at(0), vertices.size(), GL_DYNAMIC_DRAW);
 }
 
-void SceneBodyVisualization::Node::update()
+void SceneBodyGlobe::Node::update()
 {
     ofVec3f p = dir * scale;
     p = p * getOrientationQuat();
@@ -67,7 +36,7 @@ void SceneBodyVisualization::Node::update()
     vbo.updateVertexData(&vertices.at(0), vertices.size());
 }
 
-void SceneBodyVisualization::Node::customDraw()
+void SceneBodyGlobe::Node::customDraw()
 {
     glBegin(GL_LINES);
     glColor4f(1.f, 1.f, 1.f, 0.6f);
@@ -77,14 +46,14 @@ void SceneBodyVisualization::Node::customDraw()
     glEnd();
 }
 
-void SceneBodyVisualization::Node::drawPoints()
+void SceneBodyGlobe::Node::drawPoints()
 {
     glPointSize(3.f);
     ofSetColor(255, 40);
     vbo.draw(GL_POINTS, 0, vertices.size());
 }
 
-void SceneBodyVisualization::initialize()
+void SceneBodyGlobe::initialize()
 {
     dpDebugFunc();
     
@@ -103,7 +72,7 @@ void SceneBodyVisualization::initialize()
     }
 }
 
-void SceneBodyVisualization::shutDown()
+void SceneBodyGlobe::shutDown()
 {
     dpDebugFunc();
     
@@ -113,41 +82,43 @@ void SceneBodyVisualization::shutDown()
     }
 }
 
-void SceneBodyVisualization::enter()
+void SceneBodyGlobe::enter()
 {
     dpDebugFunc();
     
     ofAddListener(ofxMotioner::updateSkeletonEvent,
                   this,
-                  &SceneBodyVisualization::onUpdateSkeleton);
+                  &SceneBodyGlobe::onUpdateSkeleton);
 }
 
-void SceneBodyVisualization::exit()
+void SceneBodyGlobe::exit()
 {
     dpDebugFunc();
     
     ofRemoveListener(ofxMotioner::updateSkeletonEvent,
                      this,
-                     &SceneBodyVisualization::onUpdateSkeleton);
+                     &SceneBodyGlobe::onUpdateSkeleton);
 }
 
-void SceneBodyVisualization::update(ofxEventMessage& m)
+void SceneBodyGlobe::update(ofxEventMessage& m)
 {
     ofSetWindowTitle(getName() + ": " + ofToString(ofGetFrameRate(), 2));
     
-    if (mMagnify) {
-        mScale += ofGetLastFrameTime() * 2.f;
-        if (mScale >= 600.f) mScale = 100.f;
-    }
-    for (auto& p : mNodes) p->scale = mScale;
-    
-    if (ofGetFrameNum()%60==0) {
-        mJointId++;
-        mJointId %= ofxMot::NUM_JOINTS;
+    if (m.getAddress() == kAddrMotioner) {
+        if (mMagnify) {
+            mScale += ofGetLastFrameTime() * 2.f;
+            if (mScale >= 600.f) mScale = 100.f;
+        }
+        for (auto& p : mNodes) p->scale = mScale;
+        
+        if (ofGetFrameNum()%60==0) {
+            mJointId++;
+            mJointId %= ofxMot::NUM_JOINTS;
+        }
     }
 }
 
-void SceneBodyVisualization::draw()
+void SceneBodyGlobe::draw()
 {
     ofPushStyle();
     ofPushMatrix();
@@ -192,13 +163,13 @@ void SceneBodyVisualization::draw()
 }
 
 #pragma mark ___________________________________________________________________
-void SceneBodyVisualization::onUpdateSkeleton(ofxMotioner::EventArgs &e)
+void SceneBodyGlobe::onUpdateSkeleton(ofxMotioner::EventArgs &e)
 {
     auto skl = e.skeleton;
     
-    if (mSleletonName=="") mSleletonName = skl->getName();
+    if (mSkeletonName=="") mSkeletonName = skl->getName();
     
-    if (mSleletonName == skl->getName()) {
+    if (mSkeletonName == skl->getName()) {
         auto joints = skl->getJoints();
         
         for (int i=0; i<mNodes.size(); i++) {

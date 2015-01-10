@@ -181,6 +181,17 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		}
 		
 		if (mEnableSendOSC){
+
+
+			ofxOscMessage m;
+			m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/features");
+			m.addIntArg(mOptFlow.getFeatures().size());
+			for (int i = 0;i < mOptFlow.getFeatures().size();i++){
+				m.addFloatArg(mOptFlow.getFeatures()[i].x);
+				m.addFloatArg(mOptFlow.getFeatures()[i].y);
+			}
+			sendMessageMulti(m);
+
 			for (int i = 0;i < 10;i++){
 				ofxOscMessage m;
 				m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector");
@@ -198,12 +209,12 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 				sendMessageMulti(m);
 			}
 			
-			ofxOscMessage m;
-			m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector/total");
-			m.addFloatArg(mOptFlow_angleVec.x);
-			m.addFloatArg(mOptFlow_angleVec.y);
+			ofxOscMessage m2;
+			m2.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector/total");
+			m2.addFloatArg(mOptFlow_angleVec.x);
+			m2.addFloatArg(mOptFlow_angleVec.y);
 			
-			sendMessageMulti(m);
+			sendMessageMulti(m2);
 		}
 	}
 
