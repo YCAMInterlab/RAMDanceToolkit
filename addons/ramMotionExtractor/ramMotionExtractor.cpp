@@ -119,11 +119,6 @@ void ramMotionExtractor::draw(){
 void ramMotionExtractor::guiEvent(ofxUIEventArgs &e){
 	ofxUIWidget* w = e.widget;
 
-	cout << w->getName() << endl;
-	if ((w->getName() == "actorList")){
-		cout << "State : " << w->getState() << endl;
-	}
-
 	if (w->getName() == "PushPort"){
 		if (w->getState() == OFX_UI_STATE_DOWN){
 			ramMotionPort* mp = new ramMotionPort(ramActorManager::instance().getLastSelectedNodeIdentifer());
@@ -186,13 +181,12 @@ void ramMotionExtractor::guiEvent(ofxUIEventArgs &e){
 }
 
 void ramMotionExtractor::mouseReleased(ofMouseEventArgs &arg){
-	cout << "===Current list===" << actorList->getListItems().size() << endl;
 
 	for (int i = 0;i < mMotionPort.size();i++){
-		cout << mMotionPort[i]->mActorIndex << endl;
 		if (mMotionPort[i]->mActorIndex < actorList->getListItems().size())
 			mMotionPort[i]->mFinder.name = actorList->getListItems()[mMotionPort[i]->mActorIndex]->getName();
 	}
+	
 }
 
 #pragma mark - utility
