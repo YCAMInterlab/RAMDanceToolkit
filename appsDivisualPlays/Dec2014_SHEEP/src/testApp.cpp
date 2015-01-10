@@ -21,6 +21,8 @@
 /*!
  Scenes
  */
+#include "dpMarionette.h"
+
 #include "HakoniwaParallelLink_Base.h"
 #include "ramMotionExtractorExampleScene.h"
 
@@ -54,7 +56,7 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	
+
 }
 
 
@@ -63,7 +65,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(const ramActor &actor)
 {
-	
+	dpMarionette::instance().drawActor(actor);
 }
 
 //--------------------------------------------------------------

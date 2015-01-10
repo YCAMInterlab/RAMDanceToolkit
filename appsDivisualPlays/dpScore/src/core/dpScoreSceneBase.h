@@ -11,6 +11,7 @@
 
 #include "dpScoreCommon.h"
 #include "ofxUI.h"
+#include "dpEasing.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -18,8 +19,8 @@ class SceneBase {
 public:
     typedef ofPtr<SceneBase> Ptr;
     
-    SceneBase();
-    virtual ~SceneBase() {}
+   explicit SceneBase() = default;
+    virtual ~SceneBase() = default;
     
     virtual void update(ofxEventMessage& m) {}
     virtual void draw() {}
@@ -42,24 +43,26 @@ public:
     
     void guiEvent(ofxUIEventArgs &e) {}
     
-    // default value is NULL
-    ofxUICanvas* getUICanvas() { return mUICanvas; }
+    // default value is nullptr
+    ofxUICanvas* const getUICanvas() { return mUICanvas; }
+    const ofxUICanvas* const getUICanvas() const { return mUICanvas; }
     
     // we can change the id only once
      void setId(int id);
-    int getId() const;
-    
     // we can change the name only once and can't change it after called getName()
     void setName(const string& name);
+    void setEaseFunc(easeFunc func) { mEaseFunc = func; }
     
+    int getId() const { return mId; }
     // return class name if we've not called setName()
     const string& getName();
+    const easeFunc getEaseFunc() const { return mEaseFunc; }
     
 protected:
-    ofxUICanvas* mUICanvas;
-    string mName;
-    int mId;
-    
+    ofxUICanvas* mUICanvas{nullptr};
+    string mName{""};
+    int mId{-1};
+    easeFunc mEaseFunc = easeNone;
 };
 
 DP_SCORE_NAMESPACE_END

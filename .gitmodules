@@ -28,3 +28,6 @@
 [submodule "addons/ofxDelaunay"]
 	path = addons/ofxDelaunay
 	url = https://github.com/obviousjim/ofxDelaunay
+[submodule "addons/ofxMotioner"]
+	path = addons/ofxMotioner
+	url = https://github.com/YoshitoONISHI/ofxMotioner

@@ -62,6 +62,12 @@ else
 	git checkout 957f902
 	cd ../
 
+	# ofxMotioner
+	git clone https://github.com/YoshitoONISHI/ofxMotioner
+	cd ofxMotioner
+	git checkout 4bf47cf
+	cd ../
+
 	echo "end clone addons"
 	cd ../
 fi

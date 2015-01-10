@@ -10,13 +10,9 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-static const int _circleNum = 2000;
-
 void SceneVec2Plotter::initialize()
 {
     dpDebugFunc();
-    
-    mSensorScale = 0.3f;
     
     mCircleBuffer.clear();
     
@@ -40,7 +36,7 @@ void SceneVec2Plotter::shutDown()
     
     if (mUICanvas) {
         delete mUICanvas;
-        mUICanvas = NULL;
+        mUICanvas = nullptr;
     }
 }
 
@@ -56,6 +52,8 @@ void SceneVec2Plotter::exit()
 
 void SceneVec2Plotter::update(ofxEventMessage& m)
 {
+    ofSetWindowTitle(getName() + ": " + ofToString(ofGetFrameRate(), 2));
+    
     if (m.getAddress() == kAddrVec2) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);
@@ -72,7 +70,7 @@ void SceneVec2Plotter::draw()
     ofEnableAlphaBlending();
     
     ofSetColor(ofColor::white, 255);
-    ofDrawBitmapString("Dividual Plays System Score - D", 12.f, 16.f);
+    ofDrawBitmapString(getName(), 12.f, 16.f);
     
     ofSetLineWidth(1.f);
     ofPushMatrix();

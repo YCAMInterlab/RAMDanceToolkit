@@ -10,14 +10,10 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-static const int _clockNumX = 16;
-static const int _clockNumY = 9;
-
 void SceneVec2Clocks::initialize()
 {
     dpDebugFunc();
     
-    mSensorScale = 0.3f;
     mClockBuffer.clear();
     
     mUICanvas = new ofxUICanvas();
@@ -33,7 +29,7 @@ void SceneVec2Clocks::shutDown()
     
     if (mUICanvas) {
         delete mUICanvas;
-        mUICanvas = NULL;
+        mUICanvas = nullptr;
     }
 }
 
@@ -49,6 +45,8 @@ void SceneVec2Clocks::exit()
 
 void SceneVec2Clocks::update(ofxEventMessage& m)
 {
+    ofSetWindowTitle(getName() + ": " + ofToString(ofGetFrameRate(), 2));
+    
     if (m.getAddress() == kAddrVec2) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);
@@ -68,7 +66,7 @@ void SceneVec2Clocks::draw()
     ofEnableAlphaBlending();
     
     ofSetColor(ofColor::white, 255);
-    ofDrawBitmapString("Dividual Plays System Score - B", 12.f, 16.f);
+    ofDrawBitmapString(getName(), 12.f, 16.f);
     
     ofNoFill();
     const float step = 10.f;

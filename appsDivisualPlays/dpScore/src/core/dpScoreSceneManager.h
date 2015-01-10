@@ -17,10 +17,13 @@ class SceneManager final {
 public:
     typedef vector<SceneBase::Ptr> SceneVec;
     
-    SceneManager();
+    explicit SceneManager();
     ~SceneManager();
+    SceneManager(const SceneManager&) = delete;
+    SceneManager& operator=(const SceneManager&) = delete;
     
     void add(SceneBase::Ptr scene);
+    void clear();
     void next();
     void prev();
     void change(int index);
@@ -48,19 +51,19 @@ public:
     
     SceneVec::iterator findScene(const string& name);
     
-    ofxUITabBar* getTabBar() { return mTabBar; }
+    ofxUITabBar* const getTabBar() { return mTabBar; }
+    
+    const ofxUITabBar* const getTabBar() const { return mTabBar; }
     
 private:
     void change();
     
-    ofxUITabBar* mTabBar;
-
     SceneVec mScenes;
     SceneBase::Ptr mCurrentScene;
     
-    int mSceneId;
-    
-    bool mUpdateAll;
+    ofxUITabBar* mTabBar{nullptr};
+    int mSceneId{0};
+    bool mUpdateAll{true};
 
 };
 

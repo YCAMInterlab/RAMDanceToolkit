@@ -10,9 +10,7 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-SceneManager::SceneManager() :
-mUpdateAll(true),
-mSceneId(0)
+SceneManager::SceneManager()
 {
     mScenes.clear();
     
@@ -26,12 +24,13 @@ SceneManager::~SceneManager()
 {
     if (mTabBar) {
         delete mTabBar;
-        mTabBar = NULL;
+        mTabBar = nullptr;
     }
     
-    for (auto& scene : mScenes) scene->shutDown();
+    clear();
 }
 
+#pragma mark ___________________________________________________________________
 void SceneManager::add(SceneBase::Ptr scene)
 {
     const string className = scene->getName();
@@ -53,7 +52,7 @@ void SceneManager::add(SceneBase::Ptr scene)
     }
     scene->initialize();
     
-    if (scene->getUICanvas() != NULL) {
+    if (scene->getUICanvas() != nullptr) {
         mTabBar->addCanvas(scene->getUICanvas());
     }
     
@@ -61,6 +60,19 @@ void SceneManager::add(SceneBase::Ptr scene)
     mScenes.push_back(scene);
 }
 
+void SceneManager::clear()
+{
+    if (mCurrentScene) mCurrentScene->exit();
+    mCurrentScene.reset();
+    for (auto p : mScenes) {
+        p->shutDown();
+    }
+    mScenes.clear();
+    
+    mSceneId = 0;
+}
+
+#pragma mark ___________________________________________________________________
 void SceneManager::next()
 {
     if (mScenes.empty())
@@ -78,6 +90,7 @@ void SceneManager::prev()
     change();
 }
 
+#pragma mark ___________________________________________________________________
 void SceneManager::change(int index)
 {
     if (index<0 || index>=mScenes.size())
@@ -106,6 +119,7 @@ void SceneManager::change()
     ofLogNotice() << "changed scene: " << mSceneId << ", " << mCurrentScene->getName();
 }
 
+#pragma mark ___________________________________________________________________
 void SceneManager::update(ofxEventMessage& m)
 {
     if (mUpdateAll) {
@@ -126,11 +140,13 @@ ofPtr<SceneBase> SceneManager::getCurrent()
     return mCurrentScene;
 }
 
+#pragma mark ___________________________________________________________________
 void SceneManager::setUpdateAll(bool update)
 {
     mUpdateAll = update;
 }
 
+#pragma mark ___________________________________________________________________
 void SceneManager::keyPressed(int key)
 {
     if (mCurrentScene) mCurrentScene->keyPressed(key);
@@ -181,6 +197,7 @@ void SceneManager::guiEvent(ofxUIEventArgs &e)
     
 }
 
+#pragma mark ___________________________________________________________________
 SceneManager::SceneVec::iterator
 SceneManager::findScene(const string& name)
 {

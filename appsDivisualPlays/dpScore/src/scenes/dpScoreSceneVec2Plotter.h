@@ -15,8 +15,8 @@ DP_SCORE_NAMESPACE_BEGIN
 
 class SceneVec2Plotter final : public SceneBase {
 public:
-    SceneVec2Plotter() {}
-    virtual ~SceneVec2Plotter() {}
+    explicit SceneVec2Plotter() = default;
+    virtual ~SceneVec2Plotter() = default;
     
     void initialize() override;
     void shutDown() override;
@@ -28,13 +28,15 @@ public:
     void draw() override;
     
 private:
+    static const int _circleNum{2000};
+    
     deque<ofVec2f> mCircleBuffer;
     vector<ofVec3f> mCircleVertices;
     vector<ofFloatColor> mCircleColors;
     ofVbo mCircleVbo;
     
-    float mSensorScale;
-    ofVec2f mVec;
+    float mSensorScale{0.3};
+    ofVec2f mVec{0.f};
 };
 
 

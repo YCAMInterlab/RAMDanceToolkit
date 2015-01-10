@@ -15,8 +15,8 @@ DP_SCORE_NAMESPACE_BEGIN
 
 class SceneVec2Clocks final : public SceneBase {
 public:
-    SceneVec2Clocks() {}
-    virtual ~SceneVec2Clocks() {}
+    explicit SceneVec2Clocks() = default;
+    virtual ~SceneVec2Clocks() = default;
     
     void initialize() override;
     void shutDown() override;
@@ -28,9 +28,12 @@ public:
     void draw() override;
     
 private:
+    static const int _clockNumX{16};
+    static const int _clockNumY{9};
+    
     deque<ofVec2f> mClockBuffer;
-    float mSensorScale;
-    ofVec2f mVec;
+    float mSensorScale{0.3f};
+    ofVec2f mVec{0.f};
     
 };
 
