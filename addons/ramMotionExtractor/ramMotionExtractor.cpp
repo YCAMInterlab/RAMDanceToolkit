@@ -190,7 +190,8 @@ void ramMotionExtractor::mouseReleased(ofMouseEventArgs &arg){
 
 	for (int i = 0;i < mMotionPort.size();i++){
 		cout << mMotionPort[i]->mActorIndex << endl;
-		mMotionPort[i]->mFinder.name = actorList->getListItems()[mMotionPort[i]->mActorIndex]->getName();
+		if (mMotionPort[i]->mActorIndex < actorList->getListItems().size())
+			mMotionPort[i]->mFinder.name = actorList->getListItems()[mMotionPort[i]->mActorIndex]->getName();
 	}
 }
 
@@ -244,7 +245,10 @@ void ramMotionExtractor::load(string file){
 		ramMotionPort* mp = new ramMotionPort(nodeIdent);
 		mp->mActorIndex = xml.getValue("ActorIndex", 0);
 		int targIndex = ofClamp(mp->mActorIndex, 0, actorList->getListItems().size()-1);
-		mp->mFinder.name = actorList->getListItems()[targIndex]->getName();
+
+		if (targIndex < actorList->getListItems().size()){
+			mp->mFinder.name = actorList->getListItems()[targIndex]->getName();
+		}
 
 		mMotionPort.push_back(mp);
 
@@ -269,7 +273,9 @@ ramNode ramMotionExtractor::getNodeAt(int port){
 	ramNode nd;
 
 	if ((0 <= port) && (port < mMotionPort.size())){
-		mMotionPort[port]->mFinder.findOne(nd);
+		if (!mMotionPort[port]->isBlank){
+			mMotionPort[port]->mFinder.findOne(nd);
+		}
 	}
 
 	return nd;
