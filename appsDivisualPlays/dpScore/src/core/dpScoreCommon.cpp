@@ -112,6 +112,7 @@ const string kOscAddrPendulumVec2 = "/dp/cameraUnit/pendulum/vector";
 
 const string kAddrVec2 = "/dp/score/vec2";
 const string kAddrVec2Arr = "/dp/score/vec2Arr";
+const string kAddrMotioner = "/dp/score/motioner";
 
 const string kSettingsDir = "settings/";
 const string kSettingsPrefix = "scoreUI-";
@@ -135,5 +136,49 @@ float alignf(float f)
 {
     return ::floor(f) + 0.5f;
 }
+        
+ofVec3f randVec3f()
+{
+    const float phi = ofRandom((float)M_PI * 2.0f);
+    const float costheta = ofRandom(-1.0f, 1.0f);
+    
+    const float rho = ::sqrt(1.0f - costheta * costheta);
+    const float x = rho * ::cos(phi);
+    const float y = rho * ::sin(phi);
+    const float z = costheta;
+    
+    return ofVec3f(x, y, z);
+}
 
 DP_SCORE_NAMESPACE_END
+
+OFX_MOTIONER_NAMESPACE_BEGIN
+string getJointNameLower(int index)
+{
+    if (index==JOINT_HIPS)				return "hips";
+    if (index==JOINT_ABDOMEN)			return "abdomen";
+    if (index==JOINT_CHEST)				return "chest";
+    if (index==JOINT_NECK)				return "neck";
+    if (index==JOINT_HEAD)				return "head";
+    if (index==JOINT_LEFT_HIP)			return "left hip";
+    if (index==JOINT_LEFT_KNEE)			return "left knee";
+    if (index==JOINT_LEFT_ANKLE)		return "left ankle";
+    if (index==JOINT_LEFT_TOE)			return "left toe";
+    if (index==JOINT_RIGHT_HIP)			return "right hip";
+    if (index==JOINT_RIGHT_KNEE)		return "right knee";
+    if (index==JOINT_RIGHT_ANKLE)		return "right ankle";
+    if (index==JOINT_RIGHT_TOE)			return "right toe";
+    if (index==JOINT_LEFT_COLLAR)		return "left collar";
+    if (index==JOINT_LEFT_SHOULDER)		return "left shoulder";
+    if (index==JOINT_LEFT_ELBOW)		return "left elbow";
+    if (index==JOINT_LEFT_WRIST)		return "left wrist";
+    if (index==JOINT_LEFT_HAND) 		return "left hand";
+    if (index==JOINT_RIGHT_COLLAR) 		return "right collar";
+    if (index==JOINT_RIGHT_SHOULDER) 	return "right shoulder";
+    if (index==JOINT_RIGHT_ELBOW) 		return "right elbow";
+    if (index==JOINT_RIGHT_WRIST) 		return "right wrist";
+    if (index==JOINT_RIGHT_HAND)		return "right hand";
+    
+    return "unknown joint index";
+}
+OFX_MOTIONER_NAMESPACE_END

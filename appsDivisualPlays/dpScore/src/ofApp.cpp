@@ -3,7 +3,11 @@
 #include "dpScoreSceneVec2Clocks.h"
 #include "dpScoreSceneVec2Grid.h"
 #include "dpScoreSceneVec2Plotter.h"
-#include "dpScoreSceneBodyVisualization.h"
+#include "dpScoreSceneBodyGlobe.h"
+#include "dpScoreSceneBodyScan.h"
+#include "dpScoreSceneBodyFlow.h"
+#include "dpScoreSceneBodyPatterns.h"
+#include "dpScoreSceneDataScroll.h"
 
 using namespace dp::score;
 
@@ -35,17 +39,29 @@ void ofApp::setup()
     
     OFX_BEGIN_EXCEPTION_HANDLING
     
+    auto bodyScan = SceneBase::Ptr(new SceneBodyScan());
+    auto bodyPattern = SceneBase::Ptr(new SceneBodyPatterns());
+    auto bodyFlow = SceneBase::Ptr(new SceneBodyFlow());
+    auto bodyGlobe = SceneBase::Ptr(new SceneBodyGlobe());
+    
+    auto dataScroll = SceneBase::Ptr(new SceneDataScroll());
+    
     auto vec2Simple = SceneBase::Ptr(new SceneVec2SimpleGraph());
     auto vec2Clocks = SceneBase::Ptr(new SceneVec2Clocks());
     auto vec2Grid = SceneBase::Ptr(new SceneVec2Grid());
     auto vec2Plotter = SceneBase::Ptr(new SceneVec2Plotter());
-    auto bodyVis = SceneBase::Ptr(new SceneBodyVisualization());
+    
+    mSceneManager.add(bodyScan);
+    mSceneManager.add(bodyPattern);
+    mSceneManager.add(bodyFlow);
+    mSceneManager.add(bodyGlobe);
+    
+    mSceneManager.add(dataScroll);
     
     mSceneManager.add(vec2Simple);
     mSceneManager.add(vec2Clocks);
     mSceneManager.add(vec2Grid);
     mSceneManager.add(vec2Plotter);
-    mSceneManager.add(bodyVis);
     
     // make another instance for existing class
     //auto vec2Simple2 = SceneBase::Ptr(new SceneVec2SimpleGraph());
@@ -57,7 +73,7 @@ void ofApp::setup()
     
     //mSceneManager.change(3);
     //mSceneManager.change("dp::score::SceneVec2Clocks");
-    mSceneManager.change<SceneBodyVisualization>();
+    mSceneManager.change<SceneBodyScan>();
     
     mSceneManager.getTabBar()->loadSettings(kSettingsDir, kSettingsPrefix);
     mSceneManager.getTabBar()->setVisible(false);
@@ -100,8 +116,12 @@ void ofApp::update()
         }
         else if (addr == ofxMotioner::OSC_ADDR) {
             ofxMotioner::updateWithOscMessage(m);
+            ofxEventMessage m;
+            m.setAddress(kAddrMotioner);
+            mSceneManager.update(m);
         }
     }
+    
     if (n>0) {
         v /= (float)n;
         

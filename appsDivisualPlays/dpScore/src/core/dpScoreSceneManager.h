@@ -63,7 +63,7 @@ private:
     
     ofxUITabBar* mTabBar{nullptr};
     int mSceneId{0};
-    bool mUpdateAll{true};
+    bool mUpdateAll{false};
 
 };
 

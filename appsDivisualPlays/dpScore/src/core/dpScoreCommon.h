@@ -12,6 +12,7 @@
 #include "ofMain.h"
 #include "ofxEvent.h"
 #include "ofxException.h"
+#include "ofxMotioner.h"
 
 // WIP
 //#define USE_CUSTOM_MEMORY_ALLOCATOR
@@ -39,6 +40,7 @@ extern const string kOscAddrPendulumVec2;
 
 extern const string kAddrVec2;
 extern const string kAddrVec2Arr;
+extern const string kAddrMotioner;
 
 extern const string kSettingsDir;
 extern const string kSettingsPrefix;
@@ -59,8 +61,16 @@ string getClassName()
 
 float alignf(float f);
 
+ofVec3f randVec3f();
+
 DP_SCORE_NAMESPACE_END
 
 #define dpDebugFunc() ofLogVerbose() << getClassName(*this) << ", " << __FUNCTION__
+
+OFX_MOTIONER_NAMESPACE_BEGIN
+
+string getJointNameLower(int index);
+
+OFX_MOTIONER_NAMESPACE_END
 
 #endif /* defined(__dpScore__dpScoreCommon__) */
