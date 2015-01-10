@@ -34,7 +34,7 @@ void setup()
     myservo_movetime[i] = 0; // next time in millis servo next moves
     myservo_gPos[i] = 0; // target position to move towards
     myservo_cPos[i] = 0; // current postion of servo
-    tDelay[i] = 3; // delay between moves, gives appearance of smooth motion
+    tDelay[i] = 2; // delay between moves, gives appearance of smooth motion
   }
   
   Serial.begin(9600);

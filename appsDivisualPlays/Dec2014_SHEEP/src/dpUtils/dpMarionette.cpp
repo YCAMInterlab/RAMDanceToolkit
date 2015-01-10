@@ -52,8 +52,8 @@ void dpMarionette::drawActor(const ramActor &actor){
 
 	drawElbowPoint(mMarioA_parts[2].getTextureReference(),
 				   actor.getNode(ramActor::JOINT_LEFT_ELBOW),
-				   actor.getNode(ramActor::JOINT_RIGHT_SHOULDER),
-				   actor.getNode(ramActor::JOINT_LEFT_SHOULDER), 8, 10,true);
+				   actor.getNode(ramActor::JOINT_RIGHT_COLLAR),
+				   actor.getNode(ramActor::JOINT_LEFT_COLLAR), 8, 10,true);
 
 
 	drawBasicRibbon(mMarioA_parts[5].getTextureReference(),
@@ -87,24 +87,32 @@ void dpMarionette::drawActor(const ramActor &actor){
 					DPM_AXIS_X, DPM_AXIS_X, true, 0, 0);
 
 	drawBasicRibbon(mMarioA_parts[10].getTextureReference(),
-					actor.getNode(ramActor::JOINT_LEFT_HIP),
+					actor.getNode(ramActor::JOINT_HIPS),
 					actor.getNode(ramActor::JOINT_LEFT_KNEE), 15, 15,
-					DPM_AXIS_X, DPM_AXIS_X, true, 0, 0);
+					DPM_AXIS_X, DPM_AXIS_X, true, 0, 0,
+					ofVec3f(9.8,0.0,0.0));
 
 	drawBasicRibbon(mMarioA_parts[11].getTextureReference(),
-					actor.getNode(ramActor::JOINT_RIGHT_HIP),
+					actor.getNode(ramActor::JOINT_HIPS),
 					actor.getNode(ramActor::JOINT_RIGHT_KNEE), 15, 15,
-					DPM_AXIS_X, DPM_AXIS_X, true, 0, 0);
+					DPM_AXIS_X, DPM_AXIS_X, true, 0, 0,
+					ofVec3f(-9.8,0.0,0.0));
+
 
 	drawBasicRibbon(mMarioA_parts[12].getTextureReference(),
 					actor.getNode(ramActor::JOINT_LEFT_KNEE),
 					actor.getNode(ramActor::JOINT_LEFT_ANKLE), 10, 10,
-					DPM_AXIS_X, DPM_AXIS_X, true, 0, 0);
+					DPM_AXIS_X, DPM_AXIS_X, true, 0, 0,
+					ofVec3f(-0.5,0.0,0.0),
+					ofVec3f( 0.5,0.0,0.0));
 
 	drawBasicRibbon(mMarioA_parts[13].getTextureReference(),
 					actor.getNode(ramActor::JOINT_RIGHT_KNEE),
 					actor.getNode(ramActor::JOINT_RIGHT_ANKLE), 10, 10,
-					DPM_AXIS_X, DPM_AXIS_X, true, 0, 0);
+					DPM_AXIS_X, DPM_AXIS_X, true, 0, 0,
+					ofVec3f( 0.5,0.0,0.0),
+					ofVec3f(-0.5,0.0,0.0));
+
 
 	drawBasicRibbon(mMarioA_parts[14].getTextureReference(),
 					actor.getNode(ramActor::JOINT_LEFT_ANKLE),
@@ -124,13 +132,15 @@ void dpMarionette::drawActor(const ramActor &actor){
 
 
 	glDisable(GL_ALPHA_TEST);
+
 }
 
 void dpMarionette::drawBasicRibbon(ofTexture &tex,
 								   const ramNode &nodeA,const ramNode &nodeB,
 								   float width, int resolution,
 								   int A_Axis, int B_Axis,
-								   bool wired,int beginOffset, int endOffset){
+								   bool wired,int beginOffset, int endOffset,
+								   ofVec3f beginOffset3v,ofVec3f endOffset3v){
 
 	ofNode parent[2];
 	parent[0] = nodeA;
@@ -151,10 +161,15 @@ void dpMarionette::drawBasicRibbon(ofTexture &tex,
 	if (B_Axis == DPM_AXIS_Y) bPos.set(0.0, width/2.0, 0.0);
 	if (B_Axis == DPM_AXIS_Z) bPos.set(0.0, endOffset, width/2.0);
 
-	child[1].setPosition(aPos);
 	child[0].setPosition(aPos.x * -1, aPos.y, aPos.z * -1);
-	child[3].setPosition(bPos);
+	child[1].setPosition(aPos);
 	child[2].setPosition(bPos.x * -1, bPos.y, bPos.z * -1);
+	child[3].setPosition(bPos);
+
+	child[0].setPosition(child[0].getPosition() + beginOffset3v);
+	child[1].setPosition(child[1].getPosition() + beginOffset3v);
+	child[2].setPosition(child[2].getPosition() + endOffset3v);
+	child[3].setPosition(child[3].getPosition() + endOffset3v);
 
 	ofVec2f texSize = ofVec2f(tex.getWidth(),tex.getHeight());
 	ofVec3f targA,targB;
@@ -185,24 +200,38 @@ void dpMarionette::drawElbowPoint(ofTexture &tex, const ramNode &nodeA, const ra
 	parent[1] = nodeB;
 	parent[2] = nodeC;
 
+	ofNode subParent[2];
+	subParent[0].setParent(parent[1]);
+	subParent[1].setParent(parent[2]);
+
+	if (isLEFT){
+		subParent[0].setPosition(-12.0, 0.0, 0.0);
+		subParent[1].setPosition( 12.0, 0.0, 0.0);
+	}else{
+		subParent[0].setPosition( 12.0, 0.0, 0.0);
+		subParent[1].setPosition(-12.0, 0.0, 0.0);
+	}
+
 	ofNode child[4];
 	child[0].setParent(parent[0]);
 	child[1].setParent(parent[0]);
 
 	if (isLEFT){
-		child[2].setGlobalPosition(parent[2].getGlobalPosition().
-								   interpolate(parent[1].getGlobalPosition(),-0.2));
-		child[3].setGlobalPosition(parent[2].getGlobalPosition().
-								   interpolate(parent[1].getGlobalPosition(), 0.1));
+		child[2].setGlobalPosition(subParent[1].getGlobalPosition().
+								   interpolate(subParent[0].getGlobalPosition(), 0.0));
+		child[3].setGlobalPosition(subParent[1].getGlobalPosition().
+								   interpolate(subParent[0].getGlobalPosition(), 0.2));
 	}else{
-		child[2].setGlobalPosition(parent[2].getGlobalPosition().
-								   interpolate(parent[1].getGlobalPosition(),-0.2));
-		child[3].setGlobalPosition(parent[2].getGlobalPosition().
-								   interpolate(parent[1].getGlobalPosition(),-0.4));
+		child[2].setGlobalPosition(subParent[1].getGlobalPosition().
+								   interpolate(subParent[0].getGlobalPosition(), 0.2));
+		child[3].setGlobalPosition(subParent[1].getGlobalPosition().
+								   interpolate(subParent[0].getGlobalPosition(), 0.0));
 	}
 
 	child[0].setPosition( width/2.0, 0.0, 0.0);
 	child[1].setPosition(-width/2.0, 0.0, 0.0);
+
+
 
 	ofVec2f texSize = ofVec2f(tex.getWidth(),tex.getHeight());
 	ofVec3f targA,targB;
@@ -225,6 +254,11 @@ void dpMarionette::drawElbowPoint(ofTexture &tex, const ramNode &nodeA, const ra
 	}
 	glEnd();
 	tex.unbind();
+
+	ofVec3f guideA = subParent[0].getGlobalPosition().interpolate(subParent[1].getGlobalPosition(),
+																  5.0);
+	ofVec3f guideB = subParent[1].getGlobalPosition().interpolate(subParent[0].getGlobalPosition(),
+																  5.0);
 
 }
 
@@ -315,5 +349,4 @@ void dpMarionette::drawShoulderPoint(ofTexture &tex,
 	}
 	glEnd();
 	tex.unbind();
-
 }

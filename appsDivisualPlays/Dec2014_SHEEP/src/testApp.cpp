@@ -45,6 +45,7 @@ void testApp::setup()
 	ramSceneManager& sceneManager = ramSceneManager::instance();
 	sceneManager.addScene( hakoniwaParallelLink.getPtr());
 	sceneManager.addScene( motionExt.getPtr());
+
 }
 
 //--------------------------------------------------------------
@@ -65,7 +66,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(const ramActor &actor)
 {
-	dpMarionette::instance().drawActor(actor);
+//	dpMarionette::instance().drawActor(actor);
 }
 
 //--------------------------------------------------------------

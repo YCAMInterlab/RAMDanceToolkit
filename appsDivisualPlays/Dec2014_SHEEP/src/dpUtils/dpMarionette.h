@@ -45,7 +45,9 @@ public:
 						 const ramNode &nodeA,const ramNode &nodeB,
 						 float width, int resolution,
 						 int A_Axis, int B_Axis,
-						 bool wired,int beginOffset,int endOffset);
+						 bool wired,int beginOffset,int endOffset,
+						 ofVec3f beginOffset3v = ofVec3f(0,0,0),
+						 ofVec3f endOffset3v = ofVec3f(0,0,0));
 	
 private:
 	static dpMarionette* __instance;

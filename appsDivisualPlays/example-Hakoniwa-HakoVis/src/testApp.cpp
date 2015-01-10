@@ -17,11 +17,11 @@
 
 #include "testApp.h"
 
-#include "ramMotionExtractorExampleScene.h"
-#include "frozenIce.h"
+#include "dpHakoniwaStruggle.h"
+dpHakoniwaStruggle hakoniwa;
 
-ramMotionExtractorExampleScene extractorScene;
-frozenIce frozenice;
+#include "dpHakoVisStruggle.h"
+dpHakoVisStruggle vis;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -40,8 +40,8 @@ void testApp::setup()
 	/// - EmptyScene::update, draw, and other method will be triggerd by ramSceneManager
 	/// - the scene added to ramSceneManager will appeard on GUI automaticaly
 	ramSceneManager& sceneManager = ramSceneManager::instance();
-	sceneManager.addScene(extractorScene.getPtr());
-    sceneManager.addScene(frozenice.getPtr());
+	sceneManager.addScene(hakoniwa.getPtr());
+    sceneManager.addScene(vis.getPtr());
 }
 
 //--------------------------------------------------------------

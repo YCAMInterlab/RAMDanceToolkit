@@ -18,10 +18,10 @@
 #include "testApp.h"
 
 #include "ramMotionExtractorExampleScene.h"
-#include "frozenIce.h"
+#include "HakoniwaTheta.h"
 
 ramMotionExtractorExampleScene extractorScene;
-frozenIce frozenice;
+HakoniwaTheta HakoniwaTheta;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -41,7 +41,7 @@ void testApp::setup()
 	/// - the scene added to ramSceneManager will appeard on GUI automaticaly
 	ramSceneManager& sceneManager = ramSceneManager::instance();
 	sceneManager.addScene(extractorScene.getPtr());
-    sceneManager.addScene(frozenice.getPtr());
+    sceneManager.addScene(HakoniwaTheta.getPtr());
 }
 
 //--------------------------------------------------------------
