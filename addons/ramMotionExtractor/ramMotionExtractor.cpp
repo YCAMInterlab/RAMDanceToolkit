@@ -186,7 +186,7 @@ void ramMotionExtractor::mouseReleased(ofMouseEventArgs &arg){
 		if (mMotionPort[i]->mActorIndex < actorList->getListItems().size())
 			mMotionPort[i]->mFinder.name = actorList->getListItems()[mMotionPort[i]->mActorIndex]->getName();
 	}
-	
+
 }
 
 #pragma mark - utility

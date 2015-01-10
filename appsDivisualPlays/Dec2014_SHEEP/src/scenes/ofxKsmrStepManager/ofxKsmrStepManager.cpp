@@ -329,22 +329,22 @@ void ofxKsmrStepManager::setupEasyFromPreset(ofxKsmrStepPreset preset){
 
 	if (preset == KSMR_STEP_P_PMSA_B56D5){
 		setParam_maxSpeed(0x0075);
-		setParam_Accel(0x0070);
-		setParam_Decel(0x0070);
+		setParam_Accel(0x0010);
+		setParam_Decel(0x0010);
 		setMicroSteps(7);
 
 		unsigned char sig[2];
 
-		sig[0] = 0x0B;	sig[1] = 0xFF;
+		sig[0] = 0x0B;	sig[1] = 0x1F;
 		sendSPIPacketAll(sig, 2);
 
-		sig[0] = 0x0C;	sig[1] = 0xFF;
+		sig[0] = 0x0C;	sig[1] = 0x1F;
 		sendSPIPacketAll(sig, 2);
 
-		sig[0] = 0x09;	sig[1] = 0xFF;
+		sig[0] = 0x09;	sig[1] = 0x1F;
 		sendSPIPacketAll(sig, 2);
 
-		sig[0] = 0x0A;	sig[1] = 0xFF;
+		sig[0] = 0x0A;	sig[1] = 0x1F;
 		sendSPIPacketAll(sig, 2);
 	}
 
@@ -448,19 +448,6 @@ void ofxKsmrStepManager::sendBytesOnline(unsigned char *buffer, int length){
 		}
 		if (notAdd) m.addIntArg(data);
 
-		//ユニットテスト
-		cout << "Test ===" << endl;
-		for (int i = 0;i < length;i++){
-			printf("%x, ",buffer[i]);
-		}
-		cout << endl;
-		int numBytes = (m.getArgAsInt32(0) >> 24) & 0xFF;
-
-		for (int i = 1; i < (numBytes + 1); i++){
-			int32_t pack = m.getArgAsInt32(i/4);
-			printf("%x, ",(pack >> (24 - i * 8)) & 0xFF);
-		}
-		cout << endl << "===========" << endl;
 
 		sender.sendMessage(m);
 	}

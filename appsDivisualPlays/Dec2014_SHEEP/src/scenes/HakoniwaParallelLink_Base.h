@@ -30,11 +30,12 @@ public:
 
 	inline
 	string getName() const { return "HakoniwaParallelLink_Base"; }
+	virtual string getAddress() {return "192.168.20.57";};
 
 	virtual void onEnabled();
 	virtual void onDisabled();
 
-private:
+protected:
 	ofxOscSender* mOscSender;
 	ramActor mActor;
 	static const int kNumValves = 3;
@@ -49,6 +50,7 @@ private:
 	bool mTrackMachine;
 	bool mDrawExtractor;
 	float mPwm_Param;
+	string mSendOSCAddress;
 	
 	ofVec3f mManualPosition;
 	ofVec3f machinePosition;
