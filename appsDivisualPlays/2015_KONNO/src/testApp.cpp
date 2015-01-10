@@ -18,8 +18,10 @@
 #include "testApp.h"
 
 #include "ramMotionExtractorExampleScene.h"
+#include "frozenIce.h"
 
 ramMotionExtractorExampleScene extractorScene;
+frozenIce frozenice;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -39,6 +41,7 @@ void testApp::setup()
 	/// - the scene added to ramSceneManager will appeard on GUI automaticaly
 	ramSceneManager& sceneManager = ramSceneManager::instance();
 	sceneManager.addScene(extractorScene.getPtr());
+    sceneManager.addScene(frozenice.getPtr());
 }
 
 //--------------------------------------------------------------
