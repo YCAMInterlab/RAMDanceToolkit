@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5EEE96D01A6012FC0021B788 /* frozenIce.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EEE96CE1A6012FC0021B788 /* frozenIce.cpp */; };
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		C6A68D1F1A5C330900122475 /* ramMotionExtractorExampleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A68D1D1A5C330900122475 /* ramMotionExtractorExampleScene.cpp */; };
 		C6A68D231A5C331D00122475 /* ramMotionExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A68D211A5C331D00122475 /* ramMotionExtractor.cpp */; };
+		D58D52921A5FA2D700B8A724 /* HakoniwaTheta.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D58D52901A5FA2D700B8A724 /* HakoniwaTheta.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -78,14 +78,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5EEE96CE1A6012FC0021B788 /* frozenIce.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = frozenIce.cpp; sourceTree = "<group>"; };
-		5EEE96CF1A6012FC0021B788 /* frozenIce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = frozenIce.h; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		C6A68D1D1A5C330900122475 /* ramMotionExtractorExampleScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramMotionExtractorExampleScene.cpp; sourceTree = "<group>"; };
 		C6A68D1E1A5C330900122475 /* ramMotionExtractorExampleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramMotionExtractorExampleScene.h; sourceTree = "<group>"; };
 		C6A68D211A5C331D00122475 /* ramMotionExtractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramMotionExtractor.cpp; sourceTree = "<group>"; };
 		C6A68D221A5C331D00122475 /* ramMotionExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramMotionExtractor.h; sourceTree = "<group>"; };
+		D58D52901A5FA2D700B8A724 /* HakoniwaTheta.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HakoniwaTheta.cpp; sourceTree = "<group>"; };
+		D58D52911A5FA2D700B8A724 /* HakoniwaTheta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HakoniwaTheta.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -199,8 +199,8 @@
 			children = (
 				C6A68D1E1A5C330900122475 /* ramMotionExtractorExampleScene.h */,
 				C6A68D1D1A5C330900122475 /* ramMotionExtractorExampleScene.cpp */,
-				5EEE96CE1A6012FC0021B788 /* frozenIce.cpp */,
-				5EEE96CF1A6012FC0021B788 /* frozenIce.h */,
+				D58D52901A5FA2D700B8A724 /* HakoniwaTheta.cpp */,
+				D58D52911A5FA2D700B8A724 /* HakoniwaTheta.h */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -365,10 +365,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EEE96D01A6012FC0021B788 /* frozenIce.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				C6A68D231A5C331D00122475 /* ramMotionExtractor.cpp in Sources */,
 				C6A68D1F1A5C330900122475 /* ramMotionExtractorExampleScene.cpp in Sources */,
+				D58D52921A5FA2D700B8A724 /* HakoniwaTheta.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
