@@ -19,28 +19,33 @@ uiThemecpo(255, 192);
 HakoniwaParallelLink_Base::HakoniwaParallelLink_Base(){
 
 	mLinkManager.setup("cu.usbmodem1141");
-	//mLinkManager.setupOsc("192.168.20.69", 8528);
 
 
 	mLinkManager.height = 250.0;
 
-	mLinkManager.area_clamp.set(80.0, 43.67, 80.0);
-	mLinkManager.area_offset.set(0.0, 150.0, 0.0);
+	mLinkManager.area_clamp.set(50.0, 100.0, 50.0);
+	mLinkManager.area_offset.set(0.0, 144.0, 0.0);
 	mLinkManager.delta.rotation = 30;
 	mLinkManager.id_offset = 0;
 	mLinkManager.id_swap = false;
 
 	mOscSender = &mLinkManager.stepManager.sender;
+	mLinkManager.setupOsc("192.168.20.69", 8528);
 
 	mSetting_Accel = 16;
 	mSetting_Deccel = 16;
 	mSetting_MaxSpeed = 37;
+	mLinkManager.signal_step = 5;
+
+	mTrackMachine = true;
+
 }
 
 void HakoniwaParallelLink_Base::update(){
+	motionEx.update();
 
-	ofVec3f v = mActor.getNode(ramActor::JOINT_RIGHT_HAND);
-	ofVec3f chest = mActor.getNode(ramActor::JOINT_CHEST);
+	ofVec3f v = motionEx.getNodeAt(1);
+	ofVec3f chest = motionEx.getNodeAt(0);
 
 	if (mTrackMachine){
 		machinePosition.x = chest.x;
@@ -60,7 +65,7 @@ void HakoniwaParallelLink_Base::update(){
 
 	mLinkManager.update();
 
-	if (CalibratePose)		mLinkManager.setPlot_inClamp(ofVec3f(0.0,100.0,0.0));
+	if (CalibratePose)		mLinkManager.setPlot_inClamp(ofVec3f(0.0,196.0,0.0));
 	else if (ManualPose)	mLinkManager.setPlot_inClamp(mManualPosition);
 	else					mLinkManager.setPlot_inClamp(v - machinePosition);
 
@@ -75,6 +80,9 @@ void HakoniwaParallelLink_Base::draw(){
 	ofTranslate(machinePosition);
 	mLinkManager.draw();
 	ofPopMatrix();
+
+	if (mDrawExtractor) motionEx.draw();
+
 	glDisable(GL_DEPTH_TEST);
 	ramEndCamera();
 
@@ -152,7 +160,7 @@ void HakoniwaParallelLink_Base::setupControlPanel(){
 	xyzGui->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
 	xyzGui->addSlider("Y", -200.0, 200.0, &mManualPosition.y,15,100);
 	xyzGui->addSlider("Z", -200.0, 200.0, &mManualPosition.z,15,100);
-	xyzGui->setPosition(240, 30);
+	xyzGui->setPosition(480, 30);
 	xyzGui->autoSizeToFitWidgets();
 
 
@@ -163,16 +171,34 @@ void HakoniwaParallelLink_Base::setupControlPanel(){
 	settingGui->disableAppDrawCallback();
 	settingGui->disableMouseEventCallbacks();
 	settingGui->addLabel("Settings");
+	settingGui->addButton("A_Up", false);
+	settingGui->addButton("A_Dn", false);
+	settingGui->addButton("B_Up", false);
+	settingGui->addButton("B_Dn", false);
+	settingGui->addButton("C_Up", false);
+	settingGui->addButton("C_Dn", false);
 	settingGui->addSlider("Accel", 0.0, 500.0, &mSetting_Accel);
 	settingGui->addSlider("Deccel", 0.0, 500.0, &mSetting_Deccel);
 	settingGui->addSlider("MaxSPD", 0.0, 500.0, &mSetting_MaxSpeed);
 	settingGui->addButton("SendSettings", false);
-	settingGui->setPosition(5, 450);
+	settingGui->setPosition(5, 460);
 	settingGui->autoSizeToFitWidgets();
+
+	utilityGui = new ofxUICanvas();
+	utilityGui->setUIColors(uiThemecb, uiThemeco, uiThemecoh,
+							uiThemecf, uiThemecfh, uiThemecp, uiThemecpo);
+	utilityGui->disableAppDrawCallback();
+	utilityGui->disableMouseEventCallbacks();
+	utilityGui->addLabel("Utility");
+	utilityGui->addTextInput("OSCAddress", "192.168.20.55");
+	utilityGui->addToggle("drawExtractor", &mDrawExtractor);
+	utilityGui->setPosition(240, 450);
+	utilityGui->autoSizeToFitWidgets();
 
 	panel->addWidget(systemGui);
 	panel->addWidget(settingGui);
 	panel->addWidget(xyzGui);
+	panel->addWidget(utilityGui);
 
 	panel->autoSizeToFitWidgets();
 
@@ -182,6 +208,7 @@ void HakoniwaParallelLink_Base::setupControlPanel(){
 	ofAddListener(panel->newGUIEvent,
 				  this, &HakoniwaParallelLink_Base::onPanelChanged);
 
+	motionEx.setupControlPanel(this);
 }
 
 void HakoniwaParallelLink_Base::drawActor(const ramActor &actor)
@@ -191,6 +218,43 @@ void HakoniwaParallelLink_Base::drawActor(const ramActor &actor)
 
 void HakoniwaParallelLink_Base::onPanelChanged(ofxUIEventArgs& e){
 	ofxUIWidget* w = e.widget;
+
+	if ((w->getName() == "A_Up") && (w->getState() == OFX_UI_STATE_DOWN)){
+		int tg = mLinkManager.delta.actuator[0].getGlobalOrientation().getEuler().x/2+4;
+		mLinkManager.stepManager.setStepperSingle(0, true);
+		mLinkManager.stepManager.absPos(tg);
+		mLinkManager.stepManager.setStepperAll(false);
+	}
+	if ((w->getName() == "A_Dn") && (w->getState() == OFX_UI_STATE_DOWN)){
+		int tg = mLinkManager.delta.actuator[0].getGlobalOrientation().getEuler().x/2-4;
+		mLinkManager.stepManager.setStepperSingle(0, true);
+		mLinkManager.stepManager.absPos(tg);
+		mLinkManager.stepManager.setStepperAll(false);
+	}
+	if ((w->getName() == "B_Up") && (w->getState() == OFX_UI_STATE_DOWN)){
+		int tg = mLinkManager.delta.actuator[1].getGlobalOrientation().getEuler().x/2+4;
+		mLinkManager.stepManager.setStepperSingle(1, true);
+		mLinkManager.stepManager.absPos(tg);
+		mLinkManager.stepManager.setStepperAll(false);
+	}
+	if ((w->getName() == "B_Dn") && (w->getState() == OFX_UI_STATE_DOWN)){
+		int tg = mLinkManager.delta.actuator[1].getGlobalOrientation().getEuler().x/2-4;
+		mLinkManager.stepManager.setStepperSingle(1, true);
+		mLinkManager.stepManager.absPos(tg);
+		mLinkManager.stepManager.setStepperAll(false);
+	}
+	if ((w->getName() == "C_Up") && (w->getState() == OFX_UI_STATE_DOWN)){
+		int tg = mLinkManager.delta.actuator[2].getGlobalOrientation().getEuler().x/2+4;
+		mLinkManager.stepManager.setStepperSingle(2, true);
+		mLinkManager.stepManager.absPos(tg);
+		mLinkManager.stepManager.setStepperAll(false);
+	}
+	if ((w->getName() == "C_Dn") && (w->getState() == OFX_UI_STATE_DOWN)){
+		int tg = mLinkManager.delta.actuator[2].getGlobalOrientation().getEuler().x/2-4;
+		mLinkManager.stepManager.setStepperSingle(2, true);
+		mLinkManager.stepManager.absPos(tg);
+		mLinkManager.stepManager.setStepperAll(false);
+	}
 
 	if (w->getName() == "Calibration"){
 		mLinkManager.calibrate();

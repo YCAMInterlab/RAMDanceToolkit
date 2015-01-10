@@ -8,17 +8,10 @@
 
 #include "ofxKsmrStepManager.h"
 
+#pragma mark - Initialize
 void ofxKsmrStepManager::setupOsc(string address, int port){
 	useOsc = true;
 	sender.setup(address, port);
-}
-
-void ofxKsmrStepManager::setupUDP(string address, int port){
-	useUDP = true;
-	udpSender.Create();
-	udpSender.Connect(address.c_str(), port);
-	udpSender.SetNonBlocking(true);
-
 }
 
 void ofxKsmrStepManager::setup(string portName, int baud){
@@ -35,6 +28,7 @@ void ofxKsmrStepManager::addStepper(string name, int numStep, int SPIch){
 
 }
 
+#pragma mark - SPI Sender
 //1命令1パケットとして複数バイトを全モーターに送信する
 void ofxKsmrStepManager::sendSPIPacketAll(unsigned char *bytes, int length){
 
@@ -81,7 +75,7 @@ void ofxKsmrStepManager::sendSPIPacketSelected(unsigned char *bytes, int length)
 
 void ofxKsmrStepManager::sendSPIMultiByte(unsigned char *bytes, int length){
 	if (serial.isInitialized()) serial.writeBytes(bytes, length);
-	if (useOsc || useUDP) sendBytesOnline(bytes, length);
+	if (useOsc) sendBytesOnline(bytes, length);
 }
 
 void ofxKsmrStepManager::sendSPIByteAll(unsigned char byte){
@@ -94,7 +88,7 @@ void ofxKsmrStepManager::sendSPIByteAll(unsigned char byte){
 	}
 
 	if (serial.isInitialized()) serial.writeBytes(sig, steppers.size()+2);
-	if (useOsc || useUDP) sendBytesOnline(sig, steppers.size()+2);
+	if (useOsc) sendBytesOnline(sig, steppers.size()+2);
 
 }
 
@@ -110,7 +104,7 @@ void ofxKsmrStepManager::sendSPIByteSelected(unsigned char byte){
 	}
 
 	if (serial.isInitialized()) serial.writeBytes(sig, steppers.size()+2);
-	if (useOsc || useUDP) sendBytesOnline(sig, steppers.size()+2);
+	if (useOsc) sendBytesOnline(sig, steppers.size()+2);
 
 }
 
@@ -125,7 +119,7 @@ void ofxKsmrStepManager::sendSPIByteSingle(unsigned char byte, int ch){
 	}
 
 	if (serial.isInitialized()) serial.writeBytes(sig, steppers.size()+2);
-	if (useOsc || useUDP) sendBytesOnline(sig, steppers.size()+2);
+	if (useOsc) sendBytesOnline(sig, steppers.size()+2);
 
 }
 
@@ -148,10 +142,8 @@ virtualSteppingMotor &ofxKsmrStepManager::getMotor(string name){
 }
 
 void ofxKsmrStepManager::resetAllDevices(){
-	sendSPIByteAll(0x00);
-	sendSPIByteAll(0x00);
-	sendSPIByteAll(0x00);
-	sendSPIByteAll(0x00);
+	for (int i = 0;i < 4;i++)
+		sendSPIByteAll(0x00);
 
 	sendSPIByteAll(0xc0);
 }
@@ -295,7 +287,7 @@ void ofxKsmrStepManager::multi_go_to(int *pos){
 		signal[3*signal_unitL + 2 + i] = steppers[i].sendEnable ? datas[i][0] : 0x00;
 	}
 
-	sendSPIMultiByte(signal, 4*signal_unitL);
+	sendSPIMultiByte(signal, 4 * signal_unitL);
 }
 
 void ofxKsmrStepManager::go_to(int pos){
@@ -316,6 +308,7 @@ void ofxKsmrStepManager::go_to(int pos){
 	sig[3] = data[0];
 
 	sendSPIPacketSelected(sig, 4);
+
 }
 
 void ofxKsmrStepManager::softStop(){
@@ -339,6 +332,20 @@ void ofxKsmrStepManager::setupEasyFromPreset(ofxKsmrStepPreset preset){
 		setParam_Accel(0x0070);
 		setParam_Decel(0x0070);
 		setMicroSteps(7);
+
+		unsigned char sig[2];
+
+		sig[0] = 0x0B;	sig[1] = 0xFF;
+		sendSPIPacketAll(sig, 2);
+
+		sig[0] = 0x0C;	sig[1] = 0xFF;
+		sendSPIPacketAll(sig, 2);
+
+		sig[0] = 0x09;	sig[1] = 0xFF;
+		sendSPIPacketAll(sig, 2);
+
+		sig[0] = 0x0A;	sig[1] = 0xFF;
+		sendSPIPacketAll(sig, 2);
 	}
 
 	if (preset == KSMR_STEP_SM_42BYG011_25){
@@ -456,10 +463,6 @@ void ofxKsmrStepManager::sendBytesOnline(unsigned char *buffer, int length){
 		cout << endl << "===========" << endl;
 
 		sender.sendMessage(m);
-	}
-
-	if (useUDP){
-		udpSender.Send((char*)(buffer), length);
 	}
 
 }

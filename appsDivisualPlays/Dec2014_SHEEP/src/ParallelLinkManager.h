@@ -21,9 +21,6 @@ public:
 	void setupOsc(string host,int port){
 		stepManager.setupOsc(host, port);
 	};
-	void setupUDP(string host,int port){
-		stepManager.setupUDP(host, port);
-	}
 
 	void update();
 	void draw();
