@@ -55,6 +55,8 @@ void SceneVec2Grid::exit()
 
 void SceneVec2Grid::update(ofxEventMessage& m)
 {
+    ofSetWindowTitle(getName() + ": " + ofToString(ofGetFrameRate(), 2));
+    
     if (m.getAddress() == kAddrVec2) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);
@@ -71,7 +73,7 @@ void SceneVec2Grid::draw()
     ofEnableAlphaBlending();
     
     ofSetColor(ofColor::white, 255);
-    ofDrawBitmapString("Dividual Plays System Score - C", 12.f, 16.f);
+    ofDrawBitmapString(getName(), 12.f, 16.f);
     
     mCam.begin();
     ofPushMatrix();

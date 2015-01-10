@@ -57,7 +57,7 @@ void ofApp::setup()
     
     //mSceneManager.change(3);
     //mSceneManager.change("dp::score::SceneVec2Clocks");
-    mSceneManager.change<SceneVec2SimpleGraph>();
+    mSceneManager.change<SceneBodyVisualization>();
     
     mSceneManager.getTabBar()->loadSettings(kSettingsDir, kSettingsPrefix);
     mSceneManager.getTabBar()->setVisible(false);
@@ -84,8 +84,6 @@ void ofApp::setup()
 #pragma mark ___________________________________________________________________
 void ofApp::update()
 {
-    ofSetWindowTitle(ofToString(ofGetFrameRate(), 2));
-    
     OFX_BEGIN_EXCEPTION_HANDLING
     
     int n = 0;
