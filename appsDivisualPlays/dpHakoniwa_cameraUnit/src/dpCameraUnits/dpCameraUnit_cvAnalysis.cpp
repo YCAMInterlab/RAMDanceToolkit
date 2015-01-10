@@ -80,6 +80,9 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 
 	imgRefColor = &pixColor;
 	imgRefGray = &pixGray;
+    
+    float width = pixGray.getWidth();
+    float height = pixGray.getHeight();
 
 	if (mEnableContourFinder){
 		mContFinder.setMaxArea(mParamCF_MaxArea);
@@ -98,10 +101,10 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			ofxOscMessage m;
 			m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/boundingRect");
 			m.addIntArg(i);
-			m.addFloatArg(rt.x);
-			m.addFloatArg(rt.y);
-			m.addFloatArg(rt.width);
-			m.addFloatArg(rt.height);
+			m.addFloatArg(rt.x / width);
+			m.addFloatArg(rt.y / height);
+			m.addFloatArg(rt.width / width);
+			m.addFloatArg(rt.height / height);
 			sendMessageMulti(m);
 
 			ofxOscMessage mm;
@@ -119,8 +122,8 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 
 				if (mEnableSendOSC){
 					ofVec2f pt = ofxCv::toOf(mContFinder.getContour(i)[j]);
-					mm.addFloatArg(pt.x);
-					mm.addFloatArg(pt.y);
+					mm.addFloatArg(pt.x / width);
+					mm.addFloatArg(pt.y / height);
 					pts.push_back(ofVec2f(pt));
 				}
 			}
