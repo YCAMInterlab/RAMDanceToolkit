@@ -22,7 +22,7 @@ static ofRectangle dpGetSecondScreenViewPort(){
     return ofRectangle(SINGLE_SCREEN_WIDTH,0,SINGLE_SCREEN_WIDTH,SINGLE_SCREEN_HEIGHT);
 }
 
-static ofPoint dpGetFisrtScreenCenter(){
+static ofPoint dpGetFirstScreenCenter(){
     return ofPoint(SINGLE_SCREEN_WIDTH * 0.5,SINGLE_SCREEN_HEIGHT * 0.5,0.0);
 }
 
