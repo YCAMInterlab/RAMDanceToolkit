@@ -96,7 +96,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			
 			ofRectangle rt = ofxCv::toOf(mContFinder.getBoundingRect(i));
 			ofxOscMessage m;
-			m.setAddress("dp/cameraUnit/"+hakoniwa_name+"/contour/boundingRect");
+			m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/boundingRect");
 			m.addIntArg(i);
 			m.addFloatArg(rt.x);
 			m.addFloatArg(rt.y);
