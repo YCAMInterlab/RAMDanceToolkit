@@ -187,8 +187,8 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/features");
 			m.addIntArg(mOptFlow.getFeatures().size());
 			for (int i = 0;i < mOptFlow.getFeatures().size();i++){
-				m.addFloatArg(mOptFlow.getFeatures()[i].x);
-				m.addFloatArg(mOptFlow.getFeatures()[i].y);
+				m.addFloatArg(mOptFlow.getFeatures()[i].x / width);
+				m.addFloatArg(mOptFlow.getFeatures()[i].y / height);
 			}
 			sendMessageMulti(m);
 
