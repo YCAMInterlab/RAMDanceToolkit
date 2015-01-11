@@ -5,7 +5,7 @@
 
 #define STRINGIFY(A) #A
 
-class dpHakoniwaSand : public ramBaseScene{
+class dpHakoniwaSand : public ramBaseScene {
 public:
     
     string getName() const {return "dpHSand";};
@@ -24,7 +24,10 @@ private:
     string mVert;
     ofShader mDisplace;
     
-    float mVelocitySpeed = 0.0;
+    int val1 = 0;
+    int val2 = 0;
+    int val3 = 0;
+    bool bTestMode = true;
     
     ramMotionExtractor	mMotionExtractor;
 	ofxOscSender mSender;

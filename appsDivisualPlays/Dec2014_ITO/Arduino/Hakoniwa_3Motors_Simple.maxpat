@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 767.0, 283.0, 448.0, 379.0 ],
+		"rect" : [ 767.0, 283.0, 698.0, 379.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -38,14 +38,40 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-10",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 454.0, 39.0, 150.0, 20.0 ],
+					"presentation_rect" : [ 456.0, 36.0, 0.0, 0.0 ],
+					"style" : "",
+					"text" : "800-2175 HS-8370_Hitec"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-5",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 454.0, 15.0, 150.0, 20.0 ],
+					"style" : "",
+					"text" : "1000-2020 Tiger40"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-8",
 					"maxclass" : "number",
+					"maximum" : 2300,
+					"minimum" : 800,
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 79.0, 181.0, 50.0, 22.0 ],
-					"presentation_rect" : [ 81.0, 181.0, 0.0, 0.0 ],
+					"patching_rect" : [ 220.0, 15.0, 50.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -54,12 +80,13 @@
 				"box" : 				{
 					"id" : "obj-7",
 					"maxclass" : "number",
+					"maximum" : 2175,
+					"minimum" : 800,
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 149.0, 126.0, 50.0, 22.0 ],
-					"presentation_rect" : [ 149.0, 126.0, 0.0, 0.0 ],
+					"patching_rect" : [ 261.0, 82.0, 50.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -68,41 +95,13 @@
 				"box" : 				{
 					"id" : "obj-6",
 					"maxclass" : "number",
+					"maximum" : 2175,
+					"minimum" : 800,
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 79.0, 126.0, 50.0, 22.0 ],
-					"style" : ""
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-69",
-					"maxclass" : "number",
-					"maximum" : 158,
-					"minimum" : 24,
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "bang" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 260.5, 88.0, 50.0, 22.0 ],
-					"style" : ""
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-68",
-					"maxclass" : "number",
-					"maximum" : 158,
-					"minimum" : 24,
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "bang" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 240.5, 60.0, 50.0, 22.0 ],
+					"patching_rect" : [ 240.5, 39.0, 50.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -123,29 +122,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-9",
-					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 28.0, 287.0, 182.0, 35.0 ],
+					"patching_rect" : [ 28.0, 287.0, 182.0, 22.0 ],
 					"style" : "",
-					"text" : "/dp/hakoniwa/sand 24 1399 1110"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-5",
-					"maxclass" : "number",
-					"maximum" : 158,
-					"minimum" : 24,
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "bang" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 220.0, 30.0, 50.0, 22.0 ],
-					"style" : ""
+					"text" : "/dp/hakoniwa/sand 2016 2174 0"
 				}
 
 			}
@@ -217,15 +200,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-3", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-5", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-3", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -239,24 +213,6 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-67", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-3", 1 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-68", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-3", 2 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-69", 0 ]
 				}
 
 			}

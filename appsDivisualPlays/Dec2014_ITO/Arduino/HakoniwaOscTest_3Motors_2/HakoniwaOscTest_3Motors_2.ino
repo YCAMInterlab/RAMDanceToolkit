@@ -21,6 +21,9 @@ byte _mac[] = { 0x90, 0xA2, 0xDA, 0x85, 0x28, 0x04 };
 IPAddress _ip(192, 168, 20, 54);
 const unsigned int _inPort = 8528;
 
+void routeOsc(OSCMessage &msg, int addrOffset);
+
+
 void setup() 
 {
   
@@ -63,28 +66,38 @@ void loop()
     }
   }
   
-   OSCMessage message;
+//   OSCMessage message;
+//   int size = _udp.parsePacket();
+
+   OSCBundle bundle;
    int size = _udp.parsePacket();
+
    
    if (size > 0) {
+     
      while (size--) {
-       message.fill(_udp.read());
+       bundle.fill(_udp.read());
      }
      
-     if(!message.hasError() && message.match("/dp/hakoniwa/sand")) {
- //          digitalWrite(9, message.getInt(0) ? HIGH:LOW);
+     OSCMessage message = bundle.getOSCMessage("/dp/hakoniwa/sand");
+     
+     if(!message.hasError()) {
         for (int i = 0; i < 3; i++) {
           gPos[i] = message.getInt(i);
         }
-//        Serial.println(pos[0]);
-//
-//        for (int i = 0; i < 3; i++) {
-//          sv[i].write(pos[i]);
-//        }
-//      delay(5);
-     }
-   }
+      }
 
+//     while (size--) {
+//       message.fill(_udp.read());
+//     }
+//     
+//     if(!message.hasError() && message.match("/dp/hakoniwa/sand")) {
+//        for (int i = 0; i < 3; i++) {
+//          gPos[i] = message.getInt(i);
+//        }
+//     }
+
+   }
 }
 
 void moveServo(int which) {  
@@ -99,4 +112,5 @@ void moveServo(int which) {
   //if (cPos == gPos) // nothing
   myservo_movetime[which] = millis() + tDelay[which];
 }
+
 
