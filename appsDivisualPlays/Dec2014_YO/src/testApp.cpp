@@ -18,26 +18,22 @@
 #include "testApp.h"
 #include "dpConstants.h"
 
-class : public ramBaseScene {
-public:
+struct : public ramBaseScene {
     void drawActor(const ramActor &actor) { ramDrawBasicActor(actor); }
     string getName() const { return "TestSceneA"; }
 } testSceneA;
 
-class : public ramBaseScene {
-public:
+struct : public ramBaseScene {
     void drawActor(const ramActor &actor) { ramDrawBasicActor(actor); }
     string getName() const { return "TestSceneB"; }
 } testSceneB;
 
-class : public ramBaseScene {
-public:
+struct : public ramBaseScene {
     void drawActor(const ramActor &actor) { ramDrawBasicActor(actor); }
     string getName() const { return "TestSceneC"; }
 } testSceneC;
 
-class : public ramBaseScene {
-public:
+struct : public ramBaseScene {
     void drawActor(const ramActor &actor) { ramDrawBasicActor(actor); }
     string getName() const { return "TestSceneD"; }
 } testSceneD;

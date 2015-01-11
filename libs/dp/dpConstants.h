@@ -9,10 +9,18 @@
 #ifndef RAMDanceToolkit_dpConstants_h
 #define RAMDanceToolkit_dpConstants_h
 
-//static const int SINGLE_SCREEN_WIDTH = 1366/2;
-//static const int SINGLE_SCREEN_HEIGHT = 768;
+//#define DEBUG_MACBOOK_AIR
+
+#if defined(DEBUG_MACBOOK_AIR)
+static const int SINGLE_SCREEN_WIDTH = 1366/2;
+static const int SINGLE_SCREEN_HEIGHT = 768;
+#elif defined(DEBUG_MACBOOK_PRO)
+static const int SINGLE_SCREEN_WIDTH = 1920/2;
+static const int SINGLE_SCREEN_HEIGHT = 1080;
+#else
 static const int SINGLE_SCREEN_WIDTH = 1920;
 static const int SINGLE_SCREEN_HEIGHT = 1080;
+#endif
 
 static const int APP_WIDTH = SINGLE_SCREEN_WIDTH * 2;
 static const int APP_HEIGHT = SINGLE_SCREEN_HEIGHT;
