@@ -55,6 +55,7 @@ public:
 	float mParamCF_MaxArea;
 	float mParamCF_MinArea;
 	float mParamCF_Threshold;
+	float mParamCF_MaxBlobNum;
 	ofFloatColor mParamCF_targColor;
 
 	ofImage *imgRefColor, *imgRefGray;
