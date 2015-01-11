@@ -89,6 +89,7 @@
 		D2B4FD1B1A60DDBB00C97A66 /* dpScoreSceneBodyPatterns.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD191A60DDBB00C97A66 /* dpScoreSceneBodyPatterns.cpp */; };
 		D2B4FD1E1A60DE1200C97A66 /* dpScoreSceneBodyFlow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD1C1A60DE1200C97A66 /* dpScoreSceneBodyFlow.cpp */; };
 		D2B4FD241A60FF3A00C97A66 /* dpScoreSceneDataScroll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD221A60FF3A00C97A66 /* dpScoreSceneDataScroll.cpp */; };
+		D2C4DE7D1A6286E400342E4F /* dpScoreSceneBodyLines.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C4DE7B1A6286E400342E4F /* dpScoreSceneBodyLines.cpp */; };
 		D2E2B73F1A4A4FB500570C58 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B7381A4A4FB500570C58 /* tinyxml.cpp */; };
 		D2E2B7401A4A4FB500570C58 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B73A1A4A4FB500570C58 /* tinyxmlerror.cpp */; };
 		D2E2B7411A4A4FB500570C58 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B73B1A4A4FB500570C58 /* tinyxmlparser.cpp */; };
@@ -322,6 +323,8 @@
 		D2B4FD1D1A60DE1200C97A66 /* dpScoreSceneBodyFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyFlow.h; sourceTree = "<group>"; };
 		D2B4FD221A60FF3A00C97A66 /* dpScoreSceneDataScroll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneDataScroll.cpp; sourceTree = "<group>"; };
 		D2B4FD231A60FF3A00C97A66 /* dpScoreSceneDataScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataScroll.h; sourceTree = "<group>"; };
+		D2C4DE7B1A6286E400342E4F /* dpScoreSceneBodyLines.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyLines.cpp; sourceTree = "<group>"; };
+		D2C4DE7C1A6286E400342E4F /* dpScoreSceneBodyLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyLines.h; sourceTree = "<group>"; };
 		D2E2B7381A4A4FB500570C58 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		D2E2B7391A4A4FB500570C58 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		D2E2B73A1A4A4FB500570C58 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
@@ -719,6 +722,8 @@
 				D2B4FD1D1A60DE1200C97A66 /* dpScoreSceneBodyFlow.h */,
 				D2B4FD221A60FF3A00C97A66 /* dpScoreSceneDataScroll.cpp */,
 				D2B4FD231A60FF3A00C97A66 /* dpScoreSceneDataScroll.h */,
+				D2C4DE7B1A6286E400342E4F /* dpScoreSceneBodyLines.cpp */,
+				D2C4DE7C1A6286E400342E4F /* dpScoreSceneBodyLines.h */,
 			);
 			path = scenes;
 			sourceTree = "<group>";
@@ -941,6 +946,7 @@
 				D21D0BAA1A4C046000CC3598 /* ofxUISpectrum.cpp in Sources */,
 				D21D0BA81A4C046000CC3598 /* ofxUISortableList.cpp in Sources */,
 				D21D0B901A4C046000CC3598 /* ofxUIDragableLabelButton.cpp in Sources */,
+				D2C4DE7D1A6286E400342E4F /* dpScoreSceneBodyLines.cpp in Sources */,
 				D21D0BAD1A4C046000CC3598 /* ofxUITextArea.cpp in Sources */,
 				D29034131A4D4ADE00577E04 /* dpScoreSceneManager.cpp in Sources */,
 				D21D0BA91A4C046000CC3598 /* ofxUISpacer.cpp in Sources */,

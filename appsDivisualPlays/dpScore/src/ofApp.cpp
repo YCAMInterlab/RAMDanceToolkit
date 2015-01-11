@@ -7,6 +7,7 @@
 #include "dpScoreSceneBodyScan.h"
 #include "dpScoreSceneBodyFlow.h"
 #include "dpScoreSceneBodyPatterns.h"
+#include "dpScoreSceneBodyLines.h"
 #include "dpScoreSceneDataScroll.h"
 
 using namespace dp::score;
@@ -43,6 +44,7 @@ void ofApp::setup()
     auto bodyPattern = SceneBase::Ptr(new SceneBodyPatterns());
     auto bodyFlow = SceneBase::Ptr(new SceneBodyFlow());
     auto bodyGlobe = SceneBase::Ptr(new SceneBodyGlobe());
+    auto bodyLines = SceneBase::Ptr(new SceneBodyLines());
     
     auto dataScroll = SceneBase::Ptr(new SceneDataScroll());
     
@@ -53,6 +55,7 @@ void ofApp::setup()
     
     mSceneManager.add(dataScroll);
     
+    mSceneManager.add(bodyLines);
     mSceneManager.add(bodyScan);
     mSceneManager.add(bodyPattern);
     mSceneManager.add(bodyFlow);
@@ -73,7 +76,7 @@ void ofApp::setup()
     
     //mSceneManager.change(3);
     //mSceneManager.change("dp::score::SceneVec2Clocks");
-    mSceneManager.change<SceneDataScroll>();
+    mSceneManager.change<SceneBodyLines>();
     
     mSceneManager.getTabBar()->loadSettings(kSettingsDir, kSettingsPrefix);
     mSceneManager.getTabBar()->setVisible(false);
