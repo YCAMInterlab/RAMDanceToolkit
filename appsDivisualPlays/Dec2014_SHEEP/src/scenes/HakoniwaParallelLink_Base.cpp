@@ -31,9 +31,6 @@ HakoniwaParallelLink_Base::HakoniwaParallelLink_Base(){
 
 	mOscSender = &mLinkManager.stepManager.sender;
 
-	mSendOSCAddress = getAddress();
-	mLinkManager.setupOsc("192.168.20.57", 8528);
-
 	mSetting_Accel = 16;
 	mSetting_Deccel = 16;
 	mSetting_MaxSpeed = 37;
@@ -95,6 +92,8 @@ void HakoniwaParallelLink_Base::draw(){
 }
 
 void HakoniwaParallelLink_Base::setupControlPanel(){
+	mSendOSCAddress = getAddress();
+	mLinkManager.setupOsc(mSendOSCAddress, 8528);
 
 	ofxUICanvasPlus* panel = ramGetGUI().getCurrentUIContext();
 

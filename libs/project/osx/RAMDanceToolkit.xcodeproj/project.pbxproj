@@ -470,6 +470,8 @@
 		C62C935F1951554400EF3B2E /* ramCommunicationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C935D1951554400EF3B2E /* ramCommunicationManager.h */; };
 		C681AB9C197386FD0076DF1D /* ramOscManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C681AB9A197386FD0076DF1D /* ramOscManager.cpp */; };
 		C681AB9D197386FD0076DF1D /* ramOscManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C681AB9B197386FD0076DF1D /* ramOscManager.h */; };
+		C68A25451A627B9F001CEF91 /* ramMotionExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C68A25431A627B9F001CEF91 /* ramMotionExtractor.cpp */; };
+		C68A25461A627B9F001CEF91 /* ramMotionExtractor.h in Headers */ = {isa = PBXBuildFile; fileRef = C68A25441A627B9F001CEF91 /* ramMotionExtractor.h */; };
 		C6FC6B4419515D11002E18D5 /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FC6B3319515D11002E18D5 /* ofxBaseGui.cpp */; };
 		C6FC6B4519515D11002E18D5 /* ofxBaseGui.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FC6B3419515D11002E18D5 /* ofxBaseGui.h */; };
 		C6FC6B4619515D11002E18D5 /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FC6B3519515D11002E18D5 /* ofxButton.cpp */; };
@@ -1065,6 +1067,8 @@
 		C62C935D1951554400EF3B2E /* ramCommunicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramCommunicationManager.h; sourceTree = "<group>"; };
 		C681AB9A197386FD0076DF1D /* ramOscManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramOscManager.cpp; sourceTree = "<group>"; };
 		C681AB9B197386FD0076DF1D /* ramOscManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramOscManager.h; sourceTree = "<group>"; };
+		C68A25431A627B9F001CEF91 /* ramMotionExtractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramMotionExtractor.cpp; sourceTree = "<group>"; };
+		C68A25441A627B9F001CEF91 /* ramMotionExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramMotionExtractor.h; sourceTree = "<group>"; };
 		C6FC6B3319515D11002E18D5 /* ofxBaseGui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBaseGui.cpp; sourceTree = "<group>"; };
 		C6FC6B3419515D11002E18D5 /* ofxBaseGui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBaseGui.h; sourceTree = "<group>"; };
 		C6FC6B3519515D11002E18D5 /* ofxButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxButton.cpp; sourceTree = "<group>"; };
@@ -2410,6 +2414,15 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		C68A25421A627B9F001CEF91 /* ramMotionExtractor */ = {
+			isa = PBXGroup;
+			children = (
+				C68A25431A627B9F001CEF91 /* ramMotionExtractor.cpp */,
+				C68A25441A627B9F001CEF91 /* ramMotionExtractor.h */,
+			);
+			path = ramMotionExtractor;
+			sourceTree = "<group>";
+		};
 		C6FC6B3119515D11002E18D5 /* ofxGui */ = {
 			isa = PBXGroup;
 			children = (
@@ -2558,6 +2571,7 @@
 			isa = PBXGroup;
 			children = (
 				D2B4FD281A62211B00C97A66 /* dpConstants.h */,
+				C68A25421A627B9F001CEF91 /* ramMotionExtractor */,
 			);
 			name = dp;
 			path = ../../dp;
@@ -2714,6 +2728,7 @@
 				9A38F4D616E9E81900FF8B66 /* btMultiSapBroadphase.h in Headers */,
 				9A38F4D716E9E81900FF8B66 /* btOverlappingPairCache.h in Headers */,
 				D21D08491A4BD9A900CC3598 /* ofxUISpectrum.h in Headers */,
+				C68A25461A627B9F001CEF91 /* ramMotionExtractor.h in Headers */,
 				9A38F4D816E9E81900FF8B66 /* btOverlappingPairCallback.h in Headers */,
 				9A38F4D916E9E81900FF8B66 /* btQuantizedBvh.h in Headers */,
 				9248D5DD1A4D6A1200047AF5 /* imgproc_c.h in Headers */,
@@ -3102,6 +3117,7 @@
 				C6FC6B4D19515D11002E18D5 /* ofxPanel.cpp in Sources */,
 				600EFB3816C8F56800A5B331 /* ofxOscSender.cpp in Sources */,
 				D21D08541A4BD9A900CC3598 /* ofxUIToggleMatrix.cpp in Sources */,
+				C68A25451A627B9F001CEF91 /* ramMotionExtractor.cpp in Sources */,
 				600EFB4316C8F59700A5B331 /* tinyxml.cpp in Sources */,
 				600EFB4516C8F59700A5B331 /* tinyxmlerror.cpp in Sources */,
 				D21D08101A4BD9A900CC3598 /* ofxUICircleSlider.cpp in Sources */,

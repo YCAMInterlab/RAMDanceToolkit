@@ -56,7 +56,7 @@ void ramMotionExtractor::setupControlPanel(ramBaseScene *scene_, ofVec2f canvasP
 }
 
 void ramMotionExtractor::update(){
-	cout << "This MotionExtractor is OLD. Please re-include libs/dp/ramMotionExtractor" << endl;
+
 	for (int i = 0;i < mMotionPort.size();i++){
 		mMotionPort[i]->update(mMotionSmooth);
 	}

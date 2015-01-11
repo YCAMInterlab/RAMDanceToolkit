@@ -104,7 +104,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		ofxOscMessage blobM;
 
 		bRectM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/boundingRect");
-		blobM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/blob");
+		blobM .setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/blob");
 
 		bRectM.addIntArg(mContFinder.getContours().size());
 		blobM.addIntArg(mContFinder.getContours().size());
