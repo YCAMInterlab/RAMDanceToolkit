@@ -16,6 +16,7 @@ public:
     void update();
     void draw();
     void drawActor(const ramActor& actor);
+    void example_drawDump();
     
 private:
     

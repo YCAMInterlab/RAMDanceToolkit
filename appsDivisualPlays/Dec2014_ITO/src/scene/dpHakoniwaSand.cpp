@@ -40,7 +40,6 @@ void dpHakoniwaSand::sendOsc(){
 void dpHakoniwaSand::update(){
 
     mMotionExtractor.update();
-//    mVelocitySpeed = mMotionExtractor.getVelocitySpeedAt(0) * mVelocitySpeedScale;
     sendOsc();
     
 }
@@ -54,16 +53,44 @@ void dpHakoniwaSand::draw(){
     ramSetViewPort(dpGetFirstScreenViewPort()); //１枚目のscreenを描画に指定。ここの仕様変わります。
     ramBeginCamera();
     mMotionExtractor.draw();
-    
-    ofPoint nodePos = mMotionExtractor.getPositionAt(0);
-    
-    ofPoint boxPos(ofRandom(-1,1),ofRandom(-1,1),ofRandom(-1,1));
-//    boxPos *= mVelocitySpeed * 0.1;
-   
-    ofSetColor(255,255);
-    ofLine(boxPos,nodePos);
-    ofLine(boxPos,ofPoint(0,1000,0));
-    ofDrawBox(boxPos,30,30,30);
-    
+
     ramEndCamera();
+    
+    example_drawDump();
+}
+
+void dpHakoniwaSand::example_drawDump(){
+    
+    ofPushMatrix();
+    ofTranslate(1000, 10);
+    
+    for (int i = 0;i < mMotionExtractor.getNumPort();i++){
+        ofPushMatrix();
+        ofTranslate(0, i*90);
+        
+        ofVec3f vec = mMotionExtractor.getVelocityAt(i);
+        float speed = mMotionExtractor.getVelocitySpeedAt(i);
+        
+        ofNoFill();
+        ofRect(0, 0, 200, 80);
+        ofFill();
+        
+        string info = "";
+        info += "Port  :" + ofToString(i) + "\n";
+        info += "Actor :" + mMotionExtractor.getActorNameAt(i) + "\n";
+        info += "Joint :" + mMotionExtractor.getJointNameAt(i) + "\n";
+        info += "Speed :" + ofToString(mMotionExtractor.getVelocitySpeedAt(i)) + "\n";
+        
+        ofSetColor(100);
+        ofRect(10, 45, mMotionExtractor.getVelocitySpeedAt(i)*10.0, 15);
+        
+        ofSetColor(255);
+        ofDrawBitmapString(info, 10, 15);
+        
+        
+        ofPopMatrix();
+    }
+    
+    ofPopMatrix();
+    
 }
