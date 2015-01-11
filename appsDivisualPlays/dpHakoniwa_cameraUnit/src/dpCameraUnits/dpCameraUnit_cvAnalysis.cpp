@@ -233,6 +233,14 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 				m.addFloatArg(mOptFlow.getFeatures()[i].y / height);
 			}
 
+			ofxOscMessage feat_vec;
+			feat_vec.setAddress("/dp/cameraUnit/"+hakoniwa_name+"features/vec");
+			feat_vec.addIntArg(mOptFlow.getMotion().size());
+			for (int i = 0;i < mOptFlow.getMotion().size();i++){
+				feat_vec.addFloatArg(mOptFlow.getMotion()[i].x / width);
+				feat_vec.addFloatArg(mOptFlow.getMotion()[i].y / height);
+			}
+
 			ofxOscMessage vectorM;
 			vectorM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector");
 			for (int i = 0;i < 10;i++){
@@ -251,7 +259,9 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			totalM.addFloatArg(mOptFlow_angleVec.x);
 			totalM.addFloatArg(mOptFlow_angleVec.y);
 
+			sendMessageMulti(m);
 			sendMessageMulti(vectorM);
+			sendMessageMulti(feat_vec);
 			sendMessageMulti(lengthM);
 			sendMessageMulti(totalM);
 			
