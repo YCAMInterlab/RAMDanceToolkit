@@ -22,12 +22,13 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.addLabel("OSCSplit", "OSCSplit");
 	oscMatrixUI = mGui.addToggleMatrix("OSCSpliter", 1, 7);
 	mGui.addTextInput("OSCPort", "10000")->setAutoClear(false);
-	mGui.addToggle("ContourFinder", &mEnableContourFinder);
-	mGui.addToggle("OptFlow",		&mEnableOptFlow);
-	mGui.addToggle("Flow_FarneBack", &mEnableOptFlowFarne);
-	mGui.addToggle("Mean",			&mEnableMean);
-//	mGui.addToggle("FAST",			&mEnableFAST);
-//	mGui.addToggle("Histgram",		&mEnableHistgram);
+	mGui.addToggle("ContourFinder",		&mEnableContourFinder);
+	mGui.addToggle("OptFlow",			&mEnableOptFlow);
+	mGui.addToggle("Flow_FarneBack",	&mEnableOptFlowFarne);
+	mGui.addToggle("Mean",				&mEnableMean);
+	mGui.addToggle("Pixelate",			&mEnablePixelate);
+//	mGui.addToggle("FAST",				&mEnableFAST);
+//	mGui.addToggle("Histgram",			&mEnableHistgram);
 	mGui.addSpacer();
 	mGui.addToggle("ViewSource", &mViewSource);
 
@@ -79,7 +80,6 @@ dpCameraUnit_cvAnalysis::~dpCameraUnit_cvAnalysis(){
 }
 
 void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool isFrameNew){
-
 	imgRefColor = &pixColor;
 	imgRefGray = &pixGray;
     
@@ -158,6 +158,40 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 1.0f) &&
 			(isFrameNew)) mOptFlowFarne.calcOpticalFlow(pixGray);
 
+
+	}
+
+#pragma mark Pixelate
+	if (mEnablePixelate){
+		int res_x = 64;
+		int res_y = 48;
+
+		int64_t pixelInt = 0;
+		int Pixelcounter = 0;
+		ofxOscMessage pixelateM;
+		pixelateM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/pixelate");
+		pixelateM.addIntArg(res_x);
+		pixelateM.addIntArg(res_y);
+
+		for (int j = 0;j < res_y;j++){
+			for (int i = 0;i < res_x;i++){
+				bool pix = (pixGray.getColor(width/res_x * i, height/res_y * j)[0] > 128);
+
+				int tg = pix << (Pixelcounter % 64);
+				pixelInt += tg;
+				Pixelcounter++;
+
+				if (Pixelcounter % 64 == 0){
+					pixelateM.addInt64Arg(pixelInt);
+					pixelInt = 0;
+				}
+			}
+		}
+		if (Pixelcounter % 64 != 0){
+			pixelateM.addInt64Arg(pixelInt);
+		}
+
+		if (mEnableSendOSC) sendMessageMulti(pixelateM);
 
 	}
 
@@ -296,11 +330,15 @@ void dpCameraUnit_cvAnalysis::sendMessageMulti(ofxOscMessage &m){
 	sender.setup(defAdd, defPort);
 	sender.sendMessage(m);
 
-	for (int i = 0;i < oscListPtr->size();i++){
-		if (oscMatrixUI->getState(0, i)){
-			sender.setup((*oscListPtr)[i], defPort);
-			sender.sendMessage(m);
+	if (oscListPtr != NULL){
+		for (int i = 0;i < oscListPtr->size();i++){
+			if (oscMatrixUI->getState(0, i)){
+				sender.setup((*oscListPtr)[i], defPort);
+				sender.sendMessage(m);
+			}
+			
 		}
-
+	}else{
+		cout << "oscListPtr is NULL" << endl;
 	}
 }

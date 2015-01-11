@@ -47,6 +47,7 @@ public:
 	bool mEnableFAST;
 	bool mEnableMean;
 	bool mEnableHistgram;
+	bool mEnablePixelate;
 	bool mViewSource;
 	
 	bool mParamCF_Simplify;
