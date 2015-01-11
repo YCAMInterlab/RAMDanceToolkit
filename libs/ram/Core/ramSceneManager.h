@@ -32,6 +32,14 @@ public:
 
 	void setup();
 	void addScene(ramBaseScene* scene);
+    
+    void allocateFbos(int w, int h);
+    void deallocateFbos();
+    
+    void enableScreens(const string& sceneName, const vector<int>& screenIds);
+    void enableScreen(const string& sceneName, int screenId);
+    void enableAllScreens(const string& sceneName);
+    void disableScreens(const string& sceneName);
 	
 	size_t getNumScenes() const;
 	size_t findtSceneIndex(string name) const;
@@ -40,7 +48,7 @@ public:
 	ramActorsScene* getActorsScene();
 	void setShowAllActors(bool showAllActors);
 	bool getShowAllActors() const;
-	
+    
 protected:
 
 	void enableAllEvents();
@@ -66,4 +74,8 @@ private:
 	ramSceneManager& operator=(const ramSceneManager&);
 	
 	ramActorsScene* actorsScene;
+    bool isAllocatedFbos;
+    
+    map<string, vector<int> > screensMap;
+    
 };

@@ -15,8 +15,7 @@ frozenIce::frozenIce(){
     mDrawPreview	= true;
     mDrawDump		= true;
     
-    sender.setup("192.168.20.55", 8528);
-    
+    sender.setup("192.168.20.55", 8528);    
 }
 
 void frozenIce::setup(){
@@ -32,6 +31,10 @@ void frozenIce::setupControlPanel(){
     
     //--------
     gui->addToggle("Start"		, &iceStart);
+    gui->addToggle("Melting"		, &melting);
+    gui->addToggle("Frozing"		, &frozing);
+    gui->addToggle("MeltingFromDancer"		, &iceMelting);
+    gui->addToggle("FrozingFromDancer"		, &iceFrozing);
     //--------
     
     gui->addSpacer();
@@ -48,13 +51,100 @@ void frozenIce::update(){
     /*=== update ===*/
     motionExtractor.update();
     
-    
-    if(motionExtractor.getVelocitySpeedAt(0) > 2){
-        hantei = 0;
-    }else{
+    //----------
+    if(frozing == true){
         hantei = 1;
+        melting = false;
+        iceFrozing = false;
+        iceMelting = false;
+        count++;
+    }else{
+        count = 0;
     }
     
+    if(melting == true){
+        hantei = 0;
+        frozing = false;
+        iceFrozing = false;
+        iceMelting = false;
+    }
+    
+    
+    if(iceFrozing == true){
+        frozingCount++;
+        if(frozingCount > 500){
+            if(frozingCount%2 == 0){
+                hantei = 1;
+            }else{
+                hantei = 0;
+            }
+        }else{
+            hantei = 1;
+        }
+    }else{
+        frozingCount = 0;
+    }
+    
+    if(iceMelting == true){
+        meltingCount++;
+        if(meltingCount > 500){
+            if(meltingCount%2 == 0){
+                hantei = 1;
+            }else{
+                hantei = 0;
+            }
+        }else{
+            hantei = 0;
+        }
+    }else{
+        meltingCount = 0;
+    }
+    //----------
+
+    
+    //----------
+    //ダンサー(0)が動くと凍る
+    //-------------------
+//    if(motionExtractor.getVelocitySpeedAt(0) > 2){
+//        if(iceFrozing == false){
+//            iceFrozing = true;
+//        }
+//        if(iceMelting == true){
+//            iceMelting = false;
+//        }
+//        
+//    }else{
+//        if(iceFrozing == true){
+//            iceFrozing = false;
+//        }
+//        if(iceMelting == false){
+//            iceMelting = true;
+//        }
+//    }
+    //-------------------
+    
+    //ダンサー(0)が動くと溶ける
+    //-------------------
+    if(motionExtractor.getVelocitySpeedAt(0) > 2){
+        if(iceFrozing == true){
+            iceFrozing = false;
+        }
+        if(iceMelting == false){
+            iceMelting = true;
+        }
+        
+    }else{
+        if(iceFrozing == false){
+            iceFrozing = true;
+        }
+        if(iceMelting == true){
+            iceMelting = false;
+        }
+    }
+    //-------------------
+
+    
+    //----------
     
     /*=== OSC Send Example ===*/
     ofxOscMessage m;
@@ -84,16 +174,9 @@ void frozenIce::draw(){
     if (mDrawDump)		example_drawDump();
     
     //----------
-    if(iceStart == true){
-        hantei  = 0;
-        count++;
-        
-        if(count > 100){
-            hantei = 1;
-        }
-    }
-    
-    cout << hantei << endl;
+    cout << "cold    : " << count << ":" << hantei << endl;
+    cout << "frozing : " << frozingCount << ":" << hantei << endl;
+    cout << "melting : " << meltingCount << ":" << hantei << endl;
     //----------
     
 }

@@ -102,8 +102,8 @@ void operator delete[](void* mem) throw()
 
 DP_SCORE_NAMESPACE_BEGIN
 
-const int kW = 1280;
-const int kH = 768;
+const int kW = 1920;
+const int kH = 1080;
 
 const int kFrameRate = 30;
 const int kOscClientPort = 10000;

@@ -29,8 +29,8 @@ public:
         ofVbo vbo;
         
         ofVec3f dir;
-        float scale = 300;
-        const int kMaxPoints = 2000;
+        float scale = 500;
+        const int kMaxPoints = 3000;
     };
     
     typedef vector<Node::Ptr> NodeVec;
@@ -54,7 +54,7 @@ private:
     ofEasyCam mCam;
     NodeVec mNodes;
     bool mMagnify = false;
-    float mScale = 300.f;
+    float mScale = 500.f;
     float mRotSpdX = 2.12f;
     float mRotSpdY = 4.35f;
     int mJointId = 0;

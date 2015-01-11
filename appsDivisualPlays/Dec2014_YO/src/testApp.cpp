@@ -16,6 +16,27 @@
 // limitations under the License.
 
 #include "testApp.h"
+#include "dpConstants.h"
+
+struct : public ramBaseScene {
+    void drawActor(const ramActor &actor) { ramDrawBasicActor(actor); }
+    string getName() const { return "TestSceneA"; }
+} testSceneA;
+
+struct : public ramBaseScene {
+    void drawActor(const ramActor &actor) { ramDrawBasicActor(actor); }
+    string getName() const { return "TestSceneB"; }
+} testSceneB;
+
+struct : public ramBaseScene {
+    void drawActor(const ramActor &actor) { ramDrawBasicActor(actor); }
+    string getName() const { return "TestSceneC"; }
+} testSceneC;
+
+struct : public ramBaseScene {
+    void drawActor(const ramActor &actor) { ramDrawBasicActor(actor); }
+    string getName() const { return "TestSceneD"; }
+} testSceneD;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -28,13 +49,26 @@ void testApp::setup()
 	// ------------------
 	ramInitialize(10000, true);
     
+    ramSetViewPort(ofRectangle(0.f, 0.f, SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT));
+    
 	/// scenes setup
 	// ------------------
 	ramSceneManager& sceneManager = ramSceneManager::instance();
     sceneManager.addScene( hakoniwaOscTest.getPtr() );
 	sceneManager.addScene( hakoniwaColorOfWater.getPtr() );
     sceneManager.addScene( hakovisLaser.getPtr() );
+    
+    sceneManager.addScene( testSceneA.getPtr() );
+    sceneManager.addScene( testSceneB.getPtr() );
+    sceneManager.addScene( testSceneC.getPtr() );
+    sceneManager.addScene( testSceneD.getPtr() );
 	
+    sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
+    
+    sceneManager.enableScreen("TestSceneA", 0);
+    sceneManager.enableScreen("TestSceneB", 1);
+    sceneManager.enableAllScreens("TestSceneC");
+    sceneManager.disableScreens("TestSceneD");
 }
 
 //--------------------------------------------------------------

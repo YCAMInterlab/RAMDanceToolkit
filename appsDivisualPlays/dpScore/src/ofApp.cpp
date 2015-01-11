@@ -11,21 +11,21 @@
 
 using namespace dp::score;
 
-struct ObjA {
-    ObjA() { cout << __func__ << endl; }
-    ~ObjA() { cout << __func__ << endl; }
-    string s = "hoge";
-};
-struct ObjB {
-    ObjB() { cout << __func__ << endl; }
-    ~ObjB() { cout << __func__ << endl; }
-    string s = "foo";
-};
-struct ObjC {
-    ObjC() { cout << __func__ << endl; }
-    ~ObjC() { cout << __func__ << endl; }
-    string s = "bar";
-};
+//struct ObjA {
+//    ObjA() { cout << __func__ << endl; }
+//    ~ObjA() { cout << __func__ << endl; }
+//    string s = "hoge";
+//};
+//struct ObjB {
+//    ObjB() { cout << __func__ << endl; }
+//    ~ObjB() { cout << __func__ << endl; }
+//    string s = "foo";
+//};
+//struct ObjC {
+//    ObjC() { cout << __func__ << endl; }
+//    ~ObjC() { cout << __func__ << endl; }
+//    string s = "bar";
+//};
 
 #pragma mark ___________________________________________________________________
 void ofApp::setup()
@@ -82,17 +82,17 @@ void ofApp::setup()
     
     dp::score::registerObjectEvent(this);
     
-    dp::score::ObjectEventArgs args;
-    
-    auto objA = ofPtr<ObjA>(new ObjA());
-    auto objB = ofPtr<ObjB>(new ObjB());
-    auto objC = ofPtr<ObjC>(new ObjC());
-    
-    args.addObject(objA);
-    args.addObject(objB);
-    args.addObject(objC);
-    
-    dp::score::notifyObjectEvent(args);
+    //dp::score::ObjectEventArgs args;
+    //
+    //auto objA = ofPtr<ObjA>(new ObjA());
+    //auto objB = ofPtr<ObjB>(new ObjB());
+    //auto objC = ofPtr<ObjC>(new ObjC());
+    //
+    //args.addObject(objA);
+    //args.addObject(objB);
+    //args.addObject(objC);
+    //
+    //dp::score::notifyObjectEvent(args);
     
     OFX_END_EXCEPTION_HANDLING
 }
@@ -280,15 +280,15 @@ void ofApp::onObjectReceived(dp::score::ObjectEventArgs& e)
 {
     OFX_BEGIN_EXCEPTION_HANDLING
     
-    cout << __func__ << ": " << e.getClassName(0) << endl;
-    cout << __func__ << ": " << e.getClassName(1) << endl;
-    cout << __func__ << ": " << e.getClassName(2) << endl;
-    
-    auto _objA = e.getObject<ObjA>(0);
-    auto _objB = e.getObject<ObjB>(1);
-    auto _objC = e.getObject<ObjC>(2);
-    
-    cout << __func__ << ": " << _objA->s << ", " << _objB->s << ", " << _objC->s << endl;
+//    cout << __func__ << ": " << e.getClassName(0) << endl;
+//    cout << __func__ << ": " << e.getClassName(1) << endl;
+//    cout << __func__ << ": " << e.getClassName(2) << endl;
+//    
+//    auto _objA = e.getObject<ObjA>(0);
+//    auto _objB = e.getObject<ObjB>(1);
+//    auto _objC = e.getObject<ObjC>(2);
+//    
+//    cout << __func__ << ": " << _objA->s << ", " << _objB->s << ", " << _objC->s << endl;
     
     OFX_END_EXCEPTION_HANDLING
 }

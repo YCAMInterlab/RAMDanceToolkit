@@ -22,12 +22,13 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.addLabel("OSCSplit", "OSCSplit");
 	oscMatrixUI = mGui.addToggleMatrix("OSCSpliter", 1, 7);
 	mGui.addTextInput("OSCPort", "10000")->setAutoClear(false);
-	mGui.addToggle("ContourFinder", &mEnableContourFinder);
-	mGui.addToggle("OptFlow",		&mEnableOptFlow);
-	mGui.addToggle("Flow_FarneBack", &mEnableOptFlowFarne);
-	mGui.addToggle("Mean",			&mEnableMean);
-//	mGui.addToggle("FAST",			&mEnableFAST);
-//	mGui.addToggle("Histgram",		&mEnableHistgram);
+	mGui.addToggle("ContourFinder",		&mEnableContourFinder);
+	mGui.addToggle("OptFlow",			&mEnableOptFlow);
+	mGui.addToggle("Flow_FarneBack",	&mEnableOptFlowFarne);
+	mGui.addToggle("Mean",				&mEnableMean);
+	mGui.addToggle("Pixelate",			&mEnablePixelate);
+//	mGui.addToggle("FAST",				&mEnableFAST);
+//	mGui.addToggle("Histgram",			&mEnableHistgram);
 	mGui.addSpacer();
 	mGui.addToggle("ViewSource", &mViewSource);
 
@@ -38,6 +39,7 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.addToggle("Simplify"		, &mParamCF_Simplify);
 	mGui.addToggle("UseTargetColor"	, &mParamCF_UseTargetColor);
 	mGui.addRangeSlider("Area", 0.0, 10000.0, &mParamCF_MinArea, &mParamCF_MaxArea);
+	mGui.addSlider("MaxBlobNum", 0.0, 500.0, &mParamCF_MaxBlobNum);
 	mGui.addSlider("Threshold", 0.0, 255.0, &mParamCF_Threshold);
 	mGui.addLabel("OptFlow");
 	mGui.addSpacer();
@@ -79,7 +81,6 @@ dpCameraUnit_cvAnalysis::~dpCameraUnit_cvAnalysis(){
 }
 
 void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool isFrameNew){
-
 	imgRefColor = &pixColor;
 	imgRefGray = &pixGray;
     
@@ -105,6 +106,9 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		bRectM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/boundingRect");
 		blobM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/blob");
 
+		bRectM.addIntArg(mContFinder.getContours().size());
+		blobM.addIntArg(mContFinder.getContours().size());
+
 		for (int i = 0;i < mContFinder.getContours().size();i++){
 			ofRectangle rt = ofxCv::toOf(mContFinder.getBoundingRect(i));
 			bRectM.addIntArg(mContFinder.getLabel(i));
@@ -126,12 +130,11 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 				blobM.addFloatArg(pt.x / width);
 				blobM.addFloatArg(pt.y / height);
 			}
+		}
 
-			if (mEnableSendOSC){
-				sendMessageMulti(bRectM);
-				sendMessageMulti(blobM);
-			}
-
+		if (mEnableSendOSC){
+			sendMessageMulti(bRectM);
+			sendMessageMulti(blobM);
 		}
 
 	}
@@ -158,6 +161,42 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 1.0f) &&
 			(isFrameNew)) mOptFlowFarne.calcOpticalFlow(pixGray);
 
+
+	}
+
+#pragma mark Pixelate
+	if (mEnablePixelate){
+		int res_x = 12;
+		int res_y = 9;
+
+		int64_t pixelInt = 0;
+		int64_t Pixelcounter = 0;
+		ofxOscMessage pixelateM;
+		pixelateM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/pixelate");
+		pixelateM.addIntArg(res_x);
+		pixelateM.addIntArg(res_y);
+
+		debug_px.clear();
+
+		for (int64_t j = 0;j < res_y;j++){
+			for (int64_t i = 0;i < res_x;i++){
+				bool pix = (pixGray.getColor(width/res_x * i, height/res_y * j).r > 128);
+
+				int64_t tg = int64_t(pix) << (Pixelcounter % 64);
+				pixelInt = pixelInt | tg;
+				Pixelcounter++;
+
+				if (Pixelcounter % 64 == 0){
+					pixelateM.addInt64Arg(pixelInt);
+					pixelInt = 0;
+				}
+			}
+		}
+		if (Pixelcounter % 64 != 0){
+			pixelateM.addInt64Arg(pixelInt);
+		}
+
+		if (mEnableSendOSC) sendMessageMulti(pixelateM);
 
 	}
 
@@ -232,7 +271,6 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 //		ofCircle(pts[i], 5);
 //	}
 	
-	
 	ofPushMatrix();
 	ofTranslate(x, y);
 	glScaled(scale, scale, scale);
@@ -296,11 +334,15 @@ void dpCameraUnit_cvAnalysis::sendMessageMulti(ofxOscMessage &m){
 	sender.setup(defAdd, defPort);
 	sender.sendMessage(m);
 
-	for (int i = 0;i < oscListPtr->size();i++){
-		if (oscMatrixUI->getState(0, i)){
-			sender.setup((*oscListPtr)[i], defPort);
-			sender.sendMessage(m);
+	if (oscListPtr != NULL){
+		for (int i = 0;i < oscListPtr->size();i++){
+			if (oscMatrixUI->getState(0, i)){
+				sender.setup((*oscListPtr)[i], defPort);
+				sender.sendMessage(m);
+			}
+			
 		}
-
+	}else{
+		cout << "oscListPtr is NULL" << endl;
 	}
 }
