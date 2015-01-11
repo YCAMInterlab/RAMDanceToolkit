@@ -95,23 +95,19 @@ void ParallelLinkManager::calibrate(){
 	ofSleepMillis(300);
 	int ps[3];
 	for (int i = 0;i < 3;i++){
-		ps[i] = delta.actuator[(i+id_offset)%3].getGlobalOrientation().getEuler().x/2;
+		ps[i] = -delta.actuator[(i+id_offset)%3].getGlobalOrientation().getEuler().x/2;
 	}
 	if (id_swap) swap(ps[1], ps[2]);
 
+	ofSleepMillis(300);
 	for (int i = 0;i < 3;i++){
 		stepManager.setStepperSingle(i, true);
 		stepManager.absPos(ps[i]);
 		stepManager.setStepperSingle(i, false);
 	}
 
-	ofSleepMillis(300);
-	for (int i = 0;i < 3;i++){
-
-		stepManager.setStepperSingle(i, true);
-		stepManager.go_to(ps[i]);
-		stepManager.setStepperSingle(i, false);
-
-	}
+	stepManager.setStepperAll(true);
+	stepManager.multi_go_to(ps);
+	stepManager.setStepperAll(false);
 
 }

@@ -75,6 +75,7 @@
 		C6318F201A43E52E007DC4C8 /* dpCameraUnit_cvAnalysis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6318F1E1A43E52E007DC4C8 /* dpCameraUnit_cvAnalysis.cpp */; };
 		C685883F1A5E31DC00F8F488 /* ofxKsmrFragFXUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C685883B1A5E31DC00F8F488 /* ofxKsmrFragFXUnit.cpp */; };
 		C68588401A5E31DC00F8F488 /* ofxKsmrFragmentFx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C685883D1A5E31DC00F8F488 /* ofxKsmrFragmentFx.cpp */; };
+		C68588571A5FE5DF00F8F488 /* dpSwitchingManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C68588551A5FE5DF00F8F488 /* dpSwitchingManager.cpp */; };
 		C6D4099D1A46DB83002D4C34 /* sw_1010F_SerialController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D4099B1A46DB83002D4C34 /* sw_1010F_SerialController.cpp */; };
 		C961BE22AB9A8CCF037FC18F /* ofxUITextArea.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBE31D52BCB0CE44B9D154F0 /* ofxUITextArea.cpp */; };
 		CE5D89B9893EAA12F511DCAC /* ofxUIWidgetWithLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5AD807D1AF254F978AB20B1C /* ofxUIWidgetWithLabel.cpp */; };
@@ -365,6 +366,8 @@
 		C685883C1A5E31DC00F8F488 /* ofxKsmrFragFXUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxKsmrFragFXUnit.h; sourceTree = "<group>"; };
 		C685883D1A5E31DC00F8F488 /* ofxKsmrFragmentFx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxKsmrFragmentFx.cpp; sourceTree = "<group>"; };
 		C685883E1A5E31DC00F8F488 /* ofxKsmrFragmentFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxKsmrFragmentFx.h; sourceTree = "<group>"; };
+		C68588551A5FE5DF00F8F488 /* dpSwitchingManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpSwitchingManager.cpp; path = dpCameraUnits/dpSwitchingManager.cpp; sourceTree = "<group>"; };
+		C68588561A5FE5DF00F8F488 /* dpSwitchingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpSwitchingManager.h; path = dpCameraUnits/dpSwitchingManager.h; sourceTree = "<group>"; };
 		C6937888E126BADC8777423B /* OscTypes.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = OscTypes.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscTypes.h; sourceTree = SOURCE_ROOT; };
 		C6D4099B1A46DB83002D4C34 /* sw_1010F_SerialController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sw_1010F_SerialController.cpp; path = utils/sw_1010F_SerialController.cpp; sourceTree = "<group>"; };
 		C6D4099C1A46DB83002D4C34 /* sw_1010F_SerialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sw_1010F_SerialController.h; path = utils/sw_1010F_SerialController.h; sourceTree = "<group>"; };
@@ -1162,6 +1165,8 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
+				C68588561A5FE5DF00F8F488 /* dpSwitchingManager.h */,
+				C68588551A5FE5DF00F8F488 /* dpSwitchingManager.cpp */,
 				C6D4099E1A46DB88002D4C34 /* utils */,
 				C6318F051A432581007DC4C8 /* dpCameraUnit_Controller.h */,
 				C6318F041A432581007DC4C8 /* dpCameraUnit_Controller.cpp */,
@@ -1327,6 +1332,7 @@
 				FB09C6B2A1DA0EA217240CB8 /* ofxCvGrayscaleImage.cpp in Sources */,
 				E212C821D1064B92DD953A42 /* ofxCvHaarFinder.cpp in Sources */,
 				63020F16C7E8DED980111241 /* ofxCvImage.cpp in Sources */,
+				C68588571A5FE5DF00F8F488 /* dpSwitchingManager.cpp in Sources */,
 				C6318F0C1A432879007DC4C8 /* dpCameraUnit_cvFX.cpp in Sources */,
 				D3301F6A0B43BB293ED97C1D /* ofxCvShortImage.cpp in Sources */,
 				72A929D3561B8232A182ABFC /* ofxOscBundle.cpp in Sources */,

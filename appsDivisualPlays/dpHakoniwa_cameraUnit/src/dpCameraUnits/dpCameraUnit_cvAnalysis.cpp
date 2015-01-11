@@ -22,12 +22,13 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.addLabel("OSCSplit", "OSCSplit");
 	oscMatrixUI = mGui.addToggleMatrix("OSCSpliter", 1, 7);
 	mGui.addTextInput("OSCPort", "10000")->setAutoClear(false);
-	mGui.addToggle("ContourFinder", &mEnableContourFinder);
-	mGui.addToggle("OptFlow",		&mEnableOptFlow);
-	mGui.addToggle("Flow_FarneBack", &mEnableOptFlowFarne);
-	mGui.addToggle("Mean",			&mEnableMean);
-//	mGui.addToggle("FAST",			&mEnableFAST);
-//	mGui.addToggle("Histgram",		&mEnableHistgram);
+	mGui.addToggle("ContourFinder",		&mEnableContourFinder);
+	mGui.addToggle("OptFlow",			&mEnableOptFlow);
+	mGui.addToggle("Flow_FarneBack",	&mEnableOptFlowFarne);
+	mGui.addToggle("Mean",				&mEnableMean);
+	mGui.addToggle("Pixelate",			&mEnablePixelate);
+//	mGui.addToggle("FAST",				&mEnableFAST);
+//	mGui.addToggle("Histgram",			&mEnableHistgram);
 	mGui.addSpacer();
 	mGui.addToggle("ViewSource", &mViewSource);
 
@@ -38,6 +39,7 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.addToggle("Simplify"		, &mParamCF_Simplify);
 	mGui.addToggle("UseTargetColor"	, &mParamCF_UseTargetColor);
 	mGui.addRangeSlider("Area", 0.0, 10000.0, &mParamCF_MinArea, &mParamCF_MaxArea);
+	mGui.addSlider("MaxBlobNum", 0.0, 500.0, &mParamCF_MaxBlobNum);
 	mGui.addSlider("Threshold", 0.0, 255.0, &mParamCF_Threshold);
 	mGui.addLabel("OptFlow");
 	mGui.addSpacer();
@@ -69,7 +71,9 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mEnableHistgram			= false;
 	
 	mOptFlow_filterSpd = 100.0;
-	
+
+	mContFinder.getTracker().setPersistence(15);
+	mContFinder.getTracker().setMaximumDistance(16);
 }
 
 dpCameraUnit_cvAnalysis::~dpCameraUnit_cvAnalysis(){
@@ -77,11 +81,16 @@ dpCameraUnit_cvAnalysis::~dpCameraUnit_cvAnalysis(){
 }
 
 void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool isFrameNew){
-
 	imgRefColor = &pixColor;
 	imgRefGray = &pixGray;
+    
+    float width = pixGray.getWidth();
+    float height = pixGray.getHeight();
 
+#pragma mark ContourFinder
 	if (mEnableContourFinder){
+		ofxCv::RectTracker& tracker = mContFinder.getTracker();
+
 		mContFinder.setMaxArea(mParamCF_MaxArea);
 		mContFinder.setMinArea(mParamCF_MinArea);
 		mContFinder.setSimplify(mParamCF_Simplify);
@@ -91,51 +100,53 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 
 		mContFinder.findContours(pixGray);
 
-		pts.clear();
+		ofxOscMessage bRectM;
+		ofxOscMessage blobM;
+
+		bRectM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/boundingRect");
+		blobM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/blob");
+
+		bRectM.addIntArg(mContFinder.getContours().size());
+		blobM.addIntArg(mContFinder.getContours().size());
+
 		for (int i = 0;i < mContFinder.getContours().size();i++){
-			
 			ofRectangle rt = ofxCv::toOf(mContFinder.getBoundingRect(i));
-			ofxOscMessage m;
-			m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/boundingRect");
-			m.addIntArg(i);
-			m.addFloatArg(rt.x);
-			m.addFloatArg(rt.y);
-			m.addFloatArg(rt.width);
-			m.addFloatArg(rt.height);
-			sendMessageMulti(m);
+			bRectM.addIntArg(mContFinder.getLabel(i));
+			bRectM.addFloatArg(rt.x / width);
+			bRectM.addFloatArg(rt.y / height);
+			bRectM.addFloatArg(rt.width / width);
+			bRectM.addFloatArg(rt.height / height);
 
-			ofxOscMessage mm;
-			mm.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/blob");
-			mm.addIntArg(i);
-			
+
+			//Set Blobs
 			int cnt = 0;
-			for (int j = 0;j < mContFinder.getContour(i).size();j++){
-				cnt++;
-			}
+			int blob_step = 1;
+			for (int j = 0;j < mContFinder.getContour(i).size();j+=blob_step) cnt++;
 			
-			mm.addIntArg(cnt);
+			blobM.addIntArg(cnt);
 			
 			for (int j = 0;j < mContFinder.getContour(i).size();j++){
-
-				if (mEnableSendOSC){
-					ofVec2f pt = ofxCv::toOf(mContFinder.getContour(i)[j]);
-					mm.addFloatArg(pt.x);
-					mm.addFloatArg(pt.y);
-					pts.push_back(ofVec2f(pt));
-				}
+				ofVec2f pt = ofxCv::toOf(mContFinder.getContour(i)[j]);
+				blobM.addFloatArg(pt.x / width);
+				blobM.addFloatArg(pt.y / height);
 			}
+		}
 
-			sendMessageMulti(mm);
+		if (mEnableSendOSC){
+			sendMessageMulti(bRectM);
+			sendMessageMulti(blobM);
 		}
 
 	}
+
+#pragma mark mean
 	if (mEnableMean){
 		means = ofxCv::mean(ofxCv::toCv(pixColor));
 		means_gray = ofxCv::mean(ofxCv::toCv(pixGray));
 
 		if (mEnableSendOSC){
 			ofxOscMessage m;
-			m.setAddress("/dp/cameraUnit/mean");
+			m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/mean");
 			m.addIntArg(means[0]);
 			m.addIntArg(means[1]);
 			m.addIntArg(means[2]);
@@ -144,6 +155,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		}
 	}
 
+#pragma mark FarneBack
 	if (mEnableOptFlowFarne){
 
 		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 1.0f) &&
@@ -152,18 +164,54 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 
 	}
 
+#pragma mark Pixelate
+	if (mEnablePixelate){
+		int res_x = 64;
+		int res_y = 1;
+
+		int64_t pixelInt = 0;
+		int Pixelcounter = 0;
+		ofxOscMessage pixelateM;
+		pixelateM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/pixelate");
+		pixelateM.addIntArg(res_x);
+		pixelateM.addIntArg(res_y);
+
+		debug_px.clear();
+
+		for (int j = 0;j < res_y;j++){
+			for (int i = 0;i < res_x;i++){
+				bool pix = (pixGray.getColor(width/res_x * i, height/res_y * j).r > 128);
+				debug_px.push_back(pix);
+
+				int tg = pix << (Pixelcounter % 64);
+				pixelInt += tg;
+				Pixelcounter++;
+
+				if (Pixelcounter % 64 == 0){
+					pixelateM.addInt64Arg(pixelInt);
+					pixelInt = 0;
+				}
+			}
+		}
+		if (Pixelcounter % 64 != 0){
+			pixelateM.addInt64Arg(pixelInt);
+		}
+
+		if (mEnableSendOSC) sendMessageMulti(pixelateM);
+
+	}
+
+#pragma mark PyrLK
 	if (mEnableOptFlow){
 		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 1.0f) &&
 			(isFrameNew)) mOptFlow.calcOpticalFlow(pixGray);
-		if ((ofGetFrameNum() % 150 == 0) ||
-			(ofGetKeyPressed(' '))) mOptFlow.resetFlow();
+		if ((ofGetFrameNum() % 150 == 0) || (ofGetKeyPressed(' '))) mOptFlow.resetFlow();
 		
 		vector <ofVec2f> mot = mOptFlow.getMotion();
 		
 		for (int i = 0;i < 10;i++) mOptFlow_sumVecs[i].set(0.0,0.0);
 		
 		mOptFlow_angleVec = ofVec2f(0.0,0.0);
-		
 		for (int i = 0;i < mot.size();i++){
 			if (mot[i].lengthSquared() < pow(mOptFlow_filterSpd,2.0f)){
 				mOptFlow_sumVecs[i % 10] += mot[i];
@@ -172,46 +220,42 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		}
 		mOptFlow_angleVec /= 100.0;
 
-		
 		for (int i = 0;i < 10;i++){
 			mOptFlow_smoothVecs[i] += (mOptFlow_sumVecs[i] - mOptFlow_smoothVecs[i]) / mOptFlowSmooth;
 		}
 		
 		if (mEnableSendOSC){
 
-
 			ofxOscMessage m;
 			m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/features");
 			m.addIntArg(mOptFlow.getFeatures().size());
 			for (int i = 0;i < mOptFlow.getFeatures().size();i++){
-				m.addFloatArg(mOptFlow.getFeatures()[i].x);
-				m.addFloatArg(mOptFlow.getFeatures()[i].y);
-			}
-			sendMessageMulti(m);
-
-			for (int i = 0;i < 10;i++){
-				ofxOscMessage m;
-				m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector");
-				m.addIntArg(i);
-				m.addFloatArg(mOptFlow_smoothVecs[i].x);
-				m.addFloatArg(mOptFlow_smoothVecs[i].y);
-				sendMessageMulti(m);
+				m.addFloatArg(mOptFlow.getFeatures()[i].x / width);
+				m.addFloatArg(mOptFlow.getFeatures()[i].y / height);
 			}
 
+			ofxOscMessage vectorM;
+			vectorM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector");
 			for (int i = 0;i < 10;i++){
-				ofxOscMessage m;
-				m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector/length");
-				m.addIntArg(i);
-				m.addFloatArg(mOptFlow_smoothVecs[i].length());
-				sendMessageMulti(m);
+				vectorM.addFloatArg(mOptFlow_smoothVecs[i].x);
+				vectorM.addFloatArg(mOptFlow_smoothVecs[i].y);
+			}
+
+			ofxOscMessage lengthM;
+			lengthM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector/length");
+			for (int i = 0;i < 10;i++){
+				lengthM.addFloatArg(mOptFlow_smoothVecs[i].length());
 			}
 			
-			ofxOscMessage m2;
-			m2.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector/total");
-			m2.addFloatArg(mOptFlow_angleVec.x);
-			m2.addFloatArg(mOptFlow_angleVec.y);
+			ofxOscMessage totalM;
+			totalM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/vector/total");
+			totalM.addFloatArg(mOptFlow_angleVec.x);
+			totalM.addFloatArg(mOptFlow_angleVec.y);
+
+			sendMessageMulti(vectorM);
+			sendMessageMulti(lengthM);
+			sendMessageMulti(totalM);
 			
-			sendMessageMulti(m2);
 		}
 	}
 
@@ -227,7 +271,9 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 //		cout << "Circle" << i << endl;
 //		ofCircle(pts[i], 5);
 //	}
-	
+	for (int i = 0;i < debug_px.size();i++){
+		ofCircle(100+i*10, 100, debug_px[i]*10);
+	}
 	
 	ofPushMatrix();
 	ofTranslate(x, y);
@@ -292,11 +338,15 @@ void dpCameraUnit_cvAnalysis::sendMessageMulti(ofxOscMessage &m){
 	sender.setup(defAdd, defPort);
 	sender.sendMessage(m);
 
-	for (int i = 0;i < oscListPtr->size();i++){
-		if (oscMatrixUI->getState(0, i)){
-			sender.setup((*oscListPtr)[i], defPort);
-			sender.sendMessage(m);
+	if (oscListPtr != NULL){
+		for (int i = 0;i < oscListPtr->size();i++){
+			if (oscMatrixUI->getState(0, i)){
+				sender.setup((*oscListPtr)[i], defPort);
+				sender.sendMessage(m);
+			}
+			
 		}
-
+	}else{
+		cout << "oscListPtr is NULL" << endl;
 	}
 }

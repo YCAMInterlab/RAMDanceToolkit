@@ -47,6 +47,7 @@ public:
 	bool mEnableFAST;
 	bool mEnableMean;
 	bool mEnableHistgram;
+	bool mEnablePixelate;
 	bool mViewSource;
 	
 	bool mParamCF_Simplify;
@@ -54,6 +55,7 @@ public:
 	float mParamCF_MaxArea;
 	float mParamCF_MinArea;
 	float mParamCF_Threshold;
+	float mParamCF_MaxBlobNum;
 	ofFloatColor mParamCF_targColor;
 
 	ofImage *imgRefColor, *imgRefGray;
@@ -66,10 +68,10 @@ public:
 	ofVec2f mOptFlow_smoothVecs[10];
 	float mOptFlow_filterSpd;
 	float mOptFlowSmooth;
-	
-	vector <ofVec2f> pts;
 
 	vector <string> *oscListPtr;
+
+	vector <bool> debug_px;
 };
 
 #endif /* defined(__dpHakoniwa_cameraUnit__dpCameraUnit_cvAnalysis__) */
