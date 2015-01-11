@@ -23,14 +23,16 @@ HakoniwaParallelLink_Base::HakoniwaParallelLink_Base(){
 
 	mLinkManager.height = 250.0;
 
-	mLinkManager.area_clamp.set(50.0, 100.0, 50.0);
-	mLinkManager.area_offset.set(0.0, 144.0, 0.0);
+	mLinkManager.area_clamp.set(50.0,  96.0, 50.0);
+	mLinkManager.area_offset.set(0.0, 148.0, 0.0);
 	mLinkManager.delta.rotation = 30;
 	mLinkManager.id_offset = 0;
 	mLinkManager.id_swap = false;
 
 	mOscSender = &mLinkManager.stepManager.sender;
-	mLinkManager.setupOsc("192.168.20.69", 8528);
+
+	mSendOSCAddress = getAddress();
+	mLinkManager.setupOsc("192.168.20.57", 8528);
 
 	mSetting_Accel = 16;
 	mSetting_Deccel = 16;
@@ -190,7 +192,7 @@ void HakoniwaParallelLink_Base::setupControlPanel(){
 	utilityGui->disableAppDrawCallback();
 	utilityGui->disableMouseEventCallbacks();
 	utilityGui->addLabel("Utility");
-	utilityGui->addTextInput("OSCAddress", "192.168.20.55");
+	utilityGui->addTextInput("OSCAddress", mSendOSCAddress)->setAutoClear(false);
 	utilityGui->addToggle("drawExtractor", &mDrawExtractor);
 	utilityGui->setPosition(240, 450);
 	utilityGui->autoSizeToFitWidgets();
@@ -208,6 +210,11 @@ void HakoniwaParallelLink_Base::setupControlPanel(){
 	ofAddListener(panel->newGUIEvent,
 				  this, &HakoniwaParallelLink_Base::onPanelChanged);
 
+	ofAddListener(systemGui->newGUIEvent, this, &HakoniwaParallelLink_Base::onPanelChanged);
+	ofAddListener(settingGui->newGUIEvent, this, &HakoniwaParallelLink_Base::onPanelChanged);
+	ofAddListener(xyzGui->newGUIEvent, this, &HakoniwaParallelLink_Base::onPanelChanged);
+	ofAddListener(utilityGui->newGUIEvent, this, &HakoniwaParallelLink_Base::onPanelChanged);
+
 	motionEx.setupControlPanel(this);
 }
 
@@ -219,38 +226,44 @@ void HakoniwaParallelLink_Base::drawActor(const ramActor &actor)
 void HakoniwaParallelLink_Base::onPanelChanged(ofxUIEventArgs& e){
 	ofxUIWidget* w = e.widget;
 
+	if ((w->getName() == "OSCAddress")){
+		ofxUITextInput* t = (ofxUITextInput*)w;
+		mSendOSCAddress = t->getTextString();
+//		mOscSender->setup(mSendOSCAddress, 8528);
+	}
+
 	if ((w->getName() == "A_Up") && (w->getState() == OFX_UI_STATE_DOWN)){
-		int tg = mLinkManager.delta.actuator[0].getGlobalOrientation().getEuler().x/2+4;
+		int tg = -mLinkManager.delta.actuator[0].getGlobalOrientation().getEuler().x/2+4;
 		mLinkManager.stepManager.setStepperSingle(0, true);
 		mLinkManager.stepManager.absPos(tg);
 		mLinkManager.stepManager.setStepperAll(false);
 	}
 	if ((w->getName() == "A_Dn") && (w->getState() == OFX_UI_STATE_DOWN)){
-		int tg = mLinkManager.delta.actuator[0].getGlobalOrientation().getEuler().x/2-4;
+		int tg = -mLinkManager.delta.actuator[0].getGlobalOrientation().getEuler().x/2-4;
 		mLinkManager.stepManager.setStepperSingle(0, true);
 		mLinkManager.stepManager.absPos(tg);
 		mLinkManager.stepManager.setStepperAll(false);
 	}
 	if ((w->getName() == "B_Up") && (w->getState() == OFX_UI_STATE_DOWN)){
-		int tg = mLinkManager.delta.actuator[1].getGlobalOrientation().getEuler().x/2+4;
+		int tg = -mLinkManager.delta.actuator[1].getGlobalOrientation().getEuler().x/2+4;
 		mLinkManager.stepManager.setStepperSingle(1, true);
 		mLinkManager.stepManager.absPos(tg);
 		mLinkManager.stepManager.setStepperAll(false);
 	}
 	if ((w->getName() == "B_Dn") && (w->getState() == OFX_UI_STATE_DOWN)){
-		int tg = mLinkManager.delta.actuator[1].getGlobalOrientation().getEuler().x/2-4;
+		int tg = -mLinkManager.delta.actuator[1].getGlobalOrientation().getEuler().x/2-4;
 		mLinkManager.stepManager.setStepperSingle(1, true);
 		mLinkManager.stepManager.absPos(tg);
 		mLinkManager.stepManager.setStepperAll(false);
 	}
 	if ((w->getName() == "C_Up") && (w->getState() == OFX_UI_STATE_DOWN)){
-		int tg = mLinkManager.delta.actuator[2].getGlobalOrientation().getEuler().x/2+4;
+		int tg = -mLinkManager.delta.actuator[2].getGlobalOrientation().getEuler().x/2+4;
 		mLinkManager.stepManager.setStepperSingle(2, true);
 		mLinkManager.stepManager.absPos(tg);
 		mLinkManager.stepManager.setStepperAll(false);
 	}
 	if ((w->getName() == "C_Dn") && (w->getState() == OFX_UI_STATE_DOWN)){
-		int tg = mLinkManager.delta.actuator[2].getGlobalOrientation().getEuler().x/2-4;
+		int tg = -mLinkManager.delta.actuator[2].getGlobalOrientation().getEuler().x/2-4;
 		mLinkManager.stepManager.setStepperSingle(2, true);
 		mLinkManager.stepManager.absPos(tg);
 		mLinkManager.stepManager.setStepperAll(false);

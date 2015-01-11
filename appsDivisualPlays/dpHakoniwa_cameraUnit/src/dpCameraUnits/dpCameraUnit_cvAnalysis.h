@@ -66,8 +66,6 @@ public:
 	ofVec2f mOptFlow_smoothVecs[10];
 	float mOptFlow_filterSpd;
 	float mOptFlowSmooth;
-	
-	vector <ofVec2f> pts;
 
 	vector <string> *oscListPtr;
 };
