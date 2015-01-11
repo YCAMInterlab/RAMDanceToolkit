@@ -166,11 +166,11 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 
 #pragma mark Pixelate
 	if (mEnablePixelate){
-		int res_x = 64;
-		int res_y = 1;
+		int res_x = 12;
+		int res_y = 9;
 
 		int64_t pixelInt = 0;
-		int Pixelcounter = 0;
+		int64_t Pixelcounter = 0;
 		ofxOscMessage pixelateM;
 		pixelateM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/pixelate");
 		pixelateM.addIntArg(res_x);
@@ -178,13 +178,12 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 
 		debug_px.clear();
 
-		for (int j = 0;j < res_y;j++){
-			for (int i = 0;i < res_x;i++){
+		for (int64_t j = 0;j < res_y;j++){
+			for (int64_t i = 0;i < res_x;i++){
 				bool pix = (pixGray.getColor(width/res_x * i, height/res_y * j).r > 128);
-				debug_px.push_back(pix);
 
-				int tg = pix << (Pixelcounter % 64);
-				pixelInt += tg;
+				int64_t tg = int64_t(pix) << (Pixelcounter % 64);
+				pixelInt = pixelInt | tg;
 				Pixelcounter++;
 
 				if (Pixelcounter % 64 == 0){
@@ -271,9 +270,6 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 //		cout << "Circle" << i << endl;
 //		ofCircle(pts[i], 5);
 //	}
-	for (int i = 0;i < debug_px.size();i++){
-		ofCircle(100+i*10, 100, debug_px[i]*10);
-	}
 	
 	ofPushMatrix();
 	ofTranslate(x, y);
