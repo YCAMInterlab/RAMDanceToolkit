@@ -225,20 +225,14 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		
 		if (mEnableSendOSC){
 
-			ofxOscMessage m;
-			m.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/features");
-			m.addIntArg(mOptFlow.getFeatures().size());
+			ofxOscMessage feat;
+			feat.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/features");
+			feat.addIntArg(mOptFlow.getFeatures().size());
 			for (int i = 0;i < mOptFlow.getFeatures().size();i++){
-				m.addFloatArg(mOptFlow.getFeatures()[i].x / width);
-				m.addFloatArg(mOptFlow.getFeatures()[i].y / height);
-			}
-
-			ofxOscMessage feat_vec;
-			feat_vec.setAddress("/dp/cameraUnit/"+hakoniwa_name+"features/vec");
-			feat_vec.addIntArg(mOptFlow.getMotion().size());
-			for (int i = 0;i < mOptFlow.getMotion().size();i++){
-				feat_vec.addFloatArg(mOptFlow.getMotion()[i].x / width);
-				feat_vec.addFloatArg(mOptFlow.getMotion()[i].y / height);
+				feat.addFloatArg(mOptFlow.getFeatures()[i].x / width);
+				feat.addFloatArg(mOptFlow.getFeatures()[i].y / height);
+				feat.addFloatArg(mOptFlow.getMotion()[i].x / width);
+				feat.addFloatArg(mOptFlow.getMotion()[i].y / height);
 			}
 
 			ofxOscMessage vectorM;
@@ -259,9 +253,8 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			totalM.addFloatArg(mOptFlow_angleVec.x);
 			totalM.addFloatArg(mOptFlow_angleVec.y);
 
-			sendMessageMulti(m);
+			sendMessageMulti(feat);
 			sendMessageMulti(vectorM);
-			sendMessageMulti(feat_vec);
 			sendMessageMulti(lengthM);
 			sendMessageMulti(totalM);
 			
