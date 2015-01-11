@@ -34,7 +34,7 @@ void setup()
     myservo_movetime[i] = 0; // next time in millis servo next moves
     myservo_gPos[i] = 0; // target position to move towards
     myservo_cPos[i] = 0; // current postion of servo
-    tDelay[i] = 2; // delay between moves, gives appearance of smooth motion
+    tDelay[i] = 0; // delay between moves, gives appearance of smooth motion
   }
   
   Serial.begin(9600);
@@ -44,9 +44,8 @@ void setup()
 void loop()
 { 
   for (int i = 0; i < 3; i++) {
-    cPos[i] = sv[i].read();
-    
-    
+//    cPos[i] = sv[i].read();
+        
     if (i == 0) {
 //      Serial.println(myservo_movetime[i]);
 //      Serial.print(i);
@@ -89,8 +88,14 @@ void loop()
 }
 
 void moveServo(int which) {  
-  if (cPos[which] < gPos[which]) sv[which].write(cPos[which]+1);
-  if (cPos[which] > gPos[which]) sv[which].write(cPos[which]-1);
+  if (cPos[which] < gPos[which]) {
+    cPos[which] += 1;
+    sv[which].writeMicroseconds(cPos[which]);
+  }
+  if (cPos[which] > gPos[which]) {
+    cPos[which] -= 1;
+    sv[which].writeMicroseconds(cPos[which]);
+  }
   //if (cPos == gPos) // nothing
   myservo_movetime[which] = millis() + tDelay[which];
 }
