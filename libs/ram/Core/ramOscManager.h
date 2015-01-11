@@ -43,6 +43,10 @@ public:
 
 	void addMessage(ofxOscMessage& m){
 		msg.push_back(ofxOscMessage(m));
+
+		while (msg.size() > 128){
+			msg.erase(msg.begin());
+		}
 	}
 
 	void getNextMessage(ofxOscMessage* m){

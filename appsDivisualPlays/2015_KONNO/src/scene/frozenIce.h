@@ -31,7 +31,14 @@ public:
     //--Ice---
     int hantei;
     bool iceStart;
+    bool frozing;
+    bool melting;
     int count;
+    int frozingCount;
+    int meltingCount;
+    
+    bool iceFrozing;
+    bool iceMelting;
     
 private:
     

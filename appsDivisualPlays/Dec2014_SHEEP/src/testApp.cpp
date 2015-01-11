@@ -23,11 +23,13 @@
  */
 #include "dpMarionette.h"
 
-#include "HakoniwaParallelLink_Base.h"
+#include "HakoniwaPLink_Laser.h"
 #include "ramMotionExtractorExampleScene.h"
+#include "hakoVisPLink_Laser.h"
 
-HakoniwaParallelLink_Base hakoniwaParallelLink;
+HakoniwaPLink_Laser plink_laser;
 ramMotionExtractorExampleScene motionExt;
+hakoVisPLink_Laser vislink;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -43,7 +45,10 @@ void testApp::setup()
 	/// scenes setup
 	// ------------------
 	ramSceneManager& sceneManager = ramSceneManager::instance();
-	sceneManager.addScene( hakoniwaParallelLink.getPtr());
+
+	sceneManager.allocateFbos(1920, 1080);
+	sceneManager.addScene( plink_laser.getPtr());
+	sceneManager.addScene( vislink.getPtr());
 	sceneManager.addScene( motionExt.getPtr());
 
 }
@@ -66,7 +71,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(const ramActor &actor)
 {
-//	dpMarionette::instance().drawActor(actor);
+	dpMarionette::instance().drawActor(actor);
 }
 
 //--------------------------------------------------------------

@@ -25,7 +25,7 @@ class testApp : public ramBaseApp
 {
 public:
 	
-	// of methods
+	// of methods`
 	// ------------------------
 	void setup();
 	void update();
