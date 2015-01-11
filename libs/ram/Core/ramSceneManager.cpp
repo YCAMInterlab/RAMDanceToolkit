@@ -348,7 +348,7 @@ void ramSceneManager::draw(ofEventArgs& args)
             vector<int> screens = screenIt->second;
             for (int i=0; i<screens.size(); i++) {
                 const int screenId = screens.at(i);
-                CLAMP(screenId, 0, NUM_SCREEN_POSITIONS);
+                CLAMP(screenId, 0, (NUM_SCREEN_POSITIONS-1));
                 scene->getFbo()->draw(SCREEN_POSITIONS[screenId], scene->getFbo()->getWidth(), scene->getFbo()->getHeight());
             }
         }
