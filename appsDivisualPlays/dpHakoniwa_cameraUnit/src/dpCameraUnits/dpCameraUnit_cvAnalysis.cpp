@@ -130,12 +130,11 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 				blobM.addFloatArg(pt.x / width);
 				blobM.addFloatArg(pt.y / height);
 			}
+		}
 
-			if (mEnableSendOSC){
-				sendMessageMulti(bRectM);
-				sendMessageMulti(blobM);
-			}
-
+		if (mEnableSendOSC){
+			sendMessageMulti(bRectM);
+			sendMessageMulti(blobM);
 		}
 
 	}
