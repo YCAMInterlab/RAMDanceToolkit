@@ -19,9 +19,9 @@
 
 #include "ramUnit.h"
 #include "ramControlPanel.h"
+#include "ramBaseHasFbo.h"
 
-
-class ramBaseScene : public ramUnit
+class ramBaseScene : public ramUnit, public ramBaseHasFbo
 {
 public:
 

@@ -585,6 +585,9 @@
 		D21D08671A4BDE7600CC3598 /* ofxUITabbedCanvas.h in Headers */ = {isa = PBXBuildFile; fileRef = D21D08641A4BDE7600CC3598 /* ofxUITabbedCanvas.h */; };
 		D21D08681A4BDE7600CC3598 /* ofxUIToggleMini.h in Headers */ = {isa = PBXBuildFile; fileRef = D21D08651A4BDE7600CC3598 /* ofxUIToggleMini.h */; };
 		D21D086F1A4BE14300CC3598 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = D21D086E1A4BE14300CC3598 /* PrefixHeader.pch */; };
+		D2B4FD291A62211B00C97A66 /* dpConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = D2B4FD281A62211B00C97A66 /* dpConstants.h */; };
+		D2B4FD2C1A62216900C97A66 /* ramBaseHasFbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD2A1A62216900C97A66 /* ramBaseHasFbo.cpp */; };
+		D2B4FD2D1A62216900C97A66 /* ramBaseHasFbo.h in Headers */ = {isa = PBXBuildFile; fileRef = D2B4FD2B1A62216900C97A66 /* ramBaseHasFbo.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1177,6 +1180,9 @@
 		D21D08641A4BDE7600CC3598 /* ofxUITabbedCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUITabbedCanvas.h; sourceTree = "<group>"; };
 		D21D08651A4BDE7600CC3598 /* ofxUIToggleMini.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIToggleMini.h; sourceTree = "<group>"; };
 		D21D086E1A4BE14300CC3598 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		D2B4FD281A62211B00C97A66 /* dpConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpConstants.h; sourceTree = "<group>"; };
+		D2B4FD2A1A62216900C97A66 /* ramBaseHasFbo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramBaseHasFbo.cpp; sourceTree = "<group>"; };
+		D2B4FD2B1A62216900C97A66 /* ramBaseHasFbo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramBaseHasFbo.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1218,6 +1224,8 @@
 				9AEA658E191CB63D001FAA18 /* ramGlobal.cpp */,
 				C681AB9A197386FD0076DF1D /* ramOscManager.cpp */,
 				9AEA658F191CB63D001FAA18 /* ramSceneManager.cpp */,
+				D2B4FD2A1A62216900C97A66 /* ramBaseHasFbo.cpp */,
+				D2B4FD2B1A62216900C97A66 /* ramBaseHasFbo.h */,
 				9AEA6590191CB63D001FAA18 /* UI */,
 				9AEA65A0191CB63D001FAA18 /* Utility */,
 			);
@@ -1460,6 +1468,7 @@
 				D21D086E1A4BE14300CC3598 /* PrefixHeader.pch */,
 				60D49E5016DE5999003BA064 /* ramProject.xcconfig */,
 				60B90AAA1644E09400AF2156 /* Config.xcconfig */,
+				D2B4FD271A62211B00C97A66 /* dp */,
 				607D7ACC16661B860063800A /* addons */,
 				60B90A961644E04B00AF2156 /* src */,
 				60B90A8C1644E00900AF2156 /* Products */,
@@ -2545,6 +2554,15 @@
 			path = ofxUITabbledCanvas;
 			sourceTree = "<group>";
 		};
+		D2B4FD271A62211B00C97A66 /* dp */ = {
+			isa = PBXGroup;
+			children = (
+				D2B4FD281A62211B00C97A66 /* dpConstants.h */,
+			);
+			name = dp;
+			path = ../../dp;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2796,6 +2814,7 @@
 				9A38F51316E9E81900FF8B66 /* btTetrahedronShape.h in Headers */,
 				9248D5F11A4D6A1200047AF5 /* ofxCvContourFinder.h in Headers */,
 				9248D5F71A4D6A1200047AF5 /* ofxCvHaarFinder.h in Headers */,
+				D2B4FD2D1A62216900C97A66 /* ramBaseHasFbo.h in Headers */,
 				9A38F51416E9E81900FF8B66 /* btTriangleBuffer.h in Headers */,
 				9A38F51516E9E81900FF8B66 /* btTriangleCallback.h in Headers */,
 				9248D59E1A4D6A1200047AF5 /* cxcore.h in Headers */,
@@ -2972,6 +2991,7 @@
 				9AEA65C0191CB63D001FAA18 /* PlaybackSegment.h in Headers */,
 				9A38F57B16E9E81900FF8B66 /* btQuadWord.h in Headers */,
 				D21D08511A4BD9A900CC3598 /* ofxUITextInput.h in Headers */,
+				D2B4FD291A62211B00C97A66 /* dpConstants.h in Headers */,
 				9A38F57C16E9E81900FF8B66 /* btQuaternion.h in Headers */,
 				9248D5CE1A4D6A1200047AF5 /* params.h in Headers */,
 				9A38F57D16E9E81900FF8B66 /* btQuickprof.h in Headers */,
@@ -3149,6 +3169,7 @@
 				9A70C19916E9CE6F00A5B755 /* ofxIPPatcher.cpp in Sources */,
 				9A70C19D16E9CE6F00A5B755 /* ofxNodeArray.cpp in Sources */,
 				C62C935E1951554400EF3B2E /* ramCommunicationManager.cpp in Sources */,
+				D2B4FD2C1A62216900C97A66 /* ramBaseHasFbo.cpp in Sources */,
 				D21D08311A4BD9A900CC3598 /* ofxUIMultiImageButton.cpp in Sources */,
 				9248D5F21A4D6A1200047AF5 /* ofxCvFloatImage.cpp in Sources */,
 				9A38F59116E9E81900FF8B66 /* ofxBt.cpp in Sources */,
