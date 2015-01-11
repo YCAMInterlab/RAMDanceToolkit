@@ -69,6 +69,8 @@ public:
 	float mOptFlowSmooth;
 
 	vector <string> *oscListPtr;
+
+	vector <bool> debug_px;
 };
 
 #endif /* defined(__dpHakoniwa_cameraUnit__dpCameraUnit_cvAnalysis__) */

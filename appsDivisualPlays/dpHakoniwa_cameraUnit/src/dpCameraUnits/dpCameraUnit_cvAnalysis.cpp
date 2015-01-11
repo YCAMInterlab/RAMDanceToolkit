@@ -105,6 +105,9 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		bRectM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/boundingRect");
 		blobM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/blob");
 
+		bRectM.addIntArg(mContFinder.size());
+		blobM.addIntArg(mContFinder.size());
+
 		for (int i = 0;i < mContFinder.getContours().size();i++){
 			ofRectangle rt = ofxCv::toOf(mContFinder.getBoundingRect(i));
 			bRectM.addIntArg(mContFinder.getLabel(i));
@@ -173,9 +176,10 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		pixelateM.addIntArg(res_x);
 		pixelateM.addIntArg(res_y);
 
+//		debug_px.clear()
 		for (int j = 0;j < res_y;j++){
 			for (int i = 0;i < res_x;i++){
-				bool pix = (pixGray.getColor(width/res_x * i, height/res_y * j)[0] > 128);
+				bool pix = (pixGray.getColor(width/res_x * i, height/res_y * j).r > 128);
 
 				int tg = pix << (Pixelcounter % 64);
 				pixelInt += tg;
