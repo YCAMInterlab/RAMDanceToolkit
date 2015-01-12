@@ -13,15 +13,15 @@
 #include "sw_1010F_SerialController.h"
 #include "ofxOsc.h"
 
-#define DISPLAY_SHIMO_OKU 0
-#define DISPLAY_KAMI_OKU 1
-#define DISPLAY_SHIMO_TEMAE 2
-#define DISPLAY_KAMI_TEMAE 3
+#define DISPLAY_SHIMO_OKU 4
+#define DISPLAY_KAMI_OKU 5
+#define DISPLAY_SHIMO_TEMAE 6
+#define DISPLAY_KAMI_TEMAE 7
 
-#define CVSW_1 4
-#define CVSW_2 5
-#define CVSW_3 6
-#define CVSW_4 7
+#define CVSW_1 0
+#define CVSW_2 1
+#define CVSW_3 2
+#define CVSW_4 3
 
 enum hakoniwaType{
 	HAKO_STRUGGLE,
