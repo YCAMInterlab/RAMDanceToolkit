@@ -16,22 +16,22 @@ void dpSwitchingManager::setup(){
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_STRUGGLE;
 	hakoniwas.back()->CVPreset	= "struggle.xml";
-	hakoniwas.back()->sourceCh	= 1;
+	hakoniwas.back()->sourceCh	= 0;
 
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_FROZENICE;
 	hakoniwas.back()->CVPreset	= "frozen.xml";
-	hakoniwas.back()->sourceCh	= 2;
+	hakoniwas.back()->sourceCh	= 1;
 
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_LASER;
 	hakoniwas.back()->CVPreset	= "frozen.xml";
-	hakoniwas.back()->sourceCh	= 3;
+	hakoniwas.back()->sourceCh	= 2;
 
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_MAGNET;
 	hakoniwas.back()->CVPreset	= "frozen.xml";
-	hakoniwas.back()->sourceCh	= 4;
+	hakoniwas.back()->sourceCh	= 3;
 
 	for (int i = 0;i < 4;i++){
 		mSlots[i].targetDisplay.clear();
@@ -42,7 +42,7 @@ void dpSwitchingManager::setup(){
 	mSlots[3].matrixInputCh = CVSW_4;
 
 	isSlave = false;
-	senderToSlave.setup("192.168.20.36", 10000);
+//	senderToSlave.setup("192.168.20.36", 10000);
 }
 
 void dpSwitchingManager::update(){
@@ -52,7 +52,11 @@ void dpSwitchingManager::update(){
 	}else{
 
 	}
-
+	if (ofGetKeyPressed('5')) matrixSW.setSW(0, 0);
+	if (ofGetKeyPressed('6')) matrixSW.setSW(1, 0);
+	if (ofGetKeyPressed('7')) matrixSW.setSW(2, 0);
+	if (ofGetKeyPressed('8')) matrixSW.setSW(3, 0);
+	if (ofGetKeyPressed('9')) matrixSW.setSW(4, 0);
 }
 
 void dpSwitchingManager::draw(){
@@ -138,7 +142,8 @@ void dpSwitchingManager::SelectHakoniwa(hakoniwaType type, int slot){
 		mSlots[targCvSlot].targetDisplay.clear();
 		mSlots[targCvSlot].targetDisplay.push_back(int(slot));
 
-		matrixSW.setSW(targHako->sourceCh, mSlots[targCvSlot].matrixInputCh);
+		matrixSW.setSW(targHako->sourceCh,
+					   mSlots[targCvSlot].matrixInputCh);
 		cout << "clear & add " << slot << endl;
 	}else{
 
@@ -150,6 +155,7 @@ void dpSwitchingManager::SelectHakoniwa(hakoniwaType type, int slot){
 
 		enableDisplay(type, slot, !isExist);
 		mSlots[targCvSlot].targetDisplay.push_back(int(slot));
+
 		cout << "add " << slot << endl;
 	}
 
@@ -168,8 +174,7 @@ void dpSwitchingManager::enableDisplay(hakoniwaType type, int displayNum,bool ne
 	m.addIntArg(newHako);//新規に箱庭アウトシーンを有効にする必要があるかどうか
 
 	//箱庭の映像を舞台ディスプレイへ
-	matrixSW.setSW(getHakoniwaPreset(type)->sourceCh, displayNum);
-
+	matrixSW.setSW(getHakoniwaPreset(type)->sourceCh, displayNum+4);
 	//TODO: RDTKへのOSC送り
 
 }
