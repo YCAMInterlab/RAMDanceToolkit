@@ -43,7 +43,7 @@ class ramBusSend : public ramBaseFilter
 {
 public:
 
-	string getName() const;
+    string getName() const;
 	ramBusSend();
 	ramBusSend(const string &bus_name);
 
@@ -98,11 +98,13 @@ public:
 		return cache;
 	}
 	
-	const vector<ramNodeArray>& get(size_t index = 0) { return cache[index]; }
-	const size_t getNumFilters() { return filters.size(); }
+	const vector<ramNodeArray>& get(size_t index = 0) const { return cache[index]; }
+	const size_t getNumFilters() const { return filters.size(); }
 	
 	FilterClass& getFilter(int index) { return filters[index]; }
+    const FilterClass& getFilter(int index) const { return filters[index]; }
 	FilterClass& getFilter(const string& name) { return filters[name]; }
+    const FilterClass& getFilter(const string& name) const { return filters[name]; }
 
 protected:
 

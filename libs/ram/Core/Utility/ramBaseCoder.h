@@ -25,13 +25,13 @@ class ramBaseCoder
 	
 public:
 	ramBaseCoder() {}
-	ramBaseCoder(const string fileName) : mFileName(fileName) {}
+	ramBaseCoder(const string& fileName) : mFileName(fileName) {}
 	virtual ~ramBaseCoder() {}
 	
 	
 	/// load tsv, and convert to ramSession
 	// -----------------------------
-	void load(const string filePath)
+	void load(const string &filePath)
 	{
 //		cout
 //		<< "[" << __FUNCTION__ << "] " << "start loading file..."
@@ -51,24 +51,24 @@ public:
 	
 	/// save ramSession to filePath
 	// -----------------------------
-	const bool save(ramSession &src)
+	bool save(ramSession &src)
 	{
 		return encode(src);
 	}
 	
-	const bool save(ramSession &src, const string filePath)
+	bool save(ramSession &src, const string &filePath)
 	{
 		setFileName(filePath);
 		return encode(src);
 	}
 	
-	const bool save(ramNodeArrayBuffer &src)
+	bool save(ramNodeArrayBuffer &src)
 	{
 		ramSession session(src);
 		return encode(session);
 	}
 	
-	const bool save(ramNodeArrayBuffer &src, const string filePath)
+	bool save(ramNodeArrayBuffer &src, const string &filePath)
 	{
 		ramSession session(src);
 		setFileName(filePath);
@@ -87,14 +87,14 @@ public:
 	
 	/// setters
 	// -----------------------------
-	inline void setFileName(const string fileName) { mFileName = fileName; }
+	inline void setFileName(const string &fileName) { mFileName = fileName; }
 	
 	ramSession& get() { return mSession; }
 	
 protected:
 	
 	virtual void decode(ofBuffer buffer) = 0;
-	virtual bool encode(ramSession &src) = 0;
+	virtual bool encode(ramSession &src) const = 0;
 	
 	string mFileName;
 	ramSession mSession;

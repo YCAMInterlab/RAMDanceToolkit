@@ -17,7 +17,7 @@
 
 struct ramOscSendTag{
 
-	ramOscSendTag(int port_,string addr_){
+	ramOscSendTag(int port_, const string& addr_){
 		port = port_;
 		address = addr_;
 	}
@@ -29,31 +29,35 @@ struct ramOscSendTag{
 class ramOscReceiveTag{
 public:
 
-	ramOscReceiveTag(string addr_){
+	ramOscReceiveTag(const string& addr_){
 		string ad = addr_;
 		addr.push_back(ad);
 	}
 	ramOscReceiveTag(){
 	}
 
-	void addAddress(string addr_){
+	void addAddress(const string& addr_){
 		string ad = addr_;
 		addr.push_back(ad);
 	}
 
 	void addMessage(ofxOscMessage& m){
 		msg.push_back(ofxOscMessage(m));
+
+		while (msg.size() > 128){
+			msg.erase(msg.begin());
+		}
 	}
 
 	void getNextMessage(ofxOscMessage* m){
-		(*m) = msg[0];
+		*m = msg[0];
 		msg.erase(msg.begin());
 	}
 
-	bool hasWaitingMessages(){return (msg.size() > 0);};
+	bool hasWaitingMessages() const {return (msg.size() > 0);};
 
 	vector<ofxOscMessage> msg;
-	vector <string> addr;
+	vector<string> addr;
 
 };
 
@@ -64,14 +68,14 @@ public:
 	void update();
 
 	void sendMessage(ofxOscMessage& m);
-	void addSenderTag(int port,string address);
+	void addSenderTag(int port, const string& address);
 	void addReceiverTag(ramOscReceiveTag* ptr);
 
 	inline static ramOscManager& instance()
 	{
 		if (__instance == NULL)
 			__instance = new ramOscManager;
-		return * __instance;
+		return *__instance;
 	}
 
 	ofxOscReceiver* getReceiver()	{return &receiver;};
@@ -82,7 +86,7 @@ private:
 
 	ramOscManager() {};
 	ramOscManager(const ramOscManager&){}
-	ramOscManager& operator=(const ramOscManager&){return *this;}
+	ramOscManager& operator=(const ramOscManager&){return *__instance;}
 	~ramOscManager() {};
 
 	vector<ramOscReceiveTag*> receiverList;

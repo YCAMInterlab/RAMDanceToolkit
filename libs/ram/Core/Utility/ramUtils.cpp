@@ -17,7 +17,7 @@
 
 #include "ramUtils.h"
 
-bool ramDeadFunctor::operator()(const ramFading& fading) {
+bool ramDeadFunctor::operator()(const ramFading& fading) const {
 	return fading.isDead(lifespan);
 }
 

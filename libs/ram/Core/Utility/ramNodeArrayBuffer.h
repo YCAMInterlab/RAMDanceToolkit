@@ -67,6 +67,11 @@ public:
 		return buffer[index];
 	}
 
+    inline const ramNodeArray& get(size_t index) const
+    {
+        return const_cast<ramNodeArray &>(get(index));
+    }
+    
 	size_t getSize() const { return buffer.size(); }
 
 private:

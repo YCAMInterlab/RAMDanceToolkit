@@ -1,0 +1,19 @@
+//
+//  PrefixHeader.pch
+//  dpScore
+//
+//  Created by YoshitoONISHI on 12/25/14.
+//
+//
+
+#ifndef dpScore_PrefixHeader_pch
+#define dpScore_PrefixHeader_pch
+
+#include "ofxUIDefines.h"
+
+#ifdef OFX_UI_FONT_NAME
+#undef OFX_UI_FONT_NAME
+#define OFX_UI_FONT_NAME "FreeUniversal-Regular.ttf"
+#endif
+
+#endif
