@@ -30,12 +30,16 @@ public:
 	ramSoftBodyPrimitive();
 	~ramSoftBodyPrimitive();
 
-	ofxBt::SoftBody getSoftBody() { return body; }
+	ofxBt::SoftBody getSoftBody() const { return body; }
 
 protected:
 
 	ofxBt::SoftBody body;
 	ofxBt::SoftBodyWorld& getWorld();
+    inline const ofxBt::SoftBodyWorld& getWorld() const
+    {
+        return const_cast<ofxBt::SoftBodyWorld&>(getWorld());
+    }
 
 	void internal_update();
 };

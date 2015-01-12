@@ -33,7 +33,7 @@ public:
 
 	ramNodeLine() {}
 
-	float getDistance()
+	float getDistance() const
 	{
 		ramNode from_n;
 		ramNode to_n;
@@ -108,14 +108,14 @@ public:
 
 		return *this;
 	}
-
+    
 	ramNodeLine& resampling(float spacing = 5)
 	{
 		spacing = ofClamp(spacing, 0.1, 100);
 		polyline = polyline.getResampledBySpacing(spacing);
 		return *this;
 	}
-
+    
 	ramNodeLine& spiral(float radius = 10, float rotate = 10)
 	{
 		ofPolyline pp;
@@ -167,7 +167,7 @@ public:
 		}
 		return *this;
 	}
-
+    
 	ramNodeLine& extend(float from = 1000, float to = 1000)
 	{
 		if (polyline.size() < 2) return *this;
