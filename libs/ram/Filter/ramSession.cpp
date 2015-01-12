@@ -248,8 +248,6 @@ ramNodeArray& ramSession::getCurrentFrame()
 	return getFrame(getCurrentFrameIndex());
 }
 
-
-
 #pragma mark -
 #pragma mark getters, setters
 
@@ -263,36 +261,36 @@ bool ramSession::isPlaying() { return mPlaying; }
 bool ramSession::isRecording() { return mRecording; }
 bool ramSession::isLoop() { return mLoop; }
 
-float ramSession::getPlayhead()
+float ramSession::getPlayhead() const
 {
 	return mPlayhead;
 }
 
-int ramSession::getCurrentFrameIndex()
+int ramSession::getCurrentFrameIndex() const
 {
 	return floor(mPlayhead / getAverageFrameTime());
 //	return mPlayhead * (getNumFrames() - 1);
 }
 
-int ramSession::getNumFrames()
+int ramSession::getNumFrames() const
 {
 	return mBuffer.getSize();
 }
 
-float ramSession::getAverageFrameTime()
+float ramSession::getAverageFrameTime() const
 {
 	return getDuration() / getNumFrames();
 }
 
-float ramSession::getDuration()
+float ramSession::getDuration() const
 {
-	ramNodeArray &frontFrame = mBuffer.get( 0 );
-	ramNodeArray &backFrame = mBuffer.get( getNumFrames() );
+	const ramNodeArray &frontFrame = mBuffer.get( 0 );
+	const ramNodeArray &backFrame = mBuffer.get( getNumFrames() );
 	
 	return backFrame.getTimestamp() - frontFrame.getTimestamp();
 }
 
-string ramSession::getNodeArrayName()
+string ramSession::getNodeArrayName() const
 {
 	return getNumFrames() > 0 ? mBuffer.get(0).getName() : "no name";
 }

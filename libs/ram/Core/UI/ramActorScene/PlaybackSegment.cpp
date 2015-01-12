@@ -20,7 +20,7 @@
 #pragma mark -
 #pragma mark constructor, destructor
 
-PlaybackSegment::PlaybackSegment(string segmentName)
+PlaybackSegment::PlaybackSegment(const string& segmentName)
 {
     name = segmentName;
     
@@ -45,7 +45,7 @@ PlaybackSegment::~PlaybackSegment()
 
 #pragma mark -
 #pragma mark public methods
-ramActorUISegmentType PlaybackSegment::getType()
+ramActorUISegmentType PlaybackSegment::getType() const
 {
     return RAM_UI_SEGMENT_TYPE_PLAYBACK;
 }
@@ -55,7 +55,7 @@ void PlaybackSegment::update()
 	session.updatePlayhead();
 }
 
-ofxUICanvasPlus* PlaybackSegment::createPanel(const string targetName)
+ofxUICanvasPlus* PlaybackSegment::createPanel(const string& targetName)
 {
     name = targetName;
     
