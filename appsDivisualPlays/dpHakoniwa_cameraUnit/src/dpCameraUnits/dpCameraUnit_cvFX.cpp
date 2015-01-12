@@ -17,7 +17,7 @@ dpCameraUnit_cvFX::dpCameraUnit_cvFX(){
 	mGui.addSpacer();
 	mGui.addToggle("Blur", &mEnableBlur);
 	mGui.addSlider("BlurSize", 0.0, 40.0, &mParam_Blur);
-
+	mGui.addToggle("AccumelateWeight", &mEnableAccumlateWeight);
 	mGui.addSpacer();
 	mGui.addToggle("AdaptiveThreshold", &mEnableAdaptiveThreshold);
 	mGui.addIntSlider("blockSize", 3, 255, &mParam_adpThreshold_blockSize);
@@ -70,6 +70,9 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 			ofxCv::absdiff(mGraySource, mGraySource_forDiff, mGraySource_forDiff);
 			ofxCv::swap(mGraySource, mGraySource_forDiff);
 		}
+		if (mEnableAccumlateWeight) useAccumulateWeighted(&mGraySource,
+														  &mGraySource,
+														  &mAccum, 0.1);
 
 		mSource.update();
 		mGraySource.update();
@@ -102,6 +105,21 @@ void dpCameraUnit_cvFX::drawThumbnail(int x, int y, float scale){
 
 	ofPopMatrix();
 
+}
+
+void dpCameraUnit_cvFX::useAccumulateWeighted(ofImage *src,ofImage *result,cv::Mat *accum,float time,bool fadeLastFrame){
+
+	if(accum->empty())ofxCv::toCv(*src).convertTo(*accum,CV_32F); //最初に１フレーム格納が必要
+
+	time = fmaxf(0.0, time);
+	time = fminf(1.0,time);
+
+	accumulateWeighted(ofxCv::toCv(*src),*accum, time);
+
+	accum->convertTo(tmp, CV_8U);
+	ofxCv::toOf(tmp,*result);
+
+	if( !fadeLastFrame )ofxCv::add(*src, *result, *result); //srcと結果を加算。これをしないと最後に入ってきたフレームも移動平均で薄くなる
 }
 
 void dpCameraUnit_cvFX::useAdaptiveThreshold(ofImage &src, ofImage &dst, int blockSize, int offset, bool invert, bool gauss){

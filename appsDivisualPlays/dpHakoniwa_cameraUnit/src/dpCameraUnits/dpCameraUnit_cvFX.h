@@ -30,6 +30,7 @@ public:
 	bool mEnableAdaptiveThreshold;
 	bool mEnableInvert;
 	bool mEnableFrameDiff;
+	bool mEnableAccumlateWeight;
 
 	float mParam_Blur;
 	float mParam_Canny_Thr1;
@@ -49,7 +50,9 @@ public:
 protected:
 
 	ofxCv::Mat tmp;
+	cv::Mat mAccum;
 
+	void useAccumulateWeighted(ofImage *src,ofImage *result,cv::Mat *accum,float time,bool fadeLastFrame = false);
 	void useAdaptiveThreshold(ofImage &src,ofImage &dst,int blockSize,int offset,bool invert,bool gauss);
 };
 
