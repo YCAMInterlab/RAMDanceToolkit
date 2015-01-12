@@ -205,16 +205,18 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 1.0f) &&
 			(isFrameNew)) mOptFlow.calcOpticalFlow(pixGray);
 		if ((ofGetFrameNum() % 150 == 0) || (ofGetKeyPressed(' '))) mOptFlow.resetFlow();
-		
+
 		vector <ofVec2f> mot = mOptFlow.getMotion();
-		
+
 		for (int i = 0;i < 10;i++) mOptFlow_sumVecs[i].set(0.0,0.0);
 		
 		mOptFlow_angleVec = ofVec2f(0.0,0.0);
+
 		for (int i = 0;i < mot.size();i++){
 			if (mot[i].lengthSquared() < pow(mOptFlow_filterSpd,2.0f)){
 				mOptFlow_sumVecs[i % 10] += mot[i];
 				mOptFlow_angleVec += mot[i];
+				mOptFlow_sumVecs[0].x;
 			}
 		}
 		mOptFlow_angleVec /= 100.0;
@@ -222,17 +224,25 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		for (int i = 0;i < 10;i++){
 			mOptFlow_smoothVecs[i] += (mOptFlow_sumVecs[i] - mOptFlow_smoothVecs[i]) / mOptFlowSmooth;
 		}
-		
-		if (mEnableSendOSC){
 
+		if (mEnableSendOSC){
 			ofxOscMessage feat;
 			feat.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/features");
 			feat.addIntArg(mOptFlow.getFeatures().size());
 			for (int i = 0;i < mOptFlow.getFeatures().size();i++){
 				feat.addFloatArg(mOptFlow.getFeatures()[i].x / width);
 				feat.addFloatArg(mOptFlow.getFeatures()[i].y / height);
-				feat.addFloatArg(mOptFlow.getMotion()[i].x / width);
-				feat.addFloatArg(mOptFlow.getMotion()[i].y / height);
+				if (mOpt_previous.size() > i){
+					feat.addFloatArg((mOptFlow.getFeatures()[i].x -
+									  mOpt_previous[i].x) / width);
+					feat.addFloatArg((mOptFlow.getFeatures()[i].y -
+									  mOpt_previous[i].y) / height);
+
+				}else{
+					feat.addFloatArg(0.0);
+					feat.addFloatArg(0.0);
+				}
+
 			}
 
 			ofxOscMessage vectorM;
@@ -259,6 +269,8 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			sendMessageMulti(totalM);
 			
 		}
+		mOpt_previous = mOptFlow.getFeatures();
+
 	}
 
 }
@@ -280,10 +292,19 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 	ofDrawBitmapString(hakoniwa_name, 0,400);
 
 	if (mViewSource && imgRefGray != NULL) imgRefGray->draw(0,0);
+
+	ofSetColor(255, 0, 0);
+	for (int i = 0;i < mOptFlow.getFeatures().size();i++){
+		if (mOptFlow.getMotion()[i].x != 0){
+			ofCircle(mOptFlow.getFeatures()[i], 15);
+		}
+	}
+
 	ofSetColor(255, 255, 0);
 	if (mEnableContourFinder)	mContFinder.draw();
 	if (mEnableOptFlow)			mOptFlow.draw();
 	if (mEnableOptFlowFarne)	mOptFlowFarne.draw();
+
 
 	if (mEnableOptFlow){
 		ofSetColor(255, 0, 0);
