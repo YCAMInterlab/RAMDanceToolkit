@@ -9,8 +9,13 @@
 #include "HakoniwaGearMove.h"
 
 HakoniwaGearMove::HakoniwaGearMove(){
-    KsmrStep.setupOsc("192.168.20.51", 8528);
+//    KsmrStep.setupOsc("192.168.20.51", 8528);
+    KsmrStep.setupOsc("192.168.20.57", 8528);
     KsmrStep.addStepper("step", 400, 0);
+    //-------
+    KsmrStep.addStepper("step2", 400, 1);
+    KsmrStep.addStepper("step3", 400, 2);
+    //-------
     KsmrStep.setStepperAll(true);
     KsmrStep.setupEasy();
 }

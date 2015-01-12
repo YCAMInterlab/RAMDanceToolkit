@@ -19,9 +19,11 @@
 
 #include "ramMotionExtractorExampleScene.h"
 #include "frozenIce.h"
+#include "eyeBall.h"
 
 ramMotionExtractorExampleScene extractorScene;
 frozenIce frozenice;
+eyeBall eyeball;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -42,6 +44,7 @@ void testApp::setup()
 	ramSceneManager& sceneManager = ramSceneManager::instance();
 	sceneManager.addScene(extractorScene.getPtr());
     sceneManager.addScene(frozenice.getPtr());
+    sceneManager.addScene(eyeball.getPtr());
 }
 
 //--------------------------------------------------------------
