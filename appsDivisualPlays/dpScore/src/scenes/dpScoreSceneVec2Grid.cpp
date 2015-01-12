@@ -55,8 +55,6 @@ void SceneVec2Grid::exit()
 
 void SceneVec2Grid::update(ofxEventMessage& m)
 {
-    ofSetWindowTitle(getName() + ": " + ofToString(ofGetFrameRate(), 2));
-    
     if (m.getAddress() == kAddrVec2) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);

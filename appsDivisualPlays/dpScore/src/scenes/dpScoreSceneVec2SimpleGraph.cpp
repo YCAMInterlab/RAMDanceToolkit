@@ -47,8 +47,6 @@ void SceneVec2SimpleGraph::exit()
 
 void SceneVec2SimpleGraph::update(ofxEventMessage& m)
 {
-    ofSetWindowTitle(getName() + ": " + ofToString(ofGetFrameRate(), 2));
-    
     if (m.getAddress() == kAddrVec2) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);

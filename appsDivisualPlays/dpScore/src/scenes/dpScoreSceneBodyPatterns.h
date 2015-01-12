@@ -33,9 +33,9 @@ public:
 private:
     string mSkeletonName;
     deque<ofxMot::SkeletonPtr> mSkeletons;
-    const int nX = 16;
-    const int nY = 9;
-        const int kNumSkeletons = nX * nY;
+    const int nX{16};
+    const int nY{9};
+    const int kNumSkeletons = nX * nY;
     
     ofEasyCam mCam;
     

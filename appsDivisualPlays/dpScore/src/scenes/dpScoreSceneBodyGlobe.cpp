@@ -70,6 +70,7 @@ void SceneBodyGlobe::initialize()
     for (auto& p : mNodes) {
         p = Node::Ptr(new Node());
     }
+    mCam.disableMouseInput();
 }
 
 void SceneBodyGlobe::shutDown()
@@ -89,6 +90,7 @@ void SceneBodyGlobe::enter()
     ofAddListener(ofxMotioner::updateSkeletonEvent,
                   this,
                   &SceneBodyGlobe::onUpdateSkeleton);
+    mCam.enableMouseInput();
 }
 
 void SceneBodyGlobe::exit()
@@ -98,12 +100,11 @@ void SceneBodyGlobe::exit()
     ofRemoveListener(ofxMotioner::updateSkeletonEvent,
                      this,
                      &SceneBodyGlobe::onUpdateSkeleton);
+    mCam.disableMouseInput();
 }
 
 void SceneBodyGlobe::update(ofxEventMessage& m)
 {
-    ofSetWindowTitle(getName() + ": " + ofToString(ofGetFrameRate(), 2));
-    
     if (m.getAddress() == kAddrMotioner) {
         if (mMagnify) {
             mScale += ofGetLastFrameTime() * 2.f;

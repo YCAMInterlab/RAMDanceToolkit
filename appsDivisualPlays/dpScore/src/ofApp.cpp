@@ -28,6 +28,13 @@ using namespace dp::score;
 //    string s = "bar";
 //};
 
+#if 0
+
+身体系 5/20
+箱庭系 5/20
+
+#endif
+
 #pragma mark ___________________________________________________________________
 void ofApp::setup()
 {
@@ -105,6 +112,8 @@ void ofApp::update()
 {
     OFX_BEGIN_EXCEPTION_HANDLING
     
+    ofSetWindowTitle("dpScore : " + ofToString(ofGetFrameRate(), 2));
+    
     int n = 0;
     ofVec2f v;
     while (mOscReceiver.hasWaitingMessages()) {
@@ -139,6 +148,7 @@ void ofApp::update()
     
     OFX_END_EXCEPTION_HANDLING
 }
+
 #pragma mark ___________________________________________________________________
 void ofApp::draw()
 {
@@ -274,7 +284,6 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     OFX_BEGIN_EXCEPTION_HANDLING
     
 
-    
     OFX_END_EXCEPTION_HANDLING
 }
 

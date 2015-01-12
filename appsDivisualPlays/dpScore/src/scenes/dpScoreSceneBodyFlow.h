@@ -46,7 +46,7 @@ private:
     string mSkeletonName;
     deque<ofxMot::SkeletonPtr> mSkeletons;
     vector<ofPtr<Points> > mPoints;
-    const int kNumSkeletons = 200;
+    const int kNumSkeletons{200};
     
     ofEasyCam mCam;
 };

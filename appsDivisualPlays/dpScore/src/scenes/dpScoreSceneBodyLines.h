@@ -16,16 +16,18 @@ DP_SCORE_NAMESPACE_BEGIN
 
 class SceneBodyLines final : public SceneBase {
 public:
-    struct Node : public ofxMot::Node {
+    struct Node final : public ofxMot::Node {
         Node();
-        virtual ~Node() {}
+        virtual ~Node() = default;
         Node& operator = (const Node& rhs) { return *this = rhs; }
         
         void setupPoints();
         void setupLines();
         
-        void update();
-        void draw();
+        void updatePoints();
+        void updateLines();
+        void customDraw() final override;
+        void drawLines();
         
         vector<float> spd;
         vector<ofVec3f> axis;
@@ -33,12 +35,13 @@ public:
         vector<ofVec3f> initialVertices;
         
         //const int kNumVertices = 10*23;
-        const int kNumVertices = 20;
+        const int kNumVertices{30};
         ofVbo vbo;
         
         vector<ofVec3f> verticesLines;
+        vector<ofFloatColor> verticesColors;
         ofVbo vboLines;
-        float scale = 15.f;
+        float scale{15.f};
     };
     
     
@@ -58,10 +61,9 @@ public:
     
 private:
     string mSkeletonName;
-    ofxMot::SkeletonPtr mSkeleton;
     ofEasyCam mCam;
-    float mScale = 300.f;
-    vector<Node> mNodes;
+    float mScale{20.f};
+    ofxMot::SkeletonBase<Node>::Ptr mSkeleton;
 };
 
 DP_SCORE_NAMESPACE_END
