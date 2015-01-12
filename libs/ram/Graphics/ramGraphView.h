@@ -33,7 +33,7 @@ public:
 		records[key].max = max;
 	}
 
-	bool hasRecord(const string& key)
+	bool hasRecord(const string& key) const
 	{
 		return records.find(key) != records.end();
 	}
@@ -53,11 +53,11 @@ public:
 		}
 	}
 
-	bool getColor(const string& key, ofColor &c)
+	bool getColor(const string& key, ofColor &c) const
 	{
 		if (!hasRecord(key)) return false;
 
-		Record &o = records[key];
+		const Record &o = records.at(key);
 		c = o.color;
 
 		return true;

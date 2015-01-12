@@ -48,7 +48,7 @@ public:
 	void onKeyPressed(ofKeyEventArgs &e);
 	void onValueChanged(ofxUIEventArgs &e);
 	void onFileDrop(ofDragInfo &e);
-    void loadFile(const string filePath);
+    void loadFile(const string &filePath);
 	
 	void showAll(bool showAll);
 	void resetPosAll(bool showAll);
@@ -62,7 +62,7 @@ public:
 	void drawNodes(const ramNodeArray &NA); // experimental
     
     void addSegment(BaseSegment *newSegment);
-	void removeControlSegment(const string name);
+	void removeControlSegment(const string& name);
 	
 private:
 	

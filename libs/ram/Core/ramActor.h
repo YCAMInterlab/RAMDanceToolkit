@@ -132,7 +132,7 @@ public:
 	inline bool isOutdated() const { return (ofGetElapsedTimef() -  last_update_client_time) > RAM_OUTDATED_DURATION; }
 	
 	inline float getTimestamp() const { return last_update_client_time; }
-	inline void setTimestamp(const float t) { last_update_client_time = t; }
+	inline void setTimestamp(float t) { last_update_client_time = t; }
 
 	inline void setType(ramNodeArrayType t) { type = t; }
 	inline bool isActor() const { return type == RAM_NODEARRAY_TYPE_ACTOR; }

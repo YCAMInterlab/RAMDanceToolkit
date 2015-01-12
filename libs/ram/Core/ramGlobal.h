@@ -32,15 +32,20 @@ public:
 #pragma mark - Shortcut to ramActorManager
 
 	ramActorManager& getActorManager();
+    const ramActorManager& getActorManager() const;
 	ramCommunicationManager& getCommunicationManager();
+    const ramCommunicationManager& getCommunicationManager() const;
 	ramOscManager& getOscManager();
+    const ramOscManager& getOscManager() const;
 
-	const vector<string>& getNodeArrayNames();
-	bool hasNodeArray(const string &key);
-	ramNodeArray& getNodeArray(string name);
-	size_t getNumNodeArray();
+	const vector<string>& getNodeArrayNames() const;
+	bool hasNodeArray(const string& key) const;
+	ramNodeArray& getNodeArray(const string& name);
+    const ramNodeArray& getNodeArray(const string& name) const;
+	size_t getNumNodeArray() const;
 	ramNodeArray& getNodeArray(int index);
-	vector<ramNodeArray> getAllNodeArrays();
+    const ramNodeArray& getNodeArray(int index) const;
+	vector<ramNodeArray> getAllNodeArrays() const;
 	
 #pragma mark - Shortcut to ramCameraManager
 
@@ -55,7 +60,7 @@ public:
 
 #pragma mark - core
 void ramInitialize(int oscPort = 10000, bool usePresetScenes = false);
-string ramToResourcePath(string path);
+string ramToResourcePath(const string& path);
 
 #pragma mark - actors
 void ramEnableShowActors(bool v);

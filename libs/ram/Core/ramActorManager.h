@@ -92,6 +92,7 @@ public:
 	void setBus(const string& bus_name, const ramNodeArray &arr) { bus[bus_name] = arr; }
 	const ramNodeArray& getBus(const string& bus_name) { return bus[bus_name]; }
 	map<string, ramNodeArray>& getAllBus() { return bus; };
+    const map<string, ramNodeArray>& getAllBus() const { return bus; };
 	inline size_t getNumBus() { return bus.size(); };
 	inline size_t eraseFromBus(const string& bus_name) { return bus.erase(bus_name); };
 	
