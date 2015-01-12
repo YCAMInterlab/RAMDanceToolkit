@@ -53,9 +53,9 @@ public:
 
 	// node
 
-	inline size_t getNumNodeArray() { return nodearrays.size(); }
+	inline size_t getNumNodeArray() const { return nodearrays.size(); }
 
-	inline vector<ramNodeArray> getAllNodeArrays()
+	inline vector<ramNodeArray> getAllNodeArrays() const
 	{
 		vector<ramNodeArray> r;
 		for (int i = 0; i < getNumNodeArray(); i++)
@@ -63,10 +63,12 @@ public:
 		return r;
 	}
 
-	inline const vector<string>& getNodeArrayNames() { return nodearrays.keys(); }
+	inline const vector<string>& getNodeArrayNames() const { return nodearrays.keys(); }
 	inline ramNodeArray& getNodeArray(int index) { return nodearrays[index]; }
+    inline const ramNodeArray& getNodeArray(int index) const { return const_cast<ramNodeArray&>(nodearrays[index]); }
 	inline ramNodeArray& getNodeArray(const string& name) { return nodearrays[name]; }
-	inline bool hasNodeArray(const string &key) { return nodearrays.hasKey(key); }
+    inline const ramNodeArray& getNodeArray(const string& name) const { return const_cast<ramNodeArray&>(nodearrays[name]); }
+	inline bool hasNodeArray(const string &key) const { return nodearrays.hasKey(key); }
     inline void removeNodeArray(const string& name) { nodearrays.erase(name); }
 	
 	// test
@@ -75,9 +77,9 @@ public:
 	
 	// for mouse picked node
 
-	const ramNodeIdentifer& getLastSelectedNodeIdentifer();
-	const ramNode* getLastSelectedNode();
-	const ramNodeArray* getLastSelectedNodeArray();
+	const ramNodeIdentifer& getLastSelectedNodeIdentifer() const;
+	const ramNode* getLastSelectedNode() const;
+	const ramNodeArray* getLastSelectedNodeArray() const;
 	void clearSelected();
 
 	// Freeze all actor
@@ -88,9 +90,9 @@ public:
 
 	// bus
 
-	bool hasBus(const string& bus_name) { return bus.find(bus_name) != bus.end(); }
+	bool hasBus(const string& bus_name) const { return bus.find(bus_name) != bus.end(); }
 	void setBus(const string& bus_name, const ramNodeArray &arr) { bus[bus_name] = arr; }
-	const ramNodeArray& getBus(const string& bus_name) { return bus[bus_name]; }
+	const ramNodeArray& getBus(const string& bus_name) const { return bus.at(bus_name); }
 	map<string, ramNodeArray>& getAllBus() { return bus; };
     const map<string, ramNodeArray>& getAllBus() const { return bus; };
 	inline size_t getNumBus() { return bus.size(); };

@@ -50,7 +50,13 @@ public:
 #pragma mark - Shortcut to ramCameraManager
 
 	ramCameraManager& getCameraManager();
+    inline const ramCameraManager& getCameraManager() const {
+        return const_cast<ramCameraManager&>(getCameraManager());
+    }
 	ofCamera& getActiveCamera();
+    inline const ofCamera& getActiveCamera() const {
+        return const_cast<ofCamera&>(getActiveCamera());
+    }
 	
 #pragma mark - Shortcut to ramSceneManager
 

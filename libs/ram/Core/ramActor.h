@@ -94,6 +94,7 @@ public:
 	inline ofQuaternion getAngularAcceleration() const { return accelerometer.angular_acceleration; }
 
 	inline ramAccelerometer& getAccelerometer() { return accelerometer; }
+    inline const ramAccelerometer& getAccelerometer() const { return const_cast<ramAccelerometer&>(accelerometer); }
 
 	void drawNodeId(int floatPos = 20) const;
 	void drawNodeName(int floatPos = 20) const;
