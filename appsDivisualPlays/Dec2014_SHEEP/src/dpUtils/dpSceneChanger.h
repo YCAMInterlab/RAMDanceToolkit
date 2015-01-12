@@ -9,6 +9,15 @@
 #ifndef __RAMDanceToolkit__dpSceneChanger__
 #define __RAMDanceToolkit__dpSceneChanger__
 
-#include <stdio.h>
+#include "ramMain.h"
+
+class dpSceneChanger{
+public:
+	
+	void setup();
+	void update();
+	
+	ramOscReceiveTag receiver;
+};
 
 #endif /* defined(__RAMDanceToolkit__dpSceneChanger__) */

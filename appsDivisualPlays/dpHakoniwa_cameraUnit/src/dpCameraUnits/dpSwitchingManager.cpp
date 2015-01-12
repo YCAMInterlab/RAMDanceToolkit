@@ -242,4 +242,5 @@ hakoniwaPresets* dpSwitchingManager::getHakoniwaPreset(hakoniwaType type){
 			return hakoniwas[i];
 		}
 	}
+	return NULL;
 }
