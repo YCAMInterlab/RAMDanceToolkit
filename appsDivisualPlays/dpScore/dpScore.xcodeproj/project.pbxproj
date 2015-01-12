@@ -85,6 +85,13 @@
 		D29034151A4D4ADE00577E04 /* dpScoreSceneVec2Grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D290340B1A4D4ADE00577E04 /* dpScoreSceneVec2Grid.cpp */; };
 		D29034161A4D4ADE00577E04 /* dpScoreSceneVec2Plotter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D290340D1A4D4ADE00577E04 /* dpScoreSceneVec2Plotter.cpp */; };
 		D29034171A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D290340F1A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.cpp */; };
+		D29B99231A63F023000115C5 /* SceneBodyBoids.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29B99121A63F023000115C5 /* SceneBodyBoids.cpp */; };
+		D29B99241A63F023000115C5 /* oncVao.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29B99171A63F023000115C5 /* oncVao.cpp */; };
+		D29B99251A63F023000115C5 /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29B99191A63F023000115C5 /* Particle.cpp */; };
+		D29B99261A63F023000115C5 /* ParticleController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29B991B1A63F023000115C5 /* ParticleController.cpp */; };
+		D29B99271A63F023000115C5 /* Perlin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29B991D1A63F023000115C5 /* Perlin.cpp */; };
+		D29B99281A63F023000115C5 /* Predator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29B991F1A63F023000115C5 /* Predator.cpp */; };
+		D29B99291A63F023000115C5 /* Rand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29B99211A63F023000115C5 /* Rand.cpp */; };
 		D2B4FD181A60BEB600C97A66 /* dpScoreSceneBodyScan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD161A60BEB600C97A66 /* dpScoreSceneBodyScan.cpp */; };
 		D2B4FD1B1A60DDBB00C97A66 /* dpScoreSceneBodyPatterns.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD191A60DDBB00C97A66 /* dpScoreSceneBodyPatterns.cpp */; };
 		D2B4FD1E1A60DE1200C97A66 /* dpScoreSceneBodyFlow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD1C1A60DE1200C97A66 /* dpScoreSceneBodyFlow.cpp */; };
@@ -315,6 +322,21 @@
 		D290340E1A4D4ADE00577E04 /* dpScoreSceneVec2Plotter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneVec2Plotter.h; sourceTree = "<group>"; };
 		D290340F1A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneVec2SimpleGraph.cpp; sourceTree = "<group>"; };
 		D29034101A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneVec2SimpleGraph.h; sourceTree = "<group>"; };
+		D29B99121A63F023000115C5 /* SceneBodyBoids.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneBodyBoids.cpp; sourceTree = "<group>"; };
+		D29B99131A63F023000115C5 /* SceneBodyBoids.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneBodyBoids.h; sourceTree = "<group>"; };
+		D29B99141A63F023000115C5 /* CinderMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinderMath.h; sourceTree = "<group>"; };
+		D29B99171A63F023000115C5 /* oncVao.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = oncVao.cpp; sourceTree = "<group>"; };
+		D29B99181A63F023000115C5 /* oncVao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oncVao.h; sourceTree = "<group>"; };
+		D29B99191A63F023000115C5 /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
+		D29B991A1A63F023000115C5 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
+		D29B991B1A63F023000115C5 /* ParticleController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleController.cpp; sourceTree = "<group>"; };
+		D29B991C1A63F023000115C5 /* ParticleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleController.h; sourceTree = "<group>"; };
+		D29B991D1A63F023000115C5 /* Perlin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Perlin.cpp; sourceTree = "<group>"; };
+		D29B991E1A63F023000115C5 /* Perlin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Perlin.h; sourceTree = "<group>"; };
+		D29B991F1A63F023000115C5 /* Predator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Predator.cpp; sourceTree = "<group>"; };
+		D29B99201A63F023000115C5 /* Predator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Predator.h; sourceTree = "<group>"; };
+		D29B99211A63F023000115C5 /* Rand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rand.cpp; sourceTree = "<group>"; };
+		D29B99221A63F023000115C5 /* Rand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rand.h; sourceTree = "<group>"; };
 		D2B4FD161A60BEB600C97A66 /* dpScoreSceneBodyScan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyScan.cpp; sourceTree = "<group>"; };
 		D2B4FD171A60BEB600C97A66 /* dpScoreSceneBodyScan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyScan.h; sourceTree = "<group>"; };
 		D2B4FD191A60DDBB00C97A66 /* dpScoreSceneBodyPatterns.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyPatterns.cpp; sourceTree = "<group>"; };
@@ -704,6 +726,7 @@
 		D29034081A4D4ADE00577E04 /* scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D29B99111A63F023000115C5 /* boids */,
 				D29B990C1A63A22C000115C5 /* body */,
 				D29B990B1A63A222000115C5 /* hakoniwa */,
 			);
@@ -742,6 +765,28 @@
 				D2C4DE7C1A6286E400342E4F /* dpScoreSceneBodyLines.h */,
 			);
 			name = body;
+			sourceTree = "<group>";
+		};
+		D29B99111A63F023000115C5 /* boids */ = {
+			isa = PBXGroup;
+			children = (
+				D29B99121A63F023000115C5 /* SceneBodyBoids.cpp */,
+				D29B99131A63F023000115C5 /* SceneBodyBoids.h */,
+				D29B99141A63F023000115C5 /* CinderMath.h */,
+				D29B99171A63F023000115C5 /* oncVao.cpp */,
+				D29B99181A63F023000115C5 /* oncVao.h */,
+				D29B99191A63F023000115C5 /* Particle.cpp */,
+				D29B991A1A63F023000115C5 /* Particle.h */,
+				D29B991B1A63F023000115C5 /* ParticleController.cpp */,
+				D29B991C1A63F023000115C5 /* ParticleController.h */,
+				D29B991D1A63F023000115C5 /* Perlin.cpp */,
+				D29B991E1A63F023000115C5 /* Perlin.h */,
+				D29B991F1A63F023000115C5 /* Predator.cpp */,
+				D29B99201A63F023000115C5 /* Predator.h */,
+				D29B99211A63F023000115C5 /* Rand.cpp */,
+				D29B99221A63F023000115C5 /* Rand.h */,
+			);
+			path = boids;
 			sourceTree = "<group>";
 		};
 		D2E2B7361A4A4FB500570C58 /* ofxXmlSettings */ = {
@@ -913,9 +958,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D29B99251A63F023000115C5 /* Particle.cpp in Sources */,
 				D21D0B8B1A4C046000CC3598 /* ofxUIBaseDraws.cpp in Sources */,
 				D24C21C61A49653D009D0796 /* ofxOscMessage.cpp in Sources */,
 				D24C21C81A49653D009D0796 /* ofxOscReceiver.cpp in Sources */,
+				D29B99241A63F023000115C5 /* oncVao.cpp in Sources */,
 				D21D0B9F1A4C046000CC3598 /* ofxUIMultiImageButton.cpp in Sources */,
 				D228B37B1A5FC2D8005F0404 /* ofxMotionerNode.cpp in Sources */,
 				D24C21C41A49653D009D0796 /* OscTypes.cpp in Sources */,
@@ -923,6 +970,7 @@
 				D228B33D1A5FB738005F0404 /* dpScoreSceneBodyGlobe.cpp in Sources */,
 				D21D0B9E1A4C046000CC3598 /* ofxUIMovingGraph.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				D29B99281A63F023000115C5 /* Predator.cpp in Sources */,
 				D21D0B941A4C046000CC3598 /* ofxUIFPSSlider.cpp in Sources */,
 				D2B4FD1E1A60DE1200C97A66 /* dpScoreSceneBodyFlow.cpp in Sources */,
 				D21D0B951A4C046000CC3598 /* ofxUIImage.cpp in Sources */,
@@ -954,10 +1002,12 @@
 				D21D0B8F1A4C046000CC3598 /* ofxUICircleSlider.cpp in Sources */,
 				D21D0BA61A4C046000CC3598 /* ofxUIScrollableCanvas.cpp in Sources */,
 				D21D0BAF1A4C046000CC3598 /* ofxUIToggle.cpp in Sources */,
+				D29B99261A63F023000115C5 /* ParticleController.cpp in Sources */,
 				D21D0BA41A4C046000CC3598 /* ofxUIRectangle.cpp in Sources */,
 				D21D0B9B1A4C046000CC3598 /* ofxUILabelButton.cpp in Sources */,
 				D21D0B891A4C046000CC3598 /* ofxUI2DGraph.cpp in Sources */,
 				D29034151A4D4ADE00577E04 /* dpScoreSceneVec2Grid.cpp in Sources */,
+				D29B99291A63F023000115C5 /* Rand.cpp in Sources */,
 				D21D0B991A4C046000CC3598 /* ofxUIImageToggle.cpp in Sources */,
 				D21D0BAA1A4C046000CC3598 /* ofxUISpectrum.cpp in Sources */,
 				D21D0BA81A4C046000CC3598 /* ofxUISortableList.cpp in Sources */,
@@ -971,6 +1021,7 @@
 				D24C21C71A49653D009D0796 /* ofxOscParameterSync.cpp in Sources */,
 				D21D0C0A1A4C0E2E00CC3598 /* ofxEvent.cpp in Sources */,
 				D228B37E1A5FC2D8005F0404 /* README.md in Sources */,
+				D29B99271A63F023000115C5 /* Perlin.cpp in Sources */,
 				D228B37C1A5FC2D8005F0404 /* ofxMotionerSkeleton.cpp in Sources */,
 				D29034161A4D4ADE00577E04 /* dpScoreSceneVec2Plotter.cpp in Sources */,
 				D21D0B931A4C046000CC3598 /* ofxUIFPS.cpp in Sources */,
@@ -999,6 +1050,7 @@
 				D21D0B8E1A4C046000CC3598 /* ofxUICanvas.cpp in Sources */,
 				D21D0C0C1A4C0E2E00CC3598 /* ofxException.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
+				D29B99231A63F023000115C5 /* SceneBodyBoids.cpp in Sources */,
 				D228B3791A5FC2D8005F0404 /* ofxMotioner.cpp in Sources */,
 				D21D0B8C1A4C046000CC3598 /* ofxUIBiLabelSlider.cpp in Sources */,
 			);

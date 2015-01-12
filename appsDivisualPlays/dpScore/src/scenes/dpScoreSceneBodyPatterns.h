@@ -31,7 +31,7 @@ public:
     void onUpdateSkeleton(ofxMotioner::EventArgs &e);
     
 private:
-    void drawSkeleton(ofxMot::SkeletonPtr skl);
+    void drawSkeleton(ofxMot::SkeletonPtr skl, int idx);
     
     string mSkeletonName;
     deque<ofxMot::SkeletonPtr> mSkeletons;
@@ -41,6 +41,8 @@ private:
     
     ofEasyCam mCam;
     unsigned long mFrame{0};
+    int mFocusNode{0};
+    const int kSkip{15};
 };
 
 DP_SCORE_NAMESPACE_END

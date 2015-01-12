@@ -35,7 +35,7 @@ private:
     vector<ofFloatColor> mCircleColors;
     ofVbo mCircleVbo;
     
-    float mSensorScale{0.3};
+    float mSensorScale{3.0f};
     ofVec2f mVec{0.f};
 };
 

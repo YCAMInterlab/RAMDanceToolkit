@@ -22,7 +22,7 @@ void SceneVec2SimpleGraph::initialize()
     mUICanvas->addLabel(getName());
     mUICanvas->addSpacer();
     mUICanvas->addIntSlider("Step", 1, 10, &mStep);
-    mUICanvas->addSlider("Sensor Scale", 0.f, 2.f, &mSensorScale);
+    mUICanvas->addSlider("Sensor Scale", 0.f, 5.f, &mSensorScale);
 }
 
 void SceneVec2SimpleGraph::shutDown()
@@ -106,6 +106,12 @@ void SceneVec2SimpleGraph::draw()
             ofVec2f v1 = mBuffer.at(i+1);
             v0 *= mult;
             v1 *= mult;
+            const float r = (kH-50.0f) * 0.5f;
+            v0.x = ofClamp(v0.x, -r, r);
+            v0.y = ofClamp(v0.y, -r, r);
+            v1.x = ofClamp(v1.x, -r, r);
+            v1.y = ofClamp(v1.y, -r, r);
+            
             ofLine(alignf(i*mStep), alignf(v0.x),
                    alignf((i+1)*mStep), alignf(v1.x));
             ofLine(alignf(i*mStep), alignf(v0.y),
@@ -116,7 +122,7 @@ void SceneVec2SimpleGraph::draw()
     
     ofPushMatrix();
     ofTranslate(0.f, alignf(kH*0.5f+5.f));
-    ofSetColor(255, 0, 0, 255);
+    ofSetColor(color::kMain, 255);
     ofSetLineWidth(2.f);
     const ofVec2f v = mVec * mult;
     ofLine(ofGetWidth()-14.f, alignf(v.x), ofGetWidth(), alignf(v.x));

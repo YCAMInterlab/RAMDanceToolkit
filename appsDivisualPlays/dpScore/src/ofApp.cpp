@@ -9,6 +9,7 @@
 #include "dpScoreSceneBodyPatterns.h"
 #include "dpScoreSceneBodyLines.h"
 #include "dpScoreSceneDataScroll.h"
+#include "SceneBodyBoids.h"
 
 using namespace dp::score;
 
@@ -47,6 +48,8 @@ void ofApp::setup()
     
     OFX_BEGIN_EXCEPTION_HANDLING
     
+    auto bodyBoids = SceneBase::Ptr(new SceneBodyBoids());
+    
     auto bodyScan = SceneBase::Ptr(new SceneBodyScan());
     auto bodyPattern = SceneBase::Ptr(new SceneBodyPatterns());
     auto bodyFlow = SceneBase::Ptr(new SceneBodyFlow());
@@ -59,6 +62,8 @@ void ofApp::setup()
     auto vec2Plotter = SceneBase::Ptr(new SceneVec2Plotter());
     
     auto dataScroll = SceneBase::Ptr(new SceneDataScroll());
+    
+    mSceneManager.add(bodyBoids);
     
     mSceneManager.add(bodyLines);
     mSceneManager.add(bodyScan);
@@ -83,7 +88,7 @@ void ofApp::setup()
     
     //mSceneManager.change(3);
     //mSceneManager.change("SceneVec2Clocks");
-    mSceneManager.change<SceneBodyLines>();
+    mSceneManager.change<SceneBodyBoids>();
     
     mSceneManager.getTabBar()->loadSettings(kSettingsDir, kSettingsPrefix);
     mSceneManager.getTabBar()->setVisible(false);
@@ -114,7 +119,7 @@ void ofApp::update()
     
     ofSetWindowTitle("dpScore : " + ofToString(ofGetFrameRate(), 2));
     
-    int n = 0;
+    bool updatedVector = false;
     bool updatedMotioner = false;
     ofVec2f v;
     while (mOscReceiver.hasWaitingMessages()) {
@@ -135,12 +140,13 @@ OFX_BEGIN_EXCEPTION_HANDLING
 OFX_END_EXCEPTION_HANDLING
         }
         else if (addr == kOscAddrPendulumVec2) {
-            if (m.getNumArgs() >= 3
-                && m.getArgType(1) == OFXOSC_TYPE_FLOAT
-                && m.getArgType(2) == OFXOSC_TYPE_FLOAT) {
-                v.x += m.getArgAsFloat(1);
-                v.y += m.getArgAsFloat(2);
-                n++;
+            if (m.getNumArgs() == 20) {
+                for (int i=0; i<10; i++) {
+                    v.x += m.getArgAsFloat(i*2+0);
+                    v.y += m.getArgAsFloat(i*2+1);
+                }
+                v /= 10.f;
+                updatedVector = true;
             }
             else {
                 ofLogError() << kOscAddrPendulumVec2 << ": receiving incorrect arguments";
@@ -152,8 +158,7 @@ OFX_END_EXCEPTION_HANDLING
         }
     }
     
-    if (n>0) {
-        v /= (float)n;
+    if (updatedVector) {
         ofxOscMessage m;
         m.setAddress(kAddrVec2);
         m.addFloatArg(v.x);

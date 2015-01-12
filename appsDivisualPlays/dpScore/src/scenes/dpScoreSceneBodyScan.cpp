@@ -117,8 +117,8 @@ void SceneBodyScan::draw()
     ofNoFill();
     
     if (mSkeleton) {
-        glPointSize(3.f);
-        ofSetColor(255, 90);
+        glPointSize(4.f);
+        ofSetColor(255, 128);
         ofSetLineWidth(1.5f);
         auto& joints = mSkeleton->getJoints();
         for (int i=0; i<joints.size(); i++) {
@@ -148,14 +148,14 @@ void SceneBodyScan::draw()
     ofRect(-kW*2.f, 0.f, kW*2.f, kH);
     ofRect(w, 0.f, kW*3.f, kH);
     glBegin(GL_QUADS);
-    glColor4f(0.f, 0.f, 0.f, 0.f); glVertex2f(0.f, 0.f);
-    glColor4f(0.f, 0.f, 0.f, 0.f); glVertex2f(0.f, kH);
-    glColor4f(0.f, 0.f, 0.f, 1.f); glVertex2f(w, kH);
-    glColor4f(0.f, 0.f, 0.f, 1.f); glVertex2f(w, 0.f);
+    glColor4f(0.f, 0.f, 0.f, 0.3f); glVertex2f(0.f, 0.f);
+    glColor4f(0.f, 0.f, 0.f, 0.3f); glVertex2f(0.f, kH);
+    glColor4f(0.f, 0.f, 0.f, 1.0f); glVertex2f(w, kH);
+    glColor4f(0.f, 0.f, 0.f, 1.0f); glVertex2f(w, 0.f);
     glEnd();
     ofSetColor(color::kMain, 255);
     ofSetLineWidth(1.f);
-    ofLine(0.f, 0.f, 0.f, alignf(kH));
+    ofLine(alignf(0.f), alignf(20.f), alignf(0.f), alignf(kH));
     
     ofPopMatrix();
     

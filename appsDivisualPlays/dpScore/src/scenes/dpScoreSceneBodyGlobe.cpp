@@ -146,6 +146,7 @@ void SceneBodyGlobe::draw()
         //if (i==mJointId && mFrameNum%60 > 0 && mFrameNum%60 < 10) {
         if (mFrameNum%120 > 0 && mFrameNum%120 < 30) {
             ofSetColor(255, 128);
+            //ofSetColor(color::kMain, 255);
             ofSetDrawBitmapMode(OF_BITMAPMODE_MODEL_BILLBOARD);
             ofPushMatrix();
             ofTranslate(p->dir * p->scale * 1.f);

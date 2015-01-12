@@ -57,13 +57,15 @@ void SceneBodyPatterns::exit()
 void SceneBodyPatterns::update(ofxEventMessage& m)
 {
     if (m.getAddress() == kAddrMotioner) {
+        mFrame++;
+        if (mFrame%60 == 0)  {
+            (++mFocusNode) %= ofxMot::NUM_JOINTS;
+        }
     }
 }
 
-void SceneBodyPatterns::drawSkeleton(ofxMot::SkeletonPtr skl)
+void SceneBodyPatterns::drawSkeleton(ofxMot::SkeletonPtr skl, int idx)
 {
-    mFrame++;
-    
     ofPushMatrix();
     ofPushStyle();
     
@@ -71,18 +73,18 @@ void SceneBodyPatterns::drawSkeleton(ofxMot::SkeletonPtr skl)
     
     ofNoFill();
     
-    ofSetColor(ofColor::white);
-    
     for (size_t i=0; i<joints.size(); i++) {
         ofSetLineWidth(1.0f);
         auto& n = skl->getJoint(i);
         n.transformGL();
         const float s = 5.f;
+        (n.id == mFocusNode || idx == 0) ? ofSetColor(color::kMain) : ofSetColor(ofColor::white);;
         ofDrawBox(ofVec3f::zero(), s);
         n.restoreTransformGL();
         
         if (!n.getParent()) continue;
     
+        ofSetColor(ofColor::white);
         ofLine(n.getGlobalPosition(), n.getParent()->getGlobalPosition());
     }
     
@@ -108,7 +110,7 @@ void SceneBodyPatterns::draw()
             if (idx<mSkeletons.size()) {
                 ofPushMatrix();
                 ofTranslate(0.f, -70.f);
-                drawSkeleton(mSkeletons.at(idx));
+                drawSkeleton(mSkeletons.at(idx), i + j * nX);
                 ofPopMatrix();
             }
             mCam.end();
@@ -135,11 +137,16 @@ void SceneBodyPatterns::onUpdateSkeleton(ofxMotioner::EventArgs &e)
     if (mSkeletonName=="") mSkeletonName = skl->getName();
     
     if (mSkeletonName == skl->getName()) {
-        auto copy = ofxMot::Skeleton::copy(skl);
-        mSkeletons.push_back(copy);
-        
-        while (mSkeletons.size() > kNumSkeletons) {
-            mSkeletons.pop_front();
+        if (mFrame % kSkip == 0) {
+            auto copy = ofxMot::Skeleton::copy(skl);
+            mSkeletons.push_back(copy);
+            
+            while (mSkeletons.size() > kNumSkeletons) {
+                mSkeletons.pop_front();
+            }
+        }
+        else if (mSkeletons.empty() == false) {
+            *(mSkeletons.end()-1) = ofxMot::Skeleton::copy(skl);
         }
     }
 }

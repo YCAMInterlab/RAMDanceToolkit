@@ -27,7 +27,7 @@ void SceneVec2Plotter::initialize()
     mUICanvas->setName(getName());
     mUICanvas->addLabel(getName());
     mUICanvas->addSpacer();
-    mUICanvas->addSlider("Sensor Scale", 0.f, 2.f, &mSensorScale);
+    mUICanvas->addSlider("Sensor Scale", 0.f, 5.0f, &mSensorScale);
 }
 
 void SceneVec2Plotter::shutDown()
@@ -77,39 +77,28 @@ void SceneVec2Plotter::draw()
     glPointSize(2.f);
     ofSetColor(255, 200);
     ofNoFill();
-    ofRect(5.f, 25.f, kW-10.f, kH-30.f);
+    ofRect(alignf(5.f), alignf(25.f), alignf(kW-10.f), alignf(kH-30.f));
     
     ofLine(v.x+kW*0.5f, 40.f, v.x+kW*0.5f, kH-20.f);
     ofLine(20.f, v.y+kH*0.5f, kW-20.f, v.y+kH*0.5f);
     
-    ofSetLineWidth(2.f);
-    ofSetColor(255, 0, 0, 255);
-    //ofLine(v.x+kW*0.5f, 40.f, v.x+kW*0.5f, 50.f);
-    //ofLine(v.x+kW*0.5f, kH-30.f, v.x+kW*0.5f, kH-20.f);
-    //ofLine(20.f, v.y+kH*0.5f, 30.f, v.y+kH*0.5f);
-    //ofLine(kW-30.f, v.y+kH*0.5f, kW-20.f, v.y+kH*0.5f);
-    
-    const float size = 10.f;
-    ofLine(v.x+kW*0.5f, v.y+kH*0.5f-size, v.x+kW*0.5f, v.y+kH*0.5f+size);
-    ofLine(v.x+kW*0.5f-size, v.y+kH*0.5f, v.x+kW*0.5f+size, v.y+kH*0.5f);
-    
     ofSetColor(255, 200);
     ofSetLineWidth(1.f);
-    const float step = 1910 / 300;
-    for (int i=2; i<=210; i++) {
+    const float step = (kW-10) / 382;
+    for (int i=2; i<=380; i++) {
         int height = 5;
         if (i%10==0) height = 8;
-        ofLine(alignf(5.f+i*step), 25.f, alignf(5.f+i*step), 25.f+height);
-        ofLine(alignf(5.f+i*step), kH - 5.f, alignf(5.f+i*step), kH - 5.f - height);
+        ofLine(alignf(5.f+i*step), alignf(25.f), alignf(5.f+i*step), alignf(25.f+height));
+        ofLine(alignf(5.f+i*step), alignf(kH - 5.f), alignf(5.f+i*step), alignf(kH - 5.f - height));
     }
     
     
-    const float stepY = (kH - 30.f) / 100.f;
-    for (int i=2; i<=98; i++) {
+    const float stepY = (kH - 30.f) / 175;
+    for (int i=2; i<=173; i++) {
         int width = 5.f;
         if (i%10 == 0) width = 8;
-        ofLine(5.f, alignf(25.f+i*stepY), 5.f+width, alignf(25.f+i*stepY));
-        ofLine(kW - 5.f, alignf(25.f+i*stepY), kW - 5.f - width, alignf(25.f+i*stepY));
+        ofLine(alignf(5.f), alignf(25.f+i*stepY), alignf(5.f+width), alignf(25.f+i*stepY));
+        ofLine(alignf(kW - 5.f), alignf(25.f+i*stepY), alignf(kW - 5.f - width), alignf(25.f+i*stepY));
     }
     
     
@@ -117,7 +106,12 @@ void SceneVec2Plotter::draw()
     ofTranslate(kW * 0.5f, kH * 0.5f);
     
     for (int i=mCircleBuffer.size()-1; i>=0; i--) {
-        mCircleVertices.at(i) = mCircleBuffer.at(i) * mult;
+        auto v = mCircleBuffer.at(i) * mult;
+        const float xr = (kW-30.f)*0.5f;
+        const float yr = (kH-60.f)*0.5f;
+        v.x = ofClamp(v.x, -xr, xr);
+        v.y = ofClamp(v.y, -yr+10.f, yr+10.f);
+        mCircleVertices.at(i) = v;
         const float a = i / (float)mCircleBuffer.size();
         //const float a = 1.f;
         mCircleColors.at(i).set(1.f, 1.f, 1.f, a);
@@ -137,9 +131,22 @@ void SceneVec2Plotter::draw()
     mCircleVbo.updateColorData(&mCircleColors.at(0), mCircleColors.size());
     
     mCircleVbo.draw(GL_LINE_STRIP, 0, mCircleVertices.size());
+    
     ofPopMatrix();
     ofPopStyle();
 
+    ofPushStyle();
+    ofSetLineWidth(2.f);
+    ofSetColor(color::kMain, 255);
+    //ofLine(v.x+kW*0.5f, 40.f, v.x+kW*0.5f, 50.f);
+    //ofLine(v.x+kW*0.5f, kH-30.f, v.x+kW*0.5f, kH-20.f);
+    //ofLine(20.f, v.y+kH*0.5f, 30.f, v.y+kH*0.5f);
+    //ofLine(kW-30.f, v.y+kH*0.5f, kW-20.f, v.y+kH*0.5f);
+    
+    const float size = 10.f;
+    ofLine(v.x+kW*0.5f, v.y+kH*0.5f-size, v.x+kW*0.5f, v.y+kH*0.5f+size);
+    ofLine(v.x+kW*0.5f-size, v.y+kH*0.5f, v.x+kW*0.5f+size, v.y+kH*0.5f);
+    ofPopStyle();
 }
 
 DP_SCORE_NAMESPACE_END
