@@ -63,8 +63,7 @@ void SceneVec2Clocks::draw()
     
     ofEnableAlphaBlending();
     
-    ofSetColor(ofColor::white, 255);
-    ofDrawBitmapString(getName(), 12.f, 16.f);
+    drawHeader();
     
     ofNoFill();
     const float step = 10.f;

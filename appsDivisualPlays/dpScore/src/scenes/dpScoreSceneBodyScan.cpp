@@ -153,14 +153,13 @@ void SceneBodyScan::draw()
     glColor4f(0.f, 0.f, 0.f, 1.f); glVertex2f(w, kH);
     glColor4f(0.f, 0.f, 0.f, 1.f); glVertex2f(w, 0.f);
     glEnd();
-    ofSetColor(ofColor::white, 128);
+    ofSetColor(color::kMain, 255);
     ofSetLineWidth(1.f);
     ofLine(0.f, 0.f, 0.f, alignf(kH));
     
     ofPopMatrix();
     
-    ofSetColor(ofColor::white, 255);
-    ofDrawBitmapString(getName(), 12.f, 16.f);
+    drawHeader();
     
     ofPopMatrix();
     ofPopStyle();

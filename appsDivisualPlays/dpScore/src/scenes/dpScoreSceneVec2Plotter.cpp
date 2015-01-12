@@ -67,8 +67,7 @@ void SceneVec2Plotter::draw()
     ofPushStyle();
     ofEnableAlphaBlending();
     
-    ofSetColor(ofColor::white, 255);
-    ofDrawBitmapString(getName(), 12.f, 16.f);
+    drawHeader();
     
     ofSetLineWidth(1.f);
     ofPushMatrix();

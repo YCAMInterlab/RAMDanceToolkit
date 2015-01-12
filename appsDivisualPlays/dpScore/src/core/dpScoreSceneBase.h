@@ -43,6 +43,8 @@ public:
     
     void guiEvent(ofxUIEventArgs &e) {}
     
+    void drawHeader();
+    
     // default value is nullptr
     ofxUICanvas* const getUICanvas() { return mUICanvas; }
     const ofxUICanvas* const getUICanvas() const { return mUICanvas; }

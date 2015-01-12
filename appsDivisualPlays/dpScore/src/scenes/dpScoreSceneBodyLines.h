@@ -25,9 +25,9 @@ public:
         void setupLines();
         
         void updatePoints();
-        void updateLines();
-        void customDraw() final override;
-        void drawLines();
+        void updateLines(bool focus);
+        void draw(bool focus);
+        void drawHUD(bool focus);
         
         vector<float> spd;
         vector<ofVec3f> axis;
@@ -39,9 +39,13 @@ public:
         ofVbo vbo;
         
         vector<ofVec3f> verticesLines;
-        vector<ofFloatColor> verticesColors;
+        vector<ofFloatColor> verticesColorsW;
+        vector<ofFloatColor> verticesColorsR;
         ofVbo vboLines;
         float scale{15.f};
+        bool pFocus;
+        
+        ofVec3f windowPos;
     };
     
     
@@ -60,10 +64,16 @@ public:
     void onUpdateSkeleton(ofxMotioner::EventArgs &e);
     
 private:
+    bool isFocus(int nodeId);
+    
     string mSkeletonName;
     ofEasyCam mCam;
     float mScale{20.f};
     ofxMot::SkeletonBase<Node>::Ptr mSkeleton;
+    
+    const int kFocusLoop{120};
+    int mFocusNode{0};
+    unsigned long mFrameNum{0};
 };
 
 DP_SCORE_NAMESPACE_END

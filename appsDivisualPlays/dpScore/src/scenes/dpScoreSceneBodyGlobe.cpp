@@ -105,6 +105,8 @@ void SceneBodyGlobe::exit()
 
 void SceneBodyGlobe::update(ofxEventMessage& m)
 {
+    mFrameNum++;
+    
     if (m.getAddress() == kAddrMotioner) {
         if (mMagnify) {
             mScale += ofGetLastFrameTime() * 2.f;
@@ -112,7 +114,7 @@ void SceneBodyGlobe::update(ofxEventMessage& m)
         }
         for (auto& p : mNodes) p->scale = mScale;
         
-        if (ofGetFrameNum()%60==0) {
+        if (mFrameNum%60==0) {
             mJointId++;
             mJointId %= ofxMot::NUM_JOINTS;
         }
@@ -125,9 +127,6 @@ void SceneBodyGlobe::draw()
     ofPushMatrix();
     ofEnableAlphaBlending();
     ofDisableDepthTest();
-    
-    ofSetColor(ofColor::white, 255);
-    ofDrawBitmapString(getName(), 12.f, 16.f);
     
     mCam.begin();
     ofPushMatrix();
@@ -144,8 +143,8 @@ void SceneBodyGlobe::draw()
         p->drawPoints();
         ofEnableBlendMode(OF_BLENDMODE_ADD);
         p->draw();
-        //if (i==mJointId && ofGetFrameNum()%60 > 0 && ofGetFrameNum()%60 < 10) {
-        if (ofGetFrameNum()%120 > 0 && ofGetFrameNum()%120 < 30) {
+        //if (i==mJointId && mFrameNum%60 > 0 && mFrameNum%60 < 10) {
+        if (mFrameNum%120 > 0 && mFrameNum%120 < 30) {
             ofSetColor(255, 128);
             ofSetDrawBitmapMode(OF_BITMAPMODE_MODEL_BILLBOARD);
             ofPushMatrix();
@@ -158,6 +157,8 @@ void SceneBodyGlobe::draw()
     }
     ofPopMatrix();
     mCam.end();
+    
+    drawHeader();
     
     ofPopMatrix();
     ofPopStyle();

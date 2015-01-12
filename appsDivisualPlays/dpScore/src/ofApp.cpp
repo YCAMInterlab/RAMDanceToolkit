@@ -53,14 +53,12 @@ void ofApp::setup()
     auto bodyGlobe = SceneBase::Ptr(new SceneBodyGlobe());
     auto bodyLines = SceneBase::Ptr(new SceneBodyLines());
     
-    auto dataScroll = SceneBase::Ptr(new SceneDataScroll());
-    
     auto vec2Simple = SceneBase::Ptr(new SceneVec2SimpleGraph());
     auto vec2Clocks = SceneBase::Ptr(new SceneVec2Clocks());
     auto vec2Grid = SceneBase::Ptr(new SceneVec2Grid());
     auto vec2Plotter = SceneBase::Ptr(new SceneVec2Plotter());
     
-    mSceneManager.add(dataScroll);
+    auto dataScroll = SceneBase::Ptr(new SceneDataScroll());
     
     mSceneManager.add(bodyLines);
     mSceneManager.add(bodyScan);
@@ -73,6 +71,8 @@ void ofApp::setup()
     mSceneManager.add(vec2Grid);
     mSceneManager.add(vec2Plotter);
     
+    mSceneManager.add(dataScroll);
+    
     // make another instance for existing class
     //auto vec2Simple2 = SceneBase::Ptr(new SceneVec2SimpleGraph());
     //vec2Simple2->setName("SceneVec2SimpleGraph 2"); // set unique name
@@ -82,7 +82,7 @@ void ofApp::setup()
     //vec2Simple->setName("SceneVec2SimpleGraph renamed");
     
     //mSceneManager.change(3);
-    //mSceneManager.change("dp::score::SceneVec2Clocks");
+    //mSceneManager.change("SceneVec2Clocks");
     mSceneManager.change<SceneBodyLines>();
     
     mSceneManager.getTabBar()->loadSettings(kSettingsDir, kSettingsPrefix);
@@ -115,32 +115,54 @@ void ofApp::update()
     ofSetWindowTitle("dpScore : " + ofToString(ofGetFrameRate(), 2));
     
     int n = 0;
+    bool updatedMotioner = false;
     ofVec2f v;
     while (mOscReceiver.hasWaitingMessages()) {
         ofxOscMessage m;
         mOscReceiver.getNextMessage(&m);
         const string addr = m.getAddress();
         
-        if (addr == kOscAddrPendulumVec2) {
-            v.x += m.getArgAsFloat(1);
-            v.y += m.getArgAsFloat(2);
-            n++;
+        if (addr == kOscAddrChangeScene) {
+OFX_BEGIN_EXCEPTION_HANDLING
+            if (m.getNumArgs() >= 1) {
+                if (m.getArgType(0) == OFXOSC_TYPE_INT32) {
+                    mSceneManager.change(m.getArgAsInt32(0));
+                }
+                else if (m.getArgType(0) == OFXOSC_TYPE_STRING){
+                    mSceneManager.change(m.getArgAsString(0));
+                }
+            }
+OFX_END_EXCEPTION_HANDLING
+        }
+        else if (addr == kOscAddrPendulumVec2) {
+            if (m.getNumArgs() >= 3
+                && m.getArgType(1) == OFXOSC_TYPE_FLOAT
+                && m.getArgType(2) == OFXOSC_TYPE_FLOAT) {
+                v.x += m.getArgAsFloat(1);
+                v.y += m.getArgAsFloat(2);
+                n++;
+            }
+            else {
+                ofLogError() << kOscAddrPendulumVec2 << ": receiving incorrect arguments";
+            }
         }
         else if (addr == ofxMotioner::OSC_ADDR) {
             ofxMotioner::updateWithOscMessage(m);
-            ofxEventMessage m;
-            m.setAddress(kAddrMotioner);
-            mSceneManager.update(m);
+            updatedMotioner = true;
         }
     }
     
     if (n>0) {
         v /= (float)n;
-        
-        ofxEventMessage m;
+        ofxOscMessage m;
         m.setAddress(kAddrVec2);
         m.addFloatArg(v.x);
         m.addFloatArg(v.y);
+        mSceneManager.update(m);
+    }
+    if (updatedMotioner) {
+        ofxOscMessage m;
+        m.setAddress(kAddrMotioner);
         mSceneManager.update(m);
     }
     

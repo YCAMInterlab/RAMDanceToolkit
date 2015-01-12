@@ -60,8 +60,10 @@ void SceneBodyPatterns::update(ofxEventMessage& m)
     }
 }
 
-static void _drawSkeleton(ofxMot::SkeletonPtr skl)
+void SceneBodyPatterns::drawSkeleton(ofxMot::SkeletonPtr skl)
 {
+    mFrame++;
+    
     ofPushMatrix();
     ofPushStyle();
     
@@ -95,20 +97,18 @@ void SceneBodyPatterns::draw()
     ofPushMatrix();
     ofEnableAlphaBlending();
     ofDisableDepthTest();
-    ofSetColor(ofColor::white, 255);
-    ofDrawBitmapString(getName(), 12.f, 16.f);
     
     const float stepX = alignf(kW/nX);
     const float stepY = alignf((kH-20.f)/nY);
     for (int j=0; j<nY; j++) {
         for (int i=0; i<nX; i++) {
-            ofRectangle viewport(i*stepX, j*stepY+20.f, stepX, stepY);
+            ofRectangle viewport(alignf(i*stepX), alignf(j*stepY+20.f), alignf(stepX), alignf(stepY));
             mCam.begin(viewport);
-            const int idx = i + j * nX;
+            const int idx = mSkeletons.size() - (i + j * nX) - 1;
             if (idx<mSkeletons.size()) {
                 ofPushMatrix();
                 ofTranslate(0.f, -70.f);
-                _drawSkeleton(mSkeletons.at(idx));
+                drawSkeleton(mSkeletons.at(idx));
                 ofPopMatrix();
             }
             mCam.end();
@@ -118,6 +118,10 @@ void SceneBodyPatterns::draw()
             ofRect(viewport);
         }
     }
+    ofLine(alignf(kW-1), alignf(20.f), alignf(kW-1), alignf(kH));
+    ofLine(alignf(0.f), alignf(kH-1), alignf(kW), alignf(kH-1));
+    
+    drawHeader();
     
     ofPopMatrix();
     ofPopStyle();

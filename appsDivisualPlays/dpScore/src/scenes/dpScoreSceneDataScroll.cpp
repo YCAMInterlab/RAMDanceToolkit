@@ -109,8 +109,8 @@ void SceneDataScroll::draw()
     ofPushMatrix();
     ofEnableAlphaBlending();
     ofDisableDepthTest();
-    ofSetColor(ofColor::white, 255);
-    ofDrawBitmapString(getName(), 12.f, 16.f);
+    
+    drawHeader();
     
     ofPushMatrix();
     for (int i=0; i<mSkeletons.size(); i++) {

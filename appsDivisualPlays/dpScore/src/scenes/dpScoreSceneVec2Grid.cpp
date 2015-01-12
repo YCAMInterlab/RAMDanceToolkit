@@ -70,8 +70,7 @@ void SceneVec2Grid::draw()
     ofPushStyle();
     ofEnableAlphaBlending();
     
-    ofSetColor(ofColor::white, 255);
-    ofDrawBitmapString(getName(), 12.f, 16.f);
+    drawHeader();
     
     mCam.begin();
     ofPushMatrix();

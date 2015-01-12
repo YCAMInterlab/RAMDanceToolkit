@@ -63,9 +63,7 @@ void SceneVec2SimpleGraph::draw()
     ofEnableAlphaBlending();
     ofPushMatrix();
     
-    ofSetColor(ofColor::white, 255);
-    
-    ofDrawBitmapString(getName(), 12.f, 16.f);
+    drawHeader();
     
     ofPushMatrix();
     ofTranslate(0.f, alignf(20.f));

@@ -38,7 +38,10 @@ void SceneBodyLines::Node::setupPoints()
 void SceneBodyLines::Node::setupLines()
 {
     verticesLines.clear();
-    verticesColors.clear();
+    verticesColorsW.clear();
+    verticesColorsR.clear();
+    ofFloatColor white = ofColor::white;
+    ofFloatColor red = color::kMain;
     
     auto verts = vertices;
     
@@ -56,18 +59,22 @@ void SceneBodyLines::Node::setupLines()
             verticesLines.push_back(v0);
             verticesLines.push_back(v1);
             if (j%2==0) {
-                verticesColors.push_back(ofFloatColor(1.f, 1.f, 1.f, 0.02f));
-                verticesColors.push_back(ofFloatColor(1.f, 1.f, 1.f, 0.06f));
+                verticesColorsW.push_back(ofFloatColor(white, 0.02f));
+                verticesColorsW.push_back(ofFloatColor(white, 0.06f));
+                verticesColorsR.push_back(ofFloatColor(red, 0.02f));
+                verticesColorsR.push_back(ofFloatColor(red, 0.06f));
             }
             else {
-                verticesColors.push_back(ofFloatColor(1.f, 1.f, 1.f, 0.06f));
-                verticesColors.push_back(ofFloatColor(1.f, 1.f, 1.f, 0.02f));
+                verticesColorsW.push_back(ofFloatColor(white, 0.06f));
+                verticesColorsW.push_back(ofFloatColor(white, 0.02f));
+                verticesColorsR.push_back(ofFloatColor(red, 0.06f));
+                verticesColorsR.push_back(ofFloatColor(red, 0.02f));
             }
         }
     }
     
     vboLines.setVertexData(&verticesLines.at(0), verticesLines.size(), GL_DYNAMIC_DRAW);
-    vboLines.setColorData(&verticesColors.at(0), verticesColors.size(), GL_DYNAMIC_DRAW);
+    vboLines.setColorData(&verticesColorsW.at(0), verticesColorsW.size(), GL_DYNAMIC_DRAW);
 }
 
 void SceneBodyLines::Node::updatePoints()
@@ -80,7 +87,7 @@ void SceneBodyLines::Node::updatePoints()
     vbo.updateVertexData(&vertices.at(0), kNumVertices);
 }
 
-void SceneBodyLines::Node::updateLines()
+void SceneBodyLines::Node::updateLines(bool focus)
 {
     verticesLines.clear();
     
@@ -104,37 +111,81 @@ void SceneBodyLines::Node::updateLines()
         }
     }
     vboLines.updateVertexData(&verticesLines.at(0), verticesLines.size());
-}
-
-void SceneBodyLines::Node::customDraw()
-{
-    glPointSize(2.f);
-    ofSetColor(255, 100);
-    vbo.draw(GL_POINTS, 0, vertices.size());
-}
-
-void SceneBodyLines::Node::drawLines()
-{
-    //ofSetColor(ofColor::red, 64);
-    //ofPushMatrix();
-    //ofMultMatrix(getGlobalTransformMatrix());
-    //ofCircle(ofPoint::zero(), 10.f);
-    //ofPopMatrix();
-    //
-    //if (getParent()) {
-    //    ofSetColor(ofColor::blue, 64);
-    //    auto* parent = static_cast<Node*>(getParent());
-    //    ofPushMatrix();
-    //    ofMultMatrix(parent->getGlobalTransformMatrix());
-    //    ofDrawBitmapString(ofxMot::getJointNameLower(parent->id), ofPoint::zero());
-    //    ofCircle(ofPoint::zero(), 5.f);
-    //    ofPopMatrix();
-    //}
+    if (pFocus != focus) {
+        if (focus)
+            vboLines.updateColorData(&verticesColorsR.at(0), verticesColorsR.size());
+        else
+            vboLines.updateColorData(&verticesColorsW.at(0), verticesColorsW.size());
+    }
     
-    ofSetColor(255, 255);
+    pFocus = focus;
+}
+
+void SceneBodyLines::Node::draw(bool focus)
+{
+    ofPushStyle();
+    glPointSize(2.f);
+    focus ? ofSetColor(color::kMain, 100) : ofSetColor(ofColor::white, 100);
+    transformGL();
+    vbo.draw(GL_POINTS, 0, vertices.size());
+    restoreTransformGL();
+    
     ofSetLineWidth(1.f);
     vboLines.draw(GL_LINES, 0, verticesLines.size());
+    
+    if (focus) {
+        windowPos = project(getGlobalPosition());
+        windowPos.x = alignf(windowPos.x);
+        windowPos.y = alignf(windowPos.y);
+        windowPos.z = 0.f;
+    }
+    ofPopStyle();
 }
+
+void SceneBodyLines::Node::drawHUD(bool focus)
+{
+    if (focus) {
+        stringstream ss;
+        //ss << ofxMot::getJointNameLower(id) << endl;
+        ss << getGlobalPosition() << endl;
+        ss << getGlobalOrientation() << endl;
+        
+        ofPushStyle();
+        ofSetColor(color::kMain, 255);
+        ofSetLineWidth(1.f);
+        float w0 = -150.f;
+        float w1 = -(kW * 0.5 - ::fabsf(kW*0.5f - windowPos.x) - 50.f);
+        float h = -50.f;
+        bool invert = false;
+        if (windowPos.x > kW * 0.5f) {
+            w0 *= -1.f;
+            w1 *= -1.f;
+            invert = true;
+        }
+        ofLine(windowPos, ofVec3f(windowPos.x + w0, windowPos.y + h, 0.f));
+        ofLine(ofVec3f(windowPos.x + w0, windowPos.y + h, 0.f), ofVec3f(windowPos.x + w1, windowPos.y + h, 0.f));
+        
+        if (invert) {
+            ofSetColor(color::kMain, 255);
+            //ofSetColor(ofColor::white, 255);
+            ofDrawBitmapString(ofxMot::getJointNameLower(id), ofPoint(windowPos.x + w0 + 300.f, windowPos.y + h - 4.f));
+            //ofSetColor(color::kMain, 255);
+            ofDrawBitmapString(ss.str(), ofPoint(windowPos.x + w0 + 300.f, windowPos.y + h + 12.f));
+        }
+        else {
+            ofSetColor(color::kMain, 255);
+            //ofSetColor(ofColor::white, 255);
+            ofDrawBitmapString(ofxMot::getJointNameLower(id), ofPoint(windowPos.x + w1, windowPos.y + h - 4.f));
+            //ofSetColor(color::kMain, 255);
+            ofDrawBitmapString(ss.str(), ofPoint(windowPos.x + w1, windowPos.y + h + 12.f));
+        }
+         
+        
+        ofPopStyle();
+    }
+}
+
+#pragma mark ___________________________________________________________________
 
 void SceneBodyLines::initialize()
 {
@@ -190,15 +241,21 @@ void SceneBodyLines::exit()
 
 void SceneBodyLines::update(ofxEventMessage& m)
 {
+    mFrameNum++;
+    
+    if (mFrameNum %60 == 0) {
+        (++mFocusNode) %= mSkeleton->getNumJoints();
+    }
+    
     if (m.getAddress() == kAddrMotioner && mSkeleton) {
-        int i=0;
         for (auto& mn : mSkeleton->getJoints()) {
-            const float t = ofNoise(ofGetElapsedTimef()*1.f + i * 5.f);
+            const float t = ofNoise(ofGetElapsedTimef()*1.f + mn.id * 5.f);
             mn.scale = ofMap(t, 0.f, 1.f, 1.f, 30.f);
             mn.updatePoints();
-            i++;
         }
-        for (auto& mn : mSkeleton->getJoints()) mn.updateLines();
+        for (auto& mn : mSkeleton->getJoints()) {
+            isFocus(mn.id) ? mn.updateLines(true) : mn.updateLines(false);
+        }
     }
 }
 
@@ -217,20 +274,20 @@ void SceneBodyLines::draw()
     
     if (mSkeleton) {
         for(auto& mn : mSkeleton->getJoints()) {
-            mn.draw();
-            mn.drawLines();
-            //if (mn.getParent()) {
-            //    ofSetColor(ofColor::red);
-            //    ofLine(mn.getGlobalPosition(), mn.getParent()->getGlobalPosition());
-            //}
+            isFocus(mn.id) ? mn.draw(true) : mn.draw(false);
         }
     }
     
     ofPopMatrix();
     mCam.end();
-   
-    ofSetColor(ofColor::white, 255);
-    ofDrawBitmapString(getName(), 12.f, 16.f);
+    
+    if (mSkeleton) {
+        for(auto& mn : mSkeleton->getJoints()) {
+            isFocus(mn.id) ? mn.drawHUD(true) : mn.drawHUD(false);
+        }
+    }
+    
+    drawHeader();
     
     ofPopMatrix();
     ofPopStyle();
@@ -248,4 +305,8 @@ void SceneBodyLines::onUpdateSkeleton(ofxMotioner::EventArgs &e)
     }
 }
 
+bool SceneBodyLines::isFocus(int nodeId)
+{
+    return (nodeId == mFocusNode && mFrameNum % kFocusLoop < kFocusLoop/2);
+}
 DP_SCORE_NAMESPACE_END

@@ -58,6 +58,7 @@ private:
     float mRotSpdX{2.12f};
     float mRotSpdY{4.35f};
     int mJointId{0};
+    unsigned long mFrameNum{0};
 };
 
 DP_SCORE_NAMESPACE_END
