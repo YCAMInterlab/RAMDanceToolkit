@@ -15,48 +15,35 @@
 #include "ramUtils.h"
 #include "ofxUI.h"
 
-struct ramOscSendTag{
-
-	ramOscSendTag(int port_, const string& addr_){
-		port = port_;
-		address = addr_;
-	}
-	int port;
-	string address;
-
-};
-
 class ramOscReceiveTag{
 public:
 
 	ramOscReceiveTag(const string& addr_){
-		string ad = addr_;
-		addr.push_back(ad);
+		addr.push_back(addr_);
 	}
 	ramOscReceiveTag(){
 	}
 
 	void addAddress(const string& addr_){
-		string ad = addr_;
-		addr.push_back(ad);
+		addr.push_back(addr_);
 	}
 
-	void addMessage(ofxOscMessage& m){
-		msg.push_back(ofxOscMessage(m));
+	void addMessage(const ofxOscMessage& m){
+		msg.push(m);
 
 		while (msg.size() > 128){
-			msg.erase(msg.begin());
+            msg.pop();
 		}
 	}
 
 	void getNextMessage(ofxOscMessage* m){
-		*m = msg[0];
-		msg.erase(msg.begin());
+		m->copy(msg.front());
+        msg.pop();
 	}
 
 	bool hasWaitingMessages() const {return (msg.size() > 0);};
 
-	vector<ofxOscMessage> msg;
+	queue<ofxOscMessage> msg;
 	vector<string> addr;
 
 };
@@ -67,8 +54,6 @@ public:
 	void setup(int receivePort);
 	void update();
 
-	void sendMessage(ofxOscMessage& m);
-	void addSenderTag(int port, const string& address);
 	void addReceiverTag(ramOscReceiveTag* ptr);
 
 	inline static ramOscManager& instance()
@@ -77,11 +62,6 @@ public:
 			__instance = new ramOscManager;
 		return *__instance;
 	}
-
-	ofxOscReceiver* getReceiver() {return &receiver;};
-    const ofxOscReceiver* getReceiver() const {return const_cast<ofxOscReceiver*>(&receiver);};
-	ofxOscSender* getSender() {return &sender;};
-    const ofxOscSender* getSender() const {return const_cast<ofxOscSender*>(&sender);};
 
 private:
 	static ramOscManager *__instance;
@@ -92,9 +72,6 @@ private:
 	~ramOscManager() {};
 
 	vector<ramOscReceiveTag*> receiverList;
-	vector<ramOscSendTag> senderlist;
-
-	ofxOscSender sender;
 	ofxOscReceiver receiver;
 
 };
