@@ -30,15 +30,13 @@ class ramOscReceiveTag{
 public:
 
 	ramOscReceiveTag(const string& addr_){
-		string ad = addr_;
-		addr.push_back(ad);
+		addr.push_back(addr_);
 	}
 	ramOscReceiveTag(){
 	}
 
 	void addAddress(const string& addr_){
-		string ad = addr_;
-		addr.push_back(ad);
+		addr.push_back(addr_);
 	}
 
 	void addMessage(ofxOscMessage& m){
