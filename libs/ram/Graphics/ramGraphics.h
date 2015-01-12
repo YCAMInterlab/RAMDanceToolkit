@@ -48,15 +48,6 @@ struct ramColor
 	static const ofColor SHADOW;
 };
 
-struct dpColor
-{
-    static const ofColor MAIN_COLOR;
-    static const ofColor PALE_PINK_LIGHT;
-    static const ofColor PALE_PINK_HEAVY;
-    static const ofColor DARK_PINK_LIGHT;
-    static const ofColor DARK_PINK_HEAVY;
-};
-
 #pragma mark - ramGraphics
 
 class ramFloor
