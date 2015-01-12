@@ -43,9 +43,17 @@ public:
 	
 	size_t getNumScenes() const;
 	size_t findtSceneIndex(string name) const;
-	ramBaseScene* getScene(size_t index) const;
+    ramBaseScene* getScene(size_t index);
+	inline const ramBaseScene* getScene(size_t index) const
+    {
+        return const_cast<ramBaseScene*>(getScene(index));
+    }
 	
 	ramActorsScene* getActorsScene();
+    inline const ramActorsScene* getActorsScene() const
+    {
+        return const_cast<ramActorsScene*>(getActorsScene());
+    }
 	void setShowAllActors(bool showAllActors);
 	bool getShowAllActors() const;
     
