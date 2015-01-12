@@ -21,6 +21,7 @@ void SceneBodyPatterns::initialize()
     mUICanvas->addSpacer();
     
     mCam.setDistance(200);
+    mCam.disableMouseInput();
 }
 
 void SceneBodyPatterns::shutDown()
@@ -40,6 +41,7 @@ void SceneBodyPatterns::enter()
     ofAddListener(ofxMotioner::updateSkeletonEvent,
                   this,
                   &SceneBodyPatterns::onUpdateSkeleton);
+    mCam.enableMouseInput();
 }
 
 void SceneBodyPatterns::exit()
@@ -49,12 +51,11 @@ void SceneBodyPatterns::exit()
     ofRemoveListener(ofxMotioner::updateSkeletonEvent,
                      this,
                      &SceneBodyPatterns::onUpdateSkeleton);
+    mCam.disableMouseInput();
 }
 
 void SceneBodyPatterns::update(ofxEventMessage& m)
 {
-    ofSetWindowTitle(getName() + ": " + ofToString(ofGetFrameRate(), 2));
-    
     if (m.getAddress() == kAddrMotioner) {
     }
 }
@@ -130,7 +131,7 @@ void SceneBodyPatterns::onUpdateSkeleton(ofxMotioner::EventArgs &e)
     if (mSkeletonName=="") mSkeletonName = skl->getName();
     
     if (mSkeletonName == skl->getName()) {
-        auto copy = ofxMot::copySkeleton(skl);
+        auto copy = ofxMot::Skeleton::copy(skl);
         mSkeletons.push_back(copy);
         
         while (mSkeletons.size() > kNumSkeletons) {

@@ -29,9 +29,9 @@ public:
         vector<ofVec3f> vertices;
         vector<ofVec3f> initialVertices;
         
-        const int kNumVertices = 10;
+        const int kNumVertices{10};
         ofVbo vbo;
-        float scale = 20.f;
+        float scale{20.f};
     };
     
     
@@ -53,7 +53,7 @@ private:
     string mSkeletonName;
     ofxMot::SkeletonPtr mSkeleton;
     ofEasyCam mCam;
-    float mScale = 300.f;
+    float mScale{300.f};
     vector<Node::Ptr> mNodes;
 };
 

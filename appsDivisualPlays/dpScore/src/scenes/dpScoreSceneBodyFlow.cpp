@@ -62,6 +62,7 @@ void SceneBodyFlow::initialize()
     mUICanvas->addSpacer();
     
     mCam.setDistance(200);
+    mCam.disableMouseInput();
     
     mPoints.assign(kNumSkeletons, ofPtr<Points>());
     for (auto& p : mPoints) {
@@ -86,6 +87,7 @@ void SceneBodyFlow::enter()
     ofAddListener(ofxMotioner::updateSkeletonEvent,
                   this,
                   &SceneBodyFlow::onUpdateSkeleton);
+    mCam.enableMouseInput();
 }
 
 void SceneBodyFlow::exit()
@@ -95,12 +97,11 @@ void SceneBodyFlow::exit()
     ofRemoveListener(ofxMotioner::updateSkeletonEvent,
                      this,
                      &SceneBodyFlow::onUpdateSkeleton);
+    mCam.disableMouseInput();
 }
 
 void SceneBodyFlow::update(ofxEventMessage& m)
 {
-    ofSetWindowTitle(getName() + ": " + ofToString(ofGetFrameRate(), 2));
-    
     if (m.getAddress() == kAddrMotioner) {
         for (auto p : mPoints) p->update();
     }
@@ -165,7 +166,7 @@ void SceneBodyFlow::onUpdateSkeleton(ofxMotioner::EventArgs &e)
     if (mSkeletonName=="") mSkeletonName = skl->getName();
     
     if (mSkeletonName == skl->getName()) {
-        auto copy = ofxMot::copySkeleton(skl);
+        auto copy = ofxMot::Skeleton::copy(skl);
         mSkeletons.push_back(copy);
         
         while (mSkeletons.size() > kNumSkeletons) {

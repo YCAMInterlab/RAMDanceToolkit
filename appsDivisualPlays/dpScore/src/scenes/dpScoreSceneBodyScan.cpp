@@ -63,6 +63,7 @@ void SceneBodyScan::initialize()
     }
     
     mCam.setDistance(200);
+    mCam.disableMouseInput();
 }
 
 void SceneBodyScan::shutDown()
@@ -82,6 +83,7 @@ void SceneBodyScan::enter()
     ofAddListener(ofxMotioner::updateSkeletonEvent,
                   this,
                   &SceneBodyScan::onUpdateSkeleton);
+    mCam.enableMouseInput();
 }
 
 void SceneBodyScan::exit()
@@ -91,12 +93,11 @@ void SceneBodyScan::exit()
     ofRemoveListener(ofxMotioner::updateSkeletonEvent,
                      this,
                      &SceneBodyScan::onUpdateSkeleton);
+    mCam.disableMouseInput();
 }
 
 void SceneBodyScan::update(ofxEventMessage& m)
 {
-    ofSetWindowTitle(getName() + ": " + ofToString(ofGetFrameRate(), 2));
-    
     if (m.getAddress() == kAddrMotioner) {
         for (auto& mn : mNodes) mn->update();
     }
@@ -117,7 +118,7 @@ void SceneBodyScan::draw()
     
     if (mSkeleton) {
         glPointSize(3.f);
-        ofSetColor(255, 64);
+        ofSetColor(255, 90);
         ofSetLineWidth(1.5f);
         auto& joints = mSkeleton->getJoints();
         for (int i=0; i<joints.size(); i++) {
