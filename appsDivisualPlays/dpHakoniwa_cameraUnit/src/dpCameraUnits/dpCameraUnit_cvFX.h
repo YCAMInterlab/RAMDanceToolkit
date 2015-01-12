@@ -37,6 +37,7 @@ public:
 	float mParam_Canny_Thr2;
 	float mParam_Threshold;
 
+	float mParam_accum_Time;
 	int   mParam_adpThreshold_blockSize;
 	int   mParam_adpThreshold_offset;
 	bool  mParam_adpThreshold_invert;
