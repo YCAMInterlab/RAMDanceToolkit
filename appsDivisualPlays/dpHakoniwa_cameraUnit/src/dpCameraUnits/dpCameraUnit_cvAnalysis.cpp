@@ -204,6 +204,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 	if (mEnableOptFlow){
 		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 1.0f) &&
 			(isFrameNew)) mOptFlow.calcOpticalFlow(pixGray);
+		
 		if ((ofGetFrameNum() % 150 == 0) || (ofGetKeyPressed(' '))) mOptFlow.resetFlow();
 
 		vector <ofVec2f> mot = mOptFlow.getMotion();

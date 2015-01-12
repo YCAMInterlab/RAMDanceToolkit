@@ -17,7 +17,9 @@ dpCameraUnit_cvFX::dpCameraUnit_cvFX(){
 	mGui.addSpacer();
 	mGui.addToggle("Blur", &mEnableBlur);
 	mGui.addSlider("BlurSize", 0.0, 40.0, &mParam_Blur);
+	mGui.addSpacer();
 	mGui.addToggle("AccumelateWeight", &mEnableAccumlateWeight);
+	mGui.addSlider("Time", 0.0, 1.0, &mParam_accum_Time);
 	mGui.addSpacer();
 	mGui.addToggle("AdaptiveThreshold", &mEnableAdaptiveThreshold);
 	mGui.addIntSlider("blockSize", 3, 255, &mParam_adpThreshold_blockSize);
@@ -72,7 +74,7 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 		}
 		if (mEnableAccumlateWeight) useAccumulateWeighted(&mGraySource,
 														  &mGraySource,
-														  &mAccum, 0.1);
+														  &mAccum, mParam_accum_Time);
 
 		mSource.update();
 		mGraySource.update();

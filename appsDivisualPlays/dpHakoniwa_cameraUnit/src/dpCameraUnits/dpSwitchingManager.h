@@ -10,17 +10,18 @@
 #define __dpHakoniwa_cameraUnit__dpSwitchingManager__
 
 #include "ofMain.h"
+#include "sw_1010F_SerialController.h"
 #include "ofxOsc.h"
 
-#define DP_DISP_PT_STGLEFT 0
-#define DP_DISP_PT_STGRIGHT 1
-#define DP_DISP_PT_UPSTAGE 2
-#define DP_DISP_PT_DOWNSTAGE 3
+#define DISPLAY_SHIMO_OKU 0
+#define DISPLAY_KAMI_OKU 1
+#define DISPLAY_SHIMO_TEMAE 2
+#define DISPLAY_KAMI_TEMAE 3
 
-#define DP_DISP_TYPE_HAKOVIS 0
-#define DP_DISP_TYPE_CAMERATHRU 1
-#define DP_DISP_TYPE_AUDIENCE 2
-#define DP_DISP_TYPE_FLOOR 3
+#define CVSW_1 4
+#define CVSW_2 5
+#define CVSW_3 6
+#define CVSW_4 7
 
 enum hakoniwaType{
 	HAKO_STRUGGLE,
@@ -29,13 +30,28 @@ enum hakoniwaType{
 	HAKO_PLINK_MAGNET,
 	HAKO_PLINK_PRISM,
 	HAKO_COLOROFWATER,
-	HAKO_SERVOPENDULUM
+	HAKO_SERVOPENDULUM,
+	HAKO_BLANK,
 };
 
-struct dpDisplaySelector{
-	int displayType;
-	int displayPoint_LR;
-	int displayPoint_UD;
+struct hakoniwaPresets{
+public:
+	hakoniwaPresets(){};
+	~hakoniwaPresets(){};
+
+	hakoniwaType	type;
+	string			CVPreset;
+	int				sourceCh;
+};
+
+class cvSlot{
+public:
+	bool			isEmpty = true;
+	hakoniwaType	hakoType;
+	int				sourceCh;
+	vector<int>		targetDisplay;
+	string			presetFile;
+	int				matrixInputCh;
 };
 
 class dpSwitchingManager{
@@ -45,18 +61,24 @@ public:
 	void update();
 	void draw();
 
-	void enableHakoniwa(hakoniwaType type, dpDisplaySelector disp);
-	void disableHakoniwa(hakoniwaType type);
-	void disableAllHakoniwa();
-
 	void receiveOscMessage(ofxOscMessage &m);
 
-	//to RDTK
-	void setScene(string sceneName, bool enable);
-	void setAllScene(bool enable);
+	void SelectHakoniwa(hakoniwaType type, int slot);
 
-	//to Switcher
-	void setCamera(int src,int dst);
+	void enableDisplay(hakoniwaType type,int displayNum,bool newHako);
+	void disableHakoniwa(hakoniwaType type);
+	void disableDisplay(int displayNum);
+
+	bool isSlave;
+
+	hakoniwaPresets* getHakoniwaPreset(hakoniwaType type);
+
+	vector<hakoniwaPresets*> hakoniwas;
+
+	ofxOscSender senderToSlave;
+
+	cvSlot mSlots[4];
+	sw_1010F_SerialController matrixSW;
 };
 
 #endif /* defined(__dpHakoniwa_cameraUnit__dpSwitchingManager__) */
