@@ -96,7 +96,7 @@ void ramTSVCoder::decode(ofBuffer buffer)
 //	return mSession;
 }
 
-bool ramTSVCoder::encode(ramSession &src)
+bool ramTSVCoder::encode(ramSession &src) const
 {
 	if (src.getNumFrames() <= 0)
 	{

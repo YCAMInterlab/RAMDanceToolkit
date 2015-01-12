@@ -25,22 +25,29 @@
 static ramSimpleShadow ram_simple_shadow;
 
 ramActorManager& ramGlobalShortcut::getActorManager() { return ramActorManager::instance(); }
+const ramActorManager& ramGlobalShortcut::getActorManager() const { return ramActorManager::instance(); }
 
 ramCommunicationManager& ramGlobalShortcut::getCommunicationManager() { return ramCommunicationManager::instance(); }
+const ramCommunicationManager& ramGlobalShortcut::getCommunicationManager() const { return ramCommunicationManager::instance(); }
 
 ramOscManager& ramGlobalShortcut::getOscManager() {return ramOscManager::instance(); }
+const ramOscManager& ramGlobalShortcut::getOscManager() const {return ramOscManager::instance(); }
 
-const vector<string>& ramGlobalShortcut::getNodeArrayNames() { return ramActorManager::instance().getNodeArrayNames(); }
+const vector<string>& ramGlobalShortcut::getNodeArrayNames() const { return ramActorManager::instance().getNodeArrayNames(); }
 
-bool ramGlobalShortcut::hasNodeArray(const string &key) { return ramActorManager::instance().hasNodeArray(key); }
+bool ramGlobalShortcut::hasNodeArray(const string &key) const { return ramActorManager::instance().hasNodeArray(key); }
 
-ramNodeArray& ramGlobalShortcut::getNodeArray(string name) { return ramActorManager::instance().getNodeArray(name); }
+ramNodeArray& ramGlobalShortcut::getNodeArray(const string &name) { return ramActorManager::instance().getNodeArray(name); }
 
-size_t ramGlobalShortcut::getNumNodeArray() { return ramActorManager::instance().getNumNodeArray(); }
+const ramNodeArray& ramGlobalShortcut::getNodeArray(const string &name) const { return ramActorManager::instance().getNodeArray(name); }
+
+size_t ramGlobalShortcut::getNumNodeArray() const { return ramActorManager::instance().getNumNodeArray(); }
 
 ramNodeArray& ramGlobalShortcut::getNodeArray(int index) { return ramActorManager::instance().getNodeArray(index); }
 
-vector<ramNodeArray> ramGlobalShortcut::getAllNodeArrays() { return ramActorManager::instance().getAllNodeArrays(); }
+const ramNodeArray& ramGlobalShortcut::getNodeArray(int index) const { return ramActorManager::instance().getNodeArray(index); }
+
+vector<ramNodeArray> ramGlobalShortcut::getAllNodeArrays() const { return ramActorManager::instance().getAllNodeArrays(); }
 
 ramCameraManager& ramGlobalShortcut::getCameraManager() { return ramCameraManager::instance(); }
 
@@ -72,7 +79,7 @@ void ramInitialize(int oscPort, bool usePresetScenes)
 
 }
 
-string ramToResourcePath(string path)
+string ramToResourcePath(const string& path)
 {
 	string path_prefix;
 
