@@ -84,11 +84,12 @@ void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
 	if (m.getAddress() == "/dp/master/switch/enable"){
 		SelectHakoniwa(hakoniwaType(m.getArgAsInt32(0)),
 					   m.getArgAsInt32(1));
-		ofxOscMessage m;
-		m.setAddress("/dp/toSlave/switch/enable");
-		m.addIntArg(m.getArgAsInt32(0));
-		m.addIntArg(m.getArgAsInt32(1));
-		senderToSlave.sendMessage(m);
+
+		ofxOscMessage mm;
+		mm.setAddress("/dp/toSlave/switch/enable");
+		mm.addIntArg(m.getArgAsInt32(0));
+		mm.addIntArg(m.getArgAsInt32(1));
+		senderToSlave.sendMessage(mm);
 	}
 
 	if (m.getAddress() == "/dp/master/switch/disable"){
