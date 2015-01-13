@@ -65,10 +65,6 @@ void SceneVec2Plotter::update(ofxEventMessage& m)
 void SceneVec2Plotter::draw()
 {
     ofPushStyle();
-    ofEnableAlphaBlending();
-    
-    drawHeader();
-    
     ofSetLineWidth(1.f);
     ofPushMatrix();
     const float mult = kH / 40.f * mSensorScale;

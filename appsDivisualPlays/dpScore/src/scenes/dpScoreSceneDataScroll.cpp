@@ -105,21 +105,11 @@ void SceneDataScroll::drawSkeleton(int index)
 
 void SceneDataScroll::draw()
 {
-    ofPushStyle();
-    ofPushMatrix();
-    ofEnableAlphaBlending();
-    ofDisableDepthTest();
-    
-    drawHeader();
-    
     ofPushMatrix();
     for (int i=0; i<mSkeletons.size(); i++) {
         drawSkeleton(i);
     }
     ofPopMatrix();
-    
-    ofPopMatrix();
-    ofPopStyle();
 }
 
 #pragma mark ___________________________________________________________________

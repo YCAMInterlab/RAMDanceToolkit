@@ -66,12 +66,7 @@ void SceneVec2Grid::update(ofxEventMessage& m)
 }
 
 void SceneVec2Grid::draw()
-{
-    ofPushStyle();
-    ofEnableAlphaBlending();
-    
-    drawHeader();
-    
+{    
     mCam.begin();
     ofPushMatrix();
     ofTranslate(-ofGetWidth()*0.7f, -150.f, 0.f);
@@ -114,8 +109,6 @@ void SceneVec2Grid::draw()
     mGridVbo.draw(GL_POINTS, 0, mGridVertices.size());
     ofPopMatrix();
     mCam.end();
-    
-    ofPopStyle();
 }
 
 DP_SCORE_NAMESPACE_END

@@ -59,11 +59,7 @@ void SceneVec2SimpleGraph::update(ofxEventMessage& m)
 
 void SceneVec2SimpleGraph::draw()
 {
-    ofPushStyle();
-    ofEnableAlphaBlending();
     ofPushMatrix();
-    
-    drawHeader();
     
     ofPushMatrix();
     ofTranslate(0.f, alignf(20.f));
@@ -128,7 +124,6 @@ void SceneVec2SimpleGraph::draw()
     ofLine(ofGetWidth()-14.f, alignf(v.x), ofGetWidth(), alignf(v.x));
     ofLine(ofGetWidth()-14.f, alignf(v.y), ofGetWidth(), alignf(v.y));
     ofPopMatrix();
-    ofPopStyle();
 }
 
 DP_SCORE_NAMESPACE_END

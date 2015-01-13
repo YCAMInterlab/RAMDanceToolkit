@@ -57,15 +57,8 @@ void SceneVec2Clocks::update(ofxEventMessage& m)
 
 void SceneVec2Clocks::draw()
 {
-    ofPushStyle();
-    
     ofSetCircleResolution(64);
     
-    ofEnableAlphaBlending();
-    
-    drawHeader();
-    
-    ofNoFill();
     const float step = 10.f;
     ofSetColor(255, 50);
     
@@ -115,8 +108,6 @@ void SceneVec2Clocks::draw()
         }
         ofPopMatrix();
     }
-    ofPopStyle();
-
 }
 
 DP_SCORE_NAMESPACE_END
