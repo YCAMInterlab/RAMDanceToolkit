@@ -18,26 +18,6 @@
 #include "testApp.h"
 #include "dpConstants.h"
 
-struct : public ramBaseScene {
-    void drawActor(const ramActor &actor) { ramDrawBasicActor(actor); }
-    string getName() const { return "TestSceneA"; }
-} testSceneA;
-
-struct : public ramBaseScene {
-    void drawActor(const ramActor &actor) { ramDrawBasicActor(actor); }
-    string getName() const { return "TestSceneB"; }
-} testSceneB;
-
-struct : public ramBaseScene {
-    void drawActor(const ramActor &actor) { ramDrawBasicActor(actor); }
-    string getName() const { return "TestSceneC"; }
-} testSceneC;
-
-struct : public ramBaseScene {
-    void drawActor(const ramActor &actor) { ramDrawBasicActor(actor); }
-    string getName() const { return "TestSceneD"; }
-} testSceneD;
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
