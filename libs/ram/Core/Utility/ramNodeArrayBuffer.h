@@ -64,12 +64,14 @@ public:
 	ramNodeArray& get(size_t index)
 	{
 		if (index >= buffer.size()) return buffer.back();
-		return buffer[index];
+        return buffer.at(index);
 	}
 
     inline const ramNodeArray& get(size_t index) const
     {
-        return const_cast<ramNodeArray &>(get(index));
+        if (index >= buffer.size()) return buffer.back();
+        return buffer.at(index);
+
     }
     
 	size_t getSize() const { return buffer.size(); }
