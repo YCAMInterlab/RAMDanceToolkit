@@ -9,7 +9,7 @@
 #include "dpScoreSceneBodyPatterns.h"
 #include "dpScoreSceneBodyLines.h"
 #include "dpScoreSceneDataScroll.h"
-#include "SceneBodyBoids.h"
+#include "dpScoreSceneBodyBoids.h"
 
 using namespace dp::score;
 
@@ -31,7 +31,7 @@ using namespace dp::score;
 
 #if 0
 
-身体系 5/20
+身体系 6/20
 箱庭系 5/20
 
 #endif
@@ -49,7 +49,6 @@ void ofApp::setup()
     OFX_BEGIN_EXCEPTION_HANDLING
     
     auto bodyBoids = SceneBase::Ptr(new SceneBodyBoids());
-    
     auto bodyScan = SceneBase::Ptr(new SceneBodyScan());
     auto bodyPattern = SceneBase::Ptr(new SceneBodyPatterns());
     auto bodyFlow = SceneBase::Ptr(new SceneBodyFlow());
@@ -63,13 +62,12 @@ void ofApp::setup()
     
     auto dataScroll = SceneBase::Ptr(new SceneDataScroll());
     
-    mSceneManager.add(bodyBoids);
-    
     mSceneManager.add(bodyLines);
-    mSceneManager.add(bodyScan);
     mSceneManager.add(bodyPattern);
+    mSceneManager.add(bodyScan);
     mSceneManager.add(bodyFlow);
     mSceneManager.add(bodyGlobe);
+    mSceneManager.add(bodyBoids);
     
     mSceneManager.add(vec2Simple);
     mSceneManager.add(vec2Clocks);
@@ -182,7 +180,16 @@ void ofApp::draw()
     OFX_BEGIN_EXCEPTION_HANDLING
     
     mSceneManager.draw();
-        
+    
+    if (mInvert) {
+        ofPushStyle();
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
+        ofSetColor(ofColor::white);
+        ofRect(ofGetWindowRect());
+        ofPopStyle();
+    }
+    
     OFX_END_EXCEPTION_HANDLING
 }
 
@@ -210,6 +217,9 @@ void ofApp::keyPressed(int key)
             break;
         case 's':
             mSceneManager.getTabBar()->saveSettings(kSettingsDir, kSettingsPrefix);
+            break;
+            case 'i':
+            mInvert ^= true;
             break;
         case OF_KEY_LEFT:
             mSceneManager.prev();
