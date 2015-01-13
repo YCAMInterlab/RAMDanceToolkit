@@ -17,11 +17,21 @@
 
 #include "testApp.h"
 
-#include "ramMotionExtractorExampleScene.h"
-#include "HakoniwaTheta.h"
+#include "dpHakoniwaStruggle.h"
+dpHakoniwaStruggle hakoniwa;
 
-ramMotionExtractorExampleScene extractorScene;
+#include "dpHakoVisStruggle.h"
+dpHakoVisStruggle vis;
+
+#include "HakoniwaParallelLink_Base.h"
+HakoniwaParallelLink_Base hakoniwaParallelLink;
+
+#include "HakoniwaGearMove.h"
+HakoniwaGearMove hakoniwaGearMove;
+
+#include "HakoniwaTheta.h"
 HakoniwaTheta HakoniwaTheta;
+
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -40,7 +50,10 @@ void testApp::setup()
 	/// - EmptyScene::update, draw, and other method will be triggerd by ramSceneManager
 	/// - the scene added to ramSceneManager will appeard on GUI automaticaly
 	ramSceneManager& sceneManager = ramSceneManager::instance();
-	sceneManager.addScene(extractorScene.getPtr());
+	sceneManager.addScene(hakoniwa.getPtr());
+    sceneManager.addScene(vis.getPtr());
+    sceneManager.addScene( hakoniwaParallelLink.getPtr());
+    sceneManager.addScene( hakoniwaGearMove.getPtr());
     sceneManager.addScene(HakoniwaTheta.getPtr());
 }
 
