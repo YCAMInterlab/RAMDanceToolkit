@@ -19,8 +19,45 @@ frozenIce::frozenIce(){
 }
 
 void frozenIce::setup(){
+    //OSC送信用の値の初期設定
     hantei  = 0;
+    fanVal = 0;
+    
+    //ファンの初期設定
+    fanStart = true;
+    
+    //ペルチェ素子の初期設定
+    frozing = false;
+    melting = true;
+    
+    //Dancer Control
+    fixationTime = 500.0;
+    speedThreshold = 2.0;
+    
+    //Manual Control
+    manualControl = false;
 }
+
+
+//プログラム非選択時に、DMXを止める
+//！！！うまく出来ていないので、後で要確認！！！！
+//====================================================
+void frozenIce::onDisabled(){
+    
+    cout << "ondisebled " << endl;
+    int countExit = 0;
+    countExit++;
+    
+    if(countExit > 10){
+        fanStart = false;
+        manualControl = true;
+        hantei = 0;
+        fanVal = 0;
+        countExit = 0;
+    }
+    cout << "Count Exit : " << countExit << endl;
+}
+//====================================================
 
 void frozenIce::setupControlPanel(){
     
@@ -30,11 +67,26 @@ void frozenIce::setupControlPanel(){
     gui->addToggle("Dump"		, &mDrawDump);
     
     //--------
-    gui->addToggle("Start"		, &iceStart);
+    gui->addSpacer();
+    gui->addToggle("Fan ON/OFF"		, &fanStart);
+    
+    //Manual Control
+    gui->addSpacer();
+    gui->addToggle("Manual Control"		, &manualControl);
     gui->addToggle("Melting"		, &melting);
     gui->addToggle("Frozing"		, &frozing);
+    
+    //Dancer Control
+    gui->addSpacer();
+    gui->addSlider("Fixation Time", 0.0, 500.0, &fixationTime);
+    gui->addSlider("Speed Threshold", 0.0, 5.0, &speedThreshold);
     gui->addToggle("MeltingFromDancer"		, &iceMelting);
     gui->addToggle("FrozingFromDancer"		, &iceFrozing);
+    
+    //Distance Control
+    gui->addSpacer();
+    gui->addToggle("Distance Control"		, &distanceControl);
+    gui->addSlider("Distance Threshold", 0.0, 50.0, &distanceThreshold);
     //--------
     
     gui->addSpacer();
@@ -51,32 +103,35 @@ void frozenIce::update(){
     /*=== update ===*/
     motionExtractor.update();
     
+    if(ofGetFrameNum() % 10 == 0){
+    //Manual Control
+    //操作するのはMeltingのトグルのみ
     //----------
-    if(frozing == true){
-        hantei = 1;
-        melting = false;
+    
+    if(manualControl == true){
         iceFrozing = false;
         iceMelting = false;
-        count++;
-    }else{
-        count = 0;
+    
+        if(melting == true){
+            frozing = false;
+            hantei = 0;
+        }else{
+            frozing = true;
+            hantei = 1;
+        }
+        
     }
+    //----------
     
-    if(melting == true){
-        hantei = 0;
-        frozing = false;
-        iceFrozing = false;
-        iceMelting = false;
-    }
-    
-    
+    //Dancer Control [Frozing]
+    //500フレーム以降は、5フレームに1回溶ける（0を送る）
     if(iceFrozing == true){
         frozingCount++;
-        if(frozingCount > 500){
-            if(frozingCount%2 == 0){
-                hantei = 1;
-            }else{
+        if(frozingCount > fixationTime){
+            if(frozingCount%5 == 0){
                 hantei = 0;
+            }else{
+                hantei = 1;
             }
         }else{
             hantei = 1;
@@ -85,10 +140,13 @@ void frozenIce::update(){
         frozingCount = 0;
     }
     
+    
+    //Dancer Control [Melting]
+    //500フレーム以降は、5フレームに1回凍る（1を送る）
     if(iceMelting == true){
         meltingCount++;
-        if(meltingCount > 500){
-            if(meltingCount%2 == 0){
+        if(meltingCount > fixationTime){
+            if(meltingCount%5 == 0){
                 hantei = 1;
             }else{
                 hantei = 0;
@@ -125,7 +183,7 @@ void frozenIce::update(){
     
     //ダンサー(0)が動くと溶ける
     //-------------------
-    if(motionExtractor.getVelocitySpeedAt(0) > 2){
+    if(motionExtractor.getVelocitySpeedAt(0) > speedThreshold){
         if(iceFrozing == true){
             iceFrozing = false;
         }
@@ -141,8 +199,40 @@ void frozenIce::update(){
             iceMelting = false;
         }
     }
+    
+    //-------------------
+    
+    //ファンを回すか否か
+    //-------------------
+    if(fanStart == true){
+        fanVal = 1;
+    }else{
+        fanVal = 0;
+    }
     //-------------------
 
+    //Distance Control
+    //-------------------
+    //指定したノード間の距離が[distanceThreshold]より大きいと溶け、小さいと凍る
+    if(distanceControl == true){
+        if(motionExtractor.getDistanceAt(0, 1) > distanceThreshold){
+            if(iceFrozing == true){
+                iceFrozing = false;
+            }
+            if(iceMelting == false){
+                iceMelting = true;
+            }
+        }else{
+            if(iceFrozing == false){
+                iceFrozing = true;
+            }
+            if(iceMelting == true){
+                iceMelting = false;
+            }
+        }
+    }
+    //-------------------
+    
     
     //----------
     
@@ -150,8 +240,10 @@ void frozenIce::update(){
     ofxOscMessage m;
     m.setAddress("/dp/hakoniwa/frozenIce");
     //m.addFloatArg(hantei);
+    m.addIntArg(fanVal);
     m.addIntArg(hantei);
     sender.sendMessage(m);
+    }
 }
 
 void frozenIce::draw(){
@@ -174,9 +266,9 @@ void frozenIce::draw(){
     if (mDrawDump)		example_drawDump();
     
     //----------
-    cout << "cold    : " << count << ":" << hantei << endl;
-    cout << "frozing : " << frozingCount << ":" << hantei << endl;
-    cout << "melting : " << meltingCount << ":" << hantei << endl;
+    cout << "frozing    : " << frozingCount << ":" << hantei << endl;
+    cout << "melting    : " << meltingCount << ":" << hantei << endl;
+//    cout << "distance    : " << motionExtractor.getDistanceAt(0, 1) << endl;
     //----------
     
 }
@@ -242,4 +334,7 @@ void frozenIce::example_drawDump(){
     
     ofPopMatrix();
     
+}
+
+void frozenIce::exit(){
 }

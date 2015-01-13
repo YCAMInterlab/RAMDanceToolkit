@@ -29,11 +29,43 @@ public:
     }
     
     //----------
-    ofBoxPrimitive point;
-    float radiusX, radiusY;
+    //共通
+    int pointBoxSize;
+    float defaultZ_val;
+    
+    //eyeCamera setup
+    ofPoint camera1;
+    ofPoint camera2;
+    ofPoint camera3;
+    ofPoint camera4;
+    float camera1_x;
+    float camera1_y;
+    float camera1_z;
+    int camera1_AngleX;
+    int camera1_AngleY;
+    
+    //Manual Control
+    bool manualControl;
+    bool reset;
+    float posX;
+    float posY;
+    float posZ;
+    
+    //Auto Turn
+    bool autoTurn;
+    ofPoint pos;
+    float radius;
     float phase;
     float speed;
-    float roll, pitch, yaw;
+    
+    //Node Control
+    bool nodeControl;
+    ofPoint nodeVal;
+    
+    //servo value
+    bool sendServo;
+    int servoX_val;
+    int servoY_val;
     //----------
     
 private:
