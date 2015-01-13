@@ -5,7 +5,7 @@ void ofApp::setup(){
 	ofBackground(70, 80, 70);
 	ofSetFrameRate(30);
 
-	receiver.setup(10000);
+	receiver.setup(12400);
 	dpSwitcher.setup();
 }
 
