@@ -27,6 +27,8 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.addToggle("Flow_FarneBack",	&mEnableOptFlowFarne);
 	mGui.addToggle("Mean",				&mEnableMean);
 	mGui.addToggle("Pixelate",			&mEnablePixelate);
+	mGui.addIntSlider("Res_X", 1, 60, &mParamPixelate_ResX);
+	mGui.addIntSlider("Res_Y", 1, 60, &mParamPixelate_ResY);
 //	mGui.addToggle("FAST",				&mEnableFAST);
 //	mGui.addToggle("Histgram",			&mEnableHistgram);
 	mGui.addSpacer();
@@ -69,6 +71,9 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mEnableFAST				= false;
 	mEnableMean				= false;
 	mEnableHistgram			= false;
+	
+	mParamPixelate_ResX		= 10;
+	mParamPixelate_ResY		= 10;
 	
 	mOptFlow_filterSpd = 100.0;
 
@@ -166,8 +171,8 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 
 #pragma mark Pixelate
 	if (mEnablePixelate){
-		int res_x = 10;
-		int res_y = 10;
+		int res_x = mParamPixelate_ResX;
+		int res_y = mParamPixelate_ResY;
 
 		int64_t pixelInt = 0;
 		int64_t Pixelcounter = 0;

@@ -59,6 +59,19 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 		ofxCv::copy(pix, mSource);
 		ofxCv::convertColor(mSource, mGraySource, CV_RGB2GRAY);
 
+		if (mEnableBackground){
+			if (mBackgroundNeedsReflesh){
+				mBackgroundNeedsReflesh = false;
+				ofxCv::copy(mGraySource, mGraySource_background);
+				mGraySource_background.update();
+			}else{
+				ofxCv::absdiff(mGraySource, mGraySource_background, mGraySource);
+			}
+			
+		}else{
+			mBackgroundNeedsReflesh = true;
+		}
+		
 		if (mEnableBlur)		ofxCv::blur(mGraySource, mGraySource, mParam_Blur);
 		if (mEnableThreshold)	ofxCv::threshold(mGraySource, mGraySource, mParam_Threshold);
 		if (mEnableAdaptiveThreshold) useAdaptiveThreshold(mGraySource,
@@ -69,19 +82,6 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 														   mParam_adpThreshold_gauss);
 		if (mEnableInvert)		ofxCv::invert(mGraySource);
 		if (mEnableCanny)		ofxCv::Canny(mGraySource, mGraySource, mParam_Canny_Thr2, mParam_Canny_Thr1);
-
-		if (mEnableBackground){
-			if (mBackgroundNeedsReflesh){
-				mBackgroundNeedsReflesh = false;
-				ofxCv::copy(mGraySource, mGraySource_background);
-				mGraySource_background.update();
-			}else{
-				ofxCv::absdiff(mGraySource, mGraySource_background, mGraySource);
-			}
-
-		}else{
-			mBackgroundNeedsReflesh = true;
-		}
 
 		if (mEnableFrameDiff){
 			ofxCv::absdiff(mGraySource, mGraySource_forDiff, mGraySource_forDiff);
