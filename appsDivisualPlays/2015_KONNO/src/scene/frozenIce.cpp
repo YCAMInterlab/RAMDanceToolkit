@@ -212,7 +212,7 @@ void frozenIce::update(){
     //-------------------
 
     //Distance Control
-    //-------------------
+    //--------------------
     //指定したノード間の距離が[distanceThreshold]より大きいと溶け、小さいと凍る
     if(distanceControl == true){
         if(motionExtractor.getDistanceAt(0, 1) > distanceThreshold){
