@@ -45,10 +45,11 @@ void testApp::setup()
 	
     sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
     
-    sceneManager.enableScreen("TestSceneA", 0);
-    sceneManager.enableScreen("TestSceneB", 1);
-    sceneManager.enableAllScreens("TestSceneC");
-    sceneManager.disableScreens("TestSceneD");
+    sceneManager.setScreen(sceneManager.findtSceneIndex("TestSceneA"), 1, false);
+    sceneManager.setScreen(sceneManager.findtSceneIndex("TestSceneB"), 0, false);
+    
+    sceneManager.setAllScreens(sceneManager.findtSceneIndex("TestSceneC"), true);
+    sceneManager.setAllScreens(sceneManager.findtSceneIndex("TestSceneD"), false);
 }
 
 //--------------------------------------------------------------
