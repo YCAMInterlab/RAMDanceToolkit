@@ -193,7 +193,7 @@ void ramSceneManager::updateOsc()
                 setScreen(sceneIdx, 0, screen0);
                 setScreen(sceneIdx, 1, screen1);
                 
-                ofLogNotice("ramSceneManager") << boolalpha << header + ": " << sceneName << ", " << enabled << ", " << screen0 << ", " << screen1;
+                ofLogNotice("ramSceneManager") << boolalpha << header << sceneName << ", " << enabled << ", " << screen0 << ", " << screen1;
             }
         }
         catch(exception& e) {
