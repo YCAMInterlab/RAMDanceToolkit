@@ -346,8 +346,11 @@ float ramMotionExtractor::getDistanceAt(int port_A, int port_B){
 	ofVec3f v1 = ofVec3f(0,0,0);
 	ofVec3f v2 = ofVec3f(0,0,0);
 
-	if ((0 < port_A) && (port_A < mMotionPort.size()) &&
-		(0 < port_B) && (port_B < mMotionPort.size())){
+	if ((0 <= port_A) && (port_A < mMotionPort.size()) &&
+		(0 <= port_B) && (port_B < mMotionPort.size())){
+
+		v1 = getPositionAt(port_A);
+		v2 = getPositionAt(port_B);
 
 		return (v1 - v2).length();
 
