@@ -95,11 +95,6 @@ void SceneBodyPatterns::drawSkeleton(ofxMot::SkeletonPtr skl, int idx)
 
 void SceneBodyPatterns::draw()
 {
-    ofPushStyle();
-    ofPushMatrix();
-    ofEnableAlphaBlending();
-    ofDisableDepthTest();
-    
     const float stepX = alignf(kW/nX);
     const float stepY = alignf((kH-20.f)/nY);
     for (int j=0; j<nY; j++) {
@@ -122,11 +117,6 @@ void SceneBodyPatterns::draw()
     }
     ofLine(alignf(kW-1), alignf(20.f), alignf(kW-1), alignf(kH));
     ofLine(alignf(0.f), alignf(kH-1), alignf(kW), alignf(kH-1));
-    
-    drawHeader();
-    
-    ofPopMatrix();
-    ofPopStyle();
 }
 
 #pragma mark ___________________________________________________________________

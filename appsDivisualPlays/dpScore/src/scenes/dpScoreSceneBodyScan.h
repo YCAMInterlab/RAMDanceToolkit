@@ -9,32 +9,32 @@
 #ifndef __dpScore__dpScoreSceneBodyScan__
 #define __dpScore__dpScoreSceneBodyScan__
 
-#include "dpScoreSceneBase.h"
+#include "dpScoreSceneBodyBase.h"
 #include "ofxMotioner.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-class SceneBodyScan final : public SceneBase {
+struct BodyScanNode final : public ofxMot::Node {
+    typedef ofPtr<BodyScanNode> Ptr;
+    BodyScanNode();
+    virtual ~BodyScanNode() = default;
+    BodyScanNode& operator = (const BodyScanNode& rhs) { return *this = rhs; }
+    
+    void update();
+    void customDraw() override;
+    
+    vector<float> spd;
+    vector<ofVec3f> axis;
+    vector<ofVec3f> vertices;
+    vector<ofVec3f> initialVertices;
+    
+    const int kNumVertices{230};
+    ofVbo vbo;
+    float scale{90.f};
+};
+
+class SceneBodyScan final : public SceneBodyBase<BodyScanNode> {
 public:
-    struct Node {
-        typedef ofPtr<Node> Ptr;
-        Node();
-        virtual ~Node() {}
-        
-        void update();
-        void draw();
-        
-        vector<float> spd;
-        vector<ofVec3f> axis;
-        vector<ofVec3f> vertices;
-        vector<ofVec3f> initialVertices;
-        
-        const int kNumVertices{10};
-        ofVbo vbo;
-        float scale{20.f};
-    };
-    
-    
     explicit SceneBodyScan() = default;
     virtual ~SceneBodyScan() = default;
     
@@ -47,14 +47,11 @@ public:
     void update(ofxEventMessage& m) override;
     void draw() override;
     
-    void onUpdateSkeleton(ofxMotioner::EventArgs &e);
+    void updateSkeleton(SkeletonPtr skl);
     
 private:
-    string mSkeletonName;
-    ofxMot::SkeletonPtr mSkeleton;
     ofEasyCam mCam;
-    float mScale{300.f};
-    vector<Node::Ptr> mNodes;
+    
 };
 
 DP_SCORE_NAMESPACE_END

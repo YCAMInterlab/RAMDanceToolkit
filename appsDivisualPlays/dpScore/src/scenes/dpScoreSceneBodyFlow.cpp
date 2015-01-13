@@ -131,11 +131,6 @@ void SceneBodyFlow::drawSkeleton(int indx)
 
 void SceneBodyFlow::draw()
 {
-    ofPushStyle();
-    ofPushMatrix();
-    ofEnableAlphaBlending();
-    ofDisableDepthTest();
-    
     mCam.begin();
     ofTranslate(100.f, 0.f);
     ofRotateX(13.f);
@@ -150,11 +145,6 @@ void SceneBodyFlow::draw()
     }
     ofPopMatrix();
     mCam.end();
-    
-    drawHeader();
-    
-    ofPopMatrix();
-    ofPopStyle();
 }
 
 #pragma mark ___________________________________________________________________

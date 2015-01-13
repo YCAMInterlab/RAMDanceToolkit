@@ -10,11 +10,11 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-SceneBodyLines::Node::Node()
+BodyLinesNode::BodyLinesNode()
 {
 }
 
-void SceneBodyLines::Node::setupPoints()
+void BodyLinesNode::setupPoints()
 {
     vertices.assign(kNumVertices, ofVec3f::zero());
     for (auto& v : vertices) {
@@ -35,7 +35,7 @@ void SceneBodyLines::Node::setupPoints()
     }
 }
 
-void SceneBodyLines::Node::setupLines()
+void BodyLinesNode::setupLines()
 {
     verticesLines.clear();
     verticesColorsW.clear();
@@ -46,7 +46,7 @@ void SceneBodyLines::Node::setupLines()
     auto verts = vertices;
     
     if (getParent()) {
-        Node* parent = dynamic_cast<Node*>(getParent());
+        BodyLinesNode* parent = dynamic_cast<BodyLinesNode*>(getParent());
         for (const auto& v : parent->vertices) {
             verts.push_back(v);
         }
@@ -77,7 +77,7 @@ void SceneBodyLines::Node::setupLines()
     vboLines.setColorData(&verticesColorsW.at(0), verticesColorsW.size(), GL_DYNAMIC_DRAW);
 }
 
-void SceneBodyLines::Node::updatePoints()
+void BodyLinesNode::updatePoints()
 {
     for (int i=0; i<kNumVertices; i++) {
         auto iv = initialVertices.at(i) * scale;
@@ -87,7 +87,7 @@ void SceneBodyLines::Node::updatePoints()
     vbo.updateVertexData(&vertices.at(0), kNumVertices);
 }
 
-void SceneBodyLines::Node::updateLines(bool focus)
+void BodyLinesNode::updateLines(bool focus)
 {
     verticesLines.clear();
     
@@ -95,7 +95,7 @@ void SceneBodyLines::Node::updateLines(bool focus)
     for (auto& v : verts) v = getGlobalTransformMatrix().preMult(v);
     
     if (getParent()) {
-        Node* parent = dynamic_cast<Node*>(getParent());
+        BodyLinesNode* parent = dynamic_cast<BodyLinesNode*>(getParent());
         for (auto v : parent->vertices) {
             v = parent->getGlobalTransformMatrix().preMult(v);
             verts.push_back(v);
@@ -121,10 +121,10 @@ void SceneBodyLines::Node::updateLines(bool focus)
     pFocus = focus;
 }
 
-void SceneBodyLines::Node::draw(bool focus)
+void BodyLinesNode::draw(bool focus)
 {
     ofPushStyle();
-    glPointSize(2.f);
+    glPointSize(3.f);
     focus ? ofSetColor(color::kMain, 100) : ofSetColor(ofColor::white, 100);
     transformGL();
     vbo.draw(GL_POINTS, 0, vertices.size());
@@ -142,51 +142,55 @@ void SceneBodyLines::Node::draw(bool focus)
     ofPopStyle();
 }
 
-void SceneBodyLines::Node::drawHUD(bool focus)
+void BodyLinesNode::drawHUD(bool focus)
 {
     if (focus) {
         stringstream ss;
-        //ss << ofxMot::getJointNameLower(id) << endl;
         ss << getGlobalPosition() << endl;
         ss << getGlobalOrientation() << endl;
         
         ofPushStyle();
         ofSetColor(color::kMain, 255);
         ofSetLineWidth(1.f);
-        float w0 = -150.f;
-        float w1 = -(kW * 0.5 - ::fabsf(kW*0.5f - windowPos.x) - 50.f);
-        float h = -50.f;
+        float w0 = 400.f;
+        float w1 = 20.f;
+        float h = -200.f;
+        if (windowPos.y < kH * 0.5f) {
+            h *= -1.f;
+        }
         bool invert = false;
         if (windowPos.x > kW * 0.5f) {
-            w0 *= -1.f;
-            w1 *= -1.f;
+            w0 = kW - w0;
+            w1 = kW - w1;
             invert = true;
         }
-        ofLine(windowPos, ofVec3f(windowPos.x + w0, windowPos.y + h, 0.f));
-        ofLine(ofVec3f(windowPos.x + w0, windowPos.y + h, 0.f), ofVec3f(windowPos.x + w1, windowPos.y + h, 0.f));
+        ofLine(windowPos, ofVec3f(w0, windowPos.y + h, 0.f));
+        ofLine(ofVec3f(w0, windowPos.y + h, 0.f), ofVec3f(w1, windowPos.y + h, 0.f));
         
         if (invert) {
+            const float x0 = ofxMot::getJointNameLower(id).size() * 8.f;
+            auto strs = ofSplitString(ss.str(), "\n");
+            int longest = 0;
+            for (auto& s : strs) {
+                if (s.length() > longest) longest = s.length();
+            }
+            const float x1 = longest * 8.f;
             ofSetColor(color::kMain, 255);
-            //ofSetColor(ofColor::white, 255);
-            ofDrawBitmapString(ofxMot::getJointNameLower(id), ofPoint(windowPos.x + w0 + 300.f, windowPos.y + h - 4.f));
-            //ofSetColor(color::kMain, 255);
-            ofDrawBitmapString(ss.str(), ofPoint(windowPos.x + w0 + 300.f, windowPos.y + h + 12.f));
+            ofDrawBitmapString(ofxMot::getJointNameLower(id), ofPoint(w1 - x0, windowPos.y + h - 4.f));
+            ofDrawBitmapString(ss.str(), ofPoint( w1 - x1, windowPos.y + h + 12.f));
         }
         else {
             ofSetColor(color::kMain, 255);
-            //ofSetColor(ofColor::white, 255);
-            ofDrawBitmapString(ofxMot::getJointNameLower(id), ofPoint(windowPos.x + w1, windowPos.y + h - 4.f));
-            //ofSetColor(color::kMain, 255);
-            ofDrawBitmapString(ss.str(), ofPoint(windowPos.x + w1, windowPos.y + h + 12.f));
+            ofDrawBitmapString(ofxMot::getJointNameLower(id), ofPoint(w1, windowPos.y + h - 4.f));
+            ofDrawBitmapString(ss.str(), ofPoint(w1, windowPos.y + h + 12.f));
         }
-         
+        
         
         ofPopStyle();
     }
 }
 
 #pragma mark ___________________________________________________________________
-
 void SceneBodyLines::initialize()
 {
     dpDebugFunc();
@@ -198,12 +202,6 @@ void SceneBodyLines::initialize()
     mUICanvas->addLabel(getName());
     mUICanvas->addSpacer();
     
-    mSkeleton = ofxMot::SkeletonBase<Node>::create();
-    
-    for (auto& mn : mSkeleton->getJoints()) mn.setupPoints();
-    for (auto& mn : mSkeleton->getJoints()) mn.setupLines();
-    
-    mCam.setDistance(200);
     mCam.disableMouseInput();
     
     OFX_END_EXCEPTION_HANDLING
@@ -223,9 +221,6 @@ void SceneBodyLines::enter()
 {
     dpDebugFunc();
     
-    ofAddListener(ofxMotioner::updateSkeletonEvent,
-                  this,
-                  &SceneBodyLines::onUpdateSkeleton);
     mCam.enableMouseInput();
 }
 
@@ -233,78 +228,68 @@ void SceneBodyLines::exit()
 {
     dpDebugFunc();
     
-    ofRemoveListener(ofxMotioner::updateSkeletonEvent,
-                     this,
-                     &SceneBodyLines::onUpdateSkeleton);
     mCam.disableMouseInput();
 }
 
 void SceneBodyLines::update(ofxEventMessage& m)
 {
-    mFrameNum++;
-    
-    if (mFrameNum %60 == 0) {
-        (++mFocusNode) %= mSkeleton->getNumJoints();
-    }
-    
-    if (m.getAddress() == kAddrMotioner && mSkeleton) {
-        for (auto& mn : mSkeleton->getJoints()) {
-            const float t = ofNoise(ofGetElapsedTimef()*1.f + mn.id * 5.f);
-            mn.scale = ofMap(t, 0.f, 1.f, 1.f, 30.f);
-            mn.updatePoints();
-        }
-        for (auto& mn : mSkeleton->getJoints()) {
-            isFocus(mn.id) ? mn.updateLines(true) : mn.updateLines(false);
+    if (m.getAddress() == kAddrMotioner) {
+        mFrameNum++;
+        
+        if (mFrameNum %60 == 0) {
+            (++mFocusNode) %= getSkeleton(0)->getNumJoints();
         }
     }
 }
 
 void SceneBodyLines::draw()
 {
-    ofPushStyle();
-    ofPushMatrix();
-    ofEnableAlphaBlending();
-    ofDisableDepthTest();
-    
-    mCam.begin();
-    ofPushMatrix();
-    ofTranslate(0.f, -80.f, 0.f);
-    
-    ofNoFill();
-    
-    if (mSkeleton) {
-        for(auto& mn : mSkeleton->getJoints()) {
+    for (int i=0; i<getNumSkeletons(); i++) {
+        auto skl = getSkeleton(i);
+        
+        mCam.begin();
+        ofPushMatrix();
+        ofNoFill();
+        const int n = getNumSkeletons();
+        const float step = kW/n;
+        ofTranslate(-kW*0.5f + step * 0.5f + step * i , -300.f, 0.f);
+        
+        for(auto& mn : skl->getJoints()) {
             isFocus(mn.id) ? mn.draw(true) : mn.draw(false);
         }
-    }
-    
-    ofPopMatrix();
-    mCam.end();
-    
-    if (mSkeleton) {
-        for(auto& mn : mSkeleton->getJoints()) {
+        ofPopMatrix();
+        mCam.end();
+        
+        for(auto& mn : skl->getJoints()) {
             isFocus(mn.id) ? mn.drawHUD(true) : mn.drawHUD(false);
         }
     }
-    
-    drawHeader();
-    
-    ofPopMatrix();
-    ofPopStyle();
 }
 
 #pragma mark ___________________________________________________________________
-void SceneBodyLines::onUpdateSkeleton(ofxMotioner::EventArgs &e)
+void SceneBodyLines::setupSkeleton(SkeletonPtr skl)
 {
-    auto skl = e.skeleton;
+    for (auto& mn : skl->getJoints()) mn.setupPoints();
+    for (auto& mn : skl->getJoints()) mn.setupLines();
+}
+
+void SceneBodyLines::updateSkeleton(SkeletonPtr skl)
+{
+    for (auto& mn : skl->getJoints()) {
+        mn.setPosition(mn.getPosition()*4.5f);
+    }
     
-    if (mSkeletonName=="") mSkeletonName = skl->getName();
-    
-    if (mSkeletonName == skl->getName()) {
-        mSkeleton->copyMatrices(skl);
+    for (auto& mn : skl->getJoints()) {
+        const float t = ofNoise(ofGetElapsedTimef()*1.f + mn.id * 5.f);
+        mn.scale = ofMap(t, 0.f, 1.f, 5.f, 130.f);
+        mn.updatePoints();
+    }
+    for (auto& mn : skl->getJoints()) {
+        isFocus(mn.id) ? mn.updateLines(true) : mn.updateLines(false);
     }
 }
 
+#pragma mark ___________________________________________________________________
 bool SceneBodyLines::isFocus(int nodeId)
 {
     return (nodeId == mFocusNode && mFrameNum % kFocusLoop < kFocusLoop/2);
