@@ -9,39 +9,44 @@
 #ifndef __dpScore__dpScoreSceneBodyLines__
 #define __dpScore__dpScoreSceneBodyLines__
 
-#include "dpScoreSceneBase.h"
+#include "dpScoreSceneBodyBase.h"
 #include "ofxMotioner.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-class SceneBodyLines final : public SceneBase {
+struct BodyLinesNode final : public ofxMot::Node {
+    BodyLinesNode();
+    virtual ~BodyLinesNode() = default;
+    BodyLinesNode& operator = (const BodyLinesNode& rhs) { return *this = rhs; }
+    
+    void setupPoints();
+    void setupLines();
+    
+    void updatePoints();
+    void updateLines(bool focus);
+    void draw(bool focus);
+    void drawHUD(bool focus);
+    
+    vector<float> spd;
+    vector<ofVec3f> axis;
+    vector<ofVec3f> vertices;
+    vector<ofVec3f> initialVertices;
+    
+    const int kNumVertices{30};
+    ofVbo vbo;
+    
+    vector<ofVec3f> verticesLines;
+    vector<ofFloatColor> verticesColorsW;
+    vector<ofFloatColor> verticesColorsR;
+    ofVbo vboLines;
+    float scale{0.f};
+    bool pFocus;
+    
+    ofVec3f windowPos;
+};
+
+class SceneBodyLines final : public SceneBodyBase<BodyLinesNode> {
 public:
-    struct Node : public ofxMot::Node {
-        Node();
-        virtual ~Node() {}
-        Node& operator = (const Node& rhs) { return *this = rhs; }
-        
-        void setupPoints();
-        void setupLines();
-        
-        void update();
-        void draw();
-        
-        vector<float> spd;
-        vector<ofVec3f> axis;
-        vector<ofVec3f> vertices;
-        vector<ofVec3f> initialVertices;
-        
-        //const int kNumVertices = 10*23;
-        const int kNumVertices = 20;
-        ofVbo vbo;
-        
-        vector<ofVec3f> verticesLines;
-        ofVbo vboLines;
-        float scale = 15.f;
-    };
-    
-    
     explicit SceneBodyLines() = default;
     virtual ~SceneBodyLines() = default;
     
@@ -54,14 +59,16 @@ public:
     void update(ofxEventMessage& m) override;
     void draw() override;
     
-    void onUpdateSkeleton(ofxMotioner::EventArgs &e);
+    void setupSkeleton(SkeletonPtr skl) override;
+    void updateSkeleton(SkeletonPtr skl) override;
     
 private:
-    string mSkeletonName;
-    ofxMot::SkeletonPtr mSkeleton;
+    bool isFocus(int nodeId);
+    
     ofEasyCam mCam;
-    float mScale = 300.f;
-    vector<Node> mNodes;
+    const int kFocusLoop{120};
+    int mFocusNode{0};
+    unsigned long mFrameNum{0};
 };
 
 DP_SCORE_NAMESPACE_END

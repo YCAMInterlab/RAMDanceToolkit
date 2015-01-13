@@ -56,6 +56,8 @@ public:
 	float mParamCF_MinArea;
 	float mParamCF_Threshold;
 	float mParamCF_MaxBlobNum;
+	int mParamPixelate_ResX;
+	int mParamPixelate_ResY;
 	ofFloatColor mParamCF_targColor;
 
 	ofImage *imgRefColor, *imgRefGray;
@@ -68,6 +70,7 @@ public:
 	ofVec2f mOptFlow_smoothVecs[10];
 	float mOptFlow_filterSpd;
 	float mOptFlowSmooth;
+	vector <ofVec3f> mOpt_previous;
 
 	vector <string> *oscListPtr;
 

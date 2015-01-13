@@ -19,7 +19,7 @@ protected:
 	bool visible;
 	bool enabled, enableable;
 public:
-	ofxUITab(string tabName = "", bool enableable = true)
+	ofxUITab(const string& tabName = "", bool enableable = true)
 	:visible(false)
 	,enabled(false)
 	,enableable(enableable)
@@ -27,7 +27,7 @@ public:
 		addLabel(tabName, OFX_UI_FONT_LARGE);
 		addSpacer();
 	}
-	string getTabName() const {return tabName;}
+	const string& getTabName() const {return tabName;}
 	bool& getVisible() {return visible;}
 	bool& getEnabled() {return enabled;}
 	bool getEnableable() {return enableable;}
@@ -56,6 +56,7 @@ public:
         addWidgetRight(saveButton);
 		ofAddListener(newGUIEvent, this, &ofxUITabbedCanvas::guiEvent);
 	}
+    
 	void add(ofxUITab* tab) {
 		tab->disableAppDrawCallback();
 		tab->disableMouseEventCallbacks();
@@ -78,13 +79,16 @@ public:
 		}
 		autoSizeToFitWidgets();
 	}
+    
 	bool isHit(float x, float y) {
 		return ofxUICanvas::isHit(x, y) || getCurrent()->isHit(x - getRect()->width, y);
 	}
+    
 	ofxUITab* at(int i) {
 		return tabs[i];
 	}
-	int getTabIndex(string name) {
+    
+	int getTabIndex(const string& name) const {
 		for(int i = 0; i < tabToggles.size(); i++) {
 			ofxUILabelToggle *tabToggle = tabToggles[i];		
 			if(tabToggle->getName() == name) {
@@ -93,6 +97,7 @@ public:
 		}
 		return -1;
 	}
+    
 	void select(string name) {
 		int tabIndex = getTabIndex(name);
 		if(tabIndex != -1 && tabToggles[tabIndex]->getValue()) {
@@ -112,10 +117,19 @@ public:
 	ofxUITab* getCurrent() {
 		return tabs[currentTab];
 	}
+    const ofxUITab* const getCurrent() const {
+        return tabs[currentTab];
+    }
 	ofxUIToggle* getEnableToggle(size_t idx)
 	{
 		return enableToggles.at(idx);
 	}
+    
+    const ofxUIToggle* const getEnableToggle(size_t idx) const
+    {
+        return enableToggles.at(idx);
+    }
+    
 	void guiEvent(ofxUIEventArgs &e) {
 		if (e.widget == saveButton && saveStatus) {
 			ofFileDialogResult result = ofSystemSaveDialog("settings.xml", "Save settings.");

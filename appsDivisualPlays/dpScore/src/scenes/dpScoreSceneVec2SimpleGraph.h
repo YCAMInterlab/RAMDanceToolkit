@@ -29,7 +29,7 @@ public:
     
 private:
     deque<ofVec2f> mBuffer;
-    float mSensorScale{0.3f};
+    float mSensorScale{2.0f};
     ofVec2f mVec{0.f};
     int mStep{4};
     

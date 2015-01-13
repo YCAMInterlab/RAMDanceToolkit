@@ -47,4 +47,22 @@ static ofPoint dpGetSecondScreenCenter(){
     return ofPoint(SINGLE_SCREEN_WIDTH * 1.5,SINGLE_SCREEN_HEIGHT * 0.5,0.0);
 }
 
+struct dpColor
+{
+    static const ofColor MAIN_COLOR;
+    static const ofColor PALE_PINK_LIGHT;
+    static const ofColor PALE_PINK_HEAVY;
+    static const ofColor DARK_PINK_LIGHT;
+    static const ofColor DARK_PINK_HEAVY;
+};
+
+struct dpFloatColor
+{
+    static const ofFloatColor MAIN_COLOR;
+    static const ofFloatColor PALE_PINK_LIGHT;
+    static const ofFloatColor PALE_PINK_HEAVY;
+    static const ofFloatColor DARK_PINK_LIGHT;
+    static const ofFloatColor DARK_PINK_HEAVY;
+};
+
 #endif

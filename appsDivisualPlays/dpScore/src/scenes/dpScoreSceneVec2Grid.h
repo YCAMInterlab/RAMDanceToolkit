@@ -34,12 +34,12 @@ private:
     
     ofEasyCam mCam;
     
-    float mSensorScale{0.3f};
+    float mSensorScale{2.0f};
     ofVec2f mVec{0.f};
     
-    int mGridStep{10};
-    int mGridW{kW - 100};
-    int mGridH{kH};
+    int mGridStep{20};
+    int mGridW{kW*2};
+    int mGridH{kH*2};
 };
 
 DP_SCORE_NAMESPACE_END

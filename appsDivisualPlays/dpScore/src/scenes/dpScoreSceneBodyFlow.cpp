@@ -62,6 +62,7 @@ void SceneBodyFlow::initialize()
     mUICanvas->addSpacer();
     
     mCam.setDistance(200);
+    mCam.disableMouseInput();
     
     mPoints.assign(kNumSkeletons, ofPtr<Points>());
     for (auto& p : mPoints) {
@@ -86,6 +87,7 @@ void SceneBodyFlow::enter()
     ofAddListener(ofxMotioner::updateSkeletonEvent,
                   this,
                   &SceneBodyFlow::onUpdateSkeleton);
+    mCam.enableMouseInput();
 }
 
 void SceneBodyFlow::exit()
@@ -95,12 +97,11 @@ void SceneBodyFlow::exit()
     ofRemoveListener(ofxMotioner::updateSkeletonEvent,
                      this,
                      &SceneBodyFlow::onUpdateSkeleton);
+    mCam.disableMouseInput();
 }
 
 void SceneBodyFlow::update(ofxEventMessage& m)
 {
-    ofSetWindowTitle(getName() + ": " + ofToString(ofGetFrameRate(), 2));
-    
     if (m.getAddress() == kAddrMotioner) {
         for (auto p : mPoints) p->update();
     }
@@ -114,8 +115,6 @@ void SceneBodyFlow::drawSkeleton(int indx)
     auto& joints = mSkeletons.at(indx)->getJoints();
     
     ofNoFill();
-    
-    ofSetColor(255, 64);
     
     for (size_t i=0; i<joints.size(); i++) {
         ofSetLineWidth(1.0f);
@@ -132,13 +131,6 @@ void SceneBodyFlow::drawSkeleton(int indx)
 
 void SceneBodyFlow::draw()
 {
-    ofPushStyle();
-    ofPushMatrix();
-    ofEnableAlphaBlending();
-    ofDisableDepthTest();
-    ofSetColor(ofColor::white, 255);
-    ofDrawBitmapString(getName(), 12.f, 16.f);
-    
     mCam.begin();
     ofTranslate(100.f, 0.f);
     ofRotateX(13.f);
@@ -148,13 +140,11 @@ void SceneBodyFlow::draw()
     
     for (int i=0; i<mSkeletons.size(); i++) {
         ofTranslate(0.f, 0.f, -10.f);
+        ofSetColor(ofColor::white, 64);
         drawSkeleton(i);
     }
     ofPopMatrix();
     mCam.end();
-    
-    ofPopMatrix();
-    ofPopStyle();
 }
 
 #pragma mark ___________________________________________________________________
@@ -165,7 +155,7 @@ void SceneBodyFlow::onUpdateSkeleton(ofxMotioner::EventArgs &e)
     if (mSkeletonName=="") mSkeletonName = skl->getName();
     
     if (mSkeletonName == skl->getName()) {
-        auto copy = ofxMot::copySkeleton(skl);
+        auto copy = ofxMot::Skeleton::copy(skl);
         mSkeletons.push_back(copy);
         
         while (mSkeletons.size() > kNumSkeletons) {

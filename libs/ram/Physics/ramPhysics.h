@@ -44,7 +44,9 @@ public:
 	void debugDraw();
 
 	ofxBt::World& getWorld() { return world; }
+    const ofxBt::World& getWorld() const { return const_cast<ofxBt::World&>(getWorld()); }
 	ofxBt::SoftBodyWorld& getSoftBodyWorld() { return world; }
+    const ofxBt::SoftBodyWorld& getSoftBodyWorld() const { return const_cast<ofxBt::SoftBodyWorld&>(getSoftBodyWorld()); }
 
 	void onUpdate(ofEventArgs&);
 

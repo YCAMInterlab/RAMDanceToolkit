@@ -50,7 +50,7 @@ void SceneManager::add(SceneBase::Ptr scene)
             }
         }
     }
-    scene->initialize();
+    scene->onInitialize();
     
     if (scene->getUICanvas() != nullptr) {
         mTabBar->addCanvas(scene->getUICanvas());
@@ -62,10 +62,10 @@ void SceneManager::add(SceneBase::Ptr scene)
 
 void SceneManager::clear()
 {
-    if (mCurrentScene) mCurrentScene->exit();
+    if (mCurrentScene) mCurrentScene->onExit();
     mCurrentScene.reset();
     for (auto p : mScenes) {
-        p->shutDown();
+        p->onShutDown();
     }
     mScenes.clear();
     
@@ -112,9 +112,9 @@ void SceneManager::change(const string& name)
 
 void SceneManager::change()
 {
-    if (mCurrentScene) mCurrentScene->exit();
+    if (mCurrentScene) mCurrentScene->onExit();
     mCurrentScene = mScenes.at(mSceneId);
-    mCurrentScene->enter();
+    mCurrentScene->onEnter();
     
     ofLogNotice() << "changed scene: " << mSceneId << ", " << mCurrentScene->getName();
 }
@@ -123,16 +123,16 @@ void SceneManager::change()
 void SceneManager::update(ofxEventMessage& m)
 {
     if (mUpdateAll) {
-        for (auto& scene : mScenes) scene->update(m);
+        for (auto& scene : mScenes) scene->onUpdate(m);
     }
     else if (mCurrentScene) {
-        mCurrentScene->update(m);
+        mCurrentScene->onUpdate(m);
     }
 }
 
 void SceneManager::draw()
 {
-    if (mCurrentScene) mCurrentScene->draw();
+    if (mCurrentScene) mCurrentScene->onDraw();
 }
 
 ofPtr<SceneBase> SceneManager::getCurrent()
@@ -149,52 +149,52 @@ void SceneManager::setUpdateAll(bool update)
 #pragma mark ___________________________________________________________________
 void SceneManager::keyPressed(int key)
 {
-    if (mCurrentScene) mCurrentScene->keyPressed(key);
+    if (mCurrentScene) mCurrentScene->onKeyPressed(key);
 }
 
 void SceneManager::keyReleased(int key)
 {
-    if (mCurrentScene) mCurrentScene->keyReleased(key);
+    if (mCurrentScene) mCurrentScene->onKeyReleased(key);
 }
 
 void SceneManager::mouseMoved(int x, int y)
 {
-    if (mCurrentScene) mCurrentScene->mouseMoved(x, y);
+    if (mCurrentScene) mCurrentScene->onMouseMoved(x, y);
 }
 
 void SceneManager::mouseDragged(int x, int y, int button)
 {
-    if (mCurrentScene) mCurrentScene->mouseDragged(x, y, button);
+    if (mCurrentScene) mCurrentScene->onMouseDragged(x, y, button);
 }
 
 void SceneManager::mousePressed(int x, int y, int button)
 {
-    if (mCurrentScene) mCurrentScene->mousePressed(x, y, button);
+    if (mCurrentScene) mCurrentScene->onMousePressed(x, y, button);
 }
 
 void SceneManager::mouseReleased(int x, int y, int button)
 {
-    if (mCurrentScene) mCurrentScene->mouseReleased(x, y, button);
+    if (mCurrentScene) mCurrentScene->onMouseReleased(x, y, button);
 }
 
 void SceneManager::windowResized(int w, int h)
 {
-    if (mCurrentScene) mCurrentScene->windowResized(w, h);
+    if (mCurrentScene) mCurrentScene->onWindowResized(w, h);
 }
 
 void SceneManager::dragEvent(ofDragInfo dragInfo)
 {
-    if (mCurrentScene) mCurrentScene->dragEvent(dragInfo);
+    if (mCurrentScene) mCurrentScene->onDragEvent(dragInfo);
 }
 
 void SceneManager::gotMessage(ofMessage msg)
 {
-    if (mCurrentScene) mCurrentScene->gotMessage(msg);
+    if (mCurrentScene) mCurrentScene->onGotMessage(msg);
 }
 
 void SceneManager::guiEvent(ofxUIEventArgs &e)
 {
-    
+    if (mCurrentScene) mCurrentScene->onGuiEvent(e);
 }
 
 #pragma mark ___________________________________________________________________

@@ -4,24 +4,35 @@
 void ofApp::setup(){
 	ofBackground(70, 80, 70);
 	ofSetFrameRate(30);
+
+	receiver.setup(12400);
+	dpSwitcher.setup();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 
+	while (receiver.hasWaitingMessages()){
+		ofxOscMessage m;
+		receiver.getNextMessage(&m);
+		dpSwitcher.receiveOscMessage(m);
+	}
+
 	ofSetWindowTitle(ofToString(ofGetFrameRate()));
-	
+
+	dpSwitcher.update();
 	dpCameraUnit.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
 	dpCameraUnit.draw();
+	if (ofGetKeyPressed('q')) dpSwitcher.draw();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+	
 }
 
 //--------------------------------------------------------------

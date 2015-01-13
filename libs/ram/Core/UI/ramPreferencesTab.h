@@ -58,11 +58,11 @@ public:
 		ofAddListener(this->newGUIEvent, this, &ramPreferencesTab::onValueChanged);
 		ofSetFullscreen(fullscreen);
 	}
-	int getFloorPattern() {
+	int getFloorPattern() const {
 		return getChoice(floorStyleRadio);
 	}
-	float getFloorSize() { return floorSize; }
-	float getFloorGridSize() { return floorGridSize; }
+	float getFloorSize() const { return floorSize; }
+	float getFloorGridSize() const { return floorGridSize; }
 	
 	void update() {
 		

@@ -29,7 +29,7 @@ protected:
 	float lifespan;
 public:
 	ramDeadFunctor(float lifespan) : lifespan(lifespan) {}
-	bool operator()(const ramFading& fading);
+	bool operator()(const ramFading& fading) const;
 };
 
 class ramFading {
@@ -70,7 +70,7 @@ public:
 		updateIndexCache();
 	}
 
-	size_t size() { return array.size(); }
+	size_t size() const { return array.size(); }
 
 	void clear()
 	{
@@ -86,9 +86,14 @@ public:
 		return *array[index];
 	}
 
+    const T& operator[](size_t index) const
+    {
+        return *array[index];
+    }
+    
 	// map
 
-	const vector<string>& keys() { return hash_keys; }
+    const vector<string>& keys() const { return hash_keys; }
 
 	T& operator[](const string& key)
 	{
@@ -103,7 +108,20 @@ public:
 		}
 	}
 
-	bool hasKey(const string& key)
+    const T& operator[](const string& key) const
+    {
+        if (hasKey(key))
+        {
+            return hash.at(key);
+        }
+        else
+        {
+            ofLogError("RAMDanceToolkit::ramCompoundContainer") << "invalid key: " << key;
+            assert(false);
+        }
+    }
+    
+    bool hasKey(const string& key) const
 	{
 		return hash.find(key) != hash.end();
 	}

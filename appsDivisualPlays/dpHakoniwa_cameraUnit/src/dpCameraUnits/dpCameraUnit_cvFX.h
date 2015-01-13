@@ -30,12 +30,15 @@ public:
 	bool mEnableAdaptiveThreshold;
 	bool mEnableInvert;
 	bool mEnableFrameDiff;
+	bool mEnableAccumlateWeight;
+	bool mEnableBackground;
 
 	float mParam_Blur;
 	float mParam_Canny_Thr1;
 	float mParam_Canny_Thr2;
 	float mParam_Threshold;
 
+	float mParam_accum_Time;
 	int   mParam_adpThreshold_blockSize;
 	int   mParam_adpThreshold_offset;
 	bool  mParam_adpThreshold_invert;
@@ -43,13 +46,17 @@ public:
 
 	ofxUICanvas mGui;
 	ofImage mSource;
+	ofImage mGraySource_background;
+	bool mBackgroundNeedsReflesh;
 	ofImage mGraySource;
 	ofImage mGraySource_forDiff;
 
 protected:
 
 	ofxCv::Mat tmp;
+	cv::Mat mAccum;
 
+	void useAccumulateWeighted(ofImage *src,ofImage *result,cv::Mat *accum,float time,bool fadeLastFrame = false);
 	void useAdaptiveThreshold(ofImage &src,ofImage &dst,int blockSize,int offset,bool invert,bool gauss);
 };
 

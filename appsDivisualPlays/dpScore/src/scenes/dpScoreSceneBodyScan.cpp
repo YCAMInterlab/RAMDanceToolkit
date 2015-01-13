@@ -10,7 +10,7 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-SceneBodyScan::Node::Node()
+BodyScanNode::BodyScanNode()
 {
     vertices.assign(kNumVertices, ofVec3f::zero());
     for (auto& v : vertices) {
@@ -31,8 +31,7 @@ SceneBodyScan::Node::Node()
     }
 }
 
-
-void SceneBodyScan::Node::update()
+void BodyScanNode::update()
 {
     for (int i=0; i<kNumVertices; i++) {
         auto iv = initialVertices.at(i);
@@ -42,11 +41,12 @@ void SceneBodyScan::Node::update()
     vbo.updateVertexData(&vertices.at(0), kNumVertices);
 }
 
-void SceneBodyScan::Node::draw()
+void BodyScanNode::customDraw()
 {
     vbo.draw(GL_POINTS, 0, vertices.size());
 }
 
+#pragma mark ___________________________________________________________________
 void SceneBodyScan::initialize()
 {
     dpDebugFunc();
@@ -55,14 +55,8 @@ void SceneBodyScan::initialize()
     mUICanvas->setName(getName());
     mUICanvas->addLabel(getName());
     mUICanvas->addSpacer();
-    mUICanvas->addSlider("Sphere Scale", 200.f, 600.f, &mScale);
     
-    mNodes.assign(ofxMot::NUM_JOINTS, Node::Ptr());
-    for (auto& p : mNodes) {
-        p = Node::Ptr(new Node());
-    }
-    
-    mCam.setDistance(200);
+    mCam.disableMouseInput();
 }
 
 void SceneBodyScan::shutDown()
@@ -78,61 +72,46 @@ void SceneBodyScan::shutDown()
 void SceneBodyScan::enter()
 {
     dpDebugFunc();
-    
-    ofAddListener(ofxMotioner::updateSkeletonEvent,
-                  this,
-                  &SceneBodyScan::onUpdateSkeleton);
+
+    mCam.enableMouseInput();
 }
 
 void SceneBodyScan::exit()
 {
     dpDebugFunc();
-    
-    ofRemoveListener(ofxMotioner::updateSkeletonEvent,
-                     this,
-                     &SceneBodyScan::onUpdateSkeleton);
+
+    mCam.disableMouseInput();
 }
 
 void SceneBodyScan::update(ofxEventMessage& m)
 {
-    ofSetWindowTitle(getName() + ": " + ofToString(ofGetFrameRate(), 2));
-    
     if (m.getAddress() == kAddrMotioner) {
-        for (auto& mn : mNodes) mn->update();
+        for (int i=0; i<getNumSkeletons(); i++) {
+            for (auto& mn : getSkeleton(i)->getJoints())
+                mn.update();
+        }
     }
 }
 
 void SceneBodyScan::draw()
 {
-    ofPushStyle();
-    ofPushMatrix();
-    ofEnableAlphaBlending();
-    ofDisableDepthTest();
-    
     mCam.begin();
-    ofPushMatrix();
-    ofTranslate(0.f, -80.f, 0.f);
     
-    ofNoFill();
-    
-    if (mSkeleton) {
-        glPointSize(3.f);
-        ofSetColor(255, 64);
+    for (int i=0; i<getNumSkeletons(); i++) {
+        ofPushMatrix();
+        const int n = getNumSkeletons();
+        const float step = kW/n;
+        ofTranslate(-kW*0.5f + step * 0.5f + step * i , -300.f, 0.f);
+        glPointSize(4.f);
+        ofSetColor(255, 128);
         ofSetLineWidth(1.5f);
-        auto& joints = mSkeleton->getJoints();
-        for (int i=0; i<joints.size(); i++) {
-            auto& n = joints.at(i);
-            
-            n.transformGL();
-            for (auto& mn : mNodes) mn->draw();
-            n.restoreTransformGL();
-            
+        for (auto& n : getSkeleton(i)->getJoints()) {
+            n.draw();
             if (!n.getParent()) continue;
             ofLine(n.getGlobalPosition(), n.getParent()->getGlobalPosition());
         }
+        ofPopMatrix();
     }
-    
-    ofPopMatrix();
     mCam.end();
     
     const float w = kW;
@@ -147,33 +126,22 @@ void SceneBodyScan::draw()
     ofRect(-kW*2.f, 0.f, kW*2.f, kH);
     ofRect(w, 0.f, kW*3.f, kH);
     glBegin(GL_QUADS);
-    glColor4f(0.f, 0.f, 0.f, 0.f); glVertex2f(0.f, 0.f);
-    glColor4f(0.f, 0.f, 0.f, 0.f); glVertex2f(0.f, kH);
-    glColor4f(0.f, 0.f, 0.f, 1.f); glVertex2f(w, kH);
-    glColor4f(0.f, 0.f, 0.f, 1.f); glVertex2f(w, 0.f);
+    glColor4f(0.f, 0.f, 0.f, 0.3f); glVertex2f(0.f, 0.f);
+    glColor4f(0.f, 0.f, 0.f, 0.3f); glVertex2f(0.f, kH);
+    glColor4f(0.f, 0.f, 0.f, 1.0f); glVertex2f(w, kH);
+    glColor4f(0.f, 0.f, 0.f, 1.0f); glVertex2f(w, 0.f);
     glEnd();
-    ofSetColor(ofColor::white, 128);
+    ofSetColor(color::kMain, 255);
     ofSetLineWidth(1.f);
-    ofLine(0.f, 0.f, 0.f, alignf(kH));
-    
+    ofLine(alignf(0.f), alignf(20.f), alignf(0.f), alignf(kH));
     ofPopMatrix();
-    
-    ofSetColor(ofColor::white, 255);
-    ofDrawBitmapString(getName(), 12.f, 16.f);
-    
-    ofPopMatrix();
-    ofPopStyle();
 }
 
 #pragma mark ___________________________________________________________________
-void SceneBodyScan::onUpdateSkeleton(ofxMotioner::EventArgs &e)
+void SceneBodyScan::updateSkeleton(SkeletonPtr skl)
 {
-    auto skl = e.skeleton;
-    
-    if (mSkeletonName=="") mSkeletonName = skl->getName();
-    
-    if (mSkeletonName == skl->getName()) {
-        mSkeleton = skl;
+    for (auto& mn : skl->getJoints()) {
+        mn.setPosition(mn.getPosition()*4.5f);
     }
 }
 

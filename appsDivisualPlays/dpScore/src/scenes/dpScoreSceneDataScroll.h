@@ -34,9 +34,9 @@ public:
     void onUpdateSkeleton(ofxMotioner::EventArgs &e);
     
 private:
-    string mSkeletonName;
+    string mSkeletonName{""};
     deque<ofxMot::SkeletonPtr> mSkeletons;
-    const int kNumSkeletons = (kH-20.f) / 10.f;
+    const int kNumSkeletons{(kH-20) / 10};
 };
 
 DP_SCORE_NAMESPACE_END

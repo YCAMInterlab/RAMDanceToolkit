@@ -20,7 +20,7 @@ void SceneVec2Clocks::initialize()
     mUICanvas->setName(getName());
     mUICanvas->addLabel(getName());
     mUICanvas->addSpacer();
-    mUICanvas->addSlider("Sensor Scale", 0.f, 2.f, &mSensorScale);
+    mUICanvas->addSlider("Sensor Scale", 0.f, 5.0f, &mSensorScale);
 }
 
 void SceneVec2Clocks::shutDown()
@@ -45,8 +45,6 @@ void SceneVec2Clocks::exit()
 
 void SceneVec2Clocks::update(ofxEventMessage& m)
 {
-    ofSetWindowTitle(getName() + ": " + ofToString(ofGetFrameRate(), 2));
-    
     if (m.getAddress() == kAddrVec2) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);
@@ -59,16 +57,8 @@ void SceneVec2Clocks::update(ofxEventMessage& m)
 
 void SceneVec2Clocks::draw()
 {
-    ofPushStyle();
-    
     ofSetCircleResolution(64);
     
-    ofEnableAlphaBlending();
-    
-    ofSetColor(ofColor::white, 255);
-    ofDrawBitmapString(getName(), 12.f, 16.f);
-    
-    ofNoFill();
     const float step = 10.f;
     ofSetColor(255, 50);
     
@@ -96,7 +86,7 @@ void SceneVec2Clocks::draw()
             
             const int idx = (_clockNumX * _clockNumY - 1) - (i + j * _clockNumX);
             
-            (i == 0 && j == 0) ? ofSetColor(255, 0, 0, 255) : ofSetColor(255, 255);
+            (i == 0 && j == 0) ? ofSetColor(color::kMain, 255) : ofSetColor(ofColor::white, 255);
             
             if (idx < mClockBuffer.size()) {
                 ofVec2f v = mClockBuffer.at(idx);
@@ -118,8 +108,6 @@ void SceneVec2Clocks::draw()
         }
         ofPopMatrix();
     }
-    ofPopStyle();
-
 }
 
 DP_SCORE_NAMESPACE_END

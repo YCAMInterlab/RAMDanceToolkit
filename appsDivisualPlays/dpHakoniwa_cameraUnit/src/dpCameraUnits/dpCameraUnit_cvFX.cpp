@@ -17,17 +17,20 @@ dpCameraUnit_cvFX::dpCameraUnit_cvFX(){
 	mGui.addSpacer();
 	mGui.addToggle("Blur", &mEnableBlur);
 	mGui.addSlider("BlurSize", 0.0, 40.0, &mParam_Blur);
-
+	mGui.addSpacer();
+	mGui.addToggle("AccumelateWeight", &mEnableAccumlateWeight);
+	mGui.addSlider("Time", 0.0, 1.0, &mParam_accum_Time);
 	mGui.addSpacer();
 	mGui.addToggle("AdaptiveThreshold", &mEnableAdaptiveThreshold);
 	mGui.addIntSlider("blockSize", 3, 255, &mParam_adpThreshold_blockSize);
 	mGui.addIntSlider("offset", 3, 255, &mParam_adpThreshold_offset);
 	mGui.addToggle("invert", &mParam_adpThreshold_invert);
 	mGui.addToggle("gauss", &mParam_adpThreshold_gauss);
+	mGui.addToggle("BackGround",&mEnableBackground);
 
 	mGui.addSpacer();
-	mGui.addToggle("Threshold", &mEnableThreshold);
-	mGui.addSlider("ThrVal", 0.0, 255.0, &mParam_Threshold);
+//	mGui.addToggle("Threshold", &mEnableThreshold);
+//	mGui.addSlider("ThrVal", 0.0, 255.0, &mParam_Threshold);
 	mGui.addToggle("Canny", &mEnableCanny);
 	mGui.addToggle("FrameDiff", &mEnableFrameDiff);
 	mGui.addRangeSlider("CannyThr", 0.0, 255.0, &mParam_Canny_Thr1, &mParam_Canny_Thr2);
@@ -48,6 +51,7 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 		(pix.getHeight() != mSource.getHeight())){
 		mSource.allocate(pix.getWidth(), pix.getHeight(), OF_IMAGE_COLOR);
 		mGraySource.allocate(pix.getWidth(), pix.getHeight(), OF_IMAGE_GRAYSCALE);
+		mGraySource_background.allocate(pix.getWidth(), pix.getHeight(), OF_IMAGE_GRAYSCALE);
 		mGraySource_forDiff.allocate(pix.getWidth(), pix.getHeight(), OF_IMAGE_GRAYSCALE);
 	}
 
@@ -55,6 +59,19 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 		ofxCv::copy(pix, mSource);
 		ofxCv::convertColor(mSource, mGraySource, CV_RGB2GRAY);
 
+		if (mEnableBackground){
+			if (mBackgroundNeedsReflesh){
+				mBackgroundNeedsReflesh = false;
+				ofxCv::copy(mGraySource, mGraySource_background);
+				mGraySource_background.update();
+			}else{
+				ofxCv::absdiff(mGraySource, mGraySource_background, mGraySource);
+			}
+			
+		}else{
+			mBackgroundNeedsReflesh = true;
+		}
+		
 		if (mEnableBlur)		ofxCv::blur(mGraySource, mGraySource, mParam_Blur);
 		if (mEnableThreshold)	ofxCv::threshold(mGraySource, mGraySource, mParam_Threshold);
 		if (mEnableAdaptiveThreshold) useAdaptiveThreshold(mGraySource,
@@ -70,6 +87,9 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 			ofxCv::absdiff(mGraySource, mGraySource_forDiff, mGraySource_forDiff);
 			ofxCv::swap(mGraySource, mGraySource_forDiff);
 		}
+		if (mEnableAccumlateWeight) useAccumulateWeighted(&mGraySource,
+														  &mGraySource,
+														  &mAccum, mParam_accum_Time);
 
 		mSource.update();
 		mGraySource.update();
@@ -102,6 +122,21 @@ void dpCameraUnit_cvFX::drawThumbnail(int x, int y, float scale){
 
 	ofPopMatrix();
 
+}
+
+void dpCameraUnit_cvFX::useAccumulateWeighted(ofImage *src,ofImage *result,cv::Mat *accum,float time,bool fadeLastFrame){
+
+	if(accum->empty())ofxCv::toCv(*src).convertTo(*accum,CV_32F); //最初に１フレーム格納が必要
+
+	time = fmaxf(0.0, time);
+	time = fminf(1.0,time);
+
+	accumulateWeighted(ofxCv::toCv(*src),*accum, time);
+
+	accum->convertTo(tmp, CV_8U);
+	ofxCv::toOf(tmp,*result);
+
+	if( !fadeLastFrame )ofxCv::add(*src, *result, *result); //srcと結果を加算。これをしないと最後に入ってきたフレームも移動平均で薄くなる
 }
 
 void dpCameraUnit_cvFX::useAdaptiveThreshold(ofImage &src, ofImage &dst, int blockSize, int offset, bool invert, bool gauss){

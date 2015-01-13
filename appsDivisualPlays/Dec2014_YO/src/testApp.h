@@ -59,4 +59,52 @@ public:
     HakoniwaOscTest hakoniwaOscTest;
     HakoniwaColorOfWater hakoniwaColorOfWater;
     HakovisLaser hakovisLaser;
+    
+    struct : public ramBaseScene {
+        void drawActor(const ramActor &actor)
+        {
+            ofPushStyle();
+            ofEnableAlphaBlending();
+            ofSetColor(ofColor::cyan, 128);
+            ramDrawBasicActor(actor);
+            ofPopStyle();
+        }
+        string getName() const { return "TestSceneA"; }
+    } testSceneA;
+    
+    struct : public ramBaseScene {
+        void drawActor(const ramActor &actor)
+        {
+            ofPushStyle();
+            ofEnableAlphaBlending();
+            ofSetColor(ofColor::magenta, 128);
+            ramDrawBasicActor(actor);
+            ofPopStyle();
+        }
+        string getName() const { return "TestSceneB"; }
+    } testSceneB;
+    
+    struct : public ramBaseScene {
+        void drawActor(const ramActor &actor)
+        {
+            ofPushStyle();
+            ofEnableAlphaBlending();
+            ofSetColor(ofColor::yellow, 128);
+            ramDrawBasicActor(actor);
+            ofPopStyle();
+        }
+        string getName() const { return "TestSceneC"; }
+    } testSceneC;
+    
+    struct : public ramBaseScene {
+        void drawActor(const ramActor &actor)
+        {
+            ofPushStyle();
+            ofEnableAlphaBlending();
+            ofSetColor(ofColor::white, 128);
+            ramDrawBasicActor(actor);
+            ofPopStyle();
+        }
+        string getName() const { return "TestSceneD"; }
+    } testSceneD;
 };

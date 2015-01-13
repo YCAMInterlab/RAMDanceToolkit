@@ -33,6 +33,10 @@ public:
 	float getFitError() const;
 	cv::RotatedRect getRect();
 	ofPolyline& getPolyline();
+    const ofPolyline& getPolyline() const
+    {
+        return const_cast<ofPolyline&>(getPolyline());
+    }
 	void update(ofPolyline& polyline);
 	
 	string getName() const { return "Planar Gesture Recognizer"; }

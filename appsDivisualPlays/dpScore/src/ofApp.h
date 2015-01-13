@@ -29,5 +29,6 @@ public:
 private:
     dp::score::SceneManager mSceneManager;
     ofxOscReceiver mOscReceiver;
+    bool mInvert{false};
 };
 
