@@ -26,10 +26,11 @@ dpCameraUnit_cvFX::dpCameraUnit_cvFX(){
 	mGui.addIntSlider("offset", 3, 255, &mParam_adpThreshold_offset);
 	mGui.addToggle("invert", &mParam_adpThreshold_invert);
 	mGui.addToggle("gauss", &mParam_adpThreshold_gauss);
+	mGui.addToggle("BackGround",&mEnableBackground);
 
 	mGui.addSpacer();
-	mGui.addToggle("Threshold", &mEnableThreshold);
-	mGui.addSlider("ThrVal", 0.0, 255.0, &mParam_Threshold);
+//	mGui.addToggle("Threshold", &mEnableThreshold);
+//	mGui.addSlider("ThrVal", 0.0, 255.0, &mParam_Threshold);
 	mGui.addToggle("Canny", &mEnableCanny);
 	mGui.addToggle("FrameDiff", &mEnableFrameDiff);
 	mGui.addRangeSlider("CannyThr", 0.0, 255.0, &mParam_Canny_Thr1, &mParam_Canny_Thr2);
@@ -50,6 +51,7 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 		(pix.getHeight() != mSource.getHeight())){
 		mSource.allocate(pix.getWidth(), pix.getHeight(), OF_IMAGE_COLOR);
 		mGraySource.allocate(pix.getWidth(), pix.getHeight(), OF_IMAGE_GRAYSCALE);
+		mGraySource_background.allocate(pix.getWidth(), pix.getHeight(), OF_IMAGE_GRAYSCALE);
 		mGraySource_forDiff.allocate(pix.getWidth(), pix.getHeight(), OF_IMAGE_GRAYSCALE);
 	}
 
@@ -67,6 +69,19 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 														   mParam_adpThreshold_gauss);
 		if (mEnableInvert)		ofxCv::invert(mGraySource);
 		if (mEnableCanny)		ofxCv::Canny(mGraySource, mGraySource, mParam_Canny_Thr2, mParam_Canny_Thr1);
+
+		if (mEnableBackground){
+			if (mBackgroundNeedsReflesh){
+				mBackgroundNeedsReflesh = false;
+				ofxCv::copy(mGraySource, mGraySource_background);
+				mGraySource_background.update();
+			}else{
+				ofxCv::absdiff(mGraySource, mGraySource_background, mGraySource);
+			}
+
+		}else{
+			mBackgroundNeedsReflesh = true;
+		}
 
 		if (mEnableFrameDiff){
 			ofxCv::absdiff(mGraySource, mGraySource_forDiff, mGraySource_forDiff);

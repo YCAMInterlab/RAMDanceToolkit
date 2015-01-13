@@ -31,6 +31,7 @@ public:
 	bool mEnableInvert;
 	bool mEnableFrameDiff;
 	bool mEnableAccumlateWeight;
+	bool mEnableBackground;
 
 	float mParam_Blur;
 	float mParam_Canny_Thr1;
@@ -45,6 +46,8 @@ public:
 
 	ofxUICanvas mGui;
 	ofImage mSource;
+	ofImage mGraySource_background;
+	bool mBackgroundNeedsReflesh;
 	ofImage mGraySource;
 	ofImage mGraySource_forDiff;
 
