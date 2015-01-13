@@ -112,7 +112,7 @@ public:
     {
         if (hasKey(key))
         {
-            return hash[key];
+            return hash.at(key);
         }
         else
         {

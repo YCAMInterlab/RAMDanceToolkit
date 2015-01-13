@@ -76,8 +76,10 @@ public:
 		return *__instance;
 	}
 
-	ofxOscReceiver* getReceiver()	{return &receiver;};
-	ofxOscSender*	getSender()		{return &sender;};
+	ofxOscReceiver* getReceiver() {return &receiver;};
+    const ofxOscReceiver* getReceiver() const {return const_cast<ofxOscReceiver*>(&receiver);};
+	ofxOscSender* getSender() {return &sender;};
+    const ofxOscSender* getSender() const {return const_cast<ofxOscSender*>(&sender);};
 
 private:
 	static ramOscManager *__instance;

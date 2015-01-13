@@ -56,4 +56,13 @@ struct dpColor
     static const ofColor DARK_PINK_HEAVY;
 };
 
+struct dpFloatColor
+{
+    static const ofFloatColor MAIN_COLOR;
+    static const ofFloatColor PALE_PINK_LIGHT;
+    static const ofFloatColor PALE_PINK_HEAVY;
+    static const ofFloatColor DARK_PINK_LIGHT;
+    static const ofFloatColor DARK_PINK_HEAVY;
+};
+
 #endif

@@ -124,7 +124,7 @@ size_t ramSceneManager::findtSceneIndex(string name) const
 	}
 	return -1;
 }
-ramBaseScene* ramSceneManager::getScene(size_t index) const
+ramBaseScene* ramSceneManager::getScene(size_t index)
 {
 	return scenes.at(index);
 }
