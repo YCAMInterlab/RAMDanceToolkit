@@ -1,11 +1,11 @@
 #pragma once
-#include "dpScoreSceneBase.h"
+#include "dpScoreSceneBodyBase.h"
 #include "ParticleController.h"
 #include "ofxMotioner.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-class SceneBodyBoids final : public SceneBase {
+class SceneBodyBoids final : public SceneBodyBase<ofxMot::Node> {
 public:
     explicit SceneBodyBoids() = default;
     virtual ~SceneBodyBoids() = default;
@@ -19,7 +19,7 @@ public:
     void update(ofxEventMessage& m) override;
     void draw() override;
     
-    void onUpdateSkeleton(ofxMotioner::EventArgs &e);
+    void updateSkeleton(SkeletonPtr skl);
     
 private:
     void randomizeCamera();

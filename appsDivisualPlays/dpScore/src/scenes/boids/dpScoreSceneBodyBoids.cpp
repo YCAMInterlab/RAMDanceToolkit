@@ -1,4 +1,4 @@
-#include "SceneBodyBoids.h"
+#include "dpScoreSceneBodyBoids.h"
 #include "dpEasing.h"
 
 DP_SCORE_NAMESPACE_BEGIN
@@ -45,10 +45,7 @@ void SceneBodyBoids::enter()
     mParticleController.addPredators(ofxMot::NUM_JOINTS);
     
     mEnterTime  = ofGetElapsedTimef();
-    
-    ofAddListener(ofxMotioner::updateSkeletonEvent,
-                  this,
-                  &SceneBodyBoids::onUpdateSkeleton);
+
     mCam.enableMouseInput();
 }
 
@@ -58,9 +55,6 @@ void SceneBodyBoids::exit()
     
     mParticleController.clear();
     
-    ofAddListener(ofxMotioner::updateSkeletonEvent,
-                  this,
-                  &SceneBodyBoids::onUpdateSkeleton);
     mCam.enableMouseInput();
 }
 
@@ -201,13 +195,13 @@ void SceneBodyBoids::randomizeCamera()
 }
 
 #pragma mark ___________________________________________________________________
-void SceneBodyBoids::onUpdateSkeleton(ofxMotioner::EventArgs &e)
+void SceneBodyBoids::updateSkeleton(SkeletonPtr skl)
 {
-    if (mSkeletonName=="") mSkeletonName = e.skeleton->getName();
+    if (mSkeletonName=="") mSkeletonName = skl->getName();
     
-    if (mSkeletonName == e.skeleton->getName()) {
+    if (mSkeletonName == skl->getName()) {
         if (mActor) mPrevActor = mActor;
-        mActor = ofxMot::Skeleton::copy(e.skeleton);
+        mActor = ofxMot::Skeleton::copy(skl);
     }
 }
 
