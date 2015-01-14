@@ -206,6 +206,7 @@ void HakoniwaParallelLink_Base::setupControlPanel(){
 	utilityGui->addButton("Save",false);
 	utilityGui->addButton("Load",false);
 	utilityGui->addToggle("drawExtractor", &mDrawExtractor);
+	utilityGui->addToggle("drawMachine", &mDrawMachine);
 	utilityGui->addToggle("digitalI/O-2", &mDigitalIO[0]);
 	utilityGui->addToggle("digitalI/O-3", &mDigitalIO[1]);
 	utilityGui->addToggle("digitalI/O-4", &mDigitalIO[2]);

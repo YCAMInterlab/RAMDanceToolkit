@@ -44,13 +44,36 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->sourceCh	= 8;
     hakoniwas.back()->sceneNames.push_back("H:dpHServoPendulum");
     hakoniwas.back()->sceneNames.push_back("V:dpVisServoPendulum");
-    
 
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_STAGE;
 	hakoniwas.back()->CVPreset	= "stage";
 	hakoniwas.back()->sourceCh	= 10;
 	hakoniwas.back()->sceneNames.push_back("V:dpVisStage");
+
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_TESTA;
+	hakoniwas.back()->CVPreset	= "TestA";
+	hakoniwas.back()->sourceCh	= 2;
+	hakoniwas.back()->sceneNames.push_back("V:TestSceneA");
+
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_TESTA;
+	hakoniwas.back()->CVPreset	= "TestB";
+	hakoniwas.back()->sourceCh	= 3;
+	hakoniwas.back()->sceneNames.push_back("V:TestSceneB");
+
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_TESTA;
+	hakoniwas.back()->CVPreset	= "TestC";
+	hakoniwas.back()->sourceCh	= 4;
+	hakoniwas.back()->sceneNames.push_back("V:TestSceneC");
+
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_TESTA;
+	hakoniwas.back()->CVPreset	= "TestD";
+	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sceneNames.push_back("V:TestSceneD");
 
 //	hakoniwas.push_back(new hakoniwaPresets());
 //	hakoniwas.back()->type		= HAKO_FROZENICE;

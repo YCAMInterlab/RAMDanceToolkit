@@ -118,6 +118,7 @@
 		C66CCCEE1A66750D00CE64E9 /* virtualSteppingMotor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = virtualSteppingMotor.h; sourceTree = "<group>"; };
 		C66CCCEF1A66750D00CE64E9 /* ParallelLinkManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParallelLinkManager.cpp; sourceTree = "<group>"; };
 		C66CCCF01A66750D00CE64E9 /* ParallelLinkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallelLinkManager.h; sourceTree = "<group>"; };
+		C66CCD091A669A2A00CE64E9 /* testScenes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testScenes.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -250,6 +251,7 @@
 		C66CCCD61A66750D00CE64E9 /* sheep */ = {
 			isa = PBXGroup;
 			children = (
+				C66CCD091A669A2A00CE64E9 /* testScenes.h */,
 				C66CCCD71A66750D00CE64E9 /* HakoniwaParallelLink_Base.cpp */,
 				C66CCCD81A66750D00CE64E9 /* HakoniwaParallelLink_Base.h */,
 				C66CCCD91A66750D00CE64E9 /* HakoniwaPLink_Laser.cpp */,
