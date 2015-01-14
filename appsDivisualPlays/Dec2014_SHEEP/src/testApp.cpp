@@ -50,6 +50,8 @@ void testApp::setup()
     
 	/// scenes setup
 	// ------------------
+    ofSetWindowPosition(2000, 0);
+    ofSetFullscreen(true);
 	ramSetViewPort(ofRectangle(0.f, 0.f, SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT));
 
 	ramSceneManager& sceneManager = ramSceneManager::instance();
@@ -82,7 +84,7 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(const ramActor &actor)
 {
-	dpMarionette::instance().drawActor(actor);
+//	dpMarionette::instance().drawActor(actor);
 }
 
 //--------------------------------------------------------------
