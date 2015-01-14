@@ -25,6 +25,11 @@
 #include "dpHakoVisServoPendulum.h"
 #include "dpHakoVisPrism.h"
 
+//SHEEP Scenes
+#include "HakoniwaPlink_Oil.h"
+#include "HakoniwaPLink_Laser.h"
+#include "HakoniwaPLink_Prism.h"
+
 class testApp : public ramBaseApp
 {
 public:
@@ -53,7 +58,11 @@ public:
 	void onActorExit(const ramActor &actor);
 	void onRigidSetup(const ramRigidBody &rigid);
 	void onRigidExit(const ramRigidBody &rigid);
-    
+
+	//Parallel link
+	HakoniwaPLink_Oil			hakoniwaPlinkOil;
+	HakoniwaPLink_Laser			hakoniwaPlinkLaser;
+	HakoniwaPLink_Prism			hakoniwaPlinkPrism;
     
     // servo pendulum
     dpHakoniwaServoPendulum     hakoniwaServoPendulum;
