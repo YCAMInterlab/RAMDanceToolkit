@@ -100,7 +100,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		mContFinder.setMinArea(mParamCF_MinArea);
 		mContFinder.setSimplify(mParamCF_Simplify);
 		mContFinder.setTargetColor(mParamCF_targColor);
-		mContFinder.setUseTargetColor(mParamCF_UseTargetColor);
+//		mContFinder.setUseTargetColor(mParamCF_UseTargetColor);
 		mContFinder.setThreshold(mParamCF_Threshold);
 
 		mContFinder.findContours(pixGray);
@@ -210,7 +210,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 1.0f) &&
 			(isFrameNew)) mOptFlow.calcOpticalFlow(pixGray);
 		
-		if ((ofGetFrameNum() % 150 == 0) || (ofGetKeyPressed(' '))) mOptFlow.resetFlow();
+		if ((ofGetFrameNum() % 150 == 0) || (ofGetKeyPressed(' '))) mOptFlow.resetFeaturesToTrack();
 
 		vector <ofVec2f> mot = mOptFlow.getMotion();
 
