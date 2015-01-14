@@ -47,16 +47,37 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	mSlots[3].matrixInputCh = CVSW_4;
 
 	isSlave = false;
-//    senderToSlave.setup("192.168.20.36", 12400);
-    senderToSlave.setup("Hampshire.local", 12400);
+    senderToSlave.setup("192.168.20.4", 12400);
+//    senderToSlave.setup("Hampshire.local", 12400);
 
-	senderToRDTK1.setup("127.0.0.1", 10000);
-	senderToRDTK2.setup("192.168.20.3", 10000);
+	senderToRDTK1.setup("192.168.20.3", 10000);
+	senderToRDTK2.setup("192.168.20.2", 10000);
 
 }
 
 void dpSwitchingManager::update(){
+    
+    if (ofGetKeyPressed('1')){
+        ofxOscMessage m;
+        m.setAddress("/ram/set_scene");
+        m.addStringArg("hakoVisPLink_Laser");
+        m.addIntArg(1);
+        m.addIntArg(1);
+        m.addIntArg(0);
+        senderToRDTK1.sendMessage(m);
 
+    }
+    if (ofGetKeyPressed('2')){
+        ofxOscMessage m;
+        m.setAddress("/ram/set_scene");
+        m.addStringArg("hakoVisPLink_Laser");
+        m.addIntArg(1);
+        m.addIntArg(1);
+        m.addIntArg(0);
+        senderToRDTK1.sendMessage(m);
+
+    }
+    
 	if (isSlave){
 
 	}else{
@@ -217,7 +238,6 @@ void dpSwitchingManager::enableDisplay(hakoniwaType type, int displayNum,bool ne
 				m.addIntArg(0);
 				m.addIntArg(0);
 			}
-
 			senderToRDTK1.sendMessage(m);
 		}
 	}
@@ -237,8 +257,7 @@ void dpSwitchingManager::enableDisplay(hakoniwaType type, int displayNum,bool ne
 				m.addIntArg(0);
 				m.addIntArg(0);
 			}
-
-			senderToRDTK1.sendMessage(m);
+			senderToRDTK2.sendMessage(m);
 		}
 	}
 
