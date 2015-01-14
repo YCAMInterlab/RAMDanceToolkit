@@ -135,7 +135,38 @@ string demangle(const char* name)
 
 float alignf(float f)
 {
-    return ::floor(f) + 0.5f;
+    return ::ceil(::floor(f));
+}
+
+void alignedRect(const ofRectangle & r)
+{
+    alignedRect(r.x,r.y,0.0f,r.width, r.height);
+}
+
+void alignedRect(const ofPoint & p,float w,float h)
+{
+    alignedRect(p.x, p.y, p.z, w, h);
+}
+
+void alignedRect(float x,float y,float w,float h)
+{
+    alignedRect(x, y, 0.0f, w, h);
+}
+
+
+void alignedRect(float x,float y,float z,float w,float h)
+{
+    ofRect(alignf(x), alignf(y), alignf(z), alignf(w), alignf(h));
+}
+
+void alignedTranslate(const ofPoint& p)
+{
+    alignedTranslate(p.x, p.y, p.z);
+}
+
+void alignedTranslate(float x, float y, float z)
+{
+    ofTranslate(alignf(x), alignf(y), alignf(z));
 }
         
 ofVec3f randVec3f()
