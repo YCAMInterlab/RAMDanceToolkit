@@ -23,7 +23,7 @@
 #include "dpHakoniwaServoPendulum.h"
 #include "dpHakoVisBug.h"
 #include "dpHakoVisServoPendulum.h"
-#include "dpHakoVisPrism.h"
+#include "dpHakoVisPlinkPrism.h"
 
 //SHEEP Scenes
 #include "HakoniwaPlink_Oil.h"
@@ -72,6 +72,6 @@ public:
     dpHakoVisBug                visStage;
     
     // prism
-    dpHakoVisPrism              visPrism;
+    dpHakoVisPlinkPrism              visPrism;
     
 };
