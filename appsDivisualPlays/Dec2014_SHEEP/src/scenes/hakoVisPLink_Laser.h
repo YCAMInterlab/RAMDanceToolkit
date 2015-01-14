@@ -11,6 +11,19 @@
 
 #include "ramMain.h"
 
+class liningUnit{
+public:
+	liningUnit(){
+		pixel	= false;
+		transp	= 0;
+		pts.set(0,0,0);
+	}
+	~liningUnit(){};
+	bool	pixel;
+	int		transp;
+	ofVec3f pts;
+};
+
 class hakoVisPLink_Laser :public ramBaseScene{
 public:
 
@@ -37,7 +50,8 @@ protected:
 
 	ramOscReceiveTag receiver;
 	int pix_w,pix_h;
-	vector<bool> pixels;
+
+	vector<liningUnit> lines;
 };
 
 #endif /* defined(__RAMDanceToolkit__hakoVisPLink_Laser__) */

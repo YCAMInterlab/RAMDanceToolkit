@@ -7,3 +7,15 @@
 //
 
 #include "HakoniwaPLink_Prism.h"
+
+void HakoniwaPLink_Prism::initialize(){
+
+}
+
+void HakoniwaPLink_Prism::update_over(){
+
+}
+
+void HakoniwaPLink_Prism::draw_over(){
+	
+}

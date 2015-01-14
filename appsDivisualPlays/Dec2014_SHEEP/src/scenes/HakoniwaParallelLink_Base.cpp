@@ -38,6 +38,10 @@ HakoniwaParallelLink_Base::HakoniwaParallelLink_Base(){
 
 	mTrackMachine = true;
 
+	for (int i = 0;i < 6;i++){
+		mDigitalIO[i] = false;
+		mDigitalIO_Prev[i] = false;
+	}
 }
 
 void HakoniwaParallelLink_Base::update(){
@@ -51,14 +55,19 @@ void HakoniwaParallelLink_Base::update(){
 		machinePosition.z = chest.z;
 	}
 
-	if (ofGetFrameNum() % 1 == 0){
+	if (ofGetFrameNum() % 5 == 0){
 		if (mLinkManager.stepManager.useOsc)
 		{
-			ofxOscMessage m;
-			m.setAddress("/dp/hakoniwa/analogWrite/");
-			m.addIntArg(3);
-			m.addIntArg(mDigitalOut * mPwm_Param);
-			mOscSender->sendMessage(m);
+			for (int i = 0;i < 6;i++){
+				if (mDigitalIO_Prev[i] != mDigitalIO[i]){
+					mDigitalIO_Prev[i] = mDigitalIO[i];
+					ofxOscMessage m;
+					m.setAddress("/dp/hakoniwa/digitalWrite/");
+					m.addIntArg(2+i);
+					m.addIntArg(mDigitalIO[i]);
+					mOscSender->sendMessage(m);
+				}
+			}
 		}
 	}
 
@@ -68,6 +77,7 @@ void HakoniwaParallelLink_Base::update(){
 	else if (ManualPose)	mLinkManager.setPlot_inClamp(mManualPosition);
 	else					mLinkManager.setPlot_inClamp(v - machinePosition);
 
+	update_over();
 }
 
 void HakoniwaParallelLink_Base::draw(){
@@ -89,6 +99,7 @@ void HakoniwaParallelLink_Base::draw(){
 //		ofCircle(ofGetWidth()/2, ofGetHeight()/2, 300);
 	}
 
+	draw_over();
 }
 
 void HakoniwaParallelLink_Base::setupControlPanel(){
@@ -136,31 +147,31 @@ void HakoniwaParallelLink_Base::setupControlPanel(){
 	xyzGui->disableAppDrawCallback();
 	xyzGui->disableMouseEventCallbacks();
 	xyzGui->addLabel("Machine");
-	xyzGui->addSlider("X", -200.0, 200.0, &machinePosition.x,15,100);
+	xyzGui->addSlider("mcX", -200.0, 200.0, &machinePosition.x,15,100);
 	xyzGui->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
-	xyzGui->addSlider("Y", -200.0, 200.0, &machinePosition.y,15,100);
-	xyzGui->addSlider("Z", -200.0, 200.0, &machinePosition.z,15,100);
+	xyzGui->addSlider("mcY", -200.0, 200.0, &machinePosition.y,15,100);
+	xyzGui->addSlider("mcZ", -200.0, 200.0, &machinePosition.z,15,100);
 	xyzGui->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 
 	xyzGui->addLabel("Clamp");
-	xyzGui->addSlider("X", 0.0, 200.0, &mLinkManager.area_clamp.x,15,100);
+	xyzGui->addSlider("ClmpX", 0.0, 200.0, &mLinkManager.area_clamp.x,15,100);
 	xyzGui->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
-	xyzGui->addSlider("Y", 0.0, 200.0, &mLinkManager.area_clamp.y,15,100);
-	xyzGui->addSlider("Z", 0.0, 200.0, &mLinkManager.area_clamp.z,15,100);
+	xyzGui->addSlider("ClmpY", 0.0, 200.0, &mLinkManager.area_clamp.y,15,100);
+	xyzGui->addSlider("ClmpZ", 0.0, 200.0, &mLinkManager.area_clamp.z,15,100);
 	xyzGui->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 
 	xyzGui->addLabel("Offset");
-	xyzGui->addSlider("X", -200.0, 200.0, &mLinkManager.area_offset.x,15,100);
+	xyzGui->addSlider("OfsX", -200.0, 200.0, &mLinkManager.area_offset.x,15,100);
 	xyzGui->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
-	xyzGui->addSlider("Y", -200.0, 200.0, &mLinkManager.area_offset.y,15,100);
-	xyzGui->addSlider("Z", -200.0, 200.0, &mLinkManager.area_offset.z,15,100);
+	xyzGui->addSlider("OfsY", -200.0, 200.0, &mLinkManager.area_offset.y,15,100);
+	xyzGui->addSlider("OfsZ", -200.0, 200.0, &mLinkManager.area_offset.z,15,100);
 	xyzGui->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 
 	xyzGui->addLabel("Manual");
-	xyzGui->addSlider("X", -200.0, 200.0, &mManualPosition.x,15,100);
+	xyzGui->addSlider("MnlX", -200.0, 200.0, &mManualPosition.x,15,100);
 	xyzGui->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
-	xyzGui->addSlider("Y", -200.0, 200.0, &mManualPosition.y,15,100);
-	xyzGui->addSlider("Z", -200.0, 200.0, &mManualPosition.z,15,100);
+	xyzGui->addSlider("MnlY", -200.0, 200.0, &mManualPosition.y,15,100);
+	xyzGui->addSlider("MnlZ", -200.0, 200.0, &mManualPosition.z,15,100);
 	xyzGui->setPosition(480, 30);
 	xyzGui->autoSizeToFitWidgets();
 
@@ -192,7 +203,15 @@ void HakoniwaParallelLink_Base::setupControlPanel(){
 	utilityGui->disableMouseEventCallbacks();
 	utilityGui->addLabel("Utility");
 	utilityGui->addTextInput("OSCAddress", mSendOSCAddress)->setAutoClear(false);
+	utilityGui->addButton("Save",false);
+	utilityGui->addButton("Load",false);
 	utilityGui->addToggle("drawExtractor", &mDrawExtractor);
+	utilityGui->addToggle("digitalI/O-2", &mDigitalIO[0]);
+	utilityGui->addToggle("digitalI/O-3", &mDigitalIO[1]);
+	utilityGui->addToggle("digitalI/O-4", &mDigitalIO[2]);
+	utilityGui->addToggle("digitalI/O-5", &mDigitalIO[3]);
+	utilityGui->addToggle("digitalI/O-6", &mDigitalIO[4]);
+	utilityGui->addToggle("digitalI/O-7", &mDigitalIO[5]);
 	utilityGui->setPosition(240, 450);
 	utilityGui->autoSizeToFitWidgets();
 
@@ -215,6 +234,8 @@ void HakoniwaParallelLink_Base::setupControlPanel(){
 	ofAddListener(utilityGui->newGUIEvent, this, &HakoniwaParallelLink_Base::onPanelChanged);
 
 	motionEx.setupControlPanel(this);
+
+	initialize();
 }
 
 void HakoniwaParallelLink_Base::drawActor(const ramActor &actor)
@@ -224,6 +245,13 @@ void HakoniwaParallelLink_Base::drawActor(const ramActor &actor)
 
 void HakoniwaParallelLink_Base::onPanelChanged(ofxUIEventArgs& e){
 	ofxUIWidget* w = e.widget;
+
+	if (w->getName() == "Save"){
+		savePreset();
+	}
+	if (w->getName() == "Load"){
+		loadPreset();
+	}
 
 	if ((w->getName() == "OSCAddress")){
 		ofxUITextInput* t = (ofxUITextInput*)w;
@@ -237,6 +265,7 @@ void HakoniwaParallelLink_Base::onPanelChanged(ofxUIEventArgs& e){
 		mLinkManager.stepManager.absPos(tg);
 		mLinkManager.stepManager.setStepperAll(false);
 	}
+
 	if ((w->getName() == "A_Dn") && (w->getState() == OFX_UI_STATE_DOWN)){
 		int tg = -mLinkManager.delta.actuator[0].getGlobalOrientation().getEuler().x/2-4;
 		mLinkManager.stepManager.setStepperSingle(0, true);
@@ -286,5 +315,25 @@ void HakoniwaParallelLink_Base::onEnabled(){
 }
 
 void HakoniwaParallelLink_Base::onDisabled(){
+	mLinkManager.setPlot_inClamp(ofVec3f(0.0,196.0,0.0));
+	mLinkManager.sendSignal();
+}
+
+void HakoniwaParallelLink_Base::savePreset(){
+	ofDirectory::createDirectory(getName());
+
+	xyzGui		->saveSettings(getName()+"/xyz.xml");
+	systemGui	->saveSettings(getName()+"/system.xml");
+	settingGui	->saveSettings(getName()+"/setting.xml");
+	utilityGui	->saveSettings(getName()+"/util.xml");
+
+}
+
+void HakoniwaParallelLink_Base::loadPreset(){
+
+	xyzGui->loadSettings(getName()+"/xyz.xml");
+	systemGui->loadSettings(getName()+"/system.xml");
+	settingGui->loadSettings(getName()+"/setting.xml");
+	utilityGui->loadSettings(getName()+"/util.xml");
 
 }

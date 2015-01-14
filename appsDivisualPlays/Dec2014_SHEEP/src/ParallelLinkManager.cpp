@@ -46,20 +46,24 @@ void ParallelLinkManager::update(){
 	}
 
 	if (enableSync && (ofGetFrameNum() % (int)signal_step == 0)){
-		int ps[3];
-		for (int i = 0;i < 3;i++){
-			ps[i] = -delta.actuator[(i+id_offset)%3].getGlobalOrientation().getEuler().x/2;
-		}
-
-		if (id_swap) swap(ps[1], ps[2]);
-
-		stepManager.setStepperAll(true);
-		stepManager.multi_go_to(ps);
-		stepManager.setStepperAll(false);
+		sendSignal();
 	}
 
 	delta.setup(radius, armLength1*2, armLength2*2, height, plot_radius);
 	
+}
+
+void ParallelLinkManager::sendSignal(){
+	int ps[3];
+	for (int i = 0;i < 3;i++){
+		ps[i] = -delta.actuator[(i+id_offset)%3].getGlobalOrientation().getEuler().x/2;
+	}
+
+	if (id_swap) swap(ps[1], ps[2]);
+
+	stepManager.setStepperAll(true);
+	stepManager.multi_go_to(ps);
+	stepManager.setStepperAll(false);
 }
 
 void ParallelLinkManager::draw(){

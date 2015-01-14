@@ -29,10 +29,10 @@ enum hakoniwaType{
 	HAKO_PLINK_PRISM,
 	HAKO_PLINK_LASER,
 	HAKO_PLINK_OIL,
+	HAKO_SERVOPENDULUM,
 	HAKO_STRUGGLE,
 	HAKO_FROZENICE,
 	HAKO_COLOROFWATER,
-	HAKO_SERVOPENDULUM,
 	HAKO_BLANK,
 };
 
@@ -43,6 +43,7 @@ public:
 
 	hakoniwaType	type;
 	string			CVPreset;
+	vector<string>	sceneNames;
 	int				sourceCh;
 };
 
@@ -82,6 +83,8 @@ public:
 	vector<hakoniwaPresets*> hakoniwas;
 
 	ofxOscSender senderToSlave;
+	ofxOscSender senderToRDTK1;
+	ofxOscSender senderToRDTK2;
 
 	cvSlot mSlots[4];
 	sw_1010F_SerialController matrixSW;

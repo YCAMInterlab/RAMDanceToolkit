@@ -8,3 +8,14 @@
 
 #include "HakoniwaPLink_Laser.h"
 
+void HakoniwaPLink_Laser::initialize(){
+
+}
+
+void HakoniwaPLink_Laser::update_over(){
+
+}
+
+void HakoniwaPLink_Laser::draw_over(){
+	
+}

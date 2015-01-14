@@ -16,18 +16,24 @@
 // limitations under the License.
 
 #include "testApp.h"
-
+#include "dpConstants.h"
 
 /*!
  Scenes
  */
 #include "dpMarionette.h"
+#include "ramMotionExtractorExampleScene.h"
 
 #include "HakoniwaPLink_Laser.h"
-#include "ramMotionExtractorExampleScene.h"
+#include "HakoniwaPLink_Prism.h"
+#include "HakoniwaPlink_Oil.h"
+
 #include "hakoVisPLink_Laser.h"
 
 HakoniwaPLink_Laser plink_laser;
+HakoniwaPLink_Oil	plink_oil;
+HakoniwaPLink_Prism plink_prism;
+
 ramMotionExtractorExampleScene motionExt;
 hakoVisPLink_Laser vislink;
 
@@ -44,10 +50,15 @@ void testApp::setup()
     
 	/// scenes setup
 	// ------------------
+	ramSetViewPort(ofRectangle(0.f, 0.f, SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT));
+
 	ramSceneManager& sceneManager = ramSceneManager::instance();
 
-	sceneManager.allocateFbos(1920, 1080);
+	sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
 	sceneManager.addScene( plink_laser.getPtr());
+	sceneManager.addScene( plink_oil.getPtr());
+	sceneManager.addScene( plink_prism.getPtr());
+
 	sceneManager.addScene( vislink.getPtr());
 	sceneManager.addScene( motionExt.getPtr());
 

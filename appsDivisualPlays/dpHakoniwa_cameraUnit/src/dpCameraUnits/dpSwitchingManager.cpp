@@ -21,27 +21,22 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->type		= HAKO_PLINK_PRISM;
 	hakoniwas.back()->CVPreset	= "plink_Prism";
 	hakoniwas.back()->sourceCh	= 1;
+	hakoniwas.back()->sceneNames.push_back("H:HakoniwaPLink_Prism");
+	hakoniwas.back()->sceneNames.push_back("V:hakoVisPLink_Prism");
 
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_LASER;
 	hakoniwas.back()->CVPreset	= "plink_Laser";
 	hakoniwas.back()->sourceCh	= 2;
+	hakoniwas.back()->sceneNames.push_back("H:HakoniwaPLink_Laser");
+	hakoniwas.back()->sceneNames.push_back("V:hakoVisPLink_Laser");
 
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_OIL;
 	hakoniwas.back()->CVPreset	= "plink_Oil";
 	hakoniwas.back()->sourceCh	= 3;
-
-	//あばれる君
-	hakoniwas.push_back(new hakoniwaPresets());
-	hakoniwas.back()->type		= HAKO_STRUGGLE;
-	hakoniwas.back()->CVPreset	= "struggle.xml";
-	hakoniwas.back()->sourceCh	= 0;
-
-	hakoniwas.push_back(new hakoniwaPresets());
-	hakoniwas.back()->type		= HAKO_FROZENICE;
-	hakoniwas.back()->CVPreset	= "frozen.xml";
-	hakoniwas.back()->sourceCh	= 1;
+	hakoniwas.back()->sceneNames.push_back("H:HakoniwaPLink_Oil");
+	hakoniwas.back()->sceneNames.push_back("V:hakoVisPLink_Oil");
 
 	for (int i = 0;i < 4;i++){
 		mSlots[i].targetDisplay.clear();
@@ -54,6 +49,10 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	isSlave = false;
 //    senderToSlave.setup("192.168.20.36", 12400);
     senderToSlave.setup("Hampshire.local", 12400);
+
+	senderToRDTK1.setup("127.0.0.1", 10000);
+	senderToRDTK2.setup("192.168.20.3", 10000);
+
 }
 
 void dpSwitchingManager::update(){
@@ -166,6 +165,7 @@ void dpSwitchingManager::SelectHakoniwa(hakoniwaType type, int slot){
                 
                 matrixSW.setSW(targHako->sourceCh,
                                mSlots[targCvSlot].matrixInputCh);
+
             }
         }else{
             if (targCvSlot == 2 || targCvSlot == 3){
@@ -199,14 +199,52 @@ void dpSwitchingManager::enableDisplay(hakoniwaType type, int displayNum,bool ne
 
 	disableDisplay(displayNum);
 
-	ofxOscMessage m;
-	m.setAddress("/dp/sceneManage/enable");
-	m.addIntArg(type);
-	m.addIntArg(displayNum);
-	m.addIntArg(newHako);//新規に箱庭アウトシーンを有効にする必要があるかどうか
+	hakoniwaPresets* tp = getHakoniwaPreset(type);
+
+	if (displayNum == 0 ||
+		displayNum == 1){
+		for (int i = 0;i < tp->sceneNames.size();i++){
+			ofxOscMessage m;
+			m.setAddress("/ram/set_scene");
+			m.addStringArg(tp->sceneNames[i].substr(2));
+
+			if (tp->sceneNames[i].substr(0,1) == "V"){
+				m.addIntArg(1);
+				m.addIntArg(displayNum == 0);//screen0
+				m.addIntArg(displayNum == 1);//screen1
+			}else{
+				m.addIntArg(newHako);
+				m.addIntArg(0);
+				m.addIntArg(0);
+			}
+
+			senderToRDTK1.sendMessage(m);
+		}
+	}
+	if (displayNum == 2 ||
+		displayNum == 3){
+		for (int i = 0;i < tp->sceneNames.size();i++){
+			ofxOscMessage m;
+			m.setAddress("/ram/set_scene");
+			m.addStringArg(tp->sceneNames[i].substr(2));
+
+			if (tp->sceneNames[i].substr(0,1) == "V"){
+				m.addIntArg(1);
+				m.addIntArg(displayNum == 2);//screen0
+				m.addIntArg(displayNum == 3);//screen1
+			}else{
+				m.addIntArg(newHako);
+				m.addIntArg(0);
+				m.addIntArg(0);
+			}
+
+			senderToRDTK1.sendMessage(m);
+		}
+	}
+
 
 	//箱庭の映像を舞台ディスプレイへ
-	matrixSW.setSW(getHakoniwaPreset(type)->sourceCh, displayNum+4);
+//	matrixSW.setSW(getHakoniwaPreset(type)->sourceCh, displayNum+4);
 	//TODO: RDTKへのOSC送り
 
 }
@@ -257,17 +295,12 @@ void dpSwitchingManager::disableDisplay(int displayNum){
 		int eraseTarg = mSlots[targCvSlot].targetDisplay[targDisp];
 		mSlots[targCvSlot].targetDisplay.erase(mSlots[targCvSlot].targetDisplay.begin()+
 											   targDisp);
-		cout << "Erase :" << eraseTarg << endl;
-		ofxOscMessage m;
-		m.setAddress("/dp/sceneManage/disable");
-		m.addIntArg(mSlots[targCvSlot].hakoType);
-		m.addIntArg(displayNum);
 
 		//ディスプレイが無くなった時スロットを無効にする
 		if (mSlots[targCvSlot].targetDisplay.size() == 0){
-			mSlots[targCvSlot].isEmpty = true;
-			mSlots[targCvSlot].hakoType = HAKO_BLANK;
-			mSlots[targCvSlot].sourceCh -1;
+			mSlots[targCvSlot].isEmpty	= true;
+			mSlots[targCvSlot].hakoType	= HAKO_BLANK;
+			mSlots[targCvSlot].sourceCh = - 1;
 			mSlots[targCvSlot].presetFile = "";
 		}
 	}
