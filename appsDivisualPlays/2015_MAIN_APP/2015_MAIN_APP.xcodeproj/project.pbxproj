@@ -89,7 +89,7 @@
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
 		92CB5B0D1A666F1F00257334 /* dpHakoniwaServoPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaServoPendulum.h; sourceTree = "<group>"; };
 		92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisBug.h; sourceTree = "<group>"; };
-		92CB5B0F1A666F1F00257334 /* dpHakoVisPlinkPrism.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisPlinkPrism.h; sourceTree = "<group>"; };
+		92CB5B0F1A666F1F00257334 /* dpHakoVisPLink_Prism.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisPLink_Prism.h; sourceTree = "<group>"; };
 		92CB5B101A666F1F00257334 /* dpHakoVisServoPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisServoPendulum.h; sourceTree = "<group>"; };
 		92CB5B131A666F6A00257334 /* dpRibbon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpRibbon.h; sourceTree = "<group>"; };
 		92CB5B141A666F6A00257334 /* dpServoPendulumThread.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpServoPendulumThread.h; sourceTree = "<group>"; };
@@ -194,7 +194,7 @@
 				92CB5B121A666F6A00257334 /* util */,
 				92CB5B0D1A666F1F00257334 /* dpHakoniwaServoPendulum.h */,
 				92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */,
-				92CB5B0F1A666F1F00257334 /* dpHakoVisPlinkPrism.h */,
+				92CB5B0F1A666F1F00257334 /* dpHakoVisPLink_Prism.h */,
 				92CB5B101A666F1F00257334 /* dpHakoVisServoPendulum.h */,
 			);
 			path = knd;

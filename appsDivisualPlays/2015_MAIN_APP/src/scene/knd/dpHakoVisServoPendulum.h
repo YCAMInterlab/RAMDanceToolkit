@@ -86,7 +86,7 @@ public:
  
         
         ramOscManager::instance().addReceiverTag(&mReceiver);
-        mReceiver.addAddress("/dp/cameraUnit/servoPendulum/contour/boundingRect");
+        mReceiver.addAddress("/dp/cameraUnit/ServoPendulum/contour/boundingRect");
 
     }
     
@@ -96,7 +96,7 @@ public:
             ofxOscMessage m;
             mReceiver.getNextMessage(&m);
             
-            if(m.getAddress() == "/dp/cameraUnit/servoPendulum/contour/boundingRect"){
+            if(m.getAddress() == "/dp/cameraUnit/ServoPendulum/contour/boundingRect"){
                 
                 int num = m.getArgAsInt32(0);
                 
