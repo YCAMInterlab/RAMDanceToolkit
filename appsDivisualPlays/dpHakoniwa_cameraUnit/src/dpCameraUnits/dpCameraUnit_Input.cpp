@@ -10,7 +10,7 @@
 
 dpCameraUnit_input::dpCameraUnit_input(){
 
-	mVideoPlayer.loadMovie("hakoniwa_split_2_1.mov");//("hakoniwa_split_2.mov");
+	mVideoPlayer.loadMovie("hakoniwa_split_2.mov");//("hakoniwa_split_2.mov");
 	mVideoPlayer.setVolume(0.0);
 	
 	mCameraList.push_back("None");
@@ -45,7 +45,6 @@ dpCameraUnit_input::dpCameraUnit_input(){
 	mFinalSource_Small.allocate(input_width * cvSrc_ratio,
 								input_height * cvSrc_ratio,
 								OF_IMAGE_COLOR);
-
 	for (int i = 0;i < 4;i++){
 		mFinalSource_FourSplit[i].allocate(input_width/2.0,
 										   input_height/2.0, OF_IMAGE_COLOR);
@@ -86,7 +85,14 @@ void dpCameraUnit_input::update(){
 											 mFinalSource_Large,
 											 warpPt);
 				}else{
-					ofxCv::copy(isVideo ? mVideoPlayer.getPixelsRef() : mVideoGrabber.getPixelsRef(), mFinalSource_Large);
+					if (isVideo){
+						if (mVideoPlayer.getWidth() > input_width)
+							ofxCv::resize(mVideoPlayer.getPixelsRef(), mFinalSource_Large);
+						else
+							ofxCv::copy(mVideoPlayer.getPixelsRef(), mFinalSource_Large);
+					}else{
+						ofxCv::copy(mVideoGrabber.getPixelsRef(), mFinalSource_Large);
+					}
 				}
 
 				mFinalSource_Large.update();

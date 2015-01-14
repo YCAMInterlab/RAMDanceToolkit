@@ -13,8 +13,9 @@ dpCameraUnit_cvFX::dpCameraUnit_cvFX(){
 	mGui.setup();
 	mGui.addLabel("cvEffect",OFX_UI_FONT_LARGE);
 	mGui.addSpacer();
-	mGui.addLabel("GrayChannel");
-	mGui.addSpacer();
+//	mGui.addLabel("GrayChannel");
+//	mGui.addSpacer();
+	mGui.addToggle("Warp", &mEnableWarpPerspective);
 	mGui.addToggle("Blur", &mEnableBlur);
 	mGui.addSlider("BlurSize", 0.0, 40.0, &mParam_Blur);
 	mGui.addSpacer();
@@ -71,7 +72,26 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 		}else{
 			mBackgroundNeedsReflesh = true;
 		}
-		
+
+		if (mEnableWarpPerspective){
+			if (mResetWarpPt){
+				mResetWarpPt = false;
+
+				mUnwarpPts[0].set(0.0, 0.0);
+				mUnwarpPts[1].set(mGraySource.getWidth(), 0.0);
+				mUnwarpPts[2].set(mGraySource.getWidth(), mGraySource.getHeight());
+				mUnwarpPts[3].set(0.0, mGraySource.getHeight());
+
+			}
+
+			vector<ofxCv::Point2f> warpPt;
+			for (int i = 0;i < 4;i++) warpPt.push_back(ofxCv::toCv(mUnwarpPts[i]));
+			ofxCv::unwarpPerspective(mGraySource, tmp, warpPt);
+
+		}else{
+			mResetWarpPt = true;
+		}
+
 		if (mEnableBlur)		ofxCv::blur(mGraySource, mGraySource, mParam_Blur);
 		if (mEnableThreshold)	ofxCv::threshold(mGraySource, mGraySource, mParam_Threshold);
 		if (mEnableAdaptiveThreshold) useAdaptiveThreshold(mGraySource,
@@ -100,7 +120,7 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 void dpCameraUnit_cvFX::draw(int x,int y){
 
 	drawUI(x, y);
-	drawThumbnail(x+240, y);
+	drawThumbnail(x, ofGetHeight() - 300);
 
 }
 
@@ -119,6 +139,13 @@ void dpCameraUnit_cvFX::drawThumbnail(int x, int y, float scale){
 	ofSetColor(255);
 	mSource.draw(0,0);
 	mGraySource.draw(0, mSource.getHeight());
+
+	ofSetColor(255, 255, 0);
+	glBegin(GL_LINE_STRIP);
+	for (int i = 0;i < 4;i++){
+		glVertex2d(mUnwarpPts[i].x, mUnwarpPts[i].y);
+	}
+	glEnd();
 
 	ofPopMatrix();
 

@@ -36,10 +36,10 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 
 	mGui.addLabel("ContourFinder");
 	mGui.addSpacer();
-	mGui.addToggle("Blob"	, false);
-	mGui.addToggle("Pts"	, false);
-	mGui.addToggle("Simplify"		, &mParamCF_Simplify);
-	mGui.addToggle("UseTargetColor"	, &mParamCF_UseTargetColor);
+//	mGui.addToggle("Blob"	, false);
+//	mGui.addToggle("Pts"	, false);
+//	mGui.addToggle("Simplify"		, &mParamCF_Simplify);
+//	mGui.addToggle("UseTargetColor"	, &mParamCF_UseTargetColor);
 	mGui.addRangeSlider("Area", 0.0, 10000.0, &mParamCF_MinArea, &mParamCF_MaxArea);
 	mGui.addSlider("MaxBlobNum", 0.0, 500.0, &mParamCF_MaxBlobNum);
 	mGui.addSlider("Threshold", 0.0, 255.0, &mParamCF_Threshold);
@@ -295,7 +295,6 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 	ofPushMatrix();
 	ofTranslate(x, y);
 	glScaled(scale, scale, scale);
-	ofDrawBitmapString(hakoniwa_name, 0,400);
 
 	if (mViewSource && imgRefGray != NULL) imgRefGray->draw(0,0);
 
@@ -341,7 +340,7 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 
 void dpCameraUnit_cvAnalysis::draw(int x,int y){
 	drawUI(x, y);
-	drawThumbnail(x+240, y);
+	drawThumbnail(x, ofGetHeight() - 300);
 }
 
 void dpCameraUnit_cvAnalysis::guiEvent(ofxUIEventArgs &ev){
