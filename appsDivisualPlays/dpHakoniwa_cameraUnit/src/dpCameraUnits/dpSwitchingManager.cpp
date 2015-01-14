@@ -52,7 +52,8 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	mSlots[3].matrixInputCh = CVSW_4;
 
 	isSlave = false;
-	senderToSlave.setup("192.168.20.36", 10000);
+//    senderToSlave.setup("192.168.20.36", 12400);
+    senderToSlave.setup("Hampshire.local", 12400);
 }
 
 void dpSwitchingManager::update(){
@@ -158,11 +159,23 @@ void dpSwitchingManager::SelectHakoniwa(hakoniwaType type, int slot){
 		mSlots[targCvSlot].targetDisplay.clear();
 		mSlots[targCvSlot].targetDisplay.push_back(int(slot));
 
-		FXPtr[targCvSlot]		.loadPreset(mSlots[targCvSlot].presetFile);
-		AnalysisPtr[targCvSlot]	.loadPreset(mSlots[targCvSlot].presetFile);
-
-		matrixSW.setSW(targHako->sourceCh,
-					   mSlots[targCvSlot].matrixInputCh);
+        if (!isSlave){
+            if (targCvSlot == 0 || targCvSlot == 1){
+                FXPtr[targCvSlot]		.loadPreset(mSlots[targCvSlot].presetFile);
+                AnalysisPtr[targCvSlot]	.loadPreset(mSlots[targCvSlot].presetFile);
+                
+                matrixSW.setSW(targHako->sourceCh,
+                               mSlots[targCvSlot].matrixInputCh);
+            }
+        }else{
+            if (targCvSlot == 2 || targCvSlot == 3){
+                FXPtr[targCvSlot]		.loadPreset(mSlots[targCvSlot].presetFile);
+                AnalysisPtr[targCvSlot]	.loadPreset(mSlots[targCvSlot].presetFile);
+                
+                matrixSW.setSW(targHako->sourceCh,
+                               mSlots[targCvSlot].matrixInputCh);
+            }
+        }
 		cout << "clear & add " << slot << endl;
 	}else{
 
