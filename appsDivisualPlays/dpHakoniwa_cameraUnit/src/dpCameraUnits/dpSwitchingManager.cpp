@@ -20,35 +20,37 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_PRISM;
 	hakoniwas.back()->CVPreset	= "plink_Prism";
-	hakoniwas.back()->sourceCh	= 1;
+	hakoniwas.back()->sourceCh	= 2;
 	hakoniwas.back()->sceneNames.push_back("H:HakoniwaPLink_Prism");
-	hakoniwas.back()->sceneNames.push_back("V:hakoVisPLink_Prism");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisPLinkPrism");
 
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_LASER;
 	hakoniwas.back()->CVPreset	= "plink_Laser";
-	hakoniwas.back()->sourceCh	= 2;
+	hakoniwas.back()->sourceCh	= 3;
 	hakoniwas.back()->sceneNames.push_back("H:HakoniwaPLink_Laser");
 	hakoniwas.back()->sceneNames.push_back("V:hakoVisPLink_Laser");
 
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_OIL;
 	hakoniwas.back()->CVPreset	= "plink_Oil";
-	hakoniwas.back()->sourceCh	= 3;
+	hakoniwas.back()->sourceCh	= 4;
 	hakoniwas.back()->sceneNames.push_back("H:HakoniwaPLink_Oil");
 	hakoniwas.back()->sceneNames.push_back("V:hakoVisPLink_Oil");
 
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_SERVOPENDULUM;
 	hakoniwas.back()->CVPreset	= "servoPendulum";
-	hakoniwas.back()->sourceCh	= 7;
-	hakoniwas.back()->sceneNames.push_back("servoPendulum");
+	hakoniwas.back()->sourceCh	= 8;
+    hakoniwas.back()->sceneNames.push_back("H:dpHServoPendulum");
+    hakoniwas.back()->sceneNames.push_back("V:dpVisServoPendulum");
+    
 
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_STAGE;
 	hakoniwas.back()->CVPreset	= "stage";
-	hakoniwas.back()->sourceCh	= 9;
-	hakoniwas.back()->sceneNames.push_back("stage");
+	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sceneNames.push_back("V:dpVisStage");
 
 //	hakoniwas.push_back(new hakoniwaPresets());
 //	hakoniwas.back()->type		= HAKO_FROZENICE;
@@ -217,20 +219,15 @@ void dpSwitchingManager::SelectHakoniwa(hakoniwaType type, int slot){
             if (targCvSlot == 0 || targCvSlot == 1){
                 FXPtr[targCvSlot]		.loadPreset(mSlots[targCvSlot].presetFile);
                 AnalysisPtr[targCvSlot]	.loadPreset(mSlots[targCvSlot].presetFile);
-                
-                matrixSW.setSW(targHako->sourceCh,
-                               mSlots[targCvSlot].matrixInputCh);
-
             }
         }else{
             if (targCvSlot == 2 || targCvSlot == 3){
                 FXPtr[targCvSlot]		.loadPreset(mSlots[targCvSlot].presetFile);
                 AnalysisPtr[targCvSlot]	.loadPreset(mSlots[targCvSlot].presetFile);
-                
-                matrixSW.setSW(targHako->sourceCh,
-                               mSlots[targCvSlot].matrixInputCh);
             }
         }
+        matrixSW.setSW(targHako->sourceCh,
+                       mSlots[targCvSlot].matrixInputCh);
 		cout << "clear & add " << slot << endl;
 	}else{
 
