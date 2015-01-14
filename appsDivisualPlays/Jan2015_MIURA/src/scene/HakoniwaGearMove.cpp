@@ -12,6 +12,7 @@ void HakoniwaGearMove::setupControlPanel(){
     
     mDatahow = true;
     mturn = false;
+    mManual = false;
     mgear1 = true;
     mgear2 = true;
     mgear3 = true;
@@ -33,6 +34,7 @@ void HakoniwaGearMove::setupControlPanel(){
     panel->addToggle("allturn", &mturn);
     panel->addToggle("allturn reverse", &mturnReverse);
     panel->addIntSlider("TrurnSpeed", 100, 35000, &TurnSpeed);
+    panel->addToggle("manual turn", &mManual);
     panel->addToggle("gear1", &mgear1);
     panel->addToggle("gear1 reverse", &mgear1Reverse);
     panel->addIntSlider("TrurnGear1Speed", 100, 25000, &TurnGear1Speed);
@@ -95,12 +97,15 @@ void HakoniwaGearMove::draw(){
                 TurnGear3Count += motionExtractor.getVelocitySpeedAt(i);
             }
         }
-        TurnGear1Speed = TurnGear1Count * mScale;
-        TurnGear2Speed = TurnGear2Count * mScale;
-        TurnGear3Speed = TurnGear3Count * mScale;
-        cout << "TurnGear1Speed " << TurnGear1Speed << endl;
-        cout << "TurnGear2Speed " << TurnGear2Speed << endl;
-        cout << "TurnGear3Speed " << TurnGear3Speed << endl;
+        
+        if (mManual != true) {
+            TurnGear1Speed = TurnGear1Count * mScale;
+            TurnGear2Speed = TurnGear2Count * mScale;
+            TurnGear3Speed = TurnGear3Count * mScale;
+            cout << "TurnGear1Speed " << TurnGear1Speed << endl;
+            cout << "TurnGear2Speed " << TurnGear2Speed << endl;
+            cout << "TurnGear3Speed " << TurnGear3Speed << endl;
+        }
         
         if(mturn == true){
             stepManager.setStepperAll(true);
@@ -108,58 +113,67 @@ void HakoniwaGearMove::draw(){
             stepManager.setStepperAll(false);
         }
         if(mgear1 == true){
-            float x = ofRandom(0,1);
-            int Min1speed = ofRandom(600, 2500);
-            if ( x  > 0.51 ){
-                mgear1Reverse = true;
+            if (mManual != true) {
+                float x = ofRandom(0,1);
+                int Min1speed = ofRandom(600, 2500);
+                if ( x  > 0.51 ){
+                    mgear1Reverse = true;
+                }else{
+                    mgear1Reverse = false;
+                }
+                if ( TurnGear1Speed >= Max1speed) {
+                    OnestepTurn(0, Max1speed, mgear1Reverse);
+                }else if( TurnGear1Speed <= Min1speed){
+                    OnestepTurn(0, Min1speed, mgear1Reverse);
+                }else{
+                    OnestepTurn(0, TurnGear1Speed, mgear1Reverse);
+                }
             }else{
-                mgear1Reverse = false;
-            }
-            if ( TurnGear1Speed >= Max1speed) {
-                OnestepTurn(0, Max1speed, mgear1Reverse);
-            }else if( TurnGear1Speed <= Min1speed){
-                OnestepTurn(0, Min1speed, mgear1Reverse);
-            }else{
+                //マニュアル操作
                 OnestepTurn(0, TurnGear1Speed, mgear1Reverse);
             }
-            //マニュアル操作
-//            OnestepTurn(0, TurnGear1Speed, mgear1Reverse);
         }
         if(mgear2 == true){
-            float x = ofRandom(0,1);
-            int Min2speed = ofRandom(100, 2500);
-            if ( x > 0.51 ){
-                mgear2Reverse = true;
+            if (mManual != true) {
+                float x = ofRandom(0,1);
+                int Min2speed = ofRandom(100, 2500);
+                if ( x > 0.51 ){
+                    mgear2Reverse = true;
+                }else{
+                    mgear2Reverse = false;
+                }
+                if ( TurnGear2Speed >= Max2speed) {
+                    OnestepTurn(1, Max2speed, mgear2Reverse);
+                }else if( TurnGear2Speed <= Min2speed){
+                    OnestepTurn(1, Min2speed, mgear2Reverse);
+                }else{
+                    OnestepTurn(1, TurnGear2Speed, mgear2Reverse);
+                }
             }else{
-                mgear2Reverse = false;
-            }
-            if ( TurnGear2Speed >= Max2speed) {
-                OnestepTurn(1, Max2speed, mgear2Reverse);
-            }else if( TurnGear2Speed <= Min2speed){
-                OnestepTurn(1, Min2speed, mgear2Reverse);
-            }else{
+                //マニュアル操作
                 OnestepTurn(1, TurnGear2Speed, mgear2Reverse);
             }
-            //マニュアル操作
-//            OnestepTurn(1, TurnGear2Speed, mgear2Reverse);
         }
         if(mgear3 == true){
-            //逆回転はしない
-//            float x = ofRandom(0,1);
-//            if ( x > 0.51 ){
-//                mgear3Reverse = true;
-//            }else{
-//                mgear3Reverse = false;
-//            }
-            if ( TurnGear3Speed >= Max3speed) {
-                OnestepTurn(2, Max3speed, true);
-            }else if( TurnGear3Speed <= Min3speed){
-                OnestepTurn(2, Min3speed, true);
+            if (mManual != true) {
+                //逆回転はしない
+    //            float x = ofRandom(0,1);
+    //            if ( x > 0.51 ){
+    //                mgear3Reverse = true;
+    //            }else{
+    //                mgear3Reverse = false;
+    //            }
+                if ( TurnGear3Speed >= Max3speed) {
+                    OnestepTurn(2, Max3speed, true);
+                }else if( TurnGear3Speed <= Min3speed){
+                    OnestepTurn(2, Min3speed, true);
+                }else{
+                    OnestepTurn(2, TurnGear3Speed, mgear3Reverse);
+                }
             }else{
+                //マニュアル操作
                 OnestepTurn(2, TurnGear3Speed, mgear3Reverse);
             }
-            //マニュアル操作
-//            OnestepTurn(2, TurnGear3Speed, mgear3Reverse);
         }
     }
     

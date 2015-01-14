@@ -51,7 +51,7 @@ private:
     ofxOscSender mOscSender;
     axisConverter   converter;
     
-    bool mturn, mgear1, mgear2, mgear3, mDatahow;
+    bool mturn, mgear1, mgear2, mgear3, mDatahow, mManual;
     bool mturnReverse, mgear1Reverse, mgear2Reverse, mgear3Reverse;
     int mScale, TurnSpeed, TurnGear1Speed, TurnGear2Speed, TurnGear3Speed;
     int CountGear1Speed, CountGear2Speed, CountGear3Speed;
