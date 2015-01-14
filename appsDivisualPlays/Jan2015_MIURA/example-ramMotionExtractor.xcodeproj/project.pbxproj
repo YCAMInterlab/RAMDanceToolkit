@@ -8,10 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
+		925539F51A5FE4F400AE8CC8 /* dpHakoniwaStruggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 925539F41A5FE4F400AE8CC8 /* dpHakoniwaStruggle.cpp */; };
+		925539FB1A5FE78100AE8CC8 /* dpHakoVisStruggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 925539FA1A5FE78100AE8CC8 /* dpHakoVisStruggle.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
-		C6A68D1F1A5C330900122475 /* ramMotionExtractorExampleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A68D1D1A5C330900122475 /* ramMotionExtractorExampleScene.cpp */; };
-		C6A68D231A5C331D00122475 /* ramMotionExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A68D211A5C331D00122475 /* ramMotionExtractor.cpp */; };
-		D58D52921A5FA2D700B8A724 /* HakoniwaTheta.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D58D52901A5FA2D700B8A724 /* HakoniwaTheta.cpp */; };
+		D5B5A4511A6357C500891CC0 /* axisConverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5B5A44F1A6357C500891CC0 /* axisConverter.cpp */; };
+		D5CF059B1A6246E0007CD1E8 /* HakoniwaParallelLink_Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5CF058D1A6246E0007CD1E8 /* HakoniwaParallelLink_Base.cpp */; };
+		D5CF059C1A6246E0007CD1E8 /* ofxKsmrParallelLinkDelta.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5CF05901A6246E0007CD1E8 /* ofxKsmrParallelLinkDelta.cpp */; };
+		D5CF059D1A6246E0007CD1E8 /* ofxKsmrStepManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5CF05931A6246E0007CD1E8 /* ofxKsmrStepManager.cpp */; };
+		D5CF059E1A6246E0007CD1E8 /* virtualSteppingMotor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5CF05951A6246E0007CD1E8 /* virtualSteppingMotor.cpp */; };
+		D5CF059F1A6246E0007CD1E8 /* ParallelLinkManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5CF05971A6246E0007CD1E8 /* ParallelLinkManager.cpp */; };
+		D5CF05A01A6246E0007CD1E8 /* HakoniwaGearMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5CF05991A6246E0007CD1E8 /* HakoniwaGearMove.cpp */; };
+		D5CF05A61A624D0C007CD1E8 /* HakoniwaTheta.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5CF05A41A624D0C007CD1E8 /* HakoniwaTheta.cpp */; };
+		D5CF05C01A62A4CE007CD1E8 /* ofxTCPClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5CF05B81A62A4CE007CD1E8 /* ofxTCPClient.cpp */; };
+		D5CF05C11A62A4CE007CD1E8 /* ofxTCPManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5CF05BA1A62A4CE007CD1E8 /* ofxTCPManager.cpp */; };
+		D5CF05C21A62A4CE007CD1E8 /* ofxTCPServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5CF05BC1A62A4CE007CD1E8 /* ofxTCPServer.cpp */; };
+		D5CF05C31A62A4CE007CD1E8 /* ofxUDPManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D5CF05BE1A62A4CE007CD1E8 /* ofxUDPManager.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -79,13 +90,38 @@
 
 /* Begin PBXFileReference section */
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
+		925539F41A5FE4F400AE8CC8 /* dpHakoniwaStruggle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpHakoniwaStruggle.cpp; sourceTree = "<group>"; };
+		925539FA1A5FE78100AE8CC8 /* dpHakoVisStruggle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpHakoVisStruggle.cpp; sourceTree = "<group>"; };
+		9264E93A1A5FD4190084BA46 /* dpHakoniwaStruggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaStruggle.h; sourceTree = "<group>"; };
+		9264E93B1A5FD42A0084BA46 /* dpHakoVisStruggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisStruggle.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
-		C6A68D1D1A5C330900122475 /* ramMotionExtractorExampleScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramMotionExtractorExampleScene.cpp; sourceTree = "<group>"; };
-		C6A68D1E1A5C330900122475 /* ramMotionExtractorExampleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramMotionExtractorExampleScene.h; sourceTree = "<group>"; };
-		C6A68D211A5C331D00122475 /* ramMotionExtractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramMotionExtractor.cpp; sourceTree = "<group>"; };
-		C6A68D221A5C331D00122475 /* ramMotionExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramMotionExtractor.h; sourceTree = "<group>"; };
-		D58D52901A5FA2D700B8A724 /* HakoniwaTheta.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HakoniwaTheta.cpp; sourceTree = "<group>"; };
-		D58D52911A5FA2D700B8A724 /* HakoniwaTheta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HakoniwaTheta.h; sourceTree = "<group>"; };
+		D5B5A44F1A6357C500891CC0 /* axisConverter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = axisConverter.cpp; sourceTree = "<group>"; };
+		D5B5A4501A6357C500891CC0 /* axisConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = axisConverter.h; sourceTree = "<group>"; };
+		D5CF058D1A6246E0007CD1E8 /* HakoniwaParallelLink_Base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HakoniwaParallelLink_Base.cpp; sourceTree = "<group>"; };
+		D5CF058E1A6246E0007CD1E8 /* HakoniwaParallelLink_Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HakoniwaParallelLink_Base.h; sourceTree = "<group>"; };
+		D5CF05901A6246E0007CD1E8 /* ofxKsmrParallelLinkDelta.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxKsmrParallelLinkDelta.cpp; sourceTree = "<group>"; };
+		D5CF05911A6246E0007CD1E8 /* ofxKsmrParallelLinkDelta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxKsmrParallelLinkDelta.h; sourceTree = "<group>"; };
+		D5CF05931A6246E0007CD1E8 /* ofxKsmrStepManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxKsmrStepManager.cpp; sourceTree = "<group>"; };
+		D5CF05941A6246E0007CD1E8 /* ofxKsmrStepManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxKsmrStepManager.h; sourceTree = "<group>"; };
+		D5CF05951A6246E0007CD1E8 /* virtualSteppingMotor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = virtualSteppingMotor.cpp; sourceTree = "<group>"; };
+		D5CF05961A6246E0007CD1E8 /* virtualSteppingMotor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = virtualSteppingMotor.h; sourceTree = "<group>"; };
+		D5CF05971A6246E0007CD1E8 /* ParallelLinkManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParallelLinkManager.cpp; sourceTree = "<group>"; };
+		D5CF05981A6246E0007CD1E8 /* ParallelLinkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallelLinkManager.h; sourceTree = "<group>"; };
+		D5CF05991A6246E0007CD1E8 /* HakoniwaGearMove.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HakoniwaGearMove.cpp; sourceTree = "<group>"; };
+		D5CF059A1A6246E0007CD1E8 /* HakoniwaGearMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HakoniwaGearMove.h; sourceTree = "<group>"; };
+		D5CF05A41A624D0C007CD1E8 /* HakoniwaTheta.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HakoniwaTheta.cpp; sourceTree = "<group>"; };
+		D5CF05A51A624D0C007CD1E8 /* HakoniwaTheta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HakoniwaTheta.h; sourceTree = "<group>"; };
+		D5CF05B41A62A4CE007CD1E8 /* Instructions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Instructions.txt; sourceTree = "<group>"; };
+		D5CF05B61A62A4CE007CD1E8 /* ofxNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxNetwork.h; sourceTree = "<group>"; };
+		D5CF05B71A62A4CE007CD1E8 /* ofxNetworkUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxNetworkUtils.h; sourceTree = "<group>"; };
+		D5CF05B81A62A4CE007CD1E8 /* ofxTCPClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTCPClient.cpp; sourceTree = "<group>"; };
+		D5CF05B91A62A4CE007CD1E8 /* ofxTCPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTCPClient.h; sourceTree = "<group>"; };
+		D5CF05BA1A62A4CE007CD1E8 /* ofxTCPManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTCPManager.cpp; sourceTree = "<group>"; };
+		D5CF05BB1A62A4CE007CD1E8 /* ofxTCPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTCPManager.h; sourceTree = "<group>"; };
+		D5CF05BC1A62A4CE007CD1E8 /* ofxTCPServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTCPServer.cpp; sourceTree = "<group>"; };
+		D5CF05BD1A62A4CE007CD1E8 /* ofxTCPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTCPServer.h; sourceTree = "<group>"; };
+		D5CF05BE1A62A4CE007CD1E8 /* ofxUDPManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUDPManager.cpp; sourceTree = "<group>"; };
+		D5CF05BF1A62A4CE007CD1E8 /* ofxUDPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUDPManager.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -159,7 +195,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				C6A68D201A5C331D00122475 /* ramMotionExtractor */,
+				D5CF05B21A62A4CE007CD1E8 /* ofxNetwork */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -197,22 +233,87 @@
 		C6A68D1B1A5C330900122475 /* scene */ = {
 			isa = PBXGroup;
 			children = (
-				C6A68D1E1A5C330900122475 /* ramMotionExtractorExampleScene.h */,
-				C6A68D1D1A5C330900122475 /* ramMotionExtractorExampleScene.cpp */,
-				D58D52901A5FA2D700B8A724 /* HakoniwaTheta.cpp */,
-				D58D52911A5FA2D700B8A724 /* HakoniwaTheta.h */,
+				D5CF058C1A6246E0007CD1E8 /* Hakoniwa_ParallelLink */,
+				D5CF05991A6246E0007CD1E8 /* HakoniwaGearMove.cpp */,
+				D5CF059A1A6246E0007CD1E8 /* HakoniwaGearMove.h */,
+				D5CF05A41A624D0C007CD1E8 /* HakoniwaTheta.cpp */,
+				D5CF05A51A624D0C007CD1E8 /* HakoniwaTheta.h */,
+				9264E93A1A5FD4190084BA46 /* dpHakoniwaStruggle.h */,
+				925539F41A5FE4F400AE8CC8 /* dpHakoniwaStruggle.cpp */,
+				9264E93B1A5FD42A0084BA46 /* dpHakoVisStruggle.h */,
+				925539FA1A5FE78100AE8CC8 /* dpHakoVisStruggle.cpp */,
 			);
 			path = scene;
 			sourceTree = "<group>";
 		};
-		C6A68D201A5C331D00122475 /* ramMotionExtractor */ = {
+		D5CF058C1A6246E0007CD1E8 /* Hakoniwa_ParallelLink */ = {
 			isa = PBXGroup;
 			children = (
-				C6A68D211A5C331D00122475 /* ramMotionExtractor.cpp */,
-				C6A68D221A5C331D00122475 /* ramMotionExtractor.h */,
+				D5B5A44F1A6357C500891CC0 /* axisConverter.cpp */,
+				D5B5A4501A6357C500891CC0 /* axisConverter.h */,
+				D5CF058D1A6246E0007CD1E8 /* HakoniwaParallelLink_Base.cpp */,
+				D5CF058E1A6246E0007CD1E8 /* HakoniwaParallelLink_Base.h */,
+				D5CF058F1A6246E0007CD1E8 /* ofxKsmrParallelLinkDelta */,
+				D5CF05921A6246E0007CD1E8 /* ofxKsmrStepManager */,
+				D5CF05971A6246E0007CD1E8 /* ParallelLinkManager.cpp */,
+				D5CF05981A6246E0007CD1E8 /* ParallelLinkManager.h */,
 			);
-			name = ramMotionExtractor;
-			path = ../../addons/ramMotionExtractor;
+			path = Hakoniwa_ParallelLink;
+			sourceTree = "<group>";
+		};
+		D5CF058F1A6246E0007CD1E8 /* ofxKsmrParallelLinkDelta */ = {
+			isa = PBXGroup;
+			children = (
+				D5CF05901A6246E0007CD1E8 /* ofxKsmrParallelLinkDelta.cpp */,
+				D5CF05911A6246E0007CD1E8 /* ofxKsmrParallelLinkDelta.h */,
+			);
+			path = ofxKsmrParallelLinkDelta;
+			sourceTree = "<group>";
+		};
+		D5CF05921A6246E0007CD1E8 /* ofxKsmrStepManager */ = {
+			isa = PBXGroup;
+			children = (
+				D5CF05931A6246E0007CD1E8 /* ofxKsmrStepManager.cpp */,
+				D5CF05941A6246E0007CD1E8 /* ofxKsmrStepManager.h */,
+				D5CF05951A6246E0007CD1E8 /* virtualSteppingMotor.cpp */,
+				D5CF05961A6246E0007CD1E8 /* virtualSteppingMotor.h */,
+			);
+			path = ofxKsmrStepManager;
+			sourceTree = "<group>";
+		};
+		D5CF05B21A62A4CE007CD1E8 /* ofxNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				D5CF05B31A62A4CE007CD1E8 /* docs */,
+				D5CF05B51A62A4CE007CD1E8 /* src */,
+			);
+			name = ofxNetwork;
+			path = ../../../addons/ofxNetwork;
+			sourceTree = "<group>";
+		};
+		D5CF05B31A62A4CE007CD1E8 /* docs */ = {
+			isa = PBXGroup;
+			children = (
+				D5CF05B41A62A4CE007CD1E8 /* Instructions.txt */,
+			);
+			path = docs;
+			sourceTree = "<group>";
+		};
+		D5CF05B51A62A4CE007CD1E8 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				D5CF05B61A62A4CE007CD1E8 /* ofxNetwork.h */,
+				D5CF05B71A62A4CE007CD1E8 /* ofxNetworkUtils.h */,
+				D5CF05B81A62A4CE007CD1E8 /* ofxTCPClient.cpp */,
+				D5CF05B91A62A4CE007CD1E8 /* ofxTCPClient.h */,
+				D5CF05BA1A62A4CE007CD1E8 /* ofxTCPManager.cpp */,
+				D5CF05BB1A62A4CE007CD1E8 /* ofxTCPManager.h */,
+				D5CF05BC1A62A4CE007CD1E8 /* ofxTCPServer.cpp */,
+				D5CF05BD1A62A4CE007CD1E8 /* ofxTCPServer.h */,
+				D5CF05BE1A62A4CE007CD1E8 /* ofxUDPManager.cpp */,
+				D5CF05BF1A62A4CE007CD1E8 /* ofxUDPManager.h */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		E4328144138ABC890047C5CB /* Products */ = {
@@ -365,11 +466,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5CF059D1A6246E0007CD1E8 /* ofxKsmrStepManager.cpp in Sources */,
+				D5CF05C11A62A4CE007CD1E8 /* ofxTCPManager.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
-				C6A68D231A5C331D00122475 /* ramMotionExtractor.cpp in Sources */,
-				C6A68D1F1A5C330900122475 /* ramMotionExtractorExampleScene.cpp in Sources */,
-				D58D52921A5FA2D700B8A724 /* HakoniwaTheta.cpp in Sources */,
+				D5CF05A01A6246E0007CD1E8 /* HakoniwaGearMove.cpp in Sources */,
+				D5CF05C31A62A4CE007CD1E8 /* ofxUDPManager.cpp in Sources */,
+				D5CF059B1A6246E0007CD1E8 /* HakoniwaParallelLink_Base.cpp in Sources */,
+				D5CF05C01A62A4CE007CD1E8 /* ofxTCPClient.cpp in Sources */,
+				D5CF05A61A624D0C007CD1E8 /* HakoniwaTheta.cpp in Sources */,
+				925539FB1A5FE78100AE8CC8 /* dpHakoVisStruggle.cpp in Sources */,
+				925539F51A5FE4F400AE8CC8 /* dpHakoniwaStruggle.cpp in Sources */,
+				D5CF059C1A6246E0007CD1E8 /* ofxKsmrParallelLinkDelta.cpp in Sources */,
+				D5CF05C21A62A4CE007CD1E8 /* ofxTCPServer.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
+				D5CF059F1A6246E0007CD1E8 /* ParallelLinkManager.cpp in Sources */,
+				D5CF059E1A6246E0007CD1E8 /* virtualSteppingMotor.cpp in Sources */,
+				D5B5A4511A6357C500891CC0 /* axisConverter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,7 +23,10 @@ public:
 	void draw(int x,int y);
 	void drawUI(int x,int y);
 	void drawThumbnail(int x,int y, float scale = 1.0);
-	
+
+	void savePreset(string hakoniwaName);
+	void loadPreset(string hakoniwaName);
+
 	void guiEvent(ofxUIEventArgs& ev);
 
 	void sendMessageMulti(ofxOscMessage &m);
