@@ -10,6 +10,7 @@
 #include "dpScoreSceneBodyLines.h"
 #include "dpScoreSceneDataScroll.h"
 #include "dpScoreSceneBodyBoids.h"
+#include "dpScoreSceneBodyRect.h"
 #include "dpScoreSceneBodyBox.h"
 
 using namespace dp::score;
@@ -32,7 +33,7 @@ using namespace dp::score;
 
 #if 0
 
-身体系 7/20
+身体系 8/20
 箱庭系 5/20
 
 #endif
@@ -54,6 +55,7 @@ void ofApp::setup()
     black->setName("black");
     
     auto bodyBox = SceneBase::Ptr(new SceneBodyBox());
+    auto bodyRect = SceneBase::Ptr(new SceneBodyRect());
     auto bodyBoids = SceneBase::Ptr(new SceneBodyBoids());
     auto bodyScan = SceneBase::Ptr(new SceneBodyScan());
     auto bodyPattern = SceneBase::Ptr(new SceneBodyPatterns());
@@ -71,6 +73,7 @@ void ofApp::setup()
     mSceneManager.add(black);
     
     mSceneManager.add(bodyBox);
+    mSceneManager.add(bodyRect);
     mSceneManager.add(bodyLines);
     mSceneManager.add(bodyPattern);
     mSceneManager.add(bodyScan);
@@ -94,8 +97,8 @@ void ofApp::setup()
     //vec2Simple->setName("SceneVec2SimpleGraph renamed");
     
     //mSceneManager.change(3);
-    //mSceneManager.change("black");
-    mSceneManager.change<SceneBodyBox>();
+    mSceneManager.change("black");
+    //mSceneManager.change<SceneBodyBox>();
     
     mSceneManager.getTabBar()->loadSettings(kSettingsDir, kSettingsPrefix);
     mSceneManager.getTabBar()->setVisible(false);
