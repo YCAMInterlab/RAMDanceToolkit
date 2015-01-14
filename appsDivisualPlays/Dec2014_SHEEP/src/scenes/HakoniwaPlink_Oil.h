@@ -9,6 +9,17 @@
 #ifndef __RAMDanceToolkit__HakoniwaPlink_Oil__
 #define __RAMDanceToolkit__HakoniwaPlink_Oil__
 
-#include <stdio.h>
+#include "HakoniwaParallelLink_Base.h"
+
+class HakoniwaPLink_Oil : public HakoniwaParallelLink_Base{
+public:
+	inline string getName() const {return "HakoniwaPLink_Oil";}
+	virtual string getAddress() {return "192.168.20.69";}
+
+	virtual void initialize();
+	virtual void update_over();
+	virtual void draw_over();
+};
+
 
 #endif /* defined(__RAMDanceToolkit__HakoniwaPlink_Oil__) */
