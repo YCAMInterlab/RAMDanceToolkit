@@ -32,6 +32,7 @@ public:
 	bool mEnableFrameDiff;
 	bool mEnableAccumlateWeight;
 	bool mEnableBackground;
+	bool mEnableWarpPerspective;
 
 	float mParam_Blur;
 	float mParam_Canny_Thr1;
@@ -45,11 +46,14 @@ public:
 	bool  mParam_adpThreshold_gauss;
 
 	ofxUICanvas mGui;
-	ofImage mSource;
-	ofImage mGraySource_background;
-	bool mBackgroundNeedsReflesh;
-	ofImage mGraySource;
-	ofImage mGraySource_forDiff;
+	ofImage		mSource;
+	ofImage		mGraySource_background;
+	bool		mBackgroundNeedsReflesh;
+	ofImage		mGraySource;
+	ofImage		mGraySource_forDiff;
+
+	bool		mResetWarpPt;
+	ofVec2f		mUnwarpPts[4];
 
 protected:
 
