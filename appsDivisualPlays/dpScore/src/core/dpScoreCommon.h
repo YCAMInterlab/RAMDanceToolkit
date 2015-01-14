@@ -53,6 +53,14 @@ template <class T> string getClassName();
 
 float alignf(float f);
 
+void alignedRect(const ofRectangle & r);
+void alignedRect(const ofPoint & p,float w,float h);
+void alignedRect(float x,float y,float w,float h);
+void alignedRect(float x,float y,float z,float w,float h);
+
+void alignedTranslate(const ofPoint& p);
+void alignedTranslate(float x, float y, float z = 0.f);
+
 ofVec3f randVec3f();
 
 ofVec3f project(const ofVec3f& obj);
