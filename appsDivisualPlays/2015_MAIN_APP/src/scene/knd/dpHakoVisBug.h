@@ -134,7 +134,7 @@ public:
         mPointVbo.setColorData(&mPointColors[0],mPointColors.size(),GL_DYNAMIC_DRAW);
         
         ramOscManager::instance().addReceiverTag(&mReceiver);
-        mReceiver.addAddress("/dp/cameraUnit/stage/contour/boundingRect");
+        mReceiver.addAddress("/dp/cameraUnit/Stage/contour/boundingRect");
         
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoVisBug::onPanelChanged);
     }
@@ -144,7 +144,7 @@ public:
             ofxOscMessage m;
             mReceiver.getNextMessage(&m);
     
-        if(m.getAddress() == "/dp/cameraUnit/stage/contour/boundingRect"){
+        if(m.getAddress() == "/dp/cameraUnit/Stage/contour/boundingRect"){
         
             int num = m.getArgAsInt32(0);
         
