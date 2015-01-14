@@ -23,7 +23,7 @@
 #include "dpHakoniwaServoPendulum.h"
 #include "dpHakoVisBug.h"
 #include "dpHakoVisServoPendulum.h"
-#include "dpHakoVisPrism.h"
+#include "dpHakoVisPlinkPrism.h"
 
 class testApp : public ramBaseApp
 {
@@ -63,6 +63,6 @@ public:
     dpHakoVisBug                visStage;
     
     // prism
-    dpHakoVisPrism              visPrism;
+    dpHakoVisPlinkPrism              visPrism;
     
 };
