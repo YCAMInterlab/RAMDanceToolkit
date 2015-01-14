@@ -3,7 +3,7 @@
 #include "ramMotionExtractor.h"
 #include "dpConstants.h"
 
-#define STRINGIFY(A) #A
+//#define STRINGIFY(A) #A
 
 class dpHakoniwaSand : public ramBaseScene {
 public:
@@ -18,21 +18,23 @@ public:
     void drawActor(const ramActor& actor);
     void example_drawDump();
     
+    
 private:
     
-    ofPlanePrimitive mPlane;
-    string mFrag;
-    string mVert;
-    ofShader mDisplace;
+//    ofPlanePrimitive mPlane;
+//    string mFrag;
+//    string mVert;
+//    ofShader mDisplace;
     
     int val1 = 0;
     int val2 = 0;
     int val3 = 0;
     bool bTestMode = true;
+    int mode;
     
     ramMotionExtractor	mMotionExtractor;
 	ofxOscSender mSender;
     
-    float mVelocitySpeedScale = 10.0;
+//    float mVelocitySpeedScale = 10.0;
 };
 
