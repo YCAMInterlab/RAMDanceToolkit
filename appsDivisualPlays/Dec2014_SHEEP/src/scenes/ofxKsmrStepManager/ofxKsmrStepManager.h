@@ -14,7 +14,6 @@
 #include "ofMain.h"
 #include "virtualSteppingMotor.h"
 #include "ofxOsc.h"
-#include "ofxNetwork.h"
 
 enum ofxKsmrStepPreset{
 	KSMR_STEP_P_PMSA_B56D5, //ShinanoKenshi

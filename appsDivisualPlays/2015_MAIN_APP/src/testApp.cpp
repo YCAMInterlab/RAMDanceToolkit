@@ -45,6 +45,7 @@ void testApp::setup()
 	sceneManager.addScene(hakoniwaPlinkOil.getPtr());
 	sceneManager.addScene(hakoniwaPlinkLaser.getPtr());
 	sceneManager.addScene(hakoniwaPlinkPrism.getPtr());
+	sceneManager.addScene(hakoVisPlinkLaser.getPtr());
 
 	sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
 }

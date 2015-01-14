@@ -29,6 +29,7 @@
 #include "HakoniwaPlink_Oil.h"
 #include "HakoniwaPLink_Laser.h"
 #include "HakoniwaPLink_Prism.h"
+#include "hakoVisPLink_Laser.h"
 
 class testApp : public ramBaseApp
 {
@@ -63,6 +64,8 @@ public:
 	HakoniwaPLink_Oil			hakoniwaPlinkOil;
 	HakoniwaPLink_Laser			hakoniwaPlinkLaser;
 	HakoniwaPLink_Prism			hakoniwaPlinkPrism;
+
+	hakoVisPLink_Laser			hakoVisPlinkLaser;
     
     // servo pendulum
     dpHakoniwaServoPendulum     hakoniwaServoPendulum;

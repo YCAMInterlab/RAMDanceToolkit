@@ -26,7 +26,7 @@ void hakoVisPLink_Laser::update(){
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
 
-		if (m.getAddress() == "/dp/cameraUnit/test/pixelate"){
+		if (m.getAddress() == "/dp/cameraUnit/plink_Laser/pixelate"){
 			pix_w = m.getArgAsInt32(0);
 			pix_h = m.getArgAsInt32(1);
 
