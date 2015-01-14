@@ -134,9 +134,7 @@ void BodyLinesNode::draw(bool focus)
     vboLines.draw(GL_LINES, 0, verticesLines.size());
     
     if (focus) {
-        windowPos = project(getGlobalPosition());
-        windowPos.x = alignf(windowPos.x);
-        windowPos.y = alignf(windowPos.y);
+        windowPos = alignedVec3f(project(getGlobalPosition()));
         windowPos.z = 0.f;
     }
     ofPopStyle();

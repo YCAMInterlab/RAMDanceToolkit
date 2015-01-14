@@ -133,7 +133,7 @@ void SceneBodyScan::draw()
     glEnd();
     ofSetColor(color::kMain, 255);
     ofSetLineWidth(1.f);
-    ofLine(alignf(0.f), alignf(20.f), alignf(0.f), alignf(kH));
+    alignedLine(0.f, 20.f, 0.f, kH);
     ofPopMatrix();
 }
 

@@ -99,8 +99,8 @@ void SceneVec2Grid::draw()
             const int idx = j * mGridW/mGridStep + i;
             ofVec2f v = mGridBuffer.at(i);
             float f = ofMap(v.y, -25.f, 25.f, -1.f, 1.f);
-            mGridVertices.at(idx).x = alignf(i*mGridStep);
-            mGridVertices.at(idx).y = alignf(j*mGridStep) * f * mSensorScale;
+            mGridVertices.at(idx).x = i*mGridStep;
+            mGridVertices.at(idx).y = j*mGridStep * f * mSensorScale;
             mGridVertices.at(idx).z = v.x * 15.f * mSensorScale;
         }
     }
