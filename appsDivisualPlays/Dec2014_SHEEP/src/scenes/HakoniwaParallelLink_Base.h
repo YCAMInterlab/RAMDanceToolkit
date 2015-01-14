@@ -58,6 +58,8 @@ protected:
 	bool mDigitalOut;
 	bool mTrackMachine;
 	bool mDrawExtractor;
+	bool mDrawMachine;
+	
 	float mPwm_Param;
 
 	bool mDigitalIO[6];

@@ -26,6 +26,7 @@
 #include "dpHakoVisPlink_Prism.h"
 
 //SHEEP Scenes
+#include "testScenes.h"
 #include "HakoniwaPlink_Oil.h"
 #include "HakoniwaPLink_Laser.h"
 #include "HakoniwaPLink_Prism.h"
@@ -59,6 +60,9 @@ public:
 	void onActorExit(const ramActor &actor);
 	void onRigidSetup(const ramRigidBody &rigid);
 	void onRigidExit(const ramRigidBody &rigid);
+
+	//test Scenes;
+	
 
 	//Parallel link
 	HakoniwaPLink_Oil			hakoniwaPlinkOil;
