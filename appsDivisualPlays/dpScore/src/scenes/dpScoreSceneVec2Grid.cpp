@@ -26,7 +26,7 @@ void SceneVec2Grid::initialize()
     mUICanvas->setName(getName());
     mUICanvas->addLabel(getName());
     mUICanvas->addSpacer();
-    mUICanvas->addSlider("Sensor Scale", 0.f, 2.f, &mSensorScale);
+    mUICanvas->addSlider("Sensor Scale", 0.f, 5.0f, &mSensorScale);
 }
 
 void SceneVec2Grid::shutDown()
@@ -55,29 +55,24 @@ void SceneVec2Grid::exit()
 
 void SceneVec2Grid::update(ofxEventMessage& m)
 {
-    ofSetWindowTitle(getName() + ": " + ofToString(ofGetFrameRate(), 2));
-    
     if (m.getAddress() == kAddrVec2) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);
         mGridBuffer.push_back(mVec);
-        while (mGridBuffer.size()>kW/mGridStep) {
+        while (mGridBuffer.size()>mGridW/mGridStep) {
             mGridBuffer.pop_front();
         }
     }
 }
 
 void SceneVec2Grid::draw()
-{
-    ofPushStyle();
-    ofEnableAlphaBlending();
-    
-    ofSetColor(ofColor::white, 255);
-    ofDrawBitmapString(getName(), 12.f, 16.f);
-    
+{    
     mCam.begin();
     ofPushMatrix();
-    ofTranslate(-ofGetWidth()*0.5f, 150.f, 0.f);
+    ofTranslate(-ofGetWidth()*0.7f, -150.f, 0.f);
+    ofRotateX(-30.f);
+    ofRotateY(15.f);
+    ofRotateZ(25.f);
     
     ofPushMatrix();
     ofTranslate(mGridW, 0.f);
@@ -87,12 +82,12 @@ void SceneVec2Grid::draw()
     ofLine(0.f, -length, 0.f, length);
     ofLine(0.f, 0.f, -length, 0.f, 0.f, length);
     
-    const float size = 10.f;
-    ofSetColor(ofColor::red, 100);
+    const float size = 30.f;
+    ofSetColor(color::kMain, 255);
     ofLine(-size, 0.f, size, 0.f);
-    ofSetColor(ofColor::green, 100);
+    ofSetColor(color::kMain, 255);
     ofLine(0.f, -size, 0.f, size);
-    ofSetColor(ofColor::blue, 100);
+    ofSetColor(color::kMain, 255);
     ofLine(0.f, 0.f, -size, 0.f, 0.f, size);
     
     ofPopMatrix();
@@ -114,8 +109,6 @@ void SceneVec2Grid::draw()
     mGridVbo.draw(GL_POINTS, 0, mGridVertices.size());
     ofPopMatrix();
     mCam.end();
-    
-    ofPopStyle();
 }
 
 DP_SCORE_NAMESPACE_END

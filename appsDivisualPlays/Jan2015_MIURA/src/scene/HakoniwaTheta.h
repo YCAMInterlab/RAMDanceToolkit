@@ -3,6 +3,7 @@
 
 #include "ramMain.h"
 #include "ramMotionExtractor.h"
+#include "dpConstants.h"
 
 class HakoniwaTheta : public ramBaseScene{
     

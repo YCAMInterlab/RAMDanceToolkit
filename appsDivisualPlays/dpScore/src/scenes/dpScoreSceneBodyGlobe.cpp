@@ -18,6 +18,11 @@ SceneBodyGlobe::Node::Node()
     vbo.setVertexData(&vertices.at(0), vertices.size(), GL_DYNAMIC_DRAW);
 }
 
+SceneBodyGlobe::Node& SceneBodyGlobe::Node::operator = (const Node& rhs)
+{
+    return *this = rhs;
+}
+
 void SceneBodyGlobe::Node::update()
 {
     ofVec3f p = dir * scale;
@@ -53,6 +58,16 @@ void SceneBodyGlobe::Node::drawPoints()
     vbo.draw(GL_POINTS, 0, vertices.size());
 }
 
+#pragma mark ___________________________________________________________________
+SceneBodyGlobe::Globe::Globe() :
+nodes(ofxMot::NUM_JOINTS)
+{
+    for (auto& p : nodes) {
+        p = Node::Ptr(new Node());
+    }
+}
+
+#pragma mark ___________________________________________________________________
 void SceneBodyGlobe::initialize()
 {
     dpDebugFunc();
@@ -66,10 +81,7 @@ void SceneBodyGlobe::initialize()
     mUICanvas->addSlider("Rotation Speed Y", 0.f, 10.f, &mRotSpdY);
     mUICanvas->addToggle("Magnify", &mMagnify);
     
-    mNodes.assign(ofxMot::NUM_JOINTS, Node::Ptr());
-    for (auto& p : mNodes) {
-        p = Node::Ptr(new Node());
-    }
+    mCam.disableMouseInput();
 }
 
 void SceneBodyGlobe::shutDown()
@@ -86,32 +98,26 @@ void SceneBodyGlobe::enter()
 {
     dpDebugFunc();
     
-    ofAddListener(ofxMotioner::updateSkeletonEvent,
-                  this,
-                  &SceneBodyGlobe::onUpdateSkeleton);
+    mCam.enableMouseInput();
 }
 
 void SceneBodyGlobe::exit()
 {
     dpDebugFunc();
     
-    ofRemoveListener(ofxMotioner::updateSkeletonEvent,
-                     this,
-                     &SceneBodyGlobe::onUpdateSkeleton);
+    mCam.disableMouseInput();
 }
 
 void SceneBodyGlobe::update(ofxEventMessage& m)
 {
-    ofSetWindowTitle(getName() + ": " + ofToString(ofGetFrameRate(), 2));
+    mFrameNum++;
     
     if (m.getAddress() == kAddrMotioner) {
         if (mMagnify) {
             mScale += ofGetLastFrameTime() * 2.f;
             if (mScale >= 600.f) mScale = 100.f;
         }
-        for (auto& p : mNodes) p->scale = mScale;
-        
-        if (ofGetFrameNum()%60==0) {
+        if (mFrameNum%60==0) {
             mJointId++;
             mJointId %= ofxMot::NUM_JOINTS;
         }
@@ -120,65 +126,65 @@ void SceneBodyGlobe::update(ofxEventMessage& m)
 
 void SceneBodyGlobe::draw()
 {
-    ofPushStyle();
-    ofPushMatrix();
-    ofEnableAlphaBlending();
-    ofDisableDepthTest();
-    
-    ofSetColor(ofColor::white, 255);
-    ofDrawBitmapString(getName(), 12.f, 16.f);
-    
     mCam.begin();
     ofPushMatrix();
     ofRotateX(ofGetElapsedTimef() * mRotSpdX);
     ofRotateY(ofGetElapsedTimef() * mRotSpdY);
-    
-    ofNoFill();
     ofSetLineWidth(1.5f);
-    //ofxMotioner::debugDraw();
-    
-    int i=0;
-    for (auto& p : mNodes) {
-        ofEnableAlphaBlending();
-        p->drawPoints();
-        ofEnableBlendMode(OF_BLENDMODE_ADD);
-        p->draw();
-        //if (i==mJointId && ofGetFrameNum()%60 > 0 && ofGetFrameNum()%60 < 10) {
-        if (ofGetFrameNum()%120 > 0 && ofGetFrameNum()%120 < 30) {
-            ofSetColor(255, 128);
-            ofSetDrawBitmapMode(OF_BITMAPMODE_MODEL_BILLBOARD);
-            ofPushMatrix();
-            ofTranslate(p->dir * p->scale * 1.f);
-            ofDrawBitmapString(ofxMot::getJointNameLower(mJointId), ofPoint::zero());
-            ofPopMatrix();
+    for (auto& it : mNodeVecMap) {
+        ofPushMatrix();
+        ofTranslate(it.second->origin);
+        for (auto p : it.second->nodes) {
+            ofEnableAlphaBlending();
+            p->drawPoints();
+            ofEnableBlendMode(OF_BLENDMODE_ADD);
+            p->draw();
+            if (mFrameNum%120 > 0 && mFrameNum%120 < 30) {
+                ofSetColor(255, 128);
+                ofSetDrawBitmapMode(OF_BITMAPMODE_MODEL_BILLBOARD);
+                ofPushMatrix();
+                ofTranslate(p->dir * p->scale * 1.f);
+                ofDrawBitmapString(ofxMot::getJointNameLower(mJointId),
+                                   ofPoint::zero());
+                ofPopMatrix();
+            }
         }
-        
-        i++;
+        ofPopMatrix();
     }
     ofPopMatrix();
     mCam.end();
-    
-    ofPopMatrix();
-    ofPopStyle();
 }
 
 #pragma mark ___________________________________________________________________
-void SceneBodyGlobe::onUpdateSkeleton(ofxMotioner::EventArgs &e)
+void SceneBodyGlobe::setupSkeleton(SkeletonPtr skl)
 {
-    auto skl = e.skeleton;
-    
-    if (mSkeletonName=="") mSkeletonName = skl->getName();
-    
-    if (mSkeletonName == skl->getName()) {
-        auto joints = skl->getJoints();
-        
-        for (int i=0; i<mNodes.size(); i++) {
-            auto& node = mNodes.at(i);
-            node->dir = joints.at(i).getPosition();
-            node->dir.normalize();
-            node->setOrientation(joints.at(i).getOrientationQuat());
-            node->update();
+    auto globe = Globe::Ptr(new Globe());
+    globe->origin = ofVec3f::zero();
+    mNodeVecMap[skl->getName()] = globe;
+}
+
+void SceneBodyGlobe::updateSkeleton(SkeletonPtr skl)
+{
+    auto& joints = skl->getJoints();
+    auto it = mNodeVecMap.find(skl->getName());
+    if (it != mNodeVecMap.end()) {
+        auto& vec = it->second->nodes;
+        for (int i=0; i<vec.size(); i++) {
+            auto p = vec.at(i);
+            p->dir = joints.at(i).getPosition();
+            p->dir.normalize();
+            p->scale = mScale;
+            p->setOrientation(joints.at(i).getOrientationQuat());
+            p->update();
         }
+    }
+}
+
+void SceneBodyGlobe::exitSkeleton(SkeletonPtr skl)
+{
+    auto it = mNodeVecMap.find(skl->getName());
+    if (it != mNodeVecMap.end()) {
+        mNodeVecMap.erase(it);
     }
 }
 

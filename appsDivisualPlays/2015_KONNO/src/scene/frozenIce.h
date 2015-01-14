@@ -24,21 +24,57 @@ public:
     void update();
     void draw();
     
+    //プログラム非選択時に、DMXを止める
+    //------
+    void exit();
+    virtual void onDisabled();
+    //------
+    
     inline string getName() const {
         return "frozenIce";
     }
     
     //--Ice---
+    //ペルチェ素子の状況識別用変数
     int hantei;
-    bool iceStart;
+    
+    //Manual Control
+    //-------------------
+    bool manualControl;
     bool frozing;
     bool melting;
-    int count;
-    int frozingCount;
-    int meltingCount;
+    //-------------------
     
+    //Dancer Control
+    //-------------------
+    bool dancerControl;
     bool iceFrozing;
     bool iceMelting;
+    float fixationTime;
+    float speedThreshold;
+    //-------------------
+    
+    //Distance Control
+    //-------------------
+    bool distanceControl;
+    float distanceThreshold;
+    //-------------------
+    
+    //ファンの操作用
+    //-------------------
+    bool fanStart;
+    int fanVal;
+    //-------------------
+    
+    //時間のカウント
+    //-------------------
+    //冷やしている時間のカウント
+    int frozingCount;
+    //凍らせている時間のカウント
+    int meltingCount;
+    //-------------------
+    
+    
     
 private:
     

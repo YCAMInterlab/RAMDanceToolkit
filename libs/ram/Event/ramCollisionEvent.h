@@ -46,7 +46,7 @@ public:
 	void setTrigger(ramTriggerTiming t) { timing = t; }
 	ramTriggerTiming getTrigger() const { return timing; }
 
-	bool getState() { return collision_state; }
+	bool getState() const { return collision_state; }
 
 protected:
 

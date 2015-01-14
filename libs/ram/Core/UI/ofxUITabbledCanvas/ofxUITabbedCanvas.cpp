@@ -33,7 +33,7 @@ int ofxUICanvasPlus::getChoice(ofxUIEventArgs& e, ofxUIRadio* radio) {
 	return -1;
 }
 
-string getXmlSafeName(string name) {
+string getXmlSafeName(const string& name) {
 	string safe;
 	for(int i = 0; i < name.size(); i++) {
 		char cur = name[i];

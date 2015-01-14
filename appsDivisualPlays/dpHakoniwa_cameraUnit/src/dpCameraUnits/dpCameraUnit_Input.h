@@ -31,7 +31,7 @@ public:
 	void mouseReleased(ofMouseEventArgs &arg);
 	void guiEvent(ofxUIEventArgs &e);
 
-	void sourceReflesh();
+	void sourceReflesh(int idx = -1);
 	
 	ofxUICanvas			mGui;
 

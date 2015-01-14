@@ -94,6 +94,7 @@ public:
 	inline ofQuaternion getAngularAcceleration() const { return accelerometer.angular_acceleration; }
 
 	inline ramAccelerometer& getAccelerometer() { return accelerometer; }
+    inline const ramAccelerometer& getAccelerometer() const { return const_cast<ramAccelerometer&>(accelerometer); }
 
 	void drawNodeId(int floatPos = 20) const;
 	void drawNodeName(int floatPos = 20) const;
@@ -132,7 +133,7 @@ public:
 	inline bool isOutdated() const { return (ofGetElapsedTimef() -  last_update_client_time) > RAM_OUTDATED_DURATION; }
 	
 	inline float getTimestamp() const { return last_update_client_time; }
-	inline void setTimestamp(const float t) { last_update_client_time = t; }
+	inline void setTimestamp(float t) { last_update_client_time = t; }
 
 	inline void setType(ramNodeArrayType t) { type = t; }
 	inline bool isActor() const { return type == RAM_NODEARRAY_TYPE_ACTOR; }

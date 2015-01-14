@@ -24,11 +24,11 @@ class PlaybackSegment : public BaseSegment
 	
 public:
 	
-	PlaybackSegment(string segmentName);
+	PlaybackSegment(const string& segmentName);
 	~PlaybackSegment();
 	
-    ramActorUISegmentType getType();
-    ofxUICanvasPlus* createPanel(const string targetName);
+    ramActorUISegmentType getType() const;
+    ofxUICanvasPlus* createPanel(const string& targetName);
 	
 	void update();
 	

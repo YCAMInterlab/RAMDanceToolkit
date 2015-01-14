@@ -94,9 +94,9 @@ public:
 	inline void setSpeed(const float s) { speed = s; }
 	inline void setHistorySize(const unsigned int m) { historySize = m; }
 
-	inline float getDistance() { return distance; }
-	inline float getSpeed() { return speed; }
-	inline unsigned int getHistorySize() { return historySize; }
+	inline float getDistance() const { return distance; }
+	inline float getSpeed() const { return speed; }
+	inline unsigned int getHistorySize() const { return historySize; }
 
 protected:
     

@@ -31,14 +31,18 @@ public:
     void onUpdateSkeleton(ofxMotioner::EventArgs &e);
     
 private:
+    void drawSkeleton(ofxMot::SkeletonPtr skl, int idx);
+    
     string mSkeletonName;
     deque<ofxMot::SkeletonPtr> mSkeletons;
-    const int nX = 16;
-    const int nY = 9;
-        const int kNumSkeletons = nX * nY;
+    const int nX{8};
+    const int nY{5};
+    const int kNumSkeletons = nX * nY;
     
     ofEasyCam mCam;
-    
+    unsigned long mFrame{0};
+    int mFocusNode{0};
+    const int kSkip{15};
 };
 
 DP_SCORE_NAMESPACE_END

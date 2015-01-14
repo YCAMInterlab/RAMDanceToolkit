@@ -9,6 +9,7 @@
 #include "dpScoreSceneBodyPatterns.h"
 #include "dpScoreSceneBodyLines.h"
 #include "dpScoreSceneDataScroll.h"
+#include "dpScoreSceneBodyBoids.h"
 
 using namespace dp::score;
 
@@ -28,6 +29,13 @@ using namespace dp::score;
 //    string s = "bar";
 //};
 
+#if 0
+
+身体系 6/20
+箱庭系 5/20
+
+#endif
+
 #pragma mark ___________________________________________________________________
 void ofApp::setup()
 {
@@ -40,31 +48,33 @@ void ofApp::setup()
     
     OFX_BEGIN_EXCEPTION_HANDLING
     
+    auto bodyBoids = SceneBase::Ptr(new SceneBodyBoids());
     auto bodyScan = SceneBase::Ptr(new SceneBodyScan());
     auto bodyPattern = SceneBase::Ptr(new SceneBodyPatterns());
     auto bodyFlow = SceneBase::Ptr(new SceneBodyFlow());
     auto bodyGlobe = SceneBase::Ptr(new SceneBodyGlobe());
     auto bodyLines = SceneBase::Ptr(new SceneBodyLines());
     
-    auto dataScroll = SceneBase::Ptr(new SceneDataScroll());
-    
     auto vec2Simple = SceneBase::Ptr(new SceneVec2SimpleGraph());
     auto vec2Clocks = SceneBase::Ptr(new SceneVec2Clocks());
     auto vec2Grid = SceneBase::Ptr(new SceneVec2Grid());
     auto vec2Plotter = SceneBase::Ptr(new SceneVec2Plotter());
     
-    mSceneManager.add(dataScroll);
+    auto dataScroll = SceneBase::Ptr(new SceneDataScroll());
     
     mSceneManager.add(bodyLines);
-    mSceneManager.add(bodyScan);
     mSceneManager.add(bodyPattern);
+    mSceneManager.add(bodyScan);
     mSceneManager.add(bodyFlow);
     mSceneManager.add(bodyGlobe);
+    mSceneManager.add(bodyBoids);
     
     mSceneManager.add(vec2Simple);
     mSceneManager.add(vec2Clocks);
     mSceneManager.add(vec2Grid);
     mSceneManager.add(vec2Plotter);
+    
+    mSceneManager.add(dataScroll);
     
     // make another instance for existing class
     //auto vec2Simple2 = SceneBase::Ptr(new SceneVec2SimpleGraph());
@@ -75,8 +85,8 @@ void ofApp::setup()
     //vec2Simple->setName("SceneVec2SimpleGraph renamed");
     
     //mSceneManager.change(3);
-    //mSceneManager.change("dp::score::SceneVec2Clocks");
-    mSceneManager.change<SceneBodyLines>();
+    //mSceneManager.change("SceneVec2Clocks");
+    mSceneManager.change<SceneBodyBoids>();
     
     mSceneManager.getTabBar()->loadSettings(kSettingsDir, kSettingsPrefix);
     mSceneManager.getTabBar()->setVisible(false);
@@ -105,33 +115,57 @@ void ofApp::update()
 {
     OFX_BEGIN_EXCEPTION_HANDLING
     
-    int n = 0;
+    ofSetWindowTitle("dpScore : " + ofToString(ofGetFrameRate(), 2));
+    
+    bool updatedVector = false;
+    bool updatedMotioner = false;
     ofVec2f v;
     while (mOscReceiver.hasWaitingMessages()) {
         ofxOscMessage m;
         mOscReceiver.getNextMessage(&m);
         const string addr = m.getAddress();
         
-        if (addr == kOscAddrPendulumVec2) {
-            v.x += m.getArgAsFloat(1);
-            v.y += m.getArgAsFloat(2);
-            n++;
+        if (addr == kOscAddrChangeScene) {
+OFX_BEGIN_EXCEPTION_HANDLING
+            if (m.getNumArgs() >= 1) {
+                if (m.getArgType(0) == OFXOSC_TYPE_INT32) {
+                    mSceneManager.change(m.getArgAsInt32(0));
+                }
+                else if (m.getArgType(0) == OFXOSC_TYPE_STRING){
+                    mSceneManager.change(m.getArgAsString(0));
+                }
+            }
+OFX_END_EXCEPTION_HANDLING
+        }
+        else if (addr == kOscAddrPendulumVec2) {
+            if (m.getNumArgs() == 20) {
+                for (int i=0; i<10; i++) {
+                    v.x += m.getArgAsFloat(i*2+0);
+                    v.y += m.getArgAsFloat(i*2+1);
+                }
+                v /= 10.f;
+                updatedVector = true;
+            }
+            else {
+                ofLogError() << kOscAddrPendulumVec2 << ": receiving incorrect arguments";
+            }
         }
         else if (addr == ofxMotioner::OSC_ADDR) {
             ofxMotioner::updateWithOscMessage(m);
-            ofxEventMessage m;
-            m.setAddress(kAddrMotioner);
-            mSceneManager.update(m);
+            updatedMotioner = true;
         }
     }
     
-    if (n>0) {
-        v /= (float)n;
-        
-        ofxEventMessage m;
+    if (updatedVector) {
+        ofxOscMessage m;
         m.setAddress(kAddrVec2);
         m.addFloatArg(v.x);
         m.addFloatArg(v.y);
+        mSceneManager.update(m);
+    }
+    if (updatedMotioner) {
+        ofxOscMessage m;
+        m.setAddress(kAddrMotioner);
         mSceneManager.update(m);
     }
     
@@ -139,13 +173,23 @@ void ofApp::update()
     
     OFX_END_EXCEPTION_HANDLING
 }
+
 #pragma mark ___________________________________________________________________
 void ofApp::draw()
 {
     OFX_BEGIN_EXCEPTION_HANDLING
     
     mSceneManager.draw();
-        
+    
+    if (mInvert) {
+        ofPushStyle();
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
+        ofSetColor(ofColor::white);
+        ofRect(ofGetWindowRect());
+        ofPopStyle();
+    }
+    
     OFX_END_EXCEPTION_HANDLING
 }
 
@@ -173,6 +217,9 @@ void ofApp::keyPressed(int key)
             break;
         case 's':
             mSceneManager.getTabBar()->saveSettings(kSettingsDir, kSettingsPrefix);
+            break;
+            case 'i':
+            mInvert ^= true;
             break;
         case OF_KEY_LEFT:
             mSceneManager.prev();
@@ -274,7 +321,6 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     OFX_BEGIN_EXCEPTION_HANDLING
     
 
-    
     OFX_END_EXCEPTION_HANDLING
 }
 

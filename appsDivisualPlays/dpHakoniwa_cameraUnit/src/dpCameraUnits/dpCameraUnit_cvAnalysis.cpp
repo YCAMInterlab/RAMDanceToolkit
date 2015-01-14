@@ -27,6 +27,8 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.addToggle("Flow_FarneBack",	&mEnableOptFlowFarne);
 	mGui.addToggle("Mean",				&mEnableMean);
 	mGui.addToggle("Pixelate",			&mEnablePixelate);
+	mGui.addIntSlider("Res_X", 1, 60, &mParamPixelate_ResX);
+	mGui.addIntSlider("Res_Y", 1, 60, &mParamPixelate_ResY);
 //	mGui.addToggle("FAST",				&mEnableFAST);
 //	mGui.addToggle("Histgram",			&mEnableHistgram);
 	mGui.addSpacer();
@@ -34,10 +36,10 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 
 	mGui.addLabel("ContourFinder");
 	mGui.addSpacer();
-	mGui.addToggle("Blob"	, false);
-	mGui.addToggle("Pts"	, false);
-	mGui.addToggle("Simplify"		, &mParamCF_Simplify);
-	mGui.addToggle("UseTargetColor"	, &mParamCF_UseTargetColor);
+//	mGui.addToggle("Blob"	, false);
+//	mGui.addToggle("Pts"	, false);
+//	mGui.addToggle("Simplify"		, &mParamCF_Simplify);
+//	mGui.addToggle("UseTargetColor"	, &mParamCF_UseTargetColor);
 	mGui.addRangeSlider("Area", 0.0, 10000.0, &mParamCF_MinArea, &mParamCF_MaxArea);
 	mGui.addSlider("MaxBlobNum", 0.0, 500.0, &mParamCF_MaxBlobNum);
 	mGui.addSlider("Threshold", 0.0, 255.0, &mParamCF_Threshold);
@@ -70,6 +72,9 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mEnableMean				= false;
 	mEnableHistgram			= false;
 	
+	mParamPixelate_ResX		= 10;
+	mParamPixelate_ResY		= 10;
+	
 	mOptFlow_filterSpd = 100.0;
 
 	mContFinder.getTracker().setPersistence(15);
@@ -95,7 +100,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		mContFinder.setMinArea(mParamCF_MinArea);
 		mContFinder.setSimplify(mParamCF_Simplify);
 		mContFinder.setTargetColor(mParamCF_targColor);
-		mContFinder.setUseTargetColor(mParamCF_UseTargetColor);
+//		mContFinder.setUseTargetColor(mParamCF_UseTargetColor);
 		mContFinder.setThreshold(mParamCF_Threshold);
 
 		mContFinder.findContours(pixGray);
@@ -166,8 +171,8 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 
 #pragma mark Pixelate
 	if (mEnablePixelate){
-		int res_x = 12;
-		int res_y = 9;
+		int res_x = mParamPixelate_ResX;
+		int res_y = mParamPixelate_ResY;
 
 		int64_t pixelInt = 0;
 		int64_t Pixelcounter = 0;
@@ -204,7 +209,8 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 	if (mEnableOptFlow){
 		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 1.0f) &&
 			(isFrameNew)) mOptFlow.calcOpticalFlow(pixGray);
-		if ((ofGetFrameNum() % 150 == 0) || (ofGetKeyPressed(' '))) mOptFlow.resetFlow();
+		
+		if ((ofGetFrameNum() % 150 == 0) || (ofGetKeyPressed(' '))) mOptFlow.resetFeaturesToTrack();
 
 		vector <ofVec2f> mot = mOptFlow.getMotion();
 
@@ -289,7 +295,6 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 	ofPushMatrix();
 	ofTranslate(x, y);
 	glScaled(scale, scale, scale);
-	ofDrawBitmapString(hakoniwa_name, 0,400);
 
 	if (mViewSource && imgRefGray != NULL) imgRefGray->draw(0,0);
 
@@ -335,7 +340,7 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 
 void dpCameraUnit_cvAnalysis::draw(int x,int y){
 	drawUI(x, y);
-	drawThumbnail(x+240, y);
+	drawThumbnail(x, ofGetHeight() - 300);
 }
 
 void dpCameraUnit_cvAnalysis::guiEvent(ofxUIEventArgs &ev){
@@ -369,4 +374,17 @@ void dpCameraUnit_cvAnalysis::sendMessageMulti(ofxOscMessage &m){
 	}else{
 		cout << "oscListPtr is NULL" << endl;
 	}
+}
+
+void dpCameraUnit_cvAnalysis::savePreset(string hakoniwaName){
+
+	ofDirectory::createDirectory("Preset_"+hakoniwaName);
+	mGui.saveSettings("Preset_"+hakoniwaName+"/AnalysisUIPreset.xml");
+
+}
+
+void dpCameraUnit_cvAnalysis::loadPreset(string hakoniwaName){
+
+	mGui.loadSettings("Preset_"+hakoniwaName+"/AnalysisUIPreset.xml");
+
 }

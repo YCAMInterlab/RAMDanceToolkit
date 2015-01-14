@@ -15,7 +15,10 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
+class SceneManager;
+
 class SceneBase {
+    friend class SceneManager;
 public:
     typedef ofPtr<SceneBase> Ptr;
     
@@ -41,7 +44,9 @@ public:
     virtual void dragEvent(ofDragInfo dragInfo) {}
     virtual void gotMessage(ofMessage msg) {}
     
-    void guiEvent(ofxUIEventArgs &e) {}
+    virtual void guiEvent(ofxUIEventArgs &e) {}
+    
+    void drawHeader();
     
     // default value is nullptr
     ofxUICanvas* const getUICanvas() { return mUICanvas; }
@@ -59,6 +64,27 @@ public:
     const easeFunc getEaseFunc() const { return mEaseFunc; }
     
 protected:
+    virtual void onUpdate(ofxEventMessage& m);
+    virtual void onDraw();
+    
+    virtual void onInitialize();
+    virtual void onShutDown();
+    
+    virtual void onEnter();
+    virtual void onExit();
+    
+    virtual void onKeyPressed(int key);
+    virtual void onKeyReleased(int key);
+    virtual void onMouseMoved(int x, int y);
+    virtual void onMouseDragged(int x, int y, int button);
+    virtual void onMousePressed(int x, int y, int button);
+    virtual void onMouseReleased(int x, int y, int button);
+    virtual void onWindowResized(int w, int h);
+    virtual void onDragEvent(ofDragInfo dragInfo);
+    virtual void onGotMessage(ofMessage msg);
+    
+    virtual void onGuiEvent(ofxUIEventArgs &e);
+    
     ofxUICanvas* mUICanvas{nullptr};
     string mName{""};
     int mId{-1};

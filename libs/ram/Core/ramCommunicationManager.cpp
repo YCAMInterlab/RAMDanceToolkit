@@ -171,7 +171,7 @@ void ramCommunicationManager::updateWithOscMessage(const ofxOscMessage &m){
 
 }
 
-int ramCommunicationManager::addInstrument(string name){
+int ramCommunicationManager::addInstrument(const string &name){
 
 	ofParameterGroup* newInst = new ofParameterGroup();
 
@@ -222,7 +222,7 @@ void ramCommunicationManager::refleshInstruments(){
 
 }
 
-float ramCommunicationManager::getVelocity(string name){
+float ramCommunicationManager::getVelocity(const string &name) const {
 	int index = 0;
 	for (int i = 0;i < Instruments.size();i++){
 		if (name == Instruments[i]->getName())
@@ -232,14 +232,14 @@ float ramCommunicationManager::getVelocity(string name){
 	return getVelocity(index);
 }
 
-float ramCommunicationManager::getVelocity(int index){
+float ramCommunicationManager::getVelocity(int index) const {
 	if ((Instruments.size() == 0) || (index >= Instruments.size()))
 		return 0.0;
 
 	return Instruments[index]->getFloat("velocity");
 }
 
-float ramCommunicationManager::getCC(string name, int ccNum){
+float ramCommunicationManager::getCC(const string &name, int ccNum) const {
 	int index = 0;
 	for (int i = 0;i < Instruments.size();i++){
 		if (name == Instruments[i]->getName())
@@ -249,7 +249,7 @@ float ramCommunicationManager::getCC(string name, int ccNum){
 	return getCC(index,ccNum);
 }
 
-float ramCommunicationManager::getCC(int index, int ccNum){
+float ramCommunicationManager::getCC(int index, int ccNum) const {
 	if ((Instruments.size() == 0) || (index >= Instruments.size()))
 		return 0.0;
 
@@ -267,7 +267,7 @@ void ramCommunicationManager::keyPressed(ofKeyEventArgs &key){
 	if (key.key == OF_KEY_TAB) bVisible ^= true;
 }
 
-bool ramCommunicationManager::getVelocityExist(string name){
+bool ramCommunicationManager::getVelocityExist(const string& name) const {
 	int index = -1;
 	for (int i = 0;i < Instruments.size();i++){
 		if (name == Instruments[i]->getName())
@@ -277,14 +277,14 @@ bool ramCommunicationManager::getVelocityExist(string name){
 	return getVelocityExist(index);
 }
 
-bool ramCommunicationManager::getVelocityExist(int index){
+bool ramCommunicationManager::getVelocityExist(int index) const {
 	if ((Instruments.size() == 0) || (index >= Instruments.size()) || (index < 0))
 		return false;
 	else
 		return true;
 }
 
-bool ramCommunicationManager::getCCExist(string name,int ccNum){
+bool ramCommunicationManager::getCCExist(const string& name, int ccNum) const {
 	int index = -1;
 	for (int i = 0;i < Instruments.size();i++){
 		if (name == Instruments[i]->getName())
@@ -293,7 +293,7 @@ bool ramCommunicationManager::getCCExist(string name,int ccNum){
 	return getCCExist(index, ccNum);
 }
 
-bool ramCommunicationManager::getCCExist(int index,int ccNum){
+bool ramCommunicationManager::getCCExist(int index, int ccNum) const {
 	if ((Instruments.size() == 0) || index >= Instruments.size() || (index < 0))
 		return false;
 
@@ -304,19 +304,19 @@ bool ramCommunicationManager::getCCExist(int index,int ccNum){
 	}
 }
 
-void ramCommunicationManager::assignVelocity(string name, float *value){
+void ramCommunicationManager::assignVelocity(const string& name, float* value){
 
 	assigns.push_back(ramCommunicateAssign(name, -1, value));
 
 }
 
-void ramCommunicationManager::assignCC(string name, int ccNum, float *value){
+void ramCommunicationManager::assignCC(const string& name, int ccNum, float* value){
 
 	assigns.push_back(ramCommunicateAssign(name, ccNum, value));
 
 }
 
-int ramCommunicationManager::getInstNum(string name){
+int ramCommunicationManager::getInstNum(const string& name) const {
 	int index = -1;
 	for (int i = 0;i < Instruments.size();i++){
 		if (name == Instruments[i]->getName())
@@ -331,13 +331,13 @@ void ramCommunicationManager::windowResized(ofResizeEventArgs &win){
 
 }
 
-void ramCommunicationManager::addSender(string address, int port){
+void ramCommunicationManager::addSender(const string& address, int port){
 	if (oscManager != NULL){
 		oscManager->addSenderTag(port, address);
 	}
 }
 
-void ramCommunicationManager::sendNoteOn(string name, float velocity){
+void ramCommunicationManager::sendNoteOn(const string& name, float velocity){
 	ofxOscMessage m;
 	m.setAddress(RAM_OSC_ADDR_COMMUNICATE_NOTEON);
 	m.addStringArg(name);
@@ -345,7 +345,7 @@ void ramCommunicationManager::sendNoteOn(string name, float velocity){
 	if (oscManager != NULL) oscManager->sendMessage(m);
 }
 
-void ramCommunicationManager::sendNoteOff(string name){
+void ramCommunicationManager::sendNoteOff(const string& name){
 	ofxOscMessage m;
 	m.setAddress(RAM_OSC_ADDR_COMMUNICATE_NOTEOFF);
 	m.addStringArg(name);
@@ -353,7 +353,7 @@ void ramCommunicationManager::sendNoteOff(string name){
 	if (oscManager != NULL) oscManager->sendMessage(m);
 }
 
-void ramCommunicationManager::sendCC(string name, vector<float> cc){
+void ramCommunicationManager::sendCC(const string& name, vector<float> cc){
 	ofxOscMessage m;
 	m.setAddress(RAM_OSC_ADDR_COMMUNICATE_CC);
 	m.addStringArg(name);
@@ -365,7 +365,7 @@ void ramCommunicationManager::sendCC(string name, vector<float> cc){
 	if (oscManager != NULL) oscManager->sendMessage(m);
 }
 
-void ramCommunicationManager::sendCC(string name, float *cc, int num){
+void ramCommunicationManager::sendCC(const string& name, float *cc, int num){
 	ofxOscMessage m;
 	m.setAddress(RAM_OSC_ADDR_COMMUNICATE_CC);
 	m.addStringArg(name);
@@ -381,7 +381,7 @@ void ramCommunicationManager::sendOscMessage(ofxOscMessage &m){
 	if (oscManager != NULL) oscManager->sendMessage(m);
 }
 
-int ramCommunicationManager::getNumCCArg(string name){
+int ramCommunicationManager::getNumCCArg(const string& name) const {
 	int count = 0;
 	for (int i = 0;i < 64;i++){
 		if (getCCExist(name, i)){

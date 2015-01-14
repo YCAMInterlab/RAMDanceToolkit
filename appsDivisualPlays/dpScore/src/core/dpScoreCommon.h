@@ -17,12 +17,12 @@
 // WIP
 //#define USE_CUSTOM_MEMORY_ALLOCATOR
 
-#ifdef USE_CUSTOM_MEMORY_ALLOCATOR
-void* operator new(size_t size) throw(std::bad_alloc);
-void* operator new[](size_t size) throw(std::bad_alloc);
-void operator delete(void* pv) throw();
-void operator delete[](void* pv) throw();
-#endif
+//#ifdef USE_CUSTOM_MEMORY_ALLOCATOR
+//void* operator new(size_t size) throw(std::bad_alloc);
+//void* operator new[](size_t size) throw(std::bad_alloc);
+//void operator delete(void* pv) throw();
+//void operator delete[](void* pv) throw();
+//#endif
 
 #define DP_SCORE_NAMESPACE_BEGIN namespace dp { namespace score {
 #define DP_SCORE_NAMESPACE_END } }
@@ -36,6 +36,7 @@ extern const int kH;
 extern const int kFrameRate;
 extern const int kOscClientPort;
 
+extern const string kOscAddrChangeScene;
 extern const string kOscAddrPendulumVec2;
 
 extern const string kAddrVec2;
@@ -46,6 +47,24 @@ extern const string kSettingsDir;
 extern const string kSettingsPrefix;
 
 string demangle(const char* name);
+
+template <class T> string getClassName(const T& t);
+template <class T> string getClassName();
+
+float alignf(float f);
+
+ofVec3f randVec3f();
+
+ofVec3f project(const ofVec3f& obj);
+ofVec3f unproject(const ofVec2f& screen);
+
+namespace color {
+    extern const ofColor kMain;
+    extern const ofColor kPalePinkLight;
+    extern const ofColor kPalePinkHeavy;
+    extern const ofColor kDarkPinkLight;
+    extern const ofColor kDarkPinkHeavy;
+}
 
 template <class T>
 string getClassName(const T& t)
@@ -58,10 +77,6 @@ string getClassName()
 {
     return demangle(typeid(T).name());
 }
-
-float alignf(float f);
-
-ofVec3f randVec3f();
 
 DP_SCORE_NAMESPACE_END
 

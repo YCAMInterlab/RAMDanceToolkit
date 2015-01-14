@@ -25,7 +25,7 @@ void HakoniwaTheta::setup(){
     ofEnableAlphaBlending();
     
     sphere.set(750, 50);
-    sphere.setPosition(ofGetWidth()/2, ofGetHeight()/2, 0);
+    sphere.setPosition(dpGetFirstScreenCenter());
     glEnable(GL_CULL_FACE);
     glCullFace(GL_FRONT);
     
@@ -56,6 +56,7 @@ void HakoniwaTheta::update(){
 
 void HakoniwaTheta::draw(){
 
+    ramSetViewPort(dpGetFirstScreenViewPort());
     vidPlay.getTextureReference().bind();
     
     ofQuaternion qForSphere_osc;
@@ -76,16 +77,19 @@ void HakoniwaTheta::onPanelChanged(ofxUIEventArgs& e){
 
     if (name == "video_no") {
         VideoChanged(video_no);
-    }else if (name == "Fullscreen"){
-        sphere.setPosition(ofGetWidth()/2, ofGetHeight()/2, 0); // 位置
     }
+//    else if (name == "Fullscreen"){
+//        sphere.setPosition(ofGetWidth()/2, ofGetHeight()/2, 0); // 位置
+//    }
 
 }
 
 void HakoniwaTheta::radiusChanged(int radius){
 
     sphere.set(radius, 50);
-    sphere.setPosition(ofGetWidth()/2, ofGetHeight()/2, 0); // 位置
+//    sphere.setPosition(ofGetWidth()/2, ofGetHeight()/2, 0); // 位置
+    sphere.setPosition(dpGetFirstScreenCenter()); // 位置
+    
 
 }
 

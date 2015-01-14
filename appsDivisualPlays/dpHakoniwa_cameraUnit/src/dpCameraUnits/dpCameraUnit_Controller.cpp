@@ -74,7 +74,16 @@ void dpCameraUnit_Controller::update(){
 		cvAnalysis[0]	.update(cvFXUnit[0].mSource, cvFXUnit[0].mGraySource, inputUnit.mIsFrameNew);
 	}
 	
-
+	if (ofGetKeyPressed(' ')){
+		for (int i = 0; i < 4;i++){
+			cvFXUnit[i]		.savePreset(cvAnalysis[i].hakoniwa_name);
+			cvAnalysis[i]	.savePreset(cvAnalysis[i].hakoniwa_name);
+		}
+	}
+//	if (ofGetKeyPressed('l')){
+//		cvFXUnit[0]		.loadPreset("testHakoniwa");
+//		cvAnalysis[0]	.loadPreset("testHakoniwa");
+//	}
 }
 
 void dpCameraUnit_Controller::draw(){
@@ -85,17 +94,22 @@ void dpCameraUnit_Controller::draw(){
 	if (inputUnit.mFourSplit){
 		for (int i = 0;i < 4;i++){
 
-			cvFXUnit[i].drawUI			(240 + i*370, 0);
-			cvFXUnit[i].drawThumbnail	(450 + i*370, 0, 0.5);
+			ofSetColor(50 + 40 * (i % 2));
+			ofRect(210 + i * 420, 0, 420, ofGetHeight());
 
-			cvAnalysis[i].drawUI		(240 + i * 370, 420);
-			cvAnalysis[i].drawThumbnail	(450 + i * 370, 420, 0.5);
+			ofSetColor(255);
+			cvFXUnit[i].drawUI			(210 + i*420, 0);
+			cvFXUnit[i].drawThumbnail	(210 + i*420, ofGetHeight() - 300, 0.5);
+
+			cvAnalysis[i].drawUI		(420 + i * 420, 0);
+			cvAnalysis[i].drawThumbnail	(420 + i * 420, ofGetHeight() - 300, 0.5);
+
 
 		}
 	}else{
 
-		cvFXUnit[0].draw(240,0);
-		cvAnalysis[0].draw(240,420);
+		cvFXUnit[0].draw(210,0);
+		cvAnalysis[0].draw(420,0);
 
 	}
 }

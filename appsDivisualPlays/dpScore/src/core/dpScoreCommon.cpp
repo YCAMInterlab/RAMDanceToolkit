@@ -9,96 +9,96 @@
 #include "dpScoreCommon.h"
 #include <cxxabi.h>
 
-#ifdef USE_CUSTOM_MEMORY_ALLOCATOR
-template<typename T>
-struct track_alloc : std::allocator<T> {
-    typedef typename std::allocator<T>::pointer pointer;
-    typedef typename std::allocator<T>::size_type size_type;
-    
-    template<typename U>
-    struct rebind {
-        typedef track_alloc<U> other;
-    };
-    
-    track_alloc() {}
-    
-    template<typename U>
-    track_alloc(track_alloc<U> const& u)
-    :std::allocator<T>(u) {}
-    
-    pointer allocate(size_type size, std::allocator<void>::const_pointer = 0)
-    {
-        void* p = std::malloc(size * sizeof(T));
-        if(p == 0) {
-            throw std::bad_alloc();
-        }
-        return static_cast<pointer>(p);
-    }
-    
-    void deallocate(pointer p, size_type)
-    {
-        std::free(p);
-    }
-};
-
-typedef std::map< void*, std::size_t, std::less<void*>,
-track_alloc< std::pair<void* const, std::size_t> > > track_type;
-
-struct track_printer {
-    track_type* track;
-    track_printer(track_type* track):track(track) {}
-    ~track_printer()
-    {
-        for (const auto& pair : *track) {
-            ofLogError() << "leaked at " << pair.first << ", " << pair.second << " bytes";
-        }
-    }
-};
-
-track_type* get_map()
-{
-    // don't use normal new to avoid infinite recursion.
-    static track_type* track = new (std::malloc(sizeof *track)) track_type;
-    static track_printer printer(track);
-    return track;
-}
-
-void* operator new(size_t size) throw(std::bad_alloc)
-{
-    void* mem = malloc(size == 0 ? 1 : size);
-    if (mem == nullptr) throw std::bad_alloc();
-    (*get_map())[mem] = size;
-    return mem;
-}
-
-void* operator new[](size_t size) throw(std::bad_alloc)
-{
-    void* mem = malloc(size == 0 ? 1 : size);
-    if (mem == nullptr) throw std::bad_alloc();
-    (*get_map())[mem] = size;
-    return mem;
-}
-
-void operator delete(void* mem) throw()
-{
-    if(get_map()->erase(mem) == 0) {
-        // this indicates a serious bug
-        ofLogError() << "memory at " << mem << " wasn't allocated by us";
-    }
-    free(mem);
-    mem = nullptr;
-}
-
-void operator delete[](void* mem) throw()
-{
-    if(get_map()->erase(mem) == 0) {
-        // this indicates a serious bug
-        ofLogError() << "memory at " << mem << " wasn't allocated by us";
-    }
-    free(mem);
-    mem = nullptr;
-}
-#endif
+//#ifdef USE_CUSTOM_MEMORY_ALLOCATOR
+//template<typename T>
+//struct track_alloc : std::allocator<T> {
+//    typedef typename std::allocator<T>::pointer pointer;
+//    typedef typename std::allocator<T>::size_type size_type;
+//    
+//    template<typename U>
+//    struct rebind {
+//        typedef track_alloc<U> other;
+//    };
+//    
+//    track_alloc() {}
+//    
+//    template<typename U>
+//    track_alloc(track_alloc<U> const& u)
+//    :std::allocator<T>(u) {}
+//    
+//    pointer allocate(size_type size, std::allocator<void>::const_pointer = 0)
+//    {
+//        void* p = std::malloc(size * sizeof(T));
+//        if(p == 0) {
+//            throw std::bad_alloc();
+//        }
+//        return static_cast<pointer>(p);
+//    }
+//    
+//    void deallocate(pointer p, size_type)
+//    {
+//        std::free(p);
+//    }
+//};
+//
+//typedef std::map< void*, std::size_t, std::less<void*>,
+//track_alloc< std::pair<void* const, std::size_t> > > track_type;
+//
+//struct track_printer {
+//    track_type* track;
+//    track_printer(track_type* track):track(track) {}
+//    ~track_printer()
+//    {
+//        for (const auto& pair : *track) {
+//            ofLogError() << "leaked at " << pair.first << ", " << pair.second << " bytes";
+//        }
+//    }
+//};
+//
+//track_type* get_map()
+//{
+//    // don't use normal new to avoid infinite recursion.
+//    static track_type* track = new (std::malloc(sizeof *track)) track_type;
+//    static track_printer printer(track);
+//    return track;
+//}
+//
+//void* operator new(size_t size) throw(std::bad_alloc)
+//{
+//    void* mem = malloc(size == 0 ? 1 : size);
+//    if (mem == nullptr) throw std::bad_alloc();
+//    (*get_map())[mem] = size;
+//    return mem;
+//}
+//
+//void* operator new[](size_t size) throw(std::bad_alloc)
+//{
+//    void* mem = malloc(size == 0 ? 1 : size);
+//    if (mem == nullptr) throw std::bad_alloc();
+//    (*get_map())[mem] = size;
+//    return mem;
+//}
+//
+//void operator delete(void* mem) throw()
+//{
+//    if(get_map()->erase(mem) == 0) {
+//        // this indicates a serious bug
+//        ofLogError() << "memory at " << mem << " wasn't allocated by us";
+//    }
+//    free(mem);
+//    mem = nullptr;
+//}
+//
+//void operator delete[](void* mem) throw()
+//{
+//    if(get_map()->erase(mem) == 0) {
+//        // this indicates a serious bug
+//        ofLogError() << "memory at " << mem << " wasn't allocated by us";
+//    }
+//    free(mem);
+//    mem = nullptr;
+//}
+//#endif
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -108,6 +108,7 @@ const int kH = 1080;
 const int kFrameRate = 30;
 const int kOscClientPort = 10000;
 
+const string kOscAddrChangeScene = "/dp/score/changeScene";
 const string kOscAddrPendulumVec2 = "/dp/cameraUnit/pendulum/vector";
 
 const string kAddrVec2 = "/dp/score/vec2";
@@ -148,6 +149,31 @@ ofVec3f randVec3f()
     const float z = costheta;
     
     return ofVec3f(x, y, z);
+}
+
+ofVec3f project(const ofVec3f& obj)
+{
+    double objX = obj.x, objY = obj.y, objZ = obj.z;
+    double modelview[16];
+    glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
+    double projection[16];
+    glGetDoublev(GL_PROJECTION_MATRIX, projection);
+    int viewport[4];
+    glGetIntegerv(GL_VIEWPORT, viewport);
+    
+    double winX, winY, winZ;
+    
+    gluProject(objX, objY, objZ, modelview, projection, viewport, &winX, &winY, &winZ);
+    
+    return ofVec3f(winX, viewport[3] - winY, winZ);
+}
+ 
+namespace color {
+    const ofColor kMain             = ofColor(255, 50, 150);
+    const ofColor kPalePinkLight    = ofColor(255, 220, 235);
+    const ofColor kPalePinkHeavy    = ofColor(255, 150, 200);
+    const ofColor kDarkPinkLight    = ofColor(200, 50, 120);
+    const ofColor kDarkPinkHeavy    = ofColor(130, 50, 80);
 }
 
 DP_SCORE_NAMESPACE_END

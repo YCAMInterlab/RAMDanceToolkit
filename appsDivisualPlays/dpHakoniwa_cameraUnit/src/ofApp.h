@@ -3,6 +3,7 @@
 #include "ofMain.h"
 
 #include "dpCameraUnit_Controller.h"
+#include "dpSwitchingManager.h"
 
 class ofApp : public ofBaseApp{
 
@@ -22,6 +23,9 @@ public:
 	void gotMessage(ofMessage msg);
 
 	dpCameraUnit_Controller dpCameraUnit;
+	dpSwitchingManager dpSwitcher;
+
+	ofxOscReceiver receiver;
 
 	ofSerial ser;
 };

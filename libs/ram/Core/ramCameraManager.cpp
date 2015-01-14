@@ -46,7 +46,7 @@ void ramCameraManager::loadDefaults()
 	settings = ramCameraSettings::loadSettings(xml);
 }
 
-vector<string> ramCameraManager::getDefaultCameraNames()
+vector<string> ramCameraManager::getDefaultCameraNames() const
 {
 	vector<string> names;
 	for (int i = 0; i < settings.size(); i++)

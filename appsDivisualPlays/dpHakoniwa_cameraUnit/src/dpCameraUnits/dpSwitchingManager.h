@@ -10,53 +10,81 @@
 #define __dpHakoniwa_cameraUnit__dpSwitchingManager__
 
 #include "ofMain.h"
+#include "sw_1010F_SerialController.h"
+#include "dpCameraUnit_cvFX.h"
+#include "dpCameraUnit_cvAnalysis.h"
 #include "ofxOsc.h"
 
-#define DP_DISP_PT_STGLEFT 0
-#define DP_DISP_PT_STGRIGHT 1
-#define DP_DISP_PT_UPSTAGE 2
-#define DP_DISP_PT_DOWNSTAGE 3
+#define DISPLAY_SHIMO_OKU 4
+#define DISPLAY_KAMI_OKU 5
+#define DISPLAY_SHIMO_TEMAE 6
+#define DISPLAY_KAMI_TEMAE 7
 
-#define DP_DISP_TYPE_HAKOVIS 0
-#define DP_DISP_TYPE_CAMERATHRU 1
-#define DP_DISP_TYPE_AUDIENCE 2
-#define DP_DISP_TYPE_FLOOR 3
+#define CVSW_1 0
+#define CVSW_2 1
+#define CVSW_3 2
+#define CVSW_4 3
 
 enum hakoniwaType{
+	HAKO_PLINK_PRISM,
+	HAKO_PLINK_LASER,
+	HAKO_PLINK_OIL,
 	HAKO_STRUGGLE,
 	HAKO_FROZENICE,
-	HAKO_PLINK_LASER,
-	HAKO_PLINK_MAGNET,
-	HAKO_PLINK_PRISM,
 	HAKO_COLOROFWATER,
-	HAKO_SERVOPENDULUM
+	HAKO_SERVOPENDULUM,
+	HAKO_BLANK,
 };
 
-struct dpDisplaySelector{
-	int displayType;
-	int displayPoint_LR;
-	int displayPoint_UD;
+struct hakoniwaPresets{
+public:
+	hakoniwaPresets(){};
+	~hakoniwaPresets(){};
+
+	hakoniwaType	type;
+	string			CVPreset;
+	int				sourceCh;
+};
+
+class cvSlot{
+public:
+	bool			isEmpty = true;
+	hakoniwaType	hakoType;
+	int				sourceCh;
+	vector<int>		targetDisplay;
+	string			presetFile;
+	int				matrixInputCh;
 };
 
 class dpSwitchingManager{
 public:
 
-	void setup();
+	void setup(dpCameraUnit_cvFX* fxP,
+			   dpCameraUnit_cvAnalysis* anP);
 	void update();
 	void draw();
 
-	void enableHakoniwa(hakoniwaType type, dpDisplaySelector disp);
-	void disableHakoniwa(hakoniwaType type);
-	void disableAllHakoniwa();
-
 	void receiveOscMessage(ofxOscMessage &m);
 
-	//to RDTK
-	void setScene(string sceneName, bool enable);
-	void setAllScene(bool enable);
+	void SelectHakoniwa(hakoniwaType type, int slot);
 
-	//to Switcher
-	void setCamera(int src,int dst);
+	void enableDisplay(hakoniwaType type,int displayNum,bool newHako);
+	void disableHakoniwa(hakoniwaType type);
+	void disableDisplay(int displayNum);
+
+	bool isSlave;
+
+	dpCameraUnit_cvFX* FXPtr;
+	dpCameraUnit_cvAnalysis* AnalysisPtr;
+
+	hakoniwaPresets* getHakoniwaPreset(hakoniwaType type);
+
+	vector<hakoniwaPresets*> hakoniwas;
+
+	ofxOscSender senderToSlave;
+
+	cvSlot mSlots[4];
+	sw_1010F_SerialController matrixSW;
 };
 
 #endif /* defined(__dpHakoniwa_cameraUnit__dpSwitchingManager__) */

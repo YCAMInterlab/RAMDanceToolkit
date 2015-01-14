@@ -10,6 +10,19 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
+void SceneBase::drawHeader()
+{
+    const string title = "Dividual Plays Score";
+    string name = getName();
+    ofStringReplace(name, "dp::score::Scene", "");
+    ofPushStyle();
+    ofSetColor(color::kMain, 255);
+    ofDrawBitmapString(title, 12.f, 16.f);
+    ofSetColor(ofColor::white, 255);
+    ofDrawBitmapString(name, 12.f + (title.length()-1) * 9.f, 16.f);
+    ofPopStyle();
+}
+
 void SceneBase::setId(int id)
 {
     if (mId == -1)
@@ -31,6 +44,96 @@ const string& SceneBase::getName()
     if (mName == "")
         mName = getClassName(*this);
     return mName;
+}
+
+void SceneBase::onUpdate(ofxEventMessage& m)
+{
+    update(m);
+}
+
+void SceneBase::onDraw()
+{
+    ofPushStyle();
+    ofPushMatrix();
+    ofEnableAlphaBlending();
+    ofDisableDepthTest();
+    ofNoFill();
+ 
+    draw();
+    drawHeader();
+    
+    ofPopMatrix();
+    ofPopStyle();
+}
+
+void SceneBase::onInitialize()
+{
+    initialize();
+}
+
+void SceneBase::onShutDown()
+{
+    shutDown();
+}
+
+void SceneBase::onEnter()
+{
+    enter();
+}
+
+void SceneBase::onExit()
+{
+    exit();
+}
+
+void SceneBase::onKeyPressed(int key)
+{
+    keyPressed(key);
+}
+
+void SceneBase::onKeyReleased(int key)
+{
+    keyReleased(key);
+}
+
+void SceneBase::onMouseMoved(int x, int y)
+{
+    mouseMoved(x, y);
+}
+
+void SceneBase::onMouseDragged(int x, int y, int button)
+{
+    mouseDragged(x, y, button);
+}
+
+void SceneBase::onMousePressed(int x, int y, int button)
+{
+    mousePressed(x, y, button);
+}
+
+void SceneBase::onMouseReleased(int x, int y, int button)
+{
+    mouseReleased(x, y, button);
+}
+
+void SceneBase::onWindowResized(int w, int h)
+{
+    windowResized(w, h);
+}
+
+void SceneBase::onDragEvent(ofDragInfo dragInfo)
+{
+    dragEvent(dragInfo);
+}
+
+void SceneBase::onGotMessage(ofMessage msg)
+{
+    gotMessage(msg);
+}
+
+void SceneBase::onGuiEvent(ofxUIEventArgs &e)
+{
+    guiEvent(e);
 }
 
 DP_SCORE_NAMESPACE_END

@@ -16,7 +16,7 @@ void ramOscManager::setup(int receivePort){
 
 }
 
-void ramOscManager::addSenderTag(int port, string address){
+void ramOscManager::addSenderTag(int port, const string& address){
 
 	senderlist.push_back(ramOscSendTag(port,address));
 

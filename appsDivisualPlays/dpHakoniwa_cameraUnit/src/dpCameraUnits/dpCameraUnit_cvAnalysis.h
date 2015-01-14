@@ -23,7 +23,10 @@ public:
 	void draw(int x,int y);
 	void drawUI(int x,int y);
 	void drawThumbnail(int x,int y, float scale = 1.0);
-	
+
+	void savePreset(string hakoniwaName);
+	void loadPreset(string hakoniwaName);
+
 	void guiEvent(ofxUIEventArgs& ev);
 
 	void sendMessageMulti(ofxOscMessage &m);
@@ -56,6 +59,8 @@ public:
 	float mParamCF_MinArea;
 	float mParamCF_Threshold;
 	float mParamCF_MaxBlobNum;
+	int mParamPixelate_ResX;
+	int mParamPixelate_ResY;
 	ofFloatColor mParamCF_targColor;
 
 	ofImage *imgRefColor, *imgRefGray;

@@ -41,7 +41,7 @@ public:
 		setEnabled(!isEnabled());
 	}
 	
-	bool isEnabled()
+	bool isEnabled() const
 	{
 		return bEnabled;
 	}
