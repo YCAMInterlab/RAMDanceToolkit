@@ -62,7 +62,7 @@ void hakoVisPLink_Laser::draw(){
 	if (lines.size() < 3) return;
 	ramBeginCamera();
 	ofPushMatrix();
-	ofRotateY(ofGetElapsedTimef()*5);
+//	ofRotate(ofGetElapsedTimef()*3);
 
 	glPointSize(3.0);
 	glBegin(GL_POINTS);

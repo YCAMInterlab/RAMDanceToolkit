@@ -18,8 +18,10 @@ public:
 
 	HakoniwaParallelLink_Base();
 	virtual ~HakoniwaParallelLink_Base(){
-		mLinkManager.setPlot_inClamp(ofVec3f(0.0,196.0,0.0));
-		mLinkManager.sendSignal();
+		if (needsDestractPosition){
+			mLinkManager.setPlot_inClamp(ofVec3f(0.0,196.0,0.0));
+			mLinkManager.sendSignal();
+		}
 	};
 
 	virtual void initialize(){};
@@ -58,8 +60,6 @@ protected:
 	bool mDigitalOut;
 	bool mTrackMachine;
 	bool mDrawExtractor;
-	bool mDrawMachine;
-	
 	float mPwm_Param;
 
 	bool mDigitalIO[6];
@@ -80,6 +80,8 @@ protected:
 	float mSetting_Accel;
 	float mSetting_Deccel;
 	float mSetting_MaxSpeed;
+
+	bool needsDestractPosition;
 };
 
 

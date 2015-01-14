@@ -20,10 +20,10 @@
 #define DISPLAY_SHIMO_TEMAE 6
 #define DISPLAY_KAMI_TEMAE 7
 
-#define CVSW_1 0
-#define CVSW_2 1
-#define CVSW_3 2
-#define CVSW_4 3
+#define CVSW_1 1
+#define CVSW_2 2
+#define CVSW_3 3
+#define CVSW_4 4
 
 enum hakoniwaType{
 	HAKO_PLINK_PRISM,
@@ -32,6 +32,12 @@ enum hakoniwaType{
 
 	HAKO_SERVOPENDULUM,
 	HAKO_STAGE,
+
+	HAKO_TESTA,
+	HAKO_TESTB,
+	HAKO_TESTC,
+	HAKO_TESTD,
+
 	HAKO_FROZENICE,
 	HAKO_WORM,
 
@@ -49,6 +55,10 @@ public:
 	string			CVPreset;
 	vector<string>	sceneNames;
 	int				sourceCh;
+
+	bool getIsVis(int num){
+		return sceneNames[num].substr(0,1) == "V";
+	}
 };
 
 class cvSlot{
@@ -59,6 +69,13 @@ public:
 	vector<int>		targetDisplay;
 	string			presetFile;
 	int				matrixInputCh;
+
+	bool displayIsExist(int num){
+		for (int i = 0;i < targetDisplay.size();i++){
+			if (targetDisplay[i] == num) return true;
+		}
+		return false;
+	}
 };
 
 class dpSwitchingManager{
@@ -92,6 +109,9 @@ public:
 
 	cvSlot mSlots[4];
 	sw_1010F_SerialController matrixSW;
+
+	void refleshSceneforRDTK();
+	bool searchHakoniwaIsActive(hakoniwaType type);
 };
 
 #endif /* defined(__dpHakoniwa_cameraUnit__dpSwitchingManager__) */

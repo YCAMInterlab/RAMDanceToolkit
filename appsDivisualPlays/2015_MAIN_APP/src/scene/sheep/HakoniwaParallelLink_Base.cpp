@@ -20,7 +20,6 @@ HakoniwaParallelLink_Base::HakoniwaParallelLink_Base(){
 
 	mLinkManager.setup("cu.usbmodem1141");
 
-
 	mLinkManager.height = 250.0;
 
 	mLinkManager.area_clamp.set(50.0,  96.0, 50.0);
@@ -42,6 +41,7 @@ HakoniwaParallelLink_Base::HakoniwaParallelLink_Base(){
 		mDigitalIO[i] = false;
 		mDigitalIO_Prev[i] = false;
 	}
+	needsDestractPosition = false;
 }
 
 void HakoniwaParallelLink_Base::update(){
@@ -55,6 +55,7 @@ void HakoniwaParallelLink_Base::update(){
 		machinePosition.z = chest.z;
 	}
 
+	if (mLinkManager.enableSync) needsDestractPosition = true;
 	if (ofGetFrameNum() % 5 == 0){
 		if (mLinkManager.stepManager.useOsc)
 		{
@@ -206,7 +207,6 @@ void HakoniwaParallelLink_Base::setupControlPanel(){
 	utilityGui->addButton("Save",false);
 	utilityGui->addButton("Load",false);
 	utilityGui->addToggle("drawExtractor", &mDrawExtractor);
-	utilityGui->addToggle("drawMachine", &mDrawMachine);
 	utilityGui->addToggle("digitalI/O-2", &mDigitalIO[0]);
 	utilityGui->addToggle("digitalI/O-3", &mDigitalIO[1]);
 	utilityGui->addToggle("digitalI/O-4", &mDigitalIO[2]);
@@ -316,8 +316,10 @@ void HakoniwaParallelLink_Base::onEnabled(){
 }
 
 void HakoniwaParallelLink_Base::onDisabled(){
-	mLinkManager.setPlot_inClamp(ofVec3f(0.0,196.0,0.0));
-	mLinkManager.sendSignal();
+	if (needsDestractPosition){
+		mLinkManager.setPlot_inClamp(ofVec3f(0.0,196.0,0.0));
+		mLinkManager.sendSignal();
+	}
 }
 
 void HakoniwaParallelLink_Base::savePreset(){
