@@ -58,19 +58,19 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->sceneNames.push_back("V:TestSceneA");
 
 	hakoniwas.push_back(new hakoniwaPresets());
-	hakoniwas.back()->type		= HAKO_TESTA;
+	hakoniwas.back()->type		= HAKO_TESTB;
 	hakoniwas.back()->CVPreset	= "TestB";
 	hakoniwas.back()->sourceCh	= 3;
 	hakoniwas.back()->sceneNames.push_back("V:TestSceneB");
 
 	hakoniwas.push_back(new hakoniwaPresets());
-	hakoniwas.back()->type		= HAKO_TESTA;
+	hakoniwas.back()->type		= HAKO_TESTC;
 	hakoniwas.back()->CVPreset	= "TestC";
 	hakoniwas.back()->sourceCh	= 4;
 	hakoniwas.back()->sceneNames.push_back("V:TestSceneC");
 
 	hakoniwas.push_back(new hakoniwaPresets());
-	hakoniwas.back()->type		= HAKO_TESTA;
+	hakoniwas.back()->type		= HAKO_TESTD;
 	hakoniwas.back()->CVPreset	= "TestD";
 	hakoniwas.back()->sourceCh	= 10;
 	hakoniwas.back()->sceneNames.push_back("V:TestSceneD");
