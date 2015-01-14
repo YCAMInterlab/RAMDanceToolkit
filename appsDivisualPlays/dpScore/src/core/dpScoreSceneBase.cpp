@@ -60,7 +60,7 @@ void SceneBase::onDraw()
     ofNoFill();
  
     draw();
-    drawHeader();
+    if (mDrawHeader) drawHeader();
     
     ofPopMatrix();
     ofPopStyle();
