@@ -83,7 +83,7 @@ void SceneBodyBoids::update(ofxEventMessage& m)
             if (mActor && mPrevActor) {
                 auto v0 = mPrevActor->getJoint(i).getGlobalPosition();
                 auto v1 = mActor->getJoint(i).getGlobalPosition();
-                auto acc = v0 - v1;
+                auto acc = (v0 - v1) * 5.f;
                 auto pos = mActor->getJoint(i).getGlobalPosition();
                 
                 //pos.rotate(mEuler.y, ofVec3f(0.0f, 1.0f, 0.0f));
