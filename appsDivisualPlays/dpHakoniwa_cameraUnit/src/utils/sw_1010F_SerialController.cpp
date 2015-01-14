@@ -26,7 +26,7 @@ void sw_1010F_SerialController::setSW(int cameraChannel, int displayChannel){
 	buf += ofToString(displayChannel);
 	buf += "\r";
 
-	serial_.writeBytes((unsigned char*)(buf.c_str()), buf.length());
+	serial_.writeBytes((unsigned char*)(buf.c_str()), buf.length()+1);
 
 }
 

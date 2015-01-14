@@ -20,10 +20,10 @@
 #define DISPLAY_SHIMO_TEMAE 6
 #define DISPLAY_KAMI_TEMAE 7
 
-#define CVSW_1 0
-#define CVSW_2 1
-#define CVSW_3 2
-#define CVSW_4 3
+#define CVSW_1 1
+#define CVSW_2 2
+#define CVSW_3 3
+#define CVSW_4 4
 
 enum hakoniwaType{
 	HAKO_PLINK_PRISM,
