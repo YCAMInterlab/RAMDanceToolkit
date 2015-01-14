@@ -9,17 +9,18 @@
 #ifndef __dpScore__dpScoreSceneBodyGlobe__
 #define __dpScore__dpScoreSceneBodyGlobe__
 
-#include "dpScoreSceneBase.h"
+#include "dpScoreSceneBodyBase.h"
 #include "ofxMotioner.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-class SceneBodyGlobe final : public SceneBase {
+class SceneBodyGlobe final : public SceneBodyBase<ofxMot::Node> {
 public:
     struct Node : public ofxMot::Node {
         typedef ofPtr<Node> Ptr;
         Node();
-        virtual ~Node() {}
+        virtual ~Node() = default;
+        Node& operator = (const Node& rhs);
         void update();
         virtual void customDraw();
         void drawPoints();
@@ -33,8 +34,6 @@ public:
         const int kMaxPoints{3000};
     };
     
-    typedef vector<Node::Ptr> NodeVec;
-    
     explicit SceneBodyGlobe() = default;
     virtual ~SceneBodyGlobe() = default;
     
@@ -47,12 +46,23 @@ public:
     void update(ofxEventMessage& m) override;
     void draw() override;
     
-    void onUpdateSkeleton(ofxMotioner::EventArgs &e);
+    void setupSkeleton(SkeletonPtr skl);
+    void updateSkeleton(SkeletonPtr skl);
+    void exitSkeleton(SkeletonPtr skl);
     
 private:
-    string mSkeletonName;
+    typedef vector<Node::Ptr> NodeVec;
+    struct Globe final {
+        typedef ofPtr<Globe> Ptr;
+        Globe();
+        NodeVec nodes;
+        ofVec3f origin;
+    };
+    
+    typedef map<string, Globe::Ptr> NodeVecMap;
+    
+    NodeVecMap mNodeVecMap;
     ofEasyCam mCam;
-    NodeVec mNodes;
     bool mMagnify{false};
     float mScale{500.f};
     float mRotSpdX{2.12f};
