@@ -84,9 +84,9 @@ void hakoVisPLink_Laser::draw(){
 				   lines[lines.size() * ofNoise((i+j)*34.134)].pts);
 		}
 	}
+	ofPopMatrix();
 	ramEndCamera();
 
-	ofPopMatrix();
 	ofSetColor(255);
 	ofEnableDepthTest();
 }
