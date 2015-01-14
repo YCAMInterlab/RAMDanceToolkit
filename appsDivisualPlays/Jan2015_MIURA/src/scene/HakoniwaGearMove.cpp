@@ -87,13 +87,13 @@ void HakoniwaGearMove::draw(){
         TurnGear2Count = 0;
         TurnGear3Count = 0;
         for (int i = 0;i < motionExtractor.getNumPort();i++){
-            if (motionExtractor.getActorNameAt(i) == "Default"){
+            if (motionExtractor.getActorNameAt(i) == "sasamoto"){
                 TurnGear1Count += motionExtractor.getVelocitySpeedAt(i);
             }
-            if (motionExtractor.getActorNameAt(i) == "Default1"){
+            if (motionExtractor.getActorNameAt(i) == "kojiri"){
                 TurnGear2Count += motionExtractor.getVelocitySpeedAt(i);
             }
-            if (motionExtractor.getActorNameAt(i) == "Default2"){
+            if (motionExtractor.getActorNameAt(i) == "kawaguchi"){
                 TurnGear3Count += motionExtractor.getVelocitySpeedAt(i);
             }
         }
