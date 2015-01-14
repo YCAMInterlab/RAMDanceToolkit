@@ -56,13 +56,14 @@ void testApp::setup()
 
 	ramSceneManager& sceneManager = ramSceneManager::instance();
 
-	sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
 	sceneManager.addScene( plink_laser.getPtr());
 	sceneManager.addScene( plink_oil.getPtr());
 	sceneManager.addScene( plink_prism.getPtr());
 
 	sceneManager.addScene( vislink.getPtr());
 	sceneManager.addScene( motionExt.getPtr());
+
+	sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
 
 }
 
