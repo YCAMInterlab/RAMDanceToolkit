@@ -8,9 +8,29 @@
 
 #include "dpSwitchingManager.h"
 
-void dpSwitchingManager::setup(){
+void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
+							   dpCameraUnit_cvAnalysis* anP){
+
+	FXPtr = fxP;
+	AnalysisPtr = anP;
+	
 	//箱庭プリセット
 	hakoniwaPresets* hako;
+
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_PLINK_PRISM;
+	hakoniwas.back()->CVPreset	= "plink_Prism";
+	hakoniwas.back()->sourceCh	= 1;
+
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_PLINK_LASER;
+	hakoniwas.back()->CVPreset	= "plink_Laser";
+	hakoniwas.back()->sourceCh	= 2;
+
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_PLINK_OIL;
+	hakoniwas.back()->CVPreset	= "plink_Oil";
+	hakoniwas.back()->sourceCh	= 3;
 
 	//あばれる君
 	hakoniwas.push_back(new hakoniwaPresets());
@@ -23,16 +43,6 @@ void dpSwitchingManager::setup(){
 	hakoniwas.back()->CVPreset	= "frozen.xml";
 	hakoniwas.back()->sourceCh	= 1;
 
-	hakoniwas.push_back(new hakoniwaPresets());
-	hakoniwas.back()->type		= HAKO_PLINK_LASER;
-	hakoniwas.back()->CVPreset	= "frozen.xml";
-	hakoniwas.back()->sourceCh	= 2;
-
-	hakoniwas.push_back(new hakoniwaPresets());
-	hakoniwas.back()->type		= HAKO_PLINK_MAGNET;
-	hakoniwas.back()->CVPreset	= "frozen.xml";
-	hakoniwas.back()->sourceCh	= 3;
-
 	for (int i = 0;i < 4;i++){
 		mSlots[i].targetDisplay.clear();
 	}
@@ -42,7 +52,7 @@ void dpSwitchingManager::setup(){
 	mSlots[3].matrixInputCh = CVSW_4;
 
 	isSlave = false;
-//	senderToSlave.setup("192.168.20.36", 10000);
+	senderToSlave.setup("192.168.20.36", 10000);
 }
 
 void dpSwitchingManager::update(){
@@ -109,6 +119,12 @@ void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
 }
 
 void dpSwitchingManager::SelectHakoniwa(hakoniwaType type, int slot){
+	bool TypeisExist = false;
+	for (int i = 0;i < hakoniwas.size();i++){
+		//プリセットが未アサインの時はリターン)
+		if (hakoniwas[i]->type == type) TypeisExist = true;
+	}
+	if (!TypeisExist) return;
 
 	cout << "SelHako " << type << ":" << slot << endl;
 	cout << "Call SelectHakoniwa===" << endl;
@@ -141,6 +157,9 @@ void dpSwitchingManager::SelectHakoniwa(hakoniwaType type, int slot){
 		mSlots[targCvSlot].presetFile = targHako->CVPreset;
 		mSlots[targCvSlot].targetDisplay.clear();
 		mSlots[targCvSlot].targetDisplay.push_back(int(slot));
+
+		FXPtr[targCvSlot]		.loadPreset(mSlots[targCvSlot].presetFile);
+		AnalysisPtr[targCvSlot]	.loadPreset(mSlots[targCvSlot].presetFile);
 
 		matrixSW.setSW(targHako->sourceCh,
 					   mSlots[targCvSlot].matrixInputCh);

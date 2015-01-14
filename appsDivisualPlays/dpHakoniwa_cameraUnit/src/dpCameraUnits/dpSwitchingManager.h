@@ -11,6 +11,8 @@
 
 #include "ofMain.h"
 #include "sw_1010F_SerialController.h"
+#include "dpCameraUnit_cvFX.h"
+#include "dpCameraUnit_cvAnalysis.h"
 #include "ofxOsc.h"
 
 #define DISPLAY_SHIMO_OKU 4
@@ -24,11 +26,11 @@
 #define CVSW_4 3
 
 enum hakoniwaType{
+	HAKO_PLINK_PRISM,
+	HAKO_PLINK_LASER,
+	HAKO_PLINK_OIL,
 	HAKO_STRUGGLE,
 	HAKO_FROZENICE,
-	HAKO_PLINK_LASER,
-	HAKO_PLINK_MAGNET,
-	HAKO_PLINK_PRISM,
 	HAKO_COLOROFWATER,
 	HAKO_SERVOPENDULUM,
 	HAKO_BLANK,
@@ -57,7 +59,8 @@ public:
 class dpSwitchingManager{
 public:
 
-	void setup();
+	void setup(dpCameraUnit_cvFX* fxP,
+			   dpCameraUnit_cvAnalysis* anP);
 	void update();
 	void draw();
 
@@ -70,6 +73,9 @@ public:
 	void disableDisplay(int displayNum);
 
 	bool isSlave;
+
+	dpCameraUnit_cvFX* FXPtr;
+	dpCameraUnit_cvAnalysis* AnalysisPtr;
 
 	hakoniwaPresets* getHakoniwaPreset(hakoniwaType type);
 
