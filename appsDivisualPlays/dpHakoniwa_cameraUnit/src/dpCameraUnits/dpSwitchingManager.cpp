@@ -64,10 +64,10 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	mSlots[3].matrixInputCh = CVSW_4;
 
 	isSlave = false;
-//    senderToSlave.setup("192.168.20.36", 12400);
-    senderToSlave.setup("Hampshire.local", 12400);
+    senderToSlave.setup("192.168.20.4", 12400);
+//    senderToSlave.setup("Hampshire.local", 12400);
 
-	senderToRDTK1.setup("127.0.0.1", 10000);
+	senderToRDTK1.setup("192.168.20.2", 10000);
 	senderToRDTK2.setup("192.168.20.3", 10000);
 
 }
