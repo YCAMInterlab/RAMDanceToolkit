@@ -3,9 +3,9 @@
 void dpHakoniwaSand::setupControlPanel(){
     
     mMotionExtractor.setupControlPanel(this,ofPoint(340,30));
-    ramGetGUI().addIntSlider("Val1_Test", 1000, 2000, &val1);
-    ramGetGUI().addIntSlider("Val2_Test", 1000, 2000, &val2);
-    ramGetGUI().addIntSlider("Val3_Test", 1000, 2000, &val3);
+    ramGetGUI().addIntSlider("Val1_Test", 800, 2200, &val1);
+    ramGetGUI().addIntSlider("Val2_Test", 800, 2200, &val2);
+    ramGetGUI().addIntSlider("Val3_Test", 800, 2200, &val3);
     ramGetGUI().addToggle("Test mode", &bTestMode);
     
 //    bTestMode = false;
