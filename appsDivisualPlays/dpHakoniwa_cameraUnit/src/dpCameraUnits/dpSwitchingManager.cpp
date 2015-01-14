@@ -69,8 +69,8 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
     senderToSlave.setup("192.168.20.4", 12400);
 //    senderToSlave.setup("Hampshire.local", 12400);
 
-	senderToRDTK1.setup("192.168.20.2", 10000);
-	senderToRDTK2.setup("192.168.20.3", 10000);
+	senderToRDTK1.setup("192.168.20.3", 10000);
+	senderToRDTK2.setup("192.168.20.2", 10000);
 
 }
 
@@ -217,7 +217,7 @@ void dpSwitchingManager::enableDisplay(hakoniwaType type, int displayNum,bool ne
 	hakoniwaPresets* tp = getHakoniwaPreset(type);
 
 	//箱庭の映像を舞台ディスプレイへ
-	matrixSW.setSW(getHakoniwaPreset(type)->sourceCh, displayNum+4);
+	matrixSW.setSW(getHakoniwaPreset(type)->sourceCh, displayNum+5);
 	//TODO: RDTKへのOSC送り
 
 	refleshSceneforRDTK();
@@ -325,10 +325,10 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 					m2.addIntArg(0);
 					m2.addIntArg(0);
 				}else{
-					m2.addIntArg(mSlots[i].displayIsExist(2) ||
-								 mSlots[i].displayIsExist(3));
-					m2.addIntArg(mSlots[i].displayIsExist(2));
+					m2.addIntArg(mSlots[i].displayIsExist(3) ||
+								 mSlots[i].displayIsExist(2));
 					m2.addIntArg(mSlots[i].displayIsExist(3));
+					m2.addIntArg(mSlots[i].displayIsExist(2));
 				}
 
 				senderToRDTK1.sendMessage(m1);
