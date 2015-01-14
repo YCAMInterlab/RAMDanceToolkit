@@ -50,6 +50,7 @@ public:
 	ofImage		mGraySource_background;
 	bool		mBackgroundNeedsReflesh;
 	ofImage		mGraySource;
+	ofImage		mGraySource_tmp;
 	ofImage		mGraySource_forDiff;
 
 	bool		mResetWarpPt;
@@ -57,8 +58,15 @@ public:
 
 protected:
 
-	ofxCv::Mat tmp;
-	cv::Mat mAccum;
+	ofxCv::Mat	tmp;
+	cv::Mat		mAccum;
+
+	ofVec2f mLastDrawPos;
+	float	mLastDrawScale;
+	int mWarpTarget;
+	void mousePressed(ofMouseEventArgs &arg);
+	void mouseDragged(ofMouseEventArgs &arg);
+	void mouseReleased(ofMouseEventArgs &arg);
 
 	void useAccumulateWeighted(ofImage *src,ofImage *result,cv::Mat *accum,float time,bool fadeLastFrame = false);
 	void useAdaptiveThreshold(ofImage &src,ofImage &dst,int blockSize,int offset,bool invert,bool gauss);
