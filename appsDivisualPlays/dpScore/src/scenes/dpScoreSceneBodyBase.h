@@ -52,7 +52,7 @@ private:
 template<class Node>
 void SceneBodyBase<Node>::onEnter()
 {
-    mSkeletons.clear();
+    //mSkeletons.clear();
     
     enter();
     
@@ -72,10 +72,10 @@ void SceneBodyBase<Node>::onExit()
     
     exit();
     
-    for (auto s : mSkeletons) {
-        exitSkeleton(s);
-    }
-    mSkeletons.clear();
+    //for (auto s : mSkeletons) {
+    //    exitSkeleton(s);
+    //}
+    //mSkeletons.clear();
 }
 
 #pragma mark ___________________________________________________________________
