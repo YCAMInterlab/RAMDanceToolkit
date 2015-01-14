@@ -74,7 +74,16 @@ void dpCameraUnit_Controller::update(){
 		cvAnalysis[0]	.update(cvFXUnit[0].mSource, cvFXUnit[0].mGraySource, inputUnit.mIsFrameNew);
 	}
 	
-
+	if (ofGetKeyPressed(' ')){
+		for (int i = 0; i < 4;i++){
+			cvFXUnit[i]		.savePreset(cvAnalysis[i].hakoniwa_name);
+			cvAnalysis[i]	.savePreset(cvAnalysis[i].hakoniwa_name);
+		}
+	}
+//	if (ofGetKeyPressed('l')){
+//		cvFXUnit[0]		.loadPreset("testHakoniwa");
+//		cvAnalysis[0]	.loadPreset("testHakoniwa");
+//	}
 }
 
 void dpCameraUnit_Controller::draw(){

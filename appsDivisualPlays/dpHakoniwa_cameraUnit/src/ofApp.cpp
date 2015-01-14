@@ -6,7 +6,8 @@ void ofApp::setup(){
 	ofSetFrameRate(30);
 
 	receiver.setup(12400);
-	dpSwitcher.setup();
+	dpSwitcher.setup(dpCameraUnit.cvFXUnit,
+					 dpCameraUnit.cvAnalysis);
 
 	ofSetLogLevel(OF_LOG_ERROR);
 }

@@ -11,6 +11,8 @@
 
 #include "ofMain.h"
 #include "sw_1010F_SerialController.h"
+#include "dpCameraUnit_cvFX.h"
+#include "dpCameraUnit_cvAnalysis.h"
 #include "ofxOsc.h"
 
 #define DISPLAY_SHIMO_OKU 4
@@ -24,13 +26,17 @@
 #define CVSW_4 3
 
 enum hakoniwaType{
-	HAKO_STRUGGLE,
-	HAKO_FROZENICE,
-	HAKO_PLINK_LASER,
-	HAKO_PLINK_MAGNET,
 	HAKO_PLINK_PRISM,
-	HAKO_COLOROFWATER,
+	HAKO_PLINK_LASER,
+	HAKO_PLINK_OIL,
+
 	HAKO_SERVOPENDULUM,
+	HAKO_STAGE,
+	HAKO_FROZENICE,
+	HAKO_WORM,
+
+	HAKO_STRUGGLE,
+	HAKO_COLOROFWATER,
 	HAKO_BLANK,
 };
 
@@ -41,6 +47,7 @@ public:
 
 	hakoniwaType	type;
 	string			CVPreset;
+	vector<string>	sceneNames;
 	int				sourceCh;
 };
 
@@ -57,7 +64,8 @@ public:
 class dpSwitchingManager{
 public:
 
-	void setup();
+	void setup(dpCameraUnit_cvFX* fxP,
+			   dpCameraUnit_cvAnalysis* anP);
 	void update();
 	void draw();
 
@@ -71,11 +79,16 @@ public:
 
 	bool isSlave;
 
+	dpCameraUnit_cvFX* FXPtr;
+	dpCameraUnit_cvAnalysis* AnalysisPtr;
+
 	hakoniwaPresets* getHakoniwaPreset(hakoniwaType type);
 
 	vector<hakoniwaPresets*> hakoniwas;
 
 	ofxOscSender senderToSlave;
+	ofxOscSender senderToRDTK1;
+	ofxOscSender senderToRDTK2;
 
 	cvSlot mSlots[4];
 	sw_1010F_SerialController matrixSW;

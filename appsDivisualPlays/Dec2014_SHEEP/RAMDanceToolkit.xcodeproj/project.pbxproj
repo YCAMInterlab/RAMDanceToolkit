@@ -11,6 +11,10 @@
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		C630DF1F1A4D80E800567351 /* distanceMetaball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C630DF1D1A4D80E800567351 /* distanceMetaball.cpp */; };
+		C63615D21A63FB6E0006BB65 /* HakoniwaPLink_Prism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63615D01A63FB6E0006BB65 /* HakoniwaPLink_Prism.cpp */; };
+		C63615D51A63FB7D0006BB65 /* HakoniwaPlink_Oil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63615D31A63FB7D0006BB65 /* HakoniwaPlink_Oil.cpp */; };
+		C63615DA1A64B71D0006BB65 /* hakoVisPLink_Oil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63615D81A64B71D0006BB65 /* hakoVisPLink_Oil.cpp */; };
+		C63615DD1A64B72B0006BB65 /* hakoVisPLink_Prism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63615DB1A64B72B0006BB65 /* hakoVisPLink_Prism.cpp */; };
 		C685884C1A5EA7E000F8F488 /* dpMarionette.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C685884A1A5EA7E000F8F488 /* dpMarionette.cpp */; };
 		C6A68D181A5C32E000122475 /* ramMotionExtractorExampleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A68D161A5C32E000122475 /* ramMotionExtractorExampleScene.cpp */; };
 		C6ABEBA71A623BC0005DF2CE /* hakoVisPLink_Laser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ABEBA51A623BC0005DF2CE /* hakoVisPLink_Laser.cpp */; };
@@ -106,6 +110,14 @@
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		C630DF1D1A4D80E800567351 /* distanceMetaball.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = distanceMetaball.cpp; path = scenes/distanceMetaball/distanceMetaball.cpp; sourceTree = "<group>"; };
 		C630DF1E1A4D80E800567351 /* distanceMetaball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = distanceMetaball.h; path = scenes/distanceMetaball/distanceMetaball.h; sourceTree = "<group>"; };
+		C63615D01A63FB6E0006BB65 /* HakoniwaPLink_Prism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakoniwaPLink_Prism.cpp; path = scenes/HakoniwaPLink_Prism.cpp; sourceTree = "<group>"; };
+		C63615D11A63FB6E0006BB65 /* HakoniwaPLink_Prism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaPLink_Prism.h; path = scenes/HakoniwaPLink_Prism.h; sourceTree = "<group>"; };
+		C63615D31A63FB7D0006BB65 /* HakoniwaPlink_Oil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakoniwaPlink_Oil.cpp; path = scenes/HakoniwaPlink_Oil.cpp; sourceTree = "<group>"; };
+		C63615D41A63FB7D0006BB65 /* HakoniwaPlink_Oil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaPlink_Oil.h; path = scenes/HakoniwaPlink_Oil.h; sourceTree = "<group>"; };
+		C63615D81A64B71D0006BB65 /* hakoVisPLink_Oil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hakoVisPLink_Oil.cpp; path = scenes/hakoVisPLink_Oil.cpp; sourceTree = "<group>"; };
+		C63615D91A64B71D0006BB65 /* hakoVisPLink_Oil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hakoVisPLink_Oil.h; path = scenes/hakoVisPLink_Oil.h; sourceTree = "<group>"; };
+		C63615DB1A64B72B0006BB65 /* hakoVisPLink_Prism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hakoVisPLink_Prism.cpp; path = scenes/hakoVisPLink_Prism.cpp; sourceTree = "<group>"; };
+		C63615DC1A64B72B0006BB65 /* hakoVisPLink_Prism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hakoVisPLink_Prism.h; path = scenes/hakoVisPLink_Prism.h; sourceTree = "<group>"; };
 		C685884A1A5EA7E000F8F488 /* dpMarionette.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpMarionette.cpp; path = dpUtils/dpMarionette.cpp; sourceTree = "<group>"; };
 		C685884B1A5EA7E000F8F488 /* dpMarionette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpMarionette.h; path = dpUtils/dpMarionette.h; sourceTree = "<group>"; };
 		C6A68D161A5C32E000122475 /* ramMotionExtractorExampleScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ramMotionExtractorExampleScene.cpp; path = "../../example-ramMotionExtractor/src/scene/ramMotionExtractorExampleScene.cpp"; sourceTree = "<group>"; };
@@ -210,10 +222,8 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				C6D7F0691A60F54300851730 /* HakoniwaPLink_Laser.h */,
-				C6D7F0681A60F54300851730 /* HakoniwaPLink_Laser.cpp */,
-				C6ABEBA61A623BC0005DF2CE /* hakoVisPLink_Laser.h */,
-				C6ABEBA51A623BC0005DF2CE /* hakoVisPLink_Laser.cpp */,
+				C63615D61A64B42F0006BB65 /* hakoniwa */,
+				C63615D71A64B43A0006BB65 /* hakoVis */,
 				C6D4098A1A4575AE002D4C34 /* Hakoniwa_ParallelLink */,
 				C630DF1C1A4D80C900567351 /* distanceMetaball */,
 			);
@@ -265,6 +275,32 @@
 				C630DF1D1A4D80E800567351 /* distanceMetaball.cpp */,
 			);
 			name = distanceMetaball;
+			sourceTree = "<group>";
+		};
+		C63615D61A64B42F0006BB65 /* hakoniwa */ = {
+			isa = PBXGroup;
+			children = (
+				C63615D41A63FB7D0006BB65 /* HakoniwaPlink_Oil.h */,
+				C63615D31A63FB7D0006BB65 /* HakoniwaPlink_Oil.cpp */,
+				C6D7F0691A60F54300851730 /* HakoniwaPLink_Laser.h */,
+				C6D7F0681A60F54300851730 /* HakoniwaPLink_Laser.cpp */,
+				C63615D11A63FB6E0006BB65 /* HakoniwaPLink_Prism.h */,
+				C63615D01A63FB6E0006BB65 /* HakoniwaPLink_Prism.cpp */,
+			);
+			name = hakoniwa;
+			sourceTree = "<group>";
+		};
+		C63615D71A64B43A0006BB65 /* hakoVis */ = {
+			isa = PBXGroup;
+			children = (
+				C6ABEBA61A623BC0005DF2CE /* hakoVisPLink_Laser.h */,
+				C6ABEBA51A623BC0005DF2CE /* hakoVisPLink_Laser.cpp */,
+				C63615D81A64B71D0006BB65 /* hakoVisPLink_Oil.cpp */,
+				C63615D91A64B71D0006BB65 /* hakoVisPLink_Oil.h */,
+				C63615DB1A64B72B0006BB65 /* hakoVisPLink_Prism.cpp */,
+				C63615DC1A64B72B0006BB65 /* hakoVisPLink_Prism.h */,
+			);
+			name = hakoVis;
 			sourceTree = "<group>";
 		};
 		C68588491A5EA7A700F8F488 /* dpUtils */ = {
@@ -503,6 +539,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C63615D21A63FB6E0006BB65 /* HakoniwaPLink_Prism.cpp in Sources */,
 				C6D4098D1A4575F1002D4C34 /* ParallelLinkManager.cpp in Sources */,
 				C685884C1A5EA7E000F8F488 /* dpMarionette.cpp in Sources */,
 				C6D409B31A47D4E1002D4C34 /* ofxTCPManager.cpp in Sources */,
@@ -514,12 +551,15 @@
 				C630DF1F1A4D80E800567351 /* distanceMetaball.cpp in Sources */,
 				C6D409B21A47D4E1002D4C34 /* ofxTCPClient.cpp in Sources */,
 				C6D409891A4575A5002D4C34 /* virtualSteppingMotor.cpp in Sources */,
+				C63615DD1A64B72B0006BB65 /* hakoVisPLink_Prism.cpp in Sources */,
 				C6ABEBA71A623BC0005DF2CE /* hakoVisPLink_Laser.cpp in Sources */,
+				C63615D51A63FB7D0006BB65 /* HakoniwaPlink_Oil.cpp in Sources */,
 				C6D409B51A47D4E1002D4C34 /* ofxUDPManager.cpp in Sources */,
 				C6C944BD1A63EBA7005E9F30 /* dpSceneChanger.cpp in Sources */,
 				C6D409871A4575A5002D4C34 /* ofxKsmrParallelLinkDelta.cpp in Sources */,
 				C6D7F06A1A60F54300851730 /* HakoniwaPLink_Laser.cpp in Sources */,
 				C6D409881A4575A5002D4C34 /* ofxKsmrStepManager.cpp in Sources */,
+				C63615DA1A64B71D0006BB65 /* hakoVisPLink_Oil.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

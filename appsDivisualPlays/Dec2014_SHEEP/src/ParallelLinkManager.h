@@ -27,6 +27,7 @@ public:
 
 	void setPlot_inClamp(ofVec3f p);
 	void calibrate();
+	void sendSignal();
 
 	ofxKsmrStepManager			stepManager;
 	ofxKsmrParallellinkDelta	delta;
