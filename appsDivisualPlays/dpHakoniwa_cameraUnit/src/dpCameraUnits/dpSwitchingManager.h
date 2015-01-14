@@ -49,6 +49,10 @@ public:
 	string			CVPreset;
 	vector<string>	sceneNames;
 	int				sourceCh;
+
+	bool getIsVis(int num){
+		return sceneNames[num].substr(0,1) == "V";
+	}
 };
 
 class cvSlot{
@@ -59,6 +63,13 @@ public:
 	vector<int>		targetDisplay;
 	string			presetFile;
 	int				matrixInputCh;
+
+	bool displayIsExist(int num){
+		for (int i = 0;i < targetDisplay.size();i++){
+			if (targetDisplay[i] == num) return true;
+		}
+		return false;
+	}
 };
 
 class dpSwitchingManager{
@@ -92,6 +103,9 @@ public:
 
 	cvSlot mSlots[4];
 	sw_1010F_SerialController matrixSW;
+
+	void refleshSceneforRDTK();
+	bool searchHakoniwaIsActive(hakoniwaType type);
 };
 
 #endif /* defined(__dpHakoniwa_cameraUnit__dpSwitchingManager__) */
