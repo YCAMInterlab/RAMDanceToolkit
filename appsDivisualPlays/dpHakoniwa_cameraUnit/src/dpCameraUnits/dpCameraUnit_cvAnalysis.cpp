@@ -375,3 +375,16 @@ void dpCameraUnit_cvAnalysis::sendMessageMulti(ofxOscMessage &m){
 		cout << "oscListPtr is NULL" << endl;
 	}
 }
+
+void dpCameraUnit_cvAnalysis::savePreset(string hakoniwaName){
+
+	ofDirectory::createDirectory("Preset_"+hakoniwaName);
+	mGui.saveSettings("Preset_"+hakoniwaName+"/AnalysisUIPreset.xml");
+
+}
+
+void dpCameraUnit_cvAnalysis::loadPreset(string hakoniwaName){
+
+	mGui.loadSettings("Preset_"+hakoniwaName+"/AnalysisUIPreset.xml");
+
+}

@@ -238,3 +238,28 @@ void dpCameraUnit_cvFX::useAdaptiveThreshold(ofImage &src, ofImage &dst, int blo
 	ofxCv::toOf(tmp,dst);
 
 }
+
+void dpCameraUnit_cvFX::savePreset(string hakoniwaName){
+
+	ofDirectory::createDirectory("Preset_"+hakoniwaName);
+	mGui.saveSettings("Preset_"+hakoniwaName+"/UIPreset.xml");
+
+	ofxXmlSettings xml;
+	for (int i = 0;i < 4;i++){
+		xml.addValue("WARP_"+ofToString(i)+"X", mUnwarpPts[i].x);
+		xml.addValue("WARP_"+ofToString(i)+"Y", mUnwarpPts[i].y);
+	}
+
+	xml.save("Preset_"+hakoniwaName+"/WarpPts.xml");
+}
+
+void dpCameraUnit_cvFX::loadPreset(string hakoniwaName){
+	mGui.loadSettings("Preset_"+hakoniwaName+"/UIPreset.xml");
+	ofxXmlSettings xml;
+	xml.load("Preset_"+hakoniwaName+"/WarpPts.xml");
+
+	for (int i = 0;i < 4;i++){
+		mUnwarpPts[i].x = xml.getValue("WARP_"+ofToString(i)+"X", 0.0);
+		mUnwarpPts[i].y = xml.getValue("WARP_"+ofToString(i)+"Y", 0.0);
+	}
+}

@@ -24,6 +24,9 @@ public:
 	void drawUI(int x,int y);
 	void drawThumbnail(int x,int y,float scale = 1.0);
 
+	void savePreset(string hakoniwaName);
+	void loadPreset(string hakoniwaName);
+
 	bool mEnableBlur;
 	bool mEnableCanny;
 	bool mEnableThreshold;
