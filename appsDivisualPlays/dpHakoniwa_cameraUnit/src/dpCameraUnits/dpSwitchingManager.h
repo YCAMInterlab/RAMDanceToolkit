@@ -15,6 +15,8 @@
 #include "dpCameraUnit_cvAnalysis.h"
 #include "ofxOsc.h"
 
+#define NETWORK_ISSTOP true
+
 #define DISPLAY_SHIMO_OKU 4
 #define DISPLAY_KAMI_OKU 5
 #define DISPLAY_SHIMO_TEMAE 6
