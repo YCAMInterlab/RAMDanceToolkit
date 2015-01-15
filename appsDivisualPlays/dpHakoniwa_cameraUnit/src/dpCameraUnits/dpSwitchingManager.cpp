@@ -22,8 +22,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->CVPreset	= "plink_Prism";
 	hakoniwas.back()->sourceCh	= 2;
 	hakoniwas.back()->sceneNames.push_back("H:HakoniwaPLink_Prism");
-	
-	hakoniwas.back()->sceneNames.push_back("V:dpVisPLinkPrism");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisPLink_Prism");
 
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_LASER;
@@ -144,14 +143,17 @@ void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
 			if (hakoId > -1){
 				for (int i = 0;i < 4;i++){
 					if (m.getArgAsInt32(2+i) != 0){
-						SelectHakoniwa(hakoniwaType(hakoId), i);
+						cout << "Select hakoniwa from Mastre=====" << endl;
+ 						SelectHakoniwa(hakoniwaType(hakoId), i);
 					}else{
+						cout << "Disable Disp from Master=====" << endl;
 						disableDisplay(i);
 					}
 				}
 			}
 		}else{
 			//箱庭を探して無効化
+			cout << "Disable hakoniwa from Master=====" << endl;
 			disableHakoniwa(hakoniwaType(hakoId));
 		}
 	}
