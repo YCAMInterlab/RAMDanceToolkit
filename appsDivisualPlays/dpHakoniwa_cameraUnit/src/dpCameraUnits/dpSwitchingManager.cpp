@@ -22,7 +22,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->CVPreset	= "plink_Prism";
 	hakoniwas.back()->sourceCh	= 2;
 	hakoniwas.back()->sceneNames.push_back("H:HakoniwaPLink_Prism");
-	hakoniwas.back()->sceneNames.push_back("V:dpVisPLinkPrism");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisPLink_Prism");
 
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_LASER;
@@ -89,11 +89,13 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	mSlots[3].matrixInputCh = CVSW_4;
 
 	isSlave = false;
-    senderToSlave.setup("192.168.20.4", 12400);
-//    senderToSlave.setup("Hampshire.local", 12400);
+	if (!NETWORK_ISSTOP){
+		senderToSlave.setup("192.168.20.4", 12400);
+		//    senderToSlave.setup("Hampshire.local", 12400);
 
-	senderToRDTK1.setup("192.168.20.3", 10000);
-	senderToRDTK2.setup("192.168.20.2", 10000);
+		senderToRDTK1.setup("192.168.20.3", 10000);
+		senderToRDTK2.setup("192.168.20.2", 10000);
+	}
 
 }
 
@@ -114,11 +116,15 @@ void dpSwitchingManager::update(){
 void dpSwitchingManager::draw(){
 	ofSetColor(0);
 	ofPushMatrix();
-	ofTranslate(640, 0);
+	ofTranslate(640, 680);
+
 	ofRect(0, 0, 640, 480);
+
 
 	ofSetColor(255);
 	for (int i = 0;i < 4;i++){
+		ofPushMatrix();
+		ofTranslate(i*120, 0);
 		string info = "";
 		info += "hakoType :" + ofToString(mSlots[i].hakoType) + "\n";
 		info += "sourceCh :" + ofToString(mSlots[i].sourceCh) + "\n";
@@ -128,7 +134,13 @@ void dpSwitchingManager::draw(){
 		}
 		info += "\n";
 		info += "isEmpt :" + ofToString(mSlots[i].isEmpty);
-		ofDrawBitmapString(info, 20+i*100,20);
+		ofSetColor(128+mSlots[i].isEmpty * 128);
+		ofDrawBitmapString(info, 10,20);
+
+		ofNoFill();
+		ofRect(0, 0, 120, 100);
+		ofFill();
+		ofPopMatrix();
 	}
 
 	ofPopMatrix();
@@ -136,6 +148,30 @@ void dpSwitchingManager::draw(){
 
 void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
 
+	if (m.getAddress() == "/ram/set_scene"){
+		int hakoId = getHakoniwaIndex(m.getArgAsString(0));
+		cout << "hakoID :" << hakoId << endl;
+		if (m.getArgAsInt32(1)){
+			//箱庭を探して有効化
+			if (hakoId > -1){
+				for (int i = 0;i < 4;i++){
+					if (m.getArgAsInt32(2+i) != 0){
+						cout << "Select hakoniwa from Mastre=====" << endl;
+ 						SelectHakoniwa(hakoniwaType(hakoId), i);
+					}else{
+						cout << "Disable Disp from Master=====" << endl;
+						//ターゲット箱庭が有効になっている時だけdisableDisplayを呼ぶ
+
+						disableDisplay(i);
+					}
+				}
+			}
+		}else{
+			//箱庭を探して無効化
+			cout << "Disable hakoniwa from Master=====" << endl;
+			disableHakoniwa(hakoniwaType(hakoId));
+		}
+	}
 
 	if (m.getAddress() == "/dp/master/switch/enable"){
 		SelectHakoniwa(hakoniwaType(m.getArgAsInt32(0)),
@@ -145,7 +181,7 @@ void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
 		mm.setAddress("/dp/toSlave/switch/enable");
 		mm.addIntArg(m.getArgAsInt32(0));
 		mm.addIntArg(m.getArgAsInt32(1));
-		senderToSlave.sendMessage(mm);
+		if (!NETWORK_ISSTOP) senderToSlave.sendMessage(mm);
 	}
 
 	if (m.getAddress() == "/dp/master/switch/disable"){
@@ -262,16 +298,15 @@ void dpSwitchingManager::disableHakoniwa(hakoniwaType type){
 
 	//ターゲットディスプレイを全て無効にする
 	for (int i = 0;i < mSlots[targCvSlot].targetDisplay.size();i++){
-		ofxOscMessage m;
-		m.setAddress("/dp/sceneManage/disable");
-		m.addIntArg(type);
-		m.addIntArg(mSlots[targCvSlot].targetDisplay[i]);
+		disableDisplay(mSlots[targCvSlot].targetDisplay[i]);
 	}
 
 	//cvスロットを無効にする
-	mSlots[targCvSlot].isEmpty = true;
+	mSlots[targCvSlot].isEmpty	= true;
+	mSlots[targCvSlot].hakoType	= HAKO_BLANK;
+	mSlots[targCvSlot].sourceCh = - 1;
+	mSlots[targCvSlot].presetFile = "";
 
-	refleshSceneforRDTK();
 }
 
 void dpSwitchingManager::disableDisplay(int displayNum){
@@ -305,9 +340,9 @@ void dpSwitchingManager::disableDisplay(int displayNum){
 			mSlots[targCvSlot].sourceCh = - 1;
 			mSlots[targCvSlot].presetFile = "";
 		}
-
-
 	}
+
+	refleshSceneforRDTK();
 }
 
 hakoniwaPresets* dpSwitchingManager::getHakoniwaPreset(hakoniwaType type){
@@ -317,6 +352,16 @@ hakoniwaPresets* dpSwitchingManager::getHakoniwaPreset(hakoniwaType type){
 		}
 	}
 	return NULL;
+}
+
+int dpSwitchingManager::getHakoniwaIndex(string sceneName){
+	for (int i = 0;i < hakoniwas.size();i++){
+		for (int j = 0;j < hakoniwas[i]->sceneNames.size();j++){
+			if (hakoniwas[i]->sceneNames[j].substr(2) == sceneName) return i;
+		}
+	}
+
+	return -1;
 }
 
 void dpSwitchingManager::refleshSceneforRDTK(){
@@ -354,8 +399,8 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 					m2.addIntArg(mSlots[i].displayIsExist(2));
 				}
 
-				senderToRDTK1.sendMessage(m1);
-				senderToRDTK2.sendMessage(m2);
+				if (!NETWORK_ISSTOP) senderToRDTK1.sendMessage(m1);
+				if (!NETWORK_ISSTOP) senderToRDTK2.sendMessage(m2);
 			}
 		}
 
@@ -366,13 +411,13 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 			for (int j = 0;j < hakoniwas[i]->sceneNames.size();j++){
 				ofxOscMessage m;
 				m.setAddress("ram/set_scene");
-				m.addStringArg(hakoniwas[i]->sceneNames[j]);
+				m.addStringArg(hakoniwas[i]->sceneNames[j].substr(2));
 				m.addIntArg(0);
 				m.addIntArg(0);
 				m.addIntArg(0);
 
-				senderToRDTK1.sendMessage(m);
-				senderToRDTK2.sendMessage(m);
+				if (!NETWORK_ISSTOP) senderToRDTK1.sendMessage(m);
+				if (!NETWORK_ISSTOP) senderToRDTK2.sendMessage(m);
 			}
 		}
 	}
@@ -382,7 +427,8 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 bool dpSwitchingManager::searchHakoniwaIsActive(hakoniwaType type){
 
 	for (int i = 0;i < 4;i++){
-		if (!mSlots[i].isEmpty && mSlots[i].hakoType == type) return true;
+		if ((!mSlots[i].isEmpty) &&
+			(mSlots[i].hakoType == type)) return true;
 	}
 	return false;
 }

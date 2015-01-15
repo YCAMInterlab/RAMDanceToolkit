@@ -29,10 +29,6 @@ struct : public ramBaseScene {
 		ofEnableAlphaBlending();
 		ofSetColor(ofColor::cyan, 128);
 		ramDrawBasicActor(actor);
-		ramBeginCamera();
-		ofSetHexColor(0x00FF00);
-		ofDrawBox(100);
-		ramEndCamera();
 		ofPopStyle();
 
 	}
@@ -59,10 +55,6 @@ struct : public ramBaseScene {
 		ofEnableAlphaBlending();
 		ofSetColor(ofColor::magenta, 128);
 		ramDrawBasicActor(actor);
-		ramBeginCamera();
-		ofSetHexColor(0xFF00FF);
-		ofDrawBox(100);
-		ramEndCamera();
 		ofPopStyle();
 	}
 	string getName() const { return "TestSceneB"; }
@@ -75,6 +67,11 @@ struct : public ramBaseScene {
 		ofEnableAlphaBlending();
 		ofSetColor(ofColor::yellow, 128);
 		ofDrawBox(ofVec3f::zero(), 100.f);
+
+        ramBeginCamera();
+        ofSetHexColor(0x00FF00);
+        ofDrawBox(100);
+        ramEndCamera();
 		ofPopStyle();
 	}
 
@@ -97,6 +94,10 @@ struct : public ramBaseScene {
 		ofEnableAlphaBlending();
 		ofSetColor(ofColor::white, 128);
 		ofDrawBox(ofVec3f::zero(), 100.f);
+        ramBeginCamera();
+        ofSetHexColor(0xFF00FF);
+        ofDrawBox(100);
+        ramEndCamera();
 		ofPopStyle();
 	}
 

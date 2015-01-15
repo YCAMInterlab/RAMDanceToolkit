@@ -9,6 +9,11 @@
 #ifndef __RAMDanceToolkit__hakoVisPLink_Prism__
 #define __RAMDanceToolkit__hakoVisPLink_Prism__
 
-#include <stdio.h>
+#include "ramMain.h"
+
+class hakoVisPLink_Prism : public ramBaseScene{
+public:
+
+};
 
 #endif /* defined(__RAMDanceToolkit__hakoVisPLink_Prism__) */

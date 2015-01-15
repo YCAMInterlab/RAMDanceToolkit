@@ -15,6 +15,8 @@
 #include "dpCameraUnit_cvAnalysis.h"
 #include "ofxOsc.h"
 
+#define NETWORK_ISSTOP true
+
 #define DISPLAY_SHIMO_OKU 4
 #define DISPLAY_KAMI_OKU 5
 #define DISPLAY_SHIMO_TEMAE 6
@@ -111,6 +113,7 @@ public:
 	sw_1010F_SerialController matrixSW;
 
 	void refleshSceneforRDTK();
+	int	getHakoniwaIndex(string sceneName);
 	bool searchHakoniwaIsActive(hakoniwaType type);
 };
 

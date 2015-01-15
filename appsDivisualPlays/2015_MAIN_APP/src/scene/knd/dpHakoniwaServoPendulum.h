@@ -19,7 +19,7 @@ public:
     string getName() const { return "dpHServoPendulum"; }
 	void setupControlPanel(){
         ramGetGUI().addSlider("speed", 0.1, 4.0, &mSpeed);
-        ramGetGUI().addSlider("speed", 1.0, 10.0, &mSpeedDefault);
+        ramGetGUI().addSlider("speedDefault", 1.0, 10.0, &mSpeedDefault);
         ramGetGUI().addSlider("range", 5, 90, &mRange);
         ramGetGUI().addSlider("rad", 5, 300, &mRad);
         ramGetGUI().addSlider("velScale", 0.01, 10.0, &mVelScale);

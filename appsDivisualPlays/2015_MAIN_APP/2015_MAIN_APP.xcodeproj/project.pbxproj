@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
+		920BA37C1A67C9D700E4A227 /* dpHakoniwaSand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 920BA37A1A67C9D700E4A227 /* dpHakoniwaSand.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		C66CCCF11A66750D00CE64E9 /* HakoniwaParallelLink_Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C66CCCD71A66750D00CE64E9 /* HakoniwaParallelLink_Base.cpp */; };
 		C66CCCF21A66750D00CE64E9 /* HakoniwaPLink_Laser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C66CCCD91A66750D00CE64E9 /* HakoniwaPLink_Laser.cpp */; };
@@ -87,6 +88,21 @@
 
 /* Begin PBXFileReference section */
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
+		920BA3721A677FBB00E4A227 /* dpHakoVisStageCircle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisStageCircle.h; sourceTree = "<group>"; };
+		920BA3731A67C8E800E4A227 /* dp3DDanceMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dp3DDanceMap.h; sourceTree = "<group>"; };
+		920BA3741A67C8E800E4A227 /* dpHakoniwaStruggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaStruggle.h; sourceTree = "<group>"; };
+		920BA3751A67C8E800E4A227 /* dpHakoVisServoPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisServoPendulum.h; sourceTree = "<group>"; };
+		920BA3761A67C8E800E4A227 /* dpHakoVisVecLineCircle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisVecLineCircle.h; sourceTree = "<group>"; };
+		920BA3771A67C96B00E4A227 /* dpHakoVisStruggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisStruggle.h; sourceTree = "<group>"; };
+		920BA3781A67C99000E4A227 /* dpHakoVisSandStorm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisSandStorm.h; sourceTree = "<group>"; };
+		920BA37A1A67C9D700E4A227 /* dpHakoniwaSand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpHakoniwaSand.cpp; sourceTree = "<group>"; };
+		920BA37B1A67C9D700E4A227 /* dpHakoniwaSand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaSand.h; sourceTree = "<group>"; };
+		920BA37E1A67CB6B00E4A227 /* dpIceMapCube.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpIceMapCube.h; sourceTree = "<group>"; };
+		920BA37F1A67CB6B00E4A227 /* dpIceMapFace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpIceMapFace.h; sourceTree = "<group>"; };
+		920BA3801A67CB6B00E4A227 /* dpIceMapGrid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpIceMapGrid.h; sourceTree = "<group>"; };
+		920BA3811A67CB6B00E4A227 /* dpIceMapTri.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpIceMapTri.h; sourceTree = "<group>"; };
+		920BA3821A67CB8D00E4A227 /* KezDelaunayMesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezDelaunayMesh.h; sourceTree = "<group>"; };
+		920BA3831A67CBA800E4A227 /* KezBlinker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezBlinker.h; sourceTree = "<group>"; };
 		92CB5B0D1A666F1F00257334 /* dpHakoniwaServoPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaServoPendulum.h; sourceTree = "<group>"; };
 		92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisBug.h; sourceTree = "<group>"; };
 		92CB5B0F1A666F1F00257334 /* dpHakoVisPLink_Prism.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisPLink_Prism.h; sourceTree = "<group>"; };
@@ -189,9 +205,37 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		920BA3791A67C9D700E4A227 /* ito */ = {
+			isa = PBXGroup;
+			children = (
+				920BA37A1A67C9D700E4A227 /* dpHakoniwaSand.cpp */,
+				920BA37B1A67C9D700E4A227 /* dpHakoniwaSand.h */,
+			);
+			path = ito;
+			sourceTree = "<group>";
+		};
+		920BA37D1A67CB6B00E4A227 /* iceLine */ = {
+			isa = PBXGroup;
+			children = (
+				920BA37E1A67CB6B00E4A227 /* dpIceMapCube.h */,
+				920BA37F1A67CB6B00E4A227 /* dpIceMapFace.h */,
+				920BA3801A67CB6B00E4A227 /* dpIceMapGrid.h */,
+				920BA3811A67CB6B00E4A227 /* dpIceMapTri.h */,
+			);
+			path = iceLine;
+			sourceTree = "<group>";
+		};
 		92CB5B0C1A666F1F00257334 /* knd */ = {
 			isa = PBXGroup;
 			children = (
+				920BA37D1A67CB6B00E4A227 /* iceLine */,
+				920BA3731A67C8E800E4A227 /* dp3DDanceMap.h */,
+				920BA3741A67C8E800E4A227 /* dpHakoniwaStruggle.h */,
+				920BA3771A67C96B00E4A227 /* dpHakoVisStruggle.h */,
+				920BA3781A67C99000E4A227 /* dpHakoVisSandStorm.h */,
+				920BA3751A67C8E800E4A227 /* dpHakoVisServoPendulum.h */,
+				920BA3761A67C8E800E4A227 /* dpHakoVisVecLineCircle.h */,
+				920BA3721A677FBB00E4A227 /* dpHakoVisStageCircle.h */,
 				92CB5B121A666F6A00257334 /* util */,
 				92CB5B0D1A666F1F00257334 /* dpHakoniwaServoPendulum.h */,
 				92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */,
@@ -204,6 +248,8 @@
 		92CB5B121A666F6A00257334 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				920BA3831A67CBA800E4A227 /* KezBlinker.h */,
+				920BA3821A67CB8D00E4A227 /* KezDelaunayMesh.h */,
 				92CB5B131A666F6A00257334 /* dpRibbon.h */,
 				92CB5B141A666F6A00257334 /* dpServoPendulumThread.h */,
 				92CB5B151A666F6A00257334 /* KezSlidePoint.h */,
@@ -306,6 +352,7 @@
 		C6A68D1B1A5C330900122475 /* scene */ = {
 			isa = PBXGroup;
 			children = (
+				920BA3791A67C9D700E4A227 /* ito */,
 				C66CCCD61A66750D00CE64E9 /* sheep */,
 				92CB5B0C1A666F1F00257334 /* knd */,
 			);
@@ -475,6 +522,7 @@
 				C66CCCF91A66750D00CE64E9 /* ofxKsmrStepManager.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
 				C66CCCFA1A66750D00CE64E9 /* virtualSteppingMotor.cpp in Sources */,
+				920BA37C1A67C9D700E4A227 /* dpHakoniwaSand.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

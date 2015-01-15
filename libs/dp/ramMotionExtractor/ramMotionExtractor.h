@@ -38,6 +38,7 @@ public:
 	float			getVelocitySpeedAt(int port);
 	ofQuaternion	getRotateVelocityAt(int port);
 	float			getDistanceAt(int port_A, int port_B);
+	float			getAreaAt(int port_A, int port_B, int port_C);
 
 	/*=== Utilities ===*/
 	void clearPorts();

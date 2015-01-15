@@ -362,6 +362,32 @@ float ramMotionExtractor::getDistanceAt(int port_A, int port_B){
 
 }
 
+float ramMotionExtractor::getAreaAt(int port_A, int port_B, int port_C){
+	ofVec3f v1 = ofVec3f(0,0,0);
+	ofVec3f v2 = ofVec3f(0,0,0);
+	ofVec3f v3 = ofVec3f(0,0,0);
+	
+	if ((0 <= port_A) && (port_A < mMotionPort.size()) &&
+		(0 <= port_B) && (port_B < mMotionPort.size()) &&
+		(0 <= port_C) && (port_C < mMotionPort.size())){
+		
+		v1 = getPositionAt(port_A);
+		v2 = getPositionAt(port_B);
+		v3 = getPositionAt(port_C);
+		
+		ofVec3f mid = v1.interpolate(v2, 0.5);
+		float area = v1.distance(v2) * mid.distance(v3) / 2.0;
+		
+		return area;
+		
+	}else{
+		
+		return 0.0f;
+		
+	}
+
+}
+
 #pragma mark - motionPort
 
 void ramMotionPort::init(ramNodeFinder nodeF){

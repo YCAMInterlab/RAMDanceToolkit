@@ -248,7 +248,6 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 					feat.addFloatArg(0.0);
 					feat.addFloatArg(0.0);
 				}
-
 			}
 
 			ofxOscMessage vectorM;

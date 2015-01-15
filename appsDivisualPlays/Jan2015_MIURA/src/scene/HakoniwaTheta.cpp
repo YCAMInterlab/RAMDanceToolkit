@@ -3,18 +3,17 @@
 void HakoniwaTheta::setupControlPanel(){
     
     ofxUICanvasPlus* gui = ramGetGUI().getCurrentUIContext();
-    mDrawPreview	= true;
     mDrawDump		= true;
     mDrawhidden     = false;
 
-    gui->addToggle("preview", &mDrawPreview);
     gui->addToggle("Dump", &mDrawDump);
-    gui->addToggle("hidden", &mDrawhidden);
-    gui->addIntSlider("video_no", 1, 5, &video_no);
+    gui->addToggle("Hidden", &mDrawhidden);
+    gui->addIntSlider("Video No", 1, 5, &mVideoNo);
     
     ofAddListener(gui->newGUIEvent, this, &HakoniwaTheta::onPanelChanged);
     
     motionExtractor.setupControlPanel(this);
+    motionExtractor.load("motionExt_HakoniwaTheta.xml");
     
 }
 
@@ -29,7 +28,7 @@ void HakoniwaTheta::setup(){
     glEnable(GL_CULL_FACE);
     glCullFace(GL_FRONT);
     
-    video_no = 1;
+    mVideoNo = 1;
     vidPlay.loadMovie("1.MP4");
     vidPlay.setVolume(0);
     vidPlay.setLoopState(OF_LOOP_NORMAL);
@@ -43,7 +42,7 @@ void HakoniwaTheta::update(){
     motionExtractor.update();
     vidPlay.update();
 
-    port_no = motionExtractor.getNumPort()-1;
+    portNo = motionExtractor.getNumPort()-1;
     int numActor = getNumNodeArray();
     
     if( mDrawhidden == true){
@@ -57,30 +56,28 @@ void HakoniwaTheta::update(){
 void HakoniwaTheta::draw(){
 
     ramSetViewPort(dpGetFirstScreenViewPort());
+    
+    if (ofGetFrameNum() % 600 == 0){
+        mVideoNo = ofRandom(1 , 6);
+        VideoChanged(mVideoNo);
+    }
+    
     vidPlay.getTextureReference().bind();
     
     ofQuaternion qForSphere_osc;
-    qForSphere_osc = motionExtractor.getRotationAt(port_no);
+    qForSphere_osc = motionExtractor.getRotationAt(portNo);
     sphere.setOrientation(qForSphere_osc);
     
     sphere.draw();
-    ofPopMatrix();
     
-    if (mDrawPreview)	motionExtractor.draw();
-
 }
-
 
 void HakoniwaTheta::onPanelChanged(ofxUIEventArgs& e){
 
     const string name = e.widget->getName();
-
-    if (name == "video_no") {
-        VideoChanged(video_no);
+    if (name == "Video No") {
+        VideoChanged(mVideoNo);
     }
-//    else if (name == "Fullscreen"){
-//        sphere.setPosition(ofGetWidth()/2, ofGetHeight()/2, 0); // 位置
-//    }
 
 }
 
@@ -89,7 +86,6 @@ void HakoniwaTheta::radiusChanged(int radius){
     sphere.set(radius, 50);
 //    sphere.setPosition(ofGetWidth()/2, ofGetHeight()/2, 0); // 位置
     sphere.setPosition(dpGetFirstScreenCenter()); // 位置
-    
 
 }
 
@@ -103,4 +99,32 @@ void HakoniwaTheta::VideoChanged(int no){
     vidPlay.play();
     sphere.mapTexCoordsFromTexture(vidPlay.getTextureReference());
 
+}
+
+void HakoniwaTheta::drawDump(){
+    
+    int motionExtCnt = 0;
+    for (int i = 0;i < motionExtractor.getNumPort();i++){
+        ofPushMatrix();
+        ofTranslate(700, i*75);
+        
+        
+        ofNoFill();
+        ofRect(0, 0, 200, 75);
+        ofFill();
+        
+        string info = "";
+        info += "Port  :" + ofToString(i) + "\n";
+        info += "Actor :" + motionExtractor.getActorNameAt(i) + "\n";
+        info += "Joint :" + motionExtractor.getJointNameAt(i) + "\n";
+        info += "Speed :" + ofToString(motionExtractor.getVelocitySpeedAt(i)) + "\n";
+        
+        ofSetColor(100);
+        ofRect(10, 45, motionExtractor.getVelocitySpeedAt(i)*10.0, 15);
+        
+        ofSetColor(255);
+        ofDrawBitmapString(info, 10, 15);
+        
+        ofPopMatrix();
+    }
 }
