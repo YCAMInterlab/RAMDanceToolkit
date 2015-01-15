@@ -427,7 +427,8 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 bool dpSwitchingManager::searchHakoniwaIsActive(hakoniwaType type){
 
 	for (int i = 0;i < 4;i++){
-		if (!mSlots[i].isEmpty && mSlots[i].hakoType == type) return true;
+		if ((!mSlots[i].isEmpty) &&
+			(mSlots[i].hakoType == type)) return true;
 	}
 	return false;
 }
