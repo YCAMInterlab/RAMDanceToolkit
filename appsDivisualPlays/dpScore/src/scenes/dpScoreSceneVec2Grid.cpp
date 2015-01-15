@@ -55,7 +55,7 @@ void SceneVec2Grid::exit()
 
 void SceneVec2Grid::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kAddrVec2) {
+    if (m.getAddress() == kOscAddrCaneraUnitVector) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);
         mGridBuffer.push_back(mVec);

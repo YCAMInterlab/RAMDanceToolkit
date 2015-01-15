@@ -47,7 +47,7 @@ void SceneVec2SimpleGraph::exit()
 
 void SceneVec2SimpleGraph::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kAddrVec2) {
+    if (m.getAddress() == kOscAddrCaneraUnitVector) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);
         mBuffer.push_back(mVec);

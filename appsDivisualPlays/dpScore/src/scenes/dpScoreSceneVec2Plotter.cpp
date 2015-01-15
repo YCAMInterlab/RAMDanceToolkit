@@ -52,7 +52,7 @@ void SceneVec2Plotter::exit()
 
 void SceneVec2Plotter::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kAddrVec2) {
+    if (m.getAddress() == kOscAddrCaneraUnitVector) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);
         mCircleBuffer.push_back(mVec);

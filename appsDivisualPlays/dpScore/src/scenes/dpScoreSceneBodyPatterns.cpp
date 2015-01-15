@@ -56,7 +56,7 @@ void SceneBodyPatterns::exit()
 
 void SceneBodyPatterns::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kAddrMotioner) {
+    if (m.getAddress() == kOscAddrMotioner) {
         mFrame++;
         if (mFrame%60 == 0)  {
             (++mFocusNode) %= ofxMot::NUM_JOINTS;

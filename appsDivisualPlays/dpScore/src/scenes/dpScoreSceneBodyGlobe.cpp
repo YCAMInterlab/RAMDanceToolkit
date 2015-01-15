@@ -112,7 +112,7 @@ void SceneBodyGlobe::update(ofxEventMessage& m)
 {
     mFrameNum++;
     
-    if (m.getAddress() == kAddrMotioner) {
+    if (m.getAddress() == kOscAddrMotioner) {
         if (mMagnify) {
             mScale += ofGetLastFrameTime() * 2.f;
             if (mScale >= 600.f) mScale = 100.f;

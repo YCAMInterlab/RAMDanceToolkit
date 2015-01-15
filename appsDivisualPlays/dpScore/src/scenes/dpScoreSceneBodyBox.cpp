@@ -112,7 +112,7 @@ void SceneBodyBox::exit()
 
 void SceneBodyBox::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kAddrMotioner) {
+    if (m.getAddress() == kOscAddrMotioner) {
         for (int i=0; i<getNumSkeletons(); i++) {
             auto skl = getSkeleton(i);
             for (auto& n : skl->getJoints()) {

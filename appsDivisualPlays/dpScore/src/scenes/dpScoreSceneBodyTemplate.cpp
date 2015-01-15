@@ -58,7 +58,7 @@ void SceneBodyTemplate::exit()
 
 void SceneBodyTemplate::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kAddrMotioner) {
+    if (m.getAddress() == kOscAddrMotioner) {
         
     }
 }

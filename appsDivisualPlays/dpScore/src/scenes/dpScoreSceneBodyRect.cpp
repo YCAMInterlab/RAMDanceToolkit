@@ -110,7 +110,7 @@ void SceneBodyRect::exit()
 
 void SceneBodyRect::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kAddrMotioner) {
+    if (m.getAddress() == kOscAddrMotioner) {
         for (int i=0; i<getNumSkeletons(); i++) {
             auto skl = getSkeleton(i);
             mCam.begin();

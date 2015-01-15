@@ -227,7 +227,7 @@ void SceneBodyLines::exit()
 
 void SceneBodyLines::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kAddrMotioner) {
+    if (m.getAddress() == kOscAddrMotioner) {
         mFrameNum++;
         
         if (mFrameNum %60 == 0) {

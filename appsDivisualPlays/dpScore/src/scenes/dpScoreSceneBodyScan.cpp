@@ -85,7 +85,7 @@ void SceneBodyScan::exit()
 
 void SceneBodyScan::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kAddrMotioner) {
+    if (m.getAddress() == kOscAddrMotioner) {
         for (int i=0; i<getNumSkeletons(); i++) {
             for (auto& mn : getSkeleton(i)->getJoints())
                 mn.update();

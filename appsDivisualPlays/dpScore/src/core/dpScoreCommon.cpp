@@ -105,18 +105,21 @@ DP_SCORE_NAMESPACE_BEGIN
 const int kW = 1920;
 const int kH = 1080;
 
-const int kFrameRate = 30;
+const int kFrameRate = 60;
 const int kOscClientPort = 10000;
 
 const string kOscAddrChangeScene = "/dp/score/changeScene";
-const string kOscAddrPendulumVec2 = "/dp/cameraUnit/pendulum/vector";
 
-const string kAddrVec2 = "/dp/score/vec2";
-const string kAddrVec2Arr = "/dp/score/vec2Arr";
-const string kAddrMotioner = "/dp/score/motioner";
+const string kOscAddrCaneraUnitVector = "/dp/cameraUnit/vector";
+const string kOscAddrCaneraUnitVectorTotal = "/dp/cameraUnit/vector/total";
+const string kOscAddrCaneraUnitVectorFeatures = "/dp/cameraUnit/features";
+const string kOscAddrCaneraUnitVecContourBlob = "/dp/cameraUnit/contour/blob";
+
+const string kOscAddrMotioner = "/dp/score/motioner";
 
 const string kSettingsDir = "settings/";
 const string kSettingsPrefix = "scoreUI-";
+
 
 struct _handle {
     char* p;

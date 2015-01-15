@@ -102,7 +102,7 @@ void SceneBodyFlow::exit()
 
 void SceneBodyFlow::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kAddrMotioner) {
+    if (m.getAddress() == kOscAddrMotioner) {
         for (auto p : mPoints) p->update();
     }
 }
