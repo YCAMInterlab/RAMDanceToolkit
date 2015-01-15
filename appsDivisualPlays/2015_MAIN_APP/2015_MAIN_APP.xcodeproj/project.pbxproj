@@ -87,6 +87,7 @@
 
 /* Begin PBXFileReference section */
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
+		920BA3721A677FBB00E4A227 /* dpHakoVisStageCircle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisStageCircle.h; sourceTree = "<group>"; };
 		92CB5B0D1A666F1F00257334 /* dpHakoniwaServoPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaServoPendulum.h; sourceTree = "<group>"; };
 		92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisBug.h; sourceTree = "<group>"; };
 		92CB5B0F1A666F1F00257334 /* dpHakoVisPLink_Prism.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisPLink_Prism.h; sourceTree = "<group>"; };
@@ -192,6 +193,7 @@
 		92CB5B0C1A666F1F00257334 /* knd */ = {
 			isa = PBXGroup;
 			children = (
+				920BA3721A677FBB00E4A227 /* dpHakoVisStageCircle.h */,
 				92CB5B121A666F6A00257334 /* util */,
 				92CB5B0D1A666F1F00257334 /* dpHakoniwaServoPendulum.h */,
 				92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */,

@@ -21,7 +21,7 @@
 #include "ramMain.h"
 
 #include "dpHakoniwaServoPendulum.h"
-#include "dpHakoVisBug.h"
+#include "dpHakoVisStageCircle.h"
 #include "dpHakoVisServoPendulum.h"
 #include "dpHakoVisPlink_Prism.h"
 
@@ -76,7 +76,7 @@ public:
     dpHakoVisServoPendulum      visServoPendulum;
     
     // stage
-    dpHakoVisBug                visStage;
+    dpHakoVisStageCircle                visStage;
     
     // prism
     dpHakoVisPLink_Prism              visPrism;
