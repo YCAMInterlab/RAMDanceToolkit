@@ -52,6 +52,8 @@ void SceneBodyPatterns::exit()
                      this,
                      &SceneBodyPatterns::onUpdateSkeleton);
     mCam.disableMouseInput();
+    
+    mSkeletons.clear();
 }
 
 void SceneBodyPatterns::update(ofxEventMessage& m)
