@@ -82,6 +82,7 @@
 		D27F2E4D1A67624400913B14 /* dpScoreSceneDataWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D27F2E4B1A67624400913B14 /* dpScoreSceneDataWave.cpp */; };
 		D27F2E501A67625B00913B14 /* dpScoreSceneDataCircle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D27F2E4E1A67625B00913B14 /* dpScoreSceneDataCircle.cpp */; };
 		D27F2E531A6762C600913B14 /* dpScoreSceneDataDisplacement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D27F2E511A6762C600913B14 /* dpScoreSceneDataDisplacement.cpp */; };
+		D27F2E5B1A67F01600913B14 /* dpScoreSceneDataCircle3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D27F2E591A67F01600913B14 /* dpScoreSceneDataCircle3D.cpp */; };
 		D29034111A4D4ADE00577E04 /* dpScoreSceneBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29034021A4D4ADE00577E04 /* dpScoreSceneBase.cpp */; };
 		D29034121A4D4ADE00577E04 /* dpScoreCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29034041A4D4ADE00577E04 /* dpScoreCommon.cpp */; };
 		D29034131A4D4ADE00577E04 /* dpScoreSceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29034061A4D4ADE00577E04 /* dpScoreSceneManager.cpp */; };
@@ -322,6 +323,8 @@
 		D27F2E4F1A67625B00913B14 /* dpScoreSceneDataCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataCircle.h; sourceTree = "<group>"; };
 		D27F2E511A6762C600913B14 /* dpScoreSceneDataDisplacement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneDataDisplacement.cpp; sourceTree = "<group>"; };
 		D27F2E521A6762C600913B14 /* dpScoreSceneDataDisplacement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataDisplacement.h; sourceTree = "<group>"; };
+		D27F2E591A67F01600913B14 /* dpScoreSceneDataCircle3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneDataCircle3D.cpp; sourceTree = "<group>"; };
+		D27F2E5A1A67F01600913B14 /* dpScoreSceneDataCircle3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataCircle3D.h; sourceTree = "<group>"; };
 		D29034011A4D4ADE00577E04 /* dpEasing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpEasing.h; sourceTree = "<group>"; };
 		D29034021A4D4ADE00577E04 /* dpScoreSceneBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBase.cpp; sourceTree = "<group>"; };
 		D29034031A4D4ADE00577E04 /* dpScoreSceneBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBase.h; sourceTree = "<group>"; };
@@ -773,6 +776,8 @@
 				D27F2E4F1A67625B00913B14 /* dpScoreSceneDataCircle.h */,
 				D27F2E511A6762C600913B14 /* dpScoreSceneDataDisplacement.cpp */,
 				D27F2E521A6762C600913B14 /* dpScoreSceneDataDisplacement.h */,
+				D27F2E591A67F01600913B14 /* dpScoreSceneDataCircle3D.cpp */,
+				D27F2E5A1A67F01600913B14 /* dpScoreSceneDataCircle3D.h */,
 			);
 			name = hakoniwa;
 			sourceTree = "<group>";
@@ -996,6 +1001,7 @@
 				D29B99251A63F023000115C5 /* Particle.cpp in Sources */,
 				D21D0B8B1A4C046000CC3598 /* ofxUIBaseDraws.cpp in Sources */,
 				D24C21C61A49653D009D0796 /* ofxOscMessage.cpp in Sources */,
+				D27F2E5B1A67F01600913B14 /* dpScoreSceneDataCircle3D.cpp in Sources */,
 				D24C21C81A49653D009D0796 /* ofxOscReceiver.cpp in Sources */,
 				D29B99241A63F023000115C5 /* oncVao.cpp in Sources */,
 				D21D0B9F1A4C046000CC3598 /* ofxUIMultiImageButton.cpp in Sources */,
