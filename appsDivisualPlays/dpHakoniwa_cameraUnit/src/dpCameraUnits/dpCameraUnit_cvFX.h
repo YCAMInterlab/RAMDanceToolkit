@@ -36,7 +36,11 @@ public:
 	bool mEnableAccumlateWeight;
 	bool mEnableBackground;
 	bool mEnableWarpPerspective;
+	bool mEnableDilate;
+	bool mEnableErode;
 
+	int mParam_Dilate_num;
+	int mParam_Erode_num;
 	float mParam_Blur;
 	float mParam_Canny_Thr1;
 	float mParam_Canny_Thr2;

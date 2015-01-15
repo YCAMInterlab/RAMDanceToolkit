@@ -33,6 +33,12 @@ dpCameraUnit_cvFX::dpCameraUnit_cvFX(){
 	mGui.addSpacer();
 	mGui.addToggle("AccumelateWeight", &mEnableAccumlateWeight);
 	mGui.addSlider("Time", 0.0, 1.0, &mParam_accum_Time);
+	mGui.addSpacer();
+	mGui.addToggle("Dilate", &mEnableDilate);
+	mGui.addIntSlider("NumProc", 0, 10, &mParam_Dilate_num);
+	mGui.addSpacer();
+	mGui.addToggle("Erode", &	mEnableErode);
+	mGui.addIntSlider("NumProc", 0, 10, &mParam_Erode_num);
 
 //	mGui.addToggle("Threshold", &mEnableThreshold);
 //	mGui.addSlider("ThrVal", 0.0, 255.0, &mParam_Threshold);
@@ -117,6 +123,18 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 		if (mEnableAccumlateWeight) useAccumulateWeighted(&mGraySource,
 														  &mGraySource,
 														  &mAccum, mParam_accum_Time);
+
+		if (mEnableDilate) {
+			for (int i = 0;i < mParam_Dilate_num;i++){
+				ofxCv::dilate(mGraySource);
+			}
+		}
+
+		if (mEnableErode){
+			for (int i = 0;i < mParam_Erode_num;i++){
+				ofxCv::erode(mGraySource);
+			}
+		}
 
 		mSource.update();
 		mGraySource.update();
