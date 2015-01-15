@@ -14,8 +14,6 @@ public:
     void draw();
     void onPanelChanged(ofxUIEventArgs& e);
     
-    int video_no,port_no;
-
     inline string getName() const {
         return "HakoniwaTheta";
     }
@@ -26,11 +24,12 @@ private:
 
     void radiusChanged(int radius);
     void VideoChanged(int no);
-    bool mDrawPreview;
+    void drawDump();
     bool mDrawDump;
     bool mDrawhidden;
-    bool m1, m2, m3, m4, m5, m6, m7, m8, m9;
 
+    int mVideoNo,portNo;
+    
     ofVideoPlayer vidPlay;
     ofSpherePrimitive sphere;
 
