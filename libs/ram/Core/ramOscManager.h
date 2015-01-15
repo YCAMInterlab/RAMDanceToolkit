@@ -31,13 +31,8 @@ public:
 	void addMessage(const ofxOscMessage& m){
 		msg.push(m);
 
-<<<<<<< HEAD
-		while (msg.size() > 10){
-			msg.erase(msg.begin());
-=======
 		while (msg.size() > 128){
             msg.pop();
->>>>>>> 96cec5f6445fb879293b5d619e11bbf5d861df8e
 		}
 	}
 
