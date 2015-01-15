@@ -48,10 +48,16 @@ extern const string kOscAddrMotioner;
 extern const string kSettingsDir;
 extern const string kSettingsPrefix;
 
+extern const int kNumCameraunitVectors;
+
 string demangle(const char* name);
 
 template <class T> string getClassName(const T& t);
 template <class T> string getClassName();
+
+float getLineUped(float length, int index, int total);
+
+float clamp(float f, float range = 1.f);
 
 float aligned(float f);
 
