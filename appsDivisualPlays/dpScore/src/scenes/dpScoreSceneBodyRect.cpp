@@ -115,10 +115,8 @@ void SceneBodyRect::update(ofxEventMessage& m)
             auto skl = getSkeleton(i);
             mCam.begin();
             ofPushMatrix();
-            ofRotateY(ofGetElapsedTimef()*50.f);
-            const int n = getNumSkeletons();
-            const float step = kW/n;
-            ofTranslate(-kW*0.5f + step * 0.5f + step * i , -300.f, 0.f);
+            //ofRotateY(ofGetElapsedTimef()*50.f);
+            alignedTranslate(getLineUped(kW, i, getNumSkeletons()), -300.f, 0.f);
             for (auto& n : skl->getJoints()) {
                 n.setPosition(n.getPosition()*4.5f);
                 n.update();
