@@ -3,6 +3,9 @@
 #include "dpScoreSceneVec2Clocks.h"
 #include "dpScoreSceneVec2Grid.h"
 #include "dpScoreSceneVec2Plotter.h"
+#include "dpScoreSceneDataCircle.h"
+#include "dpScoreSceneDataWave.h"
+#include "dpScoreSceneDataDisplacement.h"
 #include "dpScoreSceneBodyGlobe.h"
 #include "dpScoreSceneBodyScan.h"
 #include "dpScoreSceneBodyFlow.h"
@@ -34,7 +37,7 @@ using namespace dp::score;
 #if 0
 
 身体系 8/20
-箱庭系 5/20
+箱庭系 8/20
 
 #endif
 
@@ -54,6 +57,10 @@ void ofApp::setup()
     black->setDrawHeader(false);
     black->setName("black");
     
+    auto dataCircle = SceneBase::Ptr(new SceneDataCircle());
+    auto dataDisplacement = SceneBase::Ptr(new SceneDataDisplacement());
+    auto dataWave = SceneBase::Ptr(new SceneDataWave());
+    
     auto bodyBox = SceneBase::Ptr(new SceneBodyBox());
     auto bodyRect = SceneBase::Ptr(new SceneBodyRect());
     auto bodyBoids = SceneBase::Ptr(new SceneBodyBoids());
@@ -67,26 +74,28 @@ void ofApp::setup()
     auto vec2Clocks = SceneBase::Ptr(new SceneVec2Clocks());
     auto vec2Grid = SceneBase::Ptr(new SceneVec2Grid());
     auto vec2Plotter = SceneBase::Ptr(new SceneVec2Plotter());
-    
     auto dataScroll = SceneBase::Ptr(new SceneDataScroll());
     
     mSceneManager.add(black);
-    
-    mSceneManager.add(bodyBox);
-    mSceneManager.add(bodyRect);
-    mSceneManager.add(bodyLines);
-    mSceneManager.add(bodyPattern);
-    mSceneManager.add(bodyScan);
-    mSceneManager.add(bodyFlow);
-    mSceneManager.add(bodyGlobe);
-    mSceneManager.add(bodyBoids);
     
     mSceneManager.add(vec2Simple);
     mSceneManager.add(vec2Clocks);
     mSceneManager.add(vec2Grid);
     mSceneManager.add(vec2Plotter);
-    
     mSceneManager.add(dataScroll);
+    mSceneManager.add(dataWave);
+    mSceneManager.add(dataCircle);
+    mSceneManager.add(dataDisplacement);
+    
+    mSceneManager.add(bodyGlobe);
+    mSceneManager.add(bodyScan);
+    mSceneManager.add(bodyPattern);
+    mSceneManager.add(bodyFlow);
+    mSceneManager.add(bodyLines);
+    mSceneManager.add(bodyRect);
+    mSceneManager.add(bodyBox);
+    mSceneManager.add(bodyBoids);
+    
     
     // make another instance for existing class
     //auto vec2Simple2 = SceneBase::Ptr(new SceneVec2SimpleGraph());
@@ -136,7 +145,6 @@ void ofApp::update()
         mOscReceiver.getNextMessage(&m);
         const string addr = m.getAddress();
         
-        
         if (addr == kOscAddrChangeScene) {
             OFX_BEGIN_EXCEPTION_HANDLING
             if (m.getNumArgs() >= 1) {
@@ -151,23 +159,40 @@ void ofApp::update()
         }
         else if (addr == ofxMotioner::OSC_ADDR) {
             ofxMotioner::updateWithOscMessage(m);
-            ofxEventMessage mm;
-            mm.setAddress(kOscAddrMotioner);
-            mSceneManager.update(mm);
+            updatedMotioner = true;
         }
         else {
             auto dir = ofSplitString(addr, "/");
-            if (dir.size() >= 4 && dir.at(0) == "dp" && dir.at(1) == "cameraUnit") {
-                string newAddr = "/" + dir.at(0) + "/" + dir.at(1) + "/" + dir.at(3);
-                for (int i=3; i<dir.size(); i++) {
+            if (dir.size() >= 5 && dir.at(1) == "dp" && dir.at(2) == "cameraUnit") {
+                string newAddr = "/" + dir.at(1) + "/" + dir.at(2) + "/" + dir.at(4);
+                for (int i=5; i<dir.size(); i++) {
                     newAddr += "/" + dir.at(i);
                 }
                 ofxEventMessage mm = m;
-                m.setAddress(kOscAddrMotioner);
+                mm.setAddress(newAddr);
                 mSceneManager.update(mm);
             }
         }
     }
+    
+    if (mDebugCamUnit) {
+        const float t = ofGetElapsedTimef();
+        ofxEventMessage vm;
+        vm.setAddress(kOscAddrCaneraUnitVector);
+        for (int i=0; i<kNumCameraunitVectors; i++) {
+            ofVec2f v;
+            v.x = ofSignedNoise(t, 0, i) + ofSignedNoise(t*9.8f, 0, i) * 0.5f  + ofSignedNoise(t*102.f, 0, i) * 0.25f;
+            v.y = ofSignedNoise(t, 1, i) + ofSignedNoise(t*9.8f, 1, i) * 0.5f  + ofSignedNoise(t*102.f, 1, i) * 0.25f;
+            vm.addFloatArg(v.x);
+            vm.addFloatArg(v.y);
+        }
+        mSceneManager.update(vm);
+    }
+    
+    ofxEventMessage m;
+    m.setAddress(kOscAddrMotioner);
+    mSceneManager.update(m);
+    
     ofxMotioner::update();
     
     OFX_END_EXCEPTION_HANDLING
@@ -219,6 +244,9 @@ void ofApp::keyPressed(int key)
             break;
         case 'i':
             mInvert ^= true;
+            break;
+        case 'd':
+            mDebugCamUnit ^= true;
             break;
         case OF_KEY_LEFT:
             mSceneManager.prev();
