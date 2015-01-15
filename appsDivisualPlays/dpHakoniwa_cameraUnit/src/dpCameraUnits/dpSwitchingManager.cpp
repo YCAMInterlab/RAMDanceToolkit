@@ -22,6 +22,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->CVPreset	= "plink_Prism";
 	hakoniwas.back()->sourceCh	= 2;
 	hakoniwas.back()->sceneNames.push_back("H:HakoniwaPLink_Prism");
+	
 	hakoniwas.back()->sceneNames.push_back("V:dpVisPLinkPrism");
 
 	hakoniwas.push_back(new hakoniwaPresets());
@@ -136,6 +137,24 @@ void dpSwitchingManager::draw(){
 
 void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
 
+	if (m.getAddress() == "/ram/set_scene"){
+		int hakoId = getHakoniwaIndex(m.getArgAsString(0));
+		if (m.getArgAsInt32(1)){
+			//箱庭を探して有効化
+			if (hakoId > -1){
+				for (int i = 0;i < 4;i++){
+					if (m.getArgAsInt32(2+i) != 0){
+						SelectHakoniwa(hakoniwaType(hakoId), i);
+					}else{
+						disableDisplay(i);
+					}
+				}
+			}
+		}else{
+			//箱庭を探して無効化
+			disableHakoniwa(hakoniwaType(hakoId));
+		}
+	}
 
 	if (m.getAddress() == "/dp/master/switch/enable"){
 		SelectHakoniwa(hakoniwaType(m.getArgAsInt32(0)),
@@ -262,16 +281,12 @@ void dpSwitchingManager::disableHakoniwa(hakoniwaType type){
 
 	//ターゲットディスプレイを全て無効にする
 	for (int i = 0;i < mSlots[targCvSlot].targetDisplay.size();i++){
-		ofxOscMessage m;
-		m.setAddress("/dp/sceneManage/disable");
-		m.addIntArg(type);
-		m.addIntArg(mSlots[targCvSlot].targetDisplay[i]);
+		disableDisplay(mSlots[targCvSlot].targetDisplay[i]);
 	}
 
 	//cvスロットを無効にする
 	mSlots[targCvSlot].isEmpty = true;
 
-	refleshSceneforRDTK();
 }
 
 void dpSwitchingManager::disableDisplay(int displayNum){
@@ -305,9 +320,9 @@ void dpSwitchingManager::disableDisplay(int displayNum){
 			mSlots[targCvSlot].sourceCh = - 1;
 			mSlots[targCvSlot].presetFile = "";
 		}
-
-
 	}
+
+	refleshSceneforRDTK();
 }
 
 hakoniwaPresets* dpSwitchingManager::getHakoniwaPreset(hakoniwaType type){
@@ -317,6 +332,16 @@ hakoniwaPresets* dpSwitchingManager::getHakoniwaPreset(hakoniwaType type){
 		}
 	}
 	return NULL;
+}
+
+int dpSwitchingManager::getHakoniwaIndex(string sceneName){
+	for (int i = 0;i < hakoniwas.size();i++){
+		for (int j = 0;j < hakoniwas[i]->sceneNames.size();j++){
+			if (hakoniwas[i]->sceneNames[j].substr(2) == sceneName) return i;
+		}
+	}
+
+	return -1;
 }
 
 void dpSwitchingManager::refleshSceneforRDTK(){

@@ -111,6 +111,7 @@ public:
 	sw_1010F_SerialController matrixSW;
 
 	void refleshSceneforRDTK();
+	int	getHakoniwaIndex(string sceneName);
 	bool searchHakoniwaIsActive(hakoniwaType type);
 };
 
