@@ -62,23 +62,23 @@ void SceneVec2SimpleGraph::draw()
     ofPushMatrix();
     
     ofPushMatrix();
-    ofTranslate(0.f, alignf(20.f));
-    ofLine(10.f, 0.f, kW-10.f, 0.f);
+    alignedTranslate(0.f, 20.f);
+    alignedLine(10.f, 0.f, kW-10.f, 0.f);
     const float step = kW / 210;
     for (int i=0; i<=210; i++) {
         int height = 5;
         if (i%10==0) height = 8;
-        ofLine(alignf(10.f+i*step), 0.f, alignf(10.f+i*step), height);
+        alignedLine(10.f+i*step, 0.f, 10.f+i*step, height);
     }
     ofPopMatrix();
     
     ofPushMatrix();
-    ofTranslate(0.f, alignf(kH-10.f));
-    ofLine(10.f, 0.f, kW-10.f, 0.f);
+    alignedTranslate(0.f, kH-10.f);
+    alignedLine(10.f, 0.f, kW-10.f, 0.f);
     for (int i=0; i<=210; i++) {
         int height = 5;
         if (i%10==0) height = 8;
-        ofLine(alignf(10.f+i*step), 0.f, alignf(10.f+i*step), -height);
+        alignedLine(10.f+i*step, 0.f, 10.f+i*step, -height);
     }
     ofPopMatrix();
     
@@ -86,12 +86,12 @@ void SceneVec2SimpleGraph::draw()
     for (int i=0; i<=100; i++) {
         int width = 5.f;
         if (i%10 == 0) width = 8;
-        ofLine(0.f, alignf(40.f+i*stepY), width, alignf(40.f+i*stepY));
+        alignedLine(0.f, 40.f+i*stepY, width, 40.f+i*stepY);
     }
     
     ofSetColor(ofColor::white, 150);
-    ofTranslate(20.f, alignf(kH*0.5f+5.f));
-    ofLine(0.f, 0.f, kW, 0.f);
+    alignedTranslate(20.f, kH*0.5f+5.f);
+    alignedLine(0.f, 0.f, kW, 0.f);
     
     const float mult = kH / 40.f * mSensorScale;
     if (mBuffer.size()>=2) {
@@ -108,21 +108,19 @@ void SceneVec2SimpleGraph::draw()
             v1.x = ofClamp(v1.x, -r, r);
             v1.y = ofClamp(v1.y, -r, r);
             
-            ofLine(alignf(i*mStep), alignf(v0.x),
-                   alignf((i+1)*mStep), alignf(v1.x));
-            ofLine(alignf(i*mStep), alignf(v0.y),
-                   alignf((i+1)*mStep), alignf(v1.y));
+            alignedLine(i*mStep, v0.x, (i+1)*mStep, v1.x);
+            alignedLine(i*mStep, v0.y, (i+1)*mStep, v1.y);
         }
     }
     ofPopMatrix();
     
     ofPushMatrix();
-    ofTranslate(0.f, alignf(kH*0.5f+5.f));
+    alignedTranslate(0.f, kH*0.5f+5.f);
     ofSetColor(color::kMain, 255);
     ofSetLineWidth(2.f);
     const ofVec2f v = mVec * mult;
-    ofLine(ofGetWidth()-14.f, alignf(v.x), ofGetWidth(), alignf(v.x));
-    ofLine(ofGetWidth()-14.f, alignf(v.y), ofGetWidth(), alignf(v.y));
+    alignedLine(ofGetWidth()-14.f, v.x, ofGetWidth(), v.x);
+    alignedLine(ofGetWidth()-14.f, v.y, ofGetWidth(), v.y);
     ofPopMatrix();
 }
 

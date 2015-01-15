@@ -63,11 +63,11 @@ void SceneVec2Clocks::draw()
     ofSetColor(255, 50);
     
     for (int i=0; i<=kW/step; i++) {
-        ofLine(alignf(i*step), 20.f, alignf(i*step), alignf(kH-30.f));
+        alignedLine(i*step, 20.f, i*step, kH-20.f);
     }
     
-    for (int j=2; j<kH/step-2; j++) {
-        ofLine(0.f, alignf(j*step), alignf(kW), alignf(j*step));
+    for (int j=2; j<kH/step-1; j++) {
+        alignedLine(0.f, j*step, kW, j*step);
     }
     
     const float circleStep = 80.f;
@@ -101,8 +101,8 @@ void SceneVec2Clocks::draw()
             ofSetColor(255, 100);
             ofSetLineWidth(1.f);
             const float size = 5.f;
-            ofLine(alignf(-size), 0.5f, alignf(size), 0.5f);
-            ofLine(0.5f, alignf(-size), 0.5f, alignf(size));
+            alignedLine(-size, 0.5f, size, 0.5f);
+            alignedLine(0.5f, -size, 0.5f, size);
             
             ofPopMatrix();
         }

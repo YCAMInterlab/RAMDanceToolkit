@@ -63,6 +63,9 @@ public:
     const string& getName();
     const easeFunc getEaseFunc() const { return mEaseFunc; }
     
+    void setDrawHeader(bool draw) { mDrawHeader = draw; }
+    bool getDrawHeader() const { return mDrawHeader; }
+    
 protected:
     virtual void onUpdate(ofxEventMessage& m);
     virtual void onDraw();
@@ -89,6 +92,7 @@ protected:
     string mName{""};
     int mId{-1};
     easeFunc mEaseFunc = easeNone;
+    bool mDrawHeader{true};
 };
 
 DP_SCORE_NAMESPACE_END

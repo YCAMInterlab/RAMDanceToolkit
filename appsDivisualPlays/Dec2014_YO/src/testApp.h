@@ -61,6 +61,15 @@ public:
     HakovisLaser hakovisLaser;
     
     struct : public ramBaseScene {
+        void draw()
+        {
+            ofPushStyle();
+            ofEnableAlphaBlending();
+            ofSetColor(ofColor::cyan, 128);
+            ofDrawBox(ofVec3f::zero(), 100.f);
+            ofPopStyle();
+        }
+        
         void drawActor(const ramActor &actor)
         {
             ofPushStyle();
@@ -73,6 +82,15 @@ public:
     } testSceneA;
     
     struct : public ramBaseScene {
+        void draw()
+        {
+            ofPushStyle();
+            ofEnableAlphaBlending();
+            ofSetColor(ofColor::magenta, 128);
+            ofDrawBox(ofVec3f::zero(), 100.f);
+            ofPopStyle();
+        }
+        
         void drawActor(const ramActor &actor)
         {
             ofPushStyle();
@@ -85,6 +103,15 @@ public:
     } testSceneB;
     
     struct : public ramBaseScene {
+        void draw()
+        {
+            ofPushStyle();
+            ofEnableAlphaBlending();
+            ofSetColor(ofColor::yellow, 128);
+            ofDrawBox(ofVec3f::zero(), 100.f);
+            ofPopStyle();
+        }
+        
         void drawActor(const ramActor &actor)
         {
             ofPushStyle();
@@ -97,6 +124,16 @@ public:
     } testSceneC;
     
     struct : public ramBaseScene {
+        
+        void draw()
+        {
+            ofPushStyle();
+            ofEnableAlphaBlending();
+            ofSetColor(ofColor::white, 128);
+            ofDrawBox(ofVec3f::zero(), 100.f);
+            ofPopStyle();
+        }
+        
         void drawActor(const ramActor &actor)
         {
             ofPushStyle();

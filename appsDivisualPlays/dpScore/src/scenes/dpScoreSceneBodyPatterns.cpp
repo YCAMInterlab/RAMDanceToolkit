@@ -95,11 +95,11 @@ void SceneBodyPatterns::drawSkeleton(ofxMot::SkeletonPtr skl, int idx)
 
 void SceneBodyPatterns::draw()
 {
-    const float stepX = alignf(kW/nX);
-    const float stepY = alignf((kH-20.f)/nY);
+    const float stepX = aligned(kW/nX);
+    const float stepY = aligned((kH-20.f)/nY);
     for (int j=0; j<nY; j++) {
         for (int i=0; i<nX; i++) {
-            ofRectangle viewport(alignf(i*stepX), alignf(j*stepY+20.f), alignf(stepX), alignf(stepY));
+            ofRectangle viewport = alignedRectangle(i*stepX, j*stepY+20.f, stepX, stepY);
             mCam.begin(viewport);
             const int idx = mSkeletons.size() - (i + j * nX) - 1;
             if (idx<mSkeletons.size()) {
@@ -115,8 +115,8 @@ void SceneBodyPatterns::draw()
             ofRect(viewport);
         }
     }
-    ofLine(alignf(kW-1), alignf(20.f), alignf(kW-1), alignf(kH));
-    ofLine(alignf(0.f), alignf(kH-1), alignf(kW), alignf(kH-1));
+    alignedLine(kW-1, 20.f, kW-1, kH);
+    alignedLine(0.f, kH-1.f, kW, kH-1.f);
 }
 
 #pragma mark ___________________________________________________________________

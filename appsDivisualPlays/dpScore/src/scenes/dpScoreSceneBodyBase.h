@@ -35,6 +35,8 @@ protected:
     SkeletonPtr getSkeleton(int i) { return mSkeletons.at(i); }
     SkeletonVec getSkeletons() { return mSkeletons(); }
     size_t getNumSkeletons() const { return mSkeletons.size(); }
+    void setFixPosition(bool fix) { mFixPosition = fix; }
+    bool getFixPosition() const { return mFixPosition; }
     
 private:
     virtual void onEnter();
@@ -46,13 +48,14 @@ private:
     virtual void onExitSkeleton(ofxMotioner::EventArgs &e);
     
     SkeletonVec mSkeletons;
+    bool mFixPosition{true};
 };
 
 #pragma mark ___________________________________________________________________
 template<class Node>
 void SceneBodyBase<Node>::onEnter()
 {
-    mSkeletons.clear();
+    //mSkeletons.clear();
     
     enter();
     
@@ -72,10 +75,10 @@ void SceneBodyBase<Node>::onExit()
     
     exit();
     
-    for (auto s : mSkeletons) {
-        exitSkeleton(s);
-    }
-    mSkeletons.clear();
+    //for (auto s : mSkeletons) {
+    //    exitSkeleton(s);
+    //}
+    //mSkeletons.clear();
 }
 
 #pragma mark ___________________________________________________________________
@@ -112,6 +115,10 @@ void SceneBodyBase<Node>::onUpdateSkeleton(ofxMotioner::EventArgs &e)
     auto it = findSkeleton(e.skeleton->getName());
     if (it != mSkeletons.end()) {
         (*it)->copyMatrices(e.skeleton);
+        if (mFixPosition) {
+            const ofVec3f origin = (*it)->getJoint(ofxMot::JOINT_HIPS).getGlobalPosition();
+            (*it)->getJoint(ofxMot::JOINT_HIPS).setGlobalPosition(0.f, origin.y, 0.f);
+        }
         updateSkeleton(*it);
     }
     else {

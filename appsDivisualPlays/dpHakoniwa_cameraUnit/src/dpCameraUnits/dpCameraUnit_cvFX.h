@@ -24,6 +24,9 @@ public:
 	void drawUI(int x,int y);
 	void drawThumbnail(int x,int y,float scale = 1.0);
 
+	void savePreset(string hakoniwaName);
+	void loadPreset(string hakoniwaName);
+
 	bool mEnableBlur;
 	bool mEnableCanny;
 	bool mEnableThreshold;
@@ -33,7 +36,11 @@ public:
 	bool mEnableAccumlateWeight;
 	bool mEnableBackground;
 	bool mEnableWarpPerspective;
+	bool mEnableDilate;
+	bool mEnableErode;
 
+	int mParam_Dilate_num;
+	int mParam_Erode_num;
 	float mParam_Blur;
 	float mParam_Canny_Thr1;
 	float mParam_Canny_Thr2;
@@ -50,6 +57,7 @@ public:
 	ofImage		mGraySource_background;
 	bool		mBackgroundNeedsReflesh;
 	ofImage		mGraySource;
+	ofImage		mGraySource_tmp;
 	ofImage		mGraySource_forDiff;
 
 	bool		mResetWarpPt;
@@ -57,8 +65,15 @@ public:
 
 protected:
 
-	ofxCv::Mat tmp;
-	cv::Mat mAccum;
+	ofxCv::Mat	tmp;
+	cv::Mat		mAccum;
+
+	ofVec2f mLastDrawPos;
+	float	mLastDrawScale;
+	int mWarpTarget;
+	void mousePressed(ofMouseEventArgs &arg);
+	void mouseDragged(ofMouseEventArgs &arg);
+	void mouseReleased(ofMouseEventArgs &arg);
 
 	void useAccumulateWeighted(ofImage *src,ofImage *result,cv::Mat *accum,float time,bool fadeLastFrame = false);
 	void useAdaptiveThreshold(ofImage &src,ofImage &dst,int blockSize,int offset,bool invert,bool gauss);

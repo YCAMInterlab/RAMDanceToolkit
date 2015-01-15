@@ -20,9 +20,13 @@ sw_1010F_SerialController::~sw_1010F_SerialController(){
 }
 
 void sw_1010F_SerialController::setSW(int cameraChannel, int displayChannel){
+	string buf;
+	buf += ofToString(cameraChannel);
+	buf += ",";
+	buf += ofToString(displayChannel);
+	buf += "\r";
 
-	unsigned char buf[4] = {cameraChannel+49, ',', displayChannel+49, '\r'};
-	serial_.writeBytes(buf, 4);
+	serial_.writeBytes((unsigned char*)(buf.c_str()), buf.length()+1);
 
 }
 

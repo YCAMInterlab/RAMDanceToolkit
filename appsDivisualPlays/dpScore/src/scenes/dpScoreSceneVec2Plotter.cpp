@@ -73,10 +73,10 @@ void SceneVec2Plotter::draw()
     glPointSize(2.f);
     ofSetColor(255, 200);
     ofNoFill();
-    ofRect(alignf(5.f), alignf(25.f), alignf(kW-10.f), alignf(kH-30.f));
+    alignedRectangle(5.f, 25.f, kW-10.f, kH-30.f);
     
-    ofLine(v.x+kW*0.5f, 40.f, v.x+kW*0.5f, kH-20.f);
-    ofLine(20.f, v.y+kH*0.5f, kW-20.f, v.y+kH*0.5f);
+    alignedLine(v.x+kW*0.5f-5.f, 40.f, v.x+kW*0.5f-5.f, kH-20.f);
+    alignedLine(20.f, v.y+kH*0.5f, kW-20.f, v.y+kH*0.5f);
     
     ofSetColor(255, 200);
     ofSetLineWidth(1.f);
@@ -84,8 +84,8 @@ void SceneVec2Plotter::draw()
     for (int i=2; i<=380; i++) {
         int height = 5;
         if (i%10==0) height = 8;
-        ofLine(alignf(5.f+i*step), alignf(25.f), alignf(5.f+i*step), alignf(25.f+height));
-        ofLine(alignf(5.f+i*step), alignf(kH - 5.f), alignf(5.f+i*step), alignf(kH - 5.f - height));
+        alignedLine(5.f+i*step, 25.f, 5.f+i*step, 25.f+height);
+        alignedLine(5.f+i*step, kH - 5.f, 5.f+i*step, kH - 5.f - height);
     }
     
     
@@ -93,8 +93,8 @@ void SceneVec2Plotter::draw()
     for (int i=2; i<=173; i++) {
         int width = 5.f;
         if (i%10 == 0) width = 8;
-        ofLine(alignf(5.f), alignf(25.f+i*stepY), alignf(5.f+width), alignf(25.f+i*stepY));
-        ofLine(alignf(kW - 5.f), alignf(25.f+i*stepY), alignf(kW - 5.f - width), alignf(25.f+i*stepY));
+        alignedLine(5.f, 25.f+i*stepY, 5.f+width, 25.f+i*stepY);
+        alignedLine(kW - 5.f, 25.f+i*stepY, kW - 5.f - width, 25.f+i*stepY);
     }
     
     

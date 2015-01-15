@@ -134,9 +134,7 @@ void BodyLinesNode::draw(bool focus)
     vboLines.draw(GL_LINES, 0, verticesLines.size());
     
     if (focus) {
-        windowPos = project(getGlobalPosition());
-        windowPos.x = alignf(windowPos.x);
-        windowPos.y = alignf(windowPos.y);
+        windowPos = alignedVec3f(project(getGlobalPosition()));
         windowPos.z = 0.f;
     }
     ofPopStyle();
@@ -195,16 +193,12 @@ void SceneBodyLines::initialize()
 {
     dpDebugFunc();
     
-    OFX_BEGIN_EXCEPTION_HANDLING
-    
     mUICanvas = new ofxUICanvas();
     mUICanvas->setName(getName());
     mUICanvas->addLabel(getName());
     mUICanvas->addSpacer();
     
     mCam.disableMouseInput();
-    
-    OFX_END_EXCEPTION_HANDLING
 }
 
 void SceneBodyLines::shutDown()

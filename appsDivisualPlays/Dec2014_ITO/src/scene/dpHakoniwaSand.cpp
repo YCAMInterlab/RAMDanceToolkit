@@ -3,12 +3,18 @@
 void dpHakoniwaSand::setupControlPanel(){
     
     mMotionExtractor.setupControlPanel(this,ofPoint(340,30));
-    ramGetGUI().addIntSlider("Val1_Test", 1000, 2000, &val1);
-    ramGetGUI().addIntSlider("Val2_Test", 1000, 2000, &val2);
-    ramGetGUI().addIntSlider("Val3_Test", 1000, 2000, &val3);
+    ramGetGUI().addIntSlider("Val1_Test", 800, 2200, &val1);
+    ramGetGUI().addIntSlider("Val2_Test", 800, 2200, &val2);
+    ramGetGUI().addIntSlider("Val3_Test", 800, 2200, &val3);
     ramGetGUI().addToggle("Test mode", &bTestMode);
     
-//    bTestMode = false;
+    vector<string> contents;
+    contents.push_back("Hight");
+    contents.push_back("Rot");
+    
+    ramGetGUI().addRadioGroup("mode", contents, &mode);
+    
+    bTestMode = true;
     
 }
 
@@ -22,25 +28,33 @@ void dpHakoniwaSand::sendOsc(){
     ofxOscMessage m;
     m.setAddress("/dp/hakoniwa/sand");
     
-    if (bTestMode) {
-        m.addIntArg(val1); // pulse width(usec) for motor1
-        m.addIntArg(val2); // pulse width(usec) for motor2
-        m.addIntArg(val3); // pulse width(usec) for motor3
-    } else {
-        m.addIntArg((int)ofMap(mMotionExtractor.getPositionAt(0).y, 0, 200, 1000, 2000)); // pulse width(usec) for motor1
-        m.addIntArg((int)ofMap(mMotionExtractor.getPositionAt(1).y, 0, 200, 1000, 2000)); // pulse width(usec) for motor1
-        m.addIntArg((int)ofMap(mMotionExtractor.getPositionAt(2).y, 0, 200, 1000, 2000)); // pulse width(usec) for motor1
-    }
-    mSender.sendMessage(m);
-
-//    cout << val1 <<", "<< val2 << ", " << val3 << endl;
+    m.addIntArg(val1); // pulse width(usec) for motor1
+    m.addIntArg(val2); // pulse width(usec) for motor2
+    m.addIntArg(val3); // pulse width(usec) for motor3
     
+    mSender.sendMessage(m);
 }
 
 void dpHakoniwaSand::update(){
 
     mMotionExtractor.update();
+    
+    if (!bTestMode) {
+        if (mode == 0) {
+            val1 = (int)ofMap(mMotionExtractor.getPositionAt(0).y, 0, 200, 800, 2200);
+            val2 = (int)ofMap(mMotionExtractor.getPositionAt(1).y, 0, 200, 800, 2200);
+            val3 = (int)ofMap(mMotionExtractor.getPositionAt(2).y, 0, 200, 1000, 2000);
+        } else if (mode ==1) {
+            
+                //not yet
+        
+        
+        }
+    }
+
     sendOsc();
+    
+//    cout << mode << endl;
     
 }
 
@@ -53,6 +67,18 @@ void dpHakoniwaSand::draw(){
     ramSetViewPort(dpGetFirstScreenViewPort()); //１枚目のscreenを描画に指定。ここの仕様変わります。
     ramBeginCamera();
     mMotionExtractor.draw();
+    
+    
+//    ramNode rn[6];
+//    for (int i = 0; i < 6; i++){
+//        rn[i] = mMotionExtractor.getNodeAt(i);
+//    }
+//        
+//    ofPushMatrix();
+//    ofNoFill();
+//    ofTranslate(200,0);
+//    for (int i = 0; i < 6; i++) rn[i].draw();
+//    ofPopMatrix();
 
     ramEndCamera();
     
@@ -62,7 +88,7 @@ void dpHakoniwaSand::draw(){
 void dpHakoniwaSand::example_drawDump(){
     
     ofPushMatrix();
-    ofTranslate(1000, 10);
+    ofTranslate(800, 10);
     
     for (int i = 0;i < mMotionExtractor.getNumPort();i++){
         ofPushMatrix();
@@ -87,10 +113,8 @@ void dpHakoniwaSand::example_drawDump(){
         ofSetColor(255);
         ofDrawBitmapString(info, 10, 15);
         
-        
         ofPopMatrix();
     }
     
     ofPopMatrix();
-    
 }

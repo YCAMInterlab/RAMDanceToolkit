@@ -100,7 +100,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		mContFinder.setMinArea(mParamCF_MinArea);
 		mContFinder.setSimplify(mParamCF_Simplify);
 		mContFinder.setTargetColor(mParamCF_targColor);
-		mContFinder.setUseTargetColor(mParamCF_UseTargetColor);
+//		mContFinder.setUseTargetColor(mParamCF_UseTargetColor);
 		mContFinder.setThreshold(mParamCF_Threshold);
 
 		mContFinder.findContours(pixGray);
@@ -210,7 +210,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 1.0f) &&
 			(isFrameNew)) mOptFlow.calcOpticalFlow(pixGray);
 		
-		if ((ofGetFrameNum() % 150 == 0) || (ofGetKeyPressed(' '))) mOptFlow.resetFlow();
+		if ((ofGetFrameNum() % 150 == 0) || (ofGetKeyPressed(' '))) mOptFlow.resetFeaturesToTrack();
 
 		vector <ofVec2f> mot = mOptFlow.getMotion();
 
@@ -248,7 +248,6 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 					feat.addFloatArg(0.0);
 					feat.addFloatArg(0.0);
 				}
-
 			}
 
 			ofxOscMessage vectorM;
@@ -374,4 +373,17 @@ void dpCameraUnit_cvAnalysis::sendMessageMulti(ofxOscMessage &m){
 	}else{
 		cout << "oscListPtr is NULL" << endl;
 	}
+}
+
+void dpCameraUnit_cvAnalysis::savePreset(string hakoniwaName){
+
+	ofDirectory::createDirectory("Preset_"+hakoniwaName);
+	mGui.saveSettings("Preset_"+hakoniwaName+"/AnalysisUIPreset.xml");
+
+}
+
+void dpCameraUnit_cvAnalysis::loadPreset(string hakoniwaName){
+
+	mGui.loadSettings("Preset_"+hakoniwaName+"/AnalysisUIPreset.xml");
+
 }

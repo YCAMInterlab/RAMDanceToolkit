@@ -17,10 +17,16 @@ class HakoniwaParallelLink_Base : public ramBaseScene {
 public:
 
 	HakoniwaParallelLink_Base();
-	virtual ~HakoniwaParallelLink_Base(){};
+	virtual ~HakoniwaParallelLink_Base(){
+		mLinkManager.setPlot_inClamp(ofVec3f(0.0,196.0,0.0));
+		mLinkManager.sendSignal();
+	};
+
+	virtual void initialize(){};
+	virtual void update_over(){};
+	virtual void draw_over(){};
 
 	void setupControlPanel();
-
 	void update();
 	void draw();
 
@@ -34,6 +40,9 @@ public:
 
 	virtual void onEnabled();
 	virtual void onDisabled();
+
+	void savePreset();
+	void loadPreset();
 
 protected:
 	ofxOscSender* mOscSender;
@@ -49,7 +58,13 @@ protected:
 	bool mDigitalOut;
 	bool mTrackMachine;
 	bool mDrawExtractor;
+	bool mDrawMachine;
+	
 	float mPwm_Param;
+
+	bool mDigitalIO[6];
+	bool mDigitalIO_Prev[6];
+
 	string mSendOSCAddress;
 	
 	ofVec3f mManualPosition;
