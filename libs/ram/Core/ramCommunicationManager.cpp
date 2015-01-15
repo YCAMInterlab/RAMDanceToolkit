@@ -333,7 +333,9 @@ void ramCommunicationManager::windowResized(ofResizeEventArgs &win){
 
 void ramCommunicationManager::addSender(const string& address, int port){
 	if (oscManager != NULL){
-		oscManager->addSenderTag(port, address);
+        ofxOscSender *sender = new ofxOscSender;
+        sender->setup(address, port);
+        senders.push_back(shared_ptr<ofxOscSender>(sender));
 	}
 }
 
@@ -342,7 +344,9 @@ void ramCommunicationManager::sendNoteOn(const string& name, float velocity){
 	m.setAddress(RAM_OSC_ADDR_COMMUNICATE_NOTEON);
 	m.addStringArg(name);
 	m.addFloatArg(velocity);
-	if (oscManager != NULL) oscManager->sendMessage(m);
+    for(int i = 0; i < senders.size(); i++) {
+        senders[i]->sendMessage(m);
+    }
 }
 
 void ramCommunicationManager::sendNoteOff(const string& name){
@@ -350,7 +354,9 @@ void ramCommunicationManager::sendNoteOff(const string& name){
 	m.setAddress(RAM_OSC_ADDR_COMMUNICATE_NOTEOFF);
 	m.addStringArg(name);
 	m.addFloatArg(0.0);
-	if (oscManager != NULL) oscManager->sendMessage(m);
+    for(int i = 0; i < senders.size(); i++) {
+        senders[i]->sendMessage(m);
+    }
 }
 
 void ramCommunicationManager::sendCC(const string& name, vector<float> cc){
@@ -362,7 +368,9 @@ void ramCommunicationManager::sendCC(const string& name, vector<float> cc){
 		m.addFloatArg(cc[i]);
 	}
 
-	if (oscManager != NULL) oscManager->sendMessage(m);
+    for(int i = 0; i < senders.size(); i++) {
+        senders[i]->sendMessage(m);
+    }
 }
 
 void ramCommunicationManager::sendCC(const string& name, float *cc, int num){
@@ -374,11 +382,15 @@ void ramCommunicationManager::sendCC(const string& name, float *cc, int num){
 		m.addFloatArg(cc[i]);
 	}
 
-	if (oscManager != NULL) oscManager->sendMessage(m);
+    for(int i = 0; i < senders.size(); i++) {
+        senders[i]->sendMessage(m);
+    }
 }
 
 void ramCommunicationManager::sendOscMessage(ofxOscMessage &m){
-	if (oscManager != NULL) oscManager->sendMessage(m);
+    for(int i = 0; i < senders.size(); i++) {
+        senders[i]->sendMessage(m);
+    }
 }
 
 int ramCommunicationManager::getNumCCArg(const string& name) const {
