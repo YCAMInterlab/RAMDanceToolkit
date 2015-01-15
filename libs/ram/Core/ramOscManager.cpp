@@ -16,18 +16,6 @@ void ramOscManager::setup(int receivePort){
 
 }
 
-void ramOscManager::addSenderTag(int port, const string& address){
-
-	senderlist.push_back(ramOscSendTag(port,address));
-
-}
-
-void ramOscManager::addReceiverTag(ramOscReceiveTag* ptr){
-
-	receiverList.push_back(ptr);
-
-}
-
 void ramOscManager::update(){
 
 	while (receiver.hasWaitingMessages()){
@@ -38,8 +26,8 @@ void ramOscManager::update(){
 
 			for (int j = 0;j < receiverList[i]->addr.size();j++){
 				string ad = receiverList[i]->addr[j];
-
-				if (m.getAddress().substr(0,ad.length()) == ad)
+                
+				if (strncmp(m.getAddress().c_str(), ad.c_str(), ad.length()) == 0)
 					receiverList[i]->addMessage(m);
 
 			}
@@ -49,9 +37,8 @@ void ramOscManager::update(){
 	}
 }
 
-void ramOscManager::sendMessage(ofxOscMessage &m){
-	for (int i = 0;i < senderlist.size();i++){
-		sender.setup(senderlist[i].address,senderlist[i].port);
-		sender.sendMessage(m);
-	}
+void ramOscManager::addReceiverTag(ramOscReceiveTag* ptr){
+    
+    receiverList.push_back(ptr);
+    
 }
