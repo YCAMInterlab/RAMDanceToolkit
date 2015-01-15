@@ -302,7 +302,10 @@ void dpSwitchingManager::disableHakoniwa(hakoniwaType type){
 	}
 
 	//cvスロットを無効にする
-	mSlots[targCvSlot].isEmpty = true;
+	mSlots[targCvSlot].isEmpty	= true;
+	mSlots[targCvSlot].hakoType	= HAKO_BLANK;
+	mSlots[targCvSlot].sourceCh = - 1;
+	mSlots[targCvSlot].presetFile = "";
 
 }
 
@@ -408,7 +411,7 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 			for (int j = 0;j < hakoniwas[i]->sceneNames.size();j++){
 				ofxOscMessage m;
 				m.setAddress("ram/set_scene");
-				m.addStringArg(hakoniwas[i]->sceneNames[j]);
+				m.addStringArg(hakoniwas[i]->sceneNames[j].substr(2));
 				m.addIntArg(0);
 				m.addIntArg(0);
 				m.addIntArg(0);
