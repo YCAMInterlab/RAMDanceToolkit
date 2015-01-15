@@ -18,8 +18,10 @@ public:
 
 	HakoniwaParallelLink_Base();
 	virtual ~HakoniwaParallelLink_Base(){
-		mLinkManager.setPlot_inClamp(ofVec3f(0.0,196.0,0.0));
-		mLinkManager.sendSignal();
+		if (mFlagNeedDestract){
+			mLinkManager.setPlot_inClamp(ofVec3f(0.0,196.0,0.0));
+			mLinkManager.sendSignal();
+		}
 	};
 
 	virtual void initialize(){};
@@ -64,6 +66,7 @@ protected:
 
 	bool mDigitalIO[6];
 	bool mDigitalIO_Prev[6];
+	bool mFlagNeedDestract;
 
 	string mSendOSCAddress;
 	
