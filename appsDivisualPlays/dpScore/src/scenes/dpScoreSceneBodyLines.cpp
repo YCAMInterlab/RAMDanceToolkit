@@ -230,7 +230,7 @@ void SceneBodyLines::update(ofxEventMessage& m)
     if (m.getAddress() == kOscAddrMotioner) {
         mFrameNum++;
         
-        if (mFrameNum %60 == 0) {
+        if (mFrameNum % kFocusLoop == 0) {
             (++mFocusNode) %= getSkeleton(0)->getNumJoints();
         }
     }
@@ -244,9 +244,7 @@ void SceneBodyLines::draw()
         mCam.begin();
         ofPushMatrix();
         ofNoFill();
-        const int n = getNumSkeletons();
-        const float step = kW/n;
-        ofTranslate(-kW*0.5f + step * 0.5f + step * i , -300.f, 0.f);
+        alignedTranslate(getLineUped(kW, i, getNumSkeletons()), -300.f, 0.f);
         
         for(auto& mn : skl->getJoints()) {
             isFocus(mn.id) ? mn.draw(true) : mn.draw(false);
