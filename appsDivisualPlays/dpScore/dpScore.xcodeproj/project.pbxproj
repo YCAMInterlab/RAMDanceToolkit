@@ -66,6 +66,7 @@
 		D228B3841A5FC95C005F0404 /* dpScoreEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3821A5FC95C005F0404 /* dpScoreEvent.cpp */; };
 		D24431111A68BD0D00574ACF /* dpScoreSceneDataSphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D244310F1A68BD0D00574ACF /* dpScoreSceneDataSphere.cpp */; };
 		D24431171A690F1E00574ACF /* dpScoreSceneDataBarcode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24431151A690F1E00574ACF /* dpScoreSceneDataBarcode.cpp */; };
+		D244311A1A6919A800574ACF /* dpScoreSceneDataText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24431181A6919A800574ACF /* dpScoreSceneDataText.cpp */; };
 		D24C21BC1A49653D009D0796 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21961A49653D009D0796 /* IpEndpointName.cpp */; };
 		D24C21BD1A49653D009D0796 /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C219B1A49653D009D0796 /* NetworkingUtils.cpp */; };
 		D24C21BE1A49653D009D0796 /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C219C1A49653D009D0796 /* UdpSocket.cpp */; };
@@ -287,6 +288,8 @@
 		D24431101A68BD0D00574ACF /* dpScoreSceneDataSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataSphere.h; sourceTree = "<group>"; };
 		D24431151A690F1E00574ACF /* dpScoreSceneDataBarcode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneDataBarcode.cpp; sourceTree = "<group>"; };
 		D24431161A690F1E00574ACF /* dpScoreSceneDataBarcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataBarcode.h; sourceTree = "<group>"; };
+		D24431181A6919A800574ACF /* dpScoreSceneDataText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneDataText.cpp; sourceTree = "<group>"; };
+		D24431191A6919A800574ACF /* dpScoreSceneDataText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataText.h; sourceTree = "<group>"; };
 		D24C21961A49653D009D0796 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		D24C21971A49653D009D0796 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
 		D24C21981A49653D009D0796 /* NetworkingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingUtils.h; sourceTree = "<group>"; };
@@ -788,6 +791,8 @@
 				D24431101A68BD0D00574ACF /* dpScoreSceneDataSphere.h */,
 				D24431151A690F1E00574ACF /* dpScoreSceneDataBarcode.cpp */,
 				D24431161A690F1E00574ACF /* dpScoreSceneDataBarcode.h */,
+				D24431181A6919A800574ACF /* dpScoreSceneDataText.cpp */,
+				D24431191A6919A800574ACF /* dpScoreSceneDataText.h */,
 			);
 			name = hakoniwa;
 			sourceTree = "<group>";
@@ -1022,6 +1027,7 @@
 				D228B33D1A5FB738005F0404 /* dpScoreSceneBodyGlobe.cpp in Sources */,
 				D21D0B9E1A4C046000CC3598 /* ofxUIMovingGraph.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				D244311A1A6919A800574ACF /* dpScoreSceneDataText.cpp in Sources */,
 				D29B99281A63F023000115C5 /* Predator.cpp in Sources */,
 				D21D0B941A4C046000CC3598 /* ofxUIFPSSlider.cpp in Sources */,
 				D2B4FD1E1A60DE1200C97A66 /* dpScoreSceneBodyFlow.cpp in Sources */,
