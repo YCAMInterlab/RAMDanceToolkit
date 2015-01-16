@@ -29,13 +29,16 @@
 #include "HakoniwaPlink_Oil.h"
 
 #include "hakoVisPLink_Laser.h"
+#include "hakoVisPLink_Oil.h"
+#include "hakoVisPLink_Prism.h"
 
 HakoniwaPLink_Laser plink_laser;
 HakoniwaPLink_Oil	plink_oil;
 HakoniwaPLink_Prism plink_prism;
 
 ramMotionExtractorExampleScene motionExt;
-hakoVisPLink_Laser vislink;
+hakoVisPLink_Laser	visLaser;
+hakoVisPLink_Oil visOil;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -50,8 +53,8 @@ void testApp::setup()
     
 	/// scenes setup
 	// ------------------
-    ofSetWindowPosition(2000, 0);
-    ofSetFullscreen(true);
+//    ofSetWindowPosition(2000, 0);
+//    ofSetFullscreen(true);
 	ramSetViewPort(ofRectangle(0.f, 0.f, SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT));
 
 	ramSceneManager& sceneManager = ramSceneManager::instance();
@@ -60,11 +63,11 @@ void testApp::setup()
 	sceneManager.addScene( plink_oil.getPtr());
 	sceneManager.addScene( plink_prism.getPtr());
 
-	sceneManager.addScene( vislink.getPtr());
+	sceneManager.addScene( visLaser.getPtr());
+	sceneManager.addScene( visOil.getPtr());
 	sceneManager.addScene( motionExt.getPtr());
 
 	sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
-
 }
 
 //--------------------------------------------------------------

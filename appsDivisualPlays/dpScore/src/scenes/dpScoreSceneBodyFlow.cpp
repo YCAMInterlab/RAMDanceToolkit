@@ -63,11 +63,6 @@ void SceneBodyFlow::initialize()
     
     mCam.setDistance(200);
     mCam.disableMouseInput();
-    
-    mPoints.assign(kNumSkeletons, ofPtr<Points>());
-    for (auto& p : mPoints) {
-        p = ofPtr<Points>(new Points());
-    }
 }
 
 void SceneBodyFlow::shutDown()
@@ -88,6 +83,11 @@ void SceneBodyFlow::enter()
                   this,
                   &SceneBodyFlow::onUpdateSkeleton);
     mCam.enableMouseInput();
+    
+    mPoints.assign(kNumSkeletons, ofPtr<Points>());
+    for (auto& p : mPoints) {
+        p = ofPtr<Points>(new Points());
+    }
 }
 
 void SceneBodyFlow::exit()
@@ -98,11 +98,14 @@ void SceneBodyFlow::exit()
                      this,
                      &SceneBodyFlow::onUpdateSkeleton);
     mCam.disableMouseInput();
+    
+    mPoints.clear();
+    mSkeletons.clear();
 }
 
 void SceneBodyFlow::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kAddrMotioner) {
+    if (m.getAddress() == kOscAddrMotioner) {
         for (auto p : mPoints) p->update();
     }
 }

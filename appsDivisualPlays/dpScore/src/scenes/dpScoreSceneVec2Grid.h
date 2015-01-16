@@ -34,10 +34,10 @@ private:
     
     ofEasyCam mCam;
     
-    float mSensorScale{2.0f};
+    float mSensorScale{1.0f};
     ofVec2f mVec{0.f};
     
-    int mGridStep{20};
+    int mGridStep{40};
     int mGridW{kW*2};
     int mGridH{kH*2};
 };

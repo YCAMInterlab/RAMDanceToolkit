@@ -78,6 +78,8 @@ void HakoniwaParallelLink_Base::update(){
 	else					mLinkManager.setPlot_inClamp(v - machinePosition);
 
 	update_over();
+
+	mFlagNeedDestract = false;
 }
 
 void HakoniwaParallelLink_Base::draw(){
@@ -237,6 +239,8 @@ void HakoniwaParallelLink_Base::setupControlPanel(){
 	motionEx.setupControlPanel(this);
 
 	initialize();
+
+	if (mLinkManager.enableSync) mFlagNeedDestract = true;
 }
 
 void HakoniwaParallelLink_Base::drawActor(const ramActor &actor)
@@ -316,8 +320,10 @@ void HakoniwaParallelLink_Base::onEnabled(){
 }
 
 void HakoniwaParallelLink_Base::onDisabled(){
-	mLinkManager.setPlot_inClamp(ofVec3f(0.0,196.0,0.0));
-	mLinkManager.sendSignal();
+	if (mFlagNeedDestract){
+		mLinkManager.setPlot_inClamp(ofVec3f(0.0,196.0,0.0));
+		mLinkManager.sendSignal();
+	}
 }
 
 void HakoniwaParallelLink_Base::savePreset(){

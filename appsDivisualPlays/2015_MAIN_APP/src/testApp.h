@@ -23,6 +23,9 @@
 //ito Scenes
 #include "dpHakoniwaSand.h"
 
+//Miura Scenes
+#include "HakoniwaTheta.h"
+
 //Kezzar Scenes
 #include "dpHakoniwaServoPendulum.h"
 #include "dpHakoVisStageCircle.h"
@@ -79,7 +82,10 @@ public:
 	HakoniwaPLink_Prism			hakoniwaPlinkPrism;
 
 	hakoVisPLink_Laser			hakoVisPlinkLaser;
-    
+
+	//Theta
+	HakoniwaTheta				hakoVisTheta;
+
     // servo pendulum
     dpHakoniwaServoPendulum     hakoniwaServoPendulum;
     dpHakoVisServoPendulum      visServoPendulum;

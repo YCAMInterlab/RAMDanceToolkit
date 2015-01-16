@@ -295,10 +295,10 @@
 			children = (
 				C6ABEBA61A623BC0005DF2CE /* hakoVisPLink_Laser.h */,
 				C6ABEBA51A623BC0005DF2CE /* hakoVisPLink_Laser.cpp */,
-				C63615D81A64B71D0006BB65 /* hakoVisPLink_Oil.cpp */,
 				C63615D91A64B71D0006BB65 /* hakoVisPLink_Oil.h */,
-				C63615DB1A64B72B0006BB65 /* hakoVisPLink_Prism.cpp */,
+				C63615D81A64B71D0006BB65 /* hakoVisPLink_Oil.cpp */,
 				C63615DC1A64B72B0006BB65 /* hakoVisPLink_Prism.h */,
+				C63615DB1A64B72B0006BB65 /* hakoVisPLink_Prism.cpp */,
 			);
 			name = hakoVis;
 			sourceTree = "<group>";

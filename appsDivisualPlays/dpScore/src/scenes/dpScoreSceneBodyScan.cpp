@@ -85,7 +85,7 @@ void SceneBodyScan::exit()
 
 void SceneBodyScan::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kAddrMotioner) {
+    if (m.getAddress() == kOscAddrMotioner) {
         for (int i=0; i<getNumSkeletons(); i++) {
             for (auto& mn : getSkeleton(i)->getJoints())
                 mn.update();
@@ -99,9 +99,7 @@ void SceneBodyScan::draw()
     
     for (int i=0; i<getNumSkeletons(); i++) {
         ofPushMatrix();
-        const int n = getNumSkeletons();
-        const float step = kW/n;
-        ofTranslate(-kW*0.5f + step * 0.5f + step * i , -300.f, 0.f);
+        alignedTranslate(getLineUped(kW, i, getNumSkeletons()), -300.f, 0.f);
         glPointSize(4.f);
         ofSetColor(255, 128);
         ofSetLineWidth(1.5f);
@@ -132,7 +130,7 @@ void SceneBodyScan::draw()
     glColor4f(0.f, 0.f, 0.f, 1.0f); glVertex2f(w, 0.f);
     glEnd();
     ofSetColor(color::kMain, 255);
-    ofSetLineWidth(1.f);
+    ofSetLineWidth(2.f);
     alignedLine(0.f, 20.f, 0.f, kH);
     ofPopMatrix();
 }

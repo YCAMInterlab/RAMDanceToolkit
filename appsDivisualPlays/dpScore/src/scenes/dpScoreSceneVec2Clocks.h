@@ -28,12 +28,13 @@ public:
     void draw() override;
     
 private:
-    static const int _clockNumX{24};
-    static const int _clockNumY{13};
+    static const int _clockNumX{16};
+    static const int _clockNumY{8};
     
     deque<ofVec2f> mClockBuffer;
-    float mSensorScale{2.0f};
+    float mSensorScale{1.f};
     ofVec2f mVec{0.f};
+    ofVec2f mPrevVec{0.f};
     
 };
 

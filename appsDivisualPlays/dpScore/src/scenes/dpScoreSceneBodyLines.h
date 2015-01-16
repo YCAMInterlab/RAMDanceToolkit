@@ -66,7 +66,7 @@ private:
     bool isFocus(int nodeId);
     
     ofEasyCam mCam;
-    const int kFocusLoop{120};
+    const int kFocusLoop{240};
     int mFocusNode{0};
     unsigned long mFrameNum{0};
 };
