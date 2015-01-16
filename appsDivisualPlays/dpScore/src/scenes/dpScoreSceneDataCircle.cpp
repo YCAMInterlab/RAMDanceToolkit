@@ -27,14 +27,14 @@ void SceneDataCircle::Circle::draw()
 {
     const float step = mRadius * TWO_PI / kResolution;
     for (int i=0; i<data.size(); i++) {
-        const float f = data.at(i);
+        const float f{data.at(i)};
         if (::fabsf(f) < 0.01f) continue;
         
         ofPushMatrix();
-        const float angle = -360.f / kResolution * i;
+        const float angle{-360.f / kResolution * i};
         ofRotate(angle);
         ofTranslate(0.f, -mRadius);
-        const float h = f * mRadius;
+        const float h{f * mRadius};
         ofFill();
         ofSetColor(128, 128);
         ofRect(-step*0.5f, 0.f, step, h);

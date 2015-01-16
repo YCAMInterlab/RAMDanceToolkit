@@ -101,8 +101,8 @@ void SceneVec2SimpleGraph::draw()
         vector<ofVec2f> points;
         ofSetColor(ofColor::white, 64);
         for (int i=0; i<mBuffer.size()-1; i++) {
-            ofVec2f v0 = mBuffer.at(i);
-            ofVec2f v1 = mBuffer.at(i+1);
+            ofVec2f v0{mBuffer.at(i)};
+            ofVec2f v1{mBuffer.at(i+1)};
             v0 *= mult;
             v1 *= mult;
             v0.x = clamp(v0.x, kHalfH);

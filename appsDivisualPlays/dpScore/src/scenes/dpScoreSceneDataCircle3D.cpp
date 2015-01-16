@@ -31,13 +31,13 @@ void SceneDataCircle3D::Circle::draw()
         if (v.length() < 0.01f) continue;
         
         ofPushMatrix();
-        const float angle = 360.f / kResolution * i;
-        const float radian = ::atan2(v.y, v.x);
+        const float angle{360.f / kResolution * i};
+        const float radian{::atan2f(v.y, v.x)};
         ofRotateZ(angle);
         ofTranslate(0.f, mRadius);
         ofRotateX(ofRadToDeg(radian));
         
-        const float h = -v.length() * mRadius;
+        const float h{-v.length() * mRadius};
         ofFill();
         ofSetColor(128, 128);
         ofRect(-step*0.5f, 0.f, step, h);

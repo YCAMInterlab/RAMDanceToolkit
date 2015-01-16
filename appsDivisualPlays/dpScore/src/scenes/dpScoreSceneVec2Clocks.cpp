@@ -101,7 +101,7 @@ void SceneVec2Clocks::draw()
             }
             
             if (idx < mClockBuffer.size()) {
-                ofVec2f v = mClockBuffer.at(idx);
+                ofVec2f v{mClockBuffer.at(idx)};
                 const float mult{r * 2.f * mSensorScale};
                 ofLine(ofVec2f::zero(), v * mult);
             }

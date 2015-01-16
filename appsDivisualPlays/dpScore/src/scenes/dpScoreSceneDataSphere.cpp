@@ -33,8 +33,8 @@ void SceneDataSphere::Circle::draw()
         ofPushMatrix();
         ofRotateY(ofGetElapsedTimef()*0.5f);
         
-        const float angle = 360.f / kResolution * i;
-        const float radian = ::atan2(v.y, v.x);
+        const float angle{360.f / kResolution * i};
+        const float radian{::atan2f(v.y, v.x)};
         
         ofRotateZ(angle);
         ofRotateX(ofRadToDeg(radian));
@@ -49,7 +49,7 @@ void SceneDataSphere::Circle::draw()
             c = ofColor::white;
             ofSetLineWidth(2.f);
         }
-        const float h = -v.length() * mRadius * 0.5f;
+        const float h{-v.length() * mRadius * 0.5f};
         ofFill();
         ofSetColor(c*0.5f, 128);
         ofRect(-step*0.5f, 0.f, step, h);

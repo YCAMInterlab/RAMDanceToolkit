@@ -97,7 +97,7 @@ void SceneDataWave::draw()
                              mPlaneMesh.getNumIndices());
     }
     
-    const float time = ofGetElapsedTimef();
+    const float time{ofGetElapsedTimef()};
     mCam.begin();
     ofPushMatrix();
     ofRotateZ(time * 3.f);
@@ -117,7 +117,7 @@ void SceneDataWave::draw()
     mCam.end();
     
     ofSetColor(180, 255);
-    int i=0;
+    int i{0};
     for (auto& v : mVectors) {
         ofPushMatrix();
         ofTranslate(12.f, (kH - mVectors.size() * 10.f - 10.f) + i * 10.f, 0.0f);

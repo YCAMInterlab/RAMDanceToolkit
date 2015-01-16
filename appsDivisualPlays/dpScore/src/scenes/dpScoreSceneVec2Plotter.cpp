@@ -69,7 +69,7 @@ void SceneVec2Plotter::draw()
 {
     const float halfH{(kH-50.f) * 0.5f};
     const float mult{halfH * mSensorScale};
-    const float t = ofGetElapsedTimef();
+    const float t{ofGetElapsedTimef()};
     
     mCam.begin();
     ofRotateZ(t*2.f);
@@ -104,7 +104,7 @@ void SceneVec2Plotter::draw()
     
     mCircleVbo.draw(GL_LINE_STRIP, 0, mCircleVertices.size());
     
-    const ofVec2f v = project(mVec * mult);
+    const ofVec2f v{project(mVec * mult)};
     
     mCam.end();
     

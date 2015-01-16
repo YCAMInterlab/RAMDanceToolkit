@@ -83,7 +83,7 @@ void SceneVec2Grid::draw()
     ofLine(0.f, 0.f, -length, 0.f, 0.f, length);
     
     ofPushStyle();
-    const float size = 60.f;
+    const float size{60.f};
     ofSetLineWidth(2.f);
     ofSetColor(color::kMain, 255);
     ofLine(-size, 0.f, size, 0.f);
@@ -99,8 +99,8 @@ void SceneVec2Grid::draw()
     ofNoFill();
     for (int j=0; j<mGridH/mGridStep; j++) {
         for (int i=0; i<mGridW/mGridStep; i++) {
-            const int idx = j * mGridW/mGridStep + i;
-            ofVec2f v = mGridBuffer.at(i);
+            const int idx{j * mGridW/mGridStep + i};
+            ofVec2f v{mGridBuffer.at(i)};
             mGridVertices.at(idx).x = i*mGridStep;
             mGridVertices.at(idx).y = j*mGridStep * v.y * 0.3f * mSensorScale;
             mGridVertices.at(idx).z = v.x * 300.f * mSensorScale;
