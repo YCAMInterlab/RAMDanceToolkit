@@ -9,6 +9,9 @@ void HakoniwaTheta::setupControlPanel(){
     gui->addToggle("Dump", &mDrawDump);
     gui->addToggle("Hidden", &mDrawhidden);
     gui->addIntSlider("Video No", 1, 5, &mVideoNo);
+    gui->addSlider("Degree",0.0,360.0,&mDegreeOffset);
+    
+    mDegreeOffset = 180.0;
     
     ofAddListener(gui->newGUIEvent, this, &HakoniwaTheta::onPanelChanged);
     
@@ -23,8 +26,9 @@ void HakoniwaTheta::setup(){
     ofBackground(0);
     ofEnableAlphaBlending();
     
-    sphere.set(750, 50);
+    sphere.set(700, 50);
     sphere.setPosition(dpGetFirstScreenCenter());
+    sphere.setPosition(0, 0, 0);
     glEnable(GL_CULL_FACE);
     glCullFace(GL_FRONT);
     
@@ -48,7 +52,7 @@ void HakoniwaTheta::update(){
     if( mDrawhidden == true){
         radiusChanged(0);
     }else{
-        radiusChanged(750);
+        radiusChanged(700);
     }
 
 }
@@ -57,6 +61,8 @@ void HakoniwaTheta::draw(){
 
     ramSetViewPort(dpGetFirstScreenViewPort());
     
+    ramBeginCamera();
+    ofRotateZ(mDegreeOffset);
     if (ofGetFrameNum() % 600 == 0){
         mVideoNo = ofRandom(1 , 6);
         VideoChanged(mVideoNo);
@@ -70,6 +76,7 @@ void HakoniwaTheta::draw(){
     
     sphere.draw();
     
+    ramEndCamera();
 }
 
 void HakoniwaTheta::onPanelChanged(ofxUIEventArgs& e){
@@ -85,7 +92,8 @@ void HakoniwaTheta::radiusChanged(int radius){
 
     sphere.set(radius, 50);
 //    sphere.setPosition(ofGetWidth()/2, ofGetHeight()/2, 0); // 位置
-    sphere.setPosition(dpGetFirstScreenCenter()); // 位置
+//    sphere.setPosition(dpGetFirstScreenCenter()); // 位置
+    sphere.setPosition(0, 0, 0);
 
 }
 
