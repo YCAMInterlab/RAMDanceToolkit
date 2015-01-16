@@ -62,7 +62,7 @@ void SceneDataWave::exit()
 
 void SceneDataWave::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kOscAddrCaneraUnitVector) {
+    if (m.getAddress() == kOscAddrCameraUnitVector) {
         for (int i=0; i<mData.size(); i++) {
             if (i>=m.getNumArgs()) break;
             
@@ -116,7 +116,7 @@ void SceneDataWave::draw()
     ofPopMatrix();
     mCam.end();
     
-    ofSetColor(ofColor::white);
+    ofSetColor(180, 255);
     int i=0;
     for (auto& v : mVectors) {
         ofPushMatrix();

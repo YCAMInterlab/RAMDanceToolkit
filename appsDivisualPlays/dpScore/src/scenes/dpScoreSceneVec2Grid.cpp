@@ -55,7 +55,7 @@ void SceneVec2Grid::exit()
 
 void SceneVec2Grid::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kOscAddrCaneraUnitVector) {
+    if (m.getAddress() == kOscAddrCameraUnitVector) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);
         mGridBuffer.push_back(mVec);
@@ -82,13 +82,16 @@ void SceneVec2Grid::draw()
     ofLine(0.f, -length, 0.f, length);
     ofLine(0.f, 0.f, -length, 0.f, 0.f, length);
     
-    const float size = 30.f;
+    ofPushStyle();
+    const float size = 60.f;
+    ofSetLineWidth(2.f);
     ofSetColor(color::kMain, 255);
     ofLine(-size, 0.f, size, 0.f);
     ofSetColor(color::kMain, 255);
     ofLine(0.f, -size, 0.f, size);
     ofSetColor(color::kMain, 255);
     ofLine(0.f, 0.f, -size, 0.f, 0.f, size);
+    ofPopStyle();
     
     ofPopMatrix();
     

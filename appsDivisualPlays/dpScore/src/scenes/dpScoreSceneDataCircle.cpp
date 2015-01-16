@@ -44,7 +44,7 @@ void SceneDataCircle::Circle::draw()
         ofRect(-step*0.5f, 0.f, step, h);
         ofPopMatrix();
     }
-    ofSetLineWidth(step);
+    ofSetLineWidth(step*0.5f);
     ofSetColor(color::kMain, 255);
     ofLine(0.f, -mRadius-50.f, 0.f, -mRadius+50.f);
 
@@ -88,7 +88,7 @@ void SceneDataCircle::exit()
 
 void SceneDataCircle::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kOscAddrCaneraUnitVector) {
+    if (m.getAddress() == kOscAddrCameraUnitVector) {
 
         for (int i=0; i<kNumCircles/2; i++) {
             if (2*i+0 >= m.getNumArgs() || 2*i+1 >= m.getNumArgs()) break;

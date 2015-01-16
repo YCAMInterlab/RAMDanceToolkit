@@ -47,7 +47,7 @@ void SceneVec2SimpleGraph::exit()
 
 void SceneVec2SimpleGraph::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kOscAddrCaneraUnitVector) {
+    if (m.getAddress() == kOscAddrCameraUnitVector) {
         if (m.getNumArgs() >= 2) {
             mVec.x = m.getArgAsFloat(0);
             mVec.y = m.getArgAsFloat(1);
@@ -91,34 +91,43 @@ void SceneVec2SimpleGraph::draw()
         alignedLine(0.f, 40.f+i*stepY, width, 40.f+i*stepY);
     }
     
-    ofSetColor(ofColor::white, 150);
+    ofSetColor(ofColor::white, 128);
     alignedTranslate(20.f, kH*0.5f+5.f);
     alignedLine(0.f, 0.f, kW, 0.f);
     
-    const float halfH{(kH-50.f) * 0.5f};
-    const float mult{halfH * mSensorScale};
+    ofSetLineWidth(1.5f);
+    const float mult{kHalfH * mSensorScale};
     if (mBuffer.size()>=2) {
-        ofSetColor(ofColor::white, 255);
+        vector<ofVec2f> points;
+        ofSetColor(ofColor::white, 64);
         for (int i=0; i<mBuffer.size()-1; i++) {
             ofVec2f v0 = mBuffer.at(i);
             ofVec2f v1 = mBuffer.at(i+1);
             v0 *= mult;
             v1 *= mult;
-            v0.x = clamp(v0.x, halfH);
-            v0.y = clamp(v0.y, halfH);
-            v1.x = clamp(v1.x, halfH);
-            v1.y = clamp(v1.y, halfH);
+            v0.x = clamp(v0.x, kHalfH);
+            v0.y = clamp(v0.y, kHalfH);
+            v1.x = clamp(v1.x, kHalfH);
+            v1.y = clamp(v1.y, kHalfH);
             
             alignedLine(i*mStep, v0.x, (i+1)*mStep, v1.x);
             alignedLine(i*mStep, v0.y, (i+1)*mStep, v1.y);
+            points.push_back(ofVec2f(i*mStep, v0.x));
+            points.push_back(ofVec2f(i*mStep, v0.y));
         }
+        glPointSize(3.f);
+        ofSetColor(ofColor::white, 128);
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glVertexPointer(2, GL_FLOAT, 0, &points.at(0).x);
+        glDrawArrays(GL_POINTS, 0, points.size());
+        glDisableClientState(GL_VERTEX_ARRAY);
     }
     ofPopMatrix();
     
     ofPushMatrix();
     alignedTranslate(0.f, kH*0.5f+5.f);
     ofSetColor(color::kMain, 255);
-    ofSetLineWidth(2.f);
+    ofSetLineWidth(3.f);
     const ofVec2f v = mVec * mult;
     alignedLine(ofGetWidth()-14.f, v.x, ofGetWidth(), v.x);
     alignedLine(ofGetWidth()-14.f, v.y, ofGetWidth(), v.y);

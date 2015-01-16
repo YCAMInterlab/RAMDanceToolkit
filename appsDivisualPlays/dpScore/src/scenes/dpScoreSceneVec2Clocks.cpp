@@ -45,7 +45,7 @@ void SceneVec2Clocks::exit()
 
 void SceneVec2Clocks::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kOscAddrCaneraUnitVector) {
+    if (m.getAddress() == kOscAddrCameraUnitVector) {
         mVec.x = clamp(m.getArgAsFloat(0));
         mVec.y = clamp(m.getArgAsFloat(1));
         mClockBuffer.push_back(mVec.interpolate(mPrevVec, 0.5f));
@@ -86,19 +86,23 @@ void SceneVec2Clocks::draw()
             ofTranslate(30.f + i * circleStep + 30.f, 0.f, 0.f);
             
             ofSetLineWidth(1.5f);
-            ofSetColor(150);
+            ofSetColor(128);
             ofCircle(0.f, 0.f, r);
             
             const int idx{(_clockNumX * _clockNumY - 1) - (i + j * _clockNumX)};
             
-            (i == 0 && j == 0) ? ofSetColor(color::kMain, 255) : ofSetColor(ofColor::white, 255);
+            if (i == 0 && j == 0) {
+                ofSetLineWidth(3.f);
+                ofSetColor(color::kMain, 255);
+            }
+            else {
+                ofSetLineWidth(1.5f);
+                ofSetColor(ofColor::white, 255);
+            }
             
             if (idx < mClockBuffer.size()) {
                 ofVec2f v = mClockBuffer.at(idx);
-                //v.normalize();
                 const float mult{r * 2.f * mSensorScale};
-                
-                ofSetLineWidth(1.5f);
                 ofLine(ofVec2f::zero(), v * mult);
             }
             

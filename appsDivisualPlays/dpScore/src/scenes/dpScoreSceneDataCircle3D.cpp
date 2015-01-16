@@ -31,23 +31,28 @@ void SceneDataCircle3D::Circle::draw()
         if (v.length() < 0.01f) continue;
         
         ofPushMatrix();
-        const float angle = -360.f / kResolution * i;
-        ofRotate(angle);
-        ofTranslate(0.f, -mRadius);
-        const float x = v.x * mRadius;
+        const float angle = 360.f / kResolution * i;
+        const float radian = ::atan2(v.y, v.x);
+        ofRotateZ(angle);
+        ofTranslate(0.f, mRadius);
+        ofRotateX(ofRadToDeg(radian));
+        
+        const float h = -v.length() * mRadius;
         ofFill();
         ofSetColor(128, 128);
-        ofRect(-step*0.5f, 0.f, step, x);
+        ofRect(-step*0.5f, 0.f, step, h);
         ofNoFill();
         ofSetLineWidth(2.f);
         ofSetColor(ofColor::white, 128);
-        ofRect(-step*0.5f, 0.f, step, x);
+        ofRect(-step*0.5f, 0.f, step, h);
         ofPopMatrix();
     }
-    ofSetLineWidth(step);
+    ofPushMatrix();
+    alignedTranslate(0.f, mRadius - 50.f);
     ofSetColor(color::kMain, 255);
-    ofLine(0.f, -mRadius-50.f, 0.f, -mRadius+50.f);
-    
+    ofSetLineWidth(2.f);
+    alignedRect(-step*0.5f, 0.f, step, 100.f);
+    ofPopMatrix();
 }
 
 #pragma mark ___________________________________________________________________
@@ -88,7 +93,7 @@ void SceneDataCircle3D::exit()
 
 void SceneDataCircle3D::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kOscAddrCaneraUnitVector) {
+    if (m.getAddress() == kOscAddrCameraUnitVector) {
         
         for (int i=0; i<kNumCircles ; i++) {
             if (2*i+0 >= m.getNumArgs() || 2*i+1 >= m.getNumArgs()) break;
@@ -101,14 +106,18 @@ void SceneDataCircle3D::update(ofxEventMessage& m)
 
 void SceneDataCircle3D::draw()
 {
+    mCam.begin();
     ofPushMatrix();
+    ofRotateX(-40.f);
+    ofRotateZ(-10.f);
     for (int i=0; i<mCircles.size(); i++) {
         ofPushMatrix();
-        ofTranslate(kW*0.5f + getLineUped(kW, i/2, mCircles.size()/2), kH*0.5f);
+        ofTranslate(getLineUped(kW, i, mCircles.size()), 0.f);
         mCircles.at(i)->draw();
         ofPopMatrix();
     }
     ofPopMatrix();
+    mCam.end();
 }
 
 DP_SCORE_NAMESPACE_END
