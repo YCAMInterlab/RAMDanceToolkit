@@ -26,6 +26,9 @@ dpHakoVisStruggle vis;
 #include "dpHakoniwaSand.h"
 dpHakoniwaSand sand;
 
+#include "dpHakoniwaMagnetPendulum.h"
+dpHakoniwaMagnetPendulum magPendulum;
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -46,6 +49,7 @@ void testApp::setup()
 	sceneManager.addScene(hakoniwa.getPtr());
     sceneManager.addScene(vis.getPtr());
     sceneManager.addScene(sand.getPtr());
+    sceneManager.addScene(magPendulum.getPtr());
 }
 
 //--------------------------------------------------------------
