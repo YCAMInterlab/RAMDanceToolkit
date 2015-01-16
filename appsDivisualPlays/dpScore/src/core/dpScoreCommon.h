@@ -50,6 +50,8 @@ extern const string kSettingsPrefix;
 
 extern const int kNumCameraunitVectors;
 
+extern const string kFontPath;
+
 string demangle(const char* name);
 
 template <class T> string getClassName(const T& t);

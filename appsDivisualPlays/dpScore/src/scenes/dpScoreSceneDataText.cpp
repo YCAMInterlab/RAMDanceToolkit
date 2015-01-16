@@ -31,12 +31,14 @@ void SceneDataText::shutDown()
 void SceneDataText::enter()
 {
     dpDebugFunc();
-    mFont.loadFont("../../../resources/fonts/AkkoStd-Thin.otf", kFontSize);
+    mFont.loadFont(kFontPath, kFontSize);
 }
 
 void SceneDataText::exit()
 {
     dpDebugFunc();
+    
+    mFont = ofTrueTypeFont();
 }
 
 void SceneDataText::update(ofxEventMessage& m)
