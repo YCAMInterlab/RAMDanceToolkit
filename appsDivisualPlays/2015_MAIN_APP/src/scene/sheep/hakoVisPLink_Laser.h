@@ -10,18 +10,25 @@
 #define __RAMDanceToolkit__hakoVisPLink_Laser__
 
 #include "ramMain.h"
+#include "ofxDelaunay.h"
 
 class liningUnit{
 public:
 	liningUnit(){
 		pixel	= false;
 		transp	= 0;
+		transp_smooth  = 0;
 		pts.set(0,0,0);
+		stand = true;
 	}
 	~liningUnit(){};
 	bool	pixel;
+	bool	stand;
 	int		transp;
+	int		transp_smooth;
+	int		flagValue;
 	ofVec3f pts;
+	ofVec3f pt_smooth;
 };
 
 class hakoVisPLink_Laser :public ramBaseScene{
@@ -39,19 +46,27 @@ public:
 
 	void drawActor(const ramActor &actor);
 
-	inline
-	string getName() const { return "hakoVisPLink_Laser"; }
+	void draw_PatternA();
+	void draw_PatternB();
+
+	inline	string getName() const { return "hakoVisPLink_Laser"; }
 	virtual string getAddress() {return "192.168.20.57";};
 
 //	virtual void onEnabled();
 //	virtual void onDisabled();
 
 protected:
-
+	ofxUICanvasPlus* gui;
 	ramOscReceiveTag receiver;
 	int pix_w,pix_h;
 
+	//===== Pattern A ======
 	vector<liningUnit> lines;
+
+	//===== Pattern B ======
+	vector<ofMesh> meshes;
+	ofEasyCam camera;
+	ofxDelaunay del;
 };
 
 #endif /* defined(__RAMDanceToolkit__hakoVisPLink_Laser__) */

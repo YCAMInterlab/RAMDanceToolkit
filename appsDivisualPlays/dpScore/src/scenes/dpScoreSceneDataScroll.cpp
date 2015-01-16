@@ -69,7 +69,7 @@ void SceneDataScroll::drawSkeleton(int index)
     const float xStep = 96.f;
     
     auto shift = [&x](float f) {
-        float ret = 0.f;
+        float ret{0.f};
         if (f<0.f) ret -= 8.f;
         if (::fabsf(f)>=100.f) ret -= 16.f;
         else if (::fabsf(f)>=10.f) ret -= 8.f;
@@ -79,22 +79,19 @@ void SceneDataScroll::drawSkeleton(int index)
     for (size_t i=5; i<joints.size(); i++) {
         if (x > kW-xStep) break;
         auto& n = s->getJoint(i);
-        ofVec3f v = n.getGlobalPosition();
-        ofQuaternion q = n.getGlobalOrientation();
+        ofVec3f v{n.getGlobalPosition()};
+        ofQuaternion q{n.getGlobalOrientation()};
         
-        string s = ofToString(v.x);
+        string s{ofToString(v.x)};
         ofDrawBitmapString(s, x + shift(v.x), y);
-        //x += (s.size()+1) * 8.f;
         x += xStep;
         
         s = ofToString(v.y);
         ofDrawBitmapString(s, x + shift(v.y), y);
-        //x += (s.size()+1) * 8.f;
         x += xStep;
         
         s = ofToString(v.z);
         ofDrawBitmapString(s, x + shift(v.z), y);
-        //x += (s.size()+1) * 8.f;
         x += xStep;
     }
     

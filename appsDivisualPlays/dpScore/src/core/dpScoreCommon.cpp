@@ -110,9 +110,9 @@ const int kOscClientPort = 10000;
 
 const string kOscAddrChangeScene = "/dp/score/changeScene";
 
-const string kOscAddrCaneraUnitVector = "/dp/cameraUnit/vector";
-const string kOscAddrCaneraUnitVectorTotal = "/dp/cameraUnit/vector/total";
-const string kOscAddrCaneraUnitVectorFeatures = "/dp/cameraUnit/features";
+const string kOscAddrCameraUnitVector = "/dp/cameraUnit/vector";
+const string kOscAddrCameraUnitVectorTotal = "/dp/cameraUnit/vector/total";
+const string kOscAddrCameraUnitVectorFeatures = "/dp/cameraUnit/features";
 const string kOscAddrCaneraUnitVecContourBlob = "/dp/cameraUnit/contour/blob";
 
 const string kOscAddrMotioner = "/dp/score/motioner";

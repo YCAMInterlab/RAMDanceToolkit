@@ -38,9 +38,9 @@ extern const int kOscClientPort;
 
 extern const string kOscAddrChangeScene;
 
-extern const string kOscAddrCaneraUnitVector;
-extern const string kOscAddrCaneraUnitVectorTotal;
-extern const string kOscAddrCaneraUnitVectorFeatures;
+extern const string kOscAddrCameraUnitVector;
+extern const string kOscAddrCameraUnitVectorTotal;
+extern const string kOscAddrCameraUnitVectorFeatures;
 extern const string kOscAddrCaneraUnitVecContourBlob;
 
 extern const string kOscAddrMotioner;

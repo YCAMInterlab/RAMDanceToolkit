@@ -43,6 +43,9 @@
 #include "HakoniwaPLink_Laser.h"
 #include "HakoniwaPLink_Prism.h"
 #include "hakoVisPLink_Laser.h"
+#include "hakoVisPLink_Oil.h"
+#include "hakoVisPLink_Prism.h"
+
 
 class testApp : public ramBaseApp
 {
@@ -82,6 +85,8 @@ public:
 	HakoniwaPLink_Prism			hakoniwaPlinkPrism;
 
 	hakoVisPLink_Laser			hakoVisPlinkLaser;
+	hakoVisPLink_Oil			hakoVisPlinkOil;
+	hakoVisPLink_Prism			hakoVisPlinkPrism;
 
 	//Theta
 	HakoniwaTheta				hakoVisTheta;
