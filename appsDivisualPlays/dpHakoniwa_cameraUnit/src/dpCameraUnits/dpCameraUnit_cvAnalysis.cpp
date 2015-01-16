@@ -309,10 +309,11 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 	if (mEnableOptFlowFarne)	mOptFlowFarne.draw();
 
 	ofSetColor(255);
+
 	if (mEnablePixelate){
-		for (int i = 0;i < mParamPixelate_ResX;i++){
-			for (int j = 0;j < mParamPixelate_ResY;j++){
-				if (debug_px[j*mParamPixelate_ResY+i]){
+		for (int j = 0;j < mParamPixelate_ResY;j++){
+			for (int i = 0;i < mParamPixelate_ResX;i++){
+				if (debug_px[j*mParamPixelate_ResX+i]){
 					ofRect(i*10, j*10, 10, 10);
 				}
 			}
