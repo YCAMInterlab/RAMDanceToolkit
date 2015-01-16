@@ -1,0 +1,10 @@
+<Widget>
+    <Kind>42</Kind>
+    <Name>Step</Name>
+    <Value>4</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Sensor Scale</Name>
+    <Value>0.800000012</Value>
+</Widget>

@@ -13,7 +13,7 @@ void HakoniwaPLink_Oil::initialize(){
 }
 
 void HakoniwaPLink_Oil::update_over(){
-	cout << "Debug Dist :" << motionEx.getDistanceAt(0, 1) << endl;
+//	cout << "Debug Dist :" << motionEx.getDistanceAt(0, 1) << endl;
 }
 
 void HakoniwaPLink_Oil::draw_over(){

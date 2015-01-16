@@ -30,12 +30,13 @@
 #include "dpHakoniwaServoPendulum.h"
 #include "dpHakoVisStageCircle.h"
 #include "dpHakoVisServoPendulum.h"
-#include "dpHakoVisPlink_Prism.h"
+#include "dpHakoVisWorm.h"
 #include "dp3DDanceMap.h"
 #include "dpHakoVisVecLineCircle.h"
 #include "dpHakoniwaStruggle.h"
 #include "dpHakoVisStruggle.h"
 #include "dpHakoVisSandStorm.h"
+#include "dpHakoVisMagnetPendulum.h"
 
 //SHEEP Scenes
 #include "testScenes.h"
@@ -43,6 +44,9 @@
 #include "HakoniwaPLink_Laser.h"
 #include "HakoniwaPLink_Prism.h"
 #include "hakoVisPLink_Laser.h"
+#include "hakoVisPLink_Oil.h"
+#include "hakoVisPLink_Prism.h"
+
 
 class testApp : public ramBaseApp
 {
@@ -82,6 +86,8 @@ public:
 	HakoniwaPLink_Prism			hakoniwaPlinkPrism;
 
 	hakoVisPLink_Laser			hakoVisPlinkLaser;
+	hakoVisPLink_Oil			hakoVisPlinkOil;
+	hakoVisPLink_Prism			hakoVisPlinkPrism;
 
 	//Theta
 	HakoniwaTheta				hakoVisTheta;
@@ -93,8 +99,8 @@ public:
     // stage
     dpHakoVisStageCircle                visStage;
     
-    // prism
-    dpHakoVisPLink_Prism              visPrism;
+    // worm
+    dpVisWorm             visWorm;
     
     // struggle
     dpHakoniwaStruggle hakoniwaStruggle;
@@ -106,4 +112,6 @@ public:
     dpHakoVisVecLineCircle vecLineCircle;
 
     dp3DDanceMap danceMap;
+    
+    dpHakoVisMagnetPendulum visMagnetPendulum;
 };

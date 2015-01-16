@@ -38,10 +38,11 @@ private:
         deque<ofVec2f> data;
     };
     vector<ofPtr<Circle> > mCircles;
-    const int kNumCircles = 1;
+    const int kNumCircles = 3;
+    
+    ofEasyCam mCam;
 };
 
 DP_SCORE_NAMESPACE_END
-
 
 #endif /* defined(__dpScore__dpScoreSceneDataCircle3D__) */

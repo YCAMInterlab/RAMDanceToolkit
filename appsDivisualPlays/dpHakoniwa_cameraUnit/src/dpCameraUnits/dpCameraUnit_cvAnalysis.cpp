@@ -185,7 +185,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		for (int64_t j = 0;j < res_y;j++){
 			for (int64_t i = 0;i < res_x;i++){
 				bool pix = (pixGray.getColor(width/res_x * i, height/res_y * j).r > 128);
-
+				debug_px.push_back(pix);
 				int64_t tg = int64_t(pix) << (Pixelcounter % 64);
 				pixelInt = pixelInt | tg;
 				Pixelcounter++;
@@ -308,6 +308,17 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 	if (mEnableOptFlow)			mOptFlow.draw();
 	if (mEnableOptFlowFarne)	mOptFlowFarne.draw();
 
+	ofSetColor(255);
+
+	if (mEnablePixelate){
+		for (int j = 0;j < mParamPixelate_ResY;j++){
+			for (int i = 0;i < mParamPixelate_ResX;i++){
+				if (debug_px[j*mParamPixelate_ResX+i]){
+					ofRect(i*10, j*10, 10, 10);
+				}
+			}
+		}
+	}
 
 	if (mEnableOptFlow){
 		ofSetColor(255, 0, 0);
