@@ -27,7 +27,8 @@ private:
     void drawDump();
     bool mDrawDump;
     bool mDrawhidden;
-
+    float mDegreeOffset;
+    
     int mVideoNo,portNo;
     
     ofVideoPlayer vidPlay;
