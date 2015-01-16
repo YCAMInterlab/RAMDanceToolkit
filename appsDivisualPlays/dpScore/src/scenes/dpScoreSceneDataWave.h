@@ -40,6 +40,7 @@ private:
     vector<ofVec2f> mVectors;
     vector<deque<float> > mData;
     float mScale{50.f};
+    float mEnterTime{0.f};
 };
 
 DP_SCORE_NAMESPACE_END

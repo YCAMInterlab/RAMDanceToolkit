@@ -42,9 +42,8 @@ using namespace dp::score;
 #if 0
 
 身体系 8/20
-箱庭系 12/20
+箱庭系 13/20
 
-スライダー
 プロッター*n
 ブロブ系
 フォント系小
@@ -104,11 +103,13 @@ void ofApp::setup()
     mSceneManager.add(vec2Grid);
     mSceneManager.add(vec2Plotter);
     mSceneManager.add(dataScroll);
+    
     mSceneManager.add(dataCircle);
     mSceneManager.add(dataCircle3D);
     mSceneManager.add(dataSphere);
     mSceneManager.add(dataWave);
     mSceneManager.add(dataDisplacement);
+    
     mSceneManager.add(dataBarcode);
     mSceneManager.add(dataText);
     mSceneManager.add(dataSlider);
@@ -118,6 +119,7 @@ void ofApp::setup()
     mSceneManager.add(bodyPattern);
     mSceneManager.add(bodyFlow);
     mSceneManager.add(bodyLines);
+    
     mSceneManager.add(bodyRect);
     mSceneManager.add(bodyBox);
     mSceneManager.add(bodyBoids);
