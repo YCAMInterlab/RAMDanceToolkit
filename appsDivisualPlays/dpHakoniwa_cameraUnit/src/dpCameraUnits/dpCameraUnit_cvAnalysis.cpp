@@ -117,11 +117,10 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		for (int i = 0;i < mContFinder.getContours().size();i++){
 			ofRectangle rt = ofxCv::toOf(mContFinder.getBoundingRect(i));
 			bRectM.addIntArg(mContFinder.getLabel(i));
-			bRectM.addFloatArg(rt.x / width);
-			bRectM.addFloatArg(rt.y / height);
-			bRectM.addFloatArg(rt.width / width);
-			bRectM.addFloatArg(rt.height / height);
-
+			bRectM.addFloatArg(ofClamp(rt.x / width,-1.0,1.0));
+			bRectM.addFloatArg(ofClamp(rt.y / height,-1.0,1.0));
+			bRectM.addFloatArg(ofClamp(rt.width / width,-1.0,1.0));
+			bRectM.addFloatArg(ofClamp(rt.height / height,-1.0,1.0));
 
 			//Set Blobs
 			int cnt = 0;
@@ -132,8 +131,8 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			
 			for (int j = 0;j < mContFinder.getContour(i).size();j++){
 				ofVec2f pt = ofxCv::toOf(mContFinder.getContour(i)[j]);
-				blobM.addFloatArg(pt.x / width);
-				blobM.addFloatArg(pt.y / height);
+				blobM.addFloatArg(ofClamp(pt.x / width,-1.0,1.0));
+				blobM.addFloatArg(ofClamp(pt.y / height,-1.0,1.0));
 			}
 		}
 
@@ -236,13 +235,13 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			feat.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/features");
 			feat.addIntArg(mOptFlow.getFeatures().size());
 			for (int i = 0;i < mOptFlow.getFeatures().size();i++){
-				feat.addFloatArg(mOptFlow.getFeatures()[i].x / width);
-				feat.addFloatArg(mOptFlow.getFeatures()[i].y / height);
+				feat.addFloatArg(ofClamp(mOptFlow.getFeatures()[i].x / width,-1.0,1.0));
+				feat.addFloatArg(ofClamp(mOptFlow.getFeatures()[i].y / height,-1.0,1.0));
 				if (mOpt_previous.size() > i){
-					feat.addFloatArg((mOptFlow.getFeatures()[i].x -
-									  mOpt_previous[i].x) / width);
-					feat.addFloatArg((mOptFlow.getFeatures()[i].y -
-									  mOpt_previous[i].y) / height);
+					feat.addFloatArg(ofClamp((mOptFlow.getFeatures()[i].x -
+									  mOpt_previous[i].x) / width,-1.0,1.0));
+					feat.addFloatArg(ofClamp((mOptFlow.getFeatures()[i].y -
+									  mOpt_previous[i].y) / height,-1.0,1.0));
 
 				}else{
 					feat.addFloatArg(0.0);
