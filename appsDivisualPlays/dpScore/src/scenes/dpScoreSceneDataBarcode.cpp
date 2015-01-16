@@ -47,6 +47,8 @@ void SceneDataBarcode::update(ofxEventMessage& m)
         for (int i=0; i<kNumCameraunitVectors; i++) {
             if (m.getNumArgs() <= i*2+0 || m.getNumArgs() <= i*2+1) break;
             ofVec2f v(clamp(m.getArgAsFloat(i*2+0)), clamp(m.getArgAsFloat(i*2+1)));
+            v.x = v.x * 0.5f + 0.5f;
+            v.y = v.y * 0.5f + 0.5f;
             mBuffer.push_back(v);
             const int bufferLen{kW/kBarWidth};
             while (mBuffer.size()>bufferLen) {
