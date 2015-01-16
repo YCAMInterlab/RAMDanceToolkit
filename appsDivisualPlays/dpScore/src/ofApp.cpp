@@ -4,6 +4,8 @@
 #include "dpScoreSceneVec2Grid.h"
 #include "dpScoreSceneVec2Plotter.h"
 #include "dpScoreSceneDataCircle.h"
+#include "dpScoreSceneDataCircle3D.h"
+#include "dpScoreSceneDataSphere.h"
 #include "dpScoreSceneDataWave.h"
 #include "dpScoreSceneDataDisplacement.h"
 #include "dpScoreSceneBodyGlobe.h"
@@ -37,7 +39,18 @@ using namespace dp::score;
 #if 0
 
 身体系 8/20
-箱庭系 8/20
+箱庭系 10/20
+
+スライダー
+プロッター*n
+ブロブ系
+テストパターン
+フォント系小
+フォント系大
+
+身体パーツ
+globeパーツ毎
+二人つなぐ
 
 #endif
 
@@ -57,7 +70,14 @@ void ofApp::setup()
     black->setDrawHeader(false);
     black->setName("black");
     
+    auto vec2Simple = SceneBase::Ptr(new SceneVec2SimpleGraph());
+    auto vec2Clocks = SceneBase::Ptr(new SceneVec2Clocks());
+    auto vec2Grid = SceneBase::Ptr(new SceneVec2Grid());
+    auto vec2Plotter = SceneBase::Ptr(new SceneVec2Plotter());
+    auto dataScroll = SceneBase::Ptr(new SceneDataScroll());
     auto dataCircle = SceneBase::Ptr(new SceneDataCircle());
+    auto dataCircle3D = SceneBase::Ptr(new SceneDataCircle3D());
+    auto dataSphere = SceneBase::Ptr(new SceneDataSphere());
     auto dataDisplacement = SceneBase::Ptr(new SceneDataDisplacement());
     auto dataWave = SceneBase::Ptr(new SceneDataWave());
     
@@ -70,11 +90,7 @@ void ofApp::setup()
     auto bodyGlobe = SceneBase::Ptr(new SceneBodyGlobe());
     auto bodyLines = SceneBase::Ptr(new SceneBodyLines());
     
-    auto vec2Simple = SceneBase::Ptr(new SceneVec2SimpleGraph());
-    auto vec2Clocks = SceneBase::Ptr(new SceneVec2Clocks());
-    auto vec2Grid = SceneBase::Ptr(new SceneVec2Grid());
-    auto vec2Plotter = SceneBase::Ptr(new SceneVec2Plotter());
-    auto dataScroll = SceneBase::Ptr(new SceneDataScroll());
+    
     
     mSceneManager.add(black);
     
@@ -83,8 +99,10 @@ void ofApp::setup()
     mSceneManager.add(vec2Grid);
     mSceneManager.add(vec2Plotter);
     mSceneManager.add(dataScroll);
-    mSceneManager.add(dataWave);
     mSceneManager.add(dataCircle);
+    mSceneManager.add(dataCircle3D);
+    mSceneManager.add(dataSphere);
+    mSceneManager.add(dataWave);
     mSceneManager.add(dataDisplacement);
     
     mSceneManager.add(bodyGlobe);
@@ -107,7 +125,7 @@ void ofApp::setup()
     
     //mSceneManager.change(3);
     mSceneManager.change("black");
-    //mSceneManager.change<SceneBodyBox>();
+    mSceneManager.change<SceneDataDisplacement>();
     
     mSceneManager.getTabBar()->loadSettings(kSettingsDir, kSettingsPrefix);
     mSceneManager.getTabBar()->setVisible(false);
@@ -178,7 +196,7 @@ void ofApp::update()
     if (mDebugCamUnit) {
         const float t = ofGetElapsedTimef();
         ofxEventMessage vm;
-        vm.setAddress(kOscAddrCaneraUnitVector);
+        vm.setAddress(kOscAddrCameraUnitVector);
         for (int i=0; i<kNumCameraunitVectors; i++) {
             ofVec2f v;
             v.x = ofSignedNoise(t, 0, i) + ofSignedNoise(t*9.8f, 0, i) * 0.5f  + ofSignedNoise(t*102.f, 0, i) * 0.25f;
