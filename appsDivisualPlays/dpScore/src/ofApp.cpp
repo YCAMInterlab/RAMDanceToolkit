@@ -8,6 +8,7 @@
 #include "dpScoreSceneDataSphere.h"
 #include "dpScoreSceneDataWave.h"
 #include "dpScoreSceneDataDisplacement.h"
+#include "dpScoreSceneDataBarcode.h"
 #include "dpScoreSceneBodyGlobe.h"
 #include "dpScoreSceneBodyScan.h"
 #include "dpScoreSceneBodyFlow.h"
@@ -39,12 +40,11 @@ using namespace dp::score;
 #if 0
 
 身体系 8/20
-箱庭系 10/20
+箱庭系 11/20
 
 スライダー
 プロッター*n
 ブロブ系
-テストパターン
 フォント系小
 フォント系大
 
@@ -80,6 +80,7 @@ void ofApp::setup()
     auto dataSphere = SceneBase::Ptr(new SceneDataSphere());
     auto dataDisplacement = SceneBase::Ptr(new SceneDataDisplacement());
     auto dataWave = SceneBase::Ptr(new SceneDataWave());
+    auto dataBarcode = SceneBase::Ptr(new SceneDataBarcode());
     
     auto bodyBox = SceneBase::Ptr(new SceneBodyBox());
     auto bodyRect = SceneBase::Ptr(new SceneBodyRect());
@@ -104,6 +105,7 @@ void ofApp::setup()
     mSceneManager.add(dataSphere);
     mSceneManager.add(dataWave);
     mSceneManager.add(dataDisplacement);
+    mSceneManager.add(dataBarcode);
     
     mSceneManager.add(bodyGlobe);
     mSceneManager.add(bodyScan);
@@ -125,7 +127,7 @@ void ofApp::setup()
     
     //mSceneManager.change(3);
     mSceneManager.change("black");
-    mSceneManager.change<SceneDataDisplacement>();
+    mSceneManager.change<SceneDataBarcode>();
     
     mSceneManager.getTabBar()->loadSettings(kSettingsDir, kSettingsPrefix);
     mSceneManager.getTabBar()->setVisible(false);

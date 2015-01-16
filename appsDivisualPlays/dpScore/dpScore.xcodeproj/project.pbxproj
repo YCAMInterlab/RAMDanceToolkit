@@ -65,6 +65,7 @@
 		D228B37E1A5FC2D8005F0404 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D228B3771A5FC2D8005F0404 /* README.md */; };
 		D228B3841A5FC95C005F0404 /* dpScoreEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3821A5FC95C005F0404 /* dpScoreEvent.cpp */; };
 		D24431111A68BD0D00574ACF /* dpScoreSceneDataSphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D244310F1A68BD0D00574ACF /* dpScoreSceneDataSphere.cpp */; };
+		D24431171A690F1E00574ACF /* dpScoreSceneDataBarcode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24431151A690F1E00574ACF /* dpScoreSceneDataBarcode.cpp */; };
 		D24C21BC1A49653D009D0796 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21961A49653D009D0796 /* IpEndpointName.cpp */; };
 		D24C21BD1A49653D009D0796 /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C219B1A49653D009D0796 /* NetworkingUtils.cpp */; };
 		D24C21BE1A49653D009D0796 /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C219C1A49653D009D0796 /* UdpSocket.cpp */; };
@@ -284,6 +285,8 @@
 		D228B3831A5FC95C005F0404 /* dpScoreEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreEvent.h; sourceTree = "<group>"; };
 		D244310F1A68BD0D00574ACF /* dpScoreSceneDataSphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneDataSphere.cpp; sourceTree = "<group>"; };
 		D24431101A68BD0D00574ACF /* dpScoreSceneDataSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataSphere.h; sourceTree = "<group>"; };
+		D24431151A690F1E00574ACF /* dpScoreSceneDataBarcode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneDataBarcode.cpp; sourceTree = "<group>"; };
+		D24431161A690F1E00574ACF /* dpScoreSceneDataBarcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataBarcode.h; sourceTree = "<group>"; };
 		D24C21961A49653D009D0796 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		D24C21971A49653D009D0796 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
 		D24C21981A49653D009D0796 /* NetworkingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingUtils.h; sourceTree = "<group>"; };
@@ -783,6 +786,8 @@
 				D27F2E5A1A67F01600913B14 /* dpScoreSceneDataCircle3D.h */,
 				D244310F1A68BD0D00574ACF /* dpScoreSceneDataSphere.cpp */,
 				D24431101A68BD0D00574ACF /* dpScoreSceneDataSphere.h */,
+				D24431151A690F1E00574ACF /* dpScoreSceneDataBarcode.cpp */,
+				D24431161A690F1E00574ACF /* dpScoreSceneDataBarcode.h */,
 			);
 			name = hakoniwa;
 			sourceTree = "<group>";
@@ -1095,6 +1100,7 @@
 				D228B3841A5FC95C005F0404 /* dpScoreEvent.cpp in Sources */,
 				D24C21C11A49653D009D0796 /* OscOutboundPacketStream.cpp in Sources */,
 				D2E2B73F1A4A4FB500570C58 /* tinyxml.cpp in Sources */,
+				D24431171A690F1E00574ACF /* dpScoreSceneDataBarcode.cpp in Sources */,
 				D24C21C51A49653D009D0796 /* ofxOscBundle.cpp in Sources */,
 				D24C21BF1A49653D009D0796 /* NetworkingUtilsWin.cpp in Sources */,
 				D2E2B7421A4A4FB500570C58 /* ofxXmlSettings.cpp in Sources */,
