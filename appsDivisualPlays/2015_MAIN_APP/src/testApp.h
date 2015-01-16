@@ -30,7 +30,7 @@
 #include "dpHakoniwaServoPendulum.h"
 #include "dpHakoVisStageCircle.h"
 #include "dpHakoVisServoPendulum.h"
-#include "dpHakoVisPlink_Prism.h"
+#include "dpHakoVisWorm.h"
 #include "dp3DDanceMap.h"
 #include "dpHakoVisVecLineCircle.h"
 #include "dpHakoniwaStruggle.h"
@@ -93,8 +93,8 @@ public:
     // stage
     dpHakoVisStageCircle                visStage;
     
-    // prism
-    dpHakoVisPLink_Prism              visPrism;
+    // worm
+    dpVisWorm             visWorm;
     
     // struggle
     dpHakoniwaStruggle hakoniwaStruggle;

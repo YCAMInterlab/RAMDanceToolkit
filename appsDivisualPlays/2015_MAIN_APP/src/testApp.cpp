@@ -40,7 +40,7 @@ void testApp::setup()
     
     sceneManager.addScene(visStage.getPtr());
     
-    sceneManager.addScene(visPrism.getPtr());
+    sceneManager.addScene(visWorm.getPtr());
     
     sceneManager.addScene(danceMap.getPtr());
     
