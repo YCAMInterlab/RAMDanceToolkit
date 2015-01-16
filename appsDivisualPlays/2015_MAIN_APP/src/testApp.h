@@ -23,11 +23,14 @@
 //ito Scenes
 #include "dpHakoniwaSand.h"
 
+//Miura Scenes
+#include "HakoniwaTheta.h"
+
 //Kezzar Scenes
 #include "dpHakoniwaServoPendulum.h"
 #include "dpHakoVisStageCircle.h"
 #include "dpHakoVisServoPendulum.h"
-#include "dpHakoVisPlink_Prism.h"
+#include "dpHakoVisWorm.h"
 #include "dp3DDanceMap.h"
 #include "dpHakoVisVecLineCircle.h"
 #include "dpHakoniwaStruggle.h"
@@ -79,7 +82,10 @@ public:
 	HakoniwaPLink_Prism			hakoniwaPlinkPrism;
 
 	hakoVisPLink_Laser			hakoVisPlinkLaser;
-    
+
+	//Theta
+	HakoniwaTheta				hakoVisTheta;
+
     // servo pendulum
     dpHakoniwaServoPendulum     hakoniwaServoPendulum;
     dpHakoVisServoPendulum      visServoPendulum;
@@ -87,8 +93,8 @@ public:
     // stage
     dpHakoVisStageCircle                visStage;
     
-    // prism
-    dpHakoVisPLink_Prism              visPrism;
+    // worm
+    dpVisWorm             visWorm;
     
     // struggle
     dpHakoniwaStruggle hakoniwaStruggle;

@@ -37,19 +37,27 @@ extern const int kFrameRate;
 extern const int kOscClientPort;
 
 extern const string kOscAddrChangeScene;
-extern const string kOscAddrPendulumVec2;
 
-extern const string kAddrVec2;
-extern const string kAddrVec2Arr;
-extern const string kAddrMotioner;
+extern const string kOscAddrCaneraUnitVector;
+extern const string kOscAddrCaneraUnitVectorTotal;
+extern const string kOscAddrCaneraUnitVectorFeatures;
+extern const string kOscAddrCaneraUnitVecContourBlob;
+
+extern const string kOscAddrMotioner;
 
 extern const string kSettingsDir;
 extern const string kSettingsPrefix;
+
+extern const int kNumCameraunitVectors;
 
 string demangle(const char* name);
 
 template <class T> string getClassName(const T& t);
 template <class T> string getClassName();
+
+float getLineUped(float length, int index, int total);
+
+float clamp(float f, float range = 1.f);
 
 float aligned(float f);
 

@@ -26,7 +26,7 @@ public:
         ramGetGUI().addButton("randomDiv");
         ramGetGUI().addToggle("extend", &isExtend);
         
-        mMotionExtractor.setupControlPanel(this,ofPoint(300,200));
+        mMotionExtractor.setupControlPanel(this);
         
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dp3DDanceMap::onPanelChanged);
     }

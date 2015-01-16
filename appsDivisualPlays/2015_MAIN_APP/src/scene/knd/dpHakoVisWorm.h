@@ -88,10 +88,10 @@ public:
     }
 };
 
-class dpHakoVisPLink_Prism : public ramBaseScene{
+class dpVisWorm : public ramBaseScene{
 public:
     
-    string getName() const{return "dpVisPLink_Prism";};
+    string getName() const{return "dpVisWorm";};
     
     void setupControlPanel(){
         
@@ -103,7 +103,7 @@ public:
         ramGetGUI().addToggle("isDrawLine", &isDrawLine);
     
         mMotionExtractor.setupControlPanel(this);
-        ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoVisPLink_Prism::onPanelChanged);
+        ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpVisWorm::onPanelChanged);
     }
     
     void setup(){
@@ -112,7 +112,7 @@ public:
         setupVbo();
         
         ramOscManager::instance().addReceiverTag(&mReceiver);
-        mReceiver.addAddress("/dp/cameraUnit/PLink_Prism/features");
+        mReceiver.addAddress("/dp/cameraUnit/Worm/features");
     }
     
     void setupVbo(){
@@ -200,7 +200,7 @@ public:
             ofxOscMessage m;
             mReceiver.getNextMessage(&m);
             
-            if(m.getAddress() == "/dp/cameraUnit/PLink_Prism/features"){
+            if(m.getAddress() == "/dp/cameraUnit/Worm/features"){
                 
                 int num = m.getArgAsInt32(0);
                 

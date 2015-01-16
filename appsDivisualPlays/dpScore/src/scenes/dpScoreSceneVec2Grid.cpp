@@ -26,7 +26,7 @@ void SceneVec2Grid::initialize()
     mUICanvas->setName(getName());
     mUICanvas->addLabel(getName());
     mUICanvas->addSpacer();
-    mUICanvas->addSlider("Sensor Scale", 0.f, 5.0f, &mSensorScale);
+    mUICanvas->addSlider("Sensor Scale", 0.f, 2.0f, &mSensorScale);
 }
 
 void SceneVec2Grid::shutDown()
@@ -55,7 +55,7 @@ void SceneVec2Grid::exit()
 
 void SceneVec2Grid::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kAddrVec2) {
+    if (m.getAddress() == kOscAddrCaneraUnitVector) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);
         mGridBuffer.push_back(mVec);
@@ -98,10 +98,9 @@ void SceneVec2Grid::draw()
         for (int i=0; i<mGridW/mGridStep; i++) {
             const int idx = j * mGridW/mGridStep + i;
             ofVec2f v = mGridBuffer.at(i);
-            float f = ofMap(v.y, -25.f, 25.f, -1.f, 1.f);
             mGridVertices.at(idx).x = i*mGridStep;
-            mGridVertices.at(idx).y = j*mGridStep * f * mSensorScale;
-            mGridVertices.at(idx).z = v.x * 15.f * mSensorScale;
+            mGridVertices.at(idx).y = j*mGridStep * v.y * 0.3f * mSensorScale;
+            mGridVertices.at(idx).z = v.x * 300.f * mSensorScale;
         }
     }
     mGridVbo.updateVertexData(&mGridVertices.at(0), mGridVertices.size());

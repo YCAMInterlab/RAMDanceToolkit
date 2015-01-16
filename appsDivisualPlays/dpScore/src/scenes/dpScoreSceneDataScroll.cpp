@@ -51,7 +51,7 @@ void SceneDataScroll::exit()
 
 void SceneDataScroll::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kAddrMotioner) {
+    if (m.getAddress() == kOscAddrMotioner) {
 
     }
 }

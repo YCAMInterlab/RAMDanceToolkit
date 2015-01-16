@@ -109,14 +109,18 @@ const int kFrameRate = 30;
 const int kOscClientPort = 10000;
 
 const string kOscAddrChangeScene = "/dp/score/changeScene";
-const string kOscAddrPendulumVec2 = "/dp/cameraUnit/pendulum/vector";
 
-const string kAddrVec2 = "/dp/score/vec2";
-const string kAddrVec2Arr = "/dp/score/vec2Arr";
-const string kAddrMotioner = "/dp/score/motioner";
+const string kOscAddrCaneraUnitVector = "/dp/cameraUnit/vector";
+const string kOscAddrCaneraUnitVectorTotal = "/dp/cameraUnit/vector/total";
+const string kOscAddrCaneraUnitVectorFeatures = "/dp/cameraUnit/features";
+const string kOscAddrCaneraUnitVecContourBlob = "/dp/cameraUnit/contour/blob";
+
+const string kOscAddrMotioner = "/dp/score/motioner";
 
 const string kSettingsDir = "settings/";
 const string kSettingsPrefix = "scoreUI-";
+
+extern const int kNumCameraunitVectors = 10;
 
 struct _handle {
     char* p;
@@ -131,6 +135,17 @@ string demangle(const char* name)
     _handle result(abi::__cxa_demangle(name, nullptr, nullptr, &status));
     
     return (status==0) ? result.p : name;
+}
+
+float clamp(float f, float range)
+{
+    return ofClamp(f, -range, range);
+}
+
+float getLineUped(float length,  int index, int total)
+{
+    const float step = length/(float)total;
+    return -length*0.5f + step*0.5f + step * (float)index;
 }
 
 float aligned(float f)

@@ -40,7 +40,7 @@ void testApp::setup()
     
     sceneManager.addScene(visStage.getPtr());
     
-    sceneManager.addScene(visPrism.getPtr());
+    sceneManager.addScene(visWorm.getPtr());
     
     sceneManager.addScene(danceMap.getPtr());
     
@@ -50,14 +50,14 @@ void testApp::setup()
     sceneManager.addScene(hakoniwaSand.getPtr());
     sceneManager.addScene(visSandStorm.getPtr());
     sceneManager.addScene(vecLineCircle.getPtr());
-    
-    sceneManager.addScene(danceMap.getPtr());
 
 	sceneManager.addScene(hakoniwaPlinkOil.getPtr());
 	sceneManager.addScene(hakoniwaPlinkLaser.getPtr());
 	sceneManager.addScene(hakoniwaPlinkPrism.getPtr());
 	sceneManager.addScene(hakoVisPlinkLaser.getPtr());
 
+	sceneManager.addScene(hakoVisTheta.getPtr());
+	
 	sceneManager.addScene(testSceneA.getPtr());
 	sceneManager.addScene(testSceneB.getPtr());
 	sceneManager.addScene(testSceneC.getPtr());

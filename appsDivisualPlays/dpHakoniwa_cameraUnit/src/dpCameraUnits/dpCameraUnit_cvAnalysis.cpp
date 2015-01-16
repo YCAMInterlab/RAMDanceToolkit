@@ -117,11 +117,10 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		for (int i = 0;i < mContFinder.getContours().size();i++){
 			ofRectangle rt = ofxCv::toOf(mContFinder.getBoundingRect(i));
 			bRectM.addIntArg(mContFinder.getLabel(i));
-			bRectM.addFloatArg(rt.x / width);
-			bRectM.addFloatArg(rt.y / height);
-			bRectM.addFloatArg(rt.width / width);
-			bRectM.addFloatArg(rt.height / height);
-
+			bRectM.addFloatArg(ofClamp(rt.x / width,-1.0,1.0));
+			bRectM.addFloatArg(ofClamp(rt.y / height,-1.0,1.0));
+			bRectM.addFloatArg(ofClamp(rt.width / width,-1.0,1.0));
+			bRectM.addFloatArg(ofClamp(rt.height / height,-1.0,1.0));
 
 			//Set Blobs
 			int cnt = 0;
@@ -132,8 +131,8 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			
 			for (int j = 0;j < mContFinder.getContour(i).size();j++){
 				ofVec2f pt = ofxCv::toOf(mContFinder.getContour(i)[j]);
-				blobM.addFloatArg(pt.x / width);
-				blobM.addFloatArg(pt.y / height);
+				blobM.addFloatArg(ofClamp(pt.x / width,-1.0,1.0));
+				blobM.addFloatArg(ofClamp(pt.y / height,-1.0,1.0));
 			}
 		}
 
@@ -186,7 +185,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		for (int64_t j = 0;j < res_y;j++){
 			for (int64_t i = 0;i < res_x;i++){
 				bool pix = (pixGray.getColor(width/res_x * i, height/res_y * j).r > 128);
-
+				debug_px.push_back(pix);
 				int64_t tg = int64_t(pix) << (Pixelcounter % 64);
 				pixelInt = pixelInt | tg;
 				Pixelcounter++;
@@ -236,13 +235,13 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			feat.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/features");
 			feat.addIntArg(mOptFlow.getFeatures().size());
 			for (int i = 0;i < mOptFlow.getFeatures().size();i++){
-				feat.addFloatArg(mOptFlow.getFeatures()[i].x / width);
-				feat.addFloatArg(mOptFlow.getFeatures()[i].y / height);
+				feat.addFloatArg(ofClamp(mOptFlow.getFeatures()[i].x / width,-1.0,1.0));
+				feat.addFloatArg(ofClamp(mOptFlow.getFeatures()[i].y / height,-1.0,1.0));
 				if (mOpt_previous.size() > i){
-					feat.addFloatArg((mOptFlow.getFeatures()[i].x -
-									  mOpt_previous[i].x) / width);
-					feat.addFloatArg((mOptFlow.getFeatures()[i].y -
-									  mOpt_previous[i].y) / height);
+					feat.addFloatArg(ofClamp((mOptFlow.getFeatures()[i].x -
+									  mOpt_previous[i].x) / width,-1.0,1.0));
+					feat.addFloatArg(ofClamp((mOptFlow.getFeatures()[i].y -
+									  mOpt_previous[i].y) / height,-1.0,1.0));
 
 				}else{
 					feat.addFloatArg(0.0);
@@ -309,6 +308,17 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 	if (mEnableOptFlow)			mOptFlow.draw();
 	if (mEnableOptFlowFarne)	mOptFlowFarne.draw();
 
+	ofSetColor(255);
+
+	if (mEnablePixelate){
+		for (int j = 0;j < mParamPixelate_ResY;j++){
+			for (int i = 0;i < mParamPixelate_ResX;i++){
+				if (debug_px[j*mParamPixelate_ResX+i]){
+					ofRect(i*10, j*10, 10, 10);
+				}
+			}
+		}
+	}
 
 	if (mEnableOptFlow){
 		ofSetColor(255, 0, 0);
