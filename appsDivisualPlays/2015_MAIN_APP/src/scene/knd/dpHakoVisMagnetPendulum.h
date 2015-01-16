@@ -20,12 +20,15 @@ public:
         for(int i = 0; i < PT_MAX; i++){
             mVecs.push_back(ofPoint(0,0,0));
         }
+        
+        mPos.imSet(mOrigin);
     }
     
     void record(ofPoint pt){
    
-        mPos = pt + mOrigin;
-        mVecs.push_back(pt);
+        mPos.set(pt + mOrigin);
+        mVecs.push_back(pt + mOrigin);
+        isRecordOnce = true;
     
     }
     
@@ -53,12 +56,15 @@ public:
     
     void update(){
         
-        if(mVecs.empty() == false && isRecord == false){
-            mPos = mOrigin;
-            mPos += mVecs[mPlaybackCounter];
+        if(mVecs.empty() == false && isRecord == false && isRecordOnce){
+      
+            mPos.set(mVecs[mPlaybackCounter]);
             mPlaybackCounter++;
             mPlaybackCounter %= mVecs.size();
+            
         }
+        
+        mPos.update();
     }
     
     void draw(){
@@ -67,9 +73,11 @@ public:
         if(isRecord)ofSetColor(dpColor::MAIN_COLOR);
         else ofSetColor(255,255,255);
 
-        ofCircle(mPos,mRad);
+      //  ofSetColor(255,255,255);
+        ofFill();
+        ofCircle(mPos.x,mPos.y,mRad);
         ofPopStyle();
-        
+      //  cout << mPos.x << endl;
     }
     
     ofPoint getPos(){
@@ -81,7 +89,7 @@ private:
     vector<ofPoint>mVecs;
     
     ofPoint mOrigin;
-    ofPoint mPos;
+    KezSlidePoint mPos;
     
     int mPlaybackCounter = 0;
     int mRecordCounter = 0;
@@ -89,12 +97,16 @@ private:
     float mRad = 20.0;
     
     bool isRecord = false;
+    bool isRecordOnce = false;
 };
 
 class dpHakoVisMagnetPendulum : public ramBaseScene{
 public:
     string getName() const{return "dpVisMagnetPendulum";}
-    void setupControlePanel(){}
+    
+    void setupControlPanel(){
+        ramGetGUI().addSlider("scale",50,500,&mScale);
+    }
     void setup(){
         
         float offsetX = 300;
@@ -133,8 +145,11 @@ public:
             mReceiver.getNextMessage(&m);
             
             if(m.getAddress() == "/dp/cameraUnit/MagnetPendulum/contour/boundingRect"){
-                record(ofPoint(m.getArgAsFloat(2) * 100.0,
-                       m.getArgAsFloat(3) * 100.0));
+                
+                if(m.getArgAsInt32(0) != 0){
+                mCurrentVec.set(ofPoint((m.getArgAsFloat(2) + m.getArgAsFloat(4) * 0.5) * mScale,
+                                        (m.getArgAsFloat(3) + m.getArgAsFloat(5) * 0.5) * mScale));
+                }
             }
         }
     }
@@ -142,7 +157,7 @@ public:
     void update(){
         
         receiveOsc();
-    
+        record(mCurrentVec);
         if(ofGetFrameNum() % dpRecordGridCircle::PT_MAX == 0)changeRecordTarget();
         
      //   record(ofPoint(ofGetMouseX(),ofGetMouseY()));
@@ -154,10 +169,7 @@ public:
     }
     
     void draw(){
-        for(auto &v:mCircles){
-            v.draw();
-        }
-        
+    
         for(int i = 1; i < mDivX; i++){
              //ofLine(mCircles[i - 1].getPos(),mCircles[i].getPos());
             for(int j = 0; j < mDivY; j++){
@@ -174,16 +186,25 @@ public:
         ofNoFill();
         ofCircle(mCircles[mRecordTargetNum].getPos(),50);
         ofPopStyle();
+
+       for(auto &v:mCircles){
+           v.draw();
+        }
+        
     }
     
 private:
-    static const int LINE_NUM = 10;
+ 
     vector<dpRecordGridCircle>mCircles;
     int mDivX = 3;
     int mDivY = 2;
     int mRecordTargetNum = 0;
     
     ramOscReceiveTag mReceiver;
+    
+    float mScale = 100.0;
+    
+    ofPoint mCurrentVec;
 };
 
 #endif

@@ -52,6 +52,8 @@ void testApp::setup()
     sceneManager.addScene(vecLineCircle.getPtr());
     
     sceneManager.addScene(visMagnetPendulum.getPtr());
+    
+    sceneManager.addScene(hakoVisTheta.getPtr());
 
 	sceneManager.addScene(hakoniwaPlinkOil.getPtr());
 	sceneManager.addScene(hakoniwaPlinkLaser.getPtr());
@@ -60,7 +62,7 @@ void testApp::setup()
 	sceneManager.addScene(hakoVisPlinkOil.getPtr());
 	sceneManager.addScene(hakoVisPlinkPrism.getPtr());
 
-	sceneManager.addScene(hakoVisTheta.getPtr());
+	
 	
 	sceneManager.addScene(testSceneA.getPtr());
 	sceneManager.addScene(testSceneB.getPtr());
