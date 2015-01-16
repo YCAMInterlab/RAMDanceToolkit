@@ -20,7 +20,7 @@ void SceneVec2Clocks::initialize()
     mUICanvas->setName(getName());
     mUICanvas->addLabel(getName());
     mUICanvas->addSpacer();
-    mUICanvas->addSlider("Sensor Scale", 0.f, 5.0f, &mSensorScale);
+    mUICanvas->addSlider("Sensor Scale", 0.f, 2.0f, &mSensorScale);
 }
 
 void SceneVec2Clocks::shutDown()
@@ -45,10 +45,12 @@ void SceneVec2Clocks::exit()
 
 void SceneVec2Clocks::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kAddrVec2) {
-        mVec.x = m.getArgAsFloat(0);
-        mVec.y = m.getArgAsFloat(1);
+    if (m.getAddress() == kOscAddrCaneraUnitVector) {
+        mVec.x = clamp(m.getArgAsFloat(0));
+        mVec.y = clamp(m.getArgAsFloat(1));
+        mClockBuffer.push_back(mVec.interpolate(mPrevVec, 0.5f));
         mClockBuffer.push_back(mVec);
+        mPrevVec = mVec;
         while (mClockBuffer.size()>_clockNumX * _clockNumY) {
             mClockBuffer.pop_front();
         }
@@ -59,50 +61,52 @@ void SceneVec2Clocks::draw()
 {
     ofSetCircleResolution(64);
     
-    const float step = 10.f;
-    ofSetColor(255, 50);
+    const float step{20.f};
+    ofSetColor(255, 70);
+    ofSetLineWidth(1.f);
     
     for (int i=0; i<=kW/step; i++) {
-        alignedLine(i*step, 20.f, i*step, kH-20.f);
+        alignedLine(i*step, 60.f, i*step, kH-60.f);
     }
     
-    for (int j=2; j<kH/step-1; j++) {
+    for (int j=3; j<kH/step-2; j++) {
         alignedLine(0.f, j*step, kW, j*step);
     }
     
-    const float circleStep = 80.f;
+    const float circleStep{120.f};
+    const float r{40.f};
+    
     ofSetColor(255, 255);
     for (int j=0; j<_clockNumY; j++) {
         ofPushMatrix();
-        ofTranslate(0.f, 30.f + j * circleStep + 30.f, 0.f);
+        ofTranslate(0.f, 30.f + j * circleStep + 90.f, 0.f);
         
         for (int i=0; i<_clockNumX; i++) {
             ofPushMatrix();
-            ofTranslate(30.f + i * circleStep + 10.f, 0.f, 0.f);
+            ofTranslate(30.f + i * circleStep + 30.f, 0.f, 0.f);
             
-            ofSetLineWidth(1.f);
-            ofSetColor(255, 150);
-            ofCircle(0.f, 0.f, 30.f);
+            ofSetLineWidth(1.5f);
+            ofSetColor(150);
+            ofCircle(0.f, 0.f, r);
             
-            const int idx = (_clockNumX * _clockNumY - 1) - (i + j * _clockNumX);
+            const int idx{(_clockNumX * _clockNumY - 1) - (i + j * _clockNumX)};
             
             (i == 0 && j == 0) ? ofSetColor(color::kMain, 255) : ofSetColor(ofColor::white, 255);
             
             if (idx < mClockBuffer.size()) {
                 ofVec2f v = mClockBuffer.at(idx);
                 //v.normalize();
-                const float mult = kH / 150.f * mSensorScale;
+                const float mult{r * 2.f * mSensorScale};
                 
                 ofSetLineWidth(1.5f);
                 ofLine(ofVec2f::zero(), v * mult);
-                //ofLine(ofVec2f::zero(), v * 30.f);
             }
             
-            ofSetColor(255, 100);
+            ofSetColor(150);
             ofSetLineWidth(1.f);
-            const float size = 5.f;
-            alignedLine(-size, 0.5f, size, 0.5f);
-            alignedLine(0.5f, -size, 0.5f, size);
+            const float size{10.f};
+            alignedLine(-size, 0.f, size, 0.f);
+            alignedLine(0.f, -size, 0.f, size);
             
             ofPopMatrix();
         }

@@ -52,7 +52,7 @@ void SceneVec2Plotter::exit()
 
 void SceneVec2Plotter::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kAddrVec2) {
+    if (m.getAddress() == kOscAddrCaneraUnitVector) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);
         mCircleBuffer.push_back(mVec);
@@ -67,7 +67,8 @@ void SceneVec2Plotter::draw()
     ofPushStyle();
     ofSetLineWidth(1.f);
     ofPushMatrix();
-    const float mult = kH / 40.f * mSensorScale;
+    const float halfH{(kH-50.f) * 0.5f};
+    const float mult{halfH * mSensorScale};
     ofVec2f v = mVec * mult;
     
     glPointSize(2.f);
@@ -80,35 +81,34 @@ void SceneVec2Plotter::draw()
     
     ofSetColor(255, 200);
     ofSetLineWidth(1.f);
-    const float step = (kW-10) / 382;
+    const float step{(kW-10) / 382.f};
     for (int i=2; i<=380; i++) {
-        int height = 5;
+        int height{5};
         if (i%10==0) height = 8;
         alignedLine(5.f+i*step, 25.f, 5.f+i*step, 25.f+height);
         alignedLine(5.f+i*step, kH - 5.f, 5.f+i*step, kH - 5.f - height);
     }
     
     
-    const float stepY = (kH - 30.f) / 175;
+    const float stepY{(kH - 30.f) / 175};
     for (int i=2; i<=173; i++) {
-        int width = 5.f;
+        int width{5};
         if (i%10 == 0) width = 8;
         alignedLine(5.f, 25.f+i*stepY, 5.f+width, 25.f+i*stepY);
         alignedLine(kW - 5.f, 25.f+i*stepY, kW - 5.f - width, 25.f+i*stepY);
     }
     
-    
     ofSetColor(255, 255);
-    ofTranslate(kW * 0.5f, kH * 0.5f);
+    alignedTranslate(kW * 0.5f, kH * 0.5f);
     
     for (int i=mCircleBuffer.size()-1; i>=0; i--) {
-        auto v = mCircleBuffer.at(i) * mult;
-        const float xr = (kW-30.f)*0.5f;
-        const float yr = (kH-60.f)*0.5f;
+        ofVec2f v{mCircleBuffer.at(i) * mult};
+        const float xr{(kW-30.f)*0.5f};
+        const float yr{(kH-60.f)*0.5f};
         v.x = ofClamp(v.x, -xr, xr);
         v.y = ofClamp(v.y, -yr+10.f, yr+10.f);
         mCircleVertices.at(i) = v;
-        const float a = i / (float)mCircleBuffer.size();
+        const float a{i / (float)mCircleBuffer.size()};
         //const float a = 1.f;
         mCircleColors.at(i).set(1.f, 1.f, 1.f, a);
     }
@@ -120,8 +120,7 @@ void SceneVec2Plotter::draw()
     
     for (int i=mCircleBuffer.size()-1; i>=0; i--) {
         mCircleVertices.at(i) = mCircleBuffer.at(i) * mult;
-        const float a = i / (float)mCircleBuffer.size();
-        //const float a = 0.5f;
+        const float a{i / (float)mCircleBuffer.size()};
         mCircleColors.at(i).set(1.f, 1.f, 1.f, a * 0.5f);
     }
     mCircleVbo.updateColorData(&mCircleColors.at(0), mCircleColors.size());
@@ -134,14 +133,9 @@ void SceneVec2Plotter::draw()
     ofPushStyle();
     ofSetLineWidth(2.f);
     ofSetColor(color::kMain, 255);
-    //ofLine(v.x+kW*0.5f, 40.f, v.x+kW*0.5f, 50.f);
-    //ofLine(v.x+kW*0.5f, kH-30.f, v.x+kW*0.5f, kH-20.f);
-    //ofLine(20.f, v.y+kH*0.5f, 30.f, v.y+kH*0.5f);
-    //ofLine(kW-30.f, v.y+kH*0.5f, kW-20.f, v.y+kH*0.5f);
-    
-    const float size = 10.f;
-    ofLine(v.x+kW*0.5f, v.y+kH*0.5f-size, v.x+kW*0.5f, v.y+kH*0.5f+size);
-    ofLine(v.x+kW*0.5f-size, v.y+kH*0.5f, v.x+kW*0.5f+size, v.y+kH*0.5f);
+    const float size{10.f};
+    ofLine(v.x+kW*0.5f-5.f, v.y+kH*0.5f-size, v.x+kW*0.5f-5.f, v.y+kH*0.5f+size);
+    ofLine(v.x+kW*0.5f-size-5.f, v.y+kH*0.5f, v.x+kW*0.5f+size-5.f, v.y+kH*0.5f);
     ofPopStyle();
 }
 

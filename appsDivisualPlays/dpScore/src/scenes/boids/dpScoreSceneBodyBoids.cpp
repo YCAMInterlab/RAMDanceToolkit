@@ -66,7 +66,7 @@ void SceneBodyBoids::update(ofxEventMessage& m)
     
     if (t-mEnterTime<DELAY) return;
     
-    if (m.getAddress() == kAddrMotioner && mActor) {
+    if (m.getAddress() == kOscAddrMotioner && mActor) {
         
         mParticleController.setSpeed(easeInSine(mSpd));
         

@@ -20,10 +20,22 @@
 #include "ofMain.h"
 #include "ramMain.h"
 
+//ito Scenes
+#include "dpHakoniwaSand.h"
+
+//Miura Scenes
+#include "HakoniwaTheta.h"
+
+//Kezzar Scenes
 #include "dpHakoniwaServoPendulum.h"
-#include "dpHakoVisBug.h"
+#include "dpHakoVisStageCircle.h"
 #include "dpHakoVisServoPendulum.h"
 #include "dpHakoVisPlink_Prism.h"
+#include "dp3DDanceMap.h"
+#include "dpHakoVisVecLineCircle.h"
+#include "dpHakoniwaStruggle.h"
+#include "dpHakoVisStruggle.h"
+#include "dpHakoVisSandStorm.h"
 
 //SHEEP Scenes
 #include "testScenes.h"
@@ -70,15 +82,28 @@ public:
 	HakoniwaPLink_Prism			hakoniwaPlinkPrism;
 
 	hakoVisPLink_Laser			hakoVisPlinkLaser;
-    
+
+	//Theta
+	HakoniwaTheta				hakoVisTheta;
+
     // servo pendulum
     dpHakoniwaServoPendulum     hakoniwaServoPendulum;
     dpHakoVisServoPendulum      visServoPendulum;
     
     // stage
-    dpHakoVisBug                visStage;
+    dpHakoVisStageCircle                visStage;
     
     // prism
     dpHakoVisPLink_Prism              visPrism;
     
+    // struggle
+    dpHakoniwaStruggle hakoniwaStruggle;
+    dpHakoVisStruggle visStruggle;
+    
+    // sandstorm
+    dpHakoniwaSand hakoniwaSand;
+    dpHakoVisSandStorm visSandStorm;
+    dpHakoVisVecLineCircle vecLineCircle;
+
+    dp3DDanceMap danceMap;
 };

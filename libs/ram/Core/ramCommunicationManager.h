@@ -91,6 +91,7 @@ private:
 
 	//Assign
 	vector<ramCommunicateAssign> assigns;
+    vector<shared_ptr<ofxOscSender> > senders;
 };
 
 struct ramCommunicateAssign{
