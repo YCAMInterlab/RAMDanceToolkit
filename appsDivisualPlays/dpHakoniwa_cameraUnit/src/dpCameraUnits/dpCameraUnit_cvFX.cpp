@@ -25,6 +25,8 @@ dpCameraUnit_cvFX::dpCameraUnit_cvFX(){
 	mGui.addRangeSlider("CannyThr", 0.0, 255.0, &mParam_Canny_Thr1, &mParam_Canny_Thr2);
 	mGui.addSpacer();
 	mGui.addToggle("FrameDiff", &mEnableFrameDiff);
+    mGui.addToggle("Threshold", &mEnableThreshold);
+    mGui.addSlider("ThrVal", 0.0, 255.0, &mParam_Threshold);
 	mGui.addToggle("AdaptiveThreshold", &mEnableAdaptiveThreshold);
 	mGui.addIntSlider("blockSize", 3, 255, &mParam_adpThreshold_blockSize);
 	mGui.addIntSlider("offset", 3, 255, &mParam_adpThreshold_offset);
@@ -40,8 +42,6 @@ dpCameraUnit_cvFX::dpCameraUnit_cvFX(){
 	mGui.addToggle("Erode", &	mEnableErode);
 	mGui.addIntSlider("NumProc", 0, 10, &mParam_Erode_num);
 
-//	mGui.addToggle("Threshold", &mEnableThreshold);
-//	mGui.addSlider("ThrVal", 0.0, 255.0, &mParam_Threshold);
 
 	mGui.autoSizeToFitWidgets();
 
@@ -105,7 +105,6 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 		}
 
 		if (mEnableBlur)		ofxCv::blur(mGraySource, mGraySource, mParam_Blur);
-		if (mEnableThreshold)	ofxCv::threshold(mGraySource, mGraySource, mParam_Threshold);
 		if (mEnableInvert)		ofxCv::invert(mGraySource);
 		if (mEnableCanny)		ofxCv::Canny(mGraySource, mGraySource, mParam_Canny_Thr2, mParam_Canny_Thr1);
 
@@ -113,6 +112,7 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 			ofxCv::absdiff(mGraySource, mGraySource_forDiff, mGraySource_forDiff);
 			ofxCv::swap(mGraySource, mGraySource_forDiff);
 		}
+        if (mEnableThreshold)	ofxCv::threshold(mGraySource, mGraySource, mParam_Threshold);
 		if (mEnableAdaptiveThreshold) useAdaptiveThreshold(mGraySource,
 														   mGraySource,
 														   mParam_adpThreshold_blockSize,
