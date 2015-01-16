@@ -42,6 +42,13 @@ public:
         mGrids[LEFT].setRot(ofPoint(0,90,0));
     }
     
+    
+    void extendEach(int width,int height, int i, int j){
+        for(auto &v:mGrids){
+            v.extendEach(width,height,i,j);
+        }
+    }
+    
     void extend(){
         for(auto &v:mGrids){
             v.extend();
