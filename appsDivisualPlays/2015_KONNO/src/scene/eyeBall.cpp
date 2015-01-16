@@ -93,6 +93,13 @@ void eyeBall::setupControlPanel(){
 
 void eyeBall::update(){
     
+    /*=== update ===*/
+    motionExtractor.update();
+    
+    //oscを送る数を制限
+    if(ofGetFrameNum() % 3 == 0){
+
+    
     //-------------
     //Auto Turn
     if(autoTurn == true){
@@ -124,9 +131,6 @@ void eyeBall::update(){
     }
     //-------------
     
-    /*=== update ===*/
-    motionExtractor.update();
-    
     /*=== OSC Send Example ===*/
     ofxOscMessage m;
     m.setAddress("/dp/hakoniwa/eyeBall");
@@ -134,6 +138,8 @@ void eyeBall::update(){
     m.addIntArg(servoX_val);
     m.addIntArg(servoY_val);
     sender.sendMessage(m);
+    
+    }
     
 }
 
