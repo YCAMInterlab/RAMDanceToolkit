@@ -1,21 +1,21 @@
 //
-//  dpScoreSceneDataCircle3D.cpp
+//  dpScoreSceneDataSphere.cpp
 //  dpScore
 //
-//  Created by YoshitoONISHI on 1/15/15.
+//  Created by YoshitoONISHI on 1/16/15.
 //
 //
 
-#include "dpScoreSceneDataCircle3D.h"
+#include "dpScoreSceneDataSphere.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-SceneDataCircle3D::Circle::Circle()
+SceneDataSphere::Circle::Circle()
 {
     data.assign(kResolution, ofVec2f::zero());
 }
 
-void SceneDataCircle3D::Circle::update(const ofVec2f& v)
+void SceneDataSphere::Circle::update(const ofVec2f& v)
 {
     data.push_back(ofVec2f(clamp(v.x), clamp(v.y)));
     while (data.size() > kResolution) {
@@ -23,7 +23,7 @@ void SceneDataCircle3D::Circle::update(const ofVec2f& v)
     }
 }
 
-void SceneDataCircle3D::Circle::draw()
+void SceneDataSphere::Circle::draw()
 {
     const float step = mRadius * TWO_PI / kResolution;
     for (int i=0; i<data.size(); i++) {
@@ -31,32 +31,37 @@ void SceneDataCircle3D::Circle::draw()
         if (v.length() < 0.01f) continue;
         
         ofPushMatrix();
+        ofRotateY(ofGetElapsedTimef()*0.5f);
+        
         const float angle{360.f / kResolution * i};
         const float radian{::atan2f(v.y, v.x)};
-        ofRotateZ(angle);
-        ofTranslate(0.f, mRadius);
-        ofRotateX(ofRadToDeg(radian));
         
-        const float h{-v.length() * mRadius};
+        ofRotateZ(angle);
+        ofRotateX(ofRadToDeg(radian));
+        ofTranslate(0.f, mRadius);
+        
+        ofColor c;
+        if (i == (data.size()-1)) {
+            c = color::kMain;
+            ofSetLineWidth(4.f);
+        }
+        else {
+            c = ofColor::white;
+            ofSetLineWidth(2.f);
+        }
+        const float h{-v.length() * mRadius * 0.5f};
         ofFill();
-        ofSetColor(128, 128);
+        ofSetColor(c*0.5f, 128);
         ofRect(-step*0.5f, 0.f, step, h);
         ofNoFill();
-        ofSetLineWidth(2.f);
-        ofSetColor(ofColor::white, 128);
+        ofSetColor(c, 128);
         ofRect(-step*0.5f, 0.f, step, h);
         ofPopMatrix();
     }
-    ofPushMatrix();
-    alignedTranslate(0.f, mRadius - 50.f);
-    ofSetColor(color::kMain, 255);
-    ofSetLineWidth(2.f);
-    alignedRect(-step*0.5f, 0.f, step, 100.f);
-    ofPopMatrix();
 }
 
 #pragma mark ___________________________________________________________________
-void SceneDataCircle3D::initialize()
+void SceneDataSphere::initialize()
 {
     dpDebugFunc();
     
@@ -66,7 +71,7 @@ void SceneDataCircle3D::initialize()
     mUICanvas->addSpacer();
 }
 
-void SceneDataCircle3D::shutDown()
+void SceneDataSphere::shutDown()
 {
     dpDebugFunc();
     
@@ -76,7 +81,7 @@ void SceneDataCircle3D::shutDown()
     }
 }
 
-void SceneDataCircle3D::enter()
+void SceneDataSphere::enter()
 {
     dpDebugFunc();
     
@@ -86,12 +91,12 @@ void SceneDataCircle3D::enter()
     }
 }
 
-void SceneDataCircle3D::exit()
+void SceneDataSphere::exit()
 {
     dpDebugFunc();
 }
 
-void SceneDataCircle3D::update(ofxEventMessage& m)
+void SceneDataSphere::update(ofxEventMessage& m)
 {
     if (m.getAddress() == kOscAddrCameraUnitVector) {
         
@@ -104,12 +109,10 @@ void SceneDataCircle3D::update(ofxEventMessage& m)
     }
 }
 
-void SceneDataCircle3D::draw()
+void SceneDataSphere::draw()
 {
     mCam.begin();
     ofPushMatrix();
-    ofRotateX(-40.f);
-    ofRotateZ(-10.f);
     for (int i=0; i<mCircles.size(); i++) {
         ofPushMatrix();
         ofTranslate(getLineUped(kW, i, mCircles.size()), 0.f);

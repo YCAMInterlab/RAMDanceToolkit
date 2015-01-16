@@ -28,7 +28,14 @@ public:
     void draw() override;
     
 private:
-    
+    ofShader mShader;
+    ofEasyCam mCam;
+    ofVboMesh mSphereMesh;
+    const float kRadius{300.f};
+    const int kResolution{50};
+    float mFreq{30.f};
+    float mAmp{20.f};
+    ofVec3f mSpeed{0.09f, 0.12f};
 };
 
 DP_SCORE_NAMESPACE_END

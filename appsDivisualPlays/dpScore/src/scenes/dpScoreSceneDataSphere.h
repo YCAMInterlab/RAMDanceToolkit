@@ -1,22 +1,22 @@
 //
-//  dpScoreSceneDataCircle3D.h
+//  dpScoreSceneDataSphere.h
 //  dpScore
 //
-//  Created by YoshitoONISHI on 1/15/15.
+//  Created by YoshitoONISHI on 1/16/15.
 //
 //
 
-#ifndef __dpScore__dpScoreSceneDataCircle3D__
-#define __dpScore__dpScoreSceneDataCircle3D__
+#ifndef __dpScore__dpScoreSceneDataSphere__
+#define __dpScore__dpScoreSceneDataSphere__
 
 #include "dpScoreSceneBase.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-class SceneDataCircle3D final : public SceneBase {
+class SceneDataSphere final : public SceneBase {
 public:
-    explicit SceneDataCircle3D() = default;
-    virtual ~SceneDataCircle3D() = default;
+    explicit SceneDataSphere() = default;
+    virtual ~SceneDataSphere() = default;
     
     void initialize() override;
     void shutDown() override;
@@ -33,7 +33,7 @@ private:
         void update(const ofVec2f& v);
         void draw();
         
-        float mRadius{270.f};
+        float mRadius{320.f};
         const int kResolution = 200;
         deque<ofVec2f> data;
     };
@@ -45,4 +45,5 @@ private:
 
 DP_SCORE_NAMESPACE_END
 
-#endif /* defined(__dpScore__dpScoreSceneDataCircle3D__) */
+
+#endif /* defined(__dpScore__dpScoreSceneDataSphere__) */
