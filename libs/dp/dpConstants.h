@@ -22,8 +22,13 @@ static const int SINGLE_SCREEN_WIDTH = 1920;
 static const int SINGLE_SCREEN_HEIGHT = 1080;
 #endif
 
+#if defined(FLOOR_APP)
+static const int APP_WIDTH = 1920;
+static const int APP_HEIGHT = 1200;
+#else
 static const int APP_WIDTH = SINGLE_SCREEN_WIDTH * 2;
 static const int APP_HEIGHT = SINGLE_SCREEN_HEIGHT;
+#endif
 
 static const int NUM_SCREEN_POSITIONS = 2;
 static const ofVec2f SCREEN_POSITIONS[NUM_SCREEN_POSITIONS] = {

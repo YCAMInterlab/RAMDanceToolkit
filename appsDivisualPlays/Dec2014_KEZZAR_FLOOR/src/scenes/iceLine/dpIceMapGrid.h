@@ -10,7 +10,7 @@
 #define RAMDanceToolkit_dpIceMapController_h
 
 #include "dpIceMapFace.h"
-#include "dpConstants.h"
+#include "KezConstants.h"
 class dpIceMapGrid{
 public:
     

@@ -36,6 +36,7 @@
 #include "dpHakoniwaStruggle.h"
 #include "dpHakoVisStruggle.h"
 #include "dpHakoVisSandStorm.h"
+#include "dpHakoVisMagnetPendulum.h"
 
 //SHEEP Scenes
 #include "testScenes.h"
@@ -111,4 +112,6 @@ public:
     dpHakoVisVecLineCircle vecLineCircle;
 
     dp3DDanceMap danceMap;
+    
+    dpHakoVisMagnetPendulum visMagnetPendulum;
 };

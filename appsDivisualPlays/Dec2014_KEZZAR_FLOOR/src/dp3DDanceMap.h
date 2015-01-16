@@ -13,6 +13,7 @@
 #include "ramMotionExtractor.h"
 #include "KezSlidePoint.h"
 #include "dpConstants.h"
+#include "ramFloorQuadWarper.h"
 
 class dp3DDanceMap : public ramBaseScene{
 public:
@@ -169,6 +170,7 @@ public:
         
         ofSetLineWidth(mLineWidth);
         
+        ramFloorQuadWarper::instance().begin();
         ramBeginCamera();
         
         ofPushMatrix();
@@ -176,6 +178,9 @@ public:
         mCube.draw();
         ofPopMatrix();
         ramEndCamera();
+        
+        ramFloorQuadWarper::instance().end();
+        ramFloorQuadWarper::instance().draw();
     }
     
     void onPanelChanged(ofxUIEventArgs &e){

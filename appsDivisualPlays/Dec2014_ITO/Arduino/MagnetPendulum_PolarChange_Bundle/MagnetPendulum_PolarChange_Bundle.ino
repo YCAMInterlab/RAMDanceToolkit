@@ -37,7 +37,7 @@ void loop() {
        bundle.fill(_udp.read());
      }
      
-    OSCMessage message = bundle.getOSCMessage("/dp/hakoniwa/magnetsLED");
+    OSCMessage message = bundle.getOSCMessage("/dp/hakoniwa/magpen");
      
      if(!message.hasError()) {
        

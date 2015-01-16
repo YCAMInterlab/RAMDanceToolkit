@@ -17,17 +17,19 @@
 
 #include "testApp.h"
 
-#include "dpHakoniwaStruggle.h"
-dpHakoniwaStruggle hakoniwa;
 
-#include "dpHakoVisStruggle.h"
-dpHakoVisStruggle vis;
+/*!
+ Scenes
+ */
 
-#include "dpHakoniwaSand.h"
-dpHakoniwaSand sand;
+//HakoniwaOscTest hakoniwaOscTest;
+//HakoniwaColorOfWater hakoniwaColorOfWater;
 
-#include "dpHakoniwaMagnetPendulum.h"
-dpHakoniwaMagnetPendulum magPendulum;
+#include "dp3DDanceMap.h"
+dp3DDanceMap mDanceMap;
+
+#include "dpHakoVisIceMap.h"
+dpHakoVisIceMap mIceMap;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -35,27 +37,24 @@ void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
-
-
+	
 	/// ram setup
 	// ------------------
-	ramInitialize(10000);
-
+	ramInitialize(10000, true);
 	
-	/// register myScene to ramSceneManager
-	/// - EmptyScene::update, draw, and other method will be triggerd by ramSceneManager
-	/// - the scene added to ramSceneManager will appeard on GUI automaticaly
+	/// scenes setup
+	// ------------------
 	ramSceneManager& sceneManager = ramSceneManager::instance();
-	sceneManager.addScene(hakoniwa.getPtr());
-    sceneManager.addScene(vis.getPtr());
-    sceneManager.addScene(sand.getPtr());
-    sceneManager.addScene(magPendulum.getPtr());
+
+    sceneManager.addScene(mDanceMap.getPtr());
+    sceneManager.addScene(mIceMap.getPtr());
+    
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-	
+
 }
 
 //--------------------------------------------------------------
@@ -70,94 +69,95 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(const ramActor &actor)
 {
-
+	
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(const ramRigidBody &rigid)
 {
-
+	
 }
 
 
 #pragma mark - ram Events
+
 //--------------------------------------------------------------
 void testApp::onActorSetup(const ramActor &actor)
 {
-	
+
 }
 
 //--------------------------------------------------------------
 void testApp::onActorExit(const ramActor &actor)
 {
-	
+
 }
 
 //--------------------------------------------------------------
 void testApp::onRigidSetup(const ramRigidBody &rigid)
 {
-	
+
 }
 
 //--------------------------------------------------------------
 void testApp::onRigidExit(const ramRigidBody &rigid)
 {
-	
+
 }
 
 
-#pragma mark - of Events
+
+#pragma mark - of Event
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::keyReleased(int key)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::windowResized(int w, int h)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::gotMessage(ofMessage msg)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo)
 {
-
+	
 }
-
