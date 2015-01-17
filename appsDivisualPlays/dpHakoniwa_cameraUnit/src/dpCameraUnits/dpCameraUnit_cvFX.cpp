@@ -258,6 +258,7 @@ void dpCameraUnit_cvFX::useAdaptiveThreshold(ofImage &src, ofImage &dst, int blo
 }
 
 void dpCameraUnit_cvFX::savePreset(string hakoniwaName){
+	if (hakoniwaName == "") return;
 
 	ofDirectory::createDirectory("Preset_"+hakoniwaName);
 	mGui.saveSettings("Preset_"+hakoniwaName+"/UIPreset.xml");

@@ -19,35 +19,35 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_PRISM;
-	hakoniwas.back()->CVPreset	= "plink_Prism";
+	hakoniwas.back()->CVPreset	= "dpPLink_Prism";
 	hakoniwas.back()->sourceCh	= 2;
-	hakoniwas.back()->sceneNames.push_back("H:HakoniwaPLink_Prism");
+	hakoniwas.back()->sceneNames.push_back("H:dpPLink_Prism");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisPLink_Prism");
 
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_LASER;
-	hakoniwas.back()->CVPreset	= "plink_Laser";
+	hakoniwas.back()->CVPreset	= "dpPlink_Laser";
 	hakoniwas.back()->sourceCh	= 3;
-	hakoniwas.back()->sceneNames.push_back("H:HakoniwaPLink_Laser");
-	hakoniwas.back()->sceneNames.push_back("V:hakoVisPLink_Laser");
+	hakoniwas.back()->sceneNames.push_back("H:dpPLink_Laser");
+	hakoniwas.back()->sceneNames.push_back("V:dpPLink_Laser");
 
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_OIL;
-	hakoniwas.back()->CVPreset	= "plink_Oil";
+	hakoniwas.back()->CVPreset	= "dpPlink_Oil";
 	hakoniwas.back()->sourceCh	= 4;
-	hakoniwas.back()->sceneNames.push_back("H:HakoniwaPLink_Oil");
-	hakoniwas.back()->sceneNames.push_back("V:hakoVisPLink_Oil");
+	hakoniwas.back()->sceneNames.push_back("H:dpPLink_Oil");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisPLink_Oil");
 
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_SERVOPENDULUM;
-	hakoniwas.back()->CVPreset	= "servoPendulum";
+	hakoniwas.back()->CVPreset	= "dpServoPendulum";
 	hakoniwas.back()->sourceCh	= 8;
-    hakoniwas.back()->sceneNames.push_back("H:dpHServoPendulum");
+    hakoniwas.back()->sceneNames.push_back("H:dpServoPendulum");
     hakoniwas.back()->sceneNames.push_back("V:dpVisServoPendulum");
 
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_STAGE;
-	hakoniwas.back()->CVPreset	= "stage";
+	hakoniwas.back()->CVPreset	= "dpStage";
 	hakoniwas.back()->sourceCh	= 10;
 	hakoniwas.back()->sceneNames.push_back("V:dpVisStage");
 

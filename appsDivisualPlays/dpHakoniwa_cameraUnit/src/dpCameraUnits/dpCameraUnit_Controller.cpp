@@ -25,12 +25,9 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 	gui.addLabel("main Console");
 	gui.addSpacer();
 	gui.setTriggerWidgetsUponLoad(false);
-	gui.addLabel("Load Preset");
-	gui.addToggleMatrix("LoadPreset", 5, 8);
-	gui.addLabel("Save Preset");
-	gui.addToggleMatrix("SavePreset", 5, 8);
-	gui.addLabel("PresetName");
-	gui.addTextInput("namePreset", "PresetName");
+
+	gui.addButton("SaveHakoPreset", false);
+
 	gui.addSpacer();
 	gui.addLabel("OSC SplitList",OFX_UI_FONT_LARGE);
 	gui.addLabel("RDTK_1");
@@ -80,10 +77,13 @@ void dpCameraUnit_Controller::update(){
 			cvAnalysis[i]	.savePreset(cvAnalysis[i].hakoniwa_name);
 		}
 	}
-//	if (ofGetKeyPressed('l')){
-//		cvFXUnit[0]		.loadPreset("testHakoniwa");
-//		cvAnalysis[0]	.loadPreset("testHakoniwa");
-//	}
+
+	if (ofGetFrameNum() % 300 == 0){
+		for (int i = 0; i < 4;i++){
+			cvFXUnit[i]		.savePreset(cvAnalysis[i].hakoniwa_name);
+			cvAnalysis[i]	.savePreset(cvAnalysis[i].hakoniwa_name);
+		}
+	}
 }
 
 void dpCameraUnit_Controller::draw(){
@@ -190,6 +190,13 @@ void dpCameraUnit_Controller::guiEvent(ofxUIEventArgs &e){
 	if (w->getName() == "namePreset"){
 		ofxUITextInput* ti = (ofxUITextInput*)(e.widget);
 		ti->setTextString(ti->getTextString());
+	}
+
+	if (w->getName() == "SaveHakoPreset"){
+		for (int i = 0; i < 4;i++){
+			cvFXUnit[i]		.savePreset(cvAnalysis[i].hakoniwa_name);
+			cvAnalysis[i]	.savePreset(cvAnalysis[i].hakoniwa_name);
+		}
 	}
 }
 

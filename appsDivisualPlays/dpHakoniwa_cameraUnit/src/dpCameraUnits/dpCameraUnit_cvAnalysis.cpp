@@ -207,7 +207,12 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 #pragma mark PyrLK
 	if (mEnableOptFlow){
 		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 1.0f) &&
-			(isFrameNew)) mOptFlow.calcOpticalFlow(pixGray);
+			(ofxCv::mean(ofxCv::toCv(pixGray))[0] < 253.0f) &&
+			(isFrameNew)){
+			float f = ofxCv::mean(ofxCv::toCv(pixGray))[0];
+			cout << f << endl;
+			mOptFlow.calcOpticalFlow(pixGray);
+		}
 		
 		if ((ofGetFrameNum() % 150 == 0) || (ofGetKeyPressed(' '))) mOptFlow.resetFeaturesToTrack();
 
@@ -386,6 +391,8 @@ void dpCameraUnit_cvAnalysis::sendMessageMulti(ofxOscMessage &m){
 }
 
 void dpCameraUnit_cvAnalysis::savePreset(string hakoniwaName){
+
+	if (hakoniwaName == "") return;
 
 	ofDirectory::createDirectory("Preset_"+hakoniwaName);
 	mGui.saveSettings("Preset_"+hakoniwaName+"/AnalysisUIPreset.xml");
