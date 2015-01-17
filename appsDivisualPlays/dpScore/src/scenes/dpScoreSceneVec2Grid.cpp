@@ -55,7 +55,7 @@ void SceneVec2Grid::exit()
 
 void SceneVec2Grid::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kOscAddrCaneraUnitVector) {
+    if (m.getAddress() == kOscAddrCameraUnitVector) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);
         mGridBuffer.push_back(mVec);
@@ -76,19 +76,39 @@ void SceneVec2Grid::draw()
     
     ofPushMatrix();
     ofTranslate(mGridW, 0.f);
-    ofSetColor(255, 50);
-    const float length = ofGetHeight()*2.f;
-    ofLine(-length, 0.f, length, 0.f);
-    ofLine(0.f, -length, 0.f, length);
-    ofLine(0.f, 0.f, -length, 0.f, 0.f, length);
+    ofSetColor(255, 128);
+    const float length = ofGetHeight()*3.5f;
+    glBegin(GL_LINES);
+    glColor4f(1.f, 1.f, 1.f, 0.5f); glVertex3f(0.f, 0.f, 0.f);
+    glColor4f(1.f, 1.f, 1.f, 0.0f); glVertex3f(-length, 0.f, 0.f);
+    glColor4f(1.f, 1.f, 1.f, 0.5f); glVertex3f(0.f, 0.f, 0.f);
+    glColor4f(1.f, 1.f, 1.f, 0.0f); glVertex3f( length, 0.f, 0.f);
     
-    const float size = 30.f;
-    ofSetColor(color::kMain, 255);
-    ofLine(-size, 0.f, size, 0.f);
+    glColor4f(1.f, 1.f, 1.f, 0.5f); glVertex3f(0.f, 0.f, 0.f);
+    glColor4f(1.f, 1.f, 1.f, 0.0f); glVertex3f(0.f, -length, 0.f);
+    glColor4f(1.f, 1.f, 1.f, 0.5f); glVertex3f(0.f, 0.f, 0.f);
+    glColor4f(1.f, 1.f, 1.f, 0.0f); glVertex3f(0.f,  length, 0.f);
+    
+    glColor4f(1.f, 1.f, 1.f, 0.5f); glVertex3f(0.f, 0.f, 0.f);
+    glColor4f(1.f, 1.f, 1.f, 0.0f); glVertex3f(0.f, 0.f, -length);
+    glColor4f(1.f, 1.f, 1.f, 0.5f); glVertex3f(0.f, 0.f, 0.f);
+    glColor4f(1.f, 1.f, 1.f, 0.0f); glVertex3f(0.f, 0.f,  length);
+    glEnd();
+    
+    ofPushStyle();
+    ofPushMatrix();
+    ofVec3f plotter;
+    plotter.x = 0.f;
+    plotter.y = mVec.y * 0.3f * mSensorScale;
+    plotter.z = mVec.x * 300.f * mSensorScale;
+    ofTranslate(plotter);
+    
+    const float size{100.f};
+    ofSetLineWidth(2.f);
     ofSetColor(color::kMain, 255);
     ofLine(0.f, -size, 0.f, size);
-    ofSetColor(color::kMain, 255);
-    ofLine(0.f, 0.f, -size, 0.f, 0.f, size);
+    ofPopStyle();
+    ofPopMatrix();
     
     ofPopMatrix();
     
@@ -96,8 +116,8 @@ void SceneVec2Grid::draw()
     ofNoFill();
     for (int j=0; j<mGridH/mGridStep; j++) {
         for (int i=0; i<mGridW/mGridStep; i++) {
-            const int idx = j * mGridW/mGridStep + i;
-            ofVec2f v = mGridBuffer.at(i);
+            const int idx{j * mGridW/mGridStep + i};
+            ofVec2f v{mGridBuffer.at(i)};
             mGridVertices.at(idx).x = i*mGridStep;
             mGridVertices.at(idx).y = j*mGridStep * v.y * 0.3f * mSensorScale;
             mGridVertices.at(idx).z = v.x * 300.f * mSensorScale;

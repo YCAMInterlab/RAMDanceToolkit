@@ -30,6 +30,7 @@ public:
 private:
     deque<ofVec2f> mBuffer;
     float mSensorScale{0.8f};
+    const float kHalfH{(kH-50.f) * 0.5f};
     ofVec2f mVec{0.f};
     int mStep{4};
     

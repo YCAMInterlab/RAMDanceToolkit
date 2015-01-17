@@ -10,7 +10,7 @@
 #define RAMDanceToolkit_dpIceMapController_h
 
 #include "dpIceMapFace.h"
-
+#include "dpConstants.h"
 class dpIceMapGrid{
 public:
     
@@ -44,6 +44,14 @@ public:
         if(idx >= 0 && idx < mMaps.size()){
             mMaps[idx].extend();
         }
+    }
+    
+    void extendEach(int width,int height, int i, int j){
+        int idxX = ofMap(i,0,width,0,mDiv,true);
+        int idxY = ofMap(j,0,height,0,mDiv,true);
+        
+        int idx = idxY * mDiv + idxX;
+        extendEach(idx);
     }
     
     void update(){

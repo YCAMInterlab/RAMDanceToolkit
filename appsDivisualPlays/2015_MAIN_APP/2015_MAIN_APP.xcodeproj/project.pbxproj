@@ -105,6 +105,7 @@
 		920BA3811A67CB6B00E4A227 /* dpIceMapTri.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpIceMapTri.h; sourceTree = "<group>"; };
 		920BA3821A67CB8D00E4A227 /* KezDelaunayMesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezDelaunayMesh.h; sourceTree = "<group>"; };
 		920BA3831A67CBA800E4A227 /* KezBlinker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezBlinker.h; sourceTree = "<group>"; };
+		9236CE851A690C480060B0FF /* dpHakoVisMagnetPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisMagnetPendulum.h; sourceTree = "<group>"; };
 		92CB5B0D1A666F1F00257334 /* dpHakoniwaServoPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaServoPendulum.h; sourceTree = "<group>"; };
 		92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisBug.h; sourceTree = "<group>"; };
 		92CB5B0F1A666F1F00257334 /* dpHakoVisWorm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisWorm.h; sourceTree = "<group>"; };
@@ -247,6 +248,7 @@
 				92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */,
 				92CB5B0F1A666F1F00257334 /* dpHakoVisWorm.h */,
 				92CB5B101A666F1F00257334 /* dpHakoVisServoPendulum.h */,
+				9236CE851A690C480060B0FF /* dpHakoVisMagnetPendulum.h */,
 			);
 			path = knd;
 			sourceTree = "<group>";

@@ -29,14 +29,17 @@ public:
     
 private:
     static const int _circleNum{2000};
+    const float kStepZ{10.0f};
     
     deque<ofVec2f> mCircleBuffer;
     vector<ofVec3f> mCircleVertices;
     vector<ofFloatColor> mCircleColors;
     ofVbo mCircleVbo;
+    ofEasyCam mCam;
     
     float mSensorScale{1.0f};
     ofVec2f mVec{0.f};
+    float mEnterTime{0.f};
 };
 
 

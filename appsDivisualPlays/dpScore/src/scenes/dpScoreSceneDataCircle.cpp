@@ -26,15 +26,17 @@ void SceneDataCircle::Circle::update(float f)
 void SceneDataCircle::Circle::draw()
 {
     const float step = mRadius * TWO_PI / kResolution;
+    const int spacing{30};
     for (int i=0; i<data.size(); i++) {
-        const float f = data.at(i);
+        if (data.size()>=kResolution-spacing && i>=kResolution-spacing) break;
+        const float f{data.at(i)};
         if (::fabsf(f) < 0.01f) continue;
         
         ofPushMatrix();
-        const float angle = -360.f / kResolution * i;
+        const float angle{-360.f / kResolution * (i+spacing/2)};
         ofRotate(angle);
         ofTranslate(0.f, -mRadius);
-        const float h = f * mRadius;
+        const float h{f * mRadius};
         ofFill();
         ofSetColor(128, 128);
         ofRect(-step*0.5f, 0.f, step, h);
@@ -44,9 +46,13 @@ void SceneDataCircle::Circle::draw()
         ofRect(-step*0.5f, 0.f, step, h);
         ofPopMatrix();
     }
-    ofSetLineWidth(step);
+    ofSetLineWidth(step*0.25f);
     ofSetColor(color::kMain, 255);
+    ofPushMatrix();
+    const float angle{360.f / kResolution * spacing/2};
+    ofRotate(angle);
     ofLine(0.f, -mRadius-50.f, 0.f, -mRadius+50.f);
+    ofPopMatrix();
 
 }
 
@@ -88,7 +94,7 @@ void SceneDataCircle::exit()
 
 void SceneDataCircle::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kOscAddrCaneraUnitVector) {
+    if (m.getAddress() == kOscAddrCameraUnitVector) {
 
         for (int i=0; i<kNumCircles/2; i++) {
             if (2*i+0 >= m.getNumArgs() || 2*i+1 >= m.getNumArgs()) break;
