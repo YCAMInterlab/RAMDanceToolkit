@@ -16,6 +16,7 @@
 		C63615DA1A64B71D0006BB65 /* hakoVisPLink_Oil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63615D81A64B71D0006BB65 /* hakoVisPLink_Oil.cpp */; };
 		C63615DD1A64B72B0006BB65 /* hakoVisPLink_Prism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63615DB1A64B72B0006BB65 /* hakoVisPLink_Prism.cpp */; };
 		C685884C1A5EA7E000F8F488 /* dpMarionette.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C685884A1A5EA7E000F8F488 /* dpMarionette.cpp */; };
+		C6957F131A68072A00DB75DB /* ofxHexGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6957F111A68072A00DB75DB /* ofxHexGrid.cpp */; };
 		C6A68D181A5C32E000122475 /* ramMotionExtractorExampleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A68D161A5C32E000122475 /* ramMotionExtractorExampleScene.cpp */; };
 		C6ABEBA71A623BC0005DF2CE /* hakoVisPLink_Laser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ABEBA51A623BC0005DF2CE /* hakoVisPLink_Laser.cpp */; };
 		C6C944BD1A63EBA7005E9F30 /* dpSceneChanger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C944BB1A63EBA7005E9F30 /* dpSceneChanger.cpp */; };
@@ -120,6 +121,8 @@
 		C63615DC1A64B72B0006BB65 /* hakoVisPLink_Prism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hakoVisPLink_Prism.h; path = scenes/hakoVisPLink_Prism.h; sourceTree = "<group>"; };
 		C685884A1A5EA7E000F8F488 /* dpMarionette.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpMarionette.cpp; path = dpUtils/dpMarionette.cpp; sourceTree = "<group>"; };
 		C685884B1A5EA7E000F8F488 /* dpMarionette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpMarionette.h; path = dpUtils/dpMarionette.h; sourceTree = "<group>"; };
+		C6957F111A68072A00DB75DB /* ofxHexGrid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxHexGrid.cpp; path = scenes/ofxHexGlid/ofxHexGrid.cpp; sourceTree = "<group>"; };
+		C6957F121A68072A00DB75DB /* ofxHexGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxHexGrid.h; path = scenes/ofxHexGlid/ofxHexGrid.h; sourceTree = "<group>"; };
 		C6A68D161A5C32E000122475 /* ramMotionExtractorExampleScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ramMotionExtractorExampleScene.cpp; path = "../../example-ramMotionExtractor/src/scene/ramMotionExtractorExampleScene.cpp"; sourceTree = "<group>"; };
 		C6A68D171A5C32E000122475 /* ramMotionExtractorExampleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ramMotionExtractorExampleScene.h; path = "../../example-ramMotionExtractor/src/scene/ramMotionExtractorExampleScene.h"; sourceTree = "<group>"; };
 		C6ABEBA51A623BC0005DF2CE /* hakoVisPLink_Laser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hakoVisPLink_Laser.cpp; path = scenes/hakoVisPLink_Laser.cpp; sourceTree = "<group>"; };
@@ -299,6 +302,7 @@
 				C63615D81A64B71D0006BB65 /* hakoVisPLink_Oil.cpp */,
 				C63615DC1A64B72B0006BB65 /* hakoVisPLink_Prism.h */,
 				C63615DB1A64B72B0006BB65 /* hakoVisPLink_Prism.cpp */,
+				C6957F141A68072E00DB75DB /* ofxHexGlid */,
 			);
 			name = hakoVis;
 			sourceTree = "<group>";
@@ -312,6 +316,15 @@
 				C6C944BB1A63EBA7005E9F30 /* dpSceneChanger.cpp */,
 			);
 			name = dpUtils;
+			sourceTree = "<group>";
+		};
+		C6957F141A68072E00DB75DB /* ofxHexGlid */ = {
+			isa = PBXGroup;
+			children = (
+				C6957F121A68072A00DB75DB /* ofxHexGrid.h */,
+				C6957F111A68072A00DB75DB /* ofxHexGrid.cpp */,
+			);
+			name = ofxHexGlid;
 			sourceTree = "<group>";
 		};
 		C6D4097E1A4575A5002D4C34 /* ofxKsmrParallelLinkDelta */ = {
@@ -542,6 +555,7 @@
 				C63615D21A63FB6E0006BB65 /* HakoniwaPLink_Prism.cpp in Sources */,
 				C6D4098D1A4575F1002D4C34 /* ParallelLinkManager.cpp in Sources */,
 				C685884C1A5EA7E000F8F488 /* dpMarionette.cpp in Sources */,
+				C6957F131A68072A00DB75DB /* ofxHexGrid.cpp in Sources */,
 				C6D409B31A47D4E1002D4C34 /* ofxTCPManager.cpp in Sources */,
 				C6D4097D1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp in Sources */,
 				C6A68D181A5C32E000122475 /* ramMotionExtractorExampleScene.cpp in Sources */,

@@ -67,7 +67,13 @@ public:
 
 class cvSlot{
 public:
-	bool			isEmpty = true;
+	cvSlot(){
+		isEmpty = true;
+		hakoType = HAKO_BLANK;
+		sourceCh = -1;
+	}
+
+	bool			isEmpty;
 	hakoniwaType	hakoType;
 	int				sourceCh;
 	vector<int>		targetDisplay;
@@ -116,7 +122,7 @@ public:
 
 	void refleshSceneforRDTK();
 	int	getHakoniwaIndex(string sceneName);
-	bool searchHakoniwaIsActive(hakoniwaType type);
+	int searchHakoniwaIsActive(hakoniwaType type);
 };
 
 #endif /* defined(__dpHakoniwa_cameraUnit__dpSwitchingManager__) */

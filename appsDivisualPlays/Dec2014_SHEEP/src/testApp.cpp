@@ -38,7 +38,8 @@ HakoniwaPLink_Prism plink_prism;
 
 ramMotionExtractorExampleScene motionExt;
 hakoVisPLink_Laser	visLaser;
-hakoVisPLink_Oil visOil;
+hakoVisPLink_Oil	visOil;
+hakoVisPLink_Prism	visPrism;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -59,12 +60,13 @@ void testApp::setup()
 
 	ramSceneManager& sceneManager = ramSceneManager::instance();
 
-	sceneManager.addScene( plink_laser.getPtr());
 	sceneManager.addScene( plink_oil.getPtr());
+	sceneManager.addScene( plink_laser.getPtr());
 	sceneManager.addScene( plink_prism.getPtr());
 
 	sceneManager.addScene( visLaser.getPtr());
 	sceneManager.addScene( visOil.getPtr());
+	sceneManager.addScene( visPrism.getPtr());
 	sceneManager.addScene( motionExt.getPtr());
 
 	sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);

@@ -89,7 +89,7 @@ void HakoniwaParallelLink_Base::draw(){
 	glEnable(GL_DEPTH_TEST);
 	ofPushMatrix();
 	ofTranslate(machinePosition);
-	mLinkManager.draw();
+	if (mDrawMachine) mLinkManager.draw();
 	ofPopMatrix();
 
 	if (mDrawExtractor) motionEx.draw();
