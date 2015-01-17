@@ -44,6 +44,10 @@ private:
     int mode;
     bool bHideNodeView;
     
+    vector <ofVec3f> vecRed;
+    vector <ofVec3f> vecGreen;
+    vector <ofVec3f> vecBlue;
+    
     ramMotionExtractor	mMotionExtractor;
     ofxOscSender mSenderOnOff;
     ofxOscSender mSenderInverse;

@@ -46,8 +46,8 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
 
 void dpHakoniwaMagnetPendulum::setup() {
     
-    mSenderOnOff.setup("192.168.20.52",8528);
-    mSenderInverse.setup("192.168.20.72", 8528);
+//    mSenderOnOff.setup("192.168.20.52",8528);
+//    mSenderInverse.setup("192.168.20.72", 8528);
 
     bHideNodeView = true;
     
@@ -106,12 +106,13 @@ void dpHakoniwaMagnetPendulum::update() {
     mMotionExtractor.update();
     
     if (!bTestMode) {
+        
+        float d1 = mMotionExtractor.getDistanceAt(0, 1);
+        float d2 = mMotionExtractor.getDistanceAt(2, 3);
+        float d3 = mMotionExtractor.getDistanceAt(4, 5);
+
         if (mode == 1) {
-            
-            float d1 = mMotionExtractor.getDistanceAt(0, 1);
-            float d2 = mMotionExtractor.getDistanceAt(2, 3);
-            float d3 = mMotionExtractor.getDistanceAt(4, 5);
-            
+
             if (d1 < distanceThreshold && d1 != 0.0f) {
                 bOn[0] = true;
                 bOn[1] = true;
@@ -133,11 +134,11 @@ void dpHakoniwaMagnetPendulum::update() {
                 bOn[4] = false;
                 bOn[5] = false;
             }
-        } else if (mode ==0) {
+        } else if (mode == 0) {
             
-            if (mMotionExtractor.getDistanceAt(0, 1) > distanceThreshold &&
-                mMotionExtractor.getDistanceAt(2, 3) > distanceThreshold &&
-                mMotionExtractor.getDistanceAt(4, 5) > distanceThreshold) {
+            if (d1 > distanceThreshold &&
+                d2 > distanceThreshold &&
+                d3 > distanceThreshold) {
                 for (int i = 0; i < 6; i++) bOn[i] = false;
             } else {
                 for (int i = 0; i < 6; i++) bOn[i] = true;
@@ -150,7 +151,7 @@ void dpHakoniwaMagnetPendulum::update() {
         bHideNodeView = !bHideNodeView;
     }
     
-    sendOsc();
+//    sendOsc();
     
 }
 
@@ -227,17 +228,32 @@ void dpHakoniwaMagnetPendulum::draw(){
             ofSetColor(0,0,255);
             ofDrawBox(axisEdge[2][i], 10, 10, 10);
             
-            
+            ofPopMatrix();
         }
     }
     
+    vecRed.push_back(axisEdge[0][0]);
+    vecGreen.push_back(axisEdge[1][0]);
+    vecBlue.push_back(axisEdge[2][0]);
+    if (vecRed.size() > 320) vecRed.erase(vecRed.begin());
+    if (vecGreen.size() > 320) vecGreen.erase(vecGreen.begin());
+    if (vecBlue.size() > 320) vecBlue.erase(vecBlue.begin());
     
-    
+
     ofPopMatrix();
+    
     ramEndCamera();
     
     ofPushMatrix();
     
+    ofTranslate(500, 300);
+    ofSetColor(255);
+    ofRect(0, 0, 320, 360);
+    
+    ofSetColor(255, 0, 0, 200);
+    for (int i = 0; i < vecRed.size(); i++ ) {
+        
+    }
     
     
     

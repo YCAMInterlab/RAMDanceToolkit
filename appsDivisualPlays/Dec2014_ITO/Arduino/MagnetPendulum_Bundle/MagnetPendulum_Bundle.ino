@@ -29,7 +29,7 @@ void setup() {
 // the loop function runs over and over again forever
 void loop() {
   
-   OSCMessage message;
+   OSCBundle bundle;
    int size = _udp.parsePacket();
  
    if (size > 0) {
