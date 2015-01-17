@@ -13,7 +13,7 @@
 
 class HakoniwaPLink_Oil : public HakoniwaParallelLink_Base{
 public:
-	inline string getName() const {return "HakoniwaPLink_Oil";}
+	inline string getName() const {return "dpPLink_Oil";}
 	virtual string getAddress() {return "192.168.20.69";}
 
 	virtual void initialize();

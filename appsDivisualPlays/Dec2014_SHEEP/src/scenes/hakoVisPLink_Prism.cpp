@@ -31,7 +31,7 @@ void hakoVisPLink_Prism::update(){
 			pts.assign(nBlob, ofVec3f(0,0,0));
 			labels.assign(nBlob, 0);
 
-			for (int ｘ２i = 0;i < nBlob;i++){
+			for (int i = 0;i < nBlob;i++){
 				labels[i] = m.getArgAsInt32(1+i*5);
 				pts[i].set(m.getArgAsFloat(1+i*5+1) + m.getArgAsFloat(1+i*5+3)/2.0,
 						   m.getArgAsFloat(1+i*5+2) + m.getArgAsFloat(1+i*5+4)/2.0);
