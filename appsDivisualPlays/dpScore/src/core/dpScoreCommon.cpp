@@ -122,6 +122,8 @@ const string kSettingsPrefix = "scoreUI-";
 
 extern const int kNumCameraunitVectors = 10;
 
+const string kFontPath = "../../../resources/fonts/AkkoStd-Thin.otf";
+
 struct _handle {
     char* p;
     _handle(char* ptr) : p(ptr) {}

@@ -96,7 +96,7 @@ public:
 	vector<ofVec3f> pts;
 
 	inline
-	string getName() const { return "hakoVisPLink_Prism"; }
+	string getName() const { return "dpVisPLink_Prism"; }
 
 protected:
 

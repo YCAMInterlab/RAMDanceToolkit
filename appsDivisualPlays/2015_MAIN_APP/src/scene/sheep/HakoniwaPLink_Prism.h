@@ -13,7 +13,7 @@
 
 class HakoniwaPLink_Prism : public HakoniwaParallelLink_Base{
 public:
-	inline string getName() const {return "HakoniwaPLink_Prism";}
+	inline string getName() const {return "dpPLink_Prism";}
 	virtual string getAddress() {return "192.168.20.56";}
 
 	virtual void initialize();

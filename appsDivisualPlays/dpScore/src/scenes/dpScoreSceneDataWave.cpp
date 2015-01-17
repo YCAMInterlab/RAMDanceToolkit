@@ -47,6 +47,8 @@ void SceneDataWave::enter()
     
     mData.assign(kNumX, deque<float>(kNumY));
     mVectors.assign(kNumCameraunitVectors, ofVec2f::zero());
+    
+    //mEnterTime = ofGetElapsedTimef();
 }
 
 void SceneDataWave::exit()
@@ -97,7 +99,7 @@ void SceneDataWave::draw()
                              mPlaneMesh.getNumIndices());
     }
     
-    const float time{ofGetElapsedTimef()};
+    const float time{ofGetElapsedTimef()-mEnterTime};
     mCam.begin();
     ofPushMatrix();
     ofRotateZ(time * 3.f);

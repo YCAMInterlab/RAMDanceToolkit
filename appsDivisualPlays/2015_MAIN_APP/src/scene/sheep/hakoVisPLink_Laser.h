@@ -49,7 +49,7 @@ public:
 	void draw_PatternA();
 	void draw_PatternB();
 
-	inline	string getName() const { return "hakoVisPLink_Laser"; }
+	inline	string getName() const { return "dpVisPLink_Laser"; }
 	virtual string getAddress() {return "192.168.20.57";};
 
 //	virtual void onEnabled();

@@ -73,7 +73,7 @@ public:
 	vector<ofVec3f> pts;
 
 	inline
-	string getName() const { return "hakoVisPLink_Oil"; }
+	string getName() const { return "dpVisPLink_Oil"; }
 
 protected:
 

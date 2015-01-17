@@ -75,12 +75,17 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->sourceCh	= 10;
 	hakoniwas.back()->sceneNames.push_back("V:TestSceneD");
 
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_BLANK;
+	hakoniwas.back()->CVPreset	= "blank";
+	hakoniwas.back()->sourceCh	= -1;
+	hakoniwas.back()->sceneNames.push_back("Blank");
 //	hakoniwas.push_back(new hakoniwaPresets());
 //	hakoniwas.back()->type		= HAKO_FROZENICE;
 //	hakoniwas.back()->CVPreset	= "frozenIce";
 //	hakoniwas.back()->
 
-	for (int i = 0;i < 4;i++){
+	for (int i = 0;i < CV_SLOT_NUM;i++){
 		mSlots[i].targetDisplay.clear();
 	}
 	mSlots[0].matrixInputCh = CVSW_1;
@@ -101,16 +106,6 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 
 void dpSwitchingManager::update(){
 
-	if (isSlave){
-
-	}else{
-
-	}
-	if (ofGetKeyPressed('5')) matrixSW.setSW(0, 0);
-	if (ofGetKeyPressed('6')) matrixSW.setSW(1, 0);
-	if (ofGetKeyPressed('7')) matrixSW.setSW(2, 0);
-	if (ofGetKeyPressed('8')) matrixSW.setSW(3, 0);
-	if (ofGetKeyPressed('9')) matrixSW.setSW(4, 0);
 }
 
 void dpSwitchingManager::draw(){
@@ -122,7 +117,7 @@ void dpSwitchingManager::draw(){
 
 
 	ofSetColor(255);
-	for (int i = 0;i < 4;i++){
+	for (int i = 0;i < CV_SLOT_NUM;i++){
 		ofPushMatrix();
 		ofTranslate(i*120, 0);
 		string info = "";
@@ -134,12 +129,37 @@ void dpSwitchingManager::draw(){
 		}
 		info += "\n";
 		info += "isEmpt :" + ofToString(mSlots[i].isEmpty);
-		ofSetColor(128+mSlots[i].isEmpty * 128);
+		ofSetColor(128+!mSlots[i].isEmpty * 128);
 		ofDrawBitmapString(info, 10,20);
 
 		ofNoFill();
 		ofRect(0, 0, 120, 100);
 		ofFill();
+		ofPopMatrix();
+	}
+
+	for (int i = 0;i < 4;i++){
+		string dispInfo = "";
+
+		for (int j = 0;j < CV_SLOT_NUM;j++){
+			for (int o = 0;o < mSlots[j].targetDisplay.size();o++){
+				if (mSlots[j].targetDisplay[o] == i){
+					dispInfo += getHakoniwaPreset(mSlots[j].hakoType)->sceneNames[0].substr(2);
+				}
+			}
+		}
+
+		ofPushMatrix();
+		ofTranslate(i%2*120, 150+i/2*90);
+		ofSetColor(255);
+		ofDrawBitmapString(dispInfo, 0,0);
+
+		if (dispInfo == "TestSceneA") ofSetColor(255, 0, 0);
+		if (dispInfo == "TestSceneB") ofSetColor(0, 255, 0);
+		if (dispInfo == "TestSceneC") ofSetColor(255, 255, 0);
+		if (dispInfo == "TestSceneD") ofSetColor(255, 0, 255);
+		ofRect(0, 20, 30, 30);
+
 		ofPopMatrix();
 	}
 
@@ -149,20 +169,27 @@ void dpSwitchingManager::draw(){
 void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
 
 	if (m.getAddress() == "/ram/set_scene"){
+		cout << "=-=-=-=-=-=-=-Head -=-=-=-=-=-=-=-=" << endl << endl;
 		int hakoId = getHakoniwaIndex(m.getArgAsString(0));
 		cout << "hakoID :" << hakoId << endl;
 		if (m.getArgAsInt32(1)){
 			//箱庭を探して有効化
 			if (hakoId > -1){
-				for (int i = 0;i < 4;i++){
+				for (int i = 0;i < CV_SLOT_NUM;i++){
 					if (m.getArgAsInt32(2+i) != 0){
 						cout << "Select hakoniwa from Mastre=====" << endl;
  						SelectHakoniwa(hakoniwaType(hakoId), i);
 					}else{
 						cout << "Disable Disp from Master=====" << endl;
 						//ターゲット箱庭が有効になっている時だけdisableDisplayを呼ぶ
-
-						disableDisplay(i);
+						int activeSlot = searchHakoniwaIsActive(hakoniwaType(hakoId));
+						if (activeSlot > -1){
+							for (int q = 0;q < mSlots[activeSlot].targetDisplay.size();q++){
+								if (mSlots[activeSlot].targetDisplay[q] == i){
+									disableDisplay(i);
+								}
+							}
+						}
 					}
 				}
 			}
@@ -209,7 +236,7 @@ void dpSwitchingManager::SelectHakoniwa(hakoniwaType type, int slot){
 	//既に該当スロットがあった場合ディスプレイのみ追加
 	int targCvSlot = 0;
 	bool isExist = false;
-	for (int i = 0;i < 4;i++){
+	for (int i = 0;i < CV_SLOT_NUM;i++){
 		if (!mSlots[i].isEmpty && mSlots[i].hakoType == type){
 			targCvSlot = i;
 			isExist = true;
@@ -222,7 +249,7 @@ void dpSwitchingManager::SelectHakoniwa(hakoniwaType type, int slot){
 		enableDisplay(type, slot, !isExist);
 		//空いてるCVスロットを見つけて保持
 		//CVスロットを初期化
-		for (int i = 0;i < 4;i++){
+		for (int i = 0;i < CV_SLOT_NUM;i++){
 			if (mSlots[i].isEmpty){
 				targCvSlot = i;
 				break;
@@ -286,9 +313,9 @@ void dpSwitchingManager::disableHakoniwa(hakoniwaType type){
 
 	int targCvSlot = 0;
 	bool isExist = false;
-	for (int i = 0;i < 4;i++){
+	for (int i = 0;i < CV_SLOT_NUM;i++){
 		if ((!mSlots[i].isEmpty) && (mSlots[i].hakoType == type)){
-			targCvSlot = 1;
+			targCvSlot = i;
 			isExist = true;
 			break;
 		}
@@ -304,6 +331,7 @@ void dpSwitchingManager::disableHakoniwa(hakoniwaType type){
 	//cvスロットを無効にする
 	mSlots[targCvSlot].isEmpty	= true;
 	mSlots[targCvSlot].hakoType	= HAKO_BLANK;
+	mSlots[targCvSlot].targetDisplay.clear();
 	mSlots[targCvSlot].sourceCh = - 1;
 	mSlots[targCvSlot].presetFile = "";
 
@@ -314,7 +342,7 @@ void dpSwitchingManager::disableDisplay(int displayNum){
 	bool isExist = false;
 	int targCvSlot = -1;
 	int targDisp = -1;
-	for (int i = 0;i < 4;i++){
+	for (int i = 0;i < CV_SLOT_NUM;i++){
 		for (int j = 0;j < mSlots[i].targetDisplay.size();j++){
 			if (displayNum == mSlots[i].targetDisplay[j]){
 				isExist = true;
@@ -366,7 +394,7 @@ int dpSwitchingManager::getHakoniwaIndex(string sceneName){
 
 void dpSwitchingManager::refleshSceneforRDTK(){
 
-	for (int i = 0;i < 4;i++){
+	for (int i = 0;i < CV_SLOT_NUM;i++){
 
 		if (!mSlots[i].isEmpty){
 			hakoniwaPresets* hk = getHakoniwaPreset(mSlots[i].hakoType);
@@ -375,8 +403,11 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 				ofxOscMessage m1,m2;
 				m1.setAddress("/ram/set_scene");
 				m1.addStringArg(hk->sceneNames[j].substr(2));
+
+
 				if (!hk->getIsVis(j)){
-					m1.addIntArg(hk->type % 2 == 0);
+					m1.addIntArg((hk->type % 2 == 0) &&
+								 (searchHakoniwaIsActive(hk->type) > -1));
 					m1.addIntArg(0);
 					m1.addIntArg(0);
 				}else{
@@ -389,7 +420,8 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 				m2.setAddress("/ram/set_scene");
 				m2.addStringArg(hk->sceneNames[j].substr(2));
 				if (!hk->getIsVis(j)){
-					m2.addIntArg(hk->type % 2 == 1);
+					m2.addIntArg((hk->type % 2 == 1) &&
+								 (searchHakoniwaIsActive(hk->type) > -1));
 					m2.addIntArg(0);
 					m2.addIntArg(0);
 				}else{
@@ -407,7 +439,7 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 	}
 
 	for (int i = 0;i < hakoniwas.size();i++){
-		if (!searchHakoniwaIsActive(hakoniwas[i]->type)){
+		if (searchHakoniwaIsActive(hakoniwas[i]->type) == -1){
 			for (int j = 0;j < hakoniwas[i]->sceneNames.size();j++){
 				ofxOscMessage m;
 				m.setAddress("ram/set_scene");
@@ -424,11 +456,11 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 
 }
 
-bool dpSwitchingManager::searchHakoniwaIsActive(hakoniwaType type){
+int dpSwitchingManager::searchHakoniwaIsActive(hakoniwaType type){
 
-	for (int i = 0;i < 4;i++){
+	for (int i = 0;i < CV_SLOT_NUM;i++){
 		if ((!mSlots[i].isEmpty) &&
-			(mSlots[i].hakoType == type)) return true;
+			(mSlots[i].hakoType == type)) return i;
 	}
-	return false;
+	return -1;
 }

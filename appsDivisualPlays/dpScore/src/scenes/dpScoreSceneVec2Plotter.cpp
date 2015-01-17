@@ -45,6 +45,7 @@ void SceneVec2Plotter::enter()
     dpDebugFunc();
     mCam.enableMouseInput();
     mCam.setFarClip(_circleNum * kStepZ);
+    mEnterTime = ofGetElapsedTimef();
 }
 
 void SceneVec2Plotter::exit()
@@ -69,7 +70,7 @@ void SceneVec2Plotter::draw()
 {
     const float halfH{(kH-50.f) * 0.5f};
     const float mult{halfH * mSensorScale};
-    const float t{ofGetElapsedTimef()};
+    const float t{ofGetElapsedTimef()-mEnterTime};
     
     mCam.begin();
     ofRotateZ(t*2.f);

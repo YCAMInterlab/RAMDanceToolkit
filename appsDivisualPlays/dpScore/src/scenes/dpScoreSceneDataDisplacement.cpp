@@ -81,6 +81,10 @@ void SceneDataDisplacement::initialize()
     mUICanvas->addSpacer();
     mUICanvas->addSlider("freq", 10.f, 50.f, &mFreq);
     mUICanvas->addSlider("amp", 10.f, 50.f, &mAmp);
+    
+    mShader.setupShaderFromSource(GL_VERTEX_SHADER, kVertSrc);
+    mShader.setupShaderFromSource(GL_FRAGMENT_SHADER, kFragSrc);
+    mShader.linkProgram();
 }
 
 void SceneDataDisplacement::shutDown()
@@ -91,46 +95,47 @@ void SceneDataDisplacement::shutDown()
         delete mUICanvas;
         mUICanvas = nullptr;
     }
+    
+    mShader.unload();
 }
 
 void SceneDataDisplacement::enter()
 {
     dpDebugFunc();
-    mShader.setupShaderFromSource(GL_VERTEX_SHADER, kVertSrc);
-    mShader.setupShaderFromSource(GL_FRAGMENT_SHADER, kFragSrc);
-    mShader.linkProgram();
-
+    mEnterTime = ofGetElapsedTimef();
     mSphereMesh = ofMesh::sphere(kRadius, kResolution);
 }
 
 void SceneDataDisplacement::exit()
 {
-    dpDebugFunc();
-    mShader.unload();
-    
+    dpDebugFunc();    
     mSphereMesh.clear();
 }
 
 void SceneDataDisplacement::update(ofxEventMessage& m)
 {
     if (m.getAddress() == kOscAddrCameraUnitVector) {
-        const float t{ofGetElapsedTimef()};
+        const float t{ofGetElapsedTimef()-mEnterTime};
         const float sx{::fabsf(m.getArgAsFloat(0))};
-        const float sy{::fabsf(m.getArgAsFloat(0))};
-        mShader.begin();
-        mShader.setUniform1f("timeX", t*mSpeed.x);
-        mShader.setUniform1f("timeY", t*mSpeed.y);
-        mShader.setUniform1f("scaleX", sx);
-        mShader.setUniform1f("scaleY", sy);
-        mShader.setUniform1f("freq", mFreq);
-        mShader.setUniform1f("amp", mAmp);
-        mShader.end();
+        const float sy{::fabsf(m.getArgAsFloat(1))};
+        updateShader(t, sx, sy);
     }
+}
+
+void SceneDataDisplacement::updateShader(float t, float sx, float sy)
+{
+    mShader.begin();
+    mShader.setUniform1f("timeX", t*mSpeed.x);
+    mShader.setUniform1f("timeY", t*mSpeed.y);
+    mShader.setUniform1f("scaleX", sx);
+    mShader.setUniform1f("scaleY", sy);
+    mShader.setUniform1f("freq", mFreq);
+    mShader.setUniform1f("amp", mAmp);
+    mShader.end();
 }
 
 void SceneDataDisplacement::draw()
 {
-    const float t{ofGetElapsedTimef()};
     mShader.begin();
     mCam.begin();
     ofRotateX(50.f);

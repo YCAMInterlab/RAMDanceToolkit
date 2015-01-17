@@ -23,6 +23,8 @@ void hakoVisPLink_Oil::setupControlPanel(){
 	patterns.push_back("Pattern_B");
 	patterns.push_back("Pattern_C");
 
+	gui->addToggle("DebugDraw", &mDebugDraw);
+
 }
 
 void hakoVisPLink_Oil::update(){
@@ -44,6 +46,7 @@ void hakoVisPLink_Oil::update(){
 			for (int i = 0;i < labels.size();i++){
 				if (!isExistByChaser(labels[i])){
 					chasers.push_back(labelChaser(labels[i]));
+					chasers.back().pos_smooth = pts[i] * SINGLE_SCREEN_HEIGHT + ofVec2f(-SINGLE_SCREEN_HEIGHT,SINGLE_SCREEN_HEIGHT);
 				}
 			}
 		}
@@ -52,33 +55,56 @@ void hakoVisPLink_Oil::update(){
 
 	for (int i = 0;i < chasers.size();i++){
 		int targ = isExistByLabel(chasers[i].label);
-		cout << targ << endl;
-		if (targ > -1){
-			chasers[i].pos = pts[targ] * 400;
+		if (targ > -1 && !chasers[i].dead){
+			chasers[i].pos = pts[targ] * SINGLE_SCREEN_HEIGHT;
+		}else{
+			chasers[i].dead = true;
+			chasers[i].vec += ofVec3f(1.0,-1.0);
+			chasers[i].pos += chasers[i].vec;
 		}
 
 		chasers[i].update();
+	}
+
+	for (int i = 0;i < chasers.size();i++){
+		if (chasers[i].vec.lengthSquared() > 100){
+			chasers.erase(chasers.begin()+i);
+		}
 	}
 
 }
 
 void hakoVisPLink_Oil::draw(){
 
-	for (int i = 0;i < pts.size();i++){
-		ofPushMatrix();
-		ofTranslate(pts[i] * 400);
-		ofLine(-5, 0, 5, 0);
-		ofLine(0, -5, 0, 5);
-		ofDrawBitmapString(ofToString(labels[i]), 20,20);
-		ofPopMatrix();
+	if (mDebugDraw){
+		for (int i = 0;i < pts.size();i++){
+			ofPushMatrix();
+			ofTranslate(pts[i] * SINGLE_SCREEN_HEIGHT);
+			ofLine(-5, 0, 5, 0);
+			ofLine(0, -5, 0, 5);
+			ofDrawBitmapString(ofToString(labels[i]), 20,20);
+			ofPopMatrix();
+		}
 	}
 
 	for (int i = 0;i < chasers.size();i++){
 		ofPushMatrix();
-		ofTranslate(chasers[i].pos);
-		ofCircle(0, 0, 10);
+
+		ofTranslate(chasers[i].pos_smooth);
+//		ofRotateZ(45);
+
+		ofSetRectMode(OF_RECTMODE_CENTER);
+		ofSetColor(chasers[i].col);
+//		ofRect(0, 0, pow(chasers[i].seed,4.0f)*50, SINGLE_SCREEN_HEIGHT);
+		ofSetLineWidth(3.0);
+		ofLine(-5000, 0, 5000, 0);
+		ofLine(0, -5000, 0, 5000);
+		ofSetLineWidth(3.0);
+		ofSetRectMode(OF_RECTMODE_CORNER);
 		ofPopMatrix();
 	}
+
+	ofSetColor(255);
 
 }
 

@@ -76,22 +76,39 @@ void SceneVec2Grid::draw()
     
     ofPushMatrix();
     ofTranslate(mGridW, 0.f);
-    ofSetColor(255, 50);
-    const float length = ofGetHeight()*2.f;
-    ofLine(-length, 0.f, length, 0.f);
-    ofLine(0.f, -length, 0.f, length);
-    ofLine(0.f, 0.f, -length, 0.f, 0.f, length);
+    ofSetColor(255, 128);
+    const float length = ofGetHeight()*3.5f;
+    glBegin(GL_LINES);
+    glColor4f(1.f, 1.f, 1.f, 0.5f); glVertex3f(0.f, 0.f, 0.f);
+    glColor4f(1.f, 1.f, 1.f, 0.0f); glVertex3f(-length, 0.f, 0.f);
+    glColor4f(1.f, 1.f, 1.f, 0.5f); glVertex3f(0.f, 0.f, 0.f);
+    glColor4f(1.f, 1.f, 1.f, 0.0f); glVertex3f( length, 0.f, 0.f);
+    
+    glColor4f(1.f, 1.f, 1.f, 0.5f); glVertex3f(0.f, 0.f, 0.f);
+    glColor4f(1.f, 1.f, 1.f, 0.0f); glVertex3f(0.f, -length, 0.f);
+    glColor4f(1.f, 1.f, 1.f, 0.5f); glVertex3f(0.f, 0.f, 0.f);
+    glColor4f(1.f, 1.f, 1.f, 0.0f); glVertex3f(0.f,  length, 0.f);
+    
+    glColor4f(1.f, 1.f, 1.f, 0.5f); glVertex3f(0.f, 0.f, 0.f);
+    glColor4f(1.f, 1.f, 1.f, 0.0f); glVertex3f(0.f, 0.f, -length);
+    glColor4f(1.f, 1.f, 1.f, 0.5f); glVertex3f(0.f, 0.f, 0.f);
+    glColor4f(1.f, 1.f, 1.f, 0.0f); glVertex3f(0.f, 0.f,  length);
+    glEnd();
     
     ofPushStyle();
-    const float size{60.f};
+    ofPushMatrix();
+    ofVec3f plotter;
+    plotter.x = 0.f;
+    plotter.y = mVec.y * 0.3f * mSensorScale;
+    plotter.z = mVec.x * 300.f * mSensorScale;
+    ofTranslate(plotter);
+    
+    const float size{100.f};
     ofSetLineWidth(2.f);
     ofSetColor(color::kMain, 255);
-    ofLine(-size, 0.f, size, 0.f);
-    ofSetColor(color::kMain, 255);
     ofLine(0.f, -size, 0.f, size);
-    ofSetColor(color::kMain, 255);
-    ofLine(0.f, 0.f, -size, 0.f, 0.f, size);
     ofPopStyle();
+    ofPopMatrix();
     
     ofPopMatrix();
     

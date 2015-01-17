@@ -27,6 +27,8 @@
 #define CVSW_3 3
 #define CVSW_4 4
 
+#define CV_SLOT_NUM 4
+
 enum hakoniwaType{
 	HAKO_PLINK_PRISM,
 	HAKO_PLINK_LASER,
@@ -65,7 +67,13 @@ public:
 
 class cvSlot{
 public:
-	bool			isEmpty = true;
+	cvSlot(){
+		isEmpty = true;
+		hakoType = HAKO_BLANK;
+		sourceCh = -1;
+	}
+
+	bool			isEmpty;
 	hakoniwaType	hakoType;
 	int				sourceCh;
 	vector<int>		targetDisplay;
@@ -109,12 +117,12 @@ public:
 	ofxOscSender senderToRDTK1;
 	ofxOscSender senderToRDTK2;
 
-	cvSlot mSlots[4];
+	cvSlot mSlots[CV_SLOT_NUM];
 	sw_1010F_SerialController matrixSW;
 
 	void refleshSceneforRDTK();
 	int	getHakoniwaIndex(string sceneName);
-	bool searchHakoniwaIsActive(hakoniwaType type);
+	int searchHakoniwaIsActive(hakoniwaType type);
 };
 
 #endif /* defined(__dpHakoniwa_cameraUnit__dpSwitchingManager__) */

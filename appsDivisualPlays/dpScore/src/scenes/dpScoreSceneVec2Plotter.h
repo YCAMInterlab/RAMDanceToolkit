@@ -39,6 +39,7 @@ private:
     
     float mSensorScale{1.0f};
     ofVec2f mVec{0.f};
+    float mEnterTime{0.f};
 };
 
 
