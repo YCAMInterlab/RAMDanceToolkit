@@ -107,12 +107,17 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 
 		ofxOscMessage bRectM;
 		ofxOscMessage blobM;
+		ofxOscMessage areaM;
 
 		bRectM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/boundingRect");
 		blobM .setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/blob");
+		areaM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/area");
 
 		bRectM.addIntArg(mContFinder.getContours().size());
 		blobM.addIntArg(mContFinder.getContours().size());
+		areaM.addIntArg(mContFinder.getContours().size());
+
+//		mContFinder.getContourArea(0)
 
 		for (int i = 0;i < mContFinder.getContours().size();i++){
 			ofRectangle rt = ofxCv::toOf(mContFinder.getBoundingRect(i));
@@ -134,11 +139,14 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 				blobM.addFloatArg(ofClamp(pt.x / width,-1.0,1.0));
 				blobM.addFloatArg(ofClamp(pt.y / height,-1.0,1.0));
 			}
+
+			areaM.addFloatArg(mContFinder.getContourArea(i));
 		}
 
 		if (mEnableSendOSC){
 			sendMessageMulti(bRectM);
 			sendMessageMulti(blobM);
+			sendMessageMulti(areaM);
 		}
 
 	}

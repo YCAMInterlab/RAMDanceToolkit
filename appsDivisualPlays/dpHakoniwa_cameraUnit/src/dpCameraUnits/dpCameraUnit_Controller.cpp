@@ -16,19 +16,15 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 		cvFXUnit[i].mGui.setPosition(-1000, 0);
 	}
 
-	cvAnalysis[0].hakoniwa_name = "prism";
-	cvAnalysis[1].hakoniwa_name = "pendulum";
+	cvAnalysis[0].hakoniwa_name = "";
+	cvAnalysis[1].hakoniwa_name = "";
 	cvAnalysis[2].hakoniwa_name = "";
-	cvAnalysis[3].hakoniwa_name = "hakoniwa_D";
+	cvAnalysis[3].hakoniwa_name = "";
 
 	gui.setup();
 	gui.addLabel("main Console");
 	gui.addSpacer();
 	gui.setTriggerWidgetsUponLoad(false);
-
-	gui.addButton("SaveHakoPreset", false);
-
-	gui.addSpacer();
 	gui.addLabel("OSC SplitList",OFX_UI_FONT_LARGE);
 	gui.addLabel("RDTK_1");
 	gui.addTextInput("OSC_A", "192.168.20.2");
@@ -44,11 +40,16 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 	gui.addTextInput("OSC_F", "192.168.20.23");
 	gui.addLabel("Dev_Onishi");
 	gui.addTextInput("OSC_G", "192.168.20.30");
+	gui.addSpacer();
+	gui.addLabel("Preset Settings");
+	gui.addToggle("SettingMode", &mbMakeSettings);
+	gui.addIntSlider("Channel", 0, 3, &makeSettings_targetInput);
+	gui.addButton("SaveHakoPreset", false);
 
 	refleshAddressList();
 
 	gui.autoSizeToFitWidgets();
-	
+	makeSettings_targetInput = 1;
 	ofAddListener(gui.newGUIEvent, this, &dpCameraUnit_Controller::guiEvent);
 }
 
@@ -57,13 +58,29 @@ dpCameraUnit_Controller::~dpCameraUnit_Controller(){
 }
 
 void dpCameraUnit_Controller::update(){
-	
+
+	static bool windowReShape;
+	if (mbMakeSettings){
+		if (mbMakeSettings != windowReShape) ofSetWindowShape(630, 1080);
+	}else{
+		if (mbMakeSettings != windowReShape) ofSetWindowShape(1920, 1080);
+	}
+	windowReShape = mbMakeSettings;
+
 	inputUnit	.update();
 	
 	if (inputUnit.mFourSplit){
-		for (int i = 0;i < 4;i++){
-			cvFXUnit[i]  .update(inputUnit.mFinalSource_FourSplit[i], inputUnit.mIsFrameNew);
-			cvAnalysis[i].update(cvFXUnit[i].mSource, cvFXUnit[i].mGraySource, inputUnit.mIsFrameNew);
+		if (mbMakeSettings){
+			cvFXUnit[0].update(inputUnit.mFinalSource_FourSplit[makeSettings_targetInput],
+							   inputUnit.mIsFrameNew);
+			cvAnalysis[0].update(cvFXUnit[makeSettings_targetInput].mSource,
+								 cvFXUnit[makeSettings_targetInput].mGraySource,
+								 inputUnit.mIsFrameNew);
+		}else{
+			for (int i = 0;i < 4;i++){
+				cvFXUnit[i]  .update(inputUnit.mFinalSource_FourSplit[i], inputUnit.mIsFrameNew);
+				cvAnalysis[i].update(cvFXUnit[i].mSource, cvFXUnit[i].mGraySource, inputUnit.mIsFrameNew);
+			}
 		}
 
 	}else{

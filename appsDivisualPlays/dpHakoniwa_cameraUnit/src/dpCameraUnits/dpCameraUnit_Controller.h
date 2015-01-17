@@ -26,7 +26,10 @@ public:
 	void refleshAddressList();
 
 	void guiEvent(ofxUIEventArgs& e);
-	
+
+	bool mbMakeSettings;
+	int makeSettings_targetInput;
+
 	ofxUICanvas gui;
 	vector<string> oscSendList;
 
