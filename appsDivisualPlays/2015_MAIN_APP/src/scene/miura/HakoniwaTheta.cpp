@@ -22,15 +22,11 @@ void HakoniwaTheta::setupControlPanel(){
 
 void HakoniwaTheta::setup(){
     
-    ofSetVerticalSync(true);
-    ofBackground(0);
     ofEnableAlphaBlending();
     
     sphere.set(700, 50);
     sphere.setPosition(dpGetFirstScreenCenter());
     sphere.setPosition(0, 0, 0);
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_FRONT);
     
     mVideoNo = 1;
     vidPlay.loadMovie("1.MP4");
@@ -59,6 +55,9 @@ void HakoniwaTheta::update(){
 
 void HakoniwaTheta::draw(){
 
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_FRONT);
+    
     ramSetViewPort(dpGetFirstScreenViewPort());
     
     ramBeginCamera();
@@ -77,6 +76,7 @@ void HakoniwaTheta::draw(){
     sphere.draw();
     
     ramEndCamera();
+    
 }
 
 void HakoniwaTheta::onPanelChanged(ofxUIEventArgs& e){
