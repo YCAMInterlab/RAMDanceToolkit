@@ -28,4 +28,6 @@ public:
 	ofxOscReceiver receiver;
 
 	ofSerial ser;
+
+	bool bDebug;
 };

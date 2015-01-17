@@ -30,12 +30,12 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 	dpCameraUnit.draw();
-	if (ofGetKeyPressed('q')) dpSwitcher.draw();
+	if (bDebug) dpSwitcher.draw();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	
+	if (key == 'q') bDebug ^= true;
 }
 
 //--------------------------------------------------------------
