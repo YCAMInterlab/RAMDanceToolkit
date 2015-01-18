@@ -1,5 +1,6 @@
 #include "ofApp.h"
 #ifdef DP_MASTER_HAKONIWA
+#include "dpScoreMasterHakoniwa.h"
 #include "dpScoreSceneMaster.h"
 #else
 #include "dpScoreSceneVec2SimpleGraph.h"
@@ -72,6 +73,9 @@ void ofApp::setup()
     OFX_BEGIN_EXCEPTION_HANDLING
     
 #ifdef DP_MASTER_HAKONIWA
+    getMH().initialize();
+    getMH().setupUI(mSceneManager.getTabBar());
+    
     auto master = SceneBase::Ptr(new SceneMaster());
     mSceneManager.add(master);
     mSceneManager.change<SceneMaster>();
@@ -261,6 +265,10 @@ void ofApp::draw()
 void ofApp::exit()
 {
     OFX_BEGIN_EXCEPTION_HANDLING
+    
+#ifdef DP_MASTER_HAKONIWA
+    getMH().shutdown();
+#endif
     
     mSceneManager.clear();
     
