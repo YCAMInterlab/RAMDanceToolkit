@@ -51,6 +51,7 @@ void testApp::setup()
     sceneManager.addScene(visSandStorm.getPtr());
     sceneManager.addScene(vecLineCircle.getPtr());
     
+    sceneManager.addScene(magPendulum.getPtr());
     sceneManager.addScene(visMagnetPendulum.getPtr());
     
     sceneManager.addScene(hakoVisTheta.getPtr());

@@ -39,7 +39,7 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
     ramGetGUI().addRadioGroup("mode___", modename, &mode);*/
     
     bTestMode = true;
-    distanceThreshold = 20.0f;
+    distanceThreshold = 60.0f;
     
     ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent,this,&dpHakoniwaMagnetPendulum::guiEvent);
     
