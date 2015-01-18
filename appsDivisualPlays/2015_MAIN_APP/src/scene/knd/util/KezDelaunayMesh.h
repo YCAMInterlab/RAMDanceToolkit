@@ -27,7 +27,7 @@ public:
         }
         setBitset();
         
-        mColor.set(ofColor::magenta);
+        mColor.set(dpColor::MAIN_COLOR);
     }
     
     void clear(){
@@ -254,9 +254,11 @@ public:
     vector<KezDelaunayMesh>mDelaunays;
     
     int mCurrentMesh = 0;
-    int mThresh = 4.0;
+    float mThresh = 4.0;
     
     bool mIsMeshChanged = false;
+    
+    ofPoint mPrePt;
 
     void setup(){
         for(int i = 0; i < MAX_MESH; i++){
@@ -311,13 +313,13 @@ public:
         glPointSize(1);
     }
     
-    void addPoint(ofPoint pt){
+    void addPoint(ofPoint pt,float scale){
         
-        if(pt.length() > mThresh){
+        if((mPrePt - pt).length() > mThresh){
             
-            mDelaunays[mCurrentMesh].addPoint(pt);
+            mDelaunays[mCurrentMesh].addPoint(pt * scale);
             mIsMeshChanged = false;
-            
+
         }else{
             
             if(mIsMeshChanged == false){
@@ -326,6 +328,8 @@ public:
             }
             
         }
+    
+        mPrePt = pt;
     }
     
     void rotAfterFinish(bool flag){
@@ -357,6 +361,10 @@ public:
         for(auto &v:mDelaunays){
             v.setOmitNum(num);
         }
+    }
+    
+    void setThresh(float thresh){
+        mThresh = thresh;
     }
     
 };
