@@ -39,7 +39,7 @@ private:
     bool bOn[NMAGNETS];
     bool bInversed[NMAGNETS];
     bool bTestMode = true;
-    int mode = 0;
+    bool bEachMode = false;
     bool bHideNodeView;
     
     vector <ofVec3f> vecRed;

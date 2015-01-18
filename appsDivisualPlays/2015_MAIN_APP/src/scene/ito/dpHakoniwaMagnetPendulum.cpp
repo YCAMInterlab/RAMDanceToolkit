@@ -32,13 +32,22 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
     
     ramGetGUI().addSlider("Distance Threshold", 2.0f, 200.0f, &distanceThreshold);
 
-   /* vector<string> modename;
+    ramGetGUI().addToggle("RESPONSE MODE_MAG", &bEachMode);
+    
+    /* vector<string> modename;
     modename.push_back("ALL 3DANCERS MODE");
     modename.push_back("2EACH 3DANCERS MODE");
     
     ramGetGUI().addRadioGroup("mode___", modename, &mode);*/
     
+    for (int i = 0; i < NMAGNETS; i++){
+    
+        bInversed[i] = true;
+        
+    }
+    
     bTestMode = false;
+    bEachMode = false;
     distanceThreshold = 44;
     
     ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent,this,&dpHakoniwaMagnetPendulum::guiEvent);
@@ -112,7 +121,7 @@ void dpHakoniwaMagnetPendulum::update() {
         d2 = mMotionExtractor.getDistanceAt(2, 3);
         d3 = mMotionExtractor.getDistanceAt(4, 5);
 
-        if (mode == 1) {
+        if (bEachMode) {
 
             if (d1 < distanceThreshold && d1 != 0.0f) {
                 bOn[0] = true;
@@ -135,7 +144,7 @@ void dpHakoniwaMagnetPendulum::update() {
                 bOn[4] = false;
                 bOn[5] = false;
             }
-        } else if (mode == 0) {
+        } else {
             
             if (d1 > distanceThreshold &&
                 d2 > distanceThreshold &&
