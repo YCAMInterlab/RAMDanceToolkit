@@ -11,8 +11,10 @@
 
 #define NMAGNETS 6
 
+#include "ramMain.h"
 #include "ramMotionExtractor.h"
 #include "dpConstants.h"
+#include "twistFinder.h"
 
 class dpHakoniwaMagnetPendulum : public ramBaseScene {
 public:
@@ -27,6 +29,9 @@ public:
     void drawActor(const ramActor& actor);
     void example_drawDump();
     void guiEvent(ofxUIEventArgs &e);
+    
+    void drawGraph(vector<ofVec3f> & vec, ofColor & drawColor, int elementNum);
+    void debugDraw();
 
     
 private:
@@ -51,6 +56,8 @@ private:
     ramMotionExtractor	mMotionExtractor;
     ofxOscSender mSenderOnOff;
     ofxOscSender mSenderInverse;
+    
+    twistFinder twFinder;
     
     //    float mVelocitySpeedScale = 10.0;
 };
