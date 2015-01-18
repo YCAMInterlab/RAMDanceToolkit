@@ -32,7 +32,7 @@ public:
 private:
     ofxOscSender mOscSender;
     ramActor mActor;
-    static const int kNumValves = 3;
+    static const int kNumValves = 6;
     bool mEnableOsc;
     
     int mNode0a;

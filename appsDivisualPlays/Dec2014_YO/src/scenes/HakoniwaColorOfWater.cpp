@@ -143,7 +143,7 @@ HakoniwaColorOfWater::HakoniwaColorOfWater()
     mBlinkClose = 1.5f;
     
     for (int i=0; i<kNumValves; i++) {
-        mValves[i].pin = 6+i;
+        mValves[i].pin = 2+i;
         mValves[i].sender = &mOscSender;
         mValves[i].blinkOpen = mBlinkOpen;
         mValves[i].blinkClose = mBlinkClose;
