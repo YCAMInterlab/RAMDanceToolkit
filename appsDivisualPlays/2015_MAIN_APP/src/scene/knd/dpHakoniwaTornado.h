@@ -12,7 +12,7 @@
 class dpHakoniwaTornado : public ramBaseScene{
 public:
     
-    string getName() const {return "dpHakoniwaTornado";};
+    string getName() const {return "dpHTornado";};
     
     void setupControlPanel(){
         ramGetGUI().addToggle("fan",&mFan);
