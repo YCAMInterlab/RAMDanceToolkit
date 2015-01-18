@@ -133,12 +133,15 @@ extern const int kPortNumberMasterHakoniwa = 8528;
 extern const string kHostNameCameraUnit = "192.168.20.5";
 extern const int kPortNumberCameraUnit = 12400;
 
-extern const int kNumScenes = 4;
+extern const int kNumScenes = 7;
 extern const string kSceneNames[kNumScenes] = {
     "dpVisPLink_Laser",
+    "dpVisMagPendulum",
     "dpVisServoPendulum",
+    "dpVisSandStorm",
     "dpVisStruggle",
-    "no scene",
+    "dpVisStage",
+    "dpVisTheta",
 };
 
 extern const string kOscAddrRamSetScene = "/ram/set_scene";

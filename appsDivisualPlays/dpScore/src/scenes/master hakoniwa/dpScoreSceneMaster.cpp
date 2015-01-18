@@ -194,9 +194,11 @@ void SceneMaster::update(ofxEventMessage& m)
     for (int i=0; i<mMeanAddtion.DIM; i++) {
         if (mMeanAddtion[i] >= mMeanLimit) {
             mMeanAddtion[i] = 0.f;
-            sendScene(kSceneNames[i], true, true, true, true, true);
+            const int which = ofRandom(2);
+            const int scene = ofClamp(which * 4 + i, 0, kNumScenes);
+            sendScene(kSceneNames[scene], true, true, true, true, true);
             sendScene(kSceneNames[mPrevScene], false, true, true, true, true);
-            mPrevScene = i;
+            mPrevScene = scene;
         }
     }
 }
