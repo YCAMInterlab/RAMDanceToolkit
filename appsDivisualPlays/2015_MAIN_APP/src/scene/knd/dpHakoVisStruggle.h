@@ -130,19 +130,19 @@ private:
     
     KezSlidePoint mVecFromCam;
     
-    float mScaleDrawDelaunay = 1.0;
+    float mScaleDrawDelaunay = 400.0;
     float mLineWidth = 4.0;
     
     ofPlanePrimitive mPlane;
     
     KezDelaunayMeshController mDelaunayMesh;
     
-    bool isShowFaces = false;
-    bool isRotAfterFinish = false;
+    bool isShowFaces = true;
+    bool isRotAfterFinish = true;
     float mAlphaReducSpeed = 0.5;
     
     int mOmitNum = 6;
-    float mThresh = 0.5;
+    float mThresh = 0.02;
     
     ofPoint mRot;
 };

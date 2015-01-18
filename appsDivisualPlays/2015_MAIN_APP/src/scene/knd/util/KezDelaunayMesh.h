@@ -239,8 +239,8 @@ private:
         }
     }
     
-    bool isRotAfterFinish = false;
-    bool isShowFaces = false;
+    bool isRotAfterFinish = true;
+    bool isShowFaces = true;
     
     ofColor mColor;
     
@@ -254,7 +254,7 @@ public:
     vector<KezDelaunayMesh>mDelaunays;
     
     int mCurrentMesh = 0;
-    float mThresh = 4.0;
+    float mThresh = 0.01;
     
     bool mIsMeshChanged = false;
     
