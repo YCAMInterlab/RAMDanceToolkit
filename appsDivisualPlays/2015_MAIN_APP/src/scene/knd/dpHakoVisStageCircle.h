@@ -109,7 +109,7 @@ public:
     void setupControlPanel(){}
     void setup(){
         ramOscManager::instance().addReceiverTag(&mReceiver);
-        mReceiver.addAddress("/dp/cameraUnit/stage/contour/boundingRect");
+        mReceiver.addAddress("/dp/cameraUnit/Stage/contour/boundingRect");
 
         mTex.loadImage("images/gradationCricle.png");
     }
@@ -119,7 +119,7 @@ public:
         while(mReceiver.hasWaitingMessages()){
             ofxOscMessage m;
             mReceiver.getNextMessage(&m);
-            if(m.getAddress() == "/dp/cameraUnit/stage/contour/boundingRect"){
+            if(m.getAddress() == "/dp/cameraUnit/Stage/contour/boundingRect"){
                 
                 int num = m.getArgAsInt32(0);
                 

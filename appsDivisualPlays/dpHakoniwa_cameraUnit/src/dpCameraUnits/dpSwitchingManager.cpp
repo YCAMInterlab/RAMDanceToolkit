@@ -17,58 +17,125 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	//箱庭プリセット
 	hakoniwaPresets* hako;
 
+#pragma mark ★パラレルリンク:プリズム
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_PRISM;
-	hakoniwas.back()->CVPreset	= "dpPLink_Prism";
+	hakoniwas.back()->CVPreset	= "Plink_Prism";
 	hakoniwas.back()->sourceCh	= 2;
-	hakoniwas.back()->sceneNames.push_back("H:dpPLink_Prism");
+	hakoniwas.back()->sceneNames.push_back("H:dpHPLink_Prism");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisPLink_Prism");
 
+#pragma mark ★パラレルリンク:畜光レーザー
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_LASER;
-	hakoniwas.back()->CVPreset	= "dpPlink_Laser";
+	hakoniwas.back()->CVPreset	= "Plink_Laser";
 	hakoniwas.back()->sourceCh	= 3;
-	hakoniwas.back()->sceneNames.push_back("H:dpPLink_Laser");
-	hakoniwas.back()->sceneNames.push_back("V:dpPLink_Laser");
+	hakoniwas.back()->sceneNames.push_back("H:dpHPLink_Laser");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisPLink_Laser");
 
+#pragma mark ★パラレルリンク:オイル
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_OIL;
-	hakoniwas.back()->CVPreset	= "dpPlink_Oil";
+	hakoniwas.back()->CVPreset	= "Plink_Oil";
 	hakoniwas.back()->sourceCh	= 4;
-	hakoniwas.back()->sceneNames.push_back("H:dpPLink_Oil");
+	hakoniwas.back()->sceneNames.push_back("H:dpHPLink_Oil");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisPLink_Oil");
 
+#pragma mark サーボ振り子
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_SERVOPENDULUM;
-	hakoniwas.back()->CVPreset	= "dpServoPendulum";
-	hakoniwas.back()->sourceCh	= 8;
-    hakoniwas.back()->sceneNames.push_back("H:dpServoPendulum");
+	hakoniwas.back()->CVPreset	= "ServoPendulum";
+	hakoniwas.back()->sourceCh	= 9;
+    hakoniwas.back()->sceneNames.push_back("H:dpHServoPendulum");
     hakoniwas.back()->sceneNames.push_back("V:dpVisServoPendulum");
 
+#pragma mark 磁石振り子
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_MAGPENDULUM;
+	hakoniwas.back()->CVPreset	= "MagnetPendulum";
+	hakoniwas.back()->sourceCh	= 4;
+	hakoniwas.back()->sceneNames.push_back("H:dpHMagPendulum");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisMagPendulum");
+
+#pragma mark Theta
+	//TODO: シーンV名
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_THETA;
+	hakoniwas.back()->CVPreset	= "Theta";
+	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sceneNames.push_back("V:dpVisTheta");
+
+#pragma mark ★色水
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_COLOROFWATER;
+	hakoniwas.back()->CVPreset	= "ColorOfWater";
+	hakoniwas.back()->sourceCh	= 1;
+	hakoniwas.back()->sceneNames.push_back("H:dpHColorOfWater");
+
+#pragma mark 砂嵐
+	//TODO: ソース番号
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_SANDSTORM;
+	hakoniwas.back()->CVPreset	= "SandStorm";
+	hakoniwas.back()->sourceCh	= 7;
+	hakoniwas.back()->sceneNames.push_back("H:dpHSandStorm");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisSandStorm");
+
+#pragma mark 氷
+	//TODO: ソース番号・箱庭出力シーン
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_FROZENICE;
+	hakoniwas.back()->CVPreset	= "Ice";
+	hakoniwas.back()->sourceCh	= 5;
+	hakoniwas.back()->sceneNames.push_back("H:");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisIceMap");
+
+#pragma mark 尺取り虫
+	//TODO: ソース番号・箱庭出力シーン
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_WORM;
+	hakoniwas.back()->CVPreset	= "";
+	hakoniwas.back()->sourceCh	= 7;
+	hakoniwas.back()->sceneNames.push_back("H:");
+	hakoniwas.back()->sceneNames.push_back("V:dp");
+
+#pragma mark ★ステージ
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_STAGE;
-	hakoniwas.back()->CVPreset	= "dpStage";
+	hakoniwas.back()->CVPreset	= "Stage";
 	hakoniwas.back()->sourceCh	= 10;
 	hakoniwas.back()->sceneNames.push_back("V:dpVisStage");
 
+#pragma mark abare
+    hakoniwas.push_back(new hakoniwaPresets());
+    hakoniwas.back()->type      = HAKO_STRUGGLE;
+    hakoniwas.back()->CVPreset  = "Struggle";
+    hakoniwas.back()->sourceCh  = 8;
+    hakoniwas.back()->sceneNames.push_back("H:dpHStruggle");
+    hakoniwas.back()->sceneNames.push_back("V:dpVisStruggle");
+    
+#pragma mark ★テストA
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_TESTA;
 	hakoniwas.back()->CVPreset	= "TestA";
 	hakoniwas.back()->sourceCh	= 2;
 	hakoniwas.back()->sceneNames.push_back("V:TestSceneA");
 
+#pragma mark ★テストB
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_TESTB;
 	hakoniwas.back()->CVPreset	= "TestB";
 	hakoniwas.back()->sourceCh	= 3;
 	hakoniwas.back()->sceneNames.push_back("V:TestSceneB");
 
+#pragma mark ★テストC
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_TESTC;
 	hakoniwas.back()->CVPreset	= "TestC";
 	hakoniwas.back()->sourceCh	= 4;
 	hakoniwas.back()->sceneNames.push_back("V:TestSceneC");
 
+#pragma mark ★テストD
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_TESTD;
 	hakoniwas.back()->CVPreset	= "TestD";
@@ -155,8 +222,8 @@ void dpSwitchingManager::draw(){
 		ofDrawBitmapString(dispInfo, 0,0);
 
 		if (dispInfo == "TestSceneA") ofSetColor(255, 0, 0);
-		if (dispInfo == "TestSceneB") ofSetColor(0, 255, 0);
-		if (dispInfo == "TestSceneC") ofSetColor(255, 255, 0);
+		if (dispInfo == "TestSceneC") ofSetColor(0, 255, 0);
+		if (dispInfo == "TestSceneB") ofSetColor(255, 255, 0);
 		if (dispInfo == "TestSceneD") ofSetColor(255, 0, 255);
 		ofRect(0, 20, 30, 30);
 
@@ -168,6 +235,11 @@ void dpSwitchingManager::draw(){
 
 void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
 
+    if (m.getAddress() == "/ram/set_slave"){
+        isSlave = true;
+        m.setAddress("/ram/set_scene");
+    }
+    
 	if (m.getAddress() == "/ram/set_scene"){
 		cout << "=-=-=-=-=-=-=-Head -=-=-=-=-=-=-=-=" << endl << endl;
 		int hakoId = getHakoniwaIndex(m.getArgAsString(0));
@@ -198,6 +270,10 @@ void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
 			cout << "Disable hakoniwa from Master=====" << endl;
 			disableHakoniwa(hakoniwaType(hakoId));
 		}
+        if (!isSlave){
+            m.setAddress("/ram/set_slave");
+            senderToSlave.sendMessage(m);
+        }
 	}
 
 	if (m.getAddress() == "/dp/master/switch/enable"){
@@ -321,7 +397,10 @@ void dpSwitchingManager::disableHakoniwa(hakoniwaType type){
 		}
 	}
 
-	if (!isExist) return; //該当する箱庭無し
+    if (!isExist){
+        refleshSceneforRDTK();
+        return; //該当する箱庭無し
+    }
 
 	//ターゲットディスプレイを全て無効にする
 	for (int i = 0;i < mSlots[targCvSlot].targetDisplay.size();i++){
@@ -334,7 +413,8 @@ void dpSwitchingManager::disableHakoniwa(hakoniwaType type){
 	mSlots[targCvSlot].targetDisplay.clear();
 	mSlots[targCvSlot].sourceCh = - 1;
 	mSlots[targCvSlot].presetFile = "";
-
+    
+    refleshSceneforRDTK();
 }
 
 void dpSwitchingManager::disableDisplay(int displayNum){
@@ -393,7 +473,23 @@ int dpSwitchingManager::getHakoniwaIndex(string sceneName){
 }
 
 void dpSwitchingManager::refleshSceneforRDTK(){
-
+    
+    for (int i = 0;i < hakoniwas.size();i++){
+        if (searchHakoniwaIsActive(hakoniwas[i]->type) == -1){
+            for (int j = 0;j < hakoniwas[i]->sceneNames.size();j++){
+                ofxOscMessage m;
+                m.setAddress("/ram/set_scene");
+                m.addStringArg(hakoniwas[i]->sceneNames[j].substr(2));
+                m.addIntArg(0);
+                m.addIntArg(0);
+                m.addIntArg(0);
+                cout << "Clear :" << hakoniwas[i]->sceneNames[j].substr(2) << endl;
+                if (!NETWORK_ISSTOP) senderToRDTK1.sendMessage(m);
+                if (!NETWORK_ISSTOP) senderToRDTK2.sendMessage(m);
+            }
+        }
+    }
+    
 	for (int i = 0;i < CV_SLOT_NUM;i++){
 
 		if (!mSlots[i].isEmpty){
@@ -436,22 +532,6 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 			}
 		}
 
-	}
-
-	for (int i = 0;i < hakoniwas.size();i++){
-		if (searchHakoniwaIsActive(hakoniwas[i]->type) == -1){
-			for (int j = 0;j < hakoniwas[i]->sceneNames.size();j++){
-				ofxOscMessage m;
-				m.setAddress("ram/set_scene");
-				m.addStringArg(hakoniwas[i]->sceneNames[j].substr(2));
-				m.addIntArg(0);
-				m.addIntArg(0);
-				m.addIntArg(0);
-
-				if (!NETWORK_ISSTOP) senderToRDTK1.sendMessage(m);
-				if (!NETWORK_ISSTOP) senderToRDTK2.sendMessage(m);
-			}
-		}
 	}
 
 }

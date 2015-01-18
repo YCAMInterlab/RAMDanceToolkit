@@ -80,7 +80,7 @@ private:
 
 class dpHakoVisVecLineCircle : public ramBaseScene{
 public:
-    string getName() const {return "dpVisVecLine";};
+    string getName() const {return "dpVisSandStorm";};
     void setupControlPanel(){
         ramGetGUI().addSlider("scale",1.0,100.0,&mVecScale);
     }

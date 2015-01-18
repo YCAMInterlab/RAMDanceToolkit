@@ -97,9 +97,7 @@ void HakoniwaParallelLink_Base::draw(){
 	glDisable(GL_DEPTH_TEST);
 	ramEndCamera();
 
-	if (ofGetFrameNum() % (int)mLinkManager.signal_step == 0){
-//		ofCircle(ofGetWidth()/2, ofGetHeight()/2, 300);
-	}
+	if (mLinkManager.enableSync) mFlagNeedDestract = true;
 
 	draw_over();
 }
@@ -239,8 +237,6 @@ void HakoniwaParallelLink_Base::setupControlPanel(){
 	motionEx.setupControlPanel(this);
 
 	initialize();
-
-	if (mLinkManager.enableSync) mFlagNeedDestract = true;
 }
 
 void HakoniwaParallelLink_Base::drawActor(const ramActor &actor)
@@ -316,7 +312,8 @@ void HakoniwaParallelLink_Base::onPanelChanged(ofxUIEventArgs& e){
 }
 
 void HakoniwaParallelLink_Base::onEnabled(){
-
+	loadPreset();
+	motionEx.load("motionExt_"+getName()+".xml");
 }
 
 void HakoniwaParallelLink_Base::onDisabled(){

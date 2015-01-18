@@ -8,7 +8,7 @@
 class dpHakoniwaSand : public ramBaseScene {
 public:
     
-    string getName() const {return "dpHSand";};
+    string getName() const {return "dpHSandStorm";};
     
     void setupControlPanel();
     void setup();

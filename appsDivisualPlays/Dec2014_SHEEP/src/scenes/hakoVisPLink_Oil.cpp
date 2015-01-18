@@ -10,7 +10,7 @@
 
 hakoVisPLink_Oil::hakoVisPLink_Oil(){
 
-	receiver.addAddress("/dp/cameraUnit/plink_Oil");
+	receiver.addAddress("/dp/cameraUnit/Plink_Oil");
 	ramOscManager::instance().addReceiverTag(&receiver);
 
 }
@@ -32,7 +32,7 @@ void hakoVisPLink_Oil::update(){
 	while (receiver.hasWaitingMessages()){
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
-		if (m.getAddress() == "/dp/cameraUnit/plink_Oil/contour/boundingRect"){
+		if (m.getAddress() == "/dp/cameraUnit/Plink_Oil/contour/boundingRect"){
 			int nBlob = m.getArgAsInt32(0);
 			pts.assign(nBlob, ofVec3f(0,0,0));
 			labels.assign(nBlob, 0);

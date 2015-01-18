@@ -23,11 +23,11 @@ void HakoniwaGearMove::setupControlPanel(){
     
     mMax1speed = 18000;
     mMin1speed = 600;
-    mMax2speed = 30000;
+    mMax2speed = 26000;
     mMin2speed = 100;
-    mMax3speed = 26000;
-    mMin3speed = 16000;
-    mScale = 3000;
+    mMax3speed = 12000;
+    mMin3speed = 6500;
+    mScale = 500;
     
     ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
     panel->addToggle("data show", &mDatahow);
@@ -40,7 +40,7 @@ void HakoniwaGearMove::setupControlPanel(){
     panel->addIntSlider("TrurnGear1Speed", 100, 25000, &mGear1Speed);
     panel->addToggle("gear2", &mGear2);
     panel->addToggle("gear2 reverse", &mGear2Reverse);
-    panel->addIntSlider("TrurnGear2Speed", 100, 45000, &mGear2Speed);
+    panel->addIntSlider("TrurnGear2Speed", 100, 35000, &mGear2Speed);
     panel->addToggle("gear3", &mGear3);
     panel->addToggle("gear3 reverse", &mGear3Reverse);
     panel->addIntSlider("TrurnGear3Speed", 100, 35000, &mGear3Speed);
@@ -59,9 +59,9 @@ void HakoniwaGearMove::setup(){
     stepManager.addStepper("unit2", 400, 1);
     stepManager.addStepper("unit3", 400, 2);
     stepManager.resetAllDevices();
-//    stepManager.setupEasyFromPreset(KSMR_STEP_P_PMSA_B56D5);
+    stepManager.setupEasyFromPreset(KSMR_STEP_P_PMSA_B56D5);
 //    stepManager.setupEasyFromPreset(KSMR_STEP_SM_42BYG011_25);
-    stepManager.setupEasy();
+//    stepManager.setupEasy();
     stepManager.setMicroSteps(5);
     
     stepManager.setStepperAll(true);
@@ -82,11 +82,8 @@ void HakoniwaGearMove::draw(){
 
     if (mDatahow)		drawDump();
 
-
-    if (ofGetFrameNum() % 300 == 0){
-        mGear1Count = 0;
-        mGear2Count = 0;
-        mGear3Count = 0;
+    if (ofGetFrameNum() % 30 == 0){
+        
         for (int i = 0;i < motionExtractor.getNumPort();i++){
             if (motionExtractor.getActorNameAt(i) == "sasamoto"){
                 mGear1Count += motionExtractor.getVelocitySpeedAt(i);
@@ -99,13 +96,74 @@ void HakoniwaGearMove::draw(){
             }
         }
         
-        if (mManual != true) {
+        mTotalcount++;
+        
+        if ((mManual != true && mTotalcount >= 10)) {
             mGear1Speed = mGear1Count * mScale;
             mGear2Speed = mGear2Count * mScale;
             mGear3Speed = mGear3Count * mScale;
             cout << "Gear1Speed " << mGear1Speed << endl;
             cout << "Gear2Speed " << mGear2Speed << endl;
             cout << "Gear3Speed " << mGear3Speed << endl;
+            
+            if(mGear1 == true){
+                if (mManual != true) {
+                    float x = ofRandom(0,1);
+                    int Min1speed = ofRandom(600, 2500);
+                    if ( x  > 0.51 ){
+                        mGear1Reverse = true;
+                    }else{
+                        mGear1Reverse = false;
+                    }
+                    if ( mGear1Speed >= mMax1speed) {
+                        OnestepTurn(0, mMax1speed, mGear1Reverse);
+                    }else if( mGear1Speed <= mMin1speed){
+                        OnestepTurn(0, mMin1speed, mGear1Reverse);
+                    }else{
+                        OnestepTurn(0, mGear1Speed, mGear1Reverse);
+                    }
+                }
+            }
+            if(mGear2 == true){
+                if (mManual != true) {
+                    float x = ofRandom(0,1);
+                    int Min2speed = ofRandom(100, 2500);
+                    if ( x > 0.51 ){
+                        mGear2Reverse = true;
+                    }else{
+                        mGear2Reverse = false;
+                    }
+                    if ( mGear2Speed >= mMax2speed) {
+                        OnestepTurn(1, mMax2speed, mGear2Reverse);
+                    }else if( mGear2Speed <= mMin2speed){
+                        OnestepTurn(1, mMin2speed, mGear2Reverse);
+                    }else{
+                        OnestepTurn(1, mGear2Speed, mGear2Reverse);
+                    }
+                }
+            }
+            if(mGear3 == true){
+                if (mManual != true) {
+                    //逆回転はしない
+                    //            float x = ofRandom(0,1);
+                    //            if ( x > 0.51 ){
+                    //                mgear3Reverse = true;
+                    //            }else{
+                    //                mgear3Reverse = false;
+                    //            }
+                    if ( mGear3Speed >= mMax3speed) {
+                        OnestepTurn(2, mMax3speed, true);
+                    }else if( mGear3Speed <= mMin3speed){
+                        OnestepTurn(2, mMin3speed, true);
+                    }else{
+                        OnestepTurn(2, mGear3Speed, mGear3Reverse);
+                    }
+                }
+            }
+            mGear1Count = 0;
+            mGear2Count = 0;
+            mGear3Count = 0;
+            mTotalcount = 0;
         }
         
         if(mAllTurn == true){
@@ -114,64 +172,19 @@ void HakoniwaGearMove::draw(){
             stepManager.setStepperAll(false);
         }
         if(mGear1 == true){
-            if (mManual != true) {
-                float x = ofRandom(0,1);
-                int Min1speed = ofRandom(600, 2500);
-                if ( x  > 0.51 ){
-                    mGear1Reverse = true;
-                }else{
-                    mGear1Reverse = false;
-                }
-                if ( mGear1Speed >= mMax1speed) {
-                    OnestepTurn(0, mMax1speed, mGear1Reverse);
-                }else if( mGear1Speed <= mMin1speed){
-                    OnestepTurn(0, mMin1speed, mGear1Reverse);
-                }else{
-                    OnestepTurn(0, mGear1Speed, mGear1Reverse);
-                }
-            }else{
+            if (mManual == true) {
                 //マニュアル操作
                 OnestepTurn(0, mGear1Speed, mGear1Reverse);
             }
         }
         if(mGear2 == true){
-            if (mManual != true) {
-                float x = ofRandom(0,1);
-                int Min2speed = ofRandom(100, 2500);
-                if ( x > 0.51 ){
-                    mGear2Reverse = true;
-                }else{
-                    mGear2Reverse = false;
-                }
-                if ( mGear2Speed >= mMax2speed) {
-                    OnestepTurn(1, mMax2speed, mGear2Reverse);
-                }else if( mGear2Speed <= mMin2speed){
-                    OnestepTurn(1, mMin2speed, mGear2Reverse);
-                }else{
-                    OnestepTurn(1, mGear2Speed, mGear2Reverse);
-                }
-            }else{
+            if (mManual == true) {
                 //マニュアル操作
                 OnestepTurn(1, mGear2Speed, mGear2Reverse);
             }
         }
         if(mGear3 == true){
-            if (mManual != true) {
-                //逆回転はしない
-    //            float x = ofRandom(0,1);
-    //            if ( x > 0.51 ){
-    //                mgear3Reverse = true;
-    //            }else{
-    //                mgear3Reverse = false;
-    //            }
-                if ( mGear3Speed >= mMax3speed) {
-                    OnestepTurn(2, mMax3speed, true);
-                }else if( mGear3Speed <= mMin3speed){
-                    OnestepTurn(2, mMin3speed, true);
-                }else{
-                    OnestepTurn(2, mGear3Speed, mGear3Reverse);
-                }
-            }else{
+            if (mManual == true) {
                 //マニュアル操作
                 OnestepTurn(2, mGear3Speed, mGear3Reverse);
             }
