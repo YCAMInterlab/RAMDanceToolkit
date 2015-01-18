@@ -26,6 +26,7 @@ public:
         ramGetGUI().addSlider("limit", 0.1, 1.0, &mLimit);
         
         mMotionExtractor.setupControlPanel(this);
+        mMotionExtractor.load("motionExt_dpHServoPendulum.xml");
         
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoniwaServoPendulum::onPanelChanged);
     }
@@ -98,10 +99,10 @@ public:
 private:
     
     float mSpeed = 1.0;
-    float mRange = 20.0;
+    float mRange = 80.0;
     float mRad = 100.0;
     
-    float mLimit = 0.1;
+    float mLimit = 0.25;
     
     dpServoPendulumThread mThread;
     
