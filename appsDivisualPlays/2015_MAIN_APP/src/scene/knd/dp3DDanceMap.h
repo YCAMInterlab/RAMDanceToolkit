@@ -16,7 +16,7 @@
 
 class dp3DDanceMap : public ramBaseScene{
 public:
-    string getName() const { return "dp3DDanceMap"; }
+    string getName() const { return "dpVisIceMap"; }
     void setupControlPanel(){
         
         ramGetGUI().addToggle("Osc", &isReceiveOsc);
