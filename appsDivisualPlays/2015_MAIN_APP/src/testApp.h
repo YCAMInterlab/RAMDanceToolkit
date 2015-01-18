@@ -22,6 +22,7 @@
 
 //ito Scenes
 #include "dpHakoniwaSand.h"
+#include "dpHakoniwaMagnetPendulum.h"
 
 //Miura Scenes
 #include "HakoniwaTheta.h"
@@ -101,7 +102,10 @@ public:
     
     // worm
     dpVisWorm             visWorm;
-    
+
+	//MagPendulum
+	dpHakoniwaMagnetPendulum	magPendulum;
+
     // struggle
     dpHakoniwaStruggle hakoniwaStruggle;
     dpHakoVisStruggle visStruggle;
