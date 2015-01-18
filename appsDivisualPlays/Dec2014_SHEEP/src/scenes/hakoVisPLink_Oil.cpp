@@ -10,7 +10,7 @@
 
 hakoVisPLink_Oil::hakoVisPLink_Oil(){
 
-	receiver.addAddress("/dp/cameraUnit/plink_Oil");
+	receiver.addAddress("/dp/cameraUnit/Plink_Oil");
 	ramOscManager::instance().addReceiverTag(&receiver);
 
 }

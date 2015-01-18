@@ -11,7 +11,7 @@
 hakoVisPLink_Prism::hakoVisPLink_Prism(){
 
 	grid.setGridScale(75.0);
-	receiver.addAddress("/dp/cameraUnit/plink_Prism");
+	receiver.addAddress("/dp/cameraUnit/Plink_Prism");
 	ramOscManager::instance().addReceiverTag(&receiver);
 
 }

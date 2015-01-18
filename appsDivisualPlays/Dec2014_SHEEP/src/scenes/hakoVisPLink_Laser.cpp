@@ -10,7 +10,7 @@
 
 hakoVisPLink_Laser::hakoVisPLink_Laser(){
 
-	receiver.addAddress("/dp/cameraUnit/plink_Laser");
+	receiver.addAddress("/dp/cameraUnit/Plink_Laser");
 	ramOscManager::instance().addReceiverTag(&receiver);
 
 	lines.assign(300, liningUnit());
