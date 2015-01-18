@@ -1,25 +1,24 @@
 //
-//  dpHakoniwaMagnetPendulum.h
+//  dpTryTwistChecker.h
 //  example-ramMotionExtractor
 //
-//  Created by itotaka on 1/16/15.
+//  Created by itotaka on 1/18/15.
 //
 //
 
-#ifndef __example_ramMotionExtractor__dpHakoniwaMagnetPendulum__
-#define __example_ramMotionExtractor__dpHakoniwaMagnetPendulum__
+#ifndef __example_ramMotionExtractor__dpTryTwistChecker__
+#define __example_ramMotionExtractor__dpTryTwistChecker__
 
-#define NMAGNETS 6
 
 #include "ramMain.h"
 #include "ramMotionExtractor.h"
 #include "dpConstants.h"
 #include "twistFinder.h"
 
-class dpHakoniwaMagnetPendulum : public ramBaseScene {
+class dpTryTwistChecker : public ramBaseScene {
 public:
     
-    string getName() const {return "dpHMagPendulum";};
+    string getName() const {return "dpTryTwist";};
     
     void setupControlPanel();
     void setup();
@@ -30,9 +29,9 @@ public:
     void example_drawDump();
     void guiEvent(ofxUIEventArgs &e);
     
-//    void drawGraph(vector<ofVec3f> & vec, ofColor & drawColor, int elementNum);
-//    void debugDraw();
-
+    void drawGraph(vector<ofVec3f> & vec, ofColor & drawColor, int elementNum);
+    void debugDraw();
+    
     
 private:
     
@@ -41,14 +40,8 @@ private:
     //    string mVert;
     //    ofShader mDisplace;
     
-    
-    float distanceThreshold;
-    bool bOn[NMAGNETS];
-    bool bInversed[NMAGNETS];
-    bool bTestMode = true;
-    int mode;
     bool bHideNodeView;
-    
+        
     vector <ofVec3f> vecRed;
     vector <ofVec3f> vecGreen;
     vector <ofVec3f> vecBlue;
@@ -63,4 +56,4 @@ private:
 };
 
 
-#endif /* defined(__example_ramMotionExtractor__dpHakoniwaMagnetPendulum__) */
+#endif /* defined(__example_ramMotionExtractor__dpTryTwistChecker__) */

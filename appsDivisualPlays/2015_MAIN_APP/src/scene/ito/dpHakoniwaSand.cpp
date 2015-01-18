@@ -15,7 +15,7 @@ void dpHakoniwaSand::setupControlPanel(){
     
     //ramGetGUI().addRadioGroup("mode__", contents, &mode);
     
-    bTestMode = true;
+    bTestMode = false;
     
 }
 
@@ -42,15 +42,15 @@ void dpHakoniwaSand::update(){
     mMotionExtractor.update();
     
     if (!bTestMode) {
-        if (mode == 0) {
+//        if (mode == 0) {
             val1 = (int)ofMap(mMotionExtractor.getPositionAt(0).y, 0, 200, 800, 2200);
             val2 = (int)ofMap(mMotionExtractor.getPositionAt(1).y, 0, 200, 800, 2200);
             val3 = (int)ofMap(mMotionExtractor.getPositionAt(2).y, 0, 200, 1000, 2000);
-        } else if (mode ==1) {
-            
-                //not yet
-        
-        }
+//        } else if (mode ==1) {
+//            
+//                //not yet
+//        
+//        }
     }
 
     sendOsc();
