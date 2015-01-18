@@ -51,16 +51,14 @@ void testApp::setup()
 
 	//MagnetPendulum
 	sceneManager.addScene(magPendulum.getPtr());
-
+    sceneManager.addScene(visMagnetPendulum.getPtr());
 
 	//SandStorm
     sceneManager.addScene(hakoniwaSand.getPtr());
 	sceneManager.addScene(visSandStorm.getPtr());
 
 	sceneManager.addScene(vecLineCircle.getPtr());
-
-	//MagnetPendulum
-    sceneManager.addScene(visMagnetPendulum.getPtr());
+    
 
 	//Theta
     sceneManager.addScene(hakoVisTheta.getPtr());

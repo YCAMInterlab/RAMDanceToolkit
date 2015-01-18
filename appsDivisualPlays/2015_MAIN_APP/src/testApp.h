@@ -108,6 +108,7 @@ public:
 
 	//MagPendulum
 	dpHakoniwaMagnetPendulum	magPendulum;
+    dpHakoVisMagnetPendulum visMagnetPendulum;
 
     // struggle
     dpHakoniwaStruggle hakoniwaStruggle;
@@ -124,6 +125,5 @@ public:
     // tornado
     dpHakoniwaTornado hakoniwaTornado;
     dpHakoVisTornado  visTornado;
-    
-    dpHakoVisMagnetPendulum visMagnetPendulum;
+
 };
