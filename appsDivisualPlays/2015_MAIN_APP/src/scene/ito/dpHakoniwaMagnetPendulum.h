@@ -32,21 +32,14 @@ public:
     
     void drawGraph(vector<ofVec3f> & vec, ofColor & drawColor, int elementNum);
     void debugDraw();
-
     
 private:
-    
-    //    ofPlanePrimitive mPlane;
-    //    string mFrag;
-    //    string mVert;
-    //    ofShader mDisplace;
-    
     
     float distanceThreshold;
     bool bOn[NMAGNETS];
     bool bInversed[NMAGNETS];
     bool bTestMode = true;
-    int mode;
+    bool bEachMode = false;
     bool bHideNodeView;
     
     vector <ofVec3f> vecRed;
@@ -57,9 +50,10 @@ private:
     ofxOscSender mSenderOnOff;
     ofxOscSender mSenderInverse;
     
+    float d1, d2, d3;
+    
     twistFinder twFinder;
     
-    //    float mVelocitySpeedScale = 10.0;
 };
 
 

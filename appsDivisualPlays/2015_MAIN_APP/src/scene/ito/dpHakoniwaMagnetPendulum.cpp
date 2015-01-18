@@ -32,14 +32,23 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
     
     ramGetGUI().addSlider("Distance Threshold", 2.0f, 200.0f, &distanceThreshold);
 
-   /* vector<string> modename;
+    ramGetGUI().addToggle("RESPONSE MODE_MAG", &bEachMode);
+    
+    /* vector<string> modename;
     modename.push_back("ALL 3DANCERS MODE");
     modename.push_back("2EACH 3DANCERS MODE");
     
     ramGetGUI().addRadioGroup("mode___", modename, &mode);*/
     
+    for (int i = 0; i < NMAGNETS; i++){
+    
+        bInversed[i] = true;
+        
+    }
+    
     bTestMode = false;
-    distanceThreshold = 60.0f;
+    bEachMode = false;
+    distanceThreshold = 45;
     
     ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent,this,&dpHakoniwaMagnetPendulum::guiEvent);
     
@@ -108,11 +117,13 @@ void dpHakoniwaMagnetPendulum::update() {
     
     if (!bTestMode) {
         
-        float d1 = mMotionExtractor.getDistanceAt(0, 1);
-        float d2 = mMotionExtractor.getDistanceAt(2, 3);
-        float d3 = mMotionExtractor.getDistanceAt(4, 5);
+        d1 = mMotionExtractor.getDistanceAt(0, 1);
+        d2 = mMotionExtractor.getDistanceAt(2, 3);
+        d3 = mMotionExtractor.getDistanceAt(4, 5);
+        
+//        cout << d1 << ", " << d2 << ", " << d3 << endl;
 
-        if (mode == 1) {
+        if (bEachMode) {
 
             if (d1 < distanceThreshold && d1 != 0.0f) {
                 bOn[0] = true;
@@ -135,14 +146,14 @@ void dpHakoniwaMagnetPendulum::update() {
                 bOn[4] = false;
                 bOn[5] = false;
             }
-        } else if (mode == 0) {
+        } else {
             
-            if (d1 > distanceThreshold &&
-                d2 > distanceThreshold &&
-                d3 > distanceThreshold) {
-                for (int i = 0; i < 6; i++) bOn[i] = false;
-            } else {
+            if ((d1 < distanceThreshold && d1 > 0) ||
+                (d2 < distanceThreshold && d2 > 0) ||
+                (d3 < distanceThreshold&& d3 > 0)) {
                 for (int i = 0; i < 6; i++) bOn[i] = true;
+            } else {
+                for (int i = 0; i < 6; i++) bOn[i] = false;
             }
             
         }
@@ -167,8 +178,7 @@ void dpHakoniwaMagnetPendulum::draw(){
     
     mMotionExtractor.draw();
 //    twFinder.debugDraw(mMotionExtractor);
-    debugDraw();
-    
+//    debugDraw();
     
     ramEndCamera();
 

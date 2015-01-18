@@ -18,6 +18,9 @@ public:
     void drawActor(const ramActor& actor);
     void example_drawDump();
     
+    virtual void onEnabled();
+    virtual void onDisabled();
+
     
 private:
     
