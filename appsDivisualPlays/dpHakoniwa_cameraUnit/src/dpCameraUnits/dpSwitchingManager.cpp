@@ -42,7 +42,6 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->sceneNames.push_back("V:dpVisPLink_Oil");
 
 #pragma mark サーボ振り子
-	//TODO: サーボ振り子：シーン名H未設定
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_SERVOPENDULUM;
 	hakoniwas.back()->CVPreset	= "ServoPendulum";
@@ -51,11 +50,10 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
     hakoniwas.back()->sceneNames.push_back("V:dpVisServoPendulum");
 
 #pragma mark 磁石振り子
-	//TODO: ソース番号
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_MAGPENDULUM;
-	hakoniwas.back()->CVPreset	= "MagPendulum";
-	hakoniwas.back()->sourceCh	= 9;
+	hakoniwas.back()->CVPreset	= "MagnetPendulum";
+	hakoniwas.back()->sourceCh	= 4;
 	hakoniwas.back()->sceneNames.push_back("H:dpHMagPendulum");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisMagPendulum");
 
@@ -65,7 +63,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->type		= HAKO_THETA;
 	hakoniwas.back()->CVPreset	= "Theta";
 	hakoniwas.back()->sourceCh	= 10;
-	hakoniwas.back()->sceneNames.push_back("V:");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisTheta");
 
 #pragma mark ★色水
 	hakoniwas.push_back(new hakoniwaPresets());
