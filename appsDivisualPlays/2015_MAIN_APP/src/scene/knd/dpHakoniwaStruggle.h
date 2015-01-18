@@ -20,7 +20,7 @@ public:
         ramGetGUI().addToggle("vibeAuto", &isVibeAuto);
         ramGetGUI().addToggle("vibeWhenMoveFast", &isVibeWhenActorMoveFast);
         ramGetGUI().addSlider("strength", 0.0, 255.0, &mVibeStrength);
-        ramGetGUI().addSlider("thresh", 0.0, 30.0, &mVibeThresh);
+        ramGetGUI().addSlider("thresh", 0.0, 10.0, &mVibeThresh);
         ramGetGUI().addButton("vibe");
         ramGetGUI().addSlider("timeSpan", 0.01, 3.0, &mVibeTimeSpan);
         ramGetGUI().addSlider("tempo",2,8.0,&mVibeTempo);
@@ -262,8 +262,8 @@ public:
 private:
 
     ofxOscSender mSender;
-    float mVibeStrength = 200.0;
-    float mVibeThresh = 100.0;
+    float mVibeStrength = 255.0;
+    float mVibeThresh = 1.5;
     static const int BEAM_NUM = 30;
     
     KezSlide mVibe;
