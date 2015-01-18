@@ -103,7 +103,7 @@ private:
     ofVec4f mMean;
     ofVec4f mMeanPrev;
     ofVec4f mMeanAddtion;
-    float mMeanLimit{5};
+    float mMeanLimit{3.f};
     int mPrevScene{0};
 };
 

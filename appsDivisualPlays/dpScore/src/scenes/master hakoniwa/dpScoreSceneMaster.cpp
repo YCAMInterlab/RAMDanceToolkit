@@ -120,7 +120,7 @@ void SceneMaster::update(ofxEventMessage& m)
     }
     if (m.getAddress() == kOscAddrCameraUnitMean) {
         if (m.getNumArgs() == 4) {
-
+            
             mMean.x = m.getArgAsInt32(0);
             mMean.y = m.getArgAsInt32(1);
             mMean.z = m.getArgAsInt32(2);
@@ -190,21 +190,35 @@ void SceneMaster::update(ofxEventMessage& m)
             }
         }
     }
-    
-    for (int i=0; i<mMeanAddtion.DIM; i++) {
-        if (mMeanAddtion[i] >= mMeanLimit) {
-            mMeanAddtion[i] = 0.f;
-            const int which = ofRandom(2);
-            const int scene = ofClamp(which * 4 + i, 0, kNumScenes);
-            sendScene(kSceneNames[scene], true, true, true, true, true);
-            sendScene(kSceneNames[mPrevScene], false, true, true, true, true);
-            mPrevScene = scene;
-        }
-    }
 }
 
 void SceneMaster::draw()
 {
+    if (mMeanAddtion.x >= mMeanLimit) {
+        mMeanAddtion.x = 0.f;
+        const int which = ofRandom(2);
+        const int scene = ofClamp(which * 3 + 0, 0, kNumScenes);
+        sendScene(kSceneNames[scene], true, true, true, true, true);
+        sendScene(kSceneNames[mPrevScene], false, true, true, true, true);
+        mPrevScene = scene;
+    }
+    if (mMeanAddtion.y >= mMeanLimit) {
+        mMeanAddtion.y = 0.f;
+        const int which = ofRandom(2);
+        const int scene = ofClamp(which * 3 + 1, 0, kNumScenes);
+        sendScene(kSceneNames[scene], true, true, true, true, true);
+        sendScene(kSceneNames[mPrevScene], false, true, true, true, true);
+        mPrevScene = scene;
+    }
+    if (mMeanAddtion.z >= mMeanLimit) {
+        mMeanAddtion.z = 0.f;
+        const int which = ofRandom(2);
+        const int scene = ofClamp(which * 3 + 2, 0, kNumScenes);
+        sendScene(kSceneNames[scene], true, true, true, true, true);
+        sendScene(kSceneNames[mPrevScene], false, true, true, true, true);
+        mPrevScene = scene;
+    }
+    
     for (int i=0; i<getNumSkeletons(); i++) {
         auto skl = getSkeleton(i);
         
