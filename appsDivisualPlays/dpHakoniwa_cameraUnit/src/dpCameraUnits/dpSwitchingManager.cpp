@@ -203,7 +203,10 @@ void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
 			cout << "Disable hakoniwa from Master=====" << endl;
 			disableHakoniwa(hakoniwaType(hakoId));
 		}
-        if (!isSlave) senderToSlave.sendMessage(m);
+        if (!isSlave){
+            m.setAddress("/ram/set_slave");
+            senderToSlave.sendMessage(m);
+        }
 	}
 
 	if (m.getAddress() == "/dp/master/switch/enable"){
