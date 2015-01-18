@@ -43,7 +43,7 @@ enum hakoniwaType{
 	HAKO_STAGE,
 
 //	HAKO_GEAR,
-//	HAKO_STRUGGLE,
+	HAKO_STRUGGLE,
 
 	HAKO_TESTA,
 	HAKO_TESTB,
