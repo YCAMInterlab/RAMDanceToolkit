@@ -150,6 +150,8 @@
 		C6755BFB1A6BAE8F007E9984 /* EmptyScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyScene.h; sourceTree = "<group>"; };
 		C6755BFC1A6BAE8F007E9984 /* twistFinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = twistFinder.cpp; sourceTree = "<group>"; };
 		C6755BFD1A6BAE8F007E9984 /* twistFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twistFinder.h; sourceTree = "<group>"; };
+		C6755C041A6BB3AA007E9984 /* dpHakoniwaTornado.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaTornado.h; sourceTree = "<group>"; };
+		C6755C051A6BB3AA007E9984 /* dpHakoVisTornado.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoVisTornado.h; sourceTree = "<group>"; };
 		C6957F181A68A07200DB75DB /* HakoniwaTheta.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakoniwaTheta.cpp; path = miura/HakoniwaTheta.cpp; sourceTree = "<group>"; };
 		C6957F191A68A07200DB75DB /* HakoniwaTheta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaTheta.h; path = miura/HakoniwaTheta.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -265,6 +267,8 @@
 				92CB5B101A666F1F00257334 /* dpHakoVisServoPendulum.h */,
 				9236CE851A690C480060B0FF /* dpHakoVisMagnetPendulum.h */,
 				92CB5B0D1A666F1F00257334 /* dpHakoniwaServoPendulum.h */,
+				C6755C041A6BB3AA007E9984 /* dpHakoniwaTornado.h */,
+				C6755C051A6BB3AA007E9984 /* dpHakoVisTornado.h */,
 				920BA3741A67C8E800E4A227 /* dpHakoniwaStruggle.h */,
 			);
 			path = knd;
