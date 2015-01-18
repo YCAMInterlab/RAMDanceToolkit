@@ -102,21 +102,21 @@ private:
 
 class dpHakoVisMagnetPendulum : public ramBaseScene{
 public:
-    string getName() const{return "dpVisMagnetPendulum";}
+    string getName() const{return "dpVisMagPendulum";}
     
     void setupControlPanel(){
         ramGetGUI().addSlider("scale",50,500,&mScale);
     }
     void setup(){
         
-        float offsetX = 300;
-        float offsetY = 400;
+        float offsetX = 530;
+        float offsetY = 440;
         
         for(int j = 0; j < mDivY; j++){
             for(int i = 0; i < mDivX; i++){
                 mCircles.push_back(dpRecordGridCircle());
-                mCircles.back().setup(ofPoint(ofMap(i,0,mDivX,offsetX,SINGLE_SCREEN_WIDTH - offsetX),
-                                              ofMap(j,0,mDivY,offsetY,SINGLE_SCREEN_HEIGHT - offsetY)));
+                mCircles.back().setup(ofPoint((i - 1) * 500 + SINGLE_SCREEN_WIDTH * 0.5,
+                                              j * 200 + SINGLE_SCREEN_HEIGHT * 0.5 - 100));
             }
         }
         

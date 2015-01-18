@@ -12,7 +12,7 @@
 
 class dpHakoVisSandStorm : public ramBaseScene{
 public:
-    string getName() const { return "dpVSandStorm"; }
+    string getName() const { return "dpVisSandStorm_floor"; }
     
 	void setupControlPanel(){
         ramGetGUI().addSlider("fade", 0.0, 255.0, &mFade);

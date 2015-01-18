@@ -30,16 +30,23 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 	gui.addTextInput("OSC_A", "192.168.20.2");
 	gui.addLabel("RDTK_2");
 	gui.addTextInput("OSC_B", "192.168.20.3");
+
 	gui.addLabel("floor_score");
-	gui.addTextInput("OSC_C", "192.168.20.6");
+	gui.addTextInput("OSC_C", "192.168.20.11");
+	gui.addLabel("Lighting");
+	gui.addTextInput("OSC_D", "192.168.20.8");
+
 	gui.addLabel("Audio1_evala");
-	gui.addTextInput("OSC_D", "192.168.20.9");
+	gui.addTextInput("OSC_E", "192.168.20.9");
 	gui.addLabel("Audio2_evala");
-	gui.addTextInput("OSC_E", "192.168.20.10");
+	gui.addTextInput("OSC_F", "192.168.20.10");
+
+	gui.addLabel("Dev_Sheep");
+	gui.addTextInput("OSC_G", "Hampshire.local");
 	gui.addLabel("Dev_Kez");
-	gui.addTextInput("OSC_F", "192.168.20.23");
+	gui.addTextInput("OSC_H", "192.168.20.23");
 	gui.addLabel("Dev_Onishi");
-	gui.addTextInput("OSC_G", "192.168.20.30");
+	gui.addTextInput("OSC_I", "192.168.20.30");
 	gui.addSpacer();
 	gui.addLabel("Preset Settings");
 	gui.addToggle("SettingMode", &mbMakeSettings);
@@ -61,7 +68,7 @@ void dpCameraUnit_Controller::update(){
 
 	static bool windowReShape;
 	if (mbMakeSettings){
-		if (mbMakeSettings != windowReShape) ofSetWindowShape(630, 1080);
+		if (mbMakeSettings != windowReShape) ofSetWindowShape(635, 1080);
 	}else{
 		if (mbMakeSettings != windowReShape) ofSetWindowShape(1920, 1080);
 	}
@@ -73,13 +80,16 @@ void dpCameraUnit_Controller::update(){
 		if (mbMakeSettings){
 			cvFXUnit[0].update(inputUnit.mFinalSource_FourSplit[makeSettings_targetInput],
 							   inputUnit.mIsFrameNew);
-			cvAnalysis[0].update(cvFXUnit[makeSettings_targetInput].mSource,
-								 cvFXUnit[makeSettings_targetInput].mGraySource,
+			cvAnalysis[0].update(cvFXUnit[0].mSource,
+								 cvFXUnit[0].mGraySource,
 								 inputUnit.mIsFrameNew);
 		}else{
 			for (int i = 0;i < 4;i++){
-				cvFXUnit[i]  .update(inputUnit.mFinalSource_FourSplit[i], inputUnit.mIsFrameNew);
-				cvAnalysis[i].update(cvFXUnit[i].mSource, cvFXUnit[i].mGraySource, inputUnit.mIsFrameNew);
+				cvFXUnit[i]  .update(inputUnit.mFinalSource_FourSplit[i],
+									 inputUnit.mIsFrameNew);
+				cvAnalysis[i].update(cvFXUnit[i].mSource,
+									 cvFXUnit[i].mGraySource,
+									 inputUnit.mIsFrameNew);
 			}
 		}
 

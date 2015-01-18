@@ -10,7 +10,7 @@
 
 hakoVisPLink_Laser::hakoVisPLink_Laser(){
 
-	receiver.addAddress("/dp/cameraUnit/plink_Laser");
+	receiver.addAddress("/dp/cameraUnit/Plink_Laser");
 	ramOscManager::instance().addReceiverTag(&receiver);
 
 	lines.assign(300, liningUnit());
@@ -24,7 +24,7 @@ void hakoVisPLink_Laser::setupControlPanel(){
 	patterns.push_back("Pattern_B");
 	patterns.push_back("Pattern_C");
 
-	gui->addRadio("Patterns", patterns);
+    gui->addRadio("Patterns", patterns)->activateToggle("Pattern_B");
 }
 
 void hakoVisPLink_Laser::update(){
@@ -33,7 +33,7 @@ void hakoVisPLink_Laser::update(){
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
 
-		if (m.getAddress() == "/dp/cameraUnit/plink_Laser/pixelate"){
+		if (m.getAddress() == "/dp/cameraUnit/Plink_Laser/pixelate"){
 			pix_w = m.getArgAsInt32(0);
 			pix_h = m.getArgAsInt32(1);
 			if (lines.size() != pix_w * pix_h){

@@ -12,6 +12,8 @@
 		925539FB1A5FE78100AE8CC8 /* dpHakoVisStruggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 925539FA1A5FE78100AE8CC8 /* dpHakoVisStruggle.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		CF3216761A611BDB00511BE3 /* dpHakoniwaSand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF3216741A611BDB00511BE3 /* dpHakoniwaSand.cpp */; };
+		CF52147E1A6B7AC400DC40A4 /* dpTryTwistChecker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF52147C1A6B7AC400DC40A4 /* dpTryTwistChecker.cpp */; };
+		CF7850251A6A9D3E00C58D17 /* twistFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF7850231A6A9D3E00C58D17 /* twistFinder.cpp */; };
 		CF9E18531A68BFCC00FE0F40 /* dpHakoniwaMagnetPendulum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF9E18511A68BFCC00FE0F40 /* dpHakoniwaMagnetPendulum.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -87,6 +89,10 @@
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		CF3216741A611BDB00511BE3 /* dpHakoniwaSand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpHakoniwaSand.cpp; sourceTree = "<group>"; };
 		CF3216751A611BDB00511BE3 /* dpHakoniwaSand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaSand.h; sourceTree = "<group>"; };
+		CF52147C1A6B7AC400DC40A4 /* dpTryTwistChecker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpTryTwistChecker.cpp; sourceTree = "<group>"; };
+		CF52147D1A6B7AC400DC40A4 /* dpTryTwistChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpTryTwistChecker.h; sourceTree = "<group>"; };
+		CF7850231A6A9D3E00C58D17 /* twistFinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = twistFinder.cpp; sourceTree = "<group>"; };
+		CF7850241A6A9D3E00C58D17 /* twistFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twistFinder.h; sourceTree = "<group>"; };
 		CF9E18511A68BFCC00FE0F40 /* dpHakoniwaMagnetPendulum.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpHakoniwaMagnetPendulum.cpp; sourceTree = "<group>"; };
 		CF9E18521A68BFCC00FE0F40 /* dpHakoniwaMagnetPendulum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaMagnetPendulum.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -206,6 +212,8 @@
 				9264E93B1A5FD42A0084BA46 /* dpHakoVisStruggle.h */,
 				925539FA1A5FE78100AE8CC8 /* dpHakoVisStruggle.cpp */,
 				CF9E185B1A68DE6600FE0F40 /* dpHakoniwaMagnetPendulum */,
+				CF52147C1A6B7AC400DC40A4 /* dpTryTwistChecker.cpp */,
+				CF52147D1A6B7AC400DC40A4 /* dpTryTwistChecker.h */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -215,6 +223,8 @@
 			children = (
 				CF9E18511A68BFCC00FE0F40 /* dpHakoniwaMagnetPendulum.cpp */,
 				CF9E18521A68BFCC00FE0F40 /* dpHakoniwaMagnetPendulum.h */,
+				CF7850231A6A9D3E00C58D17 /* twistFinder.cpp */,
+				CF7850241A6A9D3E00C58D17 /* twistFinder.h */,
 			);
 			name = dpHakoniwaMagnetPendulum;
 			sourceTree = "<group>";
@@ -369,8 +379,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF52147E1A6B7AC400DC40A4 /* dpTryTwistChecker.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				CF9E18531A68BFCC00FE0F40 /* dpHakoniwaMagnetPendulum.cpp in Sources */,
+				CF7850251A6A9D3E00C58D17 /* twistFinder.cpp in Sources */,
 				925539FB1A5FE78100AE8CC8 /* dpHakoVisStruggle.cpp in Sources */,
 				925539F51A5FE4F400AE8CC8 /* dpHakoniwaStruggle.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,

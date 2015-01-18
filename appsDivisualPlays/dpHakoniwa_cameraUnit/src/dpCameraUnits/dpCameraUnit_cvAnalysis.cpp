@@ -20,7 +20,7 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.addToggle("SendOSC",		&mEnableSendOSC);
 	mGui.addTextInput("OSCAddress", "localhost")->setAutoClear(false);
 	mGui.addLabel("OSCSplit", "OSCSplit");
-	oscMatrixUI = mGui.addToggleMatrix("OSCSpliter", 1, 7);
+	oscMatrixUI = mGui.addToggleMatrix("OSCSpliter", 1, 9);
 	mGui.addTextInput("OSCPort", "10000")->setAutoClear(false);
 	mGui.addToggle("ContourFinder",		&mEnableContourFinder);
 	mGui.addToggle("OptFlow",			&mEnableOptFlow);
@@ -79,6 +79,10 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 
 	mContFinder.getTracker().setPersistence(15);
 	mContFinder.getTracker().setMaximumDistance(16);
+
+	mParamCF_MaxArea = 1000.0;
+	mParamCF_MinArea = 50.0;
+
 }
 
 dpCameraUnit_cvAnalysis::~dpCameraUnit_cvAnalysis(){
@@ -222,7 +226,8 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			mOptFlow.calcOpticalFlow(pixGray);
 		}
 		
-		if ((ofGetFrameNum() % 150 == 0) || (ofGetKeyPressed(' '))) mOptFlow.resetFeaturesToTrack();
+		if ((ofGetFrameNum() % 150 == 0) ||
+			(ofGetKeyPressed(' '))) mOptFlow.resetFeaturesToTrack();
 
 		vector <ofVec2f> mot = mOptFlow.getMotion();
 
@@ -306,7 +311,6 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 	ofPushMatrix();
 	ofTranslate(x, y);
 	glScaled(scale, scale, scale);
-
 	if (mViewSource && imgRefGray != NULL) imgRefGray->draw(0,0);
 
 	ofSetColor(255, 0, 0);
