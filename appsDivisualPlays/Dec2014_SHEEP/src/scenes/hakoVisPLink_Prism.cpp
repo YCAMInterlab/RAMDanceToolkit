@@ -14,7 +14,6 @@ hakoVisPLink_Prism::hakoVisPLink_Prism(){
 	receiver.addAddress("/dp/cameraUnit/plink_Prism");
 	ramOscManager::instance().addReceiverTag(&receiver);
 
-	ofCircle(0, 0,0);
 }
 
 void hakoVisPLink_Prism::setupControlPanel(){
