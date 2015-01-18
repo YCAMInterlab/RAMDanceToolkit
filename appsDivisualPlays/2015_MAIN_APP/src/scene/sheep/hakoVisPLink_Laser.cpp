@@ -24,7 +24,7 @@ void hakoVisPLink_Laser::setupControlPanel(){
 	patterns.push_back("Pattern_B");
 	patterns.push_back("Pattern_C");
 
-	gui->addRadio("Patterns", patterns);
+    gui->addRadio("Patterns", patterns)->activateToggle("Pattern_B");
 }
 
 void hakoVisPLink_Laser::update(){
