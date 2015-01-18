@@ -115,14 +115,34 @@ const string kOscAddrCameraUnitVectorTotal = "/dp/cameraUnit/vector/total";
 const string kOscAddrCameraUnitVectorFeatures = "/dp/cameraUnit/features";
 const string kOscAddrCaneraUnitVecContourBlob = "/dp/cameraUnit/contour/blob";
 
+const string kOscAddrCameraUnitMean = "/dp/cameraUnit/mean";
+
 const string kOscAddrMotioner = "/dp/score/motioner";
 
 const string kSettingsDir = "settings/";
 const string kSettingsPrefix = "scoreUI-";
 
-extern const int kNumCameraunitVectors = 10;
+const int kNumCameraunitVectors = 10;
 
 const string kFontPath = "../../../resources/fonts/AkkoStd-Thin.otf";
+
+#ifdef DP_MASTER_HAKONIWA
+extern const string kHostNameMasterHakoniwa = "192.168.20.60";
+extern const int kPortNumberMasterHakoniwa = 8528;
+
+extern const string kHostNameCameraUnit = "192.168.20.5";
+extern const int kPortNumberCameraUnit = 12400;
+
+extern const int kNumScenes = 4;
+extern const string kSceneNames[kNumScenes] = {
+    "dpVisPLink_Laser",
+    "dpVisServoPendulum",
+    "dpVisStruggle",
+    "no scene",
+};
+
+extern const string kOscAddrRamSetScene = "/ram/set_scene";
+#endif
 
 struct _handle {
     char* p;

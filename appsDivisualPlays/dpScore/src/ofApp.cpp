@@ -1,4 +1,7 @@
 #include "ofApp.h"
+#ifdef DP_MASTER_HAKONIWA
+#include "dpScoreSceneMaster.h"
+#else
 #include "dpScoreSceneVec2SimpleGraph.h"
 #include "dpScoreSceneVec2Clocks.h"
 #include "dpScoreSceneVec2Grid.h"
@@ -20,6 +23,7 @@
 #include "dpScoreSceneBodyBoids.h"
 #include "dpScoreSceneBodyRect.h"
 #include "dpScoreSceneBodyBox.h"
+#endif
 
 using namespace dp::score;
 
@@ -67,6 +71,11 @@ void ofApp::setup()
     
     OFX_BEGIN_EXCEPTION_HANDLING
     
+#ifdef DP_MASTER_HAKONIWA
+    auto master = SceneBase::Ptr(new SceneMaster());
+    mSceneManager.add(master);
+    mSceneManager.change<SceneMaster>();
+#else
     auto black = SceneBase::Ptr(new SceneBase());
     black->setDrawHeader(false);
     black->setName("black");
@@ -93,8 +102,6 @@ void ofApp::setup()
     auto bodyFlow = SceneBase::Ptr(new SceneBodyFlow());
     auto bodyGlobe = SceneBase::Ptr(new SceneBodyGlobe());
     auto bodyLines = SceneBase::Ptr(new SceneBodyLines());
-    
-    
     
     mSceneManager.add(black);
     
@@ -136,6 +143,7 @@ void ofApp::setup()
     //mSceneManager.change(3);
     mSceneManager.change("black");
     mSceneManager.change<SceneDataSlider>();
+#endif
     
     mSceneManager.getTabBar()->loadSettings(kSettingsDir, kSettingsPrefix);
     mSceneManager.getTabBar()->setVisible(false);
@@ -164,7 +172,11 @@ void ofApp::update()
 {
     OFX_BEGIN_EXCEPTION_HANDLING
     
+#ifdef DP_MASTER_HAKONIWA
+    ofSetWindowTitle("dpMasterHakoniwa : " + ofToString(ofGetFrameRate(), 2));
+#else
     ofSetWindowTitle("dpScore : " + ofToString(ofGetFrameRate(), 2));
+#endif
     
     bool updatedMotioner = false;
     

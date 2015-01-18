@@ -203,7 +203,7 @@ SceneManager::findScene(const string& name)
 {
     return find_if(mScenes.begin(),
                    mScenes.end(),
-                   [&](const SceneBase::Ptr& rhs)
+                   [&name](const SceneBase::Ptr& rhs)
                    {
                        return name == rhs->getName();
                    });
