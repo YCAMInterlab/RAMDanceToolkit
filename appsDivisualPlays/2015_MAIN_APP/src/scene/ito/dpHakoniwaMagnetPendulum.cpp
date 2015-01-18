@@ -39,7 +39,7 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
     ramGetGUI().addRadioGroup("mode___", modename, &mode);*/
     
     bTestMode = false;
-    distanceThreshold = 60.0f;
+    distanceThreshold = 44;
     
     ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent,this,&dpHakoniwaMagnetPendulum::guiEvent);
     
@@ -108,9 +108,9 @@ void dpHakoniwaMagnetPendulum::update() {
     
     if (!bTestMode) {
         
-        float d1 = mMotionExtractor.getDistanceAt(0, 1);
-        float d2 = mMotionExtractor.getDistanceAt(2, 3);
-        float d3 = mMotionExtractor.getDistanceAt(4, 5);
+        d1 = mMotionExtractor.getDistanceAt(0, 1);
+        d2 = mMotionExtractor.getDistanceAt(2, 3);
+        d3 = mMotionExtractor.getDistanceAt(4, 5);
 
         if (mode == 1) {
 
@@ -167,8 +167,7 @@ void dpHakoniwaMagnetPendulum::draw(){
     
     mMotionExtractor.draw();
 //    twFinder.debugDraw(mMotionExtractor);
-    debugDraw();
-    
+//    debugDraw();
     
     ramEndCamera();
 
