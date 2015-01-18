@@ -17,58 +17,127 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	//箱庭プリセット
 	hakoniwaPresets* hako;
 
+#pragma mark ★パラレルリンク:プリズム
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_PRISM;
-	hakoniwas.back()->CVPreset	= "dpPLink_Prism";
+	hakoniwas.back()->CVPreset	= "Plink_Prism";
 	hakoniwas.back()->sourceCh	= 2;
-	hakoniwas.back()->sceneNames.push_back("H:dpPLink_Prism");
+	hakoniwas.back()->sceneNames.push_back("H:dpHPLink_Prism");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisPLink_Prism");
 
+#pragma mark ★パラレルリンク:畜光レーザー
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_LASER;
-	hakoniwas.back()->CVPreset	= "dpPlink_Laser";
+	hakoniwas.back()->CVPreset	= "Plink_Laser";
 	hakoniwas.back()->sourceCh	= 3;
-	hakoniwas.back()->sceneNames.push_back("H:dpPLink_Laser");
-	hakoniwas.back()->sceneNames.push_back("V:dpPLink_Laser");
+	hakoniwas.back()->sceneNames.push_back("H:dpHPLink_Laser");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisPLink_Laser");
 
+#pragma mark ★パラレルリンク:オイル
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_OIL;
-	hakoniwas.back()->CVPreset	= "dpPlink_Oil";
+	hakoniwas.back()->CVPreset	= "Plink_Oil";
 	hakoniwas.back()->sourceCh	= 4;
-	hakoniwas.back()->sceneNames.push_back("H:dpPLink_Oil");
+	hakoniwas.back()->sceneNames.push_back("H:dpHPLink_Oil");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisPLink_Oil");
 
+#pragma mark サーボ振り子
+	//TODO: サーボ振り子：シーン名H未設定
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_SERVOPENDULUM;
-	hakoniwas.back()->CVPreset	= "dpServoPendulum";
-	hakoniwas.back()->sourceCh	= 8;
-    hakoniwas.back()->sceneNames.push_back("H:dpServoPendulum");
+	hakoniwas.back()->CVPreset	= "ServoPendulum";
+	hakoniwas.back()->sourceCh	= 9;
+    hakoniwas.back()->sceneNames.push_back("H:dpHServoPendulum");
     hakoniwas.back()->sceneNames.push_back("V:dpVisServoPendulum");
 
+#pragma mark 磁石振り子
+	//TODO: ソース番号
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_MAGPENDULUM;
+	hakoniwas.back()->CVPreset	= "MagPendulum";
+	hakoniwas.back()->sourceCh	= 9;
+	hakoniwas.back()->sceneNames.push_back("H:dpHMagPendulum");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisMagPendulum");
+
+#pragma mark Theta
+	//TODO: シーンV名
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_THETA;
+	hakoniwas.back()->CVPreset	= "Theta";
+	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sceneNames.push_back("V:");
+
+#pragma mark ★色水
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_COLOROFWATER;
+	hakoniwas.back()->CVPreset	= "ColorOfWater";
+	hakoniwas.back()->sourceCh	= 1;
+	hakoniwas.back()->sceneNames.push_back("H:dpHColorOfWater");
+
+#pragma mark 砂嵐
+	//TODO: ソース番号
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_SANDSTORM;
+	hakoniwas.back()->CVPreset	= "SandStorm";
+	hakoniwas.back()->sourceCh	= 7;
+	hakoniwas.back()->sceneNames.push_back("H:dpHSandStorm");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisSandStorm");
+
+#pragma mark 氷
+	//TODO: ソース番号・箱庭出力シーン
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_FROZENICE;
+	hakoniwas.back()->CVPreset	= "Ice";
+	hakoniwas.back()->sourceCh	= 5;
+	hakoniwas.back()->sceneNames.push_back("H:");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisIceMap");
+
+#pragma mark 尺取り虫
+	//TODO: ソース番号・箱庭出力シーン
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_WORM;
+	hakoniwas.back()->CVPreset	= "";
+	hakoniwas.back()->sourceCh	= 7;
+	hakoniwas.back()->sceneNames.push_back("H:");
+	hakoniwas.back()->sceneNames.push_back("V:dp");
+
+#pragma mark ★ステージ
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_STAGE;
-	hakoniwas.back()->CVPreset	= "dpStage";
+	hakoniwas.back()->CVPreset	= "Stage";
 	hakoniwas.back()->sourceCh	= 10;
 	hakoniwas.back()->sceneNames.push_back("V:dpVisStage");
 
+#pragma mark abare
+    hakoniwas.push_back(new hakoniwaPresets());
+    hakoniwas.back()->type      = HAKO_STRUGGLE;
+    hakoniwas.back()->CVPreset  = "Struggle";
+    hakoniwas.back()->sourceCh  = 8;
+    hakoniwas.back()->sceneNames.push_back("H:dpHStruggle");
+    hakoniwas.back()->sceneNames.push_back("V:dpVisStruggle");
+    
+#pragma mark ★テストA
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_TESTA;
 	hakoniwas.back()->CVPreset	= "TestA";
 	hakoniwas.back()->sourceCh	= 2;
 	hakoniwas.back()->sceneNames.push_back("V:TestSceneA");
 
+#pragma mark ★テストB
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_TESTB;
 	hakoniwas.back()->CVPreset	= "TestB";
 	hakoniwas.back()->sourceCh	= 3;
 	hakoniwas.back()->sceneNames.push_back("V:TestSceneB");
 
+#pragma mark ★テストC
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_TESTC;
 	hakoniwas.back()->CVPreset	= "TestC";
 	hakoniwas.back()->sourceCh	= 4;
 	hakoniwas.back()->sceneNames.push_back("V:TestSceneC");
 
+#pragma mark ★テストD
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_TESTD;
 	hakoniwas.back()->CVPreset	= "TestD";

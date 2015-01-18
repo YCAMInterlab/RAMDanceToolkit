@@ -11,7 +11,7 @@
 hakoVisPLink_Prism::hakoVisPLink_Prism(){
 
 	grid.setGridScale(75.0);
-	receiver.addAddress("/dp/cameraUnit/plink_Prism");
+	receiver.addAddress("/dp/cameraUnit/Plink_Prism");
 	ramOscManager::instance().addReceiverTag(&receiver);
 
 }
@@ -25,7 +25,7 @@ void hakoVisPLink_Prism::update(){
 	while (receiver.hasWaitingMessages()){
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
-		if (m.getAddress() == "/dp/cameraUnit/plink_Prism/contour/boundingRect"){
+		if (m.getAddress() == "/dp/cameraUnit/Plink_Prism/contour/boundingRect"){
 			int nBlob = m.getArgAsInt32(0);
 			pts.assign(nBlob, ofVec3f(0,0,0));
 			labels.assign(nBlob, 0);

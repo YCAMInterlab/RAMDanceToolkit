@@ -37,33 +37,48 @@ void testApp::setup()
 	
     sceneManager.addScene(hakoniwaServoPendulum.getPtr());
     sceneManager.addScene(visServoPendulum.getPtr());
-    
+
+	//Stage
     sceneManager.addScene(visStage.getPtr());
     
     sceneManager.addScene(visWorm.getPtr());
-    
+
     sceneManager.addScene(danceMap.getPtr());
-    
+
+	//Struggle
     sceneManager.addScene(hakoniwaStruggle.getPtr());
     sceneManager.addScene(visStruggle.getPtr());
-    
+
+	//MagnetPendulum
+	sceneManager.addScene(magPendulum.getPtr());
+
+
+	//SandStorm
     sceneManager.addScene(hakoniwaSand.getPtr());
-    sceneManager.addScene(visSandStorm.getPtr());
-    sceneManager.addScene(vecLineCircle.getPtr());
-    
+	sceneManager.addScene(visSandStorm.getPtr());
+
+	sceneManager.addScene(vecLineCircle.getPtr());
+
+	//MagnetPendulum
     sceneManager.addScene(visMagnetPendulum.getPtr());
-    
+
+	//Theta
     sceneManager.addScene(hakoVisTheta.getPtr());
     
     sceneManager.addScene(hakoniwaTornado.getPtr());
     sceneManager.addScene(visTornado.getPtr());
 
+	//ParallelLink_Oil
 	sceneManager.addScene(hakoniwaPlinkOil.getPtr());
-	sceneManager.addScene(hakoniwaPlinkLaser.getPtr());
-	sceneManager.addScene(hakoniwaPlinkPrism.getPtr());
-	sceneManager.addScene(hakoVisPlinkLaser.getPtr());
 	sceneManager.addScene(hakoVisPlinkOil.getPtr());
+
+	//ParallelLink_Laser
+	sceneManager.addScene(hakoniwaPlinkLaser.getPtr());
+	sceneManager.addScene(hakoVisPlinkLaser.getPtr());
+
+	//ParallelLink_Prism
 	sceneManager.addScene(hakoVisPlinkPrism.getPtr());
+	sceneManager.addScene(hakoniwaPlinkPrism.getPtr());
 
 	
 	

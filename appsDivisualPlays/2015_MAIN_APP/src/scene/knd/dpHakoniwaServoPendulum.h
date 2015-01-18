@@ -16,7 +16,7 @@
 
 class dpHakoniwaServoPendulum : public ramBaseScene{
 public:
-    string getName() const { return "dpHPendulum"; }
+    string getName() const { return "dpHServoPendulum"; }
 	void setupControlPanel(){
         ramGetGUI().addSlider("speed", 0.1, 4.0, &mSpeed);
         ramGetGUI().addSlider("speedDefault", 1.0, 10.0, &mSpeedDefault);

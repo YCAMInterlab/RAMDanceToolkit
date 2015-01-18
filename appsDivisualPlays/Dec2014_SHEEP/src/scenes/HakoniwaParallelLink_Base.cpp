@@ -312,7 +312,8 @@ void HakoniwaParallelLink_Base::onPanelChanged(ofxUIEventArgs& e){
 }
 
 void HakoniwaParallelLink_Base::onEnabled(){
-
+	loadPreset();
+	motionEx.load("motionExt_"+getName()+".xml");
 }
 
 void HakoniwaParallelLink_Base::onDisabled(){
