@@ -165,7 +165,7 @@ private:
     ofEasyCam mCam;
     float mTargetPosZ = 0;
     float mTargetPosZSpeed = 0.2;
-    float mCamDistance = 30.0;
+    float mCamDistance = 100.0;
     
     ramOscReceiveTag mReceiver;
     int mTargetNum = 0;
