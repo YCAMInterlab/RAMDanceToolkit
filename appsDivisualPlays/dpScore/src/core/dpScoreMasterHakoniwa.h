@@ -16,20 +16,6 @@ class ofxUITabBar;
 
 class MasterHakoniwa final {
 public:
-    void initialize();
-    void shutdown();
-    
-    void setupUI(ofxUITabBar* tabbar);
-    void update();
-    void draw();
-    
-    void turnOffAllPins();
-    
-    static MasterHakoniwa& instance();
-    
-    static const int kNumScenes;
-    static const string kSceneNames[];
-    
     enum ValvePins {
         VALVE_PIN_0 = 2,
         VALVE_PIN_1 = 3,
@@ -45,6 +31,29 @@ public:
         NUM_PUMP_PINS,
     };
     
+    
+    void initialize();
+    void shutdown();
+    
+    void setupUI(ofxUITabBar* tabbar);
+    void update();
+    void draw();
+    
+    void turnOnValve(int index);
+    void turnOffAllPins();
+    
+    void sendScene(const string& name,
+                   bool enabled,
+                   bool scr0,
+                   bool scr1,
+                   bool scr2,
+                   bool scr3);
+    
+    static MasterHakoniwa& instance();
+    
+    static const int kNumScenes;
+    static const string kSceneNames[];
+    
 private:
     MasterHakoniwa() = default;
     ~MasterHakoniwa() = default;
@@ -53,12 +62,6 @@ private:
     MasterHakoniwa& operator = (const MasterHakoniwa&) = delete;
     
     void sendPin(int pin, bool open);
-    void sendScene(const string& name,
-                   bool enabled,
-                   bool scr0,
-                   bool scr1,
-                   bool scr2,
-                   bool scr3);
     
     struct Valve {
         bool doOpen{false};

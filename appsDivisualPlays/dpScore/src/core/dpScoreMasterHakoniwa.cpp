@@ -111,6 +111,13 @@ void MasterHakoniwa::draw()
     
 }
 
+void MasterHakoniwa::turnOnValve(int index)
+{
+    if (index <0 || index >= mValves.size())
+        ofxThrowExceptionf(ofxException, "valve index %d is out of range", index);
+    mValves.at(index).doOpen = true;
+}
+
 void MasterHakoniwa::turnOffAllPins()
 {
     for (int i=0; i<NUM_VALVE_PINS; i++) {

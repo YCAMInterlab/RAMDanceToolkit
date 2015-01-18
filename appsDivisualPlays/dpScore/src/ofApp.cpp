@@ -1,7 +1,7 @@
 #include "ofApp.h"
 #ifdef DP_MASTER_HAKONIWA
 #include "dpScoreMasterHakoniwa.h"
-#include "dpScoreSceneMaster.h"
+#include "dpScoreSceneMasterIncrement.h"
 #else
 #include "dpScoreSceneVec2SimpleGraph.h"
 #include "dpScoreSceneVec2Clocks.h"
@@ -76,9 +76,9 @@ void ofApp::setup()
     getMH().initialize();
     getMH().setupUI(mSceneManager.getTabBar());
     
-    auto master = SceneBase::Ptr(new SceneMaster());
-    mSceneManager.add(master);
-    mSceneManager.change<SceneMaster>();
+    auto increment = SceneBase::Ptr(new SceneMasterIncrement());
+    mSceneManager.add(increment);
+    mSceneManager.change<SceneMasterIncrement>();
 #else
     auto black = SceneBase::Ptr(new SceneBase());
     black->setDrawHeader(false);
