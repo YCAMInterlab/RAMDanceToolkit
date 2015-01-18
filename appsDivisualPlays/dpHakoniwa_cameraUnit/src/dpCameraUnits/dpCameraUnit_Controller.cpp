@@ -30,16 +30,23 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 	gui.addTextInput("OSC_A", "192.168.20.2");
 	gui.addLabel("RDTK_2");
 	gui.addTextInput("OSC_B", "192.168.20.3");
+
 	gui.addLabel("floor_score");
-	gui.addTextInput("OSC_C", "192.168.20.6");
+	gui.addTextInput("OSC_C", "192.168.20.11");
+	gui.addLabel("Lighting");
+	gui.addTextInput("OSC_D", "192.168.20.8");
+
 	gui.addLabel("Audio1_evala");
-	gui.addTextInput("OSC_D", "192.168.20.9");
+	gui.addTextInput("OSC_E", "192.168.20.9");
 	gui.addLabel("Audio2_evala");
-	gui.addTextInput("OSC_E", "192.168.20.10");
+	gui.addTextInput("OSC_F", "192.168.20.10");
+
+	gui.addLabel("Dev_Sheep");
+	gui.addTextInput("OSC_G", "Hampshire.local");
 	gui.addLabel("Dev_Kez");
-	gui.addTextInput("OSC_F", "192.168.20.23");
+	gui.addTextInput("OSC_H", "192.168.20.23");
 	gui.addLabel("Dev_Onishi");
-	gui.addTextInput("OSC_G", "192.168.20.30");
+	gui.addTextInput("OSC_I", "192.168.20.30");
 	gui.addSpacer();
 	gui.addLabel("Preset Settings");
 	gui.addToggle("SettingMode", &mbMakeSettings);
