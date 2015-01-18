@@ -90,6 +90,8 @@
 
 /* Begin PBXFileReference section */
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
+		9209C4241A6B8D6400E35146 /* dpHakoniwaTornado.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaTornado.h; sourceTree = "<group>"; };
+		9209C4251A6B8D6400E35146 /* dpHakoVisTornado.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisTornado.h; sourceTree = "<group>"; };
 		920BA3721A677FBB00E4A227 /* dpHakoVisStageCircle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisStageCircle.h; sourceTree = "<group>"; };
 		920BA3731A67C8E800E4A227 /* dp3DDanceMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dp3DDanceMap.h; sourceTree = "<group>"; };
 		920BA3741A67C8E800E4A227 /* dpHakoniwaStruggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaStruggle.h; sourceTree = "<group>"; };
@@ -241,6 +243,8 @@
 				920BA3771A67C96B00E4A227 /* dpHakoVisStruggle.h */,
 				920BA3781A67C99000E4A227 /* dpHakoVisSandStorm.h */,
 				920BA3751A67C8E800E4A227 /* dpHakoVisServoPendulum.h */,
+				9209C4241A6B8D6400E35146 /* dpHakoniwaTornado.h */,
+				9209C4251A6B8D6400E35146 /* dpHakoVisTornado.h */,
 				920BA3761A67C8E800E4A227 /* dpHakoVisVecLineCircle.h */,
 				920BA3721A677FBB00E4A227 /* dpHakoVisStageCircle.h */,
 				92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */,

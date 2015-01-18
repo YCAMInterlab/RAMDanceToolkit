@@ -37,6 +37,9 @@
 #include "dpHakoVisStruggle.h"
 #include "dpHakoVisSandStorm.h"
 #include "dpHakoVisMagnetPendulum.h"
+#include "dpHakoVisTornado.h"
+#include "dpHakoniwaTornado.h"
+
 
 //SHEEP Scenes
 #include "testScenes.h"
@@ -111,7 +114,12 @@ public:
     dpHakoVisSandStorm visSandStorm;
     dpHakoVisVecLineCircle vecLineCircle;
 
+    // ice
     dp3DDanceMap danceMap;
+    
+    // tornado
+    dpHakoniwaTornado hakoniwaTornado;
+    dpHakoVisTornado  visTornado;
     
     dpHakoVisMagnetPendulum visMagnetPendulum;
 };

@@ -26,6 +26,7 @@ public:
         ramGetGUI().addSlider("alphaReducSpeed", 0.01, 5.0, &mAlphaReducSpeed);
         ramGetGUI().addToggle("isShowFaces", &isShowFaces);
         ramGetGUI().addToggle("isRotAfterFinish", &isRotAfterFinish);
+        ramGetGUI().addSlider("thresh",0.001,0.5, &mThresh);
         
         ramGetGUI().addIntSlider("omit", 1, 20, &mOmitNum);
         
@@ -67,8 +68,7 @@ public:
      //   mVecFromCam.set(ofRandom(-300,300),ofRandom(-300,300));
         
         mVecFromCam.update();
-     
-        mDelaunayMesh.addPoint(mVecFromCam * mScaleDrawDelaunay);
+        mDelaunayMesh.addPoint(mVecFromCam,mScaleDrawDelaunay);
         mDelaunayMesh.update();
         
     }
@@ -113,6 +113,10 @@ public:
             mDelaunayMesh.setOmitNum(mOmitNum);
         }
         
+        if(name == "thresh"){
+            mDelaunayMesh.setThresh(mThresh);
+        }
+        
      
 	}
     
@@ -138,6 +142,7 @@ private:
     float mAlphaReducSpeed = 0.5;
     
     int mOmitNum = 6;
+    float mThresh = 0.5;
     
     ofPoint mRot;
 };
