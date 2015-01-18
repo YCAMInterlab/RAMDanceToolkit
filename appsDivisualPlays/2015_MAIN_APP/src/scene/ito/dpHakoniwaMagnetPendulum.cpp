@@ -121,7 +121,7 @@ void dpHakoniwaMagnetPendulum::update() {
         d2 = mMotionExtractor.getDistanceAt(2, 3);
         d3 = mMotionExtractor.getDistanceAt(4, 5);
         
-        cout << d1 << ", " << d2 << ", " << d3 << endl;
+//        cout << d1 << ", " << d2 << ", " << d3 << endl;
 
         if (bEachMode) {
 
