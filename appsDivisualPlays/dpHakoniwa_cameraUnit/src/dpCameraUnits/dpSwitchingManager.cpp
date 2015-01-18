@@ -155,8 +155,8 @@ void dpSwitchingManager::draw(){
 		ofDrawBitmapString(dispInfo, 0,0);
 
 		if (dispInfo == "TestSceneA") ofSetColor(255, 0, 0);
-		if (dispInfo == "TestSceneB") ofSetColor(0, 255, 0);
-		if (dispInfo == "TestSceneC") ofSetColor(255, 255, 0);
+		if (dispInfo == "TestSceneC") ofSetColor(0, 255, 0);
+		if (dispInfo == "TestSceneB") ofSetColor(255, 255, 0);
 		if (dispInfo == "TestSceneD") ofSetColor(255, 0, 255);
 		ofRect(0, 20, 30, 30);
 
@@ -321,7 +321,10 @@ void dpSwitchingManager::disableHakoniwa(hakoniwaType type){
 		}
 	}
 
-	if (!isExist) return; //該当する箱庭無し
+    if (!isExist){
+        refleshSceneforRDTK();
+        return; //該当する箱庭無し
+    }
 
 	//ターゲットディスプレイを全て無効にする
 	for (int i = 0;i < mSlots[targCvSlot].targetDisplay.size();i++){
@@ -334,7 +337,8 @@ void dpSwitchingManager::disableHakoniwa(hakoniwaType type){
 	mSlots[targCvSlot].targetDisplay.clear();
 	mSlots[targCvSlot].sourceCh = - 1;
 	mSlots[targCvSlot].presetFile = "";
-
+    
+    refleshSceneforRDTK();
 }
 
 void dpSwitchingManager::disableDisplay(int displayNum){
@@ -393,7 +397,23 @@ int dpSwitchingManager::getHakoniwaIndex(string sceneName){
 }
 
 void dpSwitchingManager::refleshSceneforRDTK(){
-
+    
+    for (int i = 0;i < hakoniwas.size();i++){
+        if (searchHakoniwaIsActive(hakoniwas[i]->type) == -1){
+            for (int j = 0;j < hakoniwas[i]->sceneNames.size();j++){
+                ofxOscMessage m;
+                m.setAddress("/ram/set_scene");
+                m.addStringArg(hakoniwas[i]->sceneNames[j].substr(2));
+                m.addIntArg(0);
+                m.addIntArg(0);
+                m.addIntArg(0);
+                cout << "Clear :" << hakoniwas[i]->sceneNames[j].substr(2) << endl;
+                if (!NETWORK_ISSTOP) senderToRDTK1.sendMessage(m);
+                if (!NETWORK_ISSTOP) senderToRDTK2.sendMessage(m);
+            }
+        }
+    }
+    
 	for (int i = 0;i < CV_SLOT_NUM;i++){
 
 		if (!mSlots[i].isEmpty){
@@ -436,22 +456,6 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 			}
 		}
 
-	}
-
-	for (int i = 0;i < hakoniwas.size();i++){
-		if (searchHakoniwaIsActive(hakoniwas[i]->type) == -1){
-			for (int j = 0;j < hakoniwas[i]->sceneNames.size();j++){
-				ofxOscMessage m;
-				m.setAddress("ram/set_scene");
-				m.addStringArg(hakoniwas[i]->sceneNames[j].substr(2));
-				m.addIntArg(0);
-				m.addIntArg(0);
-				m.addIntArg(0);
-
-				if (!NETWORK_ISSTOP) senderToRDTK1.sendMessage(m);
-				if (!NETWORK_ISSTOP) senderToRDTK2.sendMessage(m);
-			}
-		}
 	}
 
 }
