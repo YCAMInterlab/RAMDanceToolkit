@@ -48,7 +48,7 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
     
     bTestMode = false;
     bEachMode = false;
-    distanceThreshold = 44;
+    distanceThreshold = 45;
     
     ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent,this,&dpHakoniwaMagnetPendulum::guiEvent);
     
@@ -120,6 +120,8 @@ void dpHakoniwaMagnetPendulum::update() {
         d1 = mMotionExtractor.getDistanceAt(0, 1);
         d2 = mMotionExtractor.getDistanceAt(2, 3);
         d3 = mMotionExtractor.getDistanceAt(4, 5);
+        
+        cout << d1 << ", " << d2 << ", " << d3 << endl;
 
         if (bEachMode) {
 
@@ -146,12 +148,12 @@ void dpHakoniwaMagnetPendulum::update() {
             }
         } else {
             
-            if (d1 > distanceThreshold &&
-                d2 > distanceThreshold &&
-                d3 > distanceThreshold) {
-                for (int i = 0; i < 6; i++) bOn[i] = false;
-            } else {
+            if ((d1 < distanceThreshold && d1 > 0) ||
+                (d2 < distanceThreshold && d2 > 0) ||
+                (d3 < distanceThreshold&& d3 > 0)) {
                 for (int i = 0; i < 6; i++) bOn[i] = true;
+            } else {
+                for (int i = 0; i < 6; i++) bOn[i] = false;
             }
             
         }
