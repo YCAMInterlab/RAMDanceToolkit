@@ -86,6 +86,22 @@ void dpHakoniwaSand::draw(){
     example_drawDump();
 }
 
+void dpHakoniwaSand::onEnabled(){
+    
+    
+}
+
+void dpHakoniwaSand::onDisabled(){
+    
+    val1 = 2200;
+    val2 = 2200;
+    val3 = 2000;
+    
+    sendOsc();
+    
+}
+
+
 void dpHakoniwaSand::example_drawDump(){
     
     ofPushMatrix();
