@@ -13,7 +13,7 @@ void dpHakoniwaSand::setupControlPanel(){
     contents.push_back("Hight");
     contents.push_back("Rot");
     
-    ramGetGUI().addRadioGroup("mode", contents, &mode);
+    //ramGetGUI().addRadioGroup("mode__", contents, &mode);
     
     bTestMode = true;
     

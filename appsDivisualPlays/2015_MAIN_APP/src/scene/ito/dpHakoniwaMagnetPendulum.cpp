@@ -32,11 +32,11 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
     
     ramGetGUI().addSlider("Distance Threshold", 2.0f, 200.0f, &distanceThreshold);
 
-    vector<string> modename;
+   /* vector<string> modename;
     modename.push_back("ALL 3DANCERS MODE");
     modename.push_back("2EACH 3DANCERS MODE");
     
-    ramGetGUI().addRadioGroup("Dancer Mode", modename, &mode);
+    ramGetGUI().addRadioGroup("mode___", modename, &mode);*/
     
     bTestMode = true;
     distanceThreshold = 20.0f;
