@@ -31,7 +31,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->CVPreset	= "Plink_Laser";
 	hakoniwas.back()->sourceCh	= 3;
 	hakoniwas.back()->sceneNames.push_back("H:dpHPLink_Laser");
-	hakoniwas.back()->sceneNames.push_back("V:dpPLink_Laser");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisPLink_Laser");
 
 #pragma mark ★パラレルリンク:オイル
 	hakoniwas.push_back(new hakoniwaPresets());
@@ -46,8 +46,8 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_SERVOPENDULUM;
 	hakoniwas.back()->CVPreset	= "ServoPendulum";
-	hakoniwas.back()->sourceCh	= 8;
-    hakoniwas.back()->sceneNames.push_back("H:");
+	hakoniwas.back()->sourceCh	= 9;
+    hakoniwas.back()->sceneNames.push_back("H:dpHServoPendulum");
     hakoniwas.back()->sceneNames.push_back("V:dpVisServoPendulum");
 
 #pragma mark 磁石振り子
@@ -79,7 +79,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_SANDSTORM;
 	hakoniwas.back()->CVPreset	= "SandStorm";
-	hakoniwas.back()->sourceCh	= 5;
+	hakoniwas.back()->sourceCh	= 7;
 	hakoniwas.back()->sceneNames.push_back("H:dpHSandStorm");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisSandStorm");
 
@@ -104,10 +104,18 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 #pragma mark ★ステージ
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_STAGE;
-	hakoniwas.back()->CVPreset	= "dpStage";
+	hakoniwas.back()->CVPreset	= "Stage";
 	hakoniwas.back()->sourceCh	= 10;
 	hakoniwas.back()->sceneNames.push_back("V:dpVisStage");
 
+#pragma mark abare
+    hakoniwas.push_back(new hakoniwaPresets());
+    hakoniwas.back()->type      = HAKO_STRUGGLE;
+    hakoniwas.back()->CVPreset  = "Struggle";
+    hakoniwas.back()->sourceCh  = 8;
+    hakoniwas.back()->sceneNames.push_back("H:dpHStruggle");
+    hakoniwas.back()->sceneNames.push_back("V:dpVisStruggle");
+    
 #pragma mark ★テストA
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_TESTA;
