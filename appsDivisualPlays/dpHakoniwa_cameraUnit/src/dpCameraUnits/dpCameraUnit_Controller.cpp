@@ -13,6 +13,7 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 	for (int i = 0;i < 4;i++){
 		cvAnalysis[i].mGui.setPosition(-1000, 0);
 		cvAnalysis[i].oscListPtr = &oscSendList;
+		cvAnalysis[i].pairFXUnit = &cvFXUnit[i];
 		cvFXUnit[i].mGui.setPosition(-1000, 0);
 	}
 
