@@ -168,6 +168,11 @@ void dpSwitchingManager::draw(){
 
 void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
 
+    if (m.getAddress() == "/ram/set_slave"){
+        isSlave = true;
+        m.setAddress("/ram/set_scene");
+    }
+    
 	if (m.getAddress() == "/ram/set_scene"){
 		cout << "=-=-=-=-=-=-=-Head -=-=-=-=-=-=-=-=" << endl << endl;
 		int hakoId = getHakoniwaIndex(m.getArgAsString(0));
@@ -198,6 +203,7 @@ void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
 			cout << "Disable hakoniwa from Master=====" << endl;
 			disableHakoniwa(hakoniwaType(hakoId));
 		}
+        if (!isSlave) senderToSlave.sendMessage(m);
 	}
 
 	if (m.getAddress() == "/dp/master/switch/enable"){
