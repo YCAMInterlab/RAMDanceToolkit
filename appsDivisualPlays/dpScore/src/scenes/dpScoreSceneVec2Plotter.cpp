@@ -14,15 +14,6 @@ void SceneVec2Plotter::initialize()
 {
     dpDebugFunc();
     
-    mCircleBuffer.clear();
-    
-    mCircleVertices.clear();
-    mCircleVertices.assign(_circleNum, ofVec3f::zero());
-    mCircleColors.clear();
-    mCircleColors.assign(_circleNum, ofFloatColor(0.f, 0.f, 0.f, 0.f));
-    mCircleVbo.setVertexData(&mCircleVertices.at(0), _circleNum, GL_DYNAMIC_DRAW);
-    mCircleVbo.setColorData(&mCircleColors.at(0), _circleNum, GL_DYNAMIC_DRAW);
-
     mUICanvas = new ofxUICanvas();
     mUICanvas->setName(getName());
     mUICanvas->addLabel(getName());
@@ -46,12 +37,25 @@ void SceneVec2Plotter::enter()
     mCam.enableMouseInput();
     mCam.setFarClip(_circleNum * kStepZ);
     mEnterTime = ofGetElapsedTimef();
+    
+    mCircleBuffer.clear();
+    mCircleVertices.clear();
+    mCircleColors.clear();
+    mCircleVertices.assign(_circleNum, ofVec3f::zero());
+    mCircleColors.assign(_circleNum, ofFloatColor(0.f, 0.f, 0.f, 0.f));
+    mCircleVbo.setVertexData(&mCircleVertices.at(0), _circleNum, GL_DYNAMIC_DRAW);
+    mCircleVbo.setColorData(&mCircleColors.at(0), _circleNum, GL_DYNAMIC_DRAW);
 }
 
 void SceneVec2Plotter::exit()
 {
     dpDebugFunc();
     mCam.disableMouseInput();
+    
+    mCircleBuffer.clear();
+    mCircleVertices.clear();
+    mCircleColors.clear();
+    mCircleVbo.clear();
 }
 
 void SceneVec2Plotter::update(ofxEventMessage& m)

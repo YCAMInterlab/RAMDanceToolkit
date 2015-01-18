@@ -176,14 +176,6 @@ void ofApp::update()
 {
     OFX_BEGIN_EXCEPTION_HANDLING
     
-#ifdef DP_MASTER_HAKONIWA
-    ofSetWindowTitle("dpMasterHakoniwa : " + ofToString(ofGetFrameRate(), 2));
-#else
-    ofSetWindowTitle("dpScore : " + ofToString(ofGetFrameRate(), 2));
-#endif
-    
-    bool updatedMotioner = false;
-    
     while (mOscReceiver.hasWaitingMessages()) {
         ofxOscMessage m;
         mOscReceiver.getNextMessage(&m);
@@ -202,44 +194,65 @@ void ofApp::update()
             OFX_END_EXCEPTION_HANDLING
         }
         else if (addr == ofxMotioner::OSC_ADDR) {
+            OFX_BEGIN_EXCEPTION_HANDLING
             ofxMotioner::updateWithOscMessage(m);
-            updatedMotioner = true;
+            OFX_END_EXCEPTION_HANDLING
         }
         else {
-            auto dir = ofSplitString(addr, "/");
-            if (dir.size() >= 5 && dir.at(1) == "dp" && dir.at(2) == "cameraUnit") {
-                string newAddr = "/" + dir.at(1) + "/" + dir.at(2) + "/" + dir.at(4);
-                for (int i=5; i<dir.size(); i++) {
-                    newAddr += "/" + dir.at(i);
-                }
-                ofxEventMessage mm = m;
-                mm.setAddress(newAddr);
-                mSceneManager.update(mm);
+            OFX_BEGIN_EXCEPTION_HANDLING
+            const string newAddr = makeInternalCameraUnitAddress(addr);
+            if (newAddr != "") {
+                mCameraUnitMessage = m;
+                mCameraUnitMessage.setAddress(newAddr);
             }
+            OFX_END_EXCEPTION_HANDLING
         }
     }
     
-    if (mDebugCamUnit) {
-        const float t = ofGetElapsedTimef();
-        ofxEventMessage vm;
-        vm.setAddress(kOscAddrCameraUnitVector);
-        for (int i=0; i<kNumCameraunitVectors; i++) {
-            ofVec2f v;
-            v.x = ofSignedNoise(t, 0, i) + ofSignedNoise(t*9.8f, 0, i) * 0.5f  + ofSignedNoise(t*102.f, 0, i) * 0.25f;
-            v.y = ofSignedNoise(t, 1, i) + ofSignedNoise(t*9.8f, 1, i) * 0.5f  + ofSignedNoise(t*102.f, 1, i) * 0.25f;
-            vm.addFloatArg(v.x);
-            vm.addFloatArg(v.y);
-        }
-        mSceneManager.update(vm);
-    }
+    if (mDebugCamUnit) generateFakeVectorData();
+    
+    ofxMotioner::update();
     
     ofxEventMessage m;
     m.setAddress(kOscAddrMotioner);
     mSceneManager.update(m);
     
-    ofxMotioner::update();
+    mSceneManager.update(mCameraUnitMessage);
     
+#ifdef DP_MASTER_HAKONIWA
+    ofSetWindowTitle("dpMasterHakoniwa : " + ofToString(ofGetFrameRate(), 2));
+    getMH().update();
+#else
+    ofSetWindowTitle("dpScore : " + ofToString(ofGetFrameRate(), 2));
+#endif
     OFX_END_EXCEPTION_HANDLING
+}
+
+void ofApp::generateFakeVectorData()
+{
+    const float t = ofGetElapsedTimef();
+    mCameraUnitMessage.clear();
+    mCameraUnitMessage.setAddress(kOscAddrCameraUnitVector);
+    for (int i=0; i<kNumCameraunitVectors; i++) {
+        ofVec2f v;
+        v.x = ofSignedNoise(t, 0, i) + ofSignedNoise(t*9.8f, 0, i) * 0.5f  + ofSignedNoise(t*102.f, 0, i) * 0.25f;
+        v.y = ofSignedNoise(t, 1, i) + ofSignedNoise(t*9.8f, 1, i) * 0.5f  + ofSignedNoise(t*102.f, 1, i) * 0.25f;
+        mCameraUnitMessage.addFloatArg(v.x);
+        mCameraUnitMessage.addFloatArg(v.y);
+    }
+}
+
+string ofApp::makeInternalCameraUnitAddress(const string& addr)
+{
+    string newAddr = "";
+    auto dir = ofSplitString(addr, "/");
+    if (dir.size() >= 5 && dir.at(1) == "dp" && dir.at(2) == "cameraUnit") {
+        string newAddr = "/" + dir.at(1) + "/" + dir.at(2) + "/" + dir.at(4);
+        for (int i=5; i<dir.size(); i++) {
+            newAddr += "/" + dir.at(i);
+        }
+    }
+    return newAddr;
 }
 
 #pragma mark ___________________________________________________________________
@@ -267,7 +280,7 @@ void ofApp::exit()
     OFX_BEGIN_EXCEPTION_HANDLING
     
 #ifdef DP_MASTER_HAKONIWA
-    getMH().shutdown();
+    //getMH().shutdown();
 #endif
     
     mSceneManager.clear();

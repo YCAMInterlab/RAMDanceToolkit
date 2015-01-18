@@ -31,13 +31,14 @@ void SceneDataText::shutDown()
 void SceneDataText::enter()
 {
     dpDebugFunc();
+    mVectors.clear();
     mFont.loadFont(kFontPath, kFontSize);
 }
 
 void SceneDataText::exit()
 {
     dpDebugFunc();
-    
+    mVectors.clear();
     mFont = ofTrueTypeFont();
 }
 

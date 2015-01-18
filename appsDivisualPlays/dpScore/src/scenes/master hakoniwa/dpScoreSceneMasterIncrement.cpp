@@ -126,8 +126,10 @@ void SceneMasterIncrement::draw()
     for (auto f : mAdditions) {
         ofPushMatrix();
         ofTranslate(20.f, 20.f * i + 70.f);
-        auto s = ofToString(f, 3) + "/" + ofToString(mLimit);
-        ofDrawBitmapString(s, ofPoint::zero());
+        stringstream ss;
+        ss << boolalpha << getMH().getIsOpeningValve(i)
+        << ": " << ofToString(f, 3) + "/" + ofToString(mLimit);
+        ofDrawBitmapString(ss.str(), ofPoint::zero());
         ofPopMatrix();
         i++;
     }

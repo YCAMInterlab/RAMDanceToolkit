@@ -105,7 +105,7 @@ DP_SCORE_NAMESPACE_BEGIN
 const int kW = 1920;
 const int kH = 1080;
 
-const int kFrameRate = 30;
+const int kFrameRate = 60;
 const int kOscClientPort = 10000;
 
 const string kOscAddrChangeScene = "/dp/score/changeScene";

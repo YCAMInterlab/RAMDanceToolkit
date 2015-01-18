@@ -42,6 +42,9 @@ void SceneBodyPatterns::enter()
                   this,
                   &SceneBodyPatterns::onUpdateSkeleton);
     mCam.enableMouseInput();
+    
+    mSkeletons.clear();
+    mSkeletonName = "";
 }
 
 void SceneBodyPatterns::exit()

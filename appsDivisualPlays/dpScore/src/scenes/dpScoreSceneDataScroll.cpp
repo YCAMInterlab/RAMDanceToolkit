@@ -38,6 +38,7 @@ void SceneDataScroll::enter()
     ofAddListener(ofxMotioner::updateSkeletonEvent,
                   this,
                   &SceneDataScroll::onUpdateSkeleton);
+    mSkeletons.clear();
 }
 
 void SceneDataScroll::exit()
@@ -47,6 +48,7 @@ void SceneDataScroll::exit()
     ofRemoveListener(ofxMotioner::updateSkeletonEvent,
                      this,
                      &SceneDataScroll::onUpdateSkeleton);
+    mSkeletons.clear();
 }
 
 void SceneDataScroll::update(ofxEventMessage& m)

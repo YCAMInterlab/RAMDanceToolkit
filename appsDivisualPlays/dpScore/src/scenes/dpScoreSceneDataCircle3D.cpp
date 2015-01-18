@@ -89,6 +89,7 @@ void SceneDataCircle3D::enter()
 void SceneDataCircle3D::exit()
 {
     dpDebugFunc();
+    mCircles.clear();
 }
 
 void SceneDataCircle3D::update(ofxEventMessage& m)

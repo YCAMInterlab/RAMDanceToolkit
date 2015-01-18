@@ -41,6 +41,7 @@ public:
     
     void turnOnValve(int index);
     void turnOffAllPins();
+    bool getIsOpeningValve(int index);
     
     void sendScene(const string& name,
                    bool enabled,

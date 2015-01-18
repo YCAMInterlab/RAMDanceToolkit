@@ -128,6 +128,13 @@ void MasterHakoniwa::turnOffAllPins()
     }
 }
 
+bool MasterHakoniwa::getIsOpeningValve(int index)
+{
+    if (index <0 || index >= mValves.size())
+        ofxThrowExceptionf(ofxException, "valve index %d is out of range", index);
+    return mValves.at(index).opening;
+}
+
 void MasterHakoniwa::sendPin(int pin, bool open)
 {
     ofxOscMessage m;

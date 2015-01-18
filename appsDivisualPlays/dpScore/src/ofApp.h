@@ -27,8 +27,11 @@ public:
     void onObjectReceived(dp::score::ObjectEventArgs& e);
     
 private:
+    void generateFakeVectorData();
+    string makeInternalCameraUnitAddress(const string& addr);
     dp::score::SceneManager mSceneManager;
     ofxOscReceiver mOscReceiver;
+    ofxOscMessage mCameraUnitMessage;
     bool mInvert{false};
     bool mDebugCamUnit{false};
 };

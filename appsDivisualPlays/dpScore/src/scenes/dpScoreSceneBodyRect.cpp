@@ -25,6 +25,12 @@ BodyRectNode::BodyRectNode()
              });
 }
 
+BodyRectNode::~BodyRectNode()
+{
+    screenCoords.clear();
+    randomPoints.clear();
+}
+
 BodyRectNode& BodyRectNode::operator = (const BodyRectNode& rhs)
 {
     return *this = rhs;

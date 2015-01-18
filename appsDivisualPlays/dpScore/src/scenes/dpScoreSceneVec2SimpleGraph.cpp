@@ -13,9 +13,6 @@ DP_SCORE_NAMESPACE_BEGIN
 void SceneVec2SimpleGraph::initialize()
 {
     dpDebugFunc();
-    
-    mBuffer.clear();
-    mBuffer.assign(kW/mStep, ofVec2f::zero());
  
     mUICanvas = new ofxUICanvas();
     mUICanvas->setName(getName());
@@ -38,11 +35,16 @@ void SceneVec2SimpleGraph::shutDown()
 void SceneVec2SimpleGraph::enter()
 {
     dpDebugFunc();
+    
+    mBuffer.clear();
+    mBuffer.assign(kW/mStep, ofVec2f::zero());
 }
 
 void SceneVec2SimpleGraph::exit()
 {
     dpDebugFunc();
+    
+    mBuffer.clear();
 }
 
 void SceneVec2SimpleGraph::update(ofxEventMessage& m)

@@ -14,14 +14,6 @@ void SceneVec2Grid::initialize()
 {
     dpDebugFunc();
     
-    mGridBuffer.clear();
-    mGridBuffer.assign(mGridW/mGridStep, ofVec2f::zero());
-    mGridVertices.clear();
-    mGridVertices.assign(mGridW / mGridStep * mGridH /mGridStep, ofVec3f::zero());
-    mGridVbo.setVertexData(&mGridVertices.at(0),
-                           mGridVertices.size(),
-                           GL_DYNAMIC_DRAW);
-    
     mUICanvas = new ofxUICanvas();
     mUICanvas->setName(getName());
     mUICanvas->addLabel(getName());
@@ -44,6 +36,14 @@ void SceneVec2Grid::enter()
     dpDebugFunc();
     
     mCam.enableMouseInput();
+    
+    mGridBuffer.clear();
+    mGridVertices.clear();
+    mGridBuffer.assign(mGridW/mGridStep, ofVec2f::zero());
+    mGridVertices.assign(mGridW / mGridStep * mGridH /mGridStep, ofVec3f::zero());
+    mGridVbo.setVertexData(&mGridVertices.at(0),
+                           mGridVertices.size(),
+                           GL_DYNAMIC_DRAW);
 }
 
 void SceneVec2Grid::exit()
@@ -51,6 +51,10 @@ void SceneVec2Grid::exit()
     dpDebugFunc();
     
     mCam.disableMouseInput();
+    
+    mGridBuffer.clear();
+    mGridVertices.clear();
+    mGridVbo.clear();
 }
 
 void SceneVec2Grid::update(ofxEventMessage& m)

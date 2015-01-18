@@ -24,6 +24,12 @@ BodyBoxNode::BodyBoxNode()
              });
 }
 
+BodyBoxNode::~BodyBoxNode()
+{
+    screenCoords.clear();
+    randomPoints.clear();
+}
+
 BodyBoxNode& BodyBoxNode::operator = (const BodyBoxNode& rhs)
 {
     return *this = rhs;

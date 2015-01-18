@@ -94,6 +94,7 @@ void SceneDataSphere::enter()
 void SceneDataSphere::exit()
 {
     dpDebugFunc();
+    mCircles.clear();
 }
 
 void SceneDataSphere::update(ofxEventMessage& m)

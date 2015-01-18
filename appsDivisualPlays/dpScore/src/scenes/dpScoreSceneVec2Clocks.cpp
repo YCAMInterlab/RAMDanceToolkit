@@ -36,11 +36,15 @@ void SceneVec2Clocks::shutDown()
 void SceneVec2Clocks::enter()
 {
     dpDebugFunc();
+    
+    mClockBuffer.clear();
 }
 
 void SceneVec2Clocks::exit()
 {
     dpDebugFunc();
+    
+    mClockBuffer.clear();
 }
 
 void SceneVec2Clocks::update(ofxEventMessage& m)

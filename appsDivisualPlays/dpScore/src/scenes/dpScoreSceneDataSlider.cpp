@@ -105,7 +105,6 @@ void SceneDataSlider::exit()
 {
     dpDebugFunc();
     mSliders.clear();
-    
     mFont = ofTrueTypeFont();
 }
 

@@ -14,6 +14,19 @@ BodyLinesNode::BodyLinesNode()
 {
 }
 
+BodyLinesNode::~BodyLinesNode()
+{
+    spd.clear();
+    axis.clear();
+    vertices.clear();
+    initialVertices.clear();
+    verticesLines.clear();
+    verticesColorsR.clear();
+    verticesColorsW.clear();
+    vbo.clear();
+    vboLines.clear();
+}
+
 void BodyLinesNode::setupPoints()
 {
     vertices.assign(kNumVertices, ofVec3f::zero());

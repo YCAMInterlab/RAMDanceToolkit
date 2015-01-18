@@ -26,6 +26,13 @@ SceneBodyFlow::Points::Points()
     v2.setVertexData(&p2.at(0), p2.size(), GL_DYNAMIC_DRAW);
 }
 
+SceneBodyFlow::Points::~Points()
+{
+    p0.clear();
+    p1.clear();
+    p2.clear();
+}
+
 void SceneBodyFlow::Points::update()
 {
     for (auto& p : p0) {
@@ -88,6 +95,7 @@ void SceneBodyFlow::enter()
     for (auto& p : mPoints) {
         p = ofPtr<Points>(new Points());
     }
+    mSkeletonName = "";
 }
 
 void SceneBodyFlow::exit()
