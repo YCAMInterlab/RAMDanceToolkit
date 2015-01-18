@@ -48,6 +48,16 @@ dpCameraUnit_cvFX::dpCameraUnit_cvFX(){
 	ofAddListener(ofEvents().mousePressed, this, &dpCameraUnit_cvFX::mousePressed);
 	ofAddListener(ofEvents().mouseDragged, this, &dpCameraUnit_cvFX::mouseDragged);
 	ofAddListener(ofEvents().mouseReleased, this, &dpCameraUnit_cvFX::mouseReleased);
+
+	mParam_Canny_Thr1 = 100;
+	mParam_Canny_Thr2 = 120;
+	mParam_Threshold = 128;
+	mParam_adpThreshold_blockSize = 5;
+	mParam_adpThreshold_offset = 10;
+	mParam_accum_Time = 0.1;
+	mParam_Dilate_num = 5;
+	mParam_Erode_num = 5;
+
 }
 
 dpCameraUnit_cvFX::~dpCameraUnit_cvFX(){

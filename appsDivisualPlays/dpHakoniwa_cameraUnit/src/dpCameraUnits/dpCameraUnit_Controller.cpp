@@ -61,7 +61,7 @@ void dpCameraUnit_Controller::update(){
 
 	static bool windowReShape;
 	if (mbMakeSettings){
-		if (mbMakeSettings != windowReShape) ofSetWindowShape(630, 1080);
+		if (mbMakeSettings != windowReShape) ofSetWindowShape(635, 1080);
 	}else{
 		if (mbMakeSettings != windowReShape) ofSetWindowShape(1920, 1080);
 	}
@@ -73,13 +73,16 @@ void dpCameraUnit_Controller::update(){
 		if (mbMakeSettings){
 			cvFXUnit[0].update(inputUnit.mFinalSource_FourSplit[makeSettings_targetInput],
 							   inputUnit.mIsFrameNew);
-			cvAnalysis[0].update(cvFXUnit[makeSettings_targetInput].mSource,
-								 cvFXUnit[makeSettings_targetInput].mGraySource,
+			cvAnalysis[0].update(cvFXUnit[0].mSource,
+								 cvFXUnit[0].mGraySource,
 								 inputUnit.mIsFrameNew);
 		}else{
 			for (int i = 0;i < 4;i++){
-				cvFXUnit[i]  .update(inputUnit.mFinalSource_FourSplit[i], inputUnit.mIsFrameNew);
-				cvAnalysis[i].update(cvFXUnit[i].mSource, cvFXUnit[i].mGraySource, inputUnit.mIsFrameNew);
+				cvFXUnit[i]  .update(inputUnit.mFinalSource_FourSplit[i],
+									 inputUnit.mIsFrameNew);
+				cvAnalysis[i].update(cvFXUnit[i].mSource,
+									 cvFXUnit[i].mGraySource,
+									 inputUnit.mIsFrameNew);
 			}
 		}
 
