@@ -124,6 +124,10 @@ public:
         mDelaunayMesh.draw();
     }
     
+    void onDisabled(){
+        
+    }
+    
 private:
   
     ramOscReceiveTag mReceiver;

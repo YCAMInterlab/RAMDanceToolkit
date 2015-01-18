@@ -28,7 +28,6 @@ void hakoVisPLink_Laser::setupControlPanel(){
 }
 
 void hakoVisPLink_Laser::update(){
-
 	while (receiver.hasWaitingMessages()){
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
@@ -101,6 +100,7 @@ void hakoVisPLink_Laser::draw_PatternB(){
 	ofMesh msh;
 
 	del.reset();
+	int counter = 0;
 	for (int j = 0;j < pix_h;j++){
 		for (int i = 0;i < pix_w;i++){
 			ofVec3f tv =ofVec3f((i-pix_w/2)*60,
@@ -108,7 +108,10 @@ void hakoVisPLink_Laser::draw_PatternB(){
 								lines[j*pix_w+i].pixel * ofRandom(0),
 								(j-pix_h/2)*60);
 			msh.addVertex(tv);
-			if (tv.y > 0) del.addPoint(tv.x,tv.z,100+tv.y/10.0);
+			if (tv.y > 0){
+				counter++;
+				del.addPoint(tv.x,tv.z,100+tv.y/10.0);
+			}
 
 			if ((i < (pix_w - 1)) &&
 				(j < (pix_h - 1))){
@@ -125,7 +128,7 @@ void hakoVisPLink_Laser::draw_PatternB(){
 		}
 	}
 
-	del.triangulate();
+	if (counter > 4) del.triangulate();
 
 	camera.begin();
 	ofEnableDepthTest();

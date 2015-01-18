@@ -113,6 +113,100 @@
 		D2E2B7401A4A4FB500570C58 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B73A1A4A4FB500570C58 /* tinyxmlerror.cpp */; };
 		D2E2B7411A4A4FB500570C58 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B73B1A4A4FB500570C58 /* tinyxmlparser.cpp */; };
 		D2E2B7421A4A4FB500570C58 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B73D1A4A4FB500570C58 /* ofxXmlSettings.cpp */; };
+		D2E891131A6B586C0047B75A /* ofxUIBaseDraws.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF91A4C046000CC3598 /* ofxUIBaseDraws.cpp */; };
+		D2E891141A6B586C0047B75A /* ofxOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21B41A49653D009D0796 /* ofxOscMessage.cpp */; };
+		D2E891161A6B586C0047B75A /* ofxOscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21B81A49653D009D0796 /* ofxOscReceiver.cpp */; };
+		D2E891181A6B586C0047B75A /* ofxUIMultiImageButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B221A4C046000CC3598 /* ofxUIMultiImageButton.cpp */; };
+		D2E891191A6B586C0047B75A /* ofxMotionerNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3711A5FC2D8005F0404 /* ofxMotionerNode.cpp */; };
+		D2E8911A1A6B586C0047B75A /* OscTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21AD1A49653D009D0796 /* OscTypes.cpp */; };
+		D2E8911C1A6B586C0047B75A /* dpScoreSceneBodyBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2619F361A6523C3002EF3E2 /* dpScoreSceneBodyBase.cpp */; };
+		D2E8911E1A6B586C0047B75A /* ofxUIMovingGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B201A4C046000CC3598 /* ofxUIMovingGraph.cpp */; };
+		D2E8911F1A6B586C0047B75A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1D0A3A1BDC003C02F2 /* main.cpp */; };
+		D2E891221A6B586C0047B75A /* ofxUIFPSSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B0C1A4C046000CC3598 /* ofxUIFPSSlider.cpp */; };
+		D2E891241A6B586C0047B75A /* ofxUIImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B0E1A4C046000CC3598 /* ofxUIImage.cpp */; };
+		D2E891261A6B586C0047B75A /* ofxUIWidgetWithLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B4F1A4C046000CC3598 /* ofxUIWidgetWithLabel.cpp */; };
+		D2E891271A6B586C0047B75A /* ofxUIToggleMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B451A4C046000CC3598 /* ofxUIToggleMatrix.cpp */; };
+		D2E891291A6B586C0047B75A /* ofxUIValuePlotter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B481A4C046000CC3598 /* ofxUIValuePlotter.cpp */; };
+		D2E8912A1A6B586C0047B75A /* ofxOscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21BA1A49653D009D0796 /* ofxOscSender.cpp */; };
+		D2E8912B1A6B586C0047B75A /* OscReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21AB1A49653D009D0796 /* OscReceivedElements.cpp */; };
+		D2E8912C1A6B586C0047B75A /* ofxUITabBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B3D1A4C046000CC3598 /* ofxUITabBar.cpp */; };
+		D2E8912E1A6B586C0047B75A /* dpScoreSceneBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29034021A4D4ADE00577E04 /* dpScoreSceneBase.cpp */; };
+		D2E8912F1A6B586C0047B75A /* ofxUIRotarySlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B2F1A4C046000CC3598 /* ofxUIRotarySlider.cpp */; };
+		D2E891301A6B586C0047B75A /* ofxUIButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AFD1A4C046000CC3598 /* ofxUIButton.cpp */; };
+		D2E891331A6B586C0047B75A /* UdpSocketWin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21A11A49653D009D0796 /* UdpSocketWin.cpp */; };
+		D2E891361A6B586C0047B75A /* ofxUITextInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B411A4C046000CC3598 /* ofxUITextInput.cpp */; };
+		D2E891371A6B586C0047B75A /* ofxUIWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B4C1A4C046000CC3598 /* ofxUIWidget.cpp */; };
+		D2E891381A6B586C0047B75A /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C219B1A49653D009D0796 /* NetworkingUtils.cpp */; };
+		D2E891391A6B586C0047B75A /* ofxUIMinimalSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B1E1A4C046000CC3598 /* ofxUIMinimalSlider.cpp */; };
+		D2E8913A1A6B586C0047B75A /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21961A49653D009D0796 /* IpEndpointName.cpp */; };
+		D2E8913B1A6B586C0047B75A /* ofxUIDropDownList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B061A4C046000CC3598 /* ofxUIDropDownList.cpp */; };
+		D2E8913C1A6B586C0047B75A /* ofxUIRadio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B291A4C046000CC3598 /* ofxUIRadio.cpp */; };
+		D2E8913D1A6B586C0047B75A /* ofxUIEventArgs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B081A4C046000CC3598 /* ofxUIEventArgs.cpp */; };
+		D2E8913E1A6B586C0047B75A /* ofxUIImageSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B141A4C046000CC3598 /* ofxUIImageSlider.cpp */; };
+		D2E891401A6B586C0047B75A /* ofxUISlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B331A4C046000CC3598 /* ofxUISlider.cpp */; };
+		D2E891411A6B586C0047B75A /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C219C1A49653D009D0796 /* UdpSocket.cpp */; };
+		D2E891421A6B586C0047B75A /* ofxUICircleSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B011A4C046000CC3598 /* ofxUICircleSlider.cpp */; };
+		D2E891431A6B586C0047B75A /* ofxUIScrollableCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B311A4C046000CC3598 /* ofxUIScrollableCanvas.cpp */; };
+		D2E891451A6B586C0047B75A /* ofxUIToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B431A4C046000CC3598 /* ofxUIToggle.cpp */; };
+		D2E891471A6B586C0047B75A /* ofxUIRectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B2D1A4C046000CC3598 /* ofxUIRectangle.cpp */; };
+		D2E891491A6B586C0047B75A /* ofxUILabelButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B1A1A4C046000CC3598 /* ofxUILabelButton.cpp */; };
+		D2E8914A1A6B586C0047B75A /* ofxUI2DGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF51A4C046000CC3598 /* ofxUI2DGraph.cpp */; };
+		D2E8914D1A6B586C0047B75A /* ofxUIImageToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B161A4C046000CC3598 /* ofxUIImageToggle.cpp */; };
+		D2E8914E1A6B586C0047B75A /* ofxUISpectrum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B391A4C046000CC3598 /* ofxUISpectrum.cpp */; };
+		D2E8914F1A6B586C0047B75A /* ofxUISortableList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B351A4C046000CC3598 /* ofxUISortableList.cpp */; };
+		D2E891501A6B586C0047B75A /* ofxUIDragableLabelButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B041A4C046000CC3598 /* ofxUIDragableLabelButton.cpp */; };
+		D2E891521A6B586C0047B75A /* ofxUITextArea.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B3F1A4C046000CC3598 /* ofxUITextArea.cpp */; };
+		D2E891531A6B586C0047B75A /* dpScoreSceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29034061A4D4ADE00577E04 /* dpScoreSceneManager.cpp */; };
+		D2E891541A6B586C0047B75A /* ofxUISpacer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B371A4C046000CC3598 /* ofxUISpacer.cpp */; };
+		D2E891551A6B586C0047B75A /* ofxMotionerConstants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B36F1A5FC2D8005F0404 /* ofxMotionerConstants.cpp */; };
+		D2E891561A6B586C0047B75A /* ofxUIImageButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B101A4C046000CC3598 /* ofxUIImageButton.cpp */; };
+		D2E891571A6B586C0047B75A /* ofxOscParameterSync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21B61A49653D009D0796 /* ofxOscParameterSync.cpp */; };
+		D2E891581A6B586C0047B75A /* ofxEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0C021A4C0E2E00CC3598 /* ofxEvent.cpp */; };
+		D2E8915B1A6B586C0047B75A /* ofxMotionerSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3731A5FC2D8005F0404 /* ofxMotionerSkeleton.cpp */; };
+		D2E8915D1A6B586C0047B75A /* ofxUIFPS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B0A1A4C046000CC3598 /* ofxUIFPS.cpp */; };
+		D2E8915E1A6B586C0047B75A /* ofxUI2DPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF71A4C046000CC3598 /* ofxUI2DPad.cpp */; };
+		D2E8915F1A6B586C0047B75A /* ofxUIWaveform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B4A1A4C046000CC3598 /* ofxUIWaveform.cpp */; };
+		D2E891611A6B586C0047B75A /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B73B1A4A4FB500570C58 /* tinyxmlparser.cpp */; };
+		D2E891631A6B586C0047B75A /* ofxUIRangeSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B2B1A4C046000CC3598 /* ofxUIRangeSlider.cpp */; };
+		D2E891651A6B586C0047B75A /* ofxMotionerUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3751A5FC2D8005F0404 /* ofxMotionerUtils.cpp */; };
+		D2E891661A6B586C0047B75A /* ofxUINumberDialer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B261A4C046000CC3598 /* ofxUINumberDialer.cpp */; };
+		D2E891671A6B586C0047B75A /* OscPrintReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21A91A49653D009D0796 /* OscPrintReceivedElements.cpp */; };
+		D2E891681A6B586C0047B75A /* ofxUILabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B181A4C046000CC3598 /* ofxUILabel.cpp */; };
+		D2E8916A1A6B586C0047B75A /* ofxUISuperCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B3B1A4C046000CC3598 /* ofxUISuperCanvas.cpp */; };
+		D2E8916B1A6B586C0047B75A /* ofxUIMultiImageToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B241A4C046000CC3598 /* ofxUIMultiImageToggle.cpp */; };
+		D2E8916C1A6B586C0047B75A /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B73A1A4A4FB500570C58 /* tinyxmlerror.cpp */; };
+		D2E8916D1A6B586C0047B75A /* dpScoreEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3821A5FC95C005F0404 /* dpScoreEvent.cpp */; };
+		D2E8916E1A6B586C0047B75A /* OscOutboundPacketStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21A61A49653D009D0796 /* OscOutboundPacketStream.cpp */; };
+		D2E8916F1A6B586C0047B75A /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B7381A4A4FB500570C58 /* tinyxml.cpp */; };
+		D2E891711A6B586C0047B75A /* ofxOscBundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21B21A49653D009D0796 /* ofxOscBundle.cpp */; };
+		D2E891721A6B586C0047B75A /* NetworkingUtilsWin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21A01A49653D009D0796 /* NetworkingUtilsWin.cpp */; };
+		D2E891731A6B586C0047B75A /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B73D1A4A4FB500570C58 /* ofxXmlSettings.cpp */; };
+		D2E891741A6B586C0047B75A /* ofxUILabelToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B1C1A4C046000CC3598 /* ofxUILabelToggle.cpp */; };
+		D2E891751A6B586C0047B75A /* ofxUIImageSampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B121A4C046000CC3598 /* ofxUIImageSampler.cpp */; };
+		D2E891761A6B586C0047B75A /* dpScoreCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29034041A4D4ADE00577E04 /* dpScoreCommon.cpp */; };
+		D2E891771A6B586C0047B75A /* ofxUICanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AFF1A4C046000CC3598 /* ofxUICanvas.cpp */; };
+		D2E891781A6B586C0047B75A /* ofxException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0C071A4C0E2E00CC3598 /* ofxException.cpp */; };
+		D2E891791A6B586C0047B75A /* ofApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */; };
+		D2E8917B1A6B586C0047B75A /* ofxMotioner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B36D1A5FC2D8005F0404 /* ofxMotioner.cpp */; };
+		D2E8917C1A6B586C0047B75A /* ofxUIBiLabelSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AFB1A4C046000CC3598 /* ofxUIBiLabelSlider.cpp */; };
+		D2E8917E1A6B586C0047B75A /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
+		D2E8917F1A6B586C0047B75A /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E715D3B6510020DFD4 /* QTKit.framework */; };
+		D2E891801A6B586C0047B75A /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		D2E891811A6B586C0047B75A /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
+		D2E891821A6B586C0047B75A /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
+		D2E891831A6B586C0047B75A /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
+		D2E891841A6B586C0047B75A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9730E8CC7DD009D7055 /* AudioToolbox.framework */; };
+		D2E891851A6B586C0047B75A /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9750E8CC7DD009D7055 /* CoreAudio.framework */; };
+		D2E891861A6B586C0047B75A /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9760E8CC7DD009D7055 /* CoreFoundation.framework */; };
+		D2E891871A6B586C0047B75A /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9770E8CC7DD009D7055 /* CoreServices.framework */; };
+		D2E891881A6B586C0047B75A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9790E8CC7DD009D7055 /* OpenGL.framework */; };
+		D2E891891A6B586C0047B75A /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */; };
+		D2E8918A1A6B586C0047B75A /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424410CC5A17004149E2 /* AppKit.framework */; };
+		D2E8918B1A6B586C0047B75A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424510CC5A17004149E2 /* Cocoa.framework */; };
+		D2E8918C1A6B586C0047B75A /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424610CC5A17004149E2 /* IOKit.framework */; };
+		D2E8918D1A6B586C0047B75A /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */; };
+		D2E891901A6B586C0047B75A /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		D2E8919A1A6B5B460047B75A /* dpScoreSceneMaster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E891981A6B5B460047B75A /* dpScoreSceneMaster.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -134,6 +228,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D2E891101A6B586C0047B75A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = E4B27C1410CBEB8E00536013;
+			remoteInfo = openFrameworks;
+		};
 		E4328147138ABC890047C5CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */;
@@ -151,6 +252,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		D2E8918F1A6B586C0047B75A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D2E891901A6B586C0047B75A /* GLUT.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4C2427710CC5ABF004149E2 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -389,6 +500,11 @@
 		D2E2B73B1A4A4FB500570C58 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		D2E2B73D1A4A4FB500570C58 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		D2E2B73E1A4A4FB500570C58 /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
+		D2E8910D1A6B57CA0047B75A /* dpScore copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "dpScore copy-Info.plist"; path = "/Users/falcon/Documents/of_v0.8.4_osx_release/RAMDanceToolkit/appsDivisualPlays/dpScore/dpScore copy-Info.plist"; sourceTree = "<absolute>"; };
+		D2E891941A6B586C0047B75A /* dpMasterHakoniwa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dpMasterHakoniwa.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2E891951A6B586C0047B75A /* dpScore copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "dpScore copy2-Info.plist"; path = "/Users/falcon/Documents/of_v0.8.4_osx_release/RAMDanceToolkit/appsDivisualPlays/dpScore/dpScore copy2-Info.plist"; sourceTree = "<absolute>"; };
+		D2E891981A6B5B460047B75A /* dpScoreSceneMaster.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneMaster.cpp; sourceTree = "<group>"; };
+		D2E891991A6B5B460047B75A /* dpScoreSceneMaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneMaster.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -414,6 +530,29 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D2E8917D1A6B586C0047B75A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2E8917E1A6B586C0047B75A /* Accelerate.framework in Frameworks */,
+				D2E8917F1A6B586C0047B75A /* QTKit.framework in Frameworks */,
+				D2E891801A6B586C0047B75A /* GLUT.framework in Frameworks */,
+				D2E891811A6B586C0047B75A /* openFrameworksDebug.a in Frameworks */,
+				D2E891821A6B586C0047B75A /* AGL.framework in Frameworks */,
+				D2E891831A6B586C0047B75A /* ApplicationServices.framework in Frameworks */,
+				D2E891841A6B586C0047B75A /* AudioToolbox.framework in Frameworks */,
+				D2E891851A6B586C0047B75A /* CoreAudio.framework in Frameworks */,
+				D2E891861A6B586C0047B75A /* CoreFoundation.framework in Frameworks */,
+				D2E891871A6B586C0047B75A /* CoreServices.framework in Frameworks */,
+				D2E891881A6B586C0047B75A /* OpenGL.framework in Frameworks */,
+				D2E891891A6B586C0047B75A /* QuickTime.framework in Frameworks */,
+				D2E8918A1A6B586C0047B75A /* AppKit.framework in Frameworks */,
+				D2E8918B1A6B586C0047B75A /* Cocoa.framework in Frameworks */,
+				D2E8918C1A6B586C0047B75A /* IOKit.framework in Frameworks */,
+				D2E8918D1A6B586C0047B75A /* CoreVideo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4B69B590A3A1756003C02F2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -762,6 +901,7 @@
 		D29034081A4D4ADE00577E04 /* scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D2E891971A6B59F00047B75A /* master hakoniwa */,
 				D29B99111A63F023000115C5 /* boids */,
 				D29B990C1A63A22C000115C5 /* body */,
 				D29B990B1A63A222000115C5 /* hakoniwa */,
@@ -879,6 +1019,15 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		D2E891971A6B59F00047B75A /* master hakoniwa */ = {
+			isa = PBXGroup;
+			children = (
+				D2E891981A6B5B460047B75A /* dpScoreSceneMaster.cpp */,
+				D2E891991A6B5B460047B75A /* dpScoreSceneMaster.h */,
+			);
+			path = "master hakoniwa";
+			sourceTree = "<group>";
+		};
 		E4328144138ABC890047C5CB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -907,6 +1056,9 @@
 				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
 				E4B69B5B0A3A1756003C02F2 /* dpScoreDebug.app */,
+				D2E8910D1A6B57CA0047B75A /* dpScore copy-Info.plist */,
+				D2E891941A6B586C0047B75A /* dpMasterHakoniwa.app */,
+				D2E891951A6B586C0047B75A /* dpScore copy2-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -934,6 +1086,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D2E8910E1A6B586C0047B75A /* dpMasterHakoniwa */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D2E891911A6B586C0047B75A /* Build configuration list for PBXNativeTarget "dpMasterHakoniwa" */;
+			buildPhases = (
+				D2E891111A6B586C0047B75A /* Sources */,
+				D2E8917D1A6B586C0047B75A /* Frameworks */,
+				D2E8918E1A6B586C0047B75A /* ShellScript */,
+				D2E8918F1A6B586C0047B75A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D2E8910F1A6B586C0047B75A /* PBXTargetDependency */,
+			);
+			name = dpMasterHakoniwa;
+			productName = myOFApp;
+			productReference = D2E891941A6B586C0047B75A /* dpMasterHakoniwa.app */;
+			productType = "com.apple.product-type.application";
+		};
 		E4B69B5A0A3A1756003C02F2 /* dpScore */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "dpScore" */;
@@ -983,6 +1154,7 @@
 			projectRoot = "";
 			targets = (
 				E4B69B5A0A3A1756003C02F2 /* dpScore */,
+				D2E8910E1A6B586C0047B75A /* dpMasterHakoniwa */,
 			);
 		};
 /* End PBXProject section */
@@ -998,6 +1170,19 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		D2E8918E1A6B586C0047B75A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp -f ../../../libs/fmodex/lib/osx/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmodex.dylib\"; install_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\nmkdir -p \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\ncp -f \"$ICON_FILE\" \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\n";
+		};
 		E4B6FFFD0C3F9AB9008CF71C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1014,6 +1199,90 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D2E891111A6B586C0047B75A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2E891131A6B586C0047B75A /* ofxUIBaseDraws.cpp in Sources */,
+				D2E891141A6B586C0047B75A /* ofxOscMessage.cpp in Sources */,
+				D2E891161A6B586C0047B75A /* ofxOscReceiver.cpp in Sources */,
+				D2E891181A6B586C0047B75A /* ofxUIMultiImageButton.cpp in Sources */,
+				D2E891191A6B586C0047B75A /* ofxMotionerNode.cpp in Sources */,
+				D2E8911A1A6B586C0047B75A /* OscTypes.cpp in Sources */,
+				D2E8911C1A6B586C0047B75A /* dpScoreSceneBodyBase.cpp in Sources */,
+				D2E8911E1A6B586C0047B75A /* ofxUIMovingGraph.cpp in Sources */,
+				D2E8911F1A6B586C0047B75A /* main.cpp in Sources */,
+				D2E891221A6B586C0047B75A /* ofxUIFPSSlider.cpp in Sources */,
+				D2E891241A6B586C0047B75A /* ofxUIImage.cpp in Sources */,
+				D2E891261A6B586C0047B75A /* ofxUIWidgetWithLabel.cpp in Sources */,
+				D2E891271A6B586C0047B75A /* ofxUIToggleMatrix.cpp in Sources */,
+				D2E891291A6B586C0047B75A /* ofxUIValuePlotter.cpp in Sources */,
+				D2E8912A1A6B586C0047B75A /* ofxOscSender.cpp in Sources */,
+				D2E8912B1A6B586C0047B75A /* OscReceivedElements.cpp in Sources */,
+				D2E8912C1A6B586C0047B75A /* ofxUITabBar.cpp in Sources */,
+				D2E8912E1A6B586C0047B75A /* dpScoreSceneBase.cpp in Sources */,
+				D2E8912F1A6B586C0047B75A /* ofxUIRotarySlider.cpp in Sources */,
+				D2E891301A6B586C0047B75A /* ofxUIButton.cpp in Sources */,
+				D2E891331A6B586C0047B75A /* UdpSocketWin.cpp in Sources */,
+				D2E891361A6B586C0047B75A /* ofxUITextInput.cpp in Sources */,
+				D2E891371A6B586C0047B75A /* ofxUIWidget.cpp in Sources */,
+				D2E891381A6B586C0047B75A /* NetworkingUtils.cpp in Sources */,
+				D2E891391A6B586C0047B75A /* ofxUIMinimalSlider.cpp in Sources */,
+				D2E8913A1A6B586C0047B75A /* IpEndpointName.cpp in Sources */,
+				D2E8913B1A6B586C0047B75A /* ofxUIDropDownList.cpp in Sources */,
+				D2E8913C1A6B586C0047B75A /* ofxUIRadio.cpp in Sources */,
+				D2E8913D1A6B586C0047B75A /* ofxUIEventArgs.cpp in Sources */,
+				D2E8913E1A6B586C0047B75A /* ofxUIImageSlider.cpp in Sources */,
+				D2E891401A6B586C0047B75A /* ofxUISlider.cpp in Sources */,
+				D2E891411A6B586C0047B75A /* UdpSocket.cpp in Sources */,
+				D2E891421A6B586C0047B75A /* ofxUICircleSlider.cpp in Sources */,
+				D2E891431A6B586C0047B75A /* ofxUIScrollableCanvas.cpp in Sources */,
+				D2E891451A6B586C0047B75A /* ofxUIToggle.cpp in Sources */,
+				D2E891471A6B586C0047B75A /* ofxUIRectangle.cpp in Sources */,
+				D2E891491A6B586C0047B75A /* ofxUILabelButton.cpp in Sources */,
+				D2E8914A1A6B586C0047B75A /* ofxUI2DGraph.cpp in Sources */,
+				D2E8914D1A6B586C0047B75A /* ofxUIImageToggle.cpp in Sources */,
+				D2E8914E1A6B586C0047B75A /* ofxUISpectrum.cpp in Sources */,
+				D2E8914F1A6B586C0047B75A /* ofxUISortableList.cpp in Sources */,
+				D2E891501A6B586C0047B75A /* ofxUIDragableLabelButton.cpp in Sources */,
+				D2E891521A6B586C0047B75A /* ofxUITextArea.cpp in Sources */,
+				D2E891531A6B586C0047B75A /* dpScoreSceneManager.cpp in Sources */,
+				D2E891541A6B586C0047B75A /* ofxUISpacer.cpp in Sources */,
+				D2E891551A6B586C0047B75A /* ofxMotionerConstants.cpp in Sources */,
+				D2E891561A6B586C0047B75A /* ofxUIImageButton.cpp in Sources */,
+				D2E891571A6B586C0047B75A /* ofxOscParameterSync.cpp in Sources */,
+				D2E891581A6B586C0047B75A /* ofxEvent.cpp in Sources */,
+				D2E8915B1A6B586C0047B75A /* ofxMotionerSkeleton.cpp in Sources */,
+				D2E8915D1A6B586C0047B75A /* ofxUIFPS.cpp in Sources */,
+				D2E8915E1A6B586C0047B75A /* ofxUI2DPad.cpp in Sources */,
+				D2E8915F1A6B586C0047B75A /* ofxUIWaveform.cpp in Sources */,
+				D2E891611A6B586C0047B75A /* tinyxmlparser.cpp in Sources */,
+				D2E891631A6B586C0047B75A /* ofxUIRangeSlider.cpp in Sources */,
+				D2E891651A6B586C0047B75A /* ofxMotionerUtils.cpp in Sources */,
+				D2E891661A6B586C0047B75A /* ofxUINumberDialer.cpp in Sources */,
+				D2E891671A6B586C0047B75A /* OscPrintReceivedElements.cpp in Sources */,
+				D2E891681A6B586C0047B75A /* ofxUILabel.cpp in Sources */,
+				D2E8916A1A6B586C0047B75A /* ofxUISuperCanvas.cpp in Sources */,
+				D2E8916B1A6B586C0047B75A /* ofxUIMultiImageToggle.cpp in Sources */,
+				D2E8916C1A6B586C0047B75A /* tinyxmlerror.cpp in Sources */,
+				D2E8916D1A6B586C0047B75A /* dpScoreEvent.cpp in Sources */,
+				D2E8916E1A6B586C0047B75A /* OscOutboundPacketStream.cpp in Sources */,
+				D2E8916F1A6B586C0047B75A /* tinyxml.cpp in Sources */,
+				D2E891711A6B586C0047B75A /* ofxOscBundle.cpp in Sources */,
+				D2E891721A6B586C0047B75A /* NetworkingUtilsWin.cpp in Sources */,
+				D2E891731A6B586C0047B75A /* ofxXmlSettings.cpp in Sources */,
+				D2E891741A6B586C0047B75A /* ofxUILabelToggle.cpp in Sources */,
+				D2E891751A6B586C0047B75A /* ofxUIImageSampler.cpp in Sources */,
+				D2E891761A6B586C0047B75A /* dpScoreCommon.cpp in Sources */,
+				D2E891771A6B586C0047B75A /* ofxUICanvas.cpp in Sources */,
+				D2E891781A6B586C0047B75A /* ofxException.cpp in Sources */,
+				D2E8919A1A6B5B460047B75A /* dpScoreSceneMaster.cpp in Sources */,
+				D2E891791A6B586C0047B75A /* ofApp.cpp in Sources */,
+				D2E8917B1A6B586C0047B75A /* ofxMotioner.cpp in Sources */,
+				D2E8917C1A6B586C0047B75A /* ofxUIBiLabelSlider.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4B69B580A3A1756003C02F2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1131,6 +1400,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D2E8910F1A6B586C0047B75A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = openFrameworks;
+			targetProxy = D2E891101A6B586C0047B75A /* PBXContainerItemProxy */;
+		};
 		E4EEB9AC138B136A00A80321 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = openFrameworks;
@@ -1139,6 +1413,202 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		D2E891921A6B586C0047B75A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = NONE;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ./PrefixHeader.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					DP_MASTER_HAKONIWA,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(OF_CORE_HEADERS)",
+					src,
+				);
+				ICON = "$(ICON_NAME_DEBUG)";
+				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
+				INFOPLIST_FILE = "dpScore copy2-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_3)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_4)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_5)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_6)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_7)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_8)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_9)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_10)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_11)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_12)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_13)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_14)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_15)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_3)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_7)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_8)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_9)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_10)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_11)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_12)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_13)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_16)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_17)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_18)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_19)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_20)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_21)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_22)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_23)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_24)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_25)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_26)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_27)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_28)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_29)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_30)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_31)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_32)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_33)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_34)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_35)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_36)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_37)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_38)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_39)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_40)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_41)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_42)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_43)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_44)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_45)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_46)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_47)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_48)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_49)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
+				);
+				PRODUCT_NAME = dpMasterHakoniwa;
+				SDKROOT = macosx10.9;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../addons/ofxOsc/libs/oscpack/src\"";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D2E891931A6B586C0047B75A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = NONE;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ./PrefixHeader.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = DP_MASTER_HAKONIWA;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_CORE_HEADERS)",
+					src,
+				);
+				ICON = "$(ICON_NAME_RELEASE)";
+				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
+				INFOPLIST_FILE = "dpScore copy2-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_3)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_4)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_5)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_6)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_7)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_8)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_9)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_10)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_11)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_12)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_13)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_14)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_15)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_3)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_7)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_8)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_9)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_10)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_11)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_12)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_13)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_16)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_17)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_18)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_19)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_20)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_21)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_22)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_23)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_24)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_25)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_26)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_27)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_28)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_29)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_30)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_31)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_32)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_33)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_34)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_35)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_36)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_37)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_38)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_39)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_40)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_41)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_42)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_43)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_44)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_45)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_46)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_47)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_48)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_49)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
+				);
+				PRODUCT_NAME = dpMasterHakoniwa;
+				SDKROOT = macosx10.9;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../addons/ofxOsc/libs/oscpack/src\"";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		E4B69B4E0A3A1720003C02F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
@@ -1403,6 +1873,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D2E891911A6B586C0047B75A /* Build configuration list for PBXNativeTarget "dpMasterHakoniwa" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2E891921A6B586C0047B75A /* Debug */,
+				D2E891931A6B586C0047B75A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "dpScore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

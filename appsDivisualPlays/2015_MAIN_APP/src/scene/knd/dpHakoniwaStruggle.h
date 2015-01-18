@@ -259,6 +259,16 @@ public:
         if(togName == "RIGHT_ANKLE")mJointNum = ramActor::JOINT_RIGHT_ANKLE;
 	}
     
+    void onDisabled(){
+    
+        ofxOscMessage m;
+        m.setAddress("/dp/hakoniwa/struggle");
+        m.addIntArg(0);
+        m.addIntArg(1);
+        m.addIntArg(0);
+        mSender.sendMessage(m);
+    }
+
 private:
 
     ofxOscSender mSender;
