@@ -238,17 +238,17 @@
 				920BA37D1A67CB6B00E4A227 /* iceLine */,
 				92CB5B121A666F6A00257334 /* util */,
 				920BA3731A67C8E800E4A227 /* dp3DDanceMap.h */,
-				920BA3741A67C8E800E4A227 /* dpHakoniwaStruggle.h */,
 				920BA3771A67C96B00E4A227 /* dpHakoVisStruggle.h */,
 				920BA3781A67C99000E4A227 /* dpHakoVisSandStorm.h */,
 				920BA3751A67C8E800E4A227 /* dpHakoVisServoPendulum.h */,
 				920BA3761A67C8E800E4A227 /* dpHakoVisVecLineCircle.h */,
 				920BA3721A677FBB00E4A227 /* dpHakoVisStageCircle.h */,
-				92CB5B0D1A666F1F00257334 /* dpHakoniwaServoPendulum.h */,
 				92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */,
 				92CB5B0F1A666F1F00257334 /* dpHakoVisWorm.h */,
 				92CB5B101A666F1F00257334 /* dpHakoVisServoPendulum.h */,
 				9236CE851A690C480060B0FF /* dpHakoVisMagnetPendulum.h */,
+				92CB5B0D1A666F1F00257334 /* dpHakoniwaServoPendulum.h */,
+				920BA3741A67C8E800E4A227 /* dpHakoniwaStruggle.h */,
 			);
 			path = knd;
 			sourceTree = "<group>";

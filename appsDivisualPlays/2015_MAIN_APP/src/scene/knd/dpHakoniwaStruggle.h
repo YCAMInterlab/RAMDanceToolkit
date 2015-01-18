@@ -13,7 +13,7 @@
 
 class dpHakoniwaStruggle : public ramBaseScene{
 public:
-    string getName() const { return "dpHakoniwaStruggle"; }
+    string getName() const { return "dpHStruggle"; }
     
 	void setupControlPanel(){
         ramGetGUI().addToggle("dir", &mMotorDir);

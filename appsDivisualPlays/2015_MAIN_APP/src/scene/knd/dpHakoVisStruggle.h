@@ -16,7 +16,7 @@
 
 class dpHakoVisStruggle : public ramBaseScene{
 public:
-    string getName() const { return "dpVStruggle"; }
+    string getName() const { return "dpVisStruggle"; }
     
 	void setupControlPanel(){
 
@@ -38,7 +38,7 @@ public:
     void setup(){
  
         ramOscManager::instance().addReceiverTag(&mReceiver);
-        mReceiver.addAddress("/dp/cameraUnit/struggle/vector/total");
+        mReceiver.addAddress("/dp/cameraUnit/Struggle/vector/total");
         
         mVecFromCam.speed = 0.2;
         
@@ -50,7 +50,7 @@ public:
         while(mReceiver.hasWaitingMessages()){
             ofxOscMessage m;
             mReceiver.getNextMessage(&m);
-            if(m.getAddress() == "/dp/cameraUnit/struggle/vector/total"){
+            if(m.getAddress() == "/dp/cameraUnit/Struggle/vector/total"){
               //  cout << m.getArgAsFloat(0) << endl;
                mVecFromCam.set( m.getArgAsFloat(0), m.getArgAsFloat(1));
             }

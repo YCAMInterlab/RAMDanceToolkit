@@ -102,7 +102,7 @@ private:
 
 class dpHakoVisMagnetPendulum : public ramBaseScene{
 public:
-    string getName() const{return "dpVisMagnetPendulum";}
+    string getName() const{return "dpVisMagPendulum";}
     
     void setupControlPanel(){
         ramGetGUI().addSlider("scale",50,500,&mScale);
