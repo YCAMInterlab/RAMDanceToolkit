@@ -36,7 +36,7 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
     modename.push_back("ALL 3DANCERS MODE");
     modename.push_back("2EACH 3DANCERS MODE");
     
-    ramGetGUI().addRadioGroup("mode", modename, &mode);
+    ramGetGUI().addRadioGroup("Dancer Mode", modename, &mode);
     
     bTestMode = true;
     distanceThreshold = 20.0f;
