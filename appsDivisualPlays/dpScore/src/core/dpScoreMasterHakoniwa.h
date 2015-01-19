@@ -16,6 +16,9 @@ class ofxUITabBar;
 
 class MasterHakoniwa final {
 public:
+    static const int kNumScenes;
+    static const string kSceneNames[];
+    
     static const int kNumValvePins{6};
     static const int kNumPumpPins{2};
     
@@ -49,9 +52,6 @@ public:
                    bool scr3);
     
     static MasterHakoniwa& instance();
-    
-    static const int kNumScenes;
-    static const string kSceneNames[];
     
 private:
     MasterHakoniwa() = default;
@@ -93,6 +93,9 @@ private:
 
 typedef MasterHakoniwa MH;
 
-inline MasterHakoniwa& getMH() { return MasterHakoniwa::instance(); }
+inline MasterHakoniwa& getMH()
+{
+    return MasterHakoniwa::instance();
+}
 
 #endif /* defined(__dpScore__dpScoreMasterHakoniwa__) */

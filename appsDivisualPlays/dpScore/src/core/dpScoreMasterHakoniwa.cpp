@@ -9,13 +9,11 @@
 #include "dpScoreMasterHakoniwa.h"
 #include "ofxUI.h"
 
-static const string kHostNameMasterHakoniwa = "192.168.20.60";
-static const int kPortNumberMasterHakoniwa = 8528;
-
-static const string kHostNameCameraUnit = "192.168.20.5";
-static const int kPortNumberCameraUnit = 12400;
-
-static const string kOscAddrRamSetScene = "/ram/set_scene";
+static const string kHostNameMasterHakoniwa{"192.168.20.60"};
+static const int kPortNumberMasterHakoniwa {8528};
+static const string kHostNameCameraUnit{"192.168.20.5"};
+static const int kPortNumberCameraUnit{12400};
+static const string kOscAddrRamSetScene{"/ram/set_scene"};
 
 const int MasterHakoniwa::kNumScenes{7};
 
@@ -192,6 +190,7 @@ void MasterHakoniwa::sendScene(const string& name,
     m.addIntArg((int)scr3);
     mCameraUnitOscServer.sendMessage(m);
     
-    ofLogNotice() << "set scene: " << boolalpha << name << ", " << enabled << ", " << scr0 << ", " << scr1 << ", " << scr2 << ", " << scr3;
+    ofLogNotice() << "set scene: " << boolalpha << name << ", "
+    << enabled << ", " << scr0 << ", " << scr1 << ", " << scr2 << ", " << scr3;
 }
 
