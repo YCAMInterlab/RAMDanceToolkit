@@ -56,6 +56,8 @@ void testApp::setup()
     sceneManager.addScene(visMagnetPendulum.getPtr());
     
     sceneManager.addScene(hakoVisTheta.getPtr());
+    
+    sceneManager.addScene(hakoniwaGear.getPtr());
 
 	sceneManager.addScene(hakoniwaPlinkOil.getPtr());
 	sceneManager.addScene(hakoniwaPlinkLaser.getPtr());

@@ -10,6 +10,7 @@
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
 		9209C4361A6CAE3500E35146 /* dpHakoniwaIce.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9209C4341A6CAE3500E35146 /* dpHakoniwaIce.cpp */; };
 		920BA37C1A67C9D700E4A227 /* dpHakoniwaSand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 920BA37A1A67C9D700E4A227 /* dpHakoniwaSand.cpp */; };
+		928AE9281A6CF5EE00CCA21D /* HakoniwaGearMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 928AE9261A6CF5EE00CCA21D /* HakoniwaGearMove.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		C64FE4CC1A68D3CB00CA9A08 /* ofxHexGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64FE4CA1A68D3CB00CA9A08 /* ofxHexGrid.cpp */; };
 		C66CCCF11A66750D00CE64E9 /* HakoniwaParallelLink_Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C66CCCD71A66750D00CE64E9 /* HakoniwaParallelLink_Base.cpp */; };
@@ -112,6 +113,8 @@
 		920BA3821A67CB8D00E4A227 /* KezDelaunayMesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezDelaunayMesh.h; sourceTree = "<group>"; };
 		920BA3831A67CBA800E4A227 /* KezBlinker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezBlinker.h; sourceTree = "<group>"; };
 		9236CE851A690C480060B0FF /* dpHakoVisMagnetPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisMagnetPendulum.h; sourceTree = "<group>"; };
+		928AE9261A6CF5EE00CCA21D /* HakoniwaGearMove.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakoniwaGearMove.cpp; path = miura/HakoniwaGearMove.cpp; sourceTree = "<group>"; };
+		928AE9271A6CF5EE00CCA21D /* HakoniwaGearMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaGearMove.h; path = miura/HakoniwaGearMove.h; sourceTree = "<group>"; };
 		92CB5B0D1A666F1F00257334 /* dpHakoniwaServoPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaServoPendulum.h; sourceTree = "<group>"; };
 		92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisBug.h; sourceTree = "<group>"; };
 		92CB5B0F1A666F1F00257334 /* dpHakoVisWorm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisWorm.h; sourceTree = "<group>"; };
@@ -420,6 +423,8 @@
 		C6957F171A68A04900DB75DB /* miura */ = {
 			isa = PBXGroup;
 			children = (
+				928AE9261A6CF5EE00CCA21D /* HakoniwaGearMove.cpp */,
+				928AE9271A6CF5EE00CCA21D /* HakoniwaGearMove.h */,
 				C6957F191A68A07200DB75DB /* HakoniwaTheta.h */,
 				C6957F181A68A07200DB75DB /* HakoniwaTheta.cpp */,
 			);
@@ -601,6 +606,7 @@
 				C66CCCF21A66750D00CE64E9 /* HakoniwaPLink_Laser.cpp in Sources */,
 				C66CCCF91A66750D00CE64E9 /* ofxKsmrStepManager.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
+				928AE9281A6CF5EE00CCA21D /* HakoniwaGearMove.cpp in Sources */,
 				C6755BFF1A6BAE8F007E9984 /* dpHakoniwaMagnetPendulum.cpp in Sources */,
 				C66CCCFA1A66750D00CE64E9 /* virtualSteppingMotor.cpp in Sources */,
 				9209C4361A6CAE3500E35146 /* dpHakoniwaIce.cpp in Sources */,

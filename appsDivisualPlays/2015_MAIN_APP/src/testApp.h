@@ -26,6 +26,7 @@
 
 //Miura Scenes
 #include "HakoniwaTheta.h"
+#include "HakoniwaGearMove.h"
 
 //Kezzar Scenes
 #include "dpHakoniwaServoPendulum.h"
@@ -129,5 +130,7 @@ public:
     // tornado
     dpHakoniwaTornado hakoniwaTornado;
     dpHakoVisTornado  visTornado;
-
+    
+    // Gear
+    HakoniwaGearMove  hakoniwaGear;
 };
