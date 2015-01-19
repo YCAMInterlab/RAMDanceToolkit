@@ -128,7 +128,6 @@ void ramMotionExtractor::update(){
 			mGui->autoSizeToFitWidgets();
 			parentGui->autoSizeToFitWidgets();
 
-			actorList->reshuffle(lst);
 			refleshActorFromList();
 
 		}

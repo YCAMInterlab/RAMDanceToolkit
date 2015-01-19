@@ -2404,8 +2404,8 @@
 		C68A25421A627B9F001CEF91 /* ramMotionExtractor */ = {
 			isa = PBXGroup;
 			children = (
-				C68A25431A627B9F001CEF91 /* ramMotionExtractor.cpp */,
 				C68A25441A627B9F001CEF91 /* ramMotionExtractor.h */,
+				C68A25431A627B9F001CEF91 /* ramMotionExtractor.cpp */,
 			);
 			path = ramMotionExtractor;
 			sourceTree = "<group>";

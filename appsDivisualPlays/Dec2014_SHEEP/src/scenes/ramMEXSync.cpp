@@ -33,6 +33,17 @@ void ramMEXSync::update(){
 
 	mex.update();
 
+	if (ofGetKeyPressed('1')){
+		vector<string> st;
+		st.push_back("kawaguchi");
+		st.push_back("kojiri");
+		st.push_back("sasamoto");
+		mex.actorList->reshuffle(st);
+	}
+
+	if (ofGetKeyPressed('2')){
+		mex.actorList->swapListItems(0, 1);
+	}
 }
 
 void ramMEXSync::draw(){
@@ -46,7 +57,7 @@ void ramMEXSync::draw(){
 void ramMEXSync::onPanelChanged(ofxUIEventArgs &e){
 	ofxUIWidget* w = e.widget;
 
-	if (w->getName() == "Sync"){
+	if (w->getName() == "Sync" && w->getState() == OFX_UI_STATE_DOWN){
 		string addr = "/ram/MEX/"+targScene->getTextString();
 
 		for (int i = 0;i < 2;i++){
