@@ -42,8 +42,8 @@ enum hakoniwaType{
 	HAKO_WORM,
 	HAKO_STAGE,
 
-//	HAKO_GEAR,
 	HAKO_STRUGGLE,
+	HAKO_GEAR,
 
 	HAKO_TESTA,
 	HAKO_TESTB,

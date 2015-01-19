@@ -113,7 +113,15 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
     hakoniwas.back()->sourceCh  = 8;
     hakoniwas.back()->sceneNames.push_back("H:dpHStruggle");
     hakoniwas.back()->sceneNames.push_back("V:dpVisStruggle");
-    
+
+#pragma mark ギア
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_GEAR;
+	hakoniwas.back()->CVPreset	= "Gear";
+	hakoniwas.back()->sourceCh	= 9;
+	hakoniwas.back()->sceneNames.push_back("H:dpHGearMove");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisGearMove");
+
 #pragma mark ★テストA
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_TESTA;
@@ -147,10 +155,6 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->CVPreset	= "blank";
 	hakoniwas.back()->sourceCh	= -1;
 	hakoniwas.back()->sceneNames.push_back("Blank");
-//	hakoniwas.push_back(new hakoniwaPresets());
-//	hakoniwas.back()->type		= HAKO_FROZENICE;
-//	hakoniwas.back()->CVPreset	= "frozenIce";
-//	hakoniwas.back()->
 
 	for (int i = 0;i < CV_SLOT_NUM;i++){
 		mSlots[i].targetDisplay.clear();
