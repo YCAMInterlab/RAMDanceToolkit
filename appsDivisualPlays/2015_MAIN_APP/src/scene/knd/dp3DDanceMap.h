@@ -36,6 +36,8 @@ public:
         
         ramOscManager::instance().addReceiverTag(&mReceiver);
         mReceiver.addAddress("/dp/cameraUnit/Ice/pixelate");
+        
+        mCube.setScale(mScale);
     }
     
     void setup(){
@@ -176,6 +178,7 @@ public:
         ofRotate(mAngle.val,mRot.x,mRot.y,mRot.z);
         mCube.draw();
         ofPopMatrix();
+        
         ramEndCamera();
     }
     
