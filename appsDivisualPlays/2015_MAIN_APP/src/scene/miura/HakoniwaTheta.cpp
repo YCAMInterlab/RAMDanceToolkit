@@ -77,6 +77,7 @@ void HakoniwaTheta::draw(){
     
     ramEndCamera();
     
+    glDisable(GL_CULL_FACE);
 }
 
 void HakoniwaTheta::onPanelChanged(ofxUIEventArgs& e){

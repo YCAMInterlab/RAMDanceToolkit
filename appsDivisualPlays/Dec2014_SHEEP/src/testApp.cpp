@@ -32,6 +32,8 @@
 #include "hakoVisPLink_Oil.h"
 #include "hakoVisPLink_Prism.h"
 
+#include "ramMEXSync.h"
+
 HakoniwaPLink_Laser plink_laser;
 HakoniwaPLink_Oil	plink_oil;
 HakoniwaPLink_Prism plink_prism;
@@ -40,6 +42,8 @@ ramMotionExtractorExampleScene motionExt;
 hakoVisPLink_Laser	visLaser;
 hakoVisPLink_Oil	visOil;
 hakoVisPLink_Prism	visPrism;
+
+ramMEXSync mexS;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -68,6 +72,8 @@ void testApp::setup()
 	sceneManager.addScene( visOil.getPtr());
 	sceneManager.addScene( visPrism.getPtr());
 	sceneManager.addScene( motionExt.getPtr());
+
+	sceneManager.addScene( mexS.getPtr());
 
 	sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
 }

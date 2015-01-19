@@ -53,9 +53,63 @@ void ramMotionExtractor::setupControlPanel(ramBaseScene *scene_, ofVec2f canvasP
 
 	ofAddListener(mGui->newGUIEvent, this, &ramMotionExtractor::guiEvent);
 	ofAddListener(ofEvents().mouseReleased, this, &ramMotionExtractor::mouseReleased);
+
+	receiver.addAddress("/ram/MEX/"+scene_->getName());
+	ramOscManager::instance().addReceiverTag(&receiver);
 }
 
 void ramMotionExtractor::update(){
+
+	while (receiver.hasWaitingMessages()){
+		ofxOscMessage m;
+		receiver.getNextMessage(&m);
+
+		string myAddr = "/ram/MEX/"+mScenePtr->getName()+"/";
+
+		if (m.getAddress() == myAddr+"push"){// アクターID, ジョイントID
+			ramNodeIdentifer id;
+			id.set(m.getArgAsInt32(1));
+
+			ramMotionPort *mp = new ramMotionPort(id);
+			pushPort(mp, m.getArgAsInt32(0));
+
+		}
+
+		if (m.getAddress() == myAddr+"pop"){// 名前、ID
+
+			ramNodeFinder nf;
+			nf.set(m.getArgAsString(0), m.getArgAsInt32(0));
+			popPort(nf);
+
+		}
+
+		if (m.getAddress() == myAddr+"clear"){
+			clearPorts();
+		}
+
+		if (m.getAddress() == myAddr+"swap"){
+			actorList->swapListItems(m.getArgAsInt32(0),
+									 m.getArgAsInt32(1));
+		}
+
+		if (m.getAddress() == myAddr+"/save"){
+			if (m.getArgAsString(0) == "" ||
+				m.getNumArgs() == 0){
+				save("motionExt_"+mScenePtr->getName()+".xml");
+			}else{
+				save(m.getArgAsString(0));
+			}
+		}
+
+		if (m.getAddress() == myAddr+"/load"){
+			if (m.getArgAsString(0) == "" ||
+				m.getNumArgs() == 0){
+				load("motionExt_"+mScenePtr->getName()+".xml");
+			}else{
+				load(m.getArgAsString(0));
+			}
+		}
+	}
 
 	for (int i = 0;i < mMotionPort.size();i++){
 		mMotionPort[i]->update(mMotionSmooth);
@@ -122,47 +176,14 @@ void ramMotionExtractor::guiEvent(ofxUIEventArgs &e){
 	if (w->getName() == "PushPort"){
 		if (w->getState() == OFX_UI_STATE_DOWN){
 			ramMotionPort* mp = new ramMotionPort(ramActorManager::instance().getLastSelectedNodeIdentifer());
-			mp->mActorIndex = getIndexFromName(mp->mFinder.name);
-
-			bool isDuplicate = false;
-			bool isNoBlank = true;
-			for (int i = 0;i < mMotionPort.size();i++){
-				if ((mp->mFinder.name == mMotionPort[i]->mFinder.name) &&
-					(mp->mFinder.index == mMotionPort[i]->mFinder.index)){
-					isDuplicate = true;
-					break;
-				}
-
-				if (mMotionPort[i]->isBlank){
-					mMotionPort[i]->init(mp->mFinder);
-					isNoBlank = false;
-					break;
-				}
-			}
-
-			ramNode nd;
-			if (mp->mFinder.findOne(nd) && !isDuplicate && isNoBlank){
-				mMotionPort.push_back(mp);
-			}else{
-				delete mp;
-			}
+			pushPort(mp);
 		}
 	}
 
 	if (w->getName() == "PopPort"){
 		if (w->getState() == OFX_UI_STATE_DOWN){
 			ramNodeFinder nf = ramActorManager::instance().getLastSelectedNodeIdentifer();
-
-			for (int i = 0;i < mMotionPort.size();i++){
-				if ((nf.name == mMotionPort[i]->mFinder.name) &&
-					(nf.index == mMotionPort[i]->mFinder.index)){
-					mMotionPort[i]->isBlank = true;
-					mMotionPort[i]->mFinder.setTargetName("");
-					mMotionPort[i]->mFinder.setJointID(-1);
-					break;
-				}
-			}
-			
+			popPort(nf);
 		}
 	}
 
@@ -176,6 +197,50 @@ void ramMotionExtractor::guiEvent(ofxUIEventArgs &e){
 
 	if ((w->getName() == "Load") && (w->getState() == OFX_UI_STATE_DOWN)){
 		load("motionExt_"+mScenePtr->getName()+".xml");
+	}
+
+}
+
+void ramMotionExtractor::pushPort(ramMotionPort *mp, int actorId){
+
+	if (actorId == -1) mp->mActorIndex = getIndexFromName(mp->mFinder.name);
+	else mp->mActorIndex = actorId;
+
+	bool isDuplicate = false;
+	bool isNoBlank = true;
+	for (int i = 0;i < mMotionPort.size();i++){
+		if ((mp->mFinder.name == mMotionPort[i]->mFinder.name) &&
+			(mp->mFinder.index == mMotionPort[i]->mFinder.index)){
+			isDuplicate = true;
+			break;
+		}
+
+		if (mMotionPort[i]->isBlank){
+			mMotionPort[i]->init(mp->mFinder);
+			isNoBlank = false;
+			break;
+		}
+	}
+
+	ramNode nd;
+	if (mp->mFinder.findOne(nd) && !isDuplicate && isNoBlank){
+		mMotionPort.push_back(mp);
+	}else{
+		delete mp;
+	}
+
+}
+
+void ramMotionExtractor::popPort(ramNodeFinder &nf){
+
+	for (int i = 0;i < mMotionPort.size();i++){
+		if ((nf.name == mMotionPort[i]->mFinder.name) &&
+			(nf.index == mMotionPort[i]->mFinder.index)){
+			mMotionPort[i]->isBlank = true;
+			mMotionPort[i]->mFinder.setTargetName("");
+			mMotionPort[i]->mFinder.setJointID(-1);
+			break;
+		}
 	}
 
 }
