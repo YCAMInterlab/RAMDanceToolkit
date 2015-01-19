@@ -1,22 +1,22 @@
 //
-//  dpHakoVistornado.h
+//  dpHakoVisTornade.h
 //  RAMDanceToolkit
 //
 //  Created by kezzardrix2 on 2015/01/18.
 //
 //
 
-#ifndef RAMDanceToolkit_dpHakoVistornado_h
-#define RAMDanceToolkit_dpHakoVistornado_h
+#ifndef RAMDanceToolkit_dpHakoVisTornade_h
+#define RAMDanceToolkit_dpHakoVisTornade_h
 
 #include "KezSlidePoint.h"
 
-class dptornadoCircle{
+class dpTornadeCircle{
 public:
     
-    dptornadoCircle(){
-        mDiv.speed = 0.333;
-        mRad.speed = 0.333;
+    dpTornadeCircle(){
+        mDiv.speed = 0.01;
+        mRad.speed = 0.01;
     };
     
     void update(){
@@ -89,7 +89,7 @@ public:
         mReceiver.addAddress("/dp/cameraUnit/Tornado/vector");
         
         for(int i = 0; i < CIRCLE_NUM; i++){
-            mCircles.push_back(dptornadoCircle());
+            mCircles.push_back(dpTornadeCircle());
         }
     }
     
@@ -137,11 +137,11 @@ private:
     ramOscReceiveTag mReceiver;
     
     static const int CIRCLE_NUM = 10;
-    vector<dptornadoCircle>mCircles;
+    vector<dpTornadeCircle>mCircles;
     
-    float mRadScale = 10.0;
-    float mDivScale = 7.0;
-    float mThetaScale = 4.0;
+    float mRadScale = 4.0;
+    float mDivScale = 11.0;
+    float mThetaScale = 10.0;
 };
 
 #endif

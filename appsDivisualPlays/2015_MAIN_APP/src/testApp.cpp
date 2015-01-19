@@ -58,6 +58,10 @@ void testApp::setup()
     sceneManager.addScene(hakoVisTheta.getPtr());
     
     sceneManager.addScene(hakoniwaGear.getPtr());
+    
+    //tornado
+    sceneManager.addScene(hakoniwaTornado.getPtr());
+    sceneManager.addScene(visTornado.getPtr());
 
 	sceneManager.addScene(hakoniwaPlinkOil.getPtr());
 	sceneManager.addScene(hakoniwaPlinkLaser.getPtr());
