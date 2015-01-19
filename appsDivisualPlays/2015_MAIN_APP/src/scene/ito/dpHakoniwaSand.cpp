@@ -9,10 +9,10 @@ void dpHakoniwaSand::setupControlPanel(){
     ramGetGUI().addIntSlider("Val3_Test", 800, 2200, &val3);
     ramGetGUI().addToggle("Test mode", &bTestMode);
     
-    vector<string> contents;
-    contents.push_back("Hight");
-    contents.push_back("Rot");
-    
+//    vector<string> contents;
+//    contents.push_back("Hight");
+//    contents.push_back("Rot");
+//    
     //ramGetGUI().addRadioGroup("mode__", contents, &mode);
     
     bTestMode = false;
@@ -68,23 +68,26 @@ void dpHakoniwaSand::draw(){
     ramSetViewPort(dpGetFirstScreenViewPort()); //１枚目のscreenを描画に指定。ここの仕様変わります。
     ramBeginCamera();
     mMotionExtractor.draw();
-    
-    
-//    ramNode rn[6];
-//    for (int i = 0; i < 6; i++){
-//        rn[i] = mMotionExtractor.getNodeAt(i);
-//    }
-//        
-//    ofPushMatrix();
-//    ofNoFill();
-//    ofTranslate(200,0);
-//    for (int i = 0; i < 6; i++) rn[i].draw();
-//    ofPopMatrix();
-
     ramEndCamera();
     
     example_drawDump();
 }
+
+void dpHakoniwaSand::onEnabled(){
+    
+    
+}
+
+void dpHakoniwaSand::onDisabled(){
+    
+    val1 = 2200;
+    val2 = 2200;
+    val3 = 2000;
+    
+    sendOsc();
+    
+}
+
 
 void dpHakoniwaSand::example_drawDump(){
     

@@ -13,6 +13,7 @@
 #include "ofxCv.h"
 #include "ofxUI.h"
 #include "ofxOsc.h"
+#include "dpCameraUnit_cvFX.h"
 
 class dpCameraUnit_cvAnalysis{
 public:
@@ -30,6 +31,8 @@ public:
 	void guiEvent(ofxUIEventArgs& ev);
 
 	void sendMessageMulti(ofxOscMessage &m);
+
+	dpCameraUnit_cvFX* pairFXUnit;
 
 	ofxOscSender sender;
 	ofxUICanvas mGui;
