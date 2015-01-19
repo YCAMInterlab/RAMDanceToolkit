@@ -50,6 +50,9 @@ public:
 	bool				mIsFrameNew;
 	bool				mFourSplit;
 
+	bool WannaPlay;
+	float Position;
+
 	int					mGuiParam_catchWarpPoint;
 
 	ofVideoGrabber		mVideoGrabber;

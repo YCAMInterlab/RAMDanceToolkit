@@ -19,7 +19,7 @@ class twistFinder {
     
     void findTwist(ramNode & node, ramNode & nodeOrigin);       // check rotation on a line between A & B
     void debugDraw(ramMotionExtractor & motionExtractor);
-    
+    void drawGraph(vector<ofVec3f> & vec, ofColor & drawColor, int elementNum);
 
 
     

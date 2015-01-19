@@ -14,7 +14,7 @@ IPAddress _ip(192, 168, 20, 60);
 const unsigned int _inPort = 8528;
 
 const int kNumPins = 4;
-const int kPin[kNumPins] = { 6, 7, 8, 9 /* LED */ };
+const int kPin[kNumPins] = { 2, 3, 4, 5, 6, 7, 8, 9 /* LED */ };
 
 char *numToOSCAddress(int pin);
 void routeOsc(OSCMessage &msg, int addrOffset);

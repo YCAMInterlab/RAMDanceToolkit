@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E1A721C1A67B7AC00EA5850 /* magnetLooper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E1A721A1A67B7AC00EA5850 /* magnetLooper.cpp */; };
 		5E1B669B1A626AE6000F663E /* eyeBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E1B66991A626AE6000F663E /* eyeBall.cpp */; };
 		5EEE96D01A6012FC0021B788 /* frozenIce.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EEE96CE1A6012FC0021B788 /* frozenIce.cpp */; };
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
@@ -78,6 +79,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5E1A721A1A67B7AC00EA5850 /* magnetLooper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = magnetLooper.cpp; sourceTree = "<group>"; };
+		5E1A721B1A67B7AC00EA5850 /* magnetLooper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = magnetLooper.h; sourceTree = "<group>"; };
 		5E1B66991A626AE6000F663E /* eyeBall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eyeBall.cpp; sourceTree = "<group>"; };
 		5E1B669A1A626AE6000F663E /* eyeBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eyeBall.h; sourceTree = "<group>"; };
 		5EEE96CE1A6012FC0021B788 /* frozenIce.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = frozenIce.cpp; sourceTree = "<group>"; };
@@ -202,6 +205,8 @@
 				5EEE96CF1A6012FC0021B788 /* frozenIce.h */,
 				5E1B66991A626AE6000F663E /* eyeBall.cpp */,
 				5E1B669A1A626AE6000F663E /* eyeBall.h */,
+				5E1A721A1A67B7AC00EA5850 /* magnetLooper.cpp */,
+				5E1A721B1A67B7AC00EA5850 /* magnetLooper.h */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -360,6 +365,7 @@
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				C6A68D1F1A5C330900122475 /* ramMotionExtractorExampleScene.cpp in Sources */,
 				5E1B669B1A626AE6000F663E /* eyeBall.cpp in Sources */,
+				5E1A721C1A67B7AC00EA5850 /* magnetLooper.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

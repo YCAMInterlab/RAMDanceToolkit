@@ -45,19 +45,26 @@ public:
 	void save(string file);
 	void load(string file);
 
+	void pushPort(ramMotionPort *mp, int actorId = -1);
+	void popPort(ramNodeFinder &nf);
+	void refleshActorFromList();
+
+	vector<ramMotionPort*>	mMotionPort;
+	ofxUISortableList*		actorList;
+
 protected:
 	void guiEvent(ofxUIEventArgs &e);
 	int getIndexFromName(string name);
 
 	ofxUICanvasPlus*		parentGui;
 	ofxUICanvas*			mGui;
-	ofxUISortableList*		actorList;
 	ramBaseScene*			mScenePtr;
 	ofVec2f					mCurrentCanvasPos;
 	float					mMotionSmooth;
 	int						lastNumNodeArray;
-	vector<ramMotionPort*>	mMotionPort;
 
+	ramOscReceiveTag	receiver;
+	bool				bEnableSync;
 };
 
 
@@ -81,6 +88,7 @@ public:
 
 	int				mActorIndex;
 	ramNodeFinder	mFinder;
+	
 	ofNode			mCurrentNode;
 	ofNode			mBefNode;
 

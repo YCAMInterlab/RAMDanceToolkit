@@ -22,6 +22,7 @@
 
 //ito Scenes
 #include "dpHakoniwaSand.h"
+#include "dpHakoniwaMagnetPendulum.h"
 
 //Miura Scenes
 #include "HakoniwaTheta.h"
@@ -37,6 +38,9 @@
 #include "dpHakoVisStruggle.h"
 #include "dpHakoVisSandStorm.h"
 #include "dpHakoVisMagnetPendulum.h"
+#include "dpHakoVisTornado.h"
+#include "dpHakoniwaTornado.h"
+
 
 //SHEEP Scenes
 #include "testScenes.h"
@@ -46,6 +50,9 @@
 #include "hakoVisPLink_Laser.h"
 #include "hakoVisPLink_Oil.h"
 #include "hakoVisPLink_Prism.h"
+
+//konno Scenes
+#include "dpHakoniwaIce.h"
 
 
 class testApp : public ramBaseApp
@@ -101,7 +108,11 @@ public:
     
     // worm
     dpVisWorm             visWorm;
-    
+
+	//MagPendulum
+	dpHakoniwaMagnetPendulum	magPendulum;
+    dpHakoVisMagnetPendulum visMagnetPendulum;
+
     // struggle
     dpHakoniwaStruggle hakoniwaStruggle;
     dpHakoVisStruggle visStruggle;
@@ -111,7 +122,12 @@ public:
     dpHakoVisSandStorm visSandStorm;
     dpHakoVisVecLineCircle vecLineCircle;
 
+    // ice
+    dpHakoniwaIce hakoniwaIce;
     dp3DDanceMap danceMap;
     
-    dpHakoVisMagnetPendulum visMagnetPendulum;
+    // tornado
+    dpHakoniwaTornado hakoniwaTornado;
+    dpHakoVisTornado  visTornado;
+
 };

@@ -35,7 +35,7 @@ public:
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dp3DDanceMap::onPanelChanged);
         
         ramOscManager::instance().addReceiverTag(&mReceiver);
-        mReceiver.addAddress("/dp/cameraUnit/ice/pixelate");
+        mReceiver.addAddress("/dp/cameraUnit/Ice/pixelate");
     }
     
     void setup(){
@@ -47,7 +47,7 @@ public:
         while(mReceiver.hasWaitingMessages()){
             ofxOscMessage m;
             mReceiver.getNextMessage(&m);
-            if(m.getAddress() == "/dp/cameraUnit/ice/pixelate"){
+            if(m.getAddress() == "/dp/cameraUnit/Ice/pixelate"){
                 
                 int width = m.getArgAsInt32(0);
                 int height = m.getArgAsInt32(1);

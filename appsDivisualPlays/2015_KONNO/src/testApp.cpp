@@ -20,10 +20,12 @@
 #include "ramMotionExtractorExampleScene.h"
 #include "frozenIce.h"
 #include "eyeBall.h"
+#include "magnetLooper.h"
 
 ramMotionExtractorExampleScene extractorScene;
 frozenIce frozenice;
 eyeBall eyeball;
+magnetLooper looper;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -42,9 +44,10 @@ void testApp::setup()
 	/// - EmptyScene::update, draw, and other method will be triggerd by ramSceneManager
 	/// - the scene added to ramSceneManager will appeard on GUI automaticaly
 	ramSceneManager& sceneManager = ramSceneManager::instance();
-	sceneManager.addScene(extractorScene.getPtr());
+	//sceneManager.addScene(extractorScene.getPtr());
     sceneManager.addScene(frozenice.getPtr());
     sceneManager.addScene(eyeball.getPtr());
+    sceneManager.addScene(looper.getPtr());
 }
 
 //--------------------------------------------------------------

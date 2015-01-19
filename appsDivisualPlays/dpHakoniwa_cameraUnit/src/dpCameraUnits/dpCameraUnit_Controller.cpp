@@ -13,6 +13,7 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 	for (int i = 0;i < 4;i++){
 		cvAnalysis[i].mGui.setPosition(-1000, 0);
 		cvAnalysis[i].oscListPtr = &oscSendList;
+		cvAnalysis[i].pairFXUnit = &cvFXUnit[i];
 		cvFXUnit[i].mGui.setPosition(-1000, 0);
 	}
 
@@ -37,7 +38,7 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 	gui.addTextInput("OSC_D", "192.168.20.8");
 
 	gui.addLabel("Audio1_evala");
-	gui.addTextInput("OSC_E", "192.168.20.9");
+	gui.addTextInput("OSC_E", "192.168.20.9");//こっちにはOSCを送らない
 	gui.addLabel("Audio2_evala");
 	gui.addTextInput("OSC_F", "192.168.20.10");
 
@@ -51,7 +52,6 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 	gui.addLabel("Preset Settings");
 	gui.addToggle("SettingMode", &mbMakeSettings);
 	gui.addIntSlider("Channel", 0, 3, &makeSettings_targetInput);
-	gui.addButton("SaveHakoPreset", false);
 
 	refleshAddressList();
 

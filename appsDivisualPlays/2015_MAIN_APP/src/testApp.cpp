@@ -42,6 +42,7 @@ void testApp::setup()
     
     sceneManager.addScene(visWorm.getPtr());
     
+    sceneManager.addScene(hakoniwaIce.getPtr());
     sceneManager.addScene(danceMap.getPtr());
     
     sceneManager.addScene(hakoniwaStruggle.getPtr());
@@ -51,9 +52,10 @@ void testApp::setup()
     sceneManager.addScene(visSandStorm.getPtr());
     sceneManager.addScene(vecLineCircle.getPtr());
     
+    sceneManager.addScene(magPendulum.getPtr());
     sceneManager.addScene(visMagnetPendulum.getPtr());
     
-   // sceneManager.addScene(hakoVisTheta.getPtr());
+    sceneManager.addScene(hakoVisTheta.getPtr());
 
 	sceneManager.addScene(hakoniwaPlinkOil.getPtr());
 	sceneManager.addScene(hakoniwaPlinkLaser.getPtr());
@@ -136,7 +138,7 @@ void testApp::keyPressed(int key)
 //--------------------------------------------------------------
 void testApp::keyReleased(int key)
 {
-
+    if(key == 'f')ofToggleFullscreen();
 }
 
 //--------------------------------------------------------------

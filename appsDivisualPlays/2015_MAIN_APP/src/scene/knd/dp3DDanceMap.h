@@ -16,7 +16,7 @@
 
 class dp3DDanceMap : public ramBaseScene{
 public:
-    string getName() const { return "dpVisIceMap"; }
+    string getName() const { return "dpVisIce"; }
     void setupControlPanel(){
         
         ramGetGUI().addToggle("Osc", &isReceiveOsc);
@@ -30,11 +30,14 @@ public:
         ramGetGUI().addIntSlider("lineWidth", 1, 10, &mLineWidth);
         
         mMotionExtractor.setupControlPanel(this,ofPoint(300,200));
+        mMotionExtractor.load("motionExt_dpVisIce.xml");
         
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dp3DDanceMap::onPanelChanged);
         
         ramOscManager::instance().addReceiverTag(&mReceiver);
         mReceiver.addAddress("/dp/cameraUnit/Ice/pixelate");
+        
+        mCube.setScale(mScale);
     }
     
     void setup(){
@@ -175,6 +178,7 @@ public:
         ofRotate(mAngle.val,mRot.x,mRot.y,mRot.z);
         mCube.draw();
         ofPopMatrix();
+        
         ramEndCamera();
     }
     
@@ -212,8 +216,8 @@ private:
     bool isExtend = true;
     bool isReceiveOsc = false;
     
-    float mScale = 1.0;
-    float mRotThresh = 0.0;
+    float mScale = 3.0;
+    float mRotThresh = 3.5;
     KezSlidePoint mRot;
     KezSlide mAngle;
     

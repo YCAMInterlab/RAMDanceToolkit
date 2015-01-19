@@ -3,24 +3,26 @@
 void dpHakoniwaSand::setupControlPanel(){
     
     mMotionExtractor.setupControlPanel(this,ofPoint(340,30));
+    mMotionExtractor.load("motionExt_dpHSandStorm.xml");
     ramGetGUI().addIntSlider("Val1_Test", 800, 2200, &val1);
     ramGetGUI().addIntSlider("Val2_Test", 800, 2200, &val2);
     ramGetGUI().addIntSlider("Val3_Test", 800, 2200, &val3);
     ramGetGUI().addToggle("Test mode", &bTestMode);
     
-    vector<string> contents;
-    contents.push_back("Hight");
-    contents.push_back("Rot");
+//    vector<string> contents;
+//    contents.push_back("Hight");
+//    contents.push_back("Rot");
+//    
+    //ramGetGUI().addRadioGroup("mode__", contents, &mode);
     
-   // ramGetGUI().addRadioGroup("mode", contents, &mode);
-    
-    bTestMode = true;
+    bTestMode = false;
     
 }
 
 void dpHakoniwaSand::setup(){
  
     mSender.setup("192.168.20.54",8528);
+    
 }
 
 void dpHakoniwaSand::sendOsc(){
@@ -40,16 +42,15 @@ void dpHakoniwaSand::update(){
     mMotionExtractor.update();
     
     if (!bTestMode) {
-        if (mode == 0) {
-            val1 = (int)ofMap(mMotionExtractor.getPositionAt(0).y, 0, 200, 800, 2200);
-            val2 = (int)ofMap(mMotionExtractor.getPositionAt(1).y, 0, 200, 800, 2200);
-            val3 = (int)ofMap(mMotionExtractor.getPositionAt(2).y, 0, 200, 1000, 2000);
-        } else if (mode ==1) {
-            
-                //not yet
-        
-        
-        }
+//        if (mode == 0) {
+            val1 = (int)ofMap(mMotionExtractor.getPositionAt(0).y, 30, 180, 800, 2200);
+            val2 = (int)ofMap(mMotionExtractor.getPositionAt(1).y, 30, 180, 800, 2200);
+            val3 = (int)ofMap(mMotionExtractor.getPositionAt(2).y, 30, 180, 1000, 2000);
+//        } else if (mode ==1) {
+//            
+//                //not yet
+//        
+//        }
     }
 
     sendOsc();
@@ -67,23 +68,25 @@ void dpHakoniwaSand::draw(){
     ramSetViewPort(dpGetFirstScreenViewPort()); //１枚目のscreenを描画に指定。ここの仕様変わります。
     ramBeginCamera();
     mMotionExtractor.draw();
-    
-    
-//    ramNode rn[6];
-//    for (int i = 0; i < 6; i++){
-//        rn[i] = mMotionExtractor.getNodeAt(i);
-//    }
-//        
-//    ofPushMatrix();
-//    ofNoFill();
-//    ofTranslate(200,0);
-//    for (int i = 0; i < 6; i++) rn[i].draw();
-//    ofPopMatrix();
-
     ramEndCamera();
     
     example_drawDump();
 }
+
+void dpHakoniwaSand::onEnabled(){
+    
+    
+}
+
+void dpHakoniwaSand::onDisabled(){
+    
+    val1 = 2200;
+    val2 = 2200;
+    val3 = 2000;
+    
+    sendOsc();
+}
+
 
 void dpHakoniwaSand::example_drawDump(){
     

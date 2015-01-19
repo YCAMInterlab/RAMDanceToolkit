@@ -22,127 +22,117 @@ void twistFinder::findTwist(ramNode & node, ramNode & nodeOrigin){  // check rot
 void twistFinder::debugDraw(ramMotionExtractor & motionExtractor){
 
     //experimental
+    ramNode rn[2];
+    rn[0] = motionExtractor.getNodeAt(0);
+    rn[1] = motionExtractor.getNodeAt(1);
     
+    ofPushMatrix();
+    {
+        ofTranslate(100,0);
+        ofVec3f v = rn[1].getGlobalPosition() - rn[0].getGlobalPosition();
+        
+        ofSetColor(255);
+        ofLine (rn[0].getGlobalPosition(), rn[0].getGlobalPosition() + (v * 4));
+
+        ofQuaternion q = rn[1].getGlobalOrientation();
+        float tA, tX, tY, tZ;
+        q.getRotate(tA, tX, tY, tZ);
+
+        ofVec3f rdVec = ofVec3f(0,200,0);
+        ofVec3f rVec = rdVec.getRotated(tA, ofVec3f(tX, tY, tZ));
+                                        
+        ofSetColor(0, 255, 0);
+        ofLine (rn[1].getGlobalPosition(), rn[1].getGlobalPosition() + (rVec * 30));
+        
+        ofSetColor(255);
+        
+        rn[0].draw();
+        rn[1].draw();
     
-    ramNode node[ramActor::NUM_JOINTS];
-    ramNodeArray na;
+    }
+    ofPopMatrix();
+    
+    ofPushMatrix();
+    {
+        ofTranslate(200,0);
+        ofVec3f v = rn[1].getGlobalPosition() - rn[0].getGlobalPosition();
+        
+        ofQuaternion q;
+        q.makeRotate(v, ofVec3f(1,0,0));
+        float tA3, tX3, tY3, tZ3;
+        q.getRotate(tA3, tX3, tY3, tZ3);
+        ofRotate(tA3, tX3, tY3, tZ3);
 
-    if (ramActorManager::instance().getNumNodeArray() > 0) {
-        na = ramActorManager::instance().getNodeArray(0);
-        
-        node[0] = na.getNode(ramActor::JOINT_LEFT_COLLAR);
-        node[1] = na.getNode(ramActor::JOINT_LEFT_SHOULDER);
-        node[2] = na.getNode(ramActor::JOINT_LEFT_ELBOW);
-        node[3] = na.getNode(ramActor::JOINT_LEFT_WRIST);
-
-        ofNoFill();
-        for (int i = 0; i < 4; i++) node[i].draw();
-        
-//        ofPushMatrix();
-//        
-//        {
-//            ofTranslate(100, 0);
-//            ofVec3f v = node[3].getGlobalPosition() - node[2].getGlobalPosition();
-//
-//            ofQuaternion q;
-//            q.makeRotate(v, ofVec3f(1,0,0));
-//            float tA, tX, tY, tZ;
-//            q.getRotate(tA, tX, tY, tZ);
-//
-//            ofRotate(tA, tX, tY, tZ);
-//
-//            ofPushMatrix();
-//            ofTranslate(-1*node[2].getGlobalPosition());
-//            node[2].draw();
-//            node[3].draw();
-//            ofSetColor(255);
-//            ofLine(node[2].getGlobalPosition(), node[3].getGlobalPosition());
-//            ofPopMatrix();
-//        }
-//        
-//        ofPopMatrix();
-//
-        
+        ofTranslate(-rn[0].getGlobalPosition());
 
         ofPushMatrix();
         {
-            ofVec3f v = node[3].getGlobalPosition() - node[2].getGlobalPosition();
-            ofQuaternion q = node[3].getGlobalOrientation();
-            float tA, tX, tY, tZ;
-            q.getRotate(tA, tX, tY, tZ);
-        
-            ofVec3f Yaxis = ofVec3f(0,100,0);
-            Yaxis.getRotated(tA, ofVec3f(tX, tY, tZ));
-        
             ofSetColor(255);
-            ofLine(ofVec3f(0,0,0), Yaxis);
+            ofLine (rn[0].getGlobalPosition(), rn[0].getGlobalPosition() + (v * 4));
             
-            ofQuaternion q2;
-            q2.makeRotate(Yaxis, -v);
+            ofQuaternion q2 = rn[1].getGlobalOrientation();
+            float tA, tX, tY, tZ;
             q2.getRotate(tA, tX, tY, tZ);
             
-            ofRotate(tA, tX, tY, tZ);
+            ofVec3f rdVec = ofVec3f(0,200,0);
+            ofVec3f rVec = rdVec.getRotated(tA, ofVec3f(tX, tY, tZ));
             
-            ofPushMatrix();
-            ofTranslate(-1*node[3].getGlobalPosition());
-            node[3].draw();
+            ofSetColor(0, 255, 0);
+            ofLine (rn[1].getGlobalPosition(), rn[1].getGlobalPosition() + (rVec * 100));
             
-            ofPopMatrix();
+            ofSetColor(255);
             
+            rn[0].draw();
             
+            ofQuaternion q3;
+            q3.makeRotate(rVec.getNormalized(), v.getNormalized());
+            float tA2, tX2, tY2, tZ2;
+            q3.getRotate(tA2, tX2, tY2, tZ2);
             
+            ofTranslate(rn[1].getGlobalPosition());
+            ofRotate(tA2, tX2, tY2, tZ2);
+            ofTranslate(-rn[1].getGlobalPosition());
+            rn[1].draw();
         }
         ofPopMatrix();
+    }
+    ofPopMatrix();
+
+    ofPushMatrix();
+    {
+        ofVec3f v = rn[1].getGlobalPosition() - rn[0].getGlobalPosition();
+        
+        ofQuaternion q2 = rn[1].getGlobalOrientation();
+        float tA, tX, tY, tZ;
+        q2.getRotate(tA, tX, tY, tZ);
+
+        ofVec3f rdVec = ofVec3f(0,200,0);
+        ofVec3f rVec = rdVec.getRotated(tA, ofVec3f(tX, tY, tZ));
+  
+        ofQuaternion q3;
+        q3.makeRotate(rVec.getNormalized(), v.getNormalized());
+        float tA2, tX2, tY2, tZ2;
+        q3.getRotate(tA2, tX2, tY2, tZ2);
+
         
         
         
-        
-        
-        
-        
-        
-        
-        
-//        ofPushMatrix();
-//        {
-//            
-//            ofTranslate(100, 0);
-//            ofVec3f v = node[3].getGlobalPosition() - node[2].getGlobalPosition();
-//            {
-//                ofQuaternion q;
-//                q.makeRotate(v, ofVec3f(1,0,0));
-//                float tA, tX, tY, tZ;
-//                q.getRotate(tA, tX, tY, tZ);
-//                ofRotate(tA, tX, tY, tZ);
-//            }
-//            ofPushMatrix();
-//            {
-//                ofTranslate(-1*node[2].getGlobalPosition());
-//                node[2].draw();
-//            
-//                ofTranslate(node[3].getGlobalPosition());
-//                ofPushMatrix();
-//                {
-//                    {
-//                        ofQuaternion q;
-//                        q.makeRotate(node[3].getYAxis(), -v);
-//                        float tA, tX, tY, tZ;
-//                        q.getRotate(tA, tX, tY, tZ);
-//                        ofRotate(tA, tX, tY, tZ);
-//                    }
-//                    ofTranslate(-1*node[3].getGlobalPosition());
-//                    node[3].draw();
-//                }
-//                ofPopMatrix();
-//                
-////            ofSetColor(255);
-////            ofLine(node[2].getGlobalPosition(), node[3].getGlobalPosition());
-////            ofPopMatrix();
-//            }
-//            ofPopMatrix();  // ofRotate
-//
-//        }
-//        ofPopMatrix();      //ofTranslate(100,0)
-//    }
+    }
+    ofPopMatrix();
+}
+
+void twistFinder::drawGraph(vector<ofVec3f> & vec, ofColor & drawColor, int elementNum){
+    
+    ofSetColor(255);
+    ofLine(0, 0, 320, 0);
+    
+    for (int i = 0; i < vec.size(); i++ ) {
+        int val;
+        if (elementNum == 0) val = vec[i].x;
+        else if (elementNum == 1) val = vec[i].y;
+        else if (elementNum ==2) val = vec[i].z;
+        ofSetColor(drawColor);
+        ofLine(i, val, i, 0);
     }
 }
+

@@ -15,6 +15,8 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.addSpacer();
 	mGui.addLabel("Hakoniwa Name");
 	mGui.addTextInput("hakoniwaName", "")->setAutoClear(false);
+	mGui.addButton("loadPreset", false);
+	mGui.addButton("savePreset", false);
 	mGui.addLabel("OSCOption");
 	mGui.addSpacer();
 	mGui.addToggle("SendOSC",		&mEnableSendOSC);
@@ -222,7 +224,6 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			(ofxCv::mean(ofxCv::toCv(pixGray))[0] < 253.0f) &&
 			(isFrameNew)){
 			float f = ofxCv::mean(ofxCv::toCv(pixGray))[0];
-			cout << f << endl;
 			mOptFlow.calcOpticalFlow(pixGray);
 		}
 		
@@ -372,7 +373,16 @@ void dpCameraUnit_cvAnalysis::draw(int x,int y){
 void dpCameraUnit_cvAnalysis::guiEvent(ofxUIEventArgs &ev){
 	ofxUIWidget* w = ev.widget;
 
-	if (w->getName() == "hakoniwaName"){
+	if (w->getName() == "loadPreset"){
+		loadPreset(hakoniwa_name);
+		pairFXUnit->loadPreset(hakoniwa_name);
+	}
+	if (w->getName() == "savePreset"){
+		savePreset(hakoniwa_name);
+		pairFXUnit->savePreset(hakoniwa_name);
+	}
+
+	if (w->getName() == "hakoniwaName" && w->getState() == OFX_UI_STATE_DOWN){
 		ofxUITextInput* ti = (ofxUITextInput*)w;
 		ti->setTextString(ti->getTextString());
 		hakoniwa_name = ti->getTextString();
@@ -414,5 +424,7 @@ void dpCameraUnit_cvAnalysis::savePreset(string hakoniwaName){
 void dpCameraUnit_cvAnalysis::loadPreset(string hakoniwaName){
 
 	mGui.loadSettings("Preset_"+hakoniwaName+"/AnalysisUIPreset.xml");
+	ofxUITextInput* ti = ((ofxUITextInput*)(mGui.getWidget("hakoniwaName")));
+	hakoniwa_name = ti->getTextString();
 
 }

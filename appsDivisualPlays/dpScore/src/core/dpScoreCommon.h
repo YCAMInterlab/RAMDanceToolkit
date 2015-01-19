@@ -42,6 +42,7 @@ extern const string kOscAddrCameraUnitVector;
 extern const string kOscAddrCameraUnitVectorTotal;
 extern const string kOscAddrCameraUnitVectorFeatures;
 extern const string kOscAddrCaneraUnitVecContourBlob;
+extern const string kOscAddrCameraUnitMean;
 
 extern const string kOscAddrMotioner;
 
@@ -51,6 +52,19 @@ extern const string kSettingsPrefix;
 extern const int kNumCameraunitVectors;
 
 extern const string kFontPath;
+
+#ifdef DP_MASTER_HAKONIWA
+extern const string kHostNameMasterHakoniwa;
+extern const int kPortNumberMasterHakoniwa;
+
+extern const string kHostNameCameraUnit;
+extern const int kPortNumberCameraUnit;
+
+extern const int kNumScenes;
+extern const string kSceneNames[];
+
+extern const string kOscAddrRamSetScene;
+#endif
 
 string demangle(const char* name);
 

@@ -15,7 +15,7 @@ public:
     void onPanelChanged(ofxUIEventArgs& e);
     
     inline string getName() const {
-        return "HakoVisTheta";
+        return "dpVisTheta";
     }
 
 private:

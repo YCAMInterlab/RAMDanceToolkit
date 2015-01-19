@@ -29,6 +29,10 @@ dpHakoniwaSand sand;
 #include "dpHakoniwaMagnetPendulum.h"
 dpHakoniwaMagnetPendulum magPendulum;
 
+#include "dpTryTwistChecker.h"
+dpTryTwistChecker twistChecker;
+
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -50,6 +54,7 @@ void testApp::setup()
     sceneManager.addScene(vis.getPtr());
     sceneManager.addScene(sand.getPtr());
     sceneManager.addScene(magPendulum.getPtr());
+    sceneManager.addScene(twistChecker.getPtr());
 }
 
 //--------------------------------------------------------------

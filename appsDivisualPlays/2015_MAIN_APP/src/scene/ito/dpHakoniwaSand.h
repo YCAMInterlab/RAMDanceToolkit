@@ -8,7 +8,11 @@
 class dpHakoniwaSand : public ramBaseScene {
 public:
     
-    string getName() const {return "dpHSand";};
+    virtual ~dpHakoniwaSand(){
+        onDisabled();
+    };
+
+    string getName() const {return "dpHSandStorm";};
     
     void setupControlPanel();
     void setup();
@@ -18,6 +22,9 @@ public:
     void drawActor(const ramActor& actor);
     void example_drawDump();
     
+    virtual void onEnabled();
+    virtual void onDisabled();
+
     
 private:
     
