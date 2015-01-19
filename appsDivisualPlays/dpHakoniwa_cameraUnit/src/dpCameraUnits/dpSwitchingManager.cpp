@@ -45,7 +45,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_SERVOPENDULUM;
 	hakoniwas.back()->CVPreset	= "ServoPendulum";
-	hakoniwas.back()->sourceCh	= 9;
+	hakoniwas.back()->sourceCh	= 8;
     hakoniwas.back()->sceneNames.push_back("H:dpHServoPendulum");
     hakoniwas.back()->sceneNames.push_back("V:dpVisServoPendulum");
 
@@ -53,7 +53,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_MAGPENDULUM;
 	hakoniwas.back()->CVPreset	= "MagnetPendulum";
-	hakoniwas.back()->sourceCh	= 4;
+	hakoniwas.back()->sourceCh	= 3;
 	hakoniwas.back()->sceneNames.push_back("H:dpHMagPendulum");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisMagPendulum");
 
@@ -86,7 +86,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_FROZENICE;
 	hakoniwas.back()->CVPreset	= "Ice";
-	hakoniwas.back()->sourceCh	= 5;
+	hakoniwas.back()->sourceCh	= 9;
 	hakoniwas.back()->sceneNames.push_back("H:");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisIceMap");
 
@@ -95,7 +95,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_WORM;
 	hakoniwas.back()->CVPreset	= "";
-	hakoniwas.back()->sourceCh	= 7;
+	hakoniwas.back()->sourceCh	= 4;
 	hakoniwas.back()->sceneNames.push_back("H:");
 	hakoniwas.back()->sceneNames.push_back("V:dp");
 
@@ -118,9 +118,17 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_GEAR;
 	hakoniwas.back()->CVPreset	= "Gear";
-	hakoniwas.back()->sourceCh	= 9;
+	hakoniwas.back()->sourceCh	= 6;
 	hakoniwas.back()->sceneNames.push_back("H:dpHGearMove");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisGearMove");
+
+#pragma mark トルネード
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_TORNADO;
+	hakoniwas.back()->CVPreset	= "Tornado";
+	hakoniwas.back()->sourceCh	= 2;
+	hakoniwas.back()->sceneNames.push_back("H:dpHTornado");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisTornado");
 
 #pragma mark ★テストA
 	hakoniwas.push_back(new hakoniwaPresets());

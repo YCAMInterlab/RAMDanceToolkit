@@ -44,6 +44,7 @@ enum hakoniwaType{
 
 	HAKO_STRUGGLE,
 	HAKO_GEAR,
+	HAKO_TORNADO,
 
 	HAKO_TESTA,
 	HAKO_TESTB,
