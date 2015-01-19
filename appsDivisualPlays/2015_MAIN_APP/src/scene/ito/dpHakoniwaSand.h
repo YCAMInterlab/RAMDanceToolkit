@@ -8,6 +8,10 @@
 class dpHakoniwaSand : public ramBaseScene {
 public:
     
+    virtual ~dpHakoniwaSand(){
+        onDisabled();
+    };
+
     string getName() const {return "dpHSandStorm";};
     
     void setupControlPanel();

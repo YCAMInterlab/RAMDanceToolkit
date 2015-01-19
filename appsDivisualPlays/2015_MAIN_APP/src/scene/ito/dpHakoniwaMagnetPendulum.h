@@ -29,9 +29,9 @@ public:
     void drawActor(const ramActor& actor);
     void example_drawDump();
     void guiEvent(ofxUIEventArgs &e);
-    
-    void drawGraph(vector<ofVec3f> & vec, ofColor & drawColor, int elementNum);
-    void debugDraw();
+        
+    virtual void onEnabled();
+    virtual void onDisabled();
     
 private:
     

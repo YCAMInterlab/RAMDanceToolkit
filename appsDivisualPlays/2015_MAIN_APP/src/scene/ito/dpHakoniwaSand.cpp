@@ -85,7 +85,6 @@ void dpHakoniwaSand::onDisabled(){
     val3 = 2000;
     
     sendOsc();
-    
 }
 
 
