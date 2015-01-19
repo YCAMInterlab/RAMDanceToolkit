@@ -9,10 +9,11 @@
 #ifndef RAMDanceToolkit_HakoVisSandStorm_h
 #define RAMDanceToolkit_HakoVisSandStorm_h
 
+#include "dpBasicMap.h"
 
 class dpHakoVisSandStorm : public ramBaseScene{
 public:
-    string getName() const { return "dpVisSandStorm_floor"; }
+    string getName() const { return "dpVisSandStorm"; }
     
 	void setupControlPanel(){
         ramGetGUI().addSlider("fade", 0.0, 255.0, &mFade);
@@ -43,6 +44,8 @@ public:
         
         mColor.speed = 0.01;
         mColor.imSet(dpColor::MAIN_COLOR.r,dpColor::MAIN_COLOR.g,dpColor::MAIN_COLOR.b);
+        
+        mMap.setup();
     }
     
     void update(){
@@ -64,6 +67,7 @@ public:
         }
     
         mColor.update();
+        
     }
     
     void draw(){
@@ -115,7 +119,7 @@ public:
         ofSetColor(255,255,255);
         mFbo.draw(0,0);
         
-       // if(isMaskMode)mMap.draw(mFbo.getTextureReference());
+        if(isMaskMode)mMap.draw(mFbo.getTextureReference());
     }
 private:
     
@@ -129,7 +133,7 @@ private:
     bool isColor = false;
     
     ofImage mTri;
-  //  BasicMap mMap;
+    dpBasicMap mMap;
     
     ofFbo mFbo;
     
@@ -140,6 +144,7 @@ private:
     
     ofPoint mMeanVector;
     KezSlidePoint mColor;
+    //dpIceMapGrid mGrid;
 };
 
 #endif

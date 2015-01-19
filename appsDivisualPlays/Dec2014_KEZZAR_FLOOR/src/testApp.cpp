@@ -31,6 +31,9 @@ dp3DDanceMap mDanceMap;
 #include "dpHakoVisIceMap.h"
 dpHakoVisIceMap mIceMap;
 
+#include "dpHakoVisSandStorm.h"
+dpHakoVisSandStorm mSandStorm;
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -48,6 +51,7 @@ void testApp::setup()
 
     sceneManager.addScene(mDanceMap.getPtr());
     sceneManager.addScene(mIceMap.getPtr());
+    sceneManager.addScene(mSandStorm.getPtr());
     
 }
 

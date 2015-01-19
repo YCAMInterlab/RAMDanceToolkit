@@ -9,7 +9,7 @@
 #ifndef Ice_MapGrid_h
 #define Ice_MapGrid_h
 
-class MapGrid{
+class dpBasicMapGrid{
 public:
     
     class SimpleTri{
@@ -88,19 +88,19 @@ private:
     bool isDrawAll = true;
 };
 
-class BasicMap{
+class dpBasicMap{
 private:
     int mDiv = 4;
-    vector<MapGrid>mLines;
+    vector<dpBasicMapGrid>mLines;
     
     ofFbo mFbo;
     ofShader mMult;
     
     void setupLines(){
         mLines.clear();
-        mLines.assign(mDiv * mDiv, MapGrid());
+        mLines.assign(mDiv * mDiv, dpBasicMapGrid());
         
-        int size = ofGetWidth() / mDiv;
+        int size = SINGLE_SCREEN_WIDTH / mDiv;
         
         for(int i = 0; i < mDiv; i++){
             for(int j = 0; j < mDiv; j++){
@@ -126,8 +126,8 @@ public:
     
     void setup(){
         setupLines();
-        mFbo.allocate(ofGetWidth(),ofGetHeight(),GL_RGB);
-        mMult.load("","mult.frag");
+        mFbo.allocate(SINGLE_SCREEN_WIDTH,SINGLE_SCREEN_HEIGHT,GL_RGB);
+        mMult.load("","shaders/mult.frag");
     }
     
     void subdivision(){
@@ -141,10 +141,13 @@ public:
     }
     
     void draw(ofTexture &tex){
+        drawToFbo();
         mMult.begin();
         mMult.setUniformTexture("mask", tex, 1);
         mFbo.draw(0,0);
         mMult.end();
+        
+        
     }
 };
 

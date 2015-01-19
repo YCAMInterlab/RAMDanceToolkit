@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		270D2D9C16E4760700D5F750 /* icon.icns in CopyFiles */ = {isa = PBXBuildFile; fileRef = 270D2D9916E475D800D5F750 /* icon.icns */; };
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
-		92B854C71A66358100205C81 /* HakovisLaser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92B854C51A66358100205C81 /* HakovisLaser.cpp */; };
 		92F108F11A45395F00E398B2 /* VectorField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92F108EB1A45395F00E398B2 /* VectorField.cpp */; };
 		92F108F21A45395F00E398B2 /* VFParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92F108ED1A45395F00E398B2 /* VFParticle.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
@@ -91,20 +90,18 @@
 /* Begin PBXFileReference section */
 		270D2D9916E475D800D5F750 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../../resources/Icons/icon.icns; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
+		9209C4391A6CBF6A00E35146 /* dp3DDanceMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = dp3DDanceMap.h; path = scenes/dp3DDanceMap.h; sourceTree = "<group>"; };
+		9209C43A1A6CBF6A00E35146 /* dpHakoVisIceMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = dpHakoVisIceMap.h; path = scenes/dpHakoVisIceMap.h; sourceTree = "<group>"; };
+		9209C43B1A6CBF6A00E35146 /* dpHakoVisSandStorm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = dpHakoVisSandStorm.h; path = scenes/dpHakoVisSandStorm.h; sourceTree = "<group>"; };
+		9209C43E1A6CC04C00E35146 /* dpBasicMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpBasicMap.h; sourceTree = "<group>"; };
 		922356671A5D2C14009DD3EB /* KezBlinker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezBlinker.h; sourceTree = "<group>"; };
 		922356681A5D2D63009DD3EB /* KezDelaunayMesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezDelaunayMesh.h; sourceTree = "<group>"; };
 		9232BF8A1A5E36B5006D97FA /* dpIceMapFace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpIceMapFace.h; sourceTree = "<group>"; };
 		9232BF8B1A5E36B5006D97FA /* dpIceMapTri.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpIceMapTri.h; sourceTree = "<group>"; };
-		9232BF8C1A5E3708006D97FA /* dp3DDanceMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dp3DDanceMap.h; sourceTree = "<group>"; };
 		9232BF8D1A5E3959006D97FA /* dpIceMapGrid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpIceMapGrid.h; sourceTree = "<group>"; };
 		9232BF8F1A5E4F74006D97FA /* dpIceMapCube.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpIceMapCube.h; sourceTree = "<group>"; };
 		9248D4DF1A4D674600047AF5 /* KezConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezConstants.h; sourceTree = "<group>"; };
-		9264E92F1A5FB71B0084BA46 /* dpHakoVisIceMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisIceMap.h; sourceTree = "<group>"; };
 		92A1E3BE1A6241CA000023C7 /* dpHakoniwaNodeArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaNodeArray.h; sourceTree = "<group>"; };
-		92B854C41A66358100205C81 /* Easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Easing.h; sourceTree = "<group>"; };
-		92B854C51A66358100205C81 /* HakovisLaser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HakovisLaser.cpp; sourceTree = "<group>"; };
-		92B854C61A66358100205C81 /* HakovisLaser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HakovisLaser.h; sourceTree = "<group>"; };
-		92B854C81A663D2E00205C81 /* dpHakoVisStage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisStage.h; sourceTree = "<group>"; };
 		92EA0C391A5E055400F8F655 /* dpRibbon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpRibbon.h; sourceTree = "<group>"; };
 		92EA0C3A1A5E055400F8F655 /* dpServoPendulumRibbon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpServoPendulumRibbon.h; sourceTree = "<group>"; };
 		92EA0C3B1A5E1F2400F8F655 /* dpPendulumRibbonController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpPendulumRibbonController.h; sourceTree = "<group>"; };
@@ -197,20 +194,10 @@
 			path = scenes/iceLine;
 			sourceTree = "<group>";
 		};
-		92B854C31A66358100205C81 /* fromOnc */ = {
-			isa = PBXGroup;
-			children = (
-				92B854C41A66358100205C81 /* Easing.h */,
-				92B854C51A66358100205C81 /* HakovisLaser.cpp */,
-				92B854C61A66358100205C81 /* HakovisLaser.h */,
-				92B854C81A663D2E00205C81 /* dpHakoVisStage.h */,
-			);
-			path = fromOnc;
-			sourceTree = "<group>";
-		};
 		92F108E71A45395F00E398B2 /* kez_util */ = {
 			isa = PBXGroup;
 			children = (
+				9209C43E1A6CC04C00E35146 /* dpBasicMap.h */,
 				92EA0C3B1A5E1F2400F8F655 /* dpPendulumRibbonController.h */,
 				92EA0C3A1A5E055400F8F655 /* dpServoPendulumRibbon.h */,
 				92EA0C391A5E055400F8F655 /* dpRibbon.h */,
@@ -240,9 +227,10 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				9209C4391A6CBF6A00E35146 /* dp3DDanceMap.h */,
+				9209C43A1A6CBF6A00E35146 /* dpHakoVisIceMap.h */,
+				9209C43B1A6CBF6A00E35146 /* dpHakoVisSandStorm.h */,
 				925872B11A4D8FF800483FE3 /* iceLine */,
-				9232BF8C1A5E3708006D97FA /* dp3DDanceMap.h */,
-				9264E92F1A5FB71B0084BA46 /* dpHakoVisIceMap.h */,
 				92F108E71A45395F00E398B2 /* kez_util */,
 			);
 			name = Scenes;
@@ -320,7 +308,6 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				92B854C31A66358100205C81 /* fromOnc */,
 				9A1DE6D516AA666100A10E3F /* Scenes */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
@@ -438,7 +425,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92B854C71A66358100205C81 /* HakovisLaser.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				92F108F11A45395F00E398B2 /* VectorField.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
