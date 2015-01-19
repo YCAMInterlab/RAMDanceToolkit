@@ -21,13 +21,13 @@ void HakoniwaGearMove::setupControlPanel(){
     mGear2Reverse = true;
     mGear3Reverse = true;
     
-    mMax1speed = 18000;
+    mMax1speed = 16000;
     mMin1speed = 600;
     mMax2speed = 26000;
     mMin2speed = 100;
     mMax3speed = 12000;
     mMin3speed = 6500;
-    mScale = 500;
+    mScale = 150;
     
     ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
     panel->addToggle("data show", &mDatahow);
@@ -105,6 +105,8 @@ void HakoniwaGearMove::draw(){
             cout << "Gear1Speed " << mGear1Speed << endl;
             cout << "Gear2Speed " << mGear2Speed << endl;
             cout << "Gear3Speed " << mGear3Speed << endl;
+            
+            //test osc send
             
             if(mGear1 == true){
                 if (mManual != true) {
