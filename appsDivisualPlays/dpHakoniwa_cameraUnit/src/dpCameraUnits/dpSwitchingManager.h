@@ -107,6 +107,8 @@ public:
 	void disableHakoniwa(hakoniwaType type);
 	void disableDisplay(int displayNum);
 
+	void sendCurrentHakoniwa();
+
 	bool isSlave;
 
 	dpCameraUnit_cvFX* FXPtr;

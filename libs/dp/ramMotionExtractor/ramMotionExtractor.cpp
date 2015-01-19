@@ -153,11 +153,6 @@ void ramMotionExtractor::update(){
 
 	}
 
-	cout << "======" << endl;
-	for (int i = 0;i < actorList->getListItems().size();i++){
-		cout << actorList->getListItems()[i]->getName() << endl;
-	}
-
 	lastNumNodeArray = ramActorManager::instance().getNumNodeArray();
 
 	//actor removed

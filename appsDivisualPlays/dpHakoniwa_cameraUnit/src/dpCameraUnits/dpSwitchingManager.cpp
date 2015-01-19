@@ -343,6 +343,7 @@ void dpSwitchingManager::SelectHakoniwa(hakoniwaType type, int slot){
             if (targCvSlot == 0 || targCvSlot == 1){
                 FXPtr[targCvSlot]		.loadPreset(mSlots[targCvSlot].presetFile);
                 AnalysisPtr[targCvSlot]	.loadPreset(mSlots[targCvSlot].presetFile);
+				cout << "Load XML :" << mSlots[targCvSlot].presetFile << endl;
             }
         }else{
             if (targCvSlot == 2 || targCvSlot == 3){
@@ -543,4 +544,13 @@ int dpSwitchingManager::searchHakoniwaIsActive(hakoniwaType type){
 			(mSlots[i].hakoType == type)) return i;
 	}
 	return -1;
+
+}
+
+void dpSwitchingManager::sendCurrentHakoniwa(){
+
+	for (int i = 0;i < hakoniwas.size();i++){
+
+	}
+
 }

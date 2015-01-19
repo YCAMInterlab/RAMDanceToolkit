@@ -29,6 +29,8 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.addToggle("Flow_FarneBack",	&mEnableOptFlowFarne);
 	mGui.addToggle("Mean",				&mEnableMean);
 	mGui.addToggle("Pixelate",			&mEnablePixelate);
+	mGui.addToggle("RGBPixelate",		&mEnablePixelateRGB);
+	mGui.addIntSlider("Pixlthreshold", 0, 255, &mParamPixelate_thr)->setValue(128);
 	mGui.addIntSlider("Res_X", 1, 60, &mParamPixelate_ResX);
 	mGui.addIntSlider("Res_Y", 1, 60, &mParamPixelate_ResY);
 //	mGui.addToggle("FAST",				&mEnableFAST);
@@ -198,7 +200,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 
 		for (int64_t j = 0;j < res_y;j++){
 			for (int64_t i = 0;i < res_x;i++){
-				bool pix = (pixGray.getColor(width/res_x * i, height/res_y * j).r > 128);
+				bool pix = (pixGray.getColor(width/res_x * i, height/res_y * j).r > mParamPixelate_thr);
 				debug_px.push_back(pix);
 				int64_t tg = int64_t(pix) << (Pixelcounter % 64);
 				pixelInt = pixelInt | tg;
@@ -215,6 +217,58 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 		}
 
 		if (mEnableSendOSC) sendMessageMulti(pixelateM);
+
+	}
+
+#pragma mark PixelateRGB
+	if (mEnablePixelateRGB){
+		int res_x = mParamPixelate_ResX;
+		int res_y = mParamPixelate_ResY;
+
+		int64_t pixelInt[3] = {0,0,0};
+		int64_t Pixelcounter= 0;
+
+		ofxOscMessage pixelateM[3];
+		pixelateM[0].setAddress("/dp/cameraUnit/"+hakoniwa_name+"/pixelate/r");
+		pixelateM[1].setAddress("/dp/cameraUnit/"+hakoniwa_name+"/pixelate/g");
+		pixelateM[2].setAddress("/dp/cameraUnit/"+hakoniwa_name+"/pixelate/b");
+
+		for (int i = 0;i < 3;i++){
+			debug_rgb[i].clear();
+			pixelateM[i].addIntArg(res_x);
+			pixelateM[i].addIntArg(res_y);
+		}
+
+		for (int64_t j = 0;j < res_y;j++){
+			for (int64_t i = 0;i < res_x;i++){
+				bool pix[3];
+				pix[0] = (pixColor.getColor(width/res_x * i, height/res_y * j).r > mParamPixelate_thr);
+				pix[1] = (pixColor.getColor(width/res_x * i, height/res_y * j).g > mParamPixelate_thr);
+				pix[2] = (pixColor.getColor(width/res_x * i, height/res_y * j).b > mParamPixelate_thr);
+
+				for (int o = 0;o < 3;o++){
+					debug_rgb[o].push_back(pix[o]);
+					int64_t tg = int64_t(pix[o]) << (Pixelcounter % 64);
+					pixelInt[o] = pixelInt[o] | tg;
+				}
+				Pixelcounter++;
+
+
+				if (Pixelcounter % 64 == 0){
+					for (int o = 0;o < 3;o++){
+						pixelateM[o].addInt64Arg(pixelInt[o]);
+						pixelInt[o] = 0;
+					}
+				}
+			}
+		}
+
+		for (int i = 0;i < 3;i++){
+			if (Pixelcounter % 64 != 0){
+				pixelateM[i].addInt64Arg(pixelInt[i]);
+			}
+			sendMessageMulti(pixelateM[i]);
+		}
 
 	}
 
@@ -333,6 +387,20 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 			for (int i = 0;i < mParamPixelate_ResX;i++){
 				if (debug_px[j*mParamPixelate_ResX+i]){
 					ofRect(i*10, j*10, 10, 10);
+				}
+			}
+		}
+	}
+	if (mEnablePixelateRGB){
+		for (int j = 0;j < mParamPixelate_ResY;j++){
+			for (int i = 0;i < mParamPixelate_ResX;i++){
+				for (int o = 0;o < 3;o++){
+					if (debug_rgb[o][j*mParamPixelate_ResX+i]){
+						if (o == 0) ofSetColor(255,0,0);
+						if (o == 1) ofSetColor(0,255,0);
+						if (o == 2) ofSetColor(0,0,255);
+						ofRect(i*10+o*3, j*10, 3, 10);
+					}
 				}
 			}
 		}

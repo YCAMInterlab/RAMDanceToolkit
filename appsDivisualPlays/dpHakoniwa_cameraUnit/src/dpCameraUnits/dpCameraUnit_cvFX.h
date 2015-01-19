@@ -35,6 +35,7 @@ public:
 	bool mEnableFrameDiff;
 	bool mEnableAccumlateWeight;
 	bool mEnableBackground;
+	bool mEnableRunningBackground;
 	bool mEnableWarpPerspective;
 	bool mEnableDilate;
 	bool mEnableErode;
@@ -52,8 +53,12 @@ public:
 	bool  mParam_adpThreshold_invert;
 	bool  mParam_adpThreshold_gauss;
 
+	float mParam_RB_LearnTime;
+	float mParam_RB_Threshold;
+
 	ofxUICanvas mGui;
 	ofImage		mSource;
+	ofImage		mSourceTmp;
 	ofImage		mGraySource_background;
 	bool		mBackgroundNeedsReflesh;
 	ofImage		mGraySource;
@@ -67,6 +72,7 @@ protected:
 
 	ofxCv::Mat	tmp;
 	cv::Mat		mAccum;
+	ofxCv::RunningBackground backGround;
 
 	ofVec2f mLastDrawPos;
 	float	mLastDrawScale;
