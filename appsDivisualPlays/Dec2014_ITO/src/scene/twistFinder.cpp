@@ -105,18 +105,57 @@ void twistFinder::debugDraw(ramMotionExtractor & motionExtractor){
         ofQuaternion q2 = rn[1].getGlobalOrientation();
         float tA, tX, tY, tZ;
         q2.getRotate(tA, tX, tY, tZ);
-
-        ofVec3f rdVec = ofVec3f(0,200,0);
-        ofVec3f rVec = rdVec.getRotated(tA, ofVec3f(tX, tY, tZ));
-  
+        ofVec3f grVec = ofVec3f(0, 1, 0);
+        ofVec3f gVec = grVec.getRotated(tA, ofVec3f(tX, tY, tZ));
+        ofVec3f redVec = ofVec3f(1, 0, 0);
+        ofVec3f rVec = redVec.getRotated(tA, ofVec3f(tX, tY, tZ));
+        ofVec3f blueVec = ofVec3f(0, 0, 1);
+        ofVec3f bVec = blueVec.getRotated(tA, ofVec3f(tX, tY, tZ));
+        
+//        ofPushMatrix();
+//        ofSetColor(255);
+//        ofTranslate(rn[1].getGlobalPosition());
+//        ofSetColor(0, 255, 0);
+//        ofLine(ofVec3f(0,0,0), gVec * 300);
+//        ofSetColor(255, 0, 0);
+//        ofLine(ofVec3f(0,0,0), rVec * 300);
+//        ofSetColor(0, 0, 255);
+//        ofLine(ofVec3f(0,0,0), bVec * 300);
+//        ofPopMatrix();
+        
         ofQuaternion q3;
-        q3.makeRotate(rVec.getNormalized(), v.getNormalized());
+        q3.makeRotate(gVec.getNormalized(), v.getNormalized());
         float tA2, tX2, tY2, tZ2;
         q3.getRotate(tA2, tX2, tY2, tZ2);
 
+        gVec = gVec.getRotated(tA2, ofVec3f(tX2, tY2, tZ2));
+        rVec = rVec.getRotated(tA2, ofVec3f(tX2, tY2, tZ2));
+        bVec = bVec.getRotated(tA2, ofVec3f(tX2, tY2, tZ2));
+        
+        ofPushMatrix();
+        ofSetColor(255);
+        ofTranslate(rn[1].getGlobalPosition());
+        ofSetColor(0, 255, 0);
+        ofLine(ofVec3f(0,0,0), gVec * 300);
+        ofSetColor(255, 0, 0);
+        ofLine(ofVec3f(0,0,0), rVec * 300);
+        ofSetColor(0, 0, 255);
+        ofLine(ofVec3f(0,0,0), bVec * 300);
+        ofPopMatrix();
         
         
         
+        
+        
+        
+//        ofVec3f axisEdge[3];
+//        
+//        ofVec3f redPos = ofVec3f(1,0,0);
+//        axisEdge[0] = redPos.getRotated(tA2, ofVec3f(tX2, tY2, tZ2));
+//        ofVec3f greenPos = ofVec3f(0,1,0);
+//        axisEdge[1] = greenPos.getRotated(tA2, ofVec3f(tX2, tY2, tZ2));
+//        ofVec3f bluePos = ofVec3f(0,0,1);
+//        axisEdge[2] = bluePos.getRotated(tA2, ofVec3f(tX2, tY2, tZ2));
     }
     ofPopMatrix();
 }
