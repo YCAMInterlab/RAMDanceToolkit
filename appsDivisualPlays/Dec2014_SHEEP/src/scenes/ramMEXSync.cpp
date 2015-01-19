@@ -8,10 +8,14 @@
 
 #include "ramMEXSync.h"
 
+ramMEXSync::ramMEXSync(){
+
+}
+
 void ramMEXSync::setupControlPanel(){
 
 	gui = ramGetGUI().getCurrentUIContext();
-	targScene = gui->addTextInput("TargScene", "");
+	targScene = gui->addTextInput("TargScene", "dpHPLink_Laser");
 	targScene->setAutoClear(false);
 
 	scenes.push_back("dpHStruggle");
@@ -22,6 +26,7 @@ void ramMEXSync::setupControlPanel(){
 
 	mex.setupControlPanel(this);
 
+	ofAddListener(gui->newGUIEvent, this, &ramMEXSync::onPanelChanged);
 }
 
 void ramMEXSync::update(){
@@ -32,7 +37,9 @@ void ramMEXSync::update(){
 
 void ramMEXSync::draw(){
 
+	ramBeginCamera();
 	mex.draw();
+	ramEndCamera();
 
 }
 
@@ -41,20 +48,31 @@ void ramMEXSync::onPanelChanged(ofxUIEventArgs &e){
 
 	if (w->getName() == "Sync"){
 		string addr = "/ram/MEX/"+targScene->getTextString();
-		sender.setup("192.168.20.1", 10000);
 
-		ofxOscMessage mCls;
-		mCls.setAddress(addr+"/clear");
+		for (int i = 0;i < 2;i++){
+			if (i == 0) sender.setup("192.168.20.2", 10000);
+			if (i == 1) sender.setup("192.168.20.3", 10000);
 
-		sender.sendMessage(mCls);
+			ofxOscMessage mCls;
+			mCls.setAddress(addr+"/clear");
 
-		for (int i = 0;i < mex.mMotionPort.size();i++){
-			ofxOscMessage mPsh;
-			mPsh.setAddress(addr+"/push");
-			mPsh.addIntArg(mex.mMotionPort[i]->mActorIndex);
-			mPsh.addIntArg(mex.mMotionPort[i]->mFinder.index);
+			sender.sendMessage(mCls);
 
-			sender.sendMessage(mPsh);
+			for (int i = 0;i < mex.mMotionPort.size();i++){
+				ofxOscMessage mPsh;
+				mPsh.setAddress(addr+"/push");
+				mPsh.addIntArg(mex.mMotionPort[i]->mActorIndex);
+				mPsh.addIntArg(mex.mMotionPort[i]->mFinder.index);
+				sender.sendMessage(mPsh);
+			}
+
+			ofxOscMessage mLs;
+			mLs.setAddress(addr+"/actorList");
+			for (int i = 0;i < mex.actorList->getListItems().size();i++){
+				mLs.addStringArg(mex.actorList->getListItems()[i]->getName());
+			}
+			sender.sendMessage(mLs);
 		}
+
 	}
 }

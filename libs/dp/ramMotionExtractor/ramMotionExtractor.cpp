@@ -185,8 +185,6 @@ void ramMotionExtractor::draw(){
 void ramMotionExtractor::guiEvent(ofxUIEventArgs &e){
 	ofxUIWidget* w = e.widget;
 
-	cout << "EV :" << w->getName() << endl;
-
 	if (w->getName() == "PushPort"){
 		if (w->getState() == OFX_UI_STATE_DOWN){
 			ramMotionPort* mp = new ramMotionPort(ramActorManager::instance().getLastSelectedNodeIdentifer());
@@ -240,7 +238,7 @@ void ramMotionExtractor::pushPort(ramMotionPort *mp, int actorId){
 	if (mp->mFinder.findOne(nd) && !isDuplicate && isNoBlank){
 		mMotionPort.push_back(mp);
 	}else{
-		delete mp;
+		if (mp != NULL) delete mp;
 	}
 
 }
