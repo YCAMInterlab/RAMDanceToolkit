@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E8C1FAE1A6D0BB1007F6144 /* frozenIce.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E8C1FAA1A6D0BB1007F6144 /* frozenIce.cpp */; };
+		5E8C1FAF1A6D0BB1007F6144 /* magnetLooper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E8C1FAC1A6D0BB1007F6144 /* magnetLooper.cpp */; };
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
-		9209C4361A6CAE3500E35146 /* dpHakoniwaIce.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9209C4341A6CAE3500E35146 /* dpHakoniwaIce.cpp */; };
 		920BA37C1A67C9D700E4A227 /* dpHakoniwaSand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 920BA37A1A67C9D700E4A227 /* dpHakoniwaSand.cpp */; };
 		928AE9281A6CF5EE00CCA21D /* HakoniwaGearMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 928AE9261A6CF5EE00CCA21D /* HakoniwaGearMove.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
@@ -94,9 +95,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5E8C1FAA1A6D0BB1007F6144 /* frozenIce.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = frozenIce.cpp; sourceTree = "<group>"; };
+		5E8C1FAB1A6D0BB1007F6144 /* frozenIce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = frozenIce.h; sourceTree = "<group>"; };
+		5E8C1FAC1A6D0BB1007F6144 /* magnetLooper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = magnetLooper.cpp; sourceTree = "<group>"; };
+		5E8C1FAD1A6D0BB1007F6144 /* magnetLooper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = magnetLooper.h; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
-		9209C4341A6CAE3500E35146 /* dpHakoniwaIce.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpHakoniwaIce.cpp; sourceTree = "<group>"; };
-		9209C4351A6CAE3500E35146 /* dpHakoniwaIce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaIce.h; sourceTree = "<group>"; };
 		920BA3721A677FBB00E4A227 /* dpHakoVisStageCircle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisStageCircle.h; sourceTree = "<group>"; };
 		920BA3731A67C8E800E4A227 /* dp3DDanceMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dp3DDanceMap.h; sourceTree = "<group>"; };
 		920BA3741A67C8E800E4A227 /* dpHakoniwaStruggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaStruggle.h; sourceTree = "<group>"; };
@@ -261,8 +264,10 @@
 		9209C4331A6CAE3500E35146 /* konno */ = {
 			isa = PBXGroup;
 			children = (
-				9209C4341A6CAE3500E35146 /* dpHakoniwaIce.cpp */,
-				9209C4351A6CAE3500E35146 /* dpHakoniwaIce.h */,
+				5E8C1FAB1A6D0BB1007F6144 /* frozenIce.h */,
+				5E8C1FAA1A6D0BB1007F6144 /* frozenIce.cpp */,
+				5E8C1FAC1A6D0BB1007F6144 /* magnetLooper.cpp */,
+				5E8C1FAD1A6D0BB1007F6144 /* magnetLooper.h */,
 			);
 			path = konno;
 			sourceTree = "<group>";
@@ -604,15 +609,16 @@
 				C66CCCF81A66750D00CE64E9 /* ofxKsmrParallelLinkDelta.cpp in Sources */,
 				C66CCCF31A66750D00CE64E9 /* HakoniwaPlink_Oil.cpp in Sources */,
 				C66CCCF21A66750D00CE64E9 /* HakoniwaPLink_Laser.cpp in Sources */,
+				5E8C1FAE1A6D0BB1007F6144 /* frozenIce.cpp in Sources */,
 				C66CCCF91A66750D00CE64E9 /* ofxKsmrStepManager.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
 				928AE9281A6CF5EE00CCA21D /* HakoniwaGearMove.cpp in Sources */,
 				C6755BFF1A6BAE8F007E9984 /* dpHakoniwaMagnetPendulum.cpp in Sources */,
 				C66CCCFA1A66750D00CE64E9 /* virtualSteppingMotor.cpp in Sources */,
-				9209C4361A6CAE3500E35146 /* dpHakoniwaIce.cpp in Sources */,
 				C6957F1A1A68A07200DB75DB /* HakoniwaTheta.cpp in Sources */,
 				C6755BFE1A6BAE8F007E9984 /* axisConverter.cpp in Sources */,
 				C6755C001A6BAE8F007E9984 /* twistFinder.cpp in Sources */,
+				5E8C1FAF1A6D0BB1007F6144 /* magnetLooper.cpp in Sources */,
 				920BA37C1A67C9D700E4A227 /* dpHakoniwaSand.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

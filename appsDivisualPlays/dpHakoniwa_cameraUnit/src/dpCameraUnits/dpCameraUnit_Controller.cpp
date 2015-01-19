@@ -58,6 +58,7 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 	gui.autoSizeToFitWidgets();
 	makeSettings_targetInput = 1;
 	ofAddListener(gui.newGUIEvent, this, &dpCameraUnit_Controller::guiEvent);
+
 }
 
 dpCameraUnit_Controller::~dpCameraUnit_Controller(){
@@ -65,6 +66,12 @@ dpCameraUnit_Controller::~dpCameraUnit_Controller(){
 }
 
 void dpCameraUnit_Controller::update(){
+	static bool init = true;
+	if (init){
+		init = false;
+		cvFXUnit  [3].loadPreset("ColorOfWater");
+		cvAnalysis[3].loadPreset("ColorOfWater");
+	}
 
 	static bool windowReShape;
 	if (mbMakeSettings){
@@ -230,7 +237,7 @@ void dpCameraUnit_Controller::guiEvent(ofxUIEventArgs &e){
 void dpCameraUnit_Controller::refleshAddressList(){
 	oscSendList.clear();
 
-	for (int i = 0;i < 7;i++){
+	for (int i = 0;i < 9;i++){
 		string wname = "OSC_"+ofToString(char(0x41+i));
 		string add = ((ofxUITextInput*)
 					  (gui.getWidget(wname)))->getTextString();
