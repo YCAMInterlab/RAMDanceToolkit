@@ -42,6 +42,7 @@ void testApp::setup()
     
     sceneManager.addScene(visWorm.getPtr());
     
+    sceneManager.addScene(hakoniwaIce.getPtr());
     sceneManager.addScene(danceMap.getPtr());
     
     sceneManager.addScene(hakoniwaStruggle.getPtr());

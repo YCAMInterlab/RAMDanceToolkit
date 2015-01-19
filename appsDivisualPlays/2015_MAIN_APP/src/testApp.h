@@ -51,6 +51,9 @@
 #include "hakoVisPLink_Oil.h"
 #include "hakoVisPLink_Prism.h"
 
+//konno Scenes
+#include "dpHakoniwaIce.h"
+
 
 class testApp : public ramBaseApp
 {
@@ -120,6 +123,7 @@ public:
     dpHakoVisVecLineCircle vecLineCircle;
 
     // ice
+    dpHakoniwaIce hakoniwaIce;
     dp3DDanceMap danceMap;
     
     // tornado
