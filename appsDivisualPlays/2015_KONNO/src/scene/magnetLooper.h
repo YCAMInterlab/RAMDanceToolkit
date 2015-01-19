@@ -30,10 +30,34 @@ public:
     
     //==========================================
     bool manualControl;
+    
+    //マニュアルコントロールでストップ
+    //---------------------------
+    //oldしゃくとり
     bool looperStop;
+    //newしゃくとり
+    bool looperStop2;
+    //---------------------------
+    
+    
     bool speedControl;
-    float speedThreshold;
+    //スピードコントロールで判定
+    //---------------------------
+    //oldしゃくとり
     int hantei;
+    float speedThreshold;
+    //newしゃくとり
+    int hantei2;
+    float speedThreshold2;
+    //---------------------------
+    
+    bool looper1Speed;
+    int looper1SpeedHantei;
+    float looper1SpeedVal;
+    
+    bool looper2Speed;
+    int looper2SpeedHantei;
+    float looper2SpeedVal;
     
     //test
     int x,y;
@@ -43,6 +67,7 @@ private:
     
     ramMotionExtractor	motionExtractor;
     ofxOscSender sender;
+    ofxOscSender sender2;
     
     bool mDrawLines;
     bool mDrawTriangle;
