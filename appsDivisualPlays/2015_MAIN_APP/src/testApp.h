@@ -53,7 +53,9 @@
 #include "hakoVisPLink_Prism.h"
 
 //konno Scenes
-#include "dpHakoniwaIce.h"
+//#include "dpHakoniwaIce.h"
+#include "frozenIce.h"
+#include "magnetLooper.h"
 
 
 class testApp : public ramBaseApp
@@ -124,7 +126,7 @@ public:
     dpHakoVisVecLineCircle vecLineCircle;
 
     // ice
-    dpHakoniwaIce hakoniwaIce;
+    frozenIce dpHfrozenIce;
     dp3DDanceMap danceMap;
     
     // tornado
@@ -133,4 +135,7 @@ public:
     
     // Gear
     HakoniwaGearMove  hakoniwaGear;
+    
+    
+    magnetLooper dpHWorm;
 };

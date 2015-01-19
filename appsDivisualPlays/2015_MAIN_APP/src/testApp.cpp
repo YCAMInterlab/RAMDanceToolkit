@@ -42,7 +42,7 @@ void testApp::setup()
     
     sceneManager.addScene(visWorm.getPtr());
     
-    sceneManager.addScene(hakoniwaIce.getPtr());
+    sceneManager.addScene(dpHfrozenIce.getPtr());
     sceneManager.addScene(danceMap.getPtr());
     
     sceneManager.addScene(hakoniwaStruggle.getPtr());
@@ -66,7 +66,7 @@ void testApp::setup()
 	sceneManager.addScene(hakoVisPlinkOil.getPtr());
 	sceneManager.addScene(hakoVisPlinkPrism.getPtr());
 
-	
+    sceneManager.addScene(dpHWorm.getPtr());
 	
 	sceneManager.addScene(testSceneA.getPtr());
 	sceneManager.addScene(testSceneB.getPtr());
