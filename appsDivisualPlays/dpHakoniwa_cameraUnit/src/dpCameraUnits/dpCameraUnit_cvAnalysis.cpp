@@ -224,7 +224,6 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 			(ofxCv::mean(ofxCv::toCv(pixGray))[0] < 253.0f) &&
 			(isFrameNew)){
 			float f = ofxCv::mean(ofxCv::toCv(pixGray))[0];
-			cout << f << endl;
 			mOptFlow.calcOpticalFlow(pixGray);
 		}
 		

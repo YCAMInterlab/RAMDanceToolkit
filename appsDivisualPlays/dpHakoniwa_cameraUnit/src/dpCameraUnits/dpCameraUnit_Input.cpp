@@ -29,6 +29,8 @@ dpCameraUnit_input::dpCameraUnit_input(){
     
 	mGui.addToggle("Perspective", &mEnablePerspective);
 	mGui.addToggle("FourSplit", &mFourSplit);
+	mGui.addToggle("Play", &WannaPlay);
+	mGui.addSlider("Position", 0.0, 1.0, &Position);
 	mGui.autoSizeToFitWidgets();
     
     for (int i = 0;i < mCameraList.size();i++){
