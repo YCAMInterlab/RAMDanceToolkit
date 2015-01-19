@@ -9,10 +9,12 @@
 #ifndef RAMDanceToolkit_dpHakoniwaTornade_h
 #define RAMDanceToolkit_dpHakoniwaTornade_h
 
-class dpHakoniwaTornado : public ramBaseScene{
+#include "GeometryHelpers.h"
+
+class dpHakoniwaTornade : public ramBaseScene{
 public:
     
-    string getName() const {return "dpHTornado";};
+    string getName() const {return "dpHakoniwaTornado";};
     
     void setupControlPanel(){
         ramGetGUI().addIntSlider("fan",0,255,&mFan);
@@ -22,7 +24,7 @@ public:
         ramGetGUI().addSlider("fanRadMax",0.0,300.0,&mFanRadMax);
         ramGetGUI().addSlider("mistThresh",10.0, 255, &mMistThresh);
         
-        ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoniwaTornado::onPanelChanged);
+        ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoniwaTornade::onPanelChanged);
         
         mMotionExtractor.setupControlPanel(this,ofPoint(330,30));
         mMotionExtractor.load("motionExt_dpHakoniwaTornado.xml");
