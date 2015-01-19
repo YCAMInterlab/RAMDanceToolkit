@@ -429,27 +429,40 @@ void ofxKsmrStepManager::sendBytesOnline(unsigned char *buffer, int length){
 	if (useOsc){
 		ofxOscMessage m;
 		m.setAddress("/dp/hakoniwa/Ksmrmotor");
+		m.addIntArg(length);
 
-		//上位8ビットにlength
-		//残り上位から順番にバイト列を格納
-		int32_t data  = 0;
-		data += (length << 24);
+		if (sendByteSimply){
 
-		bool notAdd = false;
-		for (int i = 1;i < length + 1;i++){
-			data += buffer[i - 1] << (24 - 8 * i);
-			notAdd = true;
-
-			if (i % 4 == 3){
-				m.addIntArg(data);
-				data = 0;
-				notAdd = false;
+			for (int i = 0;i < length;i++){
+				m.addIntArg(int(buffer[i]));
 			}
+
+			sender.sendMessage(m);
+			
+		}else{
+
+			//上位8ビットにlength
+			//残り上位から順番にバイト列を格納
+			int32_t data  = 0;
+			data += (length << 24);
+
+			bool notAdd = false;
+			for (int i = 1;i < length + 1;i++){
+				data += buffer[i - 1] << (24 - 8 * i);
+				notAdd = true;
+
+				if (i % 4 == 3){
+					m.addIntArg(data);
+					data = 0;
+					notAdd = false;
+				}
+			}
+			if (notAdd) m.addIntArg(data);
+
+			
+			sender.sendMessage(m);
+
 		}
-		if (notAdd) m.addIntArg(data);
-
-
-		sender.sendMessage(m);
 	}
 
 }

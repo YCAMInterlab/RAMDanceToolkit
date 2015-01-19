@@ -24,6 +24,7 @@ class ofxKsmrStepManager{
 public:
 	ofxKsmrStepManager(){
 		useOsc = false;
+		sendByteSimply = false;
 	}
 
 	void setup(string portName,int baud);
@@ -76,6 +77,7 @@ public:
 	ofSerial serial;
 
 	bool			useOsc;
+	bool			sendByteSimply;
 
 	ofxOscSender	sender;
 

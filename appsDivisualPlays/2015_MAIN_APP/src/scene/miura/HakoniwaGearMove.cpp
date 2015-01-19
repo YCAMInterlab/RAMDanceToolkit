@@ -54,23 +54,23 @@ void HakoniwaGearMove::setupControlPanel(){
 void HakoniwaGearMove::setup(){
     
     stepManager.setupOsc("192.168.20.51", 8528);
-    
+	stepManager.sendByteSimply = true;
+
     stepManager.addStepper("unit1", 400, 0);
     stepManager.addStepper("unit2", 400, 1);
     stepManager.addStepper("unit3", 400, 2);
     stepManager.resetAllDevices();
-    
-    stepManager.setParam_maxSpeed(0x0075);
-    stepManager.setParam_Accel(0x0010);
-    stepManager.setParam_Decel(0x0010);
-    stepManager.setMicroSteps(7);
+
+	stepManager.setupEasyFromPreset(KSMR_STEP_P_PMSA_B56D5);
+
+//    stepManager.setParam_maxSpeed(0x0075);
+//    stepManager.setParam_Accel(0x0010);
+//    stepManager.setParam_Decel(0x0010);
+//    stepManager.setMicroSteps(7);
     
     unsigned char sig[2];
-    
-//    stepManager.setupEasyFromPreset(KSMR_STEP_P_PMSA_B56D5);
-//    stepManager.setupEasyFromPreset(KSMR_STEP_SM_42BYG011_25);
-//    stepManager.setupEasy();
-    stepManager.setMicroSteps(5);
+
+	stepManager.setMicroSteps(5);
     
     stepManager.setStepperAll(true);
     stepManager.absPos(0);
