@@ -73,6 +73,7 @@ void ramMotionExtractor::update(){
 			ramMotionPort *mp = new ramMotionPort(id);
 			pushPort(mp, m.getArgAsInt32(0));
 
+			refleshActorFromList();
 		}
 
 		if (m.getAddress() == myAddr+"pop"){// 名前、ID
