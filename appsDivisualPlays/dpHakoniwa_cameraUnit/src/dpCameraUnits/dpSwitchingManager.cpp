@@ -96,8 +96,8 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->type		= HAKO_WORM;
 	hakoniwas.back()->CVPreset	= "";
 	hakoniwas.back()->sourceCh	= 4;
-	hakoniwas.back()->sceneNames.push_back("H:");
-	hakoniwas.back()->sceneNames.push_back("V:dp");
+	hakoniwas.back()->sceneNames.push_back("H:dpHWorm");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisWorm");
 
 #pragma mark ★ステージ
 	hakoniwas.push_back(new hakoniwaPresets());
