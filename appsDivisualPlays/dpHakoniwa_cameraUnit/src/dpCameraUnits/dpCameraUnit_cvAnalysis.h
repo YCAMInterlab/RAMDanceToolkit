@@ -54,6 +54,7 @@ public:
 	bool mEnableMean;
 	bool mEnableHistgram;
 	bool mEnablePixelate;
+	bool mEnablePixelateRGB;
 	bool mViewSource;
 	
 	bool mParamCF_Simplify;
@@ -64,6 +65,7 @@ public:
 	float mParamCF_MaxBlobNum;
 	int mParamPixelate_ResX;
 	int mParamPixelate_ResY;
+	int mParamPixelate_thr;
 	ofFloatColor mParamCF_targColor;
 
 	ofImage *imgRefColor, *imgRefGray;
@@ -81,6 +83,7 @@ public:
 	vector <string> *oscListPtr;
 
 	vector <bool> debug_px;
+	vector <bool> debug_rgb[3];
 };
 
 #endif /* defined(__dpHakoniwa_cameraUnit__dpCameraUnit_cvAnalysis__) */

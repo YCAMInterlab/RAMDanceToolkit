@@ -26,6 +26,7 @@
 
 //Miura Scenes
 #include "HakoniwaTheta.h"
+#include "HakoniwaGearMove.h"
 
 //Kezzar Scenes
 #include "dpHakoniwaServoPendulum.h"
@@ -52,7 +53,9 @@
 #include "hakoVisPLink_Prism.h"
 
 //konno Scenes
-#include "dpHakoniwaIce.h"
+//#include "dpHakoniwaIce.h"
+#include "frozenIce.h"
+#include "magnetLooper.h"
 
 
 class testApp : public ramBaseApp
@@ -123,11 +126,16 @@ public:
     dpHakoVisVecLineCircle vecLineCircle;
 
     // ice
-    dpHakoniwaIce hakoniwaIce;
+    frozenIce dpHfrozenIce;
     dp3DDanceMap danceMap;
     
     // tornado
     dpHakoniwaTornado hakoniwaTornado;
     dpHakoVisTornado  visTornado;
-
+    
+    // Gear
+    HakoniwaGearMove  hakoniwaGear;
+    
+    
+    magnetLooper dpHWorm;
 };

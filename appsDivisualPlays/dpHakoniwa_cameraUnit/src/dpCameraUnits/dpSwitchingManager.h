@@ -42,8 +42,9 @@ enum hakoniwaType{
 	HAKO_WORM,
 	HAKO_STAGE,
 
-//	HAKO_GEAR,
 	HAKO_STRUGGLE,
+	HAKO_GEAR,
+	HAKO_TORNADO,
 
 	HAKO_TESTA,
 	HAKO_TESTB,
@@ -106,6 +107,8 @@ public:
 	void enableDisplay(hakoniwaType type,int displayNum,bool newHako);
 	void disableHakoniwa(hakoniwaType type);
 	void disableDisplay(int displayNum);
+
+	void sendCurrentHakoniwa();
 
 	bool isSlave;
 

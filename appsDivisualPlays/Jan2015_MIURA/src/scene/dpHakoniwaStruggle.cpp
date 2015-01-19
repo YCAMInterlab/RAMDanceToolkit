@@ -17,7 +17,7 @@ void dpHakoniwaStruggle::setupControlPanel(){
 
 void dpHakoniwaStruggle::setup(){
  
-    mSender.setup("192.168.20.53",8528);
+    mSender.setup("192.168.20.",8528);
 }
 
 void dpHakoniwaStruggle::sendOsc(){

@@ -16,6 +16,9 @@ dpCameraUnit_cvFX::dpCameraUnit_cvFX(){
 //	mGui.addLabel("GrayChannel");
 //	mGui.addSpacer();
 	mGui.addToggle("BackGround",&mEnableBackground);
+	mGui.addToggle("RunningBack", &mEnableRunningBackground);
+	mGui.addSlider("LearnTime", 0.0, 2000.0, &mParam_RB_LearnTime)->setValue(900.0);
+	mGui.addSlider("Threshold", 0.0, 255.0, &mParam_RB_Threshold)->setValue(10.0);
 	mGui.addToggle("Warp", &mEnableWarpPerspective);
 	mGui.addToggle("Blur", &mEnableBlur);
 	mGui.addSlider("BlurSize", 0.0, 40.0, &mParam_Blur);
@@ -70,6 +73,8 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 		(pix.getWidth() != mSource.getWidth()) ||
 		(pix.getHeight() != mSource.getHeight())){
 		mSource.allocate(pix.getWidth(), pix.getHeight(), OF_IMAGE_COLOR);
+		mSourceTmp.allocate(pix.getWidth(), pix.getHeight(), OF_IMAGE_COLOR);
+
 		mGraySource.allocate(pix.getWidth(), pix.getHeight(), OF_IMAGE_GRAYSCALE);
 		mGraySource_background.allocate(pix.getWidth(), pix.getHeight(), OF_IMAGE_GRAYSCALE);
 		mGraySource_tmp.allocate(pix.getWidth(), pix.getHeight(), OF_IMAGE_GRAYSCALE);
@@ -91,6 +96,18 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 			
 		}else{
 			mBackgroundNeedsReflesh = true;
+		}
+
+		if (mEnableRunningBackground){
+			
+//			backGround.setLearningRate(mParam_RB_LearnTime);
+			backGround.setThresholdValue(10);
+			backGround.update(mSource, mGraySource);
+			swap(mSource, mSourceTmp);
+			mSource.update();
+//			ofxCv::convertColor(mSourceTmp, mGraySource, CV_RGB2GRAY);
+		}else{
+
 		}
 
 		if (mEnableWarpPerspective){
