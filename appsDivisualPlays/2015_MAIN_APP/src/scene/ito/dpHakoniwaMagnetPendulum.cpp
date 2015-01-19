@@ -56,8 +56,8 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
 
 void dpHakoniwaMagnetPendulum::setup() {
     
-//    mSenderOnOff.setup("192.168.20.52",8528);
-//    mSenderInverse.setup("192.168.20.72", 8528);
+    mSenderOnOff.setup("192.168.20.52",8528);
+    mSenderInverse.setup("192.168.20.72", 8528);
 
     bHideNodeView = true;
     
@@ -163,7 +163,7 @@ void dpHakoniwaMagnetPendulum::update() {
         bHideNodeView = !bHideNodeView;
     }
     
-//    sendOsc();
+    sendOsc();
     
 }
 
