@@ -49,7 +49,7 @@ void SceneMasterIncrement::enter()
     
     mCam.enableMouseInput();
     
-    mAdditions.assign(MH::NUM_VALVE_PINS, 0.f);
+    mAdditions.assign(MH::kNumValvePins, 0.f);
 }
 
 void SceneMasterIncrement::exit()
@@ -66,12 +66,11 @@ void SceneMasterIncrement::update(ofxEventMessage& m)
     }
     if (m.getAddress() == kOscAddrCameraUnitMean) {
         if (m.getNumArgs() == 4) {
-            ofVec4f mean;
-            mean.x = m.getArgAsInt32(0);
-            mean.y = m.getArgAsInt32(1);
-            mean.z = m.getArgAsInt32(2);
-            mean.w = m.getArgAsInt32(3);
-            mMean.update(mean);
+            mMean.mMean.x = m.getArgAsInt32(0);
+            mMean.mMean.y = m.getArgAsInt32(1);
+            mMean.mMean.z = m.getArgAsInt32(2);
+            mMean.mMean.w = m.getArgAsInt32(3);
+            mMean.update();
         }
     }
     if (m.getAddress() == kOscAddrCameraUnitVector) {

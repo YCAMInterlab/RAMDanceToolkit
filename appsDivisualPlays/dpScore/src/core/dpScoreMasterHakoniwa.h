@@ -16,21 +16,19 @@ class ofxUITabBar;
 
 class MasterHakoniwa final {
 public:
-    enum ValvePins {
-        VALVE_PIN_0 = 2,
-        VALVE_PIN_1 = 3,
-        VALV_PINE_2 = 4,
-        VALVE_PIN_3 = 3,
-        VALVE_PIN_4 = 4,
-        VALV_PINE_5 = 5,
-        NUM_VALVE_PINS,
-    };
-    enum PumpPins {
-        PUMP_PIN_FORWARD = 8,
-        PUMP_PIN_BACK = 9,
-        NUM_PUMP_PINS,
+    static const int kNumValvePins{6};
+    static const int kNumPumpPins{2};
+    
+    const int kValvePins[kNumValvePins]{
+        2, 3, 4, 5, 6, 7,
     };
     
+    const int kPumpPins[kNumPumpPins]{
+        8, 9,
+    };
+    
+    const int kPumpPinForward{kPumpPins[0]};
+    const int kPumpPinBack{kPumpPins[1]};
     
     void initialize();
     void shutdown();
@@ -71,18 +69,26 @@ private:
         int pin{0};
     };
     
+    struct Pump {
+        bool opening{false};
+        float duration{8.f};
+        float idle{2.f};
+        float openedTime{0.f};
+        int pin{0};
+    };
+    
     const int kUpdateFrames{10};
     
     ofxOscSender mMasterHakoniwaOscServer;
     ofxOscSender mCameraUnitOscServer;
     
     vector<Valve> mValves;
+    vector<Pump> mPumps;
     
     float mOpenDuration{0.5f};
     bool mEnable{false};
     bool mOpenPumpForward{false};
     bool mOpenPumpBack{false};
-    bool mPumpOn{false};
 };
 
 typedef MasterHakoniwa MH;

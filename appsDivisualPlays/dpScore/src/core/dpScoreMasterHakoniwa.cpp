@@ -46,11 +46,19 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
 
 void MasterHakoniwa::initialize()
 {
-    mValves.assign(NUM_VALVE_PINS, Valve());
+    mValves.assign(kNumValvePins, Valve());
     
     for (int i=0; i<mValves.size(); i++) {
-        mValves.at(i).pin = VALVE_PIN_0 + i;
+        mValves.at(i).pin = kValvePins[i];
     }
+    
+    mPumps.assign(kNumPumpPins, Pump());
+    mPumps.at(0).duration = 8.f;
+    mPumps.at(0).idle = 2.f;
+    mPumps.at(1).duration = 7.f;
+    mPumps.at(1).idle = 3.f;
+    mPumps.at(0).pin = kPumpPinForward;
+    mPumps.at(1).pin = kPumpPinBack;
     
     mMasterHakoniwaOscServer.setup(kHostNameMasterHakoniwa,
                                    kPortNumberMasterHakoniwa);
@@ -70,19 +78,21 @@ void MasterHakoniwa::update()
     if (ofGetFrameNum() % kUpdateFrames)
     
     if (!mEnable) {
-        sendPin(PUMP_PIN_FORWARD, mOpenPumpForward);
-        sendPin(PUMP_PIN_BACK, mOpenPumpBack);
+        sendPin(kPumpPinForward, mOpenPumpForward);
+        sendPin(kPumpPinBack, mOpenPumpBack);
         return;
     }
     
+    const float t = ofGetElapsedTimef();
+
     for (auto& v : mValves) {
         if (v.doOpen) {
             v.doOpen = false;
             v.opening = true;
-            v.openedTime = ofGetElapsedTimef();
+            v.openedTime = t;
             if (mEnable) sendPin(v.pin, v.opening);
         }
-        else if (ofGetElapsedTimef()-v.openedTime >= mOpenDuration) {
+        else if (t - v.openedTime >= mOpenDuration) {
             v.opening = false;
         }
         if (!v.opening) {
@@ -90,25 +100,47 @@ void MasterHakoniwa::update()
         }
     }
     
-    const int loop{360};
-    const int dur{120};
-    if (ofGetFrameNum() % loop < dur) {
-        for (int i=0; i<NUM_PUMP_PINS; i++) {
-            mPumpOn = true;
-            if (mEnable) sendPin(i+PUMP_PIN_FORWARD, mPumpOn);
+    for (auto& p : mPumps) {
+        const float d = t - p.openedTime;
+        if (d < p.duration) {
+            p.opening = true;
+            sendPin(p.pin, p.opening);
         }
-    }
-    else {
-        for (int i=0; i<NUM_PUMP_PINS; i++) {
-            mPumpOn = false;
-            sendPin(i+PUMP_PIN_FORWARD, mPumpOn);
+        else if (d >= p.duration && d < p.duration + p.idle) {
+            p.opening = false;
+            sendPin(p.pin, p.opening);
         }
-    }
+        else {
+            p.openedTime = t;
+        }
+    };
 }
 
 void MasterHakoniwa::draw()
 {
-    
+    ofPushMatrix();
+    ofTranslate(12.f, 30.f);
+    const float lineH{12.f};
+    ofTranslate(0.f, lineH);
+    for (auto& v : mValves) {
+        ofTranslate(0.f, lineH);
+        stringstream ss;
+        ss << boolalpha << "valve " << v.pin << ": " << v.opening
+        << ", " << ofToString(ofGetElapsedTimef() - v.openedTime, 1)  << "/"
+        << mOpenDuration;
+        ofDrawBitmapString(ss.str(), ofPoint::zero());
+    }
+    ofTranslate(0.f, lineH);
+    for (auto& p : mPumps) {
+        ofTranslate(0.f, lineH);
+        stringstream ss;
+        ss << boolalpha << "pump " << p.pin << " : " << p.opening
+        << ", " << ofToString(ofGetElapsedTimef() - p.openedTime, 1)  << "/"
+        << p.duration << "/" << p.idle << endl;
+        ofDrawBitmapString(ss.str(), ofPoint::zero());
+        
+    }
+    ofPopMatrix();
 }
 
 void MasterHakoniwa::turnOnValve(int index)
@@ -120,11 +152,11 @@ void MasterHakoniwa::turnOnValve(int index)
 
 void MasterHakoniwa::turnOffAllPins()
 {
-    for (int i=0; i<NUM_VALVE_PINS; i++) {
-        sendPin(i+VALVE_PIN_0, false);
+    for (int i=0; i<kNumValvePins; i++) {
+        sendPin(kValvePins[i], false);
     }
-    for (int i=0; i<NUM_PUMP_PINS; i++) {
-        sendPin(i+PUMP_PIN_FORWARD, false);
+    for (int i=0; i<kNumPumpPins; i++) {
+        sendPin(kPumpPins[i], false);
     }
 }
 

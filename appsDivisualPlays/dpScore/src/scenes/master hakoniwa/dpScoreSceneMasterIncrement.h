@@ -13,6 +13,7 @@
 #include "ofxMotioner.h"
 #include "ofxOsc.h"
 #include "dpScoreMasterHakoniwa.h"
+#include "dpScoreAnalyzeMean.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -36,52 +37,6 @@ struct MasterIncrementNode final : public ofxMot::Node {
     ofVec3f prevPos;
     float totalDistance{0.f};
     bool vecInited{false};
-};
-
-class AnalyzeMean {
-public:
-    void update(const ofVec4f& mean)
-    {
-        mMean = mean;
-        
-        mMeanAddtion.x += ::fabsf((mMean.x - mMeanPrev.x)) * 0.01;
-        mMeanAddtion.y += ::fabsf((mMean.y - mMeanPrev.y)) * 0.01;
-        mMeanAddtion.z += ::fabsf((mMean.z - mMeanPrev.z)) * 0.01;
-        mMeanAddtion.w += ::fabsf((mMean.w - mMeanPrev.w)) * 0.01;
-        
-        mMeanPrev = mMean;
-        
-        if (mMeanAddtion.x >= mMeanLimit) {
-            mMeanAddtion.x = 0.f;
-            const int which = ofRandom(2);
-            const int scene = ofClamp(which * 3 + 0, 0, kNumScenes);
-            getMH().sendScene(kSceneNames[scene], true, true, true, true, true);
-            getMH().sendScene(kSceneNames[mPrevScene], false, true, true, true, true);
-            mPrevScene = scene;
-        }
-        if (mMeanAddtion.y >= mMeanLimit) {
-            mMeanAddtion.y = 0.f;
-            const int which = ofRandom(2);
-            const int scene = ofClamp(which * 3 + 1, 0, kNumScenes);
-            getMH().sendScene(kSceneNames[scene], true, true, true, true, true);
-            getMH().sendScene(kSceneNames[mPrevScene], false, true, true, true, true);
-            mPrevScene = scene;
-        }
-        if (mMeanAddtion.z >= mMeanLimit) {
-            mMeanAddtion.z = 0.f;
-            const int which = ofRandom(2);
-            const int scene = ofClamp(which * 3 + 2, 0, kNumScenes);
-            getMH().sendScene(kSceneNames[scene], true, true, true, true, true);
-            getMH().sendScene(kSceneNames[mPrevScene], false, true, true, true, true);
-            mPrevScene = scene;
-        }
-    }
-    
-    ofVec4f mMean;
-    ofVec4f mMeanPrev;
-    ofVec4f mMeanAddtion;
-    float mMeanLimit{5};
-    int mPrevScene{0};
 };
 
 class SceneMasterIncrement final : public SceneBodyBase<MasterIncrementNode> {

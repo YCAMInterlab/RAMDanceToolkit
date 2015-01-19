@@ -262,6 +262,10 @@ void ofApp::draw()
     
     mSceneManager.draw();
     
+#ifdef DP_MASTER_HAKONIWA
+    getMH().draw();
+#endif
+    
     if (mInvert) {
         ofPushStyle();
         glEnable(GL_BLEND);
