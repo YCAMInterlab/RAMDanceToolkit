@@ -114,12 +114,23 @@ void ramMotionExtractor::update(){
 		}
 
 		if (m.getAddress() == myAddr+"/actorList"){
-			vector<string> actList;
+
+			vector<string> lst;
 			for (int i = 0;i < m.getNumArgs();i++){
-				actList.push_back(m.getArgAsString(i));
+				lst.push_back(m.getArgAsString(i));
 			}
-			actorList->reshuffle(actList);
+
+			if (lst.size() == 2) lst.push_back("Dummy");
+
+			mGui->removeWidget(actorList);
+			actorList = mGui->addSortableList("actorList", lst);
+
+			mGui->autoSizeToFitWidgets();
+			parentGui->autoSizeToFitWidgets();
+
+			actorList->reshuffle(lst);
 			refleshActorFromList();
+
 		}
 	}
 
@@ -140,6 +151,11 @@ void ramMotionExtractor::update(){
 		mGui->autoSizeToFitWidgets();
 		parentGui->autoSizeToFitWidgets();
 
+	}
+
+	cout << "======" << endl;
+	for (int i = 0;i < actorList->getListItems().size();i++){
+		cout << actorList->getListItems()[i]->getName() << endl;
 	}
 
 	lastNumNodeArray = ramActorManager::instance().getNumNodeArray();
