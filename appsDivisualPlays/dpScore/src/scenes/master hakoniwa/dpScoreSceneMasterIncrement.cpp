@@ -26,9 +26,14 @@ void SceneMasterIncrement::initialize()
     dpDebugFunc();
     
     mUICanvas = new ofxUICanvas();
+    mUICanvas->setColorBack(MH::kBackgroundColor);
     mUICanvas->setName(getName());
     mUICanvas->addLabel(getName());
     mUICanvas->addSpacer();
+    mUICanvas->addSlider("Dist Limit", 500.f, 3000.f, &mLimit);
+    mUICanvas->addSpacer();
+    mUICanvas->addSlider("Mean Limit", 0.1f, 100.f, &mMean.mMeanLimit);
+    mUICanvas->addSlider("Scene change span", 0.f, 60.f * 3.f, &mMean.mMinSetSceneTime);
     
     mCam.disableMouseInput();
 }
@@ -61,15 +66,11 @@ void SceneMasterIncrement::exit()
 
 void SceneMasterIncrement::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kOscAddrMotioner) {
-        
-    }
     if (m.getAddress() == kOscAddrCameraUnitMean) {
-        if (m.getNumArgs() == 4) {
-            mMean.mMean.x = m.getArgAsInt32(0);
-            mMean.mMean.y = m.getArgAsInt32(1);
-            mMean.mMean.z = m.getArgAsInt32(2);
-            mMean.mMean.w = m.getArgAsInt32(3);
+        if (m.getNumArgs() == mMean.mMean.DIM) {
+            for (int i=0; i<mMean.mMean.DIM; i++) {
+                mMean.mMean[i] = m.getArgAsInt32(i);
+            }
             mMean.update();
         }
     }
@@ -79,52 +80,45 @@ void SceneMasterIncrement::update(ofxEventMessage& m)
             ofVec2f v(m.getArgAsFloat(2*i+0), m.getArgAsFloat(2*i+1));
         }
     }
-    
-    if (mPrevOfFrame == ofGetFrameNum()) return;
-    
-    mFrameNum++;
-    mPrevOfFrame = ofGetFrameNum();
-    
-    for (int i=0; i<getNumSkeletons(); i++) {
-        auto skl = getSkeleton(i);
-        if (i<mAdditions.size()) {
-            auto& a = mAdditions.at(i);
-            a = 0.f;
-            for (auto& n : skl->getJoints()) {
-                n.update();
-                a += n.totalDistance;
-            }
-            if (a >= mLimit) {
-                getMH().turnOnValve(i);
-                for (auto& n : skl->getJoints()) n.totalDistance = 0.f;
+    if (m.getAddress() == kOscAddrMotioner) {
+        if (mAdditions.empty() == false && getNumSkeletons() >= 1) {
+            for (int i=0; i<getNumSkeletons(); i++) {
+                auto skl = getSkeleton(i);
+                if (i<mAdditions.size()) {
+                    auto& a = mAdditions.at(i);
+                    a = 0.f;
+                    for (int k=0; k<skl->getNumJoints(); k++) {
+                        auto& n = skl->getJoint(k);
+                        n.update();
+                        a += n.totalDistance;
+                    }
+                    if (a >= mLimit) {
+                        getMH().turnOnValve(i);
+                        for (auto& n : skl->getJoints()) n.totalDistance = 0.f;
+                    }
+                }
             }
         }
     }
-    
-    
 }
 
 void SceneMasterIncrement::draw()
 {
-    for (int i=0; i<getNumSkeletons(); i++) {
-        auto skl = getSkeleton(i);
-        
-        mCam.begin();
-        ofPushMatrix();
-        ofNoFill();
-        ofTranslate(getLineUped(kW, i, getNumSkeletons()) , -300.f, 0.f);
-        ofxMot::drawSkeleton(skl);
-        ofPopMatrix();
-        mCam.end();
-    }
-    
-    ofSetColor(ofColor::white);
+    ofSetColor(MH::kTextColor);
     ofPushMatrix();
-    alignedTranslate(0.f, 200.f);
+    alignedTranslate(getMH().mTextLeftCorner);
+    string name{getName()};
+    ofStringReplace(name, "dp::score::Scene", "");
+    stringstream ss;
+    ss << name << endl << endl
+    << mMean.mMean << endl
+    << mMean.mMeanAddtion << endl;
+    ofDrawBitmapString(ss.str(), 0.f, 0.f);
+    ofTranslate(0.f, MH::kTextSpacing * 6.f);
     int i=0;
     for (auto f : mAdditions) {
         ofPushMatrix();
-        ofTranslate(20.f, 20.f * i + 70.f);
+        ofTranslate(0.f, 12.f * i);
         stringstream ss;
         ss << boolalpha << getMH().getIsOpeningValve(i)
         << ": " << ofToString(f, 3) + "/" + ofToString(mLimit);
@@ -132,10 +126,6 @@ void SceneMasterIncrement::draw()
         ofPopMatrix();
         i++;
     }
-    stringstream ss;
-    ss << mMean.mMean << " / " << mMean.mMeanAddtion << endl;
-    ss << kSceneNames[mMean.mPrevScene] << endl;
-    ofDrawBitmapString(ss.str(), 20.f, 30.f);
     ofPopMatrix();
 }
 

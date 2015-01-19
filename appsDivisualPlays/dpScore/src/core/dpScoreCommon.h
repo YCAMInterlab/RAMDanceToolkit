@@ -49,25 +49,14 @@ extern const string kOscAddrCameraUnitMean;
 
 extern const string kOscAddrMotioner;
 
+extern const string kEventAddrChangeScene;
+
 extern const string kSettingsDir;
 extern const string kSettingsPrefix;
 
 extern const int kNumCameraunitVectors;
 
 extern const string kFontPath;
-
-#ifdef DP_MASTER_HAKONIWA
-extern const string kHostNameMasterHakoniwa;
-extern const int kPortNumberMasterHakoniwa;
-
-extern const string kHostNameCameraUnit;
-extern const int kPortNumberCameraUnit;
-
-extern const int kNumScenes;
-extern const string kSceneNames[];
-
-extern const string kOscAddrRamSetScene;
-#endif
 
 string demangle(const char* name);
 
@@ -106,6 +95,16 @@ ofVec3f randVec3f();
 ofVec3f project(const ofVec3f& obj);
 ofVec3f unproject(const ofVec2f& screen);
 
+template<class SceneClass>
+void notifyChangeScene()
+{
+    ofxEventMessage m;
+    m.setAddress(kEventAddrChangeScene);
+    const string className = getClassName<SceneClass>();
+    m.addStringArg(className);
+    ofxNotifyEvent(m);
+}
+
 namespace color {
     extern const ofColor kMain;
     extern const ofColor kPalePinkLight;
@@ -125,6 +124,18 @@ string getClassName()
 {
     return demangle(typeid(T).name());
 }
+
+typedef unsigned char byte;
+
+union floatByte {
+    float f;
+    byte b[4];
+};
+
+union intByte {
+    int i;
+    byte b[4];
+};
 
 DP_SCORE_NAMESPACE_END
 

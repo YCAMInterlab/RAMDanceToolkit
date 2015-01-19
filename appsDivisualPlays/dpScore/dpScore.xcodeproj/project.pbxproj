@@ -110,7 +110,6 @@
 		D2B5BB3D1A6690EF009B0F1E /* dpScoreSceneBodyBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B5BB3B1A6690EF009B0F1E /* dpScoreSceneBodyBox.cpp */; };
 		D2C4DE7D1A6286E400342E4F /* dpScoreSceneBodyLines.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C4DE7B1A6286E400342E4F /* dpScoreSceneBodyLines.cpp */; };
 		D2CE423F1A6BC3DE001644F2 /* dpScoreMasterHakoniwa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2CE423D1A6BC3DE001644F2 /* dpScoreMasterHakoniwa.cpp */; };
-		D2CE42441A6BDD6D001644F2 /* dpScoreAnalyzeMean.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2CE42421A6BDD6D001644F2 /* dpScoreAnalyzeMean.cpp */; };
 		D2E2B73F1A4A4FB500570C58 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B7381A4A4FB500570C58 /* tinyxml.cpp */; };
 		D2E2B7401A4A4FB500570C58 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B73A1A4A4FB500570C58 /* tinyxmlerror.cpp */; };
 		D2E2B7411A4A4FB500570C58 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B73B1A4A4FB500570C58 /* tinyxmlparser.cpp */; };
@@ -209,6 +208,8 @@
 		D2E8918D1A6B586C0047B75A /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */; };
 		D2E891901A6B586C0047B75A /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		D2E8919A1A6B5B460047B75A /* dpScoreSceneMasterIncrement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E891981A6B5B460047B75A /* dpScoreSceneMasterIncrement.cpp */; };
+		D2FE53C21A6CBDAD00B01E98 /* dpScoreSceneMasterDecrement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2FE53C11A6CBDAD00B01E98 /* dpScoreSceneMasterDecrement.cpp */; };
+		D2FE53C51A6D43EE00B01E98 /* dpScoreAnalyzeMean.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2FE53C31A6D43EE00B01E98 /* dpScoreAnalyzeMean.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -498,8 +499,6 @@
 		D2C4DE7C1A6286E400342E4F /* dpScoreSceneBodyLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyLines.h; sourceTree = "<group>"; };
 		D2CE423D1A6BC3DE001644F2 /* dpScoreMasterHakoniwa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreMasterHakoniwa.cpp; sourceTree = "<group>"; };
 		D2CE423E1A6BC3DE001644F2 /* dpScoreMasterHakoniwa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreMasterHakoniwa.h; sourceTree = "<group>"; };
-		D2CE42421A6BDD6D001644F2 /* dpScoreAnalyzeMean.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreAnalyzeMean.cpp; sourceTree = "<group>"; };
-		D2CE42431A6BDD6D001644F2 /* dpScoreAnalyzeMean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreAnalyzeMean.h; sourceTree = "<group>"; };
 		D2E2B7381A4A4FB500570C58 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		D2E2B7391A4A4FB500570C58 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		D2E2B73A1A4A4FB500570C58 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
@@ -511,7 +510,10 @@
 		D2E891951A6B586C0047B75A /* dpScore copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "dpScore copy2-Info.plist"; path = "/Users/falcon/Documents/of_v0.8.4_osx_release/RAMDanceToolkit/appsDivisualPlays/dpScore/dpScore copy2-Info.plist"; sourceTree = "<absolute>"; };
 		D2E891981A6B5B460047B75A /* dpScoreSceneMasterIncrement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneMasterIncrement.cpp; sourceTree = "<group>"; };
 		D2E891991A6B5B460047B75A /* dpScoreSceneMasterIncrement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneMasterIncrement.h; sourceTree = "<group>"; };
-		D2FE53BF1A6CAD9E00B01E98 /* dpScoreAnalyzeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreAnalyzeBase.h; sourceTree = "<group>"; };
+		D2FE53C01A6CBD9E00B01E98 /* dpScoreSceneMasterDecrement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneMasterDecrement.h; sourceTree = "<group>"; };
+		D2FE53C11A6CBDAD00B01E98 /* dpScoreSceneMasterDecrement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneMasterDecrement.cpp; sourceTree = "<group>"; };
+		D2FE53C31A6D43EE00B01E98 /* dpScoreAnalyzeMean.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpScoreAnalyzeMean.cpp; path = src/scenes/dpScoreAnalyzeMean.cpp; sourceTree = SOURCE_ROOT; };
+		D2FE53C41A6D43EE00B01E98 /* dpScoreAnalyzeMean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpScoreAnalyzeMean.h; path = src/scenes/dpScoreAnalyzeMean.h; sourceTree = SOURCE_ROOT; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -903,6 +905,8 @@
 				D228B3831A5FC95C005F0404 /* dpScoreEvent.h */,
 				D2CE423D1A6BC3DE001644F2 /* dpScoreMasterHakoniwa.cpp */,
 				D2CE423E1A6BC3DE001644F2 /* dpScoreMasterHakoniwa.h */,
+				D2FE53C31A6D43EE00B01E98 /* dpScoreAnalyzeMean.cpp */,
+				D2FE53C41A6D43EE00B01E98 /* dpScoreAnalyzeMean.h */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -1033,9 +1037,8 @@
 			children = (
 				D2E891981A6B5B460047B75A /* dpScoreSceneMasterIncrement.cpp */,
 				D2E891991A6B5B460047B75A /* dpScoreSceneMasterIncrement.h */,
-				D2CE42421A6BDD6D001644F2 /* dpScoreAnalyzeMean.cpp */,
-				D2CE42431A6BDD6D001644F2 /* dpScoreAnalyzeMean.h */,
-				D2FE53BF1A6CAD9E00B01E98 /* dpScoreAnalyzeBase.h */,
+				D2FE53C11A6CBDAD00B01E98 /* dpScoreSceneMasterDecrement.cpp */,
+				D2FE53C01A6CBD9E00B01E98 /* dpScoreSceneMasterDecrement.h */,
 			);
 			path = "master hakoniwa";
 			sourceTree = "<group>";
@@ -1216,6 +1219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2E891131A6B586C0047B75A /* ofxUIBaseDraws.cpp in Sources */,
+				D2FE53C21A6CBDAD00B01E98 /* dpScoreSceneMasterDecrement.cpp in Sources */,
 				D2E891141A6B586C0047B75A /* ofxOscMessage.cpp in Sources */,
 				D2E891161A6B586C0047B75A /* ofxOscReceiver.cpp in Sources */,
 				D2E891181A6B586C0047B75A /* ofxUIMultiImageButton.cpp in Sources */,
@@ -1260,7 +1264,6 @@
 				D2E891501A6B586C0047B75A /* ofxUIDragableLabelButton.cpp in Sources */,
 				D2E891521A6B586C0047B75A /* ofxUITextArea.cpp in Sources */,
 				D2E891531A6B586C0047B75A /* dpScoreSceneManager.cpp in Sources */,
-				D2CE42441A6BDD6D001644F2 /* dpScoreAnalyzeMean.cpp in Sources */,
 				D2E891541A6B586C0047B75A /* ofxUISpacer.cpp in Sources */,
 				D2E891551A6B586C0047B75A /* ofxMotionerConstants.cpp in Sources */,
 				D2E891561A6B586C0047B75A /* ofxUIImageButton.cpp in Sources */,
@@ -1275,6 +1278,7 @@
 				D2E891651A6B586C0047B75A /* ofxMotionerUtils.cpp in Sources */,
 				D2E891661A6B586C0047B75A /* ofxUINumberDialer.cpp in Sources */,
 				D2E891671A6B586C0047B75A /* OscPrintReceivedElements.cpp in Sources */,
+				D2FE53C51A6D43EE00B01E98 /* dpScoreAnalyzeMean.cpp in Sources */,
 				D2E891681A6B586C0047B75A /* ofxUILabel.cpp in Sources */,
 				D2E8916A1A6B586C0047B75A /* ofxUISuperCanvas.cpp in Sources */,
 				D2E8916B1A6B586C0047B75A /* ofxUIMultiImageToggle.cpp in Sources */,

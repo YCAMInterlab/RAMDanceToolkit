@@ -10,19 +10,20 @@
 #define __dpScore__dpScoreAnalyzeMean__
 
 #include "dpScoreCommon.h"
-#include "dpScoreMasterHakoniwa.h"
-#include "dpScoreAnalyzeBase.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-struct AnalyzeMean final : public AnalyzeBase {
-    void update() override;
+class AnalyzeMean {
+public:
+    void update();
     
     ofVec4f mMean;
     ofVec4f mMeanPrev;
     ofVec4f mMeanAddtion;
-    float mMeanLimit{20};
+    float mMeanLimit{5.f};
     int mPrevScene{0};
+    float mPrevSetSceneTime{0.f};
+    float mMinSetSceneTime{0.f};
 };
 
 DP_SCORE_NAMESPACE_END
