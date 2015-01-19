@@ -47,6 +47,7 @@ public:
 
 	void pushPort(ramMotionPort *mp, int actorId = -1);
 	void popPort(ramNodeFinder &nf);
+	void refleshActorFromList();
 
 	vector<ramMotionPort*>	mMotionPort;
 protected:

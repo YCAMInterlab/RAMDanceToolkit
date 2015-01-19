@@ -81,6 +81,8 @@ void ramMotionExtractor::update(){
 			nf.set(m.getArgAsString(0), m.getArgAsInt32(0));
 			popPort(nf);
 
+			refleshActorFromList();
+
 		}
 
 		if (m.getAddress() == myAddr+"clear"){
@@ -173,6 +175,8 @@ void ramMotionExtractor::draw(){
 void ramMotionExtractor::guiEvent(ofxUIEventArgs &e){
 	ofxUIWidget* w = e.widget;
 
+	cout << "EV :" << w->getName() << endl;
+
 	if (w->getName() == "PushPort"){
 		if (w->getState() == OFX_UI_STATE_DOWN){
 			ramMotionPort* mp = new ramMotionPort(ramActorManager::instance().getLastSelectedNodeIdentifer());
@@ -247,11 +251,15 @@ void ramMotionExtractor::popPort(ramNodeFinder &nf){
 
 void ramMotionExtractor::mouseReleased(ofMouseEventArgs &arg){
 
+	refleshActorFromList();
+
+}
+
+void ramMotionExtractor::refleshActorFromList(){
 	for (int i = 0;i < mMotionPort.size();i++){
 		if (mMotionPort[i]->mActorIndex < actorList->getListItems().size())
 			mMotionPort[i]->mFinder.name = actorList->getListItems()[mMotionPort[i]->mActorIndex]->getName();
 	}
-
 }
 
 #pragma mark - utility
