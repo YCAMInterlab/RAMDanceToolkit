@@ -24,8 +24,11 @@ public:
     void update();
     void draw();
     
+    void onEnabled();
+    void onDisabled();
+    
     inline string getName() const {
-        return "Looper";
+        return "dpHLooper";
     }
     
     //==========================================
@@ -64,6 +67,7 @@ public:
     //==========================================
     
 private:
+    void refleshState();
     
     ramMotionExtractor	motionExtractor;
     ofxOscSender sender;

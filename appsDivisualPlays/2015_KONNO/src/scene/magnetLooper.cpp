@@ -28,13 +28,33 @@ magnetLooper::magnetLooper(){
 
 //====================================
 void magnetLooper::setup(){
-    manualControl = false;
-    speedControl = false;
-    speedThreshold = 1.0;
-    speedThreshold2 = 1.0;
-    hantei = 0;
+//    manualControl = false;
+//    speedControl = true;
+//    speedThreshold = 0.10;
+//    speedThreshold2 = 0.10;
+//    hantei = 1;
 }
 //====================================
+
+void magnetLooper::onEnabled(){
+    manualControl = false;
+    speedControl = true;
+    looperStop = false;
+    looperStop2 = false;
+    speedThreshold = 0.20;
+    speedThreshold2 = 0.20;
+}
+
+
+void magnetLooper::onDisabled(){
+    manualControl = true;
+    looperStop = true;
+    looperStop2 = true;
+    speedControl = false;
+    
+    refleshState();
+    
+}
 
 void magnetLooper::setupControlPanel(){
     
@@ -91,114 +111,120 @@ void magnetLooper::update(){
     //oscを送る数を制限
     if(ofGetFrameNum() % 10 == 0){
         
-        
-        //====================================
-        //マニュアルコントロール
-        if(manualControl == true){
-            //oldしゃくとり
-            if(looperStop == true){
-                hantei = 1;
-            }else{
-                //hantei = 0;
-                hantei = 0;
-            }
-            //newしゃくとり
-            if(looperStop2 == true){
-                hantei2 = 1;
-            }else{
-                hantei2 = 0;
-            }
-        }
-        //====================================
-        
-        //====================================
-        //スピードコントロール
-        if(speedControl == true){
-            //oldしゃくとり
-            //ダンサー0の特定ノードの早さがspeedThreshold以上だったら
-            if(motionExtractor.getVelocitySpeedAt(0) > speedThreshold){
-                //magnetLooperに1（stop）を送る
-                hantei = 1;
-                cout << "looper1 stop!!"  << motionExtractor.getVelocitySpeedAt(0)<< "," << speedThreshold << endl;
-            }else{
-                //magnetLooperに0（keep run）を送る
-                //hantei = 0;
-                hantei = 0;
-                looperStop == false;
-                cout << "looper1 move!!" << motionExtractor.getVelocitySpeedAt(0)<< "," << speedThreshold  << endl;
-            }
-            
-            //newしゃくとり
-            //ダンサー0の特定ノードの早さがspeedThreshold2以上だったら
-            if(motionExtractor.getVelocitySpeedAt(1) > speedThreshold2){
-                //magnetLooper2に1（stop）を送る
-                hantei2 = 1;
-                looperStop2 == true;
-                //cout << "looper2 stop!!" << motionExtractor.getVelocitySpeedAt(1) << endl;
-            }else{
-                //magnetLooper2に0（keep run）を送る
-                //hantei = 0;
-                hantei2 = 0;
-                looperStop2 == false;
-                //cout << "looper2 move!!" <<  motionExtractor.getVelocitySpeedAt(1) << endl;
-            }
-        }
-        
-        //====================================
-        //しゃくとり1のスピード変更
-        if(looper1Speed == true){
-            looper1SpeedHantei = 1;
-        }else{
-            looper1SpeedHantei = 0;
-        }
-        //====================================
-        
-        //====================================
-        //しゃくとり2のスピード変更
-        if(looper2Speed == true){
-            looper2SpeedHantei = 1;
-        }else{
-            looper2SpeedHantei = 0;
-        }
-        //====================================
-        
-        //    /*=== OSC Send Example ===*/
-        //    ofxOscMessage m;
-        //    m.setAddress("/dp/hakoniwa/magnetLooper");
-        //    m.addIntArg(hantei);
-        ////    m.addFloatArg(motionExtractor.getVelocitySpeedAt(0)); //send node's speed
-        //    sender.sendMessage(m);
-        
-//        //old しゃくとり
-//        ofxOscMessage m;
-//        m.setAddress( "/dp/hakoniwa/magnetLooper" );
-//        m.addIntArg(hantei);
-//        m.addIntArg(0);
-//        sender.sendMessage(m);
-        
-        //old しゃくとり
-        ofxOscMessage m;
-        m.setAddress( "/dp/hakoniwa/magnetLooper" );
-        m.addIntArg(hantei);
-        m.addIntArg(looper1SpeedHantei);
-        m.addIntArg(int(looper1SpeedVal));
-        sender.sendMessage(m);
-        
-//        //new しゃくとり
-//        ofxOscMessage n;
-//        n.setAddress( "/dp/hakoniwa/magnetLooper2" );
-//        n.addIntArg(hantei2);
-//        n.addIntArg(0);
-//        sender2.sendMessage(n);
-        
-        //new しゃくとり
-        ofxOscMessage n;
-        n.setAddress( "/dp/hakoniwa/magnetLooper2" );
-        n.addIntArg(hantei2);
-        n.addIntArg(looper2SpeedHantei);
-        n.addIntArg(int(looper2SpeedVal));
-        sender2.sendMessage(n);
+        refleshState();
+ 
     }
+}
+
+void magnetLooper::refleshState(){
+    //====================================
+    //マニュアルコントロール
+    if(manualControl == true){
+        //oldしゃくとり
+        if(looperStop == true){
+            hantei = 1;
+        }else{
+            //hantei = 0;
+            hantei = 0;
+        }
+        //newしゃくとり
+        if(looperStop2 == true){
+            hantei2 = 1;
+        }else{
+            hantei2 = 0;
+        }
+    }
+    //====================================
+    
+    //====================================
+    //スピードコントロール
+    if(speedControl == true){
+        //oldしゃくとり
+        //ダンサー0の特定ノードの早さがspeedThreshold以上だったら
+        if(motionExtractor.getVelocitySpeedAt(0) > speedThreshold){
+            //if(motionExtractor.getNodeAt(0).getVelocity().x > speedThreshold2){
+            //magnetLooperに1（stop）を送る
+            hantei = 1;
+            cout << "looper1 stop!!"  << motionExtractor.getNodeAt(0).getVelocity().x<< "," << speedThreshold << endl;
+        }else{
+            //magnetLooperに0（keep run）を送る
+            //hantei = 0;
+            hantei = 0;
+            looperStop == false;
+            cout << "looper1 move!!" << motionExtractor.getNodeAt(0).getVelocity().x<< "," << speedThreshold  << endl;
+        }
+        
+        //newしゃくとり
+        //ダンサー0の特定ノードの早さがspeedThreshold2以上だったら
+        if(motionExtractor.getVelocitySpeedAt(1) > speedThreshold2){
+            //if(motionExtractor.getNodeAt(0).getVelocity().x > speedThreshold2){
+            //magnetLooper2に1（stop）を送る
+            hantei2 = 1;
+            looperStop2 == true;
+            //cout << "looper2 stop!!" << motionExtractor.getVelocitySpeedAt(1) << endl;
+        }else{
+            //magnetLooper2に0（keep run）を送る
+            //hantei = 0;
+            hantei2 = 0;
+            looperStop2 == false;
+            //cout << "looper2 move!!" <<  motionExtractor.getVelocitySpeedAt(1) << endl;
+        }
+    }
+    
+    //====================================
+    //しゃくとり1のスピード変更
+    if(looper1Speed == true){
+        looper1SpeedHantei = 1;
+    }else{
+        looper1SpeedHantei = 0;
+    }
+    //====================================
+    
+    //====================================
+    //しゃくとり2のスピード変更
+    if(looper2Speed == true){
+        looper2SpeedHantei = 1;
+    }else{
+        looper2SpeedHantei = 0;
+    }
+    //====================================
+    
+    //    /*=== OSC Send Example ===*/
+    //    ofxOscMessage m;
+    //    m.setAddress("/dp/hakoniwa/magnetLooper");
+    //    m.addIntArg(hantei);
+    ////    m.addFloatArg(motionExtractor.getVelocitySpeedAt(0)); //send node's speed
+    //    sender.sendMessage(m);
+    
+    //        //old しゃくとり
+    //        ofxOscMessage m;
+    //        m.setAddress( "/dp/hakoniwa/magnetLooper" );
+    //        m.addIntArg(hantei);
+    //        m.addIntArg(0);
+    //        sender.sendMessage(m);
+    
+    //old しゃくとり
+    ofxOscMessage m;
+    m.setAddress( "/dp/hakoniwa/magnetLooper" );
+    m.addIntArg(hantei);
+    m.addIntArg(looper1SpeedHantei);
+    m.addIntArg(int(looper1SpeedVal));
+    sender.sendMessage(m);
+    
+    //        //new しゃくとり
+    //        ofxOscMessage n;
+    //        n.setAddress( "/dp/hakoniwa/magnetLooper2" );
+    //        n.addIntArg(hantei2);
+    //        n.addIntArg(0);
+    //        sender2.sendMessage(n);
+    
+    //new しゃくとり
+    ofxOscMessage n;
+    n.setAddress( "/dp/hakoniwa/magnetLooper2" );
+    n.addIntArg(hantei2);
+    n.addIntArg(looper2SpeedHantei);
+    n.addIntArg(int(looper2SpeedVal));
+    sender2.sendMessage(n);
 }
 
 void magnetLooper::draw(){
