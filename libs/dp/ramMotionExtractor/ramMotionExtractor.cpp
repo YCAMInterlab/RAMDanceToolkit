@@ -95,7 +95,7 @@ void ramMotionExtractor::update(){
 									 m.getArgAsInt32(1));
 		}
 
-		if (m.getAddress() == myAddr+"/save"){
+		if (m.getAddress() == myAddr+"save"){
 			if (m.getArgAsString(0) == "" ||
 				m.getNumArgs() == 0){
 				save("motionExt_"+mScenePtr->getName()+".xml");
@@ -104,7 +104,7 @@ void ramMotionExtractor::update(){
 			}
 		}
 
-		if (m.getAddress() == myAddr+"/load"){
+		if (m.getAddress() == myAddr+"load"){
 			if (m.getArgAsString(0) == "" ||
 				m.getNumArgs() == 0){
 				load("motionExt_"+mScenePtr->getName()+".xml");
@@ -113,7 +113,7 @@ void ramMotionExtractor::update(){
 			}
 		}
 
-		if (m.getAddress() == myAddr+"/actorList"){
+		if (m.getAddress() == myAddr+"actorList"){
 
 			vector<string> lst;
 			for (int i = 0;i < m.getNumArgs();i++){
