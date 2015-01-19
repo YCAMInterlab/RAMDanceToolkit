@@ -15,7 +15,7 @@
 
 class dpHakoVisIceMap : public ramBaseScene{
 public:
-    string getName() const { return "dpVIceMap"; }
+    string getName() const { return "dpVisIce"; }
     void setupControlPanel(){
         
         ramGetGUI().addIntSlider("div", 1, 14, &mDiv);
@@ -25,7 +25,7 @@ public:
         ramFloorQuadWarper::instance().setupContolPanel(this);
         
         ramOscManager::instance().addReceiverTag(&mReceiver);
-        mReceiver.addAddress("/dp/cameraUnit/ice/pixelate");
+        mReceiver.addAddress("/dp/cameraUnit/Ice/pixelate");
         
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoVisIceMap::onPanelChanged);
     }
@@ -40,7 +40,7 @@ public:
         while(mReceiver.hasWaitingMessages()){
             ofxOscMessage m;
             mReceiver.getNextMessage(&m);
-            if(m.getAddress() == "/dp/cameraUnit/ice/pixelate"){
+            if(m.getAddress() == "/dp/cameraUnit/Ice/pixelate"){
                
                 int width = m.getArgAsInt32(0);
                 int height = m.getArgAsInt32(1);
