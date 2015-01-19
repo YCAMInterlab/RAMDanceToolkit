@@ -34,6 +34,9 @@ extern const int kW;
 extern const int kH;
 
 extern const int kFrameRate;
+
+extern const int kMaxSkeleton;
+
 extern const int kOscClientPort;
 
 extern const string kOscAddrChangeScene;

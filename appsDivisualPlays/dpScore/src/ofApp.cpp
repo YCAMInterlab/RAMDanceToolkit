@@ -98,8 +98,8 @@ void ofApp::setup()
     auto dataText = SceneBase::Ptr(new SceneDataText());
     auto dataSlider = SceneBase::Ptr(new SceneDataSlider());
     
-    auto bodyBox = SceneBase::Ptr(new SceneBodyBox());
-    auto bodyRect = SceneBase::Ptr(new SceneBodyRect());
+    //auto bodyBox = SceneBase::Ptr(new SceneBodyBox());
+    //auto bodyRect = SceneBase::Ptr(new SceneBodyRect());
     auto bodyBoids = SceneBase::Ptr(new SceneBodyBoids());
     auto bodyScan = SceneBase::Ptr(new SceneBodyScan());
     auto bodyPattern = SceneBase::Ptr(new SceneBodyPatterns());
@@ -131,8 +131,8 @@ void ofApp::setup()
     mSceneManager.add(bodyFlow);
     mSceneManager.add(bodyLines);
     
-    mSceneManager.add(bodyRect);
-    mSceneManager.add(bodyBox);
+    //mSceneManager.add(bodyRect);
+    //mSceneManager.add(bodyBox);
     mSceneManager.add(bodyBoids);
     
     

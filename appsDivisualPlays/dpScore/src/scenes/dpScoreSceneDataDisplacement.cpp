@@ -142,12 +142,13 @@ void SceneDataDisplacement::draw()
     ofRotateY(15.f);
     ofRotateZ(-20.f);
     ofNoFill();
+    ofSetLineWidth(1.5f);
     ofSetSphereResolution(50);
-    ofSetColor(ofColor::white, 64);
+    ofSetColor(ofColor::white, 100);
     mSphereMesh.drawWireframe();
-    glPointSize(2.f);
-    ofSetColor(ofColor::white, 128);
-    mSphereMesh.drawVertices();
+    //glPointSize(2.f);
+    //ofSetColor(ofColor::white, 128);
+    //mSphereMesh.drawVertices();
     mCam.end();
     mShader.end();
 }

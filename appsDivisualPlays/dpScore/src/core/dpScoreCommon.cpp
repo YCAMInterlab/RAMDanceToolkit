@@ -106,6 +106,9 @@ const int kW = 1920;
 const int kH = 1080;
 
 const int kFrameRate = 60;
+
+const int kMaxSkeleton = 2;
+
 const int kOscClientPort = 10000;
 
 const string kOscAddrChangeScene = "/dp/score/changeScene";
