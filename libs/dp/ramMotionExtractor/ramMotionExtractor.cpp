@@ -112,6 +112,15 @@ void ramMotionExtractor::update(){
 				load(m.getArgAsString(0));
 			}
 		}
+
+		if (m.getAddress() == myAddr+"/actorList"){
+			vector<string> actList;
+			for (int i = 0;i < m.getNumArgs();i++){
+				actList.push_back(m.getArgAsString(i));
+			}
+			actorList->reshuffle(actList);
+			refleshActorFromList();
+		}
 	}
 
 	for (int i = 0;i < mMotionPort.size();i++){
@@ -253,7 +262,7 @@ void ramMotionExtractor::popPort(ramNodeFinder &nf){
 void ramMotionExtractor::mouseReleased(ofMouseEventArgs &arg){
 
 	refleshActorFromList();
-
+	
 }
 
 void ramMotionExtractor::refleshActorFromList(){

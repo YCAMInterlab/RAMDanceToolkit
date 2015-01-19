@@ -50,13 +50,14 @@ public:
 	void refleshActorFromList();
 
 	vector<ramMotionPort*>	mMotionPort;
+	ofxUISortableList*		actorList;
+
 protected:
 	void guiEvent(ofxUIEventArgs &e);
 	int getIndexFromName(string name);
 
 	ofxUICanvasPlus*		parentGui;
 	ofxUICanvas*			mGui;
-	ofxUISortableList*		actorList;
 	ramBaseScene*			mScenePtr;
 	ofVec2f					mCurrentCanvasPos;
 	float					mMotionSmooth;
