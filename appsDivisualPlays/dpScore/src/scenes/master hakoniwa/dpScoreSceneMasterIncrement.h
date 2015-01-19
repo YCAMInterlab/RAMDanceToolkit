@@ -61,7 +61,7 @@ private:
     ofEasyCam mCam;
     AnalyzeMean mMean;
     
-    float mLimit{1000.f};
+    float mLimit{2000.f};
     unsigned long mFrameNum{0};
     unsigned long mPrevOfFrame{0};
     vector<float> mAdditions;

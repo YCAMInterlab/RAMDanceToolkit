@@ -10,10 +10,8 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-void AnalyzeMean::update(const ofVec4f& mean)
+void AnalyzeMean::update()
 {
-    mMean = mean;
-    
     mMeanAddtion.x += ::fabsf((mMean.x - mMeanPrev.x)) * 0.01;
     mMeanAddtion.y += ::fabsf((mMean.y - mMeanPrev.y)) * 0.01;
     mMeanAddtion.z += ::fabsf((mMean.z - mMeanPrev.z)) * 0.01;

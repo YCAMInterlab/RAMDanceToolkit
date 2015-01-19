@@ -21,7 +21,7 @@ struct AnalyzeMean final : public AnalyzeBase {
     ofVec4f mMean;
     ofVec4f mMeanPrev;
     ofVec4f mMeanAddtion;
-    float mMeanLimit{5};
+    float mMeanLimit{20};
     int mPrevScene{0};
 };
 
