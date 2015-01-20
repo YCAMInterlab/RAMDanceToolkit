@@ -186,13 +186,10 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 void dpSwitchingManager::update(){
 
 	if (ofGetFrameNum() % 15 == 0 && oscListPtr != NULL){
-		for (int i = 0;i < oscListPtr->size();i++){
-
-			ofxOscMessage Live;
-			Live.setAddress("/dp/caemraUnit/aliveMonitor");
-			multiCast(Live);
-
-		}
+		
+		ofxOscMessage Live;
+		Live.setAddress("/dp/caemraUnit/aliveMonitor");
+		multiCast(Live);
 
 		for (int j = 0;j < hakoniwas.size();j++){
 			ofxOscMessage current;

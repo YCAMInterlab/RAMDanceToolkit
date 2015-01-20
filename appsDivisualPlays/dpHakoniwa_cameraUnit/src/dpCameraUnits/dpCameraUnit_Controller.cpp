@@ -43,7 +43,7 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 	gui.addTextInput("OSC_F", "192.168.20.10");
 
 	gui.addLabel("Dev_Sheep");
-	gui.addTextInput("OSC_G", "Hampshire.local");
+	gui.addTextInput("OSC_G", "192.168.20.26");
 	gui.addLabel("Dev_Kez");
 	gui.addTextInput("OSC_H", "192.168.20.23");
 	gui.addLabel("Dev_Onishi");
