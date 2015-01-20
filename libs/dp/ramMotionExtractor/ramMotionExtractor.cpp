@@ -131,6 +131,28 @@ void ramMotionExtractor::update(){
 			refleshActorFromList();
 
 		}
+
+		if (m.getAddress() == myAddr + "request"){
+
+			ofxOscSender sender;
+			sender.setup(m.getRemoteIp(), 10000);
+
+			for (int i = 0;i < mMotionPort.size();i++){
+				ofxOscMessage mPsh;
+				mPsh.setAddress("/ram/MEX/" + m.getArgAsString(0) + "/push");
+				mPsh.addIntArg(mMotionPort[i]->mActorIndex);
+				mPsh.addIntArg(mMotionPort[i]->mFinder.index);
+				sender.sendMessage(mPsh);
+			}
+
+			ofxOscMessage mLs;
+			mLs.setAddress("/ram/MEX/" + m.getArgAsString(0) + "/actorList");
+			for (int i = 0;i < actorList->getListItems().size();i++){
+				mLs.addStringArg(actorList->getListItems()[i]->getName());
+			}
+			sender.sendMessage(mLs);
+			
+		}
 	}
 
 	for (int i = 0;i < mMotionPort.size();i++){
