@@ -39,9 +39,7 @@ void testApp::setup()
     sceneManager.addScene(visServoPendulum.getPtr());
     
     sceneManager.addScene(visStage.getPtr());
-    
-    sceneManager.addScene(visWorm.getPtr());
-    
+
     sceneManager.addScene(dpHfrozenIce.getPtr());
     sceneManager.addScene(danceMap.getPtr());
     
@@ -71,7 +69,8 @@ void testApp::setup()
 	sceneManager.addScene(hakoVisPlinkPrism.getPtr());
 
     sceneManager.addScene(dpHWorm.getPtr());
-	
+	sceneManager.addScene(visWorm.getPtr());
+
 	sceneManager.addScene(testSceneA.getPtr());
 	sceneManager.addScene(testSceneB.getPtr());
 	sceneManager.addScene(testSceneC.getPtr());

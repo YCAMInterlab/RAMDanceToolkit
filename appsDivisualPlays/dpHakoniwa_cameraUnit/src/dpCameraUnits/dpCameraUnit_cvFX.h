@@ -37,10 +37,12 @@ public:
 	bool mEnableBackground;
 	bool mEnableRunningBackground;
 	bool mEnableWarpPerspective;
+	bool mEnableErode1;
 	bool mEnableDilate;
 	bool mEnableErode;
 
 	int mParam_Dilate_num;
+	int mParam_Erode_num1;
 	int mParam_Erode_num;
 	float mParam_Blur;
 	float mParam_Canny_Thr1;

@@ -32,18 +32,18 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 	gui.addLabel("RDTK_2");
 	gui.addTextInput("OSC_B", "192.168.20.3");
 
-	gui.addLabel("floor_score");
+	gui.addLabel("Score");
 	gui.addTextInput("OSC_C", "192.168.20.11");
+	gui.addLabel("Floor");
+	gui.addTextInput("OSC_D", "192.168.20.6");
 	gui.addLabel("Lighting");
-	gui.addTextInput("OSC_D", "192.168.20.8");
+	gui.addTextInput("OSC_E", "192.168.20.8");
 
-	gui.addLabel("Audio1_evala");
-	gui.addTextInput("OSC_E", "192.168.20.9");//こっちにはOSCを送らない
 	gui.addLabel("Audio2_evala");
 	gui.addTextInput("OSC_F", "192.168.20.10");
 
 	gui.addLabel("Dev_Sheep");
-	gui.addTextInput("OSC_G", "Hampshire.local");
+	gui.addTextInput("OSC_G", "192.168.20.26");
 	gui.addLabel("Dev_Kez");
 	gui.addTextInput("OSC_H", "192.168.20.23");
 	gui.addLabel("Dev_Onishi");
