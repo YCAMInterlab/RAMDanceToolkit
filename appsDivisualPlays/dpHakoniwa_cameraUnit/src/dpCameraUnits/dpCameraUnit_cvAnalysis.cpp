@@ -94,6 +94,12 @@ dpCameraUnit_cvAnalysis::~dpCameraUnit_cvAnalysis(){
 }
 
 void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool isFrameNew){
+
+	if (ofGetFrameNum() % 30 == 0){
+		ofxUITextInput* ti = ((ofxUITextInput*)(mGui.getWidget("hakoniwaName")));
+		hakoniwa_name = ti->getTextString();
+	}
+
 	imgRefColor = &pixColor;
 	imgRefGray = &pixGray;
     
@@ -358,11 +364,6 @@ void dpCameraUnit_cvAnalysis::drawUI(int x, int y){
 
 void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 	
-//	for (int i = 0;i < pts.size();i++){
-//		cout << "Circle" << i << endl;
-//		ofCircle(pts[i], 5);
-//	}
-	
 	ofPushMatrix();
 	ofTranslate(x, y);
 	glScaled(scale, scale, scale);
@@ -444,10 +445,12 @@ void dpCameraUnit_cvAnalysis::guiEvent(ofxUIEventArgs &ev){
 	if (w->getName() == "loadPreset"){
 		loadPreset(hakoniwa_name);
 		pairFXUnit->loadPreset(hakoniwa_name);
+		cout << "Load Preset at:" << hakoniwa_name << endl;
 	}
 	if (w->getName() == "savePreset"){
 		savePreset(hakoniwa_name);
 		pairFXUnit->savePreset(hakoniwa_name);
+		cout << "Save Preset at:" << hakoniwa_name << endl;
 	}
 
 	if (w->getName() == "hakoniwaName" && w->getState() == OFX_UI_STATE_DOWN){
