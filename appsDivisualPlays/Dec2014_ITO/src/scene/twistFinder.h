@@ -19,13 +19,17 @@ class twistFinder {
     
     void findTwist(ramNode & node, ramNode & nodeOrigin);       // check rotation on a line between A & B
     void debugDraw(ramMotionExtractor & motionExtractor);
+    void debugDraw2(ramMotionExtractor & motionExtractor);
+    void debugDraw3(ramMotionExtractor & motionExtractor);
+    void debugDraw4(ramMotionExtractor & motionExtractor, int nodeNum);
     
-    void drawGraph(vector<ofVec3f> & vec, ofColor & drawColor, int elementNum);
+    void calculateVector(const ramNode & node0, const ramNode & node1, ofVec3f & redVec);
+    
+    void drawGraph(vector<float> & history, ofColor drawColor);
 
-
+    vector <float> his1, his0, hisSub;
     
     // Oreteru no wo modosu. de, on-axis no kaiten wo keisan.
-    
     // how about thinkng some nodes rotation on just one long line?
 
 };
