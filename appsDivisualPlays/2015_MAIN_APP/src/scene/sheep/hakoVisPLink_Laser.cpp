@@ -28,6 +28,12 @@ void hakoVisPLink_Laser::setupControlPanel(){
 	patterns.push_back("Pattern_C");
 
     gui->addRadio("Patterns", patterns)->activateToggle("Pattern_B");
+	gui->addSpacer();
+	gui->addLabel("Adjustment",OFX_UI_FONT_LARGE);
+	gui->addSlider("Scale", 0.0, 1.0, &mScale)->setValue(0.5);
+	gui->addSlider("LineWidth", 0.0, 1.0, &mLineScale)->setValue(0.1);
+	gui->addToggle("ManualCam", &mManualCam);
+	gui->addToggle("FaceBlink", &mFaceBlink);
 
 	ShCam.setMode(SHEEPCAM_SIGMOID_WANDER);
 }
@@ -96,7 +102,7 @@ void hakoVisPLink_Laser::draw_PatternB(){
 		}
 		else{
 			lines[i].stand = true;
-			lines[i].transp /= 1.2;
+			lines[i].transp /= 1.15;
 		}
 
 		if (lines[i].transp_smooth < lines[i].transp){
@@ -119,7 +125,7 @@ void hakoVisPLink_Laser::draw_PatternB(){
 								lines[j*pix_w+i].pixel * ofRandom(0),
 								(j-pix_h/2)*60);
 			msh.addVertex(tv);
-			if (tv.y > 0){
+			if (tv.y > 10.0){
 				counter++;
 				del.addPoint(tv.x,tv.z,100+tv.y/10.0);
 			}
@@ -149,16 +155,32 @@ void hakoVisPLink_Laser::draw_PatternB(){
 
 	ofSetColor(0);
 	msh.draw(OF_MESH_FILL);
+//	glBegin(GL_TRIANGLES);
+//	for (int i = 0;i < msh.getNumIndices();i+=3){
+//
+//
+//		for (int j = 0;j < 3;j++){
+//			ofColor c = ofColor(255,50,150);
+//			c *= MIN(1.0,msh.getVertex(msh.getIndex(i+j)).y);
+//
+//			ofSetColor(c);
+//			glVertex3d(msh.getVertex(msh.getIndex(i+j)).x,
+//					   msh.getVertex(msh.getIndex(i+j)).y,
+//					   msh.getVertex(msh.getIndex(i+j)).z);
+//		}
+//
+//	}
+//	glEnd();
 
 	ofTranslate(0, 1);
 	ofSetColor(255);
 	ofSetLineWidth(3.0);
 	msh.draw(OF_MESH_WIREFRAME);
 
-	for (int i = 0;i < msh.getNumIndices();i+=3){
-		if (msh.getVertex(msh.getIndex(i+0)).y > 3 ||
-			msh.getVertex(msh.getIndex(i+1)).y > 3 ||
-			msh.getVertex(msh.getIndex(i+2)).y > 3){
+	for (int i = 0;i < msh.getNumIndices()-2;i+=3){
+		if (msh.getVertex(msh.getIndex(i+0)).y > 30 ||
+			msh.getVertex(msh.getIndex(i+1)).y > 30 ||
+			msh.getVertex(msh.getIndex(i+2)).y > 30){
 
 			float rd = pow(ofRandomuf(),2.0f);
 			ofSetColor(10);
@@ -183,7 +205,7 @@ void hakoVisPLink_Laser::draw_PatternB(){
 	ofNoFill();
 	ofTranslate(0, 200, 0);
 	ofRotateX(90);
-	ofSetLineWidth(6.0);
+	ofSetLineWidth(12.0);
 
 	ofEnableBlendMode(OF_BLENDMODE_ADD);
 	del.draw();

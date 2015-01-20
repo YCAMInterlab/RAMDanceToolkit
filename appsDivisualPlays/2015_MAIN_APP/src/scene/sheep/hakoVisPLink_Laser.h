@@ -25,8 +25,8 @@ public:
 	~liningUnit(){};
 	bool	pixel;
 	bool	stand;
-	int		transp;
-	int		transp_smooth;
+	float	transp;
+	float	transp_smooth;
 	int		flagValue;
 	ofVec3f pts;
 	ofVec3f pt_smooth;
@@ -55,6 +55,11 @@ public:
 
 //	virtual void onEnabled();
 //	virtual void onDisabled();
+
+	float mScale;
+	float mLineScale;
+	bool mManualCam;
+	bool mFaceBlink;
 
 protected:
 	ofxUICanvasPlus* gui;

@@ -31,9 +31,9 @@ void sheepCam::update(){
 			mSw_targetFrame = mSw_beginFrame + 1500;
 
 			mSw_positionBef = mSw_position;
-			mSw_target.set(ofRandomf()*500,
+			mSw_target.set((ofRandomuf()*300+200) * (ofRandomuf() < 0.5 ? -1.0 : 1.0),
 						   ofRandomuf()*300+100,
-						   ofRandomf()*500);
+						   (ofRandomuf()*300+200) * (ofRandomuf() < 0.5 ? -1.0 : 1.0));
 		}
 		camera.setPosition(mSw_position);
 		camera.lookAt(ofVec3f(0,0,0));
