@@ -23,6 +23,7 @@ void ramMEXSync::setupControlPanel(){
 	gui->addRadio("sceneLs", scenes);
 
 	gui->addButton("Sync", false);
+	gui->addButton("Get", false);
 
 	mex.setupControlPanel(this);
 
@@ -36,17 +37,6 @@ void ramMEXSync::update(){
 
 	mex.update();
 
-	if (ofGetKeyPressed('1')){
-		vector<string> st;
-		st.push_back("kawaguchi");
-		st.push_back("kojiri");
-		st.push_back("sasamoto");
-		mex.actorList->reshuffle(st);
-	}
-
-	if (ofGetKeyPressed('2')){
-		mex.actorList->swapListItems(0, 1);
-	}
 }
 
 void ramMEXSync::draw(){
@@ -86,6 +76,23 @@ void ramMEXSync::onPanelChanged(ofxUIEventArgs &e){
 				mLs.addStringArg(mex.actorList->getListItems()[i]->getName());
 			}
 			sender.sendMessage(mLs);
+		}
+
+	}
+
+	if (w->getName() == "Get" && w->getState() == OFX_UI_STATE_DOWN){
+
+		for (int i = 0;i < 2;i++){
+
+			if (i == 0) sender.setup("192.168.20.2", 10000);
+			if (i == 1) sender.setup("192.168.20.3", 10000);
+
+			ofxOscMessage req;
+			req.setAddress("/ram/MEX/request");
+			req.addStringArg(getName());
+
+			sender.sendMessage(req);
+
 		}
 
 	}
