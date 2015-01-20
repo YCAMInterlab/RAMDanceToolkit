@@ -28,8 +28,15 @@ public:
 	ofxUITextInput* targScene;
 
 	inline
-	string getName() const { return "ramMEXSync"; }
+	string getName() const { return "Presentor"; }
 
+	const string ip_1 = "192.168.20.26";
+	const string ip_2 = "192.168.20.3";
+	
+	bool mSignal_Enable;
+	bool mSignal_DispA;
+	bool mSignal_DispB;
+	
 protected:
 	vector<string> scenes;
 	ramMotionExtractor	mex;

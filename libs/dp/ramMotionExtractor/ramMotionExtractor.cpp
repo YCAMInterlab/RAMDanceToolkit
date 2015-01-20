@@ -56,6 +56,7 @@ void ramMotionExtractor::setupControlPanel(ramBaseScene *scene_, ofVec2f canvasP
 
 	receiver.addAddress("/ram/MEX/"+scene_->getName());
 	ramOscManager::instance().addReceiverTag(&receiver);
+
 }
 
 void ramMotionExtractor::update(){
@@ -155,6 +156,28 @@ void ramMotionExtractor::update(){
 			}
 			sender.sendMessage(mLs);
 			
+		}
+		
+		if (m.getAddress() == myAddr + "UI"){
+			ofxUIWidget *w = parentGui->getWidget(m.getArgAsString(0));
+			if (w != NULL){
+				
+				if (w->getKind() == OFX_UI_WIDGET_SLIDER_H ||
+					w->getKind() == OFX_UI_WIDGET_SLIDER_V){
+					((ofxUISlider*)(w))->setValue(m.getArgAsFloat(1));
+				}
+				
+				if (w->getKind() == OFX_UI_WIDGET_TOGGLE){
+					
+					((ofxUIToggle*)(w))->setValue(m.getArgAsInt32(1));
+					
+				}
+				
+				if (w->getKind() == OFX_UI_WIDGET_BUTTON){
+					((ofxUIButton*)(w))->triggerSelf();
+				}
+				
+			}
 		}
 	}
 
