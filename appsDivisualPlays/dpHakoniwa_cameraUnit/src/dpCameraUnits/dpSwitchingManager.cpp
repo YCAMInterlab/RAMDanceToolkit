@@ -184,19 +184,22 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 }
 
 void dpSwitchingManager::update(){
-	for (int i = 0;i < oscListPtr->size();i++){
 
-		ofxOscMessage Live;
-		Live.setAddress("/dp/caemraUnit/aliveMonitor");
-		multiCast(Live);
+	if (ofGetFrameNum() % 15 == 0){
+		for (int i = 0;i < oscListPtr->size();i++){
 
-	}
+			ofxOscMessage Live;
+			Live.setAddress("/dp/caemraUnit/aliveMonitor");
+			multiCast(Live);
 
-	for (int j = 0;j < hakoniwas.size();j++){
-		ofxOscMessage current;
-		current.setAddress("/dp/cameraUnit/sceneState/"+hakoniwas[j]->CVPreset);
-		current.addIntArg(hakoniwas[j]->isEnable ? 1 : 0);
-		multiCast(current);
+		}
+
+		for (int j = 0;j < hakoniwas.size();j++){
+			ofxOscMessage current;
+			current.setAddress("/dp/cameraUnit/sceneState/"+hakoniwas[j]->CVPreset);
+			current.addIntArg(hakoniwas[j]->isEnable ? 1 : 0);
+			multiCast(current);
+		}
 	}
 
 }
