@@ -46,6 +46,13 @@ void ramMEXSync::setupControlPanel(){
 	gui->addLabel("Extractor",OFX_UI_FONT_LARGE);
 	gui->addButton("Sync", false);
 	gui->addButton("Get", false);
+	gui->addSpacer();
+	gui->addLabel("Remote UI",OFX_UI_FONT_LARGE);
+	uiName = gui->addTextInput("uiName", "UIName");
+	uiName->setAutoClear(false);
+	gui->addSlider("Remote:Float", 0.0, 1.0, &mUIRemote_float);
+	gui->addSlider("Order", 1.0, 1000.0, &mUIRemote_fOrder);
+	gui->addToggle("Remote:Toggle", &mUIRemote_toggle);
 	
 	mex.setupControlPanel(this);
 
@@ -66,19 +73,59 @@ void ramMEXSync::update(){
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
 		
-		cout << "=======Dump======" << endl;
-		cout << m.getAddress() << endl;
-		for (int i = 0;i < m.getNumArgs();i++){
-			if (m.getArgType(i) == OFXOSC_TYPE_INT32) cout << m.getArgAsInt32(i) << endl;
-			if (m.getArgType(i) == OFXOSC_TYPE_INT64) cout << m.getArgAsInt64(i) << endl;
-			if (m.getArgType(i) == OFXOSC_TYPE_STRING) cout << m.getArgAsString(i) << endl;
-			if (m.getArgType(i) == OFXOSC_TYPE_FLOAT) cout << m.getArgAsFloat(i) << endl;
+		int idx = -1;
+		for (int i = 0;i < previews.size();i++){
+			if (previews[i]->msg.getAddress() == m.getAddress()){
+				idx = i;
+				break;
+			}
 		}
 		
+		if (idx == -1){
+
+			oscPreview* pv = new oscPreview();
+			pv->msg = m;
+			pv->valueClamp.assign(pv->msg.getNumArgs(), 0.0);
+			pv->numValue.assign(pv->msg.getNumArgs(), 0.0);
+
+			for (int i = 0;i < m.getNumArgs();i++){
+				if (m.getArgType(i) == OFXOSC_TYPE_FLOAT)
+					pv->numValue[i] = m.getArgAsFloat(i);
+				else if (m.getArgType(i) == OFXOSC_TYPE_INT32)
+					pv->numValue[i] = m.getArgAsInt32(i);
+				else if (m.getArgType(i) == OFXOSC_TYPE_INT64)
+					pv->numValue[i] = m.getArgAsInt64(i);
+			}
+			
+			previews.push_back(pv);
+			
+			
+		}else{
+			
+			for (int i = 0;i < previews[idx]->msg.getNumArgs();i++){
+				float v;
+				if (m.getArgType(i) == OFXOSC_TYPE_FLOAT) v = m.getArgAsFloat(i);
+				else if (m.getArgType(i) == OFXOSC_TYPE_INT32) v = m.getArgAsInt32(i);
+				else if (m.getArgType(i) == OFXOSC_TYPE_INT64) v = m.getArgAsInt64(i);
+				else{
+					v = 0.0;
+				}
+				previews[idx]->numValue[i] = v;
+				previews[idx]->valueClamp[i] = MAX(previews[idx]->valueClamp[i],v);
+			}
+			
+			previews[idx]->msg = m;
+			
+		}
+		
+		while (previews.size() > 10){
+			oscPreview* p = previews[0];
+			previews.erase(previews.begin());
+			delete p;
+		}
 	}
 	
 	mex.update();
-
 }
 
 void ramMEXSync::draw(){
@@ -86,11 +133,61 @@ void ramMEXSync::draw(){
 	ramBeginCamera();
 	mex.draw();
 	ramEndCamera();
+	
+	for (int i = 0;i < previews.size();i++){
+		ofPushMatrix();
+		ofTranslate(700, i*130);
+		ofNoFill();
+		ofRect(0, 10, 300, 115);
+		ofFill();
+		
+		string info = previews[i]->msg.getAddress() + "\n";
+		
+		ofSetColor(130,30,80);
+		for (int j = 0;j < previews[i]->msg.getNumArgs();j++){
+			if (previews[i]->msg.getArgType(j) == OFXOSC_TYPE_STRING)
+				info += previews[i]->msg.getArgAsString(j) + "\n";
+			else
+				info += ofToString(previews[i]->numValue[j]) + "\n";
+			ofRect(0, 30+j*13, 300 * previews[i]->numValue[j] / previews[i]->valueClamp[j], 8);
+		}
+		
+		ofSetColor(255);
+		ofDrawBitmapString(info, 10, 25);
+		
+		ofPopMatrix();
+	}
 
 }
 
 void ramMEXSync::onPanelChanged(ofxUIEventArgs &e){
 	ofxUIWidget* w = e.widget;
+	
+	if (w->getName() == "Remote:Float"){
+		for (int i = 0;i < 2;i++){
+			if (i == 0) sender.setup(ip_1, 10000);
+			if (i == 1) sender.setup(ip_2, 10000);
+			ofxOscMessage msg;
+			msg.setAddress("/ram/MEX/"+targScene->getTextString()+"/UI");
+			msg.addStringArg(uiName->getTextString());
+			msg.addFloatArg(mUIRemote_float * mUIRemote_fOrder);
+			
+			sender.sendMessage(msg);
+		}
+	}
+	
+	if (w->getName() == "Remote:Toggle"){
+		for (int i = 0;i < 2;i++){
+			if (i == 0) sender.setup(ip_1, 10000);
+			if (i == 1) sender.setup(ip_2, 10000);
+			ofxOscMessage msg;
+			msg.setAddress("/ram/MEX/"+targScene->getTextString()+"/UI");
+			msg.addStringArg(uiName->getTextString());
+			msg.addFloatArg(((ofxUIToggle*)(w))->getValue());
+			
+			sender.sendMessage(msg);
+		}
+	}
 
 	if (w->getName() == "Send" && w->getState() == OFX_UI_STATE_DOWN){
 		for (int i = 0;i < 2;i++){
