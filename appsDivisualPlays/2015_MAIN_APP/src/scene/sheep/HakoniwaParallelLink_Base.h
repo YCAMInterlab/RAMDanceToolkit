@@ -23,14 +23,11 @@ public:
 			mLinkManager.sendSignal();
 			
 			for (int i = 0;i < 6;i++){
-				if (mDigitalIO_Prev[i] != mDigitalIO[i]){
-					mDigitalIO_Prev[i] = mDigitalIO[i];
-					ofxOscMessage m;
-					m.setAddress("/dp/hakoniwa/digitalWrite/");
-					m.addIntArg(2+i);
-					m.addIntArg(0);
-					mOscSender->sendMessage(m);
-				}
+                ofxOscMessage m;
+                m.setAddress("/dp/hakoniwa/digitalWrite/");
+                m.addIntArg(2+i);
+                m.addIntArg(0);
+                mOscSender->sendMessage(m);
 			}
 			
 		}
