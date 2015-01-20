@@ -11,6 +11,7 @@
 
 #include "ramMain.h"
 #include "ofxDelaunay.h"
+#include "sheepCam.h"
 
 class liningUnit{
 public:
@@ -65,7 +66,7 @@ protected:
 
 	//===== Pattern B ======
 	vector<ofMesh> meshes;
-	ofEasyCam camera;
+	sheepCam ShCam;
 	ofxDelaunay del;
 };
 
