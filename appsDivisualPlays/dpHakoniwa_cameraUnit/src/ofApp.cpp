@@ -9,6 +9,8 @@ void ofApp::setup(){
 	dpSwitcher.setup(dpCameraUnit.cvFXUnit,
 					 dpCameraUnit.cvAnalysis);
 
+	dpSwitcher.oscListPtr = &(dpCameraUnit.oscSendList);
+
 	ofSetLogLevel(OF_LOG_ERROR);
 }
 
@@ -21,16 +23,16 @@ void ofApp::update(){
 		dpSwitcher.receiveOscMessage(m);
 	}
 
-	ofSetWindowTitle(ofToString(ofGetFrameRate()));
-
 	dpSwitcher.update();
 	dpCameraUnit.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+
 	dpCameraUnit.draw();
 	if (bDebug) dpSwitcher.draw();
+
 }
 
 //--------------------------------------------------------------

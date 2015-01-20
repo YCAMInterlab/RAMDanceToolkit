@@ -56,6 +56,7 @@ void ramMotionExtractor::setupControlPanel(ramBaseScene *scene_, ofVec2f canvasP
 
 	receiver.addAddress("/ram/MEX/"+scene_->getName());
 	ramOscManager::instance().addReceiverTag(&receiver);
+
 }
 
 void ramMotionExtractor::update(){
@@ -95,7 +96,7 @@ void ramMotionExtractor::update(){
 									 m.getArgAsInt32(1));
 		}
 
-		if (m.getAddress() == myAddr+"/save"){
+		if (m.getAddress() == myAddr+"save"){
 			if (m.getArgAsString(0) == "" ||
 				m.getNumArgs() == 0){
 				save("motionExt_"+mScenePtr->getName()+".xml");
@@ -104,7 +105,7 @@ void ramMotionExtractor::update(){
 			}
 		}
 
-		if (m.getAddress() == myAddr+"/load"){
+		if (m.getAddress() == myAddr+"load"){
 			if (m.getArgAsString(0) == "" ||
 				m.getNumArgs() == 0){
 				load("motionExt_"+mScenePtr->getName()+".xml");
@@ -113,7 +114,7 @@ void ramMotionExtractor::update(){
 			}
 		}
 
-		if (m.getAddress() == myAddr+"/actorList"){
+		if (m.getAddress() == myAddr+"actorList"){
 
 			vector<string> lst;
 			for (int i = 0;i < m.getNumArgs();i++){
@@ -128,9 +129,55 @@ void ramMotionExtractor::update(){
 			mGui->autoSizeToFitWidgets();
 			parentGui->autoSizeToFitWidgets();
 
-			actorList->reshuffle(lst);
 			refleshActorFromList();
 
+		}
+
+		if (m.getAddress() == myAddr + "request"){
+
+			ofxOscSender sender;
+			sender.setup(m.getRemoteIp(), 10000);
+
+			ofxOscMessage mClr;
+			mClr.setAddress("/ram/MEX/" + m.getArgAsString(0) + "/clear");
+
+			for (int i = 0;i < mMotionPort.size();i++){
+				ofxOscMessage mPsh;
+				mPsh.setAddress("/ram/MEX/" + m.getArgAsString(0) + "/push");
+				mPsh.addIntArg(mMotionPort[i]->mActorIndex);
+				mPsh.addIntArg(mMotionPort[i]->mFinder.index);
+				sender.sendMessage(mPsh);
+			}
+
+			ofxOscMessage mLs;
+			mLs.setAddress("/ram/MEX/" + m.getArgAsString(0) + "/actorList");
+			for (int i = 0;i < actorList->getListItems().size();i++){
+				mLs.addStringArg(actorList->getListItems()[i]->getName());
+			}
+			sender.sendMessage(mLs);
+			
+		}
+		
+		if (m.getAddress() == myAddr + "UI"){
+			ofxUIWidget *w = parentGui->getWidget(m.getArgAsString(0));
+			if (w != NULL){
+				
+				if (w->getKind() == OFX_UI_WIDGET_SLIDER_H ||
+					w->getKind() == OFX_UI_WIDGET_SLIDER_V){
+					((ofxUISlider*)(w))->setValue(m.getArgAsFloat(1));
+				}
+				
+				if (w->getKind() == OFX_UI_WIDGET_TOGGLE){
+					
+					((ofxUIToggle*)(w))->setValue(m.getArgAsInt32(1));
+					
+				}
+				
+				if (w->getKind() == OFX_UI_WIDGET_BUTTON){
+					((ofxUIButton*)(w))->triggerSelf();
+				}
+				
+			}
 		}
 	}
 

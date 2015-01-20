@@ -10,9 +10,9 @@
 
 dpCameraUnit_input::dpCameraUnit_input(){
 
-	mVideoPlayer.loadMovie("hakoniwa_split_2.mov");//("hakoniwa_split_2.mov");
-	mVideoPlayer.setVolume(0.0);
-	
+//	mVideoPlayer.loadMovie("hakoniwa_split_2.mov");//("hakoniwa_split_2.mov");
+//	mVideoPlayer.setVolume(0.0);
+
 	mCameraList.push_back("None");
 	for (int i = 0;i < mVideoGrabber.listDevices().size();i++){
 		mCameraList.push_back(mVideoGrabber.listDevices()[i].deviceName);

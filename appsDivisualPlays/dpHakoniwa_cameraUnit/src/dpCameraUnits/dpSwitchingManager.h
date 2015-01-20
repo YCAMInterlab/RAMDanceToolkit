@@ -56,13 +56,16 @@ enum hakoniwaType{
 
 struct hakoniwaPresets{
 public:
-	hakoniwaPresets(){};
+	hakoniwaPresets(){
+		isEnable = false;
+	};
 	~hakoniwaPresets(){};
 
 	hakoniwaType	type;
 	string			CVPreset;
 	vector<string>	sceneNames;
 	int				sourceCh;
+	bool			isEnable;
 
 	bool getIsVis(int num){
 		return sceneNames[num].substr(0,1) == "V";
@@ -129,6 +132,13 @@ public:
 	void refleshSceneforRDTK();
 	int	getHakoniwaIndex(string sceneName);
 	int searchHakoniwaIsActive(hakoniwaType type);
+
+
+	//MultiCasting
+	ofxOscSender sender;
+	void multiCast(ofxOscMessage &m);
+	bool				senderSW[9];
+	vector<string>		*oscListPtr;
 };
 
 #endif /* defined(__dpHakoniwa_cameraUnit__dpSwitchingManager__) */

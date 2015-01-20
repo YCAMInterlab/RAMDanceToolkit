@@ -46,7 +46,7 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 //	mGui.addToggle("UseTargetColor"	, &mParamCF_UseTargetColor);
 	mGui.addRangeSlider("Area", 0.0, 10000.0, &mParamCF_MinArea, &mParamCF_MaxArea);
 	mGui.addSlider("MaxBlobNum", 0.0, 500.0, &mParamCF_MaxBlobNum);
-	mGui.addSlider("Threshold", 0.0, 255.0, &mParamCF_Threshold);
+	mGui.addSlider("Threshold", 0.0, 255.0, &mParamCF_Threshold)->setValue(200);
 	mGui.addLabel("OptFlow");
 	mGui.addSpacer();
 	mGui.addSlider("filter_Speed", 0.0, 100.0, &mOptFlow_filterSpd);
@@ -94,6 +94,12 @@ dpCameraUnit_cvAnalysis::~dpCameraUnit_cvAnalysis(){
 }
 
 void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool isFrameNew){
+
+	if (ofGetFrameNum() % 30 == 0){
+		ofxUITextInput* ti = ((ofxUITextInput*)(mGui.getWidget("hakoniwaName")));
+		hakoniwa_name = ti->getTextString();
+	}
+
 	imgRefColor = &pixColor;
 	imgRefGray = &pixGray;
     
@@ -119,7 +125,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 
 		bRectM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/boundingRect");
 		blobM .setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/blob");
-		areaM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/area");
+		areaM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/sarea");
 
 		bRectM.addIntArg(mContFinder.getContours().size());
 		blobM.addIntArg(mContFinder.getContours().size());
@@ -358,11 +364,6 @@ void dpCameraUnit_cvAnalysis::drawUI(int x, int y){
 
 void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 	
-//	for (int i = 0;i < pts.size();i++){
-//		cout << "Circle" << i << endl;
-//		ofCircle(pts[i], 5);
-//	}
-	
 	ofPushMatrix();
 	ofTranslate(x, y);
 	glScaled(scale, scale, scale);
@@ -444,10 +445,12 @@ void dpCameraUnit_cvAnalysis::guiEvent(ofxUIEventArgs &ev){
 	if (w->getName() == "loadPreset"){
 		loadPreset(hakoniwa_name);
 		pairFXUnit->loadPreset(hakoniwa_name);
+		cout << "Load Preset at:" << hakoniwa_name << endl;
 	}
 	if (w->getName() == "savePreset"){
 		savePreset(hakoniwa_name);
 		pairFXUnit->savePreset(hakoniwa_name);
+		cout << "Save Preset at:" << hakoniwa_name << endl;
 	}
 
 	if (w->getName() == "hakoniwaName" && w->getState() == OFX_UI_STATE_DOWN){
@@ -469,6 +472,7 @@ void dpCameraUnit_cvAnalysis::sendMessageMulti(ofxOscMessage &m){
 
 	if (oscListPtr != NULL){
 		for (int i = 0;i < oscListPtr->size();i++){
+
 			if (oscMatrixUI->getState(0, i)){
 				sender.setup((*oscListPtr)[i], defPort);
 				sender.sendMessage(m);

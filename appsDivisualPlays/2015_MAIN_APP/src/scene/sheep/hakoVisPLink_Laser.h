@@ -11,6 +11,7 @@
 
 #include "ramMain.h"
 #include "ofxDelaunay.h"
+#include "sheepCam.h"
 
 class liningUnit{
 public:
@@ -24,8 +25,8 @@ public:
 	~liningUnit(){};
 	bool	pixel;
 	bool	stand;
-	int		transp;
-	int		transp_smooth;
+	float	transp;
+	float	transp_smooth;
 	int		flagValue;
 	ofVec3f pts;
 	ofVec3f pt_smooth;
@@ -55,6 +56,11 @@ public:
 //	virtual void onEnabled();
 //	virtual void onDisabled();
 
+	float mScale;
+	float mLineScale;
+	bool mManualCam;
+	bool mFaceBlink;
+
 protected:
 	ofxUICanvasPlus* gui;
 	ramOscReceiveTag receiver;
@@ -65,7 +71,7 @@ protected:
 
 	//===== Pattern B ======
 	vector<ofMesh> meshes;
-	ofEasyCam camera;
+	sheepCam ShCam;
 	ofxDelaunay del;
 };
 

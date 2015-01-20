@@ -23,7 +23,7 @@ public:
 	void gotMessage(ofMessage msg);
 
 	dpCameraUnit_Controller dpCameraUnit;
-	dpSwitchingManager dpSwitcher;
+	dpSwitchingManager		dpSwitcher;
 
 	ofxOscReceiver receiver;
 

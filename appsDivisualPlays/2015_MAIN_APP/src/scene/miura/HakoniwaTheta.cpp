@@ -29,7 +29,7 @@ void HakoniwaTheta::setup(){
     sphere.setPosition(0, 0, 0);
     
     mVideoNo = 1;
-    vidPlay.loadMovie("1.MP4");
+    vidPlay.loadMovie("./HakoniwaTheta/1.MP4");
     vidPlay.setVolume(0);
     vidPlay.setLoopState(OF_LOOP_NORMAL);
     vidPlay.play();
@@ -62,7 +62,11 @@ void HakoniwaTheta::draw(){
     
     ramBeginCamera();
     ofRotateZ(mDegreeOffset);
-    if (ofGetFrameNum() % 600 == 0){
+    if (ofGetFrameNum() % 3600 == 0){
+//        if(mVideoNo == 5){
+//            mVideoNo = 1;
+//        }
+        //        mVideoNo++;
         mVideoNo = ofRandom(1 , 6);
         VideoChanged(mVideoNo);
     }
@@ -101,7 +105,7 @@ void HakoniwaTheta::radiusChanged(int radius){
 void HakoniwaTheta::VideoChanged(int no){
 
     ostringstream ss;
-    ss << no << ".MP4";
+    ss <<  "./HakoniwaTheta/" << no << ".MP4";
     vidPlay.loadMovie(ss.str());
     vidPlay.setVolume(0);
     vidPlay.setLoopState(OF_LOOP_NORMAL);

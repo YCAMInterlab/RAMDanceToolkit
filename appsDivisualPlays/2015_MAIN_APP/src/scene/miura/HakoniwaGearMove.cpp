@@ -61,12 +61,12 @@ void HakoniwaGearMove::setup(){
     stepManager.addStepper("unit3", 400, 2);
     stepManager.resetAllDevices();
 
-	stepManager.setupEasyFromPreset(KSMR_STEP_P_PMSA_B56D5);
+//	stepManager.setupEasyFromPreset(KSMR_STEP_P_PMSA_B56D5);
 
-//    stepManager.setParam_maxSpeed(0x0075);
-//    stepManager.setParam_Accel(0x0010);
-//    stepManager.setParam_Decel(0x0010);
-//    stepManager.setMicroSteps(7);
+    stepManager.setParam_maxSpeed(0x0075);
+    stepManager.setParam_Accel(0x0010);
+    stepManager.setParam_Decel(0x0010);
+    stepManager.setMicroSteps(7);
     
     unsigned char sig[2];
 
