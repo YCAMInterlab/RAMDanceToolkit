@@ -62,7 +62,11 @@ void HakoniwaTheta::draw(){
     
     ramBeginCamera();
     ofRotateZ(mDegreeOffset);
-    if (ofGetFrameNum() % 600 == 0){
+    if (ofGetFrameNum() % 3600 == 0){
+//        if(mVideoNo == 5){
+//            mVideoNo = 1;
+//        }
+        //        mVideoNo++;
         mVideoNo = ofRandom(1 , 6);
         VideoChanged(mVideoNo);
     }
