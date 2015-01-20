@@ -185,7 +185,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 
 void dpSwitchingManager::update(){
 
-	if (ofGetFrameNum() % 15 == 0){
+	if (ofGetFrameNum() % 15 == 0 && oscListPtr != NULL){
 		for (int i = 0;i < oscListPtr->size();i++){
 
 			ofxOscMessage Live;

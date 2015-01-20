@@ -9,7 +9,7 @@ void ofApp::setup(){
 	dpSwitcher.setup(dpCameraUnit.cvFXUnit,
 					 dpCameraUnit.cvAnalysis);
 
-	dpSwitcher.oscListPtr = &dpCameraUnit.oscSendList;
+	dpSwitcher.oscListPtr = &(dpCameraUnit.oscSendList);
 
 	ofSetLogLevel(OF_LOG_ERROR);
 }
@@ -22,8 +22,6 @@ void ofApp::update(){
 		receiver.getNextMessage(&m);
 		dpSwitcher.receiveOscMessage(m);
 	}
-
-	ofSetWindowTitle(ofToString(ofGetFrameRate()));
 
 	dpSwitcher.update();
 	dpCameraUnit.update();
