@@ -137,6 +137,9 @@ void ramMotionExtractor::update(){
 			ofxOscSender sender;
 			sender.setup(m.getRemoteIp(), 10000);
 
+			ofxOscMessage mClr;
+			mClr.setAddress("/ram/MEX/" + m.getArgAsString(0) + "/clear");
+
 			for (int i = 0;i < mMotionPort.size();i++){
 				ofxOscMessage mPsh;
 				mPsh.setAddress("/ram/MEX/" + m.getArgAsString(0) + "/push");
