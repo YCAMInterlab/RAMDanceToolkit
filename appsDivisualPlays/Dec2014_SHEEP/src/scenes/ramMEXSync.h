@@ -35,6 +35,7 @@ protected:
 	ramMotionExtractor	mex;
 	ofxOscSender		sender;
 
+	ramOscReceiveTag receiver;
 };
 
 #endif /* defined(__RAMDanceToolkit__ramMEXSync__) */

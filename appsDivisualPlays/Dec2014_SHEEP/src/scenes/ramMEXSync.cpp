@@ -27,6 +27,9 @@ void ramMEXSync::setupControlPanel(){
 	mex.setupControlPanel(this);
 
 	ofAddListener(gui->newGUIEvent, this, &ramMEXSync::onPanelChanged);
+	
+	receiver.addAddress("/Debug/");
+	ramOscManager::instance().addReceiverTag(&receiver);
 }
 
 void ramMEXSync::update(){
