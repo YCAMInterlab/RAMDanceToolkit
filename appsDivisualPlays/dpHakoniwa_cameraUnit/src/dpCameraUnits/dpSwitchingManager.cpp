@@ -94,7 +94,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	//TODO: ソース番号・箱庭出力シーン
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_WORM;
-	hakoniwas.back()->CVPreset	= "";
+	hakoniwas.back()->CVPreset	= "Worm";
 	hakoniwas.back()->sourceCh	= 4;
 	hakoniwas.back()->sceneNames.push_back("H:dpHWorm");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisWorm");
@@ -184,7 +184,20 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 }
 
 void dpSwitchingManager::update(){
+	for (int i = 0;i < oscListPtr->size();i++){
 
+		ofxOscMessage Live;
+		Live.setAddress("/dp/caemraUnit/aliveMonitor");
+		multiCast(Live);
+
+		for (int j = 0;j < hakoniwas.size();j++){
+			ofxOscMessage current;
+			current.setAddress("/dp/cameraUnit/sceneState/"+hakoniwas[i]->CVPreset);
+			current.addIntArg(hakoniwas[i]->isEnable ? 1 : 0);
+			multiCast(current);
+		}
+
+	}
 }
 
 void dpSwitchingManager::draw(){
@@ -344,6 +357,7 @@ void dpSwitchingManager::SelectHakoniwa(hakoniwaType type, int slot){
 			}
 		}
 		hakoniwaPresets* targHako = getHakoniwaPreset(type);
+		targHako->isEnable = true;
 		mSlots[targCvSlot].isEmpty = false;
 		mSlots[targCvSlot].hakoType = type;
 		mSlots[targCvSlot].sourceCh = targHako->sourceCh;
@@ -421,6 +435,7 @@ void dpSwitchingManager::disableHakoniwa(hakoniwaType type){
 	}
 
 	//cvスロットを無効にする
+	getHakoniwaPreset(type)->isEnable = false;
 	mSlots[targCvSlot].isEmpty	= true;
 	mSlots[targCvSlot].hakoType	= HAKO_BLANK;
 	mSlots[targCvSlot].targetDisplay.clear();
@@ -456,6 +471,7 @@ void dpSwitchingManager::disableDisplay(int displayNum){
 
 		//ディスプレイが無くなった時スロットを無効にする
 		if (mSlots[targCvSlot].targetDisplay.size() == 0){
+			getHakoniwaPreset(mSlots[targCvSlot].hakoType)->isEnable = false;
 			mSlots[targCvSlot].isEmpty	= true;
 			mSlots[targCvSlot].hakoType	= HAKO_BLANK;
 			mSlots[targCvSlot].sourceCh = - 1;
@@ -559,10 +575,12 @@ int dpSwitchingManager::searchHakoniwaIsActive(hakoniwaType type){
 
 }
 
-void dpSwitchingManager::sendCurrentHakoniwa(){
+void dpSwitchingManager::multiCast(ofxOscMessage &m){
 
-	for (int i = 0;i < hakoniwas.size();i++){
-
+	for (int i = 0;i < oscListPtr->size();i++){
+			ofxOscSender sender;
+			sender.setup((*oscListPtr)[i], 10000);
+			sender.sendMessage(m);
 	}
 
 }

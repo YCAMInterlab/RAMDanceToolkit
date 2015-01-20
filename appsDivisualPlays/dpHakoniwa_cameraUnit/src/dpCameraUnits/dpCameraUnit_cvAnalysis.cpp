@@ -472,6 +472,7 @@ void dpCameraUnit_cvAnalysis::sendMessageMulti(ofxOscMessage &m){
 
 	if (oscListPtr != NULL){
 		for (int i = 0;i < oscListPtr->size();i++){
+
 			if (oscMatrixUI->getState(0, i)){
 				sender.setup((*oscListPtr)[i], defPort);
 				sender.sendMessage(m);
