@@ -14,6 +14,9 @@ hakoVisPLink_Laser::hakoVisPLink_Laser(){
 	ramOscManager::instance().addReceiverTag(&receiver);
 
 	lines.assign(300, liningUnit());
+
+	pix_w = 0;
+	pix_h = 0;
 }
 
 void hakoVisPLink_Laser::setupControlPanel(){
@@ -25,9 +28,14 @@ void hakoVisPLink_Laser::setupControlPanel(){
 	patterns.push_back("Pattern_C");
 
     gui->addRadio("Patterns", patterns)->activateToggle("Pattern_B");
+
+	ShCam.setMode(SHEEPCAM_SIGMOID_WANDER);
 }
 
 void hakoVisPLink_Laser::update(){
+
+	ShCam.update();
+	
 	while (receiver.hasWaitingMessages()){
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
@@ -78,9 +86,6 @@ void hakoVisPLink_Laser::drawActor(const ramActor &actor){
 }
 
 void hakoVisPLink_Laser::draw_PatternB(){
-	camera.setFov(75.0);
-	camera.setPosition(0.0, 200.0, 500.0);
-	camera.lookAt(ofVec3f(0.0,0.0,0.0));
 
 	for (int i = 0;i < lines.size()-1;i++){
 		if (lines[i].pixel){
@@ -91,10 +96,16 @@ void hakoVisPLink_Laser::draw_PatternB(){
 		}
 		else{
 			lines[i].stand = true;
-			lines[i].transp /= 2.0;
+			lines[i].transp /= 1.2;
 		}
-		lines[i].pt_smooth += (lines[i].pts - lines[i].pt_smooth) / 2.0;
-		lines[i].transp_smooth += (lines[i].transp - lines[i].transp_smooth) / 3.0;
+
+		if (lines[i].transp_smooth < lines[i].transp){
+			lines[i].pt_smooth += (lines[i].pts - lines[i].pt_smooth) / 1.5;
+			lines[i].transp_smooth += (lines[i].transp - lines[i].transp_smooth) / 1.8;
+		}else{
+			lines[i].pt_smooth += (lines[i].pts - lines[i].pt_smooth) / 62.0;
+			lines[i].transp_smooth += (lines[i].transp - lines[i].transp_smooth) / 63.0;
+		}
 	}
 
 	ofMesh msh;
@@ -130,18 +141,39 @@ void hakoVisPLink_Laser::draw_PatternB(){
 
 	if (counter > 4) del.triangulate();
 
-	camera.begin();
+	ShCam.camera.begin();
 	ofEnableDepthTest();
 
 	ofPushMatrix();
-	ofRotateY(ofGetElapsedTimef()*5);
+	ofRotateY(ofGetElapsedTimef()*2);
 
 	ofSetColor(0);
 	msh.draw(OF_MESH_FILL);
 
 	ofTranslate(0, 1);
 	ofSetColor(255);
+	ofSetLineWidth(3.0);
 	msh.draw(OF_MESH_WIREFRAME);
+
+	for (int i = 0;i < msh.getNumIndices();i+=3){
+		if (msh.getVertex(msh.getIndex(i+0)).y > 3 ||
+			msh.getVertex(msh.getIndex(i+1)).y > 3 ||
+			msh.getVertex(msh.getIndex(i+2)).y > 3){
+
+			float rd = pow(ofRandomuf(),2.0f);
+			ofSetColor(10);
+//			if (rd > 0.75) ofSetColor(200, 50, 120);
+			if (rd > 0.95) ofSetColor(255);
+
+			glBegin(GL_TRIANGLES);
+			for (int j = 0;j < 3;j++){
+				glVertex3d(msh.getVertex(msh.getIndex(i+j)).x,
+						   msh.getVertex(msh.getIndex(i+j)).y,
+						   msh.getVertex(msh.getIndex(i+j)).z);
+			}
+			glEnd();
+		}
+	}
 
 
 	ofSetColor(255, 50, 150);
@@ -151,7 +183,13 @@ void hakoVisPLink_Laser::draw_PatternB(){
 	ofNoFill();
 	ofTranslate(0, 200, 0);
 	ofRotateX(90);
+	ofSetLineWidth(6.0);
+
+	ofEnableBlendMode(OF_BLENDMODE_ADD);
 	del.draw();
+	ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+
+	ofSetLineWidth(1.0);
 	ofFill();
 	ofPopMatrix();
 
@@ -159,7 +197,7 @@ void hakoVisPLink_Laser::draw_PatternB(){
 
 	ofPopMatrix();
 
-	camera.end();
+	ShCam.camera.end();
 
 	ofSetLineWidth(1.0);
 	ofSetColor(255);
