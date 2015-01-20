@@ -24,9 +24,6 @@ dpCameraUnit_cvFX::dpCameraUnit_cvFX(){
 	mGui.addSlider("BlurSize", 0.0, 40.0, &mParam_Blur);
 	mGui.addSpacer();
 	mGui.addToggle("Invert", &mEnableInvert);
-	mGui.addToggle("Canny", &mEnableCanny);
-	mGui.addRangeSlider("CannyThr", 0.0, 255.0, &mParam_Canny_Thr1, &mParam_Canny_Thr2);
-	mGui.addSpacer();
 	mGui.addToggle("FrameDiff", &mEnableFrameDiff);
     mGui.addToggle("Threshold", &mEnableThreshold);
     mGui.addSlider("ThrVal", 0.0, 255.0, &mParam_Threshold);
@@ -39,11 +36,17 @@ dpCameraUnit_cvFX::dpCameraUnit_cvFX(){
 	mGui.addToggle("AccumelateWeight", &mEnableAccumlateWeight);
 	mGui.addSlider("Time", 0.0, 1.0, &mParam_accum_Time);
 	mGui.addSpacer();
+	mGui.addToggle("Erode", &mEnableErode1);
+	mGui.addIntSlider("NumProc", 0, 10, &mParam_Erode_num1)->setValue(3);
 	mGui.addToggle("Dilate", &mEnableDilate);
-	mGui.addIntSlider("NumProc", 0, 10, &mParam_Dilate_num);
 	mGui.addSpacer();
-	mGui.addToggle("Erode", &	mEnableErode);
-	mGui.addIntSlider("NumProc", 0, 10, &mParam_Erode_num);
+	mGui.addIntSlider("NumProc", 0, 10, &mParam_Dilate_num)->setValue(3);
+	mGui.addSpacer();
+	mGui.addToggle("Erode", &mEnableErode);
+	mGui.addIntSlider("NumProc", 0, 10, &mParam_Erode_num)->setValue(3);
+	mGui.addToggle("Canny", &mEnableCanny);
+	mGui.addRangeSlider("CannyThr", 0.0, 255.0, &mParam_Canny_Thr1, &mParam_Canny_Thr2);
+	mGui.addSpacer();
 
 
 	mGui.autoSizeToFitWidgets();
@@ -133,7 +136,6 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 
 		if (mEnableBlur)		ofxCv::blur(mGraySource, mGraySource, mParam_Blur);
 		if (mEnableInvert)		ofxCv::invert(mGraySource);
-		if (mEnableCanny)		ofxCv::Canny(mGraySource, mGraySource, mParam_Canny_Thr2, mParam_Canny_Thr1);
 
 		if (mEnableFrameDiff){
 			ofxCv::absdiff(mGraySource, mGraySource_forDiff, mGraySource_forDiff);
@@ -151,6 +153,13 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 														  &mGraySource,
 														  &mAccum, mParam_accum_Time);
 
+
+		if (mEnableErode1) {
+			for (int i = 0;i < mParam_Erode_num1;i++){
+				ofxCv::erode(mGraySource);
+			}
+		}
+
 		if (mEnableDilate) {
 			for (int i = 0;i < mParam_Dilate_num;i++){
 				ofxCv::dilate(mGraySource);
@@ -162,6 +171,8 @@ void dpCameraUnit_cvFX::update(ofImage &pix, bool newFrame){
 				ofxCv::erode(mGraySource);
 			}
 		}
+
+		if (mEnableCanny)		ofxCv::Canny(mGraySource, mGraySource, mParam_Canny_Thr2, mParam_Canny_Thr1);
 
 		mSource.update();
 		mGraySource.update();

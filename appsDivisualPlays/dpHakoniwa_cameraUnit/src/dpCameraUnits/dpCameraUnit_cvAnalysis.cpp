@@ -46,7 +46,7 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 //	mGui.addToggle("UseTargetColor"	, &mParamCF_UseTargetColor);
 	mGui.addRangeSlider("Area", 0.0, 10000.0, &mParamCF_MinArea, &mParamCF_MaxArea);
 	mGui.addSlider("MaxBlobNum", 0.0, 500.0, &mParamCF_MaxBlobNum);
-	mGui.addSlider("Threshold", 0.0, 255.0, &mParamCF_Threshold);
+	mGui.addSlider("Threshold", 0.0, 255.0, &mParamCF_Threshold)->setValue(200);
 	mGui.addLabel("OptFlow");
 	mGui.addSpacer();
 	mGui.addSlider("filter_Speed", 0.0, 100.0, &mOptFlow_filterSpd);
@@ -125,7 +125,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 
 		bRectM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/boundingRect");
 		blobM .setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/blob");
-		areaM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/area");
+		areaM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/sarea");
 
 		bRectM.addIntArg(mContFinder.getContours().size());
 		blobM.addIntArg(mContFinder.getContours().size());

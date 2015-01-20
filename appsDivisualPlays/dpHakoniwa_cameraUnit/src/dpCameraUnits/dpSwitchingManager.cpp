@@ -190,14 +190,15 @@ void dpSwitchingManager::update(){
 		Live.setAddress("/dp/caemraUnit/aliveMonitor");
 		multiCast(Live);
 
-		for (int j = 0;j < hakoniwas.size();j++){
-			ofxOscMessage current;
-			current.setAddress("/dp/cameraUnit/sceneState/"+hakoniwas[i]->CVPreset);
-			current.addIntArg(hakoniwas[i]->isEnable ? 1 : 0);
-			multiCast(current);
-		}
-
 	}
+
+	for (int j = 0;j < hakoniwas.size();j++){
+		ofxOscMessage current;
+		current.setAddress("/dp/cameraUnit/sceneState/"+hakoniwas[j]->CVPreset);
+		current.addIntArg(hakoniwas[j]->isEnable ? 1 : 0);
+		multiCast(current);
+	}
+
 }
 
 void dpSwitchingManager::draw(){
@@ -578,9 +579,8 @@ int dpSwitchingManager::searchHakoniwaIsActive(hakoniwaType type){
 void dpSwitchingManager::multiCast(ofxOscMessage &m){
 
 	for (int i = 0;i < oscListPtr->size();i++){
-			ofxOscSender sender;
-			sender.setup((*oscListPtr)[i], 10000);
-			sender.sendMessage(m);
+		sender.setup((*oscListPtr)[i], 10000);
+		sender.sendMessage(m);
 	}
 
 }

@@ -135,6 +135,7 @@ public:
 
 
 	//MultiCasting
+	ofxOscSender sender;
 	void multiCast(ofxOscMessage &m);
 	bool				senderSW[9];
 	vector<string>		*oscListPtr;
