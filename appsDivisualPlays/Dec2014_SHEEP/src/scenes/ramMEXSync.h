@@ -54,6 +54,7 @@ public:
 	vector<oscPreview*> previews;
 protected:
 	vector<string> scenes;
+	vector<string> scenes_pair;
 	ramMotionExtractor	mex;
 	ofxOscSender		sender;
 

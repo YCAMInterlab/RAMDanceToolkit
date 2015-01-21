@@ -18,19 +18,19 @@ void ramMEXSync::setupControlPanel(){
 	targScene = gui->addTextInput("TargScene", "dpHPLink_Laser");
 	targScene->setAutoClear(false);
 
-	scenes.push_back("dpHServoPendulum");
-	scenes.push_back("dpVisStage");
-	scenes.push_back("dpHWorm");
-	scenes.push_back("dpHfrozenIce");
-	scenes.push_back("dpHStruggle");
-	scenes.push_back("dpHSandStorm");
-	scenes.push_back("dpHMagPendulum");
- 	scenes.push_back("dpVisTheta");
-	scenes.push_back("dpHGearMove");
-	scenes.push_back("dpHTornado");
-	scenes.push_back("dpHPLink_Laser");
-	scenes.push_back("dpHPLink_Prism");
-	scenes.push_back("dpHPLink_Oil");
+	scenes.push_back("dpHServoPendulum");	scenes_pair.push_back("dpVisServoPendulum");
+	scenes.push_back("dpVisStage");			scenes_pair.push_back("");
+	scenes.push_back("dpHWorm");			scenes_pair.push_back("dpVisWorm");
+	scenes.push_back("dpHfrozenIce");		scenes_pair.push_back("dpVisIce");
+	scenes.push_back("dpHStruggle");		scenes_pair.push_back("dpVisStruggle");
+	scenes.push_back("dpHSandStorm");		scenes_pair.push_back("dpVisSandStorm");
+	scenes.push_back("dpHMagPendulum");		scenes_pair.push_back("dpVisMagPendulum");
+ 	scenes.push_back("dpVisTheta");			scenes_pair.push_back("");
+	scenes.push_back("dpHGearMove");		scenes_pair.push_back("");
+	scenes.push_back("dpHTornado");			scenes_pair.push_back("dpVisTornado");
+	scenes.push_back("dpHPLink_Laser");		scenes_pair.push_back("dpVisPLink_Laser");
+	scenes.push_back("dpHPLink_Prism");		scenes_pair.push_back("dpVisPLink_Prism");
+	scenes.push_back("dpHPLink_Oil");		scenes_pair.push_back("dpVisPLink_Oil");
 	
 	gui->addLabel("SceneSelect",OFX_UI_FONT_LARGE);
 	gui->addRadio("SceneSelector", scenes);
@@ -41,6 +41,7 @@ void ramMEXSync::setupControlPanel(){
 	gui->addToggle("Disp2", &mSignal_DispB);
 	gui->addLabel("SendSignal",OFX_UI_FONT_LARGE);
 	gui->addButton("Send", false);
+	gui->addButton("AllClear", false);
 	
 	gui->addSpacer();
 	gui->addLabel("Extractor",OFX_UI_FONT_LARGE);
@@ -142,7 +143,7 @@ void ramMEXSync::draw(){
 		ofFill();
 		
 		string info = previews[i]->msg.getAddress() + "\n";
-		
+		info += previews[i]->msg.getRemoteIp() + "\n";
 		ofSetColor(130,30,80);
 		for (int j = 0;j < previews[i]->msg.getNumArgs();j++){
 			if (previews[i]->msg.getArgType(j) == OFXOSC_TYPE_STRING)
@@ -162,7 +163,30 @@ void ramMEXSync::draw(){
 
 void ramMEXSync::onPanelChanged(ofxUIEventArgs &e){
 	ofxUIWidget* w = e.widget;
-	
+
+	if (w->getName() == "AllClear"){
+		for (int i = 0;i < scenes.size();i++){
+			ofxOscMessage scn,pair;
+			scn.setAddress("/ram/set_scene");
+			scn.addStringArg(scenes[i]);
+			scn.addIntArg(0);
+			scn.addIntArg(0);
+			scn.addIntArg(0);
+
+			pair.setAddress("/ram/set_scene");
+			pair.addStringArg(scenes_pair[i]);
+			pair.addIntArg(0);
+			pair.addIntArg(0);
+			pair.addIntArg(0);
+
+			for (int j = 0;j < 2;j++){
+				sender.setup(j == 0 ? ip_1 : ip_2, 10000);
+				sender.sendMessage(scn);
+				sender.sendMessage(pair);
+			}
+		}
+	}
+
 	if (w->getName() == "Remote:Float"){
 		for (int i = 0;i < 2;i++){
 			if (i == 0) sender.setup(ip_1, 10000);
@@ -201,6 +225,25 @@ void ramMEXSync::onPanelChanged(ofxUIEventArgs &e){
 			setScene.addIntArg(mSignal_DispB);
 			
 			sender.sendMessage(setScene);
+
+			int pId = -1;
+			for (int j = 0;j < scenes.size();j++){
+				if (targScene->getTextString() == scenes[j]){
+					pId = j;
+					break;
+				}
+			}
+
+			if (pId != -1){
+				ofxOscMessage pairScene;
+				pairScene.setAddress("/ram/set_scene");
+				pairScene.addStringArg(scenes_pair[pId]);
+				pairScene.addIntArg(mSignal_Enable);
+				pairScene.addIntArg(mSignal_DispA);
+				pairScene.addIntArg(mSignal_DispB);
+
+				sender.sendMessage(pairScene);
+			}
 		}
 	}
 	
