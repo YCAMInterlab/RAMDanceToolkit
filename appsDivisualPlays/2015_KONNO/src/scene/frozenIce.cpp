@@ -385,9 +385,11 @@ void frozenIce::draw(){
     
     ramBeginCamera();
     
+    motionExtractor.draw();
+    
     /*=== Preview selected nodes ===*/
     
-    if (mDrawPreview)	motionExtractor.draw();
+//    if (mDrawPreview)	motionExtractor.draw();
     
     
     /*=== Example drawing with motionExtractor ===*/
