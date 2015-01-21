@@ -185,7 +185,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 
 void dpSwitchingManager::update(){
 
-	if (ofGetFrameNum() % 15 == 0 && oscListPtr != NULL){
+	if (ofGetFrameNum() % 15 == 0 && oscListPtr != NULL && totalManage){
 
 		ofxOscMessage Live;
 		Live.setAddress("/dp/caemraUnit/aliveMonitor");

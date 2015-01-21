@@ -12,6 +12,9 @@ void ofApp::setup(){
 	dpSwitcher.oscListPtr = &(dpCameraUnit.oscSendList);
 
 	ofSetLogLevel(OF_LOG_ERROR);
+    
+//    dpCameraUnit.gui.addToggle("TotalManager", &dpSwitcher.totalManage);
+    dpSwitcher.totalManage = true;
 }
 
 //--------------------------------------------------------------
