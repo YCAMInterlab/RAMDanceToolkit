@@ -10,10 +10,11 @@
 #define __dpScore__dpScoreMasterHakoniwa__
 
 #include "dpScoreCommon.h"
-#include "ofxOsc.h"
-#include "ofxMotioner.h"
 #include "dpScoreAnalyzeMean.h"
 #include "dpScoreAnalyzePixelate.h"
+#include "dpScoreUniqueStack.h"
+#include "ofxOsc.h"
+#include "ofxMotioner.h"
 #include "ofxUI.h"
 
 DP_SCORE_NAMESPACE_BEGIN
@@ -33,14 +34,14 @@ public:
     void turnOnValve(int index);
     void turnOffAllPins();
     bool getIsOpeningValve(int index);
-    
-    int getNumUniqueScenes() const;
-    void resetUniqueScenes();
-    void setUniqueScene(int sceneIndex, bool win0, bool win1);
     void turnOffAllScenes();
+    
+    UniqueStringStack getUniqueScenes() const { return mUniqueScenes; }
     
     bool getIsWindowOn(int windowIndex) const;
 
+    void setUniqueScene(int sceneIndex, bool win0, bool win1);
+    
     void guiEvent(ofxUIEventArgs& e);
     
     enum class AnalyzeType {
@@ -58,21 +59,12 @@ public:
         Num,
     };
     
-    enum class ElementLevel {
-        None,
-        Low,
-        Mid,
-        High,
-        Num,
-    };
-    
     enum Window {
         WINDOW_0,
         WINDOW_1,
         NUM_WINDOWS,
     };
     
-    constexpr static const int kNumScenes{12};
     constexpr static const int kNumValvePins{6};
     constexpr static const int kNumPumpPins{2};
     
@@ -84,8 +76,6 @@ public:
     constexpr static const int kUpdateFrames{10};
     
     constexpr static const float kGuiWidth{250.f};
-    
-    static const string kSceneNames[];
     
     static const int kValvePins[];
     static const int kPumpPins[];
@@ -106,6 +96,8 @@ public:
     static const int kPortNumberCameraUnit;
     
     static const string kOscAddrRamSetScene;
+    
+    static const string kXmlSettingsPath;
     
     ofVec2f mTextLeftCorner{0.f, 0.f};
     
@@ -154,6 +146,9 @@ private:
     ofxOscSender mMasterHakoniwaOscServer;
     ofxOscSender mCameraUnitOscServer;
     
+    UniqueStringStack mUniqueScenes;
+    vector<UniqueStringStack> mUniqueScores;
+    
     ofEasyCam mCam;
     ofRectangle mCamViewport;
     
@@ -161,20 +156,22 @@ private:
     vector<Pump> mPumps;
     
     map<string, Scene> mScenes;
-    vector<string> mUniqueScenes;
+    
+    string mCurrentScore{""};
     
     AnalyzeType mAnalyzeType{AnalyzeType::Mean};
     AnalyzeMean mAnalyzeMean;
     AnalyzePixelate mAnalyzePixelate;
     
-    float mValveOpenDuration{0.5f};
+    float mValveOpenDuration{0.3f};
     
     bool mEmergencyStop{false};
     
     ofxUIToggle* mEnableAllToggle{nullptr};
     bool mEnableMotioner{false};
     bool mEnableCameraUnit{false};
-    bool mEnableOscOut{false};
+    bool mEnableOscOutRDTK{false};
+    bool mEnableOscOutMH{false};
     
     float mEnabledTime{0.f};
     
