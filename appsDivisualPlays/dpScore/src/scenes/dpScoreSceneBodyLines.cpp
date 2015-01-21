@@ -14,6 +14,19 @@ BodyLinesNode::BodyLinesNode()
 {
 }
 
+BodyLinesNode::~BodyLinesNode()
+{
+    spd.clear();
+    axis.clear();
+    vertices.clear();
+    initialVertices.clear();
+    verticesLines.clear();
+    verticesColorsR.clear();
+    verticesColorsW.clear();
+    vbo.clear();
+    vboLines.clear();
+}
+
 void BodyLinesNode::setupPoints()
 {
     vertices.assign(kNumVertices, ofVec3f::zero());
@@ -194,8 +207,8 @@ void SceneBodyLines::initialize()
     dpDebugFunc();
     
     mUICanvas = new ofxUICanvas();
-    mUICanvas->setName(getName());
-    mUICanvas->addLabel(getName());
+    mUICanvas->setName(getShortName());
+    mUICanvas->addLabel(getShortName(), OFX_UI_FONT_SMALL);
     mUICanvas->addSpacer();
     
     mCam.disableMouseInput();

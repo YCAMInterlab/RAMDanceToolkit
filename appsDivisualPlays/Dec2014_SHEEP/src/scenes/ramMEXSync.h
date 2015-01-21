@@ -44,7 +44,7 @@ public:
 	inline
 	string getName() const { return "Presentor"; }
 
-	const string ip_1 = "192.168.20.26";
+	const string ip_1 = "192.168.20.2";
 	const string ip_2 = "192.168.20.3";
 	
 	bool mSignal_Enable;
@@ -54,6 +54,7 @@ public:
 	vector<oscPreview*> previews;
 protected:
 	vector<string> scenes;
+	vector<string> scenes_pair;
 	ramMotionExtractor	mex;
 	ofxOscSender		sender;
 

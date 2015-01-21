@@ -76,8 +76,8 @@ void SceneDataDisplacement::initialize()
     dpDebugFunc();
     
     mUICanvas = new ofxUICanvas();
-    mUICanvas->setName(getName());
-    mUICanvas->addLabel(getName());
+    mUICanvas->setName(getShortName());
+    mUICanvas->addLabel(getShortName(), OFX_UI_FONT_SMALL);
     mUICanvas->addSpacer();
     mUICanvas->addSlider("freq", 10.f, 50.f, &mFreq);
     mUICanvas->addSlider("amp", 10.f, 50.f, &mAmp);
@@ -142,12 +142,13 @@ void SceneDataDisplacement::draw()
     ofRotateY(15.f);
     ofRotateZ(-20.f);
     ofNoFill();
+    ofSetLineWidth(1.5f);
     ofSetSphereResolution(50);
-    ofSetColor(ofColor::white, 64);
+    ofSetColor(ofColor::white, 100);
     mSphereMesh.drawWireframe();
-    glPointSize(2.f);
-    ofSetColor(ofColor::white, 128);
-    mSphereMesh.drawVertices();
+    //glPointSize(2.f);
+    //ofSetColor(ofColor::white, 128);
+    //mSphereMesh.drawVertices();
     mCam.end();
     mShader.end();
 }

@@ -429,9 +429,9 @@ void ofxKsmrStepManager::sendBytesOnline(unsigned char *buffer, int length){
 	if (useOsc){
 		ofxOscMessage m;
 		m.setAddress("/dp/hakoniwa/Ksmrmotor");
-		m.addIntArg(length);
 
 		if (sendByteSimply){
+			m.addIntArg(length);
 
 			for (int i = 0;i < length;i++){
 				m.addIntArg(int(buffer[i]));

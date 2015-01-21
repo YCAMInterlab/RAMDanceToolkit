@@ -24,6 +24,12 @@ BodyBoxNode::BodyBoxNode()
              });
 }
 
+BodyBoxNode::~BodyBoxNode()
+{
+    screenCoords.clear();
+    randomPoints.clear();
+}
+
 BodyBoxNode& BodyBoxNode::operator = (const BodyBoxNode& rhs)
 {
     return *this = rhs;
@@ -62,8 +68,8 @@ void SceneBodyBox::initialize()
     dpDebugFunc();
     
     mUICanvas = new ofxUICanvas();
-    mUICanvas->setName(getName());
-    mUICanvas->addLabel(getName());
+    mUICanvas->setName(getShortName());
+    mUICanvas->addLabel(getShortName(), OFX_UI_FONT_SMALL);
     mUICanvas->addSpacer();
     mUICanvas->addSlider("Division", 4.f, 40.f, &mDiv);
     ofAddListener(mUICanvas->newGUIEvent, this, &SceneBodyBox::guiEvent);

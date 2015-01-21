@@ -16,7 +16,7 @@ DP_SCORE_NAMESPACE_BEGIN
 
 struct BodyLinesNode final : public ofxMot::Node {
     BodyLinesNode();
-    virtual ~BodyLinesNode() = default;
+    virtual ~BodyLinesNode();
     BodyLinesNode& operator = (const BodyLinesNode& rhs) { return *this = rhs; }
     
     void setupPoints();

@@ -42,6 +42,8 @@ HakoniwaParallelLink_Base::HakoniwaParallelLink_Base(){
 		mDigitalIO[i] = false;
 		mDigitalIO_Prev[i] = false;
 	}
+
+	mFlagNeedDestract = false;
 }
 
 void HakoniwaParallelLink_Base::update(){
@@ -79,7 +81,6 @@ void HakoniwaParallelLink_Base::update(){
 
 	update_over();
 
-	mFlagNeedDestract = false;
 }
 
 void HakoniwaParallelLink_Base::draw(){
@@ -320,6 +321,15 @@ void HakoniwaParallelLink_Base::onDisabled(){
 	if (mFlagNeedDestract){
 		mLinkManager.setPlot_inClamp(ofVec3f(0.0,196.0,0.0));
 		mLinkManager.sendSignal();
+		
+		for (int i = 0;i < 6;i++){
+            ofxOscMessage m;
+            m.setAddress("/dp/hakoniwa/digitalWrite/");
+            m.addIntArg(2+i);
+            m.addIntArg(0);
+            mOscSender->sendMessage(m);
+			mDigitalIO_Prev[i] = false;
+		}
 	}
 }
 

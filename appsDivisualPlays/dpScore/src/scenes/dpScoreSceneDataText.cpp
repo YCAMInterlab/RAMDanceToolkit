@@ -14,8 +14,8 @@ void SceneDataText::initialize()
 {
     dpDebugFunc();
     mUICanvas = new ofxUICanvas();
-    mUICanvas->setName(getName());
-    mUICanvas->addLabel(getName());
+    mUICanvas->setName(getShortName());
+    mUICanvas->addLabel(getShortName(), OFX_UI_FONT_SMALL);
     mUICanvas->addSpacer();
 }
 
@@ -31,13 +31,14 @@ void SceneDataText::shutDown()
 void SceneDataText::enter()
 {
     dpDebugFunc();
+    mVectors.clear();
     mFont.loadFont(kFontPath, kFontSize);
 }
 
 void SceneDataText::exit()
 {
     dpDebugFunc();
-    
+    mVectors.clear();
     mFont = ofTrueTypeFont();
 }
 

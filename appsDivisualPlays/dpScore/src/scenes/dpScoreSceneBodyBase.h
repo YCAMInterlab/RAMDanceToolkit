@@ -97,6 +97,8 @@ template<class Node>
 void SceneBodyBase<Node>::onSetupSkeleton(ofxMotioner::EventArgs &e)
 {
     OFX_BEGIN_EXCEPTION_HANDLING
+    if (mSkeletons.size() >= kMaxSkeleton) return;
+    
     const string& name = e.skeleton->getName();
     
     if (findSkeleton(name) == mSkeletons.end()) {
