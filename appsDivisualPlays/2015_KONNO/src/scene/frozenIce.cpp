@@ -68,12 +68,12 @@ void frozenIce::onEnabled(){
     manualControl = false;
     
     //Speed Control
-    dancerControl = false;
+    dancerControl = true;
     fixationTime = 5000.0;
-    speedThreshold = 2.0;
+    speedThreshold = 1.5;
     
     //Distance Control
-    distanceControl = true;
+    distanceControl = false;
     distanceThreshold = 150.0;
     
     //High and Low Control
@@ -195,18 +195,19 @@ void frozenIce::refleshState(){
         //Dancer Control [Frozing]
         //500フレーム以降は、5フレームに1回溶ける（0を送る）
         if(iceFrozing == true){
-            frozingCount++;
-            if(frozingCount > fixationTime){
-                if(frozingCount%5 == 0){
-                    hantei = 0;
-                }else{
-                    hantei = 1;
-                }
-            }else{
-                hantei = 1;
-            }
-        }else{
-            frozingCount = 0;
+            hantei = 1;
+//            frozingCount++;
+//            if(frozingCount > fixationTime){
+//                if(frozingCount%5 == 0){
+//                    hantei = 0;
+//                }else{
+//                    hantei = 1;
+//                }
+//            }else{
+//                hantei = 1;
+//            }
+//        }else{
+//            frozingCount = 0;
         }
     
     
@@ -293,18 +294,19 @@ void frozenIce::refleshState(){
         //Distance Control [Frozing]
         //500フレーム以降は、5フレームに1回溶ける（0を送る）
         if(iceFrozing == true){
-            frozingCount++;
-                if(frozingCount > fixationTime){
-                    if(frozingCount%5 == 0){
-                        hantei = 0;
-                    }else{
-                        hantei = 1;
-                    }
-                }else{
-                    hantei = 1;
-                }
-            }else{
-                frozingCount = 0;
+//            frozingCount++;
+//                if(frozingCount > fixationTime){
+//                    if(frozingCount%5 == 0){
+//                        hantei = 0;
+//                    }else{
+//                        hantei = 1;
+//                    }
+//                }else{
+//                    hantei = 1;
+//                }
+//            }else{
+//                frozingCount = 0;
+            hantei = 1;
             }
         
         //Distance Control [Melting]
