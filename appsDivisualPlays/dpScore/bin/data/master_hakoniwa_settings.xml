@@ -1,0 +1,41 @@
+<rdtk>
+	<phase>
+	    <scene name="dpVisServoPendulum"/>
+	    <scene name="dpVisMagPendulum"/>
+	    <scene name="dpVisSandStorm"/>
+	    <scene name="dpVisStruggle"/>
+	    <scene name="dpVisTheta"/>
+	    <scene name="dpHGearMove"/>
+	    <scene name="dpHWorm"/>
+	    <scene name="dpVisTornado"/>
+	    <scene name="dpVisStage"/>
+	</phase>
+</rdtk>
+
+<score>
+	<complexity>
+		 <scene name="dp::score::SceneVec2SimpleGraph"/>
+		 <scene name="dp::score::SceneVec2Plotter"/>
+		 <scene name="dp::score::SceneDataText"/>
+		 <scene name="dp::score::SceneDataSlider"/>
+		 <scene name="dp::score::SceneBodyScan"/>
+		 <scene name="dp::score::SceneBodyPatterns"/>
+	</complexity>
+
+	<complexity>
+		<scene name="dp::score::SceneVec2Clocks"/>
+		<scene name="dp::score::SceneVec2Grid"/>
+		<scene name="dp::score::SceneDataCircle"/>
+		<scene name="dp::score::SceneDataCircle3D"/>
+		<scene name="dp::score::SceneBodyFlow"/>
+	</complexity>
+
+	<complexity>
+		 <scene name="dp::score::SceneDataDisplacement"/>
+		 <scene name="dp::score::SceneDataSphere"/>
+		 <scene name="dp::score::SceneDataWave"/>
+		 <scene name="dp::score::SceneBodyGlobe"/>
+		 <scene name="dp::score::SceneBodyBoids"/>
+	</complexity>
+</score>
+

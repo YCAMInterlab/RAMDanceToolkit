@@ -22,9 +22,9 @@ public:
     ofVec4f mMeanPrev;
     ofVec4f mMeanAddtion;
     floatInt mTotalAddition{0.f};
-    float mMeanLimit{30.f};
+    float mMeanLimit{20.f};
     int mPrevScene{0};
-    float mPrevSetSceneTime{0.f};
+    float mPrevSetSceneTime{-60.f};
     float mMinSetSceneTime{60.f};
     float mLastUpdateSpan{0.f};
     float mLastFrameTime{0.f};
