@@ -370,12 +370,19 @@ void dpSwitchingManager::SelectHakoniwa(hakoniwaType type, int slot){
 			if (targCvSlot == 0 || targCvSlot == 1){
 				FXPtr[targCvSlot]		.loadPreset(mSlots[targCvSlot].presetFile);
 				AnalysisPtr[targCvSlot]	.loadPreset(mSlots[targCvSlot].presetFile);
-				cout << "Load XML :" << mSlots[targCvSlot].presetFile << endl;
+				for (int i = 0;i < 4;i++)
+					AnalysisPtr[i].oscMatrixUI->setToggle(0, 2, false);
+
+				AnalysisPtr[targCvSlot] .oscMatrixUI->setToggle(0, 2, true);
 			}
 		}else{
 			if (targCvSlot == 2 || targCvSlot == 3){
 				FXPtr[targCvSlot]		.loadPreset(mSlots[targCvSlot].presetFile);
 				AnalysisPtr[targCvSlot]	.loadPreset(mSlots[targCvSlot].presetFile);
+				for (int i = 0;i < 4;i++)
+					AnalysisPtr[i].oscMatrixUI->setToggle(0, 2, false);
+
+				AnalysisPtr[targCvSlot] .oscMatrixUI->setToggle(0, 2, true);
 			}
 		}
 		matrixSW.setSW(targHako->sourceCh,
