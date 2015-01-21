@@ -66,7 +66,10 @@ string demangle(const char* name);
 template <class T> string getClassName(const T& t);
 template <class T> string getClassName();
 
-float getLineUped(float length, int index, int total);
+float getLineUped(float length,
+                  int index,
+                  int total,
+                  bool fromCenter = true);
 
 float clamp(float f, float range = 1.f);
 

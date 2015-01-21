@@ -40,11 +40,11 @@ private:
     bool bInversed[NMAGNETS];
     bool bTestMode = true;
     bool bEachMode = false;
+    bool bModeTwist = false;
     bool bHideNodeView;
     
-    vector <ofVec3f> vecRed;
-    vector <ofVec3f> vecGreen;
-    vector <ofVec3f> vecBlue;
+    float startTime;
+    bool bFirstInverseTimeDone;
     
     ramMotionExtractor	mMotionExtractor;
     ofxOscSender mSenderOnOff;

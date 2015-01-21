@@ -8,7 +8,7 @@
 
 #include "twistFinder.h"
 
-double twistFinder::findTwist(ramNode & node, float bendingLimit, float divisionForLimit){
+double twistFinder::findTwist(ramNode & node, float bendingLimit, float divisionForLimit) {
     
     ofNode parent, childR, childG, childB;
     ofQuaternion q = node.getOrientationQuat();
@@ -34,7 +34,7 @@ double twistFinder::findTwist(ramNode & node, float bendingLimit, float division
     }
     
     angle = angle * 180 / PI;
-    return angle;
+    return angle;   // -180.0f - 180.0f
 
 }
 
@@ -112,7 +112,7 @@ void twistFinder::debugDraw(ramMotionExtractor & motionExtractor, int nodeNum) {
     
 }
 
-void twistFinder::drawGraph(vector<float> & history, ofColor drawColor){
+void twistFinder::drawGraph(vector<float> & history, ofColor drawColor) {
 
     ofSetColor(255);
     ofNoFill();
@@ -132,5 +132,6 @@ void twistFinder::drawGraph(vector<float> & history, ofColor drawColor){
     ofSetColor(255);
     ofLine(0, mYL-300, 400, mYL-300);
     ofDrawBitmapString(ofToString(200-(mYL-300)), 400, mYL-300);
+
 }
 

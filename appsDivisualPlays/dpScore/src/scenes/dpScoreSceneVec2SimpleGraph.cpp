@@ -49,7 +49,7 @@ void SceneVec2SimpleGraph::exit()
 
 void SceneVec2SimpleGraph::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kOscAddrCameraUnitVector) {
+    if (m.getAddress() == kOscAddrCameraUnitVectorTotal) {
         if (m.getNumArgs() >= 2) {
             mVec.x = m.getArgAsFloat(0);
             mVec.y = m.getArgAsFloat(1);
@@ -101,7 +101,7 @@ void SceneVec2SimpleGraph::draw()
     const float mult{kHalfH * mSensorScale};
     if (mBuffer.size()>=2) {
         vector<ofVec2f> points;
-        ofSetColor(ofColor::white, 64);
+        ofSetColor(ofColor::white, 128);
         for (int i=0; i<mBuffer.size()-1; i++) {
             ofVec2f v0{mBuffer.at(i)};
             ofVec2f v1{mBuffer.at(i+1)};
@@ -118,7 +118,7 @@ void SceneVec2SimpleGraph::draw()
             points.push_back(ofVec2f(i*mStep, v0.y));
         }
         glPointSize(3.f);
-        ofSetColor(ofColor::white, 128);
+        ofSetColor(ofColor::white, 64);
         glEnableClientState(GL_VERTEX_ARRAY);
         glVertexPointer(2, GL_FLOAT, 0, &points.at(0).x);
         glDrawArrays(GL_POINTS, 0, points.size());

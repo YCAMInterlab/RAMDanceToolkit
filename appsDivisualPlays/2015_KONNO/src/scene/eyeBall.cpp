@@ -16,6 +16,8 @@ eyeBall::eyeBall(){
     
     sender.setup("192.168.20.73", 8528);
     sender2.setup("192.168.20.74", 8528);
+    
+    //receiver.setup(10000);
 }
 
 void eyeBall::setup(){
@@ -138,7 +140,10 @@ void eyeBall::onEnabled(){
     manualControl = false;
     reset = false;
     nodeControl = false;
-    sendServo = true;
+    
+    //sendServo = true;
+    //test用
+    sendServo = false;
     
     //とりあえずデフォルトでオートターン設定になるようにする
     autoTurn = true;
@@ -256,6 +261,21 @@ void eyeBall::refleshState(){
     n.addIntArg(servoY4_val);
     n.addIntArg(0);
     sender2.sendMessage(n);
+    
+//    //=== OSC Read =======
+//    
+//    // check for waiting messages
+//    while(receiver.hasWaitingMessages()){
+//        // get the next message
+//        ofxOscMessage r;
+//        receiver.getNextMessage(&r);
+//        
+//        // check for mouse moved message
+//        if(r.getAddress() == "/dp/cameraUnit/MagPendulum/features"){
+//            
+//        }
+//    }
+    //=== OSC Read =======
 }
 
 
