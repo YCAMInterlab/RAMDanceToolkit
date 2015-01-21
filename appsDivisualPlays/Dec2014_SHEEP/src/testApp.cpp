@@ -32,7 +32,11 @@
 #include "hakoVisPLink_Oil.h"
 #include "hakoVisPLink_Prism.h"
 
+#include "distanceMetaball.h"
+
 #include "ramMEXSync.h"
+
+distanceMetaball distMeta;
 
 HakoniwaPLink_Laser plink_laser;
 HakoniwaPLink_Oil	plink_oil;
@@ -74,6 +78,7 @@ void testApp::setup()
 	sceneManager.addScene( motionExt.getPtr());
 
 	sceneManager.addScene( mexS.getPtr());
+	sceneManager.addScene( distMeta.getPtr());
 
 	sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
 }

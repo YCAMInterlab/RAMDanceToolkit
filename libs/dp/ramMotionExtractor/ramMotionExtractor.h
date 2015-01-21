@@ -45,6 +45,7 @@ public:
 	void save(string file);
 	void load(string file);
 
+	void pushFromID(int actorId, int jointId);
 	void pushPort(ramMotionPort *mp, int actorId = -1);
 	void popPort(ramNodeFinder &nf);
 	void refleshActorFromList();
