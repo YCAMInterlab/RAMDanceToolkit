@@ -181,6 +181,11 @@ void ofApp::setup()
     //
     //dp::score::notifyObjectEvent(args);
     
+#ifndef DP_MASTER_HAKONIWA
+    keyPressed('f');
+    keyPressed('c');
+#endif
+    
     OFX_END_EXCEPTION_HANDLING
 }
 
