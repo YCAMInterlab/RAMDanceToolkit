@@ -50,6 +50,13 @@ const string& SceneBase::getName()
     return mName;
 }
 
+string SceneBase::getShortName()
+{
+    string name{mName};
+    ofStringReplace(name, "dp::score::Scene", "");
+    return name;
+}
+
 void SceneBase::onUpdate(ofxEventMessage& m)
 {
     update(m);

@@ -76,8 +76,8 @@ void SceneDataDisplacement::initialize()
     dpDebugFunc();
     
     mUICanvas = new ofxUICanvas();
-    mUICanvas->setName(getName());
-    mUICanvas->addLabel(getName());
+    mUICanvas->setName(getShortName());
+    mUICanvas->addLabel(getShortName(), OFX_UI_FONT_SMALL);
     mUICanvas->addSpacer();
     mUICanvas->addSlider("freq", 10.f, 50.f, &mFreq);
     mUICanvas->addSlider("amp", 10.f, 50.f, &mAmp);

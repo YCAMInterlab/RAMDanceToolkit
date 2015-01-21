@@ -15,8 +15,8 @@ void SceneVec2SimpleGraph::initialize()
     dpDebugFunc();
  
     mUICanvas = new ofxUICanvas();
-    mUICanvas->setName(getName());
-    mUICanvas->addLabel(getName());
+    mUICanvas->setName(getShortName());
+    mUICanvas->addLabel(getShortName(), OFX_UI_FONT_SMALL);
     mUICanvas->addSpacer();
     mUICanvas->addIntSlider("Step", 1, 10, &mStep);
     mUICanvas->addSlider("Sensor Scale", 0.f, 2.f, &mSensorScale);

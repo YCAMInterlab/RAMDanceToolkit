@@ -80,8 +80,8 @@ void SceneBodyGlobe::initialize()
     dpDebugFunc();
     
     mUICanvas = new ofxUICanvas();
-    mUICanvas->setName(getName());
-    mUICanvas->addLabel(getName());
+    mUICanvas->setName(getShortName());
+    mUICanvas->addLabel(getShortName(), OFX_UI_FONT_SMALL);
     mUICanvas->addSpacer();
     mUICanvas->addSlider("Sphere Scale", 200.f, 600.f, &mScale);
     mUICanvas->addSlider("Rotation Speed X", 0.f, 10.f, &mRotSpdX);
