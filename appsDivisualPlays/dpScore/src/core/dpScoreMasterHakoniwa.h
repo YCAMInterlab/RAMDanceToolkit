@@ -1,0 +1,192 @@
+//
+//  dpScoreMasterHakoniwa.h
+//  dpScore
+//
+//  Created by YoshitoONISHI on 1/18/15.
+//
+//
+
+#ifndef __dpScore__dpScoreMasterHakoniwa__
+#define __dpScore__dpScoreMasterHakoniwa__
+
+#include "dpScoreCommon.h"
+#include "ofxOsc.h"
+#include "ofxMotioner.h"
+#include "dpScoreAnalyzeMean.h"
+#include "dpScoreAnalyzePixelate.h"
+#include "ofxUI.h"
+
+DP_SCORE_NAMESPACE_BEGIN
+
+class MasterHakoniwa final {
+public:
+    static MasterHakoniwa& instance();
+    
+    void initialize();
+    void shutdown();
+    
+    void setupUI(ofxUITabBar* tabbar);
+    void update();
+    void updateCameraUnit(ofxEventMessage& m);
+    void draw();
+    
+    void turnOnValve(int index);
+    void turnOffAllPins();
+    bool getIsOpeningValve(int index);
+    
+    int getNumUniqueScenes() const;
+    void resetUniqueScenes();
+    void setUniqueScene(int sceneIndex, bool win0, bool win1);
+    void turnOffAllScenes();
+    
+    bool getIsWindowOn(int windowIndex) const;
+
+    void guiEvent(ofxUIEventArgs& e);
+    
+    enum class AnalyzeType {
+        Mean = 0,
+        Pixelate,
+        Num,
+    };
+    
+    enum class StageElements {
+        Hakoniwa = 0,
+        Dancer,
+        Lignt,
+        Sound,
+        Score,
+        Num,
+    };
+    
+    enum class ElementLevel {
+        None,
+        Low,
+        Mid,
+        High,
+        Num,
+    };
+    
+    enum Window {
+        WINDOW_0,
+        WINDOW_1,
+        NUM_WINDOWS,
+    };
+    
+    constexpr static const int kNumScenes{12};
+    constexpr static const int kNumValvePins{6};
+    constexpr static const int kNumPumpPins{2};
+    
+    constexpr static const float kTopOffset{30.f};
+    constexpr static const float kTextSpacing{12.f};
+    constexpr static const float kMargin{5.f};
+    constexpr static const float kLineWidth{320.f};
+    
+    constexpr static const int kUpdateFrames{10};
+    
+    constexpr static const float kGuiWidth{250.f};
+    
+    static const string kSceneNames[];
+    
+    static const int kValvePins[];
+    static const int kPumpPins[];
+    
+    static const ofColor kBackgroundColor;
+    static const ofColor kTextColor;
+    static const ofColor kTextColorDark;
+    
+    static const int kPumpPinForward;
+    static const int kPumpPinBack;
+    
+    static const float kPumpOpenDur[];
+    static const float kPumpCloseDur[];
+    
+    static const string kHostNameMasterHakoniwa;
+    static const int kPortNumberMasterHakoniwa;
+    static const string kHostNameCameraUnit;
+    static const int kPortNumberCameraUnit;
+    
+    static const string kOscAddrRamSetScene;
+    
+    ofVec2f mTextLeftCorner{0.f, 0.f};
+    
+private:
+    struct Valve {
+        void update(MasterHakoniwa* mh);
+        
+        bool open{false};
+        bool prevOpen{false};
+        float openedTime{0.f};
+        float closedTime{0.f};
+        int pin{0};
+        int nOpend{0};
+    };
+    
+    struct Pump {
+        void update(MasterHakoniwa* mh);
+        
+        bool open{false};
+        bool prevOpen{false};
+        float openedTime{0.f};
+        float closedTime{0.f};
+        int pin{0};
+    };
+    
+    struct Scene {
+        bool isEnabled() const;
+        bool window[NUM_WINDOWS]{false, false};
+        bool dirty{false};
+    };
+    
+    struct AnalyzeNone {};
+    
+    MasterHakoniwa() = default;
+    ~MasterHakoniwa() = default;
+    
+    MasterHakoniwa(const MasterHakoniwa&) = delete;
+    MasterHakoniwa& operator = (const MasterHakoniwa&) = delete;
+    
+    void sendSetScene(const string& name, bool win0, bool win1);
+    
+    void sendPin(int pin, bool open);
+    
+    void onDrawSkeleton(ofxMotioner::EventArgs &e);
+    
+    ofxOscSender mMasterHakoniwaOscServer;
+    ofxOscSender mCameraUnitOscServer;
+    
+    ofEasyCam mCam;
+    ofRectangle mCamViewport;
+    
+    vector<Valve> mValves;
+    vector<Pump> mPumps;
+    
+    map<string, Scene> mScenes;
+    vector<string> mUniqueScenes;
+    
+    AnalyzeType mAnalyzeType{AnalyzeType::Mean};
+    AnalyzeMean mAnalyzeMean;
+    AnalyzePixelate mAnalyzePixelate;
+    
+    float mValveOpenDuration{0.5f};
+    
+    bool mEmergencyStop{false};
+    
+    ofxUIToggle* mEnableAllToggle{nullptr};
+    bool mEnableMotioner{false};
+    bool mEnableCameraUnit{false};
+    bool mEnableOscOut{false};
+    
+    float mEnabledTime{0.f};
+    
+};
+
+typedef MasterHakoniwa MH;
+
+inline MasterHakoniwa& getMH()
+{
+    return MasterHakoniwa::instance();
+}
+
+DP_SCORE_NAMESPACE_END
+
+#endif /* defined(__dpScore__dpScoreMasterHakoniwa__) */

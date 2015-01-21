@@ -49,13 +49,23 @@ void dpTryTwistChecker::draw(){
     ramBeginCamera();
     
     mMotionExtractor.draw();
-    twFinder.debugDraw(mMotionExtractor);
 //    debugDraw();
 
+//    twFinder.debugDraw2(mMotionExtractor);
     
     ramEndCamera();
-    
-    
+//    twFinder.debugDraw(mMotionExtractor);
+//    twFinder.debugDraw3(mMotionExtractor);
+    ofPushMatrix();
+    twFinder.debugDraw4(mMotionExtractor, 0);
+    ofPopMatrix();
+
+    ofPushMatrix();
+    ofTranslate(500, 0);
+    twFinder.debugDraw4(mMotionExtractor, 1);
+    ofPopMatrix();
+
+
     if (bHideNodeView) example_drawDump();
     
 }

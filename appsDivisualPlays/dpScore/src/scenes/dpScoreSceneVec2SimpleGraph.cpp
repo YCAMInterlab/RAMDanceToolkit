@@ -13,13 +13,10 @@ DP_SCORE_NAMESPACE_BEGIN
 void SceneVec2SimpleGraph::initialize()
 {
     dpDebugFunc();
-    
-    mBuffer.clear();
-    mBuffer.assign(kW/mStep, ofVec2f::zero());
  
     mUICanvas = new ofxUICanvas();
-    mUICanvas->setName(getName());
-    mUICanvas->addLabel(getName());
+    mUICanvas->setName(getShortName());
+    mUICanvas->addLabel(getShortName(), OFX_UI_FONT_SMALL);
     mUICanvas->addSpacer();
     mUICanvas->addIntSlider("Step", 1, 10, &mStep);
     mUICanvas->addSlider("Sensor Scale", 0.f, 2.f, &mSensorScale);
@@ -38,11 +35,16 @@ void SceneVec2SimpleGraph::shutDown()
 void SceneVec2SimpleGraph::enter()
 {
     dpDebugFunc();
+    
+    mBuffer.clear();
+    mBuffer.assign(kW/mStep, ofVec2f::zero());
 }
 
 void SceneVec2SimpleGraph::exit()
 {
     dpDebugFunc();
+    
+    mBuffer.clear();
 }
 
 void SceneVec2SimpleGraph::update(ofxEventMessage& m)

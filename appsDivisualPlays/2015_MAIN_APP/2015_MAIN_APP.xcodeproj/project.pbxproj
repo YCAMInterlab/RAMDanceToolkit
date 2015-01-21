@@ -29,6 +29,7 @@
 		C6755BFF1A6BAE8F007E9984 /* dpHakoniwaMagnetPendulum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6755BF91A6BAE8F007E9984 /* dpHakoniwaMagnetPendulum.cpp */; };
 		C6755C001A6BAE8F007E9984 /* twistFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6755BFC1A6BAE8F007E9984 /* twistFinder.cpp */; };
 		C6957F1A1A68A07200DB75DB /* HakoniwaTheta.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6957F181A68A07200DB75DB /* HakoniwaTheta.cpp */; };
+		C6A2C0CA1A6E66A9000ED4DD /* sheepCam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A2C0C81A6E66A9000ED4DD /* sheepCam.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -163,6 +164,8 @@
 		C6755C051A6BB3AA007E9984 /* dpHakoVisTornado.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoVisTornado.h; sourceTree = "<group>"; };
 		C6957F181A68A07200DB75DB /* HakoniwaTheta.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakoniwaTheta.cpp; path = miura/HakoniwaTheta.cpp; sourceTree = "<group>"; };
 		C6957F191A68A07200DB75DB /* HakoniwaTheta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaTheta.h; path = miura/HakoniwaTheta.h; sourceTree = "<group>"; };
+		C6A2C0C81A6E66A9000ED4DD /* sheepCam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sheepCam.cpp; sourceTree = "<group>"; };
+		C6A2C0C91A6E66A9000ED4DD /* sheepCam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sheepCam.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -372,6 +375,8 @@
 		C66CCCD61A66750D00CE64E9 /* sheep */ = {
 			isa = PBXGroup;
 			children = (
+				C6A2C0C91A6E66A9000ED4DD /* sheepCam.h */,
+				C6A2C0C81A6E66A9000ED4DD /* sheepCam.cpp */,
 				C66CCD091A669A2A00CE64E9 /* testScenes.h */,
 				C66CCCD71A66750D00CE64E9 /* HakoniwaParallelLink_Base.cpp */,
 				C66CCCD81A66750D00CE64E9 /* HakoniwaParallelLink_Base.h */,
@@ -610,6 +615,7 @@
 				C66CCCF31A66750D00CE64E9 /* HakoniwaPlink_Oil.cpp in Sources */,
 				C66CCCF21A66750D00CE64E9 /* HakoniwaPLink_Laser.cpp in Sources */,
 				5E8C1FAE1A6D0BB1007F6144 /* frozenIce.cpp in Sources */,
+				C6A2C0CA1A6E66A9000ED4DD /* sheepCam.cpp in Sources */,
 				C66CCCF91A66750D00CE64E9 /* ofxKsmrStepManager.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
 				928AE9281A6CF5EE00CCA21D /* HakoniwaGearMove.cpp in Sources */,
