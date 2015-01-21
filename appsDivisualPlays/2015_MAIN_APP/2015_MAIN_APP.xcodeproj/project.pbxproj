@@ -25,7 +25,6 @@
 		C66CCCF91A66750D00CE64E9 /* ofxKsmrStepManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C66CCCEB1A66750D00CE64E9 /* ofxKsmrStepManager.cpp */; };
 		C66CCCFA1A66750D00CE64E9 /* virtualSteppingMotor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C66CCCED1A66750D00CE64E9 /* virtualSteppingMotor.cpp */; };
 		C66CCCFB1A66750D00CE64E9 /* ParallelLinkManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C66CCCEF1A66750D00CE64E9 /* ParallelLinkManager.cpp */; };
-		C6755BFE1A6BAE8F007E9984 /* axisConverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6755BF71A6BAE8F007E9984 /* axisConverter.cpp */; };
 		C6755BFF1A6BAE8F007E9984 /* dpHakoniwaMagnetPendulum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6755BF91A6BAE8F007E9984 /* dpHakoniwaMagnetPendulum.cpp */; };
 		C6755C001A6BAE8F007E9984 /* twistFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6755BFC1A6BAE8F007E9984 /* twistFinder.cpp */; };
 		C6957F1A1A68A07200DB75DB /* HakoniwaTheta.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6957F181A68A07200DB75DB /* HakoniwaTheta.cpp */; };
@@ -153,8 +152,6 @@
 		C66CCCEF1A66750D00CE64E9 /* ParallelLinkManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParallelLinkManager.cpp; sourceTree = "<group>"; };
 		C66CCCF01A66750D00CE64E9 /* ParallelLinkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallelLinkManager.h; sourceTree = "<group>"; };
 		C66CCD091A669A2A00CE64E9 /* testScenes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testScenes.h; sourceTree = "<group>"; };
-		C6755BF71A6BAE8F007E9984 /* axisConverter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = axisConverter.cpp; sourceTree = "<group>"; };
-		C6755BF81A6BAE8F007E9984 /* axisConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = axisConverter.h; sourceTree = "<group>"; };
 		C6755BF91A6BAE8F007E9984 /* dpHakoniwaMagnetPendulum.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpHakoniwaMagnetPendulum.cpp; sourceTree = "<group>"; };
 		C6755BFA1A6BAE8F007E9984 /* dpHakoniwaMagnetPendulum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaMagnetPendulum.h; sourceTree = "<group>"; };
 		C6755BFB1A6BAE8F007E9984 /* EmptyScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyScene.h; sourceTree = "<group>"; };
@@ -280,8 +277,6 @@
 			children = (
 				920BA37A1A67C9D700E4A227 /* dpHakoniwaSand.cpp */,
 				920BA37B1A67C9D700E4A227 /* dpHakoniwaSand.h */,
-				C6755BF71A6BAE8F007E9984 /* axisConverter.cpp */,
-				C6755BF81A6BAE8F007E9984 /* axisConverter.h */,
 				C6755BF91A6BAE8F007E9984 /* dpHakoniwaMagnetPendulum.cpp */,
 				C6755BFA1A6BAE8F007E9984 /* dpHakoniwaMagnetPendulum.h */,
 				C6755BFB1A6BAE8F007E9984 /* EmptyScene.h */,
@@ -622,7 +617,6 @@
 				C6755BFF1A6BAE8F007E9984 /* dpHakoniwaMagnetPendulum.cpp in Sources */,
 				C66CCCFA1A66750D00CE64E9 /* virtualSteppingMotor.cpp in Sources */,
 				C6957F1A1A68A07200DB75DB /* HakoniwaTheta.cpp in Sources */,
-				C6755BFE1A6BAE8F007E9984 /* axisConverter.cpp in Sources */,
 				C6755C001A6BAE8F007E9984 /* twistFinder.cpp in Sources */,
 				5E8C1FAF1A6D0BB1007F6144 /* magnetLooper.cpp in Sources */,
 				920BA37C1A67C9D700E4A227 /* dpHakoniwaSand.cpp in Sources */,
