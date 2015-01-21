@@ -27,7 +27,7 @@ public:
     void onDisabled();
     
     inline string getName() const {
-        return "eyeBall";
+        return "dpHEyeBall";
     }
     
     //----------
@@ -118,6 +118,8 @@ private:
     ramMotionExtractor	motionExtractor;
     ofxOscSender sender;
     ofxOscSender sender2;
+    
+    ofxOscReceiver receiver;
     
     bool mDrawLines;
     bool mDrawTriangle;
