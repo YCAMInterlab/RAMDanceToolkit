@@ -101,6 +101,18 @@ public:
         mScale = scale;
     }
     
+    void extendByThresh(int num){
+        for(auto &v:mGrids){
+            v.extendByThresh(num);
+        }
+    }
+    
+    void setExtendThreshNum(int num){
+        for(auto &v:mGrids){
+            v.setExtendThreshNum(num);
+        }
+    }
+    
     void update(){
         for(auto &v:mGrids){
             v.update();
