@@ -42,6 +42,9 @@ public:
 
     void setUniqueScene(int sceneIndex, bool win0, bool win1);
     
+    void setUniqueScore(int sceneIndex);
+    size_t getNumUniqueScores() const;
+    
     void guiEvent(ofxUIEventArgs& e);
     
     enum class AnalyzeType {
@@ -94,6 +97,8 @@ public:
     static const int kPortNumberMasterHakoniwa;
     static const string kHostNameCameraUnit;
     static const int kPortNumberCameraUnit;
+    static const string kHostNameScore;
+    static const int kPortNumberScore;
     
     static const string kOscAddrRamSetScene;
     
@@ -141,10 +146,13 @@ private:
     
     void sendPin(int pin, bool open);
     
+    void sendChangeScore(const string& name);
+    
     void onDrawSkeleton(ofxMotioner::EventArgs &e);
     
-    ofxOscSender mMasterHakoniwaOscServer;
-    ofxOscSender mCameraUnitOscServer;
+    ofxOscSender mMasterHakoniwaOscSender;
+    ofxOscSender mCameraUnitOscSender;
+    ofxOscSender mScoreOscSender;
     
     UniqueStringStack mUniqueScenes;
     vector<UniqueStringStack> mUniqueScores;
@@ -158,6 +166,8 @@ private:
     map<string, Scene> mScenes;
     
     string mCurrentScore{""};
+    int mCurrentScoreComplexity{0};
+    int mMaxComplexity{0};
     
     AnalyzeType mAnalyzeType{AnalyzeType::Mean};
     AnalyzeMean mAnalyzeMean;

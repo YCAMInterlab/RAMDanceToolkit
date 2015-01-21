@@ -27,6 +27,8 @@ const string MH::kHostNameMasterHakoniwa{"192.168.20.60"};
 const int MH::kPortNumberMasterHakoniwa {8528};
 const string MH::kHostNameCameraUnit{"192.168.20.5"};
 const int MH::kPortNumberCameraUnit{12400};
+const string MH::kHostNameScore{"192.168.20.11"};
+const int MH::kPortNumberScore{10000};
 
 const string MH::kOscAddrRamSetScene{"/ram/set_scene"};
 
@@ -116,6 +118,25 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     tabbar->addCanvas(sceneSelectTab);
     ofAddListener(sceneSelectTab->newGUIEvent, this, &MasterHakoniwa::guiEvent);
     
+    ofxUICanvas* scoreSelectTab{new ofxUICanvas()};
+    scoreSelectTab->setWidth(w);
+    scoreSelectTab->setHeight(h);
+    scoreSelectTab->setColorBack(MH::kBackgroundColor);
+    scoreSelectTab->setName("Select score");
+    scoreSelectTab->addLabel("Select score", OFX_UI_FONT_SMALL);
+    scoreSelectTab->addSpacer();
+    vector<string> scoreNames;
+    scoreNames.push_back("black");
+    for (int i=0; i<mUniqueScores.size(); i++) {
+        for (int j=0; j<mUniqueScores.at(i).getInitialList().size(); j++) {
+            scoreNames.push_back(mUniqueScores.at(i).getInitialList().at(j));
+        }
+    }
+    scoreSelectTab->addRadio("Scores", scoreNames);
+    tabbar->addCanvas(scoreSelectTab);
+    ofAddListener(scoreSelectTab->newGUIEvent, this, &MasterHakoniwa::guiEvent);
+    
+    
     tabbar->addSpacer(w, 1.f);
     tabbar->addLabel("Analyze method", OFX_UI_FONT_SMALL);
     vector<string> radioNames;
@@ -176,10 +197,10 @@ void MasterHakoniwa::initialize()
         mPumps.at(i).pin = kPumpPins[i];
     }
     
-    mMasterHakoniwaOscServer.setup(kHostNameMasterHakoniwa,
-                                   kPortNumberMasterHakoniwa);
-    mCameraUnitOscServer.setup(kHostNameCameraUnit,
-                               kPortNumberCameraUnit);
+    mMasterHakoniwaOscSender.setup(kHostNameMasterHakoniwa, kPortNumberMasterHakoniwa);
+    mCameraUnitOscSender.setup(kHostNameCameraUnit, kPortNumberCameraUnit);
+    mScoreOscSender.setup(kHostNameScore, kPortNumberScore);
+    
     turnOffAllPins();
     
     xml.pushTag("rdtk");
@@ -195,9 +216,9 @@ void MasterHakoniwa::initialize()
     mUniqueScenes.setInitialList(sceneNames);
     
     xml.pushTag("score");
-    const int numComplexity{xml.getNumTags("complexity")};
-    mUniqueScores.assign(numComplexity, UniqueStringStack());
-    for (int i=0; i<numComplexity; i++) {
+    mMaxComplexity = xml.getNumTags("complexity");
+    mUniqueScores.assign(mMaxComplexity, UniqueStringStack());
+    for (int i=0; i<mMaxComplexity; i++) {
         xml.pushTag("complexity", i);
         auto& stack = mUniqueScores.at(i);
         const int numScenes{xml.getNumTags("scene")};
@@ -394,6 +415,7 @@ void MasterHakoniwa::draw()
         auto& stack = mUniqueScores.at(i);
         alignedTranslate(0.f, kTextSpacing);
         
+        ofSetColor(kTextColor);
         ofDrawBitmapString("- complexity " + ofToString(i) + " -", ofPoint::zero());
         alignedTranslate(0.f, kTextSpacing);
         for (int j=0; j < stack.getInitialList().size(); j++) {
@@ -410,7 +432,6 @@ void MasterHakoniwa::draw()
     }
     
     ofPopMatrix();
-    
     
 
     ofPushMatrix();
@@ -516,6 +537,36 @@ void MasterHakoniwa::setUniqueScene(int sceneIndex, bool win0, bool win1)
     sendSetScene(sceneName, win0, win1);
 }
 
+void MasterHakoniwa::setUniqueScore(int sceneIndex)
+{
+    if (mCurrentScoreComplexity < 0 || mCurrentScoreComplexity >= mMaxComplexity) {
+        ofxThrowExceptionf(ofxException,
+                           "score complexity %d out of range",
+                           mCurrentScoreComplexity);
+    }
+    
+    auto& stack = mUniqueScores.at(mCurrentScoreComplexity);
+    
+    const string& s{stack.get(sceneIndex)};
+    
+    sendChangeScore(s);
+    
+    if (sceneIndex < 0 || sceneIndex >= stack.size()) {
+        ofxThrowExceptionf(ofxException,
+                           "scene index %d out of range",
+                           sceneIndex);
+    }
+    
+    
+    
+    ++mCurrentScoreComplexity %= mMaxComplexity;
+}
+
+size_t MasterHakoniwa::getNumUniqueScores() const
+{
+    
+}
+
 bool MasterHakoniwa::getIsWindowOn(int windowIndex) const
 {
     if (windowIndex < 0 || windowIndex >= NUM_WINDOWS) {
@@ -544,7 +595,7 @@ void MasterHakoniwa::sendPin(int pin, bool open)
     ofxOscMessage m;
     m.setAddress("/dp/hakoniwa/colorOfWater/"+ofToString(pin));
     m.addIntArg((int)open);
-    if (mEnableOscOutMH) mMasterHakoniwaOscServer.sendMessage(m);
+    if (mEnableOscOutMH) mMasterHakoniwaOscSender.sendMessage(m);
     //if (open)
     //    cout << pin << "=" << open << endl;
 }
@@ -586,9 +637,18 @@ void MasterHakoniwa::sendSetScene(const string& name, bool win0, bool win1)
             m.addIntArg((int)s.window[i]);
             //ss << s.window[i] << ", ";
         }
-        if (mEnableOscOutRDTK) mCameraUnitOscServer.sendMessage(m);
+        if (mEnableOscOutRDTK) mCameraUnitOscSender.sendMessage(m);
         //ofLogNotice() << ss.str();
     }
+}
+
+void MasterHakoniwa::sendChangeScore(const string& name)
+{
+    ofxOscMessage m;
+    m.setAddress(kOscAddrChangeScene);
+    m.addStringArg(name);
+    mCurrentScore = name;
+    mScoreOscSender.sendMessage(m);
 }
 
 void MasterHakoniwa::onDrawSkeleton(ofxMotioner::EventArgs &e)
@@ -664,6 +724,13 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
             else {
                 sendSetScene(toggleName, true, true);
             }
+        }
+    }
+    else if (widgetName == "Scores") {
+        auto* radio = static_cast<ofxUIRadio*>(e.widget);
+        const auto& toggleName = radio->getActiveName();
+        if (radio->getActive()->getValue()) {
+            sendChangeScore(toggleName);
         }
     }
     else if (widgetName == "Enable All") {
