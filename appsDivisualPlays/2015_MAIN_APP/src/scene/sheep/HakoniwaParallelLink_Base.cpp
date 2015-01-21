@@ -328,6 +328,7 @@ void HakoniwaParallelLink_Base::onDisabled(){
             m.addIntArg(2+i);
             m.addIntArg(0);
             mOscSender->sendMessage(m);
+			mDigitalIO_Prev[i] = false;
 		}
 	}
 }
