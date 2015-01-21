@@ -12,26 +12,28 @@
 #include "ramMain.h"
 #include "ramMotionExtractor.h"
 
-class dpHakoniwaIce : public ramBaseScene{
+class frozenIce : public ramBaseScene{
 public:
     
-    dpHakoniwaIce();
-    virtual ~dpHakoniwaIce(){};
+    frozenIce();
+    virtual ~frozenIce(){};
     
     void setup();
     void setupControlPanel();
     
     void update();
     void draw();
+    void onEnabled();
+    void onDisabled();
     
     //プログラム非選択時に、DMXを止める
     //------
-    void exit();
-    virtual void onDisabled();
+    //void exit();
+    //virtual void onDisabled();
     //------
     
     inline string getName() const {
-        return "dpHIce";
+        return "dpHfrozenIce";
     }
     
     //--Ice---
@@ -60,6 +62,13 @@ public:
     float distanceThreshold;
     //-------------------
     
+    //High and Low Control
+    //--------------------
+    bool HighandLowControl;
+    //ノードの上のしきい値
+    float HighandLowThreshold;
+    //--------------------
+    
     //ファンの操作用
     //-------------------
     bool fanStart;
@@ -78,6 +87,7 @@ public:
     
 private:
     
+    void refleshState();
     ramMotionExtractor	motionExtractor;
     ofxOscSender sender;
     

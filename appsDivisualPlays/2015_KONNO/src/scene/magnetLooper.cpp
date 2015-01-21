@@ -138,7 +138,7 @@ void magnetLooper::refleshState(){
     
     //====================================
     //スピードコントロール
-    if(speedControl == true){
+    if(speedControl == true){ 
         //oldしゃくとり
         //ダンサー0の特定ノードの早さがspeedThreshold以上だったら
         if(motionExtractor.getVelocitySpeedAt(0) > speedThreshold){
