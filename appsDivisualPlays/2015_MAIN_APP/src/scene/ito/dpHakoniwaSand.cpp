@@ -4,19 +4,27 @@ void dpHakoniwaSand::setupControlPanel(){
     
     mMotionExtractor.setupControlPanel(this,ofPoint(340,30));
     mMotionExtractor.load("motionExt_dpHSandStorm.xml");
-    ramGetGUI().addIntSlider("Val1_Test", 800, 2200, &val1);
-    ramGetGUI().addIntSlider("Val2_Test", 800, 2200, &val2);
-    ramGetGUI().addIntSlider("Val3_Test", 800, 2200, &val3);
+    ramGetGUI().addIntSlider("Val1_Test", 800, 2200, &val[0]);
+    ramGetGUI().addIntSlider("Val2_Test", 800, 2200, &val[1]);
+    ramGetGUI().addIntSlider("Val3_Test", 1000, 2000, &val[2]);
+    ramGetGUI().addIntSlider("Val1_Min", 0, 200, &minVal[0]);
+    ramGetGUI().addIntSlider("Val1_Max", 0, 200, &maxVal[0]);
+    ramGetGUI().addIntSlider("Val2_Min", 0, 200, &minVal[1]);
+    ramGetGUI().addIntSlider("Val2_Max", 0, 200, &maxVal[1]);
+    ramGetGUI().addIntSlider("Val3_Min", 0, 200, &minVal[2]);
+    ramGetGUI().addIntSlider("Val3_Max", 0, 200, &maxVal[2]);
+    
     ramGetGUI().addToggle("Test mode", &bTestMode);
-    
-//    vector<string> contents;
-//    contents.push_back("Hight");
-//    contents.push_back("Rot");
-//    
-    //ramGetGUI().addRadioGroup("mode__", contents, &mode);
-    
     bTestMode = false;
     
+    val[0] = 2200;
+    val[1] = 2200;
+    val[2] = 2000;
+    
+    for (int i = 0; i < 3; i++) {
+        minVal[i] = 30;
+        maxVal[i] = 180;
+    }
 }
 
 void dpHakoniwaSand::setup(){
@@ -30,9 +38,9 @@ void dpHakoniwaSand::sendOsc(){
     ofxOscMessage m;
     m.setAddress("/dp/hakoniwa/sand");
     
-    m.addIntArg(val1); // pulse width(usec) for motor1
-    m.addIntArg(val2); // pulse width(usec) for motor2
-    m.addIntArg(val3); // pulse width(usec) for motor3
+    m.addIntArg(val[0]); // pulse width(usec) for motor1
+    m.addIntArg(val[1]); // pulse width(usec) for motor2
+    m.addIntArg(val[2]); // pulse width(usec) for motor3
     
     mSender.sendMessage(m);
 }
@@ -42,21 +50,13 @@ void dpHakoniwaSand::update(){
     mMotionExtractor.update();
     
     if (!bTestMode) {
-//        if (mode == 0) {
-            val1 = (int)ofMap(mMotionExtractor.getPositionAt(0).y, 30, 180, 800, 2200);
-            val2 = (int)ofMap(mMotionExtractor.getPositionAt(1).y, 30, 180, 800, 2200);
-            val3 = (int)ofMap(mMotionExtractor.getPositionAt(2).y, 30, 180, 1000, 2000);
-//        } else if (mode ==1) {
-//            
-//                //not yet
-//        
-//        }
+        val[0] = ofClamp((int)ofMap(mMotionExtractor.getPositionAt(0).y, minVal[0], maxVal[0], 800, 2200), 800, 2200);
+        val[1] = ofClamp((int)ofMap(mMotionExtractor.getPositionAt(1).y, minVal[1], maxVal[1], 800, 2200), 800, 2200);
+        val[2] = ofClamp((int)ofMap(mMotionExtractor.getPositionAt(2).y, minVal[2], maxVal[2], 1000, 2000), 1000, 2000);
     }
 
     sendOsc();
-    
-//    cout << mode << endl;
-    
+
 }
 
 void dpHakoniwaSand::drawActor(const ramActor &actor){
@@ -80,9 +80,9 @@ void dpHakoniwaSand::onEnabled(){
 
 void dpHakoniwaSand::onDisabled(){
     
-    val1 = 2200;
-    val2 = 2200;
-    val3 = 2000;
+    val[0] = 2200;
+    val[1] = 2200;
+    val[2] = 2000;
     
     sendOsc();
 }
