@@ -15,9 +15,11 @@ SceneManager::SceneManager()
     mScenes.clear();
     
     mTabBar = new ofxUITabBar();
+#ifndef DP_MASTER_HAKONIWA
     mTabBar->setPosition(20.f, 40.f);
     mTabBar->addToggle("Update All", &mUpdateAll);
     mTabBar->addSpacer();
+#endif
 }
 
 SceneManager::~SceneManager()

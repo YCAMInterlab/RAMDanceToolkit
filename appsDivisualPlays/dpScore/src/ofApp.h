@@ -7,6 +7,7 @@
 #include "dpScoreSceneManager.h"
 #include "dpScoreEvent.h"
 #include "ofxMotioner.h"
+#include "ofxEvent.h"
 
 class ofApp final : public ofBaseApp {
 public:
@@ -25,11 +26,22 @@ public:
     void gotMessage(ofMessage msg) override;
     void guiEvent(ofxUIEventArgs &e);
     void onObjectReceived(dp::score::ObjectEventArgs& e);
+    void onEventReceived(ofxEventMessage& e);
     
 private:
+    void generateFakeMeanData();
+    void generateFakeVectorData();
+    string makeInternalCameraUnitAddress(const string& addr);
     dp::score::SceneManager mSceneManager;
     ofxOscReceiver mOscReceiver;
+    ofxOscMessage mCameraUnitMessageVector;
+    ofxOscMessage mCameraUnitMessageMean;
+    ofxOscMessage mCameraUnitMessagePixelateR;
+    ofxOscMessage mCameraUnitMessagePixelateG;
+    ofxOscMessage mCameraUnitMessagePixelateB;
     bool mInvert{false};
     bool mDebugCamUnit{false};
+    bool mShowFps{false};
+    bool mShowCursor{true};
 };
 

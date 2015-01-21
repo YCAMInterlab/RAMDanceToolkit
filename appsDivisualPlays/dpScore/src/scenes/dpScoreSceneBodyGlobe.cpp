@@ -18,6 +18,13 @@ SceneBodyGlobe::Node::Node()
     vbo.setVertexData(&vertices.at(0), vertices.size(), GL_DYNAMIC_DRAW);
 }
 
+SceneBodyGlobe::Node::~Node()
+{
+    vertices.clear();
+    points.clear();
+    vbo.clear();
+}
+
 SceneBodyGlobe::Node& SceneBodyGlobe::Node::operator = (const Node& rhs)
 {
     return *this = rhs;
@@ -73,8 +80,8 @@ void SceneBodyGlobe::initialize()
     dpDebugFunc();
     
     mUICanvas = new ofxUICanvas();
-    mUICanvas->setName(getName());
-    mUICanvas->addLabel(getName());
+    mUICanvas->setName(getShortName());
+    mUICanvas->addLabel(getShortName(), OFX_UI_FONT_SMALL);
     mUICanvas->addSpacer();
     mUICanvas->addSlider("Sphere Scale", 200.f, 600.f, &mScale);
     mUICanvas->addSlider("Rotation Speed X", 0.f, 10.f, &mRotSpdX);
@@ -99,6 +106,8 @@ void SceneBodyGlobe::enter()
     dpDebugFunc();
     
     mCam.enableMouseInput();
+    
+    mGlobeMap.clear();
 }
 
 void SceneBodyGlobe::exit()
@@ -106,6 +115,8 @@ void SceneBodyGlobe::exit()
     dpDebugFunc();
     
     mCam.disableMouseInput();
+    
+    mGlobeMap.clear();
 }
 
 void SceneBodyGlobe::update(ofxEventMessage& m)
@@ -131,7 +142,7 @@ void SceneBodyGlobe::draw()
     ofRotateX(ofGetElapsedTimef() * mRotSpdX);
     ofRotateY(ofGetElapsedTimef() * mRotSpdY);
     ofSetLineWidth(1.5f);
-    for (auto& it : mNodeVecMap) {
+    for (auto& it : mGlobeMap) {
         ofPushMatrix();
         ofTranslate(it.second->origin);
         for (auto p : it.second->nodes) {
@@ -160,14 +171,14 @@ void SceneBodyGlobe::setupSkeleton(SkeletonPtr skl)
 {
     auto globe = Globe::Ptr(new Globe());
     globe->origin = ofVec3f::zero();
-    mNodeVecMap[skl->getName()] = globe;
+    mGlobeMap[skl->getName()] = globe;
 }
 
 void SceneBodyGlobe::updateSkeleton(SkeletonPtr skl)
 {
     auto& joints = skl->getJoints();
-    auto it = mNodeVecMap.find(skl->getName());
-    if (it != mNodeVecMap.end()) {
+    auto it = mGlobeMap.find(skl->getName());
+    if (it != mGlobeMap.end()) {
         auto& vec = it->second->nodes;
         for (int i=0; i<vec.size(); i++) {
             auto p = vec.at(i);
@@ -178,13 +189,16 @@ void SceneBodyGlobe::updateSkeleton(SkeletonPtr skl)
             p->update();
         }
     }
+    else {
+        setupSkeleton(skl);
+    }
 }
 
 void SceneBodyGlobe::exitSkeleton(SkeletonPtr skl)
 {
-    auto it = mNodeVecMap.find(skl->getName());
-    if (it != mNodeVecMap.end()) {
-        mNodeVecMap.erase(it);
+    auto it = mGlobeMap.find(skl->getName());
+    if (it != mGlobeMap.end()) {
+        mGlobeMap.erase(it);
     }
 }
 

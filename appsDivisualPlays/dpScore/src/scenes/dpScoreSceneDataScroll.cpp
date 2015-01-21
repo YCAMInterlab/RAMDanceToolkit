@@ -16,8 +16,8 @@ void SceneDataScroll::initialize()
     dpDebugFunc();
     
     mUICanvas = new ofxUICanvas();
-    mUICanvas->setName(getName());
-    mUICanvas->addLabel(getName());
+    mUICanvas->setName(getShortName());
+    mUICanvas->addLabel(getShortName(), OFX_UI_FONT_SMALL);
     mUICanvas->addSpacer();
 }
 
@@ -38,6 +38,7 @@ void SceneDataScroll::enter()
     ofAddListener(ofxMotioner::updateSkeletonEvent,
                   this,
                   &SceneDataScroll::onUpdateSkeleton);
+    mSkeletons.clear();
 }
 
 void SceneDataScroll::exit()
@@ -47,6 +48,7 @@ void SceneDataScroll::exit()
     ofRemoveListener(ofxMotioner::updateSkeletonEvent,
                      this,
                      &SceneDataScroll::onUpdateSkeleton);
+    mSkeletons.clear();
 }
 
 void SceneDataScroll::update(ofxEventMessage& m)

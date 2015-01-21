@@ -105,7 +105,14 @@ DP_SCORE_NAMESPACE_BEGIN
 const int kW = 1920;
 const int kH = 1080;
 
-const int kFrameRate = 30;
+const int kFrameRate = 60;
+
+#ifdef DP_MASTER_HAKONIWA
+const int kMaxSkeleton = 3;
+#else
+const int kMaxSkeleton = 2;
+#endif
+
 const int kOscClientPort = 10000;
 
 const string kOscAddrChangeScene = "/dp/score/changeScene";
@@ -114,10 +121,15 @@ const string kOscAddrCameraUnitVector = "/dp/cameraUnit/vector";
 const string kOscAddrCameraUnitVectorTotal = "/dp/cameraUnit/vector/total";
 const string kOscAddrCameraUnitVectorFeatures = "/dp/cameraUnit/features";
 const string kOscAddrCaneraUnitVecContourBlob = "/dp/cameraUnit/contour/blob";
+const string kOscAddrCameraUnitPixelateR = "/dp/cameraUnit/pixelate/r";
+const string kOscAddrCameraUnitPixelateG = "/dp/cameraUnit/pixelate/g";
+const string kOscAddrCameraUnitPixelateB = "/dp/cameraUnit/pixelate/b";
 
 const string kOscAddrCameraUnitMean = "/dp/cameraUnit/mean";
 
 const string kOscAddrMotioner = "/dp/score/motioner";
+
+const string kEventAddrChangeScene = "/dp/score/changeScene";
 
 const string kSettingsDir = "settings/";
 const string kSettingsPrefix = "scoreUI-";
@@ -126,26 +138,6 @@ const int kNumCameraunitVectors = 10;
 
 const string kFontPath = "../../../resources/fonts/AkkoStd-Thin.otf";
 
-#ifdef DP_MASTER_HAKONIWA
-extern const string kHostNameMasterHakoniwa = "192.168.20.60";
-extern const int kPortNumberMasterHakoniwa = 8528;
-
-extern const string kHostNameCameraUnit = "192.168.20.5";
-extern const int kPortNumberCameraUnit = 12400;
-
-extern const int kNumScenes = 6;
-extern const string kSceneNames[kNumScenes] = {
-    "dpVisPLink_Laser",
-    //"dpVisMagPendulum",
-    "dpVisServoPendulum",
-    "dpVisSandStorm",
-    "dpVisStruggle",
-    "dpVisStage",
-    "dpVisTheta",
-};
-
-extern const string kOscAddrRamSetScene = "/ram/set_scene";
-#endif
 
 struct _handle {
     char* p;
