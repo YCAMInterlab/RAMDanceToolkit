@@ -61,6 +61,9 @@
 //onishi Scenes
 #include "FutureRE.h"
 
+//LEGENDARY RDTK Scenes!!!!!!!!
+#include "LineDrawing.h"
+#include "FourPoints.h"
 
 class testApp : public ramBaseApp
 {
@@ -147,5 +150,9 @@ public:
     
     // from RAM Dance Tool Kit
     FutureRE futureRE;
+    
+    // RDTK_Scenes_
+    LineDrawing line;
+    FourPoints fourPoints;
     
 };

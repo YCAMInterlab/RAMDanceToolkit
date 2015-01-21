@@ -171,7 +171,7 @@ private:
     
     ofxOscSender mSender;
     
-    float mScale = 1.0;
+    float mScale = 0.2;
     bool isRotMode = false;
 };
 
