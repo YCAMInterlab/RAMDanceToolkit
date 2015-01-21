@@ -21,6 +21,7 @@ public:
     }
     
     void reset(){
+        
         mMaps.clear();
         mMaps.assign(mDiv * mDiv, dpIceMapFace());
         
@@ -69,6 +70,18 @@ public:
     void extendEase(){
         for(auto &v:mMaps){
             v.extendEase();
+        }
+    }
+    
+    void extendByThresh(int num){
+        for(auto &v:mMaps){
+            v.extendByThresh(num);
+        }
+    }
+    
+    void setExtendThreshNum(int num){
+        for(auto &v:mMaps){
+            v.setExtendThreshNum(num);
         }
     }
     
@@ -141,6 +154,7 @@ public:
     }
     
 private:
+    
     vector<dpIceMapFace>mMaps;
     int mDiv = 1;
     
@@ -148,6 +162,7 @@ private:
     
     ofPoint mOffset;
     ofPoint mRot;
+    
 };
 
 #endif

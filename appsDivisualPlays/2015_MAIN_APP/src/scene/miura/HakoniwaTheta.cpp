@@ -8,7 +8,7 @@ void HakoniwaTheta::setupControlPanel(){
 
     gui->addToggle("Dump", &mDrawDump);
     gui->addToggle("Hidden", &mDrawhidden);
-    gui->addIntSlider("Video No", 1, 5, &mVideoNo);
+    gui->addIntSlider("Video No", 1, 3, &mVideoNo);
     gui->addSlider("Degree",0.0,360.0,&mDegreeOffset);
     
     mDegreeOffset = 180.0;
@@ -29,18 +29,32 @@ void HakoniwaTheta::setup(){
     sphere.setPosition(0, 0, 0);
     
     mVideoNo = 1;
-    vidPlay.loadMovie("./HakoniwaTheta/1.MP4");
-    vidPlay.setVolume(0);
-    vidPlay.setLoopState(OF_LOOP_NORMAL);
-    vidPlay.play();
-    sphere.mapTexCoordsFromTexture(vidPlay.getTextureReference());
+
+    for(int i = 1; i < 4; i++){
+        ostringstream ss;
+        ss <<  "./HakoniwaTheta/" << i << ".mov";
+        vidPlay[i].loadMovie(ss.str());
+        vidsetup[i] = false;
+
+    }
 
 }
 
 void HakoniwaTheta::update(){
 
     motionExtractor.update();
-    vidPlay.update();
+    
+    for(int i = 1; i < 4; i++){
+        if(vidPlay[i].isLoaded() && vidsetup[i] == false){
+            vidPlay[i].play();
+            vidPlay[i].setVolume(0);
+            vidPlay[i].setLoopState(OF_LOOP_NORMAL);
+            vidsetup[i] = true;
+            cout << "play " << i << endl;
+        }
+    }
+    
+    vidPlay[mVideoNo].update();
 
     portNo = motionExtractor.getNumPort()-1;
     int numActor = getNumNodeArray();
@@ -62,22 +76,27 @@ void HakoniwaTheta::draw(){
     
     ramBeginCamera();
     ofRotateZ(mDegreeOffset);
+
     if (ofGetFrameNum() % 3600 == 0){
-//        if(mVideoNo == 5){
-//            mVideoNo = 1;
-//        }
-        //        mVideoNo++;
-        mVideoNo = ofRandom(1 , 6);
+        if(mVideoNo == 3){
+            mVideoNo = 1;
+        }else{
+            mVideoNo++;
+        }
+
+//        mVideoNo = ofRandom(1 , 4);
         VideoChanged(mVideoNo);
     }
     
-    vidPlay.getTextureReference().bind();
+    sphere.mapTexCoordsFromTexture(vidPlay[mVideoNo].getTextureReference());
+    vidPlay[mVideoNo].getTextureReference().bind();
     
     ofQuaternion qForSphere_osc;
     qForSphere_osc = motionExtractor.getRotationAt(portNo);
     sphere.setOrientation(qForSphere_osc);
-    
+
     sphere.draw();
+    vidPlay[mVideoNo].getTextureReference().unbind();
     
     ramEndCamera();
     
@@ -96,21 +115,13 @@ void HakoniwaTheta::onPanelChanged(ofxUIEventArgs& e){
 void HakoniwaTheta::radiusChanged(int radius){
 
     sphere.set(radius, 50);
-//    sphere.setPosition(ofGetWidth()/2, ofGetHeight()/2, 0); // 位置
-//    sphere.setPosition(dpGetFirstScreenCenter()); // 位置
     sphere.setPosition(0, 0, 0);
 
 }
 
 void HakoniwaTheta::VideoChanged(int no){
 
-    ostringstream ss;
-    ss <<  "./HakoniwaTheta/" << no << ".MP4";
-    vidPlay.loadMovie(ss.str());
-    vidPlay.setVolume(0);
-    vidPlay.setLoopState(OF_LOOP_NORMAL);
-    vidPlay.play();
-    sphere.mapTexCoordsFromTexture(vidPlay.getTextureReference());
+    sphere.mapTexCoordsFromTexture(vidPlay[no].getTextureReference());
 
 }
 
@@ -140,4 +151,30 @@ void HakoniwaTheta::drawDump(){
         
         ofPopMatrix();
     }
+}
+
+void HakoniwaTheta::onDisabled(){
+    
+    cout << "ondisebled " << endl;
+//    for(int i = 1; i<6; i++){
+//        
+//        ostringstream ss;
+//        ss <<  "./HakoniwaTheta/" << i << ".MP4";
+//        vidPlay[i].stop();
+//    }
+    
+}
+
+void HakoniwaTheta::onEnabled(){
+    
+    cout << "onenabled " << endl;
+//    for(int i = 1; i<6; i++){
+//        
+//        ostringstream ss;
+//        ss <<  "./HakoniwaTheta/" << i << ".MP4";
+//        if(vidPlay[i].isLoaded()){
+//            vidPlay[i].play();
+//        }
+//    }
+    
 }

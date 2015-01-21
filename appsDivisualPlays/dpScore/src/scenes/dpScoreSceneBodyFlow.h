@@ -16,8 +16,9 @@ DP_SCORE_NAMESPACE_BEGIN
 
 class SceneBodyFlow final : public SceneBase {
 public:
-    struct Points {
+    struct Points final {
         Points();
+        ~Points();
         void update();
         void draw();
         vector<ofVec3f> p0;

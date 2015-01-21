@@ -61,6 +61,7 @@ public:
     int getId() const { return mId; }
     // return class name if we've not called setName()
     const string& getName();
+    string getShortName();
     const easeFunc getEaseFunc() const { return mEaseFunc; }
     
     void setDrawHeader(bool draw) { mDrawHeader = draw; }

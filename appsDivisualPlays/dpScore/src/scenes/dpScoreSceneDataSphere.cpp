@@ -66,8 +66,8 @@ void SceneDataSphere::initialize()
     dpDebugFunc();
     
     mUICanvas = new ofxUICanvas();
-    mUICanvas->setName(getName());
-    mUICanvas->addLabel(getName());
+    mUICanvas->setName(getShortName());
+    mUICanvas->addLabel(getShortName(), OFX_UI_FONT_SMALL);
     mUICanvas->addSpacer();
 }
 
@@ -94,6 +94,7 @@ void SceneDataSphere::enter()
 void SceneDataSphere::exit()
 {
     dpDebugFunc();
+    mCircles.clear();
 }
 
 void SceneDataSphere::update(ofxEventMessage& m)

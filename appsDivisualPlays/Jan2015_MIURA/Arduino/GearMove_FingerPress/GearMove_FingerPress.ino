@@ -11,7 +11,7 @@ byte signalStock[128];
 
 IPAddress _ip(192,168,20,50);
 
-IPAddress _outIp(192, 168, 20, 4);
+IPAddress _outIp(192, 168, 20, 5);
 const unsigned int _outPort = 12400;
 
 int pressPin = 0;

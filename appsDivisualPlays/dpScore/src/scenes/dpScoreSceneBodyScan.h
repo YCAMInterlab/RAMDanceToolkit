@@ -17,7 +17,7 @@ DP_SCORE_NAMESPACE_BEGIN
 struct BodyScanNode final : public ofxMot::Node {
     typedef ofPtr<BodyScanNode> Ptr;
     BodyScanNode();
-    virtual ~BodyScanNode() = default;
+    virtual ~BodyScanNode();
     BodyScanNode& operator = (const BodyScanNode& rhs) { return *this = rhs; }
     
     void update();
