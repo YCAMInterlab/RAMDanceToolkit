@@ -31,16 +31,18 @@ public:
 
 		col = palette[int(ofRandom(5))];
 		seed = ofRandomuf();
+
 	}
 	~labelChaser(){
 
 	}
 
 	void update(){
-		pos_smooth += (pos - pos_smooth) / 2.0;
+		pos_smooth += (pos - pos_smooth) / 20.0;
 	}
 
 	bool dead;
+	int targetIdx;
 	int label;
 	ofVec3f vec;
 	ofVec3f pos;
@@ -74,6 +76,14 @@ public:
 
 	inline
 	string getName() const { return "dpVisPLink_Oil"; }
+
+	vector<ofVec3f> simpleChaser;
+	vector<ofVec3f> sCv;
+
+	//Pixelate;
+	vector<bool> pixels;
+	int pix_w;
+	int pix_h;
 
 protected:
 
