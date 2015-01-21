@@ -49,6 +49,9 @@ void SceneDataText::update(ofxEventMessage& m)
         for (int i=0; i<kNumCameraunitVectors; i++) {
             if (m.getNumArgs() <= i*2+0 || m.getNumArgs() <= i*2+1) break;
             ofVec2f v(m.getArgAsFloat(i*2+0), m.getArgAsFloat(i*2+1));
+            const float r{9.f};
+            v. x = ofClamp(v.x, -r, r);
+            v. y = ofClamp(v.y, -r, r);
             mVectors.push_back(v);
         }
     }
