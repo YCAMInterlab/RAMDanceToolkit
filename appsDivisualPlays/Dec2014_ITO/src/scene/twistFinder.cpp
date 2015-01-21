@@ -8,16 +8,55 @@
 
 #include "twistFinder.h"
 
-void twistFinder::findTwist(ramNode & node, ramNode & nodeOrigin){  // check rotation on a line between A & B
+double twistFinder::findTwist(ramNode & node, float bendingLimit, float divisionForLimit){  // check rotation on a line between A & B
 
-    ofQuaternion q;
-    ofQuaternion qOrigin;
+    ofNode parent, childR, childG, childB;
+    ofQuaternion q = node.getOrientationQuat();
+    
+    childR.setPosition(100, 0, 0);
+    childR.setParent(parent);
+    childG.setPosition(0, 100, 0);
+    childG.setParent(parent);
+    childB.setPosition(0,0,100);
+    childB.setParent(parent);
+    parent.setOrientation(q);
+    
+    float distY = childB.getGlobalPosition().y - childG.getGlobalPosition().y;
+    ofVec2f p = ofVec2f(childR.getGlobalPosition().x, childR.getGlobalPosition().z).getNormalized();
 
-    ofVec3f v = node.getPosition() - nodeOrigin.getPosition();
-    q.makeRotate(node.getZAxis(), v.normalize());
-    qOrigin.makeRotate(nodeOrigin.getZAxis(), v.normalize());
+    double angle;
+    angle = acos(p.dot(ofVec2f(1,0)));
+    if (p.y < 0) angle *= -1;
+    
+    if (distY > (bendingLimit + divisionForLimit)){
+        int valOver = distY - bendingLimit;
+        angle /= ((double)valOver/divisionForLimit);
+    }
+    
+    angle = angle * 180 / PI;
+    return angle;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void twistFinder::debugDraw4(ramMotionExtractor & motionExtractor, int nodeNum) {
     
@@ -69,30 +108,28 @@ void twistFinder::debugDraw4(ramMotionExtractor & motionExtractor, int nodeNum) 
         drawGraph(his1, ofColor::red);
     }
     
+    
+    double angleA, angleB;
+    angleA = acos(p.dot(ofVec2f(1,0)));
+    if (p.y < 0) angleA *= -1;
+    
+    if (distY > 40){
+        int valOver = distY - 30;
+        angleA /= ((double)valOver/10.0f);
+    }
+    
     ofPushMatrix();
-
-    
-    ofPopMatrix();
-    
-//    cout << "node" << nodeNum << ": " <<  distY << endl;
-    
-    ofPushMatrix();
-    ofTranslate(300, 600);
-    ofSetColor(255,0,0);
-    ofLine(0,0, p.x*100,-p.y*100);
+    ofTranslate(300, 500);
+//    ofSetColor(255,0,0);
+//    ofLine(0,0, p.x*100,-p.y*100);
+    ofSetColor(255, 0, 0);
+    ofLine(0,0, cos(angleA)*100, -sin(angleA)*100);
     ofSetColor(150);
     ofLine(0,0, 100,0);
     ofPopMatrix();
-
-    p = p.getNormalized();
-    
-    float angleA, angleB;
-    angleA = acos(p.dot(ofVec2f(1,0)));
-    if (p.y < 0) angleA *= -angleA;
     
     angleA = angleA * 180 / PI;
-    
-    ofDrawBitmapString(ofToString(angleA), 200, 600);
+    ofDrawBitmapString(ofToString(angleA), 200, 500);
     
     
     
@@ -588,4 +625,148 @@ void twistFinder::drawGraph(vector<float> & history, ofColor drawColor){
  }
 
  
+ void dpTryTwistChecker::debugDraw(){
+ 
+ ramNode rn[10];
+ for (int i = 0; i < 10; i++){
+ rn[i] = mMotionExtractor.getNodeAt(i);
+ }
+ 
+ ofPushMatrix();
+ ofNoFill();
+ ofTranslate(200,0);
+ 
+ for (int i = 0; i < 10; i++) {
+ if (rn[i].getPosition().length() !=0) rn[i].draw();
+ }
+ 
+ ofSetColor(255);
+ 
+ ofVec3f axisEdge[3][10];
+ 
+ for (int i = 0; i < 10; i++) {
+ //        ofTranslate(rn[i].getPosition());
+ if (rn[i].getPosition().length() != 0) {
+ ofQuaternion q = rn[i].getGlobalOrientation();
+ float tA, tX, tY, tZ;
+ q.getRotate(tA, tX, tY, tZ);
+ 
+ ofTranslate(0,-100,0);
+ 
+ ofPushMatrix();
+ ofRotate(tA, tX, tY, tZ);
+ //        ofLine(0, 0, 0, tX * 100.0f, tY * 100.0f, tZ * 100.0f);
+ //            ofLine(0,0,0,100,0,0);
+ 
+ ofSetColor(255,0,0);
+ ofLine (-20,0,0,20,0,0);
+ ofSetColor(0,255,0);
+ ofLine (0,-20,0,0,20,0);
+ ofSetColor(0,0,255);
+ ofLine (0,0,-20,0,0,20);   // 先端の座標、赤(20,0,0)青(0,20,0)緑(0,0,20)に対して、xyZでグラフ表示してみる <-解析のため。
+ 
+ ofPopMatrix();
+ 
+ ofVec3f redPos = ofVec3f(20,0,0);
+ axisEdge[0][i] = redPos.getRotated(tA, ofVec3f(tX, tY, tZ));
+ ofVec3f greenPos = ofVec3f(0,20,0);
+ axisEdge[1][i] = greenPos.getRotated(tA, ofVec3f(tX, tY, tZ));
+ ofVec3f bluePos = ofVec3f(0,0,20);
+ axisEdge[2][i] = bluePos.getRotated(tA, ofVec3f(tX, tY, tZ));
+ 
+ ofSetColor(255,0,0);
+ ofDrawBox(axisEdge[0][i], 10, 10, 10);
+ ofSetColor(0,255,0);
+ ofDrawBox(axisEdge[1][i], 10, 10, 10);
+ ofSetColor(0,0,255);
+ ofDrawBox(axisEdge[2][i], 10, 10, 10);
+ 
+ ofPopMatrix();
+ }
+ }
+ 
+ vecRed.push_back(axisEdge[0][0]);
+ vecGreen.push_back(axisEdge[1][0]);
+ vecBlue.push_back(axisEdge[2][0]);
+ if (vecRed.size() > 320) vecRed.erase(vecRed.begin());
+ if (vecGreen.size() > 320) vecGreen.erase(vecGreen.begin());
+ if (vecBlue.size() > 320) vecBlue.erase(vecBlue.begin());
+ 
+ ofPopMatrix();
+ 
+ ramEndCamera();
+ 
+ ofPushMatrix();
+ 
+ ofTranslate(500, 200);
+ ofColor r = ofColor(255,0,0);
+ drawGraph(vecRed, r, 0);
+ 
+ ofTranslate(0, 100);
+ ofColor g = ofColor(0,255,0);
+ drawGraph(vecRed, g, 0);
+ 
+ ofTranslate(0, 100);
+ ofColor b = ofColor(0,0,255);
+ drawGraph(vecRed, b, 0);
+ 
+ ofPopMatrix();
+ 
+ 
+ 
+ }
+ 
+ void dpTryTwistChecker::drawGraph(vector<ofVec3f> & vec, ofColor & drawColor, int elementNum){
+ 
+ ofSetColor(255);
+ ofLine(0, 0, 320, 0);
+ 
+ for (int i = 0; i < vecRed.size(); i++ ) {
+ int val;
+ if (elementNum == 0) val = vec[i].x;
+ else if (elementNum == 1) val = vec[i].y;
+ else if (elementNum ==2) val = vec[i].z;
+ ofSetColor(drawColor);
+ ofLine(i, val, i, 0);
+ }
+ }
+ 
+ 
+ void dpTryTwistChecker::example_drawDump(){
+ 
+ ofPushMatrix();
+ ofTranslate(800, 10);
+ 
+ for (int i = 0;i < mMotionExtractor.getNumPort();i++){
+ ofPushMatrix();
+ ofTranslate(0, i*90);
+ 
+ ofVec3f vec = mMotionExtractor.getVelocityAt(i);
+ float speed = mMotionExtractor.getVelocitySpeedAt(i);
+ 
+ ofNoFill();
+ ofRect(0, 0, 200, 80);
+ ofFill();
+ 
+ string info = "";
+ info += "Port  :" + ofToString(i) + "\n";
+ info += "Actor :" + mMotionExtractor.getActorNameAt(i) + "\n";
+ info += "Joint :" + mMotionExtractor.getJointNameAt(i) + "\n";
+ info += "Speed :" + ofToString(mMotionExtractor.getVelocitySpeedAt(i)) + "\n";
+ 
+ ofSetColor(100);
+ ofRect(10, 45, mMotionExtractor.getVelocitySpeedAt(i)*10.0, 15);
+ 
+ ofSetColor(255);
+ ofDrawBitmapString(info, 10, 15);
+ 
+ ofPopMatrix();
+ }
+ 
+ ofPopMatrix();
+ }
+
+ //    void drawGraph(vector<ofVec3f> & vec, ofColor & drawColor, int elementNum);
+ //    void debugDraw();
+
  */
