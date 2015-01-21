@@ -26,15 +26,29 @@ public:
     }
     
     void swapPts(){
-        mVecs[0] = mHead;
         
-        for(int i = 1; i < VECS_MAX; i++){
-            ofPoint tmp = mVecs[i-1];
-            mVecs[i - 1] = mVecs[i];
-            mVecs[i] = tmp;
+        if(isForward){
+            
+            mVecs[0] = mHead;
+        
+            for(int i = 1; i < VECS_MAX; i++){
+                ofPoint tmp = mVecs[i-1];
+                mVecs[i - 1] = mVecs[i];
+                mVecs[i] = tmp;
+            }
+            
+        }else{
+        
+            mVecs[mVecs.size() - 1] = mHead;
+            
+            for(int i = mVecs.size() - 1; i > 0; i--){
+                ofPoint tmp = mVecs[i-1];
+                mVecs[i - 1] = mVecs[i];
+                mVecs[i] = tmp;
+            }
         }
-        
     }
+    
     void update(){
         mHead.update();
         if(isMove)swapPts();
@@ -42,6 +56,10 @@ public:
     
     void setMove(bool move){
         isMove = move;
+    }
+    
+    void setForward(bool forward){
+        isForward = forward;
     }
 
     
@@ -86,6 +104,7 @@ private:
     KezSlidePoint mHead;
     
     bool isMove = true;
+    bool isForward = true;
 };
 
 class dpHakoVisVecLineCircle : public ramBaseScene{
@@ -145,11 +164,12 @@ public:
         mZoom.set(isFar * -1000);
         
         if(ofGetFrameNum() % 600 == 0){
-            int rnd = ofRandom(0,3);
+            int rnd = ofRandom(0,4);
             
             if(rnd == 0)isFar = !isFar;
             else if(rnd == 1)checkStop();
             else if(rnd == 2)rndRot();
+            else if(rnd == 3)checkForward();
         }
         
         mRot.update();
@@ -167,6 +187,18 @@ public:
             mStopCounter++;
         }else{
             mStopCounter %= mCircles.size();
+        }
+    }
+    
+    void checkForward(){
+        for(auto &v:mCircles){
+            v.setForward(true);
+        }
+        
+        int rnd = ofRandom(0,4);
+        
+        if(rnd == 0){
+            mCircles[(int)ofRandom(0,mCircles.size())].setForward(false);
         }
     }
     

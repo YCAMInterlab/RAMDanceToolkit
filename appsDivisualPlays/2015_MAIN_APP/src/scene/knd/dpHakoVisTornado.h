@@ -117,20 +117,20 @@ public:
     
     void update(){
         
-        receiveOsc();
+        /*receiveOsc();
         
         for(auto &v:mCircles){
             v.update();
-        }
+        }*/
     }
     
     void draw(){
-        ofPushMatrix();
+      /*  ofPushMatrix();
         ofTranslate(SINGLE_SCREEN_WIDTH * 0.5, SINGLE_SCREEN_HEIGHT * 0.5);
         for(auto &v:mCircles){
             v.draw();
         }
-        ofPopMatrix();
+        ofPopMatrix();*/
     }
     
 private:

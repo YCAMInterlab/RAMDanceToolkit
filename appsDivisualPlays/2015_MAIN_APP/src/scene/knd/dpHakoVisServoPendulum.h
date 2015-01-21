@@ -78,7 +78,7 @@ public:
     
     void draw(){
     
-        ofSetColor(mColor.r,mColor.g,mColor.b,ofMap(mPos.z,230,300,150,0,true));
+        ofSetColor(mColor.r,mColor.g,mColor.b,ofMap(mPos.z,230,300,255,0,true));
         
         ofPushMatrix();
         ofTranslate(0, 0, mPos.z);
@@ -123,6 +123,8 @@ public:
         mLong.speed = 0.001;
         mLat.speed = 0.001;
         mRad.speed = 0.01;
+        
+        rndOrbit();
         
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoVisServoPendulum::onPanelChanged);
     }
@@ -200,13 +202,13 @@ public:
 
         ofDisableDepthTest();
         ofEnableBlendMode(OF_BLENDMODE_ADD);
-     
+        //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE,GL_SRC_ALPHA,GL_ONE);
         mCam.begin(dpGetFirstScreenViewPort());
         
         ofSetColor(dpColor::MAIN_COLOR.r,
                    dpColor::MAIN_COLOR.g,
                    dpColor::MAIN_COLOR.b,
-                   150);
+                   255);
         
         ofPushMatrix();
         ofTranslate(0, 0, 0.0);
