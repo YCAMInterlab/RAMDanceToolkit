@@ -10,6 +10,8 @@
 #define __RAMDanceToolkit__distanceMetaball__
 
 #include "ramMain.h"
+#include "ofxMetaballs.h"
+#include "ramMotionExtractor.h"
 
 class distanceMetaball : public ramBaseScene{
 public:
@@ -34,9 +36,20 @@ public:
 
 private:
 
-	ofxOscSender* mOscSender;
-	ramActor mActor;
+	float radius_low,radius_high;
+	float resolution;
 
+	bool mDrawMEX;
+	bool mDrawMetaball;
+	float mScale;
+	float mSmooth;
+
+	vector<ofVec3f> pts;
+
+	ofxOscSender* mOscSender;
+
+	MarchingTetrahedrons metaball;
+	ramMotionExtractor mex;
 };
 
 #endif /* defined(__RAMDanceToolkit__distanceMetaball__) */
