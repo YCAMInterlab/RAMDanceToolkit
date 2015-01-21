@@ -17,7 +17,8 @@ class twistFinder {
     
     public:
     
-    void findTwist(ramNode & node, ramNode & nodeOrigin);       // check rotation on a line between A & B
+    double findTwist(ramNode & node, float bendingLimit = 30.0f, float divisionForLimit = 10.0f);       // check rotation on a line between A & B
+    
     void debugDraw(ramMotionExtractor & motionExtractor);
     void debugDraw2(ramMotionExtractor & motionExtractor);
     void debugDraw3(ramMotionExtractor & motionExtractor);

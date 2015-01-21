@@ -59,6 +59,16 @@ void ramMotionExtractor::setupControlPanel(ramBaseScene *scene_, ofVec2f canvasP
 
 }
 
+void ramMotionExtractor::pushFromID(int actorId, int jointId){
+	ramNodeIdentifer id;
+	id.set(jointId);
+
+	ramMotionPort *mp = new ramMotionPort(id);
+	pushPort(mp, actorId);
+
+	refleshActorFromList();
+}
+
 void ramMotionExtractor::update(){
 
 	while (receiver.hasWaitingMessages()){
@@ -68,13 +78,7 @@ void ramMotionExtractor::update(){
 		string myAddr = "/ram/MEX/"+mScenePtr->getName()+"/";
 
 		if (m.getAddress() == myAddr+"push"){// アクターID, ジョイントID
-			ramNodeIdentifer id;
-			id.set(m.getArgAsInt32(1));
-
-			ramMotionPort *mp = new ramMotionPort(id);
-			pushPort(mp, m.getArgAsInt32(0));
-
-			refleshActorFromList();
+			pushFromID(m.getArgAsInt32(1), m.getArgAsInt32(0));
 		}
 
 		if (m.getAddress() == myAddr+"pop"){// 名前、ID
