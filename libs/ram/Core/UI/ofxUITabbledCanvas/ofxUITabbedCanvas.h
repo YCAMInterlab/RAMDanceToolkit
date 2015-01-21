@@ -105,11 +105,24 @@ public:
 			if(enableToggles[tabIndex] != NULL) {
 				enableToggles[tabIndex]->setValue(true);
 			}
-			for(int i = 0; i < tabToggles.size(); i++) {	
+			for(int i = 0; i < tabToggles.size(); i++) {
 				tabToggles[i]->setValue(i == tabIndex);
 			}
 		}
 	}
+	void offSelect(string name,bool force = false) {
+		int tabIndex = getTabIndex(name);
+		if(tabIndex != -1 && (tabToggles[tabIndex]->getValue() || force)) {
+			currentTab = tabIndex;
+			if(enableToggles[tabIndex] != NULL) {
+				enableToggles[tabIndex]->setValue(false);
+			}
+			for(int i = 0; i < tabToggles.size(); i++) {
+				tabToggles[i]->setValue(i == tabIndex);
+			}
+		}
+	}
+
 	void triggerEvent(ofxUIWidget *child) {
 		select(child->getName());
 		ofxUICanvas::triggerEvent(child);

@@ -1,14 +1,14 @@
 //
-//  dpHakoniwaIce.cpp
+//  frozenIce.cpp
 //  example-ramMotionExtractor
 //
 //  Created by ycam on 2015/01/09.
 //
 //
 
-#include "dpHakoniwaIce.h"
+#include "frozenIce.h"
 
-dpHakoniwaIce::dpHakoniwaIce(){
+frozenIce::frozenIce(){
     
     mDrawLines		= false;
     mDrawTriangle	= false;
@@ -19,7 +19,40 @@ dpHakoniwaIce::dpHakoniwaIce(){
 }
 
 //==========================================================================
-void dpHakoniwaIce::setup(){
+void frozenIce::setup(){
+//    //OSC送信用の値の初期設定
+//    hantei  = 0;
+//    fanVal = 0;
+//    
+//    //ファンの初期設定
+//    fanStart = true;
+//    
+//    //ペルチェ素子の初期設定
+//    frozing = false;
+//    melting = true;
+//    
+//    //Manual Control
+//    manualControl = false;
+//    
+//    //Speed Control
+//    dancerControl = true;
+//    fixationTime = 500.0;
+//    speedThreshold = 2.0;
+//    
+//    //Distance Control
+//    distanceControl = false;
+//    distanceThreshold = 200.0;
+//    
+//    //High and Low Control
+//    HighandLowControl = false;
+//    HighandLowThreshold = 100.0;
+    
+}
+//==========================================================================
+
+
+//==========================================================================
+void frozenIce::onEnabled(){
     //OSC送信用の値の初期設定
     hantei  = 0;
     fanVal = 0;
@@ -35,38 +68,41 @@ void dpHakoniwaIce::setup(){
     manualControl = false;
     
     //Speed Control
-    dancerControl = true;
-    fixationTime = 500.0;
+    dancerControl = false;
+    fixationTime = 5000.0;
     speedThreshold = 2.0;
     
     //Distance Control
+    distanceControl = true;
+    distanceThreshold = 150.0;
+    
+    //High and Low Control
+    HighandLowControl = false;
+    HighandLowThreshold = 100.0;
+}
+//==========================================================================
+
+
+//==========================================================================
+void frozenIce::onDisabled(){
+    fanStart = true;
+
+//    frozing = false;
+//    melting = true;
+    
+    frozing = true;
+    melting = false;
+
+    manualControl = true;
+    dancerControl = false;
     distanceControl = false;
-    distanceThreshold = 200.0;
+    HighandLowControl = false;
+    
+    refleshState();
 }
 //==========================================================================
 
-
-//プログラム非選択時に、DMXを止める
-//！！！うまく出来ていないので、後で要確認！！！！
-//==========================================================================
-void dpHakoniwaIce::onDisabled(){
-//    
-//    cout << "ondisebled " << endl;
-//    int countExit = 0;
-//    countExit++;
-//    
-//    if(countExit > 10){
-//        fanStart = false;
-//        manualControl = true;
-//        hantei = 0;
-//        fanVal = 0;
-//        countExit = 0;
-//    }
-//    cout << "Count Exit : " << countExit << endl;
-}
-//==========================================================================
-
-void dpHakoniwaIce::setupControlPanel(){
+void frozenIce::setupControlPanel(){
     
     ofxUICanvasPlus* gui = ramGetGUI().getCurrentUIContext();
     
@@ -85,7 +121,7 @@ void dpHakoniwaIce::setupControlPanel(){
     
     //automatic control
     gui->addSpacer();
-    gui->addSlider("Fixation Time", 0.0, 500.0, &fixationTime);
+    gui->addSlider("Fixation Time", 0.0, 5000.0, &fixationTime);
     gui->addToggle("MeltingFromDancer"		, &iceMelting);
     gui->addToggle("FrozingFromDancer"		, &iceFrozing);
     
@@ -98,6 +134,11 @@ void dpHakoniwaIce::setupControlPanel(){
     gui->addSpacer();
     gui->addToggle("Distance Control"		, &distanceControl);
     gui->addSlider("Distance Threshold", 0.0, 200.0, &distanceThreshold);
+    
+    //High and Low Control
+    gui->addSpacer();
+    gui->addToggle("High and Low Control"		, &HighandLowControl);
+    gui->addSlider("High and Low Threshold", 20.0, 300.0, &HighandLowThreshold);
     //==========================================================================
     
     gui->addSpacer();
@@ -109,13 +150,18 @@ void dpHakoniwaIce::setupControlPanel(){
     
 }
 
-void dpHakoniwaIce::update(){
+void frozenIce::update(){
     
     /*=== update ===*/
     motionExtractor.update();
     
     //oscを送る数を制限
     if(ofGetFrameNum() % 10 == 0){
+        refleshState();
+    }
+}
+
+void frozenIce::refleshState(){
     
     //Manual Control
     //==========================================================================
@@ -200,6 +246,40 @@ void dpHakoniwaIce::update(){
         }
     }
     //==========================================================================
+        
+        
+    //High and Low Control
+    //==========================================================================
+    if(HighandLowControl == true){
+        
+        //他のトグルをOFFにする
+        manualControl = false;
+        dancerControl = false;
+        
+        //指定ノードがhighThresholdより高くなったら凍る
+        if(motionExtractor.getPositionAt(0).y > HighandLowThreshold){
+            hantei = 1;
+            if(iceFrozing == false){
+                iceFrozing = true;
+            }
+            if(iceMelting == true){
+                iceMelting = false;
+            }
+        }
+        
+        //指定ノードがlowThresholdより低くなったら溶ける
+        if(motionExtractor.getPositionAt(0).y < HighandLowThreshold){
+            hantei = 0;
+            if(iceFrozing == true){
+                iceFrozing = false;
+            }
+            if(iceMelting == false){
+                iceMelting = true;
+            }
+        }
+        
+    }
+    //==========================================================================
 
     //Distance Control
     //==========================================================================
@@ -244,20 +324,37 @@ void dpHakoniwaIce::update(){
             meltingCount = 0;
         }
         
+//        //指定したノード間の距離が[distanceThreshold]より大きいと凍り、小さいと溶ける
+//        if(motionExtractor.getDistanceAt(0, 1) < distanceThreshold){
+//            if(iceFrozing == true){
+//                iceFrozing = false;
+//            }
+//            if(iceMelting == false){
+//                iceMelting = true;
+//            }
+//        }else{
+//            if(iceFrozing == false){
+//                iceFrozing = true;
+//            }
+//            if(iceMelting == true){
+//                iceMelting = false;
+//            }
+//        }
+        
         //指定したノード間の距離が[distanceThreshold]より大きいと溶け、小さいと凍る
         if(motionExtractor.getDistanceAt(0, 1) < distanceThreshold){
-            if(iceFrozing == true){
-                iceFrozing = false;
-            }
-            if(iceMelting == false){
-                iceMelting = true;
-            }
-        }else{
             if(iceFrozing == false){
                 iceFrozing = true;
             }
             if(iceMelting == true){
                 iceMelting = false;
+            }
+        }else{
+            if(iceFrozing == true){
+                iceFrozing = false;
+            }
+            if(iceMelting == false){
+                iceMelting = true;
             }
         }
     }
@@ -281,9 +378,8 @@ void dpHakoniwaIce::update(){
     m.addIntArg(hantei);
     sender.sendMessage(m);
     }
-}
 
-void dpHakoniwaIce::draw(){
+void frozenIce::draw(){
     
     ramBeginCamera();
     
@@ -304,14 +400,15 @@ void dpHakoniwaIce::draw(){
     
     //test
     //==========================================================================
-    cout << "frozing    : " << frozingCount << ":" << hantei << endl;
-    cout << "melting    : " << meltingCount << ":" << hantei << endl;
-    cout << "distance    : " << motionExtractor.getDistanceAt(0, 1) << endl;
+//    cout << "frozing    : " << frozingCount << ":" << hantei << endl;
+//    cout << "melting    : " << meltingCount << ":" << hantei << endl;
+   cout << "distance    : " << motionExtractor.getDistanceAt(0, 1) << endl;
+//    cout << "node high low    : " << motionExtractor.getPositionAt(0).y << ":" << hantei << endl;
     //==========================================================================
     
 }
 
-void dpHakoniwaIce::example_drawLines(){
+void frozenIce::example_drawLines(){
     
     ofSetColor(255);
     for (int i = 0;i < motionExtractor.getNumPort() - 1;i+=2){
@@ -324,7 +421,7 @@ void dpHakoniwaIce::example_drawLines(){
     
 }
 
-void dpHakoniwaIce::example_drawTriangles(){
+void frozenIce::example_drawTriangles(){
     
     ofVec3f vec_a = motionExtractor.getPositionAt(0);
     ofVec3f vec_b = motionExtractor.getPositionAt(1);
@@ -338,7 +435,7 @@ void dpHakoniwaIce::example_drawTriangles(){
     
 }
 
-void dpHakoniwaIce::example_drawDump(){
+void frozenIce::example_drawDump(){
     
     ofPushMatrix();
     ofTranslate(700, 10);
@@ -374,5 +471,3 @@ void dpHakoniwaIce::example_drawDump(){
     
 }
 
-void dpHakoniwaIce::exit(){
-}
