@@ -14,8 +14,8 @@ void SceneDataBarcode::initialize()
 {
     dpDebugFunc();
     mUICanvas = new ofxUICanvas();
-    mUICanvas->setName(getName());
-    mUICanvas->addLabel(getName());
+    mUICanvas->setName(getShortName());
+    mUICanvas->addLabel(getShortName(), OFX_UI_FONT_SMALL);
     mUICanvas->addSpacer();
     mUICanvas->addSlider("Threshould", 0.f, 2.f, &mThreshould);
 }
