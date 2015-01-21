@@ -104,6 +104,8 @@ public:
     
     static const string kXmlSettingsPath;
     
+    static const string kScoreBlack;
+    
     ofVec2f mTextLeftCorner{0.f, 0.f};
     
 private:
@@ -165,6 +167,9 @@ private:
     
     map<string, Scene> mScenes;
     
+    vector<string> mNoCamScenes;
+    bool mScoreBlack{false};
+    
     string mCurrentScore{""};
     int mCurrentScoreComplexity{0};
     int mMaxComplexity{0};
@@ -182,6 +187,7 @@ private:
     bool mEnableCameraUnit{false};
     bool mEnableOscOutRDTK{false};
     bool mEnableOscOutMH{false};
+    bool mEnableOscOutScore{false};
     
     float mEnabledTime{0.f};
     

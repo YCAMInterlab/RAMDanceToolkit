@@ -9,7 +9,16 @@
 	    <scene name="dpHWorm"/>
 	    <scene name="dpVisTornado"/>
 	    <scene name="dpVisStage"/>
+	    <scene name="dpVisIce"/>
+	    <scene name="FutureRE"/>
 	</phase>
+
+	<nocam>
+		<scene name="dpHWorm"/>
+		<scene name="FutureRE"/>
+		<scene name="dpVisTheta"/>
+		<scene name="dpHGearMove"/>
+	</nocam>
 </rdtk>
 
 <score>
