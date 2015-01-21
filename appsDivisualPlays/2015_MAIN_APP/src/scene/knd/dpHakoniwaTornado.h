@@ -16,7 +16,7 @@ public:
     
     void setupControlPanel(){
         ramGetGUI().addIntSlider("fan",0,255,&mFan);
-        ramGetGUI().addToggle("bulb",&mBulb);
+        ramGetGUI().addToggle("bulb",&isBulb);
         ramGetGUI().addToggle("mist",&isMist);
         ramGetGUI().addSlider("fanRadMin",0.0,300.0,&mFanRadMin);
         ramGetGUI().addSlider("fanRadMax",0.0,300.0,&mFanRadMax);
@@ -40,7 +40,7 @@ public:
         
         if(name == "bulb")bulb();
         
-        if(name == "mist")mist();
+        if(name == "mist")bulb();
     }
     
     void fan(){
@@ -61,17 +61,20 @@ public:
     void bulb(){
         ofxOscMessage m;
         m.setAddress("/dp/hakoniwa/tornado/bulb");
-        m.addIntArg((int)mBulb);
+        m.addIntArg((int)isBulb);
+        m.addIntArg((int)isMist);
         mBulbSender.sendMessage(m);
+   
     }
     
     void update(){
         
         mMotionExtractor.update();
-        
-        fan();
-        mist();
         bulb();
+       /* fan();
+        mist();
+        cout << isBulb << endl;
+        bulb();*/
     }
     
     void rotateToNormal(ofVec3f normal) {
@@ -93,7 +96,7 @@ public:
         
         ofPoint a = mMotionExtractor.getPositionAt(0);
         ofPoint b = mMotionExtractor.getPositionAt(1);
-        ofPoint c = mMotionExtractor.getPositionAt(2    );
+        ofPoint c = mMotionExtractor.getPositionAt(2);
         
         ofPoint center;
         ofPoint normal;
@@ -113,9 +116,20 @@ public:
         ofPushMatrix();
         ofTranslate(center);
         rotateToNormal(normal);
+        ofNoFill();
         ofCircle(0, 0, radius);
         ofPopMatrix();
         ramEndCamera();
+    }
+    
+    void onDisabled(){
+      /*  isBulb = false;
+        isMist = false;
+        mFan = 0;
+        
+        fan();
+        bulb();
+        mist();*/
     }
     
 private:
@@ -123,7 +137,7 @@ private:
     ofxOscSender mFanSender;
     
     int mFan = 0;
-    bool mBulb = true;
+    bool isBulb = false;
     bool isMist = false;
     
     ramMotionExtractor mMotionExtractor;

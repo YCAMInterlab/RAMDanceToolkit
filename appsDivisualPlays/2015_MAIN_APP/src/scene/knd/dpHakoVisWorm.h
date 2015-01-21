@@ -222,7 +222,7 @@ public:
     }
     
     void update(){
-        mMotionExtractor.update();
+        /*mMotionExtractor.update();
         receiveOsc();
         
         for(int i = 0; i < mLines.size(); i++){
@@ -235,11 +235,11 @@ public:
         mVbo.updateVertexData(&mVerts[0],mVerts.size());
         mVbo.updateColorData(&mColors[0],mColors.size());
         mVbo.updateAttributeData(mPointSizeAttLoc, &mPointSizes[0], mPointSizes.size());
-    
+         */
     }
     
     void draw(){
-        ofDisableDepthTest();
+       /* ofDisableDepthTest();
         ofEnableBlendMode(OF_BLENDMODE_ADD);
         ramSetViewPort(dpGetFirstScreenViewPort());
         ramBeginCamera();
@@ -259,7 +259,7 @@ public:
         ofDisablePointSprites();
        
  
-        ramEndCamera();
+        ramEndCamera();*/
     }
     
     void onPanelChanged(ofxUIEventArgs& e){
