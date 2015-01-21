@@ -49,7 +49,7 @@ void SceneVec2Clocks::exit()
 
 void SceneVec2Clocks::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kOscAddrCameraUnitVector) {
+    if (m.getAddress() == kOscAddrCameraUnitVectorTotal) {
         mVec.x = clamp(m.getArgAsFloat(0));
         mVec.y = clamp(m.getArgAsFloat(1));
         mClockBuffer.push_back(mVec.interpolate(mPrevVec, 0.5f));

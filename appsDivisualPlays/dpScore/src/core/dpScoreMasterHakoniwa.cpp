@@ -681,6 +681,12 @@ void MasterHakoniwa::sendChangeScore(const string& name)
     m.addStringArg(name);
     mCurrentScore = name;
     
+    for (auto& it : mScenes) {
+        if (it.second.isEnabled()) {
+            m.addStringArg(it.first);
+        }
+    }
+    
     if (mEnableOscOutScore) mScoreOscSender.sendMessage(m);
 }
 

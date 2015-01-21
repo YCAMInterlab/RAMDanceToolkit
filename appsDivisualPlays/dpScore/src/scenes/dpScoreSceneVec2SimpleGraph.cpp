@@ -49,7 +49,7 @@ void SceneVec2SimpleGraph::exit()
 
 void SceneVec2SimpleGraph::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kOscAddrCameraUnitVector) {
+    if (m.getAddress() == kOscAddrCameraUnitVectorTotal) {
         if (m.getNumArgs() >= 2) {
             mVec.x = m.getArgAsFloat(0);
             mVec.y = m.getArgAsFloat(1);
