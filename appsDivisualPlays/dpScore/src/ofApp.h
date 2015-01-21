@@ -15,6 +15,8 @@ public:
     void update() override;
     void draw() override;
     void exit() override;
+    void shutdown();
+    
     void keyPressed(int key) override;
     void keyReleased(int key) override;
     void mouseMoved(int x, int y) override;
@@ -22,6 +24,7 @@ public:
     void mousePressed(int x, int y, int button) override;
     void mouseReleased(int x, int y, int button) override;
     void windowResized(int w, int h) override;
+    
     void dragEvent(ofDragInfo dragInfo) override;
     void gotMessage(ofMessage msg) override;
     void guiEvent(ofxUIEventArgs &e);

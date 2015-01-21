@@ -98,9 +98,9 @@ public:
 		return -1;
 	}
     
-	void select(string name) {
+	void select(string name,bool force = false) {
 		int tabIndex = getTabIndex(name);
-		if(tabIndex != -1 && tabToggles[tabIndex]->getValue()) {
+		if(tabIndex != -1 && (tabToggles[tabIndex]->getValue() || force)) {
 			currentTab = tabIndex;
 			if(enableToggles[tabIndex] != NULL) {
 				enableToggles[tabIndex]->setValue(true);
