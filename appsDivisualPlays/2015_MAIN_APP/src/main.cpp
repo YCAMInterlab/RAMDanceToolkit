@@ -17,17 +17,21 @@
 
 #include "testApp.h"
 #include "ofAppGlutWindow.h"
+#include "ofAppGLFWWindow.h"
 #include "dpConstants.h"
 
 //--------------------------------------------------------------
 int main()
 {
-	ofAppGlutWindow window; // create a window
+	//ofAppGlutWindow window; // create a window
+    
+    ofAppGLFWWindow window;
+	window.setMultiDisplayFullscreen(true);
     
 #ifdef TARGET_OSX
-	window.setGlutDisplayString("rgba double samples>=4 depth stencil");
+//	window.setGlutDisplayString("rgba double samples>=4 depth stencil");
 #endif
-	
+
 	// set width, height, mode (OF_WINDOW or OF_FULLSCREEN)
 	ofSetupOpenGL(&window, APP_WIDTH, APP_HEIGHT,OF_WINDOW);
 	ofRunApp(new testApp); // start the app

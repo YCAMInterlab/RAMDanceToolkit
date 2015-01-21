@@ -34,6 +34,8 @@ const string MH::kOscAddrRamSetScene{"/ram/set_scene"};
 
 const string MH::kXmlSettingsPath{"master_hakoniwa_settings.xml"};
 
+const string MH::kScoreBlack{"black"};
+
 #pragma mark ___________________________________________________________________
 void MasterHakoniwa::Valve::update(MasterHakoniwa* mh)
 {
@@ -98,6 +100,7 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     mEnableAllToggle = tabbar->addToggle("Enable All", false, sizeMid, sizeMid);
     tabbar->addToggle("Enable OSC RAM Dance Tool Kit", &mEnableOscOutRDTK);
     tabbar->addToggle("Enable OSC Master Hakoniwa", &mEnableOscOutMH);
+    tabbar->addToggle("Enable OSC Score", &mEnableOscOutScore);
     tabbar->addToggle("Enable CameraUnit", &mEnableCameraUnit);
     tabbar->addToggle("Enable MOTIONER", &mEnableMotioner);
     tabbar->addSpacer(w, 1.f);
@@ -126,7 +129,7 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     scoreSelectTab->addLabel("Select score", OFX_UI_FONT_SMALL);
     scoreSelectTab->addSpacer();
     vector<string> scoreNames;
-    scoreNames.push_back("black");
+    scoreNames.push_back(kScoreBlack);
     for (int i=0; i<mUniqueScores.size(); i++) {
         for (int j=0; j<mUniqueScores.at(i).getInitialList().size(); j++) {
             scoreNames.push_back(mUniqueScores.at(i).getInitialList().at(j));
@@ -212,6 +215,15 @@ void MasterHakoniwa::initialize()
         sceneNames.push_back(name);
     }
     xml.popTag();
+    
+    xml.pushTag("nocam");
+        mNoCamScenes.clear();
+    for (int j=0; j<xml.getNumTags("scene"); j++) {
+        const string name{xml.getAttribute("scene", "name", "error", j)};
+        mNoCamScenes.push_back(name);
+    }
+    xml.popTag();
+    
     xml.popTag();
     mUniqueScenes.setInitialList(sceneNames);
     
@@ -226,11 +238,19 @@ void MasterHakoniwa::initialize()
         for (int j=0; j<numScenes; j++) {
             const string name{xml.getAttribute("scene", "name", "error", j)};
             sceneNames.push_back(name);
-            cout << name << endl;
         }
         stack.setInitialList(sceneNames);
         xml.popTag();
     }
+    xml.pushTag("body");
+    vector<string> bodies;
+    for (int i=0; i<xml.getNumTags("scene"); i++) {
+        const string name{xml.getAttribute("scene", "name", "error", i)};
+        bodies.push_back(name);
+    }
+    mUniqueScoreBodies.setInitialList(bodies);
+    xml.popTag();
+    
     xml.popTag();
     
     ofAddListener(ofxMot::drawSkeletonEvent,
@@ -255,6 +275,7 @@ void MasterHakoniwa::update()
         mEnableCameraUnit = false;
         mEnableOscOutMH = false;
         mEnableOscOutRDTK = false;
+        mEnableOscOutScore = false;
         if (mEnableAllToggle) {
             mEnableAllToggle->setValue(false);
         }
@@ -411,6 +432,10 @@ void MasterHakoniwa::draw()
     alignedTranslate(0.f, kTextSpacing * 2.f);
 
     ofDrawBitmapString("[score]", ofPoint::zero());
+    alignedTranslate(0.f, kTextSpacing);
+    mCurrentScore == kScoreBlack ? ofSetColor(color::kMain) : ofSetColor(kTextColor);
+    ofDrawBitmapString(kScoreBlack, ofPoint::zero());
+    
     for (int i=0; i<mUniqueScores.size(); i++) {
         auto& stack = mUniqueScores.at(i);
         alignedTranslate(0.f, kTextSpacing);
@@ -547,24 +572,32 @@ void MasterHakoniwa::setUniqueScore(int sceneIndex)
     
     auto& stack = mUniqueScores.at(mCurrentScoreComplexity);
     
+    if (mNoCameraData) {
+        if (stack.ref(sceneIndex).find("Body") == string::npos) {
+            //sendChangeScore(kScoreBlack);
+            sendChangeScore(mUniqueScoreBodies.get(ofRandom(mUniqueScoreBodies.size())));
+            return;
+        }
+    }
+    
     const string& s{stack.get(sceneIndex)};
     
     sendChangeScore(s);
-    
-    if (sceneIndex < 0 || sceneIndex >= stack.size()) {
-        ofxThrowExceptionf(ofxException,
-                           "scene index %d out of range",
-                           sceneIndex);
-    }
-    
-    
     
     ++mCurrentScoreComplexity %= mMaxComplexity;
 }
 
 size_t MasterHakoniwa::getNumUniqueScores() const
 {
+    if (mCurrentScoreComplexity < 0 || mCurrentScoreComplexity >= mMaxComplexity) {
+        ofxThrowExceptionf(ofxException,
+                           "score complexity %d out of range",
+                           mCurrentScoreComplexity);
+    }
     
+    auto& stack = mUniqueScores.at(mCurrentScoreComplexity);
+    
+    return stack.size();
 }
 
 bool MasterHakoniwa::getIsWindowOn(int windowIndex) const
@@ -606,49 +639,66 @@ void MasterHakoniwa::sendSetScene(const string& name, bool win0, bool win1)
     if (scene.window[WINDOW_0] == win0 && scene.window[WINDOW_1] == win1) {
         return;
     }
-    
+
     scene.window[WINDOW_0] = win0;
     scene.window[WINDOW_1] = win1;
     scene.dirty = true;
     
     for (auto& it : mScenes) {
-        auto& s = it.second;
-        const string& sName = it.first;
-        
         if (it.first != name) {
             for (int i=0; i<NUM_WINDOWS; i++) {
-                if (scene.window[i] && s.window[i]) {
+                if (scene.window[i] && it.second.window[i]) {
                     it.second.window[i] = false;
                     it.second.dirty = true;
                 }
             }
+            if (!it.second.dirty) continue;
+        
+            ofxOscMessage m;
+            m.setAddress(kOscAddrRamSetScene);
+            m.addStringArg(it.first);
+            m.addIntArg((int)it.second.isEnabled());
+            
+            for (int i=0; i<NUM_WINDOWS; i++) {
+                m.addIntArg((int)it.second.window[i]);
+            }
+            if (mEnableOscOutRDTK) mCameraUnitOscSender.sendMessage(m);
         }
-        if (!s.dirty) continue;
-        
-        //stringstream ss;
-        ofxOscMessage m;
-        m.setAddress(kOscAddrRamSetScene);
-        m.addStringArg(sName);
-        m.addIntArg((int)s.isEnabled());
-        
-        //ss << boolalpha << sName << "=" << (s.isEnabled() ? "on " : "off") << " : ";
-        
-        for (int i=0; i<NUM_WINDOWS; i++) {
-            m.addIntArg((int)s.window[i]);
-            //ss << s.window[i] << ", ";
-        }
-        if (mEnableOscOutRDTK) mCameraUnitOscSender.sendMessage(m);
-        //ofLogNotice() << ss.str();
     }
+    
+    if (scene.isEnabled()) {
+        auto it = find(mNoCamScenes.begin(), mNoCamScenes.end(), name);
+        mNoCameraData = (it != mNoCamScenes.end());
+    }
+    
+    ofxOscMessage m;
+    m.setAddress(kOscAddrRamSetScene);
+    m.addStringArg(name);
+    m.addIntArg((int)scene.isEnabled());
+    
+    for (int i=0; i<NUM_WINDOWS; i++) {
+        m.addIntArg((int)scene.window[i]);
+    }
+    if (mEnableOscOutRDTK) mCameraUnitOscSender.sendMessage(m);
+    
 }
 
-void MasterHakoniwa::sendChangeScore(const string& name)
+void MasterHakoniwa::sendChangeScore(const string& name, bool maintainSceneNames)
 {
     ofxOscMessage m;
     m.setAddress(kOscAddrChangeScene);
     m.addStringArg(name);
     mCurrentScore = name;
-    mScoreOscSender.sendMessage(m);
+    
+    if (maintainSceneNames) {
+        for (auto& it : mScenes) {
+            if (it.second.isEnabled()) {
+                m.addStringArg(it.first);
+            }
+        }
+    }
+    
+    if (mEnableOscOutScore) mScoreOscSender.sendMessage(m);
 }
 
 void MasterHakoniwa::onDrawSkeleton(ofxMotioner::EventArgs &e)
@@ -730,7 +780,7 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
         auto* radio = static_cast<ofxUIRadio*>(e.widget);
         const auto& toggleName = radio->getActiveName();
         if (radio->getActive()->getValue()) {
-            sendChangeScore(toggleName);
+            sendChangeScore(toggleName, false);
         }
     }
     else if (widgetName == "Enable All") {
@@ -739,6 +789,7 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
         mEnableOscOutRDTK = t;
         mEnableMotioner = t;
         mEnableCameraUnit = t;
+        mEnableOscOutScore = t;
     }
 }
 

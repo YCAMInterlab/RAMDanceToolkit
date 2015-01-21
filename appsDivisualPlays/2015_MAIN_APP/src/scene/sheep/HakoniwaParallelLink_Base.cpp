@@ -17,7 +17,6 @@ uiThemecp(128, 192),
 uiThemecpo(255, 192);
 
 HakoniwaParallelLink_Base::HakoniwaParallelLink_Base(){
-
 	mLinkManager.setup("cu.usbmodem1141");
 
 
@@ -57,18 +56,18 @@ void HakoniwaParallelLink_Base::update(){
 		machinePosition.z = chest.z;
 	}
 
-	if (ofGetFrameNum() % 5 == 0){
+	if (ofGetFrameNum() % 15 == 0){
 		if (mLinkManager.stepManager.useOsc)
 		{
 			for (int i = 0;i < 6;i++){
-				if (mDigitalIO_Prev[i] != mDigitalIO[i]){
+//				if (mDigitalIO_Prev[i] != mDigitalIO[i]){
 					mDigitalIO_Prev[i] = mDigitalIO[i];
 					ofxOscMessage m;
 					m.setAddress("/dp/hakoniwa/digitalWrite/");
 					m.addIntArg(2+i);
 					m.addIntArg(mDigitalIO[i]);
 					mOscSender->sendMessage(m);
-				}
+//				}
 			}
 		}
 	}
@@ -313,7 +312,16 @@ void HakoniwaParallelLink_Base::onPanelChanged(ofxUIEventArgs& e){
 }
 
 void HakoniwaParallelLink_Base::onEnabled(){
-	loadPreset();
+    for (int i = 0;i < 6;i++){
+        ofxOscMessage m;
+        m.setAddress("/dp/hakoniwa/digitalWrite/");
+        m.addIntArg(2+i);
+        m.addIntArg(1);
+        mOscSender->sendMessage(m);
+        mDigitalIO_Prev[i] = true;
+    }
+
+    loadPreset();
 	motionEx.load("motionExt_"+getName()+".xml");
 }
 

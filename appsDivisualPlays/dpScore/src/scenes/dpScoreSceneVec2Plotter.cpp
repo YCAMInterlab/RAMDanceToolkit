@@ -60,7 +60,7 @@ void SceneVec2Plotter::exit()
 
 void SceneVec2Plotter::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kOscAddrCameraUnitVector) {
+    if (m.getAddress() == kOscAddrCameraUnitVectorTotal) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);
         mCircleBuffer.push_back(mVec);
@@ -103,7 +103,7 @@ void SceneVec2Plotter::draw()
         mCircleVertices.at(i) = mCircleBuffer.at(i) * mult;
         float a{i / (float)mCircleBuffer.size()};
         a = easeOutExpo(a);
-        mCircleColors.at(i).set(1.f, 1.f, 1.f, a * 0.5f);
+        mCircleColors.at(i).set(1.f, 1.f, 1.f, a * 0.9f);
     }
     mCircleVbo.updateColorData(&mCircleColors.at(0), mCircleColors.size());
     

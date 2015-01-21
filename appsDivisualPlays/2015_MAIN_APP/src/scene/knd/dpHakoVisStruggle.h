@@ -134,7 +134,7 @@ private:
     
     KezSlidePoint mVecFromCam;
     
-    float mScaleDrawDelaunay = 400.0;
+    float mScaleDrawDelaunay = 500.0;
     float mLineWidth = 4.0;
     
     ofPlanePrimitive mPlane;
@@ -146,7 +146,7 @@ private:
     float mAlphaReducSpeed = 0.5;
     
     int mOmitNum = 6;
-    float mThresh = 0.02;
+    float mThresh = 0.28;
     
     ofPoint mRot;
 };
