@@ -68,13 +68,13 @@ void frozenIce::onEnabled(){
     manualControl = false;
     
     //Speed Control
-    dancerControl = true;
+    dancerControl = false;
     fixationTime = 5000.0;
     speedThreshold = 2.0;
     
     //Distance Control
-    distanceControl = false;
-    distanceThreshold = 200.0;
+    distanceControl = true;
+    distanceThreshold = 150.0;
     
     //High and Low Control
     HighandLowControl = false;
@@ -85,10 +85,13 @@ void frozenIce::onEnabled(){
 
 //==========================================================================
 void frozenIce::onDisabled(){
-    fanStart = false;
+    fanStart = true;
 
-    frozing = false;
-    melting = true;
+//    frozing = false;
+//    melting = true;
+    
+    frozing = true;
+    melting = false;
 
     manualControl = true;
     dancerControl = false;
@@ -127,10 +130,10 @@ void frozenIce::setupControlPanel(){
     gui->addToggle("Speed Control"		, &dancerControl);
     gui->addSlider("Speed Threshold", 0.0, 5.0, &speedThreshold);
     
-//    //Distance Control
-//    gui->addSpacer();
-//    gui->addToggle("Distance Control"		, &distanceControl);
-//    gui->addSlider("Distance Threshold", 0.0, 200.0, &distanceThreshold);
+    //Distance Control
+    gui->addSpacer();
+    gui->addToggle("Distance Control"		, &distanceControl);
+    gui->addSlider("Distance Threshold", 0.0, 200.0, &distanceThreshold);
     
     //High and Low Control
     gui->addSpacer();
@@ -321,20 +324,37 @@ void frozenIce::refleshState(){
             meltingCount = 0;
         }
         
+//        //指定したノード間の距離が[distanceThreshold]より大きいと凍り、小さいと溶ける
+//        if(motionExtractor.getDistanceAt(0, 1) < distanceThreshold){
+//            if(iceFrozing == true){
+//                iceFrozing = false;
+//            }
+//            if(iceMelting == false){
+//                iceMelting = true;
+//            }
+//        }else{
+//            if(iceFrozing == false){
+//                iceFrozing = true;
+//            }
+//            if(iceMelting == true){
+//                iceMelting = false;
+//            }
+//        }
+        
         //指定したノード間の距離が[distanceThreshold]より大きいと溶け、小さいと凍る
         if(motionExtractor.getDistanceAt(0, 1) < distanceThreshold){
-            if(iceFrozing == true){
-                iceFrozing = false;
-            }
-            if(iceMelting == false){
-                iceMelting = true;
-            }
-        }else{
             if(iceFrozing == false){
                 iceFrozing = true;
             }
             if(iceMelting == true){
                 iceMelting = false;
+            }
+        }else{
+            if(iceFrozing == true){
+                iceFrozing = false;
+            }
+            if(iceMelting == false){
+                iceMelting = true;
             }
         }
     }
@@ -382,8 +402,8 @@ void frozenIce::draw(){
     //==========================================================================
 //    cout << "frozing    : " << frozingCount << ":" << hantei << endl;
 //    cout << "melting    : " << meltingCount << ":" << hantei << endl;
-//    cout << "distance    : " << motionExtractor.getDistanceAt(0, 1) << endl;
-    cout << "node high low    : " << motionExtractor.getPositionAt(0).y << ":" << hantei << endl;
+   cout << "distance    : " << motionExtractor.getDistanceAt(0, 1) << endl;
+//    cout << "node high low    : " << motionExtractor.getPositionAt(0).y << ":" << hantei << endl;
     //==========================================================================
     
 }
