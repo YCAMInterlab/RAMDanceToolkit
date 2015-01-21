@@ -116,8 +116,9 @@ void SceneDataDisplacement::update(ofxEventMessage& m)
 {
     if (m.getAddress() == kOscAddrCameraUnitVector) {
         const float t{ofGetElapsedTimef()-mEnterTime};
-        const float sx{::fabsf(m.getArgAsFloat(0))};
-        const float sy{::fabsf(m.getArgAsFloat(1))};
+        const float r{2.f};
+        const float sx{::fabsf(ofClamp(m.getArgAsFloat(0), -r, r))};
+        const float sy{::fabsf(ofClamp(m.getArgAsFloat(1), -r, r))};
         updateShader(t, sx, sy);
     }
 }

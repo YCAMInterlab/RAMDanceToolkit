@@ -36,8 +36,10 @@ void AnalyzeMean::update(ofVec4f mean)
         cout << which << ":" << win0 << win1 << endl;
         
         if (getMH().getUniqueScenes().empty() == false) {
-            int scene{(int)(which % getMH().getUniqueScenes().size())};
+            const int scene{(int)(which % getMH().getUniqueScenes().size())};
+            const int score{(int)(which % getMH().getNumUniqueScores())};
             getMH().setUniqueScene(scene, win0, win1);
+            getMH().setUniqueScore(score);
             mPrevScene = scene;
             mPrevSetSceneTime = t;
         }
