@@ -10,7 +10,7 @@
 #define RAMDanceToolkit_dpIceMapController_h
 
 #include "dpIceMapFace.h"
-#include "dpConstants.h"
+
 class dpIceMapGrid{
 public:
     
@@ -21,6 +21,7 @@ public:
     }
     
     void reset(){
+        
         mMaps.clear();
         mMaps.assign(mDiv * mDiv, dpIceMapFace());
         
@@ -69,6 +70,18 @@ public:
     void extendEase(){
         for(auto &v:mMaps){
             v.extendEase();
+        }
+    }
+    
+    void extendByThresh(int num){
+        for(auto &v:mMaps){
+            v.extendByThresh(num);
+        }
+    }
+    
+    void setExtendThreshNum(int num){
+        for(auto &v:mMaps){
+            v.setExtendThreshNum(num);
         }
     }
     
@@ -140,7 +153,20 @@ public:
         reset();
     }
     
+    void extendEachLineByThresh(int num){
+        for(auto &v:mMaps){
+            v.extendEachLineByThresh(num);
+        }
+    }
+    
+    void setExtendEachLineThreshNum(int num){
+        for(auto &v:mMaps){
+            v.setExtendEachLineThreshNum(num);
+        }
+    }
+    
 private:
+    
     vector<dpIceMapFace>mMaps;
     int mDiv = 1;
     
@@ -148,6 +174,7 @@ private:
     
     ofPoint mOffset;
     ofPoint mRot;
+    
 };
 
 #endif

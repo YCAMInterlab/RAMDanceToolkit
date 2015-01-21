@@ -77,6 +77,8 @@ public:
             v.setAlpha(0);
         }
         */
+        
+        mExtendThreshNum = ofRandom(1,20);
     }
     
     /*void addLine(ofPoint s1,ofPoint s2){
@@ -102,11 +104,10 @@ public:
     }
     
     void extendEase(){
-        hasExtend = true;
+       // hasExtend = true;
         
         for(auto &v:mTris){
-            v.setTargetMode();
-            v.setAlpha(1.0);
+            v.extendEase();
         }
         
         /*for(auto &v:mLines){
@@ -122,16 +123,18 @@ public:
     }
     
     void shrink(){
-        hasExtend = false;
+        for(auto &v:mTris){
+            v.shrink();
+        }
     }
     
     void update(){
 
         for(auto &v:mTris){
             
-            if(hasExtend == false){
-                v.kill();
-            }
+           /* if(hasExtend == false){
+                v.shrink();
+            }*/
             
             if(isDrawAll){
                 v.setMode(0);
@@ -169,6 +172,28 @@ public:
         mVbo.updateColorData(&mColors[0], mColors.size());
         
     }
+    
+    void extendByThresh(int num){
+        if(num > mExtendThreshNum)extendEase();
+        else shrink();
+    }
+    
+    void setExtendThreshNum(int num){
+        mExtendThreshNum = ofRandom(1,num);
+    }
+    
+    void extendEachLineByThresh(int num){
+        for(auto &v:mTris){
+            v.extendByThresh(num);
+        }
+    }
+    
+    void setExtendEachLineThreshNum(int num){
+        for(auto &v:mTris){
+            v.setExtendThreshNum(num);
+        }
+    }
+    
     void draw(){
      
        // for(auto &v:mTris){
@@ -214,6 +239,7 @@ private:
     
     bool isDrawAll = false;
 
+    int mExtendThreshNum = 0;
 };
 
 #endif
