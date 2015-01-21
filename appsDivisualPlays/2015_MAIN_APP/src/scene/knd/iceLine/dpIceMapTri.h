@@ -40,13 +40,13 @@ public:
     void kill(){
         killAlpha();
         killMode();
-        hasKilled = true;
+        hasShrinked = true;
     }
     
     void gen(){
-        if(hasKilled){
+        if(hasShrinked){
             randomizeMode();
-            hasKilled = false;
+            hasShrinked = false;
         }
     }
     
@@ -143,7 +143,7 @@ private:
     
     int mTargetMode = 0;
     
-    bool hasKilled = false;
+    bool hasShrinked = false;
 };
 
 class dpIceMapTri{
@@ -162,6 +162,8 @@ public:
         
         mLineVerts.assign(2 * LINE_NUM, ofVec2f());
         mLineAlpha.assign(2 * LINE_NUM,float());
+        
+        mExtendThreshNum = ofRandom(1,20);
     }
     
     void setAlpha(float alpha){
@@ -179,9 +181,9 @@ public:
     }
     
     void gen(){
-        if(hasKilled){
+        if(hasShrinked){
             randomizeMode();
-            hasKilled = false;
+            hasShrinked = false;
         }
     }
     
@@ -193,13 +195,27 @@ public:
         
     }
     
-    void kill(){
+    void shrink(){
         for(auto &v:mLines){
             v.killAlpha();
             v.killMode();
         }
         
-        hasKilled = true;
+        hasShrinked = true;
+    }
+    
+    void extendEase(){
+        setTargetMode();
+        setAlpha(1.0);
+    }
+    
+    void extendByThresh(int num){
+        if(num > mExtendThreshNum)extendEase();
+        else shrink();
+    }
+    
+    void setExtendThreshNum(int num){
+        mExtendThreshNum = ofRandom(1,num);
     }
     
     void setTargetMode(){
@@ -240,12 +256,14 @@ public:
     }
 private:
     vector<dpIceMapLine>mLines;
-    bool hasKilled = false;
+    bool hasShrinked = false;
     
     static const int LINE_NUM = 3;
     
     vector<float> mLineAlpha;
     vector<ofVec2f> mLineVerts;
+    
+    int mExtendThreshNum;
 };
 
 #endif
