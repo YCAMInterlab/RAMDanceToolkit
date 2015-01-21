@@ -26,8 +26,8 @@ void SceneMasterDecrement::initialize()
     dpDebugFunc();
     
     mUICanvas = new ofxUICanvas();
-    mUICanvas->setName(getName());
-    mUICanvas->addLabel(getName());
+    mUICanvas->setName(getShortName());
+    mUICanvas->addLabel(getShortName(), OFX_UI_FONT_SMALL);
     mUICanvas->addSpacer();
     
     mCam.disableMouseInput();
@@ -65,13 +65,7 @@ void SceneMasterDecrement::update(ofxEventMessage& m)
         
     }
     if (m.getAddress() == kOscAddrCameraUnitMean) {
-        if (m.getNumArgs() == 4) {
-            mMean.mMean.x = m.getArgAsInt32(0);
-            mMean.mMean.y = m.getArgAsInt32(1);
-            mMean.mMean.z = m.getArgAsInt32(2);
-            mMean.mMean.w = m.getArgAsInt32(3);
-            mMean.update();
-        }
+
     }
     if (m.getAddress() == kOscAddrCameraUnitVector) {
         for (int i=0; i<kNumCameraunitVectors ; i++) {
@@ -132,10 +126,6 @@ void SceneMasterDecrement::draw()
         ofPopMatrix();
         i++;
     }
-    stringstream ss;
-    ss << mMean.mMean << " / " << mMean.mMeanAddtion << endl;
-    ss << MH::kSceneNames[mMean.mPrevScene] << endl;
-    ofDrawBitmapString(ss.str(), 20.f, 30.f);
     ofPopMatrix();
 }
 

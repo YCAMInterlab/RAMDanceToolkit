@@ -16,19 +16,40 @@ const string MH::kSceneNames[MH::kNumScenes]{
     "dpVisServoPendulum",
     "dpVisMagPendulum",
     "dpVisSandStorm",
-    "dpVisTheta",
     "dpVisStruggle",
-    "dpVisStage",
+    
+    "dpVisTheta",
+    
     "dpHGearMove",
     "dpHWorm",
     "dpVisTornado",
-    "",
-    "",
-    "",
+    
+    "dpVisStage",
+    
+    "hoge",
+    "foo",
+    "bar",
 };
+
+#if 0
+0  dpVisServoPendulum
+1  dpVisStage
+2  dpVisWorm
+3  dpVisIce
+4  dpVisStruggle
+5  dpVisSandStorm
+6  dpVisMagPendulum
+7  dpVisTheta
+8  dpVisTornado
+9  dpVisPLink_Laser
+10 dpVisPLink_Prism
+11 dpVisPLink_Oil
+12 (Gear?)
+#endif
 
 const ofColor MH::kBackgroundColor{255, 20};
 const ofColor MH::kTextColor{255, 200};
+const ofColor MH::kTextColorDark{255, 100};
 
 const int MH::kValvePins[kNumValvePins]{2, 3, 4, 5, 6, 7};
 const int MH::kPumpPins[kNumPumpPins]{8, 9};
@@ -41,10 +62,51 @@ const float MH::kPumpCloseDur[MH::kNumPumpPins]{2.0f, 5.0f};
 const string MH::kHostNameMasterHakoniwa{"192.168.20.60"};
 const int MH::kPortNumberMasterHakoniwa {8528};
 const string MH::kHostNameCameraUnit{"192.168.20.5"};
-//const int MH::kPortNumberCameraUnit{12400};
-const int MH::kPortNumberCameraUnit{12345};
+const int MH::kPortNumberCameraUnit{12400};
 
 const string MH::kOscAddrRamSetScene{"/ram/set_scene"};
+
+#pragma mark ___________________________________________________________________
+void MasterHakoniwa::Valve::update(MasterHakoniwa* mh)
+{
+    const float t{ofGetElapsedTimef()};
+    
+    if (!prevOpen && open) {
+        openedTime = t;
+        nOpend++;
+    }
+    else if (t - openedTime >= mh->mValveOpenDuration) {
+        open = false;
+        if (prevOpen && !open) {
+            closedTime = t;
+        }
+    }
+    prevOpen = open;
+    
+    mh->sendPin(pin, open);
+}
+
+#pragma mark ___________________________________________________________________
+void MasterHakoniwa::Pump::update(MasterHakoniwa* mh)
+{
+    const float t{ofGetElapsedTimef()};
+    
+    if (!prevOpen && open) {
+        openedTime = t;
+    }
+    else if (prevOpen && !open) {
+        closedTime = t;
+    }
+    prevOpen = open;
+    
+    mh->sendPin(pin, open);
+}
+
+#pragma mark ___________________________________________________________________
+bool MasterHakoniwa::Scene::isEnabled() const
+{
+    return window[WINDOW_0] || window[WINDOW_1];
+}
 
 #pragma mark ___________________________________________________________________
 MasterHakoniwa& MasterHakoniwa::instance()
@@ -56,28 +118,80 @@ MasterHakoniwa& MasterHakoniwa::instance()
 void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
 {
     const float sizeBig{40.f};
-    const float w{250.f};
-    
+    const float sizeMid{25.f};
+    const float w{kGuiWidth};
+    const float h{ofGetHeight() * 0.5f + kMargin};
+    const float lineH{12.f};
+    tabbar->setWidth(w);
     tabbar->setColorBack(kBackgroundColor);
     tabbar->setPosition(kLineWidth, kTopOffset);
-    tabbar->addToggle("[[[Stop!!!]]]", &mEmergencyStop, sizeBig, sizeBig);
+    tabbar->addToggle("[[[ Stop!!! ]]]", &mEmergencyStop, sizeBig, sizeBig);
     tabbar->addSpacer(w, 1.f);
-    tabbar->addToggle("Enable Valve", &mEnableValve);
-    tabbar->addToggle("Enable Pump", &mEnablePump);
-     tabbar->addSpacer(w, 1.f);
-    tabbar->addSlider("Valve open duration", 0.f, 1.f, &mOpenDuration);
-    tabbar->addSpacer(w, 1.f);
-    tabbar->addLabel("(Turn off [Enable pump] toggle)", OFX_UI_FONT_SMALL);
-    for (int i=0; i<kNumValvePins; i++) {
-        tabbar->addToggle("Open valve " + ofToString(i), &mOpenValve[i]);
-    }
-    tabbar->addSpacer(w, 1.f);
-    tabbar->addLabel("(Turn off [Enable valve] toggle)", OFX_UI_FONT_SMALL);
-    tabbar->addToggle("Open pump forward", &mOpenPump[0]);
-    tabbar->addToggle("Open pump back", &mOpenPump[1]);
+    mEnableAllToggle = tabbar->addToggle("Enable All", false, sizeMid, sizeMid);
+    tabbar->addToggle("Enable OSC output", &mEnableOscOut);
+    tabbar->addToggle("Enable CameraUnit", &mEnableCameraUnit);
+    tabbar->addToggle("Enable MOTIONER", &mEnableMotioner);
     tabbar->addSpacer(w, 1.f);
     
-    // UICanvasセットポジションして入れる
+    ofxUICanvas* sceneSelectTab{new ofxUICanvas()};
+    sceneSelectTab->setWidth(w);
+    sceneSelectTab->setHeight(h);
+    sceneSelectTab->setColorBack(MH::kBackgroundColor);
+    sceneSelectTab->setName("Select scene");
+    sceneSelectTab->addLabel("Select scene", OFX_UI_FONT_SMALL);
+    sceneSelectTab->addSpacer();
+    vector<string> sceneNames;
+    sceneNames.push_back("disable all");
+    for (int i=0; i<kNumScenes; i++) {
+        sceneNames.push_back(kSceneNames[i]);
+    }
+    sceneSelectTab->addRadio("Scenes", sceneNames);
+    tabbar->addCanvas(sceneSelectTab);
+    ofAddListener(sceneSelectTab->newGUIEvent, this, &MasterHakoniwa::guiEvent);
+    
+    tabbar->addSpacer(w, 1.f);
+    tabbar->addLabel("Analyze method", OFX_UI_FONT_SMALL);
+    vector<string> radioNames;
+    radioNames.push_back("Mean");
+    radioNames.push_back("Pixelate");
+    tabbar->addRadio("Analyze", radioNames)->activateToggle("Mean");
+    tabbar->addSpacer(w, 1.f);
+    
+    ofxUICanvas* meanTab{new ofxUICanvas};
+    meanTab->setWidth(w);
+    meanTab->setHeight(h);
+    meanTab->setColorBack(MH::kBackgroundColor);
+    meanTab->setName("Mean Settings");
+    meanTab->addLabel("Mean Settings", OFX_UI_FONT_SMALL);
+    meanTab->addSpacer();
+    meanTab->addSlider("Limit", 0.1f, 100.f, &mAnalyzeMean.mMeanLimit, w - kMargin, lineH);
+    meanTab->addSlider("Min time", 0.1f, 60.f * 3.f, &mAnalyzeMean.mMinSetSceneTime, w - kMargin, lineH);
+    tabbar->addCanvas(meanTab);
+    
+    ofxUICanvas* pixelataTab{new ofxUICanvas};
+    pixelataTab->setWidth(w);
+    pixelataTab->setHeight(h);
+    pixelataTab->setColorBack(MH::kBackgroundColor);
+    pixelataTab->setName("Pixelate Settings");
+    pixelataTab->addLabel("Pixelate Settings", OFX_UI_FONT_SMALL);
+    pixelataTab->addSpacer();
+    tabbar->addCanvas(pixelataTab);
+
+    tabbar->addSpacer(w, 1.f);
+    
+    tabbar->addSlider("Valve open duration", 0.f, 1.f, &mValveOpenDuration, w, lineH);
+    tabbar->addSpacer(w, 1.f);
+    for (int i=0; i<kNumValvePins; i++) {
+        tabbar->addToggle("Open valve " + ofToString(i), &mValves.at(i).open);
+    }
+    tabbar->addSpacer(w, 1.f);
+    tabbar->addToggle("Open pump forward", &mPumps.at(0).open);
+    tabbar->addToggle("Open pump back", &mPumps.at(1).open);
+    tabbar->addSpacer(w, 1.f);
+    
+    tabbar->addLabel("MOTIONER method settings", OFX_UI_FONT_SMALL);
+    
+    ofAddListener(tabbar->newGUIEvent, this, &MasterHakoniwa::guiEvent);
 }
 
 void MasterHakoniwa::initialize()
@@ -89,8 +203,6 @@ void MasterHakoniwa::initialize()
     
     mPumps.assign(kNumPumpPins, Pump());
     for (int i=0; i<mPumps.size(); i++) {
-        mPumps.at(i).duration = kPumpOpenDur[i];
-        mPumps.at(i).idle = kPumpCloseDur[i];
         mPumps.at(i).pin = kPumpPins[i];
     }
     
@@ -104,83 +216,86 @@ void MasterHakoniwa::initialize()
         mScenes[kSceneNames[i]] = Scene();
     }
     
-    ofAddListener(ofxMot::drawSkeletonEvent, this, &MasterHakoniwa::onDrawSkeleton);
+    ofAddListener(ofxMot::drawSkeletonEvent,
+                  this,
+                  &MasterHakoniwa::onDrawSkeleton);
+    
+    resetUniqueScenes();
 }
 
 void MasterHakoniwa::shutdown()
 {
-    ofRemoveListener(ofxMot::drawSkeletonEvent, this, &MasterHakoniwa::onDrawSkeleton);
-    
+    ofRemoveListener(ofxMot::drawSkeletonEvent,
+                     this,
+                     &MasterHakoniwa::onDrawSkeleton);
     turnOffAllPins();
 }
 
 void MasterHakoniwa::update()
 {
     if (mEmergencyStop) {
-        mEnableValve = false;
-        mEnablePump = false;
+        mEnableMotioner = false;
+        mEnableCameraUnit = false;
+        mEnableOscOut = false;
+        if (mEnableAllToggle) {
+            mEnableAllToggle->setValue(false);
+        }
         turnOffAllPins();
+        turnOffAllScenes();
         mEmergencyStop = false;
     }
     
     if (ofGetFrameNum() % kUpdateFrames) return;
-        
-    if (!mEnableValve) {
-        for (int i=0; i<kNumValvePins; i++) {
-               sendPin(kValvePins[i], mOpenValve[i]);
-        }
-    }
-    if (!mEnablePump) {
-        for (int i=0; i<kNumPumpPins; i++) {
-            sendPin(kPumpPins[i], mOpenPump[i]);
-        }
+    
+    for (int i=0; i<kNumValvePins; i++) {
+        mValves[i].update(this);
     }
     
-    const float t = ofGetElapsedTimef();
+    for (int i=0; i<kNumPumpPins; i++) {
+        mPumps[i].update(this);
+    }
+}
 
-    for (int i=0; i<mValves.size(); i++) {
-        auto& v = mValves.at(i);
-        if (v.doOpen) {
-            v.doOpen = false;
-            v.opening = true;
-            v.openedTime = t;
-        }
-        else if (t - v.openedTime >= mOpenDuration) {
-            v.opening = false;
-        }
-        if (mEnableValve) {
-            sendPin(v.pin, v.opening);
-            mOpenPump[i] = v.opening;
+void MasterHakoniwa::updateCameraUnit(ofxEventMessage& m)
+{
+    if (m.getAddress() == kOscAddrCameraUnitMean) {
+        if (m.getNumArgs() == ofVec4f::DIM) {
+            ofVec4f mean;
+            for (int i=0; i<ofVec4f::DIM; i++) {
+                mean[i] = m.getArgAsInt32(i);
+            }
+            if (mEnableCameraUnit && mAnalyzeType == AnalyzeType::Mean) {
+                mAnalyzeMean.update(mean);
+            }
         }
     }
-    
-    for (int i=0; i<mPumps.size(); i++) {
-        auto& p = mPumps.at(i);
-        const float d = t - p.openedTime;
-        if (d < p.duration) {
-            p.opening = true;
-        }
-        else if (d >= p.duration && d < p.duration + p.idle) {
-            p.opening = false;
-        }
-        else {
-            p.openedTime = t;
-        }
-        if (mEnablePump) {
-            sendPin(p.pin, p.opening);
-            mOpenPump[i] = p.opening;
-        }
+    else if (m.getAddress() == kOscAddrCameraUnitPixelateR) {
+        if (mEnableCameraUnit)
+            mAnalyzePixelate.updateColor(AnalyzePixelate::Color::R, m);
+    }
+    else if (m.getAddress() == kOscAddrCameraUnitPixelateG) {
+        if (mEnableCameraUnit)
+            mAnalyzePixelate.updateColor(AnalyzePixelate::Color::G, m);
+    }
+    else if (m.getAddress() == kOscAddrCameraUnitPixelateB) {
+        if (mEnableCameraUnit)
+            mAnalyzePixelate.updateColor(AnalyzePixelate::Color::B, m);
     }
 }
 
 void MasterHakoniwa::draw()
 {
-    const float t{ofGetElapsedTimef()};
-
-    mLineNum = kNumPumpPins + kNumValvePins + mScenes.size() + 5;
+    const float x{kLineWidth + kGuiWidth + kMargin * 2.f + 3.f};
+    const float y{400.f};
+    mCamViewport.set(x,
+                     y,
+                     (ofGetWidth() - x) * 0.5f - kMargin * 2.f,
+                     ofGetHeight() - y - kMargin * 2.f);
     
-    mTextLeftCorner.set(kTextSpacing + kMargin,
-                        kTopOffset + kTextSpacing + kTextSpacing * mLineNum + kMargin);
+    mTextLeftCorner.set(mCamViewport.x + mCamViewport.width + kMargin * 2.f,
+                        mCamViewport.y + kTextSpacing);
+    
+    const float t{ofGetElapsedTimef()};
     
     ofFill();
     ofSetColor(255, 0, 0, 20);
@@ -190,68 +305,128 @@ void MasterHakoniwa::draw()
            ofGetHeight() - kTopOffset);
     
     ofPushMatrix();
-    ofTranslate(kTextSpacing, kTopOffset);
+    alignedTranslate(kTextSpacing, kTopOffset);
     
     ofSetColor(kBackgroundColor);
     ofRect(0.f,
            0.f,
            kLineWidth - kTextSpacing - kMargin,
-           mLineNum * kTextSpacing);
-    ofRect(0.f,
-           mLineNum * kTextSpacing + kMargin,
-           kLineWidth - kTextSpacing - kMargin,
-           ofGetHeight() - mLineNum * kTextSpacing - kMargin * 3.f - kTopOffset);
+           ofGetHeight() - kTopOffset - kMargin * 2.f);
     
     ofSetColor(kTextColor);
-    ofTranslate(kMargin, kTextSpacing);
-    ofDrawBitmapString("valve", ofPoint::zero());
-    ofTranslate(0.f, kTextSpacing);
+    alignedTranslate(kMargin, kTextSpacing);
+    ofDrawBitmapString("[motioner]", ofPoint::zero());
+    alignedTranslate(0.f, kTextSpacing);
+    stringstream ss;
+    ss << "running time: " << setprecision(1) << fixed
+    << (mEnableMotioner ? ofGetElapsedTimef() - mEnabledTime : 0.f);
+    mEnableMotioner ? ofSetColor(color::kMain) : ofSetColor(kTextColor);
+    ofDrawBitmapString(ss.str(), ofPoint::zero());
+    alignedTranslate(0.f, kTextSpacing);
+    alignedTranslate(0.f, kTextSpacing);
+    
+    ofSetColor(kTextColor);
+    ofDrawBitmapString("[valves]", ofPoint::zero());
+    alignedTranslate(0.f, kTextSpacing);
+    
+    int i{0};
     for (auto& v : mValves) {
-        v.opening ? ofSetColor(color::kMain) : ofSetColor(kTextColor);
+        v.open ? ofSetColor(color::kMain) : ofSetColor(kTextColor);
         stringstream ss;
-        ss << v.pin << " = " << (v.opening ? "on " : "off")
-        << setprecision(1) << fixed
-        << " : " << t - v.openedTime  << " / " << mOpenDuration;
+        ss << i << " = " << (v.open ? "on " : "off")
+        << setprecision(2) << fixed
+        << " : " << (v.open ? t - v.openedTime : 0.f)
+        << " / " << mValveOpenDuration
+        << " | " << (!v.open ? t - v.closedTime : 0.f);
         ofDrawBitmapString(ss.str(), ofPoint::zero());
-        ofTranslate(0.f, kTextSpacing);
+        alignedTranslate(0.f, kTextSpacing);
+        i++;
     }
-    ofTranslate(0.f, kTextSpacing);
-    ofDrawBitmapString("pump", ofPoint::zero());
-    ofTranslate(0.f, kTextSpacing);
+    
+    ofSetColor(kTextColor);
+    alignedTranslate(0.f, kTextSpacing);
+    ofDrawBitmapString("[pumps]", ofPoint::zero());
+    
+    alignedTranslate(0.f, kTextSpacing);
+    i = 0;
     for (auto& p : mPumps) {
-        p.opening ? ofSetColor(color::kMain) : ofSetColor(kTextColor);
+        p.open ? ofSetColor(color::kMain) : ofSetColor(kTextColor);
         stringstream ss;
-        ss << p.pin << " = " << (p.opening ? "on " : "off")
+        ss << i << " = " << (p.open ? "on " : "off")
         << setprecision(1) << fixed
-        << " : " << t - p.openedTime  << " / "
-        << p.duration << " / " << p.idle << endl;
+        << " : " << (p.open ? t - p.openedTime : 0.f)
+        << " | " << (!p.open ? t - p.closedTime : 0.f);
         ofDrawBitmapString(ss.str(), ofPoint::zero());
-        ofTranslate(0.f, kTextSpacing);
+        alignedTranslate(0.f, kTextSpacing);
+        i++;
     }
-    ofTranslate(0.f, kTextSpacing);
+    
+    ofSetColor(kTextColor);
+    alignedTranslate(0.f, kTextSpacing);
+    ofDrawBitmapString("[scenes]", ofPoint::zero());
+    alignedTranslate(0.f, kTextSpacing);
     for (auto it : mScenes) {
         const string name{it.first};
         auto& s = it.second;
-        s.enabled ? ofSetColor(color::kMain) : ofSetColor(kTextColor);
+        
+        auto findIt = find(mUniqueScenes.begin(), mUniqueScenes.end(), name);
+        if (s.isEnabled()) ofSetColor(color::kMain);
+        else if (findIt != mUniqueScenes.end()) ofSetColor(kTextColor);
+        else ofSetColor(kTextColorDark);
+        
         ofDrawBitmapString(name, ofPoint::zero());
         stringstream ss;
-        ss << "= " << (s.enabled ? "on " : "off") << " : ";
-        for (int i=0; i<kNumWindows; i++) {
-            ss << (int)s.scr[i];
-            if (i<kNumWindows-1) ss << ", ";
+        ss << "= " << (s.isEnabled() ? "on " : "off") << " : ";
+        for (int i=0; i<NUM_WINDOWS; i++) {
+            ss << (int)s.window[i];
+            if (i < NUM_WINDOWS - 1) ss << ", ";
         }
         ofDrawBitmapString(ss.str(), ofPoint(kTextSpacing * 15.f, 0.f));
-        ofTranslate(0.f, kTextSpacing);
+        alignedTranslate(0.f, kTextSpacing);
     }
+    alignedTranslate(0.f, kTextSpacing);
+    
+    ofSetColor(kTextColor);
+    ss.str("");
+    ss << "unique scenes: " << getNumUniqueScenes();
+    ofDrawBitmapString(ss.str(), ofPoint::zero());
+    alignedTranslate(0.f, kTextSpacing);
+    
+    alignedTranslate(0.f, kTextSpacing);
+    ofDrawBitmapString("[mean]", ofPoint::zero());
+    alignedTranslate(0.f, kTextSpacing);
+    ss.str("");
+    ss
+    << "data span : " << setprecision(3) << mAnalyzeMean.mLastUpdateSpan << endl
+    << "scene span: " << setprecision(1) << t - mAnalyzeMean.mPrevSetSceneTime << endl
+    << "total add : " << setprecision(3) << mAnalyzeMean.mTotalAddition.f << endl
+    << "raw color : " << setprecision(0) << mAnalyzeMean.mMean << endl
+    << "diff add  : " << setprecision(1) << mAnalyzeMean.mMeanAddtion;
+    
+    ofDrawBitmapString(ss.str(), ofPoint::zero());
+    alignedTranslate(0.f, kTextSpacing * 5.f);
+    mAnalyzeMean.draw();
+    alignedTranslate(0.f, kTextSpacing * 5.f);
+    
+    ofSetColor(kTextColor);
+    alignedTranslate(0.f, kTextSpacing);
+    ofDrawBitmapString("[pixelate]", ofPoint::zero());
+    alignedTranslate(0.f, kTextSpacing);
+    mAnalyzePixelate.draw();
+    
     ofPopMatrix();
     
     ofSetColor(kBackgroundColor);
     ofRect(mCamViewport);
+    ofPushMatrix();
+    alignedTranslate(mCamViewport.width + kMargin, 0.f);
+    ofRect(mCamViewport);
+    ofPopMatrix();
     
     ofPushStyle();
     ofEnableDepthTest();
     mCam.begin(mCamViewport);
-    ofTranslate(0.f, -100.f);
+    alignedTranslate(0.f, -100.f);
     ofSetRectMode(OF_RECTMODE_CENTER);
     ofRotateX(90.f);
     ofSetColor(kBackgroundColor, 5);
@@ -262,20 +437,22 @@ void MasterHakoniwa::draw()
 
 void MasterHakoniwa::turnOnValve(int index)
 {
+    if (!mEnableMotioner) return;
+    
     if (index <0 || index >= mValves.size())
         ofxThrowExceptionf(ofxException, "valve index %d is out of range", index);
-    mValves.at(index).doOpen = true;
+    mValves.at(index).open = true;
 }
 
 void MasterHakoniwa::turnOffAllPins()
 {
-    for (int i=0; i<kNumValvePins; i++) {
-        mOpenValve[i] = false;
-        sendPin(kValvePins[i], mOpenValve[i]);
+    for (auto& v : mValves) {
+        v.open = false;
+        sendPin(v.pin, v.open);
     }
-    for (int i=0; i<kNumPumpPins; i++) {
-        mOpenPump[i] = false;
-        sendPin(kPumpPins[i], mOpenPump[i]);
+    for (auto& p : mPumps) {
+        p.open = false;
+        sendPin(p.pin, p.open);
     }
 }
 
@@ -283,77 +460,123 @@ bool MasterHakoniwa::getIsOpeningValve(int index)
 {
     if (index <0 || index >= mValves.size())
         ofxThrowExceptionf(ofxException, "valve index %d is out of range", index);
-    return mValves.at(index).opening;
+    return mValves.at(index).open;
 }
 
+int MasterHakoniwa::getNumUniqueScenes() const
+{
+    return mUniqueScenes.size();
+}
+
+void MasterHakoniwa::resetUniqueScenes()
+{
+    mUniqueScenes.clear();
+    for (auto& it : mScenes) {
+        mUniqueScenes.push_back(it.first);
+    }
+}
+
+void MasterHakoniwa::setUniqueScene(int sceneIndex, bool win0, bool win1)
+{
+    if (sceneIndex < 0 || sceneIndex >= mUniqueScenes.size()) {
+        ofxThrowExceptionf(ofxException, "scene index %d out of range", sceneIndex);
+    }
+    
+    if (!getIsWindowOn(0)) win0 = true;
+    if (!getIsWindowOn(1)) win1 = true;
+    
+    if (!win0 && !win1) win0 = win1 = true;
+    
+    const string sceneName{mUniqueScenes.at(sceneIndex)};
+    mUniqueScenes.erase(mUniqueScenes.begin() + sceneIndex);
+    
+    sendSetScene(sceneName, win0, win1);
+    
+    if (mUniqueScenes.empty()) resetUniqueScenes();
+}
+
+bool MasterHakoniwa::getIsWindowOn(int windowIndex) const
+{
+    if (windowIndex < 0 || windowIndex >= NUM_WINDOWS) {
+        ofxThrowExceptionf(ofxException, "window index %d out of range", windowIndex);
+    }
+    
+    bool on{false};
+    for (auto it : mScenes) {
+        if (it.second.window[windowIndex]) on = true;
+    }
+    return on;
+}
+
+void MasterHakoniwa::turnOffAllScenes()
+{
+    for (auto it : mScenes) {
+        const string& name{it.first};
+        const auto&s = it.second;
+        sendSetScene(name, false, false);
+    }
+}
+
+#pragma mark ___________________________________________________________________
 void MasterHakoniwa::sendPin(int pin, bool open)
 {
     ofxOscMessage m;
     m.setAddress("/dp/hakoniwa/colorOfWater/"+ofToString(pin));
     m.addIntArg((int)open);
-    mMasterHakoniwaOscServer.sendMessage(m);
+    if (mEnableOscOut) mMasterHakoniwaOscServer.sendMessage(m);
+    //if (open)
+    //    cout << pin << "=" << open << endl;
 }
 
-void MasterHakoniwa::sendScene(const string& name,
-                               bool enabled,
-                               bool scr0,
-                               bool scr1)
+void MasterHakoniwa::sendSetScene(const string& name, bool win0, bool win1)
 {
     auto& scene = mScenes[name];
-    scene.enabled = enabled;
-    scene.scr[0] = scr0;
-    scene.scr[1] = scr1;
+    if (scene.window[WINDOW_0] == win0 && scene.window[WINDOW_1] == win1) {
+        return;
+    }
+    
+    scene.window[WINDOW_0] = win0;
+    scene.window[WINDOW_1] = win1;
     scene.dirty = true;
     
     for (auto& it : mScenes) {
         auto& s = it.second;
         const string& sName = it.first;
         
-        if (sName != name) {
-            bool allOff = true;
-            for (int i=0; i<kNumWindows; i++) {
-                if (scene.scr[i] && s.scr[i]) {
-                    s.scr[i] = false;
-                    s.dirty = true;
+        if (it.first != name) {
+            for (int i=0; i<NUM_WINDOWS; i++) {
+                if (scene.window[i] && s.window[i]) {
+                    it.second.window[i] = false;
+                    it.second.dirty = true;
                 }
-                if (s.scr[i]) allOff = false;
-            }
-            if (allOff) {
-                s.enabled = false;
             }
         }
         if (!s.dirty) continue;
         
-        stringstream ss;
+        //stringstream ss;
         ofxOscMessage m;
         m.setAddress(kOscAddrRamSetScene);
         m.addStringArg(sName);
-        m.addIntArg((int)s.enabled);
+        m.addIntArg((int)s.isEnabled());
         
-        ss << boolalpha << sName << "=" << s.enabled << " / ";
+        //ss << boolalpha << sName << "=" << (s.isEnabled() ? "on " : "off") << " : ";
         
-        for (int i=0; i<kNumWindows; i++) {
-            m.addIntArg((int)s.scr[i]);
-            ss << s.scr[i] << ", ";
+        for (int i=0; i<NUM_WINDOWS; i++) {
+            m.addIntArg((int)s.window[i]);
+            //ss << s.window[i] << ", ";
         }
-        mCameraUnitOscServer.sendMessage(m);
-        ofLogNotice() << ss.str();
+        if (mEnableOscOut) mCameraUnitOscServer.sendMessage(m);
+        //ofLogNotice() << ss.str();
     }
 }
 
 void MasterHakoniwa::onDrawSkeleton(ofxMotioner::EventArgs &e)
 {
-    const float x{kLineWidth};
-    const float y{407.f};
-    mCamViewport.set(x,
-                     y,
-                     (ofGetWidth() - x) * 0.5f - kMargin,
-                     ofGetHeight() - y - kMargin * 2.f);
     mCam.begin(mCamViewport);
     ofEnableDepthTest();
     ofPushMatrix();
     ofPushStyle();
-    ofTranslate(0.f, -100.f + 8.f);
+    alignedTranslate(0.f, -100.f + 8.f);
     
     ofSetDrawBitmapMode(OF_BITMAPMODE_MODEL_BILLBOARD);
     
@@ -389,6 +612,45 @@ void MasterHakoniwa::onDrawSkeleton(ofxMotioner::EventArgs &e)
     ofPopMatrix();
     
     mCam.end();
+}
+
+void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
+{
+    const string& widgetName{e.widget->getName()};
+    
+    if (widgetName == "Enable") {
+        mEnabledTime = ofGetElapsedTimef();
+    }
+    else if (widgetName == "Analyze") {
+        auto* radio = static_cast<ofxUIRadio*>(e.widget);
+        const auto& toggleName = radio->getActiveName();
+        if (toggleName == "Mean") {
+            mAnalyzeType = AnalyzeType::Mean;
+            ofLogNotice() << "Cnahged analyze type to mean";
+        }
+        else if (toggleName == "Pixelate") {
+            mAnalyzeType = AnalyzeType::Pixelate;
+            ofLogNotice() << "Cnahged analyze type to pixelate";
+        }
+    }
+    else if (widgetName == "Scenes") {
+        auto* radio = static_cast<ofxUIRadio*>(e.widget);
+        const auto& toggleName = radio->getActiveName();
+        if (radio->getActive()->getValue()) {
+            if (toggleName == "disable all") {
+                turnOffAllScenes();
+            }
+            else {
+                sendSetScene(toggleName, true, true);
+            }
+        }
+    }
+    else if (widgetName == "Enable All") {
+        const bool t{static_cast<ofxUIToggle*>(e.widget)->getValue()};
+        mEnableOscOut = t;
+        mEnableMotioner = t;
+        mEnableCameraUnit = t;
+    }
 }
 
 DP_SCORE_NAMESPACE_END

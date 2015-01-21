@@ -121,6 +121,9 @@ const string kOscAddrCameraUnitVector = "/dp/cameraUnit/vector";
 const string kOscAddrCameraUnitVectorTotal = "/dp/cameraUnit/vector/total";
 const string kOscAddrCameraUnitVectorFeatures = "/dp/cameraUnit/features";
 const string kOscAddrCaneraUnitVecContourBlob = "/dp/cameraUnit/contour/blob";
+const string kOscAddrCameraUnitPixelateR = "/dp/cameraUnit/pixelate/r";
+const string kOscAddrCameraUnitPixelateG = "/dp/cameraUnit/pixelate/g";
+const string kOscAddrCameraUnitPixelateB = "/dp/cameraUnit/pixelate/b";
 
 const string kOscAddrCameraUnitMean = "/dp/cameraUnit/mean";
 

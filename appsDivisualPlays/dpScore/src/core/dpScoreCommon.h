@@ -46,6 +46,9 @@ extern const string kOscAddrCameraUnitVectorTotal;
 extern const string kOscAddrCameraUnitVectorFeatures;
 extern const string kOscAddrCaneraUnitVecContourBlob;
 extern const string kOscAddrCameraUnitMean;
+extern const string kOscAddrCameraUnitPixelateR;
+extern const string kOscAddrCameraUnitPixelateG;
+extern const string kOscAddrCameraUnitPixelateB;
 
 extern const string kOscAddrMotioner;
 
@@ -130,6 +133,11 @@ typedef unsigned char byte;
 union floatByte {
     float f;
     byte b[4];
+};
+
+union floatInt {
+    float f;
+    int i;
 };
 
 union intByte {

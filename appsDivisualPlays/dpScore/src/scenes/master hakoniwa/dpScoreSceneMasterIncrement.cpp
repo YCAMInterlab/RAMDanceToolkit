@@ -26,15 +26,13 @@ void SceneMasterIncrement::initialize()
     dpDebugFunc();
     
     mUICanvas = new ofxUICanvas();
+    mUICanvas->setWidth(MH::kGuiWidth);
+    mUICanvas->setHeight(100.f);
     mUICanvas->setColorBack(MH::kBackgroundColor);
-    mUICanvas->setName(getName());
-    mUICanvas->addLabel(getName());
+    mUICanvas->setName(getShortName());
+    mUICanvas->addLabel(getShortName(), OFX_UI_FONT_SMALL);
     mUICanvas->addSpacer();
     mUICanvas->addSlider("Dist Limit", 500.f, 3000.f, &mLimit);
-    mUICanvas->addSpacer();
-    mUICanvas->addSlider("Mean Limit", 0.1f, 100.f, &mMean.mMeanLimit);
-    mUICanvas->addSlider("Scene change span", 0.f, 60.f * 3.f, &mMean.mMinSetSceneTime);
-    
     mCam.disableMouseInput();
 }
 
@@ -66,14 +64,6 @@ void SceneMasterIncrement::exit()
 
 void SceneMasterIncrement::update(ofxEventMessage& m)
 {
-    if (m.getAddress() == kOscAddrCameraUnitMean) {
-        if (m.getNumArgs() == mMean.mMean.DIM) {
-            for (int i=0; i<mMean.mMean.DIM; i++) {
-                mMean.mMean[i] = m.getArgAsInt32(i);
-            }
-            mMean.update();
-        }
-    }
     if (m.getAddress() == kOscAddrCameraUnitVector) {
         for (int i=0; i<kNumCameraunitVectors ; i++) {
             if (2*i+0 >= m.getNumArgs() || 2*i+1 >= m.getNumArgs()) break;
@@ -110,11 +100,10 @@ void SceneMasterIncrement::draw()
     string name{getName()};
     ofStringReplace(name, "dp::score::Scene", "");
     stringstream ss;
-    ss << name << endl << endl
-    << mMean.mMean << endl
-    << mMean.mMeanAddtion << endl;
+    ss << name << endl << endl;
+
     ofDrawBitmapString(ss.str(), 0.f, 0.f);
-    ofTranslate(0.f, MH::kTextSpacing * 6.f);
+    ofTranslate(0.f, MH::kTextSpacing * 2);
     int i=0;
     for (auto f : mAdditions) {
         ofPushMatrix();

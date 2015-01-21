@@ -59,7 +59,6 @@ public:
     
 private:
     ofEasyCam mCam;
-    AnalyzeMean mMean;
     
     float mLimit{2000.f};
     unsigned long mFrameNum{0};

@@ -15,15 +15,19 @@ DP_SCORE_NAMESPACE_BEGIN
 
 class AnalyzeMean {
 public:
-    void update();
+    void update(ofVec4f mean);
+    void draw();
     
     ofVec4f mMean;
     ofVec4f mMeanPrev;
     ofVec4f mMeanAddtion;
-    float mMeanLimit{5.f};
+    floatInt mTotalAddition{0.f};
+    float mMeanLimit{30.f};
     int mPrevScene{0};
     float mPrevSetSceneTime{0.f};
-    float mMinSetSceneTime{0.f};
+    float mMinSetSceneTime{60.f};
+    float mLastUpdateSpan{0.f};
+    float mLastFrameTime{0.f};
 };
 
 DP_SCORE_NAMESPACE_END

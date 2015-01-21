@@ -13,8 +13,8 @@
 #include "ofxOsc.h"
 #include "ofxMotioner.h"
 #include "dpScoreAnalyzeMean.h"
-
-class ofxUITabBar;
+#include "dpScoreAnalyzePixelate.h"
+#include "ofxUI.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -27,18 +27,52 @@ public:
     
     void setupUI(ofxUITabBar* tabbar);
     void update();
+    void updateCameraUnit(ofxEventMessage& m);
     void draw();
     
     void turnOnValve(int index);
     void turnOffAllPins();
     bool getIsOpeningValve(int index);
     
-    void sendScene(const string& name, bool enabled, bool scr0, bool scr1);
+    int getNumUniqueScenes() const;
+    void resetUniqueScenes();
+    void setUniqueScene(int sceneIndex, bool win0, bool win1);
+    void turnOffAllScenes();
+    
+    bool getIsWindowOn(int windowIndex) const;
+
+    void guiEvent(ofxUIEventArgs& e);
+    
+    enum class AnalyzeType {
+        Mean = 0,
+        Pixelate,
+        Num,
+    };
+    
+    enum class StageElements {
+        Hakoniwa = 0,
+        Dancer,
+        Lignt,
+        Sound,
+        Score,
+        Num,
+    };
+    
+    enum class ElementLevel {
+        None,
+        Low,
+        Mid,
+        High,
+        Num,
+    };
+    
+    enum Window {
+        WINDOW_0,
+        WINDOW_1,
+        NUM_WINDOWS,
+    };
     
     constexpr static const int kNumScenes{12};
-    
-    constexpr static const int kNumWindows{2};
-    
     constexpr static const int kNumValvePins{6};
     constexpr static const int kNumPumpPins{2};
     
@@ -49,6 +83,8 @@ public:
     
     constexpr static const int kUpdateFrames{10};
     
+    constexpr static const float kGuiWidth{250.f};
+    
     static const string kSceneNames[];
     
     static const int kValvePins[];
@@ -56,6 +92,7 @@ public:
     
     static const ofColor kBackgroundColor;
     static const ofColor kTextColor;
+    static const ofColor kTextColorDark;
     
     static const int kPumpPinForward;
     static const int kPumpPinBack;
@@ -70,40 +107,49 @@ public:
     
     static const string kOscAddrRamSetScene;
     
-    int mLineNum{0};
     ofVec2f mTextLeftCorner{0.f, 0.f};
     
 private:
+    struct Valve {
+        void update(MasterHakoniwa* mh);
+        
+        bool open{false};
+        bool prevOpen{false};
+        float openedTime{0.f};
+        float closedTime{0.f};
+        int pin{0};
+        int nOpend{0};
+    };
+    
+    struct Pump {
+        void update(MasterHakoniwa* mh);
+        
+        bool open{false};
+        bool prevOpen{false};
+        float openedTime{0.f};
+        float closedTime{0.f};
+        int pin{0};
+    };
+    
+    struct Scene {
+        bool isEnabled() const;
+        bool window[NUM_WINDOWS]{false, false};
+        bool dirty{false};
+    };
+    
+    struct AnalyzeNone {};
+    
     MasterHakoniwa() = default;
     ~MasterHakoniwa() = default;
     
     MasterHakoniwa(const MasterHakoniwa&) = delete;
     MasterHakoniwa& operator = (const MasterHakoniwa&) = delete;
     
+    void sendSetScene(const string& name, bool win0, bool win1);
+    
     void sendPin(int pin, bool open);
     
     void onDrawSkeleton(ofxMotioner::EventArgs &e);
-    
-    struct Valve {
-        bool doOpen{false};
-        bool opening{false};
-        float openedTime{0.f};
-        int pin{0};
-    };
-    
-    struct Pump {
-        bool opening{false};
-        float duration{8.f};
-        float idle{2.f};
-        float openedTime{0.f};
-        int pin{0};
-    };
-    
-    struct Scene {
-        bool enabled{false};
-        bool scr[MasterHakoniwa::kNumWindows]{false, false};
-        bool dirty{false};
-    };
     
     ofxOscSender mMasterHakoniwaOscServer;
     ofxOscSender mCameraUnitOscServer;
@@ -115,24 +161,23 @@ private:
     vector<Pump> mPumps;
     
     map<string, Scene> mScenes;
+    vector<string> mUniqueScenes;
     
-    enum AnalyzeType {
-        AnalyzeTypeMean = 0,
-        AnalyzeTypePixelate,
-        NumAnalyzeType,
-    };
+    AnalyzeType mAnalyzeType{AnalyzeType::Mean};
+    AnalyzeMean mAnalyzeMean;
+    AnalyzePixelate mAnalyzePixelate;
     
-    int mAnalyzeType{AnalyzeTypeMean};
-    AnalyzeMean mMean;
-    
-    float mOpenDuration{0.5f};
+    float mValveOpenDuration{0.5f};
     
     bool mEmergencyStop{false};
     
-    bool mEnableValve{false};
-    bool mEnablePump{false};
-    bool mOpenPump[kNumPumpPins]{false, false};
-    bool mOpenValve[kNumValvePins]{false, false, false, false, false, false};
+    ofxUIToggle* mEnableAllToggle{nullptr};
+    bool mEnableMotioner{false};
+    bool mEnableCameraUnit{false};
+    bool mEnableOscOut{false};
+    
+    float mEnabledTime{0.f};
+    
 };
 
 typedef MasterHakoniwa MH;

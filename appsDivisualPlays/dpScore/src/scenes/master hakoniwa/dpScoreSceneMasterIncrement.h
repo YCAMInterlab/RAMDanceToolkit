@@ -59,9 +59,8 @@ public:
     
 private:
     ofEasyCam mCam;
-    AnalyzeMean mMean;
     
-    float mLimit{1500.f};
+    float mLimit{2000.f};
     vector<float> mAdditions;
 };
 

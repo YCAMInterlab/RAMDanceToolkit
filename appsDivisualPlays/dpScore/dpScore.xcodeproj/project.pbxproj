@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		D20125EB1A6E4003000246B8 /* dpScoreAnalyzePixelate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20125E91A6E4003000246B8 /* dpScoreAnalyzePixelate.cpp */; };
+		D20125EC1A6E5A43000246B8 /* dpScoreAnalyzePixelate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20125E91A6E4003000246B8 /* dpScoreAnalyzePixelate.cpp */; };
 		D21D0B891A4C046000CC3598 /* ofxUI2DGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF51A4C046000CC3598 /* ofxUI2DGraph.cpp */; };
 		D21D0B8A1A4C046000CC3598 /* ofxUI2DPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF71A4C046000CC3598 /* ofxUI2DPad.cpp */; };
 		D21D0B8B1A4C046000CC3598 /* ofxUIBaseDraws.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF91A4C046000CC3598 /* ofxUIBaseDraws.cpp */; };
@@ -279,6 +281,8 @@
 
 /* Begin PBXFileReference section */
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		D20125E91A6E4003000246B8 /* dpScoreAnalyzePixelate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpScoreAnalyzePixelate.cpp; path = src/scenes/dpScoreAnalyzePixelate.cpp; sourceTree = SOURCE_ROOT; };
+		D20125EA1A6E4003000246B8 /* dpScoreAnalyzePixelate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpScoreAnalyzePixelate.h; path = src/scenes/dpScoreAnalyzePixelate.h; sourceTree = SOURCE_ROOT; };
 		D21D08821A4C045D00CC3598 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		D21D0AF41A4C046000CC3598 /* ofxUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI.h; sourceTree = "<group>"; };
 		D21D0AF51A4C046000CC3598 /* ofxUI2DGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUI2DGraph.cpp; sourceTree = "<group>"; };
@@ -383,7 +387,7 @@
 		D21D0C081A4C0E2E00CC3598 /* ofxException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxException.h; sourceTree = "<group>"; };
 		D21D0C091A4C0E2E00CC3598 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D21D0C0F1A4C2DAB00CC3598 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		D228B33B1A5FB738005F0404 /* dpScoreSceneBodyGlobe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyGlobe.cpp; sourceTree = "<group>"; };
+		D228B33B1A5FB738005F0404 /* dpScoreSceneBodyGlobe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneBodyGlobe.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D228B33C1A5FB738005F0404 /* dpScoreSceneBodyGlobe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyGlobe.h; sourceTree = "<group>"; };
 		D228B3631A5FC2D8005F0404 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		D228B36D1A5FC2D8005F0404 /* ofxMotioner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMotioner.cpp; sourceTree = "<group>"; };
@@ -399,13 +403,13 @@
 		D228B3771A5FC2D8005F0404 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D228B3821A5FC95C005F0404 /* dpScoreEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreEvent.cpp; sourceTree = "<group>"; };
 		D228B3831A5FC95C005F0404 /* dpScoreEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreEvent.h; sourceTree = "<group>"; };
-		D244310F1A68BD0D00574ACF /* dpScoreSceneDataSphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneDataSphere.cpp; sourceTree = "<group>"; };
+		D244310F1A68BD0D00574ACF /* dpScoreSceneDataSphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneDataSphere.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D24431101A68BD0D00574ACF /* dpScoreSceneDataSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataSphere.h; sourceTree = "<group>"; };
-		D24431151A690F1E00574ACF /* dpScoreSceneDataBarcode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneDataBarcode.cpp; sourceTree = "<group>"; };
+		D24431151A690F1E00574ACF /* dpScoreSceneDataBarcode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneDataBarcode.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D24431161A690F1E00574ACF /* dpScoreSceneDataBarcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataBarcode.h; sourceTree = "<group>"; };
-		D24431181A6919A800574ACF /* dpScoreSceneDataText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneDataText.cpp; sourceTree = "<group>"; };
+		D24431181A6919A800574ACF /* dpScoreSceneDataText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneDataText.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D24431191A6919A800574ACF /* dpScoreSceneDataText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataText.h; sourceTree = "<group>"; };
-		D244311B1A69298800574ACF /* dpScoreSceneDataSlider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneDataSlider.cpp; sourceTree = "<group>"; };
+		D244311B1A69298800574ACF /* dpScoreSceneDataSlider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneDataSlider.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D244311C1A69298800574ACF /* dpScoreSceneDataSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataSlider.h; sourceTree = "<group>"; };
 		D24C21961A49653D009D0796 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		D24C21971A49653D009D0796 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
@@ -443,13 +447,13 @@
 		D24C21BB1A49653D009D0796 /* ofxOscSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscSender.h; sourceTree = "<group>"; };
 		D2619F361A6523C3002EF3E2 /* dpScoreSceneBodyBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyBase.cpp; sourceTree = "<group>"; };
 		D2619F371A6523C3002EF3E2 /* dpScoreSceneBodyBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyBase.h; sourceTree = "<group>"; };
-		D27F2E4B1A67624400913B14 /* dpScoreSceneDataWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneDataWave.cpp; sourceTree = "<group>"; };
+		D27F2E4B1A67624400913B14 /* dpScoreSceneDataWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneDataWave.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D27F2E4C1A67624400913B14 /* dpScoreSceneDataWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataWave.h; sourceTree = "<group>"; };
-		D27F2E4E1A67625B00913B14 /* dpScoreSceneDataCircle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneDataCircle.cpp; sourceTree = "<group>"; };
+		D27F2E4E1A67625B00913B14 /* dpScoreSceneDataCircle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneDataCircle.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D27F2E4F1A67625B00913B14 /* dpScoreSceneDataCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataCircle.h; sourceTree = "<group>"; };
-		D27F2E511A6762C600913B14 /* dpScoreSceneDataDisplacement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneDataDisplacement.cpp; sourceTree = "<group>"; };
+		D27F2E511A6762C600913B14 /* dpScoreSceneDataDisplacement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneDataDisplacement.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D27F2E521A6762C600913B14 /* dpScoreSceneDataDisplacement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataDisplacement.h; sourceTree = "<group>"; };
-		D27F2E591A67F01600913B14 /* dpScoreSceneDataCircle3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneDataCircle3D.cpp; sourceTree = "<group>"; };
+		D27F2E591A67F01600913B14 /* dpScoreSceneDataCircle3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneDataCircle3D.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D27F2E5A1A67F01600913B14 /* dpScoreSceneDataCircle3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataCircle3D.h; sourceTree = "<group>"; };
 		D29034011A4D4ADE00577E04 /* dpEasing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpEasing.h; sourceTree = "<group>"; };
 		D29034021A4D4ADE00577E04 /* dpScoreSceneBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBase.cpp; sourceTree = "<group>"; };
@@ -458,15 +462,15 @@
 		D29034051A4D4ADE00577E04 /* dpScoreCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreCommon.h; sourceTree = "<group>"; };
 		D29034061A4D4ADE00577E04 /* dpScoreSceneManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneManager.cpp; sourceTree = "<group>"; };
 		D29034071A4D4ADE00577E04 /* dpScoreSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneManager.h; sourceTree = "<group>"; };
-		D29034091A4D4ADE00577E04 /* dpScoreSceneVec2Clocks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneVec2Clocks.cpp; sourceTree = "<group>"; };
+		D29034091A4D4ADE00577E04 /* dpScoreSceneVec2Clocks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneVec2Clocks.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D290340A1A4D4ADE00577E04 /* dpScoreSceneVec2Clocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneVec2Clocks.h; sourceTree = "<group>"; };
-		D290340B1A4D4ADE00577E04 /* dpScoreSceneVec2Grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneVec2Grid.cpp; sourceTree = "<group>"; };
+		D290340B1A4D4ADE00577E04 /* dpScoreSceneVec2Grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneVec2Grid.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D290340C1A4D4ADE00577E04 /* dpScoreSceneVec2Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneVec2Grid.h; sourceTree = "<group>"; };
-		D290340D1A4D4ADE00577E04 /* dpScoreSceneVec2Plotter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneVec2Plotter.cpp; sourceTree = "<group>"; };
+		D290340D1A4D4ADE00577E04 /* dpScoreSceneVec2Plotter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneVec2Plotter.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D290340E1A4D4ADE00577E04 /* dpScoreSceneVec2Plotter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneVec2Plotter.h; sourceTree = "<group>"; };
-		D290340F1A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneVec2SimpleGraph.cpp; sourceTree = "<group>"; };
+		D290340F1A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneVec2SimpleGraph.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D29034101A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneVec2SimpleGraph.h; sourceTree = "<group>"; };
-		D29B99121A63F023000115C5 /* dpScoreSceneBodyBoids.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyBoids.cpp; sourceTree = "<group>"; };
+		D29B99121A63F023000115C5 /* dpScoreSceneBodyBoids.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneBodyBoids.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D29B99131A63F023000115C5 /* dpScoreSceneBodyBoids.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyBoids.h; sourceTree = "<group>"; };
 		D29B99141A63F023000115C5 /* CinderMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinderMath.h; sourceTree = "<group>"; };
 		D29B99171A63F023000115C5 /* oncVao.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = oncVao.cpp; sourceTree = "<group>"; };
@@ -481,21 +485,21 @@
 		D29B99201A63F023000115C5 /* Predator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Predator.h; sourceTree = "<group>"; };
 		D29B99211A63F023000115C5 /* Rand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rand.cpp; sourceTree = "<group>"; };
 		D29B99221A63F023000115C5 /* Rand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rand.h; sourceTree = "<group>"; };
-		D2B4FD161A60BEB600C97A66 /* dpScoreSceneBodyScan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyScan.cpp; sourceTree = "<group>"; };
+		D2B4FD161A60BEB600C97A66 /* dpScoreSceneBodyScan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneBodyScan.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D2B4FD171A60BEB600C97A66 /* dpScoreSceneBodyScan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyScan.h; sourceTree = "<group>"; };
-		D2B4FD191A60DDBB00C97A66 /* dpScoreSceneBodyPatterns.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyPatterns.cpp; sourceTree = "<group>"; };
+		D2B4FD191A60DDBB00C97A66 /* dpScoreSceneBodyPatterns.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneBodyPatterns.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D2B4FD1A1A60DDBB00C97A66 /* dpScoreSceneBodyPatterns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyPatterns.h; sourceTree = "<group>"; };
-		D2B4FD1C1A60DE1200C97A66 /* dpScoreSceneBodyFlow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyFlow.cpp; sourceTree = "<group>"; };
+		D2B4FD1C1A60DE1200C97A66 /* dpScoreSceneBodyFlow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneBodyFlow.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D2B4FD1D1A60DE1200C97A66 /* dpScoreSceneBodyFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyFlow.h; sourceTree = "<group>"; };
-		D2B4FD221A60FF3A00C97A66 /* dpScoreSceneDataScroll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneDataScroll.cpp; sourceTree = "<group>"; };
+		D2B4FD221A60FF3A00C97A66 /* dpScoreSceneDataScroll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneDataScroll.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D2B4FD231A60FF3A00C97A66 /* dpScoreSceneDataScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataScroll.h; sourceTree = "<group>"; };
-		D2B5BB331A662941009B0F1E /* dpScoreSceneBodyRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyRect.cpp; sourceTree = "<group>"; };
+		D2B5BB331A662941009B0F1E /* dpScoreSceneBodyRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneBodyRect.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D2B5BB341A662941009B0F1E /* dpScoreSceneBodyRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyRect.h; sourceTree = "<group>"; };
-		D2B5BB361A662A3F009B0F1E /* dpScoreSceneBodyTemplate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyTemplate.cpp; sourceTree = "<group>"; };
+		D2B5BB361A662A3F009B0F1E /* dpScoreSceneBodyTemplate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneBodyTemplate.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D2B5BB371A662A3F009B0F1E /* dpScoreSceneBodyTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyTemplate.h; sourceTree = "<group>"; };
-		D2B5BB3B1A6690EF009B0F1E /* dpScoreSceneBodyBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyBox.cpp; sourceTree = "<group>"; };
+		D2B5BB3B1A6690EF009B0F1E /* dpScoreSceneBodyBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneBodyBox.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D2B5BB3C1A6690EF009B0F1E /* dpScoreSceneBodyBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyBox.h; sourceTree = "<group>"; };
-		D2C4DE7B1A6286E400342E4F /* dpScoreSceneBodyLines.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyLines.cpp; sourceTree = "<group>"; };
+		D2C4DE7B1A6286E400342E4F /* dpScoreSceneBodyLines.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneBodyLines.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D2C4DE7C1A6286E400342E4F /* dpScoreSceneBodyLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyLines.h; sourceTree = "<group>"; };
 		D2CE423D1A6BC3DE001644F2 /* dpScoreMasterHakoniwa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreMasterHakoniwa.cpp; sourceTree = "<group>"; };
 		D2CE423E1A6BC3DE001644F2 /* dpScoreMasterHakoniwa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreMasterHakoniwa.h; sourceTree = "<group>"; };
@@ -508,10 +512,10 @@
 		D2E8910D1A6B57CA0047B75A /* dpScore copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "dpScore copy-Info.plist"; path = "/Users/falcon/Documents/of_v0.8.4_osx_release/RAMDanceToolkit/appsDivisualPlays/dpScore/dpScore copy-Info.plist"; sourceTree = "<absolute>"; };
 		D2E891941A6B586C0047B75A /* dpMasterHakoniwa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dpMasterHakoniwa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2E891951A6B586C0047B75A /* dpScore copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "dpScore copy2-Info.plist"; path = "/Users/falcon/Documents/of_v0.8.4_osx_release/RAMDanceToolkit/appsDivisualPlays/dpScore/dpScore copy2-Info.plist"; sourceTree = "<absolute>"; };
-		D2E891981A6B5B460047B75A /* dpScoreSceneMasterIncrement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneMasterIncrement.cpp; sourceTree = "<group>"; };
+		D2E891981A6B5B460047B75A /* dpScoreSceneMasterIncrement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneMasterIncrement.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D2E891991A6B5B460047B75A /* dpScoreSceneMasterIncrement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneMasterIncrement.h; sourceTree = "<group>"; };
 		D2FE53C01A6CBD9E00B01E98 /* dpScoreSceneMasterDecrement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneMasterDecrement.h; sourceTree = "<group>"; };
-		D2FE53C11A6CBDAD00B01E98 /* dpScoreSceneMasterDecrement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneMasterDecrement.cpp; sourceTree = "<group>"; };
+		D2FE53C11A6CBDAD00B01E98 /* dpScoreSceneMasterDecrement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneMasterDecrement.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D2FE53C31A6D43EE00B01E98 /* dpScoreAnalyzeMean.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpScoreAnalyzeMean.cpp; path = src/scenes/dpScoreAnalyzeMean.cpp; sourceTree = SOURCE_ROOT; };
 		D2FE53C41A6D43EE00B01E98 /* dpScoreAnalyzeMean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpScoreAnalyzeMean.h; path = src/scenes/dpScoreAnalyzeMean.h; sourceTree = SOURCE_ROOT; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -907,6 +911,8 @@
 				D2CE423E1A6BC3DE001644F2 /* dpScoreMasterHakoniwa.h */,
 				D2FE53C31A6D43EE00B01E98 /* dpScoreAnalyzeMean.cpp */,
 				D2FE53C41A6D43EE00B01E98 /* dpScoreAnalyzeMean.h */,
+				D20125E91A6E4003000246B8 /* dpScoreAnalyzePixelate.cpp */,
+				D20125EA1A6E4003000246B8 /* dpScoreAnalyzePixelate.h */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -1218,6 +1224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D20125EC1A6E5A43000246B8 /* dpScoreAnalyzePixelate.cpp in Sources */,
 				D2E891131A6B586C0047B75A /* ofxUIBaseDraws.cpp in Sources */,
 				D2FE53C21A6CBDAD00B01E98 /* dpScoreSceneMasterDecrement.cpp in Sources */,
 				D2E891141A6B586C0047B75A /* ofxOscMessage.cpp in Sources */,
@@ -1388,6 +1395,7 @@
 				D21D0C0B1A4C0E2E00CC3598 /* README.md in Sources */,
 				D21D0BA31A4C046000CC3598 /* ofxUIRangeSlider.cpp in Sources */,
 				D29034171A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.cpp in Sources */,
+				D20125EB1A6E4003000246B8 /* dpScoreAnalyzePixelate.cpp in Sources */,
 				D228B37D1A5FC2D8005F0404 /* ofxMotionerUtils.cpp in Sources */,
 				D21D0BA11A4C046000CC3598 /* ofxUINumberDialer.cpp in Sources */,
 				D24C21C21A49653D009D0796 /* OscPrintReceivedElements.cpp in Sources */,

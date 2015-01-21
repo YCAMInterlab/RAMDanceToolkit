@@ -75,6 +75,8 @@ void ofApp::setup()
     OFX_BEGIN_EXCEPTION_HANDLING
     
 #ifdef DP_MASTER_HAKONIWA
+    ofSetWindowTitle("dpMasterHakoniwa");
+
     getMH().initialize();
     getMH().setupUI(mSceneManager.getTabBar());
     
@@ -84,6 +86,8 @@ void ofApp::setup()
     mSceneManager.add(decrement);
     mSceneManager.change<SceneMasterIncrement>();
 #else
+    ofSetWindowTitle("dpScore");
+    
     auto black = SceneBase::Ptr(new SceneBase());
     black->setDrawHeader(false);
     black->setName("black");
@@ -161,7 +165,7 @@ void ofApp::setup()
     dp::score::registerObjectEvent(this);
     
     ofAddListener(ofxEvent(), this, &ofApp::onEventReceived);
-        
+    
     //dp::score::ObjectEventArgs args;
     //
     //auto objA = ofPtr<ObjA>(new ObjA());
@@ -183,6 +187,11 @@ void ofApp::update()
     OFX_BEGIN_EXCEPTION_HANDLING
     
     const int t = ofGetElapsedTimef()*10.f;
+    
+#ifdef DP_MASTER_HAKONIWA
+    bool newMean{false};
+    bool newPixelate{false};
+#endif
     
     while (mOscReceiver.hasWaitingMessages()) {
         ofxOscMessage m;
@@ -212,6 +221,30 @@ void ofApp::update()
             if (newAddr == kOscAddrCameraUnitMean) {
                 mCameraUnitMessageMean = m;
                 mCameraUnitMessageMean.setAddress(kOscAddrCameraUnitMean);
+#ifdef DP_MASTER_HAKONIWA
+                newMean = true;
+#endif
+            }
+            else if (newAddr == kOscAddrCameraUnitPixelateR) {
+                mCameraUnitMessagePixelateR = m;
+                mCameraUnitMessagePixelateR.setAddress(kOscAddrCameraUnitPixelateR);
+#ifdef DP_MASTER_HAKONIWA
+                newPixelate = true;
+#endif
+            }
+            else if (newAddr == kOscAddrCameraUnitPixelateG) {
+                mCameraUnitMessagePixelateG = m;
+                mCameraUnitMessagePixelateG.setAddress(kOscAddrCameraUnitPixelateG);
+#ifdef DP_MASTER_HAKONIWA
+                newPixelate = true;
+#endif
+            }
+            else if (newAddr == kOscAddrCameraUnitPixelateB) {
+                mCameraUnitMessagePixelateB = m;
+                mCameraUnitMessagePixelateB.setAddress(kOscAddrCameraUnitPixelateB);
+#ifdef DP_MASTER_HAKONIWA
+                newPixelate = true;
+#endif
             }
             else if (newAddr == kOscAddrCameraUnitVector) {
                 mCameraUnitMessageVector = m;
@@ -221,29 +254,52 @@ void ofApp::update()
         }
     }
     
-    if (mDebugCamUnit) generateFakeVectorData();
+    if (mDebugCamUnit) {
+        generateFakeVectorData();
+        generateFakeMeanData();
+#ifdef DP_MASTER_HAKONIWA
+        newMean = true;
+#endif
+    }
     
     ofxMotioner::update();
     
     ofxEventMessage m;
     m.setAddress(kOscAddrMotioner);
     mSceneManager.update(m);
-    
-    mSceneManager.update(mCameraUnitMessageVector);
+
     mSceneManager.update(mCameraUnitMessageMean);
+    mSceneManager.update(mCameraUnitMessageVector);
     
 #ifdef DP_MASTER_HAKONIWA
-    ofSetWindowTitle("dpMasterHakoniwa : " + ofToString(ofGetFrameRate(), 2));
     getMH().update();
-#else
-    ofSetWindowTitle("dpScore : " + ofToString(ofGetFrameRate(), 2));
+    getMH().updateCameraUnit(mCameraUnitMessageVector);
+    if (newMean) getMH().updateCameraUnit(mCameraUnitMessageMean);
+    if (newPixelate) {
+        getMH().updateCameraUnit(mCameraUnitMessagePixelateR);
+        getMH().updateCameraUnit(mCameraUnitMessagePixelateG);
+        getMH().updateCameraUnit(mCameraUnitMessagePixelateB);
+    }
 #endif
     OFX_END_EXCEPTION_HANDLING
 }
 
+void ofApp::generateFakeMeanData()
+{
+    const float t{ofGetElapsedTimef()};
+    mCameraUnitMessageMean.clear();
+    mCameraUnitMessageMean.setAddress(kOscAddrCameraUnitMean);
+    ofVec4f v;
+    for (int i=0; i<ofVec4f::DIM; i++) {
+        v[i] = ofSignedNoise(t, 0, i) * 2.f + ofSignedNoise(t*9.8f, 0, i) * 1.f;
+        v[i] += 127.f - i * 5.f;
+        mCameraUnitMessageMean.addIntArg(v[i]);
+    }
+}
+
 void ofApp::generateFakeVectorData()
 {
-    const float t = ofGetElapsedTimef();
+    const float t{ofGetElapsedTimef()};
     mCameraUnitMessageVector.clear();
     mCameraUnitMessageVector.setAddress(kOscAddrCameraUnitVector);
     for (int i=0; i<kNumCameraunitVectors; i++) {
@@ -279,6 +335,18 @@ void ofApp::draw()
 #endif
     
     mSceneManager.draw();
+    
+#ifndef DP_MASTER_HAKONIWA
+    if (mShowFps) {
+#endif
+        ofPushStyle();
+        ofSetColor(ofColor::white, 200);
+        ofDrawBitmapString("fps: " + ofToString(ofGetFrameRate(), 2),
+                           ofPoint(20.f, ofGetHeight()-20.f));
+        ofPopStyle();
+#ifndef DP_MASTER_HAKONIWA
+    }
+#endif
     
     if (mInvert) {
         ofPushStyle();
@@ -326,6 +394,13 @@ void ofApp::keyPressed(int key)
             break;
         case 'd':
             mDebugCamUnit ^= true;
+            break;
+        case 'c':
+            mShowCursor ^=true;
+            mShowCursor ? ofShowCursor() : ofHideCursor();
+            break;
+            case '/':
+            mShowFps ^= true;
             break;
         case OF_KEY_LEFT:
             mSceneManager.prev();
