@@ -20,7 +20,7 @@ void ofApp::setup(){
 	hakoniwas.push_back("dpVisPLink_Oil");
 	hakoniwas.push_back("distanceMetaball");
 	hakoniwas.push_back("Line");
-	hakoniwas.push_back("fourPoint");
+	hakoniwas.push_back("fourPointx3");
 	hakoniwas.push_back("future?");
 
 	hakoniwas.push_back("TestSceneA");

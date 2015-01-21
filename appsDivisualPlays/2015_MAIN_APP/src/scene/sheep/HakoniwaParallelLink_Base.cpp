@@ -17,7 +17,6 @@ uiThemecp(128, 192),
 uiThemecpo(255, 192);
 
 HakoniwaParallelLink_Base::HakoniwaParallelLink_Base(){
-
 	mLinkManager.setup("cu.usbmodem1141");
 
 
