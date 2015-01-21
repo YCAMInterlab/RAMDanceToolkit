@@ -12,10 +12,10 @@ void sheepCam::update(){
 	if (curMode == SHEEPCAM_SIGMOID_WANDER){
 		int curFrm = ofGetFrameNum();
 
-		cout << "====Sheep Cam=====" << endl;
-		cout << "BEgin :" << mSw_beginFrame << endl;
-		cout << "Targ  :" << mSw_targetFrame << endl;
-		cout << "Curren:" << curFrm << endl;
+//		cout << "====Sheep Cam=====" << endl;
+//		cout << "BEgin :" << mSw_beginFrame << endl;
+//		cout << "Targ  :" << mSw_targetFrame << endl;
+//		cout << "Curren:" << curFrm << endl;
 
 		if ((mSw_beginFrame < curFrm) &&
 			(curFrm < mSw_targetFrame)){
