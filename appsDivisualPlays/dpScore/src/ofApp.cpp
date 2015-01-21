@@ -185,8 +185,6 @@ void ofApp::setup()
     
     mFont.loadFont(kFontPath, 150);
     
-    mTitleNames.push_back("Dividual Plays ");
-    
 #ifndef DP_MASTER_HAKONIWA
     keyPressed('f');
     keyPressed('c');
@@ -494,11 +492,9 @@ void ofApp::keyPressed(int key)
             break;
         case OF_KEY_LEFT:
             mSceneManager.prev();
-            mTimeSceneChanged = ofGetElapsedTimef();
             break;
         case OF_KEY_RIGHT:
             mSceneManager.next();
-            mTimeSceneChanged = ofGetElapsedTimef();
             break;
         default:
             //mSceneManager.keyPressed(key);
@@ -622,7 +618,6 @@ void ofApp::onEventReceived(ofxEventMessage& e)
     if (e.getAddress() == kEventAddrChangeScene) {
         if (e.getNumArgs() >= 1 && e.getArgType(0) == OFXOSC_TYPE_STRING) {
             mSceneManager.change(e.getArgAsString(0));
-            mTimeSceneChanged = ofGetElapsedTimef();
         }
     }
     

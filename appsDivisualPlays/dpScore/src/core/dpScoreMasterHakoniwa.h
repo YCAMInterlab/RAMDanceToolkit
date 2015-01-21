@@ -148,7 +148,8 @@ private:
     
     void sendPin(int pin, bool open);
     
-    void sendChangeScore(const string& name);
+    void sendChangeScore(const string& name,
+                         bool maintainSceneNames = true);
     
     void onDrawSkeleton(ofxMotioner::EventArgs &e);
     
@@ -158,6 +159,7 @@ private:
     
     UniqueStringStack mUniqueScenes;
     vector<UniqueStringStack> mUniqueScores;
+    UniqueStringStack mUniqueScoreBodies;
     
     ofEasyCam mCam;
     ofRectangle mCamViewport;
@@ -168,7 +170,7 @@ private:
     map<string, Scene> mScenes;
     
     vector<string> mNoCamScenes;
-    bool mScoreBlack{false};
+    bool mNoCameraData{false};
     
     string mCurrentScore{""};
     int mCurrentScoreComplexity{0};

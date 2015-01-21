@@ -238,11 +238,19 @@ void MasterHakoniwa::initialize()
         for (int j=0; j<numScenes; j++) {
             const string name{xml.getAttribute("scene", "name", "error", j)};
             sceneNames.push_back(name);
-            cout << name << endl;
         }
         stack.setInitialList(sceneNames);
         xml.popTag();
     }
+    xml.pushTag("body");
+    vector<string> bodies;
+    for (int i=0; i<xml.getNumTags("scene"); i++) {
+        const string name{xml.getAttribute("scene", "name", "error", i)};
+        bodies.push_back(name);
+    }
+    mUniqueScoreBodies.setInitialList(bodies);
+    xml.popTag();
+    
     xml.popTag();
     
     ofAddListener(ofxMot::drawSkeletonEvent,
@@ -425,7 +433,7 @@ void MasterHakoniwa::draw()
 
     ofDrawBitmapString("[score]", ofPoint::zero());
     alignedTranslate(0.f, kTextSpacing);
-    mScoreBlack ? ofSetColor(color::kMain) : ofSetColor(kTextColor);
+    mCurrentScore == kScoreBlack ? ofSetColor(color::kMain) : ofSetColor(kTextColor);
     ofDrawBitmapString(kScoreBlack, ofPoint::zero());
     
     for (int i=0; i<mUniqueScores.size(); i++) {
@@ -564,9 +572,10 @@ void MasterHakoniwa::setUniqueScore(int sceneIndex)
     
     auto& stack = mUniqueScores.at(mCurrentScoreComplexity);
     
-    if (mScoreBlack) {
+    if (mNoCameraData) {
         if (stack.ref(sceneIndex).find("Body") == string::npos) {
-            sendChangeScore(kScoreBlack);
+            //sendChangeScore(kScoreBlack);
+            sendChangeScore(mUniqueScoreBodies.get(ofRandom(mUniqueScoreBodies.size())));
             return;
         }
     }
@@ -659,7 +668,7 @@ void MasterHakoniwa::sendSetScene(const string& name, bool win0, bool win1)
     
     if (scene.isEnabled()) {
         auto it = find(mNoCamScenes.begin(), mNoCamScenes.end(), name);
-        mScoreBlack = (it != mNoCamScenes.end());
+        mNoCameraData = (it != mNoCamScenes.end());
     }
     
     ofxOscMessage m;
@@ -674,16 +683,18 @@ void MasterHakoniwa::sendSetScene(const string& name, bool win0, bool win1)
     
 }
 
-void MasterHakoniwa::sendChangeScore(const string& name)
+void MasterHakoniwa::sendChangeScore(const string& name, bool maintainSceneNames)
 {
     ofxOscMessage m;
     m.setAddress(kOscAddrChangeScene);
     m.addStringArg(name);
     mCurrentScore = name;
     
-    for (auto& it : mScenes) {
-        if (it.second.isEnabled()) {
-            m.addStringArg(it.first);
+    if (maintainSceneNames) {
+        for (auto& it : mScenes) {
+            if (it.second.isEnabled()) {
+                m.addStringArg(it.first);
+            }
         }
     }
     
@@ -769,13 +780,7 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
         auto* radio = static_cast<ofxUIRadio*>(e.widget);
         const auto& toggleName = radio->getActiveName();
         if (radio->getActive()->getValue()) {
-            
-            ofxOscMessage m;
-            m.setAddress(kOscAddrChangeScene);
-            m.addStringArg(toggleName);
-            mCurrentScore = toggleName;
-            
-            if (mEnableOscOutScore) mScoreOscSender.sendMessage(m);
+            sendChangeScore(toggleName, false);
         }
     }
     else if (widgetName == "Enable All") {

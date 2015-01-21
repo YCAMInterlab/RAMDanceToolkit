@@ -21,6 +21,9 @@
 		<scene name="FutureRE"/>
 		<scene name="dpVisTheta"/>
 		<scene name="dpHGearMove"/>
+        <scene name="Line"/>
+        <scene name="Four Points"/>
+        <scene name="distanceMetaball"/>
 	</nocam>
 </rdtk>
 
@@ -30,6 +33,7 @@
 		 <scene name="dp::score::SceneVec2Plotter"/>
 		 <scene name="dp::score::SceneBodyScan"/>
 		 <scene name="dp::score::SceneBodyPatterns"/>
+         <scene name="dp::score::SceneDataText"/>
 	</complexity>
 
 	<complexity>
@@ -37,14 +41,24 @@
 		<scene name="dp::score::SceneVec2Grid"/>
 		<scene name="dp::score::SceneDataCircle"/>
         <scene name="dp::score::SceneDataSphere"/>
+        <scene name="dp::score::SceneBodyFlow"/>
 	</complexity>
 
 	<complexity>
 		 <scene name="dp::score::SceneDataDisplacement"/>
 		 <scene name="dp::score::SceneDataWave"/>
 		 <scene name="dp::score::SceneBodyGlobe"/>
+         <scene name="dp::score::SceneBodyGlobe"/>
 		 <scene name="dp::score::SceneBodyBoids"/>
 	</complexity>
+    
+    <body>
+        <scene name="dp::score::SceneBodyScan"/>
+        <scene name="dp::score::SceneBodyPatterns"/>
+        <scene name="dp::score::SceneBodyGlobe"/>
+        <scene name="dp::score::SceneBodyBoids"/>
+        <scene name="dp::score::SceneBodyFlow"/>
+    </body>
 </score>
 
 <!--
