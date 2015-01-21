@@ -7,32 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		270D2D9C16E4760700D5F750 /* icon.icns in CopyFiles */ = {isa = PBXBuildFile; fileRef = 270D2D9916E475D800D5F750 /* icon.icns */; };
+		5E8C1FAE1A6D0BB1007F6144 /* frozenIce.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E8C1FAA1A6D0BB1007F6144 /* frozenIce.cpp */; };
+		5E8C1FAF1A6D0BB1007F6144 /* magnetLooper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E8C1FAC1A6D0BB1007F6144 /* magnetLooper.cpp */; };
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
+		920BA37C1A67C9D700E4A227 /* dpHakoniwaSand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 920BA37A1A67C9D700E4A227 /* dpHakoniwaSand.cpp */; };
+		928AE9281A6CF5EE00CCA21D /* HakoniwaGearMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 928AE9261A6CF5EE00CCA21D /* HakoniwaGearMove.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
-		C630DF1F1A4D80E800567351 /* distanceMetaball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C630DF1D1A4D80E800567351 /* distanceMetaball.cpp */; };
-		C63615D21A63FB6E0006BB65 /* HakoniwaPLink_Prism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63615D01A63FB6E0006BB65 /* HakoniwaPLink_Prism.cpp */; };
-		C63615D51A63FB7D0006BB65 /* HakoniwaPlink_Oil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63615D31A63FB7D0006BB65 /* HakoniwaPlink_Oil.cpp */; };
-		C63615DA1A64B71D0006BB65 /* hakoVisPLink_Oil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63615D81A64B71D0006BB65 /* hakoVisPLink_Oil.cpp */; };
-		C63615DD1A64B72B0006BB65 /* hakoVisPLink_Prism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C63615DB1A64B72B0006BB65 /* hakoVisPLink_Prism.cpp */; };
-		C6755F0F1A6CA64B007E9984 /* ramMEXSync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6755F0D1A6CA64B007E9984 /* ramMEXSync.cpp */; };
-		C685884C1A5EA7E000F8F488 /* dpMarionette.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C685884A1A5EA7E000F8F488 /* dpMarionette.cpp */; };
-		C6957F131A68072A00DB75DB /* ofxHexGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6957F111A68072A00DB75DB /* ofxHexGrid.cpp */; };
-		C6A2C0E11A6F6263000ED4DD /* MarchingCubes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A2C0DC1A6F6263000ED4DD /* MarchingCubes.cpp */; };
-		C6A2C0E21A6F6263000ED4DD /* MarchingTetrahedrons.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A2C0DE1A6F6263000ED4DD /* MarchingTetrahedrons.cpp */; };
-		C6A68D181A5C32E000122475 /* ramMotionExtractorExampleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A68D161A5C32E000122475 /* ramMotionExtractorExampleScene.cpp */; };
-		C6ABEBA71A623BC0005DF2CE /* hakoVisPLink_Laser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ABEBA51A623BC0005DF2CE /* hakoVisPLink_Laser.cpp */; };
-		C6C944BD1A63EBA7005E9F30 /* dpSceneChanger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C944BB1A63EBA7005E9F30 /* dpSceneChanger.cpp */; };
-		C6D4097D1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D4097B1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp */; };
-		C6D409871A4575A5002D4C34 /* ofxKsmrParallelLinkDelta.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D4097F1A4575A5002D4C34 /* ofxKsmrParallelLinkDelta.cpp */; };
-		C6D409881A4575A5002D4C34 /* ofxKsmrStepManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D409831A4575A5002D4C34 /* ofxKsmrStepManager.cpp */; };
-		C6D409891A4575A5002D4C34 /* virtualSteppingMotor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D409851A4575A5002D4C34 /* virtualSteppingMotor.cpp */; };
-		C6D4098D1A4575F1002D4C34 /* ParallelLinkManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D4098B1A4575F1002D4C34 /* ParallelLinkManager.cpp */; };
-		C6D409B21A47D4E1002D4C34 /* ofxTCPClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D409AA1A47D4E1002D4C34 /* ofxTCPClient.cpp */; };
-		C6D409B31A47D4E1002D4C34 /* ofxTCPManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D409AC1A47D4E1002D4C34 /* ofxTCPManager.cpp */; };
-		C6D409B41A47D4E1002D4C34 /* ofxTCPServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D409AE1A47D4E1002D4C34 /* ofxTCPServer.cpp */; };
-		C6D409B51A47D4E1002D4C34 /* ofxUDPManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D409B01A47D4E1002D4C34 /* ofxUDPManager.cpp */; };
-		C6D7F06A1A60F54300851730 /* HakoniwaPLink_Laser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D7F0681A60F54300851730 /* HakoniwaPLink_Laser.cpp */; };
+		C64FE4CC1A68D3CB00CA9A08 /* ofxHexGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64FE4CA1A68D3CB00CA9A08 /* ofxHexGrid.cpp */; };
+		C66CCCF11A66750D00CE64E9 /* HakoniwaParallelLink_Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C66CCCD71A66750D00CE64E9 /* HakoniwaParallelLink_Base.cpp */; };
+		C66CCCF21A66750D00CE64E9 /* HakoniwaPLink_Laser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C66CCCD91A66750D00CE64E9 /* HakoniwaPLink_Laser.cpp */; };
+		C66CCCF31A66750D00CE64E9 /* HakoniwaPlink_Oil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C66CCCDB1A66750D00CE64E9 /* HakoniwaPlink_Oil.cpp */; };
+		C66CCCF41A66750D00CE64E9 /* HakoniwaPLink_Prism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C66CCCDD1A66750D00CE64E9 /* HakoniwaPLink_Prism.cpp */; };
+		C66CCCF51A66750D00CE64E9 /* hakoVisPLink_Laser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C66CCCDF1A66750D00CE64E9 /* hakoVisPLink_Laser.cpp */; };
+		C66CCCF61A66750D00CE64E9 /* hakoVisPLink_Oil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C66CCCE11A66750D00CE64E9 /* hakoVisPLink_Oil.cpp */; };
+		C66CCCF71A66750D00CE64E9 /* hakoVisPLink_Prism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C66CCCE31A66750D00CE64E9 /* hakoVisPLink_Prism.cpp */; };
+		C66CCCF81A66750D00CE64E9 /* ofxKsmrParallelLinkDelta.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C66CCCE71A66750D00CE64E9 /* ofxKsmrParallelLinkDelta.cpp */; };
+		C66CCCF91A66750D00CE64E9 /* ofxKsmrStepManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C66CCCEB1A66750D00CE64E9 /* ofxKsmrStepManager.cpp */; };
+		C66CCCFA1A66750D00CE64E9 /* virtualSteppingMotor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C66CCCED1A66750D00CE64E9 /* virtualSteppingMotor.cpp */; };
+		C66CCCFB1A66750D00CE64E9 /* ParallelLinkManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C66CCCEF1A66750D00CE64E9 /* ParallelLinkManager.cpp */; };
+		C6755BFE1A6BAE8F007E9984 /* axisConverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6755BF71A6BAE8F007E9984 /* axisConverter.cpp */; };
+		C6755BFF1A6BAE8F007E9984 /* dpHakoniwaMagnetPendulum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6755BF91A6BAE8F007E9984 /* dpHakoniwaMagnetPendulum.cpp */; };
+		C6755C001A6BAE8F007E9984 /* twistFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6755BFC1A6BAE8F007E9984 /* twistFinder.cpp */; };
+		C6957F1A1A68A07200DB75DB /* HakoniwaTheta.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6957F181A68A07200DB75DB /* HakoniwaTheta.cpp */; };
+		C6A2C0CA1A6E66A9000ED4DD /* sheepCam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A2C0C81A6E66A9000ED4DD /* sheepCam.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -86,16 +83,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		270D2D9B16E475FF00D5F750 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 7;
-			files = (
-				270D2D9C16E4760700D5F750 /* icon.icns in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E4C2427710CC5ABF004149E2 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -109,59 +96,76 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		270D2D9916E475D800D5F750 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../../resources/Icons/icon.icns; sourceTree = "<group>"; };
+		5E8C1FAA1A6D0BB1007F6144 /* frozenIce.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = frozenIce.cpp; sourceTree = "<group>"; };
+		5E8C1FAB1A6D0BB1007F6144 /* frozenIce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = frozenIce.h; sourceTree = "<group>"; };
+		5E8C1FAC1A6D0BB1007F6144 /* magnetLooper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = magnetLooper.cpp; sourceTree = "<group>"; };
+		5E8C1FAD1A6D0BB1007F6144 /* magnetLooper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = magnetLooper.h; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
+		920BA3721A677FBB00E4A227 /* dpHakoVisStageCircle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisStageCircle.h; sourceTree = "<group>"; };
+		920BA3731A67C8E800E4A227 /* dp3DDanceMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dp3DDanceMap.h; sourceTree = "<group>"; };
+		920BA3741A67C8E800E4A227 /* dpHakoniwaStruggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaStruggle.h; sourceTree = "<group>"; };
+		920BA3751A67C8E800E4A227 /* dpHakoVisServoPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisServoPendulum.h; sourceTree = "<group>"; };
+		920BA3761A67C8E800E4A227 /* dpHakoVisVecLineCircle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisVecLineCircle.h; sourceTree = "<group>"; };
+		920BA3771A67C96B00E4A227 /* dpHakoVisStruggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisStruggle.h; sourceTree = "<group>"; };
+		920BA3781A67C99000E4A227 /* dpHakoVisSandStorm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisSandStorm.h; sourceTree = "<group>"; };
+		920BA37A1A67C9D700E4A227 /* dpHakoniwaSand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpHakoniwaSand.cpp; sourceTree = "<group>"; };
+		920BA37B1A67C9D700E4A227 /* dpHakoniwaSand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaSand.h; sourceTree = "<group>"; };
+		920BA37E1A67CB6B00E4A227 /* dpIceMapCube.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpIceMapCube.h; sourceTree = "<group>"; };
+		920BA37F1A67CB6B00E4A227 /* dpIceMapFace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpIceMapFace.h; sourceTree = "<group>"; };
+		920BA3801A67CB6B00E4A227 /* dpIceMapGrid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpIceMapGrid.h; sourceTree = "<group>"; };
+		920BA3811A67CB6B00E4A227 /* dpIceMapTri.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpIceMapTri.h; sourceTree = "<group>"; };
+		920BA3821A67CB8D00E4A227 /* KezDelaunayMesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezDelaunayMesh.h; sourceTree = "<group>"; };
+		920BA3831A67CBA800E4A227 /* KezBlinker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezBlinker.h; sourceTree = "<group>"; };
+		9236CE851A690C480060B0FF /* dpHakoVisMagnetPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisMagnetPendulum.h; sourceTree = "<group>"; };
+		928AE9261A6CF5EE00CCA21D /* HakoniwaGearMove.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakoniwaGearMove.cpp; path = miura/HakoniwaGearMove.cpp; sourceTree = "<group>"; };
+		928AE9271A6CF5EE00CCA21D /* HakoniwaGearMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaGearMove.h; path = miura/HakoniwaGearMove.h; sourceTree = "<group>"; };
+		92CB5B0D1A666F1F00257334 /* dpHakoniwaServoPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaServoPendulum.h; sourceTree = "<group>"; };
+		92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisBug.h; sourceTree = "<group>"; };
+		92CB5B0F1A666F1F00257334 /* dpHakoVisWorm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisWorm.h; sourceTree = "<group>"; };
+		92CB5B101A666F1F00257334 /* dpHakoVisServoPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisServoPendulum.h; sourceTree = "<group>"; };
+		92CB5B131A666F6A00257334 /* dpRibbon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpRibbon.h; sourceTree = "<group>"; };
+		92CB5B141A666F6A00257334 /* dpServoPendulumThread.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpServoPendulumThread.h; sourceTree = "<group>"; };
+		92CB5B151A666F6A00257334 /* KezSlidePoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezSlidePoint.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
-		C630DF1D1A4D80E800567351 /* distanceMetaball.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = distanceMetaball.cpp; path = scenes/distanceMetaball/distanceMetaball.cpp; sourceTree = "<group>"; };
-		C630DF1E1A4D80E800567351 /* distanceMetaball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = distanceMetaball.h; path = scenes/distanceMetaball/distanceMetaball.h; sourceTree = "<group>"; };
-		C63615D01A63FB6E0006BB65 /* HakoniwaPLink_Prism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakoniwaPLink_Prism.cpp; path = scenes/HakoniwaPLink_Prism.cpp; sourceTree = "<group>"; };
-		C63615D11A63FB6E0006BB65 /* HakoniwaPLink_Prism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaPLink_Prism.h; path = scenes/HakoniwaPLink_Prism.h; sourceTree = "<group>"; };
-		C63615D31A63FB7D0006BB65 /* HakoniwaPlink_Oil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakoniwaPlink_Oil.cpp; path = scenes/HakoniwaPlink_Oil.cpp; sourceTree = "<group>"; };
-		C63615D41A63FB7D0006BB65 /* HakoniwaPlink_Oil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaPlink_Oil.h; path = scenes/HakoniwaPlink_Oil.h; sourceTree = "<group>"; };
-		C63615D81A64B71D0006BB65 /* hakoVisPLink_Oil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hakoVisPLink_Oil.cpp; path = scenes/hakoVisPLink_Oil.cpp; sourceTree = "<group>"; };
-		C63615D91A64B71D0006BB65 /* hakoVisPLink_Oil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hakoVisPLink_Oil.h; path = scenes/hakoVisPLink_Oil.h; sourceTree = "<group>"; };
-		C63615DB1A64B72B0006BB65 /* hakoVisPLink_Prism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hakoVisPLink_Prism.cpp; path = scenes/hakoVisPLink_Prism.cpp; sourceTree = "<group>"; };
-		C63615DC1A64B72B0006BB65 /* hakoVisPLink_Prism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hakoVisPLink_Prism.h; path = scenes/hakoVisPLink_Prism.h; sourceTree = "<group>"; };
-		C6755F0D1A6CA64B007E9984 /* ramMEXSync.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ramMEXSync.cpp; path = scenes/ramMEXSync.cpp; sourceTree = "<group>"; };
-		C6755F0E1A6CA64B007E9984 /* ramMEXSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ramMEXSync.h; path = scenes/ramMEXSync.h; sourceTree = "<group>"; };
-		C685884A1A5EA7E000F8F488 /* dpMarionette.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpMarionette.cpp; path = dpUtils/dpMarionette.cpp; sourceTree = "<group>"; };
-		C685884B1A5EA7E000F8F488 /* dpMarionette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpMarionette.h; path = dpUtils/dpMarionette.h; sourceTree = "<group>"; };
-		C6957F111A68072A00DB75DB /* ofxHexGrid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxHexGrid.cpp; path = scenes/ofxHexGlid/ofxHexGrid.cpp; sourceTree = "<group>"; };
-		C6957F121A68072A00DB75DB /* ofxHexGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxHexGrid.h; path = scenes/ofxHexGlid/ofxHexGrid.h; sourceTree = "<group>"; };
-		C6A2C0DC1A6F6263000ED4DD /* MarchingCubes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarchingCubes.cpp; sourceTree = "<group>"; };
-		C6A2C0DD1A6F6263000ED4DD /* MarchingCubes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarchingCubes.h; sourceTree = "<group>"; };
-		C6A2C0DE1A6F6263000ED4DD /* MarchingTetrahedrons.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarchingTetrahedrons.cpp; sourceTree = "<group>"; };
-		C6A2C0DF1A6F6263000ED4DD /* MarchingTetrahedrons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarchingTetrahedrons.h; sourceTree = "<group>"; };
-		C6A2C0E01A6F6263000ED4DD /* ofxMetaballs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMetaballs.h; sourceTree = "<group>"; };
-		C6A68D161A5C32E000122475 /* ramMotionExtractorExampleScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ramMotionExtractorExampleScene.cpp; path = "../../example-ramMotionExtractor/src/scene/ramMotionExtractorExampleScene.cpp"; sourceTree = "<group>"; };
-		C6A68D171A5C32E000122475 /* ramMotionExtractorExampleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ramMotionExtractorExampleScene.h; path = "../../example-ramMotionExtractor/src/scene/ramMotionExtractorExampleScene.h"; sourceTree = "<group>"; };
-		C6ABEBA51A623BC0005DF2CE /* hakoVisPLink_Laser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hakoVisPLink_Laser.cpp; path = scenes/hakoVisPLink_Laser.cpp; sourceTree = "<group>"; };
-		C6ABEBA61A623BC0005DF2CE /* hakoVisPLink_Laser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hakoVisPLink_Laser.h; path = scenes/hakoVisPLink_Laser.h; sourceTree = "<group>"; };
-		C6C944BB1A63EBA7005E9F30 /* dpSceneChanger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpSceneChanger.cpp; path = dpUtils/dpSceneChanger.cpp; sourceTree = "<group>"; };
-		C6C944BC1A63EBA7005E9F30 /* dpSceneChanger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpSceneChanger.h; path = dpUtils/dpSceneChanger.h; sourceTree = "<group>"; };
-		C6D4097B1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakoniwaParallelLink_Base.cpp; path = scenes/HakoniwaParallelLink_Base.cpp; sourceTree = "<group>"; };
-		C6D4097C1A457117002D4C34 /* HakoniwaParallelLink_Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaParallelLink_Base.h; path = scenes/HakoniwaParallelLink_Base.h; sourceTree = "<group>"; };
-		C6D4097F1A4575A5002D4C34 /* ofxKsmrParallelLinkDelta.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxKsmrParallelLinkDelta.cpp; sourceTree = "<group>"; };
-		C6D409801A4575A5002D4C34 /* ofxKsmrParallelLinkDelta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxKsmrParallelLinkDelta.h; sourceTree = "<group>"; };
-		C6D409831A4575A5002D4C34 /* ofxKsmrStepManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxKsmrStepManager.cpp; sourceTree = "<group>"; };
-		C6D409841A4575A5002D4C34 /* ofxKsmrStepManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxKsmrStepManager.h; sourceTree = "<group>"; };
-		C6D409851A4575A5002D4C34 /* virtualSteppingMotor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = virtualSteppingMotor.cpp; sourceTree = "<group>"; };
-		C6D409861A4575A5002D4C34 /* virtualSteppingMotor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = virtualSteppingMotor.h; sourceTree = "<group>"; };
-		C6D4098B1A4575F1002D4C34 /* ParallelLinkManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParallelLinkManager.cpp; sourceTree = "<group>"; };
-		C6D4098C1A4575F1002D4C34 /* ParallelLinkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallelLinkManager.h; sourceTree = "<group>"; };
-		C6D409A61A47D4E1002D4C34 /* Instructions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Instructions.txt; sourceTree = "<group>"; };
-		C6D409A81A47D4E1002D4C34 /* ofxNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxNetwork.h; sourceTree = "<group>"; };
-		C6D409A91A47D4E1002D4C34 /* ofxNetworkUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxNetworkUtils.h; sourceTree = "<group>"; };
-		C6D409AA1A47D4E1002D4C34 /* ofxTCPClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTCPClient.cpp; sourceTree = "<group>"; };
-		C6D409AB1A47D4E1002D4C34 /* ofxTCPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTCPClient.h; sourceTree = "<group>"; };
-		C6D409AC1A47D4E1002D4C34 /* ofxTCPManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTCPManager.cpp; sourceTree = "<group>"; };
-		C6D409AD1A47D4E1002D4C34 /* ofxTCPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTCPManager.h; sourceTree = "<group>"; };
-		C6D409AE1A47D4E1002D4C34 /* ofxTCPServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTCPServer.cpp; sourceTree = "<group>"; };
-		C6D409AF1A47D4E1002D4C34 /* ofxTCPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTCPServer.h; sourceTree = "<group>"; };
-		C6D409B01A47D4E1002D4C34 /* ofxUDPManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUDPManager.cpp; sourceTree = "<group>"; };
-		C6D409B11A47D4E1002D4C34 /* ofxUDPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUDPManager.h; sourceTree = "<group>"; };
-		C6D7F0681A60F54300851730 /* HakoniwaPLink_Laser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakoniwaPLink_Laser.cpp; path = scenes/HakoniwaPLink_Laser.cpp; sourceTree = "<group>"; };
-		C6D7F0691A60F54300851730 /* HakoniwaPLink_Laser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaPLink_Laser.h; path = scenes/HakoniwaPLink_Laser.h; sourceTree = "<group>"; };
+		C64FE4CA1A68D3CB00CA9A08 /* ofxHexGrid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxHexGrid.cpp; sourceTree = "<group>"; };
+		C64FE4CB1A68D3CB00CA9A08 /* ofxHexGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxHexGrid.h; sourceTree = "<group>"; };
+		C66CCCD71A66750D00CE64E9 /* HakoniwaParallelLink_Base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HakoniwaParallelLink_Base.cpp; sourceTree = "<group>"; };
+		C66CCCD81A66750D00CE64E9 /* HakoniwaParallelLink_Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HakoniwaParallelLink_Base.h; sourceTree = "<group>"; };
+		C66CCCD91A66750D00CE64E9 /* HakoniwaPLink_Laser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HakoniwaPLink_Laser.cpp; sourceTree = "<group>"; };
+		C66CCCDA1A66750D00CE64E9 /* HakoniwaPLink_Laser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HakoniwaPLink_Laser.h; sourceTree = "<group>"; };
+		C66CCCDB1A66750D00CE64E9 /* HakoniwaPlink_Oil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HakoniwaPlink_Oil.cpp; sourceTree = "<group>"; };
+		C66CCCDC1A66750D00CE64E9 /* HakoniwaPlink_Oil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HakoniwaPlink_Oil.h; sourceTree = "<group>"; };
+		C66CCCDD1A66750D00CE64E9 /* HakoniwaPLink_Prism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HakoniwaPLink_Prism.cpp; sourceTree = "<group>"; };
+		C66CCCDE1A66750D00CE64E9 /* HakoniwaPLink_Prism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HakoniwaPLink_Prism.h; sourceTree = "<group>"; };
+		C66CCCDF1A66750D00CE64E9 /* hakoVisPLink_Laser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hakoVisPLink_Laser.cpp; sourceTree = "<group>"; };
+		C66CCCE01A66750D00CE64E9 /* hakoVisPLink_Laser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hakoVisPLink_Laser.h; sourceTree = "<group>"; };
+		C66CCCE11A66750D00CE64E9 /* hakoVisPLink_Oil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hakoVisPLink_Oil.cpp; sourceTree = "<group>"; };
+		C66CCCE21A66750D00CE64E9 /* hakoVisPLink_Oil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hakoVisPLink_Oil.h; sourceTree = "<group>"; };
+		C66CCCE31A66750D00CE64E9 /* hakoVisPLink_Prism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hakoVisPLink_Prism.cpp; sourceTree = "<group>"; };
+		C66CCCE41A66750D00CE64E9 /* hakoVisPLink_Prism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hakoVisPLink_Prism.h; sourceTree = "<group>"; };
+		C66CCCE71A66750D00CE64E9 /* ofxKsmrParallelLinkDelta.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxKsmrParallelLinkDelta.cpp; sourceTree = "<group>"; };
+		C66CCCE81A66750D00CE64E9 /* ofxKsmrParallelLinkDelta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxKsmrParallelLinkDelta.h; sourceTree = "<group>"; };
+		C66CCCEA1A66750D00CE64E9 /* Ksmr_L6470Controller.ino */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Ksmr_L6470Controller.ino; sourceTree = "<group>"; };
+		C66CCCEB1A66750D00CE64E9 /* ofxKsmrStepManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxKsmrStepManager.cpp; sourceTree = "<group>"; };
+		C66CCCEC1A66750D00CE64E9 /* ofxKsmrStepManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxKsmrStepManager.h; sourceTree = "<group>"; };
+		C66CCCED1A66750D00CE64E9 /* virtualSteppingMotor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = virtualSteppingMotor.cpp; sourceTree = "<group>"; };
+		C66CCCEE1A66750D00CE64E9 /* virtualSteppingMotor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = virtualSteppingMotor.h; sourceTree = "<group>"; };
+		C66CCCEF1A66750D00CE64E9 /* ParallelLinkManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParallelLinkManager.cpp; sourceTree = "<group>"; };
+		C66CCCF01A66750D00CE64E9 /* ParallelLinkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallelLinkManager.h; sourceTree = "<group>"; };
+		C66CCD091A669A2A00CE64E9 /* testScenes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testScenes.h; sourceTree = "<group>"; };
+		C6755BF71A6BAE8F007E9984 /* axisConverter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = axisConverter.cpp; sourceTree = "<group>"; };
+		C6755BF81A6BAE8F007E9984 /* axisConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = axisConverter.h; sourceTree = "<group>"; };
+		C6755BF91A6BAE8F007E9984 /* dpHakoniwaMagnetPendulum.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpHakoniwaMagnetPendulum.cpp; sourceTree = "<group>"; };
+		C6755BFA1A6BAE8F007E9984 /* dpHakoniwaMagnetPendulum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaMagnetPendulum.h; sourceTree = "<group>"; };
+		C6755BFB1A6BAE8F007E9984 /* EmptyScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyScene.h; sourceTree = "<group>"; };
+		C6755BFC1A6BAE8F007E9984 /* twistFinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = twistFinder.cpp; sourceTree = "<group>"; };
+		C6755BFD1A6BAE8F007E9984 /* twistFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twistFinder.h; sourceTree = "<group>"; };
+		C6755C041A6BB3AA007E9984 /* dpHakoniwaTornado.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaTornado.h; sourceTree = "<group>"; };
+		C6755C051A6BB3AA007E9984 /* dpHakoVisTornado.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoVisTornado.h; sourceTree = "<group>"; };
+		C6957F181A68A07200DB75DB /* HakoniwaTheta.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakoniwaTheta.cpp; path = miura/HakoniwaTheta.cpp; sourceTree = "<group>"; };
+		C6957F191A68A07200DB75DB /* HakoniwaTheta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaTheta.h; path = miura/HakoniwaTheta.h; sourceTree = "<group>"; };
+		C6A2C0C81A6E66A9000ED4DD /* sheepCam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sheepCam.cpp; sourceTree = "<group>"; };
+		C6A2C0C91A6E66A9000ED4DD /* sheepCam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sheepCam.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -172,10 +176,10 @@
 		E45BE9770E8CC7DD009D7055 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		E45BE9790E8CC7DD009D7055 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
-		E4B69B5B0A3A1756003C02F2 /* RAM Dance ToolkitDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RAM Dance ToolkitDebug.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4B69B5B0A3A1756003C02F2 /* 2015_MAIN_APPDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2015_MAIN_APPDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = testApp.cpp; path = src/testApp.cpp; sourceTree = SOURCE_ROOT; };
-		E4B69E1F0A3A1BDC003C02F2 /* testApp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = testApp.h; path = src/testApp.h; sourceTree = SOURCE_ROOT; };
+		E4B69E1F0A3A1BDC003C02F2 /* testApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = testApp.h; path = src/testApp.h; sourceTree = SOURCE_ROOT; };
 		E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = "openFrameworks-Info.plist"; sourceTree = "<group>"; };
 		E4C2424410CC5A17004149E2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		E4C2424510CC5A17004149E2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -232,21 +236,98 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9A1DE6D516AA666100A10E3F /* Scenes */ = {
+		9209C42C1A6C9AE100E35146 /* Vis */ = {
 			isa = PBXGroup;
 			children = (
-				C63615D61A64B42F0006BB65 /* hakoniwa */,
-				C63615D71A64B43A0006BB65 /* hakoVis */,
-				C6D4098A1A4575AE002D4C34 /* Hakoniwa_ParallelLink */,
-				C630DF1C1A4D80C900567351 /* distanceMetaball */,
+				920BA3771A67C96B00E4A227 /* dpHakoVisStruggle.h */,
+				920BA3731A67C8E800E4A227 /* dp3DDanceMap.h */,
+				920BA3781A67C99000E4A227 /* dpHakoVisSandStorm.h */,
+				920BA3751A67C8E800E4A227 /* dpHakoVisServoPendulum.h */,
+				920BA3761A67C8E800E4A227 /* dpHakoVisVecLineCircle.h */,
+				920BA3721A677FBB00E4A227 /* dpHakoVisStageCircle.h */,
+				92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */,
+				92CB5B0F1A666F1F00257334 /* dpHakoVisWorm.h */,
+				92CB5B101A666F1F00257334 /* dpHakoVisServoPendulum.h */,
+				9236CE851A690C480060B0FF /* dpHakoVisMagnetPendulum.h */,
+				C6755C051A6BB3AA007E9984 /* dpHakoVisTornado.h */,
 			);
-			name = Scenes;
+			name = Vis;
+			sourceTree = "<group>";
+		};
+		9209C42D1A6C9AF400E35146 /* Hakoniwa */ = {
+			isa = PBXGroup;
+			children = (
+				92CB5B0D1A666F1F00257334 /* dpHakoniwaServoPendulum.h */,
+				C6755C041A6BB3AA007E9984 /* dpHakoniwaTornado.h */,
+				920BA3741A67C8E800E4A227 /* dpHakoniwaStruggle.h */,
+			);
+			name = Hakoniwa;
+			sourceTree = "<group>";
+		};
+		9209C4331A6CAE3500E35146 /* konno */ = {
+			isa = PBXGroup;
+			children = (
+				5E8C1FAB1A6D0BB1007F6144 /* frozenIce.h */,
+				5E8C1FAA1A6D0BB1007F6144 /* frozenIce.cpp */,
+				5E8C1FAC1A6D0BB1007F6144 /* magnetLooper.cpp */,
+				5E8C1FAD1A6D0BB1007F6144 /* magnetLooper.h */,
+			);
+			path = konno;
+			sourceTree = "<group>";
+		};
+		920BA3791A67C9D700E4A227 /* ito */ = {
+			isa = PBXGroup;
+			children = (
+				920BA37A1A67C9D700E4A227 /* dpHakoniwaSand.cpp */,
+				920BA37B1A67C9D700E4A227 /* dpHakoniwaSand.h */,
+				C6755BF71A6BAE8F007E9984 /* axisConverter.cpp */,
+				C6755BF81A6BAE8F007E9984 /* axisConverter.h */,
+				C6755BF91A6BAE8F007E9984 /* dpHakoniwaMagnetPendulum.cpp */,
+				C6755BFA1A6BAE8F007E9984 /* dpHakoniwaMagnetPendulum.h */,
+				C6755BFB1A6BAE8F007E9984 /* EmptyScene.h */,
+				C6755BFC1A6BAE8F007E9984 /* twistFinder.cpp */,
+				C6755BFD1A6BAE8F007E9984 /* twistFinder.h */,
+			);
+			path = ito;
+			sourceTree = "<group>";
+		};
+		920BA37D1A67CB6B00E4A227 /* iceLine */ = {
+			isa = PBXGroup;
+			children = (
+				920BA37E1A67CB6B00E4A227 /* dpIceMapCube.h */,
+				920BA37F1A67CB6B00E4A227 /* dpIceMapFace.h */,
+				920BA3801A67CB6B00E4A227 /* dpIceMapGrid.h */,
+				920BA3811A67CB6B00E4A227 /* dpIceMapTri.h */,
+			);
+			path = iceLine;
+			sourceTree = "<group>";
+		};
+		92CB5B0C1A666F1F00257334 /* knd */ = {
+			isa = PBXGroup;
+			children = (
+				9209C42D1A6C9AF400E35146 /* Hakoniwa */,
+				9209C42C1A6C9AE100E35146 /* Vis */,
+				920BA37D1A67CB6B00E4A227 /* iceLine */,
+				92CB5B121A666F6A00257334 /* util */,
+			);
+			path = knd;
+			sourceTree = "<group>";
+		};
+		92CB5B121A666F6A00257334 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				920BA3831A67CBA800E4A227 /* KezBlinker.h */,
+				920BA3821A67CB8D00E4A227 /* KezDelaunayMesh.h */,
+				92CB5B131A666F6A00257334 /* dpRibbon.h */,
+				92CB5B141A666F6A00257334 /* dpServoPendulumThread.h */,
+				92CB5B151A666F6A00257334 /* KezSlidePoint.h */,
+			);
+			path = util;
 			sourceTree = "<group>";
 		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				C6D409A41A47D4E1002D4C34 /* ofxNetwork */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -281,156 +362,95 @@
 			name = "3rd party frameworks";
 			sourceTree = "<group>";
 		};
-		C630DF1C1A4D80C900567351 /* distanceMetaball */ = {
+		C64FE4C91A68D3CB00CA9A08 /* ofxHexGlid */ = {
 			isa = PBXGroup;
 			children = (
-				C6A2C0DA1A6F6263000ED4DD /* ofxMetaballs */,
-				C630DF1E1A4D80E800567351 /* distanceMetaball.h */,
-				C630DF1D1A4D80E800567351 /* distanceMetaball.cpp */,
-			);
-			name = distanceMetaball;
-			sourceTree = "<group>";
-		};
-		C63615D61A64B42F0006BB65 /* hakoniwa */ = {
-			isa = PBXGroup;
-			children = (
-				C63615D41A63FB7D0006BB65 /* HakoniwaPlink_Oil.h */,
-				C63615D31A63FB7D0006BB65 /* HakoniwaPlink_Oil.cpp */,
-				C6D7F0691A60F54300851730 /* HakoniwaPLink_Laser.h */,
-				C6D7F0681A60F54300851730 /* HakoniwaPLink_Laser.cpp */,
-				C63615D11A63FB6E0006BB65 /* HakoniwaPLink_Prism.h */,
-				C63615D01A63FB6E0006BB65 /* HakoniwaPLink_Prism.cpp */,
-			);
-			name = hakoniwa;
-			sourceTree = "<group>";
-		};
-		C63615D71A64B43A0006BB65 /* hakoVis */ = {
-			isa = PBXGroup;
-			children = (
-				C6ABEBA61A623BC0005DF2CE /* hakoVisPLink_Laser.h */,
-				C6ABEBA51A623BC0005DF2CE /* hakoVisPLink_Laser.cpp */,
-				C63615D91A64B71D0006BB65 /* hakoVisPLink_Oil.h */,
-				C63615D81A64B71D0006BB65 /* hakoVisPLink_Oil.cpp */,
-				C63615DC1A64B72B0006BB65 /* hakoVisPLink_Prism.h */,
-				C63615DB1A64B72B0006BB65 /* hakoVisPLink_Prism.cpp */,
-				C6957F141A68072E00DB75DB /* ofxHexGlid */,
-			);
-			name = hakoVis;
-			sourceTree = "<group>";
-		};
-		C68588491A5EA7A700F8F488 /* dpUtils */ = {
-			isa = PBXGroup;
-			children = (
-				C685884B1A5EA7E000F8F488 /* dpMarionette.h */,
-				C685884A1A5EA7E000F8F488 /* dpMarionette.cpp */,
-				C6C944BC1A63EBA7005E9F30 /* dpSceneChanger.h */,
-				C6C944BB1A63EBA7005E9F30 /* dpSceneChanger.cpp */,
-				C6755F0E1A6CA64B007E9984 /* ramMEXSync.h */,
-				C6755F0D1A6CA64B007E9984 /* ramMEXSync.cpp */,
-			);
-			name = dpUtils;
-			sourceTree = "<group>";
-		};
-		C6957F141A68072E00DB75DB /* ofxHexGlid */ = {
-			isa = PBXGroup;
-			children = (
-				C6957F121A68072A00DB75DB /* ofxHexGrid.h */,
-				C6957F111A68072A00DB75DB /* ofxHexGrid.cpp */,
+				C64FE4CA1A68D3CB00CA9A08 /* ofxHexGrid.cpp */,
+				C64FE4CB1A68D3CB00CA9A08 /* ofxHexGrid.h */,
 			);
 			name = ofxHexGlid;
-			sourceTree = "<group>";
+			path = src/scene/sheep/ofxHexGlid;
+			sourceTree = SOURCE_ROOT;
 		};
-		C6A2C0DA1A6F6263000ED4DD /* ofxMetaballs */ = {
+		C66CCCD61A66750D00CE64E9 /* sheep */ = {
 			isa = PBXGroup;
 			children = (
-				C6A2C0DB1A6F6263000ED4DD /* src */,
+				C6A2C0C91A6E66A9000ED4DD /* sheepCam.h */,
+				C6A2C0C81A6E66A9000ED4DD /* sheepCam.cpp */,
+				C66CCD091A669A2A00CE64E9 /* testScenes.h */,
+				C66CCCD71A66750D00CE64E9 /* HakoniwaParallelLink_Base.cpp */,
+				C66CCCD81A66750D00CE64E9 /* HakoniwaParallelLink_Base.h */,
+				C66CCCD91A66750D00CE64E9 /* HakoniwaPLink_Laser.cpp */,
+				C66CCCDA1A66750D00CE64E9 /* HakoniwaPLink_Laser.h */,
+				C66CCCDB1A66750D00CE64E9 /* HakoniwaPlink_Oil.cpp */,
+				C66CCCDC1A66750D00CE64E9 /* HakoniwaPlink_Oil.h */,
+				C66CCCDD1A66750D00CE64E9 /* HakoniwaPLink_Prism.cpp */,
+				C66CCCDE1A66750D00CE64E9 /* HakoniwaPLink_Prism.h */,
+				C66CCCDF1A66750D00CE64E9 /* hakoVisPLink_Laser.cpp */,
+				C66CCCE01A66750D00CE64E9 /* hakoVisPLink_Laser.h */,
+				C66CCCE11A66750D00CE64E9 /* hakoVisPLink_Oil.cpp */,
+				C66CCCE21A66750D00CE64E9 /* hakoVisPLink_Oil.h */,
+				C66CCCE31A66750D00CE64E9 /* hakoVisPLink_Prism.cpp */,
+				C66CCCE41A66750D00CE64E9 /* hakoVisPLink_Prism.h */,
+				C66CCCE51A66750D00CE64E9 /* utils */,
 			);
-			name = ofxMetaballs;
-			path = scenes/distanceMetaball/ofxMetaballs;
+			path = sheep;
 			sourceTree = "<group>";
 		};
-		C6A2C0DB1A6F6263000ED4DD /* src */ = {
+		C66CCCE51A66750D00CE64E9 /* utils */ = {
 			isa = PBXGroup;
 			children = (
-				C6A2C0DC1A6F6263000ED4DD /* MarchingCubes.cpp */,
-				C6A2C0DD1A6F6263000ED4DD /* MarchingCubes.h */,
-				C6A2C0DE1A6F6263000ED4DD /* MarchingTetrahedrons.cpp */,
-				C6A2C0DF1A6F6263000ED4DD /* MarchingTetrahedrons.h */,
-				C6A2C0E01A6F6263000ED4DD /* ofxMetaballs.h */,
+				C64FE4C91A68D3CB00CA9A08 /* ofxHexGlid */,
+				C66CCCE61A66750D00CE64E9 /* ofxKsmrParallelLinkDelta */,
+				C66CCCE91A66750D00CE64E9 /* ofxKsmrStepManager */,
+				C66CCCEF1A66750D00CE64E9 /* ParallelLinkManager.cpp */,
+				C66CCCF01A66750D00CE64E9 /* ParallelLinkManager.h */,
 			);
-			path = src;
+			path = utils;
 			sourceTree = "<group>";
 		};
-		C6D4097E1A4575A5002D4C34 /* ofxKsmrParallelLinkDelta */ = {
+		C66CCCE61A66750D00CE64E9 /* ofxKsmrParallelLinkDelta */ = {
 			isa = PBXGroup;
 			children = (
-				C6D409801A4575A5002D4C34 /* ofxKsmrParallelLinkDelta.h */,
-				C6D4097F1A4575A5002D4C34 /* ofxKsmrParallelLinkDelta.cpp */,
+				C66CCCE71A66750D00CE64E9 /* ofxKsmrParallelLinkDelta.cpp */,
+				C66CCCE81A66750D00CE64E9 /* ofxKsmrParallelLinkDelta.h */,
 			);
-			name = ofxKsmrParallelLinkDelta;
-			path = scenes/ofxKsmrParallelLinkDelta;
+			path = ofxKsmrParallelLinkDelta;
 			sourceTree = "<group>";
 		};
-		C6D409811A4575A5002D4C34 /* ofxKsmrStepManager */ = {
+		C66CCCE91A66750D00CE64E9 /* ofxKsmrStepManager */ = {
 			isa = PBXGroup;
 			children = (
-				C6D409841A4575A5002D4C34 /* ofxKsmrStepManager.h */,
-				C6D409831A4575A5002D4C34 /* ofxKsmrStepManager.cpp */,
-				C6D409861A4575A5002D4C34 /* virtualSteppingMotor.h */,
-				C6D409851A4575A5002D4C34 /* virtualSteppingMotor.cpp */,
+				C66CCCEA1A66750D00CE64E9 /* Ksmr_L6470Controller.ino */,
+				C66CCCEB1A66750D00CE64E9 /* ofxKsmrStepManager.cpp */,
+				C66CCCEC1A66750D00CE64E9 /* ofxKsmrStepManager.h */,
+				C66CCCED1A66750D00CE64E9 /* virtualSteppingMotor.cpp */,
+				C66CCCEE1A66750D00CE64E9 /* virtualSteppingMotor.h */,
 			);
-			name = ofxKsmrStepManager;
-			path = scenes/ofxKsmrStepManager;
+			path = ofxKsmrStepManager;
 			sourceTree = "<group>";
 		};
-		C6D4098A1A4575AE002D4C34 /* Hakoniwa_ParallelLink */ = {
+		C6957F171A68A04900DB75DB /* miura */ = {
 			isa = PBXGroup;
 			children = (
-				C6D4097C1A457117002D4C34 /* HakoniwaParallelLink_Base.h */,
-				C6D4097B1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp */,
-				C6A68D171A5C32E000122475 /* ramMotionExtractorExampleScene.h */,
-				C6A68D161A5C32E000122475 /* ramMotionExtractorExampleScene.cpp */,
-				C6D4098C1A4575F1002D4C34 /* ParallelLinkManager.h */,
-				C6D4098B1A4575F1002D4C34 /* ParallelLinkManager.cpp */,
-				C6D4097E1A4575A5002D4C34 /* ofxKsmrParallelLinkDelta */,
-				C6D409811A4575A5002D4C34 /* ofxKsmrStepManager */,
+				928AE9261A6CF5EE00CCA21D /* HakoniwaGearMove.cpp */,
+				928AE9271A6CF5EE00CCA21D /* HakoniwaGearMove.h */,
+				C6957F191A68A07200DB75DB /* HakoniwaTheta.h */,
+				C6957F181A68A07200DB75DB /* HakoniwaTheta.cpp */,
 			);
-			name = Hakoniwa_ParallelLink;
+			name = miura;
 			sourceTree = "<group>";
 		};
-		C6D409A41A47D4E1002D4C34 /* ofxNetwork */ = {
+		C6A68D1B1A5C330900122475 /* scene */ = {
 			isa = PBXGroup;
 			children = (
-				C6D409A51A47D4E1002D4C34 /* docs */,
-				C6D409A71A47D4E1002D4C34 /* src */,
+				9209C4331A6CAE3500E35146 /* konno */,
+				C6957F171A68A04900DB75DB /* miura */,
+				920BA3791A67C9D700E4A227 /* ito */,
+				C66CCCD61A66750D00CE64E9 /* sheep */,
+				92CB5B0C1A666F1F00257334 /* knd */,
 			);
-			name = ofxNetwork;
-			path = ../../../addons/ofxNetwork;
-			sourceTree = "<group>";
-		};
-		C6D409A51A47D4E1002D4C34 /* docs */ = {
-			isa = PBXGroup;
-			children = (
-				C6D409A61A47D4E1002D4C34 /* Instructions.txt */,
-			);
-			path = docs;
-			sourceTree = "<group>";
-		};
-		C6D409A71A47D4E1002D4C34 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				C6D409A81A47D4E1002D4C34 /* ofxNetwork.h */,
-				C6D409A91A47D4E1002D4C34 /* ofxNetworkUtils.h */,
-				C6D409AA1A47D4E1002D4C34 /* ofxTCPClient.cpp */,
-				C6D409AB1A47D4E1002D4C34 /* ofxTCPClient.h */,
-				C6D409AC1A47D4E1002D4C34 /* ofxTCPManager.cpp */,
-				C6D409AD1A47D4E1002D4C34 /* ofxTCPManager.h */,
-				C6D409AE1A47D4E1002D4C34 /* ofxTCPServer.cpp */,
-				C6D409AF1A47D4E1002D4C34 /* ofxTCPServer.h */,
-				C6D409B01A47D4E1002D4C34 /* ofxUDPManager.cpp */,
-				C6D409B11A47D4E1002D4C34 /* ofxUDPManager.h */,
-			);
-			path = src;
+			path = scene;
 			sourceTree = "<group>";
 		};
 		E4328144138ABC890047C5CB /* Products */ = {
@@ -453,7 +473,6 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
-				270D2D9916E475D800D5F750 /* icon.icns */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				601900561644E22B001930AA /* ram */,
@@ -461,15 +480,14 @@
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
-				E4B69B5B0A3A1756003C02F2 /* RAM Dance ToolkitDebug.app */,
+				E4B69B5B0A3A1756003C02F2 /* 2015_MAIN_APPDebug.app */,
 			);
 			sourceTree = "<group>";
 		};
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				C68588491A5EA7A700F8F488 /* dpUtils */,
-				9A1DE6D516AA666100A10E3F /* Scenes */,
+				C6A68D1B1A5C330900122475 /* scene */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
@@ -489,14 +507,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E4B69B5A0A3A1756003C02F2 /* RAM Dance Toolkit */ = {
+		E4B69B5A0A3A1756003C02F2 /* 2015_MAIN_APP */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "RAM Dance Toolkit" */;
+			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "2015_MAIN_APP" */;
 			buildPhases = (
 				E4B69B580A3A1756003C02F2 /* Sources */,
 				E4B69B590A3A1756003C02F2 /* Frameworks */,
 				E4B6FFFD0C3F9AB9008CF71C /* ShellScript */,
-				270D2D9B16E475FF00D5F750 /* CopyFiles */,
 				E4C2427710CC5ABF004149E2 /* CopyFiles */,
 			);
 			buildRules = (
@@ -505,9 +522,9 @@
 				6019005B1644E337001930AA /* PBXTargetDependency */,
 				E4EEB9AC138B136A00A80321 /* PBXTargetDependency */,
 			);
-			name = "RAM Dance Toolkit";
+			name = 2015_MAIN_APP;
 			productName = myOFApp;
-			productReference = E4B69B5B0A3A1756003C02F2 /* RAM Dance ToolkitDebug.app */;
+			productReference = E4B69B5B0A3A1756003C02F2 /* 2015_MAIN_APPDebug.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -518,7 +535,7 @@
 			attributes = {
 				LastUpgradeCheck = 0450;
 			};
-			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "RAMDanceToolkit" */;
+			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "2015_MAIN_APP" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -543,7 +560,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				E4B69B5A0A3A1756003C02F2 /* RAM Dance Toolkit */,
+				E4B69B5A0A3A1756003C02F2 /* 2015_MAIN_APP */,
 			);
 		};
 /* End PBXProject section */
@@ -586,31 +603,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C63615D21A63FB6E0006BB65 /* HakoniwaPLink_Prism.cpp in Sources */,
-				C6D4098D1A4575F1002D4C34 /* ParallelLinkManager.cpp in Sources */,
-				C685884C1A5EA7E000F8F488 /* dpMarionette.cpp in Sources */,
-				C6957F131A68072A00DB75DB /* ofxHexGrid.cpp in Sources */,
-				C6D409B31A47D4E1002D4C34 /* ofxTCPManager.cpp in Sources */,
-				C6A2C0E21A6F6263000ED4DD /* MarchingTetrahedrons.cpp in Sources */,
-				C6D4097D1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp in Sources */,
-				C6A68D181A5C32E000122475 /* ramMotionExtractorExampleScene.cpp in Sources */,
+				C66CCCF71A66750D00CE64E9 /* hakoVisPLink_Prism.cpp in Sources */,
+				C66CCCF51A66750D00CE64E9 /* hakoVisPLink_Laser.cpp in Sources */,
+				C66CCCF41A66750D00CE64E9 /* HakoniwaPLink_Prism.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
-				C6755F0F1A6CA64B007E9984 /* ramMEXSync.cpp in Sources */,
-				C6D409B41A47D4E1002D4C34 /* ofxTCPServer.cpp in Sources */,
+				C66CCCF61A66750D00CE64E9 /* hakoVisPLink_Oil.cpp in Sources */,
+				C66CCCF11A66750D00CE64E9 /* HakoniwaParallelLink_Base.cpp in Sources */,
+				C66CCCFB1A66750D00CE64E9 /* ParallelLinkManager.cpp in Sources */,
+				C64FE4CC1A68D3CB00CA9A08 /* ofxHexGrid.cpp in Sources */,
+				C66CCCF81A66750D00CE64E9 /* ofxKsmrParallelLinkDelta.cpp in Sources */,
+				C66CCCF31A66750D00CE64E9 /* HakoniwaPlink_Oil.cpp in Sources */,
+				C66CCCF21A66750D00CE64E9 /* HakoniwaPLink_Laser.cpp in Sources */,
+				5E8C1FAE1A6D0BB1007F6144 /* frozenIce.cpp in Sources */,
+				C6A2C0CA1A6E66A9000ED4DD /* sheepCam.cpp in Sources */,
+				C66CCCF91A66750D00CE64E9 /* ofxKsmrStepManager.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
-				C630DF1F1A4D80E800567351 /* distanceMetaball.cpp in Sources */,
-				C6D409B21A47D4E1002D4C34 /* ofxTCPClient.cpp in Sources */,
-				C6A2C0E11A6F6263000ED4DD /* MarchingCubes.cpp in Sources */,
-				C6D409891A4575A5002D4C34 /* virtualSteppingMotor.cpp in Sources */,
-				C63615DD1A64B72B0006BB65 /* hakoVisPLink_Prism.cpp in Sources */,
-				C6ABEBA71A623BC0005DF2CE /* hakoVisPLink_Laser.cpp in Sources */,
-				C63615D51A63FB7D0006BB65 /* HakoniwaPlink_Oil.cpp in Sources */,
-				C6D409B51A47D4E1002D4C34 /* ofxUDPManager.cpp in Sources */,
-				C6C944BD1A63EBA7005E9F30 /* dpSceneChanger.cpp in Sources */,
-				C6D409871A4575A5002D4C34 /* ofxKsmrParallelLinkDelta.cpp in Sources */,
-				C6D7F06A1A60F54300851730 /* HakoniwaPLink_Laser.cpp in Sources */,
-				C6D409881A4575A5002D4C34 /* ofxKsmrStepManager.cpp in Sources */,
-				C63615DA1A64B71D0006BB65 /* hakoVisPLink_Oil.cpp in Sources */,
+				928AE9281A6CF5EE00CCA21D /* HakoniwaGearMove.cpp in Sources */,
+				C6755BFF1A6BAE8F007E9984 /* dpHakoniwaMagnetPendulum.cpp in Sources */,
+				C66CCCFA1A66750D00CE64E9 /* virtualSteppingMotor.cpp in Sources */,
+				C6957F1A1A68A07200DB75DB /* HakoniwaTheta.cpp in Sources */,
+				C6755BFE1A6BAE8F007E9984 /* axisConverter.cpp in Sources */,
+				C6755C001A6BAE8F007E9984 /* twistFinder.cpp in Sources */,
+				5E8C1FAF1A6D0BB1007F6144 /* magnetLooper.cpp in Sources */,
+				920BA37C1A67C9D700E4A227 /* dpHakoniwaSand.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,7 +672,6 @@
 					"-mtune=native",
 				);
 				SDKROOT = macosx;
-				VALID_ARCHS = i386;
 			};
 			name = Debug;
 		};
@@ -689,7 +703,6 @@
 					"-mtune=native",
 				);
 				SDKROOT = macosx;
-				VALID_ARCHS = i386;
 			};
 			name = Release;
 		};
@@ -708,8 +721,6 @@
 				GCC_MODEL_TUNING = NONE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
-				GCC_PREPROCESSOR_DEFINITIONS = "";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
@@ -777,20 +788,10 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 					"\"$(SRCROOT)/../../addons/ofxBt/libs/bullet/lib/osx\"",
 					"\"$(SRCROOT)/../../../addons/ofxAssimpModelLoader/libs/assimp/lib/osx\"",
-					"\"$(SRCROOT)/src/scenes/Notation\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/android/armeabi\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/android/armeabi-v7a\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/ios\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/linux\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/linux64\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/vs2010\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/win_cb\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRODUCT_NAME = "$(TARGET_NAME)Debug";
-				SDKROOT = macosx10.9;
-				VALID_ARCHS = i386;
+				PRODUCT_NAME = 2015_MAIN_APPDebug;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -809,8 +810,6 @@
 				GCC_MODEL_TUNING = NONE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
-				GCC_PREPROCESSOR_DEFINITIONS = "";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
@@ -878,20 +877,10 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"\"$(SRCROOT)/../../addons/ofxBt/libs/bullet/lib/osx\"",
 					"\"$(SRCROOT)/../../../addons/ofxAssimpModelLoader/libs/assimp/lib/osx\"",
-					"\"$(SRCROOT)/src/scenes/Notation\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/android/armeabi\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/android/armeabi-v7a\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/ios\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/linux\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/linux64\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/vs2010\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/win_cb\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.9;
-				VALID_ARCHS = i386;
+				PRODUCT_NAME = 2015_MAIN_APP;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -899,7 +888,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "RAMDanceToolkit" */ = {
+		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "2015_MAIN_APP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B4E0A3A1720003C02F2 /* Debug */,
@@ -908,7 +897,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "RAM Dance Toolkit" */ = {
+		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "2015_MAIN_APP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B600A3A1757003C02F2 /* Debug */,

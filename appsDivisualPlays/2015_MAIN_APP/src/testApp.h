@@ -51,11 +51,15 @@
 #include "hakoVisPLink_Laser.h"
 #include "hakoVisPLink_Oil.h"
 #include "hakoVisPLink_Prism.h"
+#include "distanceMetaball.h"
 
 //konno Scenes
 //#include "dpHakoniwaIce.h"
 #include "frozenIce.h"
 #include "magnetLooper.h"
+
+//onishi Scenes
+#include "FutureRE.h"
 
 
 class testApp : public ramBaseApp
@@ -135,7 +139,13 @@ public:
     
     // Gear
     HakoniwaGearMove  hakoniwaGear;
-    
+
+	//DistanceMetaball
+	distanceMetaball metaball;
     
     magnetLooper dpHWorm;
+    
+    // from RAM Dance Tool Kit
+    FutureRE futureRE;
+    
 };

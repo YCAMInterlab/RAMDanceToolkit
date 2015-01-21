@@ -29,15 +29,18 @@ void AnalyzeMean::update(ofVec4f mean)
     
     if (t < mPrevSetSceneTime + mMinSetSceneTime) return;
     
-    if (mTotalAddition.i >= mMeanLimit) {
+    if (mTotalAddition.f >= mMeanLimit) {
         const bool win0  = (mTotalAddition.i & 0b00000001) >> 0;
         const bool win1  = (mTotalAddition.i & 0b00000010) >> 1;
         const int which  = (mTotalAddition.i & 0b00111100) >> 2;
         cout << which << ":" << win0 << win1 << endl;
-        int scene{which % getMH().getNumUniqueScenes()};
-        getMH().setUniqueScene(scene, win0, win1);
-        mPrevScene = scene;
-        mPrevSetSceneTime = t;
+        
+        if (getMH().getUniqueScenes().empty() == false) {
+            int scene{(int)(which % getMH().getUniqueScenes().size())};
+            getMH().setUniqueScene(scene, win0, win1);
+            mPrevScene = scene;
+            mPrevSetSceneTime = t;
+        }
         
         for (int i=0; i<mMeanAddtion.DIM; i++) {
             mMeanAddtion[i] = 0.f;
@@ -48,7 +51,7 @@ void AnalyzeMean::update(ofVec4f mean)
 void AnalyzeMean::draw()
 {
     ofPushStyle();
-    const float w{MH::kLineWidth};
+    const float w{188.f};
     const float h{10.f};
     const float spacing{2.f};
     const int a{100};

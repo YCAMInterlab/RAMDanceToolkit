@@ -27,16 +27,24 @@ public:
     
     void swapPts(){
         mVecs[0] = mHead;
+        
         for(int i = 1; i < VECS_MAX; i++){
             ofPoint tmp = mVecs[i-1];
             mVecs[i - 1] = mVecs[i];
             mVecs[i] = tmp;
         }
+        
     }
     void update(){
         mHead.update();
-        swapPts();
+        if(isMove)swapPts();
     }
+    
+    void setMove(bool move){
+        isMove = move;
+    }
+
+    
     void draw(){
         for(int i = 0; i < mVecs.size(); i++){
             float theta = ofMap(i,0,mVecs.size(),0,TWO_PI) - HALF_PI;
@@ -71,11 +79,13 @@ public:
             }
         }
 private:
-    static const int VECS_MAX = 256;
+    static const int VECS_MAX = 512;
     vector<ofPoint>mVecs;
     float mRad;
     
     KezSlidePoint mHead;
+    
+    bool isMove = true;
 };
 
 class dpHakoVisVecLineCircle : public ramBaseScene{
@@ -83,6 +93,15 @@ public:
     string getName() const {return "dpVisSandStorm";};
     void setupControlPanel(){
         ramGetGUI().addSlider("scale",1.0,100.0,&mVecScale);
+        ramGetGUI().addSlider("rot:x",0.0,1.0,&mRotSpeed.x);
+        ramGetGUI().addSlider("rot:y",0.0,1.0,&mRotSpeed.y);
+        ramGetGUI().addSlider("rot:z",0.0,1.0,&mRotSpeed.z);
+        ramGetGUI().addToggle("far", &isFar);
+        ramGetGUI().addButton("rndRot");
+        ramGetGUI().addButton("stop");
+        
+        ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoVisVecLineCircle::onPanelChanged);
+        mRotSpeed.x = -0.05;
     }
     void setup(){
         
@@ -93,6 +112,10 @@ public:
         
         ramOscManager::instance().addReceiverTag(&mReceiver);
         mReceiver.addAddress("/dp/cameraUnit/SandStorm/vector");
+
+        mZoom.speed = 0.001;
+        mRot.speed = 0.01;
+        
     }
     
     void receiveOsc(){
@@ -114,23 +137,96 @@ public:
         for(auto &v:mCircles){
             v.update();
         }
+        
+        mRot += mRotSpeed;
 
+        mZoom.update();
+        
+        mZoom.set(isFar * -1000);
+        
+        if(ofGetFrameNum() % 600 == 0){
+            int rnd = ofRandom(0,3);
+            
+            if(rnd == 0)isFar = !isFar;
+            else if(rnd == 1)checkStop();
+            else if(rnd == 2)rndRot();
+        }
+        
+        mRot.update();
     }
+    
+    void checkStop(){
+        
+        for(auto &v:mCircles){
+            v.setMove(true);
+        }
+        
+        if(mStopCounter < mCircles.size()){
+            
+            mCircles.at(mStopCounter).setMove(false);
+            mStopCounter++;
+        }else{
+            mStopCounter %= mCircles.size();
+        }
+    }
+    
+    void rndRot(){
+        int rnd = ofRandom(0,5);
+        
+        if(rnd != 0){
+            mRotSpeed.set(0,0,0);
+        }else if(rnd == 1){
+            mRotSpeed.set(0,0,0);
+            mRot.set(0,0,0);
+        }
+        else{
+            mRotSpeed.set(ofRandom(-0.1,0.1),
+                          ofRandom(-0.1,0.1),
+                          ofRandom(-0.1,0.1));
+        }
+    }
+    
     void draw(){
         glPointSize(8);
         glEnable(GL_POINT_SMOOTH);
-        ramSetViewPort(dpGetFirstScreenViewPort());
-        ramBeginCamera();
+        mCam.begin(dpGetFirstScreenViewPort());
+        
+        ofPushMatrix();
+        ofTranslate(0, 0, mZoom.val);
+        ofRotateX(mRot.x);
+        ofRotateY(mRot.y);
+        ofRotateZ(mRot.z);
         for(auto &v:mCircles){
             v.draw();
         }
-        ramEndCamera();
+        
+        ofPopMatrix();
+        
+        mCam.end();
     }
+    
+    void onPanelChanged(ofxUIEventArgs& e){
+        string name = e.widget->getName();
+    
+        if(name == "rndRot")rndRot();
+        
+        if(name == "stop")checkStop();
+    }
+    
 private:
     ramOscReceiveTag mReceiver;
     static const int CIRCLE_NUM = 5;
     vector<dpVecLineCircle>mCircles;
-    float mVecScale = 1.0;
+    float mVecScale = 50.0;
+    
+    ofEasyCam mCam;
+    
+    KezSlidePoint mRot;
+    ofPoint mRotSpeed;
+    
+    int mStopCounter = 0;
+    KezSlide mZoom;
+    bool isFar = false;
 };
 
 #endif
