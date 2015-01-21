@@ -119,7 +119,7 @@ void ramMEXSync::update(){
 			
 		}
 		
-		while (previews.size() > 10){
+		while (previews.size() > 8){
 			oscPreview* p = previews[0];
 			previews.erase(previews.begin());
 			delete p;
