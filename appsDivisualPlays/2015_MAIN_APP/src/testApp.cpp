@@ -71,6 +71,8 @@ void testApp::setup()
     sceneManager.addScene(dpHWorm.getPtr());
 	sceneManager.addScene(visWorm.getPtr());
 
+	sceneManager.addScene(metaball.getPtr());
+
 	sceneManager.addScene(testSceneA.getPtr());
 	sceneManager.addScene(testSceneB.getPtr());
 	sceneManager.addScene(testSceneC.getPtr());

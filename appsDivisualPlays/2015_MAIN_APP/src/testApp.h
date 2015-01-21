@@ -51,6 +51,7 @@
 #include "hakoVisPLink_Laser.h"
 #include "hakoVisPLink_Oil.h"
 #include "hakoVisPLink_Prism.h"
+#include "distanceMetaball.h"
 
 //konno Scenes
 //#include "dpHakoniwaIce.h"
@@ -135,7 +136,9 @@ public:
     
     // Gear
     HakoniwaGearMove  hakoniwaGear;
-    
+
+	//DistanceMetaball
+	distanceMetaball metaball;
     
     magnetLooper dpHWorm;
 };
