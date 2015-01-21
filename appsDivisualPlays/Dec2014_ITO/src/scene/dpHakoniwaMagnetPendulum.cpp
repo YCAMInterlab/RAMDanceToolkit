@@ -18,7 +18,7 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
     ramGetGUI().addButton("ALL MAGNETS ON");
     ramGetGUI().addButton("ALL MAGNETS OFF");
     
-    for (int i = 0; i<NMAGNETS; i++ ) {
+    for (int i = 0; i < NMAGNETS; i++ ) {
         ramGetGUI().addToggle("ON/OFF_MAGNET"+ofToString(i+1), &bOn[i]);
     }
 
@@ -26,7 +26,7 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
     ramGetGUI().addButton("INVERSE ALL");
     ramGetGUI().addButton("RESTORE ALL");
 
-    for (int i = 0; i<NMAGNETS; i++ ) {
+    for (int i = 0; i < NMAGNETS; i++ ) {
         ramGetGUI().addToggle("INVERSE_MAGNET"+ofToString(i+1), &bInversed[i]);
     }
     

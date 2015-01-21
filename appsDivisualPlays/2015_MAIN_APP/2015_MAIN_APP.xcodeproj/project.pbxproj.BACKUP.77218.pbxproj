@@ -29,9 +29,6 @@
 		C6755C001A6BAE8F007E9984 /* twistFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6755BFC1A6BAE8F007E9984 /* twistFinder.cpp */; };
 		C6957F1A1A68A07200DB75DB /* HakoniwaTheta.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6957F181A68A07200DB75DB /* HakoniwaTheta.cpp */; };
 		C6A2C0CA1A6E66A9000ED4DD /* sheepCam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A2C0C81A6E66A9000ED4DD /* sheepCam.cpp */; };
-		CF6C55C81A6F80950042DE07 /* distanceMetaball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF6C55BF1A6F80950042DE07 /* distanceMetaball.cpp */; };
-		CF6C55C91A6F80950042DE07 /* MarchingCubes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF6C55C31A6F80950042DE07 /* MarchingCubes.cpp */; };
-		CF6C55CA1A6F80950042DE07 /* MarchingTetrahedrons.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF6C55C51A6F80950042DE07 /* MarchingTetrahedrons.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -166,13 +163,6 @@
 		C6957F191A68A07200DB75DB /* HakoniwaTheta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaTheta.h; path = miura/HakoniwaTheta.h; sourceTree = "<group>"; };
 		C6A2C0C81A6E66A9000ED4DD /* sheepCam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sheepCam.cpp; sourceTree = "<group>"; };
 		C6A2C0C91A6E66A9000ED4DD /* sheepCam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sheepCam.h; sourceTree = "<group>"; };
-		CF6C55BF1A6F80950042DE07 /* distanceMetaball.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = distanceMetaball.cpp; sourceTree = "<group>"; };
-		CF6C55C01A6F80950042DE07 /* distanceMetaball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = distanceMetaball.h; sourceTree = "<group>"; };
-		CF6C55C31A6F80950042DE07 /* MarchingCubes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarchingCubes.cpp; sourceTree = "<group>"; };
-		CF6C55C41A6F80950042DE07 /* MarchingCubes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarchingCubes.h; sourceTree = "<group>"; };
-		CF6C55C51A6F80950042DE07 /* MarchingTetrahedrons.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarchingTetrahedrons.cpp; sourceTree = "<group>"; };
-		CF6C55C61A6F80950042DE07 /* MarchingTetrahedrons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarchingTetrahedrons.h; sourceTree = "<group>"; };
-		CF6C55C71A6F80950042DE07 /* ofxMetaballs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMetaballs.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -380,7 +370,6 @@
 		C66CCCD61A66750D00CE64E9 /* sheep */ = {
 			isa = PBXGroup;
 			children = (
-				CF6C55BE1A6F80950042DE07 /* distanceMetaball */,
 				C6A2C0C91A6E66A9000ED4DD /* sheepCam.h */,
 				C6A2C0C81A6E66A9000ED4DD /* sheepCam.cpp */,
 				C66CCD091A669A2A00CE64E9 /* testScenes.h */,
@@ -457,36 +446,6 @@
 				92CB5B0C1A666F1F00257334 /* knd */,
 			);
 			path = scene;
-			sourceTree = "<group>";
-		};
-		CF6C55BE1A6F80950042DE07 /* distanceMetaball */ = {
-			isa = PBXGroup;
-			children = (
-				CF6C55BF1A6F80950042DE07 /* distanceMetaball.cpp */,
-				CF6C55C01A6F80950042DE07 /* distanceMetaball.h */,
-				CF6C55C11A6F80950042DE07 /* ofxMetaballs */,
-			);
-			path = distanceMetaball;
-			sourceTree = "<group>";
-		};
-		CF6C55C11A6F80950042DE07 /* ofxMetaballs */ = {
-			isa = PBXGroup;
-			children = (
-				CF6C55C21A6F80950042DE07 /* src */,
-			);
-			path = ofxMetaballs;
-			sourceTree = "<group>";
-		};
-		CF6C55C21A6F80950042DE07 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				CF6C55C31A6F80950042DE07 /* MarchingCubes.cpp */,
-				CF6C55C41A6F80950042DE07 /* MarchingCubes.h */,
-				CF6C55C51A6F80950042DE07 /* MarchingTetrahedrons.cpp */,
-				CF6C55C61A6F80950042DE07 /* MarchingTetrahedrons.h */,
-				CF6C55C71A6F80950042DE07 /* ofxMetaballs.h */,
-			);
-			path = src;
 			sourceTree = "<group>";
 		};
 		E4328144138ABC890047C5CB /* Products */ = {
@@ -643,8 +602,6 @@
 				C66CCCF51A66750D00CE64E9 /* hakoVisPLink_Laser.cpp in Sources */,
 				C66CCCF41A66750D00CE64E9 /* HakoniwaPLink_Prism.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
-				CF6C55C81A6F80950042DE07 /* distanceMetaball.cpp in Sources */,
-				CF6C55CA1A6F80950042DE07 /* MarchingTetrahedrons.cpp in Sources */,
 				C66CCCF61A66750D00CE64E9 /* hakoVisPLink_Oil.cpp in Sources */,
 				C66CCCF11A66750D00CE64E9 /* HakoniwaParallelLink_Base.cpp in Sources */,
 				C66CCCFB1A66750D00CE64E9 /* ParallelLinkManager.cpp in Sources */,
@@ -653,7 +610,6 @@
 				C66CCCF31A66750D00CE64E9 /* HakoniwaPlink_Oil.cpp in Sources */,
 				C66CCCF21A66750D00CE64E9 /* HakoniwaPLink_Laser.cpp in Sources */,
 				5E8C1FAE1A6D0BB1007F6144 /* frozenIce.cpp in Sources */,
-				CF6C55C91A6F80950042DE07 /* MarchingCubes.cpp in Sources */,
 				C6A2C0CA1A6E66A9000ED4DD /* sheepCam.cpp in Sources */,
 				C66CCCF91A66750D00CE64E9 /* ofxKsmrStepManager.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
