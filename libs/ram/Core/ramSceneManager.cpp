@@ -191,6 +191,7 @@ void ramSceneManager::updateOsc()
                     throw runtime_error(header + "no scene " + sceneName + " found");
 
                 if (enabled) ramGetGUI().getSceneTabs().select(sceneName);
+				else ramGetGUI().getSceneTabs().offSelect(sceneName);
 				getScene(sceneIdx)->setEnabled(enabled);
                 setScreen(sceneIdx, 0, screen0);
                 setScreen(sceneIdx, 1, screen1);
