@@ -280,8 +280,8 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 
 #pragma mark PyrLK
 	if (mEnableOptFlow){
-		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 1.0f) &&
-			(ofxCv::mean(ofxCv::toCv(pixGray))[0] < 253.0f) &&
+		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 5.0f) &&
+			(ofxCv::mean(ofxCv::toCv(pixGray))[0] < 250.0f) &&
 			(isFrameNew)){
 			float f = ofxCv::mean(ofxCv::toCv(pixGray))[0];
 			mOptFlow.calcOpticalFlow(pixGray);

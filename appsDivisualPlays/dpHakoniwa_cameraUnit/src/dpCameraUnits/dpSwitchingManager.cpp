@@ -29,7 +29,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_LASER;
 	hakoniwas.back()->CVPreset	= "Plink_Laser";
-	hakoniwas.back()->sourceCh	= 3;
+	hakoniwas.back()->sourceCh	= 2;
 	hakoniwas.back()->sceneNames.push_back("H:dpHPLink_Laser");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisPLink_Laser");
 
@@ -45,7 +45,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_SERVOPENDULUM;
 	hakoniwas.back()->CVPreset	= "ServoPendulum";
-	hakoniwas.back()->sourceCh	= 8;
+	hakoniwas.back()->sourceCh	= 6;
 	hakoniwas.back()->sceneNames.push_back("H:dpHServoPendulum");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisServoPendulum");
 
@@ -53,7 +53,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_MAGPENDULUM;
 	hakoniwas.back()->CVPreset	= "MagnetPendulum";
-	hakoniwas.back()->sourceCh	= 3;
+	hakoniwas.back()->sourceCh	= 4;
 	hakoniwas.back()->sceneNames.push_back("H:dpHMagPendulum");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisMagPendulum");
 
@@ -77,7 +77,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_SANDSTORM;
 	hakoniwas.back()->CVPreset	= "SandStorm";
-	hakoniwas.back()->sourceCh	= 7;
+	hakoniwas.back()->sourceCh	= 3;
 	hakoniwas.back()->sceneNames.push_back("H:dpHSandStorm");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisSandStorm");
 
@@ -95,7 +95,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_WORM;
 	hakoniwas.back()->CVPreset	= "Worm";
-	hakoniwas.back()->sourceCh	= 4;
+	hakoniwas.back()->sourceCh	= 5;
 	hakoniwas.back()->sceneNames.push_back("H:dpHWorm");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisWorm");
 
@@ -110,7 +110,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type      = HAKO_STRUGGLE;
 	hakoniwas.back()->CVPreset  = "Struggle";
-	hakoniwas.back()->sourceCh  = 8;
+	hakoniwas.back()->sourceCh  = 7;
 	hakoniwas.back()->sceneNames.push_back("H:dpHStruggle");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisStruggle");
 
@@ -126,7 +126,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_TORNADO;
 	hakoniwas.back()->CVPreset	= "Tornado";
-	hakoniwas.back()->sourceCh	= 2;
+	hakoniwas.back()->sourceCh	= 8;
 	hakoniwas.back()->sceneNames.push_back("H:dpHTornado");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisTornado");
 
