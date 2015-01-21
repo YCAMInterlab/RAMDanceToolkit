@@ -88,7 +88,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->CVPreset	= "Ice";
 	hakoniwas.back()->sourceCh	= 9;
 	hakoniwas.back()->sceneNames.push_back("H:dpHfrozenIce");
-	hakoniwas.back()->sceneNames.push_back("V:dpVisIceMap");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisIce");
 
 #pragma mark 尺取り虫
 	//TODO: ソース番号・箱庭出力シーン
