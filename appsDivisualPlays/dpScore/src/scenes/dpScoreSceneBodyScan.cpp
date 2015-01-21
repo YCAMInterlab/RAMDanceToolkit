@@ -31,6 +31,15 @@ BodyScanNode::BodyScanNode()
     }
 }
 
+BodyScanNode::~BodyScanNode()
+{
+    spd.clear();
+    axis.clear();
+    vertices.clear();
+    initialVertices.clear();
+    vbo.clear();
+}
+
 void BodyScanNode::update()
 {
     for (int i=0; i<kNumVertices; i++) {
@@ -52,8 +61,8 @@ void SceneBodyScan::initialize()
     dpDebugFunc();
     
     mUICanvas = new ofxUICanvas();
-    mUICanvas->setName(getName());
-    mUICanvas->addLabel(getName());
+    mUICanvas->setName(getShortName());
+    mUICanvas->addLabel(getShortName(), OFX_UI_FONT_SMALL);
     mUICanvas->addSpacer();
     
     mCam.disableMouseInput();

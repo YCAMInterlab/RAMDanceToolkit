@@ -1,6 +1,8 @@
 #include "ofApp.h"
 #ifdef DP_MASTER_HAKONIWA
-#include "dpScoreSceneMaster.h"
+#include "dpScoreMasterHakoniwa.h"
+#include "dpScoreSceneMasterIncrement.h"
+#include "dpScoreSceneMasterDecrement.h"
 #else
 #include "dpScoreSceneVec2SimpleGraph.h"
 #include "dpScoreSceneVec2Clocks.h"
@@ -19,6 +21,7 @@
 #include "dpScoreSceneBodyFlow.h"
 #include "dpScoreSceneBodyPatterns.h"
 #include "dpScoreSceneBodyLines.h"
+
 #include "dpScoreSceneDataScroll.h"
 #include "dpScoreSceneBodyBoids.h"
 #include "dpScoreSceneBodyRect.h"
@@ -72,10 +75,19 @@ void ofApp::setup()
     OFX_BEGIN_EXCEPTION_HANDLING
     
 #ifdef DP_MASTER_HAKONIWA
-    auto master = SceneBase::Ptr(new SceneMaster());
-    mSceneManager.add(master);
-    mSceneManager.change<SceneMaster>();
+    ofSetWindowTitle("dpMasterHakoniwa");
+
+    getMH().initialize();
+    getMH().setupUI(mSceneManager.getTabBar());
+    
+    auto increment = SceneBase::Ptr(new SceneMasterIncrement());
+    auto decrement = SceneBase::Ptr(new SceneMasterDecrement());
+    mSceneManager.add(increment);
+    mSceneManager.add(decrement);
+    mSceneManager.change<SceneMasterIncrement>();
 #else
+    ofSetWindowTitle("dpScore");
+    
     auto black = SceneBase::Ptr(new SceneBase());
     black->setDrawHeader(false);
     black->setName("black");
@@ -94,8 +106,8 @@ void ofApp::setup()
     auto dataText = SceneBase::Ptr(new SceneDataText());
     auto dataSlider = SceneBase::Ptr(new SceneDataSlider());
     
-    auto bodyBox = SceneBase::Ptr(new SceneBodyBox());
-    auto bodyRect = SceneBase::Ptr(new SceneBodyRect());
+    //auto bodyBox = SceneBase::Ptr(new SceneBodyBox());
+    //auto bodyRect = SceneBase::Ptr(new SceneBodyRect());
     auto bodyBoids = SceneBase::Ptr(new SceneBodyBoids());
     auto bodyScan = SceneBase::Ptr(new SceneBodyScan());
     auto bodyPattern = SceneBase::Ptr(new SceneBodyPatterns());
@@ -127,8 +139,8 @@ void ofApp::setup()
     mSceneManager.add(bodyFlow);
     mSceneManager.add(bodyLines);
     
-    mSceneManager.add(bodyRect);
-    mSceneManager.add(bodyBox);
+    //mSceneManager.add(bodyRect);
+    //mSceneManager.add(bodyBox);
     mSceneManager.add(bodyBoids);
     
     
@@ -143,14 +155,16 @@ void ofApp::setup()
     //mSceneManager.change(3);
     mSceneManager.change("black");
     mSceneManager.change<SceneDataSlider>();
-#endif
     
-    mSceneManager.getTabBar()->loadSettings(kSettingsDir, kSettingsPrefix);
     mSceneManager.getTabBar()->setVisible(false);
+#endif
+    mSceneManager.getTabBar()->loadSettings(kSettingsDir, kSettingsPrefix);
     
     mOscReceiver.setup(kOscClientPort);
     
     dp::score::registerObjectEvent(this);
+    
+    ofAddListener(ofxEvent(), this, &ofApp::onEventReceived);
     
     //dp::score::ObjectEventArgs args;
     //
@@ -172,13 +186,12 @@ void ofApp::update()
 {
     OFX_BEGIN_EXCEPTION_HANDLING
     
-#ifdef DP_MASTER_HAKONIWA
-    ofSetWindowTitle("dpMasterHakoniwa : " + ofToString(ofGetFrameRate(), 2));
-#else
-    ofSetWindowTitle("dpScore : " + ofToString(ofGetFrameRate(), 2));
-#endif
+    const int t = ofGetElapsedTimef()*10.f;
     
-    bool updatedMotioner = false;
+#ifdef DP_MASTER_HAKONIWA
+    bool newMean{false};
+    bool newPixelate{false};
+#endif
     
     while (mOscReceiver.hasWaitingMessages()) {
         ofxOscMessage m;
@@ -198,44 +211,117 @@ void ofApp::update()
             OFX_END_EXCEPTION_HANDLING
         }
         else if (addr == ofxMotioner::OSC_ADDR) {
+            OFX_BEGIN_EXCEPTION_HANDLING
             ofxMotioner::updateWithOscMessage(m);
-            updatedMotioner = true;
+            OFX_END_EXCEPTION_HANDLING
         }
         else {
-            auto dir = ofSplitString(addr, "/");
-            if (dir.size() >= 5 && dir.at(1) == "dp" && dir.at(2) == "cameraUnit") {
-                string newAddr = "/" + dir.at(1) + "/" + dir.at(2) + "/" + dir.at(4);
-                for (int i=5; i<dir.size(); i++) {
-                    newAddr += "/" + dir.at(i);
-                }
-                ofxEventMessage mm = m;
-                mm.setAddress(newAddr);
-                mSceneManager.update(mm);
+            OFX_BEGIN_EXCEPTION_HANDLING
+            const string newAddr = makeInternalCameraUnitAddress(addr);
+            if (newAddr == kOscAddrCameraUnitMean) {
+                mCameraUnitMessageMean = m;
+                mCameraUnitMessageMean.setAddress(kOscAddrCameraUnitMean);
+#ifdef DP_MASTER_HAKONIWA
+                newMean = true;
+#endif
             }
+            else if (newAddr == kOscAddrCameraUnitPixelateR) {
+                mCameraUnitMessagePixelateR = m;
+                mCameraUnitMessagePixelateR.setAddress(kOscAddrCameraUnitPixelateR);
+#ifdef DP_MASTER_HAKONIWA
+                newPixelate = true;
+#endif
+            }
+            else if (newAddr == kOscAddrCameraUnitPixelateG) {
+                mCameraUnitMessagePixelateG = m;
+                mCameraUnitMessagePixelateG.setAddress(kOscAddrCameraUnitPixelateG);
+#ifdef DP_MASTER_HAKONIWA
+                newPixelate = true;
+#endif
+            }
+            else if (newAddr == kOscAddrCameraUnitPixelateB) {
+                mCameraUnitMessagePixelateB = m;
+                mCameraUnitMessagePixelateB.setAddress(kOscAddrCameraUnitPixelateB);
+#ifdef DP_MASTER_HAKONIWA
+                newPixelate = true;
+#endif
+            }
+            else if (newAddr == kOscAddrCameraUnitVector) {
+                mCameraUnitMessageVector = m;
+                mCameraUnitMessageVector.setAddress(kOscAddrCameraUnitVector);
+            }
+            OFX_END_EXCEPTION_HANDLING
         }
     }
     
     if (mDebugCamUnit) {
-        const float t = ofGetElapsedTimef();
-        ofxEventMessage vm;
-        vm.setAddress(kOscAddrCameraUnitVector);
-        for (int i=0; i<kNumCameraunitVectors; i++) {
-            ofVec2f v;
-            v.x = ofSignedNoise(t, 0, i) + ofSignedNoise(t*9.8f, 0, i) * 0.5f  + ofSignedNoise(t*102.f, 0, i) * 0.25f;
-            v.y = ofSignedNoise(t, 1, i) + ofSignedNoise(t*9.8f, 1, i) * 0.5f  + ofSignedNoise(t*102.f, 1, i) * 0.25f;
-            vm.addFloatArg(v.x);
-            vm.addFloatArg(v.y);
-        }
-        mSceneManager.update(vm);
+        generateFakeVectorData();
+        generateFakeMeanData();
+#ifdef DP_MASTER_HAKONIWA
+        newMean = true;
+#endif
     }
+    
+    ofxMotioner::update();
     
     ofxEventMessage m;
     m.setAddress(kOscAddrMotioner);
     mSceneManager.update(m);
+
+    mSceneManager.update(mCameraUnitMessageMean);
+    mSceneManager.update(mCameraUnitMessageVector);
     
-    ofxMotioner::update();
-    
+#ifdef DP_MASTER_HAKONIWA
+    getMH().update();
+    getMH().updateCameraUnit(mCameraUnitMessageVector);
+    if (newMean) getMH().updateCameraUnit(mCameraUnitMessageMean);
+    if (newPixelate) {
+        getMH().updateCameraUnit(mCameraUnitMessagePixelateR);
+        getMH().updateCameraUnit(mCameraUnitMessagePixelateG);
+        getMH().updateCameraUnit(mCameraUnitMessagePixelateB);
+    }
+#endif
     OFX_END_EXCEPTION_HANDLING
+}
+
+void ofApp::generateFakeMeanData()
+{
+    const float t{ofGetElapsedTimef()};
+    mCameraUnitMessageMean.clear();
+    mCameraUnitMessageMean.setAddress(kOscAddrCameraUnitMean);
+    ofVec4f v;
+    for (int i=0; i<ofVec4f::DIM; i++) {
+        v[i] = ofSignedNoise(t, 0, i) * 2.f + ofSignedNoise(t*9.8f, 0, i) * 1.f;
+        v[i] += 127.f - i * 5.f;
+        mCameraUnitMessageMean.addIntArg(v[i]);
+    }
+}
+
+void ofApp::generateFakeVectorData()
+{
+    const float t{ofGetElapsedTimef()};
+    mCameraUnitMessageVector.clear();
+    mCameraUnitMessageVector.setAddress(kOscAddrCameraUnitVector);
+    for (int i=0; i<kNumCameraunitVectors; i++) {
+        ofVec2f v;
+        v.x = ofSignedNoise(t, 0, i) + ofSignedNoise(t*9.8f, 0, i) * 0.5f  + ofSignedNoise(t*102.f, 0, i) * 0.25f;
+        v.y = ofSignedNoise(t, 1, i) + ofSignedNoise(t*9.8f, 1, i) * 0.5f  + ofSignedNoise(t*102.f, 1, i) * 0.25f;
+        mCameraUnitMessageVector.addFloatArg(v.x);
+        mCameraUnitMessageVector.addFloatArg(v.y);
+    }
+}
+
+string ofApp::makeInternalCameraUnitAddress(const string& addr)
+{
+    string newAddr = "";
+    auto dir = ofSplitString(addr, "/");
+    if (dir.size() >= 5 && dir.at(1) == "dp" && dir.at(2) == "cameraUnit") {
+        newAddr += "/" + dir.at(1) + "/" + dir.at(2) + "/" + dir.at(4);
+        for (int i=5; i<dir.size(); i++) {
+            newAddr += "/" + dir.at(i);
+        }
+    }
+    return newAddr;
 }
 
 #pragma mark ___________________________________________________________________
@@ -243,7 +329,24 @@ void ofApp::draw()
 {
     OFX_BEGIN_EXCEPTION_HANDLING
     
+#ifdef DP_MASTER_HAKONIWA
+    getMH().draw();
+    ofxMot::draw();
+#endif
+    
     mSceneManager.draw();
+    
+#ifndef DP_MASTER_HAKONIWA
+    if (mShowFps) {
+#endif
+        ofPushStyle();
+        ofSetColor(ofColor::white, 200);
+        ofDrawBitmapString("fps: " + ofToString(ofGetFrameRate(), 2),
+                           ofPoint(20.f, ofGetHeight()-20.f));
+        ofPopStyle();
+#ifndef DP_MASTER_HAKONIWA
+    }
+#endif
     
     if (mInvert) {
         ofPushStyle();
@@ -261,6 +364,10 @@ void ofApp::draw()
 void ofApp::exit()
 {
     OFX_BEGIN_EXCEPTION_HANDLING
+    
+#ifdef DP_MASTER_HAKONIWA
+    //getMH().shutdown();
+#endif
     
     mSceneManager.clear();
     
@@ -287,6 +394,13 @@ void ofApp::keyPressed(int key)
             break;
         case 'd':
             mDebugCamUnit ^= true;
+            break;
+        case 'c':
+            mShowCursor ^=true;
+            mShowCursor ? ofShowCursor() : ofHideCursor();
+            break;
+            case '/':
+            mShowFps ^= true;
             break;
         case OF_KEY_LEFT:
             mSceneManager.prev();
@@ -405,6 +519,19 @@ void ofApp::onObjectReceived(dp::score::ObjectEventArgs& e)
     //    auto _objC = e.getObject<ObjC>(2);
     //
     //    cout << __func__ << ": " << _objA->s << ", " << _objB->s << ", " << _objC->s << endl;
+    
+    OFX_END_EXCEPTION_HANDLING
+}
+
+void ofApp::onEventReceived(ofxEventMessage& e)
+{
+    OFX_BEGIN_EXCEPTION_HANDLING
+    
+    if (e.getAddress() == kEventAddrChangeScene) {
+        if (e.getNumArgs() >= 1 && e.getArgType(0) == OFXOSC_TYPE_STRING) {
+            mSceneManager.change(e.getArgAsString(0));
+        }
+    }
     
     OFX_END_EXCEPTION_HANDLING
 }

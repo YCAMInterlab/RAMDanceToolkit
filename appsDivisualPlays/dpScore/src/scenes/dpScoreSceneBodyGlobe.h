@@ -19,7 +19,7 @@ public:
     struct Node : public ofxMot::Node {
         typedef ofPtr<Node> Ptr;
         Node();
-        virtual ~Node() = default;
+        virtual ~Node();
         Node& operator = (const Node& rhs);
         void update();
         virtual void customDraw();
@@ -55,13 +55,14 @@ private:
     struct Globe final {
         typedef ofPtr<Globe> Ptr;
         Globe();
+        ~Globe() { nodes.clear(); }
         NodeVec nodes;
         ofVec3f origin;
     };
     
-    typedef map<string, Globe::Ptr> NodeVecMap;
+    typedef map<string, Globe::Ptr> GlobeMap;
     
-    NodeVecMap mNodeVecMap;
+    GlobeMap mGlobeMap;
     ofEasyCam mCam;
     bool mMagnify{false};
     float mScale{500.f};

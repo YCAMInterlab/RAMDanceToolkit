@@ -17,8 +17,8 @@ void SceneVec2Clocks::initialize()
     mClockBuffer.clear();
     
     mUICanvas = new ofxUICanvas();
-    mUICanvas->setName(getName());
-    mUICanvas->addLabel(getName());
+    mUICanvas->setName(getShortName());
+    mUICanvas->addLabel(getShortName(), OFX_UI_FONT_SMALL);
     mUICanvas->addSpacer();
     mUICanvas->addSlider("Sensor Scale", 0.f, 2.0f, &mSensorScale);
 }
@@ -36,11 +36,15 @@ void SceneVec2Clocks::shutDown()
 void SceneVec2Clocks::enter()
 {
     dpDebugFunc();
+    
+    mClockBuffer.clear();
 }
 
 void SceneVec2Clocks::exit()
 {
     dpDebugFunc();
+    
+    mClockBuffer.clear();
 }
 
 void SceneVec2Clocks::update(ofxEventMessage& m)

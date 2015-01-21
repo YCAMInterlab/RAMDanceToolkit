@@ -22,6 +22,8 @@ private:
     
     ramMotionExtractor	motionExtractor;
 
+    virtual void onEnabled();
+    virtual void onDisabled();
     void radiusChanged(int radius);
     void VideoChanged(int no);
     void drawDump();
@@ -30,8 +32,9 @@ private:
     float mDegreeOffset;
     
     int mVideoNo,portNo;
+    bool vidsetup[5];
     
-    ofVideoPlayer vidPlay;
+    ofVideoPlayer	vidPlay[5];
     ofSpherePrimitive sphere;
 
 };

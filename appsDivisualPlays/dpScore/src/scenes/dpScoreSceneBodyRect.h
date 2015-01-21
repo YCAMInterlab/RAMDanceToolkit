@@ -18,7 +18,7 @@ class SceneBodyRect;
 
 struct BodyRectNode final : public ofxMot::Node {
     BodyRectNode();
-    virtual ~BodyRectNode() = default;
+    virtual ~BodyRectNode();
     BodyRectNode& operator = (const BodyRectNode& rhs);
     
     void update();
