@@ -221,9 +221,10 @@ void ofApp::update()
                 else if (m.getArgType(0) == OFXOSC_TYPE_STRING){
                     mSceneManager.change(m.getArgAsString(0));
                 }
+                
+                mTitleNames.clear();
                 if (m.getNumArgs()>=2) {
                     mTimeSceneChanged = ofGetElapsedTimef();
-                    mTitleNames.clear();
                     for (int i=1; i<m.getNumArgs(); i++) {
                         if (m.getArgType(i) == OFXOSC_TYPE_STRING) {
                             string name{m.getArgAsString(i)};

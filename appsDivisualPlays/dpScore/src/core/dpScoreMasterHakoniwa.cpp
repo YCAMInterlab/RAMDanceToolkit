@@ -769,7 +769,13 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
         auto* radio = static_cast<ofxUIRadio*>(e.widget);
         const auto& toggleName = radio->getActiveName();
         if (radio->getActive()->getValue()) {
-            sendChangeScore(toggleName);
+            
+            ofxOscMessage m;
+            m.setAddress(kOscAddrChangeScene);
+            m.addStringArg(toggleName);
+            mCurrentScore = toggleName;
+            
+            if (mEnableOscOutScore) mScoreOscSender.sendMessage(m);
         }
     }
     else if (widgetName == "Enable All") {
