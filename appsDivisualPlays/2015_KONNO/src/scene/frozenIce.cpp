@@ -70,7 +70,7 @@ void frozenIce::onEnabled(){
     //Speed Control
     dancerControl = true;
     fixationTime = 5000.0;
-    speedThreshold = 1.5;
+    speedThreshold = 1.2;
     
     //Distance Control
     distanceControl = false;
