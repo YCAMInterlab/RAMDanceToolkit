@@ -33,6 +33,8 @@ private:
         void update(const ofVec2f& v);
         void draw(SceneDataSlider* owner, float w);
         
+        const float kClampRange{3.f};
+        
         ofVec2f vec;
         ofVec2f prevVec;
     };
