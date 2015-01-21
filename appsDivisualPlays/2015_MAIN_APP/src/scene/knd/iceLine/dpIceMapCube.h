@@ -101,6 +101,18 @@ public:
         mScale = scale;
     }
     
+    void extendByThresh(int num){
+        for(auto &v:mGrids){
+            v.extendByThresh(num);
+        }
+    }
+    
+    void setExtendThreshNum(int num){
+        for(auto &v:mGrids){
+            v.setExtendThreshNum(num);
+        }
+    }
+    
     void update(){
         for(auto &v:mGrids){
             v.update();
@@ -113,6 +125,18 @@ public:
             ofScale(mScale,mScale,mScale);
             mGrids[i].draw();
             ofPopMatrix();
+        }
+    }
+    
+    void extendEachLineByThresh(int num){
+        for(auto &v:mGrids){
+            v.extendEachLineByThresh(num);
+        }
+    }
+    
+    void setExtendEachLineThreshNum(int num){
+        for(auto &v:mGrids){
+            v.setExtendEachLineThreshNum(num);
         }
     }
     

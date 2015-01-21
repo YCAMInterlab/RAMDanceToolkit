@@ -130,6 +130,33 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->sceneNames.push_back("H:dpHTornado");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisTornado");
 
+#pragma mark メタボール
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_METABALL;
+	hakoniwas.back()->CVPreset	= "";
+	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sceneNames.push_back("V:distanceMetaball");
+
+#pragma mark ライン
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_LINE;
+	hakoniwas.back()->CVPreset	= "";
+	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sceneNames.push_back("V:Line");
+
+#pragma mark フォーポイント
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_FOURPOINT;
+	hakoniwas.back()->CVPreset	= "";
+	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sceneNames.push_back("V:");
+
+#pragma mark 未来
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->CVPreset	= "";
+	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sceneNames.push_back("V:");
+
 #pragma mark ★テストA
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_TESTA;

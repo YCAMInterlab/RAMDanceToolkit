@@ -19,7 +19,6 @@
 
 #include "ramMain.h"
 #include "ofxKsmrStepManager.h"
-#include "axisConverter.h"
 #include "ramMotionExtractor.h"
 #include "dpConstants.h"
 
@@ -48,7 +47,6 @@ private:
 
     ramMotionExtractor	motionExtractor;
     ofxOscSender mOscSender;
-    axisConverter   converter;
     
     bool mAllTurn, mGear1, mGear2, mGear3, mDatahow, mManual;
     bool mAllGearReverse, mGear1Reverse, mGear2Reverse, mGear3Reverse;

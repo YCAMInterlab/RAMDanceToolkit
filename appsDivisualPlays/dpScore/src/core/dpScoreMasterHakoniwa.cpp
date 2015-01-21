@@ -11,42 +11,6 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-const string MH::kSceneNames[MH::kNumScenes]{
-    //"dpVisPLink_Laser",
-    "dpVisServoPendulum",
-    "dpVisMagPendulum",
-    "dpVisSandStorm",
-    "dpVisStruggle",
-    
-    "dpVisTheta",
-    
-    "dpHGearMove",
-    "dpHWorm",
-    "dpVisTornado",
-    
-    "dpVisStage",
-    
-    "hoge",
-    "foo",
-    "bar",
-};
-
-#if 0
-0  dpVisServoPendulum
-1  dpVisStage
-2  dpVisWorm
-3  dpVisIce
-4  dpVisStruggle
-5  dpVisSandStorm
-6  dpVisMagPendulum
-7  dpVisTheta
-8  dpVisTornado
-9  dpVisPLink_Laser
-10 dpVisPLink_Prism
-11 dpVisPLink_Oil
-12 (Gear?)
-#endif
-
 const ofColor MH::kBackgroundColor{255, 20};
 const ofColor MH::kTextColor{255, 200};
 const ofColor MH::kTextColorDark{255, 100};
@@ -63,8 +27,12 @@ const string MH::kHostNameMasterHakoniwa{"192.168.20.60"};
 const int MH::kPortNumberMasterHakoniwa {8528};
 const string MH::kHostNameCameraUnit{"192.168.20.5"};
 const int MH::kPortNumberCameraUnit{12400};
+const string MH::kHostNameScore{"192.168.20.11"};
+const int MH::kPortNumberScore{10000};
 
 const string MH::kOscAddrRamSetScene{"/ram/set_scene"};
+
+const string MH::kXmlSettingsPath{"master_hakoniwa_settings.xml"};
 
 #pragma mark ___________________________________________________________________
 void MasterHakoniwa::Valve::update(MasterHakoniwa* mh)
@@ -128,7 +96,8 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     tabbar->addToggle("[[[ Stop!!! ]]]", &mEmergencyStop, sizeBig, sizeBig);
     tabbar->addSpacer(w, 1.f);
     mEnableAllToggle = tabbar->addToggle("Enable All", false, sizeMid, sizeMid);
-    tabbar->addToggle("Enable OSC output", &mEnableOscOut);
+    tabbar->addToggle("Enable OSC RAM Dance Tool Kit", &mEnableOscOutRDTK);
+    tabbar->addToggle("Enable OSC Master Hakoniwa", &mEnableOscOutMH);
     tabbar->addToggle("Enable CameraUnit", &mEnableCameraUnit);
     tabbar->addToggle("Enable MOTIONER", &mEnableMotioner);
     tabbar->addSpacer(w, 1.f);
@@ -142,12 +111,31 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     sceneSelectTab->addSpacer();
     vector<string> sceneNames;
     sceneNames.push_back("disable all");
-    for (int i=0; i<kNumScenes; i++) {
-        sceneNames.push_back(kSceneNames[i]);
+    for (auto it : mScenes) {
+        sceneNames.push_back(it.first);
     }
     sceneSelectTab->addRadio("Scenes", sceneNames);
     tabbar->addCanvas(sceneSelectTab);
     ofAddListener(sceneSelectTab->newGUIEvent, this, &MasterHakoniwa::guiEvent);
+    
+    ofxUICanvas* scoreSelectTab{new ofxUICanvas()};
+    scoreSelectTab->setWidth(w);
+    scoreSelectTab->setHeight(h);
+    scoreSelectTab->setColorBack(MH::kBackgroundColor);
+    scoreSelectTab->setName("Select score");
+    scoreSelectTab->addLabel("Select score", OFX_UI_FONT_SMALL);
+    scoreSelectTab->addSpacer();
+    vector<string> scoreNames;
+    scoreNames.push_back("black");
+    for (int i=0; i<mUniqueScores.size(); i++) {
+        for (int j=0; j<mUniqueScores.at(i).getInitialList().size(); j++) {
+            scoreNames.push_back(mUniqueScores.at(i).getInitialList().at(j));
+        }
+    }
+    scoreSelectTab->addRadio("Scores", scoreNames);
+    tabbar->addCanvas(scoreSelectTab);
+    ofAddListener(scoreSelectTab->newGUIEvent, this, &MasterHakoniwa::guiEvent);
+    
     
     tabbar->addSpacer(w, 1.f);
     tabbar->addLabel("Analyze method", OFX_UI_FONT_SMALL);
@@ -176,7 +164,7 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     pixelataTab->addLabel("Pixelate Settings", OFX_UI_FONT_SMALL);
     pixelataTab->addSpacer();
     tabbar->addCanvas(pixelataTab);
-
+    
     tabbar->addSpacer(w, 1.f);
     
     tabbar->addSlider("Valve open duration", 0.f, 1.f, &mValveOpenDuration, w, lineH);
@@ -196,6 +184,9 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
 
 void MasterHakoniwa::initialize()
 {
+    ofxXmlSettings xml;
+    xml.load(kXmlSettingsPath);
+    
     mValves.assign(kNumValvePins, Valve());
     for (int i=0; i<mValves.size(); i++) {
         mValves.at(i).pin = kValvePins[i];
@@ -206,21 +197,45 @@ void MasterHakoniwa::initialize()
         mPumps.at(i).pin = kPumpPins[i];
     }
     
-    mMasterHakoniwaOscServer.setup(kHostNameMasterHakoniwa,
-                                   kPortNumberMasterHakoniwa);
-    mCameraUnitOscServer.setup(kHostNameCameraUnit,
-                               kPortNumberCameraUnit);
+    mMasterHakoniwaOscSender.setup(kHostNameMasterHakoniwa, kPortNumberMasterHakoniwa);
+    mCameraUnitOscSender.setup(kHostNameCameraUnit, kPortNumberCameraUnit);
+    mScoreOscSender.setup(kHostNameScore, kPortNumberScore);
+    
     turnOffAllPins();
     
-    for (int i=0; i<kNumScenes; i++) {
-        mScenes[kSceneNames[i]] = Scene();
+    xml.pushTag("rdtk");
+    xml.pushTag("phase", 0);
+    vector<string> sceneNames;
+    for (int j=0; j<xml.getNumTags("scene"); j++) {
+        const string name{xml.getAttribute("scene", "name", "error", j)};
+        mScenes[name] = Scene();
+        sceneNames.push_back(name);
     }
+    xml.popTag();
+    xml.popTag();
+    mUniqueScenes.setInitialList(sceneNames);
+    
+    xml.pushTag("score");
+    mMaxComplexity = xml.getNumTags("complexity");
+    mUniqueScores.assign(mMaxComplexity, UniqueStringStack());
+    for (int i=0; i<mMaxComplexity; i++) {
+        xml.pushTag("complexity", i);
+        auto& stack = mUniqueScores.at(i);
+        const int numScenes{xml.getNumTags("scene")};
+        vector<string> sceneNames;
+        for (int j=0; j<numScenes; j++) {
+            const string name{xml.getAttribute("scene", "name", "error", j)};
+            sceneNames.push_back(name);
+            cout << name << endl;
+        }
+        stack.setInitialList(sceneNames);
+        xml.popTag();
+    }
+    xml.popTag();
     
     ofAddListener(ofxMot::drawSkeletonEvent,
                   this,
                   &MasterHakoniwa::onDrawSkeleton);
-    
-    resetUniqueScenes();
 }
 
 void MasterHakoniwa::shutdown()
@@ -228,6 +243,8 @@ void MasterHakoniwa::shutdown()
     ofRemoveListener(ofxMot::drawSkeletonEvent,
                      this,
                      &MasterHakoniwa::onDrawSkeleton);
+    
+    mEnableOscOutMH = true;
     turnOffAllPins();
 }
 
@@ -236,7 +253,8 @@ void MasterHakoniwa::update()
     if (mEmergencyStop) {
         mEnableMotioner = false;
         mEnableCameraUnit = false;
-        mEnableOscOut = false;
+        mEnableOscOutMH = false;
+        mEnableOscOutRDTK = false;
         if (mEnableAllToggle) {
             mEnableAllToggle->setValue(false);
         }
@@ -369,7 +387,7 @@ void MasterHakoniwa::draw()
         const string name{it.first};
         auto& s = it.second;
         
-        auto findIt = find(mUniqueScenes.begin(), mUniqueScenes.end(), name);
+        auto findIt = mUniqueScenes.find(name);
         if (s.isEnabled()) ofSetColor(color::kMain);
         else if (findIt != mUniqueScenes.end()) ofSetColor(kTextColor);
         else ofSetColor(kTextColorDark);
@@ -388,13 +406,55 @@ void MasterHakoniwa::draw()
     
     ofSetColor(kTextColor);
     ss.str("");
-    ss << "unique scenes: " << getNumUniqueScenes();
+    ss << "unique scenes: " << mUniqueScenes.size();
     ofDrawBitmapString(ss.str(), ofPoint::zero());
+    alignedTranslate(0.f, kTextSpacing * 2.f);
+
+    ofDrawBitmapString("[score]", ofPoint::zero());
+    for (int i=0; i<mUniqueScores.size(); i++) {
+        auto& stack = mUniqueScores.at(i);
+        alignedTranslate(0.f, kTextSpacing);
+        
+        ofSetColor(kTextColor);
+        ofDrawBitmapString("- complexity " + ofToString(i) + " -", ofPoint::zero());
+        alignedTranslate(0.f, kTextSpacing);
+        for (int j=0; j < stack.getInitialList().size(); j++) {
+            const auto& s = stack.getInitialList().at(j);
+            auto findIt = stack.find(s);
+            if (s == mCurrentScore) ofSetColor(color::kMain);
+            else if (findIt != stack.end()) ofSetColor(kTextColor);
+            else ofSetColor(kTextColorDark);
+            string ss{s};
+            ofStringReplace(ss, "dp::score::Scene", "");
+            ofDrawBitmapString(ss, ofPoint::zero());
+            alignedTranslate(0.f, kTextSpacing);
+        }
+    }
+    
+    ofPopMatrix();
+    
+
+    ofPushMatrix();
+    
+    alignedTranslate(kLineWidth + kGuiWidth * 2.f + kMargin * 3.f, kTopOffset);
+    ofSetColor(kBackgroundColor);
+    alignedRect(0.f,
+                0.f,
+                ofGetWidth() - (kLineWidth + kGuiWidth * 2.f  + kMargin * 6.f),
+                ofGetHeight() - (mCamViewport.height + kTopOffset + kMargin * 3.f + 1.f));
+    
+    alignedTranslate(kMargin, 0.f);
+    ofSetColor(kTextColor);
     alignedTranslate(0.f, kTextSpacing);
     
+    ofPushMatrix();
     alignedTranslate(0.f, kTextSpacing);
+    mAnalyzeMean.draw();
+    ofPopMatrix();
+    
+    ofPushMatrix();
     ofDrawBitmapString("[mean]", ofPoint::zero());
-    alignedTranslate(0.f, kTextSpacing);
+    alignedTranslate(200.f, kTextSpacing);
     ss.str("");
     ss
     << "data span : " << setprecision(3) << mAnalyzeMean.mLastUpdateSpan << endl
@@ -404,17 +464,19 @@ void MasterHakoniwa::draw()
     << "diff add  : " << setprecision(1) << mAnalyzeMean.mMeanAddtion;
     
     ofDrawBitmapString(ss.str(), ofPoint::zero());
-    alignedTranslate(0.f, kTextSpacing * 5.f);
-    mAnalyzeMean.draw();
-    alignedTranslate(0.f, kTextSpacing * 5.f);
+    ofPopMatrix();
     
+    alignedTranslate(0.f, kTextSpacing * 8.f);
+    
+    ofPushMatrix();
     ofSetColor(kTextColor);
-    alignedTranslate(0.f, kTextSpacing);
     ofDrawBitmapString("[pixelate]", ofPoint::zero());
     alignedTranslate(0.f, kTextSpacing);
     mAnalyzePixelate.draw();
+    ofPopMatrix();
     
     ofPopMatrix();
+    
     
     ofSetColor(kBackgroundColor);
     ofRect(mCamViewport);
@@ -463,36 +525,46 @@ bool MasterHakoniwa::getIsOpeningValve(int index)
     return mValves.at(index).open;
 }
 
-int MasterHakoniwa::getNumUniqueScenes() const
-{
-    return mUniqueScenes.size();
-}
-
-void MasterHakoniwa::resetUniqueScenes()
-{
-    mUniqueScenes.clear();
-    for (auto& it : mScenes) {
-        mUniqueScenes.push_back(it.first);
-    }
-}
-
 void MasterHakoniwa::setUniqueScene(int sceneIndex, bool win0, bool win1)
 {
-    if (sceneIndex < 0 || sceneIndex >= mUniqueScenes.size()) {
-        ofxThrowExceptionf(ofxException, "scene index %d out of range", sceneIndex);
-    }
-    
     if (!getIsWindowOn(0)) win0 = true;
     if (!getIsWindowOn(1)) win1 = true;
     
     if (!win0 && !win1) win0 = win1 = true;
     
-    const string sceneName{mUniqueScenes.at(sceneIndex)};
-    mUniqueScenes.erase(mUniqueScenes.begin() + sceneIndex);
+    const string sceneName{mUniqueScenes.get(sceneIndex)};
     
     sendSetScene(sceneName, win0, win1);
+}
+
+void MasterHakoniwa::setUniqueScore(int sceneIndex)
+{
+    if (mCurrentScoreComplexity < 0 || mCurrentScoreComplexity >= mMaxComplexity) {
+        ofxThrowExceptionf(ofxException,
+                           "score complexity %d out of range",
+                           mCurrentScoreComplexity);
+    }
     
-    if (mUniqueScenes.empty()) resetUniqueScenes();
+    auto& stack = mUniqueScores.at(mCurrentScoreComplexity);
+    
+    const string& s{stack.get(sceneIndex)};
+    
+    sendChangeScore(s);
+    
+    if (sceneIndex < 0 || sceneIndex >= stack.size()) {
+        ofxThrowExceptionf(ofxException,
+                           "scene index %d out of range",
+                           sceneIndex);
+    }
+    
+    
+    
+    ++mCurrentScoreComplexity %= mMaxComplexity;
+}
+
+size_t MasterHakoniwa::getNumUniqueScores() const
+{
+    
 }
 
 bool MasterHakoniwa::getIsWindowOn(int windowIndex) const
@@ -523,7 +595,7 @@ void MasterHakoniwa::sendPin(int pin, bool open)
     ofxOscMessage m;
     m.setAddress("/dp/hakoniwa/colorOfWater/"+ofToString(pin));
     m.addIntArg((int)open);
-    if (mEnableOscOut) mMasterHakoniwaOscServer.sendMessage(m);
+    if (mEnableOscOutMH) mMasterHakoniwaOscSender.sendMessage(m);
     //if (open)
     //    cout << pin << "=" << open << endl;
 }
@@ -565,9 +637,18 @@ void MasterHakoniwa::sendSetScene(const string& name, bool win0, bool win1)
             m.addIntArg((int)s.window[i]);
             //ss << s.window[i] << ", ";
         }
-        if (mEnableOscOut) mCameraUnitOscServer.sendMessage(m);
+        if (mEnableOscOutRDTK) mCameraUnitOscSender.sendMessage(m);
         //ofLogNotice() << ss.str();
     }
+}
+
+void MasterHakoniwa::sendChangeScore(const string& name)
+{
+    ofxOscMessage m;
+    m.setAddress(kOscAddrChangeScene);
+    m.addStringArg(name);
+    mCurrentScore = name;
+    mScoreOscSender.sendMessage(m);
 }
 
 void MasterHakoniwa::onDrawSkeleton(ofxMotioner::EventArgs &e)
@@ -645,9 +726,17 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
             }
         }
     }
+    else if (widgetName == "Scores") {
+        auto* radio = static_cast<ofxUIRadio*>(e.widget);
+        const auto& toggleName = radio->getActiveName();
+        if (radio->getActive()->getValue()) {
+            sendChangeScore(toggleName);
+        }
+    }
     else if (widgetName == "Enable All") {
         const bool t{static_cast<ofxUIToggle*>(e.widget)->getValue()};
-        mEnableOscOut = t;
+        mEnableOscOutMH = t;
+        mEnableOscOutRDTK = t;
         mEnableMotioner = t;
         mEnableCameraUnit = t;
     }

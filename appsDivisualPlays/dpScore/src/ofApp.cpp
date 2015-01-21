@@ -51,6 +51,7 @@ using namespace dp::score;
 身体系 8/20
 箱庭系 13/20
 
+グラフ*n
 プロッター*n
 ブロブ系
 フォント系小
@@ -132,15 +133,15 @@ void ofApp::setup()
     mSceneManager.add(dataBarcode);
     mSceneManager.add(dataText);
     mSceneManager.add(dataSlider);
-    
     mSceneManager.add(bodyGlobe);
     mSceneManager.add(bodyScan);
+    
     mSceneManager.add(bodyPattern);
     mSceneManager.add(bodyFlow);
     mSceneManager.add(bodyLines);
-    
     //mSceneManager.add(bodyRect);
     //mSceneManager.add(bodyBox);
+    
     mSceneManager.add(bodyBoids);
     
     
@@ -165,6 +166,8 @@ void ofApp::setup()
     dp::score::registerObjectEvent(this);
     
     ofAddListener(ofxEvent(), this, &ofApp::onEventReceived);
+    
+    ofSetEscapeQuitsApp(false);
     
     //dp::score::ObjectEventArgs args;
     //
@@ -363,13 +366,19 @@ void ofApp::draw()
 #pragma mark ___________________________________________________________________
 void ofApp::exit()
 {
+}
+
+void ofApp::shutdown()
+{
     OFX_BEGIN_EXCEPTION_HANDLING
     
 #ifdef DP_MASTER_HAKONIWA
-    //getMH().shutdown();
+    getMH().shutdown();
 #endif
     
     mSceneManager.clear();
+    
+    std::exit(0);
     
     OFX_END_EXCEPTION_HANDLING
 }
@@ -380,6 +389,9 @@ void ofApp::keyPressed(int key)
     OFX_BEGIN_EXCEPTION_HANDLING
     
     switch (key) {
+        case OF_KEY_ESC:
+            shutdown();
+            break;
         case 'f':
             ofToggleFullscreen();
             break;

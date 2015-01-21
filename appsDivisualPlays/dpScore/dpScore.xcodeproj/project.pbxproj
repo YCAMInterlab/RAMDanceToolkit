@@ -85,6 +85,7 @@
 		D24C21C81A49653D009D0796 /* ofxOscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21B81A49653D009D0796 /* ofxOscReceiver.cpp */; };
 		D24C21C91A49653D009D0796 /* ofxOscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21BA1A49653D009D0796 /* ofxOscSender.cpp */; };
 		D2619F381A6523C3002EF3E2 /* dpScoreSceneBodyBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2619F361A6523C3002EF3E2 /* dpScoreSceneBodyBase.cpp */; };
+		D26CA81B1A6F5E370050BB3D /* dpScoreUniqueStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D26CA8191A6F5E370050BB3D /* dpScoreUniqueStack.cpp */; };
 		D27F2E4D1A67624400913B14 /* dpScoreSceneDataWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D27F2E4B1A67624400913B14 /* dpScoreSceneDataWave.cpp */; };
 		D27F2E501A67625B00913B14 /* dpScoreSceneDataCircle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D27F2E4E1A67625B00913B14 /* dpScoreSceneDataCircle.cpp */; };
 		D27F2E531A6762C600913B14 /* dpScoreSceneDataDisplacement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D27F2E511A6762C600913B14 /* dpScoreSceneDataDisplacement.cpp */; };
@@ -447,6 +448,8 @@
 		D24C21BB1A49653D009D0796 /* ofxOscSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscSender.h; sourceTree = "<group>"; };
 		D2619F361A6523C3002EF3E2 /* dpScoreSceneBodyBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneBodyBase.cpp; sourceTree = "<group>"; };
 		D2619F371A6523C3002EF3E2 /* dpScoreSceneBodyBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyBase.h; sourceTree = "<group>"; };
+		D26CA8191A6F5E370050BB3D /* dpScoreUniqueStack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreUniqueStack.cpp; sourceTree = "<group>"; };
+		D26CA81A1A6F5E370050BB3D /* dpScoreUniqueStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreUniqueStack.h; sourceTree = "<group>"; };
 		D27F2E4B1A67624400913B14 /* dpScoreSceneDataWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneDataWave.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D27F2E4C1A67624400913B14 /* dpScoreSceneDataWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataWave.h; sourceTree = "<group>"; };
 		D27F2E4E1A67625B00913B14 /* dpScoreSceneDataCircle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneDataCircle.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -913,6 +916,8 @@
 				D2FE53C41A6D43EE00B01E98 /* dpScoreAnalyzeMean.h */,
 				D20125E91A6E4003000246B8 /* dpScoreAnalyzePixelate.cpp */,
 				D20125EA1A6E4003000246B8 /* dpScoreAnalyzePixelate.h */,
+				D26CA8191A6F5E370050BB3D /* dpScoreUniqueStack.cpp */,
+				D26CA81A1A6F5E370050BB3D /* dpScoreUniqueStack.h */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -1397,6 +1402,7 @@
 				D29034171A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.cpp in Sources */,
 				D20125EB1A6E4003000246B8 /* dpScoreAnalyzePixelate.cpp in Sources */,
 				D228B37D1A5FC2D8005F0404 /* ofxMotionerUtils.cpp in Sources */,
+				D26CA81B1A6F5E370050BB3D /* dpScoreUniqueStack.cpp in Sources */,
 				D21D0BA11A4C046000CC3598 /* ofxUINumberDialer.cpp in Sources */,
 				D24C21C21A49653D009D0796 /* OscPrintReceivedElements.cpp in Sources */,
 				D21D0B9A1A4C046000CC3598 /* ofxUILabel.cpp in Sources */,
