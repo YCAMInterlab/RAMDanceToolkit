@@ -70,6 +70,8 @@ void testApp::setup()
 
     sceneManager.addScene(dpHWorm.getPtr());
 	sceneManager.addScene(visWorm.getPtr());
+    
+    sceneManager.addScene(futureRE.getPtr());
 
 	sceneManager.addScene(testSceneA.getPtr());
 	sceneManager.addScene(testSceneB.getPtr());

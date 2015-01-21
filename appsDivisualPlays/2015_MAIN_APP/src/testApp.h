@@ -57,6 +57,9 @@
 #include "frozenIce.h"
 #include "magnetLooper.h"
 
+//onishi Scenes
+#include "FutureRE.h"
+
 
 class testApp : public ramBaseApp
 {
@@ -138,4 +141,8 @@ public:
     
     
     magnetLooper dpHWorm;
+    
+    // from RAM Dance Tool Kit
+    FutureRE futureRE;
+    
 };
