@@ -22,7 +22,7 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mGui.addToggle("SendOSC",		&mEnableSendOSC);
 	mGui.addTextInput("OSCAddress", "localhost")->setAutoClear(false);
 	mGui.addLabel("OSCSplit", "OSCSplit");
-	oscMatrixUI = mGui.addToggleMatrix("OSCSpliter", 1, 9);
+	oscMatrixUI = mGui.addToggleMatrix("OSCSpliter", 1, 10);
 	mGui.addTextInput("OSCPort", "10000")->setAutoClear(false);
 	mGui.addToggle("ContourFinder",		&mEnableContourFinder);
 	mGui.addToggle("OptFlow",			&mEnableOptFlow);
