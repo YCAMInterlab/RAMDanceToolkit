@@ -29,6 +29,7 @@ public:
     void drawActor(const ramActor& actor);
     void example_drawDump();
     void guiEvent(ofxUIEventArgs &e);
+    void drawTwistGraph(int nodeID, ofColor color);
         
     virtual void onEnabled();
     virtual void onDisabled();
@@ -37,11 +38,18 @@ private:
     
     float distanceThreshold;
     bool bOn[NMAGNETS];
+    bool bUseNode[NMAGNETS];
     bool bInversed[NMAGNETS];
+
+    float twistVal[NMAGNETS];
+
     bool bTestMode = true;
     bool bEachMode = false;
     bool bModeTwist = false;
     bool bHideNodeView;
+    
+    float twistThresholdPositive;
+    float twistThresholdNegative;
     
     float startTime;
     bool bFirstInverseTimeDone;
