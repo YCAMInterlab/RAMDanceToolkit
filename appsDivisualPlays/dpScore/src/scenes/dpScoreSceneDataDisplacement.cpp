@@ -117,7 +117,7 @@ void SceneDataDisplacement::update(ofxEventMessage& m)
     if (m.getAddress() == kOscAddrCameraUnitVectorTotal) {
         const float t{ofGetElapsedTimef()-mEnterTime};
         const float r{2.f};
-        const float s{2.f};
+        const float s{1.5};
         const float sx{::fabsf(ofClamp(m.getArgAsFloat(0), -r, r) * s)};
         const float sy{::fabsf(ofClamp(m.getArgAsFloat(1), -r, r) * s)};
         updateShader(t, sx, sy);
@@ -140,17 +140,20 @@ void SceneDataDisplacement::draw()
 {
     mShader.begin();
     mCam.begin();
-    ofRotateX(50.f);
+    ofRotateX(30.f);
     ofRotateY(15.f);
     ofRotateZ(-20.f);
+    
+    ofRotateY(ofGetElapsedTimef() * 15.f);
+    
     ofNoFill();
     ofSetLineWidth(1.5f);
     ofSetSphereResolution(50);
     ofSetColor(ofColor::white, 100);
     mSphereMesh.drawWireframe();
-    //glPointSize(2.f);
-    //ofSetColor(ofColor::white, 128);
-    //mSphereMesh.drawVertices();
+    glPointSize(4.f);
+    ofSetColor(ofColor::white, 128);
+    mSphereMesh.drawVertices();
     mCam.end();
     mShader.end();
 }

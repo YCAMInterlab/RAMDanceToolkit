@@ -391,7 +391,7 @@ void SceneCorrelation::enter()
     for (int i=0; i<kNumDancers; i++) {
         auto* daner = new NodeDancer(this);
         ofVec3f p;
-        p.x = -dist * 2.f;
+        p.x = -dist * 1.5f;
         p.y = getLineUped(3000.f, i, kNumDancers);
         daner->setPosition(p);
         mNodes.insert(NodePair(kKeyDancer, daner));
@@ -400,7 +400,7 @@ void SceneCorrelation::enter()
     for (int i=0; i<kNumRDTK; i++) {
         auto* rdtk = new NodeRDTK(this);
         ofVec3f p;
-        p.x = -dist;
+        p.x = -dist * 0.5f;
         p.y = getLineUped(2000.f, i, kNumRDTK);
         rdtk->setPosition(p);
         mNodes.insert(NodePair(kKeyRDTK, rdtk));
@@ -422,11 +422,12 @@ void SceneCorrelation::enter()
     for (int i=0; i<sceneNames.size(); i++) {
         auto* hakoniwa = new NodeHakoniwa(this);
         ofVec3f p;
-        p.x = ofRandom(-1.f, 1.f);
-        p.y = ofRandom(-1.f, 1.f);
-        p.z = ofRandom(-1.f, 1.f);
-        p.normalize();
-        p *= dist;
+        float t{i/(float)sceneNames.size()*2.f - 1.f};
+        t *= PI * 0.8f;
+        p.x = ::cos(t);
+        p.y = ::sin(t);
+        p.z = ofRandom(-0.35f, 0.35f);
+        p *= dist * ofRandom(0.7f, 1.f);
         
         hakoniwa->setPosition(p);
         mNodes.insert(NodePair(kKeyHakoniwa, hakoniwa));
@@ -460,10 +461,11 @@ void SceneCorrelation::enter()
             default: output = new NodeHakoVis(this); break;
         }
         ofVec3f p;
-        p.x = ofRandom(-1.f, 1.f);
-        p.y = ofRandom(-1.f, 1.f);
-        p.z = ofRandom(-1.f, 1.f);
-        p.normalize();
+        float t{i/(float)kNumOutput*2.f - 1.f};
+        t *= PI * 0.8f;
+        p.x = ::cos(t);
+        p.y = ::sin(t);
+        p.z = 0.f;
         p *= dist;
         p.x += dist * 3.f;
         

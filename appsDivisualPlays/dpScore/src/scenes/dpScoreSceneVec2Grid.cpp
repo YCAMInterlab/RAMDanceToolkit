@@ -44,6 +44,8 @@ void SceneVec2Grid::enter()
     mGridVbo.setVertexData(&mGridVertices.at(0),
                            mGridVertices.size(),
                            GL_DYNAMIC_DRAW);
+    
+    mEnterTime = ofGetElapsedTimef();
 }
 
 void SceneVec2Grid::exit()
@@ -73,10 +75,21 @@ void SceneVec2Grid::draw()
 {    
     mCam.begin();
     ofPushMatrix();
-    ofTranslate(-ofGetWidth()*0.7f, -150.f, 0.f);
-    ofRotateX(-30.f);
-    ofRotateY(15.f);
-    ofRotateZ(25.f);
+    const float t{::fmodf(ofGetElapsedTimef() - mEnterTime, 36.f)};
+    
+    if (t < 12.f) {
+        ofTranslate(-ofGetWidth()*0.7f, -150.f, 0.f);
+        ofRotateX(-30.f);
+        ofRotateY(15.f);
+        ofRotateZ(25.f);
+    }
+    else if (t < 24.f) {
+        ofTranslate(-ofGetWidth()*0.7f, -100.f, -100.f);
+        ofRotateX(90.f);
+    }
+    else {
+        ofTranslate(-ofGetWidth()*0.7f, -100.f, -100.f);
+    }
     
     ofPushMatrix();
     ofTranslate(mGridW, 0.f);
