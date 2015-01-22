@@ -11,13 +11,19 @@
 	    <scene name="dpVisStage"/>
 	    <scene name="dpVisIce"/>
 	    <scene name="FutureRE"/>
+        <scene name="dpVisPLink_Laser"/>
+        <scene name="Line"/>
+        <scene name="Four Points"/>
+        <scene name="distanceMetaball"/>
 	</phase>
 
 	<nocam>
-		<scene name="dpHWorm"/>
 		<scene name="FutureRE"/>
 		<scene name="dpVisTheta"/>
 		<scene name="dpHGearMove"/>
+        <scene name="Line"/>
+        <scene name="Four Points"/>
+        <scene name="distanceMetaball"/>
 	</nocam>
 </rdtk>
 
@@ -25,26 +31,60 @@
 	<complexity>
 		 <scene name="dp::score::SceneVec2SimpleGraph"/>
 		 <scene name="dp::score::SceneVec2Plotter"/>
-		 <scene name="dp::score::SceneDataText"/>
-		 <scene name="dp::score::SceneDataSlider"/>
 		 <scene name="dp::score::SceneBodyScan"/>
 		 <scene name="dp::score::SceneBodyPatterns"/>
+         <scene name="dp::score::SceneDataText"/>
 	</complexity>
 
 	<complexity>
 		<scene name="dp::score::SceneVec2Clocks"/>
 		<scene name="dp::score::SceneVec2Grid"/>
 		<scene name="dp::score::SceneDataCircle"/>
-		<scene name="dp::score::SceneDataCircle3D"/>
-		<scene name="dp::score::SceneBodyFlow"/>
+        <scene name="dp::score::SceneDataSphere"/>
+        <scene name="dp::score::SceneBodyFlow"/>
 	</complexity>
 
 	<complexity>
 		 <scene name="dp::score::SceneDataDisplacement"/>
-		 <scene name="dp::score::SceneDataSphere"/>
 		 <scene name="dp::score::SceneDataWave"/>
 		 <scene name="dp::score::SceneBodyGlobe"/>
+         <scene name="dp::score::SceneBodyGlobe"/>
 		 <scene name="dp::score::SceneBodyBoids"/>
 	</complexity>
+    
+    <body>
+        <scene name="dp::score::SceneBodyScan"/>
+        <scene name="dp::score::SceneBodyPatterns"/>
+        <scene name="dp::score::SceneBodyGlobe"/>
+        <scene name="dp::score::SceneBodyBoids"/>
+        <scene name="dp::score::SceneBodyFlow"/>
+    </body>
 </score>
 
+<!--
+
+ dp::score::SceneVec2SimpleGraph
+ dp::score::SceneVec2Plotter
+ dp::score::SceneBodyScan
+ dp::score::SceneBodyPatterns
+ 
+ dp::score::SceneVec2Clocks
+ dp::score::SceneVec2Grid
+ dp::score::SceneDataCircle
+ dp::score::SceneDataSphere
+ 
+ dp::score::SceneDataDisplacement
+ dp::score::SceneDataWave
+ dp::score::SceneBodyGlobe
+ dp::score::SceneBodyBoids
+ 
+ dp::score::SceneDataScroll
+ dp::score::SceneDataCircle3D
+ dp::score::SceneDataBarcode
+ dp::score::SceneDataText
+ dp::score::SceneDataSlider
+ dp::score::SceneBodyFlow
+ dp::score::SceneBodyLines
+ 
+
+-->
