@@ -208,7 +208,7 @@ private:
     
     ramOscReceiveTag mReceiver;
     
-    float mScale = 100.0;
+    float mScale = 300.0;
     
     ofPoint mCurrentVec;
 };

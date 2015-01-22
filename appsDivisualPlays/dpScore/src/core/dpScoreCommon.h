@@ -101,6 +101,8 @@ ofVec3f randVec3f();
 ofVec3f project(const ofVec3f& obj);
 ofVec3f unproject(const ofVec2f& screen);
 
+void billboard();
+
 template<class SceneClass>
 void notifyChangeScene()
 {

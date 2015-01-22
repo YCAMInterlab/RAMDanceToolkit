@@ -107,7 +107,6 @@
 		920BA3721A677FBB00E4A227 /* dpHakoVisStageBlob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisStageBlob.h; sourceTree = "<group>"; };
 		920BA3731A67C8E800E4A227 /* dp3DDanceMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dp3DDanceMap.h; sourceTree = "<group>"; };
 		920BA3741A67C8E800E4A227 /* dpHakoniwaStruggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaStruggle.h; sourceTree = "<group>"; };
-		920BA3751A67C8E800E4A227 /* dpHakoVisServoPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisServoPendulum.h; sourceTree = "<group>"; };
 		920BA3761A67C8E800E4A227 /* dpHakoVisVecLineCircle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisVecLineCircle.h; sourceTree = "<group>"; };
 		920BA3771A67C96B00E4A227 /* dpHakoVisStruggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisStruggle.h; sourceTree = "<group>"; };
 		920BA3781A67C99000E4A227 /* dpHakoVisSandStorm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisSandStorm.h; sourceTree = "<group>"; };
@@ -257,7 +256,6 @@
 				920BA3771A67C96B00E4A227 /* dpHakoVisStruggle.h */,
 				920BA3731A67C8E800E4A227 /* dp3DDanceMap.h */,
 				920BA3781A67C99000E4A227 /* dpHakoVisSandStorm.h */,
-				920BA3751A67C8E800E4A227 /* dpHakoVisServoPendulum.h */,
 				920BA3761A67C8E800E4A227 /* dpHakoVisVecLineCircle.h */,
 				920BA3721A677FBB00E4A227 /* dpHakoVisStageBlob.h */,
 				92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */,

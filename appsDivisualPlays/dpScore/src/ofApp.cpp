@@ -26,6 +26,8 @@
 #include "dpScoreSceneBodyBoids.h"
 #include "dpScoreSceneBodyRect.h"
 #include "dpScoreSceneBodyBox.h"
+
+#include "dpScoreSceneCorrelation.h"
 #endif
 
 #include <algorithm>
@@ -118,6 +120,8 @@ void ofApp::setup()
     auto bodyGlobe = SceneBase::Ptr(new SceneBodyGlobe());
     auto bodyLines = SceneBase::Ptr(new SceneBodyLines());
     
+    auto correlation = SceneBase::Ptr(new SceneCorrelation());
+    
     mSceneManager.add(black);
     
     mSceneManager.add(vec2Simple);
@@ -146,6 +150,8 @@ void ofApp::setup()
     
     mSceneManager.add(bodyBoids);
     
+    mSceneManager.add(correlation);
+    
     
     // make another instance for existing class
     //auto vec2Simple2 = SceneBase::Ptr(new SceneVec2SimpleGraph());
@@ -157,7 +163,7 @@ void ofApp::setup()
     
     //mSceneManager.change(3);
     mSceneManager.change("black");
-    //mSceneManager.change<SceneDataSlider>();
+    mSceneManager.change<SceneCorrelation>();
     
     mSceneManager.getTabBar()->setVisible(false);
 #endif
