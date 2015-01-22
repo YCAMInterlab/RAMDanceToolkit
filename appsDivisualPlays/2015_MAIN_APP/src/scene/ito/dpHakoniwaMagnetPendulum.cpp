@@ -31,18 +31,29 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
     }
     
     ramGetGUI().addSlider("Distance Threshold", 2.0f, 200.0f, &distanceThreshold);
-    ramGetGUI().addToggle("RESPONSE MODE_MAG", &bEachMode);
+    ramGetGUI().addToggle("2EACH MODE", &bEachMode);
+
+    ramGetGUI().addSeparator();
     ramGetGUI().addToggle("TWIST MODE", &bModeTwist);
     
     for (int i = 0; i < NMAGNETS; i++){
-    
+        bUseNode[i] = true;
+        ramGetGUI().addToggle("USE NODE"+ofToString(i), &bUseNode[i]);
         bInversed[i] = true;
         bOn[i] = false;
+        twistVal[i] = 0;
     }
+    
+    ramGetGUI().addSlider("TWIST THRESHOLD_Positive", 0, 100, &twistThresholdPositive);
+    ramGetGUI().addSlider("TWIST THRESHOLD_Negative", 0, 100, &twistThresholdNegative);
+    
+    ramGetGUI().addLabel("twist mode assumes 2 nodes on each actors elbowLR");
     
     bTestMode = false;
     bEachMode = false;
     bModeTwist = false;
+    twistThresholdPositive = 50;
+    twistThresholdNegative = 50;
 
     distanceThreshold = 65;
     
@@ -105,10 +116,8 @@ void dpHakoniwaMagnetPendulum::guiEvent(ofxUIEventArgs &e) {
 }
 
 void dpHakoniwaMagnetPendulum::onEnabled(){
-    
     startTime = ofGetElapsedTimef();
     bFirstInverseTimeDone = false;
-
 }
 
 void dpHakoniwaMagnetPendulum::onDisabled(){
@@ -116,9 +125,7 @@ void dpHakoniwaMagnetPendulum::onDisabled(){
     for (int i = 0; i < NMAGNETS; i++) {
         bOn[i] = false;
     }
-
     sendOsc();
-    
 }
 
 void dpHakoniwaMagnetPendulum::update() {
@@ -159,7 +166,7 @@ void dpHakoniwaMagnetPendulum::update() {
                 
                 if ((d1 < distanceThreshold && d1 > 0) ||
                     (d2 < distanceThreshold && d2 > 0) ||
-                    (d3 < distanceThreshold&& d3 > 0)) {
+                    (d3 < distanceThreshold && d3 > 0)) {
                     for (int i = 0; i < 6; i++) bOn[i] = true;
                 } else {
                     for (int i = 0; i < 6; i++) bOn[i] = false;
@@ -167,9 +174,37 @@ void dpHakoniwaMagnetPendulum::update() {
             }
         } else {   // twist mode
 
+            ramNode r[NMAGNETS];
+            float twistValOnActor[3];
+            bool bTwisted[NMAGNETS];
             
-        
-        
+            for (int i = 0; i < NMAGNETS; i++) {
+                r[i] = mMotionExtractor.getNodeAt(i);
+                twistVal[i] = twFinder.findTwist(r[i]);
+
+                if ((twistVal[i] > twistThresholdPositive) || (twistVal[i] < -twistThresholdNegative)) bTwisted[i] = true;
+                else bTwisted[i] = false;
+            }
+            
+            if (bTwisted[0] || bTwisted[1]) {
+                bOn[2] = true;
+            } else {
+                bOn[2] = false;
+            }
+
+            if (bTwisted[2] || bTwisted[3]) {
+                bOn[3] = true;
+            } else {
+                bOn[3] = false;
+            }
+
+            if (bTwisted[4] || bTwisted[5]) {
+                bOn[4] = true;
+                bOn[5] = true;
+            } else {
+                bOn[4] = false;
+                bOn[5] = false;
+            }
         }
     
         if (!bFirstInverseTimeDone){
@@ -195,7 +230,7 @@ void dpHakoniwaMagnetPendulum::update() {
 }
 
 void dpHakoniwaMagnetPendulum::drawActor(const ramActor &actor){
-    ramDrawBasicActor(actor);
+//    ramDrawBasicActor(actor);
 }
 
 void dpHakoniwaMagnetPendulum::draw(){
@@ -205,7 +240,19 @@ void dpHakoniwaMagnetPendulum::draw(){
     mMotionExtractor.draw();
     ramEndCamera();
     
-    if (bHideNodeView) example_drawDump();
+    if (bModeTwist) {
+        ofPushMatrix();
+        ofTranslate(1200, -100);
+        for (int i = 0; i < NMAGNETS; i++){
+            ofTranslate(0, 200);
+            ofPushMatrix();
+            drawTwistGraph(i, ofColor::red);
+            ofPopMatrix();
+        }
+        ofPopMatrix();
+    }
+    
+    if (!bHideNodeView) example_drawDump();
     
 }
 
@@ -232,7 +279,7 @@ void dpHakoniwaMagnetPendulum::example_drawDump(){
         info += "Speed :" + ofToString(mMotionExtractor.getVelocitySpeedAt(i)) + "\n";
         
         ofSetColor(100);
-        ofRect(10, 45, mMotionExtractor.getVelocitySpeedAt(i)*10.0, 15);
+        ofRect(10, 45, mMotionExtractor.getVelocitySpeedAt(i) * 10.0, 15);
         
         ofSetColor(255);
         ofDrawBitmapString(info, 10, 15);
@@ -242,3 +289,35 @@ void dpHakoniwaMagnetPendulum::example_drawDump(){
     
     ofPopMatrix();
 }
+
+void dpHakoniwaMagnetPendulum::drawTwistGraph(int nodeID, ofColor color){
+
+    ofSetColor(255);
+    ofLine(0,0, 100,0);
+    ofNoFill();
+    ofCircle(0, 0, 100);
+    
+    ofPushMatrix();
+    ofRotate(twistThresholdNegative, 0, 0, 1);
+    ofSetColor(ofColor::blue);
+    ofLine(0,0,100,0);
+    ofPopMatrix();
+
+    ofPushMatrix();
+    ofRotate(-twistThresholdPositive, 0, 0, 1);
+    ofSetColor(ofColor::yellow);
+    ofLine(0,0,100,0);
+    ofPopMatrix();
+
+    ofPushMatrix();
+    ofRotate(-twistVal[nodeID], 0, 0, 1);
+    ofSetColor(color);
+    ofLine(0,0,100,0);
+    ofPopMatrix();
+    
+    ofSetColor(ofColor::white);
+    ofDrawBitmapString(ofToString(twistVal[nodeID]), 80,80);
+
+
+}
+

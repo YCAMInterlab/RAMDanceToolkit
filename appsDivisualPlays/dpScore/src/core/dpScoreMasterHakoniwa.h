@@ -47,6 +47,8 @@ public:
     
     void guiEvent(ofxUIEventArgs& e);
     
+    void doSomething(int rand);
+    
     enum class AnalyzeType {
         Mean = 0,
         Pixelate,

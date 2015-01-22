@@ -11,6 +11,7 @@
 	    <scene name="dpVisStage"/>
 	    <scene name="dpVisIce"/>
 	    <scene name="FutureRE"/>
+        <scene name="Future"/>
         <scene name="dpVisPLink_Laser"/>
         <scene name="Line"/>
         <scene name="Four Points"/>
@@ -19,6 +20,7 @@
 
 	<nocam>
 		<scene name="FutureRE"/>
+        <scene name="Future"/>
 		<scene name="dpVisTheta"/>
 		<scene name="dpHGearMove"/>
         <scene name="Line"/>
@@ -48,8 +50,8 @@
 		 <scene name="dp::score::SceneDataDisplacement"/>
 		 <scene name="dp::score::SceneDataWave"/>
 		 <scene name="dp::score::SceneBodyGlobe"/>
-         <scene name="dp::score::SceneBodyGlobe"/>
 		 <scene name="dp::score::SceneBodyBoids"/>
+         <scene name="dp::score::SceneCorrelation"/>
 	</complexity>
     
     <body>
@@ -58,11 +60,12 @@
         <scene name="dp::score::SceneBodyGlobe"/>
         <scene name="dp::score::SceneBodyBoids"/>
         <scene name="dp::score::SceneBodyFlow"/>
+        <scene name="dp::score::SceneCorrelation"/>
     </body>
 </score>
 
 <!--
-
+SceneCorrelation
  dp::score::SceneVec2SimpleGraph
  dp::score::SceneVec2Plotter
  dp::score::SceneBodyScan

@@ -279,6 +279,17 @@ ofVec3f project(const ofVec3f& obj)
     
     return ofVec3f(winX, viewport[3] - winY, winZ);
 }
+
+void billboard()
+{
+    GLdouble m[16];
+    
+    glGetDoublev(GL_MODELVIEW_MATRIX, m);
+    m[0] = m[5] = m[10] = 1.0;
+    m[1] = m[2] = m[4] = m[6] = m[8] = m[9] = 0.0;
+    
+    glLoadMatrixd(m);
+}
  
 namespace color {
     const ofColor kMain             = ofColor(255, 50, 150);
