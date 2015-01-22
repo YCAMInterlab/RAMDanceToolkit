@@ -58,7 +58,7 @@ void dpTryTwistChecker::draw(){
     float f1 = twFinder.findTwist(n1);
     ofDrawBitmapString(ofToString(f1), 800,500);
     
-    if (bHideNodeView) example_drawDump();
+//    if (bHideNodeView) example_drawDump();
     
 }
 

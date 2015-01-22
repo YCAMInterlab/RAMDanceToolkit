@@ -1,21 +1,27 @@
 //
-//  dpHakoVisStageCircle.h
+//  dpHakoVisStageBlob.h
 //  RAMDanceToolkit
 //
 //  Created by kezzardrix2 on 2015/01/15.
 //
 //
 
-#ifndef RAMDanceToolkit_dpHakoVisStageCircle_h
-#define RAMDanceToolkit_dpHakoVisStageCircle_h
+#ifndef RAMDanceToolkit_dpHakoVisstageBlob_h
+#define RAMDanceToolkit_dpHakoVisstageBlob_h
 
-class dpHakoVisStageCircle : public ramBaseScene{
+class dpHakoVisStageBlob : public ramBaseScene{
 public:
     
-    class StageCircle{
+    class stageBlob{
         
         static const int PTS_MAX = 20;
-        vector<KezSlidePoint>mPts;
+        
+        struct BlobPt{
+            ofPoint circlePt;
+            KezSlidePoint pt;
+        };
+        
+        vector<BlobPt>mPts;
         
         private:
             KezSlidePoint mPos;
@@ -30,10 +36,16 @@ public:
         
         public:
         
-            StageCircle(){
+            stageBlob(){
                 for(int i = 0; i < PTS_MAX; i++){
-                    mPts.push_back(KezSlidePoint());
-                    mPts.back().speed = ofRandom(0.05,0.333);
+                    mPts.push_back(BlobPt());
+                    
+                    float rad = ofRandom(20,50);
+                    float theta = ofRandom(0,TWO_PI);
+                    float x = cos(theta) * rad;//mRad.val * 0.5;
+                    float y = sin(theta) * rad;//mRad.val * 0.5;
+                    mPts.back().circlePt.set(x,y);
+                    mPts.back().pt.speed = ofRandom(0.05,0.333);
                 }
             }
     
@@ -41,7 +53,8 @@ public:
                 mPos.imSet(pt);
                 mLife = 0;
                 for(auto &v:mPts){
-                    v.imSet(pt);
+                    
+                    v.pt.imSet(pt + v.circlePt);
                 }
             }
         
@@ -50,7 +63,7 @@ public:
                 mLife = 0;
                 
                 for(auto &v:mPts){
-                    v.set(pt);
+                    v.pt.set(pt + v.circlePt);
                 }
             }
         
@@ -69,10 +82,10 @@ public:
                 
                 for(auto &v:mPts){
                     float val = 6.0;
-                    v += ofPoint(ofRandom(-val,val),
+                    v.pt += ofPoint(ofRandom(-val,val),
                                  ofRandom(-val,val),
                                  ofRandom(-val,val));
-                    v.update();
+                    v.pt.update();
                 }
             }
         
@@ -93,12 +106,12 @@ public:
                     ofSetRectMode(OF_RECTMODE_CENTER);
                     
                     for(auto &v:mPts){
-                        img.draw(v.x,v.y,mRad.val,mRad.val);
+                        img.draw(v.pt.x,v.pt.y,mRad.val,mRad.val);
                     }
                     
                     img.draw(mPos.x,mPos.y,mRad.val,mRad.val);
                     ofSetColor(255,255,255);
-                    img.draw(mPos.x,mPos.y,10,10);
+                    img.draw(mPos.x,mPos.y,30,30);
                 
                     ofPopStyle();
                 }
@@ -132,8 +145,7 @@ public:
                     ofPoint pos((m.getArgAsFloat(i+1) + size.x * 0.5) * SINGLE_SCREEN_HEIGHT + (SINGLE_SCREEN_WIDTH - SINGLE_SCREEN_HEIGHT) * 0.5,
                                 (m.getArgAsFloat(i+2) + size.y * 0.5) * SINGLE_SCREEN_HEIGHT);
                     
-                    
-                    
+                
                     if(mCircles.find(label) == mCircles.end()){
                         
                         mCircles[label].init(pos);
@@ -144,7 +156,7 @@ public:
                         
                     }
                     
-                    size *= 300.0;
+                    size *= 1000.0;
                     mCircles[label].setRad(fmaxf(size.x,size.y));
                 }
             }
@@ -155,7 +167,7 @@ public:
         
         receiveOsc();
         
-        map<int, StageCircle>::iterator it = mCircles.begin();
+        map<int, stageBlob>::iterator it = mCircles.begin();
         while (it != mCircles.end()) {
             
             it->second.update();
@@ -181,6 +193,7 @@ public:
             }
         }
         
+        ofSetLineWidth(3);
         if(tmp.empty() == false){
             ofSetColor(255,255,255);
             glBegin(GL_LINE_LOOP);
@@ -194,7 +207,7 @@ public:
         
     }
 private:
-    map<int,StageCircle>mCircles;
+    map<int,stageBlob>mCircles;
     ramOscReceiveTag mReceiver;
     
     ofImage mTex;

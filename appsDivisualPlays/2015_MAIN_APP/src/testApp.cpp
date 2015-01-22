@@ -77,6 +77,7 @@ void testApp::setup()
 
     sceneManager.addScene(line.getPtr());
 	sceneManager.addScene(fourPoints.getPtr());
+    sceneManager.addScene(future.getPtr());
     
 	sceneManager.addScene(testSceneA.getPtr());
 	sceneManager.addScene(testSceneB.getPtr());

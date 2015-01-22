@@ -36,6 +36,10 @@ public:
 	ofxUICanvasPlus* gui;
 	ofxUITextInput* targScene;
 	ofxUITextInput* uiName;
+	ofxUIRadio* sceneRadio;
+	
+	ofxUICanvas* presetGui;
+	ofxUIRadio* actPresetRadio;
 	
 	float mUIRemote_float;
 	float mUIRemote_fOrder;
@@ -50,9 +54,18 @@ public:
 	bool mSignal_Enable;
 	bool mSignal_DispA;
 	bool mSignal_DispB;
+	bool mRemotePreset;
+	
+	int getterDelay;
+	void getExtractor();
+	void setExtractor();
 
 	vector<oscPreview*> previews;
 protected:
+	vector<bool>	enabled;
+	vector<string> actorPreset;
+	
+	vector<string> presetName;
 	vector<string> scenes;
 	vector<string> scenes_pair;
 	ramMotionExtractor	mex;

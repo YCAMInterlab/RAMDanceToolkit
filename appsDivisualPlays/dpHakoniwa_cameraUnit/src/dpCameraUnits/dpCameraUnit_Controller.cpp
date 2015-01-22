@@ -43,11 +43,13 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 	gui.addTextInput("OSC_F", "192.168.20.10");
 
 	gui.addLabel("Dev_Sheep");
-	gui.addTextInput("OSC_G", "192.168.20.26");
+	gui.addTextInput("OSC_G", "192.168.20.36");
 	gui.addLabel("Dev_Kez");
 	gui.addTextInput("OSC_H", "192.168.20.23");
-	gui.addLabel("Dev_Onishi");
-	gui.addTextInput("OSC_I", "192.168.20.30");
+    gui.addLabel("Dev_Onishi");
+    gui.addTextInput("OSC_I", "192.168.20.7");
+    gui.addLabel("Dev_Onishi");
+    gui.addTextInput("OSC_J", "192.168.20.30");
 	gui.addSpacer();
 	gui.addLabel("Preset Settings");
 	gui.addToggle("SettingMode", &mbMakeSettings);
@@ -237,7 +239,7 @@ void dpCameraUnit_Controller::guiEvent(ofxUIEventArgs &e){
 void dpCameraUnit_Controller::refleshAddressList(){
 	oscSendList.clear();
 
-	for (int i = 0;i < 9;i++){
+	for (int i = 0;i < 10;i++){
 		string wname = "OSC_"+ofToString(char(0x41+i));
 		string add = ((ofxUITextInput*)
 					  (gui.getWidget(wname)))->getTextString();
