@@ -118,6 +118,7 @@ public:
 
 	void sendCurrentHakoniwa();
 
+    bool totalManage;
 	bool isSlave;
 
 	dpCameraUnit_cvFX* FXPtr;

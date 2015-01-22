@@ -104,10 +104,9 @@
 		5E8C1FAC1A6D0BB1007F6144 /* magnetLooper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = magnetLooper.cpp; sourceTree = "<group>"; };
 		5E8C1FAD1A6D0BB1007F6144 /* magnetLooper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = magnetLooper.h; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
-		920BA3721A677FBB00E4A227 /* dpHakoVisStageCircle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisStageCircle.h; sourceTree = "<group>"; };
+		920BA3721A677FBB00E4A227 /* dpHakoVisStageBlob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisStageBlob.h; sourceTree = "<group>"; };
 		920BA3731A67C8E800E4A227 /* dp3DDanceMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dp3DDanceMap.h; sourceTree = "<group>"; };
 		920BA3741A67C8E800E4A227 /* dpHakoniwaStruggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaStruggle.h; sourceTree = "<group>"; };
-		920BA3751A67C8E800E4A227 /* dpHakoVisServoPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisServoPendulum.h; sourceTree = "<group>"; };
 		920BA3761A67C8E800E4A227 /* dpHakoVisVecLineCircle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisVecLineCircle.h; sourceTree = "<group>"; };
 		920BA3771A67C96B00E4A227 /* dpHakoVisStruggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisStruggle.h; sourceTree = "<group>"; };
 		920BA3781A67C99000E4A227 /* dpHakoVisSandStorm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisSandStorm.h; sourceTree = "<group>"; };
@@ -127,6 +126,7 @@
 		929360E81A6FBCCE00F4C4BD /* GeometryHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeometryHelpers.h; sourceTree = "<group>"; };
 		929360E91A6FBCCE00F4C4BD /* SphereMesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SphereMesh.h; sourceTree = "<group>"; };
 		929360EA1A6FBCCE00F4C4BD /* ThreePoints.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreePoints.h; sourceTree = "<group>"; };
+		929360EC1A70A98B00F4C4BD /* Future.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Future.h; sourceTree = "<group>"; };
 		92CB5B0D1A666F1F00257334 /* dpHakoniwaServoPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaServoPendulum.h; sourceTree = "<group>"; };
 		92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisBug.h; sourceTree = "<group>"; };
 		92CB5B0F1A666F1F00257334 /* dpHakoVisWorm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisWorm.h; sourceTree = "<group>"; };
@@ -256,9 +256,8 @@
 				920BA3771A67C96B00E4A227 /* dpHakoVisStruggle.h */,
 				920BA3731A67C8E800E4A227 /* dp3DDanceMap.h */,
 				920BA3781A67C99000E4A227 /* dpHakoVisSandStorm.h */,
-				920BA3751A67C8E800E4A227 /* dpHakoVisServoPendulum.h */,
 				920BA3761A67C8E800E4A227 /* dpHakoVisVecLineCircle.h */,
-				920BA3721A677FBB00E4A227 /* dpHakoVisStageCircle.h */,
+				920BA3721A677FBB00E4A227 /* dpHakoVisStageBlob.h */,
 				92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */,
 				92CB5B0F1A666F1F00257334 /* dpHakoVisWorm.h */,
 				92CB5B101A666F1F00257334 /* dpHakoVisServoPendulum.h */,
@@ -316,6 +315,7 @@
 		929360E21A6FBCCE00F4C4BD /* RDTK_Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				929360EB1A70A98B00F4C4BD /* Future */,
 				929360E31A6FBCCE00F4C4BD /* FourPoints */,
 				929360E51A6FBCCE00F4C4BD /* Line */,
 				929360E71A6FBCCE00F4C4BD /* ThreePoints */,
@@ -347,6 +347,14 @@
 				929360EA1A6FBCCE00F4C4BD /* ThreePoints.h */,
 			);
 			path = ThreePoints;
+			sourceTree = "<group>";
+		};
+		929360EB1A70A98B00F4C4BD /* Future */ = {
+			isa = PBXGroup;
+			children = (
+				929360EC1A70A98B00F4C4BD /* Future.h */,
+			);
+			path = Future;
 			sourceTree = "<group>";
 		};
 		92CB5B0C1A666F1F00257334 /* knd */ = {

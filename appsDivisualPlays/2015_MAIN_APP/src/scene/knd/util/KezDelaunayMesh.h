@@ -27,7 +27,6 @@ public:
         }
         setBitset();
         
-        mColor.set(dpColor::MAIN_COLOR);
     }
     
     void clear(){
@@ -135,7 +134,7 @@ public:
                     ofSetColor(255,mAlpha);
                     mDelaunay.draw();
                     
-                    ofSetColor(mColor.r,mColor.g,mColor.b,mAlpha);
+                    ofSetColor(dpColor::MAIN_COLOR,mAlpha);
                     mDelaunay.triangleMesh.drawVertices();
                 
                     if(isShowFaces)drawEachTriangle(mDelaunay.triangleMesh);
