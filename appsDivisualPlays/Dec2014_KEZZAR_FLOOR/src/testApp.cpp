@@ -53,6 +53,8 @@ void testApp::setup()
     sceneManager.addScene(mIceMap.getPtr());
     sceneManager.addScene(mSandStorm.getPtr());
     
+    ofHideCursor();
+    
 }
 
 //--------------------------------------------------------------
@@ -115,7 +117,13 @@ void testApp::onRigidExit(const ramRigidBody &rigid)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
+    if(key == 'f'){
+        ofToggleFullscreen();
+    }
     
+    if(key == ' '){
+        ofSetWindowPosition(0, 1280);
+    }
 }
 
 //--------------------------------------------------------------
