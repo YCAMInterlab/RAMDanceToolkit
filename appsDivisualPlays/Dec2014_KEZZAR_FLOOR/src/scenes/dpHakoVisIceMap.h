@@ -34,6 +34,8 @@ public:
         mGrid.setExtendThreshNum(mExtendThreshNum);
         
         mSceneNames[ICE] = "dpVisIce";
+        mSceneNames[TWO] = "dpVisTwo";
+        mSceneNames[FIVE] = "dpVisFive";
         
         five();
         
@@ -60,17 +62,15 @@ public:
                 
                 string sceneName = m.getAddress().substr(26);
         
-                isIce = false;
-                
                 for (int i = 0;i < mSceneNames.size();i++){
-                    if (sceneName == mSceneNames[ICE]){
+                    if (sceneName == mSceneNames[i]){
                         
-                        isIce = true;
+                        mSceneEnable[i] = m.getArgAsInt32(0);
                       
                     }
                 }
                 
-                if(isIce == true && mPreMode != ICE){
+                if(mSceneEnable[ICE] == true && mPreMode != ICE){
                     mPreMode = ICE;
                     
                     mDiv = 5;
@@ -80,7 +80,7 @@ public:
                     mGrid.setAllDraw(mTogAllDraw);
                 }
                 
-                if(isIce == false){
+                if(mSceneEnable[ICE] == false && mPreMode == ICE){
                     mPreMode = FIVE;
                     five();
                 }
@@ -100,7 +100,6 @@ public:
     }
     
     void update(){
-        if(ofGetKeyPressed())five();
         receiveOsc();
         ramSetViewPort(dpGetFirstScreenViewPort());
         mGrid.update();
@@ -158,6 +157,7 @@ private:
     
     bool isIce = false;
     int mPreMode = FIVE;
+    bitset<3> mSceneEnable;
     
 };
 
