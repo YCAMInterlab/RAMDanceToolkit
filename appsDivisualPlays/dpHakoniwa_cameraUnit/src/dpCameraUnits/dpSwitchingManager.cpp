@@ -133,14 +133,14 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 #pragma mark メタボール
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_METABALL;
-	hakoniwas.back()->CVPreset	= "";
+	hakoniwas.back()->CVPreset	= "distanceMetaball";
 	hakoniwas.back()->sourceCh	= 10;
 	hakoniwas.back()->sceneNames.push_back("V:distanceMetaball");
 
 #pragma mark ライン
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_LINE;
-	hakoniwas.back()->CVPreset	= "";
+	hakoniwas.back()->CVPreset	= "line";
 	hakoniwas.back()->sourceCh	= 10;
 	hakoniwas.back()->sceneNames.push_back("V:Line");
 

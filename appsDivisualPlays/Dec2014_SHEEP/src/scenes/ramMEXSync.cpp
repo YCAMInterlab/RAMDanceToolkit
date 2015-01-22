@@ -17,7 +17,33 @@ void ramMEXSync::setupControlPanel(){
 	gui = ramGetGUI().getCurrentUIContext();
 	targScene = gui->addTextInput("TargScene", "dpHPLink_Laser");
 	targScene->setAutoClear(false);
-
+	
+	actorPreset.push_back("Standard");
+	actorPreset.push_back("Solo");
+	actorPreset.push_back("Duo");
+	actorPreset.push_back("Trio");
+	actorPreset.push_back("Preset_A");
+	actorPreset.push_back("Preset_B");
+	actorPreset.push_back("Preset_C");
+	actorPreset.push_back("Preset_D");
+	actorPreset.push_back("Preset_E");
+	
+	presetName.push_back("ServoPendulum");
+	presetName.push_back("Stage");
+	presetName.push_back("Worm");
+	presetName.push_back("Ice");
+	presetName.push_back("Struggle");
+	presetName.push_back("SandStorm");
+	presetName.push_back("MagPendulum");
+	presetName.push_back("Theta");
+	presetName.push_back("Gear");
+	presetName.push_back("Tornado");
+	presetName.push_back("Plink_Laser");
+	presetName.push_back("Plink_Prism");
+	presetName.push_back("Plink_Oil");
+	presetName.push_back("distanceMetaball");
+	enabled.assign(presetName.size(), false);
+	
 	scenes.push_back("dpHServoPendulum");	scenes_pair.push_back("dpVisServoPendulum");
 	scenes.push_back("dpVisStage");			scenes_pair.push_back("");
 	scenes.push_back("dpHWorm");			scenes_pair.push_back("dpVisWorm");
@@ -31,9 +57,11 @@ void ramMEXSync::setupControlPanel(){
 	scenes.push_back("dpHPLink_Laser");		scenes_pair.push_back("dpVisPLink_Laser");
 	scenes.push_back("dpHPLink_Prism");		scenes_pair.push_back("dpVisPLink_Prism");
 	scenes.push_back("dpHPLink_Oil");		scenes_pair.push_back("dpVisPLink_Oil");
+	scenes.push_back("distanceMetaball");	scenes_pair.push_back("");
+	
 	
 	gui->addLabel("SceneSelect",OFX_UI_FONT_LARGE);
-	gui->addRadio("SceneSelector", scenes);
+	sceneRadio = gui->addRadio("SceneSelector", scenes);
 	gui->addSpacer();
 	gui->addLabel("SceneControl",OFX_UI_FONT_LARGE);
 	gui->addToggle("Enable", &mSignal_Enable);
@@ -55,27 +83,52 @@ void ramMEXSync::setupControlPanel(){
 	gui->addSlider("Order", 1.0, 1000.0, &mUIRemote_fOrder);
 	gui->addToggle("Remote:Toggle", &mUIRemote_toggle);
 	
-	presetGui.disableAppDrawCallback();
-	presetGui.disableMouseEventCallbacks();
-	presetGui.addButton("TEst", false);
+	presetGui = new ofxUICanvas();
+	presetGui->disableAppDrawCallback();
+	presetGui->disableMouseEventCallbacks();
 	
-	presetGui.autoSizeToFitWidgets();
-	presetGui.setPosition(240, 400);
-	presetGui.setup();
-	gui->addWidget(&presetGui);
+	actPresetRadio = presetGui->addRadio("actorPreset", actorPreset);
+	presetGui->addSpacer();
+	presetGui->addButton("saveActPreset", false);
+	presetGui->addToggle("RemotePreseting", &mRemotePreset);
+	presetGui->autoSizeToFitWidgets();
+	presetGui->setPosition(240, 400);
+	presetGui->setup();
+
+	gui->addWidget(presetGui);
 	gui->autoSizeToFitWidgets();
 	
 	mex.setupControlPanel(this);
 
 	ofAddListener(gui->newGUIEvent, this, &ramMEXSync::onPanelChanged);
+	ofAddListener(presetGui->newGUIEvent, this, &ramMEXSync::onPanelChanged);
 	
 	receiver.addAddress("/Debug/");
+	receiver.addAddress("/dp/cameraUnit/sceneState/");
 	ramOscManager::instance().addReceiverTag(&receiver);
 	
+	mRemotePreset = false;
+	getterDelay = 0;
 }
 
 void ramMEXSync::update(){
 
+	getterDelay++;
+	if (getterDelay == 40){
+		if (mRemotePreset){
+			
+			string sceneName = sceneRadio->getActiveName();
+			string presetName = actPresetRadio->getActiveName();
+			
+			mex.load("presentor/"+sceneName+"_"+presetName+".xml");
+			if (mex.getNumPort() > 0) setExtractor();
+			
+		}else{
+			actPresetRadio->activateToggle("");
+			getExtractor();
+		}
+	}
+	
 	mSignal_DispA = mSignal_DispA & mSignal_Enable;
 	mSignal_DispB = mSignal_DispB & mSignal_Enable;
 	
@@ -83,56 +136,81 @@ void ramMEXSync::update(){
 		
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
-		
-		int idx = -1;
-		for (int i = 0;i < previews.size();i++){
-			if (previews[i]->msg.getAddress() == m.getAddress()){
-				idx = i;
-				break;
-			}
-		}
-		
-		if (idx == -1){
-
-			oscPreview* pv = new oscPreview();
-			pv->msg = m;
-			pv->valueClamp.assign(pv->msg.getNumArgs(), 0.0);
-			pv->numValue.assign(pv->msg.getNumArgs(), 0.0);
-
-			for (int i = 0;i < m.getNumArgs();i++){
-				if (m.getArgType(i) == OFXOSC_TYPE_FLOAT)
-					pv->numValue[i] = m.getArgAsFloat(i);
-				else if (m.getArgType(i) == OFXOSC_TYPE_INT32)
-					pv->numValue[i] = m.getArgAsInt32(i);
-				else if (m.getArgType(i) == OFXOSC_TYPE_INT64)
-					pv->numValue[i] = m.getArgAsInt64(i);
+		cout << m.getAddress() << endl;
+		if (m.getAddress().substr(0,26) == "/dp/cameraUnit/sceneState/"){
+			
+			string sceneName = m.getAddress().substr(26);
+			int targId = -1;
+			for (int i = 0;i < presetName.size();i++){
+				if (presetName[i] == sceneName) targId = i;
 			}
 			
-			previews.push_back(pv);
-			
-			
-		}else{
-			
-			for (int i = 0;i < previews[idx]->msg.getNumArgs();i++){
-				float v;
-				if (m.getArgType(i) == OFXOSC_TYPE_FLOAT) v = m.getArgAsFloat(i);
-				else if (m.getArgType(i) == OFXOSC_TYPE_INT32) v = m.getArgAsInt32(i);
-				else if (m.getArgType(i) == OFXOSC_TYPE_INT64) v = m.getArgAsInt64(i);
-				else{
-					v = 0.0;
+			if (targId > -1){
+				
+				if (!enabled[targId] && m.getArgAsInt32(0) > 0){
+					ofxUIRadio* rd = (ofxUIRadio*)(gui->getWidget("SceneSelector"));
+					rd->activateToggle(scenes[targId]);
+					targScene->setTextString(rd->getActiveName());
+					getterDelay = 0;
 				}
-				previews[idx]->numValue[i] = v;
-				previews[idx]->valueClamp[i] = MAX(previews[idx]->valueClamp[i],v);
+				
+				enabled[targId] = m.getArgAsInt32(0);
+				
 			}
-			
-			previews[idx]->msg = m;
 			
 		}
 		
-		while (previews.size() > 8){
-			oscPreview* p = previews[0];
-			previews.erase(previews.begin());
-			delete p;
+		if (m.getAddress().substr(0,7) == "/Debug/"){
+			int idx = -1;
+			for (int i = 0;i < previews.size();i++){
+				if (previews[i]->msg.getAddress() == m.getAddress()){
+					idx = i;
+					break;
+				}
+			}
+			
+			if (idx == -1){
+				
+				oscPreview* pv = new oscPreview();
+				pv->msg = m;
+				pv->valueClamp.assign(pv->msg.getNumArgs(), 0.0);
+				pv->numValue.assign(pv->msg.getNumArgs(), 0.0);
+				
+				for (int i = 0;i < m.getNumArgs();i++){
+					if (m.getArgType(i) == OFXOSC_TYPE_FLOAT)
+						pv->numValue[i] = m.getArgAsFloat(i);
+					else if (m.getArgType(i) == OFXOSC_TYPE_INT32)
+						pv->numValue[i] = m.getArgAsInt32(i);
+					else if (m.getArgType(i) == OFXOSC_TYPE_INT64)
+						pv->numValue[i] = m.getArgAsInt64(i);
+				}
+				
+				previews.push_back(pv);
+				
+				
+			}else{
+				
+				for (int i = 0;i < previews[idx]->msg.getNumArgs();i++){
+					float v;
+					if (m.getArgType(i) == OFXOSC_TYPE_FLOAT) v = m.getArgAsFloat(i);
+					else if (m.getArgType(i) == OFXOSC_TYPE_INT32) v = m.getArgAsInt32(i);
+					else if (m.getArgType(i) == OFXOSC_TYPE_INT64) v = m.getArgAsInt64(i);
+					else{
+						v = 0.0;
+					}
+					previews[idx]->numValue[i] = v;
+					previews[idx]->valueClamp[i] = MAX(previews[idx]->valueClamp[i],v);
+				}
+				
+				previews[idx]->msg = m;
+				
+			}
+			
+			while (previews.size() > 8){
+				oscPreview* p = previews[0];
+				previews.erase(previews.begin());
+				delete p;
+			}
 		}
 	}
 	
@@ -263,49 +341,84 @@ void ramMEXSync::onPanelChanged(ofxUIEventArgs &e){
 	}
 	
 	if (w->getName() == "Sync" && w->getState() == OFX_UI_STATE_DOWN){
-		string addr = "/ram/MEX/"+targScene->getTextString();
 
-		for (int i = 0;i < 2;i++){
-			if (i == 0) sender.setup(ip_1, 10000);
-			if (i == 1) sender.setup(ip_2, 10000);
-
-			ofxOscMessage mCls;
-			mCls.setAddress(addr+"/clear");
-
-			sender.sendMessage(mCls);
-
-			for (int i = 0;i < mex.mMotionPort.size();i++){
-				ofxOscMessage mPsh;
-				mPsh.setAddress(addr+"/push");
-				mPsh.addIntArg(mex.mMotionPort[i]->mActorIndex);
-				mPsh.addIntArg(mex.mMotionPort[i]->mFinder.index);
-				sender.sendMessage(mPsh);
-			}
-
-			ofxOscMessage mLs;
-			mLs.setAddress(addr+"/actorList");
-			for (int i = 0;i < mex.actorList->getListItems().size();i++){
-				mLs.addStringArg(mex.actorList->getListItems()[i]->getName());
-			}
-			sender.sendMessage(mLs);
-		}
+		setExtractor();
 
 	}
 
 	if (w->getName() == "Get" && w->getState() == OFX_UI_STATE_DOWN){
 
-		for (int i = 0;i < 2;i++){
-
-			if (i == 0) sender.setup(ip_1, 10000);
-			if (i == 1) sender.setup(ip_2, 10000);
-
-			ofxOscMessage req;
-			req.setAddress("/ram/MEX/"+targScene->getTextString()+"/request");
-			req.addStringArg(getName());
-
-			sender.sendMessage(req);
-
-		}
-
+		getExtractor();
+		
 	}
+	
+	if (w->getName() == "actorPreset"){
+	
+		string sceneName = sceneRadio->getActiveName();
+		string presetName = actPresetRadio->getActiveName();
+		
+		mex.load("presentor/"+sceneName+"_"+presetName+".xml");
+	
+	}
+	
+	
+	if (w->getName() == "saveActPreset" && w->getState() == OFX_UI_STATE_DOWN){
+		
+		string sceneName = sceneRadio->getActiveName();
+		string presetName = actPresetRadio->getActiveName();
+		
+		ofDirectory::createDirectory("presentor");
+		mex.save("presentor/"+sceneName+"_"+presetName+".xml");
+		
+	}
+}
+
+void ramMEXSync::setExtractor(){
+
+	string addr = "/ram/MEX/"+targScene->getTextString();
+	
+	for (int i = 0;i < 2;i++){
+		if (i == 0) sender.setup(ip_1, 10000);
+		if (i == 1) sender.setup(ip_2, 10000);
+		
+		ofxOscMessage mCls;
+		mCls.setAddress(addr+"/clear");
+		
+		sender.sendMessage(mCls);
+		
+		for (int i = 0;i < mex.mMotionPort.size();i++){
+			ofxOscMessage mPsh;
+			mPsh.setAddress(addr+"/push");
+			mPsh.addIntArg(mex.mMotionPort[i]->mActorIndex);
+			mPsh.addIntArg(mex.mMotionPort[i]->mFinder.index);
+			sender.sendMessage(mPsh);
+		}
+		
+		ofxOscMessage mLs;
+		mLs.setAddress(addr+"/actorList");
+		for (int i = 0;i < mex.actorList->getListItems().size();i++){
+			mLs.addStringArg(mex.actorList->getListItems()[i]->getName());
+		}
+		sender.sendMessage(mLs);
+	}
+	
+}
+
+void ramMEXSync::getExtractor(){
+
+	mex.clearPorts();
+	
+	for (int i = 0;i < 2;i++){
+		
+		if (i == 0) sender.setup(ip_1, 10000);
+		if (i == 1) sender.setup(ip_2, 10000);
+		
+		ofxOscMessage req;
+		req.setAddress("/ram/MEX/"+targScene->getTextString()+"/request");
+		req.addStringArg(getName());
+		
+		sender.sendMessage(req);
+		
+	}
+	
 }
