@@ -70,7 +70,7 @@ void frozenIce::onEnabled(){
     //Speed Control
     dancerControl = true;
     fixationTime = 5000.0;
-    speedThreshold = 1.2;
+    speedThreshold = 0.7;
     
     //Distance Control
     distanceControl = false;
@@ -79,26 +79,28 @@ void frozenIce::onEnabled(){
     //High and Low Control
     HighandLowControl = false;
     HighandLowThreshold = 100.0;
+    
+    refleshState();
 }
 //==========================================================================
 
 
 //==========================================================================
 void frozenIce::onDisabled(){
-    fanStart = true;
-
-//    frozing = false;
-//    melting = true;
-    
-    frozing = true;
-    melting = false;
-
-    manualControl = true;
-    dancerControl = false;
-    distanceControl = false;
-    HighandLowControl = false;
-    
-    refleshState();
+//    fanStart = true;
+//
+////    frozing = false;
+////    melting = true;
+//    
+//    frozing = true;
+//    melting = false;
+//
+//    manualControl = true;
+//    dancerControl = false;
+//    distanceControl = false;
+//    HighandLowControl = false;
+//    
+//    refleshState();
 }
 //==========================================================================
 

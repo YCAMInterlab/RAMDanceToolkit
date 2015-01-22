@@ -105,13 +105,11 @@ public:
     string getName() const{return "dpVisMagPendulum";}
     
     void setupControlPanel(){
-        ramGetGUI().addSlider("scale",50,500,&mScale);
+        ramGetGUI().addSlider("scale",50,1000,&mScale);
     }
     void setup(){
         
         float offsetX = 530;
-        float offsetY = 410;
-        
         float space = 250;
         
         for(int j = 0; j < mDivY; j++){
@@ -208,7 +206,7 @@ private:
     
     ramOscReceiveTag mReceiver;
     
-    float mScale = 300.0;
+    float mScale = 500.0;
     
     ofPoint mCurrentVec;
 };
