@@ -27,6 +27,9 @@ public:
         }
         setBitset();
         
+        mColor = dpColor::MAIN_COLOR;
+        mColor.setSaturation(250);
+        
     }
     
     void clear(){
@@ -131,7 +134,7 @@ public:
                 ofRotateZ(mRot.z);
                 
                 if(mBlink.update()){
-                    ofSetColor(255,mAlpha);
+                    ofSetColor(200,mAlpha);
                     mDelaunay.draw();
                     
                     ofSetColor(dpColor::MAIN_COLOR,mAlpha);
@@ -142,11 +145,11 @@ public:
                 }
                 
                 if(mHasFinishedAddPt == false){
-                    ofSetColor(dpColor::MAIN_COLOR,mAlpha);
+                    ofSetColor(mColor,mAlpha);
                     ofDrawSphere(mHead,mSphereRad);
                     
-                    ofSetColor(255,255,255,mAlpha);
-                    ofLine(0,0,mHead.x,mHead.y);
+                  //  ofSetColor(255,255,255,mAlpha);
+                  //  ofLine(0,0,mHead.x,mHead.y);
                  
                 }
                 
@@ -220,7 +223,7 @@ private:
     float mScale = 1.0;
     float mAlphaReduc = 1.0;
     float mAlpha = 0;
-    float mSphereRad = 10.0;
+    float mSphereRad = 16.0;
     
     ofPoint mPrePt;
     ofPoint mHead;

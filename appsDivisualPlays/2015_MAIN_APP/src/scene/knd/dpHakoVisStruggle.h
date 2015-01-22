@@ -75,7 +75,7 @@ public:
     
     void draw(){
 
-        ofDisableDepthTest();
+       // ofDisableDepthTest();
         ofEnableBlendMode(OF_BLENDMODE_ADD);
         ofPushMatrix();
         ofTranslate(SINGLE_SCREEN_WIDTH * 0.5,SINGLE_SCREEN_HEIGHT * 0.5);
