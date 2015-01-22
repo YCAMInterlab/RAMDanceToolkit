@@ -68,13 +68,13 @@ void frozenIce::onEnabled(){
     manualControl = false;
     
     //Speed Control
-    dancerControl = true;
+    dancerControl = false;
     fixationTime = 5000.0;
     speedThreshold = 2.0;
     
     //Distance Control
-    distanceControl = false;
-    distanceThreshold = 200.0;
+    distanceControl = true;
+    distanceThreshold = 150.0;
     
     //High and Low Control
     HighandLowControl = false;
@@ -85,10 +85,10 @@ void frozenIce::onEnabled(){
 
 //==========================================================================
 void frozenIce::onDisabled(){
-    fanStart = false;
+    fanStart = true;
 
-    frozing = false;
-    melting = true;
+    frozing = true;
+    melting = false;
 
     manualControl = true;
     dancerControl = false;
@@ -127,10 +127,10 @@ void frozenIce::setupControlPanel(){
     gui->addToggle("Speed Control"		, &dancerControl);
     gui->addSlider("Speed Threshold", 0.0, 5.0, &speedThreshold);
     
-//    //Distance Control
-//    gui->addSpacer();
-//    gui->addToggle("Distance Control"		, &distanceControl);
-//    gui->addSlider("Distance Threshold", 0.0, 200.0, &distanceThreshold);
+    //Distance Control
+    gui->addSpacer();
+    gui->addToggle("Distance Control"		, &distanceControl);
+    gui->addSlider("Distance Threshold", 0.0, 200.0, &distanceThreshold);
     
     //High and Low Control
     gui->addSpacer();
