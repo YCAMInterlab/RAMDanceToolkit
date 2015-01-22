@@ -10,6 +10,7 @@
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		D20125EB1A6E4003000246B8 /* dpScoreAnalyzePixelate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20125E91A6E4003000246B8 /* dpScoreAnalyzePixelate.cpp */; };
 		D20125EC1A6E5A43000246B8 /* dpScoreAnalyzePixelate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20125E91A6E4003000246B8 /* dpScoreAnalyzePixelate.cpp */; };
+		D21C77201A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21C771E1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp */; };
 		D21D0B891A4C046000CC3598 /* ofxUI2DGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF51A4C046000CC3598 /* ofxUI2DGraph.cpp */; };
 		D21D0B8A1A4C046000CC3598 /* ofxUI2DPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF71A4C046000CC3598 /* ofxUI2DPad.cpp */; };
 		D21D0B8B1A4C046000CC3598 /* ofxUIBaseDraws.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF91A4C046000CC3598 /* ofxUIBaseDraws.cpp */; };
@@ -284,6 +285,8 @@
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		D20125E91A6E4003000246B8 /* dpScoreAnalyzePixelate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpScoreAnalyzePixelate.cpp; path = src/scenes/dpScoreAnalyzePixelate.cpp; sourceTree = SOURCE_ROOT; };
 		D20125EA1A6E4003000246B8 /* dpScoreAnalyzePixelate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpScoreAnalyzePixelate.h; path = src/scenes/dpScoreAnalyzePixelate.h; sourceTree = SOURCE_ROOT; };
+		D21C771E1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneCorrelation.cpp; sourceTree = "<group>"; };
+		D21C771F1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneCorrelation.h; sourceTree = "<group>"; };
 		D21D08821A4C045D00CC3598 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		D21D0AF41A4C046000CC3598 /* ofxUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI.h; sourceTree = "<group>"; };
 		D21D0AF51A4C046000CC3598 /* ofxUI2DGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUI2DGraph.cpp; sourceTree = "<group>"; };
@@ -925,6 +928,8 @@
 		D29034081A4D4ADE00577E04 /* scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D21C771E1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp */,
+				D21C771F1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.h */,
 				D2E891971A6B59F00047B75A /* master hakoniwa */,
 				D29B99111A63F023000115C5 /* boids */,
 				D29B990C1A63A22C000115C5 /* body */,
@@ -1379,6 +1384,7 @@
 				D21D0B991A4C046000CC3598 /* ofxUIImageToggle.cpp in Sources */,
 				D21D0BAA1A4C046000CC3598 /* ofxUISpectrum.cpp in Sources */,
 				D21D0BA81A4C046000CC3598 /* ofxUISortableList.cpp in Sources */,
+				D21C77201A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp in Sources */,
 				D21D0B901A4C046000CC3598 /* ofxUIDragableLabelButton.cpp in Sources */,
 				D2C4DE7D1A6286E400342E4F /* dpScoreSceneBodyLines.cpp in Sources */,
 				D21D0BAD1A4C046000CC3598 /* ofxUITextArea.cpp in Sources */,
