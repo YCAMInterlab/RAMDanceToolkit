@@ -94,7 +94,7 @@ private:
     int mPlaybackCounter = 0;
     int mRecordCounter = 0;
     
-    float mRad = 20.0;
+    float mRad = 40.0;
     
     bool isRecord = false;
     bool isRecordOnce = false;
@@ -110,20 +110,22 @@ public:
     void setup(){
         
         float offsetX = 530;
-        float offsetY = 440;
+        float offsetY = 410;
+        
+        float space = 250;
         
         for(int j = 0; j < mDivY; j++){
             for(int i = 0; i < mDivX; i++){
                 mCircles.push_back(dpRecordGridCircle());
                 mCircles.back().setup(ofPoint((i - 1) * 500 + SINGLE_SCREEN_WIDTH * 0.5,
-                                              j * 200 + SINGLE_SCREEN_HEIGHT * 0.5 - 100));
+                                              j * space + SINGLE_SCREEN_HEIGHT * 0.5 - space * 0.5));
             }
         }
         
         mCircles[0].startRecord();
         
         ramOscManager::instance().addReceiverTag(&mReceiver);
-        mReceiver.addAddress("/dp/cameraUnit/MagnetPendulum/contour/boundingRect");
+        mReceiver.addAddress("/dp/cameraUnit/MagPendulum/contour/boundingRect");
 
     }
     
@@ -144,11 +146,11 @@ public:
             ofxOscMessage m;
             mReceiver.getNextMessage(&m);
             
-            if(m.getAddress() == "/dp/cameraUnit/MagnetPendulum/contour/boundingRect"){
+            if(m.getAddress() == "/dp/cameraUnit/MagPendulum/contour/boundingRect"){
                 
                 if(m.getArgAsInt32(0) != 0){
-                mCurrentVec.set(ofPoint((m.getArgAsFloat(2) + m.getArgAsFloat(4) * 0.5) * mScale,
-                                        (m.getArgAsFloat(3) + m.getArgAsFloat(5) * 0.5) * mScale));
+                mCurrentVec.set(ofPoint((m.getArgAsFloat(2) + m.getArgAsFloat(4) * 0.5 - 0.5) * mScale,
+                                        (m.getArgAsFloat(3) + m.getArgAsFloat(5) * 0.5 - 0.5) * mScale));
                 }
             }
         }
@@ -170,6 +172,10 @@ public:
     
     void draw(){
     
+        ofDisableDepthTest();
+        
+        ofSetCircleResolution(60);
+        ofSetLineWidth(4);
         for(int i = 1; i < mDivX; i++){
              //ofLine(mCircles[i - 1].getPos(),mCircles[i].getPos());
             for(int j = 0; j < mDivY; j++){
@@ -184,7 +190,7 @@ public:
         ofPushStyle();
         ofSetColor(dpColor::MAIN_COLOR);
         ofNoFill();
-        ofCircle(mCircles[mRecordTargetNum].getPos(),50);
+        ofCircle(mCircles[mRecordTargetNum].getPos(),100);
         ofPopStyle();
 
        for(auto &v:mCircles){

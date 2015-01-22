@@ -17,16 +17,12 @@ class twistFinder {
     
     public:
     
-    void findTwist(ramNode & node, ramNode & nodeOrigin);       // check rotation on a line between A & B
-    void debugDraw(ramMotionExtractor & motionExtractor);
-    
+    double findTwist(ramNode & node, float bendingLimit = 30.0f, float divisionForLimit = 10.0f);
+    void debugDraw(ramMotionExtractor & motionExtractor, int nodeNum);
+    void drawGraph(vector<float> & history, ofColor drawColor);
 
-
+    vector <float> his1, his0;
     
-    // Oreteru no wo modosu. de, on-axis no kaiten wo keisan.
-    
-    // how about thinkng some nodes rotation on just one long line?
-
 };
 
 #endif /* defined(__example_ramMotionExtractor__twistFinder__) */

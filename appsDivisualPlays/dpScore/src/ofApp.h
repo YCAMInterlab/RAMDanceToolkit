@@ -15,6 +15,8 @@ public:
     void update() override;
     void draw() override;
     void exit() override;
+    void shutdown();
+    
     void keyPressed(int key) override;
     void keyReleased(int key) override;
     void mouseMoved(int x, int y) override;
@@ -22,6 +24,7 @@ public:
     void mousePressed(int x, int y, int button) override;
     void mouseReleased(int x, int y, int button) override;
     void windowResized(int w, int h) override;
+    
     void dragEvent(ofDragInfo dragInfo) override;
     void gotMessage(ofMessage msg) override;
     void guiEvent(ofxUIEventArgs &e);
@@ -35,6 +38,7 @@ private:
     dp::score::SceneManager mSceneManager;
     ofxOscReceiver mOscReceiver;
     ofxOscMessage mCameraUnitMessageVector;
+    ofxOscMessage mCameraUnitMessageVectorTotal;
     ofxOscMessage mCameraUnitMessageMean;
     ofxOscMessage mCameraUnitMessagePixelateR;
     ofxOscMessage mCameraUnitMessagePixelateG;
@@ -43,5 +47,13 @@ private:
     bool mDebugCamUnit{false};
     bool mShowFps{false};
     bool mShowCursor{true};
+    float mTimeSceneChanged{0.f};
+#ifdef DEBUG
+    const float mTitleDuration{1.f};
+#else
+    const float mTitleDuration{5.f};
+#endif
+    ofTrueTypeFont mFont;
+    vector<string> mTitleNames;
 };
 

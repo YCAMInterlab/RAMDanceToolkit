@@ -136,7 +136,7 @@ const string kSettingsPrefix = "scoreUI-";
 
 const int kNumCameraunitVectors = 10;
 
-const string kFontPath = "../../../resources/fonts/AkkoStd-Thin.otf";
+const string kFontPath = "fonts/AkkoStd-Thin.otf";
 
 
 struct _handle {
@@ -159,10 +159,13 @@ float clamp(float f, float range)
     return ofClamp(f, -range, range);
 }
 
-float getLineUped(float length,  int index, int total)
+float getLineUped(float length,  int index, int total, bool fromCenter)
 {
     const float step = length/(float)total;
-    return -length*0.5f + step*0.5f + step * (float)index;
+    if (fromCenter)
+        return -length*0.5f + step*0.5f + step * (float)index;
+    else
+        return step*0.5f + step * (float)index;
 }
 
 float aligned(float f)

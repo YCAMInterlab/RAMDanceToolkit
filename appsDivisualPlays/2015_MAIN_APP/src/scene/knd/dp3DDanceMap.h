@@ -28,6 +28,12 @@ public:
         ramGetGUI().addButton("randomDiv");
         ramGetGUI().addToggle("extend", &isExtend);
         ramGetGUI().addIntSlider("lineWidth", 1, 10, &mLineWidth);
+        ramGetGUI().addIntSlider("extendThresh", 1, 255, &mExtendThreshNum);
+        
+        ramGetGUI().addLabel("Rot");
+        ramGetGUI().addSlider("rot:x", 0.0, 3.0, &mRot.x);
+        ramGetGUI().addSlider("rot:y", 0.0, 3.0, &mRot.y);
+        ramGetGUI().addSlider("rot:z", 0.0, 3.0, &mRot.z);
         
         mMotionExtractor.setupControlPanel(this,ofPoint(300,200));
         mMotionExtractor.load("motionExt_dpVisIce.xml");
@@ -35,9 +41,14 @@ public:
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dp3DDanceMap::onPanelChanged);
         
         ramOscManager::instance().addReceiverTag(&mReceiver);
-        mReceiver.addAddress("/dp/cameraUnit/Ice/pixelate");
+        mReceiver.addAddress("/dp/cameraUnit/Ice/mean");
         
         mCube.setScale(mScale);
+        
+        mCube.setExtendThreshNum(mExtendThreshNum);
+        
+        mAngle.speed = 0.00125;
+        mRot.speed = 0.00125;
     }
     
     void setup(){
@@ -49,38 +60,10 @@ public:
         while(mReceiver.hasWaitingMessages()){
             ofxOscMessage m;
             mReceiver.getNextMessage(&m);
-            if(m.getAddress() == "/dp/cameraUnit/Ice/pixelate"){
+            
+            if(m.getAddress() == "/dp/cameraUnit/Ice/mean"){
                 
-                int width = m.getArgAsInt32(0);
-                int height = m.getArgAsInt32(1);
-                
-                int sum = width * height;
-                int argNum = ceil(sum / 64) + 1;
-                
-                string str;
-                
-                for(int i = 2; i < argNum + 2; i++){
-                    
-                    string tmp = ofToBinary(m.getArgAsInt64(i));
-                    
-                    for (int j = tmp.size()-1; j>=0; j--) {
-                        str += tmp.at(j);
-                    }
-                    
-                }
-                
-                for(int i = 2; i < argNum + 2; i++){
-                    str += ofToBinary(m.getArgAsInt64(i));
-                }
-                
-                for(int j = 0; j < height; j++){
-                    for(int i = 0; i < width; i++){
-                    
-                        int idx = j * width + i;
-                        if(str[idx] == '1')mCube.extendEach(width,height,i,j);
-                        else mCube.shrink();
-                    }
-                }
+                mCube.extendEachLineByThresh(m.getArgAsInt32(3));
                 
             }
         }
@@ -94,18 +77,21 @@ public:
         ramSetViewPort(dpGetFirstScreenViewPort());
         mCube.update();
         
-        if(isExtend)mCube.extendEase();
-        else mCube.shrink();
-        
         mMotionExtractor.update();
+        
+        ofQuaternion quat = mMotionExtractor.getRotationAt(0);
+        
+        float angle;
+        ofPoint rot;
+        quat.getRotate(angle,rot.x,rot.y,rot.z);
+        
+        mAngle.set(angle);
+        mRot.set(rot);
+        
         setRot();
         mRot.update();
         mAngle.update();
         
-       /* cout << mRot.x << endl;
-        cout << mRot.y << endl;
-        cout << mRot.z << endl;*/
-    
     }
     
     void setRot(){
@@ -204,6 +190,15 @@ public:
         if(name == "div"){
             mCube.changeDiv(mDiv);
         }
+        
+        if(name == "extendThresh"){
+            mCube.setExtendEachLineThreshNum(mExtendThreshNum);
+        }
+        
+        if(name == "extend"){
+            if(isExtend)mCube.extendEase();
+            else mCube.shrink();
+        }
     }
     
 private:
@@ -214,7 +209,7 @@ private:
     
     bool isAllDraw = false;
     bool isExtend = true;
-    bool isReceiveOsc = false;
+    bool isReceiveOsc = true;
     
     float mScale = 3.0;
     float mRotThresh = 3.5;
@@ -234,6 +229,8 @@ private:
         Z
     };
     
+    int mExtendThreshNum = 127;
+ 
 };
 
 #endif

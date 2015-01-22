@@ -29,7 +29,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_LASER;
 	hakoniwas.back()->CVPreset	= "Plink_Laser";
-	hakoniwas.back()->sourceCh	= 3;
+	hakoniwas.back()->sourceCh	= 2;
 	hakoniwas.back()->sceneNames.push_back("H:dpHPLink_Laser");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisPLink_Laser");
 
@@ -45,7 +45,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_SERVOPENDULUM;
 	hakoniwas.back()->CVPreset	= "ServoPendulum";
-	hakoniwas.back()->sourceCh	= 8;
+	hakoniwas.back()->sourceCh	= 6;
 	hakoniwas.back()->sceneNames.push_back("H:dpHServoPendulum");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisServoPendulum");
 
@@ -53,7 +53,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_MAGPENDULUM;
 	hakoniwas.back()->CVPreset	= "MagnetPendulum";
-	hakoniwas.back()->sourceCh	= 3;
+	hakoniwas.back()->sourceCh	= 4;
 	hakoniwas.back()->sceneNames.push_back("H:dpHMagPendulum");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisMagPendulum");
 
@@ -77,7 +77,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_SANDSTORM;
 	hakoniwas.back()->CVPreset	= "SandStorm";
-	hakoniwas.back()->sourceCh	= 7;
+	hakoniwas.back()->sourceCh	= 3;
 	hakoniwas.back()->sceneNames.push_back("H:dpHSandStorm");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisSandStorm");
 
@@ -88,14 +88,14 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->CVPreset	= "Ice";
 	hakoniwas.back()->sourceCh	= 9;
 	hakoniwas.back()->sceneNames.push_back("H:dpHfrozenIce");
-	hakoniwas.back()->sceneNames.push_back("V:dpVisIceMap");
+	hakoniwas.back()->sceneNames.push_back("V:dpVisIce");
 
 #pragma mark 尺取り虫
 	//TODO: ソース番号・箱庭出力シーン
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_WORM;
 	hakoniwas.back()->CVPreset	= "Worm";
-	hakoniwas.back()->sourceCh	= 4;
+	hakoniwas.back()->sourceCh	= 5;
 	hakoniwas.back()->sceneNames.push_back("H:dpHWorm");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisWorm");
 
@@ -110,7 +110,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type      = HAKO_STRUGGLE;
 	hakoniwas.back()->CVPreset  = "Struggle";
-	hakoniwas.back()->sourceCh  = 8;
+	hakoniwas.back()->sourceCh  = 7;
 	hakoniwas.back()->sceneNames.push_back("H:dpHStruggle");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisStruggle");
 
@@ -126,9 +126,36 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_TORNADO;
 	hakoniwas.back()->CVPreset	= "Tornado";
-	hakoniwas.back()->sourceCh	= 2;
+	hakoniwas.back()->sourceCh	= 8;
 	hakoniwas.back()->sceneNames.push_back("H:dpHTornado");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisTornado");
+
+#pragma mark メタボール
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_METABALL;
+	hakoniwas.back()->CVPreset	= "";
+	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sceneNames.push_back("V:distanceMetaball");
+
+#pragma mark ライン
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_LINE;
+	hakoniwas.back()->CVPreset	= "";
+	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sceneNames.push_back("V:Line");
+
+#pragma mark フォーポイント
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_FOURPOINT;
+	hakoniwas.back()->CVPreset	= "";
+	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sceneNames.push_back("V:");
+
+#pragma mark 未来
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->CVPreset	= "";
+	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sceneNames.push_back("V:");
 
 #pragma mark ★テストA
 	hakoniwas.push_back(new hakoniwaPresets());
@@ -370,12 +397,19 @@ void dpSwitchingManager::SelectHakoniwa(hakoniwaType type, int slot){
 			if (targCvSlot == 0 || targCvSlot == 1){
 				FXPtr[targCvSlot]		.loadPreset(mSlots[targCvSlot].presetFile);
 				AnalysisPtr[targCvSlot]	.loadPreset(mSlots[targCvSlot].presetFile);
-				cout << "Load XML :" << mSlots[targCvSlot].presetFile << endl;
+				for (int i = 0;i < 4;i++)
+					AnalysisPtr[i].oscMatrixUI->setToggle(0, 2, false);
+
+				AnalysisPtr[targCvSlot] .oscMatrixUI->setToggle(0, 2, true);
 			}
 		}else{
 			if (targCvSlot == 2 || targCvSlot == 3){
 				FXPtr[targCvSlot]		.loadPreset(mSlots[targCvSlot].presetFile);
 				AnalysisPtr[targCvSlot]	.loadPreset(mSlots[targCvSlot].presetFile);
+				for (int i = 0;i < 4;i++)
+					AnalysisPtr[i].oscMatrixUI->setToggle(0, 2, false);
+
+				AnalysisPtr[targCvSlot] .oscMatrixUI->setToggle(0, 2, true);
 			}
 		}
 		matrixSW.setSW(targHako->sourceCh,

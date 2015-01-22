@@ -17,6 +17,7 @@ hakoVisPLink_Laser::hakoVisPLink_Laser(){
 
 	pix_w = 0;
 	pix_h = 0;
+	step = 5;
 }
 
 void hakoVisPLink_Laser::setupControlPanel(){
@@ -177,6 +178,13 @@ void hakoVisPLink_Laser::draw_PatternB(){
 	ofSetLineWidth(3.0);
 	msh.draw(OF_MESH_WIREFRAME);
 
+	if (ofGetFrameNum() % step == 0){
+		step = ofRandom(15,500);
+		flickStop = (ofRandomuf() < 0.4);
+	}
+
+	if (!flickStop) flick_counter+=2;
+
 	for (int i = 0;i < msh.getNumIndices()-2;i+=3){
 		if (msh.getVertex(msh.getIndex(i+0)).y > 30 ||
 			msh.getVertex(msh.getIndex(i+1)).y > 30 ||
@@ -184,8 +192,9 @@ void hakoVisPLink_Laser::draw_PatternB(){
 
 			float rd = pow(ofRandomuf(),2.0f);
 			ofSetColor(10);
-//			if (rd > 0.75) ofSetColor(200, 50, 120);
-			if (rd > 0.95) ofSetColor(255);
+
+			if (ofNoise(i*4243.324 + flick_counter / 30.0) > 0.5) ofSetColor(255);
+			if (ofNoise(i*4243.324 + flick_counter / 30.0) > 0.8) ofSetColor(dpColor::MAIN_COLOR);
 
 			glBegin(GL_TRIANGLES);
 			for (int j = 0;j < 3;j++){

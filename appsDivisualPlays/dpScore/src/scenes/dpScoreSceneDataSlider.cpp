@@ -17,8 +17,8 @@ SceneDataSlider::Slider::Slider()
 void SceneDataSlider::Slider::update(const ofVec2f& v)
 {
     vec = v;
-    vec.x = clamp(v.x);
-    vec.y = clamp(v.y);
+    vec.x = clamp(v.x, kClampRange);
+    vec.y = clamp(v.y, kClampRange);
     const float f = 0.f;
     vec = vec * (1.f - f) + prevVec * f;
     
@@ -27,8 +27,8 @@ void SceneDataSlider::Slider::update(const ofVec2f& v)
 
 void SceneDataSlider::Slider::draw(SceneDataSlider* owner, float w)
 {
-    const float hx{::fabsf(vec.x) * (kH-30.f)};
-    const float hy{::fabsf(vec.y) * (kH-30.f)};
+    const float hx{::fabsf(vec.x/kClampRange) * (kH-30.f)};
+    const float hy{::fabsf(vec.y/kClampRange) * (kH-30.f)};
     
     //const int precision = 13;
     const string sx{ofToString(vec.x)};

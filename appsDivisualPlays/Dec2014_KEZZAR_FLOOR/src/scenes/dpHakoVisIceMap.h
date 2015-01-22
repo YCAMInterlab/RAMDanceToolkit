@@ -21,13 +21,16 @@ public:
         ramGetGUI().addIntSlider("div", 1, 14, &mDiv);
         ramGetGUI().addToggle("all", &mTogAllDraw);
         ramGetGUI().addIntSlider("lineWidth", 1, 10, &mLineWidth);
+        ramGetGUI().addIntSlider("thresh", 1, 255, &mExtendThreshNum);
         
         ramFloorQuadWarper::instance().setupContolPanel(this);
         
         ramOscManager::instance().addReceiverTag(&mReceiver);
-        mReceiver.addAddress("/dp/cameraUnit/Ice/pixelate");
+        mReceiver.addAddress("/dp/cameraUnit/Ice/mean");
         
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoVisIceMap::onPanelChanged);
+        
+        mGrid.setExtendThreshNum(mExtendThreshNum);
     }
     void setup(){
         mGrid.setup(ofPoint(ramFloorQuadWarper::FBO_WIDTH * 0.5,
@@ -39,9 +42,11 @@ public:
     void receiveOsc(){
         
         while(mReceiver.hasWaitingMessages()){
+            
             ofxOscMessage m;
             mReceiver.getNextMessage(&m);
-            if(m.getAddress() == "/dp/cameraUnit/Ice/pixelate"){
+            
+            /*if(m.getAddress() == "/dp/cameraUnit/Ice/pixelate"){
                
                 int width = m.getArgAsInt32(0);
                 int height = m.getArgAsInt32(1);
@@ -76,12 +81,17 @@ public:
                     }
                 }
          
+            }*/
+            
+            if(m.getAddress() == "/dp/cameraUnit/Ice/mean"){
+                mGrid.extendByThresh(m.getArgAsInt32(3));
             }
         }
         
     }
     
     void update(){
+        
         receiveOsc();
         ramSetViewPort(dpGetFirstScreenViewPort());
         mGrid.update();
@@ -92,12 +102,8 @@ public:
         
         ramFloorQuadWarper::instance().begin();
         
-        ofPushMatrix();
-      
         mGrid.draw();
   
-        ofPopMatrix();
-        
         ramFloorQuadWarper::instance().end();
         
         ramFloorQuadWarper::instance().draw();
@@ -115,6 +121,10 @@ public:
         if(name == "all"){
             mGrid.setAllDraw(mTogAllDraw);
         }
+        
+        if(name == "thresh"){
+            mGrid.setExtendThreshNum(mExtendThreshNum);
+        }
     }
     
     
@@ -126,6 +136,8 @@ private:
     ramOscReceiveTag mReceiver;
     
     int mLineWidth = 2;
+    
+    int mExtendThreshNum = 127;
     
 };
 

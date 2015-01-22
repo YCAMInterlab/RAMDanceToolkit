@@ -28,6 +28,8 @@
 #include "dpScoreSceneBodyBox.h"
 #endif
 
+#include <algorithm>
+
 using namespace dp::score;
 
 //struct ObjA {
@@ -51,6 +53,7 @@ using namespace dp::score;
 身体系 8/20
 箱庭系 13/20
 
+グラフ*n
 プロッター*n
 ブロブ系
 フォント系小
@@ -132,15 +135,15 @@ void ofApp::setup()
     mSceneManager.add(dataBarcode);
     mSceneManager.add(dataText);
     mSceneManager.add(dataSlider);
-    
     mSceneManager.add(bodyGlobe);
     mSceneManager.add(bodyScan);
+    
     mSceneManager.add(bodyPattern);
     mSceneManager.add(bodyFlow);
     mSceneManager.add(bodyLines);
-    
     //mSceneManager.add(bodyRect);
     //mSceneManager.add(bodyBox);
+    
     mSceneManager.add(bodyBoids);
     
     
@@ -154,7 +157,7 @@ void ofApp::setup()
     
     //mSceneManager.change(3);
     mSceneManager.change("black");
-    mSceneManager.change<SceneDataSlider>();
+    //mSceneManager.change<SceneDataSlider>();
     
     mSceneManager.getTabBar()->setVisible(false);
 #endif
@@ -165,6 +168,8 @@ void ofApp::setup()
     dp::score::registerObjectEvent(this);
     
     ofAddListener(ofxEvent(), this, &ofApp::onEventReceived);
+    
+    ofSetEscapeQuitsApp(false);
     
     //dp::score::ObjectEventArgs args;
     //
@@ -177,6 +182,13 @@ void ofApp::setup()
     //args.addObject(objC);
     //
     //dp::score::notifyObjectEvent(args);
+    
+    mFont.loadFont(kFontPath, 150);
+    
+#ifndef DP_MASTER_HAKONIWA
+    keyPressed('f');
+    keyPressed('c');
+#endif
     
     OFX_END_EXCEPTION_HANDLING
 }
@@ -206,6 +218,21 @@ void ofApp::update()
                 }
                 else if (m.getArgType(0) == OFXOSC_TYPE_STRING){
                     mSceneManager.change(m.getArgAsString(0));
+                }
+                
+                mTitleNames.clear();
+                if (m.getNumArgs()>=2) {
+                    mTimeSceneChanged = ofGetElapsedTimef();
+                    for (int i=1; i<m.getNumArgs(); i++) {
+                        if (m.getArgType(i) == OFXOSC_TYPE_STRING) {
+                            string name{m.getArgAsString(i)};
+                            ofStringReplace(name, "dpVis", "");
+                            ofStringReplace(name, "dpH", "");
+                            ofStringReplace(name, "RE", "");
+                            ofStringReplace(name, "Theta", "FishEye");
+                            mTitleNames.push_back(name);
+                        }
+                    }
                 }
             }
             OFX_END_EXCEPTION_HANDLING
@@ -250,6 +277,10 @@ void ofApp::update()
                 mCameraUnitMessageVector = m;
                 mCameraUnitMessageVector.setAddress(kOscAddrCameraUnitVector);
             }
+            else if (newAddr == kOscAddrCameraUnitVectorTotal) {
+                mCameraUnitMessageVectorTotal = m;
+                mCameraUnitMessageVectorTotal.setAddress(kOscAddrCameraUnitVectorTotal);
+            }
             OFX_END_EXCEPTION_HANDLING
         }
     }
@@ -270,10 +301,12 @@ void ofApp::update()
 
     mSceneManager.update(mCameraUnitMessageMean);
     mSceneManager.update(mCameraUnitMessageVector);
+    mSceneManager.update(mCameraUnitMessageVectorTotal);
     
 #ifdef DP_MASTER_HAKONIWA
     getMH().update();
     getMH().updateCameraUnit(mCameraUnitMessageVector);
+    getMH().updateCameraUnit(mCameraUnitMessageVectorTotal);
     if (newMean) getMH().updateCameraUnit(mCameraUnitMessageMean);
     if (newPixelate) {
         getMH().updateCameraUnit(mCameraUnitMessagePixelateR);
@@ -301,13 +334,20 @@ void ofApp::generateFakeVectorData()
 {
     const float t{ofGetElapsedTimef()};
     mCameraUnitMessageVector.clear();
+    mCameraUnitMessageVectorTotal.clear();
     mCameraUnitMessageVector.setAddress(kOscAddrCameraUnitVector);
+    mCameraUnitMessageVectorTotal.setAddress(kOscAddrCameraUnitVectorTotal);
     for (int i=0; i<kNumCameraunitVectors; i++) {
         ofVec2f v;
         v.x = ofSignedNoise(t, 0, i) + ofSignedNoise(t*9.8f, 0, i) * 0.5f  + ofSignedNoise(t*102.f, 0, i) * 0.25f;
         v.y = ofSignedNoise(t, 1, i) + ofSignedNoise(t*9.8f, 1, i) * 0.5f  + ofSignedNoise(t*102.f, 1, i) * 0.25f;
         mCameraUnitMessageVector.addFloatArg(v.x);
         mCameraUnitMessageVector.addFloatArg(v.y);
+        
+        if (i == 0) {
+            mCameraUnitMessageVectorTotal.addFloatArg(v.x);
+            mCameraUnitMessageVectorTotal.addFloatArg(v.y);
+        }
     }
 }
 
@@ -332,9 +372,48 @@ void ofApp::draw()
 #ifdef DP_MASTER_HAKONIWA
     getMH().draw();
     ofxMot::draw();
-#endif
     
     mSceneManager.draw();
+#else
+    const float t{ofGetElapsedTimef()-mTimeSceneChanged};
+    
+    if (t < mTitleDuration) {
+        ofPushStyle();
+        ofPushMatrix();
+        ofEnableAlphaBlending();
+        const float ww{(float)ofGetWidth()};
+        const float wh{(float)ofGetHeight()};
+        
+        //ofSetColor(ofColor::white, 128);
+        //alignedLine(0.f, wh*0.5f, ww, wh*0.5f);
+        
+        const float tt{ofClamp(t, 0.f, 1.f)};
+        
+        int longestTitle{0};
+        
+        for (auto& s : mTitleNames) {
+            if (s.size() > longestTitle) longestTitle = s.size();
+        }
+        const int numChar{(int)(longestTitle * tt)};
+        const float sh{mFont.stringHeight("A")};
+        
+        for (int i=0; i<mTitleNames.size(); i++) {
+            string s{mTitleNames.at(i)};
+            ofSetColor(ofColor::white);
+            const float x{20.f};
+            const float y{getLineUped(wh, i, mTitleNames.size(), false) + sh * 0.5f};
+            const int num{min(max(0, numChar), (int)s.size())};
+            mFont.drawString(s.substr(0, num), x, y);
+        }
+        
+       
+        ofPopMatrix();
+        ofPopStyle();
+    }
+    else {
+        mSceneManager.draw();
+    }
+#endif
     
 #ifndef DP_MASTER_HAKONIWA
     if (mShowFps) {
@@ -363,13 +442,19 @@ void ofApp::draw()
 #pragma mark ___________________________________________________________________
 void ofApp::exit()
 {
+}
+
+void ofApp::shutdown()
+{
     OFX_BEGIN_EXCEPTION_HANDLING
     
 #ifdef DP_MASTER_HAKONIWA
-    //getMH().shutdown();
+    getMH().shutdown();
 #endif
     
     mSceneManager.clear();
+    
+    std::exit(0);
     
     OFX_END_EXCEPTION_HANDLING
 }
@@ -380,6 +465,9 @@ void ofApp::keyPressed(int key)
     OFX_BEGIN_EXCEPTION_HANDLING
     
     switch (key) {
+        case OF_KEY_ESC:
+            shutdown();
+            break;
         case 'f':
             ofToggleFullscreen();
             break;
@@ -409,7 +497,7 @@ void ofApp::keyPressed(int key)
             mSceneManager.next();
             break;
         default:
-            mSceneManager.keyPressed(key);
+            //mSceneManager.keyPressed(key);
             break;
     }
     

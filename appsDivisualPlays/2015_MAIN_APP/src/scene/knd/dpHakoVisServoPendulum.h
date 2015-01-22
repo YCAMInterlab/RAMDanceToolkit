@@ -57,6 +57,57 @@ public:
     }
 };
 
+class dpSPBox{
+public:
+    
+    void start(ofPoint size,float angle){
+        mSize = size;
+        mAngle = angle;
+        mColor = dpColor::MAIN_COLOR;
+        mSat.imSet(255);
+        mSat.set(0);
+        mSat.speed = 0.03;
+    }
+    
+    void update(){
+        mPos.z += mSpeed;
+        mSat.update();
+        
+        if(mSat.val > 1)mColor.setSaturation(mSat.val);
+    }
+    
+    void draw(){
+    
+        ofSetColor(mColor.r,mColor.g,mColor.b,ofMap(mPos.z,230,300,255,0,true));
+        
+        ofPushMatrix();
+        ofTranslate(0, 0, mPos.z);
+        ofRotateZ(ofRadToDeg(mAngle));
+        ofSetRectMode(OF_RECTMODE_CENTER);
+        ofDrawBox(0,0,0,mSize.x,mSize.y,mSize.z);
+        ofPopMatrix();
+    
+        ofPushMatrix();
+        ofTranslate(0, 0, -mPos.z);
+        ofRotateZ(ofRadToDeg(mAngle));
+        ofSetRectMode(OF_RECTMODE_CENTER);
+        ofDrawBox(0,0,0,mSize.x,mSize.y,mSize.z);
+        ofPopMatrix();
+       
+    }
+    
+private:
+    ofPoint mPos;
+    float mSpeed = 1.0;
+    float mRad;
+    int mRes = 3;
+    ofPoint mSize;
+    float mAngle = 0.0;
+    bool isPink = false;
+    ofColor mColor;
+    KezSlide mSat;
+};
+
 class dpHakoVisServoPendulum : public ramBaseScene{
 public:
     string getName() const { return "dpVisServoPendulum"; }
@@ -65,28 +116,27 @@ public:
         
         mScale.set(200,100);
         
-        ramGetGUI().addSlider("distance", 10.0, 800.0, &mCamDistance);
-        ramGetGUI().addSlider("scaleX", 100.0, 500.0, &mScale.x);
-        ramGetGUI().addSlider("scaleY", 100.0, 500.0, &mScale.y);
-        ramGetGUI().addSlider("zSpeed",0.01,2.0,&mTargetPosZSpeed);
+        ramGetGUI().addSlider("scaleX", 100.0, 2000.0, &mScale.x);
+        ramGetGUI().addSlider("scaleY", 1.0, 2000.0, &mScale.y);
+        ramGetGUI().addButton("rndOrbit");
+
+        mLong.speed = 0.001;
+        mLat.speed = 0.001;
+        mRad.speed = 0.01;
+        
+        rndOrbit();
+        
+        ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoVisServoPendulum::onPanelChanged);
     }
     void setup(){
     
-        for(int i = 0; i < MAX_RIBBONS; i++){
-            mRibbons.push_back(dpRibbonControler());
-            mRibbons.back().setup();
-        }
-        
+     
         mCam.setVFlip(true);
         
-        mRibbons[0].setForcus(true);
-        
-        mRibbons[0].setColor(dpColor::PALE_PINK_HEAVY);
-        mRibbons[1].setColor(dpColor::DARK_PINK_LIGHT);
- 
-        
         ramOscManager::instance().addReceiverTag(&mReceiver);
-        mReceiver.addAddress("/dp/cameraUnit/ServoPendulum/contour/boundingRect");
+        mReceiver.addAddress("/dp/cameraUnit/ServoPendulum/vector/total");
+        
+        mHead.speed = 0.2;
 
     }
     
@@ -96,81 +146,113 @@ public:
             ofxOscMessage m;
             mReceiver.getNextMessage(&m);
             
-            if(m.getAddress() == "/dp/cameraUnit/ServoPendulum/contour/boundingRect"){
+            if(m.getAddress() == "/dp/cameraUnit/ServoPendulum/vector/total"){
+                mBoxes.push_back(dpSPBox());
                 
-                int num = m.getArgAsInt32(0);
+                float pAngle = atan2(mHead.y,mHead.x);
                 
-                if(num != 0){
-                    
-                    ofPoint tmp;
+                mHead.set(m.getArgAsFloat(0),
+                          m.getArgAsFloat(1));
                 
-                    for(int i = 1; i < num * 5 + 1; i+=5){
-                        tmp.x += m.getArgAsFloat(i + 1) + m.getArgAsFloat(i + 3) * 0.5 - 0.5;
-                        tmp.y += m.getArgAsFloat(i + 2) + m.getArgAsFloat(i + 4) * 0.5 - 0.5;
-                    }
+                ofPoint tmp(mHead.x,mHead.y);
                 
-                    tmp /= num;
+   //             mHead = tmp;
+   
+                float angle = atan2(tmp.y,tmp.x);
+          
                 
-                    tmp *= ofPoint(mScale.x,mScale.y);
-                    tmp += ofPoint(SINGLE_SCREEN_WIDTH * 0.5,
-                                   SINGLE_SCREEN_HEIGHT * 0.5);
+                mAngle = angle;
                 
-                     mRibbons[mTargetNum].setTarget(ofPoint(tmp.x,tmp.y,mPosZ.val));
-                }
+                mBoxes.back().start(ofPoint(1.0,tmp.length() * mScale.x,1.0),angle);
+                if(mBoxes.size() > BOX_MAX)mBoxes.pop_front();
             }
+        
         }
     }
     
     void update(){
         
-        mTargetPosZ += mTargetPosZSpeed;
-        if(mTargetPosZ > 1000 || mTargetPosZ < 0){
-            mTargetPosZSpeed *= -1;
-            mRibbons[mTargetNum].setForcus(false);
-            mTargetNum++;
-            mTargetNum %= mRibbons.size();
-            mRibbons[mTargetNum].setForcus(true);
-        }
-        mPosZ.imSet(mTargetPosZ);
         receiveOsc();
-    
-        for(auto &v:mRibbons){
+   
+        for(auto &v:mBoxes){
             v.update();
         }
         
-        mPosZ.update();
-
-    }
-    void draw(){
-        ofDisableDepthTest();
-        ofPushMatrix();
-        ofScale(0.25,0.25,4.0);
-        mCam.setPosition(SINGLE_SCREEN_WIDTH * 0.5,SINGLE_SCREEN_HEIGHT * 0.5, mPosZ.val + mCamDistance);
+        mHead.update();
         
-        //mCam.setTarget(ofPoint(dpGetFirstScreenCenter().x,dpGetFirstScreenCenter().y,mZCounter));
-        mCam.begin(dpGetFirstScreenViewPort());
+        mLong.update();
+        mLat.update();
+        mRad.update();
+        
+        mCam.lookAt(ofPoint(0,0,0));
+        mCam.orbit(mLong.val, mLat.val, mRad.val);
+        
+        if(ofGetFrameNum() % 600 == 0)rndOrbit();
+    }
+    
+    void rndOrbit(){
+        mLong.set(ofRandom(-180,180));
+        mLat.set(ofRandom(-180,180));
+        mRad.set(ofRandom(0,400));
+    }
+    
+    
+    
+    void draw(){
+
+        ofDisableDepthTest();
         ofEnableBlendMode(OF_BLENDMODE_ADD);
-        ofSetColor(255,255,255,150);
-        for(auto &v:mRibbons){
+        //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE,GL_SRC_ALPHA,GL_ONE);
+        mCam.begin(dpGetFirstScreenViewPort());
+        
+        ofSetColor(dpColor::MAIN_COLOR.r,
+                   dpColor::MAIN_COLOR.g,
+                   dpColor::MAIN_COLOR.b,
+                   255);
+        
+        ofPushMatrix();
+        ofTranslate(0, 0, 0.0);
+        ofRotateZ(ofRadToDeg(mAngle));
+        ofDrawBox(0,0,0,1.0,mHead.length() * mScale.x,1.0);
+        ofPopMatrix();
+        
+        ofNoFill();
+        for(auto &v:mBoxes){
             v.draw();
         }
         mCam.end();
-        ofPopMatrix();
+        
+    }
+    
+    void onPanelChanged(ofxUIEventArgs& e){
+        string name = e.widget->getName();
+        
+        if(name == "rndOrbit")rndOrbit();
     }
     
 private:
-    static const int MAX_RIBBONS = 2;
-    vector<dpRibbonControler>mRibbons;
-    KezSlide mPosZ;
-    ofEasyCam mCam;
-    float mTargetPosZ = 0;
-    float mTargetPosZSpeed = 0.2;
-    float mCamDistance = 100.0;
     
+    ofEasyCam mCam;
+
     ramOscReceiveTag mReceiver;
-    int mTargetNum = 0;
     
     ofPoint mScale;
+    
+    deque<ofPoint>mPts;
+    static const int BOX_MAX = 300;
+    deque<dpSPBox>mBoxes;
+    ofPoint mLightRot;
+    KezSlidePoint mHead;
+    
+    float mAngle = 0.0;
+    
+    ofPoint mRot;
+    
+    KezSlide mLong;
+    KezSlide mLat;
+    KezSlide mRad;
+    
+    
 };
 
 #endif
