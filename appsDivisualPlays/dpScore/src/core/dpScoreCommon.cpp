@@ -134,10 +134,11 @@ const string kEventAddrChangeScene = "/dp/score/changeScene";
 const string kSettingsDir = "settings/";
 const string kSettingsPrefix = "scoreUI-";
 
+const string kXmlSettingsPath{"master_hakoniwa_settings.xml"};
+
 const int kNumCameraunitVectors = 10;
 
 const string kFontPath = "fonts/AkkoStd-Thin.otf";
-
 
 struct _handle {
     char* p;

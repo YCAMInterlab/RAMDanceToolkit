@@ -401,15 +401,15 @@ void ofApp::draw()
             if (s.size() > longestTitle) longestTitle = s.size();
         }
         const int numChar{(int)(longestTitle * tt)};
-        const float sh{mFont.stringHeight("A")};
-        
+        //const float sh{mFont.stringHeight("A")};
+        const float shift{kW / 8.f};
         for (int i=0; i<mTitleNames.size(); i++) {
             string s{mTitleNames.at(i)};
             ofSetColor(ofColor::white);
             const float x{20.f};
-            const float y{getLineUped(wh, i, mTitleNames.size(), false) + sh * 0.5f};
+            const float y{getLineUped(wh, i, mTitleNames.size(), false)};
             const int num{min(max(0, numChar), (int)s.size())};
-            mFont.drawString(s.substr(0, num), x, y);
+            mFont.drawString(s.substr(0, num), x + shift, y);
         }
         
        

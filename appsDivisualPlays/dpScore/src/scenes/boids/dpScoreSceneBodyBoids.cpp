@@ -137,7 +137,7 @@ void SceneBodyBoids::draw()
     
     if (mActor) {
         //ofxMot::drawSkeleton(mActor);
-        ofSetColor(color::kDarkPinkHeavy, 256);
+        ofSetColor(color::kDarkPinkHeavy, 128);
         auto& joints = mActor->getJoints();
         for (auto& j : joints) {
             j.transformGL();

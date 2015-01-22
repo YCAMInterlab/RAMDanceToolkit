@@ -57,6 +57,8 @@ extern const string kEventAddrChangeScene;
 extern const string kSettingsDir;
 extern const string kSettingsPrefix;
 
+extern const string kXmlSettingsPath;
+
 extern const int kNumCameraunitVectors;
 
 extern const string kFontPath;
