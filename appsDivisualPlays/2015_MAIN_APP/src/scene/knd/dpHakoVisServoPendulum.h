@@ -124,6 +124,8 @@ public:
         mLat.speed = 0.001;
         mRad.speed = 0.01;
         
+        rndOrbit();
+        
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoVisServoPendulum::onPanelChanged);
     }
     void setup(){

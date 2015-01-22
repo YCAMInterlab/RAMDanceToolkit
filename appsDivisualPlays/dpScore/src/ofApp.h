@@ -38,6 +38,7 @@ private:
     dp::score::SceneManager mSceneManager;
     ofxOscReceiver mOscReceiver;
     ofxOscMessage mCameraUnitMessageVector;
+    ofxOscMessage mCameraUnitMessageVectorTotal;
     ofxOscMessage mCameraUnitMessageMean;
     ofxOscMessage mCameraUnitMessagePixelateR;
     ofxOscMessage mCameraUnitMessagePixelateG;
@@ -46,5 +47,13 @@ private:
     bool mDebugCamUnit{false};
     bool mShowFps{false};
     bool mShowCursor{true};
+    float mTimeSceneChanged{0.f};
+#ifdef DEBUG
+    const float mTitleDuration{1.f};
+#else
+    const float mTitleDuration{5.f};
+#endif
+    ofTrueTypeFont mFont;
+    vector<string> mTitleNames;
 };
 

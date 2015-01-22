@@ -104,6 +104,8 @@ public:
     
     static const string kXmlSettingsPath;
     
+    static const string kScoreBlack;
+    
     ofVec2f mTextLeftCorner{0.f, 0.f};
     
 private:
@@ -146,7 +148,8 @@ private:
     
     void sendPin(int pin, bool open);
     
-    void sendChangeScore(const string& name);
+    void sendChangeScore(const string& name,
+                         bool maintainSceneNames = true);
     
     void onDrawSkeleton(ofxMotioner::EventArgs &e);
     
@@ -156,6 +159,7 @@ private:
     
     UniqueStringStack mUniqueScenes;
     vector<UniqueStringStack> mUniqueScores;
+    UniqueStringStack mUniqueScoreBodies;
     
     ofEasyCam mCam;
     ofRectangle mCamViewport;
@@ -164,6 +168,9 @@ private:
     vector<Pump> mPumps;
     
     map<string, Scene> mScenes;
+    
+    vector<string> mNoCamScenes;
+    bool mNoCameraData{false};
     
     string mCurrentScore{""};
     int mCurrentScoreComplexity{0};
@@ -182,6 +189,7 @@ private:
     bool mEnableCameraUnit{false};
     bool mEnableOscOutRDTK{false};
     bool mEnableOscOutMH{false};
+    bool mEnableOscOutScore{false};
     
     float mEnabledTime{0.f};
     

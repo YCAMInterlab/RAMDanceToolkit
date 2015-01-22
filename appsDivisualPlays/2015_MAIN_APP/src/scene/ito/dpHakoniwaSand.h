@@ -33,9 +33,11 @@ private:
 //    string mVert;
 //    ofShader mDisplace;
     
-    int val1 = 0;
-    int val2 = 0;
-    int val3 = 0;
+    int val[3];
+//    int val2 = 0;
+//    int val3 = 0;
+    int minVal[3];
+    int maxVal[3];
     bool bTestMode = true;
     int mode;
     

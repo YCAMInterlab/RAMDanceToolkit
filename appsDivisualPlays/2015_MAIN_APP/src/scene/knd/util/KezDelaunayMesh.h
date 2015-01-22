@@ -27,7 +27,6 @@ public:
         }
         setBitset();
         
-        mColor.set(dpColor::MAIN_COLOR);
     }
     
     void clear(){
@@ -124,7 +123,7 @@ public:
                 
                 ofPushStyle();
                 ofNoFill();
-                ofSetColor(255,mAlpha);
+                
                 ofPushMatrix();
 
                 ofRotateX(mRot.x);
@@ -132,7 +131,10 @@ public:
                 ofRotateZ(mRot.z);
                 
                 if(mBlink.update()){
+                    ofSetColor(255,mAlpha);
                     mDelaunay.draw();
+                    
+                    ofSetColor(dpColor::MAIN_COLOR,mAlpha);
                     mDelaunay.triangleMesh.drawVertices();
                 
                     if(isShowFaces)drawEachTriangle(mDelaunay.triangleMesh);
@@ -140,7 +142,7 @@ public:
                 }
                 
                 if(mHasFinishedAddPt == false){
-                    ofSetColor(mColor.r,mColor.g,mColor.b,mAlpha);
+                    ofSetColor(dpColor::MAIN_COLOR,mAlpha);
                     ofDrawSphere(mHead,mSphereRad);
                     
                     ofSetColor(255,255,255,mAlpha);

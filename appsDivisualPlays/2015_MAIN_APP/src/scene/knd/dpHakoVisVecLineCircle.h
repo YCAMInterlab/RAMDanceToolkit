@@ -203,7 +203,7 @@ public:
     }
     
     void rndRot(){
-        int rnd = ofRandom(0,5);
+        int rnd = ofRandom(0,7);
         
         if(rnd != 0){
             mRotSpeed.set(0,0,0);
@@ -249,7 +249,7 @@ private:
     ramOscReceiveTag mReceiver;
     static const int CIRCLE_NUM = 5;
     vector<dpVecLineCircle>mCircles;
-    float mVecScale = 50.0;
+    float mVecScale = 30.0;
     
     ofEasyCam mCam;
     

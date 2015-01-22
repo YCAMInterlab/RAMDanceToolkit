@@ -16,6 +16,8 @@ eyeBall::eyeBall(){
     
     sender.setup("192.168.20.73", 8528);
     sender2.setup("192.168.20.74", 8528);
+    
+    //receiver.setup(10000);
 }
 
 void eyeBall::setup(){
@@ -134,6 +136,51 @@ void eyeBall::setupControlPanel(){
     
 }
 
+void eyeBall::onEnabled(){
+    manualControl = false;
+    reset = false;
+    nodeControl = false;
+    
+    //sendServo = true;
+    //test用
+    sendServo = false;
+    
+    //とりあえずデフォルトでオートターン設定になるようにする
+    autoTurn = true;
+    speed = 0.03;
+    radius = 200.0;
+    
+    
+    //デフォルトのEyeポジション（仮設定）
+    //-----------------------
+    //eye1
+    camera1_x = -150.0;
+    camera1_y = 25.0;
+    camera1_z = 240.0;
+    
+    //eye2
+    camera2_x = -60.0;
+    camera2_y = 25.0;
+    camera2_z = 240.0;
+
+    //eye3
+    camera3_x = 60.0;
+    camera3_y = 25.0;
+    camera3_z = 240.0;
+
+    //eye4
+    camera4_x = 150.0;
+    camera4_y = 25.0;
+    camera4_z = 240.0;
+    //-----------------------
+}
+
+void eyeBall::onDisabled(){
+    manualControl = true;
+    reset = true;
+    sendServo = true;
+}
+
 void eyeBall::update(){
     
     /*=== update ===*/
@@ -141,12 +188,17 @@ void eyeBall::update(){
     
     //oscを送る数を制限
     if(ofGetFrameNum() % 3 == 0){
-
+        refleshState();
+    }
     
-    //-------------
+}
+
+void eyeBall::refleshState(){
     //Auto Turn
     if(autoTurn == true){
         phase += speed;
+        //phase -= speed;
+
     }
     
     //Reset
@@ -161,7 +213,7 @@ void eyeBall::update(){
         manualControl = false;
         autoTurn == false;
         nodeVal = motionExtractor.getNodeAt(0);
-        
+    
         posX = int(nodeVal[0]);
         posY = int(nodeVal[1]);
         posZ = int(nodeVal[2]);
@@ -172,15 +224,15 @@ void eyeBall::update(){
         //Eye1 servo
         servoX_val = int(camera1_AngleX);
         servoY_val = int(camera1_AngleY);
-        
+    
         //Eye2 servo
         servoX2_val = int(camera2_AngleX);
         servoY2_val = int(camera2_AngleY);
-        
+    
         //Eye3 servo
         servoX3_val = int(camera3_AngleX);
         servoY3_val = int(camera3_AngleY);
-        
+
         //Eye4 servo
         servoX4_val = int(camera4_AngleX);
         servoY4_val = int(camera4_AngleY);
@@ -209,9 +261,23 @@ void eyeBall::update(){
     n.addIntArg(servoY4_val);
     n.addIntArg(0);
     sender2.sendMessage(n);
-    }
     
+//    //=== OSC Read =======
+//    
+//    // check for waiting messages
+//    while(receiver.hasWaitingMessages()){
+//        // get the next message
+//        ofxOscMessage r;
+//        receiver.getNextMessage(&r);
+//        
+//        // check for mouse moved message
+//        if(r.getAddress() == "/dp/cameraUnit/MagPendulum/features"){
+//            
+//        }
+//    }
+    //=== OSC Read =======
 }
+
 
 void eyeBall::draw(){
     
@@ -372,13 +438,19 @@ void eyeBall::draw(){
         //ofPoint pos;
         
         //円の座標を三角関数を利用して計算
+        //pos.x = cos(phase) * radius;
+        //pos.y = sin(phase) * radius;
+        
+        //test
         pos.x = cos(phase) * radius;
         pos.y = sin(phase) * radius;
+        pos.z = cos(phase) * radius;
         
         manualControl = false;
         posX = pos.x;
         posY = pos.y;
-        posZ = 0;
+        //posZ = 0;
+        posZ = pos.z;
     }
     //----------------------------------------------
     

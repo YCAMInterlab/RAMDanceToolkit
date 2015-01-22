@@ -123,13 +123,13 @@ public:
     }
     
     void onDisabled(){
-      /*  isBulb = false;
+        isBulb = false;
         isMist = false;
         mFan = 0;
         
         fan();
         bulb();
-        mist();*/
+        mist();
     }
     
 private:

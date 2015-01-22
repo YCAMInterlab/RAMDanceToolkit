@@ -513,7 +513,7 @@
 		D2E2B73D1A4A4FB500570C58 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		D2E2B73E1A4A4FB500570C58 /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
 		D2E8910D1A6B57CA0047B75A /* dpScore copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "dpScore copy-Info.plist"; path = "/Users/falcon/Documents/of_v0.8.4_osx_release/RAMDanceToolkit/appsDivisualPlays/dpScore/dpScore copy-Info.plist"; sourceTree = "<absolute>"; };
-		D2E891941A6B586C0047B75A /* dpMasterHakoniwa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dpMasterHakoniwa.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2E891941A6B586C0047B75A /* dpMasterHakoniwaDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dpMasterHakoniwaDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2E891951A6B586C0047B75A /* dpScore copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "dpScore copy2-Info.plist"; path = "/Users/falcon/Documents/of_v0.8.4_osx_release/RAMDanceToolkit/appsDivisualPlays/dpScore/dpScore copy2-Info.plist"; sourceTree = "<absolute>"; };
 		D2E891981A6B5B460047B75A /* dpScoreSceneMasterIncrement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneMasterIncrement.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D2E891991A6B5B460047B75A /* dpScoreSceneMasterIncrement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneMasterIncrement.h; sourceTree = "<group>"; };
@@ -1083,7 +1083,7 @@
 				E45BE5980E8CC70C009D7055 /* frameworks */,
 				E4B69B5B0A3A1756003C02F2 /* dpScoreDebug.app */,
 				D2E8910D1A6B57CA0047B75A /* dpScore copy-Info.plist */,
-				D2E891941A6B586C0047B75A /* dpMasterHakoniwa.app */,
+				D2E891941A6B586C0047B75A /* dpMasterHakoniwaDebug.app */,
 				D2E891951A6B586C0047B75A /* dpScore copy2-Info.plist */,
 			);
 			sourceTree = "<group>";
@@ -1128,7 +1128,7 @@
 			);
 			name = dpMasterHakoniwa;
 			productName = myOFApp;
-			productReference = D2E891941A6B586C0047B75A /* dpMasterHakoniwa.app */;
+			productReference = D2E891941A6B586C0047B75A /* dpMasterHakoniwaDebug.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E4B69B5A0A3A1756003C02F2 /* dpScore */ = {
@@ -1538,7 +1538,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 				);
-				PRODUCT_NAME = dpMasterHakoniwa;
+				PRODUCT_NAME = dpMasterHakoniwaDebug;
 				SDKROOT = macosx10.9;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../addons/ofxOsc/libs/oscpack/src\"";
 				WRAPPER_EXTENSION = app;

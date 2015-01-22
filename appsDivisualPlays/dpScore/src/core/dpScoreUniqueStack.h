@@ -27,6 +27,7 @@ public:
     
     void reset();
     T get(int index);
+    const T& ref(int index);
     
     ListIt begin();
     ListIt end();
@@ -66,6 +67,7 @@ template<class T>
 T UniqueStack<T>::get(int index)
 {
     if (index < 0 || index >= mUniqueList.size()) {
+        assert(false);
         ofxThrowExceptionf(ofxException, "index %d out of range", index);
     }
     const T t{mUniqueList.at(index)};
@@ -74,6 +76,16 @@ T UniqueStack<T>::get(int index)
     if (mUniqueList.empty()) reset();
     
     return t;
+}
+
+template<class T>
+const T& UniqueStack<T>::ref(int index)
+{
+    if (index < 0 || index >= mUniqueList.size()) {
+        assert(false);
+        ofxThrowExceptionf(ofxException, "index %d out of range", index);
+    }
+    return mUniqueList.at(index);
 }
 
 template<class T>

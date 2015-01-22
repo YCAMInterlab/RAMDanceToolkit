@@ -31,14 +31,8 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
     }
     
     ramGetGUI().addSlider("Distance Threshold", 2.0f, 200.0f, &distanceThreshold);
-
     ramGetGUI().addToggle("RESPONSE MODE_MAG", &bEachMode);
-    
-    /* vector<string> modename;
-    modename.push_back("ALL 3DANCERS MODE");
-    modename.push_back("2EACH 3DANCERS MODE");
-    
-    ramGetGUI().addRadioGroup("mode___", modename, &mode);*/
+    ramGetGUI().addToggle("TWIST MODE", &bModeTwist);
     
     for (int i = 0; i < NMAGNETS; i++){
     
@@ -48,6 +42,8 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
     
     bTestMode = false;
     bEachMode = false;
+    bModeTwist = false;
+
     distanceThreshold = 65;
     
     ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent,this,&dpHakoniwaMagnetPendulum::guiEvent);
@@ -60,7 +56,6 @@ void dpHakoniwaMagnetPendulum::setup() {
     mSenderInverse.setup("192.168.20.72", 8528);
 
     bHideNodeView = true;
-    
 }
 
 void dpHakoniwaMagnetPendulum::sendOsc() {
@@ -75,7 +70,6 @@ void dpHakoniwaMagnetPendulum::sendOsc() {
         
         mSenderOnOff.sendMessage(m);
     }
-    
     {
         ofxOscMessage m;
         m.setAddress("/dp/hakoniwa/magpen");
@@ -83,7 +77,6 @@ void dpHakoniwaMagnetPendulum::sendOsc() {
         for (int i = 0; i < NMAGNETS; i++) {
             m.addIntArg(bInversed[i]); // Magnets Inversed (1: Inversed, 0: Normal)
         }
-        
         mSenderInverse.sendMessage(m);
     }
 }
@@ -112,6 +105,9 @@ void dpHakoniwaMagnetPendulum::guiEvent(ofxUIEventArgs &e) {
 }
 
 void dpHakoniwaMagnetPendulum::onEnabled(){
+    
+    startTime = ofGetElapsedTimef();
+    bFirstInverseTimeDone = false;
 
 }
 
@@ -120,6 +116,7 @@ void dpHakoniwaMagnetPendulum::onDisabled(){
     for (int i = 0; i < NMAGNETS; i++) {
         bOn[i] = false;
     }
+
     sendOsc();
     
 }
@@ -129,46 +126,64 @@ void dpHakoniwaMagnetPendulum::update() {
     mMotionExtractor.update();
     
     if (!bTestMode) {
+        if (!bModeTwist) {
         
-        d1 = mMotionExtractor.getDistanceAt(0, 1);
-        d2 = mMotionExtractor.getDistanceAt(2, 3);
-        d3 = mMotionExtractor.getDistanceAt(4, 5);
+            d1 = mMotionExtractor.getDistanceAt(0, 1);
+            d2 = mMotionExtractor.getDistanceAt(2, 3);
+            d3 = mMotionExtractor.getDistanceAt(4, 5);
+
+            if (bEachMode) {
+
+                if (d1 < distanceThreshold && d1 != 0.0f) {
+                    bOn[0] = true;
+                    bOn[1] = true;
+                } else {
+                    bOn[0] = false;
+                    bOn[1] = false;
+                }
+                if (d2 < distanceThreshold && d2 != 0.0f) {
+                    bOn[2] = true;
+                    bOn[3] = true;
+                } else {
+                    bOn[2] = false;
+                    bOn[3] = false;
+                }
+                if (d3 < distanceThreshold && d3 != 0.0f) {
+                    bOn[4] = true;
+                    bOn[5] = true;
+                } else {
+                    bOn[4] = false;
+                    bOn[5] = false;
+                }
+            } else {
+                
+                if ((d1 < distanceThreshold && d1 > 0) ||
+                    (d2 < distanceThreshold && d2 > 0) ||
+                    (d3 < distanceThreshold&& d3 > 0)) {
+                    for (int i = 0; i < 6; i++) bOn[i] = true;
+                } else {
+                    for (int i = 0; i < 6; i++) bOn[i] = false;
+                }
+            }
+        } else {   // twist mode
+
+            
         
-//        cout << d1 << ", " << d2 << ", " << d3 << endl;
-
-        if (bEachMode) {
-
-            if (d1 < distanceThreshold && d1 != 0.0f) {
-                bOn[0] = true;
-                bOn[1] = true;
+        
+        }
+    
+        if (!bFirstInverseTimeDone){
+            if (startTime + 1.0f > ofGetElapsedTimef()){
+                for (int i = 0; i < NMAGNETS; i++){
+                    bOn[i] = true;
+                    bInversed[i] = false;
+                }
             } else {
-                bOn[0] = false;
-                bOn[1] = false;
+                bFirstInverseTimeDone = true;
+                for (int i = 0; i < NMAGNETS; i++){
+                    bInversed[i] = true;
+                }
             }
-            if (d2 < distanceThreshold && d2 != 0.0f) {
-                bOn[2] = true;
-                bOn[3] = true;
-            } else {
-                bOn[2] = false;
-                bOn[3] = false;
-            }
-            if (d3 < distanceThreshold && d3 != 0.0f) {
-                bOn[4] = true;
-                bOn[5] = true;
-            } else {
-                bOn[4] = false;
-                bOn[5] = false;
-            }
-        } else {
-            
-            if ((d1 < distanceThreshold && d1 > 0) ||
-                (d2 < distanceThreshold && d2 > 0) ||
-                (d3 < distanceThreshold&& d3 > 0)) {
-                for (int i = 0; i < 6; i++) bOn[i] = true;
-            } else {
-                for (int i = 0; i < 6; i++) bOn[i] = false;
-            }
-            
         }
     }
     
@@ -177,7 +192,6 @@ void dpHakoniwaMagnetPendulum::update() {
     }
     
     sendOsc();
-    
 }
 
 void dpHakoniwaMagnetPendulum::drawActor(const ramActor &actor){
@@ -188,18 +202,12 @@ void dpHakoniwaMagnetPendulum::draw(){
     
     ramSetViewPort(dpGetFirstScreenViewPort()); //１枚目のscreenを描画に指定。ここの仕様変わります。
     ramBeginCamera();
-    
     mMotionExtractor.draw();
-//    twFinder.debugDraw(mMotionExtractor);
-//    debugDraw();
-    
     ramEndCamera();
-
     
     if (bHideNodeView) example_drawDump();
     
 }
-
 
 void dpHakoniwaMagnetPendulum::example_drawDump(){
     
@@ -234,8 +242,3 @@ void dpHakoniwaMagnetPendulum::example_drawDump(){
     
     ofPopMatrix();
 }
-
-
-
-
-

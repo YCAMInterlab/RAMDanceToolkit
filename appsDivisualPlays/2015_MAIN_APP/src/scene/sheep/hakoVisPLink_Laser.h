@@ -12,6 +12,7 @@
 #include "ramMain.h"
 #include "ofxDelaunay.h"
 #include "sheepCam.h"
+#include "dpConstants.h"
 
 class liningUnit{
 public:
@@ -60,6 +61,10 @@ public:
 	float mLineScale;
 	bool mManualCam;
 	bool mFaceBlink;
+
+	int step;
+	bool flickStop;
+	int flick_counter;
 
 protected:
 	ofxUICanvasPlus* gui;
