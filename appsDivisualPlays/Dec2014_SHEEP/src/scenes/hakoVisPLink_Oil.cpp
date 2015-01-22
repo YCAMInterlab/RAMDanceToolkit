@@ -13,10 +13,6 @@ hakoVisPLink_Oil::hakoVisPLink_Oil(){
 	receiver.addAddress("/dp/cameraUnit/Plink_Oil");
 	ramOscManager::instance().addReceiverTag(&receiver);
 
-	simpleChaser.assign(20, ofVec3f(ofRandomuf()*100,
-									ofRandomuf()*100,
-									ofRandomuf()*100));
-	sCv.assign(20, ofVec3f(0,0,0));
 }
 
 void hakoVisPLink_Oil::setupControlPanel(){
@@ -44,127 +40,54 @@ void hakoVisPLink_Oil::update(){
 
 			pixels.clear();
 			pixels.assign(m.getArgAsInt32(0) * m.getArgAsInt32(1), false);
+			offsets.assign(pix_w * pix_h, ofVec2f(0,0));
+			scales.assign(pix_w * pix_h, 10.0);
 
 			for (int64_t i = 0;i < pixels.size();i++){
 				int64_t bt = m.getArgAsInt64(2 + i / 64);
 				int64_t targetBit = int64_t(1) << (i % 64);
 				pixels[i] = (bt & targetBit) > 0;
-			}
-		}
-
-//		if (m.getAddress() == "/dp/cameraUnit/SandStorm/contour/boundingRect"){
-		if (m.getAddress() == "/dp/cameraUnit/Plink_Oil/contour/boundingRect"){
-			int nBlob = m.getArgAsInt32(0);
-			pts.assign(nBlob, ofVec3f(0,0,0));
-			labels.assign(nBlob, 0);
-
-			for (int i = 0;i < nBlob;i++){
-				labels[i] = m.getArgAsInt32(1+i*5);
-				pts[i].set(m.getArgAsFloat(1+i*5+1) + m.getArgAsFloat(1+i*5+3)/2.0,
-						   m.getArgAsFloat(1+i*5+2) + m.getArgAsFloat(1+i*5+4)/2.0,
-						   ofNoise(labels[i]*35.3514)*1.0);
-			}
-
-			for (int i = 0;i < labels.size();i++){
-				if (!isExistByChaser(labels[i])){
-					chasers.push_back(labelChaser(labels[i]));
-					chasers.back().targetIdx = ofRandom(simpleChaser.size());
-					chasers.back().pos_smooth = (pts[i] - ofVec3f(0.5,0.5,0.5)) * 300.0;
-				}
+				offsets[i].set(ofNoise(i*32.41)*10,
+							   ofNoise(i*67.32)*10);
+				scales[i] = ofNoise(i*43.135)*30+5;
 			}
 		}
 
 	}
 
-	for (int i = 0;i < chasers.size();i++){
-		int targ = isExistByLabel(chasers[i].label);
-		if (targ > -1 && !chasers[i].dead){
-			chasers[i].pos = (pts[targ] - ofVec3f(0.5,0.5,0.5)) * 300.0;
-		}else{
-			chasers[i].dead = true;
-			chasers[i].vec += ofVec3f(1.0,-1.0) / 10.0;
-			chasers[i].pos += chasers[i].vec;
-		}
-
-		chasers[i].update();
+	while (scaleTarg.size() < scales.size()) {
+		scaleTarg.push_back(0.0);
 	}
 
-	for (int i = 0;i < chasers.size();i++){
-		if (chasers[i].vec.lengthSquared() > 1){
-			chasers.erase(chasers.begin()+i);
-		}
+	while (scaleTarg.size() > scales.size()){
+		scaleTarg.pop_back();
+	}
+
+	for (int i = 0;i < scaleTarg.size();i++){
+		scaleTarg[i] += (scales[i] * pixels[i] - scaleTarg[i]) / 25.0;
 	}
 
 }
 
 void hakoVisPLink_Oil::draw(){
 
-	if (mDebugDraw){
-		for (int i = 0;i < pts.size();i++){
+	ofSetCircleResolution(6);
+	for (int i = 0;i < pix_w;i++){
+		for (int j = 0;j < pix_h;j++){
 			ofPushMatrix();
-			ofTranslate(pts[i] * SINGLE_SCREEN_HEIGHT);
-			ofLine(-5, 0, 5, 0);
-			ofLine(0, -5, 0, 5);
-			ofDrawBitmapString(ofToString(labels[i]), 20,20);
+			ofTranslate(0+i*(SINGLE_SCREEN_WIDTH / pix_w),
+						j*(SINGLE_SCREEN_HEIGHT / pix_h));
+			ofTranslate(offsets[i*pix_w + j]);
+
+			ofSetColor(255);
+			if (ofNoise(i*35.65, j*23.42) < 0.5) ofNoFill();
+			if (ofNoise(i*95.34, j*43.14) < 0.2) ofSetColor(dpColor::MAIN_COLOR);
+			ofCircle(0, 0, scaleTarg[i*pix_w + j]);
+			ofFill();
 			ofPopMatrix();
 		}
 	}
-
-//	for (int i = 0;i < chasers.size();i++){
-//		ofPushMatrix();
-//
-//		ofTranslate(chasers[i].pos_smooth);
-////		ofRotateZ(45);
-//
-//		ofSetRectMode(OF_RECTMODE_CENTER);
-//		ofSetColor(chasers[i].col);
-////		ofRect(0, 0, pow(chasers[i].seed,4.0f)*50, SINGLE_SCREEN_HEIGHT);
-//		ofSetLineWidth(3.0);
-//		ofLine(-5000, 0, 5000, 0);
-//		ofLine(0, -5000, 0, 5000);
-//		ofSetLineWidth(3.0);
-//		ofSetRectMode(OF_RECTMODE_CORNER);
-//		ofPopMatrix();
-//	}
-
-	for (int i = 0;i < pix_w;i++){
-		for (int j = 0;j < pix_h;j++){
-			if (pixels[i*pix_w + j]){
-				ofRect(700+i*10, j*10, 10, 10);
-			}
-		}
-	}
-
-	ramBeginCamera();
-	ofRotateY(ofGetFrameNum()/15.0);
-	for (int i = 0;i < chasers.size();i++){
-//		simpleChaser[chasers[i].targetIdx] += (chasers[i].pos_smooth - simpleChaser[chasers[i].targetIdx]) / 55.0;
-
-		sCv[chasers[i].targetIdx] += (chasers[i].pos_smooth - simpleChaser[chasers[i].targetIdx]) / 455.0;
-		sCv[chasers[i].targetIdx] *= 0.97;
-
-		simpleChaser[chasers[i].targetIdx] += sCv[chasers[i].targetIdx];
-	}
-
-	ofNoFill();
-	ofBeginShape();
-	ofTranslate(0, 100);
-	ofLine(0.0, 0.0, 1000, 0.0,0.0,-1000);
-	ofLine(1000,0.0,0.0, -1000.0,0.0,0.0);
-	ofLine(0.0, 1000, 0.0, 0.0,-1000,0.0);
-
-	glScaled(3.0, 3.0, 3.0);
-	for (int j = 0;j < 2;j++){
-		for (int i = 0;i < simpleChaser.size();i++){
-			ofCurveVertex(simpleChaser[i]);
-		}
-	}
-	ofEndShape();
-	ofFill();
-
-	ofSetColor(255);
-
-	ramEndCamera();
+	ofSetCircleResolution(15);
 }
 
 void hakoVisPLink_Oil::onPanelChanged(ofxUIEventArgs &e){
@@ -177,18 +100,4 @@ void hakoVisPLink_Oil::draw_PatternA(){
 
 void hakoVisPLink_Oil::draw_PatternB(){
 
-}
-
-bool hakoVisPLink_Oil::isExistByChaser(int label){
-	for (int i = 0;i < chasers.size();i++){
-		if (chasers[i].label == label) return true;
-	}
-	return false;
-}
-
-int hakoVisPLink_Oil::isExistByLabel(int label){
-	for (int i = 0;i < labels.size();i++){
-		if (labels[i] == label) return i;
-	}
-	return -1;
 }

@@ -12,46 +12,6 @@
 #include "ramMain.h"
 #include "dpConstants.h"
 
-class labelChaser{
-public:
-
-	labelChaser(int lb){
-		dead = false;
-		label = lb;
-		vec.set(0,0,0);
-		pos.set(0.0,0.0,0.0);
-		pos_smooth.set(0.0,0.0,0.0);
-		col.set(ofRandom(255));
-
-		palette[0].set(255,50,150);
-		palette[1].set(255,220,235);
-		palette[2].set(200,50,120);
-		palette[3].set(130,30,80);
-		palette[4].set(120,120,120);
-
-		col = palette[int(ofRandom(5))];
-		seed = ofRandomuf();
-
-	}
-	~labelChaser(){
-
-	}
-
-	void update(){
-		pos_smooth += (pos - pos_smooth) / 20.0;
-	}
-
-	bool dead;
-	int targetIdx;
-	int label;
-	ofVec3f vec;
-	ofVec3f pos;
-	ofVec3f pos_smooth;
-	ofColor col;
-	ofColor palette[5];
-	float seed;
-};
-
 class hakoVisPLink_Oil : public ramBaseScene{
 public:
 
@@ -71,27 +31,22 @@ public:
 	ramOscReceiveTag receiver;
 
 	ofxUICanvasPlus* gui;
-	vector<int> labels;
-	vector<ofVec3f> pts;
 
 	inline
 	string getName() const { return "dpVisPLink_Oil"; }
 
-	vector<ofVec3f> simpleChaser;
-	vector<ofVec3f> sCv;
 
 	//Pixelate;
-	vector<bool> pixels;
+	vector<bool>	pixels;
+	vector<ofVec2f> offsets;
+	vector<float>	scales;
+	vector<float>	scaleTarg;
 	int pix_w;
 	int pix_h;
 
 protected:
 
-	int		isExistByLabel(int label);
-	bool	isExistByChaser(int label);
-
 	bool mDebugDraw;
-	vector<labelChaser> chasers;
 };
 
 #endif /* defined(__RAMDanceToolkit__hakoVisPLink_Oil__) */
