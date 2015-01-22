@@ -16,6 +16,8 @@ void ofApp::setup(){
 	hakoniwas.push_back("dpHWorm");
 	hakoniwas.push_back("dpVisTornado");
 	hakoniwas.push_back("dpHfrozenIce");
+	hakoniwas.push_back("FutureRE");
+	hakoniwas.push_back("distanceMetaball");
 	hakoniwas.push_back("dpVisPLink_Prism");
 	hakoniwas.push_back("dpVisPLink_Oil");
 
@@ -149,8 +151,6 @@ void ofApp::sendMessage(){
 	m.addStringArg(h);
 	m.addIntArg(mEnable);
 	m.addIntArg(displays[0]);
-	m.addIntArg(displays[0]);
-	m.addIntArg(displays[2]);
 	m.addIntArg(displays[2]);
 
 	sender.setup(ad, 12400);

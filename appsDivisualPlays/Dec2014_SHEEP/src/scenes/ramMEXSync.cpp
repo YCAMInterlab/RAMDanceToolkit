@@ -55,6 +55,16 @@ void ramMEXSync::setupControlPanel(){
 	gui->addSlider("Order", 1.0, 1000.0, &mUIRemote_fOrder);
 	gui->addToggle("Remote:Toggle", &mUIRemote_toggle);
 	
+	presetGui.disableAppDrawCallback();
+	presetGui.disableMouseEventCallbacks();
+	presetGui.addButton("TEst", false);
+	
+	presetGui.autoSizeToFitWidgets();
+	presetGui.setPosition(240, 400);
+	presetGui.setup();
+	gui->addWidget(&presetGui);
+	gui->autoSizeToFitWidgets();
+	
 	mex.setupControlPanel(this);
 
 	ofAddListener(gui->newGUIEvent, this, &ramMEXSync::onPanelChanged);

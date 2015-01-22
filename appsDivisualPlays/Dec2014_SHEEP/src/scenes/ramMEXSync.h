@@ -37,6 +37,8 @@ public:
 	ofxUITextInput* targScene;
 	ofxUITextInput* uiName;
 	
+	ofxUICanvas presetGui;
+	
 	float mUIRemote_float;
 	float mUIRemote_fOrder;
 	bool mUIRemote_toggle;
