@@ -17,6 +17,7 @@ eyeBall::eyeBall(){
     sender.setup("192.168.20.73", 8528);
     sender2.setup("192.168.20.74", 8528);
     
+    //MagPendulum receive
     //receiver.setup(10000);
 }
 
@@ -239,6 +240,24 @@ void eyeBall::refleshState(){
     }
     //-------------
     
+    //=== OSC Read =======
+//    // check for waiting messages
+//    while(receiver.hasWaitingMessages()){
+//        // get the next message
+//        ofxOscMessage r;
+//        receiver.getNextMessage(&r);
+//        
+//        // check for mouse moved message
+//        if(r.getAddress() == "/dp/cameraUnit/MagPendulum/features"){
+//            int pendulumPosX = r.getArgAsInt32(1);
+//            int pendulumPosZ = r.getArgAsInt32(2);
+//            cout << "receive!!!" << endl;
+//            cout << "x  :" << pendulumPosX << endl;
+//            cout << "z  :" <<pendulumPosZ << endl;
+//        }
+//    }
+    //=== OSC Read =======
+    
     /*=== OSC Send Example ===*/
     
     //1台目のArduino
@@ -261,21 +280,6 @@ void eyeBall::refleshState(){
     n.addIntArg(servoY4_val);
     n.addIntArg(0);
     sender2.sendMessage(n);
-    
-//    //=== OSC Read =======
-//    
-//    // check for waiting messages
-//    while(receiver.hasWaitingMessages()){
-//        // get the next message
-//        ofxOscMessage r;
-//        receiver.getNextMessage(&r);
-//        
-//        // check for mouse moved message
-//        if(r.getAddress() == "/dp/cameraUnit/MagPendulum/features"){
-//            
-//        }
-//    }
-    //=== OSC Read =======
 }
 
 

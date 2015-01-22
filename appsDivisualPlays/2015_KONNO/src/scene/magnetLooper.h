@@ -11,6 +11,7 @@
 
 #include "ramMain.h"
 #include "ramMotionExtractor.h"
+#define NUM_MSG_STRINGS 20
 
 class magnetLooper : public ramBaseScene{
 public:
@@ -42,7 +43,6 @@ public:
     bool looperStop2;
     //---------------------------
     
-    
     bool speedControl;
     //スピードコントロールで判定
     //---------------------------
@@ -54,6 +54,14 @@ public:
     float speedThreshold2;
     //---------------------------
     
+    //oscによるスピードコントロール
+    //---------------------------
+    int oscValLooper1;
+    int oscValLooper2;
+    //---------------------------
+    
+    //スピードコントロール to processing
+    //---------------------------
     bool looper1Speed;
     int looper1SpeedHantei;
     float looper1SpeedVal;
@@ -61,10 +69,15 @@ public:
     bool looper2Speed;
     int looper2SpeedHantei;
     float looper2SpeedVal;
-    
+    //---------------------------
+        
     //test
     int x,y;
     //==========================================
+    
+    int current_msg_string;
+    string msg_strings[NUM_MSG_STRINGS];
+    float timers[NUM_MSG_STRINGS];
     
 private:
     void refleshState();
@@ -72,6 +85,17 @@ private:
     ramMotionExtractor	motionExtractor;
     ofxOscSender sender;
     ofxOscSender sender2;
+    
+    //evalaPCヘポジションとスピードの送信
+    ofxOscSender sender_evala;
+    
+    //-----------------------------------
+    //processingからポジション受信
+    ofxOscReceiver receiver;
+    
+    //evalaPCからのスピード受信
+    ofxOscReceiver receiver_speed;
+    //-----------------------------------
     
     bool mDrawLines;
     bool mDrawTriangle;
