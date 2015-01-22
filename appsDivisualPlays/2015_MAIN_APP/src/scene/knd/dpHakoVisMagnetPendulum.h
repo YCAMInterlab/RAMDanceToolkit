@@ -110,8 +110,6 @@ public:
     void setup(){
         
         float offsetX = 530;
-        float offsetY = 410;
-        
         float space = 250;
         
         for(int j = 0; j < mDivY; j++){

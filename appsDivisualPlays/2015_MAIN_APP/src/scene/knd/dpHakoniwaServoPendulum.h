@@ -172,7 +172,7 @@ private:
     float mLength = 200.0;
     bool isRotMode = false;
     
-    float mThresh = 10.0;
+    float mThresh = 0.0;
 };
 
 #endif

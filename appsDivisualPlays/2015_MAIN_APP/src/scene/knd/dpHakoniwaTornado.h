@@ -9,6 +9,8 @@
 #ifndef RAMDanceToolkit_dpHakoniwaTornade_h
 #define RAMDanceToolkit_dpHakoniwaTornade_h
 
+#include "dpTailSphere.h"
+
 class dpHakoniwaTornado : public ramBaseScene{
 public:
     
@@ -20,6 +22,8 @@ public:
         ramGetGUI().addToggle("mist",&isMist);
         ramGetGUI().addSlider("radMin",0.0,300.0,&mRadMin);
         ramGetGUI().addSlider("radMax",0.0,300.0,&mRadMax);
+        ramGetGUI().addSlider("drawRadMin",0.0,10.0,&mDrawRadMin);
+        ramGetGUI().addSlider("drawRadMax",0.0,10.0,&mDrawRadMax);
         ramGetGUI().addSlider("mistThresh",10.0, 255, &mMistThresh);
         ramGetGUI().addSlider("fan",0,255,&mFan);
         
@@ -40,6 +44,7 @@ public:
         if(name == "bulb")bulb();
         
         if(name == "mist")bulb();
+        
     }
     
     void fan(int val){
@@ -68,8 +73,9 @@ public:
     void update(){
         
         mMotionExtractor.update();
-        bulb();
-        fan(mFan);
+       // bulb();
+       // fan(mFan);
+        mSphere.setRad(mDrawRadMin, mDrawRadMax);
        /* fan();
         mist();
         cout << isBulb << endl;
@@ -116,8 +122,12 @@ public:
         ofTranslate(center);
         rotateToNormal(normal);
         ofNoFill();
-        ofCircle(0, 0, radius);
+        //ofSetColor(255,0,0);
+        //ofCircle(0, 0, radius);
         ofPopMatrix();
+        
+        ofSetColor(255,255,255);
+        mSphere.draw(center,radius,normal);
         ramEndCamera();
     }
     
@@ -146,6 +156,10 @@ private:
     float mMistThresh = 180.0;;
     float mFan = 170;
     
+    dpTailSphereController mSphere;
+    
+    float mDrawRadMin = 1.0;
+    float mDrawRadMax = 12.0;
 };
 
 #endif
