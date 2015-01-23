@@ -187,8 +187,8 @@ public:
 	}
     
     void onEnabled(){
-        ramCameraManager::instance().getActiveCamera().setPosition(0,240,420);
-        ramCameraManager::instance().getActiveCamera().lookAt(ofPoint(0,100,0));
+        ramCameraManager::instance().getActiveCamera().setPosition(getRDTKSceneCameraPosition());
+        ramCameraManager::instance().getActiveCamera().lookAt(getRDTKSceneCameraLookAt());
     }
 	
 	string getName() const { return "Four Points"; }

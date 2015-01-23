@@ -21,7 +21,8 @@ public:
         
         ramGetGUI().addSlider("speed", 0.1, 4.0, &mSpeed);
         ramGetGUI().addSlider("range", 0.0, 90, &mRange);
-        ramGetGUI().addSlider("thresh", 0.0, 20.0, &mThresh);
+        ramGetGUI().addSlider("minThresh", 0.0, 20.0, &mMinThresh);
+        ramGetGUI().addSlider("mixThresh", 0.0, RANGE_MAX, &mMaxThresh);
         ramGetGUI().addSlider("length", 0.01, 400.0, &mLength);
         ramGetGUI().addToggle("isRotMode",&isRotMode);
         
@@ -74,7 +75,9 @@ public:
             
                 float val = ofMap((pos1 - pos2).length(),0,mLength,0,90);
                 
-                if(val < mThresh)val = 0.0;
+                if(val < mMinThresh)val = 0.0;
+                
+                if(val > mMaxThresh)val = 0.0;
                 
                 setRange(val);//(pos1 - pos2).length() * mScale);
             
@@ -172,7 +175,10 @@ private:
     float mLength = 200.0;
     bool isRotMode = false;
     
-    float mThresh = 3.0;
+    static const int RANGE_MAX = 90;
+    
+    float mMinThresh = 3.0;
+    float mMaxThresh = RANGE_MAX;
 };
 
 #endif
