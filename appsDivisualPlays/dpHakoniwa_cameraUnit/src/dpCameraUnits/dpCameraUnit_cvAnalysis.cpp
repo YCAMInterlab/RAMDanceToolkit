@@ -125,7 +125,7 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 
 		bRectM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/boundingRect");
 		blobM .setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/blob");
-		areaM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/sarea");
+		areaM.setAddress("/dp/cameraUnit/"+hakoniwa_name+"/contour/area");
 
 		bRectM.addIntArg(mContFinder.getContours().size());
 		blobM.addIntArg(mContFinder.getContours().size());
