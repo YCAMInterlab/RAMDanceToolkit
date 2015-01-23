@@ -14,7 +14,7 @@ DP_SCORE_NAMESPACE_BEGIN
 static const string kKeyDancer{"Dancer"};
 static const string kKeyRDTK{"RAM DTK"};
 static const string kKeyHakoniwa{"Hakoniwa"};
-static const string kKeyAnalyze{"Analyze"};
+static const string kKeyAnalyze{"Analysis"};
 static const string kKeyOutput{"Output"};
 static const string kKeyZoomOut{"ZoomOut"};
 

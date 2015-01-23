@@ -30,15 +30,14 @@ void AnalyzeMean::update(ofVec4f mean)
     if (t < mPrevSetSceneTime + mMinSetSceneTime) return;
     
     if (mTotalAddition.f >= mMeanLimit) {
-        const bool win0  = (mTotalAddition.i & 0b00000001) >> 0;
-        const bool win1  = (mTotalAddition.i & 0b00000010) >> 1;
-        const int which  = (mTotalAddition.i & 0b00111100) >> 2;
-        cout << which << ":" << win0 << win1 << endl;
+        mWin0  = (mTotalAddition.i & 0b00000001) >> 0;
+        mWin1  = (mTotalAddition.i & 0b00000010) >> 1;
+        mWhich  = (mTotalAddition.i & 0b00111100) >> 2;
         
         if (getMH().getUniqueScenes().empty() == false) {
-            const int scene{(int)(which % getMH().getUniqueScenes().size())};
-            const int score{(int)(which % getMH().getNumUniqueScores())};
-            getMH().setUniqueScene(scene, win0, win1);
+            const int scene{(int)(mWhich % getMH().getUniqueScenes().size())};
+            const int score{(int)(mWhich % getMH().getNumUniqueScores())};
+            getMH().setUniqueScene(scene, mWin0, mWin1);
             getMH().setUniqueScore(score);
             mPrevScene = scene;
             mPrevSetSceneTime = t;
@@ -52,7 +51,11 @@ void AnalyzeMean::update(ofVec4f mean)
 
 void AnalyzeMean::draw()
 {
+    const float t{ofGetElapsedTimef()};
+    
     ofPushStyle();
+    ofPushMatrix();
+    alignedTranslate(0.f, MH::kTextSpacing);
     const float w{188.f};
     const float h{10.f};
     const float spacing{2.f};
@@ -69,6 +72,24 @@ void AnalyzeMean::draw()
         const float x{mMean[i]/255.f};
         alignedRect(0.f, h * i + i * spacing, w * x, h);
     }
+    ofPopMatrix();
+    
+    ofPushMatrix();
+    ofSetColor(MH::kTextColor);
+    ofDrawBitmapString("[mean]", ofPoint::zero());
+    alignedTranslate(200.f, MH::kTextSpacing);
+    alignedTranslate(0.f, MH::kTextSpacing);
+    stringstream ss;
+    ss << fixed
+    << "data span : " << setprecision(3) << mLastUpdateSpan << endl
+    << "scene span: " << setprecision(1) << t - mPrevSetSceneTime << endl
+    << "total add : " << setprecision(3) << mTotalAddition.f << endl
+    << "raw color : " << setprecision(0) << mMean << endl
+    << "diff add  : " << setprecision(1) << mMeanAddtion << endl
+    << "gen       : " << mWhich << ", " << mWin0 << ", " << mWin1;
+    
+    ofDrawBitmapString(ss.str(), ofPoint::zero());
+    ofPopMatrix();
     
     ofPopStyle();
 }

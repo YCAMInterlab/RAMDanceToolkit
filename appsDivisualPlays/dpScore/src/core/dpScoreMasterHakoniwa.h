@@ -182,7 +182,7 @@ private:
     AnalyzeMean mAnalyzeMean;
     AnalyzePixelate mAnalyzePixelate;
     
-    float mValveOpenDuration{0.3f};
+    float mValveOpenDuration{0.4f};
     
     bool mEmergencyStop{false};
     

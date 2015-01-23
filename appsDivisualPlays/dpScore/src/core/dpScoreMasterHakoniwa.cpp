@@ -175,6 +175,8 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     pixelataTab->setName("Pixelate Settings");
     pixelataTab->addLabel("Pixelate Settings", OFX_UI_FONT_SMALL);
     pixelataTab->addSpacer();
+    pixelataTab->addSlider("Limit", 0.1f, 100.f, &mAnalyzePixelate.mLimit, w - kMargin, lineH);
+    pixelataTab->addSlider("Min time", 0.1f, 60.f * 3.f, &mAnalyzePixelate.mMinSetSceneTime, w - kMargin, lineH);
     tabbar->addCanvas(pixelataTab);
     
     tabbar->addSpacer(w, 1.f);
@@ -510,26 +512,9 @@ void MasterHakoniwa::draw()
     mAnalyzeMean.draw();
     ofPopMatrix();
     
-    ofPushMatrix();
-    ofDrawBitmapString("[mean]", ofPoint::zero());
-    alignedTranslate(200.f, kTextSpacing);
-    ss.str("");
-    ss
-    << "data span : " << setprecision(3) << mAnalyzeMean.mLastUpdateSpan << endl
-    << "scene span: " << setprecision(1) << t - mAnalyzeMean.mPrevSetSceneTime << endl
-    << "total add : " << setprecision(3) << mAnalyzeMean.mTotalAddition.f << endl
-    << "raw color : " << setprecision(0) << mAnalyzeMean.mMean << endl
-    << "diff add  : " << setprecision(1) << mAnalyzeMean.mMeanAddtion;
-    
-    ofDrawBitmapString(ss.str(), ofPoint::zero());
-    ofPopMatrix();
-    
-    alignedTranslate(0.f, kTextSpacing * 8.f);
+    alignedTranslate(0.f, kTextSpacing * 10.f);
     
     ofPushMatrix();
-    ofSetColor(kTextColor);
-    ofDrawBitmapString("[pixelate]", ofPoint::zero());
-    alignedTranslate(0.f, kTextSpacing);
     mAnalyzePixelate.draw();
     ofPopMatrix();
     
