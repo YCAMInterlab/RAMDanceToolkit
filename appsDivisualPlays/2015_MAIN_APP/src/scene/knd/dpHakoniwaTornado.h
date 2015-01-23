@@ -76,8 +76,8 @@ public:
     void update(){
         
         mMotionExtractor.update();
-       // bulb();
-       // fan(mFan);
+        bulb();
+        fan(mFan);
         mSphere.setRad(mDrawRadMin, mDrawRadMax);
        /* fan();
         mist();
