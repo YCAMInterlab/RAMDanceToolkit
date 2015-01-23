@@ -21,13 +21,14 @@ void HakoniwaGearMove::setupControlPanel(){
     mGear2Reverse = true;
     mGear3Reverse = true;
     
-    mMax1speed = 16000;
+    mMax1speed = 10000;
     mMin1speed = 600;
-    mMax2speed = 26000;
-    mMin2speed = 100;
-    mMax3speed = 12000;
-    mMin3speed = 6500;
+    mMax2speed = 25000;
+    mMin2speed = 5000;
+    mMax3speed = 6500;
+    mMin3speed = 2500;
     mScale = 150;
+    mScale2 = 90;
     
     ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
     panel->addToggle("data show", &mDatahow);
@@ -37,13 +38,13 @@ void HakoniwaGearMove::setupControlPanel(){
     panel->addToggle("manual turn", &mManual);
     panel->addToggle("gear1", &mGear1);
     panel->addToggle("gear1 reverse", &mGear1Reverse);
-    panel->addIntSlider("TrurnGear1Speed", 100, 25000, &mGear1Speed);
+    panel->addIntSlider("TrurnGear1Speed", 600, 10000, &mGear1Speed);
     panel->addToggle("gear2", &mGear2);
     panel->addToggle("gear2 reverse", &mGear2Reverse);
-    panel->addIntSlider("TrurnGear2Speed", 100, 35000, &mGear2Speed);
+    panel->addIntSlider("TrurnGear2Speed", 5000, 25000, &mGear2Speed);
     panel->addToggle("gear3", &mGear3);
     panel->addToggle("gear3 reverse", &mGear3Reverse);
-    panel->addIntSlider("TrurnGear3Speed", 100, 35000, &mGear3Speed);
+    panel->addIntSlider("TrurnGear3Speed", 2500, 6500, &mGear3Speed);
     
     ofAddListener(panel->newGUIEvent, this, &HakoniwaGearMove::onPanelChanged);
     motionExtractor.setupControlPanel(this,ofPoint(340,30));
@@ -109,7 +110,7 @@ void HakoniwaGearMove::draw(){
         if ((mManual != true && mTotalcount >= 10)) {
             mGear1Speed = mGear1Count * mScale;
             mGear2Speed = mGear2Count * mScale;
-            mGear3Speed = mGear3Count * mScale;
+            mGear3Speed = mGear3Count * mScale2;
             cout << "Gear1Speed " << mGear1Speed << endl;
             cout << "Gear2Speed " << mGear2Speed << endl;
             cout << "Gear3Speed " << mGear3Speed << endl;
@@ -137,7 +138,7 @@ void HakoniwaGearMove::draw(){
             if(mGear2 == true){
                 if (mManual != true) {
                     float x = ofRandom(0,1);
-                    int Min2speed = ofRandom(100, 2500);
+                    int Min2speed = ofRandom(5000, 8000);
                     if ( x > 0.51 ){
                         mGear2Reverse = true;
                     }else{
