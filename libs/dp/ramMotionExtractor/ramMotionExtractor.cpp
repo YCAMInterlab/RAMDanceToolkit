@@ -450,7 +450,7 @@ ofVec3f ramMotionExtractor::getPositionAt(int port,bool fixPosition){
 	ramNodeArray nd = ramActorManager::instance().getNodeArray(getActorNameAt(port));
 	ofVec3f pos = getNodeAt(port).getGlobalPosition();
 	ofVec3f abd = nd.getNode(ramActor::JOINT_ABDOMEN).getGlobalPosition();
-	
+	abd.y = 0;
 	if (fixPosition){
 		pos -= abd;
 	}

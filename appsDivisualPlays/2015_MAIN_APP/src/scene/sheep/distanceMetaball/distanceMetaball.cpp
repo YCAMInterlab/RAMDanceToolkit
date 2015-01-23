@@ -42,9 +42,9 @@ void distanceMetaball::update(){
 
 	for (int i = 0;i < mex.getNumPort();i++){
 		if (pts.size() <= i){
-			pts.push_back(mex.getPositionAt(i)/400.0 + ofVec3f(0.5,0.5,0.5));
+			pts.push_back(mex.getPositionAt(i,true)/400.0 + ofVec3f(0.5,0.5,0.5));
 		}else{
-			ofVec3f tg = mex.getPositionAt(i)/400.0 + ofVec3f(0.5,0.5,0.5);
+			ofVec3f tg = mex.getPositionAt(i,true)/400.0 + ofVec3f(0.5,0.5,0.5);
 			pts[i] += (tg - pts[i]) / mSmooth;
 		}
 	}
