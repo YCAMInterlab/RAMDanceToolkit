@@ -30,7 +30,7 @@
 
 //Kezzar Scenes
 #include "dpHakoniwaServoPendulum.h"
-#include "dpHakoVisStageCircle.h"
+#include "dpHakoVisStageBlob.h"
 #include "dpHakoVisServoPendulum.h"
 #include "dpHakoVisWorm.h"
 #include "dp3DDanceMap.h"
@@ -57,6 +57,8 @@
 //#include "dpHakoniwaIce.h"
 #include "frozenIce.h"
 #include "magnetLooper.h"
+//
+#include "eyeBall.h"
 
 //onishi Scenes
 #include "FutureRE.h"
@@ -64,6 +66,7 @@
 //LEGENDARY RDTK Scenes!!!!!!!!
 #include "LineDrawing.h"
 #include "FourPoints.h"
+#include "Future.h"
 
 class testApp : public ramBaseApp
 {
@@ -114,10 +117,13 @@ public:
     dpHakoVisServoPendulum      visServoPendulum;
     
     // stage
-    dpHakoVisStageCircle                visStage;
+    dpHakoVisStageBlob                visStage;
     
     // worm
     dpVisWorm             visWorm;
+    
+    // eyeBall
+    eyeBall dpHEyeBall;
 
 	//MagPendulum
 	dpHakoniwaMagnetPendulum	magPendulum;
@@ -154,5 +160,6 @@ public:
     // RDTK_Scenes_
     LineDrawing line;
     FourPoints fourPoints;
+    Future     future;
     
 };

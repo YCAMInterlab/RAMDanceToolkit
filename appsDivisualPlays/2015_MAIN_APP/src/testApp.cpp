@@ -71,12 +71,17 @@ void testApp::setup()
     sceneManager.addScene(dpHWorm.getPtr());
 	sceneManager.addScene(visWorm.getPtr());
     
+    //---
+    sceneManager.addScene(dpHEyeBall.getPtr());
+    //---
+    
     sceneManager.addScene(futureRE.getPtr());
 
 	sceneManager.addScene(metaball.getPtr());
 
     sceneManager.addScene(line.getPtr());
 	sceneManager.addScene(fourPoints.getPtr());
+    sceneManager.addScene(future.getPtr());
     
 	sceneManager.addScene(testSceneA.getPtr());
 	sceneManager.addScene(testSceneB.getPtr());
@@ -84,6 +89,8 @@ void testApp::setup()
 	sceneManager.addScene(testSceneD.getPtr());
     
 	sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
+    
+    sceneManager.setShowAllActors(false);
 }
 
 //--------------------------------------------------------------

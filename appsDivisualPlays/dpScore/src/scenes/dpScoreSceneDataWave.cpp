@@ -49,6 +49,8 @@ void SceneDataWave::enter()
     mVectors.assign(kNumCameraunitVectors, ofVec2f::zero());
     
     //mEnterTime = ofGetElapsedTimef();
+    
+    mFont.loadFont(kFontPath, 24.f);
 }
 
 void SceneDataWave::exit()
@@ -60,6 +62,8 @@ void SceneDataWave::exit()
     mVbo.clear();
     mPlaneMesh.clear();
     mVectors.clear();
+    
+    mFont = ofTrueTypeFont();
 }
 
 void SceneDataWave::update(ofxEventMessage& m)
@@ -77,8 +81,8 @@ void SceneDataWave::update(ofxEventMessage& m)
         }
         for (int i=0; i<mVectors.size(); i++) {
             if (i*2+0>=m.getNumArgs() || i*2+1>=m.getNumArgs()) break;
-            mVectors.at(i).x = m.getArgAsFloat(i*2+0);
-            mVectors.at(i).y = m.getArgAsFloat(i*2+1);
+            mVectors.at(i).x = clamp(m.getArgAsFloat(i*2+0), 5.f);
+            mVectors.at(i).y = clamp(m.getArgAsFloat(i*2+1), 5.f);
         }
     }
 }
@@ -120,12 +124,14 @@ void SceneDataWave::draw()
     
     ofSetColor(180, 255);
     int i{0};
+    const float h{mFont.getLineHeight()};
     for (auto& v : mVectors) {
         ofPushMatrix();
-        ofTranslate(12.f, (kH - mVectors.size() * 10.f - 10.f) + i * 10.f, 0.0f);
+        ofTranslate(12.f,
+                    (kH - mVectors.size() * h - h) + i * h, 0.0f);
         stringstream ss;
-        ss << "Vec" << i << ": " << v;
-        ofDrawBitmapString(ss.str(), ofPoint::zero());
+        ss << "v" << i << ": " << v;
+        mFont.drawString(ss.str(), 0.f, 0.f);
         ofPopMatrix();
         i++;
     }

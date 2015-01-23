@@ -37,7 +37,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_OIL;
 	hakoniwas.back()->CVPreset	= "Plink_Oil";
-	hakoniwas.back()->sourceCh	= 4;
+	hakoniwas.back()->sourceCh	= 2;
 	hakoniwas.back()->sceneNames.push_back("H:dpHPLink_Oil");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisPLink_Oil");
 
@@ -52,7 +52,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 #pragma mark 磁石振り子
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_MAGPENDULUM;
-	hakoniwas.back()->CVPreset	= "MagnetPendulum";
+	hakoniwas.back()->CVPreset	= "MagPendulum";
 	hakoniwas.back()->sourceCh	= 4;
 	hakoniwas.back()->sceneNames.push_back("H:dpHMagPendulum");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisMagPendulum");
@@ -133,29 +133,30 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 #pragma mark メタボール
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_METABALL;
-	hakoniwas.back()->CVPreset	= "";
+	hakoniwas.back()->CVPreset	= "Metaball";
 	hakoniwas.back()->sourceCh	= 10;
 	hakoniwas.back()->sceneNames.push_back("V:distanceMetaball");
 
 #pragma mark ライン
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_LINE;
-	hakoniwas.back()->CVPreset	= "";
+	hakoniwas.back()->CVPreset	= "Line";
 	hakoniwas.back()->sourceCh	= 10;
 	hakoniwas.back()->sceneNames.push_back("V:Line");
 
 #pragma mark フォーポイント
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_FOURPOINT;
-	hakoniwas.back()->CVPreset	= "";
+	hakoniwas.back()->CVPreset	= "FourPoint";
 	hakoniwas.back()->sourceCh	= 10;
-	hakoniwas.back()->sceneNames.push_back("V:");
+	hakoniwas.back()->sceneNames.push_back("V:Four Points");
 
 #pragma mark 未来
 	hakoniwas.push_back(new hakoniwaPresets());
-	hakoniwas.back()->CVPreset	= "";
+    hakoniwas.back()->type      = HAKO_FUTURE;
+	hakoniwas.back()->CVPreset	= "FutureRE";
 	hakoniwas.back()->sourceCh	= 10;
-	hakoniwas.back()->sceneNames.push_back("V:");
+	hakoniwas.back()->sceneNames.push_back("V:FutureRE");
 
 #pragma mark ★テストA
 	hakoniwas.push_back(new hakoniwaPresets());
@@ -212,18 +213,25 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 
 void dpSwitchingManager::update(){
 
-	if (ofGetFrameNum() % 15 == 0 && oscListPtr != NULL){
+	if (ofGetFrameNum() % 15 == 0 && oscListPtr != NULL && totalManage){
 
 		ofxOscMessage Live;
 		Live.setAddress("/dp/caemraUnit/aliveMonitor");
 		multiCast(Live);
 
+        cout << "SceneState=====" ;
 		for (int j = 0;j < hakoniwas.size();j++){
 			ofxOscMessage current;
 			current.setAddress("/dp/cameraUnit/sceneState/"+hakoniwas[j]->CVPreset);
-			current.addIntArg(hakoniwas[j]->isEnable ? 1 : 0);
+            if (hakoniwas[j]->isEnable){
+                current.addIntArg(1);
+            }else{
+                current.addIntArg(0);
+            }
 			multiCast(current);
+            cout << (hakoniwas[j]->isEnable ? 1 : 0);
 		}
+        cout << endl;
 	}
 
 }
@@ -287,7 +295,12 @@ void dpSwitchingManager::draw(){
 }
 
 void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
-
+    if (m.getAddress() == "/dp/gearMove/fingerpress/" ||
+        m.getAddress() == "/dp/magnetLooper/looperPos"){
+        sender.setup("192.168.20.10", 10000);
+        sender.sendMessage(m);
+    }
+    
 	if (m.getAddress() == "/ram/set_slave"){
 		isSlave = true;
 		m.setAddress("/ram/set_scene");
@@ -301,7 +314,7 @@ void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
 			//箱庭を探して有効化
 			if (hakoId > -1){
 				for (int i = 0;i < CV_SLOT_NUM;i++){
-					if (m.getArgAsInt32(2+i) != 0){
+                    if (m.getArgAsInt32(2+(i < 2 ? 0 : 1)) != 0){
 						cout << "Select hakoniwa from Mastre=====" << endl;
 						SelectHakoniwa(hakoniwaType(hakoId), i);
 					}else{
@@ -441,7 +454,13 @@ void dpSwitchingManager::enableDisplay(hakoniwaType type, int displayNum,bool ne
 	hakoniwaPresets* tp = getHakoniwaPreset(type);
 
 	//箱庭の映像を舞台ディスプレイへ
-	matrixSW.setSW(getHakoniwaPreset(type)->sourceCh, displayNum+5);
+    int targDSP;
+    if (displayNum == 0) targDSP = 1;
+    if (displayNum == 1) targDSP = 3;
+    if (displayNum == 2) targDSP = 0;
+    if (displayNum == 3) targDSP = 2;
+
+    matrixSW.setSW(getHakoniwaPreset(type)->sourceCh, targDSP+5);
 	//TODO: RDTKへのOSC送り
 
 	refleshSceneforRDTK();

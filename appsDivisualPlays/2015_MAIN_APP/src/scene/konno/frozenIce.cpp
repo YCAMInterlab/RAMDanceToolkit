@@ -70,32 +70,37 @@ void frozenIce::onEnabled(){
     //Speed Control
     dancerControl = true;
     fixationTime = 5000.0;
-    speedThreshold = 2.0;
+    speedThreshold = 0.7;
     
     //Distance Control
     distanceControl = false;
-    distanceThreshold = 200.0;
+    distanceThreshold = 150.0;
     
     //High and Low Control
     HighandLowControl = false;
     HighandLowThreshold = 100.0;
+    
+    refleshState();
 }
 //==========================================================================
 
 
 //==========================================================================
 void frozenIce::onDisabled(){
-    fanStart = false;
-
-    frozing = false;
-    melting = true;
-
-    manualControl = true;
-    dancerControl = false;
-    distanceControl = false;
-    HighandLowControl = false;
-    
-    refleshState();
+//    fanStart = true;
+//
+////    frozing = false;
+////    melting = true;
+//    
+//    frozing = true;
+//    melting = false;
+//
+//    manualControl = true;
+//    dancerControl = false;
+//    distanceControl = false;
+//    HighandLowControl = false;
+//    
+//    refleshState();
 }
 //==========================================================================
 
@@ -127,10 +132,10 @@ void frozenIce::setupControlPanel(){
     gui->addToggle("Speed Control"		, &dancerControl);
     gui->addSlider("Speed Threshold", 0.0, 5.0, &speedThreshold);
     
-//    //Distance Control
-//    gui->addSpacer();
-//    gui->addToggle("Distance Control"		, &distanceControl);
-//    gui->addSlider("Distance Threshold", 0.0, 200.0, &distanceThreshold);
+    //Distance Control
+    gui->addSpacer();
+    gui->addToggle("Distance Control"		, &distanceControl);
+    gui->addSlider("Distance Threshold", 0.0, 200.0, &distanceThreshold);
     
     //High and Low Control
     gui->addSpacer();
@@ -192,18 +197,19 @@ void frozenIce::refleshState(){
         //Dancer Control [Frozing]
         //500フレーム以降は、5フレームに1回溶ける（0を送る）
         if(iceFrozing == true){
-            frozingCount++;
-            if(frozingCount > fixationTime){
-                if(frozingCount%5 == 0){
-                    hantei = 0;
-                }else{
-                    hantei = 1;
-                }
-            }else{
-                hantei = 1;
-            }
-        }else{
-            frozingCount = 0;
+            hantei = 1;
+//            frozingCount++;
+//            if(frozingCount > fixationTime){
+//                if(frozingCount%5 == 0){
+//                    hantei = 0;
+//                }else{
+//                    hantei = 1;
+//                }
+//            }else{
+//                hantei = 1;
+//            }
+//        }else{
+//            frozingCount = 0;
         }
     
     
@@ -290,18 +296,19 @@ void frozenIce::refleshState(){
         //Distance Control [Frozing]
         //500フレーム以降は、5フレームに1回溶ける（0を送る）
         if(iceFrozing == true){
-            frozingCount++;
-                if(frozingCount > fixationTime){
-                    if(frozingCount%5 == 0){
-                        hantei = 0;
-                    }else{
-                        hantei = 1;
-                    }
-                }else{
-                    hantei = 1;
-                }
-            }else{
-                frozingCount = 0;
+//            frozingCount++;
+//                if(frozingCount > fixationTime){
+//                    if(frozingCount%5 == 0){
+//                        hantei = 0;
+//                    }else{
+//                        hantei = 1;
+//                    }
+//                }else{
+//                    hantei = 1;
+//                }
+//            }else{
+//                frozingCount = 0;
+            hantei = 1;
             }
         
         //Distance Control [Melting]
@@ -321,20 +328,37 @@ void frozenIce::refleshState(){
             meltingCount = 0;
         }
         
+//        //指定したノード間の距離が[distanceThreshold]より大きいと凍り、小さいと溶ける
+//        if(motionExtractor.getDistanceAt(0, 1) < distanceThreshold){
+//            if(iceFrozing == true){
+//                iceFrozing = false;
+//            }
+//            if(iceMelting == false){
+//                iceMelting = true;
+//            }
+//        }else{
+//            if(iceFrozing == false){
+//                iceFrozing = true;
+//            }
+//            if(iceMelting == true){
+//                iceMelting = false;
+//            }
+//        }
+        
         //指定したノード間の距離が[distanceThreshold]より大きいと溶け、小さいと凍る
         if(motionExtractor.getDistanceAt(0, 1) < distanceThreshold){
-            if(iceFrozing == true){
-                iceFrozing = false;
-            }
-            if(iceMelting == false){
-                iceMelting = true;
-            }
-        }else{
             if(iceFrozing == false){
                 iceFrozing = true;
             }
             if(iceMelting == true){
                 iceMelting = false;
+            }
+        }else{
+            if(iceFrozing == true){
+                iceFrozing = false;
+            }
+            if(iceMelting == false){
+                iceMelting = true;
             }
         }
     }
@@ -363,9 +387,11 @@ void frozenIce::draw(){
     
     ramBeginCamera();
     
+    motionExtractor.draw();
+    
     /*=== Preview selected nodes ===*/
     
-    if (mDrawPreview)	motionExtractor.draw();
+//    if (mDrawPreview)	motionExtractor.draw();
     
     
     /*=== Example drawing with motionExtractor ===*/
@@ -382,8 +408,8 @@ void frozenIce::draw(){
     //==========================================================================
 //    cout << "frozing    : " << frozingCount << ":" << hantei << endl;
 //    cout << "melting    : " << meltingCount << ":" << hantei << endl;
-//    cout << "distance    : " << motionExtractor.getDistanceAt(0, 1) << endl;
-    cout << "node high low    : " << motionExtractor.getPositionAt(0).y << ":" << hantei << endl;
+   cout << "distance    : " << motionExtractor.getDistanceAt(0, 1) << endl;
+//    cout << "node high low    : " << motionExtractor.getPositionAt(0).y << ":" << hantei << endl;
     //==========================================================================
     
 }

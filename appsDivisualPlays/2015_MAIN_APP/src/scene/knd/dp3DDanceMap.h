@@ -229,7 +229,7 @@ private:
         Z
     };
     
-    int mExtendThreshNum = 127;
+    int mExtendThreshNum = 150;
  
 };
 

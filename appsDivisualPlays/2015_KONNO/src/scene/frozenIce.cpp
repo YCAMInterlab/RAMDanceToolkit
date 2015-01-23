@@ -68,37 +68,39 @@ void frozenIce::onEnabled(){
     manualControl = false;
     
     //Speed Control
-    dancerControl = false;
+    dancerControl = true;
     fixationTime = 5000.0;
-    speedThreshold = 2.0;
+    speedThreshold = 0.7;
     
     //Distance Control
-    distanceControl = true;
+    distanceControl = false;
     distanceThreshold = 150.0;
     
     //High and Low Control
     HighandLowControl = false;
     HighandLowThreshold = 100.0;
+    
+    refleshState();
 }
 //==========================================================================
 
 
 //==========================================================================
 void frozenIce::onDisabled(){
-    fanStart = true;
-
-//    frozing = false;
-//    melting = true;
-    
-    frozing = true;
-    melting = false;
-
-    manualControl = true;
-    dancerControl = false;
-    distanceControl = false;
-    HighandLowControl = false;
-    
-    refleshState();
+//    fanStart = true;
+//
+////    frozing = false;
+////    melting = true;
+//    
+//    frozing = true;
+//    melting = false;
+//
+//    manualControl = true;
+//    dancerControl = false;
+//    distanceControl = false;
+//    HighandLowControl = false;
+//    
+//    refleshState();
 }
 //==========================================================================
 
@@ -195,18 +197,19 @@ void frozenIce::refleshState(){
         //Dancer Control [Frozing]
         //500フレーム以降は、5フレームに1回溶ける（0を送る）
         if(iceFrozing == true){
-            frozingCount++;
-            if(frozingCount > fixationTime){
-                if(frozingCount%5 == 0){
-                    hantei = 0;
-                }else{
-                    hantei = 1;
-                }
-            }else{
-                hantei = 1;
-            }
-        }else{
-            frozingCount = 0;
+            hantei = 1;
+//            frozingCount++;
+//            if(frozingCount > fixationTime){
+//                if(frozingCount%5 == 0){
+//                    hantei = 0;
+//                }else{
+//                    hantei = 1;
+//                }
+//            }else{
+//                hantei = 1;
+//            }
+//        }else{
+//            frozingCount = 0;
         }
     
     
@@ -293,18 +296,19 @@ void frozenIce::refleshState(){
         //Distance Control [Frozing]
         //500フレーム以降は、5フレームに1回溶ける（0を送る）
         if(iceFrozing == true){
-            frozingCount++;
-                if(frozingCount > fixationTime){
-                    if(frozingCount%5 == 0){
-                        hantei = 0;
-                    }else{
-                        hantei = 1;
-                    }
-                }else{
-                    hantei = 1;
-                }
-            }else{
-                frozingCount = 0;
+//            frozingCount++;
+//                if(frozingCount > fixationTime){
+//                    if(frozingCount%5 == 0){
+//                        hantei = 0;
+//                    }else{
+//                        hantei = 1;
+//                    }
+//                }else{
+//                    hantei = 1;
+//                }
+//            }else{
+//                frozingCount = 0;
+            hantei = 1;
             }
         
         //Distance Control [Melting]
@@ -383,9 +387,11 @@ void frozenIce::draw(){
     
     ramBeginCamera();
     
+    motionExtractor.draw();
+    
     /*=== Preview selected nodes ===*/
     
-    if (mDrawPreview)	motionExtractor.draw();
+//    if (mDrawPreview)	motionExtractor.draw();
     
     
     /*=== Example drawing with motionExtractor ===*/

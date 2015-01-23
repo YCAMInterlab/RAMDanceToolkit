@@ -46,6 +46,7 @@ private:
     ofxMot::SkeletonPtr mPrevActor;
     ofEasyCam mCam;
     string mSkeletonName{""};
+    int mEnterFrame{0};
 
 };
 

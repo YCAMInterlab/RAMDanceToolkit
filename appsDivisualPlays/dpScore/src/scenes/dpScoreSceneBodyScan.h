@@ -28,9 +28,9 @@ struct BodyScanNode final : public ofxMot::Node {
     vector<ofVec3f> vertices;
     vector<ofVec3f> initialVertices;
     
-    const int kNumVertices{230};
+    const int kNumVertices{300};
     ofVbo vbo;
-    float scale{90.f};
+    float scale{120.f};
 };
 
 class SceneBodyScan final : public SceneBodyBase<BodyScanNode> {

@@ -115,9 +115,9 @@ public:
             mColors.push_back(ofFloatColor(1,1,1,1));
         }
         
-        ofFloatColor color(dpColor::MAIN_COLOR.r / 255.0,
-                           dpColor::MAIN_COLOR.g / 255.0,
-                           dpColor::MAIN_COLOR.b / 255.0);
+        ofFloatColor color(dpFloatColor::MAIN_COLOR.r,
+                           dpFloatColor::MAIN_COLOR.g,
+                           dpFloatColor::MAIN_COLOR.b);
         
         for(int i = 0; i < MAX_PT * 0.5; i++){
             
@@ -150,8 +150,8 @@ public:
         
             for(int i = 1; i < num * 5 + 1; i+=5){
     
-                mPts[mCurrentPt].appear(ofPoint((m.getArgAsFloat(i+1) - 0.5) * SINGLE_SCREEN_HEIGHT,
-                                                (m.getArgAsFloat(i+2) - 0.5) * SINGLE_SCREEN_HEIGHT));
+                mPts[mCurrentPt].appear(ofPoint((m.getArgAsFloat(i+1) + m.getArgAsFloat(i+3) * 0.5 - 0.5) * SINGLE_SCREEN_HEIGHT,
+                                                (m.getArgAsFloat(i+2) + m.getArgAsFloat(i+4) * 0.5 - 0.5) * SINGLE_SCREEN_HEIGHT));
                 mCurrentPt++;
                 mCurrentPt %= (int)(MAX_PT * 0.5);
                 

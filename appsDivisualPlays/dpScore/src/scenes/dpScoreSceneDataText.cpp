@@ -65,7 +65,7 @@ void SceneDataText::draw()
     const float s{12.f};
     const float w{mFont.stringWidth(ofToString(1.f, precision))};
     const float minusW{mFont.stringWidth("-")};
-    const string comma{","};
+    const string comma{" "};
     const float commaW{mFont.stringWidth(comma)};
     
     for (int i=0; i<mVectors.size(); i++) {
