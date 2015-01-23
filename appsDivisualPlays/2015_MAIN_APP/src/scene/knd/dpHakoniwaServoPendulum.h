@@ -22,7 +22,7 @@ public:
         ramGetGUI().addSlider("speed", 0.1, 4.0, &mSpeed);
         ramGetGUI().addSlider("range", 0.0, 90, &mRange);
         ramGetGUI().addSlider("minThresh", 0.0, 20.0, &mMinThresh);
-        ramGetGUI().addSlider("minThresh", 0.0, RANGE_MAX, &mMaxThresh);
+        ramGetGUI().addSlider("mixThresh", 0.0, RANGE_MAX, &mMaxThresh);
         ramGetGUI().addSlider("length", 0.01, 400.0, &mLength);
         ramGetGUI().addToggle("isRotMode",&isRotMode);
         
