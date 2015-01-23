@@ -38,7 +38,7 @@ private:
         deque<float> data;
     };
     vector<ofPtr<Circle> > mCircles;
-    const int kNumCircles = 6;
+    const int kNumCircles{ofVec2f::DIM};
 };
 
 DP_SCORE_NAMESPACE_END

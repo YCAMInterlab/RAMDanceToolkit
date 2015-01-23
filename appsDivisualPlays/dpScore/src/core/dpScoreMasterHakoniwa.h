@@ -47,6 +47,8 @@ public:
     
     void guiEvent(ofxUIEventArgs& e);
     
+    void doSomething(int rand);
+    
     enum class AnalyzeType {
         Mean = 0,
         Pixelate,
@@ -101,8 +103,6 @@ public:
     static const int kPortNumberScore;
     
     static const string kOscAddrRamSetScene;
-    
-    static const string kXmlSettingsPath;
     
     static const string kScoreBlack;
     
@@ -161,6 +161,8 @@ private:
     vector<UniqueStringStack> mUniqueScores;
     UniqueStringStack mUniqueScoreBodies;
     
+    string mScoreCorrelation;
+    
     ofEasyCam mCam;
     ofRectangle mCamViewport;
     
@@ -190,6 +192,7 @@ private:
     bool mEnableOscOutRDTK{false};
     bool mEnableOscOutMH{false};
     bool mEnableOscOutScore{false};
+    bool mEnableShowHakoniwaTitle{false};
     
     float mEnabledTime{0.f};
     

@@ -10,138 +10,141 @@
 #define RAMDanceToolkit_dpHakoVisTornade_h
 
 #include "KezSlidePoint.h"
-
-class dpTornadeCircle{
-public:
-    
-    dpTornadeCircle(){
-        mDiv.speed = 0.01;
-        mRad.speed = 0.01;
-    };
-    
-    void update(){
-        mDiv.update();
-        mRad.update();
-        mTheta.update();
-    }
-    
-    void setRad(float rad){
-        mRad.set(rad);
-    }
-    
-    void setDiv(float div){
-        mDiv.set(div);
-    }
-    
-    void setTheta(float theta){
-        mTheta.set(theta);
-    }
-    
-    void draw(){
-        
-        vector<ofVec2f>mPts;
-        
-      
-        for(int i = 0; i < mDiv.val; i++){
-            float theta = mTheta.val + ofMap(i,0,mDiv.val,0,TWO_PI);
-            float x = cos(theta) * mRad.val;
-            float y = sin(theta) * mRad.val;
-            
-            ofSetColor(dpColor::MAIN_COLOR);
-            ofCircle(x,y,ofMap(i,0,mDiv.val,2,mRad.val * 0.0625,true));
-            
-            mPts.push_back(ofVec2f(x,y));
-        }
-        
-        ofSetColor(255,255,255);
-        ofSetLineWidth(2);
-        glBegin(GL_LINE_LOOP);
-        for(auto &v:mPts){
-            glVertex2f(v.x, v.y);
-        }
-        glEnd();
-    
-    }
-    
-private:
-   
-    float mThetaSpeed;
-    
-    KezSlide mDiv;
-    KezSlide mRad;
-    KezSlide mTheta;
-};
+#include "dpTailSphere.h"
 
 class dpHakoVisTornado : public ramBaseScene{
-
 public:
     
     string getName() const {return "dpVisTornado";};
     
     void setupControlPanel(){
-        ramGetGUI().addSlider("radScale",1.0,100.0,&mRadScale);
-        ramGetGUI().addSlider("divScale",1.0,20.0,&mDivScale);
-        ramGetGUI().addSlider("thetaScale",1.0,1000.0,&mThetaScale);
-    };
-    void setup(){
-        ramOscManager::instance().addReceiverTag(&mReceiver);
-        mReceiver.addAddress("/dp/cameraUnit/Tornado/mean");
-        mReceiver.addAddress("/dp/cameraUnit/Tornado/vector");
+        ramGetGUI().addSlider("drawRadMin",0.0,10.0,&mDrawRadMin);
+        ramGetGUI().addSlider("drawRadMax",0.0,10.0,&mDrawRadMax);
+        ramGetGUI().addToggle("simpleCircle",&isDrawSimpleCircle);
+        ramGetGUI().addSlider("speed",0.01,2.0,&mSpeed);
+        /*ramGetGUI().addIntSlider("rad",0,255,&mRad);
+        ramGetGUI().addToggle("bulb",&isBulb);
+        ramGetGUI().addToggle("mist",&isMist);
+        ramGetGUI().addSlider("radMin",0.0,300.0,&mRadMin);
+        ramGetGUI().addSlider("radMax",0.0,300.0,&mRadMax);
+        ramGetGUI().addSlider("drawRadMin",0.0,10.0,&mDrawRadMin);
+        ramGetGUI().addSlider("drawRadMax",0.0,10.0,&mDrawRadMax);
+        ramGetGUI().addSlider("mistThresh",10.0, 255, &mMistThresh);
+        ramGetGUI().addSlider("fan",0,255,&mFan);
         
-        for(int i = 0; i < CIRCLE_NUM; i++){
-            mCircles.push_back(dpTornadeCircle());
-        }
+        ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoVisTornado::onPanelChanged);
+        */
+        
+        ramOscManager::instance().addReceiverTag(&mReceiver);
+        mReceiver.addAddress("/dp/toVis/Tornado");
+    }
+    void setup(){
+      
+       
+        
+    }
+    
+    void onPanelChanged(ofxUIEventArgs& e){
+        
     }
     
     void receiveOsc(){
-        
-        while (mReceiver.hasWaitingMessages()) {
+        while(mReceiver.hasWaitingMessages()){
+            
             ofxOscMessage m;
             mReceiver.getNextMessage(&m);
             
-            if(m.getAddress() == "/dp/cameraUnit/Tornado/mean"){
-                for(int i = 0; i < CIRCLE_NUM; i++){
-                    mCircles[i].setRad((i + 1) * m.getArgAsInt32(3) * mRadScale);
+            if(m.getAddress() == "/dp/toVis/Tornado"){
+                for(int i = 0; i < 3; i++){
+                    mPts[i].set(m.getArgAsFloat(i * 3),
+                                m.getArgAsFloat(i * 3 + 1),
+                                m.getArgAsFloat(i * 3 + 2));
                 }
             }
-            
-            if(m.getAddress() == "/dp/cameraUnit/Tornado/vector"){
-                for(int i = 0; i < CIRCLE_NUM; i++){
-                    mCircles[i].setDiv(abs(m.getArgAsFloat(i * 2)) * mDivScale);
-                    mCircles[i].setTheta(abs(m.getArgAsFloat(i * 2 + 1)) * mThetaScale);
-                }
-            }
-            
         }
     }
     
     void update(){
         
-        /*receiveOsc();
+        // bulb();
+        // fan(mFan);
+        receiveOsc();
+        mSphere.setRad(mDrawRadMin, mDrawRadMax);
+        mSphere.setRotateSpeed(mSpeed);
+        /* fan();
+         mist();
+         cout << isBulb << endl;
+         bulb();*/
+    }
+    
+    void rotateToNormal(ofVec3f normal) {
+        normal.normalize();
         
-        for(auto &v:mCircles){
-            v.update();
-        }*/
+        float rotationAmount;
+        ofVec3f rotationAngle;
+        ofQuaternion rotation;
+        
+        ofVec3f axis(0, 0, 1);
+        rotation.makeRotate(axis, normal);
+        rotation.getRotate(rotationAmount, rotationAngle);
+        ofRotate(rotationAmount, rotationAngle.x, rotationAngle.y, rotationAngle.z);
     }
     
     void draw(){
-      /*  ofPushMatrix();
-        ofTranslate(SINGLE_SCREEN_WIDTH * 0.5, SINGLE_SCREEN_HEIGHT * 0.5);
-        for(auto &v:mCircles){
-            v.draw();
+        
+        ramSetViewPort(dpGetFirstScreenViewPort());
+        
+        ofPoint a = mPts[0];
+        ofPoint b = mPts[1];
+        ofPoint c = mPts[2];
+        
+        ofPoint center;
+        ofPoint normal;
+        float radius;
+        
+        findCircle(a,b,c,center,normal,radius);
+        
+        ramBeginCamera();
+        
+        if(isDrawSimpleCircle){
+            
+            ofPushMatrix();
+            ofTranslate(center);
+            rotateToNormal(normal);
+            ofNoFill();
+            ofSetColor(255,255,255);
+            ofCircle(0, 0, radius);
+            ofPopMatrix();
+        
+        }else{
+        
+            mSphere.draw(center,radius,normal);
+        
         }
-        ofPopMatrix();*/
+        ramEndCamera();
+        
+    }
+
+    void onDisabled(){
+        
     }
     
 private:
+   
+    
+    int mRad = 0;
+    
+    dpTailSphereController mSphere;
+    
+    float mDrawRadMin = 1.0;
+    float mDrawRadMax = 6.0;
+    
     ramOscReceiveTag mReceiver;
     
-    static const int CIRCLE_NUM = 10;
-    vector<dpTornadeCircle>mCircles;
+    ofPoint mPts[3];
     
-    float mRadScale = 4.0;
-    float mDivScale = 11.0;
-    float mThetaScale = 10.0;
+    bool isDrawSimpleCircle = false;
+    float mSpeed = 0.1;
 };
 
 #endif

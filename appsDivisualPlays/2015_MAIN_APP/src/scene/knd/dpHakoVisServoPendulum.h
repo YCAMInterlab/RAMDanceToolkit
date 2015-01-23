@@ -60,10 +60,14 @@ public:
 class dpSPBox{
 public:
     
+    dpSPBox(){
+        mColor = dpColor::MAIN_COLOR;
+        mColor.setBrightness(220);
+    }
+    
     void start(ofPoint size,float angle){
         mSize = size;
         mAngle = angle;
-        mColor = dpColor::MAIN_COLOR;
         mSat.imSet(255);
         mSat.set(0);
         mSat.speed = 0.03;
@@ -120,8 +124,8 @@ public:
         ramGetGUI().addSlider("scaleY", 1.0, 2000.0, &mScale.y);
         ramGetGUI().addButton("rndOrbit");
 
-        mLong.speed = 0.001;
-        mLat.speed = 0.001;
+        mLong.speed = 0.005;
+        mLat.speed = 0.005;
         mRad.speed = 0.01;
         
         rndOrbit();
@@ -135,8 +139,8 @@ public:
         
         ramOscManager::instance().addReceiverTag(&mReceiver);
         mReceiver.addAddress("/dp/cameraUnit/ServoPendulum/vector/total");
-        
-        mHead.speed = 0.2;
+    
+        mHead.speed = 0.1;
 
     }
     
@@ -187,13 +191,13 @@ public:
         mCam.lookAt(ofPoint(0,0,0));
         mCam.orbit(mLong.val, mLat.val, mRad.val);
         
-        if(ofGetFrameNum() % 600 == 0)rndOrbit();
+        if(ofGetFrameNum() % 1200 == 0)rndOrbit();
     }
     
     void rndOrbit(){
         mLong.set(ofRandom(-180,180));
         mLat.set(ofRandom(-180,180));
-        mRad.set(ofRandom(0,400));
+        mRad.set(ofRandom(50,400));
     }
     
     
@@ -251,7 +255,6 @@ private:
     KezSlide mLong;
     KezSlide mLat;
     KezSlide mRad;
-    
     
 };
 

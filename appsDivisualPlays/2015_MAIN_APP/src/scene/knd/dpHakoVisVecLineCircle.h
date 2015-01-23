@@ -203,9 +203,9 @@ public:
     }
     
     void rndRot(){
-        int rnd = ofRandom(0,7);
+        int rnd = ofRandom(0,3);
         
-        if(rnd != 0){
+        if(rnd == 0){
             mRotSpeed.set(0,0,0);
         }else if(rnd == 1){
             mRotSpeed.set(0,0,0);
@@ -214,7 +214,7 @@ public:
         else{
             mRotSpeed.set(ofRandom(-0.1,0.1),
                           ofRandom(-0.1,0.1),
-                          ofRandom(-0.1,0.1));
+                          0.0);
         }
     }
     

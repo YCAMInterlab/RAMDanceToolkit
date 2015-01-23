@@ -20,12 +20,9 @@ public:
 	void setupControlPanel(){
         
         ramGetGUI().addSlider("speed", 0.1, 4.0, &mSpeed);
-        ramGetGUI().addSlider("speedDefault", 1.0, 10.0, &mSpeedDefault);
         ramGetGUI().addSlider("range", 0.0, 90, &mRange);
-        ramGetGUI().addSlider("rad", 5, 300, &mRad);
-        ramGetGUI().addSlider("velScale", 0.01, 10.0, &mVelScale);
-        ramGetGUI().addSlider("limit", 0.1, 1.0, &mLimit);
-        ramGetGUI().addSlider("scale", 0.01, 10.0, &mScale);
+        ramGetGUI().addSlider("thresh", 0.0, 20.0, &mThresh);
+        ramGetGUI().addSlider("length", 0.01, 400.0, &mLength);
         ramGetGUI().addToggle("isRotMode",&isRotMode);
         
         mMotionExtractor.setupControlPanel(this);
@@ -66,7 +63,7 @@ public:
                         ofPoint axis;
                         quat.getRotate(angle, axis);
                      
-                        mRange = angle * mScale;
+                        mRange = angle * 1.0;
                         setRange(mRange);
                     }
                 }
@@ -75,7 +72,11 @@ public:
                 ofPoint pos1 = mMotionExtractor.getPositionAt(0);
                 ofPoint pos2 = mMotionExtractor.getPositionAt(1);
             
-                setRange((pos1 - pos2).length() * mScale);
+                float val = ofMap((pos1 - pos2).length(),0,mLength,0,90);
+                
+                if(val < mThresh)val = 0.0;
+                
+                setRange(val);//(pos1 - pos2).length() * mScale);
             
             }
         
@@ -102,7 +103,7 @@ public:
                 ofPoint axis;
                 quat.getRotate(angle, axis);
                 
-                mRange = angle * mScale;
+                mRange = angle * 1.0;
                 setRange(mRange);
             
                 ofPoint pos = node.getGlobalPosition();
@@ -123,6 +124,7 @@ public:
             ofPoint pos1 = mMotionExtractor.getPositionAt(0);
             ofPoint pos2 = mMotionExtractor.getPositionAt(1);
             ofLine(pos1,pos2);
+            
         }
         
         ramEndCamera();
@@ -158,10 +160,6 @@ private:
     
     float mSpeed = 1.0;
     float mRange = 0.0;
-    float mRad = 100.0;
-    float mLimit = 0.25;
-    float mVelScale = 1.0;
-    float mSpeedDefault = 1.0;
     
     dpServoPendulumThread mThread;
     
@@ -171,8 +169,10 @@ private:
     
     ofxOscSender mSender;
     
-    float mScale = 0.2;
+    float mLength = 200.0;
     bool isRotMode = false;
+    
+    float mThresh = 3.0;
 };
 
 #endif

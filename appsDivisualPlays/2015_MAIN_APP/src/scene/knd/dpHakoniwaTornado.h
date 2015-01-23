@@ -9,18 +9,23 @@
 #ifndef RAMDanceToolkit_dpHakoniwaTornade_h
 #define RAMDanceToolkit_dpHakoniwaTornade_h
 
+#include "dpTailSphere.h"
+
 class dpHakoniwaTornado : public ramBaseScene{
 public:
     
     string getName() const {return "dpHTornado";};
     
     void setupControlPanel(){
-        ramGetGUI().addIntSlider("fan",0,255,&mFan);
+        ramGetGUI().addIntSlider("rad",0,255,&mRad);
         ramGetGUI().addToggle("bulb",&isBulb);
         ramGetGUI().addToggle("mist",&isMist);
-        ramGetGUI().addSlider("fanRadMin",0.0,300.0,&mFanRadMin);
-        ramGetGUI().addSlider("fanRadMax",0.0,300.0,&mFanRadMax);
+        ramGetGUI().addSlider("radMin",0.0,300.0,&mRadMin);
+        ramGetGUI().addSlider("radMax",0.0,300.0,&mRadMax);
+        ramGetGUI().addSlider("drawRadMin",0.0,12.0,&mDrawRadMin);
+        ramGetGUI().addSlider("drawRadMax",0.0,12.0,&mDrawRadMax);
         ramGetGUI().addSlider("mistThresh",10.0, 255, &mMistThresh);
+        ramGetGUI().addSlider("fan",0,255,&mFan);
         
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoniwaTornado::onPanelChanged);
         
@@ -31,22 +36,24 @@ public:
         mBulbSender.setup("192.168.20.70",8528);
         mFanSender.setup("192.168.20.71",8528);
         
+        mSender[0].setup("192.168.20.2", 10000);
+        mSender[1].setup("192.168.20.3", 10000);
+        
     }
     
     void onPanelChanged(ofxUIEventArgs& e){
         string name = e.widget->getName();
         
-        if(name == "fan")fan();
-        
         if(name == "bulb")bulb();
         
         if(name == "mist")bulb();
+        
     }
     
-    void fan(){
+    void fan(int val){
         ofxOscMessage m;
         m.setAddress("/dp/hakoniwa/tornado/fan");
-        m.addIntArg(mFan);
+        m.addIntArg(val);
         mFanSender.sendMessage(m);
         
     }
@@ -64,13 +71,14 @@ public:
         m.addIntArg((int)isBulb);
         m.addIntArg((int)isMist);
         mBulbSender.sendMessage(m);
-   
     }
     
     void update(){
         
         mMotionExtractor.update();
         bulb();
+        fan(mFan);
+        mSphere.setRad(mDrawRadMin, mDrawRadMax);
        /* fan();
         mist();
         cout << isBulb << endl;
@@ -104,9 +112,9 @@ public:
         
         findCircle(a,b,c,center,normal,radius);
         
-        mFan = ofMap(radius,mFanRadMin,mFanRadMax,0,255,true);
+        mRad = ofMap(radius,mRadMin,mRadMax,0,255,true);
         
-        if(mFan > mMistThresh){
+        if(mRad > mMistThresh){
             isMist = true;
         }else{
             isMist = false;
@@ -117,17 +125,43 @@ public:
         ofTranslate(center);
         rotateToNormal(normal);
         ofNoFill();
-        ofCircle(0, 0, radius);
+        //ofSetColor(255,0,0);
+        //ofCircle(0, 0, radius);
         ofPopMatrix();
+        
+        ofSetColor(255,255,255);
+        mSphere.draw(center,radius,normal);
         ramEndCamera();
+        
+        sendOscToVis(a, b, c);
+    }
+    
+    void sendOscToVis(ofPoint a,ofPoint b, ofPoint c){
+        ofxOscMessage m;
+        m.setAddress("/dp/toVis/Tornado");
+        
+        m.addFloatArg(a.x);
+        m.addFloatArg(a.y);
+        m.addFloatArg(a.z);
+        
+        m.addFloatArg(b.x);
+        m.addFloatArg(b.y);
+        m.addFloatArg(b.z);
+        
+        m.addFloatArg(c.x);
+        m.addFloatArg(c.y);
+        m.addFloatArg(c.z);
+        
+        mSender[0].sendMessage(m);
+        mSender[1].sendMessage(m);
     }
     
     void onDisabled(){
         isBulb = false;
         isMist = false;
-        mFan = 0;
+        mRad = 0;
         
-        fan();
+        fan(0);
         bulb();
         mist();
     }
@@ -136,16 +170,23 @@ private:
     ofxOscSender mBulbSender;
     ofxOscSender mFanSender;
     
-    int mFan = 0;
+    int mRad = 0;
     bool isBulb = false;
     bool isMist = false;
     
     ramMotionExtractor mMotionExtractor;
     
-    float mFanRadMin = 15;
-    float mFanRadMax = 45;
-    float mMistThresh = 30.0;;
+    float mRadMin = 15;
+    float mRadMax = 77;
+    float mMistThresh = 180.0;;
+    float mFan = 170;
     
+    dpTailSphereController mSphere;
+    
+    float mDrawRadMin = 1.0;
+    float mDrawRadMax = 12.0;
+    
+    ofxOscSender mSender[2];
 };
 
 #endif

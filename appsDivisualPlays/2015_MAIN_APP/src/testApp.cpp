@@ -71,8 +71,10 @@ void testApp::setup()
     sceneManager.addScene(dpHWorm.getPtr());
 	sceneManager.addScene(visWorm.getPtr());
     
-    sceneManager.addScene(futureRE.getPtr());
-
+    //---
+    sceneManager.addScene(dpHEyeBall.getPtr());
+    //---
+    
 	sceneManager.addScene(metaball.getPtr());
 
     sceneManager.addScene(line.getPtr());
@@ -85,6 +87,8 @@ void testApp::setup()
 	sceneManager.addScene(testSceneD.getPtr());
     
 	sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
+    
+    sceneManager.setShowAllActors(false);
 }
 
 //--------------------------------------------------------------

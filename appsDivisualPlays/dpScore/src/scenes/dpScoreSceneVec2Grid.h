@@ -40,6 +40,8 @@ private:
     int mGridStep{40};
     int mGridW{kW*2};
     int mGridH{kH*2};
+    
+    float mEnterTime{0.f};
 };
 
 DP_SCORE_NAMESPACE_END

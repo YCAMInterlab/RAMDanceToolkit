@@ -26,6 +26,8 @@
 #include "dpScoreSceneBodyBoids.h"
 #include "dpScoreSceneBodyRect.h"
 #include "dpScoreSceneBodyBox.h"
+
+#include "dpScoreSceneCorrelation.h"
 #endif
 
 #include <algorithm>
@@ -118,6 +120,8 @@ void ofApp::setup()
     auto bodyGlobe = SceneBase::Ptr(new SceneBodyGlobe());
     auto bodyLines = SceneBase::Ptr(new SceneBodyLines());
     
+    auto correlation = SceneBase::Ptr(new SceneCorrelation());
+    
     mSceneManager.add(black);
     
     mSceneManager.add(vec2Simple);
@@ -146,6 +150,8 @@ void ofApp::setup()
     
     mSceneManager.add(bodyBoids);
     
+    mSceneManager.add(correlation);
+    
     
     // make another instance for existing class
     //auto vec2Simple2 = SceneBase::Ptr(new SceneVec2SimpleGraph());
@@ -157,7 +163,7 @@ void ofApp::setup()
     
     //mSceneManager.change(3);
     mSceneManager.change("black");
-    //mSceneManager.change<SceneDataSlider>();
+    mSceneManager.change<SceneCorrelation>();
     
     mSceneManager.getTabBar()->setVisible(false);
 #endif
@@ -395,15 +401,15 @@ void ofApp::draw()
             if (s.size() > longestTitle) longestTitle = s.size();
         }
         const int numChar{(int)(longestTitle * tt)};
-        const float sh{mFont.stringHeight("A")};
-        
+        //const float sh{mFont.stringHeight("A")};
+        const float shift{kW / 8.f};
         for (int i=0; i<mTitleNames.size(); i++) {
             string s{mTitleNames.at(i)};
             ofSetColor(ofColor::white);
             const float x{20.f};
-            const float y{getLineUped(wh, i, mTitleNames.size(), false) + sh * 0.5f};
+            const float y{getLineUped(wh, i, mTitleNames.size(), false)};
             const int num{min(max(0, numChar), (int)s.size())};
-            mFont.drawString(s.substr(0, num), x, y);
+            mFont.drawString(s.substr(0, num), x + shift, y);
         }
         
        

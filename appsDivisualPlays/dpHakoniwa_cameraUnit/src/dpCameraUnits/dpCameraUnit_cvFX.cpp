@@ -205,6 +205,11 @@ void dpCameraUnit_cvFX::drawThumbnail(int x, int y, float scale){
 	mSource.draw(0,0);
 	mGraySource.draw(0, mSource.getHeight());
 
+	if (mEnableBackground){
+		ofDrawBitmapString("Background", 0,mSource.getHeight()*2+20);
+		mGraySource_background.draw(0, mSource.getHeight()*2+40);
+	}
+
 	if (mEnableWarpPerspective){
 		ofSetColor(255, 255, 0);
 		glBegin(GL_LINE_LOOP);
@@ -301,13 +306,20 @@ void dpCameraUnit_cvFX::savePreset(string hakoniwaName){
 	ofDirectory::createDirectory("Preset_"+hakoniwaName);
 	mGui.saveSettings("Preset_"+hakoniwaName+"/UIPreset.xml");
 
-	ofxXmlSettings xml;
-	for (int i = 0;i < 4;i++){
-		xml.addValue("WARP_"+ofToString(i)+"X", mUnwarpPts[i].x);
-		xml.addValue("WARP_"+ofToString(i)+"Y", mUnwarpPts[i].y);
+	if (mEnableWarpPerspective){
+		ofxXmlSettings xml;
+		for (int i = 0;i < 4;i++){
+			xml.addValue("WARP_"+ofToString(i)+"X", mUnwarpPts[i].x);
+			xml.addValue("WARP_"+ofToString(i)+"Y", mUnwarpPts[i].y);
+		}
+
+		xml.save("Preset_"+hakoniwaName+"/WarpPts.xml");
 	}
 
-	xml.save("Preset_"+hakoniwaName+"/WarpPts.xml");
+	if (mEnableBackground){
+		mGraySource_background.saveImage("Preset_"+hakoniwaName+"/background.tiff");
+	}
+
 }
 
 void dpCameraUnit_cvFX::loadPreset(string hakoniwaName){
@@ -315,8 +327,26 @@ void dpCameraUnit_cvFX::loadPreset(string hakoniwaName){
 	ofxXmlSettings xml;
 	xml.load("Preset_"+hakoniwaName+"/WarpPts.xml");
 
-	for (int i = 0;i < 4;i++){
-		mUnwarpPts[i].x = xml.getValue("WARP_"+ofToString(i)+"X", 0.0);
-		mUnwarpPts[i].y = xml.getValue("WARP_"+ofToString(i)+"Y", 0.0);
+	mUnwarpPts[0].set(0, 0);
+	mUnwarpPts[1].set(mGraySource.getWidth(), 0);
+	mUnwarpPts[2].set(mGraySource.getWidth(), mGraySource.getHeight());
+	mUnwarpPts[3].set(0, mGraySource.getHeight());
+
+	mUnwarpPts[0].x = xml.getValue("WARP_"+ofToString(0)+"X", mGraySource.getWidth());
+	mUnwarpPts[0].y = xml.getValue("WARP_"+ofToString(0)+"Y", 0.0);
+
+	mUnwarpPts[1].x = xml.getValue("WARP_"+ofToString(0)+"X", mGraySource.getWidth());
+	mUnwarpPts[1].y = xml.getValue("WARP_"+ofToString(0)+"Y", 0.0);
+
+	mUnwarpPts[2].x = xml.getValue("WARP_"+ofToString(0)+"X", mGraySource.getWidth());
+	mUnwarpPts[2].y = xml.getValue("WARP_"+ofToString(0)+"Y", mGraySource.getHeight());
+
+	mUnwarpPts[3].x = xml.getValue("WARP_"+ofToString(0)+"X", 0.0);
+	mUnwarpPts[3].y = xml.getValue("WARP_"+ofToString(0)+"Y", mGraySource.getHeight());
+
+	if (mEnableBackground){
+		mBackgroundNeedsReflesh = false;
+		mGraySource_background.loadImage("Preset_"+hakoniwaName+"/background.tiff");
 	}
+
 }

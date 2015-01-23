@@ -57,9 +57,8 @@
 //#include "dpHakoniwaIce.h"
 #include "frozenIce.h"
 #include "magnetLooper.h"
-
-//onishi Scenes
-#include "FutureRE.h"
+//
+#include "eyeBall.h"
 
 //LEGENDARY RDTK Scenes!!!!!!!!
 #include "LineDrawing.h"
@@ -119,6 +118,9 @@ public:
     
     // worm
     dpVisWorm             visWorm;
+    
+    // eyeBall
+    eyeBall dpHEyeBall;
 
 	//MagPendulum
 	dpHakoniwaMagnetPendulum	magPendulum;
@@ -148,10 +150,7 @@ public:
 	distanceMetaball metaball;
     
     magnetLooper dpHWorm;
-    
-    // from RAM Dance Tool Kit
-    FutureRE futureRE;
-    
+        
     // RDTK_Scenes_
     LineDrawing line;
     FourPoints fourPoints;

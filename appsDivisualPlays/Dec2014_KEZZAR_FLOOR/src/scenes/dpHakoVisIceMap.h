@@ -27,10 +27,18 @@ public:
         
         ramOscManager::instance().addReceiverTag(&mReceiver);
         mReceiver.addAddress("/dp/cameraUnit/Ice/mean");
+        mReceiver.addAddress("/dp/cameraUnit/sceneState/");
         
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoVisIceMap::onPanelChanged);
         
         mGrid.setExtendThreshNum(mExtendThreshNum);
+        
+        mSceneNames[ICE] = "Ice";
+        mSceneNames[TWO] = "dpVisTwo";
+        mSceneNames[FIVE] = "dpVisFive";
+        
+        five();
+        
     }
     void setup(){
         mGrid.setup(ofPoint(ramFloorQuadWarper::FBO_WIDTH * 0.5,
@@ -46,52 +54,52 @@ public:
             ofxOscMessage m;
             mReceiver.getNextMessage(&m);
             
-            /*if(m.getAddress() == "/dp/cameraUnit/Ice/pixelate"){
-               
-                int width = m.getArgAsInt32(0);
-                int height = m.getArgAsInt32(1);
-                
-                int sum = width * height;
-                int argNum = ceil(sum / 64) + 1;
-                
-                string str;
-                
-                for(int i = 2; i < argNum + 2; i++){
-                 
-                    string tmp = ofToBinary(m.getArgAsInt64(i));
-                 
-                    for (int j = tmp.size()-1; j>=0; j--) {
-                        str += tmp.at(j);
-                    }
-                    
-                }
-                
-                for(int i = 0; i < mDiv; i++){
-                    for(int j = 0; j < mDiv; j++){
-                            
-                        int idxX = ofMap(i,0,mDiv,0,width,true);
-                        int idxY = ofMap(j,0,mDiv,0,height,true);
-                        
-                        int idx = idxY * mDiv + idxX;
-                        
-                        if(idx < str.size() && str[idx] == '1'){
-                            mGrid.extendEach(i * mDiv + j);
-                        }
-                        else mGrid.shrink();
-                    }
-                }
-         
-            }*/
-            
             if(m.getAddress() == "/dp/cameraUnit/Ice/mean"){
                 mGrid.extendByThresh(m.getArgAsInt32(3));
+            }
+            
+            if (m.getAddress().substr(0,26) == "/dp/cameraUnit/sceneState/"){
+                
+                string sceneName = m.getAddress().substr(26);
+        
+                for (int i = 0;i < mSceneNames.size();i++){
+                    if (sceneName == mSceneNames[i]){
+                        
+                        mSceneEnable[i] = m.getArgAsInt32(0);
+                      
+                    }
+                }
+                
+                if(mSceneEnable[ICE] == true && mPreMode != ICE){
+                    mPreMode = ICE;
+                    
+                    mDiv = 5;
+                    mGrid.changeDiv(mDiv);
+                    
+                    mTogAllDraw = false;
+                    mGrid.setAllDraw(mTogAllDraw);
+                }
+                
+                if(mSceneEnable[ICE] == false && mPreMode == ICE){
+                    mPreMode = FIVE;
+                    five();
+                }
             }
         }
         
     }
     
-    void update(){
+    void five(){
+       
+        mDiv = 5;
+        mGrid.changeDiv(5);
         
+        mTogAllDraw = true;
+        mGrid.setAllDraw(mTogAllDraw);
+        
+    }
+    
+    void update(){
         receiveOsc();
         ramSetViewPort(dpGetFirstScreenViewPort());
         mGrid.update();
@@ -137,7 +145,19 @@ private:
     
     int mLineWidth = 2;
     
-    int mExtendThreshNum = 127;
+    int mExtendThreshNum = 150;
+    
+    map<int,string>mSceneNames;
+    
+    enum SCENE_NAME{
+        ICE,
+        TWO,
+        FIVE,
+    };
+    
+    bool isIce = false;
+    int mPreMode = FIVE;
+    bitset<3> mSceneEnable;
     
 };
 
