@@ -108,9 +108,10 @@ public:
 			selectFourPoints(ramActor::JOINT_LEFT_ELBOW, ramActor::JOINT_RIGHT_ELBOW, ramActor::JOINT_LEFT_KNEE, ramActor::JOINT_RIGHT_KNEE);
 		}
         
-        ramCameraManager::instance().getActiveCamera().lookAt(ofPoint(0,100,0));
-        ramCameraManager::instance().getActiveCamera().setPosition(0, 300, 600);
-       
+       // ramCameraManager::instance().getActiveCamera().lookAt(ofPoint(0,100,0));
+       // ramCameraManager::instance().getActiveCamera().setPosition(0, 300, 600);
+     //  cout << ramCameraManager::instance().getActiveCamera().getPosition() << endl;
+   
 	}
 	
 	//--------------------------------------------------------------
@@ -184,6 +185,11 @@ public:
 	void drawRigid(const ramRigidBody &rigid)
 	{
 	}
+    
+    void onEnabled(){
+        ramCameraManager::instance().getActiveCamera().setPosition(0,240,420);
+        ramCameraManager::instance().getActiveCamera().lookAt(ofPoint(0,100,0));
+    }
 	
 	string getName() const { return "Four Points"; }
 	
