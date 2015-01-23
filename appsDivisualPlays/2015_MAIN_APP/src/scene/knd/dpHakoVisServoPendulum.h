@@ -139,7 +139,7 @@ public:
         
         ramOscManager::instance().addReceiverTag(&mReceiver);
         mReceiver.addAddress("/dp/cameraUnit/ServoPendulum/vector/total");
-        
+    
         mHead.speed = 0.1;
 
     }
@@ -255,7 +255,6 @@ private:
     KezSlide mLong;
     KezSlide mLat;
     KezSlide mRad;
-    
     
 };
 

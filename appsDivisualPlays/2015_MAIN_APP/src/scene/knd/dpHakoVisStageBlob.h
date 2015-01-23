@@ -210,7 +210,7 @@ public:
         
         ofDisableDepthTest();
         ofEnableBlendMode(OF_BLENDMODE_ADD);
-        
+                
         vector<ofPoint>tmp;
         for(auto &v:mCircles){
             v.second.draw(mTex);

@@ -128,6 +128,7 @@
 		929360EA1A6FBCCE00F4C4BD /* ThreePoints.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreePoints.h; sourceTree = "<group>"; };
 		929360EC1A70A98B00F4C4BD /* Future.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Future.h; sourceTree = "<group>"; };
 		929360F31A710FF800F4C4BD /* dpTailSphere.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpTailSphere.h; sourceTree = "<group>"; };
+		929360F61A71E6C400F4C4BD /* DoSomething.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoSomething.h; sourceTree = "<group>"; };
 		92CB5B0D1A666F1F00257334 /* dpHakoniwaServoPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaServoPendulum.h; sourceTree = "<group>"; };
 		92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisBug.h; sourceTree = "<group>"; };
 		92CB5B0F1A666F1F00257334 /* dpHakoVisWorm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisWorm.h; sourceTree = "<group>"; };
@@ -378,6 +379,7 @@
 				92CB5B141A666F6A00257334 /* dpServoPendulumThread.h */,
 				92CB5B151A666F6A00257334 /* KezSlidePoint.h */,
 				929360F31A710FF800F4C4BD /* dpTailSphere.h */,
+				929360F61A71E6C400F4C4BD /* DoSomething.h */,
 			);
 			path = util;
 			sourceTree = "<group>";
