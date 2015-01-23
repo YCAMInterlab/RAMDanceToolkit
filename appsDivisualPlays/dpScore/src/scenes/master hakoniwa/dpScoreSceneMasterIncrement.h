@@ -61,6 +61,8 @@ private:
     ofEasyCam mCam;
     
     float mLimit{2000.f};
+    float mDoSomething{20.f};
+    float mTotal{0.f};
     vector<float> mAdditions;
 };
 

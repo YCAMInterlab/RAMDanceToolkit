@@ -101,7 +101,7 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     tabbar->addToggle("Send OSC to Master Hakoniwa", &mEnableOscOutMH);
     tabbar->addToggle("Send OSC to Score", &mEnableOscOutScore);
     tabbar->addToggle("Receive OSC from CameraUnit", &mEnableCameraUnit);
-    tabbar->addToggle("Receive OSC from MOTIONER", &mEnableMotioner);
+    tabbar->addToggle("Open Valve with MOTIONER", &mEnableMotioner);
     tabbar->addSpacer(w, 1.f);
     tabbar->addLabel("[RAM Dance Tool Kit]", OFX_UI_FONT_SMALL);
     ofxUICanvas* sceneSelectTab{new ofxUICanvas()};
