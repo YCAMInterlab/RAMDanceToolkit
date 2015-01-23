@@ -49,9 +49,9 @@ void testApp::setup()
 	// ------------------
 	ramSceneManager& sceneManager = ramSceneManager::instance();
 
-    sceneManager.addScene(mDanceMap.getPtr());
+    //sceneManager.addScene(mDanceMap.getPtr());
     sceneManager.addScene(mIceMap.getPtr());
-    sceneManager.addScene(mSandStorm.getPtr());
+    //sceneManager.addScene(mSandStorm.getPtr());
     
     ofHideCursor();
     
@@ -123,7 +123,10 @@ void testApp::keyPressed(int key)
     
     if(key == ' '){
         ofSetWindowPosition(0, 1280);
+        ofSetFullscreen(true);
     }
+    
+    if(key == 'h')ofHideCursor();
 }
 
 //--------------------------------------------------------------
