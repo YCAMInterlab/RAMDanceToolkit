@@ -2,7 +2,7 @@
 	<phase>
 	    <scene name="dpVisServoPendulum"/>
 	    <scene name="dpVisMagPendulum"/>
-	    <scene name="dpVisSandStorm"/>
+	    <!--<scene name="dpVisSandStorm"/>-->
 	    <scene name="dpVisStruggle"/>
 	    <scene name="dpVisTheta"/>
 	    <scene name="dpHGearMove"/>

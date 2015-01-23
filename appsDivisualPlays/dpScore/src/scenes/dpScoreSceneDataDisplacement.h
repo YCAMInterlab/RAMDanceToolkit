@@ -32,7 +32,7 @@ private:
     ofShader mShader;
     ofEasyCam mCam;
     ofVboMesh mSphereMesh;
-    const float kRadius{400.f};
+    const float kRadius{500.f};
     const int kResolution{30};
     float mFreq{30.f};
     float mAmp{20.f};
