@@ -50,6 +50,7 @@ enum hakoniwaType{
 	HAKO_LINE,
 	HAKO_FOURPOINT,
 	HAKO_FUTURE,
+    HAKO_FUTURE_LEG,
 
 	HAKO_TESTA,
 	HAKO_TESTB,
@@ -131,7 +132,8 @@ public:
 	ofxOscSender senderToSlave;
 	ofxOscSender senderToRDTK1;
 	ofxOscSender senderToRDTK2;
-
+    ofxOscSender senderToFloor;
+    
 	cvSlot mSlots[CV_SLOT_NUM];
 	sw_1010F_SerialController matrixSW;
 
