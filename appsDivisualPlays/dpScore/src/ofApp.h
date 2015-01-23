@@ -51,7 +51,7 @@ private:
 #ifdef DEBUG
     const float mTitleDuration{1.f};
 #else
-    const float mTitleDuration{5.f};
+    const float mTitleDuration{10.f};
 #endif
     ofTrueTypeFont mFont;
     vector<string> mTitleNames;
