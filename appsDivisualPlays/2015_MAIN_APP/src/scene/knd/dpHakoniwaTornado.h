@@ -71,6 +71,8 @@ public:
         m.addIntArg((int)isBulb);
         m.addIntArg((int)isMist);
         mBulbSender.sendMessage(m);
+        
+        cout << isMist << endl;
     }
     
     void update(){
@@ -178,8 +180,8 @@ private:
     
     float mRadMin = 15;
     float mRadMax = 77;
-    float mMistThresh = 180.0;;
-    float mFan = 170;
+    float mMistThresh = 180.0;
+    float mFan = 230;
     
     dpTailSphereController mSphere;
     

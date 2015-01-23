@@ -221,6 +221,18 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 }
 
 void dpSwitchingManager::update(){
+	if (ofGetKeyPressed('a')){
+		ofxOscMessage m;
+		m.setAddress("/ram/set_scene");
+		m.addStringArg("dpHPLink_Laser");
+		m.addIntArg(1);
+		m.addIntArg(1);
+		m.addIntArg(1);
+		receiveOscMessage(m);
+	}
+	if (ofGetKeyPressed('c')){
+
+	}
 
 	if (ofGetFrameNum() % 15 == 0 && oscListPtr != NULL && totalManage){
 
