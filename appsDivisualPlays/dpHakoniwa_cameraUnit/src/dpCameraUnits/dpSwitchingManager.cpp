@@ -37,7 +37,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_OIL;
 	hakoniwas.back()->CVPreset	= "Plink_Oil";
-	hakoniwas.back()->sourceCh	= 3;
+	hakoniwas.back()->sourceCh	= 2;
 	hakoniwas.back()->sceneNames.push_back("H:dpHPLink_Oil");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisPLink_Oil");
 
@@ -221,6 +221,18 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 }
 
 void dpSwitchingManager::update(){
+	if (ofGetKeyPressed('a')){
+		ofxOscMessage m;
+		m.setAddress("/ram/set_scene");
+		m.addStringArg("dpHPLink_Laser");
+		m.addIntArg(1);
+		m.addIntArg(1);
+		m.addIntArg(1);
+		receiveOscMessage(m);
+	}
+	if (ofGetKeyPressed('c')){
+
+	}
 
 	if (ofGetFrameNum() % 15 == 0 && oscListPtr != NULL && totalManage){
 
