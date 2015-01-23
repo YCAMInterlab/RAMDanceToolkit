@@ -479,7 +479,7 @@ void SceneCorrelation::enter()
         auto* zoomout = new NodeVoid(this);
         ofVec3f p;
         p.x = 0.f;
-        p.z = 3600.f;
+        p.z = 2600.f;
         zoomout->setPosition(p);
         mNodes.insert(NodePair(kKeyZoomOut, zoomout));
     }
