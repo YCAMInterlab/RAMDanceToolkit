@@ -125,16 +125,8 @@ void ramMotionExtractor::update(){
 				lst.push_back(m.getArgAsString(i));
 			}
 
-			if (lst.size() == 2) lst.push_back("Dummy");
-
-			mGui->removeWidget(actorList);
-			actorList = mGui->addSortableList("actorList", lst);
-
-			mGui->autoSizeToFitWidgets();
-			parentGui->autoSizeToFitWidgets();
-
-			refleshActorFromList();
-
+			setActorList(&lst);
+	
 		}
 
 		if (m.getAddress() == myAddr + "request"){
@@ -453,9 +445,17 @@ int ramMotionExtractor::getJointIdAt(int port){
 
 }
 
-ofVec3f ramMotionExtractor::getPositionAt(int port){
+ofVec3f ramMotionExtractor::getPositionAt(int port,bool fixPosition){
 
-	return getNodeAt(port).getGlobalPosition();
+	ramNodeArray nd = ramActorManager::instance().getNodeArray(getActorNameAt(port));
+	ofVec3f pos = getNodeAt(port).getGlobalPosition();
+	ofVec3f abd = nd.getNode(ramActor::JOINT_ABDOMEN).getGlobalPosition();
+	
+	if (fixPosition){
+		pos -= abd;
+	}
+	
+	return pos;
 
 }
 
@@ -538,6 +538,20 @@ float ramMotionExtractor::getAreaAt(int port_A, int port_B, int port_C){
 
 }
 
+void ramMotionExtractor::setActorList(vector<string> *lst){
+
+	if (lst->size() == 2) lst->push_back("Dummy");
+	
+	mGui->removeWidget(actorList);
+	actorList = mGui->addSortableList("actorList", *lst);
+	
+	mGui->autoSizeToFitWidgets();
+	parentGui->autoSizeToFitWidgets();
+	
+	refleshActorFromList();
+
+}
+
 #pragma mark - motionPort
 
 void ramMotionPort::init(ramNodeFinder nodeF){
@@ -584,3 +598,4 @@ void ramMotionPort::refleshActorFromIndex(){
 void ramMotionPort::refleshActorFromName(){
 
 }
+
