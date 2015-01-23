@@ -20,6 +20,8 @@ public:
     void setupControlPanel(){
         ramGetGUI().addSlider("drawRadMin",0.0,10.0,&mDrawRadMin);
         ramGetGUI().addSlider("drawRadMax",0.0,10.0,&mDrawRadMax);
+        ramGetGUI().addToggle("simpleCircle",&isDrawSimpleCircle);
+        ramGetGUI().addSlider("speed",0.01,2.0,&mSpeed);
         /*ramGetGUI().addIntSlider("rad",0,255,&mRad);
         ramGetGUI().addToggle("bulb",&isBulb);
         ramGetGUI().addToggle("mist",&isMist);
@@ -68,6 +70,7 @@ public:
         // fan(mFan);
         receiveOsc();
         mSphere.setRad(mDrawRadMin, mDrawRadMax);
+        mSphere.setRotateSpeed(mSpeed);
         /* fan();
          mist();
          cout << isBulb << endl;
@@ -102,16 +105,22 @@ public:
         findCircle(a,b,c,center,normal,radius);
         
         ramBeginCamera();
-        ofPushMatrix();
-        ofTranslate(center);
-        rotateToNormal(normal);
-        ofNoFill();
-        //ofSetColor(255,0,0);
-        //ofCircle(0, 0, radius);
-        ofPopMatrix();
         
-        ofSetColor(255,255,255);
-        mSphere.draw(center,radius,normal);
+        if(isDrawSimpleCircle){
+            
+            ofPushMatrix();
+            ofTranslate(center);
+            rotateToNormal(normal);
+            ofNoFill();
+            ofSetColor(255,255,255);
+            ofCircle(0, 0, radius);
+            ofPopMatrix();
+        
+        }else{
+        
+            mSphere.draw(center,radius,normal);
+        
+        }
         ramEndCamera();
         
     }
@@ -128,11 +137,14 @@ private:
     dpTailSphereController mSphere;
     
     float mDrawRadMin = 1.0;
-    float mDrawRadMax = 12.0;
+    float mDrawRadMax = 6.0;
     
     ramOscReceiveTag mReceiver;
     
     ofPoint mPts[3];
+    
+    bool isDrawSimpleCircle = false;
+    float mSpeed = 0.1;
 };
 
 #endif
