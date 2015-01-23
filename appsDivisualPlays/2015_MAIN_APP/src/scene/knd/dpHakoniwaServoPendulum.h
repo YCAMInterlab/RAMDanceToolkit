@@ -29,6 +29,11 @@ public:
         mMotionExtractor.setupControlPanel(this);
         mMotionExtractor.load("motionExt_dpHServoPendulum.xml");
         
+        int rnd = ofRandom(0,2);
+        
+        if(rnd == 0)mMaxThresh = 38;
+        else mMaxThresh = RANGE_MAX;
+        
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoniwaServoPendulum::onPanelChanged);
     }
     void setup(){
@@ -161,7 +166,7 @@ private:
     static const int RANGE_MAX = 90;
     
     float mLength = 200.0;
-    float mMinThresh = 3.0;
+    float mMinThresh = 7.0;
     float mMaxThresh = RANGE_MAX;
     
     float mSpeed = 1.0;

@@ -172,7 +172,7 @@ public:
                         
                     }
                     
-                    size *= 1000.0;
+                    size *= 800.0;
                     mCircles[label].setRad(fmaxf(size.x,size.y));
                 }
             }
@@ -220,7 +220,7 @@ public:
             }
         }
         
-        ofSetLineWidth(3);
+        ofSetLineWidth(4);
         if(tmp.empty() == false){
             ofSetColor(255,255,255);
             glBegin(GL_LINE_LOOP);
