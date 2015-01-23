@@ -47,6 +47,8 @@ void SceneBodyBoids::enter()
     mEnterTime  = ofGetElapsedTimef();
 
     mCam.enableMouseInput();
+    
+    mEnterFrame = ofGetFrameNum();
 }
 
 void SceneBodyBoids::exit()
@@ -62,6 +64,12 @@ void SceneBodyBoids::exit()
 
 void SceneBodyBoids::update(ofxEventMessage& m)
 {
+    int frame{ofGetFrameNum() - mEnterFrame + 1};
+    if (frame % 60 * 90 == 0) {
+        exit();
+        enter();
+    }
+    
     const float t = ofGetElapsedTimef();
     
     if (t-mEnterTime<DELAY) return;
@@ -137,7 +145,7 @@ void SceneBodyBoids::draw()
     
     if (mActor) {
         //ofxMot::drawSkeleton(mActor);
-        ofSetColor(color::kDarkPinkHeavy, 256);
+        ofSetColor(color::kDarkPinkHeavy, 128);
         auto& joints = mActor->getJoints();
         for (auto& j : joints) {
             j.transformGL();

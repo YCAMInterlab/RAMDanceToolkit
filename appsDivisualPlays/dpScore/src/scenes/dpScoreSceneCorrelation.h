@@ -99,6 +99,9 @@ public:
         virtual ~NodeHakoVis() {}
         void update() override;
         void customDraw() override;
+        
+        ofTexture tex;
+        const int dim{4};
     };
     
     struct NodeScore : public NodeAnalyze {
@@ -106,6 +109,10 @@ public:
         virtual ~NodeScore() {}
         void update() override;
         void customDraw() override;
+        
+        vector<ofVec3f> points;
+        ofVbo vbo;
+        const int numPoints{100};
     };
     
     explicit SceneCorrelation() = default;

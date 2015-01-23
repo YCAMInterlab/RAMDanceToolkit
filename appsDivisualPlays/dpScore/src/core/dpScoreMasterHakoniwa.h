@@ -104,8 +104,6 @@ public:
     
     static const string kOscAddrRamSetScene;
     
-    static const string kXmlSettingsPath;
-    
     static const string kScoreBlack;
     
     ofVec2f mTextLeftCorner{0.f, 0.f};
@@ -163,6 +161,8 @@ private:
     vector<UniqueStringStack> mUniqueScores;
     UniqueStringStack mUniqueScoreBodies;
     
+    string mScoreCorrelation;
+    
     ofEasyCam mCam;
     ofRectangle mCamViewport;
     
@@ -192,6 +192,7 @@ private:
     bool mEnableOscOutRDTK{false};
     bool mEnableOscOutMH{false};
     bool mEnableOscOutScore{false};
+    bool mEnableShowHakoniwaTitle{false};
     
     float mEnabledTime{0.f};
     

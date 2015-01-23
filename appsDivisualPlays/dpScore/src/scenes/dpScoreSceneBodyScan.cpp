@@ -27,7 +27,7 @@ BodyScanNode::BodyScanNode()
     
     spd.assign(kNumVertices, 0.f);
     for (auto& s : spd) {
-        s = ofRandom(50.f, 100.f);
+        s = ofRandom(100.f, 300.f);
     }
 }
 
@@ -114,20 +114,20 @@ void SceneBodyScan::draw()
         ofSetLineWidth(1.5f);
         for (auto& n : getSkeleton(i)->getJoints()) {
             n.draw();
-            if (!n.getParent()) continue;
-            ofLine(n.getGlobalPosition(), n.getParent()->getGlobalPosition());
+            //if (!n.getParent()) continue;
+            //ofLine(n.getGlobalPosition(), n.getParent()->getGlobalPosition());
         }
         ofPopMatrix();
     }
     mCam.end();
     
-    const float w = kW;
+    const float w = kW * 2.f;
     
-    const float span = 3.f;
+    const float span = 2.f;
     const float t = ::fmodf(ofGetElapsedTimef(), span) / span;
     const float x = t * kW*3.f;
     ofPushMatrix();
-    ofTranslate(kW*2.f-x, 0.f);
+    ofTranslate(kW-x, 0.f);
     ofFill();
     ofSetColor(ofColor::black);
     ofRect(-kW*2.f, 0.f, kW*2.f, kH);

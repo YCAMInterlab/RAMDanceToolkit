@@ -12,7 +12,7 @@
 DP_SCORE_NAMESPACE_BEGIN
 
 static const string kKeyDancer{"Dancer"};
-static const string kKeyRDTK{"RAM"};
+static const string kKeyRDTK{"RAM DTK"};
 static const string kKeyHakoniwa{"Hakoniwa"};
 static const string kKeyAnalyze{"Analyze"};
 static const string kKeyOutput{"Output"};
@@ -21,13 +21,12 @@ static const string kKeyZoomOut{"ZoomOut"};
 static const int kNumOutput{4};
 
 static const float kFontSize{60.f};
-static const float kFontSizeBig{140.f};
+static const float kFontSizeBig{100.f};
 
 static const float kBoxSize{200.f};
 
 static const int kNumDancers{3};
 static const int kNumRDTK{1};
-static const int kNumHakoniwa{8};
 
 static const float kDistance{2000.f};
 
@@ -49,12 +48,13 @@ void SceneCorrelation::Node::drawName()
 {
     ofPushMatrix();
     billboard();
-    string initial{name.substr(0, 1)};
-    string other{name.substr(1, name.size())};
-    auto& font = owner->getFontInitial();
-    font.drawString(initial, 0.f, 0.f);
-    ofTranslate(font.stringWidth(initial) + 20.f, 0.f);
-    owner->getFont().drawString(other, 0.f, 0.f);
+    //string initial{name.substr(0, 1)};
+    //string other{name.substr(1, name.size())};
+    //auto& font = owner->getFontInitial();
+    //font.drawString(initial, 0.f, 0.f);
+    //ofTranslate(font.stringWidth(initial) + 20.f, 0.f);
+    //owner->getFont().drawString(other, 0.f, 0.f);
+    owner->getFontInitial().drawString(name, 0.f, 0.f);
     ofPopMatrix();
 }
 
@@ -141,7 +141,7 @@ void SceneCorrelation::NodeHakoniwa::customDraw()
     ofPopStyle();
     
     ofPushStyle();
-    ofSetLineWidth(1.5f);
+    ofSetLineWidth(2.5f);
     ofSetColor(color::kMain);
     for (auto& p : points) ofDrawSphere(p.pos, PointSize);
     ofPopStyle();
@@ -164,7 +164,7 @@ void SceneCorrelation::NodeAnalyze::update()
 void SceneCorrelation::NodeAnalyze::customDraw()
 {
     ofPushStyle();
-    ofSetLineWidth(1.5f);
+    ofSetLineWidth(2.5f);
     ofSetColor(color::kMain);
     const float t0{::fmodf(owner->mTime * 0.5f, 1.f)};
     const float t1{::fmodf(owner->mTime * 1.1f, 1.f)};
@@ -194,7 +194,7 @@ void SceneCorrelation::NodeAnalyze::customDraw()
     ofPushStyle();
     ofSetColor(ofColor::white);
     ofDrawBox(kBoxSize);
-    ofPushStyle();
+    ofPopStyle();
     
     Node::customDraw();
 }
@@ -219,11 +219,11 @@ void SceneCorrelation::NodeSound::customDraw()
     t = easeInSine(1.f - t);
     auto drawNode = [&]() {
         ofPushMatrix();
-        ofTranslate(ofRandom(ofRandom(-200, -50), ofRandom(50, 200)) * t,
-                    ofRandom(ofRandom(-200, -50), ofRandom(50, 200)) * t,
-                    ofRandom(ofRandom(-200, -50), ofRandom(50, 200)) * t);
+        ofTranslate(ofRandom(ofRandom(-100, -20), ofRandom(20, 100)) * t,
+                    ofRandom(ofRandom(-100, -20), ofRandom(20, 100)) * t,
+                    ofRandom(ofRandom(-100, -20), ofRandom(20, 100)) * t);
         ofSetColor(ofRandom(255) * t+ 255 * (1.f - t));
-        const float s{ofRandom(2.f, 3.f) * t + 1 * (1.f - t)};
+        const float s{ofRandom(1.f, 2.f) * t + 1 * (1.f - t)};
         ofScale(s, s, s);
         ofDrawBox(kBoxSize);
         ofPopMatrix();
@@ -260,11 +260,14 @@ void SceneCorrelation::NodeLight::customDraw()
     setOrientation(fixedQuat);
     
     transformGL();
+    ofColor c;
+    c.setHsb(t * 255.f, 255, 255, 255);
+    
     const float s{1.f + t * 5.f};
     const float a{easeInSine(1.f - t) * 255.f};
-    ofSetColor(color::kMain, a);
+    ofSetColor(c, a);
     ofScale(s, s, s);
-    ofDrawBox(kBoxSize);;
+    ofDrawBox(kBoxSize);
     ofPopStyle();
     
     Node::customDraw();
@@ -280,6 +283,25 @@ NodeAnalyze(_owner)
 void SceneCorrelation::NodeHakoVis::update()
 {
     NodeDancer::update();
+    unsigned char pixels[dim * dim * 4];
+    for (int i=0; i<dim; i++) {
+        for (int j=0; j<dim; j++) {
+            const int idx{(i * dim + j) * 4};
+            ofColor col;
+            col.setHsb(ofRandom(255.f), 255, 255);
+            pixels[idx + 0] = col.r;
+            pixels[idx + 1] = col.g;
+            pixels[idx + 2] = col.b;
+            if (idx + 4 < dim * dim * 4)
+                pixels[idx + 4] = 50;
+        }
+    }
+    
+    ofPushStyle();
+    ofDisableArbTex();
+    tex.setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
+    tex.loadData(pixels, dim, dim, GL_RGBA);
+    ofPopStyle();
 }
 
 void SceneCorrelation::NodeHakoVis::customDraw()
@@ -290,11 +312,9 @@ void SceneCorrelation::NodeHakoVis::customDraw()
     ofSetColor(ofColor::white);
     ofDrawBox(kBoxSize);
     ofFill();
-    ofColor c;
-    ofSetRectMode(OF_RECTMODE_CENTER);
-    c.setHsb(t * 255.f, 255, 255, 50);
-    ofSetColor(c);
+    tex.bind();
     ofDrawBox(kBoxSize);
+    tex.unbind();
     ofPopStyle();
     
     Node::customDraw();
@@ -305,18 +325,32 @@ SceneCorrelation::NodeScore::NodeScore(SceneCorrelation* _owner) :
 NodeAnalyze(_owner)
 {
     name = "Score";
+    points.assign(numPoints, ofVec3f::zero());
+    vbo.setVertexData(&points.at(0), points.size(), GL_DYNAMIC_DRAW);
 }
 
 void SceneCorrelation::NodeScore::update()
 {
     NodeDancer::update();
+    const float t{owner->mTime * 2.f};
+    for (int i=0; i<points.size(); i++) {
+        const float step{kBoxSize / numPoints};
+        points.at(i).x = step * i - kBoxSize * 0.5f;
+        points.at(i).y = ofSignedNoise(i*0.1f+t) * kBoxSize * 0.65f;
+        points.at(i).z = 0.f;
+    }
+    vbo.updateVertexData(&points.at(0), points.size());
 }
 
 void SceneCorrelation::NodeScore::customDraw()
 {
     ofPushStyle();
+    ofEnableDepthTest();
     ofSetColor(ofColor::white);
     ofDrawBox(kBoxSize);
+    ofSetColor(color::kMain);
+    vbo.draw(GL_LINE_STRIP, 0, points.size());
+    ofDisableDepthTest();
     ofPopStyle();
     
     Node::customDraw();
@@ -357,7 +391,7 @@ void SceneCorrelation::enter()
     for (int i=0; i<kNumDancers; i++) {
         auto* daner = new NodeDancer(this);
         ofVec3f p;
-        p.x = -dist;
+        p.x = -dist * 1.5f;
         p.y = getLineUped(3000.f, i, kNumDancers);
         daner->setPosition(p);
         mNodes.insert(NodePair(kKeyDancer, daner));
@@ -366,23 +400,44 @@ void SceneCorrelation::enter()
     for (int i=0; i<kNumRDTK; i++) {
         auto* rdtk = new NodeRDTK(this);
         ofVec3f p;
+        p.x = -dist * 0.5f;
         p.y = getLineUped(2000.f, i, kNumRDTK);
         rdtk->setPosition(p);
         mNodes.insert(NodePair(kKeyRDTK, rdtk));
     }
     
+    ofxXmlSettings xml;
+    xml.load(kXmlSettingsPath);
+    
+    xml.pushTag("rdtk");
+    xml.pushTag("phase", 0);
+    vector<string> sceneNames;
+    for (int j=0; j<xml.getNumTags("scene"); j++) {
+        const string name{xml.getAttribute("scene", "name", "error", j)};
+        sceneNames.push_back(name);
+    }
+    xml.popTag();
+    
     vector<NodeHakoniwa*> hakoniwas;
-    for (int i=0; i<kNumHakoniwa; i++) {
+    for (int i=0; i<sceneNames.size(); i++) {
         auto* hakoniwa = new NodeHakoniwa(this);
         ofVec3f p;
-        do { p = randVec3f(); }
-        while (p.x < 0.f || p.z < -0.7f || p.z > 0.7f);
-        
-        p *= dist;
+        float t{i/(float)sceneNames.size()*2.f - 1.f};
+        t *= PI * 0.8f;
+        p.x = ::cos(t);
+        p.y = ::sin(t);
+        p.z = ofRandom(-0.35f, 0.35f);
+        p *= dist * ofRandom(0.7f, 1.f);
         
         hakoniwa->setPosition(p);
         mNodes.insert(NodePair(kKeyHakoniwa, hakoniwa));
         
+        string name{sceneNames.at(i)};
+        ofStringReplace(name, "dpVis", "");
+        ofStringReplace(name, "dpH", "");
+        ofStringReplace(name, "RE", "");
+        ofStringReplace(name, "Theta", "FishEye");
+        hakoniwa->name = name;
         hakoniwas.push_back(hakoniwa);
     }
     
@@ -406,11 +461,13 @@ void SceneCorrelation::enter()
             default: output = new NodeHakoVis(this); break;
         }
         ofVec3f p;
-        do { p = randVec3f(); }
-        while (p.x < 0.f || p.z < -0.7f || p.z > 0.7f);
-        
+        float t{i/(float)kNumOutput*2.f - 1.f};
+        t *= PI * 0.8f;
+        p.x = ::cos(t);
+        p.y = ::sin(t);
+        p.z = 0.f;
         p *= dist;
-        p.x += dist * 2.f;
+        p.x += dist * 3.f;
         
         output->setPosition(p);
         mNodes.insert(NodePair(kKeyOutput, output));
@@ -421,8 +478,8 @@ void SceneCorrelation::enter()
     {
         auto* zoomout = new NodeVoid(this);
         ofVec3f p;
-        p.x = dist;
-        p.z = 2200.f;
+        p.x = 0.f;
+        p.z = 3600.f;
         zoomout->setPosition(p);
         mNodes.insert(NodePair(kKeyZoomOut, zoomout));
     }
@@ -482,15 +539,13 @@ void SceneCorrelation::update(ofxEventMessage& m)
     t = ofMap(t, 0.f, 6.f, -1.f, 3.f);
     t = ofClamp(t, 0.f, 1.f);
     t = easeInOutExpo(t);
-    //float d{1.f -  ::fabsf(t * 2.f - 1.f)};
     float fov{0.f};
-    
     
     if (mCurrentTarget != mPrevTarget) {
         auto updateTarget = [&](const string& key, Node** target){
             auto count = mNodes.count(key);
             auto it = mNodes.find(key);
-            for (int i=0; i<ofRandom(count-1-FLT_EPSILON); i++) {
+            for (int i=0; i<(int)ofRandom(count-FLT_EPSILON); i++) {
                 ++it;
             }
             if (it != mNodes.end()) *target = it->second;
@@ -554,7 +609,7 @@ void SceneCorrelation::update(ofxEventMessage& m)
         
         if (mMoveCamera) {
             mCam.setGlobalPosition(camPos);
-            mCam.lookAt(lookAt);
+            mCam.lookAt(ofVec3f(lookAt.x+150.f, lookAt.y, lookAt.z));
         }
         
         if (mCurrentTarget != zoomOutSeq && mCurrentTarget != zoomInSeq)
