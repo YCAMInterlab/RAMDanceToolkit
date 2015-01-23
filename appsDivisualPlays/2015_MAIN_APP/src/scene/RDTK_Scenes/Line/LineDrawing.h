@@ -302,6 +302,7 @@ public:
 	
 	void draw()
 	{
+        ramSetViewPort(dpGetFirstScreenViewPort());
 		ramBeginCamera();
 		
 		ofPushStyle();
