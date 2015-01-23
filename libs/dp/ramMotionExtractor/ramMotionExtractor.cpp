@@ -446,16 +446,26 @@ int ramMotionExtractor::getJointIdAt(int port){
 }
 
 ofVec3f ramMotionExtractor::getPositionAt(int port,bool fixPosition){
-
-	ramNodeArray nd = ramActorManager::instance().getNodeArray(getActorNameAt(port));
-	ofVec3f pos = getNodeAt(port).getGlobalPosition();
-	ofVec3f abd = nd.getNode(ramActor::JOINT_ABDOMEN).getGlobalPosition();
+    
+    vector <string> names = ramActorManager::instance().getNodeArrayNames();
+    bool exist = false;
+    string actorName = getActorNameAt(port);
+    for (int i = 0;i < names.size();i++){
+        if (names[i] == actorName) exist = true;
+    }
+    if (exist){
+        ramNodeArray nd = ramActorManager::instance().getNodeArray(getActorNameAt(port));
+        ofVec3f pos = getNodeAt(port).getGlobalPosition();
+        ofVec3f abd = nd.getNode(ramActor::JOINT_ABDOMEN).getGlobalPosition();
+        abd.y = 0;
+        if (fixPosition){
+            pos -= abd;
+        }
+        return pos;
+    }else{
+        return getNodeAt(port).getGlobalPosition();
+    }
 	
-	if (fixPosition){
-		pos -= abd;
-	}
-	
-	return pos;
 
 }
 

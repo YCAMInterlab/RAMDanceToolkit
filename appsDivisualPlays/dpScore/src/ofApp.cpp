@@ -401,18 +401,13 @@ void ofApp::draw()
         const float ww{(float)ofGetWidth()};
         const float wh{(float)ofGetHeight()};
         
-        //ofSetColor(ofColor::white, 128);
-        //alignedLine(0.f, wh*0.5f, ww, wh*0.5f);
-        
         const float tt{ofClamp(t, 0.f, 1.f)};
-        
         int longestTitle{0};
         
         for (auto& s : mTitleNames) {
             if (s.size() > longestTitle) longestTitle = s.size();
         }
         const int numChar{(int)(longestTitle * tt)};
-        //const float sh{mFont.stringHeight("A")};
         const float shift{kW / 8.f};
         for (int i=0; i<mTitleNames.size(); i++) {
             string s{mTitleNames.at(i)};

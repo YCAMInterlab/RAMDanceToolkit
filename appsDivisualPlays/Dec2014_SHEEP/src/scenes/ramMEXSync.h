@@ -11,6 +11,19 @@
 
 #include "ramMain.h"
 #include "ramMotionExtractor.h"
+#include "simpleSwitcher.h"
+
+enum actorPresetMode{
+	ACTPRE_STANDARD,
+	ACTPRE_SOLO,
+	ACTPRE_DUO,
+	ACTPRE_TRIO,
+	ACTPRE_SET_A,
+	ACTPRE_SET_B,
+	ACTPRE_SET_C,
+	ACTPRE_SET_D,
+	ACTPRE_SET_E
+};
 
 class oscPreview{
 public:
@@ -41,6 +54,11 @@ public:
 	ofxUICanvas* presetGui;
 	ofxUIRadio* actPresetRadio;
 	
+	ofxUICanvas* blockLauncher;
+	void blockLaunch(ofxUIEventArgs& e);
+	
+	simpleSwitcher switcher;
+	
 	float mUIRemote_float;
 	float mUIRemote_fOrder;
 	bool mUIRemote_toggle;
@@ -60,7 +78,18 @@ public:
 	void getExtractor();
 	void setExtractor();
 
+	void onEnabled();
+	void onDisabled();
+	
+	string currentScene[4];
+	
 	vector<oscPreview*> previews;
+	
+	//for Remote Functions
+	void setActorSort(vector<string> list);
+	void setScene(string scene,bool enable,bool A,bool B);
+	void setActorPreset(actorPresetMode mode);
+	
 protected:
 	vector<bool>	enabled;
 	vector<string> actorPreset;
