@@ -108,6 +108,8 @@ public:
         ofPoint b = mMotionExtractor.getPositionAt(1);
         ofPoint c = mMotionExtractor.getPositionAt(2);
         
+        sendOscToVis(a, b, c);
+        
         ofPoint center;
         ofPoint normal;
         float radius;
@@ -132,8 +134,7 @@ public:
         ofSetColor(255,255,255);
         mSphere.draw(center,radius,normal);
         ramEndCamera();
-        
-        sendOscToVis(a, b, c);
+    
     }
     
     void sendOscToVis(ofPoint a,ofPoint b, ofPoint c){
