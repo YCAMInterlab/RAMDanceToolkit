@@ -163,25 +163,47 @@ void eyeBall::onEnabled(){
     
     //デフォルトのEyeポジション（仮設定）
     //-----------------------
+//    //eye1
+//    camera1_x = -250.0;
+//    camera1_y = 25.0;
+//    camera1_z = 163.0;
+//    
+//    //eye2
+//    camera2_x = -160.0;
+//    camera2_y = 25.0;
+//    camera2_z = 240.0;
+//
+//    //eye3
+//    camera3_x = 130.0;
+//    camera3_y = 25.0;
+//    camera3_z = 240.0;
+//
+//    //eye4
+//    camera4_x = 230.0;
+//    camera4_y = 25.0;
+//    camera4_z = 163.0;
+//    //-----------------------
+    
+    //-----------------------
     //eye1
-    camera1_x = -250.0;
+    camera1_x = -150.0;
     camera1_y = 25.0;
-    camera1_z = 163.0;
+    camera1_z = 240.0;
     
     //eye2
-    camera2_x = -160.0;
+    camera2_x = -60.0;
     camera2_y = 25.0;
     camera2_z = 240.0;
-
+    
     //eye3
-    camera3_x = 130.0;
+    camera3_x = 40.0;
     camera3_y = 25.0;
     camera3_z = 240.0;
-
+    
     //eye4
-    camera4_x = 230.0;
+    camera4_x = 140.0;
     camera4_y = 25.0;
-    camera4_z = 163.0;
+    camera4_z = 240.0;
     //-----------------------
     
     
@@ -242,9 +264,9 @@ void eyeBall::refleshState(){
         autoTurn = false;
         nodeControl = false;
         
-        posX = ofMap(int(pendulumPosX *200),0,300,140,-512);
+        posX = ofClamp(ofMap(int(pendulumPosX * 300),0,200,512,-512), -512, 512);
         posY = 100;
-        posZ = ofMap(int(pendulumPosZ *200),0,300,140,-512);
+        posZ = ofClamp(ofMap(int(pendulumPosZ * 300),0,200,510,-512), -512, 512);
     }
     
     //servo value
