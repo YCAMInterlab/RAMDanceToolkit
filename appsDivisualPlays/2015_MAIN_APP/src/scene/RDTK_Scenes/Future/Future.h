@@ -29,7 +29,7 @@ public:
 	
 	bool draw_line;
 	
-	Future() : distance(150), speed(27) {}
+	Future() : distance(80), speed(120) {}
 	
 	struct Preset
 	{
@@ -80,8 +80,8 @@ public:
 			ofNoFill();
 			
 			const ofColor gcolor =
-			i==0 ? ramColor::RED_LIGHT :
-			i==1 ? ramColor::YELLOW_DEEP : ramColor::BLUE_LIGHT;
+			i==0 ? ofColor::green:
+			i==1 ? ofColor::yellow: ofColor::red;
 			
 			ofSetColor(gcolor);
 			ramDrawNodes(processedNA);
@@ -147,6 +147,10 @@ public:
 		}
 	}
 	
+    void onEnabled(){
+        ramCameraManager::instance().getActiveCamera().setPosition(0,240,420);
+        ramCameraManager::instance().getActiveCamera().lookAt(ofPoint(0,100,0));
+    }
 	
 	string getName() const { return "Future"; }
 };

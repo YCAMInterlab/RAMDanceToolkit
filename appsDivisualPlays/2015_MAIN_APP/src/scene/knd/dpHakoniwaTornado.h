@@ -71,6 +71,7 @@ public:
         m.addIntArg((int)isBulb);
         m.addIntArg((int)isMist);
         mBulbSender.sendMessage(m);
+        
     }
     
     void update(){
@@ -176,10 +177,10 @@ private:
     
     ramMotionExtractor mMotionExtractor;
     
-    float mRadMin = 15;
-    float mRadMax = 77;
-    float mMistThresh = 180.0;;
-    float mFan = 170;
+    float mRadMin = 7.6;
+    float mRadMax = 95;
+    float mMistThresh = 202.0;
+    float mFan = 220;
     
     dpTailSphereController mSphere;
     
