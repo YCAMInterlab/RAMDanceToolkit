@@ -33,7 +33,7 @@ public:
         
         mGrid.setExtendThreshNum(mExtendThreshNum);
         
-        mSceneNames[ICE] = "dpVisIce";
+        mSceneNames[ICE] = "Ice";
         mSceneNames[TWO] = "dpVisTwo";
         mSceneNames[FIVE] = "dpVisFive";
         

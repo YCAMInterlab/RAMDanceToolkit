@@ -158,14 +158,16 @@ public:
         
         ofSetLineWidth(mLineWidth);
         
-        ramBeginCamera();
+        ofEasyCam cam;
+        
+        cam.begin(dpGetFirstScreenViewPort());
         
         ofPushMatrix();
         ofRotate(mAngle.val,mRot.x,mRot.y,mRot.z);
         mCube.draw();
         ofPopMatrix();
         
-        ramEndCamera();
+        cam.end();
     }
     
     void onPanelChanged(ofxUIEventArgs &e){
@@ -229,7 +231,7 @@ private:
         Z
     };
     
-    int mExtendThreshNum = 127;
+    int mExtendThreshNum = 150;
  
 };
 

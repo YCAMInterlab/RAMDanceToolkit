@@ -24,7 +24,7 @@ magnetLooper::magnetLooper(){
     receiver.setup(12002);
     
 //    //スピード変更用 OSC受信
-    //receiver_speed.setup(10000);
+    receiver_speed.setup(10000);
     
     //sender.setup("192.168.20.25", 12001);
     //sender.setup("loacalhost", 8528);
@@ -103,14 +103,14 @@ void magnetLooper::setupControlPanel(){
     //oldしゃくとりのスピード調整
     gui->addSpacer();
     gui->addToggle("Looper1 Speed Control"		, &looper1Speed);
-    gui->addSlider("Looper1 Speed", 33.0, 4.0, &looper1SpeedVal);
+    gui->addSlider("Looper1 Speed", 33.0, 2.0, &looper1SpeedVal);
     //====================================
     
     //====================================
     //newしゃくとりのスピード調整
     gui->addSpacer();
     gui->addToggle("Looper2 Speed Control"		, &looper2Speed);
-    gui->addSlider("Looper1 Speed", 33.0, 4.0, &looper2SpeedVal);
+    gui->addSlider("Looper1 Speed", 33.0, 2.0, &looper2SpeedVal);
     //====================================
     
     
@@ -208,10 +208,10 @@ void magnetLooper::refleshState(){
     if(looper2Speed == true){
         looper2SpeedHantei = 1;
         
-        //evalaPCから送られるスピードの値が0じゃなければlooper1SpeedValに代入
-        if(oscValLooper2 != 0){
-            looper2SpeedVal = oscValLooper2;
-        }
+//        //evalaPCから送られるスピードの値が0じゃなければlooper1SpeedValに代入
+//        if(oscValLooper2 != 0){
+//            looper2SpeedVal = oscValLooper2;
+//        }
         
     }else{
         looper2SpeedHantei = 0;
@@ -320,6 +320,7 @@ void magnetLooper::refleshState(){
     n.addIntArg(hantei2);
     n.addIntArg(looper2SpeedHantei);
     n.addIntArg(int(looper2SpeedVal));
+    //n.addIntArg(2);
     //n.addIntArg(33);
     sender2.sendMessage(n);
     

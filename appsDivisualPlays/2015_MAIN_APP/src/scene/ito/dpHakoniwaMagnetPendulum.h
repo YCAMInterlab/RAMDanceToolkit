@@ -57,6 +57,9 @@ private:
     
     ramMotionExtractor	mMotionExtractor;
     ofxOscSender mSenderOnOff;
+    ofxOscSender mSenderToVis1;
+    ofxOscSender mSenderToVis2;
+    
     ofxOscSender mSenderInverse;
     
     float startTimeForDistanceCondition[3];
