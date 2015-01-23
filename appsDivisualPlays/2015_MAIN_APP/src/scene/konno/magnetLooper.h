@@ -29,7 +29,7 @@ public:
     void onDisabled();
     
     inline string getName() const {
-        return "dpHLooper";
+        return "dpHWorm";
     }
     
     //==========================================

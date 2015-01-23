@@ -70,7 +70,9 @@ void dpHakoniwaMagnetPendulum::setup() {
     
     mSenderOnOff.setup("192.168.20.52",8528);
     mSenderInverse.setup("192.168.20.72", 8528);
-
+    mSenderToVis1.setup("192.168.20.2", 10000);
+    mSenderToVis2.setup("192.168.20.3", 10000);
+    
     bHideNodeView = true;
 }
 
@@ -86,6 +88,20 @@ void dpHakoniwaMagnetPendulum::sendOsc() {
         
         mSenderOnOff.sendMessage(m);
     }
+    
+    {
+        ofxOscMessage m;
+        m.setAddress("/dp/flag/MagPendulum");
+        
+        for (int i = 2; i < 5; i++) {
+            m.addIntArg(bOn[i]); // Magnets ON/OFF (1:ON, 0:OFF)
+        }
+        
+        mSenderToVis1.sendMessage(m);
+        mSenderToVis2.sendMessage(m);
+        
+    }
+    
     {
         ofxOscMessage m;
         m.setAddress("/dp/hakoniwa/magpen");
@@ -205,7 +221,7 @@ void dpHakoniwaMagnetPendulum::update() {
                 else bTwisted[i] = false;
             }
             
-            if ((bTwisted[0] || bTwisted[1]) && (bOn[2] == false)) {
+            if ((bTwisted[0] || bTwisted[1])) {
                 bOn[2] = true;
             } else {
                 bOn[2] = false;

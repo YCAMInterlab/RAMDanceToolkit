@@ -57,6 +57,8 @@
 //#include "dpHakoniwaIce.h"
 #include "frozenIce.h"
 #include "magnetLooper.h"
+//
+#include "eyeBall.h"
 
 //onishi Scenes
 #include "FutureRE.h"
@@ -119,6 +121,9 @@ public:
     
     // worm
     dpVisWorm             visWorm;
+    
+    // eyeBall
+    eyeBall dpHEyeBall;
 
 	//MagPendulum
 	dpHakoniwaMagnetPendulum	magPendulum;
