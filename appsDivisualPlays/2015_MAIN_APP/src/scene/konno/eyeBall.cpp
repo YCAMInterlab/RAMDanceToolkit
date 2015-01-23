@@ -155,7 +155,8 @@ void eyeBall::onEnabled(){
     sendServo = true;
     
     //とりあえずデフォルトでオートターン設定になるようにする
-    autoTurn = true;
+    autoTurn = false;
+    pendulumContorl = true;
     speed = 0.03;
     radius = 80.0;
     
@@ -241,9 +242,9 @@ void eyeBall::refleshState(){
         autoTurn = false;
         nodeControl = false;
         
-        posX = ofMap(int(pendulumPosX *200),0,500,140,-512);
+        posX = ofMap(int(pendulumPosX *200),0,300,140,-512);
         posY = 100;
-        posZ = ofMap(int(pendulumPosZ *200),0,500,140,-512);
+        posZ = ofMap(int(pendulumPosZ *200),0,300,140,-512);
     }
     
     //servo value
@@ -278,9 +279,9 @@ void eyeBall::refleshState(){
             pendulumPosX = r.getArgAsFloat(1);
             pendulumPosZ = r.getArgAsFloat(2);
             //cout << "receive!!!" << endl;
-            cout << "x  :" << int(pendulumPosX *200) << endl;
-            //cout << "x  :" << ofMap(int(pendulumPosX *200),0,500,140,-512) << endl;
-            //cout << "z  :" << ofMap(int(pendulumPosZ *200),0,500,140,-512) << endl;
+            //cout << "x  :" << int(pendulumPosX *100) << endl;
+            cout << "x  :" << ofMap(int(pendulumPosX *200),0,300,140,-512) << endl;
+            cout << "z  :" << ofMap(int(pendulumPosZ *200),0,300,140,-512) << endl;
         }
     }
     //=== OSC Read =======

@@ -302,6 +302,7 @@ public:
 	
 	void draw()
 	{
+        ramSetViewPort(dpGetFirstScreenViewPort());
 		ramBeginCamera();
 		
 		ofPushStyle();
@@ -445,6 +446,11 @@ public:
 	{
 		loadXML(filePath);
 	}
+    
+    void onEnabled(){
+        ramCameraManager::instance().getActiveCamera().setPosition(0,240,420);
+        ramCameraManager::instance().getActiveCamera().lookAt(ofPoint(0,100,0));
+    }
 	
 private:
     ofxXmlSettings XML;

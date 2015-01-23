@@ -75,8 +75,6 @@ void testApp::setup()
     sceneManager.addScene(dpHEyeBall.getPtr());
     //---
     
-    sceneManager.addScene(futureRE.getPtr());
-
 	sceneManager.addScene(metaball.getPtr());
 
     sceneManager.addScene(line.getPtr());
