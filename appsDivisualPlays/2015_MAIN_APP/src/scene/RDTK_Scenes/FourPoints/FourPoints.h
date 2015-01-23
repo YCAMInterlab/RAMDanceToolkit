@@ -53,12 +53,12 @@ public:
 		
 		showFourPointSphere = false;
 		showFourPointTwist = true;
-		twistResolution = 20;
-		twistExtensionWidth = 1;
-		twistExtensionHeight = 1;
+		twistResolution = 80;
+		twistExtensionWidth = 8;
+		twistExtensionHeight = 2;
 		pointSize = 3;
 		
-		pickExtents = false;
+		pickExtents = true;
 		pickCore = false;
 		pickKneesElbows = false;
 		
