@@ -53,12 +53,12 @@ public:
 		
 		showFourPointSphere = false;
 		showFourPointTwist = true;
-		twistResolution = 20;
-		twistExtensionWidth = 1;
-		twistExtensionHeight = 1;
+		twistResolution = 65;
+		twistExtensionWidth = 17;
+		twistExtensionHeight = 2;
 		pointSize = 3;
 		
-		pickExtents = false;
+		pickExtents = true;
 		pickCore = false;
 		pickKneesElbows = false;
 		
@@ -107,6 +107,11 @@ public:
 		{
 			selectFourPoints(ramActor::JOINT_LEFT_ELBOW, ramActor::JOINT_RIGHT_ELBOW, ramActor::JOINT_LEFT_KNEE, ramActor::JOINT_RIGHT_KNEE);
 		}
+        
+       // ramCameraManager::instance().getActiveCamera().lookAt(ofPoint(0,100,0));
+       // ramCameraManager::instance().getActiveCamera().setPosition(0, 300, 600);
+     //  cout << ramCameraManager::instance().getActiveCamera().getPosition() << endl;
+   
 	}
 	
 	//--------------------------------------------------------------
@@ -180,6 +185,11 @@ public:
 	void drawRigid(const ramRigidBody &rigid)
 	{
 	}
+    
+    void onEnabled(){
+        ramCameraManager::instance().getActiveCamera().setPosition(getRDTKSceneCameraPosition());
+        ramCameraManager::instance().getActiveCamera().lookAt(getRDTKSceneCameraLookAt());
+    }
 	
 	string getName() const { return "Four Points"; }
 	

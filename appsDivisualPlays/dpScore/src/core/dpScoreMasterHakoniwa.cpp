@@ -32,8 +32,6 @@ const int MH::kPortNumberScore{10000};
 
 const string MH::kOscAddrRamSetScene{"/ram/set_scene"};
 
-const string MH::kXmlSettingsPath{"master_hakoniwa_settings.xml"};
-
 const string MH::kScoreBlack{"black"};
 
 #pragma mark ___________________________________________________________________
@@ -97,20 +95,22 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     tabbar->setPosition(kLineWidth, kTopOffset);
     tabbar->addToggle("[[[ Stop!!! ]]]", &mEmergencyStop, sizeBig, sizeBig);
     tabbar->addSpacer(w, 1.f);
+    tabbar->addLabel("[OSC]", OFX_UI_FONT_SMALL);
     mEnableAllToggle = tabbar->addToggle("Enable All", false, sizeMid, sizeMid);
-    tabbar->addToggle("Enable OSC RAM Dance Tool Kit", &mEnableOscOutRDTK);
-    tabbar->addToggle("Enable OSC Master Hakoniwa", &mEnableOscOutMH);
-    tabbar->addToggle("Enable OSC Score", &mEnableOscOutScore);
-    tabbar->addToggle("Enable CameraUnit", &mEnableCameraUnit);
-    tabbar->addToggle("Enable MOTIONER", &mEnableMotioner);
+    tabbar->addToggle("Send OSC to RAM Dance Tool Kit", &mEnableOscOutRDTK);
+    tabbar->addToggle("Send OSC to Master Hakoniwa", &mEnableOscOutMH);
+    tabbar->addToggle("Send OSC to Score", &mEnableOscOutScore);
+    tabbar->addToggle("Receive OSC from CameraUnit", &mEnableCameraUnit);
+    tabbar->addToggle("Open Valve with MOTIONER", &mEnableMotioner);
     tabbar->addSpacer(w, 1.f);
-    
+    tabbar->addLabel("[RAM Dance Tool Kit]", OFX_UI_FONT_SMALL);
     ofxUICanvas* sceneSelectTab{new ofxUICanvas()};
     sceneSelectTab->setWidth(w);
     sceneSelectTab->setHeight(h);
     sceneSelectTab->setColorBack(MH::kBackgroundColor);
-    sceneSelectTab->setName("Select scene");
-    sceneSelectTab->addLabel("Select scene", OFX_UI_FONT_SMALL);
+    
+    sceneSelectTab->setName("Select Scene");
+    sceneSelectTab->addLabel("Select Scene", OFX_UI_FONT_SMALL);
     sceneSelectTab->addSpacer();
     vector<string> sceneNames;
     sceneNames.push_back("disable all");
@@ -121,6 +121,8 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     tabbar->addCanvas(sceneSelectTab);
     ofAddListener(sceneSelectTab->newGUIEvent, this, &MasterHakoniwa::guiEvent);
     
+    tabbar->addSpacer(w, 1.f);
+    tabbar->addLabel("[Score]", OFX_UI_FONT_SMALL);
     ofxUICanvas* scoreSelectTab{new ofxUICanvas()};
     scoreSelectTab->setWidth(w);
     scoreSelectTab->setHeight(h);
@@ -135,18 +137,25 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
             scoreNames.push_back(mUniqueScores.at(i).getInitialList().at(j));
         }
     }
+    for (int i=0; i<mUniqueScoreBodies.getInitialList().size(); i++) {
+        scoreNames.push_back(mUniqueScoreBodies.getInitialList().at(i));
+    }
+    scoreNames.push_back(mScoreCorrelation);
+    
     scoreSelectTab->addRadio("Scores", scoreNames);
     tabbar->addCanvas(scoreSelectTab);
     ofAddListener(scoreSelectTab->newGUIEvent, this, &MasterHakoniwa::guiEvent);
-    
+
+    tabbar->addToggle("Display Hakoniwa title on Score", &mEnableShowHakoniwaTitle);
+    tabbar->addSlider("Score Sensor scale", 1.f, 50.f, &mScoreSensorScale, w, lineH);
     
     tabbar->addSpacer(w, 1.f);
-    tabbar->addLabel("Analyze method", OFX_UI_FONT_SMALL);
+    tabbar->addLabel("[CameraUnit]", OFX_UI_FONT_SMALL);
     vector<string> radioNames;
-    radioNames.push_back("Mean");
-    radioNames.push_back("Pixelate");
+    radioNames.push_back("Use Mean");
+    radioNames.push_back("Use Pixelate");
     tabbar->addRadio("Analyze", radioNames)->activateToggle("Mean");
-    tabbar->addSpacer(w, 1.f);
+
     
     ofxUICanvas* meanTab{new ofxUICanvas};
     meanTab->setWidth(w);
@@ -169,13 +178,11 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     tabbar->addCanvas(pixelataTab);
     
     tabbar->addSpacer(w, 1.f);
-    
+    tabbar->addLabel("[Master Hakoniwa]", OFX_UI_FONT_SMALL);
     tabbar->addSlider("Valve open duration", 0.f, 1.f, &mValveOpenDuration, w, lineH);
-    tabbar->addSpacer(w, 1.f);
     for (int i=0; i<kNumValvePins; i++) {
         tabbar->addToggle("Open valve " + ofToString(i), &mValves.at(i).open);
     }
-    tabbar->addSpacer(w, 1.f);
     tabbar->addToggle("Open pump forward", &mPumps.at(0).open);
     tabbar->addToggle("Open pump back", &mPumps.at(1).open);
     tabbar->addSpacer(w, 1.f);
@@ -251,6 +258,10 @@ void MasterHakoniwa::initialize()
     mUniqueScoreBodies.setInitialList(bodies);
     xml.popTag();
     
+    xml.pushTag("correlation");
+    mScoreCorrelation = xml.getAttribute("scene", "name", "error");
+    xml.popTag();
+    
     xml.popTag();
     
     ofAddListener(ofxMot::drawSkeletonEvent,
@@ -276,6 +287,7 @@ void MasterHakoniwa::update()
         mEnableOscOutMH = false;
         mEnableOscOutRDTK = false;
         mEnableOscOutScore = false;
+        mEnableShowHakoniwaTitle = false;
         if (mEnableAllToggle) {
             mEnableAllToggle->setValue(false);
         }
@@ -426,11 +438,6 @@ void MasterHakoniwa::draw()
     alignedTranslate(0.f, kTextSpacing);
     
     ofSetColor(kTextColor);
-    ss.str("");
-    ss << "unique scenes: " << mUniqueScenes.size();
-    ofDrawBitmapString(ss.str(), ofPoint::zero());
-    alignedTranslate(0.f, kTextSpacing * 2.f);
-
     ofDrawBitmapString("[score]", ofPoint::zero());
     alignedTranslate(0.f, kTextSpacing);
     mCurrentScore == kScoreBlack ? ofSetColor(color::kMain) : ofSetColor(kTextColor);
@@ -455,6 +462,31 @@ void MasterHakoniwa::draw()
             alignedTranslate(0.f, kTextSpacing);
         }
     }
+    alignedTranslate(0.f, kTextSpacing);
+    
+    ofSetColor(kTextColor);
+    ofDrawBitmapString("- body -", ofPoint::zero());
+    alignedTranslate(0.f, kTextSpacing);
+    auto& stack = mUniqueScoreBodies;
+    for (int i=0; i<stack.getInitialList().size(); i++) {
+        const auto& s = stack.getInitialList().at(i);
+        auto findIt = stack.find(s);
+        if (s == mCurrentScore) ofSetColor(color::kMain);
+        else if (findIt != stack.end()) ofSetColor(kTextColor);
+        else ofSetColor(kTextColorDark);
+        string ss{s};
+        ofStringReplace(ss, "dp::score::Scene", "");
+        ofDrawBitmapString(ss, ofPoint::zero());
+        alignedTranslate(0.f, kTextSpacing);
+    }
+    
+    alignedTranslate(0.f, kTextSpacing);
+    if (mCurrentScore == mScoreCorrelation) ofSetColor(color::kMain);
+    else ofSetColor(kTextColor);
+    string sc{mScoreCorrelation};
+    ofStringReplace(sc, "dp::score::Scene", "");
+    ofDrawBitmapString(sc, ofPoint::zero());
+    alignedTranslate(0.f, kTextSpacing);
     
     ofPopMatrix();
     
@@ -573,16 +605,14 @@ void MasterHakoniwa::setUniqueScore(int sceneIndex)
     auto& stack = mUniqueScores.at(mCurrentScoreComplexity);
     
     if (mNoCameraData) {
-        if (stack.ref(sceneIndex).find("Body") == string::npos) {
-            //sendChangeScore(kScoreBlack);
-            sendChangeScore(mUniqueScoreBodies.get(ofRandom(mUniqueScoreBodies.size())));
-            return;
-        }
+        const int newIndex{(int)ofMap(sceneIndex, 0.f, stack.size(), 0.f, mUniqueScoreBodies.size())};
+        sendChangeScore(mUniqueScoreBodies.get(newIndex), mEnableShowHakoniwaTitle);
+        return;
     }
     
     const string& s{stack.get(sceneIndex)};
     
-    sendChangeScore(s);
+    sendChangeScore(s, mEnableShowHakoniwaTitle);
     
     ++mCurrentScoreComplexity %= mMaxComplexity;
 }
@@ -690,6 +720,9 @@ void MasterHakoniwa::sendChangeScore(const string& name, bool maintainSceneNames
     m.addStringArg(name);
     mCurrentScore = name;
     
+    if (mCurrentScore == mScoreCorrelation || mCurrentScore == kScoreBlack)
+        maintainSceneNames = false;
+    
     if (maintainSceneNames) {
         for (auto& it : mScenes) {
             if (it.second.isEnabled()) {
@@ -749,17 +782,14 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
 {
     const string& widgetName{e.widget->getName()};
     
-    if (widgetName == "Enable") {
-        mEnabledTime = ofGetElapsedTimef();
-    }
-    else if (widgetName == "Analyze") {
+    if (widgetName == "Analyze") {
         auto* radio = static_cast<ofxUIRadio*>(e.widget);
         const auto& toggleName = radio->getActiveName();
-        if (toggleName == "Mean") {
+        if (toggleName == "Use Mean") {
             mAnalyzeType = AnalyzeType::Mean;
             ofLogNotice() << "Cnahged analyze type to mean";
         }
-        else if (toggleName == "Pixelate") {
+        else if (toggleName == "Use Pixelate") {
             mAnalyzeType = AnalyzeType::Pixelate;
             ofLogNotice() << "Cnahged analyze type to pixelate";
         }
@@ -780,7 +810,7 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
         auto* radio = static_cast<ofxUIRadio*>(e.widget);
         const auto& toggleName = radio->getActiveName();
         if (radio->getActive()->getValue()) {
-            sendChangeScore(toggleName, false);
+            sendChangeScore(toggleName, mEnableShowHakoniwaTitle);
         }
     }
     else if (widgetName == "Enable All") {
@@ -790,6 +820,18 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
         mEnableMotioner = t;
         mEnableCameraUnit = t;
         mEnableOscOutScore = t;
+        mEnableShowHakoniwaTitle = true;mEnableShowHakoniwaTitle;
+        mEnabledTime = ofGetElapsedTimef();
+    }
+    else if (widgetName == "Score Sensor scale") {
+        auto* slider =static_cast<ofxUISlider*>(e.widget);
+        const float value{slider->getScaledValue()};
+        if (mEnableOscOutScore) {
+            ofxOscMessage m;
+            m.setAddress(kOscAddrSensorScale);
+            m.addFloatArg(value);
+            mScoreOscSender.sendMessage(m);
+        }
     }
 }
 

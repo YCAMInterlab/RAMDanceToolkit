@@ -18,58 +18,60 @@ eyeBall::eyeBall(){
     sender2.setup("192.168.20.74", 8528);
     
     //MagPendulum receive
-    //receiver.setup(10000);
+    receiver.addAddress("/dp/cameraUnit");
+    ramOscManager::instance().addReceiverTag(&receiver);
 }
 
 void eyeBall::setup(){
     //-------------
-    ofSetFrameRate(60);
-    ofBackground(0);
-    ofEnableAlphaBlending();
-    ofSetVerticalSync(true);
-    
-    pointBoxSize = 10;
-    radius = 0.0;
-    servoX_val = 0;
-    servoY_val = 0;
-    
-    //共通
-    defaultZ_val = 512;
-    
-    //Eye
-    //-------------------
-    //Eye1
-    camera1_x = -20;
-    camera1_y = 0;
-    camera1_z = 350;
-    
-    //Eye2
-    camera2_x = 20;
-    camera2_y = 0;
-    camera2_z = 350;
-    
-    //Eye3
-    camera3_x = 20;
-    camera3_y = 0;
-    camera3_z = 350;
-    
-    //Eye4
-    camera4_x = 20;
-    camera4_y = 0;
-    camera4_z = 350;
-    //-------------------
-    
-    //point
-    posX = 0;
-    posY = 0;
-    posZ = 0;
-    
-    //初期状態
-    manualControl = true;
-    reset = true;
-    sendServo = true;
-    //-------------
+//    ofSetFrameRate(60);
+//    ofBackground(0);
+//    ofEnableAlphaBlending();
+//    ofSetVerticalSync(true);
+//
+//    pointBoxSize = 10;
+//    radius = 0.0;
+//    servoX_val = 0;
+//    servoY_val = 0;
+//    
+//    //共通
+//    defaultZ_val = 512;
+//    
+//    //Eye
+//    //-------------------
+//    //Eye1
+//    camera1_x = -20;
+//    camera1_y = 0;
+//    camera1_z = 350;
+//    
+//    //Eye2
+//    camera2_x = 20;
+//    camera2_y = 0;
+//    camera2_z = 350;
+//    
+//    //Eye3
+//    camera3_x = 20;
+//    camera3_y = 0;
+//    camera3_z = 350;
+//    
+//    //Eye4
+//    camera4_x = 20;
+//    camera4_y = 0;
+//    camera4_z = 350;
+//    //-------------------
+//    
+//    //point
+//    posX = 0;
+//    posY = 0;
+//    posZ = 0;
+//    
+//    //初期状態
+//    manualControl = true;
+//    reset = true;
+//    sendServo = true;
+//    //-------------
 }
+
 
 void eyeBall::setupControlPanel(){
     ofxUICanvasPlus* gui = ramGetGUI().getCurrentUIContext();
@@ -125,6 +127,10 @@ void eyeBall::setupControlPanel(){
     
     //Node Control
     gui->addSpacer();
+    gui->addToggle("pendulum Contorl", &pendulumContorl);
+    
+    //Node Control
+    gui->addSpacer();
     gui->addToggle("Node Control", &nodeControl);
     
     //send servo
@@ -141,45 +147,55 @@ void eyeBall::onEnabled(){
     manualControl = false;
     reset = false;
     nodeControl = false;
+    ledVal = 1;
+    pointBoxSize = 10;
     
     //sendServo = true;
     //test用
-    sendServo = false;
+    sendServo = true;
     
     //とりあえずデフォルトでオートターン設定になるようにする
-    autoTurn = true;
+    autoTurn = false;
+    pendulumContorl = true;
     speed = 0.03;
-    radius = 200.0;
+    radius = 80.0;
     
     
     //デフォルトのEyeポジション（仮設定）
     //-----------------------
     //eye1
-    camera1_x = -150.0;
+    camera1_x = -250.0;
     camera1_y = 25.0;
-    camera1_z = 240.0;
+    camera1_z = 163.0;
     
     //eye2
-    camera2_x = -60.0;
+    camera2_x = -160.0;
     camera2_y = 25.0;
     camera2_z = 240.0;
 
     //eye3
-    camera3_x = 60.0;
+    camera3_x = 130.0;
     camera3_y = 25.0;
     camera3_z = 240.0;
 
     //eye4
-    camera4_x = 150.0;
+    camera4_x = 230.0;
     camera4_y = 25.0;
-    camera4_z = 240.0;
+    camera4_z = 163.0;
     //-----------------------
+    
+    
+    
+    refleshState();
 }
 
 void eyeBall::onDisabled(){
     manualControl = true;
     reset = true;
     sendServo = true;
+    ledVal = 0;
+    
+    refleshState();
 }
 
 void eyeBall::update(){
@@ -212,12 +228,23 @@ void eyeBall::refleshState(){
     //Node control
     if(nodeControl == true){
         manualControl = false;
-        autoTurn == false;
+        autoTurn = false;
         nodeVal = motionExtractor.getNodeAt(0);
     
         posX = int(nodeVal[0]);
         posY = int(nodeVal[1]);
         posZ = int(nodeVal[2]);
+    }
+    
+    //
+    if(pendulumContorl == true){
+        manualControl = false;
+        autoTurn = false;
+        nodeControl = false;
+        
+        posX = ofMap(int(pendulumPosX *200),0,300,140,-512);
+        posY = 100;
+        posZ = ofMap(int(pendulumPosZ *200),0,300,140,-512);
     }
     
     //servo value
@@ -241,21 +268,22 @@ void eyeBall::refleshState(){
     //-------------
     
     //=== OSC Read =======
-//    // check for waiting messages
-//    while(receiver.hasWaitingMessages()){
-//        // get the next message
-//        ofxOscMessage r;
-//        receiver.getNextMessage(&r);
-//        
-//        // check for mouse moved message
-//        if(r.getAddress() == "/dp/cameraUnit/MagPendulum/features"){
-//            int pendulumPosX = r.getArgAsInt32(1);
-//            int pendulumPosZ = r.getArgAsInt32(2);
-//            cout << "receive!!!" << endl;
-//            cout << "x  :" << pendulumPosX << endl;
-//            cout << "z  :" <<pendulumPosZ << endl;
-//        }
-//    }
+    // check for waiting messages
+    while(receiver.hasWaitingMessages()){
+        // get the next message
+        ofxOscMessage r;
+        receiver.getNextMessage(&r);
+        
+        // check for mouse moved message
+        if(r.getAddress() == "/dp/cameraUnit/MagPendulum/features"){
+            pendulumPosX = r.getArgAsFloat(1);
+            pendulumPosZ = r.getArgAsFloat(2);
+            //cout << "receive!!!" << endl;
+            //cout << "x  :" << int(pendulumPosX *100) << endl;
+            cout << "x  :" << ofMap(int(pendulumPosX *200),0,300,140,-512) << endl;
+            cout << "z  :" << ofMap(int(pendulumPosZ *200),0,300,140,-512) << endl;
+        }
+    }
     //=== OSC Read =======
     
     /*=== OSC Send Example ===*/
@@ -268,7 +296,7 @@ void eyeBall::refleshState(){
     m.addIntArg(servoY_val);
     m.addIntArg(servoY2_val);
     m.addIntArg(servoX2_val);
-    m.addIntArg(0);
+    m.addIntArg(ledVal);
     sender.sendMessage(m);
     
     //２台目のArduino
@@ -278,7 +306,7 @@ void eyeBall::refleshState(){
     n.addIntArg(servoY3_val);
     n.addIntArg(servoX4_val);
     n.addIntArg(servoY4_val);
-    n.addIntArg(0);
+    n.addIntArg(ledVal);
     sender2.sendMessage(n);
 }
 
@@ -315,11 +343,11 @@ void eyeBall::draw(){
     float bc2 = camera1_y - posY;
     float triTheta2 = atan(bc2/ac2);
     float angleY = (180 * triTheta2) / PI;
-    if(ac2 > 0){
+    //if(ac2 > 0){
         camera1_AngleY = ofMap(angleY, 90, -90, 0, 180);
-    }else{
-        camera1_AngleY = ofMap(angleY, 90, -90, 180, 0);
-    }
+    //}else{
+        //camera1_AngleY = ofMap(angleY, 90, -90, 180, 0);
+    //}
     //Eye1を描画
     ofDrawBitmapString("eye1", camera1_x + 15, camera1_y, camera1_z);
     ofRect(camera1_x, camera1_y, camera1_z, pointBoxSize, pointBoxSize);
@@ -342,11 +370,11 @@ void eyeBall::draw(){
     float bc4 = camera2_y - posY;
     float triTheta4 = atan(bc4/ac4);
     float angleY2 = (180 * triTheta4) / PI;
-    if(ac4 > 0){
+    //if(ac4 > 0){
         camera2_AngleY = ofMap(angleY2, 90, -90, 0, 180);
-    }else{
-        camera2_AngleY = ofMap(angleY2, 90, -90, 180, 0);
-    }
+    //}else{
+        //camera2_AngleY = ofMap(angleY2, 90, -90, 180, 0);
+    //}
     
     //Eye2を描画
     ofDrawBitmapString("eye2", camera2_x + 15, camera2_y, camera2_z);
@@ -371,11 +399,11 @@ void eyeBall::draw(){
     float bc6 = camera3_y - posY;
     float triTheta6 = atan(bc6/ac6);
     float angleY3 = (180 * triTheta6) / PI;
-    if(ac6 > 0){
+    //if(ac6 > 0){
         camera3_AngleY = ofMap(angleY3, 90, -90, 0, 180);
-    }else{
-        camera3_AngleY = ofMap(angleY3, 90, -90, 180, 0);
-    }
+    //}else{
+        //camera3_AngleY = ofMap(angleY3, 90, -90, 180, 0);
+    //}
     
     //Eye3を描画
     ofDrawBitmapString("eye3", camera3_x + 15, camera3_y, camera3_z);
@@ -399,11 +427,11 @@ void eyeBall::draw(){
     float bc8 = camera4_y - posY;
     float triTheta8 = atan(bc8/ac8);
     float angleY4 = (180 * triTheta8) / PI;
-    if(ac8 > 0){
+    //if(ac8 > 0){
         camera4_AngleY = ofMap(angleY4, 90, -90, 0, 180);
-    }else{
-        camera4_AngleY = ofMap(angleY4, 90, -90, 180, 0);
-    }
+    //}else{
+        //camera4_AngleY = ofMap(angleY4, 90, -90, 180, 0);
+    //}
     
     //Eye4を描画
     ofDrawBitmapString("eye4", camera4_x + 15, camera4_y, camera4_z);
@@ -460,10 +488,10 @@ void eyeBall::draw(){
     
     //test
     //----------------------------------------------
-    cout << "angle 1     : " << servoX_val << endl;
-    cout << "angle 1     : " << servoY_val << endl;
-    cout << "angle 3     : " << servoX3_val << endl;
-    cout << "angle 3     : " << servoY3_val << endl;
+//    cout << "angle 1     : " << servoX_val << endl;
+//    cout << "angle 1     : " << servoY_val << endl;
+//    cout << "angle 3     : " << servoX3_val << endl;
+//    cout << "angle 3     : " << servoY3_val << endl;
 //    cout << "node       : " << motionExtractor.getNodeAt(0) << endl;
 //    cout << "ac1    : " << int(ac1) << endl;
 //    cout << "bc1    : " << int(bc1) << endl;

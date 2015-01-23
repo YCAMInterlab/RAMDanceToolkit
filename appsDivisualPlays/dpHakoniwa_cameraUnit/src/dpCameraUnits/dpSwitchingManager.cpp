@@ -55,6 +55,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->CVPreset	= "MagPendulum";
 	hakoniwas.back()->sourceCh	= 4;
 	hakoniwas.back()->sceneNames.push_back("H:dpHMagPendulum");
+    hakoniwas.back()->sceneNames.push_back("H:dpHEyeBall");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisMagPendulum");
 
 #pragma mark Theta
@@ -157,6 +158,13 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->CVPreset	= "FutureRE";
 	hakoniwas.back()->sourceCh	= 10;
 	hakoniwas.back()->sceneNames.push_back("V:FutureRE");
+    
+#pragma mark Future legacy
+    hakoniwas.push_back(new hakoniwaPresets());
+    hakoniwas.back()->type      = HAKO_FUTURE_LEG;
+    hakoniwas.back()->CVPreset  = "Future";
+    hakoniwas.back()->sourceCh = 10;
+    hakoniwas.back()->sceneNames.push_back("V:Future");
 
 #pragma mark ★テストA
 	hakoniwas.push_back(new hakoniwaPresets());
@@ -207,11 +215,24 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 
 		senderToRDTK1.setup("192.168.20.3", 10000);
 		senderToRDTK2.setup("192.168.20.2", 10000);
+        senderToFloor.setup("192.168.20.6", 10000);
 	}
 
 }
 
 void dpSwitchingManager::update(){
+	if (ofGetKeyPressed('a')){
+		ofxOscMessage m;
+		m.setAddress("/ram/set_scene");
+		m.addStringArg("dpHPLink_Laser");
+		m.addIntArg(1);
+		m.addIntArg(1);
+		m.addIntArg(1);
+		receiveOscMessage(m);
+	}
+	if (ofGetKeyPressed('c')){
+
+	}
 
 	if (ofGetFrameNum() % 15 == 0 && oscListPtr != NULL && totalManage){
 
@@ -234,6 +255,26 @@ void dpSwitchingManager::update(){
         cout << endl;
 	}
 
+    
+    for (int i = 0;i < 4;i++){
+        string dispInfo = "";
+        
+        for (int j = 0;j < CV_SLOT_NUM;j++){
+            for (int o = 0;o < mSlots[j].targetDisplay.size();o++){
+                if (mSlots[j].targetDisplay[o] == i){
+                    dispInfo += getHakoniwaPreset(mSlots[j].hakoType)->sceneNames[0].substr(2);
+                }
+            }
+        }
+        
+        
+        ofxOscMessage m;
+        m.setAddress("/dp/cameraUnit/display");
+        m.addIntArg(i);
+        m.addStringArg(dispInfo);
+        
+        multiCast(m);
+    }
 }
 
 void dpSwitchingManager::draw(){
@@ -289,14 +330,23 @@ void dpSwitchingManager::draw(){
 		ofRect(0, 20, 30, 30);
 
 		ofPopMatrix();
+        
+        ofxOscMessage m;
+        m.setAddress("/dp/cameraUnit/display");
+        m.addIntArg(i);
+        m.addStringArg(dispInfo);
+        
+        multiCast(m);
 	}
 
 	ofPopMatrix();
 }
 
 void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
+    string ad = m.getAddress();
     if (m.getAddress() == "/dp/gearMove/fingerpress/" ||
-        m.getAddress() == "/dp/magnetLooper/looperPos"){
+        ad.substr(0,16) == "/dp/magnetLooper"){
+        cout << "Through out" << m.getAddress() << endl;
         sender.setup("192.168.20.10", 10000);
         sender.sendMessage(m);
     }
@@ -456,9 +506,10 @@ void dpSwitchingManager::enableDisplay(hakoniwaType type, int displayNum,bool ne
 	//箱庭の映像を舞台ディスプレイへ
     int targDSP;
     if (displayNum == 0) targDSP = 1;
-    if (displayNum == 1) targDSP = 3;
+    if (displayNum == 1) targDSP = 2;
+    
     if (displayNum == 2) targDSP = 0;
-    if (displayNum == 3) targDSP = 2;
+    if (displayNum == 3) targDSP = 3;
 
     matrixSW.setSW(getHakoniwaPreset(type)->sourceCh, targDSP+5);
 	//TODO: RDTKへのOSC送り
@@ -609,6 +660,17 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 					m2.addIntArg(mSlots[i].displayIsExist(3));
 					m2.addIntArg(mSlots[i].displayIsExist(2));
 				}
+                
+                if (hakoniwas[8]->isEnable){
+                    ofxOscMessage mf;
+                    mf.setAddress("/ram/set_scene");
+                    mf.addStringArg("dpVisIce");
+                    mf.addIntArg(1);
+                    mf.addIntArg(1);
+                    mf.addIntArg(1);
+                    senderToFloor.sendMessage(mf);
+                }
+                
 
 				if (!NETWORK_ISSTOP) senderToRDTK1.sendMessage(m1);
 				if (!NETWORK_ISSTOP) senderToRDTK2.sendMessage(m2);

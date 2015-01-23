@@ -105,11 +105,10 @@ public:
     string getName() const{return "dpVisMagPendulum";}
     
     void setupControlPanel(){
-        ramGetGUI().addSlider("scale",50,500,&mScale);
+        ramGetGUI().addSlider("scale",50,1000,&mScale);
     }
     void setup(){
         
-        float offsetX = 530;
         float space = 250;
         
         for(int j = 0; j < mDivY; j++){
@@ -124,6 +123,9 @@ public:
         
         ramOscManager::instance().addReceiverTag(&mReceiver);
         mReceiver.addAddress("/dp/cameraUnit/MagPendulum/contour/boundingRect");
+        mReceiver.addAddress("/dp/toVis/MagPendulum");
+        
+        mFlagImg.loadImage("../../../resources/dp_pattern_parts/dot_03_a.png");
 
     }
     
@@ -151,6 +153,13 @@ public:
                                         (m.getArgAsFloat(3) + m.getArgAsFloat(5) * 0.5 - 0.5) * mScale));
                 }
             }
+            
+            if(m.getAddress() == "/dp/toVis/MagPendulum"){
+                for(int i = 0; i < mFlag.size(); i++){
+                    mFlag[i] = m.getArgAsInt32(i);
+                }
+            }
+            
         }
     }
     
@@ -195,6 +204,29 @@ public:
            v.draw();
         }
         
+        drawFlag();
+        
+    }
+    
+    void drawFlag(){
+        
+        float size = 128;
+        
+        if(mFlag[0]){
+            ofSetColor(255,255,255);
+            mFlagImg.draw(0,0,size,size);
+        }
+        
+        if(mFlag[1]){
+            ofSetColor(255,255,255);
+            mFlagImg.draw(0,SINGLE_SCREEN_HEIGHT - size,size,size);
+        }
+        
+        if(mFlag[2]){
+            ofSetColor(255,255,255);
+            mFlagImg.draw(SINGLE_SCREEN_WIDTH - size,0,size,size);
+        }
+
     }
     
 private:
@@ -206,9 +238,13 @@ private:
     
     ramOscReceiveTag mReceiver;
     
-    float mScale = 300.0;
+    float mScale = 500.0;
     
     ofPoint mCurrentVec;
+    
+    ofImage mFlagImg;
+    static const int DANCER_NUM = 3;
+    bitset<DANCER_NUM>mFlag;
 };
 
 #endif

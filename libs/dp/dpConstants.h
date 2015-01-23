@@ -52,6 +52,14 @@ static ofPoint dpGetSecondScreenCenter(){
     return ofPoint(SINGLE_SCREEN_WIDTH * 1.5,SINGLE_SCREEN_HEIGHT * 0.5,0.0);
 }
 
+static ofPoint getRDTKSceneCameraPosition(){
+    return ofPoint(0,240,420);
+}
+
+static ofPoint getRDTKSceneCameraLookAt(){
+    return  ofPoint(0,100,0);
+}
+
 struct dpColor
 {
     static const ofColor MAIN_COLOR;

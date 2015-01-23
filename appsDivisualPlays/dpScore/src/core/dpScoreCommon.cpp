@@ -116,6 +116,7 @@ const int kMaxSkeleton = 2;
 const int kOscClientPort = 10000;
 
 const string kOscAddrChangeScene = "/dp/score/changeScene";
+const string kOscAddrSensorScale = "/dp/score/sensorScale";
 
 const string kOscAddrCameraUnitVector = "/dp/cameraUnit/vector";
 const string kOscAddrCameraUnitVectorTotal = "/dp/cameraUnit/vector/total";
@@ -134,10 +135,11 @@ const string kEventAddrChangeScene = "/dp/score/changeScene";
 const string kSettingsDir = "settings/";
 const string kSettingsPrefix = "scoreUI-";
 
+const string kXmlSettingsPath{"master_hakoniwa_settings.xml"};
+
 const int kNumCameraunitVectors = 10;
 
 const string kFontPath = "fonts/AkkoStd-Thin.otf";
-
 
 struct _handle {
     char* p;

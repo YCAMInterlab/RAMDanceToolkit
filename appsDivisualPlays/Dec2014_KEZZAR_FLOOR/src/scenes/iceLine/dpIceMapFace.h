@@ -132,15 +132,6 @@ public:
 
         for(auto &v:mTris){
             
-           /* if(hasExtend == false){
-                v.shrink();
-            }*/
-            
-            if(isDrawAll){
-                v.setMode(0);
-                v.setAlpha(1.0);
-            }
-            
             v.update();
         }
         
@@ -205,6 +196,18 @@ public:
     
     void setAllDraw(bool flag){
         isDrawAll = flag;
+        
+        for(auto &v:mTris){
+        
+            
+            if(isDrawAll){
+                v.setMode(0);
+                v.setAlpha(1.0);
+            }else{
+                v.shrink();
+            }
+            
+        }
     }
     
     ofPoint getOrigin(){

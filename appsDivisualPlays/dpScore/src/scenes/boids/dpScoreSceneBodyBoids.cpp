@@ -47,6 +47,8 @@ void SceneBodyBoids::enter()
     mEnterTime  = ofGetElapsedTimef();
 
     mCam.enableMouseInput();
+    
+    mEnterTime = ofGetElapsedTimef();
 }
 
 void SceneBodyBoids::exit()
@@ -62,9 +64,8 @@ void SceneBodyBoids::exit()
 
 void SceneBodyBoids::update(ofxEventMessage& m)
 {
-    const float t = ofGetElapsedTimef();
-    
-    if (t-mEnterTime<DELAY) return;
+    const float t{ofGetElapsedTimef() - mEnterTime};
+    if (t<DELAY) return;
     
     if (m.getAddress() == kOscAddrMotioner && mActor) {
         
@@ -124,6 +125,8 @@ void SceneBodyBoids::update(ofxEventMessage& m)
 #pragma mark ___________________________________________________________________
 void SceneBodyBoids::draw()
 {
+    const float t{ofGetElapsedTimef() - mEnterTime};
+    
     ofPushStyle();
     ofPushMatrix();
     ofEnableAlphaBlending();
@@ -133,11 +136,12 @@ void SceneBodyBoids::draw()
     mCam.begin();
     ofPushMatrix();
     ofTranslate(0.f, -120.f);
-    ofRotateY(ofGetElapsedTimef()*5.f);
+    ofRotateX(t * 0.1f);
+    ofRotateY(t*11.f);
     
     if (mActor) {
         //ofxMot::drawSkeleton(mActor);
-        ofSetColor(color::kDarkPinkHeavy, 256);
+        ofSetColor(color::kDarkPinkHeavy, 128);
         auto& joints = mActor->getJoints();
         for (auto& j : joints) {
             j.transformGL();

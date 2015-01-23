@@ -33,12 +33,12 @@ private:
         void update(float f);
         void draw();
         
-        float mRadius{270.f};
+        float mRadius{350.f};
         const int kResolution = 200;
         deque<float> data;
     };
     vector<ofPtr<Circle> > mCircles;
-    const int kNumCircles = 6;
+    const int kNumCircles{ofVec2f::DIM};
 };
 
 DP_SCORE_NAMESPACE_END

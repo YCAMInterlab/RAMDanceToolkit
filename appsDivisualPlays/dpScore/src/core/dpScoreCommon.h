@@ -40,6 +40,7 @@ extern const int kMaxSkeleton;
 extern const int kOscClientPort;
 
 extern const string kOscAddrChangeScene;
+extern const string kOscAddrSensorScale;
 
 extern const string kOscAddrCameraUnitVector;
 extern const string kOscAddrCameraUnitVectorTotal;
@@ -56,6 +57,8 @@ extern const string kEventAddrChangeScene;
 
 extern const string kSettingsDir;
 extern const string kSettingsPrefix;
+
+extern const string kXmlSettingsPath;
 
 extern const int kNumCameraunitVectors;
 

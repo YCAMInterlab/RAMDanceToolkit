@@ -45,6 +45,12 @@ void SceneBodyPatterns::enter()
     
     mSkeletons.clear();
     mSkeletonName = "";
+    mRange.clear();
+    mRange.push_back(Range(ofxMot::JOINT_HIPS, ofxMot::JOINT_HEAD));
+    mRange.push_back(Range(ofxMot::JOINT_LEFT_HIP, ofxMot::JOINT_LEFT_TOE));
+    mRange.push_back(Range(ofxMot::JOINT_RIGHT_HIP, ofxMot::JOINT_RIGHT_TOE));
+    mRange.push_back(Range(ofxMot::JOINT_LEFT_COLLAR, ofxMot::JOINT_LEFT_HAND));
+    mRange.push_back(Range(ofxMot::JOINT_RIGHT_COLLAR, ofxMot::JOINT_RIGHT_HAND));
 }
 
 void SceneBodyPatterns::exit()
@@ -69,71 +75,81 @@ void SceneBodyPatterns::update(ofxEventMessage& m)
     }
 }
 
-void SceneBodyPatterns::drawSkeleton(ofxMot::SkeletonPtr skl, int idx)
-{
-    ofPushMatrix();
-    ofPushStyle();
-    
-    auto& joints = skl->getJoints();
-    
-    ofNoFill();
-    
-    for (size_t i=0; i<joints.size(); i++) {
-        ofSetLineWidth(1.0f);
-        auto& n = skl->getJoint(i);
-        n.transformGL();
-        const float s = 5.f;
-        (n.id == mFocusNode || idx == 0) ? ofSetColor(color::kMain) : ofSetColor(ofColor::white);;
-        ofDrawBox(ofVec3f::zero(), s);
-        n.restoreTransformGL();
-        
-        if (!n.getParent()) continue;
-    
-        ofSetColor(ofColor::white);
-        ofLine(n.getGlobalPosition(), n.getParent()->getGlobalPosition());
-    }
-    
-    ofPopStyle();
-    ofPopMatrix();
-    
-}
-
 void SceneBodyPatterns::draw()
 {
+    if (mFrame % (60 * 6) == 0) {
+        ++mCurrentRange %= mRange.size();
+    }
+    
     const float stepX = aligned(kW/nX);
     const float stepY = aligned((kH-20.f)/nY);
     for (int j=0; j<nY; j++) {
         for (int i=0; i<nX; i++) {
-            ofRectangle viewport = alignedRectangle(i*stepX, j*stepY+20.f, stepX, stepY);
-            mCam.begin(viewport);
+            mViewport = alignedRectangle(i*stepX, j*stepY+20.f, stepX, stepY);
             const int idx = mSkeletons.size() - (i + j * nX) - 1;
             if (idx<mSkeletons.size()) {
-                ofPushMatrix();
-                ofTranslate(0.f, -70.f);
                 drawSkeleton(mSkeletons.at(idx), i + j * nX);
-                ofPopMatrix();
             }
-            mCam.end();
+            
             ofNoFill();
             ofSetLineWidth(1.f);
             ofSetColor(ofColor::white);
-            ofRect(viewport);
+            ofRect(mViewport);
         }
     }
     alignedLine(kW-1, 20.f, kW-1, kH);
     alignedLine(0.f, kH-1.f, kW, kH-1.f);
 }
 
+void SceneBodyPatterns::drawSkeleton(ofxMot::SkeletonPtr skl, int idx)
+{
+    auto& joints = skl->getJoints();
+    
+    ofNoFill();
+    ofSetLineWidth(1.5f);
+    
+    auto r = mRange.at(mCurrentRange);
+    const int size{r.end - r.begin};
+    
+    ofVec3f centroid;
+    for (size_t i=r.begin; i<r.end; i++) {
+        auto& n = skl->getJoint(i);
+        centroid += n.getGlobalPosition();
+    }
+    centroid /= size;
+    
+    mCam.begin(mViewport);
+    ofPushMatrix();
+    ofScale(mScale, mScale, mScale);
+    ofTranslate(-centroid.x, -centroid.y, -centroid.z);
+    vector<ofVec3f> points(size);
+    for (size_t i=r.begin; i<r.end; i++) {
+        auto& n = skl->getJoint(i);
+        idx == 0 ? ofSetColor(color::kMain) : ofSetColor(ofColor::white);
+        n.transformGL();
+        ofDrawBox(10.f);
+        n.restoreTransformGL();
+        if (i != r.begin && n.getParent()) {
+            ofSetColor(ofColor::white);
+            ofLine(n.getGlobalPosition(), n.getParent()->getGlobalPosition());
+        }
+    }
+    ofPopMatrix();
+    mCam.end();
+}
+
 #pragma mark ___________________________________________________________________
 void SceneBodyPatterns::onUpdateSkeleton(ofxMotioner::EventArgs &e)
 {
     auto skl = e.skeleton;
+    skl->getJoint(ofxMot::JOINT_HIPS).setGlobalPosition(ofVec3f::zero());
     
     if (mSkeletonName=="") mSkeletonName = skl->getName();
     
     if (mSkeletonName == skl->getName()) {
         if (mFrame % kSkip == 0) {
             auto copy = ofxMot::Skeleton::copy(skl);
+            
             mSkeletons.push_back(copy);
             
             while (mSkeletons.size() > kNumSkeletons) {

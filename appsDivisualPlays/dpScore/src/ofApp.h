@@ -55,5 +55,7 @@ private:
 #endif
     ofTrueTypeFont mFont;
     vector<string> mTitleNames;
+    float mSensorScale{1.f};
+    const float mSensorScaleMax{50.f};
 };
 

@@ -26,7 +26,7 @@ public:
         private:
             KezSlidePoint mPos;
             ofPoint mSize;
-            KezSlide mRad = 60;
+            KezSlide mRad;
            // ofPolyline mLine;
         
             int mLife = 0;
@@ -34,13 +34,15 @@ public:
         
             bool isAlive = true;
         
+        KezSlide mAlpha;
+        
         public:
         
             stageBlob(){
                 for(int i = 0; i < PTS_MAX; i++){
                     mPts.push_back(BlobPt());
                     
-                    float rad = ofRandom(20,50);
+                    float rad = ofRandom(20,70);
                     float theta = ofRandom(0,TWO_PI);
                     float x = cos(theta) * rad;//mRad.val * 0.5;
                     float y = sin(theta) * rad;//mRad.val * 0.5;
@@ -56,6 +58,8 @@ public:
                     
                     v.pt.imSet(pt + v.circlePt);
                 }
+                
+                mAlpha.imSet(255);
             }
         
             void addVertex(ofPoint pt){
@@ -65,6 +69,8 @@ public:
                 for(auto &v:mPts){
                     v.pt.set(pt + v.circlePt);
                 }
+                
+                mAlpha.imSet(255);
             }
         
         void setRad(float rad){
@@ -87,6 +93,8 @@ public:
                                  ofRandom(-val,val));
                     v.pt.update();
                 }
+                
+                mAlpha.update();
             }
         
             bool getAlive() const {
@@ -98,11 +106,11 @@ public:
         }
         
             void draw(ofImage &img){
-                if(isAlive){
-                    ofSetColor(255,255,255);
+               // if(isAlive){
+                
                    // mLine.draw();
                     ofPushStyle();
-                    ofSetColor(dpColor::MAIN_COLOR);
+                    ofSetColor(dpColor::MAIN_COLOR,mAlpha.val);
                     ofSetRectMode(OF_RECTMODE_CENTER);
                     
                     for(auto &v:mPts){
@@ -110,12 +118,20 @@ public:
                     }
                     
                     img.draw(mPos.x,mPos.y,mRad.val,mRad.val);
-                    ofSetColor(255,255,255);
+                    ofSetColor(255,255,255,mAlpha.val);
                     img.draw(mPos.x,mPos.y,30,30);
                 
                     ofPopStyle();
-                }
+               // }
             }
+        
+        void fadeOut(){
+            mAlpha.set(0);
+        }
+        
+        float getAlpha(){
+            return mAlpha.val;
+        }
     };
     
     string getName() const {return "dpVisStage";};
@@ -173,22 +189,33 @@ public:
             it->second.update();
             
             if (it->second.getAlive() == false) {
-                mCircles.erase(it++);
-            } else ++it;
+                it->second.fadeOut();
+            }
+        
+            ++it;
         }
+        
+        it = mCircles.begin();
+        
+        while (it != mCircles.end()) {
 
+            if(it->second.getAlpha() < 1.0){
+                mCircles.erase(it++);
+            }else ++it;
+            
+        }
         
     }
     void draw(){
         
         ofDisableDepthTest();
         ofEnableBlendMode(OF_BLENDMODE_ADD);
-        
+                
         vector<ofPoint>tmp;
         for(auto &v:mCircles){
             v.second.draw(mTex);
             
-            if(v.second.getAlive()){
+            if((int)v.second.getAlpha() == 255){
                 tmp.push_back(v.second.getPos());
             }
         }
@@ -202,10 +229,8 @@ public:
             }
             glEnd();
         }
-        
-        
-        
     }
+    
 private:
     map<int,stageBlob>mCircles;
     ramOscReceiveTag mReceiver;

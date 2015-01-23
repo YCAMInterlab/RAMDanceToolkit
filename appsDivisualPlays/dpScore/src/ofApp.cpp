@@ -243,6 +243,11 @@ void ofApp::update()
             }
             OFX_END_EXCEPTION_HANDLING
         }
+        else if (addr == kOscAddrSensorScale) {
+            if (m.getNumArgs() >= 1 && m.getArgType(0) == OFXOSC_TYPE_FLOAT) {
+                mSensorScale = ofClamp(m.getArgAsFloat(0), 1.f, mSensorScaleMax);
+            }
+        }
         else if (addr == ofxMotioner::OSC_ADDR) {
             OFX_BEGIN_EXCEPTION_HANDLING
             ofxMotioner::updateWithOscMessage(m);
@@ -280,12 +285,18 @@ void ofApp::update()
 #endif
             }
             else if (newAddr == kOscAddrCameraUnitVector) {
-                mCameraUnitMessageVector = m;
+                mCameraUnitMessageVector.clear();
                 mCameraUnitMessageVector.setAddress(kOscAddrCameraUnitVector);
+                for (int i=0; i<m.getNumArgs(); i++) {
+                    mCameraUnitMessageVector.addFloatArg(m.getArgAsFloat(i) * mSensorScale);
+                }
             }
             else if (newAddr == kOscAddrCameraUnitVectorTotal) {
-                mCameraUnitMessageVectorTotal = m;
+                mCameraUnitMessageVectorTotal.clear();
                 mCameraUnitMessageVectorTotal.setAddress(kOscAddrCameraUnitVectorTotal);
+                for (int i=0; i<m.getNumArgs(); i++) {
+                    mCameraUnitMessageVectorTotal.addFloatArg(m.getArgAsFloat(i) * mSensorScale);
+                }
             }
             OFX_END_EXCEPTION_HANDLING
         }
@@ -401,15 +412,15 @@ void ofApp::draw()
             if (s.size() > longestTitle) longestTitle = s.size();
         }
         const int numChar{(int)(longestTitle * tt)};
-        const float sh{mFont.stringHeight("A")};
-        
+        //const float sh{mFont.stringHeight("A")};
+        const float shift{kW / 8.f};
         for (int i=0; i<mTitleNames.size(); i++) {
             string s{mTitleNames.at(i)};
             ofSetColor(ofColor::white);
             const float x{20.f};
-            const float y{getLineUped(wh, i, mTitleNames.size(), false) + sh * 0.5f};
+            const float y{getLineUped(wh, i, mTitleNames.size(), false)};
             const int num{min(max(0, numChar), (int)s.size())};
-            mFont.drawString(s.substr(0, num), x, y);
+            mFont.drawString(s.substr(0, num), x + shift, y);
         }
         
        
@@ -501,6 +512,14 @@ void ofApp::keyPressed(int key)
             break;
         case OF_KEY_RIGHT:
             mSceneManager.next();
+            break;
+        case OF_KEY_UP:
+            mSensorScale += 1.f;
+            mSensorScale = ofClamp(mSensorScale, 1.f, mSensorScaleMax);
+            break;
+        case OF_KEY_DOWN:
+            mSensorScale -= 1.f;
+            mSensorScale = ofClamp(mSensorScale, 1.f, mSensorScaleMax);
             break;
         default:
             //mSceneManager.keyPressed(key);

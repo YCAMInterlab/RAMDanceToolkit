@@ -126,10 +126,13 @@ void SceneBodyFlow::drawSkeleton(int indx)
     auto& joints = mSkeletons.at(indx)->getJoints();
     
     ofNoFill();
+    const float s{1.f + indx / 200.f * 3.f};
+    ofScale(s, s, s);
     
     for (size_t i=0; i<joints.size(); i++) {
         ofSetLineWidth(1.0f);
         auto& n = mSkeletons.at(indx)->getJoint(i);
+        if (i == ofxMot::JOINT_HIPS) n.setGlobalPosition(ofVec3f::zero());
         n.transformGL();
         mPoints.at(i)->draw();
         n.restoreTransformGL();
@@ -143,14 +146,17 @@ void SceneBodyFlow::drawSkeleton(int indx)
 void SceneBodyFlow::draw()
 {
     mCam.begin();
+    ofPushMatrix();
     ofTranslate(100.f, 0.f);
     ofRotateX(13.f);
     ofRotateY(47.f);
-    ofPushMatrix();
-    ofTranslate(0.f, -60.f, 100.f);
+    
+    ofTranslate(200.f, -60.f, -200.f - mSkeletons.size() * 10.f);
     
     for (int i=0; i<mSkeletons.size(); i++) {
-        ofTranslate(0.f, 0.f, -10.f);
+        ofTranslate(0.f,
+                    0.f,
+                    10.f);
         ofSetColor(ofColor::white, 64);
         drawSkeleton(i);
     }

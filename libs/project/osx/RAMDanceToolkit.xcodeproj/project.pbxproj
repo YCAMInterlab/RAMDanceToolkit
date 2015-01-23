@@ -467,6 +467,8 @@
 		9AEA65D2191CB63D001FAA18 /* ramUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AEA65AA191CB63D001FAA18 /* ramUtils.h */; };
 		C62C935E1951554400EF3B2E /* ramCommunicationManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C935C1951554400EF3B2E /* ramCommunicationManager.cpp */; };
 		C62C935F1951554400EF3B2E /* ramCommunicationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C935D1951554400EF3B2E /* ramCommunicationManager.h */; };
+		C663158D1A71E32000A17FD7 /* dpMarionette.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C663158B1A71E32000A17FD7 /* dpMarionette.cpp */; };
+		C663158E1A71E32000A17FD7 /* dpMarionette.h in Headers */ = {isa = PBXBuildFile; fileRef = C663158C1A71E32000A17FD7 /* dpMarionette.h */; };
 		C681AB9C197386FD0076DF1D /* ramOscManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C681AB9A197386FD0076DF1D /* ramOscManager.cpp */; };
 		C681AB9D197386FD0076DF1D /* ramOscManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C681AB9B197386FD0076DF1D /* ramOscManager.h */; };
 		C68A25451A627B9F001CEF91 /* ramMotionExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C68A25431A627B9F001CEF91 /* ramMotionExtractor.cpp */; };
@@ -1063,6 +1065,8 @@
 		9AEA65AA191CB63D001FAA18 /* ramUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramUtils.h; sourceTree = "<group>"; };
 		C62C935C1951554400EF3B2E /* ramCommunicationManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramCommunicationManager.cpp; sourceTree = "<group>"; };
 		C62C935D1951554400EF3B2E /* ramCommunicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramCommunicationManager.h; sourceTree = "<group>"; };
+		C663158B1A71E32000A17FD7 /* dpMarionette.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpMarionette.cpp; sourceTree = "<group>"; };
+		C663158C1A71E32000A17FD7 /* dpMarionette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpMarionette.h; sourceTree = "<group>"; };
 		C681AB9A197386FD0076DF1D /* ramOscManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramOscManager.cpp; sourceTree = "<group>"; };
 		C681AB9B197386FD0076DF1D /* ramOscManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramOscManager.h; sourceTree = "<group>"; };
 		C68A25431A627B9F001CEF91 /* ramMotionExtractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramMotionExtractor.cpp; sourceTree = "<group>"; };
@@ -2559,6 +2563,8 @@
 			children = (
 				D2B4FD281A62211B00C97A66 /* dpConstants.h */,
 				92B212B21A63C650001C84FD /* dpConstants.cpp */,
+				C663158B1A71E32000A17FD7 /* dpMarionette.cpp */,
+				C663158C1A71E32000A17FD7 /* dpMarionette.h */,
 				C68A25421A627B9F001CEF91 /* ramMotionExtractor */,
 			);
 			name = dp;
@@ -2892,6 +2898,7 @@
 				9A38F53C16E9E81900FF8B66 /* btGjkConvexCast.h in Headers */,
 				9248D5C01A4D6A1200047AF5 /* heap.h in Headers */,
 				9AEA65CC191CB63D001FAA18 /* ramNodeArrayBuffer.h in Headers */,
+				C663158E1A71E32000A17FD7 /* dpMarionette.h in Headers */,
 				9248D5AA1A4D6A1200047AF5 /* internal.hpp in Headers */,
 				9A38F53D16E9E81900FF8B66 /* btGjkEpa2.h in Headers */,
 				9A38F53E16E9E81900FF8B66 /* btGjkEpaPenetrationDepthSolver.h in Headers */,
@@ -3112,6 +3119,7 @@
 				D21D08291A4BD9A900CC3598 /* ofxUILabelButton.cpp in Sources */,
 				D21D08231A4BD9A900CC3598 /* ofxUIImageSlider.cpp in Sources */,
 				600EFB4616C8F59700A5B331 /* tinyxmlparser.cpp in Sources */,
+				C663158D1A71E32000A17FD7 /* dpMarionette.cpp in Sources */,
 				9AEA65C1191CB63D001FAA18 /* ramActorsScene.cpp in Sources */,
 				9258726A1A4D6CC800483FE3 /* ofxDelaunay.cpp in Sources */,
 				9AEA65C4191CB63D001FAA18 /* ramControlPanel.cpp in Sources */,
