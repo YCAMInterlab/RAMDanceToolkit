@@ -102,8 +102,9 @@ public:
         
         findCircle(a,b,c,center,normal,radius);
         
-        ofEasyCam cam;
-        cam.begin(dpGetFirstScreenViewPort());
+        ramSetViewPort(dpGetFirstScreenViewPort());
+        
+        ramBeginCamera();
         
         if(isDrawSimpleCircle){
             
@@ -121,7 +122,7 @@ public:
         
         }
         
-        cam.end();
+        ramEndCamera();
         
     }
 
