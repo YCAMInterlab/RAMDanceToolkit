@@ -712,12 +712,25 @@ void MasterHakoniwa::sendSetScene(const string& name, bool win0, bool win1)
     }
     if (mEnableOscOutRDTK) mCameraUnitOscSender.sendMessage(m);
     
-    const float sceneElapsedTime{ofGetElapsedTimef() - mPrevTimeSceneChanged};
+    // write scene times
+    vector<string> enabledSceneNames;
     for (auto& pair : mScenes) {
-        
+        if (pair.second.isEnabled()) {
+            enabledSceneNames.push_back(pair.first);
+        }
     }
     
-    mPrevTimeSceneChanged = ofGetElapsedTimef();
+    if (enabledSceneNames.empty() == false) {
+        const float sceneElapsedTime{ofGetElapsedTimef() - mPrevTimeSceneChanged};
+        mSceneTimesBuffer.append(ofToString(sceneElapsedTime, 2));
+        mSceneTimesBuffer.append("\n");
+        for (int i=0; i<enabledSceneNames.size(); i++) {
+            mSceneTimesBuffer.append(enabledSceneNames.at(i));
+            mSceneTimesBuffer.append(", ");
+        }
+        
+        mPrevTimeSceneChanged = ofGetElapsedTimef();
+    }
 }
 
 void MasterHakoniwa::sendChangeScore(const string& name, bool maintainSceneNames)
@@ -829,6 +842,16 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
         mEnableOscOutScore = t;
         mEnableShowHakoniwaTitle = true;mEnableShowHakoniwaTitle;
         mEnabledTime = ofGetElapsedTimef();
+        
+        if (t) {
+            mSceneTimesBuffer.clear();
+        }
+        else {
+            const float sceneElapsedTime{ofGetElapsedTimef() - mPrevTimeSceneChanged};
+            mSceneTimesBuffer.append(ofToString(sceneElapsedTime, 2));
+            string fileName{"log/scene times-" + ofGetTimestampString() + ".txt"};
+            ofBufferToFile(fileName, mSceneTimesBuffer);
+        }
     }
     else if (widgetName == "Score Sensor scale") {
         auto* slider =static_cast<ofxUISlider*>(e.widget);
