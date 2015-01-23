@@ -29,7 +29,7 @@ public:
     
 private:
     const int kNumX{kNumCameraunitVectors*2};
-    const int kNumY{200};
+    const int kNumY{50};
     const float kStepX{80.f};
     const float kStepY{80.f};
     

@@ -33,7 +33,7 @@ private:
         void update(float f);
         void draw();
         
-        float mRadius{270.f};
+        float mRadius{350.f};
         const int kResolution = 200;
         deque<float> data;
     };

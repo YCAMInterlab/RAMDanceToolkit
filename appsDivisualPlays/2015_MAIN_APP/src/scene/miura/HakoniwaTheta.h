@@ -32,10 +32,13 @@ private:
     float mDegreeOffset;
     
     int mVideoNo,portNo;
-    bool vidsetup[5];
+    bool vidsetup[5], mVidFirstPlay[5];
     
     ofVideoPlayer	vidPlay[5];
     ofSpherePrimitive sphere;
+    
+    float alpha;
+    float alphaSpeed = 10.0;
 
 };
 

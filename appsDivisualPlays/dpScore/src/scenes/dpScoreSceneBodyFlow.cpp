@@ -132,6 +132,7 @@ void SceneBodyFlow::drawSkeleton(int indx)
     for (size_t i=0; i<joints.size(); i++) {
         ofSetLineWidth(1.0f);
         auto& n = mSkeletons.at(indx)->getJoint(i);
+        if (i == ofxMot::JOINT_HIPS) n.setGlobalPosition(ofVec3f::zero());
         n.transformGL();
         mPoints.at(i)->draw();
         n.restoreTransformGL();
@@ -150,7 +151,7 @@ void SceneBodyFlow::draw()
     ofRotateX(13.f);
     ofRotateY(47.f);
     
-    ofTranslate(0.f, -60.f, 100.f - mSkeletons.size() * 10.f);
+    ofTranslate(200.f, -60.f, -200.f - mSkeletons.size() * 10.f);
     
     for (int i=0; i<mSkeletons.size(); i++) {
         ofTranslate(0.f,

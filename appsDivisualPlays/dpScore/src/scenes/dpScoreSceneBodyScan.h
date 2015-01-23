@@ -22,15 +22,20 @@ struct BodyScanNode final : public ofxMot::Node {
     
     void update();
     void customDraw() override;
+    void drawPointer();
     
     vector<float> spd;
     vector<ofVec3f> axis;
     vector<ofVec3f> vertices;
     vector<ofVec3f> initialVertices;
     
+    ofVec3f windowPos;
+    
     const int kNumVertices{300};
     ofVbo vbo;
-    float scale{120.f};
+    float scale{200.f};
+    
+    float scaleAdjust{1.f};
 };
 
 class SceneBodyScan final : public SceneBodyBase<BodyScanNode> {
@@ -51,7 +56,7 @@ public:
     
 private:
     ofEasyCam mCam;
-    
+    float mEnterTime;
 };
 
 DP_SCORE_NAMESPACE_END
