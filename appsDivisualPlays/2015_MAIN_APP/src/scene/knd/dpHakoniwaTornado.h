@@ -72,7 +72,6 @@ public:
         m.addIntArg((int)isMist);
         mBulbSender.sendMessage(m);
         
-        cout << isMist << endl;
     }
     
     void update(){
