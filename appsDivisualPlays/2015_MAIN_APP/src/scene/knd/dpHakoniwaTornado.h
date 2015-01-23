@@ -22,8 +22,8 @@ public:
         ramGetGUI().addToggle("mist",&isMist);
         ramGetGUI().addSlider("radMin",0.0,300.0,&mRadMin);
         ramGetGUI().addSlider("radMax",0.0,300.0,&mRadMax);
-        ramGetGUI().addSlider("drawRadMin",0.0,10.0,&mDrawRadMin);
-        ramGetGUI().addSlider("drawRadMax",0.0,10.0,&mDrawRadMax);
+        ramGetGUI().addSlider("drawRadMin",0.0,12.0,&mDrawRadMin);
+        ramGetGUI().addSlider("drawRadMax",0.0,12.0,&mDrawRadMax);
         ramGetGUI().addSlider("mistThresh",10.0, 255, &mMistThresh);
         ramGetGUI().addSlider("fan",0,255,&mFan);
         
@@ -35,6 +35,9 @@ public:
     void setup(){
         mBulbSender.setup("192.168.20.70",8528);
         mFanSender.setup("192.168.20.71",8528);
+        
+        mSender[0].setup("192.168.20.2", 10000);
+        mSender[1].setup("192.168.20.3", 10000);
         
     }
     
@@ -129,6 +132,28 @@ public:
         ofSetColor(255,255,255);
         mSphere.draw(center,radius,normal);
         ramEndCamera();
+        
+        sendOscToVis(a, b, c);
+    }
+    
+    void sendOscToVis(ofPoint a,ofPoint b, ofPoint c){
+        ofxOscMessage m;
+        m.setAddress("/dp/toVis/Tornado");
+        
+        m.addFloatArg(a.x);
+        m.addFloatArg(a.y);
+        m.addFloatArg(a.z);
+        
+        m.addFloatArg(b.x);
+        m.addFloatArg(b.y);
+        m.addFloatArg(b.z);
+        
+        m.addFloatArg(c.x);
+        m.addFloatArg(c.y);
+        m.addFloatArg(c.z);
+        
+        mSender[0].sendMessage(m);
+        mSender[1].sendMessage(m);
     }
     
     void onDisabled(){
@@ -160,6 +185,8 @@ private:
     
     float mDrawRadMin = 1.0;
     float mDrawRadMax = 12.0;
+    
+    ofxOscSender mSender[2];
 };
 
 #endif

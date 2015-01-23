@@ -91,7 +91,7 @@ void dpHakoniwaMagnetPendulum::sendOsc() {
     
     {
         ofxOscMessage m;
-        m.setAddress("/dp/flag/MagPendulum");
+        m.setAddress("/dp/toVis/MagPendulum");
         
         for (int i = 2; i < 5; i++) {
             m.addIntArg(bOn[i]); // Magnets ON/OFF (1:ON, 0:OFF)

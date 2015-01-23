@@ -123,7 +123,7 @@ public:
         
         ramOscManager::instance().addReceiverTag(&mReceiver);
         mReceiver.addAddress("/dp/cameraUnit/MagPendulum/contour/boundingRect");
-        mReceiver.addAddress("/dp/flag/MagPendulum");
+        mReceiver.addAddress("/dp/toVis/MagPendulum");
         
         mFlagImg.loadImage("../../../resources/dp_pattern_parts/dot_03_a.png");
 
@@ -154,7 +154,7 @@ public:
                 }
             }
             
-            if(m.getAddress() == "/dp/flag/MagPendulum"){
+            if(m.getAddress() == "/dp/toVis/MagPendulum"){
                 for(int i = 0; i < mFlag.size(); i++){
                     mFlag[i] = m.getArgAsInt32(i);
                 }
