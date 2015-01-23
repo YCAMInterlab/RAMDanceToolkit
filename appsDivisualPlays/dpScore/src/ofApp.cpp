@@ -243,6 +243,11 @@ void ofApp::update()
             }
             OFX_END_EXCEPTION_HANDLING
         }
+        else if (addr == kOscAddrSensorScale) {
+            if (m.getNumArgs() >= 1 && m.getArgType(0) == OFXOSC_TYPE_FLOAT) {
+                mSensorScale = ofClamp(m.getArgAsFloat(0), 1.f, mSensorScaleMax);
+            }
+        }
         else if (addr == ofxMotioner::OSC_ADDR) {
             OFX_BEGIN_EXCEPTION_HANDLING
             ofxMotioner::updateWithOscMessage(m);
@@ -280,12 +285,18 @@ void ofApp::update()
 #endif
             }
             else if (newAddr == kOscAddrCameraUnitVector) {
-                mCameraUnitMessageVector = m;
+                mCameraUnitMessageVector.clear();
                 mCameraUnitMessageVector.setAddress(kOscAddrCameraUnitVector);
+                for (int i=0; i<m.getNumArgs(); i++) {
+                    mCameraUnitMessageVector.addFloatArg(m.getArgAsFloat(i) * mSensorScale);
+                }
             }
             else if (newAddr == kOscAddrCameraUnitVectorTotal) {
-                mCameraUnitMessageVectorTotal = m;
+                mCameraUnitMessageVectorTotal.clear();
                 mCameraUnitMessageVectorTotal.setAddress(kOscAddrCameraUnitVectorTotal);
+                for (int i=0; i<m.getNumArgs(); i++) {
+                    mCameraUnitMessageVectorTotal.addFloatArg(m.getArgAsFloat(i) * mSensorScale);
+                }
             }
             OFX_END_EXCEPTION_HANDLING
         }
@@ -501,6 +512,14 @@ void ofApp::keyPressed(int key)
             break;
         case OF_KEY_RIGHT:
             mSceneManager.next();
+            break;
+        case OF_KEY_UP:
+            mSensorScale += 1.f;
+            mSensorScale = ofClamp(mSensorScale, 1.f, mSensorScaleMax);
+            break;
+        case OF_KEY_DOWN:
+            mSensorScale -= 1.f;
+            mSensorScale = ofClamp(mSensorScale, 1.f, mSensorScaleMax);
             break;
         default:
             //mSceneManager.keyPressed(key);

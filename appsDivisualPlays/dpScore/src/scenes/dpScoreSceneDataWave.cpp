@@ -128,7 +128,7 @@ void SceneDataWave::draw()
     for (auto& v : mVectors) {
         ofPushMatrix();
         ofTranslate(12.f,
-                    (kH - mVectors.size() * h - h) + i * h, 0.0f);
+                    (kH - mVectors.size() * h) + i * h, 0.0f);
         stringstream ss;
         ss << "v" << i << ": " << v;
         mFont.drawString(ss.str(), 0.f, 0.f);

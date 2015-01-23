@@ -48,7 +48,7 @@ void SceneBodyBoids::enter()
 
     mCam.enableMouseInput();
     
-    mEnterFrame = ofGetFrameNum();
+    mEnterTime = ofGetElapsedTimef();
 }
 
 void SceneBodyBoids::exit()
@@ -64,15 +64,8 @@ void SceneBodyBoids::exit()
 
 void SceneBodyBoids::update(ofxEventMessage& m)
 {
-    int frame{ofGetFrameNum() - mEnterFrame + 1};
-    if (frame % 60 * 90 == 0) {
-        exit();
-        enter();
-    }
-    
-    const float t = ofGetElapsedTimef();
-    
-    if (t-mEnterTime<DELAY) return;
+    const float t{ofGetElapsedTimef() - mEnterTime};
+    if (t<DELAY) return;
     
     if (m.getAddress() == kOscAddrMotioner && mActor) {
         
@@ -132,6 +125,8 @@ void SceneBodyBoids::update(ofxEventMessage& m)
 #pragma mark ___________________________________________________________________
 void SceneBodyBoids::draw()
 {
+    const float t{ofGetElapsedTimef() - mEnterTime};
+    
     ofPushStyle();
     ofPushMatrix();
     ofEnableAlphaBlending();
@@ -141,7 +136,8 @@ void SceneBodyBoids::draw()
     mCam.begin();
     ofPushMatrix();
     ofTranslate(0.f, -120.f);
-    ofRotateY(ofGetElapsedTimef()*5.f);
+    ofRotateX(t * 0.1f);
+    ofRotateY(t*11.f);
     
     if (mActor) {
         //ofxMot::drawSkeleton(mActor);
