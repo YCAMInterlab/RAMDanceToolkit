@@ -198,6 +198,8 @@ private:
     
     float mScoreSensorScale{1.f};
     
+    float mPrevTimeSceneChanged{0.f};
+    
 };
 
 typedef MasterHakoniwa MH;

@@ -633,25 +633,25 @@ void SceneCorrelation::draw()
     mCam.begin();
     ofSetLineWidth(2.5f);
     ofSetColor(150);
-    for (auto it0 = mNodes.begin(); it0 != mNodes.end(); ++it0) {
-        for (auto it1 = it0; it1 != mNodes.end(); ++it1) {
-            if (it0 != it1) {
+    for (auto p0 = mNodes.begin(); p0 != mNodes.end(); ++p0) {
+        for (auto p1 = p0; p1 != mNodes.end(); ++p1) {
+            if (p0 != p1) {
                 bool drawLine{false};
-                if (it0->first == kKeyDancer && it1->first == kKeyRDTK)
+                if (p0->first == kKeyDancer && p1->first == kKeyRDTK)
                     drawLine = true;
-                else if (it1->first == kKeyDancer && it0->first == kKeyRDTK)
+                else if (p1->first == kKeyDancer && p0->first == kKeyRDTK)
                     drawLine = true;
-                else if (it0->first == kKeyRDTK && it1->first == kKeyHakoniwa)
+                else if (p0->first == kKeyRDTK && p1->first == kKeyHakoniwa)
                     drawLine = true;
-                else if (it1->first == kKeyRDTK && it0->first == kKeyHakoniwa)
+                else if (p1->first == kKeyRDTK && p0->first == kKeyHakoniwa)
                     drawLine = true;
-                else if (it0->first == kKeyRDTK && it1->first == kKeyAnalyze)
+                else if (p0->first == kKeyRDTK && p1->first == kKeyAnalyze)
                     drawLine = true;
-                else if (it1->first == kKeyAnalyze && it0->first == kKeyRDTK)
+                else if (p1->first == kKeyAnalyze && p0->first == kKeyRDTK)
                     drawLine = true;
                 if (drawLine) {
-                    ofLine(it0->second->getGlobalPosition(),
-                           it1->second->getGlobalPosition());
+                    ofLine(p0->second->getGlobalPosition(),
+                           p1->second->getGlobalPosition());
                 }
             }
         }
