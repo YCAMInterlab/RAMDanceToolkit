@@ -44,15 +44,13 @@ public:
         names.push_back("RIGHT_ANKLE");
         
         radio = new ofxUIRadio("JOINT", names, OFX_UI_ORIENTATION_VERTICAL, dim, dim);
-        //radio->getToggles().at(ramActor::JOINT_LEFT_HAND)->setValue(true);
         panel->addWidgetDown(radio);
         
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoniwaStruggle::onPanelChanged);
     }
     void setup(){
         mSender.setup("192.168.20.53",8528);
-        // ofAddListener(ReachAtStruggleEvent::events, this, &HakoniwaStruggle::reachEvent);
-        
+    
         mVibe.speed = 0.666;
         
         mPlane.setResolution(14, 14);
@@ -88,12 +86,9 @@ public:
     }
     
     void vibe(){
-        //mVibe.speed = mVibeDur;
+
         mVibe.imSet((int)mVibeStrength);
-        
-        
-        //mMotorDir = !mMotorDir;
-        //mMotorDir %= 2;//(int)ofRandom(0,2);
+
     }
     
     void stopVibe(){
@@ -240,8 +235,8 @@ public:
             }
         }
     }
-    void onPanelChanged(ofxUIEventArgs& e)
-	{
+    
+    void onPanelChanged(ofxUIEventArgs& e){
 		string name = e.widget->getName();
         
         if(name == "vibe"){

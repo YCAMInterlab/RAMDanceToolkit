@@ -19,14 +19,16 @@
 
 #include "ramMain.h"
 
-
 #include "ramGeometry.h"
+#include "ramCenteredActor.h"
 
 class FourPoints : public ramBaseScene
 {
 public:
 	
 	ofxUIToggleMatrix *m4p1, *m4p2, *m4p3, *m4p4;
+    
+    ramCenteredActor mCentered;
 	
 	bool showFourPointTwist, showFourPointSphere;
 	bool pickExtents, pickCore, pickKneesElbows;
@@ -132,7 +134,10 @@ public:
 	
 	//--------------------------------------------------------------
 	void drawActor(const ramActor &actor)
-	{		
+	{
+        
+        if(actor.getName() == dpGetLeadDancerName()){
+        
 		// maybe this is slow...? need a better way to do point size/depth testing.
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glPointSize(pointSize);
@@ -142,11 +147,13 @@ public:
 		ofNoFill();
 		ofSetColor(0);
 		
+        const ramNodeArray arr = mCentered.update(actor);
+            
 		ofEnableAlphaBlending();
-		ofVec3f j1 = actor.getNode(getChoice(m4p1));
-		ofVec3f j2 = actor.getNode(getChoice(m4p2));
-		ofVec3f j3 = actor.getNode(getChoice(m4p3));
-		ofVec3f j4 = actor.getNode(getChoice(m4p4));
+		ofVec3f j1 = arr.getNode(getChoice(m4p1));
+		ofVec3f j2 = arr.getNode(getChoice(m4p2));
+		ofVec3f j3 = arr.getNode(getChoice(m4p3));
+		ofVec3f j4 = arr.getNode(getChoice(m4p4));
 		if(j1 != j2 && j1 != j3 && j1 != j4 && j2 != j3 && j2 != j4 && j3 != j4) {
 			if(showFourPointSphere) {
 				ofVec3f sphereCenter;
@@ -179,7 +186,9 @@ public:
 		
 		ofPopStyle();
 		glPopAttrib();
-	}
+    
+        }
+    }
 	
 	//--------------------------------------------------------------
 	void drawRigid(const ramRigidBody &rigid)
@@ -187,8 +196,8 @@ public:
 	}
     
     void onEnabled(){
-        ramCameraManager::instance().getActiveCamera().setPosition(getRDTKSceneCameraPosition());
-        ramCameraManager::instance().getActiveCamera().lookAt(getRDTKSceneCameraLookAt());
+        ramCameraManager::instance().getActiveCamera().setPosition(dpGetRDTKSceneCameraPosition());
+        ramCameraManager::instance().getActiveCamera().lookAt(dpGetRDTKSceneCameraLookAt());
     }
 	
 	string getName() const { return "Four Points"; }

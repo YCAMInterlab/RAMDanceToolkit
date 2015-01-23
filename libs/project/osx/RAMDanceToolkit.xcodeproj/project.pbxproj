@@ -188,6 +188,7 @@
 		925872701A4D6CC800483FE3 /* ofxQuadWarp.h in Headers */ = {isa = PBXBuildFile; fileRef = 925872631A4D6CC800483FE3 /* ofxQuadWarp.h */; };
 		9264E9361A5FD0750084BA46 /* ramFloorQuadWarper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9264E9341A5FD0750084BA46 /* ramFloorQuadWarper.cpp */; };
 		9264E9371A5FD0750084BA46 /* ramFloorQuadWarper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9264E9351A5FD0750084BA46 /* ramFloorQuadWarper.h */; };
+		92AD8C271A7252E000BB5434 /* ramCenteredActor.h in Headers */ = {isa = PBXBuildFile; fileRef = 92AD8C261A7252E000BB5434 /* ramCenteredActor.h */; };
 		92B212B31A63C650001C84FD /* dpConstants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92B212B21A63C650001C84FD /* dpConstants.cpp */; };
 		9A38F4CC16E9E81900FF8B66 /* btBulletCollisionCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A38F3DE16E9E81800FF8B66 /* btBulletCollisionCommon.h */; };
 		9A38F4CD16E9E81900FF8B66 /* btBulletDynamicsCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A38F3DF16E9E81800FF8B66 /* btBulletDynamicsCommon.h */; };
@@ -784,6 +785,7 @@
 		925872641A4D6CC800483FE3 /* TODO.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.md; sourceTree = "<group>"; };
 		9264E9341A5FD0750084BA46 /* ramFloorQuadWarper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramFloorQuadWarper.cpp; sourceTree = "<group>"; };
 		9264E9351A5FD0750084BA46 /* ramFloorQuadWarper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramFloorQuadWarper.h; sourceTree = "<group>"; };
+		92AD8C261A7252E000BB5434 /* ramCenteredActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramCenteredActor.h; sourceTree = "<group>"; };
 		92B212B21A63C650001C84FD /* dpConstants.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpConstants.cpp; sourceTree = "<group>"; };
 		9A38F3DE16E9E81800FF8B66 /* btBulletCollisionCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletCollisionCommon.h; sourceTree = "<group>"; };
 		9A38F3DF16E9E81800FF8B66 /* btBulletDynamicsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletDynamicsCommon.h; sourceTree = "<group>"; };
@@ -1253,6 +1255,7 @@
 		277606A016E4EB2700D6B31D /* Filter */ = {
 			isa = PBXGroup;
 			children = (
+				92AD8C261A7252E000BB5434 /* ramCenteredActor.h */,
 				277606A116E4EB2700D6B31D /* ramBaseFilter.cpp */,
 				277606A216E4EB2700D6B31D /* ramBaseFilter.h */,
 				277606A316E4EB2700D6B31D /* ramExpansion.h */,
@@ -2856,6 +2859,7 @@
 				9A38F52616E9E81900FF8B66 /* btGImpactShape.h in Headers */,
 				9A38F52716E9E81900FF8B66 /* btQuantization.h in Headers */,
 				9A38F52816E9E81900FF8B66 /* btTriangleShapeEx.h in Headers */,
+				92AD8C271A7252E000BB5434 /* ramCenteredActor.h in Headers */,
 				9A38F52916E9E81900FF8B66 /* gim_array.h in Headers */,
 				9A38F52A16E9E81900FF8B66 /* gim_basic_geometry_operations.h in Headers */,
 				9A38F52B16E9E81900FF8B66 /* gim_bitset.h in Headers */,

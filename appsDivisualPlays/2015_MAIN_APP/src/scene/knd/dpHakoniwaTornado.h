@@ -51,6 +51,7 @@ public:
     }
     
     void fan(int val){
+        
         ofxOscMessage m;
         m.setAddress("/dp/hakoniwa/tornado/fan");
         m.addIntArg(val);
@@ -59,13 +60,16 @@ public:
     }
     
     void mist(){
+        
         ofxOscMessage m;
         m.setAddress("/dp/hakoniwa/tornado/mist");
         m.addIntArg((int)isMist);
         mBulbSender.sendMessage(m);
+        
     }
     
     void bulb(){
+        
         ofxOscMessage m;
         m.setAddress("/dp/hakoniwa/tornado/bulb");
         m.addIntArg((int)isBulb);
@@ -80,10 +84,7 @@ public:
         bulb();
         fan(mFan);
         mSphere.setRad(mDrawRadMin, mDrawRadMax);
-       /* fan();
-        mist();
-        cout << isBulb << endl;
-        bulb();*/
+
     }
     
     void rotateToNormal(ofVec3f normal) {
@@ -126,8 +127,6 @@ public:
         ofTranslate(center);
         rotateToNormal(normal);
         ofNoFill();
-        //ofSetColor(255,0,0);
-        //ofCircle(0, 0, radius);
         ofPopMatrix();
         
         ofSetColor(255,255,255);
@@ -168,26 +167,25 @@ public:
     }
     
 private:
+    
     ofxOscSender mBulbSender;
     ofxOscSender mFanSender;
+    ofxOscSender mSender[2];
     
     int mRad = 0;
     bool isBulb = false;
     bool isMist = false;
-    
-    ramMotionExtractor mMotionExtractor;
     
     float mRadMin = 7.6;
     float mRadMax = 95;
     float mMistThresh = 202.0;
     float mFan = 220;
     
-    dpTailSphereController mSphere;
-    
     float mDrawRadMin = 1.0;
     float mDrawRadMax = 12.0;
     
-    ofxOscSender mSender[2];
+    dpTailSphereController mSphere;
+    ramMotionExtractor mMotionExtractor;
 };
 
 #endif

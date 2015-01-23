@@ -52,12 +52,16 @@ static ofPoint dpGetSecondScreenCenter(){
     return ofPoint(SINGLE_SCREEN_WIDTH * 1.5,SINGLE_SCREEN_HEIGHT * 0.5,0.0);
 }
 
-static ofPoint getRDTKSceneCameraPosition(){
+static ofPoint dpGetRDTKSceneCameraPosition(){
     return ofPoint(0,240,420);
 }
 
-static ofPoint getRDTKSceneCameraLookAt(){
+static ofPoint dpGetRDTKSceneCameraLookAt(){
     return  ofPoint(0,100,0);
+}
+
+string dpGetLeadDancerName(){
+    return "kojiri";
 }
 
 struct dpColor
