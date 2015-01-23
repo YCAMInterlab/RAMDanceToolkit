@@ -90,6 +90,11 @@ public:
     bool nodeControl;
     ofPoint nodeVal;
     
+    //pendulum Contorl
+    bool pendulumContorl;
+    float pendulumPosX;
+    float pendulumPosZ;
+    
     //servo value
     //---------------
     bool sendServo;
@@ -110,6 +115,9 @@ public:
     int servoX4_val;
     int servoY4_val;
     //---------------
+    
+    //led
+    int ledVal;
     //----------
     
 private:
@@ -119,7 +127,7 @@ private:
     ofxOscSender sender;
     ofxOscSender sender2;
     
-    ofxOscReceiver receiver;
+    ramOscReceiveTag receiver;
     
     bool mDrawLines;
     bool mDrawTriangle;
