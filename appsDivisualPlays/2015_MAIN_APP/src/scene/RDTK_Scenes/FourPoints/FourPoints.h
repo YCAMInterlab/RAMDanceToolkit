@@ -53,8 +53,8 @@ public:
 		
 		showFourPointSphere = false;
 		showFourPointTwist = true;
-		twistResolution = 80;
-		twistExtensionWidth = 8;
+		twistResolution = 65;
+		twistExtensionWidth = 17;
 		twistExtensionHeight = 2;
 		pointSize = 3;
 		
@@ -107,6 +107,10 @@ public:
 		{
 			selectFourPoints(ramActor::JOINT_LEFT_ELBOW, ramActor::JOINT_RIGHT_ELBOW, ramActor::JOINT_LEFT_KNEE, ramActor::JOINT_RIGHT_KNEE);
 		}
+        
+        ramCameraManager::instance().getActiveCamera().lookAt(ofPoint(0,100,0));
+        ramCameraManager::instance().getActiveCamera().setPosition(0, 300, 600);
+       
 	}
 	
 	//--------------------------------------------------------------
