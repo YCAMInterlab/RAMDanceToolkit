@@ -23,6 +23,7 @@
 		C6A68D181A5C32E000122475 /* ramMotionExtractorExampleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A68D161A5C32E000122475 /* ramMotionExtractorExampleScene.cpp */; };
 		C6ABEBA71A623BC0005DF2CE /* hakoVisPLink_Laser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ABEBA51A623BC0005DF2CE /* hakoVisPLink_Laser.cpp */; };
 		C6C944BD1A63EBA7005E9F30 /* dpSceneChanger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C944BB1A63EBA7005E9F30 /* dpSceneChanger.cpp */; };
+		C6C944ED1A71304A005E9F30 /* simpleSwitcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C944EB1A71304A005E9F30 /* simpleSwitcher.cpp */; };
 		C6D4097D1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D4097B1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp */; };
 		C6D409871A4575A5002D4C34 /* ofxKsmrParallelLinkDelta.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D4097F1A4575A5002D4C34 /* ofxKsmrParallelLinkDelta.cpp */; };
 		C6D409881A4575A5002D4C34 /* ofxKsmrStepManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D409831A4575A5002D4C34 /* ofxKsmrStepManager.cpp */; };
@@ -139,6 +140,8 @@
 		C6ABEBA61A623BC0005DF2CE /* hakoVisPLink_Laser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hakoVisPLink_Laser.h; path = scenes/hakoVisPLink_Laser.h; sourceTree = "<group>"; };
 		C6C944BB1A63EBA7005E9F30 /* dpSceneChanger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpSceneChanger.cpp; path = dpUtils/dpSceneChanger.cpp; sourceTree = "<group>"; };
 		C6C944BC1A63EBA7005E9F30 /* dpSceneChanger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpSceneChanger.h; path = dpUtils/dpSceneChanger.h; sourceTree = "<group>"; };
+		C6C944EB1A71304A005E9F30 /* simpleSwitcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = simpleSwitcher.cpp; path = scenes/simpleSwitcher.cpp; sourceTree = "<group>"; };
+		C6C944EC1A71304A005E9F30 /* simpleSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = simpleSwitcher.h; path = scenes/simpleSwitcher.h; sourceTree = "<group>"; };
 		C6D4097B1A457117002D4C34 /* HakoniwaParallelLink_Base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HakoniwaParallelLink_Base.cpp; path = scenes/HakoniwaParallelLink_Base.cpp; sourceTree = "<group>"; };
 		C6D4097C1A457117002D4C34 /* HakoniwaParallelLink_Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HakoniwaParallelLink_Base.h; path = scenes/HakoniwaParallelLink_Base.h; sourceTree = "<group>"; };
 		C6D4097F1A4575A5002D4C34 /* ofxKsmrParallelLinkDelta.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxKsmrParallelLinkDelta.cpp; sourceTree = "<group>"; };
@@ -327,6 +330,8 @@
 				C6C944BB1A63EBA7005E9F30 /* dpSceneChanger.cpp */,
 				C6755F0E1A6CA64B007E9984 /* ramMEXSync.h */,
 				C6755F0D1A6CA64B007E9984 /* ramMEXSync.cpp */,
+				C6C944EC1A71304A005E9F30 /* simpleSwitcher.h */,
+				C6C944EB1A71304A005E9F30 /* simpleSwitcher.cpp */,
 			);
 			name = dpUtils;
 			sourceTree = "<group>";
@@ -606,6 +611,7 @@
 				C6ABEBA71A623BC0005DF2CE /* hakoVisPLink_Laser.cpp in Sources */,
 				C63615D51A63FB7D0006BB65 /* HakoniwaPlink_Oil.cpp in Sources */,
 				C6D409B51A47D4E1002D4C34 /* ofxUDPManager.cpp in Sources */,
+				C6C944ED1A71304A005E9F30 /* simpleSwitcher.cpp in Sources */,
 				C6C944BD1A63EBA7005E9F30 /* dpSceneChanger.cpp in Sources */,
 				C6D409871A4575A5002D4C34 /* ofxKsmrParallelLinkDelta.cpp in Sources */,
 				C6D7F06A1A60F54300851730 /* HakoniwaPLink_Laser.cpp in Sources */,
