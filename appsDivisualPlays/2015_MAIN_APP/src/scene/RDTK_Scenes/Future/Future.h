@@ -89,8 +89,8 @@ public:
                 ofNoFill();
                 
                 const ofColor gcolor =
-                i==0 ? ofColor::green:
-                i==1 ? ofColor::yellow: ofColor::red;
+                i==0 ? dpColor::MAIN_COLOR:
+                i==1 ? ofColor::green: ofColor::blue;
                 
                 ofSetColor(gcolor);
                 ramDrawNodes(arr);
