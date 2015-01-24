@@ -92,7 +92,7 @@ void distanceMetaball::draw(){
 
 	glScaled(mScale, mScale, mScale);
 	glScaled(400.0,400.0,400.0);
-	ofTranslate(-0.5, -0.5, -0.5);
+	ofTranslate(-0.5, -0.6, -0.5);
 
 	if (mDrawMetaball){
 		
