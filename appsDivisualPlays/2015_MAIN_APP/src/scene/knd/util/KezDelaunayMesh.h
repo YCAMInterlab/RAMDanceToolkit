@@ -77,7 +77,7 @@ public:
     }
     
     void changeRot(){
-        int rnd = ofRandom(0,3);
+        int rnd = ofRandom(0,2);
         
         if(rnd == 0){
             mRotSpeed.set(ofRandom(-1.0,1.0),0,0);

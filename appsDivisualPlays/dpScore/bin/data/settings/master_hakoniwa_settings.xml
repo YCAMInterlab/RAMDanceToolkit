@@ -2,24 +2,23 @@
 	<phase>
 	    <scene name="dpVisServoPendulum"/>
 	    <scene name="dpVisMagPendulum"/>
-	    <scene name="dpVisSandStorm"/>
+	    <!--<scene name="dpVisSandStorm"/>-->
 	    <scene name="dpVisStruggle"/>
 	    <scene name="dpVisTheta"/>
 	    <scene name="dpHGearMove"/>
 	    <scene name="dpHWorm"/>
 	    <scene name="dpVisTornado"/>
 	    <scene name="dpVisStage"/>
-	    <scene name="dpVisIce"/>
-	    <scene name="FutureRE"/>
+	    <!--<scene name="dpVisIce"/>-->
         <scene name="Future"/>
         <scene name="dpVisPLink_Laser"/>
+        <scene name="dpVisPLink_Oil"/>
         <scene name="Line"/>
         <scene name="Four Points"/>
         <scene name="distanceMetaball"/>
 	</phase>
 
 	<nocam>
-		<scene name="FutureRE"/>
         <scene name="Future"/>
 		<scene name="dpVisTheta"/>
 		<scene name="dpHGearMove"/>

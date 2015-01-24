@@ -17,6 +17,8 @@
 
 #pragma once
 
+#include "ramCenteredActor.h"
+
 class Future : public ramBaseScene
 {
 	
@@ -24,6 +26,8 @@ class Future : public ramBaseScene
 	ramFilterEach<ramLowPassFilter> lowPassFilters;
 	
 	float speed, distance;
+    
+    ramCenteredActor mCentered;
 	
 public:
 	
@@ -73,27 +77,33 @@ public:
 			
 			const ramNodeArray &NA = getNodeArray(i);
 			const ramNodeArray &processedNA = lowPassedNAs[i];
+            
+            if(NA.getName() == dpGetLeadDancerName()){
 			
-			glPushAttrib(GL_ALL_ATTRIB_BITS);
-			glEnable(GL_DEPTH_TEST);
-			ofPushStyle();
-			ofNoFill();
-			
-			const ofColor gcolor =
-			i==0 ? ofColor::green:
-			i==1 ? ofColor::yellow: ofColor::red;
-			
-			ofSetColor(gcolor);
-			ramDrawNodes(processedNA);
-			
-			if (draw_line)
-			{
-				ofSetColor(gcolor);
-				ramDrawNodeCorresponds(NA, processedNA);
-			}
-			
-			ofPopStyle();
-			glPopAttrib();
+                const ramNodeArray arr = mCentered.update(processedNA);
+                const ramNodeArray original = mCentered.update(NA);
+                
+                glPushAttrib(GL_ALL_ATTRIB_BITS);
+                glEnable(GL_DEPTH_TEST);
+                ofPushStyle();
+                ofNoFill();
+                
+                const ofColor gcolor =
+                i==0 ? ofColor::green:
+                i==1 ? ofColor::yellow: ofColor::red;
+                
+                ofSetColor(gcolor);
+                ramDrawNodes(arr);
+                
+                if (draw_line)
+                {
+                    ofSetColor(gcolor);
+                    ramDrawNodeCorresponds(original, processedNA);
+                }
+                
+                ofPopStyle();
+                glPopAttrib();
+            }
 		}
 		
 		ramEndCamera();
@@ -147,6 +157,10 @@ public:
 		}
 	}
 	
+    void onEnabled(){
+        ramCameraManager::instance().getActiveCamera().setPosition(dpGetRDTKSceneCameraPosition());
+        ramCameraManager::instance().getActiveCamera().lookAt(dpGetRDTKSceneCameraLookAt());
+    }
 	
 	string getName() const { return "Future"; }
 };

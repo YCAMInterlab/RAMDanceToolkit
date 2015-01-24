@@ -29,15 +29,16 @@ void HakoniwaTheta::setup(){
     sphere.setPosition(0, 0, 0);
     
     mVideoNo = 1;
+    alpha = 255;
 
     for(int i = 1; i < 4; i++){
         ostringstream ss;
         ss <<  "./HakoniwaTheta/" << i << ".mov";
         vidPlay[i].loadMovie(ss.str());
         vidsetup[i] = false;
+        mVidFirstPlay[i] = false;
 
     }
-
 }
 
 void HakoniwaTheta::update(){
@@ -64,6 +65,10 @@ void HakoniwaTheta::update(){
     }else{
         radiusChanged(700);
     }
+    
+    alpha += alphaSpeed;
+    
+    if(alpha > 255)alpha = 255;
 
 }
 
@@ -78,6 +83,13 @@ void HakoniwaTheta::draw(){
     ofRotateZ(mDegreeOffset);
 
     if (ofGetFrameNum() % 3600 == 0){
+        
+        cout << "mVidFirstPlay[mVideoNo]  " << mVidFirstPlay[mVideoNo]  << endl;
+        if(vidsetup[mVideoNo] == true && mVidFirstPlay[mVideoNo] == false){
+            alpha = 0;
+            mVidFirstPlay[mVideoNo] = true;
+        }
+        
         if(mVideoNo == 3){
             mVideoNo = 1;
         }else{
@@ -95,6 +107,7 @@ void HakoniwaTheta::draw(){
     qForSphere_osc = motionExtractor.getRotationAt(portNo);
     sphere.setOrientation(qForSphere_osc);
 
+    ofSetColor(255,255,255,alpha);
     sphere.draw();
     vidPlay[mVideoNo].getTextureReference().unbind();
     

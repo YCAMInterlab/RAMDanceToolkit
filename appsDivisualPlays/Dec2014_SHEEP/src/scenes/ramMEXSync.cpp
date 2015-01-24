@@ -41,7 +41,9 @@ void ramMEXSync::setupControlPanel(){
 	presetName.push_back("Plink_Laser");
 	presetName.push_back("Plink_Prism");
 	presetName.push_back("Plink_Oil");
-	presetName.push_back("distanceMetaball");
+	presetName.push_back("Metaball");
+	presetName.push_back("OnNote");
+
 	enabled.assign(presetName.size(), false);
 	
 	scenes.push_back("dpHServoPendulum");	scenes_pair.push_back("dpVisServoPendulum");
@@ -58,6 +60,7 @@ void ramMEXSync::setupControlPanel(){
 	scenes.push_back("dpHPLink_Prism");		scenes_pair.push_back("dpVisPLink_Prism");
 	scenes.push_back("dpHPLink_Oil");		scenes_pair.push_back("dpVisPLink_Oil");
 	scenes.push_back("distanceMetaball");	scenes_pair.push_back("");
+	scenes.push_back("OnNote");				scenes_pair.push_back("");
 	
 	
 	gui->addLabel("SceneSelect",OFX_UI_FONT_LARGE);
@@ -95,24 +98,52 @@ void ramMEXSync::setupControlPanel(){
 	presetGui->setPosition(240, 400);
 	presetGui->setup();
 
+	blockLauncher = new ofxUICanvas();
+	blockLauncher->disableAppDrawCallback();
+	blockLauncher->disableMouseEventCallbacks();
+	
+	blockLauncher->setup();
+	blockLauncher->addButton("Block_1:WormON to Kawaguchi", false);
+	blockLauncher->addButton("Block_2:SandStormON to Kojiri/Sasa", false);
+	blockLauncher->addButton("Block_3:SandStorm to 3Players WormOFF", false);
+	blockLauncher->addButton("Block_4:SandStorm to Kawaguchi/Sasamoto", false);
+	blockLauncher->addButton("Block_5:HakoniwaON Standby", false);
+	blockLauncher->addButton("Block_6", false);
+	blockLauncher->addButton("Block_7", false);
+	blockLauncher->addButton("Block_8", false);
+	blockLauncher->addButton("Block_9", false);
+	blockLauncher->addButton("Block_10", false);
+	blockLauncher->setPosition(240, 690);
+	blockLauncher->autoSizeToFitWidgets();
+	
 	gui->addWidget(presetGui);
+	gui->addWidget(blockLauncher);
 	gui->autoSizeToFitWidgets();
 	
 	mex.setupControlPanel(this);
 
 	ofAddListener(gui->newGUIEvent, this, &ramMEXSync::onPanelChanged);
 	ofAddListener(presetGui->newGUIEvent, this, &ramMEXSync::onPanelChanged);
+	ofAddListener(blockLauncher->newGUIEvent, this, &ramMEXSync::blockLaunch);
 	
 	receiver.addAddress("/Debug/");
 	receiver.addAddress("/dp/cameraUnit/sceneState/");
+	receiver.addAddress("/dp/cameraUnit/display");
+	receiver.addAddress("/dp/system/remoteManage");
 	ramOscManager::instance().addReceiverTag(&receiver);
 	
-	mRemotePreset = false;
+	mRemotePreset = true;
 	getterDelay = 0;
+	
+	switcher.setup();
+	switcher.selector_hakoniwa->setVisible(false);
+	switcher.selector_display->setVisible(false);
 }
 
 void ramMEXSync::update(){
-
+	
+	switcher.update();
+	
 	getterDelay++;
 	if (getterDelay == 40){
 		if (mRemotePreset){
@@ -136,7 +167,7 @@ void ramMEXSync::update(){
 		
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
-		cout << m.getAddress() << endl;
+		
 		if (m.getAddress().substr(0,26) == "/dp/cameraUnit/sceneState/"){
 			
 			string sceneName = m.getAddress().substr(26);
@@ -158,6 +189,10 @@ void ramMEXSync::update(){
 				
 			}
 			
+		}
+		
+		if (m.getAddress() == "/dp/cameraUnit/display"){
+			currentScene[m.getArgAsInt32(0)] = m.getArgAsString(1);
 		}
 		
 		if (m.getAddress().substr(0,7) == "/Debug/"){
@@ -218,7 +253,7 @@ void ramMEXSync::update(){
 }
 
 void ramMEXSync::draw(){
-
+	
 	ramBeginCamera();
 	mex.draw();
 	ramEndCamera();
@@ -246,7 +281,20 @@ void ramMEXSync::draw(){
 		
 		ofPopMatrix();
 	}
-
+	
+	
+	for (int i = 0;i < 4;i++){
+		ofPushMatrix();
+		ofTranslate(800 + (((i+1) % 4) % 2) * 300,
+					100 + (((i+1) % 4) / 2) * 100);
+		ofNoFill();
+		ofRect(0, 0, 280, 90);
+		ofFill();
+		ofDrawBitmapString(currentScene[i], 30,30);
+		
+		
+		ofPopMatrix();
+	}
 }
 
 void ramMEXSync::onPanelChanged(ofxUIEventArgs &e){
@@ -420,5 +468,99 @@ void ramMEXSync::getExtractor(){
 		sender.sendMessage(req);
 		
 	}
+	
+}
+
+void ramMEXSync::onEnabled(){
+	switcher.selector_hakoniwa->setVisible(true);
+	switcher.selector_display->setVisible(true);
+}
+
+void ramMEXSync::onDisabled(){
+	switcher.selector_hakoniwa->setVisible(false);
+	switcher.selector_display->setVisible(false);
+}
+
+void ramMEXSync::setActorSort(vector<string> list) {
+
+	mex.setActorList(&list);
+	
+}
+
+void ramMEXSync::setScene(string scene,bool enable, bool A, bool B){
+	((ofxUITextInput*)(switcher.selector_hakoniwa->getWidget("Target")))->setTextString(scene);
+	switcher.mEnable = enable;
+	switcher.displays[0] = A;
+	switcher.displays[2] = B;
+	
+	switcher.sendMessage();
+	
+}
+
+void ramMEXSync::setActorPreset(actorPresetMode mode){
+	
+	if (mode == ACTPRE_STANDARD) actPresetRadio->activateToggle("Standard");
+	if (mode == ACTPRE_SOLO) actPresetRadio->activateToggle("Solo");
+	if (mode == ACTPRE_DUO) actPresetRadio->activateToggle("Duo");
+	if (mode == ACTPRE_TRIO) actPresetRadio->activateToggle("Trio");
+	if (mode == ACTPRE_SET_A) actPresetRadio->activateToggle("Preset_A");
+	if (mode == ACTPRE_SET_B) actPresetRadio->activateToggle("Preset_B");
+	if (mode == ACTPRE_SET_C) actPresetRadio->activateToggle("Preset_C");
+	if (mode == ACTPRE_SET_D) actPresetRadio->activateToggle("Preset_D");
+	if (mode == ACTPRE_SET_E) actPresetRadio->activateToggle("Preset_E");
+	
+	string sceneName = sceneRadio->getActiveName();
+	string presetName = actPresetRadio->getActiveName();
+	
+	mex.load("presentor/"+sceneName+"_"+presetName+".xml");
+}
+
+#pragma mark ブロックプリセット
+
+void ramMEXSync::blockLaunch(ofxUIEventArgs &e){
+	ofxUIWidget* w = e.widget;
+	
+	if (w->getName().substr(0,7) == "Block_1"){
+		vector<string> act;
+		act.push_back("kawaguchi");
+		act.push_back("kojiri");
+		act.push_back("sasamoto");
+		setActorSort(act);
+		
+		setActorPreset(ACTPRE_SOLO);
+		setScene("dpHWorm", true, true, false);
+		
+	}
+
+	if (w->getName().substr(0,7) == "Block_2"){
+		setActorPreset(ACTPRE_DUO);
+		setScene("dpVisSandStorm", true, false, true);
+	}
+	
+	if (w->getName().substr(0,7) == "Block_3"){
+		setActorPreset(ACTPRE_TRIO);
+		setScene("dpVisSandStorm", true, true, true);
+		setExtractor();
+	}
+	
+	if (w->getName().substr(0,7) == "Block_4"){
+		vector<string> act;
+		act.push_back("kojiri");
+		act.push_back("kawaguchi");
+		act.push_back("sasamoto");
+		setActorSort(act);
+		
+		setActorPreset(ACTPRE_DUO);
+		setExtractor();
+	}
+	
+	if (w->getName().substr(0,7) == "Block_5"){
+		vector<string> act;
+		act.push_back("kawaguchi");
+		act.push_back("kojiri");
+		act.push_back("sasamoto");
+		setActorPreset(ACTPRE_STANDARD);
+	}
+	
 	
 }

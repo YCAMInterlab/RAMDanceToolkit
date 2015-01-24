@@ -7,6 +7,7 @@
 //
 
 #include "dpScoreAnalyzePixelate.h"
+#include "dpScoreMasterHakoniwa.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -52,10 +53,65 @@ void AnalyzePixelate::updateColor(Color color, ofxEventMessage& m)
     }
 }
 
+void AnalyzePixelate::update()
+{
+    const float t{ofGetElapsedTimef()};
+    
+    const int prevR{mNumR};
+    const int prevG{mNumG};
+    const int prevB{mNumB};
+    
+    mNumR = mNumG = mNumB = 0;
+    
+    for (int j=0; j<mPixelH; j++) {
+        for (int i=0; i<mPixelW; i++) {
+            const int idx{i + j * mPixelW};
+            const bool r{mPixels.at((int)Color::R).at(idx)};
+            const bool g{mPixels.at((int)Color::G).at(idx)};
+            const bool b{mPixels.at((int)Color::B).at(idx)};
+            if (r) mNumR++;
+            if (g) mNumG++;
+            if (b) mNumB++;
+        }
+    }
+    
+    mDiffR.f += ::abs(mNumR - prevR) * 0.01f;
+    mDiffG.f += ::abs(mNumG - prevG) * 0.01f;
+    mDiffB.f += ::abs(mNumB - prevB) * 0.01f;
+    
+    mTotalDiff.f = mDiffR.f + mDiffG.f + mDiffB.f;
+    
+    if (t < mPrevSetSceneTime + mMinSetSceneTime) return;
+    
+    if (mTotalDiff.f >= mLimit) {
+        mWin0  = (mTotalDiff.i & 0b00000001) >> 0;
+        mWin1  = (mTotalDiff.i & 0b00000010) >> 1;
+        
+        const int r  = (mDiffR.i & 0b00111100) >> 2;
+        const int g  = (mDiffG.i & 0b00111100) >> 2;
+        const int b  = (mDiffB.i & 0b00111100) >> 2;
+        mWhich = r + g + b;
+        if (getMH().getUniqueScenes().empty() == false) {
+            const int scene{(int)(mWhich % getMH().getUniqueScenes().size())};
+            const int score{(int)(mWhich % getMH().getNumUniqueScores())};
+            getMH().setUniqueScene(scene, mWin0, mWin1);
+            getMH().setUniqueScore(score);
+            mPrevSetSceneTime = t;
+        }
+        mDiffR.f = mDiffG.f = mDiffB.f = 0.f;
+    }
+}
+
 void AnalyzePixelate::draw()
 {
 OFX_BEGIN_EXCEPTION_HANDLING
+    update();
+    
+    const float t{ofGetElapsedTimef()};
+    
     ofPushStyle();
+    ofPushMatrix();
+    alignedTranslate(0.f, MH::kTextSpacing);
     checkData();
     const int step{10};
     const int spacing{2};
@@ -77,6 +133,23 @@ OFX_BEGIN_EXCEPTION_HANDLING
             alignedRect(i * step + i * spacing, j * step + j * spacing, step, step);
         }
     }
+    ofPopMatrix();
+    
+    ofPushMatrix();
+    ofSetColor(MH::kTextColor);
+    ofDrawBitmapString("[pixelate]", ofPoint::zero());
+    alignedTranslate(200.f, MH::kTextSpacing);
+    alignedTranslate(0.f, MH::kTextSpacing);
+    stringstream ss;
+    ss << fixed << setprecision(1)
+    << "scene span: " << t - mPrevSetSceneTime << endl
+    << "total diff: " << mTotalDiff.f << endl
+    << "RGB       : " << mNumR << ", " << mNumG << ", " << mNumB << endl
+    << "diff      : " << mDiffR.f << ", " << mDiffG.f << ", " << mDiffB.f << endl
+    << "gen       : " << mWhich << ", " << mWin0 << ", " << mWin1;
+    ofDrawBitmapString(ss.str(), ofPoint::zero());
+    ofPopMatrix();
+    
     ofPopStyle();
     
 OFX_END_EXCEPTION_HANDLING

@@ -29,10 +29,10 @@ public:
 	
 	struct LineContext
 	{
-		bool set_from;
-		bool set_control0;
-		bool set_control1;
-		bool set_to;
+		bool set_from = false;
+		bool set_control0 = false;
+		bool set_control1 = false;
+		bool set_to = false;
 		
 		float curve;
 		
@@ -59,7 +59,7 @@ public:
 			
 #ifdef RAM_GUI_SYSTEM_OFXUI
 			
-			ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+			ofxUICanvasPlus* panel = ramGetGUI().getCurrentUIContext();
 			
 			line_width = 2;
 			
@@ -150,22 +150,22 @@ public:
 			ramNode node;
 			if (nodeLine.from.findOne(node))
 			{
-				ofDrawBitmapString("FROM", node.getGlobalPosition() + ofVec3f(5, 5, 0));
+				//ofDrawBitmapString("FROM", node.getGlobalPosition() + ofVec3f(5, 5, 0));
 			}
 			
 			if (nodeLine.control0.findOne(node))
 			{
-				ofDrawBitmapString("CP0", node.getGlobalPosition() + ofVec3f(5, 5, 0));
+				//ofDrawBitmapString("CP0", node.getGlobalPosition() + ofVec3f(5, 5, 0));
 			}
 			
 			if (nodeLine.control1.findOne(node))
 			{
-				ofDrawBitmapString("CP1", node.getGlobalPosition() + ofVec3f(5, 5, 0));
+				//ofDrawBitmapString("CP1", node.getGlobalPosition() + ofVec3f(5, 5, 0));
 			}
 			
 			if (nodeLine.to.findOne(node))
 			{
-				ofDrawBitmapString("TO", node.getGlobalPosition() + ofVec3f(5, 5, 0));
+				//ofDrawBitmapString("TO", node.getGlobalPosition() + ofVec3f(5, 5, 0));
 			}
 		}
 		
@@ -225,7 +225,7 @@ public:
 	
 	void setup()
 	{
-        loadXML();
+       
 	}
     
     void onValueChanged(ofxUIEventArgs &e)
@@ -276,12 +276,12 @@ public:
             }
         }
         
-        saveXML();
+       // saveXML();
     }
 	
 	void update()
 	{
-        
+         loadXML();
 		if (random_change_time < 60
 			&& ofGetElapsedTimef() - last_changed_time > random_change_time
             && random_change_time != 0.0)
@@ -290,7 +290,7 @@ public:
 			
 			for (int i = 0; i < NUM_LINE; i++)
 			{
-				lines[i].randomize();
+				//lines[i].randomize();
 			}
 		}
 		
@@ -299,9 +299,28 @@ public:
 			lines[i].update();
 		}
 	}
+    
+    void drawActor(const ramActor &actor){
+        
+        if(actor.getName() == dpGetLeadDancerName()){
+        ramSetViewPort(dpGetFirstScreenViewPort());
+      
+            ofPoint centroid = actor.getCentroid();
+            ofPushMatrix();
+            ofTranslate(-centroid.x,0.0,-centroid.z);
+            ofPushStyle();
+            for (int i = 0; i < NUM_LINE; i++)
+            {
+                lines[i].draw();
+            }
+            ofPopStyle();
+            ofPopMatrix();
+        }
+    }
 	
 	void draw()
 	{
+        /*ramSetViewPort(dpGetFirstScreenViewPort());
 		ramBeginCamera();
 		
 		ofPushStyle();
@@ -311,7 +330,7 @@ public:
 		}
 		ofPopStyle();
 		
-		ramEndCamera();
+		ramEndCamera();*/
 	}
     
     void exit()
@@ -445,6 +464,11 @@ public:
 	{
 		loadXML(filePath);
 	}
+    
+    void onEnabled(){
+        ramCameraManager::instance().getActiveCamera().setPosition(dpGetRDTKSceneCameraPosition());
+        ramCameraManager::instance().getActiveCamera().lookAt(dpGetRDTKSceneCameraLookAt());
+    }
 	
 private:
     ofxXmlSettings XML;

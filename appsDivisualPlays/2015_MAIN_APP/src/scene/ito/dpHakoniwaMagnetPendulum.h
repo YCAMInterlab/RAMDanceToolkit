@@ -37,14 +37,14 @@ public:
     
 private:
     
-    float distanceThreshold;
+    float distanceThreshold = 65;
     bool bOn[NMAGNETS];
     bool bInversed[NMAGNETS];
 
     float limitDuration;
 
     float twistVal[NMAGNETS];
-    bool bTestMode = true;
+    bool bTestMode = false;
     bool bEachMode = false;
     bool bModeTwist = false;
     bool bHideNodeView;

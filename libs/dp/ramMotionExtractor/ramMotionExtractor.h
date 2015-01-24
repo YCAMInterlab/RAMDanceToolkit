@@ -31,7 +31,7 @@ public:
 	string			getJointNameAt(int port);
 	int				getJointIdAt(int port);
 
-	ofVec3f			getPositionAt(int port);
+	ofVec3f			getPositionAt(int port,bool fixPosition = false);
 	ofQuaternion	getRotationAt(int port);
 
 	ofVec3f			getVelocityAt(int port);
@@ -48,6 +48,7 @@ public:
 	void pushFromID(int actorId, int jointId);
 	void pushPort(ramMotionPort *mp, int actorId = -1);
 	void popPort(ramNodeFinder &nf);
+	void setActorList(vector<string>* lst);
 	void refleshActorFromList();
 
 	vector<ramMotionPort*>	mMotionPort;

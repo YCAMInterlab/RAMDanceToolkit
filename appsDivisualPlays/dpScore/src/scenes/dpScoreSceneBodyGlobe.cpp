@@ -108,6 +108,8 @@ void SceneBodyGlobe::enter()
     mCam.enableMouseInput();
     
     mGlobeMap.clear();
+    
+    mEnterTime = ofGetElapsedTimef();
 }
 
 void SceneBodyGlobe::exit()
@@ -121,17 +123,19 @@ void SceneBodyGlobe::exit()
 
 void SceneBodyGlobe::update(ofxEventMessage& m)
 {
-    mFrameNum++;
-    
     if (m.getAddress() == kOscAddrMotioner) {
         if (mMagnify) {
             mScale += ofGetLastFrameTime() * 2.f;
             if (mScale >= 600.f) mScale = 100.f;
         }
-        if (mFrameNum%60==0) {
+        if (ofGetFrameNum()%60==0) {
             mJointId++;
             mJointId %= ofxMot::NUM_JOINTS;
         }
+        
+        const float t{ofGetElapsedTimef() - mEnterTime};
+        mNumJoints = t / mJointIncrementSpan;
+        mNumJoints = ofClamp(mNumJoints, 0, ofxMot::NUM_JOINTS);
     }
 }
 
@@ -145,12 +149,14 @@ void SceneBodyGlobe::draw()
     for (auto& it : mGlobeMap) {
         ofPushMatrix();
         ofTranslate(it.second->origin);
+        int i=0;
         for (auto p : it.second->nodes) {
+            if (i > mNumJoints) break;
             ofEnableAlphaBlending();
             p->drawPoints();
             ofEnableBlendMode(OF_BLENDMODE_ADD);
             p->draw();
-            if (mFrameNum%120 > 0 && mFrameNum%120 < 30) {
+            if (ofGetFrameNum()%120 > 0 && ofGetFrameNum()%120 < 30) {
                 ofSetColor(255, 128);
                 ofSetDrawBitmapMode(OF_BITMAPMODE_MODEL_BILLBOARD);
                 ofPushMatrix();
@@ -159,6 +165,7 @@ void SceneBodyGlobe::draw()
                                    ofPoint::zero());
                 ofPopMatrix();
             }
+            i++;
         }
         ofPopMatrix();
     }
@@ -181,6 +188,7 @@ void SceneBodyGlobe::updateSkeleton(SkeletonPtr skl)
     if (it != mGlobeMap.end()) {
         auto& vec = it->second->nodes;
         for (int i=0; i<vec.size(); i++) {
+            if (i > mNumJoints) break;
             auto p = vec.at(i);
             p->dir = joints.at(i).getPosition();
             p->dir.normalize();
