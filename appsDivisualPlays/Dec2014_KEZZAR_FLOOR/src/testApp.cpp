@@ -53,8 +53,8 @@ void testApp::setup()
     sceneManager.addScene(mIceMap.getPtr());
     //sceneManager.addScene(mSandStorm.getPtr());
     
-    ofHideCursor();
-    
+  //  ofHideCursor();
+    ofToggleFullscreen();
 }
 
 //--------------------------------------------------------------
