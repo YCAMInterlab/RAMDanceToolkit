@@ -37,7 +37,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_OIL;
 	hakoniwas.back()->CVPreset	= "Plink_Oil";
-	hakoniwas.back()->sourceCh	= 2;
+	hakoniwas.back()->sourceCh	= 9;
 	hakoniwas.back()->sceneNames.push_back("H:dpHPLink_Oil");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisPLink_Oil");
 
@@ -63,7 +63,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_THETA;
 	hakoniwas.back()->CVPreset	= "Theta";
-	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sourceCh	= SHUTTER_CHANNEL;
 	hakoniwas.back()->sceneNames.push_back("V:dpVisTheta");
 
 #pragma mark ★色水
@@ -107,7 +107,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->sourceCh	= 10;
 	hakoniwas.back()->sceneNames.push_back("V:dpVisStage");
 
-#pragma mark abare
+#pragma mark 暴れる
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type      = HAKO_STRUGGLE;
 	hakoniwas.back()->CVPreset  = "Struggle";
@@ -135,43 +135,44 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_METABALL;
 	hakoniwas.back()->CVPreset	= "Metaball";
-	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sourceCh	= SHUTTER_CHANNEL;
 	hakoniwas.back()->sceneNames.push_back("V:distanceMetaball");
 
 #pragma mark ライン
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_LINE;
 	hakoniwas.back()->CVPreset	= "Line";
-	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sourceCh	= SHUTTER_CHANNEL;
 	hakoniwas.back()->sceneNames.push_back("V:Line");
 
 #pragma mark フォーポイント
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_FOURPOINT;
 	hakoniwas.back()->CVPreset	= "FourPoint";
-	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sourceCh	= SHUTTER_CHANNEL;
 	hakoniwas.back()->sceneNames.push_back("V:Four Points");
 
 #pragma mark 未来
 	hakoniwas.push_back(new hakoniwaPresets());
     hakoniwas.back()->type      = HAKO_FUTURE;
 	hakoniwas.back()->CVPreset	= "FutureRE";
-	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sourceCh	= SHUTTER_CHANNEL;
 	hakoniwas.back()->sceneNames.push_back("V:FutureRE");
     
 #pragma mark Future legacy
     hakoniwas.push_back(new hakoniwaPresets());
     hakoniwas.back()->type      = HAKO_FUTURE_LEG;
     hakoniwas.back()->CVPreset  = "Future";
-    hakoniwas.back()->sourceCh = 10;
+    hakoniwas.back()->sourceCh = SHUTTER_CHANNEL;
     hakoniwas.back()->sceneNames.push_back("V:Future");
 
-#pragma mark 記憶
-	hakoniwas.push_back(new hakoniwaPresets());
-	hakoniwas.back()->type		= HAKO_KIOKU;
-	hakoniwas.back()->CVPreset	= "Kioku";
-//	hakoniwas.back()->sourceCh	= 
-
+#pragma mark onNote
+    hakoniwas.push_back(new hakoniwaPresets());
+    hakoniwas.back()->type      = HAKO_ONNOTE;
+    hakoniwas.back()->CVPreset  = "OnNote";
+    hakoniwas.back()->sourceCh  = 10;
+    hakoniwas.back()->sceneNames.push_back("H:OnNote");
+    
 #pragma mark ★テストA
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_TESTA;
@@ -227,15 +228,15 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 }
 
 void dpSwitchingManager::update(){
-	if (ofGetKeyPressed('a')){
-		ofxOscMessage m;
-		m.setAddress("/ram/set_scene");
-		m.addStringArg("dpHPLink_Laser");
-		m.addIntArg(1);
-		m.addIntArg(1);
-		m.addIntArg(1);
-		receiveOscMessage(m);
-	}
+//	if (ofGetKeyPressed('a')){
+//		ofxOscMessage m;
+//		m.setAddress("/ram/set_scene");
+//		m.addStringArg("dpHPLink_Laser");
+//		m.addIntArg(1);
+//		m.addIntArg(1);
+//		m.addIntArg(1);
+//		receiveOscMessage(m);
+//	}
 	if (ofGetKeyPressed('c')){
 
 	}
