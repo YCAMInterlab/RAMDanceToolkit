@@ -101,7 +101,6 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     presetNames.push_back("Intro");
     presetNames.push_back("Maestro");
     presetNames.push_back("Outro");
-    presetNames.push_back("Backstage Tour");
     tabbar->addRadio("Presets", presetNames);
     tabbar->addSpacer(w, 1.f);
     tabbar->addLabel("[OSC]", OFX_UI_FONT_SMALL);
@@ -329,6 +328,13 @@ void MasterHakoniwa::update()
     for (int i=0; i<kNumPumpPins; i++) {
         mPumps[i].update(this);
     }
+    
+    if (mEnableCameraUnit && mAnalyzeType == AnalyzeType::Mean) {
+        mAnalyzeMean.update();
+    }
+    if (mEnableCameraUnit && mAnalyzeType == AnalyzeType::Pixelate) {
+        mAnalyzePixelate.update();
+    }
 }
 
 void MasterHakoniwa::updateCameraUnit(ofxEventMessage& m)
@@ -339,9 +345,7 @@ void MasterHakoniwa::updateCameraUnit(ofxEventMessage& m)
             for (int i=0; i<ofVec4f::DIM; i++) {
                 mean[i] = m.getArgAsInt32(i);
             }
-            if (mEnableCameraUnit && mAnalyzeType == AnalyzeType::Mean) {
-                mAnalyzeMean.update(mean);
-            }
+            mAnalyzeMean.mMean = mean;
         }
     }
     else if (m.getAddress() == kOscAddrCameraUnitPixelateR) {
@@ -749,7 +753,9 @@ void MasterHakoniwa::sendChangeScore(const string& name, bool maintainSceneNames
     m.addStringArg(name);
     mCurrentScore = name;
     
-    if (mCurrentScore == mScoreCorrelation || mCurrentScore == kScoreBlack)
+    if (mAllOffScene)
+        maintainSceneNames = true;
+    else if (mCurrentScore == mScoreCorrelation || mCurrentScore == kScoreBlack)
         maintainSceneNames = false;
     
     if (maintainSceneNames) {
@@ -846,18 +852,7 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
         auto* radio = static_cast<ofxUIRadio*>(e.widget);
         const auto& toggleName = radio->getActiveName();
         if (radio->getActive()->getValue()) {
-            if (toggleName == "Backstage Tour") {
-                mEnableOscOutMH = false;
-                mEnableOscOutRDTK = true;
-                mEnableMotioner = false;
-                mEnableCameraUnit = true;
-                mEnableOscOutScore = true;
-                mEnableShowHakoniwaTitle = true;
-                mAnalyzeType = AnalyzeType::Mean;
-                mAnalyzeMean.mMeanLimit = 0.1f;
-                mAnalyzeMean.mMinSetSceneTime = 120.f;
-            }
-            else if (toggleName == "Maestro") {
+            if (toggleName == "Maestro") {
                 mEnableOscOutMH = true;
                 mEnableOscOutRDTK = true;
                 mEnableMotioner = true;
