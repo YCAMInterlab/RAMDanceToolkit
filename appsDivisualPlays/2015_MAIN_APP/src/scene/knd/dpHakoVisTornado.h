@@ -142,7 +142,7 @@ private:
     
     dpTailSphereController mSphere;
     
-    float mDrawRadMin = 1.0;
+    float mDrawRadMin = 0.1;
     float mDrawRadMax = 6.0;
     
     ramOscReceiveTag mReceiver;
@@ -150,7 +150,7 @@ private:
     ofPoint mPts[3];
     
     bool isDrawSimpleCircle = false;
-    float mSpeed = 0.1;
+    float mSpeed = 0.2;
 };
 
 #endif
