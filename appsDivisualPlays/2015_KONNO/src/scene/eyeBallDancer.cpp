@@ -1,13 +1,13 @@
 //
-//  eyeBall.cpp
+//  eyeBallDancer.cpp
 //  example-ramMotionExtractor
 //
-//  Created by ycam on 2015/01/11.
+//  Created by ycam on 2015/01/24.
 //
 //
 
-#include "eyeBall.h"
-eyeBall::eyeBall(){
+#include "eyeBallDancer.h"
+eyeBallDancer::eyeBallDancer(){
     
     mDrawLines		= false;
     mDrawTriangle	= false;
@@ -22,58 +22,58 @@ eyeBall::eyeBall(){
     ramOscManager::instance().addReceiverTag(&receiver);
 }
 
-void eyeBall::setup(){
+void eyeBallDancer::setup(){
     //-------------
-//    ofSetFrameRate(60);
-//    ofBackground(0);
-//    ofEnableAlphaBlending();
-//    ofSetVerticalSync(true);
-//
-//    pointBoxSize = 10;
-//    radius = 0.0;
-//    servoX_val = 0;
-//    servoY_val = 0;
-//    
-//    //共通
-//    defaultZ_val = 512;
-//    
-//    //Eye
-//    //-------------------
-//    //Eye1
-//    camera1_x = -20;
-//    camera1_y = 0;
-//    camera1_z = 350;
-//    
-//    //Eye2
-//    camera2_x = 20;
-//    camera2_y = 0;
-//    camera2_z = 350;
-//    
-//    //Eye3
-//    camera3_x = 20;
-//    camera3_y = 0;
-//    camera3_z = 350;
-//    
-//    //Eye4
-//    camera4_x = 20;
-//    camera4_y = 0;
-//    camera4_z = 350;
-//    //-------------------
-//    
-//    //point
-//    posX = 0;
-//    posY = 0;
-//    posZ = 0;
-//    
-//    //初期状態
-//    manualControl = true;
-//    reset = true;
-//    sendServo = true;
-//    //-------------
+    //    ofSetFrameRate(60);
+    //    ofBackground(0);
+    //    ofEnableAlphaBlending();
+    //    ofSetVerticalSync(true);
+    //
+    //    pointBoxSize = 10;
+    //    radius = 0.0;
+    //    servoX_val = 0;
+    //    servoY_val = 0;
+    //
+    //    //共通
+    //    defaultZ_val = 512;
+    //
+    //    //Eye
+    //    //-------------------
+    //    //Eye1
+    //    camera1_x = -20;
+    //    camera1_y = 0;
+    //    camera1_z = 350;
+    //
+    //    //Eye2
+    //    camera2_x = 20;
+    //    camera2_y = 0;
+    //    camera2_z = 350;
+    //
+    //    //Eye3
+    //    camera3_x = 20;
+    //    camera3_y = 0;
+    //    camera3_z = 350;
+    //
+    //    //Eye4
+    //    camera4_x = 20;
+    //    camera4_y = 0;
+    //    camera4_z = 350;
+    //    //-------------------
+    //
+    //    //point
+    //    posX = 0;
+    //    posY = 0;
+    //    posZ = 0;
+    //
+    //    //初期状態
+    //    manualControl = true;
+    //    reset = true;
+    //    sendServo = true;
+    //    //-------------
 }
 
 
-void eyeBall::setupControlPanel(){
+void eyeBallDancer::setupControlPanel(){
     ofxUICanvasPlus* gui = ramGetGUI().getCurrentUIContext();
     
     gui->addToggle("Preview"	, &mDrawPreview);
@@ -107,7 +107,7 @@ void eyeBall::setupControlPanel(){
     gui->addSlider("Eye4 X", -ofGetWidth()/2, ofGetWidth()/2, &camera4_x);
     gui->addSlider("Eye4 Y", -ofGetHeight()/2, ofGetHeight()/2, &camera4_y);
     gui->addSlider("Eye4 Z", -512, 512, &camera4_z);
-     //--------------
+    //--------------
     
     //Manual Control
     gui->addSpacer();
@@ -143,7 +143,7 @@ void eyeBall::setupControlPanel(){
     
 }
 
-void eyeBall::onEnabled(){
+void eyeBallDancer::onEnabled(){
     manualControl = false;
     reset = false;
     nodeControl = false;
@@ -154,8 +154,10 @@ void eyeBall::onEnabled(){
     //test用
     sendServo = true;
     
-    //とりあえずデフォルトでオートターン設定になるようにする
-    autoTurn = true;
+    //デフォルトはnode control
+    nodeControl = true;
+    manualControl = false;
+    autoTurn = false;
     speed = 0.03;
     radius = 80.0;
     
@@ -171,12 +173,12 @@ void eyeBall::onEnabled(){
     camera2_x = -60.0;
     camera2_y = 25.0;
     camera2_z = 240.0;
-
+    
     //eye3
     camera3_x = 50.0;
     camera3_y = 25.0;
     camera3_z = 240.0;
-
+    
     //eye4
     camera4_x = 140.0;
     camera4_y = 25.0;
@@ -188,7 +190,7 @@ void eyeBall::onEnabled(){
     refleshState();
 }
 
-void eyeBall::onDisabled(){
+void eyeBallDancer::onDisabled(){
     manualControl = true;
     reset = true;
     sendServo = true;
@@ -197,7 +199,7 @@ void eyeBall::onDisabled(){
     refleshState();
 }
 
-void eyeBall::update(){
+void eyeBallDancer::update(){
     
     /*=== update ===*/
     motionExtractor.update();
@@ -209,19 +211,20 @@ void eyeBall::update(){
     
 }
 
-void eyeBall::refleshState(){
+void eyeBallDancer::refleshState(){
     //Auto Turn
     if(autoTurn == true){
         phase += speed;
         //phase -= speed;
-
+        
     }
     
     //Reset
     //リセットボタンの処理
     if(reset == true){
         posX = 0;
-        posY = 0;
+        posY = 25;
+        posZ = -240;
     }
     
     //Node control
@@ -230,10 +233,10 @@ void eyeBall::refleshState(){
         autoTurn = false;
         nodeVal = motionExtractor.getNodeAt(0);
         ramNode nodeHipVal = motionExtractor.getNodeAt(1);
-    
-//        posX = 3 * int(nodeVal.getGlobalPosition().x - nodeHipVal.getGlobalPosition().x);
-//        posY = 3 * int(nodeVal.getGlobalPosition().y - nodeHipVal.getGlobalPosition().y);
-//        posZ = 3 * int(nodeVal.getGlobalPosition().z - nodeHipVal.getGlobalPosition().z);
+        
+        //        posX = 3 * int(nodeVal.getGlobalPosition().x - nodeHipVal.getGlobalPosition().x);
+        //        posY = 3 * int(nodeVal.getGlobalPosition().y - nodeHipVal.getGlobalPosition().y);
+        //        posZ = 3 * int(nodeVal.getGlobalPosition().z - nodeHipVal.getGlobalPosition().z);
         
         posX = 2 * int(nodeVal.getGlobalPosition().x - nodeHipVal.getGlobalPosition().x);
         posY = 2 * int(nodeVal.getGlobalPosition().y - nodeHipVal.getGlobalPosition().y);
@@ -256,15 +259,15 @@ void eyeBall::refleshState(){
         //Eye1 servo
         servoX_val = int(camera1_AngleX);
         servoY_val = int(camera1_AngleY);
-    
+        
         //Eye2 servo
         servoX2_val = int(camera2_AngleX);
         servoY2_val = int(camera2_AngleY);
-    
+        
         //Eye3 servo
         servoX3_val = int(camera3_AngleX);
         servoY3_val = int(camera3_AngleY);
-
+        
         //Eye4 servo
         servoX4_val = int(camera4_AngleX);
         servoY4_val = int(camera4_AngleY);
@@ -315,7 +318,7 @@ void eyeBall::refleshState(){
 }
 
 
-void eyeBall::draw(){
+void eyeBallDancer::draw(){
     
     //----------------
     //塗りつぶし無し
@@ -348,9 +351,9 @@ void eyeBall::draw(){
     float triTheta2 = atan(bc2/ac2);
     float angleY = (180 * triTheta2) / PI;
     //if(ac2 > 0){
-        camera1_AngleY = ofMap(angleY, 90, -90, 0, 180);
+    camera1_AngleY = ofMap(angleY, 90, -90, 0, 180);
     //}else{
-        //camera1_AngleY = ofMap(angleY, 90, -90, 180, 0);
+    //camera1_AngleY = ofMap(angleY, 90, -90, 180, 0);
     //}
     //Eye1を描画
     ofDrawBitmapString("eye1", camera1_x + 15, camera1_y, camera1_z);
@@ -375,9 +378,9 @@ void eyeBall::draw(){
     float triTheta4 = atan(bc4/ac4);
     float angleY2 = (180 * triTheta4) / PI;
     //if(ac4 > 0){
-        camera2_AngleY = ofMap(angleY2, 90, -90, 0, 180);
+    camera2_AngleY = ofMap(angleY2, 90, -90, 0, 180);
     //}else{
-        //camera2_AngleY = ofMap(angleY2, 90, -90, 180, 0);
+    //camera2_AngleY = ofMap(angleY2, 90, -90, 180, 0);
     //}
     
     //Eye2を描画
@@ -404,9 +407,9 @@ void eyeBall::draw(){
     float triTheta6 = atan(bc6/ac6);
     float angleY3 = (180 * triTheta6) / PI;
     //if(ac6 > 0){
-        camera3_AngleY = ofMap(angleY3, 90, -90, 0, 180);
+    camera3_AngleY = ofMap(angleY3, 90, -90, 0, 180);
     //}else{
-        //camera3_AngleY = ofMap(angleY3, 90, -90, 180, 0);
+    //camera3_AngleY = ofMap(angleY3, 90, -90, 180, 0);
     //}
     
     //Eye3を描画
@@ -432,9 +435,9 @@ void eyeBall::draw(){
     float triTheta8 = atan(bc8/ac8);
     float angleY4 = (180 * triTheta8) / PI;
     //if(ac8 > 0){
-        camera4_AngleY = ofMap(angleY4, 90, -90, 0, 180);
+    camera4_AngleY = ofMap(angleY4, 90, -90, 0, 180);
     //}else{
-        //camera4_AngleY = ofMap(angleY4, 90, -90, 180, 0);
+    //camera4_AngleY = ofMap(angleY4, 90, -90, 180, 0);
     //}
     
     //Eye4を描画
@@ -450,9 +453,9 @@ void eyeBall::draw(){
     
     //Line
     //----------------------------------------------
-//    //ラインの色を指定
-//    ofSetColor(255, 255, 255);
-//    ofLine(camera1_x, camera1_y, camera1_z, posX, posY, posZ);
+    //    //ラインの色を指定
+    //    ofSetColor(255, 255, 255);
+    //    ofLine(camera1_x, camera1_y, camera1_z, posX, posY, posZ);
     //----------------------------------------------
     
     //Point
@@ -492,16 +495,16 @@ void eyeBall::draw(){
     
     //test
     //----------------------------------------------
-//    cout << "angle 1     : " << servoX_val << endl;
-//    cout << "angle 1     : " << servoY_val << endl;
-//    cout << "angle 3     : " << servoX3_val << endl;
-//    cout << "angle 3     : " << servoY3_val << endl;
-//    cout << "node       : " << motionExtractor.getNodeAt(0) << endl;
-//    cout << "ac1    : " << int(ac1) << endl;
-//    cout << "bc1    : " << int(bc1) << endl;
-//    cout << "pointX : " << int(pos.x) << endl;
-//    cout << "pointY : " << int(pos.y) << endl;
-//    cout << "pointZ : " << int(pos.z) << endl;
+    //    cout << "angle 1     : " << servoX_val << endl;
+    //    cout << "angle 1     : " << servoY_val << endl;
+    //    cout << "angle 3     : " << servoX3_val << endl;
+    //    cout << "angle 3     : " << servoY3_val << endl;
+    //    cout << "node       : " << motionExtractor.getNodeAt(0) << endl;
+    //    cout << "ac1    : " << int(ac1) << endl;
+    //    cout << "bc1    : " << int(bc1) << endl;
+    //    cout << "pointX : " << int(pos.x) << endl;
+    //    cout << "pointY : " << int(pos.y) << endl;
+    //    cout << "pointZ : " << int(pos.z) << endl;
     //----------------------------------------------
     
     //====== eyeBall ===============================
@@ -521,7 +524,7 @@ void eyeBall::draw(){
     if (mDrawDump)		example_drawDump();
 }
 
-void eyeBall::example_drawLines(){
+void eyeBallDancer::example_drawLines(){
     
     ofSetColor(255);
     for (int i = 0;i < motionExtractor.getNumPort() - 1;i+=2){
@@ -533,7 +536,7 @@ void eyeBall::example_drawLines(){
     }
 }
 
-void eyeBall::example_drawTriangles(){
+void eyeBallDancer::example_drawTriangles(){
     
     ofVec3f vec_a = motionExtractor.getPositionAt(0);
     ofVec3f vec_b = motionExtractor.getPositionAt(1);
@@ -547,7 +550,7 @@ void eyeBall::example_drawTriangles(){
     
 }
 
-void eyeBall::example_drawDump(){
+void eyeBallDancer::example_drawDump(){
     
     ofPushMatrix();
     ofTranslate(700, 10);
