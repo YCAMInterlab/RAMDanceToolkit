@@ -52,6 +52,8 @@ enum hakoniwaType{
 	HAKO_FUTURE,
     HAKO_FUTURE_LEG,
 
+	HAKO_KIOKU,
+
 	HAKO_TESTA,
 	HAKO_TESTB,
 	HAKO_TESTC,

@@ -166,6 +166,12 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
     hakoniwas.back()->sourceCh = 10;
     hakoniwas.back()->sceneNames.push_back("V:Future");
 
+#pragma mark 記憶
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_KIOKU;
+	hakoniwas.back()->CVPreset	= "Kioku";
+//	hakoniwas.back()->sourceCh	= 
+
 #pragma mark ★テストA
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_TESTA;
