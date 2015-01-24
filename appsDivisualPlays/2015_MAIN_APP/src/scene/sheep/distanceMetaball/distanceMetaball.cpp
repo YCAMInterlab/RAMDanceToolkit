@@ -23,7 +23,12 @@ void distanceMetaball::setupControlPanel(){
 	gui->addSlider("Smooth", 1.0, 200.0, &mSmooth);
 	gui->addToggle("drawMEX", &mDrawMEX);
 	gui->addToggle("drawMetaball", &mDrawMetaball);
-
+	gui->addToggle("FaceFlip", &mFlipFace);
+	gui->addToggle("pointDraw", &mPoints);
+	gui->addToggle("Test",&mTest);
+	
+	mFlipFace = true;
+	mPoints = true;
 	mDrawMEX = false;
 	mDrawMetaball = true;
 	resolution = 9;
@@ -52,6 +57,22 @@ void distanceMetaball::update(){
 	while (pts.size() > mex.getNumPort()){
 		pts.pop_back();
 	}
+	
+	if (mTest){
+		pts.clear();
+		for (int i = 0;i < 10;i++){
+			if (ofGetKeyPressed('a')){
+				pts.push_back(ofVec3f(ofNoise(i*34.325+ofGetElapsedTimef()/34.13)*2 - 0.5,
+									  ofNoise(i*54.54+ofGetElapsedTimef()/34.13)*2 - 0.5,
+									  ofNoise(i*65.724+ofGetElapsedTimef()/34.13)*2 - 0.5));
+			}else{
+				pts.push_back(ofVec3f(ofNoise(i*34.325)*2 - 0.5,
+									  ofNoise(i*54.54)*2 - 0.5,
+									  ofNoise(i*65.724)*2 - 0.5));
+
+			}
+		}
+	}
 
 	metaball.setCenters(pts);
 	metaball.update();
@@ -67,18 +88,70 @@ void distanceMetaball::draw(){
 	ofMesh m = metaball.getMesh();
 
 	ofPushMatrix();
+	ofRotateY(ofGetElapsedTimef()*2.0);
 
 	glScaled(mScale, mScale, mScale);
 	glScaled(400.0,400.0,400.0);
 	ofTranslate(-0.5, -0.5, -0.5);
 
 	if (mDrawMetaball){
-		ofSetColor(0);
-		m.draw(OF_MESH_FILL);
+		
+		glBegin(GL_TRIANGLES);
+		for (int i = 0;i < m.getNumVertices();i+=3){
+			
+			if ((ofNoise(i*243.4235+ofGetElapsedTimef()/10.0) < 0.3) &&
+				mFlipFace){
+				ofSetColor(dpColor::MAIN_COLOR);
+			}else{
+				ofSetColor(0, 0, 0);
+			}
+			
+			for (int j = 0;j < 3;j++){
+				glVertex3d(m.getVertex(i+j).x,
+						   m.getVertex(i+j).y,
+						   m.getVertex(i+j).z);
+			}
+		}
+		glEnd();
+		
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		ofSetLineWidth(4.0);
+		glBegin(GL_TRIANGLES);
 		ofSetColor(255);
-		ofSetLineWidth(3.0);
-		m.draw(OF_MESH_WIREFRAME);
+		for (int i = 0;i < m.getNumVertices();i+=3){
+			
+			for (int j = 0;j < 3;j++){
+				glVertex3d(m.getVertex(i+j).x,
+						   m.getVertex(i+j).y,
+						   m.getVertex(i+j).z);
+			}
+
+		}
+		glEnd();
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		
+		ofSetColor(dpColor::MAIN_COLOR);
+		if (mPoints){
+			for (int i = 0;i < m.getNumVertices();i++){
+				ofPushMatrix();
+				ofTranslate(m.getVertex(i));
+				float sc = 1.0 / 1200.0 * 5;
+				glScaled(sc,sc,sc);
+				glutSolidIcosahedron();
+				ofPopMatrix();
+			}			
+		}
+		
+		ofSetColor(dpColor::DARK_PINK_HEAVY);
+		
+		for (int i = 0;i < pts.size();i++){
+			for (int j = 0;j < pts.size();j++){
+//					ofLine(pts[i], pts[j]);
+			}
+		}
+		
 		ofSetLineWidth(1.0);
+
 	}
 
 	ofPopMatrix();
