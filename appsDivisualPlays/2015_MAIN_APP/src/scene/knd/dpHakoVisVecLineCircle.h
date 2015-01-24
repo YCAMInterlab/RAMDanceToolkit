@@ -163,7 +163,7 @@ public:
         
         mZoom.set(isFar * -1000);
         
-        if(ofGetFrameNum() % 600 == 0){
+        if((ofGetFrameNum() - mBeginFrame) % 600 == 599){
             int rnd = ofRandom(0,4);
             
             if(rnd == 0)isFar = !isFar;
@@ -254,6 +254,7 @@ public:
     void onEnabled(){
         mRotSpeed.set(-0.05,0.0,0.0);
         mRot.imSet(0,0,0);
+        mBeginFrame = ofGetFrameNum();
     }
     
 private:
@@ -270,6 +271,8 @@ private:
     int mStopCounter = 0;
     KezSlide mZoom;
     bool isFar = false;
+    
+    int mBeginFrame = 0;
 };
 
 #endif
