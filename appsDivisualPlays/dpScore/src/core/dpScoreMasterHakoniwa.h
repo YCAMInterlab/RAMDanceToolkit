@@ -174,6 +174,9 @@ private:
     vector<string> mNoCamScenes;
     bool mNoCameraData{false};
     
+    vector<string> mAllOffScenes;
+    bool mAllOffScene{false};
+    
     string mCurrentScore{""};
     int mCurrentScoreComplexity{0};
     int mMaxComplexity{0};
@@ -182,20 +185,17 @@ private:
     AnalyzeMean mAnalyzeMean;
     AnalyzePixelate mAnalyzePixelate;
     
-    float mValveOpenDuration{0.4f};
+    float mValveOpenDuration{0.3f};
     
     bool mEmergencyStop{false};
     
-    ofxUIToggle* mEnableAllToggle{nullptr};
     bool mEnableMotioner{false};
     bool mEnableCameraUnit{false};
     bool mEnableOscOutRDTK{false};
     bool mEnableOscOutMH{false};
     bool mEnableOscOutScore{false};
     bool mEnableShowHakoniwaTitle{false};
-    
-    float mEnabledTime{0.f};
-    
+        
     float mScoreSensorScale{1.f};
     
     float mPrevTimeSceneChanged{0.f};
