@@ -24,7 +24,7 @@ magnetLooper::magnetLooper(){
     receiver.setup(12002);
     
 //    //スピード変更用 OSC受信
-    receiver_speed.setup(10000);
+//    receiver_speed.setup(10000);
     
     //sender.setup("192.168.20.25", 12001);
     //sender.setup("loacalhost", 8528);

@@ -18,7 +18,7 @@ dpCameraUnit_cvFX::dpCameraUnit_cvFX(){
 	mGui.addToggle("BackGround",&mEnableBackground);
 	mGui.addToggle("RunningBack", &mEnableRunningBackground);
 	mGui.addSlider("LearnTime", 0.0, 2000.0, &mParam_RB_LearnTime)->setValue(900.0);
-	mGui.addSlider("Threshold", 0.0, 255.0, &mParam_RB_Threshold)->setValue(10.0);
+	mGui.addSlider("RunThreshold", 0.0, 255.0, &mParam_RB_Threshold)->setValue(10.0);
 	mGui.addToggle("Warp", &mEnableWarpPerspective);
 	mGui.addToggle("Blur", &mEnableBlur);
 	mGui.addSlider("BlurSize", 0.0, 40.0, &mParam_Blur);

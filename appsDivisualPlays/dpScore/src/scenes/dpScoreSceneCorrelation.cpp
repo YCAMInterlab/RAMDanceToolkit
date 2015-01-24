@@ -390,6 +390,7 @@ void SceneCorrelation::enter()
     const float dist{2000.f};
     for (int i=0; i<kNumDancers; i++) {
         auto* daner = new NodeDancer(this);
+        daner->name = kKeyDancer + " " + ofToString(kNumDancers - i);
         ofVec3f p;
         p.x = -dist * 1.5f;
         p.y = getLineUped(3000.f, i, kNumDancers);

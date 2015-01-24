@@ -14,6 +14,9 @@ void ofApp::setup(){
 	ofSetLogLevel(OF_LOG_ERROR);
     
 //    dpCameraUnit.gui.addToggle("TotalManager", &dpSwitcher.totalManage);
+	dpCameraUnit.gui.addToggle("VisEnable", &dpSwitcher.mVisEnable);
+	dpCameraUnit.gui.autoSizeToFitWidgets();
+
     dpSwitcher.totalManage = true;
 }
 
