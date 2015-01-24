@@ -130,6 +130,11 @@ public:
         
     }
     
+    void onEnabled(){
+        ramCameraManager::instance().getActiveCamera().setPosition(dpGetRDTKSceneCameraPosition());
+        ramCameraManager::instance().getActiveCamera().lookAt(dpGetRDTKSceneCameraLookAt());
+    }
+    
 private:
    
     

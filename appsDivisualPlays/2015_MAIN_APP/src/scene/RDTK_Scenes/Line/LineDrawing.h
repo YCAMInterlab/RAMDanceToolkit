@@ -276,7 +276,7 @@ public:
             }
         }
         
-       // saveXML();
+        saveXML();
     }
 	
 	void update()

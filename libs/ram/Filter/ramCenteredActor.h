@@ -32,12 +32,12 @@ public:
 	{
 		if (src.getNumNode() != copy.getNumNode()) copy = src;
         
-        const ofPoint centroid = src.getCentroid();
+        const ofPoint center = src.getNode(ramActor::JOINT_ABDOMEN).getGlobalPosition();
         
 		for (int i = 0; i < src.getNumNode(); i++)
 		{
 			ofVec3f input = src.getNode(i).getGlobalPosition();
-			copy.getNode(i).setGlobalPosition(input.x - centroid.x,input.y,input.z - centroid.z);
+			copy.getNode(i).setGlobalPosition(input.x - center.x,input.y,input.z - center.z);
 		}
         
 		return copy;

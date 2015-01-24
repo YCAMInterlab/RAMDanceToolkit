@@ -172,7 +172,7 @@ public:
                         
                     }
                     
-                    size *= 800.0;
+                    size *= 600.0;
                     mCircles[label].setRad(fmaxf(size.x,size.y));
                 }
             }
