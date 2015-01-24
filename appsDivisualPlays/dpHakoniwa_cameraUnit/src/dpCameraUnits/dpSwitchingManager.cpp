@@ -173,6 +173,13 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->sourceCh  = SHUTTER_CHANNEL;
     hakoniwas.back()->sceneNames.push_back("H:OnNote");
 
+#pragma mark あいボールダンサー
+    hakoniwas.push_back(new hakoniwaPresets());
+    hakoniwas.back()->type      = HAKO_EYEBALLDANCER;
+    hakoniwas.back()->CVPreset  = "EyeBallDancer";
+    hakoniwas.back()->sourceCh  = SHUTTER_CHANNEL;
+    hakoniwas.back()->sceneNames.push_back("H:dpHEyeBallDancer");
+    
 #pragma mark 記憶
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_KIOKU;
