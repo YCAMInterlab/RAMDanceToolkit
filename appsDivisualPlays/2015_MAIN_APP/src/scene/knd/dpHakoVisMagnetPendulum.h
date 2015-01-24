@@ -22,6 +22,9 @@ public:
         }
         
         mPos.imSet(mOrigin);
+        
+        mRecordAlpha.speed = 0.1;
+        mRecordCircleAlpha.speed = 0.16;
     }
     
     void record(ofPoint pt){
@@ -37,6 +40,7 @@ public:
         mVecs.clear();
         isRecord = true;
         mRecordAlpha.set(255);
+        mRecordCircleAlpha.set(255);
         
     }
     
@@ -45,6 +49,7 @@ public:
         isRecord = false;
         mPlaybackCounter = 0;
         mRecordAlpha.set(0);
+        mRecordCircleAlpha.set(0);
 
     }
     
@@ -70,6 +75,7 @@ public:
    
         mPos.update();
         mRecordAlpha.update();
+        mRecordCircleAlpha.update();
         
     }
     
@@ -87,6 +93,7 @@ public:
         ofNoFill();
         ofCircle(mPos.x,mPos.y,mRad * 2.5);
         
+        ofSetColor(dpColor::MAIN_COLOR,mRecordCircleAlpha.val);
         ofFill();
         ofCircle(mPos.x,mPos.y,mRad);
 
@@ -116,6 +123,7 @@ private:
     bool isRecordOnce = false;
     
     KezSlide mRecordAlpha;
+    KezSlide mRecordCircleAlpha;
 
 };
 
@@ -191,7 +199,7 @@ public:
         
         receiveOsc();
         record(mCurrentVec);
-        if(ofGetFrameNum() % dpRecordGridCircle::PT_MAX == 0)changeRecordTarget();
+        if((ofGetFrameNum() - mBeginFrame) % dpRecordGridCircle::PT_MAX == 0)changeRecordTarget();
         
      //   record(ofPoint(ofGetMouseX(),ofGetMouseY()));
         
@@ -260,6 +268,10 @@ public:
 
     }
     
+    void onEnabled(){
+        mBeginFrame = ofGetFrameNum();
+    }
+    
 private:
  
     vector<dpRecordGridCircle>mCircles;
@@ -282,6 +294,8 @@ private:
     ofPoint mCurrentHead;
     
     static const int FONT_SIZE = 32;
+    
+    int mBeginFrame = 0;
 };
 
 #endif
