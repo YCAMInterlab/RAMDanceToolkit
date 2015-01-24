@@ -133,7 +133,7 @@ public:
         mReceiver.addAddress("/dp/cameraUnit/SandStorm/vector");
 
         mZoom.speed = 0.001;
-        mRot.speed = 0.01;
+        mRot.speed = 0.005;
         
     }
     
