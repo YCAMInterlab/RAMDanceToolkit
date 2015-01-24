@@ -43,7 +43,7 @@ void ramMEXSync::setupControlPanel(){
 	presetName.push_back("Plink_Laser");
 	presetName.push_back("Plink_Prism");
 	presetName.push_back("Plink_Oil");
-	
+	presetName.push_back("EyeBallDancer");
 	presetName.push_back("Metaball");
 	presetName.push_back("OnNote");
 	presetName.push_back("Kioku");
@@ -66,7 +66,7 @@ void ramMEXSync::setupControlPanel(){
 	scenes.push_back("distanceMetaball");	scenes_pair.push_back("");
 	scenes.push_back("OnNote");				scenes_pair.push_back("");
 	scenes.push_back("Kioku");				scenes_pair.push_back("");
-	
+	scenes.push_back("dpHEyeBallDancer");
 	
 	gui->addLabel("SceneSelect",OFX_UI_FONT_LARGE);
 	sceneRadio = gui->addRadio("SceneSelector", scenes);
@@ -109,15 +109,20 @@ void ramMEXSync::setupControlPanel(){
 	blockLauncher->disableMouseEventCallbacks();
 	
 	blockLauncher->setup();
-	blockLauncher->addButton("Block_1:WormON to Kawaguchi", false);
-	blockLauncher->addButton("Block_2:SandStormON to Kojiri/Sasa", false);
-	blockLauncher->addButton("Block_3:SandStorm to 3Players WormOFF", false);
-	blockLauncher->addButton("Block_4:SandStorm to Kawaguchi/Sasamoto", false);
-	blockLauncher->addButton("Block_5:HakoniwaON Standby", false);
-	blockLauncher->addButton("Block_6:Disable Vis", false);
-	blockLauncher->addButton("Block_7:SandStorm without Vis to Kojiri/Sasa", false);
-	blockLauncher->addButton("Block_8:SandStorm without Vis to Kawaguchi/Sasa", false);
-	blockLauncher->addButton("Block_9:SandStorm without Vis to 3Players", false);
+	blockLauncher->addButton("Block_01:WormON to Kawaguchi", false);
+	blockLauncher->addButton("Block_02:SandStormON to Kojiri/Sasa", false);
+	blockLauncher->addButton("Block_03:SandStorm to 3Players WormOFF", false);
+	blockLauncher->addButton("Block_04:SandStorm to Kawaguchi/Sasamoto", false);
+	blockLauncher->addButton("Block_05:HakoniwaON Standby", false);
+	blockLauncher->addSpacer();
+	blockLauncher->addButton("Block_06:Disable Vis", false);
+	blockLauncher->addButton("Block_07:SandStorm without Vis to Kojiri/Sasa", false);
+	blockLauncher->addButton("Block_08:SandStorm without Vis to Kawaguchi/Sasa", false);
+	blockLauncher->addButton("Block_09:SandStorm without Vis to 3Players", false);
+	blockLauncher->addSpacer();
+	blockLauncher->addButton("Block_10:Call Kioku", false);
+	blockLauncher->addButton("Block_11:Disable Vis", false);
+	blockLauncher->addButton("Block_12:Enable Vis", false);
 	blockLauncher->setPosition(240, 690);
 	blockLauncher->autoSizeToFitWidgets();
 	
@@ -301,7 +306,7 @@ void ramMEXSync::draw(){
 				info += previews[i]->msg.getArgAsString(j) + "\n";
 			else
 				info += ofToString(previews[i]->numValue[j]) + "\n";
-			ofRect(0, 30+j*13, 300 * previews[i]->numValue[j] / previews[i]->valueClamp[j], 8);
+			ofRect(0, 30+(j+1)*13, 300 * previews[i]->numValue[j] / previews[i]->valueClamp[j], 8);
 		}
 		
 		ofSetColor(255);
@@ -556,7 +561,7 @@ void ramMEXSync::setActorPreset(actorPresetMode mode){
 void ramMEXSync::blockLaunch(ofxUIEventArgs &e){
 	ofxUIWidget* w = e.widget;
 	
-	if (w->getName().substr(0,7) == "Block_1"){
+	if (w->getName().substr(0,8) == "Block_01"){
 		vector<string> act;
 		act.push_back("kawaguchi");
 		act.push_back("kojiri");
@@ -568,18 +573,18 @@ void ramMEXSync::blockLaunch(ofxUIEventArgs &e){
 		
 	}
 
-	if (w->getName().substr(0,7) == "Block_2"){
+	if (w->getName().substr(0,8) == "Block_02"){
 		setActorPreset(ACTPRE_DUO);
 		setScene("dpVisSandStorm", true, false, true);
 	}
 	
-	if (w->getName().substr(0,7) == "Block_3"){
+	if (w->getName().substr(0,8) == "Block_03"){
 		setActorPreset(ACTPRE_TRIO);
 		setScene("dpVisSandStorm", true, true, true);
 		setExtractor();
 	}
 	
-	if (w->getName().substr(0,7) == "Block_4"){
+	if (w->getName().substr(0,8) == "Block_04"){
 		vector<string> act;
 		act.push_back("kojiri");
 		act.push_back("kawaguchi");
@@ -590,7 +595,7 @@ void ramMEXSync::blockLaunch(ofxUIEventArgs &e){
 		setExtractor();
 	}
 	
-	if (w->getName().substr(0,7) == "Block_5"){
+	if (w->getName().substr(0,8) == "Block_05"){
 		vector<string> act;
 		act.push_back("kawaguchi");
 		act.push_back("kojiri");
@@ -598,7 +603,7 @@ void ramMEXSync::blockLaunch(ofxUIEventArgs &e){
 		setActorPreset(ACTPRE_STANDARD);
 	}
 	
-	if (w->getName().substr(0,7) == "Block_6"){
+	if (w->getName().substr(0,8) == "Block_06"){
 		sender.setup("192.168.20.5", 12400);
 		ofxOscMessage m;
 		m.setAddress("/dp/VisEnable");
@@ -607,7 +612,7 @@ void ramMEXSync::blockLaunch(ofxUIEventArgs &e){
 	}
 	
 	
-	if (w->getName().substr(0,7) == "Block_7"){
+	if (w->getName().substr(0,8) == "Block_07"){
 		vector<string> act;
 		act.push_back("kawaguchi");
 		act.push_back("kojiri");
@@ -627,9 +632,11 @@ void ramMEXSync::blockLaunch(ofxUIEventArgs &e){
 		sender.sendMessage(m);
 		sender.setup(ip_2, 10000);
 		sender.sendMessage(m);
+		
+		setExtractor();
 	}
 	
-	if (w->getName().substr(0,7) == "Block_8"){
+	if (w->getName().substr(0,8) == "Block_08"){
 		vector<string> act;
 		act.push_back("kojiri");
 		act.push_back("kawaguchi");
@@ -649,9 +656,11 @@ void ramMEXSync::blockLaunch(ofxUIEventArgs &e){
 		sender.sendMessage(m);
 		sender.setup(ip_2, 10000);
 		sender.sendMessage(m);
+		
+		setExtractor();
 	}
 
-	if (w->getName().substr(0,7) == "Block_9"){
+	if (w->getName().substr(0,8) == "Block_09"){
 		setActorPreset(ACTPRE_TRIO);
 		setScene("dpVisSandStorm", true, true, true);
 		
@@ -666,7 +675,29 @@ void ramMEXSync::blockLaunch(ofxUIEventArgs &e){
 		sender.sendMessage(m);
 		sender.setup(ip_2, 10000);
 		sender.sendMessage(m);
+		
+		setExtractor();
 	}
+	
+	if (w->getName().substr(0,8) == "Block_10"){
+		setScene("Kioku", true, true, true);
+	}
+	
+	if (w->getName().substr(0,8) == "Block_11"){
+		sender.setup("192.168.20.5", 12400);
+		ofxOscMessage m;
+		m.setAddress("/dp/VisEnable");
+		m.addIntArg(0);
+		sender.sendMessage(m);
+	}
+	if (w->getName().substr(0,8) == "Block_12"){
+		sender.setup("192.168.20.5", 12400);
+		ofxOscMessage m;
+		m.setAddress("/dp/VisEnable");
+		m.addIntArg(1);
+		sender.sendMessage(m);
+	}
+	
 }
 
 void ramMEXSync::drawDump(){
@@ -706,5 +737,4 @@ void ramMEXSync::drawDump(){
 	}
 	
 	ofPopMatrix();
-	
 }

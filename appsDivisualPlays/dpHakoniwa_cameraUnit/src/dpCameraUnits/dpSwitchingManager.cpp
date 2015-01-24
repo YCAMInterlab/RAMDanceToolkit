@@ -173,6 +173,13 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->sourceCh  = SHUTTER_CHANNEL;
     hakoniwas.back()->sceneNames.push_back("H:OnNote");
 
+#pragma mark あいボールダンサー
+    hakoniwas.push_back(new hakoniwaPresets());
+    hakoniwas.back()->type      = HAKO_EYEBALLDANCER;
+    hakoniwas.back()->CVPreset  = "EyeBallDancer";
+    hakoniwas.back()->sourceCh  = SHUTTER_CHANNEL;
+    hakoniwas.back()->sceneNames.push_back("H:dpHEyeBallDancer");
+    
 #pragma mark 記憶
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_KIOKU;
@@ -249,7 +256,7 @@ void dpSwitchingManager::update(){
 
 	}
 
-	if (ofGetFrameNum() % 15 == 0 && oscListPtr != NULL && totalManage){
+	if (ofGetFrameNum() % 5 == 0 && oscListPtr != NULL && totalManage){
 
 		ofxOscMessage Live;
 		Live.setAddress("/dp/caemraUnit/aliveMonitor");
@@ -371,6 +378,18 @@ void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
 		m.setAddress("/ram/set_scene");
 	}
 
+	if (m.getAddress() == "/dp/VisEnable"){
+		mVisEnable = (m.getArgAsInt32(0) == 1);
+		
+		if (!mVisEnable){
+			refleshSceneforRDTK();
+			matrixSW.setSW(SHUTTER_CHANNEL, 0+5);
+			matrixSW.setSW(SHUTTER_CHANNEL, 1+5);
+			matrixSW.setSW(SHUTTER_CHANNEL, 2+5);
+			matrixSW.setSW(SHUTTER_CHANNEL, 3+5);
+		}
+	}
+	
 	if (m.getAddress() == "/ram/set_scene"){
 		cout << "=-=-=-=-=-=-=-Head -=-=-=-=-=-=-=-=" << endl << endl;
 		int hakoId = getHakoniwaIndex(m.getArgAsString(0));
@@ -526,7 +545,11 @@ void dpSwitchingManager::enableDisplay(hakoniwaType type, int displayNum,bool ne
     if (displayNum == 2) targDSP = 0;
     if (displayNum == 3) targDSP = 3;
 
-    matrixSW.setSW(getHakoniwaPreset(type)->sourceCh, targDSP+5);
+    if (mVisEnable){
+        matrixSW.setSW(getHakoniwaPreset(type)->sourceCh, targDSP+5);
+    }else{
+        matrixSW.setSW(SHUTTER_CHANNEL, targDSP+5);
+    }
 	//TODO: RDTKへのOSC送り
 
 	refleshSceneforRDTK();
