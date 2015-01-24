@@ -78,7 +78,7 @@ public:
         
         if(mSat.val > 1){
             mColor.setSaturation(mSat.val);
-            mColor.setBrightness(ofMap(mSat.val,255,0,255,216));
+            mColor.setBrightness(ofMap(mSat.val,255,0,255,90));
         }
     }
     
@@ -208,6 +208,7 @@ public:
 
         ofDisableDepthTest();
         ofEnableBlendMode(OF_BLENDMODE_ADD);
+        ofSetLineWidth(2);
         //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE,GL_SRC_ALPHA,GL_ONE);
         mCam.begin(dpGetFirstScreenViewPort());
         
