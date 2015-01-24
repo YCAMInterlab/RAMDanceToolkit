@@ -40,7 +40,9 @@ public:
     }
     void setup(){
       
-       
+        for(auto &v:mPts){
+            v.set(0,0,0);
+        }
         
     }
     

@@ -256,7 +256,7 @@ void dpSwitchingManager::update(){
 
 	}
 
-	if (ofGetFrameNum() % 15 == 0 && oscListPtr != NULL && totalManage){
+	if (ofGetFrameNum() % 5 == 0 && oscListPtr != NULL && totalManage){
 
 		ofxOscMessage Live;
 		Live.setAddress("/dp/caemraUnit/aliveMonitor");
@@ -380,6 +380,14 @@ void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
 
 	if (m.getAddress() == "/dp/VisEnable"){
 		mVisEnable = (m.getArgAsInt32(0) == 1);
+		
+		if (!mVisEnable){
+			refleshSceneforRDTK();
+			matrixSW.setSW(SHUTTER_CHANNEL, 0+5);
+			matrixSW.setSW(SHUTTER_CHANNEL, 1+5);
+			matrixSW.setSW(SHUTTER_CHANNEL, 2+5);
+			matrixSW.setSW(SHUTTER_CHANNEL, 3+5);
+		}
 	}
 	
 	if (m.getAddress() == "/ram/set_scene"){
