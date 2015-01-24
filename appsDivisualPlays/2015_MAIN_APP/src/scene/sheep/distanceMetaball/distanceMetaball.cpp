@@ -34,7 +34,7 @@ void distanceMetaball::setupControlPanel(){
 	resolution = 9;
 	radius_low = 0.05;
 	radius_high = 0.35;
-	mScale = 3.0;
+	mScale = 4.0;
 	mSmooth = 35.0;
 
 	mex.setupControlPanel(this);
