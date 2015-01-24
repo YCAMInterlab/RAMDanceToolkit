@@ -85,9 +85,11 @@ void testApp::setup()
 	sceneManager.addScene(testSceneB.getPtr());
 	sceneManager.addScene(testSceneC.getPtr());
 	sceneManager.addScene(testSceneD.getPtr());
-    
+
+	sceneManager.addScene(Kioku.getPtr());
+	
 	sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
-    
+
     sceneManager.setShowAllActors(false);
 }
 
