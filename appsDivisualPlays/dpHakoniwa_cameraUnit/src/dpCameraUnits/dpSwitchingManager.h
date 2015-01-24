@@ -27,6 +27,8 @@
 #define CVSW_3 3
 #define CVSW_4 4
 
+#define SHUTTER_CHANNEL 8
+
 #define CV_SLOT_NUM 4
 
 enum hakoniwaType{
@@ -51,6 +53,7 @@ enum hakoniwaType{
 	HAKO_FOURPOINT,
 	HAKO_FUTURE,
     HAKO_FUTURE_LEG,
+    HAKO_ONNOTE,
 
 	HAKO_TESTA,
 	HAKO_TESTB,
