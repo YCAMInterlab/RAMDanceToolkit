@@ -203,13 +203,19 @@ public:
     }
     
     void rndRot(){
-        int rnd = ofRandom(0,3);
+        int rnd = ofRandom(0,5);
         
         if(rnd == 0){
             mRotSpeed.set(0,0,0);
         }else if(rnd == 1){
             mRotSpeed.set(0,0,0);
+         
+            mRot.imSet(fmodf(mRot.x,360.0),
+                       fmodf(mRot.y,360.0),
+                       fmodf(mRot.z,360.0));
+            
             mRot.set(0,0,0);
+            
         }
         else{
             mRotSpeed.set(ofRandom(-0.1,0.1),
@@ -243,6 +249,11 @@ public:
         if(name == "rndRot")rndRot();
         
         if(name == "stop")checkStop();
+    }
+    
+    void onEnabled(){
+        mRotSpeed.set(-0.05,0.0,0.0);
+        mRot.imSet(0,0,0);
     }
     
 private:

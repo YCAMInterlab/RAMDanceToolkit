@@ -1,22 +1,22 @@
 //
-//  eyeBall.h
+//  eyeBallDancer.h
 //  example-ramMotionExtractor
 //
-//  Created by ycam on 2015/01/11.
+//  Created by ycam on 2015/01/24.
 //
 //
 
-#ifndef __RAMDanceToolkit__eyeBall__
-#define __RAMDanceToolkit__eyeBall__
+#ifndef __example_ramMotionExtractor__eyeBallDancer__
+#define __example_ramMotionExtractor__eyeBallDancer__
 
 #include "ramMain.h"
 #include "ramMotionExtractor.h"
 
-class eyeBall : public ramBaseScene{
+class eyeBallDancer : public ramBaseScene{
 public:
     
-    eyeBall();
-    virtual ~eyeBall(){};
+    eyeBallDancer();
+    virtual ~eyeBallDancer(){};
     
     void setup();
     void setupControlPanel();
@@ -27,7 +27,7 @@ public:
     void onDisabled();
     
     inline string getName() const {
-        return "dpHEyeBall";
+        return "dpHEyeBallDancer";
     }
     
     //----------
@@ -139,4 +139,4 @@ private:
     void example_drawDump();
     
 };
-#endif /* defined(__example_ramMotionExtractor__eyeBall__) */
+#endif /* defined(__example_ramMotionExtractor__eyeBallDancer__) */

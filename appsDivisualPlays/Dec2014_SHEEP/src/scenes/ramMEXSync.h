@@ -12,6 +12,7 @@
 #include "ramMain.h"
 #include "ramMotionExtractor.h"
 #include "simpleSwitcher.h"
+#include "dpConstants.h"
 
 enum actorPresetMode{
 	ACTPRE_STANDARD,
@@ -62,10 +63,13 @@ public:
 	float mUIRemote_float;
 	float mUIRemote_fOrder;
 	bool mUIRemote_toggle;
+	bool mViewSimple;
 	
 	inline
 	string getName() const { return "Presentor"; }
 
+	string lastChanged;
+	
 	const string ip_1 = "192.168.20.2";
 	const string ip_2 = "192.168.20.3";
 	
@@ -90,6 +94,7 @@ public:
 	void setScene(string scene,bool enable,bool A,bool B);
 	void setActorPreset(actorPresetMode mode);
 	
+	void drawDump();
 protected:
 	vector<bool>	enabled;
 	vector<string> actorPreset;

@@ -10,6 +10,7 @@
 		5E8C1FAE1A6D0BB1007F6144 /* frozenIce.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E8C1FAA1A6D0BB1007F6144 /* frozenIce.cpp */; };
 		5E8C1FAF1A6D0BB1007F6144 /* magnetLooper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E8C1FAC1A6D0BB1007F6144 /* magnetLooper.cpp */; };
 		5E96003D1A71E48A00F0FCD4 /* eyeBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E96003B1A71E48A00F0FCD4 /* eyeBall.cpp */; };
+		5E9600511A73454800F0FCD4 /* eyeBallDancer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E96004F1A73454800F0FCD4 /* eyeBallDancer.cpp */; };
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
 		920BA37C1A67C9D700E4A227 /* dpHakoniwaSand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 920BA37A1A67C9D700E4A227 /* dpHakoniwaSand.cpp */; };
 		928AE9281A6CF5EE00CCA21D /* HakoniwaGearMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 928AE9261A6CF5EE00CCA21D /* HakoniwaGearMove.cpp */; };
@@ -105,6 +106,8 @@
 		5E8C1FAD1A6D0BB1007F6144 /* magnetLooper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = magnetLooper.h; sourceTree = "<group>"; };
 		5E96003B1A71E48A00F0FCD4 /* eyeBall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eyeBall.cpp; sourceTree = "<group>"; };
 		5E96003C1A71E48A00F0FCD4 /* eyeBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eyeBall.h; sourceTree = "<group>"; };
+		5E96004F1A73454800F0FCD4 /* eyeBallDancer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eyeBallDancer.cpp; sourceTree = "<group>"; };
+		5E9600501A73454800F0FCD4 /* eyeBallDancer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eyeBallDancer.h; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
 		920BA3721A677FBB00E4A227 /* dpHakoVisStageBlob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisStageBlob.h; sourceTree = "<group>"; };
 		920BA3731A67C8E800E4A227 /* dp3DDanceMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dp3DDanceMap.h; sourceTree = "<group>"; };
@@ -281,6 +284,8 @@
 		9209C4331A6CAE3500E35146 /* konno */ = {
 			isa = PBXGroup;
 			children = (
+				5E96004F1A73454800F0FCD4 /* eyeBallDancer.cpp */,
+				5E9600501A73454800F0FCD4 /* eyeBallDancer.h */,
 				5E96003B1A71E48A00F0FCD4 /* eyeBall.cpp */,
 				5E96003C1A71E48A00F0FCD4 /* eyeBall.h */,
 				5E8C1FAB1A6D0BB1007F6144 /* frozenIce.h */,
@@ -696,6 +701,7 @@
 			files = (
 				C66CCCF71A66750D00CE64E9 /* hakoVisPLink_Prism.cpp in Sources */,
 				C66CCCF51A66750D00CE64E9 /* hakoVisPLink_Laser.cpp in Sources */,
+				5E9600511A73454800F0FCD4 /* eyeBallDancer.cpp in Sources */,
 				C66CCCF41A66750D00CE64E9 /* HakoniwaPLink_Prism.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				CF6C55C81A6F80950042DE07 /* distanceMetaball.cpp in Sources */,

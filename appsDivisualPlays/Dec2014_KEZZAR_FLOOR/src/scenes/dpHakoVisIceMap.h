@@ -22,6 +22,8 @@ public:
         ramGetGUI().addToggle("all", &mTogAllDraw);
         ramGetGUI().addIntSlider("lineWidth", 1, 10, &mLineWidth);
         ramGetGUI().addIntSlider("thresh", 1, 255, &mExtendThreshNum);
+        ramGetGUI().addButton("randomize");
+        ramGetGUI().addIntSlider("ForceExtendNum", 0, 255, &mForceExtendNum);
         
         ramFloorQuadWarper::instance().setupContolPanel(this);
         
@@ -30,16 +32,32 @@ public:
         mReceiver.addAddress("/dp/cameraUnit/sceneState/");
         
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoVisIceMap::onPanelChanged);
-        
+        ofAddListener(ofEvents().keyPressed, this, &dpHakoVisIceMap::keyPressed);
         mGrid.setExtendThreshNum(mExtendThreshNum);
         
         mSceneNames[ICE] = "Ice";
-        mSceneNames[TWO] = "dpVisTwo";
+        mSceneNames[TORNADO] = "Tornado";
         mSceneNames[FIVE] = "dpVisFive";
         
         five();
         
     }
+    
+    void keyPressed(ofKeyEventArgs &e){
+        if(e.key == 'e'){
+            mTogAllDraw = !mTogAllDraw;
+            mGrid.setAllDraw(mTogAllDraw);
+        }
+        
+        if(e.key == 'r'){
+           mGrid.extendByThresh(80);
+        }
+        
+        if(e.key == 't'){
+            mGrid.setExtendThreshNum(mExtendThreshNum);
+        }
+    }
+    
     void setup(){
         mGrid.setup(ofPoint(ramFloorQuadWarper::FBO_WIDTH * 0.5,
                             ramFloorQuadWarper::FBO_HEIGHT * 0.5,0),ramFloorQuadWarper::FLOOR_WIDTH);
@@ -83,6 +101,12 @@ public:
                 if(mSceneEnable[ICE] == false && mPreMode == ICE){
                     mPreMode = FIVE;
                     five();
+                }
+                
+                if(mSceneEnable[TORNADO] == true){
+                    mPreMode = FIVE;
+                    mTogAllDraw = false;
+                    mGrid.setAllDraw(mTogAllDraw);
                 }
             }
         }
@@ -133,6 +157,16 @@ public:
         if(name == "thresh"){
             mGrid.setExtendThreshNum(mExtendThreshNum);
         }
+        
+        if(name == "ForceExtendNum"){
+            mGrid.extendByThresh(mForceExtendNum);
+        }
+        
+        if(name == "randomize"){
+            mGrid.randomizeMode();
+        }
+        
+        
     }
     
     
@@ -145,19 +179,21 @@ private:
     
     int mLineWidth = 2;
     
-    int mExtendThreshNum = 150;
+    int mExtendThreshNum = 160;
     
     map<int,string>mSceneNames;
     
     enum SCENE_NAME{
         ICE,
-        TWO,
+        TORNADO,
         FIVE,
     };
     
     bool isIce = false;
     int mPreMode = FIVE;
     bitset<3> mSceneEnable;
+    
+    int mForceExtendNum = 8;
     
 };
 

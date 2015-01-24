@@ -62,7 +62,6 @@ public:
     
     dpSPBox(){
         mColor = dpColor::MAIN_COLOR;
-        mColor.setBrightness(220);
     }
     
     void start(ofPoint size,float angle){
@@ -77,7 +76,10 @@ public:
         mPos.z += mSpeed;
         mSat.update();
         
-        if(mSat.val > 1)mColor.setSaturation(mSat.val);
+        if(mSat.val > 1){
+            mColor.setSaturation(mSat.val);
+            mColor.setBrightness(ofMap(mSat.val,255,0,255,216));
+        }
     }
     
     void draw(){

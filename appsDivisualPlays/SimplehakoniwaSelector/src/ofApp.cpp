@@ -23,7 +23,8 @@ void ofApp::setup(){
 	hakoniwas.push_back("distanceMetaball");
 	hakoniwas.push_back("Line");
 	hakoniwas.push_back("fourPointx3");
-	hakoniwas.push_back("future?");
+	hakoniwas.push_back("FutureRE");
+	hakoniwas.push_back("Future");
 
 	hakoniwas.push_back("TestSceneA");
 	hakoniwas.push_back("TestSceneB");
@@ -101,14 +102,14 @@ void ofApp::update(){
 	if (mAutoShuffle && (ofGetFrameNum() % 30 == 0)){
 		ofxUIRadio* slt = (ofxUIRadio*)(selector_display.getWidget("Slot"));
 		ofxUIRadio* hkn = (ofxUIRadio*)(selector_hakoniwa.getWidget("Hakoniwa"));
-
+		
 		mEnable = (ofRandomuf() < 0.5);
 		for (int i = 0;i < 4;i++)
 			displays[i] = ofRandomuf() < 0.5;
-
+		
 		hkn->activateToggle(hakoniwas[int(ofRandom(4))+5]);
 		((ofxUITextInput*)(selector_hakoniwa.getWidget("Target")))->setTextString(hkn->getActiveName());
-
+		
 		sendMessage();
 	}
 

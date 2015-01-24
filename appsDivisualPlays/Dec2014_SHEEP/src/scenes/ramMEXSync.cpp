@@ -14,6 +14,8 @@ ramMEXSync::ramMEXSync(){
 
 void ramMEXSync::setupControlPanel(){
 
+	lastChanged = "";
+	
 	gui = ramGetGUI().getCurrentUIContext();
 	targScene = gui->addTextInput("TargScene", "dpHPLink_Laser");
 	targScene->setAutoClear(false);
@@ -41,8 +43,10 @@ void ramMEXSync::setupControlPanel(){
 	presetName.push_back("Plink_Laser");
 	presetName.push_back("Plink_Prism");
 	presetName.push_back("Plink_Oil");
+	presetName.push_back("EyeBallDancer");
 	presetName.push_back("Metaball");
 	presetName.push_back("OnNote");
+	presetName.push_back("Kioku");
 
 	enabled.assign(presetName.size(), false);
 	
@@ -61,7 +65,8 @@ void ramMEXSync::setupControlPanel(){
 	scenes.push_back("dpHPLink_Oil");		scenes_pair.push_back("dpVisPLink_Oil");
 	scenes.push_back("distanceMetaball");	scenes_pair.push_back("");
 	scenes.push_back("OnNote");				scenes_pair.push_back("");
-	
+	scenes.push_back("Kioku");				scenes_pair.push_back("");
+	scenes.push_back("dpHEyeBallDancer");
 	
 	gui->addLabel("SceneSelect",OFX_UI_FONT_LARGE);
 	sceneRadio = gui->addRadio("SceneSelector", scenes);
@@ -78,6 +83,7 @@ void ramMEXSync::setupControlPanel(){
 	gui->addLabel("Extractor",OFX_UI_FONT_LARGE);
 	gui->addButton("Sync", false);
 	gui->addButton("Get", false);
+	gui->addToggle("viewSimple", &mViewSimple);
 	gui->addSpacer();
 	gui->addLabel("Remote UI",OFX_UI_FONT_LARGE);
 	uiName = gui->addTextInput("uiName", "UIName");
@@ -108,11 +114,10 @@ void ramMEXSync::setupControlPanel(){
 	blockLauncher->addButton("Block_3:SandStorm to 3Players WormOFF", false);
 	blockLauncher->addButton("Block_4:SandStorm to Kawaguchi/Sasamoto", false);
 	blockLauncher->addButton("Block_5:HakoniwaON Standby", false);
-	blockLauncher->addButton("Block_6", false);
-	blockLauncher->addButton("Block_7", false);
-	blockLauncher->addButton("Block_8", false);
-	blockLauncher->addButton("Block_9", false);
-	blockLauncher->addButton("Block_10", false);
+	blockLauncher->addButton("Block_6:Disable Vis", false);
+	blockLauncher->addButton("Block_7:SandStorm without Vis to Kojiri/Sasa", false);
+	blockLauncher->addButton("Block_8:SandStorm without Vis to Kawaguchi/Sasa", false);
+	blockLauncher->addButton("Block_9:SandStorm without Vis to 3Players", false);
 	blockLauncher->setPosition(240, 690);
 	blockLauncher->autoSizeToFitWidgets();
 	
@@ -138,6 +143,8 @@ void ramMEXSync::setupControlPanel(){
 	switcher.setup();
 	switcher.selector_hakoniwa->setVisible(false);
 	switcher.selector_display->setVisible(false);
+	
+	mViewSimple = false;
 }
 
 void ramMEXSync::update(){
@@ -152,7 +159,8 @@ void ramMEXSync::update(){
 			string presetName = actPresetRadio->getActiveName();
 			
 			mex.load("presentor/"+sceneName+"_"+presetName+".xml");
-			if (mex.getNumPort() > 0) setExtractor();
+//			cout << mex.getNumPort() << endl;
+			setExtractor();
 			
 		}else{
 			actPresetRadio->activateToggle("");
@@ -171,6 +179,7 @@ void ramMEXSync::update(){
 		if (m.getAddress().substr(0,26) == "/dp/cameraUnit/sceneState/"){
 			
 			string sceneName = m.getAddress().substr(26);
+
 			int targId = -1;
 			for (int i = 0;i < presetName.size();i++){
 				if (presetName[i] == sceneName) targId = i;
@@ -182,6 +191,7 @@ void ramMEXSync::update(){
 					ofxUIRadio* rd = (ofxUIRadio*)(gui->getWidget("SceneSelector"));
 					rd->activateToggle(scenes[targId]);
 					targScene->setTextString(rd->getActiveName());
+					lastChanged = scenes[targId];
 					getterDelay = 0;
 				}
 				
@@ -258,9 +268,27 @@ void ramMEXSync::draw(){
 	mex.draw();
 	ramEndCamera();
 	
+	if (mViewSimple) return;
+	
+	ofSetColor(dpColor::MAIN_COLOR);
+	if ((0 < getterDelay) &&
+		(getterDelay < 3)){
+		ofRect(0, 0, ofGetWidth(), ofGetHeight());
+	}
+	
+	if ((6 < getterDelay) &&
+		(getterDelay < 9)){
+		ofRect(0, 0, ofGetWidth(), ofGetHeight());
+	}
+	ofSetColor(255);
+	
+	
+	drawDump();
+	
 	for (int i = 0;i < previews.size();i++){
 		ofPushMatrix();
-		ofTranslate(700, i*130);
+		ofTranslate(1100, i*130);
+		
 		ofNoFill();
 		ofRect(0, 10, 300, 115);
 		ofFill();
@@ -282,11 +310,18 @@ void ramMEXSync::draw(){
 		ofPopMatrix();
 	}
 	
-	
+	ofDisableDepthTest();
 	for (int i = 0;i < 4;i++){
 		ofPushMatrix();
-		ofTranslate(800 + (((i+1) % 4) % 2) * 300,
-					100 + (((i+1) % 4) / 2) * 100);
+		ofTranslate(1300 + (((i+1) % 4) % 2) * 300,
+					600 + (((i+1) % 4) / 2) * 100);
+		
+		if (currentScene[i] == lastChanged){
+			ofSetColor(dpColor::MAIN_COLOR * MAX(0,(255 - getterDelay) / 255.0));
+			ofRect(0, 0, 280, 90);
+		}
+		
+		ofSetColor(255);
 		ofNoFill();
 		ofRect(0, 0, 280, 90);
 		ofFill();
@@ -295,6 +330,7 @@ void ramMEXSync::draw(){
 		
 		ofPopMatrix();
 	}
+	ofEnableDepthTest();
 }
 
 void ramMEXSync::onPanelChanged(ofxUIEventArgs &e){
@@ -528,7 +564,7 @@ void ramMEXSync::blockLaunch(ofxUIEventArgs &e){
 		setActorSort(act);
 		
 		setActorPreset(ACTPRE_SOLO);
-		setScene("dpHWorm", true, true, false);
+		setScene("dpHWorm", true, true, true);
 		
 	}
 
@@ -562,5 +598,113 @@ void ramMEXSync::blockLaunch(ofxUIEventArgs &e){
 		setActorPreset(ACTPRE_STANDARD);
 	}
 	
+	if (w->getName().substr(0,7) == "Block_6"){
+		sender.setup("192.168.20.5", 12400);
+		ofxOscMessage m;
+		m.setAddress("/dp/VisEnable");
+		m.addIntArg(0);
+		sender.sendMessage(m);
+	}
+	
+	
+	if (w->getName().substr(0,7) == "Block_7"){
+		vector<string> act;
+		act.push_back("kawaguchi");
+		act.push_back("kojiri");
+		act.push_back("sasamoto");
+		setActorSort(act);
+		setActorPreset(ACTPRE_DUO);
+		setScene("dpVisSandStorm", true, true, true);
+		
+		ofxOscMessage m;
+		m.setAddress("/ram/set_scene");
+		m.addStringArg("dpVisSandStorm");
+		m.addIntArg(0);
+		m.addIntArg(0);
+		m.addIntArg(0);
+		
+		sender.setup(ip_1, 10000);
+		sender.sendMessage(m);
+		sender.setup(ip_2, 10000);
+		sender.sendMessage(m);
+	}
+	
+	if (w->getName().substr(0,7) == "Block_8"){
+		vector<string> act;
+		act.push_back("kojiri");
+		act.push_back("kawaguchi");
+		act.push_back("sasamoto");
+		setActorSort(act);
+		setActorPreset(ACTPRE_DUO);
+		setScene("dpVisSandStorm", true, true, true);
+		
+		ofxOscMessage m;
+		m.setAddress("/ram/set_scene");
+		m.addStringArg("dpVisSandStorm");
+		m.addIntArg(0);
+		m.addIntArg(0);
+		m.addIntArg(0);
+		
+		sender.setup(ip_1, 10000);
+		sender.sendMessage(m);
+		sender.setup(ip_2, 10000);
+		sender.sendMessage(m);
+	}
+
+	if (w->getName().substr(0,7) == "Block_9"){
+		setActorPreset(ACTPRE_TRIO);
+		setScene("dpVisSandStorm", true, true, true);
+		
+		ofxOscMessage m;
+		m.setAddress("/ram/set_scene");
+		m.addStringArg("dpVisSandStorm");
+		m.addIntArg(0);
+		m.addIntArg(0);
+		m.addIntArg(0);
+		
+		sender.setup(ip_1, 10000);
+		sender.sendMessage(m);
+		sender.setup(ip_2, 10000);
+		sender.sendMessage(m);
+	}
+}
+
+void ramMEXSync::drawDump(){
+	
+	ofPushMatrix();
+	ofTranslate(850, 10);
+	
+	for (int i = 0;i < mex.getNumPort();i++){
+		ofPushMatrix();
+		ofTranslate(0, i*90);
+		
+		ofVec3f vec = mex.getVelocityAt(i);
+		float speed = mex.getVelocitySpeedAt(i);
+		
+		ofSetColor(0, 0, 0);
+		ofRect(0, 0, 200, 80);
+		ofSetColor(255);
+		
+		ofNoFill();
+		ofRect(0, 0, 200, 80);
+		ofFill();
+		
+		string info = "";
+		info += "Port  :" + ofToString(i) + "\n";
+		info += "Actor :" + mex.getActorNameAt(i) + "\n";
+		info += "Joint :" + mex.getJointNameAt(i) + "\n";
+		info += "Speed :" + ofToString(mex.getVelocitySpeedAt(i)) + "\n";
+		
+		ofSetColor(100);
+		ofRect(10, 45, mex.getVelocitySpeedAt(i)*10.0, 15);
+		
+		ofSetColor(255);
+		ofDrawBitmapString(info, 10, 15);
+		
+		
+		ofPopMatrix();
+	}
+	
+	ofPopMatrix();
 	
 }
