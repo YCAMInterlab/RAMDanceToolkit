@@ -43,7 +43,7 @@ void ramMEXSync::setupControlPanel(){
 	presetName.push_back("Plink_Laser");
 	presetName.push_back("Plink_Prism");
 	presetName.push_back("Plink_Oil");
-	
+	presetName.push_back("EyeBallDancer");
 	presetName.push_back("Metaball");
 	presetName.push_back("OnNote");
 	presetName.push_back("Kioku");
@@ -66,7 +66,7 @@ void ramMEXSync::setupControlPanel(){
 	scenes.push_back("distanceMetaball");	scenes_pair.push_back("");
 	scenes.push_back("OnNote");				scenes_pair.push_back("");
 	scenes.push_back("Kioku");				scenes_pair.push_back("");
-	
+	scenes.push_back("dpHEyeBallDancer");
 	
 	gui->addLabel("SceneSelect",OFX_UI_FONT_LARGE);
 	sceneRadio = gui->addRadio("SceneSelector", scenes);

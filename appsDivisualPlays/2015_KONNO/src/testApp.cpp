@@ -21,13 +21,11 @@
 #include "frozenIce.h"
 #include "eyeBall.h"
 #include "magnetLooper.h"
-#include "eyeBallDancer.h"
 
 ramMotionExtractorExampleScene extractorScene;
 frozenIce frozenice;
 eyeBall eyeball;
 magnetLooper looper;
-eyeBallDancer eyeBalldancer;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -49,7 +47,6 @@ void testApp::setup()
 	//sceneManager.addScene(extractorScene.getPtr());
     sceneManager.addScene(frozenice.getPtr());
     sceneManager.addScene(eyeball.getPtr());
-    sceneManager.addScene(eyeBalldancer.getPtr());
     sceneManager.addScene(looper.getPtr());
 }
 

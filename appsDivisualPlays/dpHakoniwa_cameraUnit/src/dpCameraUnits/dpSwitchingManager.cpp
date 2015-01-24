@@ -378,6 +378,10 @@ void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
 		m.setAddress("/ram/set_scene");
 	}
 
+	if (m.getAddress() == "/dp/VisEnable"){
+		mVisEnable = (m.getArgAsInt32(0) == 1);
+	}
+	
 	if (m.getAddress() == "/ram/set_scene"){
 		cout << "=-=-=-=-=-=-=-Head -=-=-=-=-=-=-=-=" << endl << endl;
 		int hakoId = getHakoniwaIndex(m.getArgAsString(0));

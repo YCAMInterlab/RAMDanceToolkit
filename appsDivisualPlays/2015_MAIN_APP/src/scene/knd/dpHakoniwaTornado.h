@@ -104,9 +104,9 @@ public:
         
         ramSetViewPort(dpGetFirstScreenViewPort());
         
-        ofPoint a = mMotionExtractor.getPositionAt(0);
-        ofPoint b = mMotionExtractor.getPositionAt(1);
-        ofPoint c = mMotionExtractor.getPositionAt(2);
+        ofPoint a = mMotionExtractor.getPositionAt(0,true);
+        ofPoint b = mMotionExtractor.getPositionAt(1,true);
+        ofPoint c = mMotionExtractor.getPositionAt(2,true);
         
         sendOscToVis(a, b, c);
         
