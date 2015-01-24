@@ -251,6 +251,11 @@ public:
         if(name == "stop")checkStop();
     }
     
+    void onEnabled(){
+        mRotSpeed.set(-0.05,0.0,0.0);
+        mRot.imSet(0,0,0);
+    }
+    
 private:
     ramOscReceiveTag mReceiver;
     static const int CIRCLE_NUM = 5;
