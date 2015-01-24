@@ -383,6 +383,10 @@ void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
 		
 		if (!mVisEnable){
 			refleshSceneforRDTK();
+			matrixSW.setSW(SHUTTER_CHANNEL, 0+5);
+			matrixSW.setSW(SHUTTER_CHANNEL, 1+5);
+			matrixSW.setSW(SHUTTER_CHANNEL, 2+5);
+			matrixSW.setSW(SHUTTER_CHANNEL, 3+5);
 		}
 	}
 	
