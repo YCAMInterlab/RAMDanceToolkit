@@ -54,7 +54,6 @@ enum hakoniwaType{
 	HAKO_FUTURE,
     HAKO_FUTURE_LEG,
     HAKO_ONNOTE,
-
 	HAKO_KIOKU,
 
 	HAKO_TESTA,
@@ -146,6 +145,7 @@ public:
 	int	getHakoniwaIndex(string sceneName);
 	int searchHakoniwaIsActive(hakoniwaType type);
 
+	bool mVisEnable;
 
 	//MultiCasting
 	ofxOscSender sender;

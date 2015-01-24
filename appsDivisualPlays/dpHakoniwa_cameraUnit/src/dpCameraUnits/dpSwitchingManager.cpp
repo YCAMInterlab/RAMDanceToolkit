@@ -170,9 +170,16 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
     hakoniwas.push_back(new hakoniwaPresets());
     hakoniwas.back()->type      = HAKO_ONNOTE;
     hakoniwas.back()->CVPreset  = "OnNote";
-    hakoniwas.back()->sourceCh  = 10;
+	hakoniwas.back()->sourceCh  = SHUTTER_CHANNEL;
     hakoniwas.back()->sceneNames.push_back("H:OnNote");
-    
+
+#pragma mark 記憶
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_KIOKU;
+	hakoniwas.back()->CVPreset	= "Kioku";
+	hakoniwas.back()->sourceCh	= SHUTTER_CHANNEL;
+	hakoniwas.back()->sceneNames.push_back("V:Kioku");
+
 #pragma mark ★テストA
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_TESTA;
@@ -225,6 +232,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
         senderToFloor.setup("192.168.20.6", 10000);
 	}
 
+	mVisEnable = true;
 }
 
 void dpSwitchingManager::update(){
@@ -643,15 +651,17 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 
 
 				if (!hk->getIsVis(j)){
+					//箱庭アウト
 					m1.addIntArg((hk->type % 2 == 0) &&
 								 (searchHakoniwaIsActive(hk->type) > -1));
-					m1.addIntArg(0);
+					m1.addIntArg(1);
 					m1.addIntArg(0);
 				}else{
+					//ビズ
 					m1.addIntArg(mSlots[i].displayIsExist(0) ||
 								 mSlots[i].displayIsExist(1));
-					m1.addIntArg(mSlots[i].displayIsExist(0));
-					m1.addIntArg(mSlots[i].displayIsExist(1));
+					m1.addIntArg(mSlots[i].displayIsExist(0) && mVisEnable);
+					m1.addIntArg(mSlots[i].displayIsExist(1) && mVisEnable);
 				}
 
 				m2.setAddress("/ram/set_scene");
@@ -664,8 +674,8 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 				}else{
 					m2.addIntArg(mSlots[i].displayIsExist(3) ||
 								 mSlots[i].displayIsExist(2));
-					m2.addIntArg(mSlots[i].displayIsExist(3));
-					m2.addIntArg(mSlots[i].displayIsExist(2));
+					m2.addIntArg(mSlots[i].displayIsExist(3) && mVisEnable);
+					m2.addIntArg(mSlots[i].displayIsExist(2) && mVisEnable);
 				}
                 
                 if (hakoniwas[8]->isEnable){
