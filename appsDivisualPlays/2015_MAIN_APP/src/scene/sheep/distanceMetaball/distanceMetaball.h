@@ -12,6 +12,8 @@
 #include "ramMain.h"
 #include "ofxMetaballs.h"
 #include "ramMotionExtractor.h"
+#include "dpConstants.h"
+#include <GLUT/GLUT.h>
 
 class distanceMetaball : public ramBaseScene{
 public:
@@ -39,11 +41,15 @@ private:
 	float radius_low,radius_high;
 	float resolution;
 
+	bool mTest;
 	bool mDrawMEX;
 	bool mDrawMetaball;
 	float mScale;
 	float mSmooth;
 
+	bool mFlipFace;
+	bool mPoints;
+	
 	vector<ofVec3f> pts;
 
 	ofxOscSender* mOscSender;

@@ -182,7 +182,7 @@ private:
     AnalyzeMean mAnalyzeMean;
     AnalyzePixelate mAnalyzePixelate;
     
-    float mValveOpenDuration{0.3f};
+    float mValveOpenDuration{0.4f};
     
     bool mEmergencyStop{false};
     
@@ -196,6 +196,10 @@ private:
     
     float mEnabledTime{0.f};
     
+    float mScoreSensorScale{1.f};
+    
+    float mPrevTimeSceneChanged{0.f};
+    ofBuffer mSceneTimesBuffer;
 };
 
 typedef MasterHakoniwa MH;

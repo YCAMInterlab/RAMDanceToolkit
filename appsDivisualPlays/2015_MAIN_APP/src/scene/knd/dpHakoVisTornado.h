@@ -92,8 +92,6 @@ public:
     
     void draw(){
         
-        ramSetViewPort(dpGetFirstScreenViewPort());
-        
         ofPoint a = mPts[0];
         ofPoint b = mPts[1];
         ofPoint c = mPts[2];
@@ -103,6 +101,8 @@ public:
         float radius;
         
         findCircle(a,b,c,center,normal,radius);
+        
+        ramSetViewPort(dpGetFirstScreenViewPort());
         
         ramBeginCamera();
         
@@ -121,12 +121,18 @@ public:
             mSphere.draw(center,radius,normal);
         
         }
+        
         ramEndCamera();
         
     }
 
     void onDisabled(){
         
+    }
+    
+    void onEnabled(){
+        ramCameraManager::instance().getActiveCamera().setPosition(dpGetRDTKSceneCameraPosition());
+        ramCameraManager::instance().getActiveCamera().lookAt(dpGetRDTKSceneCameraLookAt());
     }
     
 private:

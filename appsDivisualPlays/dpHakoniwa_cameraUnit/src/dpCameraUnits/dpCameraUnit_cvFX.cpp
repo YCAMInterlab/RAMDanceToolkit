@@ -18,7 +18,7 @@ dpCameraUnit_cvFX::dpCameraUnit_cvFX(){
 	mGui.addToggle("BackGround",&mEnableBackground);
 	mGui.addToggle("RunningBack", &mEnableRunningBackground);
 	mGui.addSlider("LearnTime", 0.0, 2000.0, &mParam_RB_LearnTime)->setValue(900.0);
-	mGui.addSlider("Threshold", 0.0, 255.0, &mParam_RB_Threshold)->setValue(10.0);
+	mGui.addSlider("RunThreshold", 0.0, 255.0, &mParam_RB_Threshold)->setValue(10.0);
 	mGui.addToggle("Warp", &mEnableWarpPerspective);
 	mGui.addToggle("Blur", &mEnableBlur);
 	mGui.addSlider("BlurSize", 0.0, 40.0, &mParam_Blur);
@@ -325,24 +325,35 @@ void dpCameraUnit_cvFX::savePreset(string hakoniwaName){
 void dpCameraUnit_cvFX::loadPreset(string hakoniwaName){
 	mGui.loadSettings("Preset_"+hakoniwaName+"/UIPreset.xml");
 	ofxXmlSettings xml;
-	xml.load("Preset_"+hakoniwaName+"/WarpPts.xml");
+	if (!xml.load("Preset_"+hakoniwaName+"/WarpPts.xml")){
+		cout << "Warp XML Load failed" << endl;
+	};
 
-	mUnwarpPts[0].set(0, 0);
-	mUnwarpPts[1].set(mGraySource.getWidth(), 0);
-	mUnwarpPts[2].set(mGraySource.getWidth(), mGraySource.getHeight());
-	mUnwarpPts[3].set(0, mGraySource.getHeight());
+	if (mEnableWarpPerspective){
+		mUnwarpPts[0].set(0, 0);
+		mUnwarpPts[1].set(mGraySource.getWidth(), 0);
+		mUnwarpPts[2].set(mGraySource.getWidth(), mGraySource.getHeight());
+		mUnwarpPts[3].set(0, mGraySource.getHeight());
 
-	mUnwarpPts[0].x = xml.getValue("WARP_"+ofToString(0)+"X", mGraySource.getWidth());
-	mUnwarpPts[0].y = xml.getValue("WARP_"+ofToString(0)+"Y", 0.0);
+		mUnwarpPts[0].x = xml.getValue("WARP_0X", mGraySource.getWidth());
+		mUnwarpPts[0].y = xml.getValue("WARP_0Y", 0.0);
 
-	mUnwarpPts[1].x = xml.getValue("WARP_"+ofToString(0)+"X", mGraySource.getWidth());
-	mUnwarpPts[1].y = xml.getValue("WARP_"+ofToString(0)+"Y", 0.0);
+		mUnwarpPts[1].x = xml.getValue("WARP_1X", mGraySource.getWidth());
+		mUnwarpPts[1].y = xml.getValue("WARP_1Y", 0.0);
 
-	mUnwarpPts[2].x = xml.getValue("WARP_"+ofToString(0)+"X", mGraySource.getWidth());
-	mUnwarpPts[2].y = xml.getValue("WARP_"+ofToString(0)+"Y", mGraySource.getHeight());
+		mUnwarpPts[2].x = xml.getValue("WARP_2X", mGraySource.getWidth());
+		mUnwarpPts[2].y = xml.getValue("WARP_2Y", mGraySource.getHeight());
 
-	mUnwarpPts[3].x = xml.getValue("WARP_"+ofToString(0)+"X", 0.0);
-	mUnwarpPts[3].y = xml.getValue("WARP_"+ofToString(0)+"Y", mGraySource.getHeight());
+		mUnwarpPts[3].x = xml.getValue("WARP_3X", 0.0);
+		mUnwarpPts[3].y = xml.getValue("WARP_3Y", mGraySource.getHeight());
+
+		mEnableWarpPerspective = true;
+		mResetWarpPt = false;
+
+		for (int i = 0;i < 4;i++){
+			cout << mUnwarpPts[i].x << "," << mUnwarpPts[i].y << endl;
+		}
+	}
 
 	if (mEnableBackground){
 		mBackgroundNeedsReflesh = false;

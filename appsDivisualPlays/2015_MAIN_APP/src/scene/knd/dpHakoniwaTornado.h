@@ -51,6 +51,7 @@ public:
     }
     
     void fan(int val){
+        
         ofxOscMessage m;
         m.setAddress("/dp/hakoniwa/tornado/fan");
         m.addIntArg(val);
@@ -59,18 +60,22 @@ public:
     }
     
     void mist(){
+        
         ofxOscMessage m;
         m.setAddress("/dp/hakoniwa/tornado/mist");
         m.addIntArg((int)isMist);
         mBulbSender.sendMessage(m);
+        
     }
     
     void bulb(){
+        
         ofxOscMessage m;
         m.setAddress("/dp/hakoniwa/tornado/bulb");
         m.addIntArg((int)isBulb);
         m.addIntArg((int)isMist);
         mBulbSender.sendMessage(m);
+        
     }
     
     void update(){
@@ -79,10 +84,7 @@ public:
         bulb();
         fan(mFan);
         mSphere.setRad(mDrawRadMin, mDrawRadMax);
-       /* fan();
-        mist();
-        cout << isBulb << endl;
-        bulb();*/
+
     }
     
     void rotateToNormal(ofVec3f normal) {
@@ -102,9 +104,11 @@ public:
         
         ramSetViewPort(dpGetFirstScreenViewPort());
         
-        ofPoint a = mMotionExtractor.getPositionAt(0);
-        ofPoint b = mMotionExtractor.getPositionAt(1);
-        ofPoint c = mMotionExtractor.getPositionAt(2);
+        ofPoint a = mMotionExtractor.getPositionAt(0,true);
+        ofPoint b = mMotionExtractor.getPositionAt(1,true);
+        ofPoint c = mMotionExtractor.getPositionAt(2,true);
+        
+        sendOscToVis(a, b, c);
         
         ofPoint center;
         ofPoint normal;
@@ -125,15 +129,12 @@ public:
         ofTranslate(center);
         rotateToNormal(normal);
         ofNoFill();
-        //ofSetColor(255,0,0);
-        //ofCircle(0, 0, radius);
         ofPopMatrix();
         
         ofSetColor(255,255,255);
         mSphere.draw(center,radius,normal);
         ramEndCamera();
-        
-        sendOscToVis(a, b, c);
+    
     }
     
     void sendOscToVis(ofPoint a,ofPoint b, ofPoint c){
@@ -167,26 +168,25 @@ public:
     }
     
 private:
+    
     ofxOscSender mBulbSender;
     ofxOscSender mFanSender;
+    ofxOscSender mSender[2];
     
     int mRad = 0;
     bool isBulb = false;
     bool isMist = false;
     
-    ramMotionExtractor mMotionExtractor;
-    
-    float mRadMin = 15;
-    float mRadMax = 77;
-    float mMistThresh = 180.0;;
-    float mFan = 170;
-    
-    dpTailSphereController mSphere;
+    float mRadMin = 7.6;
+    float mRadMax = 95;
+    float mMistThresh = 202.0;
+    float mFan = 220;
     
     float mDrawRadMin = 1.0;
     float mDrawRadMax = 12.0;
     
-    ofxOscSender mSender[2];
+    dpTailSphereController mSphere;
+    ramMotionExtractor mMotionExtractor;
 };
 
 #endif

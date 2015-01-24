@@ -12,6 +12,19 @@
 struct : public ramBaseScene {
 	void draw()
 	{
+
+	}
+
+	void drawActor(const ramActor &actor)
+	{
+	}
+	string getName() const { return "Kioku"; }
+} Kioku;
+
+
+struct : public ramBaseScene {
+	void draw()
+	{
 		ofPushStyle();
 		ofEnableAlphaBlending();
 		ofSetColor(ofColor::cyan, 128);

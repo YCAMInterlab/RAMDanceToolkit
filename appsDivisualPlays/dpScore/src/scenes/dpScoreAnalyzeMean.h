@@ -26,9 +26,13 @@ public:
     
     int mPrevScene{0};
     float mPrevSetSceneTime{-60.f};
-    float mMinSetSceneTime{60.f};
+    float mMinSetSceneTime{120.f};
     float mLastUpdateSpan{0.f};
     float mLastFrameTime{0.f};
+    
+    int mWhich{0};
+    bool mWin0{false};
+    bool mWin1{false};
 };
 
 DP_SCORE_NAMESPACE_END

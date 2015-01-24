@@ -52,21 +52,18 @@ public:
             ofxOscMessage m;
             mReceiver.getNextMessage(&m);
             if(m.getAddress() == "/dp/cameraUnit/Struggle/vector/total"){
-              //  cout << m.getArgAsFloat(0) << endl;
+           
                mVecFromCam.set( m.getArgAsFloat(0), m.getArgAsFloat(1));
             }
         }
     }
     
     void update(){
-//        ramSetViewPort(dpGetFirstScreenViewPort());
-        
+
         receiveOsc();
         
         ofSetLineWidth(mLineWidth);
-        
-     //   mVecFromCam.set(ofRandom(-300,300),ofRandom(-300,300));
-        
+
         mVecFromCam.update();
         mDelaunayMesh.addPoint(mVecFromCam,mScaleDrawDelaunay);
         mDelaunayMesh.update();
@@ -75,7 +72,6 @@ public:
     
     void draw(){
 
-       // ofDisableDepthTest();
         ofEnableBlendMode(OF_BLENDMODE_ADD);
         ofPushMatrix();
         ofTranslate(SINGLE_SCREEN_WIDTH * 0.5,SINGLE_SCREEN_HEIGHT * 0.5);
@@ -134,20 +130,20 @@ private:
     
     KezSlidePoint mVecFromCam;
     
-    float mScaleDrawDelaunay = 500.0;
-    float mLineWidth = 4.0;
-    
     ofPlanePrimitive mPlane;
     
     KezDelaunayMeshController mDelaunayMesh;
     
     bool isShowFaces = true;
     bool isRotAfterFinish = true;
-    float mAlphaReducSpeed = 0.5;
     
-    int mOmitNum = 6;
+    float mAlphaReducSpeed = 0.5;
+    float mScaleDrawDelaunay = 500.0;
+    float mLineWidth = 4.0;
     float mThresh = 0.28;
     
+    int mOmitNum = 6;
+   
     ofPoint mRot;
 };
 

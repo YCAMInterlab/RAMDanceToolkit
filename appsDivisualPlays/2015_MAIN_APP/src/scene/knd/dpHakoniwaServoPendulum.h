@@ -21,12 +21,18 @@ public:
         
         ramGetGUI().addSlider("speed", 0.1, 4.0, &mSpeed);
         ramGetGUI().addSlider("range", 0.0, 90, &mRange);
-        ramGetGUI().addSlider("thresh", 0.0, 20.0, &mThresh);
+        ramGetGUI().addSlider("minThresh", 0.0, 20.0, &mMinThresh);
+        ramGetGUI().addSlider("mixThresh", 0.0, RANGE_MAX, &mMaxThresh);
         ramGetGUI().addSlider("length", 0.01, 400.0, &mLength);
         ramGetGUI().addToggle("isRotMode",&isRotMode);
         
         mMotionExtractor.setupControlPanel(this);
         mMotionExtractor.load("motionExt_dpHServoPendulum.xml");
+        
+        int rnd = ofRandom(0,2);
+        
+        if(rnd == 0)mMaxThresh = 38;
+        else mMaxThresh = RANGE_MAX;
         
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoniwaServoPendulum::onPanelChanged);
     }
@@ -47,9 +53,6 @@ public:
     
     void update(){
         
-        
-        float shake = 0.0;//mMotionExtractor.getVelocityAt(0).x * mVelScale;
-        
         if(isRotMode){
             
             if(mMotionExtractor.getIsExist(0)){
@@ -63,7 +66,7 @@ public:
                         ofPoint axis;
                         quat.getRotate(angle, axis);
                      
-                        mRange = angle * 1.0;
+                        mRange = angle;
                         setRange(mRange);
                     }
                 }
@@ -74,9 +77,11 @@ public:
             
                 float val = ofMap((pos1 - pos2).length(),0,mLength,0,90);
                 
-                if(val < mThresh)val = 0.0;
+                if(val < mMinThresh)val = 0.0;
                 
-                setRange(val);//(pos1 - pos2).length() * mScale);
+                if(val > mMaxThresh)val = 0.0;
+                
+                setRange(val);
             
             }
         
@@ -158,6 +163,12 @@ public:
     
 private:
     
+    static const int RANGE_MAX = 90;
+    
+    float mLength = 200.0;
+    float mMinThresh = 7.0;
+    float mMaxThresh = RANGE_MAX;
+    
     float mSpeed = 1.0;
     float mRange = 0.0;
     
@@ -169,10 +180,8 @@ private:
     
     ofxOscSender mSender;
     
-    float mLength = 200.0;
     bool isRotMode = false;
     
-    float mThresh = 3.0;
 };
 
 #endif

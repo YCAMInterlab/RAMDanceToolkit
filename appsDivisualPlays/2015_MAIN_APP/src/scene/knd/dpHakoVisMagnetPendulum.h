@@ -36,12 +36,15 @@ public:
         
         mVecs.clear();
         isRecord = true;
+        mRecordAlpha.set(255);
         
     }
     
     void startPlayback(){
+        
         isRecord = false;
         mPlaybackCounter = 0;
+        mRecordAlpha.set(0);
 
     }
     
@@ -64,19 +67,32 @@ public:
             
         }
         
+   
         mPos.update();
+        mRecordAlpha.update();
+        
     }
     
     void draw(){
        
         ofPushStyle();
-        if(isRecord)ofSetColor(dpColor::MAIN_COLOR);
-        else ofSetColor(255,255,255);
-
-      //  ofSetColor(255,255,255);
+        
+        ofFill();
+        
+        ofSetColor(255,255,255);
+        
+        ofCircle(mPos.x,mPos.y,mRad);
+    
+        ofSetColor(dpColor::MAIN_COLOR,mRecordAlpha.val);
+        ofNoFill();
+        ofCircle(mPos.x,mPos.y,mRad * 2.5);
+        
         ofFill();
         ofCircle(mPos.x,mPos.y,mRad);
+
+        
         ofPopStyle();
+        
       //  cout << mPos.x << endl;
     }
     
@@ -98,6 +114,9 @@ private:
     
     bool isRecord = false;
     bool isRecordOnce = false;
+    
+    KezSlide mRecordAlpha;
+
 };
 
 class dpHakoVisMagnetPendulum : public ramBaseScene{
@@ -126,6 +145,8 @@ public:
         mReceiver.addAddress("/dp/toVis/MagPendulum");
         
         mFlagImg.loadImage("../../../resources/dp_pattern_parts/dot_03_a.png");
+        
+        //mFont.loadFont("../../../resources/fonts/AkkoStd-Thin.otf",FONT_SIZE);
 
     }
     
@@ -149,8 +170,11 @@ public:
             if(m.getAddress() == "/dp/cameraUnit/MagPendulum/contour/boundingRect"){
                 
                 if(m.getArgAsInt32(0) != 0){
-                mCurrentVec.set(ofPoint((m.getArgAsFloat(2) + m.getArgAsFloat(4) * 0.5 - 0.5) * mScale,
-                                        (m.getArgAsFloat(3) + m.getArgAsFloat(5) * 0.5 - 0.5) * mScale));
+                    mCurrentVec.set(ofPoint((m.getArgAsFloat(2) + m.getArgAsFloat(4) * 0.5 - 0.5) * mScale,
+                                            (m.getArgAsFloat(3) + m.getArgAsFloat(5) * 0.5 - 0.5) * mScale));
+                    
+                    mCurrentHead.set(m.getArgAsFloat(2) + m.getArgAsFloat(4) * 0.5,
+                                 m.getArgAsFloat(3) + m.getArgAsFloat(5) * 0.5);
                 }
             }
             
@@ -194,18 +218,25 @@ public:
             ofLine(mCircles[i].getPos(),mCircles[i + mDivX].getPos());
         }
         
-        ofPushStyle();
+        /*ofPushStyle();
         ofSetColor(dpColor::MAIN_COLOR);
         ofNoFill();
         ofCircle(mCircles[mRecordTargetNum].getPos(),100);
-        ofPopStyle();
-
+        ofPopStyle();*/
+        
        for(auto &v:mCircles){
            v.draw();
         }
         
         drawFlag();
         
+    }
+    
+    void drawFont(){
+        ofSetColor(255,255,255);
+        ofPoint center = mCircles[mRecordTargetNum].getPos();
+        mFont.drawString("x:" + ofToString(mCurrentHead.x,2),center.x + 50,center.y - 100);
+        mFont.drawString("y:" + ofToString(mCurrentHead.y,2),center.x + 50,center.y - 100 + FONT_SIZE + 10);
     }
     
     void drawFlag(){
@@ -238,13 +269,19 @@ private:
     
     ramOscReceiveTag mReceiver;
     
-    float mScale = 500.0;
+    float mScale = 700.0;
     
     ofPoint mCurrentVec;
     
     ofImage mFlagImg;
     static const int DANCER_NUM = 3;
     bitset<DANCER_NUM>mFlag;
+    
+    ofTrueTypeFont mFont;
+    
+    ofPoint mCurrentHead;
+    
+    static const int FONT_SIZE = 32;
 };
 
 #endif

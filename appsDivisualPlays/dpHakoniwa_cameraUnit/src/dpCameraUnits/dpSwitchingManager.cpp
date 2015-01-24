@@ -37,7 +37,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_PLINK_OIL;
 	hakoniwas.back()->CVPreset	= "Plink_Oil";
-	hakoniwas.back()->sourceCh	= 3;
+	hakoniwas.back()->sourceCh	= 9;
 	hakoniwas.back()->sceneNames.push_back("H:dpHPLink_Oil");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisPLink_Oil");
 
@@ -63,7 +63,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_THETA;
 	hakoniwas.back()->CVPreset	= "Theta";
-	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sourceCh	= SHUTTER_CHANNEL;
 	hakoniwas.back()->sceneNames.push_back("V:dpVisTheta");
 
 #pragma mark ★色水
@@ -107,7 +107,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->sourceCh	= 10;
 	hakoniwas.back()->sceneNames.push_back("V:dpVisStage");
 
-#pragma mark abare
+#pragma mark 暴れる
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type      = HAKO_STRUGGLE;
 	hakoniwas.back()->CVPreset  = "Struggle";
@@ -135,36 +135,50 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_METABALL;
 	hakoniwas.back()->CVPreset	= "Metaball";
-	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sourceCh	= SHUTTER_CHANNEL;
 	hakoniwas.back()->sceneNames.push_back("V:distanceMetaball");
 
 #pragma mark ライン
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_LINE;
 	hakoniwas.back()->CVPreset	= "Line";
-	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sourceCh	= SHUTTER_CHANNEL;
 	hakoniwas.back()->sceneNames.push_back("V:Line");
 
 #pragma mark フォーポイント
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_FOURPOINT;
 	hakoniwas.back()->CVPreset	= "FourPoint";
-	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sourceCh	= SHUTTER_CHANNEL;
 	hakoniwas.back()->sceneNames.push_back("V:Four Points");
 
 #pragma mark 未来
 	hakoniwas.push_back(new hakoniwaPresets());
     hakoniwas.back()->type      = HAKO_FUTURE;
 	hakoniwas.back()->CVPreset	= "FutureRE";
-	hakoniwas.back()->sourceCh	= 10;
+	hakoniwas.back()->sourceCh	= SHUTTER_CHANNEL;
 	hakoniwas.back()->sceneNames.push_back("V:FutureRE");
     
 #pragma mark Future legacy
     hakoniwas.push_back(new hakoniwaPresets());
     hakoniwas.back()->type      = HAKO_FUTURE_LEG;
     hakoniwas.back()->CVPreset  = "Future";
-    hakoniwas.back()->sourceCh = 10;
+    hakoniwas.back()->sourceCh = SHUTTER_CHANNEL;
     hakoniwas.back()->sceneNames.push_back("V:Future");
+
+#pragma mark onNote
+    hakoniwas.push_back(new hakoniwaPresets());
+    hakoniwas.back()->type      = HAKO_ONNOTE;
+    hakoniwas.back()->CVPreset  = "OnNote";
+	hakoniwas.back()->sourceCh  = SHUTTER_CHANNEL;
+    hakoniwas.back()->sceneNames.push_back("H:OnNote");
+
+#pragma mark 記憶
+	hakoniwas.push_back(new hakoniwaPresets());
+	hakoniwas.back()->type		= HAKO_KIOKU;
+	hakoniwas.back()->CVPreset	= "Kioku";
+	hakoniwas.back()->sourceCh	= SHUTTER_CHANNEL;
+	hakoniwas.back()->sceneNames.push_back("V:Kioku");
 
 #pragma mark ★テストA
 	hakoniwas.push_back(new hakoniwaPresets());
@@ -218,9 +232,22 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
         senderToFloor.setup("192.168.20.6", 10000);
 	}
 
+	mVisEnable = true;
 }
 
 void dpSwitchingManager::update(){
+//	if (ofGetKeyPressed('a')){
+//		ofxOscMessage m;
+//		m.setAddress("/ram/set_scene");
+//		m.addStringArg("dpHPLink_Laser");
+//		m.addIntArg(1);
+//		m.addIntArg(1);
+//		m.addIntArg(1);
+//		receiveOscMessage(m);
+//	}
+	if (ofGetKeyPressed('c')){
+
+	}
 
 	if (ofGetFrameNum() % 15 == 0 && oscListPtr != NULL && totalManage){
 
@@ -624,15 +651,17 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 
 
 				if (!hk->getIsVis(j)){
+					//箱庭アウト
 					m1.addIntArg((hk->type % 2 == 0) &&
 								 (searchHakoniwaIsActive(hk->type) > -1));
-					m1.addIntArg(0);
+					m1.addIntArg(1);
 					m1.addIntArg(0);
 				}else{
+					//ビズ
 					m1.addIntArg(mSlots[i].displayIsExist(0) ||
 								 mSlots[i].displayIsExist(1));
-					m1.addIntArg(mSlots[i].displayIsExist(0));
-					m1.addIntArg(mSlots[i].displayIsExist(1));
+					m1.addIntArg(mSlots[i].displayIsExist(0) && mVisEnable);
+					m1.addIntArg(mSlots[i].displayIsExist(1) && mVisEnable);
 				}
 
 				m2.setAddress("/ram/set_scene");
@@ -645,8 +674,8 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 				}else{
 					m2.addIntArg(mSlots[i].displayIsExist(3) ||
 								 mSlots[i].displayIsExist(2));
-					m2.addIntArg(mSlots[i].displayIsExist(3));
-					m2.addIntArg(mSlots[i].displayIsExist(2));
+					m2.addIntArg(mSlots[i].displayIsExist(3) && mVisEnable);
+					m2.addIntArg(mSlots[i].displayIsExist(2) && mVisEnable);
 				}
                 
                 if (hakoniwas[8]->isEnable){
