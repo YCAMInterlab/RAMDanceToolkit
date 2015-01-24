@@ -24,7 +24,13 @@ public:
         mPos.imSet(mOrigin);
         
         mRecordAlpha.speed = 0.1;
-        mRecordCircleAlpha.speed = 0.16;
+        
+        mHue = dpColor::MAIN_COLOR.getHue();
+        mSaturation = dpColor::MAIN_COLOR.getSaturation();
+        mBrightness = dpColor::MAIN_COLOR.getBrightness();
+        
+        mColor.setHsb(mHue,mSaturation,mBrightness);
+    
     }
     
     void record(ofPoint pt){
@@ -40,7 +46,6 @@ public:
         mVecs.clear();
         isRecord = true;
         mRecordAlpha.set(255);
-        mRecordCircleAlpha.set(255);
         
     }
     
@@ -49,7 +54,6 @@ public:
         isRecord = false;
         mPlaybackCounter = 0;
         mRecordAlpha.set(0);
-        mRecordCircleAlpha.set(0);
 
     }
     
@@ -72,11 +76,12 @@ public:
             
         }
         
-   
         mPos.update();
         mRecordAlpha.update();
-        mRecordCircleAlpha.update();
         
+        mColor.setHue(mHue);
+        mColor.setSaturation((int)(mRecordAlpha.val / 255.0 * mSaturation));
+        mColor.setBrightness(mBrightness);
     }
     
     void draw(){
@@ -84,23 +89,15 @@ public:
         ofPushStyle();
         
         ofFill();
-        
-        ofSetColor(255,255,255);
-        
+        ofSetColor(mColor);
         ofCircle(mPos.x,mPos.y,mRad);
     
         ofSetColor(dpColor::MAIN_COLOR,mRecordAlpha.val);
         ofNoFill();
         ofCircle(mPos.x,mPos.y,mRad * 2.5);
-        
-        ofSetColor(dpColor::MAIN_COLOR,mRecordCircleAlpha.val);
-        ofFill();
-        ofCircle(mPos.x,mPos.y,mRad);
 
-        
         ofPopStyle();
         
-      //  cout << mPos.x << endl;
     }
     
     ofPoint getPos(){
@@ -123,7 +120,12 @@ private:
     bool isRecordOnce = false;
     
     KezSlide mRecordAlpha;
-    KezSlide mRecordCircleAlpha;
+    
+    float mSaturation = 0;
+    float mHue = 0;
+    float mBrightness = 0;
+    
+    ofColor mColor;
 
 };
 
@@ -281,7 +283,7 @@ private:
     
     ramOscReceiveTag mReceiver;
     
-    float mScale = 700.0;
+    float mScale = 800.0;
     
     ofPoint mCurrentVec;
     
