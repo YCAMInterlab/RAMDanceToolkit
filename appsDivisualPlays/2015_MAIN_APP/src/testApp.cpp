@@ -73,6 +73,7 @@ void testApp::setup()
     
     //---
     sceneManager.addScene(dpHEyeBall.getPtr());
+    sceneManager.addScene(dpHEyeBallDancer.getPtr());
     //---
     
 	sceneManager.addScene(metaball.getPtr());

@@ -59,6 +59,7 @@
 #include "magnetLooper.h"
 //
 #include "eyeBall.h"
+#include "eyeBallDancer.h"
 
 //LEGENDARY RDTK Scenes!!!!!!!!
 #include "LineDrawing.h"
@@ -121,6 +122,9 @@ public:
     
     // eyeBall
     eyeBall dpHEyeBall;
+    
+    //eyeBallDancer
+    eyeBallDancer dpHEyeBallDancer;
 
 	//MagPendulum
 	dpHakoniwaMagnetPendulum	magPendulum;
