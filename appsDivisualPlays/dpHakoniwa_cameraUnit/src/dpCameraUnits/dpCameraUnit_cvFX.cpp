@@ -335,7 +335,7 @@ void dpCameraUnit_cvFX::loadPreset(string hakoniwaName){
 		mUnwarpPts[2].set(mGraySource.getWidth(), mGraySource.getHeight());
 		mUnwarpPts[3].set(0, mGraySource.getHeight());
 
-		mUnwarpPts[0].x = xml.getValue("WARP_0X", mGraySource.getWidth());
+		mUnwarpPts[0].x = xml.getValue("WARP_0X", 0.0);
 		mUnwarpPts[0].y = xml.getValue("WARP_0Y", 0.0);
 
 		mUnwarpPts[1].x = xml.getValue("WARP_1X", mGraySource.getWidth());

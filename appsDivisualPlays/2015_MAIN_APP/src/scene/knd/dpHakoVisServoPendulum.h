@@ -120,7 +120,7 @@ public:
     
 	void setupControlPanel(){
         
-        mScale.set(200,100);
+        mScale.set(600,100);
         
         ramGetGUI().addSlider("scaleX", 100.0, 2000.0, &mScale.x);
         ramGetGUI().addSlider("scaleY", 1.0, 2000.0, &mScale.y);

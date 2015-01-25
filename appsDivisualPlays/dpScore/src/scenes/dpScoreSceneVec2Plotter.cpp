@@ -35,7 +35,7 @@ void SceneVec2Plotter::enter()
 {
     dpDebugFunc();
     mCam.enableMouseInput();
-    mCam.setFarClip(_circleNum * kStepZ);
+    mCam.setFarClip(50000.f);
     mEnterTime = ofGetElapsedTimef();
     
     mCircleBuffer.clear();
@@ -63,7 +63,16 @@ void SceneVec2Plotter::update(ofxEventMessage& m)
     if (m.getAddress() == kOscAddrCameraUnitVectorTotal) {
         mVec.x = m.getArgAsFloat(0);
         mVec.y = m.getArgAsFloat(1);
+
+        if (mPrev != mVec) {
+            mPP = mPrev;
+            mPrev = mVec;
+        }
+        else {
+            mVec = (mPP + mPrev) * 0.5f;
+        }
         mCircleBuffer.push_back(mVec);
+        
         while (mCircleBuffer.size()>_circleNum) {
             mCircleBuffer.pop_front();
         }
@@ -77,9 +86,13 @@ void SceneVec2Plotter::draw()
     const float t{ofGetElapsedTimef()-mEnterTime};
     
     mCam.begin();
-    ofRotateZ(t*2.f);
-    ofRotateY(t*3.f);
-    ofRotateX(t*1.f);
+    if (ofGetFrameNum() % 360 == 0) {
+        mRandAngle = randVec3f() * 360.f;
+    }
+    
+    ofRotateZ(t*4.9f + mRandAngle.z);
+    ofRotateY(t*6.1f + mRandAngle.y);
+    ofRotateX(t*2.3f + mRandAngle.x);
     
     for (int i=mCircleBuffer.size()-1; i>=0; i--) {
         ofVec3f v{mCircleBuffer.at(i) * mult};
@@ -90,20 +103,22 @@ void SceneVec2Plotter::draw()
         v.z = (mCircleBuffer.size()-i)*-10.f;
         mCircleVertices.at(i) = v;
         float a{i / (float)mCircleBuffer.size()};
-        a = easeOutExpo(a);
+        a = easeNone(a);
         mCircleColors.at(i).set(1.f, 1.f, 1.f, a * 1.f);
     }
     
     mCircleVbo.updateVertexData(&mCircleVertices.at(0), mCircleVertices.size());
     mCircleVbo.updateColorData(&mCircleColors.at(0), mCircleColors.size());
     
+    glPointSize(4.f);
+    ofSetLineWidth(1.5f);
     mCircleVbo.draw(GL_POINTS, 0, mCircleVertices.size());
     
     for (int i=mCircleBuffer.size()-1; i>=0; i--) {
         mCircleVertices.at(i) = mCircleBuffer.at(i) * mult;
         float a{i / (float)mCircleBuffer.size()};
-        a = easeOutExpo(a);
-        mCircleColors.at(i).set(1.f, 1.f, 1.f, a * 0.9f);
+        a = easeNone(a);
+        mCircleColors.at(i).set(1.f, 1.f, 1.f, a * 0.7f);
     }
     mCircleVbo.updateColorData(&mCircleColors.at(0), mCircleColors.size());
     

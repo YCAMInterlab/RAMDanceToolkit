@@ -15,7 +15,7 @@ DP_SCORE_NAMESPACE_BEGIN
 
 class AnalyzeMean {
 public:
-    void update(ofVec4f mean);
+    void update();
     void draw();
     
     ofVec4f mMean;

@@ -133,6 +133,7 @@
 		929360EA1A6FBCCE00F4C4BD /* ThreePoints.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreePoints.h; sourceTree = "<group>"; };
 		929360EC1A70A98B00F4C4BD /* Future.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Future.h; sourceTree = "<group>"; };
 		929360F31A710FF800F4C4BD /* dpTailSphere.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpTailSphere.h; sourceTree = "<group>"; };
+		92AD8C2E1A747ECB00BB5434 /* DoSomething.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoSomething.h; sourceTree = "<group>"; };
 		92CB5B0D1A666F1F00257334 /* dpHakoniwaServoPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaServoPendulum.h; sourceTree = "<group>"; };
 		92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisBug.h; sourceTree = "<group>"; };
 		92CB5B0F1A666F1F00257334 /* dpHakoVisWorm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisWorm.h; sourceTree = "<group>"; };
@@ -381,6 +382,7 @@
 			children = (
 				920BA3831A67CBA800E4A227 /* KezBlinker.h */,
 				920BA3821A67CB8D00E4A227 /* KezDelaunayMesh.h */,
+				92AD8C2E1A747ECB00BB5434 /* DoSomething.h */,
 				92CB5B131A666F6A00257334 /* dpRibbon.h */,
 				92CB5B141A666F6A00257334 /* dpServoPendulumThread.h */,
 				92CB5B151A666F6A00257334 /* KezSlidePoint.h */,
@@ -522,8 +524,8 @@
 		CF6C55BE1A6F80950042DE07 /* distanceMetaball */ = {
 			isa = PBXGroup;
 			children = (
-				CF6C55C01A6F80950042DE07 /* distanceMetaball.h */,
 				CF6C55BF1A6F80950042DE07 /* distanceMetaball.cpp */,
+				CF6C55C01A6F80950042DE07 /* distanceMetaball.h */,
 				CF6C55C11A6F80950042DE07 /* ofxMetaballs */,
 			);
 			path = distanceMetaball;
