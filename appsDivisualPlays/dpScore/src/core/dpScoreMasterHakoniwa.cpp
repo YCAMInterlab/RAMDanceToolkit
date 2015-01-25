@@ -187,6 +187,7 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     pixelataTab->addSlider("Min Time", 0.1f, 60.f * 3.f, &mAnalyzePixelate.mMinSetSceneTime, w - kMargin, lineH);
     pixelataTab->addSlider("Do Something Limit", 1000.f, 100000.f, &mAnalyzePixelate.mDoSomethingLimit, w - kMargin, lineH);
     pixelataTab->addToggle("Do Something", &mAnalyzePixelate.mDoSomething);
+    pixelataTab->addToggle("Enable Do Something", &mAnalyzePixelate.mEnableDoSomething);
     tabbar->addCanvas(pixelataTab);
     
     tabbar->addSpacer(w, 1.f);

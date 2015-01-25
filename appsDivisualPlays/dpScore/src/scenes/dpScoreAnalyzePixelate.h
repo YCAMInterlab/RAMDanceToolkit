@@ -48,6 +48,7 @@ public:
     bool mWin0{false};
     bool mWin1{false};
     bool mDoSomething{false};
+    bool mEnableDoSomething{false};
     bool mMaster{false};
     
 };

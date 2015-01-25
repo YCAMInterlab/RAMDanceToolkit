@@ -56,7 +56,7 @@ void AnalyzePixelate::updateColor(Color color, ofxEventMessage& m)
 void AnalyzePixelate::update()
 {
     if (mDoSomething) {
-        getMH().doSomething(0);
+        if (mEnableDoSomething) getMH().doSomething(0);
         mDoSomething = false;
     }
     
