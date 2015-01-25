@@ -491,7 +491,7 @@ void dpSwitchingManager::SelectHakoniwa(hakoniwaType type, int slot){
 		mSlots[targCvSlot].targetDisplay.push_back(int(slot));
 
 		if (!isSlave){
-			if (targCvSlot == 0 || targCvSlot == 1){
+			if (targCvSlot == 0 || targCvSlot == 1 || targCvSlot == 2){
 				FXPtr[targCvSlot]		.loadPreset(mSlots[targCvSlot].presetFile);
 				AnalysisPtr[targCvSlot]	.loadPreset(mSlots[targCvSlot].presetFile);
 				for (int i = 0;i < 4;i++)
