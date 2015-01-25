@@ -87,6 +87,7 @@ dpCameraUnit_cvAnalysis::dpCameraUnit_cvAnalysis(){
 	mParamCF_MaxArea = 1000.0;
 	mParamCF_MinArea = 50.0;
 
+    loadDelay = 0;
 }
 
 dpCameraUnit_cvAnalysis::~dpCameraUnit_cvAnalysis(){
@@ -279,12 +280,13 @@ void dpCameraUnit_cvAnalysis::update(ofImage &pixColor, ofImage &pixGray,bool is
 	}
 
 #pragma mark PyrLK
+    loadDelay++;
 	if (mEnableOptFlow){
-		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 5.0f) &&
-			(ofxCv::mean(ofxCv::toCv(pixGray))[0] < 250.0f) &&
+		if ((ofxCv::mean(ofxCv::toCv(pixGray))[0] > 3.0f) &&
+			(ofxCv::mean(ofxCv::toCv(pixGray))[0] < 200.0f) &&
 			(isFrameNew)){
 			float f = ofxCv::mean(ofxCv::toCv(pixGray))[0];
-			mOptFlow.calcOpticalFlow(pixGray);
+            if (loadDelay > 40) mOptFlow.calcOpticalFlow(pixGray);
 		}
 		
 		if ((ofGetFrameNum() % 150 == 0) ||
@@ -499,4 +501,5 @@ void dpCameraUnit_cvAnalysis::loadPreset(string hakoniwaName){
 	ofxUITextInput* ti = ((ofxUITextInput*)(mGui.getWidget("hakoniwaName")));
 	hakoniwa_name = ti->getTextString();
 
+    loadDelay = 0;
 }

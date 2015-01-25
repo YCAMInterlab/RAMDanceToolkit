@@ -119,7 +119,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.push_back(new hakoniwaPresets());
 	hakoniwas.back()->type		= HAKO_GEAR;
 	hakoniwas.back()->CVPreset	= "Gear";
-	hakoniwas.back()->sourceCh	= 6;
+	hakoniwas.back()->sourceCh	= SHUTTER_CHANNEL;
 	hakoniwas.back()->sceneNames.push_back("H:dpHGearMove");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisGearMove");
 
@@ -170,7 +170,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
     hakoniwas.push_back(new hakoniwaPresets());
     hakoniwas.back()->type      = HAKO_ONNOTE;
     hakoniwas.back()->CVPreset  = "OnNote";
-	hakoniwas.back()->sourceCh  = SHUTTER_CHANNEL;
+	hakoniwas.back()->sourceCh  = 10;
     hakoniwas.back()->sceneNames.push_back("H:OnNote");
 
 #pragma mark あいボールダンサー
