@@ -129,6 +129,7 @@ public:
         ofTranslate(center);
         rotateToNormal(normal);
         ofNoFill();
+        ofCircle(0,0,radius,radius);
         ofPopMatrix();
         
         ofSetColor(255,255,255);

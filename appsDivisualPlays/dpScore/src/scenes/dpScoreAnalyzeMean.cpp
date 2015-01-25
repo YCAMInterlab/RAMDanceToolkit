@@ -11,10 +11,8 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-void AnalyzeMean::update(ofVec4f mean)
-{
-    mMean = mean;
-    
+void AnalyzeMean::update()
+{    
     const float t{ofGetElapsedTimef()};
     mLastUpdateSpan = t - mLastFrameTime;
     mLastFrameTime = t;

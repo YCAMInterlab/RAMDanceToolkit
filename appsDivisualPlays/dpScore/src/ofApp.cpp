@@ -163,7 +163,7 @@ void ofApp::setup()
     
     //mSceneManager.change(3);
     mSceneManager.change("black");
-    mSceneManager.change<SceneCorrelation>();
+    mSceneManager.change<SceneVec2Plotter>();
     
     mSceneManager.getTabBar()->setVisible(false);
 #endif
@@ -447,7 +447,7 @@ void ofApp::draw()
         ofRect(ofGetWindowRect());
         ofPopStyle();
     }
-    
+        
     OFX_END_EXCEPTION_HANDLING
 }
 

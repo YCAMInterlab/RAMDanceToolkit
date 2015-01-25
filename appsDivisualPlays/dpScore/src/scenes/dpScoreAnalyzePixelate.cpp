@@ -104,9 +104,7 @@ void AnalyzePixelate::update()
 
 void AnalyzePixelate::draw()
 {
-OFX_BEGIN_EXCEPTION_HANDLING
-    update();
-    
+OFX_BEGIN_EXCEPTION_HANDLING    
     const float t{ofGetElapsedTimef()};
     
     ofPushStyle();
