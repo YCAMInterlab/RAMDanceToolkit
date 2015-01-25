@@ -522,8 +522,8 @@
 		CF6C55BE1A6F80950042DE07 /* distanceMetaball */ = {
 			isa = PBXGroup;
 			children = (
-				CF6C55BF1A6F80950042DE07 /* distanceMetaball.cpp */,
 				CF6C55C01A6F80950042DE07 /* distanceMetaball.h */,
+				CF6C55BF1A6F80950042DE07 /* distanceMetaball.cpp */,
 				CF6C55C11A6F80950042DE07 /* ofxMetaballs */,
 			);
 			path = distanceMetaball;
