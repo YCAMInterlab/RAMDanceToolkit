@@ -32,6 +32,7 @@ public:
             
             if(m.getAddress() == "/ram/do_something"){
                 start();
+                mBeginTime = ofGetElapsedTimef();
             }
         }
     }
@@ -40,12 +41,14 @@ public:
         
         receiveOsc();
         
-        if(enable && ofGetFrameNum() % 5 == 0){
+        if(enable){
             
-            isDraw = !isDraw;
             mLife--;
             
-            mStrCounter++;
+            float elapsed = (ofGetElapsedTimef() - mBeginTime);
+            
+            mStrCounter = ofMap(elapsed,0,1.0,0,mStr.size(),true);
+            
             if(mStrCounter > mStr.size())mStrCounter = mStr.size();
         }
         
@@ -57,6 +60,7 @@ public:
             ofSetColor(255,255,255);
             string str = mStr.substr(0,mStrCounter);
             mFont.drawString(ofToString(str),190,SINGLE_SCREEN_HEIGHT * 0.5 + FONT_SIZE * 0.25);
+            mFont.drawString(ofToString(str),190 + SINGLE_SCREEN_WIDTH,SINGLE_SCREEN_HEIGHT * 0.5 + FONT_SIZE * 0.25);
         }
     }
     
@@ -64,7 +68,7 @@ private:
     ofTrueTypeFont mFont;
     bool enable = false;
     
-    static const int LIFE = 600;
+    static const int LIFE = 1800;
     int mLife = LIFE;
     
     static const int FONT_SIZE = 200;
@@ -73,6 +77,8 @@ private:
     ramOscReceiveTag mReceiver;
     string mStr;
     int mStrCounter = 0;
+    
+    float mBeginTime;
 };
 
 #endif
