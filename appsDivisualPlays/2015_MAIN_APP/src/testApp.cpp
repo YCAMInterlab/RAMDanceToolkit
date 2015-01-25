@@ -92,18 +92,20 @@ void testApp::setup()
 	sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
 
     sceneManager.setShowAllActors(false);
+    
+    doSomething.setup();
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-	
+	doSomething.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	
+	doSomething.draw();
 }
 
 
