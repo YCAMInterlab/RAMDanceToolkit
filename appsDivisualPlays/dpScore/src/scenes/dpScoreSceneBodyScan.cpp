@@ -161,7 +161,7 @@ void SceneBodyScan::draw()
 {
     const float time{ofGetElapsedTimef() - mEnterTime};
     
-    const float pTotal{12.f};
+    const float pTotal{14.f};
     const float p0{10.f};
     const float p1{pTotal - p0};
     const float phase{::fmodf(time, pTotal)};
@@ -207,8 +207,9 @@ void SceneBodyScan::draw()
         mCam.end();
     }
     else {
-        const float t{phase - p0};
-        const int joint{(int)(t / p1 * ofxMot::NUM_JOINTS)};
+        const float span{p1 * 0.5f};
+        const float t{::fmodf(phase - p0, span)};
+        const int joint{(int)(t / span * ofxMot::NUM_JOINTS)};
         for (int i=0; i<getNumSkeletons(); i++) {
             auto& n = getSkeleton(i)->getJoint(joint);
             mCam.begin();
