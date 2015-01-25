@@ -55,6 +55,11 @@ void AnalyzePixelate::updateColor(Color color, ofxEventMessage& m)
 
 void AnalyzePixelate::update()
 {
+    if (mDoSomething) {
+        getMH().doSomething(0);
+        mDoSomething = false;
+    }
+    
     const float t{ofGetElapsedTimef()};
     
     const int prevR{mNumR};
@@ -83,22 +88,30 @@ void AnalyzePixelate::update()
     
     if (t < mPrevSetSceneTime + mMinSetSceneTime) return;
     
-    if (mTotalDiff.f >= mLimit) {
-        mWin0  = (mTotalDiff.i & 0b00000001) >> 0;
-        mWin1  = (mTotalDiff.i & 0b00000010) >> 1;
-        
-        const int r  = (mDiffR.i & 0b00111100) >> 2;
-        const int g  = (mDiffG.i & 0b00111100) >> 2;
-        const int b  = (mDiffB.i & 0b00111100) >> 2;
-        mWhich = r + g + b;
-        if (getMH().getUniqueScenes().empty() == false) {
-            const int scene{(int)(mWhich % getMH().getUniqueScenes().size())};
-            const int score{(int)(mWhich % getMH().getNumUniqueScores())};
-            getMH().setUniqueScene(scene, mWin0, mWin1);
-            getMH().setUniqueScore(score);
-            mPrevSetSceneTime = t;
+    if (mMaster) {
+        if (mTotalDiff.f >= mLimit) {
+            mWin0  = (mTotalDiff.i & 0b00000001) >> 0;
+            mWin1  = (mTotalDiff.i & 0b00000010) >> 1;
+            
+            const int r  = (mDiffR.i & 0b00111100) >> 2;
+            const int g  = (mDiffG.i & 0b00111100) >> 2;
+            const int b  = (mDiffB.i & 0b00111100) >> 2;
+            mWhich = r + g + b;
+            if (getMH().getUniqueScenes().empty() == false) {
+                const int scene{(int)(mWhich % getMH().getUniqueScenes().size())};
+                const int score{(int)(mWhich % getMH().getNumUniqueScores())};
+                getMH().setUniqueScene(scene, mWin0, mWin1);
+                getMH().setUniqueScore(score);
+                mPrevSetSceneTime = t;
+            }
+            mDiffR.f = mDiffG.f = mDiffB.f = 0.f;
         }
-        mDiffR.f = mDiffG.f = mDiffB.f = 0.f;
+    }
+    else {
+        if (mTotalDiff.f >= mDoSomethingLimit) {
+            mDoSomething = true;
+            mDiffR.f = mDiffG.f = mDiffB.f = 0.f;
+        }
     }
 }
 
@@ -140,11 +153,18 @@ OFX_BEGIN_EXCEPTION_HANDLING
     alignedTranslate(0.f, MH::kTextSpacing);
     stringstream ss;
     ss << fixed << setprecision(1)
+    << "master    : " << mMaster << endl
     << "scene span: " << t - mPrevSetSceneTime << endl
     << "total diff: " << mTotalDiff.f << endl
     << "RGB       : " << mNumR << ", " << mNumG << ", " << mNumB << endl
     << "diff      : " << mDiffR.f << ", " << mDiffG.f << ", " << mDiffB.f << endl
     << "gen       : " << mWhich << ", " << mWin0 << ", " << mWin1;
+    ofDrawBitmapString(ss.str(), ofPoint::zero());
+    alignedTranslate(0.f, MH::kTextSpacing * 7.f);
+    mDoSomething ? ofSetColor(color::kMain) : ofSetColor(MH::kTextColor);
+    ss.str("");
+    ss << boolalpha
+    << "do something: " << mTotalDiff.f << " / " << mDoSomethingLimit;
     ofDrawBitmapString(ss.str(), ofPoint::zero());
     ofPopMatrix();
     
