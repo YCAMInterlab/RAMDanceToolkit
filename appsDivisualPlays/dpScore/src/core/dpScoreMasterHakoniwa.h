@@ -103,6 +103,7 @@ public:
     static const int kPortNumberScore;
     
     static const string kOscAddrRamSetScene;
+    static const string kOscAddrRamDoSomething;
     
     static const string kScoreBlack;
     
@@ -181,7 +182,6 @@ private:
     int mCurrentScoreComplexity{0};
     int mMaxComplexity{0};
     
-    AnalyzeType mAnalyzeType{AnalyzeType::Mean};
     AnalyzeMean mAnalyzeMean;
     AnalyzePixelate mAnalyzePixelate;
     

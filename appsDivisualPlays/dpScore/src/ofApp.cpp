@@ -163,7 +163,7 @@ void ofApp::setup()
     
     //mSceneManager.change(3);
     mSceneManager.change("black");
-    mSceneManager.change<SceneVec2Plotter>();
+    //mSceneManager.change<SceneVec2Plotter>();
     
     mSceneManager.getTabBar()->setVisible(false);
 #endif

@@ -27,22 +27,24 @@ void AnalyzeMean::update()
     
     if (t < mPrevSetSceneTime + mMinSetSceneTime) return;
     
-    if (mTotalAddition.f >= mMeanLimit) {
-        mWin0  = (mTotalAddition.i & 0b00000001) >> 0;
-        mWin1  = (mTotalAddition.i & 0b00000010) >> 1;
-        mWhich  = (mTotalAddition.i & 0b00111100) >> 2;
-        
-        if (getMH().getUniqueScenes().empty() == false) {
-            const int scene{(int)(mWhich % getMH().getUniqueScenes().size())};
-            const int score{(int)(mWhich % getMH().getNumUniqueScores())};
-            getMH().setUniqueScene(scene, mWin0, mWin1);
-            getMH().setUniqueScore(score);
-            mPrevScene = scene;
-            mPrevSetSceneTime = t;
-        }
-        
-        for (int i=0; i<mMeanAddtion.DIM; i++) {
-            mMeanAddtion[i] = 0.f;
+    if (mMaster) {
+        if (mTotalAddition.f >= mMeanLimit) {
+            mWin0  = (mTotalAddition.i & 0b00000001) >> 0;
+            mWin1  = (mTotalAddition.i & 0b00000010) >> 1;
+            mWhich  = (mTotalAddition.i & 0b00111100) >> 2;
+            
+            if (getMH().getUniqueScenes().empty() == false) {
+                const int scene{(int)(mWhich % getMH().getUniqueScenes().size())};
+                const int score{(int)(mWhich % getMH().getNumUniqueScores())};
+                getMH().setUniqueScene(scene, mWin0, mWin1);
+                getMH().setUniqueScore(score);
+                mPrevScene = scene;
+                mPrevSetSceneTime = t;
+            }
+            
+            for (int i=0; i<mMeanAddtion.DIM; i++) {
+                mMeanAddtion[i] = 0.f;
+            }
         }
     }
 }
@@ -79,6 +81,7 @@ void AnalyzeMean::draw()
     alignedTranslate(0.f, MH::kTextSpacing);
     stringstream ss;
     ss << fixed
+    << "master    : " << mMaster << endl
     << "data span : " << setprecision(3) << mLastUpdateSpan << endl
     << "scene span: " << setprecision(1) << t - mPrevSetSceneTime << endl
     << "total add : " << setprecision(3) << mTotalAddition.f << endl
