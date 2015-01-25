@@ -40,12 +40,11 @@ public:
         
         receiveOsc();
         
-        if(enable && ofGetFrameNum() % 5 == 0){
+        if(enable){
             
-            isDraw = !isDraw;
             mLife--;
             
-            mStrCounter++;
+            if(ofGetFrameNum() % 5 == 0)mStrCounter++;
             if(mStrCounter > mStr.size())mStrCounter = mStr.size();
         }
         
@@ -65,7 +64,7 @@ private:
     ofTrueTypeFont mFont;
     bool enable = false;
     
-    static const int LIFE = 600;
+    static const int LIFE = 1800;
     int mLife = LIFE;
     
     static const int FONT_SIZE = 200;
