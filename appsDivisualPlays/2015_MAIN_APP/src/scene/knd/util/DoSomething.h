@@ -32,6 +32,7 @@ public:
             
             if(m.getAddress() == "/ram/do_something"){
                 start();
+                mBeginTime = ofGetElapsedTimef();
             }
         }
     }
@@ -44,7 +45,10 @@ public:
             
             mLife--;
             
-            if(ofGetFrameNum() % 5 == 0)mStrCounter++;
+            float elapsed = (ofGetElapsedTimef() - mBeginTime);
+            
+            mStrCounter = ofMap(elapsed,0,1.0,0,mStr.size(),true);
+            
             if(mStrCounter > mStr.size())mStrCounter = mStr.size();
         }
         
@@ -73,6 +77,8 @@ private:
     ramOscReceiveTag mReceiver;
     string mStr;
     int mStrCounter = 0;
+    
+    float mBeginTime;
 };
 
 #endif
