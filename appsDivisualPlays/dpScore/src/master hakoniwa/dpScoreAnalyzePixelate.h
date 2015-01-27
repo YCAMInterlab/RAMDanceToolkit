@@ -42,7 +42,7 @@ public:
     float mMinSetSceneTime{90.f};
     float mLimit{30.f};
     floatInt mTotalDiff{0.f};
-    float mDoSomethingLimit{10000.f};
+    float mDoSomethingLimit{120.f};
     
     int mWhich{0};
     bool mWin0{false};

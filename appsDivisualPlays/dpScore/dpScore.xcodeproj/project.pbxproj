@@ -797,12 +797,12 @@
 		D24366041A777037001AFA13 /* master hakoniwa */ = {
 			isa = PBXGroup;
 			children = (
+				D24366091A777037001AFA13 /* dpScoreMasterHakoniwa.cpp */,
+				D243660A1A777037001AFA13 /* dpScoreMasterHakoniwa.h */,
 				D24366051A777037001AFA13 /* dpScoreAnalyzeMean.cpp */,
 				D24366061A777037001AFA13 /* dpScoreAnalyzeMean.h */,
 				D24366071A777037001AFA13 /* dpScoreAnalyzePixelate.cpp */,
 				D24366081A777037001AFA13 /* dpScoreAnalyzePixelate.h */,
-				D24366091A777037001AFA13 /* dpScoreMasterHakoniwa.cpp */,
-				D243660A1A777037001AFA13 /* dpScoreMasterHakoniwa.h */,
 				D243660B1A777037001AFA13 /* dpScoreSceneMasterDecrement.cpp */,
 				D243660C1A777037001AFA13 /* dpScoreSceneMasterDecrement.h */,
 				D243660D1A777037001AFA13 /* dpScoreSceneMasterIncrement.cpp */,
