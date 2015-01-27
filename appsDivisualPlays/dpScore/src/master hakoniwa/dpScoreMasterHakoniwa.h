@@ -77,10 +77,12 @@ public:
     constexpr static const float kTextSpacing{12.f};
     constexpr static const float kMargin{5.f};
     constexpr static const float kLineWidth{320.f};
+    constexpr static const float kLineHeight{12.f};
     
     constexpr static const int kUpdateFrames{10};
     
     constexpr static const float kGuiWidth{250.f};
+    constexpr static const float kGuiHeight{400.f};
     
     static const int kValvePins[];
     static const int kPumpPins[];
