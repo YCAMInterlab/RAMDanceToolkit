@@ -38,14 +38,18 @@ public:
     floatInt mDiffG{0.f};
     floatInt mDiffB{0.f};
     
-    float mPrevSetSceneTime{-60.f};
-    float mMinSetSceneTime{120.f};
+    float mPrevSetSceneTime{-90.f};
+    float mMinSetSceneTime{90.f};
     float mLimit{30.f};
     floatInt mTotalDiff{0.f};
+    float mDoSomethingLimit{10000.f};
     
     int mWhich{0};
     bool mWin0{false};
     bool mWin1{false};
+    bool mDoSomething{false};
+    bool mEnableDoSomething{false};
+    bool mMaster{false};
     
 };
 

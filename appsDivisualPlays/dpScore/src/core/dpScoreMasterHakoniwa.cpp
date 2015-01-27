@@ -31,6 +31,7 @@ const string MH::kHostNameScore{"192.168.20.11"};
 const int MH::kPortNumberScore{10000};
 
 const string MH::kOscAddrRamSetScene{"/ram/set_scene"};
+const string MH::kOscAddrRamDoSomething{"/ram/do_something"};
 
 const string MH::kScoreBlack{"black"};
 
@@ -101,14 +102,13 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     presetNames.push_back("Intro");
     presetNames.push_back("Maestro");
     presetNames.push_back("Outro");
-    presetNames.push_back("Backstage Tour");
     tabbar->addRadio("Presets", presetNames);
     tabbar->addSpacer(w, 1.f);
     tabbar->addLabel("[OSC]", OFX_UI_FONT_SMALL);
-    tabbar->addToggle("Send OSC to RAM Dance Tool Kit", &mEnableOscOutRDTK);
-    tabbar->addToggle("Send OSC to Master Hakoniwa", &mEnableOscOutMH);
-    tabbar->addToggle("Send OSC to Score", &mEnableOscOutScore);
-    tabbar->addToggle("Receive OSC from CameraUnit", &mEnableCameraUnit);
+    tabbar->addToggle("Enable OSC to RAM DTK", &mEnableOscOutRDTK);
+    tabbar->addToggle("Enable OSC to Master Hakoniwa", &mEnableOscOutMH);
+    tabbar->addToggle("Enable OSC to Score", &mEnableOscOutScore);
+    tabbar->addToggle("Change Scene with CameraUnit", &mEnableCameraUnit);
     tabbar->addToggle("Open Valve with MOTIONER", &mEnableMotioner);
     tabbar->addSpacer(w, 1.f);
     tabbar->addLabel("[RAM Dance Tool Kit]", OFX_UI_FONT_SMALL);
@@ -173,7 +173,7 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     meanTab->addLabel("Mean Settings", OFX_UI_FONT_SMALL);
     meanTab->addSpacer();
     meanTab->addSlider("Limit", 0.1f, 100.f, &mAnalyzeMean.mMeanLimit, w - kMargin, lineH);
-    meanTab->addSlider("Min time", 0.1f, 60.f * 3.f, &mAnalyzeMean.mMinSetSceneTime, w - kMargin, lineH);
+    meanTab->addSlider("Min Time", 0.1f, 60.f * 3.f, &mAnalyzeMean.mMinSetSceneTime, w - kMargin, lineH);
     tabbar->addCanvas(meanTab);
     
     ofxUICanvas* pixelataTab{new ofxUICanvas};
@@ -184,7 +184,10 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     pixelataTab->addLabel("Pixelate Settings", OFX_UI_FONT_SMALL);
     pixelataTab->addSpacer();
     pixelataTab->addSlider("Limit", 0.1f, 100.f, &mAnalyzePixelate.mLimit, w - kMargin, lineH);
-    pixelataTab->addSlider("Min time", 0.1f, 60.f * 3.f, &mAnalyzePixelate.mMinSetSceneTime, w - kMargin, lineH);
+    pixelataTab->addSlider("Min Time", 0.1f, 60.f * 3.f, &mAnalyzePixelate.mMinSetSceneTime, w - kMargin, lineH);
+    pixelataTab->addSlider("Do Something Limit", 1000.f, 100000.f, &mAnalyzePixelate.mDoSomethingLimit, w - kMargin, lineH);
+    pixelataTab->addToggle("Do Something", &mAnalyzePixelate.mDoSomething);
+    pixelataTab->addToggle("Enable Do Something", &mAnalyzePixelate.mEnableDoSomething);
     tabbar->addCanvas(pixelataTab);
     
     tabbar->addSpacer(w, 1.f);
@@ -291,6 +294,9 @@ void MasterHakoniwa::initialize()
     
     xml.popTag();
     
+    mAnalyzePixelate.mMaster = false;
+    mAnalyzeMean.mMaster = true;
+    
     ofAddListener(ofxMot::drawSkeletonEvent,
                   this,
                   &MasterHakoniwa::onDrawSkeleton);
@@ -329,6 +335,11 @@ void MasterHakoniwa::update()
     for (int i=0; i<kNumPumpPins; i++) {
         mPumps[i].update(this);
     }
+    
+    if (mEnableCameraUnit) {
+        mAnalyzeMean.update();
+        mAnalyzePixelate.update();
+    }
 }
 
 void MasterHakoniwa::updateCameraUnit(ofxEventMessage& m)
@@ -339,22 +350,17 @@ void MasterHakoniwa::updateCameraUnit(ofxEventMessage& m)
             for (int i=0; i<ofVec4f::DIM; i++) {
                 mean[i] = m.getArgAsInt32(i);
             }
-            if (mEnableCameraUnit && mAnalyzeType == AnalyzeType::Mean) {
-                mAnalyzeMean.update(mean);
-            }
+            mAnalyzeMean.mMean = mean;
         }
     }
     else if (m.getAddress() == kOscAddrCameraUnitPixelateR) {
-        if (mEnableCameraUnit)
-            mAnalyzePixelate.updateColor(AnalyzePixelate::Color::R, m);
+        mAnalyzePixelate.updateColor(AnalyzePixelate::Color::R, m);
     }
     else if (m.getAddress() == kOscAddrCameraUnitPixelateG) {
-        if (mEnableCameraUnit)
-            mAnalyzePixelate.updateColor(AnalyzePixelate::Color::G, m);
+        mAnalyzePixelate.updateColor(AnalyzePixelate::Color::G, m);
     }
     else if (m.getAddress() == kOscAddrCameraUnitPixelateB) {
-        if (mEnableCameraUnit)
-            mAnalyzePixelate.updateColor(AnalyzePixelate::Color::B, m);
+        mAnalyzePixelate.updateColor(AnalyzePixelate::Color::B, m);
     }
 }
 
@@ -524,7 +530,7 @@ void MasterHakoniwa::draw()
     mAnalyzeMean.draw();
     ofPopMatrix();
     
-    alignedTranslate(0.f, kTextSpacing * 10.f);
+    alignedTranslate(0.f, kTextSpacing * 12.f);
     
     ofPushMatrix();
     mAnalyzePixelate.draw();
@@ -749,7 +755,9 @@ void MasterHakoniwa::sendChangeScore(const string& name, bool maintainSceneNames
     m.addStringArg(name);
     mCurrentScore = name;
     
-    if (mCurrentScore == mScoreCorrelation || mCurrentScore == kScoreBlack)
+    if (mAllOffScene)
+        maintainSceneNames = true;
+    else if (mCurrentScore == mScoreCorrelation || mCurrentScore == kScoreBlack)
         maintainSceneNames = false;
     
     if (maintainSceneNames) {
@@ -815,11 +823,13 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
         auto* radio = static_cast<ofxUIRadio*>(e.widget);
         const auto& toggleName = radio->getActiveName();
         if (toggleName == "Use Mean") {
-            mAnalyzeType = AnalyzeType::Mean;
+            mAnalyzeMean.mMaster = true;
+            mAnalyzePixelate.mMaster = false;
             ofLogNotice() << "Cnahged analyze type to mean";
         }
         else if (toggleName == "Use Pixelate") {
-            mAnalyzeType = AnalyzeType::Pixelate;
+            mAnalyzeMean.mMaster = false;
+            mAnalyzePixelate.mMaster = true;
             ofLogNotice() << "Cnahged analyze type to pixelate";
         }
     }
@@ -846,25 +856,15 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
         auto* radio = static_cast<ofxUIRadio*>(e.widget);
         const auto& toggleName = radio->getActiveName();
         if (radio->getActive()->getValue()) {
-            if (toggleName == "Backstage Tour") {
-                mEnableOscOutMH = false;
-                mEnableOscOutRDTK = true;
-                mEnableMotioner = false;
-                mEnableCameraUnit = true;
-                mEnableOscOutScore = true;
-                mEnableShowHakoniwaTitle = true;
-                mAnalyzeType = AnalyzeType::Mean;
-                mAnalyzeMean.mMeanLimit = 0.1f;
-                mAnalyzeMean.mMinSetSceneTime = 120.f;
-            }
-            else if (toggleName == "Maestro") {
+            if (toggleName == "Maestro") {
                 mEnableOscOutMH = true;
                 mEnableOscOutRDTK = true;
                 mEnableMotioner = true;
                 mEnableCameraUnit = true;
                 mEnableOscOutScore = true;
                 mEnableShowHakoniwaTitle = true;
-                mAnalyzeType = AnalyzeType::Mean;
+                mAnalyzeMean.mMaster = true;
+                mAnalyzePixelate.mMaster = false;
                 mAnalyzeMean.mMeanLimit = 10.f;
                 mAnalyzeMean.mMinSetSceneTime = 90.f;
             }
@@ -875,6 +875,8 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
                 mEnableCameraUnit = false;
                 mEnableOscOutScore = true;
                 mEnableShowHakoniwaTitle = false;
+                mAnalyzeMean.mMaster = true;
+                mAnalyzePixelate.mMaster = false;
                 sendChangeScore("dp::score::SceneVec2SimpleGraph");
                 
                 mSceneTimesBuffer.clear();
@@ -886,7 +888,8 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
                 mEnableCameraUnit = true;
                 mEnableOscOutScore = true;
                 mEnableShowHakoniwaTitle = false;
-                mAnalyzeType = AnalyzeType::Mean;
+                mAnalyzeMean.mMaster = true;
+                mAnalyzePixelate.mMaster = false;
                 mAnalyzeMean.mMeanLimit = 3.f;
                 mAnalyzeMean.mMinSetSceneTime = 30.f;
                 
@@ -907,6 +910,20 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
             m.addFloatArg(value);
             mScoreOscSender.sendMessage(m);
         }
+    }
+}
+
+void MasterHakoniwa::doSomething(int rand)
+{
+    ofxOscMessage m;
+    m.setAddress(kOscAddrRamDoSomething);
+    m.addIntArg(rand);
+    
+    if (mEnableOscOutRDTK) {
+        mCameraUnitOscSender.sendMessage(m);
+    }
+    if (mEnableOscOutScore) {
+        mScoreOscSender.sendMessage(m);
     }
 }
 

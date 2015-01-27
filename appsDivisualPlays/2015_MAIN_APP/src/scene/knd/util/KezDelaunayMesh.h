@@ -28,7 +28,7 @@ public:
         setBitset();
         
         mColor = dpColor::MAIN_COLOR;
-        mColor.setSaturation(250);
+     //   mColor.setSaturation(250);
         
     }
     
@@ -167,6 +167,8 @@ public:
         
         ofMesh tmp;
         
+        vector<ofPoint>pinkTri;
+        
         int bitsetCounter = 0;
         
         for(int i = 0; i < num; i+=mOmitFace){
@@ -182,6 +184,16 @@ public:
                     tmp.addVertex(mesh.getVertex(idx1));
                     tmp.addVertex(mesh.getVertex(idx2));
                     tmp.addVertex(mesh.getVertex(idx3));
+                    
+                    if(i % 14 == 0){
+                        tmp.addColor(ofColor(dpColor::MAIN_COLOR.r,dpColor::MAIN_COLOR.g,dpColor::MAIN_COLOR.b,mAlpha));
+                        tmp.addColor(ofColor(dpColor::MAIN_COLOR.r,dpColor::MAIN_COLOR.g,dpColor::MAIN_COLOR.b,mAlpha));
+                        tmp.addColor(ofColor(dpColor::MAIN_COLOR.r,dpColor::MAIN_COLOR.g,dpColor::MAIN_COLOR.b,mAlpha));
+                    }else{
+                        tmp.addColor(ofColor(200,mAlpha));
+                        tmp.addColor(ofColor(200,mAlpha));
+                        tmp.addColor(ofColor(200,mAlpha));
+                    }
                 }
                 
             }
@@ -189,8 +201,19 @@ public:
              bitsetCounter++;
         }
         
-        ofSetColor(200, mAlpha);
+       
         tmp.drawFaces();
+        
+        /*if(pinkTri.size() > 3){
+            for(int i = 0; i < pinkTri.size(); i+= 3){
+                if((i * 3) + 2 < pinkTri.size()){
+                ofSetColor(dpColor::MAIN_COLOR,mAlpha);
+                ofTriangle(pinkTri.at(i * 3),
+                           pinkTri.at(i * 3 + 1),
+                           pinkTri.at(i * 3 + 2));
+                }
+            }
+        }*/
     }
     
     void setScale(float scale){

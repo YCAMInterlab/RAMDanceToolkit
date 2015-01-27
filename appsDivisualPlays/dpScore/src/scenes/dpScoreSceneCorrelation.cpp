@@ -455,9 +455,9 @@ void SceneCorrelation::enter()
         Node* output{nullptr};
         
         switch (i) {
-            case 0: output = new NodeSound(this); break;
-            case 1: output = new NodeLight(this); break;
-            case 2: output = new NodeHakoVis(this); break;
+            case 0: output = new NodeHakoVis(this); break;
+            case 1: output = new NodeSound(this); break;
+            case 2: output = new NodeLight(this); break;
             case 3: output = new NodeScore(this); break;
             default: output = new NodeHakoVis(this); break;
         }
@@ -546,8 +546,16 @@ void SceneCorrelation::update(ofxEventMessage& m)
         auto updateTarget = [&](const string& key, Node** target){
             auto count = mNodes.count(key);
             auto it = mNodes.find(key);
-            for (int i=0; i<(int)ofRandom(count-FLT_EPSILON); i++) {
-                ++it;
+            if (key != kKeyOutput) {
+                for (int i=0; i<(int)ofRandom(count-FLT_EPSILON); i++) {
+                    ++it;
+                }
+            }
+            else {
+                for (int i=0; i<mCurrentOutputCount; i++) {
+                    ++it;
+                }
+                ++mCurrentOutputCount %= count;
             }
             if (it != mNodes.end()) *target = it->second;
         };
