@@ -19,7 +19,6 @@
 
 #include "ramControlPanel.h"
 #include "ramPhysics.h"
-#include "dpConstants.h"
 
 extern bool drawModel;
 
@@ -32,11 +31,7 @@ ramSceneManager& ramSceneManager::instance()
 	return *_instance;
 }
 
-ramSceneManager::ramSceneManager() :
-isAllocatedFbos(false)
-{
-
-}
+ramSceneManager::ramSceneManager() {}
 
 ramSceneManager::ramSceneManager(const ramSceneManager&) {}
 
@@ -51,17 +46,10 @@ void ramSceneManager::setup()
 	ofAddListener(ofEvents().exit, this, &ramSceneManager::exit);
 	
 	actorsScene = new ramActorsScene();
-    scenes.push_back(actorsScene);
-    actorsScene->setup();
-    actorsScene->setEnabled(true);
-    ramGetGUI().addPanel(actorsScene, false);
-    
-    vector<bool> screenStates;
-    screenStates.assign(NUM_SCREEN_POSITIONS, true);
-    screens.push_back(screenStates);
-    
-    oscReceiverTag.addAddress(RAM_OSC_ADDR_SET_SCENE);
-    ramOscManager::instance().addReceiverTag(&oscReceiverTag);
+	scenes.push_back(actorsScene);
+	actorsScene->setup();
+	actorsScene->setEnabled(true);
+	ramGetGUI().addPanel(actorsScene, false);
 }
 
 void ramSceneManager::addScene(ramBaseScene* scene)
@@ -69,45 +57,6 @@ void ramSceneManager::addScene(ramBaseScene* scene)
 	scenes.push_back(scene);
 	scene->setup();
 	ramGetGUI().addPanel(scene);
-    
-    vector<bool> screenStates;
-    screenStates.assign(NUM_SCREEN_POSITIONS, true);
-    screens.push_back(screenStates);
-    cout << scene->getName() << ", " << endl;
-}
-
-void ramSceneManager::allocateFbos(int w, int h)
-{
-    for (int i=0; i<scenes.size(); i++) {
-        scenes.at(i)->allocateFbo(w, h);
-    }
-    isAllocatedFbos = true;
-}
-
-void ramSceneManager::deallocateFbos()
-{
-    for (int i=0; i<scenes.size(); i++) {
-        scenes.at(i)->deallocateFbo();
-    }
-    isAllocatedFbos = false;
-}
-
-void ramSceneManager::setScreen(int sceneId, int screenId, bool enabled)
-{
-    if (sceneId < 0) return;
-    vector<bool>& screenStates = screens.at(sceneId);
-    if (screenId >= 0 && screenId < screenStates.size()) {
-        screenStates.at(screenId) = enabled;
-    }
-}
-
-void ramSceneManager::setAllScreens(int sceneId, bool enabled)
-{
-    if (sceneId < 0) return;
-    vector<bool>& screenStates = screens.at(sceneId);
-    for (int i=0; i<screenStates.size(); i++) {
-        screenStates.at(i) = enabled;
-    }
 }
 
 size_t ramSceneManager::getNumScenes() const
@@ -124,7 +73,7 @@ size_t ramSceneManager::findtSceneIndex(string name) const
 	}
 	return -1;
 }
-ramBaseScene* ramSceneManager::getScene(size_t index)
+ramBaseScene* ramSceneManager::getScene(size_t index) const
 {
 	return scenes.at(index);
 }
@@ -146,8 +95,6 @@ bool ramSceneManager::getShowAllActors() const
 
 void ramSceneManager::update(ofEventArgs& args)
 {
-    updateOsc();
-    
 	for (int i = 0; i < scenes.size(); i++)
 	{
 		if (i >= scenes.size()) break;
@@ -160,51 +107,6 @@ void ramSceneManager::update(ofEventArgs& args)
 	}
 }
 
-void ramSceneManager::updateOsc()
-{
-    while (oscReceiverTag.hasWaitingMessages()) {
-        ofxOscMessage m;
-        oscReceiverTag.getNextMessage(&m);
-        const string& addr = m.getAddress();
-        try {
-            if (addr == RAM_OSC_ADDR_SET_SCENE) {
-                const string header = "set_scene: ";
-                const int numArgs = 4;
-                if (!(m.getNumArgs() == numArgs))
-                    throw runtime_error(header + "incorrect number of arguments " + ofToString(m.getNumArgs()));
-                
-                if (!(m.getArgType(0) == OFXOSC_TYPE_STRING))
-                    throw runtime_error(header + "incorrect type of argument 0");
-
-                for (int i=1; i<numArgs; i++) {
-                    if (!(m.getArgType(i) == OFXOSC_TYPE_INT32))
-                        throw runtime_error(header + "incorrect type of argument " + ofToString(i));
-                }
-                
-                const string sceneName = m.getArgAsString(0);
-                const bool enabled = (bool)m.getArgAsInt32(1);
-                const bool screen0 = (bool)m.getArgAsInt32(2);
-                const bool screen1 = (bool)m.getArgAsInt32(3);
-                
-                const int sceneIdx = findtSceneIndex(sceneName);
-                if (sceneIdx < 0)
-                    throw runtime_error(header + "no scene " + sceneName + " found");
-
-                if (enabled) ramGetGUI().getSceneTabs().select(sceneName,true);
-				else ramGetGUI().getSceneTabs().offSelect(sceneName,true);
-				getScene(sceneIdx)->setEnabled(enabled);
-                setScreen(sceneIdx, 0, screen0);
-                setScreen(sceneIdx, 1, screen1);
-                
-                ofLogNotice("ramSceneManager") << boolalpha << header << sceneName << ", " << enabled << ", " << screen0 << ", " << screen1;
-            }
-        }
-        catch(exception& e) {
-            ofLogError("ramSceneManager") << e.what();
-        }
-    }
-}
-
 void ramSceneManager::draw(ofEventArgs& args)
 {
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
@@ -212,20 +114,11 @@ void ramSceneManager::draw(ofEventArgs& args)
 	ofPushStyle();
 
 	glEnable(GL_DEPTH_TEST);
-    
-    map<int, ramBaseScene*> fboRenderd;
 
 	for (int i = 0; i < scenes.size(); i++)
 	{
 		ramBaseScene *scene = scenes[i];
 		if (!scene->isEnabled()) continue;
-        
-        if (isAllocatedFbos && scene->isAllocatedFbo()) {
-            scene->getFbo()->begin();
-            
-            glClearColor(0.f, 0.f, 0.f, 0.f);
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-        }
 
 		bool enable_physics = ramGetEnablePhysicsPrimitive();
 		ramEnablePhysicsPrimitive(false);
@@ -369,37 +262,11 @@ void ramSceneManager::draw(ofEventArgs& args)
 			scene->drawHUD();
 			ofPopView();
 		}
-        
-        if (isAllocatedFbos && scene->isAllocatedFbo()) {
-            scene->getFbo()->end();
-            fboRenderd[i] = scene;
-        }
 	}
-    
+
 	ofPopStyle();
 	glPopMatrix();
 	glPopAttrib();
-
-    glPushAttrib(GL_ENABLE_BIT);
-    glDisable(GL_DEPTH_TEST);
-    ofPushStyle();
-    ofEnableAlphaBlending();
-    
-    ofSetColor(ofColor::white);
-    map<int, ramBaseScene*>::iterator it;
-    for (it = fboRenderd.begin(); it!=fboRenderd.end(); ++it) {
-        ramBaseScene* scene = it->second;
-        vector<bool> screenStates = screens.at(it->first);
-        for (int i=0; i<screenStates.size(); i++) {
-            if (screenStates.at(i)) {
-                scene->getFbo()->draw(SCREEN_POSITIONS[i],
-                                      scene->getFbo()->getWidth(),
-                                      scene->getFbo()->getHeight());
-            }
-        }
-    }
-    ofPopStyle();
-    glPopAttrib();
 }
 
 void ramSceneManager::exit(ofEventArgs& args)
