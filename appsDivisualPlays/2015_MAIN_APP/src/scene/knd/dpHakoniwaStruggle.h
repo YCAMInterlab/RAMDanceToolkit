@@ -16,15 +16,12 @@ public:
     string getName() const { return "dpHStruggle"; }
     
 	void setupControlPanel(){
+        
         ramGetGUI().addToggle("dir", &mMotorDir);
-        ramGetGUI().addToggle("vibeAuto", &isVibeAuto);
         ramGetGUI().addToggle("vibeWhenMoveFast", &isVibeWhenActorMoveFast);
         ramGetGUI().addSlider("strength", 0.0, 255.0, &mVibeStrength);
         ramGetGUI().addSlider("thresh", 0.0, 10.0, &mVibeThresh);
         ramGetGUI().addButton("vibe");
-        ramGetGUI().addSlider("timeSpan", 0.01, 3.0, &mVibeTimeSpan);
-        ramGetGUI().addSlider("tempo",2,8.0,&mVibeTempo);
-        ramGetGUI().addSlider("dur",0.1,2.0,&mVibeDur);
         ramGetGUI().addToggle("isDrawActor", &isDrawActor);
         ramGetGUI().addToggle("isDrawFloor", &isDrawFloor);
         ramGetGUI().addSlider("lineWidth",1.0,20.0,&mLineWidth);
@@ -33,7 +30,7 @@ public:
         
         const float dim = 16.0f;
         
-        ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+        ofxUICanvasPlus* panel = ramGetGUI().getCurrentUIContext();
         
         vector<string> names;
         
@@ -47,8 +44,10 @@ public:
         panel->addWidgetDown(radio);
         
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoniwaStruggle::onPanelChanged);
+        
     }
     void setup(){
+        
         mSender.setup("192.168.20.53",8528);
     
         mVibe.speed = 0.666;
@@ -91,19 +90,13 @@ public:
 
     }
     
-    void stopVibe(){
-        mVibe.set(0);
-    }
-    
-   
     void update(){
+        
         ramSetViewPort(dpGetFirstScreenViewPort());
         
         ofSetLineWidth(mLineWidth);
         
-        if(isVibeWhenActorMoveFast == false && isVibeAuto == false)mVibeFromActor.imSet(mVibeStrength);
-        
-        vibeAuto();
+        if(isVibeWhenActorMoveFast == false)mVibeFromActor.imSet(mVibeStrength);
         
         int numActor = getNumNodeArray();
         
@@ -161,26 +154,6 @@ public:
         mSender.sendMessage(m);
     }
     
-    void vibeAuto(){
-        if(isVibeAuto){
-            
-            if(ofGetElapsedTimef() - mElapsedTime > mVibeTimeSpan){
-                mVibeCounter++;
-                
-                mElapsedTime = ofGetElapsedTimef();
-                
-                if(mVibeCounter == (int)mVibeTempo)mVibeCounter = 0;
-                else vibe();
-            }
-            
-        }
-        
-        if(ofGetElapsedTimef() - mElapsedTimeFromVibe > mVibeDur){
-            mElapsedTimeFromVibe = ofGetElapsedTimef();
-            mVibe.set(0);
-        }
-    }
-    
     void draw(){
         
         float vibeVal = mSmoothedVibeVal.val;
@@ -203,8 +176,6 @@ public:
         ramEndCamera();
         
     }
-    
-    
     
     void drawActor(const ramActor& actor){
         
@@ -237,6 +208,7 @@ public:
     }
     
     void onPanelChanged(ofxUIEventArgs& e){
+        
 		string name = e.widget->getName();
         
         if(name == "vibe"){
@@ -252,6 +224,7 @@ public:
         if(togName == "RIGHT_WRIST")mJointNum = ramActor::JOINT_RIGHT_WRIST;
         if(togName == "LEFT_ANKLE")mJointNum = ramActor::JOINT_LEFT_ANKLE;
         if(togName == "RIGHT_ANKLE")mJointNum = ramActor::JOINT_RIGHT_ANKLE;
+        
 	}
     
     void onDisabled(){
@@ -262,6 +235,7 @@ public:
         m.addIntArg(1);
         m.addIntArg(0);
         mSender.sendMessage(m);
+        
     }
 
 private:
@@ -269,16 +243,11 @@ private:
     ofxOscSender mSender;
     float mVibeStrength = 255.0;
     float mVibeThresh = 1.5;
-    static const int BEAM_NUM = 30;
+    float mLineWidth = 4.0;
     
     KezSlide mVibe;
     KezSlide mVibeFromActor;
-    
-    float mVibeTimeSpan = 0.2;
-    float mElapsedTime = 0.0;
-    float mVibeTempo = 4;
-    float mVibeDur = 0.1;
-    float mElapsedTimeFromVibe;
+    KezSlide mSmoothedVibeVal;
     
     int mVibeCounter = 0;
     int mJointNum = ramActor::JOINT_ABDOMEN;
@@ -286,12 +255,7 @@ private:
     bool mMotorDir = 0;
     bool isDrawActor = true;
     bool isDrawFloor = false;
-    bool isVibeAuto = false;
     bool isVibeWhenActorMoveFast = false;
-    
-    KezSlide mSmoothedVibeVal;
-
-    float mLineWidth = 4.0;
     
     ofPlanePrimitive mPlane;
     string mFrag;
