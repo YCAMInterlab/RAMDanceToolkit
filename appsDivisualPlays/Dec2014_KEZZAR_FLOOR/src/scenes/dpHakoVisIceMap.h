@@ -18,12 +18,14 @@ public:
     string getName() const { return "dpVisIce"; }
     void setupControlPanel(){
         
-        ramGetGUI().addIntSlider("div", 1, 14, &mDiv);
+        ramGetGUI().addIntSlider("div", 1, 20, &mDiv);
         ramGetGUI().addToggle("all", &mTogAllDraw);
         ramGetGUI().addIntSlider("lineWidth", 1, 10, &mLineWidth);
         ramGetGUI().addIntSlider("thresh", 1, 255, &mExtendThreshNum);
         ramGetGUI().addButton("randomize");
+        ramGetGUI().addToggle("mouse",&isMouseAssign);
         ramGetGUI().addIntSlider("ForceExtendNum", 0, 255, &mForceExtendNum);
+        ramGetGUI().addToggle("osc",&isOsc);
         
         ramFloorQuadWarper::instance().setupContolPanel(this);
         
@@ -47,15 +49,32 @@ public:
         if(e.key == 'e'){
             mTogAllDraw = !mTogAllDraw;
             mGrid.setAllDraw(mTogAllDraw);
+            if(mTogAllDraw)isMouseAssign = false;
         }
         
         if(e.key == 'r'){
-           mGrid.extendByThresh(80);
+            mDiv = 5;
+            mGrid.changeDiv(mDiv);
         }
         
         if(e.key == 't'){
+            mDiv = 13;
+            mGrid.changeDiv(mDiv);
+            mExtendThreshNum = 80;
             mGrid.setExtendThreshNum(mExtendThreshNum);
         }
+        
+        if(e.key == 'y'){
+            isOsc = !isOsc;
+        }
+        
+        if(e.key == 'w'){
+            mTogAllDraw = false;
+            mGrid.setAllDraw(mTogAllDraw);
+            isMouseAssign = false;
+            isOsc = false;
+        }
+        
     }
     
     void setup(){
@@ -73,7 +92,7 @@ public:
             mReceiver.getNextMessage(&m);
             
             if(m.getAddress() == "/dp/cameraUnit/Ice/mean"){
-                mGrid.extendByThresh(m.getArgAsInt32(3));
+                if(isOsc)mGrid.extendByThresh(m.getArgAsInt32(3));
             }
             
             if (m.getAddress().substr(0,26) == "/dp/cameraUnit/sceneState/"){
@@ -106,6 +125,7 @@ public:
                 if(mSceneEnable[TORNADO] == true){
                     mPreMode = FIVE;
                     mTogAllDraw = false;
+                    isMouseAssign = false;
                     mGrid.setAllDraw(mTogAllDraw);
                 }
             }
@@ -127,6 +147,8 @@ public:
         receiveOsc();
         ramSetViewPort(dpGetFirstScreenViewPort());
         mGrid.update();
+        
+        if(isMouseAssign)mGrid.extendByThresh(ofMap(ofGetMouseX(),0,SINGLE_SCREEN_WIDTH,0,255));
     }
     void draw(){
         
@@ -190,10 +212,13 @@ private:
     };
     
     bool isIce = false;
+    bool isMouseAssign = false;
     int mPreMode = FIVE;
     bitset<3> mSceneEnable;
     
     int mForceExtendNum = 8;
+    
+    bool isOsc = false;
     
 };
 
