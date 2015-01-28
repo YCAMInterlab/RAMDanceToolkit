@@ -29,7 +29,7 @@ class Future : public ramBaseScene
 	
 public:
 	
-	bool draw_line;
+	bool draw_line = false;
 	
 	Future() : distance(150), speed(27) {}
 	
