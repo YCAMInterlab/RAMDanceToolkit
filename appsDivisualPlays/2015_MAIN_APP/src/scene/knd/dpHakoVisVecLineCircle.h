@@ -16,10 +16,10 @@ public:
         
         mRad = rad;
         
-        mVecs.clear();
+        mBuffers.clear();
         
-        for(int i = 0; i < VECS_MAX; i++){
-            mVecs.push_back(ofPoint(0,0,0));
+        for(int i = 0; i < BUFFER_MAX; i++){
+            mBuffers.push_back(ofPoint(0,0,0));
         }
         
         mVbo.clear();
@@ -28,8 +28,8 @@ public:
         mPts.clear();
         mLines.clear();
         
-        mPts.assign(VECS_MAX - 1, ofPoint()); //i do not use head pt
-        mLines.assign((VECS_MAX - 1) * 2, ofPoint());
+        mPts.assign(BUFFER_MAX - 1, ofPoint()); //i do not use head pt
+        mLines.assign((BUFFER_MAX - 1) * 2, ofPoint());
         
         mVbo.setVertexData(&mPts.at(0), mPts.size(), GL_DYNAMIC_DRAW);
         mLineVbo.setVertexData(&mLines.at(0), mLines.size(), GL_DYNAMIC_DRAW);
@@ -44,22 +44,22 @@ public:
         
         if(isForward){
             
-            mVecs[0] = mHead;
+            mBuffers[0] = mHead;
         
-            for(int i = 1; i < VECS_MAX; i++){
-                ofPoint tmp = mVecs[i-1];
-                mVecs[i - 1] = mVecs[i];
-                mVecs[i] = tmp;
+            for(int i = 1; i < BUFFER_MAX; i++){
+                ofPoint tmp = mBuffers[i-1];
+                mBuffers[i - 1] = mBuffers[i];
+                mBuffers[i] = tmp;
             }
             
         }else{
         
-            mVecs[mVecs.size() - 1] = mHead;
+            mBuffers[mBuffers.size() - 1] = mHead;
             
-            for(int i = mVecs.size() - 1; i > 0; i--){
-                ofPoint tmp = mVecs[i-1];
-                mVecs[i - 1] = mVecs[i];
-                mVecs[i] = tmp;
+            for(int i = mBuffers.size() - 1; i > 0; i--){
+                ofPoint tmp = mBuffers[i-1];
+                mBuffers[i - 1] = mBuffers[i];
+                mBuffers[i] = tmp;
             }
         }
     }
@@ -75,14 +75,14 @@ public:
     
     void updateVbos(){
         
-        for(int i = 0; i < mVecs.size() - 1; i++){
+        for(int i = 0; i < mBuffers.size() - 1; i++){
             
             ofVec2f pt;
             alongCircle(pt, i);
             
-            mPts[i].set(pt.x * mRad + mVecs[i].x , pt.y * mRad + mVecs[i].y, mVecs[i].z);
+            mPts[i].set(pt.x * mRad + mBuffers[i].x , pt.y * mRad + mBuffers[i].y, mBuffers[i].z);
             mLines[i * 2].set(pt.x * mRad, pt.y * mRad , 0.0);
-            mLines[i * 2 + 1].set(pt.x * mRad + mVecs[i].x , pt.y * mRad + mVecs[i].y , mVecs[i].z);
+            mLines[i * 2 + 1].set(pt.x * mRad + mBuffers[i].x , pt.y * mRad + mBuffers[i].y , mBuffers[i].z);
             
         }
         
@@ -99,7 +99,8 @@ public:
     }
     
     void alongCircle(ofVec2f &pt,int idx){
-        float theta = ofMap(idx,0,mVecs.size(),0,TWO_PI) - HALF_PI;
+        
+        float theta = ofMap(idx,0,mBuffers.size(),0,TWO_PI) - HALF_PI;
         
         float x = cos(theta);
         float y = sin(theta);
@@ -122,23 +123,25 @@ public:
     
     void drawHead(){
         
-        int idx = mVecs.size() - 1;
+        int idx = mBuffers.size() - 1;
         
         ofVec2f pt;
         alongCircle(pt, idx);
         
         ofSetColor(dpColor::MAIN_COLOR);
-        ofDrawSphere(pt.x * mRad + mVecs[idx].x , pt.y * mRad + mVecs[idx].y, mVecs[idx].z,20);
+        ofDrawSphere(pt.x * mRad + mBuffers[idx].x , pt.y * mRad + mBuffers[idx].y, mBuffers[idx].z,20);
         
         ofSetLineWidth(4);
         ofLine(pt.x * mRad, pt.y * mRad , 0.0,
-               pt.x * mRad + mVecs[idx].x , pt.y * mRad + mVecs[idx].y , mVecs[idx].z);
+               pt.x * mRad + mBuffers[idx].x , pt.y * mRad + mBuffers[idx].y , mBuffers[idx].z);
+        
     }
     
 private:
     
-    static const int VECS_MAX = 512;
-    vector<ofPoint>mVecs;
+    static const int BUFFER_MAX = 512;
+    vector<ofPoint>mBuffers;
+    
     float mRad;
     
     KezSlidePoint mHead;
