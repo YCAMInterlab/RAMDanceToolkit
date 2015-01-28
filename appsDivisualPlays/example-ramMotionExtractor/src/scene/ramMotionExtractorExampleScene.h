@@ -30,7 +30,6 @@ public:
 private:
 
 	ramMotionExtractor	motionExtractor;
-	ofxOscSender sender;
 
 	bool mDrawLines;
 	bool mDrawTriangle;
