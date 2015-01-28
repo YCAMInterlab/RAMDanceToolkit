@@ -29,10 +29,10 @@ public:
 	
 	struct LineContext
 	{
-		bool set_from;
-		bool set_control0;
-		bool set_control1;
-		bool set_to;
+		bool set_from = false;
+		bool set_control0 = false;
+		bool set_control1 = false;
+		bool set_to = false;
 		
 		float curve;
 		
@@ -59,7 +59,7 @@ public:
 			
 #ifdef RAM_GUI_SYSTEM_OFXUI
 			
-			ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+			ofxUICanvasPlus* panel = ramGetGUI().getCurrentUIContext();
 			
 			line_width = 2;
 			
