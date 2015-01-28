@@ -60,7 +60,7 @@ void ramActorsScene::setupControlPanel()
 		ofBuffer buf("hello ram!");
 		ofBufferToFile(ramToResourcePath(initial_file_path), buf);
 		
-		const string fake_yoko = ramToResourcePath("MotionData/Ando_1.tsv");
+		string fake_yoko = ramToResourcePath("MotionData/Ando_1.tsv");
 		
 		if (ofFile::doesFileExist( fake_yoko ))
 		{
@@ -146,7 +146,7 @@ void ramActorsScene::draw()
 	{
 		ramNodeArray &NA = getNodeArray(i);
 		
-		const string name = NA.getName();
+		const string& name = NA.getName();
 		
 		SegmentsIter it = mSegmentsMap.find(name);
 		
@@ -243,7 +243,7 @@ void ramActorsScene::gotMessage(ofMessage &msg)
 {
 	vector<string> keys = ofSplitString(msg.message, "/");
 	
-	const string route = ofSplitString(msg.message, " ")[0];
+    string route = ofSplitString(msg.message, " ")[0];
 	string value = msg.message;
 	ofStringReplace(value, route+" ", "");
 	
@@ -265,7 +265,7 @@ void ramActorsScene::onKeyPressed(ofKeyEventArgs &e)
 
 void ramActorsScene::onValueChanged(ofxUIEventArgs &e)
 {
-	const string name = e.widget->getName();
+	string name = e.widget->getName();
 	
     if (name == "Load Recorded File")
     {
@@ -316,7 +316,7 @@ void ramActorsScene::onFileDrop(ofDragInfo &e)
 #endif
 }
 
-void ramActorsScene::loadFile(const string filePath)
+void ramActorsScene::loadFile(const string& filePath)
 {
 	if (mSegmentsMap.size() >= MAX_ACTORS)
 		return;
@@ -326,7 +326,7 @@ void ramActorsScene::loadFile(const string filePath)
 		coder.load(filePath);
 		ramSession session = coder.get();
 
-		const string name = session.getNodeArrayName();
+        string name = session.getNodeArrayName();
 
 		SegmentsIter it = mSegmentsMap.find(name);
 		if( it != mSegmentsMap.end() ) return;
@@ -458,7 +458,7 @@ void ramActorsScene::addSegment(BaseSegment *newSegment)
 	newSegment->loadCache();
 }
 
-void ramActorsScene::removeControlSegment(const string name)
+void ramActorsScene::removeControlSegment(const string& name)
 {
     ramActorManager::instance().removeNodeArray(name);
 	

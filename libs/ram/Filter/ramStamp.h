@@ -68,7 +68,9 @@ public:
 
 	inline void setRecSpan(const float span) { mRecSpan = span; }
 	inline deque<ramNodeArray>& getStamps() { return mStamps; }
+    inline const deque<ramNodeArray>& getStamps() const { return mStamps; }
 	inline ramNodeArray& getStamp(const int index) { return mStamps.at(index); }
+    inline const ramNodeArray& getStamp(const int index) const { return mStamps.at(index); }
 
 	string getName() const { return "ramStamp"; }
 

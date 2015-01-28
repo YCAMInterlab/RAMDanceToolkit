@@ -28,10 +28,12 @@ public:
 
 	static ramCameraManager& instance();
 
-	inline size_t getNumCameras() { return cameras.size(); }
+	inline size_t getNumCameras() const { return cameras.size(); }
 	ofCamera* getCamera(size_t index) { return cameras[index]; }
+    const ofCamera* getCamera(size_t index) const { return const_cast<ofCamera*>(cameras[index]); }
 
 	ofCamera& getActiveCamera() { return *active_camera; }
+    const ofCamera& getActiveCamera() const { return const_cast<ofCamera&>(*active_camera); }
 	inline void setActiveCamera(int index) { active_camera = cameras.at(index); }
 
 	template <typename T>
@@ -47,7 +49,7 @@ public:
 	// defaults
 	void loadDefaults();
 
-	vector<string> getDefaultCameraNames();
+	vector<string> getDefaultCameraNames() const;
 	void rollbackDefaultCameraSetting(int camera_id = -1);
 
 protected:

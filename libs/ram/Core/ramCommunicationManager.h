@@ -27,44 +27,44 @@ public:
 	void	draw();
 
 	//Sender Methods
-	void	addSender(string address,int port);
-	void	sendOscMessage(ofxOscMessage &m);
-	void	sendNoteOn(string name,float velocity);
-	void	sendNoteOff(string name);
-	void	sendCC(string name,vector<float>cc);
-	void	sendCC(string name,float* cc,int num);
+	void	addSender(const string& address,int port);
+	void	sendOscMessage(ofxOscMessage& m);
+	void	sendNoteOn(const string& name,float velocity);
+	void	sendNoteOff(const string& name);
+	void	sendCC(const string& name, vector<float> cc);
+	void	sendCC(const string& name, float* cc, int num);
 
 	//Receiver Methods
-	void	assignVelocity(string name, float* value);
-	void	assignCC(string name, int ccNum, float* value);
+	void	assignVelocity(const string& name, float* value);
+	void	assignCC(const string& name, int ccNum, float* value);
 
-	bool	getVelocityExist(string name);
-	bool	getVelocityExist(int index);
-	bool	getCCExist(string name,int ccNum);
-	bool	getCCExist(int index,int ccNum);
-	int		getNumCCArg(string name);
-	float	getVelocity(string name);
-	float	getVelocity(int index);
-	float	getCC(string name,int ccNum);
-	float	getCC(int index,int ccNum);
+	bool	getVelocityExist(const string& name) const;
+	bool	getVelocityExist(int index) const;
+	bool	getCCExist(const string& name, int ccNum) const;
+	bool	getCCExist(int index, int ccNum) const;
+	int		getNumCCArg(const string& name) const;
+	float	getVelocity(const string& name) const;
+	float	getVelocity(int index) const;
+	float	getCC(const string& name, int ccNum) const;
+	float	getCC(int index, int ccNum) const;
 
-	int				getInstNum(string name);
+	int				getInstNum(const string& name) const;
 	ofxUICanvas*	getCanvas(){return &UIcanvas;};
 
 	inline static ramCommunicationManager& instance()
 	{
 		if (__instance == NULL)
 			__instance = new ramCommunicationManager;
-		return* __instance;
+		return *__instance;
 	};
 
 private:
-	int addInstrument(string name);
-	static ramCommunicationManager *__instance;
+	int addInstrument(const string &name);
+	static ramCommunicationManager* __instance;
 
 	ramCommunicationManager() {};
 	ramCommunicationManager(const ramCommunicationManager&){}
-	ramCommunicationManager& operator=(const ramCommunicationManager&) {return *this; }
+	ramCommunicationManager& operator=(const ramCommunicationManager&) {return *__instance; }
 	~ramCommunicationManager() {};
 
 	bool bVisible;
@@ -91,11 +91,12 @@ private:
 
 	//Assign
 	vector<ramCommunicateAssign> assigns;
+    vector<shared_ptr<ofxOscSender> > senders;
 };
 
 struct ramCommunicateAssign{
 
-	ramCommunicateAssign(string name,int index, float* val){
+	ramCommunicateAssign(const string &name,int index, float* val){
 		target = name;
 		idx = index;
 		value = val;

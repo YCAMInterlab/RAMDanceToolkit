@@ -24,6 +24,6 @@ class ramTSVCoder : public ramBaseCoder
 {
 protected:
 	void decode(ofBuffer buffer);
-	bool encode(ramSession &src);
+	bool encode(ramSession &src) const;
 };
 

@@ -31,7 +31,7 @@ public:
 	inline void setEnabled(bool v) { enabled = v; }
 	inline bool isEnabled() const { return enabled; }
 
-	inline bool isFired() { return fired; }
+	inline bool isFired() const { return fired; }
 
 	bool update()
 	{
