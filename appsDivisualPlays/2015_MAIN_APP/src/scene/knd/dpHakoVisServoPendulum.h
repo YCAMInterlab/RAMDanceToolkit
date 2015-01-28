@@ -78,7 +78,7 @@ public:
         
         if(mSat.val > 1){
             mColor.setSaturation(mSat.val);
-            mColor.setBrightness(ofMap(mSat.val,255,0,255,216));
+            mColor.setBrightness(ofMap(mSat.val,255,0,255,90));
         }
     }
     
@@ -120,7 +120,7 @@ public:
     
 	void setupControlPanel(){
         
-        mScale.set(200,100);
+        mScale.set(600,100);
         
         ramGetGUI().addSlider("scaleX", 100.0, 2000.0, &mScale.x);
         ramGetGUI().addSlider("scaleY", 1.0, 2000.0, &mScale.y);
@@ -142,7 +142,7 @@ public:
         ramOscManager::instance().addReceiverTag(&mReceiver);
         mReceiver.addAddress("/dp/cameraUnit/ServoPendulum/vector/total");
     
-        mHead.speed = 0.1;
+        mHead.speed = 0.2;
 
     }
     
@@ -155,22 +155,17 @@ public:
             if(m.getAddress() == "/dp/cameraUnit/ServoPendulum/vector/total"){
                 mBoxes.push_back(dpSPBox());
                 
-                float pAngle = atan2(mHead.y,mHead.x);
-                
                 mHead.set(m.getArgAsFloat(0),
                           m.getArgAsFloat(1));
                 
-                ofPoint tmp(mHead.x,mHead.y);
-                
-   //             mHead = tmp;
-   
-                float angle = atan2(tmp.y,tmp.x);
-          
+                float angle = atan2(mHead.y,mHead.x);
                 
                 mAngle = angle;
                 
-                mBoxes.back().start(ofPoint(1.0,tmp.length() * mScale.x,1.0),angle);
+                mBoxes.back().start(ofPoint(1.0,mHead.length() * mScale.x,1.0),angle);
                 if(mBoxes.size() > BOX_MAX)mBoxes.pop_front();
+                
+                mHead.update();
             }
         
         }
@@ -183,8 +178,6 @@ public:
         for(auto &v:mBoxes){
             v.update();
         }
-        
-        mHead.update();
         
         mLong.update();
         mLat.update();
@@ -208,6 +201,7 @@ public:
 
         ofDisableDepthTest();
         ofEnableBlendMode(OF_BLENDMODE_ADD);
+        ofSetLineWidth(2);
         //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE,GL_SRC_ALPHA,GL_ONE);
         mCam.begin(dpGetFirstScreenViewPort());
         

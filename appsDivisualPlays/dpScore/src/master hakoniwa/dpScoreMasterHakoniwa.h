@@ -77,10 +77,12 @@ public:
     constexpr static const float kTextSpacing{12.f};
     constexpr static const float kMargin{5.f};
     constexpr static const float kLineWidth{320.f};
+    constexpr static const float kLineHeight{12.f};
     
     constexpr static const int kUpdateFrames{10};
     
     constexpr static const float kGuiWidth{250.f};
+    constexpr static const float kGuiHeight{400.f};
     
     static const int kValvePins[];
     static const int kPumpPins[];
@@ -103,6 +105,7 @@ public:
     static const int kPortNumberScore;
     
     static const string kOscAddrRamSetScene;
+    static const string kOscAddrRamDoSomething;
     
     static const string kScoreBlack;
     
@@ -174,28 +177,27 @@ private:
     vector<string> mNoCamScenes;
     bool mNoCameraData{false};
     
+    vector<string> mAllOffScenes;
+    bool mAllOffScene{false};
+    
     string mCurrentScore{""};
     int mCurrentScoreComplexity{0};
     int mMaxComplexity{0};
     
-    AnalyzeType mAnalyzeType{AnalyzeType::Mean};
     AnalyzeMean mAnalyzeMean;
     AnalyzePixelate mAnalyzePixelate;
     
-    float mValveOpenDuration{0.4f};
+    float mValveOpenDuration{0.3f};
     
     bool mEmergencyStop{false};
     
-    ofxUIToggle* mEnableAllToggle{nullptr};
     bool mEnableMotioner{false};
     bool mEnableCameraUnit{false};
     bool mEnableOscOutRDTK{false};
     bool mEnableOscOutMH{false};
     bool mEnableOscOutScore{false};
     bool mEnableShowHakoniwaTitle{false};
-    
-    float mEnabledTime{0.f};
-    
+        
     float mScoreSensorScale{1.f};
     
     float mPrevTimeSceneChanged{0.f};

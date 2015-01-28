@@ -31,7 +31,7 @@ class Future : public ramBaseScene
 	
 public:
 	
-	bool draw_line;
+	bool draw_line = false;
 	
 	Future() : distance(80), speed(120) {}
 	
@@ -88,9 +88,9 @@ public:
                 ofPushStyle();
                 ofNoFill();
                 
-                const ofColor gcolor =
-                i==0 ? ofColor::green:
-                i==1 ? ofColor::yellow: ofColor::red;
+                const ofColor gcolor = dpColor::MAIN_COLOR;
+              //  i==0 ? dpColor::MAIN_COLOR:
+              //  i==1 ? ofColor::green: ofColor::blue;
                 
                 ofSetColor(gcolor);
                 ramDrawNodes(arr);

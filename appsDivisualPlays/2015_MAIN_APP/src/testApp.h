@@ -59,11 +59,14 @@
 #include "magnetLooper.h"
 //
 #include "eyeBall.h"
+#include "eyeBallDancer.h"
 
 //LEGENDARY RDTK Scenes!!!!!!!!
 #include "LineDrawing.h"
 #include "FourPoints.h"
 #include "Future.h"
+
+#include "DoSomething.h"
 
 class testApp : public ramBaseApp
 {
@@ -121,6 +124,9 @@ public:
     
     // eyeBall
     eyeBall dpHEyeBall;
+    
+    //eyeBallDancer
+    eyeBallDancer dpHEyeBallDancer;
 
 	//MagPendulum
 	dpHakoniwaMagnetPendulum	magPendulum;
@@ -155,5 +161,7 @@ public:
     LineDrawing line;
     FourPoints fourPoints;
     Future     future;
+    
+    DoSomething doSomething;
     
 };

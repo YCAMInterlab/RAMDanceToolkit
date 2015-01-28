@@ -77,7 +77,7 @@ void SceneBodyPatterns::update(ofxEventMessage& m)
 
 void SceneBodyPatterns::draw()
 {
-    if (mFrame % (60 * 6) == 0) {
+    if (mFrame % (60 * 12) == 0) {
         ++mCurrentRange %= mRange.size();
     }
     

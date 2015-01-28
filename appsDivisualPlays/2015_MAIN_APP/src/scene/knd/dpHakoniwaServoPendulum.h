@@ -166,7 +166,7 @@ private:
     static const int RANGE_MAX = 90;
     
     float mLength = 200.0;
-    float mMinThresh = 7.0;
+    float mMinThresh = 6.0;
     float mMaxThresh = RANGE_MAX;
     
     float mSpeed = 1.0;

@@ -15,7 +15,7 @@ DP_SCORE_NAMESPACE_BEGIN
 
 class AnalyzeMean {
 public:
-    void update(ofVec4f mean);
+    void update();
     void draw();
     
     ofVec4f mMean;
@@ -25,14 +25,15 @@ public:
     float mMeanLimit{20.f};
     
     int mPrevScene{0};
-    float mPrevSetSceneTime{-60.f};
-    float mMinSetSceneTime{120.f};
+    float mPrevSetSceneTime{-90.f};
+    float mMinSetSceneTime{90.f};
     float mLastUpdateSpan{0.f};
     float mLastFrameTime{0.f};
     
     int mWhich{0};
     bool mWin0{false};
     bool mWin1{false};
+    bool mMaster{false};
 };
 
 DP_SCORE_NAMESPACE_END

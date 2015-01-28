@@ -66,6 +66,8 @@ public:
 	int mParamPixelate_ResX;
 	int mParamPixelate_ResY;
 	int mParamPixelate_thr;
+    
+    int loadDelay;
 	ofFloatColor mParamCF_targColor;
 
 	ofImage *imgRefColor, *imgRefGray;

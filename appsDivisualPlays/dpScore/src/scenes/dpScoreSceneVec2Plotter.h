@@ -28,8 +28,8 @@ public:
     void draw() override;
     
 private:
-    static const int _circleNum{2000};
-    const float kStepZ{10.0f};
+    static const int _circleNum{300};
+    const float kStepZ{5.f};
     
     deque<ofVec2f> mCircleBuffer;
     vector<ofVec3f> mCircleVertices;
@@ -40,6 +40,11 @@ private:
     float mSensorScale{1.0f};
     ofVec2f mVec{0.f};
     float mEnterTime{0.f};
+    
+    ofVec3f mRandAngle;
+    
+    ofVec2f mPrev;
+    ofVec2f mPP;
 };
 
 

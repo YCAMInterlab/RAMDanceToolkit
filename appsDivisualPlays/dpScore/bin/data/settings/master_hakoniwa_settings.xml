@@ -16,6 +16,8 @@
         <scene name="Line"/>
         <scene name="Four Points"/>
         <scene name="distanceMetaball"/>
+        <scene name="Kioku"/>
+        <!--<scene name="dpHEyeBallDancer"/>-->
 	</phase>
 
 	<nocam>
@@ -25,7 +27,12 @@
         <scene name="Line"/>
         <scene name="Four Points"/>
         <scene name="distanceMetaball"/>
+        <!--<scene name="dpHEyeBallDancer"/>-->
 	</nocam>
+    
+    <alloff>
+        <scene name="Kioku"/>
+    </alloff>
 </rdtk>
 
 <score>
@@ -88,5 +95,16 @@ SceneCorrelation
  dp::score::SceneBodyFlow
  dp::score::SceneBodyLines
  
+ <preset>
+ <Name>Intro</>
+ <SendOscToRDTK>0<SendOscToRDTK/>
+ <SendOscToScore>1<SendOscToScore/>
+ <ReceiveOscFromCameraUnit>0<ReceiveOscFromCameraUnit/>
+ <OpenValvesWithMotioner>0<OpenValvesWithMotioner/>
+ <DisplayHakoniwaTitleOnScore>0<DisplayHakoniwaTitleOnScore/>
+ <ChangeScore>dp::score::SceneVec2SimpleGraph</ChangeScore>
+ <MeanLimit>10.0</MeanLimit>
+ <MinSceneDuration>120.0</MinSceneDuration>
+ </preset>
 
 -->

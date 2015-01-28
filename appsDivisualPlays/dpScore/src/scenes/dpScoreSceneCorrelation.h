@@ -162,6 +162,8 @@ private:
     Node* mCurrentOutput{nullptr};
     
     bool mMoveCamera{true};
+
+    int mCurrentOutputCount{0};
 };
 
 DP_SCORE_NAMESPACE_END
