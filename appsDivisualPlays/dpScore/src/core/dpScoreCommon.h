@@ -153,6 +153,12 @@ union intByte {
     byte b[4];
 };
 
+struct OnOffNumpunct : numpunct<char> {
+    using numpunct<char>::string_type;
+    string_type do_truename()  const { return "on "; }
+    string_type do_falsename() const { return "off"; }
+};
+
 DP_SCORE_NAMESPACE_END
 
 #define dpDebugFunc() ofLogVerbose() << getClassName(*this) << ", " << __FUNCTION__

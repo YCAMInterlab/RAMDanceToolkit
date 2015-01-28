@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
-		D20125EB1A6E4003000246B8 /* dpScoreAnalyzePixelate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20125E91A6E4003000246B8 /* dpScoreAnalyzePixelate.cpp */; };
-		D20125EC1A6E5A43000246B8 /* dpScoreAnalyzePixelate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20125E91A6E4003000246B8 /* dpScoreAnalyzePixelate.cpp */; };
 		D21C77201A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21C771E1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp */; };
 		D21D0B891A4C046000CC3598 /* ofxUI2DGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF51A4C046000CC3598 /* ofxUI2DGraph.cpp */; };
 		D21D0B8A1A4C046000CC3598 /* ofxUI2DPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF71A4C046000CC3598 /* ofxUI2DPad.cpp */; };
@@ -67,6 +65,11 @@
 		D228B37D1A5FC2D8005F0404 /* ofxMotionerUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3751A5FC2D8005F0404 /* ofxMotionerUtils.cpp */; };
 		D228B37E1A5FC2D8005F0404 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D228B3771A5FC2D8005F0404 /* README.md */; };
 		D228B3841A5FC95C005F0404 /* dpScoreEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3821A5FC95C005F0404 /* dpScoreEvent.cpp */; };
+		D243660F1A777037001AFA13 /* dpScoreAnalyzeMean.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24366051A777037001AFA13 /* dpScoreAnalyzeMean.cpp */; };
+		D24366101A777037001AFA13 /* dpScoreAnalyzePixelate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24366071A777037001AFA13 /* dpScoreAnalyzePixelate.cpp */; };
+		D24366111A777037001AFA13 /* dpScoreMasterHakoniwa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24366091A777037001AFA13 /* dpScoreMasterHakoniwa.cpp */; };
+		D24366121A777037001AFA13 /* dpScoreSceneMasterDecrement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D243660B1A777037001AFA13 /* dpScoreSceneMasterDecrement.cpp */; };
+		D24366131A777037001AFA13 /* dpScoreSceneMasterIncrement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D243660D1A777037001AFA13 /* dpScoreSceneMasterIncrement.cpp */; };
 		D24431111A68BD0D00574ACF /* dpScoreSceneDataSphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D244310F1A68BD0D00574ACF /* dpScoreSceneDataSphere.cpp */; };
 		D24431171A690F1E00574ACF /* dpScoreSceneDataBarcode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24431151A690F1E00574ACF /* dpScoreSceneDataBarcode.cpp */; };
 		D244311A1A6919A800574ACF /* dpScoreSceneDataText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24431181A6919A800574ACF /* dpScoreSceneDataText.cpp */; };
@@ -113,7 +116,6 @@
 		D2B5BB381A662A3F009B0F1E /* dpScoreSceneBodyTemplate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B5BB361A662A3F009B0F1E /* dpScoreSceneBodyTemplate.cpp */; };
 		D2B5BB3D1A6690EF009B0F1E /* dpScoreSceneBodyBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B5BB3B1A6690EF009B0F1E /* dpScoreSceneBodyBox.cpp */; };
 		D2C4DE7D1A6286E400342E4F /* dpScoreSceneBodyLines.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C4DE7B1A6286E400342E4F /* dpScoreSceneBodyLines.cpp */; };
-		D2CE423F1A6BC3DE001644F2 /* dpScoreMasterHakoniwa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2CE423D1A6BC3DE001644F2 /* dpScoreMasterHakoniwa.cpp */; };
 		D2E2B73F1A4A4FB500570C58 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B7381A4A4FB500570C58 /* tinyxml.cpp */; };
 		D2E2B7401A4A4FB500570C58 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B73A1A4A4FB500570C58 /* tinyxmlerror.cpp */; };
 		D2E2B7411A4A4FB500570C58 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E2B73B1A4A4FB500570C58 /* tinyxmlparser.cpp */; };
@@ -211,9 +213,6 @@
 		D2E8918C1A6B586C0047B75A /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424610CC5A17004149E2 /* IOKit.framework */; };
 		D2E8918D1A6B586C0047B75A /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */; };
 		D2E891901A6B586C0047B75A /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
-		D2E8919A1A6B5B460047B75A /* dpScoreSceneMasterIncrement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2E891981A6B5B460047B75A /* dpScoreSceneMasterIncrement.cpp */; };
-		D2FE53C21A6CBDAD00B01E98 /* dpScoreSceneMasterDecrement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2FE53C11A6CBDAD00B01E98 /* dpScoreSceneMasterDecrement.cpp */; };
-		D2FE53C51A6D43EE00B01E98 /* dpScoreAnalyzeMean.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2FE53C31A6D43EE00B01E98 /* dpScoreAnalyzeMean.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -283,8 +282,6 @@
 
 /* Begin PBXFileReference section */
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
-		D20125E91A6E4003000246B8 /* dpScoreAnalyzePixelate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpScoreAnalyzePixelate.cpp; path = src/scenes/dpScoreAnalyzePixelate.cpp; sourceTree = SOURCE_ROOT; };
-		D20125EA1A6E4003000246B8 /* dpScoreAnalyzePixelate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpScoreAnalyzePixelate.h; path = src/scenes/dpScoreAnalyzePixelate.h; sourceTree = SOURCE_ROOT; };
 		D21C771E1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneCorrelation.cpp; sourceTree = "<group>"; };
 		D21C771F1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneCorrelation.h; sourceTree = "<group>"; };
 		D21D08821A4C045D00CC3598 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -407,6 +404,16 @@
 		D228B3771A5FC2D8005F0404 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D228B3821A5FC95C005F0404 /* dpScoreEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreEvent.cpp; sourceTree = "<group>"; };
 		D228B3831A5FC95C005F0404 /* dpScoreEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreEvent.h; sourceTree = "<group>"; };
+		D24366051A777037001AFA13 /* dpScoreAnalyzeMean.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreAnalyzeMean.cpp; sourceTree = "<group>"; };
+		D24366061A777037001AFA13 /* dpScoreAnalyzeMean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreAnalyzeMean.h; sourceTree = "<group>"; };
+		D24366071A777037001AFA13 /* dpScoreAnalyzePixelate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreAnalyzePixelate.cpp; sourceTree = "<group>"; };
+		D24366081A777037001AFA13 /* dpScoreAnalyzePixelate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreAnalyzePixelate.h; sourceTree = "<group>"; };
+		D24366091A777037001AFA13 /* dpScoreMasterHakoniwa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreMasterHakoniwa.cpp; sourceTree = "<group>"; };
+		D243660A1A777037001AFA13 /* dpScoreMasterHakoniwa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreMasterHakoniwa.h; sourceTree = "<group>"; };
+		D243660B1A777037001AFA13 /* dpScoreSceneMasterDecrement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneMasterDecrement.cpp; sourceTree = "<group>"; };
+		D243660C1A777037001AFA13 /* dpScoreSceneMasterDecrement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneMasterDecrement.h; sourceTree = "<group>"; };
+		D243660D1A777037001AFA13 /* dpScoreSceneMasterIncrement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneMasterIncrement.cpp; sourceTree = "<group>"; };
+		D243660E1A777037001AFA13 /* dpScoreSceneMasterIncrement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneMasterIncrement.h; sourceTree = "<group>"; };
 		D244310F1A68BD0D00574ACF /* dpScoreSceneDataSphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneDataSphere.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D24431101A68BD0D00574ACF /* dpScoreSceneDataSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneDataSphere.h; sourceTree = "<group>"; };
 		D24431151A690F1E00574ACF /* dpScoreSceneDataBarcode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneDataBarcode.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -507,8 +514,6 @@
 		D2B5BB3C1A6690EF009B0F1E /* dpScoreSceneBodyBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyBox.h; sourceTree = "<group>"; };
 		D2C4DE7B1A6286E400342E4F /* dpScoreSceneBodyLines.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneBodyLines.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D2C4DE7C1A6286E400342E4F /* dpScoreSceneBodyLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyLines.h; sourceTree = "<group>"; };
-		D2CE423D1A6BC3DE001644F2 /* dpScoreMasterHakoniwa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreMasterHakoniwa.cpp; sourceTree = "<group>"; };
-		D2CE423E1A6BC3DE001644F2 /* dpScoreMasterHakoniwa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreMasterHakoniwa.h; sourceTree = "<group>"; };
 		D2E2B7381A4A4FB500570C58 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		D2E2B7391A4A4FB500570C58 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		D2E2B73A1A4A4FB500570C58 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
@@ -518,12 +523,6 @@
 		D2E8910D1A6B57CA0047B75A /* dpScore copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "dpScore copy-Info.plist"; path = "/Users/falcon/Documents/of_v0.8.4_osx_release/RAMDanceToolkit/appsDivisualPlays/dpScore/dpScore copy-Info.plist"; sourceTree = "<absolute>"; };
 		D2E891941A6B586C0047B75A /* dpMasterHakoniwaDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dpMasterHakoniwaDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2E891951A6B586C0047B75A /* dpScore copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "dpScore copy2-Info.plist"; path = "/Users/falcon/Documents/of_v0.8.4_osx_release/RAMDanceToolkit/appsDivisualPlays/dpScore/dpScore copy2-Info.plist"; sourceTree = "<absolute>"; };
-		D2E891981A6B5B460047B75A /* dpScoreSceneMasterIncrement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneMasterIncrement.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
-		D2E891991A6B5B460047B75A /* dpScoreSceneMasterIncrement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneMasterIncrement.h; sourceTree = "<group>"; };
-		D2FE53C01A6CBD9E00B01E98 /* dpScoreSceneMasterDecrement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneMasterDecrement.h; sourceTree = "<group>"; };
-		D2FE53C11A6CBDAD00B01E98 /* dpScoreSceneMasterDecrement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneMasterDecrement.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
-		D2FE53C31A6D43EE00B01E98 /* dpScoreAnalyzeMean.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpScoreAnalyzeMean.cpp; path = src/scenes/dpScoreAnalyzeMean.cpp; sourceTree = SOURCE_ROOT; };
-		D2FE53C41A6D43EE00B01E98 /* dpScoreAnalyzeMean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpScoreAnalyzeMean.h; path = src/scenes/dpScoreAnalyzeMean.h; sourceTree = SOURCE_ROOT; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -795,6 +794,23 @@
 			path = ../../addons/ofxMotioner;
 			sourceTree = "<group>";
 		};
+		D24366041A777037001AFA13 /* master hakoniwa */ = {
+			isa = PBXGroup;
+			children = (
+				D24366091A777037001AFA13 /* dpScoreMasterHakoniwa.cpp */,
+				D243660A1A777037001AFA13 /* dpScoreMasterHakoniwa.h */,
+				D24366051A777037001AFA13 /* dpScoreAnalyzeMean.cpp */,
+				D24366061A777037001AFA13 /* dpScoreAnalyzeMean.h */,
+				D24366071A777037001AFA13 /* dpScoreAnalyzePixelate.cpp */,
+				D24366081A777037001AFA13 /* dpScoreAnalyzePixelate.h */,
+				D243660B1A777037001AFA13 /* dpScoreSceneMasterDecrement.cpp */,
+				D243660C1A777037001AFA13 /* dpScoreSceneMasterDecrement.h */,
+				D243660D1A777037001AFA13 /* dpScoreSceneMasterIncrement.cpp */,
+				D243660E1A777037001AFA13 /* dpScoreSceneMasterIncrement.h */,
+			);
+			path = "master hakoniwa";
+			sourceTree = "<group>";
+		};
 		D24C21911A49653D009D0796 /* ofxOsc */ = {
 			isa = PBXGroup;
 			children = (
@@ -913,12 +929,6 @@
 				D29034071A4D4ADE00577E04 /* dpScoreSceneManager.h */,
 				D228B3821A5FC95C005F0404 /* dpScoreEvent.cpp */,
 				D228B3831A5FC95C005F0404 /* dpScoreEvent.h */,
-				D2CE423D1A6BC3DE001644F2 /* dpScoreMasterHakoniwa.cpp */,
-				D2CE423E1A6BC3DE001644F2 /* dpScoreMasterHakoniwa.h */,
-				D2FE53C31A6D43EE00B01E98 /* dpScoreAnalyzeMean.cpp */,
-				D2FE53C41A6D43EE00B01E98 /* dpScoreAnalyzeMean.h */,
-				D20125E91A6E4003000246B8 /* dpScoreAnalyzePixelate.cpp */,
-				D20125EA1A6E4003000246B8 /* dpScoreAnalyzePixelate.h */,
 				D26CA8191A6F5E370050BB3D /* dpScoreUniqueStack.cpp */,
 				D26CA81A1A6F5E370050BB3D /* dpScoreUniqueStack.h */,
 			);
@@ -930,7 +940,6 @@
 			children = (
 				D21C771E1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp */,
 				D21C771F1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.h */,
-				D2E891971A6B59F00047B75A /* master hakoniwa */,
 				D29B99111A63F023000115C5 /* boids */,
 				D29B990C1A63A22C000115C5 /* body */,
 				D29B990B1A63A222000115C5 /* hakoniwa */,
@@ -1048,17 +1057,6 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		D2E891971A6B59F00047B75A /* master hakoniwa */ = {
-			isa = PBXGroup;
-			children = (
-				D2E891981A6B5B460047B75A /* dpScoreSceneMasterIncrement.cpp */,
-				D2E891991A6B5B460047B75A /* dpScoreSceneMasterIncrement.h */,
-				D2FE53C11A6CBDAD00B01E98 /* dpScoreSceneMasterDecrement.cpp */,
-				D2FE53C01A6CBD9E00B01E98 /* dpScoreSceneMasterDecrement.h */,
-			);
-			path = "master hakoniwa";
-			sourceTree = "<group>";
-		};
 		E4328144138ABC890047C5CB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1096,6 +1094,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				D24366041A777037001AFA13 /* master hakoniwa */,
 				D29034001A4D4ADE00577E04 /* core */,
 				D29034081A4D4ADE00577E04 /* scenes */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
@@ -1234,18 +1233,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D20125EC1A6E5A43000246B8 /* dpScoreAnalyzePixelate.cpp in Sources */,
 				D2E891131A6B586C0047B75A /* ofxUIBaseDraws.cpp in Sources */,
-				D2FE53C21A6CBDAD00B01E98 /* dpScoreSceneMasterDecrement.cpp in Sources */,
+				D24366121A777037001AFA13 /* dpScoreSceneMasterDecrement.cpp in Sources */,
 				D2E891141A6B586C0047B75A /* ofxOscMessage.cpp in Sources */,
 				D2E891161A6B586C0047B75A /* ofxOscReceiver.cpp in Sources */,
 				D2E891181A6B586C0047B75A /* ofxUIMultiImageButton.cpp in Sources */,
 				D2E891191A6B586C0047B75A /* ofxMotionerNode.cpp in Sources */,
 				D2E8911A1A6B586C0047B75A /* OscTypes.cpp in Sources */,
-				D2CE423F1A6BC3DE001644F2 /* dpScoreMasterHakoniwa.cpp in Sources */,
 				D2E8911C1A6B586C0047B75A /* dpScoreSceneBodyBase.cpp in Sources */,
 				D2E8911E1A6B586C0047B75A /* ofxUIMovingGraph.cpp in Sources */,
+				D24366131A777037001AFA13 /* dpScoreSceneMasterIncrement.cpp in Sources */,
 				D2E8911F1A6B586C0047B75A /* main.cpp in Sources */,
+				D24366111A777037001AFA13 /* dpScoreMasterHakoniwa.cpp in Sources */,
 				D2E891221A6B586C0047B75A /* ofxUIFPSSlider.cpp in Sources */,
 				D2E891241A6B586C0047B75A /* ofxUIImage.cpp in Sources */,
 				D2E891261A6B586C0047B75A /* ofxUIWidgetWithLabel.cpp in Sources */,
@@ -1295,13 +1294,14 @@
 				D2E891651A6B586C0047B75A /* ofxMotionerUtils.cpp in Sources */,
 				D2E891661A6B586C0047B75A /* ofxUINumberDialer.cpp in Sources */,
 				D2E891671A6B586C0047B75A /* OscPrintReceivedElements.cpp in Sources */,
-				D2FE53C51A6D43EE00B01E98 /* dpScoreAnalyzeMean.cpp in Sources */,
+				D243660F1A777037001AFA13 /* dpScoreAnalyzeMean.cpp in Sources */,
 				D2E891681A6B586C0047B75A /* ofxUILabel.cpp in Sources */,
 				D2E8916A1A6B586C0047B75A /* ofxUISuperCanvas.cpp in Sources */,
 				D2E8916B1A6B586C0047B75A /* ofxUIMultiImageToggle.cpp in Sources */,
 				D2E8916C1A6B586C0047B75A /* tinyxmlerror.cpp in Sources */,
 				D2E8916D1A6B586C0047B75A /* dpScoreEvent.cpp in Sources */,
 				D2E8916E1A6B586C0047B75A /* OscOutboundPacketStream.cpp in Sources */,
+				D24366101A777037001AFA13 /* dpScoreAnalyzePixelate.cpp in Sources */,
 				D2E8916F1A6B586C0047B75A /* tinyxml.cpp in Sources */,
 				D2E891711A6B586C0047B75A /* ofxOscBundle.cpp in Sources */,
 				D2E891721A6B586C0047B75A /* NetworkingUtilsWin.cpp in Sources */,
@@ -1311,7 +1311,6 @@
 				D2E891761A6B586C0047B75A /* dpScoreCommon.cpp in Sources */,
 				D2E891771A6B586C0047B75A /* ofxUICanvas.cpp in Sources */,
 				D2E891781A6B586C0047B75A /* ofxException.cpp in Sources */,
-				D2E8919A1A6B5B460047B75A /* dpScoreSceneMasterIncrement.cpp in Sources */,
 				D2E891791A6B586C0047B75A /* ofApp.cpp in Sources */,
 				D2E8917B1A6B586C0047B75A /* ofxMotioner.cpp in Sources */,
 				D2E8917C1A6B586C0047B75A /* ofxUIBiLabelSlider.cpp in Sources */,
@@ -1406,7 +1405,6 @@
 				D21D0C0B1A4C0E2E00CC3598 /* README.md in Sources */,
 				D21D0BA31A4C046000CC3598 /* ofxUIRangeSlider.cpp in Sources */,
 				D29034171A4D4ADE00577E04 /* dpScoreSceneVec2SimpleGraph.cpp in Sources */,
-				D20125EB1A6E4003000246B8 /* dpScoreAnalyzePixelate.cpp in Sources */,
 				D228B37D1A5FC2D8005F0404 /* ofxMotionerUtils.cpp in Sources */,
 				D26CA81B1A6F5E370050BB3D /* dpScoreUniqueStack.cpp in Sources */,
 				D21D0BA11A4C046000CC3598 /* ofxUINumberDialer.cpp in Sources */,

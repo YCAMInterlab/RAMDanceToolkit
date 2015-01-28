@@ -81,7 +81,7 @@ void ofApp::setup()
     
 #ifdef DP_MASTER_HAKONIWA
     ofSetWindowTitle("dpMasterHakoniwa");
-
+    
     getMH().initialize();
     getMH().setupUI(mSceneManager.getTabBar());
     
@@ -191,6 +191,11 @@ void ofApp::setup()
     
     mFont.loadFont(kFontPath, 150);
     
+    mTitleReplaceList.push_back(make_pair("dpVis", ""));
+    mTitleReplaceList.push_back(make_pair("dpH", ""));
+    mTitleReplaceList.push_back(make_pair("RE", ""));
+    mTitleReplaceList.push_back(make_pair("Theta", "FishEye"));
+    
 #ifndef DP_MASTER_HAKONIWA
     keyPressed('f');
     keyPressed('c');
@@ -204,44 +209,13 @@ void ofApp::update()
 {
     OFX_BEGIN_EXCEPTION_HANDLING
     
-    const int t = ofGetElapsedTimef()*10.f;
-    
-#ifdef DP_MASTER_HAKONIWA
-    bool newMean{false};
-    bool newPixelate{false};
-#endif
-    
     while (mOscReceiver.hasWaitingMessages()) {
         ofxOscMessage m;
         mOscReceiver.getNextMessage(&m);
         const string addr = m.getAddress();
         
         if (addr == kOscAddrChangeScene) {
-            OFX_BEGIN_EXCEPTION_HANDLING
-            if (m.getNumArgs() >= 1) {
-                if (m.getArgType(0) == OFXOSC_TYPE_INT32) {
-                    mSceneManager.change(m.getArgAsInt32(0));
-                }
-                else if (m.getArgType(0) == OFXOSC_TYPE_STRING){
-                    mSceneManager.change(m.getArgAsString(0));
-                }
-                
-                mTitleNames.clear();
-                if (m.getNumArgs()>=2) {
-                    mTimeSceneChanged = ofGetElapsedTimef();
-                    for (int i=1; i<m.getNumArgs(); i++) {
-                        if (m.getArgType(i) == OFXOSC_TYPE_STRING) {
-                            string name{m.getArgAsString(i)};
-                            ofStringReplace(name, "dpVis", "");
-                            ofStringReplace(name, "dpH", "");
-                            ofStringReplace(name, "RE", "");
-                            ofStringReplace(name, "Theta", "FishEye");
-                            mTitleNames.push_back(name);
-                        }
-                    }
-                }
-            }
-            OFX_END_EXCEPTION_HANDLING
+            changeSceneWithOsc(m);
         }
         else if (addr == kOscAddrSensorScale) {
             if (m.getNumArgs() >= 1 && m.getArgType(0) == OFXOSC_TYPE_FLOAT) {
@@ -254,60 +228,13 @@ void ofApp::update()
             OFX_END_EXCEPTION_HANDLING
         }
         else {
-            OFX_BEGIN_EXCEPTION_HANDLING
-            const string newAddr = makeInternalCameraUnitAddress(addr);
-            if (newAddr == kOscAddrCameraUnitMean) {
-                mCameraUnitMessageMean = m;
-                mCameraUnitMessageMean.setAddress(kOscAddrCameraUnitMean);
-#ifdef DP_MASTER_HAKONIWA
-                newMean = true;
-#endif
-            }
-            else if (newAddr == kOscAddrCameraUnitPixelateR) {
-                mCameraUnitMessagePixelateR = m;
-                mCameraUnitMessagePixelateR.setAddress(kOscAddrCameraUnitPixelateR);
-#ifdef DP_MASTER_HAKONIWA
-                newPixelate = true;
-#endif
-            }
-            else if (newAddr == kOscAddrCameraUnitPixelateG) {
-                mCameraUnitMessagePixelateG = m;
-                mCameraUnitMessagePixelateG.setAddress(kOscAddrCameraUnitPixelateG);
-#ifdef DP_MASTER_HAKONIWA
-                newPixelate = true;
-#endif
-            }
-            else if (newAddr == kOscAddrCameraUnitPixelateB) {
-                mCameraUnitMessagePixelateB = m;
-                mCameraUnitMessagePixelateB.setAddress(kOscAddrCameraUnitPixelateB);
-#ifdef DP_MASTER_HAKONIWA
-                newPixelate = true;
-#endif
-            }
-            else if (newAddr == kOscAddrCameraUnitVector) {
-                mCameraUnitMessageVector.clear();
-                mCameraUnitMessageVector.setAddress(kOscAddrCameraUnitVector);
-                for (int i=0; i<m.getNumArgs(); i++) {
-                    mCameraUnitMessageVector.addFloatArg(m.getArgAsFloat(i) * mSensorScale);
-                }
-            }
-            else if (newAddr == kOscAddrCameraUnitVectorTotal) {
-                mCameraUnitMessageVectorTotal.clear();
-                mCameraUnitMessageVectorTotal.setAddress(kOscAddrCameraUnitVectorTotal);
-                for (int i=0; i<m.getNumArgs(); i++) {
-                    mCameraUnitMessageVectorTotal.addFloatArg(m.getArgAsFloat(i) * mSensorScale);
-                }
-            }
-            OFX_END_EXCEPTION_HANDLING
+            updateCameraUnitOsc(m);
         }
     }
     
     if (mDebugCamUnit) {
         generateFakeVectorData();
         generateFakeMeanData();
-#ifdef DP_MASTER_HAKONIWA
-        newMean = true;
-#endif
     }
     
     ofxMotioner::update();
@@ -315,7 +242,7 @@ void ofApp::update()
     ofxEventMessage m;
     m.setAddress(kOscAddrMotioner);
     mSceneManager.update(m);
-
+    
     mSceneManager.update(mCameraUnitMessageMean);
     mSceneManager.update(mCameraUnitMessageVector);
     mSceneManager.update(mCameraUnitMessageVectorTotal);
@@ -324,12 +251,10 @@ void ofApp::update()
     getMH().update();
     getMH().updateCameraUnit(mCameraUnitMessageVector);
     getMH().updateCameraUnit(mCameraUnitMessageVectorTotal);
-    if (newMean) getMH().updateCameraUnit(mCameraUnitMessageMean);
-    if (newPixelate) {
-        getMH().updateCameraUnit(mCameraUnitMessagePixelateR);
-        getMH().updateCameraUnit(mCameraUnitMessagePixelateG);
-        getMH().updateCameraUnit(mCameraUnitMessagePixelateB);
-    }
+    getMH().updateCameraUnit(mCameraUnitMessageMean);
+    getMH().updateCameraUnit(mCameraUnitMessagePixelateR);
+    getMH().updateCameraUnit(mCameraUnitMessagePixelateG);
+    getMH().updateCameraUnit(mCameraUnitMessagePixelateB);
 #endif
     OFX_END_EXCEPTION_HANDLING
 }
@@ -381,6 +306,86 @@ string ofApp::makeInternalCameraUnitAddress(const string& addr)
     return newAddr;
 }
 
+void ofApp::changeSceneWithOsc(const ofxOscMessage& m)
+{
+    OFX_BEGIN_EXCEPTION_HANDLING
+    if (m.getNumArgs() >= 1 && m.getArgType(0) == OFXOSC_TYPE_INT32) {
+        mSceneManager.change(m.getArgAsInt32(0));
+    }
+    
+    else if (m.getNumArgs() >= 1 && m.getArgType(0) == OFXOSC_TYPE_STRING){
+        mSceneManager.change(m.getArgAsString(0));
+    }
+    
+    if (m.getNumArgs()>=2) {
+        mTitleNames.clear();
+        mTimeSceneChanged = ofGetElapsedTimef();
+        for (int i=1; i<m.getNumArgs(); i++) {
+            if (m.getArgType(i) == OFXOSC_TYPE_STRING) {
+                string name{m.getArgAsString(i)};
+                for (auto& p : mTitleReplaceList) {
+                    ofStringReplace(name, p.first, p.second);
+                }
+                mTitleNames.push_back(name);
+            }
+        }
+    }
+    OFX_END_EXCEPTION_HANDLING
+}
+
+void ofApp::updateCameraUnitOsc(const ofxOscMessage& m)
+{
+    OFX_BEGIN_EXCEPTION_HANDLING
+    const string newAddr{makeInternalCameraUnitAddress(m.getAddress())};
+    if (newAddr == kOscAddrCameraUnitMean) {
+        mCameraUnitMessageMean = m;
+        mCameraUnitMessageMean.setAddress(kOscAddrCameraUnitMean);
+    }
+    else if (newAddr == kOscAddrCameraUnitPixelateR) {
+        mCameraUnitMessagePixelateR = m;
+        mCameraUnitMessagePixelateR.setAddress(kOscAddrCameraUnitPixelateR);
+    }
+    else if (newAddr == kOscAddrCameraUnitPixelateG) {
+        mCameraUnitMessagePixelateG = m;
+        mCameraUnitMessagePixelateG.setAddress(kOscAddrCameraUnitPixelateG);
+    }
+    else if (newAddr == kOscAddrCameraUnitPixelateB) {
+        mCameraUnitMessagePixelateB = m;
+        mCameraUnitMessagePixelateB.setAddress(kOscAddrCameraUnitPixelateB);
+    }
+    else if (newAddr == kOscAddrCameraUnitVector) {
+        mCameraUnitMessageVector.clear();
+        mCameraUnitMessageVector.setAddress(kOscAddrCameraUnitVector);
+        for (int i=0; i<m.getNumArgs(); i++) {
+            if (m.getArgType(i) == OFXOSC_TYPE_FLOAT) {
+                mCameraUnitMessageVector
+                .addFloatArg(m.getArgAsFloat(i) * mSensorScale);
+            }
+            else {
+                ofxThrowExceptionf(ofxException,
+                                   "received incorrect arg type %d",
+                                   m.getArgType(i));
+            }
+        }
+    }
+    else if (newAddr == kOscAddrCameraUnitVectorTotal) {
+        mCameraUnitMessageVectorTotal.clear();
+        mCameraUnitMessageVectorTotal.setAddress(kOscAddrCameraUnitVectorTotal);
+        for (int i=0; i<m.getNumArgs(); i++) {
+            if (m.getArgType(i) == OFXOSC_TYPE_FLOAT) {
+                mCameraUnitMessageVectorTotal
+                .addFloatArg(m.getArgAsFloat(i) * mSensorScale);
+            }
+            else {
+                ofxThrowExceptionf(ofxException,
+                                   "received incorrect arg type %d",
+                                   m.getArgType(i));
+            }
+        }
+    }
+    OFX_END_EXCEPTION_HANDLING
+}
+
 #pragma mark ___________________________________________________________________
 void ofApp::draw()
 {
@@ -395,60 +400,69 @@ void ofApp::draw()
     const float t{ofGetElapsedTimef()-mTimeSceneChanged};
     
     if (t < mTitleDuration) {
-        ofPushStyle();
-        ofPushMatrix();
-        ofEnableAlphaBlending();
-        const float ww{(float)ofGetWidth()};
-        const float wh{(float)ofGetHeight()};
-        
-        const float tt{ofClamp(t, 0.f, 1.f)};
-        int longestTitle{0};
-        
-        for (auto& s : mTitleNames) {
-            if (s.size() > longestTitle) longestTitle = s.size();
-        }
-        const int numChar{(int)(longestTitle * tt)};
-        const float shift{kW / 8.f};
-        for (int i=0; i<mTitleNames.size(); i++) {
-            string s{mTitleNames.at(i)};
-            ofSetColor(ofColor::white);
-            const float x{20.f};
-            const float y{getLineUped(wh, i, mTitleNames.size(), false)};
-            const int num{min(max(0, numChar), (int)s.size())};
-            mFont.drawString(s.substr(0, num), x + shift, y);
-        }
-        
-       
-        ofPopMatrix();
-        ofPopStyle();
+        drawTitle(t);
     }
     else {
         mSceneManager.draw();
     }
 #endif
     
-#ifndef DP_MASTER_HAKONIWA
     if (mShowFps) {
-#endif
-        ofPushStyle();
-        ofSetColor(ofColor::white, 200);
-        ofDrawBitmapString("fps: " + ofToString(ofGetFrameRate(), 2),
-                           ofPoint(20.f, ofGetHeight()-20.f));
-        ofPopStyle();
-#ifndef DP_MASTER_HAKONIWA
+        drawFps();
     }
-#endif
-    
     if (mInvert) {
-        ofPushStyle();
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
-        ofSetColor(ofColor::white);
-        ofRect(ofGetWindowRect());
-        ofPopStyle();
+        drawInvert();
     }
-        
+    
     OFX_END_EXCEPTION_HANDLING
+}
+
+void ofApp::drawTitle(float t)
+{
+    ofPushStyle();
+    ofPushMatrix();
+    ofEnableAlphaBlending();
+    const float ww{(float)ofGetWidth()};
+    const float wh{(float)ofGetHeight()};
+    
+    const float tt{ofClamp(t, 0.f, 1.f)};
+    int longestTitleLength{0};
+    
+    for (auto& s : mTitleNames) {
+        if (s.size() > longestTitleLength)
+            longestTitleLength = s.size();
+    }
+    const int numChar{(int)(longestTitleLength * tt)};
+    const float shift{kW / 8.f};
+    for (int i=0; i<mTitleNames.size(); i++) {
+        string s{mTitleNames.at(i)};
+        ofSetColor(ofColor::white);
+        const float x{20.f};
+        const float y{getLineUped(wh, i, mTitleNames.size(), false)};
+        const int num{min(max(0, numChar), (int)s.size())};
+        mFont.drawString(s.substr(0, num), x + shift, y);
+    }
+    ofPopMatrix();
+    ofPopStyle();
+}
+
+void ofApp::drawFps()
+{
+    ofPushStyle();
+    ofSetColor(ofColor::white, 200);
+    ofDrawBitmapString("fps: " + ofToString(ofGetFrameRate(), 2),
+                       ofPoint(20.f, ofGetHeight()-20.f));
+    ofPopStyle();
+}
+
+void ofApp::drawInvert()
+{
+    ofPushStyle();
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
+    ofSetColor(ofColor::white);
+    ofRect(ofGetWindowRect());
+    ofPopStyle();
 }
 
 #pragma mark ___________________________________________________________________
@@ -499,7 +513,7 @@ void ofApp::keyPressed(int key)
             mShowCursor ^=true;
             mShowCursor ? ofShowCursor() : ofHideCursor();
             break;
-            case '/':
+        case '/':
             mShowFps ^= true;
             break;
         case OF_KEY_LEFT:

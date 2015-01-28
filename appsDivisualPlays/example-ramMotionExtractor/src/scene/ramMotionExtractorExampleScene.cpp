@@ -15,8 +15,6 @@ ramMotionExtractorExampleScene::ramMotionExtractorExampleScene(){
 	mDrawPreview	= true;
 	mDrawDump		= true;
 
-	sender.setup("localhost", 8528);
-
 }
 
 void ramMotionExtractorExampleScene::setupControlPanel(){
@@ -39,12 +37,6 @@ void ramMotionExtractorExampleScene::update(){
 
 	/*=== update ===*/
 	motionExtractor.update();
-
-	/*=== OSC Send Example ===*/
-	ofxOscMessage m;
-	m.setAddress("/dp/hakoniwa/testHakoniwa");
-	m.addFloatArg(motionExtractor.getVelocitySpeedAt(0)); //send node's speed
-	sender.sendMessage(m);
 
 }
 
@@ -71,6 +63,7 @@ void ramMotionExtractorExampleScene::draw(){
 
 void ramMotionExtractorExampleScene::example_drawLines(){
 
+	//========  Draw line At 0---1, 2---3, 4---5..  ==========
 	ofSetColor(255);
 	for (int i = 0;i < motionExtractor.getNumPort() - 1;i+=2){
 
@@ -84,6 +77,7 @@ void ramMotionExtractorExampleScene::example_drawLines(){
 
 void ramMotionExtractorExampleScene::example_drawTriangles(){
 
+	//========  Draw triangle between 0-1-2  ===============
 	ofVec3f vec_a = motionExtractor.getPositionAt(0);
 	ofVec3f vec_b = motionExtractor.getPositionAt(1);
 	ofVec3f vec_c = motionExtractor.getPositionAt(2);

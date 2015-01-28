@@ -90,8 +90,7 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     const float sizeMid{25.f};
     const float sizeSml{OFX_UI_GLOBAL_BUTTON_DIMENSION};
     const float w{kGuiWidth};
-    const float h{ofGetHeight() * 0.5f + kMargin};
-    const float lineH{12.f};
+    const float h{kGuiHeight};
     tabbar->setWidth(w);
     tabbar->setColorBack(kBackgroundColor);
     tabbar->setPosition(kLineWidth, kTopOffset);
@@ -155,7 +154,7 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     ofAddListener(scoreSelectTab->newGUIEvent, this, &MasterHakoniwa::guiEvent);
 
     tabbar->addToggle("Display Hakoniwa title on Score", &mEnableShowHakoniwaTitle);
-    tabbar->addSlider("Score Sensor scale", 1.f, 50.f, &mScoreSensorScale, w, lineH);
+    tabbar->addSlider("Score Sensor scale", 1.f, 50.f, &mScoreSensorScale, w, kLineHeight);
     
     tabbar->addSpacer(w, 1.f);
     tabbar->addLabel("[CameraUnit]", OFX_UI_FONT_SMALL);
@@ -172,8 +171,8 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     meanTab->setName("Mean Settings");
     meanTab->addLabel("Mean Settings", OFX_UI_FONT_SMALL);
     meanTab->addSpacer();
-    meanTab->addSlider("Limit", 0.1f, 100.f, &mAnalyzeMean.mMeanLimit, w - kMargin, lineH);
-    meanTab->addSlider("Min Time", 0.1f, 60.f * 3.f, &mAnalyzeMean.mMinSetSceneTime, w - kMargin, lineH);
+    meanTab->addSlider("Limit", 0.1f, 100.f, &mAnalyzeMean.mMeanLimit, w - kMargin, kLineHeight);
+    meanTab->addSlider("Min Time", 0.1f, 60.f * 3.f, &mAnalyzeMean.mMinSetSceneTime, w - kMargin, kLineHeight);
     tabbar->addCanvas(meanTab);
     
     ofxUICanvas* pixelataTab{new ofxUICanvas};
@@ -183,9 +182,9 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     pixelataTab->setName("Pixelate Settings");
     pixelataTab->addLabel("Pixelate Settings", OFX_UI_FONT_SMALL);
     pixelataTab->addSpacer();
-    pixelataTab->addSlider("Limit", 0.1f, 100.f, &mAnalyzePixelate.mLimit, w - kMargin, lineH);
-    pixelataTab->addSlider("Min Time", 0.1f, 60.f * 3.f, &mAnalyzePixelate.mMinSetSceneTime, w - kMargin, lineH);
-    pixelataTab->addSlider("Do Something Limit", 1000.f, 100000.f, &mAnalyzePixelate.mDoSomethingLimit, w - kMargin, lineH);
+    pixelataTab->addSlider("Limit", 0.1f, 100.f, &mAnalyzePixelate.mLimit, w - kMargin, kLineHeight);
+    pixelataTab->addSlider("Min Time", 0.1f, 60.f * 3.f, &mAnalyzePixelate.mMinSetSceneTime, w - kMargin, kLineHeight);
+    pixelataTab->addSlider("Do Something Limit", 50.f, 1000.f, &mAnalyzePixelate.mDoSomethingLimit, w - kMargin, kLineHeight);
     pixelataTab->addToggle("Do Something", &mAnalyzePixelate.mDoSomething);
     pixelataTab->addToggle("Enable Do Something", &mAnalyzePixelate.mEnableDoSomething);
     tabbar->addCanvas(pixelataTab);
@@ -206,7 +205,7 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     tabbar->addToggle("In", &mPumps.at(0).open);
     tabbar->addWidgetRight(new ofxUIToggle("Out",
                                            &mPumps.at(1).open, sizeSml, sizeSml));
-    tabbar->addSlider("Valve Open Duration", 0.f, 1.f, &mValveOpenDuration, w, lineH);
+    tabbar->addSlider("Valve Open Duration", 0.f, 1.f, &mValveOpenDuration, w, kLineHeight);
     tabbar->addSpacer(w, 1.f);
     
     tabbar->addLabel("MOTIONER method settings", OFX_UI_FONT_SMALL);
@@ -367,7 +366,7 @@ void MasterHakoniwa::updateCameraUnit(ofxEventMessage& m)
 void MasterHakoniwa::draw()
 {
     const float x{kLineWidth + kGuiWidth + kMargin * 2.f + 3.f};
-    const float y{400.f};
+    const float y{kGuiHeight + kMargin + kTopOffset};
     mCamViewport.set(x,
                      y,
                      (ofGetWidth() - x) * 0.5f - kMargin * 2.f,
@@ -514,12 +513,12 @@ void MasterHakoniwa::draw()
 
     ofPushMatrix();
     
-    alignedTranslate(kLineWidth + kGuiWidth * 2.f + kMargin * 3.f, kTopOffset);
+    alignedTranslate(kLineWidth + kGuiWidth * 2.f + kMargin * 3.f - 1.f, kTopOffset);
     ofSetColor(kBackgroundColor);
     alignedRect(0.f,
                 0.f,
                 ofGetWidth() - (kLineWidth + kGuiWidth * 2.f  + kMargin * 6.f),
-                ofGetHeight() - (mCamViewport.height + kTopOffset + kMargin * 3.f + 1.f));
+                kGuiHeight);
     
     alignedTranslate(kMargin, 0.f);
     ofSetColor(kTextColor);

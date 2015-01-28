@@ -35,6 +35,13 @@ private:
     void generateFakeMeanData();
     void generateFakeVectorData();
     string makeInternalCameraUnitAddress(const string& addr);
+    void changeSceneWithOsc(const ofxOscMessage& m);
+    void updateCameraUnitOsc(const ofxOscMessage& m);
+    
+    void drawTitle(float t);
+    void drawFps();
+    void drawInvert();
+    
     dp::score::SceneManager mSceneManager;
     ofxOscReceiver mOscReceiver;
     ofxOscMessage mCameraUnitMessageVector;
@@ -45,7 +52,11 @@ private:
     ofxOscMessage mCameraUnitMessagePixelateB;
     bool mInvert{false};
     bool mDebugCamUnit{false};
+#ifdef DP_MASTER_HAKONIWA
+    bool mShowFps{true};
+#else
     bool mShowFps{false};
+#endif
     bool mShowCursor{true};
     float mTimeSceneChanged{0.f};
 #ifdef DEBUG
@@ -55,6 +66,7 @@ private:
 #endif
     ofTrueTypeFont mFont;
     vector<string> mTitleNames;
+    vector<pair<string, string>> mTitleReplaceList;
     float mSensorScale{1.f};
     const float mSensorScaleMax{50.f};
 };
