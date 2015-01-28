@@ -29,7 +29,7 @@ public:
 
 	void setTranslate(const ofVec3f& v) { translate = v; }
 	void setTranslate(float x, float y, float z) { setTranslate(ofVec3f(x, y, z)); }
-	const ofVec3f& getTranslate() { return translate; }
+	const ofVec3f& getTranslate() const { return translate; }
 
 protected:
 
@@ -64,7 +64,7 @@ public:
 	void setRotate(float rx, float ry, float rz) { setRotate(ofVec3f(rx, ry, rz)); }
 	void setRotate(const ofQuaternion& quat) { rotate = quat; }
 
-	const ofQuaternion& getRotate() { return rotate; }
+	const ofQuaternion& getRotate() const { return rotate; }
 
 protected:
 

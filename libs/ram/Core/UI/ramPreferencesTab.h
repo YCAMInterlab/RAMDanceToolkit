@@ -31,8 +31,8 @@ public:
 	ramPreferencesTab()
 	:ofxUITab("Preferences", false)
 	,fullscreen(false)
-	,useShadows(true)
-	,floorStyle(ramFloor::FLOOR_GRID_LINES)
+	,useShadows(false)
+	,floorStyle(ramFloor::FLOOR_NONE)
 	,floorSize(600.0)
 	,floorGridSize(50.0)
 	,bg(0)
@@ -58,11 +58,11 @@ public:
 		ofAddListener(this->newGUIEvent, this, &ramPreferencesTab::onValueChanged);
 		ofSetFullscreen(fullscreen);
 	}
-	int getFloorPattern() {
+	int getFloorPattern() const {
 		return getChoice(floorStyleRadio);
 	}
-	float getFloorSize() { return floorSize; }
-	float getFloorGridSize() { return floorGridSize; }
+	float getFloorSize() const { return floorSize; }
+	float getFloorGridSize() const { return floorGridSize; }
 	
 	void update() {
 		

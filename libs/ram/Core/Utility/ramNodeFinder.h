@@ -29,10 +29,10 @@ public:
 	ramNodeFinder() : ramNodeIdentifer() {}
 	ramNodeFinder(const ramNodeIdentifer& copy) : ramNodeIdentifer(copy) {}
 
-	void setTargetName(string name_) { name = name_; }
+	void setTargetName(const string& name_) { name = name_; }
 	void setJointID(int index_) { index = index_; }
 
-	inline bool found()
+	inline bool found() const
 	{
 		if (!hasNodeArray(name))
 			return false;
@@ -43,7 +43,7 @@ public:
 
 	//
 
-	bool findOne(ramNode &node)
+	bool findOne(ramNode &node) const
 	{
 		if (!isValid()) return false;
 		
@@ -65,7 +65,7 @@ public:
 
 	//
 
-	vector<ramNode> findAll()
+	vector<ramNode> findAll() const
 	{
 		vector<ramNode> nodes;
 
@@ -74,7 +74,7 @@ public:
 
 		for (int i = 0; i < getNumNodeArray(); i++)
 		{
-			ramNodeArray &actor = getNodeArray(i);
+			const ramNodeArray &actor = getNodeArray(i);
 
 			if (has_target_actor && name != actor.getName()) continue;
 
@@ -82,16 +82,16 @@ public:
 			{
 				if (has_target_node && index != n) continue;
 
-				ramNode &node = actor.getNode(n);
+				const ramNode &node = actor.getNode(n);
 				nodes.push_back(node);
 			}
 		}
 		
-		map<string, ramNodeArray>::iterator it = getActorManager().getAllBus().begin();
+		map<string, ramNodeArray>::const_iterator it = getActorManager().getAllBus().begin();
 		
 		while (it != getActorManager().getAllBus().end())
 		{
-			ramNodeArray &o = (*it).second;
+			const ramNodeArray &o = (*it).second;
 			
 			if (has_target_actor && name != o.getName()) continue;
 			
@@ -99,7 +99,7 @@ public:
 			{
 				if (has_target_node && index != n) continue;
 				
-				ramNode &node = o.getNode(n);
+				const ramNode &node = o.getNode(n);
 				nodes.push_back(node);
 			}
 			

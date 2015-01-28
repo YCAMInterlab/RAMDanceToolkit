@@ -1,0 +1,22 @@
+//
+//  PrefixHeader.pch
+//  RAMDanceToolkit
+//
+//  Created by YoshitoONISHI on 12/25/14.
+//  Copyright (c) 2014 YCAMInterlab. All rights reserved.
+//
+
+#ifndef RAMDanceToolkit_PrefixHeader_pch
+#define RAMDanceToolkit_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#include "ofxUIDefines.h"
+
+#ifdef OFX_UI_FONT_NAME
+#undef OFX_UI_FONT_NAME
+#define OFX_UI_FONT_NAME "../../../../resources/Fonts/FreeUniversal-Regular.ttf"
+#endif
+
+#endif

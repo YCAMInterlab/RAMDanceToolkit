@@ -67,17 +67,22 @@ public:
 	void clear();
 	void appendFrame(const ramNodeArray& copy);
 	ramNodeArray& getFrame(int index);
+    inline const ramNodeArray& getFrame(int index) const {
+        return const_cast<ramNodeArray &>(getFrame(index));
+    }
 	ramNodeArray& getCurrentFrame();
-	
+    inline const ramNodeArray& getCurrentFrame() const {
+        return const_cast<ramNodeArray &>(getCurrentFrame());
+    }
 	
 #pragma mark -
 #pragma mark getters, setters
-	int getCurrentFrameIndex();
-	int getNumFrames();
-	float getAverageFrameTime();
-	float getDuration();
-	float getPlayhead();
-	string getNodeArrayName();
+	int getCurrentFrameIndex() const;
+	int getNumFrames() const;
+	float getAverageFrameTime() const;
+	float getDuration() const;
+	float getPlayhead() const;
+	string getNodeArrayName() const;
 	
 	void setLoop(const bool l);
 	void setRate(const float r);

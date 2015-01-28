@@ -269,12 +269,12 @@ void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
     else assert(false);
 }
 
-const ramNodeIdentifer& ramActorManager::getLastSelectedNodeIdentifer()
+const ramNodeIdentifer& ramActorManager::getLastSelectedNodeIdentifer() const
 {
 	return nodeSelector->identifer;
 }
 
-const ramNode* ramActorManager::getLastSelectedNode()
+const ramNode* ramActorManager::getLastSelectedNode() const
 {
 	const ramNodeIdentifer &node_id = getLastSelectedNodeIdentifer();
 	if (!node_id.isValid()) return NULL;
@@ -282,7 +282,7 @@ const ramNode* ramActorManager::getLastSelectedNode()
 	return &getNodeArray(node_id.name).getNode(node_id.index);
 }
 
-const ramNodeArray* ramActorManager::getLastSelectedNodeArray()
+const ramNodeArray* ramActorManager::getLastSelectedNodeArray() const
 {
 	const ramNodeIdentifer &node_id = getLastSelectedNodeIdentifer();
 	if (!node_id.isValid()) return NULL;

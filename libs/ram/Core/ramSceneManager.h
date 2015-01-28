@@ -32,17 +32,30 @@ public:
 
 	void setup();
 	void addScene(ramBaseScene* scene);
-	
+    
+    void allocateFbos(int w, int h);
+    void deallocateFbos();
+    
+    void setScreen(int sceneId, int screenId, bool enabled);
+    void setAllScreens(int sceneId, bool enabled);
+    
 	size_t getNumScenes() const;
 	size_t findtSceneIndex(string name) const;
-	ramBaseScene* getScene(size_t index) const;
+    ramBaseScene* getScene(size_t index);
+	inline const ramBaseScene* getScene(size_t index) const
+    {
+        return const_cast<ramBaseScene*>(getScene(index));
+    }
 	
 	ramActorsScene* getActorsScene();
+    inline const ramActorsScene* getActorsScene() const
+    {
+        return const_cast<ramActorsScene*>(getActorsScene());
+    }
 	void setShowAllActors(bool showAllActors);
 	bool getShowAllActors() const;
-	
+    
 protected:
-
 	void enableAllEvents();
 	void disableAllEvents();
 
@@ -53,17 +66,23 @@ protected:
 	void rigidExit(ramRigidBody &rigid);
 
 	vector<ramBaseScene*> scenes;
+    vector<vector<bool> > screens;
 	
 	void update(ofEventArgs& args);
 	void draw(ofEventArgs& args);
 	void exit(ofEventArgs& args);
 	
 private:
-	
+    void updateOsc();
+    
 	static ramSceneManager *_instance;
 	ramSceneManager();
 	ramSceneManager(const ramSceneManager&);
 	ramSceneManager& operator=(const ramSceneManager&);
 	
 	ramActorsScene* actorsScene;
+    bool isAllocatedFbos;
+    
+    ramOscReceiveTag oscReceiverTag;
+    
 };

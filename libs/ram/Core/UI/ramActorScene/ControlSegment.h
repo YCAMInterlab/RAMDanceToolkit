@@ -27,16 +27,16 @@ class ControlSegment : public BaseSegment
 
 public:
 	
-	ControlSegment(string segmentName);
+	ControlSegment(const string& segmentName);
 	~ControlSegment();
     
-    ramActorUISegmentType getType();
-    ofxUICanvasPlus* createPanel(const string targetName);
+    ramActorUISegmentType getType() const;
+    ofxUICanvasPlus* createPanel(const string& targetName);
     
 	void onValueChanged(ofxUIEventArgs& e);
-	void toggleRecording(const bool bStart);
+	void toggleRecording(bool bStart);
 
-	bool isRecording();
+	bool isRecording() const;
     
 	void loadCache();
 	void saveCache();

@@ -20,7 +20,7 @@
 #pragma mark -
 #pragma mark constructor, destructor
 
-ControlSegment::ControlSegment(string segmentName)
+ControlSegment::ControlSegment(const string& segmentName)
 {
     name = segmentName;
     
@@ -44,12 +44,12 @@ ControlSegment::~ControlSegment()
 #pragma mark -
 #pragma mark public methods
 
-ramActorUISegmentType ControlSegment::getType()
+ramActorUISegmentType ControlSegment::getType() const
 {
     return RAM_UI_SEGMENT_TYPE_CONTROL;
 }
 
-ofxUICanvasPlus* ControlSegment::createPanel(const string targetName)
+ofxUICanvasPlus* ControlSegment::createPanel(const string& targetName)
 {
 	const float width = ramGetGUI().kLength;
 	const float height = ramGetGUI().kDim+3;
@@ -99,7 +99,7 @@ ofxUICanvasPlus* ControlSegment::createPanel(const string targetName)
 
 
 
-void ControlSegment::toggleRecording(const bool bStart)
+void ControlSegment::toggleRecording(bool bStart)
 {
 	if (bStart)
 	{
@@ -127,7 +127,7 @@ void ControlSegment::toggleRecording(const bool bStart)
 	btnRecordActor->stateChange();
 }
 
-bool ControlSegment::isRecording()
+bool ControlSegment::isRecording() const
 {
     return bRecording;
 }
@@ -199,7 +199,7 @@ void ControlSegment::onValueChanged(ofxUIEventArgs& e)
 	if (widgetName == "record")
 	{
 		ofxUILabelToggle *toggle = (ofxUILabelToggle *)e.widget;
-		const bool value = toggle->getValue();
+        bool value = toggle->getValue();
 		
 		toggleRecording(value);
 	}
