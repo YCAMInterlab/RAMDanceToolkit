@@ -29,7 +29,7 @@ else
 	# ofxUI
 	git clone git@github.com:rezaali/ofxUI.git
 	cd ofxUI
-	git checkout 748d421
+	git checkout 1832f2a
 	cd ../
 
 	# ofxInteractivePrimitives
@@ -50,15 +50,24 @@ else
 	git checkout b21dcd5
 	cd ../
 
+	# ofxQuadWarp
+	git clone git@github.com:julapy/ofxQuadWarp.git
+	cd ofxQuadWarp
+	git checkout a45ff5e
+	cd ../
+
+	# ofxDelaunay
+	git clone git@github.com:obviousjim/ofxDelaunay.git
+	cd ofxDelaunay
+	git checkout 957f902
+	cd ../
+
+	# ofxMotioner
+	git clone https://github.com/YoshitoONISHI/ofxMotioner
+	cd ofxMotioner
+	git checkout 4bf47cf
+	cd ../
+
 	echo "end clone addons"
 	cd ../
 fi
-
-
-# apply ofxUI patch
-
-echo "[start running patch for modify ofxUI]"
-cd addons/ofxUI
-patch -p0 < ../ofxUI.patch
-cd ../../
-echo "end apply patch."
