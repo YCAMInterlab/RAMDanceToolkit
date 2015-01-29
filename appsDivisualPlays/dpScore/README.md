@@ -205,3 +205,13 @@ Pixelateは非アクティブ時はDo Somethingを送信する。
 **Global Sensor Scale**: CameraUnitのVectorデータをスケーリング
 
 **Change Scene**: シーン切り替え 
+
+**Debug CameraUnit**: CameraUnitのVectorをシミュレート
+
+**Invert**: 反転
+
+**Show FPS**: FPS表示
+
+**Show Cursor**: カーソル表示
+
+**Fullscreen**: フルスクリーン

@@ -79,11 +79,13 @@ void ofApp::setup()
     
     OFX_BEGIN_EXCEPTION_HANDLING
     
+    auto* tabbar = mSceneManager.getTabBar();
+    
 #ifdef DP_MASTER_HAKONIWA
     ofSetWindowTitle("dpMasterHakoniwa");
     
     getMH().initialize();
-    getMH().setupUI(mSceneManager.getTabBar());
+    getMH().setupUI(tabbar);
     
     auto increment = SceneBase::Ptr(new SceneMasterIncrement());
     auto decrement = SceneBase::Ptr(new SceneMasterDecrement());
@@ -93,11 +95,16 @@ void ofApp::setup()
 #else
     ofSetWindowTitle("dpScore");
     
-    mSceneManager.getTabBar()->addSlider("Global Sensor Scale",
+    tabbar->addSlider("Global Sensor Scale",
                                          1.f,
                                          mSensorScaleMax,
                                          &mSensorScale);
-    mSceneManager.getTabBar()->addSpacer();
+    tabbar->addToggle("Debug CameraUnit", &mDebugCamUnit);
+    tabbar->addToggle("Invert", &mInvert);
+    tabbar->addToggle("Show FPS", &mShowFps);
+    tabbar->addToggle("Show Cursor", &mShowCursor);
+    tabbar->addToggle("Fullscreen", &mFullscreen);
+    tabbar->addSpacer();
     
     auto black = SceneBase::Ptr(new SceneBase());
     black->setDrawHeader(false);
@@ -173,9 +180,12 @@ void ofApp::setup()
     
     mSceneManager.makeChangeSceneTab();
     
-    mSceneManager.getTabBar()->setVisible(false);
+    tabbar->setVisible(false);
 #endif
-    mSceneManager.getTabBar()->loadSettings(kSettingsDir, kSettingsPrefix);
+    tabbar->loadSettings(kSettingsDir, kSettingsPrefix);
+    
+    ofAddListener(tabbar->newGUIEvent, this, &ofApp::guiEvent);
+    
     
     mOscReceiver.setup(kOscClientPort);
     
@@ -197,7 +207,7 @@ void ofApp::setup()
     //
     //dp::score::notifyObjectEvent(args);
     
-    mFont.loadFont(kFontPath, 150);
+    mFont.loadFont(kFontPath, kTitleFontSize);
     
     mTitleReplaceList.push_back(make_pair("dpVis", ""));
     mTitleReplaceList.push_back(make_pair("dpH", ""));
@@ -504,7 +514,8 @@ void ofApp::keyPressed(int key)
             shutdown();
             break;
         case 'f':
-            ofToggleFullscreen();
+            mFullscreen ^= true;
+            ofSetFullscreen(mFullscreen);
             break;
         case 'g':
             mSceneManager.getTabBar()->toggleVisible();
@@ -632,6 +643,16 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
 {
     OFX_BEGIN_EXCEPTION_HANDLING
     
+    const string widgetName{e.widget->getName()};
+    
+    if (widgetName == "Show Cursor") {
+        auto* toggle = static_cast<ofxUIToggle *>(e.widget);
+        toggle->getValue() ? ofShowCursor() : ofHideCursor();
+    }
+    else if (widgetName == "Fullscreen") {
+        auto* toggle = static_cast<ofxUIToggle *>(e.widget);
+        ofSetFullscreen(toggle->getValue());
+    }
     
     OFX_END_EXCEPTION_HANDLING
 }
