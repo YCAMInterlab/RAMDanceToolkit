@@ -3,7 +3,7 @@
 ### [valves]
 各色水バルブのステータス。
 
-**[バルブNo.] = [on/off] : [開いている時間] / [自動で閉じる時間] | [閉じた状態の経過時間]**
+**[*バルブNo.*] = [*on/off*] : [*開いている時間*] / [*自動で閉じる時間*] | [*閉じた状態の経過時間*]**
 
 ### [pumps]
 各換水用ポンプのステータス。
@@ -147,16 +147,16 @@ Pixelateは非アクティブ時はDo Somethingを送信する。
 **MasterIncrement:Do Something**: 未実装
 
 ## XML
-**rdk:phase:scene name=**マスター箱庭に選択されるシーン名
+**rdk:phase:scene name=***マスター箱庭に選択されるシーン名*
 
-**rdk:nocam:scene name=**CameraUnitの解析がないシーン
+**rdk:nocam:scene name=***CameraUnitの解析がないシーン*
 
-**rdk:alloff:scene name=**すべてのディスプレイをオフにするシーン
+**rdk:alloff:scene name=***すべてのディスプレイをオフにするシーン*
 
-**score:complexity**Scoreの表現の複雑度合いによりグループ分け
+**score:complexity***Scoreの表現の複雑度合いによりグループ分け*
 
-**score:complexity:scene name=**マスター箱庭に選択されるシーン名
+**score:complexity:scene name=***マスター箱庭に選択されるシーン名*
 
-**score:body:scene name=**CameraUnitの解析がないRDTKのシーンが選択された時にマスター箱庭に選択されるシーン
+**score:body:scene name=***CameraUnitの解析がないRDTKのシーンが選択された時にマスター箱庭に選択されるシーン*
 
-**score:correlation:scene name=**樹形図シーン
+**score:correlation:scene name=***樹形図シーン*
