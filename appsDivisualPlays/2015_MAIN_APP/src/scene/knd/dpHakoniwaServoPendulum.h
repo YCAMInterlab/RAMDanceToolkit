@@ -24,7 +24,6 @@ public:
         ramGetGUI().addSlider("minThresh", 0.0, 20.0, &mMinThresh);
         ramGetGUI().addSlider("mixThresh", 0.0, RANGE_MAX, &mMaxThresh);
         ramGetGUI().addSlider("length", 0.01, 400.0, &mLength);
-        ramGetGUI().addToggle("isRotMode",&isRotMode);
         
         mMotionExtractor.setupControlPanel(this);
         mMotionExtractor.load("motionExt_dpHServoPendulum.xml");
@@ -39,8 +38,7 @@ public:
     void setup(){
         
         mThread.setup();
-        
-        mSender.setup("192.168.20.67",8528);
+
     }
     
     void setRange(float range){
@@ -52,38 +50,17 @@ public:
     }
     
     void update(){
+    
+        ofPoint pos1 = mMotionExtractor.getPositionAt(0);
+        ofPoint pos2 = mMotionExtractor.getPositionAt(1);
+    
+        float val = ofMap((pos1 - pos2).length(),0,mLength,0,90);
         
-        if(isRotMode){
-            
-            if(mMotionExtractor.getIsExist(0)){
-            
-                    ofNode node = mMotionExtractor.getNodeAt(0);
-                
-                    if(node.getParent() != NULL){
-                        ofQuaternion quat = node.getParent()->getGlobalOrientation().inverse() * node.getGlobalOrientation();
-              
-                        float angle;
-                        ofPoint axis;
-                        quat.getRotate(angle, axis);
-                     
-                        mRange = angle;
-                        setRange(mRange);
-                    }
-                }
-            }else{
-            
-                ofPoint pos1 = mMotionExtractor.getPositionAt(0);
-                ofPoint pos2 = mMotionExtractor.getPositionAt(1);
-            
-                float val = ofMap((pos1 - pos2).length(),0,mLength,0,90);
-                
-                if(val < mMinThresh)val = 0.0;
-                
-                if(val > mMaxThresh)val = 0.0;
-                
-                setRange(val);
-            
-            }
+        if(val < mMinThresh)val = 0.0;
+        
+        if(val > mMaxThresh)val = 0.0;
+        
+        setRange(val);
         
         mThread.setSpeed(mSpeed);
         
@@ -97,34 +74,7 @@ public:
         
         ramBeginCamera();
         
-        if(isRotMode){
-     
-            ofNode node = mMotionExtractor.getNodeAt(0);
-                
-            if(node.getParent() != NULL){
-                ofQuaternion quat = node.getParent()->getGlobalOrientation().inverse() * node.getGlobalOrientation();
-                
-                float angle;
-                ofPoint axis;
-                quat.getRotate(angle, axis);
-                
-                mRange = angle * 1.0;
-                setRange(mRange);
-            
-                ofPoint pos = node.getGlobalPosition();
-                
-                ofPushMatrix();
-                ofTranslate(pos);
-                ofRotate(angle, axis.x, axis.y, axis.z);
-                ofPushStyle();
-                ofNoFill();
-                ofDrawBox(0,0,0,30,30,30);
-                ofPopStyle();
-                ofPopMatrix();
-                
-            }
-            
-        }else{
+        {
             
             ofPoint pos1 = mMotionExtractor.getPositionAt(0);
             ofPoint pos2 = mMotionExtractor.getPositionAt(1);
@@ -177,10 +127,6 @@ private:
     ramMotionExtractor mMotionExtractor;
     
     KezSlide mAngle;
-    
-    ofxOscSender mSender;
-    
-    bool isRotMode = false;
     
 };
 
