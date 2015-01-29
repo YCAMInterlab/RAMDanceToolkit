@@ -28,28 +28,28 @@ dpCameraUnit_Controller::dpCameraUnit_Controller(){
 	gui.setTriggerWidgetsUponLoad(false);
 	gui.addLabel("OSC SplitList",OFX_UI_FONT_LARGE);
 	gui.addLabel("RDTK_1");
-	gui.addTextInput("OSC_A", "192.168.20.2");
+	gui.addTextInput("OSC_A", "192.168.20.2")->setAutoClear(false);
 	gui.addLabel("RDTK_2");
-	gui.addTextInput("OSC_B", "192.168.20.3");
+	gui.addTextInput("OSC_B", "192.168.20.3")->setAutoClear(false);
 
 	gui.addLabel("Score");
-	gui.addTextInput("OSC_C", "192.168.20.11");
+	gui.addTextInput("OSC_C", "192.168.20.11")->setAutoClear(false);
 	gui.addLabel("Floor");
-	gui.addTextInput("OSC_D", "192.168.20.6");
+	gui.addTextInput("OSC_D", "192.168.20.6")->setAutoClear(false);
 	gui.addLabel("Lighting");
-	gui.addTextInput("OSC_E", "192.168.20.8");
+	gui.addTextInput("OSC_E", "192.168.20.8")->setAutoClear(false);
 
 	gui.addLabel("Audio2_evala");
-	gui.addTextInput("OSC_F", "192.168.20.10");
+	gui.addTextInput("OSC_F", "192.168.20.10")->setAutoClear(false);
 
 	gui.addLabel("Dev_Sheep");
-	gui.addTextInput("OSC_G", "192.168.20.36");
+	gui.addTextInput("OSC_G", "192.168.20.36")->setAutoClear(false);
 	gui.addLabel("Dev_Kez");
-	gui.addTextInput("OSC_H", "192.168.20.23");
+	gui.addTextInput("OSC_H", "192.168.20.23")->setAutoClear(false);
     gui.addLabel("Dev_Onishi");
-    gui.addTextInput("OSC_I", "192.168.20.7");
+    gui.addTextInput("OSC_I", "192.168.20.7")->setAutoClear(false);
     gui.addLabel("Dev_Onishi");
-    gui.addTextInput("OSC_J", "192.168.20.30");
+    gui.addTextInput("OSC_J", "192.168.20.30")->setAutoClear(false);
 	gui.addSpacer();
 	gui.addLabel("Preset Settings");
 	gui.addToggle("SettingMode", &mbMakeSettings);
