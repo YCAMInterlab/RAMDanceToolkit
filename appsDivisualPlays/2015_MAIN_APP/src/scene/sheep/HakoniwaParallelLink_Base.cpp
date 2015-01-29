@@ -18,8 +18,6 @@ uiThemecpo(255, 192);
 
 HakoniwaParallelLink_Base::HakoniwaParallelLink_Base(){
 	mLinkManager.setup("cu.usbmodem1141");
-
-
 	mLinkManager.height = 250.0;
 
 	mLinkManager.area_clamp.set(50.0,  96.0, 50.0);
@@ -60,14 +58,12 @@ void HakoniwaParallelLink_Base::update(){
 		if (mLinkManager.stepManager.useOsc)
 		{
 			for (int i = 0;i < 6;i++){
-//				if (mDigitalIO_Prev[i] != mDigitalIO[i]){
-					mDigitalIO_Prev[i] = mDigitalIO[i];
-					ofxOscMessage m;
-					m.setAddress("/dp/hakoniwa/digitalWrite/");
-					m.addIntArg(2+i);
-					m.addIntArg(mDigitalIO[i]);
-					mOscSender->sendMessage(m);
-//				}
+				mDigitalIO_Prev[i] = mDigitalIO[i];
+				ofxOscMessage m;
+				m.setAddress("/dp/hakoniwa/digitalWrite/");
+				m.addIntArg(2+i);
+				m.addIntArg(mDigitalIO[i]);
+				mOscSender->sendMessage(m);
 			}
 		}
 	}
@@ -261,38 +257,38 @@ void HakoniwaParallelLink_Base::onPanelChanged(ofxUIEventArgs& e){
 	}
 
 	if ((w->getName() == "A_Up") && (w->getState() == OFX_UI_STATE_DOWN)){
-		int tg = -mLinkManager.delta.actuator[0].getGlobalOrientation().getEuler().x/2+4;
+		int tg = -mLinkManager.delta.actuator[0].getGlobalOrientation().getEuler().x/2-4;
 		mLinkManager.stepManager.setStepperSingle(0, true);
 		mLinkManager.stepManager.absPos(tg);
 		mLinkManager.stepManager.setStepperAll(false);
 	}
 
 	if ((w->getName() == "A_Dn") && (w->getState() == OFX_UI_STATE_DOWN)){
-		int tg = -mLinkManager.delta.actuator[0].getGlobalOrientation().getEuler().x/2-4;
+		int tg = -mLinkManager.delta.actuator[0].getGlobalOrientation().getEuler().x/2+4;
 		mLinkManager.stepManager.setStepperSingle(0, true);
 		mLinkManager.stepManager.absPos(tg);
 		mLinkManager.stepManager.setStepperAll(false);
 	}
 	if ((w->getName() == "B_Up") && (w->getState() == OFX_UI_STATE_DOWN)){
-		int tg = -mLinkManager.delta.actuator[1].getGlobalOrientation().getEuler().x/2+4;
-		mLinkManager.stepManager.setStepperSingle(1, true);
-		mLinkManager.stepManager.absPos(tg);
-		mLinkManager.stepManager.setStepperAll(false);
-	}
-	if ((w->getName() == "B_Dn") && (w->getState() == OFX_UI_STATE_DOWN)){
 		int tg = -mLinkManager.delta.actuator[1].getGlobalOrientation().getEuler().x/2-4;
 		mLinkManager.stepManager.setStepperSingle(1, true);
 		mLinkManager.stepManager.absPos(tg);
 		mLinkManager.stepManager.setStepperAll(false);
 	}
+	if ((w->getName() == "B_Dn") && (w->getState() == OFX_UI_STATE_DOWN)){
+		int tg = -mLinkManager.delta.actuator[1].getGlobalOrientation().getEuler().x/2+4;
+		mLinkManager.stepManager.setStepperSingle(1, true);
+		mLinkManager.stepManager.absPos(tg);
+		mLinkManager.stepManager.setStepperAll(false);
+	}
 	if ((w->getName() == "C_Up") && (w->getState() == OFX_UI_STATE_DOWN)){
-		int tg = -mLinkManager.delta.actuator[2].getGlobalOrientation().getEuler().x/2+4;
+		int tg = -mLinkManager.delta.actuator[2].getGlobalOrientation().getEuler().x/2-4;
 		mLinkManager.stepManager.setStepperSingle(2, true);
 		mLinkManager.stepManager.absPos(tg);
 		mLinkManager.stepManager.setStepperAll(false);
 	}
 	if ((w->getName() == "C_Dn") && (w->getState() == OFX_UI_STATE_DOWN)){
-		int tg = -mLinkManager.delta.actuator[2].getGlobalOrientation().getEuler().x/2-4;
+		int tg = -mLinkManager.delta.actuator[2].getGlobalOrientation().getEuler().x/2+4;
 		mLinkManager.stepManager.setStepperSingle(2, true);
 		mLinkManager.stepManager.absPos(tg);
 		mLinkManager.stepManager.setStepperAll(false);
