@@ -257,38 +257,38 @@ void HakoniwaParallelLink_Base::onPanelChanged(ofxUIEventArgs& e){
 	}
 
 	if ((w->getName() == "A_Up") && (w->getState() == OFX_UI_STATE_DOWN)){
-		int tg = -mLinkManager.delta.actuator[0].getGlobalOrientation().getEuler().x/2+4;
+		int tg = -mLinkManager.delta.actuator[0].getGlobalOrientation().getEuler().x/2-4;
 		mLinkManager.stepManager.setStepperSingle(0, true);
 		mLinkManager.stepManager.absPos(tg);
 		mLinkManager.stepManager.setStepperAll(false);
 	}
 
 	if ((w->getName() == "A_Dn") && (w->getState() == OFX_UI_STATE_DOWN)){
-		int tg = -mLinkManager.delta.actuator[0].getGlobalOrientation().getEuler().x/2-4;
+		int tg = -mLinkManager.delta.actuator[0].getGlobalOrientation().getEuler().x/2+4;
 		mLinkManager.stepManager.setStepperSingle(0, true);
 		mLinkManager.stepManager.absPos(tg);
 		mLinkManager.stepManager.setStepperAll(false);
 	}
 	if ((w->getName() == "B_Up") && (w->getState() == OFX_UI_STATE_DOWN)){
-		int tg = -mLinkManager.delta.actuator[1].getGlobalOrientation().getEuler().x/2+4;
-		mLinkManager.stepManager.setStepperSingle(1, true);
-		mLinkManager.stepManager.absPos(tg);
-		mLinkManager.stepManager.setStepperAll(false);
-	}
-	if ((w->getName() == "B_Dn") && (w->getState() == OFX_UI_STATE_DOWN)){
 		int tg = -mLinkManager.delta.actuator[1].getGlobalOrientation().getEuler().x/2-4;
 		mLinkManager.stepManager.setStepperSingle(1, true);
 		mLinkManager.stepManager.absPos(tg);
 		mLinkManager.stepManager.setStepperAll(false);
 	}
+	if ((w->getName() == "B_Dn") && (w->getState() == OFX_UI_STATE_DOWN)){
+		int tg = -mLinkManager.delta.actuator[1].getGlobalOrientation().getEuler().x/2+4;
+		mLinkManager.stepManager.setStepperSingle(1, true);
+		mLinkManager.stepManager.absPos(tg);
+		mLinkManager.stepManager.setStepperAll(false);
+	}
 	if ((w->getName() == "C_Up") && (w->getState() == OFX_UI_STATE_DOWN)){
-		int tg = -mLinkManager.delta.actuator[2].getGlobalOrientation().getEuler().x/2+4;
+		int tg = -mLinkManager.delta.actuator[2].getGlobalOrientation().getEuler().x/2-4;
 		mLinkManager.stepManager.setStepperSingle(2, true);
 		mLinkManager.stepManager.absPos(tg);
 		mLinkManager.stepManager.setStepperAll(false);
 	}
 	if ((w->getName() == "C_Dn") && (w->getState() == OFX_UI_STATE_DOWN)){
-		int tg = -mLinkManager.delta.actuator[2].getGlobalOrientation().getEuler().x/2-4;
+		int tg = -mLinkManager.delta.actuator[2].getGlobalOrientation().getEuler().x/2+4;
 		mLinkManager.stepManager.setStepperSingle(2, true);
 		mLinkManager.stepManager.absPos(tg);
 		mLinkManager.stepManager.setStepperAll(false);
