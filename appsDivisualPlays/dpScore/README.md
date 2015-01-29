@@ -9,6 +9,55 @@ Xcodeのスキームから選択。
 
 ![MasterHakoniwa screen shot](documents/MasterHakoniwa ss smal.png)
 
+## OSC入力
+
+**port**: 10000
+
+### MOTIONERから
+**/ram/skeleton**: MOTIONERのデータ。フォーマットはMOTIONER参照。
+
+### CameraUnitから
+**/dp/cameraUnit/pixelate/r**: フォーマットはCameraUnit参照。
+
+**/dp/cameraUnit/pixelate/g**: フォーマットはCameraUnit参照。
+
+**/dp/cameraUnit/pixelate/b**: フォーマットはCameraUnit参照。
+
+**/dp/cameraUnit/mean**: フォーマットはCameraUnit参照。
+
+## OSC出力
+
+### スコアへ
+
+**host**: 192.168.20.11
+
+**port**: 10000
+
+**/dp/score/changeScene**: s:シーン名, s:箱庭名0(optional), s:箱庭名1(optional)
+
+**/dp/score/sensorScale**: f:CameraUnitのVectorデータのスケール
+
+### RDTKへ(CameraUnit経由)
+
+**host**: 192.168.20.5
+
+**port**: 12400
+
+**/ram/set_scene**: s:シーン名, i:シーンオンオフ, i:スクリーン0オンオフ, i:スクリーン1オンオフ
+
+**/ram/do_something**: i:乱数
+
+### MasterHakoniwaへ
+
+**host**: 192.168.20.60
+
+**port**: 8528
+
+**/dp/hakoniwa/colorOfWater/(ピン番号)**: i:オンオフ
+
+
+
+
 ## Log
 
 ### [valves]
@@ -178,27 +227,18 @@ Pixelateは非アクティブ時はDo Somethingを送信する。
 
 **port**: 10000
 
+### マスター箱庭から
 **/dp/score/changeScene**: s:シーン名, s:箱庭名0(optional), s:箱庭名1(optional)
 
 **/dp/score/sensorScale**: f:CameraUnitのVectorデータのスケール
 
+### MOTIONERから
 **/ram/skeleton**: MOTIONERのデータ。フォーマットはMOTIONER参照。
 
+### CameraUnitから
 **/dp/cameraUnit/vector**: フォーマットはCameraUnit参照。
 
 **/dp/cameraUnit/vector/total**: フォーマットはCameraUnit参照。
-
-**/dp/cameraUnit/features**: フォーマットはCameraUnit参照。
-
-**/dp/cameraUnit/contour/blob**: フォーマットはCameraUnit参照。
-
-**/dp/cameraUnit/pixelate/r**: フォーマットはCameraUnit参照。
-
-**/dp/cameraUnit/pixelate/g**: フォーマットはCameraUnit参照。
-
-**/dp/cameraUnit/pixelate/b**: フォーマットはCameraUnit参照。
-
-**/dp/cameraUnit/mean**: フォーマットはCameraUnit参照。
 
 ## SceneCorrelation
 
