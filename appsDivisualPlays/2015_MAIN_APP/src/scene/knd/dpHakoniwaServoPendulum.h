@@ -65,7 +65,7 @@ public:
         mThread.setSpeed(mSpeed);
         
         mMotionExtractor.update();
-        mAngle.update();
+
     }
     
     void draw(){
@@ -125,8 +125,6 @@ private:
     dpServoPendulumThread mThread;
     
     ramMotionExtractor mMotionExtractor;
-    
-    KezSlide mAngle;
     
 };
 
