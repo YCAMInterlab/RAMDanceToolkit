@@ -25,9 +25,10 @@ void ramCommunicationManager::setup(ramOscManager* oscMan){
 	mainPanel.addLabel("Communicator");
 	mainPanel.addToggle("Enable", true);
 	mainPanel.autoSizeToFitWidgets();
-	//mainPanel.setAutoDraw(false);
+	mainPanel.disableAppDrawCallback();
 
 	UIcanvas.setName("Communicator");
+	UIcanvas.disableAppDrawCallback();
 	//UIcanvas.setAutoDraw(false);
 	//UIcanvas.setUIColors(uiThemecb, uiThemeco, uiThemecoh, uiThemecf, uiThemecfh, uiThemecp, uiThemecpo);
 
@@ -37,7 +38,7 @@ void ramCommunicationManager::setup(ramOscManager* oscMan){
 	ofAddListener(ofEvents().keyPressed, this, &ramCommunicationManager::keyPressed);
 	ofAddListener(ofEvents().windowResized, this, &ramCommunicationManager::windowResized);
 
-	bVisible = true;
+	bVisible = false;
 
 	oscManager = oscMan;
 	oscReceiver.addAddress(RAM_OSC_ADDR_COMMUNICATE_NOTEON);
@@ -114,6 +115,7 @@ void ramCommunicationManager::updateWithOscMessage(const ofxOscMessage &m){
 
 
 	if (addr == RAM_OSC_ADDR_COMMUNICATE_NOTEON){
+		bVisible = true;
 		Instruments[index]->getFloat("velocity") = m.getArgAsFloat(1);
 		velocities[index]->setValue(m.getArgAsFloat(1));
 		assIdx = 0;
@@ -127,6 +129,7 @@ void ramCommunicationManager::updateWithOscMessage(const ofxOscMessage &m){
 	}
 
 	else if (addr == RAM_OSC_ADDR_COMMUNICATE_NOTEOFF){
+		bVisible = true;
 		Instruments[index]->getFloat("velocity") = 0.0;
 		velocities[index]->setValue(0.0);
 		assIdx = 0;
@@ -140,6 +143,7 @@ void ramCommunicationManager::updateWithOscMessage(const ofxOscMessage &m){
 	}
 
 	else if (addr == RAM_OSC_ADDR_COMMUNICATE_CC){
+		bVisible = true;
 		int ccNum = m.getNumArgs();
 		for (int i = 0;i < ccNum - 1;i++){
 			string ccLabel = "cc" + ofToString(i);
