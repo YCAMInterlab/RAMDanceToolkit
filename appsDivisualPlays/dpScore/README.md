@@ -174,6 +174,36 @@ Pixelateは非アクティブ時はDo Somethingを送信する。
 
 # dpScore.app
 
+## OSC入力
+
+**port**: 10000
+
+**/dp/score/changeScene**: s:シーン名, s:箱庭名0(optional), s:箱庭名1(optional)
+
+**/dp/score/sensorScale**: f:CameraUnitのVectorデータのスケール
+
+**/ram/skeleton**: MOTIONERのデータ。フォーマットはMOTIONER参照。
+
+**/dp/cameraUnit/vector**: フォーマットはCameraUnit参照。
+
+**/dp/cameraUnit/vector/total**: フォーマットはCameraUnit参照。
+
+**/dp/cameraUnit/features**: フォーマットはCameraUnit参照。
+
+**/dp/cameraUnit/contour/blob**: フォーマットはCameraUnit参照。
+
+**/dp/cameraUnit/pixelate/r**: フォーマットはCameraUnit参照。
+
+**/dp/cameraUnit/pixelate/g**: フォーマットはCameraUnit参照。
+
+**/dp/cameraUnit/pixelate/b**: フォーマットはCameraUnit参照。
+
+**/dp/cameraUnit/mean**: フォーマットはCameraUnit参照。
+
+## SceneCorrelation
+
+樹形図に表示される箱庭名はXMLファイルから読み込み。
+
 ## キーバインド
 
 **escape**: 終了
