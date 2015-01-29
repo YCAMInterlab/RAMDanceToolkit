@@ -173,3 +173,35 @@ Pixelateは非アクティブ時はDo Somethingを送信する。
 **score:correlation:scene name=***樹形図シーン*
 
 # dpScore.app
+
+## キーバインド
+
+**escape**: 終了
+
+**F**: フルスクリーン
+
+**G**: GUI表示
+
+**C**: カーソル表示
+
+**/**: FPS表示
+
+**I**: 反転
+
+**D**: CameraUnitのVectorをシミュレート
+
+**S**: GUIの設定を保存
+
+**→**: 次のシーン
+
+**←**: 前のシーン
+
+**↑**: CameraUnitのVectorデータを拡大
+
+**↓**: CameraUnitのVectorデータを縮小
+
+## GUI
+
+**Global Sensor Scale**: CameraUnitのVectorデータをスケーリング
+
+**Change Scene**: シーン切り替え 
