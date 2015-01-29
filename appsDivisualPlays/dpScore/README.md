@@ -45,7 +45,7 @@ Xcodeのスキームから選択。
 
 **/ram/set_scene**: (string)シーン名, (int)シーンオンオフ, (int)スクリーン0オンオフ, (int)スクリーン1オンオフ
 
-**/ram/do_something**: i:乱数
+**/ram/do_something**: (int)乱数
 
 #### MasterHakoniwaへ
 
@@ -54,6 +54,12 @@ Xcodeのスキームから選択。
 **port**: 8528
 
 **/dp/hakoniwa/colorOfWater/(ピン番号)**: (int)ピンオンオフ
+
+**ピン2~7**: 色水
+
+**ピン8**: 入水ポンプ
+
+**ピン9**: 排水ポンプ
 
 
 
