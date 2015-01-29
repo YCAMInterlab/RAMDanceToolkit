@@ -1,13 +1,13 @@
-# Log
+## Log
 
-## [valves]
+### [valves]
 各色水バルブのステータス。
 [ID] = [on/off] : [開いている時間] / [自動で閉じる時間] | [閉じた状態の経過時間]
 
 各換水用ポンプのステータス。
 [ID] = [on/off] : [開いている時間] / [閉じた状態の経過時間]
 
-## [scenes]
+### [scenes]
 
 マスター箱庭によって選択されるシーン名。xmlファイルから読み込み。
 マゼンタ→現在選択されているシーン。
@@ -15,7 +15,7 @@
 グレー→選択済みのシーン。
 [シーン名] = [on/off] : [スクリーン0のon/off], [スクリーン1のon/off]
 
-## [score]
+### [score]
 マスター箱庭によって選択されるシーン名。xmlファイルから読み込み。
 マゼンタ→現在選択されているシーン。
 白→まだ選択されていないシーン。
@@ -35,10 +35,10 @@ Correlation: DividualPlays系統図。マニュアルで表示。
 
 # GUI
 
-## [[[ Stop!!! ]]]
+### [[[ Stop!!! ]]]
 緊急停止。色水、換水を停止して全てのOSCをオフにする。
 
-## [mean]
+### [mean]
 master: アクティブな解析方法かどうか。
 data span: CameraUnitからのOSC受信間隔。
 scene span: 現在のシーンが選択されてからの経過時間。
@@ -48,7 +48,7 @@ diff add: 各色の明度の差分の蓄積。
 gen: 生成されたランダム情報。
 [シーン番号(残されたシーンの数でモジュロされる)], [スクリーン0のオンオフ], [スクリーン1のオンオフ]
 
-## [pixelate]
+### [pixelate]
 master: アクティブな解析方法かどうか。
 scene span: 現在のシーンが選択されてからの経過時間。
 total diff: 各色の数の差分の蓄積。
@@ -58,16 +58,16 @@ gen: 生成されたランダム情報。
 [シーン番号(残されたシーンの数でモジュロされる)], [スクリーン0のオンオフ], [スクリーン1のオンオフ]
 do something: [差分], [閾値]
 
-## [MasterIncrement]
+### [MasterIncrement]
 現在の運動量の合計が閾値を超えたら色水のバルブが開く。
 [onoff]: [現在の運動量の合計]/[閾値]
 
-## [Presets]
+### [Presets]
 Intro: 冒頭用。
 Maestro: 全機能オン。
 Outro: 終盤用。
 
-## [OSC]
+### [OSC]
 Enable OSC to RAM DTK: RAM DTKのシーンの切り替え用OSC送信のオンオフ。（CameraUnit経由）
 Enable OSC to Master Hakoniwa: 色水箱庭へのOSCの送信オンオフ。
 Enable OSC to Score: スコアへのOSCの送信オンオフ。シーン切り替え、スレッショルド設定。
@@ -76,17 +76,17 @@ Change Scene with CameraUnit: CameraUnitのデータを利用してRAM DTKとス
 Open Valve with MOTIONER: MOTIONERのデータを利用して色水バルブを開閉する。
 実際のOSCの送信は各OSCの送信機能を有効にする必要あり。
 
-## [RAM Dance Tool Kit]
+### [RAM Dance Tool Kit]
 Select Scene: シーンを切り替える。
 実際のOSCの送信はRAM DTKのOSC送信機能を有効にする必要あり。
 
-## [Score]
+### [Score]
 Select Score: シーンを切り替える。
 実際のOSCの送信はScoreのOSC送信機能を有効にする必要あり。
 Display Hakoniwa Title on Score: Scoreの切り替え時に現在の箱庭名を表示する。
 Score Sensor Scale: スコアが受診しているCameraUnitのセンサーの値をスケーリング。
 
-## [CameraUnit]
+### [CameraUnit]
 Use Mean or Use Pixelate: メインのロジックにCameraUnitのどちらの解析手段を利用するか選択。
 Pixelateは非アクティブ時はDo Somethingを送信する。
 
@@ -110,7 +110,7 @@ Valve Open Duration: 色水のバルブが自動で閉じる時間。
 MasterIncrement:Dist Limit: MOTIONERの運動量が蓄積していき色水のバルブが開く際の閾値。
 MasterIncrement:Do Something: 未実装
 
-# XML
+## XML
 rdk:phase:scene name=マスター箱庭に選択されるシーン名
 rdk:nocam:scene name=CameraUnitの解析がないシーン
 rdk:alloff:scene name=すべてのディスプレイをオフにするシーン
