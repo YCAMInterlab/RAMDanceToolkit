@@ -34,7 +34,7 @@
 
 **blak**: 暗転。RDTKのKiokuシーン時、待機時に表示される。
 
-**complexity ***: xmlファイル内でグループ分けされたScoreの複雑度合い。
+**complexity**: xmlファイル内でグループ分けされたScoreの複雑度合い。
 複雑度0からひとつ、複雑度1からひとつ...といった具合に各複雑度からひとつ順番に選択されていく。
 
 **body**: CameraUnitの解析が動いていないRDTKのシーンの場合はこの中から選択される。xmlファイルから読み出し。
@@ -115,7 +115,7 @@ do something: [差分], [閾値]**
 **Score Sensor Scale**: スコアが受診しているCameraUnitのセンサーの値をスケーリング。
 
 ### [CameraUnit]
-**Use Mean or Use Pixelate: メインのロジックにCameraUnitのどちらの解析手段を利用するか選択。
+**Use Mean or Use Pixelate**: メインのロジックにCameraUnitのどちらの解析手段を利用するか選択。
 Pixelateは非アクティブ時はDo Somethingを送信する。
 
 **Mean Settings:Limit**: シーンが切り替わる閾値。明度の差分が蓄積。
