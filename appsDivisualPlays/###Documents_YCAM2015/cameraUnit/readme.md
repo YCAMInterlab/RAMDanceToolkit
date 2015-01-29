@@ -8,7 +8,7 @@
 
 同時に、オーディオPC、照明用PCへ現在のシーン状態の情報を送ります。
 
-![InterFace image](/image/cameraUnit_IF.png)
+[[/image/cameraUnit_IF.png]]
 
 ##Main console
 OSCの送信先を決定します。
