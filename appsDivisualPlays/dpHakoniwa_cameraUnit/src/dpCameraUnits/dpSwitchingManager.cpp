@@ -232,8 +232,6 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	isSlave = false;
 	if (!NETWORK_ISSTOP){
 		senderToSlave.setup("192.168.20.4", 12400);
-		//    senderToSlave.setup("Hampshire.local", 12400);
-
 		senderToRDTK1.setup("192.168.20.3", 10000);
 		senderToRDTK2.setup("192.168.20.2", 10000);
         senderToFloor.setup("192.168.20.6", 10000);
@@ -243,18 +241,6 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 }
 
 void dpSwitchingManager::update(){
-//	if (ofGetKeyPressed('a')){
-//		ofxOscMessage m;
-//		m.setAddress("/ram/set_scene");
-//		m.addStringArg("dpHPLink_Laser");
-//		m.addIntArg(1);
-//		m.addIntArg(1);
-//		m.addIntArg(1);
-//		receiveOscMessage(m);
-//	}
-	if (ofGetKeyPressed('c')){
-
-	}
 
 	if (ofGetFrameNum() % 5 == 0 && oscListPtr != NULL && totalManage){
 
