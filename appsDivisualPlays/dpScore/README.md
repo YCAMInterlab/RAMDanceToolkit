@@ -1,3 +1,9 @@
+# Dividual Plays Score/MasterHakoniwa
+
+## ビルド
+Xcodeのスキームから選択。
+
+
 # dpMasterHakoniwa.app
 
 
@@ -165,3 +171,5 @@ Pixelateは非アクティブ時はDo Somethingを送信する。
 **score:body:scene name=***CameraUnitの解析がないRDTKのシーンが選択された時にマスター箱庭に選択されるシーン*
 
 **score:correlation:scene name=***樹形図シーン*
+
+# dpScore.app

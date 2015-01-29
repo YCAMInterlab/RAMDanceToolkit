@@ -93,6 +93,12 @@ void ofApp::setup()
 #else
     ofSetWindowTitle("dpScore");
     
+    mSceneManager.getTabBar()->addSlider("Global Sensor Scale",
+                                         1.f,
+                                         mSensorScaleMax,
+                                         &mSensorScale);
+    mSceneManager.getTabBar()->addSpacer();
+    
     auto black = SceneBase::Ptr(new SceneBase());
     black->setDrawHeader(false);
     black->setName("black");
@@ -164,6 +170,8 @@ void ofApp::setup()
     //mSceneManager.change(3);
     mSceneManager.change("black");
     //mSceneManager.change<SceneVec2Plotter>();
+    
+    mSceneManager.makeChangeSceneTab();
     
     mSceneManager.getTabBar()->setVisible(false);
 #endif
@@ -283,6 +291,7 @@ void ofApp::generateFakeVectorData()
         ofVec2f v;
         v.x = ofSignedNoise(t, 0, i) + ofSignedNoise(t*9.8f, 0, i) * 0.5f  + ofSignedNoise(t*102.f, 0, i) * 0.25f;
         v.y = ofSignedNoise(t, 1, i) + ofSignedNoise(t*9.8f, 1, i) * 0.5f  + ofSignedNoise(t*102.f, 1, i) * 0.25f;
+        v *= mSensorScale;
         mCameraUnitMessageVector.addFloatArg(v.x);
         mCameraUnitMessageVector.addFloatArg(v.y);
         

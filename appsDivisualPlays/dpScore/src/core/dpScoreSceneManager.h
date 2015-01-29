@@ -46,8 +46,10 @@ public:
     void guiEvent(ofxUIEventArgs &e);
     
     SceneBase::Ptr getCurrent();
+    SceneVec& getScenes() { return mScenes; }
+    const SceneVec& getScenes() const { return mScenes; }
     
-    void setUpdateAll(bool update);
+    void makeChangeSceneTab();
     
     SceneVec::iterator findScene(const string& name);
     
@@ -58,12 +60,16 @@ public:
 private:
     void change();
     
+    static const ofVec2f kGuiPosition;
+    static const float kGuiWidth;
+    ofColor mGuiColor;
+    
     SceneVec mScenes;
     SceneBase::Ptr mCurrentScene;
     
     ofxUITabBar* mTabBar{nullptr};
+    
     int mSceneId{0};
-    bool mUpdateAll{false};
 
 };
 
