@@ -248,7 +248,6 @@ void dpSwitchingManager::update(){
 		Live.setAddress("/dp/caemraUnit/aliveMonitor");
 		multiCast(Live);
 
-        cout << "SceneState=====" ;
 		for (int j = 0;j < hakoniwas.size();j++){
 			ofxOscMessage current;
 			current.setAddress("/dp/cameraUnit/sceneState/"+hakoniwas[j]->CVPreset);
@@ -258,9 +257,7 @@ void dpSwitchingManager::update(){
                 current.addIntArg(0);
             }
 			multiCast(current);
-            cout << (hakoniwas[j]->isEnable ? 1 : 0);
 		}
-        cout << endl;
 	}
 
     
