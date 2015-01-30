@@ -18,7 +18,7 @@ BodyBoxNode::BodyBoxNode()
              {
                  for_each(vec.begin(), vec.end(), [](ofVec3f& p)
                           {
-                              const ofVec3f r = randVec3f();
+                              const ofVec3f r{randVec3f()};
                               p = r * 20.f;
                           });
              });
@@ -40,16 +40,16 @@ void BodyBoxNode::update()
     screenCoords.clear();
     
     if (getParent()) {
-        const ofVec3f begin = getGlobalPosition();
-        const ofVec3f end = getParent()->getGlobalPosition();
+        const ofVec3f begin{getGlobalPosition()};
+        const ofVec3f end{getParent()->getGlobalPosition()};
         
-        int div = begin.distance(end) / 15;
+        int div{(int)(begin.distance(end) / 15)};
         div = ofClamp(div, 1.f, kMaxDivision-1.f);
         screenCoords.assign(div, ofVec3f::zero());
         
         for (int i=0; i<div; i++) {
-            const float p = i / (float)(div-1);
-            const ofVec3f v = begin.interpolated(end, p);
+            const float p{i / (float)(div-1)};
+            const ofVec3f v{begin.interpolated(end, p)};
             screenCoords.at(i) = v;
             
             for_each(randomPoints.at(i).begin(), randomPoints.at(i).end(), [&](const ofVec3f& rp){
@@ -164,7 +164,7 @@ void SceneBodyBox::draw()
 {
     ofSetLineWidth(1.f);
     
-    const int kDiv = (int)mDiv;
+    const int kDiv{(int)mDiv};
     
     if (mFboReady == false) {
         mGridFbo->begin();
@@ -206,9 +206,9 @@ void SceneBodyBox::draw()
         
         for (auto& n : skl->getJoints()) {
             auto drawRect = [&](const ofVec3f& v) {
-                int x = (int)v.x;
-                int y = (int)v.y;
-                int z = (int)v.z;
+                int x{(int)v.x};
+                int y{(int)v.y};
+                int z{(int)v.z};
                 
                 x = (x / kDiv) * kDiv;
                 y = (y / kDiv) * kDiv;

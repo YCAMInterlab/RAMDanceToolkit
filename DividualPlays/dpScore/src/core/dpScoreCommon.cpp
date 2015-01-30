@@ -102,44 +102,44 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-const int kW = 1920;
-const int kH = 1080;
+const int kW{1920};
+const int kH{1080};
 
-const int kFrameRate = 60;
+const int kFrameRate{60};
 
 #ifdef DP_MASTER_HAKONIWA
-const int kMaxSkeleton = 3;
+const int kMaxSkeleton{3};
 #else
-const int kMaxSkeleton = 2;
+const int kMaxSkeleton{2};
 #endif
 
-const int kOscClientPort = 10000;
+const int kOscClientPort{10000};
 
-const string kOscAddrChangeScene = "/dp/score/changeScene";
-const string kOscAddrSensorScale = "/dp/score/sensorScale";
+const string kOscAddrChangeScene{"/dp/score/changeScene"};
+const string kOscAddrSensorScale{"/dp/score/sensorScale"};
 
-const string kOscAddrCameraUnitVector = "/dp/cameraUnit/vector";
-const string kOscAddrCameraUnitVectorTotal = "/dp/cameraUnit/vector/total";
-const string kOscAddrCameraUnitVectorFeatures = "/dp/cameraUnit/features";
-const string kOscAddrCaneraUnitVecContourBlob = "/dp/cameraUnit/contour/blob";
-const string kOscAddrCameraUnitPixelateR = "/dp/cameraUnit/pixelate/r";
-const string kOscAddrCameraUnitPixelateG = "/dp/cameraUnit/pixelate/g";
-const string kOscAddrCameraUnitPixelateB = "/dp/cameraUnit/pixelate/b";
+const string kOscAddrCameraUnitVector{"/dp/cameraUnit/vector"};
+const string kOscAddrCameraUnitVectorTotal{"/dp/cameraUnit/vector/total"};
+const string kOscAddrCameraUnitVectorFeatures{"/dp/cameraUnit/features"};
+const string kOscAddrCaneraUnitVecContourBlob{"/dp/cameraUnit/contour/blob"};
+const string kOscAddrCameraUnitPixelateR{"/dp/cameraUnit/pixelate/r"};
+const string kOscAddrCameraUnitPixelateG{"/dp/cameraUnit/pixelate/g"};
+const string kOscAddrCameraUnitPixelateB{"/dp/cameraUnit/pixelate/b"};
 
-const string kOscAddrCameraUnitMean = "/dp/cameraUnit/mean";
+const string kOscAddrCameraUnitMean{"/dp/cameraUnit/mean"};
 
-const string kOscAddrMotioner = "/dp/score/motioner";
+const string kOscAddrMotioner{"/dp/score/motioner"};
 
-const string kEventAddrChangeScene = "/dp/score/changeScene";
+const string kEventAddrChangeScene{"/dp/score/changeScene"};
 
-const string kSettingsDir = "settings/";
-const string kSettingsPrefix = "scoreUI-";
+const string kSettingsDir{"settings/"};
+const string kSettingsPrefix{"scoreUI-"};
 
 const string kXmlSettingsPath{"settings/master_hakoniwa_settings.xml"};
 
-const int kNumCameraunitVectors = 10;
+const int kNumCameraunitVectors{10};
 
-const string kFontPath = "fonts/AkkoStd-Thin.otf";
+const string kFontPath{"fonts/AkkoStd-Thin.otf"};
 
 struct _handle {
     char* p;
@@ -149,7 +149,7 @@ struct _handle {
 
 string demangle(const char* name)
 {    
-    int status = -4;
+    int status{-4};
     
     _handle result(abi::__cxa_demangle(name, nullptr, nullptr, &status));
     
@@ -163,11 +163,11 @@ float clamp(float f, float range)
 
 float getLineUped(float length,  int index, int total, bool fromCenter)
 {
-    const float step = length/(float)total;
+    const float step{length / (float)total};
     if (fromCenter)
-        return -length*0.5f + step*0.5f + step * (float)index;
+        return -length * 0.5f + step * 0.5f + step * (float)index;
     else
-        return step*0.5f + step * (float)index;
+        return step * 0.5f + step * (float)index;
 }
 
 float aligned(float f)
@@ -193,7 +193,7 @@ void alignedLine(float x1, float y1, float z1, float x2, float y2, float z2)
 
 void alignedRect(const ofRectangle& r)
 {
-    alignedRect(r.x,r.y,0.0f,r.width, r.height);
+    alignedRect(r.x, r.y, 0.0f, r.width, r.height);
 }
 
 void alignedRect(const ofPoint& p,float w,float h)
@@ -239,7 +239,7 @@ ofVec3f alignedVec3f(const ofVec3f& p)
 
 ofVec3f alignedVec3f(float x, float y, float z)
 {
-    return ofVec3f(x, y, z);
+    return ofVec3f(aligned(x), aligned(y), aligned(z));
 }
 
 ofRectangle alignedRectangle(float px, float py, float w, float h)
@@ -254,20 +254,20 @@ ofRectangle alignedRectangle(const ofPoint& p, float w, float h)
         
 ofVec3f randVec3f()
 {
-    const float phi = ofRandom((float)M_PI * 2.0f);
-    const float costheta = ofRandom(-1.0f, 1.0f);
+    const float phi{ofRandom((float)M_PI * 2.0f)};
+    const float costheta{ofRandom(-1.0f, 1.0f)};
     
-    const float rho = ::sqrt(1.0f - costheta * costheta);
-    const float x = rho * ::cos(phi);
-    const float y = rho * ::sin(phi);
-    const float z = costheta;
+    const float rho{::sqrtf(1.0f - costheta * costheta)};
+    const float x{rho * ::cosf(phi)};
+    const float y{rho * ::sinf(phi)};
+    const float z{costheta};
     
     return ofVec3f(x, y, z);
 }
 
 ofVec3f project(const ofVec3f& obj)
 {
-    double objX = obj.x, objY = obj.y, objZ = obj.z;
+    double objX{obj.x}, objY{obj.y}, objZ{obj.z};
     double modelview[16];
     glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
     double projection[16];

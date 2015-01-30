@@ -32,7 +32,7 @@ SceneBodyGlobe::Node& SceneBodyGlobe::Node::operator = (const Node& rhs)
 
 void SceneBodyGlobe::Node::update()
 {
-    ofVec3f p = dir * scale;
+    ofVec3f p{dir * scale};
     p = p * getOrientationQuat();
     
     points.push_back(p);
@@ -149,7 +149,7 @@ void SceneBodyGlobe::draw()
     for (auto& it : mGlobeMap) {
         ofPushMatrix();
         ofTranslate(it.second->origin);
-        int i=0;
+        int i{0};
         for (auto p : it.second->nodes) {
             if (i > mNumJoints) break;
             ofEnableAlphaBlending();

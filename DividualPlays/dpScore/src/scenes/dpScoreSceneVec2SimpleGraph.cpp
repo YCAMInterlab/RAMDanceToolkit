@@ -86,7 +86,7 @@ void SceneVec2SimpleGraph::draw()
     }
     ofPopMatrix();
     
-    const float stepY = (kH - (10.f + 20.f + 40.f)) / 100.f;
+    const float stepY{(kH - (10.f + 20.f + 40.f)) / 100.f};
     for (int i=0; i<=100; i++) {
         int width{5};
         if (i%10 == 0) width = 8;
@@ -130,7 +130,7 @@ void SceneVec2SimpleGraph::draw()
     alignedTranslate(0.f, kH*0.5f+5.f);
     ofSetColor(color::kMain, 255);
     ofSetLineWidth(3.f);
-    const ofVec2f v = mVec * mult;
+    const ofVec2f v{mVec * mult};
     alignedLine(ofGetWidth()-14.f, v.x, ofGetWidth(), v.x);
     alignedLine(ofGetWidth()-14.f, v.y, ofGetWidth(), v.y);
     ofPopMatrix();

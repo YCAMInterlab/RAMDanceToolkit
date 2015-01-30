@@ -19,7 +19,7 @@ void SceneDataSlider::Slider::update(const ofVec2f& v)
     vec = v;
     vec.x = clamp(v.x, kClampRange);
     vec.y = clamp(v.y, kClampRange);
-    const float f = 0.f;
+    const float f{0.f};
     vec = vec * (1.f - f) + prevVec * f;
     
     prevVec = vec;

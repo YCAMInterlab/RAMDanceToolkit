@@ -25,7 +25,7 @@ void SceneDataCircle::Circle::update(float f)
 
 void SceneDataCircle::Circle::draw()
 {
-    const float step = mRadius * TWO_PI / kResolution;
+    const float step{(float)(mRadius * TWO_PI / kResolution)};
     const int spacing{30};
     for (int i=0; i<data.size(); i++) {
         if (data.size()>=kResolution-spacing && i>=kResolution-spacing) break;

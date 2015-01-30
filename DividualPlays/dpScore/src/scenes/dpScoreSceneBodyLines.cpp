@@ -108,7 +108,7 @@ void BodyLinesNode::updateLines(bool focus)
     for (auto& v : verts) v = getGlobalTransformMatrix().preMult(v);
     
     if (getParent()) {
-        BodyLinesNode* parent = dynamic_cast<BodyLinesNode*>(getParent());
+        BodyLinesNode* parent{dynamic_cast<BodyLinesNode*>(getParent())};
         for (auto v : parent->vertices) {
             v = parent->getGlobalTransformMatrix().preMult(v);
             verts.push_back(v);
@@ -116,7 +116,7 @@ void BodyLinesNode::updateLines(bool focus)
     }
     
     for (int j=0; j<verts.size(); j++) {
-        const ofVec3f v0 = verts.at(j);
+        const ofVec3f v0{verts.at(j)};
         for (int i=(j+1); i<verts.size(); i++) {
             const ofVec3f v1 = verts.at(i);
             verticesLines.push_back(v0);
@@ -163,13 +163,13 @@ void BodyLinesNode::drawHUD(bool focus)
         ofPushStyle();
         ofSetColor(color::kMain, 255);
         ofSetLineWidth(1.f);
-        float w0 = 400.f;
-        float w1 = 20.f;
-        float h = -200.f;
+        float w0{400.f};
+        float w1{20.f};
+        float h{-200.f};
         if (windowPos.y < kH * 0.5f) {
             h *= -1.f;
         }
-        bool invert = false;
+        bool invert{false};
         if (windowPos.x > kW * 0.5f) {
             w0 = kW - w0;
             w1 = kW - w1;
@@ -179,13 +179,13 @@ void BodyLinesNode::drawHUD(bool focus)
         ofLine(ofVec3f(w0, windowPos.y + h, 0.f), ofVec3f(w1, windowPos.y + h, 0.f));
         
         if (invert) {
-            const float x0 = ofxMot::getJointNameLower(id).size() * 8.f;
+            const float x0{ofxMot::getJointNameLower(id).size() * 8.f};
             auto strs = ofSplitString(ss.str(), "\n");
-            int longest = 0;
+            int longest{0};
             for (auto& s : strs) {
                 if (s.length() > longest) longest = s.length();
             }
-            const float x1 = longest * 8.f;
+            const float x1{longest * 8.f};
             ofSetColor(color::kMain, 255);
             ofDrawBitmapString(ofxMot::getJointNameLower(id), ofPoint(w1 - x0, windowPos.y + h - 4.f));
             ofDrawBitmapString(ss.str(), ofPoint( w1 - x1, windowPos.y + h + 12.f));

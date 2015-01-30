@@ -66,9 +66,9 @@ void SceneDataScroll::drawSkeleton(int index)
     auto s = mSkeletons.at(index);
     auto& joints = s->getJoints();
     
-    float y = 30.f + 10 * index;
-    float x = 24.f;
-    const float xStep = 96.f;
+    float y{30.f + 10 * index};
+    float x{24.f};
+    const float xStep{96.f};
     
     auto shift = [&x](float f) {
         float ret{0.f};

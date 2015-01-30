@@ -18,8 +18,8 @@ BodyRectNode::BodyRectNode()
              {
                  for_each(vec.begin(), vec.end(), [](ofVec2f& p)
                           {
-                              const ofVec3f r = randVec3f();
-                              const float s = ofRandom(10.f, 20.f);
+                              const ofVec3f r{randVec3f()};
+                              const float s{ofRandom(10.f, 20.f)};
                               p = r * s;
                           });
              });
@@ -40,22 +40,22 @@ void BodyRectNode::update()
 {
     screenCoords.clear();
     transformGL();
-    const ofVec2f screenCoord = project(ofVec3f::zero());
+    const ofVec2f screenCoord{project(ofVec3f::zero())};
     restoreTransformGL();
     
     if (getParent()) {
-        const ofVec3f begin = screenCoord;
+        const ofVec3f begin{screenCoord};
         getParent()->transformGL();
-        const ofVec3f end = project(ofVec3f::zero());
+        const ofVec3f end{project(ofVec3f::zero())};
         getParent()->restoreTransformGL();
         
-        int div = begin.distance(end) / 5;
+        int div{(int)(begin.distance(end) / 5)};
         div = ofClamp(div, 1.f, kMaxDivision-1.f);
         screenCoords.assign(div, ofVec3f::zero());
         
         for (int i=0; i<div; i++) {
-            const float p = i / (float)(div-1);
-            const ofVec3f v = begin.interpolated(end, p);
+            const float p{i / (float)(div-1)};
+            const ofVec3f v{begin.interpolated(end, p)};
             screenCoords.at(i) = v;
             
             for_each(randomPoints.at(i).begin(), randomPoints.at(i).end(), [&](const ofVec2f& rp){
@@ -137,7 +137,7 @@ void SceneBodyRect::draw()
 {
     ofSetLineWidth(1.f);
     
-    const int kDiv = (int)mDiv;
+    const int kDiv{(int)mDiv};
     
     if (mFboReady == false) {
         mGridFbo->begin();
@@ -163,8 +163,8 @@ void SceneBodyRect::draw()
         auto skl = getSkeleton(i);
         for (auto& n : skl->getJoints()) {
             auto drawRect = [&](const ofVec2f& v) {
-                int x = (int)v.x;
-                int y = (int)v.y;
+                int x{(int)v.x};
+                int y{(int)v.y};
                 
                 x = (x / kDiv) * kDiv;
                 y = (y / kDiv) * kDiv;
