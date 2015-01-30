@@ -30,6 +30,7 @@ public:
 	string			getActorNameAt(int port);
 	string			getJointNameAt(int port);
 	int				getJointIdAt(int port);
+	int				getActorIndexAt(int port);
 
 	ofVec3f			getPositionAt(int port,bool fixPosition = false);
 	ofQuaternion	getRotationAt(int port);
