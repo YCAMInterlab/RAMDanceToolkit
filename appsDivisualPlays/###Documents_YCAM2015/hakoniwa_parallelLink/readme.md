@@ -1,5 +1,5 @@
 #ParallelLink
-<!--![SC](image/screenshot.png)-->
+![SC](image/screenshot.png)
 
 パラレルリンクのオペレーション方法です。
 プログラムはappDividualPlays/2015_MAIN_APP内のプロジェクトを実行してdpH__PLink_Laser/Oil/Prismシーンでコントロール可能(各シーンでIPアドレスが異なっています)
