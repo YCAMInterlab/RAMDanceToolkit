@@ -47,7 +47,7 @@ Analyze image source from CvEffects unit, and send analyzed datas with OSC messa
 
 **[Int] numRects, [Int]Label, [Float]rects-X, [Float]rects-Y, [Float]rects-W, [Float]rects-H**
 
-Arg総数 --- 5 * n + 1
+Num of args --- 5 * n + 1
 
 概要：Rectangle from blobs.
 
@@ -55,13 +55,13 @@ Arg総数 --- 5 * n + 1
 
 **[Int] numBlob, [Int]numPts, [Float]pt-X, [Float]pt-Y, .....**
 
-概要：Vertex positions of outlines.
+Type：Vertex positions of outlines.
 
 ***/dp/cameraUnit/hakoniwaName/contour/area***
 
 **[Int] numAreas, [float]area1, [float]area2 ,,,**
 
-概要：Area of outlines.
+Type：Area of outlines.
 
 ---
 ####mean
@@ -69,7 +69,7 @@ Arg総数 --- 5 * n + 1
 
 **[Int] mean_R, [Int]mean_G, [Int]mean_B, [Int]mean_Brightness**
 
-概要：Avarage color of image source.
+Type：Avarage color of image source.
 
 ---
 ####optFlow(pyrLK)
@@ -82,25 +82,25 @@ Arg総数 --- 5 * n + 1
 
 **[Float] vec_X, [Float]vec_Y ,,,**
 
-Arg総数 --- 2 * 10
+Num of args --- 2 * 10
 
-概要：Avarage of movement.
+Type：Avarage of movement.
 
 ***/dp/cameraUnit/hakoniwaName/vector/length***
 
 **[Float] Length1 ,,, [Float] Length10**
 
-Arg総数 --- 10
+Num of args --- 10
 
-概要：Avarage of movement's length.
+Type：Avarage of movement's length.
 
 ***/dp/cameraUnit/hakoniwaName/vector/total***
 
 **[Float] VecX, [Float] VecY**
 
-Arg総数 --- 2
+Num of args --- 2
 
-概要：Total of movement.
+Type：Total of movement.
 
 ---
 ####Pixelate
@@ -114,9 +114,9 @@ Arg総数 --- 2
 
 **[Int32]width, [Int32]height, [Int64]pixelBit,,,,,**
 
-Arg総数 --- 2 + width * height / 64
+Num of args --- 2 + width * height / 64
 
-概要：mosaic data of image source.
+Type：mosaic data of image source.
 
 Sample:
 
