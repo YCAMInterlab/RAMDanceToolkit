@@ -39,11 +39,11 @@ public:
         isSetupOsc = true;
     }
     
-    void sendOsc(float val){
+    void sendOsc(){
         if(isSetupOsc){
             ofxOscMessage m;
             m.setAddress("/dp/hakoniwa/servoPendulum");
-            m.addIntArg(mAngle + 90 + val);
+            m.addIntArg(mAngle + 90);
             mSender.sendMessage(m);
         }
     }
@@ -51,12 +51,6 @@ public:
     float setSpeed(float speed){
         lock();
         mSpeed = speed;
-        unlock();
-    }
-    
-    float setShake(float shake){
-        lock();
-        mShake = shake;
         unlock();
     }
     
@@ -95,25 +89,15 @@ public:
                 
                 mAngle = mEllapsedTime * mRange * 4.0;
                 
-                if(mAngle < -mRange){
+                if(mAngle < -mRange || mAngle > mRange){
                     mDir *= -1;
-                    while(mAngle < -mRange){
-                        mAngle += 1.0;
-                        mEllapsedTime = 0.0;
-                    }
-                }
-                else if(mAngle > mRange){
-                    mDir *= -1;
-                    while(mAngle > mRange){
-                        mAngle += -1.0;
-                        mEllapsedTime = 0.0;
-                    }
+                    mEllapsedTime = 0.0;
                 }
                 
                 if((elapsed - mPTime) > mOscInterval){
                 
                     mPTime = elapsed;
-                    sendOsc(mShake);
+                    sendOsc();
                     
                 }
                 

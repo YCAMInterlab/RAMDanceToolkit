@@ -17,6 +17,7 @@ public:
     string getName() const {return "dpHTornado";};
     
     void setupControlPanel(){
+        
         ramGetGUI().addIntSlider("rad",0,255,&mRad);
         ramGetGUI().addToggle("bulb",&isBulb);
         ramGetGUI().addToggle("mist",&isMist);
@@ -31,6 +32,7 @@ public:
         
         mMotionExtractor.setupControlPanel(this,ofPoint(330,30));
         mMotionExtractor.load("motionExt_dpHakoniwaTornado.xml");
+        
     }
     void setup(){
         mBulbSender.setup("192.168.20.70",8528);

@@ -22,19 +22,7 @@ public:
         ramGetGUI().addSlider("drawRadMax",0.0,10.0,&mDrawRadMax);
         ramGetGUI().addToggle("simpleCircle",&isDrawSimpleCircle);
         ramGetGUI().addSlider("speed",0.01,2.0,&mSpeed);
-        /*ramGetGUI().addIntSlider("rad",0,255,&mRad);
-        ramGetGUI().addToggle("bulb",&isBulb);
-        ramGetGUI().addToggle("mist",&isMist);
-        ramGetGUI().addSlider("radMin",0.0,300.0,&mRadMin);
-        ramGetGUI().addSlider("radMax",0.0,300.0,&mRadMax);
-        ramGetGUI().addSlider("drawRadMin",0.0,10.0,&mDrawRadMin);
-        ramGetGUI().addSlider("drawRadMax",0.0,10.0,&mDrawRadMax);
-        ramGetGUI().addSlider("mistThresh",10.0, 255, &mMistThresh);
-        ramGetGUI().addSlider("fan",0,255,&mFan);
-        
-        ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoVisTornado::onPanelChanged);
-        */
-        
+
         ramOscManager::instance().addReceiverTag(&mReceiver);
         mReceiver.addAddress("/dp/toVis/Tornado");
     }
@@ -67,16 +55,11 @@ public:
     }
     
     void update(){
-        
-        // bulb();
-        // fan(mFan);
+
         receiveOsc();
         mSphere.setRad(mDrawRadMin, mDrawRadMax);
         mSphere.setRotateSpeed(mSpeed);
-        /* fan();
-         mist();
-         cout << isBulb << endl;
-         bulb();*/
+   
     }
     
     void rotateToNormal(ofVec3f normal) {
@@ -139,20 +122,20 @@ public:
     
 private:
    
-    
     int mRad = 0;
     
     dpTailSphereController mSphere;
     
     float mDrawRadMin = 0.1;
     float mDrawRadMax = 6.0;
+    float mSpeed = 0.2;
     
     ramOscReceiveTag mReceiver;
     
     ofPoint mPts[3];
     
     bool isDrawSimpleCircle = false;
-    float mSpeed = 0.2;
+
 };
 
 #endif
