@@ -23,7 +23,6 @@ public:
         ramGetGUI().addIntSlider("lineWidth", 1, 10, &mLineWidth);
         ramGetGUI().addIntSlider("thresh", 1, 255, &mExtendThreshNum);
         ramGetGUI().addButton("randomize");
-        ramGetGUI().addToggle("mouse",&isMouseAssign);
         ramGetGUI().addIntSlider("ForceExtendNum", 0, 255, &mForceExtendNum);
         ramGetGUI().addToggle("osc",&isOsc);
         
@@ -49,7 +48,6 @@ public:
         if(e.key == 'e'){
             mTogAllDraw = !mTogAllDraw;
             mGrid.setAllDraw(mTogAllDraw);
-            if(mTogAllDraw)isMouseAssign = false;
         }
         
         if(e.key == 'r'){
@@ -71,7 +69,6 @@ public:
         if(e.key == 'w'){
             mTogAllDraw = false;
             mGrid.setAllDraw(mTogAllDraw);
-            isMouseAssign = false;
             isOsc = false;
         }
         
@@ -125,7 +122,6 @@ public:
                 if(mSceneEnable[TORNADO] == true){
                     mPreMode = FIVE;
                     mTogAllDraw = false;
-                    isMouseAssign = false;
                     mGrid.setAllDraw(mTogAllDraw);
                 }
             }
@@ -147,8 +143,6 @@ public:
         receiveOsc();
         ramSetViewPort(dpGetFirstScreenViewPort());
         mGrid.update();
-        
-        if(isMouseAssign)mGrid.extendByThresh(ofMap(ofGetMouseX(),0,SINGLE_SCREEN_WIDTH,0,255));
     }
     void draw(){
         
@@ -162,7 +156,6 @@ public:
         
         ramFloorQuadWarper::instance().draw();
         
-    //    ramEndCamera();
     }
     
     void onPanelChanged(ofxUIEventArgs &e){
@@ -188,20 +181,19 @@ public:
             mGrid.randomizeMode();
         }
         
-        
     }
     
     
 private:
     dpIceMapGrid mGrid;
-    int mDiv = 4;
-    bool mTogAllDraw = false;
     
     ramOscReceiveTag mReceiver;
     
+    int mDiv = 4;
     int mLineWidth = 2;
-    
     int mExtendThreshNum = 160;
+    int mPreMode = FIVE;
+    int mForceExtendNum = 8;
     
     map<int,string>mSceneNames;
     
@@ -212,13 +204,10 @@ private:
     };
     
     bool isIce = false;
-    bool isMouseAssign = false;
-    int mPreMode = FIVE;
-    bitset<3> mSceneEnable;
-    
-    int mForceExtendNum = 8;
-    
     bool isOsc = false;
+    bool mTogAllDraw = false;
+    
+    bitset<3> mSceneEnable;
     
 };
 

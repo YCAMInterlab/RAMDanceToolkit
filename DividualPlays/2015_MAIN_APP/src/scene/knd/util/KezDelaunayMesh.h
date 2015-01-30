@@ -25,10 +25,10 @@ public:
         for(int i = 0; i < PTS_MAX; i++){
             mPts.push_back(ofPoint(0,0,0));
         }
+        
         setBitset();
         
         mColor = dpColor::MAIN_COLOR;
-     //   mColor.setSaturation(250);
         
     }
     

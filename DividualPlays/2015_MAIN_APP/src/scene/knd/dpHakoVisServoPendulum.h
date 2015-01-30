@@ -9,54 +9,6 @@
 #ifndef RAMDanceToolkit_dpHakoVisRecordRibbon_h
 #define RAMDanceToolkit_dpHakoVisRecordRibbon_h
 
-#include "dpRibbon.h"
-
-class dpRibbonControler{
-public:
-
-    dpRibbon<2000> mRibbon;
-    float mTargetPosZ = 0;
-    KezSlidePoint mTarget;
-    
-    ofColor mColor;
-    bool isFocus = false;
-    
-    void setup(){
-        mRibbon.setup();
-        mRibbon.setWidth(0.1, 0.5);
-        mTarget.speed = 0.1;
-    }
-    
-    void setColor(ofColor color){
-        mColor = color;
-    }
-    
-    void setTarget(ofPoint pt){
-        mTarget.set(pt);
-    }
-    
-    void setForcus(bool focus){
-        isFocus = focus;
-    }
-    
-    void update(){
-        if(isFocus){
-            mRibbon.setHead(mTarget);
-            mTarget.update();
-            mRibbon.update();
-        }
-    }
-    
-    void draw(){
-        ofSetColor(mColor);
-        mRibbon.draw();
-        
-        const ofPoint &head = mRibbon.getHead();
-    
-        ofDrawSphere(head, 0.5);
-    }
-};
-
 class dpSPBox{
 public:
     
@@ -104,12 +56,11 @@ public:
     
 private:
     ofPoint mPos;
-    float mSpeed = 1.0;
-    float mRad;
-    int mRes = 3;
     ofPoint mSize;
+    
+    float mSpeed = 1.0;
     float mAngle = 0.0;
-    bool isPink = false;
+
     ofColor mColor;
     KezSlide mSat;
 };
@@ -120,10 +71,9 @@ public:
     
 	void setupControlPanel(){
         
-        mScale.set(600,100);
+        mScale = 600;
         
-        ramGetGUI().addSlider("scaleX", 100.0, 2000.0, &mScale.x);
-        ramGetGUI().addSlider("scaleY", 1.0, 2000.0, &mScale.y);
+        ramGetGUI().addSlider("scale", 100.0, 2000.0, &mScale);
         ramGetGUI().addButton("rndOrbit");
 
         mLong.speed = 0.005;
@@ -162,7 +112,7 @@ public:
                 
                 mAngle = angle;
                 
-                mBoxes.back().start(ofPoint(1.0,mHead.length() * mScale.x,1.0),angle);
+                mBoxes.back().start(ofPoint(1.0,mHead.length() * mScale,1.0),angle);
                 if(mBoxes.size() > BOX_MAX)mBoxes.pop_front();
                 
                 mHead.update();
@@ -186,7 +136,7 @@ public:
         mCam.lookAt(ofPoint(0,0,0));
         mCam.orbit(mLong.val, mLat.val, mRad.val);
         
-        if(ofGetFrameNum() % 1200 == 0)rndOrbit();
+        if(ofGetFrameNum() % RND_ROT_FRAME == 0)rndOrbit();
     }
     
     void rndOrbit(){
@@ -195,14 +145,12 @@ public:
         mRad.set(ofRandom(50,400));
     }
     
-    
-    
     void draw(){
 
         ofDisableDepthTest();
         ofEnableBlendMode(OF_BLENDMODE_ADD);
         ofSetLineWidth(2);
-        //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE,GL_SRC_ALPHA,GL_ONE);
+   
         mCam.begin(dpGetFirstScreenViewPort());
         
         ofSetColor(dpColor::MAIN_COLOR.r,
@@ -213,21 +161,25 @@ public:
         ofPushMatrix();
         ofTranslate(0, 0, 0.0);
         ofRotateZ(ofRadToDeg(mAngle));
-        ofDrawBox(0,0,0,1.0,mHead.length() * mScale.x,1.0);
+        ofDrawBox(0,0,0,1.0,mHead.length() * mScale,1.0);
         ofPopMatrix();
         
         ofNoFill();
+        
         for(auto &v:mBoxes){
             v.draw();
         }
+        
         mCam.end();
         
     }
     
     void onPanelChanged(ofxUIEventArgs& e){
+        
         string name = e.widget->getName();
         
         if(name == "rndOrbit")rndOrbit();
+        
     }
     
 private:
@@ -236,22 +188,21 @@ private:
 
     ramOscReceiveTag mReceiver;
     
-    ofPoint mScale;
+    float mScale;
     
-    deque<ofPoint>mPts;
     static const int BOX_MAX = 300;
+    deque<ofPoint>mPts;
     deque<dpSPBox>mBoxes;
-    ofPoint mLightRot;
+ 
     KezSlidePoint mHead;
     
     float mAngle = 0.0;
-    
-    ofPoint mRot;
     
     KezSlide mLong;
     KezSlide mLat;
     KezSlide mRad;
     
+    static const int RND_ROT_FRAME = 1200;
 };
 
 #endif
