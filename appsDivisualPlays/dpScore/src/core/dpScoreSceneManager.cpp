@@ -10,15 +10,19 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
+const ofVec2f SceneManager::kGuiPosition{20.f, 40.f};
+const float SceneManager::kGuiWidth{200.f};
+
 SceneManager::SceneManager()
 {
     mScenes.clear();
     
     mTabBar = new ofxUITabBar();
+    mGuiColor = ofColor{color::kDarkPinkHeavy, 50.f};
 #ifndef DP_MASTER_HAKONIWA
-    mTabBar->setPosition(20.f, 40.f);
-    mTabBar->addToggle("Update All", &mUpdateAll);
-    mTabBar->addSpacer();
+    mTabBar->setPosition(kGuiPosition.x, kGuiPosition.y);
+    mTabBar->setColorBack(mGuiColor);
+    mTabBar->setWidth(kGuiWidth);
 #endif
 }
 
@@ -55,7 +59,12 @@ void SceneManager::add(SceneBase::Ptr scene)
     scene->onInitialize();
     
     if (scene->getUICanvas() != nullptr) {
-        mTabBar->addCanvas(scene->getUICanvas());
+        auto* canvas = scene->getUICanvas();
+#ifndef DP_MASTER_HAKONIWA
+        if (canvas) canvas->setColorBack(mGuiColor);
+#endif
+        if (mTabBar && canvas) mTabBar->addCanvas(canvas);
+        
     }
     
     scene->setId(mScenes.size());
@@ -124,10 +133,7 @@ void SceneManager::change()
 #pragma mark ___________________________________________________________________
 void SceneManager::update(ofxEventMessage& m)
 {
-    if (mUpdateAll) {
-        for (auto& scene : mScenes) scene->onUpdate(m);
-    }
-    else if (mCurrentScene) {
+    if (mCurrentScene) {
         mCurrentScene->onUpdate(m);
     }
 }
@@ -140,12 +146,6 @@ void SceneManager::draw()
 ofPtr<SceneBase> SceneManager::getCurrent()
 {
     return mCurrentScene;
-}
-
-#pragma mark ___________________________________________________________________
-void SceneManager::setUpdateAll(bool update)
-{
-    mUpdateAll = update;
 }
 
 #pragma mark ___________________________________________________________________
@@ -197,6 +197,33 @@ void SceneManager::gotMessage(ofMessage msg)
 void SceneManager::guiEvent(ofxUIEventArgs &e)
 {
     if (mCurrentScene) mCurrentScene->onGuiEvent(e);
+    
+    if (e.widget->getName() == "Scenes") {
+        auto* radio = static_cast<ofxUIRadio*>(e.widget);
+        if (radio->getActive()->getValue()) {
+            change(radio->getActiveName());
+        }
+    }
+}
+
+#pragma mark ___________________________________________________________________
+void SceneManager::makeChangeSceneTab()
+{
+    if (!mTabBar) return;
+    
+    auto* scenesTab = new ofxUICanvas();
+    vector<string> names;
+    for (auto p : mScenes) {
+        names.push_back(p->getName());
+    }
+    scenesTab->setName("Change Scene");
+    scenesTab->addRadio("Scenes", names);
+    scenesTab->setColorBack(mGuiColor);
+    scenesTab->autoSizeToFitWidgets();
+    getTabBar()->addSpacer();
+    getTabBar()->addCanvas(scenesTab);
+    
+    ofAddListener(scenesTab->newGUIEvent, this, &SceneManager::guiEvent);
 }
 
 #pragma mark ___________________________________________________________________

@@ -22,34 +22,14 @@ void ofxKsmrParallellinkDelta::setup(float Radius, float armLength,float arm2Len
 
 		arm[i].setPosition(ofVec3f(0,-armLength,0));
 		arm[i].setParent(actuator[i]);
+		actuator[i].setScale(0.3);
+		arm[i].setScale(0.3);
 	}
 
 	setPlot(ofVec3f(0,0,0));
 
 	degClamp_min = 45;
 	degClamp_max = 90;
-
-	ofEnableDepthTest();
-	for (int i = 0;i < 3;i++){
-		ofSetColor(255);
-		actuator[i].setScale(0.3);
-		arm[i].setScale(0.3);
-		actuator[i].draw();
-		arm[i].draw();
-
-		ofLine(actuator[i].getGlobalPosition(),
-			   arm[i].getGlobalPosition());
-
-		if (fabs(arm[i].getGlobalPosition().distance(plots[i]) - arm2_length/2) > 0.5) ofSetColor(255, 0, 0);
-		else ofSetColor(255);
-		ofLine(arm[i].getGlobalPosition(),
-			   plots[i]);
-	}
-
-	ofSetColor(255);
-	plot.setScale(0.5);
-	plot.draw();
-	ofDisableDepthTest();
 }
 
 void ofxKsmrParallellinkDelta::draw(){

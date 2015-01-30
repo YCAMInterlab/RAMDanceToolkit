@@ -52,6 +52,7 @@ private:
     ofxOscMessage mCameraUnitMessagePixelateB;
     bool mInvert{false};
     bool mDebugCamUnit{false};
+    bool mFullscreen{false};
 #ifdef DP_MASTER_HAKONIWA
     bool mShowFps{true};
 #else
@@ -66,6 +67,8 @@ private:
 #endif
     ofTrueTypeFont mFont;
     vector<string> mTitleNames;
+    const float kTitleFontSize{150.f};
+    
     vector<pair<string, string>> mTitleReplaceList;
     float mSensorScale{1.f};
     const float mSensorScaleMax{50.f};

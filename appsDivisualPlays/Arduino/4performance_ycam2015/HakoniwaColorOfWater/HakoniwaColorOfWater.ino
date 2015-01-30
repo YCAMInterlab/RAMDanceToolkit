@@ -7,14 +7,14 @@
 #include <OSCBoards.h>
 
 EthernetUDP _udp;
-byte _mac[] = { 0x85, 0x28, 0x0A, 0x00, 0x00, 0x00 };
+byte _mac[] = { 0x90,0xA2,0xDA,0x85, 0x28, 0x0A };
 
 IPAddress _ip(192, 168, 20, 60);
 
 const unsigned int _inPort = 8528;
 
-const int kNumPins = 4;
-const int kPin[kNumPins] = { 2, 3, 4, 5, 6, 7, 8, 9 /* LED */ };
+const int kNumPins = 8;
+const int kPin[kNumPins] = { 2, 3, 4, 5, 6, 7, 8, 9 };
 
 char *numToOSCAddress(int pin);
 void routeOsc(OSCMessage &msg, int addrOffset);

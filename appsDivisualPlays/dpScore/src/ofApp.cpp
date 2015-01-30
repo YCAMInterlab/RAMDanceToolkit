@@ -50,23 +50,6 @@ using namespace dp::score;
 //    string s = "bar";
 //};
 
-#if 0
-
-身体系 8/20
-箱庭系 13/20
-
-グラフ*n
-プロッター*n
-ブロブ系
-フォント系小
-
-二人つなぐ
-
-身体パーツ
-globeパーツ毎
-
-#endif
-
 #pragma mark ___________________________________________________________________
 void ofApp::setup()
 {
@@ -79,11 +62,13 @@ void ofApp::setup()
     
     OFX_BEGIN_EXCEPTION_HANDLING
     
+    auto* tabbar = mSceneManager.getTabBar();
+    
 #ifdef DP_MASTER_HAKONIWA
     ofSetWindowTitle("dpMasterHakoniwa");
     
     getMH().initialize();
-    getMH().setupUI(mSceneManager.getTabBar());
+    getMH().setupUI(tabbar);
     
     auto increment = SceneBase::Ptr(new SceneMasterIncrement());
     auto decrement = SceneBase::Ptr(new SceneMasterDecrement());
@@ -92,6 +77,17 @@ void ofApp::setup()
     mSceneManager.change<SceneMasterIncrement>();
 #else
     ofSetWindowTitle("dpScore");
+    
+    tabbar->addSlider("Global Sensor Scale",
+                                         1.f,
+                                         mSensorScaleMax,
+                                         &mSensorScale);
+    tabbar->addToggle("Debug CameraUnit", &mDebugCamUnit);
+    tabbar->addToggle("Invert", &mInvert);
+    tabbar->addToggle("Show FPS", &mShowFps);
+    tabbar->addToggle("Show Cursor", &mShowCursor);
+    tabbar->addToggle("Fullscreen", &mFullscreen);
+    tabbar->addSpacer();
     
     auto black = SceneBase::Ptr(new SceneBase());
     black->setDrawHeader(false);
@@ -165,9 +161,14 @@ void ofApp::setup()
     mSceneManager.change("black");
     //mSceneManager.change<SceneVec2Plotter>();
     
-    mSceneManager.getTabBar()->setVisible(false);
+    mSceneManager.makeChangeSceneTab();
+    
+    tabbar->setVisible(false);
 #endif
-    mSceneManager.getTabBar()->loadSettings(kSettingsDir, kSettingsPrefix);
+    tabbar->loadSettings(kSettingsDir, kSettingsPrefix);
+    
+    ofAddListener(tabbar->newGUIEvent, this, &ofApp::guiEvent);
+    
     
     mOscReceiver.setup(kOscClientPort);
     
@@ -189,7 +190,7 @@ void ofApp::setup()
     //
     //dp::score::notifyObjectEvent(args);
     
-    mFont.loadFont(kFontPath, 150);
+    mFont.loadFont(kFontPath, kTitleFontSize);
     
     mTitleReplaceList.push_back(make_pair("dpVis", ""));
     mTitleReplaceList.push_back(make_pair("dpH", ""));
@@ -283,6 +284,7 @@ void ofApp::generateFakeVectorData()
         ofVec2f v;
         v.x = ofSignedNoise(t, 0, i) + ofSignedNoise(t*9.8f, 0, i) * 0.5f  + ofSignedNoise(t*102.f, 0, i) * 0.25f;
         v.y = ofSignedNoise(t, 1, i) + ofSignedNoise(t*9.8f, 1, i) * 0.5f  + ofSignedNoise(t*102.f, 1, i) * 0.25f;
+        v *= mSensorScale;
         mCameraUnitMessageVector.addFloatArg(v.x);
         mCameraUnitMessageVector.addFloatArg(v.y);
         
@@ -495,7 +497,8 @@ void ofApp::keyPressed(int key)
             shutdown();
             break;
         case 'f':
-            ofToggleFullscreen();
+            mFullscreen ^= true;
+            ofSetFullscreen(mFullscreen);
             break;
         case 'g':
             mSceneManager.getTabBar()->toggleVisible();
@@ -623,6 +626,16 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
 {
     OFX_BEGIN_EXCEPTION_HANDLING
     
+    const string widgetName{e.widget->getName()};
+    
+    if (widgetName == "Show Cursor") {
+        auto* toggle = static_cast<ofxUIToggle *>(e.widget);
+        toggle->getValue() ? ofShowCursor() : ofHideCursor();
+    }
+    else if (widgetName == "Fullscreen") {
+        auto* toggle = static_cast<ofxUIToggle *>(e.widget);
+        ofSetFullscreen(toggle->getValue());
+    }
     
     OFX_END_EXCEPTION_HANDLING
 }

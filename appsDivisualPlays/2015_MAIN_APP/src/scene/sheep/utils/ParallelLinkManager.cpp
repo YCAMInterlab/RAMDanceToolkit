@@ -55,9 +55,12 @@ void ParallelLinkManager::update(){
 
 void ParallelLinkManager::sendSignal(){
 	int ps[3];
+	cout << "===" << endl;
 	for (int i = 0;i < 3;i++){
 		ps[i] = -delta.actuator[(i+id_offset)%3].getGlobalOrientation().getEuler().x/2;
+		cout << ps[i] << ",";
 	}
+	cout << endl;
 
 	if (id_swap) swap(ps[1], ps[2]);
 
