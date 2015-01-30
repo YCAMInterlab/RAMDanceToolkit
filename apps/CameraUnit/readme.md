@@ -1,58 +1,47 @@
-#dpCameraUnit
-
-カメラユニットはDividualPlaysのための映像解析ツールです。
+#CameraUnit
+CameraUnit is an application for analysis hakoniwa images.
 
 ##outline
-マスター箱庭からのOSCを受けて、RAMDanceToolKitへシーンの切り替えを行います。
-切り替わりのタイミングで、マトリクススイッチャー(IMAGENICS SW1010)の入出力をシリアル通信でスイッチング、指定された箱庭からの映像解析を開始します。
-
-同時に、オーディオPC、照明用PCへ現在のシーン状態の情報を送ります。
-
-[[/image/cameraUnit_IF.png]]
-
-##Main console
-OSCの送信先を決定します。
-
-##Input Unit
-映像ソースを切り替えます。本番環境(ADVC-55)が接続されている場合は自動的に切り替わります。
-**FourSplit:** 本番用・1本の映像ソースを4分割して処理します。
+This application get images from video and web camera, apply fx for analysis and send analyzed data with OSC messages.
 
 ##CvEffect
-映像ソースにエフェクトを加えます。複数のエフェクトを同時に適用でき、エフェクトは上にある項目から順番に処理されていきます。
+CvEffect UI apply fx to image sources.
 
-**Background**：背景差分を行います。有効にした瞬間のピクセルを背景として使用します。
+**Background**：It takes background difference.You push the button,then background image will be taken from current frame.
 
-**Warp**：逆パース変換をかけます。UI下部のサムネイルに黄色い枠が表示されるので、その枠をドラッグして変形します。
+**Warp**：Apply unwarp perspective.You can pick Yellow wire frame on image source, and drag frame to apply unwarp perspective.
 
-**Blur**：ブラーをかけます。
+**Blur**：Apply blur effect.
 
-**Invert**：ピクセル色を反転します。
+**Invert**：Make pixel colos inverse.
 
-**FrameDiff**：フレーム間差分を行います。前フレームとのAbsDiffを結果として使います。
+**FrameDiff**：Apply frame difference effect. It returns difference from previous frame.
 
-**Threshold**：閾値処理を行います。
+**Threshold**：Returns thresholded image.
 
-**AdaptiveThreshold**：適応的な閾値処理を行います。
+**AdaptiveThreshold**：Returns adaptive thresholded image.
 
-**AccumelateWeight**：前フレームを一部残した状態で返します。
+**AccumelateWeight**：Returns accumlated image.
 
-**Erode**：明るいエリアを縮小します。
+**Erode**：Erode white area.
 
-**Dilate**：明るいエリアを膨張します。
+**Dilate**：Dilate white area.
 
-**Canny**：輪郭を抽出します。
+**Canny**：Picks outlines.
 
 
 ##Analysis
-CvEffectsで最適化された映像を解析し、所定のコンピュータへOSCとしてデータを送信します。
+Analyze image source from CvEffects unit, and send analyzed datas with OSC messages.
 
-**Hakoniwa Name**：箱庭の名前。OSCのアドレス・プリセットの保存名称として使用されます。
-**Load Preset**：入力したHakoniwa nameのプリセットを読み込みます。
-**Save Preset**：変更したcvEffect・AnalysisのUIデータをプリセットとして保存します。
-**Send OSC**：OSCを送信を有効化します。
-**OSCSplit**：OSCの送信先を選択します。横並びのトグルは、画面左側のOSC SplitListに対応しています。
+**Hakoniwa Name**：Hakoniwa's name. This name is used as OSC address and preset names.
 
-##解析法とOSCフォーマット
+**Load Preset**：Load preset Hakoniwa name's data.
+
+**Save Preset**：Save preset cvEffects and analysis options.
+
+**Send OSC**：Enable OSC Sending.
+
+##Analyze way and OSC format
 ####ContourFinder
 ***/dp/cameraUnit/hakoniwaName/contour/boundingRect***
 
@@ -60,19 +49,19 @@ CvEffectsで最適化された映像を解析し、所定のコンピュータ�
 
 Arg総数 --- 5 * n + 1
 
-概要：Blobを囲う矩形
+概要：Rectangle from blobs.
 
 ***/dp/cameraUnit/hakoniwaName/contour/blob***
 
 **[Int] numBlob, [Int]numPts, [Float]pt-X, [Float]pt-Y, .....**
 
-概要：輪郭の頂点座標
+概要：Vertex positions of outlines.
 
 ***/dp/cameraUnit/hakoniwaName/contour/area***
 
 **[Int] numAreas, [float]area1, [float]area2 ,,,**
 
-概要：輪郭の面積
+概要：Area of outlines.
 
 ---
 ####mean
@@ -80,7 +69,7 @@ Arg総数 --- 5 * n + 1
 
 **[Int] mean_R, [Int]mean_G, [Int]mean_B, [Int]mean_Brightness**
 
-概要：画面全体のピクセルトータル数(≒明るさ)
+概要：Avarage color of image source.
 
 ---
 ####optFlow(pyrLK)
@@ -95,7 +84,7 @@ Arg総数 --- 5 * n + 1
 
 Arg総数 --- 2 * 10
 
-概要：動きの平均値を10個のベクターに集約したデータ
+概要：Avarage of movement.
 
 ***/dp/cameraUnit/hakoniwaName/vector/length***
 
@@ -103,7 +92,7 @@ Arg総数 --- 2 * 10
 
 Arg総数 --- 10
 
-概要：動きの長さ平均を10個のベクターに集約したデータ
+概要：Avarage of movement's length.
 
 ***/dp/cameraUnit/hakoniwaName/vector/total***
 
@@ -111,7 +100,7 @@ Arg総数 --- 10
 
 Arg総数 --- 2
 
-概要：動きの平均を1個のベクターに集約したデータ
+概要：Total of movement.
 
 ---
 ####Pixelate
@@ -127,7 +116,7 @@ Arg総数 --- 2
 
 Arg総数 --- 2 + width * height / 64
 
-概要：画像をピクセレートしたデータ
+概要：mosaic data of image source.
 
 Sample:
 
