@@ -41,8 +41,8 @@ public:
     
     
     /// control panel definition
-    virtual ofxUICanvasPlus* createPanel(const string targetName) = 0;
-    virtual ramActorUISegmentType getType() = 0;
+    virtual ofxUICanvasPlus* createPanel(const string& targetName) = 0;
+    virtual ramActorUISegmentType getType() const = 0;
 
     string getName() const;
     

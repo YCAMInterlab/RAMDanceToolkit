@@ -33,7 +33,7 @@ public:
 	void end();
 
 	void setEnable(bool v) { enable = v; }
-	bool getEnable() { return enable; }
+	bool getEnable() const { return enable; }
 
 	void setShadowAlpha(float alpha);
 

@@ -27,8 +27,6 @@ RAMDanceToolkit by YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, an
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-    
-
 
 <!-- 
 
@@ -50,3 +48,13 @@ If more than one point is visible, the system will not be able to reconstruct th
 The primary innovation of the CircleTracking app is the use of OpenCV's `estimateAffine3D()` function, which solves for the position and orientation of the sensors based on an original data set.
 
 -->
+
+##Change log
+###v1.2.0
+
+- add **ramMotionExtractor** : It makes you easier to edit node selection. check [wiki](https://github.com/YCAMInterlab/RAMDanceToolkit/wiki/RAM-API-Reference-MotionExtractor_jp) how to use it.
+
+###v1.1.0
+
+- add **ramReceiverTag & ramOSCManager** : for receiver OSC in scenes & other classes.
+- add **ramCommunicationManager** : for control parameters from other devices on OSC.
