@@ -25,14 +25,9 @@
 //HakoniwaOscTest hakoniwaOscTest;
 //HakoniwaColorOfWater hakoniwaColorOfWater;
 
-#include "dp3DDanceMap.h"
-dp3DDanceMap mDanceMap;
-
 #include "dpHakoVisIceMap.h"
 dpHakoVisIceMap mIceMap;
 
-#include "dpHakoVisSandStorm.h"
-dpHakoVisSandStorm mSandStorm;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------

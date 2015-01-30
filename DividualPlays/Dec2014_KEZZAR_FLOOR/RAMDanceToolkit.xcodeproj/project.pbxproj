@@ -92,7 +92,6 @@
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
 		9209C4391A6CBF6A00E35146 /* dp3DDanceMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = dp3DDanceMap.h; path = scenes/dp3DDanceMap.h; sourceTree = "<group>"; };
 		9209C43A1A6CBF6A00E35146 /* dpHakoVisIceMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = dpHakoVisIceMap.h; path = scenes/dpHakoVisIceMap.h; sourceTree = "<group>"; };
-		9209C43B1A6CBF6A00E35146 /* dpHakoVisSandStorm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = dpHakoVisSandStorm.h; path = scenes/dpHakoVisSandStorm.h; sourceTree = "<group>"; };
 		9209C43E1A6CC04C00E35146 /* dpBasicMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpBasicMap.h; sourceTree = "<group>"; };
 		922356671A5D2C14009DD3EB /* KezBlinker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezBlinker.h; sourceTree = "<group>"; };
 		922356681A5D2D63009DD3EB /* KezDelaunayMesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezDelaunayMesh.h; sourceTree = "<group>"; };
@@ -229,7 +228,6 @@
 			children = (
 				9209C4391A6CBF6A00E35146 /* dp3DDanceMap.h */,
 				9209C43A1A6CBF6A00E35146 /* dpHakoVisIceMap.h */,
-				9209C43B1A6CBF6A00E35146 /* dpHakoVisSandStorm.h */,
 				925872B11A4D8FF800483FE3 /* iceLine */,
 				92F108E71A45395F00E398B2 /* kez_util */,
 			);
