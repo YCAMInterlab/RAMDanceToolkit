@@ -13,9 +13,9 @@ DP_SCORE_NAMESPACE_BEGIN
 void SceneBase::drawHeader()
 {
 #ifdef DP_MASTER_HAKONIWA
-    const string title = "Dividual Plays";
+    const string title{"Dividual Plays"};
 #else
-    const string title = "Dividual Plays Score";
+    const string title{"Dividual Plays Score"};
 #endif
     string name = getName();
     ofStringReplace(name, "dp::score::Scene", "");

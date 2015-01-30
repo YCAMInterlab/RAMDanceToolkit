@@ -94,7 +94,7 @@ void SceneVec2Grid::draw()
     ofPushMatrix();
     ofTranslate(mGridW, 0.f);
     ofSetColor(255, 128);
-    const float length = ofGetHeight()*3.5f;
+    const float length{ofGetHeight()*3.5f};
     glBegin(GL_LINES);
     glColor4f(1.f, 1.f, 1.f, 0.5f); glVertex3f(0.f, 0.f, 0.f);
     glColor4f(1.f, 1.f, 1.f, 0.0f); glVertex3f(-length, 0.f, 0.f);

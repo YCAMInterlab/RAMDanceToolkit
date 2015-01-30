@@ -108,7 +108,7 @@ void SceneDataWave::draw()
     ofPushMatrix();
     ofRotateZ(time * 3.f);
     ofRotateY(time * 5.f);
-    const GLuint mode = ofGetGLPrimitiveMode(mPlaneMesh.getMode());
+    const GLuint mode{ofGetGLPrimitiveMode(mPlaneMesh.getMode())};
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     ofSetColor(ofColor::white, 64);
     mVbo.getUsingIndices() ? mVbo.drawElements(mode, mVbo.getNumIndices()) : mVbo.draw(mode, 0, mVbo.getNumVertices());

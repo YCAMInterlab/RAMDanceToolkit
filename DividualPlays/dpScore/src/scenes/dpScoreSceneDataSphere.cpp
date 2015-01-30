@@ -25,7 +25,7 @@ void SceneDataSphere::Circle::update(const ofVec2f& v)
 
 void SceneDataSphere::Circle::draw()
 {
-    const float step = mRadius * TWO_PI / kResolution;
+    const float step{(float)(mRadius * TWO_PI / kResolution)};
     for (int i=0; i<data.size(); i++) {
         const auto v = data.at(i);
         if (v.length() < 0.01f) continue;

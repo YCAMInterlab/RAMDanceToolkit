@@ -39,7 +39,7 @@ SceneManager::~SceneManager()
 #pragma mark ___________________________________________________________________
 void SceneManager::add(SceneBase::Ptr scene)
 {
-    const string className = scene->getName();
+    const string className{scene->getName()};
     
     if (mScenes.empty() == false) {
         if (findScene(className) != mScenes.end())
@@ -96,8 +96,7 @@ void SceneManager::prev()
 {
     if (mScenes.empty())
         ofxThrowException(ofxException, "mScenes is empty");
-    --mSceneId;
-    if (mSceneId<0) mSceneId = mScenes.size()-1;
+    (--mSceneId += mScenes.size()) %= mScenes.size();
     change();
 }
 

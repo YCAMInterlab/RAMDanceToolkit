@@ -48,6 +48,8 @@ void SceneBodyBoids::enter()
 
     mCam.enableMouseInput();
     
+    mSkeletonName = "";
+    
     mEnterTime = ofGetElapsedTimef();
 }
 
@@ -187,11 +189,13 @@ void SceneBodyBoids::draw()
 #pragma mark ___________________________________________________________________
 void SceneBodyBoids::randomizeCamera()
 {
-    const size_t n = mParticleController.mParticles.size();
-    const ofVec3f eye =
-    mParticleController.mParticles.at((size_t)ofRandom((float)n)).mPos;
-    const ofVec3f lookAt =
-    mParticleController.mParticles.at((size_t)ofRandom((float)n)).mPos;
+    const size_t n{mParticleController.mParticles.size()};
+    const ofVec3f eye{
+        mParticleController.mParticles.at((size_t)ofRandom((float)n)).mPos
+    };
+    const ofVec3f lookAt{
+        mParticleController.mParticles.at((size_t)ofRandom((float)n)).mPos
+    };
     
     //    mCam.setPosition(eye);
     //    mCam.setTarget(lookAt);
@@ -201,7 +205,7 @@ void SceneBodyBoids::randomizeCamera()
 #pragma mark ___________________________________________________________________
 void SceneBodyBoids::updateSkeleton(SkeletonPtr skl)
 {
-    if (mSkeletonName=="") mSkeletonName = skl->getName();
+    if (mSkeletonName == "") mSkeletonName = skl->getName();
     
     if (mSkeletonName == skl->getName()) {
         if (mActor) mPrevActor = mActor;
