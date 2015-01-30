@@ -121,7 +121,13 @@ void testApp::keyPressed(int key)
         ofSetFullscreen(true);
     }
     
-    if(key == 'h')ofHideCursor();
+    if(key == 'h'){
+        ofHideCursor();
+    }
+    
+    if(key == 'j'){
+        ofShowCursor();
+    }
 }
 
 //--------------------------------------------------------------

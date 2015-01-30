@@ -21,10 +21,10 @@ public:
         ramGetGUI().addIntSlider("div", 1, 20, &mDiv);
         ramGetGUI().addToggle("all", &mTogAllDraw);
         ramGetGUI().addIntSlider("lineWidth", 1, 10, &mLineWidth);
-        ramGetGUI().addIntSlider("thresh", 1, 255, &mExtendThreshNum);
+        ramGetGUI().addIntSlider("extendThresh", 1, 255, &mExtendThresh);
+        ramGetGUI().addIntSlider("extendNum", 0, 255, &mExtendNum);
         ramGetGUI().addButton("randomize");
-        ramGetGUI().addIntSlider("ForceExtendNum", 0, 255, &mForceExtendNum);
-        ramGetGUI().addToggle("osc",&isOsc);
+        ramGetGUI().addToggle("externalOsc",&isExternalOsc);
         
         ramFloorQuadWarper::instance().setupContolPanel(this);
         
@@ -34,7 +34,7 @@ public:
         
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoVisIceMap::onPanelChanged);
         ofAddListener(ofEvents().keyPressed, this, &dpHakoVisIceMap::keyPressed);
-        mGrid.setExtendThreshNum(mExtendThreshNum);
+        mGrid.setExtendThreshNum(mExtendThresh);
         
         mSceneNames[ICE] = "Ice";
         mSceneNames[TORNADO] = "Tornado";
@@ -58,18 +58,18 @@ public:
         if(e.key == 't'){
             mDiv = 13;
             mGrid.changeDiv(mDiv);
-            mExtendThreshNum = 80;
-            mGrid.setExtendThreshNum(mExtendThreshNum);
+            mExtendThresh = 80;
+            mGrid.setExtendThreshNum(mExtendThresh);
         }
         
         if(e.key == 'y'){
-            isOsc = !isOsc;
+            isExternalOsc = !isExternalOsc;
         }
         
         if(e.key == 'w'){
             mTogAllDraw = false;
             mGrid.setAllDraw(mTogAllDraw);
-            isOsc = false;
+            isExternalOsc = false;
         }
         
     }
@@ -89,7 +89,7 @@ public:
             mReceiver.getNextMessage(&m);
             
             if(m.getAddress() == "/dp/cameraUnit/Ice/mean"){
-                if(isOsc)mGrid.extendByThresh(m.getArgAsInt32(3));
+                if(isExternalOsc)mGrid.extendByThresh(m.getArgAsInt32(3));
             }
             
             if (m.getAddress().substr(0,26) == "/dp/cameraUnit/sceneState/"){
@@ -104,6 +104,7 @@ public:
                     }
                 }
                 
+                // TODO: divがシーン毎に自動的に変わる場合は実装を検討
                 if(mSceneEnable[ICE] == true && mPreMode != ICE){
                     mPreMode = ICE;
                     
@@ -169,16 +170,17 @@ public:
             mGrid.setAllDraw(mTogAllDraw);
         }
         
-        if(name == "thresh"){
-            mGrid.setExtendThreshNum(mExtendThreshNum);
+        if(name == "extendThresh"){
+            mGrid.setExtendThreshNum(mExtendThresh);
         }
         
-        if(name == "ForceExtendNum"){
-            mGrid.extendByThresh(mForceExtendNum);
+        if(name == "extendNum"){
+            mGrid.extendByThresh(mExtendNum);
         }
         
         if(name == "randomize"){
-            mGrid.randomizeMode();
+            mGrid.changeDiv(mDiv);
+            mGrid.extendByThresh(mExtendNum);
         }
         
     }
@@ -191,9 +193,9 @@ private:
     
     int mDiv = 4;
     int mLineWidth = 2;
-    int mExtendThreshNum = 160;
+    int mExtendThresh = 160;
     int mPreMode = FIVE;
-    int mForceExtendNum = 8;
+    int mExtendNum = 8;
     
     map<int,string>mSceneNames;
     
@@ -203,8 +205,7 @@ private:
         FIVE,
     };
     
-    bool isIce = false;
-    bool isOsc = false;
+    bool isExternalOsc = false;
     bool mTogAllDraw = false;
     
     bitset<3> mSceneEnable;
