@@ -1,5 +1,5 @@
 #ParallelLink
-![screen shot](documents/screenshot.png)
+![screen shot](https://raw.githubusercontent.com/YCAMInterlab/RAMDanceToolkit/DividualPlays/DividualPlays/%23%23%23Documents_YCAM2015/hakoniwa_parallelLink/documents/screenshot.png)
 
 パラレルリンクのオペレーション方法です。
 プログラムはappDividualPlays/2015_MAIN_APP内のプロジェクトを実行してdpH__PLink_Laser/Oil/Prismシーンでコントロール可能(各シーンでIPアドレスが異なっています)
