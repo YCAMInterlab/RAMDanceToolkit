@@ -1,45 +1,45 @@
 #CameraUnit
-CameraUnit is an application for analysis hakoniwa images.
+CameraUnit is an application for analyzing hakoniwa images.
 
 ##outline
-This application get images from video and web camera, apply fx for analysis and send analyzed data with OSC messages.
+This application gets images from video and/or a web camera, applies fx for analysis and send analyzed data via OSC messages.
 
 ##CvEffect
-CvEffect UI apply fx to image sources.
+The CvEffect UI applies fx to image sources.
 
-**Background**：It takes background difference.You push the button,then background image will be taken from current frame.
+**Background**：This applies a background difference effect. Pressing the UI button uses the current frame as the base for the background difference effect. 
 
-**Warp**：Apply unwarp perspective.You can pick Yellow wire frame on image source, and drag frame to apply unwarp perspective.
+**Warp**：This applies an unwarp perspective effect.  A yellow wireframe is applied on an image source, and you can drag around on the frame to apply unwarp perspective.
 
-**Blur**：Apply blur effect.
+**Blur**：This applies a blur effect.
 
-**Invert**：Make pixel colos inverse.
+**Invert**：This inverts the pixel colors.
 
-**FrameDiff**：Apply frame difference effect. It returns difference from previous frame.
+**FrameDiff**：This applies a frame difference effect. The result is any difference from the previous frame.
 
-**Threshold**：Returns thresholded image.
+**Threshold**：This returns a threholded image.
 
-**AdaptiveThreshold**：Returns adaptive thresholded image.
+**AdaptiveThreshold**：This returns an adaptive thresholded image.
 
-**AccumelateWeight**：Returns accumlated image.
+**AccumelateWeight**：This returns an accumlated image.
 
-**Erode**：Erode white area.
+**Erode**：This erodes the white area (makes it smaller).
 
-**Dilate**：Dilate white area.
+**Dilate**：This dilates the white area (makes it bigger).
 
-**Canny**：Picks outlines.
+**Canny**：This picks out outlines and edges.
 
 
 ##Analysis
-Analyze image source from CvEffects unit, and send analyzed datas with OSC messages.
+This section documents how to analyze an image source from the CvEffects unit, and send the analyzed data via OSC messages.
 
-**Hakoniwa Name**：Hakoniwa's name. This name is used as OSC address and preset names.
+**Hakoniwa Name**：Hakoniwa's name. This name is used as the OSC address and the preset names.
 
-**Load Preset**：Load preset Hakoniwa name's data.
+**Load Preset**：Load the data for the preset Hakoniwa.
 
-**Save Preset**：Save preset cvEffects and analysis options.
+**Save Preset**：Save presets of CvEffects and analysis options.
 
-**Send OSC**：Enable OSC Sending.
+**Send OSC**：Enable the sending of analyzed data via OSC messages.
 
 ##Analyze way and OSC format
 ####ContourFinder
@@ -49,7 +49,7 @@ Analyze image source from CvEffects unit, and send analyzed datas with OSC messa
 
 Num of args --- 5 * n + 1
 
-概要：Rectangle from blobs.
+Type：Rectangle from blobs.
 
 ***/dp/cameraUnit/hakoniwaName/contour/blob***
 
@@ -69,7 +69,7 @@ Type：Area of outlines.
 
 **[Int] mean_R, [Int]mean_G, [Int]mean_B, [Int]mean_Brightness**
 
-Type：Avarage color of image source.
+Type：Average color of image source.
 
 ---
 ####optFlow(pyrLK)
@@ -84,7 +84,7 @@ Type：Avarage color of image source.
 
 Num of args --- 2 * 10
 
-Type：Avarage of movement.
+Type：Average movement.
 
 ***/dp/cameraUnit/hakoniwaName/vector/length***
 
@@ -92,7 +92,7 @@ Type：Avarage of movement.
 
 Num of args --- 10
 
-Type：Avarage of movement's length.
+Type：Length of average movement.
 
 ***/dp/cameraUnit/hakoniwaName/vector/total***
 
@@ -100,7 +100,7 @@ Type：Avarage of movement's length.
 
 Num of args --- 2
 
-Type：Total of movement.
+Type：Total movement.
 
 ---
 ####Pixelate
