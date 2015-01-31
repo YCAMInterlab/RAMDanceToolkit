@@ -17,7 +17,6 @@
 
 #include "testApp.h"
 #include "ofAppGlutWindow.h"
-#include "dpConstants.h"
 
 //--------------------------------------------------------------
 int main()
@@ -25,6 +24,6 @@ int main()
 	ofAppGlutWindow window; // create a window
 	
 	// set width, height, mode (OF_WINDOW or OF_FULLSCREEN)
-	ofSetupOpenGL(&window, APP_WIDTH,APP_HEIGHT, OF_WINDOW);
+	ofSetupOpenGL(&window, 1024, 768, OF_WINDOW);
 	ofRunApp(new testApp); // start the app
 }
