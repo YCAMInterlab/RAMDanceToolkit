@@ -1,7 +1,7 @@
 #CameraUnit
-CameraUnit is an application for analyzing hakoniwa images.
+CameraUnit is an application for analyzing Hakoniwa images.
 
-##outline
+##Outline
 This application gets images from video and/or a web camera, applies fx for analysis and send analyzed data via OSC messages.
 
 ##CvEffect
@@ -41,7 +41,7 @@ This section documents how to analyze an image source from the CvEffects unit, a
 
 **Send OSC**：Enable the sending of analyzed data via OSC messages.
 
-##Analyze way and OSC format
+##OSC format
 ####ContourFinder
 ***/dp/cameraUnit/hakoniwaName/contour/boundingRect***
 
