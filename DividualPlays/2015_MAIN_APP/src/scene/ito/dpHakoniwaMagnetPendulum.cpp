@@ -197,9 +197,9 @@ void dpHakoniwaMagnetPendulum::update() {
             } else {
                 
                 if (bCondition[0] || bCondition[1] || bCondition[2]) {
-                    for (int i = 0; i < 6; i++) bOn[i] = true;
+                    for (int i = 0; i < NMAGNETS; i++) bOn[i] = true;
                 } else {
-                    for (int i = 0; i < 6; i++) bOn[i] = false;
+                    for (int i = 0; i < NMAGNETS; i++) bOn[i] = false;
                 }
             }
             
