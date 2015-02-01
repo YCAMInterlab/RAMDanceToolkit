@@ -1,44 +1,46 @@
 # ServoPendulum_Hakoniwa_Hakovis
 
-The example of RDTK to "ServoPendulum" and visualization of "ServoPendulum"
+This example demonstates the ServoPendulum Hakoniwa, how it works with the RDTK and its visualization.
 
 ## HakoniwaServoPendulum
 
-The pendulum moves automatically.
+Currently this pendulum moves on its own.
 
-The distance of two "ramNode" is mapped to the movable range of the pendulum.
+The distance betwee two "ramNode" objects is mapped to the movable range of the pendulum.
 
 ### GUI
 
-**speed** seconds of 1 round trip.
+**speed** Seconds of 1 round trip of the pendulum.
 
-**lengthMin** minimum distance of two "ramNode"
+**lengthMin** Minimum distance of two "ramNode" objects
 
-**lengthMax** maximum distance of two "ramNode"
+**lengthMax** Maximum distance of two "ramNode" objects
 
-**range** movable range of the pendulum(0 ~ 90)
+**range** Movable range of the pendulum(0 ~ 90)
 
-**angle** current angle of the pendulum(-90 ~ 90)
+**angle** Current angle of the pendulum(-90 ~ 90)
 
 ### OSC Output
 **/dp/hakoniwa/servoPendulum**
 
 ## HakoVisServoPendulum
 
-Tracking vector of the pendulum's tip. The history of angle and length of vector makes 3D computer graphics.
+This visualization tracks the vector of the pendulum's tip. 
+
+Previous recordings of the angle and length of the vector are used to create a 3D visualization.
 
 ### OSC Input
 
 **port**: 10000
 
 #### from CameraUnit
-**/dp/cameraUnit/ServoPendulum/vector/total**: see the reference of CameraUnit
 
+**/dp/cameraUnit/ServoPendulum/vector/total**: See the [CameraUnit](https://github.com/YCAMInterlab/RAMDanceToolkit/tree/master/apps/CameraUnit) reference for more information.
 
 ### GUI
 
-**scale** /dp/cameraUnit/ServoPendulum/vector/total scale for the vector length
+**scale** /dp/cameraUnit/ServoPendulum/vector/total Scale of the vector length
 
 ## Reference Movie
 
-under construction...
+Coming soon! :)
