@@ -16,7 +16,13 @@
 
 #ifdef OFX_UI_FONT_NAME
 #undef OFX_UI_FONT_NAME
+
+#if defined DEBUG
 #define OFX_UI_FONT_NAME "../../../../resources/Fonts/FreeUniversal-Regular.ttf"
+#else
+#define OFX_UI_FONT_NAME "../resources/Fonts/FreeUniversal-Regular.ttf"
+#endif
+
 #endif
 
 #endif

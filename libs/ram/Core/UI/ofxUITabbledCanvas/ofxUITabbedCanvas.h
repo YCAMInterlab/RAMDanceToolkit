@@ -2,6 +2,7 @@
 
 #include "ofxUI.h"
 #include "ofxUIToggleMini.h"
+#include "ramGlobal.h"
 
 class ofxUICanvasPlus : public ofxUICanvas {
 public:
@@ -50,8 +51,8 @@ public:
 	,loadStatus(false)
 	,tabWidth(tabWidth)
 	,visible(true) {
-        loadButton = new ofxUIImageButton(0, 0, 32, 32, &loadStatus, "../../../../resources/Images/open.png", "Load");
-        saveButton = new ofxUIImageButton(0, 0, 32, 32, &saveStatus, "../../../../resources/Images/save.png", "Save");
+        loadButton = new ofxUIImageButton(0, 0, 32, 32, &loadStatus, ramToResourcePath("Images/open.png"), "Load");
+        saveButton = new ofxUIImageButton(0, 0, 32, 32, &saveStatus, ramToResourcePath("Images/save.png"), "Save");
         addWidgetRight(loadButton);
         addWidgetRight(saveButton);
 		ofAddListener(newGUIEvent, this, &ofxUITabbedCanvas::guiEvent);
