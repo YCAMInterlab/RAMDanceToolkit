@@ -6,6 +6,6 @@
 [http://ramhackpad.ycam.jp/data/HakoniwaTheta.zip](http://ramhackpad.ycam.jp/data/HakoniwaTheta.zip "download")
 
 
-ダウンロードしたファイルを解凍して、appDividualPlays/2015_MAIN_APP内の/bin/data/内に「HakoniwaTheta」のフォルダ毎コピーして下さい。
+ダウンロードしたファイルを解凍して、appDividualPlays/2015_MAIN_APP内の/bin/data/内に「HakoniwaTheta」のフォルダをそのままコピーして下さい。
 
 
