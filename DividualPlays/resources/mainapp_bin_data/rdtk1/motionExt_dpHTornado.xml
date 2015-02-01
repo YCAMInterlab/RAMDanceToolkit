@@ -1,0 +1,16 @@
+<Smooth>10.000000000</Smooth>
+<MPort>
+    <ActorIndex>1</ActorIndex>
+    <Name>kojiri</Name>
+    <Joint>20</Joint>
+</MPort>
+<MPort>
+    <ActorIndex>1</ActorIndex>
+    <Name>kojiri</Name>
+    <Joint>0</Joint>
+</MPort>
+<MPort>
+    <ActorIndex>1</ActorIndex>
+    <Name>kojiri</Name>
+    <Joint>10</Joint>
+</MPort>
