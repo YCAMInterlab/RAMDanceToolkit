@@ -13,3 +13,21 @@
 [submodule "addons/ofxBt"]
 	path = addons/ofxBt
 	url = git@github.com:motoishmz/ofxBt.git
+[submodule "addons/ofxQuadWarp"]
+	path = addons/ofxQuadWarp
+	url = git@github.com:julapy/ofxQuadWarp.git
+[submodule "addons/ofxDelaunay"]
+	path = addons/ofxDelaunay
+	url = git@github.com:obviousjim/ofxDelaunay.git
+[submodule "addons/ofxDmx"]
+	path = addons/ofxDmx
+	url = https://github.com/kylemcdonald/ofxDmx.git
+[submodule "addons/ofxEvent"]
+	path = addons/ofxEvent
+	url = https://github.com/YoshitoONISHI/ofxEvent
+[submodule "addons/ofxException"]
+	path = addons/ofxException
+	url = https://github.com/YoshitoONISHI/ofxException
+[submodule "addons/ofxMotioner"]
+	path = addons/ofxMotioner
+	url = https://github.com/YoshitoONISHI/ofxMotioner
