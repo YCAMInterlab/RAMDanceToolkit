@@ -1,39 +1,38 @@
 # MagPendulum_Hakoniwa_Hakovis
 
-The example of RDTK to "MagPendulum" and visualization of "MagPendulum"
+This example demonstates the MagPendulum Hakoniwa, how it works with the RDTK and its visualization.
 
 ##  Arduino
 **/Arduino/MagPendulum**
 
 ## HakoniwaMagPendulum
 
-When the distance of two "ramNode" is below threshold, an electromagnet turn on.
-The pendulum is attracted to an electromagnet.
+When the distance between two "ramNode" objects is below a threshold, an electromagnet is turned on. This causes the metal pendulum to be attracted to the electromagnet.
 
 ### GUI
 
-**ON/OFF_MAGNET1** toggle of electromagnet1
+**ON/OFF_MAGNET1** Toggle electromagnet1
 
-**ON/OFF_MAGNET2** toggle of electromagnet2
+**ON/OFF_MAGNET2** Toggle electromagnet2
 
-**Distance Threshold** threshold
+**Distance Threshold** Distance threshold value for toggling electromagnet
 
 ### OSC Output
 **/dp/hakoniwa/MagPendulum**
 
 ## HakoVisMagPendulum
 
-Record the movement of the pendulum in buffers. The buffers make multi circles move and multi circles makes quad meshes.
+The movement of the pendulum is recorded in buffers. The data of the movement in the buffers results in multi-circles. The multi-circles result in quad meshes.
 
 ### OSC Input
 
 **port**: 10000
 
 #### from CameraUnit
-**/dp/cameraUnit/MagPendulum/contour/boundingRect**: see the reference of CameraUnit
+**/dp/cameraUnit/MagPendulum/contour/boundingRect**: See the [CameraUnit](https://github.com/YCAMInterlab/RAMDanceToolkit/tree/master/apps/CameraUnit) reference for more information.
 
 
 ### GUI
 
-**scale** scale for xy coordinate of the pendulum. 
+**scale** Scale for the x and y coordinates of the pendulum. 
 
