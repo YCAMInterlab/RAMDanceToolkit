@@ -108,4 +108,7 @@ private:
 	bool bRecAllActor;
 	bool bUseSimpleActor;
 	bool bUseShading;
+    
+    bool loadNewFile;
+    string newFilePath;
 };

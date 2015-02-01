@@ -25,7 +25,8 @@ ramActorsScene::ramActorsScene() :
 bShowAllActor(true),
 bRecAllActor(false),
 bUseShading(true),
-bUseSimpleActor(true)
+bUseSimpleActor(true),
+loadNewFile(false)
 {
 	ofAddListener(ofEvents().fileDragEvent, this, &ramActorsScene::onFileDrop);
 }
@@ -93,6 +94,11 @@ void ramActorsScene::setup()
 
 void ramActorsScene::update()
 {
+    if (loadNewFile) {
+        loadFile(newFilePath);
+        loadNewFile = false;
+    }
+    
     /// refresh control panel if it's needed
 	if (needsUpdatePanel())
 		rebuildControlPanel();
@@ -274,8 +280,10 @@ void ramActorsScene::onValueChanged(ofxUIEventArgs &e)
         if (button->getValue())
         {
             ofFileDialogResult result = ofSystemLoadDialog("Load recorded *.tsv file.", false, "");
-            if (result.bSuccess)
-                loadFile(result.getPath());
+            if (result.bSuccess) {
+                loadNewFile = true;
+                newFilePath = result.getPath();
+            }
         }
     }
     
