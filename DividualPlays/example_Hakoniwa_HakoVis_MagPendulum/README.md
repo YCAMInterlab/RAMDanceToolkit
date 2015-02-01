@@ -7,7 +7,9 @@ This example demonstates the MagPendulum Hakoniwa, how it works with the RDTK an
 
 ## HakoniwaMagPendulum
 
-When the distance between two "ramNode" objects is below a threshold, an electromagnet is turned on. This causes the metal pendulum to be attracted to the electromagnet.
+When the distance between two "ramNode" objects is below a threshold, an electromagnet is turned on. 
+
+This causes the metal pendulum to be attracted to the electromagnet.
 
 ### GUI
 
