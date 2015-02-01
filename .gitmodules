@@ -24,10 +24,10 @@
 	url = https://github.com/kylemcdonald/ofxDmx.git
 [submodule "addons/ofxEvent"]
 	path = addons/ofxEvent
-	url = https://github.com/YoshitoONISHI/ofxEvent
+	url = https://github.com/YoshitoONISHI/ofxEvent.git
 [submodule "addons/ofxException"]
 	path = addons/ofxException
-	url = https://github.com/YoshitoONISHI/ofxException
+	url = https://github.com/YoshitoONISHI/ofxException.git
 [submodule "addons/ofxMotioner"]
 	path = addons/ofxMotioner
-	url = https://github.com/YoshitoONISHI/ofxMotioner
+	url = https://github.com/YoshitoONISHI/ofxMotioner.git

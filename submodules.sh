@@ -69,19 +69,19 @@ else
 	cd ../
 
 	# ofxEvent
-	git clone https://github.com/YoshitoONISHI/ofxEvent
+	git clone https://github.com/YoshitoONISHI/ofxEvent.git
 	cd ofxEvent
 	git checkout 3cacf82
 	cd ../
 
 	# ofxException
-	git clone https://github.com/YoshitoONISHI/ofxException
+	git clone https://github.com/YoshitoONISHI/ofxException.git
 	cd  ofxException
 	git checkout de4507b
 	cd ../
 
 	# ofxMotioner
-	git clone https://github.com/YoshitoONISHI/ofxMotioner
+	git clone https://github.com/YoshitoONISHI/ofxMotioner.git
 	cd ofxMotioner
 	git checkout develop
 	git checkout 392d243
