@@ -15,54 +15,10 @@ const ofColor MH::kBackgroundColor{255, 20};
 const ofColor MH::kTextColor{255, 200};
 const ofColor MH::kTextColorDark{255, 100};
 
-const int MH::kValvePins[kNumValvePins]{2, 3, 4, 5, 6, 7};
-const int MH::kPumpPins[kNumPumpPins]{8, 9};
-const int MH::kPumpPinForward{kPumpPins[0]};
-const int MH::kPumpPinBack{kPumpPins[1]};
-
-const float MH::kPumpOpenDur[MH::kNumPumpPins]{8.0f, 5.0f};
-const float MH::kPumpCloseDur[MH::kNumPumpPins]{2.0f, 5.0f};
-
 const string MH::kOscAddrRamSetScene{"/ram/set_scene"};
 const string MH::kOscAddrRamDoSomething{"/ram/do_something"};
 
 const string MH::kScoreBlack{"black"};
-
-#pragma mark ___________________________________________________________________
-void MasterHakoniwa::Valve::update(MasterHakoniwa* mh)
-{
-    const float t{ofGetElapsedTimef()};
-    
-    if (!prevOpen && open) {
-        openedTime = t;
-        nOpend++;
-    }
-    else if (t - openedTime >= mh->mValveOpenDuration) {
-        open = false;
-        if (prevOpen && !open) {
-            closedTime = t;
-        }
-    }
-    prevOpen = open;
-    
-    mh->sendPin(pin, open);
-}
-
-#pragma mark ___________________________________________________________________
-void MasterHakoniwa::Pump::update(MasterHakoniwa* mh)
-{
-    const float t{ofGetElapsedTimef()};
-    
-    if (!prevOpen && open) {
-        openedTime = t;
-    }
-    else if (prevOpen && !open) {
-        closedTime = t;
-    }
-    prevOpen = open;
-    
-    mh->sendPin(pin, open);
-}
 
 #pragma mark ___________________________________________________________________
 bool MasterHakoniwa::Scene::isEnabled() const
@@ -98,10 +54,12 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     tabbar->addSpacer(w, 1.f);
     tabbar->addLabel("[OSC]", OFX_UI_FONT_SMALL);
     tabbar->addToggle("Enable OSC to RAM DTK", &mEnableOscOutRDTK);
-    tabbar->addToggle("Enable OSC to Master Hakoniwa", &mEnableOscOutMH);
+    tabbar->addToggle("Enable OSC to Master Hakoniwa",
+                      &mColorOfWater.enableOscOut);
     tabbar->addToggle("Enable OSC to Score", &mEnableOscOutScore);
     tabbar->addToggle("Change Scene with CameraUnit", &mEnableCameraUnit);
-    tabbar->addToggle("Open Valve with MOTIONER", &mEnableMotioner);
+    tabbar->addToggle("Open Valve with MOTIONER",
+                      &mColorOfWater.enableOpenValve);
     tabbar->addSpacer(w, 1.f);
     tabbar->addLabel("[RAM Dance Tool Kit]", OFX_UI_FONT_SMALL);
     ofxUICanvas* sceneSelectTab{new ofxUICanvas()};
@@ -191,23 +149,7 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     tabbar->addCanvas(pixelataTab);
     
     tabbar->addSpacer(w, 1.f);
-    tabbar->addLabel("[Master Hakoniwa]", OFX_UI_FONT_SMALL);
-    
-    tabbar->addLabel("Open Valve (Color Water)", OFX_UI_FONT_SMALL);
-    tabbar->addToggle(ofToString(0), &mValves.at(0).open);
-    for (int i=1; i<kNumValvePins; i++) {
-        tabbar->addWidgetRight(new ofxUIToggle(ofToString(i),
-                                               &mValves.at(i).open,
-                                               sizeSml,
-                                               sizeSml));
-    }
-    
-    tabbar->addLabel("Open Pump (Clear Water)", OFX_UI_FONT_SMALL);
-    tabbar->addToggle("In", &mPumps.at(0).open);
-    tabbar->addWidgetRight(new ofxUIToggle("Out",
-                                           &mPumps.at(1).open, sizeSml, sizeSml));
-    tabbar->addSlider("Valve Open Duration", 0.f, 1.f, &mValveOpenDuration, w, kLineHeight);
-    tabbar->addSpacer(w, 1.f);
+    mColorOfWater.setupGui(tabbar);
     
     tabbar->addLabel("MOTIONER method settings", OFX_UI_FONT_SMALL);
     
@@ -216,32 +158,15 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
 
 void MasterHakoniwa::initialize()
 {
+    mColorOfWater.initialize();
+    
     ofxXmlSettings xml;
     xml.load(kXmlSettingsPath);
     
-    mValves.assign(kNumValvePins, Valve());
-    for (int i=0; i<mValves.size(); i++) {
-        mValves.at(i).pin = kValvePins[i];
-    }
-    
-    mPumps.assign(kNumPumpPins, Pump());
-    for (int i=0; i<mPumps.size(); i++) {
-        mPumps.at(i).pin = kPumpPins[i];
-    }
-    
+OFX_BEGIN_EXCEPTION_HANDLING
     xml.pushTag("osc");
     string errorStr{"error"};
     int errorInt{-1};
-    const string mhHost{xml.getAttribute("serverMasterHakoniwa", "host", errorStr)};
-    if (mhHost == errorStr)
-        ofxThrowException(ofxException,
-                          "serverMasterHakoniwa host name didn't find in XML");
-    const int mhPort{xml.getAttribute("serverMasterHakoniwa", "port", errorInt)};
-    if (mhPort == errorInt)
-        ofxThrowException(ofxException,
-                          "serverMasterHakoniwa port number didn't find in XML");
-    mMasterHakoniwaOscSender.setup(mhHost, mhPort);
-    
     const string cuHost{xml.getAttribute("serverCameraUnit", "host", errorStr)};
     if (cuHost == errorStr)
         ofxThrowException(ofxException,
@@ -260,12 +185,10 @@ void MasterHakoniwa::initialize()
         ofxThrowException(ofxException,
                           "serverScore port number didn't find in XML");
     
-    mMasterHakoniwaOscSender.setup(mhHost, mhPort);
     mCameraUnitOscSender.setup(cuHost, cuPort);
     mScoreOscSender.setup(scHost, scPort);
     xml.popTag();
-    
-    turnOffAllPins();
+OFX_END_EXCEPTION_HANDLING
     
     xml.pushTag("rdtk");
     vector<string> maestroSceneNames;
@@ -328,33 +251,25 @@ void MasterHakoniwa::shutdown()
                      this,
                      &MasterHakoniwa::onDrawSkeleton);
     
-    mEnableOscOutMH = true;
-    turnOffAllPins();
+    mColorOfWater.shutdown();
 }
 
 void MasterHakoniwa::update()
 {
     if (mEmergencyStop) {
-        mEnableMotioner = false;
+        mColorOfWater.stopAll();
+        
         mEnableCameraUnit = false;
-        mEnableOscOutMH = false;
         mEnableOscOutRDTK = false;
         mEnableOscOutScore = false;
         mEnableShowHakoniwaTitle = false;
-        turnOffAllPins();
         turnOffAllScenes();
         mEmergencyStop = false;
     }
     
     if (ofGetFrameNum() % kUpdateFrames) return;
     
-    for (int i=0; i<kNumValvePins; i++) {
-        mValves[i].update(this);
-    }
-    
-    for (int i=0; i<kNumPumpPins; i++) {
-        mPumps[i].update(this);
-    }
+    mColorOfWater.update();
     
     if (mEnableCameraUnit) {
         mAnalyzeMean.update();
@@ -417,41 +332,7 @@ void MasterHakoniwa::draw()
     ofSetColor(kTextColor);
     alignedTranslate(kMargin, kTextSpacing);
     
-    ofSetColor(kTextColor);
-    ofDrawBitmapString("[valves]", ofPoint::zero());
-    alignedTranslate(0.f, kTextSpacing);
-    
-    int i{0};
-    for (auto& v : mValves) {
-        v.open ? ofSetColor(color::kMain) : ofSetColor(kTextColor);
-        stringstream ss;
-        ss << i << " = " << (v.open ? "on " : "off")
-        << setprecision(2) << fixed
-        << " : " << (v.open ? t - v.openedTime : 0.f)
-        << " / " << mValveOpenDuration
-        << " | " << (!v.open ? t - v.closedTime : 0.f);
-        ofDrawBitmapString(ss.str(), ofPoint::zero());
-        alignedTranslate(0.f, kTextSpacing);
-        i++;
-    }
-    
-    ofSetColor(kTextColor);
-    alignedTranslate(0.f, kTextSpacing);
-    ofDrawBitmapString("[pumps]", ofPoint::zero());
-    
-    alignedTranslate(0.f, kTextSpacing);
-    i = 0;
-    for (auto& p : mPumps) {
-        p.open ? ofSetColor(color::kMain) : ofSetColor(kTextColor);
-        stringstream ss;
-        ss << i << " = " << (p.open ? "on " : "off")
-        << setprecision(1) << fixed
-        << " : " << (p.open ? t - p.openedTime : 0.f)
-        << " | " << (!p.open ? t - p.closedTime : 0.f);
-        ofDrawBitmapString(ss.str(), ofPoint::zero());
-        alignedTranslate(0.f, kTextSpacing);
-        i++;
-    }
+    mColorOfWater.draw();
     
     ofSetColor(kTextColor);
     alignedTranslate(0.f, kTextSpacing);
@@ -558,7 +439,7 @@ void MasterHakoniwa::draw()
     ofPopMatrix();
     
     ofPopMatrix();
-    
+
     
     ofSetColor(kBackgroundColor);
     ofRect(mCamViewport);
@@ -577,34 +458,6 @@ void MasterHakoniwa::draw()
     ofRect(ofPoint::zero(), 10000, 1000);
     mCam.end();
     ofPopStyle();
-}
-
-void MasterHakoniwa::turnOnValve(int index)
-{
-    if (!mEnableMotioner) return;
-    
-    if (index <0 || index >= mValves.size())
-        ofxThrowExceptionf(ofxException, "valve index %d is out of range", index);
-    mValves.at(index).open = true;
-}
-
-void MasterHakoniwa::turnOffAllPins()
-{
-    for (auto& v : mValves) {
-        v.open = false;
-        sendPin(v.pin, v.open);
-    }
-    for (auto& p : mPumps) {
-        p.open = false;
-        sendPin(p.pin, p.open);
-    }
-}
-
-bool MasterHakoniwa::getIsOpeningValve(int index)
-{
-    if (index <0 || index >= mValves.size())
-        ofxThrowExceptionf(ofxException, "valve index %d is out of range", index);
-    return mValves.at(index).open;
 }
 
 void MasterHakoniwa::setUniqueScene(int sceneIndex, bool win0, bool win1)
@@ -683,16 +536,6 @@ void MasterHakoniwa::turnOffAllScenes()
 }
 
 #pragma mark ___________________________________________________________________
-void MasterHakoniwa::sendPin(int pin, bool open)
-{
-    ofxOscMessage m;
-    m.setAddress("/dp/hakoniwa/colorOfWater/"+ofToString(pin));
-    m.addIntArg((int)open);
-    if (mEnableOscOutMH) mMasterHakoniwaOscSender.sendMessage(m);
-    //if (open)
-    //    cout << pin << "=" << open << endl;
-}
-
 void MasterHakoniwa::sendSetScene(const string& name, bool win0, bool win1)
 {
     auto& scene = mScenes[name];
@@ -878,9 +721,9 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
         const auto& toggleName = radio->getActiveName();
         if (radio->getActive()->getValue()) {
             if (toggleName == "Maestro") {
-                mEnableOscOutMH = true;
+                mColorOfWater.enableOscOut = true;
+                mColorOfWater.enableOpenValve = true;
                 mEnableOscOutRDTK = true;
-                mEnableMotioner = true;
                 mEnableCameraUnit = true;
                 mEnableOscOutScore = true;
                 mEnableShowHakoniwaTitle = true;
@@ -890,9 +733,9 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
                 mAnalyzeMean.mMinSetSceneTime = 90.f;
             }
             else if (toggleName == "Intro") {
-                mEnableOscOutMH = false;
+                mColorOfWater.enableOscOut = false;
+                mColorOfWater.enableOpenValve = false;
                 mEnableOscOutRDTK = false;
-                mEnableMotioner = false;
                 mEnableCameraUnit = false;
                 mEnableOscOutScore = true;
                 mEnableShowHakoniwaTitle = false;
@@ -903,9 +746,10 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
                 mSceneTimesBuffer.clear();
             }
             else if (toggleName == "Outro") {
-                mEnableOscOutMH = true;
+                mColorOfWater.enableOscOut = true;
+                mColorOfWater.enableOpenValve = true;
+                
                 mEnableOscOutRDTK = false;
-                mEnableMotioner = true;
                 mEnableCameraUnit = true;
                 mEnableOscOutScore = true;
                 mEnableShowHakoniwaTitle = false;

@@ -53,7 +53,7 @@ void SceneMasterIncrement::enter()
     
     mCam.enableMouseInput();
     
-    mAdditions.assign(MH::kNumValvePins, 0.f);
+    mAdditions.assign(HakoniwaColorOfWater::kNumValvePins, 0.f);
 }
 
 void SceneMasterIncrement::exit()
@@ -93,7 +93,7 @@ void SceneMasterIncrement::update(ofxEventMessage& m)
             }
             
             if (a >= mLimit) {
-                getMH().turnOnValve(i);
+                getMH().getColorOfWater().turnOnValve(i);
                 for (int k=begin; k<nJoints; k+=skip) {
                     if (k < 0 || k >= nJoints) break;
                     auto& n = skl->getJoint(k);
@@ -125,9 +125,10 @@ void SceneMasterIncrement::draw()
         ofPushMatrix();
         ofTranslate(0.f, 12.f * i);
         stringstream ss;
-        getMH().getIsOpeningValve(i) ? ofSetColor(color::kMain) : ofSetColor(MH::kTextColor);
-        ss << boolalpha << getMH().getIsOpeningValve(i)
-        << ": " << fixed << setprecision(1)  << f << "/" << mLimit;
+        const bool open{getMH().getColorOfWater().getIsOpeningValve(i)};
+        open ? ofSetColor(color::kMain) : ofSetColor(MH::kTextColor);
+        ss << boolalpha
+        << open << ": " << fixed << setprecision(1)  << f << "/" << mLimit;
         ofDrawBitmapString(ss.str(), ofPoint::zero());
         ofPopMatrix();
         i++;

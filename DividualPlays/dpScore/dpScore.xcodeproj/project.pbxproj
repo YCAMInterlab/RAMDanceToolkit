@@ -68,7 +68,6 @@
 		D243660F1A777037001AFA13 /* dpScoreAnalyzeMean.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24366051A777037001AFA13 /* dpScoreAnalyzeMean.cpp */; };
 		D24366101A777037001AFA13 /* dpScoreAnalyzePixelate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24366071A777037001AFA13 /* dpScoreAnalyzePixelate.cpp */; };
 		D24366111A777037001AFA13 /* dpScoreMasterHakoniwa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24366091A777037001AFA13 /* dpScoreMasterHakoniwa.cpp */; };
-		D24366121A777037001AFA13 /* dpScoreSceneMasterDecrement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D243660B1A777037001AFA13 /* dpScoreSceneMasterDecrement.cpp */; };
 		D24366131A777037001AFA13 /* dpScoreSceneMasterIncrement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D243660D1A777037001AFA13 /* dpScoreSceneMasterIncrement.cpp */; };
 		D24431111A68BD0D00574ACF /* dpScoreSceneDataSphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D244310F1A68BD0D00574ACF /* dpScoreSceneDataSphere.cpp */; };
 		D24431171A690F1E00574ACF /* dpScoreSceneDataBarcode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24431151A690F1E00574ACF /* dpScoreSceneDataBarcode.cpp */; };
@@ -108,6 +107,7 @@
 		D29B99271A63F023000115C5 /* Perlin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29B991D1A63F023000115C5 /* Perlin.cpp */; };
 		D29B99281A63F023000115C5 /* Predator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29B991F1A63F023000115C5 /* Predator.cpp */; };
 		D29B99291A63F023000115C5 /* Rand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29B99211A63F023000115C5 /* Rand.cpp */; };
+		D29C7E751A7F770F00B0EB0D /* dpScoreHakoniwaColorOfWater.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29C7E731A7F770E00B0EB0D /* dpScoreHakoniwaColorOfWater.cpp */; };
 		D2B4FD181A60BEB600C97A66 /* dpScoreSceneBodyScan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD161A60BEB600C97A66 /* dpScoreSceneBodyScan.cpp */; };
 		D2B4FD1B1A60DDBB00C97A66 /* dpScoreSceneBodyPatterns.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD191A60DDBB00C97A66 /* dpScoreSceneBodyPatterns.cpp */; };
 		D2B4FD1E1A60DE1200C97A66 /* dpScoreSceneBodyFlow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD1C1A60DE1200C97A66 /* dpScoreSceneBodyFlow.cpp */; };
@@ -411,8 +411,6 @@
 		D24366081A777037001AFA13 /* dpScoreAnalyzePixelate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreAnalyzePixelate.h; sourceTree = "<group>"; };
 		D24366091A777037001AFA13 /* dpScoreMasterHakoniwa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreMasterHakoniwa.cpp; sourceTree = "<group>"; };
 		D243660A1A777037001AFA13 /* dpScoreMasterHakoniwa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreMasterHakoniwa.h; sourceTree = "<group>"; };
-		D243660B1A777037001AFA13 /* dpScoreSceneMasterDecrement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneMasterDecrement.cpp; sourceTree = "<group>"; };
-		D243660C1A777037001AFA13 /* dpScoreSceneMasterDecrement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneMasterDecrement.h; sourceTree = "<group>"; };
 		D243660D1A777037001AFA13 /* dpScoreSceneMasterIncrement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneMasterIncrement.cpp; sourceTree = "<group>"; };
 		D243660E1A777037001AFA13 /* dpScoreSceneMasterIncrement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneMasterIncrement.h; sourceTree = "<group>"; };
 		D244310F1A68BD0D00574ACF /* dpScoreSceneDataSphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneDataSphere.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -499,6 +497,8 @@
 		D29B99201A63F023000115C5 /* Predator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Predator.h; sourceTree = "<group>"; };
 		D29B99211A63F023000115C5 /* Rand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rand.cpp; sourceTree = "<group>"; };
 		D29B99221A63F023000115C5 /* Rand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rand.h; sourceTree = "<group>"; };
+		D29C7E731A7F770E00B0EB0D /* dpScoreHakoniwaColorOfWater.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreHakoniwaColorOfWater.cpp; sourceTree = "<group>"; };
+		D29C7E741A7F770F00B0EB0D /* dpScoreHakoniwaColorOfWater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreHakoniwaColorOfWater.h; sourceTree = "<group>"; };
 		D2B4FD161A60BEB600C97A66 /* dpScoreSceneBodyScan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneBodyScan.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D2B4FD171A60BEB600C97A66 /* dpScoreSceneBodyScan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyScan.h; sourceTree = "<group>"; };
 		D2B4FD191A60DDBB00C97A66 /* dpScoreSceneBodyPatterns.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneBodyPatterns.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -798,12 +798,12 @@
 			children = (
 				D24366091A777037001AFA13 /* dpScoreMasterHakoniwa.cpp */,
 				D243660A1A777037001AFA13 /* dpScoreMasterHakoniwa.h */,
+				D29C7E731A7F770E00B0EB0D /* dpScoreHakoniwaColorOfWater.cpp */,
+				D29C7E741A7F770F00B0EB0D /* dpScoreHakoniwaColorOfWater.h */,
 				D24366051A777037001AFA13 /* dpScoreAnalyzeMean.cpp */,
 				D24366061A777037001AFA13 /* dpScoreAnalyzeMean.h */,
 				D24366071A777037001AFA13 /* dpScoreAnalyzePixelate.cpp */,
 				D24366081A777037001AFA13 /* dpScoreAnalyzePixelate.h */,
-				D243660B1A777037001AFA13 /* dpScoreSceneMasterDecrement.cpp */,
-				D243660C1A777037001AFA13 /* dpScoreSceneMasterDecrement.h */,
 				D243660D1A777037001AFA13 /* dpScoreSceneMasterIncrement.cpp */,
 				D243660E1A777037001AFA13 /* dpScoreSceneMasterIncrement.h */,
 			);
@@ -1232,7 +1232,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2E891131A6B586C0047B75A /* ofxUIBaseDraws.cpp in Sources */,
-				D24366121A777037001AFA13 /* dpScoreSceneMasterDecrement.cpp in Sources */,
 				D2E891141A6B586C0047B75A /* ofxOscMessage.cpp in Sources */,
 				D2E891161A6B586C0047B75A /* ofxOscReceiver.cpp in Sources */,
 				D2E891181A6B586C0047B75A /* ofxUIMultiImageButton.cpp in Sources */,
@@ -1267,6 +1266,7 @@
 				D2E891401A6B586C0047B75A /* ofxUISlider.cpp in Sources */,
 				D2E891411A6B586C0047B75A /* UdpSocket.cpp in Sources */,
 				D2E891421A6B586C0047B75A /* ofxUICircleSlider.cpp in Sources */,
+				D29C7E751A7F770F00B0EB0D /* dpScoreHakoniwaColorOfWater.cpp in Sources */,
 				D2E891431A6B586C0047B75A /* ofxUIScrollableCanvas.cpp in Sources */,
 				D2E891451A6B586C0047B75A /* ofxUIToggle.cpp in Sources */,
 				D2E891471A6B586C0047B75A /* ofxUIRectangle.cpp in Sources */,
