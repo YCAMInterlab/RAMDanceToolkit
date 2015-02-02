@@ -29,6 +29,8 @@ Xcodeのスキームから選択。
 
 #### スコアへ
 
+OSCの送り先はXMLファイルから変更可能。（data/settings/master_hakoniwa_settings.xml）
+
 **host**: 192.168.20.11
 
 **port**: 10000
@@ -170,11 +172,20 @@ do something: [差分], [閾値]**
 実際のOSCの送信は各OSCの送信機能を有効にする必要あり。
 
 ### [RAM Dance Tool Kit]
-**Select Scene**: シーンを切り替える。実際のOSCの送信はRAM DTKのOSC送信機能を有効にする必要あり。
+**Send Scene OSC**: シーン切り替えのOSCを送信。実際のOSCの送信はRAM DTKのOSC送信機能を有効にする必要あり。
+
+**ScreenA**: ScreenAを表示/非表示。
+
+**ScreenB**: ScreenBを表示/非表示。
+
+**Text Input**: 対象のシーン名を手入力。
+
+**Select Scene**: 対象のシーンを選択。
+
+**Disable All Scenes**: 全てのシーンを無効にする。
 
 ### [Score]
-**Select Score**: シーンを切り替える。
-実際のOSCの送信はScoreのOSC送信機能を有効にする必要あり。
+**Select Score**: シーンを切り替える。実際のOSCの送信はScoreのOSC送信機能を有効にする必要あり。
 
 **Display Hakoniwa Title on Score**: Scoreの切り替え時に現在の箱庭名を表示する。
 
@@ -213,11 +224,23 @@ Pixelateは非アクティブ時はDo Somethingを送信する。
 **MasterIncrement:Do Something**: 未実装
 
 ## XML
-**rdk:phase:scene name=***マスター箱庭に選択されるシーン名*
+### OSCの送信先に関する設定
 
-**rdk:nocam:scene name=***CameraUnitの解析がないシーン*
+**osc:server\* host=***ホスト名*
 
-**rdk:alloff:scene name=***すべてのディスプレイをオフにするシーン*
+**osc:server\* port=***port番号*
+
+### RAM Dance Tool Kitのシーンに関わる設定
+
+**rdk:scene name=***シーン名*
+
+**rdk:scene has_camera=***CameraUnitの解析があるかどうか*
+
+**rdk:scene maestro=***マスター箱庭によって切り替えられるシーンかどうか*
+
+**rdk:scene all_off=***すべてのディスプレイをオフにするシーン(Kioku)*
+
+### Scoreに関する設定
 
 **score:complexity***Scoreの表現の複雑度合いによりグループ分け*
 
