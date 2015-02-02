@@ -321,7 +321,7 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
                 mSceneController.enableOscOutRDTK = true;
                 mSceneController.enableOscOutScore = true;
                 mSceneController.enableShowHakoniwaTitle = true;
-                                mEnableCameraUnit = true;
+                mEnableCameraUnit = true;
                 mAnalyzeMean.mMaster = true;
                 mAnalyzePixelate.mMaster = false;
                 mAnalyzeMean.mMeanLimit = 10.f;
@@ -336,7 +336,8 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
                 mEnableCameraUnit = false;
                 mAnalyzeMean.mMaster = true;
                 mAnalyzePixelate.mMaster = false;
-                mSceneController.sendChangeScore("dp::score::SceneVec2SimpleGraph");
+                const string score{"dp::score::SceneVec2SimpleGraph"};
+                mSceneController.sendChangeScore(score);
                 
                 mSceneController.clearTimeLog();
             }
@@ -352,7 +353,6 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
                 mAnalyzePixelate.mMaster = false;
                 mAnalyzeMean.mMeanLimit = 3.f;
                 mAnalyzeMean.mMinSetSceneTime = 30.f;
-                
                 
                 mSceneController.writeTimeLog();
             }
