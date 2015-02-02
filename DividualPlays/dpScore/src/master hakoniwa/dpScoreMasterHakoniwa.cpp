@@ -769,10 +769,9 @@ void MasterHakoniwa::sendChangeScore(const string& name, bool maintainSceneNames
     m.addStringArg(name);
     mCurrentScore = name;
     
-    if (mLatestScene.allOff ||
-        mCurrentScore == mScoreCorrelation ||
-        mCurrentScore == kScoreBlack)
-        maintainSceneNames = false;
+    if (!mLatestScene.allOff)
+        if (mCurrentScore == mScoreCorrelation || mCurrentScore == kScoreBlack)
+            maintainSceneNames = false;
     
     if (maintainSceneNames) {
         for (auto& pair : mScenes) {
