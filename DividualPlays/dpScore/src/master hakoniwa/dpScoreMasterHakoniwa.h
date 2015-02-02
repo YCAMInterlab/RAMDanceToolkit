@@ -96,14 +96,7 @@ public:
     
     static const float kPumpOpenDur[];
     static const float kPumpCloseDur[];
-    
-    static const string kHostNameMasterHakoniwa;
-    static const int kPortNumberMasterHakoniwa;
-    static const string kHostNameCameraUnit;
-    static const int kPortNumberCameraUnit;
-    static const string kHostNameScore;
-    static const int kPortNumberScore;
-    
+        
     static const string kOscAddrRamSetScene;
     static const string kOscAddrRamDoSomething;
     

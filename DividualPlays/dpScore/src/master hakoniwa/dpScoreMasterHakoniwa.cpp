@@ -23,13 +23,6 @@ const int MH::kPumpPinBack{kPumpPins[1]};
 const float MH::kPumpOpenDur[MH::kNumPumpPins]{8.0f, 5.0f};
 const float MH::kPumpCloseDur[MH::kNumPumpPins]{2.0f, 5.0f};
 
-const string MH::kHostNameMasterHakoniwa{"192.168.20.60"};
-const int MH::kPortNumberMasterHakoniwa {8528};
-const string MH::kHostNameCameraUnit{"192.168.20.5"};
-const int MH::kPortNumberCameraUnit{12400};
-const string MH::kHostNameScore{"192.168.20.11"};
-const int MH::kPortNumberScore{10000};
-
 const string MH::kOscAddrRamSetScene{"/ram/set_scene"};
 const string MH::kOscAddrRamDoSomething{"/ram/do_something"};
 
@@ -236,9 +229,41 @@ void MasterHakoniwa::initialize()
         mPumps.at(i).pin = kPumpPins[i];
     }
     
-    mMasterHakoniwaOscSender.setup(kHostNameMasterHakoniwa, kPortNumberMasterHakoniwa);
-    mCameraUnitOscSender.setup(kHostNameCameraUnit, kPortNumberCameraUnit);
-    mScoreOscSender.setup(kHostNameScore, kPortNumberScore);
+    xml.pushTag("osc");
+    string errorStr{"error"};
+    int errorInt{-1};
+    const string mhHost{xml.getAttribute("serverMasterHakoniwa", "host", errorStr)};
+    if (mhHost == errorStr)
+        ofxThrowException(ofxException,
+                          "serverMasterHakoniwa host name didn't find in XML");
+    const int mhPort{xml.getAttribute("serverMasterHakoniwa", "port", errorInt)};
+    if (mhPort == errorInt)
+        ofxThrowException(ofxException,
+                          "serverMasterHakoniwa port number didn't find in XML");
+    mMasterHakoniwaOscSender.setup(mhHost, mhPort);
+    
+    const string cuHost{xml.getAttribute("serverCameraUnit", "host", errorStr)};
+    if (cuHost == errorStr)
+        ofxThrowException(ofxException,
+                          "serverCameraUnit host name didn't find in XML");
+    const int cuPort{xml.getAttribute("serverCameraUnit", "port", errorInt)};
+    if (cuPort == errorInt)
+        ofxThrowException(ofxException,
+                          "serverCameraUnit port number didn't find in XML");
+    
+    const string scHost{xml.getAttribute("serverScore", "host", errorStr)};
+    if (scHost == errorStr)
+        ofxThrowException(ofxException,
+                          "serverScore host name didn't find in XML");
+    const int scPort{xml.getAttribute("serverScore", "port", errorInt)};
+    if (scPort == errorInt)
+        ofxThrowException(ofxException,
+                          "serverScore port number didn't find in XML");
+    
+    mMasterHakoniwaOscSender.setup(mhHost, mhPort);
+    mCameraUnitOscSender.setup(cuHost, cuPort);
+    mScoreOscSender.setup(scHost, scPort);
+    xml.popTag();
     
     turnOffAllPins();
     

@@ -1,3 +1,9 @@
+<osc>
+    <serverMasterHakoniwa host="192.168.20.60" port=8528/>
+    <serverCameraUnit host="192.168.20.5" port=12400/>
+    <serverScore host="192.168.20.11" port=10000/>
+</osc>
+
 <rdtk>
     <scene name="dpVisServoPendulum" has_camera=1 maestro=1/>
     <scene name="dpVisMagPendulum" has_camera=1 maestro=1/>
