@@ -42,12 +42,8 @@ void HakoniwaColorOfWater::Pump::update(HakoniwaColorOfWater* owner)
 {
     const float t{ofGetElapsedTimef()};
     
-    if (!prevOpen && open) {
-        openedTime = t;
-    }
-    else if (prevOpen && !open) {
-        closedTime = t;
-    }
+    if (!prevOpen && open) openedTime = t;
+    else if (prevOpen && !open) closedTime = t;
     prevOpen = open;
     
     owner->sendPin(pin, open);
@@ -191,7 +187,9 @@ void HakoniwaColorOfWater::turnOnValve(int index)
     if (!enableOpenValve) return;
     
     if (index <0 || index >= mValves.size())
-        ofxThrowExceptionf(ofxException, "valve index %d is out of range", index);
+        ofxThrowExceptionf(ofxException,
+                           "valve index %d is out of range",
+                           index);
     mValves.at(index).open = true;
 }
 
@@ -210,7 +208,9 @@ void HakoniwaColorOfWater::turnOffAllPins()
 bool HakoniwaColorOfWater::getIsOpeningValve(int index)
 {
     if (index <0 || index >= mValves.size())
-        ofxThrowExceptionf(ofxException, "valve index %d is out of range", index);
+        ofxThrowExceptionf(ofxException,
+                           "valve index %d is out of range",
+                           index);
     return mValves.at(index).open;
 }
 
