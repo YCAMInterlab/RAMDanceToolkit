@@ -27,9 +27,9 @@ Xcodeのスキームから選択。
 
 ## OSC出力
 
-#### スコアへ
-
 OSCの送り先はXMLファイルから変更可能。（data/settings/master_hakoniwa_settings.xml）
+
+#### スコアへ
 
 **host**: 192.168.20.11
 
