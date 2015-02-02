@@ -134,6 +134,8 @@ void HakoniwaColorOfWater::setupGui(ofxUITabBar* tabbar)
 
 void HakoniwaColorOfWater::update()
 {
+    if (ofGetFrameNum() % kUpdateFrames) return;
+    
     for (int i=0; i<kNumValvePins; i++) {
         mValves[i].update(this);
     }
@@ -223,8 +225,8 @@ void HakoniwaColorOfWater::sendPin(int pin, bool open)
 void HakoniwaColorOfWater::stopAll()
 {
     enableOpenValve = false;
-    enableOscOut = false;
     turnOffAllPins();
+    enableOscOut = false;
 }
 
 DP_SCORE_NAMESPACE_END

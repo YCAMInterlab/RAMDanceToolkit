@@ -39,6 +39,8 @@ public:
     bool enableOscOut{false};
     
 private:
+    constexpr static const int kUpdateFrames{10};
+    
     static const int kValvePins[];
     static const int kPumpPins[];
     

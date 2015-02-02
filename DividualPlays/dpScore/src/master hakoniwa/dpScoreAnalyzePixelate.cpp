@@ -56,7 +56,7 @@ void AnalyzePixelate::updateColor(Color color, ofxEventMessage& m)
 void AnalyzePixelate::update()
 {
     if (mDoSomething) {
-        if (mEnableDoSomething) getMH().doSomething(0);
+        if (mEnableDoSomething) getMH().getSceneController().doSomething(0);
         mDoSomething = false;
     }
     
@@ -97,11 +97,11 @@ void AnalyzePixelate::update()
             const int g  = (mDiffG.i & 0b00111100) >> 2;
             const int b  = (mDiffB.i & 0b00111100) >> 2;
             mWhich = r + g + b;
-            if (getMH().getUniqueScenes().empty() == false) {
-                const int scene{(int)(mWhich % getMH().getUniqueScenes().size())};
-                const int score{(int)(mWhich % getMH().getNumUniqueScores())};
-                getMH().setUniqueScene(scene, mWin0, mWin1);
-                getMH().setUniqueScore(score);
+            if (getMH().getSceneController().getUniqueScenes().empty() == false) {
+                const int scene{(int)(mWhich % getMH().getSceneController().getUniqueScenes().size())};
+                const int score{(int)(mWhich % getMH().getSceneController().getNumUniqueScores())};
+                getMH().getSceneController().setUniqueScene(scene, mWin0, mWin1);
+                getMH().getSceneController().setUniqueScore(score);
                 mPrevSetSceneTime = t;
             }
             mDiffR.f = mDiffG.f = mDiffB.f = 0.f;

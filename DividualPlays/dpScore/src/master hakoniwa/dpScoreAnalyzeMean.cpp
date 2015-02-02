@@ -33,11 +33,11 @@ void AnalyzeMean::update()
             mWin1  = (mTotalAddition.i & 0b00000010) >> 1;
             mWhich  = (mTotalAddition.i & 0b00111100) >> 2;
             
-            if (getMH().getUniqueScenes().empty() == false) {
-                const int scene{(int)(mWhich % getMH().getUniqueScenes().size())};
-                const int score{(int)(mWhich % getMH().getNumUniqueScores())};
-                getMH().setUniqueScene(scene, mWin0, mWin1);
-                getMH().setUniqueScore(score);
+            if (getMH().getSceneController().getUniqueScenes().empty() == false) {
+                const int scene{(int)(mWhich % getMH().getSceneController().getUniqueScenes().size())};
+                const int score{(int)(mWhich % getMH().getSceneController().getNumUniqueScores())};
+                getMH().getSceneController().setUniqueScene(scene, mWin0, mWin1);
+                getMH().getSceneController().setUniqueScore(score);
                 mPrevScene = scene;
                 mPrevSetSceneTime = t;
             }
