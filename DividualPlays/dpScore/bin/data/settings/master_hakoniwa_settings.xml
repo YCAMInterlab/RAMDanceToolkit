@@ -1,58 +1,52 @@
 <rdtk>
-	<phase>
-	    <scene name="dpVisServoPendulum"/>
-	    <scene name="dpVisMagPendulum"/>
-	    <!--<scene name="dpVisSandStorm"/>-->
-	    <scene name="dpVisStruggle"/>
-	    <scene name="dpVisTheta"/>
-	    <scene name="dpHGearMove"/>
-	    <scene name="dpHWorm"/>
-	    <scene name="dpVisTornado"/>
-	    <scene name="dpVisStage"/>
-	    <!--<scene name="dpVisIce"/>-->
-        <scene name="Future"/>
-        <scene name="dpVisPLink_Laser"/>
-        <scene name="dpVisPLink_Oil"/>
-        <scene name="Line"/>
-        <scene name="Four Points"/>
-        <scene name="distanceMetaball"/>
-        <scene name="Kioku"/>
-        <!--<scene name="dpHEyeBallDancer"/>-->
-	</phase>
+    <scene name="dpVisServoPendulum" has_camera=1 maestro=1/>
+    <scene name="dpVisMagPendulum" has_camera=1 maestro=1/>
+    <scene name="dpVisStruggle" has_camera=1 maestro=1/>
+    <scene name="dpHWorm" has_camera=1 maestro=1/>
+    <scene name="dpVisTornado" has_camera=1 maestro=1/>
+    <scene name="dpVisStage" has_camera=1 maestro=1/>
+    <scene name="dpVisPLink_Laser" has_camera=1 maestro=1/>
+    <scene name="dpVisPLink_Oil" has_camera=1 maestro=1/>
 
-	<nocam>
-        <scene name="Future"/>
-		<scene name="dpVisTheta"/>
-		<scene name="dpHGearMove"/>
-        <scene name="Line"/>
-        <scene name="Four Points"/>
-        <scene name="distanceMetaball"/>
-        <!--<scene name="dpHEyeBallDancer"/>-->
-	</nocam>
+    <scene name="Future" has_camera=0 maestro=1/>
+    <scene name="dpVisTheta" has_camera=0 maestro=1/>
+    <scene name="dpHGearMove" has_camera=0 maestro=1/>
+    <scene name="Line" has_camera=0 maestro=1/>
+    <scene name="Four Points" has_camera=0 maestro=1/>
+    <scene name="distanceMetaball" has_camera=0 maestro=1/>
     
-    <alloff>
-        <scene name="Kioku"/>
-    </alloff>
+    <scene name="Kioku" has_camera=0 maestro=1 all_off=1/>
+    
+    <scene name="dpVisSandStorm" has_camera=1 maestro=0/>
+    <scene name="dpVisIce" has_camera=1 maestro=0/>
+    <scene name="dpHfrozenIce" has_camera=1 maestro=0/>
+    <scene name="dpVisPLink_Prism" has_camera=1 maestro=0/>
+    
+    <scene name="FutureRE" has_camera=0 maestro=0/>
+    <scene name="fourPointx3" has_camera=0 maestro=0/>
+    <scene name="dpHEyeBallDancer" has_camera=0 maestro=0/>
+    
+    <scene name="Blank" has_camera=0 maestro=0/>
 </rdtk>
 
 <score>
-	<complexity>
-		 <scene name="dp::score::SceneVec2SimpleGraph"/>
-		 <scene name="dp::score::SceneVec2Plotter"/>
-         <scene name="dp::score::SceneDataText"/>
-	</complexity>
-
-	<complexity>
-		<scene name="dp::score::SceneVec2Grid"/>
-		<scene name="dp::score::SceneDataCircle"/>
+    <complexity>
+        <scene name="dp::score::SceneVec2SimpleGraph"/>
+        <scene name="dp::score::SceneVec2Plotter"/>
+        <scene name="dp::score::SceneDataText"/>
+    </complexity>
+    
+    <complexity>
+        <scene name="dp::score::SceneVec2Grid"/>
+        <scene name="dp::score::SceneDataCircle"/>
         <scene name="dp::score::SceneDataSphere"/>
-	</complexity>
-
-	<complexity>
+    </complexity>
+    
+    <complexity>
         <scene name="dp::score::SceneVec2Clocks"/>
-		 <scene name="dp::score::SceneDataDisplacement"/>
-		 <scene name="dp::score::SceneDataWave"/>
-	</complexity>
+        <scene name="dp::score::SceneDataDisplacement"/>
+        <scene name="dp::score::SceneDataWave"/>
+    </complexity>
     
     <body>
         <scene name="dp::score::SceneBodyScan"/>
@@ -68,7 +62,7 @@
 </score>
 
 <!--
-SceneCorrelation
+ SceneCorrelation
  
  dp::score::SceneCorrelation
  
@@ -106,5 +100,5 @@ SceneCorrelation
  <MeanLimit>10.0</MeanLimit>
  <MinSceneDuration>120.0</MinSceneDuration>
  </preset>
-
--->
+ 
+ -->

@@ -137,6 +137,9 @@ private:
         bool isEnabled() const;
         bool window[NUM_WINDOWS]{false, false};
         bool dirty{false};
+        bool hasCamera{false};
+        bool maestro{false};
+        bool allOff{false};
     };
     
     struct AnalyzeNone {};
@@ -173,12 +176,14 @@ private:
     vector<Pump> mPumps;
     
     map<string, Scene> mScenes;
+    Scene mLatestScene;
     
-    vector<string> mNoCamScenes;
-    bool mNoCameraData{false};
-    
-    vector<string> mAllOffScenes;
-    bool mAllOffScene{false};
+    struct {
+        bool screenA{false};
+        bool screenB{false};
+        
+        ofxUITextInput *textInput{nullptr};
+    } mUISceneInfo;
     
     string mCurrentScore{""};
     int mCurrentScoreComplexity{0};

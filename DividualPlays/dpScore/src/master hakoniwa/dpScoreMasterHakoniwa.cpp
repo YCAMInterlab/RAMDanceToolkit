@@ -112,27 +112,33 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     tabbar->addSpacer(w, 1.f);
     tabbar->addLabel("[RAM Dance Tool Kit]", OFX_UI_FONT_SMALL);
     ofxUICanvas* sceneSelectTab{new ofxUICanvas()};
-    sceneSelectTab->setWidth(w);
-    sceneSelectTab->setHeight(h);
     sceneSelectTab->setColorBack(MH::kBackgroundColor);
-    
+    sceneSelectTab->setWidth(w);
+    sceneSelectTab->addButton("Send Scene OSC", false);
+    sceneSelectTab->addSpacer();
+    sceneSelectTab->addToggle("Screen A", &mUISceneInfo.screenA);
+    sceneSelectTab->addToggle("Screen B", &mUISceneInfo.screenB);
+    mUISceneInfo.textInput = sceneSelectTab->addTextInput("Scene Name", "");
+    if (mUISceneInfo.textInput)
+        mUISceneInfo.textInput->setAutoClear(false);
+    sceneSelectTab->addButton("Disable All Scenes", false);
     sceneSelectTab->setName("Select Scene");
     sceneSelectTab->addLabel("Select Scene", OFX_UI_FONT_SMALL);
+    
     sceneSelectTab->addSpacer();
     vector<string> sceneNames;
-    sceneNames.push_back("disable all");
     for (auto& pair : mScenes) {
         sceneNames.push_back(pair.first);
     }
     sceneSelectTab->addRadio("Scenes", sceneNames);
+    sceneSelectTab->autoSizeToFitWidgets();
+    sceneSelectTab->setWidth(w);
     tabbar->addCanvas(sceneSelectTab);
     ofAddListener(sceneSelectTab->newGUIEvent, this, &MasterHakoniwa::guiEvent);
     
     tabbar->addSpacer(w, 1.f);
     tabbar->addLabel("[Score]", OFX_UI_FONT_SMALL);
     ofxUICanvas* scoreSelectTab{new ofxUICanvas()};
-    scoreSelectTab->setWidth(w);
-    scoreSelectTab->setHeight(h);
     scoreSelectTab->setColorBack(MH::kBackgroundColor);
     scoreSelectTab->setName("Select Score");
     scoreSelectTab->addLabel("Select Score", OFX_UI_FONT_SMALL);
@@ -150,6 +156,8 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
     scoreNames.push_back(mScoreCorrelation);
     
     scoreSelectTab->addRadio("Scores", scoreNames);
+    scoreSelectTab->autoSizeToFitWidgets();
+    scoreSelectTab->setWidth(w);
     tabbar->addCanvas(scoreSelectTab);
     ofAddListener(scoreSelectTab->newGUIEvent, this, &MasterHakoniwa::guiEvent);
 
@@ -235,33 +243,21 @@ void MasterHakoniwa::initialize()
     turnOffAllPins();
     
     xml.pushTag("rdtk");
-    xml.pushTag("phase", 0);
-    vector<string> sceneNames;
+    vector<string> maestroSceneNames;
     for (int j=0; j<xml.getNumTags("scene"); j++) {
         const string name{xml.getAttribute("scene", "name", "error", j)};
+        const bool hasCamera{(bool)xml.getAttribute("scene", "has_camera", 0, j)};
+        const bool maestro{(bool)xml.getAttribute("scene", "maestro", 0, j)};
+        const bool allOff{(bool)xml.getAttribute("scene", "all_off", 0, j)};
         mScenes[name] = Scene();
-        sceneNames.push_back(name);
+        mScenes[name].hasCamera = hasCamera;
+        mScenes[name].maestro = maestro;
+        mScenes[name].allOff = allOff;
+        if (maestro)
+            maestroSceneNames.push_back(name);
     }
     xml.popTag();
-    
-    xml.pushTag("nocam");
-        mNoCamScenes.clear();
-    for (int j=0; j<xml.getNumTags("scene"); j++) {
-        const string name{xml.getAttribute("scene", "name", "error", j)};
-        mNoCamScenes.push_back(name);
-    }
-    xml.popTag();
-    
-    xml.pushTag("alloff");
-    mAllOffScenes.clear();
-    for (int j=0; j<xml.getNumTags("scene"); j++) {
-        const string name{xml.getAttribute("scene", "name", "error", j)};
-        mAllOffScenes.push_back(name);
-    }
-    xml.popTag();
-    
-    xml.popTag();
-    mUniqueScenes.setInitialList(sceneNames);
+    mUniqueScenes.setInitialList(maestroSceneNames);
     
     xml.pushTag("score");
     mMaxComplexity = xml.getNumTags("complexity");
@@ -439,6 +435,7 @@ void MasterHakoniwa::draw()
     for (auto& pair : mScenes) {
         const string name{pair.first};
         auto& s = pair.second;
+        if (!s.maestro) continue;
         
         auto findIt = mUniqueScenes.find(name);
         if (s.isEnabled()) ofSetColor(color::kMain);
@@ -607,12 +604,12 @@ void MasterHakoniwa::setUniqueScore(int sceneIndex)
     
     auto& stack = mUniqueScores.at(mCurrentScoreComplexity);
     
-    if (mAllOffScene) {
+    if (mLatestScene.allOff) {
         sendChangeScore(kScoreBlack, mEnableShowHakoniwaTitle);
         return;
     }
     
-    if (mNoCameraData) {
+    if (!mLatestScene.hasCamera) {
         const int newIndex{(int)ofMap(sceneIndex, 0.f, stack.size(), 0.f, mUniqueScoreBodies.size())};
         sendChangeScore(mUniqueScoreBodies.get(newIndex), mEnableShowHakoniwaTitle);
         return;
@@ -673,21 +670,19 @@ void MasterHakoniwa::sendPin(int pin, bool open)
 
 void MasterHakoniwa::sendSetScene(const string& name, bool win0, bool win1)
 {
-    if (mAllOffScene) win0 = win1 = true;
-    
     auto& scene = mScenes[name];
-    if (scene.window[WINDOW_0] == win0 && scene.window[WINDOW_1] == win1) {
-        return;
-    }
+    
+    if (win0 || win1)
+        if (scene.allOff || mLatestScene.allOff)
+            win0 = win1 = true;
+    
+    if (scene.window[WINDOW_0] == win0 && scene.window[WINDOW_1] == win1) return;
+    
     scene.window[WINDOW_0] = win0;
     scene.window[WINDOW_1] = win1;
     scene.dirty = true;
     
-    auto it = find(mAllOffScenes.begin(), mAllOffScenes.end(), name);
-    mAllOffScene = (it != mAllOffScenes.end());
-    if (mAllOffScene) {
-        scene.window[WINDOW_0] = scene.window[WINDOW_1] = true;
-    }
+    mLatestScene = scene;
     
     for (auto& pair : mScenes) {
         if (pair.first != name) {
@@ -709,11 +704,6 @@ void MasterHakoniwa::sendSetScene(const string& name, bool win0, bool win1)
             }
             if (mEnableOscOutRDTK) mCameraUnitOscSender.sendMessage(m);
         }
-    }
-    
-    if (scene.isEnabled()) {
-        auto it = find(mNoCamScenes.begin(), mNoCamScenes.end(), name);
-        mNoCameraData = (it != mNoCamScenes.end());
     }
     
     ofxOscMessage m;
@@ -754,9 +744,9 @@ void MasterHakoniwa::sendChangeScore(const string& name, bool maintainSceneNames
     m.addStringArg(name);
     mCurrentScore = name;
     
-    if (mAllOffScene)
-        maintainSceneNames = true;
-    else if (mCurrentScore == mScoreCorrelation || mCurrentScore == kScoreBlack)
+    if (mLatestScene.allOff ||
+        mCurrentScore == mScoreCorrelation ||
+        mCurrentScore == kScoreBlack)
         maintainSceneNames = false;
     
     if (maintainSceneNames) {
@@ -832,16 +822,24 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
             ofLogNotice() << "Cnahged analyze type to pixelate";
         }
     }
+    else if (widgetName == "Send Scene OSC") {
+        if (mUISceneInfo.textInput)
+        sendSetScene(mUISceneInfo.textInput->getTextString(),
+                     mUISceneInfo.screenA,
+                     mUISceneInfo.screenB);
+    }
+    else if (widgetName == "Disable All Scenes") {
+        mUISceneInfo.screenA = mUISceneInfo.screenB = false;
+        if (mUISceneInfo.textInput)
+            mUISceneInfo.textInput->setTextString("");
+        turnOffAllScenes();
+    }
     else if (widgetName == "Scenes") {
         auto* radio = static_cast<ofxUIRadio*>(e.widget);
         const auto& toggleName = radio->getActiveName();
         if (radio->getActive()->getValue()) {
-            if (toggleName == "disable all") {
-                turnOffAllScenes();
-            }
-            else {
-                sendSetScene(toggleName, true, true);
-            }
+            if (mUISceneInfo.textInput)
+                mUISceneInfo.textInput->setTextString(toggleName);
         }
     }
     else if (widgetName == "Scores") {

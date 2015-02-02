@@ -411,11 +411,14 @@ void SceneCorrelation::enter()
     xml.load(kXmlSettingsPath);
     
     xml.pushTag("rdtk");
-    xml.pushTag("phase", 0);
     vector<string> sceneNames;
     for (int j=0; j<xml.getNumTags("scene"); j++) {
         const string name{xml.getAttribute("scene", "name", "error", j)};
-        sceneNames.push_back(name);
+        const bool hasCamera{(bool)xml.getAttribute("scene", "has_camera", 0, j)};
+        const bool maestro{(bool)xml.getAttribute("scene", "maestro", 0, j)};
+        const bool allOff{(bool)xml.getAttribute("scene", "all_off", 0, j)};
+        if (hasCamera || allOff)
+            sceneNames.push_back(name);
     }
     xml.popTag();
     
