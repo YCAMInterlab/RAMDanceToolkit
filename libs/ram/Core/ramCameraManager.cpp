@@ -79,6 +79,8 @@ void ramCameraManager::rollbackDefaultCameraSetting(int camera_id)
 
 void ramCameraManager::update(ofEventArgs& args)
 {
+    if (ofGetFrameNum() < 2) rollbackDefaultCameraSetting();
+    
 	if (typeid(*active_camera) == typeid(ofEasyCam))
 	{
 		ofEasyCam *cam = (ofEasyCam*)active_camera;
