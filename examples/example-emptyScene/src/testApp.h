@@ -20,6 +20,8 @@
 #include "ofMain.h"
 #include "ramMain.h"
 
+#include "EmptyScene.h"
+
 class testApp : public ramBaseApp
 {
 public:
@@ -48,4 +50,8 @@ public:
 	void onActorExit(const ramActor &actor);
 	void onRigidSetup(const ramRigidBody &rigid);
 	void onRigidExit(const ramRigidBody &rigid);
+    
+    
+    EmptyScene myScene;
+
 };
