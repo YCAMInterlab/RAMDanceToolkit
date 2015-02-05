@@ -29,9 +29,9 @@ class Future : public ramBaseScene
 	
 public:
 	
-	bool draw_line = false;
+    bool draw_line;
 	
-	Future() : distance(150), speed(27) {}
+	Future() : distance(150), speed(27), draw_line(false) {}
 	
 	struct Preset
 	{

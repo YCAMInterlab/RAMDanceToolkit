@@ -29,10 +29,10 @@ public:
 	
 	struct LineContext
 	{
-		bool set_from = false;
-		bool set_control0 = false;
-		bool set_control1 = false;
-		bool set_to = false;
+        bool set_from;
+        bool set_control0;
+        bool set_control1;
+        bool set_to;
 		
 		float curve;
 		
@@ -225,6 +225,11 @@ public:
 	
 	void setup()
 	{
+        bool set_from = false;
+        bool set_control0 = false;
+        bool set_control1 = false;
+        bool set_to = false;
+        
         loadXML();
 	}
     
