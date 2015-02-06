@@ -1,5 +1,5 @@
 //
-// EmptyScene.h - RAMDanceToolkit
+// EmptyScene.cpp - RAMDanceToolkit
 //
 // Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
 //
