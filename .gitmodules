@@ -3,22 +3,22 @@
 	url = https://github.com/rezaali/ofxUI.git
 [submodule "addons/ofxInteractivePrimitives"]
 	path = addons/ofxInteractivePrimitives
-	url = git@github.com:satoruhiga/ofxInteractivePrimitives.git
+	url = https://github.com:satoruhiga/ofxInteractivePrimitives.git
 [submodule "addons/ofxCv"]
 	path = addons/ofxCv
-	url = git@github.com:kylemcdonald/ofxCv.git
+	url = https://github.com:kylemcdonald/ofxCv.git
 [submodule "addons/ofxNodeArray"]
 	path = addons/ofxNodeArray
-	url = git@github.com:YCAMInterlab/ofxNodeArray.git
+	url = https://github.com:YCAMInterlab/ofxNodeArray.git
 [submodule "addons/ofxBt"]
 	path = addons/ofxBt
-	url = git@github.com:motoishmz/ofxBt.git
+	url = https://github.com:motoishmz/ofxBt.git
 [submodule "addons/ofxQuadWarp"]
 	path = addons/ofxQuadWarp
-	url = git@github.com:julapy/ofxQuadWarp.git
+	url = https://github.com:julapy/ofxQuadWarp.git
 [submodule "addons/ofxDelaunay"]
 	path = addons/ofxDelaunay
-	url = git@github.com:obviousjim/ofxDelaunay.git
+	url = https://github.com:obviousjim/ofxDelaunay.git
 [submodule "addons/ofxDmx"]
 	path = addons/ofxDmx
 	url = https://github.com/kylemcdonald/ofxDmx.git
