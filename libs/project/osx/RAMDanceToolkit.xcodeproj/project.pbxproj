@@ -575,9 +575,9 @@
 		D21D085F1A4BD9A900CC3598 /* ofxUIWidgetWithLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = D21D08011A4BD9A900CC3598 /* ofxUIWidgetWithLabel.h */; };
 		D21D08601A4BD9A900CC3598 /* ofxUIWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = D21D08021A4BD9A900CC3598 /* ofxUIWrapper.h */; };
 		D21D086F1A4BE14300CC3598 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = D21D086E1A4BE14300CC3598 /* PrefixHeader.pch */; };
-		D24DD6681A84BEE200CECD2B /* ofxUITabbedCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24DD6651A84BEE200CECD2B /* ofxUITabbedCanvas.cpp */; };
-		D24DD6691A84BEE200CECD2B /* ofxUITabbedCanvas.h in Headers */ = {isa = PBXBuildFile; fileRef = D24DD6661A84BEE200CECD2B /* ofxUITabbedCanvas.h */; };
-		D24DD66A1A84BEE200CECD2B /* ofxUIToggleMini.h in Headers */ = {isa = PBXBuildFile; fileRef = D24DD6671A84BEE200CECD2B /* ofxUIToggleMini.h */; };
+		D24DD66F1A84C2C800CECD2B /* ofxUITabbedCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24DD66C1A84C2C800CECD2B /* ofxUITabbedCanvas.cpp */; };
+		D24DD6701A84C2C800CECD2B /* ofxUITabbedCanvas.h in Headers */ = {isa = PBXBuildFile; fileRef = D24DD66D1A84C2C800CECD2B /* ofxUITabbedCanvas.h */; };
+		D24DD6711A84C2C800CECD2B /* ofxUIToggleMini.h in Headers */ = {isa = PBXBuildFile; fileRef = D24DD66E1A84C2C800CECD2B /* ofxUIToggleMini.h */; };
 		D2B4FD2C1A62216900C97A66 /* ramBaseHasFbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD2A1A62216900C97A66 /* ramBaseHasFbo.cpp */; };
 		D2B4FD2D1A62216900C97A66 /* ramBaseHasFbo.h in Headers */ = {isa = PBXBuildFile; fileRef = D2B4FD2B1A62216900C97A66 /* ramBaseHasFbo.h */; };
 /* End PBXBuildFile section */
@@ -1158,9 +1158,9 @@
 		D21D08011A4BD9A900CC3598 /* ofxUIWidgetWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWidgetWithLabel.h; sourceTree = "<group>"; };
 		D21D08021A4BD9A900CC3598 /* ofxUIWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWrapper.h; sourceTree = "<group>"; };
 		D21D086E1A4BE14300CC3598 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		D24DD6651A84BEE200CECD2B /* ofxUITabbedCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUITabbedCanvas.cpp; sourceTree = "<group>"; };
-		D24DD6661A84BEE200CECD2B /* ofxUITabbedCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUITabbedCanvas.h; sourceTree = "<group>"; };
-		D24DD6671A84BEE200CECD2B /* ofxUIToggleMini.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIToggleMini.h; sourceTree = "<group>"; };
+		D24DD66C1A84C2C800CECD2B /* ofxUITabbedCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUITabbedCanvas.cpp; sourceTree = "<group>"; };
+		D24DD66D1A84C2C800CECD2B /* ofxUITabbedCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUITabbedCanvas.h; sourceTree = "<group>"; };
+		D24DD66E1A84C2C800CECD2B /* ofxUIToggleMini.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIToggleMini.h; sourceTree = "<group>"; };
 		D2B4FD2A1A62216900C97A66 /* ramBaseHasFbo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramBaseHasFbo.cpp; sourceTree = "<group>"; };
 		D2B4FD2B1A62216900C97A66 /* ramBaseHasFbo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramBaseHasFbo.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1426,7 +1426,7 @@
 		607D7ACC16661B860063800A /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				D24DD6641A84BEE200CECD2B /* ofxUITabbledCanvas */,
+				D24DD66B1A84C2C800CECD2B /* ofxUITabbedCanvas */,
 				9248D51E1A4D6A1200047AF5 /* ofxOpenCv */,
 				C6FC6B3119515D11002E18D5 /* ofxGui */,
 				9A38F3B916E9E81800FF8B66 /* ofxBt */,
@@ -2452,15 +2452,15 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		D24DD6641A84BEE200CECD2B /* ofxUITabbledCanvas */ = {
+		D24DD66B1A84C2C800CECD2B /* ofxUITabbedCanvas */ = {
 			isa = PBXGroup;
 			children = (
-				D24DD6651A84BEE200CECD2B /* ofxUITabbedCanvas.cpp */,
-				D24DD6661A84BEE200CECD2B /* ofxUITabbedCanvas.h */,
-				D24DD6671A84BEE200CECD2B /* ofxUIToggleMini.h */,
+				D24DD66C1A84C2C800CECD2B /* ofxUITabbedCanvas.cpp */,
+				D24DD66D1A84C2C800CECD2B /* ofxUITabbedCanvas.h */,
+				D24DD66E1A84C2C800CECD2B /* ofxUIToggleMini.h */,
 			);
-			name = ofxUITabbledCanvas;
-			path = ../../../addons/ofxUITabbledCanvas;
+			name = ofxUITabbedCanvas;
+			path = ../../../addons/ofxUITabbedCanvas;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2568,7 +2568,7 @@
 				9248D59B1A4D6A1200047AF5 /* cvaux.h in Headers */,
 				C6FC6B4A19515D11002E18D5 /* ofxGuiGroup.h in Headers */,
 				9A70C17816E9CE6F00A5B755 /* Calibration.h in Headers */,
-				D24DD6691A84BEE200CECD2B /* ofxUITabbedCanvas.h in Headers */,
+				D24DD6701A84C2C800CECD2B /* ofxUITabbedCanvas.h in Headers */,
 				9248D5CC1A4D6A1200047AF5 /* nn_index.h in Headers */,
 				9A70C17916E9CE6F00A5B755 /* ContourFinder.h in Headers */,
 				9A70C17A16E9CE6F00A5B755 /* Distance.h in Headers */,
@@ -2717,7 +2717,7 @@
 				9A38F51516E9E81900FF8B66 /* btTriangleCallback.h in Headers */,
 				9248D59E1A4D6A1200047AF5 /* cxcore.h in Headers */,
 				9248D5991A4D6A1200047AF5 /* cv.h in Headers */,
-				D24DD66A1A84BEE200CECD2B /* ofxUIToggleMini.h in Headers */,
+				D24DD6711A84C2C800CECD2B /* ofxUIToggleMini.h in Headers */,
 				9A38F51616E9E81900FF8B66 /* btTriangleIndexVertexArray.h in Headers */,
 				9A38F51716E9E81900FF8B66 /* btTriangleIndexVertexMaterialArray.h in Headers */,
 				9248D5B81A4D6A1200047AF5 /* dist.h in Headers */,
@@ -3064,7 +3064,7 @@
 				C62C935E1951554400EF3B2E /* ramCommunicationManager.cpp in Sources */,
 				D2B4FD2C1A62216900C97A66 /* ramBaseHasFbo.cpp in Sources */,
 				D21D08311A4BD9A900CC3598 /* ofxUIMultiImageButton.cpp in Sources */,
-				D24DD6681A84BEE200CECD2B /* ofxUITabbedCanvas.cpp in Sources */,
+				D24DD66F1A84C2C800CECD2B /* ofxUITabbedCanvas.cpp in Sources */,
 				9248D5F21A4D6A1200047AF5 /* ofxCvFloatImage.cpp in Sources */,
 				9A38F59116E9E81900FF8B66 /* ofxBt.cpp in Sources */,
 				D21D08271A4BD9A900CC3598 /* ofxUILabel.cpp in Sources */,
