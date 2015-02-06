@@ -18,8 +18,33 @@
 #pragma once
 
 #include "ofMain.h"
-
 #include "ramMain.h"
+
+// Include scenes
+#include "MovingCam.h"
+#include "LineDrawing.h"
+#include "BigBox.h"
+#include "Future.h"
+
+#include "Donuts.h"
+#include "Stamp.h"
+#include "Expansion.h"
+#include "Particles.h"
+
+#include "Abacus.h"
+#include "SoundCube.h"
+#include "UpsideDown.h"
+#include "Kepler.h"
+
+#include "HastyChase.h"
+#include "ColorGrid.h"
+#include "ThreePoints.h"
+#include "FourPoints.h"
+
+#include "Chain.h"
+#include "Monster.h"
+#include "Laban.h"
+#include "Notation.h"
 
 class testApp : public ramBaseApp
 {
@@ -49,4 +74,28 @@ public:
 	void onActorExit(const ramActor &actor);
 	void onRigidSetup(const ramRigidBody &rigid);
 	void onRigidExit(const ramRigidBody &rigid);
+    
+    // scenes
+    // ------------------------
+    MovingCam movingCam;
+    LineDrawing drawLines;
+    BigBox bigbox;
+    Future future;
+    Donuts donuts;
+    Stamp stamp;
+    Expansion expansion;
+    Particles particles;
+    Abacus abacus;
+    SoundCube soundcube;
+    UpsideDown upsideDown;
+    Kepler kepler;
+    HastyChase hastyChase;
+    ColorGrid colorGrid;
+    ThreePoints threePoints;
+    FourPoints fourPoints;
+    Chain chain;
+    Monster monster;
+    Laban laban;
+    Notation notation;
+
 };

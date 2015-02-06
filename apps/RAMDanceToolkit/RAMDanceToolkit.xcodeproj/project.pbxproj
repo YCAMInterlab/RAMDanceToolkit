@@ -15,6 +15,8 @@
 		9A2B3F6816D325C7001CBFC9 /* KeplerCube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B3F5716D325C7001CBFC9 /* KeplerCube.cpp */; };
 		9AD1DE2017269E2100C97F20 /* btPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1DE1E17269E2100C97F20 /* btPicker.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		CF2B842C1A84CCBD008A183B /* SphereMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF2B842B1A84CCBD008A183B /* SphereMesh.cpp */; };
+		CF2B842E1A84D1B4008A183B /* Laban.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF2B842D1A84D1B4008A183B /* Laban.cpp */; };
 		D2B8DCD216D3835700210022 /* BaseConstrains.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCC816D3835700210022 /* BaseConstrains.cpp */; };
 		D2B8DCD316D3835700210022 /* ChainBtDynamics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCCA16D3835700210022 /* ChainBtDynamics.cpp */; };
 		D2B8DCD416D3835700210022 /* ChainBtShapeDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2B8DCCC16D3835700210022 /* ChainBtShapeDrawer.cpp */; };
@@ -130,6 +132,8 @@
 		9AD1DE1E17269E2100C97F20 /* btPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btPicker.cpp; sourceTree = "<group>"; };
 		9AD1DE1F17269E2100C97F20 /* btPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btPicker.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		CF2B842B1A84CCBD008A183B /* SphereMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphereMesh.cpp; sourceTree = "<group>"; };
+		CF2B842D1A84D1B4008A183B /* Laban.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Laban.cpp; sourceTree = "<group>"; };
 		D2B8DCC816D3835700210022 /* BaseConstrains.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseConstrains.cpp; sourceTree = "<group>"; };
 		D2B8DCC916D3835700210022 /* BaseConstrains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseConstrains.h; sourceTree = "<group>"; };
 		D2B8DCCA16D3835700210022 /* ChainBtDynamics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChainBtDynamics.cpp; sourceTree = "<group>"; };
@@ -217,6 +221,7 @@
 			children = (
 				27B8489316D35466000D321D /* ThreePoints.h */,
 				27B8489416D35513000D321D /* SphereMesh.h */,
+				CF2B842B1A84CCBD008A183B /* SphereMesh.cpp */,
 			);
 			name = ThreePoints;
 			path = scenes/ThreePoints;
@@ -235,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				27E36A0116D4937000729344 /* Laban.h */,
+				CF2B842D1A84D1B4008A183B /* Laban.cpp */,
 			);
 			name = Laban;
 			path = scenes/Laban;
@@ -648,12 +654,14 @@
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
 				9A2B3F6516D325C7001CBFC9 /* Kepler.cpp in Sources */,
+				CF2B842C1A84CCBD008A183B /* SphereMesh.cpp in Sources */,
 				9A2B3F6616D325C7001CBFC9 /* KeplerBtDynamics.cpp in Sources */,
 				9A2B3F6716D325C7001CBFC9 /* KeplerBtShapeDrawer.cpp in Sources */,
 				9A2B3F6816D325C7001CBFC9 /* KeplerCube.cpp in Sources */,
 				D2B8DCD216D3835700210022 /* BaseConstrains.cpp in Sources */,
 				D2B8DCD316D3835700210022 /* ChainBtDynamics.cpp in Sources */,
 				D2B8DCD416D3835700210022 /* ChainBtShapeDrawer.cpp in Sources */,
+				CF2B842E1A84D1B4008A183B /* Laban.cpp in Sources */,
 				D2B8DCD516D3835700210022 /* ChainObject.cpp in Sources */,
 				D2B8DCD616D3835700210022 /* Chain.cpp in Sources */,
 				9AD1DE2017269E2100C97F20 /* btPicker.cpp in Sources */,
