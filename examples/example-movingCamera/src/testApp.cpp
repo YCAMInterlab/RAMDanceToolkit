@@ -18,10 +18,6 @@
 #include "testApp.h"
 
 
-#include "CameraMover.h"
-CameraMover mover;
-
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
