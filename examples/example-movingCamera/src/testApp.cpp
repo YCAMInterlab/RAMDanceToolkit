@@ -35,7 +35,7 @@ void testApp::setup()
 	ramInitialize(10000);
 
 	ramSceneManager &sceneManager = ramSceneManager::instance();
-	sceneManager.addScene(mover.getPtr());
+	sceneManager.addScene(&mover);
 }
 
 //--------------------------------------------------------------

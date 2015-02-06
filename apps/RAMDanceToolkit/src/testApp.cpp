@@ -96,29 +96,29 @@ void testApp::setup()
 	/// scenes setup
 	// ------------------
 	ramSceneManager& sceneManager = ramSceneManager::instance();
-	sceneManager.addScene( movingCam.getPtr() );
-	sceneManager.addScene( drawLines.getPtr() );
-	sceneManager.addScene( bigbox.getPtr() );
-	sceneManager.addScene( future.getPtr() );
-	sceneManager.addScene( donuts.getPtr() );
-	sceneManager.addScene( stamp.getPtr() );
-	sceneManager.addScene( expansion.getPtr() );
+	sceneManager.addScene( &movingCam );
+	sceneManager.addScene( &drawLines );
+	sceneManager.addScene( &bigbox );
+	sceneManager.addScene( &future );
+	sceneManager.addScene( &donuts );
+	sceneManager.addScene( &stamp );
+	sceneManager.addScene( &expansion );
 // ignore win32
 #ifndef TARGET_WIN32
-	sceneManager.addScene( particles.getPtr() );
+	sceneManager.addScene( &particles );
 #endif
-	sceneManager.addScene( abacus.getPtr() );
-	sceneManager.addScene( soundcube.getPtr() );
-	sceneManager.addScene( upsideDown.getPtr() );
-	sceneManager.addScene( kepler.getPtr() );
-	sceneManager.addScene( hastyChase.getPtr() );
-	sceneManager.addScene( colorGrid.getPtr() );
-	sceneManager.addScene( threePoints.getPtr() );
-	sceneManager.addScene( fourPoints.getPtr() );
-	sceneManager.addScene( chain.getPtr() );
-	sceneManager.addScene( monster.getPtr() );
-	sceneManager.addScene( laban.getPtr() );
-	sceneManager.addScene( notation.getPtr() );
+	sceneManager.addScene( &abacus );
+	sceneManager.addScene( &soundcube );
+	sceneManager.addScene( &upsideDown );
+	sceneManager.addScene( &kepler );
+	sceneManager.addScene( &hastyChase );
+	sceneManager.addScene( &colorGrid );
+	sceneManager.addScene( &threePoints );
+	sceneManager.addScene( &fourPoints );
+	sceneManager.addScene( &chain );
+	sceneManager.addScene( &monster );
+	sceneManager.addScene( &laban );
+	sceneManager.addScene( &notation );
 	
 }
 
