@@ -34,8 +34,8 @@ void testApp::setup()
 	/// - EmptyScene::update, draw, and other method will be triggerd by ramSceneManager
 	/// - the scene added to ramSceneManager will appeard on GUI automaticaly
 	ramSceneManager& sceneManager = ramSceneManager::instance();
-	sceneManager.addScene(hakoniwaMagPendulum.getPtr());
-    sceneManager.addScene(hakoVisMagPendulum.getPtr());
+	sceneManager.addScene(&hakoniwaMagPendulum);
+    sceneManager.addScene(&hakoVisMagPendulum);
 }
 
 //--------------------------------------------------------------
