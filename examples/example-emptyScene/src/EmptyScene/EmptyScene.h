@@ -42,7 +42,6 @@ private:
 	
     void onPanelChanged(ofxUIEventArgs &e);
     
-    
 	float mySlider;
 	bool myToggle;
 };
