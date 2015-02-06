@@ -27,5 +27,6 @@ const std::string RAM_OSC_ADDR_COMMUNICATE_NOTEON		= "/ram/communicate/noteon";
 const std::string RAM_OSC_ADDR_COMMUNICATE_NOTEOFF	= "/ram/communicate/noteoff";
 const std::string RAM_OSC_ADDR_COMMUNICATE_CC			= "/ram/communicate/cc";
 
+const std::string RAM_FONT_FILE = "Fonts/FreeUniversal-Regular.ttf";
 
 const float RAM_OUTDATED_DURATION = 1.0;
