@@ -17,71 +17,6 @@
 
 #include "testApp.h"
 
-
-/*!
- Scenes
- */
-//#include "MovingCam.h"
-//MovingCam movingCam;
-//
-//#include "LineDrawing.h"
-//LineDrawing drawLines;
-//
-//#include "BigBox.h"
-//BigBox bigbox;
-//
-//#include "Future.h"
-//Future future;
-//
-//#include "Donuts.h"
-//Donuts donuts;
-//
-//#include "Stamp.h"
-//Stamp stamp;
-//
-//#include "Expansion.h"
-//Expansion expansion;
-//
-//#include "Particles.h"
-//Particles particles;
-//
-//#include "Abacus.h"
-//Abacus abacus;
-//
-//#include "SoundCube.h"
-//SoundCube soundcube;
-//
-//#include "UpsideDown.h"
-//UpsideDown upsideDown;
-//
-//#include "Kepler.h"
-//Kepler kepler;
-//
-//#include "HastyChase.h"
-//HastyChase hastyChase;
-//
-//#include "ColorGrid.h"
-//ColorGrid colorGrid;
-//
-//#include "ThreePoints.h"
-//ThreePoints threePoints;
-//
-//#include "FourPoints.h"
-//FourPoints fourPoints;
-//
-//#include "Chain.h"
-//Chain chain;    
-//
-//#include "Monster.h"
-//Monster monster;
-//
-//#include "Laban.h"
-//Laban laban;
-//
-//#include "Notation.h"
-//Notation notation;
-
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -110,12 +45,14 @@ void testApp::setup()
     sceneManager.addScene( &abacus );
 	sceneManager.addScene( &soundcube );
 	sceneManager.addScene( &upsideDown );
-	sceneManager.addScene( &kepler );
+#if !defined (DEBUG) && !defined (_DEBUG) // exclude from debug build
+    sceneManager.addScene( &kepler );
+    sceneManager.addScene( &chain );
+#endif
 	sceneManager.addScene( &hastyChase );
 	sceneManager.addScene( &colorGrid );
 	sceneManager.addScene( &threePoints );
 	sceneManager.addScene( &fourPoints );
-	sceneManager.addScene( &chain );
 	sceneManager.addScene( &monster );
 	sceneManager.addScene( &laban );
 	sceneManager.addScene( &notation );

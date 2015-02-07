@@ -88,14 +88,17 @@ public:
     Abacus abacus;
     SoundCube soundcube;
     UpsideDown upsideDown;
-    Kepler kepler;
     HastyChase hastyChase;
     ColorGrid colorGrid;
     ThreePoints threePoints;
     FourPoints fourPoints;
-    Chain chain;
     Monster monster;
     Laban laban;
     Notation notation;
+    
+#if !defined (DEBUG) && !defined (_DEBUG) // exclude from debug build
+    Kepler kepler;
+    Chain chain;
+#endif
 
 };
