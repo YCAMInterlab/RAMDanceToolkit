@@ -580,7 +580,6 @@
 		D21D085E1A4BD9A900CC3598 /* ofxUIWidgetWithLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D08001A4BD9A900CC3598 /* ofxUIWidgetWithLabel.cpp */; };
 		D21D085F1A4BD9A900CC3598 /* ofxUIWidgetWithLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = D21D08011A4BD9A900CC3598 /* ofxUIWidgetWithLabel.h */; };
 		D21D08601A4BD9A900CC3598 /* ofxUIWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = D21D08021A4BD9A900CC3598 /* ofxUIWrapper.h */; };
-		D21D086F1A4BE14300CC3598 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = D21D086E1A4BE14300CC3598 /* PrefixHeader.pch */; };
 		D24DD66F1A84C2C800CECD2B /* ofxUITabbedCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24DD66C1A84C2C800CECD2B /* ofxUITabbedCanvas.cpp */; };
 		D24DD6701A84C2C800CECD2B /* ofxUITabbedCanvas.h in Headers */ = {isa = PBXBuildFile; fileRef = D24DD66D1A84C2C800CECD2B /* ofxUITabbedCanvas.h */; };
 		D24DD6711A84C2C800CECD2B /* ofxUIToggleMini.h in Headers */ = {isa = PBXBuildFile; fileRef = D24DD66E1A84C2C800CECD2B /* ofxUIToggleMini.h */; };
@@ -1169,7 +1168,6 @@
 		D21D08001A4BD9A900CC3598 /* ofxUIWidgetWithLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUIWidgetWithLabel.cpp; sourceTree = "<group>"; };
 		D21D08011A4BD9A900CC3598 /* ofxUIWidgetWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWidgetWithLabel.h; sourceTree = "<group>"; };
 		D21D08021A4BD9A900CC3598 /* ofxUIWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWrapper.h; sourceTree = "<group>"; };
-		D21D086E1A4BE14300CC3598 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		D24DD66C1A84C2C800CECD2B /* ofxUITabbedCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUITabbedCanvas.cpp; sourceTree = "<group>"; };
 		D24DD66D1A84C2C800CECD2B /* ofxUITabbedCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUITabbedCanvas.h; sourceTree = "<group>"; };
 		D24DD66E1A84C2C800CECD2B /* ofxUIToggleMini.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIToggleMini.h; sourceTree = "<group>"; };
@@ -1455,7 +1453,6 @@
 		60B90A801644E00900AF2156 = {
 			isa = PBXGroup;
 			children = (
-				D21D086E1A4BE14300CC3598 /* PrefixHeader.pch */,
 				60D49E5016DE5999003BA064 /* ramProject.xcconfig */,
 				60B90AAA1644E09400AF2156 /* Config.xcconfig */,
 				607D7ACC16661B860063800A /* addons */,
@@ -2690,7 +2687,6 @@
 				9A38F4E916E9E81900FF8B66 /* btConvexPlaneCollisionAlgorithm.h in Headers */,
 				D21D08371A4BD9A900CC3598 /* ofxUIOFWrapper.h in Headers */,
 				9A38F4EA16E9E81900FF8B66 /* btDefaultCollisionConfiguration.h in Headers */,
-				D21D086F1A4BE14300CC3598 /* PrefixHeader.pch in Headers */,
 				9A38F4EB16E9E81900FF8B66 /* btEmptyCollisionAlgorithm.h in Headers */,
 				9A38F4EC16E9E81900FF8B66 /* btGhostObject.h in Headers */,
 				9248D5C11A4D6A1200047AF5 /* hierarchical_clustering_index.h in Headers */,
@@ -3159,7 +3155,7 @@
 			baseConfigurationReference = 60B90AAA1644E09400AF2156 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
 				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -3169,18 +3165,14 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				VALID_ARCHS = i386;
 			};
 			name = Debug;
 		};
@@ -3189,7 +3181,7 @@
 			baseConfigurationReference = 60B90AAA1644E09400AF2156 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
 				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -3204,6 +3196,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
+				VALID_ARCHS = i386;
 			};
 			name = Release;
 		};
@@ -3213,8 +3206,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ./PrefixHeader.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				LIBRARY_SEARCH_PATHS = (
@@ -3243,8 +3235,6 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ./PrefixHeader.pch;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				LIBRARY_SEARCH_PATHS = (

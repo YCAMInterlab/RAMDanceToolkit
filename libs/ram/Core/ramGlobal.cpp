@@ -81,21 +81,30 @@ void ramInitialize(int oscPort, bool usePresetScenes)
 
 string ramToResourcePath(const string& path)
 {
-	string base_path;
-
-#if defined DEBUG
-#if defined WIN32
-    base_path = ofToDataPath("../../../../resources");
-#else
-    base_path = ofToDataPath("../../resources");
-#endif
-#else
-#if defined WIN32
-    base_path = "";
-#else
-    base_path = "../resources";
-#endif
-#endif
+	string base_path = "resources";
+    bool dirExists = false;
+    
+    const int maxDepth = 5;
+    for (int i=0; i<maxDepth; i++) {
+        ofDirectory dir(base_path);
+        if (dir.exists()) {
+            dirExists = true;
+            break;
+        }
+        
+        string tmpPath = ofToDataPath(base_path);
+        ofDirectory dirFromDataPath(tmpPath);
+        if (dirFromDataPath.exists()) {
+            base_path = tmpPath;
+            dirExists = true;
+            break;
+        }
+        base_path = "../" + base_path;
+    }
+    
+    if (!dirExists) {
+        ofLogError() << "resources folder dosen't found";
+    }
     
 	return ofFilePath::join(base_path, path);
 }
