@@ -41,7 +41,7 @@ else
 	# ofxCv
 	git clone https://github.com/kylemcdonald/ofxCv.git
 	cd ofxCv
-	git checkout 115deaf
+	git checkout 88620c5
 	cd ../
 
 	# ofxNodeArray
