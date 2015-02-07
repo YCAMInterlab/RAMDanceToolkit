@@ -1,5 +1,4 @@
 #include "testApp.h"
-#include "ofxAutoControlPanel.h"
 
 #include "btBulletDynamicsCommon.h"
 
@@ -7,8 +6,6 @@
 #include "RagDoll.h"
 
 #include "ofxBtHelper.h"
-
-ofxAutoControlPanel gui;
 
 RagdollScene ragdollScene;
 
@@ -22,9 +19,6 @@ void testApp::setup()
 
 	ramInitialize(10000);
 	
-	// gui setup
-	ofxControlPanel::setTextColor(simpleColor(255,255,255,255));
-	ofxControlPanel::setBackgroundColor(simpleColor(0,0,0,127));
     
     ragdollScene.setup();
     
@@ -89,7 +83,7 @@ void testApp::drawActor(const ramActor &actor)
     
     for (int i=0; i<actor.getNumNode(); i++)
 	{
-		ramNode &node = actor.getNode(i);
+		const ramNode &node = actor.getNode(i);
 		float jointSize = (i==ramActor::JOINT_HEAD) ? 6.0 : 3.0;
 		
 		node.beginTransform();

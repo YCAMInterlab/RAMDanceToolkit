@@ -59,8 +59,10 @@ static void popAll()
 
 #pragma mark -
 //--------------------------------------------------------------
-void ChainScene::setupControlPanel(ofxUICanvas* panel)
+void ChainScene::setupControlPanel()
 {
+    ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+    
     ofAddListener(panel->newGUIEvent, this, &ChainScene::onValueChanged);
     
     const float w = 300.0f;
@@ -124,9 +126,9 @@ void ChainScene::draw()
 
 #pragma mark -
 //--------------------------------------------------------------
-void ChainScene::drawActor(ramActor &actor)
+void ChainScene::drawActor(const ramActor &actor)
 {
-    ramDrawBasicActor(actor, ramColor::RED_DEEP, ramColor::RED_NORMAL);
+    ramDrawBasicActor(actor);
     
     for (int i=0; i<mChains.size(); i++) {
         if (mChains.at(i))

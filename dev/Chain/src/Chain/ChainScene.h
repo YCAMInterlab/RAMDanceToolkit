@@ -88,7 +88,7 @@ class ChainScene : public ramBaseScene
 {
 public:
     // ------------------------
-    void setupControlPanel(ofxUICanvas* panel);
+    void setupControlPanel();
 	void setup();
 	void update();
 	void draw();
@@ -96,7 +96,7 @@ public:
 	// ------------------------
 	void drawActor(const ramActor &actor);
     
-    const string getName() { return "Chain scene"; }
+    string getName() const { return "Chain scene"; }
     
 private:
     void onValueChanged(ofxUIEventArgs& e);

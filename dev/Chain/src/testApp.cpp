@@ -20,47 +20,33 @@ void testApp::setup()
 	
 	/// Scenes setup
 	// ------------------
-	vector<ramBaseScene*> scenes;
-	scenes.push_back(chainScene.getPtr());
-	sceneManager.setup(scenes);
+    ramSceneManager::instance().addScene(&chainScene);
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-	/// Scenes update
-	// ------------------
-	sceneManager.update();
+    
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	/// Scenes draw
-	// ------------------
-	sceneManager.draw();
+    
 }
-
-
 
 #pragma mark - ram methods
 //--------------------------------------------------------------
 void testApp::drawActor(const ramActor &actor)
 {
-	/// Scenes drawActor
-	// ------------------
-	sceneManager.drawActor(actor);
+    
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(const ramRigidBody &rigid)
 {
-	/// Scenes drawRigid
-	// ------------------
-	sceneManager.drawRigid(rigid);
+    
 }
-
-
 
 
 #pragma mark - oF Events
