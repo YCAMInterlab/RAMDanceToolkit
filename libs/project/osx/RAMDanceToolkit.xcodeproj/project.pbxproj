@@ -480,6 +480,12 @@
 		C6FC6B5219515D11002E18D5 /* ofxSliderGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FC6B4119515D11002E18D5 /* ofxSliderGroup.h */; };
 		C6FC6B5319515D11002E18D5 /* ofxToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FC6B4219515D11002E18D5 /* ofxToggle.cpp */; };
 		C6FC6B5419515D11002E18D5 /* ofxToggle.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FC6B4319515D11002E18D5 /* ofxToggle.h */; };
+		D20F14F11A86035B0053B6E9 /* ETF.h in Headers */ = {isa = PBXBuildFile; fileRef = D20F14EA1A86035B0053B6E9 /* ETF.h */; };
+		D20F14F21A86035B0053B6E9 /* fdog.h in Headers */ = {isa = PBXBuildFile; fileRef = D20F14EB1A86035B0053B6E9 /* fdog.h */; };
+		D20F14F31A86035B0053B6E9 /* imatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = D20F14EC1A86035B0053B6E9 /* imatrix.h */; };
+		D20F14F41A86035B0053B6E9 /* myvec.h in Headers */ = {isa = PBXBuildFile; fileRef = D20F14ED1A86035B0053B6E9 /* myvec.h */; };
+		D20F14F51A86035B0053B6E9 /* ETF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20F14EF1A86035B0053B6E9 /* ETF.cpp */; };
+		D20F14F61A86035B0053B6E9 /* fdog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20F14F01A86035B0053B6E9 /* fdog.cpp */; };
 		D21D08031A4BD9A900CC3598 /* ofxUI.h in Headers */ = {isa = PBXBuildFile; fileRef = D21D07A51A4BD9A900CC3598 /* ofxUI.h */; };
 		D21D08041A4BD9A900CC3598 /* ofxUI2DGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D07A61A4BD9A900CC3598 /* ofxUI2DGraph.cpp */; };
 		D21D08051A4BD9A900CC3598 /* ofxUI2DGraph.h in Headers */ = {isa = PBXBuildFile; fileRef = D21D07A71A4BD9A900CC3598 /* ofxUI2DGraph.h */; };
@@ -1063,6 +1069,12 @@
 		C6FC6B4119515D11002E18D5 /* ofxSliderGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSliderGroup.h; sourceTree = "<group>"; };
 		C6FC6B4219515D11002E18D5 /* ofxToggle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxToggle.cpp; sourceTree = "<group>"; };
 		C6FC6B4319515D11002E18D5 /* ofxToggle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxToggle.h; sourceTree = "<group>"; };
+		D20F14EA1A86035B0053B6E9 /* ETF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETF.h; sourceTree = "<group>"; };
+		D20F14EB1A86035B0053B6E9 /* fdog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fdog.h; sourceTree = "<group>"; };
+		D20F14EC1A86035B0053B6E9 /* imatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imatrix.h; sourceTree = "<group>"; };
+		D20F14ED1A86035B0053B6E9 /* myvec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myvec.h; sourceTree = "<group>"; };
+		D20F14EF1A86035B0053B6E9 /* ETF.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ETF.cpp; sourceTree = "<group>"; };
+		D20F14F01A86035B0053B6E9 /* fdog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdog.cpp; sourceTree = "<group>"; };
 		D21D07A51A4BD9A900CC3598 /* ofxUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI.h; sourceTree = "<group>"; };
 		D21D07A61A4BD9A900CC3598 /* ofxUI2DGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUI2DGraph.cpp; sourceTree = "<group>"; };
 		D21D07A71A4BD9A900CC3598 /* ofxUI2DGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI2DGraph.h; sourceTree = "<group>"; };
@@ -2139,6 +2151,7 @@
 		9A70BDFF16E9CE6A00A5B755 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				D20F14E71A86035B0053B6E9 /* CLD */,
 				9A70BE0016E9CE6A00A5B755 /* .gitignore */,
 				9A70BE0116E9CE6A00A5B755 /* ofxCv */,
 			);
@@ -2347,6 +2360,43 @@
 				C6FC6B4119515D11002E18D5 /* ofxSliderGroup.h */,
 				C6FC6B4219515D11002E18D5 /* ofxToggle.cpp */,
 				C6FC6B4319515D11002E18D5 /* ofxToggle.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		D20F14E71A86035B0053B6E9 /* CLD */ = {
+			isa = PBXGroup;
+			children = (
+				D20F14E81A86035B0053B6E9 /* include */,
+				D20F14EE1A86035B0053B6E9 /* src */,
+			);
+			path = CLD;
+			sourceTree = "<group>";
+		};
+		D20F14E81A86035B0053B6E9 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				D20F14E91A86035B0053B6E9 /* CLD */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		D20F14E91A86035B0053B6E9 /* CLD */ = {
+			isa = PBXGroup;
+			children = (
+				D20F14EA1A86035B0053B6E9 /* ETF.h */,
+				D20F14EB1A86035B0053B6E9 /* fdog.h */,
+				D20F14EC1A86035B0053B6E9 /* imatrix.h */,
+				D20F14ED1A86035B0053B6E9 /* myvec.h */,
+			);
+			path = CLD;
+			sourceTree = "<group>";
+		};
+		D20F14EE1A86035B0053B6E9 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				D20F14EF1A86035B0053B6E9 /* ETF.cpp */,
+				D20F14F01A86035B0053B6E9 /* fdog.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -2686,6 +2736,7 @@
 				9248D5B51A4D6A1200047AF5 /* composite_index.h in Headers */,
 				9248D5AD1A4D6A1200047AF5 /* types_c.h in Headers */,
 				9AEA65CD191CB63D001FAA18 /* ramNodeFinder.h in Headers */,
+				D20F14F11A86035B0053B6E9 /* ETF.h in Headers */,
 				9A38F50616E9E81900FF8B66 /* btEmptyShape.h in Headers */,
 				9A38F50716E9E81900FF8B66 /* btHeightfieldTerrainShape.h in Headers */,
 				D21D080F1A4BD9A900CC3598 /* ofxUICanvas.h in Headers */,
@@ -2810,6 +2861,7 @@
 				9A38F54816E9E81900FF8B66 /* btCharacterControllerInterface.h in Headers */,
 				9A38F54916E9E81900FF8B66 /* btKinematicCharacterController.h in Headers */,
 				9248D5BC1A4D6A1200047AF5 /* flann_base.hpp in Headers */,
+				D20F14F31A86035B0053B6E9 /* imatrix.h in Headers */,
 				9A38F54A16E9E81900FF8B66 /* btConeTwistConstraint.h in Headers */,
 				9248D5F51A4D6A1200047AF5 /* ofxCvGrayscaleImage.h in Headers */,
 				D21D08361A4BD9A900CC3598 /* ofxUINumberDialer.h in Headers */,
@@ -2889,6 +2941,7 @@
 				9A38F57B16E9E81900FF8B66 /* btQuadWord.h in Headers */,
 				D21D08511A4BD9A900CC3598 /* ofxUITextInput.h in Headers */,
 				9A38F57C16E9E81900FF8B66 /* btQuaternion.h in Headers */,
+				D20F14F21A86035B0053B6E9 /* fdog.h in Headers */,
 				9248D5CE1A4D6A1200047AF5 /* params.h in Headers */,
 				9A38F57D16E9E81900FF8B66 /* btQuickprof.h in Headers */,
 				9A38F57E16E9E81900FF8B66 /* btRandom.h in Headers */,
@@ -2906,6 +2959,7 @@
 				9248D5DE1A4D6A1200047AF5 /* types_c.h in Headers */,
 				9248D5B41A4D6A1200047AF5 /* autotuned_index.h in Headers */,
 				9A38F59816E9E81900FF8B66 /* ofxBtJoint.h in Headers */,
+				D20F14F41A86035B0053B6E9 /* myvec.h in Headers */,
 				9A38F59916E9E81900FF8B66 /* ofxBtRender.h in Headers */,
 				9A38F59B16E9E81900FF8B66 /* ofxBtRigidBody.h in Headers */,
 				9A38F59D16E9E81900FF8B66 /* ofxBtSoftBody.h in Headers */,
@@ -3030,6 +3084,7 @@
 				D21D082F1A4BD9A900CC3598 /* ofxUIMovingGraph.cpp in Sources */,
 				2776070716E4EB2700D6B31D /* ramPhysics.cpp in Sources */,
 				D21D081F1A4BD9A900CC3598 /* ofxUIImageButton.cpp in Sources */,
+				D20F14F61A86035B0053B6E9 /* fdog.cpp in Sources */,
 				9248D5F61A4D6A1200047AF5 /* ofxCvHaarFinder.cpp in Sources */,
 				2776070B16E4EB2700D6B31D /* ramGeometry.cpp in Sources */,
 				9248D5ED1A4D6A1200047AF5 /* ofxCvColorImage.cpp in Sources */,
@@ -3052,6 +3107,7 @@
 				9A70C18716E9CE6F00A5B755 /* Tracker.cpp in Sources */,
 				9248D5F81A4D6A1200047AF5 /* ofxCvImage.cpp in Sources */,
 				9A70C18816E9CE6F00A5B755 /* Utilities.cpp in Sources */,
+				D20F14F51A86035B0053B6E9 /* ETF.cpp in Sources */,
 				D21D085B1A4BD9A900CC3598 /* ofxUIWidget.cpp in Sources */,
 				C6FC6B4B19515D11002E18D5 /* ofxLabel.cpp in Sources */,
 				9A70C18916E9CE6F00A5B755 /* Wrappers.cpp in Sources */,
