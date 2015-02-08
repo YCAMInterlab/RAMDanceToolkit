@@ -16,7 +16,11 @@ void dpHakoVisMagnetPendulum::setupControlPanel(){
 }
 
 void dpHakoVisMagnetPendulum::setup(){
-    
+	mRecordTargetNum = 0;
+	mBeginFrame = 0;
+
+	mScale = 800.0;
+
     for(int j = 0; j < DIV_Y; j++){
         for(int i = 0; i < DIV_X; i++){
             mCircles.push_back(dpRecordBufferCircle());

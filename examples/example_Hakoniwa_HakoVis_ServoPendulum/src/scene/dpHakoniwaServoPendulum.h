@@ -32,6 +32,19 @@ public:
     }
     
     void setup(){
+
+		mLengthMin = 20.0;
+		mLengthMax = 120.0;
+		mThreshMin = 6.0;
+		mSpeed = 1.0;
+		mRange = 0.0;
+		mAngle = 0.0;
+
+		mDebugLineLength = 150;
+		mDebugCircleRad = 30;
+
+		mDir = 1;
+		mElapsed = 0.0;
     
         mSender.setup("192.168.20.67",8528);
         
@@ -43,8 +56,8 @@ public:
         ofPoint pos2 = mMotionExtractor.getPositionAt(1);
 
         mRange = ofMap((pos1 - pos2).length(),mLengthMin,mLengthMax,0,RANGE_MAX,true);
-        mRange = fmaxf(0, mRange);
-        mRange = fminf(RANGE_MAX,mRange);
+        mRange = std::max(0.f, mRange);
+        mRange = std::min((float)RANGE_MAX, mRange);
         
     }
     
@@ -125,22 +138,22 @@ private:
     
     static const int RANGE_MAX = 90;
     
-    float mLengthMin = 20.0;
-    float mLengthMax = 120.0;
-    float mThreshMin = 6.0;
-    float mSpeed = 1.0;
-    float mRange = 0.0;
-    float mAngle = 0.0;
+	float mLengthMin;
+	float mLengthMax;
+	float mThreshMin;
+	float mSpeed;
+	float mRange;
+	float mAngle;
     
-    float mDebugLineLength = 150;
-    float mDebugCircleRad = 30;
+	float mDebugLineLength;
+	float mDebugCircleRad;
     
     ramMotionExtractor mMotionExtractor;
     
     ofxOscSender mSender;
     
-    int mDir = 1;
-    float mElapsed = 0.0;
+	int mDir;
+	float mElapsed;
 
 };
 

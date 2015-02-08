@@ -16,6 +16,11 @@ class dpSPBox{
 public:
     
     dpSPBox(){
+		mSpeed = 1.0;
+		mAngle = 0.0;
+
+		mSatDec = 10.0;
+
         mColor.set(255, 50, 150);
     }
     
@@ -67,11 +72,11 @@ private:
     
     ofColor mColor;
     
-    float mSpeed = 1.0;
-    float mAngle = 0.0;
+	float mSpeed;
+	float mAngle;
     
     float mSat;
-    float mSatDec = 10.0;
+	float mSatDec;
 };
 
 class dpHakoVisServoPendulum : public ramBaseScene{
@@ -91,7 +96,7 @@ public:
     }
     
     void setup(){
-        
+		mAngle = 0.0;
         mCam.setPosition(ofPoint(1, 0, 0));
         mCam.setTarget(ofPoint(0, 0, 0));
         mCam.setDistance(300);
@@ -170,7 +175,7 @@ private:
     ramOscReceiveTag mReceiver;
     
     float mScale;
-    float mAngle = 0.0;
+	float mAngle;
     
     static const int RECT_MAX = 600;
     deque<ofPoint>mPts;

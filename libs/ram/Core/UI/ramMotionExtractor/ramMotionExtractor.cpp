@@ -8,7 +8,7 @@
 
 #include "ramMotionExtractor.h"
 
-ofColor
+static ofColor
 uiThemecb(128, 192),
 uiThemeco(192, 192),
 uiThemecoh(192, 192),

@@ -33,10 +33,10 @@ private:
     static const int DIV_Y = 2;
     static const int SPACE = 250;
     
-    int mRecordTargetNum = 0;
-    int mBeginFrame = 0;
+	int mRecordTargetNum;
+	int mBeginFrame;
     
-    float mScale = 800.0;
+	float mScale;
     
     ofVec2f mPos;
     

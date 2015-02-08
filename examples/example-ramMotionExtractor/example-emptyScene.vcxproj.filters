@@ -1,11 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
       <UniqueIdentifier>{E8EFF3D3-B73C-9149-A70E-F8DE4EAA5868}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\EmptyScene">
-      <UniqueIdentifier>{B75111AE-4337-AC4D-90E2-F8149EB7BE73}</UniqueIdentifier>
     </Filter>
     <Filter Include="libs">
       <UniqueIdentifier>{CB691E92-A9DE-FC4F-932D-528DEDD38780}</UniqueIdentifier>
@@ -199,13 +196,28 @@
     <Filter Include="addons\ofxOpenCv\libs\opencv\include\opencv2\ts">
       <UniqueIdentifier>{35853E80-7014-CD46-A26D-9ED0075F1FD6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="addons\ofxCv\libs\CLD">
+      <UniqueIdentifier>{a451addd-76fe-4146-b4e8-9be1819bae1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxCv\libs\CLD\include">
+      <UniqueIdentifier>{95292202-06f6-4045-a9b7-e99023704131}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxCv\libs\CLD\include\CLD">
+      <UniqueIdentifier>{ca6d9458-e817-474d-ab8a-8bdaa0e35758}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxCv\libs\CLD\src">
+      <UniqueIdentifier>{4ba758c0-f7c8-4cdb-9651-3cfca3fb48a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\scene">
+      <UniqueIdentifier>{8ea0a684-ee48-4360-9e3d-7ccd185ec12c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\ram\Core\UI\ramMotionExtractor">
+      <UniqueIdentifier>{ace1d0ba-a3a3-425b-8719-4be9f25ff862}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\testApp.h">
       <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EmptyScene\EmptyScene.h">
-      <Filter>src\EmptyScene</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libs\openFrameworks\ofMain.h">
       <Filter>libs\openFrameworks</Filter>
@@ -1062,6 +1074,27 @@
     <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\ts\ts_gtest.h">
       <Filter>addons\ofxOpenCv\libs\opencv\include\opencv2\ts</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\addons\ofxCv\libs\CLD\include\CLD\imatrix.h">
+      <Filter>addons\ofxCv\libs\CLD\include\CLD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxCv\libs\CLD\include\CLD\myvec.h">
+      <Filter>addons\ofxCv\libs\CLD\include\CLD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxCv\libs\CLD\include\CLD\ETF.h">
+      <Filter>addons\ofxCv\libs\CLD\include\CLD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxCv\libs\CLD\include\CLD\fdog.h">
+      <Filter>addons\ofxCv\libs\CLD\include\CLD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\ramBaseHasFbo.h">
+      <Filter>libs\ram\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scene\ramMotionExtractorExampleScene.h">
+      <Filter>src\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\UI\ramMotionExtractor\ramMotionExtractor.h">
+      <Filter>libs\ram\Core\UI\ramMotionExtractor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -1288,6 +1321,153 @@
     </ClCompile>
     <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvShortImage.cpp">
       <Filter>addons\ofxOpenCv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxCv\libs\CLD\src\fdog.cpp">
+      <Filter>addons\ofxCv\libs\CLD\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxCv\libs\CLD\src\ETF.cpp">
+      <Filter>addons\ofxCv\libs\CLD\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUITextInput.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIToggle.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIToggleMatrix.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIValuePlotter.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIWaveform.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIWidget.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIWidgetWithLabel.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUI2DGraph.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUI2DPad.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIBaseDraws.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIBiLabelSlider.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIButton.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUICanvas.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUICircleSlider.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIDragableLabelButton.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIDropDownList.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIEventArgs.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIFPS.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIFPSSlider.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIImage.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIImageButton.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIImageSampler.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIImageSlider.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIImageToggle.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUILabel.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUILabelButton.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUILabelToggle.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIMinimalSlider.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIMovingGraph.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIMultiImageButton.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIMultiImageToggle.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUINumberDialer.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIRadio.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIRangeSlider.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIRectangle.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIRotarySlider.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIScrollableCanvas.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUISlider.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUISortableList.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUISpacer.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUISpectrum.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUISuperCanvas.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUITabBar.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUITextArea.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\ramBaseHasFbo.cpp">
+      <Filter>libs\ram\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scene\ramMotionExtractorExampleScene.cpp">
+      <Filter>src\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\UI\ramMotionExtractor\ramMotionExtractor.cpp">
+      <Filter>libs\ram\Core\UI\ramMotionExtractor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

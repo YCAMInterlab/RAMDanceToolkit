@@ -30,7 +30,7 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
 }
 
 void dpHakoniwaMagnetPendulum::setup() {
-    
+	mDistanceThreshold = 45;
     mSenderOnOff.setup("192.168.20.52",8528);
 
 }

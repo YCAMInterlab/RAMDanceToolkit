@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
@@ -195,6 +195,18 @@
     </Filter>
     <Filter Include="addons\ofxOpenCv\libs\opencv\include\opencv2\ts">
       <UniqueIdentifier>{22D60578-F5B8-6A4E-A1E4-C127ABEFCD7B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxCv\libs\CLD">
+      <UniqueIdentifier>{4807810f-b338-47ab-add4-9330286d79d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxCv\libs\CLD\include">
+      <UniqueIdentifier>{89ab079f-cb76-41f8-82f3-f1020c22def1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxCv\libs\CLD\include\CLD">
+      <UniqueIdentifier>{1fca49b3-c330-4964-8494-a029d987526e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxCv\libs\CLD\src">
+      <UniqueIdentifier>{b941395f-eb1d-49e4-841e-97fe3cef76af}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1056,6 +1068,21 @@
     <ClInclude Include="..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\ts\ts_gtest.h">
       <Filter>addons\ofxOpenCv\libs\opencv\include\opencv2\ts</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\addons\ofxCv\libs\CLD\include\CLD\ETF.h">
+      <Filter>addons\ofxCv\libs\CLD\include\CLD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxCv\libs\CLD\include\CLD\fdog.h">
+      <Filter>addons\ofxCv\libs\CLD\include\CLD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxCv\libs\CLD\include\CLD\imatrix.h">
+      <Filter>addons\ofxCv\libs\CLD\include\CLD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\addons\ofxCv\libs\CLD\include\CLD\myvec.h">
+      <Filter>addons\ofxCv\libs\CLD\include\CLD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\ramBaseHasFbo.h">
+      <Filter>libs\ram\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -1282,6 +1309,147 @@
     </ClCompile>
     <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvShortImage.cpp">
       <Filter>addons\ofxOpenCv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxCv\libs\CLD\src\fdog.cpp">
+      <Filter>addons\ofxCv\libs\CLD\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxCv\libs\CLD\src\ETF.cpp">
+      <Filter>addons\ofxCv\libs\CLD\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIRectangle.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIRotarySlider.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIScrollableCanvas.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUISlider.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUISortableList.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUISpacer.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUISpectrum.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUISuperCanvas.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUITabBar.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUITextArea.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUITextInput.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIToggle.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIToggleMatrix.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIValuePlotter.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIWaveform.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIWidget.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIWidgetWithLabel.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUI2DGraph.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUI2DPad.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIBaseDraws.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIBiLabelSlider.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIButton.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUICanvas.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUICircleSlider.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIDragableLabelButton.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIDropDownList.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIEventArgs.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIFPS.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIFPSSlider.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIImage.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIImageButton.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIImageSampler.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIImageSlider.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIImageToggle.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUILabel.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUILabelButton.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUILabelToggle.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIMinimalSlider.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIMovingGraph.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIMultiImageButton.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIMultiImageToggle.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUINumberDialer.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIRadio.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\addons\ofxUI\src\ofxUIRangeSlider.cpp">
+      <Filter>addons\ofxUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\ramBaseHasFbo.cpp">
+      <Filter>libs\ram\Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

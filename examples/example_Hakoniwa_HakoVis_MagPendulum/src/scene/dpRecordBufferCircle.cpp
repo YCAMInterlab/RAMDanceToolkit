@@ -7,10 +7,25 @@
 //
 
 #include "dpRecordBufferCircle.h"
-
 const ofColor dpRecordBufferCircle::MAIN_COLOR = ofColor(255,50,150);
 
 void dpRecordBufferCircle::setup(ofPoint origin){
+
+	mPosEase = 0.1;
+	mRad = 40.0;
+	mRecordCircleScale = 2.5;
+
+	mRecordAlphaSpeed = 10.0;
+
+	mSaturation = 0;
+	mHue = 0;
+	mBrightness = 0;
+
+	mPlaybackCounter = 0;
+	mRecordCounter = 0;
+
+	isRecord = false;
+	isRecordOnce = false;
     
     mOrigin = origin;
     
@@ -69,8 +84,8 @@ void dpRecordBufferCircle::updateAlpha(){
     if(!isRecord)mRecordAlpha -= mRecordAlphaSpeed;
     else mRecordAlpha += mRecordAlphaSpeed;
     
-    mRecordAlpha = fmaxf(mRecordAlpha, 0.0);
-    mRecordAlpha = fminf(mRecordAlpha, 255.0);
+    mRecordAlpha = std::max(mRecordAlpha, 0.0f);
+    mRecordAlpha = std::min(mRecordAlpha, 255.0f);
     
 }
 

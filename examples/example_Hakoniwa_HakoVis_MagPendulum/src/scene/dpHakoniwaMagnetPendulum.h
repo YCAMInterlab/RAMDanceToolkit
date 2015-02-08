@@ -32,7 +32,7 @@ public:
     
 private:
     
-    float mDistanceThreshold = 45;
+	float mDistanceThreshold;
     bool bOn[NMAGNETS];
     
     ramMotionExtractor	mMotionExtractor;

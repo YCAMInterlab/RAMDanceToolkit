@@ -35,23 +35,23 @@ private:
     ofPoint mPos;
     ofPoint mTargetPos;
     
-    float mPosEase = 0.1;
-    float mRad = 40.0;
-    float mRecordCircleScale = 2.5;
+	float mPosEase;
+	float mRad;
+	float mRecordCircleScale;
 
     float mRecordAlpha;
-    float mRecordAlphaSpeed = 10.0;
+	float mRecordAlphaSpeed;
     
-    float mSaturation = 0;
-    float mHue = 0;
-    float mBrightness = 0;
+	float mSaturation;
+	float mHue;
+	float mBrightness;
     
-    int mPlaybackCounter = 0;
-    int mRecordCounter = 0;
+	int mPlaybackCounter;
+	int mRecordCounter;
     
-    bool isRecord = false;
-    bool isRecordOnce = false;
-    
+	bool isRecord;
+	bool isRecordOnce;
+
     ofColor mCurrentColor;
     static const ofColor MAIN_COLOR;
     
