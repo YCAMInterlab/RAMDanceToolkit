@@ -24,6 +24,7 @@ static bool LabanMomentIsDead(LabanMoment& moment)
 
 void Laban::setupControlPanel()
 {
+	maxLabanMomentLife = 1.0f;
     threshold = .2;
     lineWidth = 3;
     scale = 20;

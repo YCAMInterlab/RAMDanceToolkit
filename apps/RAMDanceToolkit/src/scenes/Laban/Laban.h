@@ -64,7 +64,7 @@ public:
     vector<ofColor> labanColors;
     vector<ofVec3f> labanDirections;
     
-    float maxLabanMomentLife = 1.0f;
+    float maxLabanMomentLife;
     
     list<LabanMoment> moments;
 	

@@ -63,6 +63,11 @@ public:
 			
 			line_width = 2;
 			
+			set_from = false;
+			set_control0 = false;
+			set_control1 = false;
+			set_to = false;
+		
 			active = true;
             toggle = new ofxUIToggle("Line " + ofToString(id), &active, 30, 30, 0, 0);
 			panel->addWidgetDown(toggle);
