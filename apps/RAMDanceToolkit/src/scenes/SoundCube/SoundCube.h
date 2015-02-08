@@ -282,7 +282,7 @@ public:
 				
 				if (sound != "")
 				{
-					o->loadSound(sound, toggle_mode, loop);
+					o->loadSound(ramToResourcePath(sound), toggle_mode, loop);
 				}
 				
 				cout << type << " loaded." << endl;
