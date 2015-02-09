@@ -53,6 +53,7 @@ The primary innovation of the CircleTracking app is the use of OpenCV's `estimat
 ###v1.2.0
 
 - add **ramMotionExtractor** : It makes you easier to edit node selection. check [wiki](https://github.com/YCAMInterlab/RAMDanceToolkit/wiki/RAM-API-Reference-MotionExtractor_jp) how to use it.
+- change default floor pattarn from "GRID" to "NONE".
 
 ###v1.1.0
 
