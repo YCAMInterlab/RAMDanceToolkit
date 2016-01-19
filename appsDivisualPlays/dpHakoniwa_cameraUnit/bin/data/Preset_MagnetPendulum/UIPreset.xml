@@ -1,0 +1,131 @@
+<Widget>
+    <Kind>2</Kind>
+    <Name>BackGround</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>RunningBack</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>LearnTime</Name>
+    <Value>900.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Threshold</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Warp</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Blur</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>BlurSize</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Invert</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>FrameDiff</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Threshold</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>ThrVal</Name>
+    <Value>106.773399353</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>AdaptiveThreshold</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>42</Kind>
+    <Name>blockSize</Name>
+    <Value>3</Value>
+</Widget>
+<Widget>
+    <Kind>42</Kind>
+    <Name>offset</Name>
+    <Value>16</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>invert</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>gauss</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>AccumelateWeight</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Time</Name>
+    <Value>0.024630541</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Erode</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>42</Kind>
+    <Name>NumProc</Name>
+    <Value>5</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Dilate</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>42</Kind>
+    <Name>NumProc</Name>
+    <Value>5</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Erode</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>42</Kind>
+    <Name>NumProc</Name>
+    <Value>5</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Canny</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>6</Kind>
+    <Name>CannyThr</Name>
+    <HighValue>120.000000000</HighValue>
+    <LowValue>100.000000000</LowValue>
+</Widget>
