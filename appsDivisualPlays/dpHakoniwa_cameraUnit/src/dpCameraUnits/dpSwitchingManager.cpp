@@ -17,7 +17,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	//箱庭プリセット
 	hakoniwaPresets* hako;
     
-/*============================= KAAT ==============================*/
+/*VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV KAAT  VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV*/
 #pragma mark ★色水
     hakoniwas.push_back(new hakoniwaPresets());
     hakoniwas.back()->type		= HAKO_COLOROFWATER;
@@ -82,7 +82,7 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
     hakoniwas.back()->sceneNames.push_back("V:dpVisStage");
 
 
-/*============================= KAAT ==============================*/
+/*AAAAAAAAAAAAAAAAAAAAAAAAAAAA KAAT AAAAAAAAAAAAAAAAAAAAAAAAAAAA*/
     
 #pragma mark ★パラレルリンク:プリズム
 	hakoniwas.push_back(new hakoniwaPresets());
@@ -375,6 +375,9 @@ void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
         sender.setup("192.168.20.10", 10000);
         sender.sendMessage(m);
     }
+    
+    if (m.getAddress() == "/dp/matrix/manual")
+        matrixSW.setSW(m.getArgAsInt32(0), m.getArgAsInt32(1));
     
 	if (m.getAddress() == "/ram/set_slave"){
 		isSlave = true;
@@ -675,11 +678,11 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 				m1.setAddress("/ram/set_scene");
 				m1.addStringArg(hk->sceneNames[j].substr(2));
 
-
 				if (!hk->getIsVis(j)){
 					//箱庭アウト
-					m1.addIntArg((hk->type % 2 == 0) &&
-								 (searchHakoniwaIsActive(hk->type) > -1));
+                    bool use1 = (hk->type % 2 == 0);
+                    if (!RDTK_TWIN) use1 = true;
+                    m1.addIntArg((use1 && (searchHakoniwaIsActive(hk->type) > -1)) ? 1 : 0);
 					m1.addIntArg(1);
 					m1.addIntArg(0);
 				}else{
@@ -693,8 +696,9 @@ void dpSwitchingManager::refleshSceneforRDTK(){
 				m2.setAddress("/ram/set_scene");
 				m2.addStringArg(hk->sceneNames[j].substr(2));
 				if (!hk->getIsVis(j)){
-					m2.addIntArg((hk->type % 2 == 1) &&
-								 (searchHakoniwaIsActive(hk->type) > -1));
+                    bool use2 = (hk->type % 2 == 0);
+                    if (!RDTK_TWIN) use2 = true;
+                    m2.addIntArg((use2 && (searchHakoniwaIsActive(hk->type) > -1)) ? 1 : 0);
 					m2.addIntArg(0);
 					m2.addIntArg(0);
 				}else{
