@@ -4,9 +4,9 @@ void dpHakoniwaSand::setupControlPanel(){
     
     mMotionExtractor.setupControlPanel(this,ofPoint(340,30));
     mMotionExtractor.load("motionExt_dpHSandStorm.xml");
-    ramGetGUI().addIntSlider("Val1_Test", 800, 2200, &val[0]);
-    ramGetGUI().addIntSlider("Val2_Test", 800, 2200, &val[1]);
-    ramGetGUI().addIntSlider("Val3_Test", 1000, 2000, &val[2]);
+    ramGetGUI().addIntSlider("Val1_Test", 750, 2170, &val[0]);
+    ramGetGUI().addIntSlider("Val2_Test", 750, 2170, &val[1]);
+    ramGetGUI().addIntSlider("Val3_Test", 750, 2170, &val[2]);
     ramGetGUI().addIntSlider("Val1_Min", 0, 200, &minVal[0]);
     ramGetGUI().addIntSlider("Val1_Max", 0, 200, &maxVal[0]);
     ramGetGUI().addIntSlider("Val2_Min", 0, 200, &minVal[1]);
@@ -17,9 +17,9 @@ void dpHakoniwaSand::setupControlPanel(){
     ramGetGUI().addToggle("Test mode", &bTestMode);
     bTestMode = false;
     
-    val[0] = 2200;
-    val[1] = 2200;
-    val[2] = 2000;
+    val[0] = 750;
+    val[1] = 750;
+    val[2] = 750;
     
     for (int i = 0; i < 3; i++) {
         minVal[i] = 30;
@@ -50,9 +50,9 @@ void dpHakoniwaSand::update(){
     mMotionExtractor.update();
     
     if (!bTestMode) {
-        val[0] = ofClamp((int)ofMap(mMotionExtractor.getPositionAt(0).y, minVal[0], maxVal[0], 800, 2200), 800, 2200);
-        val[1] = ofClamp((int)ofMap(mMotionExtractor.getPositionAt(1).y, minVal[1], maxVal[1], 800, 2200), 800, 2200);
-        val[2] = ofClamp((int)ofMap(mMotionExtractor.getPositionAt(2).y, minVal[2], maxVal[2], 1000, 2000), 1000, 2000);
+        val[0] = ofClamp((int)ofMap(mMotionExtractor.getPositionAt(0).y, minVal[0], maxVal[0], 750, 2170), 750, 2170);
+        val[1] = ofClamp((int)ofMap(mMotionExtractor.getPositionAt(1).y, minVal[1], maxVal[1], 750, 2170), 750, 2170);
+        val[2] = ofClamp((int)ofMap(mMotionExtractor.getPositionAt(2).y, minVal[2], maxVal[2], 750, 2170), 750, 2170);
     }
 
     sendOsc();
@@ -80,9 +80,9 @@ void dpHakoniwaSand::onEnabled(){
 
 void dpHakoniwaSand::onDisabled(){
     
-    val[0] = 2200;
-    val[1] = 2200;
-    val[2] = 2000;
+    val[0] = 750;
+    val[1] = 750;
+    val[2] = 750;
     
     sendOsc();
 }
