@@ -28,6 +28,13 @@ void sw_1010F_SerialController::setSW(int cameraChannel, int displayChannel){
 
 	serial_.writeBytes((unsigned char*)(buf.c_str()), buf.length()+1);
 
+	ofxOscSender sender;
+	sender.setup("192.168.20.36", 24800);
+	ofxOscMessage m;
+	m.setAddress("/dp/debug/matrix");
+	m.addIntArg(displayChannel);
+	m.addIntArg(cameraChannel);
+	sender.sendMessage(m);
 }
 
 //	if (!ofGetKeyPressed('a')){

@@ -10,6 +10,7 @@
 #define __dpHakoniwa_cameraUnit__sw_1010F_SerialController__
 
 #include "ofMain.h"
+#include "ofxOsc.h"
 
 class sw_1010F_SerialController{
 public:
