@@ -32,6 +32,7 @@
 #define CV_SLOT_NUM 4
 
 #define RDTK_TWIN (false)//for KAAT: RDTK２台体制で、箱庭シーンを振り分ける用フラグ
+#define SENDLASTHAKO (true)//最後に選択された箱庭を独立チャンネルに送る
 
 enum hakoniwaType{
     HAKO_COLOROFWATER,

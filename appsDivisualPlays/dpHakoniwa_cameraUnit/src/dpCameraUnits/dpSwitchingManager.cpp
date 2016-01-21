@@ -514,6 +514,8 @@ void dpSwitchingManager::SelectHakoniwa(hakoniwaType type, int slot){
 		}
 		matrixSW.setSW(targHako->sourceCh,
 					   mSlots[targCvSlot].matrixInputCh);
+		if (SENDLASTHAKO) matrixSW.setSW(targHako->sourceCh, 5);
+		
 		cout << "clear & add " << slot << endl;
 	}else{
 
