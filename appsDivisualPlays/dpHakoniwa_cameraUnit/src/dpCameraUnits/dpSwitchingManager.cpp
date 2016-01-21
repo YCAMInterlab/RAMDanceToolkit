@@ -550,13 +550,6 @@ void dpSwitchingManager::enableDisplay(hakoniwaType type, int displayNum,bool ne
     if (displayNum == 2) targDSP = 0;
     if (displayNum == 3) targDSP = 3;
 
-    if (mVisEnable){
-        matrixSW.setSW(getHakoniwaPreset(type)->sourceCh, targDSP+5);
-    }else{
-        matrixSW.setSW(SHUTTER_CHANNEL, targDSP+5);
-    }
-	//TODO: RDTKへのOSC送り
-
 	refleshSceneforRDTK();
 }
 
