@@ -64,6 +64,8 @@ extern const int kNumCameraunitVectors;
 
 extern const string kFontPath;
 
+extern const float kFlowChartLineWidth;
+
 string demangle(const char* name);
 
 template <class T> string getClassName(const T& t);
