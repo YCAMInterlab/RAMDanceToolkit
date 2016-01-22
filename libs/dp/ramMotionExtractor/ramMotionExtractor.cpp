@@ -35,6 +35,7 @@ void ramMotionExtractor::setupControlPanel(ramBaseScene *scene_, ofVec2f canvasP
 	mGui->addButton("PushPort", false);
 	mGui->addButton("PopPort", false);
 	mGui->addButton("Clear", false);
+	mGui->addToggle("Visible", false);
 	mGui->addSlider("Smooth", 1.0, 50.0, &mMotionSmooth);
 
 	vector<string> it = ramActorManager::instance().getNodeArrayNames();
@@ -77,6 +78,21 @@ void ramMotionExtractor::update(){
 
 		string myAddr = "/ram/MEX/"+mScenePtr->getName()+"/";
 
+		if (m.getAddress() == myAddr+"dump")
+		{
+			ofxOscSender sender;
+			sender.setup(m.getRemoteIp(), 24800);
+			for (int i = 0;i < mMotionPort.size();i++)
+			{
+				ofxOscMessage m;
+				m.setAddress(myAddr + "list");
+				m.addIntArg(i);
+				m.addIntArg(mMotionPort[i]->mActorIndex);
+				m.addIntArg(mMotionPort[i]->mFinder.index);
+				sender.sendMessage(m);
+			}
+		}
+		
 		if (m.getAddress() == myAddr+"push"){// アクターID, ジョイントID
 			pushFromID(m.getArgAsInt32(0), m.getArgAsInt32(1));
 		}
@@ -203,6 +219,10 @@ void ramMotionExtractor::update(){
 }
 
 void ramMotionExtractor::draw(){
+	
+	ofxUIToggle* visible = (ofxUIToggle*)(mGui->getWidget("Visible"));
+	if (!visible->getValue()) return;
+	
 	for (int i = 0;i < ramActorManager::instance().getNumNodeArray();i++){
 		ramNodeArray arr = ramActorManager::instance().getNodeArray(i);
 		ofVec3f tp = arr.getNode(ramActor::JOINT_HEAD).getGlobalPosition();
