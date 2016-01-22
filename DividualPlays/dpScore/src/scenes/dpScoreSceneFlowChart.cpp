@@ -31,13 +31,13 @@ static const float kMainCamSpeed = 0.05f;
 static const string kNodeNames[] = {
 	"Dancers\n(Motion Capture)",
 	"Master Hakoniwa",
-	"Stage",
+	"",
 	"Hakoniwa x 6",
 	"Analyze Hakoniwa",
 	"Displays\n(for Dancers)",
 	"Speakers",
 	"Lights",
-	"Programmers",
+	"RAM Dance Toolkit",
 	"Audiences",
 };
 
@@ -117,6 +117,35 @@ void SceneFlowChart::initialize()
 	mCams.at(NODE_AUDIENCE).setFov(80.f);
 	mCams.at(NODE_AUDIENCE).setPosition(0.f, 100.f, 650.f);
 	mCams.at(NODE_AUDIENCE).setOrientation(ofVec3f(-30.f, 180.f, 0.f));
+
+	mCamOrders.clear();
+	mCamOrders.push_back(NODE_STAGE);
+
+	mCamOrders.push_back(NODE_MOTIONER);
+	mCamOrders.push_back(NODE_MASTER_HAKONIWA);
+	mCamOrders.push_back(NODE_COMPUTER);
+
+	mCamOrders.push_back(NODE_STAGE);
+
+	mCamOrders.push_back(NODE_MOTIONER);
+	mCamOrders.push_back(NODE_HAKONIWA);
+	mCamOrders.push_back(NODE_CAMERA_UNIT);
+	mCamOrders.push_back(NODE_COMPUTER);
+	mCamOrders.push_back(NODE_DISPLAY);
+	mCamOrders.push_back(NODE_MOTIONER);
+
+	mCamOrders.push_back(NODE_STAGE);
+
+	mCamOrders.push_back(NODE_MOTIONER);
+	mCamOrders.push_back(NODE_COMPUTER);
+	mCamOrders.push_back(NODE_LIGHT);
+	mCamOrders.push_back(NODE_SPEAKER);
+	mCamOrders.push_back(NODE_MOTIONER);
+
+	mCamOrders.push_back(NODE_STAGE);
+
+	mCamOrders.push_back(NODE_AUDIENCE);
+	mCamOrders.push_back(NODE_COMPUTER);
 
 	// bezier line settings
 	{
@@ -208,6 +237,7 @@ void SceneFlowChart::shutDown()
 	mNodes.clear();
 	mCams.clear();
 	mPoints.clear();
+	mCamOrders.clear();
 }
 
 void SceneFlowChart::enter()
@@ -225,28 +255,28 @@ void SceneFlowChart::update(ofxEventMessage& m)
 		mElapsedTimeMove += ofGetLastFrameTime();
 		if (mElapsedTimeMove >= kCamMoveSpan + kCamIdleSpan) {
 			mElapsedTimeMove = 0.f;
-			++mCurrCamID %= mCams.size();
-			mNextCamID = (mCurrCamID + 1) % mCams.size();
+
+			++mCurrentCamOrderIdx %= mCamOrders.size();
 		}
 		float t {ofClamp(mElapsedTimeMove, 0.f, kCamMoveSpan) / kCamMoveSpan};
 		t = easeInOutCubic(t);
 		Shared.t = t;
 
 		// open MacBooks
-		if (mNextCamID == NODE_CAMERA_UNIT) {
+		if (getNextCamID() == NODE_CAMERA_UNIT) {
 			Shared.macAngleCameraUnit = t * 110.f;
 		}
-		else if (mCurrCamID == NODE_CAMERA_UNIT) {
+		else if (getCurrentCamID() == NODE_CAMERA_UNIT) {
 			Shared.macAngleCameraUnit = (1.f - t) * 110.f;
 		}
 		else {
 			Shared.macAngleCameraUnit = 0.f;
 		}
 
-		if (mNextCamID == NODE_COMPUTER) {
+		if (getNextCamID() == NODE_COMPUTER) {
 			Shared.macAngleComputers = t * 110.f;
 		}
-		else if (mCurrCamID == NODE_COMPUTER) {
+		else if (getCurrentCamID() == NODE_COMPUTER) {
 			Shared.macAngleComputers = (1.f - t) * 110.f;
 		}
 		else {
@@ -254,8 +284,8 @@ void SceneFlowChart::update(ofxEventMessage& m)
 		}
 
 		// move camera
-		auto currCam = mCams.at(mCurrCamID);
-		auto nextCam = mCams.at(mNextCamID);
+		auto currCam = mCams.at(getCurrentCamID());
+		auto nextCam = mCams.at(getNextCamID());
 
 		mCurrentCam.setFov(currCam.getFov() * (1.f - t) + nextCam.getFov() * t);
 		mCurrentCam.setGlobalPosition(currCam.getGlobalPosition() * (1.f - t) + nextCam.getGlobalPosition() * t);
@@ -263,7 +293,7 @@ void SceneFlowChart::update(ofxEventMessage& m)
 	}
 	else {
 		// rotate main cam
-        mElapsedTimeMainCam += ofGetLastFrameTime() * 0.5f;
+		mElapsedTimeMainCam += ofGetLastFrameTime() * 0.5f;
 		if (mCamMode == CAM_MAIN) {
 			const float r {::cosf(mElapsedTimeMainCam * kMainCamSpeed) * 110.f};
 			mCamMainParent.setGlobalOrientation(ofQuaternion(r, ofVec3f(0.f, 1.f, 0.f)));
@@ -295,18 +325,18 @@ void SceneFlowChart::draw()
 				 for (auto i : rep(mNodes.size())) {
 					 ScopedTranslate t(0.f, -200.f, 0.f);
 					 if (mCamMode == CAM_MOVE) {
-						 i == mCurrCamID ? (Shared.focused = true) : (Shared.focused = false);
-						 i == mNextCamID ? (Shared.nextFocus = true) : (Shared.nextFocus = false);
+						 i == getCurrentCamID() ? (Shared.focused = true) : (Shared.focused = false);
+						 i == getNextCamID() ? (Shared.nextFocus = true) : (Shared.nextFocus = false);
 					 }
 					 else {
 						 Shared.nextFocus = true;
 						 Shared.focused = false;
 					 }
 					 if (i == NODE_AUDIENCE) {
-						 if (mNextCamID == NODE_AUDIENCE) {
+						 if (getNextCamID() == NODE_AUDIENCE) {
 							 mNodes.at(i)->draw();
 						 }
-						 if (mCurrCamID == NODE_AUDIENCE && Shared.t < 1.f) {
+						 if (getCurrentCamID() == NODE_AUDIENCE && Shared.t < 1.f) {
 							 mNodes.at(i)->draw();
 						 }
 					 }
@@ -390,7 +420,7 @@ void SceneFlowChart::draw()
 					 ScopedStyle s;
 					 ofFill();
 					 ofSetColor(ofColor::white);
-					 mFont.drawString(kNodeNames[mNextCamID], 40.f, 120.f);
+					 mFont.drawString(kNodeNames[getNextCamID()], 40.f, 120.f);
 				 }
 			 };
 
@@ -420,8 +450,7 @@ void SceneFlowChart::changeCamMode(CamMode m)
 	mCamMode = m;
 	switch (m) {
 	case CAM_MOVE:
-		mCurrCamID = NODE_STAGE;
-		mNextCamID = (mCurrCamID + 1) % mCams.size();
+		mCurrentCamOrderIdx = 0;
 		mElapsedTimeMove = 0;
 
 		break;
@@ -443,6 +472,16 @@ void SceneFlowChart::changeCamMode(CamMode m)
 	default:
 		break;
 	}
+}
+
+int SceneFlowChart::getCurrentCamID() const
+{
+	return mCamOrders.at(mCurrentCamOrderIdx);
+}
+
+int SceneFlowChart::getNextCamID() const
+{
+	return mCamOrders.at((mCurrentCamOrderIdx + 1) % mCamOrders.size());
 }
 
 DP_SCORE_NAMESPACE_END

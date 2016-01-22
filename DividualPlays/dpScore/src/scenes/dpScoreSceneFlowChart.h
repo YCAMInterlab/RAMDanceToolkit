@@ -54,17 +54,19 @@ public:
 
 private:
     void changeCamMode(CamMode m);
+    int getCurrentCamID() const;
+    int getNextCamID() const;
     
 	ofTrueTypeFont mFont;
 	vector<ofPtr<ofNode> > mNodes;
 	vector<ofCamera> mCams;
+    vector<int> mCamOrders;
 	ofCamera mCurrentCam;
     ofCamera mCamMain;
     ofNode mCamMainParent;
 	ofEasyCam mCamEasy;
     CamMode mCamMode;
-	int mCurrCamID {0};
-	int mNextCamID {0};
+	int mCurrentCamOrderIdx {0};
 	
     struct PP { ofVec3f p0, p1; };
     vector<PP> mPoints;
