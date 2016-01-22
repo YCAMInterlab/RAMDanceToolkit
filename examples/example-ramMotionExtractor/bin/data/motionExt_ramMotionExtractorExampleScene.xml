@@ -1,0 +1,51 @@
+<Smooth>10.000000000</Smooth>
+<MPort>
+    <ActorIndex>1</ActorIndex>
+    <Name>Richi_3</Name>
+    <Joint>4</Joint>
+</MPort>
+<MPort>
+    <ActorIndex>0</ActorIndex>
+    <Name>Ando_1</Name>
+    <Joint>11</Joint>
+</MPort>
+<MPort>
+    <ActorIndex>2</ActorIndex>
+    <Name>Cyril_2</Name>
+    <Joint>17</Joint>
+</MPort>
+<MPort>
+    <ActorIndex>0</ActorIndex>
+    <Name>Ando_1</Name>
+    <Joint>8</Joint>
+</MPort>
+<MPort>
+    <ActorIndex>0</ActorIndex>
+    <Name>Ando_1</Name>
+    <Joint>6</Joint>
+</MPort>
+<MPort>
+    <ActorIndex>0</ActorIndex>
+    <Name>Ando_1</Name>
+    <Joint>10</Joint>
+</MPort>
+<MPort>
+    <ActorIndex>1</ActorIndex>
+    <Name>Richi_3</Name>
+    <Joint>2</Joint>
+</MPort>
+<MPort>
+    <ActorIndex>2</ActorIndex>
+    <Name>Cyril_2</Name>
+    <Joint>21</Joint>
+</MPort>
+<MPort>
+    <ActorIndex>2</ActorIndex>
+    <Name>Cyril_2</Name>
+    <Joint>20</Joint>
+</MPort>
+<MPort>
+    <ActorIndex>2</ActorIndex>
+    <Name>Cyril_2</Name>
+    <Joint>15</Joint>
+</MPort>

@@ -582,6 +582,15 @@ void ramMotionExtractor::setActorList(vector<string> *lst){
 
 }
 
+int ramMotionExtractor::getActorIndexAt(int port){
+
+	if ((0 <= port) && (port < mMotionPort.size())){
+		return mMotionPort[port]->mActorIndex;
+	}
+	return -1;
+
+}
+
 #pragma mark - motionPort
 
 void ramMotionPort::init(ramNodeFinder nodeF){

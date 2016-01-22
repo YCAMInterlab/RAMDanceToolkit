@@ -17,10 +17,10 @@ class ramMotionExtractor{
 public:
 
 	/*=== Must call for use ===*/
-	void setupControlPanel(ramBaseScene* scene_, ofVec2f canvasPos = ofVec2f(240,30));
+	void setupControlPanel(ramBaseScene* scene_,
+						   ofVec2f canvasPos = ofVec2f(240,30));
 	void update();
 	void draw();
-	void mouseReleased(ofMouseEventArgs &arg);
 
 	/*=== Getter ===*/
 	int				getNumPort();
@@ -30,6 +30,7 @@ public:
 	string			getActorNameAt(int port);
 	string			getJointNameAt(int port);
 	int				getJointIdAt(int port);
+	int				getActorIndexAt(int port);
 
 	ofVec3f			getPositionAt(int port,bool fixPosition = false);
 	ofQuaternion	getRotationAt(int port);
@@ -50,6 +51,7 @@ public:
 	void popPort(ramNodeFinder &nf);
 	void setActorList(vector<string>* lst);
 	void refleshActorFromList();
+	void mouseReleased(ofMouseEventArgs &arg);
 
 	vector<ramMotionPort*>	mMotionPort;
 	ofxUISortableList*		actorList;

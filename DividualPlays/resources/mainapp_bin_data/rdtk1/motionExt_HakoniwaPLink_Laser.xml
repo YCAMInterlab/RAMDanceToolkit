@@ -1,0 +1,11 @@
+<Smooth>10.000000000</Smooth>
+<MPort>
+    <ActorIndex>0</ActorIndex>
+    <Name>Motioner</Name>
+    <Joint>9</Joint>
+</MPort>
+<MPort>
+    <ActorIndex>0</ActorIndex>
+    <Name>Motioner</Name>
+    <Joint>22</Joint>
+</MPort>

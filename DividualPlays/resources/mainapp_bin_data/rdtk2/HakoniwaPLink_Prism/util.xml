@@ -1,0 +1,40 @@
+<Widget>
+    <Kind>12</Kind>
+    <Name>OSCAddress</Name>
+    <Value>192.168.20.56</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>drawExtractor</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>digitalI/O-2</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>digitalI/O-3</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>digitalI/O-4</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>digitalI/O-5</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>digitalI/O-6</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>digitalI/O-7</Name>
+    <Value>0</Value>
+</Widget>

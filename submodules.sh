@@ -41,7 +41,7 @@ else
 	# ofxCv
 	git clone git@github.com:kylemcdonald/ofxCv.git
 	cd ofxCv
-	git checkout 115deaf
+	git checkout 88620c5
 	cd ../
 
 	# ofxNodeArray
@@ -62,10 +62,29 @@ else
 	git checkout 957f902
 	cd ../
 
+	# ofxDmx
+	git clone https://github.com/kylemcdonald/ofxDmx.git
+	cd ofxDmx
+	git checkout f84fa27
+	cd ../
+
+	# ofxEvent
+	git clone https://github.com/YoshitoONISHI/ofxEvent
+	cd ofxEvent
+	git checkout 3cacf82
+	cd ../
+
+	# ofxException
+	git clone https://github.com/YoshitoONISHI/ofxException
+	cd  ofxException
+	git checkout de4507b
+	cd ../
+
 	# ofxMotioner
 	git clone https://github.com/YoshitoONISHI/ofxMotioner
 	cd ofxMotioner
-	git checkout 4bf47cf
+	git checkout develop
+	git checkout 392d243
 	cd ../
 
 	echo "end clone addons"

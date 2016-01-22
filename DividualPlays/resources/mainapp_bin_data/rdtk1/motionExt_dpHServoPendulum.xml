@@ -1,0 +1,31 @@
+<Smooth>10.000000000</Smooth>
+<MPort>
+    <ActorIndex>0</ActorIndex>
+    <Name>sasamoto</Name>
+    <Joint>20</Joint>
+</MPort>
+<MPort>
+    <ActorIndex>0</ActorIndex>
+    <Name>sasamoto</Name>
+    <Joint>15</Joint>
+</MPort>
+<MPort>
+    <ActorIndex>0</ActorIndex>
+    <Name>sasamoto</Name>
+    <Joint>16</Joint>
+</MPort>
+<MPort>
+    <ActorIndex>0</ActorIndex>
+    <Name>sasamoto</Name>
+    <Joint>2</Joint>
+</MPort>
+<MPort>
+    <ActorIndex>0</ActorIndex>
+    <Name>sasamoto</Name>
+    <Joint>21</Joint>
+</MPort>
+<MPort>
+    <ActorIndex>0</ActorIndex>
+    <Name>sasamoto</Name>
+    <Joint>16</Joint>
+</MPort>

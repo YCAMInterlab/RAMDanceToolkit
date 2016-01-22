@@ -1,0 +1,60 @@
+<Widget>
+    <Kind>5</Kind>
+    <Name>mcX</Name>
+    <Value>32.442440033</Value>
+</Widget>
+<Widget>
+    <Kind>5</Kind>
+    <Name>mcY</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>5</Kind>
+    <Name>mcZ</Name>
+    <Value>15.792965889</Value>
+</Widget>
+<Widget>
+    <Kind>5</Kind>
+    <Name>ClmpX</Name>
+    <Value>50.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>5</Kind>
+    <Name>ClmpY</Name>
+    <Value>84.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>5</Kind>
+    <Name>ClmpZ</Name>
+    <Value>15.999996185</Value>
+</Widget>
+<Widget>
+    <Kind>5</Kind>
+    <Name>OfsX</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>5</Kind>
+    <Name>OfsY</Name>
+    <Value>159.999984741</Value>
+</Widget>
+<Widget>
+    <Kind>5</Kind>
+    <Name>OfsZ</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>5</Kind>
+    <Name>MnlX</Name>
+    <Value>3.999996185</Value>
+</Widget>
+<Widget>
+    <Kind>5</Kind>
+    <Name>MnlY</Name>
+    <Value>48.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>5</Kind>
+    <Name>MnlZ</Name>
+    <Value>-3.999996185</Value>
+</Widget>
