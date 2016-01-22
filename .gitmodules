@@ -31,3 +31,9 @@
 [submodule "addons/ofxMotioner"]
 	path = addons/ofxMotioner
 	url = https://github.com/YoshitoONISHI/ofxMotioner
+[submodule "addons/ofxZmq"]
+	path = addons/ofxZmq
+	url = https://github.com/satoruhiga/ofxZmq.git
+[submodule "addons/ofxPublishScreen"]
+	path = addons/ofxPublishScreen
+	url = https://github.com/satoruhiga/ofxPublishScreen.git
