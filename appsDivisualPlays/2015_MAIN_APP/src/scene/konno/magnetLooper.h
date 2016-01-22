@@ -88,6 +88,7 @@ private:
     
     //evalaPCヘポジションとスピードの送信
     ofxOscSender sender_evala;
+    ofxOscSender sender_debug;
     
     //-----------------------------------
     //processingからポジション受信

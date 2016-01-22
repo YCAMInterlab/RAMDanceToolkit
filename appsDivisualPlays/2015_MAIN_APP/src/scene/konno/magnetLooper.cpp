@@ -16,9 +16,11 @@ magnetLooper::magnetLooper(){
     mDrawDump		= true;
     
     //木箱のしゃくとり
-    sender.setup("192.168.20.55", 12001);
+    sender.setup("192.168.20.12", 12001);
     //newしゃくとり
-    sender2.setup("192.168.20.55", 12000);
+    sender2.setup("192.168.20.12", 12000);
+    
+    sender_debug.setup("192.168.20.36", 24800);
 
     //ポジション OSC受信(S_A)(S_B)
     //receiver.setup(12002);
@@ -306,6 +308,7 @@ void magnetLooper::refleshState(){
     m.addIntArg(looper1SpeedHantei);
     m.addIntArg(int(looper1SpeedVal));
    // m.addIntArg(4);
+    sender_debug.sendMessage(m);
     sender.sendMessage(m);
     
     //        //new しゃくとり
@@ -322,6 +325,7 @@ void magnetLooper::refleshState(){
     n.addIntArg(looper2SpeedHantei);
     n.addIntArg(int(looper2SpeedVal));
     //n.addIntArg(33);
+    sender_debug.sendMessage(n);
     sender2.sendMessage(n);
     
     //evalaさん

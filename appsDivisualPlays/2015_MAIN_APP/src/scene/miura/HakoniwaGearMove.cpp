@@ -100,7 +100,7 @@ void HakoniwaGearMove::draw(){
             if (motionExtractor.getActorNameAt(i) == "kojiri"){
                 mGear2Count += motionExtractor.getVelocitySpeedAt(i);
             }
-            if (motionExtractor.getActorNameAt(i) == "kojiri"){
+            if (motionExtractor.getActorNameAt(i) == "kawaguchi"){
                 mGear3Count += motionExtractor.getVelocitySpeedAt(i);
             }
         }

@@ -265,7 +265,7 @@ public:
         
         if(mFlag[2]){
             ofSetColor(255,255,255);
-            mFlagImg.draw(SINGLE_SCREEN_WIDTH - size,0,size,size);
+            mFlagImg.draw(SINGLE_SCREEN_WIDTH - size,SINGLE_SCREEN_HEIGHT - size,size,size);
         }
 
     }

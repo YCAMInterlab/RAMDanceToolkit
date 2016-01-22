@@ -16,7 +16,7 @@ public:
         ramOscManager::instance().addReceiverTag(&mReceiver);
         mReceiver.addAddress("/ram/do_something");
         
-        mStr = "Do Something";
+        mStr = "Do Nothing";
     }
     
     void start(){
