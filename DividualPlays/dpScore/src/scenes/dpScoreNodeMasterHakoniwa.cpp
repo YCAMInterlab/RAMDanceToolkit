@@ -15,7 +15,8 @@ DP_SCORE_NAMESPACE_BEGIN
 
 NodeMasterHakoniwa::NodeMasterHakoniwa()
 {
-
+    setGlobalPosition(ofVec3f(450.f, 0.f, 400.f - Desk::getDimension()));
+    addAimingOffset(ofVec3f(Desk::getDimension() * 0.5f, Desk::getHeight() + 50.f, Desk::getDimension() * 0.5f));
 }
 
 NodeMasterHakoniwa::~NodeMasterHakoniwa()

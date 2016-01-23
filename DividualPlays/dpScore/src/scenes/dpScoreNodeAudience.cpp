@@ -17,7 +17,7 @@ DP_SCORE_NAMESPACE_BEGIN
 
 NodeAudience::NodeAudience()
 {
-
+    setGlobalPosition(0.f, 0.f,  NodeStage::kDepth * 0.5f + 500.f);
 }
 
 NodeAudience::~NodeAudience()

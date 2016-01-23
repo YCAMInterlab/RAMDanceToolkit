@@ -14,6 +14,7 @@
 #include "dpScoreNodeHakoniwa.h"
 #include "dpScoreNodeDisplay.h"
 #include "dpScoreNodeMotioner.h"
+#include "dpScoreNodeDancer.h"
 #include "dpScoreNodeSpeaker.h"
 #include "dpScoreNodeLight.h"
 #include "dpScoreNodeAudience.h"
@@ -22,20 +23,23 @@
 #include "dpScoreScoped.h"
 #include "dpScoreToolBox.h"
 
-static const float kCamMoveSpan = 8.f;
-static const float kCamIdleSpan = 8.f;
-static const float kLineAnimSpan = 4.f;
-static const float kMainCamSpeed = 0.05f;
-static const float kMaxMacBookAngle = 110.f;
+#pragma mark ___________________________________________________________________
+
+static const float kCamMoveSpan = 2.f;
+static const float kCamIdleSpan = 2.f;
+static const float kLineSpan = 1.f;
+static const float kModeChangeSpan = (kCamMoveSpan + kCamIdleSpan) * 10.f;
+static const float kMainCamSpeed = 0.025f;
 static const float kYOffset = -200.f;
 
-static const string kNodeNames[] = {
-	"Dancers\n(Motion Capture)",
+static string kNodeNames[] = {
+	"Motion Captures",
+	"Dancers",
 	"Master Hakoniwa",
 	"",
 	"Hakoniwa x 6",
-	"Analyze Hakoniwa",
-	"Displays\n(for Dancers)",
+	"Hakoniwa Analisis",
+	"Displays",
 	"Speakers",
 	"Lights",
 	"RAM Dance Toolkit",
@@ -44,34 +48,54 @@ static const string kNodeNames[] = {
 
 DP_SCORE_NAMESPACE_BEGIN
 
+#pragma mark ___________________________________________________________________
+
 void NodeSkeleton::customDraw()
 {
 	ofDrawBox(size);
 }
 
+#pragma mark ___________________________________________________________________
+
 void SceneFlowChart::initialize()
 {
-	mFont.loadFont(kFontPath, 80.f);
+	setFixPosition(false); // for skeleton
 
+	mFont.loadFont(kFontPath, 80.f);
+	mFontSmall.loadFont(kFontPath, 40.f);
+
+	setupNodes();
+	setupCameras();
+	setupOrders();
+
+	// main camera settings
+	mCamMainParent.setGlobalPosition(ofVec3f::zero());
+	mCamMain.setParent(mCamMainParent);
+	mCamMain.setGlobalPosition(0.f, 0.f, 1200.f);
+
+	mCamEasy.setDistance(900.f);
+
+	changeCamMode(CAM_MOVE);
+}
+
+void SceneFlowChart::setupNodes()
+{
 	// place nodes
 	mNodes.clear();
 	auto motioner = ofPtr<NodeMotioner>(new NodeMotioner());
+	auto dancer = ofPtr<NodeDancer>(new NodeDancer());
 	auto masterHakoniwa = ofPtr<NodeMasterHakoniwa>(new NodeMasterHakoniwa());
-	masterHakoniwa->setGlobalPosition(ofVec3f(450.f, 0.f, 400.f - Desk::getDimension()));
 	auto stage = ofPtr<NodeStage>(new NodeStage());
 	auto hakoniwa = ofPtr<NodeHakoniwa>(new NodeHakoniwa());
-	hakoniwa->setGlobalPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 50.f, 0.f, 400.f - NodeHakoniwa::getDepth());
 	auto cameraUnit = ofPtr<NodeCameraUnit>(new NodeCameraUnit());
-	cameraUnit->setGlobalPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 250.f, 0.f, 100.f);
 	auto display = ofPtr<NodeDisplay>(new NodeDisplay());
 	auto speaker = ofPtr<NodeSpeaker>(new NodeSpeaker());
 	auto light = ofPtr<NodeLight>(new NodeLight());
 	auto computer = ofPtr<NodeComputer>(new NodeComputer());
-	computer->setGlobalPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - Deck::getWidth() - 50.f - 30.f, 0.f, -450.f);
 	auto audience = ofPtr<NodeAudience>(new NodeAudience());
-	audience->setGlobalPosition(0.f, 0.f,  NodeStage::kDepth * 0.5f + 500.f);
 
 	mNodes.push_back(motioner);
+	mNodes.push_back(dancer);
 	mNodes.push_back(masterHakoniwa);
 	mNodes.push_back(stage);
 	mNodes.push_back(hakoniwa);
@@ -81,7 +105,10 @@ void SceneFlowChart::initialize()
 	mNodes.push_back(light);
 	mNodes.push_back(computer);
 	mNodes.push_back(audience);
+}
 
+void SceneFlowChart::setupCameras()
+{
 	// moving camera settings
 	mCams.assign(mNodes.size(), ofCamera());
 
@@ -104,9 +131,13 @@ void SceneFlowChart::initialize()
 	mCams.at(NODE_DISPLAY).setPosition(-NodeStage::kWidth * 0.5f + 80.f, 70.f, 200.f);
 	mCams.at(NODE_DISPLAY).setOrientation(ofVec3f(0.f, 150.f, 0.f));
 
-	mCams.at(NODE_MOTIONER).setFov(50.f);
-	mCams.at(NODE_MOTIONER).setPosition(0.f, 200.f, 800.f);
-	mCams.at(NODE_MOTIONER).setOrientation(ofVec3f(-20.f, 0.f, 0.f));
+	mCams.at(NODE_MOTIONER).setFov(70.f);
+	mCams.at(NODE_MOTIONER).setPosition(0.f, 200.f, 400.f);
+	mCams.at(NODE_MOTIONER).setOrientation(ofVec3f(-30.f, 0.f, 0.f));
+
+	mCams.at(NODE_DANCER).setFov(50.f);
+	mCams.at(NODE_DANCER).setPosition(0.f, 200.f, 800.f);
+	mCams.at(NODE_DANCER).setOrientation(ofVec3f(-20.f, 0.f, 0.f));
 
 	mCams.at(NODE_SPEAKER).setFov(55.f);
 	mCams.at(NODE_SPEAKER).setPosition(NodeStage::kWidth * 0.5f + Desk::getDimension() * 0.5f + 50.f - 40.f, -100.f, 600.f);
@@ -123,127 +154,75 @@ void SceneFlowChart::initialize()
 	mCams.at(NODE_AUDIENCE).setFov(80.f);
 	mCams.at(NODE_AUDIENCE).setPosition(0.f, 100.f, 650.f);
 	mCams.at(NODE_AUDIENCE).setOrientation(ofVec3f(-30.f, 180.f, 0.f));
+}
 
-	mCamOrders.clear();
-	mCamOrders.push_back(NODE_STAGE);
-
-	mCamOrders.push_back(NODE_MOTIONER);
-	mCamOrders.push_back(NODE_MASTER_HAKONIWA);
-	mCamOrders.push_back(NODE_COMPUTER);
-
-	mCamOrders.push_back(NODE_STAGE);
-
-	mCamOrders.push_back(NODE_MOTIONER);
-	mCamOrders.push_back(NODE_HAKONIWA);
-	mCamOrders.push_back(NODE_CAMERA_UNIT);
-	mCamOrders.push_back(NODE_COMPUTER);
-	mCamOrders.push_back(NODE_DISPLAY);
-	mCamOrders.push_back(NODE_MOTIONER);
-
-	mCamOrders.push_back(NODE_STAGE);
-
-	mCamOrders.push_back(NODE_MOTIONER);
-	mCamOrders.push_back(NODE_COMPUTER);
-	mCamOrders.push_back(NODE_LIGHT);
-	mCamOrders.push_back(NODE_SPEAKER);
-	mCamOrders.push_back(NODE_MOTIONER);
-
-	mCamOrders.push_back(NODE_STAGE);
-
-	mCamOrders.push_back(NODE_AUDIENCE);
-	mCamOrders.push_back(NODE_COMPUTER);
-
-	// bezier line settings
+void SceneFlowChart::setupOrders()
+{
+	mOrders.clear();
 	{
-		auto p0 = mNodes.at(NODE_STAGE)->getGlobalPosition();
-		auto p1 = mNodes.at(NODE_MASTER_HAKONIWA)->getGlobalPosition();
-		p1.x += Desk::getDimension() * 0.5f;
-		p1.y += Desk::getHeight() + 50.f;
-		p1.z += Desk::getDimension() * 0.5f;
-		mPoints.push_back({p0, p1});
+		vector<int> order;
+		order.push_back(NODE_STAGE);
+		order.push_back(NODE_STAGE);
+		mOrders.push_back(order);
 	}
 	{
-		auto p0 = mNodes.at(NODE_MASTER_HAKONIWA)->getGlobalPosition();
-		p0.x += Desk::getDimension() * 0.5f;
-		p0.y += Desk::getHeight() + 50.f;
-		p0.z += Desk::getDimension() * 0.5f;
-		auto p1 = mNodes.at(NODE_COMPUTER)->getGlobalPosition();
-		p1.x += Deck::getWidth() * 0.5f;
-		p1.y += Deck::getHeight();
-		p1.z += Deck::getDepth() * 3.f * 0.5f;
-		mPoints.push_back({p0, p1});
+		vector<int> order;
+		order.push_back(NODE_MOTIONER);
+		order.push_back(NODE_COMPUTER);
+		order.push_back(NODE_DISPLAY);
+		order.push_back(NODE_DANCER);
+		mOrders.push_back(order);
 	}
 	{
-		auto p0 = mNodes.at(NODE_STAGE)->getGlobalPosition();
-		auto p1 = mNodes.at(NODE_HAKONIWA)->getGlobalPosition();
-		p1.x += NodeHakoniwa::getWidth() * 0.5f;
-		p1.y += Desk::getHeight();
-		p1.z += NodeHakoniwa::getDepth() * 0.5f;
-		mPoints.push_back({p0, p1});
+		vector<int> order;
+		order.push_back(NODE_MOTIONER);
+		order.push_back(NODE_COMPUTER);
+		order.push_back(NODE_HAKONIWA);
+		order.push_back(NODE_CAMERA_UNIT);
+		order.push_back(NODE_COMPUTER);
+		order.push_back(NODE_DISPLAY);
+		order.push_back(NODE_DANCER);
+		mOrders.push_back(order);
 	}
 	{
-		auto p0 = mNodes.at(NODE_HAKONIWA)->getGlobalPosition();
-		p0.x += Desk::getDimension() * 3 * 0.5f;
-		p0.z += Desk::getDimension() * 2 * 0.5f;
-		p0.y += Desk::getHeight();
-		auto p1 = mNodes.at(NODE_CAMERA_UNIT)->getGlobalPosition();
-		p1.x += NodeCameraUnit::getWidth() * 0.5f;
-		p1.y += NodeCameraUnit::getHeight() * 0.82f;
-		p1.z -= 10.f;
-		mPoints.push_back({p0, p1});
+		vector<int> order;
+		order.push_back(NODE_MOTIONER);
+		order.push_back(NODE_MASTER_HAKONIWA);
+		order.push_back(NODE_COMPUTER);
+		order.push_back(NODE_HAKONIWA);
+		mOrders.push_back(order);
 	}
 	{
-		auto p0 = mNodes.at(NODE_CAMERA_UNIT)->getGlobalPosition();
-		p0.x += NodeCameraUnit::getWidth() * 0.5f;
-		p0.y += NodeCameraUnit::getHeight() * 0.82f;
-		p0.z -= 10.f;
-		auto p1 = mNodes.at(NODE_COMPUTER)->getGlobalPosition();
-		p1.x += Deck::getWidth() * 0.5f;
-		p1.y += Deck::getHeight();
-		p1.z += Deck::getDepth() * 3.f * 0.5f;
-		mPoints.push_back({p0, p1});
+		vector<int> order;
+		order.push_back(NODE_AUDIENCE);
+		order.push_back(NODE_COMPUTER);
+		order.push_back(NODE_DISPLAY);
+		order.push_back(NODE_DANCER);
+		mOrders.push_back(order);
 	}
 	{
-		auto p0 = mNodes.at(NODE_COMPUTER)->getGlobalPosition();
-		p0.x += Deck::getWidth() * 0.5f;
-		p0.y += Deck::getHeight();
-		p0.z += Deck::getDepth() * 3.f * 0.5f;
-		auto p1 = mNodes.at(NODE_LIGHT)->getGlobalPosition();
-		p1.y += 800.f;
-		mPoints.push_back({p0, p1});
+		vector<int> order;
+		order.push_back(NODE_MOTIONER);
+		order.push_back(NODE_COMPUTER);
+		order.push_back(NODE_LIGHT);
+		order.push_back(NODE_DANCER);
+		mOrders.push_back(order);
 	}
 	{
-		auto p0 = mNodes.at(NODE_COMPUTER)->getGlobalPosition();
-		p0.x += Deck::getWidth() * 0.5f;
-		p0.y += Deck::getHeight();
-		p0.z += Deck::getDepth() * 3.f * 0.5f;
-
-		auto p1 = mNodes.at(NODE_SPEAKER)->getGlobalPosition();
-		p1 += NodeSpeaker::getLeft();
-		p1.x += NodeSpeaker::getWidth() * 0.6f;
-		p1.y += NodeSpeaker::getHeight() * 0.8f;
-		//p1.z += NodeSpeaker::getDepth() * 0.75f;
-		mPoints.push_back({p0, p1});
+		vector<int> order;
+		order.push_back(NODE_MOTIONER);
+		order.push_back(NODE_COMPUTER);
+		order.push_back(NODE_SPEAKER);
+		order.push_back(NODE_DANCER);
+		mOrders.push_back(order);
 	}
-
-	// main camera settings
-	mCamMainParent.setGlobalPosition(ofVec3f::zero());
-	mCamMain.setParent(mCamMainParent);
-	mCamMain.setGlobalPosition(0.f, 0.f, 1200.f);
-
-	mCamEasy.setDistance(900.f);
-
-	changeCamMode(CAM_MOVE);
-
-	setFixPosition(false);
 }
 
 void SceneFlowChart::shutDown()
 {
 	mNodes.clear();
 	mCams.clear();
-	mPoints.clear();
-	mCamOrders.clear();
+	mOrders.clear();
 }
 
 void SceneFlowChart::enter()
@@ -256,163 +235,198 @@ void SceneFlowChart::exit()
 
 void SceneFlowChart::update(ofxEventMessage& m)
 {
+	if (ofGetFrameNum() == mLastFrameNum) return;
+	mLastFrameNum = ofGetFrameNum();
+
+	mElapsedTime += ofGetLastFrameTime();
+
+	if (mElapsedTime >= kModeChangeSpan) {
+		if (mCamMode == CAM_MOVE) changeCamMode(CAM_MAIN);
+		else if (mCamMode == CAM_MAIN) changeCamMode(CAM_MOVE);
+		mElapsedTime = 0.f;
+	}
+
+	if (getNumSkeletons() >= 2) {
+		kNodeNames[NODE_DANCER] = "Dancers";
+		kNodeNames[NODE_MOTIONER] = "Motion Captures";
+	}
+	else {
+		kNodeNames[NODE_DANCER] = "Dancer";
+		kNodeNames[NODE_MOTIONER] = "Motion Capture";
+	}
+
+	// animation
+	mElapsedTimeMove += ofGetLastFrameTime();
+	if (mElapsedTimeMove >= kCamMoveSpan + kCamIdleSpan) {
+		mElapsedTimeMove = 0.f;
+		++mNodeIdx %= mOrders.at(mOrderIdx).size();
+	}
+	if (getNumSkeletons()) {
+		mNodes.at(NODE_MOTIONER)->clearAimingOffsets();
+		for (auto i : rep(getNumSkeletons())) {
+			mNodes.at(NODE_MOTIONER)->addAimingOffset(getSkeleton(i)->getJoint(ofxMot::JOINT_HIPS).getGlobalPosition());
+		}
+		mNodes.at(NODE_DANCER)->clearAimingOffsets();
+		for (auto i : rep(getNumSkeletons())) {
+			mNodes.at(NODE_DANCER)->addAimingOffset(getSkeleton(i)->getJoint(ofxMot::JOINT_HEAD).getGlobalPosition());
+			//mNodes.at(NODE_DANCER)->addAimingOffset(getSkeleton(i)->getJoint(ofxMot::JOINT_LEFT_HAND).getGlobalPosition());
+			//mNodes.at(NODE_DANCER)->addAimingOffset(getSkeleton(i)->getJoint(ofxMot::JOINT_RIGHT_HAND).getGlobalPosition());
+			//mNodes.at(NODE_DANCER)->addAimingOffset(getSkeleton(i)->getJoint(ofxMot::JOINT_LEFT_ANKLE).getGlobalPosition());
+			//mNodes.at(NODE_DANCER)->addAimingOffset(getSkeleton(i)->getJoint(ofxMot::JOINT_RIGHT_ANKLE).getGlobalPosition());
+		}
+	}
+
+	float t {ofClamp(mElapsedTimeMove, 0.f, kCamMoveSpan) / kCamMoveSpan};
+	t = easeInOutCubic(t);
+
+	// move camera
 	if (mCamMode == CAM_MOVE) {
-		// move camera
-		mElapsedTimeMove += ofGetLastFrameTime();
-		if (mElapsedTimeMove >= kCamMoveSpan + kCamIdleSpan) {
-			mElapsedTimeMove = 0.f;
-			++mCurrentCamOrderIdx %= mCamOrders.size();
-		}
-		float t {ofClamp(mElapsedTimeMove, 0.f, kCamMoveSpan) / kCamMoveSpan};
-		t = easeInOutCubic(t);
-
-		// open MacBooks
-		auto camUnit = getNode<NodeCameraUnit>(NODE_CAMERA_UNIT);
-		auto computer = getNode<NodeComputer>(NODE_COMPUTER);
-		if (getNextCamID() == NODE_CAMERA_UNIT) {
-			camUnit->macAngle = t * kMaxMacBookAngle;
-		}
-		else if (getCurrentCamID() == NODE_CAMERA_UNIT) {
-			camUnit->macAngle = (1.f - t) * kMaxMacBookAngle;
-		}
-		else {
-			camUnit->macAngle = 0.f;
-		}
-		if (getNextCamID() == NODE_COMPUTER) {
-			computer->macAngle = t * kMaxMacBookAngle;
-		}
-		else if (getCurrentCamID() == NODE_COMPUTER) {
-			computer->macAngle = (1.f - t) * kMaxMacBookAngle;
-		}
-		else {
-			computer->macAngle = 0.f;
-		}
-
-		// move camera
-		auto currCam = mCams.at(getCurrentCamID());
-		auto nextCam = mCams.at(getNextCamID());
-
-		mCurrentCam.setFov(currCam.getFov() * (1.f - t) + nextCam.getFov() * t);
-		mCurrentCam.setGlobalPosition(currCam.getGlobalPosition() * (1.f - t) + nextCam.getGlobalPosition() * t);
-		mCurrentCam.setOrientation(currCam.getOrientationEuler() * (1.f - t) + nextCam.getOrientationEuler() * t);
+		auto currCam = mCams.at(getCurrentNodeID());
+		auto nextCam = mCams.at(getNextNodeID());
 
 		for (auto i : rep(mNodes.size())) {
 			auto n = mNodes.at(i);
-			if (i == getNextCamID()) {
+			if (i == getNextNodeID()) {
 				n->t = t;
 			}
-			else if (i == getCurrentCamID()) {
+			else if (i == getCurrentNodeID()) {
 				n->t = 1.f - t;
 			}
 			else {
 				n->t = 0.f;
 			}
 		}
+		auto q0 = currCam.getGlobalOrientation();
+		auto q1 = nextCam.getGlobalOrientation();
+		ofQuaternion q;
+		q.slerp(t, q0, q1);
+		mCurrentCam.setFov(currCam.getFov() * (1.f - t) + nextCam.getFov() * t);
+		mCurrentCam.setGlobalPosition(currCam.getGlobalPosition().interpolated(nextCam.getGlobalPosition(), t));
+		mCurrentCam.setGlobalOrientation(q);
+	}
+	else if (mCamMode == CAM_MAIN) {
+		// rotate main cam
+		mElapsedTimeMainCam += ofGetLastFrameTime();
+		const float r {::cosf(mElapsedTimeMainCam * kMainCamSpeed) * 110.f};
+		mCamMainParent.setGlobalOrientation(ofQuaternion(r, ofVec3f(0.f, 1.f, 0.f)));
+
+		for (auto i : rep(mNodes.size())) {
+			if (i == NODE_LIGHT) {
+				mNodes.at(i)->t = 0.f;
+			}
+			else {
+				mNodes.at(i)->t = 1.f;
+			}
+		}
 	}
 	else {
-		// rotate main cam
-		mElapsedTimeMainCam += ofGetLastFrameTime() * 0.5f;
-		if (mCamMode == CAM_MAIN) {
-			const float r {::cosf(mElapsedTimeMainCam * kMainCamSpeed) * 110.f};
-			mCamMainParent.setGlobalOrientation(ofQuaternion(r, ofVec3f(0.f, 1.f, 0.f)));
-		}
-		mElapsedTimeLine += ofGetLastFrameTime() * 0.5f;
-
-		// change line
-		if (mElapsedTimeLine >= kLineAnimSpan) {
-			mElapsedTimeLine = 0.f;
-			++mCurrentLine %= mPoints.size();
+		for (auto i : rep(mNodes.size())) {
+			mNodes.at(i)->t = 1.f;
 		}
 	}
 }
 
 void SceneFlowChart::drawScene()
 {
-	ofCamera* camera = &mCamEasy;
+	ofCamera* camera;
 	switch (mCamMode) {
 	case CAM_MOVE: camera = &mCurrentCam; break;
 	case CAM_MAIN: camera = &mCamMain; break;
+	default:
 	case CAM_EASY: camera = &mCamEasy; break;
-	default: break;
 	}
 
 	camera->begin();
-
-	// draw nodes
 	{
-		ScopedTranslate t(0.f, kYOffset, 0.f);
+		drawStage();
+		drawCameras();
+	}
+	camera->end();
 
-		for (auto i : rep(mNodes.size())) {
-			auto n = mNodes.at(i);
-			if (i == NODE_AUDIENCE) {
-                if (getNextCamID() == NODE_AUDIENCE || (getCurrentCamID() == NODE_AUDIENCE && n->t < 1.f)) {
-                    n->draw();
-                }
-			}
-			else {
+	drawHUD();
+}
+
+void SceneFlowChart::drawStage()
+{
+	ScopedTranslate t(0.f, kYOffset, 0.f);
+	// draw nodes
+	for (auto i : rep(mNodes.size())) {
+		auto n = mNodes.at(i);
+		// only render audiences when they have been focused
+		if (i == NODE_AUDIENCE) {
+			if (getNextNodeID() == NODE_AUDIENCE || (getCurrentNodeID() == NODE_AUDIENCE && n->t < 1.f)) {
 				n->draw();
 			}
 		}
-
-		for (auto i : rep(getNumSkeletons())) {
-			auto skl = getSkeleton(i);
-			for (auto& n : skl->getJoints()) {
-				n.draw();
-				if (!n.getParent()) continue;
-				ofLine(n.getGlobalPosition(), n.getParent()->getGlobalPosition());
-			}
+		else {
+			n->draw();
 		}
+	}
+	// draw skeletons
+	for (auto i : rep(getNumSkeletons())) {
+		auto skl = getSkeleton(i);
+		for (auto& n : skl->getJoints()) {
+			n.draw();
+			if (!n.getParent()) continue;
+			ofLine(n.getGlobalPosition(), n.getParent()->getGlobalPosition());
+		}
+	}
+	// draw lines
+	{
+		ScopedStyle s;
+		setStyle();
 
-		// draw lines
-		if (mCamMode != CAM_MOVE) {
-			ScopedStyle s;
-			setStyle();
+		for (auto i : rep(mNodes.at(getCurrentNodeID())->getNumAimingPositions())) {
+			for (auto j : rep(mNodes.at(getNextNodeID())->getNumAimingPositions())) {
+				auto p0 = mNodes.at(getCurrentNodeID())->getAimingPosition(i);
+				auto p1 = mNodes.at(getNextNodeID())->getAimingPosition(j);
+				auto cp0 = p0.interpolated(p1, 0.25f);
+				auto cp1 = p0.interpolated(p1, 0.75f);
+				float height {p0.distance(p1) * 0.5f};
+				if (height < 100.f) height = 100.f;
+				cp0.y += height;
+				cp1.y += height;
 
-			auto pp = mPoints.at(mCurrentLine);
+				const int res {100};
+				ofPolyline line;
+				line.addVertex(p0);
+				line.bezierTo(cp0, cp1, p1, res);
 
-			const auto& p0 = pp.p0;
-			const auto& p1 = pp.p1;
-			auto cp0 = p0.interpolated(p1, 0.25f);
-			auto cp1 = p1.interpolated(p1, 0.75f);
-			cp0.y += 300.f;
-			cp1.y += 300.f;
+				auto v = line.getVertices();
+				float f {::fmodf(mElapsedTimeMove, kLineSpan) / kLineSpan};
+				f = ofClamp(f, 0.f, 1.f);
+				f = easeInOutQuad(f);
+				const float len {0.5f};
+				const float fb {ofMap(f, len, 1.f, 0.f, 1.f, true)};
+				const float fe {ofMap(f, 0.f, 1.f - len, 0.f, 1.f, true)};
 
-			const int res {100};
-			ofPolyline line;
-			line.addVertex(p0);
-			line.bezierTo(cp0, cp1, p1, res);
-
-			auto v = line.getVertices();
-			float f {::fmodf(mElapsedTimeLine * 2.f, kLineAnimSpan) / kLineAnimSpan};
-			f = ofClamp(f, 0.f, 1.f);
-			f = easeInOutQuad(f);
-			const float len {0.5f};
-			const float fb {ofMap(f, len, 1.f, 0.f, 1.f, true)};
-			const float fe {ofMap(f, 0.f, 1.f - len, 0.f, 1.f, true)};
-
-			ofSetColor(color::kMain);
-			for (int i = (v.size() - 1) * fb; i < (v.size() - 1) * fe; i++) {
-				ofLine(v.at(i), v.at(i + 1));
-			}
-
-			// line end circle
-			if (f >= len) {
-				ScopedStyle s;
-				ofDisableDepthTest();
-				ofEnableAlphaBlending();
-				ScopedTranslate t(v.back());
-				billboard();
-				ofFill();
 				ofSetColor(color::kMain);
-				ofCircle(ofVec3f::zero(), 6.f);
-				const float r {ofMap(f, len, 1.f, 0.f, 1.f)};
-				ofSetColor(color::kMain, 200 * (1.f - easeInExpo(r)));
-				ofCircle(ofVec3f::zero(), r * 100.f);
-				ofEnableDepthTest();
+				for (int i = (v.size() - 1) * fb; i < (v.size() - 1) * fe; i++) {
+					ofLine(v.at(i), v.at(i + 1));
+				}
+				// line end circle
+				if (f >= len) {
+					ScopedStyle s;
+					ofSetCircleResolution(64);
+					ofDisableDepthTest();
+					ofEnableAlphaBlending();
+					ScopedTranslate t(v.back());
+					billboard();
+					ofFill();
+					ofSetColor(color::kMain);
+					ofCircle(ofVec3f::zero(), 6.f);
+					const float r {ofMap(f, len, 1.f, 0.f, 1.f)};
+					ofSetColor(color::kMain, 200 * (1.f - easeInExpo(r)));
+					ofCircle(ofVec3f::zero(), r * 100.f);
+					ofEnableDepthTest();
+				}
 			}
 		}
-	} // translate(0, y offset, 0)
+	}
+}
 
+void SceneFlowChart::drawCameras()
+{
 	// debug draw cameras
 	if (mCamMode == CAM_EASY) {
 		ScopedStyle s;
@@ -424,21 +438,47 @@ void SceneFlowChart::drawScene()
 			ofDrawBox(ofVec3f(0.f, 0.f, 25.f), 20.f, 20.f, 50.f);
 			ofDrawBox(ofVec3f(0.f, 0.f, -5.f), 10.f, 10.f, 10.f);
 		}
-		ofSetColor(ofColor::blue);
-		ScopedMatrix m;
-		ofMultMatrix(mCurrentCam.getGlobalTransformMatrix());
-		ofDrawBox(ofVec3f(0.f, 0.f, 25.f), 20.f, 20.f, 50.f);
-		ofDrawBox(ofVec3f(0.f, 0.f, -5.f), 10.f, 10.f, 10.f);
+		{
+			ofSetColor(ofColor::blue);
+			ScopedMatrix m;
+			ofMultMatrix(mCurrentCam.getGlobalTransformMatrix());
+			ofDrawBox(ofVec3f(0.f, 0.f, 25.f), 20.f, 20.f, 50.f);
+			ofDrawBox(ofVec3f(0.f, 0.f, -5.f), 10.f, 10.f, 10.f);
+		}
+		{
+			ScopedStyle s;
+			ScopedTranslate t(0.f, kYOffset, 0.f);
+			ofSetColor(ofColor::yellow);
+			ofSetSphereResolution(8);
+			for (auto n : mNodes) {
+				for (auto i : rep(n->getNumAimingPositions())) {
+					ofDrawSphere(n->getAimingPosition(i), 10.f);
+				}
+			}
+		}
 	}
+}
 
-	camera->end();
-
+void SceneFlowChart::drawHUD()
+{
 	// display node name
-	if (mCamMode == CAM_MOVE && mNodes.at(getNextCamID())->t >= 1.f) {
+	if (mCamMode == CAM_MOVE && mNodes.at(getNextNodeID())->t >= 1.f) {
 		ScopedStyle s;
 		ofFill();
 		ofSetColor(ofColor::white);
-		mFont.drawString(kNodeNames[getNextCamID()], 40.f, 120.f);
+		mFont.drawString(kNodeNames[getNextNodeID()], 30.f, 120.f);
+	}
+	else if (mCamMode == CAM_MAIN) {
+		ScopedTranslate t(20.f, 80.f);
+		ScopedStyle s;
+		ofFill();
+		ofSetColor(color::kMain);
+		mFontSmall.drawString("from\nto", 0.f, 0.f);
+		ofSetColor(ofColor::white);
+		const string str0 {kNodeNames[getCurrentNodeID()]};
+		const string str1 {"\n" + kNodeNames[getNextNodeID()]};
+		mFontSmall.drawString(str0, mFontSmall.stringWidth("fromx"), 0.f);
+		mFontSmall.drawString(str1, mFontSmall.stringWidth("fromx"), 0.f);
 	}
 }
 
@@ -463,6 +503,9 @@ void SceneFlowChart::keyPressed(int key)
 	case 'q': changeCamMode(CAM_MOVE); break;
 	case 'w': changeCamMode(CAM_MAIN); break;
 	case 'e': changeCamMode(CAM_EASY); break;
+	case '+':
+		++mOrderIdx %= mOrders.size();
+		break;
 	}
 }
 
@@ -475,42 +518,27 @@ void SceneFlowChart::changeCamMode(CamMode m)
 
 	switch (m) {
 	case CAM_MOVE:
-		mCurrentCamOrderIdx = 0;
+		mNodeIdx = 0;
 		mElapsedTimeMove = 0;
-
 		break;
 	case CAM_MAIN:
 		mElapsedTimeMainCam = HALF_PI * (1.f / kMainCamSpeed);
-		mElapsedTimeLine = 0.f;
-		mCurrentLine = 0;
-		computer->macAngle = camUnit->macAngle = kMaxMacBookAngle;
-		for (auto n : mNodes) {
-			n->t = 1.f;
-		}
 		break;
-
 	case CAM_EASY:
-		mElapsedTimeLine = 0.f;
-		mCurrentLine = 0;
-		computer->macAngle = camUnit->macAngle = kMaxMacBookAngle;
-		for (auto n : mNodes) {
-			n->t = 1.f;
-		}
 		break;
-
 	default:
 		break;
 	}
 }
 
-int SceneFlowChart::getCurrentCamID() const
+int SceneFlowChart::getCurrentNodeID() const
 {
-	return mCamOrders.at(mCurrentCamOrderIdx);
+	return mOrders.at(mOrderIdx).at(mNodeIdx);
 }
 
-int SceneFlowChart::getNextCamID() const
+int SceneFlowChart::getNextNodeID() const
 {
-	return mCamOrders.at((mCurrentCamOrderIdx + 1) % mCamOrders.size());
+	return mOrders.at(mOrderIdx).at((mNodeIdx + 1) % mOrders.at(mOrderIdx).size());
 }
 
 DP_SCORE_NAMESPACE_END

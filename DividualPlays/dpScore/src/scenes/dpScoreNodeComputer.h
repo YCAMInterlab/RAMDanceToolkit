@@ -21,7 +21,11 @@ public:
     
     void customDraw() override;
     
-    float macAngle {0.f};
+    constexpr static const float kNumDecks {3};
+    constexpr static const float kNumMacBooks {8};
+    constexpr static const float kMaxMacBookAngle {110.f};
+    
+    static ofVec3f getMacBookPosition(int index);
     
 private:
     Deck mDeck;

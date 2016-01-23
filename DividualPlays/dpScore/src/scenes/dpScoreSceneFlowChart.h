@@ -24,6 +24,7 @@ class SceneFlowChart final: public SceneBodyBase<NodeSkeleton> {
 public:
 	enum NodeType {
 		NODE_MOTIONER = 0,
+        NODE_DANCER,
 		NODE_MASTER_HAKONIWA,
 		NODE_STAGE,
 		NODE_HAKONIWA,
@@ -60,32 +61,37 @@ public:
 	void keyPressed(int key) override;
 
 private:
+    void setupNodes();
+    void setupCameras();
+    void setupOrders();
+    
     void drawScene();
+    void drawStage();
+    void drawCameras();
+    void drawHUD();
     
     void changeCamMode(CamMode m);
-    int getCurrentCamID() const;
-    int getNextCamID() const;
+    int getCurrentNodeID() const;
+    int getNextNodeID() const;
     
     template <class T> ofPtr<T> getNode(int idx) { return dynamic_pointer_cast<T>(mNodes.at(idx)); }
-    
-	ofTrueTypeFont mFont;
+        
+	ofTrueTypeFont mFont, mFontSmall;
 	vector<ofPtr<BaseNode> > mNodes;
 	vector<ofCamera> mCams;
-    vector<int> mCamOrders;
+    vector<vector<int>> mOrders;
 	ofCamera mCurrentCam;
     ofCamera mCamMain;
     ofNode mCamMainParent;
 	ofEasyCam mCamEasy;
     CamMode mCamMode;
-	int mCurrentCamOrderIdx {0};
-	
-    struct PP { ofVec3f p0, p1; };
-    vector<PP> mPoints;
-    int mCurrentLine {0};
+	int mOrderIdx {2};
+    int mNodeIdx {0};
     
+    float mElapsedTime {0.f};
+    long mLastFrameNum {0};
     float mElapsedTimeMove {0.f};
     float mElapsedTimeMainCam {0.f};
-    float mElapsedTimeLine {0.f};
 };
 
 DP_SCORE_NAMESPACE_END
