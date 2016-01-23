@@ -17,69 +17,44 @@
 
 #include "testApp.h"
 
+//#include "ramEventMain.h"
+//#include "ramFilterMain.h"
+//#include "ramGraphicsMain.h"
+//#include "ramFilterMain.h"
+//#include "ramRecognizerMain.h"
 
-/*!
- Scenes
- */
-#include "MovingCam.h"
-MovingCam movingCam;
+#include "FixedBody.h"
+FixedBody mFixed;
 
-#include "LineDrawing.h"
-LineDrawing drawLines;
+#include "BrokenBody.h"
+BrokenBody mBroken;
 
-#include "BigBox.h"
-BigBox bigbox;
+#include "BurstBody.h"
+BurstBody mBurst;
 
-#include "Future.h"
-Future future;
+#include "AtractSphere.h"
+AtractSphereScene mSphere;
 
-#include "Donuts.h"
-Donuts donuts;
+#include "MoveSeparatedObjects.h"
+MoveSeparatedObjects mSep;
 
-#include "Stamp.h"
-Stamp stamp;
+#include "WeiredSpace.h"
+WeiredSpace mWeierd;
 
-#include "Expansion.h"
-Expansion expansion;
+#include "FloorLine.h"
+FloorLine mFloorLine;
 
-#include "Particles.h"
-Particles particles;
+#include "ThreePointFlow.h"
+ThreePointFlow mThree;
 
-#include "Abacus.h"
-Abacus abacus;
+#include "VectorFieldScene.h"
+VectorFieldScene mVector;
 
-#include "SoundCube.h"
-SoundCube soundcube;
+#include "WeiredSpace.h"
+WeiredSpace mWeired;
 
-#include "UpsideDown.h"
-UpsideDown upsideDown;
-
-#include "Kepler.h"
-Kepler kepler;
-
-#include "HastyChase.h"
-HastyChase hastyChase;
-
-#include "ColorGrid.h"
-ColorGrid colorGrid;
-
-#include "ThreePoints.h"
-ThreePoints threePoints;
-
-#include "FourPoints.h"
-FourPoints fourPoints;
-
-#include "Chain.h"
-Chain chain;    
-
-#include "Monster.h"
-Monster monster;
-
-#include "Laban.h"
-Laban laban;
-
-#include "Notation.h"
-Notation notation;
+#include "MoveSeparatedObjects.h"
+MoveSeparatedObjects mMoveSeparatedObject;
 
 #include "distanceMetaball.h"
 distanceMetaball distMetaball;
@@ -90,60 +65,54 @@ void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
-	
+
 	/// ram setup
 	// ------------------
-	ramInitialize(10000, true);
+	ramInitialize(10000);
+    
+    ramEnableShowActors(false);
+    
+    ramSceneManager& sceneManager = ramSceneManager::instance();
+	//sceneManager.addScene(mCube.getPtr());
+    sceneManager.addScene(mFixed.getPtr());
+    sceneManager.addScene(mBroken.getPtr());
+    sceneManager.addScene(mBurst.getPtr());
+    sceneManager.addScene(mFloorLine.getPtr());
+    //sceneManager.addScene(mMucous.getPtr());
+    sceneManager.addScene(mThree.getPtr());
+    //sceneManager.addScene(mStick.getPtr());
+   // sceneManager.addScene(mUnity.getPtr());
+    sceneManager.addScene(mVector.getPtr());
+    sceneManager.addScene(mWeired.getPtr());
+    sceneManager.addScene(mMoveSeparatedObject.getPtr());
+    //sceneManager.addScene(mSphere.getPtr());
+    
+    //sceneManager.addScene(mSep.getPtr());
+    //sceneManager.addScene(mWeierd.getPtr());
+
+
+	//Sheep
+	sceneManager.addScene(distMetaball.getPtr());
 	
-	/// scenes setup
-	// ------------------
-	ramSceneManager& sceneManager = ramSceneManager::instance();
-	sceneManager.addScene( movingCam.getPtr() );
-	sceneManager.addScene( drawLines.getPtr() );
-	sceneManager.addScene( bigbox.getPtr() );
-	sceneManager.addScene( future.getPtr() );
-	sceneManager.addScene( donuts.getPtr() );
-	sceneManager.addScene( stamp.getPtr() );
-	sceneManager.addScene( expansion.getPtr() );
-// ignore win32
-#ifndef TARGET_WIN32
-	sceneManager.addScene( particles.getPtr() );
-#endif
-	sceneManager.addScene( abacus.getPtr() );
-	sceneManager.addScene( soundcube.getPtr() );
-	sceneManager.addScene( upsideDown.getPtr() );
-	sceneManager.addScene( kepler.getPtr() );
-	sceneManager.addScene( hastyChase.getPtr() );
-	sceneManager.addScene( colorGrid.getPtr() );
-	sceneManager.addScene( threePoints.getPtr() );
-	sceneManager.addScene( fourPoints.getPtr() );
-	sceneManager.addScene( chain.getPtr() );
-	sceneManager.addScene( monster.getPtr() );
-	sceneManager.addScene( laban.getPtr() );
-	sceneManager.addScene( notation.getPtr() );
-	
-	sceneManager.addScene( distMetaball.getPtr() );
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-
+	
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	
-}
 
+}
 
 
 #pragma mark - ram methods
 //--------------------------------------------------------------
 void testApp::drawActor(const ramActor &actor)
 {
-	
 }
 
 //--------------------------------------------------------------
@@ -154,84 +123,73 @@ void testApp::drawRigid(const ramRigidBody &rigid)
 
 
 #pragma mark - ram Events
-
 //--------------------------------------------------------------
 void testApp::onActorSetup(const ramActor &actor)
 {
-
+	
 }
 
 //--------------------------------------------------------------
 void testApp::onActorExit(const ramActor &actor)
 {
-
+	
 }
 
 //--------------------------------------------------------------
 void testApp::onRigidSetup(const ramRigidBody &rigid)
 {
-
+	
 }
 
 //--------------------------------------------------------------
 void testApp::onRigidExit(const ramRigidBody &rigid)
 {
-
+	
 }
 
 
-
-#pragma mark - of Event
+#pragma mark - oF Events
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-    
 }
 
 //--------------------------------------------------------------
 void testApp::keyReleased(int key)
 {
-    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y)
 {
-    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button)
 {
-    
 }
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button)
 {
-    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button)
 {
-    
 }
 
 //--------------------------------------------------------------
 void testApp::windowResized(int w, int h)
 {
-    
 }
 
 //--------------------------------------------------------------
 void testApp::gotMessage(ofMessage msg)
 {
-    
 }
 
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo)
 {
-	
 }
