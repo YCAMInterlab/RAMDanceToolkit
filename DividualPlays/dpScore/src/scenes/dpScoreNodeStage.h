@@ -9,23 +9,27 @@
 #ifndef dpScoreNodeStage_h
 #define dpScoreNodeStage_h
 
-#include "dpScoreCommon.h"
+#include "dpScoreBaseNode.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-class NodeStage: public ofNode {
+class NodeStage: public BaseNode {
 public:
-    NodeStage();
-    virtual ~NodeStage();
-    
+	NodeStage();
+	virtual ~NodeStage();
+
 	void customDraw() override;
 
-	constexpr static const float kWidth {800.f};
-	constexpr static const float kDepth {800.f};
-	constexpr static const float kHeight {740.f};
-    constexpr static const float kScrH {kWidth * (9.f / 16.f)};
+	constexpr static float kWidth {800.f};
+	constexpr static float kDepth {800.f};
+	constexpr static float kHeight {740.f};
+	constexpr static float kScrH {kWidth * (9.f / 16.f)};
+
+	ofFbo fbo;
+	bool forFbo;
+
 private:
-    ofVbo mFloor;
+	ofVbo mFloor;
 };
 
 DP_SCORE_NAMESPACE_END

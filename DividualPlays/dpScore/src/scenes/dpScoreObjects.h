@@ -9,25 +9,24 @@
 #ifndef dpScoreObjects_h
 #define dpScoreObjects_h
 
-#include "dpScoreCommon.h"
-#include "dpScoreShared.h"
+#include "dpScoreBaseNode.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-inline void setStyle()
+inline void setStyle(const BaseNode& n)
 {
 	ofSetLineWidth(kFlowChartLineWidth);
-	if (Shared.nextFocus) {
-		ofSetColor(128 + 127 * Shared.t);
-	}
-	else if (Shared.focused) {
-		ofSetColor(128 + 127 * (1.f - Shared.t));
-	}
-	else {
-		ofSetColor(128);
-	}
+	ofSetColor(128 + 127 * n.t);
 	ofNoFill();
 	ofEnableDepthTest();
+}
+
+inline void setStyle()
+{
+    ofSetLineWidth(kFlowChartLineWidth);
+    ofSetColor(ofColor::white);
+    ofNoFill();
+    ofEnableDepthTest();
 }
 
 inline void drawBox(const ofVec3f& p, float w, float h, float d)

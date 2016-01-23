@@ -28,7 +28,7 @@ NodeCameraUnit::~NodeCameraUnit()
 void NodeCameraUnit::customDraw()
 {
 	ScopedStyle s;
-	setStyle();
+	setStyle(*this);
 	drawBox(ofVec3f::zero(), getWidth(), getHeight(), getDepth());
 
 	const float x {(getWidth() - 44.f) * 0.5f};
@@ -37,7 +37,7 @@ void NodeCameraUnit::customDraw()
 	drawBox(ofVec3f::zero(), 44.f, 5.f, -35.f);
 
 	ofTranslate((44.f - mMBP.getWidth()) * 0.5f, 5.f, -35.f);
-	mMBP.angle = Shared.macAngleCameraUnit;
+	mMBP.angle = macAngle;
 	mMBP.draw();
 }
 

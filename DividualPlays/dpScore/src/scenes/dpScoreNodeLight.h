@@ -9,12 +9,12 @@
 #ifndef dpScoreNodeLight_h
 #define dpScoreNodeLight_h
 
-#include "dpScoreCommon.h"
+#include "dpScoreBaseNode.h"
 #include "dpScoreObjects.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-class NodeLight: public ofNode {
+class NodeLight: public BaseNode {
 public:
 	NodeLight();
 	virtual ~NodeLight();

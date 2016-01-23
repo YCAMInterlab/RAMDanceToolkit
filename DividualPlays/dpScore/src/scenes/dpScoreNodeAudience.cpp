@@ -28,7 +28,7 @@ NodeAudience::~NodeAudience()
 void NodeAudience::customDraw()
 {
 	ScopedStyle s;
-	setStyle();
+	setStyle(*this);
     const float height{30.f};
     const float depth{mChair.getDepth() + 42.f};
 

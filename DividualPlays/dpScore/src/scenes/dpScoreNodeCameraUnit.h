@@ -9,12 +9,12 @@
 #ifndef dpScoreNodeCameraUnit_h
 #define dpScoreNodeCameraUnit_h
 
-#include "dpScoreCommon.h"
+#include "dpScoreBaseNode.h"
 #include "dpScoreObjects.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-class NodeCameraUnit: public ofNode {
+class NodeCameraUnit: public BaseNode {
 public:
     NodeCameraUnit();
     virtual ~NodeCameraUnit();
@@ -32,6 +32,8 @@ public:
     {
         return 61.f;
     }
+    
+    float macAngle {0.f};
     
 private:
     MacBook mMBP;

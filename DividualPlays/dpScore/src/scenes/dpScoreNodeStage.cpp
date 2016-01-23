@@ -10,7 +10,6 @@
 #include "dpScoreNodeStage.h"
 #include "dpScoreScoped.h"
 #include "dpScoreToolBox.h"
-#include "dpScoreShared.h"
 #include "dpScoreObjects.h"
 
 DP_SCORE_NAMESPACE_BEGIN
@@ -47,6 +46,8 @@ NodeStage::NodeStage()
 
 	mFloor.setVertexData(&vertices.front(), vertices.size(), GL_STATIC_DRAW);
 	mFloor.setIndexData(&indices.front(), indices.size(), GL_STATIC_DRAW);
+
+	fbo.allocate(kWidth, kScrH, GL_RGBA16);
 }
 
 NodeStage::~NodeStage()
@@ -57,15 +58,15 @@ NodeStage::~NodeStage()
 void NodeStage::customDraw()
 {
 	ScopedStyle s;
-	setStyle();
+	setStyle(*this);
 	ofSetRectMode(OF_RECTMODE_CENTER);
 
-	if (!Shared.forFbo) {
+	if (!forFbo) {
 		ScopedStyle s;
 		ScopedTranslate t(0.f, kHeight - kScrH, -kDepth * 0.5f - 300.f);
 		ofFill();
 		ofSetColor(128);
-		Shared.fbo.draw(0.f, 0.f, kWidth, kScrH);
+		fbo.draw(0.f, 0.f, kWidth, kScrH);
 
 	}
 	ofRect(ofVec3f(0.f, kHeight - kScrH, -kDepth * 0.5f - 300.f), kWidth, kScrH);

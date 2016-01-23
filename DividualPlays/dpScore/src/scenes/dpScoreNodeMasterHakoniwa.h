@@ -9,12 +9,12 @@
 #ifndef dpScoreNodeMasterHakoniwa_h
 #define dpScoreNodeMasterHakoniwa_h
 
-#include "dpScoreCommon.h"
+#include "dpScoreBaseNode.h"
 #include "dpScoreObjects.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-class NodeMasterHakoniwa: public ofNode {
+class NodeMasterHakoniwa: public BaseNode {
 public:
     NodeMasterHakoniwa();
     virtual ~NodeMasterHakoniwa();

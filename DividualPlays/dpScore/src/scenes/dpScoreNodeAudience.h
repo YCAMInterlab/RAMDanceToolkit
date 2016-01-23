@@ -9,12 +9,12 @@
 #ifndef dpScoreNodeAudience_h
 #define dpScoreNodeAudience_h
 
-#include "dpScoreCommon.h"
+#include "dpScoreBaseNode.h"
 #include "dpScoreObjects.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-class NodeAudience: public ofNode {
+class NodeAudience: public BaseNode {
 public:
     NodeAudience();
     virtual ~NodeAudience();

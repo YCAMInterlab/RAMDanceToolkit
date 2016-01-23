@@ -9,11 +9,18 @@
 #ifndef dpScoreSceneFlowChart_h
 #define dpScoreSceneFlowChart_h
 
-#include "dpScoreSceneBase.h"
+#include "dpScoreSceneBodyBase.h"
+#include "dpScoreBaseNode.h"
+#include "ofxMotioner.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-class SceneFlowChart final: public SceneBase {
+class NodeSkeleton : public ofxMot::Node {
+public:
+    void customDraw() override;
+};
+
+class SceneFlowChart final: public SceneBodyBase<NodeSkeleton> {
 public:
 	enum NodeType {
 		NODE_MOTIONER = 0,
@@ -53,12 +60,16 @@ public:
 	void keyPressed(int key) override;
 
 private:
+    void drawScene();
+    
     void changeCamMode(CamMode m);
     int getCurrentCamID() const;
     int getNextCamID() const;
     
+    template <class T> ofPtr<T> getNode(int idx) { return dynamic_pointer_cast<T>(mNodes.at(idx)); }
+    
 	ofTrueTypeFont mFont;
-	vector<ofPtr<ofNode> > mNodes;
+	vector<ofPtr<BaseNode> > mNodes;
 	vector<ofCamera> mCams;
     vector<int> mCamOrders;
 	ofCamera mCurrentCam;
