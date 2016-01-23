@@ -9,19 +9,19 @@
 #ifndef dpScoreNodeDisplay_h
 #define dpScoreNodeDisplay_h
 
-#include "dpScoreCommon.h"
+#include "dpScoreBaseNode.h"
 #include "dpScoreObjects.h"
 
 
 DP_SCORE_NAMESPACE_BEGIN
 
-class NodeDisplay: public ofNode {
+class NodeDisplay: public BaseNode {
 public:
-    NodeDisplay();
-    virtual ~NodeDisplay();
-    
-    void customDraw() override;
-    
+	NodeDisplay();
+	virtual ~NodeDisplay();
+
+	void customDraw() override;
+
 private:
 
 };

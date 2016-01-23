@@ -56,6 +56,8 @@ WeiredSpace mWeired;
 #include "MoveSeparatedObjects.h"
 MoveSeparatedObjects mMoveSeparatedObject;
 
+#include "distanceMetaball.h"
+distanceMetaball distMetaball;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -87,6 +89,11 @@ void testApp::setup()
     
     //sceneManager.addScene(mSep.getPtr());
     //sceneManager.addScene(mWeierd.getPtr());
+
+
+	//Sheep
+	sceneManager.addScene(distMetaball.getPtr());
+	
 }
 
 //--------------------------------------------------------------

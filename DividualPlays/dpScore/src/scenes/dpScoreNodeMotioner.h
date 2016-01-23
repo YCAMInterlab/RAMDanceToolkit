@@ -9,13 +9,12 @@
 #ifndef dpScoreNodeMotioner_h
 #define dpScoreNodeMotioner_h
 
-#include "dpScoreCommon.h"
+#include "dpScoreBaseNode.h"
 #include "dpScoreObjects.h"
-#include "ofxMotioner.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-class NodeMotioner: public ofNode {
+class NodeMotioner: public BaseNode {
 public:
     NodeMotioner();
     virtual ~NodeMotioner();

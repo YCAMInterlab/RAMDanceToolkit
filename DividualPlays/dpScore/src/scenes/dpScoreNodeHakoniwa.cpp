@@ -26,7 +26,7 @@ NodeHakoniwa::~NodeHakoniwa()
 void NodeHakoniwa::customDraw()
 {
     ScopedStyle s;
-    setStyle();
+    setStyle(*this);
 	for (auto i : rep(kNumX)) {
 		for (auto j : rep(kNumY)) {
 			ScopedTranslate t(i * mDesk.getDimension(), 0.f, j * (mDesk.getDimension() + 90.f));

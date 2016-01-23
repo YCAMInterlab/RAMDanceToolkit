@@ -13,6 +13,9 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
+#pragma mark CounterIterator
+#pragma mark ___________________________________________________________________
+
 template<typename T>
 class CounterIterator {
 public:
@@ -78,6 +81,37 @@ inline
 Loop<size_t> operator "" _s(unsigned long long int n)
 {
     return Loop<size_t>(static_cast<size_t>(n));
+}
+
+#pragma mark MultiFlags
+#pragma mark ___________________________________________________________________
+
+template <typename Flags, typename T = int>
+class MultiFlags {
+public:
+    bool isEnable(Flags flag) const;
+    void enable(Flags flag);
+    void disable(Flags flag);
+private:
+    T mFlags;
+};
+
+template <typename Flags, typename T>
+bool MultiFlags<Flags, T>::isEnable(Flags flag) const
+{
+    return ((mFlags & flag) == flag);
+}
+
+template <typename Flags, typename T>
+void MultiFlags<Flags, T>::enable(Flags flag)
+{
+    mFlags |= flag;
+}
+
+template <typename Flags, typename T>
+void MultiFlags<Flags, T>::disable(Flags flag)
+{
+    mFlags ^= (mFlags & flag);
 }
 
 DP_SCORE_NAMESPACE_END

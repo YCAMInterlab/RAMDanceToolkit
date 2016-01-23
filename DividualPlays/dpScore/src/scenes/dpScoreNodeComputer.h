@@ -9,17 +9,19 @@
 #ifndef dpScoreNodeComputer_h
 #define dpScoreNodeComputer_h
 
-#include "dpScoreCommon.h"
+#include "dpScoreBaseNode.h"
 #include "dpScoreObjects.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-class NodeComputer: public ofNode {
+class NodeComputer: public BaseNode {
 public:
     NodeComputer();
     virtual ~NodeComputer();
     
     void customDraw() override;
+    
+    float macAngle {0.f};
     
 private:
     Deck mDeck;

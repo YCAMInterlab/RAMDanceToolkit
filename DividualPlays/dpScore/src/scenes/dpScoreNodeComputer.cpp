@@ -28,7 +28,7 @@ NodeComputer::~NodeComputer()
 void NodeComputer::customDraw()
 {
 	ScopedStyle s;
-	setStyle();
+	setStyle(*this);
 
 	const int nX {3};
 	for (auto i : rep(nX)) {
@@ -41,7 +41,7 @@ void NodeComputer::customDraw()
 	for (auto i : rep(nPCs)) {
 		ScopedTranslate t(mDeck.getWidth() * 0.2f, mDeck.getHeight(), step * 0.5f + i * step + mMBP.getWidth() * 0.5f);
 		ScopedRotateY ry(90.f);
-		mMBP.angle = Shared.macAngleComputers;
+        mMBP.angle = macAngle;
 		mMBP.draw();
 	}
 

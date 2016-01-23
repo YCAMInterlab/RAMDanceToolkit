@@ -28,7 +28,7 @@ NodeLight::~NodeLight()
 void NodeLight::customDraw()
 {
 	ScopedStyle s;
-	setStyle();
+	setStyle(*this);
 
 	ScopedTranslate t(0.f, getHeight(), 0.f);
     const int nX{8}, nZ{3};

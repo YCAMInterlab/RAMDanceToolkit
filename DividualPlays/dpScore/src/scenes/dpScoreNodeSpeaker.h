@@ -9,12 +9,12 @@
 #ifndef dpScoreNodeSpeaker_h
 #define dpScoreNodeSpeaker_h
 
-#include "dpScoreCommon.h"
+#include "dpScoreBaseNode.h"
 #include "dpScoreObjects.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-class NodeSpeaker: public ofNode {
+class NodeSpeaker: public BaseNode {
 public:
     NodeSpeaker();
     virtual ~NodeSpeaker();

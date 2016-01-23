@@ -26,11 +26,7 @@ NodeMotioner::~NodeMotioner()
 
 void NodeMotioner::customDraw()
 {
-	ScopedStyle s;
-	setStyle();
 
-	auto skl = ofxMot::SkeletonBase<ofxMot::Node>::create();
-	ofxMotioner::drawSkeleton(skl);
 }
 
 DP_SCORE_NAMESPACE_END

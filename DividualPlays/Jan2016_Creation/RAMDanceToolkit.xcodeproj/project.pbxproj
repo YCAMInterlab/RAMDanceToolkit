@@ -14,6 +14,9 @@
 		928B4A321C531B24007B9F60 /* MoveSeparatedObjects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 928B4A2A1C531B24007B9F60 /* MoveSeparatedObjects.cpp */; };
 		928B4A331C531B24007B9F60 /* WeiredSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 928B4A2C1C531B24007B9F60 /* WeiredSpace.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		C6C22EC51C5339BE002B38EC /* distanceMetaball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22EBC1C5339BE002B38EC /* distanceMetaball.cpp */; settings = {ASSET_TAGS = (); }; };
+		C6C22EC61C5339BE002B38EC /* MarchingCubes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22EC01C5339BE002B38EC /* MarchingCubes.cpp */; settings = {ASSET_TAGS = (); }; };
+		C6C22EC71C5339BE002B38EC /* MarchingTetrahedrons.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22EC21C5339BE002B38EC /* MarchingTetrahedrons.cpp */; settings = {ASSET_TAGS = (); }; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -111,6 +114,13 @@
 		928B4A2E1C531B24007B9F60 /* ThreePointFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreePointFlow.h; sourceTree = "<group>"; };
 		928B4A2F1C531B24007B9F60 /* VectorFieldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VectorFieldScene.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		C6C22EBC1C5339BE002B38EC /* distanceMetaball.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = distanceMetaball.cpp; sourceTree = "<group>"; };
+		C6C22EBD1C5339BE002B38EC /* distanceMetaball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = distanceMetaball.h; sourceTree = "<group>"; };
+		C6C22EC01C5339BE002B38EC /* MarchingCubes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarchingCubes.cpp; sourceTree = "<group>"; };
+		C6C22EC11C5339BE002B38EC /* MarchingCubes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarchingCubes.h; sourceTree = "<group>"; };
+		C6C22EC21C5339BE002B38EC /* MarchingTetrahedrons.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MarchingTetrahedrons.cpp; sourceTree = "<group>"; };
+		C6C22EC31C5339BE002B38EC /* MarchingTetrahedrons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarchingTetrahedrons.h; sourceTree = "<group>"; };
+		C6C22EC41C5339BE002B38EC /* ofxMetaballs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMetaballs.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -250,6 +260,44 @@
 			name = "3rd party frameworks";
 			sourceTree = "<group>";
 		};
+		C6C22EBA1C5339BE002B38EC /* sheep */ = {
+			isa = PBXGroup;
+			children = (
+				C6C22EBB1C5339BE002B38EC /* distanceMetaball */,
+			);
+			path = sheep;
+			sourceTree = "<group>";
+		};
+		C6C22EBB1C5339BE002B38EC /* distanceMetaball */ = {
+			isa = PBXGroup;
+			children = (
+				C6C22EBC1C5339BE002B38EC /* distanceMetaball.cpp */,
+				C6C22EBD1C5339BE002B38EC /* distanceMetaball.h */,
+				C6C22EBE1C5339BE002B38EC /* ofxMetaballs */,
+			);
+			path = distanceMetaball;
+			sourceTree = "<group>";
+		};
+		C6C22EBE1C5339BE002B38EC /* ofxMetaballs */ = {
+			isa = PBXGroup;
+			children = (
+				C6C22EBF1C5339BE002B38EC /* src */,
+			);
+			path = ofxMetaballs;
+			sourceTree = "<group>";
+		};
+		C6C22EBF1C5339BE002B38EC /* src */ = {
+			isa = PBXGroup;
+			children = (
+				C6C22EC01C5339BE002B38EC /* MarchingCubes.cpp */,
+				C6C22EC11C5339BE002B38EC /* MarchingCubes.h */,
+				C6C22EC21C5339BE002B38EC /* MarchingTetrahedrons.cpp */,
+				C6C22EC31C5339BE002B38EC /* MarchingTetrahedrons.h */,
+				C6C22EC41C5339BE002B38EC /* ofxMetaballs.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		E4328144138ABC890047C5CB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,6 +341,7 @@
 				928B4A1F1C531B24007B9F60 /* FloorLine.h */,
 				928B4A211C531B24007B9F60 /* kez_util */,
 				928B4A291C531B24007B9F60 /* onc */,
+				C6C22EBA1C5339BE002B38EC /* sheep */,
 				928B4A2E1C531B24007B9F60 /* ThreePointFlow.h */,
 				928B4A2F1C531B24007B9F60 /* VectorFieldScene.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
@@ -411,11 +460,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6C22EC51C5339BE002B38EC /* distanceMetaball.cpp in Sources */,
 				928B4A331C531B24007B9F60 /* WeiredSpace.cpp in Sources */,
 				928B4A301C531B24007B9F60 /* VectorField.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
+				C6C22EC61C5339BE002B38EC /* MarchingCubes.cpp in Sources */,
 				928B4A311C531B24007B9F60 /* VFParticle.cpp in Sources */,
+				C6C22EC71C5339BE002B38EC /* MarchingTetrahedrons.cpp in Sources */,
 				928B4A321C531B24007B9F60 /* MoveSeparatedObjects.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -28,7 +28,7 @@ NodeSpeaker::~NodeSpeaker()
 void NodeSpeaker::customDraw()
 {
 	ScopedStyle s;
-	setStyle();
+	setStyle(*this);
 
 	const float tx {(getWidth() - 35.f) * 0.5f};
     auto drawSpeakers = [&](){

@@ -26,7 +26,7 @@ NodeMasterHakoniwa::~NodeMasterHakoniwa()
 void NodeMasterHakoniwa::customDraw()
 {
 	ScopedStyle s;
-	setStyle();
+	setStyle(*this);
 
 	mDesk.draw();
 
