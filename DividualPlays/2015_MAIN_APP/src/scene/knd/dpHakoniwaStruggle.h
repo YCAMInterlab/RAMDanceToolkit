@@ -136,6 +136,8 @@ public:
         mVibeFromActor.update();
         mSmoothedVibeVal.update();
         
+        if(ofGetFrameNum() % 60 == 0)mMotorDir = (int)ofRandom(0,2);
+        
     }
     
     void sendOsc(float vibeVal){
