@@ -74,7 +74,6 @@ protected:
 	
 private:
     void updateOsc();
-    void updateVideoGrabbers();
     
 	static ramSceneManager *_instance;
 	ramSceneManager();

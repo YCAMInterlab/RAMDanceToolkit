@@ -68,6 +68,8 @@
 
 #include "DoSomething.h"
 
+#include "dpSyphonClientManager.h"
+
 class testApp : public ramBaseApp
 {
 public:
@@ -163,5 +165,7 @@ public:
     Future     future;
     
     DoSomething doSomething;
+    
+    dpSyphonClientManager *mSyphonClientManager;
     
 };
