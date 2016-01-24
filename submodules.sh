@@ -87,6 +87,12 @@ else
 	git checkout 392d243
 	cd ../
 
+	# ofxTrueTypeFontUC
+	git clone https://github.com/hironishihara/ofxTrueTypeFontUC
+	cd ofxMotioner
+	git checkout 8be85818
+	cd ../	
+
 	echo "end clone addons"
 	cd ../
 fi
