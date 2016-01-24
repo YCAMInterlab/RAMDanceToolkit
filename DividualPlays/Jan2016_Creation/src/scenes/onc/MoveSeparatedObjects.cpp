@@ -46,13 +46,13 @@ void MoveSeparatedObjects::draw()
     ofSetColor(255);
     
     ofLine(pos0B, ofVec3f(pos0B.x, 600, pos0B.z));
-    ofDrawBox(pos0B, 20.0);
+    ofDrawBox(pos0B, 60.0);
     
     ofLine(pos1B, ofVec3f(600, pos1B.y, pos1B.z));
-    ofDrawBox(pos1B, 20.0);
+    ofDrawBox(pos1B, 60.0);
     
     ofLine(pos2B, ofVec3f(pos2B.x, pos2B.y, 600));
-    ofDrawBox(pos2B, 20.0);
+    ofDrawBox(pos2B, 60.0);
     
     ramEndCamera();
 }
