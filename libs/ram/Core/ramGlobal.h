@@ -23,6 +23,9 @@
 #include "ramCameraManager.h"
 #include "ramCommunicationManager.h"
 #include "ramOscManager.h"
+
+#include "dpVideoGrabberManager.h"
+
 //#include "ramSceneManager.h"
 
 class ramGlobalShortcut
@@ -37,7 +40,10 @@ public:
     const ramCommunicationManager& getCommunicationManager() const;
 	ramOscManager& getOscManager();
     const ramOscManager& getOscManager() const;
-
+    
+    dpVideoGrabberManager &getVideoGrabberManager();
+    const dpVideoGrabberManager& getVideoGrabberManager() const;
+    
 	const vector<string>& getNodeArrayNames() const;
 	bool hasNodeArray(const string& key) const;
 	ramNodeArray& getNodeArray(const string& name);

@@ -104,6 +104,16 @@ MoveSeparatedObjects mMoveSeparatedObject;
 #include "distanceMetaball.h"
 distanceMetaball mDistanceMetaball;
 
+#include "middleScene.h"
+MiddleScene mMiddleScene;
+
+#include "MixMonsterScene.h"
+MixMonsterScene mMixMonsterScene;
+
+/* ==== Legacy external ==== */
+#include "lineDrawing_ext.h"
+LineDrawing_ext mLine_ext;
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -151,6 +161,12 @@ void testApp::setup()
 	//Sheep
 	sceneManager.addScene(mDistanceMetaball.getPtr());
 
+	//Kumagai
+	sceneManager.addScene(mMiddleScene.getPtr());
+	sceneManager.addScene(mMixMonsterScene.getPtr());
+	
+	sceneManager.addScene(mLine_ext.getPtr());
+	
 	/*
 	sceneManager.addScene(mCube.getPtr());
 	sceneManager.addScene(mMucous.getPtr());
