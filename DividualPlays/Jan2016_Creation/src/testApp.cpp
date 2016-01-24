@@ -114,6 +114,9 @@ MixMonsterScene mMixMonsterScene;
 #include "lineDrawing_ext.h"
 LineDrawing_ext mLine_ext;
 
+#include "dp16_camera_controller.h"
+dp16_camera_controller mCameraController;
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -167,6 +170,7 @@ void testApp::setup()
 	
 	sceneManager.addScene(mLine_ext.getPtr());
 	
+	sceneManager.addScene(mCameraController.getPtr());
 	/*
 	sceneManager.addScene(mCube.getPtr());
 	sceneManager.addScene(mMucous.getPtr());
