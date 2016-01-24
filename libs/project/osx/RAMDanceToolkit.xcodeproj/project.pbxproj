@@ -186,6 +186,8 @@
 		9258726B1A4D6CC800483FE3 /* ofxDelaunay.h in Headers */ = {isa = PBXBuildFile; fileRef = 9258724D1A4D6CC800483FE3 /* ofxDelaunay.h */; };
 		9258726F1A4D6CC800483FE3 /* ofxQuadWarp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 925872621A4D6CC800483FE3 /* ofxQuadWarp.cpp */; };
 		925872701A4D6CC800483FE3 /* ofxQuadWarp.h in Headers */ = {isa = PBXBuildFile; fileRef = 925872631A4D6CC800483FE3 /* ofxQuadWarp.h */; };
+		92A2A3951C546FD700A119F4 /* dpVideoGrabberManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 92A2A3941C546FD700A119F4 /* dpVideoGrabberManager.h */; };
+		92A2A3971C546FE600A119F4 /* dpVideoGrabberManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92A2A3961C546FE600A119F4 /* dpVideoGrabberManager.cpp */; };
 		92AD8C271A7252E000BB5434 /* ramCenteredActor.h in Headers */ = {isa = PBXBuildFile; fileRef = 92AD8C261A7252E000BB5434 /* ramCenteredActor.h */; };
 		92B212B31A63C650001C84FD /* dpConstants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92B212B21A63C650001C84FD /* dpConstants.cpp */; };
 		92E3F0F41A7A1ACC00201588 /* ramFloorQuadWarper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F0F21A7A1ACC00201588 /* ramFloorQuadWarper.cpp */; };
@@ -793,6 +795,8 @@
 		925872621A4D6CC800483FE3 /* ofxQuadWarp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxQuadWarp.cpp; sourceTree = "<group>"; };
 		925872631A4D6CC800483FE3 /* ofxQuadWarp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxQuadWarp.h; sourceTree = "<group>"; };
 		925872641A4D6CC800483FE3 /* TODO.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.md; sourceTree = "<group>"; };
+		92A2A3941C546FD700A119F4 /* dpVideoGrabberManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpVideoGrabberManager.h; sourceTree = "<group>"; };
+		92A2A3961C546FE600A119F4 /* dpVideoGrabberManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpVideoGrabberManager.cpp; sourceTree = "<group>"; };
 		92AD8C261A7252E000BB5434 /* ramCenteredActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramCenteredActor.h; sourceTree = "<group>"; };
 		92B212B21A63C650001C84FD /* dpConstants.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpConstants.cpp; sourceTree = "<group>"; };
 		92E3F0F21A7A1ACC00201588 /* ramFloorQuadWarper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramFloorQuadWarper.cpp; sourceTree = "<group>"; };
@@ -2622,6 +2626,8 @@
 		D2B4FD271A62211B00C97A66 /* dp */ = {
 			isa = PBXGroup;
 			children = (
+				92A2A3941C546FD700A119F4 /* dpVideoGrabberManager.h */,
+				92A2A3961C546FE600A119F4 /* dpVideoGrabberManager.cpp */,
 				92E3F0F11A7A1ACC00201588 /* ramFloorQuadWarper */,
 				D2B4FD281A62211B00C97A66 /* dpConstants.h */,
 				92B212B21A63C650001C84FD /* dpConstants.cpp */,
@@ -2656,6 +2662,7 @@
 				600EFB2916C8F56800A5B331 /* OscPacketListener.h in Headers */,
 				600EFB2B16C8F56800A5B331 /* OscPrintReceivedElements.h in Headers */,
 				9248D5FB1A4D6A1200047AF5 /* ofxCvShortImage.h in Headers */,
+				92A2A3951C546FD700A119F4 /* dpVideoGrabberManager.h in Headers */,
 				600EFB2D16C8F56800A5B331 /* OscReceivedElements.h in Headers */,
 				D21D083B1A4BD9A900CC3598 /* ofxUIRangeSlider.h in Headers */,
 				C6403A541A7F743C002009ED /* ofxCv.h in Headers */,
@@ -3160,6 +3167,7 @@
 				600EFB2316C8F56800A5B331 /* UdpSocketWin.cpp in Sources */,
 				9AEA65B5191CB63D001FAA18 /* ramActorManager.cpp in Sources */,
 				C6403A501A7F743C002009ED /* Utilities.cpp in Sources */,
+				92A2A3971C546FE600A119F4 /* dpVideoGrabberManager.cpp in Sources */,
 				D21D08081A4BD9A900CC3598 /* ofxUIBaseDraws.cpp in Sources */,
 				600EFB2716C8F56800A5B331 /* OscOutboundPacketStream.cpp in Sources */,
 				D21D08401A4BD9A900CC3598 /* ofxUIScrollableCanvas.cpp in Sources */,

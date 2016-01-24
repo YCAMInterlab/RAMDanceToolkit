@@ -147,6 +147,7 @@ bool ramSceneManager::getShowAllActors() const
 void ramSceneManager::update(ofEventArgs& args)
 {
     updateOsc();
+    updateVideoGrabbers();
     
 	for (int i = 0; i < scenes.size(); i++)
 	{
@@ -203,6 +204,10 @@ void ramSceneManager::updateOsc()
             ofLogError("ramSceneManager") << e.what();
         }
     }
+}
+
+void ramSceneManager::updateVideoGrabbers(){
+    getVideoGrabberManager().update();
 }
 
 void ramSceneManager::draw(ofEventArgs& args)
