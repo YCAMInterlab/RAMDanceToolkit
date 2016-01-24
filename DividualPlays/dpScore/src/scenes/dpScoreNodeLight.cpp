@@ -19,6 +19,10 @@ NodeLight::NodeLight()
 {
     setGlobalPosition(0.f, getHeight(), 0.f);
     addAimingOffset(ofVec3f::zero());
+    
+    getCamera().setFov(50.f);
+    getCamera().setPosition(0.f, 400.f, 500.f);
+    getCamera().setOrientation(ofVec3f(15.f, 0.f, 0.f));
 }
 
 NodeLight::~NodeLight()

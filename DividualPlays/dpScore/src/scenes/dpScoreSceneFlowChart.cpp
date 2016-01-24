@@ -7,9 +7,6 @@
 //
 
 /*
-   三人称
-   日本語
-   ハメコミ
    箱庭フォーカス
  */
 
@@ -27,6 +24,7 @@
 #include "dpScoreNodeComputer.h"
 #include "dpScoreScoped.h"
 #include "dpScoreToolBox.h"
+#include "dpScoreText.h"
 
 #pragma mark ___________________________________________________________________
 
@@ -43,12 +41,54 @@ static string kNodeNames[] = {
 	"Master Hakoniwa",
 	"",
 	"Hakoniwa x 6",
-	"Hakoniwa Analisis",
+	"Hakoniwa Analysis",
 	"Displays",
 	"Speakers",
 	"Lights",
 	"RAM Dance Toolkit",
 	"Audiences",
+};
+
+static string kNodeNamesJP[] = {
+	"モーションキャプチャでダンサーの動きをコンピュータに取り込む",
+	"ダンサー",
+	"マスター箱庭（ダンサーの動きで舞台の進行を管理）",
+	"",
+	"ダンサーの動きによって現在選択されている箱庭の状態が変化",
+	"箱庭の状態を映像解析",
+	"ディスプレイにツールキットで生成したダンサーへの情報を表示",
+	"音響",
+	"照明",
+	"取り込んだダンサー・箱庭の情報を変換、加工、増幅する",
+	"観客",
+};
+
+static string kNodeNamesFromJP[] = {
+	"モーションキャプチャ",
+	"ダンサー",
+	"マスター箱庭",
+	"",
+	"箱庭",
+	"映像解析",
+	"ディスプレイ",
+	"音響",
+	"照明",
+	"RAM Dance Toolkit",
+	"観客",
+};
+
+static string kNodeNamesToJP[] = {
+	"モーションキャプチャ",
+	"ダンサー",
+	"マスター箱庭",
+	"",
+	"箱庭",
+	"映像解析",
+	"ディスプレイ",
+	"音響",
+	"照明",
+	"RAM Dance Toolkit",
+	"観客",
 };
 
 DP_SCORE_NAMESPACE_BEGIN
@@ -68,9 +108,9 @@ void SceneFlowChart::initialize()
 
 	mFont.loadFont(kFontPath, 80.f);
 	mFontSmall.loadFont(kFontPath, 40.f);
+	mFontJP.loadFont(kFontPathJP, 24.f, true, true);
 
 	setupNodes();
-	setupCameras();
 	setupOrders();
 
 	// main camera settings
@@ -78,7 +118,13 @@ void SceneFlowChart::initialize()
 	mCamMain.setParent(mCamMainParent);
 	mCamMain.setGlobalPosition(0.f, 0.f, 1200.f);
 
+	mCamTPS.setParent(mCamTPSParent);
+	mCamTPS.setGlobalPosition(0.f, 0.f, 200.f);
+
 	mCamEasy.setDistance(900.f);
+
+	mCamToolKit.setGlobalPosition(0.f, 200.f, 500.f);
+	mCamToolKit.setFarClip(1000.f);
 
 	changeCamMode(CAM_MOVE);
 }
@@ -110,55 +156,6 @@ void SceneFlowChart::setupNodes()
 	mNodes.push_back(light);
 	mNodes.push_back(computer);
 	mNodes.push_back(audience);
-}
-
-void SceneFlowChart::setupCameras()
-{
-	// moving camera settings
-	mCams.assign(mNodes.size(), ofCamera());
-
-	mCams.at(NODE_MASTER_HAKONIWA).setFov(45.f);
-	mCams.at(NODE_MASTER_HAKONIWA).setPosition(NodeStage::kWidth * 0.5f + Desk::getDimension() * 0.5f + 50.f, -75.f, 550.f);
-
-	mCams.at(NODE_STAGE).setFov(45.f);
-	mCams.at(NODE_STAGE).setPosition(-40.f, 400.f, 1550.f);
-	mCams.at(NODE_STAGE).setOrientation(ofVec3f(-10.f, 0.f, 0.f));
-
-	mCams.at(NODE_HAKONIWA).setFov(60.f);
-	mCams.at(NODE_HAKONIWA).setPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() * 0.5f - 50.f, 50.f, 550.f);
-	mCams.at(NODE_HAKONIWA).setOrientation(ofVec3f(-25.f, 0.f, 0.f));
-
-	mCams.at(NODE_CAMERA_UNIT).setFov(35.f);
-	mCams.at(NODE_CAMERA_UNIT).setPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 300.f, 0.f, -50.f);
-	mCams.at(NODE_CAMERA_UNIT).setOrientation(ofVec3f(-30.f, 180.f + 30.f, 0.f));
-
-	mCams.at(NODE_DISPLAY).setFov(35.f);
-	mCams.at(NODE_DISPLAY).setPosition(-NodeStage::kWidth * 0.5f + 80.f, 70.f, 200.f);
-	mCams.at(NODE_DISPLAY).setOrientation(ofVec3f(0.f, 150.f, 0.f));
-
-	mCams.at(NODE_MOTIONER).setFov(70.f);
-	mCams.at(NODE_MOTIONER).setPosition(0.f, 200.f, 400.f);
-	mCams.at(NODE_MOTIONER).setOrientation(ofVec3f(-30.f, 0.f, 0.f));
-
-	mCams.at(NODE_DANCER).setFov(50.f);
-	mCams.at(NODE_DANCER).setPosition(0.f, 200.f, 800.f);
-	mCams.at(NODE_DANCER).setOrientation(ofVec3f(-20.f, 0.f, 0.f));
-
-	mCams.at(NODE_SPEAKER).setFov(55.f);
-	mCams.at(NODE_SPEAKER).setPosition(NodeStage::kWidth * 0.5f + Desk::getDimension() * 0.5f + 50.f - 40.f, -100.f, 600.f);
-	mCams.at(NODE_SPEAKER).setOrientation(ofVec3f(0.f, -45.f, 0.f));
-
-	mCams.at(NODE_LIGHT).setFov(50.f);
-	mCams.at(NODE_LIGHT).setPosition(0.f, 400.f, 500.f);
-	mCams.at(NODE_LIGHT).setOrientation(ofVec3f(15.f, 0.f, 0.f));
-
-	mCams.at(NODE_COMPUTER).setFov(60.f);
-	mCams.at(NODE_COMPUTER).setPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 400.f, 0.f, -190.f);
-	mCams.at(NODE_COMPUTER).setOrientation(ofVec3f(-20.f, -90.f, 0.f));
-
-	mCams.at(NODE_AUDIENCE).setFov(80.f);
-	mCams.at(NODE_AUDIENCE).setPosition(0.f, 100.f, 650.f);
-	mCams.at(NODE_AUDIENCE).setOrientation(ofVec3f(-30.f, 180.f, 0.f));
 }
 
 void SceneFlowChart::setupOrders()
@@ -226,7 +223,6 @@ void SceneFlowChart::setupOrders()
 void SceneFlowChart::shutDown()
 {
 	mNodes.clear();
-	mCams.clear();
 	mOrders.clear();
 }
 
@@ -247,7 +243,8 @@ void SceneFlowChart::update(ofxEventMessage& m)
 
 	if (mElapsedTime >= kModeChangeSpan) {
 		if (mCamMode == CAM_MOVE) changeCamMode(CAM_MAIN);
-		else if (mCamMode == CAM_MAIN) changeCamMode(CAM_MOVE);
+		else if (mCamMode == CAM_MAIN) changeCamMode(CAM_TPS);
+		else if (mCamMode == CAM_TPS) changeCamMode(CAM_MOVE);
 		mElapsedTime = 0.f;
 	}
 
@@ -266,6 +263,8 @@ void SceneFlowChart::update(ofxEventMessage& m)
 		mElapsedTimeMove = 0.f;
 		++mNodeIdx %= mOrders.at(mOrderIdx).size();
 	}
+
+	// update for skeleton
 	if (getNumSkeletons()) {
 		mNodes.at(NODE_MOTIONER)->clearAimingOffsets();
 		for (auto i : rep(getNumSkeletons())) {
@@ -279,6 +278,18 @@ void SceneFlowChart::update(ofxEventMessage& m)
 			//mNodes.at(NODE_DANCER)->addAimingOffset(getSkeleton(i)->getJoint(ofxMot::JOINT_LEFT_ANKLE).getGlobalPosition());
 			//mNodes.at(NODE_DANCER)->addAimingOffset(getSkeleton(i)->getJoint(ofxMot::JOINT_RIGHT_ANKLE).getGlobalPosition());
 		}
+		// TPS camera
+		auto head = getSkeleton(0)->getJoint(ofxMot::JOINT_NECK);
+		head.pan(-90.f);
+		const auto v0 = head.getGlobalPosition();
+		const auto v1 = mCamTPSParent.getGlobalPosition();
+		const auto q0 = head.getGlobalOrientation();
+		const auto q1 = mCamTPSParent.getGlobalOrientation();
+		const float f {0.95f}; // tps camera smoothing
+		ofQuaternion q;
+		q.slerp(f, q0, q1);
+		mCamTPSParent.setGlobalPosition(v0.interpolated(v1, f));
+		mCamTPSParent.setGlobalOrientation(q);
 	}
 
 	float t {ofClamp(mElapsedTimeMove, 0.f, kCamMoveSpan) / kCamMoveSpan};
@@ -286,8 +297,8 @@ void SceneFlowChart::update(ofxEventMessage& m)
 
 	// move camera
 	if (mCamMode == CAM_MOVE) {
-		auto currCam = mCams.at(getCurrentNodeID());
-		auto nextCam = mCams.at(getNextNodeID());
+		auto currCam = mNodes.at(getCurrentNodeID())->getCamera();
+		auto nextCam = mNodes.at(getNextNodeID())->getCamera();
 
 		for (auto i : rep(mNodes.size())) {
 			auto n = mNodes.at(i);
@@ -337,6 +348,7 @@ void SceneFlowChart::drawScene()
 	switch (mCamMode) {
 	case CAM_MOVE: camera = &mCurrentCam; break;
 	case CAM_MAIN: camera = &mCamMain; break;
+	case CAM_TPS: camera = &mCamTPS; break;
 	default:
 	case CAM_EASY: camera = &mCamEasy; break;
 	}
@@ -353,7 +365,10 @@ void SceneFlowChart::drawScene()
 
 void SceneFlowChart::drawStage()
 {
-	ScopedTranslate t(0.f, kYOffset, 0.f);
+	ScopedMatrix m;
+	if (mCamMode != CAM_TPS) {
+		ofTranslate(0.f, kYOffset, 0.f);
+	}
 	// draw nodes
 	for (auto i : rep(mNodes.size())) {
 		auto n = mNodes.at(i);
@@ -380,6 +395,7 @@ void SceneFlowChart::drawStage()
 	{
 		ScopedStyle s;
 		setStyle();
+        ofDisableDepthTest();
 
 		for (auto i : rep(mNodes.at(getCurrentNodeID())->getNumAimingPositions())) {
 			for (auto j : rep(mNodes.at(getNextNodeID())->getNumAimingPositions())) {
@@ -414,7 +430,7 @@ void SceneFlowChart::drawStage()
 					ScopedStyle s;
 					ofSetCircleResolution(64);
 					ofDisableDepthTest();
-					ofEnableAlphaBlending();
+                    ofEnableAlphaBlending();
 					ScopedTranslate t(v.back());
 					billboard();
 					ofFill();
@@ -430,13 +446,46 @@ void SceneFlowChart::drawStage()
 	}
 }
 
+void SceneFlowChart::drawToolKit()
+{
+	ScopedStyle s;
+	ScopedMatrix m;
+
+	auto n = getNode<NodeDisplay>(NODE_DISPLAY);
+	n->fbo.begin();
+	ofBackground(ofColor::black);
+	mCamToolKit.begin();
+
+	for (auto i : rep(getNumSkeletons())) {
+		auto skl = getSkeleton(i);
+		for (auto& n : skl->getJoints()) {
+			ofSetColor(ofColor::blue);
+			n.draw();
+			{
+				ScopedMatrix m;
+				ofMultMatrix(n.getGlobalTransformMatrix());
+				ofMultMatrix(n.getGlobalTransformMatrix());
+				ofSetColor(ofColor::red);
+				ofDrawBox(ofVec3f::zero(), 10.f);
+			}
+			if (!n.getParent()) continue;
+			ofSetColor(ofColor::blue);
+			ofLine(n.getGlobalPosition(), n.getParent()->getGlobalPosition());
+		}
+	}
+
+	mCamToolKit.end();
+	n->fbo.end();
+}
+
 void SceneFlowChart::drawCameras()
 {
 	// debug draw cameras
 	if (mCamMode == CAM_EASY) {
 		ScopedStyle s;
 		ofNoFill();
-		for (auto c : mCams) {
+		for (auto n : mNodes) {
+			const auto c = n->getCamera();
 			ofSetColor(ofColor::red);
 			ScopedMatrix m;
 			ofMultMatrix(c.getGlobalTransformMatrix());
@@ -451,13 +500,25 @@ void SceneFlowChart::drawCameras()
 			ofDrawBox(ofVec3f(0.f, 0.f, -5.f), 10.f, 10.f, 10.f);
 		}
 		{
+			ofSetColor(ofColor::blue);
 			ScopedStyle s;
+			ScopedMatrix m;
+			ofMultMatrix(mCamTPS.getGlobalTransformMatrix());
+			ofTranslate(0.f, kYOffset);
+			ofDrawBox(ofVec3f(0.f, 0.f, 25.f), 20.f, 20.f, 50.f);
+			ofDrawBox(ofVec3f(0.f, 0.f, -5.f), 10.f, 10.f, 10.f);
+		}
+		{
+			ScopedStyle s;
+			ofDisableDepthTest();
 			ScopedTranslate t(0.f, kYOffset, 0.f);
 			ofSetColor(ofColor::yellow);
-			ofSetSphereResolution(8);
+			ofFill();
 			for (auto n : mNodes) {
 				for (auto i : rep(n->getNumAimingPositions())) {
-					ofDrawSphere(n->getAimingPosition(i), 10.f);
+					ScopedTranslate t(n->getAimingPosition(i));
+					billboard();
+					ofCircle(ofVec3f::zero(), 4.f);
 				}
 			}
 		}
@@ -470,21 +531,67 @@ void SceneFlowChart::drawHUD()
 	if (mCamMode == CAM_MOVE && mNodes.at(getNextNodeID())->t >= 1.f) {
 		ScopedStyle s;
 		ofFill();
-		ofSetColor(ofColor::white);
-		mFont.drawString(kNodeNames[getNextNodeID()], 30.f, 120.f);
+		ofDisableDepthTest();
+		{
+			ScopedTranslate t(30.f, 120.f);
+			ofSetColor(ofColor::white);
+			mFont.drawString(kNodeNames[getNextNodeID()], 0.f, 0.f);
+		}
+		const string strJP {kNodeNamesJP[getNextNodeID()]};
+		{
+			ScopedTranslate t((ofGetWidth() - mFontJP.stringWidth(strJP)) * 0.5f, ofGetHeight() - 20.f);
+			ofSetColor(ofColor::black, 180);
+			ofRect(mFontJP.getStringBoundingBox(strJP, 0.f, 0.f));
+			ofSetColor(ofColor::white);
+			mFontJP.drawStringAsShapes(strJP, 0.f, 0.f);
+		}
 	}
 	else if (mCamMode == CAM_MAIN) {
-		ScopedTranslate t(20.f, 80.f);
 		ScopedStyle s;
 		ofFill();
-		ofSetColor(color::kMain);
-		mFontSmall.drawString("from\nto", 0.f, 0.f);
-		ofSetColor(ofColor::white);
+		ofDisableDepthTest();
 		const string str0 {kNodeNames[getCurrentNodeID()]};
 		const string str1 {"\n" + kNodeNames[getNextNodeID()]};
-		mFontSmall.drawString(str0, mFontSmall.stringWidth("fromx"), 0.f);
-		mFontSmall.drawString(str1, mFontSmall.stringWidth("fromx"), 0.f);
+		{
+			ScopedTranslate t(20.f, 80.f);
+			ofSetColor(color::kMain);
+			mFontSmall.drawString("from\nto", 0.f, 0.f);
+			ofSetColor(ofColor::white);
+			mFontSmall.drawString(str0, mFontSmall.stringWidth("fromx"), 0.f);
+			mFontSmall.drawString(str1, mFontSmall.stringWidth("fromx"), 0.f);
+		}
+		const string strJP {kNodeNamesFromJP[getCurrentNodeID()] + "から" + kNodeNamesToJP[getNextNodeID()] + "へ"};
+		{
+			ScopedTranslate t((ofGetWidth() - mFontJP.stringWidth(strJP)) * 0.5f, ofGetHeight() - 20.f);
+			ofSetColor(ofColor::black, 180);
+			ofRect(mFontJP.getStringBoundingBox(strJP, 0.f, 0.f));
+			ofSetColor(ofColor::white);
+			mFontJP.drawStringAsShapes(strJP, 0.f, 0.f);
+		}
 	}
+	else if (mCamMode == CAM_TPS) {
+		ScopedStyle s;
+		ofFill();
+		ofDisableDepthTest();
+		{
+			ScopedTranslate t(30.f, 120.f);
+			ofSetColor(ofColor::white);
+			mFont.drawString("Dancer's viewpoint", 0.f, 0.f);
+		}
+		const string strJP {"ダンサー視点"};
+		{
+			ScopedTranslate t((ofGetWidth() - mFontJP.stringWidth(strJP)) * 0.5f, ofGetHeight() - 20.f);
+			ofSetColor(ofColor::black, 180);
+			ofRect(mFontJP.getStringBoundingBox(strJP, 0.f, 0.f));
+			ofSetColor(ofColor::white);
+			mFontJP.drawStringAsShapes(strJP, 0.f, 0.f);
+		}
+	}
+#ifdef DEBUG
+	ScopedStyle s;
+	ofSetColor(ofColor::white);
+	ofDrawBitmapString(ofToString(mOrderIdx), ofGetWidth() - 20.f, ofGetHeight() - 20.f);
+#endif
 }
 
 void SceneFlowChart::draw()
@@ -497,6 +604,8 @@ void SceneFlowChart::draw()
 	drawScene();
 	stage->fbo.end();
 
+	drawToolKit();
+
 	// main draw call
 	stage->forFbo = false;
 	drawScene();
@@ -507,9 +616,15 @@ void SceneFlowChart::keyPressed(int key)
 	switch (key) {
 	case 'q': changeCamMode(CAM_MOVE); break;
 	case 'w': changeCamMode(CAM_MAIN); break;
-	case 'e': changeCamMode(CAM_EASY); break;
+	case 'e': changeCamMode(CAM_TPS); break;
+	case 'r': changeCamMode(CAM_EASY); break;
 	case '+':
+	case '=':
 		++mOrderIdx %= mOrders.size();
+		break;
+	case '-':
+	case '_':
+		(--mOrderIdx += mOrders.size()) %= mOrders.size();
 		break;
 	}
 }
@@ -517,10 +632,6 @@ void SceneFlowChart::keyPressed(int key)
 void SceneFlowChart::changeCamMode(CamMode m)
 {
 	mCamMode = m;
-
-	auto camUnit = getNode<NodeCameraUnit>(NODE_CAMERA_UNIT);
-	auto computer = getNode<NodeComputer>(NODE_COMPUTER);
-
 	switch (m) {
 	case CAM_MOVE:
 		mNodeIdx = 0;
@@ -530,7 +641,7 @@ void SceneFlowChart::changeCamMode(CamMode m)
 		mElapsedTimeMainCam = HALF_PI * (1.f / kMainCamSpeed);
 		break;
 	case CAM_EASY:
-		break;
+	case CAM_TPS:
 	default:
 		break;
 	}

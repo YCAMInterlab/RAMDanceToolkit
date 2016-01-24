@@ -17,6 +17,10 @@ DP_SCORE_NAMESPACE_BEGIN
 NodeMotioner::NodeMotioner()
 {
     addAimingOffset(ofVec3f::zero());
+    
+    getCamera().setFov(70.f);
+    getCamera().setPosition(0.f, 200.f, 400.f);
+    getCamera().setOrientation(ofVec3f(-30.f, 0.f, 0.f));
 }
 
 NodeMotioner::~NodeMotioner()

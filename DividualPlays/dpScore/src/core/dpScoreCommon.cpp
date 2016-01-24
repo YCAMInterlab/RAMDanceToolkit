@@ -140,6 +140,7 @@ const string kXmlSettingsPath {"settings/master_hakoniwa_settings.xml"};
 const int kNumCameraunitVectors {10};
 
 const string kFontPath {"fonts/AkkoStd-Thin.otf"};
+const string kFontPathJP {"fonts/NotoSansCJKjp-Light.otf"};
 
 const float kFlowChartLineWidth = 2.f;
 

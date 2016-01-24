@@ -63,6 +63,7 @@ extern const string kXmlSettingsPath;
 extern const int kNumCameraunitVectors;
 
 extern const string kFontPath;
+extern const string kFontPathJP;
 
 extern const float kFlowChartLineWidth;
 

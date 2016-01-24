@@ -10,6 +10,7 @@
 #include "dpScoreScoped.h"
 #include "dpScoreToolBox.h"
 #include "dpScoreObjects.h"
+#include "dpScoreNodeStage.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -17,6 +18,8 @@ NodeMasterHakoniwa::NodeMasterHakoniwa()
 {
     setGlobalPosition(ofVec3f(450.f, 0.f, 400.f - Desk::getDimension()));
     addAimingOffset(ofVec3f(Desk::getDimension() * 0.5f, Desk::getHeight() + 50.f, Desk::getDimension() * 0.5f));
+    getCamera().setFov(45.f);
+    getCamera().setPosition(NodeStage::kWidth * 0.5f + Desk::getDimension() * 0.5f + 50.f, -75.f, 550.f);
 }
 
 NodeMasterHakoniwa::~NodeMasterHakoniwa()
