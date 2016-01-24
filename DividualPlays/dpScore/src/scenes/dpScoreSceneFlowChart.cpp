@@ -6,7 +6,12 @@
 //
 //
 
-// カメラ追加？
+/*
+   三人称
+   日本語
+   ハメコミ
+   箱庭フォーカス
+ */
 
 #include "dpScoreSceneFlowChart.h"
 #include "dpScoreNodeStage.h"
