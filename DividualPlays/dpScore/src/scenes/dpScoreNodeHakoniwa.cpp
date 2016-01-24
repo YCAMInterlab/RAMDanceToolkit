@@ -36,8 +36,9 @@ void NodeHakoniwa::customDraw()
 	const float t {::fmodf(ofGetElapsedTimef() * 2.f, kNumX * kNumY)};
 	for (auto i : rep(kNumX)) {
 		for (auto j : rep(kNumY)) {
-			((i + kNumX * j) == (int)t) ? setColor(*this) : ofSetColor(128);
-
+//            if (t > 0.f) {
+//                ((i + kNumX * j) == (int)t) ? setColor(*this) : ofSetColor(128);
+//            }
 			ScopedTranslate t(i * mDesk.getDimension(), 0.f, j * (mDesk.getDimension() + 90.f));
 			mDesk.draw();
 			drawBox(ofVec3f(Desk::getDimension() - 5.f, Desk::getHeight(), Desk::getDimension() - 9.f), 5.f, 75.f, 9.f);

@@ -8,6 +8,7 @@
 
 /*
    箱庭フォーカス
+   書き込み
  */
 
 #include "dpScoreSceneFlowChart.h"
@@ -395,7 +396,7 @@ void SceneFlowChart::drawStage()
 	{
 		ScopedStyle s;
 		setStyle();
-        ofDisableDepthTest();
+		ofDisableDepthTest();
 
 		for (auto i : rep(mNodes.at(getCurrentNodeID())->getNumAimingPositions())) {
 			for (auto j : rep(mNodes.at(getNextNodeID())->getNumAimingPositions())) {
@@ -430,7 +431,7 @@ void SceneFlowChart::drawStage()
 					ScopedStyle s;
 					ofSetCircleResolution(64);
 					ofDisableDepthTest();
-                    ofEnableAlphaBlending();
+					ofEnableAlphaBlending();
 					ScopedTranslate t(v.back());
 					billboard();
 					ofFill();
