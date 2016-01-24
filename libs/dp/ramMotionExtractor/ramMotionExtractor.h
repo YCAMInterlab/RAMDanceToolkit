@@ -65,6 +65,7 @@ protected:
 	ramBaseScene*			mScenePtr;
 	ofVec2f					mCurrentCanvasPos;
 	float					mMotionSmooth;
+	float					mPortBoxScale;
 	int						lastNumNodeArray;
 
 	ramOscReceiveTag	receiver;

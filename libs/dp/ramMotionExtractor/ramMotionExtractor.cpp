@@ -36,6 +36,7 @@ void ramMotionExtractor::setupControlPanel(ramBaseScene *scene_, ofVec2f canvasP
 	mGui->addButton("PopPort", false);
 	mGui->addButton("Clear", false);
 	mGui->addToggle("Visible", false);
+	mGui->addSlider("boxScale", 0.0, 100.0, &mPortBoxScale);
 	mGui->addSlider("Smooth", 1.0, 50.0, &mMotionSmooth);
 
 	vector<string> it = ramActorManager::instance().getNodeArrayNames();
@@ -57,7 +58,8 @@ void ramMotionExtractor::setupControlPanel(ramBaseScene *scene_, ofVec2f canvasP
 
 	receiver.addAddress("/ram/MEX/"+scene_->getName());
 	ramOscManager::instance().addReceiverTag(&receiver);
-
+	
+	mPortBoxScale = 7;
 }
 
 void ramMotionExtractor::pushFromID(int actorId, int jointId){
@@ -251,7 +253,7 @@ void ramMotionExtractor::draw(){
 			ofPushMatrix();
 			ofMultMatrix(mMotionPort[i]->mCurrentNode.getGlobalTransformMatrix());
 			ofNoFill();
-			ofDrawBox(15);
+			ofDrawBox(mPortBoxScale);
 			ofFill();
 
 			ofMatrix4x4 rotMat;
