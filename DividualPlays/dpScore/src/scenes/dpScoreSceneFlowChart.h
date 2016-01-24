@@ -12,6 +12,7 @@
 #include "dpScoreSceneBodyBase.h"
 #include "dpScoreBaseNode.h"
 #include "ofxMotioner.h"
+#include "ofxTrueTypeFontUC.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -40,6 +41,7 @@ public:
     enum CamMode {
         CAM_MOVE,
         CAM_MAIN,
+        CAM_TPS,
         CAM_EASY,
         N_CAM_MODE,
     };
@@ -62,10 +64,10 @@ public:
 
 private:
     void setupNodes();
-    void setupCameras();
     void setupOrders();
     
     void drawScene();
+    void drawToolKit();
     void drawStage();
     void drawCameras();
     void drawHUD();
@@ -77,14 +79,17 @@ private:
     template <class T> ofPtr<T> getNode(int idx) { return dynamic_pointer_cast<T>(mNodes.at(idx)); }
         
 	ofTrueTypeFont mFont, mFontSmall;
+    ofxTrueTypeFontUC mFontJP;
 	vector<ofPtr<BaseNode> > mNodes;
-	vector<ofCamera> mCams;
     vector<vector<int>> mOrders;
 	ofCamera mCurrentCam;
     ofCamera mCamMain;
-    ofNode mCamMainParent;
+    ofCamera mCamToolKit;
+    ofCamera mCamTPS;
 	ofEasyCam mCamEasy;
-    CamMode mCamMode;
+    ofNode mCamMainParent;
+    ofNode mCamTPSParent;
+    CamMode mCamMode {CAM_MOVE};
 	int mOrderIdx {2};
     int mNodeIdx {0};
     

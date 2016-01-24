@@ -58,6 +58,7 @@ void ofApp::setup()
 
 #ifdef DEBUG
 	ofSetLogLevel(OF_LOG_VERBOSE);
+	mShowFps = true;
 #endif
 
 	OFX_BEGIN_EXCEPTION_HANDLING
@@ -196,7 +197,7 @@ void ofApp::setup()
 	mTitleReplaceList.push_back(make_pair("dpH", ""));
 	mTitleReplaceList.push_back(make_pair("RE", ""));
 	mTitleReplaceList.push_back(make_pair("Theta", "FishEye"));
-    
+
 #if !defined(DP_MASTER_HAKONIWA) && !defined(DEBUG)
 	keyPressed('f');
 	keyPressed('c');

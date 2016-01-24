@@ -22,29 +22,21 @@ public:
 
 	void customDraw() override;
 
-	static ofVec3f getFrontLeft()
-	{
-		return ofVec3f(-NodeStage::kWidth * 0.5f - 61.f, 214.f, NodeStage::kDepth * 0.5f - 50.f);
-	}
-	static ofVec3f getFrontRight()
-	{
-		return ofVec3f(NodeStage::kWidth * 0.5f + 61.f, 214.f, NodeStage::kDepth * 0.5f - 50.f);
-	}
-    static float getFrontDisplayWidth()
-    {
-        return 104.f;
-    }
-    static float getFrontDisplayHeight()
-    {
-        return 61.4f;
-    }
-    static float getFrontDisplayDepth()
-    {
-        return 3.f;
-    }
+	static ofVec3f getFrontLeft();
+	static ofVec3f getFrontRight();
+	static float getFrontDisplayWidth();
+	static float getFrontDisplayHeight();
+	static float getFrontDisplayDepth();
+	static float getFrontDisplayAngle();
 
-private:
+	static ofVec3f getRearLeft();
+	static ofVec3f getRearRight();
+	static float getRearDisplayWidth();
+	static float getRearDisplayHeight();
+	static float getRearDisplayDepth();
+	static float getRearDisplayAngle();
 
+	ofFbo fbo;
 };
 
 DP_SCORE_NAMESPACE_END

@@ -21,6 +21,10 @@ NodeComputer::NodeComputer()
     addAimingOffset(NodeComputer::getMacBookPosition(3) + ofVec3f(MacBook::getDepth() * 0.5f,
                                                                   MacBook::getDepth() * 0.5f,
                                                                   -MacBook::getWidth() * 0.5f));
+    
+    getCamera().setFov(60.f);
+    getCamera().setPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 400.f, 0.f, -190.f);
+    getCamera().setOrientation(ofVec3f(-20.f, -90.f, 0.f));
 }
 
 NodeComputer::~NodeComputer()

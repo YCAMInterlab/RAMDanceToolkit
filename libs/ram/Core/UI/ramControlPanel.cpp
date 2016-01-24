@@ -96,10 +96,57 @@ void ramControlPanel::setup(bool usePresetScenes)
 	
 	ofAddListener(ofEvents().update, this, &ramControlPanel::update);
 	ofAddListener(mSceneTabs.newGUIEvent, this, &ramControlPanel::guiEvent);
+	
+	receiver.addAddress("/ram/tune/");
+	ramOscManager::instance().addReceiverTag(&receiver);
+
 }
 
 void ramControlPanel::update(ofEventArgs &e)
 {
+	
+	while (receiver.hasWaitingMessages())
+	{
+		ofxOscMessage m;
+		receiver.getNextMessage(&m);
+		vector<string> addr = ofSplitString(m.getAddress(), "/");
+		if (addr.size() > 4)
+		{
+			string sceneName = addr[3];
+			string valName = addr[4];
+			int type = m.getArgAsInt32(0);
+			
+			for (int i = 0;i < getSceneTabs().getNumTabs();i++)
+			{
+				ofxUITab* tab = getSceneTabs().at(i);
+				if (tab->getTabName() == sceneName)
+				{
+					ofxUIWidget* wd = tab->getWidget(valName);
+					if (wd != NULL)
+					{
+						if (type == wd->getKind())
+						{
+							if (type == OFX_UI_WIDGET_BUTTON)
+								((ofxUIButton*)(wd))->setValue(true);
+
+							if (type == OFX_UI_WIDGET_SLIDER_H)
+								((ofxUISlider*)(wd))->setValue(m.getArgAsFloat(1));
+							if (type == OFX_UI_WIDGET_SLIDER_V)
+								((ofxUISlider*)(wd))->setValue(m.getArgAsFloat(1));
+							if (type == OFX_UI_WIDGET_TOGGLE)
+								((ofxUIToggle*)(wd))->setValue(m.getArgAsInt32(1));
+						}
+					}
+				}
+			}
+		}
+	}
+	for (int i = 0;i < getSceneTabs().getNumTabs();i++)
+	{
+		ofxUITab* tab = getSceneTabs().at(i);
+		tab->getWidget("");
+	}
+	
 	if(!ofGetMousePressed())
 	{
 		bool hover = mSceneTabs.isHit(ofGetMouseX(), ofGetMouseY());
