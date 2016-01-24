@@ -13,20 +13,25 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
+inline void setColor(const BaseNode& n)
+{
+	ofSetColor(128 + 127 * n.t);
+}
+
 inline void setStyle(const BaseNode& n)
 {
 	ofSetLineWidth(kFlowChartLineWidth);
-	ofSetColor(128 + 127 * n.t);
+	setColor(n);
 	ofNoFill();
 	ofEnableDepthTest();
 }
 
 inline void setStyle()
 {
-    ofSetLineWidth(kFlowChartLineWidth);
-    ofSetColor(ofColor::white);
-    ofNoFill();
-    ofEnableDepthTest();
+	ofSetLineWidth(kFlowChartLineWidth);
+	ofSetColor(ofColor::white);
+	ofNoFill();
+	ofEnableDepthTest();
 }
 
 inline void drawBox(const ofVec3f& p, float w, float h, float d)

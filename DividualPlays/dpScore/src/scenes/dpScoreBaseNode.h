@@ -13,25 +13,56 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-class BaseNode : public ofNode {
+class BaseNode: public ofNode {
 public:
-    BaseNode()
-    {
-        mOffsets.clear();
-    }
-    
-    virtual ~BaseNode() {}
-    virtual void customDraw() override {}
-    
-    size_t getNumAimingPositions() const { return mOffsets.size(); }
-    ofVec3f getAimingPosition(size_t idx) const { return getGlobalPosition() + mOffsets.at(idx); }
-    void addAimingOffset(const ofVec3f& offset) { mOffsets.push_back(offset); }
-    void clearAimingOffsets() { mOffsets.clear(); }
-    
-    float t {0.f};
-    
+	BaseNode()
+	{
+		mOffsets.clear();
+	}
+
+	virtual ~BaseNode()
+	{
+	}
+
+	virtual void customDraw() override
+	{
+	}
+
+	size_t getNumAimingPositions() const
+	{
+		return mOffsets.size();
+	}
+
+	ofVec3f getAimingPosition(size_t idx) const
+	{
+		return getGlobalPosition() + mOffsets.at(idx);
+	}
+
+	void addAimingOffset(const ofVec3f& offset)
+	{
+		mOffsets.push_back(offset);
+	}
+
+	void clearAimingOffsets()
+	{
+		mOffsets.clear();
+	}
+
+	ofCamera& getCamera()
+	{
+		return mCamera;
+	}
+
+	const ofCamera& getCamera() const
+	{
+		return mCamera;
+	}
+
+	float t {0.f};
+
 private:
-    vector<ofVec3f> mOffsets;
+	vector<ofVec3f> mOffsets;
+	ofCamera mCamera;
 };
 
 DP_SCORE_NAMESPACE_END
