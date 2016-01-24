@@ -28,7 +28,8 @@ void testApp::setup()
 	/// ram setup
 	// ------------------
 	ramInitialize(10000);
-
+    
+    getVideoGrabberManager().setupDevice(0);
 	
 	/// register myScene to ramSceneManager
 	/// - EmptyScene::update, draw, and other method will be triggerd by ramSceneManager
