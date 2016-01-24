@@ -33,6 +33,9 @@ const ramCommunicationManager& ramGlobalShortcut::getCommunicationManager() cons
 ramOscManager& ramGlobalShortcut::getOscManager() {return ramOscManager::instance(); }
 const ramOscManager& ramGlobalShortcut::getOscManager() const {return ramOscManager::instance(); }
 
+dpVideoGrabberManager& ramGlobalShortcut::getVideoGrabberManager(){return dpVideoGrabberManager::instance();}
+const dpVideoGrabberManager& ramGlobalShortcut::getVideoGrabberManager() const{return dpVideoGrabberManager::instance();}
+
 const vector<string>& ramGlobalShortcut::getNodeArrayNames() const { return ramActorManager::instance().getNodeArrayNames(); }
 
 bool ramGlobalShortcut::hasNodeArray(const string &key) const { return ramActorManager::instance().hasNodeArray(key); }
