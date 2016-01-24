@@ -91,7 +91,13 @@ else
 	git clone https://github.com/hironishihara/ofxTrueTypeFontUC
 	cd ofxMotioner
 	git checkout 8be85818
-	cd ../	
+	cd ../
+
+    # ofxSyphon
+    git clone https://github.com/astellato/ofxSyphon.git
+    cd ofxSyphon
+    git checkout 3efcb74
+    cd ../
 
 	echo "end clone addons"
 	cd ../
