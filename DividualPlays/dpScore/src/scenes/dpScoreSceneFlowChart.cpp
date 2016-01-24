@@ -25,7 +25,6 @@
 #include "dpScoreNodeComputer.h"
 #include "dpScoreScoped.h"
 #include "dpScoreToolBox.h"
-#include "dpScoreText.h"
 
 #pragma mark ___________________________________________________________________
 

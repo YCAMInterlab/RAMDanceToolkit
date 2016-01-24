@@ -29,8 +29,9 @@ void testApp::setup()
 	// ------------------
 	ramInitialize(10000);
     
-    getVideoGrabberManager().setupDevice(0);
-	
+    mSyphonClientManager = &dpSyphonClientManager::instance();
+    mSyphonClientManager->setup();
+  
 	/// register myScene to ramSceneManager
 	/// - EmptyScene::update, draw, and other method will be triggerd by ramSceneManager
 	/// - the scene added to ramSceneManager will appeard on GUI automaticaly
@@ -100,6 +101,7 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
+    mSyphonClientManager->update();
 	doSomething.update();
 }
 
@@ -107,6 +109,9 @@ void testApp::update()
 void testApp::draw()
 {
 	doSomething.draw();
+
+   // mSyphonClientManager->draw(0, 0);
+   // mSyphonClientManager->draw(640, 0,640,480,1);
 }
 
 
