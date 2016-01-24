@@ -87,6 +87,8 @@ public:
 	ofxUITab* at(int i) {
 		return tabs[i];
 	}
+	
+	int getNumTabs(){return tabs.size();}
     
 	int getTabIndex(const string& name) const {
 		for(int i = 0; i < tabToggles.size(); i++) {

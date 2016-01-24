@@ -26,6 +26,7 @@
 #include "ramGlobal.h"
 #include "ramGraphics.h"
 #include "ramCameraManager.h"
+#include "ramOscManager.h"
 #include "ramPreferencesTab.h"
 #include "ramPresetTab.h"
 
@@ -89,6 +90,7 @@ public:
 private:
 	static ramControlPanel *_instance;
 	
+	ramOscReceiveTag receiver;
 	ofxUICanvasPlus *current_panel;
 	ofxUITabbedCanvas mSceneTabs;
 	
