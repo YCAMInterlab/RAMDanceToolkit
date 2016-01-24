@@ -104,6 +104,12 @@ MoveSeparatedObjects mMoveSeparatedObject;
 #include "distanceMetaball.h"
 distanceMetaball mDistanceMetaball;
 
+#include "middleScene.h"
+MiddleScene mMiddleScene;
+
+#include "MixMonsterScene.h"
+MixMonsterScene mMixMonsterScene;
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -151,6 +157,10 @@ void testApp::setup()
 	//Sheep
 	sceneManager.addScene(mDistanceMetaball.getPtr());
 
+	//Kumagai
+	sceneManager.addScene(mMiddleScene.getPtr());
+	sceneManager.addScene(mMixMonsterScene.getPtr());
+	
 	/*
 	sceneManager.addScene(mCube.getPtr());
 	sceneManager.addScene(mMucous.getPtr());

@@ -274,7 +274,7 @@ void MixMonsterScene::draw()
     ramActorManager & AM = getActorManager();
     ramNode rn[2 * ramActor::NUM_JOINTS];
     
-    for (int i = 0; i < 2; i++){
+    for (int i = 0; i < AM.getNumNodeArray(); i++){
         ramNodeArray& na = AM.getNodeArray(i);
 //        ofQuaternion base = na.getNode(ramActor::JOINT_HIPS).getOrientationQuat();
 //        ofQuaternion rotated = base * mRotation;
@@ -335,7 +335,7 @@ void MixMonsterScene::draw()
     ofPopMatrix();
     
     // draw both sides.
-    for (int k = 0; k < 2; k++){
+    for (int k = 0; k < AM.getNumNodeArray(); k++){
         
         ramNodeArray& na = AM.getNodeArray(k);
         ofQuaternion rotated = mRotation;
