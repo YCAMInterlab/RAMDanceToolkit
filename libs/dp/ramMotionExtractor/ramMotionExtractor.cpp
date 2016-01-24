@@ -84,12 +84,12 @@ void ramMotionExtractor::update(){
 			sender.setup(m.getRemoteIp(), 24800);
 			for (int i = 0;i < mMotionPort.size();i++)
 			{
-				ofxOscMessage m;
-				m.setAddress(myAddr + "list");
-				m.addIntArg(i);
-				m.addIntArg(mMotionPort[i]->mActorIndex);
-				m.addIntArg(mMotionPort[i]->mFinder.index);
-				sender.sendMessage(m);
+				ofxOscMessage mm;
+				mm.setAddress(myAddr + "list");
+				mm.addIntArg(i);
+				mm.addIntArg(mMotionPort[i]->mActorIndex);
+				mm.addIntArg(mMotionPort[i]->mFinder.index);
+				sender.sendMessage(mm);
 			}
 		}
 		
