@@ -96,7 +96,7 @@ else
     # ofxSyphon
     git clone https://github.com/astellato/ofxSyphon.git
     cd ofxSyphon
-    git checkout 3efcb74
+    git checkout 2c72778
     cd ../
 
 	echo "end clone addons"
