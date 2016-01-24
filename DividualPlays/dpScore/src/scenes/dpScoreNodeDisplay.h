@@ -11,7 +11,7 @@
 
 #include "dpScoreBaseNode.h"
 #include "dpScoreObjects.h"
-
+#include "dpScoreNodeStage.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -21,6 +21,27 @@ public:
 	virtual ~NodeDisplay();
 
 	void customDraw() override;
+
+	static ofVec3f getFrontLeft()
+	{
+		return ofVec3f(-NodeStage::kWidth * 0.5f - 61.f, 214.f, NodeStage::kDepth * 0.5f - 50.f);
+	}
+	static ofVec3f getFrontRight()
+	{
+		return ofVec3f(NodeStage::kWidth * 0.5f + 61.f, 214.f, NodeStage::kDepth * 0.5f - 50.f);
+	}
+    static float getFrontDisplayWidth()
+    {
+        return 104.f;
+    }
+    static float getFrontDisplayHeight()
+    {
+        return 61.4f;
+    }
+    static float getFrontDisplayDepth()
+    {
+        return 3.f;
+    }
 
 private:
 

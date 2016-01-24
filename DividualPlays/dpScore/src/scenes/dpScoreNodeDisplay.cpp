@@ -16,7 +16,13 @@ DP_SCORE_NAMESPACE_BEGIN
 
 NodeDisplay::NodeDisplay()
 {
+	addAimingOffset(NodeDisplay::getFrontLeft() + ofVec3f(getFrontDisplayWidth() * 0.5f - 8.f,
+	                                                      getFrontDisplayHeight() * 0.5f,
+	                                                      getFrontDisplayDepth() * 0.5f + 25.f));
 
+	addAimingOffset(NodeDisplay::getFrontRight() + ofVec3f(getFrontDisplayWidth() * 0.5f - 4.f,
+	                                                       getFrontDisplayHeight() * 0.5f,
+	                                                       getFrontDisplayDepth() * 0.5f - 28.f));
 }
 
 NodeDisplay::~NodeDisplay()
@@ -43,7 +49,7 @@ void NodeDisplay::customDraw()
 	}
 	{
 		ScopedMatrix m;
-		ofTranslate(-NodeStage::kWidth * 0.5f - 61.f, 214.f, NodeStage::kDepth * 0.5f - 50.f);
+		ofTranslate(getFrontLeft());
 		ofRotateY(-30.f);
 		ofLine(ofVec3f(52.f - 20.f, 61.f, 1.5f), ofVec3f(52.f - 20.f, 161.f, 1.5f));
 		ofLine(ofVec3f(52.f + 20.f, 61.f, 1.5f), ofVec3f(52.f + 20.f, 161.f, 1.5f));
@@ -51,7 +57,7 @@ void NodeDisplay::customDraw()
 	}
 	{
 		ScopedMatrix m;
-		ofTranslate(NodeStage::kWidth * 0.5f, 214.f, NodeStage::kDepth * 0.5f - 50.f);
+		ofTranslate(getFrontRight());
 		ofRotateY(30.f);
 		ofLine(ofVec3f(52.f - 20.f, 61.f, 1.5f), ofVec3f(52.f - 20.f, 161.f, 1.5f));
 		ofLine(ofVec3f(52.f + 20.f, 61.f, 1.5f), ofVec3f(52.f + 20.f, 161.f, 1.5f));

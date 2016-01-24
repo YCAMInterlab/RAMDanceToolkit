@@ -17,7 +17,8 @@ DP_SCORE_NAMESPACE_BEGIN
 
 NodeCameraUnit::NodeCameraUnit()
 {
-
+    setGlobalPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 250.f, 0.f, 100.f);
+    addAimingOffset(ofVec3f(getWidth() * 0.5f, getHeight() * 0.82f, -20.f));
 }
 
 NodeCameraUnit::~NodeCameraUnit()
@@ -37,7 +38,7 @@ void NodeCameraUnit::customDraw()
 	drawBox(ofVec3f::zero(), 44.f, 5.f, -35.f);
 
 	ofTranslate((44.f - mMBP.getWidth()) * 0.5f, 5.f, -35.f);
-	mMBP.angle = macAngle;
+	mMBP.angle = t * kMaxMacBookAngle;
 	mMBP.draw();
 }
 

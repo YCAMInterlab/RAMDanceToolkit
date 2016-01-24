@@ -81,9 +81,6 @@ Laban laban;
 #include "Notation.h"
 Notation notation;
 
-#include "distanceMetaball.h"
-distanceMetaball distMetaball;
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -121,8 +118,7 @@ void testApp::setup()
 	sceneManager.addScene( monster.getPtr() );
 	sceneManager.addScene( laban.getPtr() );
 	sceneManager.addScene( notation.getPtr() );
-	
-	sceneManager.addScene( distMetaball.getPtr() );
+
 }
 
 //--------------------------------------------------------------

@@ -33,7 +33,7 @@ public:
         return 61.f;
     }
     
-    float macAngle {0.f};
+    constexpr static const float kMaxMacBookAngle {110.f};
     
 private:
     MacBook mMBP;

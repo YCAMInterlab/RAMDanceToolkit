@@ -23,6 +23,51 @@
 //#include "ramFilterMain.h"
 //#include "ramRecognizerMain.h"
 
+/*====== Legacy ======*/
+#include "LineDrawing.h"
+LineDrawing drawLines;
+
+#include "BigBox.h"
+BigBox bigbox;
+
+#include "Future.h"
+Future future;
+
+#include "Donuts.h"
+Donuts donuts;
+
+#include "Expansion.h"
+Expansion expansion;
+
+#include "Particles.h"
+Particles particles;
+
+#include "UpsideDown.h"
+UpsideDown upsideDown;
+
+#include "Kepler.h"
+Kepler kepler;
+
+#include "HastyChase.h"
+HastyChase hastyChase;
+
+#include "ThreePoints.h"
+ThreePoints threePoints;
+
+#include "FourPoints.h"
+FourPoints fourPoints;
+
+#include "Chain.h"
+Chain chain;
+
+#include "Monster.h"
+Monster monster;
+
+#include "Notation.h"
+Notation notation;
+
+
+/* ==== 2014 Creation ==== */
 #include "FixedBody.h"
 FixedBody mFixed;
 
@@ -57,7 +102,13 @@ WeiredSpace mWeired;
 MoveSeparatedObjects mMoveSeparatedObject;
 
 #include "distanceMetaball.h"
-distanceMetaball distMetaball;
+distanceMetaball mDistanceMetaball;
+
+#include "middleScene.h"
+MiddleScene mMiddleScene;
+
+#include "MixMonsterScene.h"
+MixMonsterScene mMixMonsterScene;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -71,29 +122,54 @@ void testApp::setup()
 	ramInitialize(10000);
     
     ramEnableShowActors(false);
-    
-    ramSceneManager& sceneManager = ramSceneManager::instance();
-	//sceneManager.addScene(mCube.getPtr());
+
+
+	ramSceneManager& sceneManager = ramSceneManager::instance();
+	
+	/* Legacy */
+	sceneManager.addScene( drawLines.getPtr() );
+	sceneManager.addScene( bigbox.getPtr() );
+	sceneManager.addScene( future.getPtr() );
+	sceneManager.addScene( donuts.getPtr() );
+	sceneManager.addScene( expansion.getPtr() );
+	// ignore win32
+#ifndef TARGET_WIN32
+	sceneManager.addScene( particles.getPtr() );
+#endif
+	sceneManager.addScene( upsideDown.getPtr() );
+	sceneManager.addScene( kepler.getPtr() );
+	sceneManager.addScene( hastyChase.getPtr() );
+	sceneManager.addScene( threePoints.getPtr() );
+	sceneManager.addScene( fourPoints.getPtr() );
+	sceneManager.addScene( chain.getPtr() );
+	sceneManager.addScene( monster.getPtr() );
+	sceneManager.addScene( notation.getPtr() );
+	
     sceneManager.addScene(mFixed.getPtr());
     sceneManager.addScene(mBroken.getPtr());
     sceneManager.addScene(mBurst.getPtr());
     sceneManager.addScene(mFloorLine.getPtr());
-    //sceneManager.addScene(mMucous.getPtr());
     sceneManager.addScene(mThree.getPtr());
-    //sceneManager.addScene(mStick.getPtr());
-   // sceneManager.addScene(mUnity.getPtr());
     sceneManager.addScene(mVector.getPtr());
     sceneManager.addScene(mWeired.getPtr());
     sceneManager.addScene(mMoveSeparatedObject.getPtr());
-    //sceneManager.addScene(mSphere.getPtr());
-    
-    //sceneManager.addScene(mSep.getPtr());
-    //sceneManager.addScene(mWeierd.getPtr());
-
 
 	//Sheep
-	sceneManager.addScene(distMetaball.getPtr());
+	sceneManager.addScene(mDistanceMetaball.getPtr());
+
+	//Kumagai
+	sceneManager.addScene(mMiddleScene.getPtr());
+	sceneManager.addScene(mMixMonsterScene.getPtr());
 	
+	/*
+	sceneManager.addScene(mCube.getPtr());
+	sceneManager.addScene(mMucous.getPtr());
+	sceneManager.addScene(mStick.getPtr());
+	sceneManager.addScene(mUnity.getPtr());
+	sceneManager.addScene(mSphere.getPtr());
+	sceneManager.addScene(mSep.getPtr());
+	sceneManager.addScene(mWeierd.getPtr());
+	 */
 }
 
 //--------------------------------------------------------------

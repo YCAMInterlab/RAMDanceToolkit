@@ -10,12 +10,14 @@
 #include "dpScoreScoped.h"
 #include "dpScoreToolBox.h"
 #include "dpScoreObjects.h"
+#include "dpScoreNodeStage.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
 NodeHakoniwa::NodeHakoniwa()
 {
-
+    setGlobalPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 50.f, 0.f, 400.f - NodeHakoniwa::getDepth());
+    addAimingOffset(ofVec3f(NodeHakoniwa::getWidth() * 0.5f, Desk::getHeight(), NodeHakoniwa::getDepth() * 0.5f));
 }
 
 NodeHakoniwa::~NodeHakoniwa()

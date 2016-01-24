@@ -16,6 +16,8 @@ DP_SCORE_NAMESPACE_BEGIN
 
 NodeStage::NodeStage()
 {
+    addAimingOffset(ofVec3f::zero());
+    
 	const int n {6};
 	vector<ofVec3f> vertices;
 	vector<ofIndexType> indices;

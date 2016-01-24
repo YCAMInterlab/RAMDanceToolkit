@@ -16,7 +16,7 @@ DP_SCORE_NAMESPACE_BEGIN
 
 NodeMotioner::NodeMotioner()
 {
-
+    addAimingOffset(ofVec3f::zero());
 }
 
 NodeMotioner::~NodeMotioner()

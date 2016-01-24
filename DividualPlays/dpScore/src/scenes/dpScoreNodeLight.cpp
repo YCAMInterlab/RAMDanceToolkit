@@ -17,7 +17,8 @@ DP_SCORE_NAMESPACE_BEGIN
 
 NodeLight::NodeLight()
 {
-
+    setGlobalPosition(0.f, getHeight(), 0.f);
+    addAimingOffset(ofVec3f::zero());
 }
 
 NodeLight::~NodeLight()
@@ -30,7 +31,6 @@ void NodeLight::customDraw()
 	ScopedStyle s;
 	setStyle(*this);
 
-	ScopedTranslate t(0.f, getHeight(), 0.f);
     const int nX{8}, nZ{3};
     for (auto j : rep(nZ)) {
         for (auto i : rep(nX)) {

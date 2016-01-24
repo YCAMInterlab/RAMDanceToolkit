@@ -17,7 +17,10 @@ DP_SCORE_NAMESPACE_BEGIN
 
 NodeComputer::NodeComputer()
 {
-
+    setGlobalPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - Deck::getWidth() - 50.f - 30.f, 0.f, -450.f);
+    addAimingOffset(NodeComputer::getMacBookPosition(3) + ofVec3f(MacBook::getDepth() * 0.5f,
+                                                                  MacBook::getDepth() * 0.5f,
+                                                                  -MacBook::getWidth() * 0.5f));
 }
 
 NodeComputer::~NodeComputer()
@@ -30,28 +33,24 @@ void NodeComputer::customDraw()
 	ScopedStyle s;
 	setStyle(*this);
 
-	const int nX {3};
-	for (auto i : rep(nX)) {
+	for (auto i : rep(kNumDecks)) {
 		ScopedTranslate t(0.f, 0.f, mDeck.getDepth() * i);
 		mDeck.draw();
 	}
 
-	const int nPCs {8};
-	const float step {(Deck::getDepth() * 3) / (nPCs)};
-	for (auto i : rep(nPCs)) {
-		ScopedTranslate t(mDeck.getWidth() * 0.2f, mDeck.getHeight(), step * 0.5f + i * step + mMBP.getWidth() * 0.5f);
+	const float step {(Deck::getDepth() * kNumDecks) / (float)kNumMacBooks};
+	for (auto i : rep(kNumMacBooks)) {
+		ScopedTranslate trans(mDeck.getWidth() * 0.2f, mDeck.getHeight(), step * 0.5f + i * step + mMBP.getWidth() * 0.5f);
 		ScopedRotateY ry(90.f);
-        mMBP.angle = macAngle;
+		mMBP.angle = t * kMaxMacBookAngle;
 		mMBP.draw();
 	}
+}
 
-//	ScopedMatrix m;
-//	ofTranslate(0.f, 83.f, 0.f);
-//	drawBox(ofVec3f::zero(), 44.f, 5.f, -35.f);
-//
-//	ofTranslate((44.f - mMBP.getWidth()) * 0.5f, 5.f, -35.f);
-//	mMBP.angle = Shared.macAngleCameraUnit;
-//	mMBP.draw();
+ofVec3f NodeComputer::getMacBookPosition(int i)
+{
+	const float step {(Deck::getDepth() * kNumDecks) / (float)kNumMacBooks};
+    return ofVec3f(Deck::getWidth() * 0.2f, Deck::getHeight(), step * 0.5f + i * step + MacBook::getWidth() * 0.5f);
 }
 
 DP_SCORE_NAMESPACE_END
