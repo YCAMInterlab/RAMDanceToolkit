@@ -188,10 +188,10 @@ void dpHakoniwaMagnetPendulum::update() {
                 }
                 if (bCondition[2]) {
                     bOn[4] = true;
-                    bOn[5] = true;
+//                    bOn[5] = true;
                 } else  {
                     bOn[4] = false;
-                    bOn[5] = false;
+//                    bOn[5] = false;
                 }
                 
             } else {
