@@ -41,6 +41,7 @@
 #include "dpHakoVisMagnetPendulum.h"
 #include "dpHakoVisTornado.h"
 #include "dpHakoniwaTornado.h"
+#include "dpHakoniwaRawCamera.h"
 
 
 //SHEEP Scenes
@@ -165,6 +166,8 @@ public:
     Future     future;
     
     DoSomething doSomething;
+    
+    dpHakoniwaRawCamera rawCamera;
     
     dpSyphonClientManager *mSyphonClientManager;
     

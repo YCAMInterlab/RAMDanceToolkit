@@ -17,102 +17,42 @@
 
 #include "testApp.h"
 
+#include "dpVisMemeBox.h"
+dpVisMemeBox mMemeBox;
+/*!
+ Scenes
+ */
+
+//HakoniwaOscTest hakoniwaOscTest;
+//HakoniwaColorOfWater hakoniwaColorOfWater;
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
 {
 	ofSetFrameRate(60);
 	ofSetVerticalSync(true);
-
-
+	
 	/// ram setup
 	// ------------------
-	ramInitialize(10000);
-    
-    mSyphonClientManager = &dpSyphonClientManager::instance();
-    mSyphonClientManager->setup();
-  
-	/// register myScene to ramSceneManager
-	/// - EmptyScene::update, draw, and other method will be triggerd by ramSceneManager
-	/// - the scene added to ramSceneManager will appeard on GUI automaticaly
+	ramInitialize(10000, true);
+	
+	/// scenes setup
+	// ------------------
 	ramSceneManager& sceneManager = ramSceneManager::instance();
-	
-    sceneManager.addScene(rawCamera.getPtr());
-    
-    sceneManager.addScene(hakoniwaServoPendulum.getPtr());
-    sceneManager.addScene(visServoPendulum.getPtr());
-    
-    sceneManager.addScene(visStage.getPtr());
 
-    sceneManager.addScene(dpHfrozenIce.getPtr());
-    sceneManager.addScene(danceMap.getPtr());
-    
-    sceneManager.addScene(hakoniwaStruggle.getPtr());
-    sceneManager.addScene(visStruggle.getPtr());
-    
-    sceneManager.addScene(hakoniwaSand.getPtr());
-    sceneManager.addScene(visSandStorm.getPtr());
-    sceneManager.addScene(vecLineCircle.getPtr());
-    
-    sceneManager.addScene(magPendulum.getPtr());
-    sceneManager.addScene(visMagnetPendulum.getPtr());
-    
-    sceneManager.addScene(hakoVisTheta.getPtr());
-    
-    sceneManager.addScene(hakoniwaGear.getPtr());
-    
-    //tornado
-    sceneManager.addScene(hakoniwaTornado.getPtr());
-    sceneManager.addScene(visTornado.getPtr());
-
-	sceneManager.addScene(hakoniwaPlinkOil.getPtr());
-	sceneManager.addScene(hakoniwaPlinkLaser.getPtr());
-	sceneManager.addScene(hakoniwaPlinkPrism.getPtr());
-	sceneManager.addScene(hakoVisPlinkLaser.getPtr());
-	sceneManager.addScene(hakoVisPlinkOil.getPtr());
-	sceneManager.addScene(hakoVisPlinkPrism.getPtr());
-
-    sceneManager.addScene(dpHWorm.getPtr());
-	sceneManager.addScene(visWorm.getPtr());
-    
-    //---
-    sceneManager.addScene(dpHEyeBall.getPtr());
-    sceneManager.addScene(dpHEyeBallDancer.getPtr());
-    //---
-    
-	sceneManager.addScene(metaball.getPtr());
-
-    sceneManager.addScene(line.getPtr());
-	sceneManager.addScene(fourPoints.getPtr());
-    sceneManager.addScene(future.getPtr());
-    
-	sceneManager.addScene(testSceneA.getPtr());
-	sceneManager.addScene(testSceneB.getPtr());
-	sceneManager.addScene(testSceneC.getPtr());
-	sceneManager.addScene(testSceneD.getPtr());
-
-	sceneManager.addScene(Kioku.getPtr());
-	
-	sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
-
-    sceneManager.setShowAllActors(false);
-    
-    doSomething.setup();
+    sceneManager.addScene(mMemeBox.getPtr());
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-    mSyphonClientManager->update();
-	doSomething.update();
+
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	doSomething.draw();
-   // dpSyphonClientManager::instance().draw(0,0,ofGetWidth(),ofGetHeight());
-
+	
 }
 
 
@@ -121,94 +61,95 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(const ramActor &actor)
 {
-
+	
 }
 
 //--------------------------------------------------------------
 void testApp::drawRigid(const ramRigidBody &rigid)
 {
-
+	
 }
 
 
 #pragma mark - ram Events
+
 //--------------------------------------------------------------
 void testApp::onActorSetup(const ramActor &actor)
 {
-	
+
 }
 
 //--------------------------------------------------------------
 void testApp::onActorExit(const ramActor &actor)
 {
-	
+
 }
 
 //--------------------------------------------------------------
 void testApp::onRigidSetup(const ramRigidBody &rigid)
 {
-	
+
 }
 
 //--------------------------------------------------------------
 void testApp::onRigidExit(const ramRigidBody &rigid)
 {
-	
+
 }
 
 
-#pragma mark - of Events
+
+#pragma mark - of Event
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::keyReleased(int key)
 {
-    if(key == 'f')ofToggleFullscreen();
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::windowResized(int w, int h)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::gotMessage(ofMessage msg)
 {
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo)
 {
-
+	
 }
-

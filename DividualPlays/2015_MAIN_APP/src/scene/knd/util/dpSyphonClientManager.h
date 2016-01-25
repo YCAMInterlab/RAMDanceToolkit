@@ -24,11 +24,12 @@ public:
     void setup();
     void update();
     
-    void draw(float x, float y);
     void draw(ofPoint pos, ofPoint size, int clientNum);
     void draw(float x, float y, float width, float height, int clientNum);
     void draw(float x, float y, float width, float height);
 
+    void drawWithSideCrop();
+    void drawWithSideCrop(float x, float y);
     
 private:
     

@@ -86,13 +86,31 @@ void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
 		const ofQuaternion quat(angle, axis);
 
 		ramNode &node = getNode(i);
+		
 		node.node_id = i;
 		node.name = isActor() ? getJointName(i) : "Node " + ofToString(i);
+		
 		node.setGlobalPosition(vec);
 		node.setGlobalOrientation(quat);
 		node.accelerometer.update(vec, quat);
 	}
+	
+	ofVec3f fixpt = ofVec3f(0,0,0);
+	if (fixer >= 0) fixpt = getNode(fixer).getGlobalPosition();
 
+	ramNode &root = getNode(0);
+	root.setPosition(root.getGlobalPosition() - fixpt + offset);
+	
+	if (floor)
+	{
+		float floorOffset = 1000;
+		for (int i = 0; i < nNodes; i++)
+		{
+			floorOffset = MIN(floorOffset, getNode(i).getGlobalPosition().y);
+		}
+		root.setPosition(root.getGlobalPosition() - ofVec3f(0, floorOffset, 0));
+	} 	
+	
 	last_timestamp = current_timestamp;
 	current_timestamp = m.getArgAsFloat(2 + nNodes * 8);
 	last_update_client_time = ofGetElapsedTimef();

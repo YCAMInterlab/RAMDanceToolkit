@@ -7,6 +7,7 @@
 //
 
 #include "dpSyphonClientManager.h"
+#include "dpConstants.h"
 
 dpSyphonClientManager* dpSyphonClientManager::__instance = NULL;
 
@@ -28,7 +29,7 @@ const ofPtr<ofxSyphonClient> & dpSyphonClientManager::getClient(int clientNum){
     }
     
     if(clientNum >= mClients.size()){
-        cout << "dpSyphonClientManager : client num is bigger than size, return first cilent" << endl;
+       // cout << "dpSyphonClientManager : client num is bigger than size, return first cilent" << endl;
         map<string, ofPtr<ofxSyphonClient> >::iterator it = mClients.begin();
         
         return it->second;
@@ -93,14 +94,6 @@ void dpSyphonClientManager::update(){
     }
 }
 
-
-void dpSyphonClientManager::draw(float x, float y){
-    
-    if(empty())return;
-    
-    getClient(0)->draw(x,y);
-}
-
 void dpSyphonClientManager::draw(ofPoint pos, ofPoint size, int clientNum){
     draw(pos.x, pos.y, size.x, size.y,clientNum);
 }
@@ -108,13 +101,31 @@ void dpSyphonClientManager::draw(ofPoint pos, ofPoint size, int clientNum){
 void dpSyphonClientManager::draw(float x,float y, float width, float height, int clientNum){
 
     if(empty())return;
-    
+
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
+    ofDisableDepthTest();
     getClient(clientNum)->draw(x,y,width,height);
+    glPopAttrib();
 }
 
 void dpSyphonClientManager::draw(float x, float y, float width, float height){
     draw(x,y,width,height,0);
 }
+
+void dpSyphonClientManager::drawWithSideCrop(float x, float y){
+    
+    float scale = (float)SINGLE_SCREEN_HEIGHT / (float)EXTERNAL_VIDEO_HEIGHT;
+    float width = EXTERNAL_VIDEO_WIDTH * scale;
+    
+    draw((SINGLE_SCREEN_WIDTH - width) * 0.5 + x, y, width, SINGLE_SCREEN_HEIGHT);
+    
+};
+
+void dpSyphonClientManager::drawWithSideCrop(){
+    
+    drawWithSideCrop(0,0);
+    
+};
 
 bool dpSyphonClientManager::empty(){
     if(mClients.empty()){

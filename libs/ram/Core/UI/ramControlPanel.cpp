@@ -127,7 +127,24 @@ void ramControlPanel::update(ofEventArgs &e)
 						if (type == wd->getKind())
 						{
 							if (type == OFX_UI_WIDGET_BUTTON)
-								((ofxUIButton*)(wd))->setValue(true);
+							{
+								ofxUIButton* bt = ((ofxUIButton*)(wd));
+
+								bt->setState(OFX_UI_STATE_DOWN);
+								bt->toggleValue();
+								if(bt->getTriggerType() & OFX_UI_TRIGGER_BEGIN)
+								{
+									bt->triggerEvent(bt);
+								}
+								
+								bt->setState(OFX_UI_STATE_NORMAL);
+								bt->toggleValue();
+								if(bt->getTriggerType() & OFX_UI_TRIGGER_END)
+								{
+									bt->triggerEvent(bt);
+								}
+							}
+							
 
 							if (type == OFX_UI_WIDGET_SLIDER_H)
 								((ofxUISlider*)(wd))->setValue(m.getArgAsFloat(1));

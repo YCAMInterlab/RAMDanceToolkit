@@ -139,7 +139,7 @@ private:
     
     float mAlphaReducSpeed = 0.5;
     float mScaleDrawDelaunay = 500.0;
-    float mLineWidth = 3.0;
+    float mLineWidth = 2.0;
     float mThresh = 0.28;
     
     int mOmitNum = 6;
