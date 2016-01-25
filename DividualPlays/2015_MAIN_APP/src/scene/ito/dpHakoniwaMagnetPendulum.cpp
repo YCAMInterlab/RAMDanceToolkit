@@ -249,7 +249,7 @@ void dpHakoniwaMagnetPendulum::update() {
             } else {
                 bFirstInverseTimeDone = true;
                 for (int i = 0; i < NMAGNETS; i++){
-                    bInversed[i] = true;
+                    bInversed[i] = false;
                     bOn[i] = false;
                 }
             }
