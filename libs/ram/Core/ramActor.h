@@ -146,9 +146,14 @@ public:
 	virtual void updateWithOscMessage(const ofxOscMessage &m);
     
     ofPoint getCentroid() const;
-    
+	
+	void setFix(int id){fixer = id;};
+	void setOffset(ofVec3f v){offset = v;}
 protected:
 
+	ofVec3f offset = ofVec3f(0,0,0);
+	int fixer = -1;
+	
 	ramNodeArrayType type;
     bool is_playback;
 
@@ -225,7 +230,7 @@ public:
 	
 	static string getJointName(int jointId) { return jointName[jointId]; }
 	static vector<string> getJointNames();
-
+	
 private:
 	static string jointName[NUM_JOINTS];
 	void dispose();

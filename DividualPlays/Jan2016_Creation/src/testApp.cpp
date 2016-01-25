@@ -120,6 +120,9 @@ BrokenBody_ext mBrokenBody_ext;
 #include "dp16_camera_controller.h"
 dp16_camera_controller mCameraController;
 
+#include "dp16_ramActorTranslator.h"
+dp16_ramActorTranslator mRamActorTranslator;
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -135,6 +138,9 @@ void testApp::setup()
 
 
 	ramSceneManager& sceneManager = ramSceneManager::instance();
+	
+	sceneManager.addScene(mCameraController.getPtr());
+	sceneManager.addScene(mRamActorTranslator.getPtr());
 	
 	/* Legacy */
 	sceneManager.addScene( drawLines.getPtr() );
@@ -173,9 +179,7 @@ void testApp::setup()
 	
 	sceneManager.addScene(mLine_ext.getPtr());
 	sceneManager.addScene(mBrokenBody_ext.getPtr());
-	
-	sceneManager.addScene(mCameraController.getPtr());
-	/*
+		/*
 	sceneManager.addScene(mCube.getPtr());
 	sceneManager.addScene(mMucous.getPtr());
 	sceneManager.addScene(mStick.getPtr());

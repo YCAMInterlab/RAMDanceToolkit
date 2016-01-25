@@ -3363,10 +3363,6 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/kezzardrix2/Documents/of_v0.8.4_osx_release/DividualPlays_KAAT2/addons/ofxSyphon/libs/Syphon/lib/osx,
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ./PrefixHeader.pch;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
@@ -3404,10 +3400,6 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/kezzardrix2/Documents/of_v0.8.4_osx_release/DividualPlays_KAAT2/addons/ofxSyphon/libs/Syphon/lib/osx,
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ./PrefixHeader.pch;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;

@@ -12,6 +12,7 @@
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		C64C2FC41C54E4B9005E9BB2 /* dp16_camera_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64C2FC21C54E4B9005E9BB2 /* dp16_camera_controller.cpp */; settings = {ASSET_TAGS = (); }; };
 		C6A982B71C55A4670055D47B /* BrokenBody_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A982B51C55A4670055D47B /* BrokenBody_ext.cpp */; settings = {ASSET_TAGS = (); }; };
+		C6A982BD1C55C3770055D47B /* dp16_ramActorTranslator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A982BB1C55C3770055D47B /* dp16_ramActorTranslator.cpp */; settings = {ASSET_TAGS = (); }; };
 		C6C22F431C54629E002B38EC /* VectorField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22EE41C54629E002B38EC /* VectorField.cpp */; settings = {ASSET_TAGS = (); }; };
 		C6C22F441C54629E002B38EC /* VFParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22EE61C54629E002B38EC /* VFParticle.cpp */; settings = {ASSET_TAGS = (); }; };
 		C6C22F451C54629E002B38EC /* BaseConstrains.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22EF01C54629E002B38EC /* BaseConstrains.cpp */; settings = {ASSET_TAGS = (); }; };
@@ -118,6 +119,8 @@
 		C64C2FC31C54E4B9005E9BB2 /* dp16_camera_controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dp16_camera_controller.h; sourceTree = "<group>"; };
 		C6A982B51C55A4670055D47B /* BrokenBody_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BrokenBody_ext.cpp; path = src/scenes/sheep/BrokenBody_ext.cpp; sourceTree = SOURCE_ROOT; };
 		C6A982B61C55A4670055D47B /* BrokenBody_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BrokenBody_ext.h; path = src/scenes/sheep/BrokenBody_ext.h; sourceTree = SOURCE_ROOT; };
+		C6A982BB1C55C3770055D47B /* dp16_ramActorTranslator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dp16_ramActorTranslator.cpp; sourceTree = "<group>"; };
+		C6A982BC1C55C3770055D47B /* dp16_ramActorTranslator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dp16_ramActorTranslator.h; sourceTree = "<group>"; };
 		C6C22ED81C54629E002B38EC /* AtractSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtractSphere.h; sourceTree = "<group>"; };
 		C6C22ED91C54629E002B38EC /* BrokenBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrokenBody.h; sourceTree = "<group>"; };
 		C6C22EDA1C54629E002B38EC /* BurstBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BurstBody.h; sourceTree = "<group>"; };
@@ -304,6 +307,33 @@
 				BBAB23BE13894E4700AA2426 /* GLUT.framework */,
 			);
 			name = "3rd party frameworks";
+			sourceTree = "<group>";
+		};
+		C6A982B81C55B6670055D47B /* BrokenBody_ext */ = {
+			isa = PBXGroup;
+			children = (
+				C6A982B61C55A4670055D47B /* BrokenBody_ext.h */,
+				C6A982B51C55A4670055D47B /* BrokenBody_ext.cpp */,
+			);
+			name = BrokenBody_ext;
+			sourceTree = "<group>";
+		};
+		C6A982B91C55B66E0055D47B /* LineDrawing_ext */ = {
+			isa = PBXGroup;
+			children = (
+				C6C22F691C54A042002B38EC /* lineDrawing_ext.h */,
+				C6C22F681C54A042002B38EC /* lineDrawing_ext.cpp */,
+			);
+			name = LineDrawing_ext;
+			sourceTree = "<group>";
+		};
+		C6A982BA1C55B6770055D47B /* CameraController */ = {
+			isa = PBXGroup;
+			children = (
+				C64C2FC21C54E4B9005E9BB2 /* dp16_camera_controller.cpp */,
+				C64C2FC31C54E4B9005E9BB2 /* dp16_camera_controller.h */,
+			);
+			name = CameraController;
 			sourceTree = "<group>";
 		};
 		C6C22ED71C54629E002B38EC /* kez */ = {
@@ -609,13 +639,12 @@
 		C6C22F381C54629E002B38EC /* sheep */ = {
 			isa = PBXGroup;
 			children = (
+				C6A982BC1C55C3770055D47B /* dp16_ramActorTranslator.h */,
+				C6A982BB1C55C3770055D47B /* dp16_ramActorTranslator.cpp */,
 				C6C22F391C54629E002B38EC /* distanceMetaball */,
-				C6A982B61C55A4670055D47B /* BrokenBody_ext.h */,
-				C6A982B51C55A4670055D47B /* BrokenBody_ext.cpp */,
-				C6C22F691C54A042002B38EC /* lineDrawing_ext.h */,
-				C6C22F681C54A042002B38EC /* lineDrawing_ext.cpp */,
-				C64C2FC21C54E4B9005E9BB2 /* dp16_camera_controller.cpp */,
-				C64C2FC31C54E4B9005E9BB2 /* dp16_camera_controller.h */,
+				C6A982B81C55B6670055D47B /* BrokenBody_ext */,
+				C6A982B91C55B66E0055D47B /* LineDrawing_ext */,
+				C6A982BA1C55B6770055D47B /* CameraController */,
 			);
 			name = sheep;
 			path = scenes/sheep;
@@ -845,6 +874,7 @@
 				C6C22F481C54629E002B38EC /* ChainBtShapeDrawer.cpp in Sources */,
 				C6C22F441C54629E002B38EC /* VFParticle.cpp in Sources */,
 				C6C22F4E1C54629E002B38EC /* KeplerCube.cpp in Sources */,
+				C6A982BD1C55C3770055D47B /* dp16_ramActorTranslator.cpp in Sources */,
 				C6C22F551C54629E002B38EC /* MarchingCubes.cpp in Sources */,
 				C6C22F531C54629E002B38EC /* WeiredSpace.cpp in Sources */,
 			);
