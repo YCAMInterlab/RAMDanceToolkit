@@ -40,3 +40,6 @@
 [submodule "addons/ofxTrueTypeFontUC"]
 	path = addons/ofxTrueTypeFontUC
 	url = https://github.com/hironishihara/ofxTrueTypeFontUC
+[submodule "addons/ofxSyphon"]
+	path = addons/ofxSyphon
+	url = https://github.com/astellato/ofxSyphon.git

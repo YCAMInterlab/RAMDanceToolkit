@@ -41,6 +41,7 @@
 #include "dpHakoVisMagnetPendulum.h"
 #include "dpHakoVisTornado.h"
 #include "dpHakoniwaTornado.h"
+#include "dpHakoniwaRawCamera.h"
 
 
 //SHEEP Scenes
@@ -67,6 +68,8 @@
 #include "Future.h"
 
 #include "DoSomething.h"
+
+#include "dpSyphonClientManager.h"
 
 class testApp : public ramBaseApp
 {
@@ -163,5 +166,9 @@ public:
     Future     future;
     
     DoSomething doSomething;
+    
+    dpHakoniwaRawCamera rawCamera;
+    
+    dpSyphonClientManager *mSyphonClientManager;
     
 };

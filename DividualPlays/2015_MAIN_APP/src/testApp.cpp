@@ -29,13 +29,16 @@ void testApp::setup()
 	// ------------------
 	ramInitialize(10000);
     
-    getVideoGrabberManager().setupDevice(0);
-	
+    mSyphonClientManager = &dpSyphonClientManager::instance();
+    mSyphonClientManager->setup();
+  
 	/// register myScene to ramSceneManager
 	/// - EmptyScene::update, draw, and other method will be triggerd by ramSceneManager
 	/// - the scene added to ramSceneManager will appeard on GUI automaticaly
 	ramSceneManager& sceneManager = ramSceneManager::instance();
 	
+    sceneManager.addScene(rawCamera.getPtr());
+    
     sceneManager.addScene(hakoniwaServoPendulum.getPtr());
     sceneManager.addScene(visServoPendulum.getPtr());
     
@@ -100,6 +103,7 @@ void testApp::setup()
 //--------------------------------------------------------------
 void testApp::update()
 {
+    mSyphonClientManager->update();
 	doSomething.update();
 }
 
@@ -107,6 +111,8 @@ void testApp::update()
 void testApp::draw()
 {
 	doSomething.draw();
+   // dpSyphonClientManager::instance().draw(0,0,ofGetWidth(),ofGetHeight());
+
 }
 
 
