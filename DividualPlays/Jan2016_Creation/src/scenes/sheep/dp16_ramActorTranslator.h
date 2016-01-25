@@ -23,9 +23,15 @@ public:
 	void update();
 	void draw();
 
+	void exit();
+	
 private:
+	
 	int fixer;
 	ofVec3f offset;
+	
+	bool autoLayout;
+	float margine;
 };
 
 #endif /* dp16_ramActorTranslator_h */
