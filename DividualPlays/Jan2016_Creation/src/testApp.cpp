@@ -117,6 +117,12 @@ LineDrawing_ext mLine_ext;
 #include "BrokenBody_ext.h"
 BrokenBody_ext mBrokenBody_ext;
 
+#include "BigBox_ext.h"
+BigBox_ext mBigBox_ext;
+
+#include "FourPoints_ext.h"
+FourPoints_ext mFourPoints_ext;
+
 #include "dp16_camera_controller.h"
 dp16_camera_controller mCameraController;
 
@@ -141,6 +147,11 @@ void testApp::setup()
 	
 	sceneManager.addScene(mCameraController.getPtr());
 	sceneManager.addScene(mRamActorTranslator.getPtr());
+
+	sceneManager.addScene(mLine_ext.getPtr());
+	sceneManager.addScene(mBrokenBody_ext.getPtr());
+	sceneManager.addScene(mBigBox_ext.getPtr());
+	sceneManager.addScene(mFourPoints_ext.getPtr());
 	
 	/* Legacy */
 	sceneManager.addScene( drawLines.getPtr() );
@@ -177,8 +188,6 @@ void testApp::setup()
 	sceneManager.addScene(mMiddleScene.getPtr());
 	sceneManager.addScene(mMixMonsterScene.getPtr());
 	
-	sceneManager.addScene(mLine_ext.getPtr());
-	sceneManager.addScene(mBrokenBody_ext.getPtr());
 		/*
 	sceneManager.addScene(mCube.getPtr());
 	sceneManager.addScene(mMucous.getPtr());
