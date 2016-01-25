@@ -23,8 +23,7 @@ public:
     
     void setup();
     void update();
-    
-    void draw(float x, float y);
+
     void draw(ofPoint pos, ofPoint size, int clientNum);
     void draw(float x, float y, float width, float height, int clientNum);
     void draw(float x, float y, float width, float height);

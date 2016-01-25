@@ -28,7 +28,7 @@ const ofPtr<ofxSyphonClient> & dpSyphonClientManager::getClient(int clientNum){
     }
     
     if(clientNum >= mClients.size()){
-        cout << "dpSyphonClientManager : client num is bigger than size, return first cilent" << endl;
+       // cout << "dpSyphonClientManager : client num is bigger than size, return first cilent" << endl;
         map<string, ofPtr<ofxSyphonClient> >::iterator it = mClients.begin();
         
         return it->second;
@@ -93,14 +93,6 @@ void dpSyphonClientManager::update(){
     }
 }
 
-
-void dpSyphonClientManager::draw(float x, float y){
-    
-    if(empty())return;
-    
-    getClient(0)->draw(x,y);
-}
-
 void dpSyphonClientManager::draw(ofPoint pos, ofPoint size, int clientNum){
     draw(pos.x, pos.y, size.x, size.y,clientNum);
 }
@@ -108,8 +100,11 @@ void dpSyphonClientManager::draw(ofPoint pos, ofPoint size, int clientNum){
 void dpSyphonClientManager::draw(float x,float y, float width, float height, int clientNum){
 
     if(empty())return;
-    
+
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
+    ofDisableDepthTest();
     getClient(clientNum)->draw(x,y,width,height);
+    glPopAttrib();
 }
 
 void dpSyphonClientManager::draw(float x, float y, float width, float height){

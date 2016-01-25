@@ -13,6 +13,7 @@
 		5E9600511A73454800F0FCD4 /* eyeBallDancer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E96004F1A73454800F0FCD4 /* eyeBallDancer.cpp */; };
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
 		920BA37C1A67C9D700E4A227 /* dpHakoniwaSand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 920BA37A1A67C9D700E4A227 /* dpHakoniwaSand.cpp */; };
+		9230474C1C55E2D000F63832 /* ofxBlur.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9230474A1C55E2D000F63832 /* ofxBlur.cpp */; };
 		924B3F8C1C54F9FC00672EE8 /* dpSyphonClientManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 924B3F8A1C54F9FC00672EE8 /* dpSyphonClientManager.cpp */; };
 		924B3FFF1C54FA9400672EE8 /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 924B3FEC1C54FA9400672EE8 /* Syphon.framework */; };
 		924B40001C54FA9400672EE8 /* SyphonNameboundClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 924B3FEF1C54FA9400672EE8 /* SyphonNameboundClient.m */; };
@@ -133,6 +134,10 @@
 		920BA3811A67CB6B00E4A227 /* dpIceMapTri.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpIceMapTri.h; sourceTree = "<group>"; };
 		920BA3821A67CB8D00E4A227 /* KezDelaunayMesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezDelaunayMesh.h; sourceTree = "<group>"; };
 		920BA3831A67CBA800E4A227 /* KezBlinker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezBlinker.h; sourceTree = "<group>"; };
+		923047481C55E2BA00F63832 /* KezAccumlateWeightedFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezAccumlateWeightedFilter.h; sourceTree = "<group>"; };
+		923047491C55E2BA00F63832 /* KezLuminanceFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezLuminanceFilter.h; sourceTree = "<group>"; };
+		9230474A1C55E2D000F63832 /* ofxBlur.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBlur.cpp; sourceTree = "<group>"; };
+		9230474B1C55E2D000F63832 /* ofxBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBlur.h; sourceTree = "<group>"; };
 		9236CE851A690C480060B0FF /* dpHakoVisMagnetPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisMagnetPendulum.h; sourceTree = "<group>"; };
 		924B3F8A1C54F9FC00672EE8 /* dpSyphonClientManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpSyphonClientManager.cpp; sourceTree = "<group>"; };
 		924B3F8B1C54F9FC00672EE8 /* dpSyphonClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpSyphonClientManager.h; sourceTree = "<group>"; };
@@ -476,6 +481,10 @@
 		92CB5B121A666F6A00257334 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				9230474A1C55E2D000F63832 /* ofxBlur.cpp */,
+				9230474B1C55E2D000F63832 /* ofxBlur.h */,
+				923047481C55E2BA00F63832 /* KezAccumlateWeightedFilter.h */,
+				923047491C55E2BA00F63832 /* KezLuminanceFilter.h */,
 				924B3F8A1C54F9FC00672EE8 /* dpSyphonClientManager.cpp */,
 				924B3F8B1C54F9FC00672EE8 /* dpSyphonClientManager.h */,
 				920BA3831A67CBA800E4A227 /* KezBlinker.h */,
@@ -806,6 +815,7 @@
 				C66CCCF41A66750D00CE64E9 /* HakoniwaPLink_Prism.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				924B40001C54FA9400672EE8 /* SyphonNameboundClient.m in Sources */,
+				9230474C1C55E2D000F63832 /* ofxBlur.cpp in Sources */,
 				CF6C55C81A6F80950042DE07 /* distanceMetaball.cpp in Sources */,
 				CF6C55CA1A6F80950042DE07 /* MarchingTetrahedrons.cpp in Sources */,
 				C66CCCF61A66750D00CE64E9 /* hakoVisPLink_Oil.cpp in Sources */,
