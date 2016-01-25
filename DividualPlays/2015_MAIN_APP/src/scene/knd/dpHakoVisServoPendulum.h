@@ -79,7 +79,7 @@ public:
         mFbo.begin();
         ofClear(0);
         ofSetColor(255);
-        dpSyphonClientManager::instance().draw(mOffsetX,0,SINGLE_SCREEN_WIDTH,SINGLE_SCREEN_HEIGHT);
+        dpSyphonClientManager::instance().drawWithSideCrop(mOffsetX, 0);
         mFbo.end();
         
         mAccumlateWeightedFilter.begin();
@@ -102,10 +102,10 @@ public:
         ofEnableBlendMode(OF_BLENDMODE_ADD);
         mAccumlateWeightedFilter.draw();
         mBlur.draw();
-        if(mIsDrawRawCam)dpSyphonClientManager::instance().draw(mOffsetX,0,SINGLE_SCREEN_WIDTH,SINGLE_SCREEN_HEIGHT);
+        if(mIsDrawRawCam)dpSyphonClientManager::instance().drawWithSideCrop(mOffsetX, 0);
         
         drawToBuffer();
-        
+ 
     }
     
     
@@ -145,7 +145,7 @@ private:
         mBufferFbo.begin();
         ofClear(0);
         ofSetColor(255);
-        dpSyphonClientManager::instance().draw(mOffsetX,0,SINGLE_SCREEN_WIDTH,SINGLE_SCREEN_HEIGHT);
+        dpSyphonClientManager::instance().drawWithSideCrop(mOffsetX, 0);
         mBufferFbo.end();
     }
 };
