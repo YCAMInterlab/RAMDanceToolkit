@@ -138,6 +138,7 @@
 		923047491C55E2BA00F63832 /* KezLuminanceFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezLuminanceFilter.h; sourceTree = "<group>"; };
 		9230474A1C55E2D000F63832 /* ofxBlur.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBlur.cpp; sourceTree = "<group>"; };
 		9230474B1C55E2D000F63832 /* ofxBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBlur.h; sourceTree = "<group>"; };
+		9230474D1C55FA5500F63832 /* dpHakoniwaRawCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaRawCamera.h; sourceTree = "<group>"; };
 		9236CE851A690C480060B0FF /* dpHakoVisMagnetPendulum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisMagnetPendulum.h; sourceTree = "<group>"; };
 		924B3F8A1C54F9FC00672EE8 /* dpSyphonClientManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpSyphonClientManager.cpp; sourceTree = "<group>"; };
 		924B3F8B1C54F9FC00672EE8 /* dpSyphonClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpSyphonClientManager.h; sourceTree = "<group>"; };
@@ -298,6 +299,7 @@
 				92CB5B0E1A666F1F00257334 /* dpHakoVisBug.h */,
 				92CB5B0F1A666F1F00257334 /* dpHakoVisWorm.h */,
 				92CB5B101A666F1F00257334 /* dpHakoVisServoPendulum.h */,
+				9230474D1C55FA5500F63832 /* dpHakoniwaRawCamera.h */,
 				9236CE851A690C480060B0FF /* dpHakoVisMagnetPendulum.h */,
 				C6755C051A6BB3AA007E9984 /* dpHakoVisTornado.h */,
 			);

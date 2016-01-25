@@ -37,6 +37,8 @@ void testApp::setup()
 	/// - the scene added to ramSceneManager will appeard on GUI automaticaly
 	ramSceneManager& sceneManager = ramSceneManager::instance();
 	
+    sceneManager.addScene(rawCamera.getPtr());
+    
     sceneManager.addScene(hakoniwaServoPendulum.getPtr());
     sceneManager.addScene(visServoPendulum.getPtr());
     
@@ -109,9 +111,8 @@ void testApp::update()
 void testApp::draw()
 {
 	doSomething.draw();
+   // dpSyphonClientManager::instance().draw(0,0,ofGetWidth(),ofGetHeight());
 
-   // mSyphonClientManager->draw(0, 0);
-   // mSyphonClientManager->draw(640, 0,640,480,1);
 }
 
 
