@@ -11,6 +11,7 @@
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		C64C2FC41C54E4B9005E9BB2 /* dp16_camera_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64C2FC21C54E4B9005E9BB2 /* dp16_camera_controller.cpp */; settings = {ASSET_TAGS = (); }; };
+		C6A982B71C55A4670055D47B /* BrokenBody_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A982B51C55A4670055D47B /* BrokenBody_ext.cpp */; settings = {ASSET_TAGS = (); }; };
 		C6C22F431C54629E002B38EC /* VectorField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22EE41C54629E002B38EC /* VectorField.cpp */; settings = {ASSET_TAGS = (); }; };
 		C6C22F441C54629E002B38EC /* VFParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22EE61C54629E002B38EC /* VFParticle.cpp */; settings = {ASSET_TAGS = (); }; };
 		C6C22F451C54629E002B38EC /* BaseConstrains.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22EF01C54629E002B38EC /* BaseConstrains.cpp */; settings = {ASSET_TAGS = (); }; };
@@ -115,6 +116,8 @@
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		C64C2FC21C54E4B9005E9BB2 /* dp16_camera_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dp16_camera_controller.cpp; sourceTree = "<group>"; };
 		C64C2FC31C54E4B9005E9BB2 /* dp16_camera_controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dp16_camera_controller.h; sourceTree = "<group>"; };
+		C6A982B51C55A4670055D47B /* BrokenBody_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BrokenBody_ext.cpp; path = src/scenes/sheep/BrokenBody_ext.cpp; sourceTree = SOURCE_ROOT; };
+		C6A982B61C55A4670055D47B /* BrokenBody_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BrokenBody_ext.h; path = src/scenes/sheep/BrokenBody_ext.h; sourceTree = SOURCE_ROOT; };
 		C6C22ED81C54629E002B38EC /* AtractSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtractSphere.h; sourceTree = "<group>"; };
 		C6C22ED91C54629E002B38EC /* BrokenBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrokenBody.h; sourceTree = "<group>"; };
 		C6C22EDA1C54629E002B38EC /* BurstBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BurstBody.h; sourceTree = "<group>"; };
@@ -607,6 +610,8 @@
 			isa = PBXGroup;
 			children = (
 				C6C22F391C54629E002B38EC /* distanceMetaball */,
+				C6A982B61C55A4670055D47B /* BrokenBody_ext.h */,
+				C6A982B51C55A4670055D47B /* BrokenBody_ext.cpp */,
 				C6C22F691C54A042002B38EC /* lineDrawing_ext.h */,
 				C6C22F681C54A042002B38EC /* lineDrawing_ext.cpp */,
 				C64C2FC21C54E4B9005E9BB2 /* dp16_camera_controller.cpp */,
@@ -831,6 +836,7 @@
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				C6C22F4C1C54629E002B38EC /* KeplerBtDynamics.cpp in Sources */,
 				C6C22F4B1C54629E002B38EC /* Kepler.cpp in Sources */,
+				C6A982B71C55A4670055D47B /* BrokenBody_ext.cpp in Sources */,
 				C6C22F491C54629E002B38EC /* ChainObject.cpp in Sources */,
 				C6C22F641C5476D4002B38EC /* middleScene.cpp in Sources */,
 				C6C22F521C54629E002B38EC /* MoveSeparatedObjects.cpp in Sources */,
