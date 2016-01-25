@@ -68,15 +68,17 @@ private:
     
     void drawScene();
     void drawToolKit();
-    void drawStage();
-    void drawCameras();
+    void drawNodes();
+    void drawDancers();
+    void drawLines();
+    void debugDrawCameras();
     void drawHUD();
     
     void changeCamMode(CamMode m);
     int getCurrentNodeID() const;
     int getNextNodeID() const;
     
-    template <class T> ofPtr<T> getNode(int idx) { return dynamic_pointer_cast<T>(mNodes.at(idx)); }
+    template <class T> ofPtr<T> getNode();
         
 	ofTrueTypeFont mFont, mFontSmall;
     ofxTrueTypeFontUC mFontJP;
@@ -98,6 +100,14 @@ private:
     float mElapsedTimeMove {0.f};
     float mElapsedTimeMainCam {0.f};
 };
+
+template <class T> ofPtr<T> SceneFlowChart::getNode()
+{
+    for (auto n : mNodes) {
+        if (getClassName(*n) == getClassName<T>())
+        return dynamic_pointer_cast<T>(n);
+    }
+}
 
 DP_SCORE_NAMESPACE_END
 

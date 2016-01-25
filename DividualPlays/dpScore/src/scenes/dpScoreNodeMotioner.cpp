@@ -16,6 +16,10 @@ DP_SCORE_NAMESPACE_BEGIN
 
 NodeMotioner::NodeMotioner()
 {
+    title = "Motion Captures";
+    titleJP = "モーションキャプチャ";
+    descriptionJP = "モーションキャプチャでダンサーの動きをコンピュータに取り込む";
+    
     addAimingOffset(ofVec3f::zero());
     
     getCamera().setFov(70.f);

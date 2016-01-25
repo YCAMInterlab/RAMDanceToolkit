@@ -49,7 +49,7 @@ public:
 			if (spiral_radius > 0) nodeLine.spiral(spiral_radius, spiral_num_rotate);
 			if (noise_scale > 0) nodeLine.noise(noise_scale, noise_freq, ofGetFrameNum() / 60.0f);
 			
-			ofSetColor(255);
+			ofSetColor(color);
 			ofSetLineWidth(line_width);
 			nodeLine.draw();
 			
@@ -81,6 +81,7 @@ public:
 	};
 	
 	LineContext lines[NUM_LINE];
+	
 	ramMotionExtractor mex;
 	
 	void setupControlPanel();

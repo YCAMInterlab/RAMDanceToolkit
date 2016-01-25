@@ -52,6 +52,11 @@ void dp16_ramActorTranslator::update()
 	{
 		for (int i = 0;i < am.getNumNodeArray();i++)
 		{
+			ramNodeArray & act = am.getNodeArray(i);
+
+			act.setFloor(floorStay);
+			act.setFix(fixer);
+			
 			float x = margine * i - (margine * (numArray - 1)) / 2.0;
 			am.getNodeArray(i).setFix(fixer);
 			am.getNodeArray(i).setOffset(offset + ofVec3f(x,0,0));

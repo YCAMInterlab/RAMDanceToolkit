@@ -10,6 +10,19 @@
 
 void LineDrawing_ext::setupControlPanel()
 {
+	ofxUICanvas* gui = ramGetGUI().getCurrentUIContext();
+	for (int i = 0;i < NUM_LINE;i++)
+	{
+		gui->addSlider("Curve"+ofToString(i), -300.0, 300.0, &lines[i].curve);
+		gui->addSlider("ext_to"+ofToString(i), 0, 1000, &lines[i].extend_to);
+		gui->addSlider("ext_from"+ofToString(i), 0, 1000, &lines[i].extend_from);
+		gui->addSlider("Red_"+ofToString(i), 0.0, 1.0, &lines[i].color.r);
+		gui->addSlider("Green_"+ofToString(i), 0.0, 1.0, &lines[i].color.g);
+		gui->addSlider("Blue_"+ofToString(i), 0.0, 1.0, &lines[i].color.b);
+		
+		gui->addSpacer();
+	}
+	
 	mex.setupControlPanel(this);
 	mex.load("motionExt_"+getName()+".xml");
 	
