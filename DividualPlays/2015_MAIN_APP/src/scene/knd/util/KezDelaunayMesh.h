@@ -73,6 +73,7 @@ public:
         if(isRotAfterFinish){
             changeRot();
             mBlink.start();
+         //   mAlpha = 200;
         }
     }
     
@@ -129,34 +130,52 @@ public:
                 
                 ofPushMatrix();
 
-                ofRotateX(mRot.x);
+                /*ofRotateX(mRot.x);
                 ofRotateY(mRot.y);
                 ofRotateZ(mRot.z);
-                
-                if(mBlink.update()){
-                    ofSetColor(200,mAlpha);
+                */
+             //   if(mBlink.update()){
+                    ofEnableBlendMode(OF_BLENDMODE_ADD);
+                    ofSetColor(255,mAlpha * 0.75);
                     mDelaunay.draw();
-                    
+                
+                    ofEnableBlendMode(OF_BLENDMODE_ADD);
                     ofSetColor(dpColor::MAIN_COLOR,mAlpha);
                     mDelaunay.triangleMesh.drawVertices();
                 
                     if(isShowFaces)drawEachTriangle(mDelaunay.triangleMesh);
                 
-                }
-                
-                if(mHasFinishedAddPt == false){
-                    ofSetColor(mColor,mAlpha);
-                    ofDrawSphere(mHead,mSphereRad);
-                    
-                  //  ofSetColor(255,255,255,mAlpha);
-                  //  ofLine(0,0,mHead.x,mHead.y);
-                 
-                }
+           //     }
                 
                 ofPopMatrix();
                 ofPopStyle();
                 
             }
+        }
+    }
+    
+    void drawCenterCircle(){
+        
+        if(mAlpha > 0 && mPts.empty() == false){
+            ofPushStyle();
+            
+            if(mHasFinishedAddPt == false){
+                
+                ofFill();
+                ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+                ofSetColor(mColor,mAlpha);
+                ofCircle(mHead,mSphereRad);
+                
+                ofSetColor(255,mAlpha);
+                ofCircle(mHead,mSphereRad * 0.125);
+                
+                ofNoFill();
+                ofSetColor(255,mAlpha);
+                ofCircle(mHead,mSphereRad);
+            
+            }
+            
+            ofPopStyle();
         }
     }
     
@@ -246,7 +265,7 @@ private:
     float mScale = 1.0;
     float mAlphaReduc = 1.0;
     float mAlpha = 0;
-    float mSphereRad = 16.0;
+    float mSphereRad = 12.0;
     
     ofPoint mPrePt;
     ofPoint mHead;
@@ -272,7 +291,7 @@ private:
     
     ofColor mColor;
     
-    int mOmitFace = 3;
+    int mOmitFace = 12;
 };
 
 class KezDelaunayMeshController{
@@ -317,6 +336,10 @@ public:
         
         for(auto &v:mDelaunays){
             v.draw();
+        }
+        
+        for(auto &v:mDelaunays){
+            v.drawCenterCircle();
         }
         
         disablePointAtt();
