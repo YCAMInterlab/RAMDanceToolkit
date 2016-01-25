@@ -17,6 +17,10 @@ DP_SCORE_NAMESPACE_BEGIN
 
 NodeSpeaker::NodeSpeaker()
 {
+    title = "Speakers";
+    titleJP = "音響";
+    descriptionJP = "音響";
+    
 	addAimingOffset(getRight() + ofVec3f(getWidth() * 0.5f - 32.f, getHeight() * 0.7f, 45.f));
     
     getCamera().setFov(55.f);

@@ -59,8 +59,12 @@ public:
 	}
 
 	float t {0.f};
+	string title;
+	string titleJP;
+	string description;
+	string descriptionJP;
 
-private:
+protected:
 	vector<ofVec3f> mOffsets;
 	ofCamera mCamera;
 };

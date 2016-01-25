@@ -26,8 +26,16 @@ public:
     constexpr static const int kNumY { 2 };
     static float getWidth() { return Desk::getDimension() * kNumX;  }
     static float getDepth() { return Desk::getDimension() * kNumY + 90.f * (kNumY - 1);  }
+
+    void setX(int i) { mX = ofClamp(i, 0, kNumX); };
+    void setY(int i) { mY = ofClamp(i, 0, kNumY); };
+    void setFocus(bool focus) { mFocus = true; }
+    
 private:
     Desk mDesk;
+    bool mFocus {true};
+    int mX {1};
+    int mY {0};
 };
 
 DP_SCORE_NAMESPACE_END

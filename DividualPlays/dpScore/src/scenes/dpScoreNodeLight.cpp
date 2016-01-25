@@ -17,12 +17,16 @@ DP_SCORE_NAMESPACE_BEGIN
 
 NodeLight::NodeLight()
 {
-    setGlobalPosition(0.f, getHeight(), 0.f);
-    addAimingOffset(ofVec3f::zero());
-    
-    getCamera().setFov(50.f);
-    getCamera().setPosition(0.f, 400.f, 500.f);
-    getCamera().setOrientation(ofVec3f(15.f, 0.f, 0.f));
+	title = "Lights";
+	titleJP = "照明";
+	descriptionJP = "照明";
+
+	setGlobalPosition(0.f, getHeight(), 0.f);
+	addAimingOffset(ofVec3f::zero());
+
+	getCamera().setFov(50.f);
+	getCamera().setPosition(0.f, 400.f, 500.f);
+	getCamera().setOrientation(ofVec3f(15.f, 0.f, 0.f));
 }
 
 NodeLight::~NodeLight()
@@ -35,14 +39,14 @@ void NodeLight::customDraw()
 	ScopedStyle s;
 	setStyle(*this);
 
-    const int nX{8}, nZ{3};
-    for (auto j : rep(nZ)) {
-        for (auto i : rep(nX)) {
-            const float w{600.f};
-            ScopedTranslate t(-w * 0.5f + (w/(float)nX) * i, 0.f, -w * 0.5f + (w/(float)nZ) * j);
-            drawParLight(::cos(ofGetElapsedTimef() + i * 0.5) * 45.f);
-        }
-    }
+	const int nX {8}, nZ {3};
+	for (auto j : rep(nZ)) {
+		for (auto i : rep(nX)) {
+			const float w {600.f};
+			ScopedTranslate t(-w * 0.5f + (w / (float)nX) * i, 0.f, -w * 0.5f + (w / (float)nZ) * j);
+			drawParLight(::cos(ofGetElapsedTimef() + i * 0.5) * 45.f);
+		}
+	}
 }
 
 void NodeLight::drawParLight(float angle)

@@ -16,24 +16,10 @@ DP_SCORE_NAMESPACE_BEGIN
 
 class NodeDancer: public BaseNode {
 public:
-	NodeDancer()
-	{
-		addAimingOffset(ofVec3f::zero());
-        
-        getCamera().setFov(50.f);
-        getCamera().setPosition(0.f, 200.f, 800.f);
-        getCamera().setOrientation(ofVec3f(-20.f, 0.f, 0.f));
-	}
+    NodeDancer();
+    virtual ~NodeDancer();
 
-	virtual ~NodeDancer()
-	{
-	}
-
-	void customDraw() override
-	{
-	}
-
-private:
+    void customDraw() override;
 
 };
 
