@@ -147,12 +147,20 @@ public:
     
     ofPoint getCentroid() const;
 	
-	void setFix(int id){fixer = id;};
-	void setOffset(ofVec3f v){offset = v;}
+	void	setFix(int id){fixer = id;};
+	int		getFix(){return fixer;}
+	
+	void	setOffset(ofVec3f v){offset = v;}
+	ofVec3f getOffset(){return offset;}
+	
+	void	setFloor(bool b){floor = b;};
+	bool	getFloor(){return floor;}
+		
 protected:
 
 	ofVec3f offset = ofVec3f(0,0,0);
 	int fixer = -1;
+	bool floor = false;
 	
 	ramNodeArrayType type;
     bool is_playback;

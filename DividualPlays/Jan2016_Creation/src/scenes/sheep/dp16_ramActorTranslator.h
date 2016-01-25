@@ -29,7 +29,7 @@ private:
 	
 	int fixer;
 	ofVec3f offset;
-	
+	bool floorStay;
 	bool autoLayout;
 	float margine;
 };
