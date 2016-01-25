@@ -11,6 +11,7 @@
 void dp16_ramActorTranslator::setupControlPanel()
 {
 	ramGetGUI().addIntSlider("fix_pos", -1, 22, &fixer);
+	ramGetGUI().addToggle("floorStay", &floorStay);
 	ramGetGUI().addSlider("offset_x", -500, 500, &offset.x);
 	ramGetGUI().addSlider("offset_y", -500, 500, &offset.y);
 	ramGetGUI().addSlider("offset_z", -500, 500, &offset.z);
@@ -29,8 +30,22 @@ void dp16_ramActorTranslator::update()
 	{
 		for (int i = 0;i < am.getNumNodeArray();i++)
 		{
-			am.getNodeArray(i).setFix(fixer);
-			am.getNodeArray(i).setOffset(offset);
+			ramNodeArray & act = am.getNodeArray(i);
+
+			act.setFloor(floorStay);
+			act.setFix(fixer);
+			
+			float floor_y = 0;
+			for (int j = 0;j < am.getNodeArray(i).getNumNode();j++)
+			{
+				ramNode &nd = act.getNode(j);
+				floor_y = MIN(floor_y, nd.getGlobalPosition().y);
+			}
+			
+			floor_y = act.getNode(0).getGlobalPosition().y;
+			
+			act.setOffset(offset);
+			
 		}
 	}
 	else
