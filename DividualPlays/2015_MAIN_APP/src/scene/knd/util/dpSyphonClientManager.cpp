@@ -7,6 +7,7 @@
 //
 
 #include "dpSyphonClientManager.h"
+#include "dpConstants.h"
 
 dpSyphonClientManager* dpSyphonClientManager::__instance = NULL;
 
@@ -110,6 +111,21 @@ void dpSyphonClientManager::draw(float x,float y, float width, float height, int
 void dpSyphonClientManager::draw(float x, float y, float width, float height){
     draw(x,y,width,height,0);
 }
+
+void dpSyphonClientManager::drawWithSideCrop(float x, float y){
+    
+    float scale = (float)SINGLE_SCREEN_HEIGHT / (float)EXTERNAL_VIDEO_HEIGHT;
+    float width = EXTERNAL_VIDEO_WIDTH * scale;
+    
+    draw((SINGLE_SCREEN_WIDTH - width) * 0.5 + x, y, width, SINGLE_SCREEN_HEIGHT);
+    
+};
+
+void dpSyphonClientManager::drawWithSideCrop(){
+    
+    drawWithSideCrop(0,0);
+    
+};
 
 bool dpSyphonClientManager::empty(){
     if(mClients.empty()){
