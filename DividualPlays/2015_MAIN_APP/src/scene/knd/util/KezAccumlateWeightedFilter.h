@@ -55,7 +55,7 @@ public:
                                         dstColor = hsb2rgb(hsb);
                                     
                                         vec3 finalColor = dstAlpha * dstColor + srcAlpha * srcColor;
-                                        
+                                        finalColor = clamp(finalColor.rgb,0.0,1.0);
                                         gl_FragColor = vec4(finalColor.rgb,1.0);
                                         
                                     }
@@ -64,8 +64,9 @@ public:
         mAccumlateWeighted.setupShaderFromSource(GL_FRAGMENT_SHADER, frag);
         mAccumlateWeighted.linkProgram();
         
-        mSrc.allocate(ofGetWidth(),ofGetHeight(),GL_RGB32F);
-        mDst.allocate(ofGetWidth(),ofGetHeight(),GL_RGB32F);
+        mSrc.allocate(SINGLE_SCREEN_WIDTH,SINGLE_SCREEN_HEIGHT,GL_RGB32F);
+        mDst.allocate(SINGLE_SCREEN_WIDTH,SINGLE_SCREEN_HEIGHT,GL_RGB32F);
+        mBuffer.allocate(SINGLE_SCREEN_WIDTH,SINGLE_SCREEN_HEIGHT,GL_RGB32F);
        
         clear();
         
@@ -103,6 +104,10 @@ public:
         mDst.begin();
         ofClear(0,0);
         mDst.end();
+        
+        mBuffer.begin();
+        ofClear(0,0);
+        mBuffer.end();
     }
     
     void process(){
@@ -111,7 +116,7 @@ public:
         mAccumlateWeighted.setUniform1f("dstAlpha",mDstAlpha);
         mAccumlateWeighted.setUniform1f("srcAlpha",mSrcAlpha);
         mAccumlateWeighted.setUniform1f("speed", mSpeed);
-        mAccumlateWeighted.setUniformTexture("dst",mDst.getTextureReference(),1);
+        mAccumlateWeighted.setUniformTexture("dst",mBuffer.getTextureReference(),1);
         
         mDst.begin();
         mSrc.draw(0,0);
@@ -124,12 +129,19 @@ public:
     void update(){}
     void draw(){
         mDst.draw(0,0);
+        
+        mBuffer.begin();
+        ofClear(0);
+        mDst.draw(0,0);
+        mBuffer.end();
     }
 private:
     
     // dstが残像
     ofFbo mDst;
     ofFbo mSrc;
+    
+    ofFbo mBuffer;
     ofShader mAccumlateWeighted;
     
     float mDstAlpha = 0.99;

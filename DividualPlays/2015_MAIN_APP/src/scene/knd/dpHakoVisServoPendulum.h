@@ -25,6 +25,9 @@ public:
         ramGetGUI().addToggle("drawRawCam", &mIsDrawRawCam);
         ramGetGUI().addSlider("offsetX",0.0,SINGLE_SCREEN_WIDTH,&mOffsetX);
         
+       // ramGetGUI().addSlider("dst",0.0,1.0,&mDst);
+       // ramGetGUI().addSlider("src",0.0,1.0,&mSrc);
+        
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoVisServoPendulum::onPanelChanged);
     }
     void setup(){
@@ -138,7 +141,6 @@ private:
     float mLumiThresh = 0.1;
     bool mIsDrawRawCam = true;
     float mOffsetX = 0.0;
-    
     
     void drawToBuffer(){
         ofEnableBlendMode(OF_BLENDMODE_ALPHA);
