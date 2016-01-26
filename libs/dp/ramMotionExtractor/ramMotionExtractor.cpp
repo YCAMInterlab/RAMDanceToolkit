@@ -36,6 +36,7 @@ void ramMotionExtractor::setupControlPanel(ramBaseScene *scene_, ofVec2f canvasP
 	mGui->addButton("PopPort", false);
 	mGui->addButton("Clear", false);
 	mGui->addToggle("Visible", false);
+    mGui->addToggle("ShowBillboard", false);
 	mGui->addSlider("boxScale", 0.0, 100.0, &mPortBoxScale);
 	mGui->addSlider("Smooth", 1.0, 50.0, &mMotionSmooth);
 
@@ -221,6 +222,8 @@ void ramMotionExtractor::update(){
 }
 
 void ramMotionExtractor::draw(){
+    
+    drawBillboard();
 	
 	ofxUIToggle* visible = (ofxUIToggle*)(mGui->getWidget("Visible"));
 	if (!visible->getValue()) return;
@@ -263,6 +266,32 @@ void ramMotionExtractor::draw(){
 			ofPopMatrix();
 		}
 	}
+}
+
+void ramMotionExtractor::drawBillboard(){
+    
+    ofxUIToggle* billboard = (ofxUIToggle*)(mGui->getWidget("ShowBillboard"));
+    if(!billboard->getValue())return;
+    
+    for (int i = 0;i < mMotionPort.size();i++){
+        if (!mMotionPort[i]->isBlank){
+            
+            ofPushStyle();
+            ofPushMatrix();
+            ofTranslate(mMotionPort[i]->mCurrentNode.getGlobalPosition());
+            ramBillboard();
+            ofFill();
+            ofSetColor(255,200);
+            ofCircle(0,0,10 + sin(ofGetFrameNum() * 0.1) * 2.0);
+            ofNoFill();
+            ofSetLineWidth(2);
+            ofSetColor(255,255);
+            ofCircle(0,0,10 + sin(ofGetFrameNum() * 0.1) * 2.0);
+            ofPopMatrix();
+            ofPopStyle();
+        }
+    }
+    
 }
 
 void ramMotionExtractor::guiEvent(ofxUIEventArgs &e){
