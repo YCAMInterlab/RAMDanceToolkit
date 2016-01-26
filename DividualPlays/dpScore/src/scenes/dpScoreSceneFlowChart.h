@@ -11,6 +11,7 @@
 
 #include "dpScoreSceneBodyBase.h"
 #include "dpScoreBaseNode.h"
+#include "dpScoreToolBox.h"
 #include "ofxMotioner.h"
 #include "ofxTrueTypeFontUC.h"
 
@@ -18,10 +19,13 @@ DP_SCORE_NAMESPACE_BEGIN
 
 class NodeSkeleton : public ofxMot::Node {
 public:
-    void customDraw() override;
+    void customDraw() override
+    {
+        ofDrawBox(size);
+    }
 };
 
-class SceneFlowChart final: public SceneBodyBase<NodeSkeleton> {
+class SceneFlowChart final : public SceneBodyBase<NodeSkeleton> {
 public:
 	enum NodeType {
 		NODE_MOTIONER = 0,
@@ -38,12 +42,14 @@ public:
 		NUM_NODES,
 	};
     
-    enum CamMode {
-        CAM_MOVE,
-        CAM_MAIN,
-        CAM_TPS,
-        CAM_EASY,
-        N_CAM_MODE,
+    enum Scene {
+        SCENE_MOVE,
+        SCENE_MAIN,
+        SCENE_TPS,
+        SCENE_CIRCULATION,
+        SCENE_MEMORY,
+        SCENE_DEBUG,
+        NUM_SCENES,
     };
 
 	explicit SceneFlowChart() = default;
@@ -61,10 +67,18 @@ public:
 	void draw() override;
 
 	void keyPressed(int key) override;
+    void windowResized(int w, int h) override;
 
 private:
     void setupNodes();
     void setupOrders();
+    void setupScenes();
+    
+    void updateTime();
+    void updateWithSkeleton();
+    void updateMovingCam();
+    void updateMainCam();
+    void updateMemoryCam();
     
     void drawScene();
     void drawToolKit();
@@ -74,34 +88,48 @@ private:
     void debugDrawCameras();
     void drawHUD();
     
-    void changeCamMode(CamMode m);
+    void changeScene(int index);
     int getCurrentNodeID() const;
     int getNextNodeID() const;
     
     template <class T> ofPtr<T> getNode();
-        
+    
+    struct Property {
+        Property(float move, float idle, float line, bool easeyCam = false);
+        ofPtr<ofCamera> camera {makeShared<ofCamera>()};
+        float moveSpan {2.f};
+        float idleSpan {2.f};
+        float lineSpan {1.f};
+    };
+    
+    const float kMainCamSpeed {0.025f};
+    const float kYOffset {-200.f};
+    const float kModeChangeSpan = 6.f * 10.f;
+    
+    ofFbo mFbo[2]; // double buffer
+    int mCurrentFbo {0};
 	ofTrueTypeFont mFont, mFontSmall;
     ofxTrueTypeFontUC mFontJP;
 	vector<ofPtr<BaseNode> > mNodes;
     vector<vector<int>> mOrders;
-	ofCamera mCurrentCam;
-    ofCamera mCamMain;
+    vector<Property> mProperties;
     ofCamera mCamToolKit;
-    ofCamera mCamTPS;
-	ofEasyCam mCamEasy;
-    ofNode mCamMainParent;
-    ofNode mCamTPSParent;
-    CamMode mCamMode {CAM_MOVE};
+    ofNode mNodeCenter;
+    ofNode mNodeHead;
+    int mCurrentScene {SCENE_MOVE};
 	int mOrderIdx {2};
     int mNodeIdx {0};
     
     float mElapsedTime {0.f};
     long mLastFrameNum {0};
-    float mElapsedTimeMove {0.f};
-    float mElapsedTimeMainCam {0.f};
+    float mTimeCamMove {0.f};
+    float mTimeCamRotation {0.f};
+
+    bool mPaused {false};
 };
 
-template <class T> ofPtr<T> SceneFlowChart::getNode()
+template <class T>
+ofPtr<T> SceneFlowChart::getNode()
 {
     for (auto n : mNodes) {
         if (getClassName(*n) == getClassName<T>())

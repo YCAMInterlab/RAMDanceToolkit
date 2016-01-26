@@ -20,6 +20,21 @@
 #include "ofMain.h"
 #include "ramMain.h"
 
+//Kezzar Scenes
+#include "dpHakoniwaServoPendulum.h"
+#include "dpHakoVisStageBlob.h"
+#include "dpHakoVisServoPendulum.h"
+#include "dpHakoVisVecLineCircle.h"
+#include "dpHakoniwaStruggle.h"
+#include "dpHakoVisStruggle.h"
+#include "dpHakoVisSandStorm.h"
+#include "dpHakoVisMagnetPendulum.h"
+#include "dpHakoVisTornado.h"
+#include "dpHakoniwaTornado.h"
+#include "dpHakoniwaRawCamera.h"
+
+#include "DoSomething.h"
+
 class testApp : public ramBaseApp
 {
 public:
@@ -48,4 +63,8 @@ public:
 	void onActorExit(const ramActor &actor);
 	void onRigidSetup(const ramRigidBody &rigid);
 	void onRigidExit(const ramRigidBody &rigid);
+    
+    dpHakoniwaServoPendulum     hakoniwaServoPendulum;
+    
+    DoSomething doSomething;
 };

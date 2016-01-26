@@ -10,6 +10,7 @@
 #define afterWorkshop_ThreePointFlow_h
 
 #include "GeometryHelpers.h"
+#include "KezSlidePoint.h"
 
 void rotateToNormal(ofVec3f normal) {
     normal.normalize();
@@ -28,7 +29,7 @@ class TailSphere{
 public:
     static const int NUM = 30;
     
-    slidePoint mPos;
+    KezSlidePoint mPos;
     ofPoint mTarget;
     int mTargetCounter = 0;
     vector<ofPoint>mTail;

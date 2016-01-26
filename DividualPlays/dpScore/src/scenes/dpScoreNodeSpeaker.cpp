@@ -26,6 +26,9 @@ NodeSpeaker::NodeSpeaker()
     getCamera().setFov(55.f);
     getCamera().setPosition(NodeStage::kWidth * 0.5f + Desk::getDimension() * 0.5f + 50.f - 40.f, -100.f, 600.f);
     getCamera().setOrientation(ofVec3f(0.f, -45.f, 0.f));
+    
+    mBottom.setup(ofVec3f::zero(), getWidth(), getHeight(), getDepth());
+    mTop.setup(ofVec3f::zero(), 35.f, 62.f, 44.f);
 }
 
 NodeSpeaker::~NodeSpeaker()
@@ -40,10 +43,10 @@ void NodeSpeaker::customDraw()
 
 	const float tx {(getWidth() - 35.f) * 0.5f};
 	auto drawSpeakers = [&]() {
-				    drawBox(ofVec3f::zero(), getWidth(), getHeight(), getDepth());
+				    mBottom.draw();
 				    ofTranslate(tx, getHeight(), getDepth() - 44.f);
 				    ofRotateX(-5.f);
-				    drawBox(ofVec3f::zero(), 35.f, 62.f, 44.f);
+				    mTop.draw();
 			    };
 	{
 		ScopedMatrix m;

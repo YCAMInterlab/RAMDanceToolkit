@@ -92,15 +92,6 @@ FloorLine mFloorLine;
 #include "ThreePointFlow.h"
 ThreePointFlow mThree;
 
-#include "VectorFieldScene.h"
-VectorFieldScene mVector;
-
-#include "WeiredSpace.h"
-WeiredSpace mWeired;
-
-#include "MoveSeparatedObjects.h"
-MoveSeparatedObjects mMoveSeparatedObject;
-
 #include "distanceMetaball.h"
 distanceMetaball mDistanceMetaball;
 
@@ -132,6 +123,38 @@ dp16_ramActorTranslator mRamActorTranslator;
 #include "dp16_actorDrawer.h"
 dp16_actorDrawer mActorDrawer;
 
+//ito Scenes
+#include "dpHakoniwaSand.h"
+#include "dpHakoniwaMagnetPendulum.h"
+
+#include "dpSyphonClientManager.h"
+
+// sand
+dpHakoniwaSand hakoniwaSand;
+dpHakoVisSandStorm visSandStorm;
+dpHakoVisVecLineCircle vecLineCircle;
+
+// struggle
+dpHakoniwaStruggle hakoniwaStruggle;
+dpHakoVisStruggle visStruggle;
+
+//MagPendulum
+dpHakoniwaMagnetPendulum	magPendulum;
+dpHakoVisMagnetPendulum visMagnetPendulum;
+
+// servo pendulum
+dpHakoVisServoPendulum      visServoPendulum;
+
+// tornado
+dpHakoniwaTornado hakoniwaTornado;
+dpHakoVisTornado  visTornado;
+
+dpHakoniwaRawCamera rawCamera;
+dpSyphonClientManager *mSyphonClientManager;
+
+// stage
+dpHakoVisStageBlob                visStage;
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -147,6 +170,9 @@ void testApp::setup()
 
 
 	ramSceneManager& sceneManager = ramSceneManager::instance();
+    
+    mSyphonClientManager = &dpSyphonClientManager::instance();
+    mSyphonClientManager->setup();
 	
 	sceneManager.addScene(mCameraController.getPtr());
 	sceneManager.addScene(mRamActorTranslator.getPtr());
@@ -181,9 +207,6 @@ void testApp::setup()
     sceneManager.addScene(mBurst.getPtr());
     sceneManager.addScene(mFloorLine.getPtr());
     sceneManager.addScene(mThree.getPtr());
-    sceneManager.addScene(mVector.getPtr());
-    sceneManager.addScene(mWeired.getPtr());
-    sceneManager.addScene(mMoveSeparatedObject.getPtr());
 
 	//Sheep
 	sceneManager.addScene(mDistanceMetaball.getPtr());
@@ -191,6 +214,27 @@ void testApp::setup()
 	//Kumagai
 	sceneManager.addScene(mMiddleScene.getPtr());
 	sceneManager.addScene(mMixMonsterScene.getPtr());
+    
+    sceneManager.addScene(rawCamera.getPtr());
+    
+    sceneManager.addScene(hakoniwaServoPendulum.getPtr());
+    sceneManager.addScene(visServoPendulum.getPtr());
+    
+    sceneManager.addScene(visStage.getPtr());
+    
+    sceneManager.addScene(hakoniwaStruggle.getPtr());
+    sceneManager.addScene(visStruggle.getPtr());
+    
+    sceneManager.addScene(hakoniwaSand.getPtr());
+    sceneManager.addScene(visSandStorm.getPtr());
+    sceneManager.addScene(vecLineCircle.getPtr());
+    
+    sceneManager.addScene(magPendulum.getPtr());
+    sceneManager.addScene(visMagnetPendulum.getPtr());
+    
+    //tornado
+    sceneManager.addScene(hakoniwaTornado.getPtr());
+    sceneManager.addScene(visTornado.getPtr());
 	
 		/*
 	sceneManager.addScene(mCube.getPtr());
@@ -203,19 +247,26 @@ void testApp::setup()
 	 */
 	
 //	sceneManager.allocateFbos(640, 480);
+    
+    sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
+    sceneManager.setShowAllActors(false);
 
+    doSomething.setup();
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-	
+    doSomething.update();
+    mSyphonClientManager->update();
+    ramGetGUI().getSceneTabs().setPosition(0, -mouseY);
+  //  ramControlPanel::getSceneTabs().setPosition(0,mouseY);
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-
+    doSomething.draw();
 }
 
 

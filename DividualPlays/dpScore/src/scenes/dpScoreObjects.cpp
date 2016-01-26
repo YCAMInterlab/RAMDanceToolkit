@@ -8,33 +8,153 @@
 
 #include "dpScoreObjects.h"
 #include "dpScoreScoped.h"
+#include "dpScoreToolBox.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
-void Desk::draw()
+bool LineObj::enableAnimation = false;
+
+void LineObj::update()
+{
+	if (enableAnimation) {
+		mUpdate = true;
+		const double d {ofGetLastFrameTime()};
+		for (auto& p : mPoints) {
+			p.ang += p.rot * d;
+			p.pos += p.spd * d;
+			p.pos.y += 10.f * d;
+		}
+	}
+	else {
+		if (mUpdate) {
+			reset();
+		}
+		mUpdate = false;
+	}
+}
+
+void LineObj::draw()
+{
+    update();
+    
+    for (auto i : rep(mLines.size())) {
+        ScopedMatrix m;
+        if (enableAnimation) {
+            auto& p = mPoints.at(i);
+            ofTranslate(p.pos);
+            ofRotateZ(p.ang.z);
+            ofRotateY(p.ang.y);
+            ofRotateX(p.ang.x);
+        }
+        mLines.at(i).draw();
+    }
+}
+
+void LineObj::reset()
+{
+	const float s {30.f};
+	for (auto& p : mPoints) {
+		p.rot = ofVec3f(ofRandom(-1.f, 1.f) * s, ofRandom(-1.f, 1.f) * s, ofRandom(-1.f, 1.f) * s);
+		p.spd = ofVec3f(ofRandom(-1.f, 1.f) * s, ofRandom(-1.f, 1.f) * s, ofRandom(-1.f, 1.f) * s);
+		p.ang.set(0.f);
+		p.pos.set(0.f);
+	}
+}
+
+void Box::setup(const ofVec3f& p, float w, float h, float d)
+{
+	const ofVec3f o(p.x + w * 0.5f, p.y + h * 0.5f, p.z + d * 0.5);
+	const float x {w * 0.5f};
+	const float y {h * 0.5f};
+	const float z {d * 0.5f};
+	const ofVec3f v0 {ofVec3f(-x, -y, -z) + o};
+	const ofVec3f v1 {ofVec3f(x, -y, -z) + o};
+	const ofVec3f v2 {ofVec3f(x, -y,  z) + o};
+	const ofVec3f v3 {ofVec3f(-x, -y,  z) + o};
+	const ofVec3f v4 {ofVec3f(-x,  y, -z) + o};
+	const ofVec3f v5 {ofVec3f(x,  y, -z) + o};
+	const ofVec3f v6 {ofVec3f(x,  y,  z) + o};
+	const ofVec3f v7 {ofVec3f(-x,  y,  z) + o};
+
+	mLines.clear();
+	mLines.push_back(Line::make(v0, v1));
+	mLines.push_back(Line::make(v1, v2));
+	mLines.push_back(Line::make(v2, v3));
+	mLines.push_back(Line::make(v3, v0));
+
+	mLines.push_back(Line::make(v0, v4));
+	mLines.push_back(Line::make(v1, v5));
+	mLines.push_back(Line::make(v2, v6));
+	mLines.push_back(Line::make(v3, v7));
+
+	mLines.push_back(Line::make(v4, v5));
+	mLines.push_back(Line::make(v5, v6));
+	mLines.push_back(Line::make(v6, v7));
+	mLines.push_back(Line::make(v7, v4));
+
+	mPoints.assign(mLines.size(), Point());
+	reset();
+}
+
+void Rect::setup(const ofVec3f& p, float w, float h)
+{
+    const float x {w * 0.5f};
+    const float y {h * 0.5f};
+    const ofVec3f v0 {ofVec3f(-x, -y, 0.f) + p};
+    const ofVec3f v1 {ofVec3f( x, -y, 0.f) + p};
+    const ofVec3f v2 {ofVec3f( x,  y, 0.f) + p};
+    const ofVec3f v3 {ofVec3f(-x,  y, 0.f) + p};
+    
+    mLines.clear();
+    mLines.push_back(Line::make(v0, v1));
+    mLines.push_back(Line::make(v1, v2));
+    mLines.push_back(Line::make(v2, v3));
+    mLines.push_back(Line::make(v3, v0));
+
+    mPoints.assign(mLines.size(), Point());
+    reset();
+}
+
+Desk::Desk()
 {
 	const float tableDim {getDimension()};
 	const float tableH {getHeight()};
 	const float tableThickness {11.f};
 	const float legDim {5.f};
-	drawBox(ofVec3f(0.f, tableH - tableThickness, 0.f), tableDim, tableThickness, tableDim);
-	drawBox(ofVec3f(0.f, 0.f, 0.f), legDim, tableH - tableThickness, legDim);
-	drawBox(ofVec3f(tableDim - legDim, 0.f, 0.f), legDim, tableH - tableThickness, legDim);
-	drawBox(ofVec3f(tableDim - legDim, 0.f, tableDim - legDim), legDim, tableH - tableThickness, legDim);
-	drawBox(ofVec3f(0.f, 0.f, tableDim - legDim), legDim, tableH - tableThickness, legDim);
+	mBoxes.push_back(Box::create(ofVec3f(0.f, tableH - tableThickness, 0.f), tableDim, tableThickness, tableDim));
+	mBoxes.push_back(Box::create(ofVec3f(0.f, 0.f, 0.f), legDim, tableH - tableThickness, legDim));
+	mBoxes.push_back(Box::create(ofVec3f(tableDim - legDim, 0.f, 0.f), legDim, tableH - tableThickness, legDim));
+	mBoxes.push_back(Box::create(ofVec3f(tableDim - legDim, 0.f, tableDim - legDim), legDim, tableH - tableThickness, legDim));
+	mBoxes.push_back(Box::create(ofVec3f(0.f, 0.f, tableDim - legDim), legDim, tableH - tableThickness, legDim));
+}
+
+void Desk::draw()
+{
+	for (auto& b : mBoxes) {
+		b.draw();
+	}
+}
+
+Deck::Deck()
+{
+	const float w {getWidth()};
+	const float d {getDepth()};
+	const float h {getHeight()};
+	const float thickness {11.f};
+	mTop.setup(ofVec3f(0.f, h - thickness, 0.f), w, thickness, d);
 }
 
 void Deck::draw()
 {
-    ScopedStyle s;
-    ofSetCylinderResolution(8, 1);
+	ScopedStyle s;
+	ofSetCylinderResolution(8, 1);
 	const float w {getWidth()};
 	const float d {getDepth()};
 	const float h {getHeight()};
 	const float thickness {11.f};
 	const float legRad {2.5f};
-    const float legH{h - thickness};
-	drawBox(ofVec3f(0.f, h - thickness, 0.f), w, thickness, d);
+	const float legH {h - thickness};
+	mTop.draw();
 	ofDrawCylinder(ofVec3f(legRad, legH * 0.5f, legRad), legRad, legH);
 	ofDrawCylinder(ofVec3f(w - legRad, legH * 0.5f, legRad), legRad, legH);
 	ofDrawCylinder(ofVec3f(legRad, legH * 0.5f, d - legRad), legRad,  legH);
@@ -67,14 +187,36 @@ void Chair::draw()
 	}
 }
 
+MacBook::MacBook()
+{
+	mBottom.setup(ofVec3f::zero(), getWidth(), 1.f, getDepth());
+	mTop.setup(ofVec3f::zero(), getWidth(), 0.5f, -getDepth());
+}
+
 void MacBook::draw()
 {
 	ScopedStyle s;
-	drawBox(ofVec3f::zero(), getWidth(), 1.f, getDepth());
+	mBottom.draw();
 	ScopedMatrix m;
 	ofTranslate(0.f, 0.f, getDepth());
 	ofRotateX(angle);
-	drawBox(ofVec3f::zero(), getWidth(), 0.5f, -getDepth());
+	mTop.draw();
+
+	if (!LineObj::enableAnimation && drawDisplay && angle >= 15.f) {
+		ScopedStyle s;
+		ofRotateX(90.f);
+		ofFill();
+		{
+			ScopedTranslate t(0.f, -getDepth(), 0.5f);
+			ofSetColor(color::kMain);
+			drawDisplay(getWidth(), getDepth());
+		}
+		{
+			ScopedTranslate t(0.f, -getDepth(), -0.5f);
+			ofSetColor(ofColor::black);
+			ofRect(0.f, 0.f, getWidth(), getDepth());
+		}
+	}
 }
 
 DP_SCORE_NAMESPACE_END

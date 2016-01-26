@@ -21,15 +21,16 @@ public:
     
     void customDraw() override;
     
-    constexpr static const float kNumDecks {3};
-    constexpr static const float kNumMacBooks {8};
+    constexpr static const int kNumDecks {3};
+    constexpr static const int kNumMacBooks {8};
     constexpr static const float kMaxMacBookAngle {110.f};
     
     static ofVec3f getMacBookPosition(int index);
     
 private:
-    Deck mDeck;
-    MacBook mMBP;
+    vector<Deck> mDecks;
+    vector<MacBook> mMBPs;
+    ofFbo mFbo;
 };
 
 DP_SCORE_NAMESPACE_END

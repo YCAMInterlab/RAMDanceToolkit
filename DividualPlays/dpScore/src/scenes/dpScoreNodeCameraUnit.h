@@ -37,6 +37,8 @@ public:
     
 private:
     MacBook mMBP;
+    Box mBody;
+    Box mTray;
 };
 
 DP_SCORE_NAMESPACE_END
