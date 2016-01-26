@@ -629,7 +629,8 @@ int dpSwitchingManager::getHakoniwaIndex(string sceneName){
 }
 
 void dpSwitchingManager::refleshSceneforRDTK(){
-
+	if (!RDTK_CONTROL) return;
+	
 	for (int i = 0;i < hakoniwas.size();i++){
 		if (searchHakoniwaIsActive(hakoniwas[i]->type) == -1){
 			for (int j = 0;j < hakoniwas[i]->sceneNames.size();j++){
