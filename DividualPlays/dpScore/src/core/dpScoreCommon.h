@@ -24,6 +24,19 @@
 //void operator delete[](void* pv) throw();
 //#endif
 
+#define NAMESPACE_BEGIN(name) namespace name {
+#define NAMESPACE_END }
+
+#ifndef STRINGIFY
+#define STRINGIFY(A)  #A
+#endif
+
+#define GLSL_SOURCE(version, shader)  "#version " #version "\n" #shader
+
+#ifndef BUFFER_OFFSET
+#define BUFFER_OFFSET(bytes) ((GLubyte *)NULL + (bytes))
+#endif
+
 #define DP_SCORE_NAMESPACE_BEGIN namespace dp { namespace score {
 #define DP_SCORE_NAMESPACE_END } }
 

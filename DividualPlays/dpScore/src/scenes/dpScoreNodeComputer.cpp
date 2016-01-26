@@ -17,6 +17,10 @@ DP_SCORE_NAMESPACE_BEGIN
 
 NodeComputer::NodeComputer()
 {
+    title = "RAM Dance Toolkit";
+    titleJP = "RAM Dance Toolkit";
+    descriptionJP = "取り込んだダンサー・箱庭の情報を変換、加工、増幅する";
+    
     setGlobalPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - Deck::getWidth() - 50.f - 30.f, 0.f, -450.f);
     addAimingOffset(NodeComputer::getMacBookPosition(3) + ofVec3f(MacBook::getDepth() * 0.5f,
                                                                   MacBook::getDepth() * 0.5f,

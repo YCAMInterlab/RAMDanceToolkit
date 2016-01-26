@@ -16,12 +16,16 @@ DP_SCORE_NAMESPACE_BEGIN
 
 NodeStage::NodeStage()
 {
-    addAimingOffset(ofVec3f::zero());
+    title = "";
+    titleJP = "";
+    descriptionJP = "";
     
-    getCamera().setFov(45.f);
-    getCamera().setPosition(-40.f, 400.f, 1550.f);
-    getCamera().setOrientation(ofVec3f(-10.f, 0.f, 0.f));
-    
+	addAimingOffset(ofVec3f::zero());
+
+	getCamera().setFov(45.f);
+	getCamera().setPosition(-40.f, 400.f, 1550.f);
+	getCamera().setOrientation(ofVec3f(-10.f, 0.f, 0.f));
+
 	const int n {6};
 	vector<ofVec3f> vertices;
 	vector<ofIndexType> indices;

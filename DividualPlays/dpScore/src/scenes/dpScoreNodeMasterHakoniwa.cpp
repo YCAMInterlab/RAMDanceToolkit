@@ -16,8 +16,12 @@ DP_SCORE_NAMESPACE_BEGIN
 
 NodeMasterHakoniwa::NodeMasterHakoniwa()
 {
+    title = "Master Hakoniwa";
+    titleJP = "マスター箱庭";
+    descriptionJP = "マスター箱庭（ダンサーの動きで舞台の進行を管理）";
+    
     setGlobalPosition(ofVec3f(450.f, 0.f, 400.f - Desk::getDimension()));
-    addAimingOffset(ofVec3f(Desk::getDimension() * 0.5f, Desk::getHeight() + 50.f, Desk::getDimension() * 0.5f));
+    addAimingOffset(ofVec3f(Desk::getDimension() * 0.5f, Desk::getHeight() + 50.f, Desk::getDimension() * 0.5f + 30.f));
     getCamera().setFov(45.f);
     getCamera().setPosition(NodeStage::kWidth * 0.5f + Desk::getDimension() * 0.5f + 50.f, -75.f, 550.f);
 }

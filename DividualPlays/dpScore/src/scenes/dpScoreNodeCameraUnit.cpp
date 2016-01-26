@@ -17,6 +17,10 @@ DP_SCORE_NAMESPACE_BEGIN
 
 NodeCameraUnit::NodeCameraUnit()
 {
+    title = "Hakoniwa Analysis";
+    titleJP = "映像解析";
+    descriptionJP = "箱庭の状態を映像解析";
+    
     setGlobalPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 250.f, 0.f, 100.f);
     addAimingOffset(ofVec3f(getWidth() * 0.5f, getHeight() * 0.82f, -20.f));
     

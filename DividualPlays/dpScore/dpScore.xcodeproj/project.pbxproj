@@ -867,6 +867,49 @@
 			path = "master hakoniwa";
 			sourceTree = "<group>";
 		};
+		D24A92FA1C562C7A00ECCBEF /* FlowChart */ = {
+			isa = PBXGroup;
+			children = (
+				D22A7F891C4DFCC900F35879 /* dpScoreSceneFlowChart.cpp */,
+				D22A7F8A1C4DFCC900F35879 /* dpScoreSceneFlowChart.h */,
+				D27924351C4F448D000F5AFC /* dpScoreObjects.cpp */,
+				D27924361C4F448D000F5AFC /* dpScoreObjects.h */,
+				D24A92FB1C562C8F00ECCBEF /* Node */,
+			);
+			name = FlowChart;
+			sourceTree = "<group>";
+		};
+		D24A92FB1C562C8F00ECCBEF /* Node */ = {
+			isa = PBXGroup;
+			children = (
+				D2FA3A3C1C4E283A00C8889B /* dpScoreNodeStage.cpp */,
+				D2FA3A3D1C4E283A00C8889B /* dpScoreNodeStage.h */,
+				D27924321C4F2BDF000F5AFC /* dpScoreNodeMasterHakoniwa.cpp */,
+				D27924331C4F2BDF000F5AFC /* dpScoreNodeMasterHakoniwa.h */,
+				D28EFEDD1C4F4CF300CA6A8F /* dpScoreNodeHakoniwa.cpp */,
+				D28EFEDE1C4F4CF300CA6A8F /* dpScoreNodeHakoniwa.h */,
+				D2E064EE1C4F55A0006BFC1B /* dpScoreNodeDisplay.cpp */,
+				D2E064EF1C4F55A0006BFC1B /* dpScoreNodeDisplay.h */,
+				D2E064F11C4F57F5006BFC1B /* dpScoreNodeMotioner.cpp */,
+				D2E064F21C4F57F5006BFC1B /* dpScoreNodeMotioner.h */,
+				D2404EB91C5393D400B625EA /* dpScoreNodeDancer.cpp */,
+				D2404EBA1C5393D400B625EA /* dpScoreNodeDancer.h */,
+				D2E064F41C4F5BCB006BFC1B /* dpScoreNodeSpeaker.cpp */,
+				D2E064F51C4F5BCB006BFC1B /* dpScoreNodeSpeaker.h */,
+				D2CD5BC81C50AB6500480F50 /* dpScoreNodeLight.cpp */,
+				D2CD5BC91C50AB6500480F50 /* dpScoreNodeLight.h */,
+				D208F8921C50BFCE00D00729 /* dpScoreNodeAudience.cpp */,
+				D208F8931C50BFCE00D00729 /* dpScoreNodeAudience.h */,
+				D208F8951C50CCD900D00729 /* dpScoreNodeCameraUnit.cpp */,
+				D208F8961C50CCD900D00729 /* dpScoreNodeCameraUnit.h */,
+				D2BCB37B1C50E9BB0044E700 /* dpScoreNodeComputer.cpp */,
+				D2BCB37C1C50E9BB0044E700 /* dpScoreNodeComputer.h */,
+				D242C0A51C535F7A002A619A /* dpScoreBaseNode.cpp */,
+				D242C0A61C535F7A002A619A /* dpScoreBaseNode.h */,
+			);
+			name = Node;
+			sourceTree = "<group>";
+		};
 		D24C21911A49653D009D0796 /* ofxOsc */ = {
 			isa = PBXGroup;
 			children = (
@@ -1016,36 +1059,9 @@
 		D29034081A4D4ADE00577E04 /* scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D24A92FA1C562C7A00ECCBEF /* FlowChart */,
 				D21C771E1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp */,
 				D21C771F1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.h */,
-				D22A7F891C4DFCC900F35879 /* dpScoreSceneFlowChart.cpp */,
-				D22A7F8A1C4DFCC900F35879 /* dpScoreSceneFlowChart.h */,
-				D2FA3A3C1C4E283A00C8889B /* dpScoreNodeStage.cpp */,
-				D2FA3A3D1C4E283A00C8889B /* dpScoreNodeStage.h */,
-				D27924321C4F2BDF000F5AFC /* dpScoreNodeMasterHakoniwa.cpp */,
-				D27924331C4F2BDF000F5AFC /* dpScoreNodeMasterHakoniwa.h */,
-				D27924351C4F448D000F5AFC /* dpScoreObjects.cpp */,
-				D27924361C4F448D000F5AFC /* dpScoreObjects.h */,
-				D28EFEDD1C4F4CF300CA6A8F /* dpScoreNodeHakoniwa.cpp */,
-				D28EFEDE1C4F4CF300CA6A8F /* dpScoreNodeHakoniwa.h */,
-				D2E064EE1C4F55A0006BFC1B /* dpScoreNodeDisplay.cpp */,
-				D2E064EF1C4F55A0006BFC1B /* dpScoreNodeDisplay.h */,
-				D2E064F11C4F57F5006BFC1B /* dpScoreNodeMotioner.cpp */,
-				D2E064F21C4F57F5006BFC1B /* dpScoreNodeMotioner.h */,
-				D2404EB91C5393D400B625EA /* dpScoreNodeDancer.cpp */,
-				D2404EBA1C5393D400B625EA /* dpScoreNodeDancer.h */,
-				D2E064F41C4F5BCB006BFC1B /* dpScoreNodeSpeaker.cpp */,
-				D2E064F51C4F5BCB006BFC1B /* dpScoreNodeSpeaker.h */,
-				D2CD5BC81C50AB6500480F50 /* dpScoreNodeLight.cpp */,
-				D2CD5BC91C50AB6500480F50 /* dpScoreNodeLight.h */,
-				D208F8921C50BFCE00D00729 /* dpScoreNodeAudience.cpp */,
-				D208F8931C50BFCE00D00729 /* dpScoreNodeAudience.h */,
-				D208F8951C50CCD900D00729 /* dpScoreNodeCameraUnit.cpp */,
-				D208F8961C50CCD900D00729 /* dpScoreNodeCameraUnit.h */,
-				D2BCB37B1C50E9BB0044E700 /* dpScoreNodeComputer.cpp */,
-				D2BCB37C1C50E9BB0044E700 /* dpScoreNodeComputer.h */,
-				D242C0A51C535F7A002A619A /* dpScoreBaseNode.cpp */,
-				D242C0A61C535F7A002A619A /* dpScoreBaseNode.h */,
 				D29B99111A63F023000115C5 /* boids */,
 				D29B990C1A63A22C000115C5 /* body */,
 				D29B990B1A63A222000115C5 /* hakoniwa */,
