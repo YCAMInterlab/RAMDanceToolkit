@@ -430,7 +430,9 @@ void dpCameraUnit_cvAnalysis::drawThumbnail(int x, int y, float scale){
 	ofRect(0, imgRefGray->getHeight() + 20, means[2], 10);
 	ofSetColor(255);
 	ofRect(0, imgRefGray->getHeight() + 30, means_gray[0], 10);
-
+    
+    if(means_gray[0] != 0)ofDrawBitmapString("gray : " + ofToString(means_gray[0]), ofPoint(0,imgRefGray->getHeight() + 60));
+    
 	ofPopMatrix();
 
 	ofSetColor(255);
