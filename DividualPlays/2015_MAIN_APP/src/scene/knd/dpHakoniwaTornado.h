@@ -57,6 +57,7 @@ public:
         ofxOscMessage m;
         m.setAddress("/dp/hakoniwa/tornado/fan");
         m.addIntArg(val);
+        m.addIntArg(isBulb);
         mFanSender.sendMessage(m);
         
     }
@@ -122,8 +123,10 @@ public:
         
         if(mRad > mMistThresh){
             isMist = true;
+            mFan = 255;
         }else{
             isMist = false;
+            mFan = 0;
         }
         
         ramBeginCamera();
@@ -131,7 +134,7 @@ public:
         ofTranslate(center);
         rotateToNormal(normal);
         ofNoFill();
-        ofCircle(0,0,radius,radius);
+      //  ofCircle(0,0,radius,radius);
         ofPopMatrix();
         
         ofSetColor(255,255,255);
