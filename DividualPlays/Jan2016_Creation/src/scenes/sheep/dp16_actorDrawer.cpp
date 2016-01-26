@@ -10,15 +10,15 @@
 
 void dp16_actorDrawer::setupControlPanel()
 {
-//	nameList[0] = "Kojiri";
-//	nameList[1] = "Miyashita";
-//	nameList[2] = "Shimaji";
-//	nameList[3] = "Ando";
+	nameList[2] = "kojiri";
+	nameList[0] = "miyashita";
+	nameList[1] = "shimaji";
+	nameList[3] = "ando";
 	
-	nameList[0] = "Ando_2012-09-01_19-19-45";
-	nameList[1] = "Ando_2012-09-01_18-49-10";
-	nameList[2] = "Richi_2012-09-01_16-52-45";
-	nameList[3] = "Richi_2012-09-01_16-55-24";
+//	nameList[0] = "Ando_2012-09-01_19-19-45";
+//	nameList[1] = "Ando_2012-09-01_18-49-10";
+//	nameList[2] = "Richi_2012-09-01_16-52-45";
+//	nameList[3] = "Richi_2012-09-01_16-55-24";
 	
 	palette[0].setHsb( 0.5, 0.9, 0.7);
 	palette[1].setHsb(0.95, 0.9, 0.7);

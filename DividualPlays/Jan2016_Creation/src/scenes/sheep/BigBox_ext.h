@@ -30,7 +30,7 @@ private:
 	ofFloatColor color;
 	ramMotionExtractor mex;
 	
-#define NUMNODE_BBE 64
+#define NUMNODE_BBE 512
 	ofNode portNodes[NUMNODE_BBE];
 	float portScale[NUMNODE_BBE];
 };
