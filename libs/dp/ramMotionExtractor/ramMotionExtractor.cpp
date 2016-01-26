@@ -35,6 +35,9 @@ void ramMotionExtractor::setupControlPanel(ramBaseScene *scene_, ofVec2f canvasP
 	mGui->addButton("PushPort", false);
 	mGui->addButton("PopPort", false);
 	mGui->addButton("Clear", false);
+	mGui->addToggle("Visible", false);
+    mGui->addToggle("ShowBillboard", false);
+	mGui->addSlider("boxScale", 0.0, 100.0, &mPortBoxScale);
 	mGui->addSlider("Smooth", 1.0, 50.0, &mMotionSmooth);
 
 	vector<string> it = ramActorManager::instance().getNodeArrayNames();
@@ -56,7 +59,8 @@ void ramMotionExtractor::setupControlPanel(ramBaseScene *scene_, ofVec2f canvasP
 
 	receiver.addAddress("/ram/MEX/"+scene_->getName());
 	ramOscManager::instance().addReceiverTag(&receiver);
-
+	
+	mPortBoxScale = 7;
 }
 
 void ramMotionExtractor::pushFromID(int actorId, int jointId){
@@ -77,6 +81,21 @@ void ramMotionExtractor::update(){
 
 		string myAddr = "/ram/MEX/"+mScenePtr->getName()+"/";
 
+		if (m.getAddress() == myAddr+"dump")
+		{
+			ofxOscSender sender;
+			sender.setup(m.getRemoteIp(), 24800);
+			for (int i = 0;i < mMotionPort.size();i++)
+			{
+				ofxOscMessage mm;
+				mm.setAddress(myAddr + "list");
+				mm.addIntArg(i);
+				mm.addIntArg(mMotionPort[i]->mActorIndex);
+				mm.addIntArg(mMotionPort[i]->mFinder.index);
+				sender.sendMessage(mm);
+			}
+		}
+		
 		if (m.getAddress() == myAddr+"push"){// アクターID, ジョイントID
 			pushFromID(m.getArgAsInt32(0), m.getArgAsInt32(1));
 		}
@@ -203,6 +222,12 @@ void ramMotionExtractor::update(){
 }
 
 void ramMotionExtractor::draw(){
+    
+    drawBillboard();
+	
+	ofxUIToggle* visible = (ofxUIToggle*)(mGui->getWidget("Visible"));
+	if (!visible->getValue()) return;
+	
 	for (int i = 0;i < ramActorManager::instance().getNumNodeArray();i++){
 		ramNodeArray arr = ramActorManager::instance().getNodeArray(i);
 		ofVec3f tp = arr.getNode(ramActor::JOINT_HEAD).getGlobalPosition();
@@ -231,7 +256,7 @@ void ramMotionExtractor::draw(){
 			ofPushMatrix();
 			ofMultMatrix(mMotionPort[i]->mCurrentNode.getGlobalTransformMatrix());
 			ofNoFill();
-			ofDrawBox(15);
+			ofDrawBox(mPortBoxScale);
 			ofFill();
 
 			ofMatrix4x4 rotMat;
@@ -241,6 +266,32 @@ void ramMotionExtractor::draw(){
 			ofPopMatrix();
 		}
 	}
+}
+
+void ramMotionExtractor::drawBillboard(){
+    
+    ofxUIToggle* billboard = (ofxUIToggle*)(mGui->getWidget("ShowBillboard"));
+    if(!billboard->getValue())return;
+    
+    for (int i = 0;i < mMotionPort.size();i++){
+        if (!mMotionPort[i]->isBlank){
+            
+            ofPushStyle();
+            ofPushMatrix();
+            ofTranslate(mMotionPort[i]->mCurrentNode.getGlobalPosition());
+            ramBillboard();
+            ofFill();
+            ofSetColor(255,200);
+            ofCircle(0,0,10 + sin(ofGetFrameNum() * 0.1) * 2.0);
+            ofNoFill();
+            ofSetLineWidth(2);
+            ofSetColor(255,255);
+            ofCircle(0,0,10 + sin(ofGetFrameNum() * 0.1) * 2.0);
+            ofPopMatrix();
+            ofPopStyle();
+        }
+    }
+    
 }
 
 void ramMotionExtractor::guiEvent(ofxUIEventArgs &e){
@@ -559,6 +610,15 @@ void ramMotionExtractor::setActorList(vector<string> *lst){
 	parentGui->autoSizeToFitWidgets();
 	
 	refleshActorFromList();
+
+}
+
+int ramMotionExtractor::getActorIndexAt(int port){
+
+	if ((0 <= port) && (port < mMotionPort.size())){
+		return mMotionPort[port]->mActorIndex;
+	}
+	return -1;
 
 }
 

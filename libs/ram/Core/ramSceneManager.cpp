@@ -61,6 +61,8 @@ void ramSceneManager::setup()
     screens.push_back(screenStates);
     
     oscReceiverTag.addAddress(RAM_OSC_ADDR_SET_SCENE);
+	oscReceiverTag.addAddress(RAM_OSC_ADDR_CLEAR_SCENE);
+	
     ramOscManager::instance().addReceiverTag(&oscReceiverTag);
 }
 
@@ -147,7 +149,7 @@ bool ramSceneManager::getShowAllActors() const
 void ramSceneManager::update(ofEventArgs& args)
 {
     updateOsc();
-    
+
 	for (int i = 0; i < scenes.size(); i++)
 	{
 		if (i >= scenes.size()) break;
@@ -166,28 +168,52 @@ void ramSceneManager::updateOsc()
         ofxOscMessage m;
         oscReceiverTag.getNextMessage(&m);
         const string& addr = m.getAddress();
+		
+		if (addr == RAM_OSC_ADDR_CLEAR_SCENE)
+		{
+			for (int i = 0;i < getNumScenes();i++)
+			{
+				ramGetGUI().getSceneTabs().offSelect(getScene(i)->getName(),true);
+				getScene(i)->setEnabled(false);
+				setScreen(i, 0, false);
+				setScreen(i, 1, false);
+			}
+		}
+		
         try {
             if (addr == RAM_OSC_ADDR_SET_SCENE) {
                 const string header = "set_scene: ";
                 const int numArgs = 4;
                 if (!(m.getNumArgs() == numArgs))
                     throw runtime_error(header + "incorrect number of arguments " + ofToString(m.getNumArgs()));
-                
-                if (!(m.getArgType(0) == OFXOSC_TYPE_STRING))
-                    throw runtime_error(header + "incorrect type of argument 0");
-
+				
                 for (int i=1; i<numArgs; i++) {
                     if (!(m.getArgType(i) == OFXOSC_TYPE_INT32))
                         throw runtime_error(header + "incorrect type of argument " + ofToString(i));
                 }
                 
-                const string sceneName = m.getArgAsString(0);
                 const bool enabled = (bool)m.getArgAsInt32(1);
                 const bool screen0 = (bool)m.getArgAsInt32(2);
                 const bool screen1 = (bool)m.getArgAsInt32(3);
-                
+
+				string sceneName = m.getArgAsString(0);
+
+				if (m.getArgType(0) == OFXOSC_TYPE_INT32)
+				{
+					sceneName = getScene(m.getArgAsInt32(0))->getName();
+				}
+				else if (m.getArgType(0) == OFXOSC_TYPE_STRING)
+				{
+					sceneName = m.getArgAsString(0);
+				}
+				else
+				{
+					throw runtime_error(header + "incorrect type of argument 0");
+				}
+				
                 const int sceneIdx = findtSceneIndex(sceneName);
-                if (sceneIdx < 0)
+				
+				if (sceneIdx < 0)
                     throw runtime_error(header + "no scene " + sceneName + " found");
 
                 if (enabled) ramGetGUI().getSceneTabs().select(sceneName,true);

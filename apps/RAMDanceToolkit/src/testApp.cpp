@@ -81,7 +81,6 @@ Laban laban;
 #include "Notation.h"
 Notation notation;
 
-
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -119,7 +118,7 @@ void testApp::setup()
 	sceneManager.addScene( monster.getPtr() );
 	sceneManager.addScene( laban.getPtr() );
 	sceneManager.addScene( notation.getPtr() );
-	
+
 }
 
 //--------------------------------------------------------------
