@@ -18,6 +18,10 @@ void dp16_ramActorTranslator::setupControlPanel()
 	ramGetGUI().addSeparator();
 	ramGetGUI().addToggle("autoLayout", &autoLayout);
 	ramGetGUI().addSlider("margine", 0, 1000, &margine);
+	
+	floorStay = true;
+	autoLayout = true;
+	margine = 160;
 }
 
 void dp16_ramActorTranslator::update()

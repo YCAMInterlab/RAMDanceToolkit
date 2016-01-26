@@ -34,7 +34,8 @@ void dp16_camera_controller::setupControlPanel()
 	speed = 5.0;
 	smoothing = 15.0;
 	camera_pos.set(0.0, 500.0, 500);
-	camera_target.set(0.0,800.0, 800.0);
+	camera_target.set(0.0,150.0, 300.0);
+	camera_lTarget.set(0.0, 85.0, 0.0);
 	
 	mex.setupControlPanel(this);
 }
