@@ -1,5 +1,5 @@
 //
-//  slidePoint.h
+//  KezSlidePoint.h
 //  ExtractionExample
 //
 //  Created by Kanda Ryo on 12/04/18.
@@ -10,7 +10,7 @@
 
 #include "ofMain.h"
 
-class slidePoint :public ofPoint{
+class KezSlidePoint :public ofPoint{
 public:
    
     float speed;
@@ -20,7 +20,7 @@ public:
     
     bool quickSet;
     
-    slidePoint(){
+    KezSlidePoint(){
         speed = 0.1;
         
         px = py = pz = x = y = z = 0;
@@ -28,7 +28,7 @@ public:
         quickSet = false;
     };
     
-    slidePoint(float _x,float _y,float _z){
+    KezSlidePoint(float _x,float _y,float _z){
         speed = 0.1;
         px = _x;
         py = _y;
@@ -85,7 +85,7 @@ public:
         pz = pt.z;
     };
     
-    slidePoint& operator += (const ofPoint &a){
+    KezSlidePoint& operator += (const ofPoint &a){
         x += a.x;
         y += a.y;
         z += a.z;
@@ -189,20 +189,20 @@ private:
     
 };
 
-class slide{
+class KezSlide{
 public:
     
     float speed;
     float val;
     bool quickSet;
     
-    slide(){
+    KezSlide(){
         speed = 0.1;
         val = pVal = 0.0;
         quickSet = false;
     };
     
-    slide(float _val){
+    KezSlide(float _val){
         speed = 0.1;
         val = _val;
     };
@@ -214,7 +214,7 @@ public:
         }
     };
     
-    slide &operator +=(float a){
+    KezSlide &operator +=(float a){
         val += a;
         pVal += a;
         return *this;

@@ -9,11 +9,13 @@
 #ifndef afterWorkshop_BurstBody_h
 #define afterWorkshop_BurstBody_h
 
+#include "KezSlidePoint.h"
+
 class BurstBox{
 private:
     bool velSetMode = false;;
 public:
-    slidePoint mPos;
+    KezSlidePoint mPos;
     
     ofPoint mVel;
     float a;

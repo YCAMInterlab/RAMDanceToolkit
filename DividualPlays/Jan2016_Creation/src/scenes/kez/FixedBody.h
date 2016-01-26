@@ -9,11 +9,11 @@
 #ifndef afterWorkshop_FixedBody_h
 #define afterWorkshop_FixedBody_h
 
-#include "slidePoint.h"
+#include "KezSlidePoint.h"
 
 class FixedBox{
 public:
-    slidePoint mPos;
+    KezSlidePoint mPos;
     ofPoint mTarget;
     bool bFixed = false;
     

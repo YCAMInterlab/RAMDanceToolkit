@@ -9,10 +9,12 @@
 #ifndef afterWorkshop_Drop_h
 #define afterWorkshop_Drop_h
 
+#include "KezSlidePoint.h"
+
 class Ripple{
 private:
-    slide rad;
-    slide alpha;
+    KezSlide rad;
+    KezSlide alpha;
     ofPoint mCenter;
 public:
     
