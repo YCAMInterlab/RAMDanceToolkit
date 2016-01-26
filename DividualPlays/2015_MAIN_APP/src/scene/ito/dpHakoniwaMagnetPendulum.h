@@ -48,6 +48,9 @@ private:
     bool bEachMode = false;
     bool bModeTwist = false;
     bool bHideNodeView;
+    bool bUseOnDurationLimit = false;
+    bool bShowDistance = false;
+//    float timeLimitDuration;
     
     float twistThresholdPositive;
     float twistThresholdNegative;
