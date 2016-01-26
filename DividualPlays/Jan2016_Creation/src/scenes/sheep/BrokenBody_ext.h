@@ -11,11 +11,11 @@
 
 #include "ramMain.h"
 #include "ramMotionExtractor.h"
-#include "slidePoint.h"
+#include "KezSlidePoint.h"
 
 class BrokenBox_ext{
 public:
-	slidePoint mPos;
+	KezSlidePoint mPos;
 	float v;
 	float a;
 	bool bFixed = false;

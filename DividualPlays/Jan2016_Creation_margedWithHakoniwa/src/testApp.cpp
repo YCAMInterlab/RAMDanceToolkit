@@ -127,8 +127,6 @@ dp16_actorDrawer mActorDrawer;
 #include "dpHakoniwaSand.h"
 #include "dpHakoniwaMagnetPendulum.h"
 
-
-
 #include "dpSyphonClientManager.h"
 
 // sand
@@ -172,6 +170,9 @@ void testApp::setup()
 
 
 	ramSceneManager& sceneManager = ramSceneManager::instance();
+    
+    mSyphonClientManager = &dpSyphonClientManager::instance();
+    mSyphonClientManager->setup();
 	
 	sceneManager.addScene(mCameraController.getPtr());
 	sceneManager.addScene(mRamActorTranslator.getPtr());
@@ -246,12 +247,18 @@ void testApp::setup()
 	 */
 	
 //	sceneManager.allocateFbos(640, 480);
+    
+    sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
+    sceneManager.setShowAllActors(false);
 
+    doSomething.setup();
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
+    doSomething.update();
+    mSyphonClientManager->update();
     ramGetGUI().getSceneTabs().setPosition(0, -mouseY);
   //  ramControlPanel::getSceneTabs().setPosition(0,mouseY);
 }
@@ -259,7 +266,7 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
-
+    doSomething.draw();
 }
 
 

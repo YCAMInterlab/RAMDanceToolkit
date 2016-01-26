@@ -33,6 +33,8 @@
 #include "dpHakoniwaTornado.h"
 #include "dpHakoniwaRawCamera.h"
 
+#include "DoSomething.h"
+
 class testApp : public ramBaseApp
 {
 public:
@@ -63,4 +65,6 @@ public:
 	void onRigidExit(const ramRigidBody &rigid);
     
     dpHakoniwaServoPendulum     hakoniwaServoPendulum;
+    
+    DoSomething doSomething;
 };
