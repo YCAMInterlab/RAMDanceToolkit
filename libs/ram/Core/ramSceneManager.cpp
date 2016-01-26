@@ -61,6 +61,8 @@ void ramSceneManager::setup()
     screens.push_back(screenStates);
     
     oscReceiverTag.addAddress(RAM_OSC_ADDR_SET_SCENE);
+	oscReceiverTag.addAddress(RAM_OSC_ADDR_CLEAR_SCENE);
+	
     ramOscManager::instance().addReceiverTag(&oscReceiverTag);
 }
 
@@ -166,6 +168,18 @@ void ramSceneManager::updateOsc()
         ofxOscMessage m;
         oscReceiverTag.getNextMessage(&m);
         const string& addr = m.getAddress();
+		
+		if (addr == RAM_OSC_ADDR_CLEAR_SCENE)
+		{
+			for (int i = 0;i < getNumScenes();i++)
+			{
+				ramGetGUI().getSceneTabs().offSelect(getScene(i)->getName(),true);
+				getScene(i)->setEnabled(false);
+				setScreen(i, 0, false);
+				setScreen(i, 1, false);
+			}
+		}
+		
         try {
             if (addr == RAM_OSC_ADDR_SET_SCENE) {
                 const string header = "set_scene: ";
