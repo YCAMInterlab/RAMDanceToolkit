@@ -514,7 +514,12 @@ void dpSwitchingManager::SelectHakoniwa(hakoniwaType type, int slot){
 		}
 		matrixSW.setSW(targHako->sourceCh,
 					   mSlots[targCvSlot].matrixInputCh);
-		if (SENDLASTHAKO) matrixSW.setSW(targHako->sourceCh, 5);
+		if (SENDLASTHAKO)
+        {
+            matrixSW.setSW(targHako->sourceCh, 5);
+            matrixSW.setSW(targHako->sourceCh, 6);
+            matrixSW.setSW(targHako->sourceCh, 7);
+        }
 		
 		cout << "clear & add " << slot << endl;
 	}else{
@@ -676,7 +681,7 @@ void dpSwitchingManager::refleshSceneforRDTK(){
                     if (!RDTK_TWIN) use1 = true;
                     m1.addIntArg((use1 && (searchHakoniwaIsActive(hk->type) > -1)) ? 1 : 0);
 					m1.addIntArg(1);
-					m1.addIntArg(0);
+					m1.addIntArg(1);
 				}else{
 					//ビズ
 					m1.addIntArg(mSlots[i].displayIsExist(0) ||
@@ -691,8 +696,8 @@ void dpSwitchingManager::refleshSceneforRDTK(){
                     bool use2 = (hk->type % 2 == 0);
                     if (!RDTK_TWIN) use2 = true;
                     m2.addIntArg((use2 && (searchHakoniwaIsActive(hk->type) > -1)) ? 1 : 0);
-					m2.addIntArg(0);
-					m2.addIntArg(0);
+					m2.addIntArg(1);
+					m2.addIntArg(1);
 				}else{
 					m2.addIntArg(mSlots[i].displayIsExist(3) ||
 								 mSlots[i].displayIsExist(2));
