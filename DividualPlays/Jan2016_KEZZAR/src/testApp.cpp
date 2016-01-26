@@ -17,11 +17,18 @@
 
 #include "testApp.h"
 
-#include "dpVisMemeBox.h"
-dpVisMemeBox mMemeBox;
 /*!
  Scenes
  */
+
+#include "dpVisMemeBox.h"
+dpVisMemeBox mMemeBox;
+
+#include "dpVisMemeFadeRect.h"
+dpVisMemeFadeRect mFadeRect;
+
+#include "dpVisMemeVastCircle.h"
+dpVisMemeVastCircle mVastCircle;
 
 //HakoniwaOscTest hakoniwaOscTest;
 //HakoniwaColorOfWater hakoniwaColorOfWater;
@@ -41,6 +48,8 @@ void testApp::setup()
 	ramSceneManager& sceneManager = ramSceneManager::instance();
 
     sceneManager.addScene(mMemeBox.getPtr());
+    sceneManager.addScene(mFadeRect.getPtr());
+    sceneManager.addScene(mVastCircle.getPtr());
 }
 
 //--------------------------------------------------------------
