@@ -10,6 +10,8 @@
 #define RAMDanceToolkit_dpVisMemeBox_h
 
 #include "dpConstants.h"
+#include "MemeConstants.h"
+#include "KezSlidePoint.h"
 
 class dpMemeBox{
 public:
@@ -17,13 +19,17 @@ public:
     void fire(ofColor color,ofPoint size){
         mColor = color;
         mPos.set(0,0,0);
-        mSize = size;
+        
+        mSize.imSet(10,2,2);
+        mSize.set(size);
+        mSize.speed = 0.333;
         
         mIsEnable = true;
     }
     
     void update(){
         mPos.z += mSpeed;
+        mSize.update();
     }
     void draw(){
         if(mIsEnable){
@@ -34,7 +40,7 @@ public:
     }
 private:
     ofPoint mPos;
-    ofPoint mSize;
+    KezSlidePoint mSize;
     float mSpeed = -6.0;
     ofColor mColor;
     
@@ -103,7 +109,7 @@ private:
 class dpVisMemeBox : public ramBaseScene{
 public:
     
-    string getName() const { return "dpHakoniwaRawCamera"; }
+    string getName() const { return "dpVisMemeBox"; }
     
     void setupControlPanel(){
         ramOscManager::instance().addReceiverTag(&mReceiver);
@@ -126,7 +132,8 @@ public:
             v.update();
         }
         
-        receiveOsc();
+        if(bEnabled)receiveOsc();
+        
     }
     void receiveOsc(){
         
@@ -153,30 +160,34 @@ public:
                 }
             }
         }
-
     }
+    
     void draw(){
         
         ofSetBoxResolution(1);
         
         mCam.begin(dpGetFirstScreenViewPort());
+        
+        ofPushMatrix();
+        ofTranslate(0,0,POS_OFFSET_Z);
         for(auto &v:mBoxManagers){
             v.draw();
         }
+        ofPopMatrix();
+        
         mCam.end();
         
     }
+    
 private:
     
-    static const int MEME_NUM = 3;
     ramOscReceiveTag mReceiver;
-    
-    static const int MAX_SPEED = 200;
-    static const int MIN_SPEED = 1;
-    
+
     vector<dpMemeBoxManager>mBoxManagers;
     
     ofEasyCam mCam;
+    
+    static const int POS_OFFSET_Z = 400;
 };
 
 #endif

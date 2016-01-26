@@ -27,10 +27,11 @@
 #define CVSW_3 3
 #define CVSW_4 4
 
-#define SHUTTER_CHANNEL 8
+#define SHUTTER_CHANNEL 10
 
 #define CV_SLOT_NUM 4
 
+#define RDTK_CONTROL (false)//for KAAT: RDTKのシーン制御フラグ
 #define RDTK_TWIN (false)//for KAAT: RDTK２台体制で、箱庭シーンを振り分ける用フラグ
 #define SENDLASTHAKO (true)//最後に選択された箱庭を独立チャンネルに送る
 

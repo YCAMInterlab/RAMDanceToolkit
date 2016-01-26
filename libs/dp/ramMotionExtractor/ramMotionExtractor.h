@@ -70,6 +70,8 @@ protected:
 
 	ramOscReceiveTag	receiver;
 	bool				bEnableSync;
+    
+    void drawBillboard();
 };
 
 
