@@ -53,7 +53,23 @@ public:
         mBlur.setup(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
         mLumi.setup();
 
+        mFinalFbo.allocate(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT,GL_RGB);
+        
+        string frag = STRINGIFY(
+                                uniform sampler2DRect src;
 
+                                void main(void){
+                                    
+                                    vec2 st = gl_TexCoord[0].st;
+                                    vec4 color = texture2DRect(src,st);
+                                    if(dot(color.rgb,vec3(0.333)) < 0.01)discard;
+                                    
+                                    gl_FragColor = color;
+                                
+                                }
+                                );
+        mDiscards.setupShaderFromSource(GL_FRAGMENT_SHADER, frag);
+        mDiscards.linkProgram();
     }
     
     void receiveOsc(){
@@ -102,10 +118,18 @@ public:
         ofPopMatrix();
         mBlur.end();
         
+        
+        mFinalFbo.begin();
+        ofClear(0,0);
         ofEnableBlendMode(OF_BLENDMODE_ADD);
         mAccumlateWeightedFilter.draw();
         mBlur.draw();
         if(mIsDrawRawCam)dpSyphonClientManager::instance().drawWithSideCrop(mOffsetX, 0);
+        mFinalFbo.end();
+        
+        mDiscards.begin();
+        mFinalFbo.draw(0,0);
+        mDiscards.end();
         
         drawToBuffer();
  
@@ -150,6 +174,9 @@ private:
         dpSyphonClientManager::instance().drawWithSideCrop(mOffsetX, 0);
         mBufferFbo.end();
     }
+    
+    ofFbo mFinalFbo;
+    ofShader mDiscards;
 };
 
 #endif
