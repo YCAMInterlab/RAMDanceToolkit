@@ -55,7 +55,7 @@ public:
 private:
 	ofFloatColor bodyColor;
 	vector<BrokenBox_ext> mBoxes;
-	float thresh = 10.0;
+	float thresh = 0.5;
 	ramMotionExtractor mex;
 };
 

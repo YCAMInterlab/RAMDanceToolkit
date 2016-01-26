@@ -129,6 +129,9 @@ dp16_camera_controller mCameraController;
 #include "dp16_ramActorTranslator.h"
 dp16_ramActorTranslator mRamActorTranslator;
 
+#include "dp16_actorDrawer.h"
+dp16_actorDrawer mActorDrawer;
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -147,7 +150,8 @@ void testApp::setup()
 	
 	sceneManager.addScene(mCameraController.getPtr());
 	sceneManager.addScene(mRamActorTranslator.getPtr());
-
+	sceneManager.addScene(mActorDrawer.getPtr());
+	
 	sceneManager.addScene(mLine_ext.getPtr());
 	sceneManager.addScene(mBrokenBody_ext.getPtr());
 	sceneManager.addScene(mBigBox_ext.getPtr());
@@ -197,6 +201,9 @@ void testApp::setup()
 	sceneManager.addScene(mSep.getPtr());
 	sceneManager.addScene(mWeierd.getPtr());
 	 */
+	
+//	sceneManager.allocateFbos(640, 480);
+
 }
 
 //--------------------------------------------------------------
