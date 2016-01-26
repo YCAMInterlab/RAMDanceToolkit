@@ -19,14 +19,15 @@ public:
     void setupControlPanel(){
         
         ramGetGUI().addIntSlider("rad",0,255,&mRad);
-        ramGetGUI().addToggle("bulb",&isBulb);
-        ramGetGUI().addToggle("mist",&isMist);
         ramGetGUI().addSlider("radMin",0.0,300.0,&mRadMin);
         ramGetGUI().addSlider("radMax",0.0,300.0,&mRadMax);
+
         ramGetGUI().addSlider("drawRadMin",0.0,12.0,&mDrawRadMin);
         ramGetGUI().addSlider("drawRadMax",0.0,12.0,&mDrawRadMax);
-        ramGetGUI().addSlider("mistThresh",10.0, 255, &mMistThresh);
+        ramGetGUI().addSlider("drawRadThresh",0.0,255.0,&mDrawRadThresh);
+        ramGetGUI().addSlider("mistThresh",10.0, 255, &mFunThresh);
         ramGetGUI().addSlider("fan",0,255,&mFan);
+        ramGetGUI().addToggle("simpleCircle",&mIsDrawSimpleCircle);
         
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoniwaTornado::onPanelChanged);
         
@@ -35,7 +36,7 @@ public:
         
     }
     void setup(){
-        mBulbSender.setup("192.168.20.70",8528);
+
         mFanSender.setup("192.168.20.71",8528);
         
         mSender[0].setup("192.168.20.2", 10000);
@@ -46,10 +47,6 @@ public:
     void onPanelChanged(ofxUIEventArgs& e){
         string name = e.widget->getName();
         
-        if(name == "bulb")bulb();
-        
-        if(name == "mist")bulb();
-        
     }
     
     void fan(int val){
@@ -57,34 +54,13 @@ public:
         ofxOscMessage m;
         m.setAddress("/dp/hakoniwa/tornado/fan");
         m.addIntArg(val);
-        m.addIntArg(isBulb);
         mFanSender.sendMessage(m);
         
     }
-    
-    void mist(){
-        
-        ofxOscMessage m;
-        m.setAddress("/dp/hakoniwa/tornado/mist");
-        m.addIntArg((int)isMist);
-        mBulbSender.sendMessage(m);
-        
-    }
-    
-    void bulb(){
-        
-        ofxOscMessage m;
-        m.setAddress("/dp/hakoniwa/tornado/bulb");
-        m.addIntArg((int)isBulb);
-        m.addIntArg((int)isMist);
-        mBulbSender.sendMessage(m);
-        
-    }
-    
+
     void update(){
         
         mMotionExtractor.update();
-        bulb();
         fan(mFan);
         mSphere.setRad(mDrawRadMin, mDrawRadMax);
 
@@ -121,20 +97,21 @@ public:
         
         mRad = ofMap(radius,mRadMin,mRadMax,0,255,true);
         
-        if(mRad > mMistThresh){
-            isMist = true;
+        if(mRad > mFunThresh){
             mFan = 255;
         }else{
-            isMist = false;
             mFan = 0;
         }
+        
+        if(mRad < mDrawRadThresh)radius = 0.0;
+        
         
         ramBeginCamera();
         ofPushMatrix();
         ofTranslate(center);
         rotateToNormal(normal);
         ofNoFill();
-      //  ofCircle(0,0,radius,radius);
+        if(mIsDrawSimpleCircle)ofCircle(0,0,0,radius);
         ofPopMatrix();
         
         ofSetColor(255,255,255);
@@ -165,32 +142,31 @@ public:
     }
     
     void onDisabled(){
-        isBulb = false;
-        isMist = false;
+ 
         mRad = 0;
         
         fan(0);
-        bulb();
-        mist();
+
     }
     
 private:
     
-    ofxOscSender mBulbSender;
     ofxOscSender mFanSender;
     ofxOscSender mSender[2];
     
     int mRad = 0;
-    bool isBulb = false;
-    bool isMist = false;
     
     float mRadMin = 7.6;
     float mRadMax = 95;
-    float mMistThresh = 202.0;
+    float mFunThresh = 202.0;
     float mFan = 220;
+    
+    float mDrawRadThresh = 10.0;
     
     float mDrawRadMin = 1.0;
     float mDrawRadMax = 12.0;
+    
+    bool mIsDrawSimpleCircle = false;
     
     dpTailSphereController mSphere;
     ramMotionExtractor mMotionExtractor;

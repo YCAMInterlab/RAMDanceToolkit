@@ -198,6 +198,7 @@ public:
             ofPopMatrix();
         }
         
+        mMotionExtractor.draw();
         ramEndCamera();
         
     }
