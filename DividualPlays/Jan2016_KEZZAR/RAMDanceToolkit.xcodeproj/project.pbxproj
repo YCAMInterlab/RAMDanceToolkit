@@ -91,6 +91,9 @@
 		922356671A5D2C14009DD3EB /* KezBlinker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezBlinker.h; sourceTree = "<group>"; };
 		923047421C55C8D700F63832 /* dpVisMemeBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpVisMemeBox.h; sourceTree = "<group>"; };
 		9248D4DF1A4D674600047AF5 /* KezConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezConstants.h; sourceTree = "<group>"; };
+		9290EF4C1C56286C00ADFCA5 /* dpVisMemeFadeRect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpVisMemeFadeRect.h; sourceTree = "<group>"; };
+		9290EF4D1C562BBB00ADFCA5 /* dpVisMemeVastCircle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpVisMemeVastCircle.h; sourceTree = "<group>"; };
+		9290EF4E1C5705A300ADFCA5 /* MemeConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemeConstants.h; sourceTree = "<group>"; };
 		92F108E91A45395F00E398B2 /* KezSlidePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KezSlidePoint.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -179,6 +182,9 @@
 			children = (
 				92F108E71A45395F00E398B2 /* kez_util */,
 				923047421C55C8D700F63832 /* dpVisMemeBox.h */,
+				9290EF4C1C56286C00ADFCA5 /* dpVisMemeFadeRect.h */,
+				9290EF4D1C562BBB00ADFCA5 /* dpVisMemeVastCircle.h */,
+				9290EF4E1C5705A300ADFCA5 /* MemeConstants.h */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
