@@ -106,9 +106,9 @@ public:
         
         ramSetViewPort(dpGetFirstScreenViewPort());
         
-        ofPoint a = mMotionExtractor.getPositionAt(0,true);
-        ofPoint b = mMotionExtractor.getPositionAt(1,true);
-        ofPoint c = mMotionExtractor.getPositionAt(2,true);
+        ofPoint a = mMotionExtractor.getPositionAt(0,false);
+        ofPoint b = mMotionExtractor.getPositionAt(1,false);
+        ofPoint c = mMotionExtractor.getPositionAt(2,false);
         
         sendOscToVis(a, b, c);
         
@@ -136,6 +136,7 @@ public:
         
         ofSetColor(255,255,255);
         mSphere.draw(center,radius,normal);
+
         ramEndCamera();
     
     }
