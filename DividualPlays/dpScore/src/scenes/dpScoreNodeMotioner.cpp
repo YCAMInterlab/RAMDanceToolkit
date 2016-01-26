@@ -29,7 +29,7 @@ NodeMotioner::NodeMotioner()
 
 NodeMotioner::~NodeMotioner()
 {
-
+    
 }
 
 void NodeMotioner::customDraw()

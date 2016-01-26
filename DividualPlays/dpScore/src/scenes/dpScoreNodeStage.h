@@ -10,6 +10,7 @@
 #define dpScoreNodeStage_h
 
 #include "dpScoreBaseNode.h"
+#include "dpScoreObjects.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -25,11 +26,11 @@ public:
 	constexpr static float kHeight {740.f};
 	constexpr static float kScrH {kWidth * (9.f / 16.f)};
 
-	ofFbo fbo;
-	bool forFbo;
-
+    ofFbo* fbo {nullptr};
+    
 private:
 	ofVbo mFloor;
+    Rect mScreenRect;
 };
 
 DP_SCORE_NAMESPACE_END

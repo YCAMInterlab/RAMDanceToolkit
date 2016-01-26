@@ -24,6 +24,8 @@ public:
 private:
     ofVbo mWaterTank;
     Desk mDesk;
+    Box mFront;
+    Box mRear;
 };
 
 DP_SCORE_NAMESPACE_END
