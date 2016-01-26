@@ -29,7 +29,7 @@ NodeAudience::NodeAudience()
 
 NodeAudience::~NodeAudience()
 {
-
+    
 }
 
 void NodeAudience::customDraw()

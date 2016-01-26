@@ -24,6 +24,13 @@ NodeMasterHakoniwa::NodeMasterHakoniwa()
     addAimingOffset(ofVec3f(Desk::getDimension() * 0.5f, Desk::getHeight() + 50.f, Desk::getDimension() * 0.5f + 30.f));
     getCamera().setFov(45.f);
     getCamera().setPosition(NodeStage::kWidth * 0.5f + Desk::getDimension() * 0.5f + 50.f, -75.f, 550.f);
+    
+    const float w {60.f};
+    const float h {73.f};
+    const float x {(mDesk.getDimension() - w) * 0.5f};
+    mFront.setup(ofVec3f(x, mDesk.getHeight(), 50.f), w, h, 10.f);
+    mRear.setup(ofVec3f(x, mDesk.getHeight(), 50.f), w, h, 30.f);
+    
 }
 
 NodeMasterHakoniwa::~NodeMasterHakoniwa()
@@ -37,12 +44,9 @@ void NodeMasterHakoniwa::customDraw()
 	setStyle(*this);
 
 	mDesk.draw();
-
-	const float w {60.f};
-	const float h {73.f};
-	const float x {(mDesk.getDimension() - w) * 0.5f};
-	drawBox(ofVec3f(x, mDesk.getHeight(), 50.f), w, h, 10.f);
-	drawBox(ofVec3f(x, mDesk.getHeight(), 50.f), w, h, 30.f);
+    
+    mFront.draw();
+    mRear.draw();
 }
 
 DP_SCORE_NAMESPACE_END
