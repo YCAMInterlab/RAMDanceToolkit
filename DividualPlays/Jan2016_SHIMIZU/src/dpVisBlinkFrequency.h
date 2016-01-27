@@ -10,12 +10,14 @@
 #define __RAMDanceToolkit__dpVisBlinkFrequency__
 
 #include "ramMain.h"
+#include "MemeConstants.h"
+#include "dpConstants.h"
 
 class BlinkFrequency: public ramBaseScene{
     
 public:
     // GUIに表示されるシーン名をここで指定します。
-    string getName() const { return "BlinkFrequency"; }
+    string getName() const { return "dpVisBlinkFrequency"; }
     
     void setup();
     void update();
@@ -26,21 +28,20 @@ public:
     
 private:
     
-    ramOscReceiveTag mReceiver1;
-    ramOscReceiveTag mReceiver2;
+    
+    ramOscReceiveTag mReceiver;
     string oscString;
     
-    static const int NUM = 3;
-    float blinkInterval[NUM];
-    float blinkSpeed[NUM];
+    float blinkSpeed[MEME_NUM];
+    float blinkInterval[MEME_NUM];
     float frequency;
-    
+
     
     //position
     ofVec2f position[11];
     //speed
-    ofVec2f velocity[NUM];
-
+    ofVec2f velocity[MEME_NUM];
+    
     float radius[11];
     float frequncy_array[11];
     int red[11];

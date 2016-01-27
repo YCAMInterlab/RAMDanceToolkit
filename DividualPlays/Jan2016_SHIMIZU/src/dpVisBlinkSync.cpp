@@ -10,24 +10,21 @@
 
 void BlinkSync::setup()
 {
-    ramOscManager::instance().addReceiverTag(&mReceiver1);
-    mReceiver1.addAddress("/dp/toVis/meme1");
-    
-    ramOscManager::instance().addReceiverTag(&mReceiver2);
-    mReceiver2.addAddress("/dp/toVis/meme2");
+    ramOscManager::instance().addReceiverTag(&mReceiver);
+    mReceiver.addAddress("/dp/toVis/meme");
     
     ofSetFrameRate(60);
     ofSetFullscreen(true);
     ofSetCircleResolution(64);
     ofEnableAlphaBlending();
     
-    position[0].x = ofGetWidth() / 5.0;
+    position[0].x = SINGLE_SCREEN_WIDTH / 5.0;
     position[0].y = ofGetHeight() / 3.0;
     
-    position[1].x = ofGetWidth() / 2.0;
+    position[1].x = SINGLE_SCREEN_WIDTH / 2.0;
     position[1].y = ofGetHeight() / 3.0;
     
-    position[2].x = ofGetWidth() / 3.0;
+    position[2].x = SINGLE_SCREEN_WIDTH / 3.0;
     position[2].y = ofGetHeight() / 4.0;
     
 }
@@ -53,16 +50,19 @@ void BlinkSync::draw()
 }
 
 void BlinkSync::receiveOSC(){
-    while (mReceiver1.hasWaitingMessages()) {
-        ofxOscMessage m1;
-        mReceiver1.getNextMessage(&m1);
-        blinkInterval[0] = m1.getArgAsFloat(6);
+    while(mReceiver.hasWaitingMessages()){
+        ofxOscMessage m;
+        mReceiver.getNextMessage(&m);
+        if(m.getAddress() == "/dp/toVis/meme"){
+            for(int i = 0; i < MEME_NUM; i++){
+                int idx = m.getArgAsFloat(0);
+                if(idx == i){
+                    blinkInterval[i] = m.getArgAsFloat(6);
+                }
+            }
+        }
     }
-    while (mReceiver2.hasWaitingMessages()) {
-        ofxOscMessage m2;
-        mReceiver2.getNextMessage(&m2);
-        blinkInterval[1] = m2.getArgAsFloat(6);
-    }
+
 }
 
 void BlinkSync::radiusCaculate(){
@@ -71,7 +71,7 @@ void BlinkSync::radiusCaculate(){
 }
 
 void BlinkSync::BlinkSyncEffect(){
-    for (int i = 0; i < NUM; i++) {
+    for (int i = 0; i < MEME_NUM; i++) {
         if (blinkInterval[0] > 0 && blinkInterval[1] < 0.5 && blinkInterval[1] > 0 && blinkInterval[1]< 0.5) {
             printf("sync");
             radius[2] = radius[2] + 0.1;

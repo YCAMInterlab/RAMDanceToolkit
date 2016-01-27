@@ -30,6 +30,22 @@ dpVisMemeFadeRect mFadeRect;
 #include "dpVisMemeVastCircle.h"
 dpVisMemeVastCircle mVastCircle;
 
+
+#include "dpVisMemeA.h"
+dpVisMemeA memeA;
+#include "dpVisMemeB.h"
+dpVisMemeB memeB;
+#include "dpVisMEME.h"
+MEME meme;
+#include "dpVisBlinkSync.h"
+BlinkSync blinksync;
+#include "dpVisBlinkFrequency.h"
+BlinkFrequency blinkfrequency;
+#include "dpVisFrequency2.h"
+Frequency2 frequency2;
+
+
+
 //HakoniwaOscTest hakoniwaOscTest;
 //HakoniwaColorOfWater hakoniwaColorOfWater;
 #pragma mark - oF methods
@@ -50,6 +66,14 @@ void testApp::setup()
     sceneManager.addScene(mMemeBox.getPtr());
     sceneManager.addScene(mFadeRect.getPtr());
     sceneManager.addScene(mVastCircle.getPtr());
+    
+//    sceneManager.addScene( memeA.getPtr());
+//    sceneManager.addScene( memeB.getPtr());
+    sceneManager.addScene(meme.getPtr());
+    sceneManager.addScene(blinksync.getPtr());
+    sceneManager.addScene(blinkfrequency.getPtr());
+    sceneManager.addScene(frequency2.getPtr());
+
 }
 
 //--------------------------------------------------------------

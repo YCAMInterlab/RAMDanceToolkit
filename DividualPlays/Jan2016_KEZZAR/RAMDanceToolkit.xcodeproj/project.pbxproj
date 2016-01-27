@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		270D2D9C16E4760700D5F750 /* icon.icns in CopyFiles */ = {isa = PBXBuildFile; fileRef = 270D2D9916E475D800D5F750 /* icon.icns */; };
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
+		8C1255041C587FEE0072FB44 /* dpVisBlinkFrequency.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C1255021C587FEE0072FB44 /* dpVisBlinkFrequency.cpp */; };
+		8C1255091C5880420072FB44 /* dpVisBlinkSync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C1255051C5880420072FB44 /* dpVisBlinkSync.cpp */; };
+		8C12550A1C5880420072FB44 /* dpVisFrequency2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C1255071C5880420072FB44 /* dpVisFrequency2.cpp */; };
+		8C1255131C5882380072FB44 /* dpVisMEME.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C1255101C5882380072FB44 /* dpVisMEME.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -88,6 +92,16 @@
 /* Begin PBXFileReference section */
 		270D2D9916E475D800D5F750 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../../resources/Icons/icon.icns; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
+		8C1255021C587FEE0072FB44 /* dpVisBlinkFrequency.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpVisBlinkFrequency.cpp; path = ../../Jan2016_SHIMIZU/src/dpVisBlinkFrequency.cpp; sourceTree = "<group>"; };
+		8C1255031C587FEE0072FB44 /* dpVisBlinkFrequency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpVisBlinkFrequency.h; path = ../../Jan2016_SHIMIZU/src/dpVisBlinkFrequency.h; sourceTree = "<group>"; };
+		8C1255051C5880420072FB44 /* dpVisBlinkSync.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpVisBlinkSync.cpp; path = ../../Jan2016_SHIMIZU/src/dpVisBlinkSync.cpp; sourceTree = "<group>"; };
+		8C1255061C5880420072FB44 /* dpVisBlinkSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpVisBlinkSync.h; path = ../../Jan2016_SHIMIZU/src/dpVisBlinkSync.h; sourceTree = "<group>"; };
+		8C1255071C5880420072FB44 /* dpVisFrequency2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpVisFrequency2.cpp; path = ../../Jan2016_SHIMIZU/src/dpVisFrequency2.cpp; sourceTree = "<group>"; };
+		8C1255081C5880420072FB44 /* dpVisFrequency2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpVisFrequency2.h; path = ../../Jan2016_SHIMIZU/src/dpVisFrequency2.h; sourceTree = "<group>"; };
+		8C1255101C5882380072FB44 /* dpVisMEME.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dpVisMEME.cpp; path = ../../Jan2016_SHIMIZU/src/dpVisMEME.cpp; sourceTree = "<group>"; };
+		8C1255111C5882380072FB44 /* dpVisMEME.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpVisMEME.h; path = ../../Jan2016_SHIMIZU/src/dpVisMEME.h; sourceTree = "<group>"; };
+		8C1255121C5882380072FB44 /* dpVisMemeA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpVisMemeA.h; path = ../../Jan2016_SHIMIZU/src/dpVisMemeA.h; sourceTree = "<group>"; };
+		8C1255151C5882590072FB44 /* dpVisMemeB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dpVisMemeB.h; path = ../../Jan2016_SHIMIZU/src/scenes/dpVisMemeB.h; sourceTree = "<group>"; };
 		922356671A5D2C14009DD3EB /* KezBlinker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezBlinker.h; sourceTree = "<group>"; };
 		923047421C55C8D700F63832 /* dpVisMemeBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpVisMemeBox.h; sourceTree = "<group>"; };
 		9248D4DF1A4D674600047AF5 /* KezConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezConstants.h; sourceTree = "<group>"; };
@@ -166,6 +180,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8C12550D1C5881C90072FB44 /* shimizu */ = {
+			isa = PBXGroup;
+			children = (
+				8C1255121C5882380072FB44 /* dpVisMemeA.h */,
+				8C1255151C5882590072FB44 /* dpVisMemeB.h */,
+				8C1255111C5882380072FB44 /* dpVisMEME.h */,
+				8C1255101C5882380072FB44 /* dpVisMEME.cpp */,
+				8C1255031C587FEE0072FB44 /* dpVisBlinkFrequency.h */,
+				8C1255021C587FEE0072FB44 /* dpVisBlinkFrequency.cpp */,
+				8C1255061C5880420072FB44 /* dpVisBlinkSync.h */,
+				8C1255051C5880420072FB44 /* dpVisBlinkSync.cpp */,
+				8C1255081C5880420072FB44 /* dpVisFrequency2.h */,
+				8C1255071C5880420072FB44 /* dpVisFrequency2.cpp */,
+			);
+			name = shimizu;
+			sourceTree = "<group>";
+		};
 		92F108E71A45395F00E398B2 /* kez_util */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +215,7 @@
 				923047421C55C8D700F63832 /* dpVisMemeBox.h */,
 				9290EF4C1C56286C00ADFCA5 /* dpVisMemeFadeRect.h */,
 				9290EF4D1C562BBB00ADFCA5 /* dpVisMemeVastCircle.h */,
+				8C12550D1C5881C90072FB44 /* shimizu */,
 				9290EF4E1C5705A300ADFCA5 /* MemeConstants.h */,
 			);
 			name = Scenes;
@@ -380,6 +412,10 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
+				8C12550A1C5880420072FB44 /* dpVisFrequency2.cpp in Sources */,
+				8C1255091C5880420072FB44 /* dpVisBlinkSync.cpp in Sources */,
+				8C1255131C5882380072FB44 /* dpVisMEME.cpp in Sources */,
+				8C1255041C587FEE0072FB44 /* dpVisBlinkFrequency.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
