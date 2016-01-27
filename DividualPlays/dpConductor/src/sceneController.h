@@ -23,6 +23,7 @@ public:
 	
 	void	setScene_both(string name, bool viewA, bool viewB);
 	void	setScene(string name, bool RDTK_isA, bool viewA, bool viewB);
+	void	disableScene(string name, bool RDTK_isA);
 	
 	void	clearExtractor(string scene);
 	void	setExtractor(string scene, string name, Joint node);

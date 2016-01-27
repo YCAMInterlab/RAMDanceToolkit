@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "dpConductor.h"
+#include "ofxUI.h"
 
 class ofApp : public ofBaseApp{
 
@@ -21,4 +22,9 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 	
 	dpConductor dpCon;
+	ofxUICanvas gui;
+	void uiEvent(ofxUIEventArgs & e);
+	
+	ofxUIDropDownList* currentScene;
+	vector<string> scenes_for_test;
 };
