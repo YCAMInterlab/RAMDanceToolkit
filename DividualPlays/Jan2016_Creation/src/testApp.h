@@ -33,6 +33,8 @@
 #include "dpHakoniwaTornado.h"
 #include "dpHakoniwaRawCamera.h"
 
+#include "FloorLine.h"
+
 #include "DoSomething.h"
 
 class testApp : public ramBaseApp
