@@ -158,10 +158,10 @@ private:
     
     float mRadMin = 7.6;
     float mRadMax = 95;
-    float mFunThresh = 202.0;
+    float mFunThresh = 78.0;
     float mFan = 220;
     
-    float mDrawRadThresh = 10.0;
+    float mDrawRadThresh = 78.0;
     
     float mDrawRadMin = 1.0;
     float mDrawRadMax = 12.0;
