@@ -95,16 +95,16 @@ private:
     template <class T> ofPtr<T> getNode();
     
     struct Property {
-        Property(float move, float idle, float line, bool easeyCam = false);
+        Property(float move, float idle, float line, float totalTime, bool easeyCam = false);
         ofPtr<ofCamera> camera {makeShared<ofCamera>()};
         float moveSpan {2.f};
         float idleSpan {2.f};
         float lineSpan {1.f};
+        float totalTime {60.f};
     };
     
     const float kMainCamSpeed {0.025f};
     const float kYOffset {-200.f};
-    const float kModeChangeSpan = 6.f * 10.f;
     
     ofFbo mFbo[2]; // double buffer
     int mCurrentFbo {0};
@@ -124,7 +124,7 @@ private:
     long mLastFrameNum {0};
     float mTimeCamMove {0.f};
     float mTimeCamRotation {0.f};
-
+    
     bool mPaused {false};
 };
 
