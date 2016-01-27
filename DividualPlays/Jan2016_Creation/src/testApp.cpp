@@ -102,6 +102,12 @@ BigBox_ext mBigBox_ext;
 #include "FourPoints_ext.h"
 FourPoints_ext mFourPoints_ext;
 
+#include "UpsideDown_ext.h"
+UpsideDown_ext mUpsideDown_ext;
+
+#include "HastyChase_ext.h"
+HastyChase_ext mHastyChase_ext;
+
 #include "dp16_camera_controller.h"
 dp16_camera_controller mCameraController;
 
@@ -177,6 +183,8 @@ void testApp::setup()
 	sceneManager.addScene(mBrokenBody_ext.getPtr());
 	sceneManager.addScene(mBigBox_ext.getPtr());
 	sceneManager.addScene(mFourPoints_ext.getPtr());
+    sceneManager.addScene(mUpsideDown_ext.getPtr());
+    sceneManager.addScene(mHastyChase_ext.getPtr());
 	
 	/* Legacy */
 	sceneManager.addScene( drawLines.getPtr() );

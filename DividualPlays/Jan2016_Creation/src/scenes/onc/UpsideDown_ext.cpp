@@ -18,26 +18,27 @@ void UpsideDown_ext::setupControlPanel()
     ofAddListener(panel->newGUIEvent, this, &UpsideDown_ext::onValueChanged);
     
     const float dim = 16.0f;
+    const float width = 200.f;
     
-    panel->addSlider("ANGLE X", 0.0f, 360.0f, &mEuler.x, 300.0f, dim);
-    panel->addSlider("ANGLE Y", 0.0f, 360.0f, &mEuler.y, 300.0f, dim);
-    panel->addSlider("ANGLE Z", 0.0f, 360.0f, &mEuler.z, 300.0f, dim);
+    panel->addSlider("ANGLE X", 0.0f, 360.0f, &mEuler.x, width, dim);
+    panel->addSlider("ANGLE Y", 0.0f, 360.0f, &mEuler.y, width, dim);
+    panel->addSlider("ANGLE Z", 0.0f, 360.0f, &mEuler.z, width, dim);
     
-    panel->addSpacer(300.0f, 1.0f);
+    panel->addSpacer(width, 1.0f);
     
     panel->addToggle("AUTO ROTATE X", &mAutoRotate.x, dim, dim);
     panel->addToggle("AUTO ROTATE Y", &mAutoRotate.y, dim, dim);
     panel->addToggle("AUTO ROTATE Z", &mAutoRotate.z, dim, dim);
     
-    panel->addSlider("AUTO ROTATE SPEED X", -5.0f, 5.0f, &mAutoRotateSpeed.x, 300.0f, dim);
-    panel->addSlider("AUTO ROTATE SPEED Y", -5.0f, 5.0f, &mAutoRotateSpeed.y, 300.0f, dim);
-    panel->addSlider("AUTO ROTATE SPEED Z", -5.0f, 5.0f, &mAutoRotateSpeed.z, 300.0f, dim);
+    panel->addSlider("AUTO ROTATE SPEED X", -5.0f, 5.0f, &mAutoRotateSpeed.x, width, dim);
+    panel->addSlider("AUTO ROTATE SPEED Y", -5.0f, 5.0f, &mAutoRotateSpeed.y, width, dim);
+    panel->addSlider("AUTO ROTATE SPEED Z", -5.0f, 5.0f, &mAutoRotateSpeed.z, width, dim);
     
-    panel->addSpacer(300.0f, 1.0f);
+    panel->addSpacer(width, 1.0f);
     
-    panel->addSlider("OFFSET", -300.0f, 300.0f, &mOffset, 300.0f, dim);
+    panel->addSlider("OFFSET", -300.0f, 300.0f, &mOffset, width, dim);
     
-    panel->addSpacer(300.0f, 1.0f);
+    panel->addSpacer(width, 1.0f);
     
     panel->addButton("RESET", false, dim, dim);
     

@@ -51,6 +51,7 @@
 		C6C22F651C5476D4002B38EC /* MixMonsterScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22F621C5476D4002B38EC /* MixMonsterScene.cpp */; };
 		C6C22F6A1C54A042002B38EC /* lineDrawing_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22F681C54A042002B38EC /* lineDrawing_ext.cpp */; };
 		D283B3181C58809D00B0E900 /* UpsideDown_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */; };
+		D2A4E4481C58D0C700BEAA84 /* HastyChase_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2A4E4461C58D0C700BEAA84 /* HastyChase_ext.cpp */; settings = {ASSET_TAGS = (); }; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -272,6 +273,8 @@
 		C6C22F691C54A042002B38EC /* lineDrawing_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lineDrawing_ext.h; sourceTree = "<group>"; };
 		D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UpsideDown_ext.cpp; sourceTree = "<group>"; };
 		D283B3171C58809D00B0E900 /* UpsideDown_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpsideDown_ext.h; sourceTree = "<group>"; };
+		D2A4E4461C58D0C700BEAA84 /* HastyChase_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HastyChase_ext.cpp; sourceTree = "<group>"; };
+		D2A4E4471C58D0C700BEAA84 /* HastyChase_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HastyChase_ext.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -830,6 +833,8 @@
 				C6C22F371C54629E002B38EC /* WeiredSpace.h */,
 				D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */,
 				D283B3171C58809D00B0E900 /* UpsideDown_ext.h */,
+				D2A4E4461C58D0C700BEAA84 /* HastyChase_ext.cpp */,
+				D2A4E4471C58D0C700BEAA84 /* HastyChase_ext.h */,
 			);
 			name = onc;
 			path = scenes/onc;
@@ -1068,6 +1073,7 @@
 				C6C22F501C54629E002B38EC /* RagdollScene.cpp in Sources */,
 				5EF92FB01C57B5B100F6916F /* ofxSyphonClient.mm in Sources */,
 				C6C22F4D1C54629E002B38EC /* KeplerBtShapeDrawer.cpp in Sources */,
+				D2A4E4481C58D0C700BEAA84 /* HastyChase_ext.cpp in Sources */,
 				C64C2FC41C54E4B9005E9BB2 /* dp16_camera_controller.cpp in Sources */,
 				C6C22F651C5476D4002B38EC /* MixMonsterScene.cpp in Sources */,
 				C6C22F4A1C54629E002B38EC /* btPicker.cpp in Sources */,
