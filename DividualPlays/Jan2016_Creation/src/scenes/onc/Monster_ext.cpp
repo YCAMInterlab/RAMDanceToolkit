@@ -24,9 +24,9 @@ void Monster_ext::setupControlPanel()
     panel->addButton("Random Line", &randomLine, 20, 20);
     panel->addButton("Randomize Topology", &randomizeTopology, 20, 20);
     panel->addButton("Randomize Geometry", &randomizeGeometry, 20, 20);
-    panel->addSlider("Min scale", 0, 4, &minScale, 300, 20);
-    panel->addSlider("Max scale", 0, 4, &maxScale, 300, 20);
-    panel->addSlider("Randomization amount", 0, 1, &randomizationAmount, 300, 20);
+    panel->addSlider("Min scale", 0, 4, &minScale, 200, 20);
+    panel->addSlider("Max scale", 0, 4, &maxScale, 200, 20);
+    panel->addSlider("Randomization amount", 0, 1, &randomizationAmount, 200, 20);
     
     mex.setupControlPanel(this);
     
