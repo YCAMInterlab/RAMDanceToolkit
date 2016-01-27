@@ -10,12 +10,12 @@
 #define dpScoreSceneFlowChart_h
 
 #include "dpScoreSceneBodyBase.h"
-#include "dpScoreBaseNode.h"
-#include "dpScoreToolBox.h"
 #include "ofxMotioner.h"
 #include "ofxTrueTypeFontUC.h"
 
 DP_SCORE_NAMESPACE_BEGIN
+
+class BaseNode;
 
 class NodeSkeleton final : public ofxMot::Node {
 public:
@@ -91,7 +91,7 @@ private:
         Property& operator = (const Property&) = default;
         ~Property() = default;
         
-        ofPtr<ofCamera> camera {makeShared<ofCamera>()};
+        ofPtr<ofCamera> camera {shared_ptr<ofCamera>(new ofCamera())};
         float moveSpan {2.f};
         float idleSpan {2.f};
         float lineSpan {1.f};
@@ -104,13 +104,18 @@ private:
     
 	ofTrueTypeFont mFont, mFontSmall;
     ofxTrueTypeFontUC mFontJP;
+    
 	map<string, ofPtr<BaseNode>> mNodes;
     vector<vector<string>> mOrders;
     map<int, Property> mProperties;
+    
     vector<ofFbo> mFbos; // double buffer
+    
     ofCamera mCamToolKit;
+    
     ofNode mNodeCenter;
     ofNode mNodeHead;
+    
     int mCurrentScene {SCENE_MOVE};
     int mCurrentFbo {kNumFbos};
 	int mOrderIdx {2};
@@ -132,7 +137,7 @@ ofPtr<T> SceneFlowChart::getNode()
 
 template<class T> void SceneFlowChart::addNode()
 {
-    mNodes[getClassName<T>()] = makeShared<T>();
+    mNodes[getClassName<T>()] = shared_ptr<T>(new T());
 }
 
 DP_SCORE_NAMESPACE_END
