@@ -17,12 +17,6 @@
 
 #include "testApp.h"
 
-//#include "ramEventMain.h"
-//#include "ramFilterMain.h"
-//#include "ramGraphicsMain.h"
-//#include "ramFilterMain.h"
-//#include "ramRecognizerMain.h"
-
 /*====== Legacy ======*/
 #include "LineDrawing.h"
 LineDrawing drawLines;
@@ -77,17 +71,11 @@ BrokenBody mBroken;
 #include "BurstBody.h"
 BurstBody mBurst;
 
-#include "AtractSphere.h"
-AtractSphereScene mSphere;
-
 #include "MoveSeparatedObjects.h"
 MoveSeparatedObjects mSep;
 
 #include "WeiredSpace.h"
 WeiredSpace mWeierd;
-
-#include "FloorLine.h"
-FloorLine mFloorLine;
 
 #include "ThreePointFlow.h"
 ThreePointFlow mThree;
@@ -129,6 +117,8 @@ dp16_actorDrawer mActorDrawer;
 
 #include "dpSyphonClientManager.h"
 
+#include "magnetLooper.h"
+
 // sand
 dpHakoniwaSand hakoniwaSand;
 dpHakoVisSandStorm visSandStorm;
@@ -154,6 +144,9 @@ dpSyphonClientManager *mSyphonClientManager;
 
 // stage
 dpHakoVisStageBlob                visStage;
+
+//magnet looper
+magnetLooper looper;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -205,7 +198,6 @@ void testApp::setup()
     sceneManager.addScene(mFixed.getPtr());
     sceneManager.addScene(mBroken.getPtr());
     sceneManager.addScene(mBurst.getPtr());
-    sceneManager.addScene(mFloorLine.getPtr());
     sceneManager.addScene(mThree.getPtr());
 
 	//Sheep
@@ -235,19 +227,9 @@ void testApp::setup()
     //tornado
     sceneManager.addScene(hakoniwaTornado.getPtr());
     sceneManager.addScene(visTornado.getPtr());
-	
-		/*
-	sceneManager.addScene(mCube.getPtr());
-	sceneManager.addScene(mMucous.getPtr());
-	sceneManager.addScene(mStick.getPtr());
-	sceneManager.addScene(mUnity.getPtr());
-	sceneManager.addScene(mSphere.getPtr());
-	sceneManager.addScene(mSep.getPtr());
-	sceneManager.addScene(mWeierd.getPtr());
-	 */
-	
-//	sceneManager.allocateFbos(640, 480);
     
+    sceneManager.addScene(looper.getPtr());
+	
     sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
     sceneManager.setShowAllActors(false);
 
@@ -260,7 +242,7 @@ void testApp::update()
     doSomething.update();
     mSyphonClientManager->update();
     ramGetGUI().getSceneTabs().setPosition(0, -mouseY);
-  //  ramControlPanel::getSceneTabs().setPosition(0,mouseY);
+    
 }
 
 //--------------------------------------------------------------
