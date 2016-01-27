@@ -146,15 +146,11 @@ public:
                     int idx = m.getArgAsInt32(0);
                     if(idx == i){
                         float speed = m.getArgAsFloat(1);
-                        
                         if(speed > 0.0){
-                            
                             float param = ofMap(speed,MIN_SPEED,MAX_SPEED,1.0,0.0);
                             ofColor color = dpColor::MAIN_COLOR;
                             color.setSaturation(param * color.getSaturation());
-                            
                             mBoxManagers[i].fire(color,ofPoint(param * 700.0,10,10));
-                            
                         }
                     }
                 }

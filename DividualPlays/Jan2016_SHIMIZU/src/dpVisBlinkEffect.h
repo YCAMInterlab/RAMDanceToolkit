@@ -33,7 +33,7 @@ private:
     string oscString;
     
     
-    static const int NUM = 10;
+    static const int NUM = 3;
     
     //position
     ofVec2f position[NUM];

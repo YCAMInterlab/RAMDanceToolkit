@@ -31,6 +31,21 @@ dpVisMemeB memeB;
 #include "dpVisBlinkEffect.h"
 BlinkEffect blinkeffect;
 
+#include "dpVisMEME.h"
+MEME meme;
+
+#include "dpVisConcentrate.h"
+Concentrate concentrate;
+
+#include "dpVisBlinkSync.h"
+BlinkSync blinksync;
+
+#include "dpVisBlinkFrequency.h"
+BlinkFrequency blinkfrequency;
+
+#include "dpVisFrequency2.h"
+Frequency2 frequency2;
+
 #include "dpVisAccEffect.h"
 AccEffect acceffect;
 
@@ -55,7 +70,14 @@ void testApp::setup()
     sceneManager.addScene( memeB.getPtr());
     
     sceneManager.addScene(blinkeffect.getPtr());
+    sceneManager.addScene(meme.getPtr());
+    sceneManager.addScene(concentrate.getPtr());
+    sceneManager.addScene(blinksync.getPtr());
+    sceneManager.addScene(blinkfrequency.getPtr());
+    
+    sceneManager.addScene(frequency2.getPtr());
     sceneManager.addScene(acceffect.getPtr());
+    
         
 }
 

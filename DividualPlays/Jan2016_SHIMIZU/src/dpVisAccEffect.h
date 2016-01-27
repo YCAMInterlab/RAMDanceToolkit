@@ -27,7 +27,7 @@ public:
     
 private:
 
-    static const int NUM = 10;
+    static const int NUM = 3;
     float blinkSpeed[NUM];
 
     ramOscReceiveTag mReceiver1;
