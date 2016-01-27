@@ -24,8 +24,9 @@ public:
     
     constexpr static const int kNumX { 3 };
     constexpr static const int kNumY { 2 };
+    constexpr static const float kGapZ { 90.f };
     static float getWidth() { return Desk::getDimension() * kNumX;  }
-    static float getDepth() { return Desk::getDimension() * kNumY + 90.f * (kNumY - 1);  }
+    static float getDepth() { return Desk::getDimension() * kNumY + kGapZ * (kNumY - 1);  }
 
     void setX(int i) { mX = ofClamp(i, 0, kNumX); };
     void setY(int i) { mY = ofClamp(i, 0, kNumY); };
