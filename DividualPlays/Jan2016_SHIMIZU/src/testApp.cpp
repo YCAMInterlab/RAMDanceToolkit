@@ -69,14 +69,15 @@ void testApp::setup()
     sceneManager.addScene( memeA.getPtr());
     sceneManager.addScene( memeB.getPtr());
     
-    sceneManager.addScene(blinkeffect.getPtr());
     sceneManager.addScene(meme.getPtr());
-    sceneManager.addScene(concentrate.getPtr());
     sceneManager.addScene(blinksync.getPtr());
     sceneManager.addScene(blinkfrequency.getPtr());
-    
     sceneManager.addScene(frequency2.getPtr());
-    sceneManager.addScene(acceffect.getPtr());
+    
+    
+//    sceneManager.addScene(blinkeffect.getPtr());
+//    sceneManager.addScene(concentrate.getPtr());
+//    sceneManager.addScene(acceffect.getPtr());
     
         
 }

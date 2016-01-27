@@ -23,10 +23,11 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-SceneFlowChart::Property::Property(float move, float idle, float line, bool easeyCam) :
+SceneFlowChart::Property::Property(float move, float idle, float line, float totalTime, bool easeyCam) :
 	moveSpan(move),
 	idleSpan(idle),
-	lineSpan(line)
+	lineSpan(line),
+	totalTime(totalTime)
 {
 	if (easeyCam) {
 		auto easyCam = makeShared<ofEasyCam>();
@@ -140,12 +141,13 @@ void SceneFlowChart::setupOrders()
 void SceneFlowChart::setupScenes()
 {
 	mProperties.clear();
-	mProperties.push_back(Property(2.f, 2.f, 1.f, false));
-	mProperties.push_back(Property(2.f, 2.f, 1.f, false));
-	mProperties.push_back(Property(2.f, 2.f, 1.f, false));
-	mProperties.push_back(Property(1.f, 0.f, 1.f, false));
-	mProperties.push_back(Property(2.f, 2.f, 1.f, false));
-	mProperties.push_back(Property(2.f, 2.f, 1.f, true));
+	mProperties.push_back(Property(2.f, 2.f, 1.f, 60.f, false));
+	mProperties.push_back(Property(2.f, 2.f, 1.f, 60.f, false));
+	mProperties.push_back(Property(2.f, 2.f, 1.f, 30.f, false));
+	mProperties.push_back(Property(2.f, 0.f, 2.f, 30.f, false));
+	mProperties.push_back(Property(0.f, 0.f, 0.f, 60.f, false));
+    
+	mProperties.push_back(Property(2.f, 2.f, 1.f, 60.f, true));
 
 	mNodeCenter.setGlobalPosition(ofVec3f::zero());
 
@@ -155,10 +157,11 @@ void SceneFlowChart::setupScenes()
 	mProperties.at(SCENE_TPS).camera->setParent(mNodeHead);
 	mProperties.at(SCENE_TPS).camera->setGlobalPosition(0.f, 0.f, 200.f);
 
-	mProperties.at(SCENE_CIRCULATION).camera->setGlobalPosition(0.f, 200.f, 1200.f);
+	mProperties.at(SCENE_CIRCULATION).camera->setGlobalPosition(-100.f, 400.f, 800.f);
+	mProperties.at(SCENE_CIRCULATION).camera->setOrientation(ofVec3f(-30.f, 0.f, 0.f));
 
 	mProperties.at(SCENE_MEMORY).camera->setParent(mNodeCenter);
-	mProperties.at(SCENE_MEMORY).camera->setGlobalPosition(0.f, 0.f, 1200.f);
+	mProperties.at(SCENE_MEMORY).camera->setGlobalPosition(0.f, 100.f, 1000.f);
 }
 
 void SceneFlowChart::shutDown()
@@ -195,6 +198,9 @@ void SceneFlowChart::update(ofxEventMessage& m)
 	else if (mCurrentScene == SCENE_MAIN) {
 		updateMainCam();
 	}
+	else if (mCurrentScene == SCENE_MEMORY) {
+		updateMemoryCam();
+	}
 	// do nothing
 	else { // TPS and easy cam
 		for (auto i : rep(mNodes.size())) {
@@ -208,7 +214,7 @@ void SceneFlowChart::updateTime()
 	mElapsedTime += ofGetLastFrameTime();
 
 	// change camera mode
-	if (mElapsedTime >= kModeChangeSpan) {
+	if (mElapsedTime >= mProperties.at(mCurrentScene).totalTime) {
 		++mCurrentScene %= SCENE_MEMORY;
 		changeScene(mCurrentScene);
 		mElapsedTime = 0.f;
@@ -314,7 +320,12 @@ void SceneFlowChart::updateMainCam()
 void SceneFlowChart::updateMemoryCam()
 {
 	mTimeCamRotation += ofGetLastFrameTime();
-	const float r {mTimeCamRotation * 100.f};
+
+	if (mTimeCamRotation >= 10.f) {
+		LineObj::enableAnimation = true;
+	}
+
+	const float r {-mTimeCamRotation * 5.f + 45.f};
 	mNodeCenter.setGlobalOrientation(ofQuaternion(r, ofVec3f(0.f, 1.f, 0.f)));
 
 	for (auto i : rep(mNodes.size())) {
@@ -597,6 +608,22 @@ void SceneFlowChart::drawHUD()
 			mFontJP.drawStringAsShapes(strJP, 0.f, 0.f);
 		}
 	}
+	else if (mCurrentScene == SCENE_MEMORY) {
+		const string str {"Dancer's memory"};
+		{
+			ScopedTranslate t(30.f, 120.f);
+			ofSetColor(ofColor::white);
+			mFont.drawString(str, 0.f, 0.f);
+		}
+		const string strJP {"記憶"};
+		{
+			ScopedTranslate t((ofGetWidth() - mFontJP.stringWidth(strJP)) * 0.5f, ofGetHeight() - 20.f);
+			ofSetColor(ofColor::black, 180);
+			ofRect(mFontJP.getStringBoundingBox(strJP, 0.f, 0.f));
+			ofSetColor(ofColor::white);
+			mFontJP.drawStringAsShapes(strJP, 0.f, 0.f);
+		}
+	}
 #ifdef DEBUG
 	ofSetColor(ofColor::gray);
 	ofDrawBitmapString("order=" + ofToString(mOrderIdx), ofGetWidth() - 70.f, ofGetHeight() - 10.f);
@@ -664,9 +691,9 @@ void SceneFlowChart::changeScene(int index)
 	case SCENE_TPS:
 		break;
 	case SCENE_CIRCULATION:
+		getNode<NodeHakoniwa>()->setFocus(false);
 		break;
 	case SCENE_MEMORY:
-		LineObj::enableAnimation = true;
 		mTimeCamRotation = 0.f;
 		break;
 	case SCENE_DEBUG:
@@ -676,6 +703,9 @@ void SceneFlowChart::changeScene(int index)
 	}
 	if (mCurrentScene != SCENE_MEMORY) {
 		LineObj::enableAnimation = false;
+	}
+	if (mCurrentScene != SCENE_CIRCULATION) {
+		getNode<NodeHakoniwa>()->setFocus(true);
 	}
 }
 

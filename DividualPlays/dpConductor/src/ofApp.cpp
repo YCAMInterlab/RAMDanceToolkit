@@ -3,26 +3,38 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-	dpCon.setup();
+	dpCon = ofPtr<dpConductor>(new dpConductor);
+	gui.conPtr = dpCon;
+
+	gui.setup();
+	dpCon->setup();
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){
-
-	dpCon.update();
+void ofApp::update()
+{
+	dpCon->update();
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
-
-	dpCon.draw();
+void ofApp::draw()
+{
+	ofBackground(50);
+	
+	dpCon->draw();
+	
+	ofPushMatrix();
+	ofTranslate(ofGetMouseX(), ofGetMouseY());
+	ofLine(-5, 0, 5, 0);
+	ofLine(0, -5, 0, 5);
+	ofPopMatrix();
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-
-	if (key == ' ') dpCon.callSection("LineKojiri");
+void ofApp::keyPressed(int key)
+{
 }
+
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
