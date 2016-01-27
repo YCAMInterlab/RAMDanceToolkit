@@ -41,6 +41,8 @@ void UpsideDown_ext::setupControlPanel()
     
     panel->addButton("RESET", false, dim, dim);
     
+    mMex.setupControlPanel(this);
+    
 #endif
 }
 
@@ -59,6 +61,8 @@ void UpsideDown_ext::loopAngle(float &a)
 
 void UpsideDown_ext::update()
 {
+    mMex.update();
+    
     if (mAutoRotate.x) {
         mEuler.x += mAutoRotateSpeed.x;
         loopAngle(mEuler.x);
@@ -90,6 +94,13 @@ void UpsideDown_ext::draw()
     for (int i=0; i<getNumNodeArray(); i++)
     {
         ramNodeArray tmpActor = getNodeArray(i);
+        
+        bool bActEnable = false;
+        for (int q = 0;q < mMex.getNumPort();q++)
+            if (mMex.getActorNameAt(q) == tmpActor.getName()) bActEnable = true;
+        
+        if (!bActEnable) continue;
+        
         ofQuaternion base = tmpActor.getNode(ramActor::JOINT_HIPS).getOrientationQuat();
         ofQuaternion rotated = base * mRotation;
         tmpActor.getNode(ramActor::JOINT_HIPS).setOrientation(rotated);
