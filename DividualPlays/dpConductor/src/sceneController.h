@@ -16,10 +16,18 @@
 class sceneController : public baseOscSender{
 public:
 	
+	void setup(string RDTK1_addr, string RDTK2_addr);
+	
 	string	getSceneName (int index);
-	void	setScene(string name, bool viewA, bool viewB);
+	
+	void	setScene_both(string name, bool viewA, bool viewB);
+	void	setScene(string name, bool RDTK_isA, bool viewA, bool viewB);
+	
+	void	setExtractor(string scene, string name, Joint node);
+	
 	void	clearScene();
 	
+	string addr_rdtk1, addr_rdtk2;
 };
 
 #endif /* sceneController_h */

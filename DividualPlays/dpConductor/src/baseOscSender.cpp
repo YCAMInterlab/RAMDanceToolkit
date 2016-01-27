@@ -32,3 +32,10 @@ void baseOscSender::sendMessage(ofxOscMessage m)
 		++it;
 	}
 }
+
+void baseOscSender::sendMessageSelect(string host, ofxOscMessage m)
+{
+	map<string, int>::iterator it = senders.find(host);
+	ofxOscSender sender;
+	sender.sendMessage(m);
+}
