@@ -17,8 +17,10 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-class NodeSkeleton : public ofxMot::Node {
+class NodeSkeleton final : public ofxMot::Node {
 public:
+    virtual ~NodeSkeleton() {}
+    
     void customDraw() override
     {
         ofDrawBox(size);
@@ -27,31 +29,6 @@ public:
 
 class SceneFlowChart final : public SceneBodyBase<NodeSkeleton> {
 public:
-	enum NodeType {
-		NODE_MOTIONER = 0,
-        NODE_DANCER,
-		NODE_MASTER_HAKONIWA,
-		NODE_STAGE,
-		NODE_HAKONIWA,
-		NODE_CAMERA_UNIT,
-		NODE_DISPLAY,
-		NODE_SPEAKER,
-		NODE_LIGHT,
-		NODE_COMPUTER,
-		NODE_AUDIENCE,
-		NUM_NODES,
-	};
-    
-    enum Scene {
-        SCENE_MOVE,
-        SCENE_MAIN,
-        SCENE_TPS,
-        SCENE_CIRCULATION,
-        SCENE_MEMORY,
-        SCENE_DEBUG,
-        NUM_SCENES,
-    };
-
 	explicit SceneFlowChart() = default;
 	virtual ~SceneFlowChart() = default;
 	SceneFlowChart(const SceneFlowChart &) = delete;
@@ -89,13 +66,31 @@ private:
     void drawHUD();
     
     void changeScene(int index);
-    int getCurrentNodeID() const;
-    int getNextNodeID() const;
+    const string& getCurrentNodeName() const;
+    const string& getNextNodeName() const;
+    ofPtr<BaseNode> getCurrentNode();
+    ofPtr<BaseNode> getNextNode();
     
     template <class T> ofPtr<T> getNode();
+    template<class T> void addNode();
     
-    struct Property {
+    enum SceneType {
+        SCENE_MOVE = 0,
+        SCENE_MAIN,
+        SCENE_TPS,
+        SCENE_CIRCULATION,
+        SCENE_MEMORY,
+        SCENE_DEBUG,
+        NUM_SCENES,
+    };
+    
+    struct Property final {
+        Property() = default;
         Property(float move, float idle, float line, float totalTime, bool easeyCam = false);
+        Property(const Property&) = default;
+        Property& operator = (const Property&) = default;
+        ~Property() = default;
+        
         ofPtr<ofCamera> camera {makeShared<ofCamera>()};
         float moveSpan {2.f};
         float idleSpan {2.f};
@@ -105,18 +100,19 @@ private:
     
     const float kMainCamSpeed {0.025f};
     const float kYOffset {-200.f};
+    const int kNumFbos {2};
     
-    ofFbo mFbo[2]; // double buffer
-    int mCurrentFbo {0};
 	ofTrueTypeFont mFont, mFontSmall;
     ofxTrueTypeFontUC mFontJP;
-	vector<ofPtr<BaseNode> > mNodes;
-    vector<vector<int>> mOrders;
-    vector<Property> mProperties;
+	map<string, ofPtr<BaseNode>> mNodes;
+    vector<vector<string>> mOrders;
+    map<int, Property> mProperties;
+    vector<ofFbo> mFbos; // double buffer
     ofCamera mCamToolKit;
     ofNode mNodeCenter;
     ofNode mNodeHead;
     int mCurrentScene {SCENE_MOVE};
+    int mCurrentFbo {kNumFbos};
 	int mOrderIdx {2};
     int mNodeIdx {0};
     
@@ -131,10 +127,12 @@ private:
 template <class T>
 ofPtr<T> SceneFlowChart::getNode()
 {
-    for (auto n : mNodes) {
-        if (getClassName(*n) == getClassName<T>())
-        return dynamic_pointer_cast<T>(n);
-    }
+    return dynamic_pointer_cast<T>(mNodes[getClassName<T>()]);
+}
+
+template<class T> void SceneFlowChart::addNode()
+{
+    mNodes[getClassName<T>()] = makeShared<T>();
 }
 
 DP_SCORE_NAMESPACE_END
