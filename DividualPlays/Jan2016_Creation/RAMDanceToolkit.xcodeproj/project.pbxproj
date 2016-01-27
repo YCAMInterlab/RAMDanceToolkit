@@ -51,9 +51,8 @@
 		C6C22F651C5476D4002B38EC /* MixMonsterScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22F621C5476D4002B38EC /* MixMonsterScene.cpp */; };
 		C6C22F6A1C54A042002B38EC /* lineDrawing_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22F681C54A042002B38EC /* lineDrawing_ext.cpp */; };
 		D283B3181C58809D00B0E900 /* UpsideDown_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */; };
-		D2A4E4481C58D0C700BEAA84 /* HastyChase_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2A4E4461C58D0C700BEAA84 /* HastyChase_ext.cpp */; settings = {ASSET_TAGS = (); }; };
-		D2A4E44B1C58DA0700BEAA84 /* Monster_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2A4E4491C58DA0700BEAA84 /* Monster_ext.cpp */; settings = {ASSET_TAGS = (); }; };
-		D2A4E44E1C58DE9100BEAA84 /* MixMonsterScene_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2A4E44C1C58DE9100BEAA84 /* MixMonsterScene_ext.cpp */; settings = {ASSET_TAGS = (); }; };
+		D2A4E4481C58D0C700BEAA84 /* HastyChase_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2A4E4461C58D0C700BEAA84 /* HastyChase_ext.cpp */; };
+		D2A4E44B1C58DA0700BEAA84 /* Monster_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2A4E4491C58DA0700BEAA84 /* Monster_ext.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -199,6 +198,7 @@
 		9225EEC31C588FBA00A7FD9A /* dp3DDanceMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dp3DDanceMap.h; sourceTree = "<group>"; };
 		9225EEC41C588FBA00A7FD9A /* FixedBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBody.h; sourceTree = "<group>"; };
 		9225EEC51C588FBA00A7FD9A /* ThreePointFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreePointFlow.h; sourceTree = "<group>"; };
+		9225EED31C58DC9000A7FD9A /* dpAllHakoniwaMove.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpAllHakoniwaMove.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		C64C2FC21C54E4B9005E9BB2 /* dp16_camera_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dp16_camera_controller.cpp; sourceTree = "<group>"; };
 		C64C2FC31C54E4B9005E9BB2 /* dp16_camera_controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dp16_camera_controller.h; sourceTree = "<group>"; };
@@ -279,8 +279,6 @@
 		D2A4E4471C58D0C700BEAA84 /* HastyChase_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HastyChase_ext.h; sourceTree = "<group>"; };
 		D2A4E4491C58DA0700BEAA84 /* Monster_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Monster_ext.cpp; sourceTree = "<group>"; };
 		D2A4E44A1C58DA0700BEAA84 /* Monster_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Monster_ext.h; sourceTree = "<group>"; };
-		D2A4E44C1C58DE9100BEAA84 /* MixMonsterScene_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MixMonsterScene_ext.cpp; sourceTree = "<group>"; };
-		D2A4E44D1C58DE9100BEAA84 /* MixMonsterScene_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixMonsterScene_ext.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -366,6 +364,7 @@
 				5EF92F5E1C57B59C00F6916F /* dpHakoVisStageBlob.h */,
 				5EF92F5F1C57B59C00F6916F /* dpHakoVisStruggle.h */,
 				5EF92F601C57B59C00F6916F /* dpHakoVisTornado.h */,
+				9225EED31C58DC9000A7FD9A /* dpAllHakoniwaMove.h */,
 				5EF92F611C57B59C00F6916F /* dpHakoVisVecLineCircle.h */,
 				5EF92F621C57B59C00F6916F /* dpHakoVisWorm.h */,
 				5EF92F631C57B59C00F6916F /* iceLine */,
@@ -843,8 +842,6 @@
 				D2A4E4471C58D0C700BEAA84 /* HastyChase_ext.h */,
 				D2A4E4491C58DA0700BEAA84 /* Monster_ext.cpp */,
 				D2A4E44A1C58DA0700BEAA84 /* Monster_ext.h */,
-				D2A4E44C1C58DE9100BEAA84 /* MixMonsterScene_ext.cpp */,
-				D2A4E44D1C58DE9100BEAA84 /* MixMonsterScene_ext.h */,
 			);
 			name = onc;
 			path = scenes/onc;
@@ -1087,7 +1084,6 @@
 				D2A4E4481C58D0C700BEAA84 /* HastyChase_ext.cpp in Sources */,
 				C64C2FC41C54E4B9005E9BB2 /* dp16_camera_controller.cpp in Sources */,
 				C6C22F651C5476D4002B38EC /* MixMonsterScene.cpp in Sources */,
-				D2A4E44E1C58DE9100BEAA84 /* MixMonsterScene_ext.cpp in Sources */,
 				C6C22F4A1C54629E002B38EC /* btPicker.cpp in Sources */,
 				C6C22F471C54629E002B38EC /* ChainBtDynamics.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,

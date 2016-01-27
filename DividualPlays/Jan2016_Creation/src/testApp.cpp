@@ -248,7 +248,7 @@ void testApp::setup()
     sceneManager.addScene(visTornado.getPtr());
     
     sceneManager.addScene(looper.getPtr());
-    
+    sceneManager.addScene(allHakoniwaMove.getPtr());
 	
     sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
     sceneManager.setShowAllActors(false);

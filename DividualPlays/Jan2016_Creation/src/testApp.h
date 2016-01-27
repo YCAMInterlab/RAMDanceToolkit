@@ -33,6 +33,8 @@
 #include "dpHakoniwaTornado.h"
 #include "dpHakoniwaRawCamera.h"
 
+#include "dpAllHakoniwaMove.h"
+
 #include "FloorLine.h"
 
 #include "DoSomething.h"
@@ -67,6 +69,7 @@ public:
 	void onRigidExit(const ramRigidBody &rigid);
     
     dpHakoniwaServoPendulum     hakoniwaServoPendulum;
+    dpAllHakoniwaMove           allHakoniwaMove;
     
     DoSomething doSomething;
 };

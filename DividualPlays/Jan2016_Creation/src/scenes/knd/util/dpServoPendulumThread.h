@@ -11,7 +11,7 @@
 
 #include "ofMain.h"
 #include "ofThread.h"
-
+#include "dpConstants.h"
 
 class dpServoPendulumThread : public ofThread
 {
@@ -35,7 +35,7 @@ public:
     dpServoPendulumThread(){}
     
     void setup(){
-        mSender.setup("192.168.20.67",8528);
+        mSender.setup(SERVO_PENDULUM_IP,8528);
         isSetupOsc = true;
     }
     
