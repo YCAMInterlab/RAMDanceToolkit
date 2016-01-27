@@ -53,7 +53,7 @@
 		D283B3181C58809D00B0E900 /* UpsideDown_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */; };
 		D2A4E4481C58D0C700BEAA84 /* HastyChase_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2A4E4461C58D0C700BEAA84 /* HastyChase_ext.cpp */; };
 		D2A4E44B1C58DA0700BEAA84 /* Monster_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2A4E4491C58DA0700BEAA84 /* Monster_ext.cpp */; };
-		D2A4E4551C58E32F00BEAA84 /* MixMonsterScene_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2A4E4531C58E32F00BEAA84 /* MixMonsterScene_ext.cpp */; settings = {ASSET_TAGS = (); }; };
+		D2A4E4551C58E32F00BEAA84 /* MixMonsterScene_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2A4E4531C58E32F00BEAA84 /* MixMonsterScene_ext.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -200,6 +200,9 @@
 		9225EEC41C588FBA00A7FD9A /* FixedBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBody.h; sourceTree = "<group>"; };
 		9225EEC51C588FBA00A7FD9A /* ThreePointFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreePointFlow.h; sourceTree = "<group>"; };
 		9225EED31C58DC9000A7FD9A /* dpAllHakoniwaMove.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpAllHakoniwaMove.h; sourceTree = "<group>"; };
+		9225EEDA1C58F21A00A7FD9A /* dpHakoVisMag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpHakoVisMag.h; sourceTree = "<group>"; };
+		9225EEDB1C59130A00A7FD9A /* CounterFireVector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CounterFireVector.h; sourceTree = "<group>"; };
+		9225EEDC1C5938E900A7FD9A /* BurstBody_ext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BurstBody_ext.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		C64C2FC21C54E4B9005E9BB2 /* dp16_camera_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dp16_camera_controller.cpp; sourceTree = "<group>"; };
 		C64C2FC31C54E4B9005E9BB2 /* dp16_camera_controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dp16_camera_controller.h; sourceTree = "<group>"; };
@@ -361,6 +364,7 @@
 				5EF92F581C57B59C00F6916F /* dpHakoniwaStruggle.h */,
 				5EF92F591C57B59C00F6916F /* dpHakoniwaTornado.h */,
 				5EF92F5A1C57B59C00F6916F /* dpHakoVisBug.h */,
+				9225EEDA1C58F21A00A7FD9A /* dpHakoVisMag.h */,
 				5EF92F5B1C57B59C00F6916F /* dpHakoVisMagnetPendulum.h */,
 				5EF92F5C1C57B59C00F6916F /* dpHakoVisSandStorm.h */,
 				5EF92F5D1C57B59C00F6916F /* dpHakoVisServoPendulum.h */,
@@ -391,6 +395,7 @@
 		5EF92F681C57B59C00F6916F /* util */ = {
 			isa = PBXGroup;
 			children = (
+				9225EEDB1C59130A00A7FD9A /* CounterFireVector.h */,
 				9225EEBF1C588F9700A7FD9A /* GeometryHelpers.h */,
 				5EF92F691C57B59C00F6916F /* DoSomething.h */,
 				5EF92F6A1C57B59C00F6916F /* dpRibbon.h */,
@@ -511,6 +516,7 @@
 				5E846F3C1C58C9DD006FB401 /* FloorLine.h */,
 				9225EEC11C588FBA00A7FD9A /* BrokenBody.h */,
 				9225EEC21C588FBA00A7FD9A /* BurstBody.h */,
+				9225EEDC1C5938E900A7FD9A /* BurstBody_ext.h */,
 				9225EEC31C588FBA00A7FD9A /* dp3DDanceMap.h */,
 				9225EEC41C588FBA00A7FD9A /* FixedBody.h */,
 				9225EEC51C588FBA00A7FD9A /* ThreePointFlow.h */,
