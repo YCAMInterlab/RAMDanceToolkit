@@ -51,6 +51,7 @@
 		C6C22F641C5476D4002B38EC /* middleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22F601C5476D4002B38EC /* middleScene.cpp */; };
 		C6C22F651C5476D4002B38EC /* MixMonsterScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22F621C5476D4002B38EC /* MixMonsterScene.cpp */; };
 		C6C22F6A1C54A042002B38EC /* lineDrawing_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22F681C54A042002B38EC /* lineDrawing_ext.cpp */; };
+		D283B3181C58809D00B0E900 /* UpsideDown_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */; settings = {ASSET_TAGS = (); }; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -275,6 +276,8 @@
 		C6C22F631C5476D4002B38EC /* MixMonsterScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixMonsterScene.h; sourceTree = "<group>"; };
 		C6C22F681C54A042002B38EC /* lineDrawing_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lineDrawing_ext.cpp; sourceTree = "<group>"; };
 		C6C22F691C54A042002B38EC /* lineDrawing_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lineDrawing_ext.h; sourceTree = "<group>"; };
+		D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UpsideDown_ext.cpp; sourceTree = "<group>"; };
+		D283B3171C58809D00B0E900 /* UpsideDown_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpsideDown_ext.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -844,6 +847,8 @@
 				C6C22F351C54629E002B38EC /* MoveSeparatedObjects.h */,
 				C6C22F361C54629E002B38EC /* WeiredSpace.cpp */,
 				C6C22F371C54629E002B38EC /* WeiredSpace.h */,
+				D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */,
+				D283B3171C58809D00B0E900 /* UpsideDown_ext.h */,
 			);
 			name = onc;
 			path = scenes/onc;
@@ -1100,6 +1105,7 @@
 				C6C22F521C54629E002B38EC /* MoveSeparatedObjects.cpp in Sources */,
 				5EF92FAE1C57B5B100F6916F /* SyphonNameboundClient.m in Sources */,
 				C6C22F541C54629E002B38EC /* distanceMetaball.cpp in Sources */,
+				D283B3181C58809D00B0E900 /* UpsideDown_ext.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
 				5EF92F761C57B59C00F6916F /* dpHakoniwaMagnetPendulum.cpp in Sources */,
 				5EF92F771C57B59C00F6916F /* dpHakoniwaSand.cpp in Sources */,
@@ -1202,7 +1208,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-					/Users/ycam/Desktop/of_v0.8.4_osx_release/RAMDanceToolKit/addons/ofxSyphon/libs/Syphon/lib/osx,
+					../../addons/ofxSyphon/libs/Syphon/lib/osx,
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1305,7 +1311,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-					/Users/ycam/Desktop/of_v0.8.4_osx_release/RAMDanceToolKit/addons/ofxSyphon/libs/Syphon/lib/osx,
+					../../addons/ofxSyphon/libs/Syphon/lib/osx,
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
