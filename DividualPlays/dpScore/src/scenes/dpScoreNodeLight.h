@@ -21,10 +21,23 @@ public:
 
 	void customDraw() override;
 
-    constexpr static const float getHeight() { return 800.f; }
+    constexpr static float getHeight() { return 800.f; }
+    static int getNumX() { return 8; }
+    static int getNumZ() { return 3; }
     
 private:
-    void drawParLight(float angle);
+    struct ParLight {
+        ParLight();
+        
+        Box top, left, right;
+        Cylinder body;
+        float angle;
+        ofVec3f position;
+        
+        void draw();
+    };
+    
+    vector<ParLight> mParLights;
 };
 
 DP_SCORE_NAMESPACE_END
