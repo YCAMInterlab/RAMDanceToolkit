@@ -29,7 +29,7 @@ void dpHakoniwaSand::setupControlPanel(){
 
 void dpHakoniwaSand::setup(){
  
-    mSender.setup("192.168.20.54",8528);
+    mSender.setup(SAND_STORM_IP,8528);
     
 }
 

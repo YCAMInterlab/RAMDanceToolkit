@@ -33,6 +33,19 @@ static const int APP_HEIGHT = SINGLE_SCREEN_HEIGHT;
 static const int EXTERNAL_VIDEO_WIDTH = 640;
 static const int EXTERNAL_VIDEO_HEIGHT = 480;
 
+static const string MAGLOOPER_IP = "192.168.20.12";
+static const int MAGLOOPER_1_PORT = 12001;
+static const int MAGLOOPER_2_PORT = 12000;
+
+static const string MAG_PENDULUM_ONOFF_IP = "192.168.20.52";
+static const string STRUGGLE_IP = "192.168.20.53";
+static const string SAND_STORM_IP = "192.168.20.54";
+static const string SERVO_PENDULUM_IP = "192.168.20.67";
+static const string TORNADE_IP = "192.168.20.71";
+
+static const string LIGHTING_IP = "192.168.20.8";
+
+
 static const int NUM_SCREEN_POSITIONS = 2;
 static const ofVec2f SCREEN_POSITIONS[NUM_SCREEN_POSITIONS] = {
     ofVec2f(0.f, 0.f),
