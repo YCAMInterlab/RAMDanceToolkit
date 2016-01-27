@@ -18,7 +18,7 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
     ramGetGUI().addButton("ALL MAGNETS ON");
     ramGetGUI().addButton("ALL MAGNETS OFF");
     
-    for (int i = 0; i<NMAGNETS; i++ ) {
+    for (int i = 0; i < NMAGNETS; i++ ) {
         ramGetGUI().addToggle("ON/OFF_MAGNET"+ofToString(i+1), &bOn[i]);
     }
 
@@ -26,15 +26,17 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
     ramGetGUI().addButton("INVERSE ALL");
     ramGetGUI().addButton("RESTORE ALL");
 
-    for (int i = 0; i<NMAGNETS; i++ ) {
+    for (int i = 0; i < NMAGNETS; i++ ) {
         ramGetGUI().addToggle("INVERSE_MAGNET" + ofToString(i+1), &bInversed[i]);
     }
     
     ramGetGUI().addSlider("Distance Threshold", 2.0f, 200.0f, &distanceThreshold);
     ramGetGUI().addToggle("2EACH MODE", &bEachMode);
-
-    ramGetGUI().addSeparator();
+    ramGetGUI().addToggle("USE DURATION LIMIT", &bUseOnDurationLimit);
     ramGetGUI().addSlider("LIMIT TIME", 0, 20, &limitDuration);
+    ramGetGUI().addToggle("SHOW DISTANCE", &bShowDistance);
+    
+    ramGetGUI().addSeparator();
     
     ramGetGUI().addToggle("TWIST MODE", &bModeTwist);
     
@@ -56,11 +58,13 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
     bTestMode = false;
     bEachMode = true;
     bModeTwist = false;
+    bUseOnDurationLimit = false;
     
     twistThresholdPositive = 50;
     twistThresholdNegative = 50;
     limitDuration = 3.0f;
-    distanceThreshold = 65;
+//    distanceThreshold = 65;
+    distanceThreshold = 50;
     
     ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoniwaMagnetPendulum::guiEvent);
     
@@ -170,8 +174,10 @@ void dpHakoniwaMagnetPendulum::update() {
             }
             
             bool bCondition[3];
+            
             for (int i = 0; i < 3; i++){
-                bCondition[i] = (bD[i] && (startTimeForDistanceCondition[i] + limitDuration > ofGetElapsedTimef()));
+                if (bUseOnDurationLimit) bCondition[i] = (bD[i] && (startTimeForDistanceCondition[i] + limitDuration > ofGetElapsedTimef()));
+                else bCondition[i] = bD[i];
             }
             
             if (bEachMode) {
@@ -194,7 +200,7 @@ void dpHakoniwaMagnetPendulum::update() {
 //                    bOn[5] = false;
                 }
                 
-            } else {
+            } else {        // non each mode
                 
                 if (bCondition[0] || bCondition[1] || bCondition[2]) {
                     for (int i = 0; i < NMAGNETS; i++) bOn[i] = true;
@@ -206,6 +212,8 @@ void dpHakoniwaMagnetPendulum::update() {
             for (int i = 0; i < 3; i++){
                 bDprev[i] = bD[i];
             }
+            
+            // non twist mode end
             
         } else {   // twist mode
 
@@ -272,6 +280,30 @@ void dpHakoniwaMagnetPendulum::draw(){
     ramSetViewPort(dpGetFirstScreenViewPort()); //１枚目のscreenを描画に指定。ここの仕様変わります。
     ramBeginCamera();
     mMotionExtractor.draw();
+    
+    
+    if (!bModeTwist){
+    
+        ofPushStyle();
+        ofSetLineWidth(4);
+        if (mMotionExtractor.getIsExist(0) && mMotionExtractor.getIsExist(1)){
+            if (bOn[2]) ofSetColor(255, 0, 0);
+            else ofSetColor(200, 200, 200);
+            ofLine(mMotionExtractor.getPositionAt(0), mMotionExtractor.getPositionAt(1));
+        }
+        if (mMotionExtractor.getIsExist(2) && mMotionExtractor.getIsExist(3)){
+            if (bOn[3]) ofSetColor(255, 0, 0);
+            else ofSetColor(200, 200, 200);
+            ofLine(mMotionExtractor.getPositionAt(2), mMotionExtractor.getPositionAt(3));
+        }
+        if (mMotionExtractor.getIsExist(4) && mMotionExtractor.getIsExist(5)){
+            if (bOn[4]) ofSetColor(255, 0, 0);
+            else ofSetColor(200, 200, 200);
+            ofLine(mMotionExtractor.getPositionAt(4), mMotionExtractor.getPositionAt(5));
+        }
+        ofPopStyle();
+    }
+    
     ramEndCamera();
     
     if (bModeTwist) {
@@ -287,8 +319,12 @@ void dpHakoniwaMagnetPendulum::draw(){
         ofPopMatrix();
     } else {
         for (int i = 0; i < 3; i++){
-            ofSetColor(ofColor::white);
-            ofDrawBitmapString(ofToString(ofGetElapsedTimef() - startTimeForDistanceCondition[i]), 1000, 300+20*i);
+            if (bShowDistance){
+            if (bD[i]) ofSetColor(ofColor::red);
+            else ofSetColor(ofColor::white);
+            ofDrawBitmapString(ofToString(d[i]), 1000, 300+20*i);
+//            ofDrawBitmapString(ofToString(ofGetElapsedTimef() - startTimeForDistanceCondition[i]), 1000, 300+20*i);
+            }
         }
     }
     
@@ -328,6 +364,7 @@ void dpHakoniwaMagnetPendulum::example_drawDump(){
     }
     
     ofPopMatrix();
+    
 }
 
 void dpHakoniwaMagnetPendulum::drawTwistGraph(int nodeID, ofColor color, float size){

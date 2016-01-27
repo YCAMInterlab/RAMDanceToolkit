@@ -163,8 +163,8 @@ private:
     
     float mSpeed = 3.0;
     float mLumiThresh = 0.1;
-    bool mIsDrawRawCam = true;
-    float mOffsetX = 0.0;
+    bool mIsDrawRawCam = false;
+    float mOffsetX = 570.0;
     
     void drawToBuffer(){
         ofEnableBlendMode(OF_BLENDMODE_ALPHA);

@@ -53,16 +53,7 @@ void BlinkEffect::update()
 
 void BlinkEffect::draw()
 {
-    
-    //    ofSetHexColor(0x3399cc);
-    //
-    //    for (int i = 0; i < NUM; i++) {
-    //        ofCircle(position[i], 30);
-    //    }
-    
-    ofBackground(255, 255, 255);
     blinkDetection();
-    
 }
 
 
@@ -71,20 +62,17 @@ void BlinkEffect::receiveOSC(){
     while (mReceiver1.hasWaitingMessages()) {
         ofxOscMessage m1;
         mReceiver1.getNextMessage(&m1);
-        
         if (m1.getAddress() == "/dp/toVis/meme1") {
             blinkSpeed[0] = m1.getArgAsFloat(0);
             blinkStrength[0] = m1.getArgAsFloat(1);
             blinkInterval[0] = m1.getArgAsFloat(5);
             printf("blink1 %f\n", blinkSpeed[0]);
-
         }
     }
     
     while (mReceiver2.hasWaitingMessages()) {
         ofxOscMessage m2;
         mReceiver2.getNextMessage(&m2);
-        
         if (m2.getAddress() == "/dp/toVis/meme2") {
             blinkSpeed[1] = m2.getArgAsFloat(0);
             blinkStrength[1] = m2.getArgAsFloat(1);
@@ -101,7 +89,6 @@ void BlinkEffect::blinkDetection(){
         ofSetColor(red[0], green[0], blue[0]);
         ofCircle(position[0], 40);
         printf("blink1 %f\n", blinkSpeed[0]);
-        
     }else{
         ofSetColor(red[0], green[0], blue[0]);
         ofCircle(position[0], 30);
@@ -113,7 +100,6 @@ void BlinkEffect::blinkDetection(){
         ofSetColor(red[1], green[1], blue[1]);
         ofCircle(position[1], 40);
         printf("blink2 %f\n", blinkSpeed[1]);
-        
     }else{
         ofSetColor(red[1], green[1], blue[1]);
         ofCircle(position[1], 30);

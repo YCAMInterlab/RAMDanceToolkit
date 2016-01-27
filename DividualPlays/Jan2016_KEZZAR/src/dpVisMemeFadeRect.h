@@ -144,7 +144,6 @@ public:
                                     color.setSaturation(param * color.getSaturation());
                                     
                                     mRectManager.fire(color,ofPoint(param * 200.0));
-                            
                                 }
                         }
                     }

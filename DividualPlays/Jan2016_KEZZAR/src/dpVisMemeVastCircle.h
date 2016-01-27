@@ -154,16 +154,13 @@ public:
             mReceiver.getNextMessage(&m);
             
             if(m.getAddress() == "/dp/toVis/meme"){
-                
                 if(mIsReceiveOsc){
                     for(int i = 0; i < MEME_NUM; i++){
                         int idx = m.getArgAsInt32(0);
                         if(idx == i){
                             
                             float speed = m.getArgAsFloat(1);
-                            
                             if(speed > 0.0){
-                                
                                 float param = ofMap(speed,MIN_SPEED,MAX_SPEED,1.0,0.0);
                                 ofColor color = dpColor::MAIN_COLOR;
                                 color.setSaturation(param * color.getSaturation());
