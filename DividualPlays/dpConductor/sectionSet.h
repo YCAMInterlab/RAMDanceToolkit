@@ -13,6 +13,7 @@
 #include "sceneController.h"
 #include "cameraUnitManager.h"
 #include "environmentManager.h"
+#include "ofxUI.h"
 
 struct sceneSet
 {
@@ -29,6 +30,15 @@ struct extSet
 	Joint jt;
 };
 
+struct tuneSet
+{
+	string scene;
+	string typeName;
+	ofxUIWidgetType type;
+	float valF;
+	bool valT;
+};
+
 class sectionSet{
 public:
 	
@@ -38,6 +48,9 @@ public:
 	
 	void addScene		(string scene, bool displayX, bool displayY);
 	void addExtractor	(string scene, string actor, Joint node);
+	void addTuneF		(string scene, string type, float value);
+	void addTuneT		(string scene, string type, bool value);
+	void addTuneB		(string scene, string type);
 	
 	void doSection();
 	
@@ -45,8 +58,10 @@ public:
 	
 	vector<sceneSet>	sceneList;
 	vector<extSet>		extList;
-	
-	bool				needSceneClear;
+	vector<tuneSet>		tuneList;
+
+	bool				needSceneClear = false;
+	bool				needExtClear = false;
 	
 	ofPtr<sceneController> _scene;
 	ofPtr<cameraUnitManager> _camera;

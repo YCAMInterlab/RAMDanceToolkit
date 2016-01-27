@@ -29,6 +29,7 @@ void baseOscSender::sendMessage(ofxOscMessage m)
 	while (it != senders.end())
 	{
 		sender.setup(it->first, it->second);
+		sender.sendMessage(m);
 		++it;
 	}
 }
@@ -37,5 +38,6 @@ void baseOscSender::sendMessageSelect(string host, ofxOscMessage m)
 {
 	map<string, int>::iterator it = senders.find(host);
 	ofxOscSender sender;
+	sender.setup(it->first, it->second);
 	sender.sendMessage(m);
 }

@@ -12,6 +12,7 @@
 #include "ofMain.h"
 #include "baseOscSender.h"
 #include "dpConductorConstants.h"
+#include "ofxUI.h"
 
 class sceneController : public baseOscSender{
 public:
@@ -23,7 +24,11 @@ public:
 	void	setScene_both(string name, bool viewA, bool viewB);
 	void	setScene(string name, bool RDTK_isA, bool viewA, bool viewB);
 	
+	void	clearExtractor(string scene);
 	void	setExtractor(string scene, string name, Joint node);
+	void	setFloatTune(string scene, string type, float value);
+	void	setToggleTune(string scene, string type, bool value);
+	void	setButtonTune(string scene, string type);
 	
 	void	clearScene();
 	
