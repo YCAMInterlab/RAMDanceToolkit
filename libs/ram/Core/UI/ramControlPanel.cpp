@@ -98,6 +98,7 @@ void ramControlPanel::setup(bool usePresetScenes)
 	ofAddListener(mSceneTabs.newGUIEvent, this, &ramControlPanel::guiEvent);
 	
 	receiver.addAddress("/ram/tune/");
+	receiver.addAddress("/ram/tuneList/");
 	ramOscManager::instance().addReceiverTag(&receiver);
 
 }
@@ -109,55 +110,121 @@ void ramControlPanel::update(ofEventArgs &e)
 	{
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
-		vector<string> addr = ofSplitString(m.getAddress(), "/");
-		if (addr.size() > 4)
+		
+		if (m.getAddress().substr(0,14) == "/ram/tuneList/")
 		{
-			string sceneName = addr[3];
-			string valName = addr[4];
-			int type = m.getArgAsInt32(0);
-			
-			for (int i = 0;i < getSceneTabs().getNumTabs();i++)
+			vector<string> addr = ofSplitString(m.getAddress(), "/");
+			if (addr.size() > 3)
 			{
-				ofxUITab* tab = getSceneTabs().at(i);
-				if (tab->getTabName() == sceneName)
+				string sceneName = addr[3];
+				for (int i = 0;i < getSceneTabs().getNumTabs();i++)
 				{
-					ofxUIWidget* wd = tab->getWidget(valName);
-					if (wd != NULL)
+					ofxUITab* tab = getSceneTabs().at(i);
+					if (tab->getTabName() == sceneName)
 					{
-						if (type == wd->getKind())
+						for (int j = 0;j < tab->getWidgets().size();j++)
 						{
-							if (type == OFX_UI_WIDGET_BUTTON)
+							ofxUIWidget* w = tab->getWidgets()[j];
+							ofxOscMessage ret;
+							ret.addStringArg(sceneName);
+							if ((w->getKind() == OFX_UI_WIDGET_SLIDER_H) ||
+								(w->getKind() == OFX_UI_WIDGET_SLIDER_V))
 							{
-								ofxUIButton* bt = ((ofxUIButton*)(wd));
-
-								bt->setState(OFX_UI_STATE_DOWN);
-								bt->toggleValue();
-								if(bt->getTriggerType() & OFX_UI_TRIGGER_BEGIN)
-								{
-									bt->triggerEvent(bt);
-								}
+								ofxUISlider* s = ((ofxUISlider*)(w));
 								
-								bt->setState(OFX_UI_STATE_NORMAL);
-								bt->toggleValue();
-								if(bt->getTriggerType() & OFX_UI_TRIGGER_END)
-								{
-									bt->triggerEvent(bt);
-								}
+								ret.setAddress("/ram/uiList");
+								ret.addIntArg(OFX_UI_WIDGET_SLIDER_H);
+								ret.addStringArg(s->getName());
+								ret.addFloatArg(s->getValue());
+								ret.addFloatArg(s->getMin());
+								ret.addFloatArg(s->getMax());
 							}
-							
-
-							if (type == OFX_UI_WIDGET_SLIDER_H)
-								((ofxUISlider*)(wd))->setValue(m.getArgAsFloat(1));
-							if (type == OFX_UI_WIDGET_SLIDER_V)
-								((ofxUISlider*)(wd))->setValue(m.getArgAsFloat(1));
-							if (type == OFX_UI_WIDGET_TOGGLE)
-								((ofxUIToggle*)(wd))->setValue(m.getArgAsInt32(1));
+							if (w->getKind() == OFX_UI_WIDGET_TOGGLE)
+							{
+								ofxUIToggle* s = ((ofxUIToggle*)(w));
+								
+								ret.setAddress("/ram/uiList");
+								ret.addIntArg(OFX_UI_WIDGET_TOGGLE);
+								ret.addStringArg(s->getName());
+								ret.addIntArg(s->getValue());
+							}
+							if (w->getKind() == OFX_UI_WIDGET_BUTTON)
+							{
+								ret.setAddress("/ram/uiList");
+								ret.addIntArg(OFX_UI_WIDGET_BUTTON);
+								ret.addStringArg(w->getName());
+							}
+							if (w->getKind() == OFX_UI_WIDGET_SPACER)
+							{
+								ret.setAddress("/ram/uiList");
+								ret.addIntArg(OFX_UI_WIDGET_SPACER);
+							}
+							if (ret.getAddress() != "")
+							{
+								ofxOscSender sender;
+								sender.setup(m.getRemoteIp(), 12400);
+								sender.sendMessage(ret);
+							}
 						}
 					}
 				}
 			}
 		}
-	}
+		
+		if (m.getAddress().substr(0, 10) == "/ram/tune/")
+		{
+			vector<string> addr = ofSplitString(m.getAddress(), "/");
+			if (addr.size() > 4)
+			{
+				string sceneName = addr[3];
+				string valName = addr[4];
+				int type = m.getArgAsInt32(0);
+				
+				for (int i = 0;i < getSceneTabs().getNumTabs();i++)
+				{
+					ofxUITab* tab = getSceneTabs().at(i);
+					if (tab->getTabName() == sceneName)
+					{
+						ofxUIWidget* wd = tab->getWidget(valName);
+						if (wd != NULL)
+						{
+							if (type == wd->getKind())
+							{
+								if (type == OFX_UI_WIDGET_BUTTON)
+								{
+									ofxUIButton* bt = ((ofxUIButton*)(wd));
+									
+									bt->setState(OFX_UI_STATE_DOWN);
+									bt->toggleValue();
+									if(bt->getTriggerType() & OFX_UI_TRIGGER_BEGIN)
+									{
+										bt->triggerEvent(bt);
+									}
+									
+									bt->setState(OFX_UI_STATE_NORMAL);
+									bt->toggleValue();
+									if(bt->getTriggerType() & OFX_UI_TRIGGER_END)
+									{
+										bt->triggerEvent(bt);
+									}
+								}
+								
+								
+								if (type == OFX_UI_WIDGET_SLIDER_H)
+									((ofxUISlider*)(wd))->setValue(m.getArgAsFloat(1));
+								if (type == OFX_UI_WIDGET_SLIDER_V)
+									((ofxUISlider*)(wd))->setValue(m.getArgAsFloat(1));
+								if (type == OFX_UI_WIDGET_TOGGLE)
+									((ofxUIToggle*)(wd))->setValue(m.getArgAsInt32(1));
+							}
+						}
+					}
+				}
+			}
+		
+		}
+		
+		}
 	for (int i = 0;i < getSceneTabs().getNumTabs();i++)
 	{
 		ofxUITab* tab = getSceneTabs().at(i);

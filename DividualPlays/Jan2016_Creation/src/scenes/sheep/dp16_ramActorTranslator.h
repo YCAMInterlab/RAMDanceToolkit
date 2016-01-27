@@ -31,6 +31,7 @@ private:
 	ofVec3f offset;
 	bool floorStay;
 	bool autoLayout;
+	bool drawFloor;
 	float margine;
 };
 

@@ -8,6 +8,33 @@
 
 #include "dpConductor.h"
 
+void dpConductor::setSections()
+{
+	ofPtr<sectionSet> ns = newSection();
+	ns->sectionName = "LineKojiri";
+	ns->addScene("Donuts", true, true);
+	ns->needExtClear = true;
+	ns->needSceneClear = true;
+	ns->addExtractor("Line_ext", "Richi_2012-09-01_16-55-24", JOINT_LEFT_ELBOW);
+	ns->addExtractor("Line_ext", "Richi_2012-09-01_16-55-24", JOINT_LEFT_SHOULDER);
+	ns->addExtractor("Line_ext", "Richi_2012-09-01_16-55-24", JOINT_RIGHT_ELBOW);
+	ns->addExtractor("Line_ext", "Richi_2012-09-01_16-55-24", JOINT_RIGHT_SHOULDER);
+	ns->addTuneF("Line_ext", "Curve0", 100);
+	ns->addTuneF("Line_ext", "ext_to0", 500);
+	
+	ns = newSection();
+	ns->sectionName = "testSection";
+	ns->addScene("Donuts", true, true);
+	ns->needExtClear = true;
+	ns->needSceneClear = true;
+	ns->addExtractor("Line_ext", "kojiri", JOINT_LEFT_ELBOW);
+	ns->addExtractor("Line_ext", "kojiri", JOINT_LEFT_SHOULDER);
+	ns->addExtractor("Line_ext", "kojiri", JOINT_RIGHT_ELBOW);
+	ns->addExtractor("Line_ext", "kojiri", JOINT_RIGHT_SHOULDER);
+	ns->addTuneF("Line_ext", "Curve0", 100);
+	ns->addTuneF("Line_ext", "ext_to0", 500);
+}
+
 void dpConductor::setup()
 {
 	sceneCon	= ofPtr<sceneController>	(new sceneController());
@@ -38,7 +65,11 @@ void dpConductor::update()
 		{
 			if (m.getArgAsString(0).substr(0,5) == "dpVis")
 			{
-				
+				string scene = m.getArgAsString(0);
+				cameraCon->setCameraSlot(scene,
+										 m.getArgAsInt32(0),
+										 m.getArgAsInt32(1),
+										 m.getArgAsInt32(2));
 			}
 		}
 	}
@@ -56,33 +87,6 @@ void dpConductor::callSection(string name)
 		if (sections[i]->sectionName == name)
 			sections[i]->doSection();
 	}
-}
-
-void dpConductor::setSections()
-{
-	ofPtr<sectionSet> ns = newSection();
-	ns->sectionName = "LineKojiri";
-	ns->addScene("Donuts", true, true);
-	ns->needExtClear = true;
-	ns->needSceneClear = true;
-	ns->addExtractor("Line_ext", "Richi_2012-09-01_16-55-24", JOINT_LEFT_ELBOW);
-	ns->addExtractor("Line_ext", "Richi_2012-09-01_16-55-24", JOINT_LEFT_SHOULDER);
-	ns->addExtractor("Line_ext", "Richi_2012-09-01_16-55-24", JOINT_RIGHT_ELBOW);
-	ns->addExtractor("Line_ext", "Richi_2012-09-01_16-55-24", JOINT_RIGHT_SHOULDER);
-	ns->addTuneF("Line_ext", "Curve0", 100);
-	ns->addTuneF("Line_ext", "ext_to0", 500);
-
-	ns = newSection();
-	ns->sectionName = "testSection";
-	ns->addScene("Donuts", true, true);
-	ns->needExtClear = true;
-	ns->needSceneClear = true;
-	ns->addExtractor("Line_ext", "kojiri", JOINT_LEFT_ELBOW);
-	ns->addExtractor("Line_ext", "kojiri", JOINT_LEFT_SHOULDER);
-	ns->addExtractor("Line_ext", "kojiri", JOINT_RIGHT_ELBOW);
-	ns->addExtractor("Line_ext", "kojiri", JOINT_RIGHT_SHOULDER);
-	ns->addTuneF("Line_ext", "Curve0", 100);
-	ns->addTuneF("Line_ext", "ext_to0", 500);
 }
 
 ofPtr<sectionSet> dpConductor::newSection()
