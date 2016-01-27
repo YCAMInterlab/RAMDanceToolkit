@@ -10,6 +10,7 @@
 		270D2D9C16E4760700D5F750 /* icon.icns in CopyFiles */ = {isa = PBXBuildFile; fileRef = 270D2D9916E475D800D5F750 /* icon.icns */; };
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
 		8C1254DF1C57093B0072FB44 /* dpVisFrequency2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C1254DD1C57093B0072FB44 /* dpVisFrequency2.cpp */; };
+		8C12551E1C58B0640072FB44 /* dpVisBlinkSyncAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C12551C1C58B0640072FB44 /* dpVisBlinkSyncAlgorithm.cpp */; };
 		8C374A6F1C50A6C000B4C7F0 /* dpVisBlinkEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C374A6D1C50A6C000B4C7F0 /* dpVisBlinkEffect.cpp */; };
 		8C374A741C50AAE600B4C7F0 /* dpVisAccEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C374A721C50AAE600B4C7F0 /* dpVisAccEffect.cpp */; };
 		8CC5A7E11C55B08100D63725 /* dpVisMEME.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC5A7DF1C55B08100D63725 /* dpVisMEME.cpp */; };
@@ -97,6 +98,8 @@
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
 		8C1254DD1C57093B0072FB44 /* dpVisFrequency2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpVisFrequency2.cpp; sourceTree = "<group>"; };
 		8C1254DE1C57093B0072FB44 /* dpVisFrequency2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpVisFrequency2.h; sourceTree = "<group>"; };
+		8C12551C1C58B0640072FB44 /* dpVisBlinkSyncAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpVisBlinkSyncAlgorithm.cpp; sourceTree = "<group>"; };
+		8C12551D1C58B0640072FB44 /* dpVisBlinkSyncAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpVisBlinkSyncAlgorithm.h; sourceTree = "<group>"; };
 		8C374A6D1C50A6C000B4C7F0 /* dpVisBlinkEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpVisBlinkEffect.cpp; sourceTree = "<group>"; };
 		8C374A6E1C50A6C000B4C7F0 /* dpVisBlinkEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpVisBlinkEffect.h; sourceTree = "<group>"; };
 		8C374A721C50AAE600B4C7F0 /* dpVisAccEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpVisAccEffect.cpp; sourceTree = "<group>"; };
@@ -201,6 +204,8 @@
 				8C1254DD1C57093B0072FB44 /* dpVisFrequency2.cpp */,
 				8C374A731C50AAE600B4C7F0 /* dpVisAccEffect.h */,
 				8C374A721C50AAE600B4C7F0 /* dpVisAccEffect.cpp */,
+				8C12551D1C58B0640072FB44 /* dpVisBlinkSyncAlgorithm.h */,
+				8C12551C1C58B0640072FB44 /* dpVisBlinkSyncAlgorithm.cpp */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -402,6 +407,7 @@
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				8C1254DF1C57093B0072FB44 /* dpVisFrequency2.cpp in Sources */,
 				8CC8AAE41C55FF5400ADE85C /* dpVisBlinkSync.cpp in Sources */,
+				8C12551E1C58B0640072FB44 /* dpVisBlinkSyncAlgorithm.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
