@@ -26,6 +26,9 @@ public:
         ramGetGUI().addToggle("isDrawFloor", &isDrawFloor);
         ramGetGUI().addSlider("lineWidth",1.0,20.0,&mLineWidth);
         
+        mMotionExtractor.setupControlPanel(this,ofPoint(350,32));
+        mMotionExtractor.load("motionExt_dpHStruggle.xml");
+        
         ofxUIRadio *radio = NULL;
         
         const float dim = 16.0f;
@@ -94,11 +97,30 @@ public:
         
         ramSetViewPort(dpGetFirstScreenViewPort());
         
-        ofSetLineWidth(mLineWidth);
-        
+        mMotionExtractor.update();
+       
         if(isVibeWhenActorMoveFast == false)mVibeFromActor.imSet(mVibeStrength);
         
-        int numActor = getNumNodeArray();
+        float velocitySum = 0.0;
+        
+        for (int i = 0;i < mMotionExtractor.getNumPort();i++){
+            velocitySum += mMotionExtractor.getVelocityAt(i).length();
+        }
+        
+        if(velocitySum > mVibeThresh){
+            
+            if(isVibeWhenActorMoveFast){
+                
+                mVibeFromActor.imSet(mVibeStrength);
+                mVibeFromActor.set(0);
+                
+            }else{
+                mVibeFromActor.imSet(0);
+                mVibe.imSet(0);
+            }
+        }
+        
+        /*int numActor = getNumNodeArray();
         
         for(int i = 0; i < numActor; i++){
             const ramNodeArray &array = getNodeArray(i);
@@ -122,7 +144,7 @@ public:
                     }
                 }
             }
-        }
+        }*/
         
         float vibeVal = mVibe.val + mVibeFromActor.val;
         
@@ -136,7 +158,7 @@ public:
         mVibeFromActor.update();
         mSmoothedVibeVal.update();
         
-        if(ofGetFrameNum() % 60 == 0)mMotorDir = (int)ofRandom(0,2);
+        if(ofGetFrameNum() % 30 == 0)mMotorDir = (int)ofRandom(0,2);
         
     }
     
@@ -159,6 +181,7 @@ public:
     void draw(){
         
         float vibeVal = mSmoothedVibeVal.val;
+        ofSetLineWidth(mLineWidth);
         
         ramBeginCamera();
         
@@ -264,6 +287,7 @@ private:
     string mVert;
     ofShader mDisplace;
     
+    ramMotionExtractor mMotionExtractor;
 };
 
 

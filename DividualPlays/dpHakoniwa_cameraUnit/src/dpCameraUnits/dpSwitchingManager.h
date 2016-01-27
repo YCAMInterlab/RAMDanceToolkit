@@ -27,7 +27,7 @@
 #define CVSW_3 3
 #define CVSW_4 4
 
-#define SHUTTER_CHANNEL 8
+#define SHUTTER_CHANNEL 10
 
 #define CV_SLOT_NUM 4
 

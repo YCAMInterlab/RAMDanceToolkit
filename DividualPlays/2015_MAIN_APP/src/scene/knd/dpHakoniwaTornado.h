@@ -57,6 +57,7 @@ public:
         ofxOscMessage m;
         m.setAddress("/dp/hakoniwa/tornado/fan");
         m.addIntArg(val);
+        m.addIntArg(isBulb);
         mFanSender.sendMessage(m);
         
     }
@@ -106,9 +107,9 @@ public:
         
         ramSetViewPort(dpGetFirstScreenViewPort());
         
-        ofPoint a = mMotionExtractor.getPositionAt(0,true);
-        ofPoint b = mMotionExtractor.getPositionAt(1,true);
-        ofPoint c = mMotionExtractor.getPositionAt(2,true);
+        ofPoint a = mMotionExtractor.getPositionAt(0,false);
+        ofPoint b = mMotionExtractor.getPositionAt(1,false);
+        ofPoint c = mMotionExtractor.getPositionAt(2,false);
         
         sendOscToVis(a, b, c);
         
@@ -122,8 +123,10 @@ public:
         
         if(mRad > mMistThresh){
             isMist = true;
+            mFan = 255;
         }else{
             isMist = false;
+            mFan = 0;
         }
         
         ramBeginCamera();
@@ -131,11 +134,12 @@ public:
         ofTranslate(center);
         rotateToNormal(normal);
         ofNoFill();
-        ofCircle(0,0,radius,radius);
+      //  ofCircle(0,0,radius,radius);
         ofPopMatrix();
         
         ofSetColor(255,255,255);
         mSphere.draw(center,radius,normal);
+
         ramEndCamera();
     
     }

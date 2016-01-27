@@ -32,7 +32,8 @@ public:
     void setFocus(bool focus) { mFocus = true; }
     
 private:
-    Desk mDesk;
+    vector<Desk> mDesks;
+    vector<Box> mLights;
     bool mFocus {true};
     int mX {1};
     int mY {0};

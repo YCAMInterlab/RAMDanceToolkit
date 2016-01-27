@@ -91,11 +91,11 @@ public:
             ofPoint pos2 = mMotionExtractor.getPositionAt(1);
             ofLine(pos1,pos2);
             
-            ofPushMatrix();
+            /*ofPushMatrix();
             ofRotateZ(mThread.getAngle());
             ofLine(0,0,0,100);
             ofCircle(0,100,40);
-            ofPopMatrix();
+            ofPopMatrix();*/
         }
         
         ramEndCamera();

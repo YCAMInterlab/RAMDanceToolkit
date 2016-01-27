@@ -9,9 +9,11 @@
 #ifndef afterWorkshop_BrokenBody_h
 #define afterWorkshop_BrokenBody_h
 
+#include "KezSlidePoint.h"
+
 class BrokenBox{
 public:
-    slidePoint mPos;
+    KezSlidePoint mPos;
 
     float v;
     float a;

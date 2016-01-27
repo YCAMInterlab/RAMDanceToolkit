@@ -37,6 +37,10 @@ public:
 	static float getRearDisplayAngle();
 
 	ofFbo fbo;
+    
+private:
+    vector<Box> mFronts;
+    vector<Box> mRears;
 };
 
 DP_SCORE_NAMESPACE_END

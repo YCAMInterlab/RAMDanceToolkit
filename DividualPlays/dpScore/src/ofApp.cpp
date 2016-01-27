@@ -198,9 +198,11 @@ void ofApp::setup()
 	mTitleReplaceList.push_back(make_pair("RE", ""));
 	mTitleReplaceList.push_back(make_pair("Theta", "FishEye"));
 
-#if !defined(DP_MASTER_HAKONIWA) && !defined(DEBUG)
+#if !defined(DP_MASTER_HAKONIWA)
 	keyPressed('f');
+#if !defined(DEBUG)
 	keyPressed('c');
+#endif
 #endif
 
 	OFX_END_EXCEPTION_HANDLING

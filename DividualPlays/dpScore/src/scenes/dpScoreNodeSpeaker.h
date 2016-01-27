@@ -38,7 +38,8 @@ public:
     static ofVec3f getRight();
     
 private:
-    
+    Box mBottom;
+    Box mTop;
 };
 
 DP_SCORE_NAMESPACE_END
