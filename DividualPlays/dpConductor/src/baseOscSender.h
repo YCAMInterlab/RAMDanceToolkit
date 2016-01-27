@@ -18,6 +18,7 @@ public:
 	void addSender(string addr, int port);
 	
 	void sendSimpleMessage(string address);
+	void sendMessageSelect(string host, ofxOscMessage m);
 	void sendMessage(ofxOscMessage m);
 	
 	map<string, int> senders;

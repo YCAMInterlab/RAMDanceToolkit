@@ -99,6 +99,12 @@ void ramMotionExtractor::update(){
 		if (m.getAddress() == myAddr+"push"){// アクターID, ジョイントID
 			pushFromID(m.getArgAsInt32(0), m.getArgAsInt32(1));
 		}
+		
+		if (m.getAddress() == myAddr+"pushAct")
+		{
+			int aid = getIndexFromName(m.getArgAsString(0));
+			pushFromID(aid, m.getArgAsInt32(1));
+		}
 
 		if (m.getAddress() == myAddr+"pop"){// 名前、ID
 
