@@ -24,7 +24,7 @@ NodeHakoniwa::NodeHakoniwa()
 	addAimingOffset(ofVec3f(NodeHakoniwa::getWidth() * 0.5f, Desk::getHeight(), NodeHakoniwa::getDepth() * 0.5f));
 
 	getCamera().setFov(60.f);
-	getCamera().setPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() * 0.5f - 50.f, 50.f, 550.f);
+	getCamera().setPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() * 0.5f - 50.f, 250.f, 550.f);
 	getCamera().setOrientation(ofVec3f(-25.f, 0.f, 0.f));
 
 	mLights.clear();

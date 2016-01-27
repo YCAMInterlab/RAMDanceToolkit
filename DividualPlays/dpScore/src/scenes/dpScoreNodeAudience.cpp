@@ -23,7 +23,7 @@ NodeAudience::NodeAudience()
 
 	setGlobalPosition(0.f, 0.f,  NodeStage::kDepth * 0.5f + 500.f);
 	getCamera().setFov(80.f);
-	getCamera().setPosition(0.f, 100.f, 650.f);
+	getCamera().setPosition(0.f, 300.f, 650.f);
 	getCamera().setOrientation(ofVec3f(-30.f, 180.f, 0.f));
 }
 

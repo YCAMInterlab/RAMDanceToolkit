@@ -25,7 +25,7 @@ NodeCameraUnit::NodeCameraUnit()
     addAimingOffset(ofVec3f(getWidth() * 0.5f, getHeight() * 0.82f, -20.f));
     
     getCamera().setFov(35.f);
-    getCamera().setPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 300.f, 0.f, -50.f);
+    getCamera().setPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 300.f, 200.f, -50.f);
     getCamera().setOrientation(ofVec3f(-30.f, 180.f + 30.f, 0.f));
     
     mBody.setup(ofVec3f::zero(), getWidth(), getHeight(), getDepth());
