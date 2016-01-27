@@ -49,6 +49,8 @@ Frequency2 frequency2;
 #include "dpVisAccEffect.h"
 AccEffect acceffect;
 
+#include "dpVisBlinkSyncAlgorithm.h"
+BlinkSyncAlgorithm algorithm;
 
 
 #pragma mark - oF methods
@@ -73,6 +75,8 @@ void testApp::setup()
     sceneManager.addScene(blinksync.getPtr());
     sceneManager.addScene(blinkfrequency.getPtr());
     sceneManager.addScene(frequency2.getPtr());
+    
+    sceneManager.addScene(algorithm.getPtr());
     
     
 //    sceneManager.addScene(blinkeffect.getPtr());
