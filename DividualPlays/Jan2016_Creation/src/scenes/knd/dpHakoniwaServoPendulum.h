@@ -36,7 +36,7 @@ public:
         //if(rnd == 0)mThreshMax = 38;
         //else mThreshMax = RANGE_MAX;
         
-        mThreshMax = RANGE_MAX;
+        //mThreshMax = RANGE_MAX;
         
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoniwaServoPendulum::onPanelChanged);
     }
@@ -134,8 +134,8 @@ private:
     static const int RANGE_MAX = 90;
     
     float mLength = 200.0;
-    float mThreshMin = 6.0;
-    float mThreshMax = RANGE_MAX;
+    float mThreshMin = 24.5;
+    float mThreshMax = 38;//RANGE_MAX;
     
     float mSpeed = 1.0;
     float mRange = 0.0;
