@@ -24,12 +24,11 @@
 		5EF92FB21C57B5B100F6916F /* ofxSyphonServerDirectory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EF92FA71C57B5B100F6916F /* ofxSyphonServerDirectory.mm */; };
 		5EF92FB91C57B5C300F6916F /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5EF92F9A1C57B5B100F6916F /* Syphon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
+		9225EEBE1C588E0C00A7FD9A /* magnetLooper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9225EEBC1C588E0C00A7FD9A /* magnetLooper.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		C64C2FC41C54E4B9005E9BB2 /* dp16_camera_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C64C2FC21C54E4B9005E9BB2 /* dp16_camera_controller.cpp */; };
 		C6A982B71C55A4670055D47B /* BrokenBody_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A982B51C55A4670055D47B /* BrokenBody_ext.cpp */; };
 		C6A982BD1C55C3770055D47B /* dp16_ramActorTranslator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A982BB1C55C3770055D47B /* dp16_ramActorTranslator.cpp */; };
-		C6C22F431C54629E002B38EC /* VectorField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22EE41C54629E002B38EC /* VectorField.cpp */; };
-		C6C22F441C54629E002B38EC /* VFParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22EE61C54629E002B38EC /* VFParticle.cpp */; };
 		C6C22F451C54629E002B38EC /* BaseConstrains.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22EF01C54629E002B38EC /* BaseConstrains.cpp */; };
 		C6C22F461C54629E002B38EC /* Chain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22EF21C54629E002B38EC /* Chain.cpp */; };
 		C6C22F471C54629E002B38EC /* ChainBtDynamics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22EF41C54629E002B38EC /* ChainBtDynamics.cpp */; };
@@ -51,6 +50,7 @@
 		C6C22F641C5476D4002B38EC /* middleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22F601C5476D4002B38EC /* middleScene.cpp */; };
 		C6C22F651C5476D4002B38EC /* MixMonsterScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22F621C5476D4002B38EC /* MixMonsterScene.cpp */; };
 		C6C22F6A1C54A042002B38EC /* lineDrawing_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22F681C54A042002B38EC /* lineDrawing_ext.cpp */; };
+		D283B3181C58809D00B0E900 /* UpsideDown_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -142,7 +142,6 @@
 		5EF92F511C57B59C00F6916F /* twistFinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = twistFinder.cpp; sourceTree = "<group>"; };
 		5EF92F521C57B59C00F6916F /* twistFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twistFinder.h; sourceTree = "<group>"; };
 		5EF92F541C57B59C00F6916F /* _dpHakoVisServoPendulum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _dpHakoVisServoPendulum.h; sourceTree = "<group>"; };
-		5EF92F551C57B59C00F6916F /* dp3DDanceMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dp3DDanceMap.h; sourceTree = "<group>"; };
 		5EF92F561C57B59C00F6916F /* dpHakoniwaRawCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaRawCamera.h; sourceTree = "<group>"; };
 		5EF92F571C57B59C00F6916F /* dpHakoniwaServoPendulum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaServoPendulum.h; sourceTree = "<group>"; };
 		5EF92F581C57B59C00F6916F /* dpHakoniwaStruggle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaStruggle.h; sourceTree = "<group>"; };
@@ -187,6 +186,14 @@
 		5EF92FA61C57B5B100F6916F /* ofxSyphonServerDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSyphonServerDirectory.h; sourceTree = "<group>"; };
 		5EF92FA71C57B5B100F6916F /* ofxSyphonServerDirectory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxSyphonServerDirectory.mm; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
+		9225EEBC1C588E0C00A7FD9A /* magnetLooper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = magnetLooper.cpp; sourceTree = "<group>"; };
+		9225EEBD1C588E0C00A7FD9A /* magnetLooper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = magnetLooper.h; sourceTree = "<group>"; };
+		9225EEBF1C588F9700A7FD9A /* GeometryHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeometryHelpers.h; sourceTree = "<group>"; };
+		9225EEC11C588FBA00A7FD9A /* BrokenBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrokenBody.h; sourceTree = "<group>"; };
+		9225EEC21C588FBA00A7FD9A /* BurstBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BurstBody.h; sourceTree = "<group>"; };
+		9225EEC31C588FBA00A7FD9A /* dp3DDanceMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dp3DDanceMap.h; sourceTree = "<group>"; };
+		9225EEC41C588FBA00A7FD9A /* FixedBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBody.h; sourceTree = "<group>"; };
+		9225EEC51C588FBA00A7FD9A /* ThreePointFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreePointFlow.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		C64C2FC21C54E4B9005E9BB2 /* dp16_camera_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dp16_camera_controller.cpp; sourceTree = "<group>"; };
 		C64C2FC31C54E4B9005E9BB2 /* dp16_camera_controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dp16_camera_controller.h; sourceTree = "<group>"; };
@@ -194,20 +201,6 @@
 		C6A982B61C55A4670055D47B /* BrokenBody_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BrokenBody_ext.h; path = src/scenes/sheep/BrokenBody_ext.h; sourceTree = SOURCE_ROOT; };
 		C6A982BB1C55C3770055D47B /* dp16_ramActorTranslator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dp16_ramActorTranslator.cpp; sourceTree = "<group>"; };
 		C6A982BC1C55C3770055D47B /* dp16_ramActorTranslator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dp16_ramActorTranslator.h; sourceTree = "<group>"; };
-		C6C22ED81C54629E002B38EC /* AtractSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtractSphere.h; sourceTree = "<group>"; };
-		C6C22ED91C54629E002B38EC /* BrokenBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrokenBody.h; sourceTree = "<group>"; };
-		C6C22EDA1C54629E002B38EC /* BurstBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BurstBody.h; sourceTree = "<group>"; };
-		C6C22EDB1C54629E002B38EC /* Drop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drop.h; sourceTree = "<group>"; };
-		C6C22EDC1C54629E002B38EC /* FixedBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBody.h; sourceTree = "<group>"; };
-		C6C22EDD1C54629E002B38EC /* FloorLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FloorLine.h; sourceTree = "<group>"; };
-		C6C22EDE1C54629E002B38EC /* ThreePointFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreePointFlow.h; sourceTree = "<group>"; };
-		C6C22EDF1C54629E002B38EC /* VectorFieldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VectorFieldScene.h; sourceTree = "<group>"; };
-		C6C22EE11C54629E002B38EC /* GeometryHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryHelpers.h; sourceTree = "<group>"; };
-		C6C22EE21C54629E002B38EC /* slidePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slidePoint.h; sourceTree = "<group>"; };
-		C6C22EE41C54629E002B38EC /* VectorField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VectorField.cpp; sourceTree = "<group>"; };
-		C6C22EE51C54629E002B38EC /* VectorField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VectorField.h; sourceTree = "<group>"; };
-		C6C22EE61C54629E002B38EC /* VFParticle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VFParticle.cpp; sourceTree = "<group>"; };
-		C6C22EE71C54629E002B38EC /* VFParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VFParticle.h; sourceTree = "<group>"; };
 		C6C22EEA1C54629E002B38EC /* Abacus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Abacus.h; sourceTree = "<group>"; };
 		C6C22EEC1C54629E002B38EC /* BasicActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicActor.h; sourceTree = "<group>"; };
 		C6C22EEE1C54629E002B38EC /* BigBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigBox.h; sourceTree = "<group>"; };
@@ -275,6 +268,8 @@
 		C6C22F631C5476D4002B38EC /* MixMonsterScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixMonsterScene.h; sourceTree = "<group>"; };
 		C6C22F681C54A042002B38EC /* lineDrawing_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lineDrawing_ext.cpp; sourceTree = "<group>"; };
 		C6C22F691C54A042002B38EC /* lineDrawing_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lineDrawing_ext.h; sourceTree = "<group>"; };
+		D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UpsideDown_ext.cpp; sourceTree = "<group>"; };
+		D283B3171C58809D00B0E900 /* UpsideDown_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpsideDown_ext.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -347,8 +342,8 @@
 		5EF92F531C57B59C00F6916F /* knd */ = {
 			isa = PBXGroup;
 			children = (
+				9225EEC01C588FBA00A7FD9A /* 2014Scene */,
 				5EF92F541C57B59C00F6916F /* _dpHakoVisServoPendulum.h */,
-				5EF92F551C57B59C00F6916F /* dp3DDanceMap.h */,
 				5EF92F561C57B59C00F6916F /* dpHakoniwaRawCamera.h */,
 				5EF92F571C57B59C00F6916F /* dpHakoniwaServoPendulum.h */,
 				5EF92F581C57B59C00F6916F /* dpHakoniwaStruggle.h */,
@@ -383,6 +378,7 @@
 		5EF92F681C57B59C00F6916F /* util */ = {
 			isa = PBXGroup;
 			children = (
+				9225EEBF1C588F9700A7FD9A /* GeometryHelpers.h */,
 				5EF92F691C57B59C00F6916F /* DoSomething.h */,
 				5EF92F6A1C57B59C00F6916F /* dpRibbon.h */,
 				5EF92F6B1C57B59C00F6916F /* dpServoPendulumThread.h */,
@@ -485,6 +481,28 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		9225EEBB1C588E0C00A7FD9A /* cocaina */ = {
+			isa = PBXGroup;
+			children = (
+				9225EEBC1C588E0C00A7FD9A /* magnetLooper.cpp */,
+				9225EEBD1C588E0C00A7FD9A /* magnetLooper.h */,
+			);
+			name = cocaina;
+			path = scenes/cocaina;
+			sourceTree = "<group>";
+		};
+		9225EEC01C588FBA00A7FD9A /* 2014Scene */ = {
+			isa = PBXGroup;
+			children = (
+				9225EEC11C588FBA00A7FD9A /* BrokenBody.h */,
+				9225EEC21C588FBA00A7FD9A /* BurstBody.h */,
+				9225EEC31C588FBA00A7FD9A /* dp3DDanceMap.h */,
+				9225EEC41C588FBA00A7FD9A /* FixedBody.h */,
+				9225EEC51C588FBA00A7FD9A /* ThreePointFlow.h */,
+			);
+			path = 2014Scene;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
@@ -547,44 +565,6 @@
 				C64C2FC31C54E4B9005E9BB2 /* dp16_camera_controller.h */,
 			);
 			name = CameraController;
-			sourceTree = "<group>";
-		};
-		C6C22ED71C54629E002B38EC /* kez */ = {
-			isa = PBXGroup;
-			children = (
-				C6C22ED81C54629E002B38EC /* AtractSphere.h */,
-				C6C22ED91C54629E002B38EC /* BrokenBody.h */,
-				C6C22EDA1C54629E002B38EC /* BurstBody.h */,
-				C6C22EDB1C54629E002B38EC /* Drop.h */,
-				C6C22EDC1C54629E002B38EC /* FixedBody.h */,
-				C6C22EDD1C54629E002B38EC /* FloorLine.h */,
-				C6C22EDE1C54629E002B38EC /* ThreePointFlow.h */,
-				C6C22EDF1C54629E002B38EC /* VectorFieldScene.h */,
-			);
-			name = kez;
-			path = scenes/kez;
-			sourceTree = "<group>";
-		};
-		C6C22EE01C54629E002B38EC /* kez_util */ = {
-			isa = PBXGroup;
-			children = (
-				C6C22EE11C54629E002B38EC /* GeometryHelpers.h */,
-				C6C22EE21C54629E002B38EC /* slidePoint.h */,
-				C6C22EE31C54629E002B38EC /* vectorField */,
-			);
-			name = kez_util;
-			path = scenes/kez_util;
-			sourceTree = "<group>";
-		};
-		C6C22EE31C54629E002B38EC /* vectorField */ = {
-			isa = PBXGroup;
-			children = (
-				C6C22EE41C54629E002B38EC /* VectorField.cpp */,
-				C6C22EE51C54629E002B38EC /* VectorField.h */,
-				C6C22EE61C54629E002B38EC /* VFParticle.cpp */,
-				C6C22EE71C54629E002B38EC /* VFParticle.h */,
-			);
-			path = vectorField;
 			sourceTree = "<group>";
 		};
 		C6C22EE81C54629E002B38EC /* legacy */ = {
@@ -844,6 +824,8 @@
 				C6C22F351C54629E002B38EC /* MoveSeparatedObjects.h */,
 				C6C22F361C54629E002B38EC /* WeiredSpace.cpp */,
 				C6C22F371C54629E002B38EC /* WeiredSpace.h */,
+				D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */,
+				D283B3171C58809D00B0E900 /* UpsideDown_ext.h */,
 			);
 			name = onc;
 			path = scenes/onc;
@@ -946,6 +928,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				9225EEBB1C588E0C00A7FD9A /* cocaina */,
 				5EF92F7B1C57B5B000F6916F /* ofxSyphon */,
 				5EF92F4C1C57B59C00F6916F /* ito */,
 				5EF92F531C57B59C00F6916F /* knd */,
@@ -953,8 +936,6 @@
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				C6C22F5F1C5476D4002B38EC /* kumagai */,
-				C6C22ED71C54629E002B38EC /* kez */,
-				C6C22EE01C54629E002B38EC /* kez_util */,
 				C6C22EE81C54629E002B38EC /* legacy */,
 				C6C22F331C54629E002B38EC /* onc */,
 				C6C22F381C54629E002B38EC /* sheep */,
@@ -1072,8 +1053,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ECC0FEA1C572F7000630A39 /* BigBox_ext.cpp in Sources */,
+				9225EEBE1C588E0C00A7FD9A /* magnetLooper.cpp in Sources */,
 				C6C22F6A1C54A042002B38EC /* lineDrawing_ext.cpp in Sources */,
-				C6C22F431C54629E002B38EC /* VectorField.cpp in Sources */,
 				C6C22F561C54629E002B38EC /* MarchingTetrahedrons.cpp in Sources */,
 				C6C22F511C54629E002B38EC /* RagdollShapeDrawer.cpp in Sources */,
 				C6C22F461C54629E002B38EC /* Chain.cpp in Sources */,
@@ -1100,11 +1081,11 @@
 				C6C22F521C54629E002B38EC /* MoveSeparatedObjects.cpp in Sources */,
 				5EF92FAE1C57B5B100F6916F /* SyphonNameboundClient.m in Sources */,
 				C6C22F541C54629E002B38EC /* distanceMetaball.cpp in Sources */,
+				D283B3181C58809D00B0E900 /* UpsideDown_ext.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
 				5EF92F761C57B59C00F6916F /* dpHakoniwaMagnetPendulum.cpp in Sources */,
 				5EF92F771C57B59C00F6916F /* dpHakoniwaSand.cpp in Sources */,
 				C6C22F481C54629E002B38EC /* ChainBtShapeDrawer.cpp in Sources */,
-				C6C22F441C54629E002B38EC /* VFParticle.cpp in Sources */,
 				5EF92F781C57B59C00F6916F /* twistFinder.cpp in Sources */,
 				C6C22F4E1C54629E002B38EC /* KeplerCube.cpp in Sources */,
 				5EF92FB21C57B5B100F6916F /* ofxSyphonServerDirectory.mm in Sources */,
@@ -1202,7 +1183,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-					/Users/ycam/Desktop/of_v0.8.4_osx_release/RAMDanceToolKit/addons/ofxSyphon/libs/Syphon/lib/osx,
+					../../addons/ofxSyphon/libs/Syphon/lib/osx,
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1305,7 +1286,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-					/Users/ycam/Desktop/of_v0.8.4_osx_release/RAMDanceToolKit/addons/ofxSyphon/libs/Syphon/lib/osx,
+					../../addons/ofxSyphon/libs/Syphon/lib/osx,
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;

@@ -87,6 +87,25 @@ public:
 	void setup(const ofVec3f& p, float w, float h, float d);
 };
 
+class Cylinder: public LineObj {
+public:
+    static Cylinder create(const ofVec3f& p, float r, float h)
+    {
+        Cylinder c;
+        c.setup(p, r, h);
+        return c;
+    }
+    
+    void setup(const ofVec3f& p, float r, float h);
+    
+    void draw() override;
+    
+private:
+    ofVec3f mCenter;
+    float mRadius;
+    float mHeight;
+};
+
 class Rect : public LineObj {
 public:
 	static Rect create(const ofVec3f& p, float w, float h)
@@ -142,6 +161,7 @@ struct Deck {
 	}
 private:
 	Box mTop;
+    vector<Cylinder> mLegs;
 };
 
 struct Chair {

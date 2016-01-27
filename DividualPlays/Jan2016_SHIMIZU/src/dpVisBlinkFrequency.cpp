@@ -11,11 +11,8 @@
 
 void BlinkFrequency::setup()
 {
-    ramOscManager::instance().addReceiverTag(&mReceiver1);
-    mReceiver1.addAddress("/dp/toVis/meme1");
-    
-    ramOscManager::instance().addReceiverTag(&mReceiver2);
-    mReceiver2.addAddress("/dp/toVis/meme2");
+    ramOscManager::instance().addReceiverTag(&mReceiver);
+    mReceiver.addAddress("/dp/toVis/meme");
     
     ofSetFrameRate(60);
     ofSetFullscreen(true);
@@ -29,30 +26,11 @@ void BlinkFrequency::setup()
         red[i] = ofRandom(0,255);
         green[i] = ofRandom(0,255);
         blue[i] = ofRandom(0,255);
-    }
+        
+        velocity[i].x = i;
+        velocity[i].y = i;
+      }
     
-    velocity[0].x = 1;
-    velocity[0].y = 1;
-    velocity[1].x = 2;
-    velocity[1].y = 2;
-    velocity[2].x = 3;
-    velocity[2].y = 3;
-    velocity[3].x = 4;
-    velocity[3].y = 4;
-    velocity[4].x = 5;
-    velocity[4].y = 5;
-    velocity[5].x = 6;
-    velocity[5].y = 6;
-    velocity[6].x = 7;
-    velocity[6].y = 7;
-    velocity[7].x = 8;
-    velocity[7].y = 8;
-    velocity[8].x = 9;
-    velocity[8].y = 9;
-    velocity[9].x = 10;
-    velocity[9].y = 10;
-    velocity[10].x = 11;
-    velocity[10].y = 11;
 }
 
 void BlinkFrequency::update()
@@ -81,17 +59,19 @@ void BlinkFrequency::draw()
 }
 
 void BlinkFrequency::receiveOSC(){
-    while (mReceiver1.hasWaitingMessages()) {
-        ofxOscMessage m1;
-        mReceiver1.getNextMessage(&m1);
-        blinkSpeed[0] = m1.getArgAsFloat(1);
-        blinkInterval[0] = m1.getArgAsFloat(6);
-    }
-    while (mReceiver2.hasWaitingMessages()) {
-        ofxOscMessage m2;
-        mReceiver2.getNextMessage(&m2);
-        blinkSpeed[1] = m2.getArgAsFloat(1);
-        blinkInterval[1] = m2.getArgAsFloat(6);
+    while(mReceiver.hasWaitingMessages()){
+        ofxOscMessage m;
+        mReceiver.getNextMessage(&m);
+        if(m.getAddress() == "/dp/toVis/meme"){
+            for(int i = 0; i < MEME_NUM; i++){
+                int idx = m.getArgAsFloat(0);
+                if(idx == i){
+                    blinkSpeed[i] = m.getArgAsFloat(1);
+                    blinkInterval[i] = m.getArgAsFloat(6);
+                    printf("%f\n",blinkSpeed[0]);
+                }
+            }
+        }
     }
 }
 

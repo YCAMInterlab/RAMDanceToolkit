@@ -11,6 +11,7 @@
 
 #include "GeometryHelpers.h"
 #include "KezSlidePoint.h"
+#include "ramCenteredActor.h"
 
 void rotateToNormal(ofVec3f normal) {
     normal.normalize();

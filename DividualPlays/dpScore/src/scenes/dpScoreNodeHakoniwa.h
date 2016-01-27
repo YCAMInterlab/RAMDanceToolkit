@@ -29,7 +29,7 @@ public:
 
     void setX(int i) { mX = ofClamp(i, 0, kNumX); };
     void setY(int i) { mY = ofClamp(i, 0, kNumY); };
-    void setFocus(bool focus) { mFocus = true; }
+    void setFocus(bool focus) { mFocus = focus; }
     
 private:
     vector<Desk> mDesks;

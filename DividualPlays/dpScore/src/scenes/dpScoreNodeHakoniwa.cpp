@@ -55,12 +55,12 @@ void NodeHakoniwa::customDraw()
 			mLights.at(i * kNumY + j).draw();
 		}
 	}
-	const int time = (int)ofGetElapsedTimef() * 0.25f;
-	mX = time % kNumX;
-	mY = time % (kNumX * kNumY) / kNumX;
-
 	const float yOffset {0.f};
 	if (mFocus) {
+		const int time = (int)ofGetElapsedTimef() * 0.25f;
+		mX = time % kNumX;
+		mY = time % (kNumX * kNumY) / kNumX;
+
 		ofSetColor(color::kMain);
 		ofDisableDepthTest();
 		ScopedTranslate trans(mX * Desk::getDimension(), 0.f, mY * (Desk::getDimension() + 90.f));

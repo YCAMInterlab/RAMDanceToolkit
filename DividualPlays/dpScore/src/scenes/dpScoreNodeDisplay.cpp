@@ -107,6 +107,7 @@ void NodeDisplay::customDraw()
 		const float wireOffset {20.f};
 
 		auto drawFbo = [&]() {
+				       if (LineObj::enableAnimation) return;
 				       ScopedStyle s;
 				       ofFill();
 				       ofSetColor(ofColor::white);
