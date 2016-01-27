@@ -108,6 +108,9 @@ UpsideDown_ext mUpsideDown_ext;
 #include "HastyChase_ext.h"
 HastyChase_ext mHastyChase_ext;
 
+#include "Monster_ext.h"
+Monster_ext mMonster_ext;
+
 #include "dp16_camera_controller.h"
 dp16_camera_controller mCameraController;
 
@@ -185,6 +188,7 @@ void testApp::setup()
 	sceneManager.addScene(mFourPoints_ext.getPtr());
     sceneManager.addScene(mUpsideDown_ext.getPtr());
     sceneManager.addScene(mHastyChase_ext.getPtr());
+    sceneManager.addScene(mMonster_ext.getPtr());
 	
 	/* Legacy */
 	sceneManager.addScene( drawLines.getPtr() );
