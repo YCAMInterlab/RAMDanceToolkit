@@ -22,6 +22,17 @@ void sceneController::setup(string RDTK1_addr, string RDTK2_addr)
 	addr_rdtk2 = RDTK2_addr;
 }
 
+void sceneController::disableScene(string name, bool RDTK_isA)
+{
+	ofxOscMessage m;
+	m.setAddress(OSC_SET_SCENE_ADDR);
+	m.addStringArg(name);
+	m.addIntArg(0);
+	m.addIntArg(0);
+	m.addIntArg(0);
+	sendMessageSelect(RDTK_isA ? addr_rdtk1 : addr_rdtk2, m);
+}
+
 void sceneController::setScene(string name, bool RDTK_isA, bool viewA, bool viewB)
 {
 	ofxOscMessage m;

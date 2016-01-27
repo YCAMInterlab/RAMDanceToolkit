@@ -12,6 +12,7 @@ void dp16_ramActorTranslator::setupControlPanel()
 {
 	ramGetGUI().addIntSlider("fix_pos", -1, 22, &fixer);
 	ramGetGUI().addToggle("floorStay", &floorStay);
+	ramGetGUI().addToggle("drawFloor", &drawFloor);
 	ramGetGUI().addSlider("offset_x", -500, 500, &offset.x);
 	ramGetGUI().addSlider("offset_y", -500, 500, &offset.y);
 	ramGetGUI().addSlider("offset_z", -500, 500, &offset.z);
@@ -22,6 +23,7 @@ void dp16_ramActorTranslator::setupControlPanel()
 	floorStay = true;
 	autoLayout = true;
 	margine = 160;
+	drawFloor = true;
 }
 
 void dp16_ramActorTranslator::update()

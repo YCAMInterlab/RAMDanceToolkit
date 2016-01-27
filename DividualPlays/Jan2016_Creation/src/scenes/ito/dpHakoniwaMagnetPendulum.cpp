@@ -72,7 +72,7 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
 
 void dpHakoniwaMagnetPendulum::setup() {
     
-    mSenderOnOff.setup("192.168.20.52",8528);
+    mSenderOnOff.setup(MAG_PENDULUM_ONOFF_IP,8528);
     mSenderInverse.setup("192.168.20.72", 8528);
     mSenderToVis1.setup("192.168.20.2", 10000);
     mSenderToVis2.setup("192.168.20.3", 10000);

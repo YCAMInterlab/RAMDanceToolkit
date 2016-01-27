@@ -1,7 +1,9 @@
 #pragma once
 
 #include "ofMain.h"
+#include "dpConductionGUI.h"
 #include "dpConductor.h"
+#include "ofxUI.h"
 
 class ofApp : public ofBaseApp{
 
@@ -19,6 +21,7 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-	
-	dpConductor dpCon;
+
+	dpConductionGUI gui;
+	ofPtr<dpConductor> dpCon;
 };

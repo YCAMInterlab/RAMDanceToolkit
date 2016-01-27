@@ -50,7 +50,7 @@ void NodeHakoniwa::customDraw()
 	const float t {::fmodf(ofGetElapsedTimef() * 2.f, kNumX * kNumY)};
 	for (auto i : rep(kNumX)) {
 		for (auto j : rep(kNumY)) {
-			ScopedTranslate t(i * Desk::getDimension(), 0.f, j * (Desk::getDimension() + 90.f));
+			ScopedTranslate t(i * Desk::getDimension(), 0.f, j * (Desk::getDimension() + kGapZ));
 			mDesks.at(i * kNumY + j).draw();
 			mLights.at(i * kNumY + j).draw();
 		}
@@ -63,13 +63,13 @@ void NodeHakoniwa::customDraw()
 
 		ofSetColor(color::kMain);
 		ofDisableDepthTest();
-		ScopedTranslate trans(mX * Desk::getDimension(), 0.f, mY * (Desk::getDimension() + 90.f));
+		ScopedTranslate trans(mX * Desk::getDimension(), 0.f, mY * (Desk::getDimension() + kGapZ));
 		mDesks.at(mX * kNumY + mY).draw();
 		mLights.at(mX * kNumY + mY).draw();
 
 		mOffsets.front().set(Desk::getDimension() * mX + Desk::getDimension() * 0.5f,
 		                     Desk::getHeight() + yOffset,
-		                     (Desk::getDimension() + 90.f) * mY + Desk::getDimension() * 0.5f);
+		                     (Desk::getDimension() + kGapZ) * mY + Desk::getDimension() * 0.5f);
 	}
 	else {
 		mOffsets.front().set(NodeHakoniwa::getWidth() * 0.5f, Desk::getHeight() + yOffset, NodeHakoniwa::getDepth() * 0.5f);

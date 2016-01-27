@@ -51,6 +51,9 @@
 		C6C22F651C5476D4002B38EC /* MixMonsterScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22F621C5476D4002B38EC /* MixMonsterScene.cpp */; };
 		C6C22F6A1C54A042002B38EC /* lineDrawing_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22F681C54A042002B38EC /* lineDrawing_ext.cpp */; };
 		D283B3181C58809D00B0E900 /* UpsideDown_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */; };
+		D2A4E4481C58D0C700BEAA84 /* HastyChase_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2A4E4461C58D0C700BEAA84 /* HastyChase_ext.cpp */; };
+		D2A4E44B1C58DA0700BEAA84 /* Monster_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2A4E4491C58DA0700BEAA84 /* Monster_ext.cpp */; };
+		D2A4E4551C58E32F00BEAA84 /* MixMonsterScene_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2A4E4531C58E32F00BEAA84 /* MixMonsterScene_ext.cpp */; settings = {ASSET_TAGS = (); }; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -129,6 +132,8 @@
 
 /* Begin PBXFileReference section */
 		270D2D9916E475D800D5F750 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../../resources/Icons/icon.icns; sourceTree = "<group>"; };
+		5E846F3C1C58C9DD006FB401 /* FloorLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FloorLine.h; sourceTree = "<group>"; };
+		5E846F3D1C58C9E3006FB401 /* Drop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drop.h; sourceTree = "<group>"; };
 		5ECC0FE31C572F4F00630A39 /* dp16_actorDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dp16_actorDrawer.cpp; sourceTree = "<group>"; };
 		5ECC0FE41C572F4F00630A39 /* dp16_actorDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dp16_actorDrawer.h; sourceTree = "<group>"; };
 		5ECC0FE61C572F7000630A39 /* BigBox_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BigBox_ext.cpp; sourceTree = "<group>"; };
@@ -194,6 +199,7 @@
 		9225EEC31C588FBA00A7FD9A /* dp3DDanceMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dp3DDanceMap.h; sourceTree = "<group>"; };
 		9225EEC41C588FBA00A7FD9A /* FixedBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBody.h; sourceTree = "<group>"; };
 		9225EEC51C588FBA00A7FD9A /* ThreePointFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreePointFlow.h; sourceTree = "<group>"; };
+		9225EED31C58DC9000A7FD9A /* dpAllHakoniwaMove.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpAllHakoniwaMove.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		C64C2FC21C54E4B9005E9BB2 /* dp16_camera_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dp16_camera_controller.cpp; sourceTree = "<group>"; };
 		C64C2FC31C54E4B9005E9BB2 /* dp16_camera_controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dp16_camera_controller.h; sourceTree = "<group>"; };
@@ -270,6 +276,12 @@
 		C6C22F691C54A042002B38EC /* lineDrawing_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lineDrawing_ext.h; sourceTree = "<group>"; };
 		D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UpsideDown_ext.cpp; sourceTree = "<group>"; };
 		D283B3171C58809D00B0E900 /* UpsideDown_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpsideDown_ext.h; sourceTree = "<group>"; };
+		D2A4E4461C58D0C700BEAA84 /* HastyChase_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HastyChase_ext.cpp; sourceTree = "<group>"; };
+		D2A4E4471C58D0C700BEAA84 /* HastyChase_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HastyChase_ext.h; sourceTree = "<group>"; };
+		D2A4E4491C58DA0700BEAA84 /* Monster_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Monster_ext.cpp; sourceTree = "<group>"; };
+		D2A4E44A1C58DA0700BEAA84 /* Monster_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Monster_ext.h; sourceTree = "<group>"; };
+		D2A4E4531C58E32F00BEAA84 /* MixMonsterScene_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MixMonsterScene_ext.cpp; sourceTree = "<group>"; };
+		D2A4E4541C58E32F00BEAA84 /* MixMonsterScene_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixMonsterScene_ext.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -355,6 +367,7 @@
 				5EF92F5E1C57B59C00F6916F /* dpHakoVisStageBlob.h */,
 				5EF92F5F1C57B59C00F6916F /* dpHakoVisStruggle.h */,
 				5EF92F601C57B59C00F6916F /* dpHakoVisTornado.h */,
+				9225EED31C58DC9000A7FD9A /* dpAllHakoniwaMove.h */,
 				5EF92F611C57B59C00F6916F /* dpHakoVisVecLineCircle.h */,
 				5EF92F621C57B59C00F6916F /* dpHakoVisWorm.h */,
 				5EF92F631C57B59C00F6916F /* iceLine */,
@@ -494,6 +507,8 @@
 		9225EEC01C588FBA00A7FD9A /* 2014Scene */ = {
 			isa = PBXGroup;
 			children = (
+				5E846F3D1C58C9E3006FB401 /* Drop.h */,
+				5E846F3C1C58C9DD006FB401 /* FloorLine.h */,
 				9225EEC11C588FBA00A7FD9A /* BrokenBody.h */,
 				9225EEC21C588FBA00A7FD9A /* BurstBody.h */,
 				9225EEC31C588FBA00A7FD9A /* dp3DDanceMap.h */,
@@ -820,12 +835,18 @@
 		C6C22F331C54629E002B38EC /* onc */ = {
 			isa = PBXGroup;
 			children = (
+				D2A4E4531C58E32F00BEAA84 /* MixMonsterScene_ext.cpp */,
+				D2A4E4541C58E32F00BEAA84 /* MixMonsterScene_ext.h */,
 				C6C22F341C54629E002B38EC /* MoveSeparatedObjects.cpp */,
 				C6C22F351C54629E002B38EC /* MoveSeparatedObjects.h */,
 				C6C22F361C54629E002B38EC /* WeiredSpace.cpp */,
 				C6C22F371C54629E002B38EC /* WeiredSpace.h */,
 				D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */,
 				D283B3171C58809D00B0E900 /* UpsideDown_ext.h */,
+				D2A4E4461C58D0C700BEAA84 /* HastyChase_ext.cpp */,
+				D2A4E4471C58D0C700BEAA84 /* HastyChase_ext.h */,
+				D2A4E4491C58DA0700BEAA84 /* Monster_ext.cpp */,
+				D2A4E44A1C58DA0700BEAA84 /* Monster_ext.h */,
 			);
 			name = onc;
 			path = scenes/onc;
@@ -1062,10 +1083,13 @@
 				5EF92F791C57B59C00F6916F /* dpSyphonClientManager.cpp in Sources */,
 				C6C22F451C54629E002B38EC /* BaseConstrains.cpp in Sources */,
 				C6C22F501C54629E002B38EC /* RagdollScene.cpp in Sources */,
+				D2A4E44B1C58DA0700BEAA84 /* Monster_ext.cpp in Sources */,
 				5EF92FB01C57B5B100F6916F /* ofxSyphonClient.mm in Sources */,
 				C6C22F4D1C54629E002B38EC /* KeplerBtShapeDrawer.cpp in Sources */,
+				D2A4E4481C58D0C700BEAA84 /* HastyChase_ext.cpp in Sources */,
 				C64C2FC41C54E4B9005E9BB2 /* dp16_camera_controller.cpp in Sources */,
 				C6C22F651C5476D4002B38EC /* MixMonsterScene.cpp in Sources */,
+				D2A4E4551C58E32F00BEAA84 /* MixMonsterScene_ext.cpp in Sources */,
 				C6C22F4A1C54629E002B38EC /* btPicker.cpp in Sources */,
 				C6C22F471C54629E002B38EC /* ChainBtDynamics.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,

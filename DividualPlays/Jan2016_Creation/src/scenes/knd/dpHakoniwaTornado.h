@@ -37,7 +37,7 @@ public:
     }
     void setup(){
 
-        mFanSender.setup("192.168.20.71",8528);
+        mFanSender.setup(TORNADE_IP,8528);
         
         mSender[0].setup("192.168.20.2", 10000);
         mSender[1].setup("192.168.20.3", 10000);
@@ -55,7 +55,7 @@ public:
         m.setAddress("/dp/hakoniwa/tornado/fan");
         m.addIntArg(val);
         mFanSender.sendMessage(m);
-        
+
     }
 
     void update(){
@@ -97,11 +97,11 @@ public:
         
         mRad = ofMap(radius,mRadMin,mRadMax,0,255,true);
         
-        if(mRad > mFunThresh){
+        /*if(mRad > mFunThresh){
             mFan = 255;
         }else{
             mFan = 0;
-        }
+        }*/
         
         if(mRad < mDrawRadThresh)radius = 0.0;
         

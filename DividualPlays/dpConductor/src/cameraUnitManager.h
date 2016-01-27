@@ -17,7 +17,7 @@ class cameraUnitManager : public baseOscSender{
 public:
 	
 	void setup(string host);
-	void setCameraSlot(string name, bool viewA, bool viewB);
+	void setCameraSlot(string name, bool enable, bool viewA, bool viewB);
 	
 };
 

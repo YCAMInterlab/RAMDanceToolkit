@@ -102,6 +102,18 @@ BigBox_ext mBigBox_ext;
 #include "FourPoints_ext.h"
 FourPoints_ext mFourPoints_ext;
 
+#include "UpsideDown_ext.h"
+UpsideDown_ext mUpsideDown_ext;
+
+#include "HastyChase_ext.h"
+HastyChase_ext mHastyChase_ext;
+
+#include "Monster_ext.h"
+Monster_ext mMonster_ext;
+
+#include "MixMonsterScene_ext.h"
+MixMonsterScene_ext mMixMonsterScene_ext;
+
 #include "dp16_camera_controller.h"
 dp16_camera_controller mCameraController;
 
@@ -148,6 +160,8 @@ dpHakoVisStageBlob                visStage;
 //magnet looper
 magnetLooper looper;
 
+FloorLine floorLine;
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -175,6 +189,10 @@ void testApp::setup()
 	sceneManager.addScene(mBrokenBody_ext.getPtr());
 	sceneManager.addScene(mBigBox_ext.getPtr());
 	sceneManager.addScene(mFourPoints_ext.getPtr());
+    sceneManager.addScene(mUpsideDown_ext.getPtr());
+    sceneManager.addScene(mHastyChase_ext.getPtr());
+    sceneManager.addScene(mMonster_ext.getPtr());
+    sceneManager.addScene(mMixMonsterScene_ext.getPtr());
 	
 	/* Legacy */
 	sceneManager.addScene( drawLines.getPtr() );
@@ -198,6 +216,7 @@ void testApp::setup()
     sceneManager.addScene(mFixed.getPtr());
     sceneManager.addScene(mBroken.getPtr());
     sceneManager.addScene(mBurst.getPtr());
+    sceneManager.addScene(floorLine.getPtr());
     sceneManager.addScene(mThree.getPtr());
 
 	//Sheep
@@ -229,6 +248,7 @@ void testApp::setup()
     sceneManager.addScene(visTornado.getPtr());
     
     sceneManager.addScene(looper.getPtr());
+    sceneManager.addScene(allHakoniwaMove.getPtr());
 	
     sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
     sceneManager.setShowAllActors(false);
@@ -300,6 +320,7 @@ void testApp::keyPressed(int key)
 //--------------------------------------------------------------
 void testApp::keyReleased(int key)
 {
+    if(key == 'f')ofToggleFullscreen();
 }
 
 //--------------------------------------------------------------

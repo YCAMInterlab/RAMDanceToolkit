@@ -33,6 +33,10 @@
 #include "dpHakoniwaTornado.h"
 #include "dpHakoniwaRawCamera.h"
 
+#include "dpAllHakoniwaMove.h"
+
+#include "FloorLine.h"
+
 #include "DoSomething.h"
 
 class testApp : public ramBaseApp
@@ -65,6 +69,7 @@ public:
 	void onRigidExit(const ramRigidBody &rigid);
     
     dpHakoniwaServoPendulum     hakoniwaServoPendulum;
+    dpAllHakoniwaMove           allHakoniwaMove;
     
     DoSomething doSomething;
 };

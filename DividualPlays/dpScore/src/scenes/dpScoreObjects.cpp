@@ -170,6 +170,7 @@ Desk::Desk()
 	const float tableH {getHeight()};
 	const float tableThickness {11.f};
 	const float legDim {5.f};
+	mBoxes.clear();
 	mBoxes.push_back(Box::create(ofVec3f(0.f, tableH - tableThickness, 0.f), tableDim, tableThickness, tableDim));
 	mBoxes.push_back(Box::create(ofVec3f(0.f, 0.f, 0.f), legDim, tableH - tableThickness, legDim));
 	mBoxes.push_back(Box::create(ofVec3f(tableDim - legDim, 0.f, 0.f), legDim, tableH - tableThickness, legDim));
@@ -191,14 +192,14 @@ Deck::Deck()
 	const float h {getHeight()};
 	const float thickness {11.f};
 	mTop.setup(ofVec3f(0.f, h - thickness, 0.f), w, thickness, d);
-    
-    const float legRad {2.5f};
-    const float legH {h - thickness};
-    mLegs.clear();
-    mLegs.push_back(Cylinder::create(ofVec3f(legRad, legH * 0.5f, legRad), legRad, legH));
-    mLegs.push_back(Cylinder::create(ofVec3f(w - legRad, legH * 0.5f, legRad), legRad, legH));
-    mLegs.push_back(Cylinder::create(ofVec3f(legRad, legH * 0.5f, d - legRad), legRad,  legH));
-    mLegs.push_back(Cylinder::create(ofVec3f(w - legRad, legH * 0.5f, d - legRad), legRad, legH));
+
+	const float legRad {2.5f};
+	const float legH {h - thickness};
+	mLegs.clear();
+	mLegs.push_back(Cylinder::create(ofVec3f(legRad, legH * 0.5f, legRad), legRad, legH));
+	mLegs.push_back(Cylinder::create(ofVec3f(w - legRad, legH * 0.5f, legRad), legRad, legH));
+	mLegs.push_back(Cylinder::create(ofVec3f(legRad, legH * 0.5f, d - legRad), legRad,  legH));
+	mLegs.push_back(Cylinder::create(ofVec3f(w - legRad, legH * 0.5f, d - legRad), legRad, legH));
 }
 
 void Deck::draw()
@@ -207,9 +208,9 @@ void Deck::draw()
 	ofSetCylinderResolution(8, 1);
 
 	mTop.draw();
-    for (auto& l : mLegs) {
-        l.draw();
-    }
+	for (auto& l : mLegs) {
+		l.draw();
+	}
 }
 
 void Chair::draw()
