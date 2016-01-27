@@ -55,7 +55,7 @@ void NodeCameraUnit::customDraw()
     {
         ScopedStyle s;
         ofSetColor(color::kMain);
-        const float t {ofGetElapsedTimef() * 10.f};
+        const float t {getElapsedTime() * 10.f};
         ofPolyline p;
         for (int i : rep((int)w)) {
             p.addVertex((float)i, ofSignedNoise(i * 0.3f - t) * h * 0.5f + h * 0.5f, 0.f);

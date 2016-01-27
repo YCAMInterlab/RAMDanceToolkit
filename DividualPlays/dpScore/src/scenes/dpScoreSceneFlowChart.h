@@ -110,6 +110,7 @@ private:
 	map<string, ofPtr<BaseNode>> mNodes;
     vector<vector<string>> mOrders;
     map<int, Property> mProperties;
+    SkeletonVec mSkeletons;
     
     vector<ofFbo> mFbos; // double buffer
     

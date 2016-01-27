@@ -301,6 +301,26 @@ void billboard()
 	glLoadMatrixd(m);
 }
 
+static float _elapsedTime {0.f};
+static bool _updateElapsedTime {true};
+
+float getElapsedTime()
+{
+    return _elapsedTime;
+}
+
+void updateElapsedTime()
+{
+    if (_updateElapsedTime) {
+        _elapsedTime += ofGetLastFrameTime();
+    }
+}
+
+void setPauseElapsedTimeCounter(bool pause)
+{
+    _updateElapsedTime = !pause;
+}
+
 namespace color {
 const ofColor kMain             = ofColor(255, 50, 150);
 const ofColor kPalePinkLight    = ofColor(255, 220, 235);

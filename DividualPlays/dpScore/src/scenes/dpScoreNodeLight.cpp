@@ -52,7 +52,7 @@ void NodeLight::customDraw()
 
 	for (auto i : rep(mParLights.size())) {
 		auto& p = mParLights.at(i);
-		p.angle = ::cos(ofGetElapsedTimef() + i * 0.5) * 45.f;
+		p.angle = ::cos(getElapsedTime() + i * 0.5) * 45.f;
 		p.draw();
 	}
 }

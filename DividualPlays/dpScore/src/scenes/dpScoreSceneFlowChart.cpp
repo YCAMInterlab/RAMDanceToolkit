@@ -236,8 +236,13 @@ void SceneFlowChart::updateTime()
 
 void SceneFlowChart::updateWithSkeleton()
 {
+    mSkeletons.assign(getNumSkeletons(), Skeleton::create());
+    for (auto i : rep(getNumSkeletons())) {
+        *mSkeletons.at(i) = *getSkeleton(i);
+    }
+    
 	// update text
-	if (getNumSkeletons() >= 2) {
+	if (mSkeletons.size() >= 2) {
 		getNode<NodeDancer>()->title = "Dancers";
 		getNode<NodeMotioner>()->title = "Motion Captures";
 	}
@@ -246,21 +251,21 @@ void SceneFlowChart::updateWithSkeleton()
 		getNode<NodeMotioner>()->title = "Motion Capture";
 	}
 
-	if (getNumSkeletons()) {
+	if (mSkeletons.empty() == false) {
 		// update for line
 		auto motioner = mNodes[getClassName < NodeMotioner > ()];
 		motioner->clearAimingOffsets();
-		for (auto i : rep(getNumSkeletons())) {
-			motioner->addAimingOffset(getSkeleton(i)->getJoint(ofxMot::JOINT_HIPS).getGlobalPosition());
+		for (auto i : rep(mSkeletons.size())) {
+			motioner->addAimingOffset(mSkeletons.at(i)->getJoint(ofxMot::JOINT_HIPS).getGlobalPosition());
 		}
 		auto dancer = mNodes[getClassName < NodeDancer > ()];
 		dancer->clearAimingOffsets();
-		for (auto i : rep(getNumSkeletons())) {
-			dancer->addAimingOffset(getSkeleton(i)->getJoint(ofxMot::JOINT_HEAD).getGlobalPosition());
+		for (auto i : rep(mSkeletons.size())) {
+			dancer->addAimingOffset(mSkeletons.at(i)->getJoint(ofxMot::JOINT_HEAD).getGlobalPosition());
 		}
 
 		// TPS camera
-		auto head = getSkeleton(0)->getJoint(ofxMot::JOINT_NECK);
+		auto head = mSkeletons.front()->getJoint(ofxMot::JOINT_NECK);
 		//head.pan(180.f);
 		head.pan(-90.f);
 		const auto v0 = head.getGlobalPosition();
@@ -376,8 +381,7 @@ void SceneFlowChart::drawNodes()
 
 void SceneFlowChart::drawDancers()
 {
-    for (auto i : rep(getNumSkeletons())) {
-        auto skl = getSkeleton(i);
+    for (auto skl : mSkeletons) {
 		for (auto& n : skl->getJoints()) {
 			n.draw();
 			if (!n.getParent()) continue;
@@ -485,8 +489,7 @@ void SceneFlowChart::drawToolKit()
 		}
 	}
 	ofEnableDepthTest();
-    for (auto i : rep(getNumSkeletons())) {
-        auto skl = getSkeleton(i);
+    for (auto skl : mSkeletons) {
 		for (auto& n : skl->getJoints()) {
 			ofSetColor(ofColor::magenta);
 			n.draw();
@@ -676,7 +679,10 @@ void SceneFlowChart::keyPressed(int key)
 	case '4': changeScene(SCENE_CIRCULATION); break;
 	case '5': changeScene(SCENE_MEMORY); break;
 	case '6': changeScene(SCENE_DEBUG); break;
-	case ' ': mPaused ^= true; break;
+	case ' ':
+            mPaused ^= true;
+            setPauseElapsedTimeCounter(mPaused);
+            break;
 	case '+':
 	case '=':
 		(++mOrderIdx) %= mOrders.size();

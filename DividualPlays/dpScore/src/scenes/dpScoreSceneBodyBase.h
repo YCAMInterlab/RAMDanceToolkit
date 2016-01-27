@@ -33,7 +33,8 @@ public:
     
 protected:
     SkeletonPtr getSkeleton(int i) { return mSkeletons.at(i); }
-    SkeletonVec getSkeletons() { return mSkeletons(); }
+    SkeletonVec& getSkeletons() { return mSkeletons; }
+    const SkeletonVec& getSkeletons() const { return mSkeletons; }
     size_t getNumSkeletons() const { return mSkeletons.size(); }
     void setFixPosition(bool fix) { mFixPosition = fix; }
     bool getFixPosition() const { return mFixPosition; }
