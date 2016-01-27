@@ -31,6 +31,7 @@ private:
     vector<Deck> mDecks;
     vector<MacBook> mMBPs;
     ofFbo mFbo;
+    float mTime{0.f};
 };
 
 DP_SCORE_NAMESPACE_END

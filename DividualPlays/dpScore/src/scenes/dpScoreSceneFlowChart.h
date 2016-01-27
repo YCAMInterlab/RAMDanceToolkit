@@ -44,7 +44,6 @@ public:
 	void draw() override;
 
 	void keyPressed(int key) override;
-    void windowResized(int w, int h) override;
 
 private:
     void setupNodes();
@@ -62,6 +61,7 @@ private:
     void drawNodes();
     void drawDancers();
     void drawLines();
+    void drawCircles();
     void debugDrawCameras();
     void drawHUD();
     
@@ -98,8 +98,10 @@ private:
         float totalTime {60.f};
     };
     
+    const float kWidth {1920.f};
+    const float kHeight {1200.f};
+    
     const float kMainCamSpeed {0.025f};
-    const float kYOffset {-200.f};
     const int kNumFbos {2};
     
 	ofTrueTypeFont mFont, mFontSmall;
@@ -108,6 +110,7 @@ private:
 	map<string, ofPtr<BaseNode>> mNodes;
     vector<vector<string>> mOrders;
     map<int, Property> mProperties;
+    SkeletonVec mSkeletons;
     
     vector<ofFbo> mFbos; // double buffer
     

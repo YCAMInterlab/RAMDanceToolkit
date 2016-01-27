@@ -25,7 +25,7 @@ NodeCameraUnit::NodeCameraUnit()
     addAimingOffset(ofVec3f(getWidth() * 0.5f, getHeight() * 0.82f, -20.f));
     
     getCamera().setFov(35.f);
-    getCamera().setPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 300.f, 0.f, -50.f);
+    getCamera().setPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 300.f, 200.f, -50.f);
     getCamera().setOrientation(ofVec3f(-30.f, 180.f + 30.f, 0.f));
     
     mBody.setup(ofVec3f::zero(), getWidth(), getHeight(), getDepth());
@@ -55,7 +55,7 @@ void NodeCameraUnit::customDraw()
     {
         ScopedStyle s;
         ofSetColor(color::kMain);
-        const float t {ofGetElapsedTimef() * 10.f};
+        const float t {getElapsedTime() * 10.f};
         ofPolyline p;
         for (int i : rep((int)w)) {
             p.addVertex((float)i, ofSignedNoise(i * 0.3f - t) * h * 0.5f + h * 0.5f, 0.f);

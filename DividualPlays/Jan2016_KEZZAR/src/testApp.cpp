@@ -43,7 +43,10 @@ BlinkSync blinksync;
 BlinkFrequency blinkfrequency;
 #include "dpVisFrequency2.h"
 Frequency2 frequency2;
-
+#include "dpVisBlinkSyncAlgorithm.h"
+BlinkSyncAlgorithm algorithm;
+#include "dpVisSceneChange.h"
+SceneChange scenechange;
 
 
 //HakoniwaOscTest hakoniwaOscTest;
@@ -73,6 +76,10 @@ void testApp::setup()
     sceneManager.addScene(blinksync.getPtr());
     sceneManager.addScene(blinkfrequency.getPtr());
     sceneManager.addScene(frequency2.getPtr());
+    sceneManager.addScene(algorithm.getPtr());
+    
+    sceneManager.addScene(scenechange.getPtr());
+
 
 }
 

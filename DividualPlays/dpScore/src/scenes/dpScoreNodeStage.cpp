@@ -23,7 +23,7 @@ NodeStage::NodeStage()
 	addAimingOffset(ofVec3f::zero());
 
 	getCamera().setFov(45.f);
-	getCamera().setPosition(-40.f, 400.f, 1550.f);
+	getCamera().setPosition(-40.f, 600.f, 1550.f);
 	getCamera().setOrientation(ofVec3f(-10.f, 0.f, 0.f));
 
 	const int n {6};

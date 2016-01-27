@@ -24,7 +24,7 @@ NodeSpeaker::NodeSpeaker()
 	addAimingOffset(getRight() + ofVec3f(getWidth() * 0.5f - 32.f, getHeight() * 0.7f, 45.f));
     
     getCamera().setFov(55.f);
-    getCamera().setPosition(NodeStage::kWidth * 0.5f + Desk::getDimension() * 0.5f + 50.f - 40.f, -100.f, 600.f);
+    getCamera().setPosition(NodeStage::kWidth * 0.5f + Desk::getDimension() * 0.5f + 50.f - 40.f, 200.f - 100.f, 600.f);
     getCamera().setOrientation(ofVec3f(0.f, -45.f, 0.f));
     
     mBottom.setup(ofVec3f::zero(), getWidth(), getHeight(), getDepth());

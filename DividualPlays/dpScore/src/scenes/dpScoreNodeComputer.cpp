@@ -27,7 +27,7 @@ NodeComputer::NodeComputer()
 	                                                              -MacBook::getWidth() * 0.5f));
 
 	getCamera().setFov(60.f);
-	getCamera().setPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 400.f, 0.f, -190.f);
+	getCamera().setPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 400.f, 200.f, -190.f);
 	getCamera().setOrientation(ofVec3f(-20.f, -90.f, 0.f));
 
 	mFbo.allocate(MacBook::getWidth() * 4.f, MacBook::getDepth() * 4.f);
@@ -48,7 +48,7 @@ NodeComputer::~NodeComputer()
 }
 
 void NodeComputer::customDraw()
-{
+{    
 	ScopedStyle s;
 	setStyle(*this);
 
@@ -73,7 +73,7 @@ void NodeComputer::customDraw()
 					 const float g {1.f};
 					 const float s {w / (float)n - g};
 					 for (auto j : rep(n)) {
-						 const float t {ofGetElapsedTimef() * 1.f};
+						 const float t {getElapsedTime() * 1.f};
 						 auto y = ofNoise(t, j) * h;
 						 ofRect(j * (s + g), h, s, -y);
 					 }
@@ -81,9 +81,12 @@ void NodeComputer::customDraw()
 	}
 
 	drawDisplay[1] = [](float w, float h) {
+				 w -= 2.f;
+				 h -= 2.f;
+				 ScopedTranslate trans(1.f, 1.f);
 				 ScopedStyle s;
 				 ofSetColor(color::kMain);
-				 const float t {ofGetElapsedTimef() * 1.5f};
+				 const float t {getElapsedTime() * 1.5f};
 				 auto x = ofSignedNoise(t, 12.95f) * w * 0.5f;
 				 auto y = ofSignedNoise(t, 29.21f) * h * 0.5f;
 				 ofLine(0.f, h * 0.5f + y, w, h * 0.5f + y);
@@ -104,41 +107,44 @@ void NodeComputer::customDraw()
 				 const float g {1.f};
 				 const float s {h / (float)n - g};
 				 for (auto j : rep(n)) {
-					 const float t {ofGetElapsedTimef() * 1.f};
+					 const float t {getElapsedTime() * 1.f};
 					 auto x = ofNoise(t, j) * w;
 					 ofRect(w, j * (s + g), -x, s);
 				 }
 			 };
 
-    drawDisplay[3] = [](float w, float h) {
-                 ScopedStyle s;
-                 ofSetColor(color::kMain);
-                 const float t {ofGetElapsedTimef() * 30.f};
-                 ofPolyline p;
-                 for (int i : rep((int)w)) {
-                     p.addVertex((float)i, ofSignedNoise(i * 0.5f - t) * h * 0.5f + h * 0.5f, 0.f);
-                 }
-                 p.draw();
-             };
-    /*
-    drawDisplay[3] = [](float w, float h) {
-        ScopedStyle s;
-        ofSetColor(color::kMain);
-        ofTranslate(w * 0.5f, h * 0.5f);
-        const float t {ofGetElapsedTimef() * 10.f};
-        ofPolyline p;
-        const int res{100};
-        const float step {360.f / (float)res};
-        for (auto i : rep(res)) {
-            const float deg {i * step};
-            const float r {ofSignedNoise(i * 0.2f - t) * h * 0.25f + h * 0.25f};
-            p.addVertex(::cosf(ofDegToRad(deg)) * r,
-                        ::sinf(ofDegToRad(deg)) * r,
-                        0.f);
-        }
-        p.draw();
+	drawDisplay[3] = [](float w, float h) {
+				 w -= 2.f;
+				 h -= 2.f;
+				 ScopedTranslate trans(1.f, 1.f);
+				 ScopedStyle s;
+				 ofSetColor(color::kMain);
+				 const float t {getElapsedTime() * 30.f};
+				 ofPolyline p;
+				 for (int i : rep((int)w)) {
+					 p.addVertex((float)i, ofSignedNoise(i * 0.5f - t) * h * 0.5f + h * 0.5f, 0.f);
+				 }
+				 p.draw();
 			 };
-     */
+	/*
+	   drawDisplay[3] = [](float w, float h) {
+	    ScopedStyle s;
+	    ofSetColor(color::kMain);
+	    ofTranslate(w * 0.5f, h * 0.5f);
+	    const float t {getElapsedTime() * 10.f};
+	    ofPolyline p;
+	    const int res{100};
+	    const float step {360.f / (float)res};
+	    for (auto i : rep(res)) {
+	        const float deg {i * step};
+	        const float r {ofSignedNoise(i * 0.2f - t) * h * 0.25f + h * 0.25f};
+	        p.addVertex(::cosf(ofDegToRad(deg)) * r,
+	                    ::sinf(ofDegToRad(deg)) * r,
+	                    0.f);
+	    }
+	    p.draw();
+	                     };
+	 */
 	drawDisplay[6] = drawDisplay[1];
 	drawDisplay[5] = drawDisplay[2];
 	drawDisplay[4] = drawDisplay[3];

@@ -23,7 +23,7 @@ NodeMasterHakoniwa::NodeMasterHakoniwa()
     setGlobalPosition(ofVec3f(450.f, 0.f, 400.f - Desk::getDimension()));
     addAimingOffset(ofVec3f(Desk::getDimension() * 0.5f, Desk::getHeight() + 50.f, Desk::getDimension() * 0.5f + 30.f));
     getCamera().setFov(45.f);
-    getCamera().setPosition(NodeStage::kWidth * 0.5f + Desk::getDimension() * 0.5f + 50.f, -75.f, 550.f);
+    getCamera().setPosition(NodeStage::kWidth * 0.5f + Desk::getDimension() * 0.5f + 50.f, 200.f - 75.f, 550.f);
     
     const float w {60.f};
     const float h {73.f};

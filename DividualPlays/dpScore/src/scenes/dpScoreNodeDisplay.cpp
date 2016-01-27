@@ -36,7 +36,7 @@ NodeDisplay::NodeDisplay()
 	                                         getRearDisplayHeight() * 0.5f,
 	                                         getRearDisplayDepth() * 0.5f));
 	getCamera().setFov(35.f);
-	getCamera().setPosition(-NodeStage::kWidth * 0.5f + 80.f, 55.f, 200.f);
+	getCamera().setPosition(-NodeStage::kWidth * 0.5f + 80.f, 255.f, 200.f);
 	getCamera().setOrientation(ofVec3f(0.f, 150.f, 0.f));
 
 	const int fboSize {4};

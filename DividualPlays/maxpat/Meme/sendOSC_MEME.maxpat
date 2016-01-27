@@ -43,7 +43,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 24.0, 357.0, 87.0, 22.0 ],
+					"patching_rect" : [ 106.0, 359.0, 87.0, 22.0 ],
 					"style" : "",
 					"text" : "route /oscdata"
 				}
@@ -57,7 +57,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 24.0, 478.0, 39.0, 22.0 ],
+					"patching_rect" : [ 106.0, 481.0, 39.0, 22.0 ],
 					"style" : "",
 					"text" : "s osc"
 				}
@@ -72,7 +72,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 24.0, 415.0, 217.0, 22.0 ],
+					"patching_rect" : [ 106.0, 417.0, 217.0, 22.0 ],
 					"style" : "",
 					"text" : "/dp/toVis/meme3 $1 $2 $3 $4 $5 $6 $7"
 				}
@@ -87,21 +87,9 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 24.0, 288.0, 106.0, 22.0 ],
+					"patching_rect" : [ 106.0, 290.0, 106.0, 22.0 ],
 					"style" : "",
 					"text" : "udpreceive 23451"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-17",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 848.0, 85.0, 34.0, 22.0 ],
-					"style" : "",
-					"text" : "print"
 				}
 
 			}
@@ -112,7 +100,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 579.0, 115.0, 87.0, 22.0 ],
+					"patching_rect" : [ 661.0, 117.0, 87.0, 22.0 ],
 					"style" : "",
 					"text" : "route /oscdata"
 				}
@@ -126,7 +114,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 579.0, 246.0, 39.0, 22.0 ],
+					"patching_rect" : [ 661.0, 248.0, 39.0, 22.0 ],
 					"style" : "",
 					"text" : "s osc"
 				}
@@ -141,7 +129,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 579.0, 177.0, 210.0, 22.0 ],
+					"patching_rect" : [ 661.0, 179.0, 210.0, 22.0 ],
 					"style" : "",
 					"text" : "/dp/toVis/meme $1 $2 $3 $4 $5 $6 $7"
 				}
@@ -156,7 +144,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 579.0, 46.0, 106.0, 22.0 ],
+					"patching_rect" : [ 661.0, 48.0, 106.0, 22.0 ],
 					"style" : "",
 					"text" : "udpreceive 23451"
 				}
@@ -171,7 +159,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 848.0, 144.0, 37.0, 22.0 ],
+					"patching_rect" : [ 552.0, 330.0, 37.0, 22.0 ],
 					"style" : "",
 					"text" : "r osc"
 				}
@@ -185,7 +173,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 848.0, 176.0, 147.0, 22.0 ],
+					"patching_rect" : [ 552.0, 362.0, 147.0, 22.0 ],
 					"style" : "",
 					"text" : "udpsend 127.0.0.1 10000"
 				}
@@ -198,7 +186,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 290.0, 114.0, 87.0, 22.0 ],
+					"patching_rect" : [ 372.0, 116.0, 87.0, 22.0 ],
 					"style" : "",
 					"text" : "route /oscdata"
 				}
@@ -212,7 +200,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 290.0, 235.0, 39.0, 22.0 ],
+					"patching_rect" : [ 372.0, 237.0, 39.0, 22.0 ],
 					"style" : "",
 					"text" : "s osc"
 				}
@@ -227,7 +215,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 290.0, 172.0, 217.0, 22.0 ],
+					"patching_rect" : [ 372.0, 174.0, 217.0, 22.0 ],
 					"style" : "",
 					"text" : "/dp/toVis/meme3 $1 $2 $3 $4 $5 $6 $7"
 				}
@@ -242,7 +230,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 290.0, 45.0, 106.0, 22.0 ],
+					"patching_rect" : [ 372.0, 47.0, 106.0, 22.0 ],
 					"style" : "",
 					"text" : "udpreceive 34512"
 				}
@@ -255,7 +243,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 24.0, 110.0, 87.0, 22.0 ],
+					"patching_rect" : [ 106.0, 112.0, 87.0, 22.0 ],
 					"style" : "",
 					"text" : "route /oscdata"
 				}
@@ -269,7 +257,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 24.0, 231.0, 39.0, 22.0 ],
+					"patching_rect" : [ 106.0, 233.0, 39.0, 22.0 ],
 					"style" : "",
 					"text" : "s osc"
 				}
@@ -284,7 +272,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 24.0, 172.0, 217.0, 22.0 ],
+					"patching_rect" : [ 106.0, 174.0, 217.0, 22.0 ],
 					"style" : "",
 					"text" : "/dp/toVis/meme1 $1 $2 $3 $4 $5 $6 $7"
 				}
@@ -299,7 +287,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 24.0, 41.0, 106.0, 22.0 ],
+					"patching_rect" : [ 106.0, 43.0, 106.0, 22.0 ],
 					"style" : "",
 					"text" : "udpreceive 12345"
 				}
@@ -366,15 +354,6 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-4", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-17", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-5", 0 ]
 				}
 
 			}

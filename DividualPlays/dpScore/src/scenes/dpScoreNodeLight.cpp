@@ -25,7 +25,7 @@ NodeLight::NodeLight()
 	addAimingOffset(ofVec3f::zero());
 
 	getCamera().setFov(50.f);
-	getCamera().setPosition(0.f, 400.f, 500.f);
+	getCamera().setPosition(0.f, 600.f, 500.f);
 	getCamera().setOrientation(ofVec3f(15.f, 0.f, 0.f));
 
 	for (auto j : rep(getNumZ())) {
@@ -52,7 +52,7 @@ void NodeLight::customDraw()
 
 	for (auto i : rep(mParLights.size())) {
 		auto& p = mParLights.at(i);
-		p.angle = ::cos(ofGetElapsedTimef() + i * 0.5) * 45.f;
+		p.angle = ::cos(getElapsedTime() + i * 0.5) * 45.f;
 		p.draw();
 	}
 }

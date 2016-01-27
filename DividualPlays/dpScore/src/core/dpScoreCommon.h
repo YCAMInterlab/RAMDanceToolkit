@@ -122,6 +122,10 @@ ofVec3f unproject(const ofVec2f& screen);
 
 void billboard();
 
+float getElapsedTime();
+void updateElapsedTime();
+void setPauseElapsedTimeCounter(bool pause);
+
 template<class SceneClass>
 void notifyChangeScene()
 {
