@@ -10,6 +10,7 @@
 #define afterWorkshop_FloorLine_h
 
 #include "Drop.h"
+#include "ramCenteredActor.h"
 
 class ObstacleSphere{
 private:
@@ -347,7 +348,7 @@ public:
            
              
                 if(j == ramActor::JOINT_LEFT_HAND){
-                    drawToUnderground(node);
+                 //   drawToUnderground(node);
                 }
                 
                 ofPoint pos = node.getGlobalPosition();

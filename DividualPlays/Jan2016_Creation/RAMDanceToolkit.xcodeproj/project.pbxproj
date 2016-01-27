@@ -129,6 +129,8 @@
 
 /* Begin PBXFileReference section */
 		270D2D9916E475D800D5F750 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../../resources/Icons/icon.icns; sourceTree = "<group>"; };
+		5E846F3C1C58C9DD006FB401 /* FloorLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FloorLine.h; sourceTree = "<group>"; };
+		5E846F3D1C58C9E3006FB401 /* Drop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drop.h; sourceTree = "<group>"; };
 		5ECC0FE31C572F4F00630A39 /* dp16_actorDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dp16_actorDrawer.cpp; sourceTree = "<group>"; };
 		5ECC0FE41C572F4F00630A39 /* dp16_actorDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dp16_actorDrawer.h; sourceTree = "<group>"; };
 		5ECC0FE61C572F7000630A39 /* BigBox_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BigBox_ext.cpp; sourceTree = "<group>"; };
@@ -494,6 +496,8 @@
 		9225EEC01C588FBA00A7FD9A /* 2014Scene */ = {
 			isa = PBXGroup;
 			children = (
+				5E846F3D1C58C9E3006FB401 /* Drop.h */,
+				5E846F3C1C58C9DD006FB401 /* FloorLine.h */,
 				9225EEC11C588FBA00A7FD9A /* BrokenBody.h */,
 				9225EEC21C588FBA00A7FD9A /* BurstBody.h */,
 				9225EEC31C588FBA00A7FD9A /* dp3DDanceMap.h */,
