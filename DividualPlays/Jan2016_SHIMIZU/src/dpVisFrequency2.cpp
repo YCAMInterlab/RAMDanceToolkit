@@ -11,11 +11,8 @@
 
 void Frequency2::setup()
 {
-    ramOscManager::instance().addReceiverTag(&mReceiver1);
-    mReceiver1.addAddress("/dp/toVis/meme1");
-    
-    ramOscManager::instance().addReceiverTag(&mReceiver2);
-    mReceiver2.addAddress("/dp/toVis/meme2");
+    ramOscManager::instance().addReceiverTag(&mReceiver);
+    mReceiver.addAddress("/dp/toVis/meme");
     
     ofSetFrameRate(60);
     ofSetFullscreen(true);
@@ -29,7 +26,7 @@ void Frequency2::setup()
         blue[i] = ofRandom(0,255);
         radius[i] = 10;
     }
-    
+
     position[0].x = 140;
     position[0].y = ofGetHeight() / 3.0;
     position[1].x = 240;
@@ -71,49 +68,56 @@ void Frequency2::draw()
 }
 
 void Frequency2::receiveOSC(){
-    while (mReceiver1.hasWaitingMessages()) {
-        ofxOscMessage m1;
-        mReceiver1.getNextMessage(&m1);
-        blinkSpeed[0] = m1.getArgAsFloat(1);
-        blinkInterval[0] = m1.getArgAsFloat(6);
-    }
-    while (mReceiver2.hasWaitingMessages()) {
-        ofxOscMessage m2;
-        mReceiver2.getNextMessage(&m2);
-        blinkSpeed[1] = m2.getArgAsFloat(1);
-        blinkInterval[1] = m2.getArgAsFloat(6);
+    while(mReceiver.hasWaitingMessages()){
+        ofxOscMessage m;
+        mReceiver.getNextMessage(&m);
+        if(m.getAddress() == "/dp/toVis/meme"){
+            for(int i = 0; i < MEME_NUM; i++){
+                int idx = m.getArgAsFloat(0);
+                if(idx == i){
+                    blinkSpeed[i] = m.getArgAsFloat(1);
+                    blinkInterval[i] = m.getArgAsFloat(6);
+                }
+            }
+        }
     }
 }
 
 
 void Frequency2::caculateFrequency(){
     
-    frequency = 1 / blinkInterval[0];
-    if (blinkSpeed[0]> 0) {
-        if (frequency < 0.1) {
-            frequncy_array[0] ++ ;
-        }else if(frequency >= 0.1 && frequency <0.2){
-            frequncy_array[1] ++ ;
-        }else if (frequency >= 0.2 && frequency < 0.3){
-            frequncy_array[2] ++ ;
-        }else if (frequency >= 0.3 && frequency < 0.4){
-            frequncy_array[3] ++ ;
-        }else if (frequency >= 0.4 && frequency < 0.5){
-            frequncy_array[4] ++ ;
-        }else if (frequency >= 0.5 && frequency < 0.6){
-            frequncy_array[5] ++ ;
-        }else if (frequency >= 0.6 && frequency < 0.7){
-            frequncy_array[6] ++ ;
-        }else if (frequency >= 0.7 && frequency < 0.8){
-            frequncy_array[7] ++ ;
-        }else if (frequency >= 0.8 && frequency < 0.9){
-            frequncy_array[8] ++ ;
-        }else if (frequency >= 0.9 && frequency < 1.0){
-            frequncy_array[9] ++ ;
-        }else if (frequency >= 1.0){
-            frequncy_array[10] ++ ;
+    for (int j = 0; j < 3; j++) {
+        frequency = 1 / blinkInterval[j];
+        if (blinkSpeed[j]> 0) {
+            AnlyizeFrequency();
         }
     }
+}
+void Frequency2::AnlyizeFrequency(){
+    if (frequency < 0.1) {
+        frequncy_array[0] ++ ;
+    }else if(frequency >= 0.1 && frequency <0.2){
+        frequncy_array[1] ++ ;
+    }else if (frequency >= 0.2 && frequency < 0.3){
+        frequncy_array[2] ++ ;
+    }else if (frequency >= 0.3 && frequency < 0.4){
+        frequncy_array[3] ++ ;
+    }else if (frequency >= 0.4 && frequency < 0.5){
+        frequncy_array[4] ++ ;
+    }else if (frequency >= 0.5 && frequency < 0.6){
+        frequncy_array[5] ++ ;
+    }else if (frequency >= 0.6 && frequency < 0.7){
+        frequncy_array[6] ++ ;
+    }else if (frequency >= 0.7 && frequency < 0.8){
+        frequncy_array[7] ++ ;
+    }else if (frequency >= 0.8 && frequency < 0.9){
+        frequncy_array[8] ++ ;
+    }else if (frequency >= 0.9 && frequency < 1.0){
+        frequncy_array[9] ++ ;
+    }else if (frequency >= 1.0){
+        frequncy_array[10] ++ ;
+    }
+
 }
 
 void Frequency2::radiusCaculate(){
@@ -130,7 +134,7 @@ void Frequency2::radiusCaculate(){
 //    }
     
     if (j[0] > 300) {
-        radius[0] = 10;
+        radius[0] = 2;
         j[0] = 0;
     }else{
         radius[0] = radius[0] + 0.5;
@@ -138,7 +142,7 @@ void Frequency2::radiusCaculate(){
     }
     
     if (j[1] > 260) {
-        radius[1] = 10;
+        radius[1] = 2;
         j[1] = 0;
     }else{
         radius[1] = radius[1] + 0.5;
@@ -146,7 +150,7 @@ void Frequency2::radiusCaculate(){
     }
    
     if (j[2] > 230) {
-        radius[2] = 10;
+        radius[2] = 2;
         j[2] = 0;
     }else{
         radius[2] = radius[2] + 0.5;
@@ -154,7 +158,7 @@ void Frequency2::radiusCaculate(){
     }
     
     if (j[3] > 200) {
-        radius[3] = 10;
+        radius[3] = 2;
         j[3] = 0;
     }else{
         radius[3] = radius[3] + 0.5;
@@ -162,7 +166,7 @@ void Frequency2::radiusCaculate(){
     }
     
     if (j[4] > 170) {
-        radius[4] = 10;
+        radius[4] = 2;
         j[4] = 0;
     }else{
         radius[4] = radius[4] + 0.5;
@@ -170,7 +174,7 @@ void Frequency2::radiusCaculate(){
     }
     
     if (j[5] > 140) {
-        radius[5] = 10;
+        radius[5] = 2;
         j[5] = 0;
     }else{
         radius[5] = radius[5] + 0.5;
@@ -178,7 +182,7 @@ void Frequency2::radiusCaculate(){
     }
     
     if (j[6] > 110) {
-        radius[6] = 10;
+        radius[6] = 2;
         j[6] = 0;
     }else{
         radius[6] = radius[6] + 0.5;
@@ -186,7 +190,7 @@ void Frequency2::radiusCaculate(){
     }
     
     if (j[7] > 80) {
-        radius[7] = 10;
+        radius[7] = 2;
         j[7] = 0;
     }else{
         radius[7] = radius[7] + 0.5;
@@ -194,7 +198,7 @@ void Frequency2::radiusCaculate(){
     }
     
     if (j[8] > 50) {
-        radius[8] = 10;
+        radius[8] = 2;
         j[8] = 0;
     }else{
         radius[8] = radius[8] + 0.5;
@@ -202,7 +206,7 @@ void Frequency2::radiusCaculate(){
     }
     
     if (j[9] > 40) {
-        radius[9] = 10;
+        radius[9] = 2;
         j[9] = 0;
     }else{
         radius[9] = radius[9] + 0.5;
@@ -210,7 +214,7 @@ void Frequency2::radiusCaculate(){
     }
     
     if (j[10] > 30) {
-        radius[10] = 10;
+        radius[10] = 2;
         j[10] = 0;
     }else{
         radius[10] = radius[10] + 0.5;

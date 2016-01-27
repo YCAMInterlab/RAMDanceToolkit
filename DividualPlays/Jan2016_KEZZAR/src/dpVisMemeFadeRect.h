@@ -133,7 +133,7 @@ public:
                 if(mIsReceiveOsc){
                     
                     for(int i = 0; i < MEME_NUM; i++){
-                        int idx = m.getArgAsInt32(0);
+                        int idx = m.getArgAsFloat(0);
                         if(idx == i){
                             float speed = m.getArgAsFloat(1);
                             

@@ -10,22 +10,22 @@
 
 void MEME::setup()
 {
-    ramOscManager::instance().addReceiverTag(&mReceiver1);
-    mReceiver1.addAddress("/dp/toVis/meme1");
-    
-    ramOscManager::instance().addReceiverTag(&mReceiver2);
-    mReceiver2.addAddress("/dp/toVis/meme2");
-    
+    ramOscManager::instance().addReceiverTag(&mReceiver);
+    mReceiver.addAddress("/dp/toVis/meme");
+
     ofSetFrameRate(60);
     ofSetFullscreen(true);
     ofSetCircleResolution(64);
     ofEnableAlphaBlending();
     
-        position[0].x = ofGetWidth() / 4.0;
-        position[0].y = ofGetHeight() / 3.0;
+    position[0].x = SINGLE_SCREEN_WIDTH / 5.0;
+    position[0].y = ofGetHeight() / 3.0;
     
-        position[1].x = ofGetWidth() / 2.0;
-        position[1].y = ofGetHeight() / 3.0;
+    position[1].x = SINGLE_SCREEN_WIDTH / 2.0;
+    position[1].y = ofGetHeight() / 3.0;
+    
+    position[2].x = SINGLE_SCREEN_WIDTH / 3.0;
+    position[2].y = ofGetHeight() / 4.0;
 }
 
 void MEME::update()
@@ -41,27 +41,31 @@ void MEME::draw()
     
     ofSetColor(20, 130, 240, 80);
     ofCircle(position[1], radius[1]);
+    
+    ofSetColor(20, 230, 240, 80);
+    ofCircle(position[2], radius[2]);
 }
 
 void MEME::receiveOSC(){
-    while (mReceiver1.hasWaitingMessages()) {
-        ofxOscMessage m1;
-        mReceiver1.getNextMessage(&m1);
-            blinkSpeed[0] = m1.getArgAsFloat(1);
-            blinkInterval[0] = m1.getArgAsFloat(6);
-            printf("%f\n",blinkInterval[0]);
-    }
-    while (mReceiver2.hasWaitingMessages()) {
-        ofxOscMessage m2;
-        mReceiver2.getNextMessage(&m2);
-            blinkSpeed[1] = m2.getArgAsFloat(1);
-            blinkInterval[1] = m2.getArgAsFloat(6);
+    while(mReceiver.hasWaitingMessages()){
+        ofxOscMessage m;
+        mReceiver.getNextMessage(&m);
+            if(m.getAddress() == "/dp/toVis/meme"){
+            for(int i = 0; i < MEME_NUM; i++){
+                int idx = m.getArgAsFloat(0);
+                if(idx == i){
+                    blinkSpeed[i] = m.getArgAsFloat(1);
+                    blinkInterval[i] = m.getArgAsFloat(6);
+                }
+            }
+        }
     }
 }
 
 void MEME::radiusCaculate(){
-    radius[0] = 4 * blinkInterval[0];
-    radius[1] = 4 * blinkInterval[1];
+    for (int i = 0; i < MEME_NUM; i++) {
+        radius[i] = 4*blinkInterval[i];
+    }
 }
 
 

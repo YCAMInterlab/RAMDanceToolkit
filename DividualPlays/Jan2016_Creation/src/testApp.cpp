@@ -148,6 +148,8 @@ dpHakoVisStageBlob                visStage;
 //magnet looper
 magnetLooper looper;
 
+FloorLine floorLine;
+
 #pragma mark - oF methods
 //--------------------------------------------------------------
 void testApp::setup()
@@ -198,6 +200,7 @@ void testApp::setup()
     sceneManager.addScene(mFixed.getPtr());
     sceneManager.addScene(mBroken.getPtr());
     sceneManager.addScene(mBurst.getPtr());
+    sceneManager.addScene(floorLine.getPtr());
     sceneManager.addScene(mThree.getPtr());
 
 	//Sheep
@@ -229,6 +232,7 @@ void testApp::setup()
     sceneManager.addScene(visTornado.getPtr());
     
     sceneManager.addScene(looper.getPtr());
+    
 	
     sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
     sceneManager.setShowAllActors(false);
@@ -300,6 +304,7 @@ void testApp::keyPressed(int key)
 //--------------------------------------------------------------
 void testApp::keyReleased(int key)
 {
+    if(key == 'f')ofToggleFullscreen();
 }
 
 //--------------------------------------------------------------

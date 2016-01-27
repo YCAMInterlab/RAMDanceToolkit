@@ -10,12 +10,14 @@
 #define __RAMDanceToolkit__dpVisBlinkSync__
 
 #include "ramMain.h"
+#include "MemeConstants.h"
+#include "dpConstants.h"
 
 class BlinkSync: public ramBaseScene{
     
 public:
     // GUIに表示されるシーン名をここで指定します。
-    string getName() const { return "BlinkSync"; }
+    string getName() const { return "dpVisBlinkSync"; }
     
     void setup();
     void update();
@@ -28,15 +30,13 @@ public:
     
 private:
     
-    ramOscReceiveTag mReceiver1;
-    ramOscReceiveTag mReceiver2;
+    ramOscReceiveTag mReceiver;
     string oscString;
     
-    static const int NUM = 3;
     //position
-    ofVec2f position[NUM];
-    float blinkInterval[NUM];
-    float radius[NUM];
+    ofVec2f position[MEME_NUM];
+    float blinkInterval[MEME_NUM];
+    float radius[MEME_NUM];
     
 };
 

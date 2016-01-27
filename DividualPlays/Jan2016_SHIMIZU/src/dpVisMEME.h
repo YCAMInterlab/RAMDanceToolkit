@@ -10,12 +10,15 @@
 #define __RAMDanceToolkit__dpVisMEME__
 
 #include "ramMain.h"
+#include "MemeConstants.h"
+#include "dpConstants.h"
+
 
 class MEME: public ramBaseScene{
     
 public:
     // GUIに表示されるシーン名をここで指定します。
-    string getName() const { return "MEME"; }
+    string getName() const { return "dpVisMemeTest"; }
     
     void setup();
     void update();
@@ -26,19 +29,15 @@ public:
         
 private:
   
-    ramOscReceiveTag mReceiver1;
-    ramOscReceiveTag mReceiver2;
+    ramOscReceiveTag mReceiver;
     string oscString;
-    
-    static const int NUM = 3;
     //position
-    ofVec2f position[NUM];
+    ofVec2f position[MEME_NUM];
     
-    float blinkSpeed[NUM];
-    float blinkStrength[NUM];
-    float blinkInterval[NUM];
-    
-    float radius[NUM];
+    float blinkSpeed[MEME_NUM];
+    float blinkStrength[MEME_NUM];
+    float blinkInterval[MEME_NUM];
+    float radius[MEME_NUM];
     
 };
 
