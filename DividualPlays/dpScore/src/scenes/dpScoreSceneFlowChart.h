@@ -12,6 +12,7 @@
 #include "dpScoreSceneBodyBase.h"
 #include "ofxMotioner.h"
 #include "ofxTrueTypeFontUC.h"
+#include "ofxOsc.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -106,6 +107,7 @@ private:
     
 	ofTrueTypeFont mFont, mFontSmall;
     ofxTrueTypeFontUC mFontJP;
+    ofxOscSender mOscSender;
     
 	map<string, ofPtr<BaseNode>> mNodes;
     vector<vector<string>> mOrders;

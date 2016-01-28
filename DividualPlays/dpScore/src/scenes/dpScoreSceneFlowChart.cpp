@@ -20,6 +20,8 @@
 #include "dpScoreNodeComputer.h"
 #include "dpScoreScoped.h"
 #include "dpScoreToolBox.h"
+#include "ofxException.h"
+#include "ofxXmlSettings.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -61,6 +63,15 @@ void SceneFlowChart::initialize()
 	}
 
 	changeScene(SCENE_MOVE);
+
+	ofxXmlSettings xml;
+	xml.load(kXmlSettingsPathFlowChart);
+	xml.pushTag("lighting");
+	auto host = xml.getAttribute("osc", "host", "127.0.0.1");
+	auto port = xml.getAttribute("osc", "port", 10001);
+	xml.popTag();
+
+	mOscSender.setup(host, port);
 }
 
 void SceneFlowChart::setupNodes()
@@ -231,16 +242,26 @@ void SceneFlowChart::updateTime()
 	if (mTimeCamMove >= prop.moveSpan + prop.idleSpan) {
 		mTimeCamMove = 0.f;
 		++mNodeIdx %= mOrders.at(mOrderIdx).size();
+
+		if (mCurrentScene == SCENE_MOVE || mCurrentScene == SCENE_CIRCULATION || mCurrentScene == SCENE_MAIN) {
+			ofxOscMessage m;
+			m.setAddress("/dp/light/moving");
+            auto s = getCurrentNodeName();
+            ofStringReplace(s, "dp::score::Node", "");
+			m.addStringArg(s);
+			m.addFloatArg(mProperties[mCurrentScene].moveSpan);
+			mOscSender.sendMessage(m);
+		}
 	}
 }
 
 void SceneFlowChart::updateWithSkeleton()
 {
-    mSkeletons.assign(getNumSkeletons(), Skeleton::create());
-    for (auto i : rep(getNumSkeletons())) {
-        *mSkeletons.at(i) = *getSkeleton(i);
-    }
-    
+	mSkeletons.assign(getNumSkeletons(), Skeleton::create());
+	for (auto i : rep(getNumSkeletons())) {
+		*mSkeletons.at(i) = *getSkeleton(i);
+	}
+
 	// update text
 	if (mSkeletons.size() >= 2) {
 		getNode<NodeDancer>()->title = "Dancers";
@@ -381,7 +402,7 @@ void SceneFlowChart::drawNodes()
 
 void SceneFlowChart::drawDancers()
 {
-    for (auto skl : mSkeletons) {
+	for (auto skl : mSkeletons) {
 		for (auto& n : skl->getJoints()) {
 			n.draw();
 			if (!n.getParent()) continue;
@@ -397,7 +418,7 @@ void SceneFlowChart::drawLines()
 	ScopedStyle s;
 	setStyle();
 	ofDisableDepthTest();
-    ofSetColor(color::kMain);
+	ofSetColor(color::kMain);
 	auto currNode = getCurrentNode();
 	auto nextNode = getNextNode();
 	for (auto i : rep(currNode->getNumAimingPositions())) {
@@ -489,7 +510,7 @@ void SceneFlowChart::drawToolKit()
 		}
 	}
 	ofEnableDepthTest();
-    for (auto skl : mSkeletons) {
+	for (auto skl : mSkeletons) {
 		for (auto& n : skl->getJoints()) {
 			ofSetColor(ofColor::magenta);
 			n.draw();
@@ -680,9 +701,9 @@ void SceneFlowChart::keyPressed(int key)
 	case '5': changeScene(SCENE_MEMORY); break;
 	case '6': changeScene(SCENE_DEBUG); break;
 	case ' ':
-            mPaused ^= true;
-            setPauseElapsedTimeCounter(mPaused);
-            break;
+		mPaused ^= true;
+		setPauseElapsedTimeCounter(mPaused);
+		break;
 	case '+':
 	case '=':
 		(++mOrderIdx) %= mOrders.size();
@@ -699,6 +720,9 @@ void SceneFlowChart::keyPressed(int key)
 void SceneFlowChart::changeScene(int index)
 {
 	mCurrentScene = index;
+	ofxOscMessage m;
+	m.setAddress("/dp/light/moving");
+
 	switch (index) {
 	case SCENE_MOVE:
 		mNodeIdx = 0;
@@ -708,14 +732,23 @@ void SceneFlowChart::changeScene(int index)
 		mTimeCamRotation = HALF_PI * (1.f / kMainCamSpeed);
 		break;
 	case SCENE_TPS:
+		m.addStringArg("Stage");
+		m.addFloatArg(0.f);
+		mOscSender.sendMessage(m);
 		break;
 	case SCENE_CIRCULATION:
 		getNode<NodeHakoniwa>()->setFocus(false);
 		break;
 	case SCENE_MEMORY:
 		mTimeCamRotation = 0.f;
+		m.addStringArg("Off");
+		m.addFloatArg(0.f);
+		mOscSender.sendMessage(m);
 		break;
 	case SCENE_DEBUG:
+		m.addStringArg("Stage");
+		m.addFloatArg(0.f);
+		mOscSender.sendMessage(m);
 		break;
 	default:
 		break;
