@@ -80,65 +80,8 @@ void dpConductor::receiveMasterHakoniwa(ofxOscMessage m)
 		(m.getArgAsString(0).substr(0,5) == "dpVis"))//箱庭の分配処理
 	{
 		string sceneName = m.getArgAsString(0);
-		string alternativeVis;
-		if (m.getArgAsString(0).substr(0, 3) == "dpH")
-		{
-			alternativeVis = "dpVis" + sceneName.substr(3, sceneName.length() - 3);
-		}
-		else if (m.getArgAsString(0).substr(0, 5) == "dpVis")
-		{
-			alternativeVis = "dpH" + sceneName.substr(5, sceneName.length() - 5);
-			
-			string sw = alternativeVis;
-			alternativeVis = sceneName;
-			sceneName = sw;
-		}
 		
-		bool sceneEnable = m.getArgAsInt32(1);
-		bool ViewX = m.getArgAsInt32(2);
-		bool ViewY = m.getArgAsInt32(3);
-		
-		//カメラには素直にシーンフラグを送る
-		cameraCon->setCameraSlot(sceneName, sceneEnable, ViewX, ViewY);
-
-		//箱庭のみAに割り振り
-		if (sceneEnable)
-		{
-			
-			for (int i = 0;i < 2;i++)
-			{
-				string hako;
-				if (i == 0) hako = "dpH";
-				if (i == 1) hako = "dpVis";
-				sceneCon->disableScene(hako+"SandStorm", false);
-				sceneCon->disableScene(hako+"SandStorm", true);
-				
-				sceneCon->disableScene(hako+"Tornado", false);
-				sceneCon->disableScene(hako+"Tornado", true);
-				
-				sceneCon->disableScene(hako+"Worm", false);
-				sceneCon->disableScene(hako+"Worm", true);
-				
-				sceneCon->disableScene(hako+"Struggle", false);
-				sceneCon->disableScene(hako+"Struggle", true);
-				
-				sceneCon->disableScene(hako+"MagPendulum", false);
-				sceneCon->disableScene(hako+"MagPendulum", true);
-				
-				sceneCon->disableScene(hako+"ServoPendulum", false);
-				sceneCon->disableScene(hako+"ServoPendulum", true);
-			}
-			
-			sceneCon->setScene(alternativeVis, true , ViewY, ViewY);
-			sceneCon->setScene(alternativeVis, false, ViewX, ViewY);
-			sceneCon->setScene(sceneName, true, false, false);
-			sceneCon->disableScene(sceneName, false);
-		}else{
-			sceneCon->disableScene(alternativeVis, true);
-			sceneCon->disableScene(alternativeVis, false);
-			sceneCon->disableScene(sceneName, true);
-			sceneCon->disableScene(sceneName, false);
-		}
+		switchHakoniwa(sceneName, m.getArgAsInt32(1), m.getArgAsInt32(2), m.getArgAsInt32(3));
 		
 	}else{
 		
@@ -173,4 +116,41 @@ ofPtr<sectionSet> dpConductor::newSection()
 	ofPtr<sectionSet> ss = ofPtr<sectionSet>(new sectionSet);
 	sections.push_back(ss);
 	return ss;
+}
+
+void dpConductor::switchHakoniwa(string nameHakoniwa, bool enable, bool A, bool B)
+{
+	string baseName;
+	string hakoName;
+	string VisName;
+	
+	if (nameHakoniwa.substr(0,3) == "dpH")
+		baseName = nameHakoniwa.substr(3, nameHakoniwa.length() - 3);
+	
+	if (nameHakoniwa.substr(0,5) == "dpVis")
+		baseName = nameHakoniwa.substr(5, nameHakoniwa.length() - 5);
+	
+	hakoName = "dpH" + baseName;
+	VisName = "dpVis" + baseName;
+	
+	cout << "SWH::hakoniwa name : " << hakoName << endl;
+	cout << "SWH::hakoVis  name : " << VisName << endl;
+	
+	cameraCon->setCameraSlot(hakoName, enable, A, B);
+	
+	if (enable)
+	{
+		sceneCon->setScene(hakoName, true, false, false);
+		sceneCon->setScene(hakoName, true, false, false);
+		sceneCon->setScene(VisName, false, A, B);
+		sceneCon->setScene(VisName, true, A, B);
+	}
+	else
+	{//箱庭からのDisable処理
+		sceneCon->disableScene(hakoName, true);
+		sceneCon->disableScene(hakoName, false);
+		sceneCon->disableScene(VisName, true);
+		sceneCon->disableScene(VisName, false);
+		
+	}
 }

@@ -23,6 +23,8 @@ public:
 	void callSection(string name);
 	void receiveMasterHakoniwa(ofxOscMessage m);
 	
+	void switchHakoniwa(string nameHakoniwa,bool enable, bool A, bool B);
+	
 	ofPtr<sectionSet> newSection();
 	
 	vector< ofPtr<sectionSet> > sections;

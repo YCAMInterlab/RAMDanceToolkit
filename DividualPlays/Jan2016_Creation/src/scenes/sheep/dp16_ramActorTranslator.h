@@ -46,8 +46,6 @@ private:
 	string	nameList[NUM_DRAWACTOR];
 	ofFloatColor palette[NUM_DRAWACTOR];
 	
-	ofLight light;
-	
 	bool viewGridFloor;
 	float floor_scale;
 	float floor_grid_span;

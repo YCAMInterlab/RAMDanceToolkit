@@ -136,8 +136,6 @@ dp16_actorDrawer mActorDrawer;
 
 #include "dpHakoVisBug.h"
 
-#include "dpHakoVisMag.h"
-
 // sand
 dpHakoniwaSand hakoniwaSand;
 dpHakoVisSandStorm visSandStorm;
@@ -168,8 +166,6 @@ dpHakoVisStageBlob                visStage;
 magnetLooper looper;
 
 FloorLine floorLine;
-
-dpHakoVisMag mVisMag;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -255,13 +251,11 @@ void testApp::setup()
     //tornado
     sceneManager.addScene(hakoniwaTornado.getPtr());
     sceneManager.addScene(visTornado.getPtr());
-    
-    sceneManager.addScene(mVisMag.getPtr());
-    
+	
     sceneManager.addScene(looper.getPtr());
     sceneManager.addScene(allHakoniwaMove.getPtr());
 	
-    sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
+//    sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
     sceneManager.setShowAllActors(false);
 
     doSomething.setup();

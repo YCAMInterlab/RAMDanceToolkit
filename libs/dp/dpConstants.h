@@ -10,6 +10,7 @@
 #define RAMDanceToolkit_dpConstants_h
 
 //#define DEBUG_MACBOOK_AIR
+#define DEBUG_MACBOOK_PRO
 
 #if defined(DEBUG_MACBOOK_AIR)
 static const int SINGLE_SCREEN_WIDTH = 1366/2;

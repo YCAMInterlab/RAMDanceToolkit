@@ -201,6 +201,8 @@
 		9225EEC51C588FBA00A7FD9A /* ThreePointFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreePointFlow.h; sourceTree = "<group>"; };
 		9225EED31C58DC9000A7FD9A /* dpAllHakoniwaMove.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpAllHakoniwaMove.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		C60248EF1C59B6B30015DCDD /* BurstBody_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BurstBody_ext.h; sourceTree = "<group>"; };
+		C60248F01C59B6CC0015DCDD /* dpHakoVisBug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoVisBug.h; sourceTree = "<group>"; };
 		C64C2FC21C54E4B9005E9BB2 /* dp16_camera_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dp16_camera_controller.cpp; sourceTree = "<group>"; };
 		C64C2FC31C54E4B9005E9BB2 /* dp16_camera_controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dp16_camera_controller.h; sourceTree = "<group>"; };
 		C6A982B51C55A4670055D47B /* BrokenBody_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BrokenBody_ext.cpp; path = src/scenes/sheep/BrokenBody_ext.cpp; sourceTree = SOURCE_ROOT; };
@@ -370,6 +372,7 @@
 				9225EED31C58DC9000A7FD9A /* dpAllHakoniwaMove.h */,
 				5EF92F611C57B59C00F6916F /* dpHakoVisVecLineCircle.h */,
 				5EF92F621C57B59C00F6916F /* dpHakoVisWorm.h */,
+				C60248F01C59B6CC0015DCDD /* dpHakoVisBug.h */,
 				5EF92F631C57B59C00F6916F /* iceLine */,
 				5EF92F681C57B59C00F6916F /* util */,
 			);
@@ -507,6 +510,7 @@
 		9225EEC01C588FBA00A7FD9A /* 2014Scene */ = {
 			isa = PBXGroup;
 			children = (
+				C60248EF1C59B6B30015DCDD /* BurstBody_ext.h */,
 				5E846F3D1C58C9E3006FB401 /* Drop.h */,
 				5E846F3C1C58C9DD006FB401 /* FloorLine.h */,
 				9225EEC11C588FBA00A7FD9A /* BrokenBody.h */,
@@ -875,8 +879,8 @@
 		C6C22F391C54629E002B38EC /* distanceMetaball */ = {
 			isa = PBXGroup;
 			children = (
-				C6C22F3A1C54629E002B38EC /* distanceMetaball.cpp */,
 				C6C22F3B1C54629E002B38EC /* distanceMetaball.h */,
+				C6C22F3A1C54629E002B38EC /* distanceMetaball.cpp */,
 				C6C22F3C1C54629E002B38EC /* ofxMetaballs */,
 			);
 			path = distanceMetaball;
