@@ -52,6 +52,7 @@
 		C6C22F6A1C54A042002B38EC /* lineDrawing_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22F681C54A042002B38EC /* lineDrawing_ext.cpp */; };
 		D278BA7C1C59E32200B2951E /* ThreePoints_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D278BA7A1C59E32200B2951E /* ThreePoints_ext.cpp */; settings = {ASSET_TAGS = (); }; };
 		D278BA7E1C59E58500B2951E /* SphereMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D278BA7D1C59E58500B2951E /* SphereMesh.cpp */; settings = {ASSET_TAGS = (); }; };
+		D278BA861C59EE3600B2951E /* Donuts_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D278BA841C59EE3600B2951E /* Donuts_ext.cpp */; settings = {ASSET_TAGS = (); }; };
 		D283B3181C58809D00B0E900 /* UpsideDown_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */; };
 		D2A4E4481C58D0C700BEAA84 /* HastyChase_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2A4E4461C58D0C700BEAA84 /* HastyChase_ext.cpp */; };
 		D2A4E44B1C58DA0700BEAA84 /* Monster_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2A4E4491C58DA0700BEAA84 /* Monster_ext.cpp */; };
@@ -280,6 +281,8 @@
 		D278BA7B1C59E32200B2951E /* ThreePoints_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreePoints_ext.h; sourceTree = "<group>"; };
 		D278BA7D1C59E58500B2951E /* SphereMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphereMesh.cpp; sourceTree = "<group>"; };
 		D278BA7F1C59E61E00B2951E /* BurstBody_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BurstBody_ext.h; sourceTree = "<group>"; };
+		D278BA841C59EE3600B2951E /* Donuts_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Donuts_ext.cpp; sourceTree = "<group>"; };
+		D278BA851C59EE3600B2951E /* Donuts_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Donuts_ext.h; sourceTree = "<group>"; };
 		D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UpsideDown_ext.cpp; sourceTree = "<group>"; };
 		D283B3171C58809D00B0E900 /* UpsideDown_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpsideDown_ext.h; sourceTree = "<group>"; };
 		D2A4E4461C58D0C700BEAA84 /* HastyChase_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HastyChase_ext.cpp; sourceTree = "<group>"; };
@@ -857,6 +860,8 @@
 				D2A4E4541C58E32F00BEAA84 /* MixMonsterScene_ext.h */,
 				D278BA7A1C59E32200B2951E /* ThreePoints_ext.cpp */,
 				D278BA7B1C59E32200B2951E /* ThreePoints_ext.h */,
+				D278BA841C59EE3600B2951E /* Donuts_ext.cpp */,
+				D278BA851C59EE3600B2951E /* Donuts_ext.h */,
 			);
 			name = onc;
 			path = scenes/onc;
@@ -1120,6 +1125,7 @@
 				D283B3181C58809D00B0E900 /* UpsideDown_ext.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
 				5EF92F761C57B59C00F6916F /* dpHakoniwaMagnetPendulum.cpp in Sources */,
+				D278BA861C59EE3600B2951E /* Donuts_ext.cpp in Sources */,
 				5EF92F771C57B59C00F6916F /* dpHakoniwaSand.cpp in Sources */,
 				C6C22F481C54629E002B38EC /* ChainBtShapeDrawer.cpp in Sources */,
 				5EF92F781C57B59C00F6916F /* twistFinder.cpp in Sources */,
