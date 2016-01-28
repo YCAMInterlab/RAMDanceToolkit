@@ -21,6 +21,7 @@ public:
 	
 	void setSections();
 	void callSection(string name);
+	void receiveMasterHakoniwa(ofxOscMessage m);
 	
 	ofPtr<sectionSet> newSection();
 	
@@ -30,7 +31,7 @@ public:
 	ofPtr<cameraUnitManager>	cameraCon;
 	ofPtr<environmentManager>	envCon;
 	
-	ofxOscReceiver receiver;
+	string display[6];
 };
 
 #endif /* dpConductor_h */

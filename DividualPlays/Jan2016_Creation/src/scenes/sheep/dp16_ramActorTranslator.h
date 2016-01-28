@@ -10,6 +10,7 @@
 #define dp16_ramActorTranslator_h
 
 #include "ramMain.h"
+#include "dpConstants.h"
 
 class dp16_ramActorTranslator : public ramBaseScene{
 public:
@@ -24,15 +25,33 @@ public:
 	void draw();
 
 	void exit();
+	void drawTargetActor(int id, ramNodeArray & actor);
 	
 private:
 	
-	int fixer;
 	ofVec3f offset;
-	bool floorStay;
-	bool autoLayout;
-	bool drawFloor;
-	float margine;
+	int		fixer;
+	bool	floorStay;
+	bool	autoLayout;
+	bool	drawFloor;
+	float	margine;
+
+	//ActorDrawwe=========================
+	enum{NUM_DRAWACTOR = 4};
+	
+	float base_saturation;
+	float base_brightness;
+	
+	bool	visibles[NUM_DRAWACTOR];
+	string	nameList[NUM_DRAWACTOR];
+	ofFloatColor palette[NUM_DRAWACTOR];
+	
+	ofLight light;
+	
+	bool viewGridFloor;
+	float floor_scale;
+	float floor_grid_span;
+
 };
 
 #endif /* dp16_ramActorTranslator_h */

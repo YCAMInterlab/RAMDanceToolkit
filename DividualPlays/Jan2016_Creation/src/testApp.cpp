@@ -183,7 +183,6 @@ void testApp::setup()
 	
 	sceneManager.addScene(mCameraController.getPtr());
 	sceneManager.addScene(mRamActorTranslator.getPtr());
-	sceneManager.addScene(mActorDrawer.getPtr());
 	
 	sceneManager.addScene(mLine_ext.getPtr());
 	sceneManager.addScene(mBrokenBody_ext.getPtr());

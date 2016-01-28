@@ -16,13 +16,26 @@
 class dpConductionGUI{
 public:
 	
+	ofxUICanvas sceneList;
 	ofxUICanvas gui;
 	
+	ofxUICanvas dynamicUI;
+	string currentDUI;
+	
 	void setup();
+	void listUp();
+	void setScene(ofxOscMessage m);
+	void setDUI(ofxOscMessage m);
 	void event(ofxUIEventArgs &e);
 	
-	ofxUIDropDownList* currentScene;
+	void requestCurrentUI();
+	
+	ofxUIRadio*			currentScene;
+	ofxUIDropDownList*	jointSel;
+	ofxUIDropDownList*	actorSel;
 	vector<string> scenes_for_test;
+	vector<string> ActorList;
+	vector<string> jointList;
 	
 	bool bExclusive;
 

@@ -24,4 +24,6 @@ class ofApp : public ofBaseApp{
 
 	dpConductionGUI gui;
 	ofPtr<dpConductor> dpCon;
+	
+	ofxOscReceiver receiver;
 };

@@ -19,8 +19,10 @@ struct sceneSet
 {
 	string	name;
 	bool	enable;
-	bool	displayX;
-	bool	displayY;
+	bool	RDTK1_A;
+	bool	RDTK1_B;
+	bool	RDTK2_A;
+	bool	RDTK2_B;
 };
 
 struct extSet
@@ -70,7 +72,7 @@ public:
 			  ofPtr<cameraUnitManager> cam,
 			  ofPtr<environmentManager> env);
 	
-	void addScene		(string scene, bool displayX, bool displayY);
+	void addScene		(string scene, bool A_1, bool B_1, bool A_2, bool B_2);
 	void addExtractor	(string scene, string actor, Joint node);
 	void addTuneF		(string scene, string type, float value);
 	void addTuneT		(string scene, string type, bool value);

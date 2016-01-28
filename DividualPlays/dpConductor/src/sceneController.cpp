@@ -20,6 +20,11 @@ void sceneController::setup(string RDTK1_addr, string RDTK2_addr)
 	
 	addr_rdtk1 = RDTK1_addr;
 	addr_rdtk2 = RDTK2_addr;
+	
+	scene_rdtk1_a = "RDTK_1_A";
+	scene_rdtk1_b = "RDTK_1_B";
+	scene_rdtk2_a = "RDTK_2_A";
+	scene_rdtk2_b = "RDTK_2_B";
 }
 
 void sceneController::disableScene(string name, bool RDTK_isA)
@@ -33,19 +38,34 @@ void sceneController::disableScene(string name, bool RDTK_isA)
 	sendMessageSelect(RDTK_isA ? addr_rdtk1 : addr_rdtk2, m);
 }
 
-void sceneController::setScene(string name, bool RDTK_isA, bool viewA, bool viewB)
+void sceneController::setScene(string name, bool RDTK_is1, bool viewA, bool viewB)
 {
+	if (RDTK_is1)
+	{
+		if (viewA) scene_rdtk1_a = name;
+		if (viewB) scene_rdtk1_b = name;
+	}else
+	{
+		if (viewA) scene_rdtk2_a = name;
+		if (viewB) scene_rdtk2_b = name;
+	}
+	
 	ofxOscMessage m;
 	m.setAddress(OSC_SET_SCENE_ADDR);
 	m.addStringArg(name);
 	m.addIntArg(1);
 	m.addIntArg(viewA);
 	m.addIntArg(viewB);
-	sendMessageSelect(RDTK_isA ? addr_rdtk1 : addr_rdtk2, m);
+	sendMessageSelect(RDTK_is1 ? addr_rdtk1 : addr_rdtk2, m);
 }
 
 void sceneController::setScene_both(string name, bool viewA, bool viewB)
 {
+	if (viewA) scene_rdtk1_a = name;
+	if (viewB) scene_rdtk1_b = name;
+	if (viewA) scene_rdtk2_a = name;
+	if (viewB) scene_rdtk2_b = name;
+	
 	ofxOscMessage m;
 	m.setAddress(OSC_SET_SCENE_ADDR);
 	m.addStringArg(name);
@@ -58,7 +78,7 @@ void sceneController::setScene_both(string name, bool viewA, bool viewB)
 void sceneController::clearExtractor(string scene)
 {
 	ofxOscMessage m;
-	m.setAddress(OSC_EXTRACTOR_ADDR+scene+"clear");
+	m.setAddress(OSC_EXTRACTOR_ADDR+scene+"/clear");
 	m.addStringArg(scene);
 	sendMessage(m);
 }

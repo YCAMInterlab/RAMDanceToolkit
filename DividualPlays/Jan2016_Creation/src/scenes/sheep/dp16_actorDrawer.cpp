@@ -10,9 +10,9 @@
 
 void dp16_actorDrawer::setupControlPanel()
 {
-	nameList[2] = "kojiri";
 	nameList[0] = "miyashita";
 	nameList[1] = "shimaji";
+	nameList[2] = "kojiri";
 	nameList[3] = "ando";
 	
 //	nameList[0] = "Ando_2012-09-01_19-19-45";
@@ -41,7 +41,7 @@ void dp16_actorDrawer::setupControlPanel()
 	
 	base_saturation = 0.6;
 	base_brightness = 0.8;
-	
+
 	floor_scale = 300.0;
 	floor_grid_span = 50;
 }

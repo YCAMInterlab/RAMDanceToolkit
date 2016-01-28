@@ -42,5 +42,5 @@ void environmentManager::setActorMargine(float value)
 
 void environmentManager::setActorDraw(string name, bool view)
 {
-	setToggleTune("dp16_actorDrawer", "V_"+name, view);
+	setToggleTune("dp16_ramActorTranslator", "V_"+name, view);
 }

@@ -15,12 +15,14 @@ void sectionSet::init(ofPtr<sceneController> scn, ofPtr<cameraUnitManager> cam, 
 	_environment = env;
 }
 
-void sectionSet::addScene(string scene, bool displayX, bool displayY)
+void sectionSet::addScene(string scene, bool A_1, bool B_1, bool A_2, bool B_2)
 {
 	sceneSet ss;
 	ss.name = scene;
-	ss.displayX = displayX;
-	ss.displayY = displayY;
+	ss.RDTK1_A = A_1;
+	ss.RDTK1_B = B_1;
+	ss.RDTK2_A = A_2;
+	ss.RDTK2_B = B_2;
 	sceneList.push_back(ss);
 }
 
@@ -119,11 +121,11 @@ void sectionSet::doSection()
 	//シーン登録
 	for (int i = 0;i < sceneList.size();i++)
 	{
-		if (sceneList[i].displayX)
-			_scene->setScene(sceneList[i].name, true , true, true);
-		
-		if (sceneList[i].displayY)
-			_scene->setScene(sceneList[i].name, false, true, true);
+		if (sceneList[i].RDTK1_A || sceneList[i].RDTK1_B)
+			_scene->setScene(sceneList[i].name, true , sceneList[i].RDTK1_A, sceneList[i].RDTK1_B);
+
+		if (sceneList[i].RDTK2_A || sceneList[i].RDTK2_B)
+			_scene->setScene(sceneList[i].name, false, sceneList[i].RDTK2_A, sceneList[i].RDTK2_B);
 	}
 	
 	//Extractorの登録

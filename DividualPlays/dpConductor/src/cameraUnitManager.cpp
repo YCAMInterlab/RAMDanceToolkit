@@ -17,6 +17,7 @@ void cameraUnitManager::setCameraSlot(string name, bool enable, bool viewA, bool
 {
 	ofxOscMessage m;
 	m.setAddress(OSC_SET_SCENE_ADDR);
+	m.addStringArg(name);
 	m.addIntArg(enable);
 	m.addIntArg(viewA);
 	m.addIntArg(viewB);

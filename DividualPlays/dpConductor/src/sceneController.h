@@ -34,6 +34,11 @@ public:
 	void	clearScene();
 	
 	string addr_rdtk1, addr_rdtk2;
+	
+	string scene_rdtk1_a;
+	string scene_rdtk1_b;
+	string scene_rdtk2_a;
+	string scene_rdtk2_b;
 };
 
 #endif /* sceneController_h */
