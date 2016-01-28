@@ -13,8 +13,8 @@ void HakoniwaGearMove::setupControlPanel(){
     mDatahow = false;
     mAllTurn = false;
     mManual = false;
-    mGear1 = true;
-    mGear2 = true;
+    mGear1 = false;
+    mGear2 = false;
     mGear3 = true;
     mAllGearReverse = true;
     mGear1Reverse = true;
@@ -25,10 +25,13 @@ void HakoniwaGearMove::setupControlPanel(){
     mMin1speed = 600;
     mMax2speed = 25000;
     mMin2speed = 5000;
-    mMax3speed = 6500;
-    mMin3speed = 2500;
+//    mMax3speed = 6500;
+//    mMin3speed = 2500;
+    mMax3speed = 13000;
+    mMin3speed = 1500;
     mScale = 150;
     mScale2 = 90;
+    mScale3 = 150;
     
     ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
     panel->addToggle("data show", &mDatahow);
@@ -36,15 +39,15 @@ void HakoniwaGearMove::setupControlPanel(){
     panel->addToggle("all gear reverse", &mAllGearReverse);
     panel->addIntSlider("all gear Speed", 100, 35000, &mAllGearSpeed);
     panel->addToggle("manual turn", &mManual);
-    panel->addToggle("gear1", &mGear1);
-    panel->addToggle("gear1 reverse", &mGear1Reverse);
-    panel->addIntSlider("TrurnGear1Speed", 600, 10000, &mGear1Speed);
-    panel->addToggle("gear2", &mGear2);
-    panel->addToggle("gear2 reverse", &mGear2Reverse);
-    panel->addIntSlider("TrurnGear2Speed", 5000, 25000, &mGear2Speed);
+//    panel->addToggle("gear1", &mGear1);
+//    panel->addToggle("gear1 reverse", &mGear1Reverse);
+//    panel->addIntSlider("TrurnGear1Speed", 600, 10000, &mGear1Speed);
+//    panel->addToggle("gear2", &mGear2);
+//    panel->addToggle("gear2 reverse", &mGear2Reverse);
+//    panel->addIntSlider("TrurnGear2Speed", 5000, 25000, &mGear2Speed);
     panel->addToggle("gear3", &mGear3);
     panel->addToggle("gear3 reverse", &mGear3Reverse);
-    panel->addIntSlider("TrurnGear3Speed", 2500, 6500, &mGear3Speed);
+    panel->addIntSlider("TrurnGear3Speed", 1500, 13000, &mGear3Speed);
     
     ofAddListener(panel->newGUIEvent, this, &HakoniwaGearMove::onPanelChanged);
     motionExtractor.setupControlPanel(this,ofPoint(340,30));
@@ -94,25 +97,32 @@ void HakoniwaGearMove::draw(){
     if (ofGetFrameNum() % 30 == 0){
         
         for (int i = 0;i < motionExtractor.getNumPort();i++){
-            if (motionExtractor.getActorNameAt(i) == "sasamoto"){
-                mGear1Count += motionExtractor.getVelocitySpeedAt(i);
-            }
-            if (motionExtractor.getActorNameAt(i) == "kojiri"){
-                mGear2Count += motionExtractor.getVelocitySpeedAt(i);
-            }
-            if (motionExtractor.getActorNameAt(i) == "kawaguchi"){
+            if (motionExtractor.getActorNameAt(i) == "ando"){
+//            if (motionExtractor.getActorNameAt(i) == "miyashita"){
+//            if (motionExtractor.getActorNameAt(i) == "shimaji"){
+//            if (motionExtractor.getActorNameAt(i) == "kojiri"){
                 mGear3Count += motionExtractor.getVelocitySpeedAt(i);
             }
+
+//            if (motionExtractor.getActorNameAt(i) == "sasamoto"){
+//                mGear1Count += motionExtractor.getVelocitySpeedAt(i);
+//            }
+//            if (motionExtractor.getActorNameAt(i) == "kojiri"){
+//                mGear2Count += motionExtractor.getVelocitySpeedAt(i);
+//            }
+//            if (motionExtractor.getActorNameAt(i) == "kawaguchi"){
+//                mGear3Count += motionExtractor.getVelocitySpeedAt(i);
+//            }
         }
         
         mTotalcount++;
         
         if ((mManual != true && mTotalcount >= 10)) {
-            mGear1Speed = mGear1Count * mScale;
-            mGear2Speed = mGear2Count * mScale;
-            mGear3Speed = mGear3Count * mScale2;
-            cout << "Gear1Speed " << mGear1Speed << endl;
-            cout << "Gear2Speed " << mGear2Speed << endl;
+//            mGear1Speed = mGear1Count * mScale;
+//            mGear2Speed = mGear2Count * mScale;
+            mGear3Speed = mGear3Count * mScale3;
+//            cout << "Gear1Speed " << mGear1Speed << endl;
+//            cout << "Gear2Speed " << mGear2Speed << endl;
             cout << "Gear3Speed " << mGear3Speed << endl;
             
             //test osc send
@@ -156,16 +166,16 @@ void HakoniwaGearMove::draw(){
             if(mGear3 == true){
                 if (mManual != true) {
                     //逆回転はしない
-                    //            float x = ofRandom(0,1);
-                    //            if ( x > 0.51 ){
-                    //                mgear3Reverse = true;
-                    //            }else{
-                    //                mgear3Reverse = false;
-                    //            }
+                    float x = ofRandom(0,1);
+                    if ( x > 0.51 ){
+                        mGear3Reverse = true;
+                    }else{
+                        mGear3Reverse = false;
+                    }
                     if ( mGear3Speed >= mMax3speed) {
-                        OnestepTurn(2, mMax3speed, true);
+                        OnestepTurn(2, mMax3speed, mGear3Reverse);
                     }else if( mGear3Speed <= mMin3speed){
-                        OnestepTurn(2, mMin3speed, true);
+                        OnestepTurn(2, mMin3speed, mGear3Reverse);
                     }else{
                         OnestepTurn(2, mGear3Speed, mGear3Reverse);
                     }
