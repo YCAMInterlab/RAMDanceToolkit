@@ -13,33 +13,41 @@
 
 #include "SphereMesh.h"
 #include "ramGeometry.h"
+#include "ramMotionExtractor.h"
 
-class ThreePoints_ext : public ramBaseScene
+class ThreePoints_ext: public ramBaseScene
 {
 public:
-    static const ofColor cyanPrint;
-    static const ofColor magentaPrint;
-    static const ofColor yellowPrint;
-    
-    ofxUIToggle *mToggles[ramActor::NUM_JOINTS];
+	static const ofColor cyanPrint;
+	static const ofColor magentaPrint;
+	static const ofColor yellowPrint;
+
+	ramMotionExtractor mex;
+
+	//ofxUIToggle *mToggles[ramActor::NUM_JOINTS];
     bool mNodeVisibility[ramActor::NUM_JOINTS];
-    
-    bool showRects, showCircle, showSpheres, invertSpheres, showCircleBisector, showCenterCircles;
-    float pointSize, crossLength, rectRadius, maxInvertRadius, circleResolution;
-    
-    void setupControlPanel();
-    
-    void setup();
-    
-    void update();
-    
-    void draw();
-    
-    void drawActor(const ramActor &actor);
-    
-    void drawRigid(const ramRigidBody &rigid) {}
-    
-    string getName() const { return "Three Points"; }
+
+	bool showRects, showCircle, showSpheres, invertSpheres, showCircleBisector, showCenterCircles;
+	float pointSize, crossLength, rectRadius, maxInvertRadius, circleResolution;
+
+	void setupControlPanel();
+
+	void setup();
+
+	void update();
+
+	void draw();
+
+	void drawActor(const ramActor &actor);
+
+	void drawRigid(const ramRigidBody &rigid)
+	{
+	}
+
+	string getName() const
+	{
+		return "ThreePoints_ext";
+	}
 };
 
 

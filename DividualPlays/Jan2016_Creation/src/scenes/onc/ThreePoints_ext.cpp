@@ -36,16 +36,13 @@ void ThreePoints_ext::setupControlPanel()
 	ramGetGUI().addToggle("Inverted spheres", &invertSpheres);
 	ramGetGUI().addToggle("Show circle bisector", &showCircleBisector);
 	ramGetGUI().addToggle("Show center circles", &showCenterCircles);
-	ramGetGUI().addSlider("Point size", 1, 10, &pointSize);
-	ramGetGUI().addSlider("Cross length", 1, 1000, &crossLength);
-	ramGetGUI().addSlider("Rect radius", 1, 1000, &rectRadius);
-	ramGetGUI().addSlider("Max invert radius", 1, 10000, &maxInvertRadius);
-	ramGetGUI().addSlider("Circle resolution", 3, 30, &circleResolution);
-
-	for (int i = 0; i < ramActor::NUM_JOINTS; i++) {
-		mNodeVisibility[i] = (i == ramActor::JOINT_LEFT_TOE || i == ramActor::JOINT_RIGHT_TOE);
-		mToggles[i] = panel->addToggle(ramActor::getJointName(i), &mNodeVisibility[i], 8, 8);
-	}
+	panel->addSlider("Point size", 1, 10, &pointSize);
+    panel->addSlider("Cross length", 1, 1000, &crossLength, 200.f, 20.f);
+    panel->addSlider("Rect radius", 1, 1000, &rectRadius, 200.f, 20.f);
+    panel->addSlider("Max invert radius", 1, 10000, &maxInvertRadius, 200.f, 20.f);
+    panel->addSlider("Circle resolution", 3, 30, &circleResolution, 200.f, 20.f);
+    
+    mex.setupControlPanel(this);
 
 #endif
 }
@@ -57,6 +54,7 @@ void ThreePoints_ext::setup()
 
 void ThreePoints_ext::update()
 {
+    mex.update();
 }
 
 //--------------------------------------------------------------
@@ -79,14 +77,14 @@ void ThreePoints_ext::drawActor(const ramActor &actor)
 	ofEnableAlphaBlending();
 	ofSetCircleResolution(circleResolution);
 
-	for (int i = 0; i < actor.getNumNode(); i++) {
-		const ramNode &node = actor.getNode(i);
+	for (int i = 0; i < mex.getNumPort(); i++) {
+        const ramNode &node = mex.getNodeAt(i);
 
 		ofPushMatrix();
 		node.beginTransform();
 		ofSetColor(yellowPrint);
 
-		if (showRects && mToggles[i]->getValue()) {
+		if (showRects) {
 			ofPushStyle();
 			ofFill();
 			ofSetColor(255, 128);
@@ -101,7 +99,7 @@ void ThreePoints_ext::drawActor(const ramActor &actor)
 		if (node.hasParent()) {
 			ramNode* parent = node.getParent();
 
-			if (parent->hasParent() && mToggles[i]->getValue()) {
+			if (parent->hasParent()) {
 				ramNode* grandparent = parent->getParent();
 				ofVec3f a = node, b = *parent, c = *grandparent;
 				ofVec3f normal = (a - b).cross(c - b);

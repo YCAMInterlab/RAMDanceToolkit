@@ -117,6 +117,9 @@ Monster_ext mMonster_ext;
 #include "MixMonsterScene_ext.h"
 MixMonsterScene_ext mMixMonsterScene_ext;
 
+#include "ThreePoints_ext.h"
+ThreePoints_ext mThreePoints_ext;
+
 #include "dp16_camera_controller.h"
 dp16_camera_controller mCameraController;
 
@@ -201,6 +204,7 @@ void testApp::setup()
     sceneManager.addScene(mHastyChase_ext.getPtr());
     sceneManager.addScene(mMonster_ext.getPtr());
     sceneManager.addScene(mMixMonsterScene_ext.getPtr());
+    sceneManager.addScene(mThreePoints_ext.getPtr());
 	
 	/* Legacy */
 	sceneManager.addScene( drawLines.getPtr() );

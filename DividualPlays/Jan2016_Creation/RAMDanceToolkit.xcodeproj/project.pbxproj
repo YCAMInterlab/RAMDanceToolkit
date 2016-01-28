@@ -279,6 +279,7 @@
 		D278BA7A1C59E32200B2951E /* ThreePoints_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThreePoints_ext.cpp; sourceTree = "<group>"; };
 		D278BA7B1C59E32200B2951E /* ThreePoints_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreePoints_ext.h; sourceTree = "<group>"; };
 		D278BA7D1C59E58500B2951E /* SphereMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphereMesh.cpp; sourceTree = "<group>"; };
+		D278BA7F1C59E61E00B2951E /* BurstBody_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BurstBody_ext.h; sourceTree = "<group>"; };
 		D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UpsideDown_ext.cpp; sourceTree = "<group>"; };
 		D283B3171C58809D00B0E900 /* UpsideDown_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpsideDown_ext.h; sourceTree = "<group>"; };
 		D2A4E4461C58D0C700BEAA84 /* HastyChase_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HastyChase_ext.cpp; sourceTree = "<group>"; };
@@ -512,6 +513,7 @@
 		9225EEC01C588FBA00A7FD9A /* 2014Scene */ = {
 			isa = PBXGroup;
 			children = (
+				D278BA7F1C59E61E00B2951E /* BurstBody_ext.h */,
 				5E846F3D1C58C9E3006FB401 /* Drop.h */,
 				5E846F3C1C58C9DD006FB401 /* FloorLine.h */,
 				9225EEC11C588FBA00A7FD9A /* BrokenBody.h */,
@@ -841,8 +843,6 @@
 		C6C22F331C54629E002B38EC /* onc */ = {
 			isa = PBXGroup;
 			children = (
-				D2A4E4531C58E32F00BEAA84 /* MixMonsterScene_ext.cpp */,
-				D2A4E4541C58E32F00BEAA84 /* MixMonsterScene_ext.h */,
 				C6C22F341C54629E002B38EC /* MoveSeparatedObjects.cpp */,
 				C6C22F351C54629E002B38EC /* MoveSeparatedObjects.h */,
 				C6C22F361C54629E002B38EC /* WeiredSpace.cpp */,
@@ -853,6 +853,8 @@
 				D2A4E4471C58D0C700BEAA84 /* HastyChase_ext.h */,
 				D2A4E4491C58DA0700BEAA84 /* Monster_ext.cpp */,
 				D2A4E44A1C58DA0700BEAA84 /* Monster_ext.h */,
+				D2A4E4531C58E32F00BEAA84 /* MixMonsterScene_ext.cpp */,
+				D2A4E4541C58E32F00BEAA84 /* MixMonsterScene_ext.h */,
 				D278BA7A1C59E32200B2951E /* ThreePoints_ext.cpp */,
 				D278BA7B1C59E32200B2951E /* ThreePoints_ext.h */,
 			);
