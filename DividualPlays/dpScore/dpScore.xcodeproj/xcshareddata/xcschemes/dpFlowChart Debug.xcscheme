@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-               BuildableName = "dpScore.app"
-               BlueprintName = "dpScore"
+               BlueprintIdentifier = "D27D33851C5A41FB009F2B25"
+               BuildableName = "dpFlowChart.app"
+               BlueprintName = "dpFlowChart"
                ReferencedContainer = "container:dpScore.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "dpScore.app"
-            BlueprintName = "dpScore"
+            BlueprintIdentifier = "D27D33851C5A41FB009F2B25"
+            BuildableName = "dpFlowChart.app"
+            BlueprintName = "dpFlowChart"
             ReferencedContainer = "container:dpScore.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -55,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "dpScore.app"
-            BlueprintName = "dpScore"
+            BlueprintIdentifier = "D27D33851C5A41FB009F2B25"
+            BuildableName = "dpFlowChart.app"
+            BlueprintName = "dpFlowChart"
             ReferencedContainer = "container:dpScore.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -70,16 +70,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "dpScore.app"
-            BlueprintName = "dpScore"
+            BlueprintIdentifier = "D27D33851C5A41FB009F2B25"
+            BuildableName = "dpFlowChart.app"
+            BlueprintName = "dpFlowChart"
             ReferencedContainer = "container:dpScore.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

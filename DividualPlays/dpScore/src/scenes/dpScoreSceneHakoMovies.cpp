@@ -132,7 +132,7 @@ void SceneHakoMovies::draw()
 		str = "Hakoniwa Visualization";
 		break;
 	case DISPLAY_MIX:
-		str = "Dancer's mind";
+		str = "Information to dancers";
 		break;
 	default:
 		break;

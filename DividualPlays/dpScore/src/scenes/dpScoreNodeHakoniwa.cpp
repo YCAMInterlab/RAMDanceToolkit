@@ -18,7 +18,7 @@ NodeHakoniwa::NodeHakoniwa()
 {
 	title = "Hakoniwa x 6";
 	titleJP = "箱庭（６種類）";
-	descriptionJP = "箱庭（６種類）\nダンサーの動きを箱庭に入力\n箱庭の中の状態が変化する";
+	descriptionJP = "「箱庭（６種類）」\nダンサーの動きを箱庭に入力\n箱庭の中の状態が変化する";
 
 	setGlobalPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 50.f, 0.f, 400.f - NodeHakoniwa::getDepth());
 	addAimingOffset(ofVec3f(NodeHakoniwa::getWidth() * 0.5f, Desk::getHeight(), NodeHakoniwa::getDepth() * 0.5f));

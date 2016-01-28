@@ -162,7 +162,7 @@ void SceneFlowChart::setupScenes()
 	mProperties[SCENE_MOVE] = Property(2.f, 2.f, 1.f, 60.f, false);
 	mProperties[SCENE_CIRCULATION] = Property(0.f, 2.f, 2.f, 60.f, false);
 	mProperties[SCENE_TPS] = Property(0.f, 1.f, 1.f, 60.f, false);
-	mProperties[SCENE_DESCRIPTION] = Property(0.f, 8.f, 1.f, 60.f, false);
+	mProperties[SCENE_DESCRIPTION] = Property(8.f, 0.f, 1.f, 60.f, false);
 	mProperties[SCENE_MEMORY] = Property(0.f, 0.f, 0.f, 60.f, false);
 	mProperties[SCENE_DEBUG] = Property(2.f, 2.f, 1.f, 60.f, true);
 
@@ -649,14 +649,15 @@ void SceneFlowChart::drawHUD()
 		const string strJP {next->descriptionJP};
 		auto lines = ofSplitString(strJP, "\n");
 		auto& prop = mProperties[mCurrentScene];
-		float t {(::fmodf(mElapsedTime, (prop.idleSpan + prop.moveSpan)) - prop.moveSpan) / prop.idleSpan};
-		t = ofClamp(t, 0.f, 1.f - FLT_EPSILON);
-		auto line = lines.at(lines.size() * t);
+        float t {mTimeCamMove / prop.moveSpan};
+        t = ofClamp(t, 0.f, 1.f - FLT_EPSILON);
+        const decltype(lines.size()) index = lines.size() * t;
+		auto line = lines.at(index);
 		{
 			ScopedTranslate t((kWidth - mFontJP.stringWidth(line)) * 0.5f, kHeight - 40.f);
 			ofSetColor(ofColor::black, 180);
 			ofRect(mFontJP.getStringBoundingBox(line, 0.f, 0.f));
-			ofSetColor(ofColor::white);
+            ofSetColor(ofColor::white);
 			mFontJP.drawStringAsShapes(line, 0.f, 0.f);
 		}
 

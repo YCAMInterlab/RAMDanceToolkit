@@ -19,7 +19,7 @@ NodeComputer::NodeComputer()
 {
 	title = "RAM Dance Toolkit";
 	titleJP = "RAM Dance Toolkit";
-	descriptionJP = "RAM Dance Toolkit\nダンサーや箱庭の情報を取り込む\nそれらを変換、増幅してダンサーに伝える";
+	descriptionJP = "「RAM Dance Toolkit」\nダンサーや箱庭の情報を取り込む\nそれらを変換、増幅してダンサーに伝える";
 
 	setGlobalPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - Deck::getWidth() - 50.f - 30.f, 0.f, -450.f);
 	addAimingOffset(NodeComputer::getMacBookPosition(3) + ofVec3f(MacBook::getDepth() * 0.5f,

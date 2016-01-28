@@ -1,7 +1,10 @@
 #include "ofApp.h"
-#ifdef DP_MASTER_HAKONIWA
+#if defined(DP_MASTER_HAKONIWA)
 #include "dpScoreMasterHakoniwa.h"
 #include "dpScoreSceneMasterIncrement.h"
+#elif defined(DP_FLOW_CHART)
+#include "dpScoreSceneFlowChart.h"
+#include "dpScoreSceneHakoMovies.h"
 #else
 #include "dpScoreSceneVec2SimpleGraph.h"
 #include "dpScoreSceneVec2Clocks.h"
@@ -27,8 +30,6 @@
 #include "dpScoreSceneBodyBox.h"
 
 #include "dpScoreSceneCorrelation.h"
-#include "dpScoreSceneFlowChart.h"
-#include "dpScoreSceneHakoMovies.h"
 #endif
 
 #include <algorithm>
@@ -66,7 +67,7 @@ void ofApp::setup()
 
 	auto* tabbar = mSceneManager.getTabBar();
 
-#ifdef DP_MASTER_HAKONIWA
+#if defined(DP_MASTER_HAKONIWA)
 	ofSetWindowTitle("dpMasterHakoniwa");
 
 	getMH().initialize();
@@ -75,6 +76,30 @@ void ofApp::setup()
 	auto increment = SceneBase::Ptr(new SceneMasterIncrement());
 	mSceneManager.add(increment);
 	mSceneManager.change<SceneMasterIncrement>();
+#elif defined(DP_FLOW_CHART)
+    ofSetWindowTitle("dpFlowChart");
+    tabbar->addToggle("Invert", &mInvert);
+    tabbar->addToggle("Show FPS", &mShowFps);
+    tabbar->addToggle("Show Cursor", &mShowCursor);
+    tabbar->addToggle("Fullscreen", &mFullscreen);
+    
+    auto black = SceneBase::Ptr(new SceneBase());
+    black->setDrawHeader(false);
+    black->setName("black");
+    
+    auto flowChart = SceneBase::Ptr(new SceneFlowChart());
+    auto hakoMovies = SceneBase::Ptr(new SceneHakoMovies());
+    
+    mSceneManager.add(black);
+    mSceneManager.add(flowChart);
+    mSceneManager.add(hakoMovies);
+    
+    mSceneManager.change<SceneFlowChart>();
+    //mSceneManager.change<SceneHakoMovies>();
+    
+    mSceneManager.makeChangeSceneTab();
+    
+    tabbar->setVisible(false);
 #else
 	ofSetWindowTitle("dpScore");
 
@@ -117,8 +142,6 @@ void ofApp::setup()
 	auto bodyLines = SceneBase::Ptr(new SceneBodyLines());
 
 	auto correlation = SceneBase::Ptr(new SceneCorrelation());
-	auto flowChart = SceneBase::Ptr(new SceneFlowChart());
-	auto hakoMovies = SceneBase::Ptr(new SceneHakoMovies());
 
 	mSceneManager.add(black);
 
@@ -149,8 +172,6 @@ void ofApp::setup()
 	mSceneManager.add(bodyBoids);
 
 	mSceneManager.add(correlation);
-	mSceneManager.add(flowChart);
-	mSceneManager.add(hakoMovies);
 
 	// make another instance for existing class
 	//auto vec2Simple2 = SceneBase::Ptr(new SceneVec2SimpleGraph());
@@ -162,9 +183,7 @@ void ofApp::setup()
 
 	//mSceneManager.change(3);
 	//mSceneManager.change("black");
-	mSceneManager.change<SceneFlowChart>();
-	//mSceneManager.change<SceneHakoMovies>();
-	//mSceneManager.change<SceneVec2Plotter>();
+	mSceneManager.change<SceneVec2Plotter>();
 
 	mSceneManager.makeChangeSceneTab();
 
@@ -403,7 +422,7 @@ void ofApp::draw()
 	OFX_BEGIN_EXCEPTION_HANDLING
 
 #ifdef DP_MASTER_HAKONIWA
-	        getMH().draw();
+    getMH().draw();
 	ofxMot::draw();
 
 	mSceneManager.draw();

@@ -19,7 +19,7 @@ NodeLight::NodeLight()
 {
 	title = "Lights";
 	titleJP = "照明";
-	descriptionJP = "照明";
+	descriptionJP = "「照明」";
 
 	setGlobalPosition(0.f, getHeight(), 0.f);
 	addAimingOffset(ofVec3f::zero());
