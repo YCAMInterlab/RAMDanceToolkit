@@ -98,7 +98,7 @@ void ThreePoints_ext::drawActor(const ramActor &actor)
 
 		if (node.hasParent()) {
 			ramNode* parent = node.getParent();
-
+			glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE,GL_SRC_ALPHA,GL_ONE);
 			if (parent->hasParent()) {
 				ramNode* grandparent = parent->getParent();
 				ofVec3f a = node, b = *parent, c = *grandparent;
@@ -114,7 +114,7 @@ void ThreePoints_ext::drawActor(const ramActor &actor)
 				ofTranslate(center);
 				rotateToNormal(normal);
 				if (showSpheres) {
-					ofSetColor(255, 32);
+					ofSetColor(255, 150);
 					ofIcoSphere(ofVec3f(), radius);
 				}
 				ofSetColor(yellowPrint);

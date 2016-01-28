@@ -38,12 +38,12 @@
 #define SCENE_LINE		string("Line_ext")
 #define SCENE_BIGBOX	string("BigBox_ext")
 #define SCENE_FOURPT	string("FourPoints_ext")
-#define SCENE_THREEPT	string("Three Points")
+#define SCENE_THREEPT	string("ThreePoints_ext")
 #define SCENE_BROKEN	string("BrokenBody_ext")
 #define SCENE_BURST		string("BurstBody_ext")
 
 #define SCENE_METABALL	string("distanceMetaball")
-#define SCENE_DONUTS	string("Donuts")
+#define SCENE_DONUTS	string("Donuts_ext")
 #define SCENE_MONSTER	string("Monster_ext")
 #define SCENE_CHASER	string("HastyChase_ext")
 
