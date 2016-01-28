@@ -22,6 +22,7 @@
 #include "dpScoreToolBox.h"
 #include "ofxException.h"
 #include "ofxXmlSettings.h"
+#include "dpScoreSceneHakoMovies.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -70,6 +71,8 @@ void SceneFlowChart::initialize()
 	auto host = xml.getAttribute("osc", "host", "127.0.0.1");
 	auto port = xml.getAttribute("osc", "port", 10001);
 	xml.popTag();
+    
+    cout << "lighting osc: " << host << ", " << port << endl;
 
 	mOscSender.setup(host, port);
 }
@@ -231,8 +234,17 @@ void SceneFlowChart::updateTime()
 
 	// change camera mode
 	if (mElapsedTime >= mProperties[mCurrentScene].totalTime) {
-		++mCurrentScene %= SCENE_DEBUG;
-		changeScene(mCurrentScene);
+		//++mCurrentScene %= SCENE_DEBUG;
+        ++mCurrentScene;
+        if (mCurrentScene == SCENE_DEBUG) {
+            ofxEventMessage m;
+            m.setAddress(kEventAddrChangeScene);
+            m.addStringArg(getClassName<SceneHakoMovies>());
+            ofxNotifyEvent(m);
+        }
+        else {
+            changeScene(mCurrentScene);
+        }
 		mElapsedTime = 0.f;
 	}
 
@@ -246,7 +258,7 @@ void SceneFlowChart::updateTime()
 		if (mCurrentScene == SCENE_MOVE || mCurrentScene == SCENE_CIRCULATION || mCurrentScene == SCENE_MAIN) {
 			ofxOscMessage m;
 			m.setAddress("/dp/light/moving");
-            auto s = getCurrentNodeName();
+            auto s = getNextNodeName();
             ofStringReplace(s, "dp::score::Node", "");
 			m.addStringArg(s);
 			m.addFloatArg(mProperties[mCurrentScene].moveSpan);
