@@ -28,6 +28,7 @@
 
 #include "dpScoreSceneCorrelation.h"
 #include "dpScoreSceneFlowChart.h"
+#include "dpScoreSceneHakoMovies.h"
 #endif
 
 #include <algorithm>
@@ -117,6 +118,7 @@ void ofApp::setup()
 
 	auto correlation = SceneBase::Ptr(new SceneCorrelation());
 	auto flowChart = SceneBase::Ptr(new SceneFlowChart());
+    auto hakoMovies = SceneBase::Ptr(new SceneHakoMovies());
 
 	mSceneManager.add(black);
 
@@ -148,6 +150,7 @@ void ofApp::setup()
 
 	mSceneManager.add(correlation);
 	mSceneManager.add(flowChart);
+    mSceneManager.add(hakoMovies);
 
 	// make another instance for existing class
 	//auto vec2Simple2 = SceneBase::Ptr(new SceneVec2SimpleGraph());
@@ -159,7 +162,8 @@ void ofApp::setup()
 
 	//mSceneManager.change(3);
 	//mSceneManager.change("black");
-	mSceneManager.change<SceneFlowChart>();
+	//mSceneManager.change<SceneFlowChart>();
+    mSceneManager.change<SceneHakoMovies>();
 	//mSceneManager.change<SceneVec2Plotter>();
 
 	mSceneManager.makeChangeSceneTab();
