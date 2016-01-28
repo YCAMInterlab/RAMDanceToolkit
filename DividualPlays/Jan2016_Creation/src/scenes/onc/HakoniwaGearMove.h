@@ -50,7 +50,7 @@ private:
     
     bool mAllTurn, mGear1, mGear2, mGear3, mDatahow, mManual;
     bool mAllGearReverse, mGear1Reverse, mGear2Reverse, mGear3Reverse;
-    int mScale, mScale2, mAllGearSpeed, mGear1Speed, mGear2Speed, mGear3Speed;
+    int mScale, mScale2,mScale3, mAllGearSpeed, mGear1Speed, mGear2Speed, mGear3Speed;
     int mGear1Count, mGear2Count, mGear3Count, mTotalcount;
     int mMax1speed, mMax2speed, mMax3speed;
     int mMin1speed, mMin2speed, mMin3speed;
