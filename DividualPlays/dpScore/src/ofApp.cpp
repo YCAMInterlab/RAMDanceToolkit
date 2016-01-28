@@ -236,7 +236,7 @@ void ofApp::update()
 {
 	OFX_BEGIN_EXCEPTION_HANDLING
 
-	        updateElapsedTime();
+    updateElapsedTime();
 
 	while (mOscReceiver.hasWaitingMessages()) {
 		ofxOscMessage m;
