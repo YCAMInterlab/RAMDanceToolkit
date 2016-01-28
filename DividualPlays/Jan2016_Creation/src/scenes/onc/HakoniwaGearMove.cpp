@@ -31,7 +31,7 @@ void HakoniwaGearMove::setupControlPanel(){
     mMin3speed = 1500;
     mScale = 150;
     mScale2 = 90;
-    mScale3 = 150;
+    mScale3 = 50;
     
     ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
     panel->addToggle("data show", &mDatahow);
