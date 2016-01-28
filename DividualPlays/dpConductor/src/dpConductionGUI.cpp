@@ -164,16 +164,15 @@ void dpConductionGUI::requestCurrentUI()
 
 void dpConductionGUI::listUp()
 {
-	scenes_for_test.push_back("dp16_camera_controller");
-	scenes_for_test.push_back("dp16_ramActorTranslator");
-	scenes_for_test.push_back("dp16_actorDrawer");
+	scenes_for_test.push_back(SCENE_CAMERA);
+	scenes_for_test.push_back(SCENE_ACTOR);
 	scenes_for_test.push_back(SCENE_LINE);
 	scenes_for_test.push_back(SCENE_BIGBOX);
-	scenes_for_test.push_back("Donuts_ext");
-	scenes_for_test.push_back("Monster_ext");
-	scenes_for_test.push_back("distanceMetaball");
-	scenes_for_test.push_back("FourPoints_ext");
-	scenes_for_test.push_back("ThreePoints_ext");
+	scenes_for_test.push_back(SCENE_DONUTS);
+	scenes_for_test.push_back(SCENE_MONSTER);
+	scenes_for_test.push_back(SCENE_METABALL);
+	scenes_for_test.push_back(SCENE_FOURPT);
+	scenes_for_test.push_back(SCENE_THREEPT);
 	
 	ActorList.push_back("kojiri");
 	ActorList.push_back("miyashita");

@@ -18,7 +18,7 @@ void Monster_ext::setupControlPanel()
     randomLine = false;
     minScale = .5;
     maxScale = 2;
-    randomizationAmount = .5;
+    randomizationAmount = .15;
     ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
     panel->addButton("Reset", &needToReset, 20, 20);
     panel->addButton("Random Line", &randomLine, 20, 20);
@@ -66,6 +66,7 @@ void Monster_ext::setup()
         treeBase[i] = treeArray[i];
     }
     reset();
+	randomizeTopology = true;
 }
 
 void Monster_ext::reset()

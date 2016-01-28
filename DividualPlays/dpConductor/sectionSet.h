@@ -65,6 +65,13 @@ struct envSet
 	Joint nCam_look;
 };
 
+struct hakoSet
+{
+	string scene;
+	bool enable;
+	bool A,B;
+};
+
 class sectionSet{
 public:
 	
@@ -82,6 +89,7 @@ public:
 	void addEnv_drawAct (string name, bool view);
 	void addEnv_floor	(bool view);
 	void addEnv_margine	(float margine);
+	void addHakoniwa	(string name, bool enable, bool A, bool B);
 	
 	void doSection();
 	
@@ -91,6 +99,7 @@ public:
 	vector<extSet>		extList;
 	vector<tuneSet>		tuneList;
 	vector<envSet>		envList;
+	vector<hakoSet>		hakoList;
 
 	bool				needSceneClear = false;
 	bool				needExtClear = false;

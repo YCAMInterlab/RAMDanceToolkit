@@ -51,9 +51,6 @@ void dp16_ramActorTranslator::setupControlPanel()
 	gui->addSlider("saturation", 0.0, 1.0, &base_saturation);
 	gui->addSlider("brightness", 0.0, 1.0, &base_brightness);
 	
-	/// light for drawActor
-	light.setPosition(300, 600, 300);
-	
 	base_saturation = 0.6;
 	base_brightness = 0.8;
 	
@@ -141,7 +138,6 @@ void dp16_ramActorTranslator::draw()
 	
 	ramBeginCamera();
 	ofPushStyle();
-	light.enable();
 	
 	for (int i = 0;i < am.getNumNodeArray();i++)
 	{
@@ -154,8 +150,6 @@ void dp16_ramActorTranslator::draw()
 			}
 		}
 	}
-	
-	light.disable();
 	
 	ofNoFill();
 	ofSetColor(dpColor::PALE_PINK_LIGHT);

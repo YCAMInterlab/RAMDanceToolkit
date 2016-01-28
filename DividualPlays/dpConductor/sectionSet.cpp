@@ -93,6 +93,7 @@ void sectionSet::addEnv_drawAct(string name, bool view)
 	ev.envCmd = ENV_CMD_DRAWACT;
 	ev.actorName = name;
 	ev.drawAct = view;
+	envList.push_back(ev);
 }
 
 void sectionSet::addEnv_floor(bool view)
@@ -100,6 +101,7 @@ void sectionSet::addEnv_floor(bool view)
 	envSet ev;
 	ev.envCmd = ENV_CMD_FLOOR;
 	ev.viewFloor = view;
+	envList.push_back(ev);
 }
 
 void sectionSet::addEnv_margine(float margine)
@@ -107,6 +109,17 @@ void sectionSet::addEnv_margine(float margine)
 	envSet ev;
 	ev.envCmd = ENV_CMD_MARGINE;
 	ev.actorMargine = margine;
+	envList.push_back(ev);
+}
+
+void sectionSet::addHakoniwa(string name, bool enable, bool A, bool B)
+{
+	hakoSet hk;
+	hk.scene = name;
+	hk.enable = enable;
+	hk.A = A;
+	hk.B = B;
+	hakoList.push_back(hk);
 }
 
 void sectionSet::doSection()
@@ -118,14 +131,24 @@ void sectionSet::doSection()
 			_scene->clearExtractor(extList[i].scene);
 	}
 	
+	ofxOscSender sender;
+	sender.setup("127.0.0.1", 12400);
+	for (int i = 0;i < hakoList.size();i++)
+	{
+		ofxOscMessage m;
+		m.setAddress("/ram/set_scene");
+		m.addStringArg(hakoList[i].scene);
+		m.addIntArg(hakoList[i].enable);
+		m.addIntArg(hakoList[i].A);
+		m.addIntArg(hakoList[i].B);
+		sender.sendMessage(m);
+	}
+	
 	//シーン登録
 	for (int i = 0;i < sceneList.size();i++)
 	{
-		if (sceneList[i].RDTK1_A || sceneList[i].RDTK1_B)
-			_scene->setScene(sceneList[i].name, true , sceneList[i].RDTK1_A, sceneList[i].RDTK1_B);
-
-		if (sceneList[i].RDTK2_A || sceneList[i].RDTK2_B)
-			_scene->setScene(sceneList[i].name, false, sceneList[i].RDTK2_A, sceneList[i].RDTK2_B);
+		_scene->setScene(sceneList[i].name, true , sceneList[i].RDTK1_A, sceneList[i].RDTK1_B);
+		_scene->setScene(sceneList[i].name, false, sceneList[i].RDTK2_A, sceneList[i].RDTK2_B);
 	}
 	
 	//Extractorの登録
