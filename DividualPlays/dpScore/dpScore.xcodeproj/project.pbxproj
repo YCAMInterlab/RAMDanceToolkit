@@ -98,7 +98,7 @@
 		D27F2E501A67625B00913B14 /* dpScoreSceneDataCircle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D27F2E4E1A67625B00913B14 /* dpScoreSceneDataCircle.cpp */; };
 		D27F2E531A6762C600913B14 /* dpScoreSceneDataDisplacement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D27F2E511A6762C600913B14 /* dpScoreSceneDataDisplacement.cpp */; };
 		D27F2E5B1A67F01600913B14 /* dpScoreSceneDataCircle3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D27F2E591A67F01600913B14 /* dpScoreSceneDataCircle3D.cpp */; };
-		D28313581C5493120045CBE8 /* ofxTrueTypeFontUC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28313531C5493120045CBE8 /* ofxTrueTypeFontUC.cpp */; settings = {ASSET_TAGS = (); }; };
+		D28313581C5493120045CBE8 /* ofxTrueTypeFontUC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28313531C5493120045CBE8 /* ofxTrueTypeFontUC.cpp */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-w"; }; };
 		D28EFEDF1C4F4CF300CA6A8F /* dpScoreNodeHakoniwa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D28EFEDD1C4F4CF300CA6A8F /* dpScoreNodeHakoniwa.cpp */; settings = {ASSET_TAGS = (); }; };
 		D29034111A4D4ADE00577E04 /* dpScoreSceneBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29034021A4D4ADE00577E04 /* dpScoreSceneBase.cpp */; };
 		D29034121A4D4ADE00577E04 /* dpScoreCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D29034041A4D4ADE00577E04 /* dpScoreCommon.cpp */; };
@@ -1796,7 +1796,7 @@
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
@@ -1832,7 +1832,7 @@
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_UNROLL_LOOPS = YES;
-				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
