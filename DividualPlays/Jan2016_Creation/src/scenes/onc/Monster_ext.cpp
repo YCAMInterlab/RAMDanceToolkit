@@ -22,14 +22,14 @@ void Monster_ext::setupControlPanel()
     ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
     panel->addButton("Reset", &needToReset, 20, 20);
     panel->addButton("Random Line", &randomLine, 20, 20);
-    panel->addButton("Randomize Topology", &randomizeTopology, 20, 20);
-    panel->addButton("Randomize Geometry", &randomizeGeometry, 20, 20);
+    panel->addToggle("Randomize Topology", &randomizeTopology, 20, 20);
+    panel->addToggle("Randomize Geometry", &randomizeGeometry, 20, 20);
     panel->addSlider("Min scale", 0, 4, &minScale, 200, 20);
     panel->addSlider("Max scale", 0, 4, &maxScale, 200, 20);
     panel->addSlider("Randomization amount", 0, 1, &randomizationAmount, 200, 20);
     
     mex.setupControlPanel(this);
-    
+	
 #endif
 }
 
@@ -67,6 +67,14 @@ void Monster_ext::setup()
     }
     reset();
 	randomizeTopology = true;
+	int n = treeSwap.size();
+	for(int i = 0; i < n; i++)
+	{
+		if(treeSwap[i] != -1 && ofRandom(1) < randomizationAmount)
+		{
+			treeSwap[i] = getRandomNonChild(i);
+		}
+	}
 }
 
 void Monster_ext::reset()
@@ -134,6 +142,7 @@ void Monster_ext::update()
                 treeSwap[i] = getRandomNonChild(i);
             }
         }
+		randomizeTopology = false;
     }
     if(randomizeGeometry)
     {
@@ -147,6 +156,7 @@ void Monster_ext::update()
                 lengthScale[i] = 1;
             }
         }
+		randomizeGeometry = false;
     }
     if(randomLine)
     {
