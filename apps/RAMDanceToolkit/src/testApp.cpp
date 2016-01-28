@@ -82,6 +82,11 @@ Laban laban;
 Notation notation;
 
 #pragma mark - oF methods
+
+static ramActor _actor;
+static ramNode _node;
+static ofCamera _cam;
+
 //--------------------------------------------------------------
 void testApp::setup()
 {
@@ -119,18 +124,30 @@ void testApp::setup()
 	sceneManager.addScene( laban.getPtr() );
 	sceneManager.addScene( notation.getPtr() );
 
+    _cam.setPosition(0.f, 0.f, 500.f);
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-
+    //_node.setOrientation(ofVec3f(0.f, ofGetElapsedTimef() * 30.f, 0.f));
 }
 
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	
+    _cam.begin();
+    ofPushMatrix();
+    ofRotateX(90.f);
+    ofSetColor(ofColor::red);
+    ofSetRectMode(OF_RECTMODE_CENTER);
+    ofRect(0.f, 0.f, 100.f, 100.f);
+    ofPopMatrix();
+    
+    ofSetColor(ofColor::blue);
+    ramDrawBasicActor(_actor);
+    
+    _cam.end();
 }
 
 
@@ -139,7 +156,9 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::drawActor(const ramActor &actor)
 {
-	
+    _actor = actor;
+    _node = _actor.getNode(ramActor::JOINT_HEAD);
+    _cam.setParent(_node);
 }
 
 //--------------------------------------------------------------
