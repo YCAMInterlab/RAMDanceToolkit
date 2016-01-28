@@ -51,6 +51,7 @@
 		C6C22F651C5476D4002B38EC /* MixMonsterScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22F621C5476D4002B38EC /* MixMonsterScene.cpp */; };
 		C6C22F6A1C54A042002B38EC /* lineDrawing_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C22F681C54A042002B38EC /* lineDrawing_ext.cpp */; };
 		D278BA7C1C59E32200B2951E /* ThreePoints_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D278BA7A1C59E32200B2951E /* ThreePoints_ext.cpp */; settings = {ASSET_TAGS = (); }; };
+		D278BA7E1C59E58500B2951E /* SphereMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D278BA7D1C59E58500B2951E /* SphereMesh.cpp */; settings = {ASSET_TAGS = (); }; };
 		D283B3181C58809D00B0E900 /* UpsideDown_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */; };
 		D2A4E4481C58D0C700BEAA84 /* HastyChase_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2A4E4461C58D0C700BEAA84 /* HastyChase_ext.cpp */; };
 		D2A4E44B1C58DA0700BEAA84 /* Monster_ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2A4E4491C58DA0700BEAA84 /* Monster_ext.cpp */; };
@@ -277,6 +278,7 @@
 		C6C22F691C54A042002B38EC /* lineDrawing_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lineDrawing_ext.h; sourceTree = "<group>"; };
 		D278BA7A1C59E32200B2951E /* ThreePoints_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThreePoints_ext.cpp; sourceTree = "<group>"; };
 		D278BA7B1C59E32200B2951E /* ThreePoints_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreePoints_ext.h; sourceTree = "<group>"; };
+		D278BA7D1C59E58500B2951E /* SphereMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphereMesh.cpp; sourceTree = "<group>"; };
 		D283B3161C58809D00B0E900 /* UpsideDown_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UpsideDown_ext.cpp; sourceTree = "<group>"; };
 		D283B3171C58809D00B0E900 /* UpsideDown_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpsideDown_ext.h; sourceTree = "<group>"; };
 		D2A4E4461C58D0C700BEAA84 /* HastyChase_ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HastyChase_ext.cpp; sourceTree = "<group>"; };
@@ -821,6 +823,7 @@
 			isa = PBXGroup;
 			children = (
 				C6C22F2E1C54629E002B38EC /* GeometryHelpers.h */,
+				D278BA7D1C59E58500B2951E /* SphereMesh.cpp */,
 				C6C22F2F1C54629E002B38EC /* SphereMesh.h */,
 				C6C22F301C54629E002B38EC /* ThreePoints.h */,
 			);
@@ -1093,6 +1096,7 @@
 				C6C22F4D1C54629E002B38EC /* KeplerBtShapeDrawer.cpp in Sources */,
 				D2A4E4481C58D0C700BEAA84 /* HastyChase_ext.cpp in Sources */,
 				C64C2FC41C54E4B9005E9BB2 /* dp16_camera_controller.cpp in Sources */,
+				D278BA7E1C59E58500B2951E /* SphereMesh.cpp in Sources */,
 				C6C22F651C5476D4002B38EC /* MixMonsterScene.cpp in Sources */,
 				D2A4E4551C58E32F00BEAA84 /* MixMonsterScene_ext.cpp in Sources */,
 				C6C22F4A1C54629E002B38EC /* btPicker.cpp in Sources */,

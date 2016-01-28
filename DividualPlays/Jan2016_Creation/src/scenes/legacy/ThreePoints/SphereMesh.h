@@ -17,6 +17,8 @@
 
 #pragma once
 
+#include "ofMain.h"
+
 // NO texture coords or normals
 // use ofGetIcoSphere(radius, 0) // 0 iterations will return Icosahedron //
 //----------------------------------------------------------
@@ -216,7 +218,7 @@ ofMesh ofGetIcoSphereMesh(float radius, int iterations) {
 	return  sphere;
 }
 
-ofMesh icosphere;
+extern ofMesh icosphere;
 void _ofSetIcoSphereResolution(int iterations) {
 	icosphere = ofGetIcoSphereMesh(1, iterations);
 }
