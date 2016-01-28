@@ -14,7 +14,7 @@ NodeDancer::NodeDancer()
 {
 	title = "Dancers";
 	titleJP = "ダンサー";
-	descriptionJP = "ディスプレイの映像をダンサーが解釈";
+	descriptionJP = "ダンサー\nディスプレイの映像や音響、照明を利用する";
 
 	addAimingOffset(ofVec3f::zero());
 

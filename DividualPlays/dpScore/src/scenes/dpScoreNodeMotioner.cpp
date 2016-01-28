@@ -18,7 +18,7 @@ NodeMotioner::NodeMotioner()
 {
     title = "Motion Captures";
     titleJP = "モーションキャプチャ";
-    descriptionJP = "モーションキャプチャでダンサーの動きをコンピュータに取り込む";
+    descriptionJP = "モーションキャプチャ\nダンサーの動きをコンピュータに取り込む";
     
     addAimingOffset(ofVec3f::zero());
     

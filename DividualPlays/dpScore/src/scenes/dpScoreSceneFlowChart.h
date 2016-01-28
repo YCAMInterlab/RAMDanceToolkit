@@ -53,9 +53,9 @@ private:
     
     void updateTime();
     void updateWithSkeleton();
-    void updateMovingCam();
-    void updateMainCam();
-    void updateMemoryCam();
+    void updateMoving();
+    void updateCirculation();
+    void updateMemory();
     
     void drawScene();
     void drawToolKit();
@@ -77,9 +77,9 @@ private:
     
     enum SceneType {
         SCENE_MOVE = 0,
-        SCENE_MAIN,
-        SCENE_TPS,
         SCENE_CIRCULATION,
+        SCENE_TPS,
+        SCENE_DESCRIPTION,
         SCENE_MEMORY,
         SCENE_DEBUG,
         NUM_SCENES,

@@ -19,7 +19,7 @@ NodeAudience::NodeAudience()
 {
 	title = "Audiences";
     titleJP = "観客";
-	descriptionJP = "観客数名の集中力、疲労度を解析（JINS MEMEメガネ）";
+	descriptionJP = "観客\n数名の集中力、疲労度を解析（JINS MEMEメガネ）";
 
 	setGlobalPosition(0.f, 0.f,  NodeStage::kDepth * 0.5f + 500.f);
 	getCamera().setFov(80.f);

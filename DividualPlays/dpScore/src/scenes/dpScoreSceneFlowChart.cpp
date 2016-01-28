@@ -71,8 +71,8 @@ void SceneFlowChart::initialize()
 	auto host = xml.getAttribute("osc", "host", "127.0.0.1");
 	auto port = xml.getAttribute("osc", "port", 10001);
 	xml.popTag();
-    
-    cout << "lighting osc: " << host << ", " << port << endl;
+
+	cout << "lighting osc: " << host << ", " << port << endl;
 
 	mOscSender.setup(host, port);
 }
@@ -160,22 +160,22 @@ void SceneFlowChart::setupScenes()
 {
 	mProperties.clear();
 	mProperties[SCENE_MOVE] = Property(2.f, 2.f, 1.f, 60.f, false);
-	mProperties[SCENE_MAIN] = Property(2.f, 2.f, 1.f, 60.f, false);
-	mProperties[SCENE_TPS] = Property(2.f, 2.f, 1.f, 30.f, false);
-	mProperties[SCENE_CIRCULATION] = Property(2.f, 0.f, 2.f, 30.f, false);
+	mProperties[SCENE_CIRCULATION] = Property(0.f, 2.f, 2.f, 60.f, false);
+	mProperties[SCENE_TPS] = Property(0.f, 1.f, 1.f, 60.f, false);
+	mProperties[SCENE_DESCRIPTION] = Property(0.f, 8.f, 1.f, 60.f, false);
 	mProperties[SCENE_MEMORY] = Property(0.f, 0.f, 0.f, 60.f, false);
 	mProperties[SCENE_DEBUG] = Property(2.f, 2.f, 1.f, 60.f, true);
 
 	mNodeCenter.setGlobalPosition(ofVec3f::zero());
 
-	mProperties[SCENE_MAIN].camera->setParent(mNodeCenter);
-	mProperties[SCENE_MAIN].camera->setGlobalPosition(0.f, 200.f, 1200.f);
+	mProperties[SCENE_CIRCULATION].camera->setParent(mNodeCenter);
+	mProperties[SCENE_CIRCULATION].camera->setGlobalPosition(0.f, 200.f, 1200.f);
 
 	mProperties[SCENE_TPS].camera->setParent(mNodeHead);
-	mProperties[SCENE_TPS].camera->setGlobalPosition(0.f, 200.f, 200.f);
+	mProperties[SCENE_TPS].camera->setGlobalPosition(0.f, 0.f, 200.f);
 
-	mProperties[SCENE_CIRCULATION].camera->setGlobalPosition(-NodeStage::kWidth * 0.5f, 600.f, 800.f);
-	mProperties[SCENE_CIRCULATION].camera->setOrientation(ofVec3f(-30.f, 0.f, 0.f));
+	mProperties[SCENE_DESCRIPTION].camera->setGlobalPosition(-NodeStage::kWidth * 0.5f, 600.f, 800.f);
+	mProperties[SCENE_DESCRIPTION].camera->setOrientation(ofVec3f(-30.f, 0.f, 0.f));
 
 	mProperties[SCENE_MEMORY].camera->setParent(mNodeCenter);
 	mProperties[SCENE_MEMORY].camera->setGlobalPosition(0.f, 300.f, 1000.f);
@@ -211,14 +211,14 @@ void SceneFlowChart::update(ofxEventMessage& m)
 
 	// move camera
 	if (mCurrentScene == SCENE_MOVE) {
-		updateMovingCam();
+		updateMoving();
 	}
 	// rotate main cam
-	else if (mCurrentScene == SCENE_MAIN) {
-		updateMainCam();
+	else if (mCurrentScene == SCENE_CIRCULATION) {
+		updateCirculation();
 	}
 	else if (mCurrentScene == SCENE_MEMORY) {
-		updateMemoryCam();
+		updateMemory();
 	}
 	// do nothing
 	else { // TPS and easy cam
@@ -235,16 +235,16 @@ void SceneFlowChart::updateTime()
 	// change camera mode
 	if (mElapsedTime >= mProperties[mCurrentScene].totalTime) {
 		//++mCurrentScene %= SCENE_DEBUG;
-        ++mCurrentScene;
-        if (mCurrentScene == SCENE_DEBUG) {
-            ofxEventMessage m;
-            m.setAddress(kEventAddrChangeScene);
-            m.addStringArg(getClassName<SceneHakoMovies>());
-            ofxNotifyEvent(m);
-        }
-        else {
-            changeScene(mCurrentScene);
-        }
+		++mCurrentScene;
+		if (mCurrentScene == SCENE_DEBUG) {
+			ofxEventMessage m;
+			m.setAddress(kEventAddrChangeScene);
+			m.addStringArg(getClassName<SceneHakoMovies>());
+			ofxNotifyEvent(m);
+		}
+		else {
+			changeScene(mCurrentScene);
+		}
 		mElapsedTime = 0.f;
 	}
 
@@ -255,11 +255,11 @@ void SceneFlowChart::updateTime()
 		mTimeCamMove = 0.f;
 		++mNodeIdx %= mOrders.at(mOrderIdx).size();
 
-		if (mCurrentScene == SCENE_MOVE || mCurrentScene == SCENE_CIRCULATION || mCurrentScene == SCENE_MAIN) {
+		if (mCurrentScene == SCENE_MOVE || mCurrentScene == SCENE_DESCRIPTION || mCurrentScene == SCENE_CIRCULATION) {
 			ofxOscMessage m;
 			m.setAddress("/dp/light/moving");
-            auto s = getNextNodeName();
-            ofStringReplace(s, "dp::score::Node", "");
+			auto s = getNextNodeName();
+			ofStringReplace(s, "dp::score::Node", "");
 			m.addStringArg(s);
 			m.addFloatArg(mProperties[mCurrentScene].moveSpan);
 			mOscSender.sendMessage(m);
@@ -313,7 +313,7 @@ void SceneFlowChart::updateWithSkeleton()
 	}
 }
 
-void SceneFlowChart::updateMovingCam()
+void SceneFlowChart::updateMoving()
 {
 	auto& prop = mProperties[SCENE_MOVE];
 	float t {ofClamp(mTimeCamMove, 0.f, prop.moveSpan) / prop.moveSpan};
@@ -342,7 +342,7 @@ void SceneFlowChart::updateMovingCam()
 	cam->setGlobalOrientation(q);
 }
 
-void SceneFlowChart::updateMainCam()
+void SceneFlowChart::updateCirculation()
 {
 	mTimeCamRotation += ofGetLastFrameTime();
 	const float r {::cosf(mTimeCamRotation * kMainCamSpeed) * 110.f};
@@ -358,7 +358,7 @@ void SceneFlowChart::updateMainCam()
 	}
 }
 
-void SceneFlowChart::updateMemoryCam()
+void SceneFlowChart::updateMemory()
 {
 	mTimeCamRotation += ofGetLastFrameTime();
 
@@ -426,7 +426,6 @@ void SceneFlowChart::drawDancers()
 void SceneFlowChart::drawLines()
 {
 	if (mCurrentScene == SCENE_MEMORY) return;
-
 	ScopedStyle s;
 	setStyle();
 	ofDisableDepthTest();
@@ -460,7 +459,6 @@ void SceneFlowChart::drawLines()
 			}
 		}
 	}
-	ofEnableDepthTest();
 }
 
 void SceneFlowChart::drawCircles()
@@ -612,7 +610,7 @@ void SceneFlowChart::drawHUD()
 			ofSetColor(ofColor::white);
 			mFont.drawString(str, 0.f, 0.f);
 		}
-		const string strJP {next->descriptionJP};
+		const string strJP {next->titleJP};
 		{
 			ScopedTranslate t((kWidth - mFontJP.stringWidth(strJP)) * 0.5f, kHeight - 40.f);
 			ofSetColor(ofColor::black, 180);
@@ -621,7 +619,7 @@ void SceneFlowChart::drawHUD()
 			mFontJP.drawStringAsShapes(strJP, 0.f, 0.f);
 		}
 	}
-	else if (mCurrentScene == SCENE_MAIN || mCurrentScene == SCENE_CIRCULATION) {
+	else if (mCurrentScene == SCENE_CIRCULATION) {
 		const string strFrom {curr->title};
 		const string strTo {"\n" + next->title};
 		{
@@ -640,6 +638,28 @@ void SceneFlowChart::drawHUD()
 			ofSetColor(ofColor::white);
 			mFontJP.drawStringAsShapes(strJP, 0.f, 0.f);
 		}
+	}
+	else if (mCurrentScene == SCENE_DESCRIPTION) {
+		const string str {next->title};
+		{
+			ScopedTranslate t(25.f, 170.f);
+			ofSetColor(ofColor::white);
+			mFont.drawString(str, 0.f, 0.f);
+		}
+		const string strJP {next->descriptionJP};
+		auto lines = ofSplitString(strJP, "\n");
+		auto& prop = mProperties[mCurrentScene];
+		float t {(::fmodf(mElapsedTime, (prop.idleSpan + prop.moveSpan)) - prop.moveSpan) / prop.idleSpan};
+		t = ofClamp(t, 0.f, 1.f - FLT_EPSILON);
+		auto line = lines.at(lines.size() * t);
+		{
+			ScopedTranslate t((kWidth - mFontJP.stringWidth(line)) * 0.5f, kHeight - 40.f);
+			ofSetColor(ofColor::black, 180);
+			ofRect(mFontJP.getStringBoundingBox(line, 0.f, 0.f));
+			ofSetColor(ofColor::white);
+			mFontJP.drawStringAsShapes(line, 0.f, 0.f);
+		}
+
 	}
 	else if (mCurrentScene == SCENE_TPS) {
 		const string str {"Dancer's viewpoint"};
@@ -707,9 +727,9 @@ void SceneFlowChart::keyPressed(int key)
 {
 	switch (key) {
 	case '1': changeScene(SCENE_MOVE); break;
-	case '2': changeScene(SCENE_MAIN); break;
+	case '2': changeScene(SCENE_CIRCULATION); break;
 	case '3': changeScene(SCENE_TPS); break;
-	case '4': changeScene(SCENE_CIRCULATION); break;
+	case '4': changeScene(SCENE_DESCRIPTION); break;
 	case '5': changeScene(SCENE_MEMORY); break;
 	case '6': changeScene(SCENE_DEBUG); break;
 	case ' ':
@@ -740,15 +760,16 @@ void SceneFlowChart::changeScene(int index)
 		mNodeIdx = 0;
 		mTimeCamMove = 0.f;
 		break;
-	case SCENE_MAIN:
+	case SCENE_CIRCULATION:
 		mTimeCamRotation = HALF_PI * (1.f / kMainCamSpeed);
+        getNode<NodeHakoniwa>()->setFocus(false);
 		break;
 	case SCENE_TPS:
 		m.addStringArg("Stage");
 		m.addFloatArg(0.f);
 		mOscSender.sendMessage(m);
 		break;
-	case SCENE_CIRCULATION:
+	case SCENE_DESCRIPTION:
 		getNode<NodeHakoniwa>()->setFocus(false);
 		break;
 	case SCENE_MEMORY:
@@ -768,7 +789,7 @@ void SceneFlowChart::changeScene(int index)
 	if (mCurrentScene != SCENE_MEMORY) {
 		LineObj::enableAnimation = false;
 	}
-	if (mCurrentScene != SCENE_CIRCULATION) {
+	if (mCurrentScene != SCENE_DESCRIPTION && mCurrentScene != SCENE_CIRCULATION) {
 		getNode<NodeHakoniwa>()->setFocus(true);
 	}
 }

@@ -15,6 +15,8 @@ DP_SCORE_NAMESPACE_BEGIN
 
 void SceneHakoMovies::initialize()
 {
+	mFont.loadFont(kFontPath, 56.f);
+
 	auto nama = ofPtr<ofVideoPlayer>(new ofVideoPlayer());
 	auto vis = ofPtr<ofVideoPlayer>(new ofVideoPlayer());
 
@@ -59,14 +61,14 @@ void SceneHakoMovies::update(ofxEventMessage& m)
 	if (mElapsedTime >= kFadeDur) {
 		mElapsedTime = 0.f;
 		//++mDisplayType %=  NUM_DISPLAY_TYPES;
-        ++mDisplayType;
-        if (mDisplayType == NUM_DISPLAY_TYPES) {
-            mDisplayType = DISPLAY_MIX;
-            ofxEventMessage m;
-            m.setAddress(kEventAddrChangeScene);
-            m.addStringArg(getClassName<SceneFlowChart>());
-            ofxNotifyEvent(m);
-        }
+		++mDisplayType;
+		if (mDisplayType == NUM_DISPLAY_TYPES) {
+			mDisplayType = DISPLAY_MIX;
+			ofxEventMessage m;
+			m.setAddress(kEventAddrChangeScene);
+			m.addStringArg(getClassName<SceneFlowChart>());
+			ofxNotifyEvent(m);
+		}
 	}
 
 	for (auto p : mMovies) {
@@ -117,6 +119,28 @@ void SceneHakoMovies::draw()
 		const float s = ofGetHeight() / (float)m->getHeight();
 		ScopedTranslate t((ofGetWidth() - m->getWidth() * s) * 0.5f, 0.f);
 		m->draw(ofVec3f::zero(), m->getWidth() * s, m->getHeight() * s);
+	}
+
+	ofEnableAlphaBlending();
+
+	string str;
+	switch (mDisplayType) {
+	case DISPLAY_NAMA:
+		str = "Hakoniwa";
+		break;
+	case DISPLAY_VIS:
+		str = "Hakoniwa Visualization";
+		break;
+	case DISPLAY_MIX:
+		str = "Dancer's mind";
+		break;
+	default:
+		break;
+	}
+	{
+		ScopedTranslate t(25.f, 100.f);
+		ofSetColor(ofColor::white);
+		mFont.drawString(str, 0.f, 0.f);
 	}
 }
 

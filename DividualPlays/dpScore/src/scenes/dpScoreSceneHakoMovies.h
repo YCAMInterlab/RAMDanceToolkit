@@ -45,6 +45,8 @@ private:
     const float kFadeSpeed {0.5f};
     const float kFadeDur {20.f};
     
+    ofTrueTypeFont mFont;
+    
     vector<ofPtr<ofVideoPlayer>> mMovies;
     long mLastFrame {0};
     float mAlphaNama {1.f};

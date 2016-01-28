@@ -18,7 +18,7 @@ NodeDisplay::NodeDisplay()
 {
 	title = "Displays";
 	titleJP = "ディスプレイ";
-	descriptionJP = "ディスプレイにツールキットで生成したダンサーへの情報を表示";
+	descriptionJP = "ディスプレイ\nツールキットで生成した映像をダンサーに伝える";
 
 	addAimingOffset(getFrontLeft() + ofVec3f(getFrontDisplayWidth() * 0.5f - 8.f,
 	                                         getFrontDisplayHeight() * 0.5f,
