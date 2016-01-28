@@ -133,10 +133,16 @@ void dpConductor::switchHakoniwa(string nameHakoniwa, bool enable, bool A, bool 
 	hakoName = "dpH" + baseName;
 	VisName = "dpVis" + baseName;
 	
-	cout << "SWH::hakoniwa name : " << hakoName << endl;
-	cout << "SWH::hakoVis  name : " << VisName << endl;
-	
-	cameraCon->setCameraSlot(hakoName, enable, A, B);
+    if (baseName == "Stage")
+    {
+        cout << "send" << VisName << endl;
+        cameraCon->setCameraSlot(VisName, enable, A, B);
+    }
+    else
+    {
+        cout << "send" << hakoName << endl;
+        cameraCon->setCameraSlot(hakoName, enable, A, B);
+    }
 	
 	if (enable)
 	{

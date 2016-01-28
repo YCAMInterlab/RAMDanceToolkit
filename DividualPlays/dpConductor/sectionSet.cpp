@@ -182,37 +182,43 @@ void sectionSet::doSection()
 
 void sectionSet::switchHakoniwa(string nameHakoniwa, bool enable, bool A, bool B)
 {
-	string baseName;
-	string hakoName;
-	string VisName;
-	
-	if (nameHakoniwa.substr(0,3) == "dpH")
-		baseName = nameHakoniwa.substr(3, nameHakoniwa.length() - 3);
-	
-	if (nameHakoniwa.substr(0,5) == "dpVis")
-		baseName = nameHakoniwa.substr(5, nameHakoniwa.length() - 5);
-	
-	hakoName = "dpH" + baseName;
-	VisName = "dpVis" + baseName;
-	
-	cout << "SWH::hakoniwa name : " << hakoName << endl;
-	cout << "SWH::hakoVis  name : " << VisName << endl;
-	
-	_camera->setCameraSlot(hakoName, enable, A, B);
-	
-	if (enable)
-	{
-		_scene->setScene(hakoName, true, false, false);
-		_scene->setScene(hakoName, true, false, false);
-		_scene->setScene(VisName, false, A, B);
-		_scene->setScene(VisName, true, A, B);
-	}
-	else
-	{//箱庭からのDisable処理
-		_scene->disableScene(hakoName, true);
-		_scene->disableScene(hakoName, false);
-		_scene->disableScene(VisName, true);
-		_scene->disableScene(VisName, false);
-		
-	}
+    string baseName;
+    string hakoName;
+    string VisName;
+    
+    if (nameHakoniwa.substr(0,3) == "dpH")
+        baseName = nameHakoniwa.substr(3, nameHakoniwa.length() - 3);
+    
+    if (nameHakoniwa.substr(0,5) == "dpVis")
+        baseName = nameHakoniwa.substr(5, nameHakoniwa.length() - 5);
+    
+    hakoName = "dpH" + baseName;
+    VisName = "dpVis" + baseName;
+    
+    if (baseName == "Stage")
+    {
+        cout << "send" << VisName << endl;
+        _camera->setCameraSlot(VisName, enable, A, B);
+    }
+    else
+    {
+        cout << "send" << hakoName << endl;
+        _camera->setCameraSlot(hakoName, enable, A, B);
+    }
+    
+    if (enable)
+    {
+        _scene->setScene(hakoName, true, false, false);
+        _scene->setScene(hakoName, true, false, false);
+        _scene->setScene(VisName, false, A, B);
+        _scene->setScene(VisName, true, A, B);
+    }
+    else
+    {//箱庭からのDisable処理
+        _scene->disableScene(hakoName, true);
+        _scene->disableScene(hakoName, false);
+        _scene->disableScene(VisName, true);
+        _scene->disableScene(VisName, false);
+    }
+
 }

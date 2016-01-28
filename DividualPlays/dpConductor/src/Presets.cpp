@@ -565,11 +565,10 @@ void dpConductor::setSections()
 	ns->sectionName = "0250-Stage-Chaser";
 	
 	ns->addHakoniwa(HAKO_STAGE, true, true, true);
-	ns->addScene("dpHStage", false, false, false, false);
 	ns->addScene("dpVisStage", true, false, true, false);
 	ns->addScene(SCENE_CHASER, false, true, false, true);
 	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
+	ns->addScene(SCENE_ACTOR, false, true, false, true);
 	
 	ns->addExtractor(SCENE_CHASER, ACTOR_KOJIRI, JOINT_NECK);
 	ns->addExtractor(SCENE_CHASER, ACTOR_SHIMAJI, JOINT_NECK);
