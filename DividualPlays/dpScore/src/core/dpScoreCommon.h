@@ -72,6 +72,7 @@ extern const string kSettingsDir;
 extern const string kSettingsPrefix;
 
 extern const string kXmlSettingsPath;
+extern const string kXmlSettingsPathFlowChart;
 
 extern const int kNumCameraunitVectors;
 

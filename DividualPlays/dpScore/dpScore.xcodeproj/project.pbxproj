@@ -94,6 +94,7 @@
 		D24C21C91A49653D009D0796 /* ofxOscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D24C21BA1A49653D009D0796 /* ofxOscSender.cpp */; };
 		D2619F381A6523C3002EF3E2 /* dpScoreSceneBodyBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2619F361A6523C3002EF3E2 /* dpScoreSceneBodyBase.cpp */; };
 		D26CA81B1A6F5E370050BB3D /* dpScoreUniqueStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D26CA8191A6F5E370050BB3D /* dpScoreUniqueStack.cpp */; };
+		D278BA791C59C7D100B2951E /* dpScoreSceneHakoMovies.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D278BA771C59C7D100B2951E /* dpScoreSceneHakoMovies.cpp */; settings = {ASSET_TAGS = (); }; };
 		D27924341C4F2BDF000F5AFC /* dpScoreNodeMasterHakoniwa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D27924321C4F2BDF000F5AFC /* dpScoreNodeMasterHakoniwa.cpp */; settings = {ASSET_TAGS = (); }; };
 		D27924371C4F448D000F5AFC /* dpScoreObjects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D27924351C4F448D000F5AFC /* dpScoreObjects.cpp */; settings = {ASSET_TAGS = (); }; };
 		D27F2E4D1A67624400913B14 /* dpScoreSceneDataWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D27F2E4B1A67624400913B14 /* dpScoreSceneDataWave.cpp */; };
@@ -487,6 +488,8 @@
 		D2619F371A6523C3002EF3E2 /* dpScoreSceneBodyBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyBase.h; sourceTree = "<group>"; };
 		D26CA8191A6F5E370050BB3D /* dpScoreUniqueStack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreUniqueStack.cpp; sourceTree = "<group>"; };
 		D26CA81A1A6F5E370050BB3D /* dpScoreUniqueStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreUniqueStack.h; sourceTree = "<group>"; };
+		D278BA771C59C7D100B2951E /* dpScoreSceneHakoMovies.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneHakoMovies.cpp; sourceTree = "<group>"; };
+		D278BA781C59C7D100B2951E /* dpScoreSceneHakoMovies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneHakoMovies.h; sourceTree = "<group>"; };
 		D27924321C4F2BDF000F5AFC /* dpScoreNodeMasterHakoniwa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreNodeMasterHakoniwa.cpp; sourceTree = "<group>"; };
 		D27924331C4F2BDF000F5AFC /* dpScoreNodeMasterHakoniwa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreNodeMasterHakoniwa.h; sourceTree = "<group>"; };
 		D27924351C4F448D000F5AFC /* dpScoreObjects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreObjects.cpp; sourceTree = "<group>"; };
@@ -1059,6 +1062,8 @@
 		D29034081A4D4ADE00577E04 /* scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D278BA771C59C7D100B2951E /* dpScoreSceneHakoMovies.cpp */,
+				D278BA781C59C7D100B2951E /* dpScoreSceneHakoMovies.h */,
 				D24A92FA1C562C7A00ECCBEF /* FlowChart */,
 				D21C771E1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp */,
 				D21C771F1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.h */,
@@ -1471,6 +1476,7 @@
 				D21D0BB11A4C046000CC3598 /* ofxUIValuePlotter.cpp in Sources */,
 				D24C21C91A49653D009D0796 /* ofxOscSender.cpp in Sources */,
 				D24C21C31A49653D009D0796 /* OscReceivedElements.cpp in Sources */,
+				D278BA791C59C7D100B2951E /* dpScoreSceneHakoMovies.cpp in Sources */,
 				D21D0BAC1A4C046000CC3598 /* ofxUITabBar.cpp in Sources */,
 				D24431111A68BD0D00574ACF /* dpScoreSceneDataSphere.cpp in Sources */,
 				D29034111A4D4ADE00577E04 /* dpScoreSceneBase.cpp in Sources */,

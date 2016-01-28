@@ -136,6 +136,7 @@ const string kSettingsDir {"settings/"};
 const string kSettingsPrefix {"scoreUI-"};
 
 const string kXmlSettingsPath {"settings/master_hakoniwa_settings.xml"};
+const string kXmlSettingsPathFlowChart {"settings/flow_chart_settings.xml"};
 
 const int kNumCameraunitVectors {10};
 
