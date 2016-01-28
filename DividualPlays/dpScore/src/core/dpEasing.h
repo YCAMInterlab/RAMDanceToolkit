@@ -527,7 +527,7 @@ inline float easeInElasticHelper_( float t, float b, float c, float d, float a, 
     if( t_adj == 1 ) return b+c;
 
     float s;
-    if( a < ::abs(c) ) {
+    if( a < ::fabsf(c) ) {
         a = c;
         s = p / 4.0f;
     }

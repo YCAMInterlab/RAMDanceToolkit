@@ -46,9 +46,9 @@ public:
     void update(ofxEventMessage& m) override;
     void draw() override;
     
-    void setupSkeleton(SkeletonPtr skl);
-    void updateSkeleton(SkeletonPtr skl);
-    void exitSkeleton(SkeletonPtr skl);
+    void setupSkeleton(SkeletonPtr skl) override;
+    void updateSkeleton(SkeletonPtr skl) override;
+    void exitSkeleton(SkeletonPtr skl) override;
     
 private:
     typedef vector<Node::Ptr> NodeVec;

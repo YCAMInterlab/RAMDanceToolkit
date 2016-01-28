@@ -56,16 +56,13 @@
 		D21D0BB31A4C046000CC3598 /* ofxUIWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B4C1A4C046000CC3598 /* ofxUIWidget.cpp */; };
 		D21D0BB41A4C046000CC3598 /* ofxUIWidgetWithLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0B4F1A4C046000CC3598 /* ofxUIWidgetWithLabel.cpp */; };
 		D21D0C0A1A4C0E2E00CC3598 /* ofxEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0C021A4C0E2E00CC3598 /* ofxEvent.cpp */; };
-		D21D0C0B1A4C0E2E00CC3598 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D21D0C041A4C0E2E00CC3598 /* README.md */; };
 		D21D0C0C1A4C0E2E00CC3598 /* ofxException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0C071A4C0E2E00CC3598 /* ofxException.cpp */; };
-		D21D0C0D1A4C0E2E00CC3598 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D21D0C091A4C0E2E00CC3598 /* README.md */; };
 		D228B33D1A5FB738005F0404 /* dpScoreSceneBodyGlobe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B33B1A5FB738005F0404 /* dpScoreSceneBodyGlobe.cpp */; };
 		D228B3791A5FC2D8005F0404 /* ofxMotioner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B36D1A5FC2D8005F0404 /* ofxMotioner.cpp */; };
 		D228B37A1A5FC2D8005F0404 /* ofxMotionerConstants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B36F1A5FC2D8005F0404 /* ofxMotionerConstants.cpp */; };
 		D228B37B1A5FC2D8005F0404 /* ofxMotionerNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3711A5FC2D8005F0404 /* ofxMotionerNode.cpp */; };
 		D228B37C1A5FC2D8005F0404 /* ofxMotionerSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3731A5FC2D8005F0404 /* ofxMotionerSkeleton.cpp */; };
 		D228B37D1A5FC2D8005F0404 /* ofxMotionerUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3751A5FC2D8005F0404 /* ofxMotionerUtils.cpp */; };
-		D228B37E1A5FC2D8005F0404 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D228B3771A5FC2D8005F0404 /* README.md */; };
 		D228B3841A5FC95C005F0404 /* dpScoreEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D228B3821A5FC95C005F0404 /* dpScoreEvent.cpp */; };
 		D22A7F8B1C4DFCC900F35879 /* dpScoreSceneFlowChart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D22A7F891C4DFCC900F35879 /* dpScoreSceneFlowChart.cpp */; settings = {ASSET_TAGS = (); }; };
 		D2404EBB1C5393D400B625EA /* dpScoreNodeDancer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2404EB91C5393D400B625EA /* dpScoreNodeDancer.cpp */; settings = {ASSET_TAGS = (); }; };
@@ -406,11 +403,9 @@
 		D21D0C011A4C0E2E00CC3598 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		D21D0C021A4C0E2E00CC3598 /* ofxEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxEvent.cpp; sourceTree = "<group>"; };
 		D21D0C031A4C0E2E00CC3598 /* ofxEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxEvent.h; sourceTree = "<group>"; };
-		D21D0C041A4C0E2E00CC3598 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D21D0C061A4C0E2E00CC3598 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		D21D0C071A4C0E2E00CC3598 /* ofxException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxException.cpp; sourceTree = "<group>"; };
 		D21D0C081A4C0E2E00CC3598 /* ofxException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxException.h; sourceTree = "<group>"; };
-		D21D0C091A4C0E2E00CC3598 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D21D0C0F1A4C2DAB00CC3598 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		D228B33B1A5FB738005F0404 /* dpScoreSceneBodyGlobe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = dpScoreSceneBodyGlobe.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		D228B33C1A5FB738005F0404 /* dpScoreSceneBodyGlobe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneBodyGlobe.h; sourceTree = "<group>"; };
@@ -425,7 +420,6 @@
 		D228B3741A5FC2D8005F0404 /* ofxMotionerSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMotionerSkeleton.h; sourceTree = "<group>"; };
 		D228B3751A5FC2D8005F0404 /* ofxMotionerUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMotionerUtils.cpp; sourceTree = "<group>"; };
 		D228B3761A5FC2D8005F0404 /* ofxMotionerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMotionerUtils.h; sourceTree = "<group>"; };
-		D228B3771A5FC2D8005F0404 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D228B3821A5FC95C005F0404 /* dpScoreEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreEvent.cpp; sourceTree = "<group>"; };
 		D228B3831A5FC95C005F0404 /* dpScoreEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreEvent.h; sourceTree = "<group>"; };
 		D22A7F891C4DFCC900F35879 /* dpScoreSceneFlowChart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneFlowChart.cpp; sourceTree = "<group>"; };
@@ -813,7 +807,6 @@
 				D21D0C011A4C0E2E00CC3598 /* .gitignore */,
 				D21D0C021A4C0E2E00CC3598 /* ofxEvent.cpp */,
 				D21D0C031A4C0E2E00CC3598 /* ofxEvent.h */,
-				D21D0C041A4C0E2E00CC3598 /* README.md */,
 			);
 			name = ofxEvent;
 			path = ../../addons/ofxEvent;
@@ -825,7 +818,6 @@
 				D21D0C061A4C0E2E00CC3598 /* .gitignore */,
 				D21D0C071A4C0E2E00CC3598 /* ofxException.cpp */,
 				D21D0C081A4C0E2E00CC3598 /* ofxException.h */,
-				D21D0C091A4C0E2E00CC3598 /* README.md */,
 			);
 			name = ofxException;
 			path = ../../addons/ofxException;
@@ -845,7 +837,6 @@
 				D228B3741A5FC2D8005F0404 /* ofxMotionerSkeleton.h */,
 				D228B3751A5FC2D8005F0404 /* ofxMotionerUtils.cpp */,
 				D228B3761A5FC2D8005F0404 /* ofxMotionerUtils.h */,
-				D228B3771A5FC2D8005F0404 /* README.md */,
 			);
 			name = ofxMotioner;
 			path = ../../addons/ofxMotioner;
@@ -1457,7 +1448,6 @@
 				D21D0B9F1A4C046000CC3598 /* ofxUIMultiImageButton.cpp in Sources */,
 				D228B37B1A5FC2D8005F0404 /* ofxMotionerNode.cpp in Sources */,
 				D24C21C41A49653D009D0796 /* OscTypes.cpp in Sources */,
-				D21D0C0D1A4C0E2E00CC3598 /* README.md in Sources */,
 				D2619F381A6523C3002EF3E2 /* dpScoreSceneBodyBase.cpp in Sources */,
 				D228B33D1A5FB738005F0404 /* dpScoreSceneBodyGlobe.cpp in Sources */,
 				D21D0B9E1A4C046000CC3598 /* ofxUIMovingGraph.cpp in Sources */,
@@ -1532,7 +1522,6 @@
 				D21D0B961A4C046000CC3598 /* ofxUIImageButton.cpp in Sources */,
 				D24C21C71A49653D009D0796 /* ofxOscParameterSync.cpp in Sources */,
 				D21D0C0A1A4C0E2E00CC3598 /* ofxEvent.cpp in Sources */,
-				D228B37E1A5FC2D8005F0404 /* README.md in Sources */,
 				D29B99271A63F023000115C5 /* Perlin.cpp in Sources */,
 				D228B37C1A5FC2D8005F0404 /* ofxMotionerSkeleton.cpp in Sources */,
 				D29034161A4D4ADE00577E04 /* dpScoreSceneVec2Plotter.cpp in Sources */,
@@ -1541,7 +1530,6 @@
 				D21D0BB21A4C046000CC3598 /* ofxUIWaveform.cpp in Sources */,
 				D27F2E4D1A67624400913B14 /* dpScoreSceneDataWave.cpp in Sources */,
 				D2E2B7411A4A4FB500570C58 /* tinyxmlparser.cpp in Sources */,
-				D21D0C0B1A4C0E2E00CC3598 /* README.md in Sources */,
 				D21D0BA31A4C046000CC3598 /* ofxUIRangeSlider.cpp in Sources */,
 				D2CD5BCA1C50AB6500480F50 /* dpScoreNodeLight.cpp in Sources */,
 				D2404EBB1C5393D400B625EA /* dpScoreNodeDancer.cpp in Sources */,
@@ -1615,6 +1603,7 @@
 					DEBUG,
 					DP_MASTER_HAKONIWA,
 				);
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
 					src,
@@ -1687,6 +1676,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = dpMasterHakoniwaDebug;
 				SDKROOT = macosx10.10;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../addons/ofxOsc/libs/oscpack/src\"";
@@ -1711,6 +1701,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ./PrefixHeader.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = DP_MASTER_HAKONIWA;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
 					src,
@@ -1783,6 +1774,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = dpMasterHakoniwa;
 				SDKROOT = macosx10.10;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../addons/ofxOsc/libs/oscpack/src\"";
@@ -1807,6 +1799,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -1842,6 +1835,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -1949,6 +1943,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = dpScoreDebug;
 				SDKROOT = macosx10.10;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../addons/ofxOsc/libs/oscpack/src\"";
@@ -2044,6 +2039,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = dpScore;
 				SDKROOT = macosx10.10;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../addons/ofxOsc/libs/oscpack/src\"";
