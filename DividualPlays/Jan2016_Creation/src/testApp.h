@@ -36,7 +36,6 @@
 #include "dpAllHakoniwaMove.h"
 
 #include "FloorLine.h"
-#include "BurstBody_ext.h"
 
 #include "DoSomething.h"
 
