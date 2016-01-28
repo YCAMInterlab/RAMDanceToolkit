@@ -70,9 +70,7 @@ void SceneFlowChart::initialize()
 	xml.pushTag("lighting");
 	auto host = xml.getAttribute("osc", "host", "127.0.0.1");
 	auto port = xml.getAttribute("osc", "port", 10001);
-	xml.popTag();
-
-	cout << "lighting osc: " << host << ", " << port << endl;
+    xml.popTag();
 
 	mOscSender.setup(host, port);
 }
