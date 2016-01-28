@@ -19,7 +19,7 @@ NodeCameraUnit::NodeCameraUnit()
 {
     title = "Hakoniwa Analysis";
     titleJP = "映像解析";
-    descriptionJP = "映像解析\n箱庭の内部の状態をコンピュータで映像解析";
+    descriptionJP = "「映像解析」\n箱庭の内部の状態をコンピュータで映像解析";
     
     setGlobalPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 250.f, 0.f, 100.f);
     addAimingOffset(ofVec3f(getWidth() * 0.5f, getHeight() * 0.82f, -20.f));

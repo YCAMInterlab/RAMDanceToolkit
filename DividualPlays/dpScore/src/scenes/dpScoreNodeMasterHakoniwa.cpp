@@ -18,7 +18,7 @@ NodeMasterHakoniwa::NodeMasterHakoniwa()
 {
 	title = "Master Hakoniwa";
 	titleJP = "マスター箱庭";
-	descriptionJP = "マスター箱庭\n各ダンサーの運動量で溢れる色水の量が変化\n水槽の中の状態を解析して利用する箱庭を選択する";
+	descriptionJP = "「マスター箱庭」\n各ダンサーの運動量で溢れる色水の量が変化\n水槽の中の状態を解析して利用する箱庭を選択する";
 
 	setGlobalPosition(ofVec3f(450.f, 0.f, 400.f - Desk::getDimension()));
 	addAimingOffset(ofVec3f(Desk::getDimension() * 0.5f, Desk::getHeight() + 50.f, Desk::getDimension() * 0.5f + 30.f));

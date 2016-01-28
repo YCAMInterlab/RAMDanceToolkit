@@ -14,16 +14,16 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-               BuildableName = "dpScore.app"
-               BlueprintName = "dpScore"
+               BlueprintIdentifier = "D27D33851C5A41FB009F2B25"
+               BuildableName = "dpFlowChart.app"
+               BlueprintName = "dpFlowChart"
                ReferencedContainer = "container:dpScore.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "dpScore.app"
-            BlueprintName = "dpScore"
+            BlueprintIdentifier = "D27D33851C5A41FB009F2B25"
+            BuildableName = "dpFlowChart.app"
+            BlueprintName = "dpFlowChart"
             ReferencedContainer = "container:dpScore.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -42,7 +42,7 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -55,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "dpScore.app"
-            BlueprintName = "dpScore"
+            BlueprintIdentifier = "D27D33851C5A41FB009F2B25"
+            BuildableName = "dpFlowChart.app"
+            BlueprintName = "dpFlowChart"
             ReferencedContainer = "container:dpScore.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -65,27 +65,26 @@
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "dpScore.app"
-            BlueprintName = "dpScore"
+            BlueprintIdentifier = "D27D33851C5A41FB009F2B25"
+            BuildableName = "dpFlowChart.app"
+            BlueprintName = "dpFlowChart"
             ReferencedContainer = "container:dpScore.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Debug">
+      buildConfiguration = "Release">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
