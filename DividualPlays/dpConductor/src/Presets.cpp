@@ -145,7 +145,17 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_LEFT_SHOULDER);
 	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_ABDOMEN);
 	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_RIGHT_TOE);
-	
+	for (int i = 0;i < 3;i++)
+	{
+		ns->addTuneF(SCENE_LINE, "Curve"+ofToString(i)		, i == 1 ? 0.0 : 100.0);
+		ns->addTuneF(SCENE_LINE, "ext_to"+ofToString(i)		, 800.0);
+		ns->addTuneF(SCENE_LINE, "ext_from"+ofToString(i)	, 800.0);
+		ofFloatColor c;
+		c.setHsb(i / 6.0, 1.0, 1.0);
+		ns->addTuneF(SCENE_LINE, "Red_"+ofToString(i)		, c.r);
+		ns->addTuneF(SCENE_LINE, "Green_"+ofToString(i)		, c.g);
+		ns->addTuneF(SCENE_LINE, "Blue_"+ofToString(i)		, c.b);
+	}
 	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, true);
 	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
 	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
@@ -482,12 +492,12 @@ void dpConductor::setSections()
 	ns->needExtClear = true;
 	ns->sectionName = "0240-Chaser-Tornado-SandStorm-Fp";
 	
+	ns->addHakoniwa(HAKO_TORNADO, true, true, false);
+	ns->addHakoniwa(HAKO_SANDSTORM, true, false, true);
 	ns->addScene("dpHSandStorm", false, false, false, false);
 	ns->addScene("dpVisSandStorm", false, true, false, false);
 	ns->addScene(SCENE_CAMERA, false, false, false, false);
 	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addHakoniwa(HAKO_TORNADO, true, true, false);
-	ns->addHakoniwa(HAKO_SANDSTORM, true, false, true);
 	ns->addScene(SCENE_CHASER, true, false, true, true);
 	ns->addExtractor(HAKO_SANDSTORM, ACTOR_KOJIRI, JOINT_RIGHT_WRIST);
 	ns->addExtractor(HAKO_SANDSTORM, ACTOR_KOJIRI, JOINT_LEFT_WRIST);
@@ -558,10 +568,10 @@ void dpConductor::setSections()
 	ns->sectionName = "0270-magPendulum";
 	ns->addHakoniwa(HAKO_MAGPENDULUM, true, true, true);
 	ns->addScene("dpHMagPendulum", false, false, false, false);
-	ns->addScene("dpVisMagPendulum", false, true, false, true);
+	ns->addScene("dpVisMagPendulum"	, false, true, true, false);
 	ns->addScene(SCENE_CAMERA, false, false, false, false);
 	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_METABALL, false, false, false, true);
+	ns->addScene(SCENE_METABALL		, false, false, false, true);
 	
 	ns->addExtractor(HAKO_MAGPENDULUM, ACTOR_KOJIRI, JOINT_LEFT_WRIST);
 	ns->addExtractor(HAKO_MAGPENDULUM, ACTOR_KOJIRI, JOINT_RIGHT_KNEE);
@@ -593,8 +603,8 @@ void dpConductor::setSections()
 	ns->sectionName = "0280-magPendulum";
 	ns->addHakoniwa(HAKO_MAGPENDULUM, true, true, true);
 	ns->addScene("dpHMagPendulum", false, false, false, false);
-	ns->addScene("dpVisMagPendulum", false, true, true, false);
-	ns->addScene(SCENE_FOURPT, false, true, true, false);
+	ns->addScene("dpVisMagPendulum"	, false, true, false, true);
+	ns->addScene(SCENE_FOURPT		, false, true, true, false);
 	ns->addScene(SCENE_CAMERA, false, false, false, false);
 	ns->addScene(SCENE_ACTOR, false, false, false, false);
 

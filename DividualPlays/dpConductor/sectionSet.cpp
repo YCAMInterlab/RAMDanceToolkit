@@ -131,17 +131,9 @@ void sectionSet::doSection()
 			_scene->clearExtractor(extList[i].scene);
 	}
 	
-	ofxOscSender sender;
-	sender.setup("127.0.0.1", 12400);
 	for (int i = 0;i < hakoList.size();i++)
 	{
-		ofxOscMessage m;
-		m.setAddress("/ram/set_scene");
-		m.addStringArg(hakoList[i].scene);
-		m.addIntArg(hakoList[i].enable);
-		m.addIntArg(hakoList[i].A);
-		m.addIntArg(hakoList[i].B);
-		sender.sendMessage(m);
+		switchHakoniwa(hakoList[i].scene, hakoList[i].enable, hakoList[i].A, hakoList[i].B);
 	}
 	
 	//シーン登録
@@ -185,5 +177,42 @@ void sectionSet::doSection()
 		
 		if (e->envCmd == ENV_CMD_DRAWACT)
 			_environment->setActorDraw(e->actorName, e->drawAct);
+	}
+}
+
+void sectionSet::switchHakoniwa(string nameHakoniwa, bool enable, bool A, bool B)
+{
+	string baseName;
+	string hakoName;
+	string VisName;
+	
+	if (nameHakoniwa.substr(0,3) == "dpH")
+		baseName = nameHakoniwa.substr(3, nameHakoniwa.length() - 3);
+	
+	if (nameHakoniwa.substr(0,5) == "dpVis")
+		baseName = nameHakoniwa.substr(5, nameHakoniwa.length() - 5);
+	
+	hakoName = "dpH" + baseName;
+	VisName = "dpVis" + baseName;
+	
+	cout << "SWH::hakoniwa name : " << hakoName << endl;
+	cout << "SWH::hakoVis  name : " << VisName << endl;
+	
+	_camera->setCameraSlot(hakoName, enable, A, B);
+	
+	if (enable)
+	{
+		_scene->setScene(hakoName, true, false, false);
+		_scene->setScene(hakoName, true, false, false);
+		_scene->setScene(VisName, false, A, B);
+		_scene->setScene(VisName, true, A, B);
+	}
+	else
+	{//箱庭からのDisable処理
+		_scene->disableScene(hakoName, true);
+		_scene->disableScene(hakoName, false);
+		_scene->disableScene(VisName, true);
+		_scene->disableScene(VisName, false);
+		
 	}
 }
