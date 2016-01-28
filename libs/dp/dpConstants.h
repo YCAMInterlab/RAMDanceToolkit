@@ -16,8 +16,8 @@
 static const int SINGLE_SCREEN_WIDTH = 1366/2;
 static const int SINGLE_SCREEN_HEIGHT = 768;
 #elif defined(DEBUG_MACBOOK_PRO)
-static const int SINGLE_SCREEN_WIDTH = 1920/2;
-static const int SINGLE_SCREEN_HEIGHT = 1080;
+static const int SINGLE_SCREEN_WIDTH = 1920/3;
+static const int SINGLE_SCREEN_HEIGHT = 1080/3;
 #else
 static const int SINGLE_SCREEN_WIDTH = 1920;
 static const int SINGLE_SCREEN_HEIGHT = 1080;
@@ -49,8 +49,8 @@ static const string LIGHTING_IP = "192.168.20.8";
 
 static const int NUM_SCREEN_POSITIONS = 2;
 static const ofVec2f SCREEN_POSITIONS[NUM_SCREEN_POSITIONS] = {
-    ofVec2f(0.f, 0.f),
-    ofVec2f(SINGLE_SCREEN_WIDTH, 0.f),
+    ofVec2f(1920.f, 0.f),
+    ofVec2f(1920.f + SINGLE_SCREEN_WIDTH, 0.f),
 };
 
 static ofRectangle dpGetFirstScreenViewPort(){
