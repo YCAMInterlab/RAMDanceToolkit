@@ -12,178 +12,128 @@
 #include "Drop.h"
 #include "ramCenteredActor.h"
 
-class ObstacleSphere{
+class SoundSphere{
 private:
-    int mSoundDurationCounter = 0;
-    static const int MAX_SOUND_DUR = 120;
+    
+    void sendMessage(int enable){
+        ofxOscMessage m;
+        m.setAddress("/dp/floorLine/sound");
+        m.addIntArg(mID);
+        m.addIntArg(enable);
+        m.addFloatArg(mPos.x);
+        m.addFloatArg(mPos.y);
+        m.addFloatArg(mPos.z);
+        
+        mSenders[0]->sendMessage(m);
+        mSenders[1]->sendMessage(m);
+    }
+    
+    void randomizePosXY(){
+        mPos.x = ofRandom(-300,300);
+        mPos.z = ofRandom(-300,300);
+        mRad = ofRandom(20,70);
+    }
+    
+    bool hasTouched = false;
+
 public:
     ofPoint mPos;
     float mRad;
+
     bool isTouched = false;
     
-    ofSoundPlayer mPlayer;
+    int mID = 0;
+
+    ofColor mColor;
     
-    bool hasTouched = false;
+    ofxOscSender *mSenders[2];
     
-    int soundID = 0;
-    
-    static const int MAX_SOUND_NUM = 4;
-    ofColor mColors[MAX_SOUND_NUM];
-    
-    
-    
-    ObstacleSphere(){
-        randomizePos();
+    SoundSphere(int id){
         
-        mColors[0].set(ofColor::red);
-        mColors[1].set(ofColor::blue);
-        mColors[2].set(ofColor::green);
-        mColors[3].set(ofColor::magenta);
+        mID = id;
         
+        randomizePosOnGround();
+        
+        int rnd = mID % 4;
+        
+        if(rnd == 0){
+            mColor.set(ofColor::red);
+        }else if(rnd == 1){
+            mColor.set(ofColor::blue);
+        }else if(rnd == 2){
+            mColor.set(ofColor::green);
+        }else if(rnd == 3){
+            mColor.set(ofColor::magenta);
+        }
     }
     
     void reset(){
-        isTouched = false;
+        sendMessage(0);
     }
     
-    void randomizePos(){
-        mPos.x = ofRandom(-300,300);
-        mPos.z = ofRandom(-300,300);
+    void setSenders(ofxOscSender *sender1, ofxOscSender *sender2){
+        mSenders[0] = sender1;
+        mSenders[1] = sender2;
+    }
+    
+    void randomizePosOnGround(){
         
-        mRad = ofRandom(20,70);
+        randomizePosXY();
         
         mPos.y = mRad * 0.5;
         
-        char str[255];
-        
-        soundID = (int)ofRandom(0,4);
-        
-        sprintf(str,"../../../../resources/Sounds/%d.aif",soundID + 1);
-        
-        mPlayer.loadSound(str);
-        
-        
-        mPlayer.setVolume(0.5);
- 
     }
     
-    void update(ofPoint target){
+    void randomizePos(){
         
-        if(hasTouched == false && isTouched == true){
-            mPlayer.play();
-            mSoundDurationCounter = 0;
-        }
+        randomizePosXY();
         
-        mSoundDurationCounter++;
-        if(mSoundDurationCounter == MAX_SOUND_DUR)mPlayer.stop();
+        mPos.y = mRad * 0.5 + ofRandom(0,300);
         
-        //if(hasTouched == true && isTouched == false)mPlayer.stop();
-        
-        if((mPos - target).length() < mRad){
-            isTouched = true;
-        }
     }
-    void draw(){
-        ofPushStyle();
-        ofFill();
-        if(isTouched){
-            ofSetColor(mColors[soundID]);
-        }
-        else ofSetColor(255,255,255);
-        ofDrawSphere(mPos,mRad);
-        ofPopStyle();
+    
+    
+    void resetTouched(){
+        isTouched = false;
     }
     
     void checkTouched(){
-        hasTouched = isTouched;
+        
+        if(isTouched && hasTouched == false){
+            sendMessage(1);
+            hasTouched = true;
+        }
+        
+        if(isTouched == false && hasTouched){
+            sendMessage(0);
+            hasTouched = false;
+        }
     }
-};
+    
+    void update(ofPoint target){
+    
+        if((mPos - target).length() < mRad){
+            
+            isTouched = true;
+            
+        }
 
-class EscapePoint{
-public:
-    
-    EscapePoint(ofPoint pt){
-        setOrigin(pt);
     }
-    
-    void setOrigin(ofPoint pt){
-        mOrigin = pt;
-        mPos = pt;
-        
-        mAngle = atan2(-pt.z,-pt.x);
-    }
-    
-    void resetFlag(){
-        isCloseToTarget = false;
-    }
-    
-    void checkTarget(ofPoint target){
-        
-        /*if(ofDist(mPos.x,mPos.z,target.x,target.z) < mThresh){
-            mPos.x += (mPos.x - target.x) * speed;
-            mPos.z += (mPos.z - target.z) * speed;
-            isCloseToTarget = true;
-        }*/
-    }
-    
-    void checkAngle(float angle,float rad,ofPoint target){
-        
-        if(abs(mAngle - angle) < mThresh){
-            //mPos.x += (mPos.x) * speed;
-            //mPos.z += (mPos.z) * speed;
-            
-            float x = cos(angle) * -rad;
-            float z = sin(angle) * -rad;
-            
-           // mPos.x += (x - mPos.x) * speed;
-           // mPos.z += (z - mPos.z) * speed;
-            
-            mPos.x = x;
-            mPos.z = z;
-            
-            isCloseToTarget = true;
-        }
-        
-        mTarget = target;
-    }
- 
-    void update(){
-        
-        if(isCloseToTarget == false){
-        
-            mPos += (mOrigin - mPos) * speed;
-            
-        }
-    }
-    
     void draw(){
         
-        glVertex3f(mPos.x,mPos.y,mPos.z);
-    
-    }
-    
-    void drawLine(){
-        if(isCloseToTarget){
-        ofSetColor(255,255,255);
-        ofLine(mPos.x,mPos.y,mPos.z,
-               mTarget.x,mTarget.y,mTarget.z);
+        ofPushStyle();
+        ofFill();
+        
+        if(isTouched){
+            ofSetColor(mColor);
         }
+        else ofSetColor(255,255,255);
+        
+        ofDrawSphere(mPos,mRad);
+        ofPopStyle();
+    
     }
-    
-    ofPoint getPos(){
-        return mPos;
-    }
-    
-private:
-    ofPoint mOrigin;
-    ofPoint mPos;
-    ofPoint mTarget;
-    float speed = 0.1;
-    float mThresh = TWO_PI / 360.0;
-    bool isCloseToTarget = false;
-    float mSize = 4;
-    
-    float mAngle;
+  
 };
 
 class FloorLine : public ramBaseScene
@@ -195,28 +145,19 @@ public:
     
 	void setupControlPanel()
 	{
-        
-            // mTog.push_back(1);
-           // ramGetGUI().addToggle(ramActor::getJointName(i), &mTog[i]);
-       
+     
         ramGetGUI().addSlider("LeftShoulder",1.0,10.0,&mLShoulderScale);
         ramGetGUI().addSlider("RightShoulder",1.0,10.0,&mRShoulderScale);
         
         ramGetGUI().addSlider("LeftHip",1.0,10.0,&mLHipScale);
         ramGetGUI().addSlider("RightHip",1.0,10.0,&mRHipScale);
         
-        ramGetGUI().addToggle("isExtendDraw", &isExtendDraw);
-        ramGetGUI().addToggle("isPushUp", &isPushUp);
-        ramGetGUI().addToggle("isEscape", &isEscape);
-        ramGetGUI().addSlider("escape rad",50,400,&mHankei);
-        ramGetGUI().addToggle("isDrop", &isDrop);
-        ramGetGUI().addSlider("handDropThresh",0.0,200.0,&mHandThresh);
-        ramGetGUI().addToggle("isObstacleSphere", &isObstacle);
+        ramGetGUI().addToggle("isSoundSphere", &mIsSphere);
         
+        ramGetGUI().addButton("randomizePosOnGround");
+        ramGetGUI().addButton("randomizePos");
         
-        ramGetGUI().addButton("randomObstacleSphere");
-        
-         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &FloorLine::onPanelChanged);
+        ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &FloorLine::onPanelChanged);
  
         
     }
@@ -224,23 +165,11 @@ public:
 	void setup()
 	{
         
-        for(int i = 0; i < PT_NUM; i++){
-            float theta = ofMap(i,0,PT_NUM,0,TWO_PI);
-            float x = cos(theta) * mHankei;
-            float z = sin(theta) * mHankei;
-            float y = posY;
-            
-            EscapePoint pt(ofPoint(x,y,z));
-            mPts.push_back(pt);
+        for(int i = 0; i < NUM_SPHERE; i++){
+            mSpheres.push_back(SoundSphere(i));
         }
         
-        for(int i = 0; i < DROP_NUM; i++){
-            mDrops.push_back(Drop());
-        }
-        
-        for(int i = 0; i < OB_NUM; i++){
-            mObstacle.push_back(ObstacleSphere());
-        }
+        setupOscSenders();
         
     }
     
@@ -250,90 +179,23 @@ public:
     
 	void update()
 	{
-        for(auto &v:mDrops){
-            v.update();
+        for(auto &v:mSpheres){
+            v.resetTouched();
         }
-        
-        //ofSoundUpdate();
 	}
     
 	void draw()
 	{
-		
-		ramBeginCamera();
-        
-        if(isEscape){
-            
-        ofPushMatrix();
-        //ofScale(10,1,10);
-        ofPushStyle();
-        ofNoFill();
-        
-        ofSetColor(255,255,255);
-        
-        ofBeginShape();
-        for(int i = 0; i < mPts.size(); i++){
-            ofVertex(mPts[i].getPos().x,mPts[i].getPos().y,mPts[i].getPos().z);
-        }
-        
-        ofVertex(mPts[0].getPos().x,mPts[0].getPos().y,mPts[0].getPos().z);
-        
-        ofEndShape();
-        ofPopStyle();
-    
-        glPointSize(6);
-        glEnable(GL_POINT_SMOOTH);
-        glBegin(GL_POINTS);
-        
-        glColor4f(1,1,1,1);
-        
-        for(auto &v:mPts){
-            v.draw();
-        }
-        glEnd();
-            
-            for(auto &v:mPts){
-              //  v.drawLine();
-            }
-        
-        ofPopMatrix();
-            
-        }
-        
-        if(isDrop){
-            ofEnableBlendMode(OF_BLENDMODE_ADD);
-            ofDisableDepthTest();
-            for(auto &v:mDrops){
-                v.draw();
-            }
-            ofEnableDepthTest();
-        }
-        
-		ramEndCamera();
+	
 	}
     
 	void drawActor(const ramActor& actor)
 	{
-        for(auto &v:mPts){
-            v.resetFlag();
-        }
-        
-    
-        for(auto &v:mObstacle){
-            v.reset();
-        }
-        
-       // const vector<ramNodeArray> &arrays = getAllNodeArrays();
-        
-        //for(int i = 0; i < arrays.size(); i++){
+
             const ramNodeArray &array = actor;
         
-            // ramActor tmpActor(array);
-            
             ramActor centered = mCentered.update(array);
-            
-            if(!isExtendDraw)ramDrawBasicActor(centered);
-            
+        
             for(int j = 0; j < centered.getNumNode(); j++){
                 
                 ramNode &node = centered.getNode(j);
@@ -345,111 +207,50 @@ public:
                 if(j == ramActor::JOINT_LEFT_HIP)node.setScale(mLHipScale);
                 
                 if(j == ramActor::JOINT_RIGHT_HIP)node.setScale(mRHipScale);
-           
-             
-                if(j == ramActor::JOINT_LEFT_HAND){
-                 //   drawToUnderground(node);
-                }
                 
                 ofPoint pos = node.getGlobalPosition();
-                float angle = atan2(-pos.z,-pos.x);
-                
-                if(!isPushUp){
-                    if(pos.y < 0.0)node.setGlobalPosition(pos.x, 0.0, pos.z);
-                }
-                
-                //if(j == ramActor::JOINT_RIGHT_ELBOW)node.setScale(mRShoulderScale);
-                
-                if(j == ramActor::JOINT_LEFT_HAND || j == ramActor::JOINT_RIGHT_HAND || j == ramActor::JOINT_LEFT_TOE || j == ramActor::JOINT_RIGHT_TOE){
-                    
-                    if(ofDist(pos.x,pos.z,0,0) >= mHankei){
-                    
-                        ofPoint tmp = node.getGlobalPosition();
-                        
-                        for(auto &v:mPts){
-                            v.checkAngle(angle,ofDist(pos.x,pos.z,0,0),tmp);
-                        }
-                    
-                    }
-                }
+               
+                if(pos.y < 0.0)node.setGlobalPosition(pos.x, 0.0, pos.z);
                 
             }
-            
-            //ramNode &node = centered.getNode(ramActor::JOINT_LEFT_HAND);
-            
-            float offset = 0.0;
-            
-            pushUp(centered.getNode(ramActor::JOINT_LEFT_HAND), offset);
-            pushUp(centered.getNode(ramActor::JOINT_RIGHT_HAND), offset);
-            pushUp(centered.getNode(ramActor::JOINT_LEFT_TOE), offset);
-            pushUp(centered.getNode(ramActor::JOINT_RIGHT_TOE), offset);
-            
-            checkHandVelocity(centered);
+      
+            if(mIsSphere){
+                for(auto &v:mSpheres){
+                    v.update(centered.getNode(ramActor::JOINT_LEFT_HAND).getGlobalPosition());
+                    v.update(centered.getNode(ramActor::JOINT_RIGHT_HAND).getGlobalPosition());
+                    v.update(centered.getNode(ramActor::JOINT_LEFT_TOE).getGlobalPosition());
+                    v.update(centered.getNode(ramActor::JOINT_RIGHT_TOE).getGlobalPosition());
+                }
+            }
         
-        if(isObstacle){
-            for(auto &v:mObstacle){
-                v.update(centered.getNode(ramActor::JOINT_LEFT_HAND).getGlobalPosition() + ofPoint(0,offset));
-                v.update(centered.getNode(ramActor::JOINT_RIGHT_HAND).getGlobalPosition() + ofPoint(0,offset));
-                v.update(centered.getNode(ramActor::JOINT_LEFT_TOE).getGlobalPosition() + ofPoint(0,offset));
-                v.update(centered.getNode(ramActor::JOINT_RIGHT_TOE).getGlobalPosition() + ofPoint(0,offset));
-            }
-        }
-            
-            if(isExtendDraw){
-                for(int i = 0; i < centered.getNumNode(); i++){
-                
-                    ramNode &node = centered.getNode(i);
-                
-                    ofPushMatrix();
-                    ofTranslate(0, offset);
-                    float jointSize = (i == ramActor::JOINT_HEAD) ? 8.0 : 5.0;
-                    ofDrawBox(node.getGlobalPosition(), jointSize);
-                    ramLine(node);
-                    ofPopMatrix();
-                }
-            }
-
-        
-        for(auto &v:mPts){
-            v.update();
-        }
-        
-            if(isObstacle){
-                ofEnableLighting();
-                ofLight light;
-                light.enable();
-                for(auto &v:mObstacle){
-                    v.draw();
-                    v.checkTouched();
-                }
-                ofDisableLighting();
-            }
+            drawExtendActor(centered);
+            drawSpheres();
 	}
     
-    void pushUp(const ramNode &node,float &offset){
-        if(node.getGlobalPosition().y < 0.0)offset = max(offset,abs(node.getGlobalPosition().y));
+    void drawSpheres(){
+        if(mIsSphere){
+            ofEnableLighting();
+            ofLight light;
+            light.enable();
+            for(auto &v:mSpheres){
+                v.draw();
+                v.checkTouched();
+            }
+            ofDisableLighting();
+        }
     }
     
-    void checkHandVelocity(const ramNodeArray &array){
-        ramNode leftHand = array.getNode(ramActor::JOINT_LEFT_HAND);
-        ramNode rightHand = array.getNode(ramActor::JOINT_RIGHT_HAND);
-        
-        ofPoint lPos = leftHand.getGlobalPosition();
-        ofPoint rPos = rightHand.getGlobalPosition();
-        
-        if((lPos - pLeftHand).length() > mHandThresh)dropFired(lPos);
-        
-        if((rPos - pRightHand).length() > mHandThresh)dropFired(rPos);
-        
-        pLeftHand = lPos;
-        pRightHand = rPos;
-        
-    }
-    
-    void dropFired(ofPoint pos){
-        mDrops[mDropCounter].fired(pos,ofPoint(0,-2.0,0));
-        mDropCounter++;
-        mDropCounter %= DROP_NUM;
+    void drawExtendActor(ramActor &centered){
+        for(int i = 0; i < centered.getNumNode(); i++){
+            
+            ramNode &node = centered.getNode(i);
+            
+            ofPushMatrix();
+            float jointSize = (i == ramActor::JOINT_HEAD) ? 8.0 : 5.0;
+            ofDrawBox(node.getGlobalPosition(), jointSize);
+            ramLine(node);
+            ofPopMatrix();
+        }
     }
     
 	void drawRigid(const ramRigidBody &rigid)
@@ -477,33 +278,36 @@ public:
 		
 	}
     
+    void onDisabled(){
+        for(auto &v:mSpheres){
+            v.reset();
+        }
+    }
+    
     
     void onPanelChanged(ofxUIEventArgs& e)
 	{
 		string name = e.widget->getName();
-		
-		if (name == "hankei")
-		{
-			for(int i = 0; i < PT_NUM; i++){
-                float theta = ofMap(i,0,PT_NUM,0,TWO_PI);
-                float x = cos(theta) * mHankei;
-                float z = sin(theta) * mHankei;
-                float y = posY;
-                
-                mPts[i].setOrigin(ofPoint(x,y,z));
-            }
-		}
-        
-        
-        
-        
-        if(name == "randomObstacleSphere"){
+
+        if(name == "randomizePosOnGround"){
             
            ofxUIButton *b = static_cast<ofxUIButton *>(e.widget);
             
             if(b->getValue()){
             
-                for(auto &v:mObstacle){
+                for(auto &v:mSpheres){
+                    v.randomizePosOnGround();
+                }
+            }
+        }
+        
+        if(name == "randomizePos"){
+            
+            ofxUIButton *b = static_cast<ofxUIButton *>(e.widget);
+            
+            if(b->getValue()){
+                
+                for(auto &v:mSpheres){
                     v.randomizePos();
                 }
             }
@@ -512,48 +316,30 @@ public:
 	
 private:
     
-    static const int PT_NUM = 360;
-    vector<EscapePoint>mPts;
-    float posY = 100.0;
-    float mHankei = 100.0;
+    float mLShoulderScale = 6.0;
+    float mRShoulderScale = 6.0;
     
-    float mLShoulderScale = 1.0;
-    float mRShoulderScale = 1.0;
-    
-    float mLHipScale = 1.0;
-    float mRHipScale = 1.0;
-    
-    bool isDrawOnlyShadow = false;
-    
+    float mLHipScale = 6.0;
+    float mRHipScale = 6.0;
+
     ramCenteredActor mCentered;
     
-    static const int DROP_NUM = 200;
-    int mDropCounter = 0;
+    static const int NUM_SPHERE = 6;
     
-    ofPoint pLeftHand;
-    ofPoint pRightHand;
+    vector<SoundSphere>mSpheres;
+    bool mIsSphere = true;
     
-    vector<Drop>mDrops;
+    ofxOscSender mSenderToSound[2];
     
-    float mHandThresh = 16.0;
-    
-    bool isDrop = false;
-    bool isEscape = false;
-    bool isExtendDraw = true;
-    
-    bool isPushUp = false;
-    
-    static const int OB_NUM = 6;
-    vector<ObstacleSphere>mObstacle;
-    bool isObstacle = false;
-    
-    void drawToUnderground(ramNode &node){
-
-        ofLine(node.getGlobalPosition().x,node.getGlobalPosition().y,node.getGlobalPosition().z,
-        node.getGlobalPosition().x,node.getGlobalPosition().y - 1000.0,node.getGlobalPosition().z);
+    void setupOscSenders(){
+        mSenderToSound[0].setup("192.168.20.9",10000);
+        mSenderToSound[1].setup("192.168.20.10",10000);
+        
+        for(auto &v:mSpheres){
+            v.setSenders(&mSenderToSound[0], &mSenderToSound[1]);
+        }
         
     }
-    
 };
 
 

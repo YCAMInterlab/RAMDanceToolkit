@@ -71,6 +71,9 @@ BrokenBody mBroken;
 #include "BurstBody.h"
 BurstBody mBurst;
 
+#include "BurstBody_ext.h"
+BurstBody_ext mBurst_ext;
+
 #include "MoveSeparatedObjects.h"
 MoveSeparatedObjects mSep;
 
@@ -131,6 +134,10 @@ dp16_actorDrawer mActorDrawer;
 
 #include "magnetLooper.h"
 
+#include "dpHakoVisBug.h"
+
+#include "dpHakoVisMag.h"
+
 // sand
 dpHakoniwaSand hakoniwaSand;
 dpHakoVisSandStorm visSandStorm;
@@ -161,6 +168,8 @@ dpHakoVisStageBlob                visStage;
 magnetLooper looper;
 
 FloorLine floorLine;
+
+dpHakoVisMag mVisMag;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -215,6 +224,7 @@ void testApp::setup()
     sceneManager.addScene(mFixed.getPtr());
     sceneManager.addScene(mBroken.getPtr());
     sceneManager.addScene(mBurst.getPtr());
+    sceneManager.addScene(mBurst_ext.getPtr());
     sceneManager.addScene(floorLine.getPtr());
     sceneManager.addScene(mThree.getPtr());
 
@@ -245,6 +255,8 @@ void testApp::setup()
     //tornado
     sceneManager.addScene(hakoniwaTornado.getPtr());
     sceneManager.addScene(visTornado.getPtr());
+    
+    sceneManager.addScene(mVisMag.getPtr());
     
     sceneManager.addScene(looper.getPtr());
     sceneManager.addScene(allHakoniwaMove.getPtr());

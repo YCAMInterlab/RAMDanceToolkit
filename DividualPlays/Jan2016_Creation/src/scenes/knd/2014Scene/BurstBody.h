@@ -174,9 +174,9 @@ private:
     static const int NUM = 23;
     vector<BurstBox>mBoxes;
     bool mTog[NUM];
-    float thresh = 10.0;
+    float thresh = 2.0;
     
-    bool threshMode = false;
+    bool threshMode = true;
     bool velMode = false;
 };
 
