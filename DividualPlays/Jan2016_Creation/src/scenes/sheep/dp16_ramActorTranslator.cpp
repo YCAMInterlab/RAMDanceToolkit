@@ -15,14 +15,14 @@
 
 void dp16_ramActorTranslator::setupControlPanel()
 {
-	nameList[0] = ACTOR_MIYASHITA;
-	nameList[1] = ACTOR_SHIMAJI;
-	nameList[2] = ACTOR_KOJIRI;
-	nameList[3] = ACTOR_ANDO;
-//	nameList[0] = "miyashita";
-//	nameList[1] = "shimaji";
-//	nameList[2] = "kojiri";
-//	nameList[3] = "ando";
+//	nameList[0] = ACTOR_MIYASHITA;
+//	nameList[1] = ACTOR_SHIMAJI;
+//	nameList[2] = ACTOR_KOJIRI;
+//	nameList[3] = ACTOR_ANDO;
+	nameList[0] = "miyashita";
+	nameList[1] = "shimaji";
+	nameList[2] = "kojiri";
+	nameList[3] = "ando";
 	
 	palette[0].setHsb( 0.5, 0.9, 0.7);
 	palette[1].setHsb(0.95, 0.9, 0.7);
