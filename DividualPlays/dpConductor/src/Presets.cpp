@@ -11,9 +11,14 @@
 void dpConductor::setSections()
 {
 	//AddScene preset (Disp 1, Disp6, Disp2-3, Disp 4-5)
+
+	ofPtr<sectionSet> ns = newSection();//===================================================
+	ns->sectionName = "Blank";
+	ns->needExtClear = true;
+	ns->needSceneClear = true;
 	
 #pragma mark - BigBoxセクション
-	ofPtr<sectionSet> ns = newSection();//===================================================
+	ns = newSection();//===================================================
 	ns->sectionName = "DefaultBone";
 	ns->addScene("dp16_camera_controller", true, false, true, false);
 	ns->addScene("dp16_ramActorTranslator", true, false, true, false);
@@ -330,6 +335,8 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_BURST, ACTOR_SHIMAJI, JOINT_NECK);
 	ns->addExtractor(SCENE_DONUTS, ACTOR_MIYASHITA, JOINT_LEFT_ELBOW);
 	ns->addExtractor(SCENE_DONUTS, ACTOR_MIYASHITA, JOINT_RIGHT_WRIST);
+	ns->addTuneT(SCENE_DONUTS, "Show Actor", false);
+
 	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
 	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
 	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
@@ -375,6 +382,10 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_DONUTS, ACTOR_SHIMAJI, JOINT_RIGHT_KNEE);
 	ns->addExtractor(SCENE_DONUTS, ACTOR_MIYASHITA, JOINT_LEFT_TOE);
 	ns->addExtractor(SCENE_DONUTS, ACTOR_MIYASHITA, JOINT_HEAD);
+	
+	ns->addTuneF(SCENE_DONUTS, "Radius", 5.0);
+	ns->addTuneT(SCENE_DONUTS, "Show Actor", false);
+
 	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
 	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
 	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
@@ -556,6 +567,8 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_RIGHT_WRIST);
 	
 	ns->addExtractor(SCENE_DONUTS, ACTOR_MIYASHITA, JOINT_NECK);
+	ns->addTuneF(SCENE_DONUTS, "Radius", 5.0);
+	ns->addTuneT(SCENE_DONUTS, "Show Actor", true);
 	
 	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
 	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);

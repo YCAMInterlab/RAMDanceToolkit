@@ -142,6 +142,11 @@ void dpConductionGUI::event(ofxUIEventArgs &e)
 		conPtr->callSection(name);
 	}
 	
+	if ((w->getName() == "clear") && w->getState() == OFX_UI_STATE_DOWN)
+	{
+		conPtr->sceneCon->clearExtractor(currentScene->getActiveName());
+	}
+	
 	if ((w->getName() == "PushExt" && w->getState() == OFX_UI_STATE_DOWN) &&
 		(actorSel->getSelectedNames().size() > 0) && (jointSel->getSelectedNames().size() > 0))
 	{

@@ -54,6 +54,7 @@
 #define HAKO_TORNADO		string("dpHTornado")
 #define HAKO_STAGE			string("dpVisStage")
 #define HAKO_WORM			string("dpHWorm")
+#define HAKO_GEAR			string("dpHGear")
 
 enum Joint
 {
