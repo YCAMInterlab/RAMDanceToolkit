@@ -108,6 +108,7 @@ public:
 	ofPtr<cameraUnitManager> _camera;
 	ofPtr<environmentManager> _environment;
 	
+	void switchHakoniwa(string nameHakoniwa, bool enable, bool A, bool B);
 };
 
 #endif /* sectionSet_h */

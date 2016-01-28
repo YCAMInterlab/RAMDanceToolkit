@@ -18,8 +18,8 @@
 //#define ADDR_RDTK_2 string("192.168.20.3")
 //#define ADDR_CAMERAUNIT string("192.168.20.5")
 
-#define ADDR_RDTK_1 string("127.0.0.1")
-#define ADDR_RDTK_2 string("192.168.20.3")
+#define ADDR_RDTK_2 string("127.0.0.1")
+#define ADDR_RDTK_1 string("192.168.20.3")
 #define ADDR_CAMERAUNIT string("10.7.0.83")
 
 //#define ACTOR_ANDO string("ando")

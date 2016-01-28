@@ -46,6 +46,9 @@ void dpConductionGUI::setup()
 	ofAddListener(dynamicUI.newGUIEvent, this, &dpConductionGUI::event);
 	
 	currentScene->activateToggle(SCENE_LINE);
+	
+	jointSel->setAutoClose(true);
+	actorSel->setAutoClose(true);
 }
 
 void dpConductionGUI::setDUI(ofxOscMessage m)
@@ -86,6 +89,13 @@ void dpConductionGUI::setDUI(ofxOscMessage m)
 void dpConductionGUI::event(ofxUIEventArgs &e)
 {
 	ofxUIWidget* w = e.widget;
+	
+	
+	if ((jointSel->getSelectedNames().size() > 0) && (w == jointSel))
+		jointSel->setLabelText(jointSel->getSelectedNames()[0]);
+	
+	if ((actorSel->getSelectedNames().size() > 0) && (w == actorSel))
+		actorSel->setLabelText(actorSel->getSelectedNames()[0]);
 	
 	if (w->getName() == "Enable"  && w->getState() == OFX_UI_STATE_DOWN)
 	{
