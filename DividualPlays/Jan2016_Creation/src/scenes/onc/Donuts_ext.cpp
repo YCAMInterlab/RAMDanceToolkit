@@ -22,7 +22,7 @@ void Donuts_ext::setupControlPanel()
     
     ramGetGUI().addSection("Duplicated me");
     panel->addSlider("Duplicate", 1, 200, &mNumDuplicate, 200.f, 20.f);
-    panel->addSlider("Radius", 10.0, 1000.0, &mRadius, 200.f, 20.f);
+    panel->addSlider("Radius", 1.0, 1000.0, &mRadius, 200.f, 20.f);
     panel->addSlider("Box Size", 1.0, 1000.0, &mBoxSize, 200.f, 20.f);
     
     ramGetGUI().addSection("Reset, Toggle visibility");

@@ -38,7 +38,17 @@ public:
     void drawRigid(const ramRigidBody &rigid)
     {
     }
-    
+	
+	void onValueChanged(ofxUIEventArgs &e)
+	{
+		ofxUIWidget* w = e.widget;
+		if (w->getName() == "Randomize Topology")
+			randomizeTopology = true;
+		
+		if (w->getName() == "Randomize Geometry")
+			randomizeGeometry = true;
+	}
+	
     string getName() const { return "Monster_ext"; }
     
     ramMotionExtractor mex;

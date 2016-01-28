@@ -49,7 +49,7 @@ void ofApp::draw()
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key)
 {
-	if (key == 'l') dpCon->callSection("LineKojiri");
+	if (key == 'm') dpCon->sceneCon->setButtonTune(SCENE_MONSTER, "Randomize Topology");
 }
 
 

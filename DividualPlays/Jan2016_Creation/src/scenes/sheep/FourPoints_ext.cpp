@@ -53,7 +53,7 @@ void FourPoints_ext::draw()
 			ofQuaternion aq, bq;
 			aq.makeRotate(ofVec3f(1, 0, 0), an.getNormalized());
 			bq.makeRotate(ofVec3f(1, 0, 0), bn.getNormalized());
-			ofSetColor(255, 192);
+			ofSetColor(255, 240);
 			for(int i = 0; i < twistResolution; i++) {
 				float t = ofMap(i, 0, twistResolution - 1, 1 - twistExtensionHeight, 0 + twistExtensionHeight);
 				ofPushMatrix();

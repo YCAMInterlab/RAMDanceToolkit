@@ -65,7 +65,7 @@ void LineDrawing_ext::draw()
 	ramBeginCamera();
 
 	ofPushStyle();
-	for (int i = 0;i < NUM_LINE;i++)
+	for (int i = 0;i < MIN(NUM_LINE, mex.getNumPort() / 4);i++)
 	{
 		lines[i].draw();
 	}

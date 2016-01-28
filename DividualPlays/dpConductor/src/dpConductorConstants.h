@@ -14,23 +14,23 @@
 #define OSC_TUNE_ADDR string("/ram/tune/")
 #define OSC_EXTRACTOR_ADDR string("/ram/MEX/")
 
-//#define ADDR_RDTK_1 string("192.168.20.2")
-//#define ADDR_RDTK_2 string("192.168.20.3")
-//#define ADDR_CAMERAUNIT string("192.168.20.5")
+#define ADDR_RDTK_1 string("192.168.20.2")
+#define ADDR_RDTK_2 string("192.168.20.3")
+#define ADDR_CAMERAUNIT string("192.168.20.5")
 
-#define ADDR_RDTK_2 string("127.0.0.1")
-#define ADDR_RDTK_1 string("192.168.20.3")
-#define ADDR_CAMERAUNIT string("10.7.0.83")
+//#define ADDR_RDTK_2 string("127.0.0.1")
+//#define ADDR_RDTK_1 string("192.168.20.3")
+//#define ADDR_CAMERAUNIT string("10.7.0.83")
 
-//#define ACTOR_ANDO string("ando")
-//#define ACTOR_KOJIRI string("kojiri")
-//#define ACTOR_SHIMAJI string("shimaji")
-//#define ACTOR_MIYASHITA string("miyashita")
+#define ACTOR_ANDO string("ando")
+#define ACTOR_KOJIRI string("kojiri")
+#define ACTOR_SHIMAJI string("shimaji")
+#define ACTOR_MIYASHITA string("miyashita")
 
-#define ACTOR_ANDO string("Ando_2012-09-01_18-49-10")
-#define ACTOR_KOJIRI string("Richi_2012-09-01_16-55-24")
-#define ACTOR_SHIMAJI string("Richi_2012-09-01_16-52-45")
-#define ACTOR_MIYASHITA string("Ando_2012-09-01_19-19-45")
+//#define ACTOR_ANDO string("Ando_2012-09-01_18-49-10")
+//#define ACTOR_KOJIRI string("Richi_2012-09-01_16-55-24")
+//#define ACTOR_SHIMAJI string("Richi_2012-09-01_16-52-45")
+//#define ACTOR_MIYASHITA string("Ando_2012-09-01_19-19-45")
 
 #define SCENE_CAMERA	string("dp16_camera_controller")
 #define SCENE_ACTOR		string("dp16_ramActorTranslator")
@@ -38,12 +38,12 @@
 #define SCENE_LINE		string("Line_ext")
 #define SCENE_BIGBOX	string("BigBox_ext")
 #define SCENE_FOURPT	string("FourPoints_ext")
-#define SCENE_THREEPT	string("Three Points")
+#define SCENE_THREEPT	string("ThreePoints_ext")
 #define SCENE_BROKEN	string("BrokenBody_ext")
 #define SCENE_BURST		string("BurstBody_ext")
 
 #define SCENE_METABALL	string("distanceMetaball")
-#define SCENE_DONUTS	string("Donuts")
+#define SCENE_DONUTS	string("Donuts_ext")
 #define SCENE_MONSTER	string("Monster_ext")
 #define SCENE_CHASER	string("HastyChase_ext")
 
@@ -54,6 +54,7 @@
 #define HAKO_TORNADO		string("dpHTornado")
 #define HAKO_STAGE			string("dpVisStage")
 #define HAKO_WORM			string("dpHWorm")
+#define HAKO_GEAR			string("dpHGear")
 
 enum Joint
 {
