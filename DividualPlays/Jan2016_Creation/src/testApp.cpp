@@ -175,6 +175,10 @@ magnetLooper looper;
 
 FloorLine floorLine;
 
+#include "HakoniwaGearMove.h"
+
+HakoniwaGearMove mHakoniwaGearMove;
+
 //dpHakoVisMag mVisMag;
 
 #pragma mark - oF methods
@@ -268,6 +272,8 @@ void testApp::setup()
     
     sceneManager.addScene(looper.getPtr());
     sceneManager.addScene(allHakoniwaMove.getPtr());
+    
+    sceneManager.addScene(mHakoniwaGearMove.getPtr());
 	
     sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
     sceneManager.setShowAllActors(false);
