@@ -52,7 +52,7 @@ public:
     void update(ofxEventMessage& m) override;
     void draw() override;
     
-    void updateSkeleton(SkeletonPtr skl);
+    void updateSkeleton(SkeletonPtr skl) override;
     
 private:
     ofEasyCam mCam;
