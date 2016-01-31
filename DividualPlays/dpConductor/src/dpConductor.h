@@ -22,6 +22,7 @@ public:
 	void setSections();
 	void callSection(string name);
 	void receiveMasterHakoniwa(ofxOscMessage m);
+	void listSection(ofxOscMessage m);
 	
 	void switchHakoniwa(string nameHakoniwa,bool enable, bool A, bool B);
 	

@@ -62,6 +62,7 @@ void ramSceneManager::setup()
     
     oscReceiverTag.addAddress(RAM_OSC_ADDR_SET_SCENE);
 	oscReceiverTag.addAddress(RAM_OSC_ADDR_CLEAR_SCENE);
+	oscReceiverTag.addAddress(RAM_OSC_ADDR_CLEAR_DISPLAY);
 	
     ramOscManager::instance().addReceiverTag(&oscReceiverTag);
 }
@@ -171,12 +172,20 @@ void ramSceneManager::updateOsc()
 		
 		if (addr == RAM_OSC_ADDR_CLEAR_SCENE)
 		{
-			for (int i = 0;i < getNumScenes();i++)
+			for (int i = 1;i < getNumScenes();i++)
 			{
 				ramGetGUI().getSceneTabs().offSelect(getScene(i)->getName(),true);
 				getScene(i)->setEnabled(false);
 				setScreen(i, 0, false);
 				setScreen(i, 1, false);
+			}
+		}
+		
+		if (addr == RAM_OSC_ADDR_CLEAR_DISPLAY)
+		{			
+			for (int i = 1;i < getNumScenes();i++)
+			{
+				setScreen(i, m.getArgAsInt32(0), false);
 			}
 		}
 		

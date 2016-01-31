@@ -120,39 +120,66 @@ ofPtr<sectionSet> dpConductor::newSection()
 
 void dpConductor::switchHakoniwa(string nameHakoniwa, bool enable, bool A, bool B)
 {
-	string baseName;
-	string hakoName;
-	string VisName;
 	
-	if (nameHakoniwa.substr(0,3) == "dpH")
-		baseName = nameHakoniwa.substr(3, nameHakoniwa.length() - 3);
-	
-	if (nameHakoniwa.substr(0,5) == "dpVis")
-		baseName = nameHakoniwa.substr(5, nameHakoniwa.length() - 5);
-	
-	hakoName = "dpH" + baseName;
-	VisName = "dpVis" + baseName;
-	
-    if (baseName == "Stage")
-    {
-        cameraCon->setCameraSlot(VisName, enable, A, B);
-    }
-    else
-    {
-        cameraCon->setCameraSlot(hakoName, enable, A, B);
-    }
-	
-	if (enable)
+	if ((nameHakoniwa.substr(0,3) == "dpH") ||
+		(nameHakoniwa.substr(0,5) == "dpVis"))
 	{
-		sceneCon->setScene(hakoName, true, false, false);
-		sceneCon->setScene(VisName, false, A, B);
-		sceneCon->setScene(VisName, true, A, B);
+		string baseName;
+		string hakoName;
+		string VisName;
+		
+		if (nameHakoniwa.substr(0,3) == "dpH")
+			baseName = nameHakoniwa.substr(3, nameHakoniwa.length() - 3);
+		
+		if (nameHakoniwa.substr(0,5) == "dpVis")
+			baseName = nameHakoniwa.substr(5, nameHakoniwa.length() - 5);
+		
+		hakoName = "dpH" + baseName;
+		VisName = "dpVis" + baseName;
+		
+		cameraCon->setCameraSlot(VisName, enable, A, B);
+		
+		if (enable)
+		{
+			sceneCon->setScene(hakoName, true, false, false);
+			sceneCon->setScene(VisName, false, A, B);
+			sceneCon->setScene(VisName, true, A, B);
+		}
+		else
+		{//箱庭からのDisable処理
+			sceneCon->disableScene(hakoName, true);
+			sceneCon->disableScene(hakoName, false);
+			sceneCon->disableScene(VisName, true);
+			sceneCon->disableScene(VisName, false);
+		}
 	}
 	else
-	{//箱庭からのDisable処理
-		sceneCon->disableScene(hakoName, true);
-		sceneCon->disableScene(hakoName, false);
-		sceneCon->disableScene(VisName, true);
-		sceneCon->disableScene(VisName, false);
+	{
+		//箱庭意外のシーンは4−5にスルーアウト
+		if (enable)
+		{
+			sceneCon->setScene(nameHakoniwa, true, false, false);
+			sceneCon->setScene(nameHakoniwa, false, false, true);
+		}
+		else
+		{
+			sceneCon->disableScene(nameHakoniwa, true);
+			sceneCon->disableScene(nameHakoniwa, false);
+		}
+	}
+
+}
+
+void dpConductor::listSection(ofxOscMessage m)
+{
+	ofxOscSender sender;
+	sender.setup(m.getRemoteIp(), 24800);
+	
+	for (int i = 0;i < sections.size();i++)
+	{
+		ofxOscMessage ret;
+		ret.setAddress("/dpc/queList");
+		ret.addStringArg(sections[i]->sectionName);
+		sender.sendMessage(ret);
 	}
 }

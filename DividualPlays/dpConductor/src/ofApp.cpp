@@ -27,6 +27,7 @@ void ofApp::update()
 		if (m.getAddress() == "/ram/set_scene") gui.setScene(m);
 		if (m.getAddress() == "/que") dpCon->callSection(m.getArgAsString(0));
 		if (m.getAddress() == "/ram/uiList")	gui.setDUI(m);
+		if (m.getAddress() == "/getSection") dpCon->listSection(m);
 	}
 }
 
