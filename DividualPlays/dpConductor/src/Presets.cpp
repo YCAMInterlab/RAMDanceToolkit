@@ -537,7 +537,6 @@ void dpConductor::setSections()
 	ns->addScene(SCENE_ACTOR, false, false, false, false);
 	ns->addScene(SCENE_FOURPT, true, true, true, true);
 	
-	string actor_fp[] = {ACTOR_KOJIRI, ACTOR_SHIMAJI, ACTOR_MIYASHITA};
 	for (int i = 0;i < 3;i++)
 	{
 		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_RIGHT_WRIST);

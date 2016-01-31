@@ -11,6 +11,7 @@
 
 //#define DEBUG_MACBOOK_AIR
 //#define DEBUG_MACBOOK_PRO
+//#define ACTING_KAAT
 
 #if defined(DEBUG_MACBOOK_AIR)
 static const int SINGLE_SCREEN_WIDTH = 1366 / 2;
@@ -49,9 +50,25 @@ static const string LIGHTING_IP = "192.168.20.8";
 
 static const int NUM_SCREEN_POSITIONS = 2;
 static const ofVec2f SCREEN_POSITIONS[NUM_SCREEN_POSITIONS] = {
+
+#ifdef ACTING_KAAT
+	ofVec2f(1920.f, 0.f),
+	ofVec2f(1920.f + SINGLE_SCREEN_WIDTH, 0.f),
+#else
 	ofVec2f(0.f, 0.f),
 	ofVec2f(0.f + SINGLE_SCREEN_WIDTH, 0.f),
+#endif
+
 };
+
+#ifdef ACTING_KAAT
+static const int THUMB_SCREEN_WIDTH = 768;
+static const int THUMB_SCREEN_HEIGHT = 432;
+static const ofVec2f THUMB_POSITIONS[NUM_SCREEN_POSITIONS] = {
+	ofVec2f(240.f, 600.f),
+	ofVec2f(240.f + THUMB_SCREEN_WIDTH, 600.f),
+};
+#endif
 
 static ofRectangle dpGetFirstScreenViewPort()
 {

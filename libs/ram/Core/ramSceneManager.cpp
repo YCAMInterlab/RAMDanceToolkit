@@ -421,6 +421,18 @@ void ramSceneManager::draw(ofEventArgs& args)
                 scene->getFbo()->draw(SCREEN_POSITIONS[i],
                                       scene->getFbo()->getWidth(),
                                       scene->getFbo()->getHeight());
+				
+#ifdef ACTING_KAAT
+				ofDrawBitmapString("Screen :" + string(i == 0 ? "A" : "B"), THUMB_POSITIONS[i]);
+				scene->getFbo()->draw(THUMB_POSITIONS[i],
+									  THUMB_SCREEN_WIDTH,
+									  THUMB_SCREEN_HEIGHT);
+				ofPushStyle();
+				ofSetColor(255);
+				ofNoFill();
+				ofRect(THUMB_POSITIONS[i], THUMB_SCREEN_WIDTH, THUMB_SCREEN_HEIGHT);
+				ofPopStyle();
+#endif
             }
         }
     }

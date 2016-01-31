@@ -355,8 +355,11 @@ void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
     if (m.getAddress() == "/dp/gearMove/fingerpress/" ||
         ad.substr(0,16) == "/dp/magnetLooper"){
         cout << "Through out" << m.getAddress() << endl;
-        sender.setup("192.168.20.10", 10000);
-        sender.sendMessage(m);
+		if (!NETWORK_ISSTOP)
+		{
+			sender.setup("192.168.20.10", 10000);
+			sender.sendMessage(m);
+		}
     }
     
     if (m.getAddress() == "/dp/matrix/manual")
@@ -411,7 +414,9 @@ void dpSwitchingManager::receiveOscMessage(ofxOscMessage &m){
 		}
 		if (!isSlave){
 			m.setAddress("/ram/set_slave");
-			senderToSlave.sendMessage(m);
+			if (!NETWORK_ISSTOP){
+				senderToSlave.sendMessage(m);
+			}
 		}
 	}
 
@@ -699,7 +704,7 @@ void dpSwitchingManager::refleshSceneforRDTK(){
                     mf.addIntArg(1);
                     mf.addIntArg(1);
                     mf.addIntArg(1);
-                    senderToFloor.sendMessage(mf);
+					if (!NETWORK_ISSTOP) senderToFloor.sendMessage(mf);
                 }
                 
 
@@ -723,7 +728,7 @@ int dpSwitchingManager::searchHakoniwaIsActive(hakoniwaType type){
 }
 
 void dpSwitchingManager::multiCast(ofxOscMessage &m){
-
+	if (NETWORK_ISSTOP) return;
 	for (int i = 0;i < oscListPtr->size();i++){
 		sender.setup((*oscListPtr)[i], 10000);
 		sender.sendMessage(m);

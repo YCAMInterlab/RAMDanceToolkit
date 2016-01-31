@@ -135,18 +135,15 @@ void dpConductor::switchHakoniwa(string nameHakoniwa, bool enable, bool A, bool 
 	
     if (baseName == "Stage")
     {
-        cout << "send" << VisName << endl;
         cameraCon->setCameraSlot(VisName, enable, A, B);
     }
     else
     {
-        cout << "send" << hakoName << endl;
         cameraCon->setCameraSlot(hakoName, enable, A, B);
     }
 	
 	if (enable)
 	{
-		sceneCon->setScene(hakoName, true, false, false);
 		sceneCon->setScene(hakoName, true, false, false);
 		sceneCon->setScene(VisName, false, A, B);
 		sceneCon->setScene(VisName, true, A, B);
@@ -157,6 +154,5 @@ void dpConductor::switchHakoniwa(string nameHakoniwa, bool enable, bool A, bool 
 		sceneCon->disableScene(hakoName, false);
 		sceneCon->disableScene(VisName, true);
 		sceneCon->disableScene(VisName, false);
-		
 	}
 }
