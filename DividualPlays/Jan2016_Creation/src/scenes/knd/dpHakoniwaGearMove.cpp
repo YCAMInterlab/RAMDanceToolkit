@@ -20,7 +20,7 @@ void dpHakoniwaGearMove::setupControlPanel(){
     mGearReverse = true;
     
     mMaxSpeed = 13000;
-    mMinSpeed = 1500;
+    mMinSpeed = 0;
 
     mSpeedScale = 50;
     
@@ -35,7 +35,7 @@ void dpHakoniwaGearMove::setupControlPanel(){
     panel->addToggle("isReverse", &mGearReverse);
     panel->addIntSlider("CurrentSpeed", 1500, 13000, &mGearSpeed);
     
-    panel->addIntSlider("SpeedScale", 50, 500, &mSpeedScale);
+    panel->addIntSlider("SpeedScale", 50, 1000, &mSpeedScale);
     panel->addIntSlider("MinSpeed", 0, 1500, &mMinSpeed);
     
     ofAddListener(panel->newGUIEvent, this, &dpHakoniwaGearMove::onPanelChanged);
