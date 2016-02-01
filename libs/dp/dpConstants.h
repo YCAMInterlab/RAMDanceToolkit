@@ -11,7 +11,7 @@
 
 //#define DEBUG_MACBOOK_AIR
 //#define DEBUG_MACBOOK_PRO
-//#define ACTING_KAAT
+#define ACTING_KAAT
 
 #if defined(DEBUG_MACBOOK_AIR)
 static const int SINGLE_SCREEN_WIDTH = 1366 / 2;
@@ -46,6 +46,8 @@ static const string SERVO_PENDULUM_IP = "192.168.20.67";
 static const string TORNADE_IP = "192.168.20.71";
 
 static const string LIGHTING_IP = "192.168.20.8";
+
+static const string GEAR_IP = "192.168.20.51";
 
 
 static const int SCREEN_B = 0;
