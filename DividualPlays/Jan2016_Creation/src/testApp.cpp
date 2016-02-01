@@ -283,12 +283,15 @@ void testApp::setup()
     sceneManager.setShowAllActors(false);
 
     doSomething.setup();
+    dancerCue.setup();
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
     doSomething.update();
+    dancerCue.update();
+    
     mSyphonClientManager->update();
     ramGetGUI().getSceneTabs().setPosition(0, -mouseY);
     
@@ -298,6 +301,7 @@ void testApp::update()
 void testApp::draw()
 {
     doSomething.draw();
+    dancerCue.draw();
 }
 
 

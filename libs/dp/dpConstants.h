@@ -48,6 +48,9 @@ static const string TORNADE_IP = "192.168.20.71";
 static const string LIGHTING_IP = "192.168.20.8";
 
 
+static const int SCREEN_B = 0;
+static const int SCREEN_C = 1;
+
 static const int NUM_SCREEN_POSITIONS = 2;
 static const ofVec2f SCREEN_POSITIONS[NUM_SCREEN_POSITIONS] = {
 
@@ -122,5 +125,35 @@ struct dpFloatColor
 	static const ofFloatColor DARK_PINK_LIGHT;
 	static const ofFloatColor DARK_PINK_HEAVY;
 };
+
+enum DANCER_NAME{
+    ANDO,
+    KOJIRI,
+    YAS,
+    MIYASHITA,
+    NUM
+};
+
+// for dancer cue or something...
+struct dpDancerColor
+{
+    static const ofColor ANDO_COLOR;
+    static const ofColor KOJIRI_COLOR;
+    static const ofColor YAS_COLOR;
+    static const ofColor MIYASHITA_COLOR;
+};
+
+static ofColor dancerNameToColor(DANCER_NAME name){
+    
+    if(name == ANDO)return dpDancerColor::ANDO_COLOR;
+    
+    if(name == KOJIRI)return dpDancerColor::KOJIRI_COLOR;
+    
+    if(name == YAS)return dpDancerColor::YAS_COLOR;
+    
+    if(name == MIYASHITA)return dpDancerColor::MIYASHITA_COLOR;
+    
+    return ofColor(0,0,0);
+}
 
 #endif
