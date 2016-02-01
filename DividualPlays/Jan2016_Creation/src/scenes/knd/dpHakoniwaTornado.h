@@ -97,11 +97,11 @@ public:
         
         mRad = ofMap(radius,mRadMin,mRadMax,0,255,true);
         
-        /*if(mRad > mFunThresh){
+        if(mRad > mFunThresh){
             mFan = 255;
         }else{
             mFan = 0;
-        }*/
+        }
         
         if(mRad < mDrawRadThresh)radius = 0.0;
         
