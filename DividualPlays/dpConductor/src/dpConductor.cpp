@@ -85,7 +85,7 @@ void dpConductor::receiveMasterHakoniwa(ofxOscMessage m)
 		
 	}else{
 		
-		//通常のシーンの扱い
+		//通常のシーンの扱い...４−５に送る
 		string sceneName = m.getArgAsString(0);
 		bool sceneEnable = m.getArgAsInt32(1);
 		bool ViewX = m.getArgAsInt32(2);
@@ -93,8 +93,8 @@ void dpConductor::receiveMasterHakoniwa(ofxOscMessage m)
 		
 		if (sceneEnable)
 		{
-			sceneCon->setScene(sceneName, true, ViewY, ViewY);
-			sceneCon->setScene(sceneName, false, ViewX, ViewY);
+			sceneCon->setScene(sceneName, true, false, false);
+			sceneCon->setScene(sceneName, false, false, true);
 		}else{
 			sceneCon->disableScene(sceneName, true);
 			sceneCon->disableScene(sceneName, false);
@@ -121,54 +121,38 @@ ofPtr<sectionSet> dpConductor::newSection()
 void dpConductor::switchHakoniwa(string nameHakoniwa, bool enable, bool A, bool B)
 {
 	
-	if ((nameHakoniwa.substr(0,3) == "dpH") ||
-		(nameHakoniwa.substr(0,5) == "dpVis"))
+	string baseName;
+	string hakoName;
+	string VisName;
+	
+	if (nameHakoniwa.substr(0,3) == "dpH")
+		baseName = nameHakoniwa.substr(3, nameHakoniwa.length() - 3);
+	
+	if (nameHakoniwa.substr(0,5) == "dpVis")
+		baseName = nameHakoniwa.substr(5, nameHakoniwa.length() - 5);
+	
+	hakoName = "dpH" + baseName;
+	VisName = "dpVis" + baseName;
+	
+	cameraCon->setCameraSlot(VisName, enable, A, B);
+	
+	if (enable)
 	{
-		string baseName;
-		string hakoName;
-		string VisName;
+		//マスターからの受けは2-3-6ディスプレイに出力
+		bool allowed23 = true;//2-3出しの許可
 		
-		if (nameHakoniwa.substr(0,3) == "dpH")
-			baseName = nameHakoniwa.substr(3, nameHakoniwa.length() - 3);
+		sceneCon->setScene(hakoName, false, false, false);
+		sceneCon->setScene(VisName, false, allowed23, false);
+		sceneCon->setScene(VisName, true, false, true);
 		
-		if (nameHakoniwa.substr(0,5) == "dpVis")
-			baseName = nameHakoniwa.substr(5, nameHakoniwa.length() - 5);
-		
-		hakoName = "dpH" + baseName;
-		VisName = "dpVis" + baseName;
-		
-		cameraCon->setCameraSlot(VisName, enable, A, B);
-		
-		if (enable)
-		{
-			//マスターからの受けは4−5ディスプレイのみの出力
-			sceneCon->setScene(hakoName, false, false, false);
-			sceneCon->setScene(VisName, false, false, true);
-			sceneCon->setScene(VisName, true, false, false);
-			
-			sceneCon->loadExtractor(hakoName);
-		}
-		else
-		{//箱庭からのDisable処理
-			sceneCon->disableScene(hakoName, true);
-			sceneCon->disableScene(hakoName, false);
-			sceneCon->disableScene(VisName, true);
-			sceneCon->disableScene(VisName, false);
-		}
+		sceneCon->loadExtractor(hakoName);
 	}
 	else
-	{
-		//箱庭意外のシーンは4−5にスルーアウト
-		if (enable)
-		{
-			sceneCon->setScene(nameHakoniwa, true, false, false);
-			sceneCon->setScene(nameHakoniwa, false, false, true);
-		}
-		else
-		{
-			sceneCon->disableScene(nameHakoniwa, true);
-			sceneCon->disableScene(nameHakoniwa, false);
-		}
+	{//箱庭からのDisable処理
+		sceneCon->disableScene(hakoName, true);
+		sceneCon->disableScene(hakoName, false);
+		sceneCon->disableScene(VisName, true);
+		sceneCon->disableScene(VisName, false);
 	}
 
 }
