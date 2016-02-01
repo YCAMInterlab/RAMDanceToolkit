@@ -49,6 +49,7 @@
 #define SCENE_MONSTER_2	string("Monster_ext2")
 #define SCENE_CHASER	string("HastyChase_ext")
 
+#define HAKO_RAWCAM         string("dpRawCamera")
 #define HAKO_SANDSTORM		string("dpHSandStorm")
 #define HAKO_STRUGGLE		string("dpHStruggle")
 #define HAKO_SERVOPENDULUM	string("dpHServoPendulum")
