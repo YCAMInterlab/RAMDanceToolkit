@@ -25,6 +25,8 @@ public:
         ramGetGUI().addToggle("ServoPendulum", &mIsServoPendulum);
         ramGetGUI().addToggle("Gear", &mIsGear);
         ramGetGUI().addToggle("Tornade", &mIsTornade);
+        
+        ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpAllHakoniwaMove::onPanelChanged);
 
     }
     
@@ -37,6 +39,7 @@ public:
         sendServoPendulum();
         sendTornade(mIsTornade);
         sendMaglooper(mIsMagLooper);
+        sendGear(mIsGear);
         
         if (name == "ServoPendulum") {
             if(mIsServoPendulum){
@@ -129,8 +132,13 @@ public:
         ofxOscMessage m;
         m.setAddress("/dp/hakoniwa/struggle");
       
-        m.addIntArg(0);
-        m.addIntArg(1);
+        if(ofGetFrameNum() % 60 > 30){
+            m.addIntArg(0);
+            m.addIntArg(1);
+        }else{
+            m.addIntArg(1);
+            m.addIntArg(0);
+        }
         
         if(enable){
             m.addIntArg(255);
@@ -171,7 +179,7 @@ public:
         
         if(enable){
             mStepManager.setStepperAll(true);
-            mStepManager.run(1500, true);
+            mStepManager.run(11000, true);
             mStepManager.setStepperAll(false);
         }else{
             mStepManager.setStepperAll(true);
