@@ -53,7 +53,7 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
 	ns->addExtractor(SCENE_BIGBOX, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
 	
-#pragma mark 0050
+#pragma mark 0050 TODO: ボックスサイズプリセット
 	/*=============================================================*/
 	ns = setBasicSection("fp-0050-miyashita-in", false, false);
 	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_NECK);
@@ -80,7 +80,7 @@ void dpConductor::setSections()
 	ns->addTuneF(SCENE_LINE, "ext_to0", 800.0);
 	ns->addTuneF(SCENE_LINE, "ext_from0", 800.0);
 	
-#pragma mark 0090
+#pragma mark 0090 TODO: 4P 長さ
 	ns = setBasicSection("fp-0090-line-4p", true, true);
 	setCamActorScene(ns);
 	ns->addScene(SCENE_LINE, true, false, true, false);
@@ -110,7 +110,7 @@ void dpConductor::setSections()
 	ns->addTuneF(SCENE_LINE, "ext_from1", 800.0);
 
 #pragma mark 0100
-	ns = setBasicSection("fp-0010-of_proj", true, false);
+	ns = setBasicSection("fp-0010-off_proj", true, false);
 	setCamActorScene(ns);
 	ns->addScene(SCENE_LINE, false, false, true, false);
 	ns->addScene(SCENE_FOURPT, false, true, false, true);
@@ -161,16 +161,17 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_RIGHT_SHOULDER);
 	
 
-#pragma mark - 0130 TODO:ここ宮下さんだけモンスターインスタンス2つ作る
+#pragma mark - 0130 TODO:[DONE]ここ宮下さんだけモンスターインスタンス2つ作る
 	ns = setBasicSection("fp-0130-all-monster", true, true);
 	setCamActorScene(ns);
-	ns->addScene(SCENE_MONSTER, true, true, true, true);
+	ns->addScene(SCENE_MONSTER, false, false, true, true);
+	ns->addScene(SCENE_MONSTER_2, true, true, false, false);
 	ns->addExtractor(SCENE_MONSTER, ACTOR_ANDO, JOINT_NECK);
 	ns->addExtractor(SCENE_MONSTER, ACTOR_KOJIRI, JOINT_NECK);
 	ns->addExtractor(SCENE_MONSTER, ACTOR_SHIMAJI, JOINT_NECK);
 	ns->addExtractor(SCENE_MONSTER, ACTOR_MIYASHITA, JOINT_NECK);
+	ns->addExtractor(SCENE_MONSTER_2, ACTOR_MIYASHITA, JOINT_NECK);
 	
-
 #pragma mark 0140
 	ns = setBasicSection("fp-0140-monster-burst", true, true);
 	setCamActorScene(ns);
@@ -297,11 +298,17 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_SHOULDER);
 	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_RIGHT_SHOULDER);
 	
-#pragma mark 0300 TODO: モンスター分配
+#pragma mark 0300 TODO: [DONE]モンスター分配
 	ns = setBasicSection("fp-0300-monster", true, true);
 	setCamActorScene(ns);
-	ns->addScene(SCENE_MONSTER, false, true, false, true);
-
+	ns->addScene(SCENE_MONSTER, false, false, false, true);
+	ns->addScene(SCENE_MONSTER_2, false, true, false, false);
+	ns->addExtractor(SCENE_MONSTER, ACTOR_ANDO, JOINT_NECK);
+	ns->addExtractor(SCENE_MONSTER, ACTOR_KOJIRI, JOINT_NECK);
+	ns->addExtractor(SCENE_MONSTER, ACTOR_SHIMAJI, JOINT_NECK);
+	ns->addExtractor(SCENE_MONSTER, ACTOR_MIYASHITA, JOINT_NECK);
+	ns->addExtractor(SCENE_MONSTER_2, ACTOR_MIYASHITA, JOINT_NECK);
+	
 #pragma mark 0310
 	ns = setBasicSection("fp-0310-monster-burst", true, true);
 	setCamActorScene(ns);
