@@ -74,7 +74,7 @@ void HakoniwaGearMove::onPanelChanged(ofxUIEventArgs& e){
 
 void HakoniwaGearMove::setup(){
     
-    stepManager.setupOsc("192.168.20.51", 8528);
+    stepManager.setupOsc(GEAR_IP, 8528);
 	stepManager.sendByteSimply = true;
 
     stepManager.addStepper("unit1", 400, 0);
