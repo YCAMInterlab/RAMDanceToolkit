@@ -99,9 +99,9 @@ void AnalyzePixelate::update()
             mWhich = r + g + b;
             if (getMH().getSceneController().getUniqueScenes().empty() == false) {
                 const int scene{(int)(mWhich % getMH().getSceneController().getUniqueScenes().size())};
-                const int score{(int)(mWhich % getMH().getSceneController().getNumUniqueScores())};
+                //const int score{(int)(mWhich % getMH().getSceneController().getNumUniqueScores())};
                 getMH().getSceneController().setUniqueScene(scene, mWin0, mWin1);
-                getMH().getSceneController().setUniqueScore(score);
+                //getMH().getSceneController().setUniqueScore(score);
                 mPrevSetSceneTime = t;
             }
             mDiffR.f = mDiffG.f = mDiffB.f = 0.f;

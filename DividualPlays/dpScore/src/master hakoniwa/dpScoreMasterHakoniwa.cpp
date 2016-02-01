@@ -9,6 +9,14 @@
 #include "dpScoreMasterHakoniwa.h"
 #include "ofxUI.h"
 
+/*
+ 
+ 残りシーン数送る
+ 箱庭同士が２個にならないようにする
+ スクリーン選べるようにする
+ 
+ */
+
 DP_SCORE_NAMESPACE_BEGIN
 
 const ofColor MH::kBackgroundColor{255, 20};
@@ -50,8 +58,10 @@ void MasterHakoniwa::setupUI(ofxUITabBar* tabbar)
                       &mSceneController.enableOscOutRDTK);
     tabbar->addToggle("Enable OSC to Master Hakoniwa",
                       &mColorOfWater.enableOscOut);
+    /*
     tabbar->addToggle("Enable OSC to Score",
                       &mSceneController.enableOscOutScore);
+     */
     tabbar->addToggle("Change Scene with CameraUnit",
                       &mEnableCameraUnit);
     tabbar->addToggle("Open Valve with MOTIONER",
@@ -319,8 +329,10 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
                 mColorOfWater.enableOscOut = true;
                 mColorOfWater.enableOpenValve = true;
                 mSceneController.enableOscOutRDTK = true;
+                /*
                 mSceneController.enableOscOutScore = true;
                 mSceneController.enableShowHakoniwaTitle = true;
+                 */
                 mEnableCameraUnit = true;
                 mAnalyzeMean.mMaster = true;
                 mAnalyzePixelate.mMaster = false;
@@ -331,14 +343,17 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
                 mColorOfWater.enableOscOut = false;
                 mColorOfWater.enableOpenValve = false;
                 mSceneController.enableOscOutRDTK = false;
+                /*
                 mSceneController.enableOscOutScore = true;
                 mSceneController.enableShowHakoniwaTitle = false;
+                 */
                 mEnableCameraUnit = false;
                 mAnalyzeMean.mMaster = true;
                 mAnalyzePixelate.mMaster = false;
+                /*
                 const string score{"dp::score::SceneVec2SimpleGraph"};
                 mSceneController.sendChangeScore(score);
-                
+                */
                 mSceneController.clearTimeLog();
             }
             else if (toggleName == "Outro") {
@@ -346,8 +361,10 @@ void MasterHakoniwa::guiEvent(ofxUIEventArgs& e)
                 mColorOfWater.enableOpenValve = true;
                 
                 mSceneController.enableOscOutRDTK = false;
+                /*
                 mSceneController.enableOscOutScore = true;
                 mSceneController.enableShowHakoniwaTitle = false;
+                 */
                 mEnableCameraUnit = true;
                 mAnalyzeMean.mMaster = true;
                 mAnalyzePixelate.mMaster = false;
