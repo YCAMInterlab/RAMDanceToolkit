@@ -10,25 +10,88 @@
 #define RAMDanceToolkit_dpAllHakoniwaMove_h
 
 #include "dpServoPendulumThread.h"
+#include "ofxKsmrStepManager.h"
 
 class dpAllHakoniwaMove : public ramBaseScene{
 public:
     string getName() const {return "dpAllHakoniwaMove";};
-    void setupControlPanel(){}
+    
+    void setupControlPanel(){
+        
+        ramGetGUI().addToggle("MagLooper", &mIsMagLooper);
+        ramGetGUI().addToggle("MagPendulum", &mIsMagPendulum);
+        ramGetGUI().addToggle("Struggle", &mIsStruggle);
+        ramGetGUI().addToggle("SandStorm", &mIsSandStorm);
+        ramGetGUI().addToggle("ServoPendulum", &mIsServoPendulum);
+        ramGetGUI().addToggle("Gear", &mIsGear);
+        ramGetGUI().addToggle("Tornade", &mIsTornade);
+
+    }
+    
+    void onPanelChanged(ofxUIEventArgs& e){
+        const string name = e.widget->getName();
+        
+        sendMagPendulum(mIsMagPendulum);
+        sendStruggle(mIsStruggle);
+        sendSandStorm(mIsSandStorm);
+        sendServoPendulum();
+        sendTornade(mIsTornade);
+        sendMaglooper(mIsMagLooper);
+        
+        if (name == "ServoPendulum") {
+            if(mIsServoPendulum){
+                
+                mServoThread.start();
+                
+            }else{
+                
+                 mServoThread.stop();
+                
+            }
+        }
+        
+    }
+    
     void setup(){
         
-        mSender[MAG_PENDULUM].setup(MAG_PENDULUM_ONOFF_IP,8528);
-        mSender[STRUGGLE].setup(STRUGGLE_IP,8528);
-        mSender[SAND_STORM].setup(SAND_STORM_IP,8528);
+        mSender[MAG_PENDULUM].setup(MAG_PENDULUM_ONOFF_IP, 8528);
+        mSender[STRUGGLE].setup(STRUGGLE_IP, 8528);
+        mSender[SAND_STORM].setup(SAND_STORM_IP, 8528);
        // mSender[SERVO_PENDULUM].setup(SERVO_PENDULUM_IP,8528);
         mSender[TORNADE].setup(TORNADE_IP,8528);
         
         mSender[MAGLOOPER_1].setup(MAGLOOPER_IP,MAGLOOPER_1_PORT);
         mSender[MAGLOOPER_2].setup(MAGLOOPER_IP,MAGLOOPER_2_PORT);
         
+        mSender[GEAR].setup(GEAR_IP, 8528);
+        
         mServoThread.setup();
         
+        setupStepManager();
     
+    }
+    
+    void setupStepManager(){
+        
+        mStepManager.setupOsc(GEAR_IP, 8528);
+        mStepManager.sendByteSimply = true;
+        
+        mStepManager.addStepper("unit1", 400, 0);
+        mStepManager.addStepper("unit2", 400, 1);
+        mStepManager.addStepper("unit3", 400, 2);
+        mStepManager.resetAllDevices();
+        
+        mStepManager.setParam_maxSpeed(0x0075);
+        mStepManager.setParam_Accel(0x0010);
+        mStepManager.setParam_Decel(0x0010);
+        mStepManager.setMicroSteps(7);
+        
+        mStepManager.setMicroSteps(5);
+        
+        mStepManager.setStepperAll(true);
+        mStepManager.absPos(0);
+        mStepManager.hardStop();
+        
     }
     
     void sendMagPendulum(bool enable){
@@ -45,13 +108,16 @@ public:
             m.addIntArg(frame > 50);
             m.addIntArg(frame < 30);
             m.addIntArg(0);
+            
         }else{
+            
             m.addIntArg(0);
             m.addIntArg(0);
             m.addIntArg(0);
             m.addIntArg(0);
             m.addIntArg(0);
             m.addIntArg(0);
+            
         }
         
         mSender[MAG_PENDULUM].sendMessage(m);
@@ -99,6 +165,20 @@ public:
         }
         
         mSender[SAND_STORM].sendMessage(m);
+    }
+    
+    void sendGear(bool enable){
+        
+        if(enable){
+            mStepManager.setStepperAll(true);
+            mStepManager.run(1500, true);
+            mStepManager.setStepperAll(false);
+        }else{
+            mStepManager.setStepperAll(true);
+            mStepManager.hardStop();
+            mStepManager.setStepperAll(false);
+        }
+        
     }
     
     void sendServoPendulum(){
@@ -159,15 +239,24 @@ public:
         sendServoPendulum();
         sendTornade(enable);
         sendMaglooper(enable);
+        sendGear(enable);
     }
     
     void update(){
-        sendAll(true);
     }
     void receiveOsc(){}
     
     void onEnabled(){
         mServoThread.start();
+        sendAll(true);
+        
+        mIsMagLooper = true;
+        mIsMagPendulum = true;
+        mIsStruggle = true;
+        mIsSandStorm = true;
+        mIsServoPendulum = true;
+        mIsGear = true;
+        mIsTornade = true;
     }
     void onDisabled(){
         sendAll(false);
@@ -183,14 +272,25 @@ private:
         MAG_PENDULUM,
         STRUGGLE,
         SAND_STORM,
+        GEAR,
     //    SERVO_PENDULUM,
         TORNADE,
-        HAKONIWA_NUM
+        SENDER_NUM
     };
     
-    ofxOscSender mSender[HAKONIWA_NUM];
+    ofxOscSender mSender[SENDER_NUM];
     
     dpServoPendulumThread mServoThread;
+    
+    bool mIsMagLooper;
+    bool mIsMagPendulum;
+    bool mIsStruggle;
+    bool mIsSandStorm;
+    bool mIsServoPendulum;
+    bool mIsGear;
+    bool mIsTornade;
+    
+    ofxKsmrStepManager		mStepManager;
     
 };
 
