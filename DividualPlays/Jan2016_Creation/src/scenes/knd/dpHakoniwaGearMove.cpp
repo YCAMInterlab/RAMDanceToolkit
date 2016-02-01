@@ -1,14 +1,14 @@
 //
-//  HakoniwaGearMove.cpp
+//  dpHakoniwaGearMove.cpp
 //  RAMDanceToolkit
 //
 //  Created by ycam on 2014/12/25.
 //
 //
 
-#include "HakoniwaGearMove.h"
+#include "dpHakoniwaGearMove.h"
 
-void HakoniwaGearMove::setupControlPanel(){
+void dpHakoniwaGearMove::setupControlPanel(){
     
     mDatahow = false;
     mAllTurn = false;
@@ -35,14 +35,14 @@ void HakoniwaGearMove::setupControlPanel(){
     panel->addToggle("isReverse", &mGearReverse);
     panel->addIntSlider("CurrentSpeed", 1500, 13000, &mGearSpeed);
     
-    ofAddListener(panel->newGUIEvent, this, &HakoniwaGearMove::onPanelChanged);
+    ofAddListener(panel->newGUIEvent, this, &dpHakoniwaGearMove::onPanelChanged);
     motionExtractor.setupControlPanel(this,ofPoint(340,30));
-    motionExtractor.load("motionExt_HakoniwaGearMove.xml");
+    motionExtractor.load("motionExt_dpHakoniwaGearMove.xml");
     
     mParameterChangeThresh = 10;
 }
 
-void HakoniwaGearMove::onPanelChanged(ofxUIEventArgs& e){
+void dpHakoniwaGearMove::onPanelChanged(ofxUIEventArgs& e){
     const string name = e.widget->getName();
     
     if (name == "All Turn") {
@@ -72,7 +72,7 @@ void HakoniwaGearMove::onPanelChanged(ofxUIEventArgs& e){
 }
 
 
-void HakoniwaGearMove::setup(){
+void dpHakoniwaGearMove::setup(){
     
     stepManager.setupOsc(GEAR_IP, 8528);
 	stepManager.sendByteSimply = true;
@@ -95,19 +95,19 @@ void HakoniwaGearMove::setup(){
 
 }
 
-void HakoniwaGearMove::update(){
+void dpHakoniwaGearMove::update(){
 
     motionExtractor.update();
     
 }
 
-void HakoniwaGearMove::sumVelocitySpeed(){
+void dpHakoniwaGearMove::sumVelocitySpeed(){
     for (int i = 0;i < motionExtractor.getNumPort();i++){
         mVelocitySpeedSum += motionExtractor.getVelocitySpeedAt(i);
     }
 }
 
-void HakoniwaGearMove::randomiseGearDirection(){
+void dpHakoniwaGearMove::randomiseGearDirection(){
     if ( (int)ofRandom(0,2) == 0){
         mGearReverse = true;
     }else{
@@ -115,18 +115,18 @@ void HakoniwaGearMove::randomiseGearDirection(){
     }
 }
 
-void HakoniwaGearMove::calcGearSpeed(){
+void dpHakoniwaGearMove::calcGearSpeed(){
     mGearSpeed = mVelocitySpeedSum * mSpeedScale;
     mGearSpeed = ofClamp(mGearSpeed, mMinSpeed, mMaxSpeed);
     cout << "GearSpeed " << mGearSpeed << endl;
 }
 
-void HakoniwaGearMove::reset(){
+void dpHakoniwaGearMove::reset(){
     mVelocitySpeedSum = 0;
     mParameterChangeCount = 0;
 }
 
-void HakoniwaGearMove::draw(){
+void dpHakoniwaGearMove::draw(){
 
     ramSetViewPort(dpGetFirstScreenViewPort()); //１枚目のscreenを描画に指定。ここの仕様変わります。
 
@@ -174,7 +174,7 @@ void HakoniwaGearMove::draw(){
     }
 }
 
-void HakoniwaGearMove::onDisabled(){
+void dpHakoniwaGearMove::onDisabled(){
     
     cout << "ondisebled " << endl;
     stepManager.setStepperAll(true);
@@ -182,7 +182,7 @@ void HakoniwaGearMove::onDisabled(){
 
 }
 
-void HakoniwaGearMove::AllstepTurn(int speed, bool dir){
+void dpHakoniwaGearMove::AllstepTurn(int speed, bool dir){
     
     float currentSpeed = ofClamp(speed, mMinSpeed, mMaxSpeed);
     
@@ -192,7 +192,7 @@ void HakoniwaGearMove::AllstepTurn(int speed, bool dir){
 
 }
 
-void HakoniwaGearMove::OnestepTurn(int ch, int speed, bool dir){
+void dpHakoniwaGearMove::OnestepTurn(int ch, int speed, bool dir){
     
     float currentSpeed = ofClamp(speed, mMinSpeed, mMaxSpeed);
     
@@ -202,7 +202,7 @@ void HakoniwaGearMove::OnestepTurn(int ch, int speed, bool dir){
     
 }
 
-void HakoniwaGearMove::AllstepTurnStop(){
+void dpHakoniwaGearMove::AllstepTurnStop(){
     
     stepManager.setStepperAll(true);
     stepManager.hardStop();
@@ -210,7 +210,7 @@ void HakoniwaGearMove::AllstepTurnStop(){
     
 }
 
-void HakoniwaGearMove::OnestepTurnStop(int ch){
+void dpHakoniwaGearMove::OnestepTurnStop(int ch){
     
     stepManager.selectStepperOne(ch, true);
     stepManager.hardStop();
@@ -218,7 +218,7 @@ void HakoniwaGearMove::OnestepTurnStop(int ch){
    
 }
 
-void HakoniwaGearMove::drawDump(){
+void dpHakoniwaGearMove::drawDump(){
     
     for (int i = 0;i < motionExtractor.getNumPort();i++){
         

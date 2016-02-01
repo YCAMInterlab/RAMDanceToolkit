@@ -179,9 +179,9 @@ FloorLine floorLine;
 #include "floorline_ext.h"
 floorline_ext floor_ext;
 
-#include "HakoniwaGearMove.h"
+#include "dpHakoniwaGearMove.h"
 
-HakoniwaGearMove mHakoniwaGearMove;
+dpHakoniwaGearMove hakoniwaGearMove;
 
 //dpHakoVisMag mVisMag;
 
@@ -279,7 +279,7 @@ void testApp::setup()
     sceneManager.addScene(looper.getPtr());
     sceneManager.addScene(allHakoniwaMove.getPtr());
     
-    sceneManager.addScene(mHakoniwaGearMove.getPtr());
+    sceneManager.addScene(hakoniwaGearMove.getPtr());
 	
     sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
     sceneManager.setShowAllActors(false);
