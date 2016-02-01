@@ -35,6 +35,9 @@ void dpHakoniwaGearMove::setupControlPanel(){
     panel->addToggle("isReverse", &mGearReverse);
     panel->addIntSlider("CurrentSpeed", 1500, 13000, &mGearSpeed);
     
+    panel->addIntSlider("SpeedScale", 50, 500, &mSpeedScale);
+    panel->addIntSlider("MinSpeed", 0, 1500, &mMinSpeed);
+    
     ofAddListener(panel->newGUIEvent, this, &dpHakoniwaGearMove::onPanelChanged);
     motionExtractor.setupControlPanel(this,ofPoint(340,30));
     motionExtractor.load("motionExt_dpHakoniwaGearMove.xml");
