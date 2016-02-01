@@ -32,6 +32,8 @@
 #include "dpScoreSceneCorrelation.h"
 #endif
 
+#include "dpScoreToolBox.h"
+
 #include <algorithm>
 
 using namespace dp::score;
@@ -52,7 +54,12 @@ using namespace dp::score;
 //    string s = "bar";
 //};
 
+//struct A { void draw() {} };
+//struct B { void draw() {} };
+//struct C { void draw() {} };
+
 #pragma mark ___________________________________________________________________
+
 void ofApp::setup()
 {
 	ofSetFrameRate(kFrameRate);
@@ -193,9 +200,6 @@ void ofApp::setup()
 
 	ofAddListener(tabbar->newGUIEvent, this, &ofApp::guiEvent);
 
-
-	mOscReceiver.setup(kOscClientPort);
-
 	dp::score::registerObjectEvent(this);
 
 	ofAddListener(ofxEvent(), this, &ofApp::onEventReceived);
@@ -213,7 +217,16 @@ void ofApp::setup()
 	//args.addObject(objC);
 	//
 	//dp::score::notifyObjectEvent(args);
-
+    
+    //vector<AnyDraw> drawers;
+    //drawers.push_back(A());
+    //drawers.push_back(B());
+    //drawers.push_back(C());
+    //
+    //for (auto& o : drawers) {
+    //    o.draw();
+    //}
+    
 	mFont.loadFont(kFontPath, kTitleFontSize);
 
 	mTitleReplaceList.push_back(make_pair("dpVis", ""));
@@ -227,7 +240,11 @@ void ofApp::setup()
 	keyPressed('c');
 #endif
 #endif
-
+    
+    OFX_BEGIN_EXCEPTION_HANDLING
+    mOscReceiver.setup(kOscClientPort);
+    OFX_END_EXCEPTION_HANDLING
+    
 	OFX_END_EXCEPTION_HANDLING
 }
 

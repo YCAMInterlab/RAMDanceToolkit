@@ -444,15 +444,23 @@ void SceneController::sendSetScene(const string& name, bool win0, bool win1)
         }
     }
     
-    ofxOscMessage m;
-    m.setAddress(kOscAddrRamSetScene);
-    m.addStringArg(name);
-    m.addIntArg((int)scene.isEnabled());
-    
-    for (int i=0; i<NUM_WINDOWS; i++) {
-        m.addIntArg((int)scene.window[i]);
+    {
+        ofxOscMessage m;
+        m.setAddress(kOscAddrRamSetScene);
+        m.addStringArg(name);
+        m.addIntArg((int)scene.isEnabled());
+        
+        for (int i=0; i<NUM_WINDOWS; i++) {
+            m.addIntArg((int)scene.window[i]);
+        }
+        if (enableOscOutRDTK) mCameraUnitOscSender.sendMessage(m);
     }
-    if (enableOscOutRDTK) mCameraUnitOscSender.sendMessage(m);
+    {
+        ofxOscMessage m;
+        m.setAddress(kOscAddrNumHakoniwaRemained);
+        m.addIntArg(mUniqueScenes.size());
+        if (enableOscOutRDTK) mCameraUnitOscSender.sendMessage(m);
+    }
     
     // write scene times
     vector<string> enabledSceneNames;

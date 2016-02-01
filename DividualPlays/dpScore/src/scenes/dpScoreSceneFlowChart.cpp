@@ -66,14 +66,16 @@ void SceneFlowChart::initialize()
 
 	changeScene(SCENE_MOVE);
 
+OFX_BEGIN_EXCEPTION_HANDLING
 	ofxXmlSettings xml;
 	xml.load(kXmlSettingsPathFlowChart);
 	xml.pushTag("lighting");
 	auto host = xml.getAttribute("osc", "host", "127.0.0.1");
 	auto port = xml.getAttribute("osc", "port", 10001);
     xml.popTag();
-
 	mOscSender.setup(host, port);
+    mOscInited = true;
+OFX_END_EXCEPTION_HANDLING
 }
 
 void SceneFlowChart::setupNodes()
@@ -255,13 +257,15 @@ void SceneFlowChart::updateTime()
 		++mNodeIdx %= mOrders.at(mOrderIdx).size();
 
 		if (mCurrentScene == SCENE_MOVE || mCurrentScene == SCENE_DESCRIPTION || mCurrentScene == SCENE_CIRCULATION) {
-			ofxOscMessage m;
-			m.setAddress("/dp/light/moving");
-			auto s = getNextNodeName();
-			ofStringReplace(s, "dp::score::Node", "");
-			m.addStringArg(s);
-			m.addFloatArg(mProperties[mCurrentScene].moveSpan);
-			mOscSender.sendMessage(m);
+            if (mOscInited) {
+                ofxOscMessage m;
+                m.setAddress(kOscAddrLighting);
+                auto s = getNextNodeName();
+                ofStringReplace(s, "dp::score::Node", "");
+                m.addStringArg(s);
+                m.addFloatArg(mProperties[mCurrentScene].moveSpan);
+                mOscSender.sendMessage(m);
+            }
 		}
 	}
 }
@@ -752,8 +756,15 @@ void SceneFlowChart::keyPressed(int key)
 void SceneFlowChart::changeScene(int index)
 {
 	mCurrentScene = index;
-	ofxOscMessage m;
-	m.setAddress("/dp/light/moving");
+    
+    auto sendOsc = [&](const string& s, float f) {
+        if (!mOscInited) return;
+        ofxOscMessage m;
+        m.setAddress(kOscAddrLighting);
+        m.addStringArg(s);
+        m.addFloatArg(f);
+        mOscSender.sendMessage(m);
+    };
 
 	switch (index) {
 	case SCENE_MOVE:
@@ -765,23 +776,17 @@ void SceneFlowChart::changeScene(int index)
         getNode<NodeHakoniwa>()->setFocus(false);
 		break;
 	case SCENE_TPS:
-		m.addStringArg("Stage");
-		m.addFloatArg(0.f);
-		mOscSender.sendMessage(m);
+        sendOsc("Stage", 0.f);
 		break;
 	case SCENE_DESCRIPTION:
 		getNode<NodeHakoniwa>()->setFocus(false);
 		break;
 	case SCENE_MEMORY:
 		mTimeCamRotation = 0.f;
-		m.addStringArg("Off");
-		m.addFloatArg(0.f);
-		mOscSender.sendMessage(m);
+		sendOsc("Off", 0.f);
 		break;
 	case SCENE_DEBUG:
-		m.addStringArg("Stage");
-		m.addFloatArg(0.f);
-		mOscSender.sendMessage(m);
+		sendOsc("Stage", 0.f);
 		break;
 	default:
 		break;

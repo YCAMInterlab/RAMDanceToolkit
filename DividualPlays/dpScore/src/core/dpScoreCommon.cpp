@@ -117,6 +117,7 @@ const int kOscClientPort {10000};
 
 const string kOscAddrChangeScene {"/dp/score/changeScene"};
 const string kOscAddrSensorScale {"/dp/score/sensorScale"};
+const string kOscAddrNumHakoniwaRemained {"/dp/score/numHakoniwaRemained"};
 
 const string kOscAddrCameraUnitVector {"/dp/cameraUnit/vector"};
 const string kOscAddrCameraUnitVectorTotal {"/dp/cameraUnit/vector/total"};
