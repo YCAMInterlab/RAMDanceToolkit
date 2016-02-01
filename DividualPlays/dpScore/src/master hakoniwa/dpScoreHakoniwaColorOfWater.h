@@ -80,7 +80,8 @@ private:
 
 	float mValveOpenDuration {0.3f};
     
-    bool mOpenAllValves {false};
+    bool mOpenAllValvesArm {false};
+    bool mOpenAllValvesTrigger {false};
 
 };
 

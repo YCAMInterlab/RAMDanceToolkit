@@ -41,10 +41,12 @@
 #define SCENE_THREEPT	string("ThreePoints_ext")
 #define SCENE_BROKEN	string("BrokenBody_ext")
 #define SCENE_BURST		string("BurstBody_ext")
+#define SCENE_UPSIDE	string("UpsideDown_ext")
 
 #define SCENE_METABALL	string("distanceMetaball")
 #define SCENE_DONUTS	string("Donuts_ext")
 #define SCENE_MONSTER	string("Monster_ext")
+#define SCENE_MONSTER_2	string("Monster_ext2")
 #define SCENE_CHASER	string("HastyChase_ext")
 
 #define HAKO_SANDSTORM		string("dpHSandStorm")

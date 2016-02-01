@@ -133,7 +133,9 @@ void HakoniwaColorOfWater::setupGui(ofxUITabBar* tabbar)
 	                  &mValveOpenDuration,
 	                  w,
 	                  MH::kLineHeight);
-	tabbar->addToggle("Open All Valves", &mOpenAllValves);
+    tabbar->addLabel("Open All Valves", OFX_UI_FONT_SMALL);
+	tabbar->addToggle("Arm", &mOpenAllValvesArm);
+    tabbar->addWidgetRight(new ofxUIToggle("Trigger", &mOpenAllValvesTrigger, sizeSml, sizeSml));
 	tabbar->addSpacer(w, 1.f);
 
 	ofAddListener(tabbar->newGUIEvent, this, &HakoniwaColorOfWater::guiEvent);
@@ -235,7 +237,8 @@ void HakoniwaColorOfWater::sendPin(int pin, bool open)
 
 void HakoniwaColorOfWater::stopAll()
 {
-	mOpenAllValves = false;
+	mOpenAllValvesArm = false;
+    mOpenAllValvesTrigger = false;
 	for (int i = 0; i < kNumValvePins; i++) {
 		mValves[i].setCleanUp(this, false);
 	}
@@ -247,12 +250,37 @@ void HakoniwaColorOfWater::stopAll()
 void HakoniwaColorOfWater::guiEvent(ofxUIEventArgs& e)
 {
 	auto name = e.widget->getName();
-	if (name == "Open All Valves") {
-		auto toggle = static_cast<ofxUIToggle*>(e.widget);
-		for (int i = 0; i < kNumValvePins; i++) {
-			mValves[i].setCleanUp(this, toggle->getValue());
-		}
+	if (name == "Arm") {
+        auto toggle = static_cast<ofxUIToggle*>(e.widget);
+        if (toggle->getValue() == false) {
+            mOpenAllValvesTrigger = false;
+            for (int i = 0; i < kNumValvePins; i++) {
+                mValves[i].setCleanUp(this, false);
+            }
+        }
 	}
+    else if (name == "Trigger") {
+        auto toggle = static_cast<ofxUIToggle*>(e.widget);
+        if (toggle->getValue() == false) {
+            mOpenAllValvesArm = false;
+            for (int i = 0; i < kNumValvePins; i++) {
+                mValves[i].setCleanUp(this, false);
+            }
+        }
+        else {
+            if (mOpenAllValvesArm == false) {
+                mOpenAllValvesTrigger = false;
+                for (int i = 0; i < kNumValvePins; i++) {
+                    mValves[i].setCleanUp(this, false);
+                }
+            }
+            else {
+                for (int i = 0; i < kNumValvePins; i++) {
+                    mValves[i].setCleanUp(this, true);
+                }
+            }
+        }
+    }
 }
 
 DP_SCORE_NAMESPACE_END
