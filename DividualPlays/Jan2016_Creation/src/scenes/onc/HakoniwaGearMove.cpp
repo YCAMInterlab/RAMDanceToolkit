@@ -13,47 +13,64 @@ void HakoniwaGearMove::setupControlPanel(){
     mDatahow = false;
     mAllTurn = false;
     mManual = false;
-    mGear1 = false;
-    mGear2 = false;
-    mGear3 = true;
+
+    mGear = true;
     mAllGearReverse = true;
-    mGear1Reverse = true;
-    mGear2Reverse = true;
-    mGear3Reverse = true;
+
+    mGearReverse = true;
     
-    mMax1speed = 10000;
-    mMin1speed = 600;
-    mMax2speed = 25000;
-    mMin2speed = 5000;
-//    mMax3speed = 6500;
-//    mMin3speed = 2500;
-    mMax3speed = 13000;
-    mMin3speed = 1500;
-    mScale = 150;
-    mScale2 = 90;
-    mScale3 = 50;
+    mMaxSpeed = 13000;
+    mMinSpeed = 1500;
+
+    mSpeedScale = 50;
     
     ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
-    panel->addToggle("data show", &mDatahow);
-    panel->addToggle("all gear turn", &mAllTurn);
-    panel->addToggle("all gear reverse", &mAllGearReverse);
+    
+    panel->addToggle("isManualMode", &mManual);
+    panel->addToggle("On", &mGear);
+    panel->addToggle("Show Data", &mDatahow);
+    panel->addToggle("All Turn", &mAllTurn);
+    panel->addToggle("All Reverse", &mAllGearReverse);
     panel->addIntSlider("all gear Speed", 100, 35000, &mAllGearSpeed);
-    panel->addToggle("manual turn", &mManual);
-//    panel->addToggle("gear1", &mGear1);
-//    panel->addToggle("gear1 reverse", &mGear1Reverse);
-//    panel->addIntSlider("TrurnGear1Speed", 600, 10000, &mGear1Speed);
-//    panel->addToggle("gear2", &mGear2);
-//    panel->addToggle("gear2 reverse", &mGear2Reverse);
-//    panel->addIntSlider("TrurnGear2Speed", 5000, 25000, &mGear2Speed);
-    panel->addToggle("gear3", &mGear3);
-    panel->addToggle("gear3 reverse", &mGear3Reverse);
-    panel->addIntSlider("TrurnGear3Speed", 1500, 13000, &mGear3Speed);
+    panel->addToggle("isReverse", &mGearReverse);
+    panel->addIntSlider("CurrentSpeed", 1500, 13000, &mGearSpeed);
     
     ofAddListener(panel->newGUIEvent, this, &HakoniwaGearMove::onPanelChanged);
     motionExtractor.setupControlPanel(this,ofPoint(340,30));
     motionExtractor.load("motionExt_HakoniwaGearMove.xml");
     
+    mParameterChangeThresh = 10;
 }
+
+void HakoniwaGearMove::onPanelChanged(ofxUIEventArgs& e){
+    const string name = e.widget->getName();
+    
+    if (name == "All Turn") {
+        if (mAllTurn != true) {
+            cout << "turn off " << endl;
+            AllstepTurnStop();
+        }
+    }else if(name == "On"){
+        if (mGear != true) {
+            cout << "gear off " << endl;
+            OnestepTurnStop(2);
+        }
+    }
+    
+    if(name == "All Reverse"){
+        if (mAllTurn == true) {
+            AllstepTurn(mAllGearSpeed, mAllGearReverse);
+        }
+    }
+    
+    if(name == "isReverse"){
+        if (mGear == true) {
+            OnestepTurn(2, mGearSpeed, mGearReverse);
+        }
+    }
+    
+}
+
 
 void HakoniwaGearMove::setup(){
     
@@ -65,15 +82,11 @@ void HakoniwaGearMove::setup(){
     stepManager.addStepper("unit3", 400, 2);
     stepManager.resetAllDevices();
 
-//	stepManager.setupEasyFromPreset(KSMR_STEP_P_PMSA_B56D5);
-
     stepManager.setParam_maxSpeed(0x0075);
     stepManager.setParam_Accel(0x0010);
     stepManager.setParam_Decel(0x0010);
     stepManager.setMicroSteps(7);
     
-    unsigned char sig[2];
-
 	stepManager.setMicroSteps(5);
     
     stepManager.setStepperAll(true);
@@ -88,178 +101,77 @@ void HakoniwaGearMove::update(){
     
 }
 
+void HakoniwaGearMove::sumVelocitySpeed(){
+    for (int i = 0;i < motionExtractor.getNumPort();i++){
+        mVelocitySpeedSum += motionExtractor.getVelocitySpeedAt(i);
+    }
+}
+
+void HakoniwaGearMove::randomiseGearDirection(){
+    if ( (int)ofRandom(0,2) == 0){
+        mGearReverse = true;
+    }else{
+        mGearReverse = false;
+    }
+}
+
+void HakoniwaGearMove::calcGearSpeed(){
+    mGearSpeed = mVelocitySpeedSum * mSpeedScale;
+    mGearSpeed = ofClamp(mGearSpeed, mMinSpeed, mMaxSpeed);
+    cout << "GearSpeed " << mGearSpeed << endl;
+}
+
+void HakoniwaGearMove::reset(){
+    mVelocitySpeedSum = 0;
+    mParameterChangeCount = 0;
+}
+
 void HakoniwaGearMove::draw(){
 
     ramSetViewPort(dpGetFirstScreenViewPort()); //１枚目のscreenを描画に指定。ここの仕様変わります。
 
-    if (mDatahow)		drawDump();
+    if (mDatahow)drawDump();
 
     if (ofGetFrameNum() % 30 == 0){
         
-        for (int i = 0;i < motionExtractor.getNumPort();i++){
-            if (motionExtractor.getActorNameAt(i) == "ando"){
-//            if (motionExtractor.getActorNameAt(i) == "miyashita"){
-//            if (motionExtractor.getActorNameAt(i) == "shimaji"){
-//            if (motionExtractor.getActorNameAt(i) == "kojiri"){
-                mGear3Count += motionExtractor.getVelocitySpeedAt(i);
+        sumVelocitySpeed();
+        
+        mParameterChangeCount++;
+        
+        if(mManual){
+            
+            if(mGear){
+                
+                //マニュアル操作
+                OnestepTurn(2, mGearSpeed, mGearReverse);
+                
             }
-
-//            if (motionExtractor.getActorNameAt(i) == "sasamoto"){
-//                mGear1Count += motionExtractor.getVelocitySpeedAt(i);
-//            }
-//            if (motionExtractor.getActorNameAt(i) == "kojiri"){
-//                mGear2Count += motionExtractor.getVelocitySpeedAt(i);
-//            }
-//            if (motionExtractor.getActorNameAt(i) == "kawaguchi"){
-//                mGear3Count += motionExtractor.getVelocitySpeedAt(i);
-//            }
+            
+        }else{
+            
+            if (mParameterChangeCount >= mParameterChangeThresh) {
+                
+                calcGearSpeed();
+                
+                if(mGear){
+                    
+                    randomiseGearDirection();
+                    OnestepTurn(2, mGearSpeed, mGearReverse);
+                    
+                }
+                
+                reset();
+                
+            }
+            
         }
         
-        mTotalcount++;
-        
-        if ((mManual != true && mTotalcount >= 10)) {
-//            mGear1Speed = mGear1Count * mScale;
-//            mGear2Speed = mGear2Count * mScale;
-            mGear3Speed = mGear3Count * mScale3;
-//            cout << "Gear1Speed " << mGear1Speed << endl;
-//            cout << "Gear2Speed " << mGear2Speed << endl;
-            cout << "Gear3Speed " << mGear3Speed << endl;
-            
-            //test osc send
-            
-            if(mGear1 == true){
-                if (mManual != true) {
-                    float x = ofRandom(0,1);
-                    int Min1speed = ofRandom(600, 2500);
-                    if ( x  > 0.51 ){
-                        mGear1Reverse = true;
-                    }else{
-                        mGear1Reverse = false;
-                    }
-                    if ( mGear1Speed >= mMax1speed) {
-                        OnestepTurn(0, mMax1speed, mGear1Reverse);
-                    }else if( mGear1Speed <= mMin1speed){
-                        OnestepTurn(0, mMin1speed, mGear1Reverse);
-                    }else{
-                        OnestepTurn(0, mGear1Speed, mGear1Reverse);
-                    }
-                }
-            }
-            if(mGear2 == true){
-                if (mManual != true) {
-                    float x = ofRandom(0,1);
-                    int Min2speed = ofRandom(5000, 8000);
-                    if ( x > 0.51 ){
-                        mGear2Reverse = true;
-                    }else{
-                        mGear2Reverse = false;
-                    }
-                    if ( mGear2Speed >= mMax2speed) {
-                        OnestepTurn(1, mMax2speed, mGear2Reverse);
-                    }else if( mGear2Speed <= mMin2speed){
-                        OnestepTurn(1, mMin2speed, mGear2Reverse);
-                    }else{
-                        OnestepTurn(1, mGear2Speed, mGear2Reverse);
-                    }
-                }
-            }
-            if(mGear3 == true){
-                if (mManual != true) {
-                    //逆回転はしない
-                    float x = ofRandom(0,1);
-                    if ( x > 0.51 ){
-                        mGear3Reverse = true;
-                    }else{
-                        mGear3Reverse = false;
-                    }
-                    if ( mGear3Speed >= mMax3speed) {
-                        OnestepTurn(2, mMax3speed, mGear3Reverse);
-                    }else if( mGear3Speed <= mMin3speed){
-                        OnestepTurn(2, mMin3speed, mGear3Reverse);
-                    }else{
-                        OnestepTurn(2, mGear3Speed, mGear3Reverse);
-                    }
-                }
-            }
-            mGear1Count = 0;
-            mGear2Count = 0;
-            mGear3Count = 0;
-            mTotalcount = 0;
-        }
-        
-        if(mAllTurn == true){
+        if(mAllTurn){
             stepManager.setStepperAll(true);
             stepManager.run(mAllGearSpeed, mAllGearReverse);
             stepManager.setStepperAll(false);
         }
-        if(mGear1 == true){
-            if (mManual == true) {
-                //マニュアル操作
-                OnestepTurn(0, mGear1Speed, mGear1Reverse);
-            }
-        }
-        if(mGear2 == true){
-            if (mManual == true) {
-                //マニュアル操作
-                OnestepTurn(1, mGear2Speed, mGear2Reverse);
-            }
-        }
-        if(mGear3 == true){
-            if (mManual == true) {
-                //マニュアル操作
-                OnestepTurn(2, mGear3Speed, mGear3Reverse);
-            }
-        }
     }
-    
-}
-
-void HakoniwaGearMove::onPanelChanged(ofxUIEventArgs& e){
-    const string name = e.widget->getName();
-
-    if (name == "all gear turn") {
-        if (mAllTurn != true) {
-            cout << "mturn off " << endl;
-            AllstepTurnStop();
-        }
-    }else if(name == "gear1"){
-        if (mGear1 != true) {
-            cout << "gear1 off " << endl;
-            OnestepTurnStop(0);
-        }
-    }else if(name == "gear2"){
-        if (mGear2 != true) {
-            cout << "gear2 off " << endl;
-            OnestepTurnStop(1);
-        }
-    }else if(name == "gear3"){
-        if (mGear3 != true) {
-            cout << "gear3 off " << endl;
-            OnestepTurnStop(2);
-        }
-    }
-    
-    if(name == "allturn reverse"){
-        if (mAllTurn == true) {
-            AllstepTurn(mAllGearSpeed, mAllGearReverse);
-        }
-    }
-    if(name == "gear1 reverse"){
-        if (mGear1 == true) {
-            OnestepTurn(0, mGear1Speed, mGear1Reverse);
-        }
-    }
-    if(name == "gear2 reverse"){
-        if (mGear2 == true) {
-            OnestepTurn(1, mGear2Speed, mGear2Reverse);
-        }
-    }
-    if(name == "gear3 reverse"){
-        if (mGear3 == true) {
-            OnestepTurn(2, mGear3Speed, mGear3Reverse);
-        }
-    }
-
 }
 
 void HakoniwaGearMove::onDisabled(){
@@ -272,16 +184,20 @@ void HakoniwaGearMove::onDisabled(){
 
 void HakoniwaGearMove::AllstepTurn(int speed, bool dir){
     
+    float currentSpeed = ofClamp(speed, mMinSpeed, mMaxSpeed);
+    
     stepManager.setStepperAll(true);
-    stepManager.run(speed, dir);
+    stepManager.run(currentSpeed, dir);
     stepManager.setStepperAll(false);
 
 }
 
 void HakoniwaGearMove::OnestepTurn(int ch, int speed, bool dir){
     
+    float currentSpeed = ofClamp(speed, mMinSpeed, mMaxSpeed);
+    
     stepManager.selectStepperOne(ch, true);
-    stepManager.run(speed, dir);
+    stepManager.run(currentSpeed, dir);
     stepManager.setStepperAll(false);
     
 }
@@ -304,29 +220,28 @@ void HakoniwaGearMove::OnestepTurnStop(int ch){
 
 void HakoniwaGearMove::drawDump(){
     
-    int mMotionExtCnt = 0;
     for (int i = 0;i < motionExtractor.getNumPort();i++){
+        
         ofPushMatrix();
-        if (mMotionExtCnt >= 12 and mMotionExtCnt < 16) {
-            int j = i -12;
+        
+        if (i >= 12 && i < 16) {
+            int j = i - 12;
             ofTranslate(1000, j*75);
-        }else if(mMotionExtCnt >= 16 and mMotionExtCnt < 28){
-            int k = i -16;
+        }else if(i >= 16 && i < 28){
+            int k = i - 16;
             ofTranslate(1200, k*75);
-        }else if(mMotionExtCnt >= 28 and mMotionExtCnt < 32){
-            int l = i -28;
+        }else if(i >= 28 && i < 32){
+            int l = i - 28;
             ofTranslate(1400, l*75);
-        }else if(mMotionExtCnt >= 32 and mMotionExtCnt < 44){
-            int m = i -32;
+        }else if(i >= 32 && i < 44){
+            int m = i - 32;
             ofTranslate(1600, m*75);
-        }else if(mMotionExtCnt >= 44){
-            int n = i -44;
+        }else if(i >= 44){
+            int n = i - 44;
             ofTranslate(1800, n*75);
         }else{
             ofTranslate(800, i*75);
         }
-        mMotionExtCnt++;
-        
         
         ofNoFill();
         ofRect(0, 0, 200, 75);

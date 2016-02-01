@@ -45,17 +45,27 @@ private:
     void OnestepTurnStop(int ch);
     void drawDump();
 
+    void sumVelocitySpeed();
+    void randomiseGearDirection();
+    void calcGearSpeed();
+    void reset();
+    
     ramMotionExtractor	motionExtractor;
     ofxOscSender mOscSender;
     
-    bool mAllTurn, mGear1, mGear2, mGear3, mDatahow, mManual;
-    bool mAllGearReverse, mGear1Reverse, mGear2Reverse, mGear3Reverse;
-    int mScale, mScale2,mScale3, mAllGearSpeed, mGear1Speed, mGear2Speed, mGear3Speed;
-    int mGear1Count, mGear2Count, mGear3Count, mTotalcount;
-    int mMax1speed, mMax2speed, mMax3speed;
-    int mMin1speed, mMin2speed, mMin3speed;
+    bool mAllTurn, mGear, mDatahow, mManual;
+    bool mAllGearReverse, mGearReverse;
+    int mSpeedScale;
+    int mAllGearSpeed, mGearSpeed;
+    int mVelocitySpeedSum;
+    
+    int mParameterChangeCount;
+    int mMaxSpeed;
+    int mMinSpeed;
     
     int mMotionExtCnt;
+    
+    int mParameterChangeThresh;
 
 };
 
