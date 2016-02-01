@@ -37,6 +37,7 @@
 
 #include "FloorLine.h"
 
+#include "dpDancerCue.h"
 #include "DoSomething.h"
 
 class testApp : public ramBaseApp
@@ -72,4 +73,5 @@ public:
     dpAllHakoniwaMove           allHakoniwaMove;
     
     DoSomething doSomething;
+    dpDancerCue dancerCue;
 };
