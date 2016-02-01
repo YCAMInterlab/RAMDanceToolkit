@@ -22,8 +22,8 @@ public:
 	void setSections();
 	ofPtr<sectionSet> setBasicSection(string sectionName, bool sceneClear,bool extClear);
 	void setCamActorScene(ofPtr<sectionSet> s);
+	void setActorViewing(ofPtr<sectionSet> s, bool ando, bool kojiri, bool shimaji, bool miyashita);
 	
-	void basicSet(bool);
 	void callSection(string name);
 	void receiveMasterHakoniwa(ofxOscMessage m);
 	void listSection(ofxOscMessage m);

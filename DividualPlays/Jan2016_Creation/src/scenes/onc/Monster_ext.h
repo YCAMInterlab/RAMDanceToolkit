@@ -49,7 +49,7 @@ public:
 			randomizeGeometry = true;
 	}
 	
-    string getName() const { return "Monster_ext"; }
+    inline string getName() const { return "Monster_ext"; }
     
     ramMotionExtractor mex;
     vector<int> treeBase, treeSwap;
@@ -57,6 +57,11 @@ public:
     ramNodeArray monsterArray;
     float minScale, maxScale, randomizationAmount;
     bool needToReset, randomLine, randomizeTopology, randomizeGeometry;
+};
+
+class Monster_ext_2 : public Monster_ext
+{
+	inline string getName() const { return "Monster_ext2"; }
 };
 
 

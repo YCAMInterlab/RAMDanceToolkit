@@ -113,6 +113,7 @@ HastyChase_ext mHastyChase_ext;
 
 #include "Monster_ext.h"
 Monster_ext mMonster_ext;
+Monster_ext_2 mMonster_ext2;
 
 #include "MixMonsterScene_ext.h"
 MixMonsterScene_ext mMixMonsterScene_ext;
@@ -213,6 +214,7 @@ void testApp::setup()
     sceneManager.addScene(mUpsideDown_ext.getPtr());
     sceneManager.addScene(mHastyChase_ext.getPtr());
     sceneManager.addScene(mMonster_ext.getPtr());
+	sceneManager.addScene(mMonster_ext2.getPtr());
     sceneManager.addScene(mMixMonsterScene_ext.getPtr());
     sceneManager.addScene(mThreePoints_ext.getPtr());
     sceneManager.addScene(mDonuts_ext.getPtr());
