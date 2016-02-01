@@ -165,7 +165,7 @@ dpHakoVisServoPendulum      visServoPendulum;
 dpHakoniwaTornado hakoniwaTornado;
 dpHakoVisTornado  visTornado;
 
-dpHakoniwaRawCamera rawCamera;
+dpRawCamera rawCamera;
 dpSyphonClientManager *mSyphonClientManager;
 
 // stage

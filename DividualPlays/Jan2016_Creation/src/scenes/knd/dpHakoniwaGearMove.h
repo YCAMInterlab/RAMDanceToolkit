@@ -31,8 +31,7 @@ public:
     void draw();
     void onPanelChanged(ofxUIEventArgs& e);
     
-    inline
-    string getName() const { return "dpHGearMove"; }
+    inline string getName() const { return "dpHGearMove"; }
     
     ofxKsmrStepManager		stepManager;
     

@@ -31,7 +31,7 @@
 #include "dpHakoVisMagnetPendulum.h"
 #include "dpHakoVisTornado.h"
 #include "dpHakoniwaTornado.h"
-#include "dpHakoniwaRawCamera.h"
+#include "dpRawCamera.h"
 
 #include "dpAllHakoniwaMove.h"
 
