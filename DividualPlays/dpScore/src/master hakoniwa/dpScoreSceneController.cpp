@@ -15,7 +15,7 @@ DP_SCORE_NAMESPACE_BEGIN
 const string SceneController::kOscAddrRamSetScene{"/ram/set_scene"};
 const string SceneController::kOscAddrRamDoSomething{"/ram/do_something"};
 
-const string SceneController::kScoreBlack{"black"};
+//const string SceneController::kScoreBlack{"black"};
 
 #pragma mark ___________________________________________________________________
 bool SceneController::Scene::isEnabled() const
@@ -42,6 +42,7 @@ void SceneController::initialize()
         ofxThrowException(ofxException,
                           "serverCameraUnit port number didn't find in XML");
     
+    /*
     const string scHost{xml.getAttribute("serverScore", "host", errorStr)};
     if (scHost == errorStr)
         ofxThrowException(ofxException,
@@ -50,9 +51,9 @@ void SceneController::initialize()
     if (scPort == errorInt)
         ofxThrowException(ofxException,
                           "serverScore port number didn't find in XML");
-    
+    */
     mCameraUnitOscSender.setup(cuHost, cuPort);
-    mScoreOscSender.setup(scHost, scPort);
+    //mScoreOscSender.setup(scHost, scPort);
     xml.popTag();
     OFX_END_EXCEPTION_HANDLING
     
@@ -79,6 +80,7 @@ void SceneController::loadScenes(ofxXmlSettings& xml)
     
     mUniqueScenes.setInitialList(maestroSceneNames);
     
+    /*
     xml.pushTag("score");
     mMaxComplexity = xml.getNumTags("complexity");
     mUniqueScores.assign(mMaxComplexity, UniqueStringStack());
@@ -108,6 +110,7 @@ void SceneController::loadScenes(ofxXmlSettings& xml)
     xml.popTag(); // correlation
     
     xml.popTag(); // score
+     */
 }
 
 void SceneController::setupUI(ofxUITabBar* tabbar)
@@ -141,6 +144,8 @@ void SceneController::setupUI(ofxUITabBar* tabbar)
                   &SceneController::guiEvent);
     
     tabbar->addSpacer(MH::kGuiWidth, 1.f);
+    
+    /*
     tabbar->addLabel("[Score]", OFX_UI_FONT_SMALL);
     ofxUICanvas* scoreSelectTab{new ofxUICanvas()};
     scoreSelectTab->setColorBack(MH::kBackgroundColor);
@@ -177,6 +182,7 @@ void SceneController::setupUI(ofxUITabBar* tabbar)
                       MH::kLineHeight);
     
     tabbar->addSpacer(MH::kGuiWidth, 1.f);
+     */
 }
 
 void SceneController::draw()
@@ -207,6 +213,7 @@ void SceneController::draw()
     }
     alignedTranslate(0.f, MH::kTextSpacing);
     
+    /*
     ofSetColor(MH::kTextColor);
     ofDrawBitmapString("[score]", ofPoint::zero());
     alignedTranslate(0.f, MH::kTextSpacing);
@@ -257,7 +264,7 @@ void SceneController::draw()
     ofStringReplace(sc, "dp::score::Scene", "");
     ofDrawBitmapString(sc, ofPoint::zero());
     alignedTranslate(0.f, MH::kTextSpacing);
-    
+    */
 }
 
 void SceneController::guiEvent(ofxUIEventArgs& e)
@@ -284,6 +291,7 @@ void SceneController::guiEvent(ofxUIEventArgs& e)
                 mUISceneInfo.textInput->setTextString(toggleName);
         }
     }
+    /*
     else if (widgetName == "Scores") {
         auto* radio = static_cast<ofxUIRadio*>(e.widget);
         const auto& toggleName = radio->getActiveName();
@@ -300,17 +308,18 @@ void SceneController::guiEvent(ofxUIEventArgs& e)
             mScoreOscSender.sendMessage(m);
         }
     }
+     */
 }
 
 void SceneController::stopAll()
 {
-    enableShowHakoniwaTitle = false;
+    //enableShowHakoniwaTitle = false;
     
     turnOffAllScenes();
-    sendChangeScore(kScoreBlack);
+    //sendChangeScore(kScoreBlack);
     
     enableOscOutRDTK = false;
-    enableOscOutScore = false;
+    //enableOscOutScore = false;
 }
 
 void SceneController::setUniqueScene(int sceneIndex, bool win0, bool win1)
@@ -325,6 +334,7 @@ void SceneController::setUniqueScene(int sceneIndex, bool win0, bool win1)
     sendSetScene(sceneName, win0, win1);
 }
 
+/*
 void SceneController::setUniqueScore(int sceneIndex)
 {
     if (mCurrentScoreComplexity < 0 ||
@@ -370,6 +380,7 @@ size_t SceneController::getNumUniqueScores() const
     
     return stack.size();
 }
+*/
 
 bool SceneController::getIsWindowOn(int windowIndex) const
 {
@@ -464,6 +475,7 @@ void SceneController::sendSetScene(const string& name, bool win0, bool win1)
     }
 }
 
+/*
 void SceneController::sendChangeScore(const string& name,
                                       bool maintainSceneNames)
 {
@@ -486,6 +498,7 @@ void SceneController::sendChangeScore(const string& name,
     
     if (enableOscOutScore) mScoreOscSender.sendMessage(m);
 }
+ */
 
 void SceneController::doSomething(int rand)
 {
@@ -494,7 +507,7 @@ void SceneController::doSomething(int rand)
     m.addIntArg(rand);
     
     if (enableOscOutRDTK) mCameraUnitOscSender.sendMessage(m);
-    if (enableOscOutScore) mScoreOscSender.sendMessage(m);
+    //if (enableOscOutScore) mScoreOscSender.sendMessage(m);
 }
 
 void SceneController::clearTimeLog()

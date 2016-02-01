@@ -35,9 +35,9 @@ void AnalyzeMean::update()
             
             if (getMH().getSceneController().getUniqueScenes().empty() == false) {
                 const int scene{(int)(mWhich % getMH().getSceneController().getUniqueScenes().size())};
-                const int score{(int)(mWhich % getMH().getSceneController().getNumUniqueScores())};
+                //const int score{(int)(mWhich % getMH().getSceneController().getNumUniqueScores())};
                 getMH().getSceneController().setUniqueScene(scene, mWin0, mWin1);
-                getMH().getSceneController().setUniqueScore(score);
+                //getMH().getSceneController().setUniqueScore(score);
                 mPrevScene = scene;
                 mPrevSetSceneTime = t;
             }

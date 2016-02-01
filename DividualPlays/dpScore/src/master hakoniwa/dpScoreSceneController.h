@@ -31,17 +31,18 @@ public:
     
     void sendSetScene(const string& name, bool win0, bool win1);
     
+    /*
     void sendChangeScore(const string& name,
                          bool maintainSceneNames = true);
-    
+    */
     UniqueStringStack getUniqueScenes() const { return mUniqueScenes; }
     
     bool getIsWindowOn(int windowIndex) const;
     
     void setUniqueScene(int sceneIndex, bool win0, bool win1);
     
-    void setUniqueScore(int sceneIndex);
-    size_t getNumUniqueScores() const;
+    //void setUniqueScore(int sceneIndex);
+    //size_t getNumUniqueScores() const;
     
     void doSomething(int rand);
     
@@ -49,8 +50,8 @@ public:
     void writeTimeLog();
     
     bool enableOscOutRDTK{false};
-    bool enableOscOutScore{false};
-    bool enableShowHakoniwaTitle{false};
+    //bool enableOscOutScore{false};
+    //bool enableShowHakoniwaTitle{false};
     
 private:
     void loadScenes(ofxXmlSettings& xml);
@@ -75,15 +76,17 @@ private:
     static const string kOscAddrRamSetScene;
     static const string kOscAddrRamDoSomething;
     
-    static const string kScoreBlack;
+    //static const string kScoreBlack;
     
     ofxOscSender mCameraUnitOscSender;
-    ofxOscSender mScoreOscSender;
+    
+    //ofxOscSender mScoreOscSender;
     
     UniqueStringStack mUniqueScenes;
+    /*
     vector<UniqueStringStack> mUniqueScores;
     UniqueStringStack mUniqueScoreBodies;
-    
+    */
     
     map<string, Scene> mScenes;
     Scene mLatestScene;
@@ -95,12 +98,14 @@ private:
         ofxUITextInput *textInput{nullptr};
     } mUISceneInfo;
     
+    /*
     string mCurrentScore{""};
     string mScoreCorrelation{""};
     int mCurrentScoreComplexity{0};
     int mMaxComplexity{0};
     
     float mScoreSensorScale{1.f};
+    */
     
     float mPrevTimeSceneChanged{0.f};
     ofBuffer mSceneTimesBuffer;
