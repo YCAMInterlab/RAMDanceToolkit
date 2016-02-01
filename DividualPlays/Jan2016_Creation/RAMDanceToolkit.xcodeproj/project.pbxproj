@@ -19,7 +19,7 @@
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
 		9225EEBE1C588E0C00A7FD9A /* magnetLooper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9225EEBC1C588E0C00A7FD9A /* magnetLooper.cpp */; };
 		92C30EF91C5F38AF00257D14 /* dpDancerCue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92C30EF81C5F38AF00257D14 /* dpDancerCue.cpp */; };
-		92C30EFF1C5F7A5400257D14 /* HakoniwaGearMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92C30EFD1C5F7A5400257D14 /* HakoniwaGearMove.cpp */; };
+		92C30EFF1C5F7A5400257D14 /* dpHakoniwaGearMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92C30EFD1C5F7A5400257D14 /* dpHakoniwaGearMove.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		C60249311C5D96010015DCDD /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C602491E1C5D96010015DCDD /* Syphon.framework */; };
 		C60249321C5D96010015DCDD /* SyphonNameboundClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C60249211C5D96010015DCDD /* SyphonNameboundClient.m */; };
@@ -198,8 +198,8 @@
 		9225EED31C58DC9000A7FD9A /* dpAllHakoniwaMove.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpAllHakoniwaMove.h; sourceTree = "<group>"; };
 		92C30EF71C5F281C00257D14 /* dpDancerCue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpDancerCue.h; sourceTree = "<group>"; };
 		92C30EF81C5F38AF00257D14 /* dpDancerCue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpDancerCue.cpp; sourceTree = "<group>"; };
-		92C30EFD1C5F7A5400257D14 /* HakoniwaGearMove.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HakoniwaGearMove.cpp; sourceTree = "<group>"; };
-		92C30EFE1C5F7A5400257D14 /* HakoniwaGearMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HakoniwaGearMove.h; sourceTree = "<group>"; };
+		92C30EFD1C5F7A5400257D14 /* dpHakoniwaGearMove.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpHakoniwaGearMove.cpp; sourceTree = "<group>"; };
+		92C30EFE1C5F7A5400257D14 /* dpHakoniwaGearMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaGearMove.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		C60249001C5D96010015DCDD /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C602491E1C5D96010015DCDD /* Syphon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Syphon.framework; sourceTree = "<group>"; };
@@ -380,8 +380,8 @@
 		5EF92F531C57B59C00F6916F /* knd */ = {
 			isa = PBXGroup;
 			children = (
-				92C30EFD1C5F7A5400257D14 /* HakoniwaGearMove.cpp */,
-				92C30EFE1C5F7A5400257D14 /* HakoniwaGearMove.h */,
+				92C30EFD1C5F7A5400257D14 /* dpHakoniwaGearMove.cpp */,
+				92C30EFE1C5F7A5400257D14 /* dpHakoniwaGearMove.h */,
 				9225EEC01C588FBA00A7FD9A /* 2014Scene */,
 				5EF92F541C57B59C00F6916F /* _dpHakoVisServoPendulum.h */,
 				5EF92F561C57B59C00F6916F /* dpHakoniwaRawCamera.h */,
@@ -1153,7 +1153,7 @@
 				C60249341C5D96010015DCDD /* ofxSyphonClient.mm in Sources */,
 				C6C22F4C1C54629E002B38EC /* KeplerBtDynamics.cpp in Sources */,
 				C6C22F4B1C54629E002B38EC /* Kepler.cpp in Sources */,
-				92C30EFF1C5F7A5400257D14 /* HakoniwaGearMove.cpp in Sources */,
+				92C30EFF1C5F7A5400257D14 /* dpHakoniwaGearMove.cpp in Sources */,
 				C60249331C5D96010015DCDD /* README.md in Sources */,
 				C6A982B71C55A4670055D47B /* BrokenBody_ext.cpp in Sources */,
 				C6C22F491C54629E002B38EC /* ChainObject.cpp in Sources */,
