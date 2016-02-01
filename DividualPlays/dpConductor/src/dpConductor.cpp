@@ -145,6 +145,12 @@ void dpConductor::switchHakoniwa(string nameHakoniwa, bool enable, bool A, bool 
 		sceneCon->setScene(VisName, false, allowed23, false);
 		sceneCon->setScene(VisName, true, false, true);
 		
+        bool rawCam = false;
+        if (hakoName == HAKO_WORM) rawCam = true;
+        if (VisName == HAKO_STAGE) rawCam = true;
+        
+        sceneCon->setScene(HAKO_RAWCAM, false, false, true);
+        
 		sceneCon->loadExtractor(hakoName);
 	}
 	else
