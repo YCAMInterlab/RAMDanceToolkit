@@ -23,6 +23,7 @@
 #include "ofxException.h"
 #include "ofxXmlSettings.h"
 #include "dpScoreSceneHakoMovies.h"
+#include "dpScoreMatrixStack.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
