@@ -141,9 +141,12 @@ void dpConductor::switchHakoniwa(string nameHakoniwa, bool enable, bool A, bool 
 		
 		if (enable)
 		{
-			sceneCon->setScene(hakoName, true, false, false);
-			sceneCon->setScene(VisName, false, A, B);
-			sceneCon->setScene(VisName, true, A, B);
+			//マスターからの受けは4−5ディスプレイのみの出力
+			sceneCon->setScene(hakoName, false, false, false);
+			sceneCon->setScene(VisName, false, false, true);
+			sceneCon->setScene(VisName, true, false, false);
+			
+			sceneCon->loadExtractor(hakoName);
 		}
 		else
 		{//箱庭からのDisable処理

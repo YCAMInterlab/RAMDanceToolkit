@@ -175,6 +175,9 @@ magnetLooper looper;
 
 FloorLine floorLine;
 
+#include "floorline_ext.h"
+floorline_ext floor_ext;
+
 #include "HakoniwaGearMove.h"
 
 HakoniwaGearMove mHakoniwaGearMove;
@@ -213,6 +216,7 @@ void testApp::setup()
     sceneManager.addScene(mMixMonsterScene_ext.getPtr());
     sceneManager.addScene(mThreePoints_ext.getPtr());
     sceneManager.addScene(mDonuts_ext.getPtr());
+	sceneManager.addScene(floor_ext.getPtr());
 	
 	/* Legacy */
 	sceneManager.addScene( drawLines.getPtr() );

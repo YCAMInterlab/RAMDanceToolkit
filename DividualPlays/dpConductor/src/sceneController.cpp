@@ -92,6 +92,13 @@ void sceneController::setExtractor(string scene, string name, Joint node)
 	sendMessage(m);
 }
 
+void sceneController::loadExtractor(string scene)
+{
+	ofxOscMessage m;
+	m.setAddress(OSC_EXTRACTOR_ADDR+scene+"/load");
+	sendMessage(m);
+}
+
 void sceneController::setFloatTune(string scene, string type, float value)
 {
 	ofxOscMessage m;

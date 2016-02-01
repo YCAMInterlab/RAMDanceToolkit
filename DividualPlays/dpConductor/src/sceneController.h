@@ -27,6 +27,7 @@ public:
 	
 	void	clearExtractor(string scene);
 	void	setExtractor(string scene, string name, Joint node);
+	void	loadExtractor(string scene);
 	void	setFloatTune(string scene, string type, float value);
 	void	setToggleTune(string scene, string type, bool value);
 	void	setButtonTune(string scene, string type);
