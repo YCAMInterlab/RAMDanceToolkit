@@ -175,7 +175,7 @@ void SceneFlowChart::setupScenes()
 	mProperties[SCENE_TPS].camera->setParent(mNodeHead);
 	mProperties[SCENE_TPS].camera->setGlobalPosition(0.f, 0.f, 200.f);
 
-	mProperties[SCENE_DESCRIPTION].camera->setGlobalPosition(-NodeStage::kWidth * 0.5f, 600.f, 800.f);
+	mProperties[SCENE_DESCRIPTION].camera->setGlobalPosition(-NodeStage::kWidth * 0.5f + 100.f, 600.f, 800.f);
 	mProperties[SCENE_DESCRIPTION].camera->setOrientation(ofVec3f(-30.f, 0.f, 0.f));
 
 	mProperties[SCENE_MEMORY].camera->setParent(mNodeCenter);
@@ -256,7 +256,7 @@ void SceneFlowChart::updateTime()
 		mTimeCamMove = 0.f;
 		++mNodeIdx %= mOrders.at(mOrderIdx).size();
 
-		if (mCurrentScene == SCENE_MOVE || mCurrentScene == SCENE_DESCRIPTION || mCurrentScene == SCENE_CIRCULATION) {
+		if (mCurrentScene == SCENE_MOVE or mCurrentScene == SCENE_DESCRIPTION or mCurrentScene == SCENE_CIRCULATION) {
             if (mOscInited) {
                 ofxOscMessage m;
                 m.setAddress(kOscAddrLighting);
@@ -404,8 +404,8 @@ void SceneFlowChart::drawNodes()
 	for (auto& p : mNodes) {
 		// only render audiences when they have been focused
 		if (p.first == getClassName<NodeAudience>()) {
-			if (getNextNodeName() == getClassName<NodeAudience>() ||
-			    (getCurrentNodeName() == getClassName<NodeAudience>() && p.second->t < 1.f)) {
+			if (getNextNodeName() == getClassName<NodeAudience>() or
+			    (getCurrentNodeName() == getClassName<NodeAudience>() and p.second->t < 1.f)) {
 				p.second->draw();
 			}
 		}
@@ -483,7 +483,7 @@ void SceneFlowChart::drawCircles()
 		f = ofClamp(f, 0.f, 1.f);
 		f = easeInOutQuad(f);
 		const float len {0.5f};
-		if (f >= len && screen.z < 1.f) {
+		if (f >= len and screen.z < 1.f) {
 			ScopedTranslate t(screen.x, screen.y, 0.f);
 			ofSetColor(color::kMain);
 			ofCircle(ofVec3f::zero(), 10.f);
@@ -606,7 +606,7 @@ void SceneFlowChart::drawHUD()
 	auto next = getNextNode();
 
 	// display node name
-	if (mCurrentScene == SCENE_MOVE && next->t >= 1.f) {
+	if (mCurrentScene == SCENE_MOVE and next->t >= 1.f) {
 		const string str {next->title};
 		{
 			ScopedTranslate t(25.f, 170.f);
@@ -794,7 +794,7 @@ void SceneFlowChart::changeScene(int index)
 	if (mCurrentScene != SCENE_MEMORY) {
 		LineObj::enableAnimation = false;
 	}
-	if (mCurrentScene != SCENE_DESCRIPTION && mCurrentScene != SCENE_CIRCULATION) {
+	if (mCurrentScene != SCENE_DESCRIPTION and mCurrentScene != SCENE_CIRCULATION) {
 		getNode<NodeHakoniwa>()->setFocus(true);
 	}
 }

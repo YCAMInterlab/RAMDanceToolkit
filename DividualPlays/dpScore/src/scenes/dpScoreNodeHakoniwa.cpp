@@ -20,17 +20,24 @@ NodeHakoniwa::NodeHakoniwa()
 	titleJP = "箱庭（６種類）";
 	descriptionJP = "「箱庭（６種類）」\nダンサーの動きを箱庭に入力\n箱庭の中の状態が変化する";
 
-	setGlobalPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 50.f, 0.f, 400.f - NodeHakoniwa::getDepth());
+	setGlobalPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 157.f,
+	                  0.f,
+	                  NodeStage::kDepth * 0.5f - NodeHakoniwa::getDepth() - 10.f);
 	addAimingOffset(ofVec3f(NodeHakoniwa::getWidth() * 0.5f, Desk::getHeight(), NodeHakoniwa::getDepth() * 0.5f));
 
-	getCamera().setFov(60.f);
-	getCamera().setPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() * 0.5f - 50.f, 250.f, 550.f);
-	getCamera().setOrientation(ofVec3f(-25.f, 0.f, 0.f));
+	getCamera().setFov(80.f);
+	auto p = getGlobalPosition();
+	p.x += Desk::getWidth() + 150.f;
+	p.y += 250.f;
+	p.z += Desk::getDepth() * kNumY * 0.5f;
+	getCamera().setPosition(p);
+	//getCamera().setPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() * 0.5f - 50.f, 250.f, 550.f);
+	getCamera().setOrientation(ofVec3f(-30.f, 90.f, 0.f));
 
-	mLights.clear();
-	for (auto i : rep(kNumX * kNumY)) {
-		mLights.push_back(Box::create(ofVec3f(Desk::getDimension() - 5.f, Desk::getHeight(), Desk::getDimension() - 9.f), 5.f, 75.f, 9.f));
-	}
+	//mLights.clear();
+	//for (auto i : rep(kNumX * kNumY)) {
+	//    mLights.push_back(Box::create(ofVec3f(Desk::getDimension() - 5.f, Desk::getHeight(), Desk::getDimension() - 9.f), 5.f, 75.f, 9.f));
+	//}
 
 	mDesks.clear();
 	for (auto i : rep(kNumX * kNumY)) {
@@ -50,9 +57,10 @@ void NodeHakoniwa::customDraw()
 	const float t {::fmodf(getElapsedTime() * 2.f, kNumX * kNumY)};
 	for (auto i : rep(kNumX)) {
 		for (auto j : rep(kNumY)) {
-			ScopedTranslate t(i * Desk::getDimension(), 0.f, j * (Desk::getDimension() + kGapZ));
+			//ScopedTranslate t(i * Desk::getWidth(), 0.f, j * (Desk::getDepth() + kGapZ));
+			ScopedTranslate t(i * Desk::getWidth(), 0.f, j * Desk::getDepth());
 			mDesks.at(i * kNumY + j).draw();
-			mLights.at(i * kNumY + j).draw();
+			//mLights.at(i * kNumY + j).draw();
 		}
 	}
 	const float yOffset {0.f};
@@ -63,13 +71,13 @@ void NodeHakoniwa::customDraw()
 
 		ofSetColor(color::kMain);
 		ofDisableDepthTest();
-		ScopedTranslate trans(mX * Desk::getDimension(), 0.f, mY * (Desk::getDimension() + kGapZ));
+		ScopedTranslate t(mX * Desk::getWidth(), 0.f, mY * Desk::getDepth());
 		mDesks.at(mX * kNumY + mY).draw();
-		mLights.at(mX * kNumY + mY).draw();
+		//mLights.at(mX * kNumY + mY).draw();
 
-		mOffsets.front().set(Desk::getDimension() * mX + Desk::getDimension() * 0.5f,
+		mOffsets.front().set(Desk::getWidth() * mX + Desk::getWidth() * 0.5f,
 		                     Desk::getHeight() + yOffset,
-		                     (Desk::getDimension() + kGapZ) * mY + Desk::getDimension() * 0.5f);
+		                     Desk::getDepth() * mY + Desk::getDepth() * 0.5f);
 	}
 	else {
 		mOffsets.front().set(NodeHakoniwa::getWidth() * 0.5f, Desk::getHeight() + yOffset, NodeHakoniwa::getDepth() * 0.5f);

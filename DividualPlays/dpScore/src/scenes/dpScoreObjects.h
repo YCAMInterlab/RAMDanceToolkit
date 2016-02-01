@@ -132,10 +132,20 @@ struct Desk {
 	Desk();
 	void draw();
 
-	static float getDimension()
-	{
-		return 91.f;
-	}
+    //static float getDimension()
+    //{
+    //    return 60.f;
+    //}
+    static float getWidth()
+    {
+        return 60.f;
+    }
+    
+    static float getDepth()
+    {
+        return 180.f;
+    }
+    
 	static float getHeight()
 	{
 		return 84.f;
@@ -153,11 +163,11 @@ struct Deck {
 	}
 	static float getDepth()
 	{
-		return 180.f;
+		return 182.f;
 	}
 	static float getHeight()
 	{
-		return 70.f;
+		return 84.f;
 	}
 private:
 	Box mTop;
