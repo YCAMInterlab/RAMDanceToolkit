@@ -281,7 +281,7 @@ public:
     
     void sendLightingMessage(bool enable){
         ofxOscMessage m;
-        m.setAddress("/dp/light/allHakoniwa");
+        m.setAddress("/dp/rdtk/allHakoniwaMove");
         m.addIntArg(enable);
         mLightSender.sendMessage(m);
     }
