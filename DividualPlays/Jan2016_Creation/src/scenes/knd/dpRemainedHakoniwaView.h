@@ -79,7 +79,6 @@ private:
                        SINGLE_SCREEN_HEIGHT * 0.5,
                        mWidth,
                        mHeight.val);
-                cout << ofGetMouseX() << endl;
             }
             
             ofPopStyle();
