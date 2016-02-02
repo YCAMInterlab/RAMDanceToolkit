@@ -38,6 +38,7 @@
 #include "FloorLine.h"
 
 #include "dpDancerCue.h"
+#include "dpRemainedHakoniwaView.h"
 #include "DoSomething.h"
 
 class testApp : public ramBaseApp
@@ -74,4 +75,5 @@ public:
     
     DoSomething doSomething;
     dpDancerCue dancerCue;
+    dpRemainedHakoniwaView remainedView;
 };

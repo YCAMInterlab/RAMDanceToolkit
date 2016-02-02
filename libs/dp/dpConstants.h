@@ -131,19 +131,27 @@ struct dpFloatColor
 enum DANCER_NAME{
     ANDO,
     KOJIRI,
-    YAS,
     MIYASHITA,
+    SHIMAJI,
     NUM
 };
 
 // for dancer cue or something...
+
+struct dpDancerFloatColor
+{
+    static const ofFloatColor ANDO_COLOR;
+    static const ofFloatColor KOJIRI_COLOR;
+    static const ofFloatColor MIYASHITA_COLOR;
+    static const ofFloatColor SHIMAJI_COLOR;
+};
+
 struct dpDancerColor
 {
     static const ofColor ANDO_COLOR;
     static const ofColor KOJIRI_COLOR;
-    static const ofColor YAS_COLOR;
     static const ofColor MIYASHITA_COLOR;
-    
+    static const ofColor SHIMAJI_COLOR;
 };
 
 static ofColor dancerNameToColor(DANCER_NAME name){
@@ -152,9 +160,9 @@ static ofColor dancerNameToColor(DANCER_NAME name){
     
     if(name == KOJIRI)return dpDancerColor::KOJIRI_COLOR;
     
-    if(name == YAS)return dpDancerColor::YAS_COLOR;
-    
     if(name == MIYASHITA)return dpDancerColor::MIYASHITA_COLOR;
+    
+    if(name == SHIMAJI)return dpDancerColor::SHIMAJI_COLOR;
     
     return ofColor(0,0,0);
 }

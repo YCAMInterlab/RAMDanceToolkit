@@ -117,6 +117,8 @@ public:
         ofSetColor(255,255,255);
         mSphere.draw(center,radius,normal);
 
+        mMotionExtractor.draw();
+        
         ramEndCamera();
     
     }

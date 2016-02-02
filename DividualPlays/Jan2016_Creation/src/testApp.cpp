@@ -286,6 +286,7 @@ void testApp::setup()
 
     doSomething.setup();
     dancerCue.setup();
+    remainedView.setup();
 }
 
 //--------------------------------------------------------------
@@ -293,6 +294,7 @@ void testApp::update()
 {
     doSomething.update();
     dancerCue.update();
+    remainedView.update();
     
     mSyphonClientManager->update();
     ramGetGUI().getSceneTabs().setPosition(0, -mouseY);
@@ -304,6 +306,7 @@ void testApp::draw()
 {
     doSomething.draw();
     dancerCue.draw();
+    remainedView.draw();
 }
 
 

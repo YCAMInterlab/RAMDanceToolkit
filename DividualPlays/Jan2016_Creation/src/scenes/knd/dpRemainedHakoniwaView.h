@@ -10,7 +10,9 @@
 #define __RAMDanceToolkit__dpHakoniwaRemainView__
 
 #include "KezSlidePoint.h"
+#include "KezDelay.h"
 #include "ramMain.h"
+#include "dpConstants.h"
 
 class dpRemainedHakoniwaView{
 public:
@@ -18,13 +20,107 @@ public:
     void setup();
     void update();
     void receieveOsc();
+    void showEndNum();
     void draw();
     
-    
 private:
-    int mCounter = 0;
+    
+    int mNumRemain = 0;
+    
+    int mEndNum = 0;
+    bool mHasEnd = false;
+    
+    class EndBar{
+    public:
+        
+        void setup(){
+            mHeightTarget = SINGLE_SCREEN_HEIGHT * 0.75;
+            mWidth = 60;
+            mMargin = 200;
+        }
+        
+        void update(){
+            mHeight.update();
+            mAlpha.update();
+            
+            if(mFadeStartDelay.update()){
+                mAlpha.set(0);
+            }
+        }
+        
+        void show(){
+            mHeight.imSet(0);
+            mHeight.set(mHeightTarget);
+            mAlpha.imSet(255);
+            mFadeStartDelay.start(150);
+        }
+        
+        void draw(int num){
+            
+            if(mAlpha.val > 1.0){
+                
+                ofPushMatrix();
+                ofPoint offset = SCREEN_POSITIONS[SCREEN_C];
+                ofTranslate(offset.x,offset.y);
+                
+                ofPushStyle();
+                ofSetRectMode(OF_RECTMODE_CENTER);
+        
+                for(int i = 0; i < num; i++){
+                    ofColor color = dpColor::MAIN_COLOR;
+                    ofSetColor(color.r,color.g,color.b,mAlpha.val);
+                    
+                    float x = SINGLE_SCREEN_WIDTH * 0.5;
+                    
+                    ofRect(x - num * 0.5 * mMargin + mMargin * i,
+                           SINGLE_SCREEN_HEIGHT * 0.5,
+                           mWidth,
+                           mHeight.val);
+                    
+                }
+            
+                ofPopStyle();
+                
+                ofPopMatrix();
+            }
+        
+        }
+        
+    private:
+        KezSlide mHeight;
+        KezSlide mAlpha;
+        KezDelay mFadeStartDelay;
+        float mHeightTarget;
+        
+        float mWidth;
+        float mMargin;
+    };
     
     ramOscReceiveTag mReceiver;
+    
+    EndBar mEndBar;
+    
+    enum HAKONIWA{
+        STAGE,
+        MAG_LOOPER,
+        MAG_PENDULUM,
+        SERVO_PENDULUM,
+        GEAR,
+        STRUGGLE,
+        TORNADE,
+        NUM_HAKONIWA
+    };
+    
+    class HakoniwaCounterCircle{
+    public:
+        void setup(ofPoint pos);
+        void update();
+        void draw();
+    private:
+        float mRad = 100;
+        ofPoint mPos;
+    };
+    
 };
 
 #endif /* defined(__RAMDanceToolkit__dpHakoniwaRemainView__) */

@@ -206,6 +206,7 @@
 		92C30F011C5F7B8A00257D14 /* dpHakoVisGearMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoVisGearMove.h; sourceTree = "<group>"; };
 		92C30F031C5F7E9000257D14 /* dpRemainedHakoniwaView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpRemainedHakoniwaView.cpp; sourceTree = "<group>"; };
 		92C30F041C5F7E9000257D14 /* dpRemainedHakoniwaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpRemainedHakoniwaView.h; sourceTree = "<group>"; };
+		92C30F061C60511600257D14 /* KezDelay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezDelay.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		C60249001C5D96010015DCDD /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C602491E1C5D96010015DCDD /* Syphon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Syphon.framework; sourceTree = "<group>"; };
@@ -431,6 +432,7 @@
 		5EF92F681C57B59C00F6916F /* util */ = {
 			isa = PBXGroup;
 			children = (
+				92C30F061C60511600257D14 /* KezDelay.h */,
 				9225EEBF1C588F9700A7FD9A /* GeometryHelpers.h */,
 				5EF92F691C57B59C00F6916F /* DoSomething.h */,
 				5EF92F6A1C57B59C00F6916F /* dpRibbon.h */,
