@@ -1,5 +1,5 @@
 //
-//  HakoniwaGearMove.h
+//  dpHakoniwaGearMove.h
 //  RAMDanceToolkit
 //
 //  Created by ycam on 2014/12/25.
@@ -14,15 +14,15 @@
 //
 //
 
-#ifndef __RAMDanceToolkit__HakoniwaGearMove__
-#define __RAMDanceToolkit__HakoniwaGearMove__
+#ifndef __RAMDanceToolkit__dpHakoniwaGearMove__
+#define __RAMDanceToolkit__dpHakoniwaGearMove__
 
 #include "ramMain.h"
 #include "ofxKsmrStepManager.h"
 #include "ramMotionExtractor.h"
 #include "dpConstants.h"
 
-class HakoniwaGearMove : public ramBaseScene {
+class dpHakoniwaGearMove : public ramBaseScene {
 public:
     
     void setupControlPanel();
@@ -31,8 +31,7 @@ public:
     void draw();
     void onPanelChanged(ofxUIEventArgs& e);
     
-    inline
-    string getName() const { return "dpHGearMove"; }
+    inline string getName() const { return "dpHGearMove"; }
     
     ofxKsmrStepManager		stepManager;
     

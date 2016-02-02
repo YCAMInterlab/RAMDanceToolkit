@@ -156,7 +156,6 @@ void dpConductor::switchHakoniwa(string nameHakoniwa, bool enable, bool A, bool 
 		
 		sceneCon->setScene(hakoName, false, false, false);
 		callHakoniwaPreset(VisName);
-		
 	}
 	else
 	{//箱庭からのDisable処理

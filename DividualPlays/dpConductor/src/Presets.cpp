@@ -103,12 +103,12 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_LEFT_ELBOW);
 	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_RIGHT_ELBOW);
 	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_LEFT_KNEE);
-	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_LEFT_KNEE);
+	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_RIGHT_KNEE);
 	
 	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
 	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
 	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_LEFT_KNEE);
-	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_LEFT_KNEE);
+	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_RIGHT_KNEE);
 	
 	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_LEFT_ELBOW);
 	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_NECK);
@@ -144,12 +144,12 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_LEFT_ELBOW);
 	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_RIGHT_ELBOW);
 	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_LEFT_KNEE);
-	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_LEFT_KNEE);
+	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_RIGHT_KNEE);
 	
 	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
 	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
 	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_LEFT_KNEE);
-	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_LEFT_KNEE);
+	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_RIGHT_KNEE);
 	
 	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_NECK);
 	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_HIP);
@@ -183,6 +183,8 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_RIGHT_KNEE);
 	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_SHOULDER);
 	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_RIGHT_SHOULDER);
+    ns->addTuneT(SCENE_THREEPT, "Show rects", true);
+    ns->addTuneF(SCENE_THREEPT, "Rect radius", 42.1);
 	setActorViewing(ns, false, true, true, true);
 
 #pragma mark - 0130 TODO:[DONE]ここ宮下さんだけモンスターインスタンス2つ作る
@@ -195,8 +197,13 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_MONSTER, ACTOR_SHIMAJI, JOINT_NECK);
 	ns->addExtractor(SCENE_MONSTER, ACTOR_MIYASHITA, JOINT_NECK);
 	ns->addExtractor(SCENE_MONSTER_2, ACTOR_MIYASHITA, JOINT_NECK);
+    ns->addTuneT(SCENE_MONSTER, "Randomize Topology", true);
 	setActorViewing(ns, true, true, true, true);
 
+    ns = setBasicSection("fp-0135-monster-randtopo", false, false);
+    ns->addTuneT(SCENE_MONSTER, "Randomize Topology", true);
+    ns->addTuneT(SCENE_MONSTER_2, "Randomize Topology", true);
+    
 #pragma mark 0140
 	ns = setBasicSection("fp-0140-monster-burst", true, true);
 	setCamActorScene(ns);
@@ -206,6 +213,7 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_MONSTER, ACTOR_KOJIRI, JOINT_NECK);
 	ns->addExtractor(SCENE_MONSTER, ACTOR_MIYASHITA, JOINT_NECK);
 	ns->addExtractor(SCENE_BURST, ACTOR_SHIMAJI, JOINT_NECK);
+    ns->addTuneT(SCENE_MONSTER, "Randomize Topology", true);
 	setActorViewing(ns, true, true, true, true);
 
 #pragma mark 0150 TODO: ここ追跡スピード変わる？
