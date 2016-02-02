@@ -29,7 +29,7 @@ public:
         ramGetGUI().addSlider("currentLength", 0.01, 400.0, &mCurrentLength);
         
         mMotionExtractor.setupControlPanel(this,ofPoint(350,32));
-        mMotionExtractor.load("motionExt_dpHServoPendulum.xml");
+      //  mMotionExtractor.load("motionExt_dpHServoPendulum.xml");
         
         int rnd = ofRandom(0,2);
         
