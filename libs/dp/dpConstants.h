@@ -36,8 +36,8 @@ static const int EXTERNAL_VIDEO_WIDTH = 640;
 static const int EXTERNAL_VIDEO_HEIGHT = 480;
 
 static const string MAGLOOPER_IP = "192.168.20.12";
-static const int MAGLOOPER_1_PORT = 12001;
-static const int MAGLOOPER_2_PORT = 12000;
+static const int MAG_LOOPER_1_PORT = 12001;
+static const int MAG_LOOPER_2_PORT = 12000;
 
 static const string MAG_PENDULUM_ONOFF_IP = "192.168.20.52";
 static const string STRUGGLE_IP = "192.168.20.53";
@@ -143,6 +143,7 @@ struct dpDancerColor
     static const ofColor KOJIRI_COLOR;
     static const ofColor YAS_COLOR;
     static const ofColor MIYASHITA_COLOR;
+    
 };
 
 static ofColor dancerNameToColor(DANCER_NAME name){
