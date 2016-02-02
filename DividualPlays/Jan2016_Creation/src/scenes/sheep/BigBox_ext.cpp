@@ -17,6 +17,14 @@ void BigBox_ext::setupControlPanel()
 	gui->addSlider("color_r", 0.0, 1.0, &color.r);
 	gui->addSlider("color_g", 0.0, 1.0, &color.g);
 	gui->addSlider("color_b", 0.0, 1.0, &color.b);
+	
+	for (int i = 0;i < BOXSC_NUM;i++)
+	{
+		gui->addSlider("boxScale", 0.0, 1000.0, &boxScales[i]);
+		boxScales[i] = 100.0;
+	}
+	
+	
 	mex.setupControlPanel(this);
 	
 	for (int i = 0;i < NUMNODE_BBE;i++) portScale[i] = 0.0;
@@ -46,7 +54,7 @@ void BigBox_ext::draw()
 	ofSetColor(color);
 	for (int i = 0;i < NUMNODE_BBE;i++)
 	{
-		if (i < mex.getNumPort()) portScale[i] += (boxScale - portScale[i]) / 5.0;
+		if (i < mex.getNumPort()) portScale[i] += (boxScales[(i < BOXSC_NUM ? i : 0)] - portScale[i]) / 5.0;
 		else portScale[i] += (0 - portScale[i]) / 5.0;
 			
 		ofPushMatrix();
