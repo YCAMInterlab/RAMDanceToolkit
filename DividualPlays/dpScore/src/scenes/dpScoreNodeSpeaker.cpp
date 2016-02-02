@@ -12,6 +12,7 @@
 #include "dpScoreObjects.h"
 #include "dpScoreNodeStage.h"
 #include "dpScoreNodeHakoniwa.h"
+#include "dpScoreToolBox.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -21,14 +22,18 @@ NodeSpeaker::NodeSpeaker()
     titleJP = "音響";
     descriptionJP = "「音響」";
     
-	addAimingOffset(getRight() + ofVec3f(getWidth() * 0.5f - 32.f, getHeight() * 0.7f, 45.f));
+	//addAimingOffset(getRight() + ofVec3f(getWidth() * 0.5f - 32.f, getHeight() * 0.7f, 45.f));
     
     getCamera().setFov(55.f);
-    getCamera().setPosition(NodeStage::kWidth * 0.5f + Desk::getDimension() * 0.5f + 50.f - 40.f, 200.f - 100.f, 600.f);
+    getCamera().setPosition(NodeStage::kWidth * 0.5f + Desk::getWidth() * 0.5f + 50.f - 40.f, 200.f - 100.f, 600.f);
     getCamera().setOrientation(ofVec3f(0.f, -45.f, 0.f));
     
-    mBottom.setup(ofVec3f::zero(), getWidth(), getHeight(), getDepth());
-    mTop.setup(ofVec3f::zero(), 35.f, 62.f, 44.f);
+    mSpeakers.clear();
+    for (auto i : rep(kNumSpeakers)) {
+        mSpeakers.push_back(Speaker::create(ofVec3f::zero()));
+    }
+    mPole.setup(ofVec3f::zero(), 2.f, getH());
+    
 }
 
 NodeSpeaker::~NodeSpeaker()
@@ -41,35 +46,100 @@ void NodeSpeaker::customDraw()
 	ScopedStyle s;
 	setStyle(*this);
 
-	const float tx {(getWidth() - 35.f) * 0.5f};
-	auto drawSpeakers = [&]() {
-				    mBottom.draw();
-				    ofTranslate(tx, getHeight(), getDepth() - 44.f);
-				    ofRotateX(-5.f);
-				    mTop.draw();
-			    };
-	{
-		ScopedMatrix m;
-		ofTranslate(getLeft());
-		ofRotateY(45.f);
-		drawSpeakers();
-	}
-	{
-		ScopedMatrix m;
-		ofTranslate(getRight());
-		ofRotateY(-45.f);
-		drawSpeakers();
-	}
+    {
+        ScopedMatrix m;
+        ofTranslate(-NodeStage::kWidth * 0.5f - getX(),
+                    getH(),
+                    -NodeStage::kDepth * 0.5f + 120.f);
+        {
+            ScopedMatrix m2;
+            ofTranslate(Speaker::getWidth() * 0.5f, 0.f, Speaker::getDepth() * 0.5f);
+            ofRotateY(90.f);
+            ofTranslate(-Speaker::getWidth() * 0.5f, 0.f, -Speaker::getDepth() * 0.5f);
+            mSpeakers.at(0).draw();
+        }
+        ofTranslate(Speaker::getWidth() * 0.5f, -getH() * 0.5f, Speaker::getDepth() * 0.5f);
+        mPole.draw();
+    }
+    {
+        ScopedMatrix m;
+        ofTranslate(NodeStage::kWidth * 0.5f + getX(),
+                    getH(),
+                    -NodeStage::kDepth * 0.5f + 120.f);
+        {
+            ScopedMatrix m2;
+            ofTranslate(Speaker::getWidth() * 0.5f, 0.f, Speaker::getDepth() * 0.5f);
+            ofRotateY(-90.f);
+            ofTranslate(-Speaker::getWidth() * 0.5f, 0.f, -Speaker::getDepth() * 0.5f);
+            mSpeakers.at(1).draw();
+        }
+        ofTranslate(Speaker::getWidth() * 0.5f, -getH() * 0.5f, Speaker::getDepth() * 0.5f);
+        mPole.draw();
+    }
+    {
+        ScopedMatrix m;
+        ofTranslate(-NodeStage::kWidth * 0.5f - getX(),
+                    getH() + 50.f,
+                    NodeStage::kDepth * 0.5f - 100.f);
+        {
+            ScopedMatrix m2;
+            ofTranslate(Speaker::getWidth() * 0.5f, 0.f, Speaker::getDepth() * 0.5f);
+            ofRotateY(60.f);
+            ofTranslate(-Speaker::getWidth() * 0.5f, 0.f, -Speaker::getDepth() * 0.5f);
+            mSpeakers.at(2).draw();
+        }
+    }
+    {
+        ScopedMatrix m;
+        ofTranslate(NodeStage::kWidth * 0.5f + getX(),
+                    getH() + 50.f,
+                    NodeStage::kDepth * 0.5f - 100.f);
+        {
+            ScopedMatrix m2;
+            ofTranslate(Speaker::getWidth() * 0.5f, 0.f, Speaker::getDepth() * 0.5f);
+            ofRotateY(-60.f);
+            ofTranslate(-Speaker::getWidth() * 0.5f, 0.f, -Speaker::getDepth() * 0.5f);
+            mSpeakers.at(3).draw();
+        }
+    }
+    {
+        ScopedMatrix m;
+        ofTranslate(-NodeStage::kWidth * 0.5f - getX(),
+                    getH() + 50.f,
+                    NodeStage::kDepth * 0.5f - 150.f - Speaker::getWidth());
+        {
+            ScopedMatrix m2;
+            ofTranslate(Speaker::getWidth() * 0.5f, Speaker::getHeight() * 0.5f, Speaker::getDepth() * 0.5f);
+            ofRotateY(90.f);
+            ofRotateX(15.f);
+            ofTranslate(-Speaker::getWidth() * 0.5f, -Speaker::getHeight() * 0.5f, -Speaker::getDepth() * 0.5f);
+            mSpeakers.at(4).draw();
+        }
+    }
+    {
+        ScopedMatrix m;
+        ofTranslate(NodeStage::kWidth * 0.5f + getX(),
+                    getH() + 50.f,
+                    NodeStage::kDepth * 0.5f - 150.f - Speaker::getWidth());
+        {
+            ScopedMatrix m2;
+            ofTranslate(Speaker::getWidth() * 0.5f, Speaker::getHeight() * 0.5f, Speaker::getDepth() * 0.5f);
+            ofRotateY(-90.f);
+            ofRotateX(15.f);
+            ofTranslate(-Speaker::getWidth() * 0.5f, -Speaker::getHeight() * 0.5f, -Speaker::getDepth() * 0.5f);
+            mSpeakers.at(5).draw();
+        }
+    }
 }
 
-ofVec3f NodeSpeaker::getLeft()
+float NodeSpeaker::getX()
 {
-	return ofVec3f(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 54.f - 50.f, 0.f, NodeStage::kDepth * 0.5f + 50.f);
+    return 320.f;
 }
 
-ofVec3f NodeSpeaker::getRight()
+float NodeSpeaker::getH()
 {
-	return ofVec3f(NodeStage::kWidth * 0.5f + NodeHakoniwa::getWidth() + 50.f - 54.f, 0.f, NodeStage::kDepth * 0.5f + 50.f - 69.f);
+    return Deck::getHeight() + 83.f;
 }
 
 DP_SCORE_NAMESPACE_END

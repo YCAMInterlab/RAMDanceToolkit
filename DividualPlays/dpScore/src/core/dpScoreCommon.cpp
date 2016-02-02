@@ -117,6 +117,7 @@ const int kOscClientPort {10000};
 
 const string kOscAddrChangeScene {"/dp/score/changeScene"};
 const string kOscAddrSensorScale {"/dp/score/sensorScale"};
+const string kOscAddrNumHakoniwaRemained {"/dp/score/numHakoniwaRemained"};
 
 const string kOscAddrCameraUnitVector {"/dp/cameraUnit/vector"};
 const string kOscAddrCameraUnitVectorTotal {"/dp/cameraUnit/vector/total"};
@@ -335,29 +336,29 @@ DP_SCORE_NAMESPACE_END
 OFX_MOTIONER_NAMESPACE_BEGIN
 string getJointNameLower(int index)
 {
-	if (index == JOINT_HIPS)                              return "hips";
-	if (index == JOINT_ABDOMEN)                   return "abdomen";
-	if (index == JOINT_CHEST)                             return "chest";
-	if (index == JOINT_NECK)                              return "neck";
-	if (index == JOINT_HEAD)                              return "head";
-	if (index == JOINT_LEFT_HIP)                  return "left hip";
-	if (index == JOINT_LEFT_KNEE)                 return "left knee";
-	if (index == JOINT_LEFT_ANKLE)                return "left ankle";
-	if (index == JOINT_LEFT_TOE)                  return "left toe";
-	if (index == JOINT_RIGHT_HIP)                 return "right hip";
-	if (index == JOINT_RIGHT_KNEE)                return "right knee";
-	if (index == JOINT_RIGHT_ANKLE)               return "right ankle";
-	if (index == JOINT_RIGHT_TOE)                 return "right toe";
-	if (index == JOINT_LEFT_COLLAR)               return "left collar";
-	if (index == JOINT_LEFT_SHOULDER)             return "left shoulder";
-	if (index == JOINT_LEFT_ELBOW)                return "left elbow";
-	if (index == JOINT_LEFT_WRIST)                return "left wrist";
-	if (index == JOINT_LEFT_HAND)                 return "left hand";
-	if (index == JOINT_RIGHT_COLLAR)              return "right collar";
-	if (index == JOINT_RIGHT_SHOULDER)    return "right shoulder";
-	if (index == JOINT_RIGHT_ELBOW)               return "right elbow";
-	if (index == JOINT_RIGHT_WRIST)               return "right wrist";
-	if (index == JOINT_RIGHT_HAND)                return "right hand";
+	if (index == JOINT_HIPS)           return "hips";
+	if (index == JOINT_ABDOMEN)        return "abdomen";
+	if (index == JOINT_CHEST)          return "chest";
+	if (index == JOINT_NECK)           return "neck";
+	if (index == JOINT_HEAD)           return "head";
+	if (index == JOINT_LEFT_HIP)       return "left hip";
+	if (index == JOINT_LEFT_KNEE)      return "left knee";
+	if (index == JOINT_LEFT_ANKLE)     return "left ankle";
+	if (index == JOINT_LEFT_TOE)       return "left toe";
+	if (index == JOINT_RIGHT_HIP)      return "right hip";
+	if (index == JOINT_RIGHT_KNEE)     return "right knee";
+	if (index == JOINT_RIGHT_ANKLE)    return "right ankle";
+	if (index == JOINT_RIGHT_TOE)      return "right toe";
+	if (index == JOINT_LEFT_COLLAR)    return "left collar";
+	if (index == JOINT_LEFT_SHOULDER)  return "left shoulder";
+	if (index == JOINT_LEFT_ELBOW)     return "left elbow";
+	if (index == JOINT_LEFT_WRIST)     return "left wrist";
+	if (index == JOINT_LEFT_HAND)      return "left hand";
+	if (index == JOINT_RIGHT_COLLAR)   return "right collar";
+	if (index == JOINT_RIGHT_SHOULDER) return "right shoulder";
+	if (index == JOINT_RIGHT_ELBOW)    return "right elbow";
+	if (index == JOINT_RIGHT_WRIST)    return "right wrist";
+	if (index == JOINT_RIGHT_HAND)     return "right hand";
 
 	return "unknown joint index";
 }
