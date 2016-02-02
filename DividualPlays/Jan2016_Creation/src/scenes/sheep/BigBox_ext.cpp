@@ -20,7 +20,7 @@ void BigBox_ext::setupControlPanel()
 	
 	for (int i = 0;i < BOXSC_NUM;i++)
 	{
-		gui->addSlider("boxScale", 0.0, 1000.0, &boxScales[i]);
+		gui->addSlider("boxScale"+ofToString(i), 0.0, 1000.0, &boxScales[i]);
 		boxScales[i] = 100.0;
 	}
 	
