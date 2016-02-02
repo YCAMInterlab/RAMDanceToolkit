@@ -84,29 +84,29 @@ void ofApp::setup()
 	mSceneManager.add(increment);
 	mSceneManager.change<SceneMasterIncrement>();
 #elif defined(DP_FLOW_CHART)
-    ofSetWindowTitle("dpFlowChart");
-    tabbar->addToggle("Invert", &mInvert);
-    tabbar->addToggle("Show FPS", &mShowFps);
-    tabbar->addToggle("Show Cursor", &mShowCursor);
-    tabbar->addToggle("Fullscreen", &mFullscreen);
-    
-    auto black = SceneBase::Ptr(new SceneBase());
-    black->setDrawHeader(false);
-    black->setName("black");
-    
-    auto flowChart = SceneBase::Ptr(new SceneFlowChart());
-    //auto hakoMovies = SceneBase::Ptr(new SceneHakoMovies());
-    
-    mSceneManager.add(black);
-    mSceneManager.add(flowChart);
-    //mSceneManager.add(hakoMovies);
-    
-    mSceneManager.change<SceneFlowChart>();
-    //mSceneManager.change<SceneHakoMovies>();
-    
-    mSceneManager.makeChangeSceneTab();
-    
-    tabbar->setVisible(false);
+	ofSetWindowTitle("dpFlowChart");
+	tabbar->addToggle("Invert", &mInvert);
+	tabbar->addToggle("Show FPS", &mShowFps);
+	tabbar->addToggle("Show Cursor", &mShowCursor);
+	tabbar->addToggle("Fullscreen", &mFullscreen);
+
+	auto black = SceneBase::Ptr(new SceneBase());
+	black->setDrawHeader(false);
+	black->setName("black");
+
+	auto flowChart = SceneBase::Ptr(new SceneFlowChart());
+	auto hakoMovies = SceneBase::Ptr(new SceneHakoMovies());
+
+	mSceneManager.add(black);
+	mSceneManager.add(flowChart);
+	mSceneManager.add(hakoMovies);
+
+	mSceneManager.change<SceneFlowChart>();
+	//mSceneManager.change<SceneHakoMovies>();
+
+	mSceneManager.makeChangeSceneTab();
+
+	tabbar->setVisible(false);
 #else
 	ofSetWindowTitle("dpScore");
 
@@ -217,16 +217,16 @@ void ofApp::setup()
 	//args.addObject(objC);
 	//
 	//dp::score::notifyObjectEvent(args);
-    
-    //vector<AnyDraw> drawers;
-    //drawers.push_back(A());
-    //drawers.push_back(B());
-    //drawers.push_back(C());
-    //
-    //for (auto& o : drawers) {
-    //    o.draw();
-    //}
-    
+
+	//vector<AnyDraw> drawers;
+	//drawers.push_back(A());
+	//drawers.push_back(B());
+	//drawers.push_back(C());
+	//
+	//for (auto& o : drawers) {
+	//    o.draw();
+	//}
+
 	mFont.loadFont(kFontPath, kTitleFontSize);
 
 	mTitleReplaceList.push_back(make_pair("dpVis", ""));
@@ -240,12 +240,12 @@ void ofApp::setup()
 	keyPressed('c');
 #endif
 #endif
-    
-    OFX_BEGIN_EXCEPTION_HANDLING
-    mOscReceiver.setup(kOscClientPort);
-    OFX_END_EXCEPTION_HANDLING
-    
+
+	OFX_BEGIN_EXCEPTION_HANDLING
+	mOscReceiver.setup(kOscClientPort);
 	OFX_END_EXCEPTION_HANDLING
+
+	        OFX_END_EXCEPTION_HANDLING
 }
 
 #pragma mark ___________________________________________________________________
@@ -253,7 +253,7 @@ void ofApp::update()
 {
 	OFX_BEGIN_EXCEPTION_HANDLING
 
-    updateElapsedTime();
+	        updateElapsedTime();
 
 	while (mOscReceiver.hasWaitingMessages()) {
 		ofxOscMessage m;
@@ -439,7 +439,7 @@ void ofApp::draw()
 	OFX_BEGIN_EXCEPTION_HANDLING
 
 #ifdef DP_MASTER_HAKONIWA
-    getMH().draw();
+	        getMH().draw();
 	ofxMot::draw();
 
 	mSceneManager.draw();

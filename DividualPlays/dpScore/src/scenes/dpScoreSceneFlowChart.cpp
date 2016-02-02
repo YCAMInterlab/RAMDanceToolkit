@@ -66,16 +66,16 @@ void SceneFlowChart::initialize()
 
 	changeScene(SCENE_MOVE);
 
-OFX_BEGIN_EXCEPTION_HANDLING
+	OFX_BEGIN_EXCEPTION_HANDLING
 	ofxXmlSettings xml;
 	xml.load(kXmlSettingsPathFlowChart);
 	xml.pushTag("lighting");
 	auto host = xml.getAttribute("osc", "host", "127.0.0.1");
 	auto port = xml.getAttribute("osc", "port", 10001);
-    xml.popTag();
+	xml.popTag();
 	mOscSender.setup(host, port);
-    mOscInited = true;
-OFX_END_EXCEPTION_HANDLING
+	mOscInited = true;
+	OFX_END_EXCEPTION_HANDLING
 }
 
 void SceneFlowChart::setupNodes()
@@ -160,12 +160,12 @@ void SceneFlowChart::setupOrders()
 void SceneFlowChart::setupScenes()
 {
 	mProperties.clear();
-	mProperties[SCENE_MOVE] = Property(2.f, 2.f, 1.f, 60.f, false);
+	mProperties[SCENE_MOVE] = Property(2.f, 2.f, 1.f, 90.f, false);
 	mProperties[SCENE_CIRCULATION] = Property(0.f, 2.f, 2.f, 60.f, false);
 	mProperties[SCENE_TPS] = Property(0.f, 1.f, 1.f, 60.f, false);
-	mProperties[SCENE_DESCRIPTION] = Property(8.f, 0.f, 1.f, 60.f, false);
+	mProperties[SCENE_DESCRIPTION] = Property(8.f, 0.f, 1.f, 90.f, false);
 	mProperties[SCENE_MEMORY] = Property(0.f, 0.f, 0.f, 60.f, false);
-	mProperties[SCENE_DEBUG] = Property(2.f, 2.f, 1.f, 60.f, true);
+	mProperties[SCENE_DEBUG] = Property(2.f, 2.f, 1.f, 600.f, true);
 
 	mNodeCenter.setGlobalPosition(ofVec3f::zero());
 
@@ -218,6 +218,9 @@ void SceneFlowChart::update(ofxEventMessage& m)
 	else if (mCurrentScene == SCENE_CIRCULATION) {
 		updateCirculation();
 	}
+	else if (mCurrentScene == SCENE_DESCRIPTION) {
+		updateDescription();
+	}
 	else if (mCurrentScene == SCENE_MEMORY) {
 		updateMemory();
 	}
@@ -257,15 +260,15 @@ void SceneFlowChart::updateTime()
 		++mNodeIdx %= mOrders.at(mOrderIdx).size();
 
 		if (mCurrentScene == SCENE_MOVE or mCurrentScene == SCENE_DESCRIPTION or mCurrentScene == SCENE_CIRCULATION) {
-            if (mOscInited) {
-                ofxOscMessage m;
-                m.setAddress(kOscAddrLighting);
-                auto s = getNextNodeName();
-                ofStringReplace(s, "dp::score::Node", "");
-                m.addStringArg(s);
-                m.addFloatArg(mProperties[mCurrentScene].moveSpan);
-                mOscSender.sendMessage(m);
-            }
+			if (mOscInited) {
+				ofxOscMessage m;
+				m.setAddress(kOscAddrLighting);
+				auto s = getNextNodeName();
+				ofStringReplace(s, "dp::score::Node", "");
+				m.addStringArg(s);
+				m.addFloatArg(mProperties[mCurrentScene].moveSpan);
+				mOscSender.sendMessage(m);
+			}
 		}
 	}
 }
@@ -348,7 +351,7 @@ void SceneFlowChart::updateMoving()
 void SceneFlowChart::updateCirculation()
 {
 	mTimeCamRotation += ofGetLastFrameTime();
-	const float r {::cosf(mTimeCamRotation * kMainCamSpeed) * 110.f};
+	const float r {::cosf(mTimeCamRotation * kMainCamSpeed) * 90.f};
 	mNodeCenter.setGlobalOrientation(ofQuaternion(r, ofVec3f(0.f, 1.f, 0.f)));
 
 	for (auto& p : mNodes) {
@@ -361,15 +364,27 @@ void SceneFlowChart::updateCirculation()
 	}
 }
 
+void SceneFlowChart::updateDescription()
+{
+	for (auto& p : mNodes) {
+		if (p.first == getClassName<NodeLight>() or p.first == getClassName<NodeSpeaker>()) {
+			p.second->t = 0.f;
+		}
+		else {
+			p.second->t = 1.f;
+		}
+	}
+}
+
 void SceneFlowChart::updateMemory()
 {
 	mTimeCamRotation += ofGetLastFrameTime();
 
-	if (mTimeCamRotation >= 10.f) {
+	if (mTimeCamRotation >= 18.f) {
 		LineObj::enableAnimation = true;
 	}
 
-	const float r {-mTimeCamRotation * 5.f + 45.f};
+	const float r {-mTimeCamRotation * 4.f + 60.f};
 	mNodeCenter.setGlobalOrientation(ofQuaternion(r, ofVec3f(0.f, 1.f, 0.f)));
 
 	for (auto& p : mNodes) {
@@ -405,7 +420,7 @@ void SceneFlowChart::drawNodes()
 		// only render audiences when they have been focused
 		if (p.first == getClassName<NodeAudience>()) {
 			if (getNextNodeName() == getClassName<NodeAudience>() or
-			    (getCurrentNodeName() == getClassName<NodeAudience>() and p.second->t < 1.f)) {
+			            (getCurrentNodeName() == getClassName<NodeAudience>() and p.second->t < 1.f)) {
 				p.second->draw();
 			}
 		}
@@ -649,18 +664,21 @@ void SceneFlowChart::drawHUD()
 			ofSetColor(ofColor::white);
 			mFont.drawString(str, 0.f, 0.f);
 		}
-		const string strJP {next->descriptionJP};
+		string strJP {next->descriptionJP};
+        if (getCurrentNodeName() == getClassName<NodeCameraUnit>() and getNextNodeName() == getClassName<NodeComputer>()) {
+            strJP = getNode<NodeComputer>()->descriptionJPFromHakoniwa;
+        }
 		auto lines = ofSplitString(strJP, "\n");
 		auto& prop = mProperties[mCurrentScene];
-        float t {mTimeCamMove / prop.moveSpan};
-        t = ofClamp(t, 0.f, 1.f - FLT_EPSILON);
-        const decltype(lines.size()) index = lines.size() * t;
+		float t {mTimeCamMove / prop.moveSpan};
+		t = ofClamp(t, 0.f, 1.f - FLT_EPSILON);
+		const decltype(lines.size())index = lines.size() * t;
 		auto line = lines.at(index);
 		{
 			ScopedTranslate t((kWidth - mFontJP.stringWidth(line)) * 0.5f, kHeight - 40.f);
 			ofSetColor(ofColor::black, 180);
 			ofRect(mFontJP.getStringBoundingBox(line, 0.f, 0.f));
-            ofSetColor(ofColor::white);
+			ofSetColor(ofColor::white);
 			mFontJP.drawStringAsShapes(line, 0.f, 0.f);
 		}
 
@@ -688,13 +706,20 @@ void SceneFlowChart::drawHUD()
 			ofSetColor(ofColor::white);
 			mFont.drawString(str, 0.f, 0.f);
 		}
-		const string strJP {"記憶"};
+		const string strJP {"「記憶」\nこれらの仮想環境でトレーニングをしていると\nその環境はダンサーの記憶に留まります\n本公演はその記憶をダンサー間の共有情報として\nダンスを作ることにも試みています"};
 		{
-			ScopedTranslate t((kWidth - mFontJP.stringWidth(strJP)) * 0.5f, kHeight - 40.f);
-			ofSetColor(ofColor::black, 180);
-			ofRect(mFontJP.getStringBoundingBox(strJP, 0.f, 0.f));
-			ofSetColor(ofColor::white);
-			mFontJP.drawStringAsShapes(strJP, 0.f, 0.f);
+			//const float t {mTimeCamRotation / mProperties[mCurrentScene].totalTime};
+			const float t {mTimeCamRotation / 15.f};
+			const auto lines = ofSplitString(strJP, "\n");
+			if (t < 1.f) {
+				const auto current = decltype(lines.size())(lines.size() * t);
+				const auto line = lines.at(current);
+				ScopedTranslate trans((kWidth - mFontJP.stringWidth(line)) * 0.5f, kHeight - 40.f);
+				ofSetColor(ofColor::black, 180);
+				ofRect(mFontJP.getStringBoundingBox(line, 0.f, 0.f));
+				ofSetColor(ofColor::white);
+				mFontJP.drawStringAsShapes(line, 0.f, 0.f);
+			}
 		}
 	}
 #ifdef DEBUG
@@ -756,15 +781,15 @@ void SceneFlowChart::keyPressed(int key)
 void SceneFlowChart::changeScene(int index)
 {
 	mCurrentScene = index;
-    
-    auto sendOsc = [&](const string& s, float f) {
-        if (!mOscInited) return;
-        ofxOscMessage m;
-        m.setAddress(kOscAddrLighting);
-        m.addStringArg(s);
-        m.addFloatArg(f);
-        mOscSender.sendMessage(m);
-    };
+
+	auto sendOsc = [&](const string& s, float f) {
+			       if (!mOscInited) return;
+			       ofxOscMessage m;
+			       m.setAddress(kOscAddrLighting);
+			       m.addStringArg(s);
+			       m.addFloatArg(f);
+			       mOscSender.sendMessage(m);
+		       };
 
 	switch (index) {
 	case SCENE_MOVE:
@@ -773,10 +798,10 @@ void SceneFlowChart::changeScene(int index)
 		break;
 	case SCENE_CIRCULATION:
 		mTimeCamRotation = HALF_PI * (1.f / kMainCamSpeed);
-        getNode<NodeHakoniwa>()->setFocus(false);
+		getNode<NodeHakoniwa>()->setFocus(false);
 		break;
 	case SCENE_TPS:
-        sendOsc("Stage", 0.f);
+		sendOsc("Stage", 0.f);
 		break;
 	case SCENE_DESCRIPTION:
 		getNode<NodeHakoniwa>()->setFocus(false);

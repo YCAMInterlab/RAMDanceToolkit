@@ -20,12 +20,12 @@ NodeCameraUnit::NodeCameraUnit()
 {
     title = "Hakoniwa Analysis";
     titleJP = "映像解析";
-    descriptionJP = "「映像解析」\n箱庭の内部の状態をコンピュータで映像解析";
+    descriptionJP = "「映像解析」\n箱庭の内部の状態をコンピュータで解析して\nRAMシステムに伝えます";
     
     const float diff {NodeStage::kDepth};
     setGlobalPosition(-NodeStage::kWidth * 0.5f - Deck::getWidth() - 320.f - getWidth() * 0.7f,
                       0.f,
-                      NodeStage::kDepth * 0.5f - 320.f + getDepth() * 0.9f);
+                      NodeStage::kDepth * 0.5f - 300.f + getDepth() * 0.9f);
     addAimingOffset(ofVec3f(7.f, getHeight() * 0.83f, -35.f));
     
     getCamera().setFov(30.f);

@@ -10,11 +10,8 @@
 #include "ofxUI.h"
 
 /*
- 
- 残りシーン数送る
  箱庭同士が２個にならないようにする
  スクリーン選べるようにする
- 
  */
 
 DP_SCORE_NAMESPACE_BEGIN

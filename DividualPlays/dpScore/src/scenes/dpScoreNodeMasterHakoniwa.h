@@ -23,7 +23,6 @@ public:
     
 private:
     ofVbo mWaterTank;
-    Desk mDesk;
     Box mFront;
     Box mRear;
 };

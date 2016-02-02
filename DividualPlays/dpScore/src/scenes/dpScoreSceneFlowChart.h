@@ -55,6 +55,7 @@ private:
     void updateWithSkeleton();
     void updateMoving();
     void updateCirculation();
+    void updateDescription();
     void updateMemory();
     
     void drawScene();

@@ -19,22 +19,23 @@ NodeComputer::NodeComputer()
 {
 	title = "RAM Dance Toolkit";
 	titleJP = "RAM Dance Toolkit";
-	descriptionJP = "「RAM Dance Toolkit」\nダンサーや箱庭の情報を取り込む\nそれらを変換、増幅してダンサーに伝える";
+	descriptionJP = "「RAM Dance Toolkit」\nRAMシステムはダンサーの動きにあわせて\n仮想の環境を変化させます";
+	descriptionJPFromHakoniwa = "「RAM Dance Toolkit」\n再度、箱庭内部の状態にあわせて\n仮想の環境を変化させます";
 
-    const float diff {NodeStage::kDepth - Deck::getDepth() * kNumDecks};
+	const float diff {NodeStage::kDepth - Deck::getDepth() * kNumDecks};
 	setGlobalPosition(-NodeStage::kWidth * 0.5f - Deck::getWidth() - 320.f,
-                      0.f,
-                      -NodeStage::kDepth * 0.5f + diff - 320.f);
+	                  0.f,
+	                  -NodeStage::kDepth * 0.5f + diff - 300.f);
 	addAimingOffset(NodeComputer::getMacBookPosition(3) + ofVec3f(MacBook::getDepth() * 0.5f,
 	                                                              MacBook::getDepth() * 0.5f,
 	                                                              -MacBook::getWidth() * 0.5f));
 
 	getCamera().setFov(60.f);
-    auto p = getGlobalPosition();
-    p.x -= Deck::getWidth() + 50.f;
-    p.y += 180.f;
-    p.z += Deck::getDepth() * kNumDecks * 0.5f;
-    getCamera().setPosition(p);
+	auto p = getGlobalPosition();
+	p.x -= Deck::getWidth() + 50.f;
+	p.y += 180.f;
+	p.z += Deck::getDepth() * kNumDecks * 0.5f;
+	getCamera().setPosition(p);
 	getCamera().setOrientation(ofVec3f(-20.f, -90.f, 0.f));
 
 	mFbo.allocate(MacBook::getWidth() * 4.f, MacBook::getDepth() * 4.f);
@@ -55,7 +56,7 @@ NodeComputer::~NodeComputer()
 }
 
 void NodeComputer::customDraw()
-{    
+{
 	ScopedStyle s;
 	setStyle(*this);
 

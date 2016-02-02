@@ -87,6 +87,22 @@ public:
 	void setup(const ofVec3f& p, float w, float h, float d);
 };
 
+class Speaker: public LineObj {
+public:
+    static Speaker create(const ofVec3f& p)
+    {
+        Speaker s;
+        s.setup(p);
+        return s;
+    }
+    
+    void setup(const ofVec3f& p);
+    
+    static float getWidth();
+    static float getHeight();
+    static float getDepth();
+};
+
 class Cylinder: public LineObj {
 public:
     static Cylinder create(const ofVec3f& p, float r, float h)

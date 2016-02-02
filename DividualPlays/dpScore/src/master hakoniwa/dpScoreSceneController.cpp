@@ -42,6 +42,22 @@ void SceneController::initialize()
         ofxThrowException(ofxException,
                           "serverCameraUnit port number didn't find in XML");
     
+    mRDKOscSender.clear();
+    for (int i=0; i<xml.getNumTags("serverRDTK"); i++) {
+        string errorStr{"error"};
+        int errorInt{-1};
+        const string host{xml.getAttribute("serverRDTK", "host", errorStr)};
+        if (host == errorStr)
+            ofxThrowException(ofxException,
+                              "serverRDTK host name didn't find in XML");
+        const int port{xml.getAttribute("serverRDTK", "port", errorInt)};
+        if (port == errorInt)
+            ofxThrowException(ofxException,
+                              "serverRDTK port number didn't find in XML");
+        mRDKOscSender.push_back(ofxOscSender());
+        mRDKOscSender.back().setup(host, port);
+    }
+    
     /*
     const string scHost{xml.getAttribute("serverScore", "host", errorStr)};
     if (scHost == errorStr)
@@ -459,7 +475,11 @@ void SceneController::sendSetScene(const string& name, bool win0, bool win1)
         ofxOscMessage m;
         m.setAddress(kOscAddrNumHakoniwaRemained);
         m.addIntArg(mUniqueScenes.size());
-        if (enableOscOutRDTK) mCameraUnitOscSender.sendMessage(m);
+        if (enableOscOutRDTK) {
+            for (int i=0; i<mRDKOscSender.size(); i++) {
+                mRDKOscSender.at(i).sendMessage(m);
+            }
+        }
     }
     
     // write scene times

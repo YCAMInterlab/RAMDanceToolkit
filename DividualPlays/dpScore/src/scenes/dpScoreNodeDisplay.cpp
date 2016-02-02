@@ -18,7 +18,7 @@ NodeDisplay::NodeDisplay()
 {
 	title = "Displays";
 	titleJP = "ディスプレイ";
-	descriptionJP = "「ディスプレイ」\nツールキットで生成した映像をダンサーに伝える";
+    descriptionJP = "「ディスプレイ」\n仮想の環境の情報はディスプレイと\n物理的な仕掛けによってダンサーに伝えられます";
 
 	addAimingOffset(getFrontLeft() + ofVec3f(getFrontDisplayWidth() * 0.5f - 6.f,
 	                                         getFrontDisplayHeight() * 0.5f,

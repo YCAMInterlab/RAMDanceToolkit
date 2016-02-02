@@ -21,25 +21,14 @@ public:
     
     void customDraw() override;
     
-    static float getWidth()
-    {
-        return 54.f;
-    }
-    static float getHeight()
-    {
-        return 130.f;
-    }
-    static float getDepth()
-    {
-        return 69.f;
-    }
+    static float getX();
+    static float getH();
     
-    static ofVec3f getLeft();
-    static ofVec3f getRight();
+    const int kNumSpeakers {6};
     
 private:
-    Box mBottom;
-    Box mTop;
+    vector<Speaker> mSpeakers;
+    Cylinder mPole;
 };
 
 DP_SCORE_NAMESPACE_END
