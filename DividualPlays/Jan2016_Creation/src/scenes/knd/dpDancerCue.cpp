@@ -14,9 +14,8 @@ void dpDancerCue::setup(){
     
     mDancerNum["ANDO"] = ANDO;
     mDancerNum["KOJIRI"] = KOJIRI;
-    mDancerNum["YAS"] = YAS;
     mDancerNum["MIYASHITA"] = MIYASHITA;
-    
+    mDancerNum["SHIMAJI"] = SHIMAJI;
     
     for(int i = 0; i < DANCER_NUM; i++){
         float width = (float)SINGLE_SCREEN_WIDTH / (float)DANCER_NUM;

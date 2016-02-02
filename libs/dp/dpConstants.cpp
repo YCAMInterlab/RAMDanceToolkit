@@ -20,7 +20,16 @@ const ofFloatColor dpFloatColor::PALE_PINK_HEAVY  = ofFloatColor(dpColor::PALE_P
 const ofFloatColor dpFloatColor::DARK_PINK_LIGHT  = ofFloatColor(dpColor::DARK_PINK_LIGHT.r / 255.0, dpColor::DARK_PINK_LIGHT.g / 255.0, dpColor::DARK_PINK_LIGHT.b / 255.0);
 const ofFloatColor dpFloatColor::DARK_PINK_HEAVY  = ofFloatColor(dpColor::DARK_PINK_HEAVY.r / 255.0, dpColor::DARK_PINK_HEAVY.g / 255.0, dpColor::DARK_PINK_HEAVY.b / 255.0);
 
-const ofColor dpDancerColor::ANDO_COLOR = ofColor(255);
-const ofColor dpDancerColor::KOJIRI_COLOR = ofColor(255,0,0);
-const ofColor dpDancerColor::YAS_COLOR = ofColor(0,255,0);
-const ofColor dpDancerColor::MIYASHITA_COLOR = ofColor(0,0,255);
+const ofFloatColor dpDancerFloatColor::MIYASHITA_COLOR = ofFloatColor::fromHsb(0.5, 0.9, 0.7);
+const ofFloatColor dpDancerFloatColor::SHIMAJI_COLOR = ofFloatColor::fromHsb(0.95, 0.9, 0.7);
+const ofFloatColor dpDancerFloatColor::KOJIRI_COLOR = ofFloatColor::fromHsb(0.3, 0.9, 0.7);
+const ofFloatColor dpDancerFloatColor::ANDO_COLOR = ofFloatColor::fromHsb(0.0, 0.9, 0.7);
+
+const ofColor dpDancerColor::MIYASHITA_COLOR = ofColor::fromHsb(0.5 * 255.0, 0.9 * 255.0, 0.7 * 255.0);
+const ofColor dpDancerColor::SHIMAJI_COLOR = ofColor::fromHsb(0.95 * 255.0, 0.9 * 255.0, 0.7 * 255.0);
+const ofColor dpDancerColor::KOJIRI_COLOR = ofColor::fromHsb(0.3 * 255.0, 0.9 * 255.0, 0.7 * 255.0);
+const ofColor dpDancerColor::ANDO_COLOR = ofColor::fromHsb(0.0 * 255.0, 0.9 * 255.0, 0.7 * 255.0);
+
+
+
+
