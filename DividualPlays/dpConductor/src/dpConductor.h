@@ -29,6 +29,7 @@ public:
 	void listSection(ofxOscMessage m);
 	
 	void switchHakoniwa(string nameHakoniwa,bool enable, bool A, bool B);
+	void callHakoniwaPreset(string scene);
 	
 	ofPtr<sectionSet> newSection();
 	
