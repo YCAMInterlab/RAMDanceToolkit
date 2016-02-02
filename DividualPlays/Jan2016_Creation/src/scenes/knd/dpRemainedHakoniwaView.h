@@ -58,35 +58,34 @@ private:
         void draw(int num){
             
             if(mAlpha.val > 1.0){
-                
-                ofPushMatrix();
-                ofPoint offset = SCREEN_POSITIONS[SCREEN_C];
-                ofTranslate(offset.x,offset.y);
-                
-                ofPushStyle();
-                ofSetRectMode(OF_RECTMODE_CENTER);
-        
-                for(int i = 0; i < num; i++){
-                    ofColor color = dpColor::MAIN_COLOR;
-                    ofSetColor(color.r,color.g,color.b,mAlpha.val);
-                    
-                    float x = SINGLE_SCREEN_WIDTH * 0.5;
-                    
-                    ofRect(x - num * 0.5 * mMargin + mMargin * i,
-                           SINGLE_SCREEN_HEIGHT * 0.5,
-                           mWidth,
-                           mHeight.val);
-                    
-                }
             
-                ofPopStyle();
+                drawBar(num);
                 
-                ofPopMatrix();
             }
         
         }
         
+        void drawBar(int num){
+            ofPushStyle();
+            ofSetRectMode(OF_RECTMODE_CENTER);
+            
+            for(int i = 0; i < num; i++){
+                ofColor color = dpColor::MAIN_COLOR;
+                ofSetColor(color.r,color.g,color.b,mAlpha.val);
+                
+                float x = SINGLE_SCREEN_WIDTH * 0.5;
+                
+                ofRect(x - num * 0.5 * mMargin + mMargin * i + mMargin * 0.75,
+                       SINGLE_SCREEN_HEIGHT * 0.5,
+                       mWidth,
+                       mHeight.val);
+            }
+            
+            ofPopStyle();
+        }
+        
     private:
+        
         KezSlide mHeight;
         KezSlide mAlpha;
         KezDelay mFadeStartDelay;

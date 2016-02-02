@@ -79,6 +79,7 @@ private:
     //static const string kScoreBlack;
     
     ofxOscSender mCameraUnitOscSender;
+    vector<ofPtr<ofxOscSender>> mRDKOscSender;
     
     //ofxOscSender mScoreOscSender;
     

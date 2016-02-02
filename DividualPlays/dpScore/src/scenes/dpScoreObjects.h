@@ -34,6 +34,7 @@ inline void setStyle()
 	ofEnableDepthTest();
 }
 
+// all object will make from OpenGL coord(righthanded)
 struct Line {
 	static Line make(const ofVec3f& p0, const ofVec3f& p1)
 	{
@@ -87,23 +88,31 @@ public:
 	void setup(const ofVec3f& p, float w, float h, float d);
 };
 
-class Cylinder: public LineObj {
+class Speaker: public LineObj {
 public:
-    static Cylinder create(const ofVec3f& p, float r, float h)
+    static Speaker create(const ofVec3f& p)
     {
-        Cylinder c;
-        c.setup(p, r, h);
-        return c;
+        Speaker s;
+        s.setup(p);
+        return s;
     }
     
-    void setup(const ofVec3f& p, float r, float h);
+    void setup(const ofVec3f& p);
     
-    void draw() override;
-    
-private:
-    ofVec3f mCenter;
-    float mRadius;
-    float mHeight;
+    static float getWidth();
+    static float getHeight();
+    static float getDepth();
+};
+
+class Cylinder: public LineObj {
+public:
+    static Cylinder create(const ofVec3f& p, float r, float h, int res = 16)
+    {
+        Cylinder c;
+        c.setup(p, r, h, res);
+        return c;
+    }
+    void setup(const ofVec3f& p, float r, float h, int res = 16);
 };
 
 class Rect : public LineObj {
@@ -116,6 +125,18 @@ public:
 	}
 
 	void setup(const ofVec3f& p, float w, float h);
+};
+
+// this object will make from center
+class Funnel : public LineObj {
+public:
+    static Funnel create(const ofVec3f& p, float r0, float r1, float h0, float h1)
+    {
+        Funnel f;
+        f.setup(p, r0, r1, h0, h1);
+        return f;
+    }
+    void setup(const ofVec3f& p, float r0, float r1, float h0, float h2);
 };
 
 inline void drawLine(const ofVec3f& c, const ofVec3f& v)
@@ -132,10 +153,20 @@ struct Desk {
 	Desk();
 	void draw();
 
-	static float getDimension()
-	{
-		return 91.f;
-	}
+    //static float getDimension()
+    //{
+    //    return 60.f;
+    //}
+    static float getWidth()
+    {
+        return 60.f;
+    }
+    
+    static float getDepth()
+    {
+        return 180.f;
+    }
+    
 	static float getHeight()
 	{
 		return 84.f;
@@ -153,11 +184,11 @@ struct Deck {
 	}
 	static float getDepth()
 	{
-		return 180.f;
+		return 182.f;
 	}
 	static float getHeight()
 	{
-		return 70.f;
+		return 84.f;
 	}
 private:
 	Box mTop;
