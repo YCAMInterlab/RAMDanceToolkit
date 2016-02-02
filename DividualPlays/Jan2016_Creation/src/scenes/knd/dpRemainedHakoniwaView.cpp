@@ -34,7 +34,7 @@ void dpRemainedHakoniwaView::receieveOsc(){
             int remain = m.getArgAsInt32(0);
             mNumRemain = m.getArgAsInt32(0);
             
-            if(remain == 0){
+            if(remain == 1){
                 mHasEnd = true;
             }
             
