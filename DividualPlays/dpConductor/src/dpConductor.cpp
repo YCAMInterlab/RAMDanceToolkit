@@ -103,7 +103,7 @@ void dpConductor::receiveMasterHakoniwa(ofxOscMessage m)
             sceneCon->disableScene(hakoh[i], false);
         }
         
-		//通常のシーンの扱い...４−５に送る
+		//通常のシーンの扱い...４−５,6に送る
 		string sceneName = m.getArgAsString(0);
 		bool sceneEnable = m.getArgAsInt32(1);
 		bool ViewX = m.getArgAsInt32(2);
@@ -111,7 +111,7 @@ void dpConductor::receiveMasterHakoniwa(ofxOscMessage m)
         
 		if (sceneEnable)
 		{
-			sceneCon->setScene(sceneName, true, false, false);
+			sceneCon->setScene(sceneName, true, false, true);
 			sceneCon->setScene(sceneName, false, false, true);
 		}else{
 			sceneCon->disableScene(sceneName, true);
@@ -198,6 +198,8 @@ void dpConductor::switchHakoniwa(string nameHakoniwa, bool enable, bool A, bool 
 			sceneCon->disableScene(hakos[i], false);
 			sceneCon->disableScene(hakoh[i], false);
 		}
+		sceneCon->disableScene(HAKO_RAWCAM, true);
+		sceneCon->disableScene(HAKO_RAWCAM, false);
 		
 		sceneCon->setScene(hakoName, false, false, false);
         callHakoniwaPreset(VisName);
@@ -247,26 +249,20 @@ void dpConductor::callHakoniwaPreset(string scene)
         sceneCon->setExtractor(HAKO_H_TORNADO, ACTOR_SHIMAJI, JOINT_LEFT_WRIST);
         sceneCon->setExtractor(HAKO_H_TORNADO, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
         sceneCon->setExtractor(HAKO_H_TORNADO, ACTOR_SHIMAJI, JOINT_LEFT_HIP);
-        
+		sceneCon->setActorView(false, false, true, false);
 	}
 #pragma mark TODO: ギアビズ
 	if (scene == HAKO_GEAR)
 	{
-		sceneCon->setScene(HAKO_GEAR, true, false, true);
-		sceneCon->setScene(HAKO_GEAR, false, false, true);
         sceneCon->setScene(HAKO_RAWCAM, true, false, true);
         sceneCon->setScene(HAKO_RAWCAM, false, true, true);
-        
-        sceneCon->clearExtractor(HAKO_H_GEAR);
-		sceneCon->setExtractor(HAKO_H_GEAR, ACTOR_ANDO, JOINT_HIPS);
-		sceneCon->setExtractor(HAKO_H_GEAR, ACTOR_ANDO, JOINT_LEFT_WRIST);
+		
+		sceneCon->clearExtractor(HAKO_H_GEAR);
+		sceneCon->setExtractor(HAKO_H_GEAR, ACTOR_ANDO, JOINT_RIGHT_ELBOW);
 		sceneCon->setExtractor(HAKO_H_GEAR, ACTOR_ANDO, JOINT_LEFT_ELBOW);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_ANDO		, false);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_KOJIRI	, false);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI	, true);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, false);
-        
-        sceneCon->setScene(HAKO_RAWCAM, false, false, true);
+		sceneCon->setExtractor(HAKO_H_GEAR, ACTOR_ANDO, JOINT_RIGHT_KNEE);
+		sceneCon->setExtractor(HAKO_H_GEAR, ACTOR_ANDO, JOINT_RIGHT_KNEE);
+		sceneCon->setActorView(false, false, false, false);
 	}
 	if (scene == HAKO_STRUGGLE)
 	{
@@ -279,18 +275,12 @@ void dpConductor::callHakoniwaPreset(string scene)
 			sceneCon->setExtractor(HAKO_H_STRUGGLE, act[i], JOINT_LEFT_KNEE);
 			sceneCon->setExtractor(HAKO_H_STRUGGLE, act[i], JOINT_RIGHT_KNEE);
 		}
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_ANDO		, true);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_KOJIRI	, true);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI	, true);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
 	}
 	if (scene == HAKO_MAGPENDULUM)
 	{
         sceneCon->setScene(SCENE_ACTOR, false, false, true);
-        sceneCon->setToggleTune(SCENE_ACTOR, "drawFloor", false);
 		sceneCon->setScene(HAKO_MAGPENDULUM, true, false, true);
-		sceneCon->setScene(HAKO_MAGPENDULUM, false, false, true);
-		string act[] = {ACTOR_ANDO, ACTOR_KOJIRI, ACTOR_SHIMAJI};
+        sceneCon->setToggleTune(SCENE_ACTOR, "drawFloor", false);
 
         sceneCon->clearExtractor(HAKO_H_MAGPENDULUM);
         
@@ -300,11 +290,8 @@ void dpConductor::callHakoniwaPreset(string scene)
         sceneCon->setExtractor(HAKO_H_MAGPENDULUM, ACTOR_SHIMAJI, JOINT_RIGHT_ANKLE);
         sceneCon->setExtractor(HAKO_H_MAGPENDULUM, ACTOR_MIYASHITA, JOINT_LEFT_WRIST);
         sceneCon->setExtractor(HAKO_H_MAGPENDULUM, ACTOR_MIYASHITA, JOINT_RIGHT_WRIST);
-        
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_ANDO	, true);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_KOJIRI	, true);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI	, false);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
+		
+		sceneCon->setActorView(false, true, true, true);
 	}
 	if (scene == HAKO_WORM)
 	{
@@ -312,36 +299,24 @@ void dpConductor::callHakoniwaPreset(string scene)
         sceneCon->clearExtractor(HAKO_H_WORM);
 		sceneCon->setExtractor(HAKO_H_WORM, ACTOR_ANDO, JOINT_RIGHT_WRIST);
 		sceneCon->setExtractor(HAKO_H_WORM, ACTOR_ANDO, JOINT_LEFT_KNEE);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_ANDO		, true);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_KOJIRI	, false);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI	, false);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, false);
 	}
 	if (scene == HAKO_SERVOPENDULUM)
 	{
-        sceneCon->clearExtractor(HAKO_H_SERVOPENDULUM);
 		sceneCon->setScene(HAKO_SERVOPENDULUM, true, false, true);
 		sceneCon->setScene(HAKO_SERVOPENDULUM, false, true, true);
+		sceneCon->clearExtractor(HAKO_H_SERVOPENDULUM);
 		sceneCon->setExtractor(HAKO_H_SERVOPENDULUM, ACTOR_KOJIRI, JOINT_RIGHT_WRIST);
 		sceneCon->setExtractor(HAKO_H_SERVOPENDULUM, ACTOR_KOJIRI, JOINT_LEFT_WRIST);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_ANDO		, false);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_KOJIRI	, true);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI	, false);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, false);
 	}
 	if (scene == HAKO_SANDSTORM)
 	{
-		sceneCon->setScene(HAKO_SANDSTORM, false, true, true);
 		sceneCon->setScene(HAKO_SANDSTORM, true, false, true);
+		sceneCon->setScene(HAKO_SANDSTORM, false, true, true);
         sceneCon->clearExtractor(HAKO_H_SANDSTORM);
         
 		sceneCon->setExtractor(HAKO_H_SANDSTORM, ACTOR_SHIMAJI, JOINT_NECK);
 		sceneCon->setExtractor(HAKO_H_SANDSTORM, ACTOR_SHIMAJI, JOINT_RIGHT_WRIST);
 		sceneCon->setExtractor(HAKO_H_SANDSTORM, ACTOR_MIYASHITA, JOINT_RIGHT_WRIST);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_ANDO		, false);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_KOJIRI	, true);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI	, false);
-		sceneCon->setToggleTune(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, false);
 	}
 	
 //	if (scene == HAKO_SANDSTORM)
