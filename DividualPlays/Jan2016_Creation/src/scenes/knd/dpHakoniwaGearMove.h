@@ -65,6 +65,9 @@ private:
     int mMotionExtCnt;
     
     int mParameterChangeThresh;
+    
+    float mElapsed = 0.0;
+    float mGearUpdateSpan = 0.0;
 
 };
 
