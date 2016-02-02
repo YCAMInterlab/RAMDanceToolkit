@@ -17,9 +17,9 @@ magnetLooper::magnetLooper(){
     mDrawDump		= true;
     
     //木箱のしゃくとり
-    sender.setup(MAGLOOPER_IP, MAGLOOPER_1_PORT);
+    sender.setup(MAGLOOPER_IP, MAG_LOOPER_1_PORT);
     //newしゃくとり
-    sender2.setup(MAGLOOPER_IP, MAGLOOPER_2_PORT);
+    sender2.setup(MAGLOOPER_IP, MAG_LOOPER_2_PORT);
     
     sender_debug.setup("192.168.20.36", 24800);
 

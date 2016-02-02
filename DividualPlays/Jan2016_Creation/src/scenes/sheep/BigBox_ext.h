@@ -31,8 +31,10 @@ private:
 	ramMotionExtractor mex;
 	
 #define NUMNODE_BBE 512
+#define BOXSC_NUM 32
 	ofNode portNodes[NUMNODE_BBE];
 	float portScale[NUMNODE_BBE];
+	float boxScales[BOXSC_NUM];
 };
 
 #endif /* BigBox_ext_h */

@@ -8,6 +8,18 @@
 
 #include "dpConductor.h"
 
+#define MIYASHITA_BIGBOX \
+ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_NECK);\
+ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_HIP);\
+ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_RIGHT_KNEE);\
+ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_SHOULDER);\
+ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_RIGHT_SHOULDER);\
+ns->addTuneF(SCENE_BIGBOX, "boxScale2", 15.82);\
+ns->addTuneF(SCENE_BIGBOX, "boxScale3", 41.14);\
+ns->addTuneF(SCENE_BIGBOX, "boxScale4", 15.82);\
+ns->addTuneF(SCENE_BIGBOX, "boxScale5", 44.3);\
+ns->addTuneF(SCENE_BIGBOX, "boxScale6", 44.3);
+
 void dpConductor::setSections()
 {
 	//AddScene preset (Disp 1, Disp6, Disp2-3, Disp 4-5)
@@ -18,86 +30,71 @@ void dpConductor::setSections()
 	ns->needSceneClear = true;
 	
 #pragma mark - 最終プリセット群
-	ns = newSection();//===================================================
-	ns->sectionName = "fp-0020-KENTA-BOX-RELBOW";
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
+#pragma mark 0020
+	/*=============================================================*/
+	ns = setBasicSection("fp-0020-kenta-box-relbow", true, true);
+	setCamActorScene(ns);
 	ns->addScene(SCENE_BIGBOX, true, true, false, true);
 	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
-
-	ns = newSection();//===================================================
-	ns->sectionName = "fp-0030-YASU_IN";
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
+	setActorViewing(ns, false, true, false, false);
 	
-	ns = newSection();//===================================================
-	ns->sectionName = "fp-0040-yoko-out";
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
+#pragma mark 0030
+	/*=============================================================*/
+	ns = setBasicSection("fp-0030-yasu-in-disp-off", true, true);
+	setCamActorScene(ns);
+	setActorViewing(ns, false, true, false, false);
+	
+#pragma mark 0040
+	/*=============================================================*/
+	ns = setBasicSection("fp-0040-yoko-out", true, true);
+	setCamActorScene(ns);
 	ns->addScene(SCENE_BIGBOX, true, true, true, true);
 	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
 	ns->addExtractor(SCENE_BIGBOX, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
+	setActorViewing(ns, false, true, true, false);
 	
-	ns = newSection();//===================================================
-	ns->sectionName = "fp-0050-miyashita-in";
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_NECK);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_HIP);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_RIGHT_KNEE);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_SHOULDER);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_RIGHT_SHOULDER);
+#pragma mark 0050 TODO: ボックスサイズプリセット
+	/*=============================================================*/
+	ns = setBasicSection("fp-0050-miyashita-in", false, false);
+	MIYASHITA_BIGBOX
 	
-	ns = newSection();//===================================================
-	ns->sectionName = "fp-0070-dispClear";
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
+	setActorViewing(ns, false, true, true, true);
 	
-	ns = newSection();//===================================================
-	ns->sectionName = "fp-0080-line";
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
+#pragma mark 0070
+	/*=============================================================*/
+	ns = setBasicSection("fp-0070-dispClear", true, true);
+	setCamActorScene(ns);
+	setActorViewing(ns, false, false, false, false);
+	
+#pragma mark 0080
+	/*=============================================================*/
+	ns = setBasicSection("fp-0080-line", true, true);
+	setCamActorScene(ns);
 	ns->addScene(SCENE_LINE, true, true, true, true);
 	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_LEFT_ELBOW);
 	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_NECK);
 	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_ABDOMEN);
 	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
+	ns->addTuneF(SCENE_LINE, "Curve0", 0.0);
+	ns->addTuneF(SCENE_LINE, "ext_to0", 800.0);
+	ns->addTuneF(SCENE_LINE, "ext_from0", 800.0);
+	setActorViewing(ns, false, true, false, false);
 	
-	ns = newSection();//===================================================
-	ns->sectionName = "fp-0090-line-4pt";
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-
+#pragma mark 0090 TODO: 4P 長さ
+	ns = setBasicSection("fp-0090-line-4p", true, true);
+	setCamActorScene(ns);
 	ns->addScene(SCENE_LINE, true, false, true, false);
-	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_NECK);
-	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_ABDOMEN);
-	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
-	
 	ns->addScene(SCENE_FOURPT, false, true, false, true);
+	
 	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_LEFT_ELBOW);
 	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_RIGHT_ELBOW);
 	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_LEFT_KNEE);
-	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_LEFT_KNEE);
+	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_RIGHT_KNEE);
 	
 	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
 	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
 	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_LEFT_KNEE);
-	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_LEFT_KNEE);
+	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_RIGHT_KNEE);
 	
 	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_LEFT_ELBOW);
 	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_NECK);
@@ -108,44 +105,48 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_NECK);
 	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_LEFT_HIP);
 	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_RIGHT_KNEE);
-	ns->addTuneF(SCENE_LINE, "Curve1", 300);
+	ns->addTuneF(SCENE_LINE, "Curve1", 300.0);
+	ns->addTuneF(SCENE_LINE, "ext_to1", 800.0);
+	ns->addTuneF(SCENE_LINE, "ext_from1", 800.0);
+	ns->addTuneF(SCENE_FOURPT, "Twist resolution", 52.0);
+	ns->addTuneF(SCENE_FOURPT, "Twist extension width", 3.47);
+	ns->addTuneF(SCENE_FOURPT, "Twist extension height", 1.40);
+	setActorViewing(ns, true, true, true, true);
 
-	ns = newSection();//===================================================
-	ns->sectionName = "fp-0010-of_proj";
+#pragma mark 0100
+	ns = setBasicSection("fp-0010-off_proj", true, false);
+	setCamActorScene(ns);
 	ns->addScene(SCENE_LINE, false, false, true, false);
 	ns->addScene(SCENE_FOURPT, false, true, false, true);
+	setActorViewing(ns, true, true, true, true);
 	
-	
-#pragma mark TODO: UPSIDEDOWN
-	ns = newSection();//===================================================
-	ns->sectionName = "fp-0110-4pt-upside-bigbox";
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-
+#pragma mark 0110
+	ns = setBasicSection("fp-0110-4pt-upside-bigbox", true, true);
+	setCamActorScene(ns);
 	ns->addScene(SCENE_FOURPT, false, false, true, false);
+	ns->addScene(SCENE_UPSIDE, false, true, false, true);
+	ns->addScene(SCENE_BIGBOX, false, true, false, true);
+	
 	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_LEFT_ELBOW);
 	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_RIGHT_ELBOW);
 	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_LEFT_KNEE);
-	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_LEFT_KNEE);
-
+	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_RIGHT_KNEE);
+	
 	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
 	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
 	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_LEFT_KNEE);
-	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_LEFT_KNEE);
+	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_RIGHT_KNEE);
 	
-	ns->addScene(SCENE_BIGBOX, false, true, false, true);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_NECK);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_HIP);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_RIGHT_KNEE);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_SHOULDER);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_RIGHT_SHOULDER);
+	MIYASHITA_BIGBOX
+	ns->addExtractor(SCENE_UPSIDE, ACTOR_KOJIRI, JOINT_NECK);
 	
-	ns = newSection();//===================================================
-	ns->sectionName = "fp-0120-3pt-bigbox";
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
+	ns->addTuneF(SCENE_FOURPT, "Twist resolution", 52.0);
+	ns->addTuneF(SCENE_FOURPT, "Twist extension width", 3.47);
+	ns->addTuneF(SCENE_FOURPT, "Twist extension height", 1.40);
+	setActorViewing(ns, true, true, true, true);
+	
+#pragma mark 0120
+	ns = setBasicSection("fp-0120-3pt-bigbox", true, true);
 	ns->addScene(SCENE_CAMERA, false, false, false, false);
 	ns->addScene(SCENE_ACTOR, false, false, false, false);
 	ns->addScene(SCENE_THREEPT, false, true, true, true);
@@ -159,847 +160,217 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_THREEPT, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
 	ns->addExtractor(SCENE_THREEPT, ACTOR_SHIMAJI, JOINT_LEFT_KNEE);
 	
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_NECK);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_HIP);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_RIGHT_KNEE);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_SHOULDER);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_RIGHT_SHOULDER);
-	
-	
-#pragma mark - TODO:ここ宮下さんだけモンスターPJに表示は無理
-	ns = newSection();//===================================================
-	ns->sectionName = "fp-0130-all-monster";
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_MONSTER, true, true, true, true);
+	MIYASHITA_BIGBOX
+    ns->addTuneT(SCENE_THREEPT, "Show rects", true);
+    ns->addTuneF(SCENE_THREEPT, "Rect radius", 42.1);
+	setActorViewing(ns, false, true, true, true);
+
+#pragma mark - 0130 TODO:[DONE]ここ宮下さんだけモンスターインスタンス2つ作る
+	ns = setBasicSection("fp-0130-all-monster", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_MONSTER, false, false, true, true);
+	ns->addScene(SCENE_MONSTER_2, true, true, false, false);
 	ns->addExtractor(SCENE_MONSTER, ACTOR_ANDO, JOINT_NECK);
 	ns->addExtractor(SCENE_MONSTER, ACTOR_KOJIRI, JOINT_NECK);
 	ns->addExtractor(SCENE_MONSTER, ACTOR_SHIMAJI, JOINT_NECK);
 	ns->addExtractor(SCENE_MONSTER, ACTOR_MIYASHITA, JOINT_NECK);
-	
+	ns->addExtractor(SCENE_MONSTER_2, ACTOR_MIYASHITA, JOINT_NECK);
+    ns->addTuneT(SCENE_MONSTER, "Randomize Topology", true);
+	setActorViewing(ns, true, true, true, true);
 
-	
-#pragma mark - BigBoxセクション
-	ns = newSection();//===================================================
-	ns->sectionName = "DefaultBone";
-	ns->addScene("dp16_camera_controller", true, false, true, false);
-	ns->addScene("dp16_ramActorTranslator", true, false, true, false);
-	ns->needExtClear = true;
-	ns->needSceneClear = true;
-	
-	ns = newSection();//===================================================
-	ns->sectionName = "P2-1BigBox-right-Kojiri";
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_BIGBOX, true, true, true, true);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, false);
-	
-	ns = newSection();//===================================================
-	ns->sectionName = "P2-2-BigBox-right-Yasu";
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_BIGBOX, true, true, true, true);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, false);
-	
-	ns = newSection();//===================================================
-	ns->sectionName = "P2-3-BigBox-5-Miyashita";
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_BIGBOX, true, true, true, true);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_TOE);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_RIGHT_KNEE);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_HEAD);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-	
-	ns = newSection();//===================================================
-	ns->sectionName = "P2-4-Line-to-ando";
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_LINE, true, true, true, true);
-	ns->addExtractor(SCENE_LINE, ACTOR_ANDO, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_LINE, ACTOR_ANDO, JOINT_LEFT_SHOULDER);
-	ns->addExtractor(SCENE_LINE, ACTOR_ANDO, JOINT_RIGHT_SHOULDER);
-	ns->addExtractor(SCENE_LINE, ACTOR_ANDO, JOINT_RIGHT_WRIST);
-	ns->addTuneF(SCENE_LINE, "Curve0", 0.0);
-	ns->addTuneF(SCENE_LINE, "ext_to0", 800.0);
-	ns->addTuneF(SCENE_LINE, "ext_from0", 800.0);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, false);
-	
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "P2-5-FourPoint-All";
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_FOURPT, true, true, true, true);
-	
-	string actor_fp[] = {ACTOR_KOJIRI, ACTOR_SHIMAJI, ACTOR_MIYASHITA};
-	for (int i = 0;i < 3;i++)
-	{
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_RIGHT_WRIST);
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_LEFT_WRIST);
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_RIGHT_KNEE);
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_LEFT_KNEE);
-	}
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-	
-	//安藤さんビッグボックス右肘:7
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0010-Ando_BigBox_1";
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_BIGBOX, true, true, true, true);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_ANDO, JOINT_RIGHT_ELBOW);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, false);
-	
-	//安藤さんビッグボックス左膝＋小尻さん右膝:8
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_BIGBOX, true, true, true, true);
-	ns->sectionName = "0020-ando_BigBox_2";
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_ANDO, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_ANDO, JOINT_LEFT_KNEE);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_KNEE);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, false);
-	
-	//安藤さんビッグボックスキープ＋小尻さん右膝:9
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_BIGBOX, true, true, true, true);
-	ns->sectionName = "0030-kojiri_BigBox";
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_ANDO, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_KNEE);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, false);
-	
-	//ヤスさんin:10
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_BIGBOX, true, true, true, true);
-	ns->sectionName = "0040-yasu_BigBox";
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_ANDO, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_KNEE);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_SHIMAJI, JOINT_RIGHT_KNEE);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, false);
-
-	//みやしたさんin:11
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_BIGBOX, true, true, true, true);
-	ns->sectionName = "0050-miyashita_BigBox";
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_KNEE);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_SHIMAJI, JOINT_RIGHT_KNEE);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_ELBOW);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-
-	//みやしたさんBigBox5個
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_BIGBOX, true, true, true, true);
-	ns->sectionName = "0060-miyashita_5Box";
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_KNEE);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_SHIMAJI, JOINT_RIGHT_KNEE);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_RIGHT_KNEE);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_WRIST);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_NECK);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_KNEE);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-
-	//小尻さん全Box
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_BIGBOX, true, false, true, false);
-	ns->addScene(SCENE_LINE, false, true, false, true);
-	ns->sectionName = "0070-kojiri_allBox";
-	
-	for (int i = 0;i < 23;i++)
-		ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, (Joint)i);
-	ns->addExtractor(SCENE_LINE, ACTOR_ANDO, JOINT_RIGHT_WRIST);
-	ns->addExtractor(SCENE_LINE, ACTOR_ANDO, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_LINE, ACTOR_ANDO, JOINT_ABDOMEN);
-	ns->addExtractor(SCENE_LINE, ACTOR_ANDO, JOINT_LEFT_KNEE);
-	
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_LEFT_WRIST);
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_RIGHT_WRIST);
-	
-	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_LEFT_SHOULDER);
-	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_ABDOMEN);
-	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_RIGHT_TOE);
-	for (int i = 0;i < 3;i++)
-	{
-		ns->addTuneF(SCENE_LINE, "Curve"+ofToString(i)		, i == 1 ? 0.0 : 100.0);
-		ns->addTuneF(SCENE_LINE, "ext_to"+ofToString(i)		, 800.0);
-		ns->addTuneF(SCENE_LINE, "ext_from"+ofToString(i)	, 800.0);
-		ofFloatColor c;
-		c.setHsb(i / 6.0, 1.0, 1.0);
-		ns->addTuneF(SCENE_LINE, "Red_"+ofToString(i)		, c.r);
-		ns->addTuneF(SCENE_LINE, "Green_"+ofToString(i)		, c.g);
-		ns->addTuneF(SCENE_LINE, "Blue_"+ofToString(i)		, c.b);
-	}
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-
-#pragma mark - Lineセクション
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0080-ando_line";
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_LINE, true, true, true, true);
-	ns->addExtractor(SCENE_LINE, ACTOR_ANDO, JOINT_RIGHT_WRIST);
-	ns->addExtractor(SCENE_LINE, ACTOR_ANDO, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_LINE, ACTOR_ANDO, JOINT_ABDOMEN);
-	ns->addExtractor(SCENE_LINE, ACTOR_ANDO, JOINT_LEFT_KNEE);
-
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_LEFT_WRIST);
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_RIGHT_WRIST);
-	
-	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_LEFT_SHOULDER);
-	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_ABDOMEN);
-	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_RIGHT_TOE);
-	for (int i = 0;i < 3;i++)
-	{
-		ns->addTuneF(SCENE_LINE, "Curve"+ofToString(i)		, i == 1 ? 0.0 : 100.0);
-		ns->addTuneF(SCENE_LINE, "ext_to"+ofToString(i)		, 800.0);
-		ns->addTuneF(SCENE_LINE, "ext_from"+ofToString(i)	, 800.0);
-		ofFloatColor c;
-		c.setHsb(i / 6.0, 1.0, 1.0);
-		ns->addTuneF(SCENE_LINE, "Red_"+ofToString(i)		, c.r);
-		ns->addTuneF(SCENE_LINE, "Green_"+ofToString(i)		, c.g);
-		ns->addTuneF(SCENE_LINE, "Blue_"+ofToString(i)		, c.b);
-	}
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-
-	
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0090-kojiri_line";
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_LINE		, true, true, true, true);
-	
-	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_RIGHT_WRIST);
-	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_ABDOMEN);
-	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_LEFT_KNEE);
-	
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_LEFT_WRIST);
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_RIGHT_WRIST);
-	
-	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_LEFT_SHOULDER);
-	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_ABDOMEN);
-	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_RIGHT_TOE);
-	
-	for (int i = 0;i < 3;i++)
-	{
-		ns->addTuneF(SCENE_LINE, "Curve"+ofToString(i)		, i == 1 ? 0.0 : 100.0);
-		ns->addTuneF(SCENE_LINE, "ext_to"+ofToString(i)		, 800.0);
-		ns->addTuneF(SCENE_LINE, "ext_from"+ofToString(i)	, 800.0);
-		ofFloatColor c;
-		c.setHsb(i / 6.0, 1.0, 1.0);
-		ns->addTuneF(SCENE_LINE, "Red_"+ofToString(i)		, c.r);
-		ns->addTuneF(SCENE_LINE, "Green_"+ofToString(i)		, c.g);
-		ns->addTuneF(SCENE_LINE, "Blue_"+ofToString(i)		, c.b);
-	}
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-	
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0100-three-and-line";
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_LINE, true, true, true, false);
-	ns->addScene(SCENE_THREEPT, false, false, false, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-	
-	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_RIGHT_WRIST);
-	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_ABDOMEN);
-	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_LEFT_KNEE);
-	
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_LEFT_WRIST);
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_RIGHT_WRIST);
-	
-	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_LEFT_SHOULDER);
-	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_ABDOMEN);
-	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_RIGHT_TOE);
-	
-	for (int i = 0;i < 3;i++)
-	{
-		ns->addTuneF(SCENE_LINE, "Curve"+ofToString(i)		, i == 1 ? 0.0 : 100.0);
-		ns->addTuneF(SCENE_LINE, "ext_to"+ofToString(i)		, 800.0);
-		ns->addTuneF(SCENE_LINE, "ext_from"+ofToString(i)	, 800.0);
-		ofFloatColor c;
-		c.setHsb(i / 6.0, 1.0, 1.0);
-		ns->addTuneF(SCENE_LINE, "Red_"+ofToString(i)		, c.r);
-		ns->addTuneF(SCENE_LINE, "Green_"+ofToString(i)		, c.g);
-		ns->addTuneF(SCENE_LINE, "Blue_"+ofToString(i)		, c.b);
-	}
-	
-	ns->addExtractor(SCENE_THREEPT, ACTOR_KOJIRI, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_THREEPT, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_THREEPT, ACTOR_KOJIRI, JOINT_LEFT_KNEE);
-	ns->addTuneT(SCENE_THREEPT, "Show spheres", true);
-	
-#pragma mark - 三者ミックス
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0110-3-4-metaMix";
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_THREEPT, false, true, false, true);
-	ns->addScene(SCENE_FOURPT, false, false, true, false);
-	ns->addScene(SCENE_METABALL, false, true, false, true);
-	
-	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_LEFT_KNEE);
-	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_RIGHT_KNEE);
-	ns->addTuneF(SCENE_FOURPT, "resolution", 50.0);
-	ns->addTuneF(SCENE_FOURPT, "width", 3.0);
-	ns->addTuneF(SCENE_FOURPT, "height", 1.3);
-	
-	ns->addExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_RIGHT_WRIST);
-	ns->addExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_NECK);
-	ns->addExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_LEFT_KNEE);
-	ns->addExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_RIGHT_KNEE);
-	ns->addExtractor(SCENE_THREEPT, ACTOR_KOJIRI, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_THREEPT, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_THREEPT, ACTOR_KOJIRI, JOINT_LEFT_KNEE);
-	ns->addTuneT(SCENE_THREEPT, "Show spheres", true);
-	
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-
-#pragma mark - Broken
-	ns = newSection();//===================================================
-	ns->sectionName = "0120-Broken";
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_BROKEN, true, true, true, true);
-	ns->addExtractor(SCENE_BROKEN, ACTOR_KOJIRI, JOINT_NECK);
-	ns->addExtractor(SCENE_BROKEN, ACTOR_SHIMAJI, JOINT_NECK);
-	ns->addExtractor(SCENE_BROKEN, ACTOR_MIYASHITA, JOINT_NECK);
-	
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-	
-#pragma mark TODO: FloorLine
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0130-Broken_burst";
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_BURST, true, false, true, false);
-	ns->addScene(SCENE_BROKEN,false, false, true, false);
-
-	ns->addExtractor(SCENE_BROKEN, ACTOR_KOJIRI, JOINT_NECK);
-	ns->addExtractor(SCENE_BURST, ACTOR_SHIMAJI, JOINT_NECK);
-//	ns->addExtractor(SCENE_FLOOR, ACTOR_MIYASHITA, JOINT_NECK);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0140-Broken_donuts";
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_BROKEN, false, false, false, true);
-	ns->addScene(SCENE_BURST, false, false, false, true);
-	ns->addScene(SCENE_DONUTS, true, false, true, false);
-	ns->addExtractor(SCENE_BROKEN, ACTOR_KOJIRI, JOINT_NECK);
-	ns->addExtractor(SCENE_BURST, ACTOR_SHIMAJI, JOINT_NECK);
-	ns->addExtractor(SCENE_DONUTS, ACTOR_MIYASHITA, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_DONUTS, ACTOR_MIYASHITA, JOINT_RIGHT_WRIST);
-	ns->addTuneT(SCENE_DONUTS, "Show Actor", false);
-
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-	
-#pragma mark - ここから先は順不同
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0160-All-Metaball";
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_METABALL, false, true, true, true);
-	ns->addExtractor(SCENE_METABALL, ACTOR_KOJIRI, JOINT_RIGHT_SHOULDER);
-	ns->addExtractor(SCENE_METABALL, ACTOR_KOJIRI, JOINT_LEFT_WRIST);
-	ns->addExtractor(SCENE_METABALL, ACTOR_KOJIRI, JOINT_RIGHT_KNEE);
-	
-	ns->addExtractor(SCENE_METABALL, ACTOR_SHIMAJI, JOINT_HEAD);
-	ns->addExtractor(SCENE_METABALL, ACTOR_SHIMAJI, JOINT_RIGHT_WRIST);
-	ns->addExtractor(SCENE_METABALL, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
-	
-	ns->addExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_ABDOMEN);
-	ns->addExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_RIGHT_WRIST);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-	
-	
-#pragma mark TODO: ドーナツ
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0170-All-Donuts";
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_DONUTS, true, true, true, true);
-
-	ns->addExtractor(SCENE_DONUTS, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_DONUTS, ACTOR_KOJIRI, JOINT_LEFT_KNEE);
-	ns->addExtractor(SCENE_DONUTS, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_DONUTS, ACTOR_SHIMAJI, JOINT_RIGHT_KNEE);
-	ns->addExtractor(SCENE_DONUTS, ACTOR_MIYASHITA, JOINT_LEFT_TOE);
-	ns->addExtractor(SCENE_DONUTS, ACTOR_MIYASHITA, JOINT_HEAD);
-	
-	ns->addTuneF(SCENE_DONUTS, "Radius", 5.0);
-	ns->addTuneT(SCENE_DONUTS, "Show Actor", false);
-
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-	
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0180-All-Monster";
-	ns->addScene(SCENE_MONSTER, true, true, true, true);
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
+    ns = setBasicSection("fp-0135-monster-randtopo", false, false);
+    ns->addTuneT(SCENE_MONSTER, "Randomize Topology", true);
+    ns->addTuneT(SCENE_MONSTER_2, "Randomize Topology", true);
+    
+#pragma mark 0140
+	ns = setBasicSection("fp-0140-monster-burst", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_MONSTER, false, false, false, true);
+	ns->addScene(SCENE_BURST, true, true, true, false);
+	ns->addExtractor(SCENE_MONSTER, ACTOR_ANDO, JOINT_NECK);
 	ns->addExtractor(SCENE_MONSTER, ACTOR_KOJIRI, JOINT_NECK);
-	ns->addExtractor(SCENE_MONSTER, ACTOR_SHIMAJI, JOINT_NECK);
 	ns->addExtractor(SCENE_MONSTER, ACTOR_MIYASHITA, JOINT_NECK);
-	ns->addTuneF(SCENE_MONSTER, "Randomization amount", 0.15);
-	ns->addTuneB(SCENE_MONSTER, "Randomize Topology");
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
+	ns->addExtractor(SCENE_BURST, ACTOR_SHIMAJI, JOINT_NECK);
+    ns->addTuneT(SCENE_MONSTER, "Randomize Topology", true);
+	setActorViewing(ns, true, true, true, true);
 
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0190-All-FourPoints";
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_FOURPT, true, true, true, true);
-	
-	for (int i = 0;i < 3;i++)
-	{
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_RIGHT_WRIST);
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_LEFT_WRIST);
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_RIGHT_KNEE);
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_LEFT_KNEE);
-	}
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-
-#pragma mark TODO: Chaser
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0200-All-Chaser";
-
+#pragma mark 0150 TODO: ここ追跡スピード変わる？
+	ns = setBasicSection("fp-0150-chaser", true, true);
 	ns->addScene(SCENE_CAMERA, false, false, false, false);
 	ns->addScene(SCENE_ACTOR, true, true, true, true);
 	ns->addScene(SCENE_CHASER, true, true, true, true);
 	ns->addExtractor(SCENE_CHASER, ACTOR_KOJIRI, JOINT_NECK);
 	ns->addExtractor(SCENE_CHASER, ACTOR_SHIMAJI, JOINT_NECK);
 	ns->addExtractor(SCENE_CHASER, ACTOR_MIYASHITA, JOINT_NECK);
-	ns->addTuneF(SCENE_CHASER, "buffer_time", 3500);
-	ns->addTuneF(SCENE_CHASER, "rate", 1.04);
-	
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-	
-#pragma mark 以下箱庭
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0220-SandStorm_fourpoint";
-	ns->addHakoniwa(HAKO_SANDSTORM, true, true, true);
+	ns->addExtractor(SCENE_CHASER, ACTOR_ANDO, JOINT_NECK);
+	setActorViewing(ns, true, true, true, true);
 
-	ns->addScene("dpVisSandStorm", false, true, false, false);
-	ns->addScene("dpHSandStorm", false, false, false, false);
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_FOURPT, true, false, true, true);
-	
-	ns->addExtractor(HAKO_SANDSTORM, ACTOR_KOJIRI, JOINT_RIGHT_WRIST);
-	ns->addExtractor(HAKO_SANDSTORM, ACTOR_KOJIRI, JOINT_LEFT_WRIST);
-	ns->addExtractor(HAKO_SANDSTORM, ACTOR_KOJIRI, JOINT_CHEST);
-	for (int i = 0;i < 3;i++)
-	{
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_RIGHT_WRIST);
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_LEFT_WRIST);
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_RIGHT_KNEE);
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_LEFT_KNEE);
-	}
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
+#pragma mark 0160 TODO: 個別設定できない？ & TOE付いてない
+	ns = setBasicSection("fp-0160-donuts", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_DONUTS, true, true, true, true);
+	ns->addExtractor(SCENE_DONUTS, ACTOR_ANDO, JOINT_ABDOMEN);
+	ns->addExtractor(SCENE_DONUTS, ACTOR_KOJIRI, JOINT_LEFT_TOE);
+	ns->addExtractor(SCENE_DONUTS, ACTOR_KOJIRI, JOINT_RIGHT_TOE);
+	ns->addExtractor(SCENE_DONUTS, ACTOR_SHIMAJI, JOINT_CHEST);
+	ns->addExtractor(SCENE_DONUTS, ACTOR_SHIMAJI, JOINT_ABDOMEN);
+	ns->addExtractor(SCENE_DONUTS, ACTOR_MIYASHITA, JOINT_LEFT_HAND);
+	ns->addExtractor(SCENE_DONUTS, ACTOR_MIYASHITA, JOINT_RIGHT_HAND);
+	setActorViewing(ns, true, true, true, true);
 
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0230-Chaser-Tornado";
+#pragma mark 0180
+	ns = setBasicSection("fp-0180-donuts_all_off", true, true);
+	setCamActorScene(ns);
 	
-	ns->addHakoniwa(HAKO_TORNADO, true, true, true);
-	ns->addScene("dpHTornado", false, false, false, false);
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_CHASER, true, true, true, true);
+#pragma mark 0190
+	ns = setBasicSection("fp-0190-bigbox", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_BIGBOX, false, false, false, true);
+	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
+	ns->addExtractor(SCENE_BIGBOX, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
+	MIYASHITA_BIGBOX
+	setActorViewing(ns, false, true, true, true);
+
+#pragma mark 0200
+	ns = setBasicSection("fp-0200-kojiri-bigbox", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_BIGBOX, false, true, false, true);
+	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
+	setActorViewing(ns, false, true, false, false);
 	
-	ns->addExtractor(HAKO_TORNADO, ACTOR_SHIMAJI, JOINT_CHEST);
-	ns->addExtractor(HAKO_TORNADO, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(HAKO_TORNADO, ACTOR_SHIMAJI, JOINT_RIGHT_WRIST);
+#pragma mark 0210
+	ns = setBasicSection("fp-0210-yasu-in", true, true);
+	setCamActorScene(ns);
 	
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
+#pragma mark 0220
+	ns = setBasicSection("fp-0220-yoko-out-bigbox", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_BIGBOX, false, true, false, true);
+	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
+	ns->addExtractor(SCENE_BIGBOX, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
+	setActorViewing(ns, false, true, true, false);
+	
+#pragma mark 0230
+	ns = setBasicSection("fp-0230-miyashita-in-bigbox", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_BIGBOX, false, true, false, true);
+	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
+	ns->addExtractor(SCENE_BIGBOX, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
+	MIYASHITA_BIGBOX
+	setActorViewing(ns, false, true, true, true);
+
+#pragma mark 0240
+	ns = setBasicSection("fp-0240-disp-alloff", true, true);
+	setCamActorScene(ns);
+	setActorViewing(ns, false, true, true, true);
+
+#pragma mark 0250
+	ns = setBasicSection("fp-0250-kojiri-line", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_LINE, false, true, false, true);
+	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_LEFT_ELBOW);
+	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_LEFT_SHOULDER);
+	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_RIGHT_SHOULDER);
+	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_RIGHT_KNEE);
+	ns->addTuneF(SCENE_LINE, "Curve0", 0.0);
+	ns->addTuneF(SCENE_LINE, "ext_to0", 800.0);
+	ns->addTuneF(SCENE_LINE, "ext_from0", 800.0);
+	setActorViewing(ns, false, true, false, false);
+	
+#pragma mark 0260 TODO:[DONE] 宮下さんLineパラメ(LINE出ないので不要)
+	ns = setBasicSection("fp-0260-4pt", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_FOURPT, false, true, false, true);
+	
+	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_LEFT_ELBOW);
+	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_RIGHT_ELBOW);
+	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_LEFT_KNEE);
+	ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_RIGHT_KNEE);
+	
+	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
+	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
+	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_LEFT_KNEE);
+	ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_RIGHT_KNEE);
+	
+	ns->addTuneF(SCENE_FOURPT, "Twist resolution", 52.0);
+	ns->addTuneF(SCENE_FOURPT, "Twist extension width", 3.47);
+	ns->addTuneF(SCENE_FOURPT, "Twist extension height", 1.40);
+	setActorViewing(ns, true, true, true, true);
 
 	
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0240-Chaser-Tornado-SandStorm-Fp";
-	
-	ns->addHakoniwa(HAKO_TORNADO, true, true, false);
-	ns->addHakoniwa(HAKO_SANDSTORM, true, false, true);
-	ns->addScene("dpHSandStorm", false, false, false, false);
-	ns->addScene("dpVisSandStorm", false, true, false, false);
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_CHASER, true, false, true, true);
-	ns->addExtractor(HAKO_SANDSTORM, ACTOR_KOJIRI, JOINT_RIGHT_WRIST);
-	ns->addExtractor(HAKO_SANDSTORM, ACTOR_KOJIRI, JOINT_LEFT_WRIST);
-	ns->addExtractor(HAKO_SANDSTORM, ACTOR_KOJIRI, JOINT_CHEST);
+#pragma mark 0280
+	ns = setBasicSection("fp-0280-upside-bigbox", true, true);
+	ns->addScene(SCENE_UPSIDE, false, true, false, true);
+	ns->addScene(SCENE_BIGBOX, false, true, false, true);
+	ns->addExtractor(SCENE_UPSIDE, ACTOR_KOJIRI, JOINT_NECK);
+	MIYASHITA_BIGBOX
+	setActorViewing(ns, true, true, true, true);
 
-	ns->addExtractor(SCENE_CHASER, ACTOR_SHIMAJI, JOINT_NECK);
-	ns->addExtractor(SCENE_CHASER, ACTOR_MIYASHITA, JOINT_NECK);
-	ns->addExtractor(HAKO_TORNADO, ACTOR_SHIMAJI, JOINT_CHEST);
-	ns->addExtractor(HAKO_TORNADO, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(HAKO_TORNADO, ACTOR_SHIMAJI, JOINT_RIGHT_WRIST);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0250-Stage-Chaser";
-	
-	ns->addHakoniwa(HAKO_STAGE, true, true, true);
-	ns->addScene("dpVisStage", true, false, true, false);
-	ns->addScene(SCENE_CHASER, false, true, false, true);
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, true, false, true);
-	
-	ns->addExtractor(SCENE_CHASER, ACTOR_KOJIRI, JOINT_NECK);
-	ns->addExtractor(SCENE_CHASER, ACTOR_SHIMAJI, JOINT_NECK);
-	ns->addExtractor(SCENE_CHASER, ACTOR_MIYASHITA, JOINT_NECK);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-	
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0260-Servo";
-	
-	ns->addHakoniwa(HAKO_SERVOPENDULUM, true, true, true);
-	ns->addScene("dpHServoPendulum", false, false, false, false);
-	ns->addScene("dpVisServoPendulum", false, false, false, true);
-	ns->addScene(SCENE_LINE, false, false, true, false);
-	ns->addScene(SCENE_DONUTS, false, true, false, false);
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	
-	ns->addExtractor(HAKO_SERVOPENDULUM, ACTOR_KOJIRI, JOINT_LEFT_WRIST);
-	ns->addExtractor(HAKO_SERVOPENDULUM, ACTOR_KOJIRI, JOINT_CHEST);
-	ns->addExtractor(HAKO_SERVOPENDULUM, ACTOR_KOJIRI, JOINT_RIGHT_WRIST);
-
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_LEFT_WRIST);
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_LEFT_SHOULDER);
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_RIGHT_SHOULDER);
-	ns->addExtractor(SCENE_LINE, ACTOR_SHIMAJI, JOINT_RIGHT_WRIST);
-	
-	ns->addExtractor(SCENE_DONUTS, ACTOR_MIYASHITA, JOINT_NECK);
-	ns->addTuneF(SCENE_DONUTS, "Radius", 5.0);
-	ns->addTuneT(SCENE_DONUTS, "Show Actor", true);
-	
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0270-magPendulum";
-	ns->addHakoniwa(HAKO_MAGPENDULUM, true, true, true);
-	ns->addScene("dpHMagPendulum", false, false, false, false);
-	ns->addScene("dpVisMagPendulum"	, false, true, true, false);
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_METABALL		, false, false, false, true);
-	
-	ns->addExtractor(HAKO_MAGPENDULUM, ACTOR_KOJIRI, JOINT_LEFT_WRIST);
-	ns->addExtractor(HAKO_MAGPENDULUM, ACTOR_KOJIRI, JOINT_RIGHT_KNEE);
-	ns->addExtractor(HAKO_MAGPENDULUM, ACTOR_SHIMAJI, JOINT_LEFT_WRIST);
-	ns->addExtractor(HAKO_MAGPENDULUM, ACTOR_SHIMAJI, JOINT_RIGHT_KNEE);
-	ns->addExtractor(HAKO_MAGPENDULUM, ACTOR_MIYASHITA, JOINT_RIGHT_WRIST);
-	ns->addExtractor(HAKO_MAGPENDULUM, ACTOR_MIYASHITA, JOINT_LEFT_KNEE);
-
-	ns->addExtractor(SCENE_METABALL, ACTOR_KOJIRI, JOINT_RIGHT_SHOULDER);
-	ns->addExtractor(SCENE_METABALL, ACTOR_KOJIRI, JOINT_LEFT_WRIST);
-	ns->addExtractor(SCENE_METABALL, ACTOR_KOJIRI, JOINT_RIGHT_KNEE);
-	
-	ns->addExtractor(SCENE_METABALL, ACTOR_SHIMAJI, JOINT_HEAD);
-	ns->addExtractor(SCENE_METABALL, ACTOR_SHIMAJI, JOINT_RIGHT_WRIST);
-	ns->addExtractor(SCENE_METABALL, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
-	
-	ns->addExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_ABDOMEN);
-	ns->addExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_RIGHT_WRIST);
-	
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0280-magPendulum";
-	ns->addHakoniwa(HAKO_MAGPENDULUM, true, true, true);
-	ns->addScene("dpHMagPendulum", false, false, false, false);
-	ns->addScene("dpVisMagPendulum"	, false, true, false, true);
-	ns->addScene(SCENE_FOURPT		, false, true, true, false);
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-
-	ns->addExtractor(HAKO_MAGPENDULUM, ACTOR_KOJIRI, JOINT_LEFT_WRIST);
-	ns->addExtractor(HAKO_MAGPENDULUM, ACTOR_KOJIRI, JOINT_RIGHT_KNEE);
-	ns->addExtractor(HAKO_MAGPENDULUM, ACTOR_SHIMAJI, JOINT_LEFT_WRIST);
-	ns->addExtractor(HAKO_MAGPENDULUM, ACTOR_SHIMAJI, JOINT_RIGHT_KNEE);
-	ns->addExtractor(HAKO_MAGPENDULUM, ACTOR_MIYASHITA, JOINT_RIGHT_WRIST);
-	ns->addExtractor(HAKO_MAGPENDULUM, ACTOR_MIYASHITA, JOINT_LEFT_KNEE);
-	for (int i = 0;i < 3;i++)
-	{
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_RIGHT_WRIST);
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_LEFT_WRIST);
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_RIGHT_KNEE);
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_LEFT_KNEE);
-	}
-	
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "0290-worm";
-	ns->addHakoniwa(HAKO_WORM, true, true, true);
-	ns->addScene("dpHWorm", false, false, false, false);
-	ns->addScene(SCENE_BROKEN, true, true, true, true);
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	
-	ns->addExtractor(HAKO_WORM, ACTOR_ANDO, JOINT_CHEST);
-	ns->addExtractor(HAKO_WORM, ACTOR_ANDO, JOINT_RIGHT_WRIST);
-	ns->addExtractor(SCENE_BROKEN, ACTOR_KOJIRI, JOINT_NECK);
-	ns->addExtractor(SCENE_BROKEN, ACTOR_SHIMAJI, JOINT_NECK);
-	ns->addExtractor(SCENE_BROKEN, ACTOR_MIYASHITA, JOINT_NECK);
-	
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "Util-AllMonster";
-	ns->addScene(SCENE_MONSTER, true, true, true, true);
-	ns->addExtractor(SCENE_MONSTER, ACTOR_KOJIRI, JOINT_NECK);
-	ns->addExtractor(SCENE_MONSTER, ACTOR_SHIMAJI, JOINT_NECK);
-	ns->addExtractor(SCENE_MONSTER, ACTOR_MIYASHITA, JOINT_NECK);
-	
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "Util-AllThreePoints";
-	ns->addScene(SCENE_THREEPT, true, true, true, true);
-	ns->addExtractor(SCENE_MONSTER, ACTOR_KOJIRI, JOINT_NECK);
-	ns->addExtractor(SCENE_MONSTER, ACTOR_SHIMAJI, JOINT_NECK);
-	ns->addExtractor(SCENE_MONSTER, ACTOR_MIYASHITA, JOINT_NECK);
-
-	ns->addExtractor(SCENE_THREEPT, ACTOR_KOJIRI, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_THREEPT, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_THREEPT, ACTOR_KOJIRI, JOINT_LEFT_KNEE);
-
+#pragma mark 0290
+	ns = setBasicSection("fp-0290-3pt-bigbox", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_BIGBOX, false, true, false, true);
+	ns->addScene(SCENE_THREEPT, false, true, false, true);
 	ns->addExtractor(SCENE_THREEPT, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
 	ns->addExtractor(SCENE_THREEPT, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
 	ns->addExtractor(SCENE_THREEPT, ACTOR_SHIMAJI, JOINT_LEFT_KNEE);
-	
-	ns->addExtractor(SCENE_THREEPT, ACTOR_MIYASHITA, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_THREEPT, ACTOR_MIYASHITA, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_THREEPT, ACTOR_MIYASHITA, JOINT_LEFT_KNEE);
-	
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "Util-AllMetaball";
-	ns->addScene(SCENE_METABALL, true, true, true, true);
-	ns->addExtractor(SCENE_METABALL, ACTOR_KOJIRI, JOINT_RIGHT_SHOULDER);
-	ns->addExtractor(SCENE_METABALL, ACTOR_KOJIRI, JOINT_LEFT_WRIST);
-	ns->addExtractor(SCENE_METABALL, ACTOR_KOJIRI, JOINT_RIGHT_KNEE);
-	
-	ns->addExtractor(SCENE_METABALL, ACTOR_SHIMAJI, JOINT_HEAD);
-	ns->addExtractor(SCENE_METABALL, ACTOR_SHIMAJI, JOINT_RIGHT_WRIST);
-	ns->addExtractor(SCENE_METABALL, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
-	
-	ns->addExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_ABDOMEN);
-	ns->addExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_LEFT_ELBOW);
-	ns->addExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_RIGHT_WRIST);
+	MIYASHITA_BIGBOX
+	setActorViewing(ns, true, true, true, true);
 
-	ns = newSection();//===================================================
-	ns->needSceneClear = true;
-	ns->needExtClear = true;
-	ns->sectionName = "Util-All-FourPoints";
-	ns->addScene(SCENE_CAMERA, false, false, false, false);
-	ns->addScene(SCENE_ACTOR, false, false, false, false);
-	ns->addScene(SCENE_FOURPT, true, true, true, true);
-	
-	for (int i = 0;i < 3;i++)
-	{
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_RIGHT_WRIST);
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_LEFT_WRIST);
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_RIGHT_KNEE);
-		ns->addExtractor(SCENE_FOURPT, actor_fp[i], JOINT_LEFT_KNEE);
-	}
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, false);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, true);
-	ns->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, true);
-	
-	
+#pragma mark 0300 TODO: [DONE]モンスター分配
+	ns = setBasicSection("fp-0300-monster", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_MONSTER, false, false, false, true);
+	ns->addScene(SCENE_MONSTER_2, false, true, false, false);
+	ns->addExtractor(SCENE_MONSTER, ACTOR_ANDO, JOINT_NECK);
+	ns->addExtractor(SCENE_MONSTER, ACTOR_KOJIRI, JOINT_NECK);
+	ns->addExtractor(SCENE_MONSTER, ACTOR_SHIMAJI, JOINT_NECK);
+	ns->addExtractor(SCENE_MONSTER, ACTOR_MIYASHITA, JOINT_NECK);
+	ns->addExtractor(SCENE_MONSTER_2, ACTOR_MIYASHITA, JOINT_NECK);
+	setActorViewing(ns, true, true, true, true);
+
+#pragma mark 0310
+	ns = setBasicSection("fp-0310-monster-burst", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_MONSTER, false, false, false, true);
+	ns->addScene(SCENE_BURST, false, true, false, false);
+	ns->addExtractor(SCENE_MONSTER, ACTOR_ANDO, JOINT_NECK);
+	ns->addExtractor(SCENE_MONSTER, ACTOR_KOJIRI, JOINT_NECK);
+	ns->addExtractor(SCENE_MONSTER, ACTOR_MIYASHITA, JOINT_NECK);
+	ns->addExtractor(SCENE_BURST, ACTOR_SHIMAJI, JOINT_NECK);
+	setActorViewing(ns, true, true, true, true);
+
+#pragma mark 0320
+	ns = setBasicSection("fp-0320-chaser", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_CHASER, false, true, false, true);
+	ns->addExtractor(SCENE_CHASER, ACTOR_KOJIRI, JOINT_NECK);
+	ns->addExtractor(SCENE_CHASER, ACTOR_MIYASHITA, JOINT_NECK);
+	setActorViewing(ns, true, true, true, true);
+
+}
+
+
+
+ofPtr<sectionSet> dpConductor::setBasicSection(string sectionName, bool sceneClear, bool extClear)
+{
+	ofPtr<sectionSet> ns = newSection();
+	ns->sectionName = sectionName;
+	ns->needSceneClear = sceneClear;
+	ns->needExtClear = extClear;
+	return ns;
+}
+
+void dpConductor::setCamActorScene(ofPtr<sectionSet> s)
+{
+	s->addScene(SCENE_CAMERA, false, false, false, false);
+	s->addScene(SCENE_ACTOR, false, false, false, false);
+}
+
+void dpConductor::setActorViewing(ofPtr<sectionSet> s, bool ando, bool kojiri, bool shimaji, bool miyashita)
+{
+	s->addTuneT(SCENE_ACTOR, "V_"+ACTOR_ANDO, ando);
+	s->addTuneT(SCENE_ACTOR, "V_"+ACTOR_KOJIRI, kojiri);
+	s->addTuneT(SCENE_ACTOR, "V_"+ACTOR_SHIMAJI, shimaji);
+	s->addTuneT(SCENE_ACTOR, "V_"+ACTOR_MIYASHITA, miyashita);
 }
