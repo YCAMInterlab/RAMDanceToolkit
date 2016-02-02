@@ -3,7 +3,7 @@
 void dpHakoniwaSand::setupControlPanel(){
     
     mMotionExtractor.setupControlPanel(this,ofPoint(340,30));
-    mMotionExtractor.load("motionExt_dpHSandStorm.xml");
+   // mMotionExtractor.load("motionExt_dpHSandStorm.xml");
     ramGetGUI().addIntSlider("Val1_Test", 750, 2170, &val[0]);
     ramGetGUI().addIntSlider("Val2_Test", 750, 2170, &val[1]);
     ramGetGUI().addIntSlider("Val3_Test", 750, 2170, &val[2]);

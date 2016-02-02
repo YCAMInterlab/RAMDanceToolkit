@@ -29,7 +29,7 @@ public:
         ramGetGUI().addSlider("velocitySum", 0.0, 40.0, &mVelocitySum);
         
         mMotionExtractor.setupControlPanel(this,ofPoint(350,32));
-        mMotionExtractor.load("motionExt_dpHStruggle.xml");
+       // mMotionExtractor.load("motionExt_dpHStruggle.xml");
         
         ofxUIRadio *radio = NULL;
         
@@ -246,7 +246,7 @@ private:
 
     ofxOscSender mSender;
     float mVibeStrength = 255.0;
-    float mVibeThresh = 1.5;
+    float mVibeThresh = 4.0;//1.5;
     float mLineWidth = 4.0;
     
     KezSlide mVibe;

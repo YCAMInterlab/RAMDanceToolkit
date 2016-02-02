@@ -12,6 +12,7 @@
 #include "dpScoreObjects.h"
 #include "dpScoreNodeStage.h"
 #include "dpScoreNodeHakoniwa.h"
+#include "dpScoreNodeComputer.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -19,14 +20,21 @@ NodeCameraUnit::NodeCameraUnit()
 {
     title = "Hakoniwa Analysis";
     titleJP = "映像解析";
-    descriptionJP = "「映像解析」\n箱庭の内部の状態をコンピュータで映像解析";
+    descriptionJP = "「映像解析」\n箱庭の内部の状態をコンピュータで解析して\nRAMシステムに伝えます";
     
-    setGlobalPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 250.f, 0.f, 100.f);
-    addAimingOffset(ofVec3f(getWidth() * 0.5f, getHeight() * 0.82f, -20.f));
+    const float diff {NodeStage::kDepth};
+    setGlobalPosition(-NodeStage::kWidth * 0.5f - Deck::getWidth() - 320.f - getWidth() * 0.7f,
+                      0.f,
+                      NodeStage::kDepth * 0.5f - 300.f + getDepth() * 0.9f);
+    addAimingOffset(ofVec3f(7.f, getHeight() * 0.83f, -35.f));
     
-    getCamera().setFov(35.f);
-    getCamera().setPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 300.f, 200.f, -50.f);
-    getCamera().setOrientation(ofVec3f(-30.f, 180.f + 30.f, 0.f));
+    getCamera().setFov(30.f);
+    auto p = getGlobalPosition();
+    p.x -= getWidth() * 2.0f;
+    p.y += getHeight() * 1.6f;
+    p.z -= getDepth() * 0.55f;
+    getCamera().setPosition(p);
+    getCamera().setOrientation(ofVec3f(-30.f, 180.f + 45.f + 45.f, 0.f));
     
     mBody.setup(ofVec3f::zero(), getWidth(), getHeight(), getDepth());
     mTray.setup(ofVec3f::zero(), 44.f, 5.f, -35.f);
@@ -41,6 +49,8 @@ void NodeCameraUnit::customDraw()
 {
 	ScopedStyle s;
 	setStyle(*this);
+    ScopedRotateY rY(45.f);
+    
     mBody.draw();
 
 	const float x {(getWidth() - 44.f) * 0.5f};

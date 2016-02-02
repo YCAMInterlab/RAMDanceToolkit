@@ -27,6 +27,8 @@ public:
     
     static ofVec3f getMacBookPosition(int index);
     
+    string descriptionJPFromHakoniwa;
+    
 private:
     vector<Deck> mDecks;
     vector<MacBook> mMBPs;

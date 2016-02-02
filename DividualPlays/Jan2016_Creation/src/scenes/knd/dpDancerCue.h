@@ -11,6 +11,7 @@
 
 #include "ramMain.h"
 #include "dpConstants.h"
+#include "KezSlidePoint.h"
 
 class dpDancerCue{
 public:
@@ -34,20 +35,24 @@ private:
             
             CueRect(){};
             void setup(ofPoint pos, ofPoint size, ofColor color);
-            void update();
+            void update(float time);
             void draw();
-            void setEnable(bool enable){mIsEnable = enable;}
-            
+            void setEnable(bool enable, float time);
+        
         private:
             
             ofPoint mPos;
             ofPoint mSize;
             ofColor mColor;
             
-            float mAlphaBlinkSpeed = 0.1;
+            float mAlphaBlinkSpeed = 8.0;
             float mAlpha = 0.0;
             
             bool mIsEnable = false;
+        
+            float mElapsed = 0.0;
+        
+            KezSlide mAlphaScale;
 
     };
     

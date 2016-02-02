@@ -22,7 +22,9 @@ void dpHakoniwaGearMove::setupControlPanel(){
     mMaxSpeed = 13000;
     mMinSpeed = 0;
 
-    mSpeedScale = 50;
+    mSpeedScale = 200;
+    
+    mGearUpdateSpan = 0.5;
     
     ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
     
@@ -38,11 +40,16 @@ void dpHakoniwaGearMove::setupControlPanel(){
     panel->addIntSlider("SpeedScale", 50, 1000, &mSpeedScale);
     panel->addIntSlider("MinSpeed", 0, 1500, &mMinSpeed);
     
+    panel->addSlider("UpdateSpan", 0.1, 1.0, &mGearUpdateSpan);
+    panel->addIntSlider("ParameterChangeThresh", 1, 10, &mParameterChangeThresh);
+    
     ofAddListener(panel->newGUIEvent, this, &dpHakoniwaGearMove::onPanelChanged);
     motionExtractor.setupControlPanel(this,ofPoint(340,30));
-    motionExtractor.load("motionExt_dpHakoniwaGearMove.xml");
+   // motionExtractor.load("motionExt_dpHakoniwaGearMove.xml");
     
     mParameterChangeThresh = 10;
+    
+    mElapsed = ofGetElapsedTimef();
 }
 
 void dpHakoniwaGearMove::onPanelChanged(ofxUIEventArgs& e){
@@ -139,7 +146,11 @@ void dpHakoniwaGearMove::draw(){
     
     if (mDatahow)drawDump();
 
-    if (ofGetFrameNum() % 30 == 0){
+    float time = ofGetElapsedTimef();
+    
+    if (time - mElapsed > mGearUpdateSpan){
+        
+        mElapsed = time;
         
         sumVelocitySpeed();
         
