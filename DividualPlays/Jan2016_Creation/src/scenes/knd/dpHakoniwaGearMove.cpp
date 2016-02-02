@@ -133,6 +133,10 @@ void dpHakoniwaGearMove::draw(){
 
     ramSetViewPort(dpGetFirstScreenViewPort()); //１枚目のscreenを描画に指定。ここの仕様変わります。
 
+    ramBeginCamera();
+    motionExtractor.draw();
+    ramEndCamera();
+    
     if (mDatahow)drawDump();
 
     if (ofGetFrameNum() % 30 == 0){
