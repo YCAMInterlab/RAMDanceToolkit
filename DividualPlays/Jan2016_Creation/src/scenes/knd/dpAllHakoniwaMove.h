@@ -63,14 +63,16 @@ public:
        // mSender[SERVO_PENDULUM].setup(SERVO_PENDULUM_IP,8528);
         mSender[TORNADE].setup(TORNADE_IP,8528);
         
-        mSender[MAGLOOPER_1].setup(MAGLOOPER_IP,MAGLOOPER_1_PORT);
-        mSender[MAGLOOPER_2].setup(MAGLOOPER_IP,MAGLOOPER_2_PORT);
+        mSender[MAG_LOOPER_1].setup(MAGLOOPER_IP,MAG_LOOPER_1_PORT);
+        mSender[MAG_LOOPER_2].setup(MAGLOOPER_IP,MAG_LOOPER_2_PORT);
         
         mSender[GEAR].setup(GEAR_IP, 8528);
         
         mServoThread.setup();
         
         setupStepManager();
+        
+        mLightSender.setup(LIGHTING_IP,10000);
     
     }
     
@@ -210,7 +212,7 @@ public:
                 m.addIntArg(0);
                 m.addIntArg(0);
                 m.addIntArg(int(20));
-                mSender[MAGLOOPER_1].sendMessage(m);
+                mSender[MAG_LOOPER_1].sendMessage(m);
                 
                 ofxOscMessage n;
                 n.setAddress( "/dp/hakoniwa/magnetLooper2" );
@@ -218,7 +220,7 @@ public:
                 n.addIntArg(0);
                 n.addIntArg(int(20));
                 
-                mSender[MAGLOOPER_2].sendMessage(n);
+                mSender[MAG_LOOPER_2].sendMessage(n);
             }
         }else{
             
@@ -227,7 +229,7 @@ public:
             m.addIntArg(1);
             m.addIntArg(1);
             m.addIntArg(int(20));
-            mSender[MAGLOOPER_1].sendMessage(m);
+            mSender[MAG_LOOPER_1].sendMessage(m);
             
             ofxOscMessage n;
             n.setAddress( "/dp/hakoniwa/magnetLooper2" );
@@ -235,7 +237,7 @@ public:
             n.addIntArg(1);
             n.addIntArg(int(20));
             
-            mSender[MAGLOOPER_2].sendMessage(n);
+            mSender[MAG_LOOPER_2].sendMessage(n);
 
         }
     }
@@ -255,6 +257,7 @@ public:
     void receiveOsc(){}
     
     void onEnabled(){
+        
         mServoThread.start();
         sendAll(true);
         
@@ -265,18 +268,29 @@ public:
         mIsServoPendulum = true;
         mIsGear = true;
         mIsTornade = true;
+        
+        sendLightingMessage(true);
     }
+    
     void onDisabled(){
         sendAll(false);
         sendAll(false);
         mServoThread.stop();
+        sendLightingMessage(false);
+    }
+    
+    void sendLightingMessage(bool enable){
+        ofxOscMessage m;
+        m.setAddress("/dp/light/allHakoniwa");
+        m.addIntArg(enable);
+        mLightSender.sendMessage(m);
     }
     
 private:
 
-    enum HAKONIWA_NAME{
-        MAGLOOPER_1,
-        MAGLOOPER_2,
+    enum HAKONIWA_SENDER_NAME{
+        MAG_LOOPER_1,
+        MAG_LOOPER_2,
         MAG_PENDULUM,
         STRUGGLE,
         SAND_STORM,
@@ -299,6 +313,8 @@ private:
     bool mIsTornade;
     
     ofxKsmrStepManager		mStepManager;
+    
+    ofxOscSender mLightSender;
     
 };
 
