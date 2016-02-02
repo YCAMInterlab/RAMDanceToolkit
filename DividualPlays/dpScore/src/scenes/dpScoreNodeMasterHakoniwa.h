@@ -21,10 +21,24 @@ public:
     
     void customDraw() override;
     
+    static float getWidth();
+    static float getHeight();
+    static float getHeightTank();
+    static float getDepth();
+    static float getDepthFront();
+    static float getDepthRear();
+    
+    const int kNumX{3};
+    const int kNumZ{2};
+    
 private:
     ofVbo mWaterTank;
-    Box mFront;
+    Box mFrontBottom;
+    Box mFrontTop;
     Box mRear;
+    vector<Funnel> mFunnel;
+    vector<Box> mMotors;
+    vector<Cylinder> mValves;
 };
 
 DP_SCORE_NAMESPACE_END

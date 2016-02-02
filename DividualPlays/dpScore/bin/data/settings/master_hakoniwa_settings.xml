@@ -1,6 +1,6 @@
 <osc>
     <serverMasterHakoniwa host="192.168.20.60" port=8528/>
-    <serverCameraUnit host="192.168.20.5" port=12400/>
+    <serverCameraUnit host="192.168.20.36" port=12400/>
     <serverRDTK host="192.168.20.2" port=10000/>
     <serverRDTK host="192.168.20.3" port=10000/>
     <serverScore host="192.168.20.11" port=10000/>

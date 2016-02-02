@@ -46,16 +46,18 @@ void SceneController::initialize()
     for (int i=0; i<xml.getNumTags("serverRDTK"); i++) {
         string errorStr{"error"};
         int errorInt{-1};
-        const string host{xml.getAttribute("serverRDTK", "host", errorStr)};
+        const string host{xml.getAttribute("serverRDTK", "host", errorStr, i)};
         if (host == errorStr)
             ofxThrowException(ofxException,
                               "serverRDTK host name didn't find in XML");
-        const int port{xml.getAttribute("serverRDTK", "port", errorInt)};
+        const int port{xml.getAttribute("serverRDTK", "port", errorInt, i)};
         if (port == errorInt)
             ofxThrowException(ofxException,
                               "serverRDTK port number didn't find in XML");
-        mRDKOscSender.push_back(ofxOscSender());
-        mRDKOscSender.back().setup(host, port);
+        
+        auto sender = ofPtr<ofxOscSender>(new ofxOscSender());
+        sender->setup(host, port);
+        mRDKOscSender.push_back(sender);
     }
     
     /*
@@ -477,7 +479,7 @@ void SceneController::sendSetScene(const string& name, bool win0, bool win1)
         m.addIntArg(mUniqueScenes.size());
         if (enableOscOutRDTK) {
             for (int i=0; i<mRDKOscSender.size(); i++) {
-                mRDKOscSender.at(i).sendMessage(m);
+                mRDKOscSender.at(i)->sendMessage(m);
             }
         }
     }

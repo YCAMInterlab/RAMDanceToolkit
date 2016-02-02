@@ -74,6 +74,14 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
     hakoniwas.back()->sceneNames.push_back("H:dpHTornado");
     hakoniwas.back()->sceneNames.push_back("V:dpVisTornado");
     
+#pragma mark ギア
+    hakoniwas.push_back(new hakoniwaPresets());
+    hakoniwas.back()->type		= HAKO_GEAR;
+    hakoniwas.back()->CVPreset	= "Gear";
+    hakoniwas.back()->sourceCh	= SHUTTER_CHANNEL;
+    hakoniwas.back()->sceneNames.push_back("H:dpHGearMove");
+    hakoniwas.back()->sceneNames.push_back("V:dpVisGearMove");
+    
 #pragma mark ★ステージ
     hakoniwas.push_back(new hakoniwaPresets());
     hakoniwas.back()->type		= HAKO_STAGE;
@@ -125,14 +133,6 @@ void dpSwitchingManager::setup(dpCameraUnit_cvFX* fxP,
 	hakoniwas.back()->sourceCh	= 9;
 	hakoniwas.back()->sceneNames.push_back("H:dpHfrozenIce");
 	hakoniwas.back()->sceneNames.push_back("V:dpVisIce");
-    
-#pragma mark ギア
-	hakoniwas.push_back(new hakoniwaPresets());
-	hakoniwas.back()->type		= HAKO_GEAR;
-	hakoniwas.back()->CVPreset	= "Gear";
-	hakoniwas.back()->sourceCh	= SHUTTER_CHANNEL;
-	hakoniwas.back()->sceneNames.push_back("H:dpHGearMove");
-	hakoniwas.back()->sceneNames.push_back("V:dpVisGearMove");
 
 #pragma mark メタボール
 	hakoniwas.push_back(new hakoniwaPresets());

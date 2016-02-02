@@ -32,7 +32,7 @@ NodeSpeaker::NodeSpeaker()
     for (auto i : rep(kNumSpeakers)) {
         mSpeakers.push_back(Speaker::create(ofVec3f::zero()));
     }
-    mPole.setup(ofVec3f::zero(), 2.f, getH());
+    mPole.setup(ofVec3f::zero(), 2.f, getH(), 8);
     
 }
 
