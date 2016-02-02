@@ -141,17 +141,21 @@ void dpConductor::switchHakoniwa(string nameHakoniwa, bool enable, bool A, bool 
 		//マスターからの受けは2-3-6ディスプレイに出力
 		bool allowed23 = true;//2-3出しの許可
 		
-		sceneCon->setScene(hakoName, false, false, false);
-		sceneCon->setScene(VisName, false, allowed23, false);
-		sceneCon->setScene(VisName, true, false, true);
+		string hakos[] = {HAKO_MAGPENDULUM, HAKO_WORM, HAKO_SERVOPENDULUM, HAKO_STRUGGLE, HAKO_STAGE, HAKO_SANDSTORM, HAKO_GEAR, HAKO_TORNADO};
+		string hakoh[] = {HAKO_H_MAGPENDULUM, HAKO_H_WORM, HAKO_H_SERVOPENDULUM, HAKO_H_STRUGGLE, HAKO_H_STAGE, HAKO_H_SANDSTORM, HAKO_H_GEAR, HAKO_H_TORNADO};
 		
-        bool rawCam = false;
-        if (hakoName == HAKO_WORM) rawCam = true;
-        if (VisName == HAKO_STAGE) rawCam = true;
-        
-        sceneCon->setScene(HAKO_RAWCAM, false, false, true);
-        
-		sceneCon->loadExtractor(hakoName);
+		for (int i = 0;i < 8;i++)
+		{
+			sceneCon->disableScene(hakos[i], true);
+			sceneCon->disableScene(hakoh[i], true);
+			sceneCon->disableScene(hakos[i], false);
+			sceneCon->disableScene(hakoh[i], false);
+		}
+		
+		sceneCon->disableScene(HAKO_MAGPENDULUM, true);
+		
+		sceneCon->setScene(hakoName, false, false, false);
+		callHakoniwaPreset(VisName);
 	}
 	else
 	{//箱庭からのDisable処理
@@ -175,4 +179,80 @@ void dpConductor::listSection(ofxOscMessage m)
 		ret.addStringArg(sections[i]->sectionName);
 		sender.sendMessage(ret);
 	}
+}
+
+void dpConductor::callHakoniwaPreset(string scene)
+{
+	sceneCon->clearExtractor(scene);
+	
+	if (scene == HAKO_STAGE)
+	{
+		sceneCon->setScene(scene, true, false, true);
+		sceneCon->setScene(scene, false, true, true);
+	}
+	if (scene == HAKO_TORNADO)
+	{
+		sceneCon->disableScene(scene, true);
+		sceneCon->disableScene(scene, false);
+	}
+#pragma mark TODO: ギアビズ
+	if (scene == HAKO_GEAR)
+	{
+		sceneCon->setScene(HAKO_GEAR, true, false, true);
+		sceneCon->setScene(HAKO_GEAR, false, false, true);
+		sceneCon->setExtractor(HAKO_H_GEAR, ACTOR_SHIMAJI, JOINT_HIPS);
+		sceneCon->setExtractor(HAKO_H_GEAR, ACTOR_SHIMAJI, JOINT_LEFT_WRIST);
+		sceneCon->setExtractor(HAKO_H_GEAR, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
+	}
+	if (scene == HAKO_STRUGGLE)
+	{
+		sceneCon->setScene(HAKO_STRUGGLE, true, false, true);
+		sceneCon->setScene(HAKO_STRUGGLE, false, true, true);
+		string act[] = {ACTOR_ANDO, ACTOR_KOJIRI, ACTOR_SHIMAJI, ACTOR_MIYASHITA};
+		for (int i = 0;i < 4;i++)
+		{
+			sceneCon->setExtractor(HAKO_H_STRUGGLE, act[i], JOINT_LEFT_KNEE);
+			sceneCon->setExtractor(HAKO_H_STRUGGLE, act[i], JOINT_RIGHT_KNEE);
+		}
+	}
+	if (scene == HAKO_MAGPENDULUM)
+	{
+		sceneCon->setScene(HAKO_MAGPENDULUM, true, false, true);
+		sceneCon->setScene(HAKO_MAGPENDULUM, false, false, true);
+		string act[] = {ACTOR_ANDO, ACTOR_KOJIRI, ACTOR_SHIMAJI};
+		for (int i = 0;i < 3;i++)
+		{
+			sceneCon->setExtractor(HAKO_H_MAGPENDULUM, act[i], JOINT_RIGHT_WRIST);
+			sceneCon->setExtractor(HAKO_H_MAGPENDULUM, act[i], JOINT_LEFT_WRIST);
+		}
+	}
+	if (scene == HAKO_WORM)
+	{
+		sceneCon->setExtractor(HAKO_H_WORM, ACTOR_ANDO, JOINT_RIGHT_WRIST);
+		sceneCon->setExtractor(HAKO_H_WORM, ACTOR_ANDO, JOINT_LEFT_KNEE);
+	}
+	if (scene == HAKO_SERVOPENDULUM)
+	{
+		sceneCon->setScene(HAKO_SERVOPENDULUM, true, false, true);
+		sceneCon->setScene(HAKO_SERVOPENDULUM, false, true, true);
+		sceneCon->setExtractor(HAKO_H_SERVOPENDULUM, ACTOR_KOJIRI, JOINT_RIGHT_WRIST);
+		sceneCon->setExtractor(HAKO_H_SERVOPENDULUM, ACTOR_KOJIRI, JOINT_LEFT_WRIST);
+	}
+	if (scene == HAKO_SANDSTORM)
+	{
+		sceneCon->setScene(HAKO_SANDSTORM, false, false, true);
+		sceneCon->setScene(HAKO_SANDSTORM, true, true, true);
+		sceneCon->setExtractor(HAKO_SANDSTORM, ACTOR_KOJIRI, JOINT_NECK);
+		sceneCon->setExtractor(HAKO_SANDSTORM, ACTOR_KOJIRI, JOINT_RIGHT_WRIST);
+		sceneCon->setExtractor(HAKO_SANDSTORM, ACTOR_KOJIRI, JOINT_LEFT_WRIST);
+	}
+	
+//	if (scene == HAKO_SANDSTORM)
+//	{
+//		sceneCon->setScene(HAKO_SANDSTORM, false, false, true);
+//		sceneCon->setScene(HAKO_SANDSTORM, true, true, true);
+//		sceneCon->setExtractor(HAKO_SANDSTORM, ACTOR_KOJIRI, JOINT_NECK);
+//		sceneCon->setExtractor(HAKO_SANDSTORM, ACTOR_KOJIRI, JOINT_RIGHT_WRIST);
+//		sceneCon->setExtractor(HAKO_SANDSTORM, ACTOR_MIYASHITA, JOINT_RIGHT_WRIST);
+//	}
 }
