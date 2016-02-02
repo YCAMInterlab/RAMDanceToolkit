@@ -96,6 +96,60 @@ void Box::setup(const ofVec3f& p, float w, float h, float d)
 	reset();
 }
 
+void Speaker::setup(const ofVec3f& p)
+{
+	const float w0 {getWidth()};
+	const float w1 {23.f};
+	const float h {getHeight()};
+	const float d {getDepth()};
+
+	const ofVec3f o(p.x + w0 * 0.5f, p.y + h * 0.5f, p.z + d * 0.5);
+	const float x0 {w0 * 0.5f};
+	const float x1 {w1 * 0.5f};
+	const float y {h * 0.5f};
+	const float z {d * 0.5f};
+	const ofVec3f v0 {ofVec3f(-x1, -y, -z) + o};
+	const ofVec3f v1 {ofVec3f(x1, -y, -z) + o};
+	const ofVec3f v2 {ofVec3f(x0, -y,  z) + o};
+	const ofVec3f v3 {ofVec3f(-x0, -y,  z) + o};
+	const ofVec3f v4 {ofVec3f(-x1,  y, -z) + o};
+	const ofVec3f v5 {ofVec3f(x1,  y, -z) + o};
+	const ofVec3f v6 {ofVec3f(x0,  y,  z) + o};
+	const ofVec3f v7 {ofVec3f(-x0,  y,  z) + o};
+
+	mLines.clear();
+	mLines.push_back(Line::make(v0, v1));
+	mLines.push_back(Line::make(v1, v2));
+	mLines.push_back(Line::make(v2, v3));
+	mLines.push_back(Line::make(v3, v0));
+
+	mLines.push_back(Line::make(v0, v4));
+	mLines.push_back(Line::make(v1, v5));
+	mLines.push_back(Line::make(v2, v6));
+	mLines.push_back(Line::make(v3, v7));
+
+	mLines.push_back(Line::make(v4, v5));
+	mLines.push_back(Line::make(v5, v6));
+	mLines.push_back(Line::make(v6, v7));
+	mLines.push_back(Line::make(v7, v4));
+
+	mPoints.assign(mLines.size(), Point());
+	reset();
+}
+
+float Speaker::getWidth()
+{
+	return 42.f;
+}
+float Speaker::getHeight()
+{
+	return 55.f;
+}
+float Speaker::getDepth()
+{
+	return 30.f;
+}
+
 void Cylinder::setup(const ofVec3f& p, float r, float h)
 {
 	mCenter = p;
@@ -166,16 +220,18 @@ void Rect::setup(const ofVec3f& p, float w, float h)
 
 Desk::Desk()
 {
-	const float tableDim {getDimension()};
-	const float tableH {getHeight()};
-	const float tableThickness {11.f};
-	const float legDim {5.f};
+	//const float tableDim {getDimension()};
+	const float w {getWidth()};
+	const float d {getDepth()};
+	const float h {getHeight()};
+	const float thickness {11.f};
+	const float leg {5.f};
 	mBoxes.clear();
-	mBoxes.push_back(Box::create(ofVec3f(0.f, tableH - tableThickness, 0.f), tableDim, tableThickness, tableDim));
-	mBoxes.push_back(Box::create(ofVec3f(0.f, 0.f, 0.f), legDim, tableH - tableThickness, legDim));
-	mBoxes.push_back(Box::create(ofVec3f(tableDim - legDim, 0.f, 0.f), legDim, tableH - tableThickness, legDim));
-	mBoxes.push_back(Box::create(ofVec3f(tableDim - legDim, 0.f, tableDim - legDim), legDim, tableH - tableThickness, legDim));
-	mBoxes.push_back(Box::create(ofVec3f(0.f, 0.f, tableDim - legDim), legDim, tableH - tableThickness, legDim));
+	mBoxes.push_back(Box::create(ofVec3f(0.f, h - thickness, 0.f), w, thickness, d));
+	mBoxes.push_back(Box::create(ofVec3f(0.f, 0.f, 0.f), leg, h - thickness, leg));
+	mBoxes.push_back(Box::create(ofVec3f(w - leg, 0.f, 0.f), leg, h - thickness, leg));
+	mBoxes.push_back(Box::create(ofVec3f(w - leg, 0.f, d - leg), leg, h - thickness, leg));
+	mBoxes.push_back(Box::create(ofVec3f(0.f, 0.f, d - leg), leg, h - thickness, leg));
 }
 
 void Desk::draw()

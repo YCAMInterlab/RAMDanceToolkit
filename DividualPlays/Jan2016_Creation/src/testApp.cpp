@@ -113,6 +113,7 @@ HastyChase_ext mHastyChase_ext;
 
 #include "Monster_ext.h"
 Monster_ext mMonster_ext;
+Monster_ext_2 mMonster_ext2;
 
 #include "MixMonsterScene_ext.h"
 MixMonsterScene_ext mMixMonsterScene_ext;
@@ -164,7 +165,7 @@ dpHakoVisServoPendulum      visServoPendulum;
 dpHakoniwaTornado hakoniwaTornado;
 dpHakoVisTornado  visTornado;
 
-dpHakoniwaRawCamera rawCamera;
+dpRawCamera rawCamera;
 dpSyphonClientManager *mSyphonClientManager;
 
 // stage
@@ -178,9 +179,9 @@ FloorLine floorLine;
 #include "floorline_ext.h"
 floorline_ext floor_ext;
 
-#include "HakoniwaGearMove.h"
+#include "dpHakoniwaGearMove.h"
 
-HakoniwaGearMove mHakoniwaGearMove;
+dpHakoniwaGearMove hakoniwaGearMove;
 
 //dpHakoVisMag mVisMag;
 
@@ -213,6 +214,7 @@ void testApp::setup()
     sceneManager.addScene(mUpsideDown_ext.getPtr());
     sceneManager.addScene(mHastyChase_ext.getPtr());
     sceneManager.addScene(mMonster_ext.getPtr());
+	sceneManager.addScene(mMonster_ext2.getPtr());
     sceneManager.addScene(mMixMonsterScene_ext.getPtr());
     sceneManager.addScene(mThreePoints_ext.getPtr());
     sceneManager.addScene(mDonuts_ext.getPtr());
@@ -277,13 +279,14 @@ void testApp::setup()
     sceneManager.addScene(looper.getPtr());
     sceneManager.addScene(allHakoniwaMove.getPtr());
     
-    sceneManager.addScene(mHakoniwaGearMove.getPtr());
+    sceneManager.addScene(hakoniwaGearMove.getPtr());
 	
     sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
     sceneManager.setShowAllActors(false);
 
     doSomething.setup();
     dancerCue.setup();
+    remainedView.setup();
 }
 
 //--------------------------------------------------------------
@@ -291,6 +294,7 @@ void testApp::update()
 {
     doSomething.update();
     dancerCue.update();
+    remainedView.update();
     
     mSyphonClientManager->update();
     ramGetGUI().getSceneTabs().setPosition(0, -mouseY);
@@ -302,6 +306,7 @@ void testApp::draw()
 {
     doSomething.draw();
     dancerCue.draw();
+    remainedView.draw();
 }
 
 

@@ -26,6 +26,8 @@ public:
         ramGetGUI().addToggle("isDrawFloor", &isDrawFloor);
         ramGetGUI().addSlider("lineWidth",1.0,20.0,&mLineWidth);
         
+        ramGetGUI().addSlider("velocitySum", 0.0, 40.0, &mVelocitySum);
+        
         mMotionExtractor.setupControlPanel(this,ofPoint(350,32));
         mMotionExtractor.load("motionExt_dpHStruggle.xml");
         
@@ -120,31 +122,7 @@ public:
             }
         }
         
-        /*int numActor = getNumNodeArray();
-        
-        for(int i = 0; i < numActor; i++){
-            const ramNodeArray &array = getNodeArray(i);
-            
-            for(int j = 0; j < array.getNumNode(); j++){
-                const ramNode node = array.getNode(j);
-                
-                
-                if(j == mJointNum){
-                    if(node.getVelocity().length() > mVibeThresh){
-                        
-                        if(isVibeWhenActorMoveFast){
-                            
-                            mVibeFromActor.imSet(mVibeStrength);
-                            mVibeFromActor.set(0);
-                            
-                        }else{
-                            mVibeFromActor.imSet(0);
-                            mVibe.imSet(0);
-                        }
-                    }
-                }
-            }
-        }*/
+        mVelocitySum = velocitySum;
         
         float vibeVal = mVibe.val + mVibeFromActor.val;
         
@@ -289,6 +267,8 @@ private:
     ofShader mDisplace;
     
     ramMotionExtractor mMotionExtractor;
+    
+    float mVelocitySum = 0.0;
 };
 
 

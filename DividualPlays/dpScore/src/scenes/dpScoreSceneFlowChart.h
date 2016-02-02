@@ -55,6 +55,7 @@ private:
     void updateWithSkeleton();
     void updateMoving();
     void updateCirculation();
+    void updateDescription();
     void updateMemory();
     
     void drawScene();
@@ -108,6 +109,8 @@ private:
 	ofTrueTypeFont mFont, mFontSmall;
     ofxTrueTypeFontUC mFontJP;
     ofxOscSender mOscSender;
+    bool mOscInited {false};
+    const string kOscAddrLighting {"/dp/light/moving"};
     
 	map<string, ofPtr<BaseNode>> mNodes;
     vector<vector<string>> mOrders;

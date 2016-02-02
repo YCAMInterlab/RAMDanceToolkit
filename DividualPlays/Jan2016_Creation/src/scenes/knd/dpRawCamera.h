@@ -11,9 +11,9 @@
 
 #include "dpSyphonClientManager.h"
 
-class dpHakoniwaRawCamera : public ramBaseScene{
+class dpRawCamera : public ramBaseScene{
 public:
-    string getName() const { return "dpHakoniwaRawCamera"; }
+    string getName() const { return "dpRawCamera"; }
     
     void setupControlPanel(){
     

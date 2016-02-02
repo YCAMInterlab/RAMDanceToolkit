@@ -22,11 +22,12 @@ public:
     
     void customDraw() override;
     
-    constexpr static const int kNumX { 3 };
-    constexpr static const int kNumY { 2 };
-    constexpr static const float kGapZ { 90.f };
-    static float getWidth() { return Desk::getDimension() * kNumX;  }
-    static float getDepth() { return Desk::getDimension() * kNumY + kGapZ * (kNumY - 1);  }
+    constexpr static const int kNumX { 1 };
+    constexpr static const int kNumY { 3 };
+    //constexpr static const float kGapZ { 90.f };
+    static float getWidth() { return Desk::getWidth() * kNumX;  }
+    //static float getDepth() { return Desk::getDepth() * kNumY + kGapZ * (kNumY - 1);  }
+    static float getDepth() { return Desk::getDepth() * kNumY;  }
 
     void setX(int i) { mX = ofClamp(i, 0, kNumX); };
     void setY(int i) { mY = ofClamp(i, 0, kNumY); };
@@ -34,7 +35,7 @@ public:
     
 private:
     vector<Desk> mDesks;
-    vector<Box> mLights;
+    //vector<Box> mLights;
     bool mFocus {true};
     int mX {1};
     int mY {0};

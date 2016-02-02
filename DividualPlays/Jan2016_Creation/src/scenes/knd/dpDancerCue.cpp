@@ -14,9 +14,8 @@ void dpDancerCue::setup(){
     
     mDancerNum["ANDO"] = ANDO;
     mDancerNum["KOJIRI"] = KOJIRI;
-    mDancerNum["YAS"] = YAS;
     mDancerNum["MIYASHITA"] = MIYASHITA;
-    
+    mDancerNum["SHIMAJI"] = SHIMAJI;
     
     for(int i = 0; i < DANCER_NUM; i++){
         float width = (float)SINGLE_SCREEN_WIDTH / (float)DANCER_NUM;
@@ -41,7 +40,7 @@ void dpDancerCue::receiveOsc(){
                 
                 int idx = mDancerNum[m.getArgAsString(0)];
                 
-                mRects[idx].setEnable(m.getArgAsInt32(1));
+                mRects[idx].setEnable(m.getArgAsInt32(1),ofGetElapsedTimef());
             }
             
         }
@@ -52,16 +51,21 @@ void dpDancerCue::update(){
     
     receiveOsc();
     
+    float time = ofGetElapsedTimef();
+    
     for(auto &v:mRects){
-        v.update();
+        v.update(time);
     }
+    
 }
 
 void dpDancerCue::draw(){
     
-    ofPoint offset = SCREEN_POSITIONS[SCREEN_C];
+    ofPushStyle();
     
     ofPushMatrix();
+    
+    ofPoint offset = SCREEN_POSITIONS[SCREEN_C];
     ofTranslate(offset.x,offset.y);
     
     for(auto &v:mRects){
@@ -69,7 +73,12 @@ void dpDancerCue::draw(){
     }
     
     ofPopMatrix();
+   
+    for(auto &v:mRects){
+        v.draw();
+    }
     
+    ofPopStyle();
 }
 
 ///// Rect
@@ -80,21 +89,37 @@ void dpDancerCue::CueRect::setup(ofPoint pos, ofPoint size, ofColor color){
     mColor = color;
 }
 
-void dpDancerCue::CueRect::update(){
+void dpDancerCue::CueRect::update(float time){
     
     if(mIsEnable){
-        float blink = sin(ofGetFrameNum() * mAlphaBlinkSpeed);
+        float blink = sin((time - mElapsed) * mAlphaBlinkSpeed);
         mAlpha = ofMap(blink,-1.0,1.0,0.0,255.0);
     }
     
+    mAlphaScale.update();
+    
+}
+
+void dpDancerCue::CueRect::setEnable(bool enable, float time){
+
+    mIsEnable = enable;
+    
+    mElapsed = time;
+    
+    if(mIsEnable){
+        mAlphaScale.imSet(0.0);
+        mAlphaScale.set(1.0);
+    }else{
+        mAlphaScale.set(0.0);
+    }
 }
 
 void dpDancerCue::CueRect::draw(){
     
-    if(mIsEnable){
+    if(mAlphaScale.val > 0.01){
         
         ofPushStyle();
-        ofSetColor(mColor.r,mColor.g,mColor.b,mAlpha);
+        ofSetColor(mColor.r,mColor.g,mColor.b,mAlpha * mAlphaScale.val);
         ofRect(mPos.x,mPos.y,mSize.x,mSize.y);
         ofPopStyle();
         

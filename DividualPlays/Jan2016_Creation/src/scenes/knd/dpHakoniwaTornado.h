@@ -97,11 +97,11 @@ public:
         
         mRad = ofMap(radius,mRadMin,mRadMax,0,255,true);
         
-        /*if(mRad > mFunThresh){
+        if(mRad > mFunThresh){
             mFan = 255;
         }else{
             mFan = 0;
-        }*/
+        }
         
         if(mRad < mDrawRadThresh)radius = 0.0;
         
@@ -117,6 +117,8 @@ public:
         ofSetColor(255,255,255);
         mSphere.draw(center,radius,normal);
 
+        mMotionExtractor.draw();
+        
         ramEndCamera();
     
     }

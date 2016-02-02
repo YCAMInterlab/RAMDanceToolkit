@@ -48,7 +48,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 565.0, 140.0, 63.0, 20.0 ],
+					"patching_rect" : [ 394.0, 121.0, 63.0, 20.0 ],
 					"text" : "s toRDTK"
 				}
 
@@ -61,7 +61,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 565.0, 51.0, 48.0, 48.0 ]
+					"patching_rect" : [ 394.0, 32.0, 48.0, 48.0 ]
 				}
 
 			}
@@ -74,7 +74,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 565.0, 111.0, 171.0, 18.0 ],
+					"patching_rect" : [ 394.0, 92.0, 171.0, 18.0 ],
 					"text" : "/dp/dancerCue MIYASHITA $1"
 				}
 
@@ -87,7 +87,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 396.0, 140.0, 63.0, 20.0 ],
+					"patching_rect" : [ 585.0, 121.0, 63.0, 20.0 ],
 					"text" : "s toRDTK"
 				}
 
@@ -100,7 +100,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 396.0, 51.0, 48.0, 48.0 ]
+					"patching_rect" : [ 585.0, 32.0, 48.0, 48.0 ]
 				}
 
 			}
@@ -113,8 +113,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 396.0, 111.0, 132.0, 18.0 ],
-					"text" : "/dp/dancerCue YAS $1"
+					"patching_rect" : [ 585.0, 92.0, 157.0, 18.0 ],
+					"text" : "/dp/dancerCue SHIMAJI $1"
 				}
 
 			}
@@ -126,7 +126,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 227.0, 140.0, 63.0, 20.0 ],
+					"patching_rect" : [ 227.0, 121.0, 63.0, 20.0 ],
 					"text" : "s toRDTK"
 				}
 
@@ -139,7 +139,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 227.0, 51.0, 48.0, 48.0 ]
+					"patching_rect" : [ 227.0, 32.0, 48.0, 48.0 ]
 				}
 
 			}
@@ -152,7 +152,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 227.0, 111.0, 148.0, 18.0 ],
+					"patching_rect" : [ 227.0, 92.0, 148.0, 18.0 ],
 					"text" : "/dp/dancerCue KOJIRI $1"
 				}
 
@@ -179,7 +179,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 58.0, 140.0, 63.0, 20.0 ],
+					"patching_rect" : [ 58.0, 121.0, 63.0, 20.0 ],
 					"text" : "s toRDTK"
 				}
 
@@ -192,7 +192,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 58.0, 51.0, 48.0, 48.0 ]
+					"patching_rect" : [ 58.0, 32.0, 48.0, 48.0 ]
 				}
 
 			}
@@ -205,7 +205,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 58.0, 111.0, 144.0, 18.0 ],
+					"patching_rect" : [ 58.0, 92.0, 144.0, 18.0 ],
 					"text" : "/dp/dancerCue ANDO $1"
 				}
 

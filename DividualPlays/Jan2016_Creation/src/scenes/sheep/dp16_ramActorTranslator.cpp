@@ -24,10 +24,10 @@ void dp16_ramActorTranslator::setupControlPanel()
 	nameList[2] = "kojiri";
 	nameList[3] = "ando";
 	
-	palette[0].setHsb( 0.5, 0.9, 0.7);
-	palette[1].setHsb(0.95, 0.9, 0.7);
-	palette[2].setHsb( 0.3, 0.9, 0.7);
-	palette[3].setHsb( 0.0, 0.9, 0.7);
+    palette[0] = dpDancerFloatColor::MIYASHITA_COLOR;
+    palette[1] = dpDancerFloatColor::SHIMAJI_COLOR;
+    palette[2] = dpDancerFloatColor::KOJIRI_COLOR;
+    palette[3] = dpDancerFloatColor::ANDO_COLOR;
 	
 	ramGetGUI().addIntSlider("fix_pos", -1, 22, &fixer);
 	ramGetGUI().addToggle("floorStay", &floorStay);

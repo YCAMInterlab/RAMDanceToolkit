@@ -11,7 +11,7 @@
 
 //#define DEBUG_MACBOOK_AIR
 //#define DEBUG_MACBOOK_PRO
-//#define ACTING_KAAT
+#define ACTING_KAAT
 
 #if defined(DEBUG_MACBOOK_AIR)
 static const int SINGLE_SCREEN_WIDTH = 1366 / 2;
@@ -36,8 +36,8 @@ static const int EXTERNAL_VIDEO_WIDTH = 640;
 static const int EXTERNAL_VIDEO_HEIGHT = 480;
 
 static const string MAGLOOPER_IP = "192.168.20.12";
-static const int MAGLOOPER_1_PORT = 12001;
-static const int MAGLOOPER_2_PORT = 12000;
+static const int MAG_LOOPER_1_PORT = 12001;
+static const int MAG_LOOPER_2_PORT = 12000;
 
 static const string MAG_PENDULUM_ONOFF_IP = "192.168.20.52";
 static const string STRUGGLE_IP = "192.168.20.53";
@@ -46,6 +46,8 @@ static const string SERVO_PENDULUM_IP = "192.168.20.67";
 static const string TORNADE_IP = "192.168.20.71";
 
 static const string LIGHTING_IP = "192.168.20.8";
+
+static const string GEAR_IP = "192.168.20.51";
 
 
 static const int SCREEN_B = 0;
@@ -129,18 +131,27 @@ struct dpFloatColor
 enum DANCER_NAME{
     ANDO,
     KOJIRI,
-    YAS,
     MIYASHITA,
+    SHIMAJI,
     NUM
 };
 
 // for dancer cue or something...
+
+struct dpDancerFloatColor
+{
+    static const ofFloatColor ANDO_COLOR;
+    static const ofFloatColor KOJIRI_COLOR;
+    static const ofFloatColor MIYASHITA_COLOR;
+    static const ofFloatColor SHIMAJI_COLOR;
+};
+
 struct dpDancerColor
 {
     static const ofColor ANDO_COLOR;
     static const ofColor KOJIRI_COLOR;
-    static const ofColor YAS_COLOR;
     static const ofColor MIYASHITA_COLOR;
+    static const ofColor SHIMAJI_COLOR;
 };
 
 static ofColor dancerNameToColor(DANCER_NAME name){
@@ -149,9 +160,9 @@ static ofColor dancerNameToColor(DANCER_NAME name){
     
     if(name == KOJIRI)return dpDancerColor::KOJIRI_COLOR;
     
-    if(name == YAS)return dpDancerColor::YAS_COLOR;
-    
     if(name == MIYASHITA)return dpDancerColor::MIYASHITA_COLOR;
+    
+    if(name == SHIMAJI)return dpDancerColor::SHIMAJI_COLOR;
     
     return ofColor(0,0,0);
 }

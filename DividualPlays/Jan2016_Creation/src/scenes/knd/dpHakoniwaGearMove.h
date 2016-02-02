@@ -1,5 +1,5 @@
 //
-//  HakoniwaGearMove.h
+//  dpHakoniwaGearMove.h
 //  RAMDanceToolkit
 //
 //  Created by ycam on 2014/12/25.
@@ -14,15 +14,15 @@
 //
 //
 
-#ifndef __RAMDanceToolkit__HakoniwaGearMove__
-#define __RAMDanceToolkit__HakoniwaGearMove__
+#ifndef __RAMDanceToolkit__dpHakoniwaGearMove__
+#define __RAMDanceToolkit__dpHakoniwaGearMove__
 
 #include "ramMain.h"
 #include "ofxKsmrStepManager.h"
 #include "ramMotionExtractor.h"
 #include "dpConstants.h"
 
-class HakoniwaGearMove : public ramBaseScene {
+class dpHakoniwaGearMove : public ramBaseScene {
 public:
     
     void setupControlPanel();
@@ -31,8 +31,7 @@ public:
     void draw();
     void onPanelChanged(ofxUIEventArgs& e);
     
-    inline
-    string getName() const { return "dpHGearMove"; }
+    inline string getName() const { return "dpHGearMove"; }
     
     ofxKsmrStepManager		stepManager;
     
@@ -45,17 +44,30 @@ private:
     void OnestepTurnStop(int ch);
     void drawDump();
 
+    void sumVelocitySpeed();
+    void randomiseGearDirection();
+    void calcGearSpeed();
+    void reset();
+    
     ramMotionExtractor	motionExtractor;
     ofxOscSender mOscSender;
     
-    bool mAllTurn, mGear1, mGear2, mGear3, mDatahow, mManual;
-    bool mAllGearReverse, mGear1Reverse, mGear2Reverse, mGear3Reverse;
-    int mScale, mScale2,mScale3, mAllGearSpeed, mGear1Speed, mGear2Speed, mGear3Speed;
-    int mGear1Count, mGear2Count, mGear3Count, mTotalcount;
-    int mMax1speed, mMax2speed, mMax3speed;
-    int mMin1speed, mMin2speed, mMin3speed;
+    bool mAllTurn, mGear, mDatahow, mManual;
+    bool mAllGearReverse, mGearReverse;
+    int mSpeedScale;
+    int mAllGearSpeed, mGearSpeed;
+    int mVelocitySpeedSum;
+    
+    int mParameterChangeCount;
+    int mMaxSpeed;
+    int mMinSpeed;
     
     int mMotionExtCnt;
+    
+    int mParameterChangeThresh;
+    
+    float mElapsed = 0.0;
+    float mGearUpdateSpan = 0.0;
 
 };
 

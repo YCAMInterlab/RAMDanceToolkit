@@ -18,23 +18,23 @@ NodeDisplay::NodeDisplay()
 {
 	title = "Displays";
 	titleJP = "ディスプレイ";
-	descriptionJP = "「ディスプレイ」\nツールキットで生成した映像をダンサーに伝える";
+    descriptionJP = "「ディスプレイ」\n仮想の環境の情報はディスプレイと\n物理的な仕掛けによってダンサーに伝えられます";
 
-	addAimingOffset(getFrontLeft() + ofVec3f(getFrontDisplayWidth() * 0.5f - 8.f,
+	addAimingOffset(getFrontLeft() + ofVec3f(getFrontDisplayWidth() * 0.5f - 6.f,
 	                                         getFrontDisplayHeight() * 0.5f,
-	                                         getFrontDisplayDepth() * 0.5f + 25.f));
+	                                         getFrontDisplayDepth() * 0.5f + 15.f));
 
-	addAimingOffset(getFrontRight() + ofVec3f(getFrontDisplayWidth() * 0.5f - 4.f,
+	addAimingOffset(getFrontRight() + ofVec3f(getFrontDisplayWidth() * 0.5f - 8.f,
 	                                          getFrontDisplayHeight() * 0.5f,
-	                                          getFrontDisplayDepth() * 0.5f - 28.f));
+	                                          getFrontDisplayDepth() * 0.5f - 30.f));
 
-	addAimingOffset(getRearLeft() + ofVec3f(getRearDisplayWidth() * 0.5f,
+	addAimingOffset(getRearLeft() + ofVec3f(getRearDisplayWidth() * 0.5f - 10.f,
 	                                        getRearDisplayHeight() * 0.5f,
-	                                        getRearDisplayDepth() * 0.5f));
+	                                        getRearDisplayDepth() * 0.5f - 40.f));
 
-	addAimingOffset(getRearRight() + ofVec3f(getRearDisplayWidth() * 0.5f,
+	addAimingOffset(getRearRight() + ofVec3f(getRearDisplayWidth() * 0.5f + 10.f,
 	                                         getRearDisplayHeight() * 0.5f,
-	                                         getRearDisplayDepth() * 0.5f));
+	                                         getRearDisplayDepth() * 0.5f - 40.f));
 	getCamera().setFov(35.f);
 	getCamera().setPosition(-NodeStage::kWidth * 0.5f + 80.f, 255.f, 200.f);
 	getCamera().setOrientation(ofVec3f(0.f, 150.f, 0.f));
@@ -148,15 +148,15 @@ ofVec3f NodeDisplay::getFrontRight()
 }
 float NodeDisplay::getFrontDisplayWidth()
 {
-	return 104.f;
+	return 93.f;
 }
 float NodeDisplay::getFrontDisplayHeight()
 {
-	return 61.4f;
+	return 63.f;
 }
 float NodeDisplay::getFrontDisplayDepth()
 {
-	return 3.f;
+	return 7.f;
 }
 float NodeDisplay::getFrontDisplayAngle()
 {
@@ -165,23 +165,23 @@ float NodeDisplay::getFrontDisplayAngle()
 
 ofVec3f NodeDisplay::getRearLeft()
 {
-	return ofVec3f(-NodeStage::kWidth * 0.5f, 0.f, -NodeStage::kDepth * 0.5f - 10.f);
+	return ofVec3f(-NodeStage::kWidth * 0.5f - 20.f, 0.f, -NodeStage::kDepth * 0.5f - 10.f);
 }
 ofVec3f NodeDisplay::getRearRight()
 {
-	return ofVec3f(NodeStage::kWidth * 0.5f - getRearDisplayWidth(), 0.f, -NodeStage::kDepth * 0.5f - 10.f);
+	return ofVec3f(NodeStage::kWidth * 0.5f - getRearDisplayWidth() + 20.f, 0.f, -NodeStage::kDepth * 0.5f - 10.f);
 }
 float NodeDisplay::getRearDisplayWidth()
 {
-	return 104.f;
+	return 105.f;
 }
 float NodeDisplay::getRearDisplayHeight()
 {
-	return 61.4f;
+	return 61.f;
 }
 float NodeDisplay::getRearDisplayDepth()
 {
-	return 3.f;
+	return 4.f;
 }
 float NodeDisplay::getRearDisplayAngle()
 {

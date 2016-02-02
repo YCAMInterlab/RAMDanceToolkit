@@ -87,6 +87,22 @@ public:
 	void setup(const ofVec3f& p, float w, float h, float d);
 };
 
+class Speaker: public LineObj {
+public:
+    static Speaker create(const ofVec3f& p)
+    {
+        Speaker s;
+        s.setup(p);
+        return s;
+    }
+    
+    void setup(const ofVec3f& p);
+    
+    static float getWidth();
+    static float getHeight();
+    static float getDepth();
+};
+
 class Cylinder: public LineObj {
 public:
     static Cylinder create(const ofVec3f& p, float r, float h)
@@ -132,10 +148,20 @@ struct Desk {
 	Desk();
 	void draw();
 
-	static float getDimension()
-	{
-		return 91.f;
-	}
+    //static float getDimension()
+    //{
+    //    return 60.f;
+    //}
+    static float getWidth()
+    {
+        return 60.f;
+    }
+    
+    static float getDepth()
+    {
+        return 180.f;
+    }
+    
 	static float getHeight()
 	{
 		return 84.f;
@@ -153,11 +179,11 @@ struct Deck {
 	}
 	static float getDepth()
 	{
-		return 180.f;
+		return 182.f;
 	}
 	static float getHeight()
 	{
-		return 70.f;
+		return 84.f;
 	}
 private:
 	Box mTop;

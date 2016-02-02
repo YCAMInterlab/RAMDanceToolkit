@@ -31,13 +31,14 @@
 #include "dpHakoVisMagnetPendulum.h"
 #include "dpHakoVisTornado.h"
 #include "dpHakoniwaTornado.h"
-#include "dpHakoniwaRawCamera.h"
+#include "dpRawCamera.h"
 
 #include "dpAllHakoniwaMove.h"
 
 #include "FloorLine.h"
 
 #include "dpDancerCue.h"
+#include "dpRemainedHakoniwaView.h"
 #include "DoSomething.h"
 
 class testApp : public ramBaseApp
@@ -74,4 +75,5 @@ public:
     
     DoSomething doSomething;
     dpDancerCue dancerCue;
+    dpRemainedHakoniwaView remainedView;
 };
