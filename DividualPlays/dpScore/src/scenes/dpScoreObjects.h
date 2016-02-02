@@ -34,6 +34,7 @@ inline void setStyle()
 	ofEnableDepthTest();
 }
 
+// all object will make from OpenGL coord(righthanded)
 struct Line {
 	static Line make(const ofVec3f& p0, const ofVec3f& p1)
 	{
@@ -105,21 +106,13 @@ public:
 
 class Cylinder: public LineObj {
 public:
-    static Cylinder create(const ofVec3f& p, float r, float h)
+    static Cylinder create(const ofVec3f& p, float r, float h, int res = 16)
     {
         Cylinder c;
-        c.setup(p, r, h);
+        c.setup(p, r, h, res);
         return c;
     }
-    
-    void setup(const ofVec3f& p, float r, float h);
-    
-    void draw() override;
-    
-private:
-    ofVec3f mCenter;
-    float mRadius;
-    float mHeight;
+    void setup(const ofVec3f& p, float r, float h, int res = 16);
 };
 
 class Rect : public LineObj {
@@ -132,6 +125,18 @@ public:
 	}
 
 	void setup(const ofVec3f& p, float w, float h);
+};
+
+// this object will make from center
+class Funnel : public LineObj {
+public:
+    static Funnel create(const ofVec3f& p, float r0, float r1, float h0, float h1)
+    {
+        Funnel f;
+        f.setup(p, r0, r1, h0, h1);
+        return f;
+    }
+    void setup(const ofVec3f& p, float r0, float r1, float h0, float h2);
 };
 
 inline void drawLine(const ofVec3f& c, const ofVec3f& v)

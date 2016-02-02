@@ -94,13 +94,11 @@ void ofApp::setup()
 	black->setDrawHeader(false);
 	black->setName("black");
 
-	auto flowChart = SceneBase::Ptr(new SceneFlowChart());
-	auto hakoMovies = SceneBase::Ptr(new SceneHakoMovies());
-
 	mSceneManager.add(black);
-	mSceneManager.add(flowChart);
-	mSceneManager.add(hakoMovies);
-
+	mSceneManager.add(SceneBase::Ptr(new SceneFlowChart()));
+#if !defined(DEBUG)
+	mSceneManager.add(SceneBase::Ptr(new SceneHakoMovies()));
+#endif
 	mSceneManager.change<SceneFlowChart>();
 	//mSceneManager.change<SceneHakoMovies>();
 

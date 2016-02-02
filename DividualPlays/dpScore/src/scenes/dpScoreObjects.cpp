@@ -100,22 +100,33 @@ void Speaker::setup(const ofVec3f& p)
 {
 	const float w0 {getWidth()};
 	const float w1 {23.f};
+	const float w2 {35.f};
 	const float h {getHeight()};
 	const float d {getDepth()};
 
 	const ofVec3f o(p.x + w0 * 0.5f, p.y + h * 0.5f, p.z + d * 0.5);
 	const float x0 {w0 * 0.5f};
 	const float x1 {w1 * 0.5f};
+	const float x2 {w2 * 0.5f};
 	const float y {h * 0.5f};
-	const float z {d * 0.5f};
-	const ofVec3f v0 {ofVec3f(-x1, -y, -z) + o};
-	const ofVec3f v1 {ofVec3f(x1, -y, -z) + o};
-	const ofVec3f v2 {ofVec3f(x0, -y,  z) + o};
-	const ofVec3f v3 {ofVec3f(-x0, -y,  z) + o};
-	const ofVec3f v4 {ofVec3f(-x1,  y, -z) + o};
-	const ofVec3f v5 {ofVec3f(x1,  y, -z) + o};
-	const ofVec3f v6 {ofVec3f(x0,  y,  z) + o};
-	const ofVec3f v7 {ofVec3f(-x0,  y,  z) + o};
+	const float z0 {d * 0.5f - 5.f};
+	const float z1 {d * 0.5f};
+	const float z2 {d * 0.5f};
+	const ofVec3f v0 {ofVec3f(-x1, -y, -z1) + o};
+	const ofVec3f v1 {ofVec3f(x1, -y, -z1) + o};
+	const ofVec3f v2 {ofVec3f(x0, -y, z0) + o};
+	const ofVec3f v3 {ofVec3f(-x0, -y, z0) + o};
+
+	const ofVec3f v4 {ofVec3f(-x1,  y, -z1) + o};
+	const ofVec3f v5 {ofVec3f(x1,  y, -z1) + o};
+	const ofVec3f v6 {ofVec3f(x0,  y, z0) + o};
+	const ofVec3f v7 {ofVec3f(-x0,  y, z0) + o};
+
+	const ofVec3f v8 {ofVec3f(-x2, y, z2) + o};
+    const ofVec3f v9 {ofVec3f(-x2, -y, z2) + o};
+	const ofVec3f v10 {ofVec3f(x2, -y, z2) + o};
+	const ofVec3f v11 {ofVec3f(x2, y, z2) + o};
+
 
 	mLines.clear();
 	mLines.push_back(Line::make(v0, v1));
@@ -132,6 +143,16 @@ void Speaker::setup(const ofVec3f& p)
 	mLines.push_back(Line::make(v5, v6));
 	mLines.push_back(Line::make(v6, v7));
 	mLines.push_back(Line::make(v7, v4));
+    
+    mLines.push_back(Line::make(v8, v9));
+    mLines.push_back(Line::make(v9, v10));
+    mLines.push_back(Line::make(v10, v11));
+    mLines.push_back(Line::make(v11, v8));
+    
+    mLines.push_back(Line::make(v7, v8));
+    mLines.push_back(Line::make(v3, v9));
+    mLines.push_back(Line::make(v2, v10));
+    mLines.push_back(Line::make(v6, v11));
 
 	mPoints.assign(mLines.size(), Point());
 	reset();
@@ -150,53 +171,27 @@ float Speaker::getDepth()
 	return 30.f;
 }
 
-void Cylinder::setup(const ofVec3f& p, float r, float h)
+void Cylinder::setup(const ofVec3f& p, float r, float h, int res)
 {
-	mCenter = p;
-	mRadius = r;
-	mHeight = h;
+	for (auto i : rep(res)) {
+		const float step {(float)TWO_PI / (float)res};
+		const float rad0 {(i + 0) * step};
+		const float rad1 {(i + 1) * step};
+		const float x0 {::cosf(rad0) * r};
+		const float z0 {::sinf(rad0) * r};
+		const float x1 {::cosf(rad1) * r};
+		const float z1 {::sinf(rad1) * r};
 
-	const ofVec3f o(p.x + r, p.y + h * 0.5f, p.z + r);
-	const float x {r};
-	const float y {h * 0.5f};
-	const float z {r};
-	const ofVec3f v0 {ofVec3f(-x, -y, -z) + o};
-	const ofVec3f v1 {ofVec3f(x, -y, -z) + o};
-	const ofVec3f v2 {ofVec3f(x, -y,  z) + o};
-	const ofVec3f v3 {ofVec3f(-x, -y,  z) + o};
-	const ofVec3f v4 {ofVec3f(-x,  y, -z) + o};
-	const ofVec3f v5 {ofVec3f(x,  y, -z) + o};
-	const ofVec3f v6 {ofVec3f(x,  y,  z) + o};
-	const ofVec3f v7 {ofVec3f(-x,  y,  z) + o};
-
-	mLines.clear();
-	mLines.push_back(Line::make(v0, v1));
-	mLines.push_back(Line::make(v1, v2));
-	mLines.push_back(Line::make(v2, v3));
-	mLines.push_back(Line::make(v3, v0));
-
-	mLines.push_back(Line::make(v0, v4));
-	mLines.push_back(Line::make(v1, v5));
-	mLines.push_back(Line::make(v2, v6));
-	mLines.push_back(Line::make(v3, v7));
-
-	mLines.push_back(Line::make(v4, v5));
-	mLines.push_back(Line::make(v5, v6));
-	mLines.push_back(Line::make(v6, v7));
-	mLines.push_back(Line::make(v7, v4));
+		// top circle
+		mLines.push_back(Line::make(ofVec3f(x0, h * 0.5f, z0) + p, ofVec3f(x1, h * 0.5f, z1) + p));
+		// bottom circle
+		mLines.push_back(Line::make(ofVec3f(x0, -h * 0.5f, z0) + p, ofVec3f(x1, -h * 0.5f, z1) + p));
+		// side face
+		mLines.push_back(Line::make(ofVec3f(x0, -h * 0.5f, z0) + p, ofVec3f(x0, h * 0.5f, z0) + p));
+	}
 
 	mPoints.assign(mLines.size(), Point());
 	reset();
-}
-
-void Cylinder::draw()
-{
-	if (LineObj::enableAnimation) {
-		LineObj::draw();
-	}
-	else {
-		ofDrawCylinder(mCenter, mRadius, mHeight);
-	}
 }
 
 void Rect::setup(const ofVec3f& p, float w, float h)
@@ -213,6 +208,37 @@ void Rect::setup(const ofVec3f& p, float w, float h)
 	mLines.push_back(Line::make(v1, v2));
 	mLines.push_back(Line::make(v2, v3));
 	mLines.push_back(Line::make(v3, v0));
+
+	mPoints.assign(mLines.size(), Point());
+	reset();
+}
+
+void Funnel::setup(const ofVec3f& p, float r0, float r1, float h0, float h1)
+{
+	mLines.clear();
+	auto res = 16;
+	for (auto i : rep(res)) {
+		const float step {(float)TWO_PI / (float)res};
+		const float rad0 {(i + 0) * step};
+		const float rad1 {(i + 1) * step};
+		const float x0 {::cosf(rad0) * r0};
+		const float z0 {::sinf(rad0) * r0};
+		const float x1 {::cosf(rad1) * r0};
+		const float z1 {::sinf(rad1) * r0};
+		const float x2 {::cosf(rad0) * r1};
+		const float z2 {::sinf(rad0) * r1};
+		const float x3 {::cosf(rad1) * r1};
+		const float z3 {::sinf(rad1) * r1};
+
+		// top circle
+		mLines.push_back(Line::make(ofVec3f(x0, 0.f, z0) + p, ofVec3f(x1, 0.f, z1) + p));
+        // side face
+		mLines.push_back(Line::make(ofVec3f(x0, 0.f, z0) + p, ofVec3f(x2, -h0, z2) + p));
+        // bottom circle
+		//mLines.push_back(Line::make(ofVec3f(x2, -h0, z2) + p, ofVec3f(x3, -h0, z3) + p));
+		// cylinder
+		mLines.push_back(Line::make(ofVec3f(x2, -h0, z2) + p, ofVec3f(x3, -h0 - h1, z3) + p));
+	}
 
 	mPoints.assign(mLines.size(), Point());
 	reset();
@@ -252,10 +278,11 @@ Deck::Deck()
 	const float legRad {2.5f};
 	const float legH {h - thickness};
 	mLegs.clear();
-	mLegs.push_back(Cylinder::create(ofVec3f(legRad, legH * 0.5f, legRad), legRad, legH));
-	mLegs.push_back(Cylinder::create(ofVec3f(w - legRad, legH * 0.5f, legRad), legRad, legH));
-	mLegs.push_back(Cylinder::create(ofVec3f(legRad, legH * 0.5f, d - legRad), legRad,  legH));
-	mLegs.push_back(Cylinder::create(ofVec3f(w - legRad, legH * 0.5f, d - legRad), legRad, legH));
+	const auto res = 10;
+	mLegs.push_back(Cylinder::create(ofVec3f(legRad, legH * 0.5f, legRad), legRad, legH, res));
+	mLegs.push_back(Cylinder::create(ofVec3f(w - legRad, legH * 0.5f, legRad), legRad, legH, res));
+	mLegs.push_back(Cylinder::create(ofVec3f(legRad, legH * 0.5f, d - legRad), legRad,  legH, res));
+	mLegs.push_back(Cylinder::create(ofVec3f(w - legRad, legH * 0.5f, d - legRad), legRad, legH, res));
 }
 
 void Deck::draw()
