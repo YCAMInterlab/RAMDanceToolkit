@@ -58,9 +58,11 @@ void dpDancerCue::update(){
 
 void dpDancerCue::draw(){
     
-    ofPoint offset = SCREEN_POSITIONS[SCREEN_C];
+    ofPushStyle();
     
     ofPushMatrix();
+    
+    ofPoint offset = SCREEN_POSITIONS[SCREEN_C];
     ofTranslate(offset.x,offset.y);
     
     for(auto &v:mRects){
@@ -68,7 +70,12 @@ void dpDancerCue::draw(){
     }
     
     ofPopMatrix();
+   
+    for(auto &v:mRects){
+        v.draw();
+    }
     
+    ofPopStyle();
 }
 
 ///// Rect

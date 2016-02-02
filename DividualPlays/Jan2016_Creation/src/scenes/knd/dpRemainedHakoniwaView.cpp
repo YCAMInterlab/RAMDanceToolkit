@@ -53,5 +53,13 @@ void dpRemainedHakoniwaView::showEndNum(){
     mEndBar.show();
 };
 void dpRemainedHakoniwaView::draw(){
+    
+    ofPushMatrix();
+    ofPoint offset = SCREEN_POSITIONS[SCREEN_C];
+    ofTranslate(offset.x,offset.y);
     mEndBar.draw(mEndNum);
+    ofPopMatrix();
+    
+    mEndBar.draw(mEndNum);
+    
 };
