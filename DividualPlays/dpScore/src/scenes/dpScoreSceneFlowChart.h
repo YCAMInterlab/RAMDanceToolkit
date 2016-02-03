@@ -18,6 +18,7 @@
 DP_SCORE_NAMESPACE_BEGIN
 
 class BaseNode;
+class FlowChartRDTK;
 
 class NodeSkeleton final : public ofxMot::Node {
 public:
@@ -55,9 +56,14 @@ public:
     ofPtr<BaseNode> getCurrentNode();
     ofPtr<BaseNode> getNextNode();
     
-    template<class T> ofPtr<T> getNode();
+    template<class T> ofPtr<T>  getNode();
+    template<class T> bool      isCurrentNode() const;
+    template<class T> bool      isNextNode() const;
+    
+    SkeletonVec&                getCopiedSkeletons();
     
     void incrementNode();
+    void sendLightingOsc(const string& s, float f);
     
     ofTrueTypeFont&     getFont();
     ofTrueTypeFont&     getFontSmall();
@@ -71,8 +77,8 @@ private:
     void setupNodeOrders();
     void setupScenes();
     
-    void updateTime();
-    void updateWithSkeleton();
+    void updateGlobalTime();
+    void copySkeletons();
     
     void drawScene();
     void drawToolKit();
@@ -83,18 +89,19 @@ private:
     void debugDrawCameras();
     void drawHUD();
     
-    template<class T> void      addNode();
-    
+    template<class T> ofPtr<T>  addNode();
+    template<class T> ofPtr<T>  addScene();
     const string&               getCurrentSceneName() const;
     ofPtr<FlowChartBaseScene>   getCurrentScene();
     template<class T> void      changeScene();
     void                        changeScene(const string& name);
-    template<class T>           shared_ptr<T> addScene();
+    template<class T> bool      isCurrentScene() const;
     
-	ofTrueTypeFont      mFont, mFontSmall;
-    ofxTrueTypeFontUC   mFontJP;
-    ofxOscSender        mOscSender;
-    ofCamera            mCamToolKit;
+    ofPtr<FlowChartRDTK>    mRDTK;
+	ofTrueTypeFont          mFont, mFontSmall;
+    ofxTrueTypeFontUC       mFontJP;
+    ofxOscSender            mOscSender;
+    ofCamera                mCamToolKit;
     
 	NodeMap                 mNodes;
     vector<vector<string>>  mNodeOrders;
@@ -124,14 +131,26 @@ ofPtr<T> SceneFlowChart::getNode()
     return dynamic_pointer_cast<T>(mNodes[getClassName<T>()]);
 }
 
-template<class T> void SceneFlowChart::addNode()
+template<class T> ofPtr<T> SceneFlowChart::addNode()
 {
-    mNodes[getClassName<T>()] = shared_ptr<T>(new T());
+    auto p = ofPtr<T>(new T());
+    mNodes[getClassName<T>()] = p;
+    return p;
 }
 
-template<class T> shared_ptr<T> SceneFlowChart::addScene()
+template<class T> bool SceneFlowChart::isCurrentNode() const
 {
-    auto p = shared_ptr<T>(new T());
+    return getCurrentNodeName() == getClassName<T>();
+}
+
+template<class T> bool SceneFlowChart::isNextNode() const
+{
+    return getNextNodeName() == getClassName<T>();
+}
+
+template<class T> ofPtr<T> SceneFlowChart::addScene()
+{
+    auto p = ofPtr<T>(new T());
     mScenes[getClassName<T>()] = p;
     return p;
 }
@@ -139,6 +158,11 @@ template<class T> shared_ptr<T> SceneFlowChart::addScene()
  template<class T> void SceneFlowChart::changeScene()
 {
     changeScene(getClassName<T>());
+}
+
+template<class T> bool SceneFlowChart::isCurrentScene() const
+{
+    return getCurrentSceneName() == getClassName<T>();
 }
 
 DP_SCORE_NAMESPACE_END

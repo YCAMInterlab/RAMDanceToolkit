@@ -29,8 +29,9 @@ void AnalyzeMean::update()
     
     if (mMaster) {
         if (mTotalAddition.f >= mMeanLimit) {
-            mWin0  = (mTotalAddition.i & 0b00000001) >> 0;
-            mWin1  = (mTotalAddition.i & 0b00000010) >> 1;
+            //mWin0  = (mTotalAddition.i & 0b00000001) >> 0;
+            //mWin1  = (mTotalAddition.i & 0b00000010) >> 1;
+            mWin0 = mWin1 = true;
             mWhich  = (mTotalAddition.i & 0b00111100) >> 2;
             
             if (getMH().getSceneController().getUniqueScenes().empty() == false) {

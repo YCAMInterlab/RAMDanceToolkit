@@ -14,7 +14,7 @@
 DP_SCORE_NAMESPACE_BEGIN
 
 struct FlowChartSceneCirculation : public FlowChartBaseScene {
-    void reset() override;
+    void reset(class SceneFlowChart* owner) override;
     void update(class SceneFlowChart* owner) override;
     void drawText(class SceneFlowChart* owner) override;
 };

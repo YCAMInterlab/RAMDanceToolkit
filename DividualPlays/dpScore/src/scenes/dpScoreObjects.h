@@ -148,17 +148,19 @@ public:
 
 class Water : public LineObj {
 public:
-    static Water create(float w, float d, int resX, int resZ)
+    static Water create(float w, float h, float d, int resX, int resZ)
     {
         Water water;
-        water.setup(w, d, resX, resZ);
+        water.setup(w, h, d, resX, resZ);
         return water;
     }
-    void setup(float w, float d, int resX, int resZ);
+    void setup(float w, float h, float d, int resX, int resZ);
     void update();
+    void draw() override;
     
 private:
-    float mW, mD;
+    float displacement(int i, int j, float t);
+    float mW, mH, mD;
     int mResX, mResZ;
 };
 

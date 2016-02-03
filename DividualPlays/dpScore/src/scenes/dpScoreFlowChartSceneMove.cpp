@@ -15,7 +15,7 @@ DP_SCORE_NAMESPACE_BEGIN
 
 void FlowChartSceneMove::update(SceneFlowChart* owner)
 {
-    super::update(owner);
+	super::update(owner);
 
 	float t {ofClamp(mLineTime, 0.f, mMoveSpan) / mMoveSpan};
 	t = easeInOutCubic(t);

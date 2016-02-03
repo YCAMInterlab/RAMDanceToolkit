@@ -11,6 +11,11 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
+void FlowChartSceneDebug::reset(SceneFlowChart* owner)
+{
+    owner->sendLightingOsc("Stage", 0.f);
+}
+
 void FlowChartSceneDebug::update(SceneFlowChart* owner)
 {
     super::update(owner);

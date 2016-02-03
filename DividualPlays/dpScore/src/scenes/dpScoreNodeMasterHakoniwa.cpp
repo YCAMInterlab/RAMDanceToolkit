@@ -43,7 +43,7 @@ NodeMasterHakoniwa::NodeMasterHakoniwa()
 		}
 	}
 
-	mWater.setup(getWidth(), getDepthFront(), 30, 12);
+	mWater.setup(getWidth(), getHeightTank() - 10.f, getDepthFront(), 30, 12);
 }
 
 NodeMasterHakoniwa::~NodeMasterHakoniwa()
@@ -87,12 +87,9 @@ void NodeMasterHakoniwa::customDraw()
 				}
 			}
 		}
-		{
-			ScopedTranslate trans(0.f, getHeightTank() - 10.f, 0.f);
-			mWater.update();
-            ofSetColor(ofColor::white);
-			mWater.draw();
-		}
+		mWater.update();
+		ofSetColor(ofColor::white);
+		mWater.draw();
 	}
 }
 
