@@ -35,7 +35,7 @@ private:
         
         void setup(){
             mHeightTarget = SINGLE_SCREEN_HEIGHT * 0.75;
-            mWidth = 60;
+            mWidth = 40;
             mMargin = 200;
         }
         
@@ -98,28 +98,7 @@ private:
     ramOscReceiveTag mReceiver;
     
     EndBar mEndBar;
-    
-    enum HAKONIWA{
-        STAGE,
-        MAG_LOOPER,
-        MAG_PENDULUM,
-        SERVO_PENDULUM,
-        GEAR,
-        STRUGGLE,
-        TORNADE,
-        NUM_HAKONIWA
-    };
-    
-    class HakoniwaCounterCircle{
-    public:
-        void setup(ofPoint pos);
-        void update();
-        void draw();
-    private:
-        float mRad = 100;
-        ofPoint mPos;
-    };
-    
+        
 };
 
 #endif /* defined(__RAMDanceToolkit__dpHakoniwaRemainView__) */

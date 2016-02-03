@@ -283,18 +283,16 @@ void testApp::setup()
 	
     sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
     sceneManager.setShowAllActors(false);
+    
+    //TO DO make draw call order manager.
+    // do something, dancer cue, something draw called after sceneManager draw method
+    afterBaseScene.setup();
 
-    doSomething.setup();
-    dancerCue.setup();
-    remainedView.setup();
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-    doSomething.update();
-    dancerCue.update();
-    remainedView.update();
     
     mSyphonClientManager->update();
     ramGetGUI().getSceneTabs().setPosition(0, -mouseY);
@@ -304,9 +302,7 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
-    doSomething.draw();
-    dancerCue.draw();
-    remainedView.draw();
+   
 }
 
 
