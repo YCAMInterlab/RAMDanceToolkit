@@ -11,6 +11,7 @@
 #include "dpScoreToolBox.h"
 #include "dpScoreObjects.h"
 #include "dpScoreNodeStage.h"
+#include "dpScoreStyle.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 

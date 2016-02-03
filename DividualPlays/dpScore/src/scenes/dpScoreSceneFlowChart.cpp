@@ -18,12 +18,6 @@
 #include "dpScoreNodeAudience.h"
 #include "dpScoreNodeCameraUnit.h"
 #include "dpScoreNodeComputer.h"
-#include "dpScoreScoped.h"
-#include "dpScoreToolBox.h"
-#include "ofxException.h"
-#include "ofxXmlSettings.h"
-#include "dpScoreSceneHakoMovies.h"
-#include "dpScoreMatrixStack.h"
 #include "dpScoreFlowChartSceneMove.h"
 #include "dpScoreFlowChartSceneDescription.h"
 #include "dpScoreFlowChartSceneTPS.h"
@@ -32,6 +26,13 @@
 #include "dpScoreFlowChartSceneMasterHakoniwa.h"
 #include "dpScoreFlowChartSceneDebug.h"
 #include "dpScoreFlowChartRDTK.h"
+#include "dpScoreScoped.h"
+#include "dpScoreToolBox.h"
+#include "dpScoreMatrixStack.h"
+#include "dpScoreStyle.h"
+#include "ofxException.h"
+#include "ofxXmlSettings.h"
+#include "dpScoreSceneHakoMovies.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 

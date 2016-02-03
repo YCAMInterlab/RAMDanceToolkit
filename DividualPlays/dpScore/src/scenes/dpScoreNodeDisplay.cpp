@@ -11,6 +11,7 @@
 #include "dpScoreToolBox.h"
 #include "dpScoreObjects.h"
 #include "dpScoreNodeStage.h"
+#include "dpScoreStyle.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -69,7 +70,7 @@ void NodeDisplay::customDraw()
 	setStyle(*this);
 	{
 		auto drawFbo = [&]() {
-				       if (LineObj::enableAnimation) return;
+				       if (CompoundLine::enableAnimation) return;
 				       ScopedStyle s;
 				       ofFill();
 				       ofSetColor(ofColor::black);
@@ -107,7 +108,7 @@ void NodeDisplay::customDraw()
 		const float wireOffset {20.f};
 
 		auto drawFbo = [&]() {
-				       if (LineObj::enableAnimation) return;
+				       if (CompoundLine::enableAnimation) return;
 				       ScopedStyle s;
 				       ofFill();
 				       ofSetColor(ofColor::white);
