@@ -66,6 +66,7 @@ class Monster_ext_2 : public Monster_ext
     ramCenteredActor mCentered;
 
     ofPoint mTrans;
+    bool mIsCentered = true;
     
 public:
     void setupControlPanel();
