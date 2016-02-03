@@ -12,15 +12,16 @@
 #include "dpScoreObjects.h"
 #include "dpScoreNodeStage.h"
 #include "dpScoreNodeHakoniwa.h"
+#include "dpScoreStyle.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
 NodeComputer::NodeComputer()
 {
 	title = "RAM Dance Toolkit";
-	titleJP = "RAM Dance Toolkit";
-	descriptionJP = "「RAM Dance Toolkit」\nRAMシステムはダンサーの動きにあわせて\n仮想の環境を変化させます";
-	descriptionJPFromHakoniwa = "「RAM Dance Toolkit」\n再度、箱庭内部の状態にあわせて\n仮想の環境を変化させます";
+	titleJP = "RAMシステム";
+	descriptionJP = "「RAMシステム」\nRAMシステムはダンサーの動きにあわせて\n仮想の環境を変化させます";
+	descriptionJPFromHakoniwa = "「RAMシステム」\n再度、箱庭内部の状態にあわせて\n仮想の環境を変化させます";
 
 	const float diff {NodeStage::kDepth - Deck::getDepth() * kNumDecks};
 	setGlobalPosition(-NodeStage::kWidth * 0.5f - Deck::getWidth() - 320.f,

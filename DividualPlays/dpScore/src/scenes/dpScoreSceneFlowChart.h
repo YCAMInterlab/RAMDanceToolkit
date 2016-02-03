@@ -13,10 +13,12 @@
 #include "ofxMotioner.h"
 #include "ofxTrueTypeFontUC.h"
 #include "ofxOsc.h"
+#include "dpScoreFlowChartBaseScene.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
 class BaseNode;
+class FlowChartRDTK;
 
 class NodeSkeleton final : public ofxMot::Node {
 public:
@@ -29,34 +31,54 @@ public:
 };
 
 class SceneFlowChart final : public SceneBodyBase<NodeSkeleton> {
+    friend class FlowChartBaseScene;
 public:
-	explicit SceneFlowChart() = default;
-	virtual ~SceneFlowChart() = default;
-	SceneFlowChart(const SceneFlowChart &) = delete;
-	SceneFlowChart& operator = (const SceneFlowChart&) = delete;
+    typedef map<string, ofPtr<BaseNode>> NodeMap;
+    typedef map<string, ofPtr<FlowChartBaseScene>> SceneMap;
+    
+	explicit SceneFlowChart()                           = default;
+	virtual ~SceneFlowChart()                           = default;
+	SceneFlowChart(const SceneFlowChart &)              = delete;
+	SceneFlowChart& operator = (const SceneFlowChart&)  = delete;
 
-	void initialize() override;
-	void shutDown() override;
-
-	void enter() override;
-	void exit() override;
-
+	void initialize()               override;
+	void shutDown()                 override;
+	void enter()                    override;
+	void exit()                     override;
 	void update(ofxEventMessage& m) override;
-	void draw() override;
+	void draw()                     override;
+	void keyPressed(int key)        override;
 
-	void keyPressed(int key) override;
-
+    NodeMap&        getNodes();
+    const NodeMap&  getNodes() const;
+    const string&   getCurrentNodeName() const;
+    const string&   getNextNodeName() const;
+    ofPtr<BaseNode> getCurrentNode();
+    ofPtr<BaseNode> getNextNode();
+    
+    template<class T> ofPtr<T>  getNode();
+    template<class T> bool      isCurrentNode() const;
+    template<class T> bool      isNextNode() const;
+    
+    SkeletonVec&                getCopiedSkeletons();
+    
+    void incrementNode();
+    void sendLightingOsc(const string& s, float f);
+    
+    ofTrueTypeFont&     getFont();
+    ofTrueTypeFont&     getFontSmall();
+    ofxTrueTypeFontUC&  getFontJP();
+    
+    const float kWidth  {1920.f};
+    const float kHeight {1080.f};
+    
 private:
     void setupNodes();
-    void setupOrders();
+    void setupNodeOrders();
     void setupScenes();
     
-    void updateTime();
-    void updateWithSkeleton();
-    void updateMoving();
-    void updateCirculation();
-    void updateDescription();
-    void updateMemory();
+    void updateGlobalTime();
+    void copySkeletons();
     
     void drawScene();
     void drawToolKit();
@@ -67,74 +89,40 @@ private:
     void debugDrawCameras();
     void drawHUD();
     
-    void changeScene(int index);
-    const string& getCurrentNodeName() const;
-    const string& getNextNodeName() const;
-    ofPtr<BaseNode> getCurrentNode();
-    ofPtr<BaseNode> getNextNode();
+    template<class T> ofPtr<T>  addNode();
+    template<class T> ofPtr<T>  addScene();
+    const string&               getCurrentSceneName() const;
+    ofPtr<FlowChartBaseScene>   getCurrentScene();
+    template<class T> void      changeScene();
+    void                        changeScene(const string& name);
+    template<class T> bool      isCurrentScene() const;
     
-    template <class T> ofPtr<T> getNode();
-    template<class T> void addNode();
+    ofPtr<FlowChartRDTK>    mRDTK;
+	ofTrueTypeFont          mFont, mFontSmall;
+    ofxTrueTypeFontUC       mFontJP;
+    ofxOscSender            mOscSender;
+    ofCamera                mCamToolKit;
     
-    enum SceneType {
-        SCENE_MOVE = 0,
-        SCENE_CIRCULATION,
-        SCENE_TPS,
-        SCENE_DESCRIPTION,
-        SCENE_MEMORY,
-        SCENE_DEBUG,
-        NUM_SCENES,
-    };
+	NodeMap                 mNodes;
+    vector<vector<string>>  mNodeOrders;
+    SceneMap                mScenes;
+    vector<string>          mSceneOrders;
+    SkeletonVec             mSkeletons;
+    vector<ofFbo>           mFbos; // double buffer
     
-    struct Property final {
-        Property() = default;
-        Property(float move, float idle, float line, float totalTime, bool easeyCam = false);
-        Property(const Property&) = default;
-        Property& operator = (const Property&) = default;
-        ~Property() = default;
-        
-        ofPtr<ofCamera> camera {shared_ptr<ofCamera>(new ofCamera())};
-        float moveSpan {2.f};
-        float idleSpan {2.f};
-        float lineSpan {1.f};
-        float totalTime {60.f};
-    };
     
-    const float kWidth {1920.f};
-    const float kHeight {1200.f};
+    const string    kOscAddrLighting    {"/dp/light/moving"};
+    const int       kNumFbos            {2};
+    int             mCurrentFbo         {kNumFbos};
+	int             mOrderIdx           {2};
+    int             mNodeIdx            {0};
+    int             mSceneIdx           {0};
     
-    const float kMainCamSpeed {0.025f};
-    const int kNumFbos {2};
+    float           mElapsedTime        {0.f};
+    long            mLastFrameNum       {0};
     
-	ofTrueTypeFont mFont, mFontSmall;
-    ofxTrueTypeFontUC mFontJP;
-    ofxOscSender mOscSender;
-    bool mOscInited {false};
-    const string kOscAddrLighting {"/dp/light/moving"};
-    
-	map<string, ofPtr<BaseNode>> mNodes;
-    vector<vector<string>> mOrders;
-    map<int, Property> mProperties;
-    SkeletonVec mSkeletons;
-    
-    vector<ofFbo> mFbos; // double buffer
-    
-    ofCamera mCamToolKit;
-    
-    ofNode mNodeCenter;
-    ofNode mNodeHead;
-    
-    int mCurrentScene {SCENE_MOVE};
-    int mCurrentFbo {kNumFbos};
-	int mOrderIdx {2};
-    int mNodeIdx {0};
-    
-    float mElapsedTime {0.f};
-    long mLastFrameNum {0};
-    float mTimeCamMove {0.f};
-    float mTimeCamRotation {0.f};
-    
-    bool mPaused {false};
+    bool            mOscInited          {false};
+    bool            mPaused             {false};
 };
 
 template <class T>
@@ -143,9 +131,38 @@ ofPtr<T> SceneFlowChart::getNode()
     return dynamic_pointer_cast<T>(mNodes[getClassName<T>()]);
 }
 
-template<class T> void SceneFlowChart::addNode()
+template<class T> ofPtr<T> SceneFlowChart::addNode()
 {
-    mNodes[getClassName<T>()] = shared_ptr<T>(new T());
+    auto p = ofPtr<T>(new T());
+    mNodes[getClassName<T>()] = p;
+    return p;
+}
+
+template<class T> bool SceneFlowChart::isCurrentNode() const
+{
+    return getCurrentNodeName() == getClassName<T>();
+}
+
+template<class T> bool SceneFlowChart::isNextNode() const
+{
+    return getNextNodeName() == getClassName<T>();
+}
+
+template<class T> ofPtr<T> SceneFlowChart::addScene()
+{
+    auto p = ofPtr<T>(new T());
+    mScenes[getClassName<T>()] = p;
+    return p;
+}
+
+ template<class T> void SceneFlowChart::changeScene()
+{
+    changeScene(getClassName<T>());
+}
+
+template<class T> bool SceneFlowChart::isCurrentScene() const
+{
+    return getCurrentSceneName() == getClassName<T>();
 }
 
 DP_SCORE_NAMESPACE_END
