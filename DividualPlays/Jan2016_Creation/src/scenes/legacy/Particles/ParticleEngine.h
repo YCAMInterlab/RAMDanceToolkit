@@ -82,7 +82,7 @@ public:
 		time = 1;
 		particle_velocity = 2;
 		particle_life = 2;
-		
+        		
 #define _S(src) #src
 		
 		const char *vs = _S(
@@ -177,7 +177,7 @@ public:
 		return fov;
 	}
 
-	void draw()
+	void draw(float pointSize)
 	{
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		ofPushStyle();
@@ -195,7 +195,7 @@ public:
 
 		shader.begin();
 		shader.setUniform1f("pixel_per_unit", pixel_per_unit);
-		shader.setUniform1f("point_size", 1);
+		shader.setUniform1f("point_size", pointSize);
 		
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(3 , GL_FLOAT, sizeof(ofVec3f) , &particle_buffer[0]);
@@ -210,7 +210,7 @@ public:
 	{
 		force_factors.push_back(o);
 	}
-	
+    
 protected:
 	
 	float time;
@@ -218,7 +218,7 @@ protected:
 	int particle_index;
 	vector<Particle> particles;
 	vector<ForceFactor*> force_factors;
-	
+
 };
 
 class Gravity : public ParticleEngine::ForceFactor

@@ -11,6 +11,10 @@
 void sceneController::clearScene()
 {
 	sendSimpleMessage(OSC_CLEAR_SCENE_ADDR);
+	for (int i = 0;i < 4;i++)
+	{
+		calledScenes[i].clear();
+	}
 }
 
 void sceneController::setup(string RDTK1_addr, string RDTK2_addr)
@@ -36,6 +40,19 @@ void sceneController::disableScene(string name, bool RDTK_isA)
 	m.addIntArg(0);
 	m.addIntArg(0);
 	sendMessageSelect(RDTK_isA ? addr_rdtk1 : addr_rdtk2, m);
+	
+	for (int i = 0;i < 4;i++)
+	{
+		vector<string>::iterator it = calledScenes[i].begin();
+		while (it != calledScenes[i].end()) {
+			if ((*it) == name)
+			{
+				it = calledScenes[i].erase(it);
+			}else{
+				++it;
+			}
+		}
+	}
 }
 
 void sceneController::setScene(string name, bool RDTK_is1, bool viewA, bool viewB)
@@ -44,10 +61,14 @@ void sceneController::setScene(string name, bool RDTK_is1, bool viewA, bool view
 	{
 		if (viewA) scene_rdtk1_a = name;
 		if (viewB) scene_rdtk1_b = name;
+		if (viewA) calledScenes[0].push_back(name);
+		if (viewB) calledScenes[3].push_back(name);
 	}else
 	{
 		if (viewA) scene_rdtk2_a = name;
 		if (viewB) scene_rdtk2_b = name;
+		if (viewA) calledScenes[1].push_back(name);
+		if (viewB) calledScenes[2].push_back(name);
 	}
 	
 	ofxOscMessage m;
@@ -65,6 +86,11 @@ void sceneController::setScene_both(string name, bool viewA, bool viewB)
 	if (viewB) scene_rdtk1_b = name;
 	if (viewA) scene_rdtk2_a = name;
 	if (viewB) scene_rdtk2_b = name;
+
+	if (viewA) calledScenes[0].push_back(name);
+	if (viewB) calledScenes[1].push_back(name);
+	if (viewA) calledScenes[2].push_back(name);
+	if (viewB) calledScenes[3].push_back(name);
 	
 	ofxOscMessage m;
 	m.setAddress(OSC_SET_SCENE_ADDR);
@@ -123,4 +149,12 @@ void sceneController::setButtonTune(string scene, string type)
 	m.setAddress(OSC_TUNE_ADDR + scene + "/" + type);
 	m.addIntArg(OFX_UI_WIDGET_BUTTON);
 	sendMessage(m);
+}
+
+void sceneController::setActorView(bool ando, bool kojiri, bool shimaji, bool miyashita)
+{
+	setToggleTune(SCENE_ACTOR, ACTOR_ANDO, ando);
+	setToggleTune(SCENE_ACTOR, ACTOR_KOJIRI, kojiri);
+	setToggleTune(SCENE_ACTOR, ACTOR_SHIMAJI, shimaji);
+	setToggleTune(SCENE_ACTOR, ACTOR_MIYASHITA, miyashita);
 }

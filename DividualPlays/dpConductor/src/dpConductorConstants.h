@@ -42,6 +42,7 @@
 #define SCENE_BROKEN	string("BrokenBody_ext")
 #define SCENE_BURST		string("BurstBody_ext")
 #define SCENE_UPSIDE	string("UpsideDown_ext")
+#define SCENE_PARTICLE  string("Particles")
 
 #define SCENE_METABALL	string("distanceMetaball")
 #define SCENE_DONUTS	string("Donuts_ext")
@@ -56,8 +57,9 @@
 #define HAKO_H_TORNADO			string("dpHTornado")
 #define HAKO_H_STAGE			string("dpHStage")
 #define HAKO_H_WORM				string("dpHWorm")
-#define HAKO_H_GEAR				string("dpHGearMovement")
+#define HAKO_H_GEAR				string("dpHGearMove")
 
+#define HAKO_RAWCAM         string("dpRawCamera")
 #define HAKO_SANDSTORM		string("dpVisSandStorm")
 #define HAKO_STRUGGLE		string("dpVisStruggle")
 #define HAKO_SERVOPENDULUM	string("dpVisServoPendulum")
@@ -65,7 +67,7 @@
 #define HAKO_TORNADO		string("dpVisTornado")
 #define HAKO_STAGE			string("dpVisStage")
 #define HAKO_WORM			string("dpVisWorm")
-#define HAKO_GEAR			string("dpVisGearMovement")
+#define HAKO_GEAR			string("dpVisGearMove")
 
 enum Joint
 {

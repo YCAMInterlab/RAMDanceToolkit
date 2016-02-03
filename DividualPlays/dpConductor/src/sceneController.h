@@ -23,6 +23,7 @@ public:
 	
 	void	setScene_both(string name, bool viewA, bool viewB);
 	void	setScene(string name, bool RDTK_isA, bool viewA, bool viewB);
+	void	setActorView(bool ando, bool kojiri, bool shimaji, bool miyashita);
 	void	disableScene(string name, bool RDTK_isA);
 	
 	void	clearExtractor(string scene);
@@ -40,6 +41,8 @@ public:
 	string scene_rdtk1_b;
 	string scene_rdtk2_a;
 	string scene_rdtk2_b;
+	
+	vector<string> calledScenes[4];
 };
 
 #endif /* sceneController_h */

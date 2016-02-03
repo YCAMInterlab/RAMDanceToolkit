@@ -14,11 +14,11 @@ ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_HIP);\
 ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_RIGHT_KNEE);\
 ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_LEFT_SHOULDER);\
 ns->addExtractor(SCENE_BIGBOX, ACTOR_MIYASHITA, JOINT_RIGHT_SHOULDER);\
-ns->addTuneF(SCENE_BIGBOX, "boxScale2", 15.82);\
-ns->addTuneF(SCENE_BIGBOX, "boxScale3", 41.14);\
-ns->addTuneF(SCENE_BIGBOX, "boxScale4", 15.82);\
-ns->addTuneF(SCENE_BIGBOX, "boxScale5", 44.3);\
-ns->addTuneF(SCENE_BIGBOX, "boxScale6", 44.3);
+ns->addTuneF(SCENE_BIGBOX, "boxScale2", 30.82);\
+ns->addTuneF(SCENE_BIGBOX, "boxScale3", 82.14);\
+ns->addTuneF(SCENE_BIGBOX, "boxScale4", 30.82);\
+ns->addTuneF(SCENE_BIGBOX, "boxScale5", 88.3);\
+ns->addTuneF(SCENE_BIGBOX, "boxScale6", 88.3);
 
 void dpConductor::setSections()
 {
@@ -105,12 +105,15 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_NECK);
 	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_LEFT_HIP);
 	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_RIGHT_KNEE);
-	ns->addTuneF(SCENE_LINE, "Curve1", 300.0);
+    ns->addTuneF(SCENE_LINE, "Curve0", 0.0);
+    ns->addTuneF(SCENE_LINE, "ext_to0", 800.0);
+    ns->addTuneF(SCENE_LINE, "ext_from0", 800.0);
+    ns->addTuneF(SCENE_LINE, "Curve1", 300.0);
 	ns->addTuneF(SCENE_LINE, "ext_to1", 800.0);
 	ns->addTuneF(SCENE_LINE, "ext_from1", 800.0);
-	ns->addTuneF(SCENE_FOURPT, "Twist resolution", 52.0);
-	ns->addTuneF(SCENE_FOURPT, "Twist extension width", 3.47);
-	ns->addTuneF(SCENE_FOURPT, "Twist extension height", 1.40);
+	ns->addTuneF(SCENE_FOURPT, "resolution", 52.0);
+	ns->addTuneF(SCENE_FOURPT, "width", 3.47);
+	ns->addTuneF(SCENE_FOURPT, "height", 1.40);
 	setActorViewing(ns, true, true, true, true);
 
 #pragma mark 0100
@@ -168,16 +171,18 @@ void dpConductor::setSections()
 #pragma mark - 0130 TODO:[DONE]ここ宮下さんだけモンスターインスタンス2つ作る
 	ns = setBasicSection("fp-0130-all-monster", true, true);
 	setCamActorScene(ns);
-	ns->addScene(SCENE_MONSTER, false, false, true, true);
-	ns->addScene(SCENE_MONSTER_2, true, true, false, false);
-	ns->addExtractor(SCENE_MONSTER, ACTOR_ANDO, JOINT_NECK);
-	ns->addExtractor(SCENE_MONSTER, ACTOR_KOJIRI, JOINT_NECK);
-	ns->addExtractor(SCENE_MONSTER, ACTOR_SHIMAJI, JOINT_NECK);
-	ns->addExtractor(SCENE_MONSTER, ACTOR_MIYASHITA, JOINT_NECK);
+	ns->addScene(SCENE_MONSTER_2, false, false, true, true);
+	ns->addScene(SCENE_MONSTER, true, true, false, false);
+	ns->addExtractor(SCENE_MONSTER_2, ACTOR_ANDO, JOINT_NECK);
+	ns->addExtractor(SCENE_MONSTER_2, ACTOR_KOJIRI, JOINT_NECK);
+	ns->addExtractor(SCENE_MONSTER_2, ACTOR_SHIMAJI, JOINT_NECK);
 	ns->addExtractor(SCENE_MONSTER_2, ACTOR_MIYASHITA, JOINT_NECK);
+	ns->addExtractor(SCENE_MONSTER, ACTOR_MIYASHITA, JOINT_NECK);
+    ns->addTuneT(SCENE_MONSTER_2, "Randomize Topology", true);
     ns->addTuneT(SCENE_MONSTER, "Randomize Topology", true);
 	setActorViewing(ns, true, true, true, true);
 
+#pragma mark 0135
     ns = setBasicSection("fp-0135-monster-randtopo", false, false);
     ns->addTuneT(SCENE_MONSTER, "Randomize Topology", true);
     ns->addTuneT(SCENE_MONSTER_2, "Randomize Topology", true);
@@ -210,8 +215,8 @@ void dpConductor::setSections()
 	setCamActorScene(ns);
 	ns->addScene(SCENE_DONUTS, true, true, true, true);
 	ns->addExtractor(SCENE_DONUTS, ACTOR_ANDO, JOINT_ABDOMEN);
-	ns->addExtractor(SCENE_DONUTS, ACTOR_KOJIRI, JOINT_LEFT_TOE);
-	ns->addExtractor(SCENE_DONUTS, ACTOR_KOJIRI, JOINT_RIGHT_TOE);
+	ns->addExtractor(SCENE_DONUTS, ACTOR_KOJIRI, JOINT_LEFT_ANKLE);
+	ns->addExtractor(SCENE_DONUTS, ACTOR_KOJIRI, JOINT_RIGHT_ANKLE);
 	ns->addExtractor(SCENE_DONUTS, ACTOR_SHIMAJI, JOINT_CHEST);
 	ns->addExtractor(SCENE_DONUTS, ACTOR_SHIMAJI, JOINT_ABDOMEN);
 	ns->addExtractor(SCENE_DONUTS, ACTOR_MIYASHITA, JOINT_LEFT_HAND);
@@ -348,6 +353,53 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_CHASER, ACTOR_MIYASHITA, JOINT_NECK);
 	setActorViewing(ns, true, true, true, true);
 
+	
+#pragma mark - fromMaster
+	
+#pragma mark master_line
+	ns = setBasicSection("fromMaster-line_ext", true, true);
+	setCamActorScene(ns);
+    ns->addScene(SCENE_LINE, false, true, false, true);
+	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_LEFT_ELBOW);
+	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_NECK);
+	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_ABDOMEN);
+	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
+	
+	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_LEFT_ELBOW);
+	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_NECK);
+	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_LEFT_HIP);
+	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_RIGHT_KNEE);
+	ns->addTuneF(SCENE_LINE, "Curve0", 000.0);
+	ns->addTuneF(SCENE_LINE, "ext_to0", 800.0);
+	ns->addTuneF(SCENE_LINE, "ext_from0", 800.0);
+	ns->addTuneF(SCENE_LINE, "Curve1", 300.0);
+	ns->addTuneF(SCENE_LINE, "ext_to1", 800.0);
+	ns->addTuneF(SCENE_LINE, "ext_from1", 800.0);
+	setActorViewing(ns, false, true, false, true);
+	
+#pragma mark master_metaball
+	ns = setBasicSection("fromMaster-metaball", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_METABALL, false, true, false, true);
+	string act[] = {ACTOR_ANDO, ACTOR_KOJIRI, ACTOR_SHIMAJI, ACTOR_MIYASHITA};
+	for (int i = 0;i < 4;i++)
+	{
+		ns->addExtractor(SCENE_METABALL, act[i], JOINT_NECK);
+		ns->addExtractor(SCENE_METABALL, act[i], JOINT_CHEST);
+		ns->addExtractor(SCENE_METABALL, act[i], JOINT_LEFT_WRIST);
+	}
+	setActorViewing(ns, true, true, true, true);
+	
+#pragma mark master_upsidedown
+	ns = setBasicSection("fromMaster-upsidedown", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_UPSIDE, false, true, false, true);
+	ns->addExtractor(SCENE_UPSIDE, ACTOR_KOJIRI		, JOINT_NECK);
+	ns->addExtractor(SCENE_UPSIDE, ACTOR_ANDO		, JOINT_NECK);
+	ns->addExtractor(SCENE_UPSIDE, ACTOR_SHIMAJI	, JOINT_NECK);
+	ns->addExtractor(SCENE_UPSIDE, ACTOR_MIYASHITA	, JOINT_NECK);
+	
+#pragma mark master_
 }
 
 

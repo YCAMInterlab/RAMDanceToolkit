@@ -17,11 +17,12 @@
 		5EF92F791C57B59C00F6916F /* dpSyphonClientManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EF92F6C1C57B59C00F6916F /* dpSyphonClientManager.cpp */; };
 		5EF92F7A1C57B59C00F6916F /* ofxBlur.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EF92F741C57B59C00F6916F /* ofxBlur.cpp */; };
 		601900591644E31F001930AA /* libram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B90AB31644E21400AF2156 /* libram.a */; };
+		920081DD1C618F840042A062 /* dpAfterBaseSceneDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 920081D71C618F840042A062 /* dpAfterBaseSceneDraw.cpp */; };
+		920081DE1C618F840042A062 /* dpDancerCue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 920081D91C618F840042A062 /* dpDancerCue.cpp */; };
+		920081DF1C618F840042A062 /* dpRemainedHakoniwaView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 920081DB1C618F840042A062 /* dpRemainedHakoniwaView.cpp */; };
 		9225EEBE1C588E0C00A7FD9A /* magnetLooper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9225EEBC1C588E0C00A7FD9A /* magnetLooper.cpp */; };
-		92C30EF91C5F38AF00257D14 /* dpDancerCue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92C30EF81C5F38AF00257D14 /* dpDancerCue.cpp */; };
 		92C30EFF1C5F7A5400257D14 /* dpHakoniwaGearMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92C30EFD1C5F7A5400257D14 /* dpHakoniwaGearMove.cpp */; };
 		92C30F021C5F7B8A00257D14 /* dpHakoVisGearMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92C30F001C5F7B8A00257D14 /* dpHakoVisGearMove.cpp */; };
-		92C30F051C5F7E9000257D14 /* dpRemainedHakoniwaView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92C30F031C5F7E9000257D14 /* dpRemainedHakoniwaView.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		C60249311C5D96010015DCDD /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C602491E1C5D96010015DCDD /* Syphon.framework */; };
 		C60249321C5D96010015DCDD /* SyphonNameboundClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C60249211C5D96010015DCDD /* SyphonNameboundClient.m */; };
@@ -175,7 +176,6 @@
 		5EF92F651C57B59C00F6916F /* dpIceMapFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpIceMapFace.h; sourceTree = "<group>"; };
 		5EF92F661C57B59C00F6916F /* dpIceMapGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpIceMapGrid.h; sourceTree = "<group>"; };
 		5EF92F671C57B59C00F6916F /* dpIceMapTri.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpIceMapTri.h; sourceTree = "<group>"; };
-		5EF92F691C57B59C00F6916F /* DoSomething.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoSomething.h; sourceTree = "<group>"; };
 		5EF92F6A1C57B59C00F6916F /* dpRibbon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpRibbon.h; sourceTree = "<group>"; };
 		5EF92F6B1C57B59C00F6916F /* dpServoPendulumThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpServoPendulumThread.h; sourceTree = "<group>"; };
 		5EF92F6C1C57B59C00F6916F /* dpSyphonClientManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpSyphonClientManager.cpp; sourceTree = "<group>"; };
@@ -189,6 +189,13 @@
 		5EF92F741C57B59C00F6916F /* ofxBlur.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBlur.cpp; sourceTree = "<group>"; };
 		5EF92F751C57B59C00F6916F /* ofxBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBlur.h; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
+		920081D61C618F840042A062 /* DoSomething.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoSomething.h; sourceTree = "<group>"; };
+		920081D71C618F840042A062 /* dpAfterBaseSceneDraw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpAfterBaseSceneDraw.cpp; sourceTree = "<group>"; };
+		920081D81C618F840042A062 /* dpAfterBaseSceneDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpAfterBaseSceneDraw.h; sourceTree = "<group>"; };
+		920081D91C618F840042A062 /* dpDancerCue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpDancerCue.cpp; sourceTree = "<group>"; };
+		920081DA1C618F840042A062 /* dpDancerCue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpDancerCue.h; sourceTree = "<group>"; };
+		920081DB1C618F840042A062 /* dpRemainedHakoniwaView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpRemainedHakoniwaView.cpp; sourceTree = "<group>"; };
+		920081DC1C618F840042A062 /* dpRemainedHakoniwaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpRemainedHakoniwaView.h; sourceTree = "<group>"; };
 		9225EEBC1C588E0C00A7FD9A /* magnetLooper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = magnetLooper.cpp; sourceTree = "<group>"; };
 		9225EEBD1C588E0C00A7FD9A /* magnetLooper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = magnetLooper.h; sourceTree = "<group>"; };
 		9225EEBF1C588F9700A7FD9A /* GeometryHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeometryHelpers.h; sourceTree = "<group>"; };
@@ -198,14 +205,10 @@
 		9225EEC41C588FBA00A7FD9A /* FixedBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBody.h; sourceTree = "<group>"; };
 		9225EEC51C588FBA00A7FD9A /* ThreePointFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreePointFlow.h; sourceTree = "<group>"; };
 		9225EED31C58DC9000A7FD9A /* dpAllHakoniwaMove.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpAllHakoniwaMove.h; sourceTree = "<group>"; };
-		92C30EF71C5F281C00257D14 /* dpDancerCue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpDancerCue.h; sourceTree = "<group>"; };
-		92C30EF81C5F38AF00257D14 /* dpDancerCue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpDancerCue.cpp; sourceTree = "<group>"; };
 		92C30EFD1C5F7A5400257D14 /* dpHakoniwaGearMove.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpHakoniwaGearMove.cpp; sourceTree = "<group>"; };
 		92C30EFE1C5F7A5400257D14 /* dpHakoniwaGearMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaGearMove.h; sourceTree = "<group>"; };
 		92C30F001C5F7B8A00257D14 /* dpHakoVisGearMove.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpHakoVisGearMove.cpp; sourceTree = "<group>"; };
 		92C30F011C5F7B8A00257D14 /* dpHakoVisGearMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoVisGearMove.h; sourceTree = "<group>"; };
-		92C30F031C5F7E9000257D14 /* dpRemainedHakoniwaView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpRemainedHakoniwaView.cpp; sourceTree = "<group>"; };
-		92C30F041C5F7E9000257D14 /* dpRemainedHakoniwaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpRemainedHakoniwaView.h; sourceTree = "<group>"; };
 		92C30F061C60511600257D14 /* KezDelay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KezDelay.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		C60249001C5D96010015DCDD /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -387,6 +390,7 @@
 		5EF92F531C57B59C00F6916F /* knd */ = {
 			isa = PBXGroup;
 			children = (
+				920081D51C618F840042A062 /* afterBaseSceneDraw */,
 				92C30EFD1C5F7A5400257D14 /* dpHakoniwaGearMove.cpp */,
 				92C30EFE1C5F7A5400257D14 /* dpHakoniwaGearMove.h */,
 				92C30F001C5F7B8A00257D14 /* dpHakoVisGearMove.cpp */,
@@ -395,10 +399,6 @@
 				5EF92F541C57B59C00F6916F /* _dpHakoVisServoPendulum.h */,
 				5EF92F561C57B59C00F6916F /* dpRawCamera.h */,
 				5EF92F571C57B59C00F6916F /* dpHakoniwaServoPendulum.h */,
-				92C30F041C5F7E9000257D14 /* dpRemainedHakoniwaView.h */,
-				92C30F031C5F7E9000257D14 /* dpRemainedHakoniwaView.cpp */,
-				92C30EF71C5F281C00257D14 /* dpDancerCue.h */,
-				92C30EF81C5F38AF00257D14 /* dpDancerCue.cpp */,
 				5EF92F581C57B59C00F6916F /* dpHakoniwaStruggle.h */,
 				5EF92F591C57B59C00F6916F /* dpHakoniwaTornado.h */,
 				5EF92F5A1C57B59C00F6916F /* dpHakoVisBug.h */,
@@ -434,7 +434,6 @@
 			children = (
 				92C30F061C60511600257D14 /* KezDelay.h */,
 				9225EEBF1C588F9700A7FD9A /* GeometryHelpers.h */,
-				5EF92F691C57B59C00F6916F /* DoSomething.h */,
 				5EF92F6A1C57B59C00F6916F /* dpRibbon.h */,
 				5EF92F6B1C57B59C00F6916F /* dpServoPendulumThread.h */,
 				5EF92F6C1C57B59C00F6916F /* dpSyphonClientManager.cpp */,
@@ -465,6 +464,20 @@
 				60B90AB31644E21400AF2156 /* libram.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		920081D51C618F840042A062 /* afterBaseSceneDraw */ = {
+			isa = PBXGroup;
+			children = (
+				920081D61C618F840042A062 /* DoSomething.h */,
+				920081D71C618F840042A062 /* dpAfterBaseSceneDraw.cpp */,
+				920081D81C618F840042A062 /* dpAfterBaseSceneDraw.h */,
+				920081D91C618F840042A062 /* dpDancerCue.cpp */,
+				920081DA1C618F840042A062 /* dpDancerCue.h */,
+				920081DB1C618F840042A062 /* dpRemainedHakoniwaView.cpp */,
+				920081DC1C618F840042A062 /* dpRemainedHakoniwaView.h */,
+			);
+			path = afterBaseSceneDraw;
 			sourceTree = "<group>";
 		};
 		9225EEBB1C588E0C00A7FD9A /* cocaina */ = {
@@ -1148,6 +1161,7 @@
 				C6C22F451C54629E002B38EC /* BaseConstrains.cpp in Sources */,
 				C6C22F501C54629E002B38EC /* RagdollScene.cpp in Sources */,
 				D2A4E44B1C58DA0700BEAA84 /* Monster_ext.cpp in Sources */,
+				920081DF1C618F840042A062 /* dpRemainedHakoniwaView.cpp in Sources */,
 				C6C22F4D1C54629E002B38EC /* KeplerBtShapeDrawer.cpp in Sources */,
 				D2A4E4481C58D0C700BEAA84 /* HastyChase_ext.cpp in Sources */,
 				C64C2FC41C54E4B9005E9BB2 /* dp16_camera_controller.cpp in Sources */,
@@ -1157,7 +1171,6 @@
 				C6C22F4A1C54629E002B38EC /* btPicker.cpp in Sources */,
 				C60249361C5D96010015DCDD /* ofxSyphonServerDirectory.mm in Sources */,
 				C6C22F471C54629E002B38EC /* ChainBtDynamics.cpp in Sources */,
-				92C30EF91C5F38AF00257D14 /* dpDancerCue.cpp in Sources */,
 				C60249321C5D96010015DCDD /* SyphonNameboundClient.m in Sources */,
 				D278BA901C59F42E00B2951E /* virtualSteppingMotor.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
@@ -1167,8 +1180,8 @@
 				C6C22F4B1C54629E002B38EC /* Kepler.cpp in Sources */,
 				92C30EFF1C5F7A5400257D14 /* dpHakoniwaGearMove.cpp in Sources */,
 				C60249331C5D96010015DCDD /* README.md in Sources */,
+				920081DE1C618F840042A062 /* dpDancerCue.cpp in Sources */,
 				92C30F021C5F7B8A00257D14 /* dpHakoVisGearMove.cpp in Sources */,
-				92C30F051C5F7E9000257D14 /* dpRemainedHakoniwaView.cpp in Sources */,
 				C6A982B71C55A4670055D47B /* BrokenBody_ext.cpp in Sources */,
 				C6C22F491C54629E002B38EC /* ChainObject.cpp in Sources */,
 				C6C22F641C5476D4002B38EC /* middleScene.cpp in Sources */,
@@ -1186,6 +1199,7 @@
 				5EF92F781C57B59C00F6916F /* twistFinder.cpp in Sources */,
 				C6C22F4E1C54629E002B38EC /* KeplerCube.cpp in Sources */,
 				C6A982BD1C55C3770055D47B /* dp16_ramActorTranslator.cpp in Sources */,
+				920081DD1C618F840042A062 /* dpAfterBaseSceneDraw.cpp in Sources */,
 				C6C22F551C54629E002B38EC /* MarchingCubes.cpp in Sources */,
 				C60249351C5D96010015DCDD /* ofxSyphonServer.mm in Sources */,
 				5EF92F7A1C57B59C00F6916F /* ofxBlur.cpp in Sources */,

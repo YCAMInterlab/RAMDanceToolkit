@@ -18,12 +18,12 @@ void dpConductionGUI::setup()
 	sceneList.autoSizeToFitWidgets();
 	
 	dynamicUI.setup();
-	dynamicUI.setPosition(600, 10);
+	dynamicUI.setPosition(430, 10);
 	dynamicUI.clearWidgets();
 	
 	gui.setFontSize(OFX_UI_FONT_LARGE, 48);
 	gui.setup();
-	gui.setPosition(300, 10);
+	gui.setPosition(200, 10);
 	
 	gui.addToggle("Exclusive", &bExclusive);
 	gui.addButton("Enable", false);

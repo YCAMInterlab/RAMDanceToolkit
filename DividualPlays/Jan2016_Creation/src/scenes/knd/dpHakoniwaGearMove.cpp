@@ -22,7 +22,7 @@ void dpHakoniwaGearMove::setupControlPanel(){
     mMaxSpeed = 13000;
     mMinSpeed = 0;
 
-    mSpeedScale = 50;
+    mSpeedScale = 200;
     
     mGearUpdateSpan = 0.5;
     
@@ -45,7 +45,7 @@ void dpHakoniwaGearMove::setupControlPanel(){
     
     ofAddListener(panel->newGUIEvent, this, &dpHakoniwaGearMove::onPanelChanged);
     motionExtractor.setupControlPanel(this,ofPoint(340,30));
-    motionExtractor.load("motionExt_dpHakoniwaGearMove.xml");
+   // motionExtractor.load("motionExt_dpHakoniwaGearMove.xml");
     
     mParameterChangeThresh = 10;
     

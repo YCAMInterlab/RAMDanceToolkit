@@ -32,7 +32,7 @@ public:
         ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoniwaTornado::onPanelChanged);
         
         mMotionExtractor.setupControlPanel(this,ofPoint(330,30));
-        mMotionExtractor.load("motionExt_dpHakoniwaTornado.xml");
+    //  mMotionExtractor.load("motionExt_dpHakoniwaTornado.xml");
         
     }
     void setup(){

@@ -89,8 +89,10 @@ distanceMetaball mDistanceMetaball;
 #include "middleScene.h"
 MiddleScene mMiddleScene;
 
+/*
 #include "MixMonsterScene.h"
 MixMonsterScene mMixMonsterScene;
+*/
 
 /* ==== Legacy external ==== */
 #include "lineDrawing_ext.h"
@@ -115,8 +117,10 @@ HastyChase_ext mHastyChase_ext;
 Monster_ext mMonster_ext;
 Monster_ext_2 mMonster_ext2;
 
+/*
 #include "MixMonsterScene_ext.h"
 MixMonsterScene_ext mMixMonsterScene_ext;
+*/
 
 #include "ThreePoints_ext.h"
 ThreePoints_ext mThreePoints_ext;
@@ -215,7 +219,7 @@ void testApp::setup()
     sceneManager.addScene(mHastyChase_ext.getPtr());
     sceneManager.addScene(mMonster_ext.getPtr());
 	sceneManager.addScene(mMonster_ext2.getPtr());
-    sceneManager.addScene(mMixMonsterScene_ext.getPtr());
+   // sceneManager.addScene(mMixMonsterScene_ext.getPtr());
     sceneManager.addScene(mThreePoints_ext.getPtr());
     sceneManager.addScene(mDonuts_ext.getPtr());
 	sceneManager.addScene(floor_ext.getPtr());
@@ -251,7 +255,7 @@ void testApp::setup()
 
 	//Kumagai
 	sceneManager.addScene(mMiddleScene.getPtr());
-	sceneManager.addScene(mMixMonsterScene.getPtr());
+	//sceneManager.addScene(mMixMonsterScene.getPtr());
     
     sceneManager.addScene(rawCamera.getPtr());
     
@@ -283,18 +287,16 @@ void testApp::setup()
 	
     sceneManager.allocateFbos(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT);
     sceneManager.setShowAllActors(false);
+    
+    //TO DO make draw call order manager.
+    // do something, dancer cue, something draw called after sceneManager draw method
+    afterBaseScene.setup();
 
-    doSomething.setup();
-    dancerCue.setup();
-    remainedView.setup();
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
-    doSomething.update();
-    dancerCue.update();
-    remainedView.update();
     
     mSyphonClientManager->update();
     ramGetGUI().getSceneTabs().setPosition(0, -mouseY);
@@ -304,9 +306,7 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
-    doSomething.draw();
-    dancerCue.draw();
-    remainedView.draw();
+   
 }
 
 

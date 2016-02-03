@@ -37,9 +37,7 @@
 
 #include "FloorLine.h"
 
-#include "dpDancerCue.h"
-#include "dpRemainedHakoniwaView.h"
-#include "DoSomething.h"
+#include "dpAfterBaseSceneDraw.h"
 
 class testApp : public ramBaseApp
 {
@@ -73,7 +71,5 @@ public:
     dpHakoniwaServoPendulum     hakoniwaServoPendulum;
     dpAllHakoniwaMove           allHakoniwaMove;
     
-    DoSomething doSomething;
-    dpDancerCue dancerCue;
-    dpRemainedHakoniwaView remainedView;
+    dpAfterBaseSceneDraw afterBaseScene;
 };

@@ -108,7 +108,17 @@ void Donuts_ext::drawDonuts(const ramNodeArray &nodeArray)
     {
         for (int index=0; index<nodeArray.getNumNode(); index++)
         {
-            if (mNodeVisibility[index] == false) continue;
+			
+			bool isView = false;
+			for (int j = 0;j < mMex.getNumPort();j++)
+			{
+				if ((nodeArray.getName() == mMex.getActorNameAt(j)) &&
+					(nodeArray.getNode(index).getID() == mMex.getJointIdAt(j)))
+				{
+					isView = true;
+				}
+			}
+			if (!isView) continue;
             
             for (int n=0; n<mNumDuplicate; n++)
             {

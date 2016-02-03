@@ -181,7 +181,7 @@ public:
         
         if(enable){
             mStepManager.setStepperAll(true);
-            mStepManager.run(11000, true);
+            mStepManager.run(12000, true);
             mStepManager.setStepperAll(false);
         }else{
             mStepManager.setStepperAll(true);
@@ -205,6 +205,7 @@ public:
     
     void sendMaglooper(bool enable){
         if(enable){
+            
             if(ofGetFrameNum() % 10 == 0){
                 
                 ofxOscMessage m;
@@ -222,6 +223,7 @@ public:
                 
                 mSender[MAG_LOOPER_2].sendMessage(n);
             }
+            
         }else{
             
             ofxOscMessage m;
@@ -253,6 +255,9 @@ public:
     }
     
     void update(){
+        sendMaglooper(mIsMagLooper);
+        sendSandStorm(mIsSandStorm);
+        sendMagPendulum(mIsMagPendulum);
     }
     void receiveOsc(){}
     

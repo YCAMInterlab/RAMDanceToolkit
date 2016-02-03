@@ -11,7 +11,7 @@
 void dpHakoniwaMagnetPendulum::setupControlPanel() {
     
     mMotionExtractor.setupControlPanel(this,ofPoint(340,30));
-    mMotionExtractor.load("motionExt_dpHMagPendulum.xml");
+   // mMotionExtractor.load("motionExt_dpHMagPendulum.xml");
     ramGetGUI().addToggle("Test mode", &bTestMode);
     
     ramGetGUI().addSeparator();
