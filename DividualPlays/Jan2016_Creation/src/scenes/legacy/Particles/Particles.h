@@ -30,6 +30,9 @@ class Particles : public ramBaseScene
 	
 	ramFilterEach<ramGhost> ghostFilters;
     bool useGhost;
+    
+    float alpha = 200;
+    float pointSize = 1;
 	
 public:
 	
@@ -42,6 +45,9 @@ public:
 		ramGetGUI().addSlider("Life", 0.1, 10.0, &pe.particle_life);
 		ramGetGUI().addSlider("Velocity", 0.1, 5, &pe.particle_velocity);
 		ramGetGUI().addSlider("Gravity", -0.1, 0.1, &gravity->force);
+        ramGetGUI().addSlider("Alpha", 30, 255, &alpha);
+        ramGetGUI().addSlider("PointSize", 1, 10, &pointSize);
+        
 	}
 	
 	void setup()
@@ -52,6 +58,7 @@ public:
 		floor = new Floor;
 		pe.addForceFactor(gravity);
 		pe.addForceFactor(floor);
+        
 	}
 	
 	
@@ -85,8 +92,8 @@ public:
 		ofPushStyle();
 		ofNoFill();
 
-		ofSetColor(255, 30);
-		pe.draw();
+		ofSetColor(255, alpha);
+		pe.draw(pointSize);
 		
 		ofPopStyle();
 		glPopAttrib();
