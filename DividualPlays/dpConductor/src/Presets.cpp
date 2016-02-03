@@ -112,6 +112,9 @@ void dpConductor::setSections()
 	ns->addTuneF(SCENE_LINE, "Curve1", 300.0);
 	ns->addTuneF(SCENE_LINE, "ext_to1", 800.0);
 	ns->addTuneF(SCENE_LINE, "ext_from1", 800.0);
+	ns->addTuneF(SCENE_FOURPT, "Twist resolution", 52.0);
+	ns->addTuneF(SCENE_FOURPT, "Twist extension width", 3.47);
+	ns->addTuneF(SCENE_FOURPT, "Twist extension height", 1.40);
 	setActorViewing(ns, true, true, true, true);
 	
 #pragma mark 0100
@@ -145,6 +148,9 @@ void dpConductor::setSections()
 	ns->addTuneF(SCENE_LINE, "Curve1", 300.0);
 	ns->addTuneF(SCENE_LINE, "ext_to1", 800.0);
 	ns->addTuneF(SCENE_LINE, "ext_from1", 800.0);
+	ns->addTuneF(SCENE_FOURPT, "Twist resolution", 52.0);
+	ns->addTuneF(SCENE_FOURPT, "Twist extension width", 3.47);
+	ns->addTuneF(SCENE_FOURPT, "Twist extension height", 1.40);
 	setActorViewing(ns, true, true, true, true);
 	
 #pragma mark 0120
