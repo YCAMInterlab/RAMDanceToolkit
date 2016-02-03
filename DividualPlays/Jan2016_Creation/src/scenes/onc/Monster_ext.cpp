@@ -7,6 +7,7 @@
 //
 
 #include "Monster_ext.h"
+#include "ramCenteredActor.h"
 
 void Monster_ext::setupControlPanel()
 {
@@ -211,4 +212,50 @@ void Monster_ext::drawActor(const ramActor &actor)
         }
     }
     ofPopStyle();
+}
+
+void Monster_ext_2::setupControlPanel(){
+    Monster_ext::setupControlPanel();
+    
+    ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+    panel->addSlider("x",-1000, 1000, &mTrans.x, 200, 20);
+    panel->addSlider("y",-1000, 1000, &mTrans.y, 200, 20);
+    panel->addSlider("z",0, 2000, &mTrans.z, 200, 20);
+}
+
+void Monster_ext_2::drawActor(const ramActor &actor)
+{
+    bool bActEnable = false;
+    for (int q = 0;q < mex.getNumPort();q++)
+        if (mex.getActorNameAt(q) == actor.getName()) bActEnable = true;
+    
+    if (!bActEnable) return;
+    
+    monsterArray = mCentered.update(actor);
+    
+    for (int i=0; i < treeSwap.size(); i++)
+    {
+        if(treeSwap[i] != -1)
+        {
+            monsterArray.getNode(i).setParent(monsterArray.getNode(treeSwap[i]));
+            monsterArray.getNode(i).setScale(lengthScale[i]);
+        }
+    }
+    
+    ofPushMatrix();
+    ofTranslate(mTrans);
+    ofPushStyle();
+    ofNoFill();
+    for (int i=0; i<monsterArray.getNumNode(); i++)
+    {
+        ramNode &node = monsterArray.getNode(i);
+        ofSetColor(255);
+        ofSetLineWidth(2);
+        if(node.hasParent())
+        {
+            ofLine(node, *node.getParent());
+        }
+    }
+    ofPopStyle();
+    ofPopMatrix();
 }
