@@ -52,7 +52,10 @@ void dpConductor::draw()
 		{
 			list += sceneCon->calledScenes[i][j] + "\n";
 		}
-		ofDrawBitmapString(list, i * 200, 0);
+		ofDrawBitmapString(list, 5 + i * 200, 0);
+        ofNoFill();
+        ofRect(i * 200, -30, 2, 200, 70);
+        ofFill();
 	}
 	
 	ofPopMatrix();
