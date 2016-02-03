@@ -105,7 +105,10 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_NECK);
 	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_LEFT_HIP);
 	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_RIGHT_KNEE);
-	ns->addTuneF(SCENE_LINE, "Curve1", 300.0);
+    ns->addTuneF(SCENE_LINE, "Curve0", 0.0);
+    ns->addTuneF(SCENE_LINE, "ext_to0", 800.0);
+    ns->addTuneF(SCENE_LINE, "ext_from0", 800.0);
+    ns->addTuneF(SCENE_LINE, "Curve1", 300.0);
 	ns->addTuneF(SCENE_LINE, "ext_to1", 800.0);
 	ns->addTuneF(SCENE_LINE, "ext_from1", 800.0);
 	ns->addTuneF(SCENE_FOURPT, "resolution", 52.0);
@@ -356,6 +359,7 @@ void dpConductor::setSections()
 #pragma mark master_line
 	ns = setBasicSection("fromMaster-line_ext", true, true);
 	setCamActorScene(ns);
+    ns->addScene(SCENE_LINE, false, true, false, true);
 	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_LEFT_ELBOW);
 	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_NECK);
 	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_ABDOMEN);
@@ -365,7 +369,7 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_NECK);
 	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_LEFT_HIP);
 	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_RIGHT_KNEE);
-	ns->addTuneF(SCENE_LINE, "Curve0", 300.0);
+	ns->addTuneF(SCENE_LINE, "Curve0", 000.0);
 	ns->addTuneF(SCENE_LINE, "ext_to0", 800.0);
 	ns->addTuneF(SCENE_LINE, "ext_from0", 800.0);
 	ns->addTuneF(SCENE_LINE, "Curve1", 300.0);

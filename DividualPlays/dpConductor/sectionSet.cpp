@@ -143,23 +143,6 @@ void sectionSet::doSection()
 		_scene->setScene(sceneList[i].name, false, sceneList[i].RDTK2_A, sceneList[i].RDTK2_B);
 	}
 	
-	//Extractorの登録
-	for(int i = 0;i < extList.size();i++)
-		_scene->setExtractor(extList[i].scene, extList[i].actor, extList[i].jt);
-	
-	//Tuneの呼び出し
-	for (int i = 0;i < tuneList.size();i++)
-	{
-		if (tuneList[i].type == OFX_UI_WIDGET_BUTTON)
-			_scene->setButtonTune(tuneList[i].scene, tuneList[i].typeName);
-		
-		if (tuneList[i].type == OFX_UI_WIDGET_TOGGLE)
-			_scene->setToggleTune(tuneList[i].scene, tuneList[i].typeName, tuneList[i].valT);
-		
-		if (tuneList[i].type == OFX_UI_WIDGET_SLIDER_H)
-			_scene->setFloatTune(tuneList[i].scene, tuneList[i].typeName, tuneList[i].valF);
-	}
-	
 	for (int i = 0;i < envList.size();i++)
 	{
 		envSet *e = &envList[i];
@@ -178,6 +161,23 @@ void sectionSet::doSection()
 		if (e->envCmd == ENV_CMD_DRAWACT)
 			_environment->setActorDraw(e->actorName, e->drawAct);
 	}
+    
+    //Extractorの登録
+    for(int i = 0;i < extList.size();i++)
+        _scene->setExtractor(extList[i].scene, extList[i].actor, extList[i].jt);
+    
+    //Tuneの呼び出し
+    for (int i = 0;i < tuneList.size();i++)
+    {
+        if (tuneList[i].type == OFX_UI_WIDGET_BUTTON)
+            _scene->setButtonTune(tuneList[i].scene, tuneList[i].typeName);
+        
+        if (tuneList[i].type == OFX_UI_WIDGET_TOGGLE)
+            _scene->setToggleTune(tuneList[i].scene, tuneList[i].typeName, tuneList[i].valT);
+        
+        if (tuneList[i].type == OFX_UI_WIDGET_SLIDER_H)
+            _scene->setFloatTune(tuneList[i].scene, tuneList[i].typeName, tuneList[i].valF);
+    }
 }
 
 void sectionSet::switchHakoniwa(string nameHakoniwa, bool enable, bool A, bool B)
