@@ -208,6 +208,8 @@ void testApp::setup()
     mSyphonClientManager = &dpSyphonClientManager::instance();
     mSyphonClientManager->setup();
 	
+    sceneManager.addScene(rawCamera.getPtr());
+    
 	sceneManager.addScene(mCameraController.getPtr());
 	sceneManager.addScene(mRamActorTranslator.getPtr());
 	
@@ -256,8 +258,6 @@ void testApp::setup()
 	//Kumagai
 	sceneManager.addScene(mMiddleScene.getPtr());
 	//sceneManager.addScene(mMixMonsterScene.getPtr());
-    
-    sceneManager.addScene(rawCamera.getPtr());
     
     sceneManager.addScene(hakoniwaServoPendulum.getPtr());
     sceneManager.addScene(visServoPendulum.getPtr());
