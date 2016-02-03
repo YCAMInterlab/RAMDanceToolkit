@@ -21,6 +21,7 @@
 		920081DE1C618F840042A062 /* dpDancerCue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 920081D91C618F840042A062 /* dpDancerCue.cpp */; };
 		920081DF1C618F840042A062 /* dpRemainedHakoniwaView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 920081DB1C618F840042A062 /* dpRemainedHakoniwaView.cpp */; };
 		9225EEBE1C588E0C00A7FD9A /* magnetLooper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9225EEBC1C588E0C00A7FD9A /* magnetLooper.cpp */; };
+		927C44BA1C61DABB00ABDB05 /* dpBDisplayOutline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 927C44B81C61DABB00ABDB05 /* dpBDisplayOutline.cpp */; };
 		92C30EFF1C5F7A5400257D14 /* dpHakoniwaGearMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92C30EFD1C5F7A5400257D14 /* dpHakoniwaGearMove.cpp */; };
 		92C30F021C5F7B8A00257D14 /* dpHakoVisGearMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92C30F001C5F7B8A00257D14 /* dpHakoVisGearMove.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
@@ -205,6 +206,8 @@
 		9225EEC41C588FBA00A7FD9A /* FixedBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBody.h; sourceTree = "<group>"; };
 		9225EEC51C588FBA00A7FD9A /* ThreePointFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreePointFlow.h; sourceTree = "<group>"; };
 		9225EED31C58DC9000A7FD9A /* dpAllHakoniwaMove.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dpAllHakoniwaMove.h; sourceTree = "<group>"; };
+		927C44B81C61DABB00ABDB05 /* dpBDisplayOutline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpBDisplayOutline.cpp; sourceTree = "<group>"; };
+		927C44B91C61DABB00ABDB05 /* dpBDisplayOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpBDisplayOutline.h; sourceTree = "<group>"; };
 		92C30EFD1C5F7A5400257D14 /* dpHakoniwaGearMove.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpHakoniwaGearMove.cpp; sourceTree = "<group>"; };
 		92C30EFE1C5F7A5400257D14 /* dpHakoniwaGearMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaGearMove.h; sourceTree = "<group>"; };
 		92C30F001C5F7B8A00257D14 /* dpHakoVisGearMove.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpHakoVisGearMove.cpp; sourceTree = "<group>"; };
@@ -472,6 +475,8 @@
 				920081D61C618F840042A062 /* DoSomething.h */,
 				920081D71C618F840042A062 /* dpAfterBaseSceneDraw.cpp */,
 				920081D81C618F840042A062 /* dpAfterBaseSceneDraw.h */,
+				927C44B81C61DABB00ABDB05 /* dpBDisplayOutline.cpp */,
+				927C44B91C61DABB00ABDB05 /* dpBDisplayOutline.h */,
 				920081D91C618F840042A062 /* dpDancerCue.cpp */,
 				920081DA1C618F840042A062 /* dpDancerCue.h */,
 				920081DB1C618F840042A062 /* dpRemainedHakoniwaView.cpp */,
@@ -1191,6 +1196,7 @@
 				C6C22F541C54629E002B38EC /* distanceMetaball.cpp in Sources */,
 				D283B3181C58809D00B0E900 /* UpsideDown_ext.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
+				927C44BA1C61DABB00ABDB05 /* dpBDisplayOutline.cpp in Sources */,
 				5EF92F761C57B59C00F6916F /* dpHakoniwaMagnetPendulum.cpp in Sources */,
 				D278BA861C59EE3600B2951E /* Donuts_ext.cpp in Sources */,
 				5EF92F771C57B59C00F6916F /* dpHakoniwaSand.cpp in Sources */,

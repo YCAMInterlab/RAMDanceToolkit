@@ -13,9 +13,10 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-struct FlowChartSceneDebug : public FlowChartBaseScene {
-    void update(class SceneFlowChart* owner) override;
-    void drawText(class SceneFlowChart* owner) override;
+struct FlowChartSceneDebug: public FlowChartBaseScene {
+	void reset(class SceneFlowChart* owner) override;
+	void update(class SceneFlowChart* owner) override;
+	void drawText(class SceneFlowChart* owner) override;
 };
 
 DP_SCORE_NAMESPACE_END

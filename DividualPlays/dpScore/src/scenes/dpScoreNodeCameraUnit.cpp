@@ -13,6 +13,7 @@
 #include "dpScoreNodeStage.h"
 #include "dpScoreNodeHakoniwa.h"
 #include "dpScoreNodeComputer.h"
+#include "dpScoreStyle.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 

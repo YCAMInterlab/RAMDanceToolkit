@@ -9,16 +9,21 @@
 #include "dpScoreFlowChartSceneCirculation.h"
 #include "dpScoreSceneFlowChart.h"
 #include "dpScoreNodeLight.h"
+#include "dpScoreNodeHakoniwa.h"
 #include "dpScoreScoped.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
 static const float kCamSpeed {0.025f};
 
-void FlowChartSceneCirculation::reset()
+void FlowChartSceneCirculation::reset(SceneFlowChart* owner)
 {
-    super::reset();
+    super::reset(owner);
+    owner->getNode<NodeHakoniwa>()->setFocus(false);
     mElapsedTime = HALF_PI * (1.f / kCamSpeed);
+    mNodeCenter.resetTransform();
+    mCamera->clearParent();
+    mCamera->resetTransform();
     mCamera->setParent(mNodeCenter);
     mCamera->setGlobalPosition(0.f, 200.f, 1200.f);
 }
@@ -30,14 +35,7 @@ void FlowChartSceneCirculation::update(SceneFlowChart* owner)
     const float r {::cosf(mElapsedTime * kCamSpeed) * 90.f};
     mNodeCenter.setGlobalOrientation(ofQuaternion(r, ofVec3f(0.f, 1.f, 0.f)));
     
-    for (auto& p : owner->getNodes()) {
-        if (p.first == getClassName<NodeLight>()) {
-            p.second->t = 0.f;
-        }
-        else {
-            p.second->t = 1.f;
-        }
-    }
+    owner->getNode<NodeLight>()->t = 0.f;
 }
 
 void FlowChartSceneCirculation::drawText(SceneFlowChart* owner)

@@ -11,6 +11,7 @@
 #include "dpScoreScoped.h"
 #include "dpScoreToolBox.h"
 #include "dpScoreObjects.h"
+#include "dpScoreStyle.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -72,12 +73,13 @@ void NodeStage::customDraw()
 	ofSetRectMode(OF_RECTMODE_CENTER);
     ofEnableDepthTest();
     
-    if (!LineObj::enableAnimation && fbo) {
-        ScopedStyle s;
+    if (!CompoundLine::enableAnimation && fbo) {
+        ScopedStyle styple;
         ScopedTranslate t(0.f, kHeight - kScrH, -kDepth * 0.5f - 300.f);
         ofFill();
         ofSetColor(128);
-        fbo->draw(0.f, 0.f, kWidth, kScrH);
+        const float s{kWidth / fbo->getWidth()};
+        fbo->draw(0.f, 0.f, fbo->getWidth() * s, fbo->getHeight() * s);
     }
     
     mScreenRect.draw();

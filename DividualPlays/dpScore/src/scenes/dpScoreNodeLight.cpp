@@ -12,6 +12,7 @@
 #include "dpScoreObjects.h"
 #include "dpScoreNodeStage.h"
 #include "dpScoreNodeHakoniwa.h"
+#include "dpScoreStyle.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -84,7 +85,7 @@ void NodeLight::ParLight::draw()
 		ScopedMatrix m;
 		ofTranslate(0.f, -24.f);
 		ofRotateX(angle);
-        if (LineObj::enableAnimation == false) {
+        if (CompoundLine::enableAnimation == false) {
             ofDrawCone(ofVec3f(0.f, 15.f, 0.f), 9.f, -14.f);
         }
 		body.draw();

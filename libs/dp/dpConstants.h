@@ -49,6 +49,8 @@ static const string LIGHTING_IP = "192.168.20.8";
 
 static const string GEAR_IP = "192.168.20.51";
 
+static const int SCREEN_A = 0;
+static const int SCREEN_X = 1;
 
 static const int SCREEN_B = 0;
 static const int SCREEN_C = 1;

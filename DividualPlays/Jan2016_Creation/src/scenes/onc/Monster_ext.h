@@ -11,6 +11,7 @@
 
 #include "ramMain.h"
 #include "ramMotionExtractor.h"
+#include "ramCenteredActor.h"
 
 class Monster_ext : public ramBaseScene
 {
@@ -62,6 +63,14 @@ public:
 class Monster_ext_2 : public Monster_ext
 {
 	inline string getName() const { return "Monster_ext2"; }
+    ramCenteredActor mCentered;
+
+    ofPoint mTrans;
+    
+public:
+    void setupControlPanel();
+    void drawActor(const ramActor &actor);
+
 };
 
 

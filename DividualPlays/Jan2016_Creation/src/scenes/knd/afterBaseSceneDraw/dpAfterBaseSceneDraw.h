@@ -14,6 +14,7 @@
 #include "dpDancerCue.h"
 #include "dpRemainedHakoniwaView.h"
 #include "DoSomething.h"
+#include "dpBDisplayOutline.h"
 
 class dpAfterBaseSceneDraw{
 public:
@@ -26,6 +27,7 @@ private:
     DoSomething doSomething;
     dpDancerCue dancerCue;
     dpRemainedHakoniwaView remainedView;
+    dpBDisplayOutline mBDisplayOutline;
 };
 
 #endif /* defined(__RAMDanceToolkit__dpAfterBaseSceneDraw__) */
