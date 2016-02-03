@@ -240,8 +240,61 @@ void Funnel::setup(const ofVec3f& p, float r0, float r1, float h0, float h1)
 		mLines.push_back(Line::make(ofVec3f(x2, -h0, z2) + p, ofVec3f(x3, -h0 - h1, z3) + p));
 	}
 
-	mPoints.assign(mLines.size(), Point());
+    mPoints.assign(mLines.size(), Point());
 	reset();
+}
+
+void Water::setup(float w, float d, int resX, int resZ)
+{
+    mW = w;
+    mD = d;
+    mResX = resX;
+    mResZ = resZ;
+    for (auto j : rep(mResZ)) {
+        for (auto i : rep(mResX)) {
+            for (auto k : 4_i) {
+                mLines.push_back(Line::make(ofVec3f::zero(), ofVec3f::zero()));
+            }
+        }
+    }
+    mPoints.assign(mLines.size(), Point());
+    reset();
+}
+
+void Water::update()
+{
+    const float t{ofGetElapsedTimef() * 0.01f};
+    for (auto j : rep(mResZ)) {
+        for (auto i : rep(mResX)) {
+            auto displacement = [](int i, int j, float t) {
+                float y {0.f};
+                y += ::cosf(i * 0.3f + t * 0.98f) * 0.7f;
+                y += ::cosf(i * 0.3f + t * 10.3f) * 0.6f;
+                y += ::cosf(i * 0.3f + t * 97.6f) * 0.5f;
+                y += ::sinf(j * 0.3f + t * 0.98f) * 0.7f;
+                y += ::sinf(j * 0.3f + t * 10.3f) * 0.6f;
+                y += ::sinf(j * 0.3f + t * 97.6f) * 0.5f;
+                return y;
+            };
+            const float y0 {displacement(i, j, t)};
+            const float y1 {displacement(i, j + 1, t)};
+            const float y2 {displacement(i + 1, j + 1, t)};
+            const float y3 {displacement(i + 1, j, t)};
+            
+            const float x0 {mW / (float) mResX * (float)i};
+            const float z0 {mD / (float) mResZ * (float)j};
+            const float x1 {mW / (float) mResX * (float)(i + 1)};
+            const float z1 {mD / (float) mResZ * (float)(j + 1)};
+            auto v0 = ofVec3f(x0, y0, z0);
+            auto v1 = ofVec3f(x0, y1, z1);
+            auto v2 = ofVec3f(x1, y2, z1);
+            auto v3 = ofVec3f(x1, y3, z0);
+            mLines.at(j * mResX * 4 + i * 4 + 0).set(v0, v1);
+            mLines.at(j * mResX * 4 + i * 4 + 1).set(v1, v2);
+            mLines.at(j * mResX * 4 + i * 4 + 2).set(v2, v3);
+            mLines.at(j * mResX * 4 + i * 4 + 3).set(v3, v0);
+        }
+    }
 }
 
 Desk::Desk()

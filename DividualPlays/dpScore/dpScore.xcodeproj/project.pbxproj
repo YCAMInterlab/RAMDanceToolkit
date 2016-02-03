@@ -10,6 +10,14 @@
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		D208F8941C50BFCE00D00729 /* dpScoreNodeAudience.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D208F8921C50BFCE00D00729 /* dpScoreNodeAudience.cpp */; settings = {ASSET_TAGS = (); }; };
 		D208F8971C50CCD900D00729 /* dpScoreNodeCameraUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D208F8951C50CCD900D00729 /* dpScoreNodeCameraUnit.cpp */; settings = {ASSET_TAGS = (); }; };
+		D215F1B71C60B68E00DF560C /* dpScoreFlowChartBaseScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1B51C60B68E00DF560C /* dpScoreFlowChartBaseScene.cpp */; settings = {ASSET_TAGS = (); }; };
+		D215F1BA1C60B7D900DF560C /* dpScoreFlowChartSceneMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1B81C60B7D900DF560C /* dpScoreFlowChartSceneMove.cpp */; settings = {ASSET_TAGS = (); }; };
+		D215F1BD1C60B7F400DF560C /* dpScoreFlowChartSceneDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1BB1C60B7F400DF560C /* dpScoreFlowChartSceneDescription.cpp */; settings = {ASSET_TAGS = (); }; };
+		D215F1C01C60B7FE00DF560C /* dpScoreFlowChartSceneTPS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1BE1C60B7FE00DF560C /* dpScoreFlowChartSceneTPS.cpp */; settings = {ASSET_TAGS = (); }; };
+		D215F1C31C60B80600DF560C /* dpScoreFlowChartSceneDebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1C11C60B80600DF560C /* dpScoreFlowChartSceneDebug.cpp */; settings = {ASSET_TAGS = (); }; };
+		D215F1C61C60B83100DF560C /* dpScoreFlowChartSceneCirculation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1C41C60B83100DF560C /* dpScoreFlowChartSceneCirculation.cpp */; settings = {ASSET_TAGS = (); }; };
+		D215F1C91C60B84000DF560C /* dpScoreFlowChartSceneMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1C71C60B84000DF560C /* dpScoreFlowChartSceneMemory.cpp */; settings = {ASSET_TAGS = (); }; };
+		D215F1CC1C60B84A00DF560C /* dpScoreFlowChartSceneMasterHakoniwa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1CA1C60B84A00DF560C /* dpScoreFlowChartSceneMasterHakoniwa.cpp */; settings = {ASSET_TAGS = (); }; };
 		D21C77201A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21C771E1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp */; };
 		D21D0B891A4C046000CC3598 /* ofxUI2DGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF51A4C046000CC3598 /* ofxUI2DGraph.cpp */; };
 		D21D0B8A1A4C046000CC3598 /* ofxUI2DPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF71A4C046000CC3598 /* ofxUI2DPad.cpp */; };
@@ -435,6 +443,22 @@
 		D208F8951C50CCD900D00729 /* dpScoreNodeCameraUnit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreNodeCameraUnit.cpp; sourceTree = "<group>"; };
 		D208F8961C50CCD900D00729 /* dpScoreNodeCameraUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreNodeCameraUnit.h; sourceTree = "<group>"; };
 		D21213831A7A279F0060AE78 /* dpMasterHakoniwa-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "dpMasterHakoniwa-Info.plist"; sourceTree = "<group>"; };
+		D215F1B51C60B68E00DF560C /* dpScoreFlowChartBaseScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreFlowChartBaseScene.cpp; sourceTree = "<group>"; };
+		D215F1B61C60B68E00DF560C /* dpScoreFlowChartBaseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreFlowChartBaseScene.h; sourceTree = "<group>"; };
+		D215F1B81C60B7D900DF560C /* dpScoreFlowChartSceneMove.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreFlowChartSceneMove.cpp; sourceTree = "<group>"; };
+		D215F1B91C60B7D900DF560C /* dpScoreFlowChartSceneMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreFlowChartSceneMove.h; sourceTree = "<group>"; };
+		D215F1BB1C60B7F400DF560C /* dpScoreFlowChartSceneDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreFlowChartSceneDescription.cpp; sourceTree = "<group>"; };
+		D215F1BC1C60B7F400DF560C /* dpScoreFlowChartSceneDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreFlowChartSceneDescription.h; sourceTree = "<group>"; };
+		D215F1BE1C60B7FE00DF560C /* dpScoreFlowChartSceneTPS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreFlowChartSceneTPS.cpp; sourceTree = "<group>"; };
+		D215F1BF1C60B7FE00DF560C /* dpScoreFlowChartSceneTPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreFlowChartSceneTPS.h; sourceTree = "<group>"; };
+		D215F1C11C60B80600DF560C /* dpScoreFlowChartSceneDebug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreFlowChartSceneDebug.cpp; sourceTree = "<group>"; };
+		D215F1C21C60B80600DF560C /* dpScoreFlowChartSceneDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreFlowChartSceneDebug.h; sourceTree = "<group>"; };
+		D215F1C41C60B83100DF560C /* dpScoreFlowChartSceneCirculation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreFlowChartSceneCirculation.cpp; sourceTree = "<group>"; };
+		D215F1C51C60B83100DF560C /* dpScoreFlowChartSceneCirculation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreFlowChartSceneCirculation.h; sourceTree = "<group>"; };
+		D215F1C71C60B84000DF560C /* dpScoreFlowChartSceneMemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreFlowChartSceneMemory.cpp; sourceTree = "<group>"; };
+		D215F1C81C60B84000DF560C /* dpScoreFlowChartSceneMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreFlowChartSceneMemory.h; sourceTree = "<group>"; };
+		D215F1CA1C60B84A00DF560C /* dpScoreFlowChartSceneMasterHakoniwa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreFlowChartSceneMasterHakoniwa.cpp; sourceTree = "<group>"; };
+		D215F1CB1C60B84A00DF560C /* dpScoreFlowChartSceneMasterHakoniwa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreFlowChartSceneMasterHakoniwa.h; sourceTree = "<group>"; };
 		D21C771E1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneCorrelation.cpp; sourceTree = "<group>"; };
 		D21C771F1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneCorrelation.h; sourceTree = "<group>"; };
 		D21D08821A4C045D00CC3598 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -849,6 +873,29 @@
 			name = "3rd party frameworks";
 			sourceTree = "<group>";
 		};
+		D215F1B41C60B62F00DF560C /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				D215F1B51C60B68E00DF560C /* dpScoreFlowChartBaseScene.cpp */,
+				D215F1B61C60B68E00DF560C /* dpScoreFlowChartBaseScene.h */,
+				D215F1B81C60B7D900DF560C /* dpScoreFlowChartSceneMove.cpp */,
+				D215F1B91C60B7D900DF560C /* dpScoreFlowChartSceneMove.h */,
+				D215F1BB1C60B7F400DF560C /* dpScoreFlowChartSceneDescription.cpp */,
+				D215F1BC1C60B7F400DF560C /* dpScoreFlowChartSceneDescription.h */,
+				D215F1BE1C60B7FE00DF560C /* dpScoreFlowChartSceneTPS.cpp */,
+				D215F1BF1C60B7FE00DF560C /* dpScoreFlowChartSceneTPS.h */,
+				D215F1C11C60B80600DF560C /* dpScoreFlowChartSceneDebug.cpp */,
+				D215F1C21C60B80600DF560C /* dpScoreFlowChartSceneDebug.h */,
+				D215F1C41C60B83100DF560C /* dpScoreFlowChartSceneCirculation.cpp */,
+				D215F1C51C60B83100DF560C /* dpScoreFlowChartSceneCirculation.h */,
+				D215F1C71C60B84000DF560C /* dpScoreFlowChartSceneMemory.cpp */,
+				D215F1C81C60B84000DF560C /* dpScoreFlowChartSceneMemory.h */,
+				D215F1CA1C60B84A00DF560C /* dpScoreFlowChartSceneMasterHakoniwa.cpp */,
+				D215F1CB1C60B84A00DF560C /* dpScoreFlowChartSceneMasterHakoniwa.h */,
+			);
+			name = Scene;
+			sourceTree = "<group>";
+		};
 		D21D08811A4C045D00CC3598 /* ofxUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1027,6 +1074,7 @@
 				D22A7F8A1C4DFCC900F35879 /* dpScoreSceneFlowChart.h */,
 				D27924351C4F448D000F5AFC /* dpScoreObjects.cpp */,
 				D27924361C4F448D000F5AFC /* dpScoreObjects.h */,
+				D215F1B41C60B62F00DF560C /* Scene */,
 				D24A92FB1C562C8F00ECCBEF /* Node */,
 			);
 			name = FlowChart;
@@ -1551,6 +1599,8 @@
 				D27D338D1C5A41FB009F2B25 /* ofxOscReceiver.cpp in Sources */,
 				D27D338F1C5A41FB009F2B25 /* ofxUIMultiImageButton.cpp in Sources */,
 				D27D33901C5A41FB009F2B25 /* ofxMotionerNode.cpp in Sources */,
+				D215F1C91C60B84000DF560C /* dpScoreFlowChartSceneMemory.cpp in Sources */,
+				D215F1CC1C60B84A00DF560C /* dpScoreFlowChartSceneMasterHakoniwa.cpp in Sources */,
 				D27D33911C5A41FB009F2B25 /* OscTypes.cpp in Sources */,
 				D27D33921C5A41FB009F2B25 /* dpScoreSceneBodyBase.cpp in Sources */,
 				D27D33941C5A41FB009F2B25 /* ofxUIMovingGraph.cpp in Sources */,
@@ -1560,6 +1610,7 @@
 				D27D339C1C5A41FB009F2B25 /* ofxTrueTypeFontUC.cpp in Sources */,
 				D27D339D1C5A41FB009F2B25 /* ofxUIWidgetWithLabel.cpp in Sources */,
 				D27D339E1C5A41FB009F2B25 /* ofxUIToggleMatrix.cpp in Sources */,
+				D215F1C61C60B83100DF560C /* dpScoreFlowChartSceneCirculation.cpp in Sources */,
 				D27D33A01C5A41FB009F2B25 /* dpScoreNodeMotioner.cpp in Sources */,
 				D27D33A11C5A41FB009F2B25 /* ofxUIValuePlotter.cpp in Sources */,
 				D27D33A21C5A41FB009F2B25 /* ofxOscSender.cpp in Sources */,
@@ -1604,10 +1655,12 @@
 				D27D33D61C5A41FB009F2B25 /* ofxUISpacer.cpp in Sources */,
 				D27D33D71C5A41FB009F2B25 /* ofxMotionerConstants.cpp in Sources */,
 				D27D33D81C5A41FB009F2B25 /* dpScoreNodeComputer.cpp in Sources */,
+				D215F1B71C60B68E00DF560C /* dpScoreFlowChartBaseScene.cpp in Sources */,
 				D27D33D91C5A41FB009F2B25 /* ofxUIImageButton.cpp in Sources */,
 				D27D33DA1C5A41FB009F2B25 /* ofxOscParameterSync.cpp in Sources */,
 				D27D33DB1C5A41FB009F2B25 /* ofxEvent.cpp in Sources */,
 				D27D33DD1C5A41FB009F2B25 /* ofxMotionerSkeleton.cpp in Sources */,
+				D215F1BA1C60B7D900DF560C /* dpScoreFlowChartSceneMove.cpp in Sources */,
 				D27D33DF1C5A41FB009F2B25 /* ofxUIFPS.cpp in Sources */,
 				D27D33E01C5A41FB009F2B25 /* ofxUI2DPad.cpp in Sources */,
 				D27D33E11C5A41FB009F2B25 /* ofxUIWaveform.cpp in Sources */,
@@ -1630,6 +1683,7 @@
 				D27D33F41C5A41FB009F2B25 /* tinyxml.cpp in Sources */,
 				D27D33F61C5A41FB009F2B25 /* ofxOscBundle.cpp in Sources */,
 				D27D33F71C5A41FB009F2B25 /* dpScoreNodeMasterHakoniwa.cpp in Sources */,
+				D215F1C31C60B80600DF560C /* dpScoreFlowChartSceneDebug.cpp in Sources */,
 				D27D33F81C5A41FB009F2B25 /* dpScoreToolBox.cpp in Sources */,
 				D27D33F91C5A41FB009F2B25 /* NetworkingUtilsWin.cpp in Sources */,
 				D27D33FA1C5A41FB009F2B25 /* ofxXmlSettings.cpp in Sources */,
@@ -1640,6 +1694,8 @@
 				D27D33FF1C5A41FB009F2B25 /* ofxException.cpp in Sources */,
 				D27D34001C5A41FB009F2B25 /* ofApp.cpp in Sources */,
 				D27D34021C5A41FB009F2B25 /* ofxMotioner.cpp in Sources */,
+				D215F1C01C60B7FE00DF560C /* dpScoreFlowChartSceneTPS.cpp in Sources */,
+				D215F1BD1C60B7F400DF560C /* dpScoreFlowChartSceneDescription.cpp in Sources */,
 				D27D34031C5A41FB009F2B25 /* ofxUIBiLabelSlider.cpp in Sources */,
 				D27D34041C5A41FB009F2B25 /* dpScoreNodeStage.cpp in Sources */,
 			);

@@ -106,7 +106,7 @@ void NodeSpeaker::customDraw()
         ScopedMatrix m;
         ofTranslate(-NodeStage::kWidth * 0.5f - getX(),
                     getH() + 50.f,
-                    NodeStage::kDepth * 0.5f - 150.f - Speaker::getWidth());
+                    NodeStage::kDepth * 0.5f - 120.f - Speaker::getWidth());
         {
             ScopedMatrix m2;
             ofTranslate(Speaker::getWidth() * 0.5f, Speaker::getHeight() * 0.5f, Speaker::getDepth() * 0.5f);
@@ -120,7 +120,7 @@ void NodeSpeaker::customDraw()
         ScopedMatrix m;
         ofTranslate(NodeStage::kWidth * 0.5f + getX(),
                     getH() + 50.f,
-                    NodeStage::kDepth * 0.5f - 150.f - Speaker::getWidth());
+                    NodeStage::kDepth * 0.5f - 120.f - Speaker::getWidth());
         {
             ScopedMatrix m2;
             ofTranslate(Speaker::getWidth() * 0.5f, Speaker::getHeight() * 0.5f, Speaker::getDepth() * 0.5f);

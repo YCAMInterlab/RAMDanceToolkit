@@ -39,6 +39,7 @@ private:
     vector<Funnel> mFunnel;
     vector<Box> mMotors;
     vector<Cylinder> mValves;
+    Water mWater;
 };
 
 DP_SCORE_NAMESPACE_END
