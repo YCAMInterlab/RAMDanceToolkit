@@ -205,6 +205,7 @@ public:
     
     void sendMaglooper(bool enable){
         if(enable){
+            
             if(ofGetFrameNum() % 10 == 0){
                 
                 ofxOscMessage m;
@@ -222,6 +223,7 @@ public:
                 
                 mSender[MAG_LOOPER_2].sendMessage(n);
             }
+            
         }else{
             
             ofxOscMessage m;
@@ -253,6 +255,7 @@ public:
     }
     
     void update(){
+        sendMaglooper(mIsMagLooper);
     }
     void receiveOsc(){}
     
