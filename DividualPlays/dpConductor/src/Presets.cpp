@@ -112,6 +112,9 @@ void dpConductor::setSections()
 	ns->addTuneF(SCENE_LINE, "Curve1", 300.0);
 	ns->addTuneF(SCENE_LINE, "ext_to1", 800.0);
 	ns->addTuneF(SCENE_LINE, "ext_from1", 800.0);
+	ns->addTuneF(SCENE_FOURPT, "Twist resolution", 52.0);
+	ns->addTuneF(SCENE_FOURPT, "Twist extension width", 3.47);
+	ns->addTuneF(SCENE_FOURPT, "Twist extension height", 1.40);
 	setActorViewing(ns, true, true, true, true);
 	
 #pragma mark 0100
@@ -145,6 +148,9 @@ void dpConductor::setSections()
 	ns->addTuneF(SCENE_LINE, "Curve1", 300.0);
 	ns->addTuneF(SCENE_LINE, "ext_to1", 800.0);
 	ns->addTuneF(SCENE_LINE, "ext_from1", 800.0);
+	ns->addTuneF(SCENE_FOURPT, "Twist resolution", 52.0);
+	ns->addTuneF(SCENE_FOURPT, "Twist extension width", 3.47);
+	ns->addTuneF(SCENE_FOURPT, "Twist extension height", 1.40);
 	setActorViewing(ns, true, true, true, true);
 	
 #pragma mark 0120
@@ -286,7 +292,52 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_UPSIDE, ACTOR_SHIMAJI	, JOINT_NECK);
 	ns->addExtractor(SCENE_UPSIDE, ACTOR_MIYASHITA	, JOINT_NECK);
 	
-#pragma mark master_
+#pragma mark master_threept
+	ns = setBasicSection("fromMaster-threept", true, true);
+	ns->addScene(SCENE_THREEPT, false, true, false, true);
+	
+	ns->addExtractor(SCENE_THREEPT, ACTOR_KOJIRI, JOINT_LEFT_ELBOW);
+	ns->addExtractor(SCENE_THREEPT, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
+	ns->addExtractor(SCENE_THREEPT, ACTOR_KOJIRI, JOINT_LEFT_KNEE);
+	
+	ns->addExtractor(SCENE_THREEPT, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
+	ns->addExtractor(SCENE_THREEPT, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
+	ns->addExtractor(SCENE_THREEPT, ACTOR_SHIMAJI, JOINT_LEFT_KNEE);
+	
+	ns->addTuneT(SCENE_THREEPT, "Show rects", true);
+	ns->addTuneF(SCENE_THREEPT, "Rect radius", 42.1);
+	setActorViewing(ns, false, true, true, false);
+	
+#pragma mark master_burst
+	ns = setBasicSection("fromMaster-burst", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_BURST, false, true, false, true);
+	ns->addExtractor(SCENE_BURST, ACTOR_SHIMAJI, JOINT_NECK);
+	setActorViewing(ns, false, false, true, false);
+
+#pragma mark master_bigbox
+	ns = setBasicSection("fromMaster-bigbox", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_BIGBOX, false, true, false, true);
+	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
+	ns->addExtractor(SCENE_BIGBOX, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
+	MIYASHITA_BIGBOX
+	setActorViewing(ns, false, true, true, true);
+	
+#pragma mark master_monster
+	ns = setBasicSection("0130=monster", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_MONSTER, false, false, true, true);
+	ns->addScene(SCENE_MONSTER_2, true, true, false, false);
+	ns->addExtractor(SCENE_MONSTER, ACTOR_ANDO, JOINT_NECK);
+	ns->addExtractor(SCENE_MONSTER, ACTOR_KOJIRI, JOINT_NECK);
+	ns->addExtractor(SCENE_MONSTER, ACTOR_SHIMAJI, JOINT_NECK);
+	ns->addExtractor(SCENE_MONSTER, ACTOR_MIYASHITA, JOINT_NECK);
+	ns->addExtractor(SCENE_MONSTER_2, ACTOR_MIYASHITA, JOINT_NECK);
+	ns->addTuneT(SCENE_MONSTER, "Randomize Topology", true);
+	ns->addTuneT(SCENE_MONSTER_2, "Randomize Topology", true);
+	setActorViewing(ns, true, true, true, true);
+	
 }
 
 
