@@ -51,6 +51,7 @@ void SceneFlowChart::initialize()
 	mCamToolKit.setGlobalPosition(0.f, 200.f, 500.f);
 	mCamToolKit.setFarClip(1000.f);
 
+    ofDisableArbTex();
 	mFbos.clear();
 	mFbos.assign(kNumFbos, ofFbo());
 	for (auto& fbo : mFbos) {

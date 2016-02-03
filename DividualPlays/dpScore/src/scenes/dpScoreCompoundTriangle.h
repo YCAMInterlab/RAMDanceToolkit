@@ -10,40 +10,25 @@
 #define dpScoreCompoundTriangle_h
 
 #include "dpScoreCommon.h"
+#include "dpScoreCompound.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
 struct Triangle {
-    static Triangle make(const ofVec3f& _p0, const ofVec3f& _p1, const ofVec3f& _p3);
-    void set(const ofVec3f& _p0, const ofVec3f& _p1, const ofVec3f& _p2);
-    void draw();
-    
-    ofVec3f p0, p1, p2;
-    ofVec3f c;
+	static Triangle make(const ofVec3f& _p0, const ofVec3f& _p1, const ofVec3f& _p2);
+	static Triangle make(const ofVec3f& _p0, const ofVec3f& _p1, const ofVec3f& _p2,
+	                     const ofVec2f& _t0, const ofVec2f& _t1, const ofVec2f& _t2);
+	void set(const ofVec3f& _p0, const ofVec3f& _p1, const ofVec3f& _p2);
+	void set(const ofVec3f& _p0, const ofVec3f& _p1, const ofVec3f& _p2,
+	         const ofVec2f& _t0, const ofVec2f& _t1, const ofVec2f& _t2);
+	void draw();
+
+	ofVec3f p0, p1, p2;
+	ofVec2f t0, t1, t2;
+	ofVec3f c;
 };
 
-//class CompoundLine {
-//public:
-//    static bool enableAnimation;
-//    
-//    virtual ~CompoundLine() = default;
-//    virtual void draw();
-//    
-//protected:
-//    void update();
-//    void reset();
-//    
-//    struct Point {
-//        ofVec3f rot;
-//        ofVec3f spd;
-//        ofVec3f ang;
-//        ofVec3f pos;
-//    };
-//    
-//    vector<Line> mLines;
-//    vector<Point> mPoints;
-//    bool mUpdate;
-//};
+typedef Compound<Triangle> CompoundTriangle;
 
 DP_SCORE_NAMESPACE_END
 

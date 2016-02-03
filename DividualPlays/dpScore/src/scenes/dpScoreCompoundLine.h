@@ -10,6 +10,7 @@
 #define dpScoreCompoundLine_h
 
 #include "dpScoreCommon.h"
+#include "dpScoreCompound.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -23,28 +24,7 @@ struct Line {
 	ofVec3f v;
 };
 
-class CompoundLine {
-public:
-	static bool enableAnimation;
-
-	virtual ~CompoundLine() = default;
-	virtual void draw();
-
-protected:
-	void update();
-	void reset();
-
-	struct Point {
-		ofVec3f rot;
-		ofVec3f spd;
-		ofVec3f ang;
-		ofVec3f pos;
-	};
-
-	vector<Line> mLines;
-	vector<Point> mPoints;
-	bool mUpdate;
-};
+typedef Compound<Line> CompoundLine;
 
 DP_SCORE_NAMESPACE_END
 

@@ -70,7 +70,7 @@ void NodeDisplay::customDraw()
 	setStyle(*this);
 	{
 		auto drawFbo = [&]() {
-				       if (CompoundLine::enableAnimation) return;
+				       if (compoundGetEnableCollapse()) return;
 				       ScopedStyle s;
 				       ofFill();
 				       ofSetColor(ofColor::black);
@@ -108,7 +108,7 @@ void NodeDisplay::customDraw()
 		const float wireOffset {20.f};
 
 		auto drawFbo = [&]() {
-				       if (CompoundLine::enableAnimation) return;
+				       if (compoundGetEnableCollapse()) return;
 				       ScopedStyle s;
 				       ofFill();
 				       ofSetColor(ofColor::white);

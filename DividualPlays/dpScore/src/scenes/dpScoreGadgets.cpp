@@ -115,7 +115,7 @@ void MacBook::draw()
 	ofRotateX(angle);
 	mTop.draw();
 
-	if (!CompoundLine::enableAnimation && drawDisplay && angle >= 15.f) {
+	if (!compoundGetEnableCollapse() && drawDisplay && angle >= 15.f) {
 		ScopedStyle s;
 		ofRotateX(90.f);
 		ofFill();

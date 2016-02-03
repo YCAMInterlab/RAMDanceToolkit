@@ -29,7 +29,7 @@ void FlowChartSceneMemory::update(SceneFlowChart* owner)
 	super::update(owner);
 
 	if (mElapsedTime >= 18.f) {
-		CompoundLine::enableAnimation = true;
+		compoundSetEnableCollapse(true);
 	}
 
 	const float r {-mElapsedTime * 4.f + 60.f};
