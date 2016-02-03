@@ -52,7 +52,7 @@ void BigBox_ext::draw()
 	ofPushStyle();
 	ofSetLineWidth(lineWidth);
 	ofSetColor(color);
-	for (int i = 0;i < NUMNODE_BBE;i++)
+	for (int i = 0;i < MIN(NUMNODE_BBE, mex.getNumPort());i++)
 	{
 		if (i < mex.getNumPort()) portScale[i] += (boxScales[(i < BOXSC_NUM ? i : 0)] - portScale[i]) / 5.0;
 		else portScale[i] += (0 - portScale[i]) / 5.0;

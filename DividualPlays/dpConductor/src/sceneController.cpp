@@ -124,3 +124,11 @@ void sceneController::setButtonTune(string scene, string type)
 	m.addIntArg(OFX_UI_WIDGET_BUTTON);
 	sendMessage(m);
 }
+
+void sceneController::setActorView(bool ando, bool kojiri, bool shimaji, bool miyashita)
+{
+	setToggleTune(SCENE_ACTOR, ACTOR_ANDO, ando);
+	setToggleTune(SCENE_ACTOR, ACTOR_KOJIRI, kojiri);
+	setToggleTune(SCENE_ACTOR, ACTOR_SHIMAJI, shimaji);
+	setToggleTune(SCENE_ACTOR, ACTOR_MIYASHITA, miyashita);
+}
