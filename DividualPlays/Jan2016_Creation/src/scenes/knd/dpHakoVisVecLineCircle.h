@@ -184,7 +184,7 @@ public:
         mReceiver.addAddress("/dp/cameraUnit/SandStorm/vector");
 
         mZoom.speed = 0.001;
-        mRot.speed = 0.005;
+        mRot.speed = 0.0025;
         mRotSpeed.x = -0.05;
     }
     
@@ -210,7 +210,7 @@ public:
             v.update();
         }
         
-        mRot += mRotSpeed;
+        //mRot += mRotSpeed;
 
         mZoom.update();
         
@@ -226,6 +226,11 @@ public:
             else if(rnd == 3)rndDirection();
             
         }
+        
+        
+       // mRot.x = ofClamp(mRot.x,-60,60);
+       // mRot.y = ofClamp(mRot.x,-60,60);
+       // mRot.z = ofClamp(mRot.x,-60,60);
         
         mRot.update();
     }
@@ -263,8 +268,19 @@ public:
     
     void rndRot(){
         
-        int rnd = ofRandom(0,5);
+        //int rnd = ofRandom(0,5);
         
+        int rnd = ofRandom(0,4);
+        if(rnd == 0){
+            mRot.setX(ofRandom(-70,70));
+        }else if(rnd == 1){
+            mRot.setY(ofRandom(-70,70));
+        }else if(rnd == 2){
+            mRot.setZ(ofRandom(-70,70));
+        }else{
+            mRot.set(0,0,0);
+        }
+        /*
         if(rnd == 0){
             
             mRotSpeed.set(0,0,0);
@@ -273,11 +289,19 @@ public:
             
             mRotSpeed.set(0,0,0);
          
-            mRot.imSet(fmodf(mRot.x,360.0),
-                       fmodf(mRot.y,360.0),
-                       fmodf(mRot.z,360.0));
+            int rnd = ofRandom(0,3);
+            if(rnd == 0){
+                mRot.setX(ofRandom(-60,60));
+            }else if(rnd == 1){
+                mRot.setY(ofRandom(-60,60));
+            }else{
+                mRot.setZ(ofRandom(-60,60));
+            }
+           // mRot.set(fmodf(mRot.x,360.0),
+             //          fmodf(mRot.y,360.0),
+              //         fmodf(mRot.z,360.0));
             
-            mRot.set(0,0,0);
+            //mRot.set(0,0,0);
             
         }else{
             
@@ -285,7 +309,7 @@ public:
                           ofRandom(-0.1,0.1),
                           0.0);
             
-        }
+        }*/
     }
     
     void draw(){
@@ -321,7 +345,8 @@ public:
     
     void onEnabled(){
         mRotSpeed.set(-0.05,0.0,0.0);
-        mRot.imSet(0,0,0);
+        mRot.set(0,0,0);
+        // mRot.imSet(0,0,0);
         mBeginFrame = ofGetFrameNum();
     }
     
