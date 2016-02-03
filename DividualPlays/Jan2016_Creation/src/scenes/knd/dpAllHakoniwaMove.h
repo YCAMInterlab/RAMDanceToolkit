@@ -181,7 +181,7 @@ public:
         
         if(enable){
             mStepManager.setStepperAll(true);
-            mStepManager.run(11000, true);
+            mStepManager.run(12000, true);
             mStepManager.setStepperAll(false);
         }else{
             mStepManager.setStepperAll(true);
@@ -256,6 +256,8 @@ public:
     
     void update(){
         sendMaglooper(mIsMagLooper);
+        sendSandStorm(mIsSandStorm);
+        sendMagPendulum(mIsMagPendulum);
     }
     void receiveOsc(){}
     
