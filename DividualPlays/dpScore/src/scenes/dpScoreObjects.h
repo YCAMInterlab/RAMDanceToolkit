@@ -43,6 +43,13 @@ struct Line {
 		line.v = p1 - p0;
 		return line;
 	}
+    
+    void set(const ofVec3f& p0, const ofVec3f& p1)
+    {
+        c = p0 * 0.5f + p1 * 0.5f;
+        v = p1 - p0;
+    }
+    
 	void draw()
 	{
 		ofLine(c - v * 0.5f, c + v * 0.5f);
@@ -137,6 +144,22 @@ public:
         return f;
     }
     void setup(const ofVec3f& p, float r0, float r1, float h0, float h2);
+};
+
+class Water : public LineObj {
+public:
+    static Water create(float w, float d, int resX, int resZ)
+    {
+        Water water;
+        water.setup(w, d, resX, resZ);
+        return water;
+    }
+    void setup(float w, float d, int resX, int resZ);
+    void update();
+    
+private:
+    float mW, mD;
+    int mResX, mResZ;
 };
 
 inline void drawLine(const ofVec3f& c, const ofVec3f& v)
