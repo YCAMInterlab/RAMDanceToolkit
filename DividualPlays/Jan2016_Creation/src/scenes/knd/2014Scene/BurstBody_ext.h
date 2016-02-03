@@ -35,7 +35,9 @@ public:
         gui->addSlider("B", 0, 1, &bodyColor.b, 70, 16);
         gui->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
         gui->autoSizeToFitWidgets();
-        
+		
+		bodyColor.g = 0.2;
+		bodyColor.b = 0.2;
         mex.setupControlPanel(this);
     }
     
