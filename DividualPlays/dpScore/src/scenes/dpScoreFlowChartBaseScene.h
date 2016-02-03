@@ -16,9 +16,9 @@ DP_SCORE_NAMESPACE_BEGIN
 class FlowChartBaseScene {
 public:
 	typedef FlowChartBaseScene super;
-
+    virtual ~FlowChartBaseScene() = default;
 	void setup(float move, float idle, float line, float total, bool easeyCam = false);
-	virtual void reset();
+	virtual void reset(class SceneFlowChart* owner);
 	virtual void update(class SceneFlowChart* owner);
 	virtual void drawText(class SceneFlowChart* owner)
 	{

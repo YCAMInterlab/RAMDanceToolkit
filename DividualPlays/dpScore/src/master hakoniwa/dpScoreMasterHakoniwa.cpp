@@ -9,11 +9,6 @@
 #include "dpScoreMasterHakoniwa.h"
 #include "ofxUI.h"
 
-/*
- 箱庭同士が２個にならないようにする
- スクリーン選べるようにする
- */
-
 DP_SCORE_NAMESPACE_BEGIN
 
 const ofColor MH::kBackgroundColor{255, 20};

@@ -18,6 +18,7 @@
 		D215F1C61C60B83100DF560C /* dpScoreFlowChartSceneCirculation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1C41C60B83100DF560C /* dpScoreFlowChartSceneCirculation.cpp */; settings = {ASSET_TAGS = (); }; };
 		D215F1C91C60B84000DF560C /* dpScoreFlowChartSceneMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1C71C60B84000DF560C /* dpScoreFlowChartSceneMemory.cpp */; settings = {ASSET_TAGS = (); }; };
 		D215F1CC1C60B84A00DF560C /* dpScoreFlowChartSceneMasterHakoniwa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1CA1C60B84A00DF560C /* dpScoreFlowChartSceneMasterHakoniwa.cpp */; settings = {ASSET_TAGS = (); }; };
+		D215F1D31C61D3C000DF560C /* dpScoreFlowChartRDTK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1D11C61D3C000DF560C /* dpScoreFlowChartRDTK.cpp */; settings = {ASSET_TAGS = (); }; };
 		D21C77201A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21C771E1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp */; };
 		D21D0B891A4C046000CC3598 /* ofxUI2DGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF51A4C046000CC3598 /* ofxUI2DGraph.cpp */; };
 		D21D0B8A1A4C046000CC3598 /* ofxUI2DPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF71A4C046000CC3598 /* ofxUI2DPad.cpp */; };
@@ -459,6 +460,8 @@
 		D215F1C81C60B84000DF560C /* dpScoreFlowChartSceneMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreFlowChartSceneMemory.h; sourceTree = "<group>"; };
 		D215F1CA1C60B84A00DF560C /* dpScoreFlowChartSceneMasterHakoniwa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreFlowChartSceneMasterHakoniwa.cpp; sourceTree = "<group>"; };
 		D215F1CB1C60B84A00DF560C /* dpScoreFlowChartSceneMasterHakoniwa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreFlowChartSceneMasterHakoniwa.h; sourceTree = "<group>"; };
+		D215F1D11C61D3C000DF560C /* dpScoreFlowChartRDTK.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreFlowChartRDTK.cpp; sourceTree = "<group>"; };
+		D215F1D21C61D3C000DF560C /* dpScoreFlowChartRDTK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreFlowChartRDTK.h; sourceTree = "<group>"; };
 		D21C771E1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneCorrelation.cpp; sourceTree = "<group>"; };
 		D21C771F1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneCorrelation.h; sourceTree = "<group>"; };
 		D21D08821A4C045D00CC3598 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -896,6 +899,15 @@
 			name = Scene;
 			sourceTree = "<group>";
 		};
+		D215F1D01C61D3A700DF560C /* RDTK */ = {
+			isa = PBXGroup;
+			children = (
+				D215F1D11C61D3C000DF560C /* dpScoreFlowChartRDTK.cpp */,
+				D215F1D21C61D3C000DF560C /* dpScoreFlowChartRDTK.h */,
+			);
+			name = RDTK;
+			sourceTree = "<group>";
+		};
 		D21D08811A4C045D00CC3598 /* ofxUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1074,6 +1086,7 @@
 				D22A7F8A1C4DFCC900F35879 /* dpScoreSceneFlowChart.h */,
 				D27924351C4F448D000F5AFC /* dpScoreObjects.cpp */,
 				D27924361C4F448D000F5AFC /* dpScoreObjects.h */,
+				D215F1D01C61D3A700DF560C /* RDTK */,
 				D215F1B41C60B62F00DF560C /* Scene */,
 				D24A92FB1C562C8F00ECCBEF /* Node */,
 			);
@@ -1603,6 +1616,7 @@
 				D215F1CC1C60B84A00DF560C /* dpScoreFlowChartSceneMasterHakoniwa.cpp in Sources */,
 				D27D33911C5A41FB009F2B25 /* OscTypes.cpp in Sources */,
 				D27D33921C5A41FB009F2B25 /* dpScoreSceneBodyBase.cpp in Sources */,
+				D215F1D31C61D3C000DF560C /* dpScoreFlowChartRDTK.cpp in Sources */,
 				D27D33941C5A41FB009F2B25 /* ofxUIMovingGraph.cpp in Sources */,
 				D27D33951C5A41FB009F2B25 /* main.cpp in Sources */,
 				D27D33981C5A41FB009F2B25 /* ofxUIFPSSlider.cpp in Sources */,
