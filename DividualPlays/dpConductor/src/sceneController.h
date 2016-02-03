@@ -41,6 +41,8 @@ public:
 	string scene_rdtk1_b;
 	string scene_rdtk2_a;
 	string scene_rdtk2_b;
+	
+	vector<string> calledScenes[4];
 };
 
 #endif /* sceneController_h */

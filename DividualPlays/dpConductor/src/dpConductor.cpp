@@ -43,34 +43,18 @@ void dpConductor::update()
 void dpConductor::draw()
 {
 	ofPushMatrix();
-	ofTranslate(850, 500);
-	ofNoFill();
+	ofTranslate(550, 500);
 	
-	ofRect(125, 0, 200, 30);
-	ofDrawBitmapString("Disp:1", 130, -2);
-	ofDrawBitmapString(display[0], 130, 20);
+	for (int i = 0;i < 4;i++)
+	{
+		string list = "";
+		for (int j = 0;j < sceneCon->calledScenes[i].size();j++)
+		{
+			list += sceneCon->calledScenes[i][j] + "\n";
+		}
+		ofDrawBitmapString(list, i * 200, 0);
+	}
 	
-	ofRect(0, 50, 200, 30);
-	ofDrawBitmapString("Disp:2", 5, 48);
-	ofDrawBitmapString(display[1], 5, 70);
-
-	ofRect(250, 50, 200, 30);
-	ofDrawBitmapString("Disp:3", 255, 48);
-	ofDrawBitmapString(display[2], 255, 70);
-
-	ofRect(0, 100, 200, 30);
-	ofDrawBitmapString("Disp:4",  5, 98);
-	ofDrawBitmapString(display[3], 5, 120);
-
-	ofRect(250, 100, 200, 30);
-	ofDrawBitmapString("Disp:5", 255, 98);
-	ofDrawBitmapString(display[4], 255, 120);
-
-	ofRect(125, 150, 200, 30);
-	ofDrawBitmapString("Disp:6", 130, 148);
-	ofDrawBitmapString(display[5], 130, 170);
-
-	ofFill();
 	ofPopMatrix();
 }
 
