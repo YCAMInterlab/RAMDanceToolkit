@@ -118,34 +118,9 @@ void dpConductor::receiveMasterHakoniwa(ofxOscMessage m)
 			sceneCon->disableScene(sceneName, false);
 		}
         
-        if (sceneName == SCENE_METABALL)
-        {
-            sceneCon->clearExtractor(SCENE_METABALL);
-            sceneCon->setExtractor(SCENE_METABALL, ACTOR_KOJIRI, JOINT_NECK);
-            sceneCon->setExtractor(SCENE_METABALL, ACTOR_KOJIRI, JOINT_CHEST);
-            sceneCon->setExtractor(SCENE_METABALL, ACTOR_KOJIRI, JOINT_LEFT_WRIST);
-            
-            sceneCon->setExtractor(SCENE_METABALL, ACTOR_ANDO, JOINT_NECK);
-            sceneCon->setExtractor(SCENE_METABALL, ACTOR_ANDO, JOINT_CHEST);
-            sceneCon->setExtractor(SCENE_METABALL, ACTOR_ANDO, JOINT_LEFT_WRIST);
-            
-            sceneCon->setExtractor(SCENE_METABALL, ACTOR_SHIMAJI, JOINT_NECK);
-            sceneCon->setExtractor(SCENE_METABALL, ACTOR_SHIMAJI, JOINT_CHEST);
-            sceneCon->setExtractor(SCENE_METABALL, ACTOR_SHIMAJI, JOINT_LEFT_WRIST);
-            
-            sceneCon->setExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_NECK);
-            sceneCon->setExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_CHEST);
-            sceneCon->setExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_LEFT_WRIST);
-        }
-        
-        if (sceneName == SCENE_UPSIDE)
-        {
-            sceneCon->clearExtractor(SCENE_UPSIDE);
-            sceneCon->setExtractor(SCENE_UPSIDE, ACTOR_KOJIRI, JOINT_NECK);
-            sceneCon->setExtractor(SCENE_UPSIDE, ACTOR_SHIMAJI, JOINT_NECK);
-            sceneCon->setExtractor(SCENE_UPSIDE, ACTOR_MIYASHITA, JOINT_NECK);
-            sceneCon->setExtractor(SCENE_UPSIDE, ACTOR_ANDO, JOINT_NECK);
-        }
+        if (sceneName == SCENE_METABALL)	callSection("fromMaster-metaball");
+        if (sceneName == SCENE_UPSIDE)		callSection("fromMaster-upsidedown");
+		if (sceneName == SCENE_LINE)		callSection("fromMaster-line_ext");
 	}
 }
 

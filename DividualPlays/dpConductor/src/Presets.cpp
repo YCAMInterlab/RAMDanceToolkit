@@ -212,8 +212,8 @@ void dpConductor::setSections()
 	setCamActorScene(ns);
 	ns->addScene(SCENE_DONUTS, true, true, true, true);
 	ns->addExtractor(SCENE_DONUTS, ACTOR_ANDO, JOINT_ABDOMEN);
-	ns->addExtractor(SCENE_DONUTS, ACTOR_KOJIRI, JOINT_LEFT_TOE);
-	ns->addExtractor(SCENE_DONUTS, ACTOR_KOJIRI, JOINT_RIGHT_TOE);
+	ns->addExtractor(SCENE_DONUTS, ACTOR_KOJIRI, JOINT_LEFT_ANKLE);
+	ns->addExtractor(SCENE_DONUTS, ACTOR_KOJIRI, JOINT_RIGHT_ANKLE);
 	ns->addExtractor(SCENE_DONUTS, ACTOR_SHIMAJI, JOINT_CHEST);
 	ns->addExtractor(SCENE_DONUTS, ACTOR_SHIMAJI, JOINT_ABDOMEN);
 	ns->addExtractor(SCENE_DONUTS, ACTOR_MIYASHITA, JOINT_LEFT_HAND);
@@ -350,6 +350,52 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_CHASER, ACTOR_MIYASHITA, JOINT_NECK);
 	setActorViewing(ns, true, true, true, true);
 
+	
+#pragma mark - fromMaster
+	
+#pragma mark master_line
+	ns = setBasicSection("fromMaster-line_ext", true, true);
+	setCamActorScene(ns);
+	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_LEFT_ELBOW);
+	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_NECK);
+	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_ABDOMEN);
+	ns->addExtractor(SCENE_LINE, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
+	
+	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_LEFT_ELBOW);
+	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_NECK);
+	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_LEFT_HIP);
+	ns->addExtractor(SCENE_LINE, ACTOR_MIYASHITA, JOINT_RIGHT_KNEE);
+	ns->addTuneF(SCENE_LINE, "Curve0", 300.0);
+	ns->addTuneF(SCENE_LINE, "ext_to0", 800.0);
+	ns->addTuneF(SCENE_LINE, "ext_from0", 800.0);
+	ns->addTuneF(SCENE_LINE, "Curve1", 300.0);
+	ns->addTuneF(SCENE_LINE, "ext_to1", 800.0);
+	ns->addTuneF(SCENE_LINE, "ext_from1", 800.0);
+	setActorViewing(ns, false, true, false, true);
+	
+#pragma mark master_metaball
+	ns = setBasicSection("fromMaster-metaball", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_METABALL, false, true, false, true);
+	string act[] = {ACTOR_ANDO, ACTOR_KOJIRI, ACTOR_SHIMAJI, ACTOR_MIYASHITA};
+	for (int i = 0;i < 4;i++)
+	{
+		ns->addExtractor(SCENE_METABALL, act[i], JOINT_NECK);
+		ns->addExtractor(SCENE_METABALL, act[i], JOINT_CHEST);
+		ns->addExtractor(SCENE_METABALL, act[i], JOINT_LEFT_WRIST);
+	}
+	setActorViewing(ns, true, true, true, true);
+	
+#pragma mark master_upsidedown
+	ns = setBasicSection("fromMaster-upsidedown", true, true);
+	setCamActorScene(ns);
+	ns->addScene(SCENE_UPSIDE, false, true, false, true);
+	ns->addExtractor(SCENE_UPSIDE, ACTOR_KOJIRI		, JOINT_NECK);
+	ns->addExtractor(SCENE_UPSIDE, ACTOR_ANDO		, JOINT_NECK);
+	ns->addExtractor(SCENE_UPSIDE, ACTOR_SHIMAJI	, JOINT_NECK);
+	ns->addExtractor(SCENE_UPSIDE, ACTOR_MIYASHITA	, JOINT_NECK);
+	
+#pragma mark master_
 }
 
 

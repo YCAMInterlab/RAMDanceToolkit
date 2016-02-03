@@ -40,13 +40,29 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontface" : 1,
+					"fontsize" : 20.0,
+					"id" : "obj-168",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1432.0, 156.333252, 152.0, 29.0 ],
+					"presentation_rect" : [ 1461.833252, 226.5, 0.0, 0.0 ],
+					"style" : "",
+					"text" : "全箱庭駆動",
+					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-162",
 					"maxclass" : "toggle",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1475.0, 271.0, 54.0, 54.0 ],
+					"patching_rect" : [ 1432.0, 183.5, 104.0, 104.0 ],
 					"style" : ""
 				}
 
@@ -58,7 +74,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1475.0, 356.099976, 252.0, 22.0 ],
+					"patching_rect" : [ 1432.0, 318.599976, 252.0, 22.0 ],
 					"style" : "",
 					"text" : "prepend /ram/set_scene dpAllHakoniwaMove"
 				}
@@ -71,7 +87,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1475.0, 329.700073, 62.0, 22.0 ],
+					"patching_rect" : [ 1432.0, 292.200073, 62.0, 22.0 ],
 					"style" : "",
 					"text" : "pack i 0 0"
 				}
@@ -83,7 +99,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1475.0, 378.5, 69.0, 22.0 ],
+					"patching_rect" : [ 1432.0, 341.0, 69.0, 22.0 ],
 					"presentation_rect" : [ 1508.5, 402.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "s toRDTK2"
@@ -533,7 +549,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1551.5, 229.5, 69.0, 22.0 ],
+					"patching_rect" : [ 1508.5, 109.0, 69.0, 22.0 ],
 					"style" : "",
 					"text" : "s toRDTK1"
 				}
@@ -545,7 +561,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1475.0, 229.5, 69.0, 22.0 ],
+					"patching_rect" : [ 1432.0, 109.0, 69.0, 22.0 ],
 					"style" : "",
 					"text" : "s toRDTK2"
 				}
@@ -558,7 +574,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1475.0, 203.5, 189.0, 22.0 ],
+					"patching_rect" : [ 1432.0, 83.0, 189.0, 22.0 ],
 					"style" : "",
 					"text" : "/dp/remainedHakoniwaView/reset"
 				}
@@ -2626,7 +2642,7 @@
 					"destination" : [ "obj-133", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 1484.5, 226.0, 1561.0, 226.0 ],
+					"midpoints" : [ 1441.5, 105.5, 1518.0, 105.5 ],
 					"source" : [ "obj-130", 0 ]
 				}
 
