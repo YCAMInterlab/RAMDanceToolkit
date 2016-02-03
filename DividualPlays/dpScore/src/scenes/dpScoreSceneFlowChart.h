@@ -70,7 +70,7 @@ public:
     ofxTrueTypeFontUC&  getFontJP();
     
     const float kWidth  {1920.f};
-    const float kHeight {1200.f};
+    const float kHeight {1080.f};
     
 private:
     void setupNodes();

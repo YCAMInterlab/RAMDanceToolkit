@@ -12,6 +12,7 @@
 #include "dpScoreObjects.h"
 #include "dpScoreNodeStage.h"
 #include "dpScoreNodeHakoniwa.h"
+#include "dpScoreStyle.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 

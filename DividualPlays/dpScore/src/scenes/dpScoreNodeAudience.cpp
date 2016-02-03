@@ -12,6 +12,7 @@
 #include "dpScoreObjects.h"
 #include "dpScoreNodeStage.h"
 #include "dpScoreNodeHakoniwa.h"
+#include "dpScoreStyle.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
@@ -30,6 +31,11 @@ NodeAudience::NodeAudience()
 NodeAudience::~NodeAudience()
 {
     
+}
+
+static void drawBox(const ofVec3f& p, float w, float h, float d)
+{
+	ofDrawBox(p.x + w * 0.5f, p.y + h * 0.5f, p.z + d * 0.5f, w, h, d);
 }
 
 void NodeAudience::customDraw()

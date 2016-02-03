@@ -35,7 +35,7 @@ void FlowChartBaseScene::reset(SceneFlowChart* owner)
 	mElapsedTime = 0.f;
 	mLineTime = 0.f;
 	owner->getNode<NodeHakoniwa>()->setFocus(true);
-	LineObj::enableAnimation = false;
+	CompoundLine::enableAnimation = false;
 }
 
 void FlowChartBaseScene::update(SceneFlowChart* owner)
