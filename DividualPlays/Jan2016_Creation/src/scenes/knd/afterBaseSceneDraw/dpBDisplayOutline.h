@@ -9,6 +9,19 @@
 #ifndef __RAMDanceToolkit__dpBDisplayOutline__
 #define __RAMDanceToolkit__dpBDisplayOutline__
 
-#include <stdio.h>
+#include "ramMain.h"
+#include "dpConstants.h"
+
+class dpBDisplayOutline{
+public:
+    void setup();
+    void update();
+    void receiveOsc();
+    void draw();
+protected:
+    ramOscReceiveTag mReceiver;
+    bool mIsEnable = false;
+    float mLineWidth = 1.0;
+};
 
 #endif /* defined(__RAMDanceToolkit__dpBDisplayOutline__) */
