@@ -212,6 +212,8 @@ void dpConductor::callHakoniwaPreset(string scene)
         sceneCon->setExtractor(HAKO_H_TORNADO, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
         sceneCon->setExtractor(HAKO_H_TORNADO, ACTOR_SHIMAJI, JOINT_LEFT_HIP);
 		sceneCon->setActorView(false, false, true, false);
+        
+        callSection("fromMaster-threept");
 	}
 #pragma mark TODO: ギアビズ
 	if (scene == HAKO_GEAR)
@@ -225,6 +227,8 @@ void dpConductor::callHakoniwaPreset(string scene)
 		sceneCon->setExtractor(HAKO_H_GEAR, ACTOR_ANDO, JOINT_RIGHT_KNEE);
 		sceneCon->setExtractor(HAKO_H_GEAR, ACTOR_ANDO, JOINT_RIGHT_KNEE);
 		sceneCon->setActorView(false, false, false, false);
+        
+        callSection("fromMaster-burst");
 	}
 	if (scene == HAKO_STRUGGLE)
 	{
@@ -237,10 +241,13 @@ void dpConductor::callHakoniwaPreset(string scene)
 			sceneCon->setExtractor(HAKO_H_STRUGGLE, act[i], JOINT_LEFT_KNEE);
 			sceneCon->setExtractor(HAKO_H_STRUGGLE, act[i], JOINT_RIGHT_KNEE);
 		}
+        
+        callSection("fromMaster-bigbox");
 	}
 	if (scene == HAKO_MAGPENDULUM)
 	{
         sceneCon->setScene(SCENE_ACTOR, false, false, true);
+        sceneCon->setScene(HAKO_H_MAGPENDULUM, false, false, true);
 		sceneCon->setScene(HAKO_MAGPENDULUM, true, false, true);
         sceneCon->setToggleTune(SCENE_ACTOR, "drawFloor", false);
 
@@ -279,6 +286,7 @@ void dpConductor::callHakoniwaPreset(string scene)
 		sceneCon->setExtractor(HAKO_H_SANDSTORM, ACTOR_SHIMAJI, JOINT_NECK);
 		sceneCon->setExtractor(HAKO_H_SANDSTORM, ACTOR_SHIMAJI, JOINT_RIGHT_WRIST);
 		sceneCon->setExtractor(HAKO_H_SANDSTORM, ACTOR_MIYASHITA, JOINT_RIGHT_WRIST);
+        callSection("fromMaster-monster");
 	}
 	
 //	if (scene == HAKO_SANDSTORM)

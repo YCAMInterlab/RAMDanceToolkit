@@ -64,14 +64,14 @@ class Monster_ext_2 : public Monster_ext
 {
 	inline string getName() const { return "Monster_ext2"; }
     ramCenteredActor mCentered;
-    
-    float mZoom = 0.0;
+
+    ofPoint mTrans;
+    bool mIsCentered = true;
     
 public:
     void setupControlPanel();
     void drawActor(const ramActor &actor);
-    
-    ofPoint mTrans;
+
 };
 
 

@@ -22,7 +22,7 @@ void Monster_ext::setupControlPanel()
     randomizationAmount = .15;
     ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
     panel->addButton("Reset", &needToReset, 20, 20);
-    panel->addButton("Random Line", &randomLine, 20, 20);
+    panel->addToggle("Random Line", &randomLine, 20, 20);
     panel->addToggle("Randomize Topology", &randomizeTopology, 20, 20);
     panel->addToggle("Randomize Geometry", &randomizeGeometry, 20, 20);
     panel->addSlider("Min scale", 0, 4, &minScale, 200, 20);
@@ -173,6 +173,7 @@ void Monster_ext::update()
         {
             attach(all[i], all[i - 1]);
         }
+        randomLine = false;
     }
 }
 
@@ -221,6 +222,9 @@ void Monster_ext_2::setupControlPanel(){
     panel->addSlider("x",-1000, 1000, &mTrans.x, 200, 20);
     panel->addSlider("y",-1000, 1000, &mTrans.y, 200, 20);
     panel->addSlider("z",0, 2000, &mTrans.z, 200, 20);
+    panel->addToggle("Centered", &mIsCentered);
+    
+    mIsCentered = true;
 }
 
 void Monster_ext_2::drawActor(const ramActor &actor)
@@ -230,8 +234,9 @@ void Monster_ext_2::drawActor(const ramActor &actor)
         if (mex.getActorNameAt(q) == actor.getName()) bActEnable = true;
     
     if (!bActEnable) return;
-    
-    monsterArray = mCentered.update(actor);
+        
+    if(mIsCentered)monsterArray = mCentered.update(actor);
+    else monsterArray = actor;
     
     for (int i=0; i < treeSwap.size(); i++)
     {
