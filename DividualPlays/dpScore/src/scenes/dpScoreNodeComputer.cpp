@@ -20,8 +20,8 @@ NodeComputer::NodeComputer()
 {
 	title = "RAM Dance Toolkit";
 	titleJP = "RAMシステム";
-	descriptionJP = "「RAMシステム」\nRAMシステムはダンサーの動きにあわせて\n仮想の環境を変化させます";
-	descriptionJPFromHakoniwa = "「RAMシステム」\n再度、箱庭内部の状態にあわせて\n仮想の環境を変化させます";
+	descriptionJP = "RAMシステムに伝えます";
+	descriptionJPFromHakoniwa = "RAMシステムはその情報を形状や箱庭へと変換します";
 
 	const float diff {NodeStage::kDepth - Deck::getDepth() * kNumDecks};
 	setGlobalPosition(-NodeStage::kWidth * 0.5f - Deck::getWidth() - 320.f,

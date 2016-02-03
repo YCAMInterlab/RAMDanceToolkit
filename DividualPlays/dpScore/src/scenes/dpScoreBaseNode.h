@@ -15,54 +15,27 @@ DP_SCORE_NAMESPACE_BEGIN
 
 class BaseNode: public ofNode {
 public:
-	BaseNode()
-	{
-		mOffsets.clear();
-	}
+    BaseNode();
+    virtual ~BaseNode() = default;
+    
+    virtual void customDraw() override;
 
-	virtual ~BaseNode()
-	{
-	}
+    size_t getNumAimingPositions() const;
+    ofVec3f getAimingPosition(size_t idx) const;
+    void addAimingOffset(const ofVec3f& offset);
+    void clearAimingOffsets();
 
-	virtual void customDraw() override
-	{
-	}
-
-	size_t getNumAimingPositions() const
-	{
-		return mOffsets.size();
-	}
-
-	ofVec3f getAimingPosition(size_t idx) const
-	{
-		return getGlobalPosition() + mOffsets.at(idx);
-	}
-
-	void addAimingOffset(const ofVec3f& offset)
-	{
-		mOffsets.push_back(offset);
-	}
-
-	void clearAimingOffsets()
-	{
-		mOffsets.clear();
-	}
-
-	ofCamera& getCamera()
-	{
-		return mCamera;
-	}
-
-	const ofCamera& getCamera() const
-	{
-		return mCamera;
-	}
+    ofCamera& getCamera();
+    const ofCamera& getCamera() const;
 
 	float t {0.f};
 	string title;
 	string titleJP;
 	string description;
 	string descriptionJP;
+    
+    weak_ptr<BaseNode> parent;
+    weak_ptr<BaseNode> child;
 
 protected:
 	vector<ofVec3f> mOffsets;

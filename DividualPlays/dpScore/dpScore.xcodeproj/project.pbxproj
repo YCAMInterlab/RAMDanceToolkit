@@ -24,6 +24,7 @@
 		D215F1DF1C61FD1C00DF560C /* dpScoreGadgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1DD1C61FD1C00DF560C /* dpScoreGadgets.cpp */; settings = {ASSET_TAGS = (); }; };
 		D215F1E21C61FFD500DF560C /* dpScoreLinePrimitives.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1E01C61FFD500DF560C /* dpScoreLinePrimitives.cpp */; settings = {ASSET_TAGS = (); }; };
 		D215F1E51C6200BF00DF560C /* dpScoreComplexLineObjects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1E31C6200BF00DF560C /* dpScoreComplexLineObjects.cpp */; settings = {ASSET_TAGS = (); }; };
+		D215F1E81C6207A000DF560C /* dpScoreCompoundTriangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1E61C6207A000DF560C /* dpScoreCompoundTriangle.cpp */; settings = {ASSET_TAGS = (); }; };
 		D21C77201A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21C771E1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp */; };
 		D21D0B891A4C046000CC3598 /* ofxUI2DGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF51A4C046000CC3598 /* ofxUI2DGraph.cpp */; };
 		D21D0B8A1A4C046000CC3598 /* ofxUI2DPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF71A4C046000CC3598 /* ofxUI2DPad.cpp */; };
@@ -474,6 +475,8 @@
 		D215F1E11C61FFD500DF560C /* dpScoreLinePrimitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreLinePrimitives.h; sourceTree = "<group>"; };
 		D215F1E31C6200BF00DF560C /* dpScoreComplexLineObjects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreComplexLineObjects.cpp; sourceTree = "<group>"; };
 		D215F1E41C6200BF00DF560C /* dpScoreComplexLineObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreComplexLineObjects.h; sourceTree = "<group>"; };
+		D215F1E61C6207A000DF560C /* dpScoreCompoundTriangle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreCompoundTriangle.cpp; sourceTree = "<group>"; };
+		D215F1E71C6207A000DF560C /* dpScoreCompoundTriangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreCompoundTriangle.h; sourceTree = "<group>"; };
 		D21C771E1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneCorrelation.cpp; sourceTree = "<group>"; };
 		D21C771F1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneCorrelation.h; sourceTree = "<group>"; };
 		D21D08821A4C045D00CC3598 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -1101,6 +1104,8 @@
 				D215F1E11C61FFD500DF560C /* dpScoreLinePrimitives.h */,
 				D215F1E31C6200BF00DF560C /* dpScoreComplexLineObjects.cpp */,
 				D215F1E41C6200BF00DF560C /* dpScoreComplexLineObjects.h */,
+				D215F1E61C6207A000DF560C /* dpScoreCompoundTriangle.cpp */,
+				D215F1E71C6207A000DF560C /* dpScoreCompoundTriangle.h */,
 				D215F1DD1C61FD1C00DF560C /* dpScoreGadgets.cpp */,
 				D215F1DE1C61FD1C00DF560C /* dpScoreGadgets.h */,
 				D215F1D01C61D3A700DF560C /* RDTK */,
@@ -1693,6 +1698,7 @@
 				D215F1B71C60B68E00DF560C /* dpScoreFlowChartBaseScene.cpp in Sources */,
 				D27D33D91C5A41FB009F2B25 /* ofxUIImageButton.cpp in Sources */,
 				D27D33DA1C5A41FB009F2B25 /* ofxOscParameterSync.cpp in Sources */,
+				D215F1E81C6207A000DF560C /* dpScoreCompoundTriangle.cpp in Sources */,
 				D27D33DB1C5A41FB009F2B25 /* ofxEvent.cpp in Sources */,
 				D27D33DD1C5A41FB009F2B25 /* ofxMotionerSkeleton.cpp in Sources */,
 				D215F1BA1C60B7D900DF560C /* dpScoreFlowChartSceneMove.cpp in Sources */,

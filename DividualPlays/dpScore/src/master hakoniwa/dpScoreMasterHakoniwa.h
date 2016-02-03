@@ -77,6 +77,9 @@ private:
     AnalyzeMean mAnalyzeMean;
     AnalyzePixelate mAnalyzePixelate;
     
+    ofxOscSender mOscSenderLighting;
+    const string kOscAddrLighting {"/dp/light/masterHakoniwa"};
+    
     bool mEmergencyStop{false};
     
     bool mEnableCameraUnit{false};

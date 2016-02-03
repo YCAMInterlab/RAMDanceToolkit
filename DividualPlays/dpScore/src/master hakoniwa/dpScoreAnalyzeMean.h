@@ -25,8 +25,8 @@ public:
     float mMeanLimit{20.f};
     
     int mPrevScene{0};
-    float mPrevSetSceneTime{-90.f};
-    float mMinSetSceneTime{90.f};
+    float mPrevSetSceneTime{-180.f};
+    float mMinSetSceneTime{180.f};
     float mLastUpdateSpan{0.f};
     float mLastFrameTime{0.f};
     
