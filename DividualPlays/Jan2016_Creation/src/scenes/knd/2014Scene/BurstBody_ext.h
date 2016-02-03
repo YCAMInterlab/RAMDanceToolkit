@@ -13,6 +13,8 @@
 #include "KezSlidePoint.h"
 #include "BurstBody.h"
 
+#include "ramCenteredActor.h"
+
 class BurstBody_ext : public ramBaseScene
 {
     
@@ -27,18 +29,28 @@ public:
         ramGetGUI().addToggle("threshDir",&mThreshDir);
         ramGetGUI().addToggle("velMode",&mVelMode);
    
+        ramGetGUI().addToggle("Centered", &mIsCentered);
+        
+        ramGetGUI().addSlider("trans:x", -300, 300, &mTrans.x);
+        ramGetGUI().addSlider("trans:y", -300, 300, &mTrans.y);
+        ramGetGUI().addSlider("trans:z", 0, 2000, &mTrans.z);
+        
         ofxUICanvasPlus* gui = ramGetGUI().getCurrentUIContext();
         gui->addWidgetDown(new ofxUILabel("BodyColor", OFX_UI_FONT_MEDIUM));
+
+        
         gui->addSlider("R", 0, 1, &bodyColor.r, 70, 16);
         gui->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
         gui->addSlider("G", 0, 1, &bodyColor.g, 70, 16);
         gui->addSlider("B", 0, 1, &bodyColor.b, 70, 16);
+        
         gui->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
         gui->autoSizeToFitWidgets();
 		
 		bodyColor.g = 0.2;
 		bodyColor.b = 0.2;
         mex.setupControlPanel(this);
+        
     }
     
     void setup()
@@ -126,12 +138,19 @@ public:
         int cnt = 0;
         for (int i = 0;i < am.getNumNodeArray();i++)
         {
+
             ramActor act = am.getNodeArray(i);
             bool bActEnable = false;
             for (int q = 0;q < mex.getNumPort();q++)
                 if (mex.getActorNameAt(q) == act.getName()) bActEnable = true;
             
             if (!bActEnable) continue;
+            
+            const ofPoint center = act.getNode(ramActor::JOINT_ABDOMEN).getGlobalPosition();
+            
+            ofPushMatrix();
+            if(mIsCentered)ofTranslate(-center.x,-center.y,-center.z);
+            ofTranslate(mTrans);
             
             for (int j = 0;j < act.getNumNode();j++)
             {
@@ -157,6 +176,8 @@ public:
                 
                 cnt++;
             }
+            
+            ofPopMatrix();
         }
         
         mex.draw();
@@ -213,6 +234,11 @@ private:
     ramMotionExtractor mex;
     
     ofShader mShader;
+    
+    ofPoint mTrans;
+    
+    bool mIsCentered = true;
+    
 };
 
 
