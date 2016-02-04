@@ -71,7 +71,7 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
         v = 50;
     }
     
-    distanceThreshold[0] = 20;
+    distanceThreshold[0] = 30;
     
     ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoniwaMagnetPendulum::guiEvent);
     
