@@ -16,20 +16,20 @@ DP_SCORE_NAMESPACE_BEGIN
 
 NodeMotioner::NodeMotioner()
 {
-    title = "Motion Captures";
-    titleJP = "モーションキャプチャ";
-    descriptionJP = "「モーションキャプチャ」\nダンサーの動きがセンサーによって\nRAMシステムに伝えられます";
-    
-    addAimingOffset(ofVec3f::zero());
-    
-    getCamera().setFov(70.f);
-    getCamera().setPosition(0.f, 400.f, 400.f);
-    getCamera().setOrientation(ofVec3f(-30.f, 0.f, 0.f));
+	title = "Motion Captures";
+	titleJP = "モーションキャプチャ";
+	descriptionJP = "センサーはダンサーの身体の動きを情報化し";
+
+	addAimingOffset(ofVec3f::zero());
+
+	getCamera().setFov(70.f);
+	getCamera().setPosition(0.f, 400.f, 400.f);
+	getCamera().setOrientation(ofVec3f(-30.f, 0.f, 0.f));
 }
 
 NodeMotioner::~NodeMotioner()
 {
-    
+
 }
 
 void NodeMotioner::customDraw()

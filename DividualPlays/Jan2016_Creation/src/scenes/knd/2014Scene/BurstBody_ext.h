@@ -149,7 +149,7 @@ public:
             const ofPoint center = act.getNode(ramActor::JOINT_ABDOMEN).getGlobalPosition();
             
             ofPushMatrix();
-            if(mIsCentered)ofTranslate(-center.x,-center.y,-center.z);
+            if(mIsCentered)ofTranslate(-center.x,0.0,-center.z);
             ofTranslate(mTrans);
             
             for (int j = 0;j < act.getNumNode();j++)

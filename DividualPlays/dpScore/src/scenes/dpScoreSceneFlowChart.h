@@ -114,7 +114,7 @@ private:
     const string    kOscAddrLighting    {"/dp/light/moving"};
     const int       kNumFbos            {2};
     int             mCurrentFbo         {kNumFbos};
-	int             mOrderIdx           {2};
+	int             mOrderIdx           {0};
     int             mNodeIdx            {0};
     int             mSceneIdx           {0};
     

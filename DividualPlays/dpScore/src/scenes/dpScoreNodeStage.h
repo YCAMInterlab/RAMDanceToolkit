@@ -31,6 +31,7 @@ public:
 private:
 	ofVbo mFloor;
     Rect mScreenRect;
+    TriRect mScreen;
 };
 
 DP_SCORE_NAMESPACE_END
