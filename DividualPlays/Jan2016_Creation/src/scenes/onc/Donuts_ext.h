@@ -30,6 +30,8 @@ class Donuts_ext : public ramBaseScene
     int mNumDuplicates;
     float mRadian;
     
+    float mWholeScale;
+    
 public:
     void setupControlPanel();
     void setup();
@@ -42,6 +44,7 @@ public:
     void clear();
     string getName() const;
     void setAllVisiblity(bool b);
+    void onEnabled();
 };
 
 
