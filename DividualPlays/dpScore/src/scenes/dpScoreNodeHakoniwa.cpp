@@ -21,7 +21,7 @@ NodeHakoniwa::NodeHakoniwa()
 {
 	title = "Hakoniwa x 7";
 	titleJP = "箱庭（７種類）";
-	descriptionJP = "RAMシステムはその情報を形状や箱庭へと変換します";
+	descriptionJP = "RAMシステムはその情報を\n光や音や映像へと変換します";
 
 	setGlobalPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 157.f,
 	                  0.f,
@@ -41,21 +41,21 @@ NodeHakoniwa::NodeHakoniwa()
 		mDesks.push_back(Desk());
 	}
 
-    mHakoniwas.clear();
-    mHakoniwas.assign(NUM_HAKONIWA_TYPES, ofPtr<BaseHakoniwa>());
-    mHakoniwas.at(HAKO_TORNADO) = makeShared<HakoTornado>();
-    mHakoniwas.at(HAKO_WORM) = makeShared<HakoWorm>();
-    mHakoniwas.at(HAKO_STRUGGLE) = makeShared<HakoStruggle>();
-    mHakoniwas.at(HAKO_SERVO_PENDULUM) = makeShared<HakoServoPendulum>();
-    mHakoniwas.at(HAKO_GEAR) = makeShared<HakoGear>();
-    mHakoniwas.at(HAKO_MAG_PENDULUM) = makeShared<HakoMagPendulum>();
-    mHakoniwas.at(HAKO_SAND_STORM) = makeShared<HakoSandStorm>();
+	mHakoniwas.clear();
+	mHakoniwas.assign(NUM_HAKONIWA_TYPES, ofPtr<BaseHakoniwa>());
+	mHakoniwas.at(HAKO_TORNADO) = makeShared<HakoTornado>();
+	mHakoniwas.at(HAKO_WORM) = makeShared<HakoWorm>();
+	mHakoniwas.at(HAKO_STRUGGLE) = makeShared<HakoStruggle>();
+	mHakoniwas.at(HAKO_SERVO_PENDULUM) = makeShared<HakoServoPendulum>();
+	mHakoniwas.at(HAKO_GEAR) = makeShared<HakoGear>();
+	mHakoniwas.at(HAKO_MAG_PENDULUM) = makeShared<HakoMagPendulum>();
+	mHakoniwas.at(HAKO_SAND_STORM) = makeShared<HakoSandStorm>();
 
-    mHakoOrigin.setOrientation(ofVec3f(0.f, -90.f, 0.f));
-    for (auto p : mHakoniwas) {
-        p->setParent(mHakoOrigin);
-    }
-    
+	mHakoOrigin.setOrientation(ofVec3f(0.f, -90.f, 0.f));
+	for (auto p : mHakoniwas) {
+		p->setParent(mHakoOrigin);
+	}
+
 	ofVec3f v(10.f, Desk::getHeight());
 	mHakoniwas.at(HAKO_TORNADO)->setPosition(ofVec3f(0.f, 0.f, -Desk::getWidth() * 0.5f - mHakoniwas.at(HAKO_TORNADO)->getDepth() * 0.5f) + v);
 	v += ofVec3f(10.f + mHakoniwas.at(HAKO_TORNADO)->getWidth(), 0.f);
@@ -91,23 +91,23 @@ void NodeHakoniwa::customDraw()
 		ScopedTranslate t(0.f, 0.f, i * Desk::getDepth());
 		mDesks.at(i).draw();
 	}
-    for (auto i : rep(mHakoniwas.size())) {
-        mHakoniwas.at(i)->draw();
-    }
+	for (auto i : rep(mHakoniwas.size())) {
+		mHakoniwas.at(i)->draw();
+	}
 
 	if (mFocus) {
 		const int time = (int)getElapsedTime() * 0.25f;
-        mCurrHakoniwa = time % mHakoniwas.size();
-        if (mCurrHakoniwa <= HAKO_SERVO_PENDULUM) {
-            mCurrDesk = 0;
-        }
-        else if (mCurrHakoniwa <= HAKO_MAG_PENDULUM) {
-            mCurrDesk = 1;
-        }
-        else {
-            mCurrDesk = 2;
-        }
-        mCurrDesk = std::min(mCurrDesk, kNumDesks);
+		mCurrHakoniwa = time % mHakoniwas.size();
+		if (mCurrHakoniwa <= HAKO_SERVO_PENDULUM) {
+			mCurrDesk = 0;
+		}
+		else if (mCurrHakoniwa <= HAKO_MAG_PENDULUM) {
+			mCurrDesk = 1;
+		}
+		else {
+			mCurrDesk = 2;
+		}
+		mCurrDesk = std::min(mCurrDesk, kNumDesks);
 
 		ofSetColor(color::kMain);
 		ofDisableDepthTest();
@@ -115,16 +115,16 @@ void NodeHakoniwa::customDraw()
 //            ScopedTranslate t(0.f, 0.f, mCurrDesk * Desk::getDepth());
 //            mDesks.at(mCurrDesk).draw();
 //        }
-        auto hako = mHakoniwas.at(mCurrHakoniwa);
-        hako->draw();
+		auto hako = mHakoniwas.at(mCurrHakoniwa);
+		hako->draw();
 
 		//mOffsets.front().set(0.f, Desk::getHeight(), Desk::getDepth() * mCurrDesk + Desk::getDepth() * 0.5f);
-        
-        ofVec3f v = hako->getGlobalPosition();
-        v.x -= hako->getDepth() * 0.5f;
-        v.y += hako->getHeight() * 0.5f;
-        v.z += hako->getWidth() * 0.5f;
-        mOffsets.front() = v;
+
+		ofVec3f v = hako->getGlobalPosition();
+		v.x -= hako->getDepth() * 0.5f;
+		v.y += hako->getHeight() * 0.5f;
+		v.z += hako->getWidth() * 0.5f;
+		mOffsets.front() = v;
 	}
 	else {
 		mOffsets.front().set(NodeHakoniwa::getWidth() * 0.5f, Desk::getHeight(), NodeHakoniwa::getDepth() * 0.5f);

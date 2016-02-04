@@ -20,7 +20,7 @@ NodeLight::NodeLight()
 {
 	title = "Lights";
 	titleJP = "照明";
-	descriptionJP = "「照明」";
+	descriptionJP = "RAMシステムはその情報を\n光や音や映像へと変換します";
 
 	setGlobalPosition(0.f, getHeight(), 0.f);
 	addAimingOffset(ofVec3f::zero());
@@ -34,8 +34,8 @@ NodeLight::NodeLight()
 			const float w {600.f};
 			ParLight p;
 			p.position = ofVec3f(-w * 0.5f + (w / (float)getNumX()) * i,
-                                 0.f
-                                 , -w * 0.5f + (w / (float)getNumZ()) * j);
+			                     0.f
+			                     , -w * 0.5f + (w / (float)getNumZ()) * j);
 			mParLights.push_back(p);
 		}
 	}
@@ -70,8 +70,8 @@ NodeLight::ParLight::ParLight()
 void NodeLight::ParLight::draw()
 {
 	ScopedStyle s;
-    ScopedTranslate t(position);
-    
+	ScopedTranslate t(position);
+
 	{
 		ScopedTranslate t(-12.5f, 0.f, 0.f);
 		top.draw();
@@ -85,9 +85,9 @@ void NodeLight::ParLight::draw()
 		ScopedMatrix m;
 		ofTranslate(0.f, -24.f);
 		ofRotateX(angle);
-        if (compoundGetEnableCollapse() == false) {
-            ofDrawCone(ofVec3f(0.f, 15.f, 0.f), 9.f, -14.f);
-        }
+		if (compoundGetEnableCollapse() == false) {
+			ofDrawCone(ofVec3f(0.f, 15.f, 0.f), 9.f, -14.f);
+		}
 		body.draw();
 	}
 }

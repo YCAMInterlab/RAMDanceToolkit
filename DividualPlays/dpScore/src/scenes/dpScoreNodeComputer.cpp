@@ -21,7 +21,7 @@ NodeComputer::NodeComputer()
 	title = "RAM Dance Toolkit";
 	titleJP = "RAMシステム";
 	descriptionJP = "RAMシステムに伝えます";
-	descriptionJPFromHakoniwa = "RAMシステムはその情報を形状や箱庭へと変換します";
+	descriptionJPFromHakoniwa = "こんにちは";
 
 	const float diff {NodeStage::kDepth - Deck::getDepth() * kNumDecks};
 	setGlobalPosition(-NodeStage::kWidth * 0.5f - Deck::getWidth() - 320.f,

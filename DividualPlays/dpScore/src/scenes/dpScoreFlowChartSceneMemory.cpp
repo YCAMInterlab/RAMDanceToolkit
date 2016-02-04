@@ -46,7 +46,7 @@ void FlowChartSceneMemory::drawText(SceneFlowChart* owner)
 		ofSetColor(ofColor::white);
 		owner->getFont().drawString(str, 0.f, 0.f);
 	}
-	const string strJP {"「記憶」\nこのシステムによるトレーニングで\nダンサーは感覚を記憶に留めます\nこの記憶も身体を制御する情報として\nつかわれます"};
+	const string strJP {"「記憶」\nこのシステムによるトレーニングで\nダンサーは感覚を記憶に留めます\n\nこの記憶も身体をコントロールする\n情報としてつかわれます"};
 	{
 		const float t {mElapsedTime / 15.f};
 		const auto lines = ofSplitString(strJP, "\n");

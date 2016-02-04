@@ -14,7 +14,7 @@ NodeDancer::NodeDancer()
 {
 	title = "Dancers";
 	titleJP = "ダンサー";
-    descriptionJP = "ダンサーはこの情報をつかって身体を制御します";
+    descriptionJP = "ダンサーはこの情報によって\n身体をコントロールします";
 
 	addAimingOffset(ofVec3f::zero());
 

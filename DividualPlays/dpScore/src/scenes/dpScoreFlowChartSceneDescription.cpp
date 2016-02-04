@@ -21,7 +21,6 @@ DP_SCORE_NAMESPACE_BEGIN
 void FlowChartSceneDescription::reset(SceneFlowChart* owner)
 {
 	super::reset(owner);
-	owner->getNode<NodeHakoniwa>()->setFocus(false);
 	mCamera->setGlobalPosition(-NodeStage::kWidth * 0.5f + 100.f, 600.f, 800.f);
 	mCamera->setOrientation(ofVec3f(-30.f, 0.f, 0.f));
 }
@@ -29,9 +28,8 @@ void FlowChartSceneDescription::reset(SceneFlowChart* owner)
 void FlowChartSceneDescription::update(SceneFlowChart* owner)
 {
 	super::update(owner);
-
-    owner->getNode<NodeLight>()->t = 0.f;
-    owner->getNode<NodeSpeaker>()->t = 0.f;
+	owner->getNode<NodeLight>()->t = 0.f;
+	owner->getNode<NodeSpeaker>()->t = 0.f;
 }
 
 void FlowChartSceneDescription::drawText(SceneFlowChart* owner)
@@ -49,11 +47,16 @@ void FlowChartSceneDescription::drawText(SceneFlowChart* owner)
 	    owner->getNextNodeName() == getClassName<NodeComputer>()) {
 		strJP = owner->getNode<NodeComputer>()->descriptionJPFromHakoniwa;
 	}
+
 	auto lines = ofSplitString(strJP, "\n");
 	float t {mLineTime / mMoveSpan};
 	t = ofClamp(t, 0.f, 1.f - FLT_EPSILON);
 	const decltype(lines.size())index = lines.size() * t;
 	auto line = lines.at(index);
+
+	if (mTotalTime - mElapsedTime <= mMoveSpan * 3.f) {
+		line = "このやりとりの繰り返しでダンスがつくられます";
+	}
 	{
 		ScopedTranslate t((owner->kWidth - owner->getFontJP().stringWidth(line)) * 0.5f,
 		                  owner->kHeight - 40.f);

@@ -20,7 +20,7 @@ NodeMasterHakoniwa::NodeMasterHakoniwa()
 {
 	title = "Master Hakoniwa";
 	titleJP = "マスター箱庭";
-	descriptionJP = "「マスター箱庭」\n本公演では特殊な役割の箱庭がひとつあります\nこの箱庭がうごきだすと\nダンサーの運動量に応じて色水が落ち\nその混ざり具合で次の仮想環境が選ばれます";
+	descriptionJP = "「マスター箱庭」\n色水の箱庭は それぞれのダンサーの\n動きの蓄積で 対応する色の水を滴下し\nこの色の混ざり方で ダンサーに提示される\n次の情報を選びます";
 
 	setGlobalPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 157.f,
 	                  Desk::getHeight() + 0.5f,

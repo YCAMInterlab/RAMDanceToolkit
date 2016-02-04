@@ -18,7 +18,7 @@ NodeMotioner::NodeMotioner()
 {
 	title = "Motion Captures";
 	titleJP = "モーションキャプチャ";
-	descriptionJP = "センサーはダンサーの身体の動きを情報化し";
+	descriptionJP = "身体の動きをセンサーで情報化し";
 
 	addAimingOffset(ofVec3f::zero());
 

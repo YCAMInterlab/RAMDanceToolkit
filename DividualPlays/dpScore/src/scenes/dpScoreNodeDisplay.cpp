@@ -19,7 +19,7 @@ NodeDisplay::NodeDisplay()
 {
 	title = "Displays";
 	titleJP = "ディスプレイ";
-    descriptionJP = "RAMシステムはその情報を形状や箱庭へと変換します";
+	descriptionJP = "RAMシステムはその情報を\n光や音や映像へと変換します";
 
 	addAimingOffset(getFrontLeft() + ofVec3f(getFrontDisplayWidth() * 0.5f - 6.f,
 	                                         getFrontDisplayHeight() * 0.5f,
