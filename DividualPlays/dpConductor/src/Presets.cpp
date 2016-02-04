@@ -247,7 +247,7 @@ void dpConductor::setSections()
 	setCamActorScene(ns);
 	ns->addScene(SCENE_CHASER, true, true, true, true);
     ns->addScene(SCENE_ACTOR, true, true, true, true);
-	ns->addExtractor(SCENE_CHASER, ACTOR_SHIMAJI, JOINT_NECK);
+	ns->addExtractor(SCENE_CHASER, ACTOR_KOJIRI, JOINT_NECK);
 	ns->addExtractor(SCENE_CHASER, ACTOR_MIYASHITA, JOINT_NECK);
     ns->addTuneT(SCENE_ACTOR, "drawFloor", false);
 	setActorViewing(ns, false, false, true, true);
@@ -339,7 +339,7 @@ void dpConductor::setSections()
 	setCamActorScene(ns);
 	ns->addScene(SCENE_ACTOR, true, true, true, true);
 	ns->addScene(SCENE_CHASER, true, true, true, true);
-	ns->addExtractor(SCENE_CHASER, ACTOR_SHIMAJI, JOINT_NECK);
+	ns->addExtractor(SCENE_CHASER, ACTOR_KOJIRI, JOINT_NECK);
 	ns->addExtractor(SCENE_CHASER, ACTOR_MIYASHITA, JOINT_NECK);
 	ns->addTuneT(SCENE_ACTOR, "drawFloor", false);
 	setActorViewing(ns, false, false, true, true);
