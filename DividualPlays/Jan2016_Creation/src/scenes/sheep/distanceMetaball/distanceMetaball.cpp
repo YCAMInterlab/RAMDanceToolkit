@@ -27,9 +27,9 @@ void distanceMetaball::setupControlPanel(){
 
 	mDrawMEX = false;
 	mDrawMetaball = true;
-	resolution = 16;
-	radius_low = 0.01;
-	radius_high = 0.15;
+	resolution = 22;
+	radius_low = 0.02;
+	radius_high = 0.13;
 	mScale = 1.87;
 	mSmooth = 28.0;
     xCompress = 1.0;

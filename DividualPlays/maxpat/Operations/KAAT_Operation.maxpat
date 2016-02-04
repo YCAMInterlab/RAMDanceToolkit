@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 24.0, 79.0, 1557.0, 1083.0 ],
+		"rect" : [ 65.0, 79.0, 1852.0, 1083.0 ],
 		"bgcolor" : [ 0.239216, 0.254902, 0.278431, 1.0 ],
 		"editing_bgcolor" : [ 0.024046, 0.190084, 0.168283, 0.74902 ],
 		"bglocked" : 0,
@@ -39,6 +39,19 @@
 		"style" : "",
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-174",
+					"maxclass" : "incdec",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "float" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 279.0, 138.0, 42.0, 50.166748 ],
+					"style" : ""
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontface" : 0,
 					"fontsize" : 18.0,
@@ -151,7 +164,7 @@
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 603.0, 266.0, 629.0, 718.0 ],
+						"rect" : [ 603.0, 266.0, 402.0, 573.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -263,7 +276,7 @@
 									"maxclass" : "outlet",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 167.5, 560.0, 57.0, 57.0 ],
+									"patching_rect" : [ 178.5, 492.0, 57.0, 57.0 ],
 									"style" : ""
 								}
 
@@ -277,7 +290,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 178.5, 428.0, 192.5, 22.0 ],
 									"style" : "",
-									"text" : "dpHGearMove 1 0 0"
+									"text" : "dp16_camera_controller 1 0 0"
 								}
 
 							}
@@ -301,7 +314,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 83.0, 346.0, 24.0, 24.0 ],
+									"patching_rect" : [ 83.0, 338.0, 24.0, 24.0 ],
 									"style" : ""
 								}
 
@@ -473,7 +486,7 @@
 									"bgfillcolor_type" : "gradient",
 									"fontsize" : 24.0,
 									"id" : "obj-177",
-									"items" : [ "dp16_camera_controller", ",", "dp16_ramActorTranslator", ",", "Line_ext", ",", "BrokenBody_ext", ",", "BigBox_ext", ",", "FourPoints_ext", ",", "UpsideDown_ext", ",", "HastyChase_ext", ",", "Monster_ext", ",", "Monster_ext2", ",", "ThreePoints_ext", ",", "Donuts_ext", ",", "floorline_ext", ",", "BurstBody_ext", ",", "distanceMetaball", ",", "dpRawCamera", ",", "dpHServoPendulum", ",", "dpVisServoPendulum", ",", "dpVisStage", ",", "dpHStruggle", ",", "dpVisStruggle", ",", "dpHSandStorm", ",", "dpVisSandStorm", ",", "dpHMagPendulum", ",", "dpVisMagPendulum", ",", "dpHTornado", ",", "dpVisTornado", ",", "dpHWorm", ",", "dpAllHakoniwaMove", ",", "dpHGearMove" ],
+									"items" : [ "dp16_ramActorTranslator", ",", "Line_ext", ",", "BrokenBody_ext", ",", "BigBox_ext", ",", "FourPoints_ext", ",", "UpsideDown_ext", ",", "HastyChase_ext", ",", "Monster_ext", ",", "Monster_ext2", ",", "ThreePoints_ext", ",", "Donuts_ext", ",", "floorline_ext", ",", "BurstBody_ext", ",", "distanceMetaball", ",", "dpRawCamera", ",", "dpHServoPendulum", ",", "dpVisServoPendulum", ",", "dpVisStage", ",", "dpHStruggle", ",", "dpVisStruggle", ",", "dpHSandStorm", ",", "dpVisSandStorm", ",", "dpHMagPendulum", ",", "dpVisMagPendulum", ",", "dpHTornado", ",", "dpVisTornado", ",", "dpHWorm", ",", "dpAllHakoniwaMove", ",", "dpHGearMove", ",", "dp16_camera_controller" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -857,7 +870,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 419.5, 90.5, 350.0, 60.0 ],
+					"patching_rect" : [ 396.333252, 64.0, 249.166748, 60.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 183.333252, 431.624939, 253.0, 60.0 ],
 					"style" : "",
@@ -1020,7 +1033,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 576.5, 883.5, 207.0, 24.0 ],
 					"style" : "",
-					"text" : "dpRawCamera"
+					"text" : "dp16_ramActorTranslator"
 				}
 
 			}
@@ -2551,7 +2564,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 43.0, 244.0, 204.0, 22.0 ],
 					"style" : "",
-					"text" : "fp-0090-line-4p"
+					"text" : "fp-0020-kenta-box-relbow"
 				}
 
 			}
@@ -2957,7 +2970,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 364.0, 883.5, 206.0, 24.0 ],
 					"style" : "",
-					"text" : "dpRawCamera 1 1 1"
+					"text" : "dp16_ramActorTranslator 1 0 0"
 				}
 
 			}
@@ -2971,7 +2984,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 49.0, 883.5, 202.0, 24.0 ],
 					"style" : "",
-					"text" : "dpRawCamera 1 1 1"
+					"text" : "dp16_ramActorTranslator 1 0 0"
 				}
 
 			}
@@ -3824,6 +3837,16 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-43", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"midpoints" : [ 288.5, 199.333374, 70.0, 199.333374 ],
+					"source" : [ "obj-174", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-161", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -3973,6 +3996,16 @@
 					"hidden" : 0,
 					"midpoints" : [ 70.0, 468.0, 354.0, 468.0 ],
 					"source" : [ "obj-42", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-174", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"midpoints" : [ 70.0, 248.5, 380.25, 248.5, 380.25, 127.0, 288.5, 127.0 ],
+					"source" : [ "obj-43", 0 ]
 				}
 
 			}
