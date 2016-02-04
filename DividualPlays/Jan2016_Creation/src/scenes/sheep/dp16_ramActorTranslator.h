@@ -11,6 +11,7 @@
 
 #include "ramMain.h"
 #include "dpConstants.h"
+#include "dpPhongShading.h"
 
 class dp16_ramActorTranslator : public ramBaseScene{
 public:
@@ -49,6 +50,8 @@ private:
 	bool viewGridFloor;
 	float floor_scale;
 	float floor_grid_span;
+    
+    dpPhongShading mPhong;
 
 };
 

@@ -61,6 +61,8 @@ void dp16_ramActorTranslator::setupControlPanel()
 	autoLayout = true;
 	margine = 160;
 	drawFloor = true;
+    
+    mPhong.setup();
 }
 
 void dp16_ramActorTranslator::update()
@@ -146,7 +148,7 @@ void dp16_ramActorTranslator::draw()
 		{
 			if ((actor.getName() == nameList[j]) && visibles[j])
 			{
-				drawTargetActor(j, actor);
+                drawTargetActor(j, actor);
 			}
 		}
 	}
@@ -180,7 +182,9 @@ void dp16_ramActorTranslator::draw()
 void dp16_ramActorTranslator::drawTargetActor(int id, ramNodeArray &actor)
 {
 	ofSetColor(palette[id]);
+    mPhong.begin();
 	ramDrawBasicActor(actor);
+    mPhong.end();
 }
 
 void dp16_ramActorTranslator::exit()

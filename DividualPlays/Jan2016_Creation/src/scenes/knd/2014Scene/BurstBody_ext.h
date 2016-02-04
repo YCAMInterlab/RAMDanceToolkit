@@ -49,9 +49,9 @@ public:
 		
         mex.setupControlPanel(this);
         
-        bodyColor.set(dpFloatColor::MAIN_COLOR.r,
-                      dpFloatColor::MAIN_COLOR.g,
-                      dpFloatColor::MAIN_COLOR.b);
+        bodyColor.set(dpDancerFloatColor::SHIMAJI_COLOR.r,
+                      dpDancerFloatColor::SHIMAJI_COLOR.g,
+                      dpDancerFloatColor::SHIMAJI_COLOR.b);
 
     }
     
@@ -101,9 +101,9 @@ public:
         mShader.setupShaderFromSource(GL_FRAGMENT_SHADER, fs);
         mShader.linkProgram();
         
-        bodyColor.set(dpFloatColor::MAIN_COLOR.r,
-                      dpFloatColor::MAIN_COLOR.g,
-                      dpFloatColor::MAIN_COLOR.b);
+        bodyColor.set(dpDancerFloatColor::SHIMAJI_COLOR.r,
+                      dpDancerFloatColor::SHIMAJI_COLOR.g,
+                      dpDancerFloatColor::SHIMAJI_COLOR.b);
         
     }
     
