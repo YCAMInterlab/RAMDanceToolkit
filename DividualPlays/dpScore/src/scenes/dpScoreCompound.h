@@ -18,6 +18,8 @@ DP_SCORE_NAMESPACE_BEGIN
 void compoundSetEnableCollapse(bool enable);
 bool compoundGetEnableCollapse();
 
+#pragma mark ___________________________________________________________________
+
 template <class T> class Compound {
 public:
     virtual ~Compound() = default;
@@ -38,6 +40,8 @@ protected:
     vector<Point> mPoints;
     bool mUpdate;
 };
+
+#pragma mark ___________________________________________________________________
 
 template <class T>
 void Compound<T>::update()

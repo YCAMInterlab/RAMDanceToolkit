@@ -27,6 +27,7 @@
 		D215F1E81C6207A000DF560C /* dpScoreCompoundTriangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1E61C6207A000DF560C /* dpScoreCompoundTriangle.cpp */; settings = {ASSET_TAGS = (); }; };
 		D215F1EB1C621E6600DF560C /* dpScoreCompound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1EA1C621E6600DF560C /* dpScoreCompound.cpp */; settings = {ASSET_TAGS = (); }; };
 		D215F1EE1C6222B200DF560C /* dpScoreTrianglePrimitives.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1EC1C6222B200DF560C /* dpScoreTrianglePrimitives.cpp */; settings = {ASSET_TAGS = (); }; };
+		D215F1F11C63019500DF560C /* dpScoreFlowChartHakoniwa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D215F1EF1C63019500DF560C /* dpScoreFlowChartHakoniwa.cpp */; settings = {ASSET_TAGS = (); }; };
 		D21C77201A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21C771E1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp */; };
 		D21D0B891A4C046000CC3598 /* ofxUI2DGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF51A4C046000CC3598 /* ofxUI2DGraph.cpp */; };
 		D21D0B8A1A4C046000CC3598 /* ofxUI2DPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D21D0AF71A4C046000CC3598 /* ofxUI2DPad.cpp */; };
@@ -483,6 +484,8 @@
 		D215F1EA1C621E6600DF560C /* dpScoreCompound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreCompound.cpp; sourceTree = "<group>"; };
 		D215F1EC1C6222B200DF560C /* dpScoreTrianglePrimitives.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreTrianglePrimitives.cpp; sourceTree = "<group>"; };
 		D215F1ED1C6222B200DF560C /* dpScoreTrianglePrimitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreTrianglePrimitives.h; sourceTree = "<group>"; };
+		D215F1EF1C63019500DF560C /* dpScoreFlowChartHakoniwa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreFlowChartHakoniwa.cpp; sourceTree = "<group>"; };
+		D215F1F01C63019500DF560C /* dpScoreFlowChartHakoniwa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreFlowChartHakoniwa.h; sourceTree = "<group>"; };
 		D21C771E1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dpScoreSceneCorrelation.cpp; sourceTree = "<group>"; };
 		D21C771F1A6FF3C7001ECC52 /* dpScoreSceneCorrelation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpScoreSceneCorrelation.h; sourceTree = "<group>"; };
 		D21D08821A4C045D00CC3598 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -1118,6 +1121,8 @@
 				D215F1ED1C6222B200DF560C /* dpScoreTrianglePrimitives.h */,
 				D215F1DD1C61FD1C00DF560C /* dpScoreGadgets.cpp */,
 				D215F1DE1C61FD1C00DF560C /* dpScoreGadgets.h */,
+				D215F1EF1C63019500DF560C /* dpScoreFlowChartHakoniwa.cpp */,
+				D215F1F01C63019500DF560C /* dpScoreFlowChartHakoniwa.h */,
 				D215F1D01C61D3A700DF560C /* RDTK */,
 				D215F1B41C60B62F00DF560C /* Scene */,
 				D24A92FB1C562C8F00ECCBEF /* Node */,
@@ -1683,6 +1688,7 @@
 				D27D33B71C5A41FB009F2B25 /* IpEndpointName.cpp in Sources */,
 				D27D33B81C5A41FB009F2B25 /* ofxUIDropDownList.cpp in Sources */,
 				D27D33B91C5A41FB009F2B25 /* dpScoreNodeHakoniwa.cpp in Sources */,
+				D215F1F11C63019500DF560C /* dpScoreFlowChartHakoniwa.cpp in Sources */,
 				D27D33BA1C5A41FB009F2B25 /* ofxUIRadio.cpp in Sources */,
 				D27D33BB1C5A41FB009F2B25 /* dpScoreNodeCameraUnit.cpp in Sources */,
 				D27D33BC1C5A41FB009F2B25 /* ofxUIEventArgs.cpp in Sources */,

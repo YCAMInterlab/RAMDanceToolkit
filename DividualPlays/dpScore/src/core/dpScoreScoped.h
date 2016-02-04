@@ -47,6 +47,8 @@ struct ScopedColor : public ScopedStyle {
     virtual ~ScopedColor();
 };
 
+#pragma mark ___________________________________________________________________
+
 struct ScopedMatrix {
     ScopedMatrix() { ofPushMatrix(); }
     virtual ~ScopedMatrix() { ofPopMatrix(); }

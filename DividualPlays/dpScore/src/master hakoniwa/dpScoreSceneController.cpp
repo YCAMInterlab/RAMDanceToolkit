@@ -347,6 +347,15 @@ void SceneController::setUniqueScene(int sceneIndex, bool win0, bool win1)
     
     if (!win0 && !win1) win0 = win1 = true;
     
+    ofxOscMessage m;
+    m.setAddress(kOscAddrNumHakoniwaRemained);
+    m.addIntArg(mUniqueScenes.size());
+    if (enableOscOutRDTK) {
+        for (int i=0; i<mRDKOscSender.size(); i++) {
+            mRDKOscSender.at(i)->sendMessage(m);
+        }
+    }
+    
     const string sceneName{mUniqueScenes.get(sceneIndex)};
     
     sendSetScene(sceneName, win0, win1);
@@ -472,16 +481,6 @@ void SceneController::sendSetScene(const string& name, bool win0, bool win1)
             m.addIntArg((int)scene.window[i]);
         }
         if (enableOscOutRDTK) mCameraUnitOscSender.sendMessage(m);
-    }
-    {
-        ofxOscMessage m;
-        m.setAddress(kOscAddrNumHakoniwaRemained);
-        m.addIntArg(mUniqueScenes.size());
-        if (enableOscOutRDTK) {
-            for (int i=0; i<mRDKOscSender.size(); i++) {
-                mRDKOscSender.at(i)->sendMessage(m);
-            }
-        }
     }
     
     // write scene times

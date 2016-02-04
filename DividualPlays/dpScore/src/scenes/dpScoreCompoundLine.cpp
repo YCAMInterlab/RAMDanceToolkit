@@ -13,21 +13,21 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-Line Line::make(const ofVec3f& p0, const ofVec3f& p1)
+LineType LineType::make(const ofVec3f& p0, const ofVec3f& p1)
 {
-	Line line;
+	LineType line;
 	line.c = p0 * 0.5f + p1 * 0.5f;
 	line.v = p1 - p0;
 	return line;
 }
 
-void Line::set(const ofVec3f& p0, const ofVec3f& p1)
+void LineType::set(const ofVec3f& p0, const ofVec3f& p1)
 {
 	c = p0 * 0.5f + p1 * 0.5f;
 	v = p1 - p0;
 }
 
-void Line::draw()
+void LineType::draw()
 {
 	ofLine(c - v * 0.5f, c + v * 0.5f);
 }
