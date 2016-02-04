@@ -35,7 +35,7 @@ void FlowChartBaseScene::reset(SceneFlowChart* owner)
 	mElapsedTime = 0.f;
 	mLineTime = 0.f;
 	owner->getNode<NodeHakoniwa>()->setFocus(true);
-	CompoundLine::enableAnimation = false;
+    compoundSetEnableCollapse(false);
 }
 
 void FlowChartBaseScene::update(SceneFlowChart* owner)
@@ -79,6 +79,12 @@ void FlowChartBaseScene::update(SceneFlowChart* owner)
     dancer->clearAimingOffsets();
     for (auto i : rep(skeletons.size())) {
         dancer->addAimingOffset(skeletons.at(i)->getJoint(ofxMot::JOINT_HEAD).getGlobalPosition());
+        if (owner->getCurrentNodeName() == getClassName<NodeDancer>()) {
+            dancer->addAimingOffset(skeletons.at(i)->getJoint(ofxMot::JOINT_LEFT_HAND).getGlobalPosition());
+            dancer->addAimingOffset(skeletons.at(i)->getJoint(ofxMot::JOINT_RIGHT_HAND).getGlobalPosition());
+            dancer->addAimingOffset(skeletons.at(i)->getJoint(ofxMot::JOINT_LEFT_TOE).getGlobalPosition());
+            dancer->addAimingOffset(skeletons.at(i)->getJoint(ofxMot::JOINT_RIGHT_TOE).getGlobalPosition());
+        }
     }
 }
 

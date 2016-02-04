@@ -47,10 +47,12 @@ public:
         gui->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
         gui->autoSizeToFitWidgets();
 		
-		bodyColor.g = 0.2;
-		bodyColor.b = 0.2;
         mex.setupControlPanel(this);
         
+        bodyColor.set(dpDancerFloatColor::SHIMAJI_COLOR.r,
+                      dpDancerFloatColor::SHIMAJI_COLOR.g,
+                      dpDancerFloatColor::SHIMAJI_COLOR.b);
+
     }
     
     void setup()
@@ -99,7 +101,9 @@ public:
         mShader.setupShaderFromSource(GL_FRAGMENT_SHADER, fs);
         mShader.linkProgram();
         
-        bodyColor = dpDancerFloatColor::SHIMAJI_COLOR;
+        bodyColor.set(dpDancerFloatColor::SHIMAJI_COLOR.r,
+                      dpDancerFloatColor::SHIMAJI_COLOR.g,
+                      dpDancerFloatColor::SHIMAJI_COLOR.b);
         
     }
     
@@ -149,7 +153,7 @@ public:
             const ofPoint center = act.getNode(ramActor::JOINT_ABDOMEN).getGlobalPosition();
             
             ofPushMatrix();
-            if(mIsCentered)ofTranslate(-center.x,-center.y,-center.z);
+            if(mIsCentered)ofTranslate(-center.x,0.0,-center.z);
             ofTranslate(mTrans);
             
             for (int j = 0;j < act.getNumNode();j++)

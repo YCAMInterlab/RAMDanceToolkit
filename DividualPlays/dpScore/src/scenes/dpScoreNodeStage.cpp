@@ -59,6 +59,7 @@ NodeStage::NodeStage()
     mFloor.setIndexData(&indices.front(), indices.size(), GL_STATIC_DRAW);
     
     mScreenRect.setup(ofVec3f(0.f, kHeight - kScrH, -kDepth * 0.5f - 300.f), kWidth, kScrH);
+    mScreen.setup(ofVec3f(0.f, kHeight - kScrH, -kDepth * 0.5f - 300.f), kWidth, kScrH, 8, 4);
 }
 
 NodeStage::~NodeStage()
@@ -73,15 +74,17 @@ void NodeStage::customDraw()
 	ofSetRectMode(OF_RECTMODE_CENTER);
     ofEnableDepthTest();
     
-    if (!CompoundLine::enableAnimation && fbo) {
-        ScopedStyle styple;
-        ScopedTranslate t(0.f, kHeight - kScrH, -kDepth * 0.5f - 300.f);
+    if (fbo) {
+        ScopedStyle style;
+        ScopedTranslate trans(0.f, 0.f, -2.f);
         ofFill();
-        ofSetColor(128);
-        const float s{kWidth / fbo->getWidth()};
-        fbo->draw(0.f, 0.f, fbo->getWidth() * s, fbo->getHeight() * s);
+        //ofSetColor(128);
+        ofSetColor(160);
+        //const float s{kWidth / fbo->getWidth()};
+        fbo->getTextureReference().bind();
+        mScreen.draw();
+        fbo->getTextureReference().unbind();
     }
-    
     mScreenRect.draw();
 
     {
@@ -92,7 +95,6 @@ void NodeStage::customDraw()
 		ofRect(ofVec3f::zero(), kWidth, kDepth);
 	}
 
-	//mFloor.draw(GL_POINTS, 0, mFloor.getNumVertices());
     ScopedTranslate tY(0.f, 1.f, 0.f);
 	mFloor.drawElements(GL_LINES, mFloor.getNumIndices());
 }

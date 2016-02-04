@@ -1,9 +1,10 @@
 <osc>
     <serverMasterHakoniwa host="192.168.20.60" port=8528/>
-    <serverCameraUnit host="192.168.20.36" port=12400/>
+    <serverCameraUnit host="192.168.20.4" port=12400/>
     <serverRDTK host="192.168.20.2" port=10000/>
     <serverRDTK host="192.168.20.3" port=10000/>
     <serverScore host="192.168.20.11" port=10000/>
+    <serverLighting host="192.168.20.8" port=10000/>
 </osc>
 
 <rdtk>
@@ -13,26 +14,12 @@
     <scene name="dpHWorm" has_camera=1 maestro=1/>
     <scene name="dpVisTornado" has_camera=1 maestro=1/>
     <scene name="dpVisStage" has_camera=1 maestro=1/>
-    <scene name="dpVisPLink_Laser" has_camera=1 maestro=1/>
-    <scene name="dpVisPLink_Oil" has_camera=1 maestro=1/>
-
-    <scene name="Future" has_camera=0 maestro=1/>
-    <scene name="dpVisTheta" has_camera=0 maestro=1/>
     <scene name="dpHGearMove" has_camera=0 maestro=1/>
-    <scene name="Line" has_camera=0 maestro=1/>
-    <scene name="Four Points" has_camera=0 maestro=1/>
-    <scene name="distanceMetaball" has_camera=0 maestro=1/>
+    <scene name="dpVisSandStorm" has_camera=1 maestro=1/>
     
-    <scene name="Kioku" has_camera=0 maestro=1 all_off=1/>
-    
-    <scene name="dpVisSandStorm" has_camera=1 maestro=0/>
-    <scene name="dpVisIce" has_camera=1 maestro=0/>
-    <scene name="dpHfrozenIce" has_camera=1 maestro=0/>
-    <scene name="dpVisPLink_Prism" has_camera=1 maestro=0/>
-    
-    <scene name="FutureRE" has_camera=0 maestro=0/>
-    <scene name="fourPointx3" has_camera=0 maestro=0/>
-    <scene name="dpHEyeBallDancer" has_camera=0 maestro=0/>
+    <scene name="distanceMetaball" has_camera=0 maestro=0/>
+    <scene name="UpsideDown_ext" has_camera=0 maestro=0/>
+    <scene name="Line_ext" has_camera=0 maestro=0/>
     
     <scene name="Blank" has_camera=0 maestro=0/>
 </rdtk>

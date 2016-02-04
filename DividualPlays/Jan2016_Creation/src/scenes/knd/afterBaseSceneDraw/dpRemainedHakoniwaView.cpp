@@ -43,7 +43,7 @@ void dpRemainedHakoniwaView::receieveOsc(){
                 mHasEnd = true;
             }
             
-            if(mHasEnd && remain != 0){
+            if(mHasEnd && remain != 1){
                 mHasEnd = false;
                 mEndNum++;
                 

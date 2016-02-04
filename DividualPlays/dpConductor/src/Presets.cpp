@@ -39,16 +39,20 @@ void dpConductor::setSections()
 	setActorViewing(ns, false, true, false, false);
 	
 #pragma mark 0030
-	ns = setBasicSection("0030=yasuIn-off", true, true);
+	ns = setBasicSection("0030=yasuIn-2box", true, true);
 	setCamActorScene(ns);
+    ns->addScene(SCENE_BIGBOX, true, true, true, true);
+    ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
+    ns->addExtractor(SCENE_BIGBOX, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
+    setActorViewing(ns, false, true, true, false);
 	
-#pragma mark 0040
-	ns = setBasicSection("0040=andoIn-2Box", true, true);
-	setCamActorScene(ns);
-	ns->addScene(SCENE_BIGBOX, true, true, true, true);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
-	setActorViewing(ns, false, true, true, false);
+//#pragma mark 0040
+//	ns = setBasicSection("0040=andoIn-2Box", true, true);
+//	setCamActorScene(ns);
+//	ns->addScene(SCENE_BIGBOX, true, true, true, true);
+//	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
+//	ns->addExtractor(SCENE_BIGBOX, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
+//	setActorViewing(ns, false, true, true, false);
 
 #pragma mark 0050
 	ns = setBasicSection("0050=miyashita_in_5box", true, true);
@@ -59,14 +63,14 @@ void dpConductor::setSections()
 	MIYASHITA_BIGBOX
 	setActorViewing(ns, false, true, true, true);
 	
-#pragma mark 0060
-	ns = setBasicSection("0060=kenYasuOut_AB-Off", true, true);
-	setCamActorScene(ns);
-	ns->addScene(SCENE_BIGBOX, false, true, false, true);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
-	ns->addExtractor(SCENE_BIGBOX, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
-	MIYASHITA_BIGBOX
-	setActorViewing(ns, false, true, true, true);
+//#pragma mark 0060
+//	ns = setBasicSection("0060=kenYasuOut_AB-Off", true, true);
+//	setCamActorScene(ns);
+//	ns->addScene(SCENE_BIGBOX, false, true, false, true);
+//	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
+//	ns->addExtractor(SCENE_BIGBOX, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
+//	MIYASHITA_BIGBOX
+//	setActorViewing(ns, false, true, true, true);
 
 #pragma mark 0070
 	ns = setBasicSection("0070=AndoCue=Kojiri_line", true, true);
@@ -112,9 +116,9 @@ void dpConductor::setSections()
 	ns->addTuneF(SCENE_LINE, "Curve1", 300.0);
 	ns->addTuneF(SCENE_LINE, "ext_to1", 800.0);
 	ns->addTuneF(SCENE_LINE, "ext_from1", 800.0);
-	ns->addTuneF(SCENE_FOURPT, "Twist resolution", 52.0);
-	ns->addTuneF(SCENE_FOURPT, "Twist extension width", 3.47);
-	ns->addTuneF(SCENE_FOURPT, "Twist extension height", 1.40);
+	ns->addTuneF(SCENE_FOURPT, "resolution", 52.0);
+	ns->addTuneF(SCENE_FOURPT, "width", 3.0);
+	ns->addTuneF(SCENE_FOURPT, "height", 3.0);
 	setActorViewing(ns, true, true, true, true);
 	
 #pragma mark 0100
@@ -148,16 +152,36 @@ void dpConductor::setSections()
 	ns->addTuneF(SCENE_LINE, "Curve1", 300.0);
 	ns->addTuneF(SCENE_LINE, "ext_to1", 800.0);
 	ns->addTuneF(SCENE_LINE, "ext_from1", 800.0);
-	ns->addTuneF(SCENE_FOURPT, "Twist resolution", 52.0);
-	ns->addTuneF(SCENE_FOURPT, "Twist extension width", 3.47);
-	ns->addTuneF(SCENE_FOURPT, "Twist extension height", 1.40);
+	ns->addTuneF(SCENE_FOURPT, "resolution", 52.0);
+	ns->addTuneF(SCENE_FOURPT, "extension width", 3.0);
+	ns->addTuneF(SCENE_FOURPT, "height", 3.0);
 	setActorViewing(ns, true, true, true, true);
+    
+#pragma mark 0110
+    ns = setBasicSection("0110=4ptupside", true, true);
+    setCamActorScene(ns);
+    ns->addScene(SCENE_FOURPT, false, false, true, false);
+    ns->addScene(SCENE_UPSIDE, false, true, false, true);
+    ns->addScene(SCENE_BIGBOX, false, true, false, true);
+    
+    ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_LEFT_ELBOW);
+    ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_RIGHT_ELBOW);
+    ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_LEFT_KNEE);
+    ns->addExtractor(SCENE_FOURPT, ACTOR_ANDO, JOINT_RIGHT_KNEE);
+    
+    ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_LEFT_ELBOW);
+    ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_RIGHT_ELBOW);
+    ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_LEFT_KNEE);
+    ns->addExtractor(SCENE_FOURPT, ACTOR_SHIMAJI, JOINT_RIGHT_KNEE);
+    
+    ns->addExtractor(SCENE_UPSIDE, ACTOR_KOJIRI, JOINT_NECK);
+    MIYASHITA_BIGBOX
 	
 #pragma mark 0120
 	ns = setBasicSection("0120=threepoint", true, true);
 	setCamActorScene(ns);
-	ns->addScene(SCENE_THREEPT, false, true, true, false);
-	ns->addScene(SCENE_METABALL, false, false, false, true);
+	ns->addScene(SCENE_THREEPT, false, false, false, true);
+	ns->addScene(SCENE_METABALL, false, true, true, false);
 	
 	ns->addExtractor(SCENE_THREEPT, ACTOR_KOJIRI, JOINT_LEFT_ELBOW);
 	ns->addExtractor(SCENE_THREEPT, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
@@ -174,6 +198,9 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_NECK);
 	ns->addExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_LEFT_ELBOW);
 	ns->addExtractor(SCENE_METABALL, ACTOR_MIYASHITA, JOINT_RIGHT_KNEE);
+    
+    ns->addTuneF(SCENE_METABALL, "Scale", 3.05);
+    ns->addTuneF(SCENE_METABALL, "xCompress", 0.30);
 	
 	ns->addTuneT(SCENE_THREEPT, "Show rects", true);
 	ns->addTuneF(SCENE_THREEPT, "Rect radius", 42.1);
@@ -189,6 +216,8 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_MONSTER, ACTOR_SHIMAJI, JOINT_NECK);
 	ns->addExtractor(SCENE_MONSTER, ACTOR_MIYASHITA, JOINT_NECK);
 	ns->addExtractor(SCENE_MONSTER_2, ACTOR_MIYASHITA, JOINT_NECK);
+    ns->addTuneT(SCENE_MONSTER, "Reset", true);
+    ns->addTuneT(SCENE_MONSTER_2, "Reset", true);
 	setActorViewing(ns, true, true, true, true);
 	
 #pragma mark 0131
@@ -211,6 +240,9 @@ void dpConductor::setSections()
 	setCamActorScene(ns);
 	ns->addScene(SCENE_BURST, true, true, true, true);
 	ns->addExtractor(SCENE_BURST, ACTOR_SHIMAJI, JOINT_NECK);
+    ns->addTuneF(SCENE_BURST, "trans:y", 90.0);
+    ns->addTuneF(SCENE_BURST, "thresh", 1.0);
+    
 	setActorViewing(ns, false, false, true, false);
 	
 #pragma mark 0145
@@ -224,8 +256,10 @@ void dpConductor::setSections()
 	ns = setBasicSection("0150=chaser", true, true);
 	setCamActorScene(ns);
 	ns->addScene(SCENE_CHASER, true, true, true, true);
+    ns->addScene(SCENE_ACTOR, true, true, true, true);
 	ns->addExtractor(SCENE_CHASER, ACTOR_SHIMAJI, JOINT_NECK);
 	ns->addExtractor(SCENE_CHASER, ACTOR_MIYASHITA, JOINT_NECK);
+    ns->addTuneT(SCENE_ACTOR, "drawFloor", false);
 	setActorViewing(ns, false, false, true, true);
 	
 #pragma mark 0160
@@ -293,7 +327,7 @@ void dpConductor::setSections()
 	ns->addExtractor(SCENE_UPSIDE, ACTOR_MIYASHITA	, JOINT_NECK);
 	
 #pragma mark master_threept
-	ns = setBasicSection("fromMaster-threept", true, true);
+    ns = setBasicSection("fromMaster-threept",  false, false);
 	ns->addScene(SCENE_THREEPT, false, true, false, true);
 	
 	ns->addExtractor(SCENE_THREEPT, ACTOR_KOJIRI, JOINT_LEFT_ELBOW);
@@ -309,14 +343,16 @@ void dpConductor::setSections()
 	setActorViewing(ns, false, true, true, false);
 	
 #pragma mark master_burst
-	ns = setBasicSection("fromMaster-burst", true, true);
+    ns = setBasicSection("fromMaster-burst", false, false);
+
 	setCamActorScene(ns);
 	ns->addScene(SCENE_BURST, false, true, false, true);
 	ns->addExtractor(SCENE_BURST, ACTOR_SHIMAJI, JOINT_NECK);
 	setActorViewing(ns, false, false, true, false);
 
 #pragma mark master_bigbox
-	ns = setBasicSection("fromMaster-bigbox", true, true);
+    ns = setBasicSection("fromMaster-bigbox", false, false);
+
 	setCamActorScene(ns);
 	ns->addScene(SCENE_BIGBOX, false, true, false, true);
 	ns->addExtractor(SCENE_BIGBOX, ACTOR_KOJIRI, JOINT_RIGHT_ELBOW);
@@ -325,7 +361,7 @@ void dpConductor::setSections()
 	setActorViewing(ns, false, true, true, true);
 	
 #pragma mark master_monster
-	ns = setBasicSection("0130=monster", true, true);
+	ns = setBasicSection("fromMaster=monster", false, false);
 	setCamActorScene(ns);
 	ns->addScene(SCENE_MONSTER, false, false, true, true);
 	ns->addScene(SCENE_MONSTER_2, true, true, false, false);

@@ -19,7 +19,7 @@ NodeDisplay::NodeDisplay()
 {
 	title = "Displays";
 	titleJP = "ディスプレイ";
-    descriptionJP = "「ディスプレイ」\n仮想の環境の情報はディスプレイと\n物理的な仕掛けによってダンサーに伝えられます";
+    descriptionJP = "RAMシステムはその情報を形状や箱庭へと変換します";
 
 	addAimingOffset(getFrontLeft() + ofVec3f(getFrontDisplayWidth() * 0.5f - 6.f,
 	                                         getFrontDisplayHeight() * 0.5f,
@@ -70,7 +70,7 @@ void NodeDisplay::customDraw()
 	setStyle(*this);
 	{
 		auto drawFbo = [&]() {
-				       if (CompoundLine::enableAnimation) return;
+				       if (compoundGetEnableCollapse()) return;
 				       ScopedStyle s;
 				       ofFill();
 				       ofSetColor(ofColor::black);
@@ -108,7 +108,7 @@ void NodeDisplay::customDraw()
 		const float wireOffset {20.f};
 
 		auto drawFbo = [&]() {
-				       if (CompoundLine::enableAnimation) return;
+				       if (compoundGetEnableCollapse()) return;
 				       ScopedStyle s;
 				       ofFill();
 				       ofSetColor(ofColor::white);

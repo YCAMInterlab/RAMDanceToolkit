@@ -85,7 +85,7 @@ void NodeLight::ParLight::draw()
 		ScopedMatrix m;
 		ofTranslate(0.f, -24.f);
 		ofRotateX(angle);
-        if (CompoundLine::enableAnimation == false) {
+        if (compoundGetEnableCollapse() == false) {
             ofDrawCone(ofVec3f(0.f, 15.f, 0.f), 9.f, -14.f);
         }
 		body.draw();

@@ -12,6 +12,7 @@
 #include "dpScoreCommon.h"
 #include "dpScoreLinePrimitives.h"
 #include "dpScoreComplexLineObjects.h"
+#include "dpScoreTrianglePrimitives.h"
 #include "dpScoreGadgets.h"
 
 #endif /* dpScoreObjects_h */
