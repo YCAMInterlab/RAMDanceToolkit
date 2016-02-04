@@ -225,6 +225,9 @@ void Monster_ext_2::setupControlPanel(){
     panel->addToggle("Centered", &mIsCentered);
     
     mIsCentered = true;
+    
+    mTrans.y = 140.0;
+    mTrans.z = 500;
 }
 
 void Monster_ext_2::drawActor(const ramActor &actor)
