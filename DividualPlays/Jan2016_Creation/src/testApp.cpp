@@ -39,8 +39,8 @@ Particles particles;
 #include "UpsideDown.h"
 UpsideDown upsideDown;
 
-#include "Kepler.h"
-Kepler kepler;
+//#include "Kepler.h"
+//Kepler kepler;
 
 #include "HastyChase.h"
 HastyChase hastyChase;
@@ -51,48 +51,23 @@ ThreePoints threePoints;
 #include "FourPoints.h"
 FourPoints fourPoints;
 
-#include "Chain.h"
-Chain chain;
+//#include "Chain.h"
+//Chain chain;
 
 #include "Monster.h"
 Monster monster;
 
-#include "Notation.h"
-Notation notation;
+//#include "Notation.h"
+//Notation notation;
 
 
 /* ==== 2014 Creation ==== */
-#include "FixedBody.h"
-FixedBody mFixed;
-
-#include "BrokenBody.h"
-BrokenBody mBroken;
-
-#include "BurstBody.h"
-BurstBody mBurst;
 
 #include "BurstBody_ext.h"
 BurstBody_ext mBurst_ext;
 
-#include "MoveSeparatedObjects.h"
-MoveSeparatedObjects mSep;
-
-#include "WeiredSpace.h"
-WeiredSpace mWeierd;
-
-#include "ThreePointFlow.h"
-ThreePointFlow mThree;
-
 #include "distanceMetaball.h"
 distanceMetaball mDistanceMetaball;
-
-#include "middleScene.h"
-MiddleScene mMiddleScene;
-
-/*
-#include "MixMonsterScene.h"
-MixMonsterScene mMixMonsterScene;
-*/
 
 /* ==== Legacy external ==== */
 #include "lineDrawing_ext.h"
@@ -116,11 +91,6 @@ HastyChase_ext mHastyChase_ext;
 #include "Monster_ext.h"
 Monster_ext mMonster_ext;
 Monster_ext_2 mMonster_ext2;
-
-/*
-#include "MixMonsterScene_ext.h"
-MixMonsterScene_ext mMixMonsterScene_ext;
-*/
 
 #include "ThreePoints_ext.h"
 ThreePoints_ext mThreePoints_ext;
@@ -147,11 +117,8 @@ dp16_actorDrawer mActorDrawer;
 
 #include "dpHakoVisBug.h"
 
-//#include "dpHakoVisMag.h"
-
 // sand
 dpHakoniwaSand hakoniwaSand;
-dpHakoVisSandStorm visSandStorm;
 dpHakoVisVecLineCircle vecLineCircle;
 
 // struggle
@@ -178,16 +145,9 @@ dpHakoVisStageBlob                visStage;
 //magnet looper
 magnetLooper looper;
 
-FloorLine floorLine;
-
-#include "floorline_ext.h"
-floorline_ext floor_ext;
-
 #include "dpHakoniwaGearMove.h"
 
 dpHakoniwaGearMove hakoniwaGearMove;
-
-//dpHakoVisMag mVisMag;
 
 #pragma mark - oF methods
 //--------------------------------------------------------------
@@ -224,8 +184,7 @@ void testApp::setup()
    // sceneManager.addScene(mMixMonsterScene_ext.getPtr());
     sceneManager.addScene(mThreePoints_ext.getPtr());
     sceneManager.addScene(mDonuts_ext.getPtr());
-	sceneManager.addScene(floor_ext.getPtr());
-	
+
 	/* Legacy */
 	sceneManager.addScene( drawLines.getPtr() );
 	sceneManager.addScene( bigbox.getPtr() );
@@ -237,27 +196,15 @@ void testApp::setup()
 	sceneManager.addScene( particles.getPtr() );
 #endif
 	sceneManager.addScene( upsideDown.getPtr() );
-	sceneManager.addScene( kepler.getPtr() );
 	sceneManager.addScene( hastyChase.getPtr() );
 	sceneManager.addScene( threePoints.getPtr() );
 	sceneManager.addScene( fourPoints.getPtr() );
-	sceneManager.addScene( chain.getPtr() );
 	sceneManager.addScene( monster.getPtr() );
-	sceneManager.addScene( notation.getPtr() );
-	
-    sceneManager.addScene(mFixed.getPtr());
-    sceneManager.addScene(mBroken.getPtr());
-    sceneManager.addScene(mBurst.getPtr());
+
     sceneManager.addScene(mBurst_ext.getPtr());
-    sceneManager.addScene(floorLine.getPtr());
-    sceneManager.addScene(mThree.getPtr());
 
 	//Sheep
 	sceneManager.addScene(mDistanceMetaball.getPtr());
-
-	//Kumagai
-	sceneManager.addScene(mMiddleScene.getPtr());
-	//sceneManager.addScene(mMixMonsterScene.getPtr());
     
     sceneManager.addScene(hakoniwaServoPendulum.getPtr());
     sceneManager.addScene(visServoPendulum.getPtr());
@@ -268,7 +215,6 @@ void testApp::setup()
     sceneManager.addScene(visStruggle.getPtr());
     
     sceneManager.addScene(hakoniwaSand.getPtr());
-    sceneManager.addScene(visSandStorm.getPtr());
     sceneManager.addScene(vecLineCircle.getPtr());
     
     sceneManager.addScene(magPendulum.getPtr());
@@ -277,8 +223,6 @@ void testApp::setup()
     //tornado
     sceneManager.addScene(hakoniwaTornado.getPtr());
     sceneManager.addScene(visTornado.getPtr());
-    
-    //sceneManager.addScene(mVisMag.getPtr());
     
     sceneManager.addScene(looper.getPtr());
     sceneManager.addScene(allHakoniwaMove.getPtr());

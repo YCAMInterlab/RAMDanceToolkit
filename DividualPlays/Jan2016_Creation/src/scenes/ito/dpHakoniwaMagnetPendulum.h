@@ -37,7 +37,7 @@ public:
     
 private:
     
-    float distanceThreshold = 65;
+    //float distanceThreshold = 65;
     bool bOn[NMAGNETS];
     bool bInversed[NMAGNETS];
 
@@ -68,6 +68,8 @@ private:
     float startTimeForDistanceCondition[3];
     float d[3];
     bool bD[3], bDprev[3];
+    
+    float distanceThreshold[3];
     
     twistFinder twFinder;
     

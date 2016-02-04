@@ -61,6 +61,7 @@ void dp16_ramActorTranslator::setupControlPanel()
 	autoLayout = true;
 	margine = 160;
 	drawFloor = true;
+    
 }
 
 void dp16_ramActorTranslator::update()
@@ -146,7 +147,7 @@ void dp16_ramActorTranslator::draw()
 		{
 			if ((actor.getName() == nameList[j]) && visibles[j])
 			{
-				drawTargetActor(j, actor);
+                drawTargetActor(j, actor);
 			}
 		}
 	}
@@ -156,16 +157,19 @@ void dp16_ramActorTranslator::draw()
 	
 	ofPushMatrix();
 	ofRotateX(90);
-	for (int i = 0;i < floor_scale; i+=floor_grid_span)
-	{
-		for (int j = 0;j < floor_scale;j+=floor_grid_span)
-		{
-			ofRect( i, j, floor_grid_span, floor_grid_span);
-			ofRect(-i, j, floor_grid_span, floor_grid_span);
-			ofRect( i,-j, floor_grid_span, floor_grid_span);
-			ofRect(-i,-j, floor_grid_span, floor_grid_span);
-		}
-	}
+    if (drawFloor)
+    {
+        for (int i = 0;i < floor_scale; i+=floor_grid_span)
+        {
+            for (int j = 0;j < floor_scale;j+=floor_grid_span)
+            {
+                ofRect( i, j, floor_grid_span, floor_grid_span);
+                ofRect(-i, j, floor_grid_span, floor_grid_span);
+                ofRect( i,-j, floor_grid_span, floor_grid_span);
+                ofRect(-i,-j, floor_grid_span, floor_grid_span);
+            }
+        }        
+    }
 	ofPopMatrix();
 	
 	ofFill();
@@ -177,7 +181,10 @@ void dp16_ramActorTranslator::draw()
 void dp16_ramActorTranslator::drawTargetActor(int id, ramNodeArray &actor)
 {
 	ofSetColor(palette[id]);
+    
+    dpPhongShading::instance().begin();
 	ramDrawBasicActor(actor);
+    dpPhongShading::instance().end();
 }
 
 void dp16_ramActorTranslator::exit()

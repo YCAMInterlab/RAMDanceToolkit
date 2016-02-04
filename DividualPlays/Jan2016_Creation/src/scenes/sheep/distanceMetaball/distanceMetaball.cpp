@@ -23,14 +23,16 @@ void distanceMetaball::setupControlPanel(){
 	gui->addSlider("Smooth", 1.0, 200.0, &mSmooth);
 	gui->addToggle("drawMEX", &mDrawMEX);
 	gui->addToggle("drawMetaball", &mDrawMetaball);
+    gui->addSlider("xCompress", 0.0, 2.0, &xCompress);
 
 	mDrawMEX = false;
 	mDrawMetaball = true;
-	resolution = 16;
-	radius_low = 0.01;
-	radius_high = 0.15;
+	resolution = 22;
+	radius_low = 0.02;
+	radius_high = 0.13;
 	mScale = 1.87;
 	mSmooth = 28.0;
+    xCompress = 1.0;
 
 	mex.setupControlPanel(this);
 	mex.load("motionExt_"+getName()+".xml");
@@ -41,10 +43,11 @@ void distanceMetaball::update(){
 	metaball.setRadius(radius_low,radius_high);
 
 	for (int i = 0;i < mex.getNumPort();i++){
+        ofVec3f tg = mex.getPositionAt(i)/800.0 * ofVec3f(xCompress, 1.0, 1.0) + ofVec3f(0.5,0.5,0.5);
+        
 		if (pts.size() <= i){
-			pts.push_back(mex.getPositionAt(i)/800.0 + ofVec3f(0.5,0.5,0.5));
+			pts.push_back(tg);
 		}else{
-			ofVec3f tg = mex.getPositionAt(i)/800.0 + ofVec3f(0.5,0.5,0.5);
 			pts[i] += (tg - pts[i]) / mSmooth;
 		}
 	}
