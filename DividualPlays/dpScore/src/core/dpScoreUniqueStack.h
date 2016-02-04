@@ -33,6 +33,8 @@ public:
     ListIt end();
     ListIt find(const T& t);
     
+    int getIndex(const T& t);
+    
 private:
     List mInitialList;
     List mUniqueList;
@@ -104,6 +106,17 @@ template<class T>
 typename UniqueStack<T>::ListIt UniqueStack<T>::find(const T& t)
 {
     return std::find(mUniqueList.begin(), mUniqueList.end(), t);
+}
+
+template<class T>
+int UniqueStack<T>::getIndex(const T& t)
+{
+    for (int i=0; i<mUniqueList.size(); i++) {
+        if (mUniqueList.at(i) == t) {
+            return i;
+        }
+    }
+    return mUniqueList.size();
 }
 
 typedef UniqueStack<string> UniqueStringStack;

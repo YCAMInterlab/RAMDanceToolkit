@@ -44,7 +44,6 @@ private:
     vector<Desk> mDesks;
     bool mFocus {true};
     int mCurrHakoniwa {0};
-    int mCurrDesk {0};
     
     ofNode mHakoOrigin;
     vector<ofPtr<BaseHakoniwa>> mHakoniwas;

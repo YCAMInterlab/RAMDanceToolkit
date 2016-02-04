@@ -107,7 +107,7 @@ Funnel Funnel::create(const ofVec3f& p, float r0, float r1, float h0, float h1)
 void Funnel::setup(const ofVec3f& p, float r0, float r1, float h0, float h1)
 {
 	mTypes.clear();
-	auto res = 16;
+	auto res = 14;
 	for (auto i : rep(res)) {
 		const float step {(float)TWO_PI / (float)res};
 		const float rad0 {(i + 0) * step};
@@ -281,6 +281,77 @@ void Water::draw()
 		ofTriangle(v5, v7, v6);
 	}
 	ofEnableDepthTest();
+}
+
+#pragma mark ___________________________________________________________________
+
+Gear Gear::create(const ofVec3f& p, float r, float d, float speed, int nHoles, float holeRadius, int res)
+{
+	Gear gear;
+	gear.setup(p, r, d, speed, nHoles, holeRadius, res);
+	return gear;
+}
+
+void Gear::setup(const ofVec3f& p, float r, float d, float speed, int nHoles, float holeRadius, int res)
+{
+	mCenter = p;
+	mSpeed = speed;
+	mTypes.clear();
+	const float s {(float)TWO_PI / (float)res};
+	const float sh {(float)TWO_PI / (float)nHoles};
+	const float rh {ofDegToRad(holeRadius)};
+	const float r0 {r * 0.8f};
+	const float r1 {r * 0.5f};
+	auto makeRing = [&](int i, float d, float r, float s)
+			{
+				const float x0 {::cosf((i + 0) * s)};
+				const float y0 {::sinf((i + 0) * s)};
+				const float x1 {::cosf((i + 1) * s)};
+				const float y1 {::sinf((i + 1) * s)};
+				ofVec3f v0(x0 * r, y0 * r, -d * 0.5f);
+				ofVec3f v1(x1 * r, y1 * r, -d * 0.5f);
+				mTypes.push_back(LineType::make(v0, v1));
+			};
+	for (auto i : rep(res)) {
+		makeRing(i, -d, r, s);
+		makeRing(i, +d, r, s);
+	}
+	const int pinRes {4};
+	const float sc {(float)TWO_PI / (float)pinRes};
+	for (auto i : rep(pinRes)) {
+		makeRing(i, -d, 1.f, sc);
+		makeRing(i, +d, 1.f, sc);
+	}
+	auto makeHole = [&](int i, float d)
+			{
+				const float x0 {::cosf(i * sh - rh)};
+				const float y0 {::sinf(i * sh - rh)};
+				const float x1 {::cosf(i * sh + rh)};
+				const float y1 {::sinf(i * sh + rh)};
+				ofVec3f v0(x0 * r0, y0 * r0, -d * 0.5f);
+				ofVec3f v1(x0 * r1, y0 * r1, -d * 0.5f);
+				ofVec3f v2(x1 * r0, y1 * r0, -d * 0.5f);
+				ofVec3f v3(x1 * r1, y1 * r1, -d * 0.5f);
+				mTypes.push_back(LineType::make(v0, v1));
+				mTypes.push_back(LineType::make(v2, v3));
+
+				mTypes.push_back(LineType::make(v0, v2));
+				mTypes.push_back(LineType::make(v1, v3));
+			};
+	for (auto i : rep(nHoles)) {
+		makeHole(i, -d);
+		makeHole(i, +d);
+	}
+	mPoints.assign(mTypes.size(), Point());
+	reset();
+}
+
+void Gear::draw()
+{
+	ScopedMatrix m;
+	ofTranslate(mCenter);
+	ofRotateZ(getElapsedTime() * mSpeed);
+	CompoundLine::draw();
 }
 
 DP_SCORE_NAMESPACE_END

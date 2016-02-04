@@ -45,7 +45,7 @@ Deck::Deck()
 	const float legRad {2.5f};
 	const float legH {h - thickness};
 	mLegs.clear();
-	const auto res = 10;
+	const auto res = 6;
 	mLegs.push_back(Cylinder::create(ofVec3f(legRad, legH * 0.5f, legRad), legRad, legH, res));
 	mLegs.push_back(Cylinder::create(ofVec3f(w - legRad, legH * 0.5f, legRad), legRad, legH, res));
 	mLegs.push_back(Cylinder::create(ofVec3f(legRad, legH * 0.5f, d - legRad), legRad,  legH, res));

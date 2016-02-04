@@ -92,34 +92,18 @@ void NodeHakoniwa::customDraw()
 		mDesks.at(i).draw();
 	}
 	for (auto i : rep(mHakoniwas.size())) {
+		if (mFocus && i == mCurrHakoniwa) {
+			continue;
+		}
 		mHakoniwas.at(i)->draw();
 	}
 
 	if (mFocus) {
 		const int time = (int)getElapsedTime() * 0.25f;
 		mCurrHakoniwa = time % mHakoniwas.size();
-		if (mCurrHakoniwa <= HAKO_SERVO_PENDULUM) {
-			mCurrDesk = 0;
-		}
-		else if (mCurrHakoniwa <= HAKO_MAG_PENDULUM) {
-			mCurrDesk = 1;
-		}
-		else {
-			mCurrDesk = 2;
-		}
-		mCurrDesk = std::min(mCurrDesk, kNumDesks);
-
 		ofSetColor(color::kMain);
-		ofDisableDepthTest();
-//        {
-//            ScopedTranslate t(0.f, 0.f, mCurrDesk * Desk::getDepth());
-//            mDesks.at(mCurrDesk).draw();
-//        }
 		auto hako = mHakoniwas.at(mCurrHakoniwa);
 		hako->draw();
-
-		//mOffsets.front().set(0.f, Desk::getHeight(), Desk::getDepth() * mCurrDesk + Desk::getDepth() * 0.5f);
-
 		ofVec3f v = hako->getGlobalPosition();
 		v.x -= hako->getDepth() * 0.5f;
 		v.y += hako->getHeight() * 0.5f;

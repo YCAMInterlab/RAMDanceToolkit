@@ -86,6 +86,9 @@ public:
 	float getHeight() override;
 	float getDepth() override;
 private:
+    Box mFront;
+    Box mBotom;
+    vector<Gear> mGears;
 };
 
 #pragma mark ___________________________________________________________________
