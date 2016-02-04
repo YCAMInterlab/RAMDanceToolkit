@@ -227,8 +227,8 @@ void Monster_ext_2::setupControlPanel(){
     
     mIsCentered = true;
     
-    mTrans.y = 140.0;
-    mTrans.z = 500;
+   // mTrans.y = 140.0;
+   // mTrans.z = 500;
 }
 
 void Monster_ext_2::drawActor(const ramActor &actor)
