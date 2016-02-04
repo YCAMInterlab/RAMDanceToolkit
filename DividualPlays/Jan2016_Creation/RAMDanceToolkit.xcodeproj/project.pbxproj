@@ -167,12 +167,11 @@
 		5EF92F591C57B59C00F6916F /* dpHakoniwaTornado.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoniwaTornado.h; sourceTree = "<group>"; };
 		5EF92F5A1C57B59C00F6916F /* dpHakoVisBug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoVisBug.h; sourceTree = "<group>"; };
 		5EF92F5B1C57B59C00F6916F /* dpHakoVisMagnetPendulum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoVisMagnetPendulum.h; sourceTree = "<group>"; };
-		5EF92F5C1C57B59C00F6916F /* dpHakoVisSandStorm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoVisSandStorm.h; sourceTree = "<group>"; };
 		5EF92F5D1C57B59C00F6916F /* dpHakoVisServoPendulum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoVisServoPendulum.h; sourceTree = "<group>"; };
 		5EF92F5E1C57B59C00F6916F /* dpHakoVisStageBlob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoVisStageBlob.h; sourceTree = "<group>"; };
 		5EF92F5F1C57B59C00F6916F /* dpHakoVisStruggle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoVisStruggle.h; sourceTree = "<group>"; };
 		5EF92F601C57B59C00F6916F /* dpHakoVisTornado.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoVisTornado.h; sourceTree = "<group>"; };
-		5EF92F611C57B59C00F6916F /* dpHakoVisVecLineCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoVisVecLineCircle.h; sourceTree = "<group>"; };
+		5EF92F611C57B59C00F6916F /* dpHakoVisSandStorm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoVisSandStorm.h; sourceTree = "<group>"; };
 		5EF92F621C57B59C00F6916F /* dpHakoVisWorm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpHakoVisWorm.h; sourceTree = "<group>"; };
 		5EF92F641C57B59C00F6916F /* dpIceMapCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpIceMapCube.h; sourceTree = "<group>"; };
 		5EF92F651C57B59C00F6916F /* dpIceMapFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dpIceMapFace.h; sourceTree = "<group>"; };
@@ -411,13 +410,12 @@
 				5EF92F591C57B59C00F6916F /* dpHakoniwaTornado.h */,
 				5EF92F5A1C57B59C00F6916F /* dpHakoVisBug.h */,
 				5EF92F5B1C57B59C00F6916F /* dpHakoVisMagnetPendulum.h */,
-				5EF92F5C1C57B59C00F6916F /* dpHakoVisSandStorm.h */,
 				5EF92F5D1C57B59C00F6916F /* dpHakoVisServoPendulum.h */,
 				5EF92F5E1C57B59C00F6916F /* dpHakoVisStageBlob.h */,
 				5EF92F5F1C57B59C00F6916F /* dpHakoVisStruggle.h */,
 				5EF92F601C57B59C00F6916F /* dpHakoVisTornado.h */,
 				9225EED31C58DC9000A7FD9A /* dpAllHakoniwaMove.h */,
-				5EF92F611C57B59C00F6916F /* dpHakoVisVecLineCircle.h */,
+				5EF92F611C57B59C00F6916F /* dpHakoVisSandStorm.h */,
 				5EF92F621C57B59C00F6916F /* dpHakoVisWorm.h */,
 				5EF92F631C57B59C00F6916F /* iceLine */,
 				5EF92F681C57B59C00F6916F /* util */,

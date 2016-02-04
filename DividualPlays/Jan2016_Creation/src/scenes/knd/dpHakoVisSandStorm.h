@@ -1,145 +1,375 @@
 //
-//  HakoVisSandStorm.h
+//  dpHakoVisLineCircle.h
 //  RAMDanceToolkit
 //
-//  Created by kezzardrix2 on 2015/01/05.
+//  Created by kezzardrix2 on 2015/01/13.
 //
 //
 
-#ifndef RAMDanceToolkit_HakoVisSandStorm_h
-#define RAMDanceToolkit_HakoVisSandStorm_h
+#ifndef RAMDanceToolkit_dpHakoVisLineCircle_h
+#define RAMDanceToolkit_dpHakoVisLineCircle_h
 
+class dpVecLineCircle{
+public:
+    
+    void setup(float rad){
+        
+        mRad = rad;
+        
+        mBuffers.clear();
+        
+        for(int i = 0; i < BUFFER_MAX; i++){
+            mBuffers.push_back(ofPoint(0,0,0));
+        }
+        
+        mVbo.clear();
+        mLineVbo.clear();
+        
+        mPts.clear();
+        mLines.clear();
+        
+        mPts.assign(BUFFER_MAX - 1, ofPoint()); //i do not use head pt
+        mLines.assign((BUFFER_MAX - 1) * 2, ofPoint());
+        
+        mVbo.setVertexData(&mPts.at(0), mPts.size(), GL_DYNAMIC_DRAW);
+        mLineVbo.setVertexData(&mLines.at(0), mLines.size(), GL_DYNAMIC_DRAW);
+        
+    }
+    
+    void setHead(ofPoint vec){
+        mHead.set(vec.x,vec.y,vec.length());
+    }
+    
+    void swapPts(){
+        
+        if(isForward){
+            
+            mBuffers[0] = mHead;
+        
+            for(int i = 1; i < BUFFER_MAX; i++){
+                ofPoint tmp = mBuffers[i-1];
+                mBuffers[i - 1] = mBuffers[i];
+                mBuffers[i] = tmp;
+            }
+            
+        }else{
+        
+            mBuffers[mBuffers.size() - 1] = mHead;
+            
+            for(int i = mBuffers.size() - 1; i > 0; i--){
+                ofPoint tmp = mBuffers[i-1];
+                mBuffers[i - 1] = mBuffers[i];
+                mBuffers[i] = tmp;
+            }
+        }
+    }
+    
+    void update(){
+    
+        mHead.update();
+        if(isMove)swapPts();
+    
+        updateVbos();
+        
+    }
+    
+    void updateVbos(){
+        
+        for(int i = 0; i < mBuffers.size() - 1; i++){
+            
+            ofVec2f pt;
+            alongCircle(pt, i);
+            
+            mPts[i].set(pt.x * mRad + mBuffers[i].x , pt.y * mRad + mBuffers[i].y, mBuffers[i].z);
+            mLines[i * 2].set(pt.x * mRad, pt.y * mRad , 0.0);
+            mLines[i * 2 + 1].set(pt.x * mRad + mBuffers[i].x , pt.y * mRad + mBuffers[i].y , mBuffers[i].z);
+            
+        }
+        
+        mVbo.updateVertexData(&mPts.at(0), mPts.size());
+        mLineVbo.updateVertexData(&mLines.at(0), mLines.size());
+    }
+    
+    void setMove(bool move){
+        isMove = move;
+    }
+    
+    void setForward(bool forward){
+        isForward = forward;
+    }
+    
+    void alongCircle(ofVec2f &pt,int idx){
+        
+        float theta = ofMap(idx,0,mBuffers.size(),0,TWO_PI) - HALF_PI;
+        
+        float x = cos(theta);
+        float y = sin(theta);
+        
+        pt.set(x,y);
+        
+    }
+    
+    void draw(){
+        
+        ofSetColor(dpColor::MAIN_COLOR);
+        mVbo.draw(GL_POINTS,0,mPts.size());
+        
+        ofSetLineWidth(2);
+        ofSetColor(255,255,255);
+        mLineVbo.draw(GL_LINES,0,mLines.size());
+        
+        drawHead();
+    }
+    
+    void drawHead(){
+        
+        int idx = mBuffers.size() - 1;
+        
+        ofVec2f pt;
+        alongCircle(pt, idx);
+        
+        ofSetColor(dpColor::MAIN_COLOR);
+        ofDrawSphere(pt.x * mRad + mBuffers[idx].x , pt.y * mRad + mBuffers[idx].y, mBuffers[idx].z,20);
+        
+        ofSetLineWidth(4);
+        ofLine(pt.x * mRad, pt.y * mRad , 0.0,
+               pt.x * mRad + mBuffers[idx].x , pt.y * mRad + mBuffers[idx].y , mBuffers[idx].z);
+        
+    }
+    
+private:
+    
+    static const int BUFFER_MAX = 512;
+    vector<ofPoint>mBuffers;
+    
+    float mRad;
+    
+    KezSlidePoint mHead;
+    
+    bool isMove = true;
+    bool isForward = true;
+    
+    ofVbo mVbo;
+    ofVbo mLineVbo;
+    
+    vector<ofPoint>mPts;
+    vector<ofPoint>mLines;
+    
+};
 
 class dpHakoVisSandStorm : public ramBaseScene{
 public:
-    string getName() const { return "dpVisSandStorm_floor"; }
-    
-	void setupControlPanel(){
-        ramGetGUI().addSlider("fade", 0.0, 255.0, &mFade);
-        ramGetGUI().addSlider("radScale", 0.0, 1.0, &mRadScale);
-        ramGetGUI().addSlider("flowDrawScale", 0.0, 40.0, &mFlowDrawScale);
+    string getName() const {return "dpVisSandStorm";};
+    void setupControlPanel(){
         
-        ramGetGUI().addToggle("maskMode", &isMaskMode);
-        ramGetGUI().addToggle("isDrawLine", &isDrawLine);
-        ramGetGUI().addToggle("isCircle", &isCircle);
-        ramGetGUI().addToggle("isColor", &isColor);
+        ramGetGUI().addSlider("scale",1.0,100.0,&mVecScale);
+        ramGetGUI().addSlider("rot:x",0.0,1.0,&mRotSpeed.x);
+        ramGetGUI().addSlider("rot:y",0.0,1.0,&mRotSpeed.y);
+        ramGetGUI().addSlider("rot:z",0.0,1.0,&mRotSpeed.z);
+        ramGetGUI().addToggle("zoomOut", &isZoomOut);
+        ramGetGUI().addButton("rndRot");
+        ramGetGUI().addButton("stop");
         
-        int a = 0;
-        ramGetGUI().addIntSlider("colorSpeed", 2, 120, &mColorSpeed);
+        ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoVisSandStorm::onPanelChanged);
         
     }
     void setup(){
         
-        mFbo.allocate(SINGLE_SCREEN_WIDTH, SINGLE_SCREEN_HEIGHT,GL_RGBA32F);
-      
-        mFbo.begin();
-        ofClear(0,0,0,0);
-        mFbo.end();
-        
-        mTri.loadImage("images/tri.png");
+        for(int i = 0; i < CIRCLE_NUM; i++){
+            mCircles.push_back(dpVecLineCircle());
+            mCircles.back().setup(ofMap(i + 1,0,CIRCLE_NUM - 1,0,SINGLE_SCREEN_HEIGHT));
+        }
         
         ramOscManager::instance().addReceiverTag(&mReceiver);
-        mReceiver.addAddress("/dp/cameraUnit/SandStorm/vector/total");
+        mReceiver.addAddress("/dp/cameraUnit/SandStorm/vector");
+
+        mZoom.speed = 0.001;
+        mRot.speed = 0.0025;
+        mRotSpeed.x = -0.05;
+    }
+    
+    void receiveOsc(){
         
-        mColor.speed = 0.01;
-        mColor.imSet(dpColor::MAIN_COLOR.r,dpColor::MAIN_COLOR.g,dpColor::MAIN_COLOR.b);
+        while (mReceiver.hasWaitingMessages()) {
+            ofxOscMessage m;
+            mReceiver.getNextMessage(&m);
+            if(m.getAddress() == "/dp/cameraUnit/SandStorm/vector"){
+                for(int i = 0; i < CIRCLE_NUM; i++){
+                    mCircles[i].setHead(ofPoint(m.getArgAsFloat(i * 2),
+                                       m.getArgAsFloat(i * 2 + 1)) * mVecScale);
+                }
+            }
+        }
+        
     }
     
     void update(){
-        if(ofGetFrameNum() % mColorSpeed == 0)mColorCounter++;
+        receiveOsc();
         
-        if(mColorCounter % 2 == 0){
-            mColor.set(dpColor::MAIN_COLOR.r,dpColor::MAIN_COLOR.g,dpColor::MAIN_COLOR.b);
-        }else{
-            mColor.set(dpColor::PALE_PINK_LIGHT.r,dpColor::PALE_PINK_LIGHT.g,dpColor::PALE_PINK_LIGHT.b);
+        for(auto &v:mCircles){
+            v.update();
         }
         
-        while(mReceiver.hasWaitingMessages()){
-            ofxOscMessage m;
-            mReceiver.getNextMessage(&m);
-            if(m.getAddress() == "/dp/cameraUnit/SandStorm/vector/total"){
-                mMeanVector.set(m.getArgAsFloat(0),
-                                  m.getArgAsFloat(1));
-            }
+        //mRot += mRotSpeed;
+
+        mZoom.update();
+        
+        mZoom.set(isZoomOut * -1000);
+        
+        if((ofGetFrameNum() - mBeginFrame) % RANDOMIZE_HAPPEN == RANDOMIZE_HAPPEN - 1){
+            
+            int rnd = ofRandom(0,4);
+            
+            if(rnd == 0)isZoomOut = !isZoomOut;
+            else if(rnd == 1)rndStop();
+            else if(rnd == 2)rndRot();
+            else if(rnd == 3)rndDirection();
+            
         }
+        
+        
+       // mRot.x = ofClamp(mRot.x,-60,60);
+       // mRot.y = ofClamp(mRot.x,-60,60);
+       // mRot.z = ofClamp(mRot.x,-60,60);
+        
+        mRot.update();
+    }
     
-        mColor.update();
+    void rndStop(){
+        
+        for(auto &v:mCircles){
+            v.setMove(true);
+        }
+        
+        if(mStopCounter < mCircles.size()){
+            
+            mCircles.at(mStopCounter).setMove(false);
+            mStopCounter++;
+            
+        }else{
+            
+            mStopCounter %= mCircles.size();
+            
+        }
+    }
+    
+    void rndDirection(){
+        
+        for(auto &v:mCircles){
+            v.setForward(true);
+        }
+        
+        int rnd = ofRandom(0,4);
+        
+        if(rnd == 0){
+            mCircles[(int)ofRandom(0,mCircles.size())].setForward(false);
+        }
+    }
+    
+    void rndRot(){
+        
+        //int rnd = ofRandom(0,5);
+        
+        int rnd = ofRandom(0,4);
+        if(rnd == 0){
+            mRot.setX(ofRandom(-70,70));
+        }else if(rnd == 1){
+            mRot.setY(ofRandom(-70,70));
+        }else if(rnd == 2){
+            mRot.setZ(ofRandom(-70,70));
+        }else{
+            mRot.set(0,0,0);
+        }
+        /*
+        if(rnd == 0){
+            
+            mRotSpeed.set(0,0,0);
+            
+        }else if(rnd == 1){
+            
+            mRotSpeed.set(0,0,0);
+         
+            int rnd = ofRandom(0,3);
+            if(rnd == 0){
+                mRot.setX(ofRandom(-60,60));
+            }else if(rnd == 1){
+                mRot.setY(ofRandom(-60,60));
+            }else{
+                mRot.setZ(ofRandom(-60,60));
+            }
+           // mRot.set(fmodf(mRot.x,360.0),
+             //          fmodf(mRot.y,360.0),
+              //         fmodf(mRot.z,360.0));
+            
+            //mRot.set(0,0,0);
+            
+        }else{
+            
+            mRotSpeed.set(ofRandom(-0.1,0.1),
+                          ofRandom(-0.1,0.1),
+                          0.0);
+            
+        }*/
     }
     
     void draw(){
-        ofDisableDepthTest();
-        mFbo.begin();
+        
+        glPointSize(8);
+        glEnable(GL_POINT_SMOOTH);
+        
+        mCam.begin(dpGetFirstScreenViewPort());
+        
         ofPushMatrix();
-        ofTranslate(SINGLE_SCREEN_WIDTH * 0.5, SINGLE_SCREEN_HEIGHT * 0.5);
-        ofPoint tmp = mMeanVector;//(ofGetMouseX(),ofGetMouseY());//farneback.getAverageFlow();
-   
-        mMeanVector *= mFlowDrawScale;
-        
-        ofColor color;
-        
-        
-        if(isColor){
-            
-            color.set(mColor.x,mColor.y,mColor.z);
-            ofSetColor(color);
-        
+        ofTranslate(0, 0, mZoom.val);
+        ofRotateX(mRot.x);
+        ofRotateY(mRot.y);
+        ofRotateZ(mRot.z);
+        for(auto &v:mCircles){
+            v.draw();
         }
-        else ofSetColor(255, 255, 255);
-        
-        ofSetLineWidth(2);
-        if(isDrawLine)ofLine(0,0,tmp.x,tmp.y);
-        
-        if(isCircle){
-            ofFill();
-            ofCircle(tmp,tmp.length() * mRadScale);
-            
-        }else{
-            ofPushMatrix();
-            ofTranslate(tmp.x, tmp.y);
-            ofRotateZ(ofRadToDeg(atan2(-tmp.y,-tmp.x) - HALF_PI));
-            ofTranslate(-tmp.x, -tmp.y);
-            ofPushStyle();
-            ofSetRectMode(OF_RECTMODE_CENTER);
-            mTri.draw(tmp,tmp.length() * mRadScale,tmp.length() * mRadScale);
-            ofPopStyle();
-            ofPopMatrix();
-        }
-        
         ofPopMatrix();
         
-        ofSetColor(0,0,0,mFade);
-        ofRect(0,0,SINGLE_SCREEN_WIDTH,SINGLE_SCREEN_HEIGHT);
+        mCam.end();
         
-        mFbo.end();
-        
-        ofSetColor(255,255,255);
-        mFbo.draw(0,0);
-        
-       // if(isMaskMode)mMap.draw(mFbo.getTextureReference());
     }
+    
+    void onPanelChanged(ofxUIEventArgs& e){
+        
+        string name = e.widget->getName();
+    
+        if(name == "rndRot")rndRot();
+        
+        if(name == "stop")rndStop();
+        
+    }
+    
+    void onEnabled(){
+        mRotSpeed.set(-0.05,0.0,0.0);
+        mRot.set(0,0,0);
+        // mRot.imSet(0,0,0);
+        mBeginFrame = ofGetFrameNum();
+    }
+    
 private:
-    
-    float mFade = 10.0;
-    float mRadScale = 10.0;
-    float mFlowDrawScale = 10.0;
-    
-    bool isMaskMode = false;
-    bool isDrawLine = true;
-    bool isCircle = false;
-    bool isColor = false;
-    
-    ofImage mTri;
-  //  BasicMap mMap;
-    
-    ofFbo mFbo;
-    
-    int mColorSpeed = 20;
-    int mColorCounter = 0;
-    
     ramOscReceiveTag mReceiver;
     
-    ofPoint mMeanVector;
-    KezSlidePoint mColor;
+    static const int RANDOMIZE_HAPPEN = 600;
+    
+    static const int CIRCLE_NUM = 5;
+    vector<dpVecLineCircle>mCircles;
+    
+    float mVecScale = 30.0;
+    
+    ofEasyCam mCam;
+    
+    KezSlidePoint mRot;
+    KezSlide mZoom;
+    ofPoint mRotSpeed;
+    
+    bool isZoomOut = false;
+    
+    int mStopCounter = 0;
+    int mBeginFrame = 0;
 };
 
 #endif
