@@ -35,7 +35,7 @@ private:
         
         void setup(){
             mHeightTarget = SINGLE_SCREEN_HEIGHT * 0.75;
-            mWidth = 40;
+            mWidth = 20;
             mMargin = 200;
         }
         
@@ -52,7 +52,7 @@ private:
             mHeight.imSet(0);
             mHeight.set(mHeightTarget);
             mAlpha.imSet(255);
-            mFadeStartDelay.start(150);
+            mFadeStartDelay.start(120);
         }
         
         void draw(int num){

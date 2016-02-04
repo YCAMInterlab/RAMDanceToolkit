@@ -35,23 +35,23 @@ void Box::setup(const ofVec3f& p, float w, float h, float d)
     const ofVec3f v6 {ofVec3f(x,  y,  z) + o};
     const ofVec3f v7 {ofVec3f(-x,  y,  z) + o};
     
-    mLines.clear();
-    mLines.push_back(Line::make(v0, v1));
-    mLines.push_back(Line::make(v1, v2));
-    mLines.push_back(Line::make(v2, v3));
-    mLines.push_back(Line::make(v3, v0));
+    mTypes.clear();
+    mTypes.push_back(Line::make(v0, v1));
+    mTypes.push_back(Line::make(v1, v2));
+    mTypes.push_back(Line::make(v2, v3));
+    mTypes.push_back(Line::make(v3, v0));
     
-    mLines.push_back(Line::make(v0, v4));
-    mLines.push_back(Line::make(v1, v5));
-    mLines.push_back(Line::make(v2, v6));
-    mLines.push_back(Line::make(v3, v7));
+    mTypes.push_back(Line::make(v0, v4));
+    mTypes.push_back(Line::make(v1, v5));
+    mTypes.push_back(Line::make(v2, v6));
+    mTypes.push_back(Line::make(v3, v7));
     
-    mLines.push_back(Line::make(v4, v5));
-    mLines.push_back(Line::make(v5, v6));
-    mLines.push_back(Line::make(v6, v7));
-    mLines.push_back(Line::make(v7, v4));
+    mTypes.push_back(Line::make(v4, v5));
+    mTypes.push_back(Line::make(v5, v6));
+    mTypes.push_back(Line::make(v6, v7));
+    mTypes.push_back(Line::make(v7, v4));
     
-    mPoints.assign(mLines.size(), Point());
+    mPoints.assign(mTypes.size(), Point());
     reset();
 }
 
@@ -74,14 +74,14 @@ void Cylinder::setup(const ofVec3f& p, float r, float h, int res)
         const float z1 {::sinf(rad1) * r};
         
         // top circle
-        mLines.push_back(Line::make(ofVec3f(x0, h * 0.5f, z0) + p, ofVec3f(x1, h * 0.5f, z1) + p));
+        mTypes.push_back(Line::make(ofVec3f(x0, h * 0.5f, z0) + p, ofVec3f(x1, h * 0.5f, z1) + p));
         // bottom circle
-        mLines.push_back(Line::make(ofVec3f(x0, -h * 0.5f, z0) + p, ofVec3f(x1, -h * 0.5f, z1) + p));
+        mTypes.push_back(Line::make(ofVec3f(x0, -h * 0.5f, z0) + p, ofVec3f(x1, -h * 0.5f, z1) + p));
         // side face
-        mLines.push_back(Line::make(ofVec3f(x0, -h * 0.5f, z0) + p, ofVec3f(x0, h * 0.5f, z0) + p));
+        mTypes.push_back(Line::make(ofVec3f(x0, -h * 0.5f, z0) + p, ofVec3f(x0, h * 0.5f, z0) + p));
     }
     
-    mPoints.assign(mLines.size(), Point());
+    mPoints.assign(mTypes.size(), Point());
     reset();
 }
 
@@ -101,13 +101,13 @@ void Rect::setup(const ofVec3f& p, float w, float h)
     const ofVec3f v2 {ofVec3f(x,  y, 0.f) + p};
     const ofVec3f v3 {ofVec3f(-x,  y, 0.f) + p};
     
-    mLines.clear();
-    mLines.push_back(Line::make(v0, v1));
-    mLines.push_back(Line::make(v1, v2));
-    mLines.push_back(Line::make(v2, v3));
-    mLines.push_back(Line::make(v3, v0));
+    mTypes.clear();
+    mTypes.push_back(Line::make(v0, v1));
+    mTypes.push_back(Line::make(v1, v2));
+    mTypes.push_back(Line::make(v2, v3));
+    mTypes.push_back(Line::make(v3, v0));
     
-    mPoints.assign(mLines.size(), Point());
+    mPoints.assign(mTypes.size(), Point());
     reset();
 }
 

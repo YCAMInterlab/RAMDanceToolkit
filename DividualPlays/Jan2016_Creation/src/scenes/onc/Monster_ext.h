@@ -39,6 +39,8 @@ public:
     void drawRigid(const ramRigidBody &rigid)
     {
     }
+    
+    void onEnabled(){reset();};
 	
 	void onValueChanged(ofxUIEventArgs &e)
 	{

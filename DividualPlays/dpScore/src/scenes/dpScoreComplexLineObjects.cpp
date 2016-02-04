@@ -52,33 +52,33 @@ void Speaker::setup(const ofVec3f& p)
 	const ofVec3f v11 {ofVec3f(x2, y, z2) + o};
 
 
-	mLines.clear();
-	mLines.push_back(Line::make(v0, v1));
-	mLines.push_back(Line::make(v1, v2));
-	mLines.push_back(Line::make(v2, v3));
-	mLines.push_back(Line::make(v3, v0));
+	mTypes.clear();
+	mTypes.push_back(Line::make(v0, v1));
+	mTypes.push_back(Line::make(v1, v2));
+	mTypes.push_back(Line::make(v2, v3));
+	mTypes.push_back(Line::make(v3, v0));
 
-	mLines.push_back(Line::make(v0, v4));
-	mLines.push_back(Line::make(v1, v5));
-	mLines.push_back(Line::make(v2, v6));
-	mLines.push_back(Line::make(v3, v7));
+	mTypes.push_back(Line::make(v0, v4));
+	mTypes.push_back(Line::make(v1, v5));
+	mTypes.push_back(Line::make(v2, v6));
+	mTypes.push_back(Line::make(v3, v7));
 
-	mLines.push_back(Line::make(v4, v5));
-	mLines.push_back(Line::make(v5, v6));
-	mLines.push_back(Line::make(v6, v7));
-	mLines.push_back(Line::make(v7, v4));
+	mTypes.push_back(Line::make(v4, v5));
+	mTypes.push_back(Line::make(v5, v6));
+	mTypes.push_back(Line::make(v6, v7));
+	mTypes.push_back(Line::make(v7, v4));
 
-	mLines.push_back(Line::make(v8, v9));
-	mLines.push_back(Line::make(v9, v10));
-	mLines.push_back(Line::make(v10, v11));
-	mLines.push_back(Line::make(v11, v8));
+	mTypes.push_back(Line::make(v8, v9));
+	mTypes.push_back(Line::make(v9, v10));
+	mTypes.push_back(Line::make(v10, v11));
+	mTypes.push_back(Line::make(v11, v8));
 
-	mLines.push_back(Line::make(v7, v8));
-	mLines.push_back(Line::make(v3, v9));
-	mLines.push_back(Line::make(v2, v10));
-	mLines.push_back(Line::make(v6, v11));
+	mTypes.push_back(Line::make(v7, v8));
+	mTypes.push_back(Line::make(v3, v9));
+	mTypes.push_back(Line::make(v2, v10));
+	mTypes.push_back(Line::make(v6, v11));
 
-	mPoints.assign(mLines.size(), Point());
+	mPoints.assign(mTypes.size(), Point());
 	reset();
 }
 
@@ -104,7 +104,7 @@ Funnel Funnel::create(const ofVec3f& p, float r0, float r1, float h0, float h1)
 
 void Funnel::setup(const ofVec3f& p, float r0, float r1, float h0, float h1)
 {
-	mLines.clear();
+	mTypes.clear();
 	auto res = 16;
 	for (auto i : rep(res)) {
 		const float step {(float)TWO_PI / (float)res};
@@ -120,16 +120,16 @@ void Funnel::setup(const ofVec3f& p, float r0, float r1, float h0, float h1)
 		const float z3 {::sinf(rad1) * r1};
 
 		// top circle
-		mLines.push_back(Line::make(ofVec3f(x0, 0.f, z0) + p, ofVec3f(x1, 0.f, z1) + p));
+		mTypes.push_back(Line::make(ofVec3f(x0, 0.f, z0) + p, ofVec3f(x1, 0.f, z1) + p));
 		// side face
-		mLines.push_back(Line::make(ofVec3f(x0, 0.f, z0) + p, ofVec3f(x2, -h0, z2) + p));
+		mTypes.push_back(Line::make(ofVec3f(x0, 0.f, z0) + p, ofVec3f(x2, -h0, z2) + p));
 		// bottom circle
-		//mLines.push_back(Line::make(ofVec3f(x2, -h0, z2) + p, ofVec3f(x3, -h0, z3) + p));
+		//mTypes.push_back(Line::make(ofVec3f(x2, -h0, z2) + p, ofVec3f(x3, -h0, z3) + p));
 		// cylinder
-		mLines.push_back(Line::make(ofVec3f(x2, -h0, z2) + p, ofVec3f(x3, -h0 - h1, z3) + p));
+		mTypes.push_back(Line::make(ofVec3f(x2, -h0, z2) + p, ofVec3f(x3, -h0 - h1, z3) + p));
 	}
 
-	mPoints.assign(mLines.size(), Point());
+	mPoints.assign(mTypes.size(), Point());
 	reset();
 }
 
@@ -150,21 +150,21 @@ void Water::setup(float w, float h, float d, int resX, int resZ)
 	for (auto j : rep(mResZ)) {
 		for (auto i : rep(mResX)) {
 			for (auto k : 4_i) {
-				mLines.push_back(Line::make(ofVec3f::zero(), ofVec3f::zero()));
+				mTypes.push_back(Line::make(ofVec3f::zero(), ofVec3f::zero()));
 			}
 		}
 	}
 	//for (auto i : rep(mResX)) {
 	//    for (auto k : 2_i) {
-	//        mLines.push_back(Line::make(ofVec3f::zero(), ofVec3f::zero()));
+	//        mTypes.push_back(Line::make(ofVec3f::zero(), ofVec3f::zero()));
 	//    }
 	//}
 	//for (auto j : rep(mResZ)) {
 	//    for (auto k : 2_i) {
-	//        mLines.push_back(Line::make(ofVec3f::zero(), ofVec3f::zero()));
+	//        mTypes.push_back(Line::make(ofVec3f::zero(), ofVec3f::zero()));
 	//    }
 	//}
-	mPoints.assign(mLines.size(), Point());
+	mPoints.assign(mTypes.size(), Point());
 	reset();
 }
 
@@ -198,10 +198,10 @@ void Water::update()
 			auto v1 = ofVec3f(x0, y1, z1);
 			auto v2 = ofVec3f(x1, y2, z1);
 			auto v3 = ofVec3f(x1, y3, z0);
-			mLines.at(j * mResX * 4 + i * 4 + 0).set(v0, v1);
-			mLines.at(j * mResX * 4 + i * 4 + 1).set(v1, v2);
-			mLines.at(j * mResX * 4 + i * 4 + 2).set(v2, v3);
-			mLines.at(j * mResX * 4 + i * 4 + 3).set(v3, v0);
+			mTypes.at(j * mResX * 4 + i * 4 + 0).set(v0, v1);
+			mTypes.at(j * mResX * 4 + i * 4 + 1).set(v1, v2);
+			mTypes.at(j * mResX * 4 + i * 4 + 2).set(v2, v3);
+			mTypes.at(j * mResX * 4 + i * 4 + 3).set(v3, v0);
 		}
 	}
 	//for (auto i : rep(mResX)) {
@@ -210,8 +210,8 @@ void Water::update()
 	//    const float x {mW / (float) mResX * (float)i};
 	//    auto v0 = ofVec3f(x, y0, 0.f);
 	//    auto v1 = ofVec3f(x, y1, mD);
-	//    mLines.at(mResX * mResZ * 4 + i * 2 + 0).set(v0, ofVec3f(x, 0.f, 0.f));
-	//    mLines.at(mResX * mResZ * 4 + i * 2 + 1).set(v1, ofVec3f(x, 0.f, mD));
+	//    mTypes.at(mResX * mResZ * 4 + i * 2 + 0).set(v0, ofVec3f(x, 0.f, 0.f));
+	//    mTypes.at(mResX * mResZ * 4 + i * 2 + 1).set(v1, ofVec3f(x, 0.f, mD));
 	//}
 	//for (auto j : rep(mResZ)) {
 	//    const float y0 {displacement(0, j, t)};
@@ -219,15 +219,15 @@ void Water::update()
 	//    const float z {mD / (float) mResZ * (float)j};
 	//    auto v0 = ofVec3f(0, y0, z);
 	//    auto v1 = ofVec3f(mW, y1, z);
-	//    mLines.at(mResX * mResZ * 4 + mResX * 2 + j * 2 + 0).set(v0, ofVec3f(0.f, 0.f, z));
-	//    mLines.at(mResX * mResZ * 4 + mResX * 2 + j * 2 + 1).set(v1, ofVec3f(mW, 0.f, z));
+	//    mTypes.at(mResX * mResZ * 4 + mResX * 2 + j * 2 + 0).set(v0, ofVec3f(0.f, 0.f, z));
+	//    mTypes.at(mResX * mResZ * 4 + mResX * 2 + j * 2 + 1).set(v1, ofVec3f(mW, 0.f, z));
 	//}
 }
 
 void Water::draw()
 {
 	CompoundLine::draw();
-	if (CompoundLine::enableAnimation) {
+	if (compoundGetEnableCollapse()) {
 		return;
 	}
 	ScopedStyle s;

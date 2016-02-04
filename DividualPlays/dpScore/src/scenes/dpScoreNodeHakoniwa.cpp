@@ -19,7 +19,7 @@ NodeHakoniwa::NodeHakoniwa()
 {
 	title = "Hakoniwa x 7";
 	titleJP = "箱庭（７種類）";
-	descriptionJP = "「箱庭（７種類）」\n仮想環境の情報を箱庭に伝えることによって\n箱庭の内部の状態が変化します";
+	descriptionJP = "RAMシステムはその情報を形状や箱庭へと変換します";
 
 	setGlobalPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 157.f,
 	                  0.f,
