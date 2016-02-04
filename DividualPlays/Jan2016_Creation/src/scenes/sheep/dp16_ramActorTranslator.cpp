@@ -156,16 +156,19 @@ void dp16_ramActorTranslator::draw()
 	
 	ofPushMatrix();
 	ofRotateX(90);
-	for (int i = 0;i < floor_scale; i+=floor_grid_span)
-	{
-		for (int j = 0;j < floor_scale;j+=floor_grid_span)
-		{
-			ofRect( i, j, floor_grid_span, floor_grid_span);
-			ofRect(-i, j, floor_grid_span, floor_grid_span);
-			ofRect( i,-j, floor_grid_span, floor_grid_span);
-			ofRect(-i,-j, floor_grid_span, floor_grid_span);
-		}
-	}
+    if (drawFloor)
+    {
+        for (int i = 0;i < floor_scale; i+=floor_grid_span)
+        {
+            for (int j = 0;j < floor_scale;j+=floor_grid_span)
+            {
+                ofRect( i, j, floor_grid_span, floor_grid_span);
+                ofRect(-i, j, floor_grid_span, floor_grid_span);
+                ofRect( i,-j, floor_grid_span, floor_grid_span);
+                ofRect(-i,-j, floor_grid_span, floor_grid_span);
+            }
+        }        
+    }
 	ofPopMatrix();
 	
 	ofFill();
