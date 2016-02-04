@@ -54,7 +54,7 @@ void FlowChartSceneDescription::drawText(SceneFlowChart* owner)
 	const decltype(lines.size())index = lines.size() * t;
 	auto line = lines.at(index);
 
-	if (mTotalTime - mElapsedTime <= mMoveSpan * 3.f) {
+	if (mTotalTime - mElapsedTime <= mMoveSpan * 4.f) {
 		line = "このやりとりの繰り返しでダンスがつくられます";
 	}
 	{
