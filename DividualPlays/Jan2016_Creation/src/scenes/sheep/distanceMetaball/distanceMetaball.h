@@ -43,6 +43,7 @@ private:
 	bool mDrawMetaball;
 	float mScale;
 	float mSmooth;
+    float xCompress;
 
 	vector<ofVec3f> pts;
 

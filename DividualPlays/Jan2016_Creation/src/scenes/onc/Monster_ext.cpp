@@ -21,7 +21,7 @@ void Monster_ext::setupControlPanel()
     maxScale = 2;
     randomizationAmount = .15;
     ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
-    panel->addButton("Reset", &needToReset, 20, 20);
+    panel->addToggle("Reset", &needToReset, 20, 20);
     panel->addToggle("Random Line", &randomLine, 20, 20);
     panel->addToggle("Randomize Topology", &randomizeTopology, 20, 20);
     panel->addToggle("Randomize Geometry", &randomizeGeometry, 20, 20);
@@ -131,6 +131,7 @@ void Monster_ext::update()
     if(needToReset)
     {
         reset();
+        needToReset = false;
     }
     if(randomizeTopology)
     {
