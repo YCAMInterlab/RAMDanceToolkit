@@ -7,6 +7,7 @@
 //
 
 #include "UpsideDown_ext.h"
+#include "dpPhongShading.h"
 
 void UpsideDown_ext::setupControlPanel()
 {
@@ -118,7 +119,10 @@ void UpsideDown_ext::draw()
     {
         ramNodeArray &NA = filterdNAs[i];
         ofSetColor(ramColor::RED_DEEP);
+        
+        dpPhongShading::instance().begin();
         ramDrawBasicActor(NA);
+        dpPhongShading::instance().end();
     }
     ofPopStyle();
     
