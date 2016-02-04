@@ -15,8 +15,8 @@
 DP_SCORE_NAMESPACE_BEGIN
 
 // all object will make from OpenGL coord(righthanded)
-struct Line {
-	static Line make(const ofVec3f& p0, const ofVec3f& p1);
+struct LineType {
+	static LineType make(const ofVec3f& p0, const ofVec3f& p1);
 	void set(const ofVec3f& p0, const ofVec3f& p1);
 	void draw();
 
@@ -24,7 +24,7 @@ struct Line {
 	ofVec3f v;
 };
 
-typedef Compound<Line> CompoundLine;
+typedef Compound<LineType> CompoundLine;
 
 DP_SCORE_NAMESPACE_END
 

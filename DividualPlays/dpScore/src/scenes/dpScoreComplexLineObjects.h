@@ -23,12 +23,16 @@ public:
     static float getDepth();
 };
 
+#pragma mark ___________________________________________________________________
+
 // this object will make from center
 class Funnel: public CompoundLine {
 public:
     static Funnel create(const ofVec3f& p, float r0, float r1, float h0, float h1);
     void setup(const ofVec3f& p, float r0, float r1, float h0, float h2);
 };
+
+#pragma mark ___________________________________________________________________
 
 class Water: public CompoundLine {
 public:

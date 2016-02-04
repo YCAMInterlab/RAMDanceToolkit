@@ -63,6 +63,8 @@ void Deck::draw()
 	}
 }
 
+#pragma mark ___________________________________________________________________
+
 Chair::Chair()
 {
 	mBoxes.push_back(Box::create(ofVec3f::zero(), 4.f, 1.5f, 35.f));
@@ -99,6 +101,8 @@ void Chair::draw()
 		mBoxes.at(7).draw();
 	}
 }
+
+#pragma mark ___________________________________________________________________
 
 MacBook::MacBook()
 {

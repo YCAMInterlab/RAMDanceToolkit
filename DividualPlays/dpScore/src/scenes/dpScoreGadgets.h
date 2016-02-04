@@ -25,6 +25,8 @@ private:
     vector<Box> mBoxes;
 };
 
+#pragma mark ___________________________________________________________________
+
 struct Deck {
     Deck();
     void draw();
@@ -36,6 +38,8 @@ private:
     vector<Cylinder> mLegs;
 };
 
+#pragma mark ___________________________________________________________________
+
 struct Chair {
     Chair();
     void draw();
@@ -44,6 +48,8 @@ struct Chair {
 private:
     vector<Box> mBoxes;
 };
+
+#pragma mark ___________________________________________________________________
 
 struct MacBook {
     typedef void (*DrawDisplayFunc)(float w, float h);

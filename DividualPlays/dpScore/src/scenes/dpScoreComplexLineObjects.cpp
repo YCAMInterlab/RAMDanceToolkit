@@ -53,30 +53,30 @@ void Speaker::setup(const ofVec3f& p)
 
 
 	mTypes.clear();
-	mTypes.push_back(Line::make(v0, v1));
-	mTypes.push_back(Line::make(v1, v2));
-	mTypes.push_back(Line::make(v2, v3));
-	mTypes.push_back(Line::make(v3, v0));
+	mTypes.push_back(LineType::make(v0, v1));
+	mTypes.push_back(LineType::make(v1, v2));
+	mTypes.push_back(LineType::make(v2, v3));
+	mTypes.push_back(LineType::make(v3, v0));
 
-	mTypes.push_back(Line::make(v0, v4));
-	mTypes.push_back(Line::make(v1, v5));
-	mTypes.push_back(Line::make(v2, v6));
-	mTypes.push_back(Line::make(v3, v7));
+	mTypes.push_back(LineType::make(v0, v4));
+	mTypes.push_back(LineType::make(v1, v5));
+	mTypes.push_back(LineType::make(v2, v6));
+	mTypes.push_back(LineType::make(v3, v7));
 
-	mTypes.push_back(Line::make(v4, v5));
-	mTypes.push_back(Line::make(v5, v6));
-	mTypes.push_back(Line::make(v6, v7));
-	mTypes.push_back(Line::make(v7, v4));
+	mTypes.push_back(LineType::make(v4, v5));
+	mTypes.push_back(LineType::make(v5, v6));
+	mTypes.push_back(LineType::make(v6, v7));
+	mTypes.push_back(LineType::make(v7, v4));
 
-	mTypes.push_back(Line::make(v8, v9));
-	mTypes.push_back(Line::make(v9, v10));
-	mTypes.push_back(Line::make(v10, v11));
-	mTypes.push_back(Line::make(v11, v8));
+	mTypes.push_back(LineType::make(v8, v9));
+	mTypes.push_back(LineType::make(v9, v10));
+	mTypes.push_back(LineType::make(v10, v11));
+	mTypes.push_back(LineType::make(v11, v8));
 
-	mTypes.push_back(Line::make(v7, v8));
-	mTypes.push_back(Line::make(v3, v9));
-	mTypes.push_back(Line::make(v2, v10));
-	mTypes.push_back(Line::make(v6, v11));
+	mTypes.push_back(LineType::make(v7, v8));
+	mTypes.push_back(LineType::make(v3, v9));
+	mTypes.push_back(LineType::make(v2, v10));
+	mTypes.push_back(LineType::make(v6, v11));
 
 	mPoints.assign(mTypes.size(), Point());
 	reset();
@@ -94,6 +94,8 @@ float Speaker::getDepth()
 {
 	return 30.f;
 }
+
+#pragma mark ___________________________________________________________________
 
 Funnel Funnel::create(const ofVec3f& p, float r0, float r1, float h0, float h1)
 {
@@ -120,18 +122,20 @@ void Funnel::setup(const ofVec3f& p, float r0, float r1, float h0, float h1)
 		const float z3 {::sinf(rad1) * r1};
 
 		// top circle
-		mTypes.push_back(Line::make(ofVec3f(x0, 0.f, z0) + p, ofVec3f(x1, 0.f, z1) + p));
+		mTypes.push_back(LineType::make(ofVec3f(x0, 0.f, z0) + p, ofVec3f(x1, 0.f, z1) + p));
 		// side face
-		mTypes.push_back(Line::make(ofVec3f(x0, 0.f, z0) + p, ofVec3f(x2, -h0, z2) + p));
+		mTypes.push_back(LineType::make(ofVec3f(x0, 0.f, z0) + p, ofVec3f(x2, -h0, z2) + p));
 		// bottom circle
-		//mTypes.push_back(Line::make(ofVec3f(x2, -h0, z2) + p, ofVec3f(x3, -h0, z3) + p));
+		//mTypes.push_back(LineType::make(ofVec3f(x2, -h0, z2) + p, ofVec3f(x3, -h0, z3) + p));
 		// cylinder
-		mTypes.push_back(Line::make(ofVec3f(x2, -h0, z2) + p, ofVec3f(x3, -h0 - h1, z3) + p));
+		mTypes.push_back(LineType::make(ofVec3f(x2, -h0, z2) + p, ofVec3f(x3, -h0 - h1, z3) + p));
 	}
 
 	mPoints.assign(mTypes.size(), Point());
 	reset();
 }
+
+#pragma mark ___________________________________________________________________
 
 Water Water::create(float w, float h, float d, int resX, int resZ)
 {
@@ -150,18 +154,18 @@ void Water::setup(float w, float h, float d, int resX, int resZ)
 	for (auto j : rep(mResZ)) {
 		for (auto i : rep(mResX)) {
 			for (auto k : 4_i) {
-				mTypes.push_back(Line::make(ofVec3f::zero(), ofVec3f::zero()));
+				mTypes.push_back(LineType::make(ofVec3f::zero(), ofVec3f::zero()));
 			}
 		}
 	}
 	//for (auto i : rep(mResX)) {
 	//    for (auto k : 2_i) {
-	//        mTypes.push_back(Line::make(ofVec3f::zero(), ofVec3f::zero()));
+	//        mTypes.push_back(LineType::make(ofVec3f::zero(), ofVec3f::zero()));
 	//    }
 	//}
 	//for (auto j : rep(mResZ)) {
 	//    for (auto k : 2_i) {
-	//        mTypes.push_back(Line::make(ofVec3f::zero(), ofVec3f::zero()));
+	//        mTypes.push_back(LineType::make(ofVec3f::zero(), ofVec3f::zero()));
 	//    }
 	//}
 	mPoints.assign(mTypes.size(), Point());

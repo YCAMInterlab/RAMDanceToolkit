@@ -11,34 +11,43 @@
 
 #include "dpScoreBaseNode.h"
 #include "dpScoreObjects.h"
-
+#include "dpScoreFlowChartHakoniwa.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 
 class NodeHakoniwa: public BaseNode {
 public:
+    enum HakoniwaType {
+        HAKO_TORNADO,
+        HAKO_WORM,
+        HAKO_STRUGGLE,
+        HAKO_SERVO_PENDULUM,
+        HAKO_GEAR,
+        HAKO_MAG_PENDULUM,
+        HAKO_SAND_STORM,
+        NUM_HAKONIWA_TYPES,
+    };
+    
     NodeHakoniwa();
     virtual ~NodeHakoniwa();
     
     void customDraw() override;
     
-    constexpr static const int kNumX { 1 };
-    constexpr static const int kNumY { 3 };
-    //constexpr static const float kGapZ { 90.f };
-    static float getWidth() { return Desk::getWidth() * kNumX;  }
-    //static float getDepth() { return Desk::getDepth() * kNumY + kGapZ * (kNumY - 1);  }
-    static float getDepth() { return Desk::getDepth() * kNumY;  }
+    static const int kNumDesks;
+    static float getWidth() { return Desk::getWidth();  }
+    static float getDepth() { return Desk::getDepth() * kNumDesks;  }
 
-    void setX(int i) { mX = ofClamp(i, 0, kNumX); };
-    void setY(int i) { mY = ofClamp(i, 0, kNumY); };
+    void setHakoniwa(int i) { mCurrHakoniwa = ofClamp(i, 0, NUM_HAKONIWA_TYPES); };
     void setFocus(bool focus) { mFocus = focus; }
     
 private:
     vector<Desk> mDesks;
-    //vector<Box> mLights;
     bool mFocus {true};
-    int mX {1};
-    int mY {0};
+    int mCurrHakoniwa {0};
+    int mCurrDesk {0};
+    
+    ofNode mHakoOrigin;
+    vector<ofPtr<BaseHakoniwa>> mHakoniwas;
 };
 
 DP_SCORE_NAMESPACE_END

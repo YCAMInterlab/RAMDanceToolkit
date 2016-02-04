@@ -43,6 +43,8 @@ private:
     T i;
 };
 
+#pragma mark ___________________________________________________________________
+
 template<typename T>
 class Loop {
 public:
@@ -67,6 +69,8 @@ Loop<T> rep(T n)
 {
     return Loop<T>(n);
 }
+
+#pragma mark ___________________________________________________________________
 
 inline
 Loop<int> operator "" _i(unsigned long long int n)
