@@ -62,7 +62,6 @@ void dp16_ramActorTranslator::setupControlPanel()
 	margine = 160;
 	drawFloor = true;
     
-    mPhong.setup();
 }
 
 void dp16_ramActorTranslator::update()
@@ -182,9 +181,10 @@ void dp16_ramActorTranslator::draw()
 void dp16_ramActorTranslator::drawTargetActor(int id, ramNodeArray &actor)
 {
 	ofSetColor(palette[id]);
-    mPhong.begin();
+    
+    dpPhongShading::instance().begin();
 	ramDrawBasicActor(actor);
-    mPhong.end();
+    dpPhongShading::instance().end();
 }
 
 void dp16_ramActorTranslator::exit()

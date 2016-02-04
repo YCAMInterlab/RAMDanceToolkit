@@ -50,8 +50,6 @@ private:
 	bool viewGridFloor;
 	float floor_scale;
 	float floor_grid_span;
-    
-    dpPhongShading mPhong;
 
 };
 

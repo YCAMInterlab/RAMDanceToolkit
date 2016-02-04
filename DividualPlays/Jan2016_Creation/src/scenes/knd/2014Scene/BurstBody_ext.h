@@ -12,6 +12,7 @@
 #include "ramMotionExtractor.h"
 #include "KezSlidePoint.h"
 #include "BurstBody.h"
+#include "dpPhongShading.h"
 
 #include "ramCenteredActor.h"
 
@@ -31,11 +32,12 @@ public:
    
         ramGetGUI().addToggle("Centered", &mIsCentered);
         
-        ramGetGUI().addSlider("trans:x", -300, 300, &mTrans.x);
-        ramGetGUI().addSlider("trans:y", -300, 300, &mTrans.y);
-        ramGetGUI().addSlider("trans:z", 0, 2000, &mTrans.z);
-        
         ofxUICanvasPlus* gui = ramGetGUI().getCurrentUIContext();
+        
+        gui->addSlider("trans:x", -300, 300, &mTrans.x, 150,20);
+        gui->addSlider("trans:y", -300, 300, &mTrans.y, 150,20);
+        gui->addSlider("trans:z", 0, 2000, &mTrans.z, 150,20);
+        
         gui->addWidgetDown(new ofxUILabel("BodyColor", OFX_UI_FONT_MEDIUM));
 
         
@@ -57,50 +59,7 @@ public:
     
     void setup()
     {
-        
-#define _S(src) #src
-        
-        const char *vs = _S(
-                            
-                            varying vec3 normal;
-                            varying vec4 worldPos;
-                            
-                            void main(){
-                                gl_Position = ftransform();
-                                worldPos = gl_ModelViewMatrix * gl_Vertex;
-                                
-                                normal = gl_NormalMatrix * gl_Normal;
-                                gl_FrontColor = gl_Color;
-                            }
-                            );
-        
-        const char *fs = _S(
-                            
-                            varying vec3 normal;
-                            varying vec4 worldPos;
-                            uniform vec3 light;
-                            
-                            vec3 ads(){
-                                vec3 n = normalize(normal.xyz);
-                                vec3 s = normalize(light);//-v_Vertex.xyz);
-                                vec3 v = normalize(vec3(-worldPos));
-                                vec3 r = reflect(-s,-n);
-                                
-                                if(dot(n,s) > 0.0)return vec3(max(dot(s,n), 0.0) + vec3(pow(max(dot(r,v),0.0),10.0)) * 1.0) * 1.0;
-                                else return vec3(0,0,0);
-                            }
-                            
-                            void main(){
-                                gl_FragColor = vec4(gl_Color.rgb * ads(),1.0);
-                            }
-        );
-        
-#undef _S
-        
-        mShader.setupShaderFromSource(GL_VERTEX_SHADER, vs);
-        mShader.setupShaderFromSource(GL_FRAGMENT_SHADER, fs);
-        mShader.linkProgram();
-        
+
         bodyColor.set(dpDancerFloatColor::SHIMAJI_COLOR.r,
                       dpDancerFloatColor::SHIMAJI_COLOR.g,
                       dpDancerFloatColor::SHIMAJI_COLOR.b);
@@ -171,12 +130,11 @@ public:
                 
                 tmpNode.setGlobalPosition(mBoxes[idx].mPos);
                 
-                mShader.begin();
-                mShader.setUniform3f("light", 0, 0, 100);
+                dpPhongShading::instance().begin();
                 ofSetColor(bodyColor);
                 ramBox(tmpNode, jointSize);
                 ramLine(tmpNode);
-                mShader.end();
+                dpPhongShading::instance().end();
                 
                 cnt++;
             }
@@ -236,8 +194,6 @@ private:
     ofFloatColor bodyColor;
     vector<BurstBox> mBoxes;
     ramMotionExtractor mex;
-    
-    ofShader mShader;
     
     ofPoint mTrans;
     
