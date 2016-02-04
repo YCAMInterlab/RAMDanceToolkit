@@ -24,6 +24,14 @@ class Box: public CompoundLine {
 public:
 	static Box create(const ofVec3f& p, float w, float h, float d);
 	void setup(const ofVec3f& p, float w, float h, float d);
+    float getWidth() const;
+    float getHeight() const;
+    float getDepth() const;
+    ofVec3f getOrigin() const;
+    ofVec3f getCenter() const;
+private:
+    ofVec3f mOrigin;
+    float mW, mH, mD;
 };
 
 #pragma mark ___________________________________________________________________

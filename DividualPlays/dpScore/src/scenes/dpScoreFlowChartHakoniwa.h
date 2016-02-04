@@ -114,6 +114,7 @@ public:
 	float getDepth() override;
 private:
 	Box mBox;
+    Box mPlate;
 };
 
 DP_SCORE_NAMESPACE_END

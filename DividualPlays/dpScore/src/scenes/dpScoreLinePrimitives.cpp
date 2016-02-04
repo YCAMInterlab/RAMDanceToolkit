@@ -53,6 +53,11 @@ Box Box::create(const ofVec3f& p, float w, float h, float d)
 
 void Box::setup(const ofVec3f& p, float w, float h, float d)
 {
+    mOrigin = p;
+    mW = w;
+    mH = h;
+    mD = d;
+    
     const ofVec3f o(p.x + w * 0.5f, p.y + h * 0.5f, p.z + d * 0.5);
     const float x {w * 0.5f};
     const float y {h * 0.5f};
@@ -84,6 +89,31 @@ void Box::setup(const ofVec3f& p, float w, float h, float d)
     
     mPoints.assign(mTypes.size(), Point());
     reset();
+}
+
+float Box::getWidth() const
+{
+    return mW;
+}
+
+float Box::getHeight() const
+{
+    return mH;
+}
+
+float Box::getDepth() const
+{
+    return mD;
+}
+
+ofVec3f Box::getOrigin() const
+{
+    return mOrigin;
+}
+
+ofVec3f Box::getCenter() const
+{
+    return mOrigin + ofVec3f(mW * 0.5f, mH * 0.5f, mD * 0.5f);
 }
 
 Cylinder Cylinder::create(const ofVec3f& p, float r, float h, int res)
