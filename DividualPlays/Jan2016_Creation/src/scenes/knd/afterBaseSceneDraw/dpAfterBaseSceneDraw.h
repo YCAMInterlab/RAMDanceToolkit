@@ -12,7 +12,7 @@
 #include "ramMain.h"
 
 #include "dpDancerCue.h"
-#include "dpRemainedHakoniwaView.h"
+
 #include "DoSomething.h"
 #include "dpBDisplayOutline.h"
 
@@ -26,7 +26,7 @@ public:
 private:
     DoSomething doSomething;
     dpDancerCue dancerCue;
-    dpRemainedHakoniwaView remainedView;
+   // dpRemainedHakoniwaView remainedView;
     dpBDisplayOutline mBDisplayOutline;
 };
 
