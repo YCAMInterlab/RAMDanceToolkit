@@ -30,7 +30,9 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
         ramGetGUI().addToggle("INVERSE_MAGNET" + ofToString(i+1), &bInversed[i]);
     }
     
-    ramGetGUI().addSlider("Distance Threshold", 2.0f, 200.0f, &distanceThreshold);
+    ramGetGUI().addSlider("Distance Threshold_1", 2.0f, 200.0f, &distanceThreshold[0]);
+    ramGetGUI().addSlider("Distance Threshold_2", 2.0f, 200.0f, &distanceThreshold[1]);
+    ramGetGUI().addSlider("Distance Threshold_3", 2.0f, 200.0f, &distanceThreshold[2]);
     ramGetGUI().addToggle("2EACH MODE", &bEachMode);
     ramGetGUI().addToggle("USE DURATION LIMIT", &bUseOnDurationLimit);
     ramGetGUI().addSlider("LIMIT TIME", 0, 20, &limitDuration);
@@ -64,7 +66,12 @@ void dpHakoniwaMagnetPendulum::setupControlPanel() {
     twistThresholdNegative = 50;
     limitDuration = 3.0f;
 //    distanceThreshold = 65;
-    distanceThreshold = 50;
+   
+    for(auto &v:distanceThreshold){
+        v = 50;
+    }
+    
+    distanceThreshold[0] = 20;
     
     ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &dpHakoniwaMagnetPendulum::guiEvent);
     
@@ -165,7 +172,7 @@ void dpHakoniwaMagnetPendulum::update() {
             d[2] = mMotionExtractor.getDistanceAt(4, 5);
             
             for (int i = 0; i < 3; i++){
-                if (d[i] < distanceThreshold && d[i] > 0.0f) bD[i] = true;
+                if (d[i] < distanceThreshold[i] && d[i] > 0.0f) bD[i] = true;
                 else bD[i] = false;
 
                 if (bD[i] && !bDprev[i]) {
@@ -285,7 +292,7 @@ void dpHakoniwaMagnetPendulum::draw(){
     if (!bModeTwist){
     
         ofPushStyle();
-        ofSetLineWidth(4);
+        ofSetLineWidth(8);
         if (mMotionExtractor.getIsExist(0) && mMotionExtractor.getIsExist(1)){
             if (bOn[2]) ofSetColor(255, 0, 0);
             else ofSetColor(200, 200, 200);
