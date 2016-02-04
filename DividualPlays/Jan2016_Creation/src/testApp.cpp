@@ -119,7 +119,7 @@ dp16_actorDrawer mActorDrawer;
 
 // sand
 dpHakoniwaSand hakoniwaSand;
-dpHakoVisVecLineCircle vecLineCircle;
+dpHakoVisSandStorm visSandStorm;
 
 // struggle
 dpHakoniwaStruggle hakoniwaStruggle;
@@ -181,7 +181,7 @@ void testApp::setup()
     sceneManager.addScene(mHastyChase_ext.getPtr());
     sceneManager.addScene(mMonster_ext.getPtr());
 	sceneManager.addScene(mMonster_ext2.getPtr());
-   // sceneManager.addScene(mMixMonsterScene_ext.getPtr());
+
     sceneManager.addScene(mThreePoints_ext.getPtr());
     sceneManager.addScene(mDonuts_ext.getPtr());
 
@@ -215,7 +215,7 @@ void testApp::setup()
     sceneManager.addScene(visStruggle.getPtr());
     
     sceneManager.addScene(hakoniwaSand.getPtr());
-    sceneManager.addScene(vecLineCircle.getPtr());
+    sceneManager.addScene(visSandStorm.getPtr());
     
     sceneManager.addScene(magPendulum.getPtr());
     sceneManager.addScene(visMagnetPendulum.getPtr());

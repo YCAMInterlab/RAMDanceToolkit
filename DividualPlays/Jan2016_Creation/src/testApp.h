@@ -24,18 +24,15 @@
 #include "dpHakoniwaServoPendulum.h"
 #include "dpHakoVisStageBlob.h"
 #include "dpHakoVisServoPendulum.h"
-#include "dpHakoVisVecLineCircle.h"
+#include "dpHakoVisSandStorm.h"
 #include "dpHakoniwaStruggle.h"
 #include "dpHakoVisStruggle.h"
-#include "dpHakoVisSandStorm.h"
 #include "dpHakoVisMagnetPendulum.h"
 #include "dpHakoVisTornado.h"
 #include "dpHakoniwaTornado.h"
 #include "dpRawCamera.h"
 
 #include "dpAllHakoniwaMove.h"
-
-#include "FloorLine.h"
 
 #include "dpAfterBaseSceneDraw.h"
 
