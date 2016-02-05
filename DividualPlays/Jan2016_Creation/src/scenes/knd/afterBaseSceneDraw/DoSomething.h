@@ -16,7 +16,7 @@ public:
         ramOscManager::instance().addReceiverTag(&mReceiver);
         mReceiver.addAddress("/ram/do_something");
         
-        mStr = "Do Something";
+        mStr = "Do Nothing";
     }
     
     void start(){
@@ -62,18 +62,20 @@ public:
         if(enable){
             
             ofPushMatrix();
-            
             ofPoint offset = SCREEN_POSITIONS[SCREEN_C];
-            
             ofTranslate(offset.x,offset.y);
-            
-            ofSetColor(255,255,255);
-            string str = mStr.substr(0,mStrCounter);
-            mFont.drawString(ofToString(str),120,SINGLE_SCREEN_HEIGHT * 0.5 + FONT_SIZE * 0.25);
-            mFont.drawString(ofToString(str),120 + SINGLE_SCREEN_WIDTH,SINGLE_SCREEN_HEIGHT * 0.5 + FONT_SIZE * 0.25);
-            
+            drawString();
             ofPopMatrix();
+
+            drawString();
+            
         }
+    }
+    
+    void drawString(){
+        ofSetColor(255,255,255);
+        string str = mStr.substr(0,mStrCounter);
+        mFont.drawString(ofToString(str),120,SINGLE_SCREEN_HEIGHT * 0.5 + FONT_SIZE * 0.25);
     }
     
 private:
