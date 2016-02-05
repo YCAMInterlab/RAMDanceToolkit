@@ -14,6 +14,7 @@
 
 class dpAllHakoniwaMove : public ramBaseScene{
 public:
+    
     string getName() const {return "dpAllHakoniwaMove";};
     
     void setupControlPanel(){
@@ -75,6 +76,41 @@ public:
         mLightSender.setup(LIGHTING_IP,10000);
     
     }
+    
+    void update(){
+        sendMaglooper(mIsMagLooper);
+        sendSandStorm(mIsSandStorm);
+        sendMagPendulum(mIsMagPendulum);
+        sendStruggle(mIsStruggle);
+        sendGear(mIsGear);
+    }
+    void receiveOsc(){}
+    
+    void onEnabled(){
+        
+        mServoThread.start();
+        sendAll(true);
+        
+        mIsMagLooper = true;
+        mIsMagPendulum = true;
+        mIsStruggle = true;
+        mIsSandStorm = true;
+        mIsServoPendulum = true;
+        mIsGear = true;
+        mIsTornade = true;
+        
+        sendLightingMessage(true);
+        
+    }
+    
+    void onDisabled(){
+        sendAll(false);
+        sendAll(false);
+        mServoThread.stop();
+        sendLightingMessage(false);
+    }
+    
+private:
     
     void setupStepManager(){
         
@@ -143,7 +179,17 @@ public:
         }
         
         if(enable){
-            m.addIntArg(255);
+            
+            if(ofGetFrameNum() % 50 > 30){
+            
+                m.addIntArg(255);
+            
+            }else{
+                
+                m.addIntArg(0);
+            
+            }
+            
         }else{
             m.addIntArg(0);
         }
@@ -180,15 +226,28 @@ public:
     void sendGear(bool enable){
         
         if(enable){
-            mStepManager.setStepperAll(true);
-            mStepManager.run(12000, true);
-            mStepManager.setStepperAll(false);
+            
+            if(ofGetFrameNum() % 600 > 100)moveGear();
+            else stopGear();
+            
         }else{
-            mStepManager.setStepperAll(true);
-            mStepManager.hardStop();
-            mStepManager.setStepperAll(false);
+            
+            stopGear();
+            
         }
         
+    }
+    
+    void moveGear(){
+        mStepManager.setStepperAll(true);
+        mStepManager.run(12000, ofGetFrameNum() % 900 > 450);
+        mStepManager.setStepperAll(false);
+    }
+    
+    void stopGear(){
+        mStepManager.setStepperAll(true);
+        mStepManager.hardStop();
+        mStepManager.setStepperAll(false);
     }
     
     void sendServoPendulum(){
@@ -254,36 +313,6 @@ public:
         sendGear(enable);
     }
     
-    void update(){
-        sendMaglooper(mIsMagLooper);
-        sendSandStorm(mIsSandStorm);
-        sendMagPendulum(mIsMagPendulum);
-    }
-    void receiveOsc(){}
-    
-    void onEnabled(){
-        
-        mServoThread.start();
-        sendAll(true);
-        
-        mIsMagLooper = true;
-        mIsMagPendulum = true;
-        mIsStruggle = true;
-        mIsSandStorm = true;
-        mIsServoPendulum = true;
-        mIsGear = true;
-        mIsTornade = true;
-        
-        sendLightingMessage(true);
-    }
-    
-    void onDisabled(){
-        sendAll(false);
-        sendAll(false);
-        mServoThread.stop();
-        sendLightingMessage(false);
-    }
-    
     void sendLightingMessage(bool enable){
         ofxOscMessage m;
         m.setAddress("/dp/rdtk/allHakoniwaMove");
@@ -291,8 +320,6 @@ public:
         mLightSender.sendMessage(m);
     }
     
-private:
-
     enum HAKONIWA_SENDER_NAME{
         MAG_LOOPER_1,
         MAG_LOOPER_2,

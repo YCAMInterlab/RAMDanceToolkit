@@ -47,7 +47,7 @@ void Donuts_ext::setupControlPanel()
 
 void Donuts_ext::setup()
 {
-    
+    mWholeScale = 0.0;
 }
 
 void Donuts_ext::update()
@@ -55,6 +55,8 @@ void Donuts_ext::update()
     mMex.update();
     mNumDuplicate = floor(mNumDuplicate);
     mRadian = 2 * M_PI / mNumDuplicate;
+    
+    mWholeScale += (1.0 - mWholeScale) * 0.1;
 }
 
 void Donuts_ext::drawDonuts(const ramNodeArray &nodeArray)
@@ -171,12 +173,18 @@ void Donuts_ext::drawActor(const ramActor& actor)
     
     if (!bActEnable) return;
     
+    ofPushMatrix();
+    ofScale(mWholeScale, mWholeScale, mWholeScale);
     drawDonuts( actor );
+    ofPopMatrix();
 }
 
 void Donuts_ext::drawRigid(const ramRigidBody &rigid)
 {
+    ofPushMatrix();
+    ofScale(mWholeScale, mWholeScale, mWholeScale);
     drawDonuts( rigid );
+    ofPopMatrix();
 }
 
 void Donuts_ext::onValueChanged(ofxUIEventArgs& e)
@@ -218,4 +226,8 @@ void Donuts_ext::setAllVisiblity(bool b)
 {
     for (int i=0; i<ramActor::NUM_JOINTS; i++)
         mToggles[i]->setValue(b);
+}
+
+void Donuts_ext::onDisabled(){
+    mWholeScale = 0.0;
 }

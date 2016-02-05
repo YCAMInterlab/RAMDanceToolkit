@@ -20,7 +20,6 @@ public:
     }
     
     void start(){
-        mLife = LIFE;
         enable = true;
         mStrCounter = 0;
     }
@@ -32,7 +31,12 @@ public:
             
             if(m.getAddress() == "/ram/do_something"){
                 start();
+                mLimitTime = m.getArgAsFloat(0);
                 mBeginTime = ofGetElapsedTimef();
+            }
+            
+            if(m.getAddress() == "/ram/do_something/disable"){
+                enable = false;
             }
         }
     }
@@ -43,42 +47,49 @@ public:
         
         if(enable){
             
-            mLife--;
-            
             float elapsed = (ofGetElapsedTimef() - mBeginTime);
             
             mStrCounter = ofMap(elapsed,0,1.0,0,mStr.size(),true);
             
             if(mStrCounter > mStr.size())mStrCounter = mStr.size();
+            
+            if(elapsed > mLimitTime)enable = false;
         }
         
-        if(mLife < 0)enable = false;
     }
     
     void draw(){
         if(enable){
-            ofSetColor(255,255,255);
-            string str = mStr.substr(0,mStrCounter);
-            mFont.drawString(ofToString(str),120,SINGLE_SCREEN_HEIGHT * 0.5 + FONT_SIZE * 0.25);
-            mFont.drawString(ofToString(str),120 + SINGLE_SCREEN_WIDTH,SINGLE_SCREEN_HEIGHT * 0.5 + FONT_SIZE * 0.25);
+            
+            ofPushMatrix();
+            ofPoint offset = SCREEN_POSITIONS[SCREEN_C];
+            ofTranslate(offset.x,offset.y);
+            drawString();
+            ofPopMatrix();
+
+            drawString();
+            
         }
+    }
+    
+    void drawString(){
+        ofSetColor(255,255,255);
+        string str = mStr.substr(0,mStrCounter);
+        mFont.drawString(ofToString(str),120,SINGLE_SCREEN_HEIGHT * 0.5 + FONT_SIZE * 0.25);
     }
     
 private:
     ofTrueTypeFont mFont;
     bool enable = false;
     
-    static const int LIFE = 1800;
-    int mLife = LIFE;
-    
     static const int FONT_SIZE = 200;
-    bool isDraw = false;
-    
+ 
     ramOscReceiveTag mReceiver;
     string mStr;
     int mStrCounter = 0;
     
     float mBeginTime;
+    float mLimitTime = 20.0;
 };
 
 #endif
