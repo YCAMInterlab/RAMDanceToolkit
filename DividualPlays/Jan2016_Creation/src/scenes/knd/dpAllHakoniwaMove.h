@@ -227,7 +227,7 @@ private:
         
         if(enable){
             
-            if(ofGetFrameNum() % 70 > 40)moveGear();
+            if(ofGetFrameNum() % 600 > 300)moveGear();
             else stopGear();
             
         }else{
