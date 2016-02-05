@@ -44,7 +44,7 @@ public:
     void clear();
     string getName() const;
     void setAllVisiblity(bool b);
-    void onEnabled();
+    void onDisabled();
 };
 
 

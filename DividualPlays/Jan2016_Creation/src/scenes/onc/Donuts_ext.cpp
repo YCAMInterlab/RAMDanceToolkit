@@ -47,7 +47,7 @@ void Donuts_ext::setupControlPanel()
 
 void Donuts_ext::setup()
 {
-    
+    mWholeScale = 0.0;
 }
 
 void Donuts_ext::update()
@@ -228,6 +228,6 @@ void Donuts_ext::setAllVisiblity(bool b)
         mToggles[i]->setValue(b);
 }
 
-void Donuts_ext::onEnabled(){
+void Donuts_ext::onDisabled(){
     mWholeScale = 0.0;
 }
