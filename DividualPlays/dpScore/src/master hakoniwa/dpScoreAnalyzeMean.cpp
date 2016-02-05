@@ -34,7 +34,15 @@ void AnalyzeMean::update()
             mWin0 = mWin1 = true;
             mWhich  = (mTotalAddition.i & 0b00111100) >> 2;
             
-            if (getMH().getSceneController().getUniqueScenes().empty() == false) {
+            const int index = getMH().getSceneController().getUniqueScenes().getIndex("dpVisSandStorm");
+            const int size = getMH().getSceneController().getUniqueScenes().size();
+            if (index != size && size < 5) {
+                getMH().getSceneController().setUniqueScene(index, mWin0, mWin1);
+                mPrevScene = index;
+                mPrevSetSceneTime = t;
+                ofLogNotice() << "Force loaded dpVisSandStorm";
+            }
+            else if (getMH().getSceneController().getUniqueScenes().empty() == false) {
                 const int scene{(int)(mWhich % getMH().getSceneController().getUniqueScenes().size())};
                 //const int score{(int)(mWhich % getMH().getSceneController().getNumUniqueScores())};
                 getMH().getSceneController().setUniqueScene(scene, mWin0, mWin1);

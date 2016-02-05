@@ -44,7 +44,7 @@ NodeMasterHakoniwa::NodeMasterHakoniwa()
 		}
 	}
 
-	mWater.setup(getWidth(), getHeightTank() - 10.f, getDepthFront(), 30, 12);
+	mWater.setup(getWidth(), getHeightTank() - 10.f, getDepthFront(), 20, 8);
 }
 
 NodeMasterHakoniwa::~NodeMasterHakoniwa()
