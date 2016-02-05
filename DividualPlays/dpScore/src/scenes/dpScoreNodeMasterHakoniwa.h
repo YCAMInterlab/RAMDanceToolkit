@@ -32,7 +32,6 @@ public:
     const int kNumZ{2};
     
 private:
-    ofVbo mWaterTank;
     Box mFrontBottom;
     Box mFrontTop;
     Box mRear;
@@ -40,6 +39,7 @@ private:
     vector<Box> mMotors;
     vector<Cylinder> mValves;
     Water mWater;
+    Box mBox;
 };
 
 DP_SCORE_NAMESPACE_END

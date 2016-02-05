@@ -14,7 +14,7 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-struct Triangle {
+struct Triangle : public PrimitiveTypeBase {
 	static Triangle make(const ofVec3f& _p0, const ofVec3f& _p1, const ofVec3f& _p2);
 	static Triangle make(const ofVec3f& _p0, const ofVec3f& _p1, const ofVec3f& _p2,
 	                     const ofVec2f& _t0, const ofVec2f& _t1, const ofVec2f& _t2);

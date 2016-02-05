@@ -18,10 +18,29 @@ DP_SCORE_NAMESPACE_BEGIN
 void compoundSetEnableCollapse(bool enable);
 bool compoundGetEnableCollapse();
 
+class PrimitiveTypeBase {
+public:
+    PrimitiveTypeBase();
+    virtual ~PrimitiveTypeBase() = default;
+    
+    void update(float time);
+    void transformGL();
+    void reset();
+    
+protected:
+    ofVec3f mRot;
+    ofVec3f mSpd;
+    ofVec3f mAng;
+    ofVec3f mPos;
+};
+
 #pragma mark ___________________________________________________________________
 
 template <class T> class Compound {
 public:
+    Compound() = default;
+    Compound(const Compound&) = default;
+    Compound& operator = (const Compound&) = default;
     virtual ~Compound() = default;
     virtual void draw();
     
@@ -29,15 +48,8 @@ protected:
     void update();
     void reset();
     
-    struct Point {
-        ofVec3f rot;
-        ofVec3f spd;
-        ofVec3f ang;
-        ofVec3f pos;
-    };
-    
     vector<T> mTypes;
-    vector<Point> mPoints;
+    float mStartTime;
     bool mUpdate;
 };
 
@@ -47,12 +59,14 @@ template <class T>
 void Compound<T>::update()
 {
     if (compoundGetEnableCollapse()) {
+        const float t {getElapsedTime()};
+        if (!mUpdate) {
+            mStartTime = t;
+        }
         mUpdate = true;
-        const double d {ofGetLastFrameTime()};
-        for (auto& p : mPoints) {
-            p.ang += p.rot * d;
-            p.pos += p.spd * d;
-            p.pos.y += 10.f * d;
+        const double d {t - mStartTime};
+        for (auto& t : mTypes) {
+            t.update(d);
         }
     }
     else {
@@ -68,28 +82,16 @@ void Compound<T>::draw()
 {
     update();
     
-    for (auto i : rep(mTypes.size())) {
-        ScopedMatrix m;
-        if (compoundGetEnableCollapse()) {
-            auto& p = mPoints.at(i);
-            ofTranslate(p.pos);
-            ofRotateZ(p.ang.z);
-            ofRotateY(p.ang.y);
-            ofRotateX(p.ang.x);
-        }
-        mTypes.at(i).draw();
+    for (auto& t : mTypes) {
+        t.draw();
     }
 }
 
 template <class T>
 void Compound<T>::reset()
 {
-    const float s {30.f};
-    for (auto& p : mPoints) {
-        p.rot = ofVec3f(ofRandom(-1.f, 1.f) * s, ofRandom(-1.f, 1.f) * s, ofRandom(-1.f, 1.f) * s);
-        p.spd = ofVec3f(ofRandom(-1.f, 1.f) * s, ofRandom(-1.f, 1.f) * s, ofRandom(-1.f, 1.f) * s);
-        p.ang.set(0.f);
-        p.pos.set(0.f);
+    for (auto& t : mTypes) {
+        t.reset();
     }
 }
 

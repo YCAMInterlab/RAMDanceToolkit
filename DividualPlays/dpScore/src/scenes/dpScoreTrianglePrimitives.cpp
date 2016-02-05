@@ -54,8 +54,6 @@ void TriRect::setup(const ofVec3f& p, float w, float h, int resX, int resY)
 			mTypes.push_back(Triangle::make(v2, v3, v0, t2, t3, t0));
 		}
 	}
-
-	mPoints.assign(mTypes.size(), Point());
 	reset();
 }
 

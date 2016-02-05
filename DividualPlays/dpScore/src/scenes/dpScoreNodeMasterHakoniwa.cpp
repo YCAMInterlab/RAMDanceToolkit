@@ -23,8 +23,8 @@ NodeMasterHakoniwa::NodeMasterHakoniwa()
 	descriptionJP = "「マスター箱庭」\n色水の箱庭は それぞれのダンサーの\n動きの蓄積で 対応する色の水を滴下し\nこの色の混ざり方で ダンサーに提示される\n次の情報を選びます";
 
 	setGlobalPosition(-NodeStage::kWidth * 0.5f - NodeHakoniwa::getWidth() - 157.f,
-	                  Desk::getHeight() + 0.5f,
-	                  NodeStage::kDepth * 0.5f - NodeHakoniwa::getDepth() - 10.f + NodeHakoniwa::getDepth() - 30.f - 10.f);
+	                  20.5f,
+	                  NodeStage::kDepth * 0.5f - NodeHakoniwa::getDepth() - 10.f + NodeHakoniwa::getDepth() + 1.f);
 	addAimingOffset(ofVec3f(Desk::getWidth() * 0.5f, Desk::getHeight() + 50.f, Desk::getDepth() * 0.5f + 30.f));
 	getCamera().setFov(45.f);
 	getCamera().setPosition(NodeStage::kWidth * 0.5f + Desk::getWidth() * 0.5f + 50.f, 200.f - 75.f, 550.f);
@@ -45,6 +45,7 @@ NodeMasterHakoniwa::NodeMasterHakoniwa()
 	}
 
 	mWater.setup(getWidth(), getHeightTank() - 10.f, getDepthFront(), 20, 8);
+    mBox.setup(ofVec3f(0.f, -20.5f, 0.f), getWidth(), 20.f, getDepth());
 }
 
 NodeMasterHakoniwa::~NodeMasterHakoniwa()
@@ -58,6 +59,8 @@ void NodeMasterHakoniwa::customDraw()
 	setStyle(*this);
 
 	//mDesk.draw();
+    mBox.draw();
+    
 	ofSetColor(color::kMain);
 
 	mRear.draw();

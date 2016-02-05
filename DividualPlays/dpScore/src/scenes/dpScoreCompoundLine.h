@@ -14,17 +14,21 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-// all object will make from OpenGL coord(righthanded)
-struct LineType {
-	static LineType make(const ofVec3f& p0, const ofVec3f& p1);
-	void set(const ofVec3f& p0, const ofVec3f& p1);
+class LineType : public PrimitiveTypeBase {
+public:
+	LineType(const ofVec3f &v0, const ofVec3f &v1);
+	virtual ~LineType();
+	LineType(const LineType &) = default;
+	LineType& operator = (const LineType&) = default;
+	void set(const ofVec3f& v0, const ofVec3f& v1);
 	void draw();
-
-	ofVec3f c;
-	ofVec3f v;
+    
+protected:
+	ofVec3f mV0, mV1;
 };
 
 typedef Compound<LineType> CompoundLine;
+
 
 DP_SCORE_NAMESPACE_END
 

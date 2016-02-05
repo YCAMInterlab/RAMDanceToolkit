@@ -53,32 +53,31 @@ void Speaker::setup(const ofVec3f& p)
 
 
 	mTypes.clear();
-	mTypes.push_back(LineType::make(v0, v1));
-	mTypes.push_back(LineType::make(v1, v2));
-	mTypes.push_back(LineType::make(v2, v3));
-	mTypes.push_back(LineType::make(v3, v0));
+	mTypes.push_back(LineType(v0, v1));
+	mTypes.push_back(LineType(v1, v2));
+	mTypes.push_back(LineType(v2, v3));
+	mTypes.push_back(LineType(v3, v0));
 
-	mTypes.push_back(LineType::make(v0, v4));
-	mTypes.push_back(LineType::make(v1, v5));
-	mTypes.push_back(LineType::make(v2, v6));
-	mTypes.push_back(LineType::make(v3, v7));
+	mTypes.push_back(LineType(v0, v4));
+	mTypes.push_back(LineType(v1, v5));
+	mTypes.push_back(LineType(v2, v6));
+	mTypes.push_back(LineType(v3, v7));
 
-	mTypes.push_back(LineType::make(v4, v5));
-	mTypes.push_back(LineType::make(v5, v6));
-	mTypes.push_back(LineType::make(v6, v7));
-	mTypes.push_back(LineType::make(v7, v4));
+	mTypes.push_back(LineType(v4, v5));
+	mTypes.push_back(LineType(v5, v6));
+	mTypes.push_back(LineType(v6, v7));
+	mTypes.push_back(LineType(v7, v4));
 
-	mTypes.push_back(LineType::make(v8, v9));
-	mTypes.push_back(LineType::make(v9, v10));
-	mTypes.push_back(LineType::make(v10, v11));
-	mTypes.push_back(LineType::make(v11, v8));
+	mTypes.push_back(LineType(v8, v9));
+	mTypes.push_back(LineType(v9, v10));
+	mTypes.push_back(LineType(v10, v11));
+	mTypes.push_back(LineType(v11, v8));
 
-	mTypes.push_back(LineType::make(v7, v8));
-	mTypes.push_back(LineType::make(v3, v9));
-	mTypes.push_back(LineType::make(v2, v10));
-	mTypes.push_back(LineType::make(v6, v11));
+	mTypes.push_back(LineType(v7, v8));
+	mTypes.push_back(LineType(v3, v9));
+	mTypes.push_back(LineType(v2, v10));
+	mTypes.push_back(LineType(v6, v11));
 
-	mPoints.assign(mTypes.size(), Point());
 	reset();
 }
 
@@ -122,16 +121,15 @@ void Funnel::setup(const ofVec3f& p, float r0, float r1, float h0, float h1)
 		const float z3 {::sinf(rad1) * r1};
 
 		// top circle
-		mTypes.push_back(LineType::make(ofVec3f(x0, 0.f, z0) + p, ofVec3f(x1, 0.f, z1) + p));
+		mTypes.push_back(LineType(ofVec3f(x0, 0.f, z0) + p, ofVec3f(x1, 0.f, z1) + p));
 		// side face
-		mTypes.push_back(LineType::make(ofVec3f(x0, 0.f, z0) + p, ofVec3f(x2, -h0, z2) + p));
+		mTypes.push_back(LineType(ofVec3f(x0, 0.f, z0) + p, ofVec3f(x2, -h0, z2) + p));
 		// bottom circle
-		//mTypes.push_back(LineType::make(ofVec3f(x2, -h0, z2) + p, ofVec3f(x3, -h0, z3) + p));
+		//mTypes.push_back(LineType(ofVec3f(x2, -h0, z2) + p, ofVec3f(x3, -h0, z3) + p));
 		// cylinder
-		mTypes.push_back(LineType::make(ofVec3f(x2, -h0, z2) + p, ofVec3f(x3, -h0 - h1, z3) + p));
+		mTypes.push_back(LineType(ofVec3f(x2, -h0, z2) + p, ofVec3f(x3, -h0 - h1, z3) + p));
 	}
 
-	mPoints.assign(mTypes.size(), Point());
 	reset();
 }
 
@@ -154,21 +152,11 @@ void Water::setup(float w, float h, float d, int resX, int resZ)
 	for (auto j : rep(mResZ)) {
 		for (auto i : rep(mResX)) {
 			for (auto k : 4_i) {
-				mTypes.push_back(LineType::make(ofVec3f::zero(), ofVec3f::zero()));
+				mTypes.push_back(LineType(ofVec3f::zero(), ofVec3f::zero()));
 			}
 		}
 	}
-	//for (auto i : rep(mResX)) {
-	//    for (auto k : 2_i) {
-	//        mTypes.push_back(LineType::make(ofVec3f::zero(), ofVec3f::zero()));
-	//    }
-	//}
-	//for (auto j : rep(mResZ)) {
-	//    for (auto k : 2_i) {
-	//        mTypes.push_back(LineType::make(ofVec3f::zero(), ofVec3f::zero()));
-	//    }
-	//}
-	mPoints.assign(mTypes.size(), Point());
+    
 	reset();
 }
 
@@ -208,24 +196,6 @@ void Water::update()
 			mTypes.at(j * mResX * 4 + i * 4 + 3).set(v3, v0);
 		}
 	}
-	//for (auto i : rep(mResX)) {
-	//    const float y0 {displacement(i, 0, t)};
-	//    const float y1 {displacement(i, mResZ - 1, t)};
-	//    const float x {mW / (float) mResX * (float)i};
-	//    auto v0 = ofVec3f(x, y0, 0.f);
-	//    auto v1 = ofVec3f(x, y1, mD);
-	//    mTypes.at(mResX * mResZ * 4 + i * 2 + 0).set(v0, ofVec3f(x, 0.f, 0.f));
-	//    mTypes.at(mResX * mResZ * 4 + i * 2 + 1).set(v1, ofVec3f(x, 0.f, mD));
-	//}
-	//for (auto j : rep(mResZ)) {
-	//    const float y0 {displacement(0, j, t)};
-	//    const float y1 {displacement(mResX - 1, j, t)};
-	//    const float z {mD / (float) mResZ * (float)j};
-	//    auto v0 = ofVec3f(0, y0, z);
-	//    auto v1 = ofVec3f(mW, y1, z);
-	//    mTypes.at(mResX * mResZ * 4 + mResX * 2 + j * 2 + 0).set(v0, ofVec3f(0.f, 0.f, z));
-	//    mTypes.at(mResX * mResZ * 4 + mResX * 2 + j * 2 + 1).set(v1, ofVec3f(mW, 0.f, z));
-	//}
 }
 
 void Water::draw()
@@ -310,7 +280,7 @@ void Gear::setup(const ofVec3f& p, float r, float d, float speed, int nHoles, fl
 				const float y1 {::sinf((i + 1) * s)};
 				ofVec3f v0(x0 * r, y0 * r, -d * 0.5f);
 				ofVec3f v1(x1 * r, y1 * r, -d * 0.5f);
-				mTypes.push_back(LineType::make(v0, v1));
+				mTypes.push_back(LineType(v0, v1));
 			};
 	for (auto i : rep(res)) {
 		makeRing(i, -d, r, s);
@@ -332,17 +302,17 @@ void Gear::setup(const ofVec3f& p, float r, float d, float speed, int nHoles, fl
 				ofVec3f v1(x0 * r1, y0 * r1, -d * 0.5f);
 				ofVec3f v2(x1 * r0, y1 * r0, -d * 0.5f);
 				ofVec3f v3(x1 * r1, y1 * r1, -d * 0.5f);
-				mTypes.push_back(LineType::make(v0, v1));
-				mTypes.push_back(LineType::make(v2, v3));
+				mTypes.push_back(LineType(v0, v1));
+				mTypes.push_back(LineType(v2, v3));
 
-				mTypes.push_back(LineType::make(v0, v2));
-				mTypes.push_back(LineType::make(v1, v3));
+				mTypes.push_back(LineType(v0, v2));
+				mTypes.push_back(LineType(v1, v3));
 			};
 	for (auto i : rep(nHoles)) {
 		makeHole(i, -d);
 		makeHole(i, +d);
 	}
-	mPoints.assign(mTypes.size(), Point());
+
 	reset();
 }
 

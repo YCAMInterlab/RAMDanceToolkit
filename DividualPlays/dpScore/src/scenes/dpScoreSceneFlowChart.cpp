@@ -88,7 +88,7 @@ void SceneFlowChart::setupNodes()
 	addNode<NodeSpeaker>();
 	addNode<NodeLight>();
 	addNode<NodeComputer>();
-	addNode<NodeAudience>();
+	//addNode<NodeAudience>();
 }
 
 void SceneFlowChart::setupNodeOrders()
@@ -220,15 +220,16 @@ void SceneFlowChart::drawNodes()
 			continue;
 		}
 		// only render audiences when they have been focused
-		if (p.first == getClassName<NodeAudience>()) {
-			if (isNextNode<NodeAudience>() or
-			            (isCurrentScene<NodeAudience>() and p.second->t < 1.f)) {
-				p.second->draw();
-			}
-		}
-		else {
-			p.second->draw();
-		}
+        //if (p.first == getClassName<NodeAudience>()) {
+        //    if (isNextNode<NodeAudience>() or
+        //                (isCurrentScene<NodeAudience>() and p.second->t < 1.f)) {
+        //        p.second->draw();
+        //    }
+        //}
+        //else {
+		//	p.second->draw();
+		//}
+        p.second->draw();
 	}
 	// for blending
 	getNode<NodeMasterHakoniwa>()->draw();

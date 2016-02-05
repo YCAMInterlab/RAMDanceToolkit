@@ -66,6 +66,11 @@ void Triangle::draw()
     _triangle.getTexCoords()[0] = t0;
     _triangle.getTexCoords()[1] = t1;
     _triangle.getTexCoords()[2] = t2;
+    
+    ScopedMatrix m;
+    if (compoundGetEnableCollapse()) {
+        transformGL();
+    }
     _triangle.draw();
 }
 

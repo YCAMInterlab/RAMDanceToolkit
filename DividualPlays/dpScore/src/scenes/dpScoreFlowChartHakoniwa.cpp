@@ -222,13 +222,13 @@ float HakoMagPendulum::getDepth()
 
 HakoSandStorm::HakoSandStorm()
 {
-	mBox.setup(ofVec3f::zero(), getWidth(), getHeight(), getDepth());
+	//mBox.setup(ofVec3f::zero(), getWidth(), getHeight(), getDepth());
 	mPlate.setup(ofVec3f::zero(), getWidth() - 3.f, 5.5f, getDepth() - 3.f);
 }
 
 void HakoSandStorm::customDraw()
 {
-	mBox.draw();
+	//mBox.draw();
 	{
 		ScopedMatrix m;
 		ofTranslate(1.5f, getHeight() - 5.5f, 1.5f);
