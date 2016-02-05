@@ -1,5 +1,5 @@
 #include "dpScoreSceneBodyBoids.h"
-#include "dpEasing.h"
+#include "dpScoreEasing.h"
 
 DP_SCORE_NAMESPACE_BEGIN
 

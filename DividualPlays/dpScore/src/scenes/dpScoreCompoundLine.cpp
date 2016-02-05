@@ -13,7 +13,6 @@
 
 DP_SCORE_NAMESPACE_BEGIN
 
-
 LineType::LineType(const ofVec3f& v0, const ofVec3f& v1) :
 	mV0(v0),
 	mV1(v1)

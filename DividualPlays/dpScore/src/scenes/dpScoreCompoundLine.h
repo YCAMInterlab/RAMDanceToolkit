@@ -29,7 +29,6 @@ protected:
 
 typedef Compound<LineType> CompoundLine;
 
-
 DP_SCORE_NAMESPACE_END
 
 #endif /* dpScoreCompoundLine_h */

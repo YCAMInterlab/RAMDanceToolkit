@@ -34,6 +34,8 @@ void Desk::draw()
 	}
 }
 
+#pragma mark ___________________________________________________________________
+
 Deck::Deck()
 {
 	const float w {getWidth()};

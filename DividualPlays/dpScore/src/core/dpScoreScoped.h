@@ -16,6 +16,8 @@ DP_SCORE_NAMESPACE_BEGIN
 struct ScopedStyle {
     ScopedStyle() { ofPushStyle(); }
     virtual ~ScopedStyle() { ofPopStyle(); }
+    ScopedStyle(const ScopedStyle&) = delete;
+    ScopedStyle& operator = (const ScopedStyle&) = delete;
 };
 
 struct ScopedLineWidth : public ScopedStyle {
@@ -52,6 +54,8 @@ struct ScopedColor : public ScopedStyle {
 struct ScopedMatrix {
     ScopedMatrix() { ofPushMatrix(); }
     virtual ~ScopedMatrix() { ofPopMatrix(); }
+    ScopedMatrix(const ScopedMatrix&) = delete;
+    ScopedMatrix& operator = (const ScopedMatrix&) = delete;
 };
 
 struct ScopedTranslate : public ScopedMatrix {

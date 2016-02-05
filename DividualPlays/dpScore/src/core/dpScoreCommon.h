@@ -13,6 +13,11 @@
 #include "ofxEvent.h"
 #include "ofxException.h"
 #include "ofxMotioner.h"
+#include "dpScorePP.h"
+#include "dpScoreRTTI.h"
+#include "dpScoreTypes.h"
+#include "dpScoreAlign.h"
+#include "dpScoreUtils.h"
 
 // WIP
 //#define USE_CUSTOM_MEMORY_ALLOCATOR
@@ -24,24 +29,8 @@
 //void operator delete[](void* pv) throw();
 //#endif
 
-#define NAMESPACE_BEGIN(name) namespace name {
-#define NAMESPACE_END }
-
-#ifndef STRINGIFY
-#define STRINGIFY(A)  #A
-#endif
-
-#define GLSL_SOURCE(version, shader)  "#version " #version "\n" #shader
-
-#ifndef BUFFER_OFFSET
-#define BUFFER_OFFSET(bytes) ((GLubyte *)NULL + (bytes))
-#endif
-
-#define DP_SCORE_NAMESPACE_BEGIN namespace dp { namespace score {
-#define DP_SCORE_NAMESPACE_END } }
 
 DP_SCORE_NAMESPACE_BEGIN
-using easeFunc = float(*)(float);
 
 extern const int kW;
 extern const int kH;
@@ -67,8 +56,6 @@ extern const string kOscAddrCameraUnitPixelateB;
 
 extern const string kOscAddrMotioner;
 
-extern const string kEventAddrChangeScene;
-
 extern const string kSettingsDir;
 extern const string kSettingsPrefix;
 
@@ -82,108 +69,9 @@ extern const string kFontPathJP;
 
 extern const float kFlowChartLineWidth;
 
-string demangle(const char* name);
-
-template <class T> string getClassName(const T& t);
-template <class T> string getClassName();
-
-float getLineUped(float length,
-                  int index,
-                  int total,
-                  bool fromCenter = true);
-
-float clamp(float f, float range = 1.f);
-
-float aligned(float f);
-
-void alignedLine(const ofPoint& p1, const ofPoint& p2);
-void alignedLine(float x1, float y1, float x2, float y2);
-void alignedLine(float x1, float y1, float z1, float x2, float y2, float z2);
-
-void alignedRect(const ofRectangle& r);
-void alignedRect(const ofPoint& p, float w, float h);
-void alignedRect(float x, float y, float w, float h);
-void alignedRect(float x, float y, float z, float w, float h);
-
-void alignedTranslate(const ofPoint& p);
-void alignedTranslate(float x, float y, float z = 0.f);
-
-ofVec2f alignedVec2f(const ofVec2f& p);
-ofVec2f alignedVec2f(float x, float y);
-
-ofVec3f alignedVec3f(const ofVec3f& p);
-ofVec3f alignedVec3f(float x, float y, float z = 0.f);
-
-ofRectangle alignedRectangle(float px, float py, float w, float h);
-ofRectangle alignedRectangle(const ofPoint& p, float w, float h);
-
-ofVec3f randVec3f();
-
-ofVec3f project(const ofVec3f& obj);
-ofVec3f unproject(const ofVec2f& screen);
-
-void billboard();
-
-float getElapsedTime();
-void updateElapsedTime();
-void setPauseElapsedTimeCounter(bool pause);
-
-template<class SceneClass>
-void notifyChangeScene()
-{
-    ofxEventMessage m;
-    m.setAddress(kEventAddrChangeScene);
-    const string className = getClassName<SceneClass>();
-    m.addStringArg(className);
-    ofxNotifyEvent(m);
-}
-
-namespace color {
-    extern const ofColor kMain;
-    extern const ofColor kPalePinkLight;
-    extern const ofColor kPalePinkHeavy;
-    extern const ofColor kDarkPinkLight;
-    extern const ofColor kDarkPinkHeavy;
-}
-
-template <class T>
-string getClassName(const T& t)
-{
-    return demangle(typeid(t).name());
-}
-
-template <class T>
-string getClassName()
-{
-    return demangle(typeid(T).name());
-}
-
-typedef unsigned char byte;
-
-union floatByte {
-    float f;
-    byte b[4];
-};
-
-union floatInt {
-    float f;
-    int i;
-};
-
-union intByte {
-    int i;
-    byte b[4];
-};
-
-struct OnOffNumpunct : numpunct<char> {
-    using numpunct<char>::string_type;
-    string_type do_truename()  const { return "on "; }
-    string_type do_falsename() const { return "off"; }
-};
 
 DP_SCORE_NAMESPACE_END
 
-#define dpDebugFunc() ofLogVerbose() << getClassName(*this) << ", " << __FUNCTION__
 
 OFX_MOTIONER_NAMESPACE_BEGIN
 

@@ -7,7 +7,6 @@
 //
 
 #include "dpScoreCommon.h"
-#include <cxxabi.h>
 
 //#ifdef USE_CUSTOM_MEMORY_ALLOCATOR
 //template<typename T>
@@ -131,8 +130,6 @@ const string kOscAddrCameraUnitMean {"/dp/cameraUnit/mean"};
 
 const string kOscAddrMotioner {"/dp/score/motioner"};
 
-const string kEventAddrChangeScene {"/dp/score/changeScene"};
-
 const string kSettingsDir {"settings/"};
 const string kSettingsPrefix {"scoreUI-"};
 
@@ -146,190 +143,6 @@ const string kFontPathJP {"fonts/NotoSansCJKjp-Light.otf"};
 
 const float kFlowChartLineWidth = 2.f;
 
-struct _handle {
-	char* p;
-	_handle(char* ptr) : p(ptr)
-	{
-	}
-	~_handle()
-	{
-		std::free(p);
-	}
-};
-
-string demangle(const char* name)
-{
-	int status {-4};
-
-	_handle result(abi::__cxa_demangle(name, nullptr, nullptr, &status));
-
-	return (status == 0) ? result.p : name;
-}
-
-float clamp(float f, float range)
-{
-	return ofClamp(f, -range, range);
-}
-
-float getLineUped(float length,  int index, int total, bool fromCenter)
-{
-	const float step {length / (float)total};
-	if (fromCenter)
-		return -length * 0.5f + step * 0.5f + step * (float)index;
-	else
-		return step * 0.5f + step * (float)index;
-}
-
-float aligned(float f)
-{
-	//return ::ceilf(::floorf(f));
-	return ::floorf(f);
-}
-
-void alignedLine(const ofPoint& p1, const ofPoint& p2)
-{
-	alignedLine(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
-}
-
-void alignedLine(float x1, float y1, float x2, float y2)
-{
-	alignedLine(x1, y1, 0.0f, x2, y2, 0.0f);
-}
-
-void alignedLine(float x1, float y1, float z1, float x2, float y2, float z2)
-{
-	ofLine(aligned(x1), aligned(y1), aligned(z1), aligned(x2), aligned(y2), aligned(z2));
-}
-
-void alignedRect(const ofRectangle& r)
-{
-	alignedRect(r.x, r.y, 0.0f, r.width, r.height);
-}
-
-void alignedRect(const ofPoint& p, float w, float h)
-{
-	alignedRect(p.x, p.y, p.z, w, h);
-}
-
-void alignedRect(float x, float y, float w, float h)
-{
-	alignedRect(x, y, 0.0f, w, h);
-}
-
-
-void alignedRect(float x, float y, float z, float w, float h)
-{
-	ofRect(aligned(x), aligned(y), aligned(z), aligned(w), aligned(h));
-}
-
-void alignedTranslate(const ofPoint& p)
-{
-	alignedTranslate(p.x, p.y, p.z);
-}
-
-void alignedTranslate(float x, float y, float z)
-{
-	ofTranslate(aligned(x), aligned(y), aligned(z));
-}
-
-ofVec2f alignedVec2f(const ofVec2f& p)
-{
-	return ofVec2f(aligned(p.x), aligned(p.y));
-}
-
-ofVec2f alignedVec2f(float x, float y)
-{
-	return ofVec2f(aligned(x), aligned(y));
-}
-
-ofVec3f alignedVec3f(const ofVec3f& p)
-{
-	return ofVec3f(aligned(p.x), aligned(p.y), aligned(p.z));
-}
-
-ofVec3f alignedVec3f(float x, float y, float z)
-{
-	return ofVec3f(aligned(x), aligned(y), aligned(z));
-}
-
-ofRectangle alignedRectangle(float px, float py, float w, float h)
-{
-	return ofRectangle(aligned(px), aligned(py), aligned(w), aligned(h));
-}
-
-ofRectangle alignedRectangle(const ofPoint& p, float w, float h)
-{
-	return ofRectangle(alignedVec3f(p), aligned(w), aligned(h));
-}
-
-ofVec3f randVec3f()
-{
-	const float phi {ofRandom((float)M_PI * 2.0f)};
-	const float costheta {ofRandom(-1.0f, 1.0f)};
-
-	const float rho {::sqrtf(1.0f - costheta * costheta)};
-	const float x {rho * ::cosf(phi)};
-	const float y {rho * ::sinf(phi)};
-	const float z {costheta};
-
-	return ofVec3f(x, y, z);
-}
-
-ofVec3f project(const ofVec3f& obj)
-{
-	double objX {obj.x}, objY {obj.y}, objZ {obj.z};
-	double modelview[16];
-	glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
-	double projection[16];
-	glGetDoublev(GL_PROJECTION_MATRIX, projection);
-	int viewport[4];
-	glGetIntegerv(GL_VIEWPORT, viewport);
-
-	double winX, winY, winZ;
-
-	gluProject(objX, objY, objZ, modelview, projection, viewport, &winX, &winY, &winZ);
-
-	return ofVec3f(winX, viewport[3] - winY, winZ);
-}
-
-void billboard()
-{
-	GLdouble m[16];
-
-	glGetDoublev(GL_MODELVIEW_MATRIX, m);
-	m[0] = m[5] = m[10] = 1.0;
-	m[1] = m[2] = m[4] = m[6] = m[8] = m[9] = 0.0;
-
-	glLoadMatrixd(m);
-}
-
-static float _elapsedTime {0.f};
-static bool _updateElapsedTime {true};
-
-float getElapsedTime()
-{
-    return _elapsedTime;
-}
-
-void updateElapsedTime()
-{
-    if (_updateElapsedTime) {
-        _elapsedTime += ofGetLastFrameTime();
-    }
-}
-
-void setPauseElapsedTimeCounter(bool pause)
-{
-    _updateElapsedTime = !pause;
-}
-
-namespace color {
-const ofColor kMain             = ofColor(255, 50, 150);
-const ofColor kPalePinkLight    = ofColor(255, 220, 235);
-const ofColor kPalePinkHeavy    = ofColor(255, 150, 200);
-const ofColor kDarkPinkLight    = ofColor(200, 50, 120);
-const ofColor kDarkPinkHeavy    = ofColor(130, 50, 80);
-}
 
 DP_SCORE_NAMESPACE_END
 

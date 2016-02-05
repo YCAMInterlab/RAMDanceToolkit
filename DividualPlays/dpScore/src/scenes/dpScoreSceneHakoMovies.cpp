@@ -60,14 +60,10 @@ void SceneHakoMovies::update(ofxEventMessage& m)
 	mElapsedTime += ofGetLastFrameTime();
 	if (mElapsedTime >= kFadeDur) {
 		mElapsedTime = 0.f;
-		//++mDisplayType %=  NUM_DISPLAY_TYPES;
 		++mDisplayType;
 		if (mDisplayType == NUM_DISPLAY_TYPES) {
 			mDisplayType = DISPLAY_MIX;
-			ofxEventMessage m;
-			m.setAddress(kEventAddrChangeScene);
-			m.addStringArg(getClassName<SceneFlowChart>());
-			ofxNotifyEvent(m);
+			notifyChangeScene<SceneHakoMovies>();
 		}
 	}
 

@@ -176,10 +176,7 @@ void SceneFlowChart::updateGlobalTime()
 	if (mElapsedTime >= getCurrentScene()->getTotalTime()) {
 		++mSceneIdx;
 		if (isCurrentScene<FlowChartSceneDebug>()) {
-			ofxEventMessage m;
-			m.setAddress(kEventAddrChangeScene);
-			m.addStringArg(getClassName<SceneHakoMovies>());
-			ofxNotifyEvent(m);
+            notifyChangeScene<SceneHakoMovies>();
 		}
 		else {
 			changeScene(getCurrentSceneName());

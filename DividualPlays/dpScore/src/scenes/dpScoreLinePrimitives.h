@@ -20,6 +20,8 @@ public:
     void update(const ofVec3f& p0, const ofVec3f& p1);
 };
 
+#pragma mark ___________________________________________________________________
+
 class Box: public CompoundLine {
 public:
 	static Box create(const ofVec3f& p, float w, float h, float d);
