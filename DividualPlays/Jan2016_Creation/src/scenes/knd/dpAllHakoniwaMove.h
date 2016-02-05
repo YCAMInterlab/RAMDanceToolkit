@@ -227,7 +227,7 @@ private:
         
         if(enable){
             
-            if(ofGetFrameNum() % 600 > 300)moveGear();
+            if(ofGetFrameNum() % 600 > 100)moveGear();
             else stopGear();
             
         }else{
@@ -240,7 +240,7 @@ private:
     
     void moveGear(){
         mStepManager.setStepperAll(true);
-        mStepManager.run(12000, true);
+        mStepManager.run(12000, ofGetFrameNum() % 900 > 450);
         mStepManager.setStepperAll(false);
     }
     
