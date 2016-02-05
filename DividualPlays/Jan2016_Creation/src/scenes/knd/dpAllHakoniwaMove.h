@@ -81,6 +81,8 @@ public:
         sendMaglooper(mIsMagLooper);
         sendSandStorm(mIsSandStorm);
         sendMagPendulum(mIsMagPendulum);
+        sendStruggle(mIsStruggle);
+        sendGear(mIsGear);
     }
     void receiveOsc(){}
     
