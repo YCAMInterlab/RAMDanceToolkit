@@ -220,9 +220,6 @@
     <Filter Include="addons\ofxOsc\src">
       <UniqueIdentifier>{7EE76142-28CF-A345-9357-88F3E140458D}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxOsc\libs\oscpack\src\ip\posix">
-      <UniqueIdentifier>{C8A5AE8F-ADD0-6945-ACEE-F15E38519145}</UniqueIdentifier>
-    </Filter>
     <Filter Include="addons\ofxOsc\libs\oscpack\src\ip\win32">
       <UniqueIdentifier>{0A88A481-3B73-754C-A06C-0D1183EA824C}</UniqueIdentifier>
     </Filter>
@@ -1463,18 +1460,6 @@
     <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.cpp">
       <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix\NetworkingUtils.cpp">
-      <Filter>addons\ofxOsc\libs\oscpack\src\ip\posix</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix\UdpSocket.cpp">
-      <Filter>addons\ofxOsc\libs\oscpack\src\ip\posix</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32\NetworkingUtilsWin.cpp">
-      <Filter>addons\ofxOsc\libs\oscpack\src\ip\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32\UdpSocketWin.cpp">
-      <Filter>addons\ofxOsc\libs\oscpack\src\ip\win32</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.cpp">
       <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
     </ClCompile>
@@ -1681,6 +1666,12 @@
     </ClCompile>
     <ClCompile Include="src\scenes\ThreePoints\SphereMesh.cpp">
       <Filter>src\scenes\ThreePoints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32\NetworkingUtils.cpp">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32\UdpSocket.cpp">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip\win32</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
