@@ -1,5 +1,5 @@
 // 
-// ramActorManager.h - RAMDanceToolkit
+// ActorManager.h - RAMDanceToolkit
 // 
 // Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
 // 
@@ -28,114 +28,120 @@
 #include "ramOscManager.h"
 #include "ramNodeIdentifer.h"
 
-class ramActorManager
-{
-public:
+namespace rdtk{
 
-	ofEvent<ramActor> actorSetup;
-	ofEvent<ramActor> actorExit;
-	ofEvent<ramRigidBody> rigidSetup;
-	ofEvent<ramRigidBody> rigidExit;
-
-	ofEvent<ramNodeIdentifer> selectStateChanged;
-
-	// singleton
-	inline static ramActorManager& instance()
+	class ActorManager
 	{
-		if (_instance == NULL)
-			_instance = new ramActorManager;
-		return *_instance;
-	}
-
-	void setup();
-	void update();
-	void draw();
-
-	// node
-
-	inline size_t getNumNodeArray() const { return nodearrays.size(); }
-
-	inline vector<ramNodeArray> getAllNodeArrays() const
-	{
-		vector<ramNodeArray> r;
-		for (int i = 0; i < getNumNodeArray(); i++)
-			r.push_back(getNodeArray(i));
-		return r;
-	}
-
-	inline const vector<string>& getNodeArrayNames() const { return nodearrays.keys(); }
-	inline ramNodeArray& getNodeArray(int index) { return nodearrays[index]; }
-    inline const ramNodeArray& getNodeArray(int index) const { return const_cast<ramNodeArray&>(nodearrays[index]); }
-	inline ramNodeArray& getNodeArray(const string& name) { return nodearrays[name]; }
-    inline const ramNodeArray& getNodeArray(const string& name) const { return const_cast<ramNodeArray&>(nodearrays[name]); }
-	inline bool hasNodeArray(const string &key) const { return nodearrays.hasKey(key); }
-    inline void removeNodeArray(const string& name) { nodearrays.erase(name); }
+	public:
+		
+		ofEvent<Actor> actorSetup;
+		ofEvent<Actor> actorExit;
+		ofEvent<RigidBody> rigidSetup;
+		ofEvent<RigidBody> rigidExit;
+		
+		ofEvent<NodeIdentifer> selectStateChanged;
+		
+		// singleton
+		inline static ActorManager& instance()
+		{
+			if (_instance == NULL)
+				_instance = new ActorManager;
+			return *_instance;
+		}
+		
+		void setup();
+		void update();
+		void draw();
+		
+		// node
+		
+		inline size_t getNumNodeArray() const { return nodearrays.size(); }
+		
+		inline vector<NodeArray> getAllNodeArrays() const
+		{
+			vector<NodeArray> r;
+			for (int i = 0; i < getNumNodeArray(); i++)
+				r.push_back(getNodeArray(i));
+			return r;
+		}
+		
+		inline const vector<string>& getNodeArrayNames() const { return nodearrays.keys(); }
+		inline NodeArray& getNodeArray(int index) { return nodearrays[index]; }
+		inline const NodeArray& getNodeArray(int index) const { return const_cast<NodeArray&>(nodearrays[index]); }
+		inline NodeArray& getNodeArray(const string& name) { return nodearrays[name]; }
+		inline const NodeArray& getNodeArray(const string& name) const { return const_cast<NodeArray&>(nodearrays[name]); }
+		inline bool hasNodeArray(const string &key) const { return nodearrays.hasKey(key); }
+		inline void removeNodeArray(const string& name) { nodearrays.erase(name); }
+		
+		// test
+		void setNodeArray(const NodeArray& NA) { nodearrays.set(NA.getName(), NA); }
+		
+		
+		// for mouse picked node
+		
+		const NodeIdentifer& getLastSelectedNodeIdentifer() const;
+		const Node* getLastSelectedNode() const;
+		const NodeArray* getLastSelectedNodeArray() const;
+		void clearSelected();
+		
+		// Freeze all actor
+		
+		inline bool isFreezed() { return freeze; }
+		inline void setFreezed(bool v) { freeze = v; }
+		inline void toggleFreeze() { freeze ^= true; }
+		
+		// bus
+		
+		bool hasBus(const string& bus_name) const { return bus.find(bus_name) != bus.end(); }
+		void setBus(const string& bus_name, const NodeArray &arr) { bus[bus_name] = arr; }
+		const NodeArray& getBus(const string& bus_name) const { return bus.at(bus_name); }
+		map<string, NodeArray>& getAllBus() { return bus; };
+		const map<string, NodeArray>& getAllBus() const { return bus; };
+		inline size_t getNumBus() { return bus.size(); };
+		inline size_t eraseFromBus(const string& bus_name) { return bus.erase(bus_name); };
+		
+		
+		// for internal use
+		
+		void updateWithOscMessage(const ofxOscMessage &m);
+		void setupOscReceiver(OscManager* oscMan) {
+			
+			oscReceiver.addAddress(RAM_OSC_ADDR_ACTOR);
+			oscReceiver.addAddress(RAM_OSC_ADDR_RIGID_BODY);
+			
+			oscMan->addReceiverTag(&oscReceiver);
+			
+		}
+		
+	private:
+		
+		static ActorManager *_instance;
+		
+		OscReceiveTag oscReceiver;
+		
+		// noncopyable
+		ActorManager() {};
+		ActorManager(const ActorManager&) {}
+		ActorManager& operator=(const ActorManager&) { return *this; }
+		~ActorManager() {};
+		
+		CompoundContainer<NodeArray> nodearrays;
+		
+		ofxInteractivePrimitives::RootNode rootNode;
+		
+		bool freeze;
+		
+		class NodeSelector;
+		friend class NodeSelector;
+		
+		NodeSelector *nodeSelector;
+		
+		map<string, NodeArray> bus;
+		
+		void onSelectStateChanged(NodeIdentifer &e);
+		void onMouseReleased(ofMouseEventArgs &e);
+	};
 	
-	// test
-	void setNodeArray(const ramNodeArray& NA) { nodearrays.set(NA.getName(), NA); }
-	
-	
-	// for mouse picked node
+}
 
-	const ramNodeIdentifer& getLastSelectedNodeIdentifer() const;
-	const ramNode* getLastSelectedNode() const;
-	const ramNodeArray* getLastSelectedNodeArray() const;
-	void clearSelected();
-
-	// Freeze all actor
-
-	inline bool isFreezed() { return freeze; }
-	inline void setFreezed(bool v) { freeze = v; }
-	inline void toggleFreeze() { freeze ^= true; }
-
-	// bus
-
-	bool hasBus(const string& bus_name) const { return bus.find(bus_name) != bus.end(); }
-	void setBus(const string& bus_name, const ramNodeArray &arr) { bus[bus_name] = arr; }
-	const ramNodeArray& getBus(const string& bus_name) const { return bus.at(bus_name); }
-	map<string, ramNodeArray>& getAllBus() { return bus; };
-    const map<string, ramNodeArray>& getAllBus() const { return bus; };
-	inline size_t getNumBus() { return bus.size(); };
-	inline size_t eraseFromBus(const string& bus_name) { return bus.erase(bus_name); };
-	
-	
-	// for internal use
-
-	void updateWithOscMessage(const ofxOscMessage &m);
-	void setupOscReceiver(ramOscManager* oscMan) {
-
-		oscReceiver.addAddress(RAM_OSC_ADDR_ACTOR);
-		oscReceiver.addAddress(RAM_OSC_ADDR_RIGID_BODY);
-
-		oscMan->addReceiverTag(&oscReceiver);
-
-	}
-
-private:
-
-	static ramActorManager *_instance;
-
-	ramOscReceiveTag oscReceiver;
-
-	// noncopyable
-	ramActorManager() {};
-	ramActorManager(const ramActorManager&) {}
-	ramActorManager& operator=(const ramActorManager&) { return *this; }
-	~ramActorManager() {};
-
-	ramCompoundContainer<ramNodeArray> nodearrays;
-
-	ofxInteractivePrimitives::RootNode rootNode;
-
-	bool freeze;
-
-	class NodeSelector;
-	friend class NodeSelector;
-
-	NodeSelector *nodeSelector;
-
-	map<string, ramNodeArray> bus;
-
-	void onSelectStateChanged(ramNodeIdentifer &e);
-	void onMouseReleased(ofMouseEventArgs &e);
-};
+typedef rdtk::ActorManager OF_DEPRECATED(ramActorManager);

@@ -22,43 +22,44 @@
 #include "ramControlPanel.h"
 #include "ramSceneManager.h"
 
+using namespace rdtk;
+
 static ramSimpleShadow ram_simple_shadow;
 
-ramActorManager& ramGlobalShortcut::getActorManager() { return ramActorManager::instance(); }
-const ramActorManager& ramGlobalShortcut::getActorManager() const { return ramActorManager::instance(); }
+ActorManager& GlobalShortcut::getActorManager() { return ActorManager::instance(); }
+const ActorManager& GlobalShortcut::getActorManager() const { return ActorManager::instance(); }
 
-ramCommunicationManager& ramGlobalShortcut::getCommunicationManager() { return ramCommunicationManager::instance(); }
-const ramCommunicationManager& ramGlobalShortcut::getCommunicationManager() const { return ramCommunicationManager::instance(); }
+CommunicationManager& GlobalShortcut::getCommunicationManager() { return CommunicationManager::instance(); }
+const CommunicationManager& GlobalShortcut::getCommunicationManager() const { return CommunicationManager::instance(); }
 
-ramOscManager& ramGlobalShortcut::getOscManager() {return ramOscManager::instance(); }
-const ramOscManager& ramGlobalShortcut::getOscManager() const {return ramOscManager::instance(); }
+OscManager& GlobalShortcut::getOscManager() {return OscManager::instance(); }
+const OscManager& GlobalShortcut::getOscManager() const {return OscManager::instance(); }
 
-const vector<string>& ramGlobalShortcut::getNodeArrayNames() const { return ramActorManager::instance().getNodeArrayNames(); }
+const vector<string>& GlobalShortcut::getNodeArrayNames() const { return ActorManager::instance().getNodeArrayNames(); }
 
-bool ramGlobalShortcut::hasNodeArray(const string &key) const { return ramActorManager::instance().hasNodeArray(key); }
+bool GlobalShortcut::hasNodeArray(const string &key) const { return ActorManager::instance().hasNodeArray(key); }
 
-ramNodeArray& ramGlobalShortcut::getNodeArray(const string &name) { return ramActorManager::instance().getNodeArray(name); }
+NodeArray& GlobalShortcut::getNodeArray(const string &name) { return ActorManager::instance().getNodeArray(name); }
 
-const ramNodeArray& ramGlobalShortcut::getNodeArray(const string &name) const { return ramActorManager::instance().getNodeArray(name); }
+const NodeArray& GlobalShortcut::getNodeArray(const string &name) const { return ActorManager::instance().getNodeArray(name); }
 
-size_t ramGlobalShortcut::getNumNodeArray() const { return ramActorManager::instance().getNumNodeArray(); }
+size_t GlobalShortcut::getNumNodeArray() const { return ActorManager::instance().getNumNodeArray(); }
 
-ramNodeArray& ramGlobalShortcut::getNodeArray(int index) { return ramActorManager::instance().getNodeArray(index); }
+NodeArray& GlobalShortcut::getNodeArray(int index) { return ActorManager::instance().getNodeArray(index); }
 
-const ramNodeArray& ramGlobalShortcut::getNodeArray(int index) const { return ramActorManager::instance().getNodeArray(index); }
+const NodeArray& GlobalShortcut::getNodeArray(int index) const { return ActorManager::instance().getNodeArray(index); }
 
-vector<ramNodeArray> ramGlobalShortcut::getAllNodeArrays() const { return ramActorManager::instance().getAllNodeArrays(); }
+vector<NodeArray> GlobalShortcut::getAllNodeArrays() const { return ActorManager::instance().getAllNodeArrays(); }
 
-ramCameraManager& ramGlobalShortcut::getCameraManager() { return ramCameraManager::instance(); }
+CameraManager& GlobalShortcut::getCameraManager() { return CameraManager::instance(); }
 
-ofCamera& ramGlobalShortcut::getActiveCamera() { return ramCameraManager::instance().getActiveCamera(); }
+ofCamera& GlobalShortcut::getActiveCamera() { return CameraManager::instance().getActiveCamera(); }
 
-//ramSceneManager& ramGlobalShortcut::getSceneManager() { return ramSceneManager::instance(); }
-
+//SceneManager& GlobalShortcut::getSceneManager() { return SceneManager::instance(); }
 
 
 #pragma mark - core
-void ramInitialize(int oscPort, bool usePresetScenes)
+void Initialize(int oscPort, bool usePresetScenes)
 {
 	static bool inited = false;
 	if (inited) return;
@@ -67,19 +68,19 @@ void ramInitialize(int oscPort, bool usePresetScenes)
 
 	ram_simple_shadow.setup();
 
-	ramOscManager::instance().setup(oscPort);
+	OscManager::instance().setup(oscPort);
 
-	ramActorManager::instance().setup();
-	ramActorManager::instance().setupOscReceiver(&ramOscManager::instance());
-	ramSceneManager::instance().setup();
-	ramPhysics::instance();
-	ramGetGUI().setup(usePresetScenes);
+	ActorManager::instance().setup();
+	ActorManager::instance().setupOscReceiver(&OscManager::instance());
+	SceneManager::instance().setup();
+	Physics::instance();
+	GetGUI().setup(usePresetScenes);
 
-	ramCommunicationManager::instance().setup(&ramOscManager::instance());
+	CommunicationManager::instance().setup(&OscManager::instance());
 
 }
 
-string ramToResourcePath(const string& path)
+string ToResourcePath(const string& path)
 {
 	string base_path = "resources";
     bool dirExists = false;
@@ -111,20 +112,20 @@ string ramToResourcePath(const string& path)
 
 
 #pragma mark - actors
-void ramEnableShowActors(bool v)
+void EnableShowActors(bool v)
 {
-	ramSceneManager::instance().setShowAllActors(v);
+	SceneManager::instance().setShowAllActors(v);
 }
 
-bool ramShowActorsEnabled()
+bool ShowActorsEnabled()
 {
-	return ramSceneManager::instance().getShowAllActors();	
+	return SceneManager::instance().getShowAllActors();	
 }
 
-ramNode _evilNode;
-const ramNode& ramGetNode(unsigned int actorId, unsigned int jointId){
+Node _evilNode;
+const Node& GetNode(unsigned int actorId, unsigned int jointId){
 	
-	const int numNA = ramActorManager::instance().getNumNodeArray();
+	const int numNA = ActorManager::instance().getNumNodeArray();
 	
 	// if the actor does not exist...
 	if (!(0 < numNA) || (numNA-1 <= actorId))
@@ -133,7 +134,7 @@ const ramNode& ramGetNode(unsigned int actorId, unsigned int jointId){
 		return _evilNode;
 	}
 	
-	ramNodeArray &NA = ramActorManager::instance().getNodeArray(actorId);
+	NodeArray &NA = ActorManager::instance().getNodeArray(actorId);
 	
 	// if the joint does not exist...
 	if (NA.getNumNode() >= jointId)
@@ -149,62 +150,61 @@ const ramNode& ramGetNode(unsigned int actorId, unsigned int jointId){
 
 static ofRectangle _viewport;
 
-void ramSetViewPort(ofRectangle viewport)
+void SetViewPort(ofRectangle viewport)
 {
     _viewport = viewport;
 }
 
-ofRectangle ramGetViewPort()
+ofRectangle GetViewPort()
 {
     return _viewport;
 }
 
-void ramBeginCamera(ofRectangle viewport)
+void BeginCamera(ofRectangle viewport)
 {
     ofRectangle v = viewport;
     if (v.isEmpty()) v = ofGetCurrentViewport();
-	ramCameraManager::instance().getActiveCamera().begin(v);
+	CameraManager::instance().getActiveCamera().begin(v);
 }
 
-void ramEndCamera()
+void EndCamera()
 {
-	ramCameraManager::instance().getActiveCamera().end();
+	CameraManager::instance().getActiveCamera().end();
 }
 
-void ramEnableInteractiveCamera(bool v)
+void EnableInteractiveCamera(bool v)
 {
-	ramCameraManager::instance().setEnableInteractiveCamera(v);
+	CameraManager::instance().setEnableInteractiveCamera(v);
 }
-
 
 
 #pragma mark - shadows
-void ramEnableShadow(bool v)
+void EnableShadow(bool v)
 {
 	ram_simple_shadow.setEnable(v);
 }
 
-void ramDisableShadow()
+void DisableShadow()
 {
 	ram_simple_shadow.setEnable(false);
 }
 
-bool ramShadowEnabled()
+bool ShadowEnabled()
 {
 	return ram_simple_shadow.getEnable();
 }
 
-void ramBeginShadow()
+void BeginShadow()
 {
 	ram_simple_shadow.begin();
 }
 
-void ramEndShadow()
+void EndShadow()
 {
 	ram_simple_shadow.end();
 }
 
-void ramSetShadowAlpha(float alpha)
+void SetShadowAlpha(float alpha)
 {
 	ram_simple_shadow.setShadowAlpha(alpha);
 }
@@ -214,24 +214,62 @@ void ramSetShadowAlpha(float alpha)
 #pragma mark - physics
 static bool ram_enable_physics_primitive = true;
 
-void ramEnablePhysicsPrimitive(bool v)
+void EnablePhysicsPrimitive(bool v)
 {
 	ram_enable_physics_primitive = v;
 }
 
-void ramDisablePhysicsPrimitive()
+void DisablePhysicsPrimitive()
 {
 	ram_enable_physics_primitive = false;
 }
 
-bool ramGetEnablePhysicsPrimitive()
+bool GetEnablePhysicsPrimitive()
 {
 	return ram_enable_physics_primitive;
 }
 
 
 #pragma mark - error
-void ramNotImplementedError()
+void NotImplementedError()
 {
 	ofLogWarning("RAM Dance Toolkit") << "not implemented yet";
 }
+
+void ramInitialize(int oscPort, bool usePresetScenes){
+	Initialize(oscPort, usePresetScenes);
+}
+
+string ramToResourcePath(const string& path){
+	return ToResourcePath(path);
+}
+
+void ramEnableShowActors(bool v){
+	EnableShowActors(v);
+}
+bool ramShowActorsEnabled(){
+	return ShowActorsEnabled();
+}
+const ramNode& ramGetNode(unsigned int actorId, unsigned int jointId){
+	return GetNode(actorId, jointId);
+}
+
+void ramSetViewPort(ofRectangle viewport){SetViewPort(viewport);}
+ofRectangle ramGetViewPort(){return GetViewPort();}
+void ramBeginCamera(ofRectangle viewport){BeginCamera(viewport);}
+void ramEndCamera(){EndCamera();}
+void ramEnableInteractiveCamera(bool v){EnableInteractiveCamera(v);}
+
+void ramEnableShadow(bool v){EnableShadow(v);}
+void ramDisableShadow(){DisableShadow();}
+bool ramShadowEnabled(){return ShadowEnabled();}
+
+void ramBeginShadow(){BeginShadow();}
+void ramEndShadow(){EndShadow();}
+void ramSetShadowAlpha(float alpha){SetShadowAlpha(alpha);}
+
+void ramEnablePhysicsPrimitive(bool v){EnablePhysicsPrimitive(v);}
+void ramDisablePhysicsPrimitive(){DisablePhysicsPrimitive();}
+bool ramGetEnablePhysicsPrimitive(){return GetEnablePhysicsPrimitive();}
+
+void ramNotImplementedError());

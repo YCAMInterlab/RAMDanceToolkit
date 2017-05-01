@@ -8,15 +8,15 @@
 
 #include "ramOscManager.h"
 
-ramOscManager* ramOscManager::__instance = NULL;
+OscManager* OscManager::__instance = NULL;
 
-void ramOscManager::setup(int receivePort){
+void OscManager::setup(int receivePort){
 
 	receiver.setup(receivePort);
 
 }
 
-void ramOscManager::update(){
+void OscManager::update(){
 
 	while (receiver.hasWaitingMessages()){
 		ofxOscMessage m;
@@ -37,7 +37,7 @@ void ramOscManager::update(){
 	}
 }
 
-void ramOscManager::addReceiverTag(ramOscReceiveTag* ptr){
+void OscManager::addReceiverTag(OscReceiveTag* ptr){
     
     receiverList.push_back(ptr);
     

@@ -20,15 +20,17 @@
 #include "ramControlPanel.h"
 #include "ramPhysics.h"
 
+using namespace rdtk;
+
 bool drawModel = true;
 
-void ramBaseApp::exit(ofEventArgs &args)
+void BaseApp::exit(ofEventArgs &args)
 {
-	ramDisableAllEvents();
+	DisableAllEvents();
 	ofSetFullscreen(false);
 }
 
-void ramBaseApp::update(ofEventArgs &args)
+void BaseApp::update(ofEventArgs &args)
 {
 	getActorManager().update();
 	
@@ -39,33 +41,33 @@ void ramBaseApp::update(ofEventArgs &args)
 	update(); // calling testApp(or ofApp)::update()
 }
 
-void ramBaseApp::draw(ofEventArgs &args)
+void BaseApp::draw(ofEventArgs &args)
 {
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 
 	glEnable(GL_DEPTH_TEST);
 
-	ramBeginCamera();
+	BeginCamera();
 
 	if (draw_floor_auto)
 		drawFloor();
 
 	getActorManager().draw();
 
-	bool enable_physics = ramGetEnablePhysicsPrimitive();
+	bool enable_physics = GetEnablePhysicsPrimitive();
 
-	ramEnablePhysicsPrimitive(false);
+	EnablePhysicsPrimitive(false);
 
-	if (ramShadowEnabled())
+	if (ShadowEnabled())
 	{
 		// shadow
 
-		ramBeginShadow();
+		BeginShadow();
 		drawNodeArrays();
-		ramEndShadow();
+		EndShadow();
 	}
 
-	ramEnablePhysicsPrimitive(enable_physics);
+	EnablePhysicsPrimitive(enable_physics);
 
 	if (drawModel)
 	{
@@ -73,7 +75,7 @@ void ramBaseApp::draw(ofEventArgs &args)
 		drawNodeArrays();
 	}
 
-	ramEndCamera();
+	EndCamera();
 
 	glPopAttrib();
 	
@@ -82,21 +84,21 @@ void ramBaseApp::draw(ofEventArgs &args)
 	draw(); // calling testApp(or ofApp)::draw()
 }
 
-void ramBaseApp::drawNodeArrays()
+void BaseApp::drawNodeArrays()
 {
 	// draw nodearray
 
 	for (int n = 0; n < getNumNodeArray(); n++)
 	{
-		const ramNodeArray &o = getNodeArray(n);
+		const NodeArray &o = getNodeArray(n);
 		
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glPushMatrix();
 		ofPushStyle();
 		if (o.isActor())
-			drawActor((ramActor &)o);
+			drawActor((Actor &)o);
 		else
-			drawRigid((ramRigidBody &)o);
+			drawRigid((RigidBody &)o);
 		
 		ofPopStyle();
 		glPopMatrix();
@@ -105,19 +107,19 @@ void ramBaseApp::drawNodeArrays()
 
 	// draw bus
 
-	map<string, ramNodeArray>::iterator it = getActorManager().getAllBus().begin();
+	map<string, NodeArray>::iterator it = getActorManager().getAllBus().begin();
 
 	while (it != getActorManager().getAllBus().end())
 	{
-		const ramNodeArray &o = (*it).second;
+		const NodeArray &o = (*it).second;
 		
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glPushMatrix();
 		ofPushStyle();
 		if (o.isActor())
-			drawActor((ramActor &)o);
+			drawActor((Actor &)o);
 		else
-			drawRigid((ramRigidBody &)o);
+			drawRigid((RigidBody &)o);
 		ofPopStyle();
 		glPopMatrix();
 		glPopAttrib();
@@ -125,11 +127,11 @@ void ramBaseApp::drawNodeArrays()
 	}
 }
 
-void ramBaseApp::drawFloor()
+void BaseApp::drawFloor()
 {
-	ramDrawBasicFloor(ramGetGUI().getPreferencesTab().getFloorPattern(),
-					  ramGetGUI().getPreferencesTab().getFloorSize(),
-					  ramGetGUI().getPreferencesTab().getFloorGridSize(),
-					  ramColor::GRAY_ALPHA,
-					  ramColor::DARK_GRAY_ALPHA);
+	DrawBasicFloor(GetGUI().getPreferencesTab().getFloorPattern(),
+					  GetGUI().getPreferencesTab().getFloorSize(),
+					  GetGUI().getPreferencesTab().getFloorGridSize(),
+					  Color::GRAY_ALPHA,
+					  Color::DARK_GRAY_ALPHA);
 }

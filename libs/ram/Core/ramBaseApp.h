@@ -23,68 +23,73 @@
 
 #include "ramGlobal.h"
 
-class ramBaseApp : public ofBaseApp, public ramGlobalShortcut
-{
-
-public:
-
-	ramBaseApp() : draw_floor_auto(true) { ramEnableAllEvents(); };
-	virtual ~ramBaseApp() {};
-
-	// events
-	void ramEnableAllEvents()
+namespace rdtk{
+	
+	class BaseApp : public ofBaseApp, public GlobalShortcut
 	{
-		ofAddListener(ramActorManager::instance().actorSetup, this, &ramBaseApp::actorSetup);
-		ofAddListener(ramActorManager::instance().actorExit, this, &ramBaseApp::actorExit);
-		ofAddListener(ramActorManager::instance().rigidSetup, this, &ramBaseApp::rigidSetup);
-		ofAddListener(ramActorManager::instance().rigidExit, this, &ramBaseApp::rigidExit);
-	}
-	void ramDisableAllEvents()
-	{
-		ofRemoveListener(ramActorManager::instance().actorSetup, this, &ramBaseApp::actorSetup);
-		ofRemoveListener(ramActorManager::instance().actorExit, this, &ramBaseApp::actorExit);
-		ofRemoveListener(ramActorManager::instance().rigidSetup, this, &ramBaseApp::rigidSetup);
-		ofRemoveListener(ramActorManager::instance().rigidExit, this, &ramBaseApp::rigidExit);
-	}
-	
-	
-	virtual void drawActor(const ramActor &actor) {}
-	virtual void drawRigid(const ramRigidBody &rigid) {}
+		
+	public:
+		
+		BaseApp() : draw_floor_auto(true) { EnableAllEvents(); };
+		virtual ~BaseApp() {};
+		
+		// events
+		void EnableAllEvents()
+		{
+			ofAddListener(ActorManager::instance().actorSetup, this, &BaseApp::actorSetup);
+			ofAddListener(ActorManager::instance().actorExit, this, &BaseApp::actorExit);
+			ofAddListener(ActorManager::instance().rigidSetup, this, &BaseApp::rigidSetup);
+			ofAddListener(ActorManager::instance().rigidExit, this, &BaseApp::rigidExit);
+		}
+		void DisableAllEvents()
+		{
+			ofRemoveListener(ActorManager::instance().actorSetup, this, &BaseApp::actorSetup);
+			ofRemoveListener(ActorManager::instance().actorExit, this, &BaseApp::actorExit);
+			ofRemoveListener(ActorManager::instance().rigidSetup, this, &BaseApp::rigidSetup);
+			ofRemoveListener(ActorManager::instance().rigidExit, this, &BaseApp::rigidExit);
+		}
+		
+		
+		virtual void drawActor(const Actor &actor) {}
+		virtual void drawRigid(const RigidBody &rigid) {}
+		
+		// nodeArray events
+		virtual void onActorSetup(const Actor &actor) {}
+		virtual void onActorExit(const Actor &actor) {}
+		
+		virtual void onRigidSetup(const RigidBody &rigid) {}
+		virtual void onRigidExit(const RigidBody &rigid) {}
+		
+		// physics event
+		virtual void collision(const Node& jointA, const Node& jointB) {}
+		
+		void drawFloor();
+		void setDrawFloorAuto(bool v = true) { draw_floor_auto = v; }
+		void updateWithOscMessage(const ofxOscMessage &m) { getActorManager().updateWithOscMessage(m); }
+		
+	protected:
+		virtual void update() {}
+		virtual void draw() {}
+		virtual void exit() {}
+		
+	private:
+		
+		bool draw_floor_auto;
+		
+		// event callback
+		void update(ofEventArgs &args);
+		void draw(ofEventArgs &args);
+		void exit(ofEventArgs &args);
+		
+		void actorSetup(Actor &actor) { onActorSetup(actor); }
+		void actorExit(Actor &actor) { onActorExit(actor); }
+		
+		void rigidSetup(RigidBody &rigid) { onRigidSetup(rigid); }
+		void rigidExit(RigidBody &rigid) { onRigidExit(rigid); }
+		
+		//
+		void drawNodeArrays();
+	};
+}
 
-	// nodeArray events
-	virtual void onActorSetup(const ramActor &actor) {}
-	virtual void onActorExit(const ramActor &actor) {}
-
-	virtual void onRigidSetup(const ramRigidBody &rigid) {}
-	virtual void onRigidExit(const ramRigidBody &rigid) {}
-
-	// physics event
-	virtual void collision(const ramNode& jointA, const ramNode& jointB) {}
-	
-	void drawFloor();
-	void setDrawFloorAuto(bool v = true) { draw_floor_auto = v; }
-	void updateWithOscMessage(const ofxOscMessage &m) { getActorManager().updateWithOscMessage(m); }
-
-protected:
-	virtual void update() {}
-	virtual void draw() {}
-	virtual void exit() {}
-	
-private:
-
-	bool draw_floor_auto;
-	
-	// event callback
-	void update(ofEventArgs &args);
-	void draw(ofEventArgs &args);
-	void exit(ofEventArgs &args);
-
-	void actorSetup(ramActor &actor) { onActorSetup(actor); }
-	void actorExit(ramActor &actor) { onActorExit(actor); }
-
-	void rigidSetup(ramRigidBody &rigid) { onRigidSetup(rigid); }
-	void rigidExit(ramRigidBody &rigid) { onRigidExit(rigid); }
-
-	//
-	void drawNodeArrays();
-};
+typedef rdtk::BaseApp OF_DEPRECATED(BaseApp);

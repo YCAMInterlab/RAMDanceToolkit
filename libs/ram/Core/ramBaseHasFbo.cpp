@@ -8,18 +8,20 @@
 
 #include "ramBaseHasFbo.h"
 
-ramBaseHasFbo::ramBaseHasFbo() :
+using namespace rdtk;
+
+BaseHasFbo::BaseHasFbo() :
 mAllocated(false)
 {
     
 }
 
-ramBaseHasFbo::~ramBaseHasFbo()
+BaseHasFbo::~BaseHasFbo()
 {
     
 }
 
-void ramBaseHasFbo::allocateFbo(int w, int h)
+void BaseHasFbo::allocateFbo(int w, int h)
 {
     if (mAllocated) return;
     mAllocated = true;
@@ -37,7 +39,7 @@ void ramBaseHasFbo::allocateFbo(int w, int h)
     mFbo->end();
 }
 
-void ramBaseHasFbo::deallocateFbo()
+void BaseHasFbo::deallocateFbo()
 {
     if (!mAllocated) return;
     mAllocated = false;

@@ -23,47 +23,50 @@
 #include "ramGlobal.h"
 #include "ramActorsScene.h"
 
+namespace rdtk{
+	class SceneManager : public GlobalShortcut
+	{
+	public:
+		
+		static SceneManager& instance();
+		
+		void setup();
+		void addScene(BaseScene* scene);
+		
+		size_t getNumScenes() const;
+		size_t findtSceneIndex(string name) const;
+		BaseScene* getScene(size_t index) const;
+		
+		ActorsScene* getActorsScene();
+		void setShowAllActors(bool showAllActors);
+		bool getShowAllActors() const;
+		
+	protected:
+		
+		void enableAllEvents();
+		void disableAllEvents();
+		
+		void actorSetup(Actor &actor);
+		void actorExit(Actor &actor);
+		
+		void rigidSetup(RigidBody &rigid);
+		void rigidExit(RigidBody &rigid);
+		
+		vector<BaseScene*> scenes;
+		
+		void update(ofEventArgs& args);
+		void draw(ofEventArgs& args);
+		void exit(ofEventArgs& args);
+		
+	private:
+		
+		static SceneManager *_instance;
+		SceneManager();
+		SceneManager(const SceneManager&);
+		SceneManager& operator=(const SceneManager&);
+		
+		ActorsScene* actorsScene;
+	};
+}
 
-class ramSceneManager : public ramGlobalShortcut
-{
-public:
-	
-	static ramSceneManager& instance();
-
-	void setup();
-	void addScene(ramBaseScene* scene);
-	
-	size_t getNumScenes() const;
-	size_t findtSceneIndex(string name) const;
-	ramBaseScene* getScene(size_t index) const;
-	
-	ramActorsScene* getActorsScene();
-	void setShowAllActors(bool showAllActors);
-	bool getShowAllActors() const;
-	
-protected:
-
-	void enableAllEvents();
-	void disableAllEvents();
-
-	void actorSetup(ramActor &actor);
-	void actorExit(ramActor &actor);
-
-	void rigidSetup(ramRigidBody &rigid);
-	void rigidExit(ramRigidBody &rigid);
-
-	vector<ramBaseScene*> scenes;
-	
-	void update(ofEventArgs& args);
-	void draw(ofEventArgs& args);
-	void exit(ofEventArgs& args);
-	
-private:
-	
-	static ramSceneManager *_instance;
-	ramSceneManager();
-	ramSceneManager(const ramSceneManager&);
-	ramSceneManager& operator=(const ramSceneManager&);
-	
-	ramActorsScene* actorsScene;
-};
+typedef rdtk::SceneManager OF_DEPRECATED(ramSceneManager);

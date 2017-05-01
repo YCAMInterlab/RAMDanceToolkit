@@ -17,27 +17,26 @@
 
 #include "ramBaseScene.h"
 
-
+using namespace rdtk;
 
 ramBaseScene::ramBaseScene() {}
 ramBaseScene::~ramBaseScene() {}
-
 
 void ramBaseScene::setupControlPanel() {}
 void ramBaseScene::setup() {}
 void ramBaseScene::update() {}
 void ramBaseScene::draw() {}
-void ramBaseScene::drawActor(const ramActor &actor) {}
-void ramBaseScene::drawRigid(const ramRigidBody &rigid) {}
+void ramBaseScene::drawActor(const Actor &actor) {}
+void ramBaseScene::drawRigid(const RigidBody &rigid) {}
 void ramBaseScene::drawHUD() {}
 void ramBaseScene::exit() {}
 
 
 // nodeArray events
-void ramBaseScene::onActorSetup(const ramActor &actor) {}
-void ramBaseScene::onActorExit(const ramActor &actor) {}
-void ramBaseScene::onRigidSetup(const ramRigidBody &rigid) {}
-void ramBaseScene::onRigidExit(const ramRigidBody &rigid) {}
+void ramBaseScene::onActorSetup(const Actor &actor) {}
+void ramBaseScene::onActorExit(const Actor &actor) {}
+void ramBaseScene::onRigidSetup(const RigidBody &rigid) {}
+void ramBaseScene::onRigidExit(const RigidBody &rigid) {}
 
 
 

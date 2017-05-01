@@ -22,10 +22,11 @@
 #include "ramGraphics.h"
 
 using namespace ofxInteractivePrimitives;
+using namespace rdtk;
 
-#pragma mark - ramActorManager::NodeSelector
+#pragma mark - ActorManager::NodeSelector
 
-class ramActorManager::NodeSelector : public ofxInteractivePrimitives::Node
+class ActorManager::NodeSelector : public ofxInteractivePrimitives::Node
 {
 public:
 
@@ -34,29 +35,29 @@ public:
 		NODE_SELECTOR_PREFIX_ID = 1000
 	};
 
-	ofEvent<ramNodeIdentifer> selectStateChanged;
-	ramNodeIdentifer identifer;
+	ofEvent<NodeIdentifer> selectStateChanged;
+	NodeIdentifer identifer;
 
 	NodeSelector(RootNode &root) { setParent(&root); }
 
 	void draw()
 	{
-		ramActorManager &AM = ramActorManager::instance();
+		ActorManager &AM = ActorManager::instance();
 		const vector<GLuint> &NS = getCurrentNameStack();
 
 		ofNoFill();
 
 		for (int n = 0; n < AM.getNumNodeArray(); n++)
 		{
-			ramNodeArray &NA = AM.getNodeArray(n);
+			NodeArray &NA = AM.getNodeArray(n);
 
 			for (int i = 0; i < NA.getNumNode(); i++)
 			{
-				ramNode &node = NA.getNode(i);
+				Node &node = NA.getNode(i);
 
 				glPushMatrix();
 				ofTranslate(node.getGlobalPosition());
-				ramBillboard();
+				Billboard();
 
 				if (NS.size() == 3
 					&& NS[1] == n
@@ -77,22 +78,22 @@ public:
 
 		pushID(NODE_SELECTOR_PREFIX_ID);
 
-		ramActorManager &AM = ramActorManager::instance();
+		ActorManager &AM = ActorManager::instance();
 		for (int n = 0; n < AM.getNumNodeArray(); n++)
 		{
-			ramNodeArray &NA = AM.getNodeArray(n);
+			NodeArray &NA = AM.getNodeArray(n);
 
 			pushID(n);
 
 			for (int i = 0; i < NA.getNumNode(); i++)
 			{
-				ramNode &node = NA.getNode(i);
+				Node &node = NA.getNode(i);
 
 				pushID(i);
 
 				glPushMatrix();
 				ofTranslate(node.getGlobalPosition());
-				ramBillboard();
+				Billboard();
 
 				ofCircle(0, 0, 15);
 
@@ -110,11 +111,11 @@ public:
 	void mousePressed(int x, int y, int button)
 	{
 		const vector<GLuint> &NS = getCurrentNameStack();
-		ramActorManager &AM = ramActorManager::instance();
+		ActorManager &AM = ActorManager::instance();
 
 		if (NS.size() == 3 && NS[0] == NODE_SELECTOR_PREFIX_ID)
 		{
-			const ramNodeArray &NA = AM.getNodeArray(NS[1]);
+			const NodeArray &NA = AM.getNodeArray(NS[1]);
 			string name = NA.getName();
 			int index = NS[2];
 
@@ -123,7 +124,7 @@ public:
 
 			ofNotifyEvent(selectStateChanged, identifer);
 
-			ramEnableInteractiveCamera(false);
+			EnableInteractiveCamera(false);
 		}
 		else
 		{
@@ -136,7 +137,7 @@ public:
 
 	void mouseReleased(int x, int y, int button)
 	{
-		ramEnableInteractiveCamera(true);
+		EnableInteractiveCamera(true);
 	}
 
 	bool isObjectPickedUp()
@@ -145,45 +146,45 @@ public:
 	}
 };
 
-#pragma mark - ramActorManager
+#pragma mark - ActorManager
 
-ramActorManager* ramActorManager::_instance = NULL;
+ActorManager* ActorManager::_instance = NULL;
 
-void ramActorManager::setup()
+void ActorManager::setup()
 {
 	freeze = false;
 
 	nodeSelector = new NodeSelector(rootNode);
 
-	ofAddListener(nodeSelector->selectStateChanged, this, &ramActorManager::onSelectStateChanged);
-	ofAddListener(ofEvents().mouseReleased, this, &ramActorManager::onMouseReleased);
+	ofAddListener(nodeSelector->selectStateChanged, this, &ActorManager::onSelectStateChanged);
+	ofAddListener(ofEvents().mouseReleased, this, &ActorManager::onMouseReleased);
 }
 
-void ramActorManager::update()
+void ActorManager::update()
 {
 	while (oscReceiver.hasWaitingMessages())
 	{
 		ofxOscMessage m;
 		oscReceiver.getNextMessage(&m);
-		ramActorManager::instance().updateWithOscMessage(m);
+		ActorManager::instance().updateWithOscMessage(m);
 	}
 
 	nodearrays.updateIndexCache();
 
 	for (int i = 0; i < nodearrays.size(); i++)
 	{
-		const ramNodeArray &array = nodearrays[i];
+		const NodeArray &array = nodearrays[i];
 
 		if (array.isOutdated() && !isFreezed() && !array.isPlayback())
 		{
 			if (array.isActor())
 			{
-				ramActor o = array;
+				Actor o = array;
 				ofNotifyEvent(actorExit, o);
 			}
 			else
 			{
-				ramRigidBody o = array;
+				RigidBody o = array;
 				ofNotifyEvent(rigidExit, o);
 			}
 
@@ -194,21 +195,21 @@ void ramActorManager::update()
 	rootNode.update();
 }
 
-void ramActorManager::draw()
+void ActorManager::draw()
 {
 	rootNode.draw();
 
 	if (nodeSelector != NULL && nodeSelector->identifer.isValid())
 	{
-		ramNode node;
-		ramNodeFinder finder(nodeSelector->identifer);
+		Node node;
+		NodeFinder finder(nodeSelector->identifer);
 
 		if (finder.findOne(node))
 		{
 			node.beginTransform();
 
 			ofPushStyle();
-			ramBillboard();
+			Billboard();
 
 			ofFill();
 			ofSetColor(255, 0, 0, 80);
@@ -223,7 +224,7 @@ void ramActorManager::draw()
 	}
 }
 
-void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
+void ActorManager::updateWithOscMessage(const ofxOscMessage &m)
 {
 	if (isFreezed()) return;
 
@@ -234,7 +235,7 @@ void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 	{
 		if (!nodearrays.hasKey(name))
 		{
-			ramActor o;
+			Actor o;
 			o.setType(RAM_NODEARRAY_TYPE_ACTOR);
 			o.setName(name);
 			o.updateWithOscMessage(m);
@@ -244,7 +245,7 @@ void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 		}
 		else
 		{
-			ramActor &o = (ramActor &)nodearrays[name];
+			Actor &o = (Actor &)nodearrays[name];
 			o.updateWithOscMessage(m);
 		}
 	}
@@ -252,7 +253,7 @@ void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 	{
 		if (!nodearrays.hasKey(name))
 		{
-			ramRigidBody o;
+			RigidBody o;
 			o.setType(RAM_NODEARRAY_TYPE_RIGIDBODY);
 			o.setName(name);
 			o.updateWithOscMessage(m);
@@ -262,46 +263,46 @@ void ramActorManager::updateWithOscMessage(const ofxOscMessage &m)
 		}
 		else
 		{
-			ramRigidBody &o = (ramRigidBody &)nodearrays[name];
+			RigidBody &o = (RigidBody &)nodearrays[name];
 			o.updateWithOscMessage(m);
 		}
 	}
     else assert(false);
 }
 
-const ramNodeIdentifer& ramActorManager::getLastSelectedNodeIdentifer() const
+const NodeIdentifer& ActorManager::getLastSelectedNodeIdentifer() const
 {
 	return nodeSelector->identifer;
 }
 
-const ramNode* ramActorManager::getLastSelectedNode() const
+const Node* ActorManager::getLastSelectedNode() const
 {
-	const ramNodeIdentifer &node_id = getLastSelectedNodeIdentifer();
+	const NodeIdentifer &node_id = getLastSelectedNodeIdentifer();
 	if (!node_id.isValid()) return NULL;
 
 	return &getNodeArray(node_id.name).getNode(node_id.index);
 }
 
-const ramNodeArray* ramActorManager::getLastSelectedNodeArray() const
+const NodeArray* ActorManager::getLastSelectedNodeArray() const
 {
-	const ramNodeIdentifer &node_id = getLastSelectedNodeIdentifer();
+	const NodeIdentifer &node_id = getLastSelectedNodeIdentifer();
 	if (!node_id.isValid()) return NULL;
 
 	return &getNodeArray(node_id.name);
 }
 
-void ramActorManager::onSelectStateChanged(ramNodeIdentifer &e)
+void ActorManager::onSelectStateChanged(NodeIdentifer &e)
 {
 	ofNotifyEvent(selectStateChanged, e);
 }
 
-void ramActorManager::onMouseReleased(ofMouseEventArgs &e)
+void ActorManager::onMouseReleased(ofMouseEventArgs &e)
 {
 	if (!rootNode.hasFocusdObject())
 		nodeSelector->identifer.clear();
 }
 
-void ramActorManager::clearSelected()
+void ActorManager::clearSelected()
 {
 	nodeSelector->identifer.clear();
 }

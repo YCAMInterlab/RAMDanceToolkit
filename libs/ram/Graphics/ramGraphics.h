@@ -106,7 +106,7 @@ void ramDrawBasicFloor(const int floorPattern,
 void ramDrawActorCube(ramNodeArray& nodeArray);
 
 void ramDrawBasicActor(const ramActor& actor);
-void ramDrawBasicRigid(const ramRigidBody& rigid);
+void ramDrawBasicRigid(const rdtk::RigidBody& rigid);
 void ramDrawNodes(const ramNodeArray& nodeArray);
 
 //

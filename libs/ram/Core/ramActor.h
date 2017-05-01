@@ -25,210 +25,217 @@
 
 #include <assert.h>
 
-class ramNodeArray;
-
-#pragma mark - ramAccelerometer
-
-class ramAccelerometer
-{
-	friend class ramNode;
-
-public:
-	ramAccelerometer()
+namespace rdtk{
+	class NodeArray;
+	
+#pragma mark - rdtk::accelerometer
+	class Accelerometer
 	{
-		acceleration.set(0, 0, 0);
-		angular_velocity.set(0, 0, 0, 1);
-		last_pos.set(0, 0, 0);
-		last_rot.set(0, 0, 0, 1);
-	}
-	virtual ~ramAccelerometer() {}
-
-	void update(const ofVec3f &pos, const ofQuaternion &quat)
+		friend class Node;
+		
+	public:
+		Accelerometer()
+		{
+			acceleration.set(0, 0, 0);
+			angular_velocity.set(0, 0, 0, 1);
+			last_pos.set(0, 0, 0);
+			last_rot.set(0, 0, 0, 1);
+		}
+		virtual ~Accelerometer() {}
+		
+		void update(const ofVec3f &pos, const ofQuaternion &quat)
+		{
+			velocity = last_pos - pos;
+			last_pos = pos;
+			
+			acceleration = last_velocity - velocity;
+			last_velocity = velocity;
+			
+			angular_velocity = last_rot.inverse() * quat;
+			last_rot = quat;
+			
+			angular_acceleration = last_angular_velocity.inverse() * angular_velocity;
+			last_angular_velocity = angular_velocity;
+		}
+		
+	private:
+		ofVec3f velocity, last_velocity, acceleration;
+		ofQuaternion angular_velocity, last_angular_velocity, angular_acceleration;
+		
+		ofVec3f last_pos;
+		ofQuaternion last_rot;
+	};
+	
+#pragma mark - Node
+	
+	class Node : public ofxNodeArray::Node<Node>
 	{
-		velocity = last_pos - pos;
-		last_pos = pos;
-
-		acceleration = last_velocity - velocity;
-		last_velocity = velocity;
-
-		angular_velocity = last_rot.inverse() * quat;
-		last_rot = quat;
-
-		angular_acceleration = last_angular_velocity.inverse() * angular_velocity;
-		last_angular_velocity = angular_velocity;
-	}
-
-private:
-	ofVec3f velocity, last_velocity, acceleration;
-	ofQuaternion angular_velocity, last_angular_velocity, angular_acceleration;
-
-	ofVec3f last_pos;
-	ofQuaternion last_rot;
-};
-
-#pragma mark - ramNode
-
-class ramNode : public ofxNodeArray::Node<ramNode>
-{
-	friend class ramNodeArray;
-	friend class ramActor;
-	friend class ramRigidBody;
-
-public:
-
-	ramNode() : initialized(false) {}
-	ramNode(int index) : ofxNodeArray::Node<ramNode>(index) {}
-	
-	ramNode(const ramNode& copy) { *this = copy; }
-	ramNode& operator=(const ramNode& copy);
-	
-	inline void setName(const string n) { name = n; }
-	const string& getName() const { return name; }
-	
-	const ofMatrix4x4& getTransformMatrix() const { return getLocalTransformMatrix(); }
-	const ofMatrix4x4& getMatrix() const { return getLocalTransformMatrix(); }
-
-	inline ofVec3f getVelocity() const { return accelerometer.velocity; }
-	inline ofVec3f getAcceleration() const { return accelerometer.acceleration; }
-	inline ofQuaternion getAngularVelocity() const { return accelerometer.angular_velocity; }
-	inline ofQuaternion getAngularAcceleration() const { return accelerometer.angular_acceleration; }
-
-	inline ramAccelerometer& getAccelerometer() { return accelerometer; }
-    inline const ramAccelerometer& getAccelerometer() const { return const_cast<ramAccelerometer&>(accelerometer); }
-
-	void drawNodeId(int floatPos = 20) const;
-	void drawNodeName(int floatPos = 20) const;
-
-	// utils
-	inline void beginTransform() const { transformGL(); }
-	inline void endTransform() const { restoreTransformGL(); }
-
-	
-	bool initialized;
-	
-private:
-	
-	string name;
-	ramAccelerometer accelerometer;
-	
-};
-
-#pragma mark - ramNodeArray
-
-enum ramNodeArrayType
-{
-	RAM_NODEARRAY_TYPE_ACTOR     = 0,
-	RAM_NODEARRAY_TYPE_RIGIDBODY = 1
-};
-
-class ramNodeArray : public ofxNodeArray::NodeArray<ramNodeArray, ramNode>
-{
-public:
-
-	ramNodeArray();
-	ramNodeArray(const ramNodeArray& copy) { *this = copy; }
-	ramNodeArray& operator=(const ramNodeArray& copy);
-	virtual ~ramNodeArray() {}
-
-	inline bool isOutdated() const { return (ofGetElapsedTimef() -  last_update_client_time) > RAM_OUTDATED_DURATION; }
-	
-	inline float getTimestamp() const { return last_update_client_time; }
-	inline void setTimestamp(float t) { last_update_client_time = t; }
-
-	inline void setType(ramNodeArrayType t) { type = t; }
-	inline bool isActor() const { return type == RAM_NODEARRAY_TYPE_ACTOR; }
-	inline bool isRigid() const { return type == RAM_NODEARRAY_TYPE_RIGIDBODY; }
-	inline bool isTypeOf(ramNodeArrayType t) const { return type == t; }
-    
-	inline void setPlayback(bool b) { is_playback = b; }
-	inline bool isPlayback() const { return is_playback; }
-    
-	virtual void updateWithOscMessage(const ofxOscMessage &m);
-    
-    ofPoint getCentroid() const;
-    
-protected:
-
-	ramNodeArrayType type;
-    bool is_playback;
-
-	float last_timestamp;
-	float current_timestamp;
-	float last_update_client_time;
-};
-
-#pragma mark - ramRigidBody
-
-class ramRigidBody : public ramNodeArray
-{
-
-public:
-
-	ramRigidBody();
-	ramRigidBody(const ramNodeArray &copy) { *this = copy; }
-
-	ramRigidBody& operator=(const ramNodeArray &copy);
-
-	virtual void updateWithOscMessage(const ofxOscMessage &m);
-
-private:
-
-	void reserveNodes(int num);
-};
-
-#pragma mark - ramActor
-
-class ramActor : public ramNodeArray
-{
-public:
-
-	enum Joint
-	{
-		JOINT_HIPS              = 0,
-		JOINT_ABDOMEN           = 1,
-		JOINT_CHEST             = 2,
-		JOINT_NECK              = 3,
-		JOINT_HEAD              = 4,
-
-		JOINT_LEFT_HIP          = 5,
-		JOINT_LEFT_KNEE         = 6,
-		JOINT_LEFT_ANKLE        = 7,
-		JOINT_LEFT_TOE          = 8,
-
-		JOINT_RIGHT_HIP         = 9,
-		JOINT_RIGHT_KNEE        = 10,
-		JOINT_RIGHT_ANKLE       = 11,
-		JOINT_RIGHT_TOE         = 12,
-
-		JOINT_LEFT_COLLAR       = 13,
-		JOINT_LEFT_SHOULDER     = 14,
-		JOINT_LEFT_ELBOW        = 15,
-		JOINT_LEFT_WRIST        = 16,
-		JOINT_LEFT_HAND         = 17,
-
-		JOINT_RIGHT_COLLAR      = 18,
-		JOINT_RIGHT_SHOULDER    = 19,
-		JOINT_RIGHT_ELBOW       = 20,
-		JOINT_RIGHT_WRIST       = 21,
-		JOINT_RIGHT_HAND        = 22,
-
-		NUM_JOINTS              = 23,
+		friend class NodeArray;
+		friend class Actor;
+		friend class RigidBody;
+		
+	public:
+		
+		Node() : initialized(false) {}
+		Node(int index) : ofxNodeArray::Node<Node>(index) {}
+		
+		Node(const Node& copy) { *this = copy; }
+		Node& operator=(const Node& copy);
+		
+		inline void setName(const string n) { name = n; }
+		const string& getName() const { return name; }
+		
+		const ofMatrix4x4& getTransformMatrix() const { return getLocalTransformMatrix(); }
+		const ofMatrix4x4& getMatrix() const { return getLocalTransformMatrix(); }
+		
+		inline ofVec3f getVelocity() const { return accelerometer.velocity; }
+		inline ofVec3f getAcceleration() const { return accelerometer.acceleration; }
+		inline ofQuaternion getAngularVelocity() const { return accelerometer.angular_velocity; }
+		inline ofQuaternion getAngularAcceleration() const { return accelerometer.angular_acceleration; }
+		
+		inline Accelerometer& getAccelerometer() { return accelerometer; }
+		inline const Accelerometer& getAccelerometer() const { return const_cast<Accelerometer&>(accelerometer); }
+		
+		void drawNodeId(int floatPos = 20) const;
+		void drawNodeName(int floatPos = 20) const;
+		
+		// utils
+		inline void beginTransform() const { transformGL(); }
+		inline void endTransform() const { restoreTransformGL(); }
+		
+		
+		bool initialized;
+		
+	private:
+		
+		string name;
+		Accelerometer accelerometer;
+		
 	};
 
-	ramActor();
-	ramActor(const ramNodeArray &copy);
-	virtual ~ramActor();
-
-	ramActor& operator=(const ramNodeArray &copy);
-
-	virtual void updateWithOscMessage(const ofxOscMessage &m);
+#pragma mark - NodeArray
 	
-	static string getJointName(int jointId) { return jointName[jointId]; }
-	static vector<string> getJointNames();
+	enum NodeArrayType
+	{
+		RAM_NODEARRAY_TYPE_ACTOR     = 0,
+		RAM_NODEARRAY_TYPE_RIGIDBODY = 1
+	};
+	
+	class NodeArray : public ofxNodeArray::NodeArray<NodeArray, Node>
+	{
+	public:
+		
+		NodeArray();
+		NodeArray(const NodeArray& copy) { *this = copy; }
+		NodeArray& operator=(const NodeArray& copy);
+		virtual ~NodeArray() {}
+		
+		inline bool isOutdated() const { return (ofGetElapsedTimef() -  last_update_client_time) > RAM_OUTDATED_DURATION; }
+		
+		inline float getTimestamp() const { return last_update_client_time; }
+		inline void setTimestamp(float t) { last_update_client_time = t; }
+		
+		inline void setType(NodeArrayType t) { type = t; }
+		inline bool isActor() const { return type == RAM_NODEARRAY_TYPE_ACTOR; }
+		inline bool isRigid() const { return type == RAM_NODEARRAY_TYPE_RIGIDBODY; }
+		inline bool isTypeOf(NodeArrayType t) const { return type == t; }
+		
+		inline void setPlayback(bool b) { is_playback = b; }
+		inline bool isPlayback() const { return is_playback; }
+		
+		virtual void updateWithOscMessage(const ofxOscMessage &m);
+		
+		ofPoint getCentroid() const;
+		
+	protected:
+		
+		NodeArrayType type;
+		bool is_playback;
+		
+		float last_timestamp;
+		float current_timestamp;
+		float last_update_client_time;
+	};
+	
+#pragma mark - RigidBody
+	
+	class RigidBody : public NodeArray
+	{
+		
+	public:
+		
+		RigidBody();
+		RigidBody(const NodeArray &copy) { *this = copy; }
+		
+		RigidBody& operator=(const NodeArray &copy);
+		
+		virtual void updateWithOscMessage(const ofxOscMessage &m);
+		
+	private:
+		
+		void reserveNodes(int num);
+	};
+	
+#pragma mark - Actor
+	
+	class Actor : public NodeArray
+	{
+	public:
+		
+		enum Joint
+		{
+			JOINT_HIPS              = 0,
+			JOINT_ABDOMEN           = 1,
+			JOINT_CHEST             = 2,
+			JOINT_NECK              = 3,
+			JOINT_HEAD              = 4,
+			
+			JOINT_LEFT_HIP          = 5,
+			JOINT_LEFT_KNEE         = 6,
+			JOINT_LEFT_ANKLE        = 7,
+			JOINT_LEFT_TOE          = 8,
+			
+			JOINT_RIGHT_HIP         = 9,
+			JOINT_RIGHT_KNEE        = 10,
+			JOINT_RIGHT_ANKLE       = 11,
+			JOINT_RIGHT_TOE         = 12,
+			
+			JOINT_LEFT_COLLAR       = 13,
+			JOINT_LEFT_SHOULDER     = 14,
+			JOINT_LEFT_ELBOW        = 15,
+			JOINT_LEFT_WRIST        = 16,
+			JOINT_LEFT_HAND         = 17,
+			
+			JOINT_RIGHT_COLLAR      = 18,
+			JOINT_RIGHT_SHOULDER    = 19,
+			JOINT_RIGHT_ELBOW       = 20,
+			JOINT_RIGHT_WRIST       = 21,
+			JOINT_RIGHT_HAND        = 22,
+			
+			NUM_JOINTS              = 23,
+		};
+		
+		Actor();
+		Actor(const NodeArray &copy);
+		virtual ~Actor();
+		
+		Actor& operator=(const NodeArray &copy);
+		
+		virtual void updateWithOscMessage(const ofxOscMessage &m);
+		
+		static string getJointName(int jointId) { return jointName[jointId]; }
+		static vector<string> getJointNames();
+		
+	private:
+		static string jointName[NUM_JOINTS];
+		void dispose();
+		
+		void setupTree();
+	};
+}
 
-private:
-	static string jointName[NUM_JOINTS];
-	void dispose();
-
-	void setupTree();
-};
+typedef rdtk::Accelerometer OF_DEPRECATED(ramAccelerometer);
+typedef rdtk::Node			OF_DEPRECATED(ramNode);
+typedef rdtk::NodeArray		OF_DEPRECATED(ramNodeArray);
+typedef rdtk::Actor			OF_DEPRECATED(ramActor);
+typedef rdtk::NodeArrayType OF_DEPRECATED(ramNodeArrayType);

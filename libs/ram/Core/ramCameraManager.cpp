@@ -19,16 +19,18 @@
 
 #include "ramGlobal.h"
 
-ramCameraManager* ramCameraManager::_instance = NULL;
+using namespace rdtk;
 
-ramCameraManager& ramCameraManager::instance()
+CameraManager* CameraManager::_instance = NULL;
+
+CameraManager& CameraManager::instance()
 {
 	if (_instance == NULL)
-		_instance = new ramCameraManager;
+		_instance = new CameraManager;
 	return *_instance;
 }
 
-ramCameraManager::ramCameraManager()
+CameraManager::CameraManager()
 {
 	last_camera_id = 0;
 	
@@ -36,17 +38,17 @@ ramCameraManager::ramCameraManager()
 
 	loadDefaults();
 	
-	ofAddListener(ofEvents().update, this, &ramCameraManager::update);
+	ofAddListener(ofEvents().update, this, &CameraManager::update);
 }
 
-void ramCameraManager::loadDefaults()
+void CameraManager::loadDefaults()
 {
-	const string &kCamSettingFile = ramToResourcePath("Settings/camera/cam.default_positions.xml");
+	const string &kCamSettingFile = ToResourcePath("Settings/camera/cam.default_positions.xml");
 	ofxXmlSettings xml(kCamSettingFile);
-	settings = ramCameraSettings::loadSettings(xml);
+	settings = CameraSettings::loadSettings(xml);
 }
 
-vector<string> ramCameraManager::getDefaultCameraNames() const
+vector<string> CameraManager::getDefaultCameraNames() const
 {
 	vector<string> names;
 	for (int i = 0; i < settings.size(); i++)
@@ -56,7 +58,7 @@ vector<string> ramCameraManager::getDefaultCameraNames() const
 	return names;
 }
 
-void ramCameraManager::setEnableInteractiveCamera(bool v)
+void CameraManager::setEnableInteractiveCamera(bool v)
 {
 	if (typeid(*active_camera) == typeid(ofEasyCam))
 	{
@@ -67,17 +69,17 @@ void ramCameraManager::setEnableInteractiveCamera(bool v)
 	}
 }
 
-void ramCameraManager::rollbackDefaultCameraSetting(int camera_id)
+void CameraManager::rollbackDefaultCameraSetting(int camera_id)
 {
 	if(camera_id == -1) camera_id = last_camera_id;
-	const ramCameraSettings &setting = settings.at(camera_id);
+	const CameraSettings &setting = settings.at(camera_id);
 	active_camera->setPosition(setting.pos);
 	active_camera->lookAt(setting.look_at);
 	active_camera->setFov(setting.fov);
 	last_camera_id = camera_id;
 }
 
-void ramCameraManager::update(ofEventArgs& args)
+void CameraManager::update(ofEventArgs& args)
 {
     if (ofGetFrameNum() < 2) rollbackDefaultCameraSetting();
     

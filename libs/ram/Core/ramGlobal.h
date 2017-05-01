@@ -25,74 +25,105 @@
 #include "ramOscManager.h"
 //#include "ramSceneManager.h"
 
-class ramGlobalShortcut
-{
-public:
+namespace rdtk{
+	class GlobalShortcut
+	{
+	public:
+		
+#pragma mark - Shortcut to ActorManager
+		
+		ActorManager& getActorManager();
+		const ActorManager& getActorManager() const;
+		CommunicationManager& getCommunicationManager();
+		const CommunicationManager& getCommunicationManager() const;
+		OscManager& getOscManager();
+		const OscManager& getOscManager() const;
+		
+		const vector<string>& getNodeArrayNames() const;
+		bool hasNodeArray(const string& key) const;
+		NodeArray& getNodeArray(const string& name);
+		const NodeArray& getNodeArray(const string& name) const;
+		size_t getNumNodeArray() const;
+		NodeArray& getNodeArray(int index);
+		const NodeArray& getNodeArray(int index) const;
+		vector<NodeArray> getAllNodeArrays() const;
+		
+#pragma mark - Shortcut to CameraManager
+		
+		CameraManager& getCameraManager();
+		inline const CameraManager& getCameraManager() const {
+			return const_cast<CameraManager&>(getCameraManager());
+		}
+		ofCamera& getActiveCamera();
+		inline const ofCamera& getActiveCamera() const {
+			return const_cast<ofCamera&>(getActiveCamera());
+		}
+		
+#pragma mark - Shortcut to SceneManager
+		
+		//SceneManager& getSceneManager();
+		
+	};
 	
-#pragma mark - Shortcut to ramActorManager
-
-	ramActorManager& getActorManager();
-    const ramActorManager& getActorManager() const;
-	ramCommunicationManager& getCommunicationManager();
-    const ramCommunicationManager& getCommunicationManager() const;
-	ramOscManager& getOscManager();
-    const ramOscManager& getOscManager() const;
-
-	const vector<string>& getNodeArrayNames() const;
-	bool hasNodeArray(const string& key) const;
-	ramNodeArray& getNodeArray(const string& name);
-    const ramNodeArray& getNodeArray(const string& name) const;
-	size_t getNumNodeArray() const;
-	ramNodeArray& getNodeArray(int index);
-    const ramNodeArray& getNodeArray(int index) const;
-	vector<ramNodeArray> getAllNodeArrays() const;
-	
-#pragma mark - Shortcut to ramCameraManager
-
-	ramCameraManager& getCameraManager();
-    inline const ramCameraManager& getCameraManager() const {
-        return const_cast<ramCameraManager&>(getCameraManager());
-    }
-	ofCamera& getActiveCamera();
-    inline const ofCamera& getActiveCamera() const {
-        return const_cast<ofCamera&>(getActiveCamera());
-    }
-	
-#pragma mark - Shortcut to ramSceneManager
-
-	//ramSceneManager& getSceneManager();
-	
-};
-
 #pragma mark - core
-void ramInitialize(int oscPort = 10000, bool usePresetScenes = false);
-string ramToResourcePath(const string& path);
-
+	void Initialize(int oscPort = 10000, bool usePresetScenes = false);
+	string ToResourcePath(const string& path);
+	
 #pragma mark - actors
-void ramEnableShowActors(bool v);
-bool ramShowActorsEnabled();
-const ramNode& ramGetNode(unsigned int actorId, unsigned int jointId);
-
+	void EnableShowActors(bool v);
+	bool ShowActorsEnabled();
+	const Node& GetNode(unsigned int actorId, unsigned int jointId);
+	
 #pragma mark - camera
-void ramSetViewPort(ofRectangle viewport);
-ofRectangle ramGetViewPort();
-void ramBeginCamera(ofRectangle viewport = ramGetViewPort());
-void ramEndCamera();
-void ramEnableInteractiveCamera(bool v);
-
+	void SetViewPort(ofRectangle viewport);
+	ofRectangle GetViewPort();
+	void BeginCamera(ofRectangle viewport = GetViewPort());
+	void EndCamera();
+	void EnableInteractiveCamera(bool v);
+	
 #pragma mark - shadows
-void ramEnableShadow(bool v = true);
-void ramDisableShadow();
-bool ramShadowEnabled();
-
-void ramBeginShadow();
-void ramEndShadow();
-void ramSetShadowAlpha(float alpha);
-
+	void EnableShadow(bool v = true);
+	void DisableShadow();
+	bool ShadowEnabled();
+	
+	void BeginShadow();
+	void EndShadow();
+	void SetShadowAlpha(float alpha);
+	
 #pragma mark - physics
-void ramEnablePhysicsPrimitive(bool v = true);
-void ramDisablePhysicsPrimitive();
-bool ramGetEnablePhysicsPrimitive();
-
+	void EnablePhysicsPrimitive(bool v = true);
+	void DisablePhysicsPrimitive();
+	bool GetEnablePhysicsPrimitive();
+	
 #pragma mark - error
-void ramNotImplementedError();
+	void NotImplementedError();
+
+}
+
+typedef rdtk::GlobalShortcut OF_DEPRECATED(ramGlobalShortcut);
+
+OF_DEPRECATED(void ramInitialize(int oscPort = 10000, bool usePresetScenes = false));
+OF_DEPRECATED(string ramToResourcePath(const string& path));
+OF_DEPRECATED(void ramEnableShowActors(bool v));
+OF_DEPRECATED(bool ramShowActorsEnabled());
+OF_DEPRECATED(const ramNode& ramGetNode(unsigned int actorId, unsigned int jointId));
+
+OF_DEPRECATED(void ramSetViewPort(ofRectangle viewport));
+OF_DEPRECATED(ofRectangle ramGetViewPort());
+OF_DEPRECATED(void ramBeginCamera(ofRectangle viewport = ramGetViewPort()));
+OF_DEPRECATED(void ramEndCamera());
+OF_DEPRECATED(void ramEnableInteractiveCamera(bool v));
+
+OF_DEPRECATED(void ramEnableShadow(bool v = true));
+OF_DEPRECATED(void ramDisableShadow());
+OF_DEPRECATED(bool ramShadowEnabled());
+
+OF_DEPRECATED(void ramBeginShadow());
+OF_DEPRECATED(void ramEndShadow());
+OF_DEPRECATED(void ramSetShadowAlpha(float alpha));
+
+OF_DEPRECATED(void ramEnablePhysicsPrimitive(bool v = true));
+OF_DEPRECATED(void ramDisablePhysicsPrimitive());
+OF_DEPRECATED(bool ramGetEnablePhysicsPrimitive());
+
+OF_DEPRECATED(void ramNotImplementedError());

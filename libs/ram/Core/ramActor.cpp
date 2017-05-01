@@ -19,11 +19,13 @@
 
 #pragma mark - ramNode
 
-string getJointName(unsigned int jointId) { return ramActor::getJointName(jointId); }
+using namespace rdtk;
 
-ramNode& ramNode::operator=(const ramNode& copy)
+string getJointName(unsigned int jointId) { return Actor::getJointName(jointId); }
+
+Node& Node::operator=(const Node& copy)
 {
-	ofxNodeArray::Node<ramNode>::operator=(copy);
+	ofxNodeArray::Node<Node>::operator=(copy);
 
 	name = copy.name;
 	accelerometer = copy.accelerometer;
@@ -31,29 +33,29 @@ ramNode& ramNode::operator=(const ramNode& copy)
 	return *this;
 }
 
-void ramNode::drawNodeId(int floatPos) const
+void Node::drawNodeId(int floatPos) const
 {
 	ofVec3f pos = getGlobalPosition();
 	pos.y += floatPos;
 	ofDrawBitmapString(ofToString(getID()), pos);
 }
 
-void ramNode::drawNodeName(int floatPos) const
+void Node::drawNodeName(int floatPos) const
 {
 	ofVec3f pos = getGlobalPosition();
 	pos.y += floatPos;
 	ofDrawBitmapString(ofToString(getName()), pos);
 }
 
-#pragma mark - ramNodeArray
+#pragma mark - NodeArray
 
-ramNodeArray::ramNodeArray() : last_timestamp(0), current_timestamp(0), last_update_client_time(0), is_playback(false)
+NodeArray::NodeArray() : last_timestamp(0), current_timestamp(0), last_update_client_time(0), is_playback(false)
 {
 }
 
-ramNodeArray& ramNodeArray::operator=(const ramNodeArray& copy)
+NodeArray& NodeArray::operator=(const NodeArray& copy)
 {
-	ofxNodeArray::NodeArray<ramNodeArray, ramNode>::operator=(copy);
+	ofxNodeArray::NodeArray<NodeArray, Node>::operator=(copy);
 	
 	type = copy.type;
     
@@ -67,7 +69,7 @@ ramNodeArray& ramNodeArray::operator=(const ramNodeArray& copy)
 
 //
 
-void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
+void NodeArray::updateWithOscMessage(const ofxOscMessage &m)
 {
 	const int nNodes = m.getArgAsInt32(1);
 	
@@ -85,7 +87,7 @@ void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
 		const ofVec3f vec(vx, vy, vz);
 		const ofQuaternion quat(angle, axis);
 
-		ramNode &node = getNode(i);
+		rdtk::Node &node = getNode(i);
 		node.node_id = i;
 		node.name = isActor() ? getJointName(i) : "Node " + ofToString(i);
 		node.setGlobalPosition(vec);
@@ -98,13 +100,13 @@ void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
 	last_update_client_time = ofGetElapsedTimef();
 }
 
-ofPoint ramNodeArray::getCentroid() const{
+ofPoint NodeArray::getCentroid() const{
     
     ofPoint centroid(0,0,0);
     
     for (int i = 0; i < getNumNode(); i++)
     {
-        const ramNode &node = getNode(i);
+        const Node &node = getNode(i);
         centroid += node.getGlobalPosition();
     }
     
@@ -114,37 +116,37 @@ ofPoint ramNodeArray::getCentroid() const{
     
 }
 
-#pragma mark - ramRigidBody
+#pragma mark - RigidBody
 
-ramRigidBody::ramRigidBody()
+RigidBody::RigidBody()
 {
 	type = RAM_NODEARRAY_TYPE_ACTOR;
 }
 
-void ramRigidBody::updateWithOscMessage(const ofxOscMessage &m)
+void RigidBody::updateWithOscMessage(const ofxOscMessage &m)
 {
 	const int nNodes = m.getArgAsInt32(1);
 
 	if (nNodes != getNumNode())
 		reserveNodes(nNodes);
 
-	ramNodeArray::updateWithOscMessage(m);
+	NodeArray::updateWithOscMessage(m);
 }
 
-void ramRigidBody::reserveNodes(int num)
+void RigidBody::reserveNodes(int num)
 {
 	nodes.resize(num);
 }
 
-ramRigidBody& ramRigidBody::operator=(const ramNodeArray &copy)
+RigidBody& RigidBody::operator=(const NodeArray &copy)
 {
-	this->ramNodeArray::operator=(copy);
+	this->NodeArray::operator=(copy);
 	return *this;
 }
 
-#pragma mark - ramActor
+#pragma mark - Actor
 
-ramActor::ramActor()
+Actor::Actor()
 {
 	type = RAM_NODEARRAY_TYPE_ACTOR;
 	
@@ -157,33 +159,33 @@ ramActor::ramActor()
 	setupTree();
 }
 
-ramActor::ramActor(const ramNodeArray &copy)
+Actor::Actor(const NodeArray &copy)
 {
 	*this = copy;
 }
 
-ramActor::~ramActor()
+Actor::~Actor()
 {
 	dispose();
 }
 
-ramActor& ramActor::operator=(const ramNodeArray &copy)
+Actor& Actor::operator=(const NodeArray &copy)
 {
-	this->ramNodeArray::operator=(copy);
+	this->NodeArray::operator=(copy);
 	return *this;
 }
 
-void ramActor::dispose()
+void Actor::dispose()
 {
 	nodes.clear();
 }
 
-void ramActor::updateWithOscMessage(const ofxOscMessage &m)
+void Actor::updateWithOscMessage(const ofxOscMessage &m)
 {
-	ramNodeArray::updateWithOscMessage(m);
+	NodeArray::updateWithOscMessage(m);
 }
 
-void ramActor::setupTree()
+void Actor::setupTree()
 {
 	getNode(JOINT_ABDOMEN).setParent(getNode(JOINT_HIPS));
 	{
@@ -248,7 +250,7 @@ void ramActor::setupTree()
 	}
 }
 
-string ramActor::jointName[NUM_JOINTS] =
+string Actor::jointName[NUM_JOINTS] =
 {
 	"HIPS",
 	"ABDOMEN",
@@ -275,11 +277,11 @@ string ramActor::jointName[NUM_JOINTS] =
 	"RIGHT_HAND"
 };
 
-vector<string> ramActor::getJointNames()
+vector<string> Actor::getJointNames()
 {
 	vector<string> names;
 	names.clear();
-	names.resize(ramActor::NUM_JOINTS);
+	names.resize(Actor::NUM_JOINTS);
 
 	for (int i = 0; i < names.size(); i++)
 		names.at(i) = getJointName(i);

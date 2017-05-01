@@ -41,14 +41,14 @@ void ramTSVCoder::decode(ofBuffer buffer)
 			if (addr == RAM_OSC_ADDR_ACTOR)
 			{
 				ramActor o;
-				o.setType(RAM_NODEARRAY_TYPE_ACTOR);
+				o.setType(rdtk::RAM_NODEARRAY_TYPE_ACTOR);
 				o.setName(name);
 				NA = o;
 			}
 			else
 			{
-				ramRigidBody o;
-				o.setType(RAM_NODEARRAY_TYPE_RIGIDBODY);
+				rdtk::RigidBody o;
+				o.setType(rdtk::RAM_NODEARRAY_TYPE_RIGIDBODY);
 				o.setName(name);
 				NA = o;
 			}
