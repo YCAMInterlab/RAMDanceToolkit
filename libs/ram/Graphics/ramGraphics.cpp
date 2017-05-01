@@ -23,74 +23,76 @@
 
 #pragma mark - ramColor
 
-const ofColor ramColor::RED_NORMAL      = ofColor::fromHex(0xff6666);
-const ofColor ramColor::RED_DEEP        = ofColor::fromHex(0x993333);
-const ofColor ramColor::RED_LIGHT       = ofColor::fromHex(0xff9898);
+using namespace rdtk;
 
-const ofColor ramColor::GREEN_NORMAL    = ofColor::fromHex(0x66cc33);
-const ofColor ramColor::GREEN_DEEP      = ofColor::fromHex(0x339900);
-const ofColor ramColor::GREEN_LIGHT     = ofColor::fromHex(0x99cc99);
+const ofColor Color::RED_NORMAL      = ofColor::fromHex(0xff6666);
+const ofColor Color::RED_DEEP        = ofColor::fromHex(0x993333);
+const ofColor Color::RED_LIGHT       = ofColor::fromHex(0xff9898);
 
-const ofColor ramColor::BLUE_NORMAL     = ofColor::fromHex(0x0099cc);
-const ofColor ramColor::BLUE_DEEP       = ofColor::fromHex(0x003366);
-const ofColor ramColor::BLUE_LIGHT      = ofColor::fromHex(0x99cccc);
+const ofColor Color::GREEN_NORMAL    = ofColor::fromHex(0x66cc33);
+const ofColor Color::GREEN_DEEP      = ofColor::fromHex(0x339900);
+const ofColor Color::GREEN_LIGHT     = ofColor::fromHex(0x99cc99);
 
-const ofColor ramColor::YELLOW_NORMAL   = ofColor::fromHex(0xffcc00);
-const ofColor ramColor::YELLOW_DEEP     = ofColor::fromHex(0xcc9900);
-const ofColor ramColor::YELLOW_LIGHT    = ofColor::fromHex(0xffff00);
+const ofColor Color::BLUE_NORMAL     = ofColor::fromHex(0x0099cc);
+const ofColor Color::BLUE_DEEP       = ofColor::fromHex(0x003366);
+const ofColor Color::BLUE_LIGHT      = ofColor::fromHex(0x99cccc);
 
-const ofColor ramColor::BLACK           = ofColor::fromHex(0x000000);
-const ofColor ramColor::DARK_GRAY       = ofColor::fromHex(0x444444);
-const ofColor ramColor::GRAY            = ofColor::fromHex(0x888888);
-const ofColor ramColor::LIGHT_GRAY      = ofColor::fromHex(0xbbbbbb);
-const ofColor ramColor::WHITE           = ofColor::fromHex(0xffffff);
+const ofColor Color::YELLOW_NORMAL   = ofColor::fromHex(0xffcc00);
+const ofColor Color::YELLOW_DEEP     = ofColor::fromHex(0xcc9900);
+const ofColor Color::YELLOW_LIGHT    = ofColor::fromHex(0xffff00);
 
-const ofColor ramColor::DARK_GRAY_ALPHA = ofColor(255, 64);
-const ofColor ramColor::GRAY_ALPHA      = ofColor(255, 128);
-const ofColor ramColor::LIGHT_GRAY_ALPHA= ofColor(255, 192);
+const ofColor Color::BLACK           = ofColor::fromHex(0x000000);
+const ofColor Color::DARK_GRAY       = ofColor::fromHex(0x444444);
+const ofColor Color::GRAY            = ofColor::fromHex(0x888888);
+const ofColor Color::LIGHT_GRAY      = ofColor::fromHex(0xbbbbbb);
+const ofColor Color::WHITE           = ofColor::fromHex(0xffffff);
 
-const ofColor ramColor::SHADOW          = ofColor(0, 0, 0, 60);
+const ofColor Color::DARK_GRAY_ALPHA = ofColor(255, 64);
+const ofColor Color::GRAY_ALPHA      = ofColor(255, 128);
+const ofColor Color::LIGHT_GRAY_ALPHA= ofColor(255, 192);
+
+const ofColor Color::SHADOW          = ofColor(0, 0, 0, 60);
 
 //
 
-void ramBox(const ramNode& o, float size)
+void rdtk::Box(const Node& o, float size)
 {
 	o.beginTransform();
 	ofDrawBox(size);
 	o.endTransform();
 
-	if (ramGetEnablePhysicsPrimitive()
-		&& ramPhysics::instance().checkAndUpdateNodeCache(&o))
+	if (GetEnablePhysicsPrimitive()
+		&& Physics::instance().checkAndUpdateNodeCache(&o))
 	{
-		ramBoxPrimitive *p = new ramBoxPrimitive(o.getGlobalTransformMatrix(), size);
+		BoxPrimitive *p = new BoxPrimitive(o.getGlobalTransformMatrix(), size);
 		p->getRigidBody().setKinematic(true);
-		ramPhysics::instance().registerTempraryPrimitive(p);
+		Physics::instance().registerTempraryPrimitive(p);
 	}
 }
 
-void ramSphere(const ramNode& o, float radius)
+void rdtk::Sphere(const Node& o, float radius)
 {
 	o.beginTransform();
 	ofDrawSphere(radius);
 	o.endTransform();
 
-	if (ramGetEnablePhysicsPrimitive())
+	if (GetEnablePhysicsPrimitive())
 	{
-		ramSpherePrimitive *p = new ramSpherePrimitive(o.getGlobalPosition(), radius);
+		SpherePrimitive *p = new SpherePrimitive(o.getGlobalPosition(), radius);
 		p->getRigidBody().setKinematic(true);
-		ramPhysics::instance().registerTempraryPrimitive(p);
+		Physics::instance().registerTempraryPrimitive(p);
 	}
 }
 
 //
 
-void ramDrawBasicFloor(const int floorPattern,
+void rdtk::DrawBasicFloor(const int floorPattern,
 					   const float floorSize,
 					   const float tileSize,
 					   const ofColor& c1,
 					   const ofColor& c2)
 {
-	if (floorPattern == ramFloor::FLOOR_NONE) return;
+	if (floorPattern == Floor::FLOOR_NONE) return;
 
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glEnable(GL_DEPTH_TEST);
@@ -115,7 +117,7 @@ void ramDrawBasicFloor(const int floorPattern,
 
 	glNormal3f(0.0f, 1.0f, 0.0f);
 
-	if (floorPattern == ramFloor::FLOOR_PLANE)
+	if (floorPattern == Floor::FLOOR_PLANE)
 	{
 		ofFill();
 		ofSetColor(c1);
@@ -129,13 +131,13 @@ void ramDrawBasicFloor(const int floorPattern,
 			switch (floorPattern)
 			{
 
-			case ramFloor::FLOOR_CHECKER_PATTERN:
+			case Floor::FLOOR_CHECKER_PATTERN:
 				ofFill();
 				ofSetColor((i % 2 == 0 && j % 2 == 0) || (i % 2 == 1 && j % 2 == 1) ? c1 : c2);
 				ofRect(i * tileSize, j * tileSize, tileSize, tileSize);
 				break;
 
-			case ramFloor::FLOOR_GRID_LINES:
+			case Floor::FLOOR_GRID_LINES:
 				ofNoFill();
 				ofSetColor(c1);
 				ofRect(i * tileSize, j * tileSize, tileSize, tileSize);
@@ -150,11 +152,11 @@ void ramDrawBasicFloor(const int floorPattern,
 	glPopAttrib();
 }
 
-void ramDrawBasicActor(const ramActor& actor)
+void rdtk::DrawBasicActor(const Actor& actor)
 {
 	if (actor.getNumNode() == 0) return;
 
-	assert(actor.getNumNode() == ramActor::NUM_JOINTS);
+	assert(actor.getNumNode() == Actor::NUM_JOINTS);
 
 	ofPushStyle();
 	const ofColor& color0 = ofGetStyle().color;
@@ -163,17 +165,17 @@ void ramDrawBasicActor(const ramActor& actor)
 	glPushMatrix();
 	for (int i = 0; i < actor.getNumNode(); i++)
 	{
-		const ramNode &node = actor.getNode(i);
-		float jointSize = (i == ramActor::JOINT_HEAD) ? 8.0 : 5.0;
+		const Node &node = actor.getNode(i);
+		float jointSize = (i == Actor::JOINT_HEAD) ? 8.0 : 5.0;
 
 		ofPushStyle();
 		ofSetLineWidth(2);
 
 		ofSetColor(color0);
-		ramBox(node, jointSize);
+		rdtk::Box(node, jointSize);
 
 		ofSetColor(color1);
-		ramLine(node);
+		Line(node);
 
 		ofPopStyle();
 	}
@@ -182,33 +184,33 @@ void ramDrawBasicActor(const ramActor& actor)
 	ofPopStyle();
 }
 
-void ramDrawBasicRigid(const ramRigidBody& rigid)
+void rdtk::DrawBasicRigid(const RigidBody& rigid)
 {
 	if (rigid.getNumNode() == 0) return;
 
 	for (int i = 0; i < rigid.getNumNode(); i++)
 	{
-		const ramNode &node = rigid.getNode(i);
-		ramBox(node, 5);
+		const Node &node = rigid.getNode(i);
+		rdtk::Box(node, 5);
 	}
 }
 
-void ramDrawNodes(const ramNodeArray& nodeArray)
+void rdtk::DrawNodes(const NodeArray& nodeArray)
 {
 	if (nodeArray.getNumNode() == 0) return;
 
 	if (nodeArray.isActor())
-		ramDrawBasicActor((ramActor &)nodeArray);
+		DrawBasicActor((Actor &)nodeArray);
 	else
-		ramDrawBasicRigid((ramRigidBody &)nodeArray);
+		DrawBasicRigid((RigidBody &)nodeArray);
 }
 
-void ramDrawActorCube(ramNodeArray& nodeArray)
+void rdtk::DrawActorCube(NodeArray& nodeArray)
 {
 	if (nodeArray.getNumNode() == 0) return;
 
-	ofVec3f maxPos = nodeArray.getNode(ramActor::JOINT_CHEST).getGlobalPosition();
-	ofVec3f minPos = nodeArray.getNode(ramActor::JOINT_CHEST).getGlobalPosition();
+	ofVec3f maxPos = nodeArray.getNode(Actor::JOINT_CHEST).getGlobalPosition();
+	ofVec3f minPos = nodeArray.getNode(Actor::JOINT_CHEST).getGlobalPosition();
 
 	for (int j = 0; j < nodeArray.getNumNode(); j++)
 	{
@@ -239,7 +241,7 @@ void ramDrawActorCube(ramNodeArray& nodeArray)
 	ofPopStyle();
 }
 
-void ramDrawNodeCorresponds(const ramNodeArray &a, const ramNodeArray &b)
+void rdtk::DrawNodeCorresponds(const NodeArray &a, const NodeArray &b)
 {
 	if (a.getNumNode() == 0) return;
 
@@ -255,7 +257,7 @@ void ramDrawNodeCorresponds(const ramNodeArray &a, const ramNodeArray &b)
 
 //
 
-void ramBillboard()
+void rdtk::Billboard()
 {
 	ofMatrix4x4 m;
 	glGetFloatv(GL_MODELVIEW_MATRIX, m.getPtr());
@@ -279,7 +281,7 @@ void ramBillboard()
 
 //
 
-void ramStripe(const vector<ramNode> &nodes)
+void rdtk::Stripe(const vector<Node> &nodes)
 {
 	glBegin(ofGetFill() ? GL_POLYGON : GL_LINE_LOOP);
 	for (int i = 0; i < nodes.size(); i++)
@@ -290,7 +292,7 @@ void ramStripe(const vector<ramNode> &nodes)
 	glEnd();
 }
 
-void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5)
+void rdtk::Stripe(const Node& n1, const Node& n2, const Node& n3, const Node& n4, const Node& n5)
 {
 	const ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition() };
 	glBegin(ofGetFill() ? GL_POLYGON : GL_LINE_LOOP);
@@ -301,7 +303,7 @@ void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ra
 	glEnd();
 }
 
-void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6)
+void rdtk::Stripe(const Node& n1, const Node& n2, const Node& n3, const Node& n4, const Node& n5, const Node& n6)
 {
 	const ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition() };
 	glBegin(ofGetFill() ? GL_POLYGON : GL_LINE_LOOP);
@@ -312,7 +314,7 @@ void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ra
 	glEnd();
 }
 
-void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7)
+void rdtk::Stripe(const Node& n1, const Node& n2, const Node& n3, const Node& n4, const Node& n5, const Node& n6, const Node& n7)
 {
 	const ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition(), n7.getGlobalPosition() };
 	glBegin(ofGetFill() ? GL_POLYGON : GL_LINE_LOOP);
@@ -323,7 +325,7 @@ void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ra
 	glEnd();
 }
 
-void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7, const ramNode& n8)
+void rdtk::Stripe(const Node& n1, const Node& n2, const Node& n3, const Node& n4, const Node& n5, const Node& n6, const Node& n7, const Node& n8)
 {
 	const ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition(), n7.getGlobalPosition(), n8.getGlobalPosition() };
 	glBegin(ofGetFill() ? GL_POLYGON : GL_LINE_LOOP);
@@ -334,7 +336,7 @@ void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ra
 	glEnd();
 }
 
-void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7, const ramNode& n8, const ramNode& n9)
+void rdtk::Stripe(const Node& n1, const Node& n2, const Node& n3, const Node& n4, const Node& n5, const Node& n6, const Node& n7, const Node& n8, const Node& n9)
 {
 	const ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition(), n7.getGlobalPosition(), n8.getGlobalPosition(), n9.getGlobalPosition() };
 	glBegin(ofGetFill() ? GL_POLYGON : GL_LINE_LOOP);
@@ -345,7 +347,7 @@ void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ra
 	glEnd();
 }
 
-void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7, const ramNode& n8, const ramNode& n9, const ramNode& n10)
+void rdtk::Stripe(const Node& n1, const Node& n2, const Node& n3, const Node& n4, const Node& n5, const Node& n6, const Node& n7, const Node& n8, const Node& n9, const Node& n10)
 {
 	const ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition(), n7.getGlobalPosition(), n8.getGlobalPosition(), n9.getGlobalPosition(), n10.getGlobalPosition() };
 	glBegin(ofGetFill() ? GL_POLYGON : GL_LINE_LOOP);
@@ -356,7 +358,7 @@ void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ra
 	glEnd();
 }
 
-void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7, const ramNode& n8, const ramNode& n9, const ramNode& n10, const ramNode& n11)
+void rdtk::Stripe(const Node& n1, const Node& n2, const Node& n3, const Node& n4, const Node& n5, const Node& n6, const Node& n7, const Node& n8, const Node& n9, const Node& n10, const Node& n11)
 {
 	const ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition(), n7.getGlobalPosition(), n8.getGlobalPosition(), n9.getGlobalPosition(), n10.getGlobalPosition(), n11.getGlobalPosition() };
 	glBegin(ofGetFill() ? GL_POLYGON : GL_LINE_LOOP);
@@ -367,7 +369,7 @@ void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ra
 	glEnd();
 }
 
-void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ramNode& n4, const ramNode& n5, const ramNode& n6, const ramNode& n7, const ramNode& n8, const ramNode& n9, const ramNode& n10, const ramNode& n11, const ramNode& n12)
+void rdtk::Stripe(const Node& n1, const Node& n2, const Node& n3, const Node& n4, const Node& n5, const Node& n6, const Node& n7, const Node& n8, const Node& n9, const Node& n10, const Node& n11, const Node& n12)
 {
 	const ofVec3f v[] = { n1.getGlobalPosition(), n2.getGlobalPosition(), n3.getGlobalPosition(), n4.getGlobalPosition(), n5.getGlobalPosition(), n6.getGlobalPosition(), n7.getGlobalPosition(), n8.getGlobalPosition(), n9.getGlobalPosition(), n10.getGlobalPosition(), n11.getGlobalPosition(), n12.getGlobalPosition() };
 	glBegin(ofGetFill() ? GL_POLYGON : GL_LINE_LOOP);
@@ -376,4 +378,27 @@ void ramStripe(const ramNode& n1, const ramNode& n2, const ramNode& n3, const ra
 		glVertex3fv(v[i].getPtr());
 	}
 	glEnd();
+}
+
+#pragma mark - DEPRECATED
+
+void ramBillboard(){rdtk::Billboard();}
+void ramLine(const rdtk::Node& node){Line(node);}
+void ramBox(const rdtk::Node& o, float size){rdtk::Box(o, size);}
+void ramSphere(const rdtk::Node& o, float radius){rdtk::Sphere(o, radius);}
+void ramDrawNodeCorresponds(const rdtk::NodeArray &a, const rdtk::NodeArray &b){
+	rdtk::DrawNodeCorresponds(a, b);
+}
+void ramDrawBasicFloor(const int floorPattern,const float floorSize,
+					   const float tileSize,const ofColor& c1,const ofColor& c2){
+	rdtk::DrawBasicFloor(floorPattern, floorSize, tileSize, c1, c2);
+}
+void ramDrawActorCube(rdtk::NodeArray& nodeArray){
+	rdtk::DrawActorCube(nodeArray);
+}
+void ramDrawBasicActor(const rdtk::RigidBody& rigid){
+	rdtk::DrawBasicActor(rigid);
+}
+void ramDrawNodes(const rdtk::NodeArray& nodeArray){
+	rdtk::DrawNodes(nodeArray);
 }

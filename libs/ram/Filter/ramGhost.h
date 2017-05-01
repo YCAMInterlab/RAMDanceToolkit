@@ -23,128 +23,132 @@
 #include "ramControlPanel.h"
 #include "ramLowPassFilter.h"
 
-class ramGhost : public ramBaseFilter
-{
-public:
-
-	string getName() const { return "ramGhost"; };
-
-	ramGhost() : historySize(10), distance(150), speed(27)
+namespace rdtk{
+	class Ghost : public BaseFilter
 	{
-		clear();
-	}
-
-	void clear()
-	{
-		record.clear();
-	}
-
-	struct Preset
-	{
-		ramGhost *self;
-		float distance;
-		float speed;
+	public:
 		
-		Preset(ramGhost *self, float distance, float speed) : self(self), distance(distance), speed(speed) {}
-		void operator()()
+		string getName() const { return "ramGhost"; };
+		
+		Ghost() : historySize(10), distance(150), speed(27)
 		{
-			self->setSpeed(speed);
-			self->setDistance(distance);
+			clear();
 		}
+		
+		void clear()
+		{
+			record.clear();
+		}
+		
+		struct Preset
+		{
+			Ghost *self;
+			float distance;
+			float speed;
+			
+			Preset(Ghost *self, float distance, float speed) : self(self), distance(distance), speed(speed) {}
+			void operator()()
+			{
+				self->setSpeed(speed);
+				self->setDistance(distance);
+			}
+		};
+		
+		void setupControlPanel()
+		{
+			GetGUI().addSection(getName());
+			
+			ofAddListener(GetGUI().addButton("Ghost"), this, &Ghost::onPresetGhost);
+			ofAddListener(GetGUI().addButton("Slow"), this, &Ghost::onPresetSlow);
+			ofAddListener(GetGUI().addButton("Normal"), this, &Ghost::onPresetNormal);
+			ofAddListener(GetGUI().addButton("Fast"), this, &Ghost::onPresetFast);
+			
+			GetGUI().addSlider("Distance", 0.0, 255.0, &distance);
+			GetGUI().addSlider("Speed", 0.0, 255.0, &speed);
+		}
+		
+		void onPresetGhost(ofEventArgs &e)
+		{
+			setSpeed(1.5);
+			setDistance(240);
+		}
+		
+		void onPresetSlow(ofEventArgs &e)
+		{
+			setSpeed(8.3);
+			setDistance(74.4);
+		}
+		
+		void onPresetNormal(ofEventArgs &e)
+		{
+			setSpeed(9.4);
+			setDistance(150);
+		}
+		
+		void onPresetFast(ofEventArgs &e)
+		{
+			setSpeed(38.9);
+			setDistance(211);
+		}
+		
+		inline void setDistance(const float d) { distance = d; }
+		inline void setSpeed(const float s) { speed = s; }
+		inline void setHistorySize(const unsigned int m) { historySize = m; }
+		
+		inline float getDistance() const { return distance; }
+		inline float getSpeed() const { return speed; }
+		inline unsigned int getHistorySize() const { return historySize; }
+		
+	protected:
+		
+		NodeArray ghost;
+		deque<NodeArray> record;
+		
+		int historySize;
+		float distance, speed;
+		
+		const NodeArray& filter(const NodeArray& src)
+		{
+			if (src.getNumNode() != 0)
+				record.push_back(src);
+			
+			if (ghost.getNumNode() != src.getNumNode())
+				ghost = src;
+			
+			if (record.size() > historySize)
+				record.pop_front();
+			
+			NodeArray &presentArray = record.back();
+			NodeArray &pastArray = record.front();
+			
+			for (int i = 0; i < presentArray.getNumNode(); i++)
+			{
+				
+				const ofVec3f& p0 = presentArray.getNode(i).getGlobalPosition();
+				const ofVec3f& p1 = pastArray.getNode(i).getGlobalPosition();
+				
+				// position
+				ofVec3f d = (p0 - p1);
+				d.normalize();
+				d *= distance;
+				ofVec3f v = p0 + d;
+				
+				ofVec3f vec = ghost.getNode(i).getGlobalPosition();
+				vec += (v - vec) * speed * 0.001;
+				
+				// quaternion
+				const ofQuaternion& quat = presentArray.getNode(i).getGlobalOrientation();
+				
+				Node& node = ghost.getNode(i);
+				node.setGlobalPosition(vec);
+				node.setGlobalOrientation(quat);
+				node.getAccelerometer().update(vec, quat);
+			}
+			
+			return ghost;
+		}
+		
 	};
+}
 
-	void setupControlPanel()
-	{
-		ramGetGUI().addSection(getName());
-
-		ofAddListener(ramGetGUI().addButton("Ghost"), this, &ramGhost::onPresetGhost);
-		ofAddListener(ramGetGUI().addButton("Slow"), this, &ramGhost::onPresetSlow);
-		ofAddListener(ramGetGUI().addButton("Normal"), this, &ramGhost::onPresetNormal);
-		ofAddListener(ramGetGUI().addButton("Fast"), this, &ramGhost::onPresetFast);
-
-		ramGetGUI().addSlider("Distance", 0.0, 255.0, &distance);
-		ramGetGUI().addSlider("Speed", 0.0, 255.0, &speed);
-	}
-	
-	void onPresetGhost(ofEventArgs &e)
-	{
-		setSpeed(1.5);
-		setDistance(240);
-	}
-
-	void onPresetSlow(ofEventArgs &e)
-	{
-		setSpeed(8.3);
-		setDistance(74.4);
-	}
-	
-	void onPresetNormal(ofEventArgs &e)
-	{
-		setSpeed(9.4);
-		setDistance(150);
-	}
-	
-	void onPresetFast(ofEventArgs &e)
-	{
-		setSpeed(38.9);
-		setDistance(211);
-	}
-
-	inline void setDistance(const float d) { distance = d; }
-	inline void setSpeed(const float s) { speed = s; }
-	inline void setHistorySize(const unsigned int m) { historySize = m; }
-
-	inline float getDistance() const { return distance; }
-	inline float getSpeed() const { return speed; }
-	inline unsigned int getHistorySize() const { return historySize; }
-
-protected:
-    
-	ramNodeArray ghost;
-	deque<ramNodeArray> record;
-
-	int historySize;
-	float distance, speed;
-
-	const ramNodeArray& filter(const ramNodeArray& src)
-	{
-		if (src.getNumNode() != 0)
-			record.push_back(src);
-
-		if (ghost.getNumNode() != src.getNumNode())
-			ghost = src;
-
-		if (record.size() > historySize)
-			record.pop_front();
-
-		ramNodeArray &presentArray = record.back();
-		ramNodeArray &pastArray = record.front();
-
-		for (int i = 0; i < presentArray.getNumNode(); i++)
-		{
-
-			const ofVec3f& p0 = presentArray.getNode(i).getGlobalPosition();
-			const ofVec3f& p1 = pastArray.getNode(i).getGlobalPosition();
-            
-			// position
-			ofVec3f d = (p0 - p1);
-			d.normalize();
-			d *= distance;
-			ofVec3f v = p0 + d;
-
-			ofVec3f vec = ghost.getNode(i).getGlobalPosition();
-			vec += (v - vec) * speed * 0.001;
-
-			// quaternion
-			const ofQuaternion& quat = presentArray.getNode(i).getGlobalOrientation();
-
-			ramNode& node = ghost.getNode(i);
-			node.setGlobalPosition(vec);
-			node.setGlobalOrientation(quat);
-			node.getAccelerometer().update(vec, quat);
-		}
-
-		return ghost;
-	}
-
-};
+typedef rdtk::Ghost OF_DEPRECATED(ramGhost);

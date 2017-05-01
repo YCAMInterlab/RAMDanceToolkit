@@ -20,10 +20,15 @@
 #include "ramBaseCoder.h"
 #include "ramSession.h"
 
-class ramTSVCoder : public ramBaseCoder
-{
-protected:
-	void decode(ofBuffer buffer);
-	bool encode(ramSession &src) const;
-};
+namespace rdtk{
+	
+	class TSVCoder : public BaseCoder
+	{
+	protected:
+		void decode(ofBuffer buffer);
+		bool encode(Session &src) const;
+	};
+	
+}
 
+typedef rdtk::TSVCoder OF_DEPRECATED(ramTSVCoder);

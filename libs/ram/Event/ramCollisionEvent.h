@@ -18,79 +18,83 @@
 #pragma once
 
 #include "ramBaseEvent.h"
-
 #include "ramPrimitive.h"
 
-enum ramTriggerTiming
-{
-	RAM_TRIGGER_UP,
-	RAM_TRIGGER_DOWN,
-	RAM_TRIGGER_BOTH
-};
-
-class ramCollisionEvent : public ramBaseEvent
-{
-public:
-
-	ofEvent<ofEventArgs> onCollision;
-	ofEvent<ofEventArgs> onCollisionEnd;
-
-	ramCollisionEvent() : primitive(NULL), collision_state(false), last_collision_frame(false), timing(RAM_TRIGGER_UP) {}
-
-	void setPrimitive(ramPrimitive *o)
+namespace rdtk{
+	enum TriggerTiming
 	{
-		primitive = o;
-		primitive->getRigidBody().setCollisionCallback(CollisionCallback(this));
-	}
-
-	void setTrigger(ramTriggerTiming t) { timing = t; }
-	ramTriggerTiming getTrigger() const { return timing; }
-
-	bool getState() const { return collision_state; }
-
-protected:
-
-	struct CollisionCallback
-	{
-		ramCollisionEvent *evt;
-
-		CollisionCallback(ramCollisionEvent *evt) : evt(evt) {}
-
-		void operator()()
-		{
-			evt->last_collision_frame = ofGetFrameNum();
-		}
+		RAM_TRIGGER_UP,
+		RAM_TRIGGER_DOWN,
+		RAM_TRIGGER_BOTH
 	};
-
-	ramPrimitive *primitive;
-
-	bool collision_state;
-	int last_collision_frame;
-
-	ramTriggerTiming timing;
-
-	bool tick()
+	
+	class CollisionEvent : public BaseEvent
 	{
-		if (primitive == NULL) return false;
-
-		bool b = ofGetFrameNum() - last_collision_frame < 2;
-		if (b != collision_state)
+	public:
+		
+		ofEvent<ofEventArgs> onCollision;
+		ofEvent<ofEventArgs> onCollisionEnd;
+		
+		CollisionEvent() : primitive(NULL), collision_state(false), last_collision_frame(false), timing(RAM_TRIGGER_UP) {}
+		
+		void setPrimitive(Primitive *o)
 		{
-			collision_state = b;
-
-			static ofEventArgs e;
-
-			if (b) ofNotifyEvent(onCollision, e);
-			else ofNotifyEvent(onCollisionEnd, e);
-
-			if (timing == RAM_TRIGGER_BOTH) return true;
-			else if (timing == RAM_TRIGGER_UP && b) return true;
-			else if (timing == RAM_TRIGGER_DOWN && !b) return true;
-
+			primitive = o;
+			primitive->getRigidBody().setCollisionCallback(CollisionCallback(this));
+		}
+		
+		void setTrigger(TriggerTiming t) { timing = t; }
+		TriggerTiming getTrigger() const { return timing; }
+		
+		bool getState() const { return collision_state; }
+		
+	protected:
+		
+		struct CollisionCallback
+		{
+			CollisionEvent *evt;
+			
+			CollisionCallback(CollisionEvent *evt) : evt(evt) {}
+			
+			void operator()()
+			{
+				evt->last_collision_frame = ofGetFrameNum();
+			}
+		};
+		
+		Primitive *primitive;
+		
+		bool collision_state;
+		int last_collision_frame;
+		
+		TriggerTiming timing;
+		
+		bool tick()
+		{
+			if (primitive == NULL) return false;
+			
+			bool b = ofGetFrameNum() - last_collision_frame < 2;
+			if (b != collision_state)
+			{
+				collision_state = b;
+				
+				static ofEventArgs e;
+				
+				if (b) ofNotifyEvent(onCollision, e);
+				else ofNotifyEvent(onCollisionEnd, e);
+				
+				if (timing == RAM_TRIGGER_BOTH) return true;
+				else if (timing == RAM_TRIGGER_UP && b) return true;
+				else if (timing == RAM_TRIGGER_DOWN && !b) return true;
+				
+				return false;
+			}
+			
 			return false;
 		}
+		
+	};
+}
 
-		return false;
-	}
-
-};
+typedef rdtk::TriggerTiming OF_DEPRECATED(ramTriggerTiming);
+typedef rdtk::CollisionEvent OF_DEPRECATED(ramCollisionEvent);

@@ -19,28 +19,28 @@
 
 using namespace rdtk;
 
-ramBaseScene::ramBaseScene() {}
-ramBaseScene::~ramBaseScene() {}
+BaseScene::BaseScene() {}
+BaseScene::~BaseScene() {}
 
-void ramBaseScene::setupControlPanel() {}
-void ramBaseScene::setup() {}
-void ramBaseScene::update() {}
-void ramBaseScene::draw() {}
-void ramBaseScene::drawActor(const Actor &actor) {}
-void ramBaseScene::drawRigid(const RigidBody &rigid) {}
-void ramBaseScene::drawHUD() {}
-void ramBaseScene::exit() {}
+void BaseScene::setupControlPanel() {}
+void BaseScene::setup() {}
+void BaseScene::update() {}
+void BaseScene::draw() {}
+void BaseScene::drawActor(const Actor &actor) {}
+void BaseScene::drawRigid(const RigidBody &rigid) {}
+void BaseScene::drawHUD() {}
+void BaseScene::exit() {}
 
 
 // nodeArray events
-void ramBaseScene::onActorSetup(const Actor &actor) {}
-void ramBaseScene::onActorExit(const Actor &actor) {}
-void ramBaseScene::onRigidSetup(const RigidBody &rigid) {}
-void ramBaseScene::onRigidExit(const RigidBody &rigid) {}
+void BaseScene::onActorSetup(const Actor &actor) {}
+void BaseScene::onActorExit(const Actor &actor) {}
+void BaseScene::onRigidSetup(const RigidBody &rigid) {}
+void BaseScene::onRigidExit(const RigidBody &rigid) {}
 
 
 
-ramBaseScene* ramBaseScene::getPtr()
+BaseScene* BaseScene::getPtr()
 {
 	return this;
 }

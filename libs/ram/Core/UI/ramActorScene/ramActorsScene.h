@@ -25,90 +25,96 @@
 /*
  almost all things of this class depends on ofxUI
 */
-class ramActorsScene : public ramBaseScene
-{
-public:
-	
-	ramActorsScene();
-	~ramActorsScene();
-	
-	string getName() const;
-	void setupControlPanel();
-	void setup();
-	void update();
-	void draw();
-	void drawHUD();
-	
-	void onActorSetup(const ramActor &actor);
-	void onRigidSetup(const ramRigidBody &rigid);
-	void onActorExit(const ramActor &actor);
-	void onRigidExit(const ramRigidBody &rigid);
-	
-	void gotMessage(ofMessage &msg);
-	void onKeyPressed(ofKeyEventArgs &e);
-	void onValueChanged(ofxUIEventArgs &e);
-	void onFileDrop(ofDragInfo &e);
-    void loadFile(const string &filePath);
-	
-	void showAll(bool showAll);
-	void resetPosAll(bool showAll);
-    void pauseAll(bool bPause);
-    void recAll(bool bStartRec);
-	bool getShowAll();
-    
-	void setNeedsUpdatePanel(const bool needsUpdate);
-    bool needsUpdatePanel();
-    
-	void drawNodes(const ramNodeArray &NA); // experimental
-    
-    void addSegment(BaseSegment *newSegment);
-	void removeControlSegment(const string& name);
-	
-private:
-	
-	static const int MAX_ACTORS = 4;
-	
-    /// playback
-	ramTSVCoder coder;
-    
-	
-	/// internal use
-	void rebuildControlPanel();
-	void createPanelHeader();
-    
-    
-	/// instances which are controlled programatically
-	ofxUILabelToggle *btnShowAll;
-	ofxUILabelToggle *btnPause;
-	ofxUILabelToggle *btnRecAll;
 
+namespace rdtk{
+	class ActorsScene : public BaseScene
+	{
+	public:
+		
+		ActorsScene();
+		~ActorsScene();
+		
+		string getName() const;
+		void setupControlPanel();
+		void setup();
+		void update();
+		void draw();
+		void drawHUD();
+		
+		void onActorSetup(const Actor &actor);
+		void onRigidSetup(const RigidBody &rigid);
+		void onActorExit(const Actor &actor);
+		void onRigidExit(const RigidBody &rigid);
+		
+		void gotMessage(ofMessage &msg);
+		void onKeyPressed(ofKeyEventArgs &e);
+		void onValueChanged(ofxUIEventArgs &e);
+		void onFileDrop(ofDragInfo &e);
+		void loadFile(const string &filePath);
+		
+		void showAll(bool showAll);
+		void resetPosAll(bool showAll);
+		void pauseAll(bool bPause);
+		void recAll(bool bStartRec);
+		bool getShowAll();
+		
+		void setNeedsUpdatePanel(const bool needsUpdate);
+		bool needsUpdatePanel();
+		
+		void drawNodes(const NodeArray &NA); // experimental
+		
+		void addSegment(BaseSegment *newSegment);
+		void removeControlSegment(const string& name);
+		
+	private:
+		
+		static const int MAX_ACTORS = 4;
+		
+		/// playback
+		TSVCoder coder;
+		
+		
+		/// internal use
+		void rebuildControlPanel();
+		void createPanelHeader();
+		
+		
+		/// instances which are controlled programatically
+		ofxUILabelToggle *btnShowAll;
+		ofxUILabelToggle *btnPause;
+		ofxUILabelToggle *btnRecAll;
+		
+		
+		/// ActorsPanel
+		ofxUICanvasPlus *mLocalPanel;
+		
+		
+		/// ControlSegment map
+		map<string, BaseSegment*> mSegmentsMap;
+		typedef map<string, BaseSegment*>::iterator SegmentsIter;
+		
+		
+		/// fonts
+		ofTrueTypeFont font;
+		float fontSize;
+		
+		
+		/// update flags
+		bool bNeedUpdatePanel;
+		bool bRecording;
+		
+		
+		/// draw method flags
+		ofLight light;
+		bool bShowAllActor;
+		bool bRecAllActor;
+		bool bUseSimpleActor;
+		bool bUseShading;
+		
+		bool loadNewFile;
+		string newFilePath;
+	};
 	
-	/// ActorsPanel
-	ofxUICanvasPlus *mLocalPanel;
-	
-	
-	/// ControlSegment map
-	map<string, BaseSegment*> mSegmentsMap;
-	typedef map<string, BaseSegment*>::iterator SegmentsIter;
-	
-	
-	/// fonts
-	ofTrueTypeFont font;
-	float fontSize;
-	
-	
-	/// update flags
-	bool bNeedUpdatePanel;
-	bool bRecording;
-	
-	
-	/// draw method flags
-	ofLight light;
-	bool bShowAllActor;
-	bool bRecAllActor;
-	bool bUseSimpleActor;
-	bool bUseShading;
-    
-    bool loadNewFile;
-    string newFilePath;
-};
+}
+
+typedef rdtk::ActorsScene OF_DEPRECATED(ramActorsScene);

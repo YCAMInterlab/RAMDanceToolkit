@@ -17,26 +17,28 @@
 
 #include "ramSoftBodyPrimitive.h"
 
-ramSoftBodyPrimitive::ramSoftBodyPrimitive()
+using namespace rdtk;
+
+SoftBodyPrimitive::SoftBodyPrimitive()
 {
-	ramPhysics::instance().registerSoftBodyPrimitive(this);
+	Physics::instance().registerSoftBodyPrimitive(this);
 }
 
-ramSoftBodyPrimitive::~ramSoftBodyPrimitive()
+SoftBodyPrimitive::~SoftBodyPrimitive()
 {
-	ramPhysics::instance().unregisterSoftBodyPrimitive(this);
+	Physics::instance().unregisterSoftBodyPrimitive(this);
 }
 
-ofxBt::SoftBodyWorld& ramSoftBodyPrimitive::getWorld()
+ofxBt::SoftBodyWorld& SoftBodyPrimitive::getWorld()
 {
-	return ramPhysics::instance().getSoftBodyWorld();
+	return Physics::instance().getSoftBodyWorld();
 }
 
-void ramSoftBodyPrimitive::internal_update() {}
+void SoftBodyPrimitive::internal_update() {}
 
 //
 
-ramRopePrimitive::ramRopePrimitive(const ofVec3f p0, const ofVec3f p1)
+RopePrimitive::RopePrimitive(const ofVec3f p0, const ofVec3f p1)
 {
 	body = getWorld().addRope(p0, p1);
 }

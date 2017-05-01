@@ -20,42 +20,47 @@
 #include "ofxUITabbedCanvas.h"
 #include "ramNodeFinder.h"
 
-class ramPresetTab : public ofxUITab
-{
-    
-protected:
-    
-    // preset scenes
-	ofxUIToggleMatrix* matrix;
-    
-    
-    // preset camera positions
-    ofxUIRadio* preset_cam_radio;
-	int preset_cam_index;
-    
-    
-    // nodecam
-    bool use_node_cam;
-    bool cam_position;
-    bool cam_look_at;
-    
-    ramNodeFinder nf_pos;
-    ramNodeFinder nf_look_at;
-    
-    ramNode node_pos;
-    ramNode node_look_at;
-    
-	// preset scenes
-	void callPreset(size_t preset_id);
-	void setEnableScene(size_t idx, bool enable);
-	void disableAllScene();
+namespace rdtk{
+	class PresetTab : public ofxUITab
+	{
+		
+	protected:
+		
+		// preset scenes
+		ofxUIToggleMatrix* matrix;
+		
+		
+		// preset camera positions
+		ofxUIRadio* preset_cam_radio;
+		int preset_cam_index;
+		
+		
+		// nodecam
+		bool use_node_cam;
+		bool cam_position;
+		bool cam_look_at;
+		
+		NodeFinder nf_pos;
+		NodeFinder nf_look_at;
+		
+		Node node_pos;
+		Node node_look_at;
+		
+		// preset scenes
+		void callPreset(size_t preset_id);
+		void setEnableScene(size_t idx, bool enable);
+		void disableAllScene();
+		
+	public:
+		
+		PresetTab();
+		void setup(bool usePresetScenes);
+		void update(ofEventArgs& e);
+		void draw(ofEventArgs& e);
+		void guiEvent(ofxUIEventArgs &e);
+		
+	};
 	
-public:
-    
-	ramPresetTab();
-	void setup(bool usePresetScenes);
-	void update(ofEventArgs& e);
-	void draw(ofEventArgs& e);
-	void guiEvent(ofxUIEventArgs &e);
-    
-};
+}
+
+typedef rdtk::PresetTab OF_DEPRECATED(ramPresetTab);

@@ -19,42 +19,46 @@
 
 #include "ofMain.h"
 
-struct ramNodeIdentifer
-{
-	string name;
-	int index;
-
-	ramNodeIdentifer() : name(""), index(-1) {}
-	ramNodeIdentifer(int index) : name(""), index(index) {}
-	ramNodeIdentifer(const string &name) : name(name), index(-1) {}
-	ramNodeIdentifer(const string &name, int index) : name(name), index(index) {}
-	ramNodeIdentifer(const ramNodeIdentifer& copy) { *this = copy; }
-
-	ramNodeIdentifer& operator=(const ramNodeIdentifer& copy)
+namespace rdtk{
+	struct NodeIdentifer
 	{
-		name = copy.name;
-		index = copy.index;
-		return *this;
-	}
+		string name;
+		int index;
+		
+		NodeIdentifer() : name(""), index(-1) {}
+		NodeIdentifer(int index) : name(""), index(index) {}
+		NodeIdentifer(const string &name) : name(name), index(-1) {}
+		NodeIdentifer(const string &name, int index) : name(name), index(index) {}
+		NodeIdentifer(const NodeIdentifer& copy) { *this = copy; }
+		
+		NodeIdentifer& operator=(const NodeIdentifer& copy)
+		{
+			name = copy.name;
+			index = copy.index;
+			return *this;
+		}
+		
+		void set(const string &name, int index) { this->name = name; this->index = index; }
+		void set(const string &name) { this->name = name; this->index = -1; }
+		void set(int index) { this->name = ""; this->index = index; }
+		
+		void clear() { name = ""; index = -1; }
+		
+		bool isValid() const
+		{
+			if (name == "" && index == -1) return false;
+			else return true;
+		}
+		
+		friend ostream& operator<<(ostream &os, const NodeIdentifer& o)
+		{
+			if (o.isValid())
+				os << "['" << o.name << "' : " << o.index << "]";
+			else
+				os << "(null)";
+			return os;
+		}
+	};
+}
 
-	void set(const string &name, int index) { this->name = name; this->index = index; }
-	void set(const string &name) { this->name = name; this->index = -1; }
-	void set(int index) { this->name = ""; this->index = index; }
-
-	void clear() { name = ""; index = -1; }
-
-	bool isValid() const
-	{
-		if (name == "" && index == -1) return false;
-		else return true;
-	}
-
-	friend ostream& operator<<(ostream &os, const ramNodeIdentifer& o)
-	{
-		if (o.isValid())
-			os << "['" << o.name << "' : " << o.index << "]";
-		else
-			os << "(null)";
-		return os;
-	}
-};
+typedef rdtk::NodeIdentifer OF_DEPRECATED(ramNodeIdentifer);

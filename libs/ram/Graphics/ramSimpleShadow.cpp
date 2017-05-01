@@ -21,13 +21,15 @@
 
 #include <numeric>
 
-void ramSimpleShadow::setup()
+using namespace rdtk;
+
+void SimpleShadow::setup()
 {
 	enable = true;
 
 	// defulat light position
 	setLightPosition(ofVec3f(-100.0f, 500.0f, 200.0f));
-	shadow_color.set(ramColor::SHADOW);
+	shadow_color.set(Color::SHADOW);
 
 #define _S(src) # src
 
@@ -52,7 +54,7 @@ void ramSimpleShadow::setup()
 	shader.linkProgram();
 }
 
-void ramSimpleShadow::setLightPosition(ofVec3f pos)
+void SimpleShadow::setLightPosition(ofVec3f pos)
 {
 	static const float groundplane[] = { 0.0, 1.0, 0.0, 1.0 };
 	const float* lightpos = pos.getPtr();
@@ -73,12 +75,12 @@ void ramSimpleShadow::setLightPosition(ofVec3f pos)
 	}
 }
 
-void ramSimpleShadow::setShadowColor(ofFloatColor color)
+void SimpleShadow::setShadowColor(ofFloatColor color)
 {
 	shadow_color = color;
 }
 
-void ramSimpleShadow::begin()
+void SimpleShadow::begin()
 {
 	assert(enable);
 
@@ -86,7 +88,7 @@ void ramSimpleShadow::begin()
 
 	glEnable(GL_DEPTH_TEST);
 
-	ofMatrix4x4 modelview_matrix = ramCameraManager::instance().getActiveCamera().getModelViewMatrix();
+	ofMatrix4x4 modelview_matrix = CameraManager::instance().getActiveCamera().getModelViewMatrix();
 	ofMatrix4x4 modelview_matrix_inv = modelview_matrix.getInverse();
 
 	shader.begin();
@@ -96,14 +98,14 @@ void ramSimpleShadow::begin()
 	shader.setUniformMatrix4f("modelview_matrix_inv", modelview_matrix_inv);
 }
 
-void ramSimpleShadow::end()
+void SimpleShadow::end()
 {
 	shader.end();
 
 	glPopAttrib();
 }
 
-void ramSimpleShadow::setShadowAlpha(float alpha)
+void SimpleShadow::setShadowAlpha(float alpha)
 {
 	shadow_color = ofFloatColor(shadow_color, alpha);
 }

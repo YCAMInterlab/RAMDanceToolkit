@@ -23,6 +23,7 @@
 #include "ramActorsScene.h"
 
 #ifdef RAM_GUI_SYSTEM_OFXUI
+using namespace rdtk;
 
 struct ButtonEventListener
 {
@@ -42,13 +43,13 @@ struct ButtonEventListener
 	}
 };
 
-ramPreferencesTab& ramControlPanel::getPreferencesTab() { return preferencesTab; }
-ofxUITabbedCanvas& ramControlPanel::getSceneTabs() { return mSceneTabs; }
-void ramControlPanel::save(const string& path) { getSceneTabs().saveSettings(path); }
-void ramControlPanel::load(const string& path) { getSceneTabs().loadSettings(path); }
-ofxUICanvasPlus* ramControlPanel::getCurrentUIContext() { return current_panel; }
+PreferencesTab& ControlPanel::getPreferencesTab() { return preferencesTab; }
+ofxUITabbedCanvas& ControlPanel::getSceneTabs() { return mSceneTabs; }
+void ControlPanel::save(const string& path) { getSceneTabs().saveSettings(path); }
+void ControlPanel::load(const string& path) { getSceneTabs().loadSettings(path); }
+ofxUICanvasPlus* ControlPanel::getCurrentUIContext() { return current_panel; }
 
-ofEvent<ofEventArgs>& ramControlPanel::addButton(const string& name)
+ofEvent<ofEventArgs>& ControlPanel::addButton(const string& name)
 {
 	ofxUIButton *button = current_panel->addButton(name, false, 30, 30);
 	
@@ -59,34 +60,34 @@ ofEvent<ofEventArgs>& ramControlPanel::addButton(const string& name)
 }
 
 
-ramControlPanel *ramControlPanel::_instance = NULL;
+ControlPanel *ControlPanel::_instance = NULL;
 
-ramControlPanel& ramControlPanel::instance()
+ControlPanel& ControlPanel::instance()
 {
 	if (_instance == NULL)
 	{
-		_instance = new ramControlPanel();
+		_instance = new ControlPanel();
 	}
 	return *_instance;
 }
 
-void ramControlPanel::setUsePresetScenes(bool bUse)
+void ControlPanel::setUsePresetScenes(bool bUse)
 {
 	
 }
 
-ramControlPanel::ramControlPanel()
+ControlPanel::ControlPanel()
 :kDim(16)
 ,kXInit(OFX_UI_GLOBAL_WIDGET_SPACING)
 ,kLength(320 - kXInit)
 {
 }
 
-ramControlPanel::~ramControlPanel()
+ControlPanel::~ControlPanel()
 {
 }
 
-void ramControlPanel::setup(bool usePresetScenes)
+void ControlPanel::setup(bool usePresetScenes)
 {
 	addPanel(presetTab);
 	addPanel(preferencesTab);
@@ -94,22 +95,22 @@ void ramControlPanel::setup(bool usePresetScenes)
 	
 	presetTab.setup(usePresetScenes);
 	
-	ofAddListener(ofEvents().update, this, &ramControlPanel::update);
-	ofAddListener(mSceneTabs.newGUIEvent, this, &ramControlPanel::guiEvent);
+	ofAddListener(ofEvents().update, this, &ControlPanel::update);
+	ofAddListener(mSceneTabs.newGUIEvent, this, &ControlPanel::guiEvent);
 }
 
-void ramControlPanel::update(ofEventArgs &e)
+void ControlPanel::update(ofEventArgs &e)
 {
 	if(!ofGetMousePressed())
 	{
 		bool hover = mSceneTabs.isHit(ofGetMouseX(), ofGetMouseY());
-		ramCameraManager::instance().setEnableInteractiveCamera(!hover);
+		CameraManager::instance().setEnableInteractiveCamera(!hover);
 	}
 }
 
 //
 
-void ramControlPanel::addPanel(ramUnit* control, bool enableable)
+void ControlPanel::addPanel(Unit* control, bool enableable)
 {
 	ofxUITab *panel = new ofxUITab(control->getName(), enableable);
 	current_panel = panel;	
@@ -119,38 +120,38 @@ void ramControlPanel::addPanel(ramUnit* control, bool enableable)
 	panel->autoSizeToFitWidgets();
 }
 
-void ramControlPanel::addPanel(ofxUITab& tab)
+void ControlPanel::addPanel(ofxUITab& tab)
 {
 	scenes.push_back(NULL);
 	getSceneTabs().add(&tab);
 }
 
-void ramControlPanel::addSection(const string& name)
+void ControlPanel::addSection(const string& name)
 {
 	current_panel->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_MEDIUM));
 	current_panel->addSpacer(kLength, 2);
 	current_panel->autoSizeToFitWidgets();
 }
 
-void ramControlPanel::addSeparator()
+void ControlPanel::addSeparator()
 {
 	current_panel->addSpacer(kLength, 2);
 	current_panel->autoSizeToFitWidgets();
 }
 
-void ramControlPanel::addLabel(const string& content)
+void ControlPanel::addLabel(const string& content)
 {
 	current_panel->addWidgetDown(new ofxUILabel(content, OFX_UI_FONT_MEDIUM));
 	current_panel->autoSizeToFitWidgets();
 }
 
-void ramControlPanel::addToggle(const string& name, bool *value)
+void ControlPanel::addToggle(const string& name, bool *value)
 {
 	current_panel->addToggle(name, value, 30, 30);
 	current_panel->autoSizeToFitWidgets();
 }
 
-void ramControlPanel::addMultiToggle(const string& name, const vector<string>& content, int *value)
+void ControlPanel::addMultiToggle(const string& name, const vector<string>& content, int *value)
 {
 	assert(false);
 }
@@ -181,7 +182,7 @@ struct RadioGroupListener
 	}
 };
 
-ofxUIRadio* ramControlPanel::addRadioGroup(const string& name, const vector<string>& content, int *value)
+ofxUIRadio* ControlPanel::addRadioGroup(const string& name, const vector<string>& content, int *value)
 {
 	ofxUIRadio *o = current_panel->addRadio(name, content, OFX_UI_ORIENTATION_VERTICAL, kDim, kDim);
 	
@@ -192,18 +193,18 @@ ofxUIRadio* ramControlPanel::addRadioGroup(const string& name, const vector<stri
 	return o;
 }
 
-void ramControlPanel::addDropdown(const string& name, const vector<string>& content, int *value)
+void ControlPanel::addDropdown(const string& name, const vector<string>& content, int *value)
 {
 	assert(false);
 }
 
-void ramControlPanel::addSlider(const string& name, float min_value, float max_value, float *value)
+void ControlPanel::addSlider(const string& name, float min_value, float max_value, float *value)
 {
 	current_panel->addSlider(name, min_value, max_value, value, kLength, kDim);
 	current_panel->autoSizeToFitWidgets();
 }
 
-void ramControlPanel::addIntSlider(const string& name, int min_value, int max_value, int *value)
+void ControlPanel::addIntSlider(const string& name, int min_value, int max_value, int *value)
 {
 	current_panel->addIntSlider(name, min_value, max_value, value, kLength, kDim);
 	current_panel->autoSizeToFitWidgets();
@@ -232,7 +233,7 @@ struct ColorSelectorListener
 	}
 };
 
-void ramControlPanel::addColorSelector(const string& name, ofFloatColor *value)
+void ControlPanel::addColorSelector(const string& name, ofFloatColor *value)
 {
 	current_panel->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_MEDIUM));
 	current_panel->addSlider("R", 0, 1, &value->r, 90, kDim);
@@ -243,12 +244,12 @@ void ramControlPanel::addColorSelector(const string& name, ofFloatColor *value)
 	current_panel->autoSizeToFitWidgets();
 }
 
-void ramControlPanel::remove(const string& name)
+void ControlPanel::remove(const string& name)
 {
 	assert(false);
 }
 
-void ramControlPanel::guiEvent(ofxUIEventArgs &e)
+void ControlPanel::guiEvent(ofxUIEventArgs &e)
 {
 	for(int i = 0; i < scenes.size(); i++) 
 	{
@@ -259,5 +260,9 @@ void ramControlPanel::guiEvent(ofxUIEventArgs &e)
 		}
 	}
 }
+
+rdtk::ControlPanel& ramGetGUI(){return rdtk::GetGUI();}
+inline void ramSaveSettings(const string filename){rdtk::SaveSettings(filename);}
+inline void ramLoadSettings(const string filename){rdtk::LoadSettings(filename);}
 
 #endif

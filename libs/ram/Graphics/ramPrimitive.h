@@ -20,96 +20,105 @@
 #include "ofMain.h"
 #include "ramPhysics.h"
 
-class ramPhysics;
+namespace rdtk{
+	class Physics;
+	
+	class BasePrimitive
+	{
+		friend class Physics;
+		
+	public:
+		
+		virtual ~BasePrimitive() {}
+		
+	private:
+		
+		virtual void internal_update() {}
+		
+	};
+	
+	class Primitive : public ofNode, public BasePrimitive
+	{
+		friend class Physics;
+		
+	public:
+		
+		Primitive();
+		~Primitive();
+		
+		ofxBt::RigidBody getRigidBody() { return body; }
+		
+		void updatePhysicsTransform();
+		
+	protected:
+		
+		ofxBt::RigidBody body;
+		ofxBt::World& getWorld();
+		
+	private:
+		
+		void internal_update();
+		
+	};
+	
+	class BoxPrimitive : public Primitive
+	{
+	public:
+		
+		BoxPrimitive(float size = 100);
+		BoxPrimitive(const ofVec3f& size);
+		
+		BoxPrimitive(const ofVec3f& pos, float size);
+		BoxPrimitive(const ofVec3f& pos, const ofVec3f& size);
+		
+		BoxPrimitive(const ofMatrix4x4& mat, float size);
+		BoxPrimitive(const ofMatrix4x4& mat, const ofVec3f& size);
+		
+	protected:
+		void customDraw();
+	};
+	
+	class SpherePrimitive : public Primitive
+	{
+	public:
+		
+		SpherePrimitive(float radius = 100);
+		SpherePrimitive(const ofVec3f& pos, float radius = 100);
+		
+	protected:
+		void customDraw();
+	};
+	
+	class CylinderPrimitive : public Primitive
+	{
+	public:
+		
+		CylinderPrimitive(float radius = 100, float height = 100);
+		CylinderPrimitive(const ofMatrix4x4& mat, float radius = 100, float height = 100);
+		CylinderPrimitive(const ofVec3f& pos, float radius = 100, float height = 100);
+		
+	protected:
+		void customDraw();
+	};
+	
+	class PyramidPrimitive : public Primitive
+	{
+	public:
+		
+		PyramidPrimitive(float size = 100);
+		PyramidPrimitive(const ofMatrix4x4& mat, float size = 100);
+		PyramidPrimitive(const ofVec3f& pos, float size = 100);
+		
+	protected:
+		void customDraw();
+		
+		ofMesh mesh;
+	};
+}
 
-class ramBasePrimitive
-{
-	friend class ramPhysics;
-
-public:
-
-	virtual ~ramBasePrimitive() {}
-
-private:
-
-	virtual void internal_update() {}
-
-};
-
-class ramPrimitive : public ofNode, public ramBasePrimitive
-{
-	friend class ramPhysics;
-
-public:
-
-	ramPrimitive();
-	~ramPrimitive();
-
-	ofxBt::RigidBody getRigidBody() { return body; }
-
-	void updatePhysicsTransform();
-
-protected:
-
-	ofxBt::RigidBody body;
-	ofxBt::World& getWorld();
-
-private:
-
-	void internal_update();
-
-};
-
-class ramBoxPrimitive : public ramPrimitive
-{
-public:
-
-	ramBoxPrimitive(float size = 100);
-	ramBoxPrimitive(const ofVec3f& size);
-
-	ramBoxPrimitive(const ofVec3f& pos, float size);
-	ramBoxPrimitive(const ofVec3f& pos, const ofVec3f& size);
-
-	ramBoxPrimitive(const ofMatrix4x4& mat, float size);
-	ramBoxPrimitive(const ofMatrix4x4& mat, const ofVec3f& size);
-
-protected:
-	void customDraw();
-};
-
-class ramSpherePrimitive : public ramPrimitive
-{
-public:
-
-	ramSpherePrimitive(float radius = 100);
-	ramSpherePrimitive(const ofVec3f& pos, float radius = 100);
-
-protected:
-	void customDraw();
-};
-
-class ramCylinderPrimitive : public ramPrimitive
-{
-public:
-
-	ramCylinderPrimitive(float radius = 100, float height = 100);
-	ramCylinderPrimitive(const ofMatrix4x4& mat, float radius = 100, float height = 100);
-	ramCylinderPrimitive(const ofVec3f& pos, float radius = 100, float height = 100);
-
-protected:
-	void customDraw();
-};
-
-class ramPyramidPrimitive : public ramPrimitive
-{
-public:
-
-	ramPyramidPrimitive(float size = 100);
-	ramPyramidPrimitive(const ofMatrix4x4& mat, float size = 100);
-	ramPyramidPrimitive(const ofVec3f& pos, float size = 100);
-
-protected:
-	void customDraw();
-
-	ofMesh mesh;
-};
+typedef rdtk::BasePrimitive			OF_DEPRECATED(ramBasePrimitive);
+typedef rdtk::Primitive				OF_DEPRECATED(ramPrimitive);
+typedef rdtk::BoxPrimitive			OF_DEPRECATED(ramBoxPrimitive);
+typedef rdtk::SpherePrimitive		OF_DEPRECATED(ramSpherePrimitive);
+typedef rdtk::CylinderPrimitive		OF_DEPRECATED(ramCylinderPrimitive);
+typedef rdtk::PyramidPrimitive		OF_DEPRECATED(ramPyramidPrimitive);

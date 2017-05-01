@@ -19,6 +19,8 @@
 
 #include "ramUnit.h"
 
-class ramBaseRecognizer : public ramUnit {
-public:
-};
+namespace rdtk{
+	class BaseRecognizer : public Unit {
+	public:
+	};
+}

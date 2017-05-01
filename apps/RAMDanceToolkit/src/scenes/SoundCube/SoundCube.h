@@ -71,7 +71,7 @@ public:
 			
 			player->play();
 			
-			event.setTrigger(RAM_TRIGGER_BOTH);
+			event.setTrigger(rdtk::RAM_TRIGGER_BOTH);
 		}
 		
 		void draw(float fade = 0.1)

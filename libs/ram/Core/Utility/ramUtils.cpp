@@ -17,16 +17,18 @@
 
 #include "ramUtils.h"
 
-bool ramDeadFunctor::operator()(const ramFading& fading) const {
+using namespace rdtk;
+
+bool DeadFunctor::operator()(const Fading& fading) const {
 	return fading.isDead(lifespan);
 }
 
-ramFading::ramFading() {
+Fading::Fading() {
 	birth = ofGetElapsedTimef();
 }
-float ramFading::getLife(float lifespan) const {
+float Fading::getLife(float lifespan) const {
 	return 1. - ((ofGetElapsedTimef() - birth) / lifespan);
 }
-bool ramFading::isDead(float lifespan) const {
+bool Fading::isDead(float lifespan) const {
 	return getLife(lifespan) < 0;
 }

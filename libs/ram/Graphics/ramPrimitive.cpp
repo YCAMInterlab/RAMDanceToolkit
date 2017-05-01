@@ -17,21 +17,23 @@
 
 #include "ramPrimitive.h"
 
-ramPrimitive::ramPrimitive()
+using namespace rdtk;
+
+Primitive::Primitive()
 {
-	ramPhysics::instance().registerRigidBodyPrimitive(this);
+	Physics::instance().registerRigidBodyPrimitive(this);
 }
-ramPrimitive::~ramPrimitive()
+Primitive::~Primitive()
 {
-	ramPhysics::instance().unregisterRigidBodyPrimitive(this);
+	Physics::instance().unregisterRigidBodyPrimitive(this);
 }
 
-ofxBt::World& ramPrimitive::getWorld()
+ofxBt::World& Primitive::getWorld()
 {
-	return ramPhysics::instance().getWorld();
+	return Physics::instance().getWorld();
 }
 
-void ramPrimitive::internal_update()
+void Primitive::internal_update()
 {
 	if (body)
 	{
@@ -40,87 +42,87 @@ void ramPrimitive::internal_update()
 	}
 }
 
-void ramPrimitive::updatePhysicsTransform()
+void Primitive::updatePhysicsTransform()
 {
 	body.setTransform(getGlobalTransformMatrix());
 }
 
-#pragma mark - ramBoxPrimitive
+#pragma mark - BoxPrimitive
 
-ramBoxPrimitive::ramBoxPrimitive(float size)
+BoxPrimitive::BoxPrimitive(float size)
 {
 	body = getWorld().addBox(ofVec3f(size), ofVec3f());
 }
 
-ramBoxPrimitive::ramBoxPrimitive(const ofVec3f& size)
+BoxPrimitive::BoxPrimitive(const ofVec3f& size)
 {
 	body = getWorld().addBox(size, ofVec3f());
 }
 
-ramBoxPrimitive::ramBoxPrimitive(const ofVec3f& pos, float size)
+BoxPrimitive::BoxPrimitive(const ofVec3f& pos, float size)
 {
 	body = getWorld().addBox(ofVec3f(size), pos);
 }
 
-ramBoxPrimitive::ramBoxPrimitive(const ofVec3f& pos, const ofVec3f& size)
+BoxPrimitive::BoxPrimitive(const ofVec3f& pos, const ofVec3f& size)
 {
 	body = getWorld().addBox(size, pos);
 }
 
-ramBoxPrimitive::ramBoxPrimitive(const ofMatrix4x4& mat, float size)
+BoxPrimitive::BoxPrimitive(const ofMatrix4x4& mat, float size)
 {
 	body = getWorld().addBox(ofVec3f(size), mat.getTranslation(), mat.getRotate().getEuler());
 }
 
-ramBoxPrimitive::ramBoxPrimitive(const ofMatrix4x4& mat, const ofVec3f& size)
+BoxPrimitive::BoxPrimitive(const ofMatrix4x4& mat, const ofVec3f& size)
 {
 	body = getWorld().addBox(size, mat.getTranslation(), mat.getRotate().getEuler());
 }
 
-void ramBoxPrimitive::customDraw()
+void BoxPrimitive::customDraw()
 {
 	ofVec3f size = body.getSize();
 	glScalef(size.x, size.y, size.z);
 	ofDrawBox(2);
 }
 
-#pragma mark - ramSpherePrimitive
+#pragma mark - SpherePrimitive
 
-ramSpherePrimitive::ramSpherePrimitive(float size)
+SpherePrimitive::SpherePrimitive(float size)
 {
 	body = getWorld().addSphere(size * 0.5, ofVec3f());
 }
 
-ramSpherePrimitive::ramSpherePrimitive(const ofVec3f& pos, float size)
+SpherePrimitive::SpherePrimitive(const ofVec3f& pos, float size)
 {
 	body = getWorld().addSphere(size * 0.5, pos);
 }
 
-void ramSpherePrimitive::customDraw()
+void SpherePrimitive::customDraw()
 {
 	ofVec3f size = body.getSize();
 	glScalef(size.x, size.x, size.x);
 	ofDrawSphere(1);
 }
 
-#pragma mark - ramCylinderPrimitive
+#pragma mark - CylinderPrimitive
 
-ramCylinderPrimitive::ramCylinderPrimitive(float radius, float height)
+CylinderPrimitive::CylinderPrimitive(float radius, float height)
 {
 	body = getWorld().addCylinder(radius, height * 0.5, ofVec3f(), ofVec3f());
 }
 
-ramCylinderPrimitive::ramCylinderPrimitive(const ofMatrix4x4& mat, float radius, float height)
+CylinderPrimitive::CylinderPrimitive(const ofMatrix4x4& mat, float radius, float height)
 {
 	body = getWorld().addCylinder(radius, height * 0.5, mat.getTranslation(), mat.getRotate().getEuler());
 }
 
-ramCylinderPrimitive::ramCylinderPrimitive(const ofVec3f& pos, float radius, float height)
+CylinderPrimitive::CylinderPrimitive(const ofVec3f& pos, float radius, float height)
 {
 	body = getWorld().addCylinder(radius, height * 0.5, pos);
 }
 
-void ramCylinderPrimitive::customDraw()
+void CylinderPrimitive::customDraw()
 {
 	ofVec3f size = body.getSize();
 
@@ -176,9 +178,9 @@ void ramCylinderPrimitive::customDraw()
 	glPopAttrib();
 }
 
-// ramPyramidPrimitive
+// PyramidPrimitive
 
-ramPyramidPrimitive::ramPyramidPrimitive(float size)
+PyramidPrimitive::PyramidPrimitive(float size)
 {
 	size *= 0.5;
 
@@ -195,7 +197,7 @@ ramPyramidPrimitive::ramPyramidPrimitive(float size)
 	body = getWorld().addMesh(mesh, ofVec3f(), ofVec3f());
 }
 
-ramPyramidPrimitive::ramPyramidPrimitive(const ofMatrix4x4& mat, float size)
+PyramidPrimitive::PyramidPrimitive(const ofMatrix4x4& mat, float size)
 {
 	size *= 0.5;
 
@@ -212,7 +214,7 @@ ramPyramidPrimitive::ramPyramidPrimitive(const ofMatrix4x4& mat, float size)
 	body = getWorld().addMesh(mesh, mat.getTranslation(), mat.getRotate().getEuler());
 }
 
-ramPyramidPrimitive::ramPyramidPrimitive(const ofVec3f& pos, float size)
+PyramidPrimitive::PyramidPrimitive(const ofVec3f& pos, float size)
 {
 	size *= 0.5;
 
@@ -229,7 +231,7 @@ ramPyramidPrimitive::ramPyramidPrimitive(const ofVec3f& pos, float size)
 	body = getWorld().addMesh(mesh, pos);
 }
 
-void ramPyramidPrimitive::customDraw()
+void PyramidPrimitive::customDraw()
 {
 	if (ofGetStyle().bFill)
 		mesh.draw();

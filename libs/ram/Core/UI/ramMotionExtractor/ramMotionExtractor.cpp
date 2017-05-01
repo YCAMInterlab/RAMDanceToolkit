@@ -8,6 +8,8 @@
 
 #include "ramMotionExtractor.h"
 
+using namespace rdtk;
+
 static ofColor
 uiThemecb(128, 192),
 uiThemeco(192, 192),
@@ -18,7 +20,7 @@ uiThemecp(128, 192),
 uiThemecpo(255, 192);
 
 /* Call setupControlPanel of each scenes. */
-void ramMotionExtractor::setupControlPanel(ramBaseScene *scene_, ofVec2f canvasPos){
+void MotionExtractor::setupControlPanel(BaseScene *scene_, ofVec2f canvasPos){
 
 	mMotionSmooth = 10.0;
 	mScenePtr = scene_;
@@ -37,7 +39,7 @@ void ramMotionExtractor::setupControlPanel(ramBaseScene *scene_, ofVec2f canvasP
 	mGui->addButton("Clear", false);
 	mGui->addSlider("Smooth", 1.0, 50.0, &mMotionSmooth);
 
-	vector<string> it = ramActorManager::instance().getNodeArrayNames();
+	vector<string> it = ActorManager::instance().getNodeArrayNames();
 	actorList = mGui->addSortableList("actorList", it);
 
 	mGui->setup();
@@ -45,31 +47,31 @@ void ramMotionExtractor::setupControlPanel(ramBaseScene *scene_, ofVec2f canvasP
 	mGui->setPosition(canvasPos.x,
 					  canvasPos.y);
 
-	parentGui = ramGetGUI().getCurrentUIContext();
+	parentGui = GetGUI().getCurrentUIContext();
 	parentGui->addWidget(mGui);
 
 	mGui->autoSizeToFitWidgets();
 	parentGui->autoSizeToFitWidgets();
 
-	ofAddListener(mGui->newGUIEvent, this, &ramMotionExtractor::guiEvent);
-	ofAddListener(ofEvents().mouseReleased, this, &ramMotionExtractor::mouseReleased);
+	ofAddListener(mGui->newGUIEvent, this, &MotionExtractor::guiEvent);
+	ofAddListener(ofEvents().mouseReleased, this, &MotionExtractor::mouseReleased);
 
 	receiver.addAddress("/ram/MEX/"+scene_->getName());
-	ramOscManager::instance().addReceiverTag(&receiver);
+	OscManager::instance().addReceiverTag(&receiver);
 
 }
 
-void ramMotionExtractor::pushFromID(int actorId, int jointId){
-	ramNodeIdentifer id;
+void MotionExtractor::pushFromID(int actorId, int jointId){
+	NodeIdentifer id;
 	id.set(jointId);
 
-	ramMotionPort *mp = new ramMotionPort(id);
+	MotionPort *mp = new MotionPort(id);
 	pushPort(mp, actorId);
 
 	refleshActorFromList();
 }
 
-void ramMotionExtractor::update(){
+void MotionExtractor::update(){
 
 	while (receiver.hasWaitingMessages()){
 		ofxOscMessage m;
@@ -83,7 +85,7 @@ void ramMotionExtractor::update(){
 
 		if (m.getAddress() == myAddr+"pop"){// 名前、ID
 
-			ramNodeFinder nf;
+			NodeFinder nf;
 			nf.set(m.getArgAsString(0), m.getArgAsInt32(0));
 			popPort(nf);
 
@@ -183,9 +185,9 @@ void ramMotionExtractor::update(){
 
 	//new actor
 
-	if (lastNumNodeArray != ramActorManager::instance().getNumNodeArray()){
+	if (lastNumNodeArray != ActorManager::instance().getNumNodeArray()){
 
-		vector<string> lst = ramActorManager::instance().getNodeArrayNames();
+		vector<string> lst = ActorManager::instance().getNodeArrayNames();
 		if (lst.size() == 2) lst.push_back("Dummy");
 
 		mGui->removeWidget(actorList);
@@ -196,18 +198,18 @@ void ramMotionExtractor::update(){
 
 	}
 
-	lastNumNodeArray = ramActorManager::instance().getNumNodeArray();
+	lastNumNodeArray = ActorManager::instance().getNumNodeArray();
 
 	//actor removed
 
 }
 
-void ramMotionExtractor::draw(){
-	for (int i = 0;i < ramActorManager::instance().getNumNodeArray();i++){
-		ramNodeArray arr = ramActorManager::instance().getNodeArray(i);
-		ofVec3f tp = arr.getNode(ramActor::JOINT_HEAD).getGlobalPosition();
+void MotionExtractor::draw(){
+	for (int i = 0;i < ActorManager::instance().getNumNodeArray();i++){
+		NodeArray arr = ActorManager::instance().getNodeArray(i);
+		ofVec3f tp = arr.getNode(Actor::JOINT_HEAD).getGlobalPosition();
 
-		ofDrawBitmapString(ramActorManager::instance().getNodeArrayNames()[i], tp);
+		ofDrawBitmapString(ActorManager::instance().getNodeArrayNames()[i], tp);
 	}
 
 	for (int i = 0;i < mMotionPort.size();i++){
@@ -243,19 +245,19 @@ void ramMotionExtractor::draw(){
 	}
 }
 
-void ramMotionExtractor::guiEvent(ofxUIEventArgs &e){
+void MotionExtractor::guiEvent(ofxUIEventArgs &e){
 	ofxUIWidget* w = e.widget;
 
 	if (w->getName() == "PushPort"){
 		if (w->getState() == OFX_UI_STATE_DOWN){
-			ramMotionPort* mp = new ramMotionPort(ramActorManager::instance().getLastSelectedNodeIdentifer());
+			MotionPort* mp = new MotionPort(ActorManager::instance().getLastSelectedNodeIdentifer());
 			pushPort(mp);
 		}
 	}
 
 	if (w->getName() == "PopPort"){
 		if (w->getState() == OFX_UI_STATE_DOWN){
-			ramNodeFinder nf = ramActorManager::instance().getLastSelectedNodeIdentifer();
+			NodeFinder nf = ActorManager::instance().getLastSelectedNodeIdentifer();
 			popPort(nf);
 		}
 	}
@@ -274,7 +276,7 @@ void ramMotionExtractor::guiEvent(ofxUIEventArgs &e){
 
 }
 
-void ramMotionExtractor::pushPort(ramMotionPort *mp, int actorId){
+void MotionExtractor::pushPort(MotionPort *mp, int actorId){
 
 	if (actorId == -1) mp->mActorIndex = getIndexFromName(mp->mFinder.name);
 	else mp->mActorIndex = actorId;
@@ -295,7 +297,7 @@ void ramMotionExtractor::pushPort(ramMotionPort *mp, int actorId){
 		}
 	}
 
-	ramNode nd;
+	Node nd;
 	if (mp->mFinder.findOne(nd) && !isDuplicate && isNoBlank){
 		mMotionPort.push_back(mp);
 	}else{
@@ -304,7 +306,7 @@ void ramMotionExtractor::pushPort(ramMotionPort *mp, int actorId){
 
 }
 
-void ramMotionExtractor::popPort(ramNodeFinder &nf){
+void MotionExtractor::popPort(NodeFinder &nf){
 
 	for (int i = 0;i < mMotionPort.size();i++){
 		if ((nf.name == mMotionPort[i]->mFinder.name) &&
@@ -318,13 +320,13 @@ void ramMotionExtractor::popPort(ramNodeFinder &nf){
 
 }
 
-void ramMotionExtractor::mouseReleased(ofMouseEventArgs &arg){
+void MotionExtractor::mouseReleased(ofMouseEventArgs &arg){
 
 	refleshActorFromList();
 	
 }
 
-void ramMotionExtractor::refleshActorFromList(){
+void MotionExtractor::refleshActorFromList(){
 	for (int i = 0;i < mMotionPort.size();i++){
 		if (mMotionPort[i]->mActorIndex < actorList->getListItems().size())
 			mMotionPort[i]->mFinder.name = actorList->getListItems()[mMotionPort[i]->mActorIndex]->getName();
@@ -333,22 +335,22 @@ void ramMotionExtractor::refleshActorFromList(){
 
 #pragma mark - utility
 
-int ramMotionExtractor::getIndexFromName(string name){
+int MotionExtractor::getIndexFromName(string name){
 	for (int i = 0;i < actorList->getListItems().size();i++){
 		if (actorList->getListItems()[i]->getName() == name) return i;
 	}
 	return 0;
 }
 
-void ramMotionExtractor::clearPorts(){
+void MotionExtractor::clearPorts(){
 	while (mMotionPort.size() > 0){
-		ramMotionPort* pt = mMotionPort[0];
+		MotionPort* pt = mMotionPort[0];
 		mMotionPort.erase(mMotionPort.begin());
 		delete pt;
 	}
 }
 
-void ramMotionExtractor::save(string file){
+void MotionExtractor::save(string file){
 
 	ofxXmlSettings xml;
 
@@ -364,7 +366,7 @@ void ramMotionExtractor::save(string file){
 
 }
 
-void ramMotionExtractor::load(string file){
+void MotionExtractor::load(string file){
 
 	ofxXmlSettings xml;
 	xml.load(file);
@@ -372,13 +374,13 @@ void ramMotionExtractor::load(string file){
 	clearPorts();
 	mMotionSmooth = xml.getValue("Smooth", 10.0);
 	for (int i = 0;i < xml.getNumTags("MPort");i++){
-		ramNodeIdentifer nodeIdent;
+		NodeIdentifer nodeIdent;
 
 		xml.pushTag("MPort",i);
 		nodeIdent.set(xml.getValue("Name", ""),
 					  xml.getValue("Joint", -1));
 
-		ramMotionPort* mp = new ramMotionPort(nodeIdent);
+		MotionPort* mp = new MotionPort(nodeIdent);
 		mp->mActorIndex = xml.getValue("ActorIndex", 0);
 		int targIndex = ofClamp(mp->mActorIndex, 0, actorList->getListItems().size()-1);
 
@@ -395,18 +397,18 @@ void ramMotionExtractor::load(string file){
 
 #pragma mark - Getter
 
-int ramMotionExtractor::getNumPort(){
+int MotionExtractor::getNumPort(){
 	return mMotionPort.size();
 }
 
-bool ramMotionExtractor::getIsExist(int port){
+bool MotionExtractor::getIsExist(int port){
 	if ((0 <= port) && (port < mMotionPort.size())) return true;
 	return false;
 }
 
-ramNode ramMotionExtractor::getNodeAt(int port){
+Node MotionExtractor::getNodeAt(int port){
 
-	ramNode nd;
+	Node nd;
 
 	if ((0 <= port) && (port < mMotionPort.size())){
 		if (!mMotionPort[port]->isBlank){
@@ -417,7 +419,7 @@ ramNode ramMotionExtractor::getNodeAt(int port){
 	return nd;
 }
 
-string ramMotionExtractor::getActorNameAt(int port){
+string MotionExtractor::getActorNameAt(int port){
 
 	if ((0 <= port) && (port < mMotionPort.size())){
 		return mMotionPort[port]->mFinder.name;
@@ -426,17 +428,17 @@ string ramMotionExtractor::getActorNameAt(int port){
 	return "N/A";
 }
 
-string ramMotionExtractor::getJointNameAt(int port){
+string MotionExtractor::getJointNameAt(int port){
 
 	if ((0 <= port) && (port < mMotionPort.size())){
 		int idx = mMotionPort[port]->mFinder.index;
-		if (idx != -1) return ramActor::getJointName(idx);
+		if (idx != -1) return Actor::getJointName(idx);
 	}
 
 	return "N/A";
 }
 
-int ramMotionExtractor::getJointIdAt(int port){
+int MotionExtractor::getJointIdAt(int port){
 
 	if ((0 <= port) && (port < mMotionPort.size())){
 		return mMotionPort[port]->mFinder.index;
@@ -445,18 +447,18 @@ int ramMotionExtractor::getJointIdAt(int port){
 
 }
 
-ofVec3f ramMotionExtractor::getPositionAt(int port,bool fixPosition){
+ofVec3f MotionExtractor::getPositionAt(int port,bool fixPosition){
     
-    vector <string> names = ramActorManager::instance().getNodeArrayNames();
+    vector <string> names = ActorManager::instance().getNodeArrayNames();
     bool exist = false;
     string actorName = getActorNameAt(port);
     for (int i = 0;i < names.size();i++){
         if (names[i] == actorName) exist = true;
     }
     if (exist){
-        ramNodeArray nd = ramActorManager::instance().getNodeArray(getActorNameAt(port));
+        NodeArray nd = ActorManager::instance().getNodeArray(getActorNameAt(port));
         ofVec3f pos = getNodeAt(port).getGlobalPosition();
-        ofVec3f abd = nd.getNode(ramActor::JOINT_ABDOMEN).getGlobalPosition();
+        ofVec3f abd = nd.getNode(Actor::JOINT_ABDOMEN).getGlobalPosition();
         abd.y = 0;
         if (fixPosition){
             pos -= abd;
@@ -469,13 +471,13 @@ ofVec3f ramMotionExtractor::getPositionAt(int port,bool fixPosition){
 
 }
 
-ofQuaternion ramMotionExtractor::getRotationAt(int port){
+ofQuaternion MotionExtractor::getRotationAt(int port){
 
 	return getNodeAt(port).getGlobalOrientation();
 
 }
 
-ofVec3f ramMotionExtractor::getVelocityAt(int port){
+ofVec3f MotionExtractor::getVelocityAt(int port){
 
 	ofVec3f v = ofVec3f(0,0,0);
 
@@ -486,11 +488,11 @@ ofVec3f ramMotionExtractor::getVelocityAt(int port){
 	return v;
 }
 
-float ramMotionExtractor::getVelocitySpeedAt(int port){
+float MotionExtractor::getVelocitySpeedAt(int port){
 	return getVelocityAt(port).length();
 }
 
-ofQuaternion ramMotionExtractor::getRotateVelocityAt(int port){
+ofQuaternion MotionExtractor::getRotateVelocityAt(int port){
 
 	ofQuaternion q = ofQuaternion(0,0,0,0);
 
@@ -501,7 +503,7 @@ ofQuaternion ramMotionExtractor::getRotateVelocityAt(int port){
 	return q;
 }
 
-float ramMotionExtractor::getDistanceAt(int port_A, int port_B){
+float MotionExtractor::getDistanceAt(int port_A, int port_B){
 
 	ofVec3f v1 = ofVec3f(0,0,0);
 	ofVec3f v2 = ofVec3f(0,0,0);
@@ -522,7 +524,7 @@ float ramMotionExtractor::getDistanceAt(int port_A, int port_B){
 
 }
 
-float ramMotionExtractor::getAreaAt(int port_A, int port_B, int port_C){
+float MotionExtractor::getAreaAt(int port_A, int port_B, int port_C){
 	ofVec3f v1 = ofVec3f(0,0,0);
 	ofVec3f v2 = ofVec3f(0,0,0);
 	ofVec3f v3 = ofVec3f(0,0,0);
@@ -548,7 +550,7 @@ float ramMotionExtractor::getAreaAt(int port_A, int port_B, int port_C){
 
 }
 
-void ramMotionExtractor::setActorList(vector<string> *lst){
+void MotionExtractor::setActorList(vector<string> *lst){
 
 	if (lst->size() == 2) lst->push_back("Dummy");
 	
@@ -562,7 +564,7 @@ void ramMotionExtractor::setActorList(vector<string> *lst){
 
 }
 
-int ramMotionExtractor::getActorIndexAt(int port){
+int MotionExtractor::getActorIndexAt(int port){
 
 	if ((0 <= port) && (port < mMotionPort.size())){
 		return mMotionPort[port]->mActorIndex;
@@ -573,7 +575,7 @@ int ramMotionExtractor::getActorIndexAt(int port){
 
 #pragma mark - motionPort
 
-void ramMotionPort::init(ramNodeFinder nodeF){
+void MotionPort::init(NodeFinder nodeF){
 
 	mFinder = nodeF;
 
@@ -586,10 +588,10 @@ void ramMotionPort::init(ramNodeFinder nodeF){
 
 }
 
-void ramMotionPort::update(float smooth){
+void MotionPort::update(float smooth){
 
 	mBefNode = mCurrentNode;
-	ramNode cn;
+	Node cn;
 	if (!isBlank){
 		mFinder.findOne(cn);
 		mCurrentNode.setTransformMatrix(cn.getGlobalTransformMatrix());
@@ -607,14 +609,14 @@ void ramMotionPort::update(float smooth){
 
 }
 
-void ramMotionPort::refleshActorFromIndex(){
+void MotionPort::refleshActorFromIndex(){
 	if ((0 <= mActorIndex) &&
-		(mActorIndex < ramActorManager::instance().getNumNodeArray())){
-		mFinder.name = ramActorManager::instance().getNodeArrayNames()[mActorIndex];
+		(mActorIndex < ActorManager::instance().getNumNodeArray())){
+		mFinder.name = ActorManager::instance().getNodeArrayNames()[mActorIndex];
 	}
 }
 
-void ramMotionPort::refleshActorFromName(){
+void MotionPort::refleshActorFromName(){
 
 }
 

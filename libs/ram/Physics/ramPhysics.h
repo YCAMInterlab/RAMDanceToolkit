@@ -28,52 +28,56 @@
 
 #include <set>
 
-class ramBasePrimitive;
-class ramPrimitive;
-class ramSoftBodyPrimitive;
+namespace rdtk{
+	class BasePrimitive;
+	class Primitive;
+	class SoftBodyPrimitive;
+	
+	class Physics
+	{
+	public:
+		
+		static Physics& instance();
+		
+		void setup();
+		void clear();
+		
+		void debugDraw();
+		
+		ofxBt::World& getWorld() { return world; }
+		const ofxBt::World& getWorld() const { return const_cast<ofxBt::World&>(getWorld()); }
+		ofxBt::SoftBodyWorld& getSoftBodyWorld() { return world; }
+		const ofxBt::SoftBodyWorld& getSoftBodyWorld() const { return const_cast<ofxBt::SoftBodyWorld&>(getSoftBodyWorld()); }
+		
+		void onUpdate(ofEventArgs&);
+		
+		void registerRigidBodyPrimitive(Primitive *o);
+		void unregisterRigidBodyPrimitive(Primitive *o);
+		void registerTempraryPrimitive(Primitive *o);
+		
+		void registerSoftBodyPrimitive(SoftBodyPrimitive *o);
+		void unregisterSoftBodyPrimitive(SoftBodyPrimitive *o);
+		
+		bool checkAndUpdateNodeCache(const Node *node);
+		
+	private:
+		
+		static Physics *_instance;
+		
+		bool inited;
+		ofxBt::SoftBodyWorld world;
+		
+		vector<BasePrimitive*> primitives;
+		vector<BasePrimitive*> temporary_primitives;
+		
+		set<const Node*> cache_index;
+		
+		Physics() : inited(false) {}
+		~Physics() {}
+		Physics(const Physics&);
+		Physics& operator=(const Physics&);
+		
+	};
+}
 
-class ramPhysics
-{
-public:
-
-	static ramPhysics& instance();
-
-	void setup();
-	void clear();
-
-	void debugDraw();
-
-	ofxBt::World& getWorld() { return world; }
-    const ofxBt::World& getWorld() const { return const_cast<ofxBt::World&>(getWorld()); }
-	ofxBt::SoftBodyWorld& getSoftBodyWorld() { return world; }
-    const ofxBt::SoftBodyWorld& getSoftBodyWorld() const { return const_cast<ofxBt::SoftBodyWorld&>(getSoftBodyWorld()); }
-
-	void onUpdate(ofEventArgs&);
-
-	void registerRigidBodyPrimitive(ramPrimitive *o);
-	void unregisterRigidBodyPrimitive(ramPrimitive *o);
-	void registerTempraryPrimitive(ramPrimitive *o);
-
-	void registerSoftBodyPrimitive(ramSoftBodyPrimitive *o);
-	void unregisterSoftBodyPrimitive(ramSoftBodyPrimitive *o);
-
-	bool checkAndUpdateNodeCache(const ramNode *node);
-
-private:
-
-	static ramPhysics *_instance;
-
-	bool inited;
-	ofxBt::SoftBodyWorld world;
-
-	vector<ramBasePrimitive*> primitives;
-	vector<ramBasePrimitive*> temporary_primitives;
-
-	set<const ramNode*> cache_index;
-
-	ramPhysics() : inited(false) {}
-	~ramPhysics() {}
-	ramPhysics(const ramPhysics&);
-	ramPhysics& operator=(const ramPhysics&);
-
-};
+using OF_DEPRECATED(ramPhysics) = rdtk::Physics;

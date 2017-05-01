@@ -22,62 +22,67 @@
 #include "ramTSVCoder.h"
 #include "ramControlPanel.h"
 
-enum ramActorUISegmentType
-{
-    RAM_UI_SEGMENT_TYPE_CONTROL = 0,
-    RAM_UI_SEGMENT_TYPE_PLAYBACK = 1
-};
+namespace rdtk{
+	enum ActorUISegmentType
+	{
+		RAM_UI_SEGMENT_TYPE_CONTROL = 0,
+		RAM_UI_SEGMENT_TYPE_PLAYBACK = 1
+	};
+	
+	class BaseSegment
+	{
+		
+		friend class ActorsScene;
+		
+	public:
+		
+		/// load / save actor's color, position, visibility....
+		virtual void loadCache() = 0;
+		virtual void saveCache() = 0;
+		
+		
+		/// control panel definition
+		virtual ofxUICanvasPlus* createPanel(const string& targetName) = 0;
+		virtual ActorUISegmentType getType() const = 0;
+		
+		string getName() const;
+		
+		inline void setVisibility(bool b) { bHideActor = b; }
+		inline bool isVisible() const { return !bHideActor; }
+		
+	protected:
+		
+		///
+		virtual void onValueChanged(ofxUIEventArgs& e) = 0;
+		virtual void init();
+		
+		
+		string getCacheFilePath() const;
+		
+		
+		/// flags
+		ofxUIImageToggle *btnHideActor;
+		ofxUIImageButton *btnResetActor;
+		bool bHideActor;
+		bool bNeedsResetPos;
+		
+		
+		/// load / save motion data
+		Session session;
+		ofxXmlSettings XML;
+		TSVCoder coder;
+		
+		
+		///
+		string name;
+		ofFloatColor jointColor;
+		ofPoint position;
+		
+		
+		//
+		int segmentType;
+	};
+}
 
-class BaseSegment
-{
-    
-    friend class ramActorsScene;
-    
-public:
-    
-    /// load / save actor's color, position, visibility....
-    virtual void loadCache() = 0;
-    virtual void saveCache() = 0;
-    
-    
-    /// control panel definition
-    virtual ofxUICanvasPlus* createPanel(const string& targetName) = 0;
-    virtual ramActorUISegmentType getType() const = 0;
-
-    string getName() const;
-    
-    inline void setVisibility(bool b) { bHideActor = b; }
-    inline bool isVisible() const { return !bHideActor; }
-    
-protected:
-    
-    ///
-    virtual void onValueChanged(ofxUIEventArgs& e) = 0;
-    virtual void init();
-    
-    
-    string getCacheFilePath() const;
-    
-    
-    /// flags
-    ofxUIImageToggle *btnHideActor;
-	ofxUIImageButton *btnResetActor;
-    bool bHideActor;
-    bool bNeedsResetPos;
-    
-    
-    /// load / save motion data
-    ramSession session;
-    ofxXmlSettings XML;
-    ramTSVCoder coder;
-    
-    
-    /// 
-    string name;
-    ofFloatColor jointColor;
-    ofPoint position;
-    
-    
-    //
-    int segmentType;
-};
+typedef rdtk::ActorUISegmentType OF_DEPRECATED(ramActorUISegmentType);
+typedef rdtk::BaseSegment OF_DEPRECATED(BaseSegment);

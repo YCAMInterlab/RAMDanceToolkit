@@ -21,38 +21,44 @@
 #include "BaseSegment.h"
 #include "ramSession.h"
 
-class ControlSegment : public BaseSegment
-{
-	friend class ramActorsScene;
+namespace rdtk{
+	class ControlSegment : public BaseSegment
+	{
+		friend class ActorsScene;
+		
+	public:
+		
+		ControlSegment(const string& segmentName);
+		~ControlSegment();
+		
+		ActorUISegmentType getType() const;
+		ofxUICanvasPlus* createPanel(const string& targetName);
+		
+		void onValueChanged(ofxUIEventArgs& e);
+		void toggleRecording(bool bStart);
+		
+		bool isRecording() const;
+		
+		void loadCache();
+		void saveCache();
+		
+	protected:
+		
+		/// additional variables from BaseSegment...
+		
+		// ui parts
+		ofxUIImageToggle *btnRecordActor;
+		
+		
+		// initialize
+		void init();
+		
+		
+		// flags
+		bool bRecording;
+	};
+}
 
-public:
-	
-	ControlSegment(const string& segmentName);
-	~ControlSegment();
-    
-    ramActorUISegmentType getType() const;
-    ofxUICanvasPlus* createPanel(const string& targetName);
-    
-	void onValueChanged(ofxUIEventArgs& e);
-	void toggleRecording(bool bStart);
+typedef rdtk::ControlSegment OF_DEPRECATED(ControlSegment);
 
-	bool isRecording() const;
-    
-	void loadCache();
-	void saveCache();
 
-protected:
-    
-    /// additional variables from BaseSegment...
-    
-    // ui parts
-	ofxUIImageToggle *btnRecordActor;
-	
-    
-    // initialize
-	void init();
-    
-	
-    // flags
-	bool bRecording;
-};

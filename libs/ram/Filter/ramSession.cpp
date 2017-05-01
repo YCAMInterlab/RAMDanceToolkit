@@ -19,34 +19,36 @@
 
 #include "ramControlPanel.h"
 
+using namespace rdtk;
+
 #pragma mark -
 #pragma mark constructor
 
-ramSession::ramSession() { clear(); }
-ramSession::ramSession(const ramSession &copy) { clear(); *this = copy; }
-ramSession::ramSession(const ramNodeArrayBuffer &buf) { clear(); mBuffer = buf; }
+Session::Session() { clear(); }
+Session::Session(const Session &copy) { clear(); *this = copy; }
+Session::Session(const NodeArrayBuffer &buf) { clear(); mBuffer = buf; }
 
 
 #pragma mark -
 #pragma mark gui settings
 
-void ramSession::setupControlPanel()
+void Session::setupControlPanel()
 {
 
 #ifdef RAM_GUI_SYSTEM_OFXUI
 
-	ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+	ofxUICanvas* panel = GetGUI().getCurrentUIContext();
 
 	panel->addToggle("Rec", false, 40, 40);
 	panel->addToggle("Play", false, 40, 40);
 	panel->addToggle("Loop", true, 40, 40);
 
-	ofAddListener(panel->newGUIEvent, this, &ramSession::onPanelChanged);
+	ofAddListener(panel->newGUIEvent, this, &Session::onPanelChanged);
 
 #endif
 }
 
-void ramSession::onPanelChanged(ofxUIEventArgs& e)
+void Session::onPanelChanged(ofxUIEventArgs& e)
 {
 	string name = e.widget->getName();
 	
@@ -84,7 +86,7 @@ void ramSession::onPanelChanged(ofxUIEventArgs& e)
 #pragma mark -
 #pragma mark override ramBaseFilter
 
-const ramNodeArray& ramSession::filter(const ramNodeArray &src)
+const NodeArray& Session::filter(const NodeArray &src)
 {
 	if (isRecording())
 	{
@@ -100,7 +102,7 @@ const ramNodeArray& ramSession::filter(const ramNodeArray &src)
 	return src;
 }
 
-string ramSession::getName() const
+string Session::getName() const
 {
 	return "ramSession";
 }
@@ -110,7 +112,7 @@ string ramSession::getName() const
 #pragma mark -
 #pragma mark session handling
 
-void ramSession::startRecording()
+void Session::startRecording()
 {
 	if (isRecording()) return;
 
@@ -122,7 +124,7 @@ void ramSession::startRecording()
 	cout << "recording start." << endl;
 }
 
-void ramSession::stopRecording()
+void Session::stopRecording()
 {
 	if (!isRecording() || mBuffer.getSize() <= 0) return;
 	
@@ -135,7 +137,7 @@ void ramSession::stopRecording()
 	cout << "Frames: " << getNumFrames() << endl;
 }
 
-void ramSession::play()
+void Session::play()
 {
 	if (mCurrentFrame.getNumNode() == 0)
 	{
@@ -154,7 +156,7 @@ void ramSession::play()
 //	cout << "start playing " << getNodeArrayName() << "." << endl;
 }
 
-void ramSession::stop()
+void Session::stop()
 {
 	if (!isPlaying()) return;
 
@@ -166,14 +168,14 @@ void ramSession::stop()
 
 // --
 
-void ramSession::prepareForPlay()
+void Session::prepareForPlay()
 {
 	assert( getNumFrames() > 0 );
 	
 	mCurrentFrame = mBuffer.get(0);
 }
 
-void ramSession::updatePlayhead()
+void Session::updatePlayhead()
 {
 	if (!isPlaying()) return;
 	
@@ -205,7 +207,7 @@ void ramSession::updatePlayhead()
 
 // --
 
-void ramSession::clear()
+void Session::clear()
 {
 	mBuffer.clear();
 	
@@ -220,12 +222,12 @@ void ramSession::clear()
 	mPlaying = false;
 }
 
-void ramSession::appendFrame(const ramNodeArray& copy)
+void Session::appendFrame(const NodeArray& copy)
 {
 	mBuffer.append(copy);
 }
 
-ramNodeArray& ramSession::getFrame(int index)
+NodeArray& Session::getFrame(int index)
 {
 	mCurrentFrame = mBuffer.get(index);
 	
@@ -234,7 +236,7 @@ ramNodeArray& ramSession::getFrame(int index)
 		const ofVec3f pos = mCurrentFrame.getNode(i).getGlobalPosition();
 		const ofQuaternion quat = mCurrentFrame.getNode(i).getGlobalOrientation();
 		
-		ramNode &node = mCurrentFrame.getNode(i);
+		Node &node = mCurrentFrame.getNode(i);
 		node.setGlobalPosition(pos);
 		node.setGlobalOrientation(quat);
 		node.getAccelerometer().update(pos, quat);
@@ -243,7 +245,7 @@ ramNodeArray& ramSession::getFrame(int index)
 	return mCurrentFrame;
 }
 
-ramNodeArray& ramSession::getCurrentFrame()
+NodeArray& Session::getCurrentFrame()
 {
 	return getFrame(getCurrentFrameIndex());
 }
@@ -251,51 +253,51 @@ ramNodeArray& ramSession::getCurrentFrame()
 #pragma mark -
 #pragma mark getters, setters
 
-void ramSession::setFreeze(const bool playing) { mPlaying = !playing; };
-void ramSession::setLoop(const bool l) { mLoop = l; };
-void ramSession::setRate(const float r) { mRate = r; };
-void ramSession::setPlayhead(const float t) { mPlayhead = t; };
+void Session::setFreeze(const bool playing) { mPlaying = !playing; };
+void Session::setLoop(const bool l) { mLoop = l; };
+void Session::setRate(const float r) { mRate = r; };
+void Session::setPlayhead(const float t) { mPlayhead = t; };
 
 
-bool ramSession::isPlaying() { return mPlaying; }
-bool ramSession::isRecording() { return mRecording; }
-bool ramSession::isLoop() { return mLoop; }
+bool Session::isPlaying() { return mPlaying; }
+bool Session::isRecording() { return mRecording; }
+bool Session::isLoop() { return mLoop; }
 
-float ramSession::getPlayhead() const
+float Session::getPlayhead() const
 {
 	return mPlayhead;
 }
 
-int ramSession::getCurrentFrameIndex() const
+int Session::getCurrentFrameIndex() const
 {
 	return floor(mPlayhead / getAverageFrameTime());
 //	return mPlayhead * (getNumFrames() - 1);
 }
 
-int ramSession::getNumFrames() const
+int Session::getNumFrames() const
 {
 	return mBuffer.getSize();
 }
 
-float ramSession::getAverageFrameTime() const
+float Session::getAverageFrameTime() const
 {
 	return getDuration() / getNumFrames();
 }
 
-float ramSession::getDuration() const
+float Session::getDuration() const
 {
-	const ramNodeArray &frontFrame = mBuffer.get( 0 );
-	const ramNodeArray &backFrame = mBuffer.get( getNumFrames() );
+	const NodeArray &frontFrame = mBuffer.get( 0 );
+	const NodeArray &backFrame = mBuffer.get( getNumFrames() );
 	
 	return backFrame.getTimestamp() - frontFrame.getTimestamp();
 }
 
-string ramSession::getNodeArrayName() const
+string Session::getNodeArrayName() const
 {
 	return getNumFrames() > 0 ? mBuffer.get(0).getName() : "no name";
 }
 
-void ramSession::setNodeArrayBuffer(ramNodeArrayBuffer &buffer)
+void Session::setNodeArrayBuffer(NodeArrayBuffer &buffer)
 {
 	if (buffer.getSize() <= 0)
 	{

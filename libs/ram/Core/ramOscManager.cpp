@@ -8,6 +8,8 @@
 
 #include "ramOscManager.h"
 
+using namespace rdtk;
+
 OscManager* OscManager::__instance = NULL;
 
 void OscManager::setup(int receivePort){

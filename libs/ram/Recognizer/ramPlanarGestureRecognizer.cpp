@@ -17,27 +17,29 @@
 
 #include "ramPlanarGestureRecognizer.h"
 
-ramPlanarGestureRecognizer::ramPlanarGestureRecognizer()
+using namespace rdtk;
+
+PlanarGestureRecognizer::PlanarGestureRecognizer()
 :lineRatio(6)
 ,gestureType(GESTURE_LINE)
 ,fitError(0)
 {}
-void ramPlanarGestureRecognizer::setLineRatio(float lineRatio) {
+void PlanarGestureRecognizer::setLineRatio(float lineRatio) {
 	this->lineRatio = lineRatio;
 }
-ramPlanarGestureRecognizer::GestureType ramPlanarGestureRecognizer::getGestureType() const {
+PlanarGestureRecognizer::GestureType PlanarGestureRecognizer::getGestureType() const {
 	return gestureType;
 }
-float ramPlanarGestureRecognizer::getFitError() const {
+float PlanarGestureRecognizer::getFitError() const {
 	return fitError;
 }
-cv::RotatedRect ramPlanarGestureRecognizer::getRect() {
+cv::RotatedRect PlanarGestureRecognizer::getRect() {
 	return gestureType == GESTURE_LINE ? rect : ellipse;
 }
-ofPolyline& ramPlanarGestureRecognizer::getPolyline() {
+ofPolyline& PlanarGestureRecognizer::getPolyline() {
 	return idealized;
 }
-void ramPlanarGestureRecognizer::update(ofPolyline& polyline) {
+void PlanarGestureRecognizer::update(ofPolyline& polyline) {
 	if(polyline.size() > 5) {
 		ellipse = ofxCv::fitEllipse(polyline);
 	}

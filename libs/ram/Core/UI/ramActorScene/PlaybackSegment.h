@@ -19,38 +19,42 @@
 
 #include "BaseSegment.h"
 
-class PlaybackSegment : public BaseSegment
-{
+namespace rdtk{
+	class PlaybackSegment : public BaseSegment
+	{
+		
+	public:
+		
+		PlaybackSegment(const string& segmentName);
+		~PlaybackSegment();
+		
+		ActorUISegmentType getType() const;
+		ofxUICanvasPlus* createPanel(const string& targetName);
+		
+		void update();
+		
+		void pause(bool bPause);
+		void deleteSelf();
+		
+		void loadCache();
+		void saveCache();
+		
+		inline bool isPlaying() const { return !bPaused; }
+		
+	private:
+		
+		void onValueChanged(ofxUIEventArgs& e);
+		void init();
+		
+		ofxUIImageToggle *btnPlayActor;
+		ofxUIImageButton *btnCueActor;
+		ofxUIImageButton *btnDeleteActor;
+		
+		bool bPaused;
+	};
 	
-public:
-	
-	PlaybackSegment(const string& segmentName);
-	~PlaybackSegment();
-	
-    ramActorUISegmentType getType() const;
-    ofxUICanvasPlus* createPanel(const string& targetName);
-	
-	void update();
-	
-    void pause(bool bPause);
-    void deleteSelf();
-    
-	void loadCache();
-	void saveCache();
+}
 
-	inline bool isPlaying() const { return !bPaused; }
-    
-private:
-	
-    void onValueChanged(ofxUIEventArgs& e);
-    void init();
-	
-	ofxUIImageToggle *btnPlayActor;
-	ofxUIImageButton *btnCueActor;
-	ofxUIImageButton *btnDeleteActor;
-	
-    bool bPaused;
-};
 
 
 

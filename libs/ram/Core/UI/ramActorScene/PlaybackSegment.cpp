@@ -20,16 +20,18 @@
 #pragma mark -
 #pragma mark constructor, destructor
 
+using namespace rdtk;
+
 PlaybackSegment::PlaybackSegment(const string& segmentName)
 {
     name = segmentName;
     
 	init();
 	
-	btnHideActor = new ofxUIImageToggle(32, 32, &bHideActor, ramToResourcePath("Images/show.png"),"show");
-	btnPlayActor = new ofxUIImageToggle(32, 32, &bPaused, ramToResourcePath("Images/play.png"),"pause");
-	btnCueActor = new ofxUIImageButton(32, 32, &bNeedsResetPos, ramToResourcePath("Images/reset.png"),"resetPos");
-	btnDeleteActor = new ofxUIImageButton(32, 32, false, ramToResourcePath("Images/delete.png"),"delete");
+	btnHideActor = new ofxUIImageToggle(32, 32, &bHideActor, ToResourcePath("Images/show.png"),"show");
+	btnPlayActor = new ofxUIImageToggle(32, 32, &bPaused, ToResourcePath("Images/play.png"),"pause");
+	btnCueActor = new ofxUIImageButton(32, 32, &bNeedsResetPos, ToResourcePath("Images/reset.png"),"resetPos");
+	btnDeleteActor = new ofxUIImageButton(32, 32, false, ToResourcePath("Images/delete.png"),"delete");
 }
 
 PlaybackSegment::~PlaybackSegment()
@@ -45,7 +47,7 @@ PlaybackSegment::~PlaybackSegment()
 
 #pragma mark -
 #pragma mark public methods
-ramActorUISegmentType PlaybackSegment::getType() const
+ActorUISegmentType PlaybackSegment::getType() const
 {
     return RAM_UI_SEGMENT_TYPE_PLAYBACK;
 }
@@ -59,9 +61,9 @@ ofxUICanvasPlus* PlaybackSegment::createPanel(const string& targetName)
 {
     name = targetName;
     
-	const float width = ramGetGUI().kLength;
-	const float height = ramGetGUI().kDim+3;
-    const float padding = ramGetGUI().kXInit*2;
+	const float width = GetGUI().kLength;
+	const float height = GetGUI().kDim+3;
+    const float padding = GetGUI().kXInit*2;
 	
 	
 	ofxUICanvasPlus *child = new ofxUICanvasPlus();

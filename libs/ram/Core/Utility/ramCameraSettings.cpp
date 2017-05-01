@@ -17,7 +17,9 @@
 
 #include "ramCameraSettings.h"
 
-void ramCameraSettings::prepareForPlay()
+using namespace rdtk;
+
+void CameraSettings::prepareForPlay()
 {
 	bMoving = true;
 	moving_from = pos;
@@ -25,23 +27,23 @@ void ramCameraSettings::prepareForPlay()
 	moving_end_time = moving_start_time + moving_duration;
 	moving_deg = 0.0f;
 }
-void ramCameraSettings::reset()
+void CameraSettings::reset()
 {
 	bMoving = false;
 	pos = moving_from;
 }
 
-vector<ramCameraSettings> ramCameraSettings::loadSettings(ofxXmlSettings& setting)
+vector<CameraSettings> CameraSettings::loadSettings(ofxXmlSettings& setting)
 {
 	const int numCams = setting.getNumTags("cam");
-	vector<ramCameraSettings> settings;
+	vector<CameraSettings> settings;
 	settings.clear();
 
 	for (int i = 0; i < numCams; i++)
 	{
 		setting.pushTag("cam", i);
 		{
-			ramCameraSettings s = ramCameraSettings(setting);
+			CameraSettings s = CameraSettings(setting);
 
 			if (setting.tagExists("movement"))
 			{

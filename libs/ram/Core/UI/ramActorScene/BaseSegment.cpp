@@ -17,7 +17,7 @@
 
 #include "BaseSegment.h"
 
-
+using namespace rdtk;
 
 string BaseSegment::getName() const
 {
@@ -38,6 +38,6 @@ void BaseSegment::init()
 
 string BaseSegment::getCacheFilePath() const
 {
-	return ramToResourcePath("Settings/cache/color."+name+".xml");
+	return ToResourcePath("Settings/cache/color."+name+".xml");
 }
 

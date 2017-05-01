@@ -22,129 +22,135 @@
 
 #pragma mark - ramFading
 
-class ramFading;
-
-class ramDeadFunctor {
-protected:
-	float lifespan;
-public:
-	ramDeadFunctor(float lifespan) : lifespan(lifespan) {}
-	bool operator()(const ramFading& fading) const;
-};
-
-class ramFading {
-protected:
-	float birth;
-public:
-	ramFading();
-	float getLife(float lifespan) const;
-	bool isDead(float lifespan) const;
+namespace rdtk{
+	class Fading;
 	
-	template <class T>
-	static void bury(list<T>& all, float lifespan) {
-		ramDeadFunctor deadFunctor(lifespan);
-		all.erase(remove_if(all.begin(), all.end(), deadFunctor), all.end());
-	}
-};
-
-
-#pragma mark - ramCompoundContainer
-
-template <typename T>
-class ramCompoundContainer
-{
-	typedef std::map<string, T> MapType;
-	typedef vector<T*> ArrayType;
-
-public:
-
-	void set(const string &key, const T &o)
-	{
-		hash[key] = o;
-		updateIndexCache();
-	}
-
-	void erase(const string &key)
-	{
-		hash.erase(key);
-		updateIndexCache();
-	}
-
-	size_t size() const { return array.size(); }
-
-	void clear()
-	{
-		array.clear();
-		hash.clear();
-		hash_keys.clear();
-	}
-
-	// array
-
-	T& operator[](size_t index)
-	{
-		return *array[index];
-	}
-
-    const T& operator[](size_t index) const
-    {
-        return *array[index];
-    }
-    
-	// map
-
-    const vector<string>& keys() const { return hash_keys; }
-
-	T& operator[](const string& key)
-	{
-		if (hasKey(key))
-		{
-			return hash[key];
+	class DeadFunctor {
+	protected:
+		float lifespan;
+	public:
+		DeadFunctor(float lifespan) : lifespan(lifespan) {}
+		bool operator()(const Fading& fading) const;
+	};
+	
+	class Fading {
+	protected:
+		float birth;
+	public:
+		Fading();
+		float getLife(float lifespan) const;
+		bool isDead(float lifespan) const;
+		
+		template <class T>
+		static void bury(list<T>& all, float lifespan) {
+			DeadFunctor deadFunctor(lifespan);
+			all.erase(remove_if(all.begin(), all.end(), deadFunctor), all.end());
 		}
-		else
-		{
-			ofLogError("RAMDanceToolkit::ramCompoundContainer") << "invalid key: " << key;
-			assert(false);
-		}
-	}
-
-    const T& operator[](const string& key) const
-    {
-        if (hasKey(key))
-        {
-            return hash.at(key);
-        }
-        else
-        {
-            ofLogError("RAMDanceToolkit::ramCompoundContainer") << "invalid key: " << key;
-            assert(false);
-        }
-    }
-    
-    bool hasKey(const string& key) const
+	};
+	
+	
+#pragma mark - CompoundContainer
+	
+	template <typename T>
+	class CompoundContainer
 	{
-		return hash.find(key) != hash.end();
-	}
-
-	void updateIndexCache()
-	{
-		array.clear();
-		hash_keys.clear();
-
-		typename MapType::iterator it = hash.begin();
-		while (it != hash.end())
+		typedef std::map<string, T> MapType;
+		typedef vector<T*> ArrayType;
+		
+	public:
+		
+		void set(const string &key, const T &o)
 		{
-			hash_keys.push_back(it->first);
-			array.push_back(&it->second);
-			it++;
+			hash[key] = o;
+			updateIndexCache();
 		}
-	}
+		
+		void erase(const string &key)
+		{
+			hash.erase(key);
+			updateIndexCache();
+		}
+		
+		size_t size() const { return array.size(); }
+		
+		void clear()
+		{
+			array.clear();
+			hash.clear();
+			hash_keys.clear();
+		}
+		
+		// array
+		
+		T& operator[](size_t index)
+		{
+			return *array[index];
+		}
+		
+		const T& operator[](size_t index) const
+		{
+			return *array[index];
+		}
+		
+		// map
+		
+		const vector<string>& keys() const { return hash_keys; }
+		
+		T& operator[](const string& key)
+		{
+			if (hasKey(key))
+			{
+				return hash[key];
+			}
+			else
+			{
+				ofLogError("RAMDanceToolkit::ramCompoundContainer") << "invalid key: " << key;
+				assert(false);
+			}
+		}
+		
+		const T& operator[](const string& key) const
+		{
+			if (hasKey(key))
+			{
+				return hash.at(key);
+			}
+			else
+			{
+				ofLogError("RAMDanceToolkit::ramCompoundContainer") << "invalid key: " << key;
+				assert(false);
+			}
+		}
+		
+		bool hasKey(const string& key) const
+		{
+			return hash.find(key) != hash.end();
+		}
+		
+		void updateIndexCache()
+		{
+			array.clear();
+			hash_keys.clear();
+			
+			typename MapType::iterator it = hash.begin();
+			while (it != hash.end())
+			{
+				hash_keys.push_back(it->first);
+				array.push_back(&it->second);
+				it++;
+			}
+		}
+		
+	private:
+		
+		MapType hash;
+		ArrayType array;
+		
+		vector<string> hash_keys;
+		
+	};
+}
 
-private:
-
-	MapType hash;
-	ArrayType array;
-
-	vector<string> hash_keys;
-
-};
+typedef rdtk::Fading			OF_DEPRECATED(ramFading);
+typedef rdtk::DeadFunctor		OF_DEPRECATED(ramDeadFunctor);
+typedef rdtk::Fading			OF_DEPRECATED(ramFading);

@@ -234,6 +234,7 @@ namespace rdtk{
 	};
 }
 
+typedef rdtk::RigidBody		OF_DEPRECATED(ramRigidBody);
 typedef rdtk::Accelerometer OF_DEPRECATED(ramAccelerometer);
 typedef rdtk::Node			OF_DEPRECATED(ramNode);
 typedef rdtk::NodeArray		OF_DEPRECATED(ramNodeArray);

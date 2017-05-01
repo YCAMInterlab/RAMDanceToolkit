@@ -24,7 +24,7 @@
 
 using namespace rdtk;
 
-static ramSimpleShadow ram_simple_shadow;
+static SimpleShadow ram_simple_shadow;
 
 ActorManager& GlobalShortcut::getActorManager() { return ActorManager::instance(); }
 const ActorManager& GlobalShortcut::getActorManager() const { return ActorManager::instance(); }
@@ -39,17 +39,17 @@ const vector<string>& GlobalShortcut::getNodeArrayNames() const { return ActorMa
 
 bool GlobalShortcut::hasNodeArray(const string &key) const { return ActorManager::instance().hasNodeArray(key); }
 
-NodeArray& GlobalShortcut::getNodeArray(const string &name) { return ActorManager::instance().getNodeArray(name); }
+rdtk::NodeArray& GlobalShortcut::getNodeArray(const string &name) { return ActorManager::instance().getNodeArray(name); }
 
-const NodeArray& GlobalShortcut::getNodeArray(const string &name) const { return ActorManager::instance().getNodeArray(name); }
+const rdtk::NodeArray& GlobalShortcut::getNodeArray(const string &name) const { return ActorManager::instance().getNodeArray(name); }
 
 size_t GlobalShortcut::getNumNodeArray() const { return ActorManager::instance().getNumNodeArray(); }
 
-NodeArray& GlobalShortcut::getNodeArray(int index) { return ActorManager::instance().getNodeArray(index); }
+rdtk::NodeArray& GlobalShortcut::getNodeArray(int index) { return ActorManager::instance().getNodeArray(index); }
 
-const NodeArray& GlobalShortcut::getNodeArray(int index) const { return ActorManager::instance().getNodeArray(index); }
+const rdtk::NodeArray& GlobalShortcut::getNodeArray(int index) const { return ActorManager::instance().getNodeArray(index); }
 
-vector<NodeArray> GlobalShortcut::getAllNodeArrays() const { return ActorManager::instance().getAllNodeArrays(); }
+vector<rdtk::NodeArray> GlobalShortcut::getAllNodeArrays() const { return ActorManager::instance().getAllNodeArrays(); }
 
 CameraManager& GlobalShortcut::getCameraManager() { return CameraManager::instance(); }
 
@@ -59,7 +59,7 @@ ofCamera& GlobalShortcut::getActiveCamera() { return CameraManager::instance().g
 
 
 #pragma mark - core
-void Initialize(int oscPort, bool usePresetScenes)
+void rdtk::Initialize(int oscPort, bool usePresetScenes)
 {
 	static bool inited = false;
 	if (inited) return;
@@ -80,7 +80,7 @@ void Initialize(int oscPort, bool usePresetScenes)
 
 }
 
-string ToResourcePath(const string& path)
+string rdtk::ToResourcePath(const string& path)
 {
 	string base_path = "resources";
     bool dirExists = false;
@@ -112,12 +112,12 @@ string ToResourcePath(const string& path)
 
 
 #pragma mark - actors
-void EnableShowActors(bool v)
+void rdtk::EnableShowActors(bool v)
 {
 	SceneManager::instance().setShowAllActors(v);
 }
 
-bool ShowActorsEnabled()
+bool rdtk::ShowActorsEnabled()
 {
 	return SceneManager::instance().getShowAllActors();	
 }
@@ -134,7 +134,7 @@ const Node& GetNode(unsigned int actorId, unsigned int jointId){
 		return _evilNode;
 	}
 	
-	NodeArray &NA = ActorManager::instance().getNodeArray(actorId);
+	rdtk::NodeArray &NA = ActorManager::instance().getNodeArray(actorId);
 	
 	// if the joint does not exist...
 	if (NA.getNumNode() >= jointId)
@@ -150,61 +150,61 @@ const Node& GetNode(unsigned int actorId, unsigned int jointId){
 
 static ofRectangle _viewport;
 
-void SetViewPort(ofRectangle viewport)
+void rdtk::SetViewPort(ofRectangle viewport)
 {
     _viewport = viewport;
 }
 
-ofRectangle GetViewPort()
+ofRectangle rdtk::GetViewPort()
 {
     return _viewport;
 }
 
-void BeginCamera(ofRectangle viewport)
+void rdtk::BeginCamera(ofRectangle viewport)
 {
     ofRectangle v = viewport;
     if (v.isEmpty()) v = ofGetCurrentViewport();
 	CameraManager::instance().getActiveCamera().begin(v);
 }
 
-void EndCamera()
+void rdtk::EndCamera()
 {
 	CameraManager::instance().getActiveCamera().end();
 }
 
-void EnableInteractiveCamera(bool v)
+void rdtk::EnableInteractiveCamera(bool v)
 {
 	CameraManager::instance().setEnableInteractiveCamera(v);
 }
 
 
 #pragma mark - shadows
-void EnableShadow(bool v)
+void rdtk::EnableShadow(bool v)
 {
 	ram_simple_shadow.setEnable(v);
 }
 
-void DisableShadow()
+void rdtk::DisableShadow()
 {
 	ram_simple_shadow.setEnable(false);
 }
 
-bool ShadowEnabled()
+bool rdtk::ShadowEnabled()
 {
 	return ram_simple_shadow.getEnable();
 }
 
-void BeginShadow()
+void rdtk::BeginShadow()
 {
 	ram_simple_shadow.begin();
 }
 
-void EndShadow()
+void rdtk::EndShadow()
 {
 	ram_simple_shadow.end();
 }
 
-void SetShadowAlpha(float alpha)
+void rdtk::SetShadowAlpha(float alpha)
 {
 	ram_simple_shadow.setShadowAlpha(alpha);
 }
@@ -214,62 +214,62 @@ void SetShadowAlpha(float alpha)
 #pragma mark - physics
 static bool ram_enable_physics_primitive = true;
 
-void EnablePhysicsPrimitive(bool v)
+void rdtk::EnablePhysicsPrimitive(bool v)
 {
 	ram_enable_physics_primitive = v;
 }
 
-void DisablePhysicsPrimitive()
+void rdtk::DisablePhysicsPrimitive()
 {
 	ram_enable_physics_primitive = false;
 }
 
-bool GetEnablePhysicsPrimitive()
+bool rdtk::GetEnablePhysicsPrimitive()
 {
 	return ram_enable_physics_primitive;
 }
 
 
 #pragma mark - error
-void NotImplementedError()
+void rdtk::NotImplementedError()
 {
 	ofLogWarning("RAM Dance Toolkit") << "not implemented yet";
 }
 
 void ramInitialize(int oscPort, bool usePresetScenes){
-	Initialize(oscPort, usePresetScenes);
+	rdtk::Initialize(oscPort, usePresetScenes);
 }
 
 string ramToResourcePath(const string& path){
-	return ToResourcePath(path);
+	return rdtk::ToResourcePath(path);
 }
 
 void ramEnableShowActors(bool v){
-	EnableShowActors(v);
+	rdtk::EnableShowActors(v);
 }
 bool ramShowActorsEnabled(){
-	return ShowActorsEnabled();
+	return rdtk::ShowActorsEnabled();
 }
 const ramNode& ramGetNode(unsigned int actorId, unsigned int jointId){
-	return GetNode(actorId, jointId);
+	return rdtk::GetNode(actorId, jointId);
 }
 
-void ramSetViewPort(ofRectangle viewport){SetViewPort(viewport);}
-ofRectangle ramGetViewPort(){return GetViewPort();}
-void ramBeginCamera(ofRectangle viewport){BeginCamera(viewport);}
-void ramEndCamera(){EndCamera();}
-void ramEnableInteractiveCamera(bool v){EnableInteractiveCamera(v);}
+void ramSetViewPort(ofRectangle viewport){rdtk::SetViewPort(viewport);}
+ofRectangle ramGetViewPort(){return rdtk::GetViewPort();}
+void ramBeginCamera(ofRectangle viewport){rdtk::BeginCamera(viewport);}
+void ramEndCamera(){rdtk::EndCamera();}
+void ramEnableInteractiveCamera(bool v){rdtk::EnableInteractiveCamera(v);}
 
-void ramEnableShadow(bool v){EnableShadow(v);}
-void ramDisableShadow(){DisableShadow();}
-bool ramShadowEnabled(){return ShadowEnabled();}
+void ramEnableShadow(bool v){rdtk::EnableShadow(v);}
+void ramDisableShadow(){rdtk::DisableShadow();}
+bool ramShadowEnabled(){return rdtk::ShadowEnabled();}
 
-void ramBeginShadow(){BeginShadow();}
-void ramEndShadow(){EndShadow();}
-void ramSetShadowAlpha(float alpha){SetShadowAlpha(alpha);}
+void ramBeginShadow(){rdtk::BeginShadow();}
+void ramEndShadow(){rdtk::EndShadow();}
+void ramSetShadowAlpha(float alpha){rdtk::SetShadowAlpha(alpha);}
 
-void ramEnablePhysicsPrimitive(bool v){EnablePhysicsPrimitive(v);}
-void ramDisablePhysicsPrimitive(){DisablePhysicsPrimitive();}
-bool ramGetEnablePhysicsPrimitive(){return GetEnablePhysicsPrimitive();}
+void ramEnablePhysicsPrimitive(bool v){rdtk::EnablePhysicsPrimitive(v);}
+void ramDisablePhysicsPrimitive(){rdtk::DisablePhysicsPrimitive();}
+bool ramGetEnablePhysicsPrimitive(){return rdtk::GetEnablePhysicsPrimitive();}
 
-void ramNotImplementedError());
+void ramNotImplementedError(){rdtk::NotImplementedError();}

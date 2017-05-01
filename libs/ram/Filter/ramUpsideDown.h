@@ -21,43 +21,47 @@
 
 #include "ramBaseFilter.h"
 
-class ramUpsideDown : public ramBaseFilter
-{
-public:
-
-	string getName() const { return "ramUpsideDown"; };
-
-	ramUpsideDown() : offset(-3.0f) {}
-
-	inline void setOffset(float y) { offset = y; }
-	inline float getOffset() const { return offset; }
-
-protected:
-
-	ramNodeArray hangedNodes;
-	float offset;
-
-	const ramNodeArray& filter(const ramNodeArray& src)
+namespace rdtk{
+	class UpsideDown : public BaseFilter
 	{
-		hangedNodes = src;
-
-		float h = 0;
-		for (int i = 0; i < src.getNumNode(); i++)
+	public:
+		
+		string getName() const { return "ramUpsideDown"; };
+		
+		UpsideDown() : offset(-3.0f) {}
+		
+		inline void setOffset(float y) { offset = y; }
+		inline float getOffset() const { return offset; }
+		
+	protected:
+		
+		NodeArray hangedNodes;
+		float offset;
+		
+		const NodeArray& filter(const NodeArray& src)
 		{
-			float nh = src.getNode(i).getGlobalPosition().y;
-			if (nh > h) h = nh;
+			hangedNodes = src;
+			
+			float h = 0;
+			for (int i = 0; i < src.getNumNode(); i++)
+			{
+				float nh = src.getNode(i).getGlobalPosition().y;
+				if (nh > h) h = nh;
+			}
+			
+			// rootnode
+			Node &rootNode = hangedNodes.getNode(Actor::JOINT_HIPS);
+			ofMatrix4x4 m = rootNode.getTransformMatrix();
+			
+			m.translate(0.0f, -h - offset, 0.0f);
+			m.rotate(180, 0.0, 0.0, 1.0);
+			
+			rootNode.setTransformMatrix(m);
+			
+			return hangedNodes;
 		}
+		
+	};
+}
 
-		// rootnode
-		ramNode &rootNode = hangedNodes.getNode(ramActor::JOINT_HIPS);
-		ofMatrix4x4 m = rootNode.getTransformMatrix();
-
-		m.translate(0.0f, -h - offset, 0.0f);
-		m.rotate(180, 0.0, 0.0, 1.0);
-
-		rootNode.setTransformMatrix(m);
-
-		return hangedNodes;
-	}
-
-};
+typedef rdtk::UpsideDown OF_DEPRECATED(ramUpsideDown);

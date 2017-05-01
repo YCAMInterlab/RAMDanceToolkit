@@ -19,70 +19,75 @@
 
 #include "ofxUITabbedCanvas.h"
 
-class ramPreferencesTab : public ofxUITab {
-protected:
-	ofxUIRadio* floorStyleRadio;
-	ofxUILabelToggle* fullscreenToggle;
-	bool fullscreen, useShadows;
-	float floorSize, floorGridSize;
-	int floorStyle;
-	ofFloatColor bg;
-public:
-	ramPreferencesTab()
-	:ofxUITab("Preferences", false)
-	,fullscreen(false)
-	,useShadows(false)
-	,floorStyle(ramFloor::FLOOR_NONE)
-	,floorSize(600.0)
-	,floorGridSize(50.0)
-	,bg(0)
-	{
-		fullscreenToggle = addLabelToggle("Fullscreen", &fullscreen);
-		addLabelToggle("Use shadows", &useShadows);
-		addSpacer();
-		
-		vector<string> floorNames = ramFloor::getFloorNames();
-		floorStyleRadio = addRadio("Floor style", floorNames);
-		floorStyleRadio->getToggles()[floorStyle]->setValue(true);
-		addSlider("Floor size", 100, 1000, &floorSize);
-		addSlider("Floor grid Size", 20, 200, &floorGridSize);
-		addSpacer();
-		
-		addLabel("Background color", OFX_UI_FONT_MEDIUM);
-		addSlider("Red", 0, 1, &bg.r);
-		addSlider("Green", 0, 1, &bg.g);
-		addSlider("Blue", 0, 1, &bg.b);
-		
-		autoSizeToFitWidgets();
-		
-		ofAddListener(this->newGUIEvent, this, &ramPreferencesTab::onValueChanged);
-		ofSetFullscreen(fullscreen);
-	}
-	int getFloorPattern() const {
-		return getChoice(floorStyleRadio);
-	}
-	float getFloorSize() const { return floorSize; }
-	float getFloorGridSize() const { return floorGridSize; }
-	
-	void update() {
-		
-		if (fullscreenToggle->getValue() != (ofGetWindowMode() == OF_FULLSCREEN))
+namespace rdtk{
+	class PreferencesTab : public ofxUITab {
+	protected:
+		ofxUIRadio* floorStyleRadio;
+		ofxUILabelToggle* fullscreenToggle;
+		bool fullscreen, useShadows;
+		float floorSize, floorGridSize;
+		int floorStyle;
+		ofFloatColor bg;
+	public:
+		PreferencesTab()
+		:ofxUITab("Preferences", false)
+		,fullscreen(false)
+		,useShadows(false)
+		,floorStyle(Floor::FLOOR_NONE)
+		,floorSize(600.0)
+		,floorGridSize(50.0)
+		,bg(0)
 		{
-			fullscreenToggle->setValue(ofGetWindowMode() == OF_FULLSCREEN);
-			fullscreenToggle->stateChange();
-		}
+			fullscreenToggle = addLabelToggle("Fullscreen", &fullscreen);
+			addLabelToggle("Use shadows", &useShadows);
+			addSpacer();
 			
-		ramEnableShadow(useShadows);
-		ofBackground(bg);
-	}
-	
-	void onValueChanged(ofxUIEventArgs& e)
-	{
-		const string widgetName = e.widget->getName();
-		
-		if (widgetName == "Fullscreen")
-		{
-			ofSetFullscreen(fullscreenToggle->getValue());
+			vector<string> floorNames = Floor::getFloorNames();
+			floorStyleRadio = addRadio("Floor style", floorNames);
+			floorStyleRadio->getToggles()[floorStyle]->setValue(true);
+			addSlider("Floor size", 100, 1000, &floorSize);
+			addSlider("Floor grid Size", 20, 200, &floorGridSize);
+			addSpacer();
+			
+			addLabel("Background color", OFX_UI_FONT_MEDIUM);
+			addSlider("Red", 0, 1, &bg.r);
+			addSlider("Green", 0, 1, &bg.g);
+			addSlider("Blue", 0, 1, &bg.b);
+			
+			autoSizeToFitWidgets();
+			
+			ofAddListener(this->newGUIEvent, this, &PreferencesTab::onValueChanged);
+			ofSetFullscreen(fullscreen);
 		}
-	}
-};
+		int getFloorPattern() const {
+			return getChoice(floorStyleRadio);
+		}
+		float getFloorSize() const { return floorSize; }
+		float getFloorGridSize() const { return floorGridSize; }
+		
+		void update() {
+			
+			if (fullscreenToggle->getValue() != (ofGetWindowMode() == OF_FULLSCREEN))
+			{
+				fullscreenToggle->setValue(ofGetWindowMode() == OF_FULLSCREEN);
+				fullscreenToggle->stateChange();
+			}
+			
+			EnableShadow(useShadows);
+			ofBackground(bg);
+		}
+		
+		void onValueChanged(ofxUIEventArgs& e)
+		{
+			const string widgetName = e.widget->getName();
+			
+			if (widgetName == "Fullscreen")
+			{
+				ofSetFullscreen(fullscreenToggle->getValue());
+			}
+		}
+	};
+	
+}
+
+typedef rdtk::PreferencesTab OF_DEPRECATED(ramPreferencesTab);

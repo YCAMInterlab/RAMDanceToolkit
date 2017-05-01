@@ -21,7 +21,7 @@
 #include "ramControlPanel.h"
 #include "ramBaseHasFbo.h"
 
-using namespace rdtk{
+namespace rdtk{
 	
 	class BaseScene : public Unit, public BaseHasFbo
 	{

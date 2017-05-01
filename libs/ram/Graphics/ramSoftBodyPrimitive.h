@@ -21,37 +21,42 @@
 
 #include "ofxBtSoftBodyWorld.h"
 
-class ramSoftBodyPrimitive : public ramBasePrimitive
-{
-	friend class ramPhysics;
+namespace rdtk{
+	class SoftBodyPrimitive : public BasePrimitive
+	{
+		friend class Physics;
+		
+	public:
+		
+		SoftBodyPrimitive();
+		~SoftBodyPrimitive();
+		
+		ofxBt::SoftBody getSoftBody() const { return body; }
+		
+	protected:
+		
+		ofxBt::SoftBody body;
+		ofxBt::SoftBodyWorld& getWorld();
+		inline const ofxBt::SoftBodyWorld& getWorld() const
+		{
+			return const_cast<ofxBt::SoftBodyWorld&>(getWorld());
+		}
+		
+		void internal_update();
+	};
+	
+	class RopePrimitive : public SoftBodyPrimitive
+	{
+	public:
+		
+		RopePrimitive(const ofVec3f p0, const ofVec3f p1);
+		
+	protected:
+		
+		ofNode controlPoint[2];
+		
+	};
+}
 
-public:
-
-	ramSoftBodyPrimitive();
-	~ramSoftBodyPrimitive();
-
-	ofxBt::SoftBody getSoftBody() const { return body; }
-
-protected:
-
-	ofxBt::SoftBody body;
-	ofxBt::SoftBodyWorld& getWorld();
-    inline const ofxBt::SoftBodyWorld& getWorld() const
-    {
-        return const_cast<ofxBt::SoftBodyWorld&>(getWorld());
-    }
-
-	void internal_update();
-};
-
-class ramRopePrimitive : public ramSoftBodyPrimitive
-{
-public:
-
-	ramRopePrimitive(const ofVec3f p0, const ofVec3f p1);
-
-protected:
-
-	ofNode controlPoint[2];
-
-};
+typedef rdtk::SoftBodyPrimitive OF_DEPRECATED(ramSoftBodyPrimitive);
+typedef rdtk::RopePrimitive OF_DEPRECATED(ramRopePrimitive);

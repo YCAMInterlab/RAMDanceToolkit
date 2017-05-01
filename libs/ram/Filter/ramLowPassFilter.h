@@ -17,42 +17,47 @@
 
 #pragma once
 
-class ramLowPassFilter : public ramBaseFilter
-{
-public:
 
-	ramLowPassFilter() : amount(0.1) {}
-
-	const ramNodeArray& get(size_t index = 0) const { return copy; }
-	size_t getSize() const { return 1; }
-
-	void setupControlPanel()
+namespace rdtk{
+	class LowPassFilter : public BaseFilter
 	{
-		ramGetGUI().addSlider("LowPass amount", 0.0, 1.0, &amount);
-	}
-
-	string getName() const { return "ramLowPassFilter"; }
-
-#pragma mark -
-
-	void setAmount(float a) { amount = a; }
-
-	const ramNodeArray& filter(const ramNodeArray& src)
-	{
-		if (src.getNumNode() != copy.getNumNode()) copy = src;
-
-		for (int i = 0; i < src.getNumNode(); i++)
+	public:
+		
+		LowPassFilter() : amount(0.1) {}
+		
+		const NodeArray& get(size_t index = 0) const { return copy; }
+		size_t getSize() const { return 1; }
+		
+		void setupControlPanel()
 		{
-			ofVec3f input = src.getNode(i).getGlobalPosition();
-			ofVec3f output = copy.getNode(i).getGlobalPosition();
-			copy.getNode(i).setGlobalPosition((input * amount) + (output * (1 - amount)));
+			GetGUI().addSlider("LowPass amount", 0.0, 1.0, &amount);
 		}
+		
+		string getName() const { return "ramLowPassFilter"; }
+		
+#pragma mark -
+		
+		void setAmount(float a) { amount = a; }
+		
+		const NodeArray& filter(const NodeArray& src)
+		{
+			if (src.getNumNode() != copy.getNumNode()) copy = src;
+			
+			for (int i = 0; i < src.getNumNode(); i++)
+			{
+				ofVec3f input = src.getNode(i).getGlobalPosition();
+				ofVec3f output = copy.getNode(i).getGlobalPosition();
+				copy.getNode(i).setGlobalPosition((input * amount) + (output * (1 - amount)));
+			}
+			
+			return copy;
+		}
+		
+	protected:
+		
+		NodeArray copy;
+		float amount;
+	};
+}
 
-		return copy;
-	}
-
-protected:
-
-	ramNodeArray copy;
-	float amount;
-};
+typedef rdtk::LowPassFilter OF_DEPRECATED(ramLowPassFilter);

@@ -18,7 +18,10 @@
 #include "ramTSVCoder.h"
 
 
-void ramTSVCoder::decode(ofBuffer buffer)
+
+using namespace rdtk;
+	
+void TSVCoder::decode(ofBuffer buffer)
 {
 	
 	if (buffer.size())
@@ -32,15 +35,15 @@ void ramTSVCoder::decode(ofBuffer buffer)
 			
 			if (values.size() < 2)
 				throw std::exception();
-				
+			
 			const string addr = values.at(0);
 			const string name = values.at(1);
 			
-			ramNodeArray NA;
+			NodeArray NA;
 			
 			if (addr == RAM_OSC_ADDR_ACTOR)
 			{
-				ramActor o;
+				Actor o;
 				o.setType(rdtk::RAM_NODEARRAY_TYPE_ACTOR);
 				o.setName(name);
 				NA = o;
@@ -59,7 +62,7 @@ void ramTSVCoder::decode(ofBuffer buffer)
 			{
 				if (values.size() < i*8+3+7)
 					throw std::exception();
-					
+				
 				const string nodeName = values.at(i*8 + 0 + 3);
 				const float vx = ofToFloat( values.at(i*8 + 1 + 3) );
 				const float vy = ofToFloat( values.at(i*8 + 2 + 3) );
@@ -72,7 +75,7 @@ void ramTSVCoder::decode(ofBuffer buffer)
 				const ofVec3f axis(ax, ay, az);
 				const ofQuaternion quat(qa, axis);
 				
-				ramNode &node = NA.getNode(i);
+				Node &node = NA.getNode(i);
 				node.setID(i);
 				node.setName(nodeName);
 				node.setPosition(vec);
@@ -86,17 +89,17 @@ void ramTSVCoder::decode(ofBuffer buffer)
 			
 		} while (!buffer.isLastLine());
 		
-//		cout << "[" << __FUNCTION__ << "] " << "File loaded! " << endl;
-//		cout << "[" << __FUNCTION__ << "] " << "Actor: " << mSession.getNodeArrayName() << endl;
-//		cout << "[" << __FUNCTION__ << "] " << "Duration: " << mSession.getDuration() << "sec"<< endl;
-//		cout << "[" << __FUNCTION__ << "] " << "Frames: " << mSession.getNumFrames() << endl << endl;
+		//		cout << "[" << __FUNCTION__ << "] " << "File loaded! " << endl;
+		//		cout << "[" << __FUNCTION__ << "] " << "Actor: " << mSession.getNodeArrayName() << endl;
+		//		cout << "[" << __FUNCTION__ << "] " << "Duration: " << mSession.getDuration() << "sec"<< endl;
+		//		cout << "[" << __FUNCTION__ << "] " << "Frames: " << mSession.getNumFrames() << endl << endl;
 	}
-
-
-//	return mSession;
+	
+	
+	//	return mSession;
 }
 
-bool ramTSVCoder::encode(ramSession &src) const
+bool TSVCoder::encode(Session &src) const
 {
 	if (src.getNumFrames() <= 0)
 	{
@@ -107,7 +110,7 @@ bool ramTSVCoder::encode(ramSession &src) const
 	src.prepareForPlay();
 	
 	ofBuffer buf;
-	ramNodeArray& sample = src.getFrame(0);
+	NodeArray& sample = src.getFrame(0);
 	const string timestampStr = ofGetTimestampString("%Y.%m.%d_%H.%M.%S");
 	const string address = sample.isActor() ? RAM_OSC_ADDR_ACTOR : RAM_OSC_ADDR_RIGID_BODY;
 	const string entityName = sample.getName() + " " + timestampStr;
@@ -115,13 +118,13 @@ bool ramTSVCoder::encode(ramSession &src) const
 	
 	for(int i=0; i<src.getNumFrames(); i++)
 	{
-		ramNodeArray &nodeArray = src.getFrame(i);
+		NodeArray &nodeArray = src.getFrame(i);
 		stringstream frame;
 		frame << address << "\t" << entityName << "\t" << numJoints << "\t";
 		
 		for(int j=0; j<nodeArray.getNumNode(); j++)
 		{
-			const ramNode& node = nodeArray.getNode(j);
+			const Node& node = nodeArray.getNode(j);
 			const string& name = node.getName();
 			const ofVec3f &pos = node.getPosition();
 			float qangle, qx, qy, qz;
@@ -145,7 +148,7 @@ bool ramTSVCoder::encode(ramSession &src) const
 	}
 	
 	const string fileName = mFileName.empty() ? timestampStr + "_" + entityName + ".tsv" : mFileName;
-
+	
 	const bool succeeded = ofBufferToFile(fileName, buf, true);
 	
 	if (succeeded)
@@ -163,4 +166,3 @@ bool ramTSVCoder::encode(ramSession &src) const
 	
 	return succeeded;
 }
-

@@ -20,65 +20,69 @@
 #include "ramControllable.h"
 #include "ramGlobal.h"
 
-class ramUnit : public ramControllable, public ramGlobalShortcut
-{
-public:	
-	ramUnit() : bEnabled(false) {} 
-	virtual ~ramUnit() {}
-	
-	void enable()
+namespace rdtk{
+	class Unit : public Controllable, public GlobalShortcut
 	{
-		bEnabled = true;
-	}
-	
-	void disable()
-	{
-		bEnabled = false;
-	}
-	
-	void toggle()
-	{
-		setEnabled(!isEnabled());
-	}
-	
-	bool isEnabled() const
-	{
-		return bEnabled;
-	}
-	
-	void setEnabled(bool enabled)
-	{
-		if (bEnabled == enabled) return;
+	public:
+		Unit() : bEnabled(false) {}
+		virtual ~Unit() {}
 		
-		bEnabled = enabled;
+		void enable()
+		{
+			bEnabled = true;
+		}
 		
-		if (enabled)
-			onEnabled();
-		else
-			onDisabled();
-	}
-	
-	virtual void loadPreset(size_t preset_id = 0)
-	{
-		cout << "[loadPreset] " << getName() << endl;
-	}
-	
-	virtual void loadPresetXML(string filePath)
-	{
-		cout << "[loadPresetXML] " << getName() << endl;
-	}
-	
-	virtual void onEnabled()
-	{
-		cout << "[Unit enabled] " << getName() << endl;
-	}
-	
-	virtual void onDisabled()
-	{
-		cout << "[Unit disabled] " << getName() << endl;
-	}
-	
-protected:
-	
-	bool bEnabled;
-};
+		void disable()
+		{
+			bEnabled = false;
+		}
+		
+		void toggle()
+		{
+			setEnabled(!isEnabled());
+		}
+		
+		bool isEnabled() const
+		{
+			return bEnabled;
+		}
+		
+		void setEnabled(bool enabled)
+		{
+			if (bEnabled == enabled) return;
+			
+			bEnabled = enabled;
+			
+			if (enabled)
+				onEnabled();
+			else
+				onDisabled();
+		}
+		
+		virtual void loadPreset(size_t preset_id = 0)
+		{
+			cout << "[loadPreset] " << getName() << endl;
+		}
+		
+		virtual void loadPresetXML(string filePath)
+		{
+			cout << "[loadPresetXML] " << getName() << endl;
+		}
+		
+		virtual void onEnabled()
+		{
+			cout << "[Unit enabled] " << getName() << endl;
+		}
+		
+		virtual void onDisabled()
+		{
+			cout << "[Unit disabled] " << getName() << endl;
+		}
+		
+	protected:
+		
+		bool bEnabled;
+	};
+}
+
+using OF_DEPRECATED(ramUnit) = rdtk::Unit;

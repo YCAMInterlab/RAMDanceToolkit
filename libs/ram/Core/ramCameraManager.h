@@ -72,4 +72,4 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::cameraManager OF_DEPRECATED(ramCameraManager);
+typedef rdtk::CameraManager OF_DEPRECATED(ramCameraManager);

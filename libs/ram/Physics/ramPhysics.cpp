@@ -20,19 +20,21 @@
 #include "ramPrimitive.h"
 #include "ramSoftBodyPrimitive.h"
 
-ramPhysics* ramPhysics::_instance = NULL;
+using namespace rdtk;
 
-ramPhysics& ramPhysics::instance()
+Physics* Physics::_instance = NULL;
+
+Physics& Physics::instance()
 {
 	if (!_instance)
 	{
-		_instance = new ramPhysics;
+		_instance = new Physics;
 		_instance->setup();
 	}
 	return *_instance;
 }
 
-void ramPhysics::setup()
+void Physics::setup()
 {
 	if (inited) return;
 
@@ -41,20 +43,20 @@ void ramPhysics::setup()
 	world.setup(ofVec3f(0, -980, 0));
 	world.addWorldBox(ofVec3f(-1000, 0, -1000), ofVec3f(1000, 1000, 1000));
 
-	ofAddListener(ofEvents().update, this, &ramPhysics::onUpdate);
+	ofAddListener(ofEvents().update, this, &Physics::onUpdate);
 }
 
-void ramPhysics::clear()
+void Physics::clear()
 {
 	world.clear();
 }
 
-void ramPhysics::debugDraw()
+void Physics::debugDraw()
 {
 	world.draw();
 }
 
-void ramPhysics::onUpdate(ofEventArgs&)
+void Physics::onUpdate(ofEventArgs&)
 {
 	for (int i = 0; i < primitives.size(); i++)
 	{
@@ -67,7 +69,7 @@ void ramPhysics::onUpdate(ofEventArgs&)
 
 	for (int i = 0; i < temporary_primitives.size(); i++)
 	{
-		ramBasePrimitive *p = temporary_primitives[i];
+		BasePrimitive *p = temporary_primitives[i];
 		delete p;
 	}
 
@@ -75,16 +77,16 @@ void ramPhysics::onUpdate(ofEventArgs&)
 	cache_index.clear();
 }
 
-void ramPhysics::registerRigidBodyPrimitive(ramPrimitive *o)
+void Physics::registerRigidBodyPrimitive(Primitive *o)
 {
 	if (find(primitives.begin(), primitives.end(), o) != primitives.end()) return;
 
 	primitives.push_back(o);
 }
 
-void ramPhysics::unregisterRigidBodyPrimitive(ramPrimitive *o)
+void Physics::unregisterRigidBodyPrimitive(Primitive *o)
 {
-	vector<ramBasePrimitive*>::iterator it = find(primitives.begin(), primitives.end(), o);
+	vector<BasePrimitive*>::iterator it = find(primitives.begin(), primitives.end(), o);
 	if (it == primitives.end()) return;
 
 	world.removeRigidBody(o->body);
@@ -92,21 +94,21 @@ void ramPhysics::unregisterRigidBodyPrimitive(ramPrimitive *o)
 	primitives.erase(it);
 }
 
-void ramPhysics::registerTempraryPrimitive(ramPrimitive *o)
+void Physics::registerTempraryPrimitive(Primitive *o)
 {
 	temporary_primitives.push_back(o);
 }
 
-void ramPhysics::registerSoftBodyPrimitive(ramSoftBodyPrimitive *o)
+void Physics::registerSoftBodyPrimitive(SoftBodyPrimitive *o)
 {
 	if (find(primitives.begin(), primitives.end(), o) != primitives.end()) return;
 
 	primitives.push_back(o);
 }
 
-void ramPhysics::unregisterSoftBodyPrimitive(ramSoftBodyPrimitive *o)
+void Physics::unregisterSoftBodyPrimitive(SoftBodyPrimitive *o)
 {
-	vector<ramBasePrimitive*>::iterator it = find(primitives.begin(), primitives.end(), o);
+	vector<BasePrimitive*>::iterator it = find(primitives.begin(), primitives.end(), o);
 	if (it == primitives.end()) return;
 
 	world.removeSoftBody(o->body);
@@ -114,7 +116,7 @@ void ramPhysics::unregisterSoftBodyPrimitive(ramSoftBodyPrimitive *o)
 	primitives.erase(it);
 }
 
-bool ramPhysics::checkAndUpdateNodeCache(const ramNode *node)
+bool Physics::checkAndUpdateNodeCache(const Node *node)
 {
 	if (cache_index.find(node) == cache_index.end())
 	{

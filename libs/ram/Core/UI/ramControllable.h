@@ -19,10 +19,14 @@
 
 #include "ofMain.h"
 
-class ramControllable
-{
-public:
-	virtual ~ramControllable() {}
-	virtual string getName() const = 0;
-	virtual void setupControlPanel() {}
-};
+namespace rdtk{
+	class Controllable
+	{
+	public:
+		virtual ~Controllable() {}
+		virtual string getName() const = 0;
+		virtual void setupControlPanel() {}
+	};
+}
+
+typedef rdtk::Controllable OF_DEPRECATED(ramControllable);

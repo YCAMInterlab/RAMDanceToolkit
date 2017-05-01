@@ -17,74 +17,78 @@
 
 #pragma once
 
-class ramStamp : public ramBaseFilter
-{
-
-	deque<ramNodeArray> mStamps;
-	float mLastRecordTime;
-	float mRecSpan;
-
-	int kMaxStamps;
-
-public:
-
-	ramStamp() : mLastRecordTime(0.0), mRecSpan(5.0), kMaxStamps(30) {}
-
-	void setupControlPanel()
+namespace rdtk{
+	class Stamp : public BaseFilter
 	{
-		ofAddListener(ramGetGUI().addButton("Clear"), this, &ramStamp::onClear);
-		ramGetGUI().addSlider("Recording Span", 2.0, 60.0, &mRecSpan);
-	}
-	
-	void onClear(ofEventArgs &e)
-	{
-		clear();
-	}
-
-	void setup()
-	{
-		clear();
-	}
-
-#pragma mark -
-
-	const ramNodeArray& get(size_t index = 0) const { return mStamps[index]; }
-	size_t getSize() const { return mStamps.size(); }
-
-	void clear()
-	{
-		mLastRecordTime = ofGetElapsedTimef();
-		mStamps.clear();
-	}
-
-	const ramNodeArray createStamp(const ramNodeArray& src)
-	{
-		mLastRecordTime = ofGetElapsedTimef();
-		ramNodeArray copy = src;
-		mStamps.push_back(copy);
-
-		return copy;
-	}
-
-	inline void setRecSpan(const float span) { mRecSpan = span; }
-	inline deque<ramNodeArray>& getStamps() { return mStamps; }
-    inline const deque<ramNodeArray>& getStamps() const { return mStamps; }
-	inline ramNodeArray& getStamp(const int index) { return mStamps.at(index); }
-    inline const ramNodeArray& getStamp(const int index) const { return mStamps.at(index); }
-
-	string getName() const { return "ramStamp"; }
-
-protected:
-
-	const ramNodeArray& filter(const ramNodeArray& src)
-	{
-		if (ofGetElapsedTimef() - mLastRecordTime > mRecSpan)
+		
+		deque<NodeArray> mStamps;
+		float mLastRecordTime;
+		float mRecSpan;
+		
+		int kMaxStamps;
+		
+	public:
+		
+		Stamp() : mLastRecordTime(0.0), mRecSpan(5.0), kMaxStamps(30) {}
+		
+		void setupControlPanel()
 		{
-			createStamp(src);
-			if (kMaxStamps < mStamps.size())
-				mStamps.pop_front();
+			ofAddListener(GetGUI().addButton("Clear"), this, &Stamp::onClear);
+			GetGUI().addSlider("Recording Span", 2.0, 60.0, &mRecSpan);
 		}
+		
+		void onClear(ofEventArgs &e)
+		{
+			clear();
+		}
+		
+		void setup()
+		{
+			clear();
+		}
+		
+#pragma mark -
+		
+		const NodeArray& get(size_t index = 0) const { return mStamps[index]; }
+		size_t getSize() const { return mStamps.size(); }
+		
+		void clear()
+		{
+			mLastRecordTime = ofGetElapsedTimef();
+			mStamps.clear();
+		}
+		
+		const NodeArray createStamp(const NodeArray& src)
+		{
+			mLastRecordTime = ofGetElapsedTimef();
+			NodeArray copy = src;
+			mStamps.push_back(copy);
+			
+			return copy;
+		}
+		
+		inline void setRecSpan(const float span) { mRecSpan = span; }
+		inline deque<NodeArray>& getStamps() { return mStamps; }
+		inline const deque<NodeArray>& getStamps() const { return mStamps; }
+		inline NodeArray& getStamp(const int index) { return mStamps.at(index); }
+		inline const NodeArray& getStamp(const int index) const { return mStamps.at(index); }
+		
+		string getName() const { return "ramStamp"; }
+		
+	protected:
+		
+		const NodeArray& filter(const NodeArray& src)
+		{
+			if (ofGetElapsedTimef() - mLastRecordTime > mRecSpan)
+			{
+				createStamp(src);
+				if (kMaxStamps < mStamps.size())
+					mStamps.pop_front();
+			}
+			
+			return src;
+		}
+	};
+}
 
-		return src;
-	}
-};
+typedef rdtk::Stamp OF_DEPRECATED(ramStamp);

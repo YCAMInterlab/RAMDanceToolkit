@@ -21,7 +21,7 @@
 #include "ramNodeFinder.h"
 #include "ramGraphics.h"
 
-using namespace ofxInteractivePrimitives;
+//using namespace ofxInteractivePrimitives;
 using namespace rdtk;
 
 #pragma mark - ActorManager::NodeSelector
@@ -38,7 +38,7 @@ public:
 	ofEvent<NodeIdentifer> selectStateChanged;
 	NodeIdentifer identifer;
 
-	NodeSelector(RootNode &root) { setParent(&root); }
+	NodeSelector(ofxInteractivePrimitives::RootNode &root) { setParent(&root); }
 
 	void draw()
 	{
@@ -49,11 +49,11 @@ public:
 
 		for (int n = 0; n < AM.getNumNodeArray(); n++)
 		{
-			NodeArray &NA = AM.getNodeArray(n);
+			rdtk::NodeArray &NA = AM.getNodeArray(n);
 
 			for (int i = 0; i < NA.getNumNode(); i++)
 			{
-				Node &node = NA.getNode(i);
+				rdtk::Node &node = NA.getNode(i);
 
 				glPushMatrix();
 				ofTranslate(node.getGlobalPosition());
@@ -87,7 +87,7 @@ public:
 
 			for (int i = 0; i < NA.getNumNode(); i++)
 			{
-				Node &node = NA.getNode(i);
+				rdtk::Node &node = NA.getNode(i);
 
 				pushID(i);
 

@@ -20,82 +20,87 @@
 #include "ramNodeArrayBuffer.h"
 #include "ramSession.h"
 
-class ramBaseCoder
-{
-	
-public:
-	ramBaseCoder() {}
-	ramBaseCoder(const string& fileName) : mFileName(fileName) {}
-	virtual ~ramBaseCoder() {}
-	
-	
-	/// load tsv, and convert to ramSession
-	// -----------------------------
-	void load(const string &filePath)
+namespace rdtk{
+	class BaseCoder
 	{
-//		cout
-//		<< "[" << __FUNCTION__ << "] " << "start loading file..."
-//		<< "File name: " << filePath << endl;
 		
-		if ( !ofFile::doesFileExist(filePath) )
+	public:
+		BaseCoder() {}
+		BaseCoder(const string& fileName) : mFileName(fileName) {}
+		virtual ~BaseCoder() {}
+		
+		
+		/// load tsv, and convert to ramSession
+		// -----------------------------
+		void load(const string &filePath)
 		{
-			cout << "[" << __FUNCTION__ << "] " << filePath << " load failed. No such file or directory." << endl;
+			//		cout
+			//		<< "[" << __FUNCTION__ << "] " << "start loading file..."
+			//		<< "File name: " << filePath << endl;
+			
+			if ( !ofFile::doesFileExist(filePath) )
+			{
+				cout << "[" << __FUNCTION__ << "] " << filePath << " load failed. No such file or directory." << endl;
+			}
+			
+			ofFile file;
+			file.open(filePath);
+			
+			decode(file.readToBuffer());
 		}
 		
-		ofFile file;
-		file.open(filePath);
 		
-		decode(file.readToBuffer());
-	}
+		/// save ramSession to filePath
+		// -----------------------------
+		bool save(Session &src)
+		{
+			return encode(src);
+		}
+		
+		bool save(Session &src, const string &filePath)
+		{
+			setFileName(filePath);
+			return encode(src);
+		}
+		
+		bool save(NodeArrayBuffer &src)
+		{
+			Session session(src);
+			return encode(session);
+		}
+		
+		bool save(NodeArrayBuffer &src, const string &filePath)
+		{
+			Session session(src);
+			setFileName(filePath);
+			return encode(session);
+		}
+		
+		
+		/// clear all members
+		// -----------------------------
+		void clear()
+		{
+			mFileName.clear();
+			mSession.clear();
+		}
+		
+		
+		/// setters
+		// -----------------------------
+		inline void setFileName(const string &fileName) { mFileName = fileName; }
+		
+		Session& get() { return mSession; }
+		
+	protected:
+		
+		virtual void decode(ofBuffer buffer) = 0;
+		virtual bool encode(Session &src) const = 0;
+		
+		string mFileName;
+		Session mSession;
+	};
 	
-	
-	/// save ramSession to filePath
-	// -----------------------------
-	bool save(ramSession &src)
-	{
-		return encode(src);
-	}
-	
-	bool save(ramSession &src, const string &filePath)
-	{
-		setFileName(filePath);
-		return encode(src);
-	}
-	
-	bool save(ramNodeArrayBuffer &src)
-	{
-		ramSession session(src);
-		return encode(session);
-	}
-	
-	bool save(ramNodeArrayBuffer &src, const string &filePath)
-	{
-		ramSession session(src);
-		setFileName(filePath);
-		return encode(session);
-	}
-	
-	
-	/// clear all members
-	// -----------------------------
-	void clear()
-	{
-		mFileName.clear();
-		mSession.clear();
-	}
-	
-	
-	/// setters
-	// -----------------------------
-	inline void setFileName(const string &fileName) { mFileName = fileName; }
-	
-	ramSession& get() { return mSession; }
-	
-protected:
-	
-	virtual void decode(ofBuffer buffer) = 0;
-	virtual bool encode(ramSession &src) const = 0;
-	
-	string mFileName;
-	ramSession mSession;
-};
+}
+
+typedef rdtk::BaseCoder OF_DEPRECATED(ramBaseCoder);
