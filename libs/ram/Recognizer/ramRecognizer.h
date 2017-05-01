@@ -174,11 +174,11 @@ namespace rdtk{
 			
 			ofSetColor(c, c.a * 0.3);
 			ofNoFill();
-			ofCircle(0, 0, current_value * 10);
+			ofDrawCircle(0, 0, current_value * 10);
 			
 			ofSetColor(c, c.a * 0.5);
 			ofNoFill();
-			ofCircle(0, 0, threshold * 10);
+			ofDrawCircle(0, 0, threshold * 10);
 			
 			ofPopStyle();
 			glPopMatrix();
@@ -264,7 +264,7 @@ namespace rdtk{
 			
 			ofSetColor(c, c.a * 0.5);
 			ofFill();
-			ofCircle(0, 0, 10 * getThreshold() * timer.getProgress());
+			ofDrawCircle(0, 0, 10 * getThreshold() * timer.getProgress());
 			
 			ofPopStyle();
 			glPopMatrix();

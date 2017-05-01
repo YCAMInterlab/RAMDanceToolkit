@@ -149,7 +149,7 @@ public:
 					}
 					ofSetColor(yellowPrint);
 					if(showCircle) {
-						ofCircle(0, 0, radius);
+						ofDrawCircle(0, 0, radius);
 					}
 					ofPopMatrix();
 					if(showCircleBisector) {
@@ -167,7 +167,7 @@ public:
 					}
 					if(showCenterCircles) {
 						ofSetColor(yellowPrint);
-						ofCircle(0, 0, radius);
+						ofDrawCircle(0, 0, radius);
 					}
 					ofPopMatrix();
 				}

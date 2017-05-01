@@ -64,7 +64,7 @@ public:
 					&& NS[2] == i)
 				{
 					ofSetColor(255, 0, 0);
-					ofCircle(0, 0, 10 + sin(ofGetElapsedTimef() * 20) * 5);
+					ofDrawCircle(0, 0, 10 + sin(ofGetElapsedTimef() * 20) * 5);
 				}
 
 				glPopMatrix();
@@ -95,7 +95,7 @@ public:
 				ofTranslate(node.getGlobalPosition());
 				Billboard();
 
-				ofCircle(0, 0, 15);
+				ofDrawCircle(0, 0, 15);
 
 				glPopMatrix();
 
@@ -213,10 +213,10 @@ void ActorManager::draw()
 
 			ofFill();
 			ofSetColor(255, 0, 0, 80);
-			ofCircle(0, 0, 10 + sin(ofGetElapsedTimef() * 10) * 5);
+			ofDrawCircle(0, 0, 10 + sin(ofGetElapsedTimef() * 10) * 5);
 
 			ofNoFill();
-			ofCircle(0, 0, 10 + sin(ofGetElapsedTimef() * 10) * 5);
+			ofDrawCircle(0, 0, 10 + sin(ofGetElapsedTimef() * 10) * 5);
 			ofPopStyle();
 
 			node.endTransform();
