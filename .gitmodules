@@ -12,7 +12,7 @@
 	url = https://github.com/YCAMInterlab/ofxNodeArray.git
 [submodule "addons/ofxBt"]
 	path = addons/ofxBt
-url=https://github.com/loveandsheep/ofxBt.git
+	url=https://github.com/loveandsheep/ofxBt.git
 [submodule "addons/ofxQuadWarp"]
 	path = addons/ofxQuadWarp
 	url = https://github.com/julapy/ofxQuadWarp.git
@@ -31,3 +31,6 @@ url=https://github.com/loveandsheep/ofxBt.git
 [submodule "addons/ofxMotioner"]
 	path = addons/ofxMotioner
 	url = https://github.com/YoshitoONISHI/ofxMotioner.git
+[submodule "addons/ofxImGui"]
+	path = addons/ofxImGui
+	url = https://github.com/jvcleave/ofxImGui.git

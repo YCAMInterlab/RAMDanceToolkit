@@ -1,5 +1,5 @@
 // 
-// testApp.h - RAMDanceToolkit
+// ofApp.h - RAMDanceToolkit
 // 
 // Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
 // 
@@ -46,7 +46,7 @@
 #include "Laban.h"
 #include "Notation.h"
 
-class testApp : public ramBaseApp
+class ofApp : public ramBaseApp
 {
 public:
 	

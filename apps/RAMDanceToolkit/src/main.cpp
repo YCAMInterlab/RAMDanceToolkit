@@ -15,7 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "testApp.h"
+#include "ofApp.h"
 #include "ofAppGlutWindow.h"
 
 //--------------------------------------------------------------
@@ -29,5 +29,5 @@ int main()
 
 	// these values are only for initialization, actual settings are in ramControlPanel
 	ofSetupOpenGL(&window, 1024, 1024, OF_WINDOW);
-	ofRunApp(new testApp); // start the app
+	ofRunApp(new ofApp); // start the app
 }

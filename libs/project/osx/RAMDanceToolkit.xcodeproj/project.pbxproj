@@ -480,6 +480,32 @@
 		C6FC6B5219515D11002E18D5 /* ofxSliderGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FC6B4119515D11002E18D5 /* ofxSliderGroup.h */; };
 		C6FC6B5319515D11002E18D5 /* ofxToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FC6B4219515D11002E18D5 /* ofxToggle.cpp */; };
 		C6FC6B5419515D11002E18D5 /* ofxToggle.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FC6B4319515D11002E18D5 /* ofxToggle.h */; };
+		C6FE33DF1EB7492100E39BF0 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33B81EB7492100E39BF0 /* imgui.cpp */; };
+		C6FE33E01EB7492100E39BF0 /* imgui.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33B91EB7492100E39BF0 /* imgui.h */; };
+		C6FE33E11EB7492100E39BF0 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33BA1EB7492100E39BF0 /* imgui_demo.cpp */; };
+		C6FE33E21EB7492100E39BF0 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33BB1EB7492100E39BF0 /* imgui_draw.cpp */; };
+		C6FE33E31EB7492100E39BF0 /* imgui_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33BC1EB7492100E39BF0 /* imgui_internal.h */; };
+		C6FE33E41EB7492100E39BF0 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33BE1EB7492100E39BF0 /* README.md */; };
+		C6FE33E51EB7492100E39BF0 /* stb_rect_pack.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33BF1EB7492100E39BF0 /* stb_rect_pack.h */; };
+		C6FE33E61EB7492100E39BF0 /* stb_textedit.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33C01EB7492100E39BF0 /* stb_textedit.h */; };
+		C6FE33E71EB7492100E39BF0 /* stb_truetype.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33C11EB7492100E39BF0 /* stb_truetype.h */; };
+		C6FE33E91EB7492100E39BF0 /* BaseEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33C41EB7492100E39BF0 /* BaseEngine.cpp */; };
+		C6FE33EA1EB7492100E39BF0 /* BaseEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33C51EB7492100E39BF0 /* BaseEngine.h */; };
+		C6FE33EB1EB7492100E39BF0 /* BaseTheme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33C61EB7492100E39BF0 /* BaseTheme.cpp */; };
+		C6FE33EC1EB7492100E39BF0 /* BaseTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33C71EB7492100E39BF0 /* BaseTheme.h */; };
+		C6FE33ED1EB7492100E39BF0 /* EngineGLFW.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33C81EB7492100E39BF0 /* EngineGLFW.cpp */; };
+		C6FE33EE1EB7492100E39BF0 /* EngineGLFW.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33C91EB7492100E39BF0 /* EngineGLFW.h */; };
+		C6FE33EF1EB7492100E39BF0 /* EngineOpenGLES.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33CA1EB7492100E39BF0 /* EngineOpenGLES.cpp */; };
+		C6FE33F01EB7492100E39BF0 /* EngineOpenGLES.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33CB1EB7492100E39BF0 /* EngineOpenGLES.h */; };
+		C6FE33F11EB7492100E39BF0 /* Gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33CC1EB7492100E39BF0 /* Gui.cpp */; };
+		C6FE33F21EB7492100E39BF0 /* Gui.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33CD1EB7492100E39BF0 /* Gui.h */; };
+		C6FE33F31EB7492100E39BF0 /* Helpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33CE1EB7492100E39BF0 /* Helpers.cpp */; };
+		C6FE33F41EB7492100E39BF0 /* Helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33CF1EB7492100E39BF0 /* Helpers.h */; };
+		C6FE33F51EB7492100E39BF0 /* imconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33D01EB7492100E39BF0 /* imconfig.h */; };
+		C6FE33F61EB7492100E39BF0 /* ofxImGui.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33D11EB7492100E39BF0 /* ofxImGui.h */; };
+		C6FE33F71EB7492100E39BF0 /* ThemeTest.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33D21EB7492100E39BF0 /* ThemeTest.h */; };
+		C6FE33FD1EB7495E00E39BF0 /* ramImGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33FB1EB7495E00E39BF0 /* ramImGui.cpp */; };
+		C6FE33FE1EB7495E00E39BF0 /* ramImGui.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33FC1EB7495E00E39BF0 /* ramImGui.h */; };
 		D20F14F11A86035B0053B6E9 /* ETF.h in Headers */ = {isa = PBXBuildFile; fileRef = D20F14EA1A86035B0053B6E9 /* ETF.h */; };
 		D20F14F21A86035B0053B6E9 /* fdog.h in Headers */ = {isa = PBXBuildFile; fileRef = D20F14EB1A86035B0053B6E9 /* fdog.h */; };
 		D20F14F31A86035B0053B6E9 /* imatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = D20F14EC1A86035B0053B6E9 /* imatrix.h */; };
@@ -1068,6 +1094,33 @@
 		C6FC6B4119515D11002E18D5 /* ofxSliderGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSliderGroup.h; sourceTree = "<group>"; };
 		C6FC6B4219515D11002E18D5 /* ofxToggle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxToggle.cpp; sourceTree = "<group>"; };
 		C6FC6B4319515D11002E18D5 /* ofxToggle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxToggle.h; sourceTree = "<group>"; };
+		C6FE33B81EB7492100E39BF0 /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
+		C6FE33B91EB7492100E39BF0 /* imgui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui.h; sourceTree = "<group>"; };
+		C6FE33BA1EB7492100E39BF0 /* imgui_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_demo.cpp; sourceTree = "<group>"; };
+		C6FE33BB1EB7492100E39BF0 /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_draw.cpp; sourceTree = "<group>"; };
+		C6FE33BC1EB7492100E39BF0 /* imgui_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_internal.h; sourceTree = "<group>"; };
+		C6FE33BD1EB7492100E39BF0 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		C6FE33BE1EB7492100E39BF0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C6FE33BF1EB7492100E39BF0 /* stb_rect_pack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_rect_pack.h; sourceTree = "<group>"; };
+		C6FE33C01EB7492100E39BF0 /* stb_textedit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_textedit.h; sourceTree = "<group>"; };
+		C6FE33C11EB7492100E39BF0 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
+		C6FE33C41EB7492100E39BF0 /* BaseEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseEngine.cpp; sourceTree = "<group>"; };
+		C6FE33C51EB7492100E39BF0 /* BaseEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEngine.h; sourceTree = "<group>"; };
+		C6FE33C61EB7492100E39BF0 /* BaseTheme.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseTheme.cpp; sourceTree = "<group>"; };
+		C6FE33C71EB7492100E39BF0 /* BaseTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTheme.h; sourceTree = "<group>"; };
+		C6FE33C81EB7492100E39BF0 /* EngineGLFW.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EngineGLFW.cpp; sourceTree = "<group>"; };
+		C6FE33C91EB7492100E39BF0 /* EngineGLFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EngineGLFW.h; sourceTree = "<group>"; };
+		C6FE33CA1EB7492100E39BF0 /* EngineOpenGLES.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EngineOpenGLES.cpp; sourceTree = "<group>"; };
+		C6FE33CB1EB7492100E39BF0 /* EngineOpenGLES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EngineOpenGLES.h; sourceTree = "<group>"; };
+		C6FE33CC1EB7492100E39BF0 /* Gui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Gui.cpp; sourceTree = "<group>"; };
+		C6FE33CD1EB7492100E39BF0 /* Gui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gui.h; sourceTree = "<group>"; };
+		C6FE33CE1EB7492100E39BF0 /* Helpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Helpers.cpp; sourceTree = "<group>"; };
+		C6FE33CF1EB7492100E39BF0 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
+		C6FE33D01EB7492100E39BF0 /* imconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
+		C6FE33D11EB7492100E39BF0 /* ofxImGui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxImGui.h; sourceTree = "<group>"; };
+		C6FE33D21EB7492100E39BF0 /* ThemeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeTest.h; sourceTree = "<group>"; };
+		C6FE33FB1EB7495E00E39BF0 /* ramImGui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramImGui.cpp; sourceTree = "<group>"; };
+		C6FE33FC1EB7495E00E39BF0 /* ramImGui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramImGui.h; sourceTree = "<group>"; };
 		D20F14EA1A86035B0053B6E9 /* ETF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETF.h; sourceTree = "<group>"; };
 		D20F14EB1A86035B0053B6E9 /* fdog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fdog.h; sourceTree = "<group>"; };
 		D20F14EC1A86035B0053B6E9 /* imatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imatrix.h; sourceTree = "<group>"; };
@@ -1331,6 +1384,7 @@
 		607D7ACC16661B860063800A /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				C6FE338A1EB7492100E39BF0 /* ofxImGui */,
 				D24DD66B1A84C2C800CECD2B /* ofxUITabbedCanvas */,
 				9248D51E1A4D6A1200047AF5 /* ofxOpenCv */,
 				C6FC6B3119515D11002E18D5 /* ofxGui */,
@@ -2170,6 +2224,8 @@
 		9AEA6590191CB63D001FAA18 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C6FE33FC1EB7495E00E39BF0 /* ramImGui.h */,
+				C6FE33FB1EB7495E00E39BF0 /* ramImGui.cpp */,
 				C698EAD51A78C6FE00362289 /* ramMotionExtractor */,
 				9AEA6591191CB63D001FAA18 /* ramActorScene */,
 				9AEA659A191CB63D001FAA18 /* ramControllable.h */,
@@ -2353,6 +2409,71 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		C6FE338A1EB7492100E39BF0 /* ofxImGui */ = {
+			isa = PBXGroup;
+			children = (
+				C6FE33B51EB7492100E39BF0 /* libs */,
+				C6FE33C31EB7492100E39BF0 /* src */,
+			);
+			name = ofxImGui;
+			path = ../../../../addons/ofxImGui;
+			sourceTree = "<group>";
+		};
+		C6FE33B51EB7492100E39BF0 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				C6FE33B61EB7492100E39BF0 /* imgui */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		C6FE33B61EB7492100E39BF0 /* imgui */ = {
+			isa = PBXGroup;
+			children = (
+				C6FE33B71EB7492100E39BF0 /* src */,
+			);
+			path = imgui;
+			sourceTree = "<group>";
+		};
+		C6FE33B71EB7492100E39BF0 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				C6FE33B81EB7492100E39BF0 /* imgui.cpp */,
+				C6FE33B91EB7492100E39BF0 /* imgui.h */,
+				C6FE33BA1EB7492100E39BF0 /* imgui_demo.cpp */,
+				C6FE33BB1EB7492100E39BF0 /* imgui_draw.cpp */,
+				C6FE33BC1EB7492100E39BF0 /* imgui_internal.h */,
+				C6FE33BD1EB7492100E39BF0 /* LICENSE */,
+				C6FE33BE1EB7492100E39BF0 /* README.md */,
+				C6FE33BF1EB7492100E39BF0 /* stb_rect_pack.h */,
+				C6FE33C01EB7492100E39BF0 /* stb_textedit.h */,
+				C6FE33C11EB7492100E39BF0 /* stb_truetype.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		C6FE33C31EB7492100E39BF0 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				C6FE33C41EB7492100E39BF0 /* BaseEngine.cpp */,
+				C6FE33C51EB7492100E39BF0 /* BaseEngine.h */,
+				C6FE33C61EB7492100E39BF0 /* BaseTheme.cpp */,
+				C6FE33C71EB7492100E39BF0 /* BaseTheme.h */,
+				C6FE33C81EB7492100E39BF0 /* EngineGLFW.cpp */,
+				C6FE33C91EB7492100E39BF0 /* EngineGLFW.h */,
+				C6FE33CA1EB7492100E39BF0 /* EngineOpenGLES.cpp */,
+				C6FE33CB1EB7492100E39BF0 /* EngineOpenGLES.h */,
+				C6FE33CC1EB7492100E39BF0 /* Gui.cpp */,
+				C6FE33CD1EB7492100E39BF0 /* Gui.h */,
+				C6FE33CE1EB7492100E39BF0 /* Helpers.cpp */,
+				C6FE33CF1EB7492100E39BF0 /* Helpers.h */,
+				C6FE33D01EB7492100E39BF0 /* imconfig.h */,
+				C6FE33D11EB7492100E39BF0 /* ofxImGui.h */,
+				C6FE33D21EB7492100E39BF0 /* ThemeTest.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		D20F14E71A86035B0053B6E9 /* CLD */ = {
 			isa = PBXGroup;
 			children = (
@@ -2527,6 +2648,7 @@
 				9AEA65B3191CB63D001FAA18 /* ramUnit.h in Headers */,
 				9248D5E41A4D6A1200047AF5 /* objdetect.hpp in Headers */,
 				9AEA65AC191CB63D001FAA18 /* ramActorManager.h in Headers */,
+				C6FE33F21EB7492100E39BF0 /* Gui.h in Headers */,
 				9AEA65C3191CB63D001FAA18 /* ramControllable.h in Headers */,
 				D21D08141A4BD9A900CC3598 /* ofxUIDragableLabelButton.h in Headers */,
 				D21D081A1A4BD9A900CC3598 /* ofxUIFPS.h in Headers */,
@@ -2560,6 +2682,7 @@
 				9248D5AF1A4D6A1200047AF5 /* wimage.hpp in Headers */,
 				277606F216E4EB2700D6B31D /* ramExpansion.h in Headers */,
 				277606F316E4EB2700D6B31D /* ramGhost.h in Headers */,
+				C6FE33F51EB7492100E39BF0 /* imconfig.h in Headers */,
 				277606F416E4EB2700D6B31D /* ramLowPassFilter.h in Headers */,
 				9248D5BE1A4D6A1200047AF5 /* ground_truth.h in Headers */,
 				277606F516E4EB2700D6B31D /* ramNodeTransform.h in Headers */,
@@ -2567,6 +2690,7 @@
 				277606F616E4EB2700D6B31D /* ramPendulum.h in Headers */,
 				277606F816E4EB2700D6B31D /* ramSession.h in Headers */,
 				9248D5A51A4D6A1200047AF5 /* contrib.hpp in Headers */,
+				C6FE33F61EB7492100E39BF0 /* ofxImGui.h in Headers */,
 				277606F916E4EB2700D6B31D /* ramStamp.h in Headers */,
 				277606FA16E4EB2700D6B31D /* ramTimeFilter.h in Headers */,
 				277606FB16E4EB2700D6B31D /* ramUpsideDown.h in Headers */,
@@ -2575,6 +2699,7 @@
 				9248D5AE1A4D6A1200047AF5 /* version.hpp in Headers */,
 				2776070016E4EB2700D6B31D /* ramNodeLine.h in Headers */,
 				2776070216E4EB2700D6B31D /* ramPrimitive.h in Headers */,
+				C6FE33EE1EB7492100E39BF0 /* EngineGLFW.h in Headers */,
 				2776070416E4EB2700D6B31D /* ramSimpleShadow.h in Headers */,
 				2776070616E4EB2700D6B31D /* ramSoftBodyPrimitive.h in Headers */,
 				2776070816E4EB2700D6B31D /* ramPhysics.h in Headers */,
@@ -2606,6 +2731,7 @@
 				9A70C17F16E9CE6F00A5B755 /* Utilities.h in Headers */,
 				9A70C18016E9CE6F00A5B755 /* Wrappers.h in Headers */,
 				9A70C18A16E9CE6F00A5B755 /* ofxCv.h in Headers */,
+				C6FE33F01EB7492100E39BF0 /* EngineOpenGLES.h in Headers */,
 				D21D08261A4BD9A900CC3598 /* ofxUIImageToggle.h in Headers */,
 				9A70C19516E9CE6F00A5B755 /* ofxInteractivePrimitives.h in Headers */,
 				9A70C19616E9CE6F00A5B755 /* ofxIPBaseElement.h in Headers */,
@@ -2671,6 +2797,7 @@
 				9248D5C11A4D6A1200047AF5 /* hierarchical_clustering_index.h in Headers */,
 				D21D085C1A4BD9A900CC3598 /* ofxUIWidget.h in Headers */,
 				9A38F4ED16E9E81900FF8B66 /* btInternalEdgeUtility.h in Headers */,
+				C6FE33F71EB7492100E39BF0 /* ThemeTest.h in Headers */,
 				9AEA65AD191CB63D001FAA18 /* ramBaseApp.h in Headers */,
 				9248D5A61A4D6A1200047AF5 /* retina.hpp in Headers */,
 				9A38F4EE16E9E81900FF8B66 /* btManifoldResult.h in Headers */,
@@ -2759,6 +2886,7 @@
 				9248D59F1A4D6A1200047AF5 /* cxcore.hpp in Headers */,
 				9A38F51B16E9E81900FF8B66 /* btTriangleShape.h in Headers */,
 				D21D085A1A4BD9A900CC3598 /* ofxUIWaveform.h in Headers */,
+				C6FE33E31EB7492100E39BF0 /* imgui_internal.h in Headers */,
 				9A38F51C16E9E81900FF8B66 /* btUniformScalingShape.h in Headers */,
 				D21D080B1A4BD9A900CC3598 /* ofxUIBiLabelSlider.h in Headers */,
 				9A38F51D16E9E81900FF8B66 /* btBoxCollision.h in Headers */,
@@ -2775,6 +2903,7 @@
 				9A38F52316E9E81900FF8B66 /* btGImpactCollisionAlgorithm.h in Headers */,
 				9A38F52416E9E81900FF8B66 /* btGImpactMassUtil.h in Headers */,
 				9A38F52516E9E81900FF8B66 /* btGImpactQuantizedBvh.h in Headers */,
+				C6FE33EA1EB7492100E39BF0 /* BaseEngine.h in Headers */,
 				9A38F52616E9E81900FF8B66 /* btGImpactShape.h in Headers */,
 				9A38F52716E9E81900FF8B66 /* btQuantization.h in Headers */,
 				9A38F52816E9E81900FF8B66 /* btTriangleShapeEx.h in Headers */,
@@ -2783,6 +2912,7 @@
 				9A38F52A16E9E81900FF8B66 /* gim_basic_geometry_operations.h in Headers */,
 				9A38F52B16E9E81900FF8B66 /* gim_bitset.h in Headers */,
 				9A38F52C16E9E81900FF8B66 /* gim_box_collision.h in Headers */,
+				C6FE33F41EB7492100E39BF0 /* Helpers.h in Headers */,
 				9A38F52D16E9E81900FF8B66 /* gim_box_set.h in Headers */,
 				9AEA65C8191CB63D001FAA18 /* ramPresetTab.h in Headers */,
 				9248D59C1A4D6A1200047AF5 /* cvaux.hpp in Headers */,
@@ -2820,6 +2950,7 @@
 				D21D081E1A4BD9A900CC3598 /* ofxUIImage.h in Headers */,
 				D21D08071A4BD9A900CC3598 /* ofxUI2DPad.h in Headers */,
 				9A38F53C16E9E81900FF8B66 /* btGjkConvexCast.h in Headers */,
+				C6FE33E61EB7492100E39BF0 /* stb_textedit.h in Headers */,
 				9248D5C01A4D6A1200047AF5 /* heap.h in Headers */,
 				9AEA65CC191CB63D001FAA18 /* ramNodeArrayBuffer.h in Headers */,
 				9248D5AA1A4D6A1200047AF5 /* internal.hpp in Headers */,
@@ -2878,6 +3009,7 @@
 				D21D08431A4BD9A900CC3598 /* ofxUISlider.h in Headers */,
 				9248D5BF1A4D6A1200047AF5 /* hdf5.h in Headers */,
 				9A38F55B16E9E81900FF8B66 /* btUniversalConstraint.h in Headers */,
+				C6FE33E01EB7492100E39BF0 /* imgui.h in Headers */,
 				9AEA65AB191CB63D001FAA18 /* ramActor.h in Headers */,
 				9A38F55C16E9E81900FF8B66 /* btActionInterface.h in Headers */,
 				9A38F55D16E9E81900FF8B66 /* btDiscreteDynamicsWorld.h in Headers */,
@@ -2925,8 +3057,10 @@
 				9A38F57A16E9E81900FF8B66 /* btPoolAllocator.h in Headers */,
 				C6F853771EA0AA8B00BBDE36 /* IpEndpointName.h in Headers */,
 				9AEA65C0191CB63D001FAA18 /* PlaybackSegment.h in Headers */,
+				C6FE33EC1EB7492100E39BF0 /* BaseTheme.h in Headers */,
 				9A38F57B16E9E81900FF8B66 /* btQuadWord.h in Headers */,
 				D21D08511A4BD9A900CC3598 /* ofxUITextInput.h in Headers */,
+				C6FE33E71EB7492100E39BF0 /* stb_truetype.h in Headers */,
 				9A38F57C16E9E81900FF8B66 /* btQuaternion.h in Headers */,
 				D20F14F21A86035B0053B6E9 /* fdog.h in Headers */,
 				9248D5CE1A4D6A1200047AF5 /* params.h in Headers */,
@@ -2948,10 +3082,12 @@
 				C6F853811EA0AA8B00BBDE36 /* OscException.h in Headers */,
 				9248D5B41A4D6A1200047AF5 /* autotuned_index.h in Headers */,
 				9A38F59816E9E81900FF8B66 /* ofxBtJoint.h in Headers */,
+				C6FE33E51EB7492100E39BF0 /* stb_rect_pack.h in Headers */,
 				D20F14F41A86035B0053B6E9 /* myvec.h in Headers */,
 				9A38F59916E9E81900FF8B66 /* ofxBtRender.h in Headers */,
 				9A38F59B16E9E81900FF8B66 /* ofxBtRigidBody.h in Headers */,
 				9A38F59D16E9E81900FF8B66 /* ofxBtSoftBody.h in Headers */,
+				C6FE33FE1EB7495E00E39BF0 /* ramImGui.h in Headers */,
 				9A38F59F16E9E81900FF8B66 /* ofxBtSoftBodyWorld.h in Headers */,
 				9A38F5A116E9E81900FF8B66 /* ofxBtWorld.h in Headers */,
 			);
@@ -3009,9 +3145,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D21D084C1A4BD9A900CC3598 /* ofxUITabBar.cpp in Sources */,
+				C6FE33E21EB7492100E39BF0 /* imgui_draw.cpp in Sources */,
 				C6F8538E1EA0AA8B00BBDE36 /* ofxOscBundle.cpp in Sources */,
+				C6FE33F31EB7492100E39BF0 /* Helpers.cpp in Sources */,
 				D21D08591A4BD9A900CC3598 /* ofxUIWaveform.cpp in Sources */,
 				9AEA65B6191CB63D001FAA18 /* ramBaseApp.cpp in Sources */,
+				C6FE33ED1EB7492100E39BF0 /* EngineGLFW.cpp in Sources */,
 				D21D08211A4BD9A900CC3598 /* ofxUIImageSampler.cpp in Sources */,
 				9AEA65B7191CB63D001FAA18 /* ramBaseScene.cpp in Sources */,
 				9AEA65B5191CB63D001FAA18 /* ramActorManager.cpp in Sources */,
@@ -3039,6 +3178,7 @@
 				D21D08291A4BD9A900CC3598 /* ofxUILabelButton.cpp in Sources */,
 				D21D08231A4BD9A900CC3598 /* ofxUIImageSlider.cpp in Sources */,
 				600EFB4616C8F59700A5B331 /* tinyxmlparser.cpp in Sources */,
+				C6FE33EF1EB7492100E39BF0 /* EngineOpenGLES.cpp in Sources */,
 				C6F853831EA0AA8B00BBDE36 /* OscOutboundPacketStream.cpp in Sources */,
 				9AEA65C1191CB63D001FAA18 /* ramActorsScene.cpp in Sources */,
 				9AEA65C4191CB63D001FAA18 /* ramControlPanel.cpp in Sources */,
@@ -3062,9 +3202,11 @@
 				9AEA65BD191CB63D001FAA18 /* ControlSegment.cpp in Sources */,
 				D21D08251A4BD9A900CC3598 /* ofxUIImageToggle.cpp in Sources */,
 				2776070516E4EB2700D6B31D /* ramSoftBodyPrimitive.cpp in Sources */,
+				C6FE33EB1EB7492100E39BF0 /* BaseTheme.cpp in Sources */,
 				D21D08191A4BD9A900CC3598 /* ofxUIFPS.cpp in Sources */,
 				D21D082F1A4BD9A900CC3598 /* ofxUIMovingGraph.cpp in Sources */,
 				2776070716E4EB2700D6B31D /* ramPhysics.cpp in Sources */,
+				C6FE33E11EB7492100E39BF0 /* imgui_demo.cpp in Sources */,
 				D21D081F1A4BD9A900CC3598 /* ofxUIImageButton.cpp in Sources */,
 				D20F14F61A86035B0053B6E9 /* fdog.cpp in Sources */,
 				9248D5F61A4D6A1200047AF5 /* ofxCvHaarFinder.cpp in Sources */,
@@ -3089,6 +3231,7 @@
 				D21D081B1A4BD9A900CC3598 /* ofxUIFPSSlider.cpp in Sources */,
 				9A70C18716E9CE6F00A5B755 /* Tracker.cpp in Sources */,
 				9248D5F81A4D6A1200047AF5 /* ofxCvImage.cpp in Sources */,
+				C6FE33F11EB7492100E39BF0 /* Gui.cpp in Sources */,
 				9A70C18816E9CE6F00A5B755 /* Utilities.cpp in Sources */,
 				D20F14F51A86035B0053B6E9 /* ETF.cpp in Sources */,
 				D21D085B1A4BD9A900CC3598 /* ofxUIWidget.cpp in Sources */,
@@ -3097,6 +3240,7 @@
 				D21D08381A4BD9A900CC3598 /* ofxUIRadio.cpp in Sources */,
 				D21D08041A4BD9A900CC3598 /* ofxUI2DGraph.cpp in Sources */,
 				9A70C19416E9CE6F00A5B755 /* ofxInteractivePrimitives.cpp in Sources */,
+				C6FE33DF1EB7492100E39BF0 /* imgui.cpp in Sources */,
 				D21D08501A4BD9A900CC3598 /* ofxUITextInput.cpp in Sources */,
 				9A70C19916E9CE6F00A5B755 /* ofxIPPatcher.cpp in Sources */,
 				9A70C19D16E9CE6F00A5B755 /* ofxNodeArray.cpp in Sources */,
@@ -3118,7 +3262,10 @@
 				C6F853881EA0AA8B00BBDE36 /* OscReceivedElements.cpp in Sources */,
 				9A38F59516E9E81900FF8B66 /* ofxBtHelper.cpp in Sources */,
 				D21D08481A4BD9A900CC3598 /* ofxUISpectrum.cpp in Sources */,
+				C6FE33E91EB7492100E39BF0 /* BaseEngine.cpp in Sources */,
 				D21D082D1A4BD9A900CC3598 /* ofxUIMinimalSlider.cpp in Sources */,
+				C6FE33E41EB7492100E39BF0 /* README.md in Sources */,
+				C6FE33FD1EB7495E00E39BF0 /* ramImGui.cpp in Sources */,
 				D21D080E1A4BD9A900CC3598 /* ofxUICanvas.cpp in Sources */,
 				9A38F59716E9E81900FF8B66 /* ofxBtJoint.cpp in Sources */,
 				9A38F59A16E9E81900FF8B66 /* ofxBtRigidBody.cpp in Sources */,
