@@ -121,7 +121,7 @@ void rdtk::DrawBasicFloor(const int floorPattern,
 	{
 		ofFill();
 		ofSetColor(c1);
-		ofRect(0, 0, 0, division * tileSize, division * tileSize);
+		ofDrawRectangle(0, 0, 0, division * tileSize, division * tileSize);
 	}
 
 	for (int i = 0; i < division; i++)
@@ -134,13 +134,13 @@ void rdtk::DrawBasicFloor(const int floorPattern,
 			case Floor::FLOOR_CHECKER_PATTERN:
 				ofFill();
 				ofSetColor((i % 2 == 0 && j % 2 == 0) || (i % 2 == 1 && j % 2 == 1) ? c1 : c2);
-				ofRect(i * tileSize, j * tileSize, tileSize, tileSize);
+				ofDrawRectangle(i * tileSize, j * tileSize, tileSize, tileSize);
 				break;
 
 			case Floor::FLOOR_GRID_LINES:
 				ofNoFill();
 				ofSetColor(c1);
-				ofRect(i * tileSize, j * tileSize, tileSize, tileSize);
+				ofDrawRectangle(i * tileSize, j * tileSize, tileSize, tileSize);
 				break;
 			}
 		}

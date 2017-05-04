@@ -20,7 +20,7 @@
 #include "ofxXmlSettings.h"
 #include "ramNodeLine.h"
 
-class LineDrawing : public ramBaseScene
+class LineDrawing : public rdtk::BaseScene
 {
 	
 public:
@@ -59,7 +59,7 @@ public:
 			
 #ifdef RAM_GUI_SYSTEM_OFXUI
 			
-			ofxUICanvasPlus* panel = ramGetGUI().getCurrentUIContext();
+			ofxUICanvasPlus* panel = rdtk::GetGUI().getCurrentUIContext();
 			
 			line_width = 2;
 			
@@ -103,7 +103,7 @@ public:
 			panel->addSlider("extend to", 0, 1000, &extend_to, 150, 10);
 			panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 			
-			panel->addSpacer(ramGetGUI().kLength, 2);
+			panel->addSpacer(rdtk::GetGUI().kLength, 2);
 			
 #endif
 		}
@@ -112,10 +112,10 @@ public:
 		{
 			if (!active) return;
 			
-			if (set_from) nodeLine.from = ramActorManager::instance().getLastSelectedNodeIdentifer();
-			if (set_control0) nodeLine.control0 = ramActorManager::instance().getLastSelectedNodeIdentifer();
-			if (set_control1) nodeLine.control1 = ramActorManager::instance().getLastSelectedNodeIdentifer();
-			if (set_to) nodeLine.to = ramActorManager::instance().getLastSelectedNodeIdentifer();
+			if (set_from) nodeLine.from = rdtk::ActorManager::instance().getLastSelectedNodeIdentifer();
+			if (set_control0) nodeLine.control0 = rdtk::ActorManager::instance().getLastSelectedNodeIdentifer();
+			if (set_control1) nodeLine.control1 = rdtk::ActorManager::instance().getLastSelectedNodeIdentifer();
+			if (set_to) nodeLine.to = rdtk::ActorManager::instance().getLastSelectedNodeIdentifer();
 		}
 		
 		void draw()
@@ -176,7 +176,7 @@ public:
 		
 		void randomize()
 		{
-			ramActorManager &AM = ramActorManager::instance();
+			rdtk::ActorManager &AM = rdtk::ActorManager::instance();
 			const vector<string>& names = AM.getNodeArrayNames();
 			
 			nodeLine.from.index = ofRandom(23);
@@ -208,14 +208,14 @@ public:
 	
 	void setupControlPanel()
 	{
-		ramGetGUI().getCurrentUIContext()->addLabelButton("Load Line Settings", false, ramGetGUI().kLength);
-		ramGetGUI().getCurrentUIContext()->addLabelButton("Save Line Settings", false, ramGetGUI().kLength);
-        ramGetGUI().getCurrentUIContext()->addSpacer(ramGetGUI().kLength, 2);
+		rdtk::GetGUI().getCurrentUIContext()->addLabelButton("Load Line Settings", false, rdtk::GetGUI().kLength);
+		rdtk::GetGUI().getCurrentUIContext()->addLabelButton("Save Line Settings", false, rdtk::GetGUI().kLength);
+        rdtk::GetGUI().getCurrentUIContext()->addSpacer(rdtk::GetGUI().kLength, 2);
         
 		random_change_time = 60;
-        ramGetGUI().addButton("Randomize");
-		ramGetGUI().addSlider("Auto Random change time", 0.0, 60, &random_change_time);
-        ramGetGUI().getCurrentUIContext()->addSpacer();
+        rdtk::GetGUI().addButton("Randomize");
+		rdtk::GetGUI().addSlider("Auto Random change time", 0.0, 60, &random_change_time);
+        rdtk::GetGUI().getCurrentUIContext()->addSpacer();
         
 		last_changed_time = ofGetElapsedTimef();
 		
@@ -225,7 +225,7 @@ public:
 			lines[i].setupControlPanel();
 		}
         
-        ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &LineDrawing::onValueChanged);
+        ofAddListener(rdtk::GetGUI().getCurrentUIContext()->newGUIEvent, this, &LineDrawing::onValueChanged);
 	}
 	
 	void setup()
@@ -396,16 +396,16 @@ public:
 			
 			/// nodes
 			const string from_name	= XML.getValue("from:name", "Yoko");
-			const int	 from_id	= XML.getValue("from:id", ramActor::JOINT_RIGHT_HAND);
+			const int	 from_id	= XML.getValue("from:id", rdtk::Actor::JOINT_RIGHT_HAND);
 			
 			const string cp0_name	= XML.getValue("control0:name", "Yoko");
-			const int	 cp0_id		= XML.getValue("control0:id", ramActor::JOINT_RIGHT_TOE);
+			const int	 cp0_id		= XML.getValue("control0:id", rdtk::Actor::JOINT_RIGHT_TOE);
 			
 			const string cp1_name	= XML.getValue("control1:name", "Yoko");
-			const int	 cp1_id		= XML.getValue("control1:id", ramActor::JOINT_LEFT_TOE);
+			const int	 cp1_id		= XML.getValue("control1:id", rdtk::Actor::JOINT_LEFT_TOE);
 			
 			const string to_name	= XML.getValue("to:name", "Yoko");
-			const int	 to_id		= XML.getValue("to:id", ramActor::JOINT_LEFT_HAND);
+			const int	 to_id		= XML.getValue("to:id", rdtk::Actor::JOINT_LEFT_HAND);
 			
 			/// curve
 			const float curve		= XML.getValue("param:curve", 10);

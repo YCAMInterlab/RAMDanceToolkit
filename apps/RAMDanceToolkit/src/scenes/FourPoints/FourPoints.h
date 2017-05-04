@@ -22,7 +22,7 @@
 #include "SphereMesh.h"
 #include "ramGeometry.h"
 
-class FourPoints : public ramBaseScene
+class FourPoints : public rdtk::BaseScene
 {
 public:
 	
@@ -49,7 +49,7 @@ public:
 		
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		
-		ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+		ofxUICanvas* panel = rdtk::GetGUI().getCurrentUIContext();
 		
 		showFourPointSphere = false;
 		showFourPointTwist = true;
@@ -97,15 +97,15 @@ public:
 	{
 		if(pickExtents)
 		{			
-			selectFourPoints(ramActor::JOINT_LEFT_HAND, ramActor::JOINT_RIGHT_HAND, ramActor::JOINT_LEFT_TOE, ramActor::JOINT_RIGHT_TOE);
+			selectFourPoints(rdtk::Actor::JOINT_LEFT_HAND, rdtk::Actor::JOINT_RIGHT_HAND, rdtk::Actor::JOINT_LEFT_TOE, rdtk::Actor::JOINT_RIGHT_TOE);
 		}
 		if(pickCore)
 		{
-			selectFourPoints(ramActor::JOINT_LEFT_SHOULDER, ramActor::JOINT_RIGHT_SHOULDER, ramActor::JOINT_LEFT_HIP, ramActor::JOINT_RIGHT_HIP);			
+			selectFourPoints(rdtk::Actor::JOINT_LEFT_SHOULDER, rdtk::Actor::JOINT_RIGHT_SHOULDER, rdtk::Actor::JOINT_LEFT_HIP, rdtk::Actor::JOINT_RIGHT_HIP);			
 		}
 		if(pickKneesElbows)
 		{
-			selectFourPoints(ramActor::JOINT_LEFT_ELBOW, ramActor::JOINT_RIGHT_ELBOW, ramActor::JOINT_LEFT_KNEE, ramActor::JOINT_RIGHT_KNEE);
+			selectFourPoints(rdtk::Actor::JOINT_LEFT_ELBOW, rdtk::Actor::JOINT_RIGHT_ELBOW, rdtk::Actor::JOINT_LEFT_KNEE, rdtk::Actor::JOINT_RIGHT_KNEE);
 		}
 	}
 	
@@ -126,7 +126,7 @@ public:
 	}
 	
 	//--------------------------------------------------------------
-	void drawActor(const ramActor &actor)
+	void drawActor(const rdtk::Actor &actor)
 	{		
 		// maybe this is slow...? need a better way to do point size/depth testing.
 		glPushAttrib(GL_ALL_ATTRIB_BITS);

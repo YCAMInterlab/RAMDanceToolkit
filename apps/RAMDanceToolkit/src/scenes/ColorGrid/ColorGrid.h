@@ -19,7 +19,7 @@
 
 #include "ramMain.h"
 
-class ColorGrid : public ramBaseScene
+class ColorGrid : public rdtk::BaseScene
 {
 public:
 	
@@ -32,8 +32,8 @@ public:
 		useRgb = true;
 		bufferSize = 1024;
 		
-		ramGetGUI().addToggle("Use RGB/HSB", &useRgb);
-		ramGetGUI().addSlider("Buffer size", 128, 2048, &bufferSize);
+		rdtk::GetGUI().addToggle("Use RGB/HSB", &useRgb);
+		rdtk::GetGUI().addSlider("Buffer size", 128, 2048, &bufferSize);
 	}
 	
 	void setup()
@@ -45,8 +45,8 @@ public:
 		bufferSize = (int) bufferSize;
 		if(bufferSize != img.getWidth())
 		{
-			img.allocate((int) bufferSize, ramActor::NUM_JOINTS, OF_IMAGE_COLOR);
-			for(int y = 0; y < ramActor::NUM_JOINTS; y++) {
+			img.allocate((int) bufferSize, rdtk::Actor::NUM_JOINTS, OF_IMAGE_COLOR);
+			for(int y = 0; y < rdtk::Actor::NUM_JOINTS; y++) {
 				for(int x = 0; x < bufferSize; x++) {
 					img.setColor(x, y, ofColor(0));
 				}
@@ -64,7 +64,7 @@ public:
 	}
 	
 	//--------------------------------------------------------------
-	void drawActor(const ramActor &actor)
+	void drawActor(const rdtk::Actor &actor)
 	{
 		for(int y = 0; y < img.getHeight(); y++) {
 			for(int x = 0; x < img.getWidth() - 1; x++) {
@@ -74,7 +74,7 @@ public:
 		
 		for (int i=0; i<actor.getNumNode(); i++)
 		{
-			if(i < ramActor::NUM_JOINTS) {
+			if(i < rdtk::Actor::NUM_JOINTS) {
 				const ramNode &node = actor.getNode(i);
 				ofColor cur;
 				if(useRgb) {
@@ -94,7 +94,7 @@ public:
 //				ofPushMatrix();
 //				node.beginTransform();
 //				ofFill();
-//				ofBox((i==ramActor::JOINT_HEAD) ? 6 : 3);
+//				ofBox((i==rdtk::Actor::JOINT_HEAD) ? 6 : 3);
 //				ofSetColor(cur);
 //				node.endTransform();
 //				ofPopMatrix();

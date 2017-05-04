@@ -110,7 +110,7 @@ void ControlPanel::update(ofEventArgs &e)
 
 //
 
-void ControlPanel::addPanel(Unit* control, bool enableable)
+void ControlPanel::addPanel(ofPtr<Unit> control, bool enableable)
 {
 	ofxUITab *panel = new ofxUITab(control->getName(), enableable);
 	current_panel = panel;	

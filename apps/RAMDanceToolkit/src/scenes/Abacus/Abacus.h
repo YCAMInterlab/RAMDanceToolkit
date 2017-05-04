@@ -19,7 +19,7 @@
 
 #include "ramMain.h"
 
-class Abacus : public ramBaseScene
+class Abacus : public rdtk::BaseScene
 {
 	
 	const int box_size;

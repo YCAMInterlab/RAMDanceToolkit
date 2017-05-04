@@ -19,7 +19,7 @@
 
 #include "ramMain.h"
 
-class HastyChase : public ramBaseScene
+class HastyChase : public rdtk::BaseScene
 {
 public:
 	
@@ -42,13 +42,13 @@ public:
 		showBoxToggle = new ofxUIToggle("show box", &show_box, 20, 20);
 		fillChaserToggle = new ofxUIToggle("fill chaser", &fill_chaser, 20, 20);
 		
-		ramGetGUI().addSlider("buffer_time", 1, 10000, &buffer_time);
-		ramGetGUI().addSlider("rate", -2, 3, &rate);
+		rdtk::GetGUI().addSlider("buffer_time", 1, 10000, &buffer_time);
+		rdtk::GetGUI().addSlider("rate", -2, 3, &rate);
 		
-		ramGetGUI().getCurrentUIContext()->addWidgetDown(drawLineToggle);
-		ramGetGUI().getCurrentUIContext()->addWidgetDown(showBoxToggle);
-		ramGetGUI().getCurrentUIContext()->addWidgetDown(fillChaserToggle);
-		ramGetGUI().addColorSelector("chaser color", &joint_color);
+		rdtk::GetGUI().getCurrentUIContext()->addWidgetDown(drawLineToggle);
+		rdtk::GetGUI().getCurrentUIContext()->addWidgetDown(showBoxToggle);
+		rdtk::GetGUI().getCurrentUIContext()->addWidgetDown(fillChaserToggle);
+		rdtk::GetGUI().addColorSelector("chaser color", &joint_color);
 	}
 	
 	void setup()
@@ -60,7 +60,7 @@ public:
 		joint_color = ramColor::BLUE_NORMAL;
 	}
 	
-	void drawActor(const ramActor& actor)
+	void drawActor(const rdtk::Actor& actor)
 	{
 		ramTimeShifter &TS = time_shifters[actor.getName()];
 		TS.setNumBufferFrame(buffer_time);
@@ -75,7 +75,7 @@ public:
 			ofNoFill();
 		}
 		
-		const ramActor &chaser = TS.update(actor);
+		const rdtk::Actor &chaser = TS.update(actor);
 		
 		ofSetColor(joint_color);
 		ramDrawBasicActor(chaser);

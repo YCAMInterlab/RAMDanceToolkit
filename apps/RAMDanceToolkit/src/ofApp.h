@@ -68,37 +68,11 @@ public:
 	
 	// ram methods
 	// ------------------------
-	void drawActor(const ramActor &actor);
+	void drawActor(const rdtk::Actor &actor);
 	void drawRigid(const ramRigidBody &rigid);
-	void onActorSetup(const ramActor &actor);
-	void onActorExit(const ramActor &actor);
+	void onActorSetup(const rdtk::Actor &actor);
+	void onActorExit(const rdtk::Actor &actor);
 	void onRigidSetup(const ramRigidBody &rigid);
 	void onRigidExit(const ramRigidBody &rigid);
-    
-    // scenes
-    // ------------------------
-    MovingCam movingCam;
-    LineDrawing drawLines;
-    BigBox bigbox;
-    Future future;
-    Donuts donuts;
-    Stamp stamp;
-    Expansion expansion;
-    Particles particles;
-    Abacus abacus;
-    SoundCube soundcube;
-    UpsideDown upsideDown;
-    HastyChase hastyChase;
-    ColorGrid colorGrid;
-    ThreePoints threePoints;
-    FourPoints fourPoints;
-    Monster monster;
-    Laban laban;
-    Notation notation;
-    
-#if !defined (DEBUG) && !defined (_DEBUG) // exclude from debug build
-    Kepler kepler;
-    Chain chain;
-#endif
 
 };

@@ -81,7 +81,7 @@ void Kepler::setupControlPanel()
 	
 #ifdef RAM_GUI_SYSTEM_OFXUI
 	
-	ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+	ofxUICanvas* panel = rdtk::GetGUI().getCurrentUIContext();
 	
     ofAddListener(panel->newGUIEvent, this, &Kepler::onValueChanged);
 
@@ -95,24 +95,24 @@ void Kepler::setupControlPanel()
     
     names.clear();
     mNamesNodeA.clear();
-    for (int i=0; i<ramActor::NUM_JOINTS; i++) {
-        mNamesNodeA["A "+ramActor::getJointName(i)] = i;
-        names.push_back("A "+ramActor::getJointName(i));
+    for (int i=0; i<rdtk::Actor::NUM_JOINTS; i++) {
+        mNamesNodeA["A "+rdtk::Actor::getJointName(i)] = i;
+        names.push_back("A "+rdtk::Actor::getJointName(i));
     }
     
     radio = new ofxUIRadio("JOINT A", names, OFX_UI_ORIENTATION_VERTICAL, dim, dim);
-    radio->getToggles().at(ramActor::JOINT_LEFT_HAND)->setValue(true);
+    radio->getToggles().at(rdtk::Actor::JOINT_LEFT_HAND)->setValue(true);
     panel->addWidgetDown(radio);
     
     names.clear();
     mNamesNodeB.clear();
-    for (int i=0; i<ramActor::NUM_JOINTS; i++) {
-        mNamesNodeB["B "+ramActor::getJointName(i)] = i;
-        names.push_back("B "+ramActor::getJointName(i));
+    for (int i=0; i<rdtk::Actor::NUM_JOINTS; i++) {
+        mNamesNodeB["B "+rdtk::Actor::getJointName(i)] = i;
+        names.push_back("B "+rdtk::Actor::getJointName(i));
     }
     
     radio = new ofxUIRadio("JOINT B", names, OFX_UI_ORIENTATION_VERTICAL, dim, dim);
-    radio->getToggles().at(ramActor::JOINT_RIGHT_HAND)->setValue(true);
+    radio->getToggles().at(rdtk::Actor::JOINT_RIGHT_HAND)->setValue(true);
     panel->addWidgetRight(radio);
     
     names.clear();
@@ -149,8 +149,8 @@ void Kepler::setup()
     mPickerA.setWorld(mKeplerDynamics.getDynamicsWorld());
     mPickerB.setWorld(mKeplerDynamics.getDynamicsWorld());
     
-    mNodeA = ramActor::JOINT_LEFT_HAND;
-    mNodeB = ramActor::JOINT_RIGHT_HAND;
+    mNodeA = rdtk::Actor::JOINT_LEFT_HAND;
+    mNodeB = rdtk::Actor::JOINT_RIGHT_HAND;
     mEdgeA = KeplerCube::EDGE_9;
     mEdgeB = KeplerCube::EDGE_11;
     
@@ -176,7 +176,7 @@ void Kepler::draw()
 
 #pragma mark -
 //--------------------------------------------------------------
-void Kepler::drawActor(const ramActor &actor)
+void Kepler::drawActor(const rdtk::Actor &actor)
 {
     pushAll();
     
@@ -186,7 +186,7 @@ void Kepler::drawActor(const ramActor &actor)
     for (int i=0; i<actor.getNumNode(); i++)
 	{
 		const ramNode &node = actor.getNode(i);
-		float jointSize = (i==ramActor::JOINT_HEAD) ? 6.0 : 3.0;
+		float jointSize = (i==rdtk::Actor::JOINT_HEAD) ? 6.0 : 3.0;
 		
 		node.beginTransform();
 		ofSetColor(ramColor::BLUE_LIGHT);

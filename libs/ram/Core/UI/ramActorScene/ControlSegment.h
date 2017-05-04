@@ -59,6 +59,6 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::ControlSegment OF_DEPRECATED(ControlSegment);
+typedef rdtk::ControlSegment OF_DEPRECATED(ramControlSegment);
 
 

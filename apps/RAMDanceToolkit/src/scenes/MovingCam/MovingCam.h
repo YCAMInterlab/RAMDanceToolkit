@@ -20,7 +20,7 @@
 #include "ofxXmlSettings.h"
 #include "ramBaseScene.h"
 
-class MovingCam : public ramBaseScene
+class MovingCam : public rdtk::BaseScene
 {
     
     enum MovingState
@@ -53,7 +53,7 @@ public:
 	
 	void setupControlPanel()
 	{
-		ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+		ofxUICanvas* panel = rdtk::GetGUI().getCurrentUIContext();
         
         panel->addLabel("Press [u] to move up", OFX_UI_FONT_SMALL);
         panel->addLabel("Press [d] to move down", OFX_UI_FONT_SMALL);

@@ -310,7 +310,7 @@ void ChainBtDynamics::draw()
 	}
     
     ramPushAll();
-    ofSetColor(ramColor::BLUE_LIGHT);
+    ofSetColor(rdtk::Color::BLUE_LIGHT);
     glDisable(GL_LIGHTING);
     for (int i=0; i<m_constrains.size(); i++) {
         m_constrains.at(i)->draw();
@@ -458,34 +458,34 @@ void ChainBtDynamics::renderscene(int pass)
 			colObj->getWorldTransform().getOpenGLMatrix(m);
 			rot=colObj->getWorldTransform().getBasis();
 		}
-		btVector3 wireColor(ramColor::RED_NORMAL.r/255.0f,
-                            ramColor::RED_NORMAL.g/255.0f,
-                            ramColor::RED_NORMAL.b/255.0f); //wants deactivation
-		if(i&1) wireColor=btVector3(ramColor::BLUE_NORMAL.r/255.0f,
-                                    ramColor::BLUE_NORMAL.g/255.0f,
-                                    ramColor::BLUE_NORMAL.b/255.0f);
+		btVector3 wireColor(rdtk::Color::RED_NORMAL.r/255.0f,
+                            rdtk::Color::RED_NORMAL.g/255.0f,
+                            rdtk::Color::RED_NORMAL.b/255.0f); //wants deactivation
+		if(i&1) wireColor=btVector3(rdtk::Color::BLUE_NORMAL.r/255.0f,
+                                    rdtk::Color::BLUE_NORMAL.g/255.0f,
+                                    rdtk::Color::BLUE_NORMAL.b/255.0f);
 		///color differently for active, sleeping, wantsdeactivation states
         //active
 		if (colObj->getActivationState() == 1) {
 			if (i & 1)
-				wireColor += btVector3 (ramColor::YELLOW_NORMAL.r/255.0f,
-                                        ramColor::YELLOW_NORMAL.g/255.0f,
-                                        ramColor::YELLOW_NORMAL.b/255.0f);
+				wireColor += btVector3 (rdtk::Color::YELLOW_NORMAL.r/255.0f,
+                                        rdtk::Color::YELLOW_NORMAL.g/255.0f,
+                                        rdtk::Color::YELLOW_NORMAL.b/255.0f);
 			else
-				wireColor += btVector3 (ramColor::GREEN_NORMAL.r/255.0f,
-                                        ramColor::GREEN_NORMAL.g/255.0f,
-                                        ramColor::GREEN_NORMAL.b/255.0f);
+				wireColor += btVector3 (rdtk::Color::GREEN_NORMAL.r/255.0f,
+                                        rdtk::Color::GREEN_NORMAL.g/255.0f,
+                                        rdtk::Color::GREEN_NORMAL.b/255.0f);
 		}
         //ISLAND_SLEEPING
 		if(colObj->getActivationState()==2) {
 			if(i&1)
-				wireColor += btVector3 (ramColor::RED_DEEP.r/255.0f,
-                                        ramColor::RED_DEEP.g/255.0f,
-                                        ramColor::RED_DEEP.b/255.0f);
+				wireColor += btVector3 (rdtk::Color::RED_DEEP.r/255.0f,
+                                        rdtk::Color::RED_DEEP.g/255.0f,
+                                        rdtk::Color::RED_DEEP.b/255.0f);
 			else
-				wireColor += btVector3 (ramColor::BLUE_DEEP.r/255.0f,
-                                        ramColor::BLUE_DEEP.g/255.0f,
-                                        ramColor::BLUE_DEEP.b/255.0f);
+				wireColor += btVector3 (rdtk::Color::BLUE_DEEP.r/255.0f,
+                                        rdtk::Color::BLUE_DEEP.g/255.0f,
+                                        rdtk::Color::BLUE_DEEP.b/255.0f);
 		}
         
         if (colObj->getCollisionShape()->getShapeType() == BOX_SHAPE_PROXYTYPE) {

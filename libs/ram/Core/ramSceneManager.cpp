@@ -47,18 +47,17 @@ void SceneManager::setup()
 	ofAddListener(ofEvents().draw, this, &SceneManager::draw);
 	ofAddListener(ofEvents().exit, this, &SceneManager::exit);
 	
-	actorsScene = new ActorsScene();
-	scenes.push_back(actorsScene);
-	actorsScene->setup();
+	actorsScene = make_shared<ActorsScene>();
+	addScene(actorsScene);
 	actorsScene->setEnabled(true);
-	GetGUI().addPanel(actorsScene, false);
 }
 
-void SceneManager::addScene(BaseScene* scene)
+void SceneManager::addScene(ofPtr<BaseScene> scene)
 {
 	scenes.push_back(scene);
 	scene->setup();
-	GetGUI().addPanel(scene);
+	GetGUI().addPanel(ofPtr<Unit>(scene));
+	GuiManager::instance().addScene(ofPtr<SceneGui>(scene));
 }
 
 size_t SceneManager::getNumScenes() const
@@ -75,12 +74,12 @@ size_t SceneManager::findtSceneIndex(string name) const
 	}
 	return -1;
 }
-BaseScene* SceneManager::getScene(size_t index) const
+ofPtr<BaseScene> SceneManager::getScene(size_t index)
 {
 	return scenes.at(index);
 }
 
-ActorsScene* SceneManager::getActorsScene()
+ofPtr<ActorsScene> SceneManager::getActorsScene()
 {
 	return actorsScene;
 }
@@ -101,7 +100,7 @@ void SceneManager::update(ofEventArgs& args)
 	{
 		if (i >= scenes.size()) break;
 
-		BaseScene *scene = scenes.at(i);
+		ofPtr<BaseScene> scene = scenes.at(i);
 		if (scene->isEnabled())
 			scene->update();
 		else
@@ -119,7 +118,7 @@ void SceneManager::draw(ofEventArgs& args)
 
 	for (int i = 0; i < scenes.size(); i++)
 	{
-		BaseScene *scene = scenes[i];
+		ofPtr<BaseScene> scene = scenes[i];
 		if (!scene->isEnabled()) continue;
 
 		bool enable_physics = GetEnablePhysicsPrimitive();
@@ -269,6 +268,8 @@ void SceneManager::draw(ofEventArgs& args)
 	ofPopStyle();
 	glPopMatrix();
 	glPopAttrib();
+	
+	GuiManager::instance().draw();
 }
 
 void SceneManager::exit(ofEventArgs& args)
@@ -277,7 +278,7 @@ void SceneManager::exit(ofEventArgs& args)
 	{
 		if (i >= scenes.size()) break;
         
-		BaseScene *scene = scenes.at(i);
+		ofPtr<BaseScene> scene = scenes.at(i);
         scene->exit();
 	}
 }
@@ -302,7 +303,7 @@ void SceneManager::actorSetup(Actor &actor)
 {
 	for (int i = 0; i < scenes.size(); i++)
 	{
-		BaseScene *scene = scenes[i];
+		ofPtr<BaseScene> scene = scenes[i];
 		if (!scene->isEnabled()) continue;
 		scene->onActorSetup(actor);
 	}
@@ -312,7 +313,7 @@ void SceneManager::actorExit(Actor &actor)
 {
 	for (int i = 0; i < scenes.size(); i++)
 	{
-		BaseScene *scene = scenes[i];
+		ofPtr<BaseScene> scene = scenes[i];
 		if (!scene->isEnabled()) continue;
 		scene->onActorExit(actor);
 	}
@@ -322,7 +323,7 @@ void SceneManager::rigidSetup(RigidBody &rigid)
 {
 	for (int i = 0; i < scenes.size(); i++)
 	{
-		BaseScene *scene = scenes[i];
+		ofPtr<BaseScene> scene = scenes[i];
 		if (!scene->isEnabled()) continue;
 		scene->onRigidSetup(rigid);
 	}
@@ -332,7 +333,7 @@ void SceneManager::rigidExit(RigidBody &rigid)
 {
 	for (int i = 0; i < scenes.size(); i++)
 	{
-		BaseScene *scene = scenes[i];
+		ofPtr<BaseScene> scene = scenes[i];
 		if (!scene->isEnabled()) continue;
 		scene->onRigidExit(rigid);
 	}

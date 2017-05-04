@@ -17,7 +17,7 @@
 
 #pragma once
 
-class Stamp : public ramBaseScene
+class Stamp : public rdtk::BaseScene
 {
 	
 	ramStamp mStamp;
@@ -44,13 +44,13 @@ public:
 		idleTimerToggle = new ofxUIToggle("Idle Timer", &use_idle_timer, 30, 30);
 		showActorToggle = new ofxUIToggle("Show Actor", &mShowActor, 30, 30);
 		
-		ramGetGUI().getCurrentUIContext()->addWidgetDown(idleTimerToggle);
+		rdtk::GetGUI().getCurrentUIContext()->addWidgetDown(idleTimerToggle);
 		
 		mStamp.setupControlPanel();
-        ramGetGUI().addSeparator();
-		ramGetGUI().getCurrentUIContext()->addWidgetDown(showActorToggle);
-		ramGetGUI().addColorSelector("Box line color", &color);
-		ramGetGUI().addSlider("Line width", 0, 6, &line_width);
+        rdtk::GetGUI().addSeparator();
+		rdtk::GetGUI().getCurrentUIContext()->addWidgetDown(showActorToggle);
+		rdtk::GetGUI().addColorSelector("Box line color", &color);
+		rdtk::GetGUI().addSlider("Line width", 0, 6, &line_width);
     }
 	
 	void setup()

@@ -1,5 +1,5 @@
 // 
-// Donuts.h - RAMDanceToolkit
+// Donuts.h - RamDanceToolkit
 // 
 // Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
 // 
@@ -19,11 +19,11 @@
 
 #include "ramActor.h"
 
-class Donuts : public ramBaseScene
+class Donuts : public rdtk::BaseScene
 {
 	
-	ofxUIToggle *mToggles[ramActor::NUM_JOINTS];
-	bool mNodeVisibility[ramActor::NUM_JOINTS];
+	ofxUIToggle *mToggles[rdtk::Actor::NUM_JOINTS];
+	bool mNodeVisibility[rdtk::Actor::NUM_JOINTS];
 
 	float mNumDuplicate;
 	float mRadius;
@@ -45,27 +45,27 @@ public:
 		
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		
-		ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+		ofxUICanvas* panel = rdtk::GetGUI().getCurrentUIContext();
 		
-		ramGetGUI().addSection("Original me");
-		ramGetGUI().addSlider("Scale", 0.1, 10.0, &mScale);
-		ramGetGUI().addSlider("Position: X", -300.0, 300.0, &mTranslate.x);
-		ramGetGUI().addSlider("Position: Z", -300.0, 300.0, &mTranslate.z);
+		rdtk::GetGUI().addSection("Original me");
+		rdtk::GetGUI().addSlider("Scale", 0.1, 10.0, &mScale);
+		rdtk::GetGUI().addSlider("Position: X", -300.0, 300.0, &mTranslate.x);
+		rdtk::GetGUI().addSlider("Position: Z", -300.0, 300.0, &mTranslate.z);
 		
-		ramGetGUI().addSection("Duplicated me");
-		ramGetGUI().addSlider("Duplicate", 1, 200, &mNumDuplicate);
-		ramGetGUI().addSlider("Radius", 10.0, 1000.0, &mRadius);
-		ramGetGUI().addSlider("Box Size", 1.0, 1000.0, &mBoxSize);
+		rdtk::GetGUI().addSection("Duplicated me");
+		rdtk::GetGUI().addSlider("Duplicate", 1, 200, &mNumDuplicate);
+		rdtk::GetGUI().addSlider("Radius", 10.0, 1000.0, &mRadius);
+		rdtk::GetGUI().addSlider("Box Size", 1.0, 1000.0, &mBoxSize);
 		
-		ramGetGUI().addSection("Reset, Toggle visibility");
+		rdtk::GetGUI().addSection("Reset, Toggle visibility");
 		panel->addButton("Reset all settings", false, 30, 30);
-		ramGetGUI().addToggle("Show Actor", &mShowActor);
-		ramGetGUI().addToggle("Toggle All", &mToggleAll);
+		rdtk::GetGUI().addToggle("Show Actor", &mShowActor);
+		rdtk::GetGUI().addToggle("Toggle All", &mToggleAll);
 		
-		for (int i=0; i<ramActor::NUM_JOINTS; i++)
+		for (int i=0; i<rdtk::Actor::NUM_JOINTS; i++)
 		{
-			mNodeVisibility[i] = (i == ramActor::JOINT_RIGHT_HAND || i == ramActor::JOINT_LEFT_HAND);
-			mToggles[i] = panel->addToggle(ramActor::getJointName(i), &mNodeVisibility[i], 8, 8);
+			mNodeVisibility[i] = (i == rdtk::Actor::JOINT_RIGHT_HAND || i == rdtk::Actor::JOINT_LEFT_HAND);
+			mToggles[i] = panel->addToggle(rdtk::Actor::getJointName(i), &mNodeVisibility[i], 8, 8);
 		}
 		
 		clear();
@@ -86,7 +86,7 @@ public:
 		mRadian = 2 * M_PI / mNumDuplicate;
 	}
 	
-	void drawDonuts(const ramNodeArray &nodeArray)
+	void drawDonuts(const rdtk::NodeArray &nodeArray)
 	{
 		ofPushStyle();
 		ofNoFill();
@@ -95,8 +95,8 @@ public:
 		{
 			for (int n=0; n<mNumDuplicate; n++)
 			{
-				ofColor c1 = ramColor::RED_DEEP;
-				ofColor c2 = ramColor::BLUE_LIGHT;
+				ofColor c1 = rdtk::Color::RED_DEEP;
+				ofColor c2 = rdtk::Color::BLUE_LIGHT;
 				c1.g += n*3;
 				c2.b += n*3;
 				
@@ -114,11 +114,11 @@ public:
 				ofPushStyle();
 				for(int i=0; i<nodeArray.getNumNode(); i++)
 				{
-					const ramNode& node = nodeArray.getNode(i);
+					const rdtk::Node& node = nodeArray.getNode(i);
 					
 					node.beginTransform();
 					ofSetColor(c1);
-					ofBox( i==ramActor::JOINT_HEAD ? 8 : 5);
+					ofBox( i==rdtk::Actor::JOINT_HEAD ? 8 : 5);
 					node.endTransform();
 					
 					if (node.hasParent())
@@ -141,12 +141,12 @@ public:
 				
 				for (int n=0; n<mNumDuplicate; n++)
 				{
-					const ramNode &node = nodeArray.getNode(index);
+					const rdtk::Node &node = nodeArray.getNode(index);
 					
 					ofPushMatrix();
 					{
-						ofColor c1 = ramColor::RED_DEEP;
-						ofColor c2 = ramColor::BLUE_LIGHT;
+						ofColor c1 = rdtk::Color::RED_DEEP;
+						ofColor c2 = rdtk::Color::BLUE_LIGHT;
 						c1.g += n*3;
 						c2.b += n*3;
 						
@@ -182,12 +182,12 @@ public:
 
 	}
 	
-	void drawActor(const ramActor& actor)
+	void drawActor(const rdtk::Actor& actor)
 	{
 		drawDonuts( actor );
 	}
 	
-	void drawRigid(const ramRigidBody &rigid)
+	void drawRigid(const rdtk::RigidBody &rigid)
 	{
 		drawDonuts( rigid );
 	}
@@ -210,9 +210,9 @@ public:
 	
 	void clear()
 	{
-		for (int i=0; i<ramActor::NUM_JOINTS; i++)
+		for (int i=0; i<rdtk::Actor::NUM_JOINTS; i++)
 		{
-			mNodeVisibility[i] = (i == ramActor::JOINT_RIGHT_HAND || i == ramActor::JOINT_LEFT_HAND);
+			mNodeVisibility[i] = (i == rdtk::Actor::JOINT_RIGHT_HAND || i == rdtk::Actor::JOINT_LEFT_HAND);
 			mToggles[i]->setValue(mNodeVisibility[i]);
 		}
 		
@@ -229,7 +229,7 @@ public:
 	
 	void setAllVisiblity(bool b)
 	{
-		for (int i=0; i<ramActor::NUM_JOINTS; i++)
+		for (int i=0; i<rdtk::Actor::NUM_JOINTS; i++)
 			mToggles[i]->setValue(b);
 	}
 };

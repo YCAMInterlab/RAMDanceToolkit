@@ -21,7 +21,7 @@
 #include "ofxCv.h"
 #include "ramPlanarGestureRecognizer.h"
 
-class HistoryPoint : public ramFading
+class HistoryPoint : public rdtk::Fading
 {
 public:
 	ofVec3f point;
@@ -31,7 +31,7 @@ public:
 	{}
 };
 
-class SpatialMark : public ramFading
+class SpatialMark : public rdtk::Fading
 {
 public:
 	ofVec3f position, normal;
@@ -62,7 +62,7 @@ public:
 	}
 };
 
-class Notation : public ramBaseScene
+class Notation : public rdtk::BaseScene
 {
 public:
 	
@@ -88,7 +88,7 @@ public:
 		normalLerpRate = .1;
 		threshold = .3;
 		drawDebug = false;
-		ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+		ofxUICanvas* panel = rdtk::GetGUI().getCurrentUIContext();
 		panel->addToggle("Only limbs", &onlyLimbs, 20, 20);
 		panel->addToggle("Draw debug", &drawDebug, 20, 20);
 		panel->addSlider("History fade out", 0, 5, &maxNotationLife, 300, 20);
@@ -105,14 +105,14 @@ public:
 	
 	void update()
 	{
-		ramFading::bury(allMarks, maxMarkLife);
+		rdtk::Fading::bury(allMarks, maxMarkLife);
 		
 		// remove any dead points
 		map<int, list<HistoryPoint> >::iterator itr;
 		for(itr = history.begin(); itr != history.end(); itr++)
 		{
 			list<HistoryPoint>& cur = itr->second;
-			ramFading::bury(cur, maxNotationLife);
+			rdtk::Fading::bury(cur, maxNotationLife);
 			vector<ofVec3f> all;
 			list<HistoryPoint>::iterator curItr;
 			for(curItr = cur.begin(); curItr != cur.end(); curItr++)
@@ -224,16 +224,16 @@ public:
 		ramEndCamera();
 	}
 	
-	void drawActor(const ramActor &actor)
+	void drawActor(const rdtk::Actor &actor)
 	{	
 		for (int i=0; i<actor.getNumNode(); i++)
 		{
 			if(onlyLimbs)
 			{
-				if(i != ramActor::JOINT_LEFT_ANKLE &&
-				   i != ramActor::JOINT_RIGHT_ANKLE &&
-				   i != ramActor::JOINT_LEFT_HAND &&
-				   i != ramActor::JOINT_RIGHT_HAND)
+				if(i != rdtk::Actor::JOINT_LEFT_ANKLE &&
+				   i != rdtk::Actor::JOINT_RIGHT_ANKLE &&
+				   i != rdtk::Actor::JOINT_LEFT_HAND &&
+				   i != rdtk::Actor::JOINT_RIGHT_HAND)
 				{
 					continue;
 				}

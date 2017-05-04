@@ -17,7 +17,7 @@
 
 #pragma once
 
-class BasicActor : public ramBaseScene
+class BasicActor : public rdtk::BaseScene
 {
 	
 	struct ControlSegment
@@ -60,7 +60,7 @@ public:
 	
 	void setupControlPanel()
 	{
-		ramControlPanel &gui = ramGetGUI();
+		ramControlPanel &gui = rdtk::GetGUI();
 		
 		gui.addToggle("Enable light", &enableLight);
 		
@@ -84,7 +84,7 @@ public:
 	
 	void addEntityControl(const ramNodeArray &nodeArray)
 	{
-		ramControlPanel &gui = ramGetGUI();
+		ramControlPanel &gui = rdtk::GetGUI();
 		
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		

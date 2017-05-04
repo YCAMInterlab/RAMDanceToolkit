@@ -45,7 +45,7 @@ public:
     }
 };
 
-class Laban : public ramBaseScene
+class Laban : public rdtk::BaseScene
 {
 public:
 
@@ -55,7 +55,7 @@ public:
     void setup();
     void update();
     void draw();
-    void drawActor(const ramActor &actor);
+    void drawActor(const rdtk::Actor &actor);
     void drawRigid(ramRigidBody &rigid);
 
     float threshold, lineWidth, lineLength, scale, ticks;

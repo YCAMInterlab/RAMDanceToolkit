@@ -33,7 +33,7 @@
 #include "KeplerCube.h"
 #include "btBulletDynamicsCommon.h"
 
-class Kepler : public ramBaseScene
+class Kepler : public rdtk::BaseScene
 {
 public:
     // ------------------------
@@ -43,7 +43,7 @@ public:
 	void draw();
     
 	// ------------------------
-	void drawActor(const ramActor &actor);
+	void drawActor(const rdtk::Actor &actor);
     
     string getName() const { return "Kepler"; }
     

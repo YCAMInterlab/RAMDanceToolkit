@@ -17,7 +17,7 @@
 
 #pragma once
 
-class BigBox : public ramBaseScene
+class BigBox : public rdtk::BaseScene
 {
 	vector<float> mSizeArray;
 	float mBoxLineWidth;
@@ -30,7 +30,7 @@ public:
 	BigBox() : mBoxLineWidth(2.0), mMasterBoxSize(300.0), mUseSingleColor(true), mLineColor(0.840, 1.000, 0.419)
 	{
 		mSizeArray.clear();
-		mSizeArray.resize(ramActor::NUM_JOINTS);
+		mSizeArray.resize(rdtk::Actor::NUM_JOINTS);
 		for (int i=0; i<mSizeArray.size(); i++)
 			mSizeArray.at(i) = mMasterBoxSize;
 	}
@@ -39,15 +39,15 @@ public:
 	{
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		
-		ramGetGUI().addToggle("Use single color", &mUseSingleColor);
-		ramGetGUI().addColorSelector("line color", &mLineColor);
-		ramGetGUI().addSlider("Line width", 0.0, 10.0, &mBoxLineWidth);
-		ramGetGUI().addSlider("Master box size", 0.0, 1000.0, &mMasterBoxSize);
+		rdtk::GetGUI().addToggle("Use single color", &mUseSingleColor);
+		rdtk::GetGUI().addColorSelector("line color", &mLineColor);
+		rdtk::GetGUI().addSlider("Line width", 0.0, 10.0, &mBoxLineWidth);
+		rdtk::GetGUI().addSlider("Master box size", 0.0, 1000.0, &mMasterBoxSize);
 
-		for (int i=0; i<ramActor::NUM_JOINTS; i++)
-			ramGetGUI().addSlider(ramActor::getJointName(i), 0.0, 1000.0, &mSizeArray.at(i));
+		for (int i=0; i<rdtk::Actor::NUM_JOINTS; i++)
+			rdtk::GetGUI().addSlider(rdtk::Actor::getJointName(i), 0.0, 1000.0, &mSizeArray.at(i));
 
-		ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &BigBox::onPanelChanged);
+		ofAddListener(rdtk::GetGUI().getCurrentUIContext()->newGUIEvent, this, &BigBox::onPanelChanged);
 		
 #endif
 	}
@@ -69,7 +69,7 @@ public:
 	{
 		for (int i=0; i<NA.getNumNode(); i++)
 		{
-			const int keyJoint = NA.isActor() ? ramActor::JOINT_HEAD : 0;
+			const int keyJoint = NA.isActor() ? rdtk::Actor::JOINT_HEAD : 0;
 			
 			const ramNode &node = NA.getNode(i);
 			float boxSize = (i==keyJoint) ? 6 : 3;

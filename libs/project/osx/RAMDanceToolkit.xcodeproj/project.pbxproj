@@ -425,6 +425,8 @@
 		9AEA65D0191CB63D001FAA18 /* ramTSVCoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AEA65A8191CB63D001FAA18 /* ramTSVCoder.h */; };
 		9AEA65D1191CB63D001FAA18 /* ramUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AEA65A9191CB63D001FAA18 /* ramUtils.cpp */; };
 		9AEA65D2191CB63D001FAA18 /* ramUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AEA65AA191CB63D001FAA18 /* ramUtils.h */; };
+		C604C6C21EBB0F520043C216 /* ramImGuiPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C604C6C01EBB0F520043C216 /* ramImGuiPanel.cpp */; };
+		C604C6C31EBB0F520043C216 /* ramImGuiPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = C604C6C11EBB0F520043C216 /* ramImGuiPanel.h */; };
 		C62C935E1951554400EF3B2E /* ramCommunicationManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C62C935C1951554400EF3B2E /* ramCommunicationManager.cpp */; };
 		C62C935F1951554400EF3B2E /* ramCommunicationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C62C935D1951554400EF3B2E /* ramCommunicationManager.h */; };
 		C681AB9C197386FD0076DF1D /* ramOscManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C681AB9A197386FD0076DF1D /* ramOscManager.cpp */; };
@@ -504,8 +506,8 @@
 		C6FE33F51EB7492100E39BF0 /* imconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33D01EB7492100E39BF0 /* imconfig.h */; };
 		C6FE33F61EB7492100E39BF0 /* ofxImGui.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33D11EB7492100E39BF0 /* ofxImGui.h */; };
 		C6FE33F71EB7492100E39BF0 /* ThemeTest.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33D21EB7492100E39BF0 /* ThemeTest.h */; };
-		C6FE33FD1EB7495E00E39BF0 /* ramImGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33FB1EB7495E00E39BF0 /* ramImGui.cpp */; };
-		C6FE33FE1EB7495E00E39BF0 /* ramImGui.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33FC1EB7495E00E39BF0 /* ramImGui.h */; };
+		C6FE33FD1EB7495E00E39BF0 /* ramImGuiManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33FB1EB7495E00E39BF0 /* ramImGuiManager.cpp */; };
+		C6FE33FE1EB7495E00E39BF0 /* ramImGuiManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33FC1EB7495E00E39BF0 /* ramImGuiManager.h */; };
 		D20F14F11A86035B0053B6E9 /* ETF.h in Headers */ = {isa = PBXBuildFile; fileRef = D20F14EA1A86035B0053B6E9 /* ETF.h */; };
 		D20F14F21A86035B0053B6E9 /* fdog.h in Headers */ = {isa = PBXBuildFile; fileRef = D20F14EB1A86035B0053B6E9 /* fdog.h */; };
 		D20F14F31A86035B0053B6E9 /* imatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = D20F14EC1A86035B0053B6E9 /* imatrix.h */; };
@@ -1038,6 +1040,8 @@
 		9AEA65A8191CB63D001FAA18 /* ramTSVCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramTSVCoder.h; sourceTree = "<group>"; };
 		9AEA65A9191CB63D001FAA18 /* ramUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramUtils.cpp; sourceTree = "<group>"; };
 		9AEA65AA191CB63D001FAA18 /* ramUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramUtils.h; sourceTree = "<group>"; };
+		C604C6C01EBB0F520043C216 /* ramImGuiPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramImGuiPanel.cpp; sourceTree = "<group>"; };
+		C604C6C11EBB0F520043C216 /* ramImGuiPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramImGuiPanel.h; sourceTree = "<group>"; };
 		C62C935C1951554400EF3B2E /* ramCommunicationManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramCommunicationManager.cpp; sourceTree = "<group>"; };
 		C62C935D1951554400EF3B2E /* ramCommunicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramCommunicationManager.h; sourceTree = "<group>"; };
 		C681AB9A197386FD0076DF1D /* ramOscManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramOscManager.cpp; sourceTree = "<group>"; };
@@ -1119,8 +1123,8 @@
 		C6FE33D01EB7492100E39BF0 /* imconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
 		C6FE33D11EB7492100E39BF0 /* ofxImGui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxImGui.h; sourceTree = "<group>"; };
 		C6FE33D21EB7492100E39BF0 /* ThemeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeTest.h; sourceTree = "<group>"; };
-		C6FE33FB1EB7495E00E39BF0 /* ramImGui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramImGui.cpp; sourceTree = "<group>"; };
-		C6FE33FC1EB7495E00E39BF0 /* ramImGui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramImGui.h; sourceTree = "<group>"; };
+		C6FE33FB1EB7495E00E39BF0 /* ramImGuiManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramImGuiManager.cpp; sourceTree = "<group>"; };
+		C6FE33FC1EB7495E00E39BF0 /* ramImGuiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramImGuiManager.h; sourceTree = "<group>"; };
 		D20F14EA1A86035B0053B6E9 /* ETF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETF.h; sourceTree = "<group>"; };
 		D20F14EB1A86035B0053B6E9 /* fdog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fdog.h; sourceTree = "<group>"; };
 		D20F14EC1A86035B0053B6E9 /* imatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imatrix.h; sourceTree = "<group>"; };
@@ -2224,8 +2228,7 @@
 		9AEA6590191CB63D001FAA18 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				C6FE33FC1EB7495E00E39BF0 /* ramImGui.h */,
-				C6FE33FB1EB7495E00E39BF0 /* ramImGui.cpp */,
+				C604C6BF1EBB0F430043C216 /* ImGui */,
 				C698EAD51A78C6FE00362289 /* ramMotionExtractor */,
 				9AEA6591191CB63D001FAA18 /* ramActorScene */,
 				9AEA659A191CB63D001FAA18 /* ramControllable.h */,
@@ -2268,6 +2271,17 @@
 				9AEA65AA191CB63D001FAA18 /* ramUtils.h */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		C604C6BF1EBB0F430043C216 /* ImGui */ = {
+			isa = PBXGroup;
+			children = (
+				C604C6C11EBB0F520043C216 /* ramImGuiPanel.h */,
+				C604C6C01EBB0F520043C216 /* ramImGuiPanel.cpp */,
+				C6FE33FC1EB7495E00E39BF0 /* ramImGuiManager.h */,
+				C6FE33FB1EB7495E00E39BF0 /* ramImGuiManager.cpp */,
+			);
+			name = ImGui;
 			sourceTree = "<group>";
 		};
 		C698EAD51A78C6FE00362289 /* ramMotionExtractor */ = {
@@ -3001,6 +3015,7 @@
 				9A38F55516E9E81900FF8B66 /* btSequentialImpulseConstraintSolver.h in Headers */,
 				9A38F55616E9E81900FF8B66 /* btSliderConstraint.h in Headers */,
 				9A38F55716E9E81900FF8B66 /* btSolve2LinearConstraint.h in Headers */,
+				C604C6C31EBB0F520043C216 /* ramImGuiPanel.h in Headers */,
 				9A38F55816E9E81900FF8B66 /* btSolverBody.h in Headers */,
 				9AEA65D2191CB63D001FAA18 /* ramUtils.h in Headers */,
 				9A38F55916E9E81900FF8B66 /* btSolverConstraint.h in Headers */,
@@ -3087,7 +3102,7 @@
 				9A38F59916E9E81900FF8B66 /* ofxBtRender.h in Headers */,
 				9A38F59B16E9E81900FF8B66 /* ofxBtRigidBody.h in Headers */,
 				9A38F59D16E9E81900FF8B66 /* ofxBtSoftBody.h in Headers */,
-				C6FE33FE1EB7495E00E39BF0 /* ramImGui.h in Headers */,
+				C6FE33FE1EB7495E00E39BF0 /* ramImGuiManager.h in Headers */,
 				9A38F59F16E9E81900FF8B66 /* ofxBtSoftBodyWorld.h in Headers */,
 				9A38F5A116E9E81900FF8B66 /* ofxBtWorld.h in Headers */,
 			);
@@ -3245,6 +3260,7 @@
 				9A70C19916E9CE6F00A5B755 /* ofxIPPatcher.cpp in Sources */,
 				9A70C19D16E9CE6F00A5B755 /* ofxNodeArray.cpp in Sources */,
 				C6F853941EA0AA8B00BBDE36 /* ofxOscReceiver.cpp in Sources */,
+				C604C6C21EBB0F520043C216 /* ramImGuiPanel.cpp in Sources */,
 				C62C935E1951554400EF3B2E /* ramCommunicationManager.cpp in Sources */,
 				D2B4FD2C1A62216900C97A66 /* ramBaseHasFbo.cpp in Sources */,
 				D21D08311A4BD9A900CC3598 /* ofxUIMultiImageButton.cpp in Sources */,
@@ -3265,7 +3281,7 @@
 				C6FE33E91EB7492100E39BF0 /* BaseEngine.cpp in Sources */,
 				D21D082D1A4BD9A900CC3598 /* ofxUIMinimalSlider.cpp in Sources */,
 				C6FE33E41EB7492100E39BF0 /* README.md in Sources */,
-				C6FE33FD1EB7495E00E39BF0 /* ramImGui.cpp in Sources */,
+				C6FE33FD1EB7495E00E39BF0 /* ramImGuiManager.cpp in Sources */,
 				D21D080E1A4BD9A900CC3598 /* ofxUICanvas.cpp in Sources */,
 				9A38F59716E9E81900FF8B66 /* ofxBtJoint.cpp in Sources */,
 				9A38F59A16E9E81900FF8B66 /* ofxBtRigidBody.cpp in Sources */,
@@ -3354,6 +3370,14 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_HEADER_SEARCH_PATHS)",
+					"$(OF_BASE_PATH)/addons/ofxOsc/**",
+					../../../addons/ofxBt/libs/bullet/include/bullet,
+					../../../addons/ofxCv/src,
+					../../../addons/ofxCv/libs/ofxCv/include/,
+					"$(OF_BASE_PATH)/addons/ofxOpenCV/libs/opencv/include",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../addons/ofxBt/libs/bullet/lib/osx\"",
@@ -3388,6 +3412,14 @@
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_HEADER_SEARCH_PATHS)",
+					"$(OF_BASE_PATH)/addons/ofxOsc/**",
+					../../../addons/ofxBt/libs/bullet/include/bullet,
+					../../../addons/ofxCv/src,
+					../../../addons/ofxCv/libs/ofxCv/include/,
+					"$(OF_BASE_PATH)/addons/ofxOpenCV/libs/opencv/include",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../addons/ofxBt/libs/bullet/lib/osx\"",

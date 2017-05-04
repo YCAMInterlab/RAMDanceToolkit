@@ -73,7 +73,7 @@ public:
         }
     }
     
-    void update(const ramActor &actor)
+    void update(const rdtk::Actor &actor)
     {
         if (actor.getName()==mActorName) {
             const ofVec3f pos = actor.getNode(mActorNodeId).getGlobalPosition();
@@ -101,7 +101,7 @@ private:
 };
 // ------------------------
 
-class Chain : public ramBaseScene
+class Chain : public rdtk::BaseScene
 {
 public:
     // ------------------------
@@ -111,7 +111,7 @@ public:
 	void draw();
     
 	// ------------------------
-	void drawActor(const ramActor &actor);
+	void drawActor(const rdtk::Actor &actor);
     
     string getName() const { return "Chain"; }
     

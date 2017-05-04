@@ -37,12 +37,3 @@ void BaseScene::onActorSetup(const Actor &actor) {}
 void BaseScene::onActorExit(const Actor &actor) {}
 void BaseScene::onRigidSetup(const RigidBody &rigid) {}
 void BaseScene::onRigidExit(const RigidBody &rigid) {}
-
-
-
-BaseScene* BaseScene::getPtr()
-{
-	return this;
-}
-
-

@@ -70,7 +70,7 @@ namespace rdtk{
 		
 		// for internal use
 		
-		void addPanel(Unit* control,  bool enableable = true);
+		void addPanel(ofPtr<Unit> control,  bool enableable = true);
 		
 		PreferencesTab& getPreferencesTab();
 		
@@ -96,7 +96,7 @@ namespace rdtk{
 		PresetTab presetTab;
 		PreferencesTab preferencesTab;
 		
-		vector<Unit*> scenes;
+		vector<ofPtr<Unit> > scenes;
 		
 		ControlPanel();
 	};

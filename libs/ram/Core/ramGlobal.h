@@ -32,12 +32,12 @@ namespace rdtk{
 		
 #pragma mark - Shortcut to ActorManager
 		
-		ActorManager& getActorManager();
-		const ActorManager& getActorManager() const;
-		CommunicationManager& getCommunicationManager();
+		ActorManager&				getActorManager();
+		const ActorManager&			getActorManager() const;
+		CommunicationManager&		getCommunicationManager();
 		const CommunicationManager& getCommunicationManager() const;
-		OscManager& getOscManager();
-		const OscManager& getOscManager() const;
+		OscManager&					getOscManager();
+		const OscManager&			getOscManager() const;
 		
 		const vector<string>& getNodeArrayNames() const;
 		bool hasNodeArray(const string& key) const;

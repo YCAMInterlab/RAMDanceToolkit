@@ -18,7 +18,7 @@
 #pragma once
 
 
-class Expansion : public ramBaseScene
+class Expansion : public rdtk::BaseScene
 {
 	
 public:
@@ -50,14 +50,14 @@ public:
 		
 		ramGetGUI().addSlider("Expasion Ratio", 1.0, 10.0, &mExpasionRatio);
 		ramGetGUI().addSlider("Box size", 3.0, 100.0, &mBoxSize);
-		ramGetGUI().addSlider("Big Box ratio", 2.0, 10.0, &mBoxSizeRatio);
+		rdtk::GetGUI().addSlider("Big Box ratio", 2.0, 10.0, &mBoxSizeRatio);
 		
 		panel->addToggle("Toggle box size", false, 20, 20);
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_RIGHT);
 		panel->addToggle("Show All", true, 20, 20);
 		panel->setWidgetPosition(OFX_UI_WIDGET_POSITION_DOWN);
 		
-		for(int i=0; i<ramActor::NUM_JOINTS; i++)
+		for(int i=0; i<rdtk::Actor::NUM_JOINTS; i++)
 		{
             mBiggerSize[i] = false;
             mNodeVisibility[i] = true;
@@ -67,7 +67,7 @@ public:
 			panel->addWidgetDown(toggleSize);
 			mToggleSize[i] = toggleSize;
 			
-			ofxUIToggle *toggleVisible = new ofxUIToggle(ramActor::getJointName(i), &mNodeVisibility[i], 8, 8);
+			ofxUIToggle *toggleVisible = new ofxUIToggle(rdtk::Actor::getJointName(i), &mNodeVisibility[i], 8, 8);
 			panel->addWidgetRight(toggleVisible);
 			mToggleDraw[i] = toggleVisible;
 		}
@@ -176,13 +176,13 @@ public:
 	
 	void setAllVisiblity(bool b)
 	{
-		for (int i=0; i<ramActor::NUM_JOINTS; i++)
+		for (int i=0; i<rdtk::Actor::NUM_JOINTS; i++)
             mToggleDraw[i]->setValue(b);
 	}
 	
 	void seteAllSizeBigger(bool b)
 	{
-		for (int i=0; i<ramActor::NUM_JOINTS; i++)
+		for (int i=0; i<rdtk::Actor::NUM_JOINTS; i++)
             mToggleSize[i]->setValue(b);
 	}
     
@@ -192,11 +192,11 @@ private:
     ramFilterEach<ramExpansion> mExpansion;
     ramFilterEach<ramLowPassFilter> mLowpass;
     
-	ofxUIToggle *mToggleDraw[ramActor::NUM_JOINTS];
-	bool mNodeVisibility[ramActor::NUM_JOINTS];
+	ofxUIToggle *mToggleDraw[rdtk::Actor::NUM_JOINTS];
+	bool mNodeVisibility[rdtk::Actor::NUM_JOINTS];
 	
-	ofxUIToggle *mToggleSize[ramActor::NUM_JOINTS];
-	bool mBiggerSize[ramActor::NUM_JOINTS];
+	ofxUIToggle *mToggleSize[rdtk::Actor::NUM_JOINTS];
+	bool mBiggerSize[rdtk::Actor::NUM_JOINTS];
 	
 	bool mShowAxis;
 	bool mShowBox;

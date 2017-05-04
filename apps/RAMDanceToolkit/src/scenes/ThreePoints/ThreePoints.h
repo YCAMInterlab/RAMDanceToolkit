@@ -26,12 +26,12 @@ static const ofColor cyanPrint = ofColor::fromHex(0x00abec);
 static const ofColor magentaPrint = ofColor::fromHex(0xec008c);
 static const ofColor yellowPrint = ofColor::fromHex(0xffee00);
 
-class ThreePoints : public ramBaseScene
+class ThreePoints : public rdtk::BaseScene
 {
 public:
 	
-	ofxUIToggle *mToggles[ramActor::NUM_JOINTS];
-	bool mNodeVisibility[ramActor::NUM_JOINTS];
+	ofxUIToggle *mToggles[rdtk::Actor::NUM_JOINTS];
+	bool mNodeVisibility[rdtk::Actor::NUM_JOINTS];
 	
 	bool showRects, showCircle, showSpheres, invertSpheres, showCircleBisector, showCenterCircles;
 	float pointSize, crossLength, rectRadius, maxInvertRadius, circleResolution;
@@ -41,7 +41,7 @@ public:
 		
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		
-		ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+		ofxUICanvas* panel = rdtk::GetGUI().getCurrentUIContext();
 
 		showRects = false;
 		showSpheres = false;
@@ -54,22 +54,22 @@ public:
 		maxInvertRadius = 2000;
 		circleResolution = 30;
 		
-		ramGetGUI().addToggle("Show spheres", &showSpheres);
-		ramGetGUI().addToggle("Show rects", &showRects);
-		ramGetGUI().addToggle("Show circle", &showCircle);
-		ramGetGUI().addToggle("Inverted spheres", &invertSpheres);
-		ramGetGUI().addToggle("Show circle bisector", &showCircleBisector);
-		ramGetGUI().addToggle("Show center circles", &showCenterCircles);
-		ramGetGUI().addSlider("Point size", 1, 10, &pointSize);
-		ramGetGUI().addSlider("Cross length", 1, 1000, &crossLength);
-		ramGetGUI().addSlider("Rect radius", 1, 1000, &rectRadius);
-		ramGetGUI().addSlider("Max invert radius", 1, 10000, &maxInvertRadius);
-		ramGetGUI().addSlider("Circle resolution", 3, 30, &circleResolution);
+		rdtk::GetGUI().addToggle("Show spheres", &showSpheres);
+		rdtk::GetGUI().addToggle("Show rects", &showRects);
+		rdtk::GetGUI().addToggle("Show circle", &showCircle);
+		rdtk::GetGUI().addToggle("Inverted spheres", &invertSpheres);
+		rdtk::GetGUI().addToggle("Show circle bisector", &showCircleBisector);
+		rdtk::GetGUI().addToggle("Show center circles", &showCenterCircles);
+		rdtk::GetGUI().addSlider("Point size", 1, 10, &pointSize);
+		rdtk::GetGUI().addSlider("Cross length", 1, 1000, &crossLength);
+		rdtk::GetGUI().addSlider("Rect radius", 1, 1000, &rectRadius);
+		rdtk::GetGUI().addSlider("Max invert radius", 1, 10000, &maxInvertRadius);
+		rdtk::GetGUI().addSlider("Circle resolution", 3, 30, &circleResolution);
 		
-		for (int i=0; i<ramActor::NUM_JOINTS; i++)
+		for (int i=0; i<rdtk::Actor::NUM_JOINTS; i++)
 		{
-			mNodeVisibility[i] = (i == ramActor::JOINT_LEFT_TOE || i == ramActor::JOINT_RIGHT_TOE);
-			mToggles[i] = panel->addToggle(ramActor::getJointName(i), &mNodeVisibility[i], 8, 8);
+			mNodeVisibility[i] = (i == rdtk::Actor::JOINT_LEFT_TOE || i == rdtk::Actor::JOINT_RIGHT_TOE);
+			mToggles[i] = panel->addToggle(rdtk::Actor::getJointName(i), &mNodeVisibility[i], 8, 8);
 		}
 		
 #endif
@@ -90,7 +90,7 @@ public:
 	}
 	
 	//--------------------------------------------------------------
-	void drawActor(const ramActor &actor)
+	void drawActor(const rdtk::Actor &actor)
 	{		
 		// maybe this is slow...? need a better way to do point size/depth testing.
 		glPushAttrib(GL_ALL_ATTRIB_BITS);

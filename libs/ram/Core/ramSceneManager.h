@@ -22,6 +22,7 @@
 #include "ramBaseScene.h"
 #include "ramGlobal.h"
 #include "ramActorsScene.h"
+#include "ramImGuiManager.h"
 
 namespace rdtk{
 	class SceneManager : public GlobalShortcut
@@ -31,13 +32,19 @@ namespace rdtk{
 		static SceneManager& instance();
 		
 		void setup();
-		void addScene(BaseScene* scene);
 		
+		void addScene(ofPtr<BaseScene> scene);
+		template <class T> void addScene()
+		{
+			ofPtr<T> ptr = make_shared<T>();
+			addScene(ofPtr<BaseScene>(ptr));
+		}
+
 		size_t getNumScenes() const;
 		size_t findtSceneIndex(string name) const;
-		BaseScene* getScene(size_t index) const;
+		ofPtr<BaseScene> getScene(size_t index);
 		
-		ActorsScene* getActorsScene();
+		ofPtr<ActorsScene> getActorsScene();
 		void setShowAllActors(bool showAllActors);
 		bool getShowAllActors() const;
 		
@@ -52,7 +59,7 @@ namespace rdtk{
 		void rigidSetup(RigidBody &rigid);
 		void rigidExit(RigidBody &rigid);
 		
-		vector<BaseScene*> scenes;
+		vector< ofPtr<BaseScene> > scenes;
 		
 		void update(ofEventArgs& args);
 		void draw(ofEventArgs& args);
@@ -65,7 +72,7 @@ namespace rdtk{
 		SceneManager(const SceneManager&);
 		SceneManager& operator=(const SceneManager&);
 		
-		ActorsScene* actorsScene;
+		ofPtr<ActorsScene> actorsScene;
 	};
 }
 

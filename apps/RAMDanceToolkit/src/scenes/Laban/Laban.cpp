@@ -33,7 +33,7 @@ void Laban::setupControlPanel()
     showLines = true;
     showPlanes = false;
     onlyLimbs = true;
-    ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+    ofxUICanvas* panel = rdtk::GetGUI().getCurrentUIContext();
     panel->addSlider("Fade out", 0, 2, &maxLabanMomentLife, 300, 20);
     panel->addToggle("Only Limbs", &onlyLimbs, 20, 20);
     panel->addSlider("Threshold", 0, .5, &threshold, 300, 20);
@@ -93,16 +93,16 @@ void Laban::draw()
     ramEndCamera();
 }
 
-void Laban::drawActor(const ramActor &actor)
+void Laban::drawActor(const rdtk::Actor &actor)
 {
     for (int i=0; i<actor.getNumNode(); i++)
     {
         if(onlyLimbs)
         {
-            if(i != ramActor::JOINT_LEFT_ANKLE &&
-               i != ramActor::JOINT_RIGHT_ANKLE &&
-               i != ramActor::JOINT_LEFT_WRIST &&
-               i != ramActor::JOINT_RIGHT_WRIST)
+            if(i != rdtk::Actor::JOINT_LEFT_ANKLE &&
+               i != rdtk::Actor::JOINT_RIGHT_ANKLE &&
+               i != rdtk::Actor::JOINT_LEFT_WRIST &&
+               i != rdtk::Actor::JOINT_RIGHT_WRIST)
             {
                 continue;
             }
@@ -162,6 +162,6 @@ void Laban::drawActor(const ramActor &actor)
     }
 }
 
-void Laban::drawRigid(ramRigidBody &rigid)
+void Laban::drawRigid(rdtk::RigidBody &rigid)
 {
 }

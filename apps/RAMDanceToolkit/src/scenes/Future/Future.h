@@ -19,7 +19,7 @@
 
 #include "ParticleEngine.h"
 
-class Future : public ramBaseScene
+class Future : public rdtk::BaseScene
 {
 	
 	ramFilterEach<ramGhost> ghostFilters;
@@ -50,17 +50,17 @@ public:
 	void setupControlPanel()
 	{
 		
-		ramGetGUI().addToggle("Draw line from actor to ghost", &draw_line);
+		rdtk::GetGUI().addToggle("Draw line from actor to ghost", &draw_line);
 		
-		ofAddListener(ramGetGUI().addButton("Speed: Ghost"), this, &Future::onPresetGhost);
-		ofAddListener(ramGetGUI().addButton("Speed: Slow"), this, &Future::onPresetSlow);
-		ofAddListener(ramGetGUI().addButton("Speed: Normal"), this, &Future::onPresetNormal);
-		ofAddListener(ramGetGUI().addButton("Speed: Fast"), this, &Future::onPresetFast);
+		ofAddListener(rdtk::GetGUI().addButton("Speed: Ghost"), this, &Future::onPresetGhost);
+		ofAddListener(rdtk::GetGUI().addButton("Speed: Slow"), this, &Future::onPresetSlow);
+		ofAddListener(rdtk::GetGUI().addButton("Speed: Normal"), this, &Future::onPresetNormal);
+		ofAddListener(rdtk::GetGUI().addButton("Speed: Fast"), this, &Future::onPresetFast);
 		
-		ramGetGUI().addSlider("Distance", 0.0, 255.0, &distance);
-		ramGetGUI().addSlider("Speed", 0.0, 255.0, &speed);
+		rdtk::GetGUI().addSlider("Distance", 0.0, 255.0, &distance);
+		rdtk::GetGUI().addSlider("Speed", 0.0, 255.0, &speed);
 		
-		ofAddListener(ramGetGUI().getCurrentUIContext()->newGUIEvent, this, &Future::onValueChanged);
+		ofAddListener(rdtk::GetGUI().getCurrentUIContext()->newGUIEvent, this, &Future::onValueChanged);
 	}
 
 	void draw()

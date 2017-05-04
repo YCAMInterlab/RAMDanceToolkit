@@ -19,7 +19,7 @@
 
 #include "ParticleEngine.h"
 
-class Particles : public ramBaseScene
+class Particles : public rdtk::BaseScene
 {
 	
 	ParticleEngine pe;
@@ -37,11 +37,11 @@ public:
 	
 	void setupControlPanel()
 	{
-        ramGetGUI().addToggle("Change emit position", &useGhost);
-		ramGetGUI().addSlider("Amount", 1.0, 15.0, &particle_amount);
-		ramGetGUI().addSlider("Life", 0.1, 10.0, &pe.particle_life);
-		ramGetGUI().addSlider("Velocity", 0.1, 5, &pe.particle_velocity);
-		ramGetGUI().addSlider("Gravity", -0.1, 0.1, &gravity->force);
+        rdtk::GetGUI().addToggle("Change emit position", &useGhost);
+		rdtk::GetGUI().addSlider("Amount", 1.0, 15.0, &particle_amount);
+		rdtk::GetGUI().addSlider("Life", 0.1, 10.0, &pe.particle_life);
+		rdtk::GetGUI().addSlider("Velocity", 0.1, 5, &pe.particle_velocity);
+		rdtk::GetGUI().addSlider("Gravity", -0.1, 0.1, &gravity->force);
 	}
 	
 	void setup()

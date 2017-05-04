@@ -84,7 +84,7 @@ void Chain::setupControlPanel()
     const float w = 300.0f;
     const float dim = 16.0f;
     
-	ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+	ofxUICanvas* panel = rdtk::GetGUI().getCurrentUIContext();
 	
     panel->addSlider("GRAVITY X", -3.0f, 3.0f, &mGravity.x, w, dim);
     panel->addSlider("GRAVITY Y", -3.0f, 3.0f, &mGravity.y, w, dim);
@@ -140,20 +140,20 @@ void Chain::update()
 void Chain::draw()
 {
     pushAll();
-    ramBeginCamera();
+    rdtk::BeginCamera();
     ofEnableAlphaBlending();
     mChainBtDynamics.draw();
-    ramEndCamera();
+    rdtk::EndCamera();
     popAll();
 }
 
 
 #pragma mark -
 //--------------------------------------------------------------
-void Chain::drawActor(const ramActor &actor)
+void Chain::drawActor(const rdtk::Actor &actor)
 {
-	ofSetColor(ramColor::RED_DEEP);
-    ramDrawBasicActor(actor);
+	ofSetColor(rdtk::Color::RED_DEEP);
+    rdtk::DrawBasicActor(actor);
     
     for (int i=0; i<mChains.size(); i++) {
         if (mChains.at(i))
@@ -174,16 +174,16 @@ void Chain::onValueChanged(ofxUIEventArgs& e)
         ofxUIButton *b = static_cast<ofxUIButton *>(e.widget);
         if (b->getValue()) return;
         
-        if (!ramActorManager::instance().getLastSelectedNode()) {
+        if (!rdtk::ActorManager::instance().getLastSelectedNode()) {
             ofLogError("Chain") << "We must select a node at first!";
             return;
         }
-        const string actorName = ramActorManager::instance().getLastSelectedNodeIdentifer().name;
-        int nodeId =ramActorManager::instance().getLastSelectedNodeIdentifer().index;
+        const string actorName = rdtk::ActorManager::instance().getLastSelectedNodeIdentifer().name;
+        int nodeId =rdtk::ActorManager::instance().getLastSelectedNodeIdentifer().index;
         AttachableChain *chain;
         chain = new AttachableChain();
         chain->setup(&mChainBtDynamics);
-        const ofVec3f pos = ramActorManager::instance().getLastSelectedNode()->getGlobalPosition();
+        const ofVec3f pos = rdtk::ActorManager::instance().getLastSelectedNode()->getGlobalPosition();
         /// not good
         //chain->spawnChain(btVector3(pos.x, pos.y, pos.z), mNumEdges, mEdgeLength, mThickness);
         /// good
@@ -209,16 +209,16 @@ void Chain::onKeyPressed(ofKeyEventArgs &e)
 {
 	if (e.key != 'o') return;
 	
-	if (!ramActorManager::instance().getLastSelectedNode()) {
+	if (!rdtk::ActorManager::instance().getLastSelectedNode()) {
 		ofLogError("Chain") << "We must select a node at first!";
 		return;
 	}
-	const string actorName = ramActorManager::instance().getLastSelectedNodeIdentifer().name;
-	int nodeId =ramActorManager::instance().getLastSelectedNodeIdentifer().index;
+	const string actorName = rdtk::ActorManager::instance().getLastSelectedNodeIdentifer().name;
+	int nodeId =rdtk::ActorManager::instance().getLastSelectedNodeIdentifer().index;
 	AttachableChain *chain;
 	chain = new AttachableChain();
 	chain->setup(&mChainBtDynamics);
-	const ofVec3f pos = ramActorManager::instance().getLastSelectedNode()->getGlobalPosition();
+	const ofVec3f pos = rdtk::ActorManager::instance().getLastSelectedNode()->getGlobalPosition();
 	/// not good
 	//chain->spawnChain(btVector3(pos.x, pos.y, pos.z), mNumEdges, mEdgeLength, mThickness);
 	/// good

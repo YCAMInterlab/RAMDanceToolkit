@@ -17,7 +17,7 @@
 
 #pragma once
 
-class UpsideDown : public ramBaseScene
+class UpsideDown : public rdtk::BaseScene
 {
 	
 public:
@@ -36,7 +36,7 @@ public:
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		
 		
-		ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+		ofxUICanvas* panel = rdtk::GetGUI().getCurrentUIContext();
 		
 		ofAddListener(panel->newGUIEvent, this, &UpsideDown::onValueChanged);
         
@@ -113,9 +113,9 @@ public:
         for (int i=0; i<getNumNodeArray(); i++)
         {
             ramNodeArray tmpActor = getNodeArray(i);
-            ofQuaternion base = tmpActor.getNode(ramActor::JOINT_HIPS).getOrientationQuat();
+            ofQuaternion base = tmpActor.getNode(rdtk::Actor::JOINT_HIPS).getOrientationQuat();
             ofQuaternion rotated = base * mRotation;
-            tmpActor.getNode(ramActor::JOINT_HIPS).setOrientation(rotated);
+            tmpActor.getNode(rdtk::Actor::JOINT_HIPS).setOrientation(rotated);
             
             NAs.push_back(tmpActor);
         }

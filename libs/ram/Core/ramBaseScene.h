@@ -20,10 +20,11 @@
 #include "ramUnit.h"
 #include "ramControlPanel.h"
 #include "ramBaseHasFbo.h"
+#include "ramImGuiPanel.h"
 
 namespace rdtk{
 	
-	class BaseScene : public Unit, public BaseHasFbo
+	class BaseScene : public BaseHasFbo, public SceneGui
 	{
 	public:
 		
@@ -46,8 +47,6 @@ namespace rdtk{
 		virtual void onActorExit(const Actor &actor);
 		virtual void onRigidSetup(const RigidBody &rigid);
 		virtual void onRigidExit(const RigidBody &rigid);
-		
-		BaseScene* getPtr();
 		
 	};
 }

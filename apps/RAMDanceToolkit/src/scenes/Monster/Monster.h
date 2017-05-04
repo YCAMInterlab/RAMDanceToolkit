@@ -19,7 +19,7 @@
 
 #include "ramMain.h"
 
-class Monster : public ramBaseScene
+class Monster : public rdtk::BaseScene
 {
 public:
 	
@@ -40,7 +40,7 @@ public:
 		minScale = .5;
 		maxScale = 2;
 		randomizationAmount = .5;
-		ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+		ofxUICanvas* panel = rdtk::GetGUI().getCurrentUIContext();
 		panel->addButton("Reset", &needToReset, 20, 20);
 		panel->addButton("Random Line", &randomLine, 20, 20);
 		panel->addButton("Randomize Topology", &randomizeTopology, 20, 20);
@@ -56,31 +56,31 @@ public:
 	{
 		int treeArray[] = {
 			-1,
-			ramActor::JOINT_HIPS,
-			ramActor::JOINT_ABDOMEN,
-			ramActor::JOINT_CHEST,
-			ramActor::JOINT_NECK,
-			ramActor::JOINT_HIPS,
-			ramActor::JOINT_LEFT_HIP,
-			ramActor::JOINT_LEFT_KNEE,
-			ramActor::JOINT_LEFT_ANKLE,
-			ramActor::JOINT_HIPS,
-			ramActor::JOINT_RIGHT_HIP,
-			ramActor::JOINT_RIGHT_KNEE,
-			ramActor::JOINT_RIGHT_ANKLE,
-			ramActor::JOINT_CHEST,
-			ramActor::JOINT_LEFT_COLLAR,
-			ramActor::JOINT_LEFT_SHOULDER,
-			ramActor::JOINT_LEFT_ELBOW,
-			ramActor::JOINT_LEFT_WRIST,
-			ramActor::JOINT_CHEST,
-			ramActor::JOINT_RIGHT_COLLAR,
-			ramActor::JOINT_RIGHT_SHOULDER,
-			ramActor::JOINT_RIGHT_ELBOW,
-			ramActor::JOINT_RIGHT_WRIST
+			rdtk::Actor::JOINT_HIPS,
+			rdtk::Actor::JOINT_ABDOMEN,
+			rdtk::Actor::JOINT_CHEST,
+			rdtk::Actor::JOINT_NECK,
+			rdtk::Actor::JOINT_HIPS,
+			rdtk::Actor::JOINT_LEFT_HIP,
+			rdtk::Actor::JOINT_LEFT_KNEE,
+			rdtk::Actor::JOINT_LEFT_ANKLE,
+			rdtk::Actor::JOINT_HIPS,
+			rdtk::Actor::JOINT_RIGHT_HIP,
+			rdtk::Actor::JOINT_RIGHT_KNEE,
+			rdtk::Actor::JOINT_RIGHT_ANKLE,
+			rdtk::Actor::JOINT_CHEST,
+			rdtk::Actor::JOINT_LEFT_COLLAR,
+			rdtk::Actor::JOINT_LEFT_SHOULDER,
+			rdtk::Actor::JOINT_LEFT_ELBOW,
+			rdtk::Actor::JOINT_LEFT_WRIST,
+			rdtk::Actor::JOINT_CHEST,
+			rdtk::Actor::JOINT_RIGHT_COLLAR,
+			rdtk::Actor::JOINT_RIGHT_SHOULDER,
+			rdtk::Actor::JOINT_RIGHT_ELBOW,
+			rdtk::Actor::JOINT_RIGHT_WRIST
 		};
-		treeBase.resize(ramActor::NUM_JOINTS);
-		lengthScale.resize(ramActor::NUM_JOINTS, 1);
+		treeBase.resize(rdtk::Actor::NUM_JOINTS);
+		lengthScale.resize(rdtk::Actor::NUM_JOINTS, 1);
 		for(int i = 0; i < treeBase.size(); i++) {
 			treeBase[i] = treeArray[i];
 		}
@@ -91,7 +91,7 @@ public:
 	{
 		treeSwap = treeBase;
 		lengthScale.clear();
-		lengthScale.resize(ramActor::NUM_JOINTS, 1);
+		lengthScale.resize(rdtk::Actor::NUM_JOINTS, 1);
 	}
 	
 	bool isAncestor(int ancestor, int child) {
@@ -110,7 +110,7 @@ public:
 	vector<int> getNonChildren(int ancestor)
 	{
 		vector<int> nonchildren;
-		int n = ramActor::NUM_JOINTS;
+		int n = rdtk::Actor::NUM_JOINTS;
 		for(int child = 0; child < n; child++)
 		{
 			if(!isAncestor(ancestor, child))
@@ -168,12 +168,12 @@ public:
 		{
 			reset();
 			vector<int> all;
-			for(int i = 1; i < ramActor::NUM_JOINTS; i++) 
+			for(int i = 1; i < rdtk::Actor::NUM_JOINTS; i++) 
 			{
 				all.push_back(i);
 			}
 			ofRandomize(all);
-			attach(all[0], ramActor::JOINT_HIPS);
+			attach(all[0], rdtk::Actor::JOINT_HIPS);
 			for(int i = 1; i < all.size(); i++)
 			{
 				attach(all[i], all[i - 1]);
@@ -185,7 +185,7 @@ public:
 	{	
 	}
 	
-	void drawActor(const ramActor &actor)
+	void drawActor(const rdtk::Actor &actor)
 	{	
 		
 		monsterArray = actor;

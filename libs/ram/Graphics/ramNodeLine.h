@@ -97,8 +97,8 @@ namespace rdtk{
 				ofVec3f cp0 = control0_n.getGlobalTransformMatrix().preMult(ofVec3f(0, 0, 0));
 				ofVec3f cp1 = control1_n.getGlobalTransformMatrix().preMult(ofVec3f(0, 0, 0));
 				
-				ofVec3f pp0 = (p0 - cp0).normalized() * strength;
-				ofVec3f pp1 = (p1 - cp1).normalized() * strength;
+				ofVec3f pp0 = (p0 - cp0).getNormalized() * strength;
+				ofVec3f pp1 = (p1 - cp1).getNormalized() * strength;
 				
 				pp0 += p0;
 				pp1 += p1;
@@ -138,7 +138,7 @@ namespace rdtk{
 				
 				if (i == 0)
 				{
-					axis = d.crossed(ofVec3f(0, 1, 0)).normalized();
+					axis = d.getCrossed(ofVec3f(0, 1, 0)).getNormalized();
 				}
 				else
 				{

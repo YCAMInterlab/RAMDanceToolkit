@@ -19,7 +19,7 @@
 
 #include "ramMain.h"
 
-class SoundCube : public ramBaseScene
+class SoundCube : public rdtk::BaseScene
 {
 public:
 	
@@ -139,9 +139,9 @@ public:
 	{
 		fade = 0.5;
 		
-		ramGetGUI().addSlider("line width", 0, 10, &line_width);
-		ramGetGUI().addSlider("fade", 0, 1, &fade);
-		ramGetGUI().addToggle("show box", &show_box);
+		rdtk::GetGUI().addSlider("line width", 0, 10, &line_width);
+		rdtk::GetGUI().addSlider("fade", 0, 1, &fade);
+		rdtk::GetGUI().addToggle("show box", &show_box);
 	}
 	
 	void setup()
