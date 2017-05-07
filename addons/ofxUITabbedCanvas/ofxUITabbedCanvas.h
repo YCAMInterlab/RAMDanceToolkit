@@ -25,7 +25,7 @@ public:
 	,enabled(false)
 	,enableable(enableable)
 	,tabName(tabName) {
-        setFont(ramToResourcePath(RAM_FONT_FILE));
+        setFont(rdtk::ToResourcePath(RAM_FONT_FILE));
         
 		addLabel(tabName, OFX_UI_FONT_LARGE);
 		addSpacer();
@@ -53,10 +53,10 @@ public:
 	,loadStatus(false)
 	,tabWidth(tabWidth)
 	,visible(true) {
-        setFont(ramToResourcePath(RAM_FONT_FILE));
+        setFont(rdtk::ToResourcePath(RAM_FONT_FILE));
         
-        loadButton = new ofxUIImageButton(0, 0, 32, 32, &loadStatus, ramToResourcePath("Images/open.png"), "Load");
-        saveButton = new ofxUIImageButton(0, 0, 32, 32, &saveStatus, ramToResourcePath("Images/save.png"), "Save");
+        loadButton = new ofxUIImageButton(0, 0, 32, 32, &loadStatus, rdtk::ToResourcePath("Images/open.png"), "Load");
+        saveButton = new ofxUIImageButton(0, 0, 32, 32, &saveStatus, rdtk::ToResourcePath("Images/save.png"), "Save");
         addWidgetRight(loadButton);
         addWidgetRight(saveButton);
 		ofAddListener(newGUIEvent, this, &ofxUITabbedCanvas::guiEvent);

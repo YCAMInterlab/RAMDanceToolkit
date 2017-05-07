@@ -524,6 +524,56 @@ void ActorsScene::rebuildControlPanel()
 	setNeedsUpdatePanel(false);
 }
 
+void ActorsScene::drawImGui()
+{
+#ifndef TARGET_WIN32
+	if (ImGui::Button("Load Recorded File"))
+	{
+		ofFileDialogResult result = ofSystemLoadDialog("Load recorded *.tsv file.", false, "");
+		if (result.bSuccess) {
+			loadNewFile = true;
+			newFilePath = result.getPath();
+		}
+	}
+#endif
+	ImGui::SameLine();
+	if (ImGui::Button("Reset Positions")) resetPosAll(true);
+	
+	if (ImGui::Checkbox("Show All Actors", &bShowAllActor)) showAll(bShowAllActor);
+	
+	ImGui::Checkbox("Use Shading", &bUseShading);ImGui::SameLine();
+	ImGui::Checkbox("Use SimpleActor", &bUseSimpleActor);
+
+	if (ImGui::Checkbox("Pause (Space key)", &bPausing)) pauseAll(bPausing);ImGui::SameLine();
+	if (ImGui::Checkbox("Recording All Actors", &bRec)) recAll(bRec);
+	
+	/// insert panels
+	map<string, BaseSegment*> tmpMap = mSegmentsMap;
+	SegmentsIter it = tmpMap.begin();
+	
+	while (it != tmpMap.end())
+	{
+		BaseSegment *seg = it->second;
+
+		ImGui::Button(seg->getName().c_str());
+//		if (seg->getType() == RAM_UI_SEGMENT_TYPE_CONTROL)
+//		{
+//			ControlSegment *s = new ControlSegment(seg->getName());
+//			addSegment(s);
+//		}
+//		else if (seg->getType() == RAM_UI_SEGMENT_TYPE_PLAYBACK)
+//		{
+//			PlaybackSegment *s = new PlaybackSegment(seg->getName());
+//			s->session = seg->session;
+//			s->session.prepareForPlay();
+//			s->session.play();
+//			addSegment(s);
+//		}
+		
+		it++;
+	}
+}
+
 
 void ActorsScene::createPanelHeader()
 {

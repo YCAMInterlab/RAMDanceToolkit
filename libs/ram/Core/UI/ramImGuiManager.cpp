@@ -1,4 +1,4 @@
-//
+
 //  ramImGui.cpp
 //  RAMDanceToolkit
 //
@@ -15,6 +15,8 @@ GuiManager* GuiManager::__instance = NULL;
 GuiManager::GuiManager()
 {
 	gui.setup();
+	prefGui = ofPtr<PreferencesGui>(new PreferencesGui());
+	addScene(ofPtr<SceneGui>(prefGui));
 }
 
 GuiManager::~GuiManager()
@@ -35,29 +37,12 @@ void GuiManager::draw()
 {
 	gui.begin();
 	CameraManager::instance().setEnableInteractiveCamera(!ImGui::GetWindowIsFocused());
-	bool cl = ImGui::CollapsingHeader("Actors");
-	ImGui::SameLine();ImGui::Checkbox("Toggle", &cl);
-	if (cl)
-	{
-		ImGui::Button("Load Recorded File");
-//		ImGui::Button(")
-		
-	}
-	if (ImGui::CollapsingHeader("Presets"))
-	{
-		
-	}
-	if (ImGui::CollapsingHeader("Preferences"))
-	{
-		
-	}
 	
 	for (auto scn : sceneArr)
 	{
-		if (ImGui::CollapsingHeader(scn->getName().c_str()))
-		{
-			scn->drawGuiBase();
-		}
+		ImGui::PushID(scn->getName().c_str());
+		scn->drawGuiBase();
+		ImGui::PopID();
 	}
 	
 	gui.end();

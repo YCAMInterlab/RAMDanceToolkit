@@ -23,8 +23,6 @@
 
 #include "ofxUITabbedCanvas.h"
 
-#include "ramGlobal.h"
-#include "ramGraphics.h"
 #include "ramCameraManager.h"
 #include "ramPreferencesTab.h"
 #include "ramPresetTab.h"

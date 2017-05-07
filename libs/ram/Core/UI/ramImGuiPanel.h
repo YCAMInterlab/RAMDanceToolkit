@@ -12,26 +12,15 @@
 #include "ofMain.h"
 #include "ofxImGui.h"
 #include "ramUnit.h"
+#include "ramCameraManager.h"
 
 namespace rdtk{
 	class SceneGui : public Unit{
 	public:
 		bool gui_floating = false;
 		
-		void drawGuiBase()
-		{
-			ImGui::Checkbox("Float", &gui_floating);
-			drawImGui();
-			
-			if (gui_floating)
-			{
-				ImGui::Begin(getName().c_str(), &gui_floating);
-//				if (ImGui::IsWindowHovered()) camEnable = false;
-				drawImGui();
-				ImGui::End();
-			}
-		}
-		virtual void drawImGui() {}
+		void drawGuiBase();
+		virtual void drawImGui();
 	};
 	
 	class ActorGui{

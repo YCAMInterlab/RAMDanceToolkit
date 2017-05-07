@@ -40,6 +40,7 @@ namespace rdtk{
 		void update();
 		void draw();
 		void drawHUD();
+		void drawImGui();
 		
 		void onActorSetup(const Actor &actor);
 		void onRigidSetup(const RigidBody &rigid);
@@ -110,6 +111,8 @@ namespace rdtk{
 		bool bRecAllActor;
 		bool bUseSimpleActor;
 		bool bUseShading;
+		bool bPausing;
+		bool bRec;
 		
 		bool loadNewFile;
 		string newFilePath;

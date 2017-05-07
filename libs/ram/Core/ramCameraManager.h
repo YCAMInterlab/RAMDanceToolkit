@@ -47,6 +47,7 @@ namespace rdtk{
 		}
 		
 		void setEnableInteractiveCamera(bool v);
+		bool getEnableInteractiveCamera();
 		
 		// defaults
 		void loadDefaults();

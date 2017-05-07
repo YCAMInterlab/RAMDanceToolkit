@@ -69,6 +69,17 @@ void CameraManager::setEnableInteractiveCamera(bool v)
 	}
 }
 
+bool CameraManager::getEnableInteractiveCamera()
+{
+	if (typeid(*active_camera) == typeid(ofEasyCam))
+	{
+		ofEasyCam *cam = (ofEasyCam*)active_camera;
+		
+		return cam->getMouseInputEnabled();
+	}
+	return false;
+}
+
 void CameraManager::rollbackDefaultCameraSetting(int camera_id)
 {
 	if(camera_id == -1) camera_id = last_camera_id;

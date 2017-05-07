@@ -9,8 +9,8 @@
 #ifndef ramImGui_hpp
 #define ramImGui_hpp
 
-#include "ramImGuiPanel.h"
 #include "ramCameraManager.h"
+#include "ramPreferencesTab.h"
 
 namespace rdtk{
 	
@@ -40,6 +40,8 @@ namespace rdtk{
 	private:
 		static GuiManager *__instance;
 		
+		
+		ofPtr<PreferencesGui> prefGui;
 		GuiManager();
 		GuiManager(const GuiManager&){}
 		GuiManager& operator=(const GuiManager&){return *__instance;}
