@@ -32,7 +32,7 @@ public:
 		bool trigger_mode;
 		bool visible;
 		
-		ramCollisionEvent event;
+		rdtk::CollisionEvent event;
 		
 		Shape() : id(-1), obj(NULL), alpha(0), player(NULL), trigger_mode(false), visible(true) {}
 		
@@ -50,7 +50,7 @@ public:
 			}
 		}
 		
-		void set(int id, ramPrimitive *obj)
+		void set(int id, rdtk::Primitive *obj)
 		{
 			this->id = id;
 			this->obj = obj;
@@ -63,7 +63,7 @@ public:
 			if (player) delete player;
 			
 			player = new ofSoundPlayer;
-			player->loadSound(path);
+			player->load(path);
 			player->setLoop(loop ? OF_LOOP_NORMAL : OF_LOOP_NONE);
 			trigger_mode = trigger;
 			
@@ -121,7 +121,7 @@ public:
 	private:
 		
 		int id;
-		ramPrimitive *obj;
+		rdtk::Primitive *obj;
 		
 		float alpha;
 		float volume, volume_t;
@@ -174,7 +174,7 @@ public:
 	
 	void draw()
 	{
-		ramBeginCamera();
+		rdtk::BeginCamera();
 		
 		ofNoFill();
 		ofPushStyle();
@@ -187,7 +187,7 @@ public:
 		}
 		
 		ofPopStyle();
-		ramEndCamera();
+		rdtk::EndCamera();
 	}
 	
 	void loadXML()
@@ -246,19 +246,19 @@ public:
 			
 			if (type != "")
 			{
-				ramPrimitive *s;
+				rdtk::Primitive *s;
 				
 				if (type == "cube")
 				{
-					s = new ramBoxPrimitive(size);
+					s = new rdtk::BoxPrimitive(size);
 				}
 				else if (type == "pyramid")
 				{
-					s = new ramPyramidPrimitive(size.x);
+					s = new rdtk::PyramidPrimitive(size.x);
 				}
 				else if (type == "sphere")
 				{
-					s = new ramSpherePrimitive(size.x);
+					s = new rdtk::SpherePrimitive(size.x);
 				}
 				else
 				{
@@ -282,7 +282,7 @@ public:
 				
 				if (sound != "")
 				{
-					o->loadSound(ramToResourcePath(sound), toggle_mode, loop);
+					o->load(ramToResourcePath(sound), toggle_mode, loop);
 				}
 				
 				cout << type << " loaded." << endl;

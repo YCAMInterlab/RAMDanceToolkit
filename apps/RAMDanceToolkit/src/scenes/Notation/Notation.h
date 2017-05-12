@@ -77,7 +77,7 @@ public:
 	
 	float centerLerpRate, normalLerpRate;
 	
-	ramPlanarGestureRecognizer recognizer;
+	rdtk::PlanarGestureRecognizer recognizer;
 	
 	void setupControlPanel()
 	{
@@ -176,7 +176,7 @@ public:
 	
 	void draw()
 	{	
-		ramBeginCamera();
+		rdtk::BeginCamera();
 		ofEnableAlphaBlending();
 		glDisable(GL_DEPTH_TEST);
 		
@@ -210,18 +210,18 @@ public:
 				int i = centersItr->first;
 				ofVec3f& center = centersItr->second;
 				ofVec3f& normal = normals[i];
-				//ofLine(center, center + normal * 100);
+				//ofDrawLine(center, center + normal * 100);
 				
 				ofPushMatrix();
 				ofTranslate(center);
 				rotateToNormal(normal);
 				ofNoFill();
-				ofRect(projected[i].getBoundingBox());
+				ofDrawRectangle(projected[i].getBoundingBox());
 				ofPopMatrix();
 			}
 		}
 		
-		ramEndCamera();
+		rdtk::EndCamera();
 	}
 	
 	void drawActor(const rdtk::Actor &actor)
@@ -243,7 +243,7 @@ public:
 		}
 	}
 	
-	void drawRigid(ramRigidBody &rigid)
+	void drawRigid(rdtk::RigidBody &rigid)
 	{
 	}
 	

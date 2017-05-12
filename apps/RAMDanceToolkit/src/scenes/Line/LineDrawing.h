@@ -48,7 +48,7 @@ public:
 		float line_width;
 		ofFloatColor color;
 		
-		ramNodeLine nodeLine;
+		rdtk::NodeLine nodeLine;
         ofxUIToggle *toggle;
 		
 		bool active;
@@ -152,7 +152,7 @@ public:
 			
 			ofSetColor(255, 127);
 			
-			ramNode node;
+			rdtk::Node node;
 			if (nodeLine.from.findOne(node))
 			{
 				ofDrawBitmapString("FROM", node.getGlobalPosition() + ofVec3f(5, 5, 0));
@@ -312,7 +312,7 @@ public:
 	
 	void draw()
 	{
-		ramBeginCamera();
+		rdtk::BeginCamera();
 		
 		ofPushStyle();
 		for (int i = 0; i < NUM_LINE; i++)
@@ -321,7 +321,7 @@ public:
 		}
 		ofPopStyle();
 		
-		ramEndCamera();
+		rdtk::EndCamera();
 	}
     
     void exit()
@@ -382,7 +382,7 @@ public:
 	{
 		if (!ofFile::doesFileExist(fileName))
 		{
-			fileName = ramToResourcePath("Settings/presets/preset.lines.xml");
+			fileName = rdtk::ToResourcePath("Settings/presets/preset.lines.xml");
 		}
 		
 		XML.loadFile(fileName);
@@ -431,10 +431,10 @@ public:
 			
 			LineContext &line = lines[i];
 			line.active = active;
-			line.nodeLine.from = ramNodeIdentifer(from_name, from_id);
-			line.nodeLine.control0 = ramNodeIdentifer(cp0_name, cp0_id);
-			line.nodeLine.control1 = ramNodeIdentifer(cp1_name, cp1_id);
-			line.nodeLine.to = ramNodeIdentifer(to_name, to_id);
+			line.nodeLine.from = rdtk::NodeIdentifer(from_name, from_id);
+			line.nodeLine.control0 = rdtk::NodeIdentifer(cp0_name, cp0_id);
+			line.nodeLine.control1 = rdtk::NodeIdentifer(cp1_name, cp1_id);
+			line.nodeLine.to = rdtk::NodeIdentifer(to_name, to_id);
 			line.curve = curve;
 			line.spiral_radius = radius;
 			line.spiral_num_rotate = num_rotate;

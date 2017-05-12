@@ -298,7 +298,7 @@ void ActorManager::onSelectStateChanged(NodeIdentifer &e)
 
 void ActorManager::onMouseReleased(ofMouseEventArgs &e)
 {
-	if (!rootNode.hasFocusdObject())
+	if (!rootNode.hasFocusObject())
 		nodeSelector->identifer.clear();
 }
 

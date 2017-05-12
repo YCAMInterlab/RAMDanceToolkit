@@ -167,9 +167,9 @@ void Kepler::update()
 void Kepler::draw()
 {
     pushAll();
-    ramBeginCamera();
+    rdtk::BeginCamera();
     mKeplerDynamics.draw();
-    ramEndCamera();
+    rdtk::EndCamera();
     popAll();
 }
 
@@ -185,23 +185,23 @@ void Kepler::drawActor(const rdtk::Actor &actor)
     
     for (int i=0; i<actor.getNumNode(); i++)
 	{
-		const ramNode &node = actor.getNode(i);
+		const rdtk::Node &node = actor.getNode(i);
 		float jointSize = (i==rdtk::Actor::JOINT_HEAD) ? 6.0 : 3.0;
 		
 		node.beginTransform();
-		ofSetColor(ramColor::BLUE_LIGHT);
+		ofSetColor(rdtk::Color::BLUE_LIGHT);
         ofNoFill();
-		ofBox(jointSize);
+		ofDrawBox(jointSize);
         if (i==mNodeA || i==mNodeB) {
-            ofSetColor(ramColor::RED_LIGHT);
-            ofBox(jointSize*1.5f);
+            ofSetColor(rdtk::Color::RED_LIGHT);
+            ofDrawBox(jointSize*1.5f);
         }
 		node.endTransform();
 		
 		if (node.hasParent())
 		{
-			ofSetColor(ramColor::RED_LIGHT);
-			ofLine(node, *node.getParent());
+			ofSetColor(rdtk::Color::RED_LIGHT);
+			ofDrawLine(node, *node.getParent());
 		}
         
 	}

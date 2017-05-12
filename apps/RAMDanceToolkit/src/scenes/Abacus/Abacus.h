@@ -37,7 +37,7 @@ public:
 	
 	void draw()
 	{
-		ramBeginCamera();
+		rdtk::BeginCamera();
 		
 		glEnable(GL_DEPTH_TEST);
 		
@@ -48,7 +48,7 @@ public:
 			drawAbacus(getNodeArray(i), i, numNodeArrays);
 		}
 		
-		ramEndCamera();
+		rdtk::EndCamera();
 	}
 	
 	string getName() const { return "Abacus"; }
@@ -59,12 +59,12 @@ public:
 	
 	
 	
-	void drawAbacus(ramNodeArray& nodeArray, int index, int numNodeArrays)
+	void drawAbacus(rdtk::NodeArray& nodeArray, int index, int numNodeArrays)
 	{
 		const int numNodes = nodeArray.getNumNode();
 		
-		ofColor c1 = ramColor::BLUE_DEEP;
-		ofColor c2 = ramColor::GREEN_DEEP;
+		ofColor c1 = rdtk::Color::BLUE_DEEP;
+		ofColor c2 = rdtk::Color::GREEN_DEEP;
 		
 		glTranslatef(0.0, -(margin+box_size) * numNodes / 2, 0.0);
 		
@@ -72,7 +72,7 @@ public:
 		for(int i=0; i<numNodes; i++)
 		{
 			glPushMatrix();
-			ramNode& node = nodeArray.getNode(i);
+			rdtk::Node& node = nodeArray.getNode(i);
 			ofVec3f pos = node.getGlobalPosition();
 			
 			pos.y = i*margin + i*box_size;
@@ -80,10 +80,10 @@ public:
 			
 			ofSetColor(i%2==0 ? c1 : c2);
 			ofSetLineWidth(2);
-			ofLine(ofVec3f(-width, pos.y, 0), ofVec3f(width, pos.y, 0));
+			ofDrawLine(ofVec3f(-width, pos.y, 0), ofVec3f(width, pos.y, 0));
 			
 			glTranslatef(width*2/(numNodeArrays+1)*(index+1) - width, 0, 0);
-			ofBox(pos, box_size);
+			ofDrawBox(pos, box_size);
 			
 			glPopMatrix();
 		}

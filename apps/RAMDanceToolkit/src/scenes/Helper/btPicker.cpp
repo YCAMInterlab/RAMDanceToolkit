@@ -17,7 +17,7 @@
 
 //
 //  btPicker.cpp
-//  DanceWithRagdall2
+//  DanceWirdtk::thRagdall2
 //
 //  Created by Onishi Yoshito on 1/24/13.
 //

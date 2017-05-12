@@ -81,7 +81,7 @@ void ActorsScene::setup()
 	
 	/// font setting to draw "RECORDING" on screen right top
 	fontSize = 30;
-	font.loadFont(ToResourcePath(RAM_FONT_FILE), fontSize, true, true);
+	font.load(ToResourcePath(RAM_FONT_FILE), fontSize, true, true);
 	font.setLineHeight(fontSize*1.4f);
 	font.setLetterSpacing(1.0);
 	
@@ -645,7 +645,7 @@ void ActorsScene::drawNodes(const NodeArray &NA)
 		parent->beginTransform();
 		
 		ofVec3f axis(0, 0, 1);
-		ofVec3f c = node.getPosition().normalized().crossed(axis);
+		ofVec3f c = node.getPosition().getNormalized().getCrossed(axis);
 		
 		ofRotate(90, c.x, c.y, c.z);
 		
@@ -656,7 +656,7 @@ void ActorsScene::drawNodes(const NodeArray &NA)
 		float offset = 0.2;
 		
 		glNormal3f(0, 0, 0);
-		ofLine(ofVec3f(0), ofVec3f(0, 0, -dist));
+		ofDrawLine(ofVec3f(0), ofVec3f(0, 0, -dist));
 		
 		if (i < 4)
 			glScalef(1., 1.8, 1);

@@ -75,7 +75,7 @@ void Laban::update()
 
 void Laban::draw()
 {
-    ramBeginCamera();
+    rdtk::BeginCamera();
     ofEnableAlphaBlending();
     glDisable(GL_DEPTH_TEST);
     list<LabanMoment>::iterator itr;
@@ -85,12 +85,12 @@ void Laban::draw()
         ofPushStyle();
         float alpha = cur.getLife(maxLabanMomentLife);
         ofSetColor(255, 64 * alpha);
-        ofLine(cur.start, cur.start + cur.direction * lineLength);
+        ofDrawLine(cur.start, cur.start + cur.direction * lineLength);
         ofSetColor(labanColors[cur.choice], 255 * alpha);
-        ofLine(cur.start, cur.start + labanDirections[cur.choice] * lineLength);
+        ofDrawLine(cur.start, cur.start + labanDirections[cur.choice] * lineLength);
         ofPopStyle();
     }
-    ramEndCamera();
+    rdtk::EndCamera();
 }
 
 void Laban::drawActor(const rdtk::Actor &actor)
@@ -107,7 +107,7 @@ void Laban::drawActor(const rdtk::Actor &actor)
                 continue;
             }
         }
-        const ramNode &node = actor.getNode(i);
+        const rdtk::Node &node = actor.getNode(i);
         ofSetColor(255);
         ofSetLineWidth(lineWidth);
         if(node.hasParent())

@@ -54,24 +54,24 @@ public:
 	
 	void draw()
 	{
-		ramBeginCamera();
+		rdtk::BeginCamera();
 		
 		for(int i=0; i<getNumNodeArray(); i++)
 		{
-			const ramNodeArray &NA = getNodeArray(i);
+			const rdtk::NodeArray &NA = getNodeArray(i);
 			drawBigBox(NA);
 		}
 		
-		ramEndCamera();
+		rdtk::EndCamera();
 	}
 	
-	void drawBigBox(const ramNodeArray& NA)
+	void drawBigBox(const rdtk::NodeArray& NA)
 	{
 		for (int i=0; i<NA.getNumNode(); i++)
 		{
 			const int keyJoint = NA.isActor() ? rdtk::Actor::JOINT_HEAD : 0;
 			
-			const ramNode &node = NA.getNode(i);
+			const rdtk::Node &node = NA.getNode(i);
 			float boxSize = (i==keyJoint) ? 6 : 3;
 			float bigBoxSize = mSizeArray.at(i);
 			
@@ -94,21 +94,21 @@ public:
 				{
 					if (i%3 == 0)
 					{
-						ofSetColor( ramColor::BLUE_DEEP );
+						ofSetColor( rdtk::Color::BLUE_DEEP );
 					}
 					else if (i%3 == 1)
 					{
-						ofSetColor( ramColor::BLUE_NORMAL );
+						ofSetColor( rdtk::Color::BLUE_NORMAL );
 					}
 					else
 					{
-						ofSetColor( ramColor::BLUE_LIGHT );
+						ofSetColor( rdtk::Color::BLUE_LIGHT );
 					}
 				}
 				
 				ofSetLineWidth(mBoxLineWidth);
 				node.beginTransform();
-				ofBox(bigBoxSize);
+				ofDrawBox(bigBoxSize);
 				node.endTransform();
 				
 				ofPopStyle();

@@ -108,14 +108,14 @@ public:
         if (is_camera_enabled)
             return;
         
-        ramBeginCamera();
+		rdtk::BeginCamera();
         
         ofPushStyle();
         
         // from, to
         ofSetColor(255,0,0);
-        ofBox(base.pos, 10);
-        ofBox(opposite.pos, 10);
+        ofDrawBox(base.pos, 10);
+        ofDrawBox(opposite.pos, 10);
 		
         ofVec3f strPos1 = move_from.pos;
         strPos1.y += 20;
@@ -130,20 +130,20 @@ public:
 		ofVec3f curStrPos = camera.pos;
 		curStrPos.y += 20;;
 		ofDrawBitmapString("Camera", curStrPos);
-		ofBox(camera.pos, 10);
+		ofDrawBox(camera.pos, 10);
 		
 		// lookAt
 		ofSetColor(0, 255, 0);
 		ofVec3f lookAtStrPos = camera.lookAt;
 		lookAtStrPos.y += 20;;
 		ofDrawBitmapString("Look At", lookAtStrPos);
-		ofBox(camera.lookAt, 10);
+		ofDrawBox(camera.lookAt, 10);
 		
-		ofLine(camera.lookAt, camera.pos);
+		ofDrawLine(camera.lookAt, camera.pos);
 		
         ofPopStyle();
         
-        ramEndCamera();
+        rdtk::EndCamera();
 	}
     
     void reloadXML()

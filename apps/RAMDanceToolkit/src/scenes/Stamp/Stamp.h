@@ -20,7 +20,7 @@
 class Stamp : public rdtk::BaseScene
 {
 	
-	ramStamp mStamp;
+	rdtk::Stamp mStamp;
 	bool mShowActor;
 	bool mShowBox;
 	
@@ -71,11 +71,11 @@ public:
 	
 	void draw()
 	{
-		ramBeginCamera();
+		rdtk::BeginCamera();
 		
 		for (int i=0; i<mStamp.getSize(); i++)
 		{
-			ramNodeArray& nodeArray = mStamp.getStamp(i);
+			rdtk::NodeArray& nodeArray = mStamp.getStamp(i);
 			
 			if (mShowActor)
 			{
@@ -92,7 +92,7 @@ public:
 			}
 		}
 		
-		ramEndCamera();
+		rdtk::EndCamera();
 	}
 	
 	void loadPreset(size_t preset_id=0)

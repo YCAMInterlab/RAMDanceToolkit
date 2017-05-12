@@ -56,7 +56,7 @@ public:
     void update();
     void draw();
     void drawActor(const rdtk::Actor &actor);
-    void drawRigid(ramRigidBody &rigid);
+    void drawRigid(rdtk::RigidBody &rigid);
 
     float threshold, lineWidth, lineLength, scale, ticks;
     bool showLines, showPlanes, onlyLimbs;

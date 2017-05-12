@@ -166,7 +166,7 @@ public:
 					q.slerp(t, aq, bq);
 					ofMultMatrix(ofMatrix4x4(q));
 					float radius = twistExtensionWidth * ofLerp(al, bl, t) / 2;
-					ofLine(-radius, 0, radius, 0);
+					ofDrawLine(-radius, 0, radius, 0);
 					ofPopMatrix();
 				}
 			}
@@ -177,7 +177,7 @@ public:
 	}
 	
 	//--------------------------------------------------------------
-	void drawRigid(const ramRigidBody &rigid)
+	void drawRigid(const rdtk::RigidBody &rigid)
 	{
 	}
 	

@@ -46,7 +46,7 @@
 #include "Laban.h"
 #include "Notation.h"
 
-class ofApp : public ramBaseApp
+class ofApp : public rdtk::BaseApp
 {
 public:
 	
@@ -69,10 +69,10 @@ public:
 	// ram methods
 	// ------------------------
 	void drawActor(const rdtk::Actor &actor);
-	void drawRigid(const ramRigidBody &rigid);
+	void drawRigid(const rdtk::RigidBody &rigid);
 	void onActorSetup(const rdtk::Actor &actor);
 	void onActorExit(const rdtk::Actor &actor);
-	void onRigidSetup(const ramRigidBody &rigid);
-	void onRigidExit(const ramRigidBody &rigid);
+	void onRigidSetup(const rdtk::RigidBody &rigid);
+	void onRigidExit(const rdtk::RigidBody &rigid);
 
 };

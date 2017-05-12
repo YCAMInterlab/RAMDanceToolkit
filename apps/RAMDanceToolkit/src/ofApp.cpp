@@ -63,7 +63,7 @@ void ofApp::setup()
 //--------------------------------------------------------------
 void ofApp::update()
 {
-
+	
 }
 
 //--------------------------------------------------------------
@@ -82,18 +82,17 @@ void ofApp::drawActor(const rdtk::Actor &actor)
 }
 
 //--------------------------------------------------------------
-void ofApp::drawRigid(const ramRigidBody &rigid)
+void ofApp::drawRigid(const rdtk::RigidBody &rigid)
 {
 	
 }
-
 
 #pragma mark - ram Events
 
 //--------------------------------------------------------------
 void ofApp::onActorSetup(const rdtk::Actor &actor)
 {
-
+	
 }
 
 //--------------------------------------------------------------
@@ -103,13 +102,13 @@ void ofApp::onActorExit(const rdtk::Actor &actor)
 }
 
 //--------------------------------------------------------------
-void ofApp::onRigidSetup(const ramRigidBody &rigid)
+void ofApp::onRigidSetup(const rdtk::RigidBody &rigid)
 {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::onRigidExit(const ramRigidBody &rigid)
+void ofApp::onRigidExit(const rdtk::RigidBody &rigid)
 {
 
 }

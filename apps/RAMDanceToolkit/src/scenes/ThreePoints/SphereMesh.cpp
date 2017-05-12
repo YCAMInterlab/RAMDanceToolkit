@@ -106,9 +106,9 @@ ofMesh ofGetIcoSphereMesh(float radius, int iterations) {
             ofVec3f v2 = vertices[i2];
             ofVec3f v3 = vertices[i3];
             //make 1 vertice at the center of each edge and project it onto the sphere
-            vertices.push_back((v1+v2).normalized());
-            vertices.push_back((v2+v3).normalized());
-            vertices.push_back((v1+v3).normalized());
+            vertices.push_back((v1+v2).getNormalized());
+            vertices.push_back((v2+v3).getNormalized());
+            vertices.push_back((v1+v3).getNormalized());
             //now recreate indices
             newFaces.push_back(i1);
             newFaces.push_back(i12);

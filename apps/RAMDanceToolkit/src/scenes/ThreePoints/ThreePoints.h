@@ -106,7 +106,7 @@ public:
 		
 		for (int i=0; i<actor.getNumNode(); i++)
 		{
-			const ramNode &node = actor.getNode(i);
+			const rdtk::Node &node = actor.getNode(i);
 			
 			ofPushMatrix();
 			node.beginTransform();
@@ -116,7 +116,7 @@ public:
 				ofPushStyle();
 				ofFill();
 				ofSetColor(255, 128);
-				ofRect(0, 0, 100, 30);
+				ofDrawRectangle(0, 0, 100, 30);
 				ofPopStyle();
 			}
 			
@@ -126,16 +126,16 @@ public:
 			
 			if (node.hasParent())
 			{
-				ramNode* parent = node.getParent();
+				rdtk::Node* parent = node.getParent();
 				
 				if(parent->hasParent() && mToggles[i]->getValue())
 				{
-					ramNode* grandparent = parent->getParent();
+					rdtk::Node* grandparent = parent->getParent();
 					ofVec3f a = node, b = *parent, c = *grandparent;
 					ofVec3f normal = (a - b).cross(c - b);
 					normal.normalize();
 					ofSetColor(magentaPrint);
-					ofLine(b - normal * crossLength, b + normal * crossLength);
+					ofDrawLine(b - normal * crossLength, b + normal * crossLength);
 					
 					ofVec3f center;
 					float radius;
@@ -153,14 +153,14 @@ public:
 					}
 					ofPopMatrix();
 					if(showCircleBisector) {
-						ofLine(b, b + (center - b) * 2);
+						ofDrawLine(b, b + (center - b) * 2);
 					}
 					
 					ofPushMatrix();
 					ofTranslate(b);
 					rotateToNormal(normal);
 					ofSetColor(cyanPrint);
-					ofRect(-rectRadius, -rectRadius, 2*rectRadius, 2*rectRadius);
+					ofDrawRectangle(-rectRadius, -rectRadius, 2*rectRadius, 2*rectRadius);
 					if(invertSpheres) {
 						ofSetColor(255, 32);
 						ofIcoSphere(ofVec3f(), maxInvertRadius / radius);
@@ -179,7 +179,7 @@ public:
 	}
 	
 	//--------------------------------------------------------------
-	void drawRigid(const ramRigidBody &rigid)
+	void drawRigid(const rdtk::RigidBody &rigid)
 	{
 	}
 	

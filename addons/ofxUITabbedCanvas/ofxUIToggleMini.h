@@ -48,7 +48,7 @@ public:
         {
             ofFill();
             ofSetColor(color_back);
-            ofRect(rect->getX(), rect->getY(), rect->getWidth(), rect->getHeight());
+            ofDrawRectangle(rect->getX(), rect->getY(), rect->getWidth(), rect->getHeight());
         }
     }
     
@@ -58,7 +58,7 @@ public:
         {
             ofFill();
             ofSetColor(color_fill);
-            ofRect(rect->getX(), rect->getY(), rect->getWidth(), rect->getHeight());
+            ofDrawRectangle(rect->getX(), rect->getY(), rect->getWidth(), rect->getHeight());
         }
     }
     
@@ -68,7 +68,7 @@ public:
         {
             ofFill();
             ofSetColor(color_fill_highlight);
-            ofRect(rect->getX(), rect->getY(), rect->getWidth(), rect->getHeight());
+            ofDrawRectangle(rect->getX(), rect->getY(), rect->getWidth(), rect->getHeight());
         }
     }
     
@@ -78,7 +78,7 @@ public:
         {
             ofNoFill();
             ofSetColor(color_outline_highlight);
-            ofRect(rect->getX(), rect->getY(), rect->getWidth(), rect->getHeight());
+            ofDrawRectangle(rect->getX(), rect->getY(), rect->getWidth(), rect->getHeight());
         }
     }
 }; 

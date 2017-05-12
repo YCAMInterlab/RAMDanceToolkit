@@ -178,8 +178,8 @@ namespace rdtk{
 			ofVec3f &pN = polyline[polyline.size() - 1];
 			ofVec3f &pNm1 = polyline[polyline.size() - 2];
 			
-			p0 += (p0 - p1).normalized() * from;
-			pN += (pN - pNm1).normalized() * to;
+			p0 += (p0 - p1).getNormalized() * from;
+			pN += (pN - pNm1).getNormalized() * to;
 			
 			return *this;
 		}

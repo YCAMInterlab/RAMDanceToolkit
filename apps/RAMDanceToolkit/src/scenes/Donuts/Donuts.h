@@ -118,13 +118,13 @@ public:
 					
 					node.beginTransform();
 					ofSetColor(c1);
-					ofBox( i==rdtk::Actor::JOINT_HEAD ? 8 : 5);
+					ofDrawBox( i==rdtk::Actor::JOINT_HEAD ? 8 : 5);
 					node.endTransform();
 					
 					if (node.hasParent())
 					{
 						ofSetColor(c2);
-						ofLine(node, *node.getParent());
+						ofDrawLine(node, *node.getParent());
 					}
 				}
 				ofPopStyle();
@@ -164,7 +164,7 @@ public:
 						
 						node.beginTransform();
 						ofSetColor(c2);
-						ofBox(mBoxSize);
+						ofDrawBox(mBoxSize);
 						node.endTransform();
 					}
 					ofPopMatrix();

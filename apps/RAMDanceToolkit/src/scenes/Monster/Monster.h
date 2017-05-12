@@ -25,7 +25,7 @@ public:
 	
 	vector<int> treeBase, treeSwap;
 	vector<float> lengthScale;
-	ramNodeArray monsterArray;
+	rdtk::NodeArray monsterArray;
 	float minScale, maxScale, randomizationAmount;
 	bool needToReset, randomLine, randomizeTopology, randomizeGeometry;
 		
@@ -203,18 +203,18 @@ public:
 		ofNoFill();
 		for (int i=0; i<monsterArray.getNumNode(); i++)
 		{
-			ramNode &node = monsterArray.getNode(i);
+			rdtk::Node &node = monsterArray.getNode(i);
 			ofSetColor(255);
 			ofSetLineWidth(2);
 			if(node.hasParent())
 			{
-				ofLine(node, *node.getParent());
+				ofDrawLine(node, *node.getParent());
 			}
 		}
 		ofPopStyle();
 	}
 	
-	void drawRigid(const ramRigidBody &rigid)
+	void drawRigid(const rdtk::RigidBody &rigid)
 	{
 	}
 	

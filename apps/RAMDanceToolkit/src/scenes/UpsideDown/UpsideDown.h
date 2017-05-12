@@ -24,7 +24,7 @@ public:
     
     ofVec3f mEuler;
     ofQuaternion mRotation;
-    ramFilterEach<ramUpsideDown> mUpsideDown;
+    ramFilterEach<rdtk::UpsideDown> mUpsideDown;
     
     float mOffset;
     
@@ -109,10 +109,10 @@ public:
 	
 	void draw()
 	{
-        vector<ramNodeArray> NAs;
+        vector<rdtk::NodeArray> NAs;
         for (int i=0; i<getNumNodeArray(); i++)
         {
-            ramNodeArray tmpActor = getNodeArray(i);
+            rdtk::NodeArray tmpActor = getNodeArray(i);
             ofQuaternion base = tmpActor.getNode(rdtk::Actor::JOINT_HIPS).getOrientationQuat();
             ofQuaternion rotated = base * mRotation;
             tmpActor.getNode(rdtk::Actor::JOINT_HIPS).setOrientation(rotated);
@@ -120,20 +120,20 @@ public:
             NAs.push_back(tmpActor);
         }
         
-        vector<ramNodeArray> filterdNAs = mUpsideDown.update(NAs);
+        vector<rdtk::NodeArray> filterdNAs = mUpsideDown.update(NAs);
         
-        ramBeginCamera();
+        rdtk::BeginCamera();
         
         ofPushStyle();
         for (int i=0; i<NAs.size(); i++)
         {
-            ramNodeArray &NA = filterdNAs[i];
-            ofSetColor(ramColor::RED_DEEP);
+            rdtk::NodeArray &NA = filterdNAs[i];
+            ofSetColor(rdtk::Color::RED_DEEP);
             ramDrawBasicActor(NA);
         }
         ofPopStyle();
         
-        ramEndCamera();
+        rdtk::EndCamera();
 	}
 	
 	

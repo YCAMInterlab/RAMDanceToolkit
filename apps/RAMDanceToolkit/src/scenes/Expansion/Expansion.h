@@ -38,18 +38,18 @@ public:
 		
 #ifdef RAM_GUI_SYSTEM_OFXUI
 		
-		ofxUICanvas* panel = ramGetGUI().getCurrentUIContext();
+		ofxUICanvas* panel = rdtk::GetGUI().getCurrentUIContext();
 		
 		panel->getRect()->width =500.0f;
 		
-		ramGetGUI().addToggle("Show Joint name", &mShowName);
-		ramGetGUI().addToggle("Show Box", &mShowBox);
-		ramGetGUI().addToggle("Show Axis", &mShowAxis);
-		ramGetGUI().addToggle("Show Line", &mShowLine);
-		ramGetGUI().addColorSelector("Box Color", &mBoxColor);
+		rdtk::GetGUI().addToggle("Show Joint name", &mShowName);
+		rdtk::GetGUI().addToggle("Show Box", &mShowBox);
+		rdtk::GetGUI().addToggle("Show Axis", &mShowAxis);
+		rdtk::GetGUI().addToggle("Show Line", &mShowLine);
+		rdtk::GetGUI().addColorSelector("Box Color", &mBoxColor);
 		
-		ramGetGUI().addSlider("Expasion Ratio", 1.0, 10.0, &mExpasionRatio);
-		ramGetGUI().addSlider("Box size", 3.0, 100.0, &mBoxSize);
+		rdtk::GetGUI().addSlider("Expasion Ratio", 1.0, 10.0, &mExpasionRatio);
+		rdtk::GetGUI().addSlider("Box size", 3.0, 100.0, &mBoxSize);
 		rdtk::GetGUI().addSlider("Big Box ratio", 2.0, 10.0, &mBoxSizeRatio);
 		
 		panel->addToggle("Toggle box size", false, 20, 20);
@@ -79,14 +79,14 @@ public:
 	
 	void draw()
 	{
-        vector<ramNodeArray> expNAs = mExpansion.update(getAllNodeArrays());
-        vector<ramNodeArray> lpNAs = mLowpass.update(expNAs);
+        vector<rdtk::NodeArray> expNAs = mExpansion.update(getAllNodeArrays());
+        vector<rdtk::NodeArray> lpNAs = mLowpass.update(expNAs);
 
-		ramBeginCamera();
+		rdtk::BeginCamera();
 		for (int i=0; i<getNumNodeArray(); i++)
 		{
-            ramNodeArray &src = getNodeArray(i);
-            ramNodeArray &processedNA = lpNAs.at(i);
+            rdtk::NodeArray &src = getNodeArray(i);
+            rdtk::NodeArray &processedNA = lpNAs.at(i);
 			
 			ofPushStyle();
 			ofNoFill();
@@ -94,7 +94,7 @@ public:
 			{
 				if (mNodeVisibility[nodeId] == false) continue;
                 
-				ramNode &node = processedNA.getNode(nodeId);
+				rdtk::Node &node = processedNA.getNode(nodeId);
 				
 				node.beginTransform();
 				
@@ -103,7 +103,7 @@ public:
 				if (mShowBox)
 				{
 					ofSetColor(mBoxColor);
-					ofBox(boxSize);
+					ofDrawBox(boxSize);
 				}
 				
 				if (mShowAxis)
@@ -117,7 +117,7 @@ public:
 				{
 					ofSetColor(100);
 					ofSetLineWidth(1);
-					ofLine(src.getNode(nodeId), processedNA.getNode(nodeId));
+					ofDrawLine(src.getNode(nodeId), processedNA.getNode(nodeId));
 				}
 				
 				
@@ -129,7 +129,7 @@ public:
 			}
 			ofPopStyle();
 		}
-		ramEndCamera();
+		rdtk::EndCamera();
 	}
 
 	

@@ -251,7 +251,7 @@ void rdtk::DrawNodeCorresponds(const NodeArray &a, const NodeArray &b)
 
 	for (int i = 0; i < a.getNumNode(); i++)
 	{
-		ofLine(a.getNode(i).getGlobalPosition(), b.getNode(i).getGlobalPosition());
+		ofDrawLine(a.getNode(i).getGlobalPosition(), b.getNode(i).getGlobalPosition());
 	}
 }
 

@@ -28,7 +28,7 @@ class Particles : public rdtk::BaseScene
 	
 	float particle_amount;
 	
-	ramFilterEach<ramGhost> ghostFilters;
+	ramFilterEach<rdtk::Ghost> ghostFilters;
     bool useGhost;
 	
 public:
@@ -58,15 +58,15 @@ public:
 	void update()
 	{
         
-		const vector<ramNodeArray>& NAs = useGhost ? ghostFilters.update(getAllNodeArrays()) : getAllNodeArrays();
+		const vector<rdtk::NodeArray>& NAs = useGhost ? ghostFilters.update(getAllNodeArrays()) : getAllNodeArrays();
         
 		for (int n = 0; n < NAs.size(); n++)
 		{
-			const ramNodeArray &NA = NAs[n];
+			const rdtk::NodeArray &NA = NAs[n];
 			
 			for (int i = 0; i < NA.getNumNode(); i++)
 			{
-				const ramNode &node = NA.getNode(i);
+				const rdtk::Node &node = NA.getNode(i);
 				
 				for(int j=0; j<particle_amount; j++)
 					pe.emit( node.getGlobalPosition() );
@@ -78,7 +78,7 @@ public:
 	
 	void draw()
 	{
-		ramBeginCamera();
+		rdtk::BeginCamera();
 		
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glEnable(GL_DEPTH_TEST);
@@ -91,7 +91,7 @@ public:
 		ofPopStyle();
 		glPopAttrib();
 		
-		ramEndCamera();
+		rdtk::EndCamera();
 	}
 	
 	void loadPreset(size_t preset_id=0)

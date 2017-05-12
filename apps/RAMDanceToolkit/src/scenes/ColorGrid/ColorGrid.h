@@ -75,7 +75,7 @@ public:
 		for (int i=0; i<actor.getNumNode(); i++)
 		{
 			if(i < rdtk::Actor::NUM_JOINTS) {
-				const ramNode &node = actor.getNode(i);
+				const rdtk::Node &node = actor.getNode(i);
 				ofColor cur;
 				if(useRgb) {
 					ofVec3f base = ofVec3f(1, 0, 0) * node.getOrientationQuat();
@@ -94,22 +94,22 @@ public:
 //				ofPushMatrix();
 //				node.beginTransform();
 //				ofFill();
-//				ofBox((i==rdtk::Actor::JOINT_HEAD) ? 6 : 3);
+//				ofDrawBox((i==rdtk::Actor::JOINT_HEAD) ? 6 : 3);
 //				ofSetColor(cur);
 //				node.endTransform();
 //				ofPopMatrix();
 //				
 //				if (node.hasParent())
 //				{
-//					ramNode* parent = node.getParent();
-//					ofLine(node, *parent);
+//					rdtk::Node* parent = node.getParent();
+//					ofDrawLine(node, *parent);
 //				}
 			}
 		}
 	}
 	
 	//--------------------------------------------------------------
-	void drawRigid(const ramRigidBody &rigid)
+	void drawRigid(const rdtk::RigidBody &rigid)
 	{
 	}
 	
