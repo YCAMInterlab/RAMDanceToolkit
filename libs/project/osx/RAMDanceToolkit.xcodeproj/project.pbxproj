@@ -470,7 +470,6 @@
 		C6FE33E11EB7492100E39BF0 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33BA1EB7492100E39BF0 /* imgui_demo.cpp */; };
 		C6FE33E21EB7492100E39BF0 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33BB1EB7492100E39BF0 /* imgui_draw.cpp */; };
 		C6FE33E31EB7492100E39BF0 /* imgui_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33BC1EB7492100E39BF0 /* imgui_internal.h */; };
-		C6FE33E41EB7492100E39BF0 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33BE1EB7492100E39BF0 /* README.md */; };
 		C6FE33E51EB7492100E39BF0 /* stb_rect_pack.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33BF1EB7492100E39BF0 /* stb_rect_pack.h */; };
 		C6FE33E61EB7492100E39BF0 /* stb_textedit.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33C01EB7492100E39BF0 /* stb_textedit.h */; };
 		C6FE33E71EB7492100E39BF0 /* stb_truetype.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33C11EB7492100E39BF0 /* stb_truetype.h */; };
@@ -1069,8 +1068,6 @@
 		C6FE33BA1EB7492100E39BF0 /* imgui_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_demo.cpp; sourceTree = "<group>"; };
 		C6FE33BB1EB7492100E39BF0 /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_draw.cpp; sourceTree = "<group>"; };
 		C6FE33BC1EB7492100E39BF0 /* imgui_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_internal.h; sourceTree = "<group>"; };
-		C6FE33BD1EB7492100E39BF0 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		C6FE33BE1EB7492100E39BF0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C6FE33BF1EB7492100E39BF0 /* stb_rect_pack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_rect_pack.h; sourceTree = "<group>"; };
 		C6FE33C01EB7492100E39BF0 /* stb_textedit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_textedit.h; sourceTree = "<group>"; };
 		C6FE33C11EB7492100E39BF0 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
@@ -2389,8 +2386,6 @@
 				C6FE33BA1EB7492100E39BF0 /* imgui_demo.cpp */,
 				C6FE33BB1EB7492100E39BF0 /* imgui_draw.cpp */,
 				C6FE33BC1EB7492100E39BF0 /* imgui_internal.h */,
-				C6FE33BD1EB7492100E39BF0 /* LICENSE */,
-				C6FE33BE1EB7492100E39BF0 /* README.md */,
 				C6FE33BF1EB7492100E39BF0 /* stb_rect_pack.h */,
 				C6FE33C01EB7492100E39BF0 /* stb_textedit.h */,
 				C6FE33C11EB7492100E39BF0 /* stb_truetype.h */,
@@ -3196,7 +3191,6 @@
 				D21D08481A4BD9A900CC3598 /* ofxUISpectrum.cpp in Sources */,
 				C6FE33E91EB7492100E39BF0 /* BaseEngine.cpp in Sources */,
 				D21D082D1A4BD9A900CC3598 /* ofxUIMinimalSlider.cpp in Sources */,
-				C6FE33E41EB7492100E39BF0 /* README.md in Sources */,
 				C6FE33FD1EB7495E00E39BF0 /* ramImGuiManager.cpp in Sources */,
 				D21D080E1A4BD9A900CC3598 /* ofxUICanvas.cpp in Sources */,
 				9A38F59716E9E81900FF8B66 /* ofxBtJoint.cpp in Sources */,

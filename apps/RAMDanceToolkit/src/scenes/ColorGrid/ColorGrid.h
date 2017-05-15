@@ -59,7 +59,7 @@ public:
 	void drawHUD()
 	{	
 		ofSetColor(255);
-		ofSetMinMagFilters(GL_NEAREST, GL_NEAREST);
+		img.getTexture().setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
 		img.draw(0, 0, ofGetViewportWidth(), ofGetViewportHeight());
 	}
 	

@@ -832,17 +832,14 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 					"\"$(SRCROOT)/../../addons/ofxBt/libs/bullet/lib/osx\"",
 					"\"$(SRCROOT)/../../../addons/ofxAssimpModelLoader/libs/assimp/lib/osx\"",
-					"\"$(SRCROOT)/src/scenes/Notation\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/android/armeabi\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/android/armeabi-v7a\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/ios\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/linux\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/linux64\"",
 					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/vs2010\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/win_cb\"",
+					"\"$(SRCROOT)/src/scenes/Notation\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_CPLUSPLUSFLAGS = (
+					"-D__MACOSX_CORE__",
+					"-mtune=native",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
 				RAM_HEADER_SEARCH_PATHS = "../../libs/ram/** $(OF_PATH)/addons/ofxOsc/** $(OF_PATH)/addons/ofxXmlSettings/** ../../addons/ofxUI/src/** ../../addons/ofxUITabbedCanvas/** ../../addons/ofxInteractivePrimitives/src/** ../../addons/ofxBt/libs/bullet/include/bullet ../../addons/ofxBt/src ../../addons/ofxNodeArray/src ../../addons/ofxCv/src $(OF_PATH)/addons/ofxGui/** ../../addons/ofxCv/libs/ofxCv/include/ ../../addons/ofxCv/libs/CLD/include/CLD/** $(OF_PATH)/addons/ofxOpenCV/src $(OF_PATH)/addons/ofxOpenCV/libs/opencv/include/** ../../addons/ofxDelaunay/src ../../addons/ofxDelaunay/libs/Delaunay/** ../../addons/ofxQuadWarp/src ../../addons/ramFloorQuadWarper ../../addons/ofxUITabbedCanvas ../../libs/dp/** ../../../addons/ofxImGui/src/** ../../../addons/ofxImGui/libs/**";
 				SDKROOT = macosx;
@@ -935,17 +932,14 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"\"$(SRCROOT)/../../addons/ofxBt/libs/bullet/lib/osx\"",
 					"\"$(SRCROOT)/../../../addons/ofxAssimpModelLoader/libs/assimp/lib/osx\"",
-					"\"$(SRCROOT)/src/scenes/Notation\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/android/armeabi\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/android/armeabi-v7a\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/ios\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/linux\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/linux64\"",
 					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/vs2010\"",
-					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/win_cb\"",
+					"\"$(SRCROOT)/src/scenes/Notation\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_CPLUSPLUSFLAGS = (
+					"-D__MACOSX_CORE__",
+					"-mtune=native",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RAM_HEADER_SEARCH_PATHS = "../../libs/ram/** $(OF_PATH)/addons/ofxOsc/** $(OF_PATH)/addons/ofxXmlSettings/** ../../addons/ofxUI/src/** ../../addons/ofxUITabbedCanvas/** ../../addons/ofxInteractivePrimitives/src/** ../../addons/ofxBt/libs/bullet/include/bullet ../../addons/ofxBt/src ../../addons/ofxNodeArray/src ../../addons/ofxCv/src $(OF_PATH)/addons/ofxGui/** ../../addons/ofxCv/libs/ofxCv/include/ ../../addons/ofxCv/libs/CLD/include/CLD/** $(OF_PATH)/addons/ofxOpenCV/src $(OF_PATH)/addons/ofxOpenCV/libs/opencv/include/** ../../addons/ofxDelaunay/src ../../addons/ofxDelaunay/libs/Delaunay/** ../../addons/ofxQuadWarp/src ../../addons/ramFloorQuadWarper ../../addons/ofxUITabbedCanvas ../../libs/dp/** ../../../addons/ofxImGui/src/** ../../../addons/ofxImGui/libs/**";
 				SDKROOT = macosx;
