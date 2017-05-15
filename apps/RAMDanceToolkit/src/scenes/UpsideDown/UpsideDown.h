@@ -129,7 +129,7 @@ public:
         {
             rdtk::NodeArray &NA = filterdNAs[i];
             ofSetColor(rdtk::Color::RED_DEEP);
-            ramDrawBasicActor(NA);
+            rdtk::DrawBasicActor(NA);
         }
         ofPopStyle();
         

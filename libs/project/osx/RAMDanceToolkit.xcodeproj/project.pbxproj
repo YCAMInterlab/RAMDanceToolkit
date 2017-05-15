@@ -3297,17 +3297,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../addons/ofxBt/libs/bullet/lib/osx\"",
 					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/osx\"",
-					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/android/armeabi\"",
-					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/android/armeabi-v7a\"",
-					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/ios\"",
-					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/linux\"",
-					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/linux64\"",
-					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/vs2010\"",
-					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/win_cb\"",
-					"\"$(SRCROOT)/../../../addons/ofxBt/libs/bullet/lib/vs2010\"",
-					/Users/kezzardrix2/Documents/of_v0.8.4_osx_release/addons/ofxOpenCv/libs/opencv/lib/osx,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OF_HEADER_SEARCH_PATHS = "$(OF_BASE_PATH)/libs/openFrameworks/** $(OF_BASE_PATH)/libs/glew/include $(OF_BASE_PATH)/libs/tess2/include $(OF_BASE_PATH)/libs/poco/include $(OF_BASE_PATH)/libs/cairo/include/** $(OF_BASE_PATH)/libs/fmodex/include/** $(OF_BASE_PATH)/libs/boost/include/** $(OF_BASE_PATH)/libs/utf8cpp/include/** $(OF_BASE_PATH)/libs/glfw/include/** ";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = ram;
@@ -3339,17 +3330,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../addons/ofxBt/libs/bullet/lib/osx\"",
 					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/osx\"",
-					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/android/armeabi\"",
-					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/android/armeabi-v7a\"",
-					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/ios\"",
-					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/linux\"",
-					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/linux64\"",
-					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/vs2010\"",
-					"\"$(SRCROOT)/../../../../addons/ofxOpenCv/libs/opencv/lib/win_cb\"",
-					"\"$(SRCROOT)/../../../addons/ofxBt/libs/bullet/lib/vs2010\"",
-					/Users/kezzardrix2/Documents/of_v0.8.4_osx_release/addons/ofxOpenCv/libs/opencv/lib/osx,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OF_HEADER_SEARCH_PATHS = "$(OF_BASE_PATH)/libs/openFrameworks/** $(OF_BASE_PATH)/libs/glew/include $(OF_BASE_PATH)/libs/tess2/include $(OF_BASE_PATH)/libs/poco/include $(OF_BASE_PATH)/libs/cairo/include/** $(OF_BASE_PATH)/libs/fmodex/include/** $(OF_BASE_PATH)/libs/boost/include/** $(OF_BASE_PATH)/libs/utf8cpp/include/** $(OF_BASE_PATH)/libs/glfw/include/** ";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = ram;

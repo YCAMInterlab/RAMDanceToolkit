@@ -156,7 +156,7 @@ public:
 				if (use_new_actor)
 					drawNodes(array);
 				else
-					ramDrawNodes(array);
+					rdtk::DrawNodes(array);
 			}
 			glPopMatrix();
 		}

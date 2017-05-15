@@ -282,7 +282,7 @@ public:
 				
 				if (sound != "")
 				{
-					o->load(ramToResourcePath(sound), toggle_mode, loop);
+					o->loadSound(rdtk::ToResourcePath(sound), toggle_mode, loop);
 				}
 				
 				cout << type << " loaded." << endl;

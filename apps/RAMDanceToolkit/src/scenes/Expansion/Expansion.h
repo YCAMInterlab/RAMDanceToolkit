@@ -189,8 +189,8 @@ public:
     
 private:
     
-    ramFilterEach<ramExpansion> mExpansion;
-    ramFilterEach<ramLowPassFilter> mLowpass;
+	ramFilterEach<rdtk::Expansion> mExpansion;
+	ramFilterEach<rdtk::LowPassFilter> mLowpass;
     
 	ofxUIToggle *mToggleDraw[rdtk::Actor::NUM_JOINTS];
 	bool mNodeVisibility[rdtk::Actor::NUM_JOINTS];

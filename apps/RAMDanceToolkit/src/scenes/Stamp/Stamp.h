@@ -79,7 +79,7 @@ public:
 			
 			if (mShowActor)
 			{
-				ramDrawNodes(nodeArray);
+				rdtk::DrawNodes(nodeArray);
 			}
 			
 			if (color.a > 0)
@@ -87,7 +87,7 @@ public:
 				ofPushStyle();
 				ofSetColor(color);
 				ofSetLineWidth(line_width);
-				ramDrawActorCube(nodeArray);
+				rdtk::DrawActorCube(nodeArray);
 				ofPopStyle();
 			}
 		}
