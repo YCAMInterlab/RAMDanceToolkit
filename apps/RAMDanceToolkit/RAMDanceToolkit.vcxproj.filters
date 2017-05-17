@@ -1344,6 +1344,12 @@
     <ClInclude Include="..\..\addons\ofxImGui\src\BaseTheme.h">
       <Filter>addons\ofxImGui\src</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\UI\ramImGuiManager.h">
+      <Filter>libs\ram\Core\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\ram\Core\UI\ramImGuiPanel.h">
+      <Filter>libs\ram\Core\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -1777,6 +1783,15 @@
     </ClCompile>
     <ClCompile Include="..\..\addons\ofxImGui\src\EngineGLFW.cpp">
       <Filter>addons\ofxImGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\UI\ramPreferencesTab.cpp">
+      <Filter>libs\ram\Core\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\UI\ramImGuiPanel.cpp">
+      <Filter>libs\ram\Core\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\ram\Core\UI\ramImGuiManager.cpp">
+      <Filter>libs\ram\Core\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

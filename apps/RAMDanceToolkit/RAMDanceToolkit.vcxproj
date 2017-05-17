@@ -191,6 +191,8 @@ xcopy /e /i /y "$(ProjectDir)..\..\..\export\vs\*.dll" "$(ProjectDir)bin"</Comma
     <ClInclude Include="..\..\addons\ofxUI\src\ofxUIWidgetWithLabel.h" />
     <ClInclude Include="..\..\addons\ofxUI\src\ofxUIWrapper.h" />
     <ClInclude Include="..\..\libs\ram\Core\ramBaseHasFbo.h" />
+    <ClInclude Include="..\..\libs\ram\Core\UI\ramImGuiManager.h" />
+    <ClInclude Include="..\..\libs\ram\Core\UI\ramImGuiPanel.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\scenes\Abacus\Abacus.h" />
     <ClInclude Include="src\scenes\BasicActor\BasicActor.h" />
@@ -531,6 +533,9 @@ xcopy /e /i /y "$(ProjectDir)..\..\..\export\vs\*.dll" "$(ProjectDir)bin"</Comma
     <ClCompile Include="..\..\addons\ofxUI\src\ofxUIWidget.cpp" />
     <ClCompile Include="..\..\addons\ofxUI\src\ofxUIWidgetWithLabel.cpp" />
     <ClCompile Include="..\..\libs\ram\Core\ramBaseHasFbo.cpp" />
+    <ClCompile Include="..\..\libs\ram\Core\UI\ramImGuiManager.cpp" />
+    <ClCompile Include="..\..\libs\ram\Core\UI\ramImGuiPanel.cpp" />
+    <ClCompile Include="..\..\libs\ram\Core\UI\ramPreferencesTab.cpp" />
     <ClCompile Include="src\main.cpp">
     </ClCompile>
     <ClCompile Include="src\ofApp.cpp" />

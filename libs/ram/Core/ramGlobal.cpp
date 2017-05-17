@@ -123,7 +123,7 @@ bool rdtk::ShowActorsEnabled()
 }
 
 Node _evilNode;
-const Node& GetNode(unsigned int actorId, unsigned int jointId){
+const Node& rdtk:: GetNode(unsigned int actorId, unsigned int jointId) {
 	
 	const int numNA = ActorManager::instance().getNumNodeArray();
 	
