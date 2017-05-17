@@ -46,9 +46,7 @@ namespace rdtk{
 		Preference& operator=(const Preference&){return *__instance;}
 		~Preference() {};
 	};
-	
-	Preference* Preference::__instance = NULL;
-	
+		
 	class PreferencesGui : public SceneGui {
 	public:
 		virtual string getName() const {return "Preference";}

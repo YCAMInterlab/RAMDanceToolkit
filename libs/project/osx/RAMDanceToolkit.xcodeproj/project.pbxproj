@@ -433,6 +433,7 @@
 		C681AB9D197386FD0076DF1D /* ramOscManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C681AB9B197386FD0076DF1D /* ramOscManager.h */; };
 		C698EAD81A78C6FE00362289 /* ramMotionExtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C698EAD61A78C6FE00362289 /* ramMotionExtractor.cpp */; };
 		C698EAD91A78C6FE00362289 /* ramMotionExtractor.h in Headers */ = {isa = PBXBuildFile; fileRef = C698EAD71A78C6FE00362289 /* ramMotionExtractor.h */; };
+		C6E462C11ECC323800285F1B /* ramPreferencesTab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6E462C01ECC323800285F1B /* ramPreferencesTab.cpp */; };
 		C6F853761EA0AA8B00BBDE36 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6F853501EA0AA8B00BBDE36 /* IpEndpointName.cpp */; };
 		C6F853771EA0AA8B00BBDE36 /* IpEndpointName.h in Headers */ = {isa = PBXBuildFile; fileRef = C6F853511EA0AA8B00BBDE36 /* IpEndpointName.h */; };
 		C6F853781EA0AA8B00BBDE36 /* NetworkingUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C6F853521EA0AA8B00BBDE36 /* NetworkingUtils.h */; };
@@ -1030,6 +1031,7 @@
 		C681AB9B197386FD0076DF1D /* ramOscManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramOscManager.h; sourceTree = "<group>"; };
 		C698EAD61A78C6FE00362289 /* ramMotionExtractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramMotionExtractor.cpp; sourceTree = "<group>"; };
 		C698EAD71A78C6FE00362289 /* ramMotionExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramMotionExtractor.h; sourceTree = "<group>"; };
+		C6E462C01ECC323800285F1B /* ramPreferencesTab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramPreferencesTab.cpp; sourceTree = "<group>"; };
 		C6F8534B1EA0AA8B00BBDE36 /* addon_config.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = addon_config.mk; sourceTree = "<group>"; };
 		C6F853501EA0AA8B00BBDE36 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		C6F853511EA0AA8B00BBDE36 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
@@ -2197,6 +2199,7 @@
 				9AEA659B191CB63D001FAA18 /* ramControlPanel.cpp */,
 				9AEA659C191CB63D001FAA18 /* ramControlPanel.h */,
 				9AEA659D191CB63D001FAA18 /* ramPreferencesTab.h */,
+				C6E462C01ECC323800285F1B /* ramPreferencesTab.cpp */,
 				9AEA659E191CB63D001FAA18 /* ramPresetTab.cpp */,
 				9AEA659F191CB63D001FAA18 /* ramPresetTab.h */,
 			);
@@ -3152,6 +3155,7 @@
 				C681AB9C197386FD0076DF1D /* ramOscManager.cpp in Sources */,
 				9A70C18516E9CE6F00A5B755 /* Helpers.cpp in Sources */,
 				9AEA65CA191CB63D001FAA18 /* ramCameraSettings.cpp in Sources */,
+				C6E462C11ECC323800285F1B /* ramPreferencesTab.cpp in Sources */,
 				9AEA65B9191CB63D001FAA18 /* ramGlobal.cpp in Sources */,
 				9A70C18616E9CE6F00A5B755 /* RunningBackground.cpp in Sources */,
 				D21D08521A4BD9A900CC3598 /* ofxUIToggle.cpp in Sources */,
