@@ -119,6 +119,6 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::BaseTimerEvent		OF_DEPRECATED(ramBaseTimerEvent);
-typedef rdtk::ScheduledTimerEvent	OF_DEPRECATED(ramScheduledTimerEvent);
-typedef rdtk::RandomTimerEvent		OF_DEPRECATED(ramRandomTimerEvent);
+typedef rdtk::BaseTimerEvent		RAMDEPRECATED(ramBaseTimerEvent);
+typedef rdtk::ScheduledTimerEvent	RAMDEPRECATED(ramScheduledTimerEvent);
+typedef rdtk::RandomTimerEvent		RAMDEPRECATED(ramRandomTimerEvent);

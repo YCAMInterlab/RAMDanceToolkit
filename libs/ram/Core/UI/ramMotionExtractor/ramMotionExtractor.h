@@ -107,7 +107,7 @@ namespace rdtk{
 
 }
 
-typedef rdtk::MotionExtractor OF_DEPRECATED(ramMotionExtractor);
-typedef rdtk::MotionPort OF_DEPRECATED(ramMotionPort);
+typedef rdtk::MotionExtractor RAMDEPRECATED(ramMotionExtractor);
+typedef rdtk::MotionPort RAMDEPRECATED(ramMotionPort);
 
 #endif /* defined(__RAMDanceToolkit__ramMotionExtractor__) */

@@ -143,5 +143,5 @@ OF_DEPRECATED(void ramDrawActorCube(rdtk::NodeArray& nodeArray));
 OF_DEPRECATED(void ramDrawBasicActor(const rdtk::RigidBody& rigid));
 OF_DEPRECATED(void ramDrawNodes(const rdtk::NodeArray& nodeArray));
 
-typedef rdtk::Floor OF_DEPRECATED(ramFloor);
-typedef rdtk::Color OF_DEPRECATED(ramColor);
+typedef rdtk::Floor RAMDEPRECATED(ramFloor);
+typedef rdtk::Color RAMDEPRECATED(ramColor);

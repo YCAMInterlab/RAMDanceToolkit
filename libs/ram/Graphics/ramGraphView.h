@@ -175,4 +175,4 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::GraphView OF_DEPRECATED(ramGraphView);
+typedef rdtk::GraphView RAMDEPRECATED(ramGraphView);

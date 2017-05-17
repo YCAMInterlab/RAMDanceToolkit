@@ -85,4 +85,4 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::NodeArrayBuffer OF_DEPRECATED(ramNodeArrayBuffer);
+typedef rdtk::NodeArrayBuffer RAMDEPRECATED(ramNodeArrayBuffer);

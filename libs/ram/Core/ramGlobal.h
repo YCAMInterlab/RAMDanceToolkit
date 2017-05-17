@@ -100,7 +100,7 @@ namespace rdtk{
 
 }
 
-typedef rdtk::GlobalShortcut OF_DEPRECATED(ramGlobalShortcut);
+typedef rdtk::GlobalShortcut RAMDEPRECATED(ramGlobalShortcut);
 
 OF_DEPRECATED(void ramInitialize(int oscPort = 10000, bool usePresetScenes = false));
 OF_DEPRECATED(string ramToResourcePath(const string& path));

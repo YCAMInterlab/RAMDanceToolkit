@@ -114,4 +114,4 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::NodeFinder OF_DEPRECATED(ramNodeFinder);
+typedef rdtk::NodeFinder RAMDEPRECATED(ramNodeFinder);

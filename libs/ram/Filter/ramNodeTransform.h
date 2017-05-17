@@ -147,7 +147,7 @@ namespace rdtk{
 
 }
 
-typedef rdtk::Translate			OF_DEPRECATED(ramTranslate);
-typedef rdtk::Rotate				OF_DEPRECATED(ramRotate);
-typedef rdtk::NodeTransform		OF_DEPRECATED(ramNodeTransform);
-typedef rdtk::NodeLocalTransform	OF_DEPRECATED(ramNodeLocalTransform);
+typedef rdtk::Translate			RAMDEPRECATED(ramTranslate);
+typedef rdtk::Rotate				RAMDEPRECATED(ramRotate);
+typedef rdtk::NodeTransform		RAMDEPRECATED(ramNodeTransform);
+typedef rdtk::NodeLocalTransform	RAMDEPRECATED(ramNodeLocalTransform);

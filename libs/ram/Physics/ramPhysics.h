@@ -80,4 +80,4 @@ namespace rdtk{
 	};
 }
 
-using OF_DEPRECATED(ramPhysics) = rdtk::Physics;
+using RAMDEPRECATED(ramPhysics) = rdtk::Physics;

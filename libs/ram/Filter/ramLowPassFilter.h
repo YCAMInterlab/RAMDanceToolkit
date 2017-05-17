@@ -60,4 +60,4 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::LowPassFilter OF_DEPRECATED(ramLowPassFilter);
+typedef rdtk::LowPassFilter RAMDEPRECATED(ramLowPassFilter);

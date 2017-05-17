@@ -72,4 +72,4 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::Expansion OF_DEPRECATED(ramExpansion);
+typedef rdtk::Expansion RAMDEPRECATED(ramExpansion);

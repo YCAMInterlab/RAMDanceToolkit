@@ -53,4 +53,4 @@ namespace rdtk{
 
 }
 
-typedef rdtk::PlanarGestureRecognizer OF_DEPRECATED(ramPlanarGestureRecognizer);
+typedef rdtk::PlanarGestureRecognizer RAMDEPRECATED(ramPlanarGestureRecognizer);

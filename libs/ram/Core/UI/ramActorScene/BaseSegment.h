@@ -84,5 +84,5 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::ActorUISegmentType OF_DEPRECATED(ramActorUISegmentType);
-typedef rdtk::BaseSegment OF_DEPRECATED(ramBaseSegment);
+typedef rdtk::ActorUISegmentType RAMDEPRECATED(ramActorUISegmentType);
+typedef rdtk::BaseSegment RAMDEPRECATED(ramBaseSegment);

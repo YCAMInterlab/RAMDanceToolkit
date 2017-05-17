@@ -18,6 +18,8 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxXmlSettings.h"
+#include "ramConstants.h"
+
 
 namespace rdtk{
 	class CameraSettings
@@ -77,4 +79,4 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::CameraSettings OF_DEPRECATED(ramCameraSettings);
+typedef rdtk::CameraSettings RAMDEPRECATED(ramCameraSettings);

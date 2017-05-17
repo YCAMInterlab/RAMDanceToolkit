@@ -91,4 +91,4 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::Stamp OF_DEPRECATED(ramStamp);
+typedef rdtk::Stamp RAMDEPRECATED(ramStamp);

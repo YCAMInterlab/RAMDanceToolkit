@@ -137,4 +137,4 @@ namespace rdtk{
 	
 }
 
-typedef rdtk::PreferencesTab OF_DEPRECATED(ramPreferencesTab);
+typedef rdtk::PreferencesTab RAMDEPRECATED(ramPreferencesTab);

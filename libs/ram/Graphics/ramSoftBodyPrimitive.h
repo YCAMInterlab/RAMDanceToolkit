@@ -58,5 +58,5 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::SoftBodyPrimitive OF_DEPRECATED(ramSoftBodyPrimitive);
-typedef rdtk::RopePrimitive OF_DEPRECATED(ramRopePrimitive);
+typedef rdtk::SoftBodyPrimitive RAMDEPRECATED(ramSoftBodyPrimitive);
+typedef rdtk::RopePrimitive RAMDEPRECATED(ramRopePrimitive);

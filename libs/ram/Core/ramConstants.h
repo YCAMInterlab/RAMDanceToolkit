@@ -34,5 +34,5 @@ const float RAM_OUTDATED_DURATION = 1.0;
 #ifdef TARGET_WIN32
 #define RAMDEPRECATED(func) func
 #else
-#define RAMDEPRECATED OF_DEPRECATED
-#endif // TARGET*
+#define RAMDEPRECATED(func) OF_DEPRECATED(func)
+#endif

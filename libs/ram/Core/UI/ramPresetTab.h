@@ -63,4 +63,4 @@ namespace rdtk{
 	
 }
 
-typedef rdtk::PresetTab OF_DEPRECATED(ramPresetTab);
+typedef rdtk::PresetTab RAMDEPRECATED(ramPresetTab);

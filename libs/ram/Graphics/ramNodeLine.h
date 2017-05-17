@@ -221,4 +221,4 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::NodeLine OF_DEPRECATED(ramNodeLine);
+typedef rdtk::NodeLine RAMDEPRECATED(ramNodeLine);

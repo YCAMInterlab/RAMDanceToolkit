@@ -80,7 +80,7 @@ namespace rdtk{
 
 }
 
-typedef rdtk::OscReceiveTag OF_DEPRECATED(ramOscReceiveTag);
-typedef rdtk::OscManager	OF_DEPRECATED(ramOscManager);
+typedef rdtk::OscReceiveTag RAMDEPRECATED(ramOscReceiveTag);
+typedef rdtk::OscManager	RAMDEPRECATED(ramOscManager);
 
 #endif /* defined(__RAMDanceToolkit__ramOscManager__) */

@@ -88,5 +88,5 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::Pendulum OF_DEPRECATED(ramPendulu);
+typedef rdtk::Pendulum RAMDEPRECATED(ramPendulu);
 

@@ -19,6 +19,7 @@
 
 #include "ofMain.h"
 #include "ofxXmlSettings.h"
+#include "ramConstants.h"
 
 #pragma mark - ramFading
 
@@ -151,6 +152,6 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::Fading			OF_DEPRECATED(ramFading);
-typedef rdtk::DeadFunctor		OF_DEPRECATED(ramDeadFunctor);
-typedef rdtk::Fading			OF_DEPRECATED(ramFading);
+typedef rdtk::Fading			RAMDEPRECATED(ramFading);
+typedef rdtk::DeadFunctor		RAMDEPRECATED(ramDeadFunctor);
+typedef rdtk::Fading			RAMDEPRECATED(ramFading);

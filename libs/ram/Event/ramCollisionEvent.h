@@ -96,5 +96,5 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::TriggerTiming OF_DEPRECATED(ramTriggerTiming);
-typedef rdtk::CollisionEvent OF_DEPRECATED(ramCollisionEvent);
+typedef rdtk::TriggerTiming RAMDEPRECATED(ramTriggerTiming);
+typedef rdtk::CollisionEvent RAMDEPRECATED(ramCollisionEvent);

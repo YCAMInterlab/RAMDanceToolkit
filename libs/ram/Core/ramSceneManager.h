@@ -76,4 +76,4 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::SceneManager OF_DEPRECATED(ramSceneManager);
+typedef rdtk::SceneManager RAMDEPRECATED(ramSceneManager);

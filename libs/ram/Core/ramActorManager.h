@@ -144,4 +144,4 @@ namespace rdtk{
 	
 }
 
-typedef rdtk::ActorManager OF_DEPRECATED(ramActorManager);
+typedef rdtk::ActorManager RAMDEPRECATED(ramActorManager);

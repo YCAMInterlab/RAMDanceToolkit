@@ -18,6 +18,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ramConstants.h"
 
 namespace rdtk{
 	class Controllable
@@ -29,4 +30,4 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::Controllable OF_DEPRECATED(ramControllable);
+using RAMDEPRECATED(ramControllable) = rdtk::Controllable;

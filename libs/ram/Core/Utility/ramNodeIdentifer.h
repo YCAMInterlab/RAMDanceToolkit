@@ -61,4 +61,4 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::NodeIdentifer OF_DEPRECATED(ramNodeIdentifer);
+typedef rdtk::NodeIdentifer RAMDEPRECATED(ramNodeIdentifer);

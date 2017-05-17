@@ -49,4 +49,4 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::SimpleShadow OF_DEPRECATED(ramSimpleShadow);
+typedef rdtk::SimpleShadow RAMDEPRECATED(ramSimpleShadow);

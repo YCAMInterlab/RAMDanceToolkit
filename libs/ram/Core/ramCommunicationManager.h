@@ -119,7 +119,7 @@ namespace rdtk{
 
 }
 
-typedef rdtk::CommunicationManager OF_DEPRECATED(ramCommunicationManager);
-typedef rdtk::CommunicateAssign OF_DEPRECATED(ramCommunicateAssign);
+typedef rdtk::CommunicationManager RAMDEPRECATED(ramCommunicationManager);
+typedef rdtk::CommunicateAssign RAMDEPRECATED(ramCommunicateAssign);
 
 #endif /* defined(__RAMDanceToolkit__ramCommunicationManager__) */

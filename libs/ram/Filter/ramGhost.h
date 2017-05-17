@@ -151,4 +151,4 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::Ghost OF_DEPRECATED(ramGhost);
+typedef rdtk::Ghost RAMDEPRECATED(ramGhost);

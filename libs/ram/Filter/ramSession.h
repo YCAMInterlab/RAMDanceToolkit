@@ -115,5 +115,5 @@ namespace rdtk{
 
 }
 
-typedef rdtk::Session OF_DEPRECATED(ramSession);
+typedef rdtk::Session RAMDEPRECATED(ramSession);
 

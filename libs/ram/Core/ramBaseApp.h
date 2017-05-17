@@ -92,4 +92,4 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::BaseApp OF_DEPRECATED(ramBaseApp);
+typedef rdtk::BaseApp RAMDEPRECATED(ramBaseApp);

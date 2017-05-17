@@ -116,9 +116,9 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::BasePrimitive			OF_DEPRECATED(ramBasePrimitive);
-typedef rdtk::Primitive				OF_DEPRECATED(ramPrimitive);
-typedef rdtk::BoxPrimitive			OF_DEPRECATED(ramBoxPrimitive);
-typedef rdtk::SpherePrimitive		OF_DEPRECATED(ramSpherePrimitive);
-typedef rdtk::CylinderPrimitive		OF_DEPRECATED(ramCylinderPrimitive);
-typedef rdtk::PyramidPrimitive		OF_DEPRECATED(ramPyramidPrimitive);
+typedef rdtk::BasePrimitive			RAMDEPRECATED(ramBasePrimitive);
+typedef rdtk::Primitive				RAMDEPRECATED(ramPrimitive);
+typedef rdtk::BoxPrimitive			RAMDEPRECATED(ramBoxPrimitive);
+typedef rdtk::SpherePrimitive		RAMDEPRECATED(ramSpherePrimitive);
+typedef rdtk::CylinderPrimitive		RAMDEPRECATED(ramCylinderPrimitive);
+typedef rdtk::PyramidPrimitive		RAMDEPRECATED(ramPyramidPrimitive);

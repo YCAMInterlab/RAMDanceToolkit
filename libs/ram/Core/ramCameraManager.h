@@ -21,6 +21,7 @@
 
 #include "ofxXmlSettings.h"
 #include "ramCameraSettings.h"
+#include "ramConstants.h"
 
 namespace rdtk{
 
@@ -73,4 +74,4 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::CameraManager OF_DEPRECATED(ramCameraManager);
+typedef rdtk::CameraManager RAMDEPRECATED(ramCameraManager);

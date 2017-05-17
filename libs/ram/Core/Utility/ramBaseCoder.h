@@ -103,4 +103,4 @@ namespace rdtk{
 	
 }
 
-typedef rdtk::BaseCoder OF_DEPRECATED(ramBaseCoder);
+typedef rdtk::BaseCoder RAMDEPRECATED(ramBaseCoder);

@@ -64,4 +64,4 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::UpsideDown OF_DEPRECATED(ramUpsideDown);
+typedef rdtk::UpsideDown RAMDEPRECATED(ramUpsideDown);

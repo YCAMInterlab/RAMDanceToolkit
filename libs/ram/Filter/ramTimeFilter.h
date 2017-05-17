@@ -104,5 +104,5 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::Delay		OF_DEPRECATED(ramDelay);
-typedef rdtk::TimeShifter	OF_DEPRECATED(ramTimeShifter);
+typedef rdtk::Delay		RAMDEPRECATED(ramDelay);
+typedef rdtk::TimeShifter	RAMDEPRECATED(ramTimeShifter);

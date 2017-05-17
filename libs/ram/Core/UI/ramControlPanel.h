@@ -117,7 +117,7 @@ OF_DEPRECATED(rdtk::ControlPanel& ramGetGUI());
 OF_DEPRECATED(inline void ramSaveSettings(const string filename));
 OF_DEPRECATED(inline void ramLoadSettings(const string filename));
 
-typedef rdtk::Unit OF_DEPRECATED(ramUnit);
-typedef rdtk::ControlPanel OF_DEPRECATED(ramControlPanel);
+typedef rdtk::Unit RAMDEPRECATED(ramUnit);
+typedef rdtk::ControlPanel RAMDEPRECATED(ramControlPanel);
 
 #endif

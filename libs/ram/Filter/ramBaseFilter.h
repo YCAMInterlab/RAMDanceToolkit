@@ -117,7 +117,7 @@ namespace rdtk{
 	};
 }
 
-using OF_DEPRECATED(ramBaseFilter)	= rdtk::BaseFilter;
-using OF_DEPRECATED(ramBusSend)		= rdtk::BusSend;
+using RAMDEPRECATED(ramBaseFilter)	= rdtk::BaseFilter;
+using RAMDEPRECATED(ramBusSend)		= rdtk::BusSend;
 template <typename FilterClass>
-using OF_DEPRECATED(ramFilterEach) = rdtk::FilterEach<FilterClass>;
+using RAMDEPRECATED(ramFilterEach) = rdtk::FilterEach<FilterClass>;

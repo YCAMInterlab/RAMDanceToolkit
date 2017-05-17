@@ -18,6 +18,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ramConstants.h"
 
 namespace rdtk{
 	class BaseHasFbo {
@@ -43,4 +44,4 @@ namespace rdtk{
 
 }
 
-typedef rdtk::BaseHasFbo OF_DEPRECATED(ramBaseHasFbo);
+typedef rdtk::BaseHasFbo RAMDEPRECATED(ramBaseHasFbo);

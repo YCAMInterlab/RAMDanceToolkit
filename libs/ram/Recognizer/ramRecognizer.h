@@ -292,6 +292,6 @@ namespace rdtk{
 	};
 }
 
-typedef rdtk::TimerdMovementAnalyser OF_DEPRECATED(ramTimerdMovementAnalyser);
-typedef rdtk::Balancer OF_DEPRECATED(ramBalancer);
-typedef rdtk::MovementAnalyser OF_DEPRECATED(ramMovementAnalyser);
+typedef rdtk::TimerdMovementAnalyser RAMDEPRECATED(ramTimerdMovementAnalyser);
+typedef rdtk::Balancer RAMDEPRECATED(ramBalancer);
+typedef rdtk::MovementAnalyser RAMDEPRECATED(ramMovementAnalyser);

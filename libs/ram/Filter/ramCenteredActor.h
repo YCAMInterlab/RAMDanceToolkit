@@ -55,6 +55,6 @@ namespace rdtk {
 	
 }
 
-typedef rdtk::CenteredActor OF_DEPRECATED(ramCenteredActor);
+typedef rdtk::CenteredActor RAMDEPRECATED(ramCenteredActor);
 
 #endif

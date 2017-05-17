@@ -85,4 +85,4 @@ namespace rdtk{
 	};
 }
 
-using OF_DEPRECATED(ramUnit) = rdtk::Unit;
+using RAMDEPRECATED(ramUnit) = rdtk::Unit;

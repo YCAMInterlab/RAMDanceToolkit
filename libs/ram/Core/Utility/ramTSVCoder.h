@@ -31,4 +31,4 @@ namespace rdtk{
 	
 }
 
-typedef rdtk::TSVCoder OF_DEPRECATED(ramTSVCoder);
+typedef rdtk::TSVCoder RAMDEPRECATED(ramTSVCoder);

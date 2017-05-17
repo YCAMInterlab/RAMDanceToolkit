@@ -52,4 +52,4 @@ namespace rdtk{
 }
 
 
-typedef rdtk::BaseScene OF_DEPRECATED(ramBaseScene);
+typedef rdtk::BaseScene RAMDEPRECATED(ramBaseScene);

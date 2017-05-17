@@ -120,4 +120,4 @@ namespace rdtk{
 	
 }
 
-typedef rdtk::ActorsScene OF_DEPRECATED(ramActorsScene);
+typedef rdtk::ActorsScene RAMDEPRECATED(ramActorsScene);
