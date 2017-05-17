@@ -57,4 +57,4 @@ namespace rdtk{
 	};
 }
 
-using OF_DEPRECATED(ramBaseEvent) = rdtk::BaseEvent;
+using RAMDEPRECATED(ramBaseEvent) = rdtk::BaseEvent;

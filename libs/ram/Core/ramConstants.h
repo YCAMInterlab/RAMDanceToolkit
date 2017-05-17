@@ -30,3 +30,9 @@ const std::string RAM_OSC_ADDR_COMMUNICATE_CC			= "/ram/communicate/cc";
 const std::string RAM_FONT_FILE = "Fonts/FreeUniversal-Regular.ttf";
 
 const float RAM_OUTDATED_DURATION = 1.0;
+
+#ifdef TARGET_WIN32
+#define RAMDEPRECATED(func) func
+#else
+#define RAMDEPRECATED OF_DEPRECATED
+#endif // TARGET*
