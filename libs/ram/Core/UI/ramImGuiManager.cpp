@@ -46,7 +46,7 @@ void GuiManager::addScene(ofPtr<SceneGui> scn)
 
 void GuiManager::draw()
 {
-	
+	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.5,0.5,0.5,1.0));
 	gui.begin();
 	
 	CameraManager::instance().setEnableInteractiveCamera(!ImGui::GetWindowIsFocused());
@@ -59,4 +59,5 @@ void GuiManager::draw()
 	}
 	
 	gui.end();
+	ImGui::PopStyleColor();
 }

@@ -559,14 +559,10 @@ void ActorsScene::drawImGui()
 		{
 			seg->drawImGui();
 		}
-//		else if (seg->getType() == RAM_UI_SEGMENT_TYPE_PLAYBACK)
-//		{
-//			PlaybackSegment *s = new PlaybackSegment(seg->getName());
-//			s->session = seg->session;
-//			s->session.prepareForPlay();
-//			s->session.play();
-//			addSegment(s);
-//		}
+		else if (seg->getType() == RAM_UI_SEGMENT_TYPE_PLAYBACK)
+		{
+			seg->drawImGui();
+		}
 		
 		it++;
 	}

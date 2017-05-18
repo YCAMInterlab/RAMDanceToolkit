@@ -14,25 +14,42 @@ void SceneGui::drawGuiBase()
 {
 	if (gui_floating)
 	{
+		ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.5,0.5,0.5,1.0));
 		ImGui::Begin(getName().c_str(), &gui_floating, ImGuiWindowFlags_AlwaysAutoResize);
 		
 		if (ImGui::IsWindowHovered())
 			CameraManager::instance().setEnableInteractiveCamera(false);
 		
+		if (ImGui::Checkbox("Enable", &bEnabled)) setEnabled(bEnabled);
+
 		drawImGui();
+		
 		ImGui::End();
+		ImGui::PopStyleColor();
 	}
 	else
 	{
-		if (ImGui::CollapsingHeader(getName().c_str()))
+		ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.5,0.5,0.5,1.0));
+		
+		if (ImGui::Checkbox("", &bEnabled)) setEnabled(bEnabled);
+		
+		ImGui::SameLine();
+		bool collapse = ImGui::CollapsingHeader(getName().c_str());
+		
+		if (collapse)
 		{
+			if (!folding) folding = bEnabled = true;
+			if (ImGui::Button("Float Window")) gui_floating = true;
 			drawImGui();
 			ImGui::Separator();
-			if (ImGui::Button("Float Window"))
-			{
-				gui_floating = true;
-			}
 		}
+		else
+		{
+			folding = false;
+		}
+		
+
+		ImGui::PopStyleColor();
 	}
 }
 

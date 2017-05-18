@@ -62,6 +62,40 @@ public:
 		
 		ofAddListener(rdtk::GetGUI().getCurrentUIContext()->newGUIEvent, this, &Future::onValueChanged);
 	}
+	
+	void onValueChanged(ofxUIEventArgs &e)
+	{
+		updateFilters();
+	}
+	
+	void drawImGui()
+	{
+		ofEventArgs dummy;
+		if (ImGui::Checkbox("Draw line from actor to ghost", &draw_line)) updateFilters();
+		if (ImGui::Button("speed: Ghost"))
+		{
+			onPresetGhost(dummy);
+			updateFilters();
+		}
+		if (ImGui::Button("speed: Slow"))
+		{
+			onPresetSlow(dummy);
+			updateFilters();
+		}
+		if (ImGui::Button("speed: Normal"))
+		{
+			onPresetNormal(dummy);
+			updateFilters();
+		}
+		if (ImGui::Button("speed: Fast"))
+		{
+			onPresetFast(dummy);
+			updateFilters();
+		}
+		if (ImGui::DragFloat("Distance", &distance, 1, 0, 255)) updateFilters();
+		if (ImGui::DragFloat("Speed", &speed, 1, 0, 255)) updateFilters();
+		
+	}
 
 	void draw()
 	{
@@ -133,11 +167,6 @@ public:
 			filter.setDistance(distance);
 			filter.setSpeed(speed);
 		}
-	}
-	
-	void onValueChanged(ofxUIEventArgs &e)
-	{
-		updateFilters();
 	}
 	
 	void loadPreset(size_t preset_id=0)

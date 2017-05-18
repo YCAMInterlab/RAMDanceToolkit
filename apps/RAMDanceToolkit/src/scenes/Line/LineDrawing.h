@@ -53,7 +53,69 @@ public:
 		
 		bool active;
 		int id;
-        
+		
+		void drawImGui()
+		{
+			ImGui::BeginChild(("win"+ofToString(id)).c_str(), ImVec2(400, 170),
+							  false, ImGuiWindowFlags_AlwaysAutoResize);
+			
+			ImGui::Checkbox(("Line " + ofToString(id)).c_str(), &active);
+			ImGui::Button("From");ImGui::SameLine();
+			ImGui::Button("Control0");ImGui::SameLine();
+			ImGui::Button("Control1");ImGui::SameLine();
+			ImGui::Button("To");
+			
+			ImGui::ColorEdit3("Color", &color[0]);
+			
+			
+			ImGui::Columns(2, NULL, true);
+			
+			ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.2f);
+			ImGui::DragFloat("Width", &line_width, 0.1, 1, 10);
+			ImGui::PopItemWidth();
+			ImGui::NextColumn();
+			
+			ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.2f);
+			ImGui::DragFloat("curve", &curve, 1, -400, 400);
+			ImGui::PopItemWidth();
+			ImGui::NextColumn();
+			
+			ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.2f);
+			ImGui::DragFloat("spiral_radius", &spiral_radius,			1, 0, 200);
+			ImGui::PopItemWidth();
+			ImGui::NextColumn();
+			
+			ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.2f);
+			ImGui::DragFloat("spiral_num_rotate", &spiral_num_rotate,	1, 0, 100);
+			ImGui::PopItemWidth();
+			ImGui::NextColumn();
+
+			ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.2f);
+			ImGui::DragFloat("noise_scale", &noise_scale,				1, 0, 200);
+			ImGui::PopItemWidth();
+			ImGui::NextColumn();
+
+			ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.2f);
+			ImGui::DragFloat("noise_freq", &noise_freq,					1, 0, 10);
+			ImGui::PopItemWidth();
+			ImGui::NextColumn();
+
+			ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.2f);
+			ImGui::DragFloat("extend from", &extend_from,				1, 0, 1000);
+			ImGui::PopItemWidth();
+			ImGui::NextColumn();
+
+			ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.2f);
+			ImGui::DragFloat("extend to", &extend_to,					1, 0, 1000);
+			ImGui::PopItemWidth();
+			ImGui::NextColumn();
+
+			ImGui::Columns(1);
+			ImGui::EndChild();
+			ImGui::Spacing();
+			
+		}
+		
 		void setupControlPanel()
 		{
 			
@@ -206,6 +268,28 @@ public:
 	{
 	}
 	
+	void drawImGui()
+	{
+		
+		if (ImGui::Button("Load Line Settings"))
+			loadLineSettings();
+		ImGui::SameLine();
+		if (ImGui::Button("Save Line Settings"))
+			saveLineSettings();
+		
+		if (ImGui::Button("Randomize"))
+			for (int i = 0; i < NUM_LINE; i++) lines[i].randomize();
+		
+		ImGui::SliderFloat("Auto Random change time", &random_change_time, 0.0, 60.0);
+		
+		for (int i = 0; i < NUM_LINE; i++)
+		{
+			ImGui::PushID(ofToString(i).c_str());
+			lines[i].drawImGui();
+			ImGui::PopID();
+		}
+	}
+	
 	void setupControlPanel()
 	{
 		rdtk::GetGUI().getCurrentUIContext()->addLabelButton("Load Line Settings", false, rdtk::GetGUI().kLength);
@@ -246,52 +330,54 @@ public:
         {
             ofxUIButton *button = (ofxUIButton *)e.widget;
             if (button->getValue())
-            {
                 for (int i = 0; i < NUM_LINE; i++) lines[i].randomize();
-            }
         }
         
         if (name == "Load Line Settings")
         {
             ofxUIButton *button = (ofxUIButton *)e.widget;
-            if (button->getValue())
-            {
-                ofFileDialogResult result = ofSystemLoadDialog("Load Line Settings.", false, "Lines.xml");
-                if (result.bSuccess)
-                    loadXML(result.getPath());
-                
-                for (int i=0; i<NUM_LINE; i++)
-                {
-                    bool active;
-                    
-                    LineContext &line = lines[i];
-                    XML.pushTag("line", i);
-                    active = XML.getValue("active", true);
-                    XML.popTag();
-                    
-                    line.toggle->setValue(active);
-                    line.toggle->stateChange();
-                }
-            }
+            if (button->getValue()) loadLineSettings();
         }
         
         if (name == "Save Line Settings")
         {
             ofxUIButton *button = (ofxUIButton *)e.widget;
-            if (button->getValue())
-            {
-                ofFileDialogResult result = ofSystemSaveDialog("Lines.xml", "Save Line Settings.");
-                if (result.bSuccess)
-                    saveXML(result.getPath());
-            }
+            if (button->getValue()) saveLineSettings();
         }
         
         saveXML();
     }
 	
+	void loadLineSettings()
+	{
+		ofFileDialogResult result = ofSystemLoadDialog("Load Line Settings.", false, "Lines.xml");
+		if (result.bSuccess)
+			loadXML(result.getPath());
+		
+		for (int i=0; i<NUM_LINE; i++)
+		{
+			bool active;
+			
+			LineContext &line = lines[i];
+			XML.pushTag("line", i);
+			active = XML.getValue("active", true);
+			XML.popTag();
+			
+			line.toggle->setValue(active);
+			line.toggle->stateChange();
+		}
+	}
+	
+	void saveLineSettings()
+	{
+		ofFileDialogResult result = ofSystemSaveDialog("Lines.xml", "Save Line Settings.");
+		if (result.bSuccess)
+			saveXML(result.getPath());
+	}
+	
 	void update()
 	{
-        
+		
 		if (random_change_time < 60
 			&& ofGetElapsedTimef() - last_changed_time > random_change_time
             && random_change_time != 0.0)

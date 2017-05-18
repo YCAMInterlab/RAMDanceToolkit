@@ -212,7 +212,20 @@ void PlaybackSegment::onValueChanged(ofxUIEventArgs& e)
 
 void PlaybackSegment::drawImGui()
 {
-	
+	ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(jointColor));
+	if (ImGui::CollapsingHeader(("Playback - " + getName()).c_str()))
+	{
+		if (ImGui::Checkbox("Visible", &bHideActor)) saveCache();
+		ImGui::SameLine();
+		if (ImGui::Checkbox("ResetPos", &bNeedsResetPos)) saveCache();
+		ImGui::SameLine();
+		if (ImGui::Checkbox("Pause", &bPaused)) pause(bPaused);
+		ImGui::SameLine();
+		if (ImGui::Button("Delete")) deleteSelf();
+		
+		ImGui::ColorEdit3("Color", &jointColor[0]);
+	}
+	ImGui::PopStyleColor();
 }
 
 

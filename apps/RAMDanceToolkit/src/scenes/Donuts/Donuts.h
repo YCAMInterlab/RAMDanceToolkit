@@ -73,6 +73,51 @@ public:
 		
 #endif
 	}
+	
+	void onValueChanged(ofxUIEventArgs& e)
+	{
+		string name = e.widget->getName();
+		
+		if (name == "Toggle All")
+		{
+			ofxUIToggle *t = (ofxUIToggle *)e.widget;
+			setAllVisiblity(t->getValue());
+		}
+		
+		if (name == "Reset all settings")
+		{
+			clear();
+		}
+	}
+	
+	
+	void drawImGui()
+	{
+		ImGui::Text("Original me");
+		ImGui::DragFloat("Scale", &mScale, 0.1, 0.1, 10.0);
+		ImGui::DragFloat("Position: X", &mTranslate.x, 1, -300.0, 300.0);
+		ImGui::DragFloat("Position: Z", &mTranslate.z, 1, -300.0, 300.0);
+		
+		ImGui::Spacing();
+		ImGui::Text("Duplicate me");
+		ImGui::DragFloat("Duplicate", &mNumDuplicate, 1, 1, 200);
+		ImGui::DragFloat("Radius", &mRadius, 1, 10.0, 1000.0);
+		ImGui::DragFloat("Box Size", &mBoxSize, 1, 1, 1000.0);
+		
+		ImGui::Spacing();
+		ImGui::Text("Reset, Toggle visibility");
+		if (ImGui::Button("Reset all settings")) clear();
+		ImGui::Checkbox("Show Actor", &mShowActor);
+		if (ImGui::Checkbox("Toggle All", &mToggleAll)) setAllVisiblity(mToggleAll);
+		
+		ImGui::Columns(3, NULL, true);
+		for (int i=0; i<rdtk::Actor::NUM_JOINTS; i++)
+		{
+			ImGui::Checkbox(rdtk::Actor::getJointName(i).c_str(), &mNodeVisibility[i]);
+			ImGui::NextColumn();
+		}
+		ImGui::Columns(1);
+	}
 
 	
 	void setup()
@@ -190,22 +235,6 @@ public:
 	void drawRigid(const rdtk::RigidBody &rigid)
 	{
 		drawDonuts( rigid );
-	}
-	
-	void onValueChanged(ofxUIEventArgs& e)
-	{
-		string name = e.widget->getName();
-		
-		if (name == "Toggle All")
-		{
-			ofxUIToggle *t = (ofxUIToggle *)e.widget;
-			setAllVisiblity(t->getValue());
-		}
-		
-		if (name == "Reset all settings")
-		{
-			clear();
-		}
 	}
 	
 	void clear()

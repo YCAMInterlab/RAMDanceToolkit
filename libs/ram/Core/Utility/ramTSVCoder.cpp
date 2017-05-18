@@ -34,7 +34,10 @@ void TSVCoder::decode(ofBuffer buffer)
 			vector<string> values = ofSplitString(frame, "\t");
 			
 			if (values.size() < 2)
+			{
+				break;
 				throw std::exception();
+			}
 			
 			const string addr = values.at(0);
 			const string name = values.at(1);

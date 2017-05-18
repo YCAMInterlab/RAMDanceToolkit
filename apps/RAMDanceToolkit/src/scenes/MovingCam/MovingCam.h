@@ -51,6 +51,18 @@ class MovingCam : public rdtk::BaseScene
     
 public:
 	
+	void drawImGui()
+	{
+		ImGui::Text("Press [u] to move up");
+		ImGui::Text("Press [d] to move down");
+		ImGui::Separator();
+		if (ImGui::Button("Start move up")) moveUp();
+		if (ImGui::Button("Start move down")) moveDown();
+		ImGui::Separator();
+		if (ImGui::Button("Reset & Reload XML")) resetCamera();
+		ImGui::Checkbox("Enable Camera", &is_camera_enabled);
+	}
+	
 	void setupControlPanel()
 	{
 		ofxUICanvas* panel = rdtk::GetGUI().getCurrentUIContext();

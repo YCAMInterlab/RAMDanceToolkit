@@ -52,6 +52,38 @@ public:
 #endif
 	}
 	
+	void onPanelChanged(ofxUIEventArgs& e)
+	{
+		string name = e.widget->getName();
+		
+		if (name == "Master box size")
+		{
+			for (int i=0; i<mSizeArray.size(); i++)
+				mSizeArray.at(i) = mMasterBoxSize;
+		}
+	}
+	
+	void drawImGui()
+	{
+		ImGui::Checkbox("Use single color", &mUseSingleColor);
+		ImGui::ColorEdit3("Line color", &mLineColor[0]);
+		ImGui::DragFloat("Line width", &mBoxLineWidth, 0.1, 0.0, 10.0);
+		if (ImGui::DragFloat("Master box size", &mMasterBoxSize, 1, 0, 1000.0))
+		{
+			for (int i=0; i<mSizeArray.size(); i++)
+				mSizeArray.at(i) = mMasterBoxSize;
+		}
+		
+		ImGui::Columns(2, NULL, true);
+		for (int i=0; i<rdtk::Actor::NUM_JOINTS; i++)
+		{
+			ImGui::DragFloat(rdtk::Actor::getJointName(i).c_str(), &mSizeArray.at(i), 1, 0, 1000);
+			ImGui::NextColumn();
+		}
+		ImGui::Columns(1);
+		
+	}
+	
 	void draw()
 	{
 		rdtk::BeginCamera();
@@ -115,17 +147,6 @@ public:
 			}
 			glPopMatrix();
 			glPopAttrib();
-		}
-	}
-	
-	void onPanelChanged(ofxUIEventArgs& e)
-	{
-		string name = e.widget->getName();
-		
-		if (name == "Master box size")
-		{
-			for (int i=0; i<mSizeArray.size(); i++)
-				mSizeArray.at(i) = mMasterBoxSize;
 		}
 	}
 	

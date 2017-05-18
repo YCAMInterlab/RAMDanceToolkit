@@ -18,6 +18,7 @@ namespace rdtk{
 	class SceneGui : public Unit{
 	public:
 		bool gui_floating = false;
+		bool folding = false;
 		
 		void drawGuiBase();
 		virtual void drawImGui();
