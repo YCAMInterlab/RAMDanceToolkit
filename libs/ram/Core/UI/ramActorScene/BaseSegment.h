@@ -39,7 +39,7 @@ namespace rdtk{
 		/// load / save actor's color, position, visibility....
 		virtual void loadCache() = 0;
 		virtual void saveCache() = 0;
-		
+		virtual void drawImGui() = 0;
 		
 		/// control panel definition
 		virtual ofxUICanvasPlus* createPanel(const string& targetName) = 0;

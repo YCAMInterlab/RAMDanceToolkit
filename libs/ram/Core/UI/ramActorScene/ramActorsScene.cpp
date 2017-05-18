@@ -538,13 +538,13 @@ void ActorsScene::drawImGui()
 #endif
 	ImGui::SameLine();
 	if (ImGui::Button("Reset Positions")) resetPosAll(true);
-	
 	if (ImGui::Checkbox("Show All Actors", &bShowAllActor)) showAll(bShowAllActor);
 	
 	ImGui::Checkbox("Use Shading", &bUseShading);ImGui::SameLine();
 	ImGui::Checkbox("Use SimpleActor", &bUseSimpleActor);
 
-	if (ImGui::Checkbox("Pause (Space key)", &bPausing)) pauseAll(bPausing);ImGui::SameLine();
+	if (ImGui::Checkbox("Pause (Space key)", &bPausing)) pauseAll(bPausing);
+	ImGui::SameLine();
 	if (ImGui::Checkbox("Recording All Actors", &bRec)) recAll(bRec);
 	
 	/// insert panels
@@ -555,12 +555,10 @@ void ActorsScene::drawImGui()
 	{
 		BaseSegment *seg = it->second;
 
-		ImGui::Button(seg->getName().c_str());
-//		if (seg->getType() == RAM_UI_SEGMENT_TYPE_CONTROL)
-//		{
-//			ControlSegment *s = new ControlSegment(seg->getName());
-//			addSegment(s);
-//		}
+		if (seg->getType() == RAM_UI_SEGMENT_TYPE_CONTROL)
+		{
+			seg->drawImGui();
+		}
 //		else if (seg->getType() == RAM_UI_SEGMENT_TYPE_PLAYBACK)
 //		{
 //			PlaybackSegment *s = new PlaybackSegment(seg->getName());

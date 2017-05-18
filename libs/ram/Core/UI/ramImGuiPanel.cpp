@@ -28,7 +28,10 @@ void SceneGui::drawGuiBase()
 		{
 			drawImGui();
 			ImGui::Separator();
-			ImGui::Checkbox("Floating", &gui_floating);
+			if (ImGui::Button("Float Window"))
+			{
+				gui_floating = true;
+			}
 		}
 	}
 }

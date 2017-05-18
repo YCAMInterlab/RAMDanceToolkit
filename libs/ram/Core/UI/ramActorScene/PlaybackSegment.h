@@ -31,6 +31,8 @@ namespace rdtk{
 		ActorUISegmentType getType() const;
 		ofxUICanvasPlus* createPanel(const string& targetName);
 		
+		void drawImGui();
+		
 		void update();
 		
 		void pause(bool bPause);

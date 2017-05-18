@@ -20,6 +20,7 @@
 #include "ofxUITabbedCanvas.h"
 #include "BaseSegment.h"
 #include "ramSession.h"
+#include "ofxImGui.h"
 
 namespace rdtk{
 	class ControlSegment : public BaseSegment
@@ -33,6 +34,8 @@ namespace rdtk{
 		
 		ActorUISegmentType getType() const;
 		ofxUICanvasPlus* createPanel(const string& targetName);
+		
+		void drawImGui();
 		
 		void onValueChanged(ofxUIEventArgs& e);
 		void toggleRecording(bool bStart);

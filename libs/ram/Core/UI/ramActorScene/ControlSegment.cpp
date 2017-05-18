@@ -41,8 +41,6 @@ ControlSegment::~ControlSegment()
 }
 
 
-
-
 #pragma mark -
 #pragma mark public methods
 
@@ -211,7 +209,21 @@ void ControlSegment::onValueChanged(ofxUIEventArgs& e)
 	}
 }
 
-
+void ControlSegment::drawImGui()
+{
+	ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(jointColor));
+	if (ImGui::CollapsingHeader(("Actor - " + getName()).c_str()))
+	{
+		if (ImGui::Checkbox("Visible", &bHideActor)) saveCache();
+		ImGui::SameLine();
+		if (ImGui::Checkbox("ResetPos", &bNeedsResetPos)) saveCache();
+		ImGui::SameLine();
+		if (ImGui::Checkbox("Record", &bRecording)) toggleRecording(bRecording);
+		
+		ImGui::ColorEdit3("Color", &jointColor[0]);
+	}
+	ImGui::PopStyleColor();
+}
 
 
 #pragma mark -

@@ -210,7 +210,10 @@ void PlaybackSegment::onValueChanged(ofxUIEventArgs& e)
 	saveCache();
 }
 
-
+void PlaybackSegment::drawImGui()
+{
+	
+}
 
 
 #pragma mark -
