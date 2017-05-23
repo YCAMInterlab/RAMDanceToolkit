@@ -33,6 +33,37 @@ public:
     mBoxSizeRatio(5.0) {}
     
 
+	void drawImGui()
+	{
+		ImGui::Checkbox("Show Joint name", &mShowName);	ImGui::SameLine();
+		ImGui::Checkbox("Show Box", &mShowBox);
+		ImGui::Checkbox("Show Axis", &mShowAxis);		ImGui::SameLine();
+		ImGui::Checkbox("Show Line", &mShowLine);
+		ImGui::ColorEdit3("Box Color", &mBoxColor[0]);
+		
+		ImGui::DragFloat("Expansion Ratio", &mExpasionRatio, 0.5, 1.0, 10.0);
+		ImGui::DragFloat("Box size", &mBoxSize, 1.0, 3.0, 100.0);
+		ImGui::DragFloat("BigBox ratio", &mBoxSizeRatio, 0.5, 2.0, 10.0);
+		
+		static bool boxSize = false;
+		static bool showAll = false;
+		if (ImGui::Checkbox("Toggle box size", &boxSize)) seteAllSizeBigger(boxSize);
+		ImGui::SameLine();
+		if (ImGui::Checkbox("Show All", &showAll)) setAllVisiblity(showAll);
+		
+		ImGui::Columns(2, NULL, true);
+		for (int i = 0;i < rdtk::Actor::NUM_JOINTS; i++)
+		{
+			ImGui::PushID(ofToString(i).c_str());
+			ImGui::Checkbox(rdtk::Actor::getJointName(i).c_str(), &mNodeVisibility[i]);
+			ImGui::NextColumn();
+			ImGui::Checkbox("Bigger", &mBiggerSize[i]);
+			ImGui::NextColumn();
+			ImGui::PopID();
+		}
+		ImGui::Columns(1);
+	}
+	
 	void setupControlPanel()
 	{
 		
@@ -76,6 +107,35 @@ public:
 		
 #endif
 	}
+	
+	void onValueChanged(ofxUIEventArgs& e)
+	{
+		string name = e.widget->getName();
+		
+		if (name == "Expasion Ratio")
+		{
+			ofxUISlider *slider = (ofxUISlider *)e.widget;
+			setExpasionRatio(slider->getValue());
+		}
+		
+		if (name == "Show All")
+		{
+			ofxUIToggle *t = (ofxUIToggle *)e.widget;
+			bool newValue = t->getValue();
+			
+			setAllVisiblity(newValue);
+		}
+		
+		if (name == "Toggle box size")
+		{
+			ofxUIToggle *t = (ofxUIToggle *)e.widget;
+			bool newValue = t->getValue();
+			
+			seteAllSizeBigger(newValue);
+		}
+	}
+	
+	
 	
 	void draw()
 	{
@@ -132,33 +192,6 @@ public:
 		rdtk::EndCamera();
 	}
 
-	
-	void onValueChanged(ofxUIEventArgs& e)
-	{
-		string name = e.widget->getName();
-        
-		if (name == "Expasion Ratio")
-		{
-            ofxUISlider *slider = (ofxUISlider *)e.widget;
-            setExpasionRatio(slider->getValue());
-		}
-        
-		if (name == "Show All")
-		{
-			ofxUIToggle *t = (ofxUIToggle *)e.widget;
-			bool newValue = t->getValue();
-			
-			setAllVisiblity(newValue);
-		}
-		
-		if (name == "Toggle box size")
-		{
-			ofxUIToggle *t = (ofxUIToggle *)e.widget;
-			bool newValue = t->getValue();
-			
-			seteAllSizeBigger(newValue);
-		}
-	}
     
 	string getName() const { return "Expansion"; }
 

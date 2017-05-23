@@ -44,6 +44,15 @@ public:
 		rdtk::GetGUI().addSlider("Gravity", -0.1, 0.1, &gravity->force);
 	}
 	
+	void drawImGui()
+	{
+		ImGui::Checkbox("Change emit position", &useGhost);
+		ImGui::DragFloat("Amount", &particle_amount, 0.5, 1.0, 15.0);
+		ImGui::DragFloat("Life", &pe.particle_life, 0.1, 0.1, 10.0);
+		ImGui::DragFloat("Velocity", &pe.particle_velocity, 0.1, 0.1, 5.0);
+		ImGui::DragFloat("Gravity", &gravity->force, 0.005, -0.1, 0.1);
+	}
+	
 	void setup()
 	{
 		pe.setup(50000);

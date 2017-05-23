@@ -144,6 +144,13 @@ public:
 		rdtk::GetGUI().addToggle("show box", &show_box);
 	}
 	
+	void drawImGui()
+	{
+		ImGui::DragFloat("line width", &line_width, 0.1, 0, 10);
+		ImGui::DragFloat("fade", &fade, 0.01, 0, 1);
+		ImGui::Checkbox("show box", &show_box);
+	}
+	
 	void setup()
 	{
 		show_box = true;

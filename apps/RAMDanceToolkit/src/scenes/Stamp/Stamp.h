@@ -53,6 +53,15 @@ public:
 		rdtk::GetGUI().addSlider("Line width", 0, 6, &line_width);
     }
 	
+	void drawImGui()
+	{
+		ImGui::Checkbox("Idle Timer", &use_idle_timer);
+		mStamp.drawImGui();
+		ImGui::Checkbox("Show Actor", &mShowActor);
+		ImGui::ColorEdit3("Box line color", &color[0]);
+		ImGui::DragFloat("Line Width", &line_width, 0.1, 0, 6);
+	}
+	
 	void setup()
 	{
 		mStamp.clear();

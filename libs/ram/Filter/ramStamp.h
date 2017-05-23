@@ -37,6 +37,12 @@ namespace rdtk{
 			GetGUI().addSlider("Recording Span", 2.0, 60.0, &mRecSpan);
 		}
 		
+		void drawImGui()
+		{
+			if (ImGui::Button("Clear")) clear();
+			ImGui::DragFloat("Recording Span", &mRecSpan, 0.5, 2, 60);
+		}
+		
 		void onClear(ofEventArgs &e)
 		{
 			clear();

@@ -66,7 +66,29 @@ public:
 		
 #endif
 	}
-    
+	
+	void drawImGui()
+	{
+		ImGui::DragFloat("Angle X", &mEuler.x, 1, 0.0, 360);
+		ImGui::DragFloat("Angle Y", &mEuler.y, 1, 0.0, 360);
+		ImGui::DragFloat("Angle Z", &mEuler.z, 1, 0.0, 360);
+		
+		ImGui::Checkbox("Auto rotate X", &mAutoRotate.x);
+		ImGui::Checkbox("Auto rotate Y", &mAutoRotate.y);
+		ImGui::Checkbox("Auto rotate Z", &mAutoRotate.z);
+		
+		ImGui::DragFloat("Offset", &mOffset, 1, -300, 300);
+		
+		if (ImGui::Button("Reset"))
+		{
+			mAutoRotate.x = mAutoRotate.y = mAutoRotate.z = 0.0f;
+			mEuler.set(0.0f);
+			mAutoRotateSpeed.set(1.0f);
+			mOffset = -3.0f;
+		}
+		
+	}
+	
 	void setup()
 	{
         mAutoRotateSpeed.set(1.0f);
