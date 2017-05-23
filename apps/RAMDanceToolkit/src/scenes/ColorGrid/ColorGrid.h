@@ -36,6 +36,12 @@ public:
 		rdtk::GetGUI().addSlider("Buffer size", 128, 2048, &bufferSize);
 	}
 	
+	void drawImGui()
+	{
+		ImGui::Checkbox("Use RGB/HSB", &useRgb);
+		ImGui::DragFloat("Buffer size", &bufferSize, 1, 128, 2048);
+	}
+	
 	void setup()
 	{		
 	}

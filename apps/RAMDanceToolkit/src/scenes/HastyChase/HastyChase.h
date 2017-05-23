@@ -51,6 +51,18 @@ public:
 		rdtk::GetGUI().addColorSelector("chaser color", &joint_color);
 	}
 	
+	void drawImGui()
+	{
+		ImGui::DragFloat("buffer time", &buffer_time, 10, 1, 10000);
+		ImGui::DragFloat("rate", &rate, 0.05, -2, 3);
+		
+		ImGui::Checkbox("draw line", &draw_line);
+		ImGui::Checkbox("show box", &show_box);
+		ImGui::Checkbox("fill chaser", &fill_chaser);
+
+		ImGui::ColorEdit3("chaser color", &joint_color[0]);
+	}
+	
 	void setup()
 	{
 		buffer_time = 3600;
