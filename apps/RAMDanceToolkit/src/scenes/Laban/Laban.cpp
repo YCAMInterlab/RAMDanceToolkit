@@ -45,6 +45,19 @@ void Laban::setupControlPanel()
     panel->addSlider("Ticks", 0, 10, &ticks, 300, 20);
 }
 
+void Laban::drawImGui()
+{
+	ImGui::DragFloat("Fade out", &maxLabanMomentLife, 0.1, 0.0, 2.0);
+	ImGui::Checkbox("Only Limbs", &onlyLimbs);
+	ImGui::DragFloat("Threshold", &threshold, 0.1, 0.0, 0.5);
+	ImGui::Checkbox("Show Lines", &showLines);
+	ImGui::DragFloat("Line width", &lineWidth, 0.1, 0, 10);
+	ImGui::DragFloat("Line Length", &lineLength, 1, 0, 1000);
+	ImGui::Checkbox("Show planes", &showPlanes);
+	ImGui::DragFloat("Scale", &scale, 1, 0, 3000);
+	ImGui::DragFloat("Ticks", &ticks, 1, 0, 10);
+}
+
 void Laban::setup()
 {
     for(int x = -1; x <= +1; x++)

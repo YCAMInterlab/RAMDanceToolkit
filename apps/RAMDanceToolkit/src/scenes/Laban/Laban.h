@@ -52,6 +52,7 @@ public:
     string getName() const { return "Laban"; }
 
     void setupControlPanel();
+	void drawImGui();
     void setup();
     void update();
     void draw();

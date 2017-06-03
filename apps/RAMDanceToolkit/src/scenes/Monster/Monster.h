@@ -52,6 +52,18 @@ public:
 #endif
 	}
 	
+	void drawImGui()
+	{
+		if (ImGui::Button("Reset")) needToReset = true;
+		if (ImGui::Button("Random Line")) randomLine = true;
+		if (ImGui::Button("Randomize Topology")) randomizeTopology = true;
+		if (ImGui::Button("Randomize Geometry")) randomizeGeometry = true;
+		
+		ImGui::SliderFloat("Min scale", &minScale, 0.0, 4.0);
+		ImGui::SliderFloat("Max scale", &maxScale, 0.0, 4.0);
+		ImGui::SliderFloat("Randomization amount", &randomizationAmount, 0, 1);
+	}
+	
 	void setup()
 	{
 		int treeArray[] = {
@@ -138,6 +150,7 @@ public:
 		if(needToReset)
 		{
 			reset();
+			needToReset = false;
 		}
 		if(randomizeTopology) 
 		{
@@ -150,6 +163,7 @@ public:
 					treeSwap[i] = getRandomNonChild(i);
 				}
 			}
+			randomizeTopology = false;
 		}
 		if(randomizeGeometry) 
 		{
@@ -163,6 +177,7 @@ public:
 					lengthScale[i] = 1;
 				}
 			}
+			randomizeGeometry = false;
 		}
 		if(randomLine)
 		{
@@ -178,6 +193,7 @@ public:
 			{
 				attach(all[i], all[i - 1]);
 			}
+			randomLine = false;
 		}
 	}
 	

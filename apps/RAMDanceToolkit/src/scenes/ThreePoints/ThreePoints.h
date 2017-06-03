@@ -75,6 +75,30 @@ public:
 #endif
 	}
 	
+	void drawImGui()
+	{
+		ImGui::Checkbox("Show spheres", &showSpheres);
+		ImGui::Checkbox("Show rects", &showRects);
+		ImGui::Checkbox("Show circles", &showCircle);
+		ImGui::Checkbox("Inverted spheres", &invertSpheres);
+		ImGui::Checkbox("Show circle bisector", &showCircleBisector);
+		ImGui::Checkbox("Show center circles", &showCenterCircles);
+		ImGui::DragFloat("Point size", &pointSize, 1, 1, 10);
+		ImGui::DragFloat("Cross length", &crossLength, 1, 1, 1000);
+		ImGui::DragFloat("Rect radius", &rectRadius, 1, 1, 1000);
+		ImGui::DragFloat("Max invert radius", &maxInvertRadius, 10, 1, 10000);
+		ImGui::DragFloat("Circle resolution", &circleResolution);
+		
+		ImGui::Spacing();
+		ImGui::Columns(3, NULL, true);
+		for (int i = 0;i < rdtk::Actor::NUM_JOINTS; i++)
+		{
+			ImGui::Checkbox(rdtk::Actor::getJointName(i).c_str(), &mNodeVisibility[i]);
+			ImGui::NextColumn();
+		}
+		ImGui::Columns(1);
+	}
+	
 	void setup()
 	{		
 		_ofSetIcoSphereResolution(3);

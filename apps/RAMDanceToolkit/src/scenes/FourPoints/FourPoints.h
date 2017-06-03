@@ -28,12 +28,18 @@ public:
 	
 	ofxUIToggleMatrix *m4p1, *m4p2, *m4p3, *m4p4;
 	
+	int currentSelected[4] = {0,0,0,0};
 	bool showFourPointTwist, showFourPointSphere;
 	bool pickExtents, pickCore, pickKneesElbows;
 	float twistResolution, twistExtensionWidth, twistExtensionHeight, pointSize;
 	
 	void selectFourPoints(int i0, int i1, int i2, int i3) 
 	{
+		currentSelected[0] = i0;
+		currentSelected[1] = i1;
+		currentSelected[2] = i2;
+		currentSelected[3] = i3;
+		
 		m4p1->setAllToggles(false);
 		m4p2->setAllToggles(false);
 		m4p3->setAllToggles(false);
@@ -86,6 +92,51 @@ public:
 	
 #endif
 		
+	}
+	
+	void drawImGui()
+	{
+		ImGui::Checkbox("Show four point sphere", &showFourPointSphere);
+		ImGui::Checkbox("Show four point twist", &showFourPointTwist);
+		ImGui::DragFloat("Twist resolution", &twistResolution, 1, 2, 200);
+		ImGui::DragFloat("Twist extension width",  &twistExtensionWidth, 1, 1, 40);
+		ImGui::DragFloat("Twist extension height", &twistExtensionHeight, 1, 1, 8);
+		
+		if (ImGui::Button("Pick Extents"))
+			selectFourPoints(rdtk::Actor::JOINT_LEFT_HAND,
+							 rdtk::Actor::JOINT_RIGHT_HAND,
+							 rdtk::Actor::JOINT_LEFT_TOE,
+							 rdtk::Actor::JOINT_RIGHT_TOE);
+		
+		if (ImGui::Button("Pick core"))
+			selectFourPoints(rdtk::Actor::JOINT_LEFT_SHOULDER,
+							 rdtk::Actor::JOINT_RIGHT_SHOULDER,
+							 rdtk::Actor::JOINT_LEFT_HIP,
+							 rdtk::Actor::JOINT_RIGHT_HIP);
+		
+		if (ImGui::Button("Pick knees and elbows"))
+			selectFourPoints(rdtk::Actor::JOINT_LEFT_ELBOW,
+							 rdtk::Actor::JOINT_RIGHT_ELBOW,
+							 rdtk::Actor::JOINT_LEFT_KNEE,
+							 rdtk::Actor::JOINT_RIGHT_KNEE);
+		
+		bool updated = false;
+		for (int j = 0;j < rdtk::Actor::NUM_JOINTS;j++)
+		{
+			for (int i = 0;i < 4;i++)
+			{
+				if (i > 0) ImGui::SameLine();
+				ImGui::PushID((rdtk::Actor::getJointName(j)+ofToString(i)).c_str());
+				if (ImGui::RadioButton(i == 3 ? rdtk::Actor::getJointName(j).c_str() : "",
+									   &currentSelected[i], j)) updated = true;
+				ImGui::PopID();
+			}
+		}
+		
+		if (updated) selectFourPoints(currentSelected[0],
+									  currentSelected[1],
+									  currentSelected[2],
+									  currentSelected[3]);
 	}
 	
 	void setup()

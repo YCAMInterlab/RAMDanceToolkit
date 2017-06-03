@@ -98,6 +98,17 @@ public:
 		panel->addSlider("Normal lerp rate", 0, 1, &normalLerpRate, 300, 20);
 	}
 	
+	void drawImGui()
+	{
+		ImGui::Checkbox("Only limbs", &onlyLimbs);
+		ImGui::Checkbox("Draw debug", &drawDebug);
+		ImGui::DragFloat("History fade out", &maxNotationLife, 0.1, 0, 5);
+		ImGui::DragFloat("Mark fade out", &maxMarkLife, 0.5, 0, 30);
+		ImGui::DragFloat("Threshold", &threshold, 0.02, 0.0, 1.0);
+		ImGui::DragFloat("Center lerp rate", &centerLerpRate, 0.02, 0.0, 1.0);
+		ImGui::DragFloat("Normal lerp rate", &normalLerpRate, 0.02, 0.0, 1.0);
+	}
+	
 	void setup()
 	{
 		
