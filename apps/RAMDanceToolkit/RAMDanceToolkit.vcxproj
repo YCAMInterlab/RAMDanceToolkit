@@ -83,7 +83,7 @@
     </Link>
     <PostBuildEvent>
       <Command>mkdir $(ProjectDir)bin\data
-xcopy /e /i /y "$(ProjectDir)..\..\..\export\vs\*.dll" "$(ProjectDir)bin"</Command>
+xcopy /e /i /y "$(ProjectDir)..\..\..\export\vs\Win32\*.dll" "$(ProjectDir)bin"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
