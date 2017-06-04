@@ -212,6 +212,7 @@ void PlaybackSegment::onValueChanged(ofxUIEventArgs& e)
 
 void PlaybackSegment::drawImGui()
 {
+	ImGui::PushID(getName().c_str());
 	ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(jointColor));
 	if (ImGui::CollapsingHeader(("Playback - " + getName()).c_str()))
 	{
@@ -226,6 +227,7 @@ void PlaybackSegment::drawImGui()
 		ImGui::ColorEdit3("Color", &jointColor[0]);
 	}
 	ImGui::PopStyleColor();
+	ImGui::PopID();
 }
 
 

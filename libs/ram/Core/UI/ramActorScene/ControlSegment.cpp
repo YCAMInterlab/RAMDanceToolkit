@@ -211,6 +211,7 @@ void ControlSegment::onValueChanged(ofxUIEventArgs& e)
 
 void ControlSegment::drawImGui()
 {
+	ImGui::PushID(getName().c_str());
 	ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(jointColor));
 	if (ImGui::CollapsingHeader(("Actor - " + getName()).c_str()))
 	{
@@ -223,6 +224,7 @@ void ControlSegment::drawImGui()
 		ImGui::ColorEdit3("Color", &jointColor[0]);
 	}
 	ImGui::PopStyleColor();
+	ImGui::PopID();
 }
 
 

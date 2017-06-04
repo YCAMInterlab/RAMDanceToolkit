@@ -84,7 +84,7 @@ namespace rdtk{
 		ofxUICanvasPlus* getCurrentUIContext();
 		
 		void setUsePresetScenes(bool bUse);
-		
+		void setVisible(bool b);
 	private:
 		static ControlPanel *_instance;
 		

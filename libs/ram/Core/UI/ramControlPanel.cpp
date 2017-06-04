@@ -249,6 +249,11 @@ void ControlPanel::remove(const string& name)
 	assert(false);
 }
 
+void ControlPanel::setVisible(bool b)
+{
+	mSceneTabs.setVisible(b);
+}
+
 void ControlPanel::guiEvent(ofxUIEventArgs &e)
 {
 	for(int i = 0; i < scenes.size(); i++) 

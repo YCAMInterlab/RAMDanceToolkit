@@ -11,6 +11,7 @@
 
 #include "ramCameraManager.h"
 #include "ramPreferencesTab.h"
+#include "ramControlPanel.h"
 
 namespace rdtk{
 	
@@ -24,10 +25,18 @@ namespace rdtk{
 		void removeActorGui();
 		void removeSceneGui();
 		
+		bool visible = true;
+		int currentUIView = 0;
+		
+		void keyPressed(ofKeyEventArgs & key);
+		
 		inline static GuiManager& instance()
 		{
 			if (__instance == NULL)
+			{
 				__instance = new GuiManager;
+				ofAddListener(ofEvents().keyPressed, __instance, &GuiManager::keyPressed);
+			}
 			return *__instance;
 		}
 		

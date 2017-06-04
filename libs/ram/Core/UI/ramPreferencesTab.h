@@ -29,7 +29,7 @@ namespace rdtk{
 		bool useShadows = false;
 		float floorSize = 600.0;
 		float floorGridSize = 50.0;
-		int floorStyle = Floor::FLOOR_NONE;
+		int floorStyle = Floor::FLOOR_GRID_LINES;
 		ofFloatColor bg = ofFloatColor(0);
 		
 		inline static Preference& instance()

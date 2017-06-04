@@ -44,12 +44,36 @@ void GuiManager::addScene(ofPtr<SceneGui> scn)
 	sceneArr.push_back(scn);
 }
 
+void GuiManager::keyPressed(ofKeyEventArgs & key)
+{
+	if (key.key == '\t')
+	{
+		currentUIView = (currentUIView + 1) % 3;
+		if (currentUIView == 0)
+		{
+			visible = true;
+			GetGUI().setVisible(false);
+		}
+		if (currentUIView == 1)
+		{
+			visible = false;
+			GetGUI().setVisible(true);
+		}
+		if (currentUIView == 2)
+		{
+			visible = false;
+			GetGUI().setVisible(false);
+		}
+	}
+}
+
 void GuiManager::draw()
 {
+	if (!visible) return;
 	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.5,0.5,0.5,1.0));
 	gui.begin();
-	
-	CameraManager::instance().setEnableInteractiveCamera(!ImGui::GetWindowIsFocused());
+
+	CameraManager::instance().setEnableInteractiveCamera(!ImGui::IsWindowHovered());
 	
 	for (auto scn : sceneArr)
 	{

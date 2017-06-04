@@ -52,7 +52,7 @@ public:
 	,saveStatus(false)
 	,loadStatus(false)
 	,tabWidth(tabWidth)
-	,visible(true) {
+	,visible(false) {
         setFont(rdtk::ToResourcePath(RAM_FONT_FILE));
         
         loadButton = new ofxUIImageButton(0, 0, 32, 32, &loadStatus, rdtk::ToResourcePath("Images/open.png"), "Load");
@@ -61,7 +61,9 @@ public:
         addWidgetRight(saveButton);
 		ofAddListener(newGUIEvent, this, &ofxUITabbedCanvas::guiEvent);
 	}
-    
+	
+	void setVisible(bool b){visible = b;}
+	
 	void add(ofxUITab* tab) {
 		tab->disableAppDrawCallback();
 		tab->disableMouseEventCallbacks();
@@ -179,7 +181,6 @@ public:
 		}
 	}
 	void keyPressed(int key) {
-		if(key == '\t') visible = !visible;
 		if (!visible) return;
 		ofxUICanvas::keyPressed(key);
 		if (tabs.empty()) return;
