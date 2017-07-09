@@ -3298,8 +3298,9 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OF_HEADER_SEARCH_PATHS = "$(OF_BASE_PATH)/libs/openFrameworks/** $(OF_BASE_PATH)/libs/glew/include $(OF_BASE_PATH)/libs/tess2/include $(OF_BASE_PATH)/libs/poco/include $(OF_BASE_PATH)/libs/cairo/include/** $(OF_BASE_PATH)/libs/fmodex/include/** $(OF_BASE_PATH)/libs/boost/include/** $(OF_BASE_PATH)/libs/utf8cpp/include/** $(OF_BASE_PATH)/libs/glfw/include/** ";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = ram;
+				SDKROOT = macosx;
 				VALID_ARCHS = i386;
 			};
 			name = Debug;
@@ -3331,8 +3332,9 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OF_HEADER_SEARCH_PATHS = "$(OF_BASE_PATH)/libs/openFrameworks/** $(OF_BASE_PATH)/libs/glew/include $(OF_BASE_PATH)/libs/tess2/include $(OF_BASE_PATH)/libs/poco/include $(OF_BASE_PATH)/libs/cairo/include/** $(OF_BASE_PATH)/libs/fmodex/include/** $(OF_BASE_PATH)/libs/boost/include/** $(OF_BASE_PATH)/libs/utf8cpp/include/** $(OF_BASE_PATH)/libs/glfw/include/** ";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = ram;
+				SDKROOT = macosx;
 				VALID_ARCHS = i386;
 			};
 			name = Release;

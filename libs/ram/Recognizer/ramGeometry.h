@@ -17,6 +17,7 @@
 
 #pragma once
 
+#include "ofMain.h"
 #include "ofxCv.h"
 
 void rotateToNormal(ofVec3f normal);
