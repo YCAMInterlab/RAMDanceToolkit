@@ -122,7 +122,7 @@ void ActorsScene::update()
         /// realtime osc data
         if (seg->getType() == RAM_UI_SEGMENT_TYPE_CONTROL)
         {
-            seg->session.filter( getNodeArray(it->first) );
+			seg->session.filter( getNodeArray(it->first) );
         }
         /// recording data playback
         else if (seg->getType() == RAM_UI_SEGMENT_TYPE_PLAYBACK)
@@ -139,6 +139,38 @@ void ActorsScene::update()
         }
 		
 		it++;
+	}
+	
+	for(int i=0; i<getNumNodeArray(); i++)
+	{
+		NodeArray &NArray = getNodeArray(i);
+		const string& name = NArray.getName();
+		
+		SegmentsIter it = mSegmentsMap.find(name);
+		
+		if (it == mSegmentsMap.end())
+			continue;
+		
+		BaseSegment *seg = it->second;
+		
+		if (seg->NodeModifiedStamp != NArray.getTimestamp())
+		{
+			seg->NodeModifiedStamp = NArray.getTimestamp();
+			Node & chst = NArray.getNode(Actor::JOINT_CHEST);
+			ofVec3f chestOffset = ofVec3f(-chst.getGlobalPosition().x, 0,
+										  -chst.getGlobalPosition().z);
+			
+			for (int j = 0;j < NArray.getNumNode();j++)
+			{
+				ofVec3f nodePos = NArray.getNode(j).getGlobalPosition();
+				
+				nodePos += ofVec3f(seg->position.x, 0, seg->position.y);
+				if (seg->isFixActor() && NArray.isTypeOf(RAM_NODEARRAY_TYPE_ACTOR))
+					nodePos += chestOffset;
+				
+				NArray.getNode(j).setGlobalPosition(nodePos);
+			}
+		}
 	}
 }
 
@@ -174,7 +206,13 @@ void ActorsScene::draw()
 				if (bUseShading) light.enable();
 				
 				ofSetColor(seg->jointColor);
-				ofTranslate(seg->position.x, 0, seg->position.y);
+//				ofTranslate(seg->position.x, 0, seg->position.y);
+//				
+//				if (seg->isFixActor() &&
+//					NA.isTypeOf(RAM_NODEARRAY_TYPE_ACTOR))
+//					ofTranslate(-NA.getNode(Actor::JOINT_CHEST).getGlobalPosition().x,0,
+//								-NA.getNode(Actor::JOINT_CHEST).getGlobalPosition().z);
+				
 				
 				if (NA.isRigid())
 				{

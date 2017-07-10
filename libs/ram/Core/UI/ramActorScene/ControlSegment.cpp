@@ -217,11 +217,41 @@ void ControlSegment::drawImGui()
 	{
 		if (ImGui::Checkbox("Visible", &bHideActor)) saveCache();
 		ImGui::SameLine();
+		if (ImGui::Checkbox("Fix", &bFixActor)) saveCache();
+		ImGui::SameLine();
 		if (ImGui::Checkbox("ResetPos", &bNeedsResetPos)) saveCache();
 		ImGui::SameLine();
 		if (ImGui::Checkbox("Record", &bRecording)) toggleRecording(bRecording);
 		
 		ImGui::ColorEdit3("Color", &jointColor[0]);
+
+		float range = 300;
+		if (ImGui::SliderFloat2("Position", &position[0], -range, range)) saveCache();
+		
+		ofRectangle rct;
+		ImGui::BeginChild("ScrollingRegion", ImVec2(0,100), false, ImGuiWindowFlags_NoScrollWithMouse);
+		{
+			rct.x = ImGui::GetWindowPos().x;
+			rct.y = ImGui::GetWindowPos().y;
+			rct.width = ImGui::GetWindowSize().x;
+			rct.height = ImGui::GetWindowSize().y;
+			
+			if (ImGui::IsWindowHovered())
+			{
+				CameraManager::instance().setEnableInteractiveCamera(false);
+				if (ofGetMousePressed())
+				{
+					position.set(ofMap(ofGetMouseX(), rct.x, rct.x + rct.width, -range, range, true),
+								 ofMap(ofGetMouseY(), rct.y, rct.y + rct.height, -range, range, true));
+				}
+			}
+		}
+		ImGui::EndChild();
+		ofSetColor(255);
+		ofDrawLine(rct.x + ofMap(position.x, -range, range, 0, rct.width), rct.y,
+				   rct.x + ofMap(position.x, -range, range, 0, rct.width), rct.y + rct.height);
+		ofDrawLine(rct.x, rct.y + ofMap(position.y, -range, range, 0, rct.height),
+				   rct.x + rct.width, rct.y + ofMap(position.y, -range, range, 0, rct.height));
 	}
 	ImGui::PopStyleColor();
 	ImGui::PopID();

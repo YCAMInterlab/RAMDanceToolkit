@@ -49,6 +49,7 @@ namespace rdtk{
 		
 		inline void setVisibility(bool b) { bHideActor = b; }
 		inline bool isVisible() const { return !bHideActor; }
+		inline bool isFixActor() const { return bFixActor;}
 		
 	protected:
 		
@@ -65,7 +66,8 @@ namespace rdtk{
 		ofxUIImageButton *btnResetActor;
 		bool bHideActor;
 		bool bNeedsResetPos;
-		
+		bool bFixActor;
+		float NodeModifiedStamp = 0.0;
 		
 		/// load / save motion data
 		Session session;

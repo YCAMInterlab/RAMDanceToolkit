@@ -218,6 +218,7 @@ void PlaybackSegment::drawImGui()
 	{
 		if (ImGui::Checkbox("Visible", &bHideActor)) saveCache();
 		ImGui::SameLine();
+		if (ImGui::Checkbox("Fix", &bFixActor)) saveCache();
 		if (ImGui::Checkbox("ResetPos", &bNeedsResetPos)) saveCache();
 		ImGui::SameLine();
 		if (ImGui::Checkbox("Pause", &bPaused)) pause(bPaused);
