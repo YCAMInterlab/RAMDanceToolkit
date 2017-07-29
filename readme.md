@@ -49,13 +49,13 @@ The primary innovation of the CircleTracking app is the use of OpenCV's `estimat
 
 -->
 
-##Change log
-###v1.2.0
+## Change log
+### v1.2.0
 
 - add **ramMotionExtractor** : It makes you easier to edit node selection. check [wiki](https://github.com/YCAMInterlab/RAMDanceToolkit/wiki/RAM-API-Reference-MotionExtractor_jp) how to use it.
 - change default floor pattarn from "GRID" to "NONE".
 
-###v1.1.0
+### v1.1.0
 
 - add **ramReceiverTag & ramOSCManager** : for receiver OSC in scenes & other classes.
 - add **ramCommunicationManager** : for control parameters from other devices on OSC.
