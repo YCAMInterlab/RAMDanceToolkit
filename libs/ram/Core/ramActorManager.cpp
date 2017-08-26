@@ -239,9 +239,12 @@ void ActorManager::updateWithOscMessage(const ofxOscMessage &m)
 			o.setType(RAM_NODEARRAY_TYPE_ACTOR);
 			o.setName(name);
 			o.updateWithOscMessage(m);
-			nodearrays.set(name, o);
 
+			nodearrays.set(name, o);
+			
 			ofNotifyEvent(actorSetup, o);
+			//1.NodeArrayで格納しているので、Actorを格納するとツリー構造が全て無くなる
+			//2.TSVはローカル座標だが、OSCはグローバル座標で飛んできているので大元で揃えておかないと、描画部分の実装では巻き取れない
 		}
 		else
 		{

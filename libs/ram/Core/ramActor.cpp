@@ -86,7 +86,7 @@ void NodeArray::updateWithOscMessage(const ofxOscMessage &m)
 		const ofVec3f axis(ax, ay, az);
 		const ofVec3f vec(vx, vy, vz);
 		const ofQuaternion quat(angle, axis);
-
+		
 		rdtk::Node &node = getNode(i);
 		node.node_id = i;
 		node.name = isActor() ? getJointName(i) : "Node " + ofToString(i);
@@ -162,6 +162,7 @@ Actor::Actor()
 Actor::Actor(const NodeArray &copy)
 {
 	*this = copy;
+	setupTree();
 }
 
 Actor::~Actor()
@@ -177,16 +178,21 @@ Actor& Actor::operator=(const NodeArray &copy)
 
 void Actor::dispose()
 {
+	for (auto & n : nodes) n.clearParent();
 	nodes.clear();
 }
 
 void Actor::updateWithOscMessage(const ofxOscMessage &m)
 {
+	if (!getNode(JOINT_ABDOMEN).hasParent()) setupTree();
 	NodeArray::updateWithOscMessage(m);
 }
 
 void Actor::setupTree()
 {
+	if (getNumNode() < NUM_JOINTS) return;
+	for (auto & n : nodes) n.clearParent();
+	
 	getNode(JOINT_ABDOMEN).setParent(getNode(JOINT_HIPS));
 	{
 		getNode(JOINT_CHEST).setParent(getNode(JOINT_ABDOMEN));

@@ -95,7 +95,6 @@ namespace rdtk{
 		
 		void setNodeArrayBuffer(NodeArrayBuffer &buffer);
 		
-		
 	protected:
 		
 		NodeArrayBuffer mBuffer;

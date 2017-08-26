@@ -35,7 +35,7 @@ void TSVCoder::decode(ofBuffer buffer)
 			
 			if (values.size() < 2)
 			{
-				break;
+				continue;
 				throw std::exception();
 			}
 			
@@ -43,24 +43,25 @@ void TSVCoder::decode(ofBuffer buffer)
 			const string name = values.at(1);
 			
 			NodeArray NA;
+			Actor oA;
+			RigidBody oR;
 			
 			if (addr == RAM_OSC_ADDR_ACTOR)
 			{
-				Actor o;
-				o.setType(rdtk::RAM_NODEARRAY_TYPE_ACTOR);
-				o.setName(name);
-				NA = o;
+				oA.setType(rdtk::RAM_NODEARRAY_TYPE_ACTOR);
+				oA.setName(name);
+				
+				NA = oA;
 			}
 			else
 			{
-				rdtk::RigidBody o;
-				o.setType(rdtk::RAM_NODEARRAY_TYPE_RIGIDBODY);
-				o.setName(name);
-				NA = o;
+				oR.setType(rdtk::RAM_NODEARRAY_TYPE_RIGIDBODY);
+				oR.setName(name);
+				NA = oR;
 			}
 			
 			const int numNodes = ofToInt(values.at(2));
-			
+
 			for (int i=0; i<numNodes; i++)
 			{
 				if (values.size() < i*8+3+7)

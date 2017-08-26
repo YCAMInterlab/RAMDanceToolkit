@@ -206,12 +206,12 @@ void ActorsScene::draw()
 				if (bUseShading) light.enable();
 				
 				ofSetColor(seg->jointColor);
-//				ofTranslate(seg->position.x, 0, seg->position.y);
-//				
-//				if (seg->isFixActor() &&
-//					NA.isTypeOf(RAM_NODEARRAY_TYPE_ACTOR))
-//					ofTranslate(-NA.getNode(Actor::JOINT_CHEST).getGlobalPosition().x,0,
-//								-NA.getNode(Actor::JOINT_CHEST).getGlobalPosition().z);
+				ofTranslate(seg->position.x, 0, seg->position.y);
+				
+				if (seg->isFixActor() &&
+					NA.isTypeOf(RAM_NODEARRAY_TYPE_ACTOR))
+					ofTranslate(-NA.getNode(Actor::JOINT_CHEST).getGlobalPosition().x,0,
+								-NA.getNode(Actor::JOINT_CHEST).getGlobalPosition().z);
 				
 				
 				if (NA.isRigid())
@@ -220,10 +220,11 @@ void ActorsScene::draw()
 				}
 				else
 				{
+					Actor ac = NA;
 					if (bUseSimpleActor)
                         DrawBasicActor((Actor&)NA);
 					else
-                        drawNodes(NA);
+                        drawNodes(ac);
 				}
 				
 				if (bUseShading) light.disable();
