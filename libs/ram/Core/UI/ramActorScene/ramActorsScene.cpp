@@ -130,11 +130,19 @@ void ActorsScene::update()
             if (static_cast<PlaybackSegment*>(seg)->isPlaying())
             {
                 seg->session.updatePlayhead();
-                
-                NodeArray NA = seg->session.getCurrentFrame();
-                NA.setPlayback(true);
-                NA.setTimestamp(ofGetElapsedTimef());
-                getActorManager().instance().setNodeArray(NA);
+				
+                NodeArray & NA = seg->session.getCurrentFrame();
+				NA.setPlayback(true);
+				NA.setTimestamp(ofGetElapsedTimef());
+
+				if (NA.isActor())
+				{
+					ofPtr<Actor> ac = make_shared<Actor>(NA);
+					getActorManager().instance().setNodeArray(ac);
+				}
+				else{
+					getActorManager().instance().setNodeArray(NA);
+				}
             }
         }
 		
@@ -220,11 +228,10 @@ void ActorsScene::draw()
 				}
 				else
 				{
-					Actor ac = NA;
 					if (bUseSimpleActor)
                         DrawBasicActor((Actor&)NA);
 					else
-                        drawNodes(ac);
+                        drawNodes((Actor&)NA);
 				}
 				
 				if (bUseShading) light.disable();

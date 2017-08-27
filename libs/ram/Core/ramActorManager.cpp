@@ -173,22 +173,22 @@ void ActorManager::update()
 
 	for (int i = 0; i < nodearrays.size(); i++)
 	{
-		const NodeArray &array = nodearrays[i];
+		const ofPtr<NodeArray> & array = nodearrays[i];
 
-		if (array.isOutdated() && !isFreezed() && !array.isPlayback())
+		if (array->isOutdated() && !isFreezed() && !array->isPlayback())
 		{
-			if (array.isActor())
+			if (array->isActor())
 			{
-				Actor o = array;
+				Actor o = *array.get();
 				ofNotifyEvent(actorExit, o);
 			}
 			else
 			{
-				RigidBody o = array;
+				RigidBody o = *array.get();
 				ofNotifyEvent(rigidExit, o);
 			}
 
-			nodearrays.erase(array.getName());
+			nodearrays.erase(array->getName());
 		}
 	}
 
@@ -235,39 +235,36 @@ void ActorManager::updateWithOscMessage(const ofxOscMessage &m)
 	{
 		if (!nodearrays.hasKey(name))
 		{
-			Actor o;
-			o.setType(RAM_NODEARRAY_TYPE_ACTOR);
-			o.setName(name);
-			o.updateWithOscMessage(m);
-
+			ofPtr<Actor> o = make_shared<Actor>();
+			o->setType(RAM_NODEARRAY_TYPE_ACTOR);
+			o->setName(name);
+			o->updateWithOscMessage(m);
 			nodearrays.set(name, o);
 			
-			ofNotifyEvent(actorSetup, o);
-			//1.NodeArrayで格納しているので、Actorを格納するとツリー構造が全て無くなる
-			//2.TSVはローカル座標だが、OSCはグローバル座標で飛んできているので大元で揃えておかないと、描画部分の実装では巻き取れない
+			ofNotifyEvent(actorSetup, *o.get());
 		}
 		else
 		{
-			Actor &o = (Actor &)nodearrays[name];
-			o.updateWithOscMessage(m);
+			ofPtr<Actor> o = static_pointer_cast<Actor>(nodearrays[name]);
+			o->updateWithOscMessage(m);
 		}
 	}
 	else if (addr == RAM_OSC_ADDR_RIGID_BODY)
 	{
 		if (!nodearrays.hasKey(name))
 		{
-			RigidBody o;
-			o.setType(RAM_NODEARRAY_TYPE_RIGIDBODY);
-			o.setName(name);
-			o.updateWithOscMessage(m);
+			ofPtr<RigidBody> o = make_shared<RigidBody>();
+			o->setType(RAM_NODEARRAY_TYPE_RIGIDBODY);
+			o->setName(name);
+			o->updateWithOscMessage(m);
 			nodearrays.set(name, o);
 
-			ofNotifyEvent(rigidSetup, o);
+			ofNotifyEvent(rigidSetup, *o.get());
 		}
 		else
 		{
-			RigidBody &o = (RigidBody &)nodearrays[name];
-			o.updateWithOscMessage(m);
+			ofPtr<RigidBody> o = static_pointer_cast<RigidBody>(nodearrays[name]);
+			o->updateWithOscMessage(m);
 		}
 	}
     else assert(false);

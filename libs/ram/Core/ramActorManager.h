@@ -66,15 +66,16 @@ namespace rdtk{
 		}
 		
 		inline const vector<string>& getNodeArrayNames() const { return nodearrays.keys(); }
-		inline NodeArray& getNodeArray(int index) { return nodearrays[index]; }
-		inline const NodeArray& getNodeArray(int index) const { return const_cast<NodeArray&>(nodearrays[index]); }
-		inline NodeArray& getNodeArray(const string& name) { return nodearrays[name]; }
-		inline const NodeArray& getNodeArray(const string& name) const { return const_cast<NodeArray&>(nodearrays[name]); }
+		inline NodeArray& getNodeArray(int index) { return *nodearrays[index].get(); }
+		inline const NodeArray& getNodeArray(int index) const { return const_cast<NodeArray&>(*nodearrays[index].get()); }
+		inline NodeArray& getNodeArray(const string& name) { return *nodearrays[name].get(); }
+		inline const NodeArray& getNodeArray(const string& name) const { return const_cast<NodeArray&>(*nodearrays[name].get()); }
 		inline bool hasNodeArray(const string &key) const { return nodearrays.hasKey(key); }
 		inline void removeNodeArray(const string& name) { nodearrays.erase(name); }
 		
 		// test
-		void setNodeArray(const NodeArray& NA) { nodearrays.set(NA.getName(), NA); }
+		void setNodeArray(const NodeArray& NA) { nodearrays.set(NA.getName(), make_shared<NodeArray>(NA)); }
+		void setNodeArray(ofPtr<NodeArray> NA) { nodearrays.set(NA->getName(), NA); }
 		
 		
 		// for mouse picked node
@@ -125,7 +126,7 @@ namespace rdtk{
 		ActorManager& operator=(const ActorManager&) { return *this; }
 		~ActorManager() {};
 		
-		CompoundContainer<NodeArray> nodearrays;
+		CompoundContainer<ofPtr<NodeArray> > nodearrays;
 		
 		ofxInteractivePrimitives::RootNode rootNode;
 		
