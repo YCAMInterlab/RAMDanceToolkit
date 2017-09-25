@@ -32,6 +32,12 @@ else
 	git checkout 4145d50
 	cd ../
 
+	# ofxUITabbedCanvas
+	git clone https://github.com/YoshitoONISHI/ofxUITabbedCanvas
+	cd ofxUITabbedCanvas
+	cd ../
+
+
 	# ofxInteractivePrimitives
 	git clone https://github.com/satoruhiga/ofxInteractivePrimitives.git
 	cd ofxInteractivePrimitives
