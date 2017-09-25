@@ -22,26 +22,26 @@ else
 	echo "[couldn't found ./.gitmodule. start clone five addons from github repos instead of git submodule update]"
 
 	# ofxBt
-	git clone https://github.com/motoishmz/ofxBt.git
+	git clone https://github.com/loveandsheep/ofxBt.git
 	cd ofxBt
 	cd ../
 
 	# ofxUI
 	git clone https://github.com/rezaali/ofxUI.git
 	cd ofxUI
-	git checkout 1832f2a
+	git checkout 4145d50
 	cd ../
 
 	# ofxInteractivePrimitives
 	git clone https://github.com/satoruhiga/ofxInteractivePrimitives.git
 	cd ofxInteractivePrimitives
-	git checkout 987205e
+	git checkout dbfb3e6
 	cd ../
 
 	# ofxCv
 	git clone https://github.com/kylemcdonald/ofxCv.git
 	cd ofxCv
-	git checkout 88620c5
+	git checkout e2db58a
 	cd ../
 
 	# ofxNodeArray
@@ -85,6 +85,13 @@ else
 	cd ofxMotioner
 	git checkout develop
 	git checkout 392d243
+	cd ../
+
+	# ofxImGui
+	git clone https://github.com/jvcleave/ofxImGui.git
+	cd ofxImGui
+	git checkout develop
+	git checkout 7c30679
 	cd ../
 
 	echo "end clone addons"
