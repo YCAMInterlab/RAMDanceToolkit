@@ -41,9 +41,7 @@ namespace rdtk{
 		
 		void append(const NodeArray& arr)
 		{
-			if (arr.isActor())	buffer.push_back((Actor&)arr);
-			else				buffer.push_back(arr);
-			
+            buffer.push_back(arr);
 			if (buffer.size() > capacity)
 				buffer.pop_front();
 		}

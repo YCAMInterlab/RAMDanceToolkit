@@ -134,51 +134,11 @@ void ActorsScene::update()
                 NodeArray & NA = seg->session.getCurrentFrame();
 				NA.setPlayback(true);
 				NA.setTimestamp(ofGetElapsedTimef());
-
-				if (NA.isActor())
-				{
-					ofPtr<Actor> ac = make_shared<Actor>(NA);
-					getActorManager().instance().setNodeArray(ac);
-				}
-				else{
-					getActorManager().instance().setNodeArray(NA);
-				}
+				getActorManager().instance().setNodeArray(NA);
             }
         }
 		
 		it++;
-	}
-	
-	for(int i=0; i<getNumNodeArray(); i++)
-	{
-		NodeArray &NArray = getNodeArray(i);
-		const string& name = NArray.getName();
-		
-		SegmentsIter it = mSegmentsMap.find(name);
-		
-		if (it == mSegmentsMap.end())
-			continue;
-		
-		BaseSegment *seg = it->second;
-		
-		if (seg->NodeModifiedStamp != NArray.getTimestamp())
-		{
-			seg->NodeModifiedStamp = NArray.getTimestamp();
-			Node & chst = NArray.getNode(Actor::JOINT_CHEST);
-			ofVec3f chestOffset = ofVec3f(-chst.getGlobalPosition().x, 0,
-										  -chst.getGlobalPosition().z);
-			
-			for (int j = 0;j < NArray.getNumNode();j++)
-			{
-				ofVec3f nodePos = NArray.getNode(j).getGlobalPosition();
-				
-				nodePos += ofVec3f(seg->position.x, 0, seg->position.y);
-				if (seg->isFixActor() && NArray.isTypeOf(RAM_NODEARRAY_TYPE_ACTOR))
-					nodePos += chestOffset;
-				
-				NArray.getNode(j).setGlobalPosition(nodePos);
-			}
-		}
 	}
 }
 

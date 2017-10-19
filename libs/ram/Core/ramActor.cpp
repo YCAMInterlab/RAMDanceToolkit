@@ -25,8 +25,24 @@ string getJointName(unsigned int jointId) { return Actor::getJointName(jointId);
 
 Node& Node::operator=(const Node& copy)
 {
+#if defined(OF_VERSION_MAJOR) && defined (OF_VERSION_MINOR)
+#if (OF_VERSION_MAJOR == 0) && (OF_VERSION_MINOR <= 8)
 	ofxNodeArray::Node<Node>::operator=(copy);
-
+#elif (OF_VERSION_MAJOR == 0) && (OF_VERSION_MINOR == 9)
+	//
+	// Hotfix for oF v0.9.8 : avoid ofNode.clearParent() from original ofNode destructor.
+	// https://github.com/openframeworks/openFrameworks/blob/master/libs/openFrameworks/3d/ofNode.cpp#L30
+	//
+	setPosition(copy.getPosition());
+	setOrientation(copy.getOrientationQuat());
+	setScale(copy.getScale());
+	updateAxis();
+	createMatrix();
+	node_id = copy.node_id;
+	parent = copy.parent;
+#endif
+#endif
+	
 	name = copy.name;
 	accelerometer = copy.accelerometer;
 
