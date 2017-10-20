@@ -32,6 +32,7 @@ void ofApp::setup()
 	// ------------------
 	rdtk::SceneManager& sceneManager = rdtk::SceneManager::instance();
 
+	sceneManager.addScene<Extractor>();
 	sceneManager.addScene<MovingCam>();
 	sceneManager.addScene<LineDrawing>();
 	sceneManager.addScene<BigBox>();

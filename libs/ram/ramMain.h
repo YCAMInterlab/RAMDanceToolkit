@@ -42,3 +42,4 @@
 #include "ramGraphicsMain.h"
 #include "ramPhysicsMain.h"
 #include "ramRecognizerMain.h"
+#include "ramMotionExtractor.h"

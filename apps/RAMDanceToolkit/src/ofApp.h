@@ -46,6 +46,8 @@
 #include "Laban.h"
 #include "Notation.h"
 
+#include "Extractor.h"
+
 class ofApp : public rdtk::BaseApp
 {
 public:

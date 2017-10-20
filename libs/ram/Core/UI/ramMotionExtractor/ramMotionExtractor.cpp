@@ -19,9 +19,17 @@ uiThemecfh(160, 255),
 uiThemecp(128, 192),
 uiThemecpo(255, 192);
 
+void MotionExtractor::setup(BaseScene* scene_)
+{
+	mMotionSmooth = 10.0;
+	Preview = true;
+	mScenePtr = scene_;
+}
+
 /* Call setupControlPanel of each scenes. */
 void MotionExtractor::setupControlPanel(BaseScene *scene_, ofVec2f canvasPos){
 
+	called_ofxUI = true;
 	mMotionSmooth = 10.0;
 	mScenePtr = scene_;
 
@@ -59,6 +67,102 @@ void MotionExtractor::setupControlPanel(BaseScene *scene_, ofVec2f canvasPos){
 	receiver.addAddress("/ram/MEX/"+scene_->getName());
 	OscManager::instance().addReceiverTag(&receiver);
 
+}
+
+void MotionExtractor::drawImGui()
+{
+	if (gui_floating)
+	{
+		ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.5,0.5,0.5,1.0));
+		ImGui::Begin("moition Extractor", &gui_floating, ImGuiWindowFlags_AlwaysAutoResize);
+		
+		if (ImGui::IsWindowHovered())
+			CameraManager::instance().setEnableInteractiveCamera(false);
+		
+		drawImGuiObject();
+		
+		ImGui::End();
+		ImGui::PopStyleColor();
+	}
+	else
+	{
+		ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.5,0.5,0.5,1.0));
+		
+		bool collapse = ImGui::CollapsingHeader("motion Extractor");
+		
+		if (collapse)
+		{
+			if (ImGui::Button("Float Window")) gui_floating = true;
+			ImGui::SameLine();
+			drawImGuiObject();
+			ImGui::Separator();
+		}
+		
+		ImGui::PopStyleColor();
+	}
+}
+
+void MotionExtractor::drawImGuiObject()
+{
+	ImGui::Checkbox("Visible", &Preview);
+	
+	if (ImGui::Button("Push Port"))
+	{
+		MotionPort* mp = new MotionPort(lastSelected);
+		pushPort(mp);
+	}
+	
+	ImGui::SameLine();
+	if (ImGui::Button("Pop Port"))
+	{
+		NodeFinder nf = lastSelected;
+		popPort(nf);
+	}
+	ImGui::SameLine();
+	if (ImGui::Button("Clear")) clearPorts();
+	
+	ImGui::Spacing();
+	ImGui::Text("---Actors---");
+	
+	vector<string> swaper = listActor.actorNames;
+	bool doSwap = false;
+	for (int i = 0;i < listActor.actorNames.size();i++)
+	{
+		ImGui::PushID(("BT"+ofToString(i)).c_str());
+		string ac = listActor.actorNames[i];
+		if (ImGui::Button("Up") && (i > 0))
+		{
+			swap(swaper[i], swaper[i-1]);
+			doSwap = true;
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Dn") && (i < listActor.actorNames.size() - 1))
+		{
+			swap(swaper[i], swaper[i+1]);
+			doSwap = true;
+		}
+		ImGui::SameLine();
+		ImGui::Text(ac.c_str());
+		ImGui::PopID();
+	}
+	
+	if (doSwap)
+	{
+		listActor.actorNames = swaper;
+		refleshActorFromList();
+	}
+	
+	if (ImGui::Button("Save"))
+		save("motionExt_"+mScenePtr->getName()+".xml");
+	ImGui::SameLine();
+	if (ImGui::Button("Load"))
+		load("motionExt_"+mScenePtr->getName()+".xml");
+	ImGui::SliderFloat("Smooth", &mMotionSmooth, 1.0, 50.0);
+
+	if (ofGetMousePressed())
+	{
+		lastSelected = ActorManager::instance().getLastSelectedNodeIdentifer();
+	}
 }
 
 void MotionExtractor::pushFromID(int actorId, int jointId){
@@ -100,6 +204,9 @@ void MotionExtractor::update(){
 		if (m.getAddress() == myAddr+"swap"){
 			actorList->swapListItems(m.getArgAsInt32(0),
 									 m.getArgAsInt32(1));
+			
+			listActor.swapListItems(m.getArgAsInt32(0),
+									m.getArgAsInt32(1));
 		}
 
 		if (m.getAddress() == myAddr+"save"){
@@ -188,13 +295,20 @@ void MotionExtractor::update(){
 	if (lastNumNodeArray != ActorManager::instance().getNumNodeArray()){
 
 		vector<string> lst = ActorManager::instance().getNodeArrayNames();
+		
+		listActor.actorNames = lst;
+		
 		if (lst.size() == 2) lst.push_back("Dummy");
 
-		mGui->removeWidget(actorList);
-		actorList = mGui->addSortableList("actorList", lst);
-
-		mGui->autoSizeToFitWidgets();
-		parentGui->autoSizeToFitWidgets();
+		if (called_ofxUI)
+		{
+			mGui->removeWidget(actorList);
+			actorList = mGui->addSortableList("actorList", lst);
+			
+			mGui->autoSizeToFitWidgets();
+			parentGui->autoSizeToFitWidgets();
+		}
+		
 
 	}
 
@@ -205,6 +319,8 @@ void MotionExtractor::update(){
 }
 
 void MotionExtractor::draw(){
+	if (!Preview) return;
+	
 	for (int i = 0;i < ActorManager::instance().getNumNodeArray();i++){
 		NodeArray arr = ActorManager::instance().getNodeArray(i);
 		ofVec3f tp = arr.getNode(Actor::JOINT_HEAD).getGlobalPosition();
@@ -328,17 +444,35 @@ void MotionExtractor::mouseReleased(ofMouseEventArgs &arg){
 
 void MotionExtractor::refleshActorFromList(){
 	for (int i = 0;i < mMotionPort.size();i++){
-		if (mMotionPort[i]->mActorIndex < actorList->getListItems().size())
-			mMotionPort[i]->mFinder.name = actorList->getListItems()[mMotionPort[i]->mActorIndex]->getName();
+		
+		if (called_ofxUI)
+		{
+			if (mMotionPort[i]->mActorIndex < actorList->getListItems().size())
+				mMotionPort[i]->mFinder.name = actorList->getListItems()[mMotionPort[i]->mActorIndex]->getName();
+		}
+		else
+		{
+			if (mMotionPort[i]->mActorIndex < listActor.actorNames.size())
+				mMotionPort[i]->mFinder.name = listActor.actorNames[mMotionPort[i]->mActorIndex];
+		}
 	}
 }
 
 #pragma mark - utility
 
 int MotionExtractor::getIndexFromName(string name){
-	for (int i = 0;i < actorList->getListItems().size();i++){
-		if (actorList->getListItems()[i]->getName() == name) return i;
+	
+	if (called_ofxUI)
+	{
+		for (int i = 0;i < actorList->getListItems().size();i++)
+			if (actorList->getListItems()[i]->getName() == name) return i;
 	}
+	else
+	{
+		for (int i = 0;i < listActor.actorNames.size();i++)
+			if (listActor.actorNames[i] == name) return i;
+	}
+
 	return 0;
 }
 
@@ -382,10 +516,23 @@ void MotionExtractor::load(string file){
 
 		MotionPort* mp = new MotionPort(nodeIdent);
 		mp->mActorIndex = xml.getValue("ActorIndex", 0);
-		int targIndex = ofClamp(mp->mActorIndex, 0, actorList->getListItems().size()-1);
+		int targIndex;
+		
+		if (called_ofxUI)
+		{
+			targIndex = ofClamp(mp->mActorIndex, 0, actorList->getListItems().size()-1);
+			
+			if (targIndex < actorList->getListItems().size())
+				mp->mFinder.name = actorList->getListItems()[targIndex]->getName();
 
-		if (targIndex < actorList->getListItems().size()){
-			mp->mFinder.name = actorList->getListItems()[targIndex]->getName();
+		}
+		else
+		{
+			targIndex = ofClamp(mp->mActorIndex, 0, listActor.actorNames.size() - 1);
+
+			if (targIndex < listActor.actorNames.size())
+				mp->mFinder.name = listActor.actorNames[targIndex];
+
 		}
 
 		mMotionPort.push_back(mp);
@@ -554,11 +701,18 @@ void MotionExtractor::setActorList(vector<string> *lst){
 
 	if (lst->size() == 2) lst->push_back("Dummy");
 	
-	mGui->removeWidget(actorList);
-	actorList = mGui->addSortableList("actorList", *lst);
-	
-	mGui->autoSizeToFitWidgets();
-	parentGui->autoSizeToFitWidgets();
+	if (called_ofxUI)
+	{
+		mGui->removeWidget(actorList);
+		actorList = mGui->addSortableList("actorList", *lst);
+		
+		mGui->autoSizeToFitWidgets();
+		parentGui->autoSizeToFitWidgets();
+	}
+	else
+	{
+		listActor.actorNames = *lst;
+	}
 	
 	refleshActorFromList();
 

@@ -132,6 +132,7 @@
 		9AD1DE1E17269E2100C97F20 /* btPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = btPicker.cpp; sourceTree = "<group>"; };
 		9AD1DE1F17269E2100C97F20 /* btPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btPicker.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		C64C5C111F998E5A00EA4A4E /* Extractor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Extractor.h; path = scenes/Extractor.h; sourceTree = "<group>"; };
 		CF2B842B1A84CCBD008A183B /* SphereMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphereMesh.cpp; sourceTree = "<group>"; };
 		CF2B842D1A84D1B4008A183B /* Laban.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Laban.cpp; sourceTree = "<group>"; };
 		D2B8DCC816D3835700210022 /* BaseConstrains.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseConstrains.cpp; sourceTree = "<group>"; };
@@ -283,6 +284,7 @@
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				C64C5C121F99AEC500EA4A4E /* Extractor */,
 				9AD1DE1D17269E2100C97F20 /* Helper */,
 				9A778459171847F0004ED621 /* MovingCam */,
 				9A2B3F3F16D325C7001CBFC9 /* Abacus */,
@@ -479,6 +481,14 @@
 				BBAB23BE13894E4700AA2426 /* GLUT.framework */,
 			);
 			name = "3rd party frameworks";
+			sourceTree = "<group>";
+		};
+		C64C5C121F99AEC500EA4A4E /* Extractor */ = {
+			isa = PBXGroup;
+			children = (
+				C64C5C111F998E5A00EA4A4E /* Extractor.h */,
+			);
+			name = Extractor;
 			sourceTree = "<group>";
 		};
 		D2B8DCC716D3835700210022 /* Chain */ = {

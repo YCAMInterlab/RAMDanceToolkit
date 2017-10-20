@@ -2174,8 +2174,8 @@
 		9A70BE4F16E9CE6B00A5B755 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				9A70BE5016E9CE6B00A5B755 /* ofxNodeArray.cpp */,
 				9A70BE5116E9CE6B00A5B755 /* ofxNodeArray.h */,
+				9A70BE5016E9CE6B00A5B755 /* ofxNodeArray.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -2196,8 +2196,8 @@
 				C698EAD51A78C6FE00362289 /* ramMotionExtractor */,
 				9AEA6591191CB63D001FAA18 /* ramActorScene */,
 				9AEA659A191CB63D001FAA18 /* ramControllable.h */,
-				9AEA659B191CB63D001FAA18 /* ramControlPanel.cpp */,
 				9AEA659C191CB63D001FAA18 /* ramControlPanel.h */,
+				9AEA659B191CB63D001FAA18 /* ramControlPanel.cpp */,
 				9AEA659D191CB63D001FAA18 /* ramPreferencesTab.h */,
 				C6E462C01ECC323800285F1B /* ramPreferencesTab.cpp */,
 				9AEA659E191CB63D001FAA18 /* ramPresetTab.cpp */,

@@ -15,14 +15,24 @@ namespace rdtk{
 	
 	class MotionPort;
 	
+	class mex_actorList
+	{
+	public:
+		void swapListItems(int idx_a, int idx_b)
+		{
+			swap(actorNames[idx_a], actorNames[idx_b]);
+		}
+		vector<string> actorNames;
+	};
+	
 	class MotionExtractor{
 	public:
 		
 		/*=== Must call for use ===*/
-		void setupControlPanel(BaseScene* scene_,
-							   ofVec2f canvasPos = ofVec2f(240,30));
+		void setup(BaseScene* scene_);
 		void update();
 		void draw();
+		void drawImGui();
 		
 		/*=== Getter ===*/
 		int				getNumPort();
@@ -57,7 +67,13 @@ namespace rdtk{
 		
 		vector<MotionPort*>	mMotionPort;
 		ofxUISortableList*		actorList;
-		
+		mex_actorList listActor;
+
+		/*===Old func===*/
+		void setupControlPanel(BaseScene* scene_,
+							   ofVec2f canvasPos = ofVec2f(240,30));
+		bool called_ofxUI = false;
+
 	protected:
 		void guiEvent(ofxUIEventArgs &e);
 		int getIndexFromName(string name);
@@ -66,11 +82,18 @@ namespace rdtk{
 		ofxUICanvas*			mGui;
 		BaseScene*			mScenePtr;
 		ofVec2f					mCurrentCanvasPos;
-		float					mMotionSmooth;
+		float					mMotionSmooth = 10.0;
 		int						lastNumNodeArray;
 		
-		OscReceiveTag	receiver;
+		
+		
+		OscReceiveTag		receiver;
 		bool				bEnableSync;
+		bool				Preview;
+		
+		rdtk::NodeIdentifer lastSelected;
+		bool gui_floating = false;
+		void drawImGuiObject();
 	};
 	
 	
