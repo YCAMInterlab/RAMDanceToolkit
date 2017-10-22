@@ -75,6 +75,9 @@ void GuiManager::draw()
 
 	CameraManager::instance().setEnableInteractiveCamera(!ImGui::IsWindowHovered());
 	
+	// Prevent ActorManager::onMouseReleased in order to ImGui based scene get value from ActorManager::getLastSelectedNodeIdentifer()
+	ActorManager::instance().setEnableOnMouseRelease(!ImGui::GetIO().WantCaptureMouse);
+	
 	for (auto scn : sceneArr)
 	{
 		ImGui::PushID(scn->getName().c_str());

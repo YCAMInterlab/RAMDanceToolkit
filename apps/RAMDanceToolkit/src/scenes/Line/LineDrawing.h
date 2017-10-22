@@ -60,10 +60,10 @@ public:
 							  false, ImGuiWindowFlags_AlwaysAutoResize);
 			
 			ImGui::Checkbox(("Line " + ofToString(id)).c_str(), &active);
-			ImGui::Button("From");ImGui::SameLine();
-			ImGui::Button("Control0");ImGui::SameLine();
-			ImGui::Button("Control1");ImGui::SameLine();
-			ImGui::Button("To");
+			set_from = ImGui::Button("From");ImGui::SameLine();
+			set_control0 = ImGui::Button("Control0");ImGui::SameLine();
+			set_control1 = ImGui::Button("Control1");ImGui::SameLine();
+			set_to = ImGui::Button("To");
 			
 			ImGui::ColorEdit3("Color", &color[0]);
 			

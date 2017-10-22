@@ -306,3 +306,11 @@ void ActorManager::clearSelected()
 {
 	nodeSelector->identifer.clear();
 }
+
+void ActorManager::setEnableOnMouseRelease(bool v)
+{
+	if (v)
+		ofAddListener(ofEvents().mouseReleased, this, &ActorManager::onMouseReleased);
+	else
+		ofRemoveListener(ofEvents().mouseReleased, this, &ActorManager::onMouseReleased);
+}

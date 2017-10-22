@@ -113,6 +113,7 @@ namespace rdtk{
 			oscMan->addReceiverTag(&oscReceiver);
 			
 		}
+		void setEnableOnMouseRelease(bool v);
 		
 	private:
 		
