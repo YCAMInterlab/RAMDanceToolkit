@@ -73,7 +73,9 @@ void GuiManager::draw()
 	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.5,0.5,0.5,1.0));
 	gui.begin();
 
-	CameraManager::instance().setEnableInteractiveCamera(!ImGui::IsWindowHovered());
+	//CameraManager::instance().setEnableInteractiveCamera(!ImGui::IsWindowHovered());
+	// WantCaptureMouse is better?  https://github.com/jvcleave/ofxImGui/issues/26
+	CameraManager::instance().setEnableInteractiveCamera(!ImGui::GetIO().WantCaptureMouse);
 	
 	// Prevent ActorManager::onMouseReleased in order to ImGui based scene get value from ActorManager::getLastSelectedNodeIdentifer()
 	ActorManager::instance().setEnableOnMouseRelease(!ImGui::GetIO().WantCaptureMouse);
