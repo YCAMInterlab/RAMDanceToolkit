@@ -98,9 +98,9 @@ public:
 	{
 		ImGui::Checkbox("Show four point sphere", &showFourPointSphere);
 		ImGui::Checkbox("Show four point twist", &showFourPointTwist);
-		ImGui::DragFloat("Twist resolution", &twistResolution, 1, 2, 200);
-		ImGui::DragFloat("Twist extension width",  &twistExtensionWidth, 1, 1, 40);
-		ImGui::DragFloat("Twist extension height", &twistExtensionHeight, 1, 1, 8);
+		ImGui::DragFloat("Twist resolution", &twistResolution, 0.1f, 2, 200);
+		ImGui::DragFloat("Twist extension width",  &twistExtensionWidth, 0.01f, 1, 40);
+		ImGui::DragFloat("Twist extension height", &twistExtensionHeight, 0.01f, 1, 8);
 		
 		if (ImGui::Button("Pick Extents"))
 			selectFourPoints(rdtk::Actor::JOINT_LEFT_HAND,
