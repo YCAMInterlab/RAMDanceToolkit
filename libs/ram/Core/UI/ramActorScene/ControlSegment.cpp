@@ -229,7 +229,7 @@ void ControlSegment::drawImGui()
 		if (ImGui::SliderFloat2("Position", &position[0], -range, range)) saveCache();
 		
 		ofRectangle rct;
-		ImGui::BeginChild("ScrollingRegion", ImVec2(0,100), false, ImGuiWindowFlags_NoScrollWithMouse);
+		ImGui::BeginChild(getName().c_str(), ImVec2(0,100), false, ImGuiWindowFlags_NoScrollWithMouse);
 		{
 			rct.x = ImGui::GetWindowPos().x;
 			rct.y = ImGui::GetWindowPos().y;
