@@ -31,7 +31,9 @@ void SceneGui::drawGuiBase()
 	{
 		ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.5,0.5,0.5,1.0));
 		
-		if (ImGui::Checkbox("", &bEnabled)) setEnabled(bEnabled);
+		bool b_tmp = bEnabled;
+		if (ImGui::Checkbox("", &b_tmp))
+			setEnabled(b_tmp);
 		
 		ImGui::SameLine();
 		bool collapse = ImGui::CollapsingHeader(getName().c_str());
