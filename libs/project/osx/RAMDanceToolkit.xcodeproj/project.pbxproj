@@ -149,6 +149,30 @@
 		9248D5FB1A4D6A1200047AF5 /* ofxCvShortImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 9248D5971A4D6A1200047AF5 /* ofxCvShortImage.h */; };
 		9248D5FC1A4D6A1200047AF5 /* ofxOpenCv.h in Headers */ = {isa = PBXBuildFile; fileRef = 9248D5981A4D6A1200047AF5 /* ofxOpenCv.h */; };
 		92AD8C271A7252E000BB5434 /* ramCenteredActor.h in Headers */ = {isa = PBXBuildFile; fileRef = 92AD8C261A7252E000BB5434 /* ramCenteredActor.h */; };
+		9A1D757A1FA056E100EFCFBC /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D75541FA056E100EFCFBC /* imgui.cpp */; };
+		9A1D757B1FA056E100EFCFBC /* imgui.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A1D75551FA056E100EFCFBC /* imgui.h */; };
+		9A1D757C1FA056E100EFCFBC /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D75561FA056E100EFCFBC /* imgui_demo.cpp */; };
+		9A1D757D1FA056E100EFCFBC /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D75571FA056E100EFCFBC /* imgui_draw.cpp */; };
+		9A1D757E1FA056E100EFCFBC /* imgui_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A1D75581FA056E100EFCFBC /* imgui_internal.h */; };
+		9A1D757F1FA056E100EFCFBC /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D755A1FA056E100EFCFBC /* README.md */; };
+		9A1D75801FA056E100EFCFBC /* stb_rect_pack.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A1D755B1FA056E100EFCFBC /* stb_rect_pack.h */; };
+		9A1D75811FA056E100EFCFBC /* stb_textedit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A1D755C1FA056E100EFCFBC /* stb_textedit.h */; };
+		9A1D75821FA056E100EFCFBC /* stb_truetype.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A1D755D1FA056E100EFCFBC /* stb_truetype.h */; };
+		9A1D75841FA056E100EFCFBC /* BaseEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D75601FA056E100EFCFBC /* BaseEngine.cpp */; };
+		9A1D75851FA056E100EFCFBC /* BaseEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A1D75611FA056E100EFCFBC /* BaseEngine.h */; };
+		9A1D75861FA056E100EFCFBC /* BaseTheme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D75621FA056E100EFCFBC /* BaseTheme.cpp */; };
+		9A1D75871FA056E100EFCFBC /* BaseTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A1D75631FA056E100EFCFBC /* BaseTheme.h */; };
+		9A1D75881FA056E100EFCFBC /* EngineGLFW.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D75641FA056E100EFCFBC /* EngineGLFW.cpp */; };
+		9A1D75891FA056E100EFCFBC /* EngineGLFW.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A1D75651FA056E100EFCFBC /* EngineGLFW.h */; };
+		9A1D758A1FA056E100EFCFBC /* EngineOpenGLES.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D75661FA056E100EFCFBC /* EngineOpenGLES.cpp */; };
+		9A1D758B1FA056E100EFCFBC /* EngineOpenGLES.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A1D75671FA056E100EFCFBC /* EngineOpenGLES.h */; };
+		9A1D758C1FA056E100EFCFBC /* Gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D75681FA056E100EFCFBC /* Gui.cpp */; };
+		9A1D758D1FA056E100EFCFBC /* Gui.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A1D75691FA056E100EFCFBC /* Gui.h */; };
+		9A1D758E1FA056E100EFCFBC /* Helpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D756A1FA056E100EFCFBC /* Helpers.cpp */; };
+		9A1D758F1FA056E100EFCFBC /* Helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A1D756B1FA056E100EFCFBC /* Helpers.h */; };
+		9A1D75901FA056E100EFCFBC /* imconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A1D756C1FA056E100EFCFBC /* imconfig.h */; };
+		9A1D75911FA056E100EFCFBC /* ofxImGui.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A1D756D1FA056E100EFCFBC /* ofxImGui.h */; };
+		9A1D75921FA056E100EFCFBC /* ThemeTest.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A1D756E1FA056E100EFCFBC /* ThemeTest.h */; };
 		9A38F4CC16E9E81900FF8B66 /* btBulletCollisionCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A38F3DE16E9E81800FF8B66 /* btBulletCollisionCommon.h */; };
 		9A38F4CD16E9E81900FF8B66 /* btBulletDynamicsCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A38F3DF16E9E81800FF8B66 /* btBulletDynamicsCommon.h */; };
 		9A38F4CE16E9E81900FF8B66 /* Bullet-C-Api.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A38F3E016E9E81800FF8B66 /* Bullet-C-Api.h */; };
@@ -466,29 +490,6 @@
 		C6F853951EA0AA8B00BBDE36 /* ofxOscReceiver.h in Headers */ = {isa = PBXBuildFile; fileRef = C6F853731EA0AA8B00BBDE36 /* ofxOscReceiver.h */; };
 		C6F853961EA0AA8B00BBDE36 /* ofxOscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6F853741EA0AA8B00BBDE36 /* ofxOscSender.cpp */; };
 		C6F853971EA0AA8B00BBDE36 /* ofxOscSender.h in Headers */ = {isa = PBXBuildFile; fileRef = C6F853751EA0AA8B00BBDE36 /* ofxOscSender.h */; };
-		C6FE33DF1EB7492100E39BF0 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33B81EB7492100E39BF0 /* imgui.cpp */; };
-		C6FE33E01EB7492100E39BF0 /* imgui.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33B91EB7492100E39BF0 /* imgui.h */; };
-		C6FE33E11EB7492100E39BF0 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33BA1EB7492100E39BF0 /* imgui_demo.cpp */; };
-		C6FE33E21EB7492100E39BF0 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33BB1EB7492100E39BF0 /* imgui_draw.cpp */; };
-		C6FE33E31EB7492100E39BF0 /* imgui_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33BC1EB7492100E39BF0 /* imgui_internal.h */; };
-		C6FE33E51EB7492100E39BF0 /* stb_rect_pack.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33BF1EB7492100E39BF0 /* stb_rect_pack.h */; };
-		C6FE33E61EB7492100E39BF0 /* stb_textedit.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33C01EB7492100E39BF0 /* stb_textedit.h */; };
-		C6FE33E71EB7492100E39BF0 /* stb_truetype.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33C11EB7492100E39BF0 /* stb_truetype.h */; };
-		C6FE33E91EB7492100E39BF0 /* BaseEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33C41EB7492100E39BF0 /* BaseEngine.cpp */; };
-		C6FE33EA1EB7492100E39BF0 /* BaseEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33C51EB7492100E39BF0 /* BaseEngine.h */; };
-		C6FE33EB1EB7492100E39BF0 /* BaseTheme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33C61EB7492100E39BF0 /* BaseTheme.cpp */; };
-		C6FE33EC1EB7492100E39BF0 /* BaseTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33C71EB7492100E39BF0 /* BaseTheme.h */; };
-		C6FE33ED1EB7492100E39BF0 /* EngineGLFW.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33C81EB7492100E39BF0 /* EngineGLFW.cpp */; };
-		C6FE33EE1EB7492100E39BF0 /* EngineGLFW.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33C91EB7492100E39BF0 /* EngineGLFW.h */; };
-		C6FE33EF1EB7492100E39BF0 /* EngineOpenGLES.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33CA1EB7492100E39BF0 /* EngineOpenGLES.cpp */; };
-		C6FE33F01EB7492100E39BF0 /* EngineOpenGLES.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33CB1EB7492100E39BF0 /* EngineOpenGLES.h */; };
-		C6FE33F11EB7492100E39BF0 /* Gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33CC1EB7492100E39BF0 /* Gui.cpp */; };
-		C6FE33F21EB7492100E39BF0 /* Gui.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33CD1EB7492100E39BF0 /* Gui.h */; };
-		C6FE33F31EB7492100E39BF0 /* Helpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33CE1EB7492100E39BF0 /* Helpers.cpp */; };
-		C6FE33F41EB7492100E39BF0 /* Helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33CF1EB7492100E39BF0 /* Helpers.h */; };
-		C6FE33F51EB7492100E39BF0 /* imconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33D01EB7492100E39BF0 /* imconfig.h */; };
-		C6FE33F61EB7492100E39BF0 /* ofxImGui.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33D11EB7492100E39BF0 /* ofxImGui.h */; };
-		C6FE33F71EB7492100E39BF0 /* ThemeTest.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33D21EB7492100E39BF0 /* ThemeTest.h */; };
 		C6FE33FD1EB7495E00E39BF0 /* ramImGuiManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6FE33FB1EB7495E00E39BF0 /* ramImGuiManager.cpp */; };
 		C6FE33FE1EB7495E00E39BF0 /* ramImGuiManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C6FE33FC1EB7495E00E39BF0 /* ramImGuiManager.h */; };
 		D20F14F11A86035B0053B6E9 /* ETF.h in Headers */ = {isa = PBXBuildFile; fileRef = D20F14EA1A86035B0053B6E9 /* ETF.h */; };
@@ -745,6 +746,31 @@
 		9248D5971A4D6A1200047AF5 /* ofxCvShortImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCvShortImage.h; sourceTree = "<group>"; };
 		9248D5981A4D6A1200047AF5 /* ofxOpenCv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOpenCv.h; sourceTree = "<group>"; };
 		92AD8C261A7252E000BB5434 /* ramCenteredActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramCenteredActor.h; sourceTree = "<group>"; };
+		9A1D75541FA056E100EFCFBC /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
+		9A1D75551FA056E100EFCFBC /* imgui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui.h; sourceTree = "<group>"; };
+		9A1D75561FA056E100EFCFBC /* imgui_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_demo.cpp; sourceTree = "<group>"; };
+		9A1D75571FA056E100EFCFBC /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_draw.cpp; sourceTree = "<group>"; };
+		9A1D75581FA056E100EFCFBC /* imgui_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_internal.h; sourceTree = "<group>"; };
+		9A1D75591FA056E100EFCFBC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		9A1D755A1FA056E100EFCFBC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		9A1D755B1FA056E100EFCFBC /* stb_rect_pack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_rect_pack.h; sourceTree = "<group>"; };
+		9A1D755C1FA056E100EFCFBC /* stb_textedit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_textedit.h; sourceTree = "<group>"; };
+		9A1D755D1FA056E100EFCFBC /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
+		9A1D75601FA056E100EFCFBC /* BaseEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseEngine.cpp; sourceTree = "<group>"; };
+		9A1D75611FA056E100EFCFBC /* BaseEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEngine.h; sourceTree = "<group>"; };
+		9A1D75621FA056E100EFCFBC /* BaseTheme.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseTheme.cpp; sourceTree = "<group>"; };
+		9A1D75631FA056E100EFCFBC /* BaseTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTheme.h; sourceTree = "<group>"; };
+		9A1D75641FA056E100EFCFBC /* EngineGLFW.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EngineGLFW.cpp; sourceTree = "<group>"; };
+		9A1D75651FA056E100EFCFBC /* EngineGLFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EngineGLFW.h; sourceTree = "<group>"; };
+		9A1D75661FA056E100EFCFBC /* EngineOpenGLES.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EngineOpenGLES.cpp; sourceTree = "<group>"; };
+		9A1D75671FA056E100EFCFBC /* EngineOpenGLES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EngineOpenGLES.h; sourceTree = "<group>"; };
+		9A1D75681FA056E100EFCFBC /* Gui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Gui.cpp; sourceTree = "<group>"; };
+		9A1D75691FA056E100EFCFBC /* Gui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gui.h; sourceTree = "<group>"; };
+		9A1D756A1FA056E100EFCFBC /* Helpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Helpers.cpp; sourceTree = "<group>"; };
+		9A1D756B1FA056E100EFCFBC /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
+		9A1D756C1FA056E100EFCFBC /* imconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
+		9A1D756D1FA056E100EFCFBC /* ofxImGui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxImGui.h; sourceTree = "<group>"; };
+		9A1D756E1FA056E100EFCFBC /* ThemeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeTest.h; sourceTree = "<group>"; };
 		9A38F3DE16E9E81800FF8B66 /* btBulletCollisionCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletCollisionCommon.h; sourceTree = "<group>"; };
 		9A38F3DF16E9E81800FF8B66 /* btBulletDynamicsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletDynamicsCommon.h; sourceTree = "<group>"; };
 		9A38F3E016E9E81800FF8B66 /* Bullet-C-Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bullet-C-Api.h"; sourceTree = "<group>"; };
@@ -1065,29 +1091,6 @@
 		C6F853731EA0AA8B00BBDE36 /* ofxOscReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscReceiver.h; sourceTree = "<group>"; };
 		C6F853741EA0AA8B00BBDE36 /* ofxOscSender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOscSender.cpp; sourceTree = "<group>"; };
 		C6F853751EA0AA8B00BBDE36 /* ofxOscSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscSender.h; sourceTree = "<group>"; };
-		C6FE33B81EB7492100E39BF0 /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
-		C6FE33B91EB7492100E39BF0 /* imgui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui.h; sourceTree = "<group>"; };
-		C6FE33BA1EB7492100E39BF0 /* imgui_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_demo.cpp; sourceTree = "<group>"; };
-		C6FE33BB1EB7492100E39BF0 /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_draw.cpp; sourceTree = "<group>"; };
-		C6FE33BC1EB7492100E39BF0 /* imgui_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_internal.h; sourceTree = "<group>"; };
-		C6FE33BF1EB7492100E39BF0 /* stb_rect_pack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_rect_pack.h; sourceTree = "<group>"; };
-		C6FE33C01EB7492100E39BF0 /* stb_textedit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_textedit.h; sourceTree = "<group>"; };
-		C6FE33C11EB7492100E39BF0 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
-		C6FE33C41EB7492100E39BF0 /* BaseEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseEngine.cpp; sourceTree = "<group>"; };
-		C6FE33C51EB7492100E39BF0 /* BaseEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEngine.h; sourceTree = "<group>"; };
-		C6FE33C61EB7492100E39BF0 /* BaseTheme.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseTheme.cpp; sourceTree = "<group>"; };
-		C6FE33C71EB7492100E39BF0 /* BaseTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTheme.h; sourceTree = "<group>"; };
-		C6FE33C81EB7492100E39BF0 /* EngineGLFW.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EngineGLFW.cpp; sourceTree = "<group>"; };
-		C6FE33C91EB7492100E39BF0 /* EngineGLFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EngineGLFW.h; sourceTree = "<group>"; };
-		C6FE33CA1EB7492100E39BF0 /* EngineOpenGLES.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EngineOpenGLES.cpp; sourceTree = "<group>"; };
-		C6FE33CB1EB7492100E39BF0 /* EngineOpenGLES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EngineOpenGLES.h; sourceTree = "<group>"; };
-		C6FE33CC1EB7492100E39BF0 /* Gui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Gui.cpp; sourceTree = "<group>"; };
-		C6FE33CD1EB7492100E39BF0 /* Gui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gui.h; sourceTree = "<group>"; };
-		C6FE33CE1EB7492100E39BF0 /* Helpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Helpers.cpp; sourceTree = "<group>"; };
-		C6FE33CF1EB7492100E39BF0 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
-		C6FE33D01EB7492100E39BF0 /* imconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
-		C6FE33D11EB7492100E39BF0 /* ofxImGui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxImGui.h; sourceTree = "<group>"; };
-		C6FE33D21EB7492100E39BF0 /* ThemeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeTest.h; sourceTree = "<group>"; };
 		C6FE33FB1EB7495E00E39BF0 /* ramImGuiManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramImGuiManager.cpp; sourceTree = "<group>"; };
 		C6FE33FC1EB7495E00E39BF0 /* ramImGuiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramImGuiManager.h; sourceTree = "<group>"; };
 		D20F14EA1A86035B0053B6E9 /* ETF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETF.h; sourceTree = "<group>"; };
@@ -1353,7 +1356,7 @@
 		607D7ACC16661B860063800A /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				C6FE338A1EB7492100E39BF0 /* ofxImGui */,
+				9A1D752F1FA056E100EFCFBC /* ofxImGui */,
 				D24DD66B1A84C2C800CECD2B /* ofxUITabbedCanvas */,
 				9248D51E1A4D6A1200047AF5 /* ofxOpenCv */,
 				9A38F3B916E9E81800FF8B66 /* ofxBt */,
@@ -1673,6 +1676,71 @@
 				9248D5961A4D6A1200047AF5 /* ofxCvShortImage.cpp */,
 				9248D5971A4D6A1200047AF5 /* ofxCvShortImage.h */,
 				9248D5981A4D6A1200047AF5 /* ofxOpenCv.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		9A1D752F1FA056E100EFCFBC /* ofxImGui */ = {
+			isa = PBXGroup;
+			children = (
+				9A1D75511FA056E100EFCFBC /* libs */,
+				9A1D755F1FA056E100EFCFBC /* src */,
+			);
+			name = ofxImGui;
+			path = ../../../addons/ofxImGui;
+			sourceTree = "<group>";
+		};
+		9A1D75511FA056E100EFCFBC /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				9A1D75521FA056E100EFCFBC /* imgui */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		9A1D75521FA056E100EFCFBC /* imgui */ = {
+			isa = PBXGroup;
+			children = (
+				9A1D75531FA056E100EFCFBC /* src */,
+			);
+			path = imgui;
+			sourceTree = "<group>";
+		};
+		9A1D75531FA056E100EFCFBC /* src */ = {
+			isa = PBXGroup;
+			children = (
+				9A1D75541FA056E100EFCFBC /* imgui.cpp */,
+				9A1D75551FA056E100EFCFBC /* imgui.h */,
+				9A1D75561FA056E100EFCFBC /* imgui_demo.cpp */,
+				9A1D75571FA056E100EFCFBC /* imgui_draw.cpp */,
+				9A1D75581FA056E100EFCFBC /* imgui_internal.h */,
+				9A1D75591FA056E100EFCFBC /* LICENSE */,
+				9A1D755A1FA056E100EFCFBC /* README.md */,
+				9A1D755B1FA056E100EFCFBC /* stb_rect_pack.h */,
+				9A1D755C1FA056E100EFCFBC /* stb_textedit.h */,
+				9A1D755D1FA056E100EFCFBC /* stb_truetype.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		9A1D755F1FA056E100EFCFBC /* src */ = {
+			isa = PBXGroup;
+			children = (
+				9A1D75601FA056E100EFCFBC /* BaseEngine.cpp */,
+				9A1D75611FA056E100EFCFBC /* BaseEngine.h */,
+				9A1D75621FA056E100EFCFBC /* BaseTheme.cpp */,
+				9A1D75631FA056E100EFCFBC /* BaseTheme.h */,
+				9A1D75641FA056E100EFCFBC /* EngineGLFW.cpp */,
+				9A1D75651FA056E100EFCFBC /* EngineGLFW.h */,
+				9A1D75661FA056E100EFCFBC /* EngineOpenGLES.cpp */,
+				9A1D75671FA056E100EFCFBC /* EngineOpenGLES.h */,
+				9A1D75681FA056E100EFCFBC /* Gui.cpp */,
+				9A1D75691FA056E100EFCFBC /* Gui.h */,
+				9A1D756A1FA056E100EFCFBC /* Helpers.cpp */,
+				9A1D756B1FA056E100EFCFBC /* Helpers.h */,
+				9A1D756C1FA056E100EFCFBC /* imconfig.h */,
+				9A1D756D1FA056E100EFCFBC /* ofxImGui.h */,
+				9A1D756E1FA056E100EFCFBC /* ThemeTest.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -2355,69 +2423,6 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		C6FE338A1EB7492100E39BF0 /* ofxImGui */ = {
-			isa = PBXGroup;
-			children = (
-				C6FE33B51EB7492100E39BF0 /* libs */,
-				C6FE33C31EB7492100E39BF0 /* src */,
-			);
-			name = ofxImGui;
-			path = ../../../../addons/ofxImGui;
-			sourceTree = "<group>";
-		};
-		C6FE33B51EB7492100E39BF0 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				C6FE33B61EB7492100E39BF0 /* imgui */,
-			);
-			path = libs;
-			sourceTree = "<group>";
-		};
-		C6FE33B61EB7492100E39BF0 /* imgui */ = {
-			isa = PBXGroup;
-			children = (
-				C6FE33B71EB7492100E39BF0 /* src */,
-			);
-			path = imgui;
-			sourceTree = "<group>";
-		};
-		C6FE33B71EB7492100E39BF0 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				C6FE33B81EB7492100E39BF0 /* imgui.cpp */,
-				C6FE33B91EB7492100E39BF0 /* imgui.h */,
-				C6FE33BA1EB7492100E39BF0 /* imgui_demo.cpp */,
-				C6FE33BB1EB7492100E39BF0 /* imgui_draw.cpp */,
-				C6FE33BC1EB7492100E39BF0 /* imgui_internal.h */,
-				C6FE33BF1EB7492100E39BF0 /* stb_rect_pack.h */,
-				C6FE33C01EB7492100E39BF0 /* stb_textedit.h */,
-				C6FE33C11EB7492100E39BF0 /* stb_truetype.h */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		C6FE33C31EB7492100E39BF0 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				C6FE33C41EB7492100E39BF0 /* BaseEngine.cpp */,
-				C6FE33C51EB7492100E39BF0 /* BaseEngine.h */,
-				C6FE33C61EB7492100E39BF0 /* BaseTheme.cpp */,
-				C6FE33C71EB7492100E39BF0 /* BaseTheme.h */,
-				C6FE33C81EB7492100E39BF0 /* EngineGLFW.cpp */,
-				C6FE33C91EB7492100E39BF0 /* EngineGLFW.h */,
-				C6FE33CA1EB7492100E39BF0 /* EngineOpenGLES.cpp */,
-				C6FE33CB1EB7492100E39BF0 /* EngineOpenGLES.h */,
-				C6FE33CC1EB7492100E39BF0 /* Gui.cpp */,
-				C6FE33CD1EB7492100E39BF0 /* Gui.h */,
-				C6FE33CE1EB7492100E39BF0 /* Helpers.cpp */,
-				C6FE33CF1EB7492100E39BF0 /* Helpers.h */,
-				C6FE33D01EB7492100E39BF0 /* imconfig.h */,
-				C6FE33D11EB7492100E39BF0 /* ofxImGui.h */,
-				C6FE33D21EB7492100E39BF0 /* ThemeTest.h */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
 		D20F14E71A86035B0053B6E9 /* CLD */ = {
 			isa = PBXGroup;
 			children = (
@@ -2592,7 +2597,7 @@
 				9AEA65B3191CB63D001FAA18 /* ramUnit.h in Headers */,
 				9248D5E41A4D6A1200047AF5 /* objdetect.hpp in Headers */,
 				9AEA65AC191CB63D001FAA18 /* ramActorManager.h in Headers */,
-				C6FE33F21EB7492100E39BF0 /* Gui.h in Headers */,
+				9A1D75911FA056E100EFCFBC /* ofxImGui.h in Headers */,
 				9AEA65C3191CB63D001FAA18 /* ramControllable.h in Headers */,
 				D21D08141A4BD9A900CC3598 /* ofxUIDragableLabelButton.h in Headers */,
 				D21D081A1A4BD9A900CC3598 /* ofxUIFPS.h in Headers */,
@@ -2602,6 +2607,7 @@
 				9248D5A11A4D6A1200047AF5 /* cxmisc.h in Headers */,
 				D21D08321A4BD9A900CC3598 /* ofxUIMultiImageButton.h in Headers */,
 				D21D08531A4BD9A900CC3598 /* ofxUIToggle.h in Headers */,
+				9A1D757B1FA056E100EFCFBC /* imgui.h in Headers */,
 				9AEA65AE191CB63D001FAA18 /* ramBaseScene.h in Headers */,
 				9AEA65B1191CB63D001FAA18 /* ramGlobal.h in Headers */,
 				9248D5D51A4D6A1200047AF5 /* devmem2d.hpp in Headers */,
@@ -2625,7 +2631,6 @@
 				9248D5AF1A4D6A1200047AF5 /* wimage.hpp in Headers */,
 				277606F216E4EB2700D6B31D /* ramExpansion.h in Headers */,
 				277606F316E4EB2700D6B31D /* ramGhost.h in Headers */,
-				C6FE33F51EB7492100E39BF0 /* imconfig.h in Headers */,
 				277606F416E4EB2700D6B31D /* ramLowPassFilter.h in Headers */,
 				9248D5BE1A4D6A1200047AF5 /* ground_truth.h in Headers */,
 				277606F516E4EB2700D6B31D /* ramNodeTransform.h in Headers */,
@@ -2633,8 +2638,8 @@
 				277606F616E4EB2700D6B31D /* ramPendulum.h in Headers */,
 				277606F816E4EB2700D6B31D /* ramSession.h in Headers */,
 				9248D5A51A4D6A1200047AF5 /* contrib.hpp in Headers */,
-				C6FE33F61EB7492100E39BF0 /* ofxImGui.h in Headers */,
 				277606F916E4EB2700D6B31D /* ramStamp.h in Headers */,
+				9A1D75921FA056E100EFCFBC /* ThemeTest.h in Headers */,
 				277606FA16E4EB2700D6B31D /* ramTimeFilter.h in Headers */,
 				277606FB16E4EB2700D6B31D /* ramUpsideDown.h in Headers */,
 				277606FD16E4EB2700D6B31D /* ramGraphics.h in Headers */,
@@ -2642,7 +2647,6 @@
 				9248D5AE1A4D6A1200047AF5 /* version.hpp in Headers */,
 				2776070016E4EB2700D6B31D /* ramNodeLine.h in Headers */,
 				2776070216E4EB2700D6B31D /* ramPrimitive.h in Headers */,
-				C6FE33EE1EB7492100E39BF0 /* EngineGLFW.h in Headers */,
 				2776070416E4EB2700D6B31D /* ramSimpleShadow.h in Headers */,
 				2776070616E4EB2700D6B31D /* ramSoftBodyPrimitive.h in Headers */,
 				2776070816E4EB2700D6B31D /* ramPhysics.h in Headers */,
@@ -2665,6 +2669,7 @@
 				9248D5E81A4D6A1200047AF5 /* background_segm.hpp in Headers */,
 				9248D5CD1A4D6A1200047AF5 /* object_factory.h in Headers */,
 				9A70C17B16E9CE6F00A5B755 /* Flow.h in Headers */,
+				9A1D75891FA056E100EFCFBC /* EngineGLFW.h in Headers */,
 				9A70C17C16E9CE6F00A5B755 /* Helpers.h in Headers */,
 				9248D5A31A4D6A1200047AF5 /* ml.h in Headers */,
 				9A70C17D16E9CE6F00A5B755 /* RunningBackground.h in Headers */,
@@ -2672,7 +2677,6 @@
 				9A70C17F16E9CE6F00A5B755 /* Utilities.h in Headers */,
 				9A70C18016E9CE6F00A5B755 /* Wrappers.h in Headers */,
 				9A70C18A16E9CE6F00A5B755 /* ofxCv.h in Headers */,
-				C6FE33F01EB7492100E39BF0 /* EngineOpenGLES.h in Headers */,
 				D21D08261A4BD9A900CC3598 /* ofxUIImageToggle.h in Headers */,
 				9A70C19516E9CE6F00A5B755 /* ofxInteractivePrimitives.h in Headers */,
 				9A70C19616E9CE6F00A5B755 /* ofxIPBaseElement.h in Headers */,
@@ -2724,6 +2728,7 @@
 				C6F853891EA0AA8B00BBDE36 /* OscReceivedElements.h in Headers */,
 				9A38F4E616E9E81900FF8B66 /* btConvex2dConvex2dAlgorithm.h in Headers */,
 				9A38F4E716E9E81900FF8B66 /* btConvexConcaveCollisionAlgorithm.h in Headers */,
+				9A1D75871FA056E100EFCFBC /* BaseTheme.h in Headers */,
 				9248D5EC1A4D6A1200047AF5 /* ofxCvBlob.h in Headers */,
 				9248D5DA1A4D6A1200047AF5 /* highgui.hpp in Headers */,
 				9A38F4E816E9E81900FF8B66 /* btConvexConvexAlgorithm.h in Headers */,
@@ -2735,7 +2740,6 @@
 				9248D5C11A4D6A1200047AF5 /* hierarchical_clustering_index.h in Headers */,
 				D21D085C1A4BD9A900CC3598 /* ofxUIWidget.h in Headers */,
 				9A38F4ED16E9E81900FF8B66 /* btInternalEdgeUtility.h in Headers */,
-				C6FE33F71EB7492100E39BF0 /* ThemeTest.h in Headers */,
 				9AEA65AD191CB63D001FAA18 /* ramBaseApp.h in Headers */,
 				9248D5A61A4D6A1200047AF5 /* retina.hpp in Headers */,
 				9A38F4EE16E9E81900FF8B66 /* btManifoldResult.h in Headers */,
@@ -2747,6 +2751,7 @@
 				9A38F4F216E9E81900FF8B66 /* btSphereTriangleCollisionAlgorithm.h in Headers */,
 				9A38F4F316E9E81900FF8B66 /* btUnionFind.h in Headers */,
 				9A38F4F416E9E81900FF8B66 /* SphereTriangleDetector.h in Headers */,
+				9A1D75801FA056E100EFCFBC /* stb_rect_pack.h in Headers */,
 				D21D083F1A4BD9A900CC3598 /* ofxUIRotarySlider.h in Headers */,
 				9248D5A71A4D6A1200047AF5 /* core.hpp in Headers */,
 				9A38F4F516E9E81900FF8B66 /* btBox2dShape.h in Headers */,
@@ -2755,6 +2760,7 @@
 				9A38F4F716E9E81900FF8B66 /* btBvhTriangleMeshShape.h in Headers */,
 				D21D080D1A4BD9A900CC3598 /* ofxUIButton.h in Headers */,
 				9A38F4F816E9E81900FF8B66 /* btCapsuleShape.h in Headers */,
+				9A1D75851FA056E100EFCFBC /* BaseEngine.h in Headers */,
 				9A38F4F916E9E81900FF8B66 /* btCollisionMargin.h in Headers */,
 				9A38F4FA16E9E81900FF8B66 /* btCollisionShape.h in Headers */,
 				9248D5E31A4D6A1200047AF5 /* ml.hpp in Headers */,
@@ -2765,6 +2771,7 @@
 				9A38F4FB16E9E81900FF8B66 /* btCompoundShape.h in Headers */,
 				9A38F4FC16E9E81900FF8B66 /* btConcaveShape.h in Headers */,
 				9A38F4FD16E9E81900FF8B66 /* btConeShape.h in Headers */,
+				9A1D75821FA056E100EFCFBC /* stb_truetype.h in Headers */,
 				9A38F4FE16E9E81900FF8B66 /* btConvex2dShape.h in Headers */,
 				9A38F4FF16E9E81900FF8B66 /* btConvexHullShape.h in Headers */,
 				9A38F50016E9E81900FF8B66 /* btConvexInternalShape.h in Headers */,
@@ -2824,7 +2831,6 @@
 				9248D59F1A4D6A1200047AF5 /* cxcore.hpp in Headers */,
 				9A38F51B16E9E81900FF8B66 /* btTriangleShape.h in Headers */,
 				D21D085A1A4BD9A900CC3598 /* ofxUIWaveform.h in Headers */,
-				C6FE33E31EB7492100E39BF0 /* imgui_internal.h in Headers */,
 				9A38F51C16E9E81900FF8B66 /* btUniformScalingShape.h in Headers */,
 				D21D080B1A4BD9A900CC3598 /* ofxUIBiLabelSlider.h in Headers */,
 				9A38F51D16E9E81900FF8B66 /* btBoxCollision.h in Headers */,
@@ -2841,16 +2847,15 @@
 				9A38F52316E9E81900FF8B66 /* btGImpactCollisionAlgorithm.h in Headers */,
 				9A38F52416E9E81900FF8B66 /* btGImpactMassUtil.h in Headers */,
 				9A38F52516E9E81900FF8B66 /* btGImpactQuantizedBvh.h in Headers */,
-				C6FE33EA1EB7492100E39BF0 /* BaseEngine.h in Headers */,
 				9A38F52616E9E81900FF8B66 /* btGImpactShape.h in Headers */,
 				9A38F52716E9E81900FF8B66 /* btQuantization.h in Headers */,
 				9A38F52816E9E81900FF8B66 /* btTriangleShapeEx.h in Headers */,
+				9A1D75811FA056E100EFCFBC /* stb_textedit.h in Headers */,
 				92AD8C271A7252E000BB5434 /* ramCenteredActor.h in Headers */,
 				9A38F52916E9E81900FF8B66 /* gim_array.h in Headers */,
 				9A38F52A16E9E81900FF8B66 /* gim_basic_geometry_operations.h in Headers */,
 				9A38F52B16E9E81900FF8B66 /* gim_bitset.h in Headers */,
 				9A38F52C16E9E81900FF8B66 /* gim_box_collision.h in Headers */,
-				C6FE33F41EB7492100E39BF0 /* Helpers.h in Headers */,
 				9A38F52D16E9E81900FF8B66 /* gim_box_set.h in Headers */,
 				9AEA65C8191CB63D001FAA18 /* ramPresetTab.h in Headers */,
 				9248D59C1A4D6A1200047AF5 /* cvaux.hpp in Headers */,
@@ -2888,20 +2893,22 @@
 				D21D081E1A4BD9A900CC3598 /* ofxUIImage.h in Headers */,
 				D21D08071A4BD9A900CC3598 /* ofxUI2DPad.h in Headers */,
 				9A38F53C16E9E81900FF8B66 /* btGjkConvexCast.h in Headers */,
-				C6FE33E61EB7492100E39BF0 /* stb_textedit.h in Headers */,
 				9248D5C01A4D6A1200047AF5 /* heap.h in Headers */,
+				9A1D75901FA056E100EFCFBC /* imconfig.h in Headers */,
 				9AEA65CC191CB63D001FAA18 /* ramNodeArrayBuffer.h in Headers */,
 				9248D5AA1A4D6A1200047AF5 /* internal.hpp in Headers */,
 				9A38F53D16E9E81900FF8B66 /* btGjkEpa2.h in Headers */,
 				9A38F53E16E9E81900FF8B66 /* btGjkEpaPenetrationDepthSolver.h in Headers */,
 				9248D5AB1A4D6A1200047AF5 /* mat.hpp in Headers */,
 				9A38F53F16E9E81900FF8B66 /* btGjkPairDetector.h in Headers */,
+				9A1D757E1FA056E100EFCFBC /* imgui_internal.h in Headers */,
 				9A38F54016E9E81900FF8B66 /* btManifoldPoint.h in Headers */,
 				9A38F54116E9E81900FF8B66 /* btMinkowskiPenetrationDepthSolver.h in Headers */,
 				D21D08471A4BD9A900CC3598 /* ofxUISpacer.h in Headers */,
 				9248D5E21A4D6A1200047AF5 /* streams.hpp in Headers */,
 				9248D5EA1A4D6A1200047AF5 /* video.hpp in Headers */,
 				9A38F54216E9E81900FF8B66 /* btPersistentManifold.h in Headers */,
+				9A1D758F1FA056E100EFCFBC /* Helpers.h in Headers */,
 				9A38F54316E9E81900FF8B66 /* btPointCollector.h in Headers */,
 				D21D081C1A4BD9A900CC3598 /* ofxUIFPSSlider.h in Headers */,
 				9A38F54416E9E81900FF8B66 /* btRaycastCallback.h in Headers */,
@@ -2947,7 +2954,6 @@
 				D21D08431A4BD9A900CC3598 /* ofxUISlider.h in Headers */,
 				9248D5BF1A4D6A1200047AF5 /* hdf5.h in Headers */,
 				9A38F55B16E9E81900FF8B66 /* btUniversalConstraint.h in Headers */,
-				C6FE33E01EB7492100E39BF0 /* imgui.h in Headers */,
 				9AEA65AB191CB63D001FAA18 /* ramActor.h in Headers */,
 				9A38F55C16E9E81900FF8B66 /* btActionInterface.h in Headers */,
 				9A38F55D16E9E81900FF8B66 /* btDiscreteDynamicsWorld.h in Headers */,
@@ -2969,6 +2975,7 @@
 				9A38F56A16E9E81900FF8B66 /* btSoftRigidDynamicsWorld.h in Headers */,
 				9A38F56B16E9E81900FF8B66 /* btSoftSoftCollisionAlgorithm.h in Headers */,
 				9A38F56C16E9E81900FF8B66 /* btSparseSDF.h in Headers */,
+				9A1D758D1FA056E100EFCFBC /* Gui.h in Headers */,
 				9248D5F31A4D6A1200047AF5 /* ofxCvFloatImage.h in Headers */,
 				9248D5A91A4D6A1200047AF5 /* eigen.hpp in Headers */,
 				9A38F56D16E9E81900FF8B66 /* btAabbUtil2.h in Headers */,
@@ -2993,10 +3000,8 @@
 				9A38F57A16E9E81900FF8B66 /* btPoolAllocator.h in Headers */,
 				C6F853771EA0AA8B00BBDE36 /* IpEndpointName.h in Headers */,
 				9AEA65C0191CB63D001FAA18 /* PlaybackSegment.h in Headers */,
-				C6FE33EC1EB7492100E39BF0 /* BaseTheme.h in Headers */,
 				9A38F57B16E9E81900FF8B66 /* btQuadWord.h in Headers */,
 				D21D08511A4BD9A900CC3598 /* ofxUITextInput.h in Headers */,
-				C6FE33E71EB7492100E39BF0 /* stb_truetype.h in Headers */,
 				9A38F57C16E9E81900FF8B66 /* btQuaternion.h in Headers */,
 				D20F14F21A86035B0053B6E9 /* fdog.h in Headers */,
 				9248D5CE1A4D6A1200047AF5 /* params.h in Headers */,
@@ -3011,6 +3016,7 @@
 				9A38F58216E9E81900FF8B66 /* btTransform.h in Headers */,
 				9A38F58316E9E81900FF8B66 /* btTransformUtil.h in Headers */,
 				9A38F58416E9E81900FF8B66 /* btVector3.h in Headers */,
+				9A1D758B1FA056E100EFCFBC /* EngineOpenGLES.h in Headers */,
 				9A38F59216E9E81900FF8B66 /* ofxBt.h in Headers */,
 				9A38F59416E9E81900FF8B66 /* ofxBtCollisionObject.h in Headers */,
 				9A38F59616E9E81900FF8B66 /* ofxBtHelper.h in Headers */,
@@ -3018,7 +3024,6 @@
 				C6F853811EA0AA8B00BBDE36 /* OscException.h in Headers */,
 				9248D5B41A4D6A1200047AF5 /* autotuned_index.h in Headers */,
 				9A38F59816E9E81900FF8B66 /* ofxBtJoint.h in Headers */,
-				C6FE33E51EB7492100E39BF0 /* stb_rect_pack.h in Headers */,
 				D20F14F41A86035B0053B6E9 /* myvec.h in Headers */,
 				9A38F59916E9E81900FF8B66 /* ofxBtRender.h in Headers */,
 				9A38F59B16E9E81900FF8B66 /* ofxBtRigidBody.h in Headers */,
@@ -3081,12 +3086,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D21D084C1A4BD9A900CC3598 /* ofxUITabBar.cpp in Sources */,
-				C6FE33E21EB7492100E39BF0 /* imgui_draw.cpp in Sources */,
 				C6F8538E1EA0AA8B00BBDE36 /* ofxOscBundle.cpp in Sources */,
-				C6FE33F31EB7492100E39BF0 /* Helpers.cpp in Sources */,
 				D21D08591A4BD9A900CC3598 /* ofxUIWaveform.cpp in Sources */,
 				9AEA65B6191CB63D001FAA18 /* ramBaseApp.cpp in Sources */,
-				C6FE33ED1EB7492100E39BF0 /* EngineGLFW.cpp in Sources */,
+				9A1D757A1FA056E100EFCFBC /* imgui.cpp in Sources */,
 				D21D08211A4BD9A900CC3598 /* ofxUIImageSampler.cpp in Sources */,
 				9AEA65B7191CB63D001FAA18 /* ramBaseScene.cpp in Sources */,
 				9AEA65B5191CB63D001FAA18 /* ramActorManager.cpp in Sources */,
@@ -3111,13 +3114,14 @@
 				D21D08291A4BD9A900CC3598 /* ofxUILabelButton.cpp in Sources */,
 				D21D08231A4BD9A900CC3598 /* ofxUIImageSlider.cpp in Sources */,
 				600EFB4616C8F59700A5B331 /* tinyxmlparser.cpp in Sources */,
-				C6FE33EF1EB7492100E39BF0 /* EngineOpenGLES.cpp in Sources */,
 				C6F853831EA0AA8B00BBDE36 /* OscOutboundPacketStream.cpp in Sources */,
 				9AEA65C1191CB63D001FAA18 /* ramActorsScene.cpp in Sources */,
 				9AEA65C4191CB63D001FAA18 /* ramControlPanel.cpp in Sources */,
 				600EFB4716C8F59700A5B331 /* ofxXmlSettings.cpp in Sources */,
 				277606F016E4EB2700D6B31D /* ramBaseFilter.cpp in Sources */,
 				9248D5F41A4D6A1200047AF5 /* ofxCvGrayscaleImage.cpp in Sources */,
+				9A1D757C1FA056E100EFCFBC /* imgui_demo.cpp in Sources */,
+				9A1D75861FA056E100EFCFBC /* BaseTheme.cpp in Sources */,
 				D21D080A1A4BD9A900CC3598 /* ofxUIBiLabelSlider.cpp in Sources */,
 				D21D08421A4BD9A900CC3598 /* ofxUISlider.cpp in Sources */,
 				9AEA65BF191CB63D001FAA18 /* PlaybackSegment.cpp in Sources */,
@@ -3134,17 +3138,17 @@
 				9AEA65BD191CB63D001FAA18 /* ControlSegment.cpp in Sources */,
 				D21D08251A4BD9A900CC3598 /* ofxUIImageToggle.cpp in Sources */,
 				2776070516E4EB2700D6B31D /* ramSoftBodyPrimitive.cpp in Sources */,
-				C6FE33EB1EB7492100E39BF0 /* BaseTheme.cpp in Sources */,
 				D21D08191A4BD9A900CC3598 /* ofxUIFPS.cpp in Sources */,
 				D21D082F1A4BD9A900CC3598 /* ofxUIMovingGraph.cpp in Sources */,
 				2776070716E4EB2700D6B31D /* ramPhysics.cpp in Sources */,
-				C6FE33E11EB7492100E39BF0 /* imgui_demo.cpp in Sources */,
 				D21D081F1A4BD9A900CC3598 /* ofxUIImageButton.cpp in Sources */,
 				D20F14F61A86035B0053B6E9 /* fdog.cpp in Sources */,
 				9248D5F61A4D6A1200047AF5 /* ofxCvHaarFinder.cpp in Sources */,
+				9A1D758E1FA056E100EFCFBC /* Helpers.cpp in Sources */,
 				2776070B16E4EB2700D6B31D /* ramGeometry.cpp in Sources */,
 				C6F853901EA0AA8B00BBDE36 /* ofxOscMessage.cpp in Sources */,
 				9248D5ED1A4D6A1200047AF5 /* ofxCvColorImage.cpp in Sources */,
+				9A1D757F1FA056E100EFCFBC /* README.md in Sources */,
 				D21D08441A4BD9A900CC3598 /* ofxUISortableList.cpp in Sources */,
 				D21D082B1A4BD9A900CC3598 /* ofxUILabelToggle.cpp in Sources */,
 				2776070D16E4EB2700D6B31D /* ramPlanarGestureRecognizer.cpp in Sources */,
@@ -3163,7 +3167,6 @@
 				D21D081B1A4BD9A900CC3598 /* ofxUIFPSSlider.cpp in Sources */,
 				9A70C18716E9CE6F00A5B755 /* Tracker.cpp in Sources */,
 				9248D5F81A4D6A1200047AF5 /* ofxCvImage.cpp in Sources */,
-				C6FE33F11EB7492100E39BF0 /* Gui.cpp in Sources */,
 				9A70C18816E9CE6F00A5B755 /* Utilities.cpp in Sources */,
 				D20F14F51A86035B0053B6E9 /* ETF.cpp in Sources */,
 				D21D085B1A4BD9A900CC3598 /* ofxUIWidget.cpp in Sources */,
@@ -3171,13 +3174,14 @@
 				D21D08381A4BD9A900CC3598 /* ofxUIRadio.cpp in Sources */,
 				D21D08041A4BD9A900CC3598 /* ofxUI2DGraph.cpp in Sources */,
 				9A70C19416E9CE6F00A5B755 /* ofxInteractivePrimitives.cpp in Sources */,
-				C6FE33DF1EB7492100E39BF0 /* imgui.cpp in Sources */,
 				D21D08501A4BD9A900CC3598 /* ofxUITextInput.cpp in Sources */,
 				9A70C19916E9CE6F00A5B755 /* ofxIPPatcher.cpp in Sources */,
 				9A70C19D16E9CE6F00A5B755 /* ofxNodeArray.cpp in Sources */,
+				9A1D758C1FA056E100EFCFBC /* Gui.cpp in Sources */,
 				C6F853941EA0AA8B00BBDE36 /* ofxOscReceiver.cpp in Sources */,
 				C604C6C21EBB0F520043C216 /* ramImGuiPanel.cpp in Sources */,
 				C62C935E1951554400EF3B2E /* ramCommunicationManager.cpp in Sources */,
+				9A1D75881FA056E100EFCFBC /* EngineGLFW.cpp in Sources */,
 				D2B4FD2C1A62216900C97A66 /* ramBaseHasFbo.cpp in Sources */,
 				D21D08311A4BD9A900CC3598 /* ofxUIMultiImageButton.cpp in Sources */,
 				D24DD66F1A84C2C800CECD2B /* ofxUITabbedCanvas.cpp in Sources */,
@@ -3186,6 +3190,7 @@
 				D21D08271A4BD9A900CC3598 /* ofxUILabel.cpp in Sources */,
 				D21D080C1A4BD9A900CC3598 /* ofxUIButton.cpp in Sources */,
 				9AEA65BB191CB63D001FAA18 /* BaseSegment.cpp in Sources */,
+				9A1D758A1FA056E100EFCFBC /* EngineOpenGLES.cpp in Sources */,
 				9A38F59316E9E81900FF8B66 /* ofxBtCollisionObject.cpp in Sources */,
 				D21D08571A4BD9A900CC3598 /* ofxUIValuePlotter.cpp in Sources */,
 				D21D08151A4BD9A900CC3598 /* ofxUIDropDownList.cpp in Sources */,
@@ -3193,7 +3198,6 @@
 				C6F853881EA0AA8B00BBDE36 /* OscReceivedElements.cpp in Sources */,
 				9A38F59516E9E81900FF8B66 /* ofxBtHelper.cpp in Sources */,
 				D21D08481A4BD9A900CC3598 /* ofxUISpectrum.cpp in Sources */,
-				C6FE33E91EB7492100E39BF0 /* BaseEngine.cpp in Sources */,
 				D21D082D1A4BD9A900CC3598 /* ofxUIMinimalSlider.cpp in Sources */,
 				C6FE33FD1EB7495E00E39BF0 /* ramImGuiManager.cpp in Sources */,
 				D21D080E1A4BD9A900CC3598 /* ofxUICanvas.cpp in Sources */,
@@ -3206,7 +3210,9 @@
 				9A38F59E16E9E81900FF8B66 /* ofxBtSoftBodyWorld.cpp in Sources */,
 				9A38F5A016E9E81900FF8B66 /* ofxBtWorld.cpp in Sources */,
 				9AEA65B4191CB63D001FAA18 /* ramActor.cpp in Sources */,
+				9A1D75841FA056E100EFCFBC /* BaseEngine.cpp in Sources */,
 				D21D083C1A4BD9A900CC3598 /* ofxUIRectangle.cpp in Sources */,
+				9A1D757D1FA056E100EFCFBC /* imgui_draw.cpp in Sources */,
 				D21D08131A4BD9A900CC3598 /* ofxUIDragableLabelButton.cpp in Sources */,
 				D21D08461A4BD9A900CC3598 /* ofxUISpacer.cpp in Sources */,
 				C6F8538A1EA0AA8B00BBDE36 /* OscTypes.cpp in Sources */,
