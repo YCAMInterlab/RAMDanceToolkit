@@ -4,7 +4,6 @@
 // Inherit `rdtk::BaseScene` to make your own scene
 class EmptyScene : public rdtk::BaseScene
 {
-  
 public:
 	
   // You must define `getName` to show your scene name in GUI
@@ -19,7 +18,6 @@ public:
   void drawImGui();
   
 private:
-  
   /*
    This EmptyScene includes a simple example for picking a node with mouse click.
   

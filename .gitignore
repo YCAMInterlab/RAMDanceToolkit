@@ -2,6 +2,7 @@
 .hg
 .cvs
 
+
 *.pyc
 
 # osx
@@ -41,3 +42,6 @@ resources/Settings/cache/
 !resources/MotionData/.gitkeep
 !resources/Settings/cache/.gitkeep
 resources/Settings/presets/preset.init.xml
+
+# imgui
+*.ini
