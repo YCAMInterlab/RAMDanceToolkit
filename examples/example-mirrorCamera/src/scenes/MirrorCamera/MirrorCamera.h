@@ -27,9 +27,7 @@ class MirrorCamera : public rdtk::BaseScene
 public:
 	ofCamera *camera_=nullptr;
 	int my_camera_index_=0;
-	ofVec3f scale_=ofVec3f(1,1,1);
 	int active_camera_cache_ = 0;
-	ofxOscReceiver osc_;
 	float mirror_width_=300;
 	float mirror_pos_=0;
 	float camera_shift_;
@@ -40,7 +38,6 @@ public:
 		ImGui::DragFloat("mirror pos", &mirror_pos_);
 		ImGui::SliderFloat("camera shift", &camera_shift_, -1,1);
 		ImGui::DragFloat("mirror width", &mirror_width_);
-		ImGui::DragFloat3("scale", &scale_[0], 0.01f);
 	}
 	
 	void onEnabled() {
