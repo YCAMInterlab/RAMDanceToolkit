@@ -49,7 +49,6 @@
 #include "Extractor.h"
 
 #include "AutoSwitcher.h"
-#include "MIrrorCamera.h"
 
 class ofApp : public rdtk::BaseApp
 {
