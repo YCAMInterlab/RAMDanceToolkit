@@ -48,8 +48,6 @@
 
 #include "Extractor.h"
 
-#include "AutoSwitcher.h"
-
 class ofApp : public rdtk::BaseApp
 {
 public:
