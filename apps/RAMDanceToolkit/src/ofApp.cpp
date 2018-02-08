@@ -33,6 +33,7 @@ void ofApp::setup()
 	rdtk::SceneManager& sceneManager = rdtk::SceneManager::instance();
 
 	auto switcher = sceneManager.addScene<AutoSwitcher>();
+	sceneManager.addScene<MirrorCamera>();
 	switcher->addScene(sceneManager.addScene<Extractor>());
 	switcher->addScene(sceneManager.addScene<MovingCam>());
 	switcher->addScene(sceneManager.addScene<LineDrawing>());

@@ -41,6 +41,12 @@ CameraManager::CameraManager()
 	ofAddListener(ofEvents().update, this, &CameraManager::update);
 }
 
+int CameraManager::getActiveCameraIndex() const
+{
+	auto it = find(begin(cameras), end(cameras), active_camera);
+	return it == end(cameras) ? distance(begin(cameras), it) : -1;
+}
+
 void CameraManager::loadDefaults()
 {
 	const string &kCamSettingFile = ToResourcePath("Settings/camera/cam.default_positions.xml");
