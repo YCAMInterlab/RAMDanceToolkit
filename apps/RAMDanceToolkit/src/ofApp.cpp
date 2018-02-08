@@ -32,31 +32,32 @@ void ofApp::setup()
 	// ------------------
 	rdtk::SceneManager& sceneManager = rdtk::SceneManager::instance();
 
-	sceneManager.addScene<Extractor>();
-	sceneManager.addScene<MovingCam>();
-	sceneManager.addScene<LineDrawing>();
-	sceneManager.addScene<BigBox>();
-	sceneManager.addScene<Future>();
-	sceneManager.addScene<Donuts>();
-	sceneManager.addScene<Stamp>();
-	sceneManager.addScene<Expansion>();
+	auto switcher = sceneManager.addScene<AutoSwitcher>();
+	switcher->addScene(sceneManager.addScene<Extractor>());
+	switcher->addScene(sceneManager.addScene<MovingCam>());
+	switcher->addScene(sceneManager.addScene<LineDrawing>());
+	switcher->addScene(sceneManager.addScene<BigBox>());
+	switcher->addScene(sceneManager.addScene<Future>());
+	switcher->addScene(sceneManager.addScene<Donuts>());
+	switcher->addScene(sceneManager.addScene<Stamp>());
+	switcher->addScene(sceneManager.addScene<Expansion>());
 // ignore win32
 #ifndef TARGET_WIN32
-	sceneManager.addScene<Particles>();
+	switcher->addScene(sceneManager.addScene<Particles>());
 #endif
-	sceneManager.addScene<Abacus>();
-	sceneManager.addScene<SoundCube>();
-	sceneManager.addScene<UpsideDown>();
-	sceneManager.addScene<HastyChase>();
-	sceneManager.addScene<ColorGrid>();
-	sceneManager.addScene<ThreePoints>();
-	sceneManager.addScene<FourPoints>();
-	sceneManager.addScene<Monster>();
-	sceneManager.addScene<Laban>();
-	sceneManager.addScene<Notation>();
+	switcher->addScene(sceneManager.addScene<Abacus>());
+	switcher->addScene(sceneManager.addScene<SoundCube>());
+	switcher->addScene(sceneManager.addScene<UpsideDown>());
+	switcher->addScene(sceneManager.addScene<HastyChase>());
+	switcher->addScene(sceneManager.addScene<ColorGrid>());
+	switcher->addScene(sceneManager.addScene<ThreePoints>());
+	switcher->addScene(sceneManager.addScene<FourPoints>());
+	switcher->addScene(sceneManager.addScene<Monster>());
+	switcher->addScene(sceneManager.addScene<Laban>());
+	switcher->addScene(sceneManager.addScene<Notation>());
 #if !defined (DEBUG) && !defined (_DEBUG) // exclude from debug build
-    sceneManager.addScene<Kepler>();
-    sceneManager.addScene<Chain>();
+    switcher->addScene(sceneManager.addScene<Kepler>());
+    switcher->addScene(sceneManager.addScene<Chain>());
 #endif
 	
 }

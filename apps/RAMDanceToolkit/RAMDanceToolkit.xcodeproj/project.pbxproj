@@ -108,6 +108,7 @@
 		27FD3B6B16D387E800C9EAC6 /* Monster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Monster.h; sourceTree = "<group>"; };
 		60B90AAE1644E21400AF2156 /* RAMDanceToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RAMDanceToolkit.xcodeproj; path = ../../libs/project/osx/RAMDanceToolkit.xcodeproj; sourceTree = "<group>"; };
 		60E559B116D3366A00051FE9 /* HastyChase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HastyChase.h; sourceTree = "<group>"; };
+		81D1C44E202C176900959EE0 /* AutoSwitcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoSwitcher.h; sourceTree = "<group>"; };
 		9A2B3F4016D325C7001CBFC9 /* Abacus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Abacus.h; sourceTree = "<group>"; };
 		9A2B3F4216D325C7001CBFC9 /* BasicActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicActor.h; sourceTree = "<group>"; };
 		9A2B3F4416D325C7001CBFC9 /* BigBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigBox.h; sourceTree = "<group>"; };
@@ -281,9 +282,19 @@
 			path = scenes/HastyChase;
 			sourceTree = "<group>";
 		};
+		81D1C44D202C176900959EE0 /* AutoSwitcher */ = {
+			isa = PBXGroup;
+			children = (
+				81D1C44E202C176900959EE0 /* AutoSwitcher.h */,
+			);
+			name = AutoSwitcher;
+			path = scenes/AutoSwitcher;
+			sourceTree = "<group>";
+		};
 		9A1DE6D516AA666100A10E3F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				81D1C44D202C176900959EE0 /* AutoSwitcher */,
 				C64C5C121F99AEC500EA4A4E /* Extractor */,
 				9AD1DE1D17269E2100C97F20 /* Helper */,
 				9A778459171847F0004ED621 /* MovingCam */,

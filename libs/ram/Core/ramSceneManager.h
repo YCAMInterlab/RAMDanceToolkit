@@ -34,10 +34,11 @@ namespace rdtk{
 		void setup();
 		
 		void addScene(ofPtr<BaseScene> scene);
-		template <class T> void addScene()
+		template <class T> ofPtr<T> addScene()
 		{
 			ofPtr<T> ptr = make_shared<T>();
 			addScene(ofPtr<BaseScene>(ptr));
+			return ptr;
 		}
 
 		size_t getNumScenes() const;
