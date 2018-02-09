@@ -25,6 +25,7 @@ project.xcworkspace
 *.suo
 *.ilk
 obj
+*.VC.db
 
 *.zip
 

@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\ofApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ofApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscBundle.cpp">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscMessage.cpp">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscParameterSync.cpp">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscReceiver.cpp">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscSender.cpp">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.cpp">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32\NetworkingUtils.cpp">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32\UdpSocket.cpp">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.cpp">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.cpp">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.cpp">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.cpp">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxKinect2\src\ofxKinect2.cpp">
+      <Filter>local_addons\ofxKinect2\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxImGui\libs\imgui\src\imgui.cpp">
+      <Filter>local_addons\ofxImGui\libs\imgui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxImGui\libs\imgui\src\imgui_demo.cpp">
+      <Filter>local_addons\ofxImGui\libs\imgui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxImGui\libs\imgui\src\imgui_draw.cpp">
+      <Filter>local_addons\ofxImGui\libs\imgui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxImGui\src\EngineGLFW.cpp">
+      <Filter>local_addons\ofxImGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxImGui\src\EngineOpenGLES.cpp">
+      <Filter>local_addons\ofxImGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxImGui\src\Gui.cpp">
+      <Filter>local_addons\ofxImGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxImGui\src\Helpers.cpp">
+      <Filter>local_addons\ofxImGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxImGui\src\BaseEngine.cpp">
+      <Filter>local_addons\ofxImGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxImGui\src\BaseTheme.cpp">
+      <Filter>local_addons\ofxImGui\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons">
+      <UniqueIdentifier>{71834F65-F3A9-211E-73B8-DC85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOsc">
+      <UniqueIdentifier>{D91DCA33-6E5D-4481-2AEC-9FBB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOsc\src">
+      <UniqueIdentifier>{B9DD339A-D93D-92A1-0A2F-4B41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOsc\libs">
+      <UniqueIdentifier>{99ECA1D9-873F-4622-8FC0-FC7B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOsc\libs\oscpack">
+      <UniqueIdentifier>{D3A98534-1602-4FEF-57A6-6593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOsc\libs\oscpack\src">
+      <UniqueIdentifier>{BFB5BB47-98C8-BBCB-3066-1046}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOsc\libs\oscpack\src\ip">
+      <UniqueIdentifier>{5A029128-EB41-95C5-CBC0-CDED}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOsc\libs\oscpack\src\ip\win32">
+      <UniqueIdentifier>{79DFDFE2-400B-8654-3675-01A3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOsc\libs\oscpack\src\osc">
+      <UniqueIdentifier>{EDACB89C-9768-9551-4D41-B590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_addons">
+      <UniqueIdentifier>{DE6745C7-E99D-D8E0-F77D-C032}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_addons\ofxKinect2">
+      <UniqueIdentifier>{B7FDA72B-B1FD-2AF1-C8F4-0934}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_addons\ofxKinect2\src">
+      <UniqueIdentifier>{942BA110-D376-60F6-68A9-F75C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_addons\ofxKinect2\src\utils">
+      <UniqueIdentifier>{A73D009F-B847-6319-F362-0114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_addons\ofxImGui">
+      <UniqueIdentifier>{EA30943C-9159-F3C6-CA5A-2624}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_addons\ofxImGui\src">
+      <UniqueIdentifier>{6C0F77A4-05C0-8741-6EAB-BCCA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_addons\ofxImGui\libs">
+      <UniqueIdentifier>{786A29BE-59D1-66A3-FDFA-48D9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_addons\ofxImGui\libs\imgui">
+      <UniqueIdentifier>{4D56D533-80CB-0284-17AD-1E9E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_addons\ofxImGui\libs\imgui\src">
+      <UniqueIdentifier>{777A49B6-A2CF-2A9F-BB46-20C8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ofApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ofApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ramActor.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOsc.h">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscArg.h">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscBundle.h">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscMessage.h">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscParameterSync.h">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscReceiver.h">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscSender.h">
+      <Filter>addons\ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\NetworkingUtils.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\PacketListener.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\TimerListener.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\UdpSocket.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\MessageMappingOscPacketListener.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscException.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscHostEndianness.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPacketListener.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.h">
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxKinect2\src\ofxKinect2.h">
+      <Filter>local_addons\ofxKinect2\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxKinect2\src\ofxKinect2Enums.h">
+      <Filter>local_addons\ofxKinect2\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxKinect2\src\ofxKinect2Types.h">
+      <Filter>local_addons\ofxKinect2\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxKinect2\src\utils\DepthRemapToRange.h">
+      <Filter>local_addons\ofxKinect2\src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxKinect2\src\utils\DoubleBuffer.h">
+      <Filter>local_addons\ofxKinect2\src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxKinect2\src\utils\MeshGenerator.h">
+      <Filter>local_addons\ofxKinect2\src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxImGui\libs\imgui\src\imgui.h">
+      <Filter>local_addons\ofxImGui\libs\imgui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxImGui\libs\imgui\src\imgui_internal.h">
+      <Filter>local_addons\ofxImGui\libs\imgui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxImGui\libs\imgui\src\stb_rect_pack.h">
+      <Filter>local_addons\ofxImGui\libs\imgui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxImGui\libs\imgui\src\stb_textedit.h">
+      <Filter>local_addons\ofxImGui\libs\imgui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxImGui\libs\imgui\src\stb_truetype.h">
+      <Filter>local_addons\ofxImGui\libs\imgui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxImGui\src\BaseTheme.h">
+      <Filter>local_addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxImGui\src\EngineGLFW.h">
+      <Filter>local_addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxImGui\src\EngineOpenGLES.h">
+      <Filter>local_addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxImGui\src\Gui.h">
+      <Filter>local_addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxImGui\src\Helpers.h">
+      <Filter>local_addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxImGui\src\imconfig.h">
+      <Filter>local_addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxImGui\src\ofxImGui.h">
+      <Filter>local_addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxImGui\src\ThemeTest.h">
+      <Filter>local_addons\ofxImGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxImGui\src\BaseEngine.h">
+      <Filter>local_addons\ofxImGui\src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+</Project>
